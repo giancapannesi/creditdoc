@@ -9,9 +9,10 @@ interface Props {
   canonical?: string;
   ogImage?: string;
   jsonLd?: object;
+  noindex?: boolean;
 }
 
-const { title, description, canonical, ogImage, jsonLd } = Astro.props;
+const { title, description, canonical, ogImage, jsonLd, noindex } = Astro.props;
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
 const ogImg = ogImage || 'https://creditdoc.co/og-default.png';
 ---
@@ -34,6 +35,7 @@ const ogImg = ogImage || 'https://creditdoc.co/og-default.png';
 
   <title>{title}</title>
   <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
   <link rel="canonical" href={canonicalUrl} />
 
   <!-- Favicon -->
