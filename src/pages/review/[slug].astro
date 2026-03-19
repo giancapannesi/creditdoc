@@ -36,6 +36,8 @@ const bbbClass = getBbbClass(lender.company_info.bbb_rating);
 const lowestPrice = lender.pricing.tiers.length > 0
   ? Math.min(...lender.pricing.tiers.map(t => t.price))
   : lender.pricing.monthly_price;
+const hasPricing = lowestPrice > 0 || lender.pricing.tiers.length > 0;
+const priceDisplay = hasPricing ? `From ${formatPrice(lowestPrice)}/mo` : 'Contact for Pricing';
 
 const featureLabels: Record<string, string> = {
   credit_monitoring: 'Credit Monitoring',
@@ -63,11 +65,13 @@ const ratingCategories = [
 const faqs = [
   {
     question: `Is ${lender.name} legitimate?`,
-    answer: `Yes. ${lender.name} is a registered company headquartered in ${lender.company_info.headquarters}, founded in ${lender.company_info.founded_year}. They hold a ${lender.company_info.bbb_rating} rating with the Better Business Bureau${lender.company_info.bbb_accredited ? ' and are BBB-accredited' : ''}.`,
+    answer: `Yes. ${lender.name} is a registered company headquartered in ${lender.company_info.headquarters}${lender.company_info.founded_year ? `, founded in ${lender.company_info.founded_year}` : ''}. They hold a ${lender.company_info.bbb_rating} rating with the Better Business Bureau${lender.company_info.bbb_accredited ? ' and are BBB-accredited' : ''}.`,
   },
   {
     question: `How much does ${lender.name} cost?`,
-    answer: `${lender.name} plans start at ${formatPrice(lowestPrice)} per month${lender.pricing.setup_fee > 0 ? ` with a ${formatPrice(lender.pricing.setup_fee)} setup fee` : ' with no setup fee'}. ${lender.pricing.money_back_guarantee ? lender.pricing.guarantee_details : 'No money-back guarantee is offered.'}`,
+    answer: hasPricing
+      ? `${lender.name} plans start at ${formatPrice(lowestPrice)} per month${lender.pricing.setup_fee > 0 ? ` with a ${formatPrice(lender.pricing.setup_fee)} setup fee` : ' with no setup fee'}. ${lender.pricing.money_back_guarantee ? lender.pricing.guarantee_details : 'No money-back guarantee is offered.'}`
+      : `Contact ${lender.name} directly for current pricing information. ${lender.pricing.guarantee_details}`,
   },
   {
     question: `How long does ${lender.name} take to show results?`,
@@ -170,7 +174,7 @@ const jsonLd = [
       <!-- Quick Badges -->
       <div class="mt-6 flex flex-wrap items-center gap-3">
         <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-primary-light text-primary">
-          From {formatPrice(lowestPrice)}/mo
+          {priceDisplay}
         </span>
         <span class:list={['inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold', bbbClass]}>
           BBB: {lender.company_info.bbb_rating}
@@ -363,18 +367,22 @@ const jsonLd = [
         <div class="glass-card p-5">
           <h3 class="text-base font-semibold text-text mb-4">Quick Facts</h3>
           <dl class="space-y-3">
-            <div class="flex items-center justify-between py-2 border-b border-border/50">
-              <dt class="text-sm text-muted">Founded</dt>
-              <dd class="text-sm font-medium text-text">{lender.company_info.founded_year}</dd>
-            </div>
+            {lender.company_info.founded_year > 0 && (
+              <div class="flex items-center justify-between py-2 border-b border-border/50">
+                <dt class="text-sm text-muted">Founded</dt>
+                <dd class="text-sm font-medium text-text">{lender.company_info.founded_year}</dd>
+              </div>
+            )}
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">Headquarters</dt>
               <dd class="text-sm font-medium text-text">{lender.company_info.headquarters}</dd>
             </div>
-            <div class="flex items-center justify-between py-2 border-b border-border/50">
-              <dt class="text-sm text-muted">Employees</dt>
-              <dd class="text-sm font-medium text-text">{lender.company_info.employees}</dd>
-            </div>
+            {lender.company_info.employees && (
+              <div class="flex items-center justify-between py-2 border-b border-border/50">
+                <dt class="text-sm text-muted">Employees</dt>
+                <dd class="text-sm font-medium text-text">{lender.company_info.employees}</dd>
+              </div>
+            )}
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">BBB Rating</dt>
               <dd>
@@ -389,7 +397,7 @@ const jsonLd = [
             </div>
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">Starting Price</dt>
-              <dd class="text-sm font-medium text-text">{formatPrice(lowestPrice)}/mo</dd>
+              <dd class="text-sm font-medium text-text">{hasPricing ? `${formatPrice(lowestPrice)}/mo` : 'Contact provider'}</dd>
             </div>
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">Setup Fee</dt>

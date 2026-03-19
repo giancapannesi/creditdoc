@@ -135,7 +135,7 @@ const jsonLd = {
       <span class="text-sm text-muted">{lenders.length} companies reviewed</span>
     </div>
     <div class="glass-card p-4 sm:p-6">
-      <TopPicksTable lenders={lenders} />
+      <TopPicksTable lenders={lenders.sort((a, b) => b.rating - a.rating).slice(0, 10)} />
     </div>
   </section>
 

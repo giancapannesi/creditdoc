@@ -67,6 +67,12 @@ export interface Lender {
   typical_results_timeline: string;
   last_updated: string;
   review_status: string;
+  // Directory listing fields (optional — from Outscraper DB)
+  data_source?: string;
+  google_rating?: number;
+  google_reviews_count?: number;
+  phone?: string;
+  address?: string;
   // Loan-specific fields (optional — only for loan lenders)
   loan_details?: {
     min_amount: number;

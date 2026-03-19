@@ -1,27 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SearchBar from '../components/SearchBar.astro';
-import LenderCard from '../components/LenderCard.astro';
 import { getAllLenders, US_STATES, STATE_ABBREVIATIONS } from '../utils/data';
-import type { Lender } from '../utils/data';
 
 const lenders = getAllLenders();
 
+// Lightweight data for client-side filtering + card rendering
 const lendersData = lenders.map(l => ({
-  slug: l.slug,
-  name: l.name,
-  category: l.category,
-  subcategories: l.subcategories,
-  rating: l.rating,
-  monthly_price: l.pricing.monthly_price,
-  setup_fee: l.pricing.setup_fee,
-  bbb_rating: l.company_info.bbb_rating,
-  money_back_guarantee: l.pricing.money_back_guarantee,
-  free_consultation: l.pricing.free_consultation,
-  states_served: l.states_served,
-  cities_served: l.cities_served,
-  description_short: l.description_short,
-  best_for: l.best_for,
+  s: l.slug,
+  n: l.name,
+  c: l.category,
+  sc: l.subcategories,
+  r: l.rating,
+  mp: l.pricing.monthly_price,
+  sf: l.pricing.setup_fee,
+  bb: l.company_info.bbb_rating,
+  mg: l.pricing.money_back_guarantee,
+  fc: l.pricing.free_consultation,
+  st: l.states_served,
+  ct: l.cities_served,
+  ds: l.description_short,
+  bf: l.best_for,
+  gr: (l as any).google_reviews_count || 0,
 }));
 
 const stateEntries = US_STATES.map(state => ({
@@ -58,6 +58,7 @@ const stateEntries = US_STATES.map(state => ({
         class="rounded-lg border border-border bg-white px-3 py-2 text-sm text-text focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
       >
         <option value="rating">Highest Rated</option>
+        <option value="reviews">Most Reviewed</option>
         <option value="price-low">Lowest Price</option>
         <option value="price-high">Highest Price</option>
         <option value="name">Alphabetical</option>
@@ -65,14 +66,19 @@ const stateEntries = US_STATES.map(state => ({
     </div>
   </section>
 
-  <!-- Results Grid -->
+  <!-- Results Grid (dynamically rendered) -->
   <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-    <div id="results-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {lenders.map(lender => (
-        <div class="lender-card-wrapper" data-slug={lender.slug}>
-          <LenderCard lender={lender} />
-        </div>
-      ))}
+    <div id="results-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+    <!-- Load More -->
+    <div id="load-more-wrap" class="hidden mt-8 text-center">
+      <button
+        id="load-more-btn"
+        class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-primary text-primary text-sm font-semibold hover:bg-primary-light transition-colors"
+      >
+        Show More Results
+        <span id="load-more-count" class="ml-2 text-muted text-xs"></span>
+      </button>
     </div>
 
     <!-- No Results State -->
@@ -111,9 +117,105 @@ const stateEntries = US_STATES.map(state => ({
     </div>
   </section>
 
-  <!-- Lender data for client-side filtering -->
+  <!-- Client-side search engine -->
   <script define:vars={{ lendersData: JSON.stringify(lendersData) }}>
     const allLenders = JSON.parse(lendersData);
+    const PAGE_SIZE = 48;
+    let currentFiltered = [];
+    let displayedCount = 0;
+
+    // BBB class mapping
+    function bbbClass(rating) {
+      if (rating === 'A+') return 'bbb-a-plus';
+      if (rating === 'A') return 'bbb-a';
+      if (rating === 'B+') return 'bbb-b-plus';
+      if (rating === 'B') return 'bbb-b';
+      if (rating === 'C' || rating === 'C+' || rating === 'C-') return 'bbb-c';
+      if (rating === 'F') return 'bbb-f';
+      return 'bbb-nr';
+    }
+
+    // Format price
+    function fmtPrice(p) {
+      if (p === 0) return 'Free';
+      return '$' + p.toFixed(2);
+    }
+
+    // Star SVG helper
+    function starsSvg(rating) {
+      const full = Math.floor(rating);
+      const half = rating - full >= 0.25;
+      let html = '<div class="flex items-center gap-1">';
+      for (let i = 0; i < 5; i++) {
+        if (i < full) {
+          html += '<svg class="h-3.5 w-3.5 text-amber-400" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+        } else if (i === full && half) {
+          html += '<svg class="h-3.5 w-3.5 text-amber-400" viewBox="0 0 20 20" fill="currentColor" style="clip-path:inset(0 50% 0 0)"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+        } else {
+          html += '<svg class="h-3.5 w-3.5 text-gray-200" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+        }
+      }
+      html += '<span class="text-xs font-medium text-text ml-1">' + rating.toFixed(1) + '</span></div>';
+      return html;
+    }
+
+    // Render a single card
+    function renderCard(l) {
+      const priceLabel = l.mp > 0 ? fmtPrice(l.mp) + '/mo' : 'Contact';
+      const bestFor = l.bf.slice(0, 2).join(', ');
+      const reviewCount = l.gr > 0 ? '<span class="text-xs text-muted ml-1">(' + l.gr.toLocaleString() + ' reviews)</span>' : '';
+      return `<article class="glass-card p-5 sm:p-6 flex flex-col h-full">
+        <div class="flex items-start gap-4">
+          <div class="shrink-0 w-14 h-14 rounded-xl bg-bg-alt border border-border flex items-center justify-center overflow-hidden">
+            <span class="text-lg font-bold text-primary">${l.n.charAt(0)}</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="text-lg font-semibold text-text truncate">${l.n}</h3>
+            <p class="text-sm text-muted mt-0.5 line-clamp-2">${l.ds}</p>
+          </div>
+        </div>
+        <div class="mt-4">${starsSvg(l.r)}${reviewCount}</div>
+        <div class="mt-3 flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center rounded-full bg-bg-alt px-3 py-1 text-xs font-semibold text-text border border-border">${priceLabel}</span>
+          <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${bbbClass(l.bb)}">BBB: ${l.bb}</span>
+          ${l.mg ? '<span class="inline-flex items-center rounded-full bg-positive/10 text-positive px-2.5 py-0.5 text-xs font-semibold">Guarantee</span>' : ''}
+        </div>
+        ${bestFor ? '<div class="mt-3"><p class="text-xs text-muted"><span class="font-medium">Best for:</span> ' + bestFor + '</p></div>' : ''}
+        <div class="flex-1"></div>
+        <div class="mt-5">
+          <a href="/review/${l.s}/" class="flex items-center justify-center w-full rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px]">
+            View Details
+            <svg xmlns="http://www.w3.org/2000/svg" class="ml-1.5 h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
+          </a>
+        </div>
+      </article>`;
+    }
+
+    function renderCards(lenders, startIdx, count) {
+      const grid = document.getElementById('results-grid');
+      if (!grid) return;
+      const end = Math.min(startIdx + count, lenders.length);
+      for (let i = startIdx; i < end; i++) {
+        const div = document.createElement('div');
+        div.innerHTML = renderCard(lenders[i]);
+        grid.appendChild(div.firstElementChild);
+      }
+      displayedCount = end;
+      updateLoadMore(lenders.length);
+    }
+
+    function updateLoadMore(total) {
+      const wrap = document.getElementById('load-more-wrap');
+      const countEl = document.getElementById('load-more-count');
+      if (!wrap) return;
+      const remaining = total - displayedCount;
+      if (remaining > 0) {
+        wrap.classList.remove('hidden');
+        if (countEl) countEl.textContent = `(${remaining} more)`;
+      } else {
+        wrap.classList.add('hidden');
+      }
+    }
 
     function getParams() {
       const params = new URLSearchParams(window.location.search);
@@ -127,7 +229,6 @@ const stateEntries = US_STATES.map(state => ({
         bbb_a_plus: params.get('bbb_a_plus') === '1',
         free_consult: params.get('free_consult') === '1',
         under_100: params.get('under_100') === '1',
-        // Loan-specific params
         amount: params.get('amount') || '',
         term: params.get('term') || '',
         credit_score: params.get('credit_score') || '',
@@ -136,7 +237,6 @@ const stateEntries = US_STATES.map(state => ({
         no_origination_fee: params.get('no_origination_fee') === '1',
         soft_pull: params.get('soft_pull') === '1',
         direct_pay: params.get('direct_pay') === '1',
-        // FilterBar context params
         budget: params.get('budget') || '',
         bbb: params.get('bbb') || '',
         debt_amount: params.get('debt_amount') || '',
@@ -152,107 +252,70 @@ const stateEntries = US_STATES.map(state => ({
       const resultsCount = document.getElementById('results-count');
       const resultsHeading = document.getElementById('results-heading');
       const sortSelect = document.getElementById('sort-select');
-      const cards = document.querySelectorAll('.lender-card-wrapper');
 
       if (!resultsGrid || !noResults || !resultsCount) return;
 
       const loanCategories = ['personal-loans', 'emergency-cash', 'payday-alternatives'];
       const isLoanMode = params.mode === 'loans' || loanCategories.indexOf(params.category) !== -1;
 
-      const matchingSlugs = new Set();
-
-      allLenders.forEach(lender => {
-        let match = true;
-
-        // Category filter (from FilterBar)
+      // Filter
+      currentFiltered = allLenders.filter(lender => {
         if (params.category) {
-          const catMatch = lender.category === params.category || lender.subcategories.indexOf(params.category) !== -1;
-          if (!catMatch) match = false;
+          if (lender.c !== params.category && lender.sc.indexOf(params.category) === -1) return false;
         }
-
-        // Keyword filter
         if (params.q) {
-          const searchable = [
-            lender.name,
-            lender.category,
-            lender.description_short,
-            ...lender.subcategories,
-            ...lender.best_for,
-          ].join(' ').toLowerCase();
-          if (!searchable.includes(params.q)) match = false;
+          const searchable = [lender.n, lender.c, lender.ds, ...lender.sc, ...lender.bf].join(' ').toLowerCase();
+          if (!searchable.includes(params.q)) return false;
         }
-
-        // State filter
         if (params.state) {
-          const stateMatch = lender.states_served.some(
-            s => s.toLowerCase() === params.state.toLowerCase() || s === 'All 50 States'
-          );
-          if (!stateMatch) match = false;
+          if (!lender.st.some(s => s.toLowerCase() === params.state.toLowerCase() || s === 'All 50 States')) return false;
         }
-
-        // City filter
         if (params.city) {
           const cityName = params.city.split(',')[0].trim().toLowerCase();
-          const cityMatch = lender.cities_served.some(
-            c => c.toLowerCase() === cityName
-          ) || lender.states_served.includes('All 50 States');
-          if (!cityMatch) match = false;
+          if (!lender.ct.some(c => c.toLowerCase() === cityName) && !lender.st.includes('All 50 States')) return false;
         }
-
-        // Service-mode checkbox filters
-        if (params.guarantee && !lender.money_back_guarantee) match = false;
-        if (params.bbb_a_plus && lender.bbb_rating !== 'A+') match = false;
-        if (params.free_consult && !lender.free_consultation) match = false;
-        if (params.under_100 && lender.monthly_price >= 100) match = false;
-
-        // FilterBar budget filter (credit repair)
+        if (params.guarantee && !lender.mg) return false;
+        if (params.bbb_a_plus && lender.bb !== 'A+') return false;
+        if (params.free_consult && !lender.fc) return false;
+        if (params.under_100 && lender.mp >= 100) return false;
         if (params.budget) {
-          const price = lender.monthly_price;
-          if (params.budget === 'under-50' && price >= 50) match = false;
-          else if (params.budget === '50-100' && (price < 50 || price > 100)) match = false;
-          else if (params.budget === '100-150' && (price < 100 || price > 150)) match = false;
-          else if (params.budget === '150-plus' && price < 150) match = false;
-          // Build-credit budget tiers
-          else if (params.budget === 'under-10' && price >= 10) match = false;
-          else if (params.budget === '10-25' && (price < 10 || price > 25)) match = false;
-          else if (params.budget === '25-50' && (price < 25 || price > 50)) match = false;
-          else if (params.budget === '50-plus' && price < 50) match = false;
+          const p = lender.mp;
+          if (params.budget === 'under-50' && p >= 50) return false;
+          if (params.budget === '50-100' && (p < 50 || p > 100)) return false;
+          if (params.budget === '100-150' && (p < 100 || p > 150)) return false;
+          if (params.budget === '150-plus' && p < 150) return false;
+          if (params.budget === 'under-10' && p >= 10) return false;
+          if (params.budget === '10-25' && (p < 10 || p > 25)) return false;
+          if (params.budget === '25-50' && (p < 25 || p > 50)) return false;
+          if (params.budget === '50-plus' && p < 50) return false;
         }
-
-        // FilterBar BBB filter
         if (params.bbb) {
-          const bbb = lender.bbb_rating;
-          if (params.bbb === 'a-plus' && bbb !== 'A+') match = false;
-          else if (params.bbb === 'a-or-higher' && bbb !== 'A+' && bbb !== 'A') match = false;
-          else if (params.bbb === 'b-or-higher' && ['C', 'C+', 'C-', 'D', 'F', 'NR'].indexOf(bbb) !== -1) match = false;
+          const b = lender.bb;
+          if (params.bbb === 'a-plus' && b !== 'A+') return false;
+          if (params.bbb === 'a-or-higher' && b !== 'A+' && b !== 'A') return false;
+          if (params.bbb === 'b-or-higher' && ['C', 'C+', 'C-', 'D', 'F', 'NR'].indexOf(b) !== -1) return false;
         }
-
-        if (match) matchingSlugs.add(lender.slug);
+        return true;
       });
 
-      // Show/hide cards
-      cards.forEach(card => {
-        const slug = card.dataset.slug;
-        card.style.display = matchingSlugs.has(slug) ? '' : 'none';
-      });
-
-      // Sort visible cards
+      // Sort
       const sortValue = sortSelect?.value || 'rating';
-      const visibleCards = Array.from(cards).filter(c => c.style.display !== 'none');
-      visibleCards.sort((a, b) => {
-        const la = allLenders.find(l => l.slug === a.dataset.slug);
-        const lb = allLenders.find(l => l.slug === b.dataset.slug);
-        if (!la || !lb) return 0;
-        if (sortValue === 'rating') return lb.rating - la.rating;
-        if (sortValue === 'price-low') return la.monthly_price - lb.monthly_price;
-        if (sortValue === 'price-high') return lb.monthly_price - la.monthly_price;
-        if (sortValue === 'name') return la.name.localeCompare(lb.name);
+      currentFiltered.sort((a, b) => {
+        if (sortValue === 'rating') return b.r - a.r;
+        if (sortValue === 'reviews') return (b.gr || 0) - (a.gr || 0);
+        if (sortValue === 'price-low') return a.mp - b.mp;
+        if (sortValue === 'price-high') return b.mp - a.mp;
+        if (sortValue === 'name') return a.n.localeCompare(b.n);
         return 0;
       });
-      visibleCards.forEach(c => resultsGrid.appendChild(c));
+
+      // Clear and render
+      resultsGrid.innerHTML = '';
+      displayedCount = 0;
+      renderCards(currentFiltered, 0, PAGE_SIZE);
 
       // Update count
-      resultsCount.textContent = String(matchingSlugs.size);
+      resultsCount.textContent = String(currentFiltered.length);
 
       // Update heading
       let headingText = 'All Companies';
@@ -267,16 +330,13 @@ const stateEntries = US_STATES.map(state => ({
           'credit-monitoring': 'Credit Monitoring',
           'free-help': 'Free Help',
         };
-        const catLabel = categoryLabels[params.category] || params.category;
-        headingText = `${catLabel} Results`;
+        headingText = (categoryLabels[params.category] || params.category) + ' Results';
       } else if (params.state && params.city) {
-        const cityName = params.city.split(',')[0].trim();
-        headingText = `Companies in ${cityName}, ${params.state}`;
+        headingText = `Companies in ${params.city.split(',')[0].trim()}, ${params.state}`;
       } else if (params.state) {
         headingText = `Companies in ${params.state}`;
       } else if (params.city) {
-        const cityName = params.city.split(',')[0].trim();
-        headingText = `Companies in ${cityName}`;
+        headingText = `Companies in ${params.city.split(',')[0].trim()}`;
       } else if (params.q) {
         headingText = `Results for "${params.q}"`;
       } else if (isLoanMode) {
@@ -284,11 +344,11 @@ const stateEntries = US_STATES.map(state => ({
       }
 
       if (resultsHeading) {
-        resultsHeading.innerHTML = `${headingText} (<span id="results-count">${matchingSlugs.size}</span>)`;
+        resultsHeading.innerHTML = `${headingText} (<span id="results-count">${currentFiltered.length}</span>)`;
       }
 
       // Toggle no results
-      if (matchingSlugs.size === 0) {
+      if (currentFiltered.length === 0) {
         noResults.classList.remove('hidden');
         resultsGrid.classList.add('hidden');
       } else {
@@ -300,16 +360,20 @@ const stateEntries = US_STATES.map(state => ({
     // Run on page load
     filterLenders();
 
-    // Listen for SearchBar custom submit event (from both services + loans forms)
+    // Listen for SearchBar custom submit event
     window.addEventListener('searchbar:submit', filterLenders);
 
     // Sort change
     document.getElementById('sort-select')?.addEventListener('change', filterLenders);
 
+    // Load More
+    document.getElementById('load-more-btn')?.addEventListener('click', () => {
+      renderCards(currentFiltered, displayedCount, PAGE_SIZE);
+    });
+
     // Clear filters
     document.getElementById('clear-filters-btn')?.addEventListener('click', () => {
       window.history.pushState({}, '', '/search/');
-      // Reset both forms
       const svcForm = document.getElementById('search-form-services');
       const loanForm = document.getElementById('search-form-loans');
       if (svcForm) svcForm.reset();
