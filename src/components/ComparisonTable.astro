@@ -32,8 +32,15 @@ function bbbWinner(a: string, b: string): 'a' | 'b' | 'tie' {
   return ra > rb ? 'a' : 'b';
 }
 
+const lowestPriceA = lenderA.pricing.tiers.length > 0
+  ? Math.min(...lenderA.pricing.tiers.filter(t => t.price <= lenderA.pricing.monthly_price * 2).map(t => t.price))
+  : lenderA.pricing.monthly_price;
+const lowestPriceB = lenderB.pricing.tiers.length > 0
+  ? Math.min(...lenderB.pricing.tiers.filter(t => t.price <= lenderB.pricing.monthly_price * 2).map(t => t.price))
+  : lenderB.pricing.monthly_price;
+
 const winners = {
-  price: priceWinner(lenderA.pricing.monthly_price, lenderB.pricing.monthly_price),
+  price: priceWinner(lowestPriceA, lowestPriceB),
   setup: priceWinner(lenderA.pricing.setup_fee, lenderB.pricing.setup_fee),
   bbb: bbbWinner(lenderA.company_info.bbb_rating, lenderB.company_info.bbb_rating),
   guarantee: lenderA.pricing.money_back_guarantee === lenderB.pricing.money_back_guarantee ? 'tie' as const : (lenderA.pricing.money_back_guarantee ? 'a' as const : 'b' as const),
@@ -100,11 +107,11 @@ const winnerBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-ligh
       <tr class="hover:bg-bg-alt/50 transition-colors">
         <td class="py-3 px-4 font-medium text-text">Monthly Price</td>
         <td class="py-3 px-4 text-center">
-          <span class="font-semibold">{formatPrice(lenderA.pricing.monthly_price)}/mo</span>
+          <span class="font-semibold">From {formatPrice(lowestPriceA)}/mo</span>
           {winners.price === 'a' && <span class={winnerBadge}>Best</span>}
         </td>
         <td class="py-3 px-4 text-center">
-          <span class="font-semibold">{formatPrice(lenderB.pricing.monthly_price)}/mo</span>
+          <span class="font-semibold">From {formatPrice(lowestPriceB)}/mo</span>
           {winners.price === 'b' && <span class={winnerBadge}>Best</span>}
         </td>
       </tr>

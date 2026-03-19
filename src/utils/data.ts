@@ -197,8 +197,10 @@ export function getSpecials(): Special[] {
 }
 
 export function getBbbClass(rating: string): string {
-  if (rating === 'A+' || rating === 'A') return 'bbb-a';
-  if (rating === 'B+' || rating === 'B') return 'bbb-b';
+  if (rating === 'A+') return 'bbb-a-plus';
+  if (rating === 'A') return 'bbb-a';
+  if (rating === 'B+') return 'bbb-b-plus';
+  if (rating === 'B') return 'bbb-b';
   if (rating === 'C' || rating === 'C+' || rating === 'C-') return 'bbb-c';
   if (rating === 'F') return 'bbb-f';
   return 'bbb-nr';
