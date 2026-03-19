@@ -2,158 +2,478 @@
 import { US_STATES, TOP_CITIES } from '../utils/data';
 
 const topCitiesJson = JSON.stringify(TOP_CITIES.map(c => `${c.city}, ${c.state}`));
+const usStatesJson = JSON.stringify(US_STATES);
+
+// Categories that trigger loan mode
+const loanCategories = ['personal-loans', 'emergency-cash', 'payday-alternatives'];
+const loanCategoriesJson = JSON.stringify(loanCategories);
 ---
 
-<div class="glass-card p-6 sm:p-8">
-  <h2 class="text-lg sm:text-xl font-bold text-text text-center mb-2">Find Credit Services Near You</h2>
-  <p class="text-sm text-muted text-center mb-6">Search by keyword, state, or city to find services in your area</p>
+<div class="glass-card p-6 sm:p-8" style="transform: none;">
+  <!-- Mode Toggle Tabs -->
+  <div class="flex items-center justify-center mb-6">
+    <div class="inline-flex rounded-lg border border-border bg-bg-alt p-1">
+      <button
+        id="tab-services"
+        type="button"
+        class="px-5 py-2 rounded-md text-sm font-semibold transition-colors min-h-[40px] bg-white text-text shadow-sm"
+        aria-pressed="true"
+      >
+        Services
+      </button>
+      <button
+        id="tab-loans"
+        type="button"
+        class="px-5 py-2 rounded-md text-sm font-semibold transition-colors min-h-[40px] text-muted hover:text-text"
+        aria-pressed="false"
+      >
+        Loans
+      </button>
+    </div>
+  </div>
 
-  <form id="search-form" action="/search/" method="get" class="space-y-5">
-    <!-- Row 1: Keyword + State + City -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-      <!-- Keyword -->
-      <div>
-        <label for="search-keyword" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
-          Keyword
-        </label>
+  <!-- ============================== -->
+  <!-- MODE 1: Credit Repair / Service Search -->
+  <!-- ============================== -->
+  <div id="mode-services">
+    <h2 class="text-lg sm:text-xl font-bold text-text text-center mb-2">Find Credit Services Near You</h2>
+    <p class="text-sm text-muted text-center mb-6">Search by keyword, state, or city to find services in your area</p>
+
+    <form id="search-form-services" action="/search/" method="get" class="space-y-5">
+      <input type="hidden" name="mode" value="services" />
+
+      <!-- Row 1: Keyword + State + City -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <!-- Keyword -->
+        <div>
+          <label for="svc-keyword" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
+            Keyword
+          </label>
+          <div class="relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
+            </svg>
+            <input
+              type="text"
+              id="svc-keyword"
+              name="q"
+              placeholder="e.g. credit repair, debt..."
+              class="w-full rounded-lg border border-border bg-white py-3 pl-9 pr-3 text-sm text-text placeholder:text-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
+            />
+          </div>
+        </div>
+
+        <!-- State -->
+        <div>
+          <label for="svc-state" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
+            State
+          </label>
+          <select
+            id="svc-state"
+            name="state"
+            class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
+          >
+            <option value="">All states...</option>
+            {US_STATES.map(state => (
+              <option value={state}>{state}</option>
+            ))}
+          </select>
+        </div>
+
+        <!-- City -->
         <div class="relative">
-          <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
-          </svg>
+          <label for="svc-city" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
+            City
+          </label>
           <input
             type="text"
-            id="search-keyword"
-            name="q"
-            placeholder="e.g. credit repair, debt..."
-            class="w-full rounded-lg border border-border bg-white py-3 pl-9 pr-3 text-sm text-text placeholder:text-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
+            id="svc-city"
+            name="city"
+            placeholder="Start typing a city..."
+            autocomplete="off"
+            class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text placeholder:text-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
           />
+          <ul
+            id="svc-city-autocomplete"
+            class="hidden absolute z-20 left-0 right-0 top-full mt-1 max-h-48 overflow-y-auto rounded-lg border border-border bg-white shadow-lg"
+          ></ul>
         </div>
       </div>
 
-      <!-- State -->
-      <div>
-        <label for="search-state" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
-          State
+      <!-- Row 2: Filter checkboxes -->
+      <div class="flex flex-wrap gap-x-6 gap-y-3">
+        <label class="inline-flex items-center gap-2 cursor-pointer group">
+          <input
+            type="checkbox"
+            name="guarantee"
+            value="1"
+            class="h-4 w-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-primary"
+          />
+          <span class="text-sm text-text group-hover:text-primary transition-colors">Money-back guarantee</span>
         </label>
-        <select
-          id="search-state"
-          name="state"
-          class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
+
+        <label class="inline-flex items-center gap-2 cursor-pointer group">
+          <input
+            type="checkbox"
+            name="bbb_a_plus"
+            value="1"
+            class="h-4 w-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-primary"
+          />
+          <span class="text-sm text-text group-hover:text-primary transition-colors">BBB A+ only</span>
+        </label>
+
+        <label class="inline-flex items-center gap-2 cursor-pointer group">
+          <input
+            type="checkbox"
+            name="free_consult"
+            value="1"
+            class="h-4 w-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-primary"
+          />
+          <span class="text-sm text-text group-hover:text-primary transition-colors">Free consultation</span>
+        </label>
+
+        <label class="inline-flex items-center gap-2 cursor-pointer group">
+          <input
+            type="checkbox"
+            name="under_100"
+            value="1"
+            class="h-4 w-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-primary"
+          />
+          <span class="text-sm text-text group-hover:text-primary transition-colors">Under $100/mo</span>
+        </label>
+      </div>
+
+      <!-- Row 3: Search button + browse link -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+        <button
+          type="submit"
+          class="flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px] shadow-sm"
         >
-          <option value="">All states...</option>
-          {US_STATES.map(state => (
-            <option value={state}>{state}</option>
-          ))}
-        </select>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
+          </svg>
+          Search
+        </button>
+
+        <div class="flex-1 text-center sm:text-right">
+          <span class="text-xs text-muted">
+            or browse by <a href="/categories/credit-repair/" class="text-primary hover:underline">category</a>
+          </span>
+        </div>
       </div>
+    </form>
 
-      <!-- City -->
-      <div class="relative">
-        <label for="search-city" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
-          City
-        </label>
-        <input
-          type="text"
-          id="search-city"
-          name="city"
-          placeholder="Start typing a city..."
-          autocomplete="off"
-          class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text placeholder:text-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
-        />
-        <ul
-          id="city-autocomplete"
-          class="hidden absolute z-20 left-0 right-0 top-full mt-1 max-h-48 overflow-y-auto rounded-lg border border-border bg-white shadow-lg"
-        ></ul>
-      </div>
-    </div>
-
-    <!-- Row 2: Filter checkboxes -->
-    <div class="flex flex-wrap gap-x-6 gap-y-3">
-      <label class="inline-flex items-center gap-2 cursor-pointer group">
-        <input
-          type="checkbox"
-          name="guarantee"
-          value="1"
-          class="h-4 w-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer"
-        />
-        <span class="text-sm text-text group-hover:text-primary transition-colors">Money-back guarantee</span>
-      </label>
-
-      <label class="inline-flex items-center gap-2 cursor-pointer group">
-        <input
-          type="checkbox"
-          name="bbb_a_plus"
-          value="1"
-          class="h-4 w-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer"
-        />
-        <span class="text-sm text-text group-hover:text-primary transition-colors">BBB A+ only</span>
-      </label>
-
-      <label class="inline-flex items-center gap-2 cursor-pointer group">
-        <input
-          type="checkbox"
-          name="free_consult"
-          value="1"
-          class="h-4 w-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer"
-        />
-        <span class="text-sm text-text group-hover:text-primary transition-colors">Free consultation</span>
-      </label>
-
-      <label class="inline-flex items-center gap-2 cursor-pointer group">
-        <input
-          type="checkbox"
-          name="under_100"
-          value="1"
-          class="h-4 w-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer"
-        />
-        <span class="text-sm text-text group-hover:text-primary transition-colors">Under $100/mo</span>
-      </label>
-    </div>
-
-    <!-- Row 3: Search button + Map placeholder -->
-    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-      <button
-        type="submit"
-        class="flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px] shadow-sm"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
+    <!-- Map Placeholder -->
+    <div
+      id="map"
+      class="mt-6 rounded-xl border border-border bg-bg-alt flex items-center justify-center p-8"
+      style="min-height: 200px;"
+    >
+      <div class="text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-muted mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/>
         </svg>
-        Search
-      </button>
-
-      <div class="flex-1 text-center sm:text-right">
-        <span class="text-xs text-muted">
-          or browse by <a href="/categories/credit-repair/" class="text-primary hover:underline">category</a>
-        </span>
+        <p class="text-sm text-muted font-medium">Map search coming soon</p>
+        <p class="text-xs text-muted mt-1">Use the dropdowns above to search by location</p>
       </div>
     </div>
-  </form>
+  </div>
 
-  <!-- Map Placeholder -->
-  <div
-    id="map"
-    class="mt-6 rounded-xl border border-border bg-bg-alt flex items-center justify-center p-8"
-    style="min-height: 200px;"
-  >
-    <div class="text-center">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-muted mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/>
-      </svg>
-      <p class="text-sm text-muted font-medium">Map search coming soon</p>
-      <p class="text-xs text-muted mt-1">Use the dropdowns above to search by location</p>
-    </div>
+  <!-- ============================== -->
+  <!-- MODE 2: Loan Search -->
+  <!-- ============================== -->
+  <div id="mode-loans" class="hidden">
+    <h2 class="text-lg sm:text-xl font-bold text-text text-center mb-2">Find Loans That Fit Your Needs</h2>
+    <p class="text-sm text-muted text-center mb-6">Compare lenders by amount, term, credit score, and APR</p>
+
+    <form id="search-form-loans" action="/search/" method="get" class="space-y-5">
+      <input type="hidden" name="mode" value="loans" />
+
+      <!-- Row 1: Amount + Term + Credit Score -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <!-- How much -->
+        <div>
+          <label for="loan-amount" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
+            How much do you need?
+          </label>
+          <select
+            id="loan-amount"
+            name="amount"
+            class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
+          >
+            <option value="">Any amount...</option>
+            <option value="200">$200</option>
+            <option value="500">$500</option>
+            <option value="1000">$1,000</option>
+            <option value="2500">$2,500</option>
+            <option value="5000">$5,000</option>
+            <option value="10000">$10,000</option>
+            <option value="25000-plus">$25,000+</option>
+          </select>
+        </div>
+
+        <!-- Repay over -->
+        <div>
+          <label for="loan-term" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
+            Repay over
+          </label>
+          <select
+            id="loan-term"
+            name="term"
+            class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
+          >
+            <option value="">Any term...</option>
+            <option value="3">3 months</option>
+            <option value="6">6 months</option>
+            <option value="12">12 months</option>
+            <option value="24">24 months</option>
+            <option value="36-plus">36+ months</option>
+          </select>
+        </div>
+
+        <!-- Credit score -->
+        <div>
+          <label for="loan-credit" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
+            My credit is
+          </label>
+          <select
+            id="loan-credit"
+            name="credit_score"
+            class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
+          >
+            <option value="">Any score...</option>
+            <option value="excellent">Excellent (720+)</option>
+            <option value="good">Good (670-719)</option>
+            <option value="fair">Fair (580-669)</option>
+            <option value="poor">Poor (below 580)</option>
+            <option value="none">No history</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 2: Max APR + Speed + State -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <!-- Max APR -->
+        <div>
+          <label for="loan-apr" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
+            Max APR
+          </label>
+          <select
+            id="loan-apr"
+            name="max_apr"
+            class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
+          >
+            <option value="">Any APR...</option>
+            <option value="10">Under 10%</option>
+            <option value="20">Under 20%</option>
+            <option value="30">Under 30%</option>
+            <option value="36">Under 36%</option>
+            <option value="any">Any</option>
+          </select>
+        </div>
+
+        <!-- How fast -->
+        <div>
+          <label for="loan-speed" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
+            How fast do I need it?
+          </label>
+          <select
+            id="loan-speed"
+            name="funding_speed"
+            class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
+          >
+            <option value="">Doesn't matter...</option>
+            <option value="same-day">Same day</option>
+            <option value="this-week">This week</option>
+            <option value="any">Doesn't matter</option>
+          </select>
+        </div>
+
+        <!-- State -->
+        <div>
+          <label for="loan-state" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
+            State
+          </label>
+          <select
+            id="loan-state"
+            name="state"
+            class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
+          >
+            <option value="">All states...</option>
+            {US_STATES.map(state => (
+              <option value={state}>{state}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 3: Loan checkboxes -->
+      <div class="flex flex-wrap gap-x-6 gap-y-3">
+        <label class="inline-flex items-center gap-2 cursor-pointer group">
+          <input
+            type="checkbox"
+            name="no_origination_fee"
+            value="1"
+            class="h-4 w-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-primary"
+          />
+          <span class="text-sm text-text group-hover:text-primary transition-colors">No origination fee</span>
+        </label>
+
+        <label class="inline-flex items-center gap-2 cursor-pointer group">
+          <input
+            type="checkbox"
+            name="soft_pull"
+            value="1"
+            class="h-4 w-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-primary"
+          />
+          <span class="text-sm text-text group-hover:text-primary transition-colors">Soft credit pull</span>
+        </label>
+
+        <label class="inline-flex items-center gap-2 cursor-pointer group">
+          <input
+            type="checkbox"
+            name="direct_pay"
+            value="1"
+            class="h-4 w-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-primary"
+          />
+          <span class="text-sm text-text group-hover:text-primary transition-colors">Direct creditor payment</span>
+        </label>
+      </div>
+
+      <!-- Row 4: Search button -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+        <button
+          type="submit"
+          class="flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px] shadow-sm"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
+          </svg>
+          Search Loans
+        </button>
+
+        <div class="flex-1 text-center sm:text-right">
+          <span class="text-xs text-muted">
+            or browse <a href="/categories/personal-loans/" class="text-primary hover:underline">all personal loans</a>
+          </span>
+        </div>
+      </div>
+    </form>
+
+    <!-- Regulatory Disclaimer -->
+    <p class="text-xs text-muted mt-4 max-w-2xl">
+      CreditDoc is not a lender, broker, or financial advisor. APR ranges shown are from each lender's
+      published rates. Your actual rate depends on your creditworthiness, loan amount, and term.
+      We do not collect your personal financial information.
+      <a href="/disclaimer/" class="text-primary hover:underline">Full disclaimer</a>.
+    </p>
   </div>
 </div>
 
-<script define:vars={{ topCitiesJson }}>
+<script define:vars={{ topCitiesJson, loanCategoriesJson }}>
   const cities = JSON.parse(topCitiesJson);
-  const cityInput = document.getElementById('search-city');
-  const autocompleteList = document.getElementById('city-autocomplete');
+  const loanCategories = JSON.parse(loanCategoriesJson);
 
-  if (cityInput && autocompleteList) {
+  // ===== Mode Switching =====
+  const tabServices = document.getElementById('tab-services');
+  const tabLoans = document.getElementById('tab-loans');
+  const modeServices = document.getElementById('mode-services');
+  const modeLoans = document.getElementById('mode-loans');
+
+  const activeTabClasses = ['bg-white', 'text-text', 'shadow-sm'];
+  const inactiveTabClasses = ['text-muted', 'hover:text-text'];
+
+  function setMode(mode) {
+    if (!tabServices || !tabLoans || !modeServices || !modeLoans) return;
+
+    if (mode === 'loans') {
+      modeServices.classList.add('hidden');
+      modeLoans.classList.remove('hidden');
+      // Tab styles
+      activeTabClasses.forEach(function(c) { tabLoans.classList.add(c); tabServices.classList.remove(c); });
+      inactiveTabClasses.forEach(function(c) { tabServices.classList.add(c); tabLoans.classList.remove(c); });
+      tabLoans.setAttribute('aria-pressed', 'true');
+      tabServices.setAttribute('aria-pressed', 'false');
+    } else {
+      modeLoans.classList.add('hidden');
+      modeServices.classList.remove('hidden');
+      // Tab styles
+      activeTabClasses.forEach(function(c) { tabServices.classList.add(c); tabLoans.classList.remove(c); });
+      inactiveTabClasses.forEach(function(c) { tabLoans.classList.add(c); tabServices.classList.remove(c); });
+      tabServices.setAttribute('aria-pressed', 'true');
+      tabLoans.setAttribute('aria-pressed', 'false');
+    }
+  }
+
+  if (tabServices) {
+    tabServices.addEventListener('click', function() { setMode('services'); });
+  }
+  if (tabLoans) {
+    tabLoans.addEventListener('click', function() { setMode('loans'); });
+  }
+
+  // ===== Auto-detect mode from URL params =====
+  var urlParams = new URLSearchParams(window.location.search);
+  var categoryParam = urlParams.get('category') || '';
+  var modeParam = urlParams.get('mode') || '';
+
+  if (modeParam === 'loans' || loanCategories.indexOf(categoryParam) !== -1) {
+    setMode('loans');
+  } else {
+    setMode('services');
+  }
+
+  // ===== Pre-fill services form from URL params =====
+  var svcKeyword = document.getElementById('svc-keyword');
+  var svcState = document.getElementById('svc-state');
+  var svcCity = document.getElementById('svc-city');
+
+  if (svcKeyword && urlParams.get('q')) svcKeyword.value = urlParams.get('q');
+  if (svcState && urlParams.get('state')) svcState.value = urlParams.get('state');
+  if (svcCity && urlParams.get('city')) svcCity.value = urlParams.get('city');
+
+  // Pre-fill checkboxes (services)
+  var svcForm = document.getElementById('search-form-services');
+  if (svcForm) {
+    ['guarantee', 'bbb_a_plus', 'free_consult', 'under_100'].forEach(function(name) {
+      var cb = svcForm.querySelector('input[name="' + name + '"]');
+      if (cb && urlParams.get(name) === '1') cb.checked = true;
+    });
+  }
+
+  // ===== Pre-fill loan form from URL params =====
+  var loanFields = {
+    'loan-amount': 'amount',
+    'loan-term': 'term',
+    'loan-credit': 'credit_score',
+    'loan-apr': 'max_apr',
+    'loan-speed': 'funding_speed',
+    'loan-state': 'state',
+  };
+  for (var elId in loanFields) {
+    var el = document.getElementById(elId);
+    var paramVal = urlParams.get(loanFields[elId]);
+    if (el && paramVal) el.value = paramVal;
+  }
+
+  // Pre-fill checkboxes (loans)
+  var loanForm = document.getElementById('search-form-loans');
+  if (loanForm) {
+    ['no_origination_fee', 'soft_pull', 'direct_pay'].forEach(function(name) {
+      var cb = loanForm.querySelector('input[name="' + name + '"]');
+      if (cb && urlParams.get(name) === '1') cb.checked = true;
+    });
+  }
+
+  // ===== City Autocomplete =====
+  function setupCityAutocomplete(inputId, listId) {
+    var cityInput = document.getElementById(inputId);
+    var autocompleteList = document.getElementById(listId);
+
+    if (!cityInput || !autocompleteList) return;
+
     cityInput.addEventListener('input', function () {
-      const val = this.value.toLowerCase().trim();
+      var val = this.value.toLowerCase().trim();
       autocompleteList.innerHTML = '';
 
       if (val.length < 2) {
@@ -161,21 +481,23 @@ const topCitiesJson = JSON.stringify(TOP_CITIES.map(c => `${c.city}, ${c.state}`
         return;
       }
 
-      const matches = cities.filter(c => c.toLowerCase().includes(val)).slice(0, 8);
+      var matches = cities.filter(function(c) {
+        return c.toLowerCase().indexOf(val) !== -1;
+      }).slice(0, 8);
 
       if (matches.length === 0) {
         autocompleteList.classList.add('hidden');
         return;
       }
 
-      matches.forEach(city => {
-        const li = document.createElement('li');
+      matches.forEach(function(city) {
+        var li = document.createElement('li');
         li.textContent = city;
         li.className = 'px-3 py-2.5 text-sm text-text hover:bg-primary-light hover:text-primary cursor-pointer transition-colors';
         li.style.minHeight = '44px';
         li.style.display = 'flex';
         li.style.alignItems = 'center';
-        li.addEventListener('click', () => {
+        li.addEventListener('click', function() {
           cityInput.value = city;
           autocompleteList.classList.add('hidden');
         });
@@ -186,17 +508,60 @@ const topCitiesJson = JSON.stringify(TOP_CITIES.map(c => `${c.city}, ${c.state}`
     });
 
     // Close on click outside
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', function(e) {
       if (!cityInput.contains(e.target) && !autocompleteList.contains(e.target)) {
         autocompleteList.classList.add('hidden');
       }
     });
 
     // Close on Escape
-    cityInput.addEventListener('keydown', (e) => {
+    cityInput.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         autocompleteList.classList.add('hidden');
       }
+    });
+  }
+
+  setupCityAutocomplete('svc-city', 'svc-city-autocomplete');
+
+  // ===== Form Submissions =====
+  // Services form: submit as GET with query params, prevent default so search page JS handles it
+  if (svcForm) {
+    svcForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var formData = new FormData(svcForm);
+      var params = new URLSearchParams();
+      for (var pair of formData.entries()) {
+        if (pair[1]) params.set(pair[0], String(pair[1]));
+      }
+      // Checkboxes
+      var checkboxes = svcForm.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(function(cb) {
+        if (cb.checked) params.set(cb.name, cb.value);
+      });
+      window.history.pushState({}, '', '/search/?' + params.toString());
+      // Dispatch a custom event so the search page can re-filter
+      window.dispatchEvent(new CustomEvent('searchbar:submit'));
+    });
+  }
+
+  // Loans form
+  if (loanForm) {
+    loanForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var formData = new FormData(loanForm);
+      var params = new URLSearchParams();
+      for (var pair of formData.entries()) {
+        if (pair[1]) params.set(pair[0], String(pair[1]));
+      }
+      // Checkboxes
+      var checkboxes = loanForm.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(function(cb) {
+        if (cb.checked) params.set(cb.name, cb.value);
+      });
+      window.history.pushState({}, '', '/search/?' + params.toString());
+      // Dispatch a custom event so the search page can re-filter
+      window.dispatchEvent(new CustomEvent('searchbar:submit'));
     });
   }
 </script>

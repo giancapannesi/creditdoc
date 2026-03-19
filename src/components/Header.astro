@@ -3,6 +3,17 @@ import { getCategories } from '../utils/data';
 
 const categories = getCategories();
 const currentPath = Astro.url.pathname;
+
+/* Group categories by section for the dropdown */
+const creditRepair = categories.filter(c =>
+  ['fix-my-credit', 'build-my-credit', 'watch-my-score'].includes(c.slug)
+);
+const loansCash = categories.filter(c =>
+  ['i-need-a-loan', 'emergency-cash', 'payday-alternatives'].includes(c.slug)
+);
+const debtHelp = categories.filter(c =>
+  ['get-out-of-debt', 'free-help'].includes(c.slug)
+);
 ---
 
 <header class="sticky top-0 z-50 border-b border-border bg-white/80 backdrop-blur-lg">
@@ -28,11 +39,41 @@ const currentPath = Astro.url.pathname;
           </svg>
         </button>
         <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute left-0 top-full pt-2 transition-all duration-200">
-          <div class="glass-card w-56 p-2 shadow-lg">
-            {categories.map(cat => (
+          <div class="glass-card w-64 p-3 shadow-lg">
+            <!-- Credit & Repair -->
+            <p class="px-3 pt-1 pb-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted">Credit & Repair</p>
+            {creditRepair.map(cat => (
               <a
                 href={`/categories/${cat.slug}/`}
-                class="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-text hover:bg-primary-light hover:text-primary transition-colors"
+                class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-text hover:bg-primary-light hover:text-primary transition-colors"
+              >
+                {cat.name}
+              </a>
+            ))}
+
+            <!-- Separator -->
+            <div class="my-2 border-t border-border"></div>
+
+            <!-- Loans & Cash -->
+            <p class="px-3 pt-1 pb-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted">Loans & Cash</p>
+            {loansCash.map(cat => (
+              <a
+                href={`/categories/${cat.slug}/`}
+                class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-text hover:bg-primary-light hover:text-primary transition-colors"
+              >
+                {cat.name}
+              </a>
+            ))}
+
+            <!-- Separator -->
+            <div class="my-2 border-t border-border"></div>
+
+            <!-- Debt & Help -->
+            <p class="px-3 pt-1 pb-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted">Debt & Help</p>
+            {debtHelp.map(cat => (
+              <a
+                href={`/categories/${cat.slug}/`}
+                class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-text hover:bg-primary-light hover:text-primary transition-colors"
               >
                 {cat.name}
               </a>
@@ -110,8 +151,38 @@ const currentPath = Astro.url.pathname;
           <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
         </svg>
       </button>
-      <div id="mobile-categories-list" class="hidden pl-4 space-y-1">
-        {categories.map(cat => (
+      <div id="mobile-categories-list" class="hidden pl-4 space-y-0.5">
+        <!-- Credit & Repair -->
+        <p class="px-3 pt-2 pb-1 text-[11px] font-semibold uppercase tracking-wider text-muted">Credit & Repair</p>
+        {creditRepair.map(cat => (
+          <a
+            href={`/categories/${cat.slug}/`}
+            class="block rounded-lg px-3 py-2.5 text-sm text-muted hover:bg-primary-light hover:text-primary transition-colors"
+          >
+            {cat.name}
+          </a>
+        ))}
+
+        <!-- Separator -->
+        <div class="mx-3 my-1.5 border-t border-border"></div>
+
+        <!-- Loans & Cash -->
+        <p class="px-3 pt-1 pb-1 text-[11px] font-semibold uppercase tracking-wider text-muted">Loans & Cash</p>
+        {loansCash.map(cat => (
+          <a
+            href={`/categories/${cat.slug}/`}
+            class="block rounded-lg px-3 py-2.5 text-sm text-muted hover:bg-primary-light hover:text-primary transition-colors"
+          >
+            {cat.name}
+          </a>
+        ))}
+
+        <!-- Separator -->
+        <div class="mx-3 my-1.5 border-t border-border"></div>
+
+        <!-- Debt & Help -->
+        <p class="px-3 pt-1 pb-1 text-[11px] font-semibold uppercase tracking-wider text-muted">Debt & Help</p>
+        {debtHelp.map(cat => (
           <a
             href={`/categories/${cat.slug}/`}
             class="block rounded-lg px-3 py-2.5 text-sm text-muted hover:bg-primary-light hover:text-primary transition-colors"

@@ -67,6 +67,21 @@ export interface Lender {
   typical_results_timeline: string;
   last_updated: string;
   review_status: string;
+  // Loan-specific fields (optional — only for loan lenders)
+  loan_details?: {
+    min_amount: number;
+    max_amount: number;
+    min_term_months: number;
+    max_term_months: number;
+    apr_min: number;
+    apr_max: number;
+    origination_fee: string;
+    min_credit_score: number;
+    funding_speed: string;
+    loan_purposes: string[];
+    prequalification: boolean;
+    direct_pay: boolean;
+  };
 }
 
 export interface Category {
@@ -77,6 +92,7 @@ export interface Category {
   seo_title: string;
   seo_description: string;
   count: number;
+  filter_type: 'credit-repair' | 'loan' | 'service';
 }
 
 export interface Comparison {

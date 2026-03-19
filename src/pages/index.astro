@@ -9,6 +9,21 @@ const lenders = getAllLenders();
 const categories = getCategories();
 const specials = getSpecials().slice(0, 3);
 
+// Order categories for the 2x4 grid layout
+const categoryOrder = [
+  'fix-my-credit',
+  'personal-loans',
+  'emergency-cash',
+  'payday-alternatives',
+  'debt-relief',
+  'build-credit',
+  'credit-monitoring',
+  'free-help',
+];
+const orderedCategories = categoryOrder
+  .map(slug => categories.find(c => c.slug === slug))
+  .filter((c): c is NonNullable<typeof c> => c !== undefined);
+
 const steps = [
   {
     number: '1',
@@ -36,6 +51,29 @@ const steps = [
   },
 ];
 
+const whyCreditDoc = [
+  {
+    title: 'Independent Reviews',
+    description: "We're not a lender, broker, or credit repair company. We compare them.",
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>',
+  },
+  {
+    title: 'Real Data',
+    description: 'CFPB complaints, BBB ratings, licensing verification, and published APR rates.',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605"/>',
+  },
+  {
+    title: 'No Personal Info Required',
+    description: 'Browse and compare without entering your Social Security number or income.',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>',
+  },
+  {
+    title: 'Consumer Rights First',
+    description: 'Every page includes your rights under FCRA, CROA, and state laws.',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>',
+  },
+];
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -58,11 +96,11 @@ const jsonLd = {
     <div class="relative mx-auto max-w-7xl px-4 py-16 sm:py-20 lg:py-24 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center">
         <h1 class="text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-5xl">
-          Compare the Top Credit Repair Companies.
-          <span class="text-primary"> No Bias.</span>
+          Your Credit. Your Terms.
+          <span class="text-primary"> We Just Compare.</span>
         </h1>
         <p class="mt-4 text-lg text-muted sm:text-xl leading-relaxed">
-          We've diagnosed the fine print. Browse 200+ companies by price, rating, and services.
+          We've diagnosed the fine print on 200+ credit repair companies, lenders, and financial services. Compare by price, rating, and what actually matters.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
@@ -107,10 +145,35 @@ const jsonLd = {
       <h2 class="text-2xl font-bold text-text">Browse by Category</h2>
       <p class="mt-2 text-muted">Find the right service for your specific financial need.</p>
     </div>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-      {categories.map(category => (
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {orderedCategories.map(category => (
         <CategoryCard category={category} />
       ))}
+    </div>
+  </section>
+
+  <!-- Why CreditDoc? -->
+  <section class="bg-white border-t border-b border-border">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl font-bold text-text">Why CreditDoc?</h2>
+        <p class="mt-2 text-muted">What makes us different from the companies we review.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {whyCreditDoc.map(item => (
+          <div class="glass-card p-6 flex gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary-light flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <Fragment set:html={item.icon} />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-text">{item.title}</h3>
+              <p class="mt-1 text-sm text-muted leading-relaxed">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
