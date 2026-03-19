@@ -1,0 +1,291 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchBar from '../components/SearchBar.astro';
+import LenderCard from '../components/LenderCard.astro';
+import { getAllLenders, US_STATES, STATE_ABBREVIATIONS } from '../utils/data';
+import type { Lender } from '../utils/data';
+
+const lenders = getAllLenders();
+
+const lendersData = lenders.map(l => ({
+  slug: l.slug,
+  name: l.name,
+  category: l.category,
+  subcategories: l.subcategories,
+  rating: l.rating,
+  monthly_price: l.pricing.monthly_price,
+  setup_fee: l.pricing.setup_fee,
+  bbb_rating: l.company_info.bbb_rating,
+  money_back_guarantee: l.pricing.money_back_guarantee,
+  free_consultation: l.pricing.free_consultation,
+  states_served: l.states_served,
+  cities_served: l.cities_served,
+  description_short: l.description_short,
+  best_for: l.best_for,
+}));
+
+const stateEntries = US_STATES.map(state => ({
+  name: state,
+  abbr: STATE_ABBREVIATIONS[state] || '',
+}));
+---
+
+<BaseLayout
+  title="Search Credit Repair Companies by Location | CreditDoc"
+  description="Search and filter credit repair companies by state, city, budget, and BBB rating. Find services available in your area."
+>
+  <!-- Header -->
+  <section class="bg-white border-b border-border">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-2xl sm:text-3xl font-bold text-text">Search Credit Repair Companies</h1>
+      <p class="mt-2 text-muted">Find companies by location, budget, BBB rating, and more.</p>
+    </div>
+  </section>
+
+  <!-- Search Bar Component -->
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <SearchBar />
+  </section>
+
+  <!-- Results Header -->
+  <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between mb-4">
+      <h2 id="results-heading" class="text-lg font-bold text-text">
+        All Companies (<span id="results-count">{lenders.length}</span>)
+      </h2>
+      <select
+        id="sort-select"
+        class="rounded-lg border border-border bg-white px-3 py-2 text-sm text-text focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+      >
+        <option value="rating">Highest Rated</option>
+        <option value="price-low">Lowest Price</option>
+        <option value="price-high">Highest Price</option>
+        <option value="name">Alphabetical</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Results Grid -->
+  <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+    <div id="results-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {lenders.map(lender => (
+        <div class="lender-card-wrapper" data-slug={lender.slug}>
+          <LenderCard lender={lender} />
+        </div>
+      ))}
+    </div>
+
+    <!-- No Results State -->
+    <div id="no-results" class="hidden glass-card p-12 text-center">
+      <div class="mx-auto w-16 h-16 rounded-2xl bg-bg-alt flex items-center justify-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-muted" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+      <h3 class="text-lg font-semibold text-text">No companies found</h3>
+      <p class="mt-2 text-sm text-muted">Try adjusting your search filters or browsing all companies.</p>
+      <button
+        id="clear-filters-btn"
+        class="mt-4 inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors"
+      >
+        Clear All Filters
+      </button>
+    </div>
+  </section>
+
+  <!-- US States Map Section -->
+  <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="glass-card p-6">
+      <h2 class="text-lg font-bold text-text mb-4 text-center">Browse by State</h2>
+      <div class="grid grid-cols-5 sm:grid-cols-10 gap-2">
+        {stateEntries.map(state => (
+          <a
+            href={`/search/?state=${encodeURIComponent(state.name)}`}
+            class="flex items-center justify-center px-2 py-2 rounded-lg text-xs font-medium text-text bg-bg-alt hover:bg-primary-light hover:text-primary transition-colors border border-transparent hover:border-primary/20"
+            title={state.name}
+          >
+            {state.abbr}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lender data for client-side filtering -->
+  <script define:vars={{ lendersData: JSON.stringify(lendersData) }}>
+    const allLenders = JSON.parse(lendersData);
+
+    function getParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        q: (params.get('q') || '').toLowerCase().trim(),
+        state: (params.get('state') || '').trim(),
+        city: (params.get('city') || '').trim(),
+        guarantee: params.get('guarantee') === '1',
+        bbb_a_plus: params.get('bbb_a_plus') === '1',
+        free_consult: params.get('free_consult') === '1',
+        under_100: params.get('under_100') === '1',
+      };
+    }
+
+    function filterLenders() {
+      const params = getParams();
+      const resultsGrid = document.getElementById('results-grid');
+      const noResults = document.getElementById('no-results');
+      const resultsCount = document.getElementById('results-count');
+      const resultsHeading = document.getElementById('results-heading');
+      const sortSelect = document.getElementById('sort-select');
+      const cards = document.querySelectorAll('.lender-card-wrapper');
+
+      if (!resultsGrid || !noResults || !resultsCount) return;
+
+      // Set form values from URL params
+      const keywordInput = document.getElementById('search-keyword');
+      const stateSelect = document.getElementById('search-state');
+      const cityInput = document.getElementById('search-city');
+      const guaranteeCheck = document.querySelector('input[name="guarantee"]');
+      const bbbCheck = document.querySelector('input[name="bbb_a_plus"]');
+      const consultCheck = document.querySelector('input[name="free_consult"]');
+      const under100Check = document.querySelector('input[name="under_100"]');
+
+      if (keywordInput && params.q) keywordInput.value = params.q;
+      if (stateSelect && params.state) stateSelect.value = params.state;
+      if (cityInput && params.city) cityInput.value = params.city;
+      if (guaranteeCheck) guaranteeCheck.checked = params.guarantee;
+      if (bbbCheck) bbbCheck.checked = params.bbb_a_plus;
+      if (consultCheck) consultCheck.checked = params.free_consult;
+      if (under100Check) under100Check.checked = params.under_100;
+
+      const matchingSlugs = new Set();
+
+      allLenders.forEach(lender => {
+        let match = true;
+
+        // Keyword filter
+        if (params.q) {
+          const searchable = [
+            lender.name,
+            lender.category,
+            lender.description_short,
+            ...lender.subcategories,
+            ...lender.best_for,
+          ].join(' ').toLowerCase();
+          if (!searchable.includes(params.q)) match = false;
+        }
+
+        // State filter
+        if (params.state) {
+          const stateMatch = lender.states_served.some(
+            s => s.toLowerCase() === params.state.toLowerCase() || s === 'All 50 States'
+          );
+          if (!stateMatch) match = false;
+        }
+
+        // City filter
+        if (params.city) {
+          const cityName = params.city.split(',')[0].trim().toLowerCase();
+          const cityMatch = lender.cities_served.some(
+            c => c.toLowerCase() === cityName
+          ) || lender.states_served.includes('All 50 States');
+          if (!cityMatch) match = false;
+        }
+
+        // Guarantee filter
+        if (params.guarantee && !lender.money_back_guarantee) match = false;
+
+        // BBB A+ filter
+        if (params.bbb_a_plus && lender.bbb_rating !== 'A+') match = false;
+
+        // Free consultation filter
+        if (params.free_consult && !lender.free_consultation) match = false;
+
+        // Under $100 filter
+        if (params.under_100 && lender.monthly_price >= 100) match = false;
+
+        if (match) matchingSlugs.add(lender.slug);
+      });
+
+      // Show/hide cards
+      cards.forEach(card => {
+        const slug = card.dataset.slug;
+        card.style.display = matchingSlugs.has(slug) ? '' : 'none';
+      });
+
+      // Sort visible cards
+      const sortValue = sortSelect?.value || 'rating';
+      const visibleCards = Array.from(cards).filter(c => c.style.display !== 'none');
+      visibleCards.sort((a, b) => {
+        const la = allLenders.find(l => l.slug === a.dataset.slug);
+        const lb = allLenders.find(l => l.slug === b.dataset.slug);
+        if (!la || !lb) return 0;
+        if (sortValue === 'rating') return lb.rating - la.rating;
+        if (sortValue === 'price-low') return la.monthly_price - lb.monthly_price;
+        if (sortValue === 'price-high') return lb.monthly_price - la.monthly_price;
+        if (sortValue === 'name') return la.name.localeCompare(lb.name);
+        return 0;
+      });
+      visibleCards.forEach(c => resultsGrid.appendChild(c));
+
+      // Update count
+      resultsCount.textContent = String(matchingSlugs.size);
+
+      // Update heading
+      let headingText = 'All Companies';
+      if (params.state && params.city) {
+        const cityName = params.city.split(',')[0].trim();
+        headingText = `${matchingSlugs.size} companies serve ${cityName}, ${params.state}`;
+      } else if (params.state) {
+        headingText = `${matchingSlugs.size} companies serve ${params.state}`;
+      } else if (params.city) {
+        const cityName = params.city.split(',')[0].trim();
+        headingText = `${matchingSlugs.size} companies serve ${cityName}`;
+      } else if (params.q) {
+        headingText = `Results for "${params.q}"`;
+      }
+
+      if (resultsHeading) {
+        resultsHeading.innerHTML = `${headingText} (<span id="results-count">${matchingSlugs.size}</span>)`;
+      }
+
+      // Toggle no results
+      if (matchingSlugs.size === 0) {
+        noResults.classList.remove('hidden');
+        resultsGrid.classList.add('hidden');
+      } else {
+        noResults.classList.add('hidden');
+        resultsGrid.classList.remove('hidden');
+      }
+    }
+
+    // Run on page load
+    filterLenders();
+
+    // Listen for form submission
+    const form = document.getElementById('search-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const params = new URLSearchParams();
+      for (const [key, value] of formData.entries()) {
+        if (value) params.set(key, String(value));
+      }
+      const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(cb => {
+        if (cb.checked) params.set(cb.name, cb.value);
+      });
+      window.history.pushState({}, '', `/search/?${params.toString()}`);
+      filterLenders();
+    });
+
+    // Sort change
+    document.getElementById('sort-select')?.addEventListener('change', filterLenders);
+
+    // Clear filters
+    document.getElementById('clear-filters-btn')?.addEventListener('click', () => {
+      window.history.pushState({}, '', '/search/');
+      const form = document.getElementById('search-form');
+      if (form) form.reset();
+      filterLenders();
+    });
+  </script>
+</BaseLayout>

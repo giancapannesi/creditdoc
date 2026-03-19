@@ -1,0 +1,108 @@
+---
+const currentYear = new Date().getFullYear();
+
+const categoryLinks = [
+  { name: 'Credit Repair', href: '/categories/credit-repair/' },
+  { name: 'Personal Loans', href: '/categories/personal-loans/' },
+  { name: 'Debt Relief', href: '/categories/debt-relief/' },
+  { name: 'Credit Cards', href: '/categories/credit-cards/' },
+];
+
+const resourceLinks = [
+  { name: 'About', href: '/about/' },
+  { name: 'Methodology', href: '/methodology/' },
+  { name: 'Disclaimer', href: '/disclaimer/' },
+  { name: 'Disclosure', href: '/disclosure/' },
+  { name: 'Privacy Policy', href: '/privacy/' },
+  { name: 'Terms of Service', href: '/terms/' },
+];
+---
+
+<footer class="border-t border-border bg-white">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Brand -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <a href="/" class="flex items-center gap-2 text-primary font-bold text-xl">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/>
+            <path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/>
+            <circle cx="20" cy="10" r="2"/>
+          </svg>
+          <span>CreditDoc</span>
+        </a>
+        <p class="mt-3 text-sm text-muted leading-relaxed">
+          Expert reviews and comparisons to help you find the right credit repair, personal loan, and debt relief services.
+        </p>
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <h3 class="text-sm font-semibold text-text uppercase tracking-wider">Categories</h3>
+        <ul class="mt-4 space-y-3">
+          {categoryLinks.map(link => (
+            <li>
+              <a href={link.href} class="text-sm text-muted hover:text-primary transition-colors">
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h3 class="text-sm font-semibold text-text uppercase tracking-wider">Resources</h3>
+        <ul class="mt-4 space-y-3">
+          {resourceLinks.map(link => (
+            <li>
+              <a href={link.href} class="text-sm text-muted hover:text-primary transition-colors">
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div>
+        <h3 class="text-sm font-semibold text-text uppercase tracking-wider">Stay Updated</h3>
+        <p class="mt-4 text-sm text-muted">Get weekly credit tips and deal alerts.</p>
+        <form class="mt-3 flex gap-2" onsubmit="return false;">
+          <input
+            type="email"
+            placeholder="you@email.com"
+            class="flex-1 min-w-0 rounded-lg border border-border bg-bg px-3 py-2.5 text-sm text-text placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+          />
+          <button
+            type="submit"
+            class="shrink-0 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-hover transition-colors min-h-[44px]"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Affiliate Disclosure -->
+    <div class="mt-10 rounded-lg bg-bg-alt p-4 border border-border">
+      <p class="text-xs text-muted leading-relaxed">
+        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click on links to products and services featured on this site. These commissions help us maintain and improve our free research. Our editorial team independently reviews all services using our rigorous <a href="/methodology/" class="text-primary hover:underline">evaluation methodology</a>. Compensation does not influence our ratings or rankings. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
+      </p>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
+      <p class="text-xs text-muted">
+        &copy; {currentYear} CreditDoc. All rights reserved.
+      </p>
+      <div class="flex items-center gap-4">
+        <a href="/privacy/" class="text-xs text-muted hover:text-primary transition-colors">Privacy</a>
+        <span class="text-border">|</span>
+        <a href="/terms/" class="text-xs text-muted hover:text-primary transition-colors">Terms</a>
+        <span class="text-border">|</span>
+        <a href="/disclosure/" class="text-xs text-muted hover:text-primary transition-colors">Disclosure</a>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Affiliate Disclosure",
+  "description": "CreditDoc's affiliate disclosure explaining how we earn money and how it affects our editorial content.",
+  "url": "https://creditdoc.co/disclosure/"
+};
+---
+
+<BaseLayout
+  title="Affiliate Disclosure | How CreditDoc Earns Money"
+  description="CreditDoc's full affiliate disclosure. Learn how we earn revenue through affiliate partnerships, what it means for you, and why our editorial ratings remain independent."
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <section class="bg-white border-b border-border">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 text-center">
+      <span class="inline-block rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-6">FTC Disclosure</span>
+      <h1 class="text-4xl font-bold text-text sm:text-5xl">Affiliate Disclosure</h1>
+      <p class="mt-6 text-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        Transparency is one of our core values. Here's exactly how CreditDoc earns money and what it means for you as a consumer.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="space-y-12">
+
+      <!-- Important Notice Box -->
+      <div class="rounded-xl border-2 border-primary bg-primary-light/40 p-6 sm:p-8">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 mt-0.5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-lg font-bold text-text">Important Notice</h2>
+            <p class="mt-2 text-sm text-text leading-relaxed">
+              CreditDoc.co is owned and operated by Cosmic Phoenix LLC. <strong>We earn compensation from some of the companies and products featured on this website.</strong> This compensation may impact how and where products appear on the site (including, for example, the order in which they appear in certain listings). However, this compensation does not influence our editorial ratings, reviews, or recommendations, which are based on our independent <a href="/methodology/" class="text-primary font-medium hover:underline">research methodology</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How We Earn Money -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">How We Earn Money</h2>
+        <div class="rounded-xl border border-border bg-white p-6 sm:p-8 space-y-6">
+          <p class="text-sm text-muted leading-relaxed">
+            CreditDoc is a free consumer resource. We do not charge visitors to use our comparison tools, read our reviews, or access our educational content. To keep the site running and fund our research, we earn revenue in the following ways:
+          </p>
+
+          <div class="space-y-5">
+            <div>
+              <h3 class="text-base font-semibold text-text mb-2">Affiliate Links</h3>
+              <p class="text-sm text-muted leading-relaxed">
+                Some links on CreditDoc are "affiliate links." When you click on these links and subsequently sign up for a service, purchase a product, or complete another qualifying action on the third-party website, CreditDoc may receive a referral commission from that company. You pay nothing extra -- the price you see is the same whether you use our link or go to the company directly.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="text-base font-semibold text-text mb-2">Referral Fees</h3>
+              <p class="text-sm text-muted leading-relaxed">
+                Some companies pay us a referral fee when we send qualified visitors to their website, regardless of whether a purchase or sign-up is completed. This is sometimes called a "cost per click" (CPC) or "cost per lead" (CPL) arrangement.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="text-base font-semibold text-text mb-2">Cost Per Acquisition (CPA)</h3>
+              <p class="text-sm text-muted leading-relaxed">
+                In other cases, we earn a commission only when a visitor completes a specific action, such as signing up for a credit repair service or submitting a loan application. This is a "cost per acquisition" (CPA) arrangement. The commission amount varies by company and can range from a fixed fee to a percentage of the first month's service charge.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- What This Means for You -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">What This Means for You</h2>
+        <div class="rounded-xl border border-border bg-white p-6 sm:p-8 space-y-4">
+          <div class="flex gap-3">
+            <div class="flex-shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-positive" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <p class="text-sm text-muted leading-relaxed">
+              <strong class="text-text">You never pay more.</strong> Our affiliate partnerships do not increase the price you pay. The cost of a service is the same whether you reach the company through our site or directly.
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <div class="flex-shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-positive" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <p class="text-sm text-muted leading-relaxed">
+              <strong class="text-text">Our opinions are our own.</strong> Compensation does not influence our editorial ratings, star scores, or written reviews. Our 5-factor rating system is applied consistently to every company we evaluate, regardless of affiliate status.
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <div class="flex-shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-positive" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <p class="text-sm text-muted leading-relaxed">
+              <strong class="text-text">We feature companies without affiliate relationships.</strong> Not every company listed on CreditDoc pays us a commission. We include companies based on their merit and relevance to consumers, not based on whether they have an affiliate program.
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <div class="flex-shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-positive" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <p class="text-sm text-muted leading-relaxed">
+              <strong class="text-text">We may earn negative reviews.</strong> If a company that pays us commissions provides a poor service, we will rate it accordingly. Affiliate revenue is never worth misleading our readers.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How to Identify Affiliate Links -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">How to Identify Affiliate Links</h2>
+        <div class="rounded-xl border border-border bg-white p-6 sm:p-8">
+          <p class="text-sm text-muted leading-relaxed mb-4">
+            On CreditDoc, affiliate links are typically found in:
+          </p>
+          <ul class="ml-4 list-disc text-sm text-muted leading-relaxed space-y-2">
+            <li>"Visit Website" or "Get Started" buttons on review and comparison pages</li>
+            <li>Company name links that direct you to the company's website</li>
+            <li>Call-to-action buttons in "best of" listicle articles</li>
+            <li>Links within our editorial content that direct you to a company's sign-up page</li>
+          </ul>
+          <p class="mt-4 text-sm text-muted leading-relaxed">
+            These links may contain tracking parameters that identify CreditDoc as the referring source. If you prefer not to use affiliate links, you can always navigate to the company's website directly by typing their URL into your browser.
+          </p>
+        </div>
+      </div>
+
+      <!-- Placement and Ordering -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Placement and Ordering</h2>
+        <div class="rounded-xl border border-border bg-white p-6 sm:p-8">
+          <p class="text-sm text-muted leading-relaxed mb-4">
+            The order in which companies appear on CreditDoc may be influenced by several factors, including:
+          </p>
+          <ul class="ml-4 list-disc text-sm text-muted leading-relaxed space-y-2">
+            <li>Our editorial rating (primary factor)</li>
+            <li>Relevance to the specific page or comparison</li>
+            <li>Consumer popularity and search volume</li>
+            <li>Whether we have an affiliate relationship with the company</li>
+          </ul>
+          <p class="mt-4 text-sm text-muted leading-relaxed">
+            While affiliate relationships may influence placement (such as the order of listings), they <strong>never influence our ratings or editorial assessments</strong>. A company's star rating, pros/cons, and our written diagnosis are determined solely by our <a href="/methodology/" class="text-primary hover:underline">research methodology</a>.
+          </p>
+        </div>
+      </div>
+
+      <!-- FTC Compliance -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">FTC Compliance Statement</h2>
+        <div class="rounded-xl border border-primary/20 bg-primary-light/30 p-6 sm:p-8">
+          <p class="text-sm text-text leading-relaxed mb-4">
+            This disclosure is made in compliance with the Federal Trade Commission's guidelines on endorsements and testimonials, specifically the <strong>FTC's Guides Concerning the Use of Endorsements and Testimonials in Advertising (16 CFR Part 255)</strong>.
+          </p>
+          <p class="text-sm text-text leading-relaxed mb-4">
+            In accordance with FTC guidelines, CreditDoc.co hereby discloses that:
+          </p>
+          <ol class="ml-4 list-decimal text-sm text-text leading-relaxed space-y-2">
+            <li>We receive monetary compensation from some companies featured on this website.</li>
+            <li>All opinions expressed on this website are our own and are not influenced by compensation.</li>
+            <li>We have a material connection to the products and services mentioned on this site because we may receive a commission if you click a link and make a purchase or sign up for a service.</li>
+            <li>We only recommend products and services that we believe provide value to our readers.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Questions About Our Disclosure</h2>
+        <div class="rounded-xl border border-border bg-white p-6 sm:p-8">
+          <p class="text-sm text-muted leading-relaxed">
+            If you have any questions about our affiliate relationships, how we earn money, or how compensation affects (or does not affect) our editorial content, please contact us at <a href="mailto:gian.eao@gmail.com" class="text-primary hover:underline">gian.eao@gmail.com</a>.
+          </p>
+          <p class="mt-4 text-xs text-muted">
+            This disclosure was last updated on March 19, 2026.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

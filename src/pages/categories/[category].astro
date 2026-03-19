@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LenderCard from '../../components/LenderCard.astro';
+import { getCategories, getLendersByCategory } from '../../utils/data';
+
+export function getStaticPaths() {
+  const categories = getCategories();
+  return categories.map(category => ({
+    params: { category: category.slug },
+  }));
+}
+
+const { category: categorySlug } = Astro.params;
+const categories = getCategories();
+const category = categories.find(c => c.slug === categorySlug)!;
+const lenders = getLendersByCategory(categorySlug!);
+---
+
+<BaseLayout
+  title={category.seo_title}
+  description={category.seo_description}
+>
+  <!-- Breadcrumbs -->
+  <nav class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li><a href="/" class="hover:text-primary transition-colors">Categories</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li class="text-text font-medium">{category.name}</li>
+    </ol>
+  </nav>
+
+  <!-- Header -->
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <h1 class="text-2xl sm:text-3xl font-bold text-text">{category.name}</h1>
+      <p class="mt-3 text-muted leading-relaxed">{category.description}</p>
+    </div>
+  </section>
+
+  <!-- Lender Grid or Empty State -->
+  <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+    {lenders.length > 0 ? (
+      <div>
+        <p class="text-sm text-muted mb-6">{lenders.length} {lenders.length === 1 ? 'company' : 'companies'} found</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {lenders.map(lender => (
+            <LenderCard lender={lender} />
+          ))}
+        </div>
+      </div>
+    ) : (
+      <div class="glass-card p-12 text-center">
+        <div class="mx-auto w-16 h-16 rounded-2xl bg-bg-alt flex items-center justify-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-muted" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+        <h2 class="text-lg font-semibold text-text">Coming Soon</h2>
+        <p class="mt-2 text-sm text-muted max-w-md mx-auto">
+          We're currently reviewing companies in the {category.name} category.
+          Check back soon for detailed reviews and comparisons.
+        </p>
+        <a
+          href="/"
+          class="mt-6 inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors"
+        >
+          Browse All Companies
+        </a>
+      </div>
+    )}
+  </section>
+</BaseLayout>
