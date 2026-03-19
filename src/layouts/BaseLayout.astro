@@ -13,7 +13,7 @@ interface Props {
 
 const { title, description, canonical, ogImage, jsonLd } = Astro.props;
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
-const ogImg = ogImage || '/og-default.png';
+const ogImg = ogImage || 'https://creditdoc.co/og-default.png';
 ---
 
 <!doctype html>

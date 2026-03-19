@@ -6,13 +6,13 @@ const currentPath = Astro.url.pathname;
 
 /* Group categories by section for the dropdown */
 const creditRepair = categories.filter(c =>
-  ['fix-my-credit', 'build-my-credit', 'watch-my-score'].includes(c.slug)
+  ['fix-my-credit', 'build-credit', 'credit-monitoring'].includes(c.slug)
 );
 const loansCash = categories.filter(c =>
-  ['i-need-a-loan', 'emergency-cash', 'payday-alternatives'].includes(c.slug)
+  ['personal-loans', 'emergency-cash', 'payday-alternatives'].includes(c.slug)
 );
 const debtHelp = categories.filter(c =>
-  ['get-out-of-debt', 'free-help'].includes(c.slug)
+  ['debt-relief', 'free-help'].includes(c.slug)
 );
 ---
 
@@ -112,14 +112,6 @@ const debtHelp = categories.filter(c =>
         About
       </a>
 
-      <span class="h-5 w-px bg-border"></span>
-
-      <a
-        href="/disclosure/"
-        class="text-xs text-muted hover:text-primary transition-colors py-2"
-      >
-        How We Earn Money
-      </a>
     </div>
 
     <!-- Mobile Hamburger -->
@@ -202,11 +194,6 @@ const debtHelp = categories.filter(c =>
         About
       </a>
 
-      <div class="pt-2 border-t border-border">
-        <a href="/disclosure/" class="block rounded-lg px-3 py-2.5 text-xs text-muted hover:text-primary transition-colors">
-          How We Earn Money
-        </a>
-      </div>
     </div>
   </div>
 </header>

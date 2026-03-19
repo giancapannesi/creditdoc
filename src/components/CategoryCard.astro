@@ -61,14 +61,14 @@ const { category } = Astro.props;
     {category.name}
   </h3>
 
-  <!-- Count or Coming Soon -->
+  <!-- Count or Researching -->
   {category.count > 0 ? (
     <span class="text-xs font-medium text-primary">
-      {category.count} {category.count === 1 ? 'company' : 'companies'}
+      {category.count} {category.count === 1 ? 'company' : 'companies'} reviewed
     </span>
   ) : (
-    <span class="inline-flex items-center rounded-full bg-warning-light px-2 py-0.5 text-xs font-medium text-amber-800">
-      Coming Soon
+    <span class="inline-flex items-center rounded-full bg-primary-light px-2 py-0.5 text-xs font-medium text-primary">
+      Reviews in progress
     </span>
   )}
 
