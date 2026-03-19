@@ -1,0 +1,68 @@
+@import "tailwindcss";
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/inter/latin-700.css";
+
+@theme {
+  --color-bg: #F8FAFC;
+  --color-bg-alt: #F1F5F9;
+  --color-card: rgba(255, 255, 255, 0.8);
+  --color-card-solid: #FFFFFF;
+  --color-card-hover: rgba(255, 255, 255, 0.95);
+  --color-border: #E2E8F0;
+  --color-text: #0F172A;
+  --color-muted: #64748B;
+  --color-primary: #0D9488;
+  --color-primary-hover: #0F766E;
+  --color-primary-light: #CCFBF1;
+  --color-secondary: #1E3A5F;
+  --color-accent: #3B82F6;
+  --color-accent-hover: #2563EB;
+  --color-positive: #10B981;
+  --color-positive-light: #D1FAE5;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FEF3C7;
+  --color-negative: #EF4444;
+  --color-negative-light: #FEE2E2;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* Glassmorphism card base */
+.glass-card {
+  background: var(--color-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.glass-card:hover {
+  background: var(--color-card-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* BBB Rating pills */
+.bbb-a-plus { background-color: #D1FAE5; color: #065F46; }
+.bbb-a { background-color: #D1FAE5; color: #065F46; }
+.bbb-b-plus { background-color: #FEF3C7; color: #92400E; }
+.bbb-b { background-color: #FEF3C7; color: #92400E; }
+.bbb-c { background-color: #FEE2E2; color: #991B1B; }
+.bbb-f { background-color: #FEE2E2; color: #991B1B; }
+.bbb-nr { background-color: #F1F5F9; color: #64748B; }

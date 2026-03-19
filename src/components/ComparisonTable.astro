@@ -1,0 +1,226 @@
+---
+import type { Lender } from '../utils/data';
+import { getBbbClass, formatPrice } from '../utils/data';
+import RatingStars from './RatingStars.astro';
+
+interface Props {
+  lenderA: Lender;
+  lenderB: Lender;
+}
+
+const { lenderA, lenderB } = Astro.props;
+
+// Determine winners for each row
+function priceWinner(a: number, b: number): 'a' | 'b' | 'tie' {
+  if (a === b) return 'tie';
+  return a < b ? 'a' : 'b';
+}
+
+function ratingWinner(a: number, b: number): 'a' | 'b' | 'tie' {
+  if (a === b) return 'tie';
+  return a > b ? 'a' : 'b';
+}
+
+function bbbRank(rating: string): number {
+  const ranks: Record<string, number> = { 'A+': 7, 'A': 6, 'B+': 5, 'B': 4, 'C+': 3, 'C': 2, 'C-': 1, 'F': 0 };
+  return ranks[rating] ?? -1;
+}
+
+function bbbWinner(a: string, b: string): 'a' | 'b' | 'tie' {
+  const ra = bbbRank(a), rb = bbbRank(b);
+  if (ra === rb) return 'tie';
+  return ra > rb ? 'a' : 'b';
+}
+
+const winners = {
+  price: priceWinner(lenderA.pricing.monthly_price, lenderB.pricing.monthly_price),
+  setup: priceWinner(lenderA.pricing.setup_fee, lenderB.pricing.setup_fee),
+  bbb: bbbWinner(lenderA.company_info.bbb_rating, lenderB.company_info.bbb_rating),
+  guarantee: lenderA.pricing.money_back_guarantee === lenderB.pricing.money_back_guarantee ? 'tie' as const : (lenderA.pricing.money_back_guarantee ? 'a' as const : 'b' as const),
+  rating: ratingWinner(lenderA.rating, lenderB.rating),
+};
+
+const featureKeys: { key: keyof Lender['features']; label: string }[] = [
+  { key: 'credit_monitoring', label: 'Credit Monitoring' },
+  { key: 'all_three_bureaus', label: 'All 3 Bureaus' },
+  { key: 'goodwill_letters', label: 'Goodwill Letters' },
+  { key: 'cease_desist_letters', label: 'Cease & Desist Letters' },
+  { key: 'debt_validation', label: 'Debt Validation' },
+  { key: 'credit_education', label: 'Credit Education' },
+  { key: 'identity_theft_protection', label: 'ID Theft Protection' },
+  { key: 'score_tracking', label: 'Score Tracking' },
+  { key: 'mobile_app', label: 'Mobile App' },
+  { key: 'online_portal', label: 'Online Portal' },
+  { key: 'personal_advisor', label: 'Personal Advisor' },
+  { key: 'ai_powered', label: 'AI-Powered' },
+];
+
+const winnerBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-light text-primary text-xs font-semibold px-2 py-0.5 ml-1';
+---
+
+<div class="overflow-x-auto -mx-4 sm:mx-0">
+  <table class="w-full min-w-[600px] border-collapse text-sm">
+    <!-- Header -->
+    <thead>
+      <tr class="border-b-2 border-border">
+        <th class="py-4 px-4 text-left text-xs font-semibold uppercase tracking-wider text-muted w-1/3">Feature</th>
+        <th class="py-4 px-4 text-center w-1/3">
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-12 h-12 rounded-xl bg-bg-alt border border-border flex items-center justify-center overflow-hidden">
+              {lenderA.logo_url ? (
+                <img src={lenderA.logo_url} alt={lenderA.name} class="w-8 h-8 object-contain" loading="lazy" />
+              ) : (
+                <span class="text-sm font-bold text-primary">{lenderA.name.charAt(0)}</span>
+              )}
+            </div>
+            <a href={`/review/${lenderA.slug}/`} class="font-semibold text-text hover:text-primary transition-colors">
+              {lenderA.name}
+            </a>
+          </div>
+        </th>
+        <th class="py-4 px-4 text-center w-1/3">
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-12 h-12 rounded-xl bg-bg-alt border border-border flex items-center justify-center overflow-hidden">
+              {lenderB.logo_url ? (
+                <img src={lenderB.logo_url} alt={lenderB.name} class="w-8 h-8 object-contain" loading="lazy" />
+              ) : (
+                <span class="text-sm font-bold text-primary">{lenderB.name.charAt(0)}</span>
+              )}
+            </div>
+            <a href={`/review/${lenderB.slug}/`} class="font-semibold text-text hover:text-primary transition-colors">
+              {lenderB.name}
+            </a>
+          </div>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody class="divide-y divide-border">
+      <!-- Monthly Price -->
+      <tr class="hover:bg-bg-alt/50 transition-colors">
+        <td class="py-3 px-4 font-medium text-text">Monthly Price</td>
+        <td class="py-3 px-4 text-center">
+          <span class="font-semibold">{formatPrice(lenderA.pricing.monthly_price)}/mo</span>
+          {winners.price === 'a' && <span class={winnerBadge}>Best</span>}
+        </td>
+        <td class="py-3 px-4 text-center">
+          <span class="font-semibold">{formatPrice(lenderB.pricing.monthly_price)}/mo</span>
+          {winners.price === 'b' && <span class={winnerBadge}>Best</span>}
+        </td>
+      </tr>
+
+      <!-- Setup Fee -->
+      <tr class="hover:bg-bg-alt/50 transition-colors">
+        <td class="py-3 px-4 font-medium text-text">Setup Fee</td>
+        <td class="py-3 px-4 text-center">
+          <span>{formatPrice(lenderA.pricing.setup_fee)}</span>
+          {winners.setup === 'a' && <span class={winnerBadge}>Best</span>}
+        </td>
+        <td class="py-3 px-4 text-center">
+          <span>{formatPrice(lenderB.pricing.setup_fee)}</span>
+          {winners.setup === 'b' && <span class={winnerBadge}>Best</span>}
+        </td>
+      </tr>
+
+      <!-- BBB Rating -->
+      <tr class="hover:bg-bg-alt/50 transition-colors">
+        <td class="py-3 px-4 font-medium text-text">BBB Rating</td>
+        <td class="py-3 px-4 text-center">
+          <span class={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${getBbbClass(lenderA.company_info.bbb_rating)}`}>
+            {lenderA.company_info.bbb_rating}
+          </span>
+          {winners.bbb === 'a' && <span class={winnerBadge}>Best</span>}
+        </td>
+        <td class="py-3 px-4 text-center">
+          <span class={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${getBbbClass(lenderB.company_info.bbb_rating)}`}>
+            {lenderB.company_info.bbb_rating}
+          </span>
+          {winners.bbb === 'b' && <span class={winnerBadge}>Best</span>}
+        </td>
+      </tr>
+
+      <!-- Money-Back Guarantee -->
+      <tr class="hover:bg-bg-alt/50 transition-colors">
+        <td class="py-3 px-4 font-medium text-text">Money-Back Guarantee</td>
+        <td class="py-3 px-4 text-center">
+          {lenderA.pricing.money_back_guarantee ? (
+            <span class="text-positive font-medium">Yes</span>
+          ) : (
+            <span class="text-muted">No</span>
+          )}
+          {winners.guarantee === 'a' && <span class={winnerBadge}>Best</span>}
+        </td>
+        <td class="py-3 px-4 text-center">
+          {lenderB.pricing.money_back_guarantee ? (
+            <span class="text-positive font-medium">Yes</span>
+          ) : (
+            <span class="text-muted">No</span>
+          )}
+          {winners.guarantee === 'b' && <span class={winnerBadge}>Best</span>}
+        </td>
+      </tr>
+
+      <!-- Rating -->
+      <tr class="hover:bg-bg-alt/50 transition-colors">
+        <td class="py-3 px-4 font-medium text-text">Our Rating</td>
+        <td class="py-3 px-4 text-center">
+          <div class="inline-flex flex-col items-center gap-1">
+            <RatingStars rating={lenderA.rating} size="sm" />
+            {winners.rating === 'a' && <span class={winnerBadge}>Best</span>}
+          </div>
+        </td>
+        <td class="py-3 px-4 text-center">
+          <div class="inline-flex flex-col items-center gap-1">
+            <RatingStars rating={lenderB.rating} size="sm" />
+            {winners.rating === 'b' && <span class={winnerBadge}>Best</span>}
+          </div>
+        </td>
+      </tr>
+
+      <!-- Feature Checkmarks -->
+      {featureKeys.map(({ key, label }) => (
+        <tr class="hover:bg-bg-alt/50 transition-colors">
+          <td class="py-3 px-4 font-medium text-text">{label}</td>
+          <td class="py-3 px-4 text-center">
+            {lenderA.features[key] ? (
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto text-positive" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto text-border" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/>
+              </svg>
+            )}
+          </td>
+          <td class="py-3 px-4 text-center">
+            {lenderB.features[key] ? (
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto text-positive" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto text-border" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/>
+              </svg>
+            )}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<!-- CTA Row -->
+<div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <a
+    href={`/review/${lenderA.slug}/`}
+    class="flex items-center justify-center rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px]"
+  >
+    View {lenderA.name} Review
+  </a>
+  <a
+    href={`/review/${lenderB.slug}/`}
+    class="flex items-center justify-center rounded-lg border-2 border-primary px-4 py-3 text-sm font-semibold text-primary hover:bg-primary-light transition-colors min-h-[44px]"
+  >
+    View {lenderB.name} Review
+  </a>
+</div>

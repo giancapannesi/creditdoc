@@ -1,0 +1,50 @@
+---
+interface Props {
+  pros: string[];
+  cons: string[];
+}
+
+const { pros, cons } = Astro.props;
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+  <!-- Pros -->
+  <div class="rounded-xl border border-positive/20 bg-positive-light/30 p-5">
+    <h4 class="flex items-center gap-2 text-sm font-semibold text-positive uppercase tracking-wide mb-3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/>
+      </svg>
+      Pros
+    </h4>
+    <ul class="space-y-2.5">
+      {pros.map(pro => (
+        <li class="flex items-start gap-2.5 text-sm text-text leading-relaxed">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 shrink-0 text-positive" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
+          </svg>
+          <span>{pro}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Cons -->
+  <div class="rounded-xl border border-negative/20 bg-negative-light/30 p-5">
+    <h4 class="flex items-center gap-2 text-sm font-semibold text-negative uppercase tracking-wide mb-3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/>
+      </svg>
+      Cons
+    </h4>
+    <ul class="space-y-2.5">
+      {cons.map(con => (
+        <li class="flex items-start gap-2.5 text-sm text-text leading-relaxed">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 shrink-0 text-negative" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/>
+          </svg>
+          <span>{con}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>

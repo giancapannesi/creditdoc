@@ -1,0 +1,476 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RatingStars from '../../components/RatingStars.astro';
+import ProsCons from '../../components/ProsCons.astro';
+import DiagnosisCard from '../../components/DiagnosisCard.astro';
+import LenderCard from '../../components/LenderCard.astro';
+import TrustBadge from '../../components/TrustBadge.astro';
+import { getAllLenders, getLenderBySlug, formatPrice, getBbbClass, generateDiagnosis, getComparisons } from '../../utils/data';
+import type { Lender } from '../../utils/data';
+
+export function getStaticPaths() {
+  const lenders = getAllLenders();
+  return lenders.map(lender => ({
+    params: { slug: lender.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const lender = getLenderBySlug(slug!)!;
+
+const allLenders = getAllLenders();
+const similarLenders = lender.similar_lenders
+  .map(s => getLenderBySlug(s))
+  .filter((l): l is Lender => l !== undefined)
+  .slice(0, 3);
+
+const comparisons = getComparisons().filter(
+  c => c.lender_a === lender.slug || c.lender_b === lender.slug
+);
+
+const diagnosis = generateDiagnosis(lender);
+const bbbClass = getBbbClass(lender.company_info.bbb_rating);
+const lowestPrice = lender.pricing.tiers.length > 0
+  ? Math.min(...lender.pricing.tiers.map(t => t.price))
+  : lender.pricing.monthly_price;
+
+const featureLabels: Record<string, string> = {
+  credit_monitoring: 'Credit Monitoring',
+  all_three_bureaus: 'All Three Bureaus',
+  goodwill_letters: 'Goodwill Letters',
+  cease_desist_letters: 'Cease & Desist Letters',
+  debt_validation: 'Debt Validation',
+  credit_education: 'Credit Education',
+  identity_theft_protection: 'Identity Theft Protection',
+  score_tracking: 'Score Tracking',
+  mobile_app: 'Mobile App',
+  online_portal: 'Online Portal',
+  personal_advisor: 'Personal Advisor',
+  ai_powered: 'AI-Powered Tools',
+};
+
+const ratingCategories = [
+  { label: 'Value', value: lender.rating_breakdown.value },
+  { label: 'Effectiveness', value: lender.rating_breakdown.effectiveness },
+  { label: 'Customer Service', value: lender.rating_breakdown.customer_service },
+  { label: 'Transparency', value: lender.rating_breakdown.transparency },
+  { label: 'Ease of Use', value: lender.rating_breakdown.ease_of_use },
+];
+
+const faqs = [
+  {
+    question: `Is ${lender.name} legitimate?`,
+    answer: `Yes. ${lender.name} is a registered company headquartered in ${lender.company_info.headquarters}, founded in ${lender.company_info.founded_year}. They hold a ${lender.company_info.bbb_rating} rating with the Better Business Bureau${lender.company_info.bbb_accredited ? ' and are BBB-accredited' : ''}.`,
+  },
+  {
+    question: `How much does ${lender.name} cost?`,
+    answer: `${lender.name} plans start at ${formatPrice(lowestPrice)} per month${lender.pricing.setup_fee > 0 ? ` with a ${formatPrice(lender.pricing.setup_fee)} setup fee` : ' with no setup fee'}. ${lender.pricing.money_back_guarantee ? lender.pricing.guarantee_details : 'No money-back guarantee is offered.'}`,
+  },
+  {
+    question: `How long does ${lender.name} take to show results?`,
+    answer: lender.typical_results_timeline,
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FinancialProduct',
+    name: lender.name,
+    description: lender.description_short,
+    url: lender.website_url,
+    provider: {
+      '@type': 'Organization',
+      name: lender.name,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: lender.company_info.city,
+        addressRegion: lender.company_info.state,
+      },
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: lender.rating.toString(),
+      bestRating: '5',
+      worstRating: '1',
+      ratingCount: '1',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://creditdoc.co/' },
+      { '@type': 'ListItem', position: 2, name: 'Credit Repair', item: `https://creditdoc.co/categories/${lender.category}/` },
+      { '@type': 'ListItem', position: 3, name: lender.name, item: `https://creditdoc.co/review/${lender.slug}/` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={`${lender.name} Review (2026) - Pricing, BBB Rating & Features | CreditDoc`}
+  description={lender.description_short}
+  jsonLd={jsonLd}
+>
+  <!-- Breadcrumbs -->
+  <nav class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li><a href={`/categories/${lender.category}/`} class="hover:text-primary transition-colors capitalize">Credit Repair</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li class="text-text font-medium">{lender.name}</li>
+    </ol>
+  </nav>
+
+  <!-- Header Section -->
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-6 sm:p-8">
+      <div class="flex flex-col sm:flex-row items-start gap-6">
+        <!-- Logo -->
+        <div class="w-20 h-20 rounded-2xl bg-bg-alt border border-border flex items-center justify-center shrink-0 overflow-hidden">
+          {lender.logo_url ? (
+            <img src={lender.logo_url} alt={`${lender.name} logo`} class="w-14 h-14 object-contain" />
+          ) : (
+            <span class="text-2xl font-bold text-primary">{lender.name.charAt(0)}</span>
+          )}
+        </div>
+
+        <div class="flex-1">
+          <h1 class="text-2xl sm:text-3xl font-bold text-text">{lender.name}</h1>
+          <div class="flex items-center gap-3 mt-2">
+            <RatingStars rating={lender.rating} size="md" showValue={true} />
+          </div>
+          <p class="mt-3 text-muted leading-relaxed">{lender.description_short}</p>
+        </div>
+      </div>
+
+      <!-- Quick Badges -->
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-primary-light text-primary">
+          From {formatPrice(lowestPrice)}/mo
+        </span>
+        <span class:list={['inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold', bbbClass]}>
+          BBB: {lender.company_info.bbb_rating}
+        </span>
+        {lender.pricing.free_consultation && (
+          <TrustBadge type="verified" text="Free Consultation" />
+        )}
+        {lender.pricing.money_back_guarantee && (
+          <TrustBadge type="money-back" text="Money-Back Guarantee" />
+        )}
+        <a
+          href={lender.affiliate_url || lender.website_url}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          class="inline-flex items-center px-5 py-2 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary-hover transition-colors ml-auto"
+        >
+          Visit Website
+          <svg xmlns="http://www.w3.org/2000/svg" class="ml-1.5 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5zm7.5-2.25a.75.75 0 01.75-.75h4a.75.75 0 01.75.75v4a.75.75 0 01-1.5 0V5.56l-5.22 5.22a.75.75 0 11-1.06-1.06l5.22-5.22h-2.19a.75.75 0 01-.75-.75z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Two-Column Layout -->
+  <section class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content -->
+      <div class="lg:col-span-2 space-y-8">
+        <!-- Description -->
+        <div class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">{lender.name} Review</h2>
+          <div class="prose prose-sm max-w-none text-muted leading-relaxed">
+            {lender.description_long.split('\n\n').map(paragraph => (
+              <p class="mb-4">{paragraph}</p>
+            ))}
+          </div>
+        </div>
+
+        <!-- Services & Features -->
+        <div class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">Services & Features</h2>
+
+          <!-- Services list -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+            {lender.services.map(service => (
+              <div class="flex items-start gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-positive shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-sm text-text">{service}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- Feature grid -->
+          <h3 class="text-base font-semibold text-text mb-3">Feature Checklist</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {Object.entries(lender.features).map(([key, value]) => (
+              <div class="flex items-center gap-2">
+                {value ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-positive shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/>
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-border shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/>
+                  </svg>
+                )}
+                <span class:list={['text-xs', value ? 'text-text' : 'text-muted']}>
+                  {featureLabels[key] || key}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Pricing Tiers -->
+        {lender.pricing.tiers.length > 0 && (
+          <div class="glass-card p-6">
+            <h2 class="text-xl font-bold text-text mb-4">Pricing Plans</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {lender.pricing.tiers.map((tier, i) => (
+                <div class:list={[
+                  'rounded-xl border p-5 flex flex-col',
+                  i === 1 ? 'border-primary bg-primary-light/20 ring-1 ring-primary/20' : 'border-border bg-white'
+                ]}>
+                  {i === 1 && (
+                    <span class="inline-flex self-start items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary text-white mb-2">
+                      Most Popular
+                    </span>
+                  )}
+                  <h3 class="text-base font-semibold text-text">{tier.name}</h3>
+                  <div class="mt-2">
+                    <span class="text-2xl font-bold text-text">{formatPrice(tier.price)}</span>
+                    <span class="text-sm text-muted">/mo</span>
+                  </div>
+                  {lender.pricing.setup_fee > 0 && (
+                    <p class="text-xs text-muted mt-1">+ {formatPrice(lender.pricing.setup_fee)} setup fee</p>
+                  )}
+                  <ul class="mt-4 space-y-2 flex-1">
+                    {tier.features.map(feature => (
+                      <li class="flex items-start gap-2 text-sm text-muted">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-positive shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={lender.affiliate_url || lender.website_url}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    class:list={[
+                      'mt-4 flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors min-h-[44px]',
+                      i === 1 ? 'bg-primary text-white hover:bg-primary-hover' : 'border border-border text-text hover:bg-bg-alt'
+                    ]}
+                  >
+                    Get Started
+                  </a>
+                </div>
+              ))}
+            </div>
+            {lender.pricing.money_back_guarantee && (
+              <p class="mt-4 text-xs text-muted text-center">
+                {lender.pricing.guarantee_details}
+              </p>
+            )}
+          </div>
+        )}
+
+        <!-- Pros & Cons -->
+        <div>
+          <h2 class="text-xl font-bold text-text mb-4">Pros & Cons</h2>
+          <ProsCons pros={lender.pros} cons={lender.cons} />
+        </div>
+
+        <!-- Rating Breakdown -->
+        <div class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">Rating Breakdown</h2>
+          <div class="space-y-3">
+            {ratingCategories.map(cat => (
+              <div class="flex items-center gap-4">
+                <span class="text-sm font-medium text-text w-32 shrink-0">{cat.label}</span>
+                <div class="flex-1 h-2.5 bg-bg-alt rounded-full overflow-hidden">
+                  <div
+                    class="h-full bg-primary rounded-full transition-all"
+                    style={`width: ${(cat.value / 5) * 100}%`}
+                  ></div>
+                </div>
+                <span class="text-sm font-semibold text-text w-8 text-right">{cat.value.toFixed(1)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">Frequently Asked Questions</h2>
+          <div class="space-y-4">
+            {faqs.map(faq => (
+              <details class="group border-b border-border pb-4 last:border-0 last:pb-0">
+                <summary class="flex items-center justify-between cursor-pointer text-sm font-semibold text-text hover:text-primary transition-colors py-1">
+                  {faq.question}
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-muted group-open:rotate-180 transition-transform shrink-0 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                  </svg>
+                </summary>
+                <p class="mt-2 text-sm text-muted leading-relaxed">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="space-y-6">
+        <!-- Quick Facts -->
+        <div class="glass-card p-5">
+          <h3 class="text-base font-semibold text-text mb-4">Quick Facts</h3>
+          <dl class="space-y-3">
+            <div class="flex items-center justify-between py-2 border-b border-border/50">
+              <dt class="text-sm text-muted">Founded</dt>
+              <dd class="text-sm font-medium text-text">{lender.company_info.founded_year}</dd>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-border/50">
+              <dt class="text-sm text-muted">Headquarters</dt>
+              <dd class="text-sm font-medium text-text">{lender.company_info.headquarters}</dd>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-border/50">
+              <dt class="text-sm text-muted">Employees</dt>
+              <dd class="text-sm font-medium text-text">{lender.company_info.employees}</dd>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-border/50">
+              <dt class="text-sm text-muted">BBB Rating</dt>
+              <dd>
+                <span class:list={['inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold', bbbClass]}>
+                  {lender.company_info.bbb_rating}
+                </span>
+              </dd>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-border/50">
+              <dt class="text-sm text-muted">BBB Accredited</dt>
+              <dd class="text-sm font-medium text-text">{lender.company_info.bbb_accredited ? 'Yes' : 'No'}</dd>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-border/50">
+              <dt class="text-sm text-muted">Starting Price</dt>
+              <dd class="text-sm font-medium text-text">{formatPrice(lowestPrice)}/mo</dd>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-border/50">
+              <dt class="text-sm text-muted">Setup Fee</dt>
+              <dd class="text-sm font-medium text-text">{lender.pricing.setup_fee > 0 ? formatPrice(lender.pricing.setup_fee) : 'None'}</dd>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-border/50">
+              <dt class="text-sm text-muted">Free Consultation</dt>
+              <dd class="text-sm font-medium text-text">{lender.pricing.free_consultation ? 'Yes' : 'No'}</dd>
+            </div>
+            <div class="flex items-center justify-between py-2">
+              <dt class="text-sm text-muted">Money-Back Guarantee</dt>
+              <dd class="text-sm font-medium text-text">{lender.pricing.money_back_guarantee ? 'Yes' : 'No'}</dd>
+            </div>
+          </dl>
+          <a
+            href={lender.affiliate_url || lender.website_url}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            class="mt-5 flex items-center justify-center w-full rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px]"
+          >
+            Visit {lender.name}
+          </a>
+        </div>
+
+        <!-- Diagnosis Card -->
+        <DiagnosisCard diagnosis={diagnosis} lenderName={lender.name} />
+
+        <!-- Best For -->
+        {lender.best_for.length > 0 && (
+          <div class="glass-card p-5">
+            <h3 class="text-base font-semibold text-text mb-3">Best For</h3>
+            <ul class="space-y-2">
+              {lender.best_for.map(item => (
+                <li class="flex items-start gap-2 text-sm text-muted">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/>
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <!-- Last Updated -->
+        <div class="text-center">
+          <TrustBadge type="updated" text={`Updated ${lender.last_updated}`} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compare With Section -->
+  {comparisons.length > 0 && (
+    <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <h2 class="text-xl font-bold text-text mb-4">Compare {lender.name} With Others</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {comparisons.map(comp => {
+          const otherSlug = comp.lender_a === lender.slug ? comp.lender_b : comp.lender_a;
+          const otherLender = getLenderBySlug(otherSlug);
+          return (
+            <a
+              href={`/compare/${comp.slug}/`}
+              class="glass-card p-4 flex items-center gap-3 group"
+            >
+              <div class="w-10 h-10 rounded-lg bg-bg-alt border border-border flex items-center justify-center shrink-0">
+                <span class="text-sm font-bold text-primary">vs</span>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-text group-hover:text-primary transition-colors">
+                  {lender.name} vs {otherLender?.name || otherSlug}
+                </p>
+                <p class="text-xs text-muted mt-0.5">Side-by-side comparison</p>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  )}
+
+  <!-- Similar Companies -->
+  {similarLenders.length > 0 && (
+    <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <h2 class="text-xl font-bold text-text mb-4">Similar Companies</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {similarLenders.map(similar => (
+          <LenderCard lender={similar} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Affiliate Disclosure -->
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="rounded-lg bg-bg-alt border border-border p-4">
+      <p class="text-xs text-muted leading-relaxed">
+        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to {lender.name} and other services. These commissions help us maintain our free research. Our editorial team independently evaluates all services. Compensation does not influence our ratings or rankings. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

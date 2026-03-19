@@ -1,0 +1,54 @@
+---
+interface Props {
+  rating: number;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { rating, size = 'md' } = Astro.props;
+
+const clampedRating = Math.max(0, Math.min(5, rating));
+const fullStars = Math.floor(clampedRating);
+const hasHalf = clampedRating - fullStars >= 0.25 && clampedRating - fullStars < 0.75;
+const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
+const displayRating = clampedRating.toFixed(1);
+
+const sizeMap = {
+  sm: { star: 'w-3.5 h-3.5', text: 'text-xs', gap: 'gap-0.5' },
+  md: { star: 'w-5 h-5', text: 'text-sm', gap: 'gap-0.5' },
+  lg: { star: 'w-6 h-6', text: 'text-base', gap: 'gap-1' },
+};
+
+const s = sizeMap[size];
+---
+
+<div class={`inline-flex items-center ${s.gap}`} aria-label={`Rating: ${displayRating} out of 5 stars`}>
+  <div class={`flex items-center ${s.gap}`}>
+    {/* Full stars */}
+    {Array.from({ length: fullStars }).map(() => (
+      <svg xmlns="http://www.w3.org/2000/svg" class={`${s.star} text-warning`} viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd"/>
+      </svg>
+    ))}
+
+    {/* Half star */}
+    {hasHalf && (
+      <svg xmlns="http://www.w3.org/2000/svg" class={`${s.star} text-warning`} viewBox="0 0 20 20">
+        <defs>
+          <linearGradient id={`half-grad-${rating}`}>
+            <stop offset="50%" stop-color="currentColor"/>
+            <stop offset="50%" stop-color="#E2E8F0"/>
+          </linearGradient>
+        </defs>
+        <path fill={`url(#half-grad-${rating})`} fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd"/>
+      </svg>
+    )}
+
+    {/* Empty stars */}
+    {Array.from({ length: emptyStars }).map(() => (
+      <svg xmlns="http://www.w3.org/2000/svg" class={`${s.star} text-border`} viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd"/>
+      </svg>
+    ))}
+  </div>
+  <span class={`${s.text} font-medium text-text ml-1`}>{displayRating}/5</span>
+</div>
