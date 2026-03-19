@@ -1,37 +1,168 @@
 ---
 const categories = [
-  { value: 'credit-repair', label: 'Credit Repair' },
-  { value: 'personal-loans', label: 'Personal Loans' },
-  { value: 'debt-relief', label: 'Debt Relief' },
-  { value: 'credit-cards', label: 'Credit Cards' },
+  { value: 'fix-my-credit', label: 'Fix My Credit', type: 'credit-repair' },
+  { value: 'personal-loans', label: 'I Need a Loan', type: 'loan' },
+  { value: 'emergency-cash', label: 'Emergency Cash', type: 'loan' },
+  { value: 'payday-alternatives', label: 'Payday Alternatives', type: 'loan' },
+  { value: 'debt-relief', label: 'Get Out of Debt', type: 'service' },
+  { value: 'build-credit', label: 'Build My Credit', type: 'service' },
+  { value: 'credit-monitoring', label: 'Improve My Credit Score', type: 'service' },
+  { value: 'free-help', label: 'Free Help', type: 'service' },
 ];
 
-const budgets = [
-  { value: 'under-50', label: 'Under $50/mo' },
-  { value: '50-100', label: '$50-$100/mo' },
-  { value: '100-150', label: '$100-$150/mo' },
-  { value: '150-plus', label: '$150+/mo' },
-];
+import { US_STATES } from '../utils/data';
 
-const bbbRatings = [
-  { value: 'a-plus', label: 'A+ Only' },
-  { value: 'a-or-higher', label: 'A or Higher' },
-  { value: 'b-or-higher', label: 'B or Higher' },
-  { value: 'any', label: 'Any Rating' },
-];
+// Context-aware follow-up option sets
+const contextOptions = {
+  'fix-my-credit': {
+    second: {
+      label: 'Monthly budget',
+      name: 'budget',
+      placeholder: 'Select budget...',
+      options: [
+        { value: 'under-50', label: 'Under $50' },
+        { value: '50-100', label: '$50 - $100' },
+        { value: '100-150', label: '$100 - $150' },
+        { value: '150-plus', label: '$150+' },
+      ],
+    },
+    third: {
+      label: 'BBB Rating',
+      name: 'bbb',
+      placeholder: 'Any rating...',
+      options: [
+        { value: 'a-plus', label: 'A+ Only' },
+        { value: 'a-or-higher', label: 'A or Higher' },
+        { value: 'b-or-higher', label: 'B or Higher' },
+        { value: 'any', label: 'Any' },
+      ],
+    },
+  },
+  'loan': {
+    second: {
+      label: 'How much?',
+      name: 'amount',
+      placeholder: 'Select amount...',
+      options: [
+        { value: '200', label: '$200' },
+        { value: '500', label: '$500' },
+        { value: '1000', label: '$1,000' },
+        { value: '2500', label: '$2,500' },
+        { value: '5000', label: '$5,000' },
+        { value: '10000', label: '$10,000' },
+        { value: '25000-plus', label: '$25,000+' },
+      ],
+    },
+    third: {
+      label: 'Repay over',
+      name: 'term',
+      placeholder: 'Select term...',
+      options: [
+        { value: '3', label: '3 months' },
+        { value: '6', label: '6 months' },
+        { value: '12', label: '12 months' },
+        { value: '24', label: '24 months' },
+        { value: '36-plus', label: '36+ months' },
+      ],
+    },
+  },
+  'debt-relief': {
+    second: {
+      label: 'How much debt?',
+      name: 'debt_amount',
+      placeholder: 'Select range...',
+      options: [
+        { value: 'under-5k', label: 'Under $5K' },
+        { value: '5k-15k', label: '$5K - $15K' },
+        { value: '15k-50k', label: '$15K - $50K' },
+        { value: '50k-plus', label: '$50K+' },
+      ],
+    },
+    third: {
+      label: 'Type of help',
+      name: 'debt_type',
+      placeholder: 'Select type...',
+      options: [
+        { value: 'settlement', label: 'Debt Settlement' },
+        { value: 'consolidation', label: 'Debt Consolidation' },
+        { value: 'management', label: 'Debt Management Plan' },
+        { value: 'not-sure', label: 'Not Sure' },
+      ],
+    },
+  },
+  'build-credit': {
+    second: {
+      label: 'Monthly budget',
+      name: 'budget',
+      placeholder: 'Select budget...',
+      options: [
+        { value: 'under-10', label: 'Under $10' },
+        { value: '10-25', label: '$10 - $25' },
+        { value: '25-50', label: '$25 - $50' },
+        { value: '50-plus', label: '$50+' },
+      ],
+    },
+    third: {
+      label: 'My credit is',
+      name: 'credit_score',
+      placeholder: 'Select range...',
+      options: [
+        { value: 'excellent', label: 'Excellent (720+)' },
+        { value: 'good', label: 'Good (670-719)' },
+        { value: 'fair', label: 'Fair (580-669)' },
+        { value: 'poor', label: 'Poor (below 580)' },
+        { value: 'none', label: 'No history' },
+      ],
+    },
+  },
+  'free-help': {
+    second: {
+      label: 'I need help with',
+      name: 'help_type',
+      placeholder: 'Select topic...',
+      options: [
+        { value: 'budget-planning', label: 'Budget Planning' },
+        { value: 'debt-management', label: 'Debt Management' },
+        { value: 'credit-counseling', label: 'Credit Counseling' },
+        { value: 'housing-counseling', label: 'Housing Counseling' },
+      ],
+    },
+    third: {
+      label: 'My state',
+      name: 'state',
+      placeholder: 'Select state...',
+      options: US_STATES.map(s => ({ value: s.toLowerCase().replace(/\s+/g, '-'), label: s })),
+    },
+  },
+};
+
+const contextOptionsJson = JSON.stringify(contextOptions);
+
+// Map categories to their context key
+const categoryContextMap = {
+  'fix-my-credit': 'fix-my-credit',
+  'personal-loans': 'loan',
+  'emergency-cash': 'loan',
+  'payday-alternatives': 'loan',
+  'debt-relief': 'debt-relief',
+  'build-credit': 'build-credit',
+  'credit-monitoring': 'build-credit',
+  'free-help': 'free-help',
+};
+const categoryContextMapJson = JSON.stringify(categoryContextMap);
 ---
 
-<div class="glass-card p-6 sm:p-8">
+<div class="glass-card p-6 sm:p-8" style="transform: none;">
   <div class="text-center mb-6">
     <h2 class="text-lg sm:text-xl font-bold text-text">Find the Right Service for You</h2>
-    <p class="text-sm text-muted mt-1">Answer three quick questions to see your best matches</p>
+    <p class="text-sm text-muted mt-1">Answer a few quick questions to see your best matches</p>
   </div>
 
-  <form id="filter-form" class="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-3">
-    <!-- Category -->
-    <div class="flex-1 min-w-0">
+  <form id="filter-form" class="flex flex-col gap-4">
+    <!-- Row 1: Category selector -->
+    <div>
       <label for="filter-need" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
-        I need help with
+        What do you need?
       </label>
       <select
         id="filter-need"
@@ -45,76 +176,137 @@ const bbbRatings = [
       </select>
     </div>
 
-    <!-- Budget -->
-    <div class="flex-1 min-w-0">
-      <label for="filter-budget" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
-        My budget
-      </label>
-      <select
-        id="filter-budget"
-        name="budget"
-        class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
-      >
-        <option value="">Any budget...</option>
-        {budgets.map(b => (
-          <option value={b.value}>{b.label}</option>
-        ))}
-      </select>
-    </div>
+    <!-- Row 2: Context-aware follow-up fields + CTA -->
+    <div id="filter-followups" class="hidden">
+      <div class="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-3 items-end">
+        <!-- Second dropdown (context-aware) -->
+        <div>
+          <label id="filter-second-label" for="filter-second" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
+            &nbsp;
+          </label>
+          <select
+            id="filter-second"
+            name="filter_second"
+            class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
+          >
+            <option value="">Loading...</option>
+          </select>
+        </div>
 
-    <!-- BBB Rating -->
-    <div class="flex-1 min-w-0">
-      <label for="filter-bbb" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
-        BBB Rating
-      </label>
-      <select
-        id="filter-bbb"
-        name="bbb"
-        class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
-      >
-        <option value="">Any rating...</option>
-        {bbbRatings.map(r => (
-          <option value={r.value}>{r.label}</option>
-        ))}
-      </select>
-    </div>
+        <!-- Third dropdown (context-aware) -->
+        <div>
+          <label id="filter-third-label" for="filter-third" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
+            &nbsp;
+          </label>
+          <select
+            id="filter-third"
+            name="filter_third"
+            class="w-full rounded-lg border border-border bg-white px-3 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors min-h-[44px]"
+          >
+            <option value="">Loading...</option>
+          </select>
+        </div>
 
-    <!-- CTA -->
-    <div class="sm:shrink-0">
-      <button
-        type="submit"
-        class="w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px] shadow-sm"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
-        </svg>
-        See Matches
-      </button>
+        <!-- CTA Button -->
+        <div>
+          <button
+            type="submit"
+            class="w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px] shadow-sm whitespace-nowrap"
+          >
+            See Matches
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   </form>
 </div>
 
-<script>
-  const form = document.getElementById('filter-form') as HTMLFormElement | null;
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const category = (document.getElementById('filter-need') as HTMLSelectElement)?.value;
-    const budget = (document.getElementById('filter-budget') as HTMLSelectElement)?.value;
-    const bbb = (document.getElementById('filter-bbb') as HTMLSelectElement)?.value;
+<script define:vars={{ contextOptionsJson, categoryContextMapJson }}>
+  const contextOptions = JSON.parse(contextOptionsJson);
+  const categoryContextMap = JSON.parse(categoryContextMapJson);
 
-    // Route to category page if selected, otherwise to search
-    if (category) {
-      const params = new URLSearchParams();
-      if (budget) params.set('budget', budget);
-      if (bbb) params.set('bbb', bbb);
-      const qs = params.toString();
-      window.location.href = `/categories/${category}/${qs ? '?' + qs : ''}`;
-    } else {
-      const params = new URLSearchParams();
-      if (budget) params.set('budget', budget);
-      if (bbb) params.set('bbb', bbb);
-      const qs = params.toString();
-      window.location.href = `/search/${qs ? '?' + qs : ''}`;
+  const categorySelect = document.getElementById('filter-need');
+  const followupsContainer = document.getElementById('filter-followups');
+  const secondSelect = document.getElementById('filter-second');
+  const thirdSelect = document.getElementById('filter-third');
+  const secondLabel = document.getElementById('filter-second-label');
+  const thirdLabel = document.getElementById('filter-third-label');
+  const form = document.getElementById('filter-form');
+
+  function populateSelect(selectEl, labelEl, config) {
+    if (!selectEl || !labelEl || !config) return;
+
+    // Update label
+    labelEl.textContent = config.label;
+
+    // Update select name attribute for form submission
+    selectEl.name = config.name;
+
+    // Clear and rebuild options
+    selectEl.innerHTML = '';
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = config.placeholder;
+    selectEl.appendChild(placeholder);
+
+    config.options.forEach(function(opt) {
+      const option = document.createElement('option');
+      option.value = opt.value;
+      option.textContent = opt.label;
+      selectEl.appendChild(option);
+    });
+  }
+
+  function updateFollowups() {
+    if (!categorySelect || !followupsContainer) return;
+
+    const categoryValue = categorySelect.value;
+    if (!categoryValue) {
+      followupsContainer.classList.add('hidden');
+      return;
     }
-  });
+
+    const contextKey = categoryContextMap[categoryValue];
+    if (!contextKey || !contextOptions[contextKey]) {
+      followupsContainer.classList.add('hidden');
+      return;
+    }
+
+    const config = contextOptions[contextKey];
+    populateSelect(secondSelect, secondLabel, config.second);
+    populateSelect(thirdSelect, thirdLabel, config.third);
+
+    followupsContainer.classList.remove('hidden');
+  }
+
+  // Listen for category change
+  if (categorySelect) {
+    categorySelect.addEventListener('change', updateFollowups);
+  }
+
+  // Handle form submission
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const category = categorySelect ? categorySelect.value : '';
+      if (!category) return;
+
+      const params = new URLSearchParams();
+      params.set('category', category);
+
+      // Add the context-aware field values with their actual param names
+      if (secondSelect && secondSelect.value) {
+        params.set(secondSelect.name, secondSelect.value);
+      }
+      if (thirdSelect && thirdSelect.value) {
+        params.set(thirdSelect.name, thirdSelect.value);
+      }
+
+      window.location.href = '/search/?' + params.toString();
+    });
+  }
 </script>

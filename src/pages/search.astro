@@ -118,6 +118,8 @@ const stateEntries = US_STATES.map(state => ({
     function getParams() {
       const params = new URLSearchParams(window.location.search);
       return {
+        mode: params.get('mode') || '',
+        category: params.get('category') || '',
         q: (params.get('q') || '').toLowerCase().trim(),
         state: (params.get('state') || '').trim(),
         city: (params.get('city') || '').trim(),
@@ -125,6 +127,21 @@ const stateEntries = US_STATES.map(state => ({
         bbb_a_plus: params.get('bbb_a_plus') === '1',
         free_consult: params.get('free_consult') === '1',
         under_100: params.get('under_100') === '1',
+        // Loan-specific params
+        amount: params.get('amount') || '',
+        term: params.get('term') || '',
+        credit_score: params.get('credit_score') || '',
+        max_apr: params.get('max_apr') || '',
+        funding_speed: params.get('funding_speed') || '',
+        no_origination_fee: params.get('no_origination_fee') === '1',
+        soft_pull: params.get('soft_pull') === '1',
+        direct_pay: params.get('direct_pay') === '1',
+        // FilterBar context params
+        budget: params.get('budget') || '',
+        bbb: params.get('bbb') || '',
+        debt_amount: params.get('debt_amount') || '',
+        debt_type: params.get('debt_type') || '',
+        help_type: params.get('help_type') || '',
       };
     }
 
@@ -139,27 +156,19 @@ const stateEntries = US_STATES.map(state => ({
 
       if (!resultsGrid || !noResults || !resultsCount) return;
 
-      // Set form values from URL params
-      const keywordInput = document.getElementById('search-keyword');
-      const stateSelect = document.getElementById('search-state');
-      const cityInput = document.getElementById('search-city');
-      const guaranteeCheck = document.querySelector('input[name="guarantee"]');
-      const bbbCheck = document.querySelector('input[name="bbb_a_plus"]');
-      const consultCheck = document.querySelector('input[name="free_consult"]');
-      const under100Check = document.querySelector('input[name="under_100"]');
-
-      if (keywordInput && params.q) keywordInput.value = params.q;
-      if (stateSelect && params.state) stateSelect.value = params.state;
-      if (cityInput && params.city) cityInput.value = params.city;
-      if (guaranteeCheck) guaranteeCheck.checked = params.guarantee;
-      if (bbbCheck) bbbCheck.checked = params.bbb_a_plus;
-      if (consultCheck) consultCheck.checked = params.free_consult;
-      if (under100Check) under100Check.checked = params.under_100;
+      const loanCategories = ['personal-loans', 'emergency-cash', 'payday-alternatives'];
+      const isLoanMode = params.mode === 'loans' || loanCategories.indexOf(params.category) !== -1;
 
       const matchingSlugs = new Set();
 
       allLenders.forEach(lender => {
         let match = true;
+
+        // Category filter (from FilterBar)
+        if (params.category) {
+          const catMatch = lender.category === params.category || lender.subcategories.indexOf(params.category) !== -1;
+          if (!catMatch) match = false;
+        }
 
         // Keyword filter
         if (params.q) {
@@ -190,17 +199,33 @@ const stateEntries = US_STATES.map(state => ({
           if (!cityMatch) match = false;
         }
 
-        // Guarantee filter
+        // Service-mode checkbox filters
         if (params.guarantee && !lender.money_back_guarantee) match = false;
-
-        // BBB A+ filter
         if (params.bbb_a_plus && lender.bbb_rating !== 'A+') match = false;
-
-        // Free consultation filter
         if (params.free_consult && !lender.free_consultation) match = false;
-
-        // Under $100 filter
         if (params.under_100 && lender.monthly_price >= 100) match = false;
+
+        // FilterBar budget filter (credit repair)
+        if (params.budget) {
+          const price = lender.monthly_price;
+          if (params.budget === 'under-50' && price >= 50) match = false;
+          else if (params.budget === '50-100' && (price < 50 || price > 100)) match = false;
+          else if (params.budget === '100-150' && (price < 100 || price > 150)) match = false;
+          else if (params.budget === '150-plus' && price < 150) match = false;
+          // Build-credit budget tiers
+          else if (params.budget === 'under-10' && price >= 10) match = false;
+          else if (params.budget === '10-25' && (price < 10 || price > 25)) match = false;
+          else if (params.budget === '25-50' && (price < 25 || price > 50)) match = false;
+          else if (params.budget === '50-plus' && price < 50) match = false;
+        }
+
+        // FilterBar BBB filter
+        if (params.bbb) {
+          const bbb = lender.bbb_rating;
+          if (params.bbb === 'a-plus' && bbb !== 'A+') match = false;
+          else if (params.bbb === 'a-or-higher' && bbb !== 'A+' && bbb !== 'A') match = false;
+          else if (params.bbb === 'b-or-higher' && ['C', 'C+', 'C-', 'D', 'F', 'NR'].indexOf(bbb) !== -1) match = false;
+        }
 
         if (match) matchingSlugs.add(lender.slug);
       });
@@ -231,16 +256,31 @@ const stateEntries = US_STATES.map(state => ({
 
       // Update heading
       let headingText = 'All Companies';
-      if (params.state && params.city) {
+      if (params.category) {
+        const categoryLabels = {
+          'fix-my-credit': 'Credit Repair',
+          'personal-loans': 'Personal Loans',
+          'emergency-cash': 'Emergency Cash',
+          'payday-alternatives': 'Payday Alternatives',
+          'debt-relief': 'Debt Relief',
+          'build-credit': 'Credit Building',
+          'credit-monitoring': 'Credit Monitoring',
+          'free-help': 'Free Help',
+        };
+        const catLabel = categoryLabels[params.category] || params.category;
+        headingText = `${catLabel} Results`;
+      } else if (params.state && params.city) {
         const cityName = params.city.split(',')[0].trim();
-        headingText = `${matchingSlugs.size} companies serve ${cityName}, ${params.state}`;
+        headingText = `Companies in ${cityName}, ${params.state}`;
       } else if (params.state) {
-        headingText = `${matchingSlugs.size} companies serve ${params.state}`;
+        headingText = `Companies in ${params.state}`;
       } else if (params.city) {
         const cityName = params.city.split(',')[0].trim();
-        headingText = `${matchingSlugs.size} companies serve ${cityName}`;
+        headingText = `Companies in ${cityName}`;
       } else if (params.q) {
         headingText = `Results for "${params.q}"`;
+      } else if (isLoanMode) {
+        headingText = 'Loan Results';
       }
 
       if (resultsHeading) {
@@ -260,22 +300,8 @@ const stateEntries = US_STATES.map(state => ({
     // Run on page load
     filterLenders();
 
-    // Listen for form submission
-    const form = document.getElementById('search-form');
-    form?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const params = new URLSearchParams();
-      for (const [key, value] of formData.entries()) {
-        if (value) params.set(key, String(value));
-      }
-      const checkboxes = form.querySelectorAll('input[type="checkbox"]');
-      checkboxes.forEach(cb => {
-        if (cb.checked) params.set(cb.name, cb.value);
-      });
-      window.history.pushState({}, '', `/search/?${params.toString()}`);
-      filterLenders();
-    });
+    // Listen for SearchBar custom submit event (from both services + loans forms)
+    window.addEventListener('searchbar:submit', filterLenders);
 
     // Sort change
     document.getElementById('sort-select')?.addEventListener('change', filterLenders);
@@ -283,8 +309,11 @@ const stateEntries = US_STATES.map(state => ({
     // Clear filters
     document.getElementById('clear-filters-btn')?.addEventListener('click', () => {
       window.history.pushState({}, '', '/search/');
-      const form = document.getElementById('search-form');
-      if (form) form.reset();
+      // Reset both forms
+      const svcForm = document.getElementById('search-form-services');
+      const loanForm = document.getElementById('search-form-loans');
+      if (svcForm) svcForm.reset();
+      if (loanForm) loanForm.reset();
       filterLenders();
     });
   </script>
