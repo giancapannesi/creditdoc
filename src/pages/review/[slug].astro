@@ -459,6 +459,21 @@ const jsonLd = [
               )}
             </div>
           )}
+
+          {/* Embedded Map */}
+          {lender.address && (
+            <div class="mt-4 rounded-lg overflow-hidden border border-border/50">
+              <iframe
+                src={`https://www.google.com/maps?q=${encodeURIComponent(lender.address)}&output=embed`}
+                width="100%"
+                height="180"
+                style="border:0"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title={`${lender.name} location map`}
+              ></iframe>
+            </div>
+          )}
         </div>
 
         <!-- Diagnosis Card -->
