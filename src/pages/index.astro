@@ -3,11 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import FilterBar from '../components/FilterBar.astro';
 import TopPicksTable from '../components/TopPicksTable.astro';
 import CategoryCard from '../components/CategoryCard.astro';
-import { getAllLenders, getCategories, getSpecials, formatPrice } from '../utils/data';
+import { getAllLenders, getCategories, getSpecials, getWellnessGuides, formatPrice } from '../utils/data';
 
 const lenders = getAllLenders();
 const categories = getCategories();
 const specials = getSpecials().slice(0, 3);
+const wellnessGuides = getWellnessGuides().slice(0, 3);
 
 // Order categories for the 2x4 grid layout
 const categoryOrder = [
@@ -219,6 +220,33 @@ const jsonLd = {
       </div>
     </section>
   )}
+
+  <!-- Financial Wellness Guides -->
+  <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h2 class="text-2xl font-bold text-text">Financial Wellness Guides</h2>
+        <p class="mt-1 text-sm text-muted">Free educational guides written by finance professionals.</p>
+      </div>
+      <a href="/financial-wellness/" class="text-sm font-medium text-primary hover:text-primary-hover transition-colors">
+        View all guides &rarr;
+      </a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {wellnessGuides.map(guide => (
+        <a href={`/financial-wellness/${guide.slug}/`} class="glass-card p-5 hover:shadow-lg transition-shadow group">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="inline-block rounded-full bg-primary-light px-2.5 py-0.5 text-[11px] font-semibold text-primary uppercase tracking-wider">
+              {guide.category.replace(/-/g, ' ')}
+            </span>
+            <span class="text-xs text-muted">{guide.read_time}</span>
+          </div>
+          <h3 class="text-sm font-semibold text-text group-hover:text-primary transition-colors leading-snug">{guide.title}</h3>
+          <p class="mt-1.5 text-xs text-muted leading-relaxed line-clamp-2">{guide.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
 
   <!-- How It Works -->
   <section class="bg-white border-t border-b border-border">

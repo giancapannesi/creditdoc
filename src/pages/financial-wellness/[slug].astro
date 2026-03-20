@@ -1,0 +1,292 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getWellnessGuides, getWellnessGuideBySlug, getWellnessGuidesByCategory, getCategories } from '../../utils/data';
+import type { WellnessGuide } from '../../utils/data';
+
+export function getStaticPaths() {
+  const guides = getWellnessGuides();
+  return guides.map(guide => ({
+    params: { slug: guide.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const guide = getWellnessGuideBySlug(slug!)!;
+
+const relatedGuides = guide.related_guides
+  .map(s => getWellnessGuideBySlug(s))
+  .filter((g): g is WellnessGuide => g !== undefined);
+
+const categories = getCategories();
+const relatedCategories = guide.related_categories
+  .map(slug => categories.find(c => c.slug === slug))
+  .filter((c): c is NonNullable<typeof c> => c !== undefined);
+
+const categoryLabels: Record<string, string> = {
+  'understanding-credit': 'Understanding Credit',
+  'budgeting-saving': 'Budgeting & Saving',
+  'loans-interest': 'Loans & Interest',
+  'financial-recovery': 'Financial Recovery',
+};
+
+const categoryLabel = categoryLabels[guide.category] || guide.category.replace(/-/g, ' ');
+
+// JSON-LD: Article + FAQPage + BreadcrumbList
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": guide.title,
+    "description": guide.seo_description,
+    "url": `https://creditdoc.co/financial-wellness/${guide.slug}/`,
+    "dateModified": guide.last_updated,
+    "datePublished": guide.last_updated,
+    "author": {
+      "@type": "Person",
+      "name": "CreditDoc Editorial Team",
+      "description": "Consumer finance specialists with 15+ years experience in payments, lending, and risk management.",
+      "url": "https://creditdoc.co/about/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "CreditDoc",
+      "url": "https://creditdoc.co",
+      "logo": { "@type": "ImageObject", "url": "https://creditdoc.co/favicon.svg" }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://creditdoc.co/financial-wellness/${guide.slug}/`
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": guide.faq.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+    }))
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://creditdoc.co/" },
+      { "@type": "ListItem", "position": 2, "name": "Financial Wellness", "item": "https://creditdoc.co/financial-wellness/" },
+      { "@type": "ListItem", "position": 3, "name": guide.title, "item": `https://creditdoc.co/financial-wellness/${guide.slug}/` }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title={guide.seo_title}
+  description={guide.seo_description}
+  jsonLd={jsonLd}
+>
+  <!-- Breadcrumbs -->
+  <div class="border-b border-border bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
+      <nav class="flex items-center text-sm text-muted" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-primary transition-colors">Home</a>
+        <svg xmlns="http://www.w3.org/2000/svg" class="mx-2 h-4 w-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"/>
+        </svg>
+        <a href="/financial-wellness/" class="hover:text-primary transition-colors">Financial Wellness</a>
+        <svg xmlns="http://www.w3.org/2000/svg" class="mx-2 h-4 w-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"/>
+        </svg>
+        <span class="text-text font-medium truncate">{guide.title}</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <section class="bg-white border-b border-border">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="inline-block rounded-full bg-primary-light px-3 py-1 text-xs font-semibold text-primary uppercase tracking-wider">{categoryLabel}</span>
+          <span class="text-sm text-muted">{guide.read_time} read</span>
+        </div>
+        <h1 class="text-3xl font-bold text-text sm:text-4xl leading-tight">{guide.title}</h1>
+        <p class="mt-4 text-lg text-muted leading-relaxed">{guide.description}</p>
+        <div class="mt-4 flex items-center gap-4 text-sm text-muted">
+          <span>By CreditDoc Editorial Team</span>
+          <span class="text-border">|</span>
+          <span>Updated {new Date(guide.last_updated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Two-column layout -->
+  <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+      <!-- Main Column -->
+      <div class="lg:col-span-2 space-y-8">
+        {guide.sections.map((section, i) => (
+          <section id={`section-${i}`}>
+            <h2 class="text-xl font-bold text-text mb-4">{section.heading}</h2>
+            <div class="prose-content text-sm text-muted leading-relaxed space-y-4">
+              {section.content.split('\n\n').map(paragraph => {
+                if (paragraph.startsWith('- ') || paragraph.startsWith('* ')) {
+                  const items = paragraph.split('\n').filter(line => line.startsWith('- ') || line.startsWith('* '));
+                  return (
+                    <ul class="list-disc list-inside space-y-1.5 ml-1">
+                      {items.map(item => (
+                        <li set:html={item.replace(/^[-*]\s+/, '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-text">$1</strong>')} />
+                      ))}
+                    </ul>
+                  );
+                }
+                if (paragraph.match(/^\d+\.\s/)) {
+                  const items = paragraph.split('\n').filter(line => line.match(/^\d+\.\s/));
+                  return (
+                    <ol class="list-decimal list-inside space-y-1.5 ml-1">
+                      {items.map(item => (
+                        <li set:html={item.replace(/^\d+\.\s+/, '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-text">$1</strong>')} />
+                      ))}
+                    </ol>
+                  );
+                }
+                return <p set:html={paragraph.replace(/\*\*(.*?)\*\*/g, '<strong class="text-text">$1</strong>')} />;
+              })}
+            </div>
+          </section>
+        ))}
+
+        <!-- FAQ Section -->
+        {guide.faq.length > 0 && (
+          <section class="border-t border-border pt-8">
+            <h2 class="text-xl font-bold text-text mb-6">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+              {guide.faq.map(item => (
+                <details class="glass-card p-5 group">
+                  <summary class="flex items-center justify-between cursor-pointer list-none text-base font-semibold text-text">
+                    {item.question}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-muted flex-shrink-0 ml-4 group-open:rotate-180 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                  </summary>
+                  <p class="mt-3 text-sm text-muted leading-relaxed">{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Author / E-E-A-T -->
+        <section class="border-t border-border pt-8">
+          <div class="rounded-xl border border-border bg-white p-5 flex gap-4">
+            <div class="flex-shrink-0">
+              <div class="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center text-white text-sm font-bold">CD</div>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-text">CreditDoc Editorial Team</p>
+              <p class="text-xs text-primary font-medium">Consumer Finance Specialists</p>
+              <p class="mt-2 text-xs text-muted leading-relaxed">
+                Written and reviewed by finance professionals with 15+ years of experience in consumer lending, payments, and risk management. <a href="/about/" class="text-primary hover:underline">Learn more about our team</a>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <div class="rounded-lg bg-bg-alt p-4 border border-border">
+          <p class="text-xs text-muted leading-relaxed">
+            <strong class="text-text">Disclaimer:</strong> This guide is for educational purposes only and does not constitute financial advice. CreditDoc is not a financial advisor, lender, or credit repair company. Always consult with a qualified financial professional before making financial decisions. Your individual circumstances may differ from the general information presented here.
+          </p>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="space-y-6">
+        <!-- Key Takeaways -->
+        <div class="glass-card p-5">
+          <h3 class="text-base font-semibold text-text mb-3 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M10 1a6 6 0 00-3.815 10.631C7.237 12.5 8 13.443 8 14.456v.644a.75.75 0 00.572.729 6.016 6.016 0 002.856 0A.75.75 0 0012 15.1v-.644c0-1.013.762-1.957 1.815-2.825A6 6 0 0010 1zM8.863 17.414a.75.75 0 00-.226 1.483 9.066 9.066 0 002.726 0 .75.75 0 00-.226-1.483 7.553 7.553 0 01-2.274 0z"/>
+            </svg>
+            Key Takeaways
+          </h3>
+          <ul class="space-y-2">
+            {guide.key_takeaways.map(takeaway => (
+              <li class="flex gap-2 text-sm text-muted leading-relaxed">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary flex-shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
+                </svg>
+                <span>{takeaway}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="glass-card p-5">
+          <h3 class="text-base font-semibold text-text mb-3 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M2 3.75A.75.75 0 012.75 3h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 3.75zm0 4.167a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75zm0 4.166a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75zm0 4.167a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z" clip-rule="evenodd"/>
+            </svg>
+            In This Guide
+          </h3>
+          <nav class="space-y-1.5">
+            {guide.sections.map((section, i) => (
+              <a
+                href={`#section-${i}`}
+                class="block text-sm text-muted hover:text-primary transition-colors py-0.5"
+              >
+                {section.heading}
+              </a>
+            ))}
+            {guide.faq.length > 0 && (
+              <a href="#faq" class="block text-sm text-muted hover:text-primary transition-colors py-0.5">
+                FAQ
+              </a>
+            )}
+          </nav>
+        </div>
+
+        <!-- Related Guides -->
+        {relatedGuides.length > 0 && (
+          <div class="glass-card p-5">
+            <h3 class="text-base font-semibold text-text mb-3">Related Guides</h3>
+            <div class="space-y-3">
+              {relatedGuides.map(related => (
+                <a
+                  href={`/financial-wellness/${related.slug}/`}
+                  class="block rounded-lg border border-border p-3 hover:border-primary/30 hover:bg-primary-light/20 transition-colors"
+                >
+                  <p class="text-sm font-medium text-text leading-snug">{related.title}</p>
+                  <p class="mt-1 text-xs text-muted">{related.read_time}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Related Categories -->
+        {relatedCategories.length > 0 && (
+          <div class="glass-card p-5">
+            <h3 class="text-base font-semibold text-text mb-3">Find Services</h3>
+            <p class="text-xs text-muted mb-3">Browse companies related to this topic:</p>
+            <div class="space-y-2">
+              {relatedCategories.map(cat => (
+                <a
+                  href={`/categories/${cat.slug}/`}
+                  class="flex items-center gap-2 rounded-lg border border-border px-3 py-2.5 text-sm text-text hover:border-primary/30 hover:bg-primary-light/20 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"/>
+                  </svg>
+                  {cat.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</BaseLayout>
