@@ -7,3 +7,12 @@ dist/
 *.log
 .DS_Store
 .vercel
+
+# Claude agent data (may contain cached secrets)
+.claude-flow/
+
+# Generated reports
+AUDIT_REPORT_*.md
+*.pdf
+audit-*.md
+content_drip_log.json
