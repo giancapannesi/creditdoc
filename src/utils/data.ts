@@ -145,6 +145,23 @@ export interface Special {
   url: string;
 }
 
+export interface WellnessGuide {
+  slug: string;
+  title: string;
+  category: string;
+  description: string;
+  seo_title: string;
+  seo_description: string;
+  icon: string;
+  read_time: string;
+  last_updated: string;
+  sections: { heading: string; content: string }[];
+  key_takeaways: string[];
+  related_guides: string[];
+  related_categories: string[];
+  faq: { question: string; answer: string }[];
+}
+
 const LENDERS_DIR = path.join(process.cwd(), 'src/content/lenders');
 const CONTENT_DIR = path.join(process.cwd(), 'src/content');
 
@@ -210,6 +227,19 @@ export function getListicleBySlug(slug: string): Listicle | undefined {
 export function getSpecials(): Special[] {
   const raw = fs.readFileSync(path.join(CONTENT_DIR, 'specials.json'), 'utf-8');
   return JSON.parse(raw) as Special[];
+}
+
+export function getWellnessGuides(): WellnessGuide[] {
+  const raw = fs.readFileSync(path.join(CONTENT_DIR, 'wellness-guides.json'), 'utf-8');
+  return JSON.parse(raw) as WellnessGuide[];
+}
+
+export function getWellnessGuideBySlug(slug: string): WellnessGuide | undefined {
+  return getWellnessGuides().find(g => g.slug === slug);
+}
+
+export function getWellnessGuidesByCategory(category: string): WellnessGuide[] {
+  return getWellnessGuides().filter(g => g.category === category);
 }
 
 export function getBbbClass(rating: string): string {

@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getWellnessGuides, getWellnessGuidesByCategory } from '../../utils/data';
+
+const guides = getWellnessGuides();
+
+const topicCategories = [
+  {
+    slug: 'understanding-credit',
+    name: 'Understanding Credit',
+    description: 'Learn how credit scores, credit reports, and the credit system work.',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342"/>',
+  },
+  {
+    slug: 'budgeting-saving',
+    name: 'Budgeting & Saving',
+    description: 'Practical strategies for managing money and building financial security.',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"/>',
+  },
+  {
+    slug: 'loans-interest',
+    name: 'Loans & Interest',
+    description: 'Understand how interest rates, APR, and loan terms affect what you pay.',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z"/>',
+  },
+  {
+    slug: 'financial-recovery',
+    name: 'Financial Recovery',
+    description: 'Step-by-step plans for getting out of debt and rebuilding your finances.',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/>',
+  },
+];
+
+const featuredGuides = guides.slice(0, 3);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Financial Wellness Center",
+  "description": "Free educational guides on credit scores, budgeting, interest rates, debt management, and financial recovery from CreditDoc's finance professionals.",
+  "url": "https://creditdoc.co/financial-wellness/",
+  "publisher": {
+    "@type": "Organization",
+    "name": "CreditDoc",
+    "url": "https://creditdoc.co"
+  }
+};
+---
+
+<BaseLayout
+  title="Financial Wellness Center | Free Guides & Education | CreditDoc"
+  description="Free educational guides on credit scores, budgeting, interest rates, debt payoff, and financial recovery. Written by finance professionals with 15+ years experience."
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <section class="bg-white border-b border-border">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 text-center">
+      <span class="inline-block rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-6">Financial Wellness</span>
+      <h1 class="text-4xl font-bold text-text sm:text-5xl">Financial Wellness Center</h1>
+      <p class="mt-6 text-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        Actionable, jargon-free guides to help you understand credit, manage debt, budget smarter, and build a stronger financial future. Written by finance professionals, not marketers.
+      </p>
+    </div>
+  </section>
+
+  <!-- Our Commitment -->
+  <section class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="rounded-xl border border-primary/20 bg-primary-light/30 p-6 sm:p-8">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0 mt-1">
+          <div class="h-10 w-10 rounded-lg bg-primary-light flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <h2 class="text-lg font-bold text-text">Our Commitment to Financial Education</h2>
+          <p class="mt-2 text-sm text-text leading-relaxed">
+            CreditDoc promotes financial wellness at every level. Whether you're rebuilding your credit from scratch, trying to understand how interest rates work, or looking for the best way to pay down debt, our guides provide clear, actionable education -- not sales pitches. Every guide is written and reviewed by our finance team with combined experience of 15+ years in consumer lending and credit.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Browse by Topic -->
+  <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-text">Browse by Topic</h2>
+      <p class="mt-2 text-muted">Find guides organized by what you're trying to learn.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {topicCategories.map(topic => {
+        const topicGuides = getWellnessGuidesByCategory(topic.slug);
+        return (
+          <div class="glass-card p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-light text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <Fragment set:html={topic.icon} />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-base font-semibold text-text">{topic.name}</h3>
+                <p class="text-xs text-muted">{topicGuides.length} guide{topicGuides.length !== 1 ? 's' : ''}</p>
+              </div>
+            </div>
+            <p class="text-sm text-muted leading-relaxed mb-4">{topic.description}</p>
+            <ul class="space-y-2">
+              {topicGuides.map(guide => (
+                <li>
+                  <a
+                    href={`/financial-wellness/${guide.slug}/`}
+                    class="flex items-center gap-2 text-sm text-text hover:text-primary transition-colors group"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-muted group-hover:text-primary transition-colors flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>{guide.title}</span>
+                    <span class="ml-auto text-xs text-muted flex-shrink-0">{guide.read_time}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- Featured Guides -->
+  <section class="bg-white border-t border-b border-border">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl font-bold text-text">Featured Guides</h2>
+        <p class="mt-2 text-muted">Start here if you're not sure where to begin.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {featuredGuides.map(guide => (
+          <a href={`/financial-wellness/${guide.slug}/`} class="glass-card p-6 hover:shadow-lg transition-shadow group">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="inline-block rounded-full bg-primary-light px-2.5 py-0.5 text-[11px] font-semibold text-primary uppercase tracking-wider">
+                {guide.category.replace(/-/g, ' ')}
+              </span>
+              <span class="text-xs text-muted">{guide.read_time}</span>
+            </div>
+            <h3 class="text-base font-semibold text-text group-hover:text-primary transition-colors leading-snug">{guide.title}</h3>
+            <p class="mt-2 text-sm text-muted leading-relaxed line-clamp-3">{guide.description}</p>
+            <div class="mt-4 flex items-center text-sm font-medium text-primary">
+              Read guide
+              <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Written by Finance Professionals -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="rounded-xl border border-border bg-white p-6 sm:p-8">
+      <div class="flex flex-col sm:flex-row gap-6">
+        <div class="flex-shrink-0">
+          <div class="h-16 w-16 rounded-full bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center text-white text-xl font-bold">
+            CD
+          </div>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-text">Written by Finance Professionals</h2>
+          <p class="mt-1 text-sm text-primary font-medium">Not content farms. Not AI slop.</p>
+          <p class="mt-3 text-sm text-muted leading-relaxed">
+            Every guide on CreditDoc is written and reviewed by our editorial team, led by a consumer finance specialist with 15+ years of experience in payments, lending, and risk management across 10+ countries. We don't generate content for clicks -- we write to genuinely help people make better financial decisions.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="rounded-full bg-bg-alt px-3 py-1 text-xs font-medium text-muted">15+ Years Finance</span>
+            <span class="rounded-full bg-bg-alt px-3 py-1 text-xs font-medium text-muted">MBA, Warwick</span>
+            <span class="rounded-full bg-bg-alt px-3 py-1 text-xs font-medium text-muted">10+ Countries</span>
+            <span class="rounded-full bg-bg-alt px-3 py-1 text-xs font-medium text-muted">Payments & Lending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-white border-t border-border">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl font-bold text-text">Ready to Take Action?</h2>
+      <p class="mt-3 text-muted max-w-xl mx-auto">
+        Once you've learned the basics, browse our directory to find the right credit repair company, lender, or financial service for your situation.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href="/"
+          class="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary-hover transition-colors min-h-[44px]"
+        >
+          Browse Our Directory
+        </a>
+        <a
+          href="mailto:contact@creditdoc.co"
+          class="inline-flex items-center px-6 py-3 rounded-lg border border-border text-text font-semibold text-sm hover:bg-bg-alt transition-colors min-h-[44px]"
+        >
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
