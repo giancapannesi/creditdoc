@@ -47,6 +47,7 @@ export interface Lender {
     employees: string;
     bbb_rating: string;
     bbb_accredited: boolean;
+    certifications?: string[];
   };
   states_served: string[];
   cities_served: string[];
@@ -87,6 +88,15 @@ export interface Lender {
     loan_purposes: string[];
     prequalification: boolean;
     direct_pay: boolean;
+  };
+  cfpb_data?: {
+    found_in_cfpb: boolean;
+    cfpb_company_name: string;
+    resolution_rate: number;
+    timely_response_rate: number;
+    data_source: string;
+    data_period: string;
+    last_checked: string;
   };
 }
 
