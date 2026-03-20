@@ -285,6 +285,56 @@ export function getAllCities(): string[] {
   return Array.from(cities).sort();
 }
 
+export interface CityInfo {
+  city: string;
+  state: string;
+  stateAbbr: string;
+  slug: string;
+  count: number;
+}
+
+export function getCitiesWithLenders(minCount: number = 5): CityInfo[] {
+  const cityMap = new Map<string, { city: string; state: string; count: number }>();
+  for (const l of getAllLenders()) {
+    const city = l.company_info.city;
+    const state = l.company_info.state;
+    if (!city || !state) continue;
+    const key = `${city}|${state}`;
+    const existing = cityMap.get(key);
+    if (existing) {
+      existing.count++;
+    } else {
+      cityMap.set(key, { city, state, count: 1 });
+    }
+  }
+
+  const abbrevToFull: Record<string, string> = {};
+  for (const [full, abbr] of Object.entries(STATE_ABBREVIATIONS)) {
+    abbrevToFull[abbr] = full;
+  }
+
+  return Array.from(cityMap.values())
+    .filter(c => c.count >= minCount)
+    .map(c => {
+      const fullState = abbrevToFull[c.state] || c.state;
+      const slug = `${c.city.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${c.state.toLowerCase()}`;
+      return {
+        city: c.city,
+        state: fullState,
+        stateAbbr: c.state,
+        slug,
+        count: c.count,
+      };
+    })
+    .sort((a, b) => b.count - a.count);
+}
+
+export function getLendersByCityState(city: string, stateAbbr: string): Lender[] {
+  return getAllLenders().filter(l =>
+    l.company_info.city === city && l.company_info.state === stateAbbr
+  );
+}
+
 export const US_STATES = [
   'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
   'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa',
