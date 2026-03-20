@@ -228,7 +228,7 @@ const stateEntries = US_STATES.map(state => ({
         guarantee: params.get('guarantee') === '1',
         bbb_a_plus: params.get('bbb_a_plus') === '1',
         free_consult: params.get('free_consult') === '1',
-        under_100: params.get('under_100') === '1',
+        all_bureaus: params.get('all_bureaus') === '1',
         amount: params.get('amount') || '',
         term: params.get('term') || '',
         credit_score: params.get('credit_score') || '',
@@ -237,11 +237,16 @@ const stateEntries = US_STATES.map(state => ({
         no_origination_fee: params.get('no_origination_fee') === '1',
         soft_pull: params.get('soft_pull') === '1',
         direct_pay: params.get('direct_pay') === '1',
-        budget: params.get('budget') || '',
         bbb: params.get('bbb') || '',
         debt_amount: params.get('debt_amount') || '',
         debt_type: params.get('debt_type') || '',
         help_type: params.get('help_type') || '',
+        issue: params.get('issue') || '',
+        lender_type: params.get('lender_type') || '',
+        monitor_need: params.get('monitor_need') || '',
+        bureaus: params.get('bureaus') || '',
+        credit_status: params.get('credit_status') || '',
+        product_type: params.get('product_type') || '',
       };
     }
 
@@ -277,18 +282,6 @@ const stateEntries = US_STATES.map(state => ({
         if (params.guarantee && !lender.mg) return false;
         if (params.bbb_a_plus && lender.bb !== 'A+') return false;
         if (params.free_consult && !lender.fc) return false;
-        if (params.under_100 && lender.mp >= 100) return false;
-        if (params.budget) {
-          const p = lender.mp;
-          if (params.budget === 'under-50' && p >= 50) return false;
-          if (params.budget === '50-100' && (p < 50 || p > 100)) return false;
-          if (params.budget === '100-150' && (p < 100 || p > 150)) return false;
-          if (params.budget === '150-plus' && p < 150) return false;
-          if (params.budget === 'under-10' && p >= 10) return false;
-          if (params.budget === '10-25' && (p < 10 || p > 25)) return false;
-          if (params.budget === '25-50' && (p < 25 || p > 50)) return false;
-          if (params.budget === '50-plus' && p < 50) return false;
-        }
         if (params.bbb) {
           const b = lender.bb;
           if (params.bbb === 'a-plus' && b !== 'A+') return false;
@@ -327,7 +320,7 @@ const stateEntries = US_STATES.map(state => ({
           'payday-alternatives': 'Payday Alternatives',
           'debt-relief': 'Debt Relief',
           'build-credit': 'Credit Building',
-          'credit-monitoring': 'Credit Monitoring',
+          'credit-monitoring': 'Credit Monitoring & Protection',
           'free-help': 'Free Help',
         };
         headingText = (categoryLabels[params.category] || params.category) + ' Results';
