@@ -395,6 +395,18 @@ const jsonLd = [
               <dt class="text-sm text-muted">BBB Accredited</dt>
               <dd class="text-sm font-medium text-text">{lender.company_info.bbb_accredited ? 'Yes' : 'No'}</dd>
             </div>
+            {lender.company_info.certifications && lender.company_info.certifications.length > 0 && (
+              <div class="py-2 border-b border-border/50">
+                <dt class="text-sm text-muted mb-1">Certifications</dt>
+                <dd class="flex flex-wrap gap-1">
+                  {lender.company_info.certifications.map(cert => (
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-primary/10 text-primary">
+                      {cert}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            )}
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">Starting Price</dt>
               <dd class="text-sm font-medium text-text">{hasPricing ? `${formatPrice(lowestPrice)}/mo` : 'Contact provider'}</dd>
@@ -420,6 +432,33 @@ const jsonLd = [
           >
             Visit {lender.name}
           </a>
+
+          {/* Contact & Location */}
+          {(lender.phone || lender.address) && (
+            <div class="mt-4 pt-4 border-t border-border/50 space-y-2">
+              {lender.phone && (
+                <a href={`tel:${lender.phone}`} class="flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd"/>
+                  </svg>
+                  {lender.phone}
+                </a>
+              )}
+              {lender.address && (
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lender.address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-start gap-2 text-sm text-muted hover:text-primary transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>{lender.address}</span>
+                </a>
+              )}
+            </div>
+          )}
         </div>
 
         <!-- Diagnosis Card -->
