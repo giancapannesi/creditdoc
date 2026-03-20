@@ -135,11 +135,11 @@ const loanCategoriesJson = JSON.stringify(loanCategories);
         <label class="inline-flex items-center gap-2 cursor-pointer group">
           <input
             type="checkbox"
-            name="under_100"
+            name="all_bureaus"
             value="1"
             class="h-4 w-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-primary"
           />
-          <span class="text-sm text-text group-hover:text-primary transition-colors">Under $100/mo</span>
+          <span class="text-sm text-text group-hover:text-primary transition-colors">All 3 bureaus</span>
         </label>
       </div>
 
@@ -425,7 +425,7 @@ const loanCategoriesJson = JSON.stringify(loanCategories);
   // Pre-fill checkboxes (services)
   var svcForm = document.getElementById('search-form-services');
   if (svcForm) {
-    ['guarantee', 'bbb_a_plus', 'free_consult', 'under_100'].forEach(function(name) {
+    ['guarantee', 'bbb_a_plus', 'free_consult', 'all_bureaus'].forEach(function(name) {
       var cb = svcForm.querySelector('input[name="' + name + '"]');
       if (cb && urlParams.get(name) === '1') cb.checked = true;
     });

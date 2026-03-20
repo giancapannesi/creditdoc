@@ -6,24 +6,27 @@ const categories = [
   { value: 'payday-alternatives', label: 'Payday Alternatives', type: 'loan' },
   { value: 'debt-relief', label: 'Get Out of Debt', type: 'service' },
   { value: 'build-credit', label: 'Build My Credit', type: 'service' },
-  { value: 'credit-monitoring', label: 'Improve My Credit Score', type: 'service' },
+  { value: 'credit-monitoring', label: 'Monitor & Protect', type: 'service' },
   { value: 'free-help', label: 'Free Help', type: 'service' },
 ];
 
 import { US_STATES } from '../utils/data';
 
-// Context-aware follow-up option sets
+// Context-aware follow-up option sets — each category gets filters that
+// match how consumers actually shop for that type of service
 const contextOptions = {
   'fix-my-credit': {
     second: {
-      label: 'Monthly budget',
-      name: 'budget',
-      placeholder: 'Select budget...',
+      label: "What's your issue?",
+      name: 'issue',
+      placeholder: 'Select issue...',
       options: [
-        { value: 'under-50', label: 'Under $50' },
-        { value: '50-100', label: '$50 - $100' },
-        { value: '100-150', label: '$100 - $150' },
-        { value: '150-plus', label: '$150+' },
+        { value: 'errors', label: 'Errors on my report' },
+        { value: 'collections', label: 'Collections & charge-offs' },
+        { value: 'late-payments', label: 'Late payments' },
+        { value: 'identity-theft', label: 'Identity theft damage' },
+        { value: 'bankruptcy', label: 'Bankruptcy recovery' },
+        { value: 'full-service', label: 'Everything — full cleanup' },
       ],
     },
     third: {
@@ -66,6 +69,55 @@ const contextOptions = {
       ],
     },
   },
+  'emergency-cash': {
+    second: {
+      label: 'How much?',
+      name: 'amount',
+      placeholder: 'Select amount...',
+      options: [
+        { value: '100', label: '$100' },
+        { value: '200', label: '$200' },
+        { value: '500', label: '$500' },
+        { value: '1000', label: '$1,000' },
+      ],
+    },
+    third: {
+      label: 'How fast?',
+      name: 'funding_speed',
+      placeholder: 'Select speed...',
+      options: [
+        { value: 'same-day', label: 'Same day' },
+        { value: 'next-day', label: 'Next business day' },
+        { value: 'this-week', label: 'This week' },
+        { value: 'any', label: 'Doesn\'t matter' },
+      ],
+    },
+  },
+  'payday-alternatives': {
+    second: {
+      label: 'How much?',
+      name: 'amount',
+      placeholder: 'Select amount...',
+      options: [
+        { value: '200', label: '$200' },
+        { value: '500', label: '$500' },
+        { value: '1000', label: '$1,000' },
+        { value: '2000', label: '$2,000' },
+      ],
+    },
+    third: {
+      label: 'Lender type',
+      name: 'lender_type',
+      placeholder: 'Any type...',
+      options: [
+        { value: 'credit-union', label: 'Credit union PAL' },
+        { value: 'cdfi', label: 'Community lender (CDFI)' },
+        { value: 'employer', label: 'Employer advance' },
+        { value: 'app', label: 'Cash advance app' },
+        { value: 'any', label: 'Any' },
+      ],
+    },
+  },
   'debt-relief': {
     second: {
       label: 'How much debt?',
@@ -92,26 +144,48 @@ const contextOptions = {
   },
   'build-credit': {
     second: {
-      label: 'Monthly budget',
-      name: 'budget',
-      placeholder: 'Select budget...',
+      label: 'Where are you starting?',
+      name: 'credit_status',
+      placeholder: 'Select...',
       options: [
-        { value: 'under-10', label: 'Under $10' },
-        { value: '10-25', label: '$10 - $25' },
-        { value: '25-50', label: '$25 - $50' },
-        { value: '50-plus', label: '$50+' },
+        { value: 'no-history', label: 'No credit history at all' },
+        { value: 'thin-file', label: 'Thin file (1-2 accounts)' },
+        { value: 'rebuilding', label: 'Rebuilding after damage' },
+        { value: 'immigrant', label: 'New to the US' },
       ],
     },
     third: {
-      label: 'My credit is',
-      name: 'credit_score',
-      placeholder: 'Select range...',
+      label: 'What type of product?',
+      name: 'product_type',
+      placeholder: 'Any product...',
       options: [
-        { value: 'excellent', label: 'Excellent (720+)' },
-        { value: 'good', label: 'Good (670-719)' },
-        { value: 'fair', label: 'Fair (580-669)' },
-        { value: 'poor', label: 'Poor (below 580)' },
-        { value: 'none', label: 'No history' },
+        { value: 'secured-card', label: 'Secured credit card' },
+        { value: 'builder-loan', label: 'Credit builder loan' },
+        { value: 'rent-reporting', label: 'Rent reporting' },
+        { value: 'any', label: 'Show me all options' },
+      ],
+    },
+  },
+  'credit-monitoring': {
+    second: {
+      label: 'What do you need?',
+      name: 'monitor_need',
+      placeholder: 'Select...',
+      options: [
+        { value: 'score-tracking', label: 'Track my score' },
+        { value: 'alerts', label: 'Get change alerts' },
+        { value: 'id-theft', label: 'Identity theft protection' },
+        { value: 'all', label: 'All of the above' },
+      ],
+    },
+    third: {
+      label: 'How many bureaus?',
+      name: 'bureaus',
+      placeholder: 'Select...',
+      options: [
+        { value: '3', label: 'All 3 bureaus' },
+        { value: '1', label: '1 bureau is fine' },
+        { value: 'any', label: "Doesn't matter" },
       ],
     },
   },
@@ -121,10 +195,11 @@ const contextOptions = {
       name: 'help_type',
       placeholder: 'Select topic...',
       options: [
-        { value: 'budget-planning', label: 'Budget Planning' },
-        { value: 'debt-management', label: 'Debt Management' },
-        { value: 'credit-counseling', label: 'Credit Counseling' },
-        { value: 'housing-counseling', label: 'Housing Counseling' },
+        { value: 'budget-planning', label: 'Budget & money management' },
+        { value: 'debt-management', label: 'Debt management plan' },
+        { value: 'credit-counseling', label: 'Credit counseling' },
+        { value: 'housing-counseling', label: 'Housing / mortgage help' },
+        { value: 'bankruptcy', label: 'Bankruptcy alternatives' },
       ],
     },
     third: {
@@ -142,11 +217,11 @@ const contextOptionsJson = JSON.stringify(contextOptions);
 const categoryContextMap = {
   'fix-my-credit': 'fix-my-credit',
   'personal-loans': 'loan',
-  'emergency-cash': 'loan',
-  'payday-alternatives': 'loan',
+  'emergency-cash': 'emergency-cash',
+  'payday-alternatives': 'payday-alternatives',
   'debt-relief': 'debt-relief',
   'build-credit': 'build-credit',
-  'credit-monitoring': 'build-credit',
+  'credit-monitoring': 'credit-monitoring',
   'free-help': 'free-help',
 };
 const categoryContextMapJson = JSON.stringify(categoryContextMap);
@@ -155,7 +230,7 @@ const categoryContextMapJson = JSON.stringify(categoryContextMap);
 <div class="glass-card p-6 sm:p-8" style="transform: none;">
   <div class="text-center mb-6">
     <h2 class="text-lg sm:text-xl font-bold text-text">Find the Right Service for You</h2>
-    <p class="text-sm text-muted mt-1">Answer a few quick questions to see your best matches</p>
+    <p class="text-sm text-muted mt-1">Tell us what you need — we'll show the best matches</p>
   </div>
 
   <form id="filter-form" class="flex flex-col gap-4">
