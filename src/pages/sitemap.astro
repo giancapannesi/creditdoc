@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCategories, getLendersByCategory, getWellnessGuides, getComparisons, getCitiesWithLenders } from '../utils/data';
+
+const categories = getCategories();
+const guides = getWellnessGuides();
+const comparisons = getComparisons();
+const cityPages = getCitiesWithLenders(5);
+
+// Group guides by category
+const guidesByCategory: Record<string, typeof guides> = {};
+for (const g of guides) {
+  if (!guidesByCategory[g.category_label]) guidesByCategory[g.category_label] = [];
+  guidesByCategory[g.category_label].push(g);
+}
+
+// Top lenders per category (top 10 by rating)
+const categoryData = categories.map(cat => {
+  const lenders = getLendersByCategory(cat.slug);
+  const top = [...lenders].sort((a, b) => b.rating - a.rating).slice(0, 10);
+  return { category: cat, lenders, top };
+});
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Sitemap',
+  description: 'Browse all pages on CreditDoc — lender reviews, comparisons, financial wellness guides, and city directories.',
+  url: 'https://creditdoc.co/sitemap/',
+};
+---
+
+<BaseLayout
+  title="Sitemap | CreditDoc"
+  description="Browse all pages on CreditDoc — lender reviews, comparisons, financial wellness guides, and city directories."
+  jsonLd={[jsonLd]}
+>
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <h1 class="text-2xl font-bold text-text mb-2">Sitemap</h1>
+    <p class="text-sm text-muted mb-8">Browse all sections of CreditDoc.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Main Pages -->
+      <div>
+        <h2 class="text-lg font-bold text-text mb-3">Main Pages</h2>
+        <ul class="space-y-1.5 text-sm">
+          <li><a href="/" class="text-primary hover:underline">Home</a></li>
+          <li><a href="/about/" class="text-primary hover:underline">About Us</a></li>
+          <li><a href="/search/" class="text-primary hover:underline">Search</a></li>
+          <li><a href="/methodology/" class="text-primary hover:underline">Our Methodology</a></li>
+          <li><a href="/editorial-policy/" class="text-primary hover:underline">Editorial Policy</a></li>
+          <li><a href="/faq/" class="text-primary hover:underline">FAQ</a></li>
+          <li><a href="/deals/" class="text-primary hover:underline">Deals &amp; Specials</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <h2 class="text-lg font-bold text-text mb-3">Categories</h2>
+        <ul class="space-y-1.5 text-sm">
+          {categories.map(cat => (
+            <li>
+              <a href={`/categories/${cat.slug}/`} class="text-primary hover:underline">{cat.name}</a>
+              <span class="text-muted text-xs ml-1">({getLendersByCategory(cat.slug).length})</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Financial Wellness Guides -->
+      <div>
+        <h2 class="text-lg font-bold text-text mb-3">Financial Wellness Guides</h2>
+        {Object.entries(guidesByCategory).map(([label, catGuides]) => (
+          <div class="mb-3">
+            <h3 class="text-xs font-semibold text-muted uppercase tracking-wide mb-1">{label}</h3>
+            <ul class="space-y-1 text-sm">
+              {catGuides.map(g => (
+                <li><a href={`/financial-wellness/${g.slug}/`} class="text-primary hover:underline">{g.title}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <!-- Comparisons -->
+      <div>
+        <h2 class="text-lg font-bold text-text mb-3">Comparisons</h2>
+        <ul class="space-y-1.5 text-sm">
+          {comparisons.map(comp => (
+            <li><a href={`/compare/${comp.slug}/`} class="text-primary hover:underline">{comp.title}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- City Pages -->
+      <div>
+        <h2 class="text-lg font-bold text-text mb-3">City Directories</h2>
+        <ul class="space-y-1.5 text-sm">
+          {cityPages.map(city => (
+            <li><a href={`/city/${city.slug}/`} class="text-primary hover:underline">{city.city}, {city.stateAbbr}</a> <span class="text-muted text-xs">({city.count})</span></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h2 class="text-lg font-bold text-text mb-3">Legal &amp; Compliance</h2>
+        <ul class="space-y-1.5 text-sm">
+          <li><a href="/terms/" class="text-primary hover:underline">Terms of Service</a></li>
+          <li><a href="/privacy/" class="text-primary hover:underline">Privacy Policy</a></li>
+          <li><a href="/disclosure/" class="text-primary hover:underline">Affiliate Disclosure</a></li>
+          <li><a href="/disclaimer/" class="text-primary hover:underline">Disclaimer</a></li>
+          <li><a href="/accessibility/" class="text-primary hover:underline">Accessibility</a></li>
+          <li><a href="/do-not-sell/" class="text-primary hover:underline">Do Not Sell My Info</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Top Lenders by Category -->
+    <div class="mt-12">
+      <h2 class="text-xl font-bold text-text mb-6">Top-Rated Lenders by Category</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {categoryData.filter(d => d.top.length > 0).map(({ category, lenders, top }) => (
+          <div class="glass-card p-4">
+            <h3 class="text-sm font-bold text-text mb-2">
+              <a href={`/categories/${category.slug}/`} class="hover:text-primary transition-colors">{category.name}</a>
+              <span class="text-muted font-normal text-xs ml-1">({lenders.length} total)</span>
+            </h3>
+            <ul class="space-y-1 text-sm">
+              {top.map(l => (
+                <li class="flex items-center justify-between">
+                  <a href={`/review/${l.slug}/`} class="text-primary hover:underline truncate mr-2">{l.name}</a>
+                  {l.rating > 0 && <span class="text-xs text-muted shrink-0">{l.rating.toFixed(1)}/5</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>
