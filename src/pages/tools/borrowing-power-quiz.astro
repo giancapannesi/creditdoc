@@ -1,0 +1,907 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllLenders, getCategories } from '../../utils/data';
+
+const categories = getCategories();
+const allLenders = getAllLenders();
+
+// Build recommendation data: top lenders per category (only enriched/quality ones)
+const categoryRecommendations: Record<string, { name: string; slug: string; rating: number; category: string; description: string; website_url: string; free_consultation: boolean; money_back: boolean }[]> = {};
+
+for (const cat of categories) {
+  const catLenders = allLenders
+    .filter(l => l.category === cat.slug && l.rating > 0 && l.description_short && l.description_short.length > 30)
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 8)
+    .map(l => ({
+      name: l.name,
+      slug: l.slug,
+      rating: l.rating,
+      category: l.category,
+      description: l.description_short?.substring(0, 120) || '',
+      website_url: l.website_url || '',
+      free_consultation: l.pricing?.free_consultation || false,
+      money_back: l.pricing?.money_back_guarantee || false,
+    }));
+  if (catLenders.length > 0) {
+    categoryRecommendations[cat.slug] = catLenders;
+  }
+}
+
+const title = "What's My Borrowing Power? — Free Quiz | CreditDoc";
+const description = "Find out how much you could borrow in 60 seconds. Answer 5 quick questions about your income, debt, and credit to get personalized lender recommendations.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Borrowing Power Quiz",
+  "description": description,
+  "url": "https://creditdoc.co/tools/borrowing-power-quiz/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "CreditDoc Editorial Team",
+    "jobTitle": "Chief Executive",
+    "description": "International consumer finance executive with 15+ years of experience across multiple continents. MBA from a globally ranked university."
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "CreditDoc",
+    "url": "https://creditdoc.co"
+  }
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is my borrowing power calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your borrowing power estimate is based on your income, existing debt obligations, credit score range, and loan purpose. We use standard debt-to-income ratios used by lenders to estimate how much you could qualify for. This is an educational estimate, not a pre-approval."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the Borrowing Power Quiz free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, the quiz is completely free and requires no personal information beyond the 5 multiple-choice questions. We never ask for your Social Security number, and the quiz does not affect your credit score."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this quiz affect my credit score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. This quiz is purely educational and does not perform any credit checks. No information is sent to credit bureaus. Your credit score is not affected in any way."
+      }
+    }
+  ]
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://creditdoc.co/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://creditdoc.co/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Borrowing Power Quiz", "item": "https://creditdoc.co/tools/borrowing-power-quiz/" }
+  ]
+};
+
+const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
+---
+
+<BaseLayout title={title} description={description} jsonLd={combinedJsonLd}>
+  <!-- Breadcrumbs -->
+  <nav class="max-w-3xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/tools/" class="hover:text-primary transition-colors">Tools</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">Borrowing Power Quiz</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-3xl mx-auto px-4 py-8">
+    <!-- Quiz Container -->
+    <div id="quiz-container">
+      <!-- Intro Screen -->
+      <div id="quiz-intro" class="text-center">
+        <div class="inline-flex items-center gap-2 bg-primary-light text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+          Free &middot; 60 Seconds &middot; No Credit Check
+        </div>
+
+        <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">What's My Borrowing Power?</h1>
+        <p class="text-lg text-muted mb-8 max-w-xl mx-auto">Answer 5 quick questions to get a personalized estimate of how much you could borrow — plus lender recommendations matched to your situation.</p>
+
+        <div class="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
+          <div class="text-center">
+            <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-light flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+            </div>
+            <p class="text-xs text-muted">100% Private</p>
+          </div>
+          <div class="text-center">
+            <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-light flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <p class="text-xs text-muted">60 Seconds</p>
+          </div>
+          <div class="text-center">
+            <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-light flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <p class="text-xs text-muted">No Credit Impact</p>
+          </div>
+        </div>
+
+        <button id="start-quiz-btn" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white font-semibold px-8 py-3.5 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+          Find My Borrowing Power
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+        </button>
+      </div>
+
+      <!-- Quiz Questions -->
+      <div id="quiz-questions" class="hidden">
+        <!-- Progress Bar -->
+        <div class="mb-8">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-sm font-medium text-muted">Question <span id="current-q">1</span> of 5</span>
+            <span id="progress-pct" class="text-sm font-medium text-primary">20%</span>
+          </div>
+          <div class="w-full bg-bg-alt rounded-full h-2.5">
+            <div id="progress-bar" class="bg-primary h-2.5 rounded-full transition-all duration-500 ease-out" style="width: 20%"></div>
+          </div>
+        </div>
+
+        <!-- Question 1: Income -->
+        <div class="quiz-step" data-step="1">
+          <h2 class="text-2xl font-bold text-text mb-2">What's your annual household income?</h2>
+          <p class="text-muted mb-6">Before taxes. Include all regular income sources.</p>
+          <div class="grid gap-3" id="q1-options">
+            <button class="quiz-option" data-value="under25k">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Under $25,000</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="25k-50k">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">$25,000 &ndash; $50,000</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="50k-75k">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">$50,000 &ndash; $75,000</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="75k-100k">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">$75,000 &ndash; $100,000</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="over100k">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Over $100,000</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 2: Monthly Debt -->
+        <div class="quiz-step hidden" data-step="2">
+          <h2 class="text-2xl font-bold text-text mb-2">How much do you pay in monthly debt?</h2>
+          <p class="text-muted mb-6">Include rent/mortgage, car payments, student loans, credit cards, and other recurring debt.</p>
+          <div class="grid gap-3" id="q2-options">
+            <button class="quiz-option" data-value="under500">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Under $500/month</span>
+                <span class="text-sm text-muted">Low debt load</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="500-1000">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">$500 &ndash; $1,000/month</span>
+                <span class="text-sm text-muted">Moderate debt</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="1000-2000">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">$1,000 &ndash; $2,000/month</span>
+                <span class="text-sm text-muted">Significant obligations</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="2000-3000">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">$2,000 &ndash; $3,000/month</span>
+                <span class="text-sm text-muted">Heavy debt load</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="over3000">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Over $3,000/month</span>
+                <span class="text-sm text-muted">Very high obligations</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 3: Credit Score -->
+        <div class="quiz-step hidden" data-step="3">
+          <h2 class="text-2xl font-bold text-text mb-2">What's your credit score range?</h2>
+          <p class="text-muted mb-6">Your best estimate is fine. Don't know? <a href="/financial-wellness/understanding-credit-scores/" class="text-primary hover:underline">Learn how to check for free</a>.</p>
+          <div class="grid gap-3" id="q3-options">
+            <button class="quiz-option" data-value="poor">
+              <span class="quiz-option-icon bg-negative-light text-negative">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Poor (300&ndash;579)</span>
+                <span class="text-sm text-muted">Limited options, but they exist</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="fair">
+              <span class="quiz-option-icon bg-warning-light text-warning">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Fair (580&ndash;669)</span>
+                <span class="text-sm text-muted">Some options available</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="good">
+              <span class="quiz-option-icon bg-primary-light text-primary">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Good (670&ndash;739)</span>
+                <span class="text-sm text-muted">Solid range, many options</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="excellent">
+              <span class="quiz-option-icon bg-positive-light text-positive">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Very Good / Excellent (740+)</span>
+                <span class="text-sm text-muted">Best rates available</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="unknown">
+              <span class="quiz-option-icon bg-bg-alt text-muted">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">I'm not sure</span>
+                <span class="text-sm text-muted">We'll estimate conservatively</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 4: Loan Purpose -->
+        <div class="quiz-step hidden" data-step="4">
+          <h2 class="text-2xl font-bold text-text mb-2">What do you need the money for?</h2>
+          <p class="text-muted mb-6">This helps us match you with the right type of lender.</p>
+          <div class="grid gap-3" id="q4-options">
+            <button class="quiz-option" data-value="debt-consolidation">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Pay off debt</span>
+                <span class="text-sm text-muted">Consolidation, credit cards, collections</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="emergency">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Emergency expense</span>
+                <span class="text-sm text-muted">Medical, car repair, unexpected bill</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="major-purchase">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Major purchase</span>
+                <span class="text-sm text-muted">Home improvement, appliance, vehicle</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="credit-repair">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17l-5.1-5.1m0 0L3.6 12.79a1.5 1.5 0 002.12 2.12l2.7-2.74m0 0l5.1 5.1m-5.1-5.1l2.74-2.7a1.5 1.5 0 10-2.12-2.12L8.32 10.07" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Fix my credit first</span>
+                <span class="text-sm text-muted">Dispute errors, remove negatives, rebuild</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="just-looking">
+              <span class="quiz-option-icon">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Just exploring options</span>
+                <span class="text-sm text-muted">Not sure yet, want to see what's available</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 5: Timeline -->
+        <div class="quiz-step hidden" data-step="5">
+          <h2 class="text-2xl font-bold text-text mb-2">How soon do you need the money?</h2>
+          <p class="text-muted mb-6">This helps us prioritize speed vs. getting the best rate.</p>
+          <div class="grid gap-3" id="q5-options">
+            <button class="quiz-option" data-value="asap">
+              <span class="quiz-option-icon bg-negative-light text-negative">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">ASAP &mdash; within days</span>
+                <span class="text-sm text-muted">Urgent need, speed is priority</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="weeks">
+              <span class="quiz-option-icon bg-warning-light text-warning">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">Within a few weeks</span>
+                <span class="text-sm text-muted">Some urgency, but can shop around</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="months">
+              <span class="quiz-option-icon bg-primary-light text-primary">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">1&ndash;3 months</span>
+                <span class="text-sm text-muted">Planning ahead, want best terms</span>
+              </span>
+            </button>
+            <button class="quiz-option" data-value="no-rush">
+              <span class="quiz-option-icon bg-positive-light text-positive">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+              </span>
+              <span class="quiz-option-text">
+                <span class="font-semibold">No rush &mdash; researching</span>
+                <span class="text-sm text-muted">Just want to understand my options</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Back Button -->
+        <button id="back-btn" class="hidden mt-6 text-sm text-muted hover:text-text transition-colors inline-flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
+          Previous question
+        </button>
+      </div>
+
+      <!-- Results Screen -->
+      <div id="quiz-results" class="hidden">
+        <!-- Results Header -->
+        <div class="text-center mb-8">
+          <div id="result-badge" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium mb-4"></div>
+          <h2 class="text-3xl font-bold text-text mb-2">Your Borrowing Power</h2>
+          <p class="text-muted">Based on your responses, here's what we estimate.</p>
+        </div>
+
+        <!-- Score Card -->
+        <div class="glass-card p-8 mb-6 text-center" style="pointer-events: none;">
+          <div class="mb-4">
+            <div id="result-meter" class="relative w-48 h-24 mx-auto mb-4">
+              <svg viewBox="0 0 200 100" class="w-full h-full">
+                <path d="M 20 90 A 80 80 0 0 1 180 90" fill="none" stroke="#E2E8F0" stroke-width="12" stroke-linecap="round"/>
+                <path id="meter-fill" d="M 20 90 A 80 80 0 0 1 180 90" fill="none" stroke="#0D9488" stroke-width="12" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2" style="transition: stroke-dashoffset 1.5s ease-out;"/>
+              </svg>
+              <div class="absolute inset-0 flex items-end justify-center pb-0">
+                <span id="result-score-display" class="text-4xl font-bold text-text">0</span>
+              </div>
+            </div>
+            <p id="result-label" class="text-lg font-semibold"></p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto mt-6">
+            <div class="text-center">
+              <p class="text-sm text-muted mb-1">Estimated Range</p>
+              <p id="result-range" class="text-xl font-bold text-text"></p>
+            </div>
+            <div class="text-center">
+              <p class="text-sm text-muted mb-1">DTI Ratio</p>
+              <p id="result-dti" class="text-xl font-bold text-text"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personalized Insights -->
+        <div id="result-insights" class="glass-card p-6 mb-6" style="pointer-events: none;">
+          <h3 class="font-bold text-text mb-3 flex items-center gap-2">
+            <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
+            Your Personalized Insights
+          </h3>
+          <ul id="insights-list" class="space-y-2 text-sm text-muted"></ul>
+        </div>
+
+        <!-- Recommended Actions -->
+        <div id="result-actions" class="glass-card p-6 mb-6" style="pointer-events: none;">
+          <h3 class="font-bold text-text mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            Recommended Next Steps
+          </h3>
+          <div id="actions-list" class="space-y-3"></div>
+        </div>
+
+        <!-- Recommended Lenders -->
+        <div id="result-lenders" class="mb-6">
+          <h3 class="font-bold text-text mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" /></svg>
+            Matched Lenders for You
+          </h3>
+          <div id="lenders-grid" class="grid gap-3"></div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="bg-bg-alt border border-border rounded-xl p-4 mb-6">
+          <p class="text-xs text-muted leading-relaxed">
+            <strong>Disclaimer:</strong> This quiz provides educational estimates only. It is not a loan pre-approval, credit decision, or financial advice.
+            Actual borrowing amounts depend on lender-specific criteria, your complete financial picture, and current market conditions.
+            CreditDoc is not a lender. We may receive compensation from companies featured on this site.
+            <a href="/disclosure/" class="text-primary hover:underline">Full disclosure</a>.
+          </p>
+        </div>
+
+        <!-- Retake -->
+        <div class="text-center">
+          <button id="retake-btn" class="inline-flex items-center gap-2 text-primary hover:text-primary-hover font-medium transition-colors">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" /></svg>
+            Retake Quiz
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-16 border-t border-border pt-12">
+      <h2 class="text-2xl font-bold text-text mb-6">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        <details class="glass-card p-4 group" style="pointer-events: auto;">
+          <summary class="font-semibold text-text cursor-pointer flex items-center justify-between">
+            How is my borrowing power calculated?
+            <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-muted mt-3 text-sm leading-relaxed">Your borrowing power estimate is based on your income, existing debt obligations, credit score range, and loan purpose. We use standard debt-to-income ratios used by lenders to estimate how much you could qualify for. This is an educational estimate, not a pre-approval.</p>
+        </details>
+        <details class="glass-card p-4 group" style="pointer-events: auto;">
+          <summary class="font-semibold text-text cursor-pointer flex items-center justify-between">
+            Is the Borrowing Power Quiz free?
+            <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-muted mt-3 text-sm leading-relaxed">Yes, the quiz is completely free and requires no personal information beyond the 5 multiple-choice questions. We never ask for your Social Security number, and the quiz does not affect your credit score.</p>
+        </details>
+        <details class="glass-card p-4 group" style="pointer-events: auto;">
+          <summary class="font-semibold text-text cursor-pointer flex items-center justify-between">
+            Does this quiz affect my credit score?
+            <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-muted mt-3 text-sm leading-relaxed">No. This quiz is purely educational and does not perform any credit checks. No information is sent to credit bureaus. Your credit score is not affected in any way.</p>
+        </details>
+        <details class="glass-card p-4 group" style="pointer-events: auto;">
+          <summary class="font-semibold text-text cursor-pointer flex items-center justify-between">
+            What should I do after getting my results?
+            <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-muted mt-3 text-sm leading-relaxed">Review the matched lenders we recommend. Many offer free consultations or pre-qualification checks that won't affect your credit. If your score needs work, check out our credit repair guides first — improving your score by even 50 points can unlock significantly better rates.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Embed lender data for client-side filtering -->
+  <script define:vars={{ categoryRecommendations }}>
+    window.__LENDER_DATA = categoryRecommendations;
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const answers = {};
+      let currentStep = 0; // 0 = intro
+
+      const introEl = document.getElementById('quiz-intro');
+      const questionsEl = document.getElementById('quiz-questions');
+      const resultsEl = document.getElementById('quiz-results');
+      const startBtn = document.getElementById('start-quiz-btn');
+      const backBtn = document.getElementById('back-btn');
+      const retakeBtn = document.getElementById('retake-btn');
+      const progressBar = document.getElementById('progress-bar');
+      const progressPct = document.getElementById('progress-pct');
+      const currentQEl = document.getElementById('current-q');
+      const steps = document.querySelectorAll('.quiz-step');
+
+      function showStep(n) {
+        steps.forEach(s => s.classList.add('hidden'));
+        if (n >= 1 && n <= 5) {
+          steps[n - 1].classList.remove('hidden');
+          const pct = (n / 5) * 100;
+          progressBar.style.width = pct + '%';
+          progressPct.textContent = Math.round(pct) + '%';
+          currentQEl.textContent = n;
+          backBtn.classList.toggle('hidden', n <= 1);
+        }
+        currentStep = n;
+      }
+
+      startBtn.addEventListener('click', () => {
+        introEl.classList.add('hidden');
+        questionsEl.classList.remove('hidden');
+        showStep(1);
+      });
+
+      backBtn.addEventListener('click', () => {
+        if (currentStep > 1) {
+          showStep(currentStep - 1);
+        }
+      });
+
+      retakeBtn.addEventListener('click', () => {
+        Object.keys(answers).forEach(k => delete answers[k]);
+        resultsEl.classList.add('hidden');
+        introEl.classList.remove('hidden');
+        questionsEl.classList.add('hidden');
+        // Clear selected states
+        document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+      });
+
+      // Handle option clicks
+      document.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          const step = opt.closest('.quiz-step');
+          const stepNum = parseInt(step.dataset.step);
+          const value = opt.dataset.value;
+
+          // Mark selected
+          step.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+
+          answers[stepNum] = value;
+
+          // Auto-advance after brief delay
+          setTimeout(() => {
+            if (stepNum < 5) {
+              showStep(stepNum + 1);
+            } else {
+              showResults();
+            }
+          }, 300);
+        });
+      });
+
+      function showResults() {
+        questionsEl.classList.add('hidden');
+        resultsEl.classList.remove('hidden');
+
+        const result = calculateBorrowingPower(answers);
+        renderResults(result);
+      }
+
+      function calculateBorrowingPower(a) {
+        // Income midpoints
+        const incomeMap = { 'under25k': 20000, '25k-50k': 37500, '50k-75k': 62500, '75k-100k': 87500, 'over100k': 125000 };
+        // Monthly debt midpoints
+        const debtMap = { 'under500': 250, '500-1000': 750, '1000-2000': 1500, '2000-3000': 2500, 'over3000': 4000 };
+        // Credit multipliers (affects rate and qualifying amount)
+        const creditMult = { 'poor': 0.4, 'fair': 0.65, 'good': 0.85, 'excellent': 1.0, 'unknown': 0.55 };
+
+        const income = incomeMap[a[1]] || 37500;
+        const monthlyDebt = debtMap[a[2]] || 750;
+        const creditFactor = creditMult[a[3]] || 0.55;
+        const monthlyIncome = income / 12;
+
+        // DTI calculation
+        const currentDTI = monthlyDebt / monthlyIncome;
+
+        // Max DTI lenders typically allow: 43% for good credit, 36% for fair, 50% for excellent
+        const maxDTI = a[3] === 'excellent' ? 0.50 : a[3] === 'good' ? 0.43 : a[3] === 'fair' ? 0.40 : a[3] === 'poor' ? 0.36 : 0.38;
+
+        // Available monthly payment capacity
+        const availablePayment = Math.max(0, (maxDTI * monthlyIncome) - monthlyDebt);
+
+        // Estimate borrowing power based on 5-year loan at estimated APR
+        const aprMap = { 'poor': 0.28, 'fair': 0.18, 'good': 0.10, 'excellent': 0.065, 'unknown': 0.20 };
+        const apr = aprMap[a[3]] || 0.20;
+        const monthlyRate = apr / 12;
+        const months = 60;
+
+        let maxLoan = 0;
+        if (monthlyRate > 0 && availablePayment > 0) {
+          maxLoan = availablePayment * ((1 - Math.pow(1 + monthlyRate, -months)) / monthlyRate);
+        }
+
+        // Apply credit factor
+        maxLoan = maxLoan * creditFactor;
+
+        // Round to nearest $500
+        maxLoan = Math.round(maxLoan / 500) * 500;
+
+        // Calculate score 0-100
+        let score = 0;
+        // Income component (0-30)
+        const incomeScore = Math.min(30, (income / 100000) * 30);
+        // DTI component (0-30) — lower DTI = higher score
+        const dtiScore = Math.max(0, 30 - (currentDTI * 60));
+        // Credit component (0-40)
+        const creditScore = creditFactor * 40;
+        score = Math.round(incomeScore + dtiScore + creditScore);
+        score = Math.max(5, Math.min(95, score));
+
+        // Score label
+        let label, color, badgeBg;
+        if (score >= 75) { label = 'Strong'; color = '#10B981'; badgeBg = 'bg-positive-light text-positive'; }
+        else if (score >= 55) { label = 'Moderate'; color = '#0D9488'; badgeBg = 'bg-primary-light text-primary'; }
+        else if (score >= 35) { label = 'Building'; color = '#F59E0B'; badgeBg = 'bg-warning-light text-warning'; }
+        else { label = 'Limited'; color = '#EF4444'; badgeBg = 'bg-negative-light text-negative'; }
+
+        // Borrowing range
+        const lowRange = Math.max(500, Math.round((maxLoan * 0.6) / 500) * 500);
+        const highRange = Math.max(1000, Math.round((maxLoan * 1.2) / 500) * 500);
+
+        // Category recommendations based on purpose
+        const purposeCategories = {
+          'debt-consolidation': ['debt-relief', 'personal-loans', 'fix-my-credit'],
+          'emergency': ['emergency-cash', 'payday-alternatives', 'personal-loans'],
+          'major-purchase': ['personal-loans', 'build-credit'],
+          'credit-repair': ['fix-my-credit', 'credit-monitoring', 'free-help'],
+          'just-looking': ['credit-monitoring', 'personal-loans', 'fix-my-credit'],
+        };
+
+        // Adjust categories based on credit score
+        let categories = purposeCategories[a[4]] || ['personal-loans', 'fix-my-credit'];
+        if (a[3] === 'poor' || a[3] === 'unknown') {
+          // Prepend credit repair for poor/unknown credit
+          categories = ['fix-my-credit', ...categories.filter(c => c !== 'fix-my-credit')];
+        }
+
+        // Build insights
+        const insights = [];
+        if (currentDTI < 0.2) {
+          insights.push('Your debt-to-income ratio is excellent. Lenders see you as low risk.');
+        } else if (currentDTI < 0.36) {
+          insights.push('Your debt-to-income ratio is healthy. Most lenders will consider you.');
+        } else if (currentDTI < 0.43) {
+          insights.push('Your DTI is on the higher side. Paying down existing debt could unlock better rates.');
+        } else {
+          insights.push('Your DTI ratio is high. Focus on reducing existing debt before taking on more.');
+        }
+
+        if (a[3] === 'poor') {
+          insights.push('With a score under 580, credit repair could save you thousands in interest. Even a 50-point improvement opens significantly better options.');
+        } else if (a[3] === 'fair') {
+          insights.push('A fair credit score gives you options, but rates will be higher. Improving to 670+ could cut your APR substantially.');
+        } else if (a[3] === 'good') {
+          insights.push('Good credit gives you access to competitive rates. You can shop confidently.');
+        } else if (a[3] === 'excellent') {
+          insights.push('Excellent credit means you qualify for the best rates. Use that leverage to negotiate.');
+        } else {
+          insights.push('Not knowing your score is common. Check it for free at AnnualCreditReport.com before applying anywhere.');
+        }
+
+        if (a[5] === 'asap') {
+          insights.push('For urgent needs, look for same-day or next-day funding options. Pre-qualification checks (soft pulls) let you compare without hurting your score.');
+        } else if (a[5] === 'months' || a[5] === 'no-rush') {
+          insights.push('With time on your side, shop multiple lenders. Even a 1% APR difference on a $10,000 loan saves $300+ over the life of the loan.');
+        }
+
+        // Build actions
+        const actions = [];
+        if (a[3] === 'poor' || a[3] === 'unknown') {
+          actions.push({ text: 'Check your credit report for free', link: '/financial-wellness/how-to-get-free-credit-report/', type: 'primary' });
+          actions.push({ text: 'Explore credit repair companies', link: '/categories/fix-my-credit/', type: 'secondary' });
+        }
+        if (a[4] === 'debt-consolidation') {
+          actions.push({ text: 'Compare debt relief options', link: '/categories/debt-relief/', type: 'primary' });
+          actions.push({ text: 'Read: How debt consolidation works', link: '/financial-wellness/debt-consolidation-guide/', type: 'secondary' });
+        } else if (a[4] === 'emergency') {
+          actions.push({ text: 'Find emergency cash options', link: '/categories/emergency-cash/', type: 'primary' });
+          actions.push({ text: 'Check payday alternatives first', link: '/categories/payday-alternatives/', type: 'secondary' });
+        } else if (a[4] === 'major-purchase') {
+          actions.push({ text: 'Compare personal loan rates', link: '/categories/personal-loans/', type: 'primary' });
+        } else if (a[4] === 'credit-repair') {
+          actions.push({ text: 'Compare credit repair companies', link: '/categories/fix-my-credit/', type: 'primary' });
+          actions.push({ text: 'Read: DIY credit repair guide', link: '/financial-wellness/diy-credit-repair-step-by-step/', type: 'secondary' });
+        }
+        if (actions.length < 3) {
+          actions.push({ text: 'Browse all categories', link: '/categories/fix-my-credit/', type: 'secondary' });
+        }
+
+        return { score, label, color, badgeBg, lowRange, highRange, maxLoan, currentDTI, apr, insights, actions, categories };
+      }
+
+      function renderResults(r) {
+        // Badge
+        const badge = document.getElementById('result-badge');
+        badge.className = `inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium ${r.badgeBg}`;
+        badge.textContent = r.label + ' Borrowing Power';
+
+        // Meter animation
+        const meterFill = document.getElementById('meter-fill');
+        const totalArc = 251.2;
+        const offset = totalArc - (r.score / 100) * totalArc;
+        meterFill.style.stroke = r.color;
+        setTimeout(() => { meterFill.style.strokeDashoffset = offset; }, 100);
+
+        // Score counter animation
+        const scoreDisplay = document.getElementById('result-score-display');
+        let current = 0;
+        const interval = setInterval(() => {
+          current += Math.ceil(r.score / 30);
+          if (current >= r.score) {
+            current = r.score;
+            clearInterval(interval);
+          }
+          scoreDisplay.textContent = current;
+        }, 40);
+
+        // Label
+        document.getElementById('result-label').textContent = r.label + ' Borrowing Power';
+        document.getElementById('result-label').style.color = r.color;
+
+        // Range & DTI
+        document.getElementById('result-range').textContent = '$' + r.lowRange.toLocaleString() + ' – $' + r.highRange.toLocaleString();
+        document.getElementById('result-dti').textContent = Math.round(r.currentDTI * 100) + '%';
+        document.getElementById('result-dti').style.color = r.currentDTI < 0.36 ? '#10B981' : r.currentDTI < 0.43 ? '#F59E0B' : '#EF4444';
+
+        // Insights
+        const insightsList = document.getElementById('insights-list');
+        insightsList.innerHTML = '';
+        r.insights.forEach(txt => {
+          const li = document.createElement('li');
+          li.className = 'flex items-start gap-2';
+          li.innerHTML = `<svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>${txt}</span>`;
+          insightsList.appendChild(li);
+        });
+
+        // Actions
+        const actionsList = document.getElementById('actions-list');
+        actionsList.innerHTML = '';
+        r.actions.forEach(action => {
+          const a = document.createElement('a');
+          a.href = action.link;
+          a.className = action.type === 'primary'
+            ? 'flex items-center gap-3 p-3 rounded-xl bg-primary text-white font-medium hover:bg-primary-hover transition-colors'
+            : 'flex items-center gap-3 p-3 rounded-xl border border-border text-text font-medium hover:bg-bg-alt transition-colors';
+          a.innerHTML = `<svg class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>${action.text}`;
+          actionsList.appendChild(a);
+        });
+
+        // Lenders
+        const lenderData = window.__LENDER_DATA || {};
+        const lendersGrid = document.getElementById('lenders-grid');
+        lendersGrid.innerHTML = '';
+        const shown = new Set();
+        r.categories.forEach(cat => {
+          const catLenders = lenderData[cat] || [];
+          catLenders.forEach(l => {
+            if (shown.has(l.slug) || shown.size >= 6) return;
+            shown.add(l.slug);
+            const card = document.createElement('a');
+            card.href = '/review/' + l.slug + '/';
+            card.className = 'glass-card p-4 flex items-center gap-4 hover:bg-card-hover transition-all';
+            card.innerHTML = `
+              <div class="flex-1 min-w-0">
+                <p class="font-semibold text-text truncate">${l.name}</p>
+                <p class="text-sm text-muted truncate">${l.description}</p>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <p class="font-bold text-primary">${l.rating.toFixed(1)}</p>
+                <p class="text-xs text-muted">${l.free_consultation ? 'Free consult' : l.money_back ? 'Money-back' : 'View details'}</p>
+              </div>
+              <svg class="w-4 h-4 text-muted flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>`;
+            lendersGrid.appendChild(card);
+          });
+        });
+
+        if (shown.size === 0) {
+          lendersGrid.innerHTML = '<p class="text-sm text-muted">We\'re building our lender recommendations. Browse our <a href="/categories/fix-my-credit/" class="text-primary hover:underline">categories</a> to explore options.</p>';
+        }
+
+        // GA4 event
+        if (typeof gtag === 'function') {
+          gtag('event', 'quiz_completed', {
+            event_category: 'engagement',
+            event_label: 'borrowing_power',
+            quiz_score: r.score,
+            quiz_label: r.label,
+          });
+        }
+      }
+    });
+  </script>
+
+  <style>
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--color-card-solid);
+      border: 2px solid var(--color-border);
+      border-radius: 12px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+    .quiz-option:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+      transform: translateY(-1px);
+    }
+    .quiz-option.selected {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+    }
+    .quiz-option-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 10px;
+      background: var(--color-bg-alt);
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+    .quiz-option-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+  </style>
+</BaseLayout>
