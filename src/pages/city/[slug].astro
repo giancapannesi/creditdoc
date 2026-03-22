@@ -1,18 +1,19 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
-import { getCitiesWithLenders, getLendersByCityState, getCategories } from '../../utils/data';
+import { getCitiesWithLenders, getLendersByCityState, getCategories, getStateData } from '../../utils/data';
 import type { CityInfo, Lender } from '../../utils/data';
 
 export function getStaticPaths() {
   const cities = getCitiesWithLenders(5);
+  const stateData = getStateData();
   return cities.map(city => ({
     params: { slug: city.slug },
-    props: { cityInfo: city },
+    props: { cityInfo: city, sd: stateData[city.stateAbbr] || null },
   }));
 }
 
-const { cityInfo } = Astro.props as { cityInfo: CityInfo };
+const { cityInfo, sd } = Astro.props as { cityInfo: CityInfo; sd: any };
 const lenders = getLendersByCityState(cityInfo.city, cityInfo.stateAbbr);
 const categories = getCategories();
 
@@ -144,6 +145,37 @@ const jsonLd = [
     </div>
   </section>
 
+  {/* State economic context */}
+  {sd && (
+    <div class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center gap-4 text-xs text-muted">
+        {sd.avg_credit_score && (
+          <span class="flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+            {cityInfo.state} avg credit score: <strong class="text-text">{sd.avg_credit_score}</strong>
+          </span>
+        )}
+        {sd.median_household_income && (
+          <span>Median income: <strong class="text-text">${sd.median_household_income.toLocaleString()}</strong></span>
+        )}
+        {sd.poverty_rate && (
+          <span>Poverty rate: <strong class="text-text">{sd.poverty_rate}%</strong></span>
+        )}
+        {sd.payday_loan_status && (
+          <span class:list={["font-medium px-1.5 py-0.5 rounded",
+            sd.payday_loan_status === 'Banned' ? 'bg-positive-light text-positive' :
+            sd.payday_loan_status === 'Restricted' ? 'bg-warning-light text-warning' :
+            'bg-negative-light text-negative']}>
+            Payday loans: {sd.payday_loan_status}
+          </span>
+        )}
+        <a href={`/state/${cityInfo.state.toLowerCase().replace(/\s+/g, '-')}/`} class="text-primary hover:underline ml-auto">
+          {cityInfo.state} overview &rarr;
+        </a>
+      </div>
+    </div>
+  )}
+
   <!-- Top Rated -->
   <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between mb-6">
@@ -176,7 +208,16 @@ const jsonLd = [
           <LenderCard lender={lender} />
         ))}
       </div>
-      {items.length > 6 && (
+      {items.length >= 5 ? (
+        <div class="mt-4 text-center">
+          <a
+            href={`/browse/${cat}/${cityInfo.slug}/`}
+            class="text-sm font-medium text-primary hover:text-primary-hover transition-colors"
+          >
+            View all {items.length} {catNames[cat] || cat} providers in {cityInfo.city} &rarr;
+          </a>
+        </div>
+      ) : items.length > 6 && (
         <div class="mt-4 text-center">
           <a
             href={`/search/?city=${encodeURIComponent(cityInfo.city)}`}
@@ -194,14 +235,33 @@ const jsonLd = [
     <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
       <h2 class="text-xl font-bold text-text mb-4">Your Rights in {cityInfo.state}</h2>
       <div class="glass-card p-6 space-y-4 text-sm text-muted leading-relaxed">
+        {sd?.consumer_rights_summary && (
+          <p><strong class="text-text">{cityInfo.state} Consumer Protections:</strong> {sd.consumer_rights_summary}</p>
+        )}
+        {sd?.usury_cap && (
+          <p><strong class="text-text">Interest Rate Cap:</strong> {cityInfo.state} usury cap: {sd.usury_cap}.
+            {sd.payday_loan_status === 'Banned' && ' Payday lending is banned in this state.'}
+            {sd.payday_loan_status === 'Restricted' && ` Payday lending is restricted${sd.max_payday_amount ? ` (max $${sd.max_payday_amount})` : ''}.`}
+          </p>
+        )}
+        {sd?.key_regulations && sd.key_regulations.length > 0 && (
+          <div>
+            <strong class="text-text">Key Regulations:</strong>
+            <ul class="mt-1 ml-4 list-disc space-y-0.5">
+              {sd.key_regulations.map((reg: string) => <li>{reg}</li>)}
+            </ul>
+          </div>
+        )}
         <p>
-          <strong class="text-text">Fair Credit Reporting Act (FCRA):</strong> You have the right to dispute inaccurate information on your credit report directly with the credit bureaus, free of charge. Credit repair companies cannot charge you before performing services (Credit Repair Organizations Act).
+          <strong class="text-text">Federal protections:</strong> The FCRA gives you the right to dispute inaccurate credit report information for free. Credit repair companies cannot charge before performing services (Credit Repair Organizations Act).
         </p>
         <p>
-          <strong class="text-text">State protections:</strong> {cityInfo.state} may have additional consumer protection laws regarding credit repair services and lending practices. Check with the {cityInfo.state} Attorney General's office or Department of Financial Services for state-specific regulations.
-        </p>
-        <p>
-          <strong class="text-text">Free resources:</strong> You can get a free credit report from each bureau annually at <a href="https://www.annualcreditreport.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">AnnualCreditReport.com</a>. HUD-approved housing counselors in {cityInfo.city} offer free financial guidance — search at <a href="https://www.consumerfinance.gov/housing/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">consumerfinance.gov</a>.
+          <strong class="text-text">Free resources:</strong> Get a free credit report annually at <a href="https://www.annualcreditreport.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">AnnualCreditReport.com</a>.
+          {sd?.consumer_protection_url ? (
+            <> File complaints with <a href={sd.consumer_protection_url} target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{sd.consumer_protection_agency || `${cityInfo.state} consumer protection`}</a>.</>
+          ) : (
+            <> HUD-approved counselors in {cityInfo.city} offer free guidance at <a href="https://www.consumerfinance.gov/housing/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">consumerfinance.gov</a>.</>
+          )}
         </p>
       </div>
     </div>
