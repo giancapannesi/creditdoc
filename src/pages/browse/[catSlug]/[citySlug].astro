@@ -1,0 +1,214 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LenderCard from '../../../components/LenderCard.astro';
+import { getCitiesWithLenders, getLendersByCityState, getCategories, getStateData } from '../../../utils/data';
+import type { CityInfo, Lender, Category } from '../../../utils/data';
+
+export function getStaticPaths() {
+  const cities = getCitiesWithLenders(5);
+  const categories = getCategories();
+  const stateData = getStateData();
+  const paths: any[] = [];
+
+  for (const city of cities) {
+    const lenders = getLendersByCityState(city.city, city.stateAbbr);
+    for (const cat of categories) {
+      const catLenders = lenders.filter(l => l.category === cat.slug);
+      if (catLenders.length >= 5) {
+        paths.push({
+          params: { catSlug: cat.slug, citySlug: city.slug },
+          props: {
+            cityInfo: city,
+            category: cat,
+            lenders: catLenders,
+            sd: stateData[city.stateAbbr] || null,
+          },
+        });
+      }
+    }
+  }
+
+  return paths;
+}
+
+const { cityInfo, category, lenders, sd } = Astro.props;
+
+// Sort lenders: rated first (by rating desc), then by name
+const sorted = [...lenders].sort((a, b) => {
+  if (b.rating !== a.rating) return b.rating - a.rating;
+  return a.name.localeCompare(b.name);
+});
+
+const topRated = sorted.filter(l => l.rating > 0 && l.description_short?.length > 20).slice(0, 6);
+const totalRated = sorted.filter(l => l.rating > 0).length;
+const avgRating = totalRated > 0 ? (sorted.filter(l => l.rating > 0).reduce((s, l) => s + l.rating, 0) / totalRated).toFixed(1) : null;
+
+const title = `Best ${category.name} in ${cityInfo.city}, ${cityInfo.stateAbbr} (2026) | CreditDoc`;
+const description = `Compare ${lenders.length} ${category.name.toLowerCase()} companies in ${cityInfo.city}, ${cityInfo.state}. ${avgRating ? `Average rating: ${avgRating}/5.` : ''} Read reviews, compare pricing, and find trusted local providers.`;
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `${category.name} in ${cityInfo.city}, ${cityInfo.state}`,
+    "description": description,
+    "url": `https://creditdoc.co/browse/${category.slug}/${cityInfo.slug}/`,
+    "about": {
+      "@type": "City",
+      "name": cityInfo.city,
+      "containedInPlace": { "@type": "State", "name": cityInfo.state }
+    }
+  },
+  ...(topRated.length > 0 ? [{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `Top ${category.name} in ${cityInfo.city}, ${cityInfo.stateAbbr}`,
+    "itemListOrder": "https://schema.org/ItemListOrderDescending",
+    "numberOfItems": topRated.length,
+    "itemListElement": topRated.map((l: Lender, i: number) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": l.name,
+      "url": `https://creditdoc.co/review/${l.slug}/`,
+    })),
+  }] : []),
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://creditdoc.co/" },
+      { "@type": "ListItem", "position": 2, "name": "Cities", "item": "https://creditdoc.co/city/" },
+      { "@type": "ListItem", "position": 3, "name": `${cityInfo.city}, ${cityInfo.stateAbbr}`, "item": `https://creditdoc.co/city/${cityInfo.slug}/` },
+      { "@type": "ListItem", "position": 4, "name": category.name, "item": `https://creditdoc.co/browse/${category.slug}/${cityInfo.slug}/` },
+    ]
+  }
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Breadcrumbs -->
+  <nav class="max-w-7xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted flex-wrap">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/city/" class="hover:text-primary transition-colors">Cities</a></li>
+      <li class="text-border">/</li>
+      <li><a href={`/city/${cityInfo.slug}/`} class="hover:text-primary transition-colors">{cityInfo.city}, {cityInfo.stateAbbr}</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">{category.name}</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-4 py-6">
+    <div class="lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+      <!-- Main Content -->
+      <div>
+        <!-- Header -->
+        <div class="mb-8">
+          <h1 class="text-2xl md:text-3xl font-bold text-text mb-2">
+            Best {category.name} in {cityInfo.city}, {cityInfo.stateAbbr}
+          </h1>
+          <p class="text-muted max-w-2xl">
+            Compare {lenders.length} {category.name.toLowerCase()} companies serving {cityInfo.city}, {cityInfo.state}.
+            {avgRating && <> Average rating: <span class="text-primary font-semibold">{avgRating}/5</span>.</>}
+          </p>
+          <div class="flex items-center gap-4 mt-3">
+            <span class="text-xs bg-primary-light text-primary font-medium px-2 py-1 rounded">{lenders.length} Companies</span>
+            {totalRated > 0 && <span class="text-xs bg-bg-alt text-muted font-medium px-2 py-1 rounded">{totalRated} Rated</span>}
+            {sd?.payday_loan_status && (
+              <span class:list={["text-xs font-medium px-2 py-1 rounded",
+                sd.payday_loan_status === 'Banned' ? 'bg-positive-light text-positive' :
+                sd.payday_loan_status === 'Restricted' ? 'bg-warning-light text-warning' :
+                'bg-negative-light text-negative']}>
+                Payday: {sd.payday_loan_status}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* State regulation callout */}
+        {sd && (
+          <div class="glass-card p-4 mb-6 border-l-4 border-primary">
+            <h2 class="text-sm font-semibold text-text mb-1">{cityInfo.state} Lending Regulations</h2>
+            <p class="text-sm text-muted mb-2">{sd.consumer_rights_summary}</p>
+            <div class="flex flex-wrap gap-3 text-xs text-muted">
+              {sd.usury_cap && <span>Usury cap: <strong class="text-text">{sd.usury_cap}</strong></span>}
+              {sd.consumer_protection_agency && (
+                <span>
+                  Agency:{' '}
+                  {sd.consumer_protection_url
+                    ? <a href={sd.consumer_protection_url} target="_blank" rel="noopener" class="text-primary hover:underline">{sd.consumer_protection_agency}</a>
+                    : <strong class="text-text">{sd.consumer_protection_agency}</strong>
+                  }
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Top-rated section */}
+        {topRated.length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-lg font-bold text-text mb-4">Top-Rated {category.name}</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {topRated.map(lender => <LenderCard lender={lender} />)}
+            </div>
+          </div>
+        )}
+
+        {/* All lenders */}
+        <div>
+          <h2 class="text-lg font-bold text-text mb-4">All {category.name} in {cityInfo.city} ({sorted.length})</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {sorted.map(lender => <LenderCard lender={lender} />)}
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="hidden lg:block space-y-6 mt-8 lg:mt-0">
+        {/* Other categories in this city */}
+        <div class="glass-card p-4">
+          <h3 class="text-sm font-bold text-text mb-3">Other Services in {cityInfo.city}</h3>
+          <div class="space-y-1">
+            <a href={`/city/${cityInfo.slug}/`} class="block text-sm text-primary hover:underline">
+              All {cityInfo.count} companies
+            </a>
+          </div>
+        </div>
+
+        {/* State page link */}
+        {sd && (
+          <div class="glass-card p-4">
+            <h3 class="text-sm font-bold text-text mb-2">{cityInfo.state} Overview</h3>
+            <p class="text-xs text-muted mb-2">
+              {sd.avg_credit_score && <>Avg credit score: <strong>{sd.avg_credit_score}</strong>. </>}
+              {sd.median_household_income && <>Median income: <strong>${sd.median_household_income.toLocaleString()}</strong>.</>}
+            </p>
+            <a href={`/state/${cityInfo.state.toLowerCase().replace(/\s+/g, '-')}/`} class="text-sm text-primary hover:underline">
+              View {cityInfo.state} page &rarr;
+            </a>
+          </div>
+        )}
+
+        {/* Quiz CTA */}
+        <div class="glass-card p-4 bg-gradient-to-br from-primary/5 to-primary/10">
+          <h3 class="text-sm font-bold text-text mb-2">Not Sure Where to Start?</h3>
+          <p class="text-xs text-muted mb-3">Take our 2-minute quiz to find the best options for your situation.</p>
+          <a href="/tools/borrowing-power-quiz/" class="inline-block text-sm font-medium text-white bg-primary rounded-lg px-4 py-2 hover:bg-primary-hover transition-colors">
+            Take the Quiz
+          </a>
+        </div>
+
+        {/* Wellness guides */}
+        <div class="glass-card p-4">
+          <h3 class="text-sm font-bold text-text mb-2">Learn More</h3>
+          <div class="space-y-1">
+            <a href="/financial-wellness/" class="block text-sm text-muted hover:text-primary transition-colors">Financial Wellness Guides</a>
+            <a href="/tools/" class="block text-sm text-muted hover:text-primary transition-colors">Free Financial Tools</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
