@@ -93,6 +93,16 @@ const debtHelp = categories.filter(c =>
       </a>
 
       <a
+        href="/state/"
+        class:list={[
+          "text-sm font-medium transition-colors py-2",
+          currentPath.startsWith('/state') ? 'text-primary' : 'text-text hover:text-primary'
+        ]}
+      >
+        States
+      </a>
+
+      <a
         href="/tools/"
         class:list={[
           "text-sm font-medium transition-colors py-2",
@@ -206,6 +216,9 @@ const debtHelp = categories.filter(c =>
 
       <a href="/deals/" class="block rounded-lg px-3 py-3 text-sm font-medium text-text hover:bg-bg-alt transition-colors">
         Deals
+      </a>
+      <a href="/state/" class="block rounded-lg px-3 py-3 text-sm font-medium text-text hover:bg-bg-alt transition-colors">
+        States
       </a>
       <a href="/tools/" class="block rounded-lg px-3 py-3 text-sm font-medium text-text hover:bg-bg-alt transition-colors">
         Tools
