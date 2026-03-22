@@ -95,19 +95,21 @@ const jsonLd = [
         addressRegion: lender.company_info.state,
       },
     },
-    review: {
-      '@type': 'Review',
-      author: {
-        '@type': 'Organization',
-        name: 'CreditDoc',
+    ...(lender.rating > 0 ? {
+      review: {
+        '@type': 'Review',
+        author: {
+          '@type': 'Organization',
+          name: 'CreditDoc',
+        },
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: lender.rating.toString(),
+          bestRating: '5',
+          worstRating: '1',
+        },
       },
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: lender.rating.toString(),
-        bestRating: '5',
-        worstRating: '1',
-      },
-    },
+    } : {}),
   },
   {
     '@context': 'https://schema.org',
