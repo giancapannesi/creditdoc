@@ -112,8 +112,10 @@ const jsonLd = [
         </div>
         <h1 class="text-3xl font-bold text-text sm:text-4xl leading-tight">{guide.title}</h1>
         <p class="mt-4 text-lg text-muted leading-relaxed">{guide.description}</p>
-        <div class="mt-4 flex items-center gap-4 text-sm text-muted">
-          <span>By CreditDoc Editorial Team</span>
+        <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted">
+          <span>Written by <a href="/about/" class="text-primary hover:underline font-medium">CreditDoc Editorial Team</a></span>
+          <span class="text-border">|</span>
+          <span>Reviewed by a consumer finance specialist with 15+ years experience</span>
           <span class="text-border">|</span>
           <span>Updated {new Date(guide.last_updated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
         </div>
