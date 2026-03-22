@@ -39,7 +39,8 @@ const lowestPrice = lender.pricing.tiers.length > 0
 const hasPricing = lowestPrice > 0 || lender.pricing.tiers.length > 0;
 const priceDisplay = hasPricing ? `From ${formatPrice(lowestPrice)}/mo` : 'Contact for Pricing';
 
-const featureLabels: Record<string, string> = {
+// Category-aware feature labels — credit repair features only show on credit repair pages
+const creditRepairFeatures: Record<string, string> = {
   credit_monitoring: 'Credit Monitoring',
   all_three_bureaus: 'All Three Bureaus',
   goodwill_letters: 'Goodwill Letters',
@@ -53,6 +54,15 @@ const featureLabels: Record<string, string> = {
   personal_advisor: 'Personal Advisor',
   ai_powered: 'AI-Powered Tools',
 };
+const generalFeatures: Record<string, string> = {
+  mobile_app: 'Mobile App',
+  online_portal: 'Online Portal',
+  personal_advisor: 'Personal Advisor',
+  credit_education: 'Credit Education',
+  score_tracking: 'Score Tracking',
+  identity_theft_protection: 'Identity Theft Protection',
+};
+const featureLabels = category?.filter_type === 'credit-repair' ? creditRepairFeatures : generalFeatures;
 
 const ratingCategories = [
   { label: 'Value', value: lender.rating_breakdown.value },
@@ -67,17 +77,21 @@ const faqs = [
     question: `Is ${lender.name} legitimate?`,
     answer: `Yes. ${lender.name} is a registered company headquartered in ${lender.company_info.headquarters}${lender.company_info.founded_year ? `, founded in ${lender.company_info.founded_year}` : ''}. They hold a ${lender.company_info.bbb_rating} rating with the Better Business Bureau${lender.company_info.bbb_accredited ? ' and are BBB-accredited' : ''}.`,
   },
-  {
+  ...(hasPricing ? [{
     question: `How much does ${lender.name} cost?`,
-    answer: hasPricing
-      ? `${lender.name} plans start at ${formatPrice(lowestPrice)} per month${lender.pricing.setup_fee > 0 ? ` with a ${formatPrice(lender.pricing.setup_fee)} setup fee` : ' with no setup fee'}. ${lender.pricing.money_back_guarantee ? lender.pricing.guarantee_details : 'No money-back guarantee is offered.'}`
-      : `Contact ${lender.name} directly for current pricing information. ${lender.pricing.guarantee_details}`,
-  },
-  {
+    answer: `${lender.name} plans start at ${formatPrice(lowestPrice)} per month${lender.pricing.setup_fee > 0 ? ` with a ${formatPrice(lender.pricing.setup_fee)} setup fee` : ' with no setup fee'}. ${lender.pricing.money_back_guarantee ? lender.pricing.guarantee_details : 'No money-back guarantee is offered.'}`,
+  }] : []),
+  ...(lender.typical_results_timeline?.trim() ? [{
     question: `How long does ${lender.name} take to show results?`,
     answer: lender.typical_results_timeline,
-  },
-];
+  }] : []),
+].filter(faq => faq.answer && faq.answer.trim().length > 0);
+
+// Determine page quality — skeleton pages get noindex
+const isEnriched = lender.has_been_enriched === true;
+const hasRealRating = lender.rating > 0 && lender.rating !== 5;
+const hasRealContent = !!(lender.typical_results_timeline?.trim()) && lender.pros?.length > 0;
+const isSkeleton = !isEnriched && !hasRealRating && !hasRealContent;
 
 const jsonLd = [
   {
@@ -95,7 +109,7 @@ const jsonLd = [
         addressRegion: lender.company_info.state,
       },
     },
-    ...(lender.rating > 0 ? {
+    ...(lender.rating > 0 && lender.rating <= 5 ? {
       review: {
         '@type': 'Review',
         author: {
@@ -120,7 +134,7 @@ const jsonLd = [
       { '@type': 'ListItem', position: 3, name: lender.name, item: `https://creditdoc.co/review/${lender.slug}/` },
     ],
   },
-  {
+  ...(faqs.length > 0 ? [{
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: faqs.map(faq => ({
@@ -131,7 +145,7 @@ const jsonLd = [
         text: faq.answer,
       },
     })),
-  },
+  }] : []),
 ];
 ---
 
@@ -139,6 +153,7 @@ const jsonLd = [
   title={`${lender.name} Review (2026) - Pricing, BBB Rating & Features | CreditDoc`}
   description={lender.description_short}
   jsonLd={jsonLd}
+  noindex={isSkeleton}
 >
   <!-- Breadcrumbs -->
   <nav class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8" aria-label="Breadcrumb">
@@ -238,7 +253,7 @@ const jsonLd = [
           <!-- Feature grid -->
           <h3 class="text-base font-semibold text-text mb-3">Feature Checklist</h3>
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {Object.entries(lender.features).map(([key, value]) => (
+            {Object.entries(lender.features).filter(([key]) => key in featureLabels).map(([key, value]) => (
               <div class="flex items-center gap-2">
                 {value ? (
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-positive shrink-0" viewBox="0 0 20 20" fill="currentColor">
@@ -250,7 +265,7 @@ const jsonLd = [
                   </svg>
                 )}
                 <span class:list={['text-xs', value ? 'text-text' : 'text-muted']}>
-                  {featureLabels[key] || key}
+                  {featureLabels[key]}
                 </span>
               </div>
             ))}
