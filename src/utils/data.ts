@@ -360,6 +360,57 @@ export const STATE_ABBREVIATIONS: Record<string, string> = {
   'West Virginia': 'WV', 'Wisconsin': 'WI', 'Wyoming': 'WY'
 };
 
+export interface StateInfo {
+  name: string;
+  abbr: string;
+  slug: string;
+  lenderCount: number;
+  cityCount: number;
+  topCities: string[];
+}
+
+export function getStatesWithLenders(minCount: number = 1): StateInfo[] {
+  const stateMap = new Map<string, { count: number; cities: Set<string> }>();
+  for (const l of getAllLenders()) {
+    const abbr = l.company_info.state;
+    if (!abbr) continue;
+    if (!stateMap.has(abbr)) stateMap.set(abbr, { count: 0, cities: new Set() });
+    const s = stateMap.get(abbr)!;
+    s.count++;
+    if (l.company_info.city) s.cities.add(l.company_info.city);
+  }
+
+  const abbrevToFull: Record<string, string> = {};
+  for (const [full, abbr] of Object.entries(STATE_ABBREVIATIONS)) {
+    abbrevToFull[abbr] = full;
+  }
+
+  return Array.from(stateMap.entries())
+    .filter(([, v]) => v.count >= minCount)
+    .map(([abbr, v]) => {
+      const name = abbrevToFull[abbr] || abbr;
+      return {
+        name,
+        abbr,
+        slug: name.toLowerCase().replace(/\s+/g, '-'),
+        lenderCount: v.count,
+        cityCount: v.cities.size,
+        topCities: Array.from(v.cities).slice(0, 10),
+      };
+    })
+    .sort((a, b) => b.lenderCount - a.lenderCount);
+}
+
+export function getLendersInState(stateAbbr: string): Lender[] {
+  return getAllLenders().filter(l => l.company_info.state === stateAbbr);
+}
+
+export function getStateData(): Record<string, any> {
+  const dataPath = path.join(process.cwd(), 'src/content/states.json');
+  if (!fs.existsSync(dataPath)) return {};
+  return JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+}
+
 export const TOP_CITIES: { city: string; state: string; lat: number; lng: number }[] = [
   { city: 'New York', state: 'New York', lat: 40.7128, lng: -74.0060 },
   { city: 'Los Angeles', state: 'California', lat: 34.0522, lng: -118.2437 },

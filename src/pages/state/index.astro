@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getStatesWithLenders, getStateData } from '../../utils/data';
+
+const states = getStatesWithLenders(1);
+const stateData = getStateData();
+const totalLenders = states.reduce((s, st) => s + st.lenderCount, 0);
+
+const title = "Browse by State — Credit Repair & Financial Services | CreditDoc";
+const description = `Find credit repair companies and financial services in all 50 states. ${totalLenders.toLocaleString()} companies across ${states.length} states with local regulations and consumer rights.`;
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Browse Financial Services by State",
+    "description": description,
+    "url": "https://creditdoc.co/state/",
+    "publisher": { "@type": "Organization", "name": "CreditDoc", "url": "https://creditdoc.co" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://creditdoc.co/" },
+      { "@type": "ListItem", "position": 2, "name": "States", "item": "https://creditdoc.co/state/" }
+    ]
+  }
+];
+
+// Group states by region
+const regions: Record<string, typeof states> = {
+  'Northeast': [],
+  'Southeast': [],
+  'Midwest': [],
+  'Southwest': [],
+  'West': [],
+};
+
+const regionMap: Record<string, string> = {
+  'CT': 'Northeast', 'DE': 'Northeast', 'ME': 'Northeast', 'MD': 'Northeast', 'MA': 'Northeast',
+  'NH': 'Northeast', 'NJ': 'Northeast', 'NY': 'Northeast', 'PA': 'Northeast', 'RI': 'Northeast', 'VT': 'Northeast',
+  'AL': 'Southeast', 'AR': 'Southeast', 'FL': 'Southeast', 'GA': 'Southeast', 'KY': 'Southeast',
+  'LA': 'Southeast', 'MS': 'Southeast', 'NC': 'Southeast', 'SC': 'Southeast', 'TN': 'Southeast',
+  'VA': 'Southeast', 'WV': 'Southeast', 'DC': 'Southeast',
+  'IL': 'Midwest', 'IN': 'Midwest', 'IA': 'Midwest', 'KS': 'Midwest', 'MI': 'Midwest',
+  'MN': 'Midwest', 'MO': 'Midwest', 'NE': 'Midwest', 'ND': 'Midwest', 'OH': 'Midwest',
+  'SD': 'Midwest', 'WI': 'Midwest',
+  'AZ': 'Southwest', 'NM': 'Southwest', 'OK': 'Southwest', 'TX': 'Southwest',
+  'AK': 'West', 'CA': 'West', 'CO': 'West', 'HI': 'West', 'ID': 'West',
+  'MT': 'West', 'NV': 'West', 'OR': 'West', 'UT': 'West', 'WA': 'West', 'WY': 'West',
+};
+
+for (const state of states) {
+  const region = regionMap[state.abbr] || 'West';
+  if (regions[region]) regions[region].push(state);
+}
+
+// Sort each region alphabetically
+for (const region of Object.values(regions)) {
+  region.sort((a, b) => a.name.localeCompare(b.name));
+}
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <nav class="max-w-6xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">States</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="text-center mb-10">
+      <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">Browse by State</h1>
+      <p class="text-lg text-muted max-w-2xl mx-auto">
+        Find credit repair companies and financial services in your state. Each state page includes local regulations, economic data, and top-rated lenders.
+      </p>
+      <div class="flex items-center justify-center gap-6 mt-4">
+        <div class="text-center">
+          <p class="text-2xl font-bold text-primary">{states.length}</p>
+          <p class="text-xs text-muted">States</p>
+        </div>
+        <div class="text-center">
+          <p class="text-2xl font-bold text-text">{totalLenders.toLocaleString()}</p>
+          <p class="text-xs text-muted">Companies</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Regions -->
+    {Object.entries(regions).filter(([, s]) => s.length > 0).map(([region, regionStates]) => (
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" /></svg>
+          {region}
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {regionStates.map(state => {
+            const sd = stateData[state.abbr];
+            return (
+              <a href={`/state/${state.slug}/`} class="glass-card p-4 flex items-center justify-between hover:border-primary transition-all group">
+                <div class="min-w-0">
+                  <div class="flex items-center gap-2">
+                    <p class="font-semibold text-text group-hover:text-primary transition-colors">{state.name}</p>
+                    <span class="text-xs text-muted">({state.abbr})</span>
+                  </div>
+                  <div class="flex items-center gap-3 mt-1">
+                    <span class="text-xs text-muted">{state.lenderCount.toLocaleString()} companies</span>
+                    {sd?.payday_loan_status && (
+                      <span class:list={["text-[10px] font-medium px-1.5 py-0.5 rounded",
+                        sd.payday_loan_status === 'Banned' ? 'bg-positive-light text-positive' :
+                        sd.payday_loan_status === 'Restricted' ? 'bg-warning-light text-warning' :
+                        'bg-negative-light text-negative']}>
+                        Payday: {sd.payday_loan_status}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <svg class="w-4 h-4 text-muted flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+
+    <!-- Quick Links -->
+    <div class="mt-8 text-center">
+      <p class="text-sm text-muted">
+        Looking for a specific city? <a href="/city/" class="text-primary hover:underline">Browse by city</a> &middot;
+        Need help? <a href="/tools/borrowing-power-quiz/" class="text-primary hover:underline">Take the quiz</a>
+      </p>
+    </div>
+  </div>
+</BaseLayout>
