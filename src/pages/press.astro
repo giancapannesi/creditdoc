@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAllLenders, getCategories, getCitiesWithLenders, getStatesWithLenders } from '../utils/data';
+
+const lenders = getAllLenders();
+const categories = getCategories();
+const cities = getCitiesWithLenders(5);
+const states = getStatesWithLenders(1);
+
+const stats = {
+  totalLenders: lenders.length,
+  categories: categories.length,
+  cities: cities.length,
+  states: states.length,
+  sources: ['FDIC', 'NCUA', 'HUD', 'CFPB', 'Outscraper (Google Maps)'],
+  enriched: lenders.filter(l => l.has_been_enriched).length,
+};
+
+const title = "Press & Media — CreditDoc";
+const description = "Media resources, data citations, and press inquiries for CreditDoc — the independent consumer lending directory covering credit repair, personal loans, and financial services.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Press & Media",
+    "description": description,
+    "url": "https://creditdoc.co/press/",
+    "publisher": { "@type": "Organization", "name": "CreditDoc", "url": "https://creditdoc.co" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://creditdoc.co/" },
+      { "@type": "ListItem", "position": 2, "name": "Press", "item": "https://creditdoc.co/press/" }
+    ]
+  }
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <nav class="max-w-4xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">Press</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">Press & Media</h1>
+    <p class="text-lg text-muted max-w-2xl mb-8">
+      CreditDoc is an independent consumer lending directory. We welcome inquiries from journalists, researchers, and policy organizations.
+    </p>
+
+    <!-- Quick Stats for Journalists -->
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-lg font-bold text-text mb-4">CreditDoc at a Glance</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div>
+          <p class="text-2xl font-bold text-primary">{stats.totalLenders.toLocaleString()}</p>
+          <p class="text-xs text-muted">Company Profiles</p>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-text">{stats.states}</p>
+          <p class="text-xs text-muted">States Covered</p>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-text">{stats.cities}</p>
+          <p class="text-xs text-muted">Cities</p>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-text">{stats.categories}</p>
+          <p class="text-xs text-muted">Service Categories</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3">
+        Data sourced from: {stats.sources.join(', ')}. {stats.enriched.toLocaleString()} profiles independently verified.
+      </p>
+    </section>
+
+    <!-- Data & Research -->
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">Data & Research</h2>
+      <div class="space-y-4">
+        <div class="glass-card p-5">
+          <h3 class="font-semibold text-text mb-2">Available Data</h3>
+          <p class="text-sm text-muted mb-3">CreditDoc maintains one of the most comprehensive consumer lending databases in the U.S., cross-referencing multiple government and commercial sources:</p>
+          <ul class="text-sm text-muted space-y-1.5 ml-4 list-disc">
+            <li><strong class="text-text">FDIC-insured institutions</strong> — Bank profiles, deposit data, branch locations</li>
+            <li><strong class="text-text">NCUA credit unions</strong> — Credit union profiles, membership data, financial health</li>
+            <li><strong class="text-text">HUD-approved counselors</strong> — Housing and financial counseling agencies</li>
+            <li><strong class="text-text">CFPB complaint data</strong> — Consumer complaint trends by company and product</li>
+            <li><strong class="text-text">State lending regulations</strong> — Usury caps, payday loan laws, consumer protection agencies for all 50 states</li>
+            <li><strong class="text-text">Economic indicators</strong> — Median household income, poverty rate, unbanked rate, average credit score by state</li>
+          </ul>
+        </div>
+
+        <div class="glass-card p-5">
+          <h3 class="font-semibold text-text mb-2">How to Cite CreditDoc</h3>
+          <p class="text-sm text-muted mb-2">When referencing CreditDoc data or analysis, please use:</p>
+          <div class="bg-bg-alt rounded-lg p-3 text-sm font-mono text-text">
+            According to CreditDoc (creditdoc.co), [data point].
+          </div>
+          <p class="text-xs text-muted mt-2">
+            We appreciate a link back to the relevant page. For custom data requests, contact us below.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About the Team -->
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">About Our Team</h2>
+      <div class="glass-card p-5">
+        <div class="flex items-start gap-4">
+          <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-text">Founder & Lead Analyst</h3>
+            <p class="text-sm text-muted mt-1">
+              Consumer finance specialist with 15+ years of experience across payments, lending, and risk management in 10+ countries. MBA from a globally ranked business school. Available for commentary on:
+            </p>
+            <ul class="text-sm text-muted mt-2 ml-4 list-disc space-y-0.5">
+              <li>Consumer credit trends and subprime lending</li>
+              <li>Credit repair industry practices and regulation</li>
+              <li>State-by-state lending law analysis</li>
+              <li>Financial inclusion and the unbanked population</li>
+              <li>Payday lending regulation and alternatives</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">Press Contact</h2>
+      <div class="glass-card p-5">
+        <p class="text-sm text-muted mb-3">
+          For press inquiries, data requests, or interview scheduling:
+        </p>
+        <div class="space-y-2">
+          <p class="text-sm">
+            <strong class="text-text">Email:</strong>
+            <a href="mailto:contact@creditdoc.co" class="text-primary hover:underline">contact@creditdoc.co</a>
+          </p>
+          <p class="text-sm text-muted">
+            We aim to respond to media inquiries within 24 hours. For urgent requests, please include "PRESS" in the subject line.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Assets -->
+    <section>
+      <h2 class="text-xl font-bold text-text mb-4">Brand Assets</h2>
+      <div class="glass-card p-5">
+        <p class="text-sm text-muted mb-3">
+          When referencing CreditDoc in articles:
+        </p>
+        <ul class="text-sm text-muted space-y-1.5 ml-4 list-disc">
+          <li><strong class="text-text">Name:</strong> CreditDoc (one word, capital C and D)</li>
+          <li><strong class="text-text">URL:</strong> creditdoc.co</li>
+          <li><strong class="text-text">Description:</strong> Independent consumer lending directory and comparison website</li>
+          <li><strong class="text-text">Founded:</strong> 2026</li>
+          <li><strong class="text-text">Parent company:</strong> Cosmic Phoenix LLC (Wyoming)</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
