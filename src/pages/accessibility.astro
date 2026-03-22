@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Accessibility Statement",
+  "description": "CreditDoc's commitment to digital accessibility and WCAG 2.1 AA compliance.",
+  "url": "https://creditdoc.co/accessibility/",
+  "datePublished": "2026-03-22",
+  "dateModified": "2026-03-22"
+};
+---
+
+<BaseLayout
+  title="Accessibility Statement | WCAG 2.1 AA Compliance - CreditDoc"
+  description="CreditDoc is committed to making our website accessible to all users, including people with disabilities. Learn about our WCAG 2.1 AA compliance efforts."
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <section class="bg-white border-b border-border">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 text-center">
+      <span class="inline-block rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-6">Accessibility</span>
+      <h1 class="text-4xl font-bold text-text sm:text-5xl">Accessibility Statement</h1>
+      <p class="mt-6 text-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        CreditDoc is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="space-y-12">
+
+      <!-- Our Commitment -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Our Commitment</h2>
+        <div class="rounded-xl border border-border bg-white p-6 sm:p-8">
+          <p class="text-sm text-muted leading-relaxed mb-4">
+            CreditDoc strives to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 at Level AA. These guidelines help make web content more accessible to people with a wide range of disabilities, including blindness and low vision, deafness and hearing loss, learning disabilities, cognitive limitations, limited movement, speech disabilities, photosensitivity, and combinations of these.
+          </p>
+          <p class="text-sm text-muted leading-relaxed">
+            We believe that access to financial information and comparison tools is essential for all consumers, regardless of ability. Making our site accessible is not just a legal obligation -- it's the right thing to do.
+          </p>
+        </div>
+      </div>
+
+      <!-- Measures Taken -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Measures We Have Taken</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="rounded-xl border border-border bg-white p-5">
+            <h3 class="text-base font-semibold text-text mb-2">Semantic HTML</h3>
+            <p class="text-sm text-muted leading-relaxed">All pages use proper heading hierarchy, landmark regions, and semantic elements to support screen readers and assistive technologies.</p>
+          </div>
+          <div class="rounded-xl border border-border bg-white p-5">
+            <h3 class="text-base font-semibold text-text mb-2">Keyboard Navigation</h3>
+            <p class="text-sm text-muted leading-relaxed">All interactive elements (links, buttons, forms, navigation) are accessible via keyboard. Focus states are visible on all interactive elements.</p>
+          </div>
+          <div class="rounded-xl border border-border bg-white p-5">
+            <h3 class="text-base font-semibold text-text mb-2">Color Contrast</h3>
+            <p class="text-sm text-muted leading-relaxed">Text and interactive elements meet WCAG 2.1 AA minimum contrast ratios (4.5:1 for normal text, 3:1 for large text).</p>
+          </div>
+          <div class="rounded-xl border border-border bg-white p-5">
+            <h3 class="text-base font-semibold text-text mb-2">Alternative Text</h3>
+            <p class="text-sm text-muted leading-relaxed">Images include descriptive alt text. Decorative images are marked appropriately so screen readers can skip them.</p>
+          </div>
+          <div class="rounded-xl border border-border bg-white p-5">
+            <h3 class="text-base font-semibold text-text mb-2">Responsive Design</h3>
+            <p class="text-sm text-muted leading-relaxed">Our site is fully responsive and functions on all screen sizes, from mobile devices to desktop monitors, including text zoom up to 200%.</p>
+          </div>
+          <div class="rounded-xl border border-border bg-white p-5">
+            <h3 class="text-base font-semibold text-text mb-2">Readable Typography</h3>
+            <p class="text-sm text-muted leading-relaxed">We use clear, legible fonts with adequate spacing. Line lengths and line heights are optimized for readability.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Known Limitations -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Known Limitations</h2>
+        <div class="rounded-xl border border-border bg-white p-6">
+          <p class="text-sm text-muted leading-relaxed mb-4">
+            While we strive for full accessibility, some areas of our site may have limitations:
+          </p>
+          <ul class="space-y-3 text-sm text-muted">
+            <li class="flex items-start gap-2">
+              <span class="text-warning mt-0.5 shrink-0">&#9679;</span>
+              <span><strong class="text-text">Embedded maps:</strong> Google Maps embeds on lender review pages may have limited screen reader support. The full address is always provided as text and as a link to Google Maps.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-warning mt-0.5 shrink-0">&#9679;</span>
+              <span><strong class="text-text">Third-party content:</strong> Some content loaded from third-party services (such as affiliate partner websites) may not meet our accessibility standards. We encourage those partners to improve their accessibility.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-warning mt-0.5 shrink-0">&#9679;</span>
+              <span><strong class="text-text">PDF documents:</strong> Some PDF documents on our site may not be fully accessible. If you need an accessible version of any document, please contact us.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feedback -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Feedback & Assistance</h2>
+        <div class="rounded-xl border border-primary/20 bg-primary-light/20 p-6">
+          <p class="text-sm text-muted leading-relaxed mb-4">
+            We welcome your feedback on the accessibility of CreditDoc. If you encounter any accessibility barriers or need assistance, please contact us:
+          </p>
+          <div class="flex items-center gap-3 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+            </svg>
+            <a href="mailto:contact@creditdoc.co" class="text-sm text-primary font-medium hover:underline">contact@creditdoc.co</a>
+          </div>
+          <p class="text-sm text-muted leading-relaxed">
+            Please include "Accessibility" in the subject line. We will try to respond within 5 business days and will work with you to provide the information or service you need in an accessible format.
+          </p>
+        </div>
+      </div>
+
+      <!-- Standards -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Standards & Guidelines</h2>
+        <div class="rounded-xl border border-border bg-white p-6">
+          <p class="text-sm text-muted leading-relaxed mb-4">This statement references the following standards:</p>
+          <ul class="space-y-2 text-sm text-muted">
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Web Content Accessibility Guidelines (WCAG) 2.1</a> — Level AA</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Section 508 of the Rehabilitation Act</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Americans with Disabilities Act (ADA) Title III</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Last Updated -->
+      <div class="text-center">
+        <p class="text-xs text-muted">
+          Last updated: March 22, 2026 | CreditDoc is a property of Cosmic Phoenix LLC, a Wyoming limited liability company.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

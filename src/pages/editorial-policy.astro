@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Editorial Policy",
+  "description": "CreditDoc's editorial standards, listing criteria, and review policies for financial services.",
+  "url": "https://creditdoc.co/editorial-policy/",
+  "datePublished": "2026-03-22",
+  "dateModified": "2026-03-22"
+};
+---
+
+<BaseLayout
+  title="Editorial Policy | Review Standards & Listing Criteria - CreditDoc"
+  description="Learn about CreditDoc's editorial standards, how companies get listed, our review and update policies, and our commitment to accuracy and independence."
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <section class="bg-white border-b border-border">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 text-center">
+      <span class="inline-block rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-6">Editorial Standards</span>
+      <h1 class="text-4xl font-bold text-text sm:text-5xl">Editorial Policy</h1>
+      <p class="mt-6 text-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        Our commitment to accuracy, independence, and consumer protection guides every review and listing on CreditDoc.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="space-y-12">
+
+      <!-- Independence -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Editorial Independence</h2>
+        <div class="rounded-xl border-2 border-primary/30 bg-primary-light/30 p-6 sm:p-8">
+          <p class="text-base text-text leading-relaxed mb-4">
+            CreditDoc's editorial team operates independently from our business and advertising operations. Our ratings, rankings, and recommendations are never influenced by compensation arrangements.
+          </p>
+          <p class="text-sm text-muted leading-relaxed">
+            Companies cannot pay for higher ratings, preferential placement in editorial content, or the removal of negative information. Affiliate relationships are disclosed transparently on every page where they exist. See our <a href="/disclosure/" class="text-primary hover:underline">Affiliate Disclosure</a> for full details.
+          </p>
+        </div>
+      </div>
+
+      <!-- Listing Criteria -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Listing Criteria</h2>
+        <div class="rounded-xl border border-border bg-white p-6">
+          <p class="text-sm text-muted leading-relaxed mb-6">
+            Not every company that applies or is discovered will be listed on CreditDoc. We apply the following criteria:
+          </p>
+
+          <h3 class="text-base font-semibold text-text mb-3">Companies We List</h3>
+          <ul class="space-y-2 text-sm text-muted mb-6">
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-positive shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Actively operating consumer financial service providers (credit repair, lending, debt relief, credit building, credit monitoring, pawn services, ATM networks)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-positive shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Verified through government databases (FDIC, NCUA, HUD), public business registries, or direct website confirmation</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-positive shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Non-profit credit counseling agencies approved by HUD or accredited by the NFCC</span>
+            </li>
+          </ul>
+
+          <h3 class="text-base font-semibold text-text mb-3">Companies We Exclude</h3>
+          <ul class="space-y-2 text-sm text-muted">
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-negative shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/>
+              </svg>
+              <span>Companies with active FTC or CFPB enforcement actions for deceptive practices</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-negative shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/>
+              </svg>
+              <span>Companies that charge upfront fees in violation of the Credit Repair Organizations Act (CROA)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-negative shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/>
+              </svg>
+              <span>Businesses that are not consumer financial services (retail stores, restaurants, etc.)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-negative shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/>
+              </svg>
+              <span>Companies that have ceased operations or are no longer accessible</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Review Process -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Review Process</h2>
+        <div class="rounded-xl border border-border bg-white p-6">
+          <p class="text-sm text-muted leading-relaxed mb-6">
+            Each company listed on CreditDoc goes through a structured review process:
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white text-sm font-bold">1</div>
+              <div>
+                <h3 class="text-base font-semibold text-text">Data Collection</h3>
+                <p class="text-sm text-muted mt-1">We gather information from government databases (FDIC, NCUA, HUD, CFPB), the Better Business Bureau, the company's own website, and verified user review platforms.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white text-sm font-bold">2</div>
+              <div>
+                <h3 class="text-base font-semibold text-text">Verification</h3>
+                <p class="text-sm text-muted mt-1">We verify the company is actively operating, confirm pricing directly from their website, and cross-reference regulatory records for any enforcement actions or complaints.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white text-sm font-bold">3</div>
+              <div>
+                <h3 class="text-base font-semibold text-text">Analysis & Rating</h3>
+                <p class="text-sm text-muted mt-1">We evaluate the company across five dimensions: Value, Effectiveness, Customer Service, Transparency, and Ease of Use. See our <a href="/methodology/" class="text-primary hover:underline">Methodology</a> for scoring details.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white text-sm font-bold">4</div>
+              <div>
+                <h3 class="text-base font-semibold text-text">Publication</h3>
+                <p class="text-sm text-muted mt-1">The completed profile is published with clear pros, cons, pricing, and a factual description. Companies are notified and invited to verify their listing details.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white text-sm font-bold">5</div>
+              <div>
+                <h3 class="text-base font-semibold text-text">Ongoing Monitoring</h3>
+                <p class="text-sm text-muted mt-1">Listings are reviewed quarterly. Pricing is verified monthly. CFPB complaint data is updated daily. Companies with significant changes are re-evaluated promptly.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sponsored Content -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Sponsored Content & Advertising</h2>
+        <div class="rounded-xl border border-border bg-white p-6">
+          <p class="text-sm text-muted leading-relaxed mb-4">
+            CreditDoc clearly distinguishes between editorial content and advertising:
+          </p>
+          <ul class="space-y-3 text-sm text-muted">
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong class="text-text">Affiliate links</strong> are identified in our <a href="/disclosure/" class="text-primary hover:underline">Affiliate Disclosure</a> and noted on individual review pages. Clicking these links may earn CreditDoc a commission at no cost to you.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong class="text-text">Sponsored listings,</strong> if any, will be clearly labeled as "Sponsored" or "Ad" and will never be presented as editorial reviews.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong class="text-text">Editorial content</strong> (reviews, comparisons, guides) is written by our research team and is never reviewed or approved by the companies being evaluated.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Corrections -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Corrections & Updates</h2>
+        <div class="rounded-xl border border-primary/20 bg-primary-light/20 p-6">
+          <p class="text-sm text-muted leading-relaxed mb-4">
+            We take accuracy seriously. If you believe any information on CreditDoc is incorrect, outdated, or misleading:
+          </p>
+          <ul class="space-y-2 text-sm text-muted mb-4">
+            <li class="flex items-start gap-2">
+              <span class="text-primary font-bold mt-0.5">1.</span>
+              <span>Email us at <a href="mailto:contact@creditdoc.co" class="text-primary hover:underline">contact@creditdoc.co</a> with "Correction Request" in the subject line.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary font-bold mt-0.5">2.</span>
+              <span>Include the specific page URL and the information you believe is inaccurate.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary font-bold mt-0.5">3.</span>
+              <span>If possible, provide a source or documentation supporting the correction.</span>
+            </li>
+          </ul>
+          <p class="text-sm text-muted leading-relaxed">
+            We will review all correction requests within 5 business days and update our content if the correction is verified.
+          </p>
+        </div>
+      </div>
+
+      <!-- Last Updated -->
+      <div class="text-center">
+        <p class="text-xs text-muted">
+          Last updated: March 22, 2026 | CreditDoc is a property of Cosmic Phoenix LLC, a Wyoming limited liability company.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
