@@ -5,7 +5,7 @@ import ProsCons from '../../components/ProsCons.astro';
 import DiagnosisCard from '../../components/DiagnosisCard.astro';
 import LenderCard from '../../components/LenderCard.astro';
 import TrustBadge from '../../components/TrustBadge.astro';
-import { getAllLenders, getLenderBySlug, formatPrice, getBbbClass, generateDiagnosis, getComparisons, getCategories } from '../../utils/data';
+import { getAllLenders, getLenderBySlug, formatPrice, getBbbClass, generateDiagnosis, getComparisons, getCategories, getWellnessGuidesByCategory } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
 export function getStaticPaths() {
@@ -26,6 +26,38 @@ const similarLenders = lender.similar_lenders
 
 const categories = getCategories();
 const category = categories.find(c => c.slug === lender.category);
+
+// Fallback: nearby lenders when similar_lenders is empty
+const nearbyLenders = similarLenders.length === 0
+  ? allLenders
+      .filter(l => l.slug !== lender.slug && l.company_info?.city === lender.company_info?.city && l.company_info?.state === lender.company_info?.state && l.company_info?.city)
+      .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+      .slice(0, 3)
+  : [];
+
+// Same-category lenders when no similar and no nearby
+const categoryLenders = similarLenders.length === 0 && nearbyLenders.length === 0
+  ? allLenders
+      .filter(l => l.slug !== lender.slug && l.category === lender.category && l.rating > 0)
+      .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+      .slice(0, 3)
+  : [];
+
+const relatedLenders = similarLenders.length > 0 ? similarLenders : nearbyLenders.length > 0 ? nearbyLenders : categoryLenders;
+const relatedLendersLabel = similarLenders.length > 0 ? 'Similar Companies' : nearbyLenders.length > 0 ? `More Lenders in ${lender.company_info?.city}` : `More ${category?.name || 'Lenders'}`;
+
+// Category-mapped wellness guides
+const categoryGuideMap: Record<string, string> = {
+  'credit-repair': 'credit-repair',
+  'debt-relief': 'financial-recovery',
+  'personal-loans': 'loans-and-interest',
+  'check-cashing': 'everyday-finance',
+  'credit-counseling': 'financial-recovery',
+  'pawn-lenders': 'everyday-finance',
+  'buy-here-pay-here': 'loans-and-interest',
+};
+const guideCategory = categoryGuideMap[lender.category] || 'understanding-credit';
+const relatedWellnessGuides = getWellnessGuidesByCategory(guideCategory).slice(0, 3);
 
 const comparisons = getComparisons().filter(
   c => c.lender_a === lender.slug || c.lender_b === lender.slug
@@ -643,13 +675,29 @@ const jsonLd = [
     </section>
   )}
 
-  <!-- Similar Companies -->
-  {similarLenders.length > 0 && (
+  <!-- Related Lenders -->
+  {relatedLenders.length > 0 && (
     <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <h2 class="text-xl font-bold text-text mb-4">Similar Companies</h2>
+      <h2 class="text-xl font-bold text-text mb-4">{relatedLendersLabel}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {similarLenders.map(similar => (
-          <LenderCard lender={similar} />
+        {relatedLenders.map(related => (
+          <LenderCard lender={related} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Related Financial Wellness Guides -->
+  {relatedWellnessGuides.length > 0 && (
+    <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+      <h2 class="text-lg font-bold text-text mb-3">Financial Wellness Guides</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {relatedWellnessGuides.map(guide => (
+          <a href={`/financial-wellness/${guide.slug}/`} class="glass-card p-4 hover:border-primary transition-colors group">
+            <h3 class="text-sm font-semibold text-text group-hover:text-primary transition-colors line-clamp-2">{guide.title}</h3>
+            <p class="mt-1 text-xs text-muted line-clamp-2">{guide.description}</p>
+            <span class="mt-2 inline-block text-xs text-primary font-medium">Read guide &rarr;</span>
+          </a>
         ))}
       </div>
     </section>
