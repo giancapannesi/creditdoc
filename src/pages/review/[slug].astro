@@ -107,38 +107,61 @@ if (lender.website_url?.trim()) qualityScore += 1;
 if ((lender.google_reviews_count || 0) > 0) qualityScore += 1;
 const isSkeleton = qualityScore < 3;
 
-const jsonLd = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'FinancialProduct',
-    name: lender.name,
-    description: lender.description_short,
-    ...(lender.website_url ? { url: lender.website_url } : {}),
-    provider: {
-      '@type': 'Organization',
-      name: lender.name,
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: lender.company_info.city,
-        addressRegion: lender.company_info.state,
-      },
+// Build FinancialService (LocalBusiness subtype) — proper schema for financial services
+const financialService: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': 'FinancialService',
+  name: lender.name,
+  description: lender.description_short,
+  url: lender.website_url?.trim() ? lender.website_url : `https://creditdoc.co/review/${lender.slug}/`,
+};
+
+// Address (always have city/state from data)
+if (lender.company_info?.city || lender.company_info?.state) {
+  const addr: Record<string, string> = { '@type': 'PostalAddress' };
+  if (lender.company_info.address) addr.streetAddress = lender.company_info.address;
+  if (lender.company_info.city) addr.addressLocality = lender.company_info.city;
+  if (lender.company_info.state) addr.addressRegion = lender.company_info.state;
+  if (lender.company_info.zip) addr.postalCode = lender.company_info.zip;
+  addr.addressCountry = 'US';
+  financialService.address = addr;
+}
+
+// Phone
+if (lender.company_info?.phone) {
+  financialService.telephone = lender.company_info.phone;
+}
+
+// AggregateRating from Google Maps data (more trustworthy than single review)
+if (lender.rating > 0 && lender.rating <= 5 && (lender.google_reviews_count || 0) > 0) {
+  financialService.aggregateRating = {
+    '@type': 'AggregateRating',
+    ratingValue: lender.rating.toString(),
+    bestRating: '5',
+    worstRating: '1',
+    reviewCount: lender.google_reviews_count.toString(),
+  };
+} else if (lender.rating > 0 && lender.rating <= 5) {
+  // Fall back to single review if no review count
+  financialService.review = {
+    '@type': 'Review',
+    author: { '@type': 'Organization', name: 'CreditDoc' },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: lender.rating.toString(),
+      bestRating: '5',
+      worstRating: '1',
     },
-    ...(lender.rating > 0 && lender.rating <= 5 ? {
-      review: {
-        '@type': 'Review',
-        author: {
-          '@type': 'Organization',
-          name: 'CreditDoc',
-        },
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: lender.rating.toString(),
-          bestRating: '5',
-          worstRating: '1',
-        },
-      },
-    } : {}),
-  },
+  };
+}
+
+// Price range hint
+if (lender.pricing?.monthly_price > 0) {
+  financialService.priceRange = `$${lender.pricing.monthly_price}/mo`;
+}
+
+const jsonLd = [
+  financialService,
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

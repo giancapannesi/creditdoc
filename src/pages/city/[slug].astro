@@ -56,6 +56,19 @@ const jsonLd = [
       }
     }
   },
+  ...(topLenders.length > 0 ? [{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `Top-Rated Financial Services in ${cityInfo.city}, ${cityInfo.stateAbbr}`,
+    "itemListOrder": "https://schema.org/ItemListOrderDescending",
+    "numberOfItems": topLenders.length,
+    "itemListElement": topLenders.map((l: any, i: number) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": l.name,
+      "url": `https://creditdoc.co/review/${l.slug}/`,
+    })),
+  }] : []),
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

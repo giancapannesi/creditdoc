@@ -75,15 +75,38 @@ const whyCreditDoc = [
   },
 ];
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'CreditDoc',
-  url: 'https://creditdoc.co',
-  logo: 'https://creditdoc.co/favicon.svg',
-  description: 'Unbiased credit repair company reviews and comparisons. We diagnose the fine print so you don\'t have to.',
-  sameAs: [],
-};
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'CreditDoc',
+    url: 'https://creditdoc.co',
+    logo: 'https://creditdoc.co/favicon.svg',
+    description: 'Unbiased credit repair company reviews and comparisons. We diagnose the fine print so you don\'t have to.',
+    founder: {
+      '@type': 'Person',
+      name: 'Jammi Capannesi',
+      jobTitle: 'Consumer Finance Specialist',
+      description: 'MBA from Warwick Business School with 15+ years in payments, lending, and risk management.',
+      url: 'https://creditdoc.co/about/',
+    },
+    sameAs: [],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'CreditDoc',
+    url: 'https://creditdoc.co',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://creditdoc.co/search/?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  },
+];
 ---
 
 <BaseLayout
