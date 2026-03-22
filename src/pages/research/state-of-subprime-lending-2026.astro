@@ -1,0 +1,368 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllLenders, getStatesWithLenders, getStateData, getCitiesWithLenders } from '../../utils/data';
+
+const allLenders = getAllLenders();
+const states = getStatesWithLenders(1);
+const stateData = getStateData();
+const cities = getCitiesWithLenders(5);
+
+// Compute report statistics
+const totalLenders = allLenders.length;
+const enrichedCount = allLenders.filter(l => l.has_been_enriched).length;
+
+// Category distribution
+const catCounts: Record<string, number> = {};
+for (const l of allLenders) {
+  catCounts[l.category] = (catCounts[l.category] || 0) + 1;
+}
+const topCategories = Object.entries(catCounts).sort((a, b) => b[1] - a[1]);
+
+// State-level analysis
+const stateStats = states.map(s => {
+  const sd = stateData[s.abbr];
+  return {
+    ...s,
+    data: sd,
+    paydayStatus: sd?.payday_loan_status || 'Unknown',
+    creditScore: sd?.avg_credit_score || 0,
+    povertyRate: sd?.poverty_rate || 0,
+    unbankedRate: sd?.unbanked_rate || 0,
+    medianIncome: sd?.median_household_income || 0,
+  };
+}).filter(s => s.data);
+
+// Payday lending analysis
+const paydayBanned = stateStats.filter(s => s.paydayStatus === 'Banned');
+const paydayRestricted = stateStats.filter(s => s.paydayStatus === 'Restricted');
+const paydayLegal = stateStats.filter(s => s.paydayStatus !== 'Banned' && s.paydayStatus !== 'Restricted');
+
+// Credit score extremes
+const sortedByCredit = [...stateStats].sort((a, b) => b.creditScore - a.creditScore);
+const highestCreditStates = sortedByCredit.slice(0, 5);
+const lowestCreditStates = sortedByCredit.slice(-5).reverse();
+
+// Poverty rate extremes
+const sortedByPoverty = [...stateStats].sort((a, b) => b.povertyRate - a.povertyRate);
+const highestPovertyStates = sortedByPoverty.slice(0, 5);
+
+// Unbanked extremes
+const sortedByUnbanked = [...stateStats].sort((a, b) => b.unbankedRate - a.unbankedRate);
+const highestUnbankedStates = sortedByUnbanked.slice(0, 5);
+
+// Lenders per capita analysis
+const lendersPerCapita = stateStats
+  .filter(s => s.data?.population > 0)
+  .map(s => ({ ...s, perCapita: s.lenderCount / s.data.population * 100000 }))
+  .sort((a, b) => b.perCapita - a.perCapita);
+
+const avgCreditScore = Math.round(stateStats.reduce((s, st) => s + st.creditScore, 0) / stateStats.length);
+const avgPovertyRate = (stateStats.reduce((s, st) => s + st.povertyRate, 0) / stateStats.length).toFixed(1);
+const avgUnbankedRate = (stateStats.reduce((s, st) => s + st.unbankedRate, 0) / stateStats.length).toFixed(1);
+
+const title = "State of Subprime Lending in America 2026 — CreditDoc Research";
+const description = `Original research: analysis of ${totalLenders.toLocaleString()} consumer lenders across 50 states. Credit scores, payday lending laws, poverty rates, and financial access by state.`;
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "State of Subprime Lending in America 2026",
+    "description": description,
+    "url": "https://creditdoc.co/research/state-of-subprime-lending-2026/",
+    "datePublished": "2026-03-22",
+    "dateModified": "2026-03-22",
+    "author": { "@type": "Organization", "name": "CreditDoc", "url": "https://creditdoc.co" },
+    "publisher": { "@type": "Organization", "name": "CreditDoc", "url": "https://creditdoc.co" },
+    "mainEntityOfPage": "https://creditdoc.co/research/state-of-subprime-lending-2026/"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://creditdoc.co/" },
+      { "@type": "ListItem", "position": 2, "name": "Research", "item": "https://creditdoc.co/research/" },
+      { "@type": "ListItem", "position": 3, "name": "State of Subprime Lending 2026" }
+    ]
+  }
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <nav class="max-w-5xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/press/" class="hover:text-primary transition-colors">Research</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">State of Subprime Lending 2026</li>
+    </ol>
+  </nav>
+
+  <article class="max-w-5xl mx-auto px-4 py-8">
+    <!-- Report Header -->
+    <header class="mb-10">
+      <span class="inline-block rounded-full bg-primary-light px-3 py-1 text-xs font-semibold text-primary uppercase tracking-wider mb-4">CreditDoc Research</span>
+      <h1 class="text-3xl md:text-4xl font-bold text-text mb-3 leading-tight">
+        State of Subprime Lending<br class="hidden sm:block"/> in America 2026
+      </h1>
+      <p class="text-lg text-muted max-w-2xl">
+        An analysis of {totalLenders.toLocaleString()} consumer lending companies across 50 states, examining credit access, payday lending regulations, and financial vulnerability by state.
+      </p>
+      <div class="flex items-center gap-4 mt-4 text-xs text-muted">
+        <span>Published: March 2026</span>
+        <span>|</span>
+        <span>Sources: FDIC, NCUA, HUD, CFPB, Census Bureau</span>
+      </div>
+    </header>
+
+    <!-- Key Findings -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-text mb-6">Key Findings</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="glass-card p-5 text-center">
+          <p class="text-3xl font-bold text-primary">{totalLenders.toLocaleString()}</p>
+          <p class="text-sm text-muted mt-1">Consumer Lending Companies</p>
+          <p class="text-xs text-muted mt-0.5">across all 50 states</p>
+        </div>
+        <div class="glass-card p-5 text-center">
+          <p class="text-3xl font-bold text-text">{paydayBanned.length}</p>
+          <p class="text-sm text-muted mt-1">States Ban Payday Lending</p>
+          <p class="text-xs text-muted mt-0.5">{paydayRestricted.length} more with 36% APR caps</p>
+        </div>
+        <div class="glass-card p-5 text-center">
+          <p class="text-3xl font-bold text-text">{avgCreditScore}</p>
+          <p class="text-sm text-muted mt-1">Average State Credit Score</p>
+          <p class="text-xs text-muted mt-0.5">range: {lowestCreditStates[0]?.creditScore}–{highestCreditStates[0]?.creditScore}</p>
+        </div>
+        <div class="glass-card p-5 text-center">
+          <p class="text-3xl font-bold text-text">{avgUnbankedRate}%</p>
+          <p class="text-sm text-muted mt-1">Average Unbanked Rate</p>
+          <p class="text-xs text-muted mt-0.5">~26 million Americans</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Payday Lending Landscape -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-text mb-4">The Payday Lending Landscape</h2>
+      <p class="text-muted mb-6">
+        Payday lending remains one of the most contentious issues in consumer finance. Our analysis of state-by-state regulations reveals a nation divided on how to protect consumers from high-cost lending.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="glass-card p-5 border-l-4 border-positive">
+          <h3 class="font-bold text-text mb-2">Banned ({paydayBanned.length} states)</h3>
+          <p class="text-sm text-muted mb-3">These states prohibit payday lending through outright bans or strict usury caps.</p>
+          <div class="flex flex-wrap gap-1">
+            {paydayBanned.map(s => (
+              <a href={`/state/${s.slug}/`} class="text-xs bg-positive-light text-positive px-2 py-0.5 rounded hover:underline">{s.abbr}</a>
+            ))}
+          </div>
+        </div>
+        <div class="glass-card p-5 border-l-4 border-warning">
+          <h3 class="font-bold text-text mb-2">Restricted ({paydayRestricted.length} states)</h3>
+          <p class="text-sm text-muted mb-3">Reformed with 36% APR caps or significant consumer protections.</p>
+          <div class="flex flex-wrap gap-1">
+            {paydayRestricted.map(s => (
+              <a href={`/state/${s.slug}/`} class="text-xs bg-warning-light text-warning px-2 py-0.5 rounded hover:underline">{s.abbr}</a>
+            ))}
+          </div>
+        </div>
+        <div class="glass-card p-5 border-l-4 border-negative">
+          <h3 class="font-bold text-text mb-2">Legal ({paydayLegal.length} states)</h3>
+          <p class="text-sm text-muted mb-3">Payday lending permitted with varying levels of regulation.</p>
+          <div class="flex flex-wrap gap-1">
+            {paydayLegal.map(s => (
+              <a href={`/state/${s.slug}/`} class="text-xs bg-negative-light text-negative px-2 py-0.5 rounded hover:underline">{s.abbr}</a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Credit Score Analysis -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-text mb-4">Credit Scores by State</h2>
+      <p class="text-muted mb-6">
+        Average credit scores vary significantly across states, often correlating with economic indicators like poverty rate and median household income.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="glass-card p-5">
+          <h3 class="font-semibold text-text mb-3 flex items-center gap-2">
+            <svg class="w-4 h-4 text-positive" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z" clip-rule="evenodd"/></svg>
+            Highest Credit Scores
+          </h3>
+          <div class="space-y-2">
+            {highestCreditStates.map((s, i) => (
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-muted w-4">{i + 1}.</span>
+                  <a href={`/state/${s.slug}/`} class="text-sm text-text hover:text-primary transition-colors">{s.name}</a>
+                </div>
+                <span class="text-sm font-semibold text-positive">{s.creditScore}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="glass-card p-5">
+          <h3 class="font-semibold text-text mb-3 flex items-center gap-2">
+            <svg class="w-4 h-4 text-negative" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd"/></svg>
+            Lowest Credit Scores
+          </h3>
+          <div class="space-y-2">
+            {lowestCreditStates.map((s, i) => (
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-muted w-4">{i + 1}.</span>
+                  <a href={`/state/${s.slug}/`} class="text-sm text-text hover:text-primary transition-colors">{s.name}</a>
+                </div>
+                <span class="text-sm font-semibold text-negative">{s.creditScore}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Financial Vulnerability -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-text mb-4">Financial Vulnerability by State</h2>
+      <p class="text-muted mb-6">
+        High poverty rates and lack of banking access create conditions where consumers are more likely to turn to alternative financial services — including high-cost payday loans and credit repair companies.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="glass-card p-5">
+          <h3 class="font-semibold text-text mb-3">Highest Poverty Rates</h3>
+          <div class="space-y-2">
+            {highestPovertyStates.map((s, i) => (
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-muted w-4">{i + 1}.</span>
+                  <a href={`/state/${s.slug}/`} class="text-sm text-text hover:text-primary transition-colors">{s.name}</a>
+                </div>
+                <span class="text-sm font-semibold text-negative">{s.povertyRate}%</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="glass-card p-5">
+          <h3 class="font-semibold text-text mb-3">Highest Unbanked Rates</h3>
+          <div class="space-y-2">
+            {highestUnbankedStates.map((s, i) => (
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-muted w-4">{i + 1}.</span>
+                  <a href={`/state/${s.slug}/`} class="text-sm text-text hover:text-primary transition-colors">{s.name}</a>
+                </div>
+                <span class="text-sm font-semibold text-negative">{s.unbankedRate}%</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lender Density -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-text mb-4">Consumer Lender Density</h2>
+      <p class="text-muted mb-6">
+        The number of consumer lending companies per 100,000 residents reveals where the lending industry is most concentrated — and potentially where consumers face the most aggressive marketing.
+      </p>
+
+      <div class="glass-card p-5">
+        <h3 class="font-semibold text-text mb-3">Most Lenders per 100K Residents</h3>
+        <div class="space-y-3">
+          {lendersPerCapita.slice(0, 10).map((s, i) => (
+            <div class="flex items-center gap-3">
+              <span class="text-xs text-muted w-5">{i + 1}.</span>
+              <a href={`/state/${s.slug}/`} class="text-sm text-text hover:text-primary transition-colors w-32 flex-shrink-0">{s.name}</a>
+              <div class="flex-1 bg-bg-alt rounded-full h-4 overflow-hidden">
+                <div
+                  class="h-full bg-primary/60 rounded-full"
+                  style={`width: ${Math.min(100, (s.perCapita / lendersPerCapita[0].perCapita) * 100)}%`}
+                ></div>
+              </div>
+              <span class="text-sm font-semibold text-text w-16 text-right">{s.perCapita.toFixed(1)}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-xs text-muted mt-3">Lenders per 100,000 residents. Based on CreditDoc database of {totalLenders.toLocaleString()} companies.</p>
+      </div>
+    </section>
+
+    <!-- Category Breakdown -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-text mb-4">Industry Breakdown</h2>
+      <p class="text-muted mb-6">
+        Consumer lending spans multiple categories, from credit repair to emergency cash services. Here's how the industry breaks down nationally.
+      </p>
+
+      <div class="glass-card p-5">
+        <div class="space-y-3">
+          {topCategories.map(([cat, count]) => (
+            <div class="flex items-center gap-3">
+              <a href={`/categories/${cat}/`} class="text-sm text-text hover:text-primary transition-colors w-40 flex-shrink-0 capitalize">
+                {cat.replace(/-/g, ' ')}
+              </a>
+              <div class="flex-1 bg-bg-alt rounded-full h-4 overflow-hidden">
+                <div
+                  class="h-full bg-primary/50 rounded-full"
+                  style={`width: ${(count / topCategories[0][1]) * 100}%`}
+                ></div>
+              </div>
+              <span class="text-sm text-muted w-20 text-right">{count.toLocaleString()}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-text mb-4">Methodology</h2>
+      <div class="glass-card p-5 text-sm text-muted space-y-3">
+        <p>
+          This report draws on CreditDoc's proprietary database of {totalLenders.toLocaleString()} consumer lending companies, built by cross-referencing multiple authoritative sources:
+        </p>
+        <ul class="ml-4 list-disc space-y-1">
+          <li><strong class="text-text">FDIC (BankFind Suite):</strong> All FDIC-insured banking institutions</li>
+          <li><strong class="text-text">NCUA:</strong> Federally insured credit unions</li>
+          <li><strong class="text-text">HUD:</strong> Approved housing counseling agencies</li>
+          <li><strong class="text-text">CFPB:</strong> Consumer complaint data and enforcement actions</li>
+          <li><strong class="text-text">Census Bureau ACS:</strong> Median household income, poverty rates</li>
+          <li><strong class="text-text">FDIC Household Banking Survey:</strong> Unbanked and underbanked rates</li>
+          <li><strong class="text-text">Experian:</strong> State-level average credit scores</li>
+          <li><strong class="text-text">State regulatory databases:</strong> Usury caps, payday lending laws, consumer protection agencies</li>
+        </ul>
+        <p>
+          State economic data represents the most recent available estimates. Credit scores are approximate state averages. Lender counts reflect companies physically located in each state, not companies that may serve that state remotely.
+        </p>
+        <p>
+          For questions about methodology or data access, contact <a href="mailto:contact@creditdoc.co" class="text-primary hover:underline">contact@creditdoc.co</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="glass-card p-6 bg-gradient-to-br from-primary/5 to-primary/10 text-center">
+      <h2 class="text-lg font-bold text-text mb-2">Explore the Full Directory</h2>
+      <p class="text-sm text-muted mb-4 max-w-lg mx-auto">
+        Browse {totalLenders.toLocaleString()} consumer lending companies by state, city, or category. Each profile includes BBB ratings, pricing, and independent analysis.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <a href="/state/" class="text-sm font-medium text-white bg-primary rounded-lg px-5 py-2.5 hover:bg-primary-hover transition-colors">Browse by State</a>
+        <a href="/city/" class="text-sm font-medium text-primary border border-primary rounded-lg px-5 py-2.5 hover:bg-primary-light transition-colors">Browse by City</a>
+        <a href="/tools/borrowing-power-quiz/" class="text-sm font-medium text-primary border border-primary rounded-lg px-5 py-2.5 hover:bg-primary-light transition-colors">Take the Quiz</a>
+      </div>
+    </section>
+
+    <!-- Citation -->
+    <div class="mt-8 text-center text-xs text-muted">
+      <p>To cite this report: CreditDoc, "State of Subprime Lending in America 2026," March 2026, creditdoc.co/research/state-of-subprime-lending-2026/</p>
+      <p class="mt-1"><a href="/press/" class="text-primary hover:underline">Press & media resources</a></p>
+    </div>
+  </article>
+</BaseLayout>
