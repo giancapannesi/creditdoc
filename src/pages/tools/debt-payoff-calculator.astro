@@ -1,0 +1,580 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = "Debt Payoff Calculator — Snowball vs Avalanche | CreditDoc";
+const description = "Compare snowball vs avalanche debt payoff strategies. See your debt-free date, total interest paid, and monthly payment plan. Free, no signup required.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Debt Payoff Calculator",
+  "description": description,
+  "url": "https://creditdoc.co/tools/debt-payoff-calculator/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": {
+    "@type": "Person",
+    "name": "CreditDoc Editorial Team",
+    "jobTitle": "Chief Executive",
+    "description": "International consumer finance executive with 15+ years of experience across multiple continents. MBA from a globally ranked university."
+  },
+  "publisher": { "@type": "Organization", "name": "CreditDoc", "url": "https://creditdoc.co" }
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the snowball method?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The debt snowball method pays off debts from smallest balance to largest, regardless of interest rate. Each time a debt is paid off, you roll that payment into the next smallest debt. This method provides psychological wins that keep you motivated."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the avalanche method?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The debt avalanche method pays off debts from highest interest rate to lowest. This mathematically saves you the most money in interest charges over time, though it may take longer to see individual debts eliminated."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which method saves more money?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The avalanche method always saves more in total interest paid. However, research shows the snowball method has higher completion rates because quick wins keep people motivated. The best method is the one you'll stick with."
+      }
+    }
+  ]
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://creditdoc.co/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://creditdoc.co/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Debt Payoff Calculator", "item": "https://creditdoc.co/tools/debt-payoff-calculator/" }
+  ]
+};
+---
+
+<BaseLayout title={title} description={description} jsonLd={[jsonLd, faqJsonLd, breadcrumbJsonLd]}>
+  <nav class="max-w-4xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/tools/" class="hover:text-primary transition-colors">Tools</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">Debt Payoff Calculator</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 bg-primary-light text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-4">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" /></svg>
+        Free &middot; Instant Results &middot; No Signup
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">Debt Payoff Calculator</h1>
+      <p class="text-lg text-muted max-w-2xl mx-auto">Enter your debts below and see exactly when you'll be debt-free. Compare snowball vs. avalanche to find the strategy that works for you.</p>
+    </div>
+
+    <!-- Debt Input Form -->
+    <div class="glass-card p-6 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-bold text-text">Your Debts</h2>
+        <button id="add-debt-btn" class="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-hover transition-colors">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          Add Debt
+        </button>
+      </div>
+
+      <div id="debts-container" class="space-y-3">
+        <!-- Debt rows inserted here by JS -->
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-border">
+        <label class="block text-sm font-medium text-text mb-2">Extra monthly payment (beyond minimums)</label>
+        <div class="relative max-w-xs">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted">$</span>
+          <input id="extra-payment" type="number" min="0" step="50" value="100" class="w-full pl-7 pr-4 py-2.5 rounded-lg border border-border bg-white text-text focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" />
+        </div>
+        <p class="text-xs text-muted mt-1.5">This amount is applied to the target debt each month after all minimums are paid.</p>
+      </div>
+
+      <button id="calculate-btn" class="mt-6 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-semibold px-8 py-3 rounded-xl transition-all shadow-lg hover:shadow-xl">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" /></svg>
+        Calculate My Plan
+      </button>
+    </div>
+
+    <!-- Results -->
+    <div id="results-section" class="hidden">
+      <!-- Strategy Comparison Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <!-- Snowball -->
+        <div id="snowball-card" class="glass-card p-6 border-2 border-transparent">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" /></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text">Snowball Method</h3>
+              <p class="text-xs text-muted">Smallest balance first</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-muted">Debt-free in</span>
+              <span id="snowball-months" class="font-bold text-text text-lg"></span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-muted">Total interest</span>
+              <span id="snowball-interest" class="font-bold text-negative"></span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-muted">Total paid</span>
+              <span id="snowball-total" class="font-bold text-text"></span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-muted">First debt eliminated</span>
+              <span id="snowball-first-win" class="font-bold text-positive text-sm"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Avalanche -->
+        <div id="avalanche-card" class="glass-card p-6 border-2 border-transparent">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-primary-light flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-text">Avalanche Method</h3>
+              <p class="text-xs text-muted">Highest interest first</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-muted">Debt-free in</span>
+              <span id="avalanche-months" class="font-bold text-text text-lg"></span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-muted">Total interest</span>
+              <span id="avalanche-interest" class="font-bold text-negative"></span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-muted">Total paid</span>
+              <span id="avalanche-total" class="font-bold text-text"></span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-muted">First debt eliminated</span>
+              <span id="avalanche-first-win" class="font-bold text-positive text-sm"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Savings Highlight -->
+      <div id="savings-banner" class="glass-card p-5 mb-6 bg-positive-light border-positive/20 text-center hidden">
+        <p class="text-sm font-medium text-positive" id="savings-text"></p>
+      </div>
+
+      <!-- Payment Schedule -->
+      <div class="glass-card p-6 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-text">Monthly Payment Schedule</h3>
+          <div class="flex gap-2">
+            <button id="show-snowball-schedule" class="text-xs font-medium px-3 py-1.5 rounded-lg bg-accent/10 text-accent transition-colors">Snowball</button>
+            <button id="show-avalanche-schedule" class="text-xs font-medium px-3 py-1.5 rounded-lg bg-bg-alt text-muted transition-colors">Avalanche</button>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table id="schedule-table" class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-border">
+                <th class="text-left py-2 pr-4 text-muted font-medium">Month</th>
+                <th class="text-left py-2 pr-4 text-muted font-medium">Target Debt</th>
+                <th class="text-right py-2 pr-4 text-muted font-medium">Payment</th>
+                <th class="text-right py-2 pr-4 text-muted font-medium">Interest</th>
+                <th class="text-right py-2 text-muted font-medium">Remaining</th>
+              </tr>
+            </thead>
+            <tbody id="schedule-body"></tbody>
+          </table>
+        </div>
+        <button id="show-more-schedule" class="mt-3 text-sm text-primary hover:text-primary-hover font-medium hidden">Show more months...</button>
+      </div>
+
+      <!-- Recommendation -->
+      <div class="glass-card p-6 mb-6" id="recommendation-box">
+        <h3 class="font-bold text-text mb-2 flex items-center gap-2">
+          <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
+          Our Recommendation
+        </h3>
+        <p id="recommendation-text" class="text-sm text-muted leading-relaxed"></p>
+      </div>
+
+      <!-- CTA -->
+      <div class="glass-card p-6 mb-6 bg-gradient-to-r from-primary-light to-white">
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+          <div class="flex-1">
+            <h3 class="font-bold text-text">Struggling with high-interest debt?</h3>
+            <p class="text-sm text-muted mt-1">A debt relief company could negotiate lower balances. Compare top-rated options.</p>
+          </div>
+          <a href="/categories/debt-relief/" class="inline-flex items-center gap-2 bg-primary text-white font-medium px-5 py-2.5 rounded-xl hover:bg-primary-hover transition-colors flex-shrink-0">
+            Compare Options
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="bg-bg-alt border border-border rounded-xl p-4 mb-6">
+        <p class="text-xs text-muted leading-relaxed">
+          <strong>Disclaimer:</strong> This calculator provides estimates for educational purposes only. Actual payoff timelines depend on your lender terms, payment consistency, and any changes to your debt balances. This is not financial advice. <a href="/disclosure/" class="text-primary hover:underline">Full disclosure</a>.
+        </p>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="mt-12 border-t border-border pt-10">
+      <h2 class="text-2xl font-bold text-text mb-6">How It Works</h2>
+      <div class="space-y-4">
+        <details class="glass-card p-4 group">
+          <summary class="font-semibold text-text cursor-pointer flex items-center justify-between">
+            What is the snowball method?
+            <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-muted mt-3 text-sm leading-relaxed">The debt snowball method pays off debts from smallest balance to largest, regardless of interest rate. Each time a debt is paid off, you roll that payment into the next smallest debt. This method provides psychological wins that keep you motivated.</p>
+        </details>
+        <details class="glass-card p-4 group">
+          <summary class="font-semibold text-text cursor-pointer flex items-center justify-between">
+            What is the avalanche method?
+            <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-muted mt-3 text-sm leading-relaxed">The debt avalanche method pays off debts from highest interest rate to lowest. This mathematically saves you the most money in interest charges over time, though it may take longer to see individual debts eliminated.</p>
+        </details>
+        <details class="glass-card p-4 group">
+          <summary class="font-semibold text-text cursor-pointer flex items-center justify-between">
+            Which method saves more money?
+            <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-muted mt-3 text-sm leading-relaxed">The avalanche method always saves more in total interest paid. However, research from Northwestern University shows the snowball method has higher completion rates because quick wins keep people motivated. The best method is the one you'll stick with.</p>
+        </details>
+        <details class="glass-card p-4 group">
+          <summary class="font-semibold text-text cursor-pointer flex items-center justify-between">
+            How much extra should I pay?
+            <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-muted mt-3 text-sm leading-relaxed">Even $50 extra per month makes a significant difference. On a $10,000 debt at 20% APR, adding $100/month to the minimum cuts payoff time from 9+ years to under 3 years and saves over $7,000 in interest. Use the calculator above to see your specific numbers.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('debts-container');
+      const addBtn = document.getElementById('add-debt-btn');
+      const calcBtn = document.getElementById('calculate-btn');
+      const resultsSection = document.getElementById('results-section');
+      let debtId = 0;
+      let snowballSchedule = [];
+      let avalancheSchedule = [];
+      let activeSchedule = 'snowball';
+      let scheduleLimit = 12;
+
+      // Presets for common debts
+      const presets = [
+        { name: 'Credit Card', balance: 5000, rate: 22.99, minimum: 100 },
+        { name: 'Car Loan', balance: 15000, rate: 6.5, minimum: 350 },
+        { name: 'Student Loan', balance: 25000, rate: 5.5, minimum: 280 },
+      ];
+
+      function createDebtRow(preset) {
+        const id = debtId++;
+        const div = document.createElement('div');
+        div.className = 'debt-row grid grid-cols-12 gap-2 items-end p-3 rounded-xl bg-bg-alt';
+        div.dataset.id = id;
+        div.innerHTML = `
+          <div class="col-span-12 sm:col-span-3">
+            <label class="block text-xs text-muted mb-1">Debt Name</label>
+            <input type="text" class="debt-name w-full px-3 py-2 rounded-lg border border-border bg-white text-sm text-text focus:border-primary focus:ring-1 focus:ring-primary outline-none" value="${preset?.name || ''}" placeholder="e.g., Chase Visa" />
+          </div>
+          <div class="col-span-4 sm:col-span-3">
+            <label class="block text-xs text-muted mb-1">Balance</label>
+            <div class="relative">
+              <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted text-sm">$</span>
+              <input type="number" class="debt-balance w-full pl-6 pr-2 py-2 rounded-lg border border-border bg-white text-sm text-text focus:border-primary focus:ring-1 focus:ring-primary outline-none" min="0" step="100" value="${preset?.balance || ''}" placeholder="5000" />
+            </div>
+          </div>
+          <div class="col-span-3 sm:col-span-2">
+            <label class="block text-xs text-muted mb-1">APR %</label>
+            <input type="number" class="debt-rate w-full px-3 py-2 rounded-lg border border-border bg-white text-sm text-text focus:border-primary focus:ring-1 focus:ring-primary outline-none" min="0" max="99" step="0.01" value="${preset?.rate || ''}" placeholder="22.99" />
+          </div>
+          <div class="col-span-4 sm:col-span-3">
+            <label class="block text-xs text-muted mb-1">Min Payment</label>
+            <div class="relative">
+              <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted text-sm">$</span>
+              <input type="number" class="debt-minimum w-full pl-6 pr-2 py-2 rounded-lg border border-border bg-white text-sm text-text focus:border-primary focus:ring-1 focus:ring-primary outline-none" min="0" step="10" value="${preset?.minimum || ''}" placeholder="100" />
+            </div>
+          </div>
+          <div class="col-span-1 flex items-center justify-center">
+            <button class="remove-debt w-8 h-8 rounded-lg text-muted hover:text-negative hover:bg-negative-light transition-colors flex items-center justify-center" title="Remove">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+          </div>`;
+        container.appendChild(div);
+
+        div.querySelector('.remove-debt').addEventListener('click', () => {
+          div.remove();
+        });
+      }
+
+      // Initialize with 3 preset debts
+      presets.forEach(p => createDebtRow(p));
+
+      addBtn.addEventListener('click', () => createDebtRow(null));
+
+      calcBtn.addEventListener('click', () => {
+        const debts = getDebts();
+        if (debts.length === 0) return;
+
+        const extraPayment = parseFloat(document.getElementById('extra-payment').value) || 0;
+
+        const snowball = simulate(debts.map(d => ({...d})), extraPayment, 'snowball');
+        const avalanche = simulate(debts.map(d => ({...d})), extraPayment, 'avalanche');
+
+        snowballSchedule = snowball.schedule;
+        avalancheSchedule = avalanche.schedule;
+
+        renderComparison(snowball, avalanche);
+        resultsSection.classList.remove('hidden');
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // GA4
+        if (typeof gtag === 'function') {
+          gtag('event', 'calculator_used', { event_category: 'engagement', event_label: 'debt_payoff', total_debt: debts.reduce((s, d) => s + d.balance, 0) });
+        }
+      });
+
+      function getDebts() {
+        const rows = container.querySelectorAll('.debt-row');
+        const debts = [];
+        rows.forEach(row => {
+          const name = row.querySelector('.debt-name').value || 'Debt ' + (debts.length + 1);
+          const balance = parseFloat(row.querySelector('.debt-balance').value);
+          const rate = parseFloat(row.querySelector('.debt-rate').value);
+          const minimum = parseFloat(row.querySelector('.debt-minimum').value);
+          if (balance > 0 && rate >= 0 && minimum > 0) {
+            debts.push({ name, balance, rate: rate / 100, minimum });
+          }
+        });
+        return debts;
+      }
+
+      function simulate(debts, extraPayment, method) {
+        // Sort based on method
+        if (method === 'snowball') {
+          debts.sort((a, b) => a.balance - b.balance);
+        } else {
+          debts.sort((a, b) => b.rate - a.rate);
+        }
+
+        let month = 0;
+        let totalInterest = 0;
+        let totalPaid = 0;
+        const schedule = [];
+        let firstWin = null;
+        const maxMonths = 600; // 50 year cap
+
+        while (debts.some(d => d.balance > 0.01) && month < maxMonths) {
+          month++;
+          let extraRemaining = extraPayment;
+
+          // Pay interest on all debts, then minimums
+          for (const d of debts) {
+            if (d.balance <= 0.01) continue;
+            const interest = d.balance * (d.rate / 12);
+            d.balance += interest;
+            totalInterest += interest;
+          }
+
+          // Pay minimums first
+          for (const d of debts) {
+            if (d.balance <= 0.01) continue;
+            const payment = Math.min(d.minimum, d.balance);
+            d.balance -= payment;
+            totalPaid += payment;
+            if (d.balance <= 0.01 && !firstWin) {
+              firstWin = { name: d.name, month };
+            }
+          }
+
+          // Apply extra payment to target debt (first non-zero in sorted order)
+          for (const d of debts) {
+            if (d.balance <= 0.01 || extraRemaining <= 0) continue;
+            const payment = Math.min(extraRemaining, d.balance);
+            d.balance -= payment;
+            extraRemaining -= payment;
+            totalPaid += payment;
+            if (d.balance <= 0.01 && !firstWin) {
+              firstWin = { name: d.name, month };
+            }
+          }
+
+          // Also roll freed-up minimums to the next target
+          for (const d of debts) {
+            if (d.balance > 0.01) continue;
+            // This debt is paid off; its minimum goes to the next
+            const freedMin = d.minimum;
+            d.minimum = 0;
+            for (const d2 of debts) {
+              if (d2.balance <= 0.01) continue;
+              const rollPayment = Math.min(freedMin, d2.balance);
+              d2.balance -= rollPayment;
+              totalPaid += rollPayment;
+              break;
+            }
+          }
+
+          const totalRemaining = debts.reduce((s, d) => s + Math.max(0, d.balance), 0);
+          const targetDebt = debts.find(d => d.balance > 0.01);
+
+          schedule.push({
+            month,
+            targetName: targetDebt?.name || 'Done',
+            payment: debts.reduce((s, d) => s + (d.balance > 0.01 || month === 1 ? d.minimum : 0), 0) + extraPayment,
+            interest: debts.reduce((s, d) => s + d.balance * (d.rate / 12), 0),
+            remaining: totalRemaining,
+          });
+        }
+
+        return { months: month, totalInterest, totalPaid, schedule, firstWin };
+      }
+
+      function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+
+      function renderComparison(snowball, avalanche) {
+        document.getElementById('snowball-months').textContent = snowball.months + ' months (' + Math.floor(snowball.months / 12) + 'y ' + (snowball.months % 12) + 'm)';
+        document.getElementById('snowball-interest').textContent = fmt(snowball.totalInterest);
+        document.getElementById('snowball-total').textContent = fmt(snowball.totalPaid);
+        document.getElementById('snowball-first-win').textContent = snowball.firstWin ? snowball.firstWin.name + ' (month ' + snowball.firstWin.month + ')' : 'N/A';
+
+        document.getElementById('avalanche-months').textContent = avalanche.months + ' months (' + Math.floor(avalanche.months / 12) + 'y ' + (avalanche.months % 12) + 'm)';
+        document.getElementById('avalanche-interest').textContent = fmt(avalanche.totalInterest);
+        document.getElementById('avalanche-total').textContent = fmt(avalanche.totalPaid);
+        document.getElementById('avalanche-first-win').textContent = avalanche.firstWin ? avalanche.firstWin.name + ' (month ' + avalanche.firstWin.month + ')' : 'N/A';
+
+        // Highlight winner
+        const snowCard = document.getElementById('snowball-card');
+        const avaCard = document.getElementById('avalanche-card');
+        snowCard.classList.remove('border-accent', 'border-primary');
+        avaCard.classList.remove('border-accent', 'border-primary');
+
+        if (snowball.totalInterest < avalanche.totalInterest) {
+          snowCard.classList.add('border-accent');
+        } else {
+          avaCard.classList.add('border-primary');
+        }
+
+        // Savings banner
+        const diff = Math.abs(snowball.totalInterest - avalanche.totalInterest);
+        const banner = document.getElementById('savings-banner');
+        if (diff > 10) {
+          const winner = avalanche.totalInterest < snowball.totalInterest ? 'Avalanche' : 'Snowball';
+          document.getElementById('savings-text').textContent = `The ${winner} method saves you ${fmt(diff)} in interest! But remember — the snowball gives you quicker wins to stay motivated.`;
+          banner.classList.remove('hidden');
+        } else {
+          banner.classList.add('hidden');
+        }
+
+        // Recommendation
+        const recText = document.getElementById('recommendation-text');
+        if (diff < 100) {
+          recText.textContent = 'Both methods are nearly identical for your debt mix. Go with snowball for the motivational wins — you\'ll see your first debt disappear faster.';
+        } else if (avalanche.totalInterest < snowball.totalInterest) {
+          const monthDiff = snowball.firstWin && avalanche.firstWin ? snowball.firstWin.month - avalanche.firstWin.month : 0;
+          if (monthDiff < -3) {
+            recText.textContent = `Avalanche saves you ${fmt(diff)}, but snowball eliminates "${snowball.firstWin?.name}" ${Math.abs(monthDiff)} months sooner. If staying motivated is key, go snowball. If saving money matters more, go avalanche.`;
+          } else {
+            recText.textContent = `Avalanche is the clear winner here — it saves you ${fmt(diff)} in interest. The first-win timing is similar between both methods, so you get the savings without sacrificing motivation.`;
+          }
+        }
+
+        // Render schedule
+        activeSchedule = 'snowball';
+        scheduleLimit = 12;
+        renderSchedule();
+      }
+
+      function renderSchedule() {
+        const data = activeSchedule === 'snowball' ? snowballSchedule : avalancheSchedule;
+        const tbody = document.getElementById('schedule-body');
+        const showMore = document.getElementById('show-more-schedule');
+        tbody.innerHTML = '';
+
+        const displayed = data.slice(0, scheduleLimit);
+        displayed.forEach(row => {
+          const tr = document.createElement('tr');
+          tr.className = 'border-b border-border/50';
+          tr.innerHTML = `
+            <td class="py-2 pr-4 text-text">${row.month}</td>
+            <td class="py-2 pr-4 text-text">${row.targetName}</td>
+            <td class="py-2 pr-4 text-right text-text">${fmt(row.payment)}</td>
+            <td class="py-2 pr-4 text-right text-negative">${fmt(row.interest)}</td>
+            <td class="py-2 text-right font-medium text-text">${fmt(row.remaining)}</td>`;
+          tbody.appendChild(tr);
+        });
+
+        if (data.length > scheduleLimit) {
+          showMore.classList.remove('hidden');
+          showMore.textContent = `Show more (${data.length - scheduleLimit} remaining)...`;
+        } else {
+          showMore.classList.add('hidden');
+        }
+
+        // Toggle buttons
+        document.getElementById('show-snowball-schedule').className = activeSchedule === 'snowball'
+          ? 'text-xs font-medium px-3 py-1.5 rounded-lg bg-accent/10 text-accent transition-colors'
+          : 'text-xs font-medium px-3 py-1.5 rounded-lg bg-bg-alt text-muted transition-colors';
+        document.getElementById('show-avalanche-schedule').className = activeSchedule === 'avalanche'
+          ? 'text-xs font-medium px-3 py-1.5 rounded-lg bg-primary-light text-primary transition-colors'
+          : 'text-xs font-medium px-3 py-1.5 rounded-lg bg-bg-alt text-muted transition-colors';
+      }
+
+      document.getElementById('show-snowball-schedule').addEventListener('click', () => {
+        activeSchedule = 'snowball';
+        scheduleLimit = 12;
+        renderSchedule();
+      });
+      document.getElementById('show-avalanche-schedule').addEventListener('click', () => {
+        activeSchedule = 'avalanche';
+        scheduleLimit = 12;
+        renderSchedule();
+      });
+      document.getElementById('show-more-schedule').addEventListener('click', () => {
+        scheduleLimit += 24;
+        renderSchedule();
+      });
+    });
+  </script>
+
+  <style>
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+  </style>
+</BaseLayout>
