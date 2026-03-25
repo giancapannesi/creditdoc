@@ -28,11 +28,12 @@ const sorted = lenders;
     <tbody class="divide-y divide-border">
       {sorted.map((lender, i) => {
         const bbbClass = getBbbClass(lender.company_info.bbb_rating);
+        const isVerified = lender.verified_provider === true;
         return (
-          <tr class="hover:bg-bg-alt/50 transition-colors bg-white">
+          <tr class={`hover:bg-bg-alt/50 transition-colors ${isVerified ? 'bg-amber-50/40 border-l-2 border-l-amber-400' : 'bg-white'}`}>
             <!-- Rank -->
             <td class="py-4 px-4">
-              <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary-light text-primary text-xs font-bold">
+              <span class={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold ${isVerified ? 'bg-amber-100 text-amber-700' : 'bg-primary-light text-primary'}`}>
                 {i + 1}
               </span>
             </td>
@@ -40,17 +41,27 @@ const sorted = lenders;
             <!-- Provider (logo + name + description) -->
             <td class="py-4 px-4">
               <div class="flex items-center gap-3">
-                <div class="shrink-0 w-10 h-10 rounded-lg bg-bg-alt border border-border flex items-center justify-center overflow-hidden">
+                <div class={`shrink-0 w-10 h-10 rounded-lg border flex items-center justify-center overflow-hidden ${isVerified ? 'bg-amber-50 border-amber-200' : 'bg-bg-alt border-border'}`}>
                   {lender.logo_url ? (
                     <img src={lender.logo_url} alt={lender.name} class="w-7 h-7 object-contain" loading="lazy" />
                   ) : (
-                    <span class="text-xs font-bold text-primary">{lender.name.charAt(0)}</span>
+                    <span class={`text-xs font-bold ${isVerified ? 'text-amber-700' : 'text-primary'}`}>{lender.name.charAt(0)}</span>
                   )}
                 </div>
                 <div class="min-w-0">
-                  <a href={`/review/${lender.slug}/`} class="font-semibold text-text hover:text-primary transition-colors block truncate">
-                    {lender.name}
-                  </a>
+                  <div class="flex items-center gap-2">
+                    <a href={`/review/${lender.slug}/`} class="font-semibold text-text hover:text-primary transition-colors truncate">
+                      {lender.name}
+                    </a>
+                    {isVerified && (
+                      <span class="inline-flex items-center gap-1 rounded-full bg-amber-100 border border-amber-300 px-1.5 py-0.5 text-[10px] font-bold text-amber-800 uppercase tracking-wider flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/>
+                        </svg>
+                        Verified
+                      </span>
+                    )}
+                  </div>
                   <div class="mt-0.5">
                     <RatingStars rating={lender.rating} size="sm" />
                   </div>
