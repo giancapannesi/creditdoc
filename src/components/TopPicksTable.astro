@@ -8,7 +8,8 @@ interface Props {
 }
 
 const { lenders } = Astro.props;
-const sorted = [...lenders].sort((a, b) => b.rating - a.rating);
+// Use the order passed in (already sorted by caller)
+const sorted = lenders;
 ---
 
 <div class="overflow-x-auto -mx-4 sm:mx-0 rounded-xl border border-border">
