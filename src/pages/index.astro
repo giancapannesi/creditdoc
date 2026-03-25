@@ -10,7 +10,7 @@ const categories = getCategories();
 const specials = getSpecials().slice(0, 3);
 const wellnessGuides = getWellnessGuides().slice(0, 3);
 
-// Top Picks: only show enriched/editorial/verified profiles with real content
+// Top Picks: enriched profiles only, verified first, then by rating
 const topPicks = lenders
   .filter(l => {
     const ds = l.data_source || '';
@@ -18,7 +18,13 @@ const topPicks = lenders
     const hasContent = (l.description_long || '').length > 200;
     return (ds === 'enriched' || ds === 'editorial' || ds === 'verified' || enriched) && hasContent;
   })
-  .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+  .sort((a, b) => {
+    // Verified first, then editorial, then enriched
+    const tierA = a.data_source === 'verified' ? 3 : a.data_source === 'editorial' ? 2 : 1;
+    const tierB = b.data_source === 'verified' ? 3 : b.data_source === 'editorial' ? 2 : 1;
+    if (tierA !== tierB) return tierB - tierA;
+    return (b.rating || 0) - (a.rating || 0);
+  })
   .slice(0, 10);
 
 // Order categories for the 2x4 grid layout
