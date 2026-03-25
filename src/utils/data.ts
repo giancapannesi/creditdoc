@@ -173,7 +173,12 @@ export function getAllLenders(): Lender[] {
   _lendersCache = files.map(f => {
     const raw = fs.readFileSync(path.join(LENDERS_DIR, f), 'utf-8');
     return JSON.parse(raw) as Lender;
-  }).filter(l => l.review_status === 'published');
+  }).filter(l => {
+    // State-machine gate: only ready_for_index pages are built
+    if (l.processing_status) return l.processing_status === 'ready_for_index';
+    // Backward compatibility: if migration hasn't run yet, use old logic
+    return l.review_status === 'published';
+  });
   return _lendersCache;
 }
 

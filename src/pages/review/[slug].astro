@@ -119,24 +119,8 @@ const faqs = [
   }] : []),
 ].filter(faq => faq.answer && faq.answer.trim().length > 0);
 
-// Determine page quality — thin pages get noindex until enriched
-// Quality score: count unique data points beyond basic NAP (name/address/phone)
-// Enriched pages always pass. Government sources (FDIC/NCUA/HUD) get +2 bonus.
-// Threshold: need 3+ quality signals to be indexed. See CREDITDOC_MASTER_STRATEGY.md.
-const isEnriched = lender.has_been_enriched === true;
-const isGovSource = ['fdic', 'ncua', 'hud'].includes(lender.data_source);
-let qualityScore = 0;
-if (isEnriched) qualityScore += 5; // enriched = always indexed
-if (isGovSource) qualityScore += 2; // government data has inherent value
-if (lender.rating > 0 && lender.rating !== 5) qualityScore += 1; // real Google Maps rating
-if (lender.pros?.length > 0) qualityScore += 1;
-if (lender.typical_results_timeline?.trim()) qualityScore += 1;
-if (lender.services?.length >= 3) qualityScore += 1;
-if ((lender.description_long || '').length >= 200) qualityScore += 1;
-if (lender.cfpb_data) qualityScore += 1;
-if (lender.company_info?.bbb_rating && !['', 'N/A', 'NR'].includes(lender.company_info.bbb_rating)) qualityScore += 1;
-if (lender.website_url?.trim()) qualityScore += 1;
-if ((lender.google_reviews_count || 0) > 0) qualityScore += 1;
+// Quality score — persisted by the autonomous engine, fallback to 0
+const qualityScore = lender.quality_score ?? 0;
 const isSkeleton = qualityScore < 3;
 
 // Build FinancialService (LocalBusiness subtype) — proper schema for financial services
