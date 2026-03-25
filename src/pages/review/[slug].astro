@@ -122,6 +122,7 @@ const faqs = [
 // Quality score — persisted by the autonomous engine, fallback to 0
 const qualityScore = lender.quality_score ?? 0;
 const isSkeleton = qualityScore < 3;
+const isEnriched = lender.has_been_enriched === true || lender.data_source === 'enriched' || lender.data_source === 'editorial' || lender.data_source === 'verified';
 
 // Build FinancialService (LocalBusiness subtype) — proper schema for financial services
 const financialService: Record<string, any> = {
