@@ -149,7 +149,7 @@ if (lender.company_info?.phone) {
   financialService.telephone = lender.company_info.phone;
 }
 
-// AggregateRating from Google Maps data (more trustworthy than single review)
+// AggregateRating — only when we have real Google Maps review data
 if (lender.rating > 0 && lender.rating <= 5 && (lender.google_reviews_count || 0) > 0) {
   financialService.aggregateRating = {
     '@type': 'AggregateRating',
@@ -158,19 +158,9 @@ if (lender.rating > 0 && lender.rating <= 5 && (lender.google_reviews_count || 0
     worstRating: '1',
     reviewCount: lender.google_reviews_count.toString(),
   };
-} else if (lender.rating > 0 && lender.rating <= 5) {
-  // Fall back to single review if no review count
-  financialService.review = {
-    '@type': 'Review',
-    author: { '@type': 'Organization', name: 'CreditDoc' },
-    reviewRating: {
-      '@type': 'Rating',
-      ratingValue: lender.rating.toString(),
-      bestRating: '5',
-      worstRating: '1',
-    },
-  };
 }
+// No review markup for pages without real review count data —
+// fabricated single reviews trigger GSC "Invalid object type" errors
 
 // Price range hint
 if (lender.pricing?.monthly_price > 0) {
