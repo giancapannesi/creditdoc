@@ -111,7 +111,7 @@ const faqs = [
   },
   ...(hasPricing ? [{
     question: `How much does ${lender.name} cost?`,
-    answer: `${lender.name} plans start at ${formatPrice(lowestPrice)} per month${lender.pricing.setup_fee > 0 ? ` with a ${formatPrice(lender.pricing.setup_fee)} setup fee` : ' with no setup fee'}. ${lender.pricing.money_back_guarantee ? lender.pricing.guarantee_details : 'No money-back guarantee is offered.'}`,
+    answer: `${lender.name} plans start at ${formatPrice(lowestPrice)} per month${lender.pricing.setup_fee > 0 ? ` with a ${formatPrice(lender.pricing.setup_fee)} setup fee` : lender.pricing.first_work_fee > 0 ? ` with a ${formatPrice(lender.pricing.first_work_fee)} First Work Fee charged after audit delivery` : ' with no setup fee'}. ${lender.pricing.money_back_guarantee ? lender.pricing.guarantee_details : 'No money-back guarantee is offered.'}`,
   }] : []),
   ...(lender.typical_results_timeline?.trim() ? [{
     question: `How long does ${lender.name} take to show results?`,
@@ -513,6 +513,12 @@ const jsonLd = [
               <dt class="text-sm text-muted">Setup Fee</dt>
               <dd class="text-sm font-medium text-text">{lender.pricing.setup_fee > 0 ? formatPrice(lender.pricing.setup_fee) : 'None'}</dd>
             </div>
+            {lender.pricing.first_work_fee > 0 && (
+            <div class="flex items-center justify-between py-2 border-b border-border/50">
+              <dt class="text-sm text-muted">First Work Fee</dt>
+              <dd class="text-sm font-medium text-text">{formatPrice(lender.pricing.first_work_fee)} <span class="text-xs text-muted">(after audit)</span></dd>
+            </div>
+            )}
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">Free Consultation</dt>
               <dd class="text-sm font-medium text-text">{lender.pricing.free_consultation ? 'Yes' : 'No'}</dd>
