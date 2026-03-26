@@ -22,6 +22,10 @@ const lendersData = lenders.map(l => ({
   ds: l.description_short,
   bf: l.best_for,
   gr: (l as any).google_reviews_count || 0,
+  qs: (l as any).quality_score || 0,
+  en: (l as any).has_been_enriched || (l as any).data_source === 'enriched' || (l as any).data_source === 'editorial' || (l as any).data_source === 'verified' ? 1 : 0,
+  sv: ((l as any).services || []).join(' ').toLowerCase(),
+  lo: (l as any).logo_url || '',
 }));
 
 const stateEntries = US_STATES.map(state => ({
@@ -263,21 +267,65 @@ const stateEntries = US_STATES.map(state => ({
       const loanCategories = ['personal-loans', 'emergency-cash', 'payday-alternatives'];
       const isLoanMode = params.mode === 'loans' || loanCategories.indexOf(params.category) !== -1;
 
+      // Category keyword aliases — so searching "credit repair" matches fix-my-credit
+      const categoryAliases = {
+        'credit repair': 'fix-my-credit',
+        'fix my credit': 'fix-my-credit',
+        'fix credit': 'fix-my-credit',
+        'repair credit': 'fix-my-credit',
+        'personal loan': 'personal-loans',
+        'personal loans': 'personal-loans',
+        'payday loan': 'payday-alternatives',
+        'payday loans': 'payday-alternatives',
+        'payday alternative': 'payday-alternatives',
+        'emergency cash': 'emergency-cash',
+        'emergency loan': 'emergency-cash',
+        'quick cash': 'emergency-cash',
+        'cash advance': 'emergency-cash',
+        'debt relief': 'debt-relief',
+        'debt consolidation': 'debt-relief',
+        'debt help': 'debt-relief',
+        'build credit': 'build-credit',
+        'credit builder': 'build-credit',
+        'credit monitoring': 'credit-monitoring',
+        'credit score': 'credit-monitoring',
+        'free credit': 'free-help',
+        'free help': 'free-help',
+        'pawn shop': 'pawn-shops',
+        'pawn shops': 'pawn-shops',
+        'title loan': 'emergency-cash',
+        'title loans': 'emergency-cash',
+        'bankruptcy': 'bankruptcy',
+        'check cashing': 'check-cashing',
+      };
+
+      // Check if keyword maps to a category
+      const matchedCategory = params.q ? categoryAliases[params.q] : null;
+
       // Filter
       currentFiltered = allLenders.filter(lender => {
+        // Skip very low quality profiles — don't show garbage in results
+        if (lender.qs < 3 && !lender.en) return false;
+
         if (params.category) {
           if (lender.c !== params.category && lender.sc.indexOf(params.category) === -1) return false;
         }
         if (params.q) {
-          const searchable = [lender.n, lender.c, lender.ds, ...lender.sc, ...lender.bf].join(' ').toLowerCase();
-          if (!searchable.includes(params.q)) return false;
+          // If keyword matches a category, filter by that category
+          if (matchedCategory) {
+            if (lender.c !== matchedCategory && lender.sc.indexOf(matchedCategory) === -1) return false;
+          } else {
+            // Search across name, category, description, subcategories, best_for, and services
+            const searchable = [lender.n, lender.c, lender.ds, lender.sv || '', ...lender.sc, ...lender.bf].join(' ').toLowerCase();
+            if (!searchable.includes(params.q)) return false;
+          }
         }
         if (params.state) {
-          if (!lender.st.some(s => s.toLowerCase() === params.state.toLowerCase() || s === 'All 50 States')) return false;
+          if (!lender.st.some(s => s.toLowerCase() === params.state.toLowerCase() || s.toLowerCase() === 'all' || s === 'All 50 States')) return false;
         }
         if (params.city) {
           const cityName = params.city.split(',')[0].trim().toLowerCase();
-          if (!lender.ct.some(c => c.toLowerCase() === cityName) && !lender.st.includes('All 50 States')) return false;
+          if (!lender.ct.some(c => c.toLowerCase() === cityName) && !lender.st.some(s => s.toLowerCase() === 'all' || s === 'All 50 States')) return false;
         }
         if (params.guarantee && !lender.mg) return false;
         if (params.bbb_a_plus && lender.bb !== 'A+') return false;
@@ -291,9 +339,16 @@ const stateEntries = US_STATES.map(state => ({
         return true;
       });
 
-      // Sort
+      // Sort — enriched and high-quality profiles first, then by selected sort
       const sortValue = sortSelect?.value || 'rating';
       currentFiltered.sort((a, b) => {
+        // Enriched profiles always rank above non-enriched
+        if (a.en !== b.en) return b.en - a.en;
+        // Then by quality score tier (10+, 5-9, 3-4)
+        const aTier = a.qs >= 10 ? 2 : a.qs >= 5 ? 1 : 0;
+        const bTier = b.qs >= 10 ? 2 : b.qs >= 5 ? 1 : 0;
+        if (aTier !== bTier) return bTier - aTier;
+        // Then by user-selected sort
         if (sortValue === 'rating') return b.r - a.r;
         if (sortValue === 'reviews') return (b.gr || 0) - (a.gr || 0);
         if (sortValue === 'price-low') return a.mp - b.mp;
