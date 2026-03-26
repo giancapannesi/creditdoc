@@ -57,7 +57,11 @@ const ogImg = ogImage || 'https://creditdoc.co/og-default.png';
 
   <!-- JSON-LD -->
   {jsonLd && (
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    Array.isArray(jsonLd)
+      ? jsonLd.map((item: any) => (
+          <script type="application/ld+json" set:html={JSON.stringify(item)} />
+        ))
+      : <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   )}
 </head>
 <body class="min-h-screen flex flex-col">
