@@ -111,7 +111,7 @@ const faqs = [
   },
   ...(hasPricing ? [{
     question: `How much does ${lender.name} cost?`,
-    answer: `${lender.name} plans start at ${formatPrice(lowestPrice)} per month${lender.pricing.setup_fee > 0 ? ` with a ${formatPrice(lender.pricing.setup_fee)} setup fee` : lender.pricing.first_work_fee > 0 ? ` with a ${formatPrice(lender.pricing.first_work_fee)} First Work Fee charged after audit delivery` : ' with no setup fee'}. ${lender.pricing.money_back_guarantee ? lender.pricing.guarantee_details : 'No money-back guarantee is offered.'}`,
+    answer: `${lender.name} plans start at ${formatPrice(lowestPrice)} per month${lender.pricing.setup_fee > 0 ? ` with a ${formatPrice(lender.pricing.setup_fee)} setup fee` : lender.pricing.first_work_fee > 0 ? `. There is no setup fee — only a ${formatPrice(lender.pricing.first_work_fee)} work fee charged after the detailed audit analysis` : ' with no setup fee'}. ${lender.pricing.money_back_guarantee ? lender.pricing.guarantee_details : 'No money-back guarantee is offered.'}`,
   }] : []),
   ...(lender.typical_results_timeline?.trim() ? [{
     question: `How long does ${lender.name} take to show results?`,
@@ -353,9 +353,11 @@ const jsonLd = [
                       </>
                     )}
                   </div>
-                  {lender.pricing.setup_fee > 0 && (
+                  {lender.pricing.setup_fee > 0 ? (
                     <p class="text-xs text-muted mt-1">+ {formatPrice(lender.pricing.setup_fee)} setup fee</p>
-                  )}
+                  ) : lender.pricing.first_work_fee > 0 ? (
+                    <p class="text-xs text-muted mt-1">No setup fee — {formatPrice(lender.pricing.first_work_fee)} work fee after audit only</p>
+                  ) : null}
                   <ul class="mt-4 space-y-2 flex-1">
                     {tier.features.map(feature => (
                       <li class="flex items-start gap-2 text-sm text-muted">
@@ -499,14 +501,20 @@ const jsonLd = [
               <dt class="text-sm text-muted">Starting Price</dt>
               <dd class="text-sm font-medium text-text">{hasPricing ? `${formatPrice(lowestPrice)}/mo` : 'Contact provider'}</dd>
             </div>
+            {lender.pricing.setup_fee > 0 ? (
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">Setup Fee</dt>
-              <dd class="text-sm font-medium text-text">{lender.pricing.setup_fee > 0 ? formatPrice(lender.pricing.setup_fee) : 'None'}</dd>
+              <dd class="text-sm font-medium text-text">{formatPrice(lender.pricing.setup_fee)}</dd>
             </div>
-            {lender.pricing.first_work_fee > 0 && (
+            ) : lender.pricing.first_work_fee > 0 ? (
             <div class="flex items-center justify-between py-2 border-b border-border/50">
-              <dt class="text-sm text-muted">First Work Fee</dt>
-              <dd class="text-sm font-medium text-text">{formatPrice(lender.pricing.first_work_fee)} <span class="text-xs text-muted">(after audit)</span></dd>
+              <dt class="text-sm text-muted">Fees</dt>
+              <dd class="text-sm font-medium text-text">No Setup Fee — {formatPrice(lender.pricing.first_work_fee)} Work Fee only after audit</dd>
+            </div>
+            ) : (
+            <div class="flex items-center justify-between py-2 border-b border-border/50">
+              <dt class="text-sm text-muted">Setup Fee</dt>
+              <dd class="text-sm font-medium text-text">None</dd>
             </div>
             )}
             <div class="flex items-center justify-between py-2 border-b border-border/50">
