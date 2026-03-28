@@ -1,10 +1,10 @@
 {
   "name": "FinFi",
   "slug": "finfi",
-  "category": "fix-my-credit",
+  "category": "business-loans",
   "subcategories": [],
-  "description_short": "FinFi \u2014 Financial consultant in New York, NY.",
-  "description_long": "FinFi provides Financial consultant. Located at 1178 Broadway 4th Floor, Suite 102, New York, NY 10001.",
+  "description_short": "FinFi is a point-of-sale financing platform that enables merchants to offer customers access to multiple lender options through a single application, streamlining purchases across home improvement, dental, and healthcare sectors.",
+  "description_long": "FinFi is a B2B SaaS platform created and powered by FinMkt, Inc., a provider of embedded, API-driven consumer financing and loan origination solutions. The company launched to address a gap in merchant financing tools by enabling businesses to offer customers financing options directly at the point of sale, whether online or in-person. FinFi operates alongside FinMkt's consumer-facing personal loan marketplace, Lendvious, leveraging a shared technology infrastructure focused on multi-lender credit access.\n\nFinFi's core offering is a point-of-sale financing platform that connects merchants with multiple third-party lending partners. The platform enables customers to complete a single universal application and receive prequalified loan offers from multiple lenders in real-time, without affecting their credit scores. Funds are paid directly to merchants upon approval. The platform is industry-agnostic but is actively marketed and optimized for home improvement, dental practices and DSOs, and healthcare providers. FinFi also offers customizable white-label solutions for merchants seeking tailored integrations.\n\nThe company distinguishes itself through its multi-lender aggregation model, which theoretically provides borrowers with a broader credit spectrum and higher approval rates than single-lender point-of-sale solutions. The emphasis on seamless integration and simplified workflows for both merchants and consumers, combined with prequalified offers that don't impact credit, represents a consumer-friendly positioning. FinFi's focus on specific verticals (especially healthcare and home improvement) suggests deep product customization, though the extent of vertical specialization is limited in available documentation.\n\nFinFi is fundamentally a merchant-facing business service, not a direct lender or credit product for consumers. The company's success depends entirely on third-party lending partners' underwriting and availability. Rates, terms, and approval odds vary by lender, purchase amount, state, and merchant. The platform does not originate credit itself, making it a financing facilitator rather than a financing provider. For merchants, adoption requires API integration and willingness to integrate a third-party service into their sales workflow.",
   "logo_url": "https://lh4.googleusercontent.com/-JnAHE67O8ZE/AAAAAAAAAAI/AAAAAAAAAAA/yb2IePY_07Q/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://finfi.co/",
   "affiliate_url": "",
@@ -58,18 +58,45 @@
     "transparency": 0,
     "ease_of_use": 0
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Prequalified offers visible to borrowers without triggering a hard credit pull",
+    "Single application provides access to multiple lenders simultaneously, increasing approval odds",
+    "Funds paid directly to merchant, streamlining the purchase completion process",
+    "Platform supports both online and in-person transactions, enabling flexibility across sales channels",
+    "White-label customization available for merchants with unique integration needs",
+    "Optimized solutions for high-value, recurring-cost verticals (home improvement, dental, healthcare)",
+    "Fair lending commitments and compliance with ECOA, Fair Housing Act, and state regulations explicitly documented"
+  ],
+  "cons": [
+    "FinMkt/FinFi is not a lender\u2014rates, terms, and approval odds depend entirely on third-party lending partners' underwriting and availability",
+    "Offers are subject to change and may expire without notice; not all products or lenders available in all states",
+    "Requires merchant integration and adoption; not a direct-to-consumer product, limiting accessibility to customers of partner merchants",
+    "Limited transparency on lending partner roster, average APRs, typical approval rates, or default rates in public marketing materials",
+    "White-label customization and dedicated solutions likely come at premium pricing not detailed on public website"
+  ],
+  "best_for": [
+    "Home improvement contractors and retailers seeking to increase average transaction value and close rates by offering customer financing",
+    "Dental practices and DSOs wanting to improve patient treatment acceptance rates and afford ability without managing multiple lender relationships",
+    "Healthcare providers (traditional and non-traditional) needing flexible, integrated financing options to reduce patient payment barriers"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "FinFi is best for merchants (home improvement, dental, healthcare) seeking to increase customer purchasing power and sales conversion by offering financing, rather than consumers looking to borrow directly. The primary caveat is that FinFi is a financing platform, not a lender\u2014actual credit quality, rates, and approval odds depend on third-party lenders, and availability varies by state, lender, and merchant.",
   "services": [
-    "Financial consultant"
+    "Point-of-sale financing platform with universal consumer application",
+    "Multi-lender real-time offer aggregation and presentation",
+    "Prequalified loan offer generation without hard credit inquiries",
+    "Direct-to-merchant fund disbursement upon approval",
+    "API-driven integration for online and in-person sales environments",
+    "White-label, customizable platform solutions for enterprise merchants",
+    "Vertical-specific optimization for home improvement, dental, and healthcare",
+    "Fair lending compliance facilitation and monitoring",
+    "Consumer credit screening and underwriting coordination with lending partners",
+    "Merchant support and integration assistance"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-03-21",
   "review_status": "published",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x89c259a3f801ac19:0x975cee2674dc8524",
     "google_rating": 2.0,
@@ -102,8 +129,9 @@
     }
   },
   "website": "https://finfi.co",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 2,
-  "enrichment_attempts": 0,
-  "last_engine_run": null
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-03-28",
+  "has_been_enriched": true
 }
