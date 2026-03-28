@@ -1,0 +1,442 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getStatesWithLenders, getStateData, getLendersInState } from '../../../utils/data';
+
+export function getStaticPaths() {
+  const states = getStatesWithLenders(1);
+  const stateData = getStateData();
+  return states
+    .filter(s => stateData[s.abbr]?.credit_repair_laws)
+    .map(s => ({
+      params: { slug: s.slug },
+      props: { stateInfo: s, data: stateData[s.abbr] },
+    }));
+}
+
+const { stateInfo, data } = Astro.props;
+const lenders = getLendersInState(stateInfo.abbr);
+const creditRepairLenders = lenders.filter(l => l.category === 'fix-my-credit' || l.category === 'credit-counseling');
+
+const cr = data.credit_repair_laws || {};
+const lt = data.lending_types || {};
+const vp = data.veteran_protections || {};
+const complaints = data.complaint_resources || [];
+const statutes = data.statute_links || [];
+
+const title = `${stateInfo.name} Lending & Credit Laws (${new Date().getFullYear()}) | CreditDoc`;
+const description = `${stateInfo.name} lending regulations, credit repair laws, payday loan rules, veteran protections (MLA/SCRA), and consumer rights. Official statute references and complaint resources.`;
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": `${stateInfo.name} Lending & Credit Laws`,
+    "description": description,
+    "url": `https://creditdoc.co/state/${stateInfo.slug}/lending-laws/`,
+    "dateModified": data.legislation_last_updated || new Date().toISOString().split('T')[0],
+    "publisher": { "@type": "Organization", "name": "CreditDoc", "url": "https://creditdoc.co" },
+    "about": [
+      { "@type": "Thing", "name": `${stateInfo.name} consumer lending regulations` },
+      { "@type": "Thing", "name": "Credit repair laws" },
+      { "@type": "Thing", "name": "Military Lending Act" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://creditdoc.co/" },
+      { "@type": "ListItem", "position": 2, "name": "States", "item": "https://creditdoc.co/state/" },
+      { "@type": "ListItem", "position": 3, "name": stateInfo.name, "item": `https://creditdoc.co/state/${stateInfo.slug}/` },
+      { "@type": "ListItem", "position": 4, "name": "Lending Laws", "item": `https://creditdoc.co/state/${stateInfo.slug}/lending-laws/` }
+    ]
+  }
+];
+
+// Helpers
+const loanTypes = [
+  { key: 'personal_loans', name: 'Personal Loans', icon: '💰' },
+  { key: 'payday_loans', name: 'Payday Loans', icon: '⚡' },
+  { key: 'title_loans', name: 'Title Loans', icon: '🚗' },
+  { key: 'installment_loans', name: 'Installment Loans', icon: '📅' },
+  { key: 'mortgage', name: 'Mortgage', icon: '🏠' },
+];
+
+const paydayStatusColor = (status: string) => {
+  if (status === 'Banned') return { bg: 'bg-positive-light', text: 'text-positive' };
+  if (status === 'Restricted') return { bg: 'bg-warning-light', text: 'text-warning' };
+  return { bg: 'bg-negative-light', text: 'text-negative' };
+};
+const psc = paydayStatusColor(data.payday_loan_status || '');
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Breadcrumbs -->
+  <nav class="max-w-6xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted flex-wrap">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/state/" class="hover:text-primary transition-colors">States</a></li>
+      <li class="text-border">/</li>
+      <li><a href={`/state/${stateInfo.slug}/`} class="hover:text-primary transition-colors">{stateInfo.name}</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">Lending Laws</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Hero -->
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">
+        {stateInfo.name} Lending & Credit Laws
+      </h1>
+      <p class="text-lg text-muted max-w-3xl">
+        Comprehensive guide to {stateInfo.name}'s consumer lending regulations, credit repair laws, and veteran protections. Cross-check official state rules before borrowing.
+      </p>
+      {data.legislation_last_updated && (
+        <p class="text-xs text-muted mt-2">
+          Last reviewed: {data.legislation_last_updated}
+        </p>
+      )}
+    </div>
+
+    <!-- Quick Reference Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="glass-card p-4 text-center" style="pointer-events: none;">
+        <div class="w-10 h-10 rounded-xl bg-primary-light flex items-center justify-center mx-auto mb-2">
+          <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        </div>
+        <p class="text-xs text-muted">Interest Rate Cap</p>
+        <p class="text-sm font-semibold text-text mt-1">{data.usury_cap?.split(';')[0] || 'Varies'}</p>
+      </div>
+
+      <div class="glass-card p-4 text-center" style="pointer-events: none;">
+        <div class:list={["w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2", psc.bg]}>
+          <svg class:list={["w-5 h-5", psc.text]} fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+        </div>
+        <p class="text-xs text-muted">Payday Loans</p>
+        <span class:list={["inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold mt-1", psc.bg, psc.text]}>
+          {data.payday_loan_status || 'Unknown'}
+        </span>
+      </div>
+
+      <div class="glass-card p-4 text-center" style="pointer-events: none;">
+        <div class="w-10 h-10 rounded-xl bg-bg-alt flex items-center justify-center mx-auto mb-2">
+          <svg class="w-5 h-5 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+        </div>
+        <p class="text-xs text-muted">Credit Repair Bond</p>
+        <p class="text-sm font-semibold text-text mt-1">
+          {cr.bond_required ? cr.bond_amount || 'Required' : 'Not Required'}
+        </p>
+      </div>
+
+      <div class="glass-card p-4 text-center" style="pointer-events: none;">
+        <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mx-auto mb-2">
+          <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5" /></svg>
+        </div>
+        <p class="text-xs text-muted">Veteran Protections</p>
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold mt-1 bg-blue-50 text-blue-700">
+          MLA + SCRA
+        </span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content -->
+      <div class="lg:col-span-2 space-y-8">
+
+        <!-- Lending by Loan Type -->
+        <section>
+          <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" /></svg>
+            Lending Regulations by Loan Type
+          </h2>
+          <div class="space-y-4">
+            {loanTypes.map(({ key, name, icon }) => {
+              const loan = lt[key];
+              if (!loan) return null;
+              const isLegal = loan.legal !== false;
+              return (
+                <div class="glass-card p-5" style="pointer-events: none;">
+                  <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-semibold text-text flex items-center gap-2">
+                      <span class="text-lg">{icon}</span> {name}
+                    </h3>
+                    {loan.legal !== undefined && (
+                      <span class:list={["px-2.5 py-1 rounded-full text-xs font-semibold",
+                        isLegal ? 'bg-positive-light text-positive' : 'bg-negative-light text-negative']}>
+                        {isLegal ? 'Legal' : 'Prohibited'}
+                      </span>
+                    )}
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                    {loan.rate_cap && (
+                      <div>
+                        <p class="text-xs text-muted uppercase tracking-wider">Rate Cap</p>
+                        <p class="text-text">{loan.rate_cap}</p>
+                      </div>
+                    )}
+                    {loan.max_amount && (
+                      <div>
+                        <p class="text-xs text-muted uppercase tracking-wider">Max Amount</p>
+                        <p class="text-text">${loan.max_amount.toLocaleString()}</p>
+                      </div>
+                    )}
+                    {loan.max_term_days && (
+                      <div>
+                        <p class="text-xs text-muted uppercase tracking-wider">Max Term</p>
+                        <p class="text-text">{loan.max_term_days} days</p>
+                      </div>
+                    )}
+                    {loan.max_outstanding && (
+                      <div>
+                        <p class="text-xs text-muted uppercase tracking-wider">Max Outstanding</p>
+                        <p class="text-text">{loan.max_outstanding} loan{loan.max_outstanding > 1 ? 's' : ''} at a time</p>
+                      </div>
+                    )}
+                    {loan.cooling_off_days && (
+                      <div>
+                        <p class="text-xs text-muted uppercase tracking-wider">Cooling Off Period</p>
+                        <p class="text-text">{loan.cooling_off_days} days</p>
+                      </div>
+                    )}
+                    {loan.database_tracking !== undefined && (
+                      <div>
+                        <p class="text-xs text-muted uppercase tracking-wider">State Database</p>
+                        <p class="text-text">{loan.database_tracking ? 'Yes — lenders must check' : 'No statewide database'}</p>
+                      </div>
+                    )}
+                  </div>
+                  {loan.notes && (
+                    <p class="text-sm text-muted mt-3 pt-3 border-t border-border/50">{loan.notes}</p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <!-- Credit Repair Regulations -->
+        {cr.state_statute && (
+          <section class="glass-card p-6" style="pointer-events: none;">
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+              Credit Repair Regulations
+            </h2>
+
+            <div class="mb-4 p-4 rounded-xl bg-primary-light/30 border border-primary/10">
+              <p class="text-sm font-semibold text-text">{cr.state_statute}</p>
+              {cr.statute_code && <p class="text-xs text-muted mt-1">{cr.statute_code}</p>}
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+              <div class="text-center p-3 rounded-lg bg-bg-alt">
+                <p class="text-xs text-muted">Bond Required</p>
+                <p class="text-sm font-semibold text-text">{cr.bond_required ? 'Yes' : 'No'}</p>
+                {cr.bond_amount && cr.bond_required && <p class="text-xs text-muted">{cr.bond_amount}</p>}
+              </div>
+              <div class="text-center p-3 rounded-lg bg-bg-alt">
+                <p class="text-xs text-muted">Registration</p>
+                <p class="text-sm font-semibold text-text">{cr.registration_required ? 'Required' : 'Not Required'}</p>
+              </div>
+              <div class="text-center p-3 rounded-lg bg-bg-alt">
+                <p class="text-xs text-muted">Cancellation Period</p>
+                <p class="text-sm font-semibold text-text">{cr.cancellation_period_days || 3} days</p>
+              </div>
+              <div class="text-center p-3 rounded-lg bg-bg-alt">
+                <p class="text-xs text-muted">Upfront Fees</p>
+                <p class="text-sm font-semibold text-text">{cr.upfront_fees_prohibited ? 'Prohibited' : 'Allowed'}</p>
+              </div>
+            </div>
+
+            {cr.key_provisions && cr.key_provisions.length > 0 && (
+              <div>
+                <h3 class="text-sm font-semibold text-text mb-2">Key Provisions</h3>
+                <ul class="space-y-2">
+                  {cr.key_provisions.map((p: string) => (
+                    <li class="flex items-start gap-2 text-sm text-muted">
+                      <svg class="w-4 h-4 mt-0.5 text-positive shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {cr.registration_agency && (
+              <p class="text-xs text-muted mt-3">Licensing/Registration: {cr.registration_agency}</p>
+            )}
+          </section>
+        )}
+
+        <!-- Veteran & Military Protections -->
+        <section class="glass-card p-6" style="pointer-events: none;">
+          <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5" /></svg>
+            Veteran & Military Lending Protections
+          </h2>
+
+          <!-- Federal Protections -->
+          <div class="space-y-4 mb-6">
+            <div class="p-4 rounded-xl bg-blue-50 border border-blue-100">
+              <h3 class="text-sm font-semibold text-blue-800 mb-1">Military Lending Act (MLA) — Federal</h3>
+              <p class="text-sm text-blue-700">{vp.federal_mla_summary || 'The Military Lending Act caps interest at 36% MAPR for active-duty servicemembers and dependents. Applies to payday loans, vehicle title loans, and consumer credit products.'}</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-blue-50 border border-blue-100">
+              <h3 class="text-sm font-semibold text-blue-800 mb-1">Servicemembers Civil Relief Act (SCRA) — Federal</h3>
+              <p class="text-sm text-blue-700">{vp.federal_scra_summary || 'SCRA caps interest at 6% on pre-service debts, provides protection against default judgments, and allows lease termination for deployment.'}</p>
+            </div>
+          </div>
+
+          <!-- State-Specific -->
+          {vp.state_specific_protections && vp.state_specific_protections.length > 0 && (
+            <div class="mb-4">
+              <h3 class="text-sm font-semibold text-text mb-2">{stateInfo.name}-Specific Veteran Protections</h3>
+              <ul class="space-y-2">
+                {vp.state_specific_protections.map((p: string) => (
+                  <li class="flex items-start gap-2 text-sm text-muted">
+                    <svg class="w-4 h-4 mt-0.5 text-blue-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {vp.va_loan_notes && (
+            <div class="p-4 rounded-xl bg-bg-alt border border-border/50">
+              <h3 class="text-sm font-semibold text-text mb-1">VA Loans in {stateInfo.name}</h3>
+              <p class="text-sm text-muted">{vp.va_loan_notes}</p>
+            </div>
+          )}
+
+          {vp.military_installations && (
+            <p class="text-xs text-muted mt-3">
+              <strong>Military installations:</strong> {vp.military_installations}
+            </p>
+          )}
+        </section>
+
+        <!-- Consumer Rights & Complaints -->
+        {complaints.length > 0 && (
+          <section class="glass-card p-6" style="pointer-events: none;">
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+              File a Complaint
+            </h2>
+
+            {data.consumer_rights_summary && (
+              <div class="mb-4 p-4 rounded-xl bg-primary-light/30 border border-primary/10">
+                <p class="text-sm text-text leading-relaxed">{data.consumer_rights_summary}</p>
+              </div>
+            )}
+
+            <div class="space-y-3">
+              {complaints.map((c: any) => (
+                <a href={c.url} target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-bg-alt hover:bg-bg-alt/80 transition-colors border border-border/50" style="pointer-events: auto;">
+                  <div>
+                    <p class="font-semibold text-text text-sm">{c.name}</p>
+                    <p class="text-xs text-muted mt-0.5">{c.description || c.type}</p>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class:list={["text-xs px-2 py-0.5 rounded-full font-medium",
+                      c.type === 'Federal' ? 'bg-blue-50 text-blue-700' :
+                      c.type === 'State AG' ? 'bg-purple-50 text-purple-700' :
+                      'bg-bg text-muted']}>
+                      {c.type}
+                    </span>
+                    <svg class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Recent Changes -->
+        {data.recent_changes && (
+          <section class="glass-card p-6" style="pointer-events: none;">
+            <h2 class="text-lg font-bold text-text mb-2 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              Recent Legislative Changes
+            </h2>
+            <p class="text-sm text-muted leading-relaxed">{data.recent_changes}</p>
+          </section>
+        )}
+      </div>
+
+      <!-- Sidebar -->
+      <div class="space-y-6">
+        <!-- Official Resources -->
+        {statutes.length > 0 && (
+          <div class="glass-card p-5" style="pointer-events: none;">
+            <h3 class="font-bold text-text mb-3 flex items-center gap-2">
+              <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>
+              Official Resources
+            </h3>
+            <div class="space-y-2">
+              {statutes.map((s: any) => (
+                <a href={s.url} target="_blank" rel="noopener noreferrer" class="block text-sm text-muted hover:text-primary transition-colors py-1" style="pointer-events: auto;">
+                  {s.name}
+                  <svg class="w-3 h-3 inline ml-1 opacity-50" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                </a>
+              ))}
+            </div>
+
+            {data.consumer_protection_url && (
+              <a href={data.consumer_protection_url} target="_blank" rel="noopener noreferrer" class="mt-3 block text-sm text-primary hover:text-primary-hover font-medium" style="pointer-events: auto;">
+                {data.consumer_protection_agency || `${stateInfo.name} Consumer Protection`}
+                <svg class="w-3 h-3 inline ml-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+              </a>
+            )}
+          </div>
+        )}
+
+        <!-- Credit Repair Providers CTA -->
+        <div class="glass-card p-5 bg-gradient-to-br from-primary-light to-white">
+          <h3 class="font-bold text-text mb-2">Need Credit Repair in {stateInfo.abbr}?</h3>
+          <p class="text-sm text-muted mb-3">
+            Compare {creditRepairLenders.length > 0 ? creditRepairLenders.length : ''} verified credit repair companies in {stateInfo.name}.
+          </p>
+          <a href={`/state/${stateInfo.slug}/`} class="inline-flex items-center gap-2 bg-primary text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-primary-hover transition-colors">
+            Browse {stateInfo.abbr} Providers
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+          </a>
+        </div>
+
+        <!-- Know Your Rights CTA -->
+        <div class="glass-card p-5" style="pointer-events: none;">
+          <h3 class="font-bold text-text mb-2">Know Your Rights</h3>
+          <ul class="space-y-2 mt-3">
+            <li><a href="/financial-wellness/how-to-get-free-credit-report/" class="text-sm text-muted hover:text-primary transition-colors" style="pointer-events: auto;">Free Credit Report Guide</a></li>
+            <li><a href="/financial-wellness/understanding-credit-scores/" class="text-sm text-muted hover:text-primary transition-colors" style="pointer-events: auto;">Understanding Credit Scores</a></li>
+            <li><a href="/financial-wellness/diy-credit-repair-step-by-step/" class="text-sm text-muted hover:text-primary transition-colors" style="pointer-events: auto;">DIY Credit Repair Guide</a></li>
+            <li><a href="/financial-wellness/how-to-dispute-errors-on-your-credit-report/" class="text-sm text-muted hover:text-primary transition-colors" style="pointer-events: auto;">Dispute Credit Report Errors</a></li>
+          </ul>
+          <a href="/financial-wellness/" class="mt-3 block text-xs text-primary hover:text-primary-hover font-medium" style="pointer-events: auto;">All wellness guides &rarr;</a>
+        </div>
+
+        <!-- Other States -->
+        <div class="glass-card p-5" style="pointer-events: none;">
+          <h3 class="font-bold text-text mb-3">Other State Laws</h3>
+          <div class="flex flex-wrap gap-1.5">
+            {getStatesWithLenders(10).filter(s => s.abbr !== stateInfo.abbr).slice(0, 12).map(s => (
+              <a href={`/state/${s.slug}/lending-laws/`} class="text-xs px-2.5 py-1 rounded-full border border-border text-muted hover:text-primary hover:border-primary transition-colors" style="pointer-events: auto;">
+                {s.abbr}
+              </a>
+            ))}
+            <a href="/state/" class="text-xs px-2.5 py-1 rounded-full bg-primary-light text-primary font-medium" style="pointer-events: auto;">All 50 &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="mt-12 bg-bg-alt border border-border rounded-xl p-4">
+      <p class="text-xs text-muted leading-relaxed">
+        <strong>Disclaimer:</strong> This page provides general information about {stateInfo.name} lending and credit regulations for educational purposes only. It does not constitute legal advice. Laws and regulations change frequently — always verify current rules with the <a href={data.consumer_protection_url || '#'} target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{data.consumer_protection_agency || `${stateInfo.name} consumer protection agency`}</a> or consult a licensed attorney. Federal protections (MLA, SCRA) are summarized — servicemembers should contact their legal assistance office for specific guidance. <a href="/disclosure/" class="text-primary hover:underline">Full disclosure</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
