@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getWellnessGuides, getWellnessGuideBySlug, getWellnessGuidesByCategory, getCategories } from '../../utils/data';
+import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
+import { getWellnessGuides, getWellnessGuideBySlug, getWellnessGuidesByCategory, getCategories, getGlossaryTermsForContext } from '../../utils/data';
 import type { WellnessGuide } from '../../utils/data';
 
 export function getStaticPaths() {
@@ -30,6 +31,19 @@ const categoryLabels: Record<string, string> = {
 };
 
 const categoryLabel = categoryLabels[guide.category] || guide.category.replace(/-/g, ' ');
+
+// Map wellness guide category to glossary contexts
+const wellnessGlossaryMap: Record<string, string[]> = {
+  'understanding-credit': ['wellness-understanding-credit'],
+  'building-credit': ['wellness-understanding-credit', 'wellness-credit-repair'],
+  'budgeting-and-saving': ['wellness-everyday-finance'],
+  'loans-and-interest': ['wellness-loans-and-interest'],
+  'financial-recovery': ['wellness-financial-recovery'],
+  'everyday-finance': ['wellness-everyday-finance'],
+  'credit-repair': ['wellness-credit-repair'],
+};
+const glossaryContexts = wellnessGlossaryMap[guide.category] || [];
+const glossaryTerms = getGlossaryTermsForContext(glossaryContexts);
 
 // JSON-LD: Article + FAQPage + BreadcrumbList
 const jsonLd = [
@@ -195,6 +209,9 @@ const jsonLd = [
             </div>
           </div>
         </section>
+
+        <!-- Glossary Appendix -->
+        <GlossaryAppendix terms={glossaryTerms} />
 
         <!-- Disclaimer -->
         <div class="rounded-lg bg-bg-alt p-4 border border-border">

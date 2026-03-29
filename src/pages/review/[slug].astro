@@ -5,7 +5,8 @@ import ProsCons from '../../components/ProsCons.astro';
 import DiagnosisCard from '../../components/DiagnosisCard.astro';
 import LenderCard from '../../components/LenderCard.astro';
 import TrustBadge from '../../components/TrustBadge.astro';
-import { getAllLenders, getLenderBySlug, formatPrice, getBbbClass, generateDiagnosis, getComparisons, getCategories, getWellnessGuidesByCategory } from '../../utils/data';
+import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
+import { getAllLenders, getLenderBySlug, formatPrice, getBbbClass, generateDiagnosis, getComparisons, getCategories, getWellnessGuidesByCategory, getGlossaryTermsForContext } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
 export function getStaticPaths() {
@@ -58,6 +59,24 @@ const categoryGuideMap: Record<string, string> = {
 };
 const guideCategory = categoryGuideMap[lender.category] || 'understanding-credit';
 const relatedWellnessGuides = getWellnessGuidesByCategory(guideCategory).slice(0, 3);
+
+// Map lender category to glossary contexts
+const glossaryContextMap: Record<string, string[]> = {
+  'fix-my-credit': ['review-credit-repair'],
+  'credit-repair': ['review-credit-repair'],
+  'build-credit': ['review-build-credit'],
+  'credit-monitoring': ['review-credit-monitoring'],
+  'personal-loans': ['review-personal-loans'],
+  'business-loans': ['review-business-loans'],
+  'emergency-cash': ['review-emergency-cash'],
+  'payday-alternatives': ['review-emergency-cash'],
+  'mortgages': ['review-mortgages'],
+  'debt-relief': ['review-debt-relief'],
+  'bankruptcy': ['review-debt-relief'],
+  'credit-counseling': ['review-credit-repair', 'review-debt-relief'],
+};
+const glossaryContexts = glossaryContextMap[lender.category] || [];
+const glossaryTerms = getGlossaryTermsForContext(glossaryContexts);
 
 const comparisons = getComparisons().filter(
   c => c.lender_a === lender.slug || c.lender_b === lender.slug
@@ -707,6 +726,13 @@ const jsonLd = [
           </a>
         ))}
       </div>
+    </section>
+  )}
+
+  <!-- Glossary Appendix -->
+  {glossaryTerms.length > 0 && (
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <GlossaryAppendix terms={glossaryTerms} />
     </section>
   )}
 
