@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { getStatesWithLenders, getStateData, getLendersInState } from '../../../utils/data';
+import GlossaryAppendix from '../../../components/GlossaryAppendix.astro';
+import { getStatesWithLenders, getStateData, getLendersInState, getGlossaryTermsForContext } from '../../../utils/data';
 
 export function getStaticPaths() {
   const states = getStatesWithLenders(1);
@@ -22,6 +23,7 @@ const lt = data.lending_types || {};
 const vp = data.veteran_protections || {};
 const complaints = data.complaint_resources || [];
 const statutes = data.statute_links || [];
+const glossaryTerms = getGlossaryTermsForContext(['lending-laws']);
 
 const title = `${stateInfo.name} Lending & Credit Laws (${new Date().getFullYear()}) | CreditDoc`;
 const description = `${stateInfo.name} lending regulations, credit repair laws, payday loan rules, veteran protections (MLA/SCRA), and consumer rights. Official statute references and complaint resources.`;
@@ -431,6 +433,9 @@ const psc = paydayStatusColor(data.payday_loan_status || '');
         </div>
       </div>
     </div>
+
+    <!-- Glossary Appendix -->
+    <GlossaryAppendix terms={glossaryTerms} heading="Key Legal & Lending Terms" />
 
     <!-- Disclaimer -->
     <div class="mt-12 bg-bg-alt border border-border rounded-xl p-4">

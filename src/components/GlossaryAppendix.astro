@@ -1,0 +1,131 @@
+---
+import type { GlossaryTerm } from '../utils/data';
+
+interface Props {
+  terms: GlossaryTerm[];
+  heading?: string;
+}
+
+const { terms, heading = 'Financial Terms Explained' } = Astro.props;
+
+// Guard: render nothing if no terms
+if (terms.length === 0) return;
+
+const categoryLabels: Record<string, string> = {
+  'interest-and-rates': 'Interest & Rates',
+  'how-loans-work': 'How Loans Work',
+  'credit-and-scoring': 'Credit & Scoring',
+  'fees-and-costs': 'Fees & Costs',
+  'legal-terms': 'Legal Terms',
+  'debt-and-recovery': 'Debt & Recovery',
+  'mortgages': 'Mortgages',
+  'credit-cards': 'Credit Cards',
+};
+
+// Preserve display order
+const categoryOrder = [
+  'interest-and-rates', 'how-loans-work', 'credit-and-scoring',
+  'fees-and-costs', 'legal-terms', 'debt-and-recovery',
+  'mortgages', 'credit-cards',
+];
+
+const grouped = new Map<string, GlossaryTerm[]>();
+for (const term of terms) {
+  if (!grouped.has(term.category)) grouped.set(term.category, []);
+  grouped.get(term.category)!.push(term);
+}
+
+const sortedGroups = categoryOrder
+  .filter(c => grouped.has(c))
+  .map(c => [c, grouped.get(c)!] as [string, GlossaryTerm[]]);
+
+// DefinedTermSet JSON-LD
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": heading,
+  "description": "Plain-language financial term definitions for consumers",
+  "url": "https://creditdoc.co/financial-wellness/",
+  "hasDefinedTerm": terms.map(t => ({
+    "@type": "DefinedTerm",
+    "name": t.full_form || t.term,
+    "description": t.plain_definition,
+    "inDefinedTermSet": "https://creditdoc.co/financial-wellness/"
+  }))
+};
+---
+
+<section class="mt-10">
+  <details class="glass-card overflow-hidden">
+    <summary class="flex items-center justify-between cursor-pointer p-5 text-base font-semibold text-text hover:text-primary transition-colors select-none">
+      <span class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+        </svg>
+        {heading}
+        <span class="text-xs font-normal text-muted ml-1">({terms.length} terms)</span>
+      </span>
+      <svg class="w-5 h-5 text-muted group-open:rotate-180 transition-transform flex-shrink-0 ml-2 details-chevron" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+      </svg>
+    </summary>
+
+    <div class="px-5 pb-5 space-y-6 border-t border-border/50">
+      <p class="text-sm text-muted pt-4">
+        New to credit and lending? Here are the key terms used on this page, explained in plain language with real-number examples.
+      </p>
+
+      {sortedGroups.map(([cat, catTerms]) => (
+        <div>
+          <h3 class="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+            {categoryLabels[cat] || cat}
+          </h3>
+          <div class="space-y-2">
+            {catTerms.map(term => (
+              <details class="group border border-border/50 rounded-lg overflow-hidden">
+                <summary class="flex items-center justify-between cursor-pointer px-4 py-3 text-sm font-medium text-text hover:bg-bg-alt/50 transition-colors">
+                  <span>
+                    <span class="font-semibold">{term.term}</span>
+                    {term.full_form && term.full_form !== term.term && (
+                      <span class="text-muted font-normal ml-1">— {term.full_form}</span>
+                    )}
+                  </span>
+                  <svg class="w-4 h-4 text-muted group-open:rotate-180 transition-transform flex-shrink-0 ml-2" fill="none" viewBox="0 0 20 20" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
+                  </svg>
+                </summary>
+                <div class="px-4 pb-4 space-y-3">
+                  <p class="text-sm text-muted leading-relaxed">{term.plain_definition}</p>
+
+                  <div class="flex items-start gap-2">
+                    <span class="text-xs font-semibold text-primary uppercase tracking-wider whitespace-nowrap mt-0.5">Why it matters</span>
+                    <p class="text-sm text-muted leading-relaxed">{term.why_it_matters}</p>
+                  </div>
+
+                  <div class="rounded-lg bg-primary-light/30 border border-primary/10 p-3">
+                    <p class="text-xs font-semibold text-primary uppercase tracking-wider mb-1">Example</p>
+                    <p class="text-sm text-text leading-relaxed">{term.example}</p>
+                  </div>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="pt-2 border-t border-border/50">
+        <p class="text-xs text-muted">
+          Want to learn more? Read our <a href="/financial-wellness/" class="text-primary hover:underline font-medium">Financial Wellness Guides</a> for in-depth explanations and practical advice.
+        </p>
+      </div>
+    </div>
+  </details>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</section>
+
+<style>
+  details[open] > summary .details-chevron {
+    transform: rotate(180deg);
+  }
+</style>

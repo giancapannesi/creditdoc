@@ -416,6 +416,30 @@ export function getStateData(): Record<string, any> {
   return JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
 }
 
+// --- Glossary Terms ---
+
+export interface GlossaryTerm {
+  slug: string;
+  term: string;
+  full_form: string;
+  category: string;
+  plain_definition: string;
+  why_it_matters: string;
+  example: string;
+  page_contexts: string[];
+}
+
+export function getGlossaryTerms(): GlossaryTerm[] {
+  const raw = fs.readFileSync(path.join(CONTENT_DIR, 'glossary-terms.json'), 'utf-8');
+  return JSON.parse(raw) as GlossaryTerm[];
+}
+
+export function getGlossaryTermsForContext(contexts: string[]): GlossaryTerm[] {
+  return getGlossaryTerms().filter(t =>
+    t.page_contexts.some(c => contexts.includes(c))
+  );
+}
+
 export const TOP_CITIES: { city: string; state: string; lat: number; lng: number }[] = [
   { city: 'New York', state: 'New York', lat: 40.7128, lng: -74.0060 },
   { city: 'Los Angeles', state: 'California', lat: 34.0522, lng: -118.2437 },
