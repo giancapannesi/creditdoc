@@ -1,0 +1,299 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEducationSearchData } from '../utils/data';
+
+const searchData = getEducationSearchData();
+const totalCount = searchData.guides.length + searchData.terms.length + searchData.posts.length;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SearchResultsPage",
+  "name": "Learn — Financial Education Search",
+  "description": "Search financial topics across wellness guides, glossary terms, and blog articles. Find clear explanations of credit, debt, loans, and more.",
+  "url": "https://creditdoc.co/learn/",
+  "publisher": {
+    "@type": "Organization",
+    "name": "CreditDoc",
+    "url": "https://creditdoc.co"
+  }
+};
+
+const popularTopics = [
+  { label: 'Credit Score', query: 'credit score' },
+  { label: 'APR', query: 'apr' },
+  { label: 'Debt Consolidation', query: 'debt consolidation' },
+  { label: 'Payday Loans', query: 'payday' },
+  { label: 'Credit Repair', query: 'credit repair' },
+  { label: 'BNPL', query: 'buy now pay later' },
+  { label: 'Mortgage', query: 'mortgage' },
+  { label: 'Student Loans', query: 'student loan' },
+  { label: 'Budgeting', query: 'budget' },
+  { label: 'Bankruptcy', query: 'bankruptcy' },
+];
+---
+
+<BaseLayout
+  title="Learn — Financial Education Search | CreditDoc"
+  description="Search financial topics across wellness guides, glossary terms, and blog articles. Find clear explanations of credit, debt, loans, and personal finance."
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <section class="bg-white border-b border-border">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 text-center">
+      <span class="inline-block rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-6">Learn</span>
+      <h1 class="text-4xl font-bold text-text sm:text-5xl">Financial Education Search</h1>
+      <p class="mt-6 text-lg text-muted leading-relaxed max-w-2xl mx-auto">
+        Search across {totalCount} guides, definitions, and articles. Plain-English explanations of credit, debt, loans, and personal finance.
+      </p>
+
+      <!-- Search Box -->
+      <div class="mt-8 max-w-xl mx-auto">
+        <div class="relative">
+          <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
+          </svg>
+          <input
+            id="learn-search"
+            type="text"
+            placeholder="Search financial topics — try 'APR', 'debt consolidation', 'credit score'"
+            class="w-full rounded-xl border border-border bg-white px-4 py-4 pl-12 text-sm text-text placeholder:text-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 shadow-sm"
+            autocomplete="off"
+          />
+          <button
+            id="clear-search"
+            class="absolute right-3 top-1/2 -translate-y-1/2 hidden items-center justify-center w-7 h-7 rounded-full text-muted hover:text-text hover:bg-bg-alt transition-colors"
+            aria-label="Clear search"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Tabs -->
+  <section class="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="flex flex-wrap gap-2 justify-center" id="type-filters">
+      <button class="type-btn active rounded-full px-4 py-2 text-sm font-medium border transition-colors" data-type="all">All</button>
+      <button class="type-btn rounded-full px-4 py-2 text-sm font-medium border transition-colors" data-type="guide">
+        Guides <span class="type-count text-xs text-muted ml-1">({searchData.guides.length})</span>
+      </button>
+      <button class="type-btn rounded-full px-4 py-2 text-sm font-medium border transition-colors" data-type="term">
+        Definitions <span class="type-count text-xs text-muted ml-1">({searchData.terms.length})</span>
+      </button>
+      <button class="type-btn rounded-full px-4 py-2 text-sm font-medium border transition-colors" data-type="post">
+        Blog Articles <span class="type-count text-xs text-muted ml-1">({searchData.posts.length})</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="mx-auto max-w-4xl px-4 pb-16 sm:px-6 lg:px-8">
+    <!-- Results count -->
+    <p id="results-info" class="text-sm text-muted mb-4"></p>
+
+    <!-- Results list -->
+    <div id="results-list" class="space-y-3"></div>
+
+    <!-- No results -->
+    <div id="no-results" class="hidden glass-card p-12 text-center">
+      <div class="mx-auto w-16 h-16 rounded-2xl bg-bg-alt flex items-center justify-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-muted" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+      <h3 class="text-lg font-semibold text-text">No results found</h3>
+      <p class="mt-2 text-sm text-muted">Try different keywords or browse popular topics below.</p>
+    </div>
+
+    <!-- Popular Topics (shown when no search) -->
+    <div id="popular-topics" class="mt-8">
+      <h2 class="text-lg font-bold text-text mb-4 text-center">Popular Topics</h2>
+      <div class="flex flex-wrap gap-2 justify-center">
+        {popularTopics.map(topic => (
+          <button
+            class="topic-btn rounded-full bg-bg-alt px-4 py-2 text-sm font-medium text-text border border-border hover:bg-primary-light hover:text-primary hover:border-primary/30 transition-colors"
+            data-query={topic.query}
+          >
+            {topic.label}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Browse links -->
+    <div class="mt-12 text-center">
+      <h2 class="text-lg font-bold text-text mb-4">Browse by Section</h2>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="/financial-wellness/" class="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary-hover transition-colors min-h-[44px]">
+          Wellness Guides
+        </a>
+        <a href="/blog/" class="inline-flex items-center px-5 py-2.5 rounded-lg border border-border text-text text-sm font-semibold hover:bg-bg-alt transition-colors min-h-[44px]">
+          Blog Articles
+        </a>
+        <a href="/" class="inline-flex items-center px-5 py-2.5 rounded-lg border border-border text-text text-sm font-semibold hover:bg-bg-alt transition-colors min-h-[44px]">
+          Lender Directory
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .type-btn {
+      background: var(--bg-alt);
+      color: var(--text);
+      border-color: var(--border);
+    }
+    .type-btn:hover, .type-btn.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .type-btn.active .type-count {
+      color: var(--primary);
+    }
+  </style>
+
+  <script define:vars={{ allData: JSON.stringify(searchData) }}>
+    const data = JSON.parse(allData);
+    const allItems = [
+      ...data.guides,
+      ...data.terms,
+      ...data.posts,
+    ];
+
+    const searchInput = document.getElementById('learn-search');
+    const clearBtn = document.getElementById('clear-search');
+    const resultsList = document.getElementById('results-list');
+    const resultsInfo = document.getElementById('results-info');
+    const noResults = document.getElementById('no-results');
+    const popularTopics = document.getElementById('popular-topics');
+    const typeButtons = document.querySelectorAll('.type-btn');
+    const topicButtons = document.querySelectorAll('.topic-btn');
+
+    let activeType = 'all';
+    let lastQuery = '';
+
+    const typeBadge = {
+      guide: { label: 'Guide', cls: 'bg-blue-50 text-blue-700 border-blue-200' },
+      term: { label: 'Definition', cls: 'bg-amber-50 text-amber-700 border-amber-200' },
+      post: { label: 'Blog', cls: 'bg-green-50 text-green-700 border-green-200' },
+    };
+
+    function search(query) {
+      const q = query.toLowerCase().trim();
+      lastQuery = q;
+
+      if (!q) {
+        resultsList.innerHTML = '';
+        resultsInfo.textContent = '';
+        noResults.classList.add('hidden');
+        popularTopics.classList.remove('hidden');
+        clearBtn.classList.add('hidden');
+        clearBtn.classList.remove('flex');
+        return;
+      }
+
+      clearBtn.classList.remove('hidden');
+      clearBtn.classList.add('flex');
+      popularTopics.classList.add('hidden');
+
+      const words = q.split(/\s+/).filter(w => w.length > 1);
+
+      // Score each item
+      const scored = allItems
+        .filter(item => activeType === 'all' || item.type === activeType)
+        .map(item => {
+          let score = 0;
+          const title = (item.title || '').toLowerCase();
+          const desc = (item.description || '').toLowerCase();
+          const fullForm = (item.full_form || '').toLowerCase();
+          const tags = (item.tags || []).join(' ').toLowerCase();
+          const takeaways = (item.key_takeaways || []).join(' ').toLowerCase();
+
+          for (const word of words) {
+            if (title.includes(word)) score += 10;
+            if (title === q) score += 20;
+            if (fullForm.includes(word)) score += 8;
+            if (desc.includes(word)) score += 3;
+            if (tags.includes(word)) score += 5;
+            if (takeaways.includes(word)) score += 2;
+          }
+
+          return { ...item, score };
+        })
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score);
+
+      // Render
+      if (scored.length === 0) {
+        resultsList.innerHTML = '';
+        resultsInfo.textContent = '';
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+        const shown = scored.slice(0, 50);
+        resultsInfo.textContent = `${scored.length} result${scored.length !== 1 ? 's' : ''} for "${query}"`;
+
+        resultsList.innerHTML = shown.map(item => {
+          const badge = typeBadge[item.type];
+          const readTime = item.read_time ? `<span class="text-xs text-muted">${item.read_time} read</span>` : '';
+          const snippet = item.description.length > 200 ? item.description.slice(0, 200) + '...' : item.description;
+          return `<a href="${item.url}" class="block glass-card p-5 hover:border-primary/30 hover:shadow-sm transition-all">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="inline-block rounded-full px-2.5 py-0.5 text-[11px] font-semibold border ${badge.cls}">${badge.label}</span>
+              ${readTime}
+            </div>
+            <h3 class="text-base font-semibold text-text">${item.title}</h3>
+            ${item.full_form && item.full_form !== item.title ? `<p class="text-xs text-primary font-medium mt-0.5">${item.full_form}</p>` : ''}
+            <p class="mt-1.5 text-sm text-muted leading-relaxed">${snippet}</p>
+          </a>`;
+        }).join('');
+      }
+    }
+
+    // Debounce
+    let timer;
+    searchInput?.addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => search(searchInput.value), 150);
+    });
+
+    // Clear button
+    clearBtn?.addEventListener('click', () => {
+      searchInput.value = '';
+      search('');
+      searchInput.focus();
+    });
+
+    // Type filter buttons
+    typeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        typeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeType = btn.getAttribute('data-type');
+        if (lastQuery) search(searchInput.value);
+      });
+    });
+
+    // Popular topic buttons
+    topicButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const query = btn.getAttribute('data-query');
+        searchInput.value = query;
+        search(query);
+        searchInput.focus();
+      });
+    });
+
+    // Check URL params
+    const params = new URLSearchParams(window.location.search);
+    const urlQ = params.get('q');
+    if (urlQ) {
+      searchInput.value = urlQ;
+      search(urlQ);
+    }
+  </script>
+</BaseLayout>

@@ -467,3 +467,83 @@ export const TOP_CITIES: { city: string; state: string; lat: number; lng: number
   { city: 'Detroit', state: 'Michigan', lat: 42.3314, lng: -83.0458 },
   { city: 'Memphis', state: 'Tennessee', lat: 35.1495, lng: -90.0490 },
 ];
+
+// --- Blog Posts ---
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  category: string;
+  category_label: string;
+  description: string;
+  seo_title: string;
+  seo_description: string;
+  read_time: string;
+  publish_date: string;
+  status: 'draft' | 'scheduled' | 'published';
+  last_updated: string;
+  sections: { heading: string; content: string }[];
+  key_takeaways: string[];
+  related_guides: string[];
+  related_categories: string[];
+  faq: { question: string; answer: string }[];
+  tags: string[];
+}
+
+export function getBlogPosts(): BlogPost[] {
+  const raw = fs.readFileSync(path.join(CONTENT_DIR, 'blog-posts.json'), 'utf-8');
+  const all = JSON.parse(raw) as BlogPost[];
+  return all.filter(p => p.status === 'published');
+}
+
+export function getAllBlogPosts(): BlogPost[] {
+  const raw = fs.readFileSync(path.join(CONTENT_DIR, 'blog-posts.json'), 'utf-8');
+  return JSON.parse(raw) as BlogPost[];
+}
+
+export function getBlogPostBySlug(slug: string): BlogPost | undefined {
+  return getBlogPosts().find(p => p.slug === slug);
+}
+
+export function getBlogPostsByCategory(category: string): BlogPost[] {
+  return getBlogPosts().filter(p => p.category === category);
+}
+
+// --- Education Search Data ---
+
+export function getEducationSearchData() {
+  const guides = getWellnessGuides().map(g => ({
+    slug: g.slug,
+    title: g.title,
+    description: g.description,
+    category: g.category,
+    read_time: g.read_time,
+    type: 'guide' as const,
+    url: `/financial-wellness/${g.slug}/`,
+    key_takeaways: g.key_takeaways,
+  }));
+
+  const terms = getGlossaryTerms().map(t => ({
+    slug: t.slug,
+    title: t.term,
+    description: t.plain_definition,
+    category: t.category,
+    full_form: t.full_form,
+    type: 'term' as const,
+    url: `/glossary/#${t.slug}`,
+  }));
+
+  const posts = getBlogPosts().map(p => ({
+    slug: p.slug,
+    title: p.title,
+    description: p.description,
+    category: p.category,
+    read_time: p.read_time,
+    tags: p.tags,
+    type: 'post' as const,
+    url: `/blog/${p.slug}/`,
+    key_takeaways: p.key_takeaways,
+  }));
+
+  return { guides, terms, posts };
+}
