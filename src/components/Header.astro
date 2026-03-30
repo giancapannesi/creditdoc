@@ -130,6 +130,16 @@ const services = categories.filter(c =>
       </a>
 
       <a
+        href="/blog/"
+        class:list={[
+          "text-sm font-medium transition-colors py-2",
+          currentPath.startsWith('/blog') ? 'text-primary' : 'text-text hover:text-primary'
+        ]}
+      >
+        Blog
+      </a>
+
+      <a
         href="/financial-wellness/"
         class:list={[
           "text-sm font-medium transition-colors py-2",
@@ -137,6 +147,16 @@ const services = categories.filter(c =>
         ]}
       >
         Wellness
+      </a>
+
+      <a
+        href="/learn/"
+        class:list={[
+          "text-sm font-medium transition-colors py-2",
+          currentPath.startsWith('/learn') ? 'text-primary' : 'text-text hover:text-primary'
+        ]}
+      >
+        Learn
       </a>
 
       <a
@@ -240,8 +260,14 @@ const services = categories.filter(c =>
       <a href="/tools/" class="block rounded-lg px-3 py-3 text-sm font-medium text-text hover:bg-bg-alt transition-colors">
         Tools
       </a>
+      <a href="/blog/" class="block rounded-lg px-3 py-3 text-sm font-medium text-text hover:bg-bg-alt transition-colors">
+        Blog
+      </a>
       <a href="/financial-wellness/" class="block rounded-lg px-3 py-3 text-sm font-medium text-text hover:bg-bg-alt transition-colors">
         Wellness
+      </a>
+      <a href="/learn/" class="block rounded-lg px-3 py-3 text-sm font-medium text-text hover:bg-bg-alt transition-colors">
+        Learn
       </a>
       <a href="/search/" class="block rounded-lg px-3 py-3 text-sm font-medium text-text hover:bg-bg-alt transition-colors">
         Search
