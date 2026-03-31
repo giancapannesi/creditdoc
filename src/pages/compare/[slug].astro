@@ -8,9 +8,11 @@ import type { Lender } from '../../utils/data';
 
 export function getStaticPaths() {
   const comparisons = getComparisons();
-  return comparisons.map(comp => ({
-    params: { slug: comp.slug },
-  }));
+  return comparisons
+    .filter(comp => getLenderBySlug(comp.lender_a) && getLenderBySlug(comp.lender_b))
+    .map(comp => ({
+      params: { slug: comp.slug },
+    }));
 }
 
 const { slug } = Astro.params;

@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../../components/GlossaryAppendix.astro';
-import { getStatesWithLenders, getStateData, getLendersInState, getGlossaryTermsForContext } from '../../../utils/data';
+import { getAllStatesInfo, getStatesWithLenders, getStateData, getLendersInState, getGlossaryTermsForContext } from '../../../utils/data';
 
 export function getStaticPaths() {
-  const states = getStatesWithLenders(1);
+  const states = getAllStatesInfo();
   const stateData = getStateData();
   return states
     .filter(s => stateData[s.abbr]?.credit_repair_laws)

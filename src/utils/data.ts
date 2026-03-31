@@ -416,6 +416,16 @@ export function getStateData(): Record<string, any> {
   return JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
 }
 
+/** Returns all 50 states from states.json — no lender-count dependency */
+export function getAllStatesInfo(): { name: string; abbr: string; slug: string }[] {
+  const data = getStateData();
+  return Object.entries(data).map(([abbr, info]: [string, any]) => ({
+    name: info.name,
+    abbr,
+    slug: info.name.toLowerCase().replace(/\s+/g, '-'),
+  }));
+}
+
 // --- Glossary Terms ---
 
 export interface GlossaryTerm {
