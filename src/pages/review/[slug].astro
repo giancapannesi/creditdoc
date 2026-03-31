@@ -217,7 +217,7 @@ const jsonLd = [
 ---
 
 <BaseLayout
-  title={`${lender.name} Review (2026) - Pricing, BBB Rating & Features | CreditDoc`}
+  title={lender.seo_title || (lender.name.length <= 35 ? `${lender.name} Review (2026) | CreditDoc` : lender.name.length <= 50 ? `${lender.name} Review (2026)` : `${lender.name.slice(0, 53)} Review`)}
   description={lender.description_short}
   jsonLd={jsonLd}
   noindex={isSkeleton}
