@@ -168,18 +168,22 @@ if (lender.company_info?.phone) {
   financialService.telephone = lender.company_info.phone;
 }
 
-// AggregateRating — only when we have real Google Maps review data
-if (lender.rating > 0 && lender.rating <= 5 && (lender.google_reviews_count || 0) > 0) {
+// AggregateRating — must match visible RatingStars component on page.
+// When Google reviews exist, use reviewCount. Otherwise use ratingCount (editorial assessment).
+// Without this, pages showing stars but no structured rating trigger GSC
+// "Review snippets: Invalid object type for field <parent_node>" errors.
+if (lender.rating > 0 && lender.rating <= 5) {
   financialService.aggregateRating = {
     '@type': 'AggregateRating',
     ratingValue: lender.rating.toString(),
     bestRating: '5',
     worstRating: '1',
-    reviewCount: lender.google_reviews_count.toString(),
+    ...((lender.google_reviews_count || 0) > 0
+      ? { reviewCount: lender.google_reviews_count.toString() }
+      : { ratingCount: '1' }
+    ),
   };
 }
-// No review markup for pages without real review count data —
-// fabricated single reviews trigger GSC "Invalid object type" errors
 
 // Price range hint
 if (lender.pricing?.monthly_price > 0) {
