@@ -10,13 +10,18 @@ const categories = getCategories();
 const specials = getSpecials().slice(0, 3);
 const wellnessGuides = getWellnessGuides().slice(0, 3);
 
-// Top Picks: enriched profiles only, verified first, then by rating
+// Top Picks: credit repair + financial services ONLY, no pawn shops or title loans
+// Deduplicated by company name (keep highest rated location)
+const TOP_PICK_CATEGORIES = ['fix-my-credit', 'credit-counseling', 'debt-relief', 'credit-monitoring', 'build-credit'];
+const seenNames = new Set<string>();
 const topPicks = lenders
   .filter(l => {
     const ds = l.data_source || '';
     const enriched = l.has_been_enriched === true;
     const hasContent = (l.description_long || '').length > 200;
-    return (ds === 'enriched' || ds === 'editorial' || ds === 'verified' || enriched) && hasContent;
+    const relevantCategory = TOP_PICK_CATEGORIES.includes(l.category);
+    const hasRating = (l.rating || 0) > 0;
+    return relevantCategory && (ds === 'enriched' || ds === 'editorial' || ds === 'verified' || enriched) && hasContent && hasRating;
   })
   .sort((a, b) => {
     // Verified first, then editorial, then enriched
@@ -24,6 +29,13 @@ const topPicks = lenders
     const tierB = b.data_source === 'verified' ? 3 : b.data_source === 'editorial' ? 2 : 1;
     if (tierA !== tierB) return tierB - tierA;
     return (b.rating || 0) - (a.rating || 0);
+  })
+  .filter(l => {
+    // Deduplicate: keep first (highest rated) entry per company name
+    const baseName = l.name.replace(/\s*[-–—]\s*.+$/, '').replace(/\s+(of|in|at)\s+.+$/i, '').trim();
+    if (seenNames.has(baseName.toLowerCase())) return false;
+    seenNames.add(baseName.toLowerCase());
+    return true;
   })
   .slice(0, 10);
 
