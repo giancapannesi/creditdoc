@@ -143,6 +143,18 @@ const qualityScore = lender.quality_score ?? 0;
 const isSkeleton = qualityScore < 3;
 const isEnriched = lender.has_been_enriched === true || lender.data_source === 'enriched' || lender.data_source === 'editorial' || lender.data_source === 'verified';
 
+// Website health warnings
+const websiteStatus = (lender as any).website_status || '';
+const hasWebsiteWarning = ['ssl_expired', 'dead', 'parked', 'hacked', 'redirect_suspicious'].includes(websiteStatus);
+const websiteWarnings: Record<string, { label: string; detail: string }> = {
+  ssl_expired: { label: 'Insecure Website (SSL Expired)', detail: 'This company\'s website has an expired SSL certificate. The site may be inaccessible or insecure. Exercise caution before sharing personal information.' },
+  dead: { label: 'Website Unavailable', detail: 'This company\'s website appears to be offline or no longer operational. The company may have closed or moved to a different address.' },
+  parked: { label: 'Website Not Active', detail: 'This company\'s website appears to be parked or for sale. The company may no longer be operating.' },
+  hacked: { label: 'Website Compromised', detail: 'This company\'s website appears to have been compromised. Do not visit the site or enter any personal information.' },
+  redirect_suspicious: { label: 'Suspicious Website Redirect', detail: 'This company\'s website redirects to an unrelated domain. The original business may no longer operate at this address.' },
+};
+const warning = websiteWarnings[websiteStatus];
+
 // Build FinancialService (LocalBusiness subtype) — proper schema for financial services
 const financialService: Record<string, any> = {
   '@context': 'https://schema.org',
@@ -232,6 +244,21 @@ const jsonLd = [
       <li class="text-text font-medium">{lender.name}</li>
     </ol>
   </nav>
+
+  <!-- Website Health Warning Banner -->
+  {hasWebsiteWarning && warning && (
+    <div class="mx-auto max-w-7xl px-4 pt-4 sm:px-6 lg:px-8">
+      <div class="rounded-lg border-2 border-red-500/40 bg-red-500/10 p-4 flex items-start gap-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400 shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.168 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+        </svg>
+        <div>
+          <p class="font-bold text-red-400 text-sm">{warning.label}</p>
+          <p class="text-sm text-red-300/80 mt-1">{warning.detail}</p>
+        </div>
+      </div>
+    </div>
+  )}
 
   <!-- Header Section -->
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
