@@ -88,7 +88,8 @@ const lowestPrice = lender.pricing.tiers.length > 0
   ? Math.min(...lender.pricing.tiers.map(t => t.price))
   : lender.pricing.monthly_price;
 const hasPricing = lowestPrice > 0 || lender.pricing.tiers.length > 0;
-const priceDisplay = hasPricing ? `From ${formatPrice(lowestPrice)}/mo` : 'Contact for Pricing';
+const isFreeService = lender.pricing.monthly_price === 0 && lender.pricing.setup_fee === 0 && lender.pricing.tiers.length === 0 && lender.pricing.free_consultation === true;
+const priceDisplay = hasPricing ? `From ${formatPrice(lowestPrice)}/mo` : isFreeService ? 'Free to Use' : 'Contact for Pricing';
 
 // Category-aware feature labels — credit repair features only show on credit repair pages
 const creditRepairFeatures: Record<string, string> = {
@@ -552,7 +553,7 @@ const jsonLd = [
             )}
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">Starting Price</dt>
-              <dd class="text-sm font-medium text-text">{hasPricing ? `${formatPrice(lowestPrice)}/mo` : 'Contact provider'}</dd>
+              <dd class="text-sm font-medium text-text">{hasPricing ? `${formatPrice(lowestPrice)}/mo` : isFreeService ? 'Free to Use' : 'Contact provider'}</dd>
             </div>
             {lender.pricing.setup_fee > 0 ? (
             <div class="flex items-center justify-between py-2 border-b border-border/50">
