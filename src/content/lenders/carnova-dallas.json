@@ -3,7 +3,7 @@
   "slug": "carnova-dallas",
   "category": "personal-loans",
   "subcategories": [],
-  "description_short": "CARNOVA — Used car dealer in Dallas, TX.",
+  "description_short": "CARNOVA \u2014 Used car dealer in Dallas, TX.",
   "description_long": "CARNOVA provides Used car dealer. Located at 2612 Manana Dr, Dallas, TX 75220.",
   "logo_url": "https://lh4.googleusercontent.com/-ihq5VJwVQYM/AAAAAAAAAAI/AAAAAAAAAAA/UFURKZQki9M/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://carnova.us/",
@@ -104,9 +104,11 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 1,
   "enrichment_attempts": 0,
   "last_engine_run": "2026-03-31",
-  "website_needs_review": true
+  "website_needs_review": true,
+  "no_index": true,
+  "quarantine_reason": "auto_dealer_not_financial"
 }

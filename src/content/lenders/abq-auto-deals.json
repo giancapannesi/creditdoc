@@ -3,7 +3,7 @@
   "slug": "abq-auto-deals",
   "category": "personal-loans",
   "subcategories": [],
-  "description_short": "ABQ Auto Deals — Used car dealer in Albuquerque, NM.",
+  "description_short": "ABQ Auto Deals \u2014 Used car dealer in Albuquerque, NM.",
   "description_long": "ABQ Auto Deals provides Used car dealer. Located at 169 Griegos Rd NW, Albuquerque, NM 87107.",
   "logo_url": "",
   "website_url": "https://www.cars.com/dealers/189803/abq-auto-deals/",
@@ -79,9 +79,11 @@
     "phone": "+1 505-554-2428",
     "working_hours": {}
   },
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 1,
   "enrichment_attempts": 0,
   "last_engine_run": "2026-03-31",
-  "website_needs_review": true
+  "website_needs_review": true,
+  "no_index": true,
+  "quarantine_reason": "auto_dealer_not_financial"
 }

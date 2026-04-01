@@ -3,7 +3,7 @@
   "slug": "m-m-motors",
   "category": "personal-loans",
   "subcategories": [],
-  "description_short": "M & M Motors Inc — Used car dealer in West Allis, WI.",
+  "description_short": "M & M Motors Inc \u2014 Used car dealer in West Allis, WI.",
   "description_long": "M & M Motors Inc provides Used car dealer. Located at 911 S 108th St, West Allis, WI 53214.",
   "logo_url": "https://lh4.googleusercontent.com/-IZMUosnBcY4/AAAAAAAAAAI/AAAAAAAAAAA/vlWf9_FI2qc/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.m-mcars.com/",
@@ -101,9 +101,11 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 1,
   "enrichment_attempts": 0,
   "last_engine_run": "2026-03-31",
-  "website_needs_review": true
+  "website_needs_review": true,
+  "no_index": true,
+  "quarantine_reason": "auto_dealer_not_financial"
 }

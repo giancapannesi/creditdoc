@@ -3,7 +3,7 @@
   "slug": "makka-auto-sales",
   "category": "personal-loans",
   "subcategories": [],
-  "description_short": "Makka Auto Sales — Car dealer in Dallas, TX.",
+  "description_short": "Makka Auto Sales \u2014 Car dealer in Dallas, TX.",
   "description_long": "Makka Auto Sales provides Car dealer. Located at 11652 Harry Hines Blvd, Dallas, TX 75229.",
   "logo_url": "https://lh6.googleusercontent.com/-ukbCDy7oT5g/AAAAAAAAAAI/AAAAAAAAAAA/CyIuGLq1q8s/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.carsforsale.com/used-car-dealer/makka-auto-sales-dallas-tx-d648569",
@@ -101,9 +101,11 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 1,
   "enrichment_attempts": 0,
   "last_engine_run": "2026-03-31",
-  "website_needs_review": true
+  "website_needs_review": true,
+  "no_index": true,
+  "quarantine_reason": "auto_dealer_not_financial"
 }
