@@ -2,16 +2,25 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
-import { getStatesWithLenders, getLendersInState, getStateData, getCategories, getCitiesWithLenders, getGlossaryTermsForContext } from '../../utils/data';
+import { getAllStatesInfo, getStatesWithLenders, getLendersInState, getStateData, getCategories, getCitiesWithLenders, getGlossaryTermsForContext } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
 export function getStaticPaths() {
-  const states = getStatesWithLenders(1);
+  const allStates = getAllStatesInfo();
+  const statesWithLenders = getStatesWithLenders(1);
   const stateData = getStateData();
-  return states.map(s => ({
-    params: { slug: s.slug },
-    props: { stateInfo: s, data: stateData[s.abbr] || null },
-  }));
+
+  // Build pages for ALL 50 states, enriching with lender counts where available
+  return allStates.map(s => {
+    const withLenders = statesWithLenders.find(sw => sw.abbr === s.abbr);
+    return {
+      params: { slug: s.slug },
+      props: {
+        stateInfo: withLenders || { ...s, lenderCount: 0, cityCount: 0 },
+        data: stateData[s.abbr] || null,
+      },
+    };
+  });
 }
 
 const { stateInfo, data } = Astro.props;
@@ -39,10 +48,15 @@ const topLenders = [...lenders]
   .sort((a, b) => b.rating - a.rating)
   .slice(0, 10);
 
-const title = `Credit Repair & Financial Services in ${stateInfo.name} (${stateInfo.abbr}) | CreditDoc`;
-const description = data?.consumer_rights_summary
-  ? `Find ${stateInfo.lenderCount} credit repair companies and lenders in ${stateInfo.name}. ${data.consumer_rights_summary.split('.')[0]}.`
-  : `Compare ${stateInfo.lenderCount} credit repair companies, personal lenders, and financial services in ${stateInfo.name}. BBB ratings, pricing, and reviews.`;
+const hasLenders = stateInfo.lenderCount > 0;
+const title = hasLenders
+  ? `Credit Repair & Financial Services in ${stateInfo.name} (${stateInfo.abbr}) | CreditDoc`
+  : `${stateInfo.name} Credit & Lending Laws | CreditDoc`;
+const description = hasLenders
+  ? (data?.consumer_rights_summary
+    ? `Find ${stateInfo.lenderCount} credit repair companies and lenders in ${stateInfo.name}. ${data.consumer_rights_summary.split('.')[0]}.`
+    : `Compare ${stateInfo.lenderCount} credit repair companies, personal lenders, and financial services in ${stateInfo.name}. BBB ratings, pricing, and reviews.`)
+  : `${stateInfo.name} lending regulations, credit repair laws, consumer protections, and financial resources. ${data?.consumer_rights_summary?.split('.')[0] || ''}`;
 
 const jsonLd = [
   {
@@ -105,14 +119,17 @@ const fmtCurrency = (n: number) => n ? '$' + n.toLocaleString('en-US') : 'N/A';
     <!-- Hero -->
     <div class="mb-8">
       <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">
-        Credit Repair & Financial Services in {stateInfo.name}
+        {hasLenders ? `Credit Repair & Financial Services in ${stateInfo.name}` : `${stateInfo.name} Credit & Lending Laws`}
       </h1>
       <p class="text-lg text-muted max-w-3xl">
-        Compare {stateInfo.lenderCount.toLocaleString()} credit repair companies, personal lenders, and financial services across {stateInfo.cityCount} cities in {stateInfo.abbr}.
+        {hasLenders
+          ? `Compare ${stateInfo.lenderCount.toLocaleString()} credit repair companies, personal lenders, and financial services across ${stateInfo.cityCount} cities in ${stateInfo.abbr}.`
+          : `${stateInfo.name} lending regulations, credit repair laws, consumer protections, and resources for borrowers.`}
       </p>
     </div>
 
     <!-- Quick Stats -->
+    {hasLenders ? (
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
       <div class="glass-card p-4 text-center" style="pointer-events: none;">
         <p class="text-2xl font-bold text-primary">{stateInfo.lenderCount.toLocaleString()}</p>
@@ -131,6 +148,28 @@ const fmtCurrency = (n: number) => n ? '$' + n.toLocaleString('en-US') : 'N/A';
         <p class="text-xs text-muted mt-1">Avg Credit Score</p>
       </div>
     </div>
+    ) : data ? (
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+      {data.avg_credit_score && (
+        <div class="glass-card p-4 text-center" style="pointer-events: none;">
+          <p class="text-2xl font-bold text-primary">{data.avg_credit_score}</p>
+          <p class="text-xs text-muted mt-1">Avg Credit Score</p>
+        </div>
+      )}
+      {data.population && (
+        <div class="glass-card p-4 text-center" style="pointer-events: none;">
+          <p class="text-2xl font-bold text-text">{fmt(data.population)}</p>
+          <p class="text-xs text-muted mt-1">Population</p>
+        </div>
+      )}
+      {data.payday_loan_status && (
+        <div class="glass-card p-4 text-center" style="pointer-events: none;">
+          <p class:list={["text-2xl font-bold", data.payday_loan_status === 'Banned' ? 'text-positive' : data.payday_loan_status === 'Restricted' ? 'text-warning' : 'text-negative']}>{data.payday_loan_status}</p>
+          <p class="text-xs text-muted mt-1">Payday Loans</p>
+        </div>
+      )}
+    </div>
+    ) : null}
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- Main Content (2 cols) -->
