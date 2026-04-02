@@ -157,9 +157,11 @@ const websiteWarnings: Record<string, { label: string; detail: string }> = {
 const warning = websiteWarnings[websiteStatus];
 
 // Build FinancialService (LocalBusiness subtype) — proper schema for financial services
+// Explicit ["FinancialService", "LocalBusiness"] for Google Review snippet eligibility.
+// Google's validator doesn't always resolve subtype chains, so we declare both.
 const financialService: Record<string, any> = {
   '@context': 'https://schema.org',
-  '@type': 'FinancialService',
+  '@type': ['FinancialService', 'LocalBusiness'],
   name: lender.name,
   description: lender.description_short,
   url: lender.website_url?.trim() ? lender.website_url : `https://creditdoc.co/review/${lender.slug}/`,
@@ -185,10 +187,11 @@ if (lender.company_info?.phone) {
 // When Google reviews exist, use reviewCount. Otherwise use ratingCount (editorial assessment).
 // Without this, pages showing stars but no structured rating trigger GSC
 // "Review snippets: Invalid object type for field <parent_node>" errors.
+const clampedRating = Math.min(5, Math.max(1, lender.rating));
 if (lender.rating > 0 && lender.rating <= 5) {
   financialService.aggregateRating = {
     '@type': 'AggregateRating',
-    ratingValue: lender.rating.toString(),
+    ratingValue: clampedRating.toFixed(1),
     bestRating: '5',
     worstRating: '1',
     ...((lender.google_reviews_count || 0) > 0
@@ -230,8 +233,27 @@ const jsonLd = [
 ---
 
 <BaseLayout
-  title={lender.seo_title || (lender.name.length <= 35 ? `${lender.name} Review (2026) | CreditDoc` : lender.name.length <= 50 ? `${lender.name} Review (2026)` : `${lender.name.slice(0, 53)} Review`)}
-  description={lender.description_short}
+  title={(() => {
+    if (lender.seo_title) return lender.seo_title;
+    const city = lender.company_info?.city;
+    const state = lender.company_info?.state;
+    const loc = city ? ` ${city}` : '';
+    const stAbbr = state ? `, ${state.slice(0, 2).toUpperCase()}` : '';
+    const locSuffix = loc ? `${loc}${stAbbr}` : '';
+    const nameWithLoc = locSuffix ? `${lender.name}${locSuffix}` : lender.name;
+    if (nameWithLoc.length <= 35) return `${nameWithLoc} Review (2026) | CreditDoc`;
+    if (nameWithLoc.length <= 50) return `${nameWithLoc} Review (2026)`;
+    return `${nameWithLoc.slice(0, 53)} Review`;
+  })()}
+  description={(() => {
+    const base = lender.description_short || `${lender.name} review with pricing, ratings, and features.`;
+    const city = lender.company_info?.city;
+    if (city && !base.includes(city)) {
+      const locNote = ` Located in ${city}${lender.company_info?.state ? ', ' + lender.company_info.state : ''}.`;
+      return (base + locNote).slice(0, 155);
+    }
+    return base.slice(0, 155);
+  })()}
   jsonLd={jsonLd}
   noindex={isSkeleton}
 >
