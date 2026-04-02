@@ -42,24 +42,34 @@ const similarLenders = lender.similar_lenders
 const categories = getCategories();
 const category = categories.find(c => c.slug === lender.category);
 
-// Fallback: nearby lenders when similar_lenders is empty
+// Fallback chain: similar → nearby → same category → same state
+const usedSlugs = new Set([lender.slug]);
+
 const nearbyLenders = similarLenders.length === 0
   ? allLenders
-      .filter(l => l.slug !== lender.slug && l.company_info?.city === lender.company_info?.city && l.company_info?.state === lender.company_info?.state && l.company_info?.city)
+      .filter(l => !usedSlugs.has(l.slug) && l.company_info?.city === lender.company_info?.city && l.company_info?.state === lender.company_info?.state && l.company_info?.city)
       .sort((a, b) => (b.rating || 0) - (a.rating || 0))
       .slice(0, 3)
   : [];
 
-// Same-category lenders when no similar and no nearby
 const categoryLenders = similarLenders.length === 0 && nearbyLenders.length === 0
   ? allLenders
-      .filter(l => l.slug !== lender.slug && l.category === lender.category && l.rating > 0)
+      .filter(l => !usedSlugs.has(l.slug) && l.category === lender.category && l.rating > 0)
       .sort((a, b) => (b.rating || 0) - (a.rating || 0))
       .slice(0, 3)
   : [];
 
-const relatedLenders = similarLenders.length > 0 ? similarLenders : nearbyLenders.length > 0 ? nearbyLenders : categoryLenders;
-const relatedLendersLabel = similarLenders.length > 0 ? 'Similar Companies' : nearbyLenders.length > 0 ? `More Lenders in ${lender.company_info?.city}` : `More ${category?.name || 'Lenders'}`;
+// Last resort: same state, any category
+const stateAbbr = lender.company_info?.state ? (STATE_ABBR[lender.company_info.state] || lender.company_info.state) : '';
+const stateLenders = similarLenders.length === 0 && nearbyLenders.length === 0 && categoryLenders.length === 0 && stateAbbr
+  ? allLenders
+      .filter(l => !usedSlugs.has(l.slug) && l.company_info?.state === lender.company_info?.state && l.rating > 0)
+      .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+      .slice(0, 3)
+  : [];
+
+const relatedLenders = similarLenders.length > 0 ? similarLenders : nearbyLenders.length > 0 ? nearbyLenders : categoryLenders.length > 0 ? categoryLenders : stateLenders;
+const relatedLendersLabel = similarLenders.length > 0 ? 'Similar Companies' : nearbyLenders.length > 0 ? `More Lenders in ${lender.company_info?.city}` : categoryLenders.length > 0 ? `More ${category?.name || 'Lenders'}` : `More Lenders in ${lender.company_info?.state || 'Your Area'}`;
 
 // Category-mapped wellness guides
 const categoryGuideMap: Record<string, string> = {
