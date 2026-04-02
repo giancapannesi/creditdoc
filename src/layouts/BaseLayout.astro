@@ -12,7 +12,9 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title, description, canonical, ogImage, jsonLd, noindex } = Astro.props;
+const { title: rawTitle, description: rawDesc, canonical, ogImage, jsonLd, noindex } = Astro.props;
+const title = rawTitle.length > 60 ? rawTitle.slice(0, 57) + '...' : rawTitle;
+const description = rawDesc.length > 155 ? rawDesc.slice(0, 152) + '...' : rawDesc;
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
 const ogImg = ogImage || 'https://creditdoc.co/og-default.png';
 ---
