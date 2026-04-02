@@ -174,7 +174,7 @@ export function getAllLenders(): Lender[] {
     const raw = fs.readFileSync(path.join(LENDERS_DIR, f), 'utf-8');
     return JSON.parse(raw) as Lender;
   }).filter(l => {
-    // State-machine gate: ready_for_index + pending_approval (for founder review)
+    // State-machine gate: ready_for_index (live) + pending_approval (live but noindex, for founder review)
     if (l.processing_status) return l.processing_status === 'ready_for_index' || l.processing_status === 'pending_approval';
     // Backward compatibility: if migration hasn't run yet, use old logic
     return l.review_status === 'published';
