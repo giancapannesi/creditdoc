@@ -225,6 +225,29 @@ if (lender.rating > 0 && lender.rating <= 5) {
   };
 }
 
+// Review — enables star snippets in Google SERPs.
+// Uses the editorial diagnosis as the review body.
+if (lender.rating > 0 && lender.rating <= 5) {
+  const diagnosisText = diagnosis?.summary || lender.description_short || '';
+  if (diagnosisText.length > 10) {
+    financialService.review = {
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: 'CreditDoc Editorial Team',
+        url: 'https://creditdoc.co/about/',
+      },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: clampedRating.toFixed(1),
+        bestRating: '5',
+        worstRating: '1',
+      },
+      reviewBody: diagnosisText,
+    };
+  }
+}
+
 // Price range hint
 if (lender.pricing?.monthly_price > 0) {
   financialService.priceRange = `$${lender.pricing.monthly_price}/mo`;
