@@ -101,6 +101,40 @@ const jsonLd = [
     </div>
   </section>
 
+  <!-- Loan Matching CTA (personal loans / emergency cash listicles only) -->
+  {(listicle.category === 'personal-loans' || listicle.category === 'emergency-cash' || listicle.category === 'payday-alternatives') && (
+    <section class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
+      <div class="rounded-xl border-2 border-amber-300/50 bg-gradient-to-r from-amber-50 to-orange-50 p-6">
+        <div class="flex items-start gap-3">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-600" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"/>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-base font-bold text-gray-900">Not Sure Which Lender? Get Matched Instantly</h3>
+            <p class="mt-1 text-sm text-gray-600">Fill out one short form and see which lenders pre-qualify you — no hard credit check to compare your options.</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <a href="https://lowcreditfinance.com/?aff146570" target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center px-4 py-2 rounded-lg bg-amber-600 text-white text-sm font-semibold hover:bg-amber-700 transition-colors">
+                Bad Credit? Check Options
+                <svg xmlns="http://www.w3.org/2000/svg" class="ml-1.5 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"/>
+                </svg>
+              </a>
+              <a href="https://50kloans.com/?aff146559" target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center px-4 py-2 rounded-lg border border-amber-300 text-amber-800 text-sm font-semibold hover:bg-amber-100 transition-colors">
+                Loans Up to $50K
+              </a>
+              <a href="https://superpersonalfinder.com/?aff146562" target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center px-4 py-2 rounded-lg border border-amber-300 text-amber-800 text-sm font-semibold hover:bg-amber-100 transition-colors">
+                Find Personal Loans
+              </a>
+            </div>
+            <p class="mt-2 text-xs text-gray-400">Sponsored — CreditDoc may earn a commission. <a href="/disclosure/" class="underline hover:text-gray-600">Disclosure</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- Ranked List -->
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="space-y-6">
