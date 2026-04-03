@@ -42,6 +42,23 @@ const jsonLd = [
     })),
   },
 ];
+
+// FAQPage schema (if FAQ data exists)
+const faqSchemaItems = (listicle.faq || []).map((item: { q: string; a: string }) => ({
+  '@type': 'Question',
+  name: item.q,
+  acceptedAnswer: {
+    '@type': 'Answer',
+    text: item.a,
+  },
+}));
+if (faqSchemaItems.length > 0) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqSchemaItems,
+  });
+}
 ---
 
 <BaseLayout
@@ -246,6 +263,26 @@ const jsonLd = [
       })}
     </div>
   </section>
+
+  <!-- FAQ Section (FAQPage schema rendered above) -->
+  {listicle.faq && listicle.faq.length > 0 && (
+    <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8" id="faq">
+      <h2 class="text-2xl font-bold text-text mb-6">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {listicle.faq.map((item: { q: string; a: string }) => (
+          <details class="glass-card p-5 group" open>
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <h3 class="text-base font-semibold text-text pr-4">{item.q}</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-muted shrink-0 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+              </svg>
+            </summary>
+            <p class="mt-3 text-sm text-muted leading-relaxed">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )}
 
   <!-- Affiliate Disclosure -->
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
