@@ -1,14 +1,14 @@
 {
   "name": "Cendera Bank",
   "slug": "cendera-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Bells, TX. $228M in assets. 3 offices.",
-  "description_long": "Cendera Bank is a community bank located in Bells, TX, established in 1904. The bank holds approximately $228M in total assets and $199M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Cendera Bank is a community bank serving the DFW area with personal and business checking, savings, lending, and digital banking solutions.",
+  "description_long": "Cendera Bank operates as a traditional community bank with a physical presence in the Dallas-Fort Worth area, maintaining four office locations. The bank was established with roots in the DFW community and positions itself as a modern banking institution serving both personal and business customers. According to their website, they focus on empowering businesses and helping customers manage their finances through tailored solutions. Cendera Bank offers a comprehensive suite of deposit products including multiple checking account tiers (Cendera+ Checking, Cendera Checking, Small Business Checking, Elite Business Checking), savings accounts, money market accounts, and CDs with ICS & CDARS options. Their lending portfolio includes home equity options, home lending, personal secured loans, and business credit lending. The bank emphasizes digital accessibility through multiple channels including online banking, mobile banking, digital wallet integration, bill pay, eStatements, Zelle transfers, and CardHub services. What distinguishes Cendera Bank is their community-focused approach with physical branch locations in the DFW area, combined with modern digital banking capabilities. They serve both retail customers and businesses with treasury management services and merchant services for commercial clients. The bank maintains transparent rate information and fee schedules publicly available on their website. However, as a regional bank with only four locations in the DFW area, Cendera Bank has significantly limited geographic reach compared to national banking institutions. Their digital offerings, while comprehensive, are standard features now offered by most banking institutions. The website does not provide detailed information about loan terms, APRs, minimum deposits, or competitive rate comparisons that would help consumers evaluate their offerings against larger competitors.",
   "logo_url": "",
   "website_url": "http://cenderabank.com",
   "affiliate_url": "",
@@ -23,23 +23,42 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Cendera+ Premium Checking accounts",
+    "Standard Cendera Checking accounts",
+    "Cendera Savings accounts",
+    "Money Market deposit accounts",
+    "Certificates of Deposit (CDs)",
+    "ICS & CDARS high-balance deposit products",
+    "Home equity options and home lending",
+    "Personal secured loans",
+    "Business checking accounts (Elite, Account Analysis, Small Business tiers)",
+    "Business credit lending",
+    "Treasury management services for businesses",
+    "Merchant services",
+    "Mobile banking application",
+    "Digital wallet integration",
+    "Zelle money transfer services",
+    "Bill pay services",
+    "eStatements",
+    "CardHub integration",
+    "Account monitoring and alerts",
+    "Digital banking platform"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1904",
-    "Local community bank with personal service",
-    "3 locations"
+    "Multiple physical branch locations in DFW area for in-person banking and customer service",
+    "Comprehensive digital banking platform including mobile app, online banking, and Zelle money transfer integration",
+    "Diverse checking account options (Cendera+, standard, and tiered business accounts) to serve different customer segments",
+    "Business-focused services including treasury management, merchant services, and account analysis checking",
+    "CD options with ICS & CDARS products for higher deposit protection",
+    "Integrated digital wallet and CardHub services for modern payment methods",
+    "Publicly available rates and fee schedules for transparency"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to four locations in DFW area, providing no national or online-only banking flexibility for customers outside the region",
+    "Website lacks specific information on loan rates, APRs, minimum deposit requirements, and fee amounts for meaningful comparison",
+    "No mention of FDIC insurance limits, account protections, or regulatory details that consumers need for financial institution evaluation",
+    "Digital services offered are standard industry features, not differentiated or innovative compared to national and online banks",
+    "Limited information about business banking features, credit lending requirements, or eligibility criteria"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +70,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3098,
   "latitude": 33.606228918585,
   "longitude": -96.393142042865,
@@ -93,12 +112,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners in the DFW area seeking personalized commercial banking relationships and treasury management",
+    "DFW residents who prefer community banking with local branch access and personal customer service",
+    "Customers seeking multiple account types (personal and business) at a single institution with both digital and physical access",
+    "Homeowners in the DFW area interested in home equity lines of credit or home lending products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Cendera Bank is best suited for DFW-area residents and small businesses seeking traditional community banking with both digital convenience and local branch relationships. The primary caveat is their strictly regional footprint with only four DFW locations and lack of published rate/fee details online, making it unsuitable for customers outside the Dallas-Fort Worth area or those comparing specific loan terms and deposit rates.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +126,11 @@
   ],
   "phone": "",
   "address": "615 E Bells Blvd, Bells, TX 75414",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

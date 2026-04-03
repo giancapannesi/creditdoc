@@ -1,13 +1,13 @@
 {
   "name": "Stride Bank, National Association",
   "slug": "stride-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Enid, OK. $4856M in assets. 11 offices.",
-  "description_long": "Stride Bank, National Association is a community bank located in Enid, OK, established in 1913. The bank holds approximately $4856M in total assets and $4462M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Oklahoma-based national bank founded in 1913, offering consumer and commercial banking, mortgages, and wealth management across Oklahoma and Salt Lake City.",
+  "description_long": "Stride Bank, National Association (formerly Central National Bank of Enid) was established in 1913 and has over a century of experience in community banking. The bank was nationally chartered in 1921, granted trust powers in 1926, and rebranded as Stride Bank in 2019. It has grown from a single location in Enid to a network of branches across Oklahoma (Enid, Tulsa, Oklahoma City, Bartlesville, Blackwell, Woodward, Mooreland) and an expansion location in Salt Lake City, Utah.\n\nStride Bank offers a comprehensive range of financial services including consumer banking (checking, savings, online banking, bill pay), commercial lending, mortgage origination, wealth management, and treasury management services. The bank specializes in niche lending sectors including agricultural loans, healthcare provider financing, commercial real estate, transportation and equipment financing for trucking companies, and commercial & industrial loans for small to mid-sized businesses. They provide home financing, trust account management, and payroll card services.\n\nThe bank distinguishes itself through deep industry expertise in specialized lending verticals. Their agricultural lending team consists of producers who understand farming firsthand. The healthcare lending team brings over 20 years of specialized experience. The transportation lending division has 25+ years serving trucking and construction equipment financing. Home lending dates back over 100 years. This specialization contrasts with generic regional banks and represents genuine sector knowledge.\n\nStride Bank is FDIC insured and positioned as an Equal Housing Lender serving primarily Oklahoma's community banking needs. While they offer modern digital banking (online banking since 1998, bill pay, business internet banking), they maintain traditional community bank relationships and local decision-making. The expansion to Salt Lake City and focus on fintech lending suggests growth ambitions, though the bank remains fundamentally a regional institution with limited national reach.",
   "logo_url": "",
   "website_url": "https://www.stridebank.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Consumer checking and savings accounts",
+    "Online banking and bill pay",
+    "Business internet banking",
+    "Home loans and mortgage origination",
+    "Agricultural loans and farm financing",
+    "Commercial & industrial business loans",
+    "Transportation and equipment financing for trucking and construction",
+    "Commercial real estate loans",
+    "Healthcare provider financing and lending",
+    "Trust account management and trust services",
+    "Wealth management services",
+    "Payroll card services and cardholder programs"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1913",
-    "Local community bank with personal service",
-    "11 locations"
+    "Over 100 years of experience in home lending and community banking since 1913",
+    "Specialized lending expertise in agriculture, healthcare, transportation, and commercial real Estate with dedicated lending teams",
+    "FDIC insured member with Equal Housing Lender designation",
+    "Online banking and bill pay available since 1998; multiple digital banking options including business and payroll platforms",
+    "Trust account management and wealth management services available",
+    "Multiple branch locations across Oklahoma plus Salt Lake City expansion",
+    "Custom-tailored commercial lending solutions with deep industry knowledge"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint primarily confined to Oklahoma; not a national bank despite national charter status",
+    "No mention of consumer credit products like credit cards, personal loans, or auto loans on website",
+    "Appears to focus primarily on business and commercial lending rather than consumer retail banking",
+    "Website provides limited detail on specific deposit products, rates, or consumer loan terms",
+    "No mention of mobile banking app despite online banking availability since 1998"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4091,
   "latitude": 36.3967173350847,
   "longitude": -97.8821958544725,
@@ -92,12 +103,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Oklahoma-based small to mid-sized business owners needing specialized commercial lending (agriculture, healthcare, transportation)",
+    "Farmers, ranchers, and agricultural producers seeking agricultural financing and deposit products",
+    "Commercial real estate investors and business owners in Oklahoma or Salt Lake City markets",
+    "Healthcare providers and medical professionals needing specialized healthcare financing solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Stride Bank is best suited for small-to-mid-sized business owners, farmers, healthcare providers, and commercial borrowers in Oklahoma seeking relationship-based banking with specialized industry expertise. The primary caveat is that this is a regional bank with limited geographic reach outside Oklahoma and minimal consumer retail banking products, making it unsuitable for consumers seeking general-purpose banking or personal lending solutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "324 W Broadway Ave, Enid, OK 73701",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

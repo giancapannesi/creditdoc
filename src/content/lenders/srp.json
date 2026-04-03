@@ -1,15 +1,15 @@
 {
   "name": "Srp",
   "slug": "srp",
-  "category": "payday-alternatives",
+  "category": "banking",
   "subcategories": [
     "credit-union",
     "fdic-equivalent",
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "Federal Credit Union in , . Low-income designated. NCUA insured. 21 locations.",
-  "description_long": "Srp is a federal credit union serving members in , , established in 1960. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) — small, affordable loans designed to replace predatory payday lending. The credit union operates 21 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "SRP is Arizona's largest electric and water utility company providing power, water, and irrigation services to residential and business customers in the Phoenix metro area.",
+  "description_long": "Salt River Project (SRP) is a utility company headquartered in Arizona that has served the Phoenix metropolitan area for over a century. Founded to manage water and power resources for the region, SRP has evolved into one of the largest public utilities in the United States, responsible for delivering electricity and water to millions of residents and businesses.\n\nSRP offers comprehensive utility services including residential and business electric service, water and irrigation management, and energy solutions. Customers can manage accounts online, set up budget billing, receive billing alerts, pay bills, and transfer service through their digital platform. The company provides multiple residential rate plans including time-of-use pricing, prepaid programs (M-Power), and specialized plans for solar customers and electric vehicle owners. Business customers access commercial rate structures, demand response programs, and custom energy solutions.\n\nSRP distinguishes itself through extensive sustainability initiatives, including renewable energy options, solar rebate programs, energy efficiency audits, and a 2035 sustainability goal framework. The utility offers financial support options and resources for customers struggling with bills, including Budget Billing that spreads costs evenly across months and a Safety Net program for sending past-due alerts to family members. SRP also manages water resources, flood irrigation systems, canal maintenance, and provides recreational access to managed lakes and trails.\n\nSRP is a regulated utility company, not a consumer finance provider. While it offers budget billing and financial assistance programs to help manage utility costs, these are standard utility services rather than payday alternatives, loans, or credit products. The company's primary function is infrastructure and service delivery rather than consumer lending or financial services.",
   "logo_url": "",
   "website_url": "https://www.srpnet.com/",
   "affiliate_url": "",
@@ -24,25 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)",
-    "Payday Alternative Loans (PALs)"
+    "Residential electric service setup, transfer, and cancellation",
+    "Business electric service with multiple rate plan options",
+    "Water and irrigation service management and billing",
+    "Budget Billing for residential customers (12-month cost averaging)",
+    "Billing alerts and reminders (eNotes) and Safety Net past-due alerts",
+    "Online account management and mobile app access",
+    "Solar installation rebates and utility-scale solar offset programs",
+    "Energy efficiency rebates (AC, thermostats, LED, insulation, heat pumps)",
+    "Electric vehicle rate plans and EV charger installation rebates",
+    "Home energy audits and free shade tree programs",
+    "Business demand response and custom energy efficiency solutions",
+    "Project SHARE financial assistance for customers in need"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1960",
-    "Member-owned cooperative",
-    "Low-income designated — may offer Payday Alternative Loans (PALs)"
+    "Budget Billing spreads electric costs evenly across 12 months for predictable monthly bills",
+    "Multiple rate plan options including time-of-use, prepaid (M-Power), and specialized EV/solar plans",
+    "Extensive energy-saving rebates and incentives ($100 off thermostats, AC rebates, EV charger credits)",
+    "Safety Net program allows customers to send past-due bill alerts to family members for support",
+    "Comprehensive digital account management through website and mobile apps",
+    "Free energy audits and DIY energy-saving resources to help reduce consumption",
+    "Project SHARE provides direct financial assistance to neighbors in need"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Not a consumer finance company\u2014does not provide loans, credit products, or payday alternatives",
+    "Financial assistance is limited to utility bill help, not general emergency cash needs",
+    "Only serves Arizona geographic area; no nationwide availability",
+    "Budget billing is a cost-spreading tool, not a discount or rate reduction",
+    "Miscategorized as 'payday-alternatives' despite being a regulated utility provider"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +61,7 @@
   "founded_year": 1960,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "24410",
   "published": true,
   "review_status": "published",
@@ -92,19 +101,21 @@
     "ease_of_use": 3.8
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Payday loan alternatives (PALs)"
+    "Arizona residents seeking to stabilize monthly electricity and water costs",
+    "Homeowners interested in solar rebates, energy efficiency upgrades, and conservation",
+    "Business owners needing commercial power solutions and demand response programs"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "SRP is a regulated utility company, not a consumer finance provider, and should not be categorized as a payday alternative. It is appropriate only for Arizona residents needing electricity, water, or irrigation services. While it offers budget billing and limited financial assistance, these are utility cost-management tools, not loans or emergency credit products.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-03"
 }

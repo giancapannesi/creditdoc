@@ -1,14 +1,14 @@
 {
   "name": "Louisiana National Bank",
   "slug": "louisiana-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Ruston, LA. $480M in assets. 10 offices.",
-  "description_long": "Louisiana National Bank is a community bank located in Ruston, LA, established in 1935. The bank holds approximately $480M in total assets and $426M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured regional bank in Louisiana offering personal and business checking, savings, loans, and treasury management services across six locations.",
+  "description_long": "Louisiana National Bank is a regional FDIC-insured financial institution that has built its operations around personal and business banking services. The bank positions itself as an \"Uncommon Banker,\" emphasizing local decision-making and personalized service across its footprint in Louisiana, with branches in Ruston, Arcadia, Farmerville, Monroe, West Monroe, and Baton Rouge.\n\nThe bank offers a comprehensive range of deposit and lending products for both consumers and businesses. For personal banking, they provide checking and savings accounts, personal loans, debit cards with rewards (0.5% on domestic transactions), and a mobile app with bill pay functionality. On the business side, Louisiana National Bank offers business checking and savings accounts, commercial loans, merchant services (in partnership with MersaTech), treasury management tools including ACH processing, positive pay fraud protection, remote deposit capture, cash management, and CDARS/ICS deposit insurance products that extend FDIC coverage above the standard $250,000 limit.\n\nWhat distinguishes Louisiana National Bank is its emphasis on local relationship banking and real estate lending expertise. The bank highlights \"local decision-making\" on real estate projects, partnership with MersaTech for merchant services (offering brands like Valor, Clover, and PAX), and 24/7 local customer support. Their CDARS and ICS products specifically address the needs of depositors seeking FDIC insurance above $250,000 through a single banking relationship.\n\nAs a regional bank, Louisiana National Bank is best suited for individuals and businesses with existing ties to Louisiana or those seeking personalized, relationship-based banking. The bank's strength lies in commercial lending and real estate financing rather than consumer lending innovation. Customers should be aware this is a regional institution with limited branch presence compared to national banks, and there is no mention of online account opening, making in-person banking necessary for new customers.",
   "logo_url": "",
   "website_url": "https://www.ln.bank",
   "affiliate_url": "",
@@ -23,23 +23,41 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking accounts",
+    "Business savings accounts",
+    "Commercial loans with local underwriting",
+    "Real estate financing",
+    "Merchant services (card processing via MersaTech partnership)",
+    "ACH processing",
+    "Positive pay fraud protection",
+    "Remote deposit capture",
+    "Cash management services",
+    "CDARS and ICS deposit insurance products",
+    "Business credit cards (Visa and MasterCard)",
+    "Debit cards with rewards",
+    "Mobile banking app with bill pay",
+    "Online banking platform",
+    "Treasury management services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1935",
-    "Local community bank with personal service",
-    "10 locations"
+    "FDIC-insured deposits with full government backing",
+    "0.5% cash back rewards on all domestic debit card transactions",
+    "CDARS and ICS products allow FDIC insurance coverage above $250,000 with single banking relationship",
+    "Local decision-making on real estate loans with focus on project specifics",
+    "24/7 local customer support through merchant services partner MersaTech",
+    "Mobile app includes bill pay and secure account management",
+    "Comprehensive treasury management suite for businesses including ACH, positive pay fraud protection, and remote deposit capture",
+    "Partnership with established merchant service providers (Valor, Clover, PAX brands)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint with only six branch locations in Louisiana",
+    "No mention of online account opening for new customers, requiring in-person banking",
+    "Merchant services require partnership with third-party provider rather than in-house processing",
+    "No information provided about loan rates, fees, or APRs for any products",
+    "Website lacks details on minimum balance requirements, account types, or product-specific terms"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +69,7 @@
   "states_served": [
     "LA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15059,
   "latitude": 32.5511400087509,
   "longitude": -92.6413730125136,
@@ -93,12 +111,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Louisiana residents and businesses seeking relationship-based personal banking",
+    "Commercial real estate developers and investors valuing local lending decisions",
+    "Small business owners needing integrated merchant processing and treasury management",
+    "High-net-worth depositors seeking FDIC coverage above $250,000 through CDARS/ICS"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Louisiana National Bank is best for consumers and businesses in Louisiana seeking personalized, relationship-driven banking with an emphasis on local decision-making, particularly for real estate financing and business treasury management. The primary caveat is limited geographic reach\u2014this is a six-location regional bank, not a nationwide institution\u2014and lack of information regarding pricing, rates, and minimum account requirements on their website.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +125,11 @@
   ],
   "phone": "",
   "address": "2001 N Trenton St, Ruston, LA 71270",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Miami Savings Bank",
   "slug": "miami-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mutual-bank"
   ],
-  "description_short": "FDIC-insured community bank in Miamitown, OH. $134M in assets. 3 offices.",
-  "description_long": "Miami Savings Bank is a community bank located in Miamitown, OH, established in 1909. The bank holds approximately $134M in total assets and $103M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank based in Ohio offering checking, savings, CDs, mortgages, and refinancing. NMLS#402771.",
+  "description_long": "Miami Savings Bank is a community-focused financial institution operating multiple branches in the Miamitown, Harrison, and Oxford areas of Ohio. The bank serves both personal and business customers with traditional banking services and mortgage lending. The institution is actively expanding, having announced an acquisition of New Foundation Savings Bank. Miami Savings Bank emphasizes personalized service and streamlined loan processing, positioning itself as an alternative to larger national banks with what they characterize as more responsive customer service and faster processing times.\n\nThe bank offers a range of products including checking and savings accounts, Certificate of Deposit (CD) specials, mortgage loans with pre-qualification services, and loan refinancing. They provide telephone banking access, debit cards, internet and mobile banking, e-statements, and direct deposit services. Their mortgage offerings include home purchase loans and refinancing, with customer testimonials highlighting quick closing timelines. The institution maintains an NMLS number (402771) indicating regulatory oversight by the Nationwide Multistate Licensing System.\n\nMiami Savings Bank distinguishes itself through emphasis on local presence and personalized service. Customer testimonials highlight faster processing compared to competitors\u2014one business customer noted closing within one month versus six months with another lender. The bank markets itself as staffed by \"plain-talking, regular folks\" focused on relationship-based banking rather than bureaucratic processes. Their community focus is reflected in a \"Bulletin & Community\" section and financial education resources.\n\nAs a regional community bank, Miami Savings Bank serves customers in specific geographic areas of Ohio rather than nationwide. The available information confirms basic banking services and mortgage lending but does not provide details on account minimums, fee structures, interest rates, or credit requirements. Customers seeking national banking reach or broader service options may need to consider larger institutions. The company appears stable and legitimate but operates within a limited geographic footprint.",
   "logo_url": "",
   "website_url": "https://www.miamisavings.bank",
   "affiliate_url": "",
@@ -26,21 +26,34 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificate of Deposit (CD) products",
+    "Mortgage loans for home purchase",
+    "Mortgage refinancing",
+    "Mortgage pre-qualification",
+    "Telephone banking (balance checks, transaction history, direct deposit verification)",
+    "Debit cards with fraud dispute and lost/stolen card reporting",
+    "Internet banking",
+    "Mobile banking",
+    "E-statements",
+    "Direct deposit",
+    "Business loans"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1909",
-    "Local community bank with personal service",
-    "3 locations"
+    "Multiple branch locations in Ohio (Miamitown, Harrison, Oxford) for in-person banking",
+    "Telephone banking system available 24/7 (844-731-2699) for account management",
+    "CD specials marketed with competitive rates",
+    "Fast mortgage processing\u2014testimonials cite closing within one month versus six months with competitors",
+    "Mortgage pre-qualification available for home shoppers",
+    "Both personal and business loan products offered",
+    "Active expansion through acquisition of New Foundation Savings Bank",
+    "NMLS regulated institution (NMLS#402771)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area restricted to Ohio branches only",
+    "Website does not display current interest rates, account minimums, or fee schedules",
+    "No mention of online account opening or fully digital onboarding",
+    "Limited information about business loan products or eligibility requirements",
+    "No transparency on credit score requirements or lending criteria"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 32293,
   "latitude": 39.2151849946078,
   "longitude": -84.7050789672439,
@@ -94,12 +107,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Ohio residents in Miamitown, Harrison, or Oxford seeking local community banking relationships",
+    "Homebuyers and refinancing customers in Ohio wanting faster mortgage processing",
+    "Small business owners in the service area needing personal relationships with lenders"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Miami Savings Bank is best for Ohio residents in its service areas seeking traditional community banking with emphasis on personalized service and faster mortgage processing. The main caveat is that it operates only in limited Ohio locations (Miamitown, Harrison, Oxford branches) and does not appear to offer nationwide or online-only banking access, making it unsuitable for those needing geographic flexibility or fully digital banking solutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +120,10 @@
   ],
   "phone": "",
   "address": "8008 Ferry Street, Miamitown, OH 45041",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-03"
 }

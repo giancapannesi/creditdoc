@@ -1,15 +1,15 @@
 {
   "name": "Actors",
   "slug": "actors",
-  "category": "payday-alternatives",
+  "category": "atm",
   "subcategories": [
     "credit-union",
     "fdic-equivalent",
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "Federal Credit Union in , . Low-income designated. NCUA insured. 5 locations.",
-  "description_long": "Actors is a federal credit union serving members in , , established in 1962. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) — small, affordable loans designed to replace predatory payday lending. The credit union operates 5 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "ERROR: Data mismatch. The URL references Fandango's celebrity database, not a financial services company. No payday-alternative or financial product found.",
+  "description_long": "CRITICAL CATEGORIZATION ERROR DETECTED:\n\nBackground: The company name \"Actors\" with URL https://www.fandango.com/famous-actors-and-actresses does not correspond to a financial services provider. Fandango is an entertainment ticketing platform owned by Comcast, primarily known for movie ticket sales.\n\nWhat they actually offer: Based on the website content provided, Fandango operates a celebrity information directory listing popular actors and actresses (Chris Evans, Robert Downey Jr., Jennifer Lawrence, etc.) with biographical data, filmography, and photos. The platform also promotes movie tickets, gift cards, fan club memberships, and entertainment merchandise bundles related to films and television shows.\n\nCategory misalignment: There is no evidence of any financial product, service, or lending activity on this page. No payday loans, payday alternatives, credit products, or financial services of any kind are described or offered. The \"payday-alternatives\" categorization is completely inaccurate and appears to be a data entry error.\n\nHonest assessment: This appears to be a database contamination or URL mapping error in the CreditDoc system. \"Actors\" is not a financial services company and should not be profiled as a consumer finance entity. Fandango is an entertainment platform. No legitimate company profile can be generated from this data because the subject is fundamentally not a financial services provider.",
   "logo_url": "",
   "website_url": "https://www.fandango.com/famous-actors-and-actresses",
   "affiliate_url": "",
@@ -33,16 +33,17 @@
     "Payday Alternative Loans (PALs)"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
+    "Not-for-profit \u2014 typically lower fees and better rates than banks",
+    "NCUA insured \u2014 deposits protected up to $250,000",
     "Established in 1962",
     "Member-owned cooperative",
-    "Low-income designated — may offer Payday Alternative Loans (PALs)"
+    "Low-income designated \u2014 may offer Payday Alternative Loans (PALs)"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Not a financial services company",
+    "No lending, credit, or consumer finance products offered",
+    "Miscategorized in payday-alternatives category",
+    "Website content contains only entertainment ticketing and celebrity information"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +53,7 @@
   "founded_year": 1962,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "15358",
   "published": true,
   "review_status": "published",
@@ -97,7 +98,7 @@
     "Payday loan alternatives (PALs)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "PROFILE CANNOT BE COMPLETED: This is not a consumer finance company. Fandango is an entertainment ticketing platform with a celebrity database. The categorization and premise are fundamentally incorrect. Data verification and URL mapping should be reviewed in the source system.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
@@ -112,9 +113,11 @@
     "data_period": "2023-present",
     "last_checked": "2026-03-22"
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
-  "website_needs_review": true
+  "website_needs_review": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-03"
 }

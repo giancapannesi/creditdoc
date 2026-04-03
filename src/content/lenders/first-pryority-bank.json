@@ -1,14 +1,14 @@
 {
   "name": "First Pryority Bank",
   "slug": "first-pryority-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Pryor, OK. $524M in assets. 3 offices.",
-  "description_long": "First Pryority Bank is a community bank located in Pryor, OK, established in 1900. The bank holds approximately $524M in total assets and $469M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank serving Oklahoma with personal, business, and mortgage services. Member FDIC with local decision-makers and branches in Pryor, Tulsa, and Bixby.",
+  "description_long": "First Pryority Bank (operating as pryority.bank) is a community-focused financial institution serving Oklahoma communities including Pryor, Tulsa, and Bixby. The bank recently underwent a brand refresh to emphasize its purpose-driven, community-centered approach to banking. As a Member FDIC institution (NMLS# 1844483), it operates under federal banking regulations and deposit insurance protections.\n\nThe bank offers three primary service categories: personal banking with emphasis on faster answers and local support; business banking positioned around helping businesses grow through personalized support and local decision-makers; and mortgage services for both home purchases and refinancing. Beyond these core services, pryority.bank provides aircraft loans, ITIN loans, and auto loans (advertised at rates as low as 5.25% for title-secured vehicles with approved credit and minimum 625 credit score). Digital banking capabilities include online account access, check ordering, secure document upload, and Zelle integration for personal transfers.\n\nWhat distinguishes pryority.bank is its explicit emphasis on local decision-making and community presence rather than operating as a purely digital or national institution. The bank markets itself around the concept of \"your why\" \u2014 positioning banking as purposeful rather than transactional. They emphasize knowing customers personally and providing service from people in the community where customers live and work.\n\nThe bank operates transparently regarding its regulatory status and has published security warnings about scam calls/texts impersonating pryority.bank, suggesting consumer awareness of fraud risks. However, the website content provided does not include specific details about interest rates for savings/checking products, account minimums, fee structures, or detailed product comparisons that would help consumers evaluate competitiveness against other community or regional banks.",
   "logo_url": "",
   "website_url": "https://www.firstpryority.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business banking and commercial services",
+    "Mortgage lending (home purchase and refinance)",
+    "Auto loans (title-secured vehicles)",
+    "Aircraft loans",
+    "ITIN loans",
+    "Digital banking platform with online account access",
+    "Zelle peer-to-peer transfer integration",
+    "Online check ordering",
+    "Secure document upload",
+    "Routing number access and account management",
+    "Lost or stolen card replacement"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1900",
-    "Local community bank with personal service",
-    "3 locations"
+    "Member FDIC with federal deposit insurance protection up to $250,000 per account category",
+    "Local decision-makers and community presence in three Oklahoma locations (Pryor, Tulsa, Bixby) enabling in-person service",
+    "Auto loans available with rates as low as 5.25% for title-secured vehicles with approved credit",
+    "Specialized loan products including aircraft loans and ITIN loans not universally available at all banks",
+    "Digital banking integration with Zelle for peer-to-peer transfers and check ordering online",
+    "Mortgage services spanning both purchase and refinance scenarios with emphasis on personal service",
+    "Transparent about fraud risks with published security warnings and online security tips"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic presence restricted to Oklahoma (Pryor, Tulsa, Bixby areas) \u2014 not accessible to customers outside this region",
+    "Website does not disclose specific interest rates for savings accounts, checking accounts, or CDs, making rate comparison difficult",
+    "No information provided about monthly account fees, minimum balance requirements, or overdraft policies",
+    "Auto loan minimum credit score requirement of 625 excludes applicants with lower credit scores",
+    "Aircraft loan product and ITIN loan specialization suggest niche focus rather than comprehensive consumer product depth"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4185,
   "latitude": 36.3069359987541,
   "longitude": -95.3148950242041,
@@ -93,12 +104,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Oklahoma residents in Pryor, Tulsa, or Bixby seeking community banking with local relationship managers",
+    "Small business owners prioritizing local decision-making over national bank bureaucracy",
+    "Homebuyers in Oklahoma wanting mortgage services from local loan officers they can meet in person"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Pryority Bank is best for Oklahoma residents and small business owners in the Pryor, Tulsa, or Bixby areas who value local relationship banking and in-person service over digital-only or national bank convenience. The main caveat is that geographic availability is strictly limited to three Oklahoma locations, making this inaccessible for out-of-state customers, and the website lacks transparency on specific rates and fees needed to compare competitiveness.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "310 E Graham Ave, Pryor, OK 74361",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

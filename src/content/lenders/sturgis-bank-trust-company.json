@@ -1,14 +1,14 @@
 {
   "name": "Sturgis Bank & Trust Company",
   "slug": "sturgis-bank-trust-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Sturgis, MI. $998M in assets. 17 offices.",
-  "description_long": "Sturgis Bank & Trust Company is a community bank located in Sturgis, MI, established in 1905. The bank holds approximately $998M in total assets and $893M in deposits. It operates 17 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community-focused bank serving southwest Michigan with FDIC-insured checking, savings, loans, and investment services emphasizing local, relationship-based banking.",
+  "description_long": "Sturgis Bank & Trust Company is a regional bank headquartered in southwest Michigan with a deep community presence spanning over 50+ years of service. The institution is FDIC-insured and backed by the full faith and credit of the U.S. Government, operating under routing number 272471632. The bank is part of Sturgis Bancorp, Inc., a publicly reporting financial holding company that publishes full-year financial results.\n\nThe bank offers comprehensive personal and business banking services including deposit accounts (checking and savings), home equity lines of credit with promotional low intro rates, home mortgages, small business loans, online banking with bill pay, debit cards (including co-branded Greenlight cards for families), credit cards through their Elan partnership, and trust and investment services. They provide loan calculators, fraud protection tools, and account management features accessible through both personal and business online banking portals.\n\nSturgis Bank distinguishes itself through emphasis on personalized, relationship-based banking with staff who know customers by name. Their marketing highlights local decision-making, in-person branch support, and responsive customer service. The bank actively promotes financial literacy programs (noted for April Financial Literacy Month initiatives) and positions itself as community-first, contrasting their service model against larger banks with call centers and outsourced support.\n\nAs a regional community bank, Sturgis Bank is best suited for customers prioritizing personal relationships and local service over digital-first banking or competitive rates. Their specific strengths in small business support and relationship banking come with typical tradeoffs in product breadth and pricing competitiveness compared to national banks. The bank does not prominently feature rate information, fee structures, or technology innovation on their homepage.",
   "logo_url": "",
   "website_url": "https://www.sturgis.bank",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "FDIC-insured checking accounts",
+    "Savings accounts and CDs",
+    "Personal online banking with bill pay",
+    "Business online banking and account management",
+    "Home mortgages (purchase and refinance)",
+    "Home equity lines of credit",
+    "Small business loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Elan-branded credit cards",
+    "Greenlight debit cards for families",
+    "Trust and investment services",
+    "Loan calculators and financial tools",
+    "Fraud protection features",
+    "Two-factor authentication for account security"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "17 locations"
+    "FDIC-insured deposits with backing of U.S. Government full faith and credit",
+    "Staff greet customers by name with personalized one-on-one attention in branches",
+    "Business banking support includes on-site training and responsive technical assistance for accounting software integration",
+    "Offers multiple account access channels including online banking, mobile, and 888-255-7372 toll-free phone support",
+    "Promotional home equity line of credit with low introductory rates available seasonally",
+    "Trust and investment services available alongside core banking",
+    "Greenlight debit card partnership offering free customized cards for financial literacy during promotion periods"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint to southwest Michigan and surrounding areas may restrict convenience for non-local customers",
+    "Website does not display current APRs, fees, or rate comparisons, making it difficult to assess competitiveness",
+    "No prominent mention of digital-first features, mobile app capabilities, or fintech integrations beyond basic online banking",
+    "Testimonials on homepage are primarily from local business customers; limited consumer review visibility",
+    "Two-factor authentication described as new implementation suggests potential technology modernization gaps"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "MI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28593,
   "latitude": 41.7990780164483,
   "longitude": -85.4180500215935,
@@ -93,12 +106,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners in southwest Michigan seeking personalized banking relationships and responsive technical support",
+    "Local residents and families prioritizing face-to-face banking relationships over digital convenience",
+    "Customers valuing community bank stability and local decision-making over competitive rates or extensive product offerings",
+    "Individuals interested in trust services and investment guidance beyond basic banking products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Sturgis Bank & Trust is best for customers in southwest Michigan who value relationship banking, personalized service, and local decision-making over competitive rates or cutting-edge digital features. The primary caveat is their limited geographic availability and lack of transparent rate/fee information online, making them unsuitable for customers seeking price comparison or those outside their service area.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   ],
   "phone": "",
   "address": "113 E Chicago Rd, Sturgis, MI 49091",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

@@ -1,15 +1,15 @@
 {
   "name": "West View Savings Bank",
   "slug": "west-view-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Pittsburgh, PA. $363M in assets. 5 offices.",
-  "description_long": "West View Savings Bank is a community bank located in Pittsburgh, PA, established in 1908. The bank holds approximately $363M in total assets and $181M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "West View Savings Bank is a community bank operating multiple Pittsburgh-area branches offering checking, savings, mortgages, home equity loans, and debit card services with mobile banking access.",
+  "description_long": "West View Savings Bank is a regional financial institution serving the Pittsburgh metropolitan area with four office locations in McCandless, West View, Cranberry Township, and Franklin Park/Wexford, Pennsylvania. The bank operates during standard business hours (Monday-Thursday 8:30 AM-4:00 PM, Friday until 5:00 PM, Saturday mornings) and provides traditional banking services to both personal and business customers.\n\nThe bank's core service offerings include mortgage loans with competitive rates for home purchases, home equity loans for property improvements, business checking accounts, savings and retirement products, online and mobile banking platforms, and VISA debit cards. They emphasize secure access to accounts through their digital banking tools available 24/7. The institution also provides fraud prevention services and maintains dedicated phone lines for lost or stolen debit card reporting, with after-hours support available through 1-888-263-3370.\n\nWest View Savings Bank distinguishes itself through community-focused operations with limited but accessible branch locations in the Pittsburgh area, and active fraud awareness communication. The bank explicitly educates customers about scams, warning that they never solicit sensitive information via email, phone, or text message, and do not market products through those channels. They provide cybersecurity tips and maintain alerts about fraudulent third parties misrepresenting the bank.\n\nThe bank is best suited for customers in the Pittsburgh region seeking traditional banking services and those who prefer in-person banking relationships with community institutions. The limited branch network and lack of visible national presence or extensive product details on their website suggest this is a smaller regional bank rather than a major national institution, which may appeal to customers prioritizing local service but limit convenience for those outside their service area.",
   "logo_url": "",
   "website_url": "https://www.wvsbank.com",
   "affiliate_url": "",
@@ -24,23 +24,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage loans for home purchases with competitive rates",
+    "Home equity loans for property improvements",
+    "Business checking accounts",
+    "Personal savings accounts",
+    "Retirement savings products",
+    "Online banking platform with 24/7 access",
+    "Mobile banking application",
+    "VISA debit cards with nationwide acceptance",
+    "ATM access for cash withdrawals",
+    "Lost and stolen debit card replacement services",
+    "Fraud prevention and monitoring services",
+    "Cybersecurity education and scam alerts"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1908",
-    "Local community bank with personal service",
-    "5 locations"
+    "Multiple physical branch locations across Pittsburgh area (McCandless, West View, Cranberry, Franklin Park)",
+    "24/7 secure online and mobile banking access for account management",
+    "Competitive mortgage rates explicitly advertised with dedicated lending support",
+    "VISA debit cards accepted nationwide with ATM access and fraud protection",
+    "Dedicated fraud prevention services with 24/7 phone support (1-855-961-1602)",
+    "Active customer education on cybersecurity, scams, and fraud prevention",
+    "Both personal and business banking accounts available",
+    "Saturday morning hours (8:30 AM-12:00 PM) for customers with limited weekday availability"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Very limited geographic footprint (only 4 branches in Pittsburgh area) restricts accessibility for most consumers",
+    "Website lacks specific details on interest rates, APYs, account fees, or product terms",
+    "No information about minimum deposit requirements, balance thresholds, or savings products details",
+    "Limited visibility into business loan products or financing options beyond checking accounts",
+    "Mobile app mentioned but no direct download links or app-specific features detailed on website"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +64,7 @@
   "states_served": [
     "PA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 27760,
   "latitude": 40.5697590115339,
   "longitude": -80.0376829877671,
@@ -94,12 +106,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Pittsburgh area residents seeking community bank relationships with local branch access",
+    "Homebuyers in Western Pennsylvania looking for competitive mortgage rates",
+    "Small business owners needing local business checking and banking services",
+    "Customers prioritizing in-person banking support over digital-only institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "West View Savings Bank is best for customers in the Pittsburgh, Pennsylvania region who value community banking relationships and prefer in-person branch access over digital-only banking. The main caveat is the extremely limited geographic footprint\u2014with only four branch locations in Western Pennsylvania, this bank is impractical for customers outside the Pittsburgh area or those requiring widespread branch and ATM networks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +120,11 @@
   ],
   "phone": "",
   "address": "9001 Perry Hwy, Pittsburgh, PA 15237",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

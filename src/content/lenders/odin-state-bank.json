@@ -1,15 +1,15 @@
 {
   "name": "Odin State Bank",
   "slug": "odin-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Odin, MN. $82M in assets. 1 office.",
-  "description_long": "Odin State Bank is a community bank located in Odin, MN, established in 1904. The bank holds approximately $82M in total assets and $74M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Odin State Bank is a community-focused hometown bank offering checking accounts, debit cards, online banking, and agricultural lending in a local market.",
+  "description_long": "Odin State Bank operates as a traditional community bank positioned as a \"Hometown Community Bank\" with an emphasis on local relationships and agricultural support. The bank serves its area with in-person services at a physical lobby location and extends specialized lending products tailored to regional farmers, indicating a niche focus on agricultural customers. The institution offers standard retail banking products including checking and savings accounts paired with modern digital banking capabilities. The bank's commitment to security and privacy is evident in explicit warnings about phishing and account protection, reflecting standard banking compliance and customer protection practices.\n\nThe bank's service portfolio includes debit card offerings on checking accounts, online banking platforms with electronic statement options, and a mobile banking application with modern features. Mobile capabilities include debit card controls for fraud prevention, customizable login options (PIN, swipe, biometric, or full login), transaction search functionality, and travel notice setup. Their online banking system provides electronic statement access, reducing paper usage for eco-conscious customers. Agricultural lending appears to be a signature product line, with the bank advertising targeted loan solutions for farmers and explicit availability of loan officers for detailed consultations.\n\nOdin State Bank distinguishes itself through emphasis on local relationship banking and agricultural expertise rather than competing on convenience or digital innovation breadth. The bank maintains traditional business hours (Monday-Friday, 8:30 AM to 3:00 PM, closed Saturdays) with accommodations for after-hours loan officer meetings by appointment, suggesting a personal service model. Their proactive security messaging and cookie policy transparency demonstrate consumer-focused practices. The agricultural lending specialization targets a specific customer demographic underserved by larger national institutions.\n\nOdin State Bank is a straightforward community bank suitable for customers seeking personalized service and agricultural financing expertise. However, the limited information on rates, fees, minimum balances, and deposit insurance clarity makes comprehensive comparison difficult. The traditional business hours and appointment-based after-hours availability may inconvenience customers seeking 24/7 access. The bank's regional focus means services are likely limited to a specific geographic area, making this unsuitable for nationally mobile customers.",
   "logo_url": "",
   "website_url": "https://www.odinstatebank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts with debit cards",
+    "Online banking platform with account access",
+    "Mobile banking application",
+    "Agricultural loans tailored to farmer needs",
+    "Electronic statements (eStatements)",
+    "Debit card fraud controls",
+    "Customizable login security (PIN, swipe, biometric, full login)",
+    "Transaction search functionality in mobile app",
+    "Travel notice setup for debit cards",
+    "In-person loan officer consultations",
+    "Account enrollment for online and mobile banking",
+    "Local weather information access"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1904",
-    "Local community bank with personal service",
-    "1 location"
+    "Specialized agricultural lending with loan officers available for farmer consultations",
+    "Modern mobile app with fraud controls, biometric login options, and travel notice features",
+    "Electronic statements available to reduce paper waste",
+    "Debit cards included on all checking accounts",
+    "Explicit security warnings about phishing and account information protection",
+    "Flexible login options (PIN, swipe, biometric, or full authentication)",
+    "Local relationship banking model with in-person lobby access"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited business hours (8:30 AM-3:00 PM weekdays, closed Saturdays) with no mention of 24/7 digital access",
+    "No pricing information, fee schedules, or interest rate transparency available on website",
+    "Appears to serve only a specific geographic region with no indication of broader availability",
+    "Website provides minimal details on deposit insurance, account types, or minimum balance requirements",
+    "No information on customer service phone numbers, branch locations beyond main lobby, or service area definition"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14574,
   "latitude": 43.8663829881076,
   "longitude": -94.7423960337147,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Area farmers and agricultural business owners seeking specialized lending",
+    "Community members prioritizing in-person relationship banking over digital convenience",
+    "Local residents seeking a hometown bank alternative to national institutions",
+    "Customers valuing explicit security transparency and anti-phishing messaging"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Odin State Bank is best suited for rural or community-based customers with agricultural interests seeking specialized lending and personalized relationship banking. The primary caveat is the bank's apparent regional limitation and lack of transparent fee/rate information, making it unsuitable for customers requiring nationwide access or detailed pricing comparison before account opening.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "101 E Main St, Odin, MN 56160",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

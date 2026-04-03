@@ -1,14 +1,14 @@
 {
   "name": "Genubank",
   "slug": "genubank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Las Vegas, NV. $221M in assets. 3 offices.",
-  "description_long": "Genubank is a community bank located in Las Vegas, NV, established in 2008. The bank holds approximately $221M in total assets and $172M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "GenuBank is an FDIC-insured bank offering personal and business banking services with branches in Las Vegas, including checking, savings, and cash management tools.",
+  "description_long": "GenuBank operates as a traditional FDIC-insured bank backed by the full faith and credit of the U.S. Government. The bank serves both personal and business customers through physical branches located in Las Vegas, positioning itself as a community-focused financial institution with personalized service. The company emphasizes a commitment to making banking personal while maintaining standard banking security and protections.\n\nFor personal banking customers, GenuBank offers standard deposit accounts and personal banking services. For business customers, the bank provides a comprehensive suite of commercial banking solutions including business checking and savings accounts, commercial loans, and specialized cash management services. The business offerings span from basic transaction services to sophisticated fraud prevention and liquidity management tools designed to help enterprises of various sizes operate more efficiently.\n\nGenuBank distinguishes itself through its emphasis on personalized service and its integration of modern digital banking with traditional branch-based relationships. The bank offers both online and mobile banking platforms for Android and iOS, allowing customers to manage accounts remotely while maintaining access to in-person services at physical locations. The availability of notary services, safe deposit boxes, and armored transport/virtual vault options through trusted partners demonstrates a focus on comprehensive business support beyond typical online-only banking.\n\nAs a regional bank with Las Vegas branches, GenuBank's reach and service capabilities appear limited to customers who can access physical locations or who are comfortable with online/mobile banking. The website provides limited detail on specific account features, interest rates, fees, or loan products, requiring direct contact with the bank for detailed product information. This traditional banking model positions GenuBank as best suited for customers seeking personalized service and those with business banking needs rather than consumers seeking specialized financial products or digital-first experiences.",
   "logo_url": "",
   "website_url": "https://www.genubank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal banking accounts (checking and savings)",
+    "Business banking accounts and commercial loans",
+    "Positive Pay fraud deterrence service for ACH and check transactions",
+    "Domestic and international wire transfers via online banking and mobile app",
+    "Automated Clearing House (ACH) transfers",
+    "Insured Cash Sweep (ICS) via IntraFi for FDIC coverage above $250,000",
+    "Online and mobile banking platforms (Android and iOS)",
+    "Remote Deposit Capture (RDC) for check deposits",
+    "Bill pay through online banking and mobile app",
+    "Notary services at Las Vegas branch locations",
+    "Safe deposit boxes",
+    "Armored transport and virtual vault services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2008",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits backed by the full faith and credit of the U.S. Government",
+    "Comprehensive business services including positive pay fraud deterrence, ACH, wire transfers, and remote deposit capture",
+    "Insured Cash Sweep (ICS) via IntraFi for FDIC coverage on balances exceeding $250,000",
+    "Mobile banking apps available for both Android and iOS platforms",
+    "In-person notary services and safe deposit boxes at physical branch locations",
+    "Armored transport and virtual vault services available for secure business cash management",
+    "Commercial loans and business accounts designed to support enterprise growth"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic presence restricted to Las Vegas branches, reducing accessibility for non-local customers",
+    "Website provides minimal detail on account features, interest rates, APYs, or specific loan terms",
+    "No mention of overdraft protection, minimum balance requirements, or other common account features",
+    "Lacks information about consumer credit products like credit cards or personal loans",
+    "No pricing transparency for services\u2014website notes 'fees may apply' without disclosure"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "NV"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58806,
   "latitude": 36.061117,
   "longitude": -115.265456,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-sized businesses requiring comprehensive cash management and fraud prevention services",
+    "Las Vegas-area residents seeking personalized banking with in-person branch access",
+    "Business owners needing commercial loans, ACH processing, and wire transfer capabilities",
+    "Companies with cash-intensive operations requiring armored transport or remote deposit solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "GenuBank is best for business owners and Las Vegas-area residents seeking personalized banking with in-person support combined with modern digital banking tools. The primary caveat is limited geographic reach and lack of detailed product information on the website, requiring direct contact with the bank to understand specific account features, rates, and fees.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "8488 Rozita Lee Ave, Las Vegas, NV 89113",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

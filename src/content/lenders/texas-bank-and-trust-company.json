@@ -1,14 +1,14 @@
 {
   "name": "Texas Bank And Trust Company",
   "slug": "texas-bank-and-trust-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Longview, TX. $4380M in assets. 22 offices.",
-  "description_long": "Texas Bank And Trust Company is a community bank located in Longview, TX, established in 1958. The bank holds approximately $4380M in total assets and $3790M in deposits. It operates 22 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Texas Bank and Trust is an FDIC-insured bank offering personal and business checking, savings, mortgages, treasury management, and wealth management services across Texas.",
+  "description_long": "Texas Bank and Trust (TBT) is a regional bank providing comprehensive financial services to individuals and businesses throughout Texas, with a focus on the Dallas-Fort Worth and East Texas markets. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, offering deposit protection up to regulatory limits.\n\nThe company offers a broad range of products including personal checking accounts (including MyFree Checking), personal savings accounts, business checking and savings accounts, VISA debit cards, mortgages, lines of credit, business loans, treasury management services, and wealth management services. They provide digital banking available 24/7, merchant services through multiple platforms (FirstView, goEmerchant, NMI Virtual Terminal), retirement plan administration, and credit card services with rewards programs (Scorecard Rewards).\n\nTBT differentiates itself through personalized service relationships with both individual and business customers, experienced treasury management professionals, and a dedicated wealth management team focused on creation and preservation of wealth. The bank emphasizes understanding customer needs and providing tailored solutions rather than one-size-fits-all products. Their business positioning focuses on understanding business-specific goals and operational cash flow management.\n\nAs a regional bank, TBT provides traditional banking services with FDIC protections and local relationships, but customers should note that investment products offered through their wealth management division are not FDIC-insured, not guaranteed by the bank, and may decrease in value. The bank maintains standard banking hours with select locations open Saturdays.",
   "logo_url": "",
   "website_url": "https://www.texasbankandtrust.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (MyFree Checking)",
+    "Personal savings accounts",
+    "Business checking accounts (MyFree Business Checking)",
+    "Business savings and money market accounts",
+    "VISA debit cards",
+    "VISA credit cards with rewards (Scorecard Rewards)",
+    "Mortgage lending (TBT Mortgage)",
+    "Business lines of credit and working capital loans",
+    "Treasury management services",
+    "Wealth management and financial planning",
+    "Merchant services (FirstView, goEmerchant, NMI Virtual Terminal)",
+    "Retirement plan administration and participant services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1958",
-    "Local community bank with personal service",
-    "22 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "MyFree Checking account with no apparent monthly fees",
+    "24/7 digital banking availability alongside in-person branch locations",
+    "Treasury management services with dedicated professionals for business customers",
+    "Comprehensive wealth management services for both individuals and businesses",
+    "Multiple business loan products including working capital lines of credit",
+    "VISA debit card and rewards-based credit card programs (Scorecard Rewards)",
+    "Merchant services through multiple platforms for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Investment and wealth management products are not FDIC-insured and may lose value",
+    "Regional bank with limited to East Texas and Dallas-Fort Worth service area",
+    "Business loans and treasury management services require approval and likely credit evaluation",
+    "Website provides limited detail on specific APRs, fees, or product terms without contacting bank"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 17842,
   "latitude": 32.4960687675029,
   "longitude": -94.73593760968,
@@ -93,12 +104,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to medium-sized Texas businesses needing treasury management and working capital solutions",
+    "Texas residents seeking local banking relationships with FDIC-insured deposit products",
+    "Individuals and business owners interested in comprehensive wealth management and financial planning"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Texas Bank and Trust is best for Texas-based individuals and small-to-medium businesses seeking FDIC-insured banking with personalized service and comprehensive financial solutions including treasury management and wealth planning. Primary caveat: investment products are not FDIC-insured and may decline in value, and services are geographically limited to Texas markets.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "300 E Whaley St, Longview, TX 75601",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

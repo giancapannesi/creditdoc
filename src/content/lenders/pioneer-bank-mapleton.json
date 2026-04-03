@@ -1,15 +1,15 @@
 {
   "name": "Pioneer Bank",
   "slug": "pioneer-bank-mapleton",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Mapleton, MN. $897M in assets. 6 offices.",
-  "description_long": "Pioneer Bank is a community bank located in Mapleton, MN, established in 1903. The bank holds approximately $897M in total assets and $778M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal, business, and agricultural banking services with digital options. Member of Federal Home Loan Bank of Des Moines with active community involvement.",
+  "description_long": "Pioneer Bank is a full-service financial institution that operates as an FDIC-insured member bank backed by the full faith and credit of the U.S. Government. Based on their website and press releases dated 2025, the bank serves communities primarily in Minnesota (locations mentioned include St. James, St. Peter, and Mapleton) and maintains a commitment to regional financial services.\n\nThe bank offers a comprehensive suite of services across three main segments: Personal Banking (checking, savings, CDs, loans, wealth management, and card services), Business Banking (business checking, business loans, treasury management, and related services), and Agriculture/Agribusiness Banking (specialized ag loans, crop insurance, and ag-specific account products). All customers have access to digital banking through mobile and online platforms, including features like mobile deposit, bill pay, Zelle transfers, and fraud text alerts.\n\nPioneer Bank distinguishes itself through specialized agricultural banking expertise, active community involvement (demonstrated by multiple $10,000 grants through the Federal Home Loan Bank of Des Moines Member Impact Fund), and a stated focus on personalized service. The bank has been recognized as a \"Top 3 Extraordinary Bank in Nation\" according to their website. They emphasize relationship banking and customized solutions rather than commoditized products, with named market presidents and ag bankers serving specific regions.\n\nAs a regional community bank, Pioneer Bank serves customers seeking FDIC-insured deposit products and financing in rural and semi-rural Minnesota markets. The lack of detailed product specifications (rates, fees, loan limits) on their public website is typical for regional banks and requires direct contact for specific terms. Their strength appears concentrated in agricultural lending and community relationships rather than competing on rates or features with national banks.",
   "logo_url": "",
   "website_url": "https://WWW.BANKWITHPIONEER.COM",
   "affiliate_url": "",
@@ -24,23 +24,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of deposit (CDs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Wealth management",
+    "Business checking accounts",
+    "Business loans and lines of credit",
+    "Agricultural/agribusiness loans and operating credit",
+    "Crop insurance",
+    "Credit card services (personal and business)",
+    "Mobile and online banking with mobile deposit",
+    "Bill pay and Zelle money transfers",
+    "Telephone banking",
+    "Treasury management and cash management services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1903",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Specialized agricultural banking with dedicated ag bankers and crop insurance options",
+    "Digital banking suite including mobile deposit, bill pay, Zelle, and fraud alerts",
+    "Active community involvement with documented grants and partnerships (Federal Home Loan Bank)",
+    "Multiple service lines (personal, business, ag) under one institution for convenience",
+    "Named market presidents and relationship bankers serving specific regions",
+    "Free business checking accounts available",
+    "Treasury management services for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint (appears to serve only Minnesota communities) restricts accessibility for out-of-state customers",
+    "Website lacks specific product details including interest rates, APRs, and fee schedules, requiring customers to contact directly",
+    "No mention of competitive rates or rate guarantees compared to national banks or online alternatives",
+    "Limited information about minimum balance requirements and qualification criteria for different account types",
+    "No apparent mobile app ratings or detailed digital banking feature comparison provided on website"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +66,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5193,
   "latitude": 43.9284980035985,
   "longitude": -93.9556550113278,
@@ -94,12 +108,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural producers and agribusiness owners seeking specialized lending and crop insurance services",
+    "Small to mid-sized business owners in Minnesota seeking relationship-based banking and treasury management",
+    "Minnesota residents and communities seeking local FDIC-insured banking with community involvement focus",
+    "Customers prioritizing personalized service and named banker relationships over online convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Pioneer Bank is best for Minnesota-based customers and agricultural businesses seeking FDIC-insured deposits and personalized relationship banking from a regional institution. The primary caveat is geographic limitation to Minnesota communities and the need to contact the bank directly for specific rates, fees, and product terms not published on their website.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +122,11 @@
   ],
   "phone": "",
   "address": "301 Main St E, Mapleton, MN 56065",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }
