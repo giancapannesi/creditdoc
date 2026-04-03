@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
-import { getBlogPosts, getBlogPostBySlug, getBlogPostsByCategory, getCategories, getWellnessGuideBySlug, getGlossaryTermsForContext } from '../../utils/data';
+import { getBlogPosts, getBlogPostBySlug, getBlogPostsByCategory, getCategories, getListicles, getWellnessGuideBySlug, getGlossaryTermsForContext } from '../../utils/data';
 import type { BlogPost } from '../../utils/data';
 
 export function getStaticPaths() {
@@ -30,6 +30,20 @@ const relatedCategories = post.related_categories
 // Glossary terms based on tags
 const glossaryContexts = post.tags.map(t => `blog-${t}`);
 const glossaryTerms = getGlossaryTermsForContext(glossaryContexts);
+
+// Cross-link: match blog category to relevant listicles
+const blogCategoryToListicleCategory: Record<string, string[]> = {
+  'personal-loans': ['personal-loans'],
+  'credit-repair': ['fix-my-credit'],
+  'debt-relief': ['debt-relief'],
+  'build-credit': ['build-credit'],
+  'credit-monitoring': ['credit-monitoring'],
+  'emergency-cash': ['payday-alternatives', 'emergency-cash'],
+};
+const matchingListicleCategories = blogCategoryToListicleCategory[post.category] || [];
+const relatedListicles = getListicles()
+  .filter(l => matchingListicleCategories.includes(l.category))
+  .slice(0, 3);
 
 // JSON-LD: Article + FAQPage + BreadcrumbList
 const jsonLd = [
@@ -295,6 +309,29 @@ const jsonLd = [
                 >
                   <p class="text-sm font-medium text-text leading-snug">{guide.title}</p>
                   <p class="mt-1 text-xs text-muted">{guide.read_time}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Recommended Services (cross-link to listicles) -->
+        {relatedListicles.length > 0 && (
+          <div class="glass-card p-5">
+            <h3 class="text-base font-semibold text-text mb-3 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd"/>
+              </svg>
+              Recommended Services
+            </h3>
+            <div class="space-y-3">
+              {relatedListicles.map(listicle => (
+                <a
+                  href={`/best/${listicle.slug}/`}
+                  class="block rounded-lg border border-border p-3 hover:border-primary/30 hover:bg-primary-light/20 transition-colors"
+                >
+                  <p class="text-sm font-medium text-text leading-snug">{listicle.title}</p>
+                  <p class="mt-1 text-xs text-primary font-medium">Compare top picks &rarr;</p>
                 </a>
               ))}
             </div>
