@@ -1,14 +1,14 @@
 {
   "name": "Guaranty Bank",
   "slug": "guaranty-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Springfield, MO. $2414M in assets. 14 offices.",
-  "description_long": "Guaranty Bank is a community bank located in Springfield, MO, established in 2008. The bank holds approximately $2414M in total assets and $1834M in deposits. It operates 14 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering personal checking, savings, business banking, CDs, and loans with 14 physical locations and 37,000+ ATM access.",
+  "description_long": "Guaranty Bank is a community-focused FDIC-insured bank headquartered in Missouri (based on domain gbankmo.com) that positions itself as a local alternative to larger national banks. The institution emphasizes personal relationships and responsive customer service through local decision-making rather than corporate bureaucracy. Founded with a commitment to community involvement, Guaranty Bank sponsors local events, organizes volunteer initiatives, and maintains a stated focus on diversity, equity, and inclusion within its operations.\n\nThe bank offers a comprehensive suite of consumer and business banking products. For individuals, this includes multiple checking account tiers (Elevate Checking with rewards up to $25,000, Empower Checking for teens 11-17), savings accounts, Certificates of Deposit with terms from 3 months to 6 years, and personal loans. Business clients can access business checking accounts, business savings, flexible business loans, and operational support tools. All consumers can use digital banking through mobile apps featuring Zelle money transfers, mobile check deposit, and a Money Manager tool for viewing finances across multiple institutions.\n\nGuaranty Bank distinguishes itself through its community bank model with 14 physical branch locations, local decision-making authority, and emphasis on personalized service. The bank provides account opening in minutes online and offers a refer-a-friend program paying $50 per referral. Their ClickSWITCH tool facilitates free transfers of automatic payments and direct deposits from other banks. The institution actively markets its commitment to small business growth with dedicated business banking teams and customized financing solutions.\n\nAs a community bank, Guaranty Bank's main limitation is geographic reach\u2014with only 14 locations, it primarily serves customers in its Missouri region, unlike national banks with thousands of branches. The website provides limited specific information about loan terms, interest rates, fees, or minimum deposit requirements for various accounts, requiring customers to contact branches directly for detailed product information. While FDIC insurance provides deposit protection, the bank's smaller size means fewer technological innovations compared to larger financial institutions.",
   "logo_url": "",
   "website_url": "https://www.gbankmo.com",
   "affiliate_url": "",
@@ -23,23 +23,40 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts (Elevate Checking and Empower Checking)",
+    "Personal savings accounts",
+    "Certificates of Deposit (3 months to 6 years terms)",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Business loans (flexible, customized financing)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mobile banking app with Zelle integration",
+    "Mobile check deposit",
+    "Money Manager (multi-institution financial aggregation)",
+    "ClickSWITCH (automatic payment and direct deposit transfers)",
+    "Physical branch banking at 14 locations",
+    "MoneyPass ATM access (37,000+ nationwide)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2008",
-    "Local community bank with personal service",
-    "14 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Fast account opening available in minutes online",
+    "Elevate Checking earns rewards up to $25,000 with premium rates",
+    "Empower Checking specifically designed for teens 11-17 to build financial independence",
+    "CDs available with flexible terms from 3 months to 6 years",
+    "ClickSWITCH tool provides free, fast, secure transfer of automatic payments and direct deposits",
+    "Access to 37,000+ MoneyPass ATMs nationwide plus 14 physical branch locations",
+    "Zelle integration for quick money transfers in minutes",
+    "Mobile check deposit capability via phone or tablet",
+    "$50 refer-a-friend program for both parties",
+    "Dedicated business banking solutions with flexible loan options",
+    "Money Manager tool consolidates finances from multiple institutions"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to 14 physical branch locations, primarily serving Missouri area only",
+    "Website lacks specific interest rates, APY, loan terms, or fee schedules for products",
+    "No mention of checking account ATM fee reimbursements or overdraft protection details",
+    "Smaller institution may offer fewer advanced digital features compared to major national banks",
+    "Limited information about credit products (no credit cards mentioned on website)"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +68,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58892,
   "latitude": 37.1364779943304,
   "longitude": -93.2549989843997,
@@ -93,12 +110,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs seeking local, personalized banking relationships",
+    "Customers in Missouri seeking FDIC-insured deposits with physical branch access",
+    "Teens and young adults ages 11-17 interested in building financial independence",
+    "Community-minded depositors prioritizing local economic impact and engagement"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Guaranty Bank is best for Missouri-based consumers and small business owners seeking personalized service and community involvement from an FDIC-insured institution. The primary caveat is geographic limitation\u2014with only 14 branches, it serves a regional market and is not suitable for customers requiring nationwide branch access, and specific product terms and rates must be confirmed directly with the bank.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +124,11 @@
   ],
   "phone": "",
   "address": "2144 E Republic Rd, Springfield, MO 65804",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Fcb Banks",
   "slug": "fcb-banks",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Collinsville, IL. $2595M in assets. 20 offices.",
-  "description_long": "Fcb Banks is a community bank located in Collinsville, IL, established in 1990. The bank holds approximately $2595M in total assets and $2207M in deposits. It operates 20 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FCB Banks is an FDIC-insured financial institution offering checking, savings, loans, and digital banking services to consumers and businesses.",
+  "description_long": "FCB Banks operates as a traditional retail bank providing comprehensive financial services to individual consumers and business customers. The institution is FDIC-insured and backed by the full faith and credit of the U.S. Government, indicating federal deposit protection for customer accounts.\n\nThe bank offers a broad range of services including deposit accounts (checking and savings), certificate of deposit (CD) products, auto loans with rates starting at 4.74% APR, mortgage lending, business accounts, and digital banking tools. They provide mobile banking access, bill pay services (with an improved experience launching March 11, 2026), Zelle payment transfers, card management features through their mobile app, and partnership programs like Greenlight for teaching children financial literacy. The bank maintains loan officers to help customers with personal and business lending needs.\n\nFCB Banks distinguishes itself through FDIC insurance protection, multiple service channels (online, mobile, in-person), and partnerships with established fintech providers like Greenlight and Zelle. They actively communicate security awareness to customers, as evidenced by their PPP scam warnings, and invest in improving user experience with upcoming bill pay enhancements.\n\nThe bank functions as a full-service retail financial institution suitable for customers seeking traditional banking relationships with digital convenience. However, the website provides limited information about account features, fee structures, specific CD rates, mortgage terms, or business lending requirements, making detailed comparison difficult from publicly available information alone.",
   "logo_url": "",
   "website_url": "https://www.fcbbanks.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts",
+    "Certificate of Deposit (CD) products",
+    "Auto loans (starting at 4.74% APR)",
+    "Mortgage loans and refinancing",
+    "Business checking and business accounts",
+    "Mobile banking app with card management",
+    "Bill pay service with scheduled and single payments",
+    "Zelle peer-to-peer payment transfers",
+    "Personal and business loan origination",
+    "Greenlight debit card and money app for kids and teens",
+    "Online banking with improved interface",
+    "Card spending limits and transaction tracking"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1990",
-    "Local community bank with personal service",
-    "20 locations"
+    "FDIC-insured deposits with U.S. Government backing provide strong account protection",
+    "Auto loan rates as low as 4.74% APR available for qualified borrowers",
+    "Mobile banking app with card management features to lock cards and track spending",
+    "Bill pay service with upcoming improvements for easier usability and payment management",
+    "Zelle integration for secure peer-to-peer payments and transfers",
+    "Greenlight partnership offering parents tools to teach children financial management",
+    "Dedicated loan officers available to help customers find appropriate loan products",
+    "Responsive online banking platform with accessibility features for screen readers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not disclose specific checking or savings account fees, minimum balances, or interest rates",
+    "Limited transparency on mortgage rates, terms, or qualification requirements",
+    "No information provided about business account features, pricing, or service levels",
+    "Sparse details on CD rates and terms despite promoting them as a savings product",
+    "Website contains no customer reviews, ratings, or third-party verification of service quality"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 33005,
   "latitude": 38.6902919871222,
   "longitude": -89.9838569993078,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Consumers seeking FDIC-insured traditional banking with mobile and online convenience",
+    "Small business owners looking for dedicated business accounts and relationship-based lending",
+    "Customers interested in auto loans and mortgages with personal loan officer assistance",
+    "Parents wanting to teach children financial literacy through the Greenlight partnership"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "FCB Banks is best for traditional banking customers who value FDIC deposit insurance, personal service through loan officers, and digital banking convenience. The main caveat is that the website provides minimal transparency on fees, rates, and specific account terms, requiring direct contact with the bank for detailed product comparisons.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,10 @@
   ],
   "phone": "",
   "address": "800 Belt Line Rd, Collinsville, IL 62234",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-03"
 }

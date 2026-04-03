@@ -1,16 +1,16 @@
 {
   "name": "Fnb Bank",
   "slug": "fnb-bank-fontanelle",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Fontanelle, IA. $274M in assets. 5 offices.",
-  "description_long": "Fnb Bank is a community bank located in Fontanelle, IA, established in 1905. The bank holds approximately $274M in total assets and $212M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
-  "logo_url": "",
+  "description_short": "FNB Fontanelle is an FDIC-insured community bank offering traditional banking services including online banking, mobile access, and agricultural lending for customers in their service areas.",
+  "description_long": "FNB Fontanelle is a community-focused FDIC-insured bank that has established itself as a regional financial institution serving agricultural and general banking customers. The bank emphasizes long-term relationships with its customers and has grown within its communities over time, positioning itself as a reliable local banking option backed by full faith and credit of the U.S. Government through FDIC insurance.\n\nThe bank offers a comprehensive suite of traditional banking services centered on account management and accessibility. Core offerings include online banking, a mobile platform called Mobiliti\u2122 accessible via SMS text messaging, mobile web browser, and downloadable applications for both iOS and Android devices. Customers can check account balances, review transaction history, transfer funds between accounts, locate ATMs and branches, make mobile deposits, and access financial calculators for savings, investments, loans, and mortgages. The bank also provides online bill pay services free to online banking customers and specializes in agricultural lending for customers whose livelihoods depend on farming.\n\nFNB Fontanelle distinguishes itself through community engagement and personalized service. The bank operates a \"First Fifty Club\" program for customers aged 50 and older that includes trips, social events, seminars, and complimentary personalized checks. Their focus on agricultural lending demonstrates a commitment to serving rural and farm-based customers, an underserved segment in mainstream banking. The multi-channel mobile access approach\u2014including low-tech SMS text messaging that requires no app or data plan\u2014ensures accessibility for customers with varying technological capabilities.\n\nAs a smaller community bank, FNB Fontanelle's service area appears geographically limited to their local communities, which may restrict accessibility for customers outside these regions. The website does not provide detailed information about deposit rates, loan rates, fees, or the full breadth of financial products available. The bank's focus on agricultural lending, while specialized, may limit appeal to non-agricultural customers seeking more diverse lending products.",
+  "logo_url": "https://www.google.com/s2/favicons?domain=fnbfontanelle.com&sz=128",
   "website_url": "http://www.fnbfontanelle.com",
   "affiliate_url": "",
   "affiliate_program": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking and savings accounts",
+    "Online banking platform with account access and management",
+    "Mobiliti\u2122 SMS text messaging mobile banking",
+    "Mobiliti\u2122 mobile web browser banking",
+    "Mobiliti\u2122 downloadable mobile applications (iOS and Android)",
+    "Mobile check deposit functionality",
+    "Account balance checking and transaction history review",
+    "Funds transfer between accounts",
+    "ATM and branch location finder",
+    "Online bill pay service",
+    "Agricultural lending and financing",
+    "Financial calculators for savings, investments, loans, and mortgages"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Mobile banking via SMS text messaging requires no smartphone or data plan, increasing accessibility",
+    "Free online bill pay service for online banking customers",
+    "Mobile deposit capability through Mobiliti\u2122 app for remote check deposits",
+    "Specialized agricultural lending for farm-based customers and those in rural areas",
+    "First Fifty Club membership program offering social events, trips, and seminars for seniors 50+",
+    "Multi-platform mobile access including app, mobile web browser, and SMS text options"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Service area appears geographically limited to local communities based on website focus",
+    "No transparent information provided about deposit rates, loan rates, or fee structures",
+    "Limited product diversity mentioned\u2014no details on credit cards, investment products, or business banking beyond agricultural loans",
+    "Small community bank may lack advanced digital features or 24/7 customer support that larger banks offer",
+    "Agricultural lending specialization may not address needs of non-agricultural customers seeking diverse loan products"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 954,
   "latitude": 41.2898269813926,
   "longitude": -94.5611239665007,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural customers and farmers seeking specialized lending support for farming operations",
+    "Senior citizens aged 50+ interested in community-focused banking with social engagement programs",
+    "Customers in FNB Fontanelle's service area seeking local community banking with relationship-based service",
+    "Users preferring low-tech mobile banking via SMS text messaging without requiring smartphones or data plans"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "FNB Fontanelle is best suited for agricultural customers, seniors, and residents within their local service communities who value personalized service and accessible banking options. The main caveat is that this is a small community bank with geographically limited reach, no published rate or fee information, and minimal detail about the full scope of available products beyond agricultural lending.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,10 @@
   ],
   "phone": "",
   "address": "311 5Th Street, Fontanelle, IA 50846",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-03"
 }

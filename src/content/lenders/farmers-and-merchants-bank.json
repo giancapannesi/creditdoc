@@ -1,15 +1,15 @@
 {
   "name": "Farmers And Merchants Bank",
   "slug": "farmers-and-merchants-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Arnett, OK. $80M in assets. 1 office.",
-  "description_long": "Farmers And Merchants Bank is a community bank located in Arnett, OK, established in 1908. The bank holds approximately $80M in total assets and $69M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Locally owned community bank in Arnett, Oklahoma, offering checking, savings, loans, and digital banking services since 1908.",
+  "description_long": "Farmers & Merchants Bank is a community-focused financial institution chartered in 1908 and headquartered in Arnett, Oklahoma. The bank operates as a locally owned and managed institution with a mission to serve the financial needs of Arnett and surrounding areas. With over $45 million in assets and a staff of 9 full-time employees, FMB maintains a small-town banking presence where customers know their bankers personally.\n\nThe bank offers a comprehensive suite of traditional banking services including checking and savings accounts, certificates of deposit, various loan products (agricultural, personal, and commercial), VISA debit cards, safe deposit boxes, and ATM access. Customers can manage their finances through multiple channels: Internet Banking for web-based account management, TeleBank for telephone banking via touch-tone phone, and in-person service at their single location at 225 E. Renfrow in Arnett. The bank also provides a 24-hour lost/stolen debit card hotline and standard banking conveniences like fund transfers and loan payments.\n\nWhat distinguishes FMB is its emphasis on personalized, relationship-based banking in a rural market. The bank explicitly markets itself as a \"Home Town Bank\" where \"We know our customers, and they know us.\" This contrasts with larger regional or national banks and positions FMB as an alternative for residents seeking face-to-face interactions and local decision-making. Their long operational history since 1908 suggests stability and deep community roots.\n\nFMB is best suited for Arnett-area residents and small business owners seeking traditional community banking. The single location and small staff may limit convenient access for those outside the immediate Arnett area. Digital banking options are available but appear basic compared to modern fintech offerings. The website provides limited detail on loan terms, rates, or account specifications, requiring direct contact for full product information.",
   "logo_url": "",
   "website_url": "https://fmbankarnett.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Personal, agricultural, and commercial loan products",
+    "VISA debit cards with ATM access",
+    "Internet Banking (web-based account management)",
+    "TeleBank (24-hour telephone banking)",
+    "Safe deposit boxes (multiple sizes)",
+    "24-hour ATM service at 225 E. Renfrow, Arnett",
+    "Fund transfers between accounts",
+    "Loan payments and account transfers",
+    "Lost/stolen debit card reporting (24-hour hotline)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1908",
-    "Local community bank with personal service",
-    "1 location"
+    "Locally owned and managed with 115+ years of operational history since 1908",
+    "Personal relationship banking model where staff know customers by name",
+    "24-hour ATM access at main location for account holders",
+    "Multiple digital banking channels including Internet Banking, TeleBank, and debit card access",
+    "Comprehensive loan products with dedicated loan officers available for consultation",
+    "Safe deposit box options in multiple sizes for valuables storage",
+    "24-hour lost/stolen debit card hotline (888-263-3370) for immediate fraud protection",
+    "$45+ million in assets provides stability and FDIC deposit insurance coverage"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Single branch location in Arnett, Oklahoma limits accessibility for non-local customers",
+    "Small staff of 9 full-time employees may result in longer wait times during peak hours",
+    "Website provides minimal information on interest rates, loan terms, fees, or account minimums",
+    "Limited technological infrastructure compared to regional or national banks",
+    "No mention of investment services, wealth management, or business banking specialization"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13415,
   "latitude": 36.1348088406106,
   "longitude": -99.770821663936,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Arnett, Oklahoma residents seeking personalized community banking relationships",
+    "Local small business owners needing flexible lending from decision-makers they know",
+    "Rural customers prioritizing in-person service and local ownership over digital convenience",
+    "Customers preferring relationship-based banking to online-only or large institutional options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Farmers & Merchants Bank is best for residents in and around Arnett, Oklahoma who value personalized, relationship-based banking from a locally owned institution with deep community roots. The main caveat is geographic limitation\u2014customers outside the Arnett area will find limited branch access and should verify whether online/phone services meet their needs before opening an account.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "225 E Renfrow Ave, Arnett, OK 73832",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

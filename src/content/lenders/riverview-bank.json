@@ -1,14 +1,14 @@
 {
   "name": "Riverview Bank",
   "slug": "riverview-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Vancouver, WA. $1510M in assets. 18 offices.",
-  "description_long": "Riverview Bank is a community bank located in Vancouver, WA, established in 1923. The bank holds approximately $1510M in total assets and $1239M in deposits. It operates 18 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank operating in Southwest Washington with 100+ years of history, offering personal and business banking with FDIC insurance and local decision-making.",
+  "description_long": "Riverview Bank was founded over 100 years ago, opening its first branch in Camas, Washington. The institution has expanded its footprint across Southwest Washington, from Ridgefield to Aumsville and extending to Goldendale, while maintaining its identity as a true community bank. The company emphasizes that financial decisions are made locally by people who are neighbors to their customers, distinguishing it from larger national institutions.\n\nThe bank offers a comprehensive suite of financial products including personal checking and savings accounts, certificates of deposit (currently offering up to 3.76% APY), home equity lines of credit (HELOC), business banking solutions, credit cards, digital and mobile banking, investment services through Riverview Trust Company, merchant bankcard processing, and identity theft protection through ID TheftSmart. They provide both personal and business banking products designed around customer needs, with online and mobile banking platforms available.\n\nRiverview Bank differentiates itself through its emphasis on community involvement and relationship-based banking rather than transactional experiences. The bank has received recognition as the Best Bank in Clark County for 12 years consecutively and holds a 5-Star Rating from Bauer Financial. Their marketing emphasizes keeping money local, community support, and providing personalized financial guidance that considers customers' full financial pictures and life goals.\n\nAs a community bank, Riverview operates with inherent geographic limitations and likely cannot match the product breadth or digital innovation of larger national banks. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing standard deposit protection. For customers in their service area seeking relationship-based banking with local decision-making, Riverview presents a viable alternative to larger institutions.",
   "logo_url": "",
   "website_url": "https://www.riverviewbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Home Equity Lines of Credit (HELOC)",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Credit cards",
+    "Digital and mobile banking",
+    "Investment advisory services (Riverview Trust Company)",
+    "Merchant bankcard processing",
+    "Identity theft protection (ID TheftSmart)",
+    "Online banking platform"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1923",
-    "Local community bank with personal service",
-    "18 locations"
+    "FDIC-insured deposits backed by U.S. Government",
+    "12-year recognition as Best Bank in Clark County",
+    "5-Star Bauer Financial rating indicating superior financial strength",
+    "Local decision-making by community members rather than distant corporate headquarters",
+    "Comprehensive service offerings including personal banking, business banking, investment services, and trust company",
+    "CD rates competitive at 3.76% APY (5-month terms, $1,000 minimum)",
+    "Over 100 years of operational history and stability in the region"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Southwest Washington reduces accessibility for non-regional customers",
+    "Smaller institution may lack the digital innovation and advanced mobile features of larger national banks",
+    "Product offerings appear more limited compared to major national banks (no mortgage origination mentioned on homepage)",
+    "Minimal transparency about specific checking/savings account fees or minimum balance requirements on visible website content",
+    "Limited information about business loan products beyond basic business checking and savings"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29922,
   "latitude": 45.628399558192,
   "longitude": -122.673275779315,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Southwest Washington residents seeking relationship-based banking with local decision-makers",
+    "Small business owners in the Ridgefield to Aumsville corridor wanting community-focused business banking",
+    "Customers who prioritize keeping deposits within their local community over national bank options",
+    "Individuals seeking investment advisory services with understanding of local market conditions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Riverview Bank is best for Southwest Washington residents and small businesses seeking relationship-driven banking from a stable community institution with local decision-making. The primary caveat is geographic limitation\u2014customers outside their service area cannot access their services, and those within the region should verify that their specific financial needs align with a smaller community bank's product limitations.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "900 Washington St, Vancouver, WA 98660",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Tristar Bank",
   "slug": "tristar-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Dickson, TN. $540M in assets. 7 offices.",
-  "description_long": "Tristar Bank is a community bank located in Dickson, TN, established in 2000. The bank holds approximately $540M in total assets and $460M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "TriStar Bank is an FDIC-insured community bank serving Tennessee with personal and business checking, savings, loans, and mortgage products.",
+  "description_long": "TriStar Bank operates as a community-focused financial institution with FDIC insurance backing. The bank emphasizes local presence and personalized service, positioning itself as an alternative to large national banks. Their website indicates physical locations in Dickson, Spring Hill, and Columbia, Tennessee, with a primary phone line at (615) 446-7100.\n\nThe bank offers a comprehensive range of personal banking products including checking accounts, savings accounts (Reserve Savings, Youth Savings, Christmas Club), Money Market accounts, CDs, IRAs, and HSAs. For borrowing needs, they provide personal loans, auto/recreation vehicle loans, home mortgages (including reverse mortgages), and home equity loans. Their business banking division offers multiple checking account tiers (Small Business, Commercial, Commercial Analysis, and Impact Checking), business savings products, business loans, lines of credit, and commercial real estate financing. Both personal and business customers can access Visa Platinum credit cards and debit cards.\n\nTriStar differentiates itself through emphasis on personalized service, local decision-making, and community involvement. They highlight features like the Star Student Program (paying students for good grades), accessibility features on their website, and online/mobile banking platforms. The bank markets itself around the tagline \"Your Bank. Our Community\" and promotes having experienced local bankers available for consultation.\n\nAs a community bank, TriStar serves a regional market rather than national audience. While they offer standard banking products comparable to larger institutions, their competitive advantage rests on localized service and community commitment rather than advanced fintech features or specialized lending products.",
   "logo_url": "",
   "website_url": "https://www.tristar.bank",
   "affiliate_url": "",
@@ -23,23 +23,40 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts (Reserve, Youth, Christmas Club)",
+    "Money Market accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Health Savings Accounts (HSAs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Auto and recreation vehicle loans",
+    "Home mortgages and reverse mortgages",
+    "Home equity loans",
+    "Business checking (multiple tiers)",
+    "Business savings and Money Market accounts",
+    "Business loans and lines of credit",
+    "Commercial real estate loans",
+    "Treasury Services",
+    "Visa Platinum personal and business credit cards",
+    "Online and mobile banking",
+    "Debit cards"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2000",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits with full faith and credit of U.S. Government backing",
+    "Multiple checking account options tailored to different needs (personal, small business, commercial, analysis-based)",
+    "Comprehensive loan portfolio including personal loans, auto loans, mortgages, reverse mortgages, and home equity lines",
+    "Online and mobile banking platforms for account access anywhere",
+    "Community-focused programs like Star Student Program offering incentives for academic achievement",
+    "Local physical branches in multiple Tennessee locations with direct banker access",
+    "Diverse product offerings including IRAs, HSAs, CDs, and Money Market accounts"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Tennessee (Dickson, Spring Hill, Columbia) with no national presence",
+    "No mention of competitive interest rates, APY percentages, or fee structures on website",
+    "Accessibility features still being optimized (AudioEye enabled but ongoing accessibility work indicated)",
+    "No information about minimum account balances, overdraft fees, or other account requirements",
+    "Limited details on credit card rewards programs or specific lending terms and rates"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +68,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 35417,
   "latitude": 36.0722440090367,
   "longitude": -87.3775850084506,
@@ -93,12 +110,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Tennessee residents seeking personalized banking with local decision-makers",
+    "Small business owners in the Dickson, Spring Hill, or Columbia areas needing tailored commercial banking",
+    "Customers prioritizing FDIC-insured deposits and community bank relationship over online-only banking",
+    "Families interested in youth financial education through the Star Student Program"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "TriStar Bank is best suited for Tennessee residents and small business owners who value personalized, local banking relationships and community involvement over the convenience and technology features of national banks or fintech alternatives. The main caveat is geographic limitation\u2014this institution only serves specific Tennessee markets and is not accessible to customers outside this region.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +124,11 @@
   ],
   "phone": "",
   "address": "719 E College St, Dickson, TN 37055",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

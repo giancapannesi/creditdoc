@@ -1,10 +1,10 @@
 {
   "name": "Western Union Money Order Only",
   "slug": "western-union-money-order-only-san-diego-ca",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union Money Order Only — Money order service in San Diego, CA.",
-  "description_long": "Western Union Money Order Only provides Money order service. Located at 3744 Ocean View Blvd, San Diego, CA 92113.",
+  "description_short": "Western Union operates 850+ agent locations across the US offering in-person money transfers, bill payments, cash pickups, and money order services with service since 1851.",
+  "description_long": "Western Union is a century-old money transfer company that has operated since 1851, establishing itself as a trusted provider of financial services for domestic and international transactions. The company operates through a network of agent locations at retail stores, grocery chains, banks, and dedicated centers across the United States, making their services broadly accessible to consumers. They offer a comprehensive suite of in-person financial services beyond simple money transfers, including bill payment options, money order purchasing and cashing, prepaid card funding, and cash pickup services. Western Union distinguishes itself through widespread physical availability\u2014partnering with major retailers like Walmart and grocery chains\u2014combined with encryption and fraud prevention measures. The company allows customers to partially complete transactions online or via app and then finalize in-person with cash payment, offering some convenience hybrid features. However, Western Union's pricing structure varies significantly by transfer method and destination, and they explicitly do not provide currency exchange services at physical locations despite facilitating international transfers. The service is best suited for unbanked or underbanked consumers who prefer in-person transactions, those sending money domestically or internationally without online access, and individuals who need to pay bills or access cash quickly at physical locations. Their money order services position them as a check alternative for secure payment transmission.",
   "logo_url": "https://lh4.googleusercontent.com/-CvZYw9jfuuc/AAAAAAAAAAI/AAAAAAAAAAA/MK5pgq53z5Q/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/us/en/locations.html",
   "affiliate_url": "",
@@ -58,18 +58,46 @@
     "transparency": 0,
     "ease_of_use": 0
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Extensive network of 850+ US locations including major retailers (Walmart, grocery chains) and bank partners for convenient access",
+    "Multiple service options beyond transfers: bill payment, money orders, prepaid cards, and cash pickup all available in-person",
+    "Hybrid convenience\u2014customers can register transfers online or via app and complete payment in cash at agent locations",
+    "Established 173-year track record (since 1851) with stated encryption and fraud prevention protections",
+    "Money orders accepted as check alternative and can be deposited directly into bank accounts",
+    "First online international money transfer is fee-free (promotional offer noted on website)",
+    "Flexible payment options at select locations (cash, debit, and credit card accepted)"
+  ],
+  "cons": [
+    "Pricing varies significantly by transfer method and destination with no transparent posted fee schedule on website",
+    "Does not provide currency exchange services at physical locations despite offering international transfers",
+    "Currently experiencing documented delays for payments to Orange Wallet in Cameroon (service reliability issue)",
+    "In-person service hours vary by location with no standardized operating times",
+    "Requires valid ID and additional documentation for some transfers, creating friction in transaction process"
+  ],
+  "best_for": [
+    "Unbanked and underbanked consumers without bank accounts who prefer in-person transactions",
+    "Individuals sending domestic money transfers who value physical location convenience",
+    "Customers needing to pay bills (utilities, rent, car payments) at a local physical location",
+    "People seeking money orders as a secure check alternative for payment transmission"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for unbanked consumers and those preferring in-person transactions who need domestic/international money transfers, bill payments, or money order services. The main caveat is that pricing is non-transparent and varies significantly by transfer type and destination, requiring customers to use their cost calculator before committing to a transaction, and some international corridors experience documented service delays.",
   "services": [
-    "Money order service"
+    "In-person domestic money transfers at agent locations",
+    "International money transfers with recipient currency conversion",
+    "Money order purchase and cashing at participating locations",
+    "Bill payment services (utilities, rent, car payments) at agent locations",
+    "Cash pickup from money sent by others using MTCN tracking",
+    "Western Union Prepaid Visa Card funding and receipt",
+    "Online or app-initiated transfers completed with in-person cash payment",
+    "Money Transfer Control Number (MTCN) generation and tracking for recipients",
+    "Services available at retail partners (Walmart, grocery chains, dedicated locations)",
+    "Bank partner network for in-person money transfers and cash pickups"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-04-02",
   "review_status": "published",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x80d953bcc4fb25e3:0x3c2b73b130e817b3",
     "google_rating": 3.7,
@@ -101,9 +129,10 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
-  "no_index": true
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-03",
+  "no_index": true,
+  "has_been_enriched": true
 }

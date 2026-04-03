@@ -1,14 +1,14 @@
 {
   "name": "Coulee Bank",
   "slug": "coulee-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in La Crosse, WI. $543M in assets. 8 offices.",
-  "description_long": "Coulee Bank is a community bank located in La Crosse, WI, established in 1961. The bank holds approximately $543M in total assets and $435M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank in La Crosse, WI offering personal and business banking, mortgages, SBA loans, and savings products with local commitment.",
+  "description_long": "Coulee Bank is a community-focused financial institution headquartered in La Crosse, Wisconsin, operating as an FDIC-insured bank backed by the full faith and credit of the U.S. Government. The bank has established itself as a regional alternative to larger national institutions, emphasizing personalized service and local community involvement.\n\nCoulee Bank offers a comprehensive range of banking services including personal checking and savings accounts, certificates of deposit (CDs) with promotional rates up to 3.50% APY, high-yield money market accounts, and mortgage products. On the business side, they provide business banking solutions, SBA loan products as a Small Business Administration Preferred Lender, and treasury management services. The bank also offers a mobile app (Coulee Bank Treasury App) available on iOS and Android for account management on-the-go.\n\nThe bank differentiates itself through strong community engagement, with employees actively volunteering and supporting local organizations including Neighbors, Inc. and Rochester Women's Shelter. They offer specific promotional incentives such as $500 off closing costs on owner-occupied purchase mortgages (promotional period 3/1/26-6/30/26) and competitive CD rates. Customer testimonials highlight exceptional customer service, communication, and a welcoming environment compared to larger banks.\n\nAs a regional community bank, Coulee Bank serves customers primarily in Wisconsin with multiple locations. While they offer modern digital banking capabilities, their strength lies in localized relationship banking rather than being a full-service megabank. The bank maintains transparency through a publicly available CRA Public File and emphasizes doing \"the right thing for our clients and colleagues\" as their organizational principle.",
   "logo_url": "",
   "website_url": "https://www.couleebank.net",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Certificates of Deposit (CDs) with promotional rates",
+    "High-yield money market accounts with tiered interest rates",
+    "Residential mortgages (purchase and refinance)",
+    "SBA loan products as a Preferred Lender",
+    "Business banking and commercial services",
+    "Mortgage loan servicing",
+    "Treasury management and business apps",
+    "Coulee Bank Treasury App for mobile banking",
+    "Financial resources and planning tools",
+    "Community reinvestment and support programs"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1961",
-    "Local community bank with personal service",
-    "8 locations"
+    "FDIC-insured with full U.S. Government backing provides deposit security up to $250,000 per account category",
+    "SBA Preferred Lender status enables small businesses to access government-backed financing with potentially favorable terms",
+    "Competitive CD rates with promotional offerings up to 3.50% APY compared to traditional savings accounts",
+    "Mobile app (Treasury App) available on both iOS and Android for secure account management",
+    "$500 closing cost reduction on owner-occupied purchase mortgages during promotional periods",
+    "Strong community involvement with documented employee volunteer programs and support for local nonprofits",
+    "Customer testimonials specifically praise personal service quality and attentiveness compared to large banks"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint (primarily La Crosse, WI and Twin Cities area) restricts accessibility for non-regional customers",
+    "No mention of online account opening, which may require in-person visits for new customers in remote areas",
+    "CD rate special and mortgage promotion are time-limited, creating pressure to act within specific windows",
+    "No information provided about overdraft fees, minimum balance requirements, or other standard banking charges",
+    "Limited product innovation compared to neobanks; emphasis on traditional banking services rather than fintech features"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 18361,
   "latitude": 43.7957310042324,
   "longitude": -91.2202649988328,
@@ -93,12 +103,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking SBA-backed financing with personalized service from a Preferred Lender",
+    "Wisconsin and Upper Midwest residents who prefer local community banking relationships over large national chains",
+    "Savers and CD investors looking for competitive rates with FDIC security in a relationship-oriented environment",
+    "Home buyers in the Coulee Bank service area interested in mortgage products with promotional cost reductions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Coulee Bank is best for customers in Wisconsin and the Upper Midwest who value personalized community banking relationships, competitive savings rates, and local decision-making over the convenience of national banking chains. The primary caveat is geographic limitation\u2014this bank serves a specific regional market and is not suitable for customers outside their service areas or those requiring 24/7 nationwide branch access.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "1516 Losey Blvd S, La Crosse, WI 54601",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

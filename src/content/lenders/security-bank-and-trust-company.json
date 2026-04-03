@@ -1,14 +1,14 @@
 {
   "name": "Security Bank And Trust Company",
   "slug": "security-bank-and-trust-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Paris, TN. $1554M in assets. 16 offices.",
-  "description_long": "Security Bank And Trust Company is a community bank located in Paris, TN, established in 1905. The bank holds approximately $1554M in total assets and $1314M in deposits. It operates 16 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank serving Tennessee since 1905, offering personal and business deposit accounts, lending solutions, and digital banking services across 12 locations.",
+  "description_long": "Security Bank and Trust Company was founded in 1905 as Cottage Grove Bank & Trust and has evolved into a regional community bank with 12 locations throughout Tennessee. Despite significant growth, the institution maintains its original mission of providing personalized service to local customers and communities. The bank emphasizes its deep roots in the areas it serves and positions itself as a local alternative to larger national institutions.\n\nThe bank offers a comprehensive suite of financial products divided into personal and business segments. On the deposit side, customers can access checking and savings accounts, certificates of deposit (CDs), and individual retirement accounts (IRAs), with published deposit rates available on their website. For lending, Security Bank provides personal loans, business loans, and personal real estate loans. Convenience services include online banking, mobile banking with mobile deposit capability, bill pay, Zelle integration, eStatements, debit/ATM cards, phone banking, safe deposit boxes, and wire transfer services.\n\nSecurity Bank distinguishes itself through its local community focus and emphasis on personal relationships rather than corporate banking. The website prominently features their founding history, location-based service model, and career opportunities, suggesting a commitment to community employment and involvement. They offer an online education center and actively advertise fraud prevention awareness to protect customers, indicating consumer-focused risk management practices.\n\nAs a traditional community bank, Security Bank's main limitation is geographic availability restricted to Tennessee with only 12 branches. While they offer digital banking options, their product suite is standard for regional banks without innovative fintech offerings or specialized lending products. The website provides limited detail on specific rates, fees, or loan terms, requiring customers to contact the bank directly for detailed product information.",
   "logo_url": "",
   "website_url": "https://www.securitybanktn.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of deposit (CDs)",
+    "Individual retirement accounts (IRAs)",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Personal loan solutions",
+    "Business loan solutions",
+    "Personal real estate loans",
+    "Online banking and mobile banking with mobile deposit",
+    "Bill pay and Zelle money transfer",
+    "Safe deposit boxes, debit/ATM cards, and wire transfers"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "16 locations"
+    "12 convenient Tennessee locations with extended local presence since 1905",
+    "Full suite of personal and business deposit accounts with published deposit rates",
+    "Comprehensive digital banking: online banking, mobile banking, mobile deposit, bill pay, and Zelle",
+    "Personal relationship-focused service model emphasizing local people serving local needs",
+    "Multiple lending options including personal loans, business loans, and real estate loans",
+    "Fraud prevention resources and proactive scam alert warnings",
+    "Online education center available to help customers make informed financial decisions"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to 12 Tennessee locations, not suitable for customers outside the service area",
+    "Website provides minimal detail on specific rates, fees, or loan terms requiring phone contact",
+    "No mention of specialized products like investment services, wealth management, or insurance",
+    "Standard community bank offerings with no distinctive fintech features or digital-only banking options",
+    "Limited information about small business lending specifics, SBA loans, or equipment financing"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9172,
   "latitude": 36.30297500468,
   "longitude": -88.327157994885,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Tennessee residents seeking a community bank with personal service and local accountability",
+    "Small business owners needing relationship-based banking and business lending solutions",
+    "Customers who value 100+ year banking institutions with established community ties",
+    "Individuals preferring branch-based banking combined with modern digital convenience services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Security Bank is best for Tennessee-based individuals and business owners seeking traditional community banking with personalized service and local accountability. The main caveat is geographic limitation to 12 Tennessee locations and lack of detailed product information online, requiring direct customer outreach for rate and fee specifics.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "210 W Washington St, Paris, TN 38242",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

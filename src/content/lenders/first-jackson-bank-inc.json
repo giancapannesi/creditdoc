@@ -1,14 +1,14 @@
 {
   "name": "First Jackson Bank, Inc.",
   "slug": "first-jackson-bank-inc",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Stevenson, AL. $449M in assets. 7 offices.",
-  "description_long": "First Jackson Bank, Inc. is a community bank located in Stevenson, AL, established in 1981. The bank holds approximately $449M in total assets and $358M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Regional community bank serving northeastern Alabama and southeastern Tennessee with six branch locations, offering personal and business banking services including checking, savings, loans, and digital banking.",
+  "description_long": "First Jackson Bank is a regional community bank headquartered in Stevenson, Alabama, operating six convenient branch offices across northeastern Alabama and southeastern Tennessee. The bank has established itself as a local financial institution focused on serving the banking needs of individuals, families, and businesses in its service area.\n\nThe bank offers a comprehensive suite of banking services including personal checking and savings accounts, certificates of deposit (CDs), individual retirement accounts (IRAs), money market accounts, and both personal and commercial loans. For business customers, First Jackson Bank provides business checking and savings accounts along with business lending products. Digital banking capabilities include online banking, a new mobile banking app, online bill payment, telephone banking available 24 hours, and electronic statements delivered via email. The bank also operates a 24-hour ATM network throughout its service region.\n\nFirst Jackson Bank distinguishes itself through its regional focus and personalized customer service in a community banking model. The bank maintains direct customer support via multiple channels (phone, in-person at six locations) and implements proactive fraud prevention measures, including alerts about phishing scams and customizable debit card geographic restrictions. The institution offers overdraft privilege options and maintains relatively accessible lending programs for local customers.\n\nThe bank's primary limitation is its geographic restriction to a four-state service area (Alabama, Tennessee, Georgia, Florida), with debit card purchases blocked outside these states by default\u2014requiring customers to contact the bookkeeping department for temporary removal. As a smaller regional bank, First Jackson Bank may have more limited product offerings, technology sophistication, or competitive rates compared to larger national banking institutions. The bank's six-location footprint means it cannot provide the nationwide branch access of major banks, though this aligns with its community banking positioning.",
   "logo_url": "",
   "website_url": "https://www.firstjacksonbank.com",
   "affiliate_url": "",
@@ -23,23 +23,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Money Market Accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking and savings accounts",
+    "Business loans and commercial lending",
+    "Debit cards with geographic restrictions",
+    "Online banking and mobile banking app",
+    "Online bill payment",
+    "24-hour telephone banking",
+    "Electronic statements",
+    "24-hour ATM network",
+    "Overdraft privilege",
+    "Loan payment options"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1981",
-    "Local community bank with personal service",
-    "7 locations"
+    "24-hour ATM network available throughout northeastern Alabama and southeastern Tennessee",
+    "New mobile banking app and online banking platform for digital account management",
+    "24-hour telephone banking service for quick balance inquiries and account access",
+    "Six convenient physical branch locations for in-person banking needs",
+    "Comprehensive loan offerings for both personal and commercial customers",
+    "Online bill payment service included with accounts",
+    "Proactive fraud prevention measures including phishing alerts and customizable card restrictions"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Debit cards blocked for purchases outside Alabama, Tennessee, Georgia, and Florida by default, requiring customer service call to temporarily unblock",
+    "Limited to six locations\u2014no nationwide branch network or accessibility for customers outside service area",
+    "As a regional bank, likely offers fewer product options and digital features compared to large national banks",
+    "No information provided on rates, APYs, or fee structures on publicly available website",
+    "Geographic limitation restricts growth potential and customer base expansion"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +66,7 @@
   "states_served": [
     "AL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 23376,
   "latitude": 34.875361413974,
   "longitude": -85.8123432686809,
@@ -93,12 +108,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Individuals and families living in northeastern Alabama or southeastern Tennessee seeking local community banking",
+    "Small business owners in the bank's service area needing business checking and commercial lending",
+    "Customers prioritizing in-person banking relationships and local customer service",
+    "Residents of the four-state service area (AL, TN, GA, FL) who rarely travel outside these states"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Jackson Bank is best for individuals, families, and small businesses located in northeastern Alabama or southeastern Tennessee who value community banking, personalized service, and in-person relationships with their financial institution. The primary caveat is geographic limitation\u2014customers must live within or primarily conduct banking in the four-state region (AL, TN, GA, FL), and debit card use outside this area requires advance notification to the bank.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +122,10 @@
   ],
   "phone": "",
   "address": "43243 Us Highway 72, Stevenson, AL 35772",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-03"
 }

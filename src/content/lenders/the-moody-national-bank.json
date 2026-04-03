@@ -1,14 +1,14 @@
 {
   "name": "The Moody National Bank",
   "slug": "the-moody-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Galveston, TX. $1567M in assets. 14 offices.",
-  "description_long": "The Moody National Bank is a community bank located in Galveston, TX, established in 1907. The bank holds approximately $1567M in total assets and $1346M in deposits. It operates 14 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering personal and business banking services across Texas, including checking, savings, mortgages, and commercial lending with local decision-making.",
+  "description_long": "Moody National Bank is a Texas-based community bank that operates in Houston and Galveston, positioning itself as an institution that balances accessibility with local expertise. The bank is FDIC-insured and emphasizes personalized service through its \"small enough to know you, big enough to serve you\" philosophy.\n\nThe bank offers comprehensive personal banking products including checking and savings accounts with competitive interest rates, unlimited transactions, and free online and mobile banking. For real estate needs, Moody Bank provides lot loans, construction loans, and mortgage products with flexible terms, credit scores as low as 670, and no PMI requirements on certain mortgages. On the business side, they offer commercial real estate financing, business lines of credit, term business loans, and business credit cards designed for growth and expansion.\n\nMoody Bank distinguishes itself through quick local lending decisions, expert guidance from market-knowledgeable lenders, and a relationship-focused approach to customer service. Their construction and lot loan products feature one-time close options and payments based on 15-30 year amortization schedules. The bank also provides a mobile banking app with multi-layered security, real-time transaction tracking, and mobile check deposit capabilities.\n\nAs a regional community bank, Moody Bank is best suited for Texas-based customers seeking personalized service and quick lending decisions rather than national convenience. The primary caveat is geographic limitation to Texas operations, and the website does not transparently display current interest rates, requiring customers to contact the bank directly for specific product pricing.",
   "logo_url": "",
   "website_url": "https://www.moodybank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with unlimited transactions",
+    "Personal savings accounts with competitive interest rates",
+    "FDIC-insured deposits",
+    "Mortgage loans with no PMI",
+    "Construction loans with one-time close option",
+    "Lot loans for land purchase and development",
+    "Commercial real estate financing",
+    "Business lines of credit",
+    "Term business loans",
+    "Business credit cards",
+    "Mobile banking app with mobile check deposit",
+    "Online banking with bill payment"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1907",
-    "Local community bank with personal service",
-    "14 locations"
+    "FDIC-insured deposits up to $250,000 provide federal protection",
+    "No PMI required on mortgage loans, reducing borrowing costs",
+    "Quick local lending decisions avoid delays typical of larger institutions",
+    "One-time close construction loans simplify the building process",
+    "Credit scores as low as 670 accepted for mortgages and construction loans",
+    "Free online and mobile banking with multi-layered security features",
+    "Unlimited transactions on personal checking accounts"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to Texas operations excludes out-of-state customers",
+    "Website does not display current interest rates for any products, requiring direct contact",
+    "Limited information about minimum account balances or monthly fees for checking/savings",
+    "Business credit card benefits and rewards structure not detailed on website",
+    "No mention of investment products, wealth management, or retirement planning services"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3210,
   "latitude": 29.304731008273,
   "longitude": -94.7938900044159,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Texas homebuyers seeking construction or lot financing with quick local approval",
+    "Small business owners in Houston and Galveston needing flexible commercial lending",
+    "Customers prioritizing relationship-based banking over digital-only neobanks",
+    "Real estate investors interested in one-time close construction financing"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Moody National Bank is best for Texas-based personal and business customers seeking personalized, relationship-driven banking with quick lending decisions and local expertise. The primary caveat is geographic restriction to Texas operations and lack of transparent pricing on the website, requiring direct inquiry for current rates and terms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "2302 Post Office St, Galveston, TX 77550",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Cross Bank",
   "slug": "cross-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Wynne, AR. $568M in assets. 10 offices.",
-  "description_long": "Cross Bank is a community bank located in Wynne, AR, established in 1891. The bank holds approximately $568M in total assets and $479M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Cross Bank is a community bank offering personal and business checking, savings, loans, and credit products with FDIC insurance across Arkansas locations.",
+  "description_long": "Cross Bank is a traditional community bank operating in Arkansas with multiple locations including Wynne, Jonesboro, Blytheville, and Osceola. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing deposit protection up to applicable limits. Founded as a regional financial institution, Cross Bank has developed a full-service banking model serving both retail and commercial customers in their markets.\n\nThe bank offers a comprehensive suite of personal banking products including multiple checking account tiers (Free Kasasa Cash Checking, InControl Checking, Premium Gold accounts, Basic Checking), savings options (Kasasa Saver, standard savings, money market accounts), certificates of deposit, and individual retirement accounts. On the lending side, Cross Bank provides personal loans, auto loans, RV loans, and home financing including mortgages, construction loans, and home equity products. They also offer personal credit cards and overdraft coverage options. For business customers, Cross Bank provides commercial checking and savings accounts, business loans, small business loans, agricultural loans, equipment financing, lines of credit, merchant card services, and cash management tools like remote deposit capture and ACH origination.\n\nCross Bank distinguishes itself through its emphasis on community banking and local service, with accessible branch locations in smaller Arkansas markets rather than national presence. The bank provides financial education resources and tools, supports small business growth specifically, and offers both traditional and Kasasa-branded account products. Their digital offerings include online banking, mobile app access (iOS and Android), person-to-person payments, and paperless eStatements. The bank maintains accessibility standards with AudioEye-enabled website optimization.\n\nAs a regional community bank, Cross Bank is best suited for customers in Arkansas seeking personalized local service and relationships with their financial institution. However, the bank's geographic footprint is limited to Arkansas locations, and the website provides minimal detail on specific rates, fees, loan terms, or competitive advantages against national banks or credit unions. Customers requiring nationwide branch access or specialized financial products may find larger institutions more suitable.",
   "logo_url": "",
   "website_url": "http://www.mycrossbank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (6 tiers including Kasasa Cash Checking)",
+    "Personal savings products (Kasasa Saver, savings accounts, money market, CDs, IRAs)",
+    "Personal loans and term loans",
+    "Auto loans and RV loans",
+    "Home mortgages, construction loans, and home equity loans",
+    "Small business loans and agricultural loans",
+    "Commercial checking and savings accounts",
+    "Equipment loans and operating lines of credit",
+    "Merchant card services and business debit cards",
+    "Remote deposit capture and ACH origination",
+    "Personal and business credit cards",
+    "Online banking, mobile banking, and bill pay services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1891",
-    "Local community bank with personal service",
-    "10 locations"
+    "FDIC-insured deposits with full U.S. Government backing",
+    "Multiple checking account options including free Kasasa Cash Checking with rewards",
+    "Comprehensive lending products: personal loans, auto, RV, home mortgages, construction, and home equity loans",
+    "Dedicated small business and agricultural loan programs with cash management services",
+    "Mobile banking app available on both iOS and Android platforms",
+    "Financial education resources and tools provided free to customers",
+    "Remote deposit capture and ACH origination for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: only operates in Arkansas (Wynne, Jonesboro, Blytheville, Osceola areas)",
+    "No specific interest rates, APRs, or fee structures published on website",
+    "Limited information about loan approval timelines or lending criteria",
+    "No mention of investment products, wealth management, or advisory services",
+    "Minimal detail on how Kasasa rewards accounts work or earning rate specifics"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "AR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13821,
   "latitude": 35.2238060185797,
   "longitude": -90.7900160415052,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners in Arkansas seeking local banking relationships and commercial lending",
+    "Agricultural customers needing farm loans and equipment financing in rural Arkansas",
+    "Customers preferring community banking with in-person service over national chains",
+    "Individuals in Arkansas seeking bundled personal banking (checking, savings, loans, credit)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Cross Bank is best for individuals and small businesses located in Arkansas seeking traditional community banking with local branch relationships, FDIC-insured deposits, and comprehensive lending options. The primary caveat is geographic limitation to Arkansas markets; customers outside this region cannot access the bank, and those seeking national reach or detailed rate/fee comparisons should research alternatives, as the website lacks specific pricing information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "399 Merriman Ave E, Wynne, AR 72396",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

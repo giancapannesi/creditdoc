@@ -1,13 +1,13 @@
 {
   "name": "Choiceone Bank",
   "slug": "choiceone-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Sparta, MI. $4407M in assets. 51 offices.",
-  "description_long": "Choiceone Bank is a community bank located in Sparta, MI, established in 1898. The bank holds approximately $4407M in total assets and $3602M in deposits. It operates 51 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "ChoiceOne Bank is a full-service community bank offering checking, savings, loans, mortgages, credit cards, and wealth management services with FDIC insurance and digital banking capabilities.",
+  "description_long": "ChoiceOne Bank is a publicly traded community bank (NASDAQ: COFS) that operates as a comprehensive financial institution serving both personal and business customers. The bank emphasizes community-focused banking with a mission to help customers reach their financial goals through accessible, innovative services.\n\nThe bank offers an extensive range of personal banking products including multiple checking account options (Secure Plus, Freedom), savings accounts, money market accounts, CDs, IRAs, and health savings accounts. On the lending side, ChoiceOne provides auto loans, RV loans, student loans, and personal credit cards (Rewards Platinum, Cash Rewards Platinum, Visa Signature, and Secured Platinum options). Their mortgage services include home purchase loans, refinancing, new construction financing, home equity loans, and home equity lines of credit.\n\nFor business customers, ChoiceOne offers small business checking and savings accounts, business loans (including working capital lines of credit, equipment financing, real estate loans, agricultural loans, medical loans, and SBA loans), business credit cards (Express Loans), and comprehensive treasury management services (ACH, positive pay, wire transfers, merchant card services, remote deposit capture, and lockbox services). The bank also provides wealth management through a private banking division and brokerage services in partnership with Ameriprise.\n\nChoiceOne distinguishes itself through community commitment\u2014they've awarded grants (including $1 million to Fresh Coast Alliance), maintain multiple physical locations, offer financial calculators and learning resources, and have received recognition including a 2025 WebAward for their website. Their CEO was named to Crain's Grand Rapids Most Influential Leaders list. The bank supports first-time homebuyers with dedicated resources and homeowner assistance programs.",
   "logo_url": "",
   "website_url": "https://WWW.CHOICEONE.BANK",
   "affiliate_url": "",
@@ -22,23 +22,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Secure Plus, Freedom)",
+    "Savings accounts and money market accounts",
+    "CDs and Individual Retirement Accounts (IRAs)",
+    "Health Savings Accounts",
+    "Auto loans and RV/recreation loans",
+    "Personal credit cards (Rewards Platinum, Cash Rewards Platinum, Platinum Edition, Secured Platinum, Visa Signature)",
+    "Home purchase and refinance mortgages",
+    "Home equity loans and home equity lines of credit",
+    "Business checking and savings accounts",
+    "Business loans (working capital, equipment, real estate, agricultural, medical, SBA)",
+    "Treasury management services (ACH, positive pay, wire transfers, merchant card services, remote deposit capture, lockbox)",
+    "Wealth management and Ameriprise brokerage services",
+    "Mobile banking app",
+    "Student loans",
+    "Financial calculators and learning resources"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1898",
-    "Local community bank with personal service",
-    "51 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Multiple checking account options tailored to different needs (Secure Plus, Freedom)",
+    "Comprehensive mortgage services including purchase, refinance, new construction, and home equity options",
+    "Robust business banking with SBA loans, treasury management, and merchant services",
+    "Wealth management and brokerage services through Ameriprise partnership",
+    "Mobile banking app available on App Store and Play Store",
+    "Community-focused with homeowner assistance programs and first-time buyer resources",
+    "Award-recognized website and customer service infrastructure"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited information on specific interest rates and APRs for products on the website",
+    "No mention of online-only or neo-bank features that may appeal to digital-first customers",
+    "Wealth management and brokerage services appear to require partnership with external provider (Ameriprise) rather than direct offerings",
+    "No pricing transparency for business services like ACH, wire transfers, or merchant services on public website",
+    "Physical location requirement may not suit customers seeking purely online banking"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +65,7 @@
   "states_served": [
     "MI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1014,
   "latitude": 43.161133552511,
   "longitude": -85.707452914541,
@@ -92,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Community-oriented customers seeking relationship banking with local decision-making",
+    "Small business owners needing integrated checking, lending, and treasury management",
+    "Homebuyers seeking comprehensive mortgage options and first-time buyer support",
+    "Customers wanting FDIC-insured accounts with both traditional banking and investment options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "ChoiceOne Bank is best for community-focused customers, small business owners, and homebuyers seeking full-service banking with personal service and local accountability. The main caveat is that specific product pricing, rates, and terms are not transparent on the public website, requiring direct contact for detailed information on accounts and loan products.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +121,11 @@
   ],
   "phone": "",
   "address": "109 E Division St, Sparta, MI 49345",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }
