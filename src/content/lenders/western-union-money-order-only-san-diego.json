@@ -1,10 +1,10 @@
 {
   "name": "Western Union Money Order Only",
   "slug": "western-union-money-order-only-san-diego",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union Money Order Only — Money transfer service in San Diego, CA.",
-  "description_long": "Western Union Money Order Only provides Money transfer service. Located at 600 W Grape St, San Diego, CA 92101.",
+  "description_short": "Western Union offers in-person money transfers, money orders, bill payments, and cash pickup services at hundreds of agent locations across the US and internationally since 1851.",
+  "description_long": "Western Union is a long-established money services company founded in 1851 that operates a global network of agent locations for in-person financial transactions. The company has evolved from its historical telegraph roots to become a major provider of consumer money transfer and payment services, maintaining hundreds of agent locations across retail stores, grocery chains, banks, and dedicated offices throughout the United States.\n\nWestern Union's primary offerings include domestic and international money transfers, money order purchase and cashing, bill payment services (utilities, rent, car payments), cash pickup from sent transfers, and prepaid card services. Customers can initiate transfers online or through their mobile app and then finalize transactions in person at agent locations, or conduct entire transactions at physical locations. The company provides Money Transfer Control Numbers (MTCN) for tracking transfers and enables recipients to pick up funds at participating locations with valid ID.\n\nKey distinguishing factors include Western Union's extensive physical footprint through partnerships with major retailers like Walmart and numerous grocery chains, making services accessible in communities nationwide. The company emphasizes encryption and fraud prevention protections, offers a fee-free first international online transfer promotion, and provides a location finder tool to identify nearby agent locations. Their in-person service model appeals to unbanked and underbanked consumers who prefer cash-based transactions over digital-only payment methods.\n\nHowever, Western Union's pricing structure varies significantly by transfer method, payment option, and destination, requiring users to comparison-shop using their calculator tool. The company does not provide in-person currency exchange services, though international recipients receive funds in local currency at time-of-transfer rates. Service limitations include location-dependent hours, potential processing delays (as noted for certain destinations like Orange Wallet in Cameroon), and varying acceptance of credit cards across agent locations.",
   "logo_url": "https://lh5.googleusercontent.com/-gYjlOpM9e_A/AAAAAAAAAAI/AAAAAAAAAAA/hjrjMd1cz5I/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/us/en/locations.html",
   "affiliate_url": "",
@@ -58,18 +58,49 @@
     "transparency": 0,
     "ease_of_use": 0
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Extensive network of 100+ agent locations across US including Walmart, grocery chains, and bank partners for convenient access",
+    "Money Transfer Control Number (MTCN) system allows tracking of transfers and secure recipient pickup with ID verification",
+    "Serves both banked and unbanked populations with cash-based transactions at physical locations",
+    "Offers first international online money transfer fee-free to new customers",
+    "Provides multiple in-person payment options including cash, debit card, and credit card at select locations",
+    "Money orders available as trusted alternative to checks for secure fund transfers",
+    "Can register transfers online or via app to save time at physical location for payment",
+    "International money transfer capability with automatic local currency conversion at time of transfer"
+  ],
+  "cons": [
+    "Transfer fees and costs vary significantly by method, destination, and payment option with no transparent published pricing",
+    "Does not offer in-person currency exchange despite international transfer capability",
+    "Subject to processing delays for certain destinations (example: Orange Wallet in Cameroon currently experiencing delays)",
+    "Service hours vary by individual agent location requiring separate lookup for each location",
+    "Credit card acceptance inconsistent across agent locations, limiting payment flexibility for some users"
+  ],
+  "best_for": [
+    "Unbanked and underbanked consumers needing cash-based money transfer without bank accounts",
+    "Individuals sending remittances domestically or internationally to family and friends",
+    "Customers preferring in-person service and cash payment over digital-only money transfer apps",
+    "Consumers needing bill payment services for utilities, rent, and car payments at local retail locations"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for consumers who prefer in-person, cash-based money transfers and lack traditional bank accounts, with an extensive retail network making services widely accessible. The primary caveat is that transparent pricing requires using their comparison calculator before sending, as fees vary substantially by transfer method, destination, and location\u2014making it essential to shop costs rather than assume standard rates.",
   "services": [
-    "Money transfer service"
+    "Domestic money transfers at agent locations",
+    "International money transfers with currency conversion",
+    "Money order purchase and cashing services",
+    "Bill payment services (utilities, rent, car payments) at participating locations",
+    "Cash pickup from transferred funds at agent locations",
+    "Western Union Prepaid Visa Card services",
+    "Online transfer registration for faster in-person completion",
+    "Mobile app-based money transfer initiation",
+    "Money Transfer Control Number (MTCN) tracking system",
+    "Direct bank account transfer option at select locations",
+    "In-person ID verification and fund pickup services",
+    "Location finder tool to identify nearby agent services"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-04-02",
   "review_status": "published",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x80d955b020659793:0x8547c3121c8028",
     "google_rating": 4.0,
@@ -101,9 +132,10 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
-  "no_index": true
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-03",
+  "no_index": true,
+  "has_been_enriched": true
 }

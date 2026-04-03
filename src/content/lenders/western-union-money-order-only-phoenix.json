@@ -1,10 +1,10 @@
 {
   "name": "Western Union Money Order Only",
   "slug": "western-union-money-order-only-phoenix",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union Money Order Only — Money order service in Phoenix, AZ.",
-  "description_long": "Western Union Money Order Only provides Money order service. Located at 646 W Indian School Rd, Phoenix, AZ 85013.",
+  "description_short": "Western Union provides in-person money transfer, cash pickup, bill payment, and money order services at hundreds of agent locations across the US since 1851.",
+  "description_long": "Western Union is a long-established money services company founded in 1851 that operates through a network of agent locations rather than as a traditional storefront operation. The company has built its reputation on reliable, in-person financial transactions available at convenient retail and banking partner locations nationwide.\n\nWestern Union's core services include domestic and international money transfers, bill payment (utilities, rent, car payments), money order purchase and cashing, and cash pickup for funds sent by others. Customers can initiate transfers online or via app and pay in cash at participating locations, or complete the entire transaction in person. The company also offers access to prepaid Visa cards as an alternative to cash pickup. All transfers include a Money Transfer Control Number (MTCN) for tracking.\n\nThe company distinguishes itself through its extensive agent network\u2014available at Walmart locations, grocery chains, retail stores, and select bank partners across the US. Western Union emphasizes encryption and fraud prevention measures, offers flexibility in payment methods (cash, debit, and select credit card options), and provides same-day or next-day service depending on transaction type. First-time online international transfers are advertised as fee-free.\n\nLimitations include that Western Union does not provide in-person currency exchange services (though international recipients receive funds in local currency at transfer rate), varying hours by location, and potential processing delays on certain routes (the site notes current delays for Orange Wallet payments in Cameroon). Pricing varies significantly by transfer method, payment option, and destination, requiring customers to use their cost calculator for accurate quotes.",
   "logo_url": "https://lh6.googleusercontent.com/-Zcig5zaiscQ/AAAAAAAAAAI/AAAAAAAAAAA/5xuTxkx-dDY/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/us/en/locations.html",
   "affiliate_url": "",
@@ -58,18 +58,47 @@
     "transparency": 3.5,
     "ease_of_use": 3.9
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Extensive agent network with hundreds of locations at Walmart, grocery chains, retail stores, and bank partners nationwide",
+    "Money orders available as trusted alternative to checks for sending cash securely",
+    "Same-day or next-day cash pickup at participating locations with MTCN tracking",
+    "Online/app registration option allows customers to start transfers before visiting location, saving counter time",
+    "Multiple payment methods accepted including cash, debit, and credit cards at select locations",
+    "First online international money transfer is fee-free",
+    "Services available 24/7 at some locations (hours vary by agent location)",
+    "Encryption and fraud prevention protections for money transfers"
+  ],
+  "cons": [
+    "No in-person currency exchange services available at agent locations",
+    "Pricing and fees vary significantly by transfer method, payment option, and destination\u2014no transparent posted rates",
+    "Known processing delays on certain international routes (currently experiencing delays for Cameroon Orange Wallet payments)",
+    "Service hours vary by location, requiring individual lookup before visiting",
+    "Not all locations accept credit card payments; cash and debit are more universally accepted"
+  ],
+  "best_for": [
+    "Customers needing to send or receive domestic cash quickly without a bank account",
+    "People sending money internationally who want in-person transaction verification",
+    "Those preferring money orders as a secure alternative to checks for bill payment or cash transfer",
+    "Unbanked or underbanked consumers without access to traditional banking services"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for consumers needing quick in-person cash transfers or money orders, particularly those without traditional bank accounts who value the security of a physical location and tracking number. The main caveat is that fees and rates are not transparently posted online and vary significantly by transfer type and destination\u2014customers must use their calculator or visit a location for accurate pricing.",
   "services": [
-    "Money order service"
+    "Domestic and international in-person money transfers",
+    "Money order purchase and cashing",
+    "Bill payment (utilities, rent, car payments) at participating locations",
+    "Cash pickup for funds sent by others using MTCN",
+    "Prepaid Visa card option for receiving money",
+    "Online and app-based transfer registration with in-person cash payment",
+    "Money Transfer Control Number (MTCN) tracking for transfers",
+    "Service at bank partner locations",
+    "Service at retail and grocery store locations",
+    "Debit and cash payment options at agent locations"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-04-03",
   "review_status": "published",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x872b13b7d91e80fd:0x68d603bf0725c3bf",
     "google_rating": null,
@@ -101,9 +130,10 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
-  "no_index": true
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-03",
+  "no_index": true,
+  "has_been_enriched": true
 }

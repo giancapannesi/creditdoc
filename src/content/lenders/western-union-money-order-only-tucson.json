@@ -1,10 +1,10 @@
 {
   "name": "Western Union Money Order Only",
   "slug": "western-union-money-order-only-tucson",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union Money Order Only — Money order service in Tucson, AZ.",
-  "description_long": "Western Union Money Order Only provides Money order service. Located at 2345 E Irvington Rd, Tucson, AZ 85714.",
+  "description_short": "Western Union offers in-person money transfers, money orders, bill payments, and cash pickup services at hundreds of agent locations across the US and internationally since 1851.",
+  "description_long": "Western Union is a global money transfer service that has operated since 1851, establishing itself as one of the longest-running financial services companies. The company operates through a network of hundreds of agent locations across the United States, including partnerships with major retailers like Walmart and grocery chains, making their services widely accessible to consumers. Western Union's primary focus is facilitating in-person financial transactions for customers who prefer face-to-face service or lack access to traditional banking infrastructure.\n\nThe company offers a comprehensive suite of services centered on money movement and bill payment. Customers can send money domestically or internationally through in-person transfers, purchase and cash money orders as alternatives to checks, pay utility bills and rent at participating locations, pick up cash sent by others using a Money Transfer Control Number (MTCN), and receive funds via prepaid cards. Western Union also enables customers to start transfers online or via mobile app and complete payment in cash at agent locations, combining digital convenience with in-person transaction finality.\n\nWestern Union distinguishes itself through its extensive physical footprint and operational longevity. The company emphasizes encryption and fraud prevention measures to protect transactions, offers reliable service documented over 170+ years of operation, and provides flexible payment options including cash, debit, and credit cards at select locations. Their prepaid card option requires no minimum balance or credit check, making it accessible to underbanked populations. The ability to register online before visiting a location to save time at the counter reflects a hybrid service model.\n\nHowever, Western Union is primarily a transaction facilitator rather than a comprehensive financial services provider. The service is best suited for consumers who need occasional money transfers or bill payments rather than ongoing financial management. Exchange rates apply to international transfers, fees vary by transfer method and destination, and customers must visit physical locations for most services. The company does not provide currency exchange at agent locations, and current delays exist for certain payment corridors like Orange Wallet in Cameroon.",
   "logo_url": "https://lh4.googleusercontent.com/-RXtL83bY1dE/AAAAAAAAAAI/AAAAAAAAAAA/G2ccq-Lgd9I/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/us/en/locations.html",
   "affiliate_url": "",
@@ -58,18 +58,48 @@
     "transparency": 0,
     "ease_of_use": 0
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Extensive network of 100+ agent locations across the US, including major retailers like Walmart and grocery chains",
+    "Money orders available as trusted alternative to checks, with ability to cash or deposit into bank accounts",
+    "Hybrid online-to-offline model allows customers to register transfers online or via app and pay in cash at locations",
+    "Prepaid Visa Card option with no minimum balance or credit check required for receiving money",
+    "International money transfers available with automatic currency conversion at time of transfer",
+    "Bill payment services for utilities, rent, and car payments at participating locations",
+    "Established 170+ year operational history with documented encryption and fraud prevention measures"
+  ],
+  "cons": [
+    "Service fees and exchange rates vary by transfer method, destination, and payment option, requiring cost comparison before sending",
+    "International transfers to some corridors (e.g., Orange Wallet in Cameroon) currently experiencing processing delays",
+    "No currency exchange services available at agent locations; exchange happens at transaction time with rates set by Western Union",
+    "Requires in-person visits to agent locations for most services; no purely online money order or bill payment options",
+    "Money orders must be cashed at participating locations or deposited into bank account; limited flexibility compared to direct transfers"
+  ],
+  "best_for": [
+    "Underbanked consumers without access to traditional bank accounts who need to send or receive money occasionally",
+    "Customers preferring in-person transactions and face-to-face assistance for money transfers or bill payments",
+    "Individuals sending remittances domestically or internationally and wanting established, trusted service provider",
+    "People seeking money order purchases as alternatives to checks for secure payment methods"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for underbanked consumers and those preferring in-person transactions who need occasional money transfers, bill payments, or money orders. The primary caveat is that while the service is widely accessible and established, costs vary significantly by transfer type and destination, and customers must physically visit agent locations for most services beyond online registration.",
   "services": [
-    "Money order service"
+    "Domestic in-person money transfers",
+    "International in-person money transfers with currency conversion",
+    "Money order purchase and cashing",
+    "Bill payment (utilities, rent, car payments) at participating locations",
+    "Cash pickup service using MTCN",
+    "Western Union Prepaid Visa Card account opening and fund receipt",
+    "Online transfer registration with in-person cash payment",
+    "Mobile app for initiating transfers",
+    "Money Transfer Control Number (MTCN) tracking",
+    "Bank partnerships for in-person money transfer services",
+    "Retail location partnerships (Walmart, grocery chains) for service access",
+    "Payment acceptance via cash, debit, and select credit cards"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-04-03",
   "review_status": "published",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x86d67b0b139c5c11:0x90086a00152ab916",
     "google_rating": 5.0,
@@ -101,9 +131,10 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 0,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
-  "no_index": true
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-03",
+  "no_index": true,
+  "has_been_enriched": true
 }
