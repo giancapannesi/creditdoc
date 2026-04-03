@@ -1,10 +1,10 @@
 {
   "name": "Western Union Money Order Only",
   "slug": "western-union-money-order-only-west-new-york",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union Money Order Only — Money order service in West New York, NJ.",
-  "description_long": "Western Union Money Order Only provides Money order service. Located at 6004 Bergenline Ave, West New York, NJ 07093.",
+  "description_short": "Western Union offers in-person money transfers, money orders, bill payments, and cash pickup services at hundreds of agent locations across the US and internationally since 1851.",
+  "description_long": "Western Union is a global money transfer service that has operated since 1851, establishing itself as a trusted provider of financial transaction services. The company operates through a network of hundreds of agent locations across the United States, including partnerships with major retailers like Walmart and grocery chains, as well as select bank partners. This extensive physical footprint makes their services widely accessible to consumers who prefer in-person transactions.\n\nWestern Union's core offerings include domestic and international money transfers conducted in person at agent locations, money order purchases and cashing, bill payment services (utilities, rent, car payments), cash pickup for funds sent by others, and prepaid Visa card options for receiving funds. Customers can also register transfers online or through the Western Union app and then finalize payment in cash at participating locations. The company emphasizes encryption and fraud prevention measures to protect money transfers, and provides Money Transfer Control Numbers (MTCNs) to track transactions.\n\nWestern Union distinguishes itself through its extensive agent location network, long-established brand reputation, and convenience of same-day or rapid fund availability at pickup locations. The company offers flexibility in payment methods (cash, debit, and select credit card options) and serves both domestic and international transfer needs. They provide a first online international money transfer at no fee and offer a money transfer cost calculator for price comparison.\n\nA key limitation is that Western Union does not provide in-person currency exchange services\u2014international recipients receive funds in local currency based on the exchange rate at transfer time, with no customer control over the rate. Pricing varies significantly by transfer method, destination, and payment option, and fees can be substantial for certain transactions. The service is primarily transaction-focused rather than relationship-based banking, and there are currently documented delays for payments to specific regions like Orange Wallet in Cameroon.",
   "logo_url": "https://lh4.googleusercontent.com/-VW4LHaxrJ7I/AAAAAAAAAAI/AAAAAAAAAAA/Ha-deoLPfpU/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/us/en/locations.html",
   "affiliate_url": "",
@@ -58,18 +58,48 @@
     "transparency": 0,
     "ease_of_use": 0
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Extensive network of hundreds of agent locations across the US, including Walmart and major grocery chains",
+    "Fast in-person cash pickup available at participating locations with MTCN and valid ID",
+    "Money orders available as a trusted alternative to checks for sending cash",
+    "International money transfer capability with funds delivered in recipient's local currency",
+    "Online registration option allows customers to start transfers online and finalize in-store to save time",
+    "First online international money transfer is fee-free",
+    "Bill payment services (utilities, rent, car payments) available at participating locations",
+    "Prepaid Visa card option for receiving funds with no minimum balance or credit check required"
+  ],
+  "cons": [
+    "No in-person currency exchange services available; exchange rates determined by Western Union at time of transfer",
+    "Pricing is not transparent upfront and varies significantly by transfer method, destination, and payment option",
+    "Known processing delays for certain international destinations (e.g., Orange Wallet in Cameroon)",
+    "Service requires valid ID and recipient details, limiting anonymity and convenience for some users",
+    "Primarily a transaction service without relationship banking features like accounts or credit products"
+  ],
+  "best_for": [
+    "Unbanked or underbanked consumers without access to traditional checking accounts needing to send or receive cash",
+    "International immigrants and workers sending money to family members in foreign countries",
+    "Consumers who prefer in-person transactions over online banking and want rapid cash availability"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for consumers seeking rapid in-person money transfer and cash pickup services, particularly those without traditional bank accounts or those sending money internationally. The main caveat is that pricing is opaque and varies widely by transaction type and destination, and customers have no control over international exchange rates, making cost comparison essential before each transaction.",
   "services": [
-    "Money order service"
+    "In-person domestic money transfers",
+    "In-person international money transfers",
+    "Money order purchase and cashing",
+    "Bill payment (utilities, rent, car payments)",
+    "Cash pickup at agent locations",
+    "Prepaid Visa card fund delivery",
+    "Money Transfer Control Number (MTCN) tracking",
+    "Online transfer registration with in-store payment finalization",
+    "Mobile app for transfer initiation",
+    "Multi-payment method acceptance (cash, debit, select credit cards)",
+    "Bank partner money transfer services",
+    "Retail location integration (Walmart, grocery chains)"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-04-03",
   "review_status": "published",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x89c259672be757e7:0xf74f0e558af1366b",
     "google_rating": 5.0,
@@ -101,9 +131,10 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 0,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
-  "no_index": true
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-03",
+  "no_index": true,
+  "has_been_enriched": true
 }
