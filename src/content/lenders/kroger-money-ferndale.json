@@ -1,10 +1,10 @@
 {
   "name": "Kroger Money Services",
   "slug": "kroger-money-ferndale",
-  "category": "emergency-cash",
+  "category": "atm",
   "subcategories": [],
-  "description_short": "Kroger Money Services — Check cashing service in Ferndale, MI.",
-  "description_long": "Kroger Money Services provides Check cashing service. Located at 8920 Eight Mile W, Ferndale, MI 48220.",
+  "description_short": "Coinstar kiosk operator offering coin-to-cash conversion, cryptocurrency purchases, gift card exchanges, and account transfers at Kroger locations.",
+  "description_long": "Coinstar operates self-service kiosks at retail locations like Kroger that provide multiple financial services beyond traditional ATM functions. The company has been in the coin conversion business for decades, making physical currency accessible at convenient grocery store locations rather than requiring trips to banks. Their Kroger Money Services kiosk in Ferndale, MI exemplifies their multi-service model now common across their 10,000+ U.S. locations.\n\nThe primary service remains Coins to Cash conversion, allowing customers to deposit loose change and receive bills without sorting or rolling coins. However, their service menu has expanded significantly to include cryptocurrency buying (via CINQ by Coinstar and Coinme), Amazon Cash loading, eGift card exchanges, charity donations, account transfers, and CINQ debit card services. This positions them as a modern fintech cash access point rather than a simple coin exchange.\n\nCoinstar distinguishes itself through omnichannel cash services and retail partnerships rather than traditional banking infrastructure. Their integration with cryptocurrency platforms (Zero Hash for CINQ, Coinme for direct crypto purchases) reflects evolving consumer demand. The 2026 acquisition by Arctic Slope Regional Corporation suggests institutional backing and potential expansion of financial services.\n\nHowever, this company serves a niche market and should not be confused with consumer finance lending, credit services, or traditional banking. The cryptocurrency services carry inherent volatility risks, and fees vary by location and service type. Users should verify specific services and fees at their local kiosk before visiting.",
   "logo_url": "https://lh5.googleusercontent.com/-VB368FQbwa4/AAAAAAAAAAI/AAAAAAAAAAA/8po_xhOjjNE/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.coinstar.com/kiosk-info?KioskId=1927",
   "affiliate_url": "",
@@ -58,18 +58,46 @@
     "transparency": 0,
     "ease_of_use": 0
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Convenient access at grocery stores eliminates bank visit requirements for coin conversion",
+    "No fee options available for eGift card exchanges at participating retailers",
+    "Cryptocurrency purchases available without requiring bank account or credit card",
+    "Amazon Cash service adds funds directly to Amazon account balance with no hidden fees",
+    "Charity donation option allows direct giving from loose change to 8+ participating organizations",
+    "Account transfer service (Push to Card) enables direct deposit to checking accounts",
+    "CINQ debit card provides digital wallet alternative for cryptocurrency and cash management"
+  ],
+  "cons": [
+    "Fees vary by location and service type, not transparently disclosed upfront on main page",
+    "Cryptocurrency services (CINQ, Coinme) expose users to price volatility and market risk",
+    "Limited to specific eGift card retailers and cryptocurrency options available varies by kiosk",
+    "Does not exchange gift cards or foreign currency, limiting service scope",
+    "Requires app downloads for cryptocurrency and Amazon Cash services, adding friction",
+    "Account transfer fees vary by financial institution, potentially hidden costs"
+  ],
+  "best_for": [
+    "Consumers with significant loose change seeking immediate conversion without bank trips",
+    "Amazon shoppers preferring to add cash to accounts without credit/debit cards",
+    "Cryptocurrency-curious consumers wanting accessible on-ramp at physical retail locations",
+    "Charitable donors wanting to convert spare change to meaningful donations"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Coinstar kiosks serve consumers needing cash access, coin conversion, or fintech services at grocery store locations\u2014not traditional consumer lending or credit services. The cryptocurrency offerings and account transfers represent modern cash services, but users should understand that crypto involves market risk and all service fees vary by location before visiting.",
   "services": [
-    "Check cashing service"
+    "Coins to Cash conversion with no sorting or rolling required",
+    "eGift card exchanges (AMC, Apple, Starbucks, DoorDash, Home Depot, etc.) with variable and no-fee options",
+    "CINQ by Coinstar cryptocurrency wallet and cash-to-crypto conversion",
+    "Coinme cryptocurrency purchases from cash at kiosk",
+    "Amazon Cash service for adding funds to Amazon account balance ($5-$500)",
+    "Charity donations via Coinstar Coins that Count program (Red Cross, Make-A-Wish, Feeding America, etc.)",
+    "Account transfer service (Push to Card) for depositing coins/cash to checking accounts",
+    "CINQ by Coinstar debit card issuance and management",
+    "Bill acceptance (confirmed at this Ferndale location)"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-04-02",
   "review_status": "published",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x8824ceca25e4c34b:0x2509ff075e80746d",
     "google_rating": 4.0,
@@ -101,10 +129,11 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-03",
   "no_index": true,
-  "website_needs_review": true
+  "website_needs_review": true,
+  "has_been_enriched": true
 }
