@@ -1,10 +1,10 @@
 {
   "name": "Western Union",
   "slug": "western-union-seattle-wa",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union — Money transfer service in Seattle, WA.",
-  "description_long": "Western Union provides Money transfer service. Located at 7300 Roosevelt Way NE, Seattle, WA 98115.",
+  "description_short": "Western Union operates a global money transfer and payment services network with 150+ U.S. agent locations, enabling customers to send money, receive cash, and pay bills.",
+  "description_long": "Western Union is a longstanding financial services company that provides money transfer, cash pickup, and payment solutions through a distributed network of agent locations across the United States. The company operates primarily through partnerships with retail chains like Walmart, Safeway, City Market, Kroger, and Circle K, allowing customers to access services at convenient neighborhood locations rather than dedicated branch offices.\n\nThe company offers a range of consumer financial services accessible both online and in-store. Customers can send money domestically and internationally, pick up cash transfers at agent locations, pay bills online, purchase money orders (available at select locations), receive money on a prepaid card, and purchase mobile top-ups. Western Union also provides online account management through registration and login portals, transfer tracking, pricing estimates, and a rewards program for frequent users.\n\nWestern Union's primary distinction is its extensive agent network embedded within established retail partners rather than standalone locations. The company advertises 24/7 online initiation of transfers with in-store pickup based on individual agent hours of operation (typically 8 PM to 11:59 PM closings). Their integration into major grocery and retail chains provides accessibility without requiring dedicated financial institution branches.\n\nA significant limitation evident from the website is the incomplete or outdated information presentation\u2014including a 404 error on a secondary URL and a temporary \"Orange wallet\" payment method outage. The website provides location finder and basic service descriptions but lacks detail on fees, APRs, eligibility requirements, or comprehensive service comparisons. Customers should verify specific service availability by location, as some agents provide limited services (e.g., money orders only at certain Circle K locations).",
   "logo_url": "https://lh5.googleusercontent.com/-he5jHbKrzPU/AAAAAAAAAAI/AAAAAAAAAAA/EvRbFcXSMUk/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/US/en/find-locations.html",
   "affiliate_url": "",
@@ -58,18 +58,48 @@
     "transparency": 0,
     "ease_of_use": 0
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Extensive U.S. agent network with 150+ locations across multiple states, embedded in major retail chains like Walmart and Safeway",
+    "24/7 online money transfer initiation with same-day or next-day pickup at agent locations during business hours",
+    "Multiple service options including domestic/international transfers, bill payment, mobile top-ups, and prepaid card funding",
+    "Convenient retail-based locations with flexible hours (some agents open until 11:59 PM) eliminates need for separate financial institution branches",
+    "Western Union Rewards program offers incentives for repeat users",
+    "Multi-language support (English, Spanish, Haitian Creole, Chinese, French, Vietnamese)",
+    "Online account management with transfer tracking and price estimation tools"
+  ],
+  "cons": [
+    "Website contains technical issues (404 errors, temporary service outages like Orange wallet) suggesting inconsistent digital infrastructure",
+    "No fee, exchange rate, or pricing information visible on the location-finder website; customers must contact agents or visit main site separately",
+    "Service availability varies significantly by location\u2014some agents provide limited services (money orders only), requiring customers to verify before visiting",
+    "No information provided on eligibility requirements, speed of transfers, or comparison with competitor offerings",
+    "Geolocation feature requires manual browser enablement; system defaults to Colorado locations without proper address entry"
+  ],
+  "best_for": [
+    "Consumers needing to send or receive money at convenient retail locations without a traditional bank account",
+    "Customers sending domestic or international remittances who prefer in-person cash pickup over direct deposit",
+    "Users seeking quick bill payment or mobile top-up services integrated with grocery shopping",
+    "Individuals in underbanked communities with limited access to traditional financial institutions but near retail agent partners"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for consumers seeking convenient retail-based money transfer and cash pickup services without traditional bank accounts, particularly those sending domestic or international remittances. The main caveat is that service availability and fees vary significantly by location, requiring customers to verify specific offerings and pricing before visiting an agent, and the website's technical issues suggest inconsistent service reliability.",
   "services": [
-    "Money transfer service"
+    "Domestic money transfer with in-store pickup",
+    "International money transfer",
+    "Cash pickup at agent locations",
+    "Online bill payment",
+    "Money orders (at select locations)",
+    "Mobile top-up/mobile phone recharging",
+    "Western Union Rewards program membership",
+    "Prepaid card funding and cash receipt on card",
+    "Transfer tracking and monitoring",
+    "Online pricing estimates",
+    "Inmate payment services",
+    "Delivery method updates and account management"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-03-21",
   "review_status": "published",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x549014730ec137fb:0xed15ac92cc75e66c",
     "google_rating": 5.0,
@@ -101,10 +131,10 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 0,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-04",
   "no_index": true,
   "contact": {
     "phone": "",
@@ -112,5 +142,6 @@
   },
   "website_found_by": "scrapeforge",
   "website_found_at": "2026-04-04T17:16:08.214927",
-  "email": "email@domain.com"
+  "email": "email@domain.com",
+  "has_been_enriched": true
 }

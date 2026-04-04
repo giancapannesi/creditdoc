@@ -1,14 +1,14 @@
 {
   "name": "Texas Republic Bank, National Association",
   "slug": "texas-republic-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Frisco, TX. $503M in assets. 6 offices.",
-  "description_long": "Texas Republic Bank, National Association is a community bank located in Frisco, TX, established in 1891. The bank holds approximately $503M in total assets and $368M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank headquartered in North Dallas offering personal and business banking, lending, mortgages, and treasury services with local decision-making authority.",
+  "description_long": "Texas Republic Bank, National Association is a locally-owned and managed community bank headquartered in Plano, Texas\u2014described as the fastest-growing city in the U.S. As an FDIC-insured institution backed by the full faith and credit of the U.S. Government, the bank positions itself as a \"community bank\" with emphasis on personal relationships and local expertise rather than corporate bureaucracy. The bank explicitly markets its philosophy as \"Banking like it oughta be,\" focusing on trusted guidance and flexible services.\n\nThe bank offers a comprehensive suite of financial products across personal and business segments. Personal offerings include checking/savings accounts, personal loans, mortgages (purchase and refinance), and mobile/online banking with 24/7 account access. Business services span commercial lending, SBA loans (7a, Express, and 504 programs), equipment financing, lines of credit, term loans, treasury management, medical practice lending, and specialized services like remote deposit and lockbox. The bank also serves non-profits with dedicated products.\n\nTexas Republic Bank distinguishes itself through its local ownership structure, claiming that customers \"can deal with someone who has authority to get you a decision.\" The bank emphasizes SBA Preferred Lender status for faster loan decisions, specialized medical and professional practice lending expertise, and regional focus on North Dallas and neighboring communities. Their digital offerings include mobile check deposit, card controls, and paperless statements alongside traditional banking services.\n\nAs a traditional community bank, Texas Republic Bank is best suited for customers who prioritize local relationships and personalized service over digital-first experiences or specialized fintech solutions. However, the company provides limited detail on specific loan terms, interest rates, fees, or competitive advantages in pricing, making it difficult to assess whether their products offer better value than larger national banks or online alternatives.",
   "logo_url": "",
   "website_url": "https://www.texasrepublicbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Personal lending and personal loans",
+    "Mortgage lending (purchase and refinance)",
+    "Business checking and commercial deposit accounts",
+    "SBA loans (7a, SBA Express, 504 programs)",
+    "Equipment financing for business purchases",
+    "Lines of credit (secured with accounts receivable, inventory, or other assets)",
+    "Term loans for business expansion and acquisitions",
+    "Medical and professional practice lending",
+    "Treasury management and cash management services",
+    "Remote deposit and lockbox services",
+    "Mobile banking with 24/7 account access and mobile check deposit"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1891",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured with full U.S. Government backing, providing deposit protection up to $250,000",
+    "SBA Preferred Lender status enables faster approval and funding for small business loans",
+    "Specialized medical and professional practice lending programs with tailored financing solutions",
+    "Local ownership and decision-making authority\u2014loan officers can approve decisions without corporate delays",
+    "24/7 digital account access with mobile check deposit, bill pay, and fund transfers",
+    "Comprehensive business lending suite including equipment financing, lines of credit, term loans, and SBA programs",
+    "Serves non-profits and specialized segments (medical professionals, equipment financing) with expertise"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation\u2014primarily serves North Dallas and neighboring communities, not nationwide",
+    "Website provides no fee schedule, interest rate ranges, or loan term details for comparison shopping",
+    "No mention of competitive products like high-yield savings accounts or money market accounts",
+    "Limited information on minimum deposit requirements, balance thresholds, or account qualification criteria",
+    "No transparency on approval timelines, credit score requirements, or borrowing limits for personal loans"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3400,
   "latitude": 33.1003010147718,
   "longitude": -96.8067359909447,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners in North Dallas seeking SBA loans and relationship-based lending with local decision-makers",
+    "Medical professionals and healthcare practice owners needing specialized financing and deposit solutions",
+    "Community-focused customers prioritizing face-to-face banking relationships over digital-only services",
+    "Non-profit organizations requiring banking services with community bank expertise and local support"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Texas Republic Bank is best for small business owners and professionals in the North Dallas area who value local decision-making and personalized service over digital convenience or competitive pricing transparency. The main caveat is the lack of publicly available rate and fee information, which prevents customers from assessing true value versus larger regional or national banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "2595 Preston Rd, Frisco, TX 75034",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

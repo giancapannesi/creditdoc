@@ -1,7 +1,7 @@
 {
   "name": "Yakima Federal Savings And Loan Association",
   "slug": "yakima-federal-savings-and-loan-association",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
@@ -9,8 +9,8 @@
     "mutual-bank",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Yakima, WA. $2008M in assets. 10 offices.",
-  "description_long": "Yakima Federal Savings And Loan Association is a community bank located in Yakima, WA, established in 1905. The bank holds approximately $2008M in total assets and $1389M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Yakima Federal Savings and Loan is a mutual bank founded in 1905 offering checking, savings, home loans, and credit cards across Washington state.",
+  "description_long": "Yakima Federal Savings and Loan Association was established in 1905 with the original mission of providing a safe place for people to save money to purchase homes. Operating as a mutual bank, the institution is owned by its depositors rather than external shareholders, which aligns its incentives with customer benefit. The company maintains a regional presence across Washington state with multiple branch locations.\n\nThe institution offers a comprehensive suite of retail banking products including checking and savings accounts, certificates of deposit (CDs), home loans (conventional, construction, refinance, and home equity), credit cards, and business checking accounts. Mortgage products are actively marketed with featured rates for 30-year purchase and refinance loans, 15-year mortgages, and 20-year home equity lines of credit. Deposit products include CDs with terms ranging from 3 to 18 months. Customer service is available via phone at (800) 331-3225, live chat (Mon-Fri, 9 a.m.\u20134 p.m.), and online banking portal.\n\nYakima Federal differentiates itself through its mutual ownership structure, long operational history spanning 118+ years, and emphasis on community-focused banking practices. The website highlights customer testimonials praising individual staff members by name, suggesting relationship-based banking and personalized service. The company offers bilingual services (English and Spanish) and maintains accessibility features including AudioEye optimization for disabled users.\n\nAs a regional mutual bank, Yakima Federal serves consumers seeking traditional banking relationships with local branch access in Washington state. The featured mortgage rates (6.0%-7.125% APR range) and CD rates (2.96%-3.63% rate range) are competitive for the current market. However, as a regional institution with limited geographic presence, customers outside Washington may find it inconvenient, and the company does not prominently advertise digital-first or neo-banking features that appeal to tech-focused consumers.",
   "logo_url": "",
   "website_url": "https://yakimafed.com",
   "affiliate_url": "",
@@ -25,23 +25,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Checking accounts (personal and business)",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of Deposit (3-month, 6-month, 8-month, 18-month terms)",
+    "30-year fixed-rate mortgage loans (purchase and refinance)",
+    "15-year fixed-rate mortgage loans",
+    "Construction loans",
+    "Home equity lines of credit (HELOC) and home equity loans",
+    "Credit cards",
+    "Business checking accounts",
+    "Online banking portal with username/password enrollment",
+    "Phone banking (800) 331-3225",
+    "Live chat support (Mon-Fri, 9 a.m.\u20134 p.m.)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "10 locations"
+    "Mutual bank structure owned by depositors aligns institutional incentives with customer benefit",
+    "118-year operational history (founded 1905) demonstrates stability and longevity",
+    "Multiple product offerings including checking, savings, CDs, mortgages, HELOCs, and business accounts",
+    "Bilingual services available (English and Spanish) for broader customer accessibility",
+    "Personalized customer service highlighted through named employee testimonials across branch locations",
+    "Accessibility features including AudioEye optimization for users with disabilities",
+    "Live chat support during business hours (Mon-Fri, 9 a.m.\u20134 p.m.) in addition to phone banking"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic presence restricted to Washington state, inconvenient for out-of-state customers",
+    "No prominent digital banking innovation or neo-banking features advertised on website",
+    "Mortgage rates (6.0%-7.125% APR) not significantly differentiated from larger national lenders",
+    "CD rates (up to 3.7% APY) are modest and may not be competitive with online-only banks offering 4%+ APY",
+    "Website content does not detail account fees, minimum balance requirements, or other cost considerations"
   ],
   "contact": {
     "phone": "",
@@ -53,7 +64,7 @@
   "states_served": [
     "WA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28116,
   "latitude": 46.6021649803045,
   "longitude": -120.504957977917,
@@ -95,12 +106,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Washington state residents seeking local branch banking relationships with a stable mutual institution",
+    "Homebuyers and refinancers wanting conventional or construction mortgage products with local loan officers",
+    "Spanish-speaking customers who value bilingual banking services and personalized branch support",
+    "Long-term savers and retirees who prioritize mutual bank ownership and community-focused banking practices"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Yakima Federal is best suited for Washington state residents and homebuyers seeking traditional mutual bank services with local branch access and personalized customer relationships. The primary caveat is geographic limitation to Washington state and modest digital banking innovation compared to national or online-only competitors, making it less ideal for tech-focused or out-of-state customers.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +120,11 @@
   ],
   "phone": "",
   "address": "118 E Yakima Ave, Yakima, WA 98901",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

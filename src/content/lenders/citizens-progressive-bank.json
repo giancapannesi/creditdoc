@@ -1,14 +1,14 @@
 {
   "name": "Citizens Progressive Bank",
   "slug": "citizens-progressive-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Winnsboro, LA. $256M in assets. 6 offices.",
-  "description_long": "Citizens Progressive Bank is a community bank located in Winnsboro, LA, established in 1918. The bank holds approximately $256M in total assets and $223M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Citizens Progressive Bank is a full-service bank offering checking, savings, loans, and mortgage services through both online and traditional channels.",
+  "description_long": "Citizens Progressive Bank operates as a traditional community bank providing comprehensive financial services to personal and commercial customers. Based on their website presence at cpbonline.com, the institution positions itself as a relationship-focused bank serving diverse banking needs.\n\nThe bank offers a range of core banking products including multiple checking account options (personal, commercial, and student accounts), savings accounts designed for various goals like emergency funds and retirement, personal loans for general borrowing needs, and a dedicated Home Mortgage Center for purchase and refinance services. They provide online banking enrollment and prequalification services for prospective borrowers, indicating a digital-forward approach to account access and loan origination.\n\nCitizens Progressive Bank distinguishes itself through community involvement, maintaining an events calendar and publishing community activities on their website. The bank also demonstrates proactive customer protection awareness by publishing fraud alerts on their homepage, specifically warning customers about text-based card fraud schemes and educating them on proper security practices.\n\nAs a traditional bank, Citizens Progressive Bank serves mainstream banking needs rather than specialized lending or alternative finance. Prospective customers should verify current account terms, interest rates, and loan products directly, as the website provides product category information but limited specific rate or fee details. The bank appears to operate during standard business hours with after-hours debit card support available.",
   "logo_url": "",
   "website_url": "https://cpbonline.com",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts",
+    "Commercial checking accounts",
+    "Student checking accounts",
     "Savings accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Home mortgage purchase services",
+    "Home refinance services",
+    "Online banking enrollment",
+    "Home loan prequalification",
+    "Lost or stolen debit card reporting and replacement",
+    "Fraud alert notifications and customer security education",
+    "Community events and financial education programs"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1918",
-    "Local community bank with personal service",
-    "6 locations"
+    "Offers multiple checking account types including student and commercial options, providing flexibility for different customer segments",
+    "Dedicated Home Mortgage Center with prequalification services available online, streamlining the home loan process",
+    "Proactive fraud alert notifications on homepage demonstrating customer security awareness and protection education",
+    "Online banking enrollment available, allowing remote account access without branch visits",
+    "After-hours debit card support line (844-202-5333) available for lost or stolen card situations",
+    "Community engagement with published events calendar, indicating local involvement and relationship-building focus",
+    "Clear distinction between savings purposes (emergency funds, holidays, retirement) showing product customization"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides limited specific information on interest rates, APRs, fees, or loan terms, requiring direct contact for pricing details",
+    "No mention of mobile app availability or mobile-specific banking features despite online banking emphasis",
+    "Limited transparency regarding insurance products, investment services, or wealth management offerings visible on homepage"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "LA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10531,
   "latitude": 32.1743230019576,
   "longitude": -91.7258820178573,
@@ -93,12 +102,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking traditional full-service banking with both online and in-person branch options",
+    "Homebuyers and homeowners interested in mortgage prequalification and refinancing services",
+    "Small business owners needing commercial checking and business lending solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Citizens Progressive Bank is best for customers seeking traditional full-service banking with both online and physical branch access, particularly those interested in mortgage services and small business banking. The main caveat is that the website lacks detailed pricing information\u2014you'll need to contact them directly for specific rates, fees, and terms on products.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +115,10 @@
   ],
   "phone": "",
   "address": "3540 Front St, Winnsboro, LA 71295",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }
