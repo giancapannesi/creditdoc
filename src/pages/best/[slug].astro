@@ -41,6 +41,26 @@ const jsonLd = [
       url: `https://creditdoc.co/review/${lender.slug}/`,
     })),
   },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: listicle.title,
+    description: listicle.description,
+    author: {
+      '@type': 'Person',
+      name: 'Harvey Brooks',
+      jobTitle: 'Senior Financial Editor',
+      url: 'https://creditdoc.co/about/',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'CreditDoc',
+      url: 'https://creditdoc.co',
+      logo: { '@type': 'ImageObject', url: 'https://creditdoc.co/favicon.svg' },
+    },
+    image: 'https://creditdoc.co/og-default.png',
+    url: `https://creditdoc.co/best/${listicle.slug}/`,
+  },
 ];
 
 // FAQPage schema (if FAQ data exists)
@@ -80,6 +100,7 @@ if (faqSchemaItems.length > 0) {
     <div class="max-w-3xl">
       <h1 class="text-2xl sm:text-3xl font-bold text-text">{listicle.title}</h1>
       <p class="mt-3 text-muted leading-relaxed">{listicle.description}</p>
+      <p class="mt-3 text-sm text-muted">Written by <a href="/about/" class="text-primary hover:underline font-medium">Harvey Brooks</a>, Senior Financial Editor</p>
     </div>
   </section>
 
@@ -283,6 +304,22 @@ if (faqSchemaItems.length > 0) {
       </div>
     </section>
   )}
+
+  <!-- Author / E-E-A-T -->
+  <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+    <div class="rounded-xl border border-border bg-white p-5 flex gap-4">
+      <div class="flex-shrink-0">
+        <div class="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center text-white text-sm font-bold">HB</div>
+      </div>
+      <div>
+        <p class="text-sm font-semibold text-text">Harvey Brooks</p>
+        <p class="text-xs text-primary font-medium">Senior Financial Editor</p>
+        <p class="mt-2 text-xs text-muted leading-relaxed">
+          Harvey Brooks is a consumer finance writer specializing in credit repair, personal lending, and debt management. With over a decade covering the industry, he makes financial literacy accessible to everyday Americans. <a href="/about/" class="text-primary hover:underline">About our editorial team</a>.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- Affiliate Disclosure -->
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
