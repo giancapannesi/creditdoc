@@ -1,0 +1,104 @@
+---
+/**
+ * AffiliateSidebar — Contextual affiliate placement for blog/guide sidebars.
+ *
+ * Renders ONE relevant affiliate offer based on the page category.
+ * Styled as a native card (glass-card) — no flashy banner dumps.
+ *
+ * Categories → Offers:
+ *   credit-repair, fix-my-credit → The Credit People ($125 CPA)
+ *   personal-loans, emergency-cash, payday-alternatives → Lead Stack (loan matching)
+ *   debt-relief → The Credit People (credit repair helps debt too)
+ *   build-credit, credit-monitoring → WalletHub (credit monitoring)
+ *   default → Lead Stack (broadest appeal)
+ */
+
+interface Props {
+  category: string;
+}
+
+const { category } = Astro.props;
+
+// Map page categories to the best affiliate offer
+type Offer = {
+  name: string;
+  tagline: string;
+  description: string;
+  cta: string;
+  url: string;
+  banner?: string;  // 300x250 banner path (optional)
+  disclosure: string;
+};
+
+const offers: Record<string, Offer> = {
+  'credit-repair': {
+    name: 'The Credit People',
+    tagline: 'Professional Credit Repair',
+    description: 'Trusted by thousands to dispute errors, remove negative items, and rebuild credit scores. Results in as little as 30 days.',
+    cta: 'Get a Free Consultation',
+    url: 'https://thecreditpeople.net/?a=17543&c=5194&s1=creditdoc-sidebar',
+    banner: '/affiliates/tcp/The worst credit ever 300x250-1.jpg',
+    disclosure: 'CreditDoc earns a commission if you sign up.',
+  },
+  'personal-loans': {
+    name: 'Compare Personal Loans',
+    tagline: 'Find Your Best Rate',
+    description: 'Check options from multiple lenders with one form. No hard credit pull to see what you qualify for.',
+    cta: 'Check Your Options',
+    url: 'https://lowcreditfinance.com/?aff146570',
+    disclosure: 'CreditDoc earns a commission if you apply.',
+  },
+  'build-credit': {
+    name: 'WalletHub',
+    tagline: 'Free Credit Monitoring',
+    description: 'Track your credit score, get personalized improvement tips, and receive alerts when your report changes.',
+    cta: 'Monitor Your Credit Free',
+    url: 'https://wallethub.com/',  // TODO: replace with CJ deep link when available
+    disclosure: 'CreditDoc earns a commission if you subscribe.',
+  },
+};
+
+// Category → offer mapping
+const categoryToOffer: Record<string, string> = {
+  'credit-repair': 'credit-repair',
+  'fix-my-credit': 'credit-repair',
+  'debt-relief': 'credit-repair',
+  'personal-loans': 'personal-loans',
+  'emergency-cash': 'personal-loans',
+  'payday-alternatives': 'personal-loans',
+  'build-credit': 'build-credit',
+  'credit-monitoring': 'build-credit',
+};
+
+const offerKey = categoryToOffer[category] || 'personal-loans';
+const offer = offers[offerKey];
+---
+
+<div class="glass-card p-5">
+  <div class="flex items-center gap-2 mb-3">
+    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-700 uppercase tracking-wider">Sponsored</span>
+  </div>
+
+  {offer.banner && (
+    <a href={offer.url} target="_blank" rel="noopener noreferrer nofollow" class="block mb-3 rounded-lg overflow-hidden">
+      <img src={offer.banner} alt={offer.name} class="w-full h-auto" loading="lazy" />
+    </a>
+  )}
+
+  <h3 class="text-sm font-bold text-text">{offer.name}</h3>
+  <p class="text-xs text-primary font-medium mt-0.5">{offer.tagline}</p>
+  <p class="mt-2 text-xs text-muted leading-relaxed">{offer.description}</p>
+
+  <a
+    href={offer.url}
+    target="_blank"
+    rel="noopener noreferrer nofollow"
+    class="mt-3 block w-full text-center px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary-hover transition-colors"
+  >
+    {offer.cta}
+  </a>
+
+  <p class="mt-2 text-[10px] text-muted/60 leading-tight">
+    {offer.disclosure} <a href="/disclosure/" class="underline hover:text-muted">Full disclosure</a>.
+  </p>
+</div>

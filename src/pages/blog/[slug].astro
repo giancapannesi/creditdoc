@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
+import AffiliateSidebar from '../../components/AffiliateSidebar.astro';
+import AffiliateInline from '../../components/AffiliateInline.astro';
 import { getBlogPosts, getBlogPostBySlug, getBlogPostsByCategory, getCategories, getListicles, getWellnessGuideBySlug, getGlossaryTermsForContext } from '../../utils/data';
 import type { BlogPost } from '../../utils/data';
 
@@ -155,34 +157,39 @@ const jsonLd = [
       <!-- Main Column -->
       <div class="lg:col-span-2 space-y-8">
         {post.sections.map((section, i) => (
-          <section id={`section-${i}`}>
-            <h2 class="text-xl font-bold text-text mb-4">{section.heading}</h2>
-            <div class="prose-content text-sm text-muted leading-relaxed space-y-4">
-              {section.content.split('\n\n').map(paragraph => {
-                if (paragraph.startsWith('- ') || paragraph.startsWith('* ')) {
-                  const items = paragraph.split('\n').filter(line => line.startsWith('- ') || line.startsWith('* '));
-                  return (
-                    <ul class="list-disc list-inside space-y-1.5 ml-1">
-                      {items.map(item => (
-                        <li set:html={item.replace(/^[-*]\s+/, '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-text">$1</strong>')} />
-                      ))}
-                    </ul>
-                  );
-                }
-                if (paragraph.match(/^\d+\.\s/)) {
-                  const items = paragraph.split('\n').filter(line => line.match(/^\d+\.\s/));
-                  return (
-                    <ol class="list-decimal list-inside space-y-1.5 ml-1">
-                      {items.map(item => (
-                        <li set:html={item.replace(/^\d+\.\s+/, '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-text">$1</strong>')} />
-                      ))}
-                    </ol>
-                  );
-                }
-                return <p set:html={paragraph.replace(/\*\*(.*?)\*\*/g, '<strong class="text-text">$1</strong>')} />;
-              })}
-            </div>
-          </section>
+          <Fragment>
+            <section id={`section-${i}`}>
+              <h2 class="text-xl font-bold text-text mb-4">{section.heading}</h2>
+              <div class="prose-content text-sm text-muted leading-relaxed space-y-4">
+                {section.content.split('\n\n').map(paragraph => {
+                  if (paragraph.startsWith('- ') || paragraph.startsWith('* ')) {
+                    const items = paragraph.split('\n').filter(line => line.startsWith('- ') || line.startsWith('* '));
+                    return (
+                      <ul class="list-disc list-inside space-y-1.5 ml-1">
+                        {items.map(item => (
+                          <li set:html={item.replace(/^[-*]\s+/, '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-text">$1</strong>')} />
+                        ))}
+                      </ul>
+                    );
+                  }
+                  if (paragraph.match(/^\d+\.\s/)) {
+                    const items = paragraph.split('\n').filter(line => line.match(/^\d+\.\s/));
+                    return (
+                      <ol class="list-decimal list-inside space-y-1.5 ml-1">
+                        {items.map(item => (
+                          <li set:html={item.replace(/^\d+\.\s+/, '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-text">$1</strong>')} />
+                        ))}
+                      </ol>
+                    );
+                  }
+                  return <p set:html={paragraph.replace(/\*\*(.*?)\*\*/g, '<strong class="text-text">$1</strong>')} />;
+                })}
+              </div>
+            </section>
+            {i === 1 && post.sections.length > 3 && (
+              <AffiliateInline category={post.category} />
+            )}
+          </Fragment>
         ))}
 
         <!-- FAQ Section -->
@@ -314,6 +321,9 @@ const jsonLd = [
             </div>
           </div>
         )}
+
+        <!-- Affiliate Sidebar -->
+        <AffiliateSidebar category={post.category} />
 
         <!-- Recommended Services (cross-link to listicles) -->
         {relatedListicles.length > 0 && (
