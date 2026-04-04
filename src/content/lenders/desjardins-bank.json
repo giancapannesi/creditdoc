@@ -1,15 +1,15 @@
 {
   "name": "Desjardins Bank, National Association",
   "slug": "desjardins-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Hallandale, FL. $353M in assets. 2 offices.",
-  "description_long": "Desjardins Bank, National Association is a community bank located in Hallandale, FL, established in 1992. The bank holds approximately $353M in total assets and $286M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Desjardins Bank is a U.S.-based financial institution offering checking, savings, and lending services primarily to French-speaking customers and those with ties to Florida or the Desjardins cooperative movement.",
+  "description_long": "Desjardins Bank, National Association operates as the U.S. banking arm of the Mouvement Desjardins, a large Quebec-based financial cooperative. The bank is headquartered in Hallandale Beach, Florida, and is designed to serve Desjardins members, existing customers, and francophone communities seeking U.S. dollar banking services. The institution bridges Canadian and U.S. banking, allowing members to maintain accounts and conduct transactions in dollars while living, working, or investing in the United States.\n\nThe bank offers a full suite of consumer banking products including checking accounts (DBank Virtuel and DBank Illimit\u00e9), savings accounts, term deposits (CDs), debit cards, and mortgage services. Key services include money transfers via Zelle, HELOC (home equity lines of credit), real estate financing for Florida properties, and access to the Allpoint network of over 55,000 ATMs globally. Account opening can be completed online in 15 minutes for existing Desjardins members or customers. Checking accounts range from $4.95 to $12.95 monthly with fee waivers based on minimum balance requirements.\n\nDesjardins Bank distinguishes itself through its francophone focus, seamless integration with the broader Desjardins cooperative ecosystem, and specialized real estate services for Florida property acquisitions. The bank emphasizes personalized guidance for residential real estate projects and leverages the trust and cooperative principles of the parent Desjardins movement. Customer service is available in French and English, with a dedicated help center and phone support.\n\nThe bank serves a niche market but operates with legitimate regulatory standing as a national bank. However, its geographic and linguistic focus means it is not suitable for general U.S. consumers without Desjardins affiliation or French-language preference. Term deposits are FDIC-insured up to $250,000 per depositor, providing standard consumer protections. The bank is best suited for existing Desjardins members, Quebec/Canadian residents, and francophone communities seeking U.S. banking services.",
   "logo_url": "",
   "website_url": "https://www.Desjardinsbank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "DBank Virtuel checking account (fee-waived at $1,000 minimum balance)",
+    "DBank Illimit\u00e9 unlimited checking account (fee-waived at $2,000 minimum balance)",
+    "DBank Savings account (no monthly fees, $1,000 minimum)",
+    "Term deposit/CD products (1\u20135 year terms, daily interest accrual)",
+    "Desjardins Bank debit card with global merchant and ATM access",
+    "Zelle money transfer service for peer-to-peer payments",
+    "Home equity lines of credit (HELOC) for project financing",
+    "Mortgage services and real estate financing for Florida properties",
+    "Wire transfers and fund transfers",
+    "Lost/stolen card reporting and fraud reporting",
+    "MasterCard account management",
+    "Customer support via phone (1-800-454-5058) and online help center"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1992",
-    "Local community bank with personal service",
-    "2 locations"
+    "Online account opening in 15 minutes for existing Desjardins members",
+    "Access to 55,000+ Allpoint ATMs worldwide with no fees",
+    "Fee-waived checking accounts with $1,000\u2013$2,000 minimum balances maintained",
+    "Specialized real estate financing and guidance for Florida property purchases",
+    "Zelle integration for fast, secure money transfers to family and friends",
+    "FDIC insurance coverage up to $250,000 on term deposits",
+    "Seamless integration with existing Desjardins cooperative membership benefits"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint\u2014primarily Florida-focused operations, not a nationwide bank",
+    "Francophone-oriented marketing and services may exclude non-French-speaking consumers",
+    "Monthly fees required for checking accounts ($4.95\u2013$12.95) unless minimum balances are maintained",
+    "Savings accounts require $1,000 minimum deposit to open",
+    "Limited branch locations compared to major national banks"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "FL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 33565,
   "latitude": 25.9862240198936,
   "longitude": -80.138043034886,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Existing Desjardins members from Quebec or Canada seeking U.S. dollar banking",
+    "Francophone individuals and families with ties to Florida",
+    "Real estate investors and buyers purchasing residential property in Florida",
+    "Canadians with dual residency or frequent extended stays in the United States"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Desjardins Bank is best for existing Desjardins members, Canadian residents, and francophone consumers seeking U.S. banking services with specialized support for Florida real estate. The main caveat is that it is a niche, regionally-focused bank not designed for general U.S. consumers; individuals without Desjardins affiliation or French-language needs would be better served by major national banks or online-only banks with broader accessibility.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,10 @@
   ],
   "phone": "",
   "address": "1001 E Hallandale Beach Blvd, Hallandale, FL 33009",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

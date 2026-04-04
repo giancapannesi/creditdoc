@@ -1,14 +1,14 @@
 {
   "name": "Mid America Bank",
   "slug": "mid-america-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Jefferson City, MO. $1111M in assets. 11 offices.",
-  "description_long": "Mid America Bank is a community bank located in Jefferson City, MO, established in 1914. The bank holds approximately $1111M in total assets and $967M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Mid America Bank is a community-focused bank offering personal and business checking/savings accounts, CDs, and lending services across multiple Missouri locations.",
+  "description_long": "Mid America Bank operates as a traditional community bank with a network of branches across Missouri, including locations in Columbia, Jefferson City, Wardsville, Linn, and Holts Summit. The bank emphasizes local service and recently expanded with a new branch at the intersection of Providence Road and Southampton Drive in Columbia. Mid America Bank serves both personal and business customers through deposit accounts and lending products. The bank offers a comprehensive suite of personal banking services including checking and savings accounts, certificates of deposit (CDs), home lending, consumer lending, and business checking tailored to different transaction volumes and account balances. Their service philosophy centers on integrity and community focus, with an emphasis on exceeding customer expectations through quality service. What distinguishes Mid America Bank is their commitment to convenience and customer support through both traditional branch services and digital banking platforms. They offer specialized services like free notary services for customers, automatic coin counting machines at select branches, safe deposit boxes in various sizes, and night deposit boxes for after-hours transactions. Their overdraft protection options include both Auto Sweep transfers ($2 per transfer) and Overdraft Privilege coverage ($15-$30 per overdraft item), providing flexibility for different customer needs. For a community bank, Mid America Bank provides a reasonable range of services, though their website content does not detail specific interest rates, CD terms, lending rates, or comprehensive product comparisons that would help consumers evaluate competitiveness against larger regional or national banks.",
   "logo_url": "",
   "website_url": "http://www.midambk.com",
   "affiliate_url": "",
@@ -23,23 +23,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of deposit (CDs)",
+    "Business checking accounts",
+    "Home lending",
+    "Consumer lending",
+    "Safe deposit boxes",
+    "Wire transfers",
+    "Cashier's checks",
+    "Notary services (free for customers)",
+    "Automatic coin counting machines",
+    "Night deposit boxes",
+    "Auto Sweep overdraft protection",
+    "Overdraft Privilege coverage",
+    "Online banking platform"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1914",
-    "Local community bank with personal service",
-    "11 locations"
+    "Free notary services for all customers during lobby hours",
+    "Free automatic coin counting machines at five branch locations (Wardsville, Columbia, Jefferson City, Linn, Holts Summit)",
+    "Multiple overdraft protection options including low-cost Auto Sweep ($2 per transfer) and standard Overdraft Privilege coverage",
+    "Night deposit boxes available for after-hours transaction drops",
+    "Offers both personal and business checking accounts with customizable features",
+    "Certificates of deposit (CDs) with promotional specials advertised",
+    "Wire transfer services for quick electronic fund transfers",
+    "Safe deposit boxes in multiple sizes for secure document and valuables storage"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display current interest rates, APYs, or fee schedules for any accounts",
+    "Limited geographic footprint (only five named Missouri locations) reduces accessibility for non-local customers",
+    "No mention of mobile banking app, mobile deposit, or advanced digital banking features despite promoting 'digital banking services'",
+    "Overdraft fees ($15-$30 per item for Overdraft Privilege) are relatively standard but not competitive; Auto Sweep fee of $2 per transfer adds up with frequent overdrafts",
+    "Website lacks detail on lending products\u2014no rates, terms, or eligibility information provided for home loans or consumer loans"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +66,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 11459,
   "latitude": 38.498043985338,
   "longitude": -92.1784919650194,
@@ -93,12 +108,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers in central Missouri (Columbia, Jefferson City area) seeking local relationship banking with convenient branch access",
+    "Small business owners needing customizable business checking with personalized service",
+    "Customers who value free services like notarization and coin counting over competitive interest rates",
+    "Community-oriented savers who prioritize local bank ownership and decision-making over national brand names"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Mid America Bank is best for customers in central Missouri seeking convenient local banking with personalized service and free customer amenities like notarization and coin counting. The primary caveat is that the bank's website provides no rate or fee transparency, making it impossible to assess competitiveness against other banks on core products like interest rates, CD terms, or lending rates.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +122,11 @@
   ],
   "phone": "",
   "address": "1511 Friendship Rd, Jefferson City, MO 65101",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

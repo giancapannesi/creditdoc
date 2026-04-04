@@ -1,10 +1,10 @@
 {
   "name": "Western Union",
   "slug": "western-union-baltimore-md",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union — Money transfer service in Baltimore, MD.",
-  "description_long": "Western Union provides Money transfer service. Located at 4127 Patterson Ave, Baltimore, MD 21215.",
+  "description_short": "Western Union operates a global money transfer and cash pickup network through retail agents like Walmart and City Market, enabling customers to send money, receive cash, and access bill payment services.",
+  "description_long": "Western Union is a long-established financial services company operating a distributed network of physical agent locations worldwide. The company does not operate traditional bank branches but instead partners with retail chains (Walmart, Safeway, City Market, Circle K, Kroger) to provide financial services at consumer-accessible locations.\n\nThe company's core offerings include money transfers (send money internationally and domestically), cash pickup at agent locations, money order services, bill payment, mobile top-up services, and Western Union Prepaid card services. Customers can initiate transfers online through WU.com or in-store, with in-store cash pickups available during agent business hours. The platform tracks transfers in real-time and allows customers to manage receivers and transfer history through a registered account.\n\nWestern Union's key distinguishing factor is its physical distribution network\u2014with hundreds of agent locations operating extended hours (many open until 8-11 PM), providing access to cash services in both urban and rural areas where traditional banking may be limited. The company also offers online initiation (24/7) with in-store completion options, combining digital convenience with physical cash access. Their multilingual support (English, Spanish, Haitian Creole, Chinese, French, Vietnamese) serves diverse immigrant communities.\n\nThe primary limitation is that Western Union is not a bank and does not offer checking accounts, savings accounts, or credit products. Customers are entirely dependent on agent locations for cash services, and fees for transfers and money orders are not transparent on the location finder page. Service availability varies by specific agent location, and some locations offer limited services (e.g., money orders only at one Colorado location).",
   "logo_url": "https://lh4.googleusercontent.com/-wcEU6kafaQ8/AAAAAAAAAAI/AAAAAAAAAAA/hJerysilSjQ/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/global-services/find-locations",
   "affiliate_url": "",
@@ -58,18 +58,48 @@
     "transparency": 0,
     "ease_of_use": 0
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Extensive physical network with 150+ locations visible in single region, accessible through major grocery and convenience retail chains",
+    "Extended operating hours at many locations (open until 8-11 PM), providing access outside traditional banking hours",
+    "24/7 online money transfer initiation through WU.com, allowing customers to start transfers anytime and pick up in-store",
+    "Real-time transfer tracking system allowing customers to monitor money movement",
+    "Multilingual support in 6 languages (English, Spanish, Haitian Creole, Chinese, French, Vietnamese) serving immigrant communities",
+    "Mobile top-up services for international phone recharges directly through the platform",
+    "Western Union Rewards loyalty program offering benefits on repeated transfers"
+  ],
+  "cons": [
+    "Not a bank\u2014no checking, savings, or credit account services available",
+    "No fee transparency on location finder; customers must call or visit to learn transfer costs",
+    "Service availability varies significantly by agent location (some locations money orders only)",
+    "Completely dependent on retail partner locations and hours; service interruptions occur (e.g., 'Orange wallet temporarily unavailable')",
+    "No geolocation accuracy without browser permission, limiting map-based location discovery"
+  ],
+  "best_for": [
+    "International immigrants sending money to family in home countries",
+    "Individuals without bank accounts or in underbanked areas needing physical cash access",
+    "People requiring extended-hours cash pickup (evenings/weekends) outside traditional banking",
+    "Customers needing bill payment without maintaining a checking account"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for unbanked or underbanked consumers and immigrants needing reliable cash pickup and money transfer services outside traditional banking hours. The primary caveat is that it is strictly a money movement service provider, not a bank, so it cannot serve as a primary financial institution for everyday banking needs like direct deposit, bill pay from an account, or savings.",
   "services": [
-    "Money transfer service"
+    "International and domestic money transfers",
+    "Cash pickup at agent locations",
+    "Money order issuance",
+    "Bill payment services",
+    "Transfer tracking (real-time)",
+    "Mobile top-up (international phone recharging)",
+    "Western Union Prepaid card services",
+    "Receive money on prepaid card",
+    "Western Union Rewards program",
+    "Inmate payment services",
+    "Delivery method updates and price estimation",
+    "Multi-language customer support"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-03-21",
   "review_status": "published",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x89c81b879e73ab4d:0xb16fc4bc6edbd679",
     "google_rating": 4.1,
@@ -101,10 +131,10 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-04",
   "no_index": true,
   "contact": {
     "phone": "",
@@ -112,5 +142,6 @@
   },
   "website_found_by": "scrapeforge",
   "website_found_at": "2026-04-04T17:13:15.536902",
-  "email": "email@domain.com"
+  "email": "email@domain.com",
+  "has_been_enriched": true
 }

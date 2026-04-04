@@ -1,14 +1,14 @@
 {
   "name": "United Roosevelt Savings Bank",
   "slug": "united-roosevelt-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Carteret, NJ. $368M in assets. 2 offices.",
-  "description_long": "United Roosevelt Savings Bank is a community bank located in Carteret, NJ, established in 1914. The bank holds approximately $368M in total assets and $292M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering checking, savings, CDs, mortgages, and business banking with early direct deposit and local merchant discounts.",
+  "description_long": "United Roosevelt Savings Bank (URSB) is a community-focused financial institution based in Carteret, New Jersey, with NMLS #786209 and routing #221270240. The bank emphasizes FDIC insurance protection backed by the full faith and credit of the U.S. Government, positioning itself as a safe deposit institution for personal and business customers.\n\nURSB offers a comprehensive suite of banking products including personal checking and savings accounts, Certificates of Deposit (CDs), retirement accounts, personal lending, mortgage loans with rate calculators, business checking and lending, credit cards, and merchant services. The bank partners with TIB for payment processing solutions and offers the BaZing local discount network providing deals with retailers in the Carteret area. Notable features include early direct deposit access (up to 2 days early, up to $10,000 per deposit with no enrollment required), a mobile app, online banking platforms for both personal and business customers, AllPoint ATM access, remote deposit capabilities, and safe deposit boxes.\n\nURSB distinguishes itself through community engagement, including sponsorship of the Carteret Performing Arts Center and participation in Financial Literacy Awareness Month initiatives. The bank maintains a 5-star rating from Bauer-Financial and emphasizes fraud protection education through partnership with the American Bankers Association. Their merchant services division offers transparent fee structures, 24/7 customer support, and both traditional POS and mobile payment processing options. The institution also provides financial calculators and a Knowledge Center for customer education.\n\nAs a traditional community bank, URSB serves individuals and small businesses seeking local banking relationships with standard FDIC protections. However, as a regional institution, they may have more limited digital innovation compared to larger national banks or neobanks, and their product offerings, while comprehensive, are typical of mid-sized community banks rather than specialized or distinctive.",
   "logo_url": "",
   "website_url": "https://ursb.bank",
   "affiliate_url": "",
@@ -23,23 +23,39 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Retirement accounts",
+    "Personal lending",
+    "Mortgage loans",
+    "Business checking accounts",
+    "Business lending",
+    "Credit cards",
+    "Merchant services with payment processing",
+    "BaZing local discount network",
+    "Mobile app and online banking platforms",
+    "Remote deposit capture",
+    "Safe deposit boxes",
+    "AllPoint ATM access",
+    "Early direct deposit (up to 2 days early)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1914",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits with full U.S. Government backing",
+    "Early direct deposit access up to 2 days early with no enrollment required (up to $10,000)",
+    "5-star rating from Bauer-Financial",
+    "Local discount network (BaZing) providing merchant discounts in Carteret area",
+    "Comprehensive product suite including checking, savings, CDs, mortgages, and business lending",
+    "24/7 merchant services technical support through TIB partnership",
+    "Multiple digital banking channels: mobile app, online banking, and remote deposit",
+    "Community engagement through cultural sponsorship and financial literacy initiatives"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as regional Carteret, NJ-based institution may restrict branch access for non-local customers",
+    "Direct deposit early pay feature capped at $10,000 per deposit (larger deposits post on standard date)",
+    "No specific information provided about competitive interest rates on savings or CDs relative to market",
+    "Merchant services limited to partnership with single processor (TIB) rather than multiple options",
+    "Limited transparency on personal loan terms, rates, and maximum loan amounts on website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +67,7 @@
   "states_served": [
     "NJ"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29170,
   "latitude": 40.5769109961469,
   "longitude": -74.2211310166033,
@@ -93,12 +109,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Carteret, New Jersey residents seeking community bank relationships with FDIC protection",
+    "Small business owners needing merchant services and business banking from a local institution",
+    "Employees receiving regular direct deposits who value early access to funds",
+    "Customers interested in local discount networks and community-supported banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "URSB is best for local Carteret residents and small business owners seeking traditional FDIC-insured community banking with personalized service and local merchant discounts. The main caveat is limited geographic reach as a regional bank, making it less suitable for customers outside the New Jersey area or those seeking national bank features and branch networks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +123,11 @@
   ],
   "phone": "",
   "address": "11-15 Cooke Ave, Carteret, NJ 07008",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

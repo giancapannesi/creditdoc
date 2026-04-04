@@ -1,10 +1,10 @@
 {
   "name": "Western Union",
   "slug": "western-union-las-vegas-nv",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union — Money transfer service in Las Vegas, NV.",
-  "description_long": "Western Union provides Money transfer service. Located at 1760 E Charleston Blvd, Las Vegas, NV 89104.",
+  "description_short": "Western Union operates a global money transfer network with 150+ U.S. locations, enabling customers to send money, receive cash, and access bill payment services through agent locations and online platforms.",
+  "description_long": "Western Union is a well-established financial services company that has operated money transfer and payment services for decades. The company maintains a vast network of agent locations across the United States, partnering with major retailers like Walmart, Safeway, City Market, Kroger, and Circle K to provide accessible financial services in communities nationwide. Their primary business model centers on enabling cash transfers and payments through physical agent locations combined with digital channels.\n\nWestern Union's core offerings include money transfers (send and receive money), check cashing equivalents through money orders, bill payment services, mobile top-up functionality, prepaid card services, and cash pickup options. Customers can initiate transfers online or through mobile platforms 24/7, though in-store payment and cash pickup depend on individual agent location hours. The company also offers tracking capabilities for active transfers and maintains a rewards program to incentivize repeat usage.\n\nWestern Union distinguishes itself through its extensive physical footprint, with agent locations accessible in thousands of retail environments. The combination of 24/7 online initiation with same-day or next-day cash availability at convenient retail locations provides accessibility that pure digital competitors cannot match. Their multilingual support (English, Spanish, Haitian Creole, Chinese, French, Vietnamese) reflects their focus on immigrant and underbanked populations who rely heavily on money transfer services.\n\nThe company operates in a mature market where digital alternatives and international competitors have increased. While their agent network remains a significant advantage for cash access, the service relies on agent availability and location hours, and pricing is typically higher than digital-only alternatives. Western Union serves customers who prioritize physical cash access, those sending money internationally, and individuals in rural areas where other financial services may be limited.",
   "logo_url": "https://lh6.googleusercontent.com/-anMRnZcmc5w/AAAAAAAAAAI/AAAAAAAAAAA/nnf6wnDtcMs/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/US/en/find-locations.html",
   "affiliate_url": "",
@@ -58,18 +58,48 @@
     "transparency": 0,
     "ease_of_use": 0
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Extensive agent network with 150+ U.S. locations in convenient retail partnerships (Walmart, Safeway, City Market, Kroger, Circle K)",
+    "24/7 online money transfer initiation available on WU.com, enabling around-the-clock service initiation",
+    "Multilingual support in 6 languages (English, Spanish, Haitian Creole, Chinese, French, Vietnamese) serving diverse populations",
+    "Multiple service options including money transfers, bill payment, mobile top-up, money orders, and prepaid card services",
+    "Real-time transfer tracking available to customers",
+    "Same-day or next-day cash pickup availability at most agent locations",
+    "Western Union Rewards program offering incentives for repeat usage and referrals"
+  ],
+  "cons": [
+    "Service availability dependent on agent location hours (most locations close by 8-11 PM, limiting late-night access)",
+    "Higher fees and exchange rates compared to digital-only money transfer competitors",
+    "Geolocation feature requires browser permissions to find nearby locations, creating extra friction",
+    "Limited service offerings at some locations (e.g., Circle K #0682 restricted to money orders only)",
+    "Temporary service outages (Orange wallet payment method was unavailable at time of data collection)"
+  ],
+  "best_for": [
+    "Immigrants and international customers sending remittances to family abroad requiring same-day cash delivery",
+    "Unbanked and underbanked populations in rural areas without access to traditional banking services",
+    "Customers who prefer cash transactions and need reliable physical locations for money pickup",
+    "Non-English speakers requiring multilingual support and familiar brand presence"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for customers who prioritize same-day cash access and convenience of physical retail locations over lowest price, particularly immigrants sending international remittances and unbanked populations in underserved areas. The main caveat is that fees are significantly higher than digital alternatives, and service quality depends on individual agent location hours and operational status.",
   "services": [
-    "Money transfer service"
+    "Online money transfers (initiate 24/7 on WU.com)",
+    "Cash pickup at agent locations",
+    "Money orders",
+    "Bill payment services",
+    "Mobile top-up/mobile recharge",
+    "Western Union Prepaid card services",
+    "Transfer tracking",
+    "Receive money on a card",
+    "In-store cash payment at agent locations",
+    "Western Union Rewards program",
+    "Referral services",
+    "Inmate payment services"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-03-21",
   "review_status": "published",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x80c8c3b620399161:0x77aeed6bcad49381",
     "google_rating": 5.0,
@@ -101,10 +131,10 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 0,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-04",
   "no_index": true,
   "contact": {
     "phone": "",
@@ -112,5 +142,6 @@
   },
   "website_found_by": "scrapeforge",
   "website_found_at": "2026-04-04T17:15:42.293611",
-  "email": "email@domain.com"
+  "email": "email@domain.com",
+  "has_been_enriched": true
 }
