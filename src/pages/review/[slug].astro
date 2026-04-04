@@ -381,7 +381,7 @@ const jsonLd = [
           {lender.logo_url && !lender.logo_url.includes('googleusercontent.com') ? (
             <img src={lender.logo_url} alt={`${lender.name} logo`} class="w-14 h-14 object-contain" loading="lazy" />
           ) : lender.website_url ? (
-            <img src={`https://www.google.com/s2/favicons?domain=${new URL(lender.website_url).hostname}&sz=128`} alt={`${lender.name} logo`} class="w-14 h-14 object-contain" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <img src={`https://logo.clearbit.com/${new URL(lender.website_url).hostname}`} alt={`${lender.name} logo`} class="w-14 h-14 object-contain" loading="lazy" onerror="this.src=`https://www.google.com/s2/favicons?domain=${new URL(lender.website_url).hostname}&sz=128`;this.onerror=()=>{this.style.display='none';this.nextElementSibling.style.display='flex'}" />
             <span class="text-2xl font-bold text-primary hidden items-center justify-center w-full h-full">{lender.name.charAt(0)}</span>
           ) : (
             <span class="text-2xl font-bold text-primary">{lender.name.charAt(0)}</span>
