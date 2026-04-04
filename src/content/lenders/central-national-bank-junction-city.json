@@ -1,15 +1,15 @@
 {
   "name": "Central National Bank",
   "slug": "central-national-bank-junction-city",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Junction City, KS. $1411M in assets. 35 offices.",
-  "description_long": "Central National Bank is a community bank located in Junction City, KS, established in 1884. The bank holds approximately $1411M in total assets and $1239M in deposits. It operates 35 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Central National Bank offers personal and business banking with checking, savings, mortgages, auto loans, and investment services. They emphasize fee transparency, identity theft protection, and modern digital banking technology.",
+  "description_long": "Central National Bank is an established financial institution with over a century of history, positioning itself as a community-oriented bank committed to providing quality service to customers and the communities it serves. The bank emphasizes a conservative approach to banking that has sustained it through economic challenges, with a demonstrated focus on security and maintaining a strong capital position.\n\nThe bank offers a comprehensive suite of personal banking products including personal checking, savings accounts, money market accounts, certificates of deposit, and specialized accounts like the \"New Opportunity Checking\" designed for those rebuilding credit history. On the lending side, they provide personal loans, auto loans, home mortgages with a \"Money for Life\" mortgage fee guarantee, credit cards, credit lines, and home equity lines of credit. For business customers, they offer business checking, commercial lending, ACH services, credit card processing, remote deposit capture, payroll cards, and lockbox services. Investment services are provided in partnership with Raymond James Financial Services.\n\nCentral National Bank differentiates itself through several specific offerings: their \"It Makes \u00a2ents!\" savings program marketed as saving hundreds, bundled account benefits including identity theft protection, roadside assistance, and cell phone protection, a mortgage fee guarantee eliminating closing costs, and the \"New Opportunity Checking\" product specifically designed for customers with limited or damaged credit histories. They emphasize cutting-edge online and mobile technology, branded as \"MoneyCentral,\" and highlight their community commitment through employee recognition programs like the Central Star Award.\n\nAs a traditional bank, Central National Bank serves customers seeking comprehensive financial services with local community presence and established institutional stability. However, consumers should note that the website provides limited information about specific interest rates, fee structures (beyond mortgage fee elimination), APY rates, or detailed product terms. The bank's emphasis on heritage and conservative operations may appeal to traditional banking customers, though specifics on competitiveness relative to other institutions are not evident from available information.",
   "logo_url": "",
   "website_url": "https://www.centralnational.com",
   "affiliate_url": "",
@@ -24,23 +24,43 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal Checking Accounts",
+    "Personal Savings Accounts",
+    "New Opportunity Checking (credit rebuilding product)",
+    "Money Market Accounts",
+    "Certificates of Deposit (CDs)",
+    "Home Mortgages with Fee Guarantee",
+    "Auto Loans",
+    "Personal Loans",
+    "Credit Cards",
+    "Home Equity Line of Credit",
+    "Business Checking",
+    "ACH Services and Electronic Funds Transfer",
+    "Credit Card Processing",
+    "Payroll Cards",
+    "Remote Deposit Capture",
+    "Lockbox Services",
+    "Investment Products (via Raymond James)",
+    "Online and Mobile Banking (MoneyCentral)",
+    "Safe Deposit Boxes",
+    "Fraud Protection Services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1884",
-    "Local community bank with personal service",
-    "35 locations"
+    "Mortgage Fee Guarantee eliminates closing costs for mortgage customers, explicitly addressing a common complaint about lending expenses",
+    "Identity theft protection, roadside assistance, and cell phone protection bundled with accounts at no apparent additional cost",
+    "New Opportunity Checking specifically designed to help customers rebuild credit history and access banking services",
+    "Over 100 years of institutional history with demonstrated security, soundness, and strong capital position",
+    "Partnership with Raymond James Financial Services for comprehensive wealth management and investment options",
+    "SSL encryption and secure online banking technology for account access",
+    "ACH services and electronic payment processing for business customers with recurring and one-time transfer capabilities",
+    "Community-focused with employee recognition programs and commitment to local service"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific APY rates, interest rates, and detailed fee schedules, making comparison shopping difficult",
+    "Limited transparency on approval criteria for New Opportunity Checking or credit rebuilding requirements",
+    "No information provided about minimum balance requirements, monthly maintenance fees, or overdraft policies",
+    "Website does not disclose whether the bank is FDIC insured or provide deposit insurance coverage details",
+    "Business services descriptions are incomplete (ACH Services section cuts off mid-sentence on the captured page)"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +72,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4702,
   "latitude": 39.0305700148598,
   "longitude": -96.8298100292821,
@@ -94,12 +114,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers with damaged or limited credit history seeking to rebuild banking relationships",
+    "Homebuyers wanting to eliminate mortgage closing costs through the fee guarantee program",
+    "Small business owners needing comprehensive banking services including payroll processing and merchant services",
+    "Customers prioritizing community banking relationships and institutional stability over digital-only options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Central National Bank is best for customers seeking traditional, full-service banking with community presence and those rebuilding credit through their specialized New Opportunity Checking product. The main caveat is limited public transparency on rates, fees, and specific product terms on their website, requiring direct contact with the bank for detailed comparisons and approval information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +128,10 @@
   ],
   "phone": "",
   "address": "802 N Washington St, Junction City, KS 66441",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

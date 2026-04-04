@@ -1,13 +1,13 @@
 {
   "name": "Linkbank",
   "slug": "linkbank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Camp Hill, PA. $3068M in assets. 26 offices.",
-  "description_long": "Linkbank is a community bank located in Camp Hill, PA, established in 1934. The bank holds approximately $3068M in total assets and $2556M in deposits. It operates 26 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "LINKBANK is an FDIC-insured community bank serving the Mid-Atlantic region with personal, business, and nonprofit banking solutions.",
+  "description_long": "LINKBANK is a community bank operating in the Mid-Atlantic region with a focus on personalized banking relationships and local decision-making. The bank positions itself as an alternative to larger national institutions by emphasizing direct connections with clients and understanding of local market conditions. As of December 18, 2025, LINKBANK announced a merger agreement with Burke & Herbert Financial Services Corp., with plans to merge into Burke & Herbert Bank pending shareholder and regulatory approval.\n\nThe bank offers comprehensive personal banking solutions including checking and savings accounts, certificates of deposit (currently offering 3.85% APY for 7 months and 3.25% APY for 25 months), and home equity lines of credit (3.99% APR for first 6 months, then 6.75% variable). Business banking services include treasury management, escrow management, remote deposit capture, and small business banking. The bank also serves nonprofit organizations with specialized banking products. Mortgage pre-qualification and home lending services are available to support first-time homebuyers and refinancing customers.\n\nLINKBANK distinguishes itself through its community-focused approach, emphasizing that loan decisions are made locally by relationship managers who understand the specific needs of their markets. The bank actively combats fraud through customer alerts and maintains FDIC insurance backing by the full faith and credit of the U.S. Government. Their marketing emphasizes simplified, accessible banking solutions designed around individual customer life stages rather than forcing customers into standardized products.\n\nThe primary caveat is the announced merger with Burke & Herbert Bank, which introduces uncertainty about service continuity, potential fee changes, and whether current account terms will be maintained post-conversion. The bank is currently in the process of obtaining shareholder and regulatory approval, with a customer conversion date to be established. For customers with significant deposits or specific service needs, clarity on how the merger will affect their accounts would be advisable before making new commitments.",
   "logo_url": "",
   "website_url": "https://www.linkbank.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Home Equity Lines of Credit (HELOC)",
+    "Mortgage lending and pre-qualification",
+    "Online and mobile banking",
+    "Business banking and treasury management",
+    "Escrow management services",
+    "Remote deposit capture",
+    "Small business banking",
+    "Nonprofit organization banking solutions",
+    "Commercial lending for local businesses",
+    "Client Solutions Centers (local branch services)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1934",
-    "Local community bank with personal service",
-    "26 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Competitive CD rates: 3.85% APY for 7 months, 3.25% APY for 25 months",
+    "HELOC introductory rate of 3.99% APR for first 6 months with flexible variable options",
+    "Local decision-making for lending with relationship managers familiar with community",
+    "Comprehensive business banking including treasury management, escrow, and remote deposit capture",
+    "Dedicated nonprofit banking solutions and community-focused services",
+    "Online banking and mobile access for personal and business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Merger agreement announced December 18, 2025 creates uncertainty about service continuity and future terms",
+    "Geographic limitation: serves only Mid-Atlantic region, not available nationally",
+    "HELOC rates revert to variable 6.75% APR after introductory period, subject to market fluctuations",
+    "Limited information provided on website about checking account features, ATM networks, or overdraft policies",
+    "Account comparison tool referenced but detailed fee schedules not transparently displayed on main site"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "PA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14863,
   "latitude": 40.239535998665,
   "longitude": -76.933237024086,
@@ -92,12 +103,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Mid-Atlantic residents seeking personalized community banking with local relationship managers",
+    "Small business owners and nonprofit organizations needing business banking and escrow services",
+    "Savers interested in competitive CD rates and home equity borrowing for renovations or major purchases",
+    "Customers prioritizing FDIC-insured deposit safety and conservative community banking practices"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "LINKBANK is best for Mid-Atlantic residents and small business owners who value personalized, community-focused banking with local decision-making and competitive savings rates. However, the announced merger with Burke & Herbert Bank effective December 2025 introduces significant uncertainty\u2014prospective customers should clarify how the merger will affect account terms, service availability, and relationship management before making long-term commitments.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "3045 Market St, Camp Hill, PA 17011",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

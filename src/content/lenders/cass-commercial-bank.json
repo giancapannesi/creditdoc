@@ -1,14 +1,14 @@
 {
   "name": "Cass Commercial Bank",
   "slug": "cass-commercial-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Des Peres, MO. $1439M in assets. 3 offices.",
-  "description_long": "Cass Commercial Bank is a community bank located in Des Peres, MO, established in 1906. The bank holds approximately $1439M in total assets and $1224M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Cass Commercial Bank is a St. Louis-based bank founded in 1906 offering business banking, equipment financing, and faith-based lending with mobile wallet integration.",
+  "description_long": "Cass Commercial Bank has operated as a commercial and religious banking institution since 1906, establishing itself as a long-term financial advisor for businesses and faith-based organizations in the St. Louis region. The bank positions itself around three core lending verticals: general commercial banking for businesses, specialized funding for religious and non-profit organizations, and dedicated support for McDonald's franchise operators. They have financed notable projects including the Ronald McDonald House in St. Louis and Westminster Christian Academy, demonstrating expertise in both commercial and faith-based real estate development.\n\nThe bank offers a comprehensive suite of business financial services including equipment financing, treasury management solutions, business credit cards (Visa Classic Business and Visa Business Rewards), mobile wallet integration (Apple Pay, Samsung Pay, Google Pay), and various digital banking platforms (Business eBanking, Deposit Control Panel, eZCard). Their credit card program features tiered cash-back rewards up to 1.25% on annual purchases over $250,000, with no annual fee on the Classic card and a $99 first-card fee for the Rewards card. They emphasize centralized account management through a single financial services representative and retain all customer financial information internally rather than sharing with third-party vendors.\n\nCass differentiates itself through specialized industry knowledge, particularly in the McDonald's franchise market, and deep relationships with religious and non-profit sectors. The bank's rating of 5-Star Superior by Bauer Financial suggests strong financial stability. Their approach emphasizes relationship banking with dedicated account management and transparency, contrasting with larger national banks. They focus on flexible, customized solutions rather than standardized products.\n\nAs a regional commercial bank, Cass serves primarily business clients and faith-based organizations rather than retail consumers. Their services require established business operations or organizational status, and they do not appear to offer personal banking products like consumer credit cards, personal loans, or retail checking/savings accounts based on available website content. The bank's regional footprint and specialized focus means they may not be accessible or suitable for consumers seeking traditional personal banking services.",
   "logo_url": "",
   "website_url": "https://www.cassbank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Commercial business banking and lending services",
+    "Equipment financing with flexible terms",
+    "Visa Classic Business credit card (no annual fee)",
+    "Visa Business Rewards credit card (tiered cash-back 0.75%-1.25%)",
+    "Mobile wallet integration (Apple Pay, Samsung Pay, Google Pay)",
+    "Business eBanking platform",
+    "Deposit Control Panel (ICS) for liquidity management",
+    "Credit card reporting dashboard (eZCard) with enhanced reporting",
+    "Religious and non-profit organization lending and facility funding",
+    "Leadership financial management training and stewardship development",
+    "McDonald's franchise-specific financing and banking services",
+    "Treasury management solutions"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1906",
-    "Local community bank with personal service",
-    "3 locations"
+    "Tiered cash-back rewards program for business spending with no cap, earning up to 1.25% on purchases over $250,000 annually",
+    "No annual fee option with Visa Classic Business card for cost-conscious businesses",
+    "Mobile wallet integration for Apple Pay, Samsung Pay, and Google Pay on business debit and credit cards",
+    "Centralized account management with all financial information retained internally and accessible through one dedicated financial services representative",
+    "Specialized expertise in McDonald's franchise financing with understanding of franchise-specific business models",
+    "Dedicated funding programs for religious organizations and non-profits including leadership financial management training",
+    "Equipment financing solutions with flexible terms designed to support business growth and capital acquisition",
+    "5-Star Superior rating from Bauer Financial indicating strong institutional financial stability"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Visa Business Rewards card carries $99 annual fee for first card plus $9 per additional card, which may offset rewards for lower-spending businesses",
+    "Cash advance interest rate of 14.74% is significantly higher than purchase rate of 9.74%, making cash advances expensive",
+    "Balance transfer and foreign transaction fees of 3% are substantial, and cash advance fees of 5% add considerable costs for those borrowing methods",
+    "Regional bank with apparent focus on St. Louis area, limiting accessibility for businesses in other geographic markets",
+    "Limited publicly available information about personal banking services, minimum account balances, or lending requirements"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1068,
   "latitude": 38.6071689886074,
   "longitude": -90.4496700365328,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "McDonald's franchise operators seeking specialized financing and business banking from a lender familiar with franchise operations",
+    "Religious organizations and non-profits requiring capital for facility construction or renovation with mission-aligned lending",
+    "Established businesses with annual spending over $150,000 that can benefit from tiered cash-back rewards on the Visa Business Rewards card",
+    "St. Louis area businesses seeking relationship banking with dedicated account management and centralized financial information control"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Cass Commercial Bank is best for established businesses and faith-based organizations in the St. Louis region seeking relationship-based commercial banking with specialized industry expertise, particularly McDonald's franchises. The main caveat is that this is a regional commercial bank focused on business lending, not a retail bank for personal finances, and its accessibility may be limited for businesses outside its primary geographic market.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "12412 Powerscourt Dr, Des Peres, MO 63131",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

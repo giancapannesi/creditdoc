@@ -1,14 +1,14 @@
 {
   "name": "Empire State Bank",
   "slug": "empire-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Staten Island, NY. $617M in assets. 7 offices.",
-  "description_long": "Empire State Bank is a community bank located in Staten Island, NY, established in 2004. The bank holds approximately $617M in total assets and $507M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering business and personal checking, savings, CDs, and lending products with specialized services like cash management and escrow.",
+  "description_long": "Empire State Bank is a community bank headquartered in Staten Island, New York (1441 South Avenue, Suite 705), operating under FDIC insurance with routing number 021913862. The bank positions itself as a full-service financial institution backed by the full faith and credit of the U.S. Government through FDIC protection.\n\nThe bank serves both personal and business customers with a tiered product lineup. For personal banking, they offer checking accounts, money market accounts, savings accounts, and CDs with published rates (6-month CD at 3.50% APY, 10-month CD at 3.70% APY, both requiring $1,000 minimum). Business customers can access checking, money market, and savings accounts, plus specialized programs like EDGE Concierge Business Banking (described as providing VIP banking experience, premium rewards, no fees on everyday transactions, and preferred rates) and Attorney Advantage Banking. They provide lending across business loans, SBA financing, family investment property loans, and commercial real estate financing.\n\nWhat distinguishes Empire State Bank includes fee-free ATM access across their network, extended FDIC insurance programs protecting deposits beyond the standard $250,000 limit, digital wallet integration, mobile banking apps for both personal and business customers, and specialized business services including cash management, escrow management, and remote deposit capabilities. They maintain investor relations transparency with published annual reports, earnings statements, and committee charters available to the public.\n\nAs a community bank, Empire State Bank serves a regional market with established operations and compliance infrastructure (NACHA Operating Rules, CRA Public File, Code of Business Conduct & Ethics). However, the website provides limited detail on asset size, specific branch locations beyond headquarters, competitive rate comparisons, or detailed fee structures\u2014information typically required for comprehensive banking evaluation.",
   "logo_url": "",
   "website_url": "http://www.esbna.com",
   "affiliate_url": "",
@@ -23,23 +23,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Money market accounts (personal and business)",
+    "Certificates of deposit (CDs) and IRAs",
+    "Business checking accounts",
+    "EDGE Concierge Business Banking",
+    "Attorney Advantage Banking",
+    "Business loans and SBA financing",
+    "Commercial real estate lending",
+    "Cash management services",
+    "Escrow management",
+    "Remote deposit",
+    "Digital wallet integration",
+    "Online and mobile banking",
+    "Extended FDIC insurance programs"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2004",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits with extended coverage programs protecting beyond standard $250,000 limit",
+    "Competitive CD rates published (3.50-3.70% APY) with low $1,000 minimum opening balance",
+    "Fee-free ATM access across their network for all customers",
+    "Dual mobile banking apps for personal and business customers enabling remote account management",
+    "Specialized business products including EDGE Concierge with no fees on everyday transactions and preferred rates",
+    "Cash management and escrow management services designed for business efficiency",
+    "Community bank model with published governance (board of directors, management team, code of ethics)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited branch location information on website\u2014only headquarters address provided, making physical access assessment difficult",
+    "No detailed fee schedule visible on homepage; actual checking account fees, overdraft fees, and service charges not transparent",
+    "Vague product descriptions\u2014EDGE Concierge benefits like 'premium rewards' and 'preferred rates' lack specific details or comparison data",
+    "No interest rate information for checking or savings accounts; only CD rates disclosed",
+    "Limited competitive positioning\u2014website does not compare rates or features against other banks or credit unions"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +65,7 @@
   "states_served": [
     "NY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57672,
   "latitude": 40.6045485616683,
   "longitude": -74.1808581511401,
@@ -93,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking specialized services like cash management, escrow, and SBA lending",
+    "Customers prioritizing FDIC insurance protection and extended coverage beyond standard limits",
+    "Businesses qualifying for EDGE Concierge or Attorney Advantage Banking programs seeking fee-reduced transactions",
+    "Personal savers and CD investors in the Northeast seeking established community banking relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Empire State Bank is best for small business owners and personal customers seeking FDIC-insured community banking with specialized business services, particularly those interested in cash management or SBA lending. The main caveat is that the website lacks critical transparency on fee structures, branch locations beyond headquarters, and competitive rate positioning\u2014prospective customers must contact the bank directly or visit in person to evaluate actual costs and service availability.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +121,11 @@
   ],
   "phone": "",
   "address": "1441 South Ave, Staten Island, NY 10314",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }
