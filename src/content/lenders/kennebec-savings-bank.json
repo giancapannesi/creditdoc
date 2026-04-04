@@ -1,14 +1,14 @@
 {
   "name": "Kennebec Savings Bank",
   "slug": "kennebec-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Augusta, ME. $1822M in assets. 8 offices.",
-  "description_long": "Kennebec Savings Bank is a community bank located in Augusta, ME, established in 1870. The bank holds approximately $1822M in total assets and $1388M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Kennebec Savings Bank is a community-focused financial institution serving 35 Maine communities with deposit accounts, loans, mortgages, and investment services.",
+  "description_long": "Kennebec Savings Bank operates as a community bank based in Augusta, Maine, with its main office campus at 150 State Street. The bank emphasizes its role as a local financial partner that reinvests deposits back into the 35 communities it serves throughout Maine. Founded on principles of community engagement and financial accessibility, Kennebec Savings Bank has established itself as a regional banking option for residents seeking alternatives to larger national institutions.\n\nThe bank offers a comprehensive suite of financial services including savings and checking accounts, mortgage lending (with specialized first-time homebuyer programs), business banking solutions, personal loans, and investment management and trust services. Customers can access accounts through online banking, a mobile app, and bill pay features. The bank provides both consumer and business lending products, positioning itself as a full-service community financial institution.\n\nKennebec Savings Bank distinguishes itself through its Community Dividends program, which donated nearly $1.4 million across its service area in 2025, and the organization's emphasis on employee volunteerism. The bank's marketing emphasizes that customer deposits remain invested locally, supporting community economic development. Recent announcements indicate significant capital investment in modernizing its Augusta headquarters campus, reflecting long-term commitment to its primary market.\n\nThe bank serves as a traditional community banking option for Maine residents seeking deposit accounts, mortgage financing, and lending products. However, the website provides limited detail on specific product terms, rates, or competitive advantages beyond community focus. Prospective customers should research specific offerings, rate competitiveness, and service areas before opening accounts.",
   "logo_url": "",
   "website_url": "https://www.kennebecsavings.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
     "Savings accounts",
+    "Checking accounts",
+    "Online banking with bill pay",
+    "Mobile banking app",
+    "Mortgage lending (home purchase and refinance)",
+    "First-time homebuyer mortgage programs",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking accounts",
+    "Business loans and financing",
+    "Investment management",
+    "Trust services",
+    "Online Trust & Investment services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1870",
-    "Local community bank with personal service",
-    "8 locations"
+    "Community Dividends program donated $1.4 million across 35 Maine communities in 2025",
+    "Offers comprehensive services: savings accounts, checking, mortgages, business banking, and investment management",
+    "Provides online and mobile banking with bill pay features for remote account access",
+    "Specialized first-time homebuyer mortgage programs available",
+    "Deposits reinvested locally rather than transferred to national headquarters",
+    "Full-service business banking including business checking accounts",
+    "Active community engagement with employee volunteer hours and Catalyst Grant funding ($30K per recipient)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to 35 Maine communities\u2014not available nationwide",
+    "Website provides no interest rates, APRs, or specific loan terms for comparison",
+    "No mention of ATM network or details about ATM access beyond online banking",
+    "Minimal information on deposit account types, minimum balances, or fees",
+    "Recent focus on office renovations may indicate capital constraints for competitive product development"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "ME"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 17897,
   "latitude": 44.3115493861546,
   "longitude": -69.7797532238903,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Maine residents seeking community-focused banking with local reinvestment of deposits",
+    "First-time homebuyers in the bank's 35-community service area needing specialized mortgage guidance",
+    "Small business owners in central Maine requiring business checking and lending relationships",
+    "Customers prioritizing bank community involvement and charitable giving over national brand presence"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Kennebec Savings Bank is best suited for Maine residents within its 35-community service area who value community reinvestment and local decision-making over competitive rates or extensive product features. The main caveat is the lack of publicly available rate and fee information on the website, requiring potential customers to contact the bank directly for product comparisons.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "150 State St, Augusta, ME 04330",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

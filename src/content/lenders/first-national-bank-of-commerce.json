@@ -1,15 +1,15 @@
 {
   "name": "First National Bank Of Commerce",
   "slug": "first-national-bank-of-commerce",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Walnut Ridge, AR. $297M in assets. 6 offices.",
-  "description_long": "First National Bank Of Commerce is a community bank located in Walnut Ridge, AR, established in 1919. The bank holds approximately $297M in total assets and $270M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering digital banking, savings accounts, mortgages, CDs, IRAs, and agricultural loans with competitive rates.",
+  "description_long": "First National Bank of Commerce is a traditional community bank that operates through both physical branch locations and digital banking channels. The bank emphasizes personal service and community integration, positioning itself as more than just a financial institution but as a part of the community it serves.\n\nThe bank offers a comprehensive suite of deposit and lending products. On the deposit side, they provide standard savings accounts (minimum $25), high-yield savings accounts (minimum $3,000), CDs, IRAs, and specialty products like Christmas Club accounts. Their lending products include mortgages for home purchases and renovations, agricultural loans for equipment and land expansion, and personal loans. All deposit accounts are FDIC-insured, backed by the full faith and credit of the U.S. Government.\n\nFirst National Bank of Commerce distinguishes itself through its focus on agricultural lending and community presence with multiple branch locations. They offer digital banking convenience alongside traditional branch service, recognizing the shift toward online banking while maintaining physical locations for customers who prefer in-person service. The bank provides financial calculators and educational resources to help customers make informed decisions.\n\nThe bank's straightforward fee structure and tiered account offerings allow consumers to choose accounts matching their banking patterns and balance maintenance capacity. However, the limited information provided on their website about specific loan terms, detailed interest rates, and broader product offerings suggests a regional focus rather than a comprehensive digital-first banking model. For community-oriented customers with straightforward banking needs, this bank provides reliable FDIC-insured services with accessible branch locations.",
   "logo_url": "",
   "website_url": "https://www.firstnb.bank",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Standard savings accounts with quarterly interest payments",
+    "High-yield savings accounts with variable weekly interest rates",
+    "Checking accounts (referenced through digital banking)",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Christmas Club savings accounts",
+    "Residential mortgages for home purchase and renovation",
+    "Agricultural loans for equipment purchases and land expansion",
+    "Digital banking platform with bill pay and fund transfers",
+    "Online check reordering for personal and business accounts",
+    "Financial calculators for loan and savings planning",
+    "Online banking enrollment and account management"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1919",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Multiple account types including standard savings ($25 minimum), high-yield savings ($3,000 minimum), CDs, and IRAs",
+    "Specialized agricultural loan products for equipment purchases and land expansion",
+    "Digital banking platform allowing account management, bill pay, and fund transfers 24/7",
+    "Physical branch locations providing in-person customer service throughout the community",
+    "Competitive interest rates on savings and deposit products with quarterly or monthly interest payments",
+    "Check reordering services available online for both personal and business accounts"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "High-yield savings account requires $3,000 minimum opening balance with $10/month fee if balance drops below minimum",
+    "Limited withdrawal privileges on savings accounts (9 free quarterly withdrawals on standard savings; 6 per month on high-yield with $2 fees thereafter)",
+    "Website does not display specific current interest rates, requiring customers to contact bank or visit in person for rate information",
+    "Service charges apply to accounts falling below minimum balances ($5/month on standard savings below $25)",
+    "Christmas Club account withdrawals are subject to fees, reducing product flexibility"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "AR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3896,
   "latitude": 36.069117902464,
   "longitude": -90.95674378289,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural businesses and farmers seeking specialized lending for equipment and land expansion",
+    "Community-oriented customers who prefer in-person banking relationships alongside digital options",
+    "Savers with $3,000+ looking for high-yield savings with competitive rates and monthly statements",
+    "Homebuyers seeking mortgage services with personalized, localized customer service"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First National Bank of Commerce is best for community-focused customers and agricultural businesses seeking a blend of traditional in-person service with modern digital banking capabilities. The primary caveat is that specific current interest rates are not publicly displayed on their website, requiring prospective customers to contact the bank directly for rate comparisons before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "206 W Main St, Walnut Ridge, AR 72476",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

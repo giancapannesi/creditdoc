@@ -1,14 +1,14 @@
 {
   "name": "The First Citizens National Bank Of Upper Sandusky",
   "slug": "the-first-citizens-national-bank-of-upper-sandusky",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Upper Sandusky, OH. $368M in assets. 8 offices.",
-  "description_long": "The First Citizens National Bank Of Upper Sandusky is a community bank located in Upper Sandusky, OH, established in 1902. The bank holds approximately $368M in total assets and $307M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "The First Citizens National Bank of Upper Sandusky is a community bank offering personal and business banking, agricultural lending, mortgage services, and trust services.",
+  "description_long": "The First Citizens National Bank of Upper Sandusky is a regional community bank headquartered in Upper Sandusky, Ohio, serving North Central Ohio. The bank maintains a strong local presence with emphasis on community involvement and relationship-based banking. They have been a trusted financial institution for the region, as evidenced by their participation in community initiatives like the Wyandot Memorial Hospital donations and local farmers' events.\n\nThe bank offers comprehensive personal banking services including multiple checking and savings account options (1st Cashback Checking, 1st Relationship Checking, Classic Checking, Freedom Checking, NOW Checking), money market accounts, CDs, IRAs, and HSAs. Personal loan products include auto loans and personal loans. Mortgage services are a significant offering, including home purchase mortgages, home equity loans, and HELOCs with dedicated mortgage lending teams. They also provide credit cards and standard deposit services.\n\nOn the business side, First Citizens National Bank specializes in small business and agricultural lending, which distinguishes them in their market. They offer SBA loans, Farm Service Agency guaranteed loans, Farmer Mac loans, commercial and agricultural real estate financing, equipment loans, and working capital solutions. Treasury management services including payment and collection solutions, fraud management tools, and funds management are available for business customers.\n\nThe bank's online and digital presence includes online banking, mobile banking with mobile deposit, bill pay, eStatements, and integration with Zelle for transfers. They provide accessibility features through AudioEye enablement. However, as a regional community bank, their service areas and product availability may be geographically limited compared to national institutions, and some advanced fintech features available at larger banks or neobanks may not be present.",
   "logo_url": "",
   "website_url": "http://www.firstcitizensnational.com",
   "affiliate_url": "",
@@ -23,23 +23,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business Checking (Business Classic Checking, Business NOW Checking)",
+    "Business Savings and Money Market Accounts",
+    "Business CDs and Business Credit/Debit Cards",
+    "SBA Small Business Loans",
+    "Agricultural and Farm Loans (FSA Guaranteed, Farmer Mac)",
+    "Commercial and Agricultural Real Estate Loans",
+    "Working Capital and Equipment Loans",
+    "Personal Checking Accounts (multiple types including 1st Cashback, 1st Relationship, Freedom Checking)",
+    "Savings Accounts, Money Market Accounts, CDs, IRAs, HSAs",
+    "Mortgage Loans and Home Equity Lines of Credit (HELOC)",
+    "Personal Loans and Auto Loans",
+    "Treasury Management and Funds Management Solutions",
+    "Online Banking, Mobile Banking with Mobile Deposit, Bill Pay, Zelle",
+    "Trust Services and Investment Services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1902",
-    "Local community bank with personal service",
-    "8 locations"
+    "Specialized agricultural and farm lending programs including FSA Guaranteed Loans and Farmer Mac Loans, tailored for regional farming community",
+    "Multiple checking account options with specific features (1st Cashback Checking, 1st Relationship Checking) to match different customer needs",
+    "Comprehensive mortgage services with dedicated mortgage lending team and home equity solutions (HELOC available)",
+    "Business and agricultural lending expertise with customized financing solutions for small business and farm operations",
+    "Trust services and investment services available for wealth management and estate planning",
+    "Mobile banking with mobile deposit and Zelle integration for modern digital banking convenience",
+    "Strong community engagement demonstrated through charitable donations and local business support",
+    "Personal loan options including auto loans through dedicated consumer lending team"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area as a regional community bank\u2014likely only serves North Central Ohio market, restricting accessibility for out-of-area customers",
+    "No mention of investment advisory fees, minimum balances for premium accounts, or CD rates on website\u2014pricing transparency is limited",
+    "Agricultural lending focus may mean less specialized expertise in other business verticals compared to larger commercial banks",
+    "Website does not clearly display current interest rates for savings, money market, or CD products",
+    "Limited information about business credit cards and commercial credit line products compared to national bank competitors"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +65,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14355,
   "latitude": 40.8277990020941,
   "longitude": -83.2818029743069,
@@ -93,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and farmers in North Central Ohio seeking relationship-based lending and agricultural expertise",
+    "Homebuyers in the Upper Sandusky region looking for local mortgage services with dedicated lending team support",
+    "Personal customers in Ohio seeking community bank relationship banking with multiple account options and local decision-making",
+    "Agricultural operations and farms requiring specialized financing programs like FSA and Farmer Mac loans"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Citizens National Bank of Upper Sandusky is best for small business owners, farmers, and personal customers in North Central Ohio seeking community relationship banking with specialized agricultural lending expertise. The main caveat is that their services are geographically limited to the regional market, and they lack the extensive digital infrastructure and national branch network of larger competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +121,11 @@
   ],
   "phone": "",
   "address": "100 N Sandusky Ave, Upper Sandusky, OH 43351",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

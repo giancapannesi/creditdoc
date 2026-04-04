@@ -1,14 +1,14 @@
 {
   "name": "Ives Bank",
   "slug": "ives-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Danbury, CT. $1680M in assets. 16 offices.",
-  "description_long": "Ives Bank is a community bank located in Danbury, CT, established in 1849. The bank holds approximately $1680M in total assets and $1352M in deposits. It operates 16 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Ives Bank is a Connecticut-based community bank offering personal and business banking, mortgages, and lending solutions with 175 years of history.",
+  "description_long": "Ives Bank is a community-focused financial institution based in Southern Connecticut with a 175-year history of serving local customers. The bank emphasizes personal relationships and community involvement as core to its mission, positioning itself around three key values: focusing on community, putting customers first, and creating human connections. The bank operates multiple branches across Western Connecticut and maintains both traditional in-person and digital banking channels.\n\nThe bank offers a comprehensive suite of financial services including personal savings accounts, checking and online banking, mobile banking capabilities, mortgages for home purchase and refinance, home equity loans, and business lending solutions. On the commercial side, Ives Bank provides small business loans, SBA 504 loans, commercial mortgages, term loans, and revolving lines of credit. The bank also partners with Greenlight to offer kids and teens money management tools including chore management, allowance transfers, and savings goal features.\n\nIves Bank distinguishes itself through local expertise and personalized service rather than scale or technology innovation. The website emphasizes \"local experts\" guiding customers through mortgage processes and highlights specific client success stories (Enhance a Colour, Amber Room Colonnade) showing tailored business financing. The bank positions itself as accessible and straightforward (\"we make it easy\") compared to larger institutions, with emphasis on community relationships and small business support.\n\nAs a traditional community bank, Ives Bank may have more limited digital capabilities and product breadth compared to larger regional or national banks. The website does not detail competitive pricing, interest rates comparison tools, or extensive product documentation. The bank's geographic focus on Southern Connecticut means services are primarily local rather than nationwide, which may be limiting for customers seeking broader accessibility.",
   "logo_url": "",
   "website_url": "https://www.ivesbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal savings accounts",
+    "Checking accounts with online banking",
+    "Mobile banking app",
+    "Home purchase mortgages",
+    "Mortgage refinancing",
+    "Home equity loans and lines of credit",
+    "Small business loans",
+    "SBA 504 business loans",
+    "Commercial mortgages",
+    "Business lines of credit and revolving credit",
+    "First-time homebuyer programs",
+    "Greenlight kids and teens account management"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1849",
-    "Local community bank with personal service",
-    "16 locations"
+    "175-year history demonstrates long-term stability and community commitment",
+    "Local branch presence across Western Connecticut for in-person service",
+    "Offers SBA 504 loans and small business lending beyond typical consumer services",
+    "Provides first-time homebuyer programs with local mortgage experts",
+    "Mobile and online banking available for account management flexibility",
+    "Greenlight integration for youth financial education and money management",
+    "Clear fraud alert messaging and proactive customer education on security"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Southern/Western Connecticut only",
+    "No transparent rate comparisons or fee schedules visible on homepage",
+    "Limited information on product varieties, terms, or competitive positioning",
+    "No mention of digital-first features or fintech integrations beyond Greenlight",
+    "Small institution may have fewer resources for specialized lending products"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "CT"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15912,
   "latitude": 41.3943750045236,
   "longitude": -73.4529750204892,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Southern Connecticut residents and small business owners seeking personalized local banking",
+    "First-time homebuyers wanting guidance from local mortgage experts",
+    "Small business owners needing SBA loans and commercial lending solutions",
+    "Parents looking to teach children money management through Greenlight integration"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Ives Bank is best for Southern Connecticut residents and small business owners who prioritize personal relationships and local expertise over digital innovation or nationwide reach. The main caveat is geographic limitation\u2014the bank serves only Western Connecticut, making it unsuitable for customers outside this region or those seeking a fully digital-first banking experience.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "220 Main St, Danbury, CT 06810",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

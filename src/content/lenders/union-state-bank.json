@@ -1,14 +1,14 @@
 {
   "name": "Union State Bank",
   "slug": "union-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in West Salem, WI. $125M in assets. 2 offices.",
-  "description_long": "Union State Bank is a community bank located in West Salem, WI, established in 1903. The bank holds approximately $125M in total assets and $104M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Union State Bank is a community bank in West Salem offering personal and business checking, savings, lending, and mortgage services with 24/7 online banking access.",
+  "description_long": "Union State Bank operates as a traditional community bank serving the West Salem area with a focus on personalized banking relationships and local lending. The institution positions itself as a community-oriented lender that emphasizes direct engagement with borrowers to understand their unique financial needs. Their service portfolio spans personal banking (checking, savings, credit cards, debit cards), business banking (business accounts, ACH management, merchant services), and comprehensive lending products across consumer, agricultural, and commercial real estate segments. What distinguishes Union State Bank is their emphasis on personal service as a community mortgage lender and their commitment to agricultural lending, which reflects local market priorities. They offer modern digital conveniences including 24/7 online banking, mobile banking with mobile deposit capability, bill pay, and Zelle integration, alongside traditional in-person services at physical locations. The bank provides educational resources through their Money IQ program with financial literacy video tutorials. For borrowers, they offer diverse loan products including auto loans, recreational loans, home equity lines of credit, construction loans, and business lines of credit with agriculture-specific financing options. Union State Bank appears to be a solid choice for customers seeking personalized community banking with both digital conveniences and local decision-making, though as a regional bank their product offerings and rates may be less competitive than larger national institutions on some products.",
   "logo_url": "",
   "website_url": "https://www.usbwestsalem.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with multiple account types",
+    "Savings accounts and money market accounts",
+    "Online banking available 24/7/365",
+    "Mobile banking and mobile deposit",
+    "Bill pay and eStatements",
+    "Zelle peer-to-peer money transfer",
+    "Auto loans and recreational loans",
+    "Mortgage loans and home equity lines of credit",
+    "Business checking and money market accounts",
+    "Agricultural loans and real estate financing",
+    "Business loans and lines of credit",
+    "Credit cards and debit cards for personal and business use"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1903",
-    "Local community bank with personal service",
-    "2 locations"
+    "Offers 24/7 online banking and mobile banking with mobile deposit capabilities",
+    "Provides comprehensive lending products including mortgages, auto loans, agricultural loans, and home equity lines of credit",
+    "Includes Zelle money transfer service for quick peer-to-peer payments",
+    "Offers business-specific services including ACH Manager and Positive Pay for fraud prevention",
+    "Provides free financial education through Money IQ video tutorial center",
+    "Community-focused mortgage lending with staff available to discuss personalized loan options",
+    "Multiple account types for checking and savings tailored to different customer needs"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic presence as a regional bank in West Salem area may restrict accessibility for remote customers",
+    "No mention of competitive rates or specific APY/APR information on website to compare against national banks",
+    "Website content does not specify minimum deposit requirements, monthly fees, or account requirements",
+    "Product selection appears more limited than national banks (no investment services, insurance products, or wealth management mentioned)",
+    "No mention of CDIC or deposit insurance specifics beyond general security center reference"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14560,
   "latitude": 43.8964360085765,
   "longitude": -91.0802850365081,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local West Salem residents seeking personalized community banking with in-person relationship managers",
+    "Agricultural borrowers needing specialized farm and ranch lending products",
+    "Small business owners requiring local decision-making and business banking services",
+    "Home buyers interested in community mortgage lending with direct lender consultation"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Union State Bank is best for West Salem-area residents and local business owners who value personalized community banking relationships and are willing to bank with a regional institution. The main caveat is that as a regional bank, they may not offer the most competitive rates or extensive product selection compared to national banks, and their services are geographically limited to those able to visit physical locations or use their digital platforms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "120 Mill St S, West Salem, WI 54669",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

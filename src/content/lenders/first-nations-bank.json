@@ -1,14 +1,14 @@
 {
   "name": "First Nations Bank",
   "slug": "first-nations-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Chicago, IL. $540M in assets. 3 offices.",
-  "description_long": "First Nations Bank is a community bank located in Chicago, IL, established in 1976. The bank holds approximately $540M in total assets and $442M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering checking, savings, CDs, home equity lines of credit, mortgages, and business banking services with 49+ years of local service.",
+  "description_long": "First Nations Bank is an established community bank that has served its local market for over 49 years. The institution positions itself as combining 'small-town values with big-bank services,' emphasizing relationship-based banking and personalized service. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing depositor protection up to applicable limits.\n\nThe bank offers a comprehensive range of consumer and business financial products. For consumers, these include savings accounts, CDs (currently offering 5-month CDs at 4.00% APY), home equity lines of credit, mortgages for both purchase and refinance, personal loans, and digital banking services including online and mobile banking. Business customers can access business checking, online banking with fraud prevention tools, merchant services (Direct Link Merchant RDC), and Positive Pay account protection. Current mortgage rates advertised are 6.250% APR for 30-year fixed and 5.625% APR for 15-year fixed loans.\n\nFirst Nations Bank distinguishes itself through its emphasis on personalized service and community relationships rather than competing primarily on rates. The marketing tagline 'Big enough to serve you but small enough to know you' reflects a positioning focused on accessibility and local knowledge. The bank offers no-closing-cost home equity line of credit promotions and tailored business online banking features. Their presence and longevity in the community for nearly 50 years suggests stability and established local relationships.\n\nAs a traditional community bank, First Nations Bank is best suited for customers prioritizing relationship banking, personalized service, and local accessibility over cutting-edge fintech features or industry-leading rates. The bank's products are competitively positioned but rates appear moderate rather than leading-edge. Borrowers should compare rates with larger institutions and online banks, as small community banks typically cannot match the scale advantages of mega-banks or online lenders on pricing.",
   "logo_url": "",
   "website_url": "https://www.firstnations.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Consumer checking accounts",
+    "Consumer savings accounts",
+    "Certificates of Deposit (CDs) - currently 5-month at 4.00% APY",
+    "Home Equity Lines of Credit (HELOC) - variable rate tied to Prime + 0.50%, up to $400,000",
+    "Fixed-rate mortgages (30-year and 15-year options) for purchase and refinance",
+    "Home equity mortgages and home equity products",
+    "Personal loans and consumer lending",
+    "Business checking and business savings accounts",
+    "Business online banking with tailored features",
+    "Positive Pay fraud prevention for business accounts",
+    "Direct Link Merchant Services (RDC - Remote Deposit Capture)",
+    "Consumer online banking and mobile app banking"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1976",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits with full government backing providing deposit protection",
+    "Established 49+ year operating history in the community demonstrating stability and local relationships",
+    "No closing costs on home equity lines of credit promotional offer",
+    "Comprehensive product suite including checking, savings, CDs, mortgages, HELOCs, and business services",
+    "Business Fraud Prevention and Positive Pay tools specifically designed for business account security",
+    "Digital banking options including consumer and business online banking plus mobile apps",
+    "Personalized service and relationship-focused banking model with local accessibility"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Moderate CD rates (4.00% APY for 5-month) may not be competitive with online banks offering 4.5%+ APY",
+    "Mortgage rates (6.250% for 30-year) appear higher than some online lenders and refinance specialists",
+    "Limited geographic presence as a community bank may restrict convenience for customers outside service area",
+    "HELOC terms include balloon payment structure (interest-only minimum payments required) creating refinance risk",
+    "Maximum HELOC of $400,000 may be insufficient for customers with higher-value properties"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 22282,
   "latitude": 41.9964979877679,
   "longitude": -87.8210229742439,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking relationship-based banking with fraud prevention and merchant services",
+    "Community members prioritizing personalized service and local accessibility over online-only banking",
+    "Homeowners with moderate borrowing needs (under $400K HELOC) seeking no-closing-cost equity access",
+    "Consumers seeking FDIC-insured savings and checking with established local bank stability"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Nations Bank is best for community-focused customers and small business owners who value personalized service, local relationships, and accessibility over maximizing rates or accessing cutting-edge fintech features. The primary caveat is that customers rate-shopping for mortgages, CDs, and HELOCs should compare with online banks and national lenders, as this community bank's pricing appears moderate rather than leading-edge in current market conditions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "7757 W Devon Ave, Chicago, IL 60631",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

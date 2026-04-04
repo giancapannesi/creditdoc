@@ -1,7 +1,7 @@
 {
   "name": "Cape Ann Savings Bank",
   "slug": "cape-ann-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
@@ -9,8 +9,8 @@
     "mutual-bank",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Gloucester, MA. $1039M in assets. 4 offices.",
-  "description_long": "Cape Ann Savings Bank is a community bank located in Gloucester, MA, established in 1846. The bank holds approximately $1039M in total assets and $783M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank founded in 1846 serving Cape Ann, Massachusetts with FDIC-insured checking, savings, mortgages, and business banking services.",
+  "description_long": "Cape Ann Savings Bank was established in 1846 by three local residents\u2014a physician, a scholar, and a businessman\u2014with a mission to serve the greater Gloucester and Cape Ann community. The bank opened its doors on May 9, 1846, on the second floor of what is now 51-53 Main Street in Gloucester. Over 175 years later, it continues to operate as a community-focused financial institution deeply rooted in the region.\n\nThe bank offers a comprehensive suite of retail and business banking services. For personal customers, this includes checking and savings accounts, mobile banking via downloadable app, debit cards, and lending products. Their mortgage division provides home purchase loans, refinancing options, and home equity lines of credit (HELOCs) to qualified borrowers. On the business side, Cape Ann Savings Bank offers business checking accounts, merchant processing services, and payroll processing, with promotional incentives up to $600 for new business customers who enroll in multiple services.\n\nCape Ann Savings Bank distinguishes itself through its deep community ties and 175+ year history of local service. The bank maintains multiple physical branch locations across Gloucester, Rockport, and Manchester-by-the-Sea, emphasizing personalized service and local decision-making. All deposits are FDIC-insured, backed by the full faith and credit of the U.S. Government. The bank also demonstrates community commitment through initiatives like the FV Lily Jean Fund, supporting families impacted by tragedy.\n\nAs a traditional community bank, Cape Ann Savings Bank is best suited for customers in the Cape Ann region seeking personalized banking relationships and local loan servicing. The main limitation is geographic: the bank serves a specific New England area and does not appear to offer online-only or national banking options. Customers outside the service area would need to visit physical branches or work with loan officers in person.",
   "logo_url": "",
   "website_url": "https://capeannsavings.bank",
   "affiliate_url": "",
@@ -25,23 +25,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Mobile banking app",
+    "Debit cards with lost/stolen card replacement",
+    "Home purchase mortgages",
+    "Mortgage refinancing",
+    "Home equity lines of credit (HELOC)",
+    "Business checking accounts",
+    "Merchant processing services",
+    "Payroll processing services",
+    "Personal loan products",
+    "FDIC deposit insurance"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1846",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits backed by U.S. Government guarantee",
+    "175+ years of continuous operation and community presence since 1846",
+    "Multiple physical branch locations in Gloucester, Rockport, and Manchester-by-the-Sea for in-person service",
+    "Mobile banking app available for account management anytime, anywhere",
+    "Full-service mortgage lending with customized loan options and community lender status",
+    "Business banking with merchant processing and payroll services; up to $600 promotional bonus for new business customers",
+    "Community-focused initiatives including the FV Lily Jean Fund charitable support"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area restricted to Cape Ann region of Massachusetts",
+    "No indication of online account opening or digital-first banking for non-local customers",
+    "No mention of investment services, wealth management, or advisory services",
+    "Website lacks specific information on interest rates, fee schedules, or product comparison details",
+    "Appears to lack competitive digital features compared to national banks and neobanks"
   ],
   "contact": {
     "phone": "",
@@ -53,7 +64,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 90203,
   "latitude": 42.6122680085768,
   "longitude": -70.6637888637668,
@@ -95,12 +106,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Cape Ann area residents and businesses seeking personalized local banking relationships",
+    "Homebuyers in Massachusetts looking for community mortgage lenders with local decision-making",
+    "Small business owners in Gloucester, Rockport, or Manchester-by-the-Sea needing integrated business banking and payroll services",
+    "Customers who value 175+ years of established community history and FDIC protection over digital convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Cape Ann Savings Bank is best for residents and business owners in the greater Gloucester, Rockport, and Manchester-by-the-Sea area who value established community banking relationships, personalized service, and 175+ years of local history. The primary caveat is geographic limitation\u2014the bank does not serve customers outside its New England service area and lacks the digital-first infrastructure of national or online-only banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +120,11 @@
   ],
   "phone": "",
   "address": "109 Main St, Gloucester, MA 01930",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

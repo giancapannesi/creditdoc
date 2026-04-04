@@ -1,14 +1,14 @@
 {
   "name": "Hcn Bank",
   "slug": "hcn-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Riverside, CA. $975M in assets. 7 offices.",
-  "description_long": "Hcn Bank is a community bank located in Riverside, CA, established in 1974. The bank holds approximately $975M in total assets and $854M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal and business checking, savings, credit cards, loans, and digital banking solutions across California locations.",
+  "description_long": "HCN Bank is a regional financial institution operating in California that provides comprehensive banking services to both personal and business customers. The bank is FDIC-insured and emphasizes its commitment to customer service through multiple branch locations, including a newly opened Palm Springs branch. According to their website, HCN Bank has been recognized as the #1 bank out of 122 banks in California in the Q4 2025 Bank Performance Report and was named Best Hometown Bank in the Inland Empire by Press Enterprise Readers.\n\nThe bank offers a wide range of deposit and lending products for personal customers, including Freedom Checking accounts, savings accounts, CDs, IRAs, personal loans, and personal credit cards. For business customers, HCN Bank provides business checking and savings accounts, business credit cards, business loans, lines of credit, and specialized services like commercial real estate financing, NNN lease and tenant financing, and mobile home park financing. They also offer attorney solutions and government banking services. Their digital offerings include online banking, mobile banking with mobile deposit, bill pay, Zelle integration, Apple Pay support, and card control features.\n\nWhat distinguishes HCN Bank is their emphasis on fee-free accounts and specialized lending products. Their Freedom Business Checking account advertises no monthly maintenance fee and no minimum balance requirement, with accounts openable for as little as $100. The bank also offers treasury management services including remote deposit capture, ACH origination, positive pay, lockbox services, and remote cash deposit\u2014services typically associated with larger regional or national banks. Their recognition as the top-performing bank in California and emphasis on customer security (including multi-factor authentication and the CyberSmart educational series on cybersecurity) reflects their positioning as a performance-focused community bank.\n\nHCN Bank is best suited for California-based customers seeking traditional banking services with competitive performance metrics and fee-friendly personal and business accounts. However, the website provides limited information about specific rates, fees, and loan terms, which prospective customers would need to obtain through direct contact. The bank appears to lack an established digital-only or neobank presence, positioning them as a traditional community bank rather than a fintech alternative.",
   "logo_url": "",
   "website_url": "http://www.hcnbank.com",
   "affiliate_url": "",
@@ -23,23 +23,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts (Freedom Checking)",
+    "CDs and IRAs",
+    "Business checking and savings accounts",
+    "Personal and business credit cards",
+    "Personal loans and business loans",
+    "Lines of credit",
+    "Commercial real estate loans",
+    "NNN lease and tenant financing",
+    "Mobile home park financing",
+    "Online and mobile banking with bill pay",
+    "Mobile deposit and remote deposit capture",
+    "Treasury management (ACH origination, positive pay, lockbox, remote cash deposit)",
+    "Merchant card services",
+    "Zelle money transfer integration",
+    "Apple Pay integration"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1974",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured with full faith and credit backing from U.S. Government",
+    "Ranked #1 out of 122 banks in California in Q4 2025 Bank Performance Report",
+    "Freedom Business Checking with no monthly maintenance fee and no minimum balance requirement",
+    "Comprehensive digital solutions including mobile banking, mobile deposit, and Apple Pay integration",
+    "Specialized lending products including commercial real estate, NNN lease financing, and mobile home park financing",
+    "Multi-location branch network with recent Palm Springs expansion",
+    "Treasury management and merchant services for business customers",
+    "Multi-factor authentication and CyberSmart security education program"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display specific interest rates, APR, or fee schedules for comparison",
+    "Limited geographic footprint as a California-regional bank without national presence",
+    "No indication of online account opening or digital-only banking options",
+    "Minimal transparency on loan approval criteria, terms, or required credit scores",
+    "No mention of mobile app ratings or user reviews on website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +66,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 21606,
   "latitude": 33.9548360015987,
   "longitude": -117.394759011173,
@@ -93,12 +108,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "California-based small business owners seeking fee-free business checking and specialized lending",
+    "Commercial real estate investors and mobile home park operators needing specialized financing",
+    "Personal and business customers prioritizing local branch access and personalized service",
+    "Customers seeking FDIC-insured banking with demonstrated strong financial performance"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "HCN Bank is best for California residents and businesses seeking traditional FDIC-insured banking with competitive performance metrics and specialized lending options. The main caveat is that specific rates, fees, and loan terms are not published on their website, requiring direct contact for pricing comparison, and their service area is limited to California with no digital-only banking alternative.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +122,10 @@
   ],
   "phone": "",
   "address": "3715 Sunnyside Dr, Riverside, CA 92506",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

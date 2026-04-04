@@ -1,14 +1,14 @@
 {
   "name": "Oostburg State Bank",
   "slug": "oostburg-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Oostburg, WI. $434M in assets. 4 offices.",
-  "description_long": "Oostburg State Bank is a community bank located in Oostburg, WI, established in 1908. The bank holds approximately $434M in total assets and $383M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Independent community bank serving Sheboygan County since 1908, offering personal banking, business financing, mortgages, and wealth management with local decision-making.",
+  "description_long": "Oostburg State Bank was founded in 1908 and has operated as a fiercely independent, locally owned bank throughout its 118-year history in Sheboygan County, Wisconsin. The bank maintains three physical locations in Oostburg, Cedar Grove, and Sheboygan Falls, with leadership including CEO Eric Glewen who emphasizes the bank's commitment to local community banking principles.\n\nThe bank offers a comprehensive suite of financial services including personal banking (free checking, savings accounts, retirement planning, home loans), business banking solutions for startups and expansion, mortgage lending, and wealth/protection services. They provide modern banking tools alongside personalized service, positioning themselves as an alternative to national bank chains. The bank maintains ATM access, online banking, and various deposit products with published rate information available to customers.\n\nOostburg State Bank distinguishes itself through local decision-making authority, with loan and service decisions made by community members who understand regional customer needs rather than distant corporate offices. Their CEO message and website emphasize relationship-based banking where customers interact with real people from the community. The bank is FDIC-insured, maintains federal compliance (Routing #075906346, NMLS #416680), and operates extended hours including Saturday lobby service in two locations.\n\nAs a regional community bank, Oostburg State Bank is best suited for customers prioritizing local service relationships and community investment over national bank convenience. The primary limitation is geographic restriction to Sheboygan County, Wisconsin, making services unavailable to customers outside this service area. Customers seeking extensive branch networks or specialized financial products available only at large national institutions may find limited options here.",
   "logo_url": "",
   "website_url": "https://www.oostburgstate.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Free checking accounts",
+    "Savings accounts and deposit products",
+    "Retirement planning services",
+    "Home loan origination and mortgage lending",
+    "Business banking and financing for startups and expansion",
+    "Wealth management and protection services",
+    "Online banking platform",
+    "ATM access and cash services",
+    "Financial calculators and planning tools",
+    "Newsletter subscription service",
+    "Scholarship program for community",
+    "Safe deposit boxes implied through full-service banking"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1908",
-    "Local community bank with personal service",
-    "4 locations"
+    "Locally owned and independent with 118 years of continuous operation in Sheboygan County",
+    "Free checking account with no hidden fees, explicitly branded as 'actually free'",
+    "Local decision-making by community-based bankers who understand regional needs",
+    "Extended Saturday lobby hours (8:30 AM - 11:30 AM) at Oostburg and Sheboygan Falls locations",
+    "Full FDIC insurance protection and federal compliance (Member FDIC, NMLS #416680)",
+    "Comprehensive service offerings including personal, business, mortgage, and wealth management",
+    "Published deposit rates and fee schedules available transparently on website"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to three locations in Sheboygan County, Wisconsin with no online-only banking option mentioned",
+    "Limited to regional market means fewer ATM locations compared to national banks",
+    "No mention of advanced digital banking features, mobile app functionality, or cutting-edge fintech offerings",
+    "Business hours exclude Sunday service at all locations, limiting accessibility for weekend banking needs",
+    "No Saturday drive-thru service at Cedar Grove location creates unequal service across branches"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10380,
   "latitude": 43.6228589870142,
   "longitude": -87.7969919740208,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Sheboygan County residents seeking personalized banking relationships with local decision-makers",
+    "Small business owners and startups needing accessible business financing from community lenders",
+    "Customers who prioritize supporting independent, locally-owned financial institutions over national chains",
+    "Homebuyers and homeowners in the region seeking mortgage services with local loan officers"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Oostburg State Bank is ideal for Sheboygan County residents and businesses prioritizing relationship-based banking with local decision-making authority. The main caveat is strict geographic limitation to three Wisconsin locations, making services inaccessible to customers outside the immediate service area.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "905 Center Ave, Oostburg, WI 53070",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

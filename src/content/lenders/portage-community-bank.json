@@ -1,14 +1,14 @@
 {
   "name": "Portage Community Bank",
   "slug": "portage-community-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Ravenna, OH. $533M in assets. 4 offices.",
-  "description_long": "Portage Community Bank is a community bank located in Ravenna, OH, established in 1998. The bank holds approximately $533M in total assets and $468M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Portage Community Bank is an FDIC-insured community bank offering personal and business checking, savings, loans, and credit cards across Ohio locations.",
+  "description_long": "Portage Community Bank operates as a traditional community bank with FDIC insurance protection, serving customers across multiple Ohio locations including Cuyahoga Falls, Ravenna, Kent, and Rootstown. The bank positions itself with the motto \"Neighbors serving neighbors,\" emphasizing local community involvement and personalized service. The institution provides comprehensive financial products across both personal and business banking segments, ranging from basic deposit accounts to specialized lending products. Founded on community-focused principles, the bank maintains a traditional brick-and-mortar presence while offering digital banking capabilities.\n\nThe bank's service offerings span personal banking (checking and savings accounts with tiered APY rates, CDs, IRAs, HSAs, personal loans, and Visa credit cards) and business banking (business checking accounts with multiple tiers, business savings, business loans, SBA loans, commercial real estate financing, and merchant services). Loan products include home mortgages, home equity lines, auto loans, personal term loans, equipment financing, and business lines of credit. Digital services include online banking, telephone banking, mobile check deposit, ACH and wire services, and positive pay fraud protection for business customers.\n\nPortage Community Bank distinguishes itself through its strong community focus and the \"Neighbor Rewards\" checking product offering 4.00% APY on balances up to $25,000 with qualified deposits. The bank emphasizes FDIC insurance protection and provides educational resources on fraud prevention and identity theft protection. Their business services include QuickBooks integration, remote deposit capture, and merchant card processing, positioning them as a comprehensive small business banking solution.\n\nAs a community bank, Portage Community Bank is best suited for customers seeking personalized local banking relationships and straightforward financial products rather than cutting-edge fintech features. The institution does not appear to offer specialized products like credit repair, debt settlement, or payday lending alternatives. Customers should verify current rates and product availability at their specific branch location, as community banks often have localized offerings.",
   "logo_url": "",
   "website_url": "https://www.portagecommunity.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Neighbor Rewards, Neighbors Give Back, Community Plus, Community Prestige)",
+    "Personal savings accounts including money market accounts and Certificates of Deposit",
+    "Individual Retirement Accounts (IRAs) and Health Savings Accounts (HSAs)",
+    "Personal loans and personal Visa credit cards",
+    "Business checking accounts (Performance, Core, and Blue Chip tiers)",
+    "Business savings accounts and business Certificates of Deposit",
+    "Home mortgage loans, home equity loans, and auto loans",
+    "Business loans including SBA loans, commercial real estate loans, and equipment financing",
+    "Business Visa credit cards and merchant card services",
+    "Digital banking services including online banking and mobile check deposit (remote deposit capture)",
+    "Business services including ACH/wire transfers, positive pay fraud protection, and QuickBooks integration",
+    "Telephone banking and debit card services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1998",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC insurance protection backed by full faith and credit of U.S. Government",
+    "Neighbor Rewards Checking offers 4.00% APY on balances up to $25,000 with qualifying deposits",
+    "Comprehensive product suite including personal and business banking, loans, and credit cards",
+    "Multiple loan types available including SBA loans, home mortgages, and equipment financing",
+    "Digital banking services including online banking, mobile check deposit, and ACH/wire transfers",
+    "Business-focused services like QuickBooks integration, positive pay, and merchant card processing",
+    "Community-focused bank with established presence across multiple Ohio locations"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Ohio communities (Cuyahoga Falls, Ravenna, Kent, Rootstown)",
+    "No evidence of competitive rates on standard savings accounts (non-rewards products appear to offer 0.05% APY)",
+    "No mention of mobile banking app features or advanced digital capabilities compared to national banks",
+    "Community bank model may result in less product innovation compared to larger national institutions",
+    "Limited online presence for account opening or loan applications compared to digital-first competitors"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34760,
   "latitude": 41.1576059791993,
   "longitude": -81.2227799935372,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking comprehensive banking services with personalized local relationships",
+    "Ohio residents prioritizing community banking and supporting local financial institutions",
+    "Customers who qualify for Neighbor Rewards Checking seeking higher-yield deposit accounts",
+    "Borrowers seeking SBA loans, equipment financing, or commercial real estate lending with local decision-making"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Portage Community Bank is best for Ohio residents and small business owners seeking traditional community banking with personalized service, FDIC-insured deposits, and straightforward lending products. The main caveat is limited geographic availability (Ohio only) and lack of evidence for advanced digital capabilities or competitive rates on standard products outside the Neighbor Rewards checking program.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1311 E Main St, Ravenna, OH 44266",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

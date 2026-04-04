@@ -1,14 +1,14 @@
 {
   "name": "Wellworth Bank",
   "slug": "wellworth-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Lafayette, TN. $1759M in assets. 20 offices.",
-  "description_long": "Wellworth Bank is a community bank located in Lafayette, TN, established in 1909. The bank holds approximately $1759M in total assets and $1451M in deposits. It operates 20 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community-focused FDIC-insured bank serving Middle Tennessee with personal checking, business loans, mortgages, and treasury management services for over 100 years.",
+  "description_long": "Wellworth Bank is a community bank deeply rooted in Middle Tennessee with over 100 years of history serving the region. The bank recently underwent a rebranding initiative (from a previous name to Wellworth Bank) while maintaining the same ownership, staff, and commitment to local service. The institution operates multiple branches throughout Middle Tennessee and emphasizes personal relationships and local community investment as core to its mission.\n\nWellworth Bank offers a comprehensive suite of consumer and business banking products. For personal customers, they provide checking accounts (eVantage Checking with no minimum balance), mobile banking through their downloadable app, and mortgage services including fixed-rate loans and refinancing options with advertised low closing costs. On the business side, they offer commercial loans for various business types, treasury management services, and specialized financial solutions designed for business growth.\n\nThe bank distinguishes itself through a stated commitment to personalized service and community care. Their marketing emphasizes taking time to understand individual customer needs, treating business accounts as if they were the bank's own, and maintaining deep investment in local Middle Tennessee communities. They highlight 24/7 fraud detection, mobile check deposit, ACH payment capabilities, wire transfers, online bill pay, and SmartPay payment solutions. The bank positions itself as a \"neighborhood bank\" invested in community reinvestment and economic development.\n\nWellworth Bank is best suited for customers seeking traditional community banking with local decision-making, those prioritizing relationship-based service over digital-only banking, and small to mid-sized businesses in the Middle Tennessee region. The main limitation is geographic\u2014their branch network is concentrated in Middle Tennessee only, making them inaccessible for customers outside this region. As a traditional community bank, they may have fewer fintech features or competitive rates compared to national banks or digital-native financial institutions.",
   "logo_url": "",
   "website_url": "https://www.wellworth.bank",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (eVantage Checking)",
+    "Mobile banking app with account management",
+    "Business loans for various business types",
+    "Mortgage services including home purchase and refinance loans",
+    "Treasury management and cash management solutions",
+    "Fraud prevention with 24/7 monitoring and real-time alerts",
+    "Mobile check deposit and remote deposit capture",
+    "ACH payment origination and receipt",
+    "Wire transfer services",
+    "Online bill pay with automatic payment setup",
+    "SmartPay online payment processing",
+    "Business expense tracking and vendor payment solutions"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1909",
-    "Local community bank with personal service",
-    "20 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "eVantage Checking with no minimum balance requirement",
+    "Mobile banking app available for account management from anywhere",
+    "24/7 fraud detection and prevention with real-time transaction alerts",
+    "Mobile check deposit and remote deposit capture for business customers",
+    "Mortgage services with advertised low closing costs and fixed-rate options",
+    "Over 100 years of community banking history and local investment"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability\u2014branches only throughout Middle Tennessee, not accessible nationally",
+    "No mention of competitive interest rates or APY figures on deposit accounts",
+    "Website lacks pricing details, fee schedules, or loan rate information for comparison"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1711,
   "latitude": 36.5202079929971,
   "longitude": -86.0351819759399,
@@ -93,12 +102,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Middle Tennessee residents seeking relationship-based community banking",
+    "Small to mid-sized businesses in Middle Tennessee needing local lending and treasury services",
+    "First-time homebuyers in the region looking for mortgage services with low closing costs",
+    "Business owners prioritizing fraud protection and payment processing solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Wellworth Bank is best for customers in Middle Tennessee seeking personalized community banking with local branch access and relationship-driven service. The primary caveat is strict geographic limitation\u2014the bank only serves Middle Tennessee and is unsuitable for customers outside this region or those requiring nationwide accessibility.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +116,11 @@
   ],
   "phone": "",
   "address": "400 Highway 52 Byp W, Lafayette, TN 37083",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

@@ -1,14 +1,14 @@
 {
   "name": "First State Bank",
   "slug": "first-state-bank-lonoke",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Lonoke, AR. $329M in assets. 6 offices.",
-  "description_long": "First State Bank is a community bank located in Lonoke, AR, established in 1935. The bank holds approximately $329M in total assets and $292M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "First State Bank is a community-focused bank offering checking, savings, loans, and mobile banking services with flexible account options for personal and business customers.",
+  "description_long": "First State Bank operates as a traditional community bank, providing deposit and lending services to both individual and business customers. The bank emphasizes local commitment and accessibility through multiple service channels including in-person branch locations, online banking, and mobile applications. Based on their website presence at firststatebk.com with FDIC information prominently displayed, they maintain standard banking regulatory compliance and consumer protections. The bank's routing number (082902003) is publicly listed, indicating they are an established institution within the Federal Reserve system.\n\nFirst State Bank offers a tiered approach to deposit accounts designed for different customer segments. Personal customers can access checking and savings accounts with online bill pay (unlimited, free transfers to all personal account types) and mobile banking capabilities. Business customers have three distinct checking account options: Small Business Checking (starting at $100 minimum with $8/month maintenance), Small Business Checking With Interest ($2,500 minimum, earning interest on balances), and Business Analysis Checking for high-volume operations featuring earnings credits to offset fees. All business accounts include statement imaging, QuickBooks compatibility, debit cards, and free online banking and bill pay services.\n\nWhat distinguishes First State Bank is their explicit focus on small business banking with transaction-based account structures and flexible monthly statement production on the last business day. They offer specific features like Card Controls (ability to freeze debit cards), native mobile app downloads, and tiered transaction pricing for businesses ($0.05-$0.12 per item depending on transaction type). Their community-focused messaging and multiple account customization options suggest a regional bank prioritizing customer relationships over standardized national products.\n\nFirst State Bank is a straightforward traditional bank with no apparent specialization in non-traditional lending, fintech innovation, or premium wealth management services. Their website content is limited to basic service descriptions without detailed product rates, APY disclosures, or comprehensive loan product information, which may require customers to contact them directly for specific pricing. As a regional bank, they likely have geographic service limitations and may not offer the extensive product ecosystem of larger national banks. The limited website detail suggests they operate primarily through relationship-based banking rather than comprehensive digital-first operations.",
   "logo_url": "",
   "website_url": "https://www.firststatebk.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Small Business Checking (basic and with interest options)",
+    "Business Analysis Checking for high-volume operations",
+    "Mobile banking app (iOS/Android with existing login credentials)",
+    "Online bill pay (unlimited, free transactions)",
+    "ATM/Debit card services (instant issuance upon approval)",
+    "Online banking portal with 24/7 access",
+    "Card Controls (debit card freeze/unfreeze functionality)",
+    "Monthly account statements (email, online paperless, or paper via USPS)",
+    "Personal and business loan products",
+    "Financial calculators"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1935",
-    "Local community bank with personal service",
-    "6 locations"
+    "Unlimited free bill pay to all personal and business account types",
+    "Business accounts include QuickBooks and Money Management software integration for statement downloads",
+    "Small Business Checking available with just $100 minimum deposit and $8/month maintenance fee",
+    "Card Controls feature allows debit card freezing for fraud prevention on demand",
+    "Monthly statement imaging with checks organized numerically for business accounts",
+    "Free native mobile app and 24/7 online banking access",
+    "Three distinct business checking tiers allowing customers to match account type to transaction volume"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Small Business Checking with Interest requires $2,500 minimum deposit (significantly higher barrier than basic checking)",
+    "Monthly balance requirement fees ($8-$12.50) apply if minimum daily balances not maintained on most accounts",
+    "Business Analysis Checking charges per-item fees ($0.05-$0.12) plus $7 monthly maintenance, making it expensive for businesses evaluating detailed costs",
+    "Website lacks specific APY rates, loan product details, and comprehensive fee schedules requiring customers to contact bank directly",
+    "Limited information about geographic service areas and potential regional restrictions on account access"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "AR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15050,
   "latitude": 34.7836799941881,
   "longitude": -91.8998869750182,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners with modest transaction volume seeking simple, low-cost checking without excessive fees",
+    "Local community members preferring relationship-based banking with branch access in First State Bank service areas",
+    "Business customers using QuickBooks or other accounting software who need direct statement integration",
+    "Individuals wanting fraud prevention features like debit card controls with mobile banking convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First State Bank is best for small business owners and community-minded personal customers seeking straightforward deposit accounts with reasonable fee structures and mobile access, particularly those using accounting software integration. The main caveat is that specific product rates, loan terms, and detailed fee schedules are not available on their website, requiring direct customer contact to evaluate actual costs and terms before account opening.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "101 S Center St, Lonoke, AR 72086",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

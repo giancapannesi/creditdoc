@@ -1,14 +1,14 @@
 {
   "name": "The Citizens Bank Of Georgia",
   "slug": "the-citizens-bank-of-georgia",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Cumming, GA. $617M in assets. 4 offices.",
-  "description_long": "The Citizens Bank Of Georgia is a community bank located in Cumming, GA, established in 1997. The bank holds approximately $617M in total assets and $554M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "The Citizens Bank of Georgia is a community bank offering personal and business deposit products, lending solutions, and online banking services with multiple Georgia locations.",
+  "description_long": "The Citizens Bank of Georgia is a full-service community bank that has established itself as a regional financial institution serving both personal and business customers. The bank operates from a main office located at 651 Veterans Memorial Boulevard and maintains multiple branch locations throughout Georgia, positioning itself as a locally-focused banking alternative to larger national institutions.\n\nThe bank provides a comprehensive suite of deposit products including personal checking, savings, money market accounts, and certificates of deposit (CDs), along with Individual Retirement Accounts (IRAs) for personal customers. For business clients, Citizens Bank of Georgia offers business checking, business savings, business money market accounts, and business CDs. On the lending side, the bank offers personal loans, home equity loans, personal lines of credit, construction loans, business loans, commercial real estate financing, residential construction loans, and letters of credit. Digital banking capabilities include online banking, mobile banking apps, bill pay, eStatements, telephone banking, and remote deposit capture for business customers.\n\nWhat distinguishes Citizens Bank of Georgia is its emphasis on personalized service and community engagement. The bank highlights that its team is dedicated to finding banking and lending solutions tailored to individual customer situations. The institution demonstrates community commitment through initiatives like Shred Day events (scheduled for May 9, 2026) and maintains transparent security practices with published FDIC insurance limits and CRA information. The bank also offers financial calculators and educational resources to help customers make informed decisions.\n\nAs a regional community bank, Citizens Bank of Georgia serves customers who prioritize local banking relationships and personalized service over the convenience of national chains. However, customers should be aware that community banks typically have fewer branch locations and ATMs compared to national institutions, potentially limiting accessibility for those who travel frequently or require extensive branch networks. The website does not prominently display interest rates, fees, or specific lending terms, requiring customers to contact the bank directly for detailed product information.",
   "logo_url": "",
   "website_url": "https://www.citizbank.com",
   "affiliate_url": "",
@@ -23,23 +23,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Money market accounts",
+    "Certificates of deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Online banking platform",
+    "Mobile banking app",
+    "Bill pay services",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Home equity loans",
+    "Business loans and commercial real estate financing",
+    "Debit cards",
+    "Telephone banking",
+    "Remote deposit capture (business)",
+    "Financial calculators",
+    "Wire transfer services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1997",
-    "Local community bank with personal service",
-    "4 locations"
+    "Full-service banking with comprehensive personal and business deposit products (checking, savings, money market, CDs, IRAs)",
+    "Multiple lending options including personal loans, home equity loans, construction loans, and business loans",
+    "Modern digital banking capabilities including mobile app, online banking, bill pay, and remote deposit capture",
+    "Commitment to customer security with clear anti-fraud policies and published FDIC insurance information",
+    "Personalized service model with dedicated team focused on finding tailored solutions for individual customers",
+    "Community engagement through local initiatives and transparency about corporate governance (mission statement, senior management directory)",
+    "Online financial calculators and tools to help customers plan and manage finances"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited branch network as a regional community bank, reducing accessibility compared to national institutions",
+    "Website does not display specific interest rates, APRs, or fee schedules for any products",
+    "No transparent pricing information available online, requiring customers to contact bank directly for quotes",
+    "Limited information about loan approval criteria, terms, or qualification requirements",
+    "Smaller institution may have fewer ATM locations and less extensive geographic coverage"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +66,7 @@
   "states_served": [
     "GA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34229,
   "latitude": 34.1901966995514,
   "longitude": -84.1409719382138,
@@ -93,12 +108,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Georgia residents seeking personalized banking relationships with local community bank service",
+    "Small business owners and entrepreneurs needing dedicated business lending and account management",
+    "Customers prioritizing in-person service and relationship banking over digital-only banking models",
+    "Borrowers seeking construction, home equity, or business loans with flexible terms negotiated directly with bank"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Citizens Bank of Georgia is best for Georgia-based customers and business owners who value personalized service and local banking relationships over digital convenience and national branch networks. The primary caveat is that specific pricing, rates, and terms are not transparently available online, requiring direct contact with the bank for product details and loan quotes.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +122,11 @@
   ],
   "phone": "",
   "address": "651 Veterans Memorial Blvd, Cumming, GA 30040",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

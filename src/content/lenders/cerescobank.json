@@ -1,15 +1,15 @@
 {
   "name": "Cerescobank",
   "slug": "cerescobank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Ceresco, NE. $77M in assets. 1 office.",
-  "description_long": "Cerescobank is a community bank located in Ceresco, NE, established in 1911. The bank holds approximately $77M in total assets and $66M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Independent, FDIC-insured community bank in Ceresco, Nebraska, established in 1911, offering deposit accounts, loans, credit cards, and insurance services.",
+  "description_long": "CerescoBank was established in 1911 as the Farmers and Merchants Bank of Ceresco and has operated continuously in the Ceresco community for over a century. The bank relocated to its current building at 130 West Elm Street in 1983, which added modern amenities including a drive-thru banking lane. In 1990, the bank was renamed CerescoBank to better reflect its identity and community ties. As an independent, locally owned and operated institution, the bank serves Ceresco and surrounding markets with a focus on agriculture and local business.\n\nCerescoBank offers a comprehensive range of deposit products including checking accounts, savings accounts, money market accounts, certificates of deposit (CDs), IRA products, and educational savings accounts. The bank also provides loan services, ATM/Visa debit cards, credit cards, wire transfers, cashier's checks, safe deposit boxes, and direct deposit services. Additionally, CerescoBank operates an insurance division offering auto, home, commercial property and casualty, life and disability insurance, and federal crop insurance through partnerships.\n\nThe bank distinguishes itself as a locally owned community institution combining banking technology with personalized hometown service. Located strategically in a growth triangle between Lincoln and Omaha, CerescoBank emphasizes maintaining strong relationships with customers, employees, and the community. The bank is FDIC-insured, providing full backing by the U.S. government. Modern conveniences include a mobile banking app, internet banking platform, and extended weekend hours.\n\nAs a small community bank, CerescoBank's product offerings and competitive rates may be limited compared to larger regional or national institutions. The bank's insurance and investment products carry standard disclaimers that they are not FDIC-insured and may involve investment risk. For consumers seeking niche agricultural lending or deeply personalized local banking relationships, CerescoBank offers genuine community value; however, those prioritizing maximum product selection or competitive rates should compare options with larger institutions.",
   "logo_url": "",
   "website_url": "https://WWW.CERESCOBANK.COM",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Checking accounts (interest and non-interest bearing)",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Money market accounts",
+    "Certificates of Deposit (CDs)",
+    "IRA products",
+    "Educational savings accounts",
+    "Loan services",
+    "Credit cards",
+    "ATM/Visa debit cards",
+    "Wire transfers and electronic payments",
+    "Safe deposit boxes",
+    "Insurance services (auto, home, commercial, crop)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1911",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Independent, locally owned institution with 113+ years of community history",
+    "Offers complete banking services including deposits, loans, cards, and insurance in one location",
+    "Extended weekend hours (Saturday 8:30 am - 11:30 am) plus drive-thru banking lane",
+    "Modern technology access including mobile app and internet banking platform",
+    "Specialized focus on agricultural and business lending in rural market",
+    "Toll-free customer service line (800-371-5076) for convenience"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint and service area restricted to Ceresco, Nebraska and surrounding region",
+    "Insurance and investment products sold are not FDIC-insured and carry investment risk",
+    "Small community bank may have fewer product options and potentially less competitive rates than larger regional/national banks",
+    "No mention of competitive APR rates, fee structures, or promotional offers on website",
+    "Limited information provided about loan terms, credit requirements, or eligibility criteria"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1993,
   "latitude": 41.0575059806264,
   "longitude": -96.6447289738081,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural businesses and farmers in the Ceresco, Nebraska area seeking relationship-based lending",
+    "Ceresco community residents and surrounding rural populations prioritizing personalized local banking",
+    "Small business owners wanting comprehensive financial services from a single community institution",
+    "Customers seeking traditional bank deposits and basic financial services with FDIC protection"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "CerescoBank is best for rural Nebraska customers and agricultural businesses seeking personalized community banking with FDIC protection and traditional deposit/loan services. The primary caveat is geographic limitation\u2014the bank operates only in Ceresco and surrounding areas, and as a small institution may offer fewer products and less competitive rates than larger banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "130 Elm St, Ceresco, NE 68017",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

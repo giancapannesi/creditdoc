@@ -1,14 +1,14 @@
 {
   "name": "First Southern State Bank",
   "slug": "first-southern-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Stevenson, AL. $877M in assets. 11 offices.",
-  "description_long": "First Southern State Bank is a community bank located in Stevenson, AL, established in 1910. The bank holds approximately $877M in total assets and $795M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank offering deposit accounts, personal loans, and specialized agricultural/business lending since 1910. Operates multiple branches across Alabama.",
+  "description_long": "First Southern State Bank has served its community since 1910, establishing itself as a regional financial institution with a focus on personalized banking relationships. The bank operates multiple branch locations across Alabama, including offices in Cullman, Stevenson, Scottsboro, and Fort Payne, maintaining a community-oriented approach to banking.\n\nThe bank offers a comprehensive range of financial products including deposit accounts (checking, savings, CDs, IRAs), personal loans at competitive rates, and specialized agricultural and business lending. Their digital offerings include online banking, a digital suite, e-statements, and enrollment services. The website highlights competitive interest rates on deposit products, with rates up to 3.39% APY on 60-month CDs and 3.41% APY on 60-month IRAs.\n\nFirst Southern distinguishes itself through personalized service and relationship-based lending. Testimonials emphasize staff friendliness, responsive communication, and willingness to work with customers on credit improvement and financial restructuring. The bank explicitly highlights credit-building loan options and describes a culture where loan officers like Chris Miller and Cole Justice provide professional, thorough service. Their agricultural and business lending division emphasizes flexible terms, competitive rates, and rapid decision-making tailored to business clients.\n\nAs a regional community bank, First Southern operates with standard banking limitations: physical branch presence limited to specific Alabama areas, typical banking hours constraints, and products structured around traditional banking rather than specialized fintech solutions. The bank does not appear to offer investment advisory services, insurance products, or wealth management beyond basic lending relationships. Customer base appears primarily local to their service areas rather than national.",
   "logo_url": "",
   "website_url": "https://www.fssbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Deposit accounts (checking, savings, money market)",
+    "Certificates of Deposit (CDs) with rates up to 3.39% APY",
+    "Individual Retirement Accounts (IRAs) with rates up to 3.41% APY",
+    "Personal loans at competitive interest rates",
+    "Agricultural lending with specialized terms",
+    "Business loans and commercial lending",
+    "Online banking platform with digital suite",
+    "E-statements and paperless banking",
+    "Digital enrollment for accounts",
+    "Loan origination and processing services",
+    "Credit improvement consultation through loan officers",
+    "Cybersecurity and fraud education resources"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1910",
-    "Local community bank with personal service",
-    "11 locations"
+    "Established institution with 110+ year history (since 1910), providing demonstrated stability",
+    "Personalized loan service with emphasis on credit-building and financial restructuring for customers with challenged credit",
+    "Competitive deposit rates: 3.39% APY on 60-month CDs and 3.41% APY on 60-month IRAs",
+    "Specialized agricultural and business lending with rapid decision-making and flexible terms",
+    "Digital banking suite available including online banking and e-statements",
+    "Multiple branch locations across Alabama with named staff loan officers and relationship-focused service model",
+    "Staff proactively provides financial education and cybersecurity tips on social media scam prevention"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area restricted to Alabama branches; not available for customers outside their service regions",
+    "No evidence of investment services, wealth management, or retirement planning services on website",
+    "Limited information about specific loan terms, APR ranges, or product details for personal loans",
+    "Website does not display full product pricing, fees, or comparative rate information",
+    "No mention of mobile app or advanced digital banking features compared to larger regional competitors"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "AL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 2829,
   "latitude": 34.8725010104815,
   "longitude": -85.8145360023782,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and farmers needing flexible, relationship-based lending with rapid approval",
+    "Customers in Alabama communities (Cullman, Stevenson, Scottsboro, Fort Payne areas) seeking personal relationship banking",
+    "Individuals with previous credit challenges looking to rebuild credit through responsive lenders",
+    "Local depositors seeking competitive rates on CDs and savings accounts with personalized service"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Southern State Bank is best for Alabama residents and business owners within their service areas seeking traditional community banking with personalized relationships and specialized agricultural/business lending. The main caveat is geographic limitation to Alabama branches and lack of advanced fintech features or national availability that larger banks provide.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "80 Bank St, Stevenson, AL 35772",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

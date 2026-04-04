@@ -1,14 +1,14 @@
 {
   "name": "Newtek Bank, National Association",
   "slug": "newtek-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Miami, FL. $1730M in assets. 1 office.",
-  "description_long": "Newtek Bank, National Association is a community bank located in Miami, FL, established in 1963. The bank holds approximately $1730M in total assets and $1513M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured national bank offering business and personal deposit accounts, business lending up to $15M, and merchant services with no-fee checking and competitive savings rates.",
+  "description_long": "Newtek Bank, National Association has been in operation since 1963 and operates as a full-service national bank (ticker: NASDAQ:NEWT). The bank positions itself as business-focused, emphasizing direct banking relationships rather than third-party intermediaries. Newtek Bank is FDIC-insured and member of the FDIC, protecting deposits up to $250,000 per account.\n\nThe bank offers a comprehensive suite of products across both business and personal banking. Business services include fully amortizing business loans from $5K to $15M with 10-25 year terms, no balloon payments, and no standard covenants; business checking accounts with 1.00% APY and unlimited free transactions; business money market accounts at 3.50% APY; multiple business CD options; and a zero-cost merchant account through Newtek Payments. Personal banking products include high-yield savings at 4.20% APY, multiple CD terms (6-month at 4.00% APY, 9-month at 4.20% APY), and mobile banking with remote check deposit.\n\nNewtek Bank distinguishes itself through emphasis on customer service accessibility, zero-fee checking with no minimum balances or overdraft charges, competitive APY rates on deposit products, and integrated business tools including the ability to track website analytics, review financial statements, organize documents, and process payroll from a single dashboard. The bank requires only a 5-minute prequalification for business loans with no credit score impact and offers access to 40,000+ MoneyPass ATMs nationwide.\n\nAs a regional national bank, Newtek serves both small business owners and consumers seeking higher yields on savings. However, the website indicates the Personal High Yield Savings account is currently on a waiting list due to demand. Business lending and deposit products appear to be the primary focus, with personal banking positioned as a secondary offering.",
   "logo_url": "",
   "website_url": "https://www.newtekbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking accounts with unlimited free transactions and 1.00% APY",
+    "Business lending from $5K to $15M with 10-25 year amortizing terms",
+    "Business money market accounts at 3.50% APY",
+    "Multiple business CD products with rates up to 4.00% APY",
+    "Zero-cost merchant account processing through Newtek Payments",
+    "Personal high-yield savings at 4.20% APY",
+    "Personal CDs with multiple term options (6-month, 9-month, and other terms)",
+    "Mobile app with remote check deposit capability",
+    "Business dashboard with payroll processing, document storage, and financial tracking",
+    "MoneyPass ATM network access (40,000+ ATMs nationwide)",
+    "Business Visa debit cards",
+    "Free ACH transfers and wire transfers"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1963",
-    "Local community bank with personal service",
-    "1 location"
+    "Business checking with 1.00% APY, unlimited free transactions, no minimum balance, no overdraft charges, and no hidden fees",
+    "Business loans up to $15M with 10-25 year fully amortizing terms, no balloon payments, and no standard covenants",
+    "Fast prequalification for business loans in under 5 minutes with no credit score impact",
+    "Zero-cost merchant account through Newtek Payments with integrated dashboard showing chargebacks, refunds, and processing data",
+    "High APY rates on savings products (4.20% personal high-yield savings, 3.50% business money market, 4.00% 6-month business CD)",
+    "FDIC-insured deposits up to $250,000 with two-factor authentication and encryption security",
+    "Integrated business tools in dashboard including payroll processing, document storage, financial statement review, and analytics tracking"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Personal High Yield Savings account currently on waiting list due to demand, limiting immediate access for new personal savings customers",
+    "Maximum business loan amount of $15M may not serve larger enterprises or more substantial expansion needs",
+    "Limited information provided about commercial loan eligibility requirements, underwriting timeline, or specific rate ranges",
+    "Regional focus may limit branch access compared to nationwide banks with physical locations in all states",
+    "Website emphasizes business banking heavily; personal banking products appear to be a secondary offering with less detailed information"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "FL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 18734,
   "latitude": 25.762347996124,
   "longitude": -80.190371004953,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-sized business owners seeking simple business lending with no balloon payments and transparent terms",
+    "Business owners looking for zero-fee checking with high APY rates and integrated accounting/payroll tools",
+    "Companies using merchant processing who want integrated payment processing with their main business banking relationship",
+    "Personal savers willing to wait or on a waitlist seeking competitive high-yield savings rates from an FDIC-insured bank"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Newtek Bank is best for small to mid-sized business owners seeking straightforward lending and no-fee banking with integrated business tools, as well as consumers interested in competitive savings rates from an FDIC-insured bank. The main caveat is that the popular Personal High Yield Savings account is currently on a waiting list, and business lending capped at $15M may not suit larger enterprises.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1111 Brickell Ave, Miami, FL 33131",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

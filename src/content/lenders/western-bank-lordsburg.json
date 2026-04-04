@@ -1,15 +1,15 @@
 {
   "name": "Western Bank",
   "slug": "western-bank-lordsburg",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Lordsburg, NM. $322M in assets. 5 offices.",
-  "description_long": "Western Bank is a community bank located in Lordsburg, NM, established in 1907. The bank holds approximately $322M in total assets and $282M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank serving Southwestern New Mexico and Southeastern Arizona since 1907, offering retail banking, business services, and merchant processing.",
+  "description_long": "Western Bank is a community-focused financial institution founded in 1907 with headquarters in Lordsburg, New Mexico. The bank operates four physical branches across the region: Lordsburg (main office), Silver City, Willcox, and Bisbee, serving a primary lending area within a 150-mile radius of each branch location. The bank emphasizes long-term customer relationships and local decision-making as core to its mission.\n\nWestern Bank offers comprehensive retail banking services including online and mobile banking, bill pay, debit card management through Card Suite Lite, and spending tracking tools. For business customers, the bank provides merchant processing (in partnership with Priority FI Solutions), payroll services, remote deposit capture, cash management solutions, and check guarantee services. The bank accepts all major card types including Visa, Mastercard, Discover, and American Express OptBlue, with equipment options for lease or purchase.\n\nThe bank distinguishes itself through its century-old presence in local communities, emphasis on relationship banking, and locally-maintained equipment support for merchant services. They offer 24/7/365 customer service through their merchant processor and free equipment warranty programs. The bank has recently launched enhanced fraud prevention through Positive Pay solutions for ACH and check fraud prevention.\n\nHowever, Western Bank's digital capabilities appear limited compared to modern competitors\u2014they do not accept loan applications online and require customers to download, print, and bring physical applications to branches. Their service area is geographically constrained to rural New Mexico and Arizona, limiting accessibility for customers outside the 150-mile radius zones. Specific product details like interest rates, fees, and account minimums are not disclosed on their website.",
   "logo_url": "",
   "website_url": "https://www.bootheelbank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Online and mobile banking platform",
+    "Bill pay services",
+    "Debit card management (Card Suite Lite)",
+    "Spending tracking and budget management (My Spending)",
+    "Merchant processing (Visa, Mastercard, Discover, American Express OptBlue)",
+    "Point of sale transactions and virtual terminal payments",
+    "Payroll services",
+    "Remote deposit capture",
+    "Cash management services",
+    "Check guarantee and conversion",
+    "Gift cards and loyalty cards programs",
+    "Positive Pay fraud prevention for ACH and check fraud"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1907",
-    "Local community bank with personal service",
-    "5 locations"
+    "Over 115 years of local community banking presence and established relationships in Southwestern New Mexico and Southeastern Arizona",
+    "Mobile and online banking with Card Suite Lite debit card controls and My Spending budget tracking tools",
+    "Merchant processing with no annual fees or monthly minimums, complementary online reporting, and competitive rates",
+    "24/7/365 U.S.-based customer service for merchant services with award-winning support",
+    "Free equipment warranty and locally-maintained equipment loaner program for merchant processing terminals",
+    "Comprehensive business services including payroll, remote deposit capture, and cash management solutions",
+    "Recent launch of Positive Pay fraud prevention for ACH and check fraud protection"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Does not accept loan applications online; requires customers to manually download, print, complete, sign, and bring applications to physical branches",
+    "Limited service area\u2014primary lending area restricted to 150-mile radius of each branch (Lordsburg, Silver City, Willcox, Bisbee only)",
+    "No specific information on website regarding account fees, interest rates, minimum balances, or APYs for savings/checking products",
+    "Lacks modern digital onboarding capabilities; no online account opening mentioned for retail customers",
+    "Limited branch footprint with only four locations in rural areas of New Mexico and Arizona"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "NM"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 2249,
   "latitude": 32.3497260186587,
   "longitude": -108.707904009478,
@@ -94,12 +105,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners in rural Southwestern New Mexico or Southeastern Arizona seeking relationship-based banking and merchant processing",
+    "Customers within the 150-mile lending radius of Lordsburg, Silver City, Willcox, or Bisbee who value community banking and in-person service",
+    "Businesses needing merchant processing without monthly minimums or annual fees and requiring local equipment support"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Bank is best suited for small business owners and individuals in rural Southwestern New Mexico and Southeastern Arizona who prioritize relationship banking and community presence over digital convenience. The primary caveat is that the bank's service area is geographically limited to a 150-mile radius of four branch locations, and customers outside these zones cannot access their lending products; additionally, the lack of online loan application capability may frustrate customers seeking modern digital banking experiences.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +118,11 @@
   ],
   "phone": "",
   "address": "140 E Motel Dr, Lordsburg, NM 88045",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

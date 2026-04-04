@@ -1,14 +1,14 @@
 {
   "name": "Colonial Savings, F.A.",
   "slug": "colonial-savings-fa",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Fort Worth, TX. $675M in assets. 7 offices.",
-  "description_long": "Colonial Savings, F.A. is a community bank located in Fort Worth, TX, established in 1962. The bank holds approximately $675M in total assets and $406M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Full-service community bank offering personal and business checking, savings, CDs, credit products, and home equity lines with emphasis on personalized service and competitive rates.",
+  "description_long": "Colonial Savings, F.A. is a community-focused financial institution with deep roots in the Colleyville, Texas area, where customer testimonials indicate multi-generational relationships spanning decades (some customers cite 45+ years of banking history). The bank positions itself as a personalized alternative to large national banks, emphasizing direct customer relationships and customized service. Colonial offers a comprehensive suite of consumer banking products including checking and savings accounts, certificates of deposit (currently advertising 3.94% APY on 6-month CDs), personal lines of credit, and home equity lines of credit. They also serve business customers with commercial checking, business loans, owner-occupied real estate financing, and cash management tools. What distinguishes Colonial is their stated commitment to personalized service\u2014multiple customer reviews specifically highlight being \"known\" as individuals, receiving courteous treatment, and avoiding automated phone trees. The bank advertises online banking access available 24/7 through their Colonial Online platform, allowing customers to manage checking, savings, and investment portfolios remotely. While their website emphasizes competitive rates and no hidden fees, the company appears to operate primarily as a regional institution with a physical presence in the Colleyville area, limiting geographic accessibility compared to national banks. Their product offerings are standard for community banks, and without access to independent rate comparisons or regulatory data, claims about being \"more affordable\" than competitors cannot be independently verified from their website alone.",
   "logo_url": "",
   "website_url": "https://www.gocolonial.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with no hidden fees and mobile access",
+    "High-interest savings accounts and money market accounts",
+    "Certificates of deposit (CDs) with competitive rates",
+    "Personal lines of credit (PLOC) marketed as alternative to credit cards",
+    "Home equity lines of credit (HELOC)",
+    "Business checking accounts",
+    "Business loans with flexible terms",
+    "Owner-occupied real estate loan program",
+    "Cash management tools for business customers",
+    "Online banking portal (Colonial Online) with 24/7 access",
+    "Investment portfolio management access",
+    "Physical branch locations for in-person banking"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1962",
-    "Local community bank with personal service",
-    "7 locations"
+    "Long-standing community institution with multi-decade customer relationships documented in testimonials",
+    "Personal service model\u2014staff reportedly know customers by name and address individual financial needs",
+    "No hidden fees on checking accounts according to their website messaging",
+    "Comprehensive product suite including personal loans, HELOCs, business loans, and cash management tools",
+    "24/7 online banking access through Colonial Online platform",
+    "Currently competitive CD rates (3.94% APY advertised on 6-month terms)",
+    "Direct phone access without automated phone trees, per customer testimonials"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint\u2014primarily operates in Colleyville, Texas area, making in-person banking inaccessible for most U.S. consumers",
+    "No independent verification of rate competitiveness available from website; claims of lower rates than competitors are unsubstantiated",
+    "Website provides no detail on APR ranges for personal lines of credit or HELOC rates, making comparison difficult",
+    "No information about minimum deposit requirements, account maintenance fees, or other fee structures",
+    "No regulatory oversight information, FDIC insurance details, or safety certifications visible on website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 31361,
   "latitude": 32.737342981965,
   "longitude": -97.3569640132398,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Colleyville-area and local Texas residents seeking personalized community banking relationships",
+    "Small business owners needing local business banking with direct relationship management",
+    "Consumers prioritizing personal service and knowing their banker over national brand convenience",
+    "Homeowners seeking HELOC financing with local decision-making and flexible terms"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Colonial Savings is best suited for customers in the Colleyville, Texas area who value personalized, relationship-based community banking over the convenience and breadth of national institutions. The primary caveat is geographic limitation\u2014this is a regional bank with no indication of online-only account opening or nationwide service, making it inaccessible for most U.S. consumers outside their physical service territory.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "2626C West Fwy, Fort Worth, TX 76102",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Lawrence Bank",
   "slug": "lawrence-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Nashville, TN. $1608M in assets. 36 offices.",
-  "description_long": "Lawrence Bank is a community bank located in Nashville, TN, established in 1977. The bank holds approximately $1608M in total assets and $1365M in deposits. It operates 36 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Lawrence Bank, operating as Volunteer Bank, is a full-service regional bank offering personal and business checking, savings, loans, and credit cards with FDIC insurance protection.",
+  "description_long": "Lawrence Bank operates under the Volunteer Bank brand and serves customers primarily in Middle Tennessee. The bank positions itself as a community-focused institution with deep regional roots, emphasizing that Middle Tennessee is not just where they are located but reflects their identity and values. The bank has maintained its operations while offering contemporary digital banking options alongside traditional in-person services.\n\nVolunteer Bank offers a comprehensive suite of financial products across personal and business banking. On the personal side, customers can access multiple checking account options (Volunteer Checking, Volunteer Interest Checking, BankOn Volunteer), savings products (Advantage Savings, Advantage Money Market, CDs, IRAs), personal loans, personal credit cards, and various loan products including home mortgages, HELOCs, construction loans, and auto loans. The business division provides commercial checking accounts (Everyday, Prime, Commercial, and IOLTA variants), business savings and CD products, business loans, business credit cards, and specialized services including treasury management, merchant card services, and remote deposit capture.\n\nLawrence Bank distinguishes itself through its regional focus and integrated product offering. The bank emphasizes accessibility (AudioEye-enabled website), FDIC insurance backing, surcharge-free ATM access, digital banking capabilities including Zelle integration, and specialized tools like CardHub and remote deposit capture. Their messaging around \"Excellence in Every Loan\" and customized lending solutions for different life stages suggests a relationship-oriented approach rather than one-size-fits-all products.\n\nAs a regional bank, Lawrence Bank operates with physical branch locations and hours, suggesting limited geographic availability compared to national institutions. While the website demonstrates a full range of financial services, specific product details such as interest rates, fees, loan terms, and minimum account balances are not provided in the available content, requiring customers to contact the bank directly or visit branches for detailed information.",
   "logo_url": "",
   "website_url": "https://www.volunteer.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Volunteer Checking, Volunteer Interest Checking, BankOn Volunteer)",
+    "Savings products (Advantage Savings, Advantage Money Market, Certificates of Deposit, IRAs)",
+    "Personal loans and personal credit cards",
+    "Home loans (mortgages, refinancing, construction loans, HELOCs)",
+    "Business checking accounts (Everyday Business, Prime Business, Commercial, IOLTA)",
+    "Business loans (term loans, equipment loans, commercial real estate, lines of credit)",
+    "Business credit cards",
+    "Treasury management and merchant card services",
+    "Remote deposit capture",
+    "Digital banking with online account access and Zelle integration",
+    "Auto loans",
+    "Letters of credit"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1977",
-    "Local community bank with personal service",
-    "36 locations"
+    "FDIC-insured deposits backed by full faith and credit of the U.S. Government",
+    "Multiple checking account options tailored to different customer needs (interest-bearing, BankOn program)",
+    "Comprehensive loan portfolio including mortgages, HELOCs, construction loans, auto loans, and business financing",
+    "Surcharge-free ATM access network for convenient cash withdrawals",
+    "Digital banking integration with Zelle for peer-to-peer payments",
+    "Specialized business services including treasury management and merchant card processing",
+    "Remote deposit capture for convenient business banking"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability\u2014appears to serve primarily Middle Tennessee region only",
+    "Website lacks specific rate information, fees, or minimum balance requirements, requiring direct contact for product details",
+    "No clear information about mobile app functionality or advanced digital banking features",
+    "Limited transparency on business loan terms, SBA offerings, or commercial real estate loan specifics",
+    "No mention of investment advisory services despite listing 'Investment Services' as available"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 22451,
   "latitude": 36.142095646887,
   "longitude": -86.81731295158,
@@ -93,12 +104,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Middle Tennessee residents seeking FDIC-insured checking and savings products from a regional bank",
+    "Small business owners needing comprehensive commercial banking including treasury management and merchant services",
+    "Homebuyers and borrowers in the region seeking mortgage, HELOC, and personal loan products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Lawrence Bank is best for individuals and small-to-medium businesses in the Middle Tennessee region seeking traditional banking services with FDIC protection and a relationship-based approach. The primary caveat is geographic limitation\u2014this is a regional bank not available nationwide\u2014and the lack of publicly available pricing information on their website, necessitating direct contact to compare rates and fees with national competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "3200 West End Ave, Nashville, TN 37203",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

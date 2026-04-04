@@ -1,15 +1,15 @@
 {
   "name": "Cherokee State Bank",
   "slug": "cherokee-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Cherokee, IA. $271M in assets. 1 office.",
-  "description_long": "Cherokee State Bank is a community bank located in Cherokee, IA, established in 1888. The bank holds approximately $271M in total assets and $212M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Cherokee State Bank is a full-service bank offering personal and business banking, lending, and wealth management services with online and mobile banking access.",
+  "description_long": "Cherokee State Bank operates as a traditional community bank providing comprehensive financial services to both personal and business customers. The bank is accessible via their website at cherokeestatebank.com and maintains a routing number of 073901974, indicating established FDIC-regulated operations. The institution has been serving customers with a physical presence, as evidenced by their hours and locations information available on their site.\n\nThe bank offers a broad range of personal banking products including checking and savings accounts, CDs, IRAs, and HSAs. On the lending side, they provide mortgages, consumer loans, and home improvement financing. For business customers, Cherokee State Bank offers separate checking and savings products, business credit cards, business debit cards, agriculture loans, and business loans. Additionally, they provide wealth management services including trusts, investments, and insurance products, along with educational offerings like scholarships and student loans.\n\nCherokeee State Bank distinguishes itself through integrated security features such as Mastercard SecureCode for debit cards and fraud protection mechanisms. Their business credit cards include specific benefits like $150K travel accident insurance, a 25-day payment grace period, Apple and Google Pay compatibility, and access to the SavingsEdge discount program. The bank provides both retail and business online banking portals with separate enrollment systems, suggesting tailored digital experiences for different customer segments.\n\nAs a traditional bank, Cherokee State Bank is best suited for customers seeking established, regulated financial institutions with comprehensive product offerings. However, the website lacks specific details about interest rates for savings products, APRs for loans, minimum balance requirements, and fee structures\u2014information typically important for consumer decision-making. The bank appears to focus on relationship banking rather than competitive rate advertising, which may appeal to some but may not attract rate-sensitive consumers.",
   "logo_url": "",
   "website_url": "https://www.cherokeestatebank.com",
   "affiliate_url": "",
@@ -24,23 +24,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "CDs (Certificates of Deposit)",
+    "IRAs and HSAs",
+    "Personal online and mobile banking",
+    "Consumer loans and mortgages",
+    "Home improvement financing",
+    "Business checking and savings accounts",
+    "Business credit cards with rewards and benefits",
+    "Business debit cards with Mastercard SecureCode security",
+    "Agriculture loans",
+    "Business loans",
+    "Wealth management including trusts and investments",
+    "Insurance products",
+    "Scholarships and student loan programs"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1888",
-    "Local community bank with personal service",
-    "1 location"
+    "Offers comprehensive personal and business banking with integrated lending and wealth management services",
+    "Business credit cards include $150K travel accident insurance and 25-day grace period",
+    "Mastercard SecureCode technology adds fraud protection layer for business debit card transactions",
+    "Apple and Google Pay compatible for business credit and debit cards",
+    "Separate online banking portals for retail and business customers with dedicated support",
+    "SavingsEdge program provides discount savings at participating merchants for business cardholders",
+    "Agriculture-specific lending available, indicating rural/agricultural community focus"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display deposit rates, loan APRs, or fee schedules, requiring customers to contact for pricing",
+    "Debit card transactions blocked in most countries except US and Canada, limiting international travel flexibility",
+    "Limited information about minimum account balances or product eligibility requirements",
+    "No indication of competitive rate positioning compared to other banks",
+    "Mobile and online banking features mentioned but not detailed on the website"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 951,
   "latitude": 42.7508170123914,
   "longitude": -95.5519510039836,
@@ -94,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking integrated business banking, lending, and credit card solutions",
+    "Agricultural businesses and farmers needing ag-specific lending products",
+    "Customers prioritizing established FDIC-regulated institutions with relationship banking",
+    "Individuals seeking comprehensive wealth management including trusts and investments"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Cherokee State Bank is best for small business owners, agricultural customers, and individuals seeking a full-service traditional bank with integrated lending and wealth management capabilities. The main caveat is that the website lacks transparent pricing information (rates, APRs, fees), requiring direct contact to evaluate competitiveness, and international debit card usage is significantly restricted.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,10 @@
   ],
   "phone": "",
   "address": "212 W Willow St, Cherokee, IA 51012",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

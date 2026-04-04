@@ -1,15 +1,15 @@
 {
   "name": "Sanborn Savings Bank",
   "slug": "sanborn-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Sanborn, IA. $90M in assets. 1 office.",
-  "description_long": "Sanborn Savings Bank is a community bank located in Sanborn, IA, established in 1899. The bank holds approximately $90M in total assets and $68M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank in Sanborn, Iowa operating since 1899, offering personal, agricultural, and business banking services.",
+  "description_long": "Sanborn Savings Bank has operated as a hometown financial institution in Sanborn, Iowa for over 125 years, establishing itself as a long-standing community bank with deep local roots. The bank emphasizes its status as a \"Hometown Bank\" and positions itself around understanding local community financial needs. Like traditional banks, it operates under FDIC insurance protection, meaning customer deposits are backed by the full faith and credit of the U.S. Government up to applicable limits. The institution maintains both physical and digital banking infrastructure, including online banking, mobile banking, and a toll-free customer service line.\n\nSanborn Savings Bank offers a comprehensive suite of banking products across three primary segments: personal banking, agricultural services, and business banking. For personal customers, they provide checking and savings accounts, Money Market accounts, IRAs, home loans, consumer loans, student loans, debit/ATM cards, and credit cards with published CD rates available. The agricultural division serves farm customers with specialized ag lending and ag-specific checking and savings products. Business customers can access commercial checking, savings, lending products, debit/ATM cards, credit cards, and dedicated business services. The bank also offers wire transfer capabilities and maintains an online banking enrollment system with password reset functionality.\n\nSanborn Savings Bank distinguishes itself primarily through its deep community integration and longevity\u2014operating continuously since 1899 gives it historical credibility and established relationships in its service area. The bank explicitly caters to agricultural customers with dedicated ag services, which is notable for a small community bank. They offer products specifically designed for different customer segments (including a \"Star Savers Kids Club\"), indicating attention to family banking needs. The bank emphasizes personalized service, stating they are \"always ready to work with you to design a program to meet your individual financial needs,\" suggesting customized financial solutions rather than one-size-fits-all offerings.\n\nAs a regional community bank, Sanborn Savings Bank serves customers primarily in Iowa with traditional banking products. The honest assessment is that this bank operates as a standard community financial institution without premium digital innovation, specialized lending products, or national reach. Customers should expect traditional banking hours and local branch availability rather than 24/7 digital-first banking. The bank's website contains some dead links (404 errors on business services pages), suggesting potential limitations in online infrastructure. For customers seeking cutting-edge fintech features, extensive branch networks, or specialized financial products, larger national banks or online-only neobanks may be more suitable.",
   "logo_url": "",
   "website_url": "https://www.sanbornbank.com",
   "affiliate_url": "",
@@ -24,23 +24,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Individual Retirement Accounts (IRAs)",
+    "Money Market checking and savings accounts",
+    "Home loans and mortgage services",
+    "Consumer loans",
+    "Student loans",
+    "Agricultural lending and ag-specific accounts",
+    "Business checking and savings",
+    "Commercial lending services",
+    "Credit cards (personal and business)",
+    "Debit/ATM cards",
+    "Online banking",
+    "Mobile banking",
+    "Wire transfer services",
+    "CD products with published rates"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1899",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits protected by full faith and credit of the U.S. Government",
+    "Over 125 years of continuous operation (since 1899) demonstrates stability and community trust",
+    "Dedicated agricultural lending and banking services tailored to farm customers",
+    "Offers comprehensive product line including home loans, consumer loans, student loans, and credit cards",
+    "Personalized service model with willingness to design custom financial programs for individual needs",
+    "Multiple access channels including online banking, mobile banking, and toll-free support (1-800-409-8455)",
+    "Star Savers Kids Club indicates commitment to youth financial education and family banking"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as small regional Iowa bank may restrict branch access for non-local customers",
+    "Website contains dead links and 404 errors (business services page), suggesting limited digital infrastructure investment",
+    "No mention of premium features like investment advisory services, wealth management, or advanced digital tools",
+    "Small community bank structure may result in less competitive rates compared to national or online banks",
+    "Limited information provided on specific loan rates, terms, APRs, or account fee structures on public website"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +67,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 11352,
   "latitude": 43.1822109796024,
   "longitude": -95.6561000066139,
@@ -94,12 +109,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Iowa residents and farmers seeking community-focused banking with agricultural lending expertise",
+    "Customers prioritizing long-established, stable financial institutions with local decision-making",
+    "Small business owners and agricultural operations needing personalized lending relationships",
+    "Families seeking traditional banking services including youth savings products in the Sanborn, Iowa area"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Sanborn Savings Bank is best suited for Iowa residents, particularly farmers and small business owners, who value long-term community relationships and personalized service over digital convenience and competitive rates. The primary caveat is that as a small regional bank, it lacks the technological sophistication, rate competitiveness, and geographic reach of larger national or online banks, making it primarily viable for local customers in its service area.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +123,11 @@
   ],
   "phone": "",
   "address": "219 Main St, Sanborn, IA 51248",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

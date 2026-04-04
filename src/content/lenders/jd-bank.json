@@ -1,14 +1,14 @@
 {
   "name": "Jd Bank",
   "slug": "jd-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Jennings, LA. $1259M in assets. 25 offices.",
-  "description_long": "Jd Bank is a community bank located in Jennings, LA, established in 1947. The bank holds approximately $1259M in total assets and $1124M in deposits. It operates 25 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "JD Bank is a full-service community bank offering checking, savings, credit cards, personal loans, mortgages, and business banking services with FDIC protection.",
+  "description_long": "JD Bank operates as a traditional community bank with routing number 065204579, serving personal and business customers. The bank is part of JD Bancshares, Inc., a publicly traded holding company that reports quarterly financial results and maintains active leadership and succession planning. The institution has a physical presence with multiple locations, including branches in Louisiana such as Baton Rouge, and employs a team of commercial lenders, branch managers, and financial advisors.\n\nThe bank offers a comprehensive suite of retail and business banking products. For consumers, JD Bank provides checking accounts (including the ZydeCash line with high-yield options), savings accounts and CDs, personal loans, mortgage lending, and credit cards. Their ZydeCash checking account features no monthly fees when balance requirements are met, $500 overdraft privilege, free cashier's checks, and a 0.25% loan discount with auto-debit enrollment. Business customers can access commercial lending, small business checking accounts, and business banking services. Additionally, the bank offers investment advisory services through JD Prime Investments to help with retirement planning and wealth management.\n\nJD Bank distinguishes itself as a locally-operated community bank with experienced home lenders and commercial loan officers. The bank emphasizes personal relationships, as evidenced by case studies like Caroline's Cookies, where local entrepreneurs partnered with JD Bank Business Bankers for growth. The bank maintains FDIC deposit protection and actively promotes its commitment to customer service through employee and customer testimonials. Their leadership team includes vice presidents, assistant vice presidents, and specialized roles in commercial lending.\n\nHowever, JD Bank's online presence and available information are limited compared to larger national banks. The website does not provide specific interest rates, APRs, loan terms, or detailed product comparisons. There is no transparent pricing information for credit cards, personal loans, or other products visible on the public website. Customers would need to contact the bank directly for most product details, application processes, and approval criteria. The bank appears to operate primarily on a relationship-based, in-person banking model rather than emphasizing digital banking convenience.",
   "logo_url": "",
   "website_url": "https://www.jdbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "ZydeCash high-yield checking accounts with no monthly fee",
+    "ZydeCash savings accounts and certificates of deposit (CDs)",
+    "Personal loan products",
+    "Mortgage lending for home purchase and refinancing",
+    "Vehicle loans",
+    "Credit card services",
+    "Commercial lending and business loans",
+    "Small business checking accounts",
+    "Investment advisory services (JD Prime Investments)",
+    "Overdraft privilege ($500)",
+    "Free cashier's checks",
+    "Debit card services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1947",
-    "Local community bank with personal service",
-    "25 locations"
+    "FDIC-insured deposits provide deposit protection up to regulatory limits",
+    "ZydeCash checking account offers no monthly fees when balance requirements are met",
+    "0.25% interest rate discount on loans when using auto-debit enrollment",
+    "Free cashier's checks and free debit cards included with checking accounts",
+    "$500 overdraft privilege available on qualifying accounts",
+    "Local community bank with experienced lenders for mortgages and commercial loans",
+    "Investment advisory services through JD Prime Investments for retirement planning"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific interest rates, APRs, and loan terms for comparison shopping",
+    "No transparent pricing information for credit cards or personal loan products",
+    "Limited information about application requirements, approval criteria, or processing times",
+    "Appears to operate primarily on in-person banking model with no mention of mobile app or digital-first services",
+    "ZydeCash savings account interest only applies to balances up to $30,000, limiting high-yield potential"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "LA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 16546,
   "latitude": 30.2247950016636,
   "longitude": -92.6582339651222,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local customers in Louisiana seeking relationship-based community banking with in-person support",
+    "Small business owners and entrepreneurs needing commercial lending and business banking services",
+    "Individuals interested in comprehensive banking (checking, savings, loans, mortgages) from a single institution",
+    "Customers who value FDIC protection and prefer traditional bank services over digital-only neobanks"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "JD Bank is best for customers in Louisiana or nearby regions who prefer traditional community banking with local relationships and in-person service. The main caveat is the lack of transparent online pricing information\u2014prospective customers must contact the bank directly to obtain specific rates, terms, and approval details for any product.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "507 N Main St, Jennings, LA 70546",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

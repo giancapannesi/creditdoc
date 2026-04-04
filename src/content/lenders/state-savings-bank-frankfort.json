@@ -1,14 +1,14 @@
 {
   "name": "State Savings Bank",
   "slug": "state-savings-bank-frankfort",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Frankfort, MI. $413M in assets. 9 offices.",
-  "description_long": "State Savings Bank is a community bank located in Frankfort, MI, established in 1901. The bank holds approximately $413M in total assets and $374M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Full-service community bank with 125+ years of operation serving northwest Michigan through 6 banking offices and 3 loan centers, offering checking, savings, loans, and business services.",
+  "description_long": "State Savings Bank is a longstanding community bank that has served northwest Michigan for more than 125 years. The institution operates as an FDIC-insured bank backed by the full faith and credit of the U.S. Government, emphasizing personal service and local community connections. With roots extending back over a century, the bank has grown to maintain a regional presence while maintaining a community-focused approach.\n\nThe bank offers a comprehensive range of retail and commercial banking products. Customers can access checking and savings accounts, certificates of deposit (CDs), and Individual Retirement Accounts (IRAs). For borrowing needs, State Savings Bank provides mortgage loans, home equity lines of credit, consumer loans, and commercial loans. The bank also offers business cash management services including ACH processing and remote deposit capabilities. An online banking platform is available for account access and management.\n\nState Savings Bank differentiates itself through its emphasis on personal service and local decision-making. The bank's marketing focuses on a \"Yes, I can!\" philosophy, highlighting stories of employees going beyond standard procedures to help customers. Employees are community members who live, work, and volunteer locally, positioning the bank as a neighbor rather than a distant corporation. The bank offers unique services like free coin conversion for customers and maintains a deliberately smaller, localized footprint.\n\nAs a regional community bank, State Savings Bank is best suited for customers in northwest Michigan who prioritize personal relationships and local banking over convenience features offered by larger institutions. The bank's strength lies in relationship banking and commercial lending within its service area. However, the limited geographic footprint means customers outside northwest Michigan cannot access physical locations, and the website provides minimal information about specific product terms, rates, or fees that consumers typically need for comparison shopping.",
   "logo_url": "",
   "website_url": "https://www.ssbankmi.com",
   "affiliate_url": "",
@@ -25,21 +25,33 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Mortgage loans (home purchase and refinance)",
+    "Home equity loans and lines of credit",
+    "Consumer loans",
+    "Commercial loans",
+    "Business cash management services",
+    "ACH processing",
+    "Remote deposit capture",
+    "Online banking platform",
+    "Free coin conversion service for customers"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1901",
-    "Local community bank with personal service",
-    "9 locations"
+    "FDIC-insured with full backing of U.S. Government, providing deposit security up to applicable limits",
+    "125+ years of operating history demonstrates long-term stability and community commitment",
+    "Free coin-to-cash conversion service for customers at multiple locations (Frankfort, Gaylord, Traverse City)",
+    "6 banking offices and 3 loan centers across northwest Michigan providing physical branch access",
+    "Offers full suite of products: checking, savings, CDs, IRAs, mortgages, home equity, consumer loans, and commercial loans",
+    "Business cash management services including ACH and remote deposit capabilities",
+    "Emphasis on personalized service with local employees who know customers and communities"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to northwest Michigan (Beulah, Empire, Frankfort, Gaylord, Suttons Bay, Traverse City, Big Rapids, Caro, Houghton Lake) with no online-only or nationwide options",
+    "Website lacks specific information about interest rates, APYs, loan terms, and fees needed for product comparison",
+    "No clear information about minimum account balances, monthly fees, or account requirements",
+    "Online banking enrollment link returns error page (https://b072406506.flex.online-banking-services.com/cuflexenrollment endpoint unavailable)",
+    "Limited transparency about commercial lending requirements, small business loan products, or business account specifications"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "MI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8162,
   "latitude": 44.63272899605,
   "longitude": -86.2339269585134,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Northwest Michigan residents who value personal relationships and local decision-making in banking",
+    "Small business owners and commercial borrowers in the bank's service area seeking relationship-based lending",
+    "Customers seeking full-service banking (checking, savings, loans, mortgages) in a community bank environment",
+    "Individuals wanting FDIC-insured deposits with local branch access and personal service"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "State Savings Bank is best for northwest Michigan residents and small business owners who prioritize personal service and local banking relationships over digital convenience or competitive rate shopping. The primary caveat is that the bank's limited geographic footprint and minimal online product transparency make it unsuitable for customers outside its service area or those comparing rates and fees across multiple lenders.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "703 Main St, Frankfort, MI 49635",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Bank Of Dudley",
   "slug": "bank-of-dudley",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Dudley, GA. $502M in assets. 8 offices.",
-  "description_long": "Bank Of Dudley is a community bank located in Dudley, GA, established in 1905. The bank holds approximately $502M in total assets and $453M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community-focused bank serving Middle Georgia since 1905 with FDIC insurance, offering personal and business banking products across 8 locations.",
+  "description_long": "Bank of Dudley is a regional financial institution with deep roots in Laurens County and the broader Middle Georgia community, having operated continuously since 1905. The bank emphasizes its role as a local institution where lending decisions are made by people who know customers personally, rather than distant corporate decision-makers. Their physical footprint includes eight branch locations across the region: Downtown Dublin, Dublin\u2013Veterans Blvd., East Dublin, Dudley, Forsyth, Locust Grove, Jeffersonville, and Perry.\n\nThe bank offers a comprehensive suite of financial services across three main hubs: personal banking, business banking, and mortgages/lending. Personal offerings include checking and savings accounts, money market accounts, CDs, IRAs, digital banking services, safe deposit boxes, and credit cards with rewards programs. Business customers can access business checking, money market accounts, business loans, merchant services, and business credit cards. The mortgage and lending division provides personal loans, mortgages, and construction loans.\n\nBank of Dudley's primary differentiator is its emphasis on local decision-making and community integration. The bank positions itself explicitly as a neighborhood institution where loan officers and bankers know customers by name and understand their financial context beyond what appears on application forms. This contrasts sharply with larger national banks, and the company uses this localized approach as its core marketing message throughout its website and branding.\n\nAs a traditional community bank, Bank of Dudley serves customers seeking relationship-based banking with local accountability. The institution is FDIC-insured and operates with standard banking compliance. However, the website provides limited detail about specific product features, interest rates, fees, or competitive advantages beyond the community relationship angle. Potential customers should contact branches directly for detailed product information and pricing comparisons.",
   "logo_url": "",
   "website_url": "http://www.bankofdudley.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings and money market accounts",
+    "CDs and IRA accounts",
+    "Digital banking services",
+    "Safe deposit boxes",
+    "Personal credit cards with Scorecard Rewards",
+    "Business checking accounts",
+    "Business money market accounts",
+    "Business loans",
+    "Merchant services",
+    "Business credit cards",
+    "Personal loans and mortgages with construction financing options"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "8 locations"
+    "FDIC-insured deposits backed by U.S. Government guarantee",
+    "Lending decisions made locally by loan officers who know customers personally",
+    "Eight physical branch locations across Middle Georgia for in-person service",
+    "Comprehensive product suite including personal, business, and mortgage services",
+    "Over 115 years of continuous operation in the same community (established 1905)",
+    "Scorecard Rewards credit card program for eligible customers",
+    "Full range of digital banking services available alongside traditional branch banking"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Middle Georgia region only",
+    "Website lacks specific information about interest rates, fees, or product terms",
+    "No mention of competitive rates or how they compare to larger regional/national banks",
+    "Limited details about digital banking capabilities and mobile app features",
+    "No information about minimum deposit requirements or account opening processes"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "GA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9068,
   "latitude": 32.5363089854532,
   "longitude": -83.074621019454,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Middle Georgia residents seeking relationship-based community banking with local decision-makers",
+    "Small business owners and entrepreneurs in Laurens County wanting personalized lending relationships",
+    "Customers prioritizing in-person service and knowing their banker by name over digital convenience",
+    "Homebuyers in the region seeking locally-underwritten mortgages with community context"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Dudley is best for Middle Georgia residents and business owners who value community relationships and local decision-making in banking over the convenience and competitive rates often found with larger regional or national banks. The main caveat is that the bank's geographic limitations and lack of transparent pricing information on their website make it essential for prospective customers to visit branches in person or call directly to compare their specific offerings against competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1448 2Nd St, Dudley, GA 31022",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

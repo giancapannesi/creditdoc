@@ -1,14 +1,14 @@
 {
   "name": "City State Bank",
   "slug": "city-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Norwalk, IA. $775M in assets. 9 offices.",
-  "description_long": "City State Bank is a community bank located in Norwalk, IA, established in 1895. The bank holds approximately $775M in total assets and $684M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Locally-owned community bank serving the Des Moines metro area since 1895, offering checking, savings, mobile banking, trust and investment services.",
+  "description_long": "City State Bank is a family-owned, independent community bank that has operated continuously since 1895, making it over 125 years old. Unlike larger national banks, City State Bank maintains local ownership and decision-making authority while serving communities in the Norwalk, Grimes, and Indianola areas of Iowa, as well as the broader Des Moines metropolitan region.\n\nThe bank offers a comprehensive suite of consumer and business banking services including deposit accounts (checking and savings), mobile banking, online banking, e-statements, home loan pre-qualification, trust and investment services for personal investors and retirement plan participants, and insurance products. Their website emphasizes accessibility and convenience through digital channels while maintaining traditional in-person service at physical branch locations.\n\nCity State Bank distinguishes itself through its community-focused approach and explicit commitment to local involvement. The bank explicitly contrasts itself with industry trends of consolidation and acquisitions, positioning itself as 'different' by maintaining family ownership and emphasizing personalized service. Their marketing emphasizes relationship-building and custom consultation, offering to meet customers at their preferred locations when necessary.\n\nThe bank is FDIC-insured, which provides deposit protection up to applicable limits. However, the website provides limited detailed information about specific products, rates, terms, or fees. As a regional community bank, their services and rates may be less competitive than larger national institutions, and their product range may be more limited. The website lacks transparency about current deposit rates, loan terms, and fee structures.",
   "logo_url": "",
   "website_url": "https://www.citystatebank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts",
+    "Mobile banking platform",
+    "Online banking with username enrollment",
+    "E-statements",
+    "Home loan products with pre-qualification",
+    "Trust and investment services",
+    "Retirement plan participant services",
+    "Personal investor services",
+    "Insurance products",
+    "Deposit accounts with FDIC insurance",
+    "Youth savings accounts (savings rockstars program)",
+    "Newsletter and financial education resources"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1895",
-    "Local community bank with personal service",
-    "9 locations"
+    "FDIC-insured deposits with full faith and credit backing of U.S. Government",
+    "Over 125 years of continuous operation (since 1895) demonstrating stability and longevity",
+    "Locally-owned and family-owned structure with community decision-making authority",
+    "Mobile banking available for account access anywhere, anytime",
+    "Trust and investment services with dedicated professionals for retirement and legacy planning",
+    "Relationship-based approach with willingness to meet customers at their locations",
+    "Active community involvement and sponsorship of local events"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint compared to national banks\u2014only serves Des Moines metro and specific Iowa communities",
+    "Website lacks transparency on current deposit rates, loan APRs, and fee schedules",
+    "No information provided about minimum account balances, overdraft fees, or product-specific terms",
+    "Limited information about business banking products despite serving both personal and business customers",
+    "No indication of competitive rates or how they compare to larger regional or national institutions"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14410,
   "latitude": 41.4755259926783,
   "longitude": -93.6791289847713,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Iowa residents in the Des Moines metro area, Norwalk, Grimes, or Indianola seeking community bank relationship",
+    "Customers prioritizing local ownership and personalized service over digital-only banking",
+    "High-net-worth individuals seeking trust, investment, and legacy planning services",
+    "Small business owners in the Des Moines area wanting local banking relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "City State Bank is best for Iowa residents in the Des Moines metro area who value local ownership, personalized banking relationships, and community involvement over the convenience of large national banks or digital-only options. The primary caveat is that as a small regional bank, they likely offer less competitive rates and fewer products than national competitors, and their geographic reach is limited to central Iowa.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "801 Main St, Norwalk, IA 50211",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

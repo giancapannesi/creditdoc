@@ -1,14 +1,14 @@
 {
   "name": "The Commercial Bank",
   "slug": "the-commercial-bank-crawford",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Crawford, GA. $463M in assets. 5 offices.",
-  "description_long": "The Commercial Bank is a community bank located in Crawford, GA, established in 1924. The bank holds approximately $463M in total assets and $420M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering personal checking, savings, commercial lending, and mortgage services with multiple Georgia branch locations.",
+  "description_long": "The Commercial Bank is a traditional FDIC-insured banking institution headquartered in Crawford, Georgia, operating under the full faith and credit backing of the U.S. Government. The bank has been serving customers through multiple branch locations in Georgia, with its corporate mailing address at P.O. Box 306, Crawford, GA 30630.\n\nThe Commercial Bank offers a comprehensive suite of personal and commercial banking services. For personal customers, they provide checking accounts designed for different financial needs and lifestyles, traditional savings accounts with competitive interest rates, Individual Retirement Accounts (IRAs) for retirement planning, Certificates of Deposit, Consumer Loans, Money Market Accounts, and Mortgage Loans for home purchases. Their commercial division offers Commercial Lending, Commercial Checking accounts, Business Loans, and Real Estate Loans designed to support business operations. All customers have access to 24/7 free internet banking and a mobile app for account management.\n\nThe Commercial Bank distinguishes itself through its community bank model with local branch presence across Georgia, offering personalized service and accessible decision-making. They provide both MoneyPass and Star ATM networks for extended cash access beyond their branch locations. The bank emphasizes convenience through multiple service channels\u2014online banking, mobile app, and physical branch locations with extended hours including weekend availability.\n\nAs a regional community bank, The Commercial Bank serves customers seeking traditional banking relationships with local accountability. However, the website provides limited information about specific account features, interest rates, fees, loan terms, or product details that would enable comprehensive comparison with other institutions. The bank's digital presence is functional but minimal, lacking detailed product specifications or competitive rate information that modern consumers increasingly expect.",
   "logo_url": "",
   "website_url": "http://thecommercialbank.net",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal Checking Accounts",
+    "Personal Savings Accounts",
+    "Certificates of Deposit (CDs)",
+    "Money Market Accounts",
+    "Individual Retirement Accounts (IRAs)",
+    "Commercial Checking Accounts",
+    "Commercial Lending",
+    "Business Loans",
+    "Mortgage Loans",
+    "Real Estate Loans",
+    "Consumer Loans",
+    "Free Internet Banking and Mobile App"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1924",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured with backing of U.S. Government, ensuring deposit protection up to legal limits",
+    "Free internet banking available 24/7 from any internet connection for account management",
+    "Mobile app available for convenient banking on-the-go",
+    "Multiple Georgia branch locations with extended hours (9am-4:30pm weekdays, 5:30pm Friday)",
+    "Access to both MoneyPass and Star ATM networks for cash withdrawals beyond branch locations",
+    "Comprehensive product range including personal, commercial, mortgage, and retirement accounts",
+    "Local community bank model with personalized customer service and accessible decision-making"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no specific information about interest rates, APYs, or fee schedules for any products",
+    "Limited geographic presence restricted to Georgia locations only",
+    "Minimal online information about loan terms, qualification requirements, or product features",
+    "No transparent pricing or rate comparison data available on website",
+    "Limited digital marketing or educational content compared to larger regional or national banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "GA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 175,
   "latitude": 33.882657486892,
   "longitude": -83.1553781835855,
@@ -93,12 +104,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Georgia residents seeking traditional community bank relationships with local branch access",
+    "Small business owners needing commercial lending and checking services with local decision-makers",
+    "Customers preferring FDIC-insured deposits with in-person service and relationship banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Commercial Bank is best for Georgia-based individuals and small business owners seeking traditional FDIC-insured banking with local branch relationships and personalized service. The primary caveat is the lack of transparent product information, rate disclosure, and fee schedules on their website, which limits ability to compare offerings with competitors or understand true costs before contacting the bank.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,10 @@
   ],
   "phone": "",
   "address": "102 N. Church Street, Crawford, GA 30630",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

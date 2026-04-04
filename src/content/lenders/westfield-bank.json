@@ -1,14 +1,14 @@
 {
   "name": "Westfield Bank",
   "slug": "westfield-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Westfield, MA. $2734M in assets. 27 offices.",
-  "description_long": "Westfield Bank is a community bank located in Westfield, MA, established in 1853. The bank holds approximately $2734M in total assets and $2363M in deposits. It operates 27 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Westfield Bank is a regional bank offering checking, savings, mortgages, home equity products, and commercial lending with FDIC insurance and multi-channel access.",
+  "description_long": "Westfield Bank operates as a traditional community bank with a primary presence in the Northeast, indicated by branch locations and phone numbers with 413 (Massachusetts) and 860 (Connecticut) area codes. The bank provides a full suite of consumer and commercial banking services including deposit accounts, mortgage origination and refinancing, home equity lines and loans, and commercial lending products. The institution is FDIC-insured with routing number 211871604 and holds NMLS# 439933, demonstrating regulatory compliance and licensing for mortgage lending. Westfield Bank emphasizes digital accessibility through an online banking platform and a 5-star rated mobile app (the WB Mobile App), allowing customers to bank remotely 24/7 while maintaining traditional branch and ATM access. Their product offerings are intentionally designed around customer life stages\u2014from first-time homebuyers (1% down payment assistance program) to existing homeowners (home equity products) to business owners (commercial lending and POS systems via Clover partnership). Westfield Bank distinguishes itself through targeted rate promotions (currently offering 0.125% mortgage rate discounts and specialized deposit rates), a tiered premium banking program (Portfolio Banking Program for higher-balance customers), and community engagement including free document shred events and career development opportunities. The bank actively manages fraud awareness, prominently warning customers about phishing scams and providing direct contact for compromised information. Their lending flexibility appears competitive, offering fixed-rate mortgages, construction loans, term loans, and down payment assistance products. However, as a regional bank rather than a national institution, Westfield Bank's service areas are geographically limited to parts of Massachusetts and Connecticut, potentially restricting accessibility for out-of-region customers seeking branch services or local relationship banking.",
   "logo_url": "",
   "website_url": "https://www.westfieldbank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "WB Free Checking accounts with spending and savings focus",
+    "Certificates of Deposit (CDs) with FDIC insurance",
+    "Fixed-rate mortgages for home purchase, construction, and refinancing",
+    "Adjustable and fixed-rate home equity lines and loans",
+    "BetterWay Down Payment Assistance Program (1% down + supplemental loan)",
+    "Commercial term loans for small businesses",
+    "Portfolio Banking Program (premium tier with higher rates and exclusive benefits)",
+    "Digital banking via online platform and WB Mobile App (5-star rated)",
+    "Clover Merchant Services POS system for business payment processing and inventory management",
+    "ATM network with extended hours (Sunday access during branch closures)",
+    "Customer service via phone, email, and online messaging",
+    "Document shred events (partnership with PROSHRED)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1853",
-    "Local community bank with personal service",
-    "27 locations"
+    "FDIC-insured deposits with clear regulatory compliance (NMLS# 439933, Routing# 211871604)",
+    "First-time homebuyer program with as little as 1% down payment plus down payment assistance loan",
+    "5-star rated mobile app with 24/7 digital banking access for account management",
+    "Tiered Portfolio Banking Program offering premium interest rates and exclusive discounts for higher-balance customers",
+    "Active mortgage rate promotions (currently 0.125% discount on purchase/construction loans through April 30)",
+    "Full-service commercial lending with fixed-rate term loans and dedicated lending team",
+    "Extended customer service hours (Mon-Fri 8 AM-7 PM, weekend hours available) plus online messaging",
+    "Proactive fraud prevention education with clear scam alerts and compromised account support"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographically limited to Massachusetts and Connecticut region, restricting accessibility for remote or out-of-state customers needing branch services",
+    "No mention of ATM surcharge policies or network partnerships beyond their own ATM network",
+    "Promotional rate offer (0.125% mortgage discount) is time-limited (through April 30) with unspecified eligibility requirements",
+    "No specific information provided about minimum balance requirements, monthly fees, or fee waivers for checking/savings accounts",
+    "Limited transparency on current deposit rates and loan rates on website (rates page requires separate navigation without displayed figures)"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 90300,
   "latitude": 42.1235451764071,
   "longitude": -72.7479111183192,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "First-time homebuyers in Massachusetts or Connecticut seeking down payment assistance programs",
+    "Local business owners needing commercial lending and POS payment solutions",
+    "Existing homeowners with equity seeking home equity lines, loans, or refinancing in the Northeast",
+    "Customers preferring relationship banking with regional institution and community involvement"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Westfield Bank is best for Northeast-based consumers and small business owners seeking traditional relationship banking with digital convenience, competitive mortgage products, and community focus. Primary caveat: geographic limitation to Massachusetts/Connecticut restricts accessibility for out-of-region customers, and lack of transparent rate information online requires direct contact for loan/deposit pricing.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "141 Elm St, Westfield, MA 01085",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

@@ -1,10 +1,10 @@
 {
   "name": "Kroger Money Services",
   "slug": "kroger-money-worthington-oh",
-  "category": "emergency-cash",
+  "category": "atm",
   "subcategories": [],
-  "description_short": "Kroger Money Services — Check cashing service in Worthington, OH.",
-  "description_long": "Kroger Money Services provides Check cashing service. Located at 60 Worthington Mall, Worthington, OH 43085.",
+  "description_short": "Coinstar kiosk at Kroger offering coin-to-cash conversion, cryptocurrency purchases, eGift cards, and account transfers from a single machine.",
+  "description_long": "Coinstar operates coin exchange kiosks in retail locations, including this Kroger branch in Worthington, OH. The kiosk provides convenient access to multiple financial and retail services without requiring a bank visit. The primary service is Coins to Cash\u00ae, which converts loose coins into dollar bills on-site within minutes, eliminating the need for customers to sort, count, or roll their coins manually.\n\nBeyond basic coin conversion, this kiosk offers a broad range of services including cryptocurrency purchases (Bitcoin, Ethereum, Litecoin, and 20+ other cryptocurrencies via CINQ by Coinstar and Coinme), eGift card exchanges, charity donations, Amazon Cash balance loading, and account transfers via Push to Card. The machine accepts bills and offers no-fee options for certain eGift card exchanges.\n\nWhat distinguishes this location is the integration of multiple financial and retail services in a single kiosk, positioning it as a multi-purpose financial access point rather than just a coin exchanger. The addition of cryptocurrency purchasing capability reflects modernization of traditional coin exchange services. The variety of no-fee eGift options and charity donation functionality add value beyond simple cash conversion.\n\nHowever, this service is not a traditional financial institution. Fees vary by location and service type, cryptocurrency transactions involve third-party providers (Zero Hash, Coinme), and the kiosk's utility depends entirely on proximity and specific service needs. This is best suited for customers with loose change, those seeking quick access to gift cards or cryptocurrency, and those who prefer non-bank alternatives for specific transactions.",
   "logo_url": "https://lh4.googleusercontent.com/-E75VmrH5c60/AAAAAAAAAAI/AAAAAAAAAAA/54sJU0ZHehU/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.coinstar.com/kiosk-info?KioskId=738",
   "affiliate_url": "",
@@ -58,18 +58,46 @@
     "transparency": 1.8,
     "ease_of_use": 2.2
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Coin-to-cash conversion completed in minutes without sorting, counting, or rolling required",
+    "Accepts bills for cash services and Amazon balance loading ($5-$500 range)",
+    "25+ cryptocurrency options available (Bitcoin, Ethereum, Litecoin, Dogecoin, Solana, etc.)",
+    "No-fee eGift card options available across multiple retailers (AMC, Apple, Starbucks, Nike, etc.)",
+    "Charity donation program lets customers donate directly from coins to established organizations",
+    "Account transfer capability via Push to Card for direct checking account deposits",
+    "Convenient location inside Kroger for combined shopping and financial services"
+  ],
+  "cons": [
+    "Fees vary by location and service, making costs unpredictable without checking the machine first",
+    "Cryptocurrency purchases require downloading third-party apps (CINQ, Coinme) before visiting",
+    "Does not exchange gift cards or foreign currency according to stated limitations",
+    "Limited to services offered at this specific kiosk location; services vary by Coinstar machine",
+    "Account transfer fees depend on the customer's financial institution, adding variable costs"
+  ],
+  "best_for": [
+    "Consumers with accumulated loose change seeking quick, fee-based conversion to cash without bank visits",
+    "People interested in purchasing cryptocurrency with cash at a physical location",
+    "Shoppers looking for convenient eGift card exchanges while grocery shopping at Kroger",
+    "Those seeking charitable giving options through coin donations to established organizations"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "This Coinstar kiosk is best for consumers with loose change or small cash amounts who need immediate conversion to usable currency or gift cards, as well as those seeking cash-to-cryptocurrency purchasing without account setup at exchanges. The main caveat is that fees vary by location and service type, and this is a convenience service, not a financial institution, meaning costs will likely exceed traditional banking options for most transactions.",
   "services": [
-    "Check cashing service"
+    "Coins to Cash\u00ae - coin-to-bill conversion",
+    "eGift Cards - exchange coins for gift cards (20+ retailers with no-fee options)",
+    "Charity Donations - Coinstar Coins that Count\u00ae program supporting 7+ charities",
+    "CINQ by Coinstar\u2122 Debit Card - cryptocurrency wallet and digital payments",
+    "CINQ by Coinstar - cryptocurrency purchase (25+ cryptocurrencies supported)",
+    "Coinme - cash-to-cryptocurrency exchange",
+    "Amazon Cash - add cash to Amazon account balance ($5-$500)",
+    "Push to Card - Account Transfer - direct deposit of coins/cash to checking account",
+    "Bill acceptance - accepts paper currency for cash services",
+    "No-fee eGift card exchanges - selected retailers"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-04-03",
   "review_status": "published",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x8838f339d140dbaf:0x2c61b10bd5e355c5",
     "google_rating": null,
@@ -101,10 +129,11 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-04",
   "no_index": true,
-  "website_needs_review": true
+  "website_needs_review": true,
+  "has_been_enriched": true
 }

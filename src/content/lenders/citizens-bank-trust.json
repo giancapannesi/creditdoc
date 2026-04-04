@@ -1,15 +1,15 @@
 {
   "name": "Citizens Bank & Trust",
   "slug": "citizens-bank-trust",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Rock Port, MO. $115M in assets. 2 offices.",
-  "description_long": "Citizens Bank & Trust is a community bank located in Rock Port, MO, established in 1902. The bank holds approximately $115M in total assets and $100M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank offering personal and business checking, savings, loans, and digital banking services across two Missouri locations with mobile app access.",
+  "description_long": "Citizens Bank & Trust (CB&T) is a regional community bank operating two branch locations in Missouri: Rock Port and Mound City. The bank has been serving customers through traditional banking channels and has modernized its offerings with online and mobile banking platforms. Their website indicates a focus on personalized customer service, including anti-harassment policies protecting customers from unsolicited calls, particularly on federal holidays.\n\nCB&T offers a dual-focused service menu serving both personal and business customers. For personal banking, they provide checking accounts, savings accounts, personal loans, and online banking access. Business customers can access business checking and savings accounts, commercial loans, online banking, and remote deposit capture technology. Additional services include ATM cards, debit cards, safe deposit boxes, cashiers checks, night depository, bill pay, and mobile deposit functionality through their CB&T Anywhere mobile app.\n\nThe bank distinguishes itself through localized, community-oriented operations rather than national scale. They explicitly communicate anti-predatory lending practices by stating they do not solicit customers and do not contact customers on federal holidays. The availability of remote deposit capture and mobile banking suggests efforts to provide modern convenience while maintaining traditional branch relationships. Their two-location footprint indicates deep roots in their specific Missouri market.\n\nCB&T is a straightforward regional community bank without specialized or innovative financial products. As a traditional lender, they likely serve customers seeking familiar banking relationships over fintech solutions. The announced reduction in Saturday hours at the Mound City branch as of December 2025 reflects operational changes typical of smaller regional institutions managing costs. Prospective customers should verify current loan terms, interest rates, and specific account requirements by contacting branches directly, as these details are not published on their website.",
   "logo_url": "",
   "website_url": "https://www.cbtmo.com",
   "affiliate_url": "",
@@ -24,23 +24,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business checking accounts",
+    "Business savings accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business/commercial loans",
+    "Online banking platform",
+    "Mobile banking app (CB&T Anywhere)",
+    "Bill pay service",
+    "Remote deposit capture for businesses",
+    "ATM/debit cards",
+    "Safe deposit boxes",
+    "Cashiers checks",
+    "Night depository"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1902",
-    "Local community bank with personal service",
-    "2 locations"
+    "Two physical branch locations in Rock Port and Mound City for in-person service",
+    "Mobile banking app (CB&T Anywhere) available for remote account management",
+    "Offers both personal and business banking products under one institution",
+    "Provides remote deposit capture for business customers, reducing trips to branches",
+    "Anti-harassment policy protecting customers from unwanted solicitation calls",
+    "Multiple deposit and withdrawal options including night depository and ATM access",
+    "Bill pay service available for account holders"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic reach with only two branch locations in rural Missouri",
+    "No published interest rates, APRs, or specific loan terms on website",
+    "Mound City branch reducing Saturday hours effective December 1, 2025, limiting weekend access",
+    "No online loan application process visible; customers must contact branches for loan details",
+    "Limited information about business loan products, amounts, or qualification requirements"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14293,
   "latitude": 40.4143799843334,
   "longitude": -95.5142509637001,
@@ -94,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Residents of Rock Port or Mound City, Missouri seeking local banking relationships",
+    "Small business owners in northwest Missouri needing commercial checking and deposit services",
+    "Customers preferring traditional banks with physical branch access over online-only institutions",
+    "Business customers requiring remote deposit capture for daily operations"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Citizens Bank & Trust is best for residents of Rock Port or Mound City, Missouri who value local banking relationships and need basic checking, savings, or lending services. The main caveat is that specific loan products, rates, terms, and qualification requirements are not disclosed online, requiring direct contact with branches for detailed information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,11 @@
   ],
   "phone": "",
   "address": "101 N Main St, Rock Port, MO 64482",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

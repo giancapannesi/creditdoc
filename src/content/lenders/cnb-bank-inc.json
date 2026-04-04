@@ -1,14 +1,14 @@
 {
   "name": "Cnb Bank, Inc.",
   "slug": "cnb-bank-inc",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Berkeley Springs, WV. $786M in assets. 8 offices.",
-  "description_long": "Cnb Bank, Inc. is a community bank located in Berkeley Springs, WV, established in 1917. The bank holds approximately $786M in total assets and $639M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "CNB Bank, Inc. is an FDIC-insured community bank offering personal and business banking services with a focus on local relationships and digital convenience.",
+  "description_long": "CNB Bank, Inc. is a traditional community bank that emphasizes local presence and neighborhood banking relationships. The bank maintains multiple physical branch locations and combines in-person service with digital accessibility, positioning itself as a locally-rooted financial institution that understands the communities it serves.\n\nThe bank offers a comprehensive range of banking products including personal checking and savings accounts, personal loans, business banking services, and cash management solutions. They provide online banking platforms for both personal and business customers, a mobile app for iPhone and Android, ATM access through their CNB Now self-service banking network, and business payment solutions including invoicing and payment acceptance through their Autobooks integration. Business customers can access specialized cash management services alongside standard deposit products.\n\nCNB Bank distinguishes itself through its emphasis on local market knowledge and community involvement, contrasting with larger national banks. They highlight their routing number (052204359) and NMLS certification (#681652) prominently, and maintain a dedicated Solution Center Team for personalized customer support. The bank promotes features like digital invoicing for business owners, fraud mitigation solutions, and flexible self-service banking options available 24/7 through their online and mobile platforms.\n\nAs a traditional community bank, CNB Bank is best suited for customers who value local relationships and community banking while still wanting modern digital conveniences. The website content demonstrates a functional, straightforward banking operation without indicating specialization in fintech innovation or serving underserved populations, positioning it as a standard regional banking option.",
   "logo_url": "",
   "website_url": "https://www.cnb.bank",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Online banking platform for personal accounts",
+    "Online banking platform for business accounts (BizNow)",
+    "Mobile banking app for iPhone and Android (personal)",
+    "Mobile banking app for iPhone and Android (business)",
+    "Personal loan applications and servicing",
+    "Business cash management services",
+    "ATM network (CNB Now self-service banking)",
+    "Invoicing and payment acceptance through Autobooks integration",
+    "Fraud detection and mitigation solutions",
+    "Debit/ATM card services with fraud reporting",
+    "Branch location services and loan payments"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1917",
-    "Local community bank with personal service",
-    "8 locations"
+    "FDIC-insured deposits backed by U.S. Government guarantee",
+    "Multiple digital channels including online banking, mobile apps for personal and business, and ATM access",
+    "Integrated business payment solutions with Autobooks for invoicing and payment acceptance",
+    "24/7 self-service banking through CNB Now with more functionality than standard ATMs",
+    "Dedicated Solution Center Team available for personal customer support",
+    "Emphasis on local branch presence and community involvement",
+    "Business cash management services alongside standard banking products"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited information on specific product rates, fees, or minimum balance requirements on public website",
+    "No indication of specialty lending products or niche market focus compared to competitors",
+    "Enrollment process for online banking requires phone contact (888-258-1520) for some customers, suggesting less streamlined digital onboarding"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "WV"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14507,
   "latitude": 39.6253950007378,
   "longitude": -78.2284090380317,
@@ -93,12 +102,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local business owners seeking integrated payment and invoicing solutions with relationship banking",
+    "Community-focused consumers who prefer in-person banking relationships alongside digital access",
+    "Small business owners needing cash management and business banking services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "CNB Bank is best for customers in communities where the bank operates who value local banking relationships combined with modern digital convenience. The primary caveat is that as a community bank with limited public information about rates and fees, customers should contact them directly to compare competitiveness on specific products and services against larger regional or national banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +115,11 @@
   ],
   "phone": "",
   "address": "101 S Washington St, Berkeley Springs, WV 25411",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

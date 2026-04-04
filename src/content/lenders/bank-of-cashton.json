@@ -1,15 +1,15 @@
 {
   "name": "Bank Of Cashton",
   "slug": "bank-of-cashton",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Cashton, WI. $145M in assets. 1 office.",
-  "description_long": "Bank Of Cashton is a community bank located in Cashton, WI, established in 1899. The bank holds approximately $145M in total assets and $126M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank operating since 1899, offering checking, savings, mortgages, credit cards, and business lending with local roots in Cashton, Wisconsin.",
+  "description_long": "Bank of Cashton was founded on March 15, 1899, by Watson B. Earle, his sons Louis W. Earle and LaMont M. Earle, and John C. Ford in response to Cashton's growing business community needing banking services. The bank initially operated as a private bank before becoming a state bank in 1903 with $10,000 in capital. It survived the Great Depression, taking over operations of Farmers Exchange Bank in 1931, and became FDIC-insured in 1935. The bank has remained a cornerstone financial institution for the Cashton community for over 120 years.\n\nBank of Cashton offers a comprehensive range of consumer and business banking products. These include checking and savings accounts, certificates of deposit, mortgages, credit cards, Health Savings Accounts (HSAs), investment opportunities, business lending, and online banking with a mobile app called Asset for financial tracking. The bank provides 24-hour ATM access and a drive-up window for customer convenience. Customers can order checks by phone at (800) 205-7203 and access a range of loan products for personal and business needs.\n\nThe bank distinguishes itself through its deep historical roots as a community bank with over 120 years of continuous operation. It has modernized significantly while maintaining its commitment to local service, including a brand refresh with a new website and mobile app. The bank emphasizes security with identity protection guidance and has maintained strong performance through major economic fluctuations, including the Great Depression and interest rate volatility of the 1970s-1980s.\n\nAs a traditional community bank, Bank of Cashton is best suited for customers seeking personal relationships with their financial institution and who value local decision-making. However, the website provides limited information about rates, fees, minimum balances, or specific product terms, making detailed comparison difficult. The geographic focus on Cashton, Wisconsin may limit accessibility for customers outside the immediate service area.",
   "logo_url": "",
   "website_url": "https://www.bankofcashton.bank",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Mortgage loans (purchase and refinance)",
+    "Credit card applications and issuance",
+    "Health Savings Accounts (HSAs)",
+    "Investment opportunities and wealth preparation products",
+    "Business lending and business banking tools",
+    "Online banking platform",
+    "Mobile banking app (Asset)",
+    "24-hour ATM access",
+    "Check ordering service",
+    "Personal and business loan products"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1899",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured since 1935, providing deposit protection up to $250,000",
+    "Over 120 years of continuous operation and community presence since 1899",
+    "Offers Health Savings Accounts (HSAs), a specialized product not all banks feature",
+    "Modern mobile banking app (Asset) for financial tracking and account management",
+    "24-hour ATM access and drive-up window for customer convenience",
+    "Comprehensive mortgage lending with formal application process",
+    "Business lending services and tools specifically designed to help businesses strengthen operations"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no specific information about current interest rates, APRs, or fees",
+    "No details on minimum account balances or deposit requirements",
+    "Limited geographic service area centered on Cashton, Wisconsin with unclear remote banking options",
+    "Website content appears partially incomplete (cut off mid-sentence on history page)",
+    "No information about customer service response times or support availability"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 12325,
   "latitude": 43.7423551880733,
   "longitude": -90.7794969052709,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners in the Cashton, Wisconsin area seeking relationship-based banking",
+    "Consumers interested in Health Savings Accounts for healthcare cost management",
+    "Mortgage borrowers preferring local bank underwriting and decision-making",
+    "Community-oriented customers valuing long-established, locally-rooted institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Cashton is best for small business owners and consumers in the Cashton, Wisconsin area who value community relationships and local decision-making over competitive rates or extensive product selection. The main caveat is that the website lacks critical information about rates, fees, and terms, making it impossible to assess competitiveness\u2014interested customers must contact the bank directly at (800) 205-7203 for pricing details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "724 Front St, Cashton, WI 54619",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

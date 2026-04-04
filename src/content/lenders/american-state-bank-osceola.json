@@ -1,15 +1,15 @@
 {
   "name": "American State Bank",
   "slug": "american-state-bank-osceola",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Osceola, IA. $348M in assets. 4 offices.",
-  "description_long": "American State Bank is a community bank located in Osceola, IA, established in 1987. The bank holds approximately $348M in total assets and $272M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "American State Bank is a community bank offering FDIC-insured checking, savings, debit cards, online banking, and mortgage lending services across multiple Iowa locations.",
+  "description_long": "American State Bank operates as a traditional community bank with a focus on local service. The bank has physical branch locations in Osceola (two branches), Lamoni, and Winterset, Iowa, positioning itself as a neighborhood-focused financial institution with staff who live and work in the communities they serve.\n\nThe bank's primary service offerings include personal checking and savings accounts, instant-issue debit cards with contactless payment capability, online and mobile banking platforms, bill pay services, account alerts, mobile wallet integration, and residential mortgage lending. They emphasize accessibility through multiple channels including online banking, mobile apps (Brella App with fingerprint login), chat support, and in-branch service. All deposits are FDIC-insured, backed by the full faith and credit of the U.S. Government.\n\nAmerican State Bank distinguishes itself through its community-oriented branding (\"Banker. Neighbor. Friend.\") and emphasis on personalized service. Notable features include same-day instant-issue debit card availability at branch locations, contactless card technology, and dedicated mortgage lending staff. The bank offers free e-statements, account alerts for low balance and ACH transactions, and 24/7 lost card reporting. They maintain a Spanish-language interface and provide accessibility features for screen-reader users.\n\nAs a regional community bank, American State Bank serves customers in a limited geographic area and does not offer the full range of services found at larger national banks. Their strength lies in personalized local service and relationship-based banking rather than competitive rates or extensive product offerings. Customers should verify whether their location has an ASB branch and compare rates with larger institutions before opening an account.",
   "logo_url": "",
   "website_url": "https://www.americanstatebank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts with account alerts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Instant-issue debit cards (same-day activation)",
+    "Contactless debit cards with tap-and-go payment",
+    "Online banking and bill pay",
+    "Mobile banking with Brella App",
+    "e-Statements (electronic statement delivery)",
+    "Mobile wallet integration",
+    "Residential mortgage lending and home loans",
+    "Account alerts for low balance, direct deposits, and ACH transactions",
+    "Lost/stolen card reporting and PIN management",
+    "24/7 customer support phone line"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1987",
-    "Local community bank with personal service",
-    "4 locations"
+    "Instant-issue debit cards available same-day at branch locations, eliminating typical 7-10 day wait",
+    "FDIC-insured deposits backed by U.S. Government full faith and credit",
+    "Free online banking and bill pay services included with accounts",
+    "Contactless debit cards with tap-and-go technology",
+    "24/7 lost or stolen card reporting line available",
+    "Dedicated mortgage lending staff with personalized loan consultation",
+    "Mobile wallet integration and fingerprint login via Brella App"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited branch network restricted to four locations in Iowa (Osceola, Lamoni, Winterset)",
+    "No information provided about checking/savings account rates or fees on website",
+    "No mention of business banking, investment products, or credit card offerings",
+    "Community bank status may result in higher rates and fewer features compared to national banks",
+    "Limited geographic accessibility for customers outside Iowa service area"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 26944,
   "latitude": 41.0295240027036,
   "longitude": -93.779448966393,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Residents of Osceola, Lamoni, Winterset, and surrounding Iowa communities",
+    "Customers who value personal relationships and local decision-making over branch convenience",
+    "Homebuyers seeking mortgage lending with personalized service",
+    "Individuals needing immediate debit card replacement"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "American State Bank is best suited for residents within its four-branch Iowa service area who prioritize personalized community banking and relationship-based service over competitive rates and extensive product offerings. The primary caveat is the limited geographic footprint and lack of published rate information, requiring prospective customers to contact the bank directly and compare offerings with regional and national alternatives.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-24",
   "cities_served": [
@@ -116,8 +128,11 @@
     "data_period": "2023-present",
     "last_checked": "2026-03-24"
   },
-  "processing_status": "raw",
-  "quality_score": 9,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 12,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

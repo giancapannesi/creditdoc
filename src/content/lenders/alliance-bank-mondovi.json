@@ -1,15 +1,15 @@
 {
   "name": "Alliance Bank",
   "slug": "alliance-bank-mondovi",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Mondovi, WI. $258M in assets. 4 offices.",
-  "description_long": "Alliance Bank is a community bank located in Mondovi, WI, established in 1900. The bank holds approximately $258M in total assets and $210M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank serving Western Wisconsin with four locations offering checking, savings, loans, and investment services to agricultural and business customers.",
+  "description_long": "Alliance Bank is a regional community bank based in Western Wisconsin, operating since at least the time this profile was created. The bank maintains four physical branch locations in Mondovi, Osseo, Cochrane, and Bluff Siding, serving primarily agricultural and business banking needs in the region. The bank holds routing number 091803355 and provides traditional banking infrastructure to rural Wisconsin communities.\n\nAlliance Bank offers a standard suite of retail banking products including checking accounts, savings accounts, personal and business loans, certificate of deposit (CD) products, and investment services. The bank advertises competitive rates and provides digital banking access through 24-hour telephone and internet banking platforms. They partner with Shazam for debit card processing and the Brella App for digital card management, allowing customers to suspend cards immediately if needed. The bank also manages investment products tailored to individual customer goals.\n\nWhat distinguishes Alliance Bank is its hyperlocal focus on agricultural and business banking in Western Wisconsin, with particular emphasis on serving graduating high school seniors through annual $1,000 scholarship programs from five regional high schools. The bank operates the \"AB Perks\" loyalty program and maintains accessibility features for low-vision users on their website. Their small footprint of four branches allows for personalized service and relationship banking.\n\nAs a small regional bank, Alliance Bank's primary limitation is geographic reach\u2014customers are restricted to Western Wisconsin locations only. The website provides minimal detail on specific loan products, rates, or account fee structures, requiring customers to contact branches directly for detailed information. There is no indication of FDIC insurance messaging, mobile app details, or comprehensive digital banking features beyond basic internet and phone banking.",
   "logo_url": "",
   "website_url": "https://www.alliancebank.us",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts with multiple account options",
+    "Savings accounts and planning services",
+    "Personal and business loans",
+    "Certificate of Deposit (CD) products",
+    "Investment products and advisory services",
+    "24-hour telephone banking",
+    "Internet banking portal",
+    "Debit card services via Shazam network",
+    "Digital card management through Brella App",
+    "Lost or stolen debit card services",
+    "Debit card dispute resolution",
+    "Annual scholarship program ($1,000 awards)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1900",
-    "Local community bank with personal service",
-    "4 locations"
+    "Four conveniently located branches in Mondovi, Osseo, Cochrane, and Bluff Siding serving Western Wisconsin communities",
+    "24-hour telephone and internet banking access for existing account holders",
+    "Partnership with Shazam for debit card processing with immediate card suspension capability via Brella App",
+    "Annual $1,000 scholarship program for graduating seniors from five local high schools (Mondovi, C-FC, Osseo-Fairchild, Eleva-Strum, Gilmanton)",
+    "Full-service investment products and services available for wealth management and retirement planning",
+    "Specialized focus on agricultural and business banking needs specific to rural Wisconsin economy",
+    "AB Perks loyalty program offering benefits to customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to four physical locations in Western Wisconsin with no national or online-only banking presence",
+    "Website lacks specific information on account fees, minimum balance requirements, and interest rate details",
+    "No mention of mobile banking app, only basic telephone and internet banking options available",
+    "Minimal transparency about loan products, terms, APRs, or lending criteria on public website",
+    "No FDIC insurance messaging or deposit protection information visible on primary pages"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 12511,
   "latitude": 44.5659639940439,
   "longitude": -91.6710269878018,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural businesses and farmers in Western Wisconsin seeking relationship banking and specialized ag lending",
+    "Small business owners in the Mondovi, Osseo, Cochrane, and Bluff Siding areas needing local banking support",
+    "High school graduates from five regional schools seeking educational funding through their scholarship program",
+    "Local residents seeking traditional community bank services with in-person branch access"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Alliance Bank is best for agricultural producers, small business owners, and local residents in Western Wisconsin who value personalized relationship banking and prefer dealing with local branch staff. The primary caveat is geographic limitation\u2014this bank only serves four rural Wisconsin locations, making it unsuitable for customers outside this region or those seeking modern digital banking features like a dedicated mobile app.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "245 S Eau Claire St, Mondovi, WI 54755",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

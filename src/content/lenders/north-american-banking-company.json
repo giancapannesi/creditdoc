@@ -1,14 +1,14 @@
 {
   "name": "North American Banking Company",
   "slug": "north-american-banking-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Roseville, MN. $1461M in assets. 6 offices.",
-  "description_long": "North American Banking Company is a community bank located in Roseville, MN, established in 1998. The bank holds approximately $1461M in total assets and $1113M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank with 6 Twin Cities branches offering personal and business banking, mortgages, loans, and leasing programs with FDIC insurance.",
+  "description_long": "North American Banking Company is a locally owned and operated community bank headquartered in the Twin Cities, Minnesota area. The company operates six physical branches and emphasizes personalized, relationship-based banking rather than treating customers as transaction numbers. They have established a 15+ year track record serving both individual consumers and business clients in the Minnesota market.\n\nThe company offers a comprehensive range of banking products including personal checking and savings accounts, online and mobile banking, auto loans (as low as 7.00% APR), boat/trailer loans (8.50% APR), home equity lines of credit (7.25% APR), business loans, equipment leasing programs (financing 100% of purchase price), mortgage banking with rate quotes and online applications, and a free credit score service accessible through their digital platforms. They also provide fraud prevention resources and cybersecurity guidance to customers.\n\nNorth American Banking Company differentiates itself through its emphasis on community involvement, local business partnerships, and personalized service. The bank highlights case studies of business clients like Robinson Rubber (80-year-old company acquisition) and OS Hockey, demonstrating deep involvement in their local economy. They actively support nonprofits and community initiatives across the Twin Cities. The company uses Fiserv for online banking infrastructure and offers the Brella app for travel card enablement.\n\nAs a community bank, North American Banking Company is best suited for Twin Cities-area residents and businesses seeking relationship-based banking with local decision-making. However, customers outside the six-branch service area would need to rely entirely on digital banking, and the bank appears to lack the broader geographic reach or specialized fintech products offered by larger national institutions or digital banks.",
   "logo_url": "",
   "website_url": "https://www.nabankco.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Online and mobile banking platforms",
+    "Auto loans (7.00% APR minimum)",
+    "Boat and trailer loans (8.50% APR minimum)",
+    "Home equity lines of credit (7.25% APR minimum)",
+    "Business loans for expansion and operations",
+    "Equipment leasing (100% financing available)",
+    "Mortgage banking with rate quotes and online applications",
+    "Free credit score service and credit report access",
+    "Fraud prevention and cybersecurity resources",
+    "Debit/ATM card travel enablement via Brella app",
+    "MoneyPass ATM network access"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1998",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Six physical Twin Cities branch locations for in-person service",
+    "Competitive auto loan rates starting at 7.00% APR",
+    "Free credit score service available to all customers through online and mobile banking",
+    "Equipment leasing programs financing 100% of purchase price for businesses",
+    "Demonstrated 15+ year partnerships with local businesses (OS Hockey, Robinson Rubber, Raymond Auto Body)",
+    "Active community involvement with nonprofit support and volunteer programs"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to 6 Twin Cities branches\u2014poor accessibility for customers outside this geographic area",
+    "Relies on external Fiserv platform for online banking rather than proprietary system",
+    "No mention of checking account features, APY rates for savings/money market accounts, or CD rates on website",
+    "Limited digital banking innovation compared to neobanks or larger national banks",
+    "No information about minimum account balances, monthly fees, or account requirements"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34836,
   "latitude": 45.0086389971006,
   "longitude": -93.1585879871429,
@@ -93,12 +104,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Twin Cities-area small business owners needing equipment financing and personalized lending relationships",
+    "Minnesota consumers seeking community bank service with local decision-making authority",
+    "Business owners acquiring companies or expanding operations who value 15+ year banking partnerships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "North American Banking Company is best for Twin Cities-area residents and small-to-medium businesses seeking personalized community banking with local branch access and relationship managers. The primary caveat is severe geographic limitation\u2014customers outside the six Twin Cities branch footprint have no physical access and must rely entirely on Fiserv-powered digital banking, making this unsuitable for multi-state or remote customers.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "2230 Albert St N, Roseville, MN 55113",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }
