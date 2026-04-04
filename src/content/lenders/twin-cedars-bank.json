@@ -1,14 +1,14 @@
 {
   "name": "Twin Cedars Bank",
   "slug": "twin-cedars-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Bussey, IA. $122M in assets. 4 offices.",
-  "description_long": "Twin Cedars Bank is a community bank located in Bussey, IA, established in 1931. The bank holds approximately $122M in total assets and $105M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Twin Cedars Bank is a community bank offering personal, business, and agricultural banking services with a focus on wealth growth and relationship-based banking.",
+  "description_long": "Twin Cedars Bank operates as a full-service community bank with a primary focus on relationship banking and personalized financial solutions. Based on their website messaging, they position themselves around a \"growth mindset\" philosophy, emphasizing holistic wealth management and business development support. The bank is FDIC-insured, which means customer deposits are backed by federal government protection up to applicable limits.\n\nThe bank offers a comprehensive range of services across three main segments: personal banking, business & agricultural banking, and wealth management. For personal customers, they provide checking and savings accounts, mobile banking with deposit capabilities, ATM access through a nationwide network, credit cards, and Zelle money transfer integration. For business clients, they offer loans and lines of credit, payment processing, treasury management solutions, and specialized farm & ranch financing. Their wealth banking division provides financing solutions tailored to individual lifestyles and financial goals.\n\nTwin Cedars Bank distinguishes itself through emphasis on personalized banker relationships rather than purely digital banking. Their marketing focuses on \"bankers you can know and trust, available every day\" and highlights simplified account options designed around customer lifestyles. They also maintain a specific focus on agricultural and ranch lending, suggesting deep roots in rural or farm-based communities. The bank actively recruits staff and promotes a growth-oriented culture internally.\n\nAs a community bank, Twin Cedars likely operates with more localized decision-making and personalized service compared to national megabanks, though their website provides limited detail on specific rates, fees, or geographic service areas. The lack of detailed rate information or specific product comparisons on their homepage is typical for regional banks that prefer direct consultation. Their service appears standard for mid-sized community banks rather than offering innovative fintech features.",
   "logo_url": "",
   "website_url": "https://www.twincedars.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Mobile banking with mobile deposit",
+    "Online account access",
+    "Business loans and lines of credit",
+    "Farm & ranch loans",
+    "Credit cards",
+    "Merchant payment processing",
+    "Treasury management solutions",
+    "Wealth banking and financing",
+    "Zelle money transfer",
+    "ATM card access to nationwide ATM network"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1931",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Mobile banking with mobile deposit capability for convenience",
+    "Access to thousands of ATMs nationwide through secure ATM cards",
+    "Zelle money transfer integration for quick peer-to-peer payments",
+    "Specialized farm & ranch lending expertise and loan products",
+    "Emphasis on personal banker relationships and local decision-making",
+    "Comprehensive service offerings across personal, business, and wealth banking"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no specific interest rates or APRs for comparison",
+    "No fee schedules or account cost information disclosed online",
+    "Limited geographic service area details - unclear if they operate nationally or regionally only",
+    "No online application process visible; requires visiting locations or calling (641) 944-5314",
+    "Minimal detail on specific loan terms, credit requirements, or approval timelines"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1556,
   "latitude": 41.2053399957741,
   "longitude": -92.8863710131898,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural businesses and farm/ranch operators seeking specialized financing",
+    "Small to mid-sized business owners prioritizing personal banker relationships",
+    "Customers in Twin Cedars' service area seeking FDIC-insured community banking",
+    "Individuals wanting mobile banking convenience combined with local account management"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Twin Cedars Bank is best for agricultural operators, small business owners, and individuals in their service region who value personal banker relationships and community-based financial management. The main caveat is that their website provides minimal pricing and product detail, requiring direct contact with local branches to compare rates and fees against other financial institutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "402 Merrill St, Bussey, IA 50044",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

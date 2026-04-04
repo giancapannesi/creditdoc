@@ -1,14 +1,14 @@
 {
   "name": "Clinton Savings Bank",
   "slug": "clinton-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Clinton, MA. $743M in assets. 9 offices.",
-  "description_long": "Clinton Savings Bank is a community bank located in Clinton, MA, established in 1851. The bank holds approximately $743M in total assets and $571M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Clinton Savings Bank is a local community bank in Central Massachusetts offering FDIC-insured checking, savings, CDs, IRAs, mortgages, home equity loans, and auto loans with online and mobile banking.",
+  "description_long": "Clinton Savings Bank operates as a community-focused financial institution serving Central Massachusetts. The bank is FDIC-insured, meaning deposits are backed by the full faith and credit of the U.S. Government up to applicable limits. Based on their website presence and service offerings, they function as a traditional retail bank with both personal and business banking divisions.\n\nThe bank offers a comprehensive suite of deposit and lending products. On the deposit side, customers can access multiple checking account tiers (Total Access, Preferred, Basic, Less Stress, Get Real), savings options (Statement Savings, Save 4, eXPERIENCE Online Savings, Next Generation Savers), Certificates of Deposit (CDs), and Individual Retirement Accounts (IRAs). For borrowing, they provide home mortgage loans including first-time homebuyer programs, home equity loans and lines of credit (HELOCs), auto loans, personal loans, personal credit cards, and specialized products like Mass Save HEAT loans. They also offer surcharge-free ATM access and debit cards.\n\nClinton Savings Bank distinguishes itself through strong community involvement and local accessibility. The bank operates physical branches in Central Massachusetts, offers branch community rooms, maintains a high school banking program (Tahanto banking program with student accounts), and actively participates in community donations. They provide educational resources on borrowing, budgeting, life changes, retirement, and savings. Their digital services include free online banking, mobile banking, mobile pay capabilities, and CardValet debit card control tools, suggesting a modernization effort alongside traditional banking.\n\nThe primary caveat is that as a regional community bank, Clinton Savings Bank likely has geographic limitations\u2014their service area appears concentrated in Central Massachusetts. While they offer competitive rates (advertising 6.50% APR on home equity products), rates and terms would need to be compared against larger national banks and credit unions. Their website indicates they maintain business banking services, though specific business loan products beyond basic descriptions are not detailed. For customers seeking extensive branch networks or specialized financial services, national institutions may offer more options.",
   "logo_url": "",
   "website_url": "https://www.clintonsavings.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Total Access Checking, Preferred Checking, Basic Checking, Less Stress Checking, Get Real Checking accounts",
+    "Statement Savings, Save 4 Savings, eXPERIENCE Online Savings, Next Generation Savers accounts",
+    "Certificates of Deposit (CDs) with new Student Add-On CD product",
+    "Individual Retirement Accounts (IRAs)",
+    "Home Mortgage Loans with first-time homebuyer programs",
+    "Home Equity Loans and Home Equity Lines of Credit (HELOC)",
+    "Auto Loans",
+    "Personal Loans",
+    "Personal Credit Cards",
+    "Mass Save HEAT Loans",
+    "Online banking, mobile banking, and mobile pay services",
+    "Surcharge-free ATM access and personal debit cards with CardValet app"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1851",
-    "Local community bank with personal service",
-    "9 locations"
+    "FDIC-insured deposits with full U.S. government backing",
+    "Multiple checking account options tailored to different customer needs (Less Stress, Get Real, Total Access)",
+    "Surcharge-free ATM access network",
+    "Free online and mobile banking with CardValet debit card control app",
+    "Competitive home equity rates advertised at 6.50% APR",
+    "Educational resources covering borrowing, budgeting, retirement, and savings",
+    "Strong community involvement including high school banking programs and branch community rooms",
+    "Specialized loan programs including Mass Save HEAT loans and first-time homebuyer programs"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation as a regional bank primarily serving Central Massachusetts",
+    "Limited information on business banking products despite offering business services",
+    "Recent phishing email scam targeting customers suggests potential security communication gaps",
+    "No mention of rewards programs, cash back, or incentive structures for checking/savings accounts",
+    "Mobile and online banking features described generally without detail on functionality or innovation"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 90181,
   "latitude": 42.4176356487058,
   "longitude": -71.6840999162216,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Central Massachusetts residents seeking local community banking with physical branch access",
+    "Homeowners interested in home equity loans or lines of credit at competitive rates",
+    "High school students participating in financial literacy through the Tahanto banking program",
+    "Customers prioritizing FDIC insurance and government-backed deposit safety with straightforward banking products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Clinton Savings Bank is best for Central Massachusetts residents who value local community banking, physical branch relationships, and FDIC-insured products. The main caveat is geographic limitation\u2014this is a regional institution, so out-of-area customers or those requiring extensive branch networks should compare alternatives, and all product rates should be benchmarked against national and credit union competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "200 Church St, Clinton, MA 01510",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

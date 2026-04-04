@@ -1,14 +1,14 @@
 {
   "name": "The Peoples Bank",
   "slug": "the-peoples-bank-brownstown",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Brownstown, IN. $319M in assets. 4 offices.",
-  "description_long": "The Peoples Bank is a community bank located in Brownstown, IN, established in 1934. The bank holds approximately $319M in total assets and $295M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "The Peoples Bank is a community bank serving Jackson County, Indiana with three local branches offering mortgages, checking, savings, and other banking services.",
+  "description_long": "The Peoples Bank is a locally-owned community bank headquartered in Brownstown, Indiana, with NMLS# 406111. It has been serving Jackson County residents through three physical branch locations in Brownstown, Crothersville, and Seymour. The bank positions itself as a hybrid institution offering both big-bank conveniences and small-town service standards.\n\nThe Peoples Bank offers residential mortgages with 30-year fixed-rate options (currently advertised at 5.84% with 5.882% APR), quick pre-approvals, online loan applications, and rate-locking features. Beyond mortgages, the bank provides standard banking services including checking and savings accounts, access to ATMs, debit cards, online account access, and various financial resources. They operate a data center and maintain extended hours for both lobby and drive-up services.\n\nWhat distinguishes The Peoples Bank is its explicit commitment to local, personal service combined with modern banking conveniences. Their marketing emphasizes competitive rates paired with expert guidance, personal support throughout the lending process, and the ability to work with a trusted local institution rather than a national chain. The bank targets both first-time homebuyers and long-term homeowners, and offers tools like a \"Switch Kit\" to simplify account transfers.\n\nThe bank serves a specific geographic market (Jackson County, Indiana) rather than operating nationally or regionally. While they offer mortgages competitively, their primary distinction is community presence and personalized service rather than specialized mortgage products. Their stated minimum credit requirement of 650+ for mortgages is moderate but not exceptionally accessible for borrowers with poor credit.",
   "logo_url": "",
   "website_url": "http://www.banktpb.com",
   "affiliate_url": "",
@@ -23,23 +23,31 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "30-year fixed-rate mortgages with rate-locking",
+    "Mortgage pre-approvals and online applications",
+    "Checking and savings accounts",
+    "Debit cards with 24/7 PIN reset and fraud reporting",
+    "Online account access and login enrollment",
+    "Loan calculators and financial resources",
+    "Wire transfers and money handling",
+    "Multiple physical branch locations with drive-up service",
+    "Personal financial guidance and mortgage counseling"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1934",
-    "Local community bank with personal service",
-    "4 locations"
+    "Three convenient local branch locations in Jackson County with extended Saturday hours",
+    "Competitive 30-year fixed mortgage rates with rate-locking available",
+    "Quick pre-approval process for mortgage applicants",
+    "Online loan application and account access available",
+    "Personal support throughout the mortgage lending process",
+    "FDIC-insured deposits as a federally-regulated bank",
+    "Multiple customer service phone lines and 24/7 debit card support"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area restricted to Jackson County, Indiana only",
+    "Mortgage minimum credit score requirement of 650 excludes borrowers with poor credit",
+    "No indication of specialized products like FHA, VA, or reverse mortgages despite being a full-service bank",
+    "Website lacks transparency on fee structures, APY rates for savings products, or CD terms",
+    "Small institution with fewer resources and technology infrastructure than national banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +59,7 @@
   "states_served": [
     "IN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5779,
   "latitude": 38.8794670155642,
   "longitude": -86.042068966684,
@@ -93,12 +101,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Jackson County, Indiana residents seeking local banking relationships and mortgages",
+    "First-time homebuyers with moderate credit scores (650+) who value personal service",
+    "Long-term homeowners in the area looking for stable, predictable mortgage products",
+    "Community members preferring to bank locally rather than with national institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Peoples Bank is best for Jackson County, Indiana residents seeking a community-focused banking relationship with competitive mortgages and personal service. The main caveat is their strict geographic limitation to one county and their minimum 650 credit score requirement, which excludes potential borrowers outside their service area or with lower credit profiles.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +115,11 @@
   ],
   "phone": "",
   "address": "100 N Main St, Brownstown, IN 47220",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

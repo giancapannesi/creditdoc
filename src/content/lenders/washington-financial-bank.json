@@ -1,14 +1,14 @@
 {
   "name": "Washington Financial Bank",
   "slug": "washington-financial-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Washington, PA. $1474M in assets. 10 offices.",
-  "description_long": "Washington Financial Bank is a community bank located in Washington, PA, established in 1899. The bank holds approximately $1474M in total assets and $1263M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal checking, savings, mortgages, and online banking with a focus on relationship-based service and accessibility.",
+  "description_long": "Washington Financial Bank is a regional bank that emphasizes personal relationship banking with integrity and transparency as core values. The bank operates with FDIC insurance backing, providing customers with federal deposit protection. Based on their website messaging, they position themselves as \"The Bank That Gets You,\" suggesting a customer-centric approach to traditional banking services.\n\nThe bank offers a comprehensive suite of personal banking products including checking accounts, savings accounts, certificates of deposit (CDs), debit cards, home equity loans, mortgages, and youth checking accounts for ages 13-15. Their online and mobile banking platform allows customers to manage accounts remotely, and they offer Zelle for peer-to-peer transfers. They highlight competitive CD rates and a savings product called \"Rebellion Savings\" with no fees.\n\nWashington Financial Bank distinguishes itself through several accessibility and service features: they maintain AudioEye accessibility tools on their website, offer dedicated customer support lines, provide fraud and online security resources, and explicitly communicate their commitment to never requesting personal financial information via unsolicited calls. Their youth banking product includes ATM fee reimbursements and financial education positioning.\n\nAs a regional bank, Washington Financial appears to serve primarily personal banking needs rather than offering extensive business or investment services beyond what's mentioned. While they present as community-focused and relationship-oriented, the website content is limited in depth regarding specific rates, fees, minimum balances, or comprehensive service details. Their mortgage services are promoted but lack specifics about loan types, rates, or approval criteria.",
   "logo_url": "",
   "website_url": "https://www.washfin.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal Checking Accounts",
+    "Personal Savings Accounts (Rebellion Savings)",
+    "Certificates of Deposit (CDs)",
+    "Debit Cards",
+    "Online and Mobile Banking",
+    "Mortgage Loans (home purchase and refinancing)",
+    "Home Equity Loans",
+    "Youth Checking Accounts (ages 13-15)",
+    "Zelle money transfer service",
+    "Fraud and Online Security resources",
+    "Personal Online Banking enrollment",
+    "Business Online Banking enrollment"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1899",
-    "Local community bank with personal service",
-    "10 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "No-fee Rebellion Savings account with emphasis on competitive rates",
+    "Youth Checking Account designed for ages 13-15 with ATM fee reimbursements and Zelle access",
+    "Accessible website with AudioEye toolbar and accessibility optimization",
+    "Online and mobile banking available for account management anytime, anywhere",
+    "Home Equity Loan products available for debt consolidation and home improvement",
+    "Explicit security messaging and fraud prevention resources prominently displayed"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific fee schedules, minimum balance requirements, or exact interest rates",
+    "Limited information about business banking services despite having a business login option",
+    "No details provided about mortgage loan types, rates, or approval timelines",
+    "Regional bank status may limit physical branch accessibility for some customers",
+    "Minimal transparency about CD terms, rates, or laddering options"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "PA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29520,
   "latitude": 40.1694919961363,
   "longitude": -80.2454749775331,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking FDIC-insured deposit products with relationship-based service",
+    "First-time homebuyers interested in mortgage products with personal guidance",
+    "Parents wanting to teach financial literacy to teenagers through youth banking accounts",
+    "Homeowners with equity seeking consolidation loans or home improvement financing"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Washington Financial Bank is best for customers who value relationship-based banking and community connection over digital-only or discount banking models. The main caveat is that critical information like specific rates, fees, and loan terms are not transparently displayed on their website, requiring direct contact to compare offers with competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "77 S Main St, Washington, PA 15301",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

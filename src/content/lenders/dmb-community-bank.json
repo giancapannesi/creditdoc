@@ -1,14 +1,14 @@
 {
   "name": "Dmb Community Bank",
   "slug": "dmb-community-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Madison, WI. $827M in assets. 2 offices.",
-  "description_long": "Dmb Community Bank is a community bank located in Madison, WI, established in 1922. The bank holds approximately $827M in total assets and $577M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "DMB Community Bank is a locally owned bank serving personal and commercial clients since 1922, offering checking, savings, CDs, IRAs, mortgages, and digital banking services.",
+  "description_long": "DMB Community Bank has operated as a community-focused financial institution since 1922, establishing itself as a locally owned and operated bank committed to personalized service. The bank explicitly positions itself around the philosophy that 'banking with us is doing business with people you know and who know you,' emphasizing relationship-based banking rather than purely transactional services.\n\nThe bank offers a comprehensive range of financial products for both personal and commercial customers. Personal banking services include checking accounts (simple and interest-bearing options), multiple savings account types, Certificates of Deposit (CDs), Individual Retirement Accounts (IRAs), and mortgage loan options. Commercial clients can access business checking accounts, business savings accounts, CDs, commercial online banking with optional cash management services, and specialized treasury management including ICS/CDARS programs for FDIC-secured large deposits. All customers have access to free online banking, mobile banking, telephone banking, and card services.\n\nDMB distinguishes itself through its community-banking model and relationship-focused approach rather than through cutting-edge fintech innovation. The bank actively promotes current deposit rates and 'New Money Specials' (such as 6-month CDs at 3.05% APY and 12-month CDs at 2.85% APY as of 12/11/2025), suggesting competitive rate positioning. They offer personalized financial guidance through business advisors and emphasize rapid approval processes. The bank also provides educational resources on electronic banking security and convenient digital service options.\n\nDMB Community Bank operates as a traditional community bank with standard banking services but without the breadth of specialized products or aggressive marketing seen at larger institutions. While the website demonstrates solid fundamentals and competitive CD rates, there is limited transparency regarding checking/savings account rates, account fees, minimum balances beyond the CD specials, and specific mortgage terms. The bank's strength lies in personalized service for local customers rather than innovative financial products or the most competitive rates across all products.",
   "logo_url": "",
   "website_url": "https://www.deforestbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (simple and interest-bearing options)",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Mortgage loans (home purchase and related options)",
+    "Commercial checking accounts",
+    "Commercial savings accounts",
+    "Commercial online banking with optional cash management services",
+    "Treasury management and ICS/CDARS (FDIC-secured large deposit options)",
+    "Free online banking platform",
+    "Mobile banking app",
+    "Telephone banking and card services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1922",
-    "Local community bank with personal service",
-    "2 locations"
+    "Competitive CD rates: 6-month CDs at 3.05% APY and 12-month CDs at 2.85% APY (as of 12/11/2025)",
+    "Free online banking, mobile banking, and telephone banking for all customers",
+    "FDIC-secured large deposit options through ICS/CDARS programs for commercial clients",
+    "Community-focused model with stated emphasis on personalized service and relationship banking since 1922",
+    "Comprehensive product lineup including checking, savings, CDs, IRAs, mortgages, and commercial cash management services",
+    "Online mortgage application for convenience",
+    "Business advisors available for commercial clients with rapid approval process"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display checking or savings account APY rates, making rate comparison difficult",
+    "Limited transparency on account fees, minimum balance requirements (except for CD specials requiring $100,000 new funds)",
+    "CD early withdrawal penalties mentioned but not specified in detail",
+    "Mortgage rates and terms not disclosed on website, requiring direct contact",
+    "No mention of financial products like personal loans, credit cards, or investment services"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14769,
   "latitude": 43.143237015765,
   "longitude": -89.298595008114,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local customers seeking relationship-based banking with personalized service",
+    "Savers with $100,000+ in new funds looking for competitive CD rates",
+    "Small business owners needing commercial checking, savings, and cash management services",
+    "Customers preferring community banks over large national institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "DMB Community Bank is best for local customers who prioritize personalized service and relationship banking over maximum rates or innovative fintech features. The main caveat is that the website lacks transparency on checking/savings rates and most loan terms, requiring customers to contact the bank directly for detailed product information and rate comparison.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "10 Terrace Ct, Madison, WI 53718",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }
