@@ -1,14 +1,14 @@
 {
   "name": "Ssb Bank",
   "slug": "ssb-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Pittsburgh, PA. $368M in assets. 3 offices.",
-  "description_long": "Ssb Bank is a community bank located in Pittsburgh, PA, established in 1922. The bank holds approximately $368M in total assets and $319M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank serving Pittsburgh, PA with three branch locations offering checking, savings, mortgages, and deposit products with competitive rates.",
+  "description_long": "SSB Bank is a community-focused bank based in Pittsburgh, Pennsylvania, with over 100 years of history serving the local area. The bank operates three branch locations: Perry Highway, California Avenue, and the recently opened Beechwood Boulevard branch in the Greenfield neighborhood. As a traditional banking institution, SSB Bank positions itself as a neighborhood lender committed to making customers feel at home in their community.\n\nSSB Bank offers a full range of retail banking services including personal checking and savings accounts, certificates of deposit, consumer mortgages, home equity lines of credit (HELOCs), credit cards, and online banking access. Their deposit products feature branded options like Kasasa Cash and Kasasa Saver accounts, with promotional rates advertised on their website (Kasasa Cash at 4.59% APY and CDs ranging from 3.75% to 4.03% APY as of the website content date). They also offer business banking services and have established themselves as a mortgage lender focused on the local Pittsburgh market.\n\nSSB Bank differentiates itself through genuine community integration and expansion strategy. The bank recently opened a new branch in Greenfield, Squirrel Hill, and Hazelwood areas after expanding to McCandless in 2017, demonstrating deliberate geographic growth within the Pittsburgh region. They maintain active community engagement, as evidenced by their blog content addressing local financial topics like updated FHFA loan limits and community awareness initiatives. The bank explicitly markets itself as staffed by community members who understand local needs.\n\nAs a traditional community bank, SSB Bank serves customers seeking personal banking relationships with local decision-making. However, customers should note that as a regional institution, they lack the digital convenience features and product breadth of larger national banks or online-only banks. Their service area is geographically limited to the Pittsburgh region, making them unsuitable for those seeking nationwide branch access or those outside their service territory.",
   "logo_url": "",
   "website_url": "https://www.ssbpgh.com",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Kasasa Checking)",
+    "Savings accounts (Kasasa Saver and America's Finest Saver)",
+    "Certificates of Deposit (9-month and 61-month terms)",
+    "Consumer mortgages and home purchase financing",
+    "Home equity lines of credit (HELOCs)",
+    "Credit cards",
+    "Business banking and business checking",
+    "Online banking access",
+    "Check reordering",
+    "Mortgage and HELOC products",
+    "Community lending for homeownership"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1922",
-    "Local community bank with personal service",
-    "3 locations"
+    "Competitive high-yield savings rates (Kasasa Cash at 4.59% APY and Kasasa Saver at 3.20% APY)",
+    "Strong CD rates with 61-month CD offering 4.03% APY",
+    "Three conveniently located Pittsburgh-area branches with recent expansion to Greenfield neighborhood",
+    "Full-service community bank offering mortgages, HELOCs, business banking, and consumer lending",
+    "Over 100 years of established history and community presence in Pittsburgh",
+    "Online banking access for personal and business accounts",
+    "Active fraud monitoring and customer protection measures with dedicated phone verification support"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area restricted to Pittsburgh region with only three branch locations",
+    "No mention of mobile banking app or advanced digital banking features on website",
+    "No information on minimum deposit requirements or account maintenance fees",
+    "Limited product diversification compared to larger national banks",
+    "Relatively small institution may have limited lending capacity for larger business or real estate deals"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "PA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 30431,
   "latitude": 40.5630930096671,
   "longitude": -80.0385400373668,
@@ -93,12 +103,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Pittsburgh-area residents seeking personalized community banking with local branch relationships",
+    "Homebuyers in the Pittsburgh market looking for mortgage services from a local lender",
+    "Small business owners in Pittsburgh wanting relationship-based banking services",
+    "Savers looking for competitive rates on deposit products with FDIC insurance protection"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "SSB Bank is best for Pittsburgh-area residents and small business owners seeking a traditional community banking relationship with personalized service and competitive deposit rates. The main caveat is that the bank's service area is geographically limited to the Pittsburgh region with only three branches, making it unsuitable for customers outside this area or those requiring nationwide branch access.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "8700 Perry Hwy, Pittsburgh, PA 15237",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

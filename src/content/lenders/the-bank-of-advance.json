@@ -1,15 +1,15 @@
 {
   "name": "The Bank Of Advance",
   "slug": "the-bank-of-advance",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Advance, MO. $526M in assets. 7 offices.",
-  "description_long": "The Bank Of Advance is a community bank located in Advance, MO, established in 1902. The bank holds approximately $526M in total assets and $459M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering checking, savings, debit cards, mortgages, and business banking with fraud protection and online account management.",
+  "description_long": "Bank of Advance is a traditional FDIC-insured bank that operates with backing from the full faith and credit of the U.S. Government. The institution serves both personal and business customers through a network of local branches and digital banking channels. Based on the website content, the bank has been established long enough to develop a mature product suite and security infrastructure.\n\nThe bank's core offerings include personal and business checking/savings accounts, Mastercard debit cards, home mortgages, and a Kids Club savings program. Their digital services feature online and mobile banking platforms with account management tools. The debit card program includes features like check reordering, loan payment processing, and card management capabilities. For business customers, they explicitly market accounts designed for active business use.\n\nBank of Advance distinguishes itself through advanced fraud protection technology, specifically integration with SHAZAM Falcon Fraud Manager for real-time transaction monitoring. Their Debit Card Management system allows customers to set customized alerts by transaction amount, foreign location, or online purchase type. The card pause feature enables temporary blocking of cards without affecting previous transactions, and customers can submit travel notices to maintain card functionality while traveling. Optional overdraft protection is available as part of their Bounce Protection service.\n\nThe bank represents a conventional banking option suitable for customers seeking FDIC-protected deposits and traditional banking services. However, the website content provided is limited to debit card, online banking, and mortgage information\u2014insufficient to comprehensively assess all products, fee structures, interest rates, or customer service quality. The website appears functional but dated in design, and no information is available regarding business loan products, credit cards, investment services, or customer support ratings.",
   "logo_url": "",
   "website_url": "https://www.bankofadvance.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business checking and savings accounts",
+    "Mastercard debit cards with multiple design options",
+    "Debit Card Management with customizable purchase alerts",
+    "Card pause feature for lost or stolen cards",
+    "Travel notice submission for debit cards",
+    "Overdraft protection (Bounce Protection) for debit cards",
+    "Home mortgages",
+    "Online and mobile banking platforms",
+    "Loan payment processing (online with debit card or bank account)",
+    "Check reordering service",
+    "Kids Club savings program"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1902",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits backed by the U.S. Government",
+    "Advanced fraud detection through SHAZAM Falcon Fraud Manager with real-time text alerts",
+    "Debit Card Management with customizable alerts by transaction amount, location, and purchase type",
+    "Card pause feature allowing temporary blocking without affecting previous transactions",
+    "Travel notice submission to prevent card blocks while traveling",
+    "Optional overdraft protection (Bounce Protection) for debit cards with no fee unless used",
+    "Multiple debit card design options available for personalization"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited information available on the website regarding fee schedules, interest rates, and full product offerings",
+    "Overdraft protection carries a $24.00 per transaction fee when activated and used",
+    "Website design appears dated and navigation could be more intuitive for discovering all services",
+    "Phone-based activation requirement for debit cards (not available through online banking)",
+    "No information provided about customer support responsiveness or satisfaction ratings"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9369,
   "latitude": 37.1039948450792,
   "longitude": -89.9117898233776,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking FDIC-protected checking and savings accounts with established banking infrastructure",
+    "Small business owners looking for dedicated business checking accounts with local branch access",
+    "Homebuyers interested in working with a local bank for mortgage financing",
+    "Customers prioritizing advanced fraud detection and real-time transaction monitoring on debit cards"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Advance is best for traditional banking customers seeking FDIC-insured deposits and fraud-protected debit cards at a brick-and-mortar bank. The main caveat is that the website provides limited transparency on fees, interest rates, and the full scope of services offered, making it difficult to fully assess value without contacting the bank directly.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,10 @@
   ],
   "phone": "",
   "address": "105 E Gabriel St, Advance, MO 63730",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Commerce Bank",
   "slug": "commerce-bank-laredo",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Laredo, TX. $737M in assets. 3 offices.",
-  "description_long": "Commerce Bank is a community bank located in Laredo, TX, established in 1982. The bank holds approximately $737M in total assets and $658M in deposits. It operates 3 office locations. Designated as a Minority Board and Serving Hispanic Community. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "IBC Bank is a regional FDIC-insured bank serving personal, business, and international customers across Oklahoma and Texas with checking, savings, lending, and investment services.",
+  "description_long": "International Bancshares Corporation (NASDAQ: IBOC) operates IBC Bank, a full-service regional bank headquartered in Laredo, Texas, with a presence in Oklahoma and Texas. The bank has been actively managing shareholder returns, with recent dividend increases of 4.3% announced in early 2026, indicating established financial stability and shareholder-focused operations.\n\nIBC Bank offers a comprehensive suite of banking products across personal, business, and international segments. Personal services include multiple checking account tiers (Free Checking, Rite Checking, Regular Checking, Interest Checking), savings accounts, certificates of deposit, IRAs, debit cards, credit cards, online and mobile banking, and overdraft courtesy. Business customers can access commercial checking accounts, business savings, small business loans, merchant services, treasury management tools including remote deposit and lockbox services, and investment products such as 401(k)s, pension plans, and surety bonds. The bank also provides insurance products including workers compensation, garage insurance, property insurance, and Medicare supplement insurance through its IBC Insurance Agency.\n\nIBC Bank distinguishes itself through specialized services for specific customer segments, particularly international banking with foreign national loan programs, currency exchange services, and international checking account options. The bank maintains FDIC insurance backing and offers integrated online business banking with deposit express capabilities. Their positioning as both a personal and business banking partner with international services is less common among regional banks of similar size.\n\nThe bank's strength lies in its full-service model and regional stability, though as a regional institution, it may lack the branch density and product innovation of national megabanks. The website emphasizes financial education through Practical Money Skills resources, suggesting consumer-focused values. However, specific details about competitive rates, minimum deposit requirements, and fee structures are not disclosed on the public website.",
   "logo_url": "",
   "website_url": "https://www.ibc.com",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Free Checking accounts",
+    "Interest-bearing checking accounts",
+    "Savings accounts and certificates of deposit",
+    "Individual Retirement Accounts (IRAs)",
+    "Debit cards and credit cards",
+    "Online and mobile banking",
+    "Small business loans",
+    "Merchant services and payment processing",
+    "Remote deposit capture (IBC Deposit Express)",
+    "Lockbox services",
+    "Currency exchange",
+    "Foreign national loan programs",
+    "401(k) plans and pension plan administration",
+    "Business insurance including workers compensation and property insurance"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1982",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits backed by the full faith and credit of the U.S. Government",
+    "Multiple checking account options with tiered benefits including Free Checking and Interest Checking variants",
+    "Comprehensive business banking including merchant services, treasury management, and remote deposit capabilities",
+    "International banking services including foreign national loan programs and currency exchange",
+    "Integrated insurance offerings through IBC Insurance Agency covering business and personal needs",
+    "Online and mobile banking platforms with deposit express remote deposit services",
+    "Established public company (NASDAQ: IBOC) with consistent dividend increases showing financial stability",
+    "Financial education resources provided free through Practical Money Skills partnership"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Oklahoma and Texas, reducing accessibility for customers outside service areas",
+    "Website provides limited transparency on account fees, minimum balance requirements, and interest rate specifics",
+    "As a regional bank, likely lacks the extensive ATM network and branch density of national competitors",
+    "Small business loan details and qualification criteria not clearly outlined on public website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 23772,
   "latitude": 27.5551355910835,
   "longitude": -99.5032234611446,
@@ -93,12 +106,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Business owners in Texas and Oklahoma seeking integrated banking and insurance services",
+    "International customers or those needing foreign national lending and currency exchange services",
+    "Customers prioritizing relationship banking with a stable, publicly-traded regional institution",
+    "Small businesses requiring treasury management and merchant services in the Southwest"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "IBC Bank is best for personal and business customers in Texas and Oklahoma seeking a stable, full-service regional bank with integrated lending, investment, and insurance capabilities. The main caveat is geographic limitation to two states and lack of transparent rate and fee information online, requiring direct contact for specific product details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,10 @@
   ],
   "phone": "",
   "address": "5800 San Dario Ave, Laredo, TX 78041",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

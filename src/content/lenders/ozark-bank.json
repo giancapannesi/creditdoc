@@ -1,14 +1,14 @@
 {
   "name": "Ozark Bank",
   "slug": "ozark-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Ozark, MO. $347M in assets. 4 offices.",
-  "description_long": "Ozark Bank is a community bank located in Ozark, MO, established in 1906. The bank holds approximately $347M in total assets and $278M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Ozark Bank is a community-focused, independent bank chartered in 1906 serving Christian County and surrounding areas with traditional banking and lending services.",
+  "description_long": "Ozark Bank was founded in 1906 by local businessmen with a vision to improve the Ozark and Christian County communities by providing accessible banking services and loans. The bank has maintained its independence for over 118 years and remains the only home-owned bank in Christian County, emphasizing consistent commitment to community relationships and local decision-making. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing account protection for depositors.\n\nOzark Bank offers a full range of personal and business banking services including checking accounts, savings products, online banking with mobile capabilities, debit cards with alert features, credit cards, bill pay functionality, and mortgage lending options. The bank provides ATM/branch locator services and maintains physical locations throughout the region. Online and mobile banking allows customers to transfer money, pay bills, and deposit checks remotely. The bank also offers financial calculators to assist customers with budgeting, retirement planning, and payment estimation.\n\nOzark Bank distinguishes itself through its deeply rooted community focus and local ownership model. The bank prioritizes getting to know customers by name and emphasizes staff longevity and stability, with employees who can provide personalized service. Their active involvement in community organizations including the Chamber of Commerce, Sertoma, Relay for Life, and Care to Learn reflects a commitment to Christian County residents beyond banking services. The bank markets itself as a hometown institution with over a century of stability.\n\nAs a traditional community bank, Ozark Bank serves customers who value local decision-making and personal relationships over digital-first banking. However, the website provides limited specific information about deposit rates, loan terms, credit card features, or competitive advantages. Customers should compare their specific account offerings and rates against regional and national alternatives. The bank's geographic focus on Christian County may limit convenience for non-local customers.",
   "logo_url": "",
   "website_url": "http://www.ozarkbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Business checking accounts",
+    "Online banking with mobile app access",
+    "Bill pay services",
+    "Mobile check deposit",
+    "Money transfer between accounts",
+    "Debit cards with alert notifications",
+    "Credit cards with card benefits",
+    "Mortgage loans for home purchase and refinancing",
+    "Business lending services",
+    "ATM access and branch locations",
+    "Financial calculators for budgeting and retirement planning"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1906",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits backed by U.S. Government protection",
+    "Only remaining home-owned bank in Christian County with 118+ years of continuous operation",
+    "Mobile and online banking with bill pay, money transfer, and mobile check deposit capabilities",
+    "Local decision-making and staff stability with employees focused on personal customer relationships",
+    "Active community involvement through Chamber of Commerce, Sertoma, Relay for Life, and Care to Learn sponsorships",
+    "Mortgage lending services with focus on loans that make sense for borrowers and the bank",
+    "Multiple physical branch and ATM locations throughout the region with locator tool"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area focused primarily on Christian County and surrounding communities in Missouri",
+    "Website lacks specific details on deposit rates, APYs, loan rates, or credit card terms for rate comparison",
+    "No mention of specialized digital banking features, investment services, or advanced fintech capabilities",
+    "Small regional bank may have limited product options compared to larger national banks",
+    "Website does not provide information about minimum balance requirements, monthly fees, or account eligibility criteria"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1654,
   "latitude": 37.0201730108914,
   "longitude": -93.2042499972527,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Christian County and Ozark area residents seeking a local, community-focused banking relationship",
+    "Small business owners and entrepreneurs in the region needing local lending and personalized service",
+    "Customers who value face-to-face banking relationships and staff stability over purely digital experiences",
+    "Home buyers in the region seeking mortgage financing from a local lender with community roots"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Ozark Bank is best for customers in Christian County and surrounding areas who prioritize local ownership, personal relationships, and community involvement in their banking decisions. The main caveat is that as a small regional community bank, it lacks the breadth of digital features, competitive rates transparency, and geographic convenience that larger national banks and online-focused institutions offer\u2014customers should verify specific rates and terms directly before comparing.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "106 N 2Nd Ave, Ozark, MO 65721",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Lookout",
   "slug": "lookout",
-  "category": "payday-alternatives",
+  "category": "credit-monitoring",
   "subcategories": [
     "credit-union",
     "fdic-equivalent",
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "Federal Credit Union in , . Low-income designated. NCUA insured. 7 locations.",
-  "description_long": "Lookout is a federal credit union serving members in , , established in 1952. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) — small, affordable loans designed to replace predatory payday lending. The credit union operates 7 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "Lookout is an enterprise mobile security and threat intelligence platform that protects organizations from AI-fueled credential theft, phishing, and mobile endpoint threats using data from 220M+ devices.",
+  "description_long": "Lookout is a cybersecurity company focused on mobile threat detection and enterprise security. The company operates as a B2B platform provider, not a consumer finance product, offering mobile endpoint protection and threat intelligence services to businesses and organizations. Their core business involves monitoring mobile devices for security threats, detecting credential theft, and providing real-time threat intelligence to corporate security teams and SOCs (Security Operations Centers).\n\nLookout's primary offerings include mobile endpoint detection and response (EDR), AI-driven threat intelligence, mobile phishing assessment tools, and protection against advanced threats like the DarkSword iOS exploit chain. They provide executive impersonation and smishing (SMS phishing) attack protection, along with SMS phishing assessment tests that measure user vulnerability to mobile-delivered social engineering. Their platform aggregates telemetry from over 220 million devices globally to detect patterns and anomalies.\n\nThe company distinguishes itself through an \"AI-first approach\" to cybersecurity, positioning artificial intelligence at the foundation of threat detection rather than as an afterthought. They claim to bridge the gap between compliance policies and real-world mobile risk, offering intelligence \"built on the world's largest mobile data set.\" Lookout emphasizes early detection of emerging threats like Shadow AI and credential theft before they disrupt business operations.\n\nHowever, Lookout is fundamentally a B2B enterprise security platform\u2014not a consumer finance product. The current CreditDoc categorization as \"payday-alternatives\" is entirely incorrect. This company has no connection to consumer lending, credit building, financial assistance, or any consumer finance service. It should be recategorized as a corporate/enterprise security tool, which does not fit CreditDoc's consumer finance framework.",
   "logo_url": "",
   "website_url": "https://www.lookout.com/",
   "affiliate_url": "",
@@ -24,25 +24,31 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)",
-    "Payday Alternative Loans (PALs)"
+    "Mobile endpoint detection and response (EDR)",
+    "AI-driven mobile threat intelligence and preventive analysis",
+    "Executive impersonation attack detection and mitigation",
+    "SMS phishing (smishing) assessment testing",
+    "Mobile phishing detection and user exposure measurement",
+    "Real-time threat discovery and reporting on emerging threats",
+    "Mobile device telemetry analysis from 220M+ devices",
+    "Modern kill chain visibility and disruption capabilities",
+    "Shadow AI detection and business risk mitigation",
+    "Compliance gap analysis between policy and real-world mobile risk",
+    "Threat Lab research and vulnerability reporting"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1952",
-    "Member-owned cooperative",
-    "Low-income designated — may offer Payday Alternative Loans (PALs)"
+    "Analyzes phishing threats across 220M+ device dataset for comprehensive mobile threat intelligence",
+    "Provides AI-first threat detection that learns from vast data patterns to identify missed anomalies",
+    "Offers free SMS phishing assessment test to measure organizational exposure to mobile social engineering",
+    "Proactive executive impersonation protection to prevent credential-sharing with attackers",
+    "Real-time visibility into modern kill chain from recon through data theft and extortion",
+    "Mobile EDR platform designed to protect employee identities and corporate data",
+    "Reports that 25% of mobile devices were phished in 2023, providing actionable threat context"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Enterprise/B2B platform with no consumer-facing products or services for individual users",
+    "Pricing and product tiers not disclosed on website; requires demo request for information",
+    "Positioned as mitigation tool, not prevention\u2014implies some threats will still occur despite their platform"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +58,7 @@
   "founded_year": 1952,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "7776",
   "published": true,
   "review_status": "published",
@@ -92,20 +98,22 @@
     "ease_of_use": 3.8
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Payday loan alternatives (PALs)"
+    "Large enterprises with significant mobile device management and security concerns",
+    "Organizations with SOCs (Security Operations Centers) needing real-time threat visibility",
+    "Companies subject to compliance audits requiring proof of mobile security posture"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Lookout is an enterprise cybersecurity platform designed exclusively for organizational security teams and corporate buyers\u2014not consumers. This company is fundamentally miscategorized on CreditDoc and should be removed or recategorized outside the consumer finance framework, as it provides no financial products, credit services, lending, or consumer assistance of any kind.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
-  "website_needs_review": true
+  "website_needs_review": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

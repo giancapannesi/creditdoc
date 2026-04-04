@@ -1,14 +1,14 @@
 {
   "name": "Schertz Bank & Trust",
   "slug": "schertz-bank-trust",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Schertz, TX. $770M in assets. 6 offices.",
-  "description_long": "Schertz Bank & Trust is a community bank located in Schertz, TX, established in 1913. The bank holds approximately $770M in total assets and $658M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank in Schertz, Texas offering personal and business checking, savings, lending, and digital banking services with FDIC insurance protection.",
+  "description_long": "Schertz Bank & Trust is a regional bank headquartered in Schertz, Texas, serving both personal and business customers in their local market. The bank provides comprehensive deposit products including personal checking, savings accounts, and CDs/IRAs, along with business banking solutions designed for small to mid-sized enterprises. Their lending division offers consumer products such as home mortgages, home improvement loans, and personal loans, plus commercial lending including SBA-guaranteed loans, construction financing, and commercial real estate lending. Schertz Bank & Trust emphasizes digital convenience through online banking, mobile banking with deposit capture, bill pay, text banking, and integration with Zelle\u00ae for peer-to-peer transfers. What distinguishes them is their combination of community bank personalization with modern digital tools, FDIC insurance through IntraFi network participation (ICS\u00ae and CDARS\u00ae for aggregate coverage), and specialized lending products like interim/permanent construction loans across both consumer and commercial segments. They offer CardHub\u00ae for debit and credit card management with fraud protection and spending limits, plus CardValet\u00ae for enhanced card controls. The bank maintains physical locations in their service area with stated hours and provides traditional services like safe deposit boxes, wire transfers, and check reordering alongside contemporary fintech integrations. For consumers and businesses seeking a traditional bank with digital capabilities, Schertz Bank & Trust represents a mid-sized institution with competitive rates and personalized service, though their geographic limitation to Texas and emphasis on relationship banking may not suit customers seeking purely online-only banking.",
   "logo_url": "",
   "website_url": "https://www.schertzbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts and CDs/IRAs",
+    "Home mortgages and home improvement loans",
+    "Personal loans and interim/permanent construction loans",
+    "Business checking and savings accounts",
+    "SBA-guaranteed loans and commercial real estate lending",
+    "Commercial loans and lines of credit",
+    "Online banking and bill pay",
+    "Mobile banking with mobile deposit",
+    "Zelle\u00ae peer-to-peer transfers",
+    "CardHub\u00ae debit and credit card management",
+    "Safe deposit boxes and wire transfers"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1913",
-    "Local community bank with personal service",
-    "6 locations"
+    "Offers CDARS\u00ae and ICS\u00ae through IntraFi network for access to millions in aggregate FDIC insurance across multiple banks",
+    "Comprehensive lending products including SBA-guaranteed loans, construction financing, and commercial real estate loans",
+    "Modern digital solutions including mobile deposit, mobile banking, text banking, and Zelle\u00ae integration",
+    "CardHub\u00ae and CardValet\u00ae mobile app features for fraud protection, spending limits, and card controls",
+    "Both personal and business checking with DirectPLUS Checking promotional offer ($300 incentive)",
+    "Online education center providing security tips and financial literacy resources",
+    "ACH origination and merchant services for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to Texas service area restricts accessibility for out-of-state customers",
+    "Website lacks specific information about credit card terms, APR rates, or rewards programs",
+    "No mention of investment products, wealth management, or advisory services beyond basic banking",
+    "Limited transparency on checking account fees, minimum balance requirements, or CD rate structures on homepage",
+    "No indication of 24/7 customer support or online-only account opening capabilities"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10344,
   "latitude": 29.5534460058219,
   "longitude": -98.2702319595358,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Schertz, Texas residents and businesses seeking community bank relationship with modern digital tools",
+    "Small business owners needing SBA loans, merchant services, and business banking solutions",
+    "Customers wanting FDIC insurance protection beyond $250K through CDARS\u00ae network participation",
+    "Home buyers and commercial real estate investors seeking construction and mortgage financing"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Schertz Bank & Trust is best for Texas residents and business owners seeking a traditional community bank with modern digital capabilities, competitive lending products (especially construction and commercial loans), and enhanced FDIC insurance through the IntraFi network. The main caveat is geographic limitation to the Texas service area and lack of national reach for customers seeking broader accessibility or purely online-only banking.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "519 Main St, Schertz, TX 78154",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

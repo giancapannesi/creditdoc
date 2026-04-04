@@ -1,14 +1,14 @@
 {
   "name": "Riverhills Bank",
   "slug": "riverhills-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Milford, OH. $344M in assets. 5 offices.",
-  "description_long": "Riverhills Bank is a community bank located in Milford, OH, established in 1904. The bank holds approximately $344M in total assets and $307M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "RiverHills Bank is a Southwest Ohio-based community bank offering personal and business accounts, mortgages, and commercial loans with a focus on technology-driven banking and community impact investing.",
+  "description_long": "RiverHills Bank operates as a community-focused financial institution serving Southwest Ohio through multiple branches and digital channels. The bank positions itself as a relationship-driven alternative to larger national banks, emphasizing personal service while maintaining modern technology infrastructure.\n\nThe bank offers a comprehensive suite of consumer and commercial banking products including personal checking and savings accounts, business accounts, home loans (mortgages), and commercial loans. They provide online banking, mobile app access (rated 4.7/5), bill pay, Zelle integration, paperless statements, and electronic banking for business customers. Their mortgage center offers pre-approval, loan applications, and a dedicated mortgage team. The bank also maintains physical branches and ATM networks for in-person service.\n\nRiverHills Bank distinguishes itself through several commitments: access to 32,000 surcharge-free ATMs across the US, 24-hour online account access, and explicit focus on impact investing (over $1.1 billion in impact investments). The company emphasizes community participation with over 200 hours of annual community service and hosts community events. Their organizational culture prioritizes employees (70+ staff mentioned) and relationships over transactional metrics. They offer both 100% online and face-to-face mortgage processes.\n\nThe bank is geographically limited to Southwest Ohio with specific branch locations mentioned (New Richmond). Their digital offerings and surcharge-free ATM access are competitive advantages, but service is fundamentally regional. The 4.7-star mobile app rating and 4.7-star Facebook rating (122 reviews) suggest reasonable customer satisfaction, though the sample size is modest. No information provided regarding fees, interest rates, minimum balances, or loan terms.",
   "logo_url": "",
   "website_url": "https://www.rhb24.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business checking and savings accounts",
+    "Home loans (mortgages) with pre-approval and online/hybrid/in-person options",
+    "Commercial loans and commercial loan products",
+    "Online banking with bill pay and fund transfers",
+    "Mobile banking app (4.7/5 rating)",
+    "Check deposit via mobile app",
+    "Zelle money transfer",
+    "Paperless statements and electronic banking for business",
+    "ATM access network (32,000 surcharge-free ATMs)",
+    "Loan servicing",
+    "Affordable housing and OSL closings programs"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1904",
-    "Local community bank with personal service",
-    "5 locations"
+    "Access to 32,000 surcharge-free ATMs across the US despite being a regional bank",
+    "4.7/5 mobile app rating indicating strong digital banking experience",
+    "Explicit commitment to impact investing ($1.1 billion deployed) with transparent mission",
+    "Flexible mortgage options including 100% online, face-to-face, or hybrid processes",
+    "24-hour online account access and digital services (bill pay, check deposit, transfers)",
+    "Community-focused with over 200 hours of annual community service participation",
+    "Relationship-based service model with emphasis on personal banking relationships"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitations: Southwest Ohio only, making physical branch access unavailable for most U.S. consumers",
+    "No fee schedule, interest rates, minimum balance requirements, or loan terms disclosed on website",
+    "Limited customer review data (122 Facebook reviews) compared to national banking competitors",
+    "No information about credit cards, checking account features, or savings account APY rates",
+    "ATM removal notice (Rivertown ATM closing May 1, 2026) suggests branch/ATM network consolidation"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 6662,
   "latitude": 39.1575139803614,
   "longitude": -84.2745450252083,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Southwest Ohio residents seeking a community bank with digital-first capabilities and personal service",
+    "Homebuyers in the region who prefer relationship-based mortgage lending with flexible delivery options",
+    "Small business owners in Southwest Ohio needing commercial loans from local lenders",
+    "Consumers who prioritize community impact investing and corporate social responsibility in banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "RiverHills Bank is best for Southwest Ohio residents and small businesses seeking a community-oriented bank with modern digital capabilities and genuine relationship focus. The main caveat is strict geographic limitation to Southwest Ohio, making this impractical for most U.S. consumers; additionally, the website lacks critical details on fees, rates, and account terms needed for informed comparison.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "553 Chamber Dr, Milford, OH 45150",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

@@ -1,14 +1,14 @@
 {
   "name": "The Yellowstone Bank",
   "slug": "the-yellowstone-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Laurel, MT. $1364M in assets. 10 offices.",
-  "description_long": "The Yellowstone Bank is a community bank located in Laurel, MT, established in 1926. The bank holds approximately $1364M in total assets and $1129M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering checking, savings, mortgages, agricultural lending, and commercial loans with online banking and fraud protection services.",
+  "description_long": "Yellowstone Bank is a traditional FDIC-insured financial institution operating as a full-service bank. The bank is backed by the full faith and credit of the U.S. Government through FDIC insurance, providing deposit protection for customers. Based on their website presence and service offerings, they operate as a community-focused banking institution.\n\nThe bank offers a comprehensive suite of banking services including internet banking with enhanced security features, mortgage lending for home purchases, agricultural lending programs, commercial business loans, and standard deposit products. They provide eStatements to reduce paper statements and enable digital account management. Their online banking platform emphasizes both convenience and security features for account access and management.\n\nYellowstone Bank distinguishes itself through specialized agricultural lending expertise, suggesting a regional focus on farm and ranch communities. They actively educate customers about phishing scams and fraud prevention, providing detailed resources on recognizing and avoiding financial scams and directing suspicious communications to a dedicated phishing email address. This customer education approach indicates a commitment to account security beyond standard banking services.\n\nThe bank operates as a traditional brick-and-mortar institution with online capabilities rather than a neobank or digital-only platform. While they offer modern conveniences like eStatements and online banking, their emphasis on agricultural lending and traditional mortgage services suggests they serve a specific geographic or demographic market rather than the general national consumer base. Limited information is publicly available on their website regarding specific interest rates, fees, account minimums, or competitive positioning against other regional or national banks.",
   "logo_url": "",
   "website_url": "https://yellowstonebank.com",
   "affiliate_url": "",
@@ -23,23 +23,31 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking and savings accounts",
+    "Internet banking with online account access and multi-factor authentication",
+    "eStatements with email delivery and paperless account management",
+    "Mortgage loans for home purchases",
+    "Agricultural lending programs and services",
+    "Commercial business loans",
+    "Online banking credential and account security",
+    "Phishing scam recognition education and reporting",
+    "Account fraud protection and security alerts"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1926",
-    "Local community bank with personal service",
-    "10 locations"
+    "FDIC-insured deposits backed by the full faith and credit of the U.S. Government",
+    "Specialized agricultural lending programs tailored to farm and ranch customers",
+    "Online banking platform with multi-factor authentication and enhanced security features",
+    "Proactive phishing scam education with dedicated reporting email (phishing@yellowstonebank.com)",
+    "eStatements option for paperless account management with email notifications",
+    "Mortgage lending services to help customers with home purchases",
+    "Commercial loan options for business startups and maintenance"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited public information on website regarding account fees, interest rates, or minimum balance requirements",
+    "No details provided about specific interest rates for savings accounts, CDs, or loan products",
+    "Website does not clearly specify geographic service areas or branch locations",
+    "No information about mobile app availability or features beyond general online banking mention",
+    "Limited details on mortgage loan types (FHA, VA, refinance options) compared to mortgage-specific lenders"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +59,7 @@
   "states_served": [
     "MT"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1978,
   "latitude": 45.669734997521,
   "longitude": -108.772083990635,
@@ -93,12 +101,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural and farming business customers seeking specialized lending expertise",
+    "Rural and community-based customers in regions where Yellowstone Bank operates",
+    "Small business owners needing commercial loans and local banking relationships",
+    "Homebuyers seeking mortgage lending from a community-focused institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Yellowstone Bank is best for agricultural customers, small business owners, and rural communities seeking traditional banking services with specialized farm lending expertise and a local relationship model. The main caveat is that limited public information is available on the website regarding specific rates, fees, and account terms, requiring direct contact with the bank for detailed product comparisons.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +115,11 @@
   ],
   "phone": "",
   "address": "12 1St Ave, Laurel, MT 59044",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

@@ -1,15 +1,15 @@
 {
   "name": "State Bank Of Toulon",
   "slug": "state-bank-of-toulon",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Toulon, IL. $326M in assets. 3 offices.",
-  "description_long": "State Bank Of Toulon is a community bank located in Toulon, IL, established in 1903. The bank holds approximately $326M in total assets and $282M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "State Bank of Toulon is a community bank offering checking, savings, CDs, and loans with specialized agricultural financing expertise developed over 110+ years.",
+  "description_long": "State Bank of Toulon is an established community bank with over 110 years of experience serving customers, particularly in the agricultural sector. The bank was founded with deep roots in farming communities and has built its reputation on understanding the unique financial needs of agricultural borrowers. Their longevity and focus on relationship banking distinguish them from larger national institutions. The bank operates through a traditional branch and mobile banking model, serving both personal and business customers in their market area.\n\nThe bank offers a comprehensive range of financial products including checking accounts (Key Checking at 0.10% APY), savings accounts (Passbook Savings at 0.20% APY), and certificates of deposit (7-Month CD at 3.86% APY). They provide consumer loans, mortgage loans, agricultural loans, and credit card services. Their mobile banking platform allows customers to access accounts, view balances, transfer funds between accounts, make deposits, and pay bills. The bank also maintains ATM networks and offers both consumer and merchant credit card options.\n\nState Bank of Toulon distinguishes itself through specialized agricultural lending services, with loan officers experienced in customizing financing for land leasing, livestock, farm inputs, and equipment purchases. They emphasize personalized service and community banking relationships rather than digital-first or fintech approaches. The bank promotes financial education resources and offers programs like the Downpayment Plus\u00ae Program for mortgage applicants to help with upfront homeownership costs, positioning themselves as community-focused.\n\nThe honest assessment is that State Bank of Toulon appears to be a solid regional/community bank with strong agricultural lending credentials, but their advertised deposit rates (0.10-0.20% APY on basic accounts, 3.86% on 7-month CDs) are relatively low compared to online banks and current market conditions. The bank's website had a 404 error on their financial education page, suggesting potential website maintenance issues. They are best suited for customers prioritizing relationship banking, agricultural financing, and local community connections over rates or digital-first features.",
   "logo_url": "",
   "website_url": "https://www.banksbt.bank",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Key Checking accounts (0.10% APY)",
+    "Passbook Savings accounts (0.20% APY)",
+    "7-Month Certificates of Deposit (3.86% APY)",
+    "Consumer Loans",
+    "Mortgage Loans with Downpayment Plus\u00ae Program",
+    "Agricultural loans (land, livestock, equipment, inputs)",
+    "Mobile banking app with deposits, transfers, bill pay, and balance viewing",
+    "Consumer and merchant credit cards",
+    "ATM network and ATM locations",
+    "Online banking account access",
+    "24/7 personal loan applications",
+    "Financial education resources (link broken on website)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1903",
-    "Local community bank with personal service",
-    "3 locations"
+    "110+ years of specialized agricultural lending expertise with experienced loan officers",
+    "Offers Downpayment Plus\u00ae Program to help eligible mortgage applicants with upfront costs",
+    "Free mobile banking app with deposit capture, bill pay, and account transfers",
+    "Multiple loan application options available (consumer, mortgage, agricultural)",
+    "Community-focused banking with local branch presence and ATM network",
+    "Provides both personal and merchant credit card services",
+    "24/7 online personal loan applications available through Quilo partnership"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Advertised deposit rates are significantly below market (0.10% checking, 0.20% savings APY)",
+    "Website had 404 error on financial education page indicating maintenance issues",
+    "Limited transparency on specific loan terms, APRs, and eligibility requirements",
+    "No mention of FDIC insurance protection on website despite being a bank",
+    "Limited information about fees, minimum balances, or account requirements"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 12386,
   "latitude": 41.0940073303272,
   "longitude": -89.8645999095704,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural borrowers needing specialized farm, equipment, and livestock financing",
+    "Community-oriented customers prioritizing relationship banking over rates",
+    "First-time homebuyers interested in down payment assistance programs",
+    "Businesses seeking local banking relationships and merchant services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "State Bank of Toulon is best for rural and agricultural customers seeking specialized farm lending with personalized service from experienced loan officers, and for community-minded depositors who value local relationships over competitive rates. Primary caveat: deposit rates are well below current market averages, making this primarily a borrower-friendly institution rather than a savings-focused option.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "102 W Main St, Toulon, IL 61483",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

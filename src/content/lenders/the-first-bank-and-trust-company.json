@@ -1,15 +1,15 @@
 {
   "name": "The First Bank And Trust Company",
   "slug": "the-first-bank-and-trust-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Lebanon, VA. $4209M in assets. 34 offices.",
-  "description_long": "The First Bank And Trust Company is a community bank located in Lebanon, VA, established in 1979. The bank holds approximately $4209M in total assets and $3761M in deposits. It operates 34 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Full-service bank offering personal, business, agricultural, mortgage, and wealth management services with online and mobile banking platforms.",
+  "description_long": "First Bank & Trust Company is a full-service commercial bank providing comprehensive financial services across multiple customer segments. The bank has been established long enough to publish annual reports to shareholders and maintains a substantial digital and branch infrastructure.\n\nThe bank offers a wide range of services including personal checking and savings accounts, personal loans, student loans, and mortgage products (conventional, jumbo, FHA, VA, USDA rural development, and construction loans). For business customers, they provide commercial checking, business loans, lines of credit, term loans, small business lending, and USDA Business & Industry Guaranteed Loans. Their agricultural division specializes in farm operating loans, equipment financing, and real estate loans across multiple farming sectors (dairy, beef cattle, row crops, poultry, swine, forestry, and specialty agriculture). They also offer wealth management services including investment management, brokerage services, retirement planning, and trust administration.\n\nThe bank distinguishes itself through specialized lending divisions tailored to agricultural and business clients, offering USDA-guaranteed loan programs not typically available at consumer-focused banks. They provide comprehensive digital banking including mobile deposit, bill pay, Zelle integration, and virtual StrongBox. Their wealth management arm includes estate planning, charitable planning, and trust services alongside traditional investment management.\n\nAs a traditional bank, First Bank & Trust operates within standard banking regulations and deposit insurance protections. Customers should be aware that detailed information about interest rates, fees, minimum balances, and lending terms is not available on the website and would require direct contact or branch visits. The bank's strength lies in serving small-to-medium business, agricultural, and wealth management clients rather than consumer loan specialization.",
   "logo_url": "",
   "website_url": "https://www.firstbank.com",
   "affiliate_url": "",
@@ -24,23 +24,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Student loans",
+    "Mortgage loans (conventional, jumbo, FHA, VA, USDA, construction, bridge, refinance, home equity)",
+    "Business checking, savings, and specialty accounts",
+    "Commercial loans (lines of credit, term loans, real estate, small business lending)",
+    "Agricultural loans (operating, equipment, real estate, USDA FSA-guaranteed)",
+    "Mobile and online banking with mobile deposit and bill pay",
+    "Wealth management and investment management services",
+    "Brokerage services",
+    "Trust administration and estate settlement services",
+    "Cash management and merchant services for businesses",
+    "Payroll services and qualified retirement plans",
+    "Business insurance and succession planning"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1979",
-    "Local community bank with personal service",
-    "34 locations"
+    "Specialized agricultural lending across 9+ farm types with dedicated ag lenders and USDA FSA-guaranteed loan programs",
+    "Multiple mortgage product options including VA loans, FHA loans, USDA rural development, construction-to-permanent, and bridge loans",
+    "Comprehensive digital banking including mobile deposit, bill pay, Zelle, and virtual StrongBox",
+    "Dedicated commercial lending team with solutions for cash management, merchant services, and treasury management",
+    "Full wealth management division with investment management, brokerage services, estate planning, and trust administration",
+    "USDA Business & Industry Guaranteed Loans available for small business customers",
+    "Multiple login portals for different customer types (online banking, trust customers, merchant services, 401k services)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No interest rates, APRs, fees, or minimum balance requirements disclosed on website",
+    "No information about loan terms, approval timelines, or qualification requirements available",
+    "Limited transparency on whether this is a regional or national bank with branch availability",
+    "No online loan application process visible; customers must contact lenders directly",
+    "No information about deposit insurance coverage or FDIC status explicitly stated on reviewed content"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "VA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 22918,
   "latitude": 36.9003350133544,
   "longitude": -82.0866569886388,
@@ -94,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural business owners and farmers seeking specialized lending and USDA-guaranteed loan programs",
+    "Small-to-medium business owners needing commercial checking, lines of credit, and business lending",
+    "High-net-worth individuals seeking comprehensive wealth management, trust administration, and investment services",
+    "Homebuyers interested in diverse mortgage products including VA, FHA, and rural development loans"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Bank & Trust Company is best for agricultural operators, small-to-medium business owners, and affluent individuals seeking comprehensive financial services including specialized lending and wealth management. The main caveat is that critical details about rates, fees, and lending terms are not available online, requiring direct contact with the bank or branch visits to evaluate specific offerings.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,11 @@
   ],
   "phone": "",
   "address": "359 W Main St, Lebanon, VA 24266",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

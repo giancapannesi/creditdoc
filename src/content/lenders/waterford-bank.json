@@ -1,14 +1,14 @@
 {
   "name": "Waterford Bank, N.A.",
   "slug": "waterford-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Toledo, OH. $1707M in assets. 4 offices.",
-  "description_long": "Waterford Bank, N.A. is a community bank located in Toledo, OH, established in 2007. The bank holds approximately $1707M in total assets and $1490M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank serving Ohio and Michigan with personal and business banking, mortgages, and commercial loans.",
+  "description_long": "Waterford Bank, N.A. is a federally chartered bank offering comprehensive banking services across Ohio and Michigan. The institution provides both personal and business banking solutions, positioning itself as a relationship-focused lender rather than a one-size-fits-all operation. According to their website, they emphasize customized account setups tailored to diverse client needs, as evidenced by their work with healthcare providers and not-for-profit organizations.\n\nThe bank's service portfolio includes personal deposit products, health savings accounts, mortgage loans, consumer loans, and private banking for personal customers. On the business side, they offer commercial checking and savings accounts, commercial loans, treasury management services, and business online banking platforms. Their digital offerings include mobile apps, online banking, Zelle integration, and secure document uploading via ShareFile. The Mortgage Center provides calculators, refinancing analysis, and loan product information in a centralized platform.\n\nWaterford Bank distinguishes itself through personalized service and flexibility in structuring financial solutions. Their testimonials highlight willingness to adapt offerings based on client complexity rather than forcing customers into standardized programs. The bank maintains active security awareness, explicitly warning customers about phishing attempts and providing direct contact numbers (866-707-2871 and 855-896-2064) for verification. They're also investing in digital modernization, with plans for a refreshed website and updated online/mobile banking experience announced for later in 2026.\n\nAs a smaller regional bank, Waterford serves niche markets effectively but lacks the branch network and product breadth of national institutions. Their emphasis on business lending and relationship banking suggests strength in commercial markets, though personal banking customers may find more competitive rates or rewards at larger competitors. The bank is FDIC-insured, providing standard deposit protection up to legal limits.",
   "logo_url": "",
   "website_url": "https://www.waterfordbankna.com",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Health savings accounts (HSAs)",
+    "eDeposit products",
+    "Private banking services",
+    "Mortgage loans and refinancing",
+    "Consumer loans",
+    "Commercial checking and savings",
+    "Commercial loans and business lending",
+    "Treasury management services",
+    "Online and mobile banking platforms",
+    "Business-specific mobile apps",
+    "Zelle money transfer integration",
+    "ShareFile secure document uploading",
+    "Check ordering services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2007",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits with full faith and credit of U.S. Government backing",
+    "Customized account structures tailored to specific business needs rather than standardized programs",
+    "Treasury management services and commercial lending expertise for small to mid-sized businesses",
+    "Secure document sharing via ShareFile to avoid email limitations and protect sensitive data",
+    "Comprehensive mortgage center with calculators, payment estimates, and refinancing analysis tools",
+    "Multi-channel access including mobile apps, online banking, Zelle, and business-specific platforms",
+    "Proactive fraud prevention messaging and direct customer care lines for account verification"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint (Ohio and Michigan only) compared to national banks",
+    "No mention of competitive interest rates, APY figures, or fee structures on public website",
+    "Smaller institution may offer fewer product options and digital features than major national banks",
+    "Website indicates digital banking platform overhaul planned for later 2026, suggesting current system may be outdated",
+    "No information available about minimum account balances, account maintenance fees, or overdraft policies"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58433,
   "latitude": 41.6888450093981,
   "longitude": -83.7026119808213,
@@ -93,12 +106,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-sized business owners in Ohio and Michigan seeking relationship-based commercial lending and treasury services",
+    "Healthcare providers and not-for-profit organizations requiring customized financial solutions",
+    "Homebuyers and refinancers in their service area seeking mortgage products with personalized guidance",
+    "Customers prioritizing personalized service and account customization over national brand recognition"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Waterford Bank is best for small-to-mid-sized businesses and homebuyers in Ohio and Michigan who value personalized, relationship-based banking over national scale. The main caveat is their limited geographic footprint and lack of publicly available information about rates, fees, and specific product terms, requiring direct contact for pricing and feature comparisons.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   ],
   "phone": "",
   "address": "3900 N Mccord Rd, Toledo, OH 43617",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

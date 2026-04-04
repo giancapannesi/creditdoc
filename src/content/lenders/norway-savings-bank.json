@@ -1,14 +1,14 @@
 {
   "name": "Norway Savings Bank",
   "slug": "norway-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Norway, ME. $2082M in assets. 25 offices.",
-  "description_long": "Norway Savings Bank is a community bank located in Norway, ME, established in 1866. The bank holds approximately $2082M in total assets and $1595M in deposits. It operates 25 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank with 25 locations in Maine and New Hampshire offering mortgages, checking/savings accounts, business loans, and wealth management services.",
+  "description_long": "Norway Savings Bank is a regional financial institution headquartered in Maine and New Hampshire with 25 physical branch locations across both states. The bank has established itself as a community-focused lender emphasizing personal service and flexibility across multiple product lines. Founded on principles of supporting customers through major life events, Norway Savings positions itself as a relationship-driven alternative to larger national banks.\n\nThe bank offers a comprehensive suite of consumer and business banking services including checking and savings accounts, mortgages (through their MortgageGO platform), home equity lines of credit (HELOCs), personal loans, business loans, and investment/trust services through their Asset Management Group. Their current HELOC offering features a 6.50% APR with savings up to $650 on appraisal and title fees. Customers can access services through online banking, mobile app (including mobile check deposit), 24/7 ATMs, phone (1-888-725-2207), email, and in-person branch visits. The bank maintains routing number 211274515.\n\nNorway Savings distinguishes itself through localized service with emphasis on personalized support, FDIC insurance backing all deposits, flexible mortgage and HELOC products, and a stated commitment to employee growth and community involvement. Their marketing emphasizes simplicity in application processes and adaptability to customer needs across various life stages. The bank offers educational resources on mortgages, home equity, business lending, estate planning, and trusts.\n\nAs a regional bank, Norway Savings serves primarily Maine and New Hampshire customers and lacks the branch network or digital convenience features of national banks. Their website highlights employee culture and community values but provides limited transparency on specific loan terms, approval rates, or comparative pricing. The wealth management services (Asset Management Group) explicitly carry disclaimers of no FDIC insurance and potential loss of value, distinguishing them from deposit products.",
   "logo_url": "",
   "website_url": "https://www.norwaysavings.bank",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "FDIC-insured checking accounts (Go>2 product)",
+    "FDIC-insured savings accounts",
+    "Home equity lines of credit (HELOCs) at 6.50% APR",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Residential mortgages (through MortgageGO platform)",
+    "Business loans and business loan solutions",
+    "Online and mobile banking with mobile check deposit",
+    "Investment and trust services (Norway Savings Asset Management Group)",
+    "Estate planning and trustee services",
+    "ATM network access (24/7 check deposit and withdrawal)",
+    "Internet banking for individual and business customers",
+    "Educational resources on mortgages, home equity, business lending, and wealth planning"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1866",
-    "Local community bank with personal service",
-    "25 locations"
+    "FDIC-insured deposits backed by full U.S. government faith and credit",
+    "25 physical branch locations in Maine and New Hampshire for in-person service",
+    "Mobile check deposit capability through NSB Mobile app available 24/7",
+    "Current HELOC offer at 6.50% APR with up to $650 in appraisal and title fee savings",
+    "Comprehensive financial services including mortgages, business loans, trusts, and wealth management",
+    "Online MortgageGO platform allowing customers to apply for home loans digitally",
+    "24/7 ATM access for check deposits and cash withdrawals",
+    "Free checking accounts (Go>2 product) with no apparent monthly fees"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Maine and New Hampshire only, unavailable to most U.S. customers",
+    "Wealth management and trust services explicitly not FDIC insured and carry risk of value loss",
+    "Website provides minimal specific loan terms, APRs for most products, or approval rate transparency",
+    "No indication of online account opening capabilities; unclear application process for many services",
+    "Limited information about competitive rates or fee structures compared to regional and national alternatives"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "ME"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 17658,
   "latitude": 44.2130842777961,
   "longitude": -70.5392326929324,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Residents of Maine and New Hampshire seeking full-service regional banking with personal service",
+    "Homeowners interested in mortgages or HELOCs with flexible terms and local loan officers",
+    "Small business owners in the Maine/New Hampshire region needing customized business lending solutions",
+    "Families requiring comprehensive wealth management and trust services with professional trustees"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Norway Savings Bank is best for Maine and New Hampshire residents seeking traditional full-service banking with personal relationships and community focus. The primary caveat is geographic limitation\u2014customers outside Maine and New Hampshire cannot access this bank's services, and even within their markets, the limited digital innovation and transparency may disadvantage customers comparing rates or seeking faster online-only solutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "261 Main St, Norway, ME 04268",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

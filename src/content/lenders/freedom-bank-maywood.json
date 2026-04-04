@@ -1,14 +1,14 @@
 {
   "name": "Freedom Bank",
   "slug": "freedom-bank-maywood",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Maywood, NJ. $812M in assets. 5 offices.",
-  "description_long": "Freedom Bank is a community bank located in Maywood, NJ, established in 2008. The bank holds approximately $812M in total assets and $707M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank serving Bergen and Hudson Counties, NJ with personal and business banking, loans, and deposit products.",
+  "description_long": "Freedom Bank is an independent, full-service community bank headquartered in New Jersey, specifically serving the Bergen and Hudson Counties region. The institution positions itself as a locally-focused alternative to larger national banks while maintaining full FDIC insurance protection backed by the U.S. Government.\n\nFreedom Bank offers a comprehensive suite of banking products for both personal and business customers. On the personal side, they provide checking and savings accounts, money market accounts, certificates of deposit (CDs with $500 minimum), credit cards, retirement accounts, residential mortgages, personal loans, and digital banking access. Business customers can access business checking and savings accounts, business money market accounts, treasury management services, merchant services, business credit cards, and commercial loans. The bank also operates an ATM network and provides Zelle money transfer capabilities.\n\nThe bank distinguishes itself through several specific service offerings that emphasize convenience and relationship-building. These include coin counting machines, medallion signature guarantees, notary services, official checks, safe deposit boxes (at select locations), and debit cards. They advertise accessibility features and promote a \"high tech, high touch\" approach as a community bank. Additionally, Freedom Bank offers extended FDIC insurance coverage up to $50 million, which goes beyond standard federal protection limits.\n\nAs a regional community bank, Freedom Bank serves a defined geographic market rather than operating nationally. While they offer standard banking products comparable to larger institutions, their value proposition centers on personalized service, community ties (evidenced by local business testimonials), and local decision-making. Prospective customers should verify current rates and product terms directly, as the website indicates rates are subject to change and some promotions may be withdrawn without notice.",
   "logo_url": "",
   "website_url": "http://www.freedombanknj.com",
   "affiliate_url": "",
@@ -23,23 +23,40 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Money market accounts (personal and business)",
+    "Certificates of deposit (CDs)",
+    "Credit cards (personal and business)",
+    "Residential mortgage loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Commercial loans",
+    "Business checking accounts",
+    "Treasury management services",
+    "Merchant services",
+    "Zelle money transfer",
+    "Coin counting machines",
+    "Safe deposit boxes",
+    "Notary services",
+    "Medallion signature guarantees",
+    "Digital banking and mobile app",
+    "ATM network access"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2008",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured with additional coverage available up to $50 million (exceeding standard $250K protection)",
+    "Coin counting machines available in-branch\u2014convenient service for cash-heavy customers",
+    "Medallion signature guarantee and notary services offered, reducing need to seek external providers",
+    "Zelle integration for fast, safe digital money transfers",
+    "Full-service offerings for both personal and business banking in one institution",
+    "Community bank structure with local decision-making and personalized relationship focus",
+    "CDs available with low $500 minimum balance requirement"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint\u2014only serves Bergen and Hudson Counties, NJ; not accessible to customers outside this region",
+    "Safe deposit boxes only available at select branch locations, not all locations",
+    "Website does not display current APY rates or loan rate terms; customers must contact bank or log in to see specific rates",
+    "Early withdrawal penalties apply to CDs, and fees may reduce earnings",
+    "No mention of mobile-only or online-only account opening; likely requires in-person branch visit"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +68,7 @@
   "states_served": [
     "NJ"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58712,
   "latitude": 40.891747014081,
   "longitude": -74.0714550363233,
@@ -93,12 +110,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "New Jersey residents in Bergen and Hudson Counties seeking personalized community banking",
+    "Small business owners in Northern NJ needing integrated personal and business accounts",
+    "Customers who prefer local bank decision-making and relationship-based service over national institutions",
+    "Savers seeking extended FDIC protection beyond standard $250K limits"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Freedom Bank is best suited for Northern New Jersey residents and small business owners in Bergen and Hudson Counties who prioritize personalized service and community banking relationships over national convenience. The primary caveat is strict geographic limitation\u2014this bank is inaccessible to customers outside its service region, and prospective customers must visit a branch location to fully understand current rates and complete account opening.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +124,11 @@
   ],
   "phone": "",
   "address": "99 W Essex St, Maywood, NJ 07607",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

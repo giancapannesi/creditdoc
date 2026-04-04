@@ -1,14 +1,14 @@
 {
   "name": "Center National Bank",
   "slug": "center-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Litchfield, MN. $233M in assets. 3 offices.",
-  "description_long": "Center National Bank is a community bank located in Litchfield, MN, established in 1891. The bank holds approximately $233M in total assets and $205M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Center National Bank is a full-service community bank offering checking, savings, CDs, mortgages, business loans, and credit cards with FDIC insurance protection.",
+  "description_long": "Center National Bank operates as a traditional community banking institution positioned as 'Hometown Banking.' The bank is FDIC-insured, meaning deposits are backed by the full faith and credit of the U.S. Government up to applicable limits. Based on the website content, Center National Bank appears to serve both personal and business customers across Minnesota, with emphasis on local mortgage expertise and relationship banking.\n\nThe bank offers a comprehensive suite of personal banking products including multiple checking account tiers (Center Rewards Checking, Center Cash Back Checking, Center Free Checking, Center Interest Checking), various savings options (Money Market accounts at Gold and Platinum levels), Certificates of Deposit, Individual Retirement Accounts, Health Savings Accounts, and personal loans. For credit products, they offer personal credit cards and debit cards with digital payment integration (Apple Pay, Google Pay). The mortgage division emphasizes flexible financing for purchase, refinance, and construction loans with local Minnesota expertise.\n\nCenter National Bank distinguishes itself through rewards-based checking and savings products\u2014the Center Rewards Checking account offers interest earnings for meeting monthly qualifications, while Center Cash Back Checking provides cash back rewards for debit card usage. The bank also maintains surcharge-free ATM access and offers digital-first banking through mobile apps (iOS/Android) with features like mobile remote deposit capture. Business customers have access to specialized cash management services, merchant card services, and SBA lending programs.\n\nAs a traditional community bank, Center National Bank is best suited for customers seeking personalized service and local expertise, particularly for mortgage lending in Minnesota. The rewards-based checking and savings accounts appeal to customers meeting monthly activity thresholds. However, as a regional community bank rather than a national institution, product availability, rates, and service depth may vary compared to larger national banks, and the bank's geographic footprint appears limited to Minnesota.",
   "logo_url": "",
   "website_url": "https://www.centernationalbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (multiple tiers: Rewards, Cash Back, Free, Interest)",
+    "Personal savings accounts (including Money Market Gold and Platinum)",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Health Savings Accounts (HSAs)",
+    "Home mortgage loans (purchase, refinance, construction)",
+    "Home equity loans",
+    "Personal loans and Center Plus Lines of Credit",
+    "Business checking accounts (multiple tiers)",
+    "Business savings and money market accounts",
+    "SBA loans and commercial real estate loans",
+    "Mobile banking with remote deposit capture"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1891",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits backed by full U.S. Government faith and credit",
+    "Rewards-based checking account (Center Rewards Checking) earns interest for meeting monthly qualifications",
+    "Cash back rewards on debit card usage through Center Cash Back Checking",
+    "Comprehensive mortgage lending with local Minnesota experts for purchase, refinance, and construction",
+    "Mobile banking app with mobile remote deposit capture feature",
+    "Surcharge-free ATM network access",
+    "Business banking services including cash management, merchant services, and SBA loans"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint\u2014appears to operate only in Minnesota, not nationally available",
+    "Rewards accounts require meeting monthly qualifications; rates and benefits not specified on homepage",
+    "No specific APR, interest rate, or fee information disclosed on accessible website content",
+    "Smaller community bank may have fewer branches and ATMs compared to national banks",
+    "No mention of account opening bonus programs or promotional rates"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10976,
   "latitude": 45.1288489835005,
   "longitude": -94.529974970282,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Minnesota residents seeking personalized hometown banking with relationship managers",
+    "Homebuyers and refinancers in Minnesota wanting local mortgage expertise",
+    "Small business owners needing cash management and merchant services",
+    "Customers who meet monthly activity thresholds to earn rewards on checking and savings accounts"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Center National Bank is best for Minnesota residents and businesses seeking a community bank with personalized service, local mortgage expertise, and rewards-based checking/savings accounts. The primary caveat is geographic limitation to Minnesota and the lack of transparent rate and fee information on the public website, requiring direct contact with the bank for specific product terms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "301 N Ramsey Ave, Litchfield, MN 55355",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

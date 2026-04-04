@@ -1,14 +1,14 @@
 {
   "name": "Peoples Bank",
   "slug": "peoples-bank-sheridan",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Sheridan, AR. $290M in assets. 3 offices.",
-  "description_long": "Peoples Bank is a community bank located in Sheridan, AR, established in 2000. The bank holds approximately $290M in total assets and $250M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank serving Sheridan, Benton, and East End with personal and business banking services, emphasizing local decision-making and personalized customer relationships.",
+  "description_long": "Peoples Bank is a community-focused financial institution operating in Sheridan, Benton, and East End, positioning itself as a relationship-driven alternative to larger national banks. The bank emphasizes local ownership and decision-making, marketing itself around the concept that customers are more than account numbers and that banking should be personalized to individual circumstances.\n\nThe bank offers a comprehensive suite of consumer and commercial banking services. For personal customers, this includes checking and savings accounts, money market accounts, digital banking through mobile apps and online platforms, online bill pay, mortgages, consumer loans, credit cards, and overdraft privilege. For business customers, they provide commercial lending, business accounts, treasury management, and tailored financing solutions with what they describe as flexible, local decision-making from commercial lenders.\n\nPeoples Bank differentiates itself primarily through its emphasis on personal relationships and local community presence. Their marketing centers on understanding individual customer goals, providing personalized service from people who know the community, and making decisions locally rather than through centralized corporate processes. They highlight modern banking conveniences like mobile apps and online tools alongside their personal service model.\n\nAs a regional community bank, Peoples Bank serves customers in specific geographic areas but lacks the nationwide branch network and service breadth of major national banks. While their personalized approach appeals to customers seeking relationship-based banking, those needing specialized financial products or the widest product selection may find limitations. The website provides service overview but limited transparency on specific rates, fees, or detailed product terms.",
   "logo_url": "",
   "website_url": "http://www.peoplesbankar.com",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Money market accounts",
+    "Mortgages and home loans",
+    "Consumer loans",
+    "Business checking and business accounts",
+    "Commercial lending and business loans",
+    "Credit cards",
+    "Online banking and mobile banking app",
+    "Online bill pay",
+    "Digital banking services",
+    "Lost or stolen card replacement and protection",
+    "Treasury management for businesses",
+    "Overdraft privilege"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2000",
-    "Local community bank with personal service",
-    "3 locations"
+    "Emphasizes local decision-making and community presence rather than centralized corporate processing",
+    "Offers comprehensive personal banking including checking, savings, money market accounts, and mortgages",
+    "Provides dedicated business banking with tailored commercial lending and treasury management services",
+    "Includes modern digital banking tools like mobile app, online banking, and mobile check deposit",
+    "Highlights personalized customer service with local branch support and relationship-focused approach",
+    "Offers free online bill pay and financial calculators for customer planning",
+    "Provides lost/stolen card protection with rapid replacement service"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Sheridan, Benton, and East End areas only",
+    "Website lacks specific information on interest rates, APRs, fees, or detailed product terms",
+    "No transparent comparison of products against competitors or explanation of pricing structure",
+    "Limited online information about credit card rewards programs or specific features",
+    "No mention of FDIC insurance limits, security certifications, or regulatory oversight details"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "AR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57058,
   "latitude": 34.2924979535362,
   "longitude": -92.3984090482809,
@@ -93,12 +106,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local residents and business owners in Sheridan, Benton, and East End seeking relationship-based banking",
+    "Small to medium-sized businesses wanting personalized commercial lending and local decision-making",
+    "Customers who value in-person service and knowing their banker personally over digital-only banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Peoples Bank is best suited for customers in its service areas (Sheridan, Benton, East End) who prioritize relationship-based banking and value local decision-making over the convenience of national branch networks. The primary caveat is geographic limitation\u2014this bank only serves specific local areas and is not accessible to customers outside its footprint.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "1120 S Rock St, Sheridan, AR 72150",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

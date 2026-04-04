@@ -1,13 +1,13 @@
 {
   "name": "Fifth Third Bank, National Association",
   "slug": "fifth-third-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Cincinnati, OH. $213730M in assets. 1484 offices.",
-  "description_long": "Fifth Third Bank, National Association is a community bank located in Cincinnati, OH, established in 1865. The bank holds approximately $213730M in total assets and $175203M in deposits. It operates 1484 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Fifth Third Bank is a national banking institution offering checking, savings, credit cards, mortgages, business loans, and personal lending through branches and digital channels.",
+  "description_long": "Fifth Third Bank, National Association operates as a federally chartered national bank serving consumers and businesses across the United States. The bank maintains a significant physical branch and ATM network accessible through their branch locator tool, alongside digital banking services available at 53.com. Fifth Third provides a comprehensive suite of financial products spanning deposit accounts (checking and savings), credit products (personal loans, credit cards, mortgages), business lending solutions, and wealth management services. The bank operates as a full-service retail and commercial bank rather than a specialized lender, positioning itself among traditional banking institutions. Fifth Third's scale as a national bank with physical locations distinguishes it from neobanks and online-only competitors, providing in-person customer service and local market presence. The bank's reach through ATM networks and branch locations offers accessibility advantages for customers who prefer traditional banking channels. However, the website currently exhibits technical issues, with error pages preventing access to detailed product information and service specifications that would typically inform consumer decision-making.",
   "logo_url": "",
   "website_url": "https://www.53.com",
   "affiliate_url": "",
@@ -24,21 +24,30 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
+    "Money market accounts",
+    "Certificates of Deposit (CDs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Credit cards",
+    "Mortgages (home purchase and refinance)",
+    "Business loans and commercial banking",
+    "Branch locator service",
+    "ATM access and cash withdrawal",
+    "Digital banking platform",
+    "Customer service support"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1865",
-    "Local community bank with personal service",
-    "1484 locations"
+    "National bank with established branch and ATM network for in-person banking access",
+    "Full-service banking offering checking, savings, credit cards, mortgages, personal loans, and business solutions",
+    "Federally chartered national bank status provides regulatory oversight and FDIC deposit insurance",
+    "Digital banking platform available at 53.com for online account management",
+    "Customer service support available via phone at 1-800-972-3030",
+    "Serves both consumer and commercial customers with varied product offerings"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website contains error pages and technical issues preventing access to product details and rates",
+    "Specific APR ranges, fee structures, and loan terms not accessible from the website",
+    "Competitive landscape with other national banks may not offer differentiated rates or features",
+    "Website usability problems suggest potential customer service friction"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +59,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 6672,
   "latitude": 39.102100296459,
   "longitude": -84.512112217262,
@@ -92,12 +101,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Consumers seeking traditional full-service banking with physical branch access",
+    "Business owners needing commercial lending and deposit account solutions",
+    "Customers preferring established national banks with FDIC-insured deposits"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Fifth Third Bank is best for consumers and business owners seeking traditional full-service banking with branch access, FDIC deposit insurance, and a complete range of loan and deposit products. The primary caveat is that their website currently contains technical errors that prevent prospective customers from reviewing specific product terms, rates, and fees before contacting the bank.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +114,11 @@
   ],
   "phone": "",
   "address": "38 Fountain Square Plz, Cincinnati, OH 45202",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Community Bank Of Raymore",
   "slug": "community-bank-of-raymore",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Raymore, MO. $338M in assets. 3 offices.",
-  "description_long": "Community Bank Of Raymore is a community bank located in Raymore, MO, established in 1979. The bank holds approximately $338M in total assets and $322M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community Bank of Raymore is a local FDIC-insured bank serving Missouri communities with personal and business checking, savings, loans, and wealth management services.",
+  "description_long": "Community Bank of Raymore operates as a traditional community bank with physical locations in Raymore, Peculiar, and Harrisonville, Missouri. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing deposit protection up to regulatory limits. The institution positions itself as an alternative to national chains, emphasizing personalized service and local community involvement.\n\nThe bank offers a comprehensive range of financial products across personal and business segments. Personal services include multiple checking account options (Kasasa Cash Back Checking, Wall Street Checking, Green Checking), savings products (savings accounts, money market accounts, CDs, IRAs), personal loans, auto loans, home equity lines of credit, and recreational vehicle loans. Business services include business checking, savings, money market accounts, business loans (term loans, lines of credit, commercial real estate loans), and merchant services. The bank also provides wealth management and trust services, investment services, and digital banking through online and mobile platforms.\n\nCommunity Bank of Raymore differentiates itself through local ownership and relationship banking. Customer testimonials highlight friendly staff and personalized interactions, with emphasis on community engagement. The bank offers specific products like Kasasa accounts with cash back rewards, free ATM access, and various overdraft coverage options. They provide modern conveniences including mobile banking, mobile wallet functionality, and remote deposit capture for business customers.\n\nAs a traditional community bank, the institution serves customers seeking local decision-making and personalized service rather than digital-only or national banking alternatives. However, prospective customers should note the bank's geographic limitation to Missouri locations and may want to compare rates and fees against larger regional or national competitors. The bank's website indicates standard community bank pricing with published deposit rates and fee schedules available for review.",
   "logo_url": "",
   "website_url": "https://www.cbronline.net",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Kasasa Cash Back, Kasasa, Wall Street, Green)",
+    "Personal savings accounts, money market accounts, and certificates of deposit",
+    "Individual Retirement Accounts (IRAs)",
+    "Personal loans, auto loans, and home equity lines of credit",
+    "Recreational vehicle loans",
+    "Business checking and business savings accounts",
+    "Business loans (term loans, lines of credit, commercial real estate loans)",
+    "Merchant card services and ACH services",
+    "Remote deposit capture and business bill pay",
+    "Wealth management, personal trusts, and investment services",
+    "Online banking and mobile banking with mobile wallet",
+    "Safe deposit boxes"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1979",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits with full government backing",
+    "Kasasa Cash Back Checking offers up to $120 annual cash back with qualifying activities",
+    "Personalized service model with local decision-making and community engagement",
+    "Multiple account types for both personal and business customers with comparison tools",
+    "Free ATM network and mobile banking with mobile wallet functionality",
+    "Comprehensive loan products including auto, home equity, RV, and business financing",
+    "Wealth management and trust services with dedicated expertise staff"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to three Missouri locations (Raymore, Peculiar, Harrisonville)",
+    "No mention of competitive rate comparisons or specific APY figures for savings products on homepage",
+    "Kasasa account cash back requires meeting specific qualification criteria not fully detailed on website",
+    "Website security vulnerability warning displayed to Chrome users may create trust concerns",
+    "No indication of specialized digital banking features or fintech integrations beyond standard mobile banking"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 22867,
   "latitude": 38.8113640103542,
   "longitude": -94.4676560230868,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Missouri residents in the Raymore, Peculiar, or Harrisonville areas seeking relationship banking",
+    "Small business owners needing comprehensive business checking, lending, and merchant services",
+    "Customers prioritizing personalized service and local community involvement over digital-only banking",
+    "Individuals interested in Kasasa rewards accounts with cash back earning potential"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Community Bank of Raymore is best for Missouri customers within their three-location service area who value personalized, relationship-based banking and want to support local institutions. The main caveat is geographic limitation\u2014customers outside Raymore, Peculiar, or Harrisonville cannot access in-person services, and prospective customers should verify specific rates and fees are competitive before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "801 W Foxwood Dr, Raymore, MO 64083",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }
