@@ -1,0 +1,110 @@
+---
+/**
+ * AffiliateInline — Mid-article CTA for blog posts.
+ *
+ * Appears once between content sections. Styled to match the site's
+ * existing CTA blocks (see the loan matching box on listicle pages).
+ * Clean, not flashy. Contextual to page category.
+ */
+
+interface Props {
+  category: string;
+}
+
+const { category } = Astro.props;
+
+// Credit repair categories → The Credit People CTA
+const isCreditRepair = ['credit-repair', 'fix-my-credit', 'debt-relief'].includes(category);
+// Loan categories → Lead Stack loan matching
+const isLoans = ['personal-loans', 'emergency-cash', 'payday-alternatives'].includes(category);
+// Credit building → WalletHub
+const isBuildCredit = ['build-credit', 'credit-monitoring'].includes(category);
+---
+
+{isCreditRepair && (
+  <div class="rounded-xl border border-primary/20 bg-gradient-to-r from-primary/5 to-transparent p-5 my-8">
+    <div class="flex items-start gap-3">
+      <div class="shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+      <div class="flex-1">
+        <p class="text-sm font-semibold text-text">Need Help Fixing Your Credit?</p>
+        <p class="mt-1 text-xs text-muted leading-relaxed">The Credit People have helped thousands dispute errors and remove negative items. Free consultation, results in 30 days or less.</p>
+        <a
+          href="https://thecreditpeople.net/?a=17543&c=5194&s1=creditdoc-inline"
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          class="mt-2 inline-flex items-center px-3.5 py-2 rounded-lg bg-primary text-white text-xs font-semibold hover:bg-primary-hover transition-colors"
+        >
+          Get Your Free Consultation
+          <svg xmlns="http://www.w3.org/2000/svg" class="ml-1.5 h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+        <p class="mt-1.5 text-[10px] text-muted/50">Sponsored &middot; <a href="/disclosure/" class="underline">Disclosure</a></p>
+      </div>
+    </div>
+  </div>
+)}
+
+{isLoans && (
+  <div class="rounded-xl border border-amber-200/50 bg-gradient-to-r from-amber-50/50 to-transparent p-5 my-8">
+    <div class="flex items-start gap-3">
+      <div class="shrink-0 w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-600" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"/>
+        </svg>
+      </div>
+      <div class="flex-1">
+        <p class="text-sm font-semibold text-text">Compare Loan Options in Minutes</p>
+        <p class="mt-1 text-xs text-muted leading-relaxed">Fill out one short form and see which lenders pre-qualify you — no hard credit check to compare rates.</p>
+        <div class="mt-2 flex flex-wrap gap-2">
+          <a
+            href="https://lowcreditfinance.com/?aff146570"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            class="inline-flex items-center px-3 py-1.5 rounded-lg bg-amber-600 text-white text-xs font-semibold hover:bg-amber-700 transition-colors"
+          >
+            Check Your Options
+          </a>
+          <a
+            href="https://50kloans.com/?aff146559"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            class="inline-flex items-center px-3 py-1.5 rounded-lg border border-amber-300 text-amber-800 text-xs font-semibold hover:bg-amber-50 transition-colors"
+          >
+            Loans Up to $50K
+          </a>
+        </div>
+        <p class="mt-1.5 text-[10px] text-muted/50">Sponsored &middot; <a href="/disclosure/" class="underline">Disclosure</a></p>
+      </div>
+    </div>
+  </div>
+)}
+
+{isBuildCredit && (
+  <div class="rounded-xl border border-blue-200/50 bg-gradient-to-r from-blue-50/50 to-transparent p-5 my-8">
+    <div class="flex items-start gap-3">
+      <div class="shrink-0 w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+      <div class="flex-1">
+        <p class="text-sm font-semibold text-text">Track Your Credit Score for Free</p>
+        <p class="mt-1 text-xs text-muted leading-relaxed">WalletHub monitors your credit score daily and sends alerts when your report changes. Personalized tips to improve.</p>
+        <a
+          href="https://wallethub.com/"
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          class="mt-2 inline-flex items-center px-3.5 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors"
+        >
+          Start Monitoring Free
+        </a>
+        <p class="mt-1.5 text-[10px] text-muted/50">Sponsored &middot; <a href="/disclosure/" class="underline">Disclosure</a></p>
+      </div>
+    </div>
+  </div>
+)}
