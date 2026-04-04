@@ -1,14 +1,14 @@
 {
   "name": "Capon Valley Bank",
   "slug": "capon-valley-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Wardensville, WV. $237M in assets. 5 offices.",
-  "description_long": "Capon Valley Bank is a community bank located in Wardensville, WV, established in 1918. The bank holds approximately $237M in total assets and $212M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Capon Valley Bank is a community bank offering personal loans, mortgages, credit cards, and deposit accounts with local decision-making and customer service.",
+  "description_long": "Capon Valley Bank is a traditional community bank serving customers through local lending and banking services. The bank operates with a focus on personalized service, emphasizing that lending decisions are made locally rather than through centralized corporate processes. Their routing number is 052203703 and they maintain an NMLS license (#768505), indicating they are a regulated financial institution. The bank maintains an active website with online banking capabilities and fraud monitoring services.\n\nThe bank offers a comprehensive range of consumer financial products including personal loans with flexible terms, fixed-rate mortgage financing for home purchases and refinancing, auto loans, home equity loans, deposit accounts, and credit cards with rewards programs. They advertise debit card rewards programs and multiple credit card options that offer either points or cash back incentives. Their mortgage products emphasize fixed-rate options with stable payments and local guidance through the lending process. Personal loans are marketed as flexible options with local decision-making.\n\nCapon Valley Bank distinguishes itself through its emphasis on local decision-making and community-based service. The bank highlights that lending decisions are made \"close to home\" rather than through remote corporate offices, and they emphasize the availability of local lenders for mortgage guidance. This positioning appeals to customers who prefer working with regional financial institutions over large national banks. The bank has implemented accessibility features on their website, including AudioEye optimization.\n\nAs a traditional bank, Capon Valley Bank serves customers seeking comprehensive financial services in a community banking environment. They are suitable for customers in their service area seeking traditional banking products with local service. However, the website does not provide specific information about interest rates, fees, loan approval timelines, or detailed product terms, which would be necessary for consumers to make informed comparisons with competitors.",
   "logo_url": "",
   "website_url": "https://www.caponvalleybank.com",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal loans with flexible terms and local decision-making",
+    "Fixed-rate mortgage loans for home purchase and refinancing",
+    "Auto loans",
+    "Home equity loans",
+    "Credit cards with points or cash back rewards",
+    "Debit cards with rewards program",
+    "Online banking and account access",
+    "Deposit accounts (checking and savings implied)",
+    "Fraud monitoring and fraud alerts",
+    "Secure contact forms for sensitive communications"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1918",
-    "Local community bank with personal service",
-    "5 locations"
+    "Offers comprehensive banking products in one institution (checking, savings, loans, mortgages, credit cards)",
+    "Emphasizes local loan decision-making rather than centralized corporate approval",
+    "Provides fixed-rate mortgage options with stable, predictable payments",
+    "Credit card products include rewards (points or cash back) on purchases",
+    "Debit card rewards program for everyday spending",
+    "Maintains fraud monitoring and alerts customers to fraudulent activity",
+    "Website accessibility optimized through AudioEye technology"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display interest rates, APRs, or fees for any products, making rate comparison impossible",
+    "No information provided about loan approval timelines or processing speed",
+    "Limited details about eligibility requirements or minimum/maximum loan amounts",
+    "No clear geographic service area defined on website",
+    "No information about mobile app availability or online-only account options"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "WV"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9998,
   "latitude": 39.0766190174392,
   "longitude": -78.5953270171747,
@@ -93,12 +102,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers in Capon Valley Bank's service area seeking one-stop banking with local relationship managers",
+    "Homebuyers looking for fixed-rate mortgages with local lender guidance",
+    "Consumers who prefer community banks over large national financial institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Capon Valley Bank is best for customers in their service area who value community banking, local decision-making, and comprehensive financial services under one roof. The primary caveat is that the website provides almost no specific information about rates, fees, terms, or eligibility requirements, making it impossible to evaluate their competitiveness without contacting the bank directly.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +115,11 @@
   ],
   "phone": "",
   "address": "2 W Main St, Wardensville, WV 26851",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

@@ -1,14 +1,14 @@
 {
   "name": "America'S Community Bank",
   "slug": "americas-community-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Blue Springs, MO. $62M in assets. 1 office.",
-  "description_long": "America'S Community Bank is a community bank located in Blue Springs, MO, established in 1888. The bank holds approximately $62M in total assets and $47M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering personal checking accounts, savings options, loans, and online banking services with 24/7 account access.",
+  "description_long": "America's Community Bank is a traditional community bank that serves customers through its digital and physical presence, emphasizing accessibility and personalized service. The bank is FDIC-insured, meaning deposits are backed by the full faith and credit of the U.S. Government, providing customers with deposit protection up to applicable limits.\n\nThe bank offers a range of financial services including personal checking accounts tailored to different financial needs, personal savings accounts, various loan products, and online banking capabilities. Customers can access their accounts 24/7 through the bank's online platform, review account activity including cleared checks and ATM/debit card transactions, transfer funds between accounts (both internal and external), and reorder checks online. The bank maintains at least one physical branch location that customers can visit in person.\n\nAmerica's Community Bank positions itself as a community-focused institution with experienced lenders ready to assist customers in finding appropriate loan products. The bank emphasizes convenience through multiple banking channels\u2014in-person branch access, phone support (816-228-2300), online banking, and a contact form on their website. Their approach suggests a balance between traditional community banking and modern digital convenience.\n\nHowever, potential customers should note several limitations based on available information: the bank's service area appears geographically limited (Kansas City area based on phone number 816 area code), specific loan types and rates are not detailed on the homepage, online banking has experienced downtime (noted as \"temporarily unavailable\" on the website), and limited information is available about savings products, CD rates, or comprehensive product comparisons without direct contact.",
   "logo_url": "",
   "website_url": "https://www.amcommbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with customizable options",
+    "Personal savings accounts",
+    "Loan products (personal, auto, home, business types not fully specified)",
+    "24/7 online banking platform with account access",
+    "Account activity review and transaction history",
+    "Internal and external account transfers",
+    "Online check reordering",
+    "ATM/debit card services",
+    "In-person branch banking",
+    "Phone support (816-228-2300)",
+    "Online contact form for inquiries",
+    "Business checking (mentioned on website)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1888",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits providing government-backed protection",
+    "24/7 online banking access for account review and transfers",
+    "Ability to transfer money between internal and external accounts",
+    "In-person branch location available for face-to-face service",
+    "Online check reordering capability for customer convenience",
+    "Multiple contact channels: phone (816-228-2300), email form, and in-person",
+    "Experienced loan officers available to help match customers with appropriate products"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Online banking platform has experienced downtime/unavailability issues",
+    "Limited product information available on website\u2014rates, fees, and loan terms not displayed",
+    "Service area appears geographically restricted to Kansas City region based on available contact information",
+    "No detailed information about savings accounts, CDs, or competitive product comparisons",
+    "Email communication explicitly discouraged for account matters, limiting asynchronous support options"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8893,
   "latitude": 39.0181240202012,
   "longitude": -94.2780339877485,
@@ -93,12 +104,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Kansas City-area residents seeking traditional community banking with online access",
+    "Customers who value in-person branch relationships combined with digital convenience",
+    "Individuals and families looking for basic checking, savings, and loan products from an FDIC-insured institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "America's Community Bank is best for customers in the Kansas City area seeking straightforward, FDIC-insured banking with both online and in-person service options. The main caveat is that specific product details, rates, and fees are not available on their website, requiring direct contact with the bank for pricing and comparison shopping, and the bank's online platform has experienced technical issues that may impact digital banking reliability.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "1100 W Main St, Blue Springs, MO 64015",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

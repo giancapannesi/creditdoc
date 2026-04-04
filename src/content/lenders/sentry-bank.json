@@ -1,14 +1,14 @@
 {
   "name": "Sentry Bank",
   "slug": "sentry-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Saint Joseph, MN. $375M in assets. 4 offices.",
-  "description_long": "Sentry Bank is a community bank located in Saint Joseph, MN, established in 1904. The bank holds approximately $375M in total assets and $324M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Sentry Bank is a locally-owned community bank in St. Cloud, Minnesota, offering checking, savings, home loans, business banking, and credit cards with four branch locations.",
+  "description_long": "Sentry Bank operates as a community-focused financial institution serving the St. Cloud, Minnesota area and surrounding communities. The bank emphasizes its local roots and understanding of the regional landscape, positioning itself as a partner for both personal and business customers at various life stages. With a stated 80-year history of community engagement, including sponsorship of local events and initiatives, Sentry Bank has built its reputation around accessibility and personalized service through on-site staff at four physical branch locations.\n\nThe bank offers a comprehensive suite of financial products including personal and business checking accounts, savings accounts, certificates of deposit (CDs) with promotional rates up to 3.80% APY, home loan financing for purchase and refinance, business banking services, treasury management solutions, credit cards, and online banking infrastructure. Their digital offerings include a mobile app for account management, bill pay functionality, budgeting tools, and electronic statement delivery, enabling customers to access accounts 24/7 from remote locations.\n\nSentry Bank differentiates itself primarily through its local ownership model and emphasis on community engagement rather than through innovative technology or competitive rate advantages. The bank actively sponsors community events, supports local organizations, and maintains physical branches staffed with personnel available for in-person assistance. This approach contrasts with larger regional or national banks and positions the institution as embedded within the communities it serves, particularly St. Cloud and surrounding Minnesota areas.\n\nAs a small community bank, Sentry Bank's primary limitation is geographic reach\u2014all four branches are concentrated in Central Minnesota. While the bank offers modern digital banking tools, it does not appear to differentiate on rate competitiveness or product innovation compared to larger financial institutions. Customers seeking extensive branch networks, specialized wealth management, or the broadest product selection may find better options elsewhere, though those prioritizing local relationship banking and community connection would find clear alignment with Sentry Bank's stated values.",
   "logo_url": "",
   "website_url": "https://www.mysentrybank.com",
   "affiliate_url": "",
@@ -23,23 +23,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs) with promotional rates",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Home purchase loans",
+    "Home refinancing loans",
+    "Home building loans",
+    "Business treasury management and cash flow solutions",
+    "Credit cards",
+    "Online banking with 24/7 account access",
+    "Mobile banking app with deposit and transfer functionality",
+    "Bill pay services",
+    "Budgeting tools",
+    "Electronic statement delivery"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1904",
-    "Local community bank with personal service",
-    "4 locations"
+    "Four physical branch locations in St. Cloud area with friendly, accessible staff available for in-person assistance",
+    "80-year history of community engagement and event sponsorship demonstrating long-term local commitment",
+    "Competitive CD rates with promotional 3.80% APY special offer (11-month terms, $10K minimum)",
+    "Comprehensive digital banking platform with mobile app, online bill pay, budgeting tools, and 24/7 account access",
+    "Business banking services including treasury management and cash flow solutions for growing enterprises",
+    "Home loan financing available for purchase, refinance, and building scenarios",
+    "Strong fraud awareness messaging and commitment to never requesting sensitive data over phone"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to four branch locations all in Central Minnesota\u2014no geographic reach beyond St. Cloud area",
+    "No evidence of rate competitiveness or specialty products that differentiate from larger regional banks",
+    "Community bank model may mean higher fees or fewer product options compared to national institutions",
+    "Limited information provided on specific checking account features, fee structures, or minimum balance requirements",
+    "No mention of investment services, wealth management, or products beyond basic banking and lending"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +65,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8546,
   "latitude": 45.5668349822829,
   "longitude": -94.3090890228325,
@@ -93,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and startups in Central Minnesota seeking local relationship banking and business-focused support",
+    "St. Cloud area residents seeking convenient branch access and personalized service from community-embedded banking staff",
+    "Customers prioritizing local community engagement and wanting to support locally-owned financial institutions",
+    "Homebuyers in Minnesota interested in working with a local lender familiar with regional property markets"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Sentry Bank is best for Central Minnesota residents and small business owners who value local relationship banking, convenient branch access, and community investment over rate shopping or extensive product selection. The primary caveat is geographic limitation\u2014the bank serves only the St. Cloud area with four branches, making it unsuitable for customers requiring broader regional or national banking reach.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +121,11 @@
   ],
   "phone": "",
   "address": "400 4Th Ave Ne, Saint Joseph, MN 56374",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

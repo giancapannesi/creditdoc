@@ -1,14 +1,14 @@
 {
   "name": "Millbury National Bank",
   "slug": "millbury-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Millbury, MA. $139M in assets. 1 office.",
-  "description_long": "Millbury National Bank is a community bank located in Millbury, MA, established in 1933. The bank holds approximately $139M in total assets and $113M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Millbury National Bank is a 200-year-old community bank serving Central Massachusetts with personal and business checking, savings, loans, and investment products.",
+  "description_long": "Millbury National Bank was established in 1825 and converted to a national bank in 1864, making it one of Massachusetts' oldest financial institutions. The bank celebrated its 200th anniversary in June 2025 and has maintained continuous operations throughout its history, operating from locations in the Blackstone Valley region of Central Massachusetts. The institution is known for its multigenerational family leadership spanning the Harris, Waters, Hull, Corey, Matson, and Warren families. As a Member FDIC institution, all deposits are FDIC-insured and backed by the full faith and credit of the U.S. Government.\n\nMillbury National Bank offers a comprehensive range of personal and business banking services. Personal products include free Kasasa Cash Checking and Kasasa Cash Back Checking (offering 5.00% cash back on debit purchases), personal savings accounts, Money Market Accounts, Certificates of Deposit, IRAs, and personal loans. The bank also provides home mortgage loans, home equity loans and lines of credit (HELOC), auto loans, RV and boat loans, and construction/home improvement loans. Business customers can access everyday business checking, IOLTA business checking, business money market accounts, business savings accounts, business CDs, and a range of business loans including commercial real estate, equipment, lines of credit, and term loans.\n\nThe bank distinguishes itself through its deep community roots and focus on small business lending within the Blackstone Valley. Millbury National Bank emphasizes competitive rates\u2014advertising 4.07% APY on qualifying checking balances up to $25,001 and 5.00% cash back rewards on debit purchases. The institution provides digital banking tools, CardValet fraud protection, financial calculators, and online account management. Their long history and local ownership model contrast sharply with large national banks, positioning them as a community-focused alternative.\n\nMillbury National Bank is best suited for Central Massachusetts residents and small business owners seeking personalized, local banking with competitive rates and strong community involvement. The bank's 200-year track record and FDIC insurance provide stability and safety. However, as a regional institution, they may have limited branch locations compared to national banks, and their digital banking capabilities appear basic relative to larger competitors. The specific APY and cash back offers carry qualification requirements that should be verified.",
   "logo_url": "",
   "website_url": "https://www.mnbonline.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal Checking (Free Kasasa Cash, Free Kasasa Cash Back, Everyday Checking)",
+    "Personal Savings (Free Kasasa Saver, Everyday Savings Account, Money Market Accounts)",
+    "Certificates of Deposit (personal and business)",
+    "Individual Retirement Accounts (IRAs)",
+    "Personal Loans and Cash Reserve Loans",
+    "Home Mortgage Loans and Home Equity Loans/HELOC",
+    "Auto Loans and RV/Boats/Personal Recreational Vehicle Loans",
+    "Business Checking (Everyday and IOLTA)",
+    "Business Loans (Commercial Real Estate, Construction, Equipment, Term Loans, Lines of Credit)",
+    "Business Money Market Accounts and Business Savings",
+    "Digital Banking and Online Account Management",
+    "CardValet Fraud Protection and EMV Debit Cards"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1933",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits with full faith and credit backing",
+    "Kasasa Cash Checking with 4.07% APY on balances up to $25,001",
+    "Kasasa Cash Back Checking offering 5.00% cash back on debit card purchases",
+    "200-year history (founded 1825) demonstrating institutional longevity and stability",
+    "No-fee, no-minimum everyday business checking accounts",
+    "Comprehensive loan offerings including mortgages, HELOCs, auto, RV, construction, and business loans",
+    "Community-focused lending with multigenerational family leadership",
+    "Digital banking tools including CardValet fraud protection and online account management"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as a regional Blackstone Valley bank vs. national competitors",
+    "Kasasa product rates and cash back rewards require monthly qualification criteria not fully detailed on homepage",
+    "Website shows basic digital interface without clear information on mobile app capabilities or modern fintech features",
+    "Limited information about business lending terms, rates, or SBA loan availability",
+    "No mention of investment advisory services or wealth management offerings despite 200-year history"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 2616,
   "latitude": 42.1918736548125,
   "longitude": -71.7604112773018,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Central Massachusetts residents and small business owners seeking personalized local banking",
+    "Consumers prioritizing high-yield checking and debit card rewards through Kasasa products",
+    "Small to mid-sized businesses in the Blackstone Valley needing business checking and commercial lending",
+    "Customers valuing institutional stability and community involvement over digital-only banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Millbury National Bank is best for Central Massachusetts consumers and small business owners seeking community-focused banking with competitive rates, FDIC insurance, and long-term stability. The main caveat is that as a regional bank with limited digital innovation compared to national competitors, customers should verify specific rate qualifications (Kasasa products require monthly activity criteria) and confirm branch/ATM access meets their location needs.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "18 Main St, Millbury, MA 01527",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

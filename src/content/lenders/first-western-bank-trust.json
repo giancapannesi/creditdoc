@@ -1,13 +1,13 @@
 {
   "name": "First Western Bank & Trust",
   "slug": "first-western-bank-trust",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Minot, ND. $2308M in assets. 20 offices.",
-  "description_long": "First Western Bank & Trust is a community bank located in Minot, ND, established in 1964. The bank holds approximately $2308M in total assets and $1930M in deposits. It operates 20 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank serving 19 locations across North Dakota, South Dakota, Minnesota, and Arizona since 1964, offering personal, business, agricultural, and mortgage banking services with FDIC insurance.",
+  "description_long": "First Western Bank & Trust has operated as a community-focused financial institution for over 60 years, establishing itself as a trusted banking partner since its founding in 1964. The bank maintains 19 physical locations across four states (North Dakota, South Dakota, Minnesota, and Arizona), positioning itself as a regional community bank rather than a national institution. The bank emphasizes deep local knowledge combined with modern banking technology to serve its customer base.\n\nThe company offers a comprehensive suite of banking services including personal checking and savings accounts, money market accounts, business banking solutions with cash management tools, agricultural lending with specialized expertise, mortgage loans for home purchase and refinance, and trust and estate planning services. They provide digital banking through online platforms and a mobile app (MyFirstWestern), credit card products (Cashback Visa with no annual fee), and the ability to open accounts remotely through their OpenAnywhere\u2122 service. Additional services include tax eStatements, fraud detection, and purchase security protection on credit cards.\n\nFirst Western distinguishes itself through its agricultural banking focus, acknowledging the unique needs of farming operations with specialized lending products and financial guidance. The bank emphasizes community reinvestment through initiatives like their annual \"100 Cheers\" grocery program and positions itself around personalized service rather than transactional banking. They highlight FDIC insurance backing and modern technology integration while maintaining the personal touch of a community bank.\n\nAs a regional community bank, First Western serves customers seeking local relationship banking with modern digital capabilities. However, their geographic footprint is limited to the Upper Midwest and Arizona, and their service offerings, while comprehensive, may lack some specialized products available at larger national banks. Customers should verify service availability at their specific location among the 19 branches.",
   "logo_url": "",
   "website_url": "https://www.firstwestern.bank",
   "affiliate_url": "",
@@ -22,23 +22,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts with flexible terms",
+    "Money market accounts",
+    "OpenAnywhere\u2122 remote account opening service",
+    "Business banking and cash management services",
+    "Agricultural lending with specialized expertise",
+    "Mortgage loans for home purchase, refinance, and customized options",
+    "Trust services and estate planning",
+    "Cashback Visa credit card with rewards and fraud protection",
+    "MyCardStatement online credit card payment service",
+    "Online and mobile banking (MyFirstWestern app)",
+    "Tax eStatements delivery",
+    "Certificate of Deposit (CDs) implied through money market products"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1964",
-    "Local community bank with personal service",
-    "20 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "19 physical branch locations across 4 states for in-person banking services",
+    "Specialized agricultural lending with dedicated ag banking experts",
+    "Cashback Visa credit card with no annual fee and fraud detection service",
+    "OpenAnywhere\u2122 service allows account opening online within minutes, 24/7",
+    "Comprehensive trust and estate planning services for legacy planning",
+    "Strong community reinvestment programs including annual charitable initiatives",
+    "Mobile app (MyFirstWestern) and online banking for digital account management"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint to Upper Midwest and Arizona\u2014not available nationally",
+    "Smaller institution may have fewer specialized products than major national banks",
+    "Only 19 locations could limit convenience for customers outside service areas",
+    "Website does not clearly display current interest rates for deposit or loan products",
+    "No mention of specific loan approval timelines or processing procedures"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +62,7 @@
   "states_served": [
     "ND"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 19123,
   "latitude": 48.227010992461,
   "longitude": -101.296461020269,
@@ -92,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural business owners and farmers in the Upper Midwest seeking specialized ag lending",
+    "Families and individuals in North Dakota, South Dakota, Minnesota, or Arizona wanting community-focused relationship banking",
+    "Small business owners requiring personalized cash management and business lending services",
+    "Customers prioritizing FDIC-insured deposits and local decision-making over large national bank options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Western Bank & Trust is best suited for customers in the Upper Midwest and Arizona seeking traditional community banking with FDIC insurance, local relationship management, and specialized agricultural lending expertise. The main caveat is geographic limitation\u2014they only serve 19 locations across four states, making them unavailable for national coverage, and prospective customers should verify branch availability in their area.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +118,11 @@
   ],
   "phone": "",
   "address": "900 S Broadway, Minot, ND 58701",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

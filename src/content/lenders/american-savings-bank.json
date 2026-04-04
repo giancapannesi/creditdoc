@@ -1,15 +1,15 @@
 {
   "name": "American Savings Bank, National Association",
   "slug": "american-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Honolulu, HI. $8979M in assets. 35 offices.",
-  "description_long": "American Savings Bank, National Association is a community bank located in Honolulu, HI, established in 1987. The bank holds approximately $8979M in total assets and $8180M in deposits. It operates 35 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "American Savings Bank is a Hawaii-based national bank offering personal and business banking, mortgages, loans, credit cards, and investment services through branches, online, and mobile platforms.",
+  "description_long": "American Savings Bank, National Association is a full-service bank headquartered in Hawaii with a strong local presence across the islands. The bank has built its reputation around serving Hawaii residents and businesses since being voted one of Hawaii's Best Banks since 2018. ASB operates as a traditional national bank with both personal and commercial banking divisions, maintaining physical branch locations throughout Hawaii while offering comprehensive digital banking services.\n\nASB's service portfolio spans personal banking (checking, savings, CDs, mortgages, home equity lines of credit, personal loans, credit cards), business banking (commercial checking, savings, cash management, commercial real estate loans, merchant services), and investment services through partnerships with Cetera and Franklin Madison Group LLC. The bank offers certificates of deposit with competitive rates (currently advertising 6-month CDs up to 3.10% APY), online and mobile banking available 24/7, ATM networks, wire transfers, and foreign currency exchange. They also provide student loan options through College Ave and financial education through free courses designed by Banzai.\n\nWhat distinguishes ASB is its strong \"Buy Local Hawaii\" program, which provides exclusive discounts at over 125 local merchants across Hawaii islands to ASB Visa debit cardholders, saving customers more than $1.5 million collectively. The bank emphasizes waived monthly service fees on personal checking accounts, no-fee services on various transactions, and a user-friendly mobile app that was recognized as one of Hawaii's best-ranked online banking apps. ASB also positions itself around customer accessibility with features like low-vision accessibility options and dedicated customer service for both personal and business clients.\n\nASB is a legitimate, FDIC-insured national bank with a routing number (321370765) and established physical presence. However, as a regional bank focused primarily on Hawaii, it has geographic limitations for customers outside the islands. The bank's product offerings are standard for traditional banks and not particularly innovative compared to fintech competitors, though this may appeal to customers preferring established institutions over digital-only banks.",
   "logo_url": "",
   "website_url": "https://www.asbhawaii.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Mortgages (home purchase and refinance)",
+    "Home Equity Lines of Credit (HELOC)",
+    "Personal loans and lines of credit",
+    "Credit cards with local merchant rewards",
+    "Business checking and savings accounts",
+    "Commercial real estate loans",
+    "Cash management services",
+    "Investment brokerage services through Cetera",
+    "Retirement accounts (IRAs including Brokerage IRAs)",
+    "Wire transfers and foreign currency exchange"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1987",
-    "Local community bank with personal service",
-    "35 locations"
+    "Exclusive Buy Local Hawaii program providing discounts at 125+ local merchants with ASB Visa debit card",
+    "No monthly service fee on personal checking accounts (with qualifying conditions)",
+    "Competitive CD rates advertised at 3.10% APY for 6-month terms",
+    "24/7 availability of online, mobile, phone banking, and ATMs",
+    "Recognized as one of Hawaii's Best Banks since 2018 with strong local reputation",
+    "Comprehensive digital banking with updated mobile app rated among Hawaii's best",
+    "Full suite of services including mortgages, business banking, investments, and insurance partnerships"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: primarily serves Hawaii; limited accessibility for mainland customers",
+    "No mention of competitive rates compared to national banks or online-only banks on checking/savings products",
+    "Limited innovation in product offerings compared to fintech and digital banking competitors",
+    "Mortgage and loan products require application process with no indication of streamlined online approval",
+    "Student loans only offered through College Ave partnership rather than in-house product"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "HI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 32526,
   "latitude": 21.315025464313,
   "longitude": -157.862182780105,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Hawaii residents seeking local banking with community-focused rewards and merchant discounts",
+    "Small business owners and commercial entities operating in Hawaii requiring business banking services",
+    "Mortgage borrowers in Hawaii wanting local lender relationships and in-person support",
+    "Customers prioritizing established, FDIC-insured banking over fintech alternatives"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "American Savings Bank is best for Hawaii residents and businesses seeking comprehensive banking services with strong local community integration and merchant rewards. The primary caveat is geographic limitation\u2014this bank is designed for Hawaii-based customers and offers limited value to mainland users without Hawaii ties.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "300 N Beretania St, Honolulu, HI 96817",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

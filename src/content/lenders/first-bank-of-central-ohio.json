@@ -1,14 +1,14 @@
 {
   "name": "First Bank Of Central Ohio",
   "slug": "first-bank-of-central-ohio",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Worthington, OH. $253M in assets. 2 offices.",
-  "description_long": "First Bank Of Central Ohio is a community bank located in Worthington, OH, established in 2021. The bank holds approximately $253M in total assets and $224M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank serving central Ohio with personal and business banking, lending, and specialty services for real estate, medical, and dental practices.",
+  "description_long": "First Bank of Central Ohio is a community-focused FDIC-insured bank operating in the Columbus, Ohio area with two primary locations in Worthington and Upper Arlington. The bank emphasizes personalized service and local decision-making, positioning itself as an alternative to larger national banks while maintaining federal deposit insurance backing.\n\nThe bank offers a comprehensive suite of personal banking services including checking, savings accounts, certificates of deposit, and digital payment tools like Zelle and mobile wallet integration. For consumers, lending options include home mortgages and home equity lines of credit. On the business side, FBCO provides business checking and savings accounts, business credit cards, business lines of credit, commercial installment loans, SBA loans, and specialized commercial real estate financing including land acquisition and development loans.\n\nFirst Bank of Central Ohio distinguishes itself through industry-specific expertise, with dedicated specialty services for property management companies, commercial real estate investors, and medical and dental practices. The bank promotes \"personal\" business banking and community involvement, contrasting itself with larger institutional competitors. They offer modern digital conveniences like external fund transfers at no cost, Apple Pay/Samsung Pay/Google Pay integration, and online and mobile banking platforms.\n\nAs a regional community bank, FBCO serves a limited geographic footprint (only two locations in central Ohio) and may have less extensive branch access than national competitors. The website provides limited information about account fee structures, specific interest rates, and minimum balance requirements, which are critical factors for consumers evaluating banking options. For those in the central Ohio region seeking relationship-based banking with specialized business services, this bank offers viable options.",
   "logo_url": "",
   "website_url": "https://www.fbcentralohio.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Zelle digital payments (personal and business)",
+    "Home mortgage lending",
+    "Home equity lines of credit",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Business credit cards",
+    "Commercial real estate financing",
+    "SBA loan programs",
+    "Commercial land acquisition and development financing"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2021",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits backed by full faith and credit of the U.S. Government",
+    "No-cost external transfers between FBCO and other financial institutions",
+    "Mobile wallet support (Apple Pay, Samsung Pay, Google Pay) for secure contactless payments",
+    "Specialized lending expertise for medical/dental practices, property management, and commercial real estate",
+    "Small Business Administration (SBA) loan programs available for qualifying businesses",
+    "Dedicated business banking focus with commitment to community lending",
+    "Multiple lending options including commercial real estate financing and land development loans"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint with only two physical branch locations in central Ohio",
+    "No published information on checking/savings account fees, monthly maintenance charges, or minimum balance requirements",
+    "Interest rates and CD yields not displayed on website, requiring direct contact to compare",
+    "Limited service area may inconvenience customers relocating outside central Ohio",
+    "No mention of checking account overdraft protection or fee structures"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 59249,
   "latitude": 40.1016329881277,
   "longitude": -83.0161809655913,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs in central Ohio seeking relationship-based commercial banking",
+    "Medical and dental practice owners needing specialized financial services and healthcare industry expertise",
+    "Commercial real estate investors and property management companies in the central Ohio region",
+    "Central Ohio residents seeking FDIC-insured personal banking with community bank service model"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Bank of Central Ohio is best for small business owners, real estate investors, and medical/dental professionals in the central Ohio area who prioritize personalized service and industry expertise over branch convenience. The main caveat is the very limited geographic footprint (two locations only) and lack of publicly available fee and rate information, requiring direct contact to evaluate actual banking costs.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "6700 N High St, Worthington, OH 43085",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

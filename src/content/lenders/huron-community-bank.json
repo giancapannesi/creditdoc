@@ -1,14 +1,14 @@
 {
   "name": "Huron Community Bank",
   "slug": "huron-community-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in East Tawas, MI. $320M in assets. 8 offices.",
-  "description_long": "Huron Community Bank is a community bank located in East Tawas, MI, established in 1927. The bank holds approximately $320M in total assets and $280M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank established in 1927, offering personal loans, mortgages, business banking, and deposit products with local branch access.",
+  "description_long": "Huron Community Bank (HCB) was established in 1927 and has been community-owned since 1989. The bank operates as a traditional full-service financial institution with FDIC insurance backing all eligible deposits. Their positioning emphasizes the \"community banking difference\" and maintaining a local presence with multiple branches and ATMs across their service area.\n\nHCB offers a comprehensive range of retail and business banking services including personal checking and savings accounts, certificates of deposit (CDs), individual retirement accounts (IRAs), personal loans with competitive rates and flexible terms, mortgage loans for home purchase, and agricultural loans for farming operations. They provide online banking, remote deposit capture, telephone banking (24/7), debit and credit cards, and bill pay services. For businesses, they offer tailored business loan solutions and business checking accounts designed to optimize cash flow and streamline finances.\n\nThe bank distinguishes itself through community ownership structure, longevity (96+ years in operation), emphasis on personalized service, and specialized agricultural lending. They offer employee benefits including tuition reimbursement and free accounts to staff, and actively recruit talent locally. The website features financial calculators and cybersecurity education resources to help customers plan and protect their finances.\n\nAs a regional community bank, HCB's primary limitation is geographic\u2014their services are tied to physical branch locations and they do not appear to be a national online-only bank. The website provides limited detail on specific loan rates, terms, or product specifications, requiring prospective customers to contact branches directly for detailed pricing and eligibility information.",
   "logo_url": "",
   "website_url": "https://www.bankhcb.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with free online banking and bill pay",
+    "Savings accounts and deposit products",
+    "Certificates of Deposit (CDs) and Individual Retirement Accounts (IRAs)",
+    "Personal loans with competitive rates and flexible terms",
+    "Mortgage loans for home purchase and refinancing",
+    "Agricultural loans for farming operations",
+    "Business checking accounts and business loan solutions",
+    "Online banking platform with 24/7 access",
+    "Remote deposit capture for mobile check deposits",
+    "Telephone banking system for account access",
+    "Debit and credit card products",
+    "Financial calculators and planning tools"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1927",
-    "Local community bank with personal service",
-    "8 locations"
+    "FDIC-insured deposits with full faith and credit backing",
+    "Community-owned since 1989 with 96+ years of operating history",
+    "24/7 telephone banking access for account management",
+    "Specialized agricultural loan products for farming businesses",
+    "Free online banking and bill pay with checking accounts",
+    "Remote deposit capture capability for mobile check deposits",
+    "Tuition reimbursement and free accounts offered to employees"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability tied to physical branch locations",
+    "Website provides no specific rate information or loan terms for comparison",
+    "No clear mention of competitive advantage in interest rates or fees versus larger banks",
+    "Agricultural lending specialization may not apply to non-farming customers",
+    "No indication of digital banking innovation or mobile app features"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 11810,
   "latitude": 44.28181459022,
   "longitude": -83.4911244805313,
@@ -93,12 +104,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers in the bank's service area seeking personalized local banking relationships",
+    "Agricultural and farming business owners needing specialized loan products",
+    "Community-minded depositors preferring locally-owned institutions over national chains"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Huron Community Bank is best for individuals and businesses within their service area who value local ownership, personalized service, and community banking relationships. The primary caveat is that this is a regional bank with geographic limitations\u2014customers must live or operate in their branch service area, and they should contact the bank directly for current rates and specific loan terms not detailed on the website.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "301 Newman St, East Tawas, MI 48730",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

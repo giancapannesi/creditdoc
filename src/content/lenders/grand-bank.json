@@ -1,14 +1,14 @@
 {
   "name": "Grand Bank",
   "slug": "grand-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Tulsa, OK. $654M in assets. 4 offices.",
-  "description_long": "Grand Bank is a community bank located in Tulsa, OK, established in 1975. The bank holds approximately $654M in total assets and $563M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Family-owned bank offering traditional banking services including checking, savings, and mobile banking, with FDIC insurance protection and community-focused service.",
+  "description_long": "Grand Bank is a family-owned banking institution that operates as a community-focused alternative to large national banks. The company emphasizes personal relationships and word-of-mouth reputation rather than mass advertising, positioning itself as a locally-oriented financial institution. The bank is FDIC-insured, meaning deposits are backed by the full faith and credit of the U.S. Government, providing standard deposit protection up to applicable limits.\n\nGrand Bank offers core banking services including online banking with login credentials, mobile banking through a dedicated secure app, checking and savings accounts, and check ordering. The bank provides account management tools accessible through their website and mobile platform, allowing customers to bank anytime and anywhere. They maintain physical branch locations that customers can find through their online locator tool, combining digital and in-person banking options.\n\nThe company distinguishes itself through its family-owned structure and emphasis on personalized service from dedicated bankers who are described as \"working to help their community thrive.\" Rather than relying on billboards or television advertising, Grand Bank builds its customer base through community reputation and customer referrals. This approach suggests a focus on relationship-based banking rather than transactional volume.\n\nAs a regional bank, Grand Bank provides essential banking services but appears to be a smaller institution without the extensive product offerings of major national banks. The website content is limited to core banking functions and fraud prevention information, with no mention of investment services, business banking solutions beyond implied small business accounts, advanced credit products, or wealth management. The bank's digital presence and app availability indicate modernization efforts, though details about specific features, account types, fees, or interest rates are not disclosed on the homepage.",
   "logo_url": "",
   "website_url": "https://www.grandbank.com",
   "affiliate_url": "",
@@ -23,23 +23,31 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking and savings accounts",
+    "Online banking platform with secure login",
+    "Mobile banking app for iOS and Android",
+    "Physical branch locations in multiple areas",
+    "Check ordering through online portal",
+    "Lost or stolen debit card reporting and replacement",
+    "Fraud alert and account security monitoring",
+    "Customer contact support via phone (918-491-9700)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1975",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits backed by U.S. Government guarantee",
+    "Family-owned and community-focused business model emphasizing personalized service",
+    "Mobile banking app available for secure on-the-go access",
+    "Online banking platform with account login and management capabilities",
+    "Physical branch locations accessible through online locator tool",
+    "Fraud alert warnings and proactive customer security messaging on homepage",
+    "Online check reordering capability for account management convenience",
+    "Lost or stolen card reporting system for fraud protection"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited product information on website makes it difficult to compare offerings with competitors",
+    "No details provided about account types, fees, interest rates, or specific services available",
+    "As a regional/family-owned bank, likely has fewer branch locations than national banks",
+    "Homepage does not mention business banking, investment services, or loan products",
+    "No information about customer support hours or service levels"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +59,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 22065,
   "latitude": 36.1327040177457,
   "longitude": -95.9523009583132,
@@ -93,12 +101,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking personalized, relationship-based banking in the bank's service area",
+    "Community-minded individuals who prefer supporting local, family-owned financial institutions",
+    "People looking for FDIC-insured checking and savings with mobile banking convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Grand Bank is best for customers in their service area who value community banking relationships and want FDIC protection with modern digital access. The main caveat is that the website provides minimal details about specific products, rates, and fees\u2014prospective customers should contact the bank directly or visit a branch to understand full service offerings and competitive positioning.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +114,11 @@
   ],
   "phone": "",
   "address": "2642 E 21St St, Tulsa, OK 74114",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

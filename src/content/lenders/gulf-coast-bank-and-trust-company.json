@@ -1,14 +1,14 @@
 {
   "name": "Gulf Coast Bank And Trust Company",
   "slug": "gulf-coast-bank-and-trust-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in New Orleans, LA. $3631M in assets. 38 offices.",
-  "description_long": "Gulf Coast Bank And Trust Company is a community bank located in New Orleans, LA, established in 1990. The bank holds approximately $3631M in total assets and $3152M in deposits. It operates 38 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank operating in Southeast Louisiana, Florida, and Alabama offering checking, savings, loans, and trust services with a focus on personalized customer service.",
+  "description_long": "Gulf Coast Bank & Trust Company is a locally owned and operated financial institution serving communities across Southeast Louisiana (New Orleans, Baton Rouge, Northshore, St. Bernard), Florida, and Alabama. The bank has been operating since the 1890s and positions itself as a community-focused alternative to larger national banks. The institution emphasizes combining traditional relationship banking with modern digital banking capabilities.\n\nThe bank offers a comprehensive suite of personal and business banking products. Personal services include interest-checking accounts with no monthly service fee and no minimum balance requirements, personal loans, mortgage loans with multiple program options, and co-branded school affinity debit cards. Business customers can access business checking and savings accounts, business loans, business credit cards, and specialized business solutions. Additionally, the bank provides trust and brokerage services, online and mobile banking, and peer-to-peer money transfer capabilities through digital channels.\n\nGulf Coast Bank distinguishes itself through its emphasis on personalized, relationship-based banking. Customer testimonials consistently highlight individual loan officers and personal attention to customer needs rather than automated processes. The bank markets itself as \"The Bank That Cares About You\" and emphasizes its local ownership and community involvement. Their interest-checking account specifically offers no minimum balance requirement, which may appeal to customers with limited savings.\n\nAs a regional community bank, Gulf Coast Bank offers traditional banking products without specialized fintech innovations. While FDIC insurance and established operations since the 1890s provide stability, the bank's geographic footprint is limited compared to national institutions. Customers should verify that specific service offerings and rates are competitive in their local market, as community banks often have higher fees or lower rates than national competitors on certain products.",
   "logo_url": "",
   "website_url": "https://www.gulfbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "FDIC-insured checking accounts with online and mobile banking",
+    "Interest-checking accounts with no monthly service fee and no minimum balance",
+    "Personal savings accounts",
+    "Mortgage loans with multiple program options and pre-qualification",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking and savings accounts",
+    "Business loans and business solutions",
+    "Trust and brokerage services",
+    "Consumer and business credit cards",
+    "Co-branded school affinity debit cards",
+    "Free contactless debit cards",
+    "Peer-to-peer money transfer via online banking and mobile app"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1990",
-    "Local community bank with personal service",
-    "38 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Interest-checking account with zero monthly service fee and zero minimum balance requirement",
+    "Free contactless debit cards for both personal and business accounts",
+    "Established institution operating since the 1890s with deep community roots",
+    "Personalized mortgage pre-qualification process with dedicated loan officers",
+    "Multiple digital channels including online banking, mobile app, and peer-to-peer money transfers",
+    "Co-branded school affinity debit cards for students, alumni, and supporters"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Southeast Louisiana, Florida, and Alabama versus national bank availability",
+    "No information provided about fee schedules, interest rates, or minimum balance requirements for most account types",
+    "Smaller institution may have fewer branch locations and ATMs compared to major national banks",
+    "Website does not clearly display competitive rates or fee comparisons for checking/savings products",
+    "Limited transparency on business loan terms, personal loan APRs, or mortgage rate offerings"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "LA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 32974,
   "latitude": 29.9520179908499,
   "longitude": -90.0696509750884,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Southeast Louisiana, Florida, and Alabama residents seeking personalized relationship banking and local decision-making",
+    "Mortgage borrowers who value working directly with experienced loan officers and customized loan programs",
+    "Students and alumni seeking school affinity debit cards with community bank support",
+    "Small business owners wanting accessible business banking solutions with personal service"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Gulf Coast Bank & Trust is best for individuals and small business owners in Southeast Louisiana, Florida, and Alabama who prioritize personalized customer service and relationship banking over digital-first solutions or competitive rate shopping. The main caveat is that as a regional community bank, customers should verify that their specific products offer competitive rates and fees compared to national alternatives, as the bank does not transparently display pricing on its website.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "200 Saint Charles Ave, New Orleans, LA 70130",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Bank Of Brookhaven",
   "slug": "bank-of-brookhaven",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Brookhaven, MS. $241M in assets. 1 office.",
-  "description_long": "Bank Of Brookhaven is a community bank located in Brookhaven, MS, established in 2000. The bank holds approximately $241M in total assets and $210M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Bank of Brookhaven is an FDIC-insured community bank in Mississippi offering checking, savings, loans, and digital banking services since 2000.",
+  "description_long": "Bank of Brookhaven opened its doors on January 31, 2000, and proudly markets itself as the only remaining home-owned bank in Lincoln County, Mississippi. The institution emphasizes its commitment to community involvement and responsive service as core differentiators in the competitive banking landscape. As an FDIC-insured institution, deposits are backed by the full faith and credit of the U.S. Government, providing standard deposit protection.\n\nThe bank offers a comprehensive suite of retail and commercial banking services. For individuals, this includes multiple checking and savings account options, CDs and IRAs, personal installment loans, mortgage loans (including customized options), and debit/credit card services. Digital capabilities encompass online banking, mobile banking, digital wallet integration, bill pay, and cash management tools. The bank also provides traditional banking services such as wire transfers, money orders, notary services, overdraft protection, and night depository options. Phone banking is available for account inquiries and management.\n\nBank of Brookhaven distinguishes itself through its positioning as a locally-owned, community-focused institution in an era of consolidation. The organization emphasizes personalized mortgage lending tailored to individual needs and budgets, and maintains a commitment to both personal and commercial lending. Their customer base appears to be community members who prioritize relationship banking over large national institutions.\n\nAs a smaller regional bank, Bank of Brookhaven faces inherent limitations. The website provides limited detail on specific loan rates, terms, account features, or competitive advantages beyond community ownership. Digital banking capabilities appear functional but basic compared to larger institutions. Prospective customers should verify specific product terms and rates directly, as detailed pricing and feature information is not available on the website.",
   "logo_url": "",
   "website_url": "https://www.bankofbrookhaven.com",
   "affiliate_url": "",
@@ -23,23 +23,39 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "FDIC-insured checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of Deposit (CDs) and Individual Retirement Accounts (IRAs)",
+    "Personal installment loans",
+    "Mortgage loans (customized options)",
+    "Commercial loans",
+    "Debit and credit card services",
+    "Online banking",
+    "Mobile banking",
+    "Digital wallet services",
+    "Bill pay",
+    "Wire transfers",
+    "Money orders",
+    "Notary services",
+    "Overdraft protection",
+    "Night depository",
+    "Phone banking"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2000",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Positioned as the only remaining home-owned bank in Lincoln County, emphasizing local control",
+    "Offers multiple account types including free student checking",
+    "Provides both retail and commercial lending products",
+    "Digital banking services including mobile banking, online access, and digital wallet",
+    "Personalized mortgage loan options tailored to individual budgets",
+    "Traditional banking services like wire transfers, notary services, and night depository"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as a small regional bank restricts accessibility for non-local customers",
+    "Website lacks specific details on loan rates, APRs, account terms, and fees needed for comparison shopping",
+    "Minimal information about competitive advantages, product features, or service differentiation beyond community ownership",
+    "Digital banking capabilities appear basic with limited detail on mobile app features or functionality",
+    "No readily available information about customer service hours, branch locations, or online application processes"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +67,7 @@
   "states_served": [
     "MS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 35439,
   "latitude": 31.5796610021869,
   "longitude": -90.4492070202014,
@@ -93,12 +109,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Lincoln County, Mississippi residents seeking relationship-based community banking",
+    "Small business owners and commercial entities in the local market",
+    "Customers prioritizing local ownership and community involvement over national bank convenience",
+    "Individuals seeking personalized mortgage lending with customized terms"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Brookhaven is best suited for individuals and businesses in Lincoln County, Mississippi who value local, community-focused banking and personalized service over the convenience and features of large national institutions. Primary caveat: limited website transparency on specific rates, terms, and fees makes it difficult to evaluate competitiveness without direct contact; geographic limitations restrict accessibility for customers outside the local market.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-30",
   "cities_served": [
@@ -106,9 +123,9 @@
   ],
   "phone": "",
   "address": "411 Brookway Blvd, Brookhaven, MS 39601",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
+  "processing_status": "ready_for_index",
+  "quality_score": 12,
+  "enrichment_attempts": 1,
   "cfpb_data": {
     "found_in_cfpb": true,
     "cfpb_company_name": "Brookhaven Law Group PLLC",
@@ -118,5 +135,8 @@
     "data_period": "2023-present",
     "last_checked": "2026-03-30"
   },
-  "no_index": true
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

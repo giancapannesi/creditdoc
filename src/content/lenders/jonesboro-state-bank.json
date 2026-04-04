@@ -1,14 +1,14 @@
 {
   "name": "Jonesboro State Bank",
   "slug": "jonesboro-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Jonesboro, LA. $1225M in assets. 2 offices.",
-  "description_long": "Jonesboro State Bank is a community bank located in Jonesboro, LA, established in 1913. The bank holds approximately $1225M in total assets and $1142M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank in Jackson Parish, Louisiana, offering personal and business banking with a 110+ year history of local service and competitive lending rates.",
+  "description_long": "Jonesboro State Bank was founded in January 1913 and has operated continuously for over 110 years as a community-focused financial institution serving Jackson Parish and surrounding areas in Louisiana. The bank is notable for maintaining 70+ years of management continuity across four generations of leadership, enabling deep institutional knowledge and long-term customer relationships. The bank emphasizes personalized service and investment in local economic development as core to its mission.\n\nThe bank offers a comprehensive suite of personal and business banking services including checking and savings accounts, mobile banking, certificates of deposit, individual retirement accounts, personal and mortgage loans, and business checking and lending products. They provide modern digital banking conveniences through mobile apps and online platforms, while maintaining emphasis on direct customer service. The bank is FDIC-insured, providing federal deposit protection up to applicable limits.\n\nJonesboro State Bank distinguishes itself through commitment to local community investment, competitive pricing on loans, loyalty discounts, and a stated focus on understanding individual customer needs and goals. The bank emphasizes security, offering SecurLock Protection, debit card coverage, identity protection resources, and a dedicated security center. Management's multi-generational continuity is presented as enabling superior customer understanding compared to larger institutions.\n\nAs a small community bank, Jonesboro State Bank serves primarily Jackson Parish residents and local businesses rather than national markets. While the website demonstrates professional banking operations and security measures, the bank's limited geographic footprint and smaller scale mean fewer branch locations, ATM networks, and digital features compared to regional or national banks. The website content is informational but lacks specific details on fee structures, loan rates, or deposit product interest rates that would enable comprehensive comparison.",
   "logo_url": "",
   "website_url": "https://www.jonesborostatebank.com",
   "affiliate_url": "",
@@ -23,23 +23,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Personal loans and mortgage loans",
+    "Mobile banking application",
+    "Online banking platform",
+    "Business checking accounts",
+    "Business loans",
+    "Debit card services with SecurLock Protection",
+    "Lost or stolen card reporting and replacement",
+    "ATM network access",
+    "Financial calculators",
+    "Identity theft protection resources",
+    "Secure document upload services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1913",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits with federal protection backing",
+    "110+ year history of continuous operation and community investment in Jackson Parish",
+    "Four-generation management continuity providing institutional stability and customer relationship depth",
+    "Competitive loan rates and loyalty discounts explicitly offered",
+    "Mobile banking and online banking platforms for digital account access",
+    "Comprehensive personal banking products: checking, savings, IRAs, CDs, and mortgage loans",
+    "Business banking services including business checking and business loans",
+    "SecurLock Protection and identity theft protection resources"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area restricted to Jackson Parish and immediately surrounding communities, unsuitable for customers outside Louisiana",
+    "No specific loan rates, deposit APYs, or fee schedules disclosed on website, making comparison shopping difficult",
+    "Smaller institution means likely fewer ATM locations and branch offices than regional or national alternatives",
+    "Website lacks details on minimum deposit requirements, loan eligibility criteria, or product-specific terms",
+    "No information about business loan amounts, SBA lending, or specialized business products beyond basic checking and loans"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +66,7 @@
   "states_served": [
     "LA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9325,
   "latitude": 32.2405229798707,
   "longitude": -92.7138540114806,
@@ -93,12 +108,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Jackson Parish and local Louisiana residents seeking community-focused banking with personal service",
+    "Small business owners and entrepreneurs in the region seeking relationship-based lending and local accountability",
+    "Customers prioritizing local economic investment and multi-generational banking relationships over largest product selection",
+    "Individuals wanting FDIC insurance protection with a bank emphasizing security and identity protection"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Jonesboro State Bank is best for Jackson Parish, Louisiana residents and small business owners seeking personalized, community-focused banking from a stable, locally-invested institution with 110+ years of history. The primary caveat is geographic limitation\u2014the bank primarily serves Jackson Parish and surrounding areas, making it unsuitable for customers outside Louisiana, and lacks detailed public information on rates and fees necessary for informed product comparison.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +122,11 @@
   ],
   "phone": "",
   "address": "109 Jimmie Davis Blvd, Jonesboro, LA 71251",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

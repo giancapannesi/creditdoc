@@ -1,15 +1,15 @@
 {
   "name": "Andrews Federal Credit Union",
   "slug": "andrews-federal-credit-union",
-  "category": "payday-alternatives",
+  "category": "banking",
   "subcategories": [
     "credit-union",
     "fdic-equivalent",
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "Federal Credit Union in , . Low-income designated. NCUA insured. 17 locations.",
-  "description_long": "Andrews Federal Credit Union is a federal credit union serving members in , , established in 1948. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) — small, affordable loans designed to replace predatory payday lending. The credit union operates 17 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "Andrews Federal Credit Union is a membership-based financial cooperative offering banking services to eligible members, though recent users report technical difficulties with third-party account connectivity.",
+  "description_long": "Andrews Federal Credit Union operates as a traditional credit union, a member-owned financial institution that provides banking and financial services to its eligible membership base. Like other credit unions, AFCU positions itself within the cooperative banking model, contrasting with traditional banks through its member-ownership structure and purported focus on member benefits rather than shareholder profits.\n\nBased on the available information, Andrews FCU offers standard banking services including online account access, transaction downloads, and digital banking capabilities. Members can connect their accounts to third-party financial management software like Quicken for transaction aggregation and personal finance management. The credit union appears to maintain an active online banking platform and supports various connectivity protocols for account access.\n\nWhat distinguishes Andrews FCU in the credit union space is its apparent service to a specific membership base, though the exact eligibility criteria are not detailed in the available documentation. The organization maintains sufficient technical infrastructure to support online banking and third-party integrations, suggesting a mid-to-large sized credit union operation.\n\nHowever, recent user reports from March-April 2023 indicate significant technical issues with account connectivity through third-party aggregators. Multiple users reported encountering OL-293 errors when attempting to link Andrews FCU accounts to Quicken, with one user noting the problem persisted for over a month despite reporting to AFCU directly. While users confirmed they could access their accounts directly on AFCU's website, the persistent inability to sync accounts through standard personal finance software suggests either underlying infrastructure compatibility issues or delayed resolution of technical problems on either AFCU's or third-party providers' systems.",
   "logo_url": "",
   "website_url": "https://community.quicken.com/discussion/7932455/andrews-federal-credit-union-issue",
   "affiliate_url": "",
@@ -24,25 +24,27 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)",
-    "Payday Alternative Loans (PALs)"
+    "Online banking account access and login",
+    "Transaction viewing and account history",
+    "Transaction downloads for personal financial management",
+    "Third-party account aggregation compatibility (Quicken and similar platforms)",
+    "Email-based two-factor authentication for account security",
+    "Digital verification codes for account setup and recovery",
+    "Web-based account management and balance viewing"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1948",
-    "Member-owned cooperative",
-    "Low-income designated — may offer Payday Alternative Loans (PALs)"
+    "Maintains active online banking platform with web access to accounts",
+    "Supports third-party account aggregation and integration with popular financial software",
+    "Offers transaction download capabilities for manual account management",
+    "Member-owned cooperative structure aligned with credit union philosophy",
+    "Direct web banking access functions independently of third-party connectivity issues"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Persistent technical issues with third-party account connectivity (Quicken OL-293 errors as of March-April 2023)",
+    "Extended resolution timeframe for technical issues despite member reporting (one user reported issue unresolved after one month)",
+    "Limited documentation available regarding account linking troubleshooting or support responsiveness",
+    "Third-party integration failures force members to manual transaction download workarounds",
+    "No clear communication from credit union regarding widespread connectivity issues"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +54,7 @@
   "founded_year": 1948,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "5754",
   "published": true,
   "review_status": "published",
@@ -92,20 +94,22 @@
     "ease_of_use": 3.8
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Payday loan alternatives (PALs)"
+    "Credit union members who conduct banking directly on AFCU's website and do not require third-party software integration",
+    "Members who prefer member-owned financial institutions and cooperative banking models",
+    "Individuals willing to manually download and manage transactions outside of automated aggregation tools"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Andrews Federal Credit Union is suitable for individuals who are eligible for membership and prefer to manage their finances directly through the credit union's website without relying on third-party financial software integration. The primary caveat is that recent users have experienced significant and persistent technical issues connecting AFCU accounts to aggregation platforms like Quicken, with slow resolution timelines, making the credit union problematic for members who depend on automated transaction syncing or portfolio management tools.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
-  "website_needs_review": true
+  "website_needs_review": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

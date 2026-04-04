@@ -1,15 +1,15 @@
 {
   "name": "The Farmers State Bank Of Westmoreland",
   "slug": "the-farmers-state-bank-of-westmoreland",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Westmoreland, KS. $235M in assets. 3 offices.",
-  "description_long": "The Farmers State Bank Of Westmoreland is a community bank located in Westmoreland, KS, established in 1898. The bank holds approximately $235M in total assets and $204M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering personal and business banking with modern digital services including online and mobile banking platforms.",
+  "description_long": "Farmers State Bank of Westmoreland is a traditional community bank that positions itself as a local financial institution combining modern banking technology with personalized service. The bank emphasizes its FDIC insurance backing and commitment to the communities it serves. They offer a full suite of personal and business banking services through both traditional and digital channels, making a point of ease of transition for customers switching from other institutions. The bank's marketing focuses on the convenience of modern digital banking\u2014particularly their mobile app\u2014while maintaining the relationship-oriented approach of a community bank. Their website content emphasizes safety, security, and customer convenience. Farmers State Bank provides standard retail banking services you would expect from a community bank, but there is limited information available on their specific product offerings beyond mobile and online banking platforms. The bank appears to be a solid option for consumers seeking FDIC-protected banking with digital convenience, though they are positioned as a mid-market community bank rather than a full-service financial institution with extensive lending products. No specific information about loan products, interest rates, fees, credit products, or investment services is disclosed on the available website pages.",
   "logo_url": "",
   "website_url": "https://bankwithfarmers.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal online banking",
+    "Business online banking",
+    "Mobile banking app (iOS and Android)",
+    "Mobile Remote Deposit Capture (MRDC) for checks",
+    "Account balance inquiries",
+    "Transaction history viewing",
+    "Fund transfers between accounts",
+    "Bill payment services",
+    "Debit card management",
+    "Mobile wallet integration (Apple Pay, Google Pay, Samsung Pay)",
+    "Customized account alerts and notifications",
+    "Travel destination alerts"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1898",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Free mobile deposit (MRDC) service available to all customers",
+    "Mobile banking app supports Apple Pay, Google Pay, and Samsung Pay integration",
+    "No fees charged for mobile deposit capture service",
+    "Mobile app allows remote check deposits, reducing need to visit branch",
+    "Emphasizes personalized service and hassle-free account switching process",
+    "Offers both personal and business online banking platforms"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides minimal detail on loan products, interest rates, or fees beyond mobile deposit",
+    "Limited information about product offerings\u2014no specifics on savings accounts, CDs, or credit cards",
+    "Mobile deposit has daily dollar limits that vary by customer and require approval for increases",
+    "Website does not disclose branch locations, physical address, or operating hours",
+    "Sparse information about business banking services beyond online access availability"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15164,
   "latitude": 39.3927909850109,
   "longitude": -96.4130889607654,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local community members seeking FDIC-protected banking with personalized service",
+    "Mobile-first consumers wanting convenient check deposit and account management",
+    "Small business owners needing online banking access without national bank overhead",
+    "Bank switchers prioritizing easy transition and local relationship banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Farmers State Bank is best for community-based consumers and small business owners who prioritize FDIC-protected banking with modern mobile convenience and personalized local service. The main caveat is that the website provides very limited transparency about specific loan products, fees, interest rates, and full service offerings\u2014prospective customers should contact the bank directly to compare rates and products with other institutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "307 Main St, Westmoreland, KS 66549",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

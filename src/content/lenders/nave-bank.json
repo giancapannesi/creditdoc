@@ -1,14 +1,14 @@
 {
   "name": "Nave Bank",
   "slug": "nave-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in San Juan, PR. $427M in assets. 1 office.",
-  "description_long": "Nave Bank is a community bank located in San Juan, PR, established in 2023. The bank holds approximately $427M in total assets and $302M in deposits. Designated as a Minority Board and Serving Hispanic Community. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Nave Bank is Puerto Rico's first digital-only bank offering business checking accounts, savings products, and business loans with transparent pricing and real-time account management.",
+  "description_long": "Nave Bank is a digital banking platform founded specifically to serve small business owners in Puerto Rico. The company positions itself as the island's first bank created with a digital-first approach, operating under FDIC insurance (OCIF B-40 charter) and a routing number (021508222). The bank launched with a mission to simplify financial services by reducing obstacles and increasing transparency in business banking.\n\nNave Bank's core offerings include Cuenta Nave Business (business checking accounts) with real-time balance information and mobile deposit capabilities, savings accounts earning 3% APY (2.75% APY on balances over $10,000; 1.50% APY on smaller balances), and Nave Pr\u00e9stamo para Negocio (business loans). The platform emphasizes consolidated account management, allowing users to manage multiple business accounts from a single dashboard. Their service model includes live customer support (Monday-Friday, 9am-5pm) via chat, email (hola@navebank.com), WhatsApp, and a help center.\n\nNave Bank distinguishes itself through emphasis on transparency (zero hidden fees), simplified application processes, rapid credit decisions on loans, and competitive rates. The platform uses high-security standards and integrates technology-first solutions for digital banking. Their marketing emphasizes convenience, human support, and operational simplicity tailored to small business needs in Puerto Rico's market.\n\nThe primary caveat is geographic limitation\u2014Nave Bank operates exclusively in Puerto Rico, making it inaccessible to mainland U.S. businesses. Interest rates on savings are variable and subject to change at the bank's discretion. Loan approval is subject to credit review, and the platform appears designed for smaller to mid-size business operations rather than enterprise accounts.",
   "logo_url": "",
   "website_url": "https://www.navebank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Cuenta Nave Business checking accounts",
+    "Business savings accounts with variable APY (3%, tiered by balance)",
+    "Nave Pr\u00e9stamo para Negocio (business loans)",
+    "Mobile deposit functionality",
+    "Real-time ACH transfers",
+    "Wire transfer services",
+    "Real-time balance information and account management",
+    "Multi-account management dashboard",
+    "Live customer support via chat, email, and WhatsApp",
+    "Help center and account support resources",
+    "Account security and fraud protection services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2023",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits with legitimate Puerto Rico banking charter (OCIF B-40)",
+    "3% APY on savings deposits with tiered rates (2.75% for $10k+, 1.50% for smaller balances)",
+    "Real-time account balance visibility and consolidated multi-account management from single dashboard",
+    "Mobile deposit and real-time payment capabilities (ACH, wire transfers)",
+    "Zero hidden fees and transparent pricing structure explicitly stated on website",
+    "Fast loan application process with rapid credit decisions on business loans",
+    "Live human customer support available via chat, email, WhatsApp during business hours",
+    "Dedicated business accounts designed for operational and savings components"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Exclusively serves Puerto Rico\u2014not available for mainland U.S. businesses",
+    "Variable interest rates subject to change at bank's discretion with no rate-lock guarantees",
+    "Minimum balance requirements for APY tiers ($10,000 minimum for highest 2.75% rate)",
+    "Limited information on loan terms, amounts, eligibility criteria, and approval timeline specifics",
+    "No mention of business credit card products, lines of credit, or equipment financing beyond basic loans"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "PR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 59324,
   "latitude": 18.444306984751,
   "longitude": -66.066281025329,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-size business owners operating in Puerto Rico seeking simplified digital banking",
+    "Puerto Rico-based businesses wanting to consolidate accounts with transparent, hidden-fee-free operations",
+    "Small business owners looking for business loans with faster approval processes than traditional banks",
+    "Puerto Rico entrepreneurs prioritizing customer service and human support alongside digital convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Nave Bank is best for small business owners and entrepreneurs operating in Puerto Rico who prioritize digital convenience, transparent pricing, and human customer support without geographic limitations. The main caveat is that it operates exclusively in Puerto Rico\u2014mainland U.S. businesses cannot open accounts, making this a Puerto Rico-specific solution only.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1608 Ave Ponce De Leon, San Juan, PR 00909",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Franklin Savings Bank",
   "slug": "franklin-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Franklin, NH. $917M in assets. 9 offices.",
-  "description_long": "Franklin Savings Bank is a community bank located in Franklin, NH, established in 1869. The bank holds approximately $917M in total assets and $795M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Franklin Savings Bank is a New Hampshire-based community bank offering personal and business checking, savings, CDs, IRAs, lending, and credit cards with online and mobile banking.",
+  "description_long": "Franklin Savings Bank is a community-focused financial institution headquartered in New Hampshire that serves both personal and business customers. The bank has established itself as a regional player with multiple locations throughout New Hampshire and a commitment to local community involvement, as evidenced by their grants to local organizations and schools. The bank operates a traditional full-service banking model with both in-person branch locations and digital banking capabilities.\n\nThe bank offers comprehensive personal banking services including checking and savings accounts, money market accounts, certificates of deposit, individual retirement accounts, and Visa debit and credit cards. They provide modern conveniences such as online and mobile banking, text alerts, Zelle for peer-to-peer transfers, and access to Allpoint ATM networks. For business customers, Franklin Savings Bank provides business checking, business savings and CDs, commercial lending through a dedicated team, business credit cards, cash management services, lockbox services, and government banking solutions. Their deposit products include rate specials on CDs and IRAs that are periodically updated.\n\nWhat distinguishes Franklin Savings Bank is its positioning as a community bank with active involvement in local philanthropic efforts, combined with modern banking technology. They offer identity theft resolution services and debit card monitoring, suggesting a focus on consumer protection. The bank also features Insured Cash Sweep (ICS) for business customers, which provides FDIC protection beyond standard limits. Their accessibility features and fraud prevention resources indicate attention to customer security and usability.\n\nFranklin Savings Bank operates as a traditional regional bank with solid fundamentals but lacks the extensive product depth or national brand recognition of larger institutions. The website content suggests they are a stable, community-oriented option for customers seeking personalized service in New Hampshire. However, as a regional bank, their rates and product offerings may not be competitive with online-only banks or larger national institutions in all categories.",
   "logo_url": "",
   "website_url": "https://www.fsbnh.bank",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with e-statements and check ordering",
+    "Savings and money market accounts",
+    "Certificates of deposit with periodic rate specials",
+    "Individual retirement accounts (IRAs)",
+    "Visa debit and credit cards (personal and business)",
+    "Online and mobile banking with text alerts",
+    "Business checking and business savings accounts",
+    "Commercial lending and business relationship management",
+    "Government banking services",
+    "Business cash management and lockbox services",
+    "Identity theft resolution services",
+    "Debit card monitoring and fraud prevention"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1869",
-    "Local community bank with personal service",
-    "9 locations"
+    "Multiple physical branch locations throughout New Hampshire with in-person customer service",
+    "Offers both personal and business banking with dedicated commercial lending team",
+    "Identity theft resolution services and debit card monitoring included",
+    "Access to Allpoint ATM network for convenient cash withdrawal",
+    "Insured Cash Sweep (ICS) protection for business accounts exceeding FDIC limits",
+    "Modern digital services including online banking, mobile app, and Zelle payments",
+    "Active community involvement with documented grants to local schools and nonprofits",
+    "Accessibility features on website including keyboard navigation and text resizing options"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "As a regional bank, may offer less competitive rates than national banks or online-only institutions",
+    "Limited geographic availability\u2014primarily serves New Hampshire only",
+    "No evidence of premium checking account features like fee waivers or higher interest rates compared to online alternatives",
+    "Fraud notices on website indicate recent fraud targeting (though this reflects industry-wide phishing issues)",
+    "Business lending and premium products likely require relationship-building and in-person interaction"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "NH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 17951,
   "latitude": 43.4445500063918,
   "longitude": -71.6453350389587,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "New Hampshire residents seeking local community bank relationships with in-person service",
+    "Small to medium-sized businesses needing dedicated commercial lending teams and local decision-making",
+    "Customers prioritizing branch access and personalized service over maximum interest rates",
+    "Business owners requiring government banking, cash management, and lockbox services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Franklin Savings Bank is best for New Hampshire residents and businesses seeking a community-oriented bank with physical branch locations, personalized service, and modern digital banking capabilities. The primary caveat is that as a regional institution, they may not offer the most competitive rates compared to larger national banks or online-only competitors, and their services are geographically limited to New Hampshire.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "387 Central St, Franklin, NH 03235",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

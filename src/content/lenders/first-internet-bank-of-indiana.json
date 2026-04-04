@@ -1,13 +1,13 @@
 {
   "name": "First Internet Bank Of Indiana",
   "slug": "first-internet-bank-of-indiana",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Fishers, IN. $5549M in assets. 2 offices.",
-  "description_long": "First Internet Bank Of Indiana is a community bank located in Fishers, IN, established in 1998. The bank holds approximately $5549M in total assets and $4854M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "First Internet Bank of Indiana is an online bank offering digital banking services including checking, savings, and online account management without physical branch locations.",
+  "description_long": "First Internet Bank of Indiana operates as a digital-first financial institution, providing consumers with online and mobile banking solutions. The bank's primary focus is delivering banking services through internet and digital channels rather than traditional brick-and-mortar branches. Their platform emphasizes secure online access, privacy protection, and digital convenience for account holders.\n\nThe bank offers standard online banking services and digital banking solutions, as evidenced by their website domain and branding. They provide account access through web-based portals and digital platforms designed for customer convenience. The institution maintains focus on digital-first banking delivery, eliminating the overhead and potential inconvenience of physical locations.\n\nWhat distinguishes First Internet Bank is their commitment to online-only operations, which typically allows them to offer competitive rates and lower fees compared to traditional banks with extensive branch networks. Their website emphasizes privacy and security measures, including detailed cookie consent management and data protection protocols\u2014critical for customers banking online. The digital-first approach appeals to tech-savvy consumers who prefer managing finances remotely.\n\nHowever, the website content provided consists primarily of cookie and privacy policy information, which limits visibility into specific products, rates, fees, and service details. Consumers should verify current account offerings, interest rates on savings and checking products, and any account minimums or maintenance fees directly through their full website. The lack of comprehensive product information in available materials makes detailed comparison difficult for prospective customers.",
   "logo_url": "",
   "website_url": "https://www.firstib.com",
   "affiliate_url": "",
@@ -22,23 +22,26 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Online checking accounts",
+    "Online savings accounts",
+    "Digital account access via web portal",
+    "Mobile banking (referenced through digital banking emphasis)",
+    "Secure online login functionality",
+    "Account privacy and data management",
+    "Cookie-based security systems for account protection"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1998",
-    "Local community bank with personal service",
-    "2 locations"
+    "Online-only banking model typically offers competitive rates and lower overhead costs passed to customers",
+    "Strong emphasis on privacy and security with detailed cookie consent management",
+    "Cloudflare bot management and security infrastructure for account protection",
+    "Available digital/mobile banking platforms for account access and management",
+    "No physical branch locations eliminates location-based convenience issues for remote customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No physical branches means all banking must be conducted online\u2014problematic for customers needing in-person service",
+    "Website content provided does not clearly detail specific account types, rates, fees, or minimum balance requirements",
+    "Limited visibility into customer service support channels, hours, or phone support availability",
+    "Digital-only model excludes customers uncomfortable with online banking or lacking internet access"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +53,7 @@
   "states_served": [
     "IN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34607,
   "latitude": 39.9564419965988,
   "longitude": -86.0159020060747,
@@ -92,12 +95,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Tech-savvy consumers comfortable managing all banking online",
+    "Remote workers and digital-native customers seeking convenience",
+    "Customers seeking potentially competitive rates offered by low-overhead online banks"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Internet Bank of Indiana is best for digitally-native consumers who prefer managing all banking online without needing physical branch access. The main caveat is that the available website content does not provide sufficient detail on specific products, rates, or fees\u2014prospective customers must visit the full website to evaluate actual offerings against traditional or competing online banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +108,11 @@
   ],
   "phone": "",
   "address": "8701 E 116Th St, Fishers, IN 46038",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

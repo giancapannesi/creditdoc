@@ -1,14 +1,14 @@
 {
   "name": "The Yoakum National Bank",
   "slug": "the-yoakum-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Yoakum, TX. $384M in assets. 5 offices.",
-  "description_long": "The Yoakum National Bank is a community bank located in Yoakum, TX, established in 1890. The bank holds approximately $384M in total assets and $350M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Yoakum National Bank is a community bank founded in 1890 offering personal and small business banking with mobile check deposit, credit cards, and fast loan decisions.",
+  "description_long": "Yoakum National Bank is an independent community bank established in 1890 that has positioned itself as a modern alternative to larger institutions while maintaining local decision-making and personalized service. The bank recently acquired Citizens State Bank, expanding its customer base and service offerings across its markets.\n\nThe bank offers comprehensive banking services for both personal and small business customers, including checking and savings accounts, personal and corporate credit cards, online and mobile banking with remote check deposit, bill pay, loan services, and funds transfers. Their small business center provides dedicated support for entrepreneurs and established business owners, while their personal banking division focuses on simplifying individual financial management.\n\nYoakum National Bank distinguishes itself through several key commitments: a stated guarantee of fast answers with \"no slow maybes,\" a 5-Star BauerFinancial rating (as of March 2025), decades of local expertise serving entrepreneurs and small business owners, and a community-focused approach to reinvestment. The bank emphasizes combining modern banking technology with traditional community bank relationship-building and straight-talk communication.\n\nAs a regional independent bank, Yoakum National Bank is best suited for small business owners and entrepreneurs in their service area who value local decision-making and personalized service over nationwide bank convenience. However, customers should verify branch locations and service availability, as the bank appears to serve a specific geographic region rather than offering nationwide coverage. The acquisition of Citizens State Bank is recent, so integration and potential changes to existing customer accounts should be monitored.",
   "logo_url": "",
   "website_url": "https://www.ynbtx.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
+    "Small business banking and accounts",
+    "Personal and corporate credit cards",
+    "Mobile banking app with remote check deposit",
+    "Online bill pay and loan pay services",
+    "Funds transfer capabilities",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Small business loans and financing",
+    "Financial education and resources",
+    "Online banking access via computer and mobile devices",
+    "Community banking relationship management",
+    "Dedicated Small Business Center support"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1890",
-    "Local community bank with personal service",
-    "5 locations"
+    "5-Star BauerFinancial rating (March 2025) indicates strong financial stability and performance",
+    "Mobile check deposit feature allows customers to deposit checks remotely via smartphone app",
+    "Personal and corporate credit cards now offered to expand borrowing options for customers",
+    "Long operational history since 1890 demonstrates institutional longevity and local market knowledge",
+    "Dedicated Small Business Center with experienced staff familiar with entrepreneur challenges",
+    "Fast loan decision guarantee contrasts with larger banks' slower approval processes",
+    "Community reinvestment focus with transparent commitment to local charitable organizations"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic service area appears limited to specific regions; nationwide coverage not mentioned",
+    "Recent Citizens State Bank acquisition may create account consolidation issues or service disruptions",
+    "Website lacks specific information on loan rates, terms, APR ranges, or fee structures",
+    "No mention of FDIC insurance protection or other regulatory safety certifications beyond Bauer rating",
+    "Limited transparency on small business loan types, SBA loan availability, or credit requirements"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5595,
   "latitude": 29.290159488698,
   "longitude": -97.151995132282,
@@ -93,12 +104,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs in their service area seeking personalized banking relationships",
+    "Personal banking customers who prefer community banks over large national institutions",
+    "Customers transitioning from Citizens State Bank who want to maintain local banking relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Yoakum National Bank is best for small business owners and personal banking customers in their service area who value fast decisions, local expertise, and community-focused banking over the convenience of large national banks. The main caveat is that geographic service area appears limited to specific regions, and recent acquisition of Citizens State Bank may involve ongoing integration and account changes that should be verified before committing.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "301 W Grand Ave, Yoakum, TX 77995",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

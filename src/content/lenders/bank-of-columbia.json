@@ -1,15 +1,15 @@
 {
   "name": "Bank Of Columbia",
   "slug": "bank-of-columbia",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Columbia, KY. $230M in assets. 3 offices.",
-  "description_long": "Bank Of Columbia is a community bank located in Columbia, KY, established in 1866. The bank holds approximately $230M in total assets and $203M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Bank of Columbia is a local community bank operating since 1866, offering checking, savings, loans, and digital banking services across three Columbia locations.",
+  "description_long": "Bank of Columbia has been serving its community for 159 years, establishing itself as a longstanding local financial institution. The bank positions itself as a relationship-focused alternative to larger national banks, emphasizing personal service combined with modern technology. Founded in 1866, the company has maintained three physical locations in Columbia while adapting to digital banking trends.\n\nThe bank offers a comprehensive range of retail and business banking services. On the consumer side, they provide four personal checking account tiers (e-Checking, Personal Checking, Advantage Checking, and All-Access Checking), interest-earning savings accounts, CDs, and Club accounts. They also offer consumer loans through an online application process, residential and personal loans, and safe deposit boxes in five sizes. Business customers can access business checking, business online banking with payroll management, wire transfers, and stop payments, plus commercial and agricultural loans\u2014reflecting their stated focus on agricultural banking.\n\nBank of Columbia distinguishes itself through emphasis on agricultural lending expertise and 24/7 digital access. They offer mobile banking with remote deposit capture, online account management, and a mobile app. Their marketing emphasizes being \"local like you\" with agricultural loan specialization, positioning against larger regional competitors. The three-location model in Columbia provides in-person service while their digital tools claim to make them accessible \"wherever you are.\"\n\nThe bank is a legitimate FDIC-insured institution with genuine physical locations and established operations. However, as a small community bank, they likely have limited product sophistication, geographic reach, and competitive rates compared to larger institutions. Customers should verify current rates and terms directly, as the website provides limited specific APR or fee information.",
   "logo_url": "",
   "website_url": "https://www.bankcolumbia.com",
   "affiliate_url": "",
@@ -24,23 +24,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (e-Checking, Personal Checking, Advantage Checking, All-Access Checking)",
+    "Savings accounts and interest-earning accounts",
+    "Certificate of Deposit (CD) accounts",
+    "Club savings accounts",
+    "Consumer loans with online application",
+    "Residential and personal loans",
+    "Commercial and agricultural loans",
+    "Business checking accounts",
+    "Business online banking with payroll management",
+    "Mobile banking app with remote deposit capture",
+    "Online account access and fund transfers",
+    "Safe deposit boxes in five sizes",
+    "Wire transfers and stop payments"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1866",
-    "Local community bank with personal service",
-    "3 locations"
+    "159 years of operational history and community presence since 1866",
+    "Specialized agricultural lending expertise and Ag loan products",
+    "Four personal checking account options with different benefit tiers (e-Checking through All-Access)",
+    "24/7 digital banking access including mobile app and remote deposit capture",
+    "Three convenient physical locations in Columbia for in-person service",
+    "Business online banking with payroll management and wire transfer capabilities",
+    "Online consumer loan application process without requiring in-branch visit",
+    "Multiple contact options: main line, after-hours card services, and dedicated activation support"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint with only three Columbia locations restricts accessibility for non-local customers",
+    "Website lacks specific rate information, APYs, and fee structures preventing rate comparison",
+    "Small community bank may have limited product sophistication, fewer digital features, and competitive disadvantages versus regional/national banks",
+    "Safe deposit box contents explicitly not FDIC insured, creating security gap for valuable items",
+    "No mention of investment services, wealth management, or expanded product offerings beyond basic retail/business banking"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "KY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8775,
   "latitude": 37.1028169836396,
   "longitude": -85.3067550274109,
@@ -94,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural businesses and farmers seeking specialized Ag lending expertise",
+    "Columbia-area residents wanting local relationship banking with in-person service",
+    "Small business owners needing basic business checking and payroll management tools",
+    "Customers prioritizing community reinvestment and local institution support over national bank convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Columbia is best for Columbia-area residents and agricultural businesses seeking personalized local banking with agricultural lending expertise. The main caveat is their limited geographic reach, lack of transparent rate/fee information online, and smaller product range compared to regional or national banks\u2014customers should contact them directly to verify current rates and whether their needs fit a small community bank model.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,11 @@
   ],
   "phone": "",
   "address": "144 Public Sq, Columbia, KY 42728",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

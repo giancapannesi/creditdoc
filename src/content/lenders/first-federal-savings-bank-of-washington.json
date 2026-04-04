@@ -1,7 +1,7 @@
 {
   "name": "First Federal Savings Bank Of Washington",
   "slug": "first-federal-savings-bank-of-washington",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
@@ -9,8 +9,8 @@
     "mutual-bank",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Washington, IN. $95M in assets. 1 office.",
-  "description_long": "First Federal Savings Bank Of Washington is a community bank located in Washington, IN, established in 1895. The bank holds approximately $95M in total assets and $76M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "First Federal Savings Bank of Washington is a locally-owned community bank in Indiana offering comprehensive checking, savings, lending, and investment services.",
+  "description_long": "First Federal Savings Bank of Washington has established itself as Washington, Indiana's only locally-owned bank, serving the community from its location at 439 S State Rd 57. The bank positions itself as a community-focused financial institution committed to building stronger financial futures for its customers and local area.\n\nThe bank offers a comprehensive suite of banking and lending services. On the deposit side, they provide checking accounts, statement savings accounts, money market accounts, certificates of deposit, and individual retirement accounts, with online account opening available. Their lending services span home mortgages, personal loans, auto loans, home equity lines of credit (HELOC), commercial loans, and agriculture loans. They emphasize competitive rates and tailored solutions for each customer's unique circumstances.\n\nWhat distinguishes First Federal is their explicit commitment to local ownership and community banking. They promote themselves specifically as Washington's only locally-owned bank, which appeals to customers preferring to keep deposits in their community rather than with national chains. They offer modern banking conveniences including mobile banking with mobile deposit capability and Zelle integration, plus the ability to open new accounts directly through their app. Their lending specialists are positioned as knowledgeable about local business and agricultural needs.\n\nAs a community bank with a single location, First Federal operates with traditional banking hours (lobby hours 9 AM-4 PM Mon-Thurs, 9 AM-5 PM Fri, and Saturday by appointment). The website lacks detailed information about fee structures, specific APR ranges, or minimum deposit requirements, requiring customers to call for current rates and fees. Their NMLS number (246859) indicates federal oversight, but the limited online transparency about product terms may require more direct contact with loan officers to understand specific offerings.",
   "logo_url": "",
   "website_url": "https://WWW.FIRSTFEDERALWASHINGTON.COM",
   "affiliate_url": "",
@@ -26,22 +26,36 @@
   },
   "services": [
     "Checking accounts",
-    "Savings accounts",
+    "Statement savings accounts",
+    "Money market accounts",
+    "Certificates of deposit (CDs)",
+    "Individual retirement accounts (IRAs)",
+    "Home/mortgage loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Auto loans",
+    "Home equity lines of credit (HELOC)",
+    "Commercial loans",
+    "Agriculture loans",
+    "Mobile banking with mobile deposit",
+    "Zelle peer-to-peer payments",
+    "Online account opening",
+    "Bill pay services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1895",
-    "Local community bank with personal service",
-    "1 location"
+    "Locally-owned bank\u2014only locally-owned bank in Washington, Indiana, keeping deposits in the community",
+    "Full-service lending\u2014home, personal, auto, HELOC, commercial, and agriculture loans under one roof",
+    "Mobile banking with mobile deposit\u2014can deposit checks via smartphone app",
+    "Zelle integration\u2014peer-to-peer payment option available through Bill Pay",
+    "Online account opening\u2014can open checking, savings, and money market accounts online",
+    "Agriculture lending specialization\u2014dedicated loan officers familiar with farming operations",
+    "Flexible Saturday hours\u2014drive-thru open Saturday 9 AM-12 PM for convenience"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited product transparency\u2014website requires calling for current rates, fees, and APR information; no published fee schedules online",
+    "Single location\u2014only one branch at 439 S State Rd 57 Washington, IN; no ATM network or branch expansion mentioned",
+    "Restricted online services\u2014online banking limited; complex lending products may require in-person consultation with loan officers",
+    "Limited weekend access\u2014Saturday appointments only for lobby; drive-thru limited to 3 hours on Saturday",
+    "No mention of deposit insurance details, FDIC coverage limits, or other regulatory protections on website"
   ],
   "contact": {
     "phone": "",
@@ -53,7 +67,7 @@
   "states_served": [
     "IN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29710,
   "latitude": 38.6502349975753,
   "longitude": -87.1718409690875,
@@ -95,12 +109,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Washington, Indiana residents seeking community-focused banking with local decision-making",
+    "Farmers and agricultural businesses needing specialized lending officers familiar with farming operations",
+    "Small business owners preferring personalized attention from a dedicated business banker",
+    "Customers wanting to keep their deposits in their local community rather than with national banks"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Federal is best for Washington, Indiana residents and local business/agricultural customers who prioritize community banking and personalized service over digital convenience and product transparency. The main caveat is that this single-location community bank requires phone calls to get current rates and specific product terms, and lacks the extensive online self-service features found at larger national banks or digital-first institutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +123,10 @@
   ],
   "phone": "",
   "address": "439 S State Road 57, Washington, IN 47501",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

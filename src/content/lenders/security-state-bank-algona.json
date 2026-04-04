@@ -1,15 +1,15 @@
 {
   "name": "Security State Bank",
   "slug": "security-state-bank-algona",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Algona, IA. $113M in assets. 4 offices.",
-  "description_long": "Security State Bank is a community bank located in Algona, IA, established in 1931. The bank holds approximately $113M in total assets and $84M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Independent community bank in Iowa offering checking, savings, CDs, loans, and debit/ATM services across four branch locations.",
+  "description_long": "Security State Bank is an independent community bank headquartered in Algona, Iowa, with a focus on serving local customers through personalized banking services. The bank operates four physical locations: Algona (main branch with drive-through), Burt, and Lu Verne, positioning itself as a traditional brick-and-mortar financial institution rooted in community banking values.\n\nThe bank offers a comprehensive range of deposit products including checking accounts, savings accounts, Certificates of Deposit, and Individual Retirement Accounts (IRAs), all FDIC-insured. They provide loan services across multiple categories: real estate, vehicle, personal, and agricultural/commercial loans. Electronic banking services include SHAZAMChek debit cards (MasterCard-branded), online banking with bill pay functionality, and ATM access through the SHAZAM network.\n\nSecurity State Bank differentiates itself through its independent status and commitment to community focus. Customers benefit from membership in the SHAZAM Privileged Status Network, which allows surcharge-free ATM access at participating institutions nationwide. The bank maintains two ATMs in its immediate service area and provides both a mobile app and online banking platform for digital account management.\n\nAs a regional community bank, Security State Bank is best suited for customers prioritizing local relationships and personalized service over digital-first banking. However, the limited geographic footprint (four Iowa branches) means it serves primarily local residents and businesses, and online resources are basic compared to larger national institutions.",
   "logo_url": "",
   "website_url": "https://bankssb.com",
   "affiliate_url": "",
@@ -26,21 +26,32 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Real estate loans",
+    "Vehicle loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Agricultural/commercial loans",
+    "SHAZAMChek debit cards (MasterCard)",
+    "Online banking with bill pay",
+    "Mobile app banking",
+    "ATM access (24-hour drive-up in Algona plus SHAZAM network)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1931",
-    "Local community bank with personal service",
-    "4 locations"
+    "Member of SHAZAM Privileged Status Network providing surcharge-free ATM access across thousands of locations nationally",
+    "FDIC insurance on all deposit accounts including savings, checking, and CDs",
+    "Independent bank with products specifically designed for local community customers",
+    "Four physical branch locations with drive-through facilities for in-person service",
+    "Full-service loan department offering real estate, vehicle, personal, and agricultural/commercial financing",
+    "Mobile app available for account access and management",
+    "SHAZAMChek debit cards accepted wherever MasterCard is accepted globally"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic presence restricted to four locations in Iowa (Algona, Burt, Lu Verne, and one drive-through)",
+    "Basic online presence with minimal product detail pages\u2014customers must contact branches for specific rates and terms",
+    "Website contains placeholder content ('\u00a9 2026') suggesting outdated maintenance or development issues",
+    "No visible information about interest rates, account minimums, or loan terms on public website",
+    "Limited transparency around fees, requirements, and competitive positioning versus regional/national banks"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15839,
   "latitude": 43.069069996974,
   "longitude": -94.237667999341,
@@ -94,12 +105,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Iowa residents in Algona, Burt, and Lu Verne seeking local relationship-based banking with community focus",
+    "Agricultural and small business owners needing personalized commercial lending from a local institution",
+    "Customers prioritizing physical branch access and face-to-face service over digital-only banking platforms"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Security State Bank is best for Iowa residents and agricultural/small business customers who value local relationship banking and physical branch access. Primary caveat: geographic limitation to four Iowa locations makes it unsuitable for customers outside this region or those requiring extensive digital banking features.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +118,11 @@
   ],
   "phone": "",
   "address": "1 E State St, Algona, IA 50511",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Marion County State Bank",
   "slug": "marion-county-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Pella, IA. $648M in assets. 5 offices.",
-  "description_long": "Marion County State Bank is a community bank located in Pella, IA, established in 1935. The bank holds approximately $648M in total assets and $553M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Marion County Bank is a community bank serving Marion County for over 90 years, offering personal and business banking products including checking, savings, loans, and mortgages.",
+  "description_long": "Marion County Bank is a full-service community bank with a 90-year history of serving Marion County residents and businesses. The bank emphasizes relationship-based banking and community involvement, as evidenced by their support of 14 local schools through 'The Report Card' program and a $15,000 first-time homebuyer grant initiative. Their leadership team, including Bank President Kevin Bolt, explicitly describes their approach as 'banking with purpose' focused on personal, meaningful interactions rather than transactional relationships.\n\nThe bank offers a comprehensive suite of personal banking services including checking and savings accounts, CDs and IRAs, debit and credit cards, and online/mobile banking. On the lending side, they provide mortgage loans, vehicle loans, personal loans, and agricultural loans. For business customers, Marion County Bank offers business checking and savings accounts, merchant card services, cash management solutions, and specialized business lending. They also feature financial calculators covering mortgages, retirement planning, loan consolidation, and education savings.\n\nWhat distinguishes Marion County Bank is its explicit commitment to community building and local impact. Rather than positioning itself as a modern fintech alternative, the bank emphasizes long-standing relationships with customers, celebrating employee milestones (such as Steve Kraayenbrink's 42-year tenure), and demonstrating tangible community support. Their first-time homebuyer grant program is a specific, measurable way they invest in local financial stability.\n\nAs a regional community bank, Marion County Bank's primary limitation is geographic scope\u2014they appear to serve primarily Marion County residents and businesses rather than offering nationwide digital banking. While they provide online and mobile banking options, the bank's identity and value proposition center on local relationships and community presence rather than cutting-edge fintech features or competitive rates that would appeal to rate-shopping consumers. Their website emphasizes service quality and community impact over rate leadership.",
   "logo_url": "",
   "website_url": "https://www.marioncountybank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "CDs and IRAs",
+    "Online and mobile banking",
+    "Personal debit cards",
+    "Personal credit cards",
+    "Mortgage loans",
+    "Vehicle loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business loans and commercial lending",
+    "Agricultural loans",
+    "Merchant card services and cash management for businesses"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1935",
-    "Local community bank with personal service",
-    "5 locations"
+    "90+ years of established presence and trust in Marion County community",
+    "$15,000 first-time homebuyer grant program for qualifying applicants",
+    "Comprehensive personal and business lending options including mortgages, vehicle loans, and agricultural loans",
+    "Multiple financial calculators available (mortgage, retirement, loan consolidation, education planning, etc.)",
+    "Explicit commitment to community support with documented local school sponsorship",
+    "Multi-channel access with online and mobile banking alongside in-person relationships",
+    "Specialized services including merchant card services and cash management for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation\u2014primarily serves Marion County, not available nationwide",
+    "No mention of competitive rate advantages or rate leadership compared to other banks",
+    "Limited information about fee structures, minimum balances, or account requirements on website",
+    "No clear information about FDIC insurance limits or deposit protection details",
+    "Digital presence appears secondary to relationship-based local banking model, potentially limiting convenience for tech-focused consumers"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15272,
   "latitude": 41.4070549800093,
   "longitude": -92.9156879768314,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Marion County residents and businesses seeking relationship-based local banking with community accountability",
+    "First-time homebuyers in Marion County eligible for the $15,000 grant program",
+    "Agricultural businesses and farmers needing specialized ag lending and rural banking services",
+    "Customers who value long-term banking relationships and local community investment over rate shopping"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Marion County Bank is best suited for Marion County-area residents and business owners who prioritize relationship-based banking and community involvement over rate shopping and digital convenience. The primary caveat is geographic limitation\u2014this is a regional community bank, not a nationwide option, making it only relevant for those in or relocating to Marion County.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "800 Main St, Pella, IA 50219",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

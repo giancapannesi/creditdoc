@@ -1,15 +1,15 @@
 {
   "name": "First State Bank Of Fountain",
   "slug": "first-state-bank-of-fountain",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Fountain, MN. $40M in assets. 1 office.",
-  "description_long": "First State Bank Of Fountain is a community bank located in Fountain, MN, established in 1901. The bank holds approximately $40M in total assets and $37M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank in Fountain, Minnesota serving southeastern Minnesota since 1901 with personal, business, and agricultural lending plus deposit accounts.",
+  "description_long": "First State Bank of Fountain is a longstanding community bank established in 1901, operating in Fountain, Minnesota (population 415) in southeastern Minnesota. The bank emphasizes personalized service and local decision-making, with a team of 6 employees who collectively bring over 110 years of banking experience. Their tagline\u2014\"Your Community Bank for Generations\"\u2014reflects their positioning as a relationship-based institution rather than a large corporate lender.\n\nThe bank offers a range of financial products including personal loans with flexible terms and reasonable rates, business loans designed to support local entrepreneurs, and specialized agricultural lending products. On the deposit side, they provide statement savings accounts, money market accounts, holiday savings programs, and certificates of deposit (CDs) and IRAs. They also maintain online and mobile banking platforms for customer convenience. All deposits are FDIC-insured, providing federal protection up to applicable limits.\n\nWhat distinguishes First State Bank of Fountain is its hyper-local focus and commitment to community banking in a very small town. The bank positions itself around personal relationships and local lending decisions rather than algorithmic underwriting. Their emphasis on agricultural lending suggests deep roots in the regional economy. The presence of a 120+ year operational history indicates stability and continuity.\n\nThe primary limitation is geographic scope\u2014this is a very small rural bank with limited physical infrastructure (one location) and a small team. Customers seeking sophisticated financial products, investment services, or comprehensive wealth management would likely need to look elsewhere. The bank's size means lending capacity may be constrained compared to larger institutions, which could limit approval for very large loan amounts.",
   "logo_url": "",
   "website_url": "https://www.firststatebankoffountain.com",
   "affiliate_url": "",
@@ -24,23 +24,39 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal loans with flexible terms and reasonable rates",
+    "Business loans for entrepreneurship and business growth",
+    "Farm operating lines of credit",
+    "Farm real estate loans",
+    "Crop input financing",
+    "Farm equipment loans",
+    "Statement savings accounts",
+    "Money market accounts",
+    "Holiday savings programs",
+    "Certificates of deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Online banking platform",
+    "Mobile banking app",
+    "Annual financial analysis for agricultural customers",
+    "Identity theft prevention education and resources",
+    "Financial calculators",
+    "Interest rate information"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1901",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Over 110 years of combined employee experience with 6-person team",
+    "Specialized agricultural lending including operating lines of credit, farm real estate loans, crop input financing, and equipment loans",
+    "Local decision-making on loans rather than centralized underwriting",
+    "Multiple account types including statement savings, money market, holiday savings, CDs, and IRAs",
+    "Online and mobile banking platform available for remote access",
+    "Customer education resources focused on identity theft prevention and financial safety"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Single physical location in very small town (Fountain, MN population 415) limits accessibility for most customers",
+    "Small staff (6 employees) may limit operational capacity, availability, and product sophistication",
+    "No mention of competitive interest rates, loan products beyond basics, or pricing transparency on website",
+    "Limited geographic service area focuses on southeastern Minnesota; unclear if serving customers outside region",
+    "No mention of investment services, wealth management, retirement planning, or advanced financial products"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +68,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9349,
   "latitude": 43.7400949903485,
   "longitude": -92.1359819695987,
@@ -94,12 +110,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural producers and farmers in southeastern Minnesota seeking specialized farm lending and local relationships",
+    "Small business owners in the Fountain/Root River area who value local decision-making over corporate underwriting",
+    "Residents of Fountain and surrounding rural communities seeking basic banking with personalized service",
+    "Long-term customers seeking stability and continuity from a 120+ year established institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First State Bank of Fountain is best for agricultural producers, small business owners, and community residents in southeastern Minnesota who prioritize personalized service and local relationships over national banking conveniences or product sophistication. The primary caveat is severe geographic limitation\u2014with a single location in a 415-person town, this bank is practically inaccessible for non-local customers, making it relevant only to those living in or near Fountain, Minnesota.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +124,11 @@
   ],
   "phone": "",
   "address": "101 Main St, Fountain, MN 55935",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

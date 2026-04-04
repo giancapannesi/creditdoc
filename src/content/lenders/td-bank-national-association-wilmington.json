@@ -1,13 +1,13 @@
 {
   "name": "Td Bank, National Association",
   "slug": "td-bank-national-association-wilmington",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Wilmington, DE. $346188M in assets. 1053 offices.",
-  "description_long": "Td Bank, National Association is a community bank located in Wilmington, DE, established in 1852. The bank holds approximately $346188M in total assets and $283538M in deposits. It operates 1053 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "TD Bank is a major U.S. bank offering checking, savings, credit cards, personal loans, and home lending with 24/7 digital banking and local branch access.",
+  "description_long": "TD Bank, National Association operates as a full-service retail bank providing comprehensive financial products to personal, small business, and commercial customers. The bank emphasizes a 'digital first, human always' philosophy, positioning itself at the intersection of modern online banking and traditional personalized service. With FDIC insurance backing, TD Bank offers core deposit products including checking and savings accounts, certificates of deposit (CDs), and investment services alongside lending products.\n\nThe company's service portfolio includes online and mobile banking with features like mobile check deposit, bill pay, digital wallet integration, and 24/7 customer service via phone (1-888-751-9000). TD offers consumer credit products including personal loans, credit cards with balance transfer options, and home lending services. Account holders can access local branch locations for in-person banking during extended hours including weekends. The bank actively promotes deposit account sign-ups through incentive offers, including a $300 bonus for new TD Beyond Checking customers who meet qualifying activities.\n\nTD distinguishes itself through overdraft protection innovations, particularly its TD Overdraft Relief program which waives fees for overdrafts of $50 or less and provides a Grace Period allowing customers until 11 PM ET the next business day to cover overdrawn balances. The bank also offers optional Savings Overdraft Protection and TD Debit Card Advance services. Additional differentiators include TD Early Pay functionality and educational resources through Finance 101. The company maintains both digital channels and physical retail presence, attempting to merge convenience with accessibility.\n\nAs a major national bank, TD Bank serves mainstream consumers seeking traditional banking with digital convenience. However, the company does not position itself as a specialized fintech, alternative lender, or niche provider. Customers should note that overdraft protection features carry specific terms and conditions, and not all accounts (such as TD Essential Banking) include standard overdraft services. The bank's strength lies in established infrastructure and regulatory backing rather than competitive rates or specialized lending for underserved populations.",
   "logo_url": "",
   "website_url": "https://www.td.com/us/en/personal-banking/",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts with overdraft protection and bonus incentives",
+    "Savings accounts and certificates of deposit (CDs)",
+    "Credit cards with balance transfer offers",
+    "Personal loans for debt consolidation and purchases",
+    "Home lending and mortgage services",
+    "Mobile banking app with check deposit functionality",
+    "Bill pay and e-bills management",
+    "Digital wallet integration for payments",
+    "TD Overdraft Relief with Grace Period",
+    "TD Debit Card Advance overdraft coverage",
+    "Savings Overdraft Protection",
+    "24/7 phone customer service"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1852",
-    "Local community bank with personal service",
-    "1053 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "24/7 live customer service available by phone any day of the week",
+    "Mobile check deposit via smartphone/tablet with next business day availability",
+    "TD Overdraft Relief waives fees for overdrafts of $50 or less with Grace Period until next business day at 11 PM ET",
+    "Extended branch hours including early, late, and weekend access to local TD stores",
+    "Digital wallet integration for simplified online, in-store, and in-app purchases",
+    "$300 new customer bonus for TD Beyond Checking with qualifying activities"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Overdraft fees of $35 per transaction apply for overages exceeding $50 (up to 3 fees per day), which is standard but not competitive",
+    "TD Essential Banking accounts exclude standard overdraft services and related protections",
+    "Limited transparency on interest rates, APYs, and pricing details on main landing page",
+    "Overdraft Grace Period requires action by 11 PM ET next business day\u2014timing constraint could be challenging for different time zones",
+    "Balance transfer and personal loan terms require prequalification inquiry rather than published rate information"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "DE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 18409,
   "latitude": 39.7223379973892,
   "longitude": -75.6560460364707,
@@ -92,12 +103,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Consumers seeking traditional full-service banking with both digital and in-person branch access",
+    "Customers wanting overdraft protection with no-fee options for small overages",
+    "Small business owners and commercial customers needing integrated banking and lending solutions",
+    "Users prioritizing 24/7 live customer service and extended branch hours over online-only banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "TD Bank is best suited for mainstream consumers and small businesses seeking established, full-service banking with both robust digital tools and local branch access. Primary caveat: as a large traditional bank, TD does not offer specialized lending for credit-challenged borrowers, niche financial products, or rates/terms competitive with fintech-only or credit union alternatives\u2014it serves convenience-focused customers who value regulatory safety and personalized service alongside online banking.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "2035 Limestone Rd, Wilmington, DE 19808",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

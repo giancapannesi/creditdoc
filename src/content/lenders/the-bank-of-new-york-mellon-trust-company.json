@@ -1,13 +1,13 @@
 {
   "name": "The Bank Of New York Mellon Trust Company, National Association",
   "slug": "the-bank-of-new-york-mellon-trust-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Los Angeles, CA. $1351M in assets. 10 offices.",
-  "description_long": "The Bank Of New York Mellon Trust Company, National Association is a community bank located in Los Angeles, CA, established in 1981. The bank holds approximately $1351M in total assets and $1M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "BNY Mellon is a global financial services institution providing custody, asset management, and payment solutions to institutions, businesses, and high-net-worth clients worldwide.",
+  "description_long": "The Bank of New York Mellon Trust Company, National Association operates as a major global financial institution at the center of world capital markets. Founded with a long history in banking, BNY Mellon has evolved into a comprehensive financial services provider serving institutional clients, corporations, and individuals. The company operates through its parent organization BNY Mellon and maintains significant presence across over 100 markets globally. As of December 31, 2025, BNY Mellon touches approximately 20% of the world's investable assets, making it one of the largest custodians and administrators in the financial system.\n\nBNY Mellon offers a comprehensive suite of financial solutions spanning the entire financial lifecycle. Their service portfolio includes global payments and trade financing, execution services for market access, liquidity and financing platforms, custody and asset administration services, fund and investor servicing solutions, global clearing services, wealth management for individuals and family offices, investment management, credit and lending products, digital assets infrastructure, data and analytics platforms, and specialized solutions for debt, structured transactions, and collateral management. The company positions itself as providing \"holistic solutions\" that combine expertise with technology across multiple platforms.\n\nWhat distinguishes BNY Mellon is its scale and institutional focus. Unlike consumer-oriented banks, BNY Mellon specializes in serving institutional clients, asset managers, corporations, and ultra-high-net-worth individuals rather than retail consumers. The company's $59.3 trillion in assets under custody and $2.2 trillion in assets under management demonstrate its position as a critical infrastructure provider in global capital markets. Their offerings span sophisticated services like depositary receipts, collateral mobility optimization, and cloud-native data analytics platforms that cater to complex institutional needs.\n\nHowever, it's important to note that BNY Mellon is not a consumer banking institution in the traditional sense. Their services are primarily designed for institutional clients, investment firms, corporations, and high-net-worth clients with substantial assets. Individual consumers seeking basic checking accounts, personal loans, credit cards, or consumer lending will not find those products through this entity. The company operates primarily in the wholesale and institutional markets rather than the retail consumer finance space.",
   "logo_url": "",
   "website_url": "https://www.bny.com",
   "affiliate_url": "",
@@ -22,23 +22,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Global custody and asset administration services across 100+ markets",
+    "Global payments and trade financing solutions",
+    "Execution services with market access and trading workflow support",
+    "Liquidity, margin, and financing orchestration platform",
+    "Global collateral management and mobility services",
+    "Digital assets infrastructure for traditional and crypto ecosystems",
+    "Fund and investor servicing solutions",
+    "Global clearing services (self-clearing, outsourced, and hybrid models)",
+    "Wealth management and investment advisory for individuals and family offices",
+    "Depositary receipts services for international market access",
+    "Conventional trust services for debt, escrow, and public finance",
+    "Data analytics and AI-enabled operational platforms"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1981",
-    "Local community bank with personal service",
-    "10 locations"
+    "Global scale with custody services in over 100 markets and approximately 20% of world's investable assets under administration",
+    "$59.3 trillion in assets under custody and administration as of December 2025, demonstrating institutional trust and infrastructure capability",
+    "Comprehensive integrated platform approach combining multiple services from payments to wealth management to reduce client complexity",
+    "Specialized expertise in complex transactions including digital assets, collateral management, structured debt, and fund servicing",
+    "Advanced technology infrastructure including cloud-native data analytics and AI-enabled platforms for institutional clients",
+    "Global reach with dedicated regional operations and multilingual support across Asia Pacific, EMEA, and Latin America",
+    "Institutional-grade solutions for depositary receipts, clearing, and capital markets infrastructure"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Not a retail consumer bank\u2014does not offer standard checking accounts, savings accounts, or consumer credit products",
+    "Services are primarily designed for institutional clients and high-net-worth individuals; inaccessible for average consumers",
+    "Website content focuses on corporate and institutional solutions with no consumer-facing service details or transparency"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +59,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 23472,
   "latitude": 34.0537409922358,
   "longitude": -118.25326396071,
@@ -92,12 +101,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Large institutional investors and asset managers requiring custody and administration services",
+    "Corporations and multinational enterprises needing global payments, clearing, and capital markets solutions",
+    "Ultra-high-net-worth individuals and family offices seeking sophisticated wealth management and investment services",
+    "Financial institutions and fund managers requiring fund servicing, collateral management, and middle-office solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "BNY Mellon Trust Company is exclusively designed for institutional clients, corporations, and ultra-high-net-worth individuals requiring sophisticated capital markets infrastructure, custody, and asset management services. Average consumers should not consider this institution, as it operates entirely in the wholesale institutional market and does not offer consumer banking products or services.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +115,11 @@
   ],
   "phone": "",
   "address": "333 S Hope St, Los Angeles, CA 90071",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Texas Financial Bank",
   "slug": "texas-financial-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Eden, TX. $235M in assets. 5 offices.",
-  "description_long": "Texas Financial Bank is a community bank located in Eden, TX, established in 1986. The bank holds approximately $235M in total assets and $195M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank serving Texas with personal and business banking, including checking, mortgages, commercial real estate, and agricultural lending across multiple branches.",
+  "description_long": "Texas Financial Bank is a community-focused financial institution rooted in Texas, operating multiple branches across West Texas and the Dallas area. The bank emphasizes local service and personal relationships, positioning itself as a financial leader in the communities it serves rather than as a large national institution.\n\nThe bank offers a full range of personal banking services including checking accounts, money market accounts, and mortgage lending. On the business side, Texas Financial provides commercial banking tailored to entrepreneurs and established companies, with specific expertise in ranch and agricultural banking, small business lending, commercial real estate financing, and SBA loans. All services are accessible through online banking available 24/7, along with mobile banking for account management and bill payment.\n\nTexas Financial distinguishes itself through deep community roots and emphasis on personalized service. The bank operates branches in Eden, Rankin, Big Lake, and Big Spring, plus a Dallas Loan Production Office and San Angelo Operations Center. Their marketing emphasizes understanding client vision and providing flexible, fast service designed for entrepreneurs and business growth, rather than one-size-fits-all banking.\n\nAs a regional community bank, Texas Financial serves customers who value local relationships and personalized attention over large national institutions. The main limitation is geographic scope\u2014branches are concentrated in West Texas with limited Dallas presence\u2014making it less convenient for customers outside these service areas. Like all traditional banks, they require full account opening and qualification processes.",
   "logo_url": "",
   "website_url": "https://www.texasfinancial.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Money market accounts",
+    "Home mortgage lending and refinancing",
+    "Commercial real estate financing",
+    "Agricultural and ranch banking",
+    "Small business loans",
+    "SBA loan programs",
+    "Online banking with 24/7 access",
+    "Mobile banking and mobile deposit",
+    "Bill payment services",
+    "Account management and transfers",
+    "Lost/stolen card replacement and fraud protection"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1986",
-    "Local community bank with personal service",
-    "5 locations"
+    "Specialized agricultural and ranch banking expertise, a niche strength in West Texas",
+    "Multiple branch locations across Texas with San Angelo operations center for business services",
+    "SBA loan programs available for small business financing",
+    "24/7 online and mobile banking with bill pay and mobile deposit capabilities",
+    "Emphasis on personalized service and understanding client-specific business needs",
+    "Commercial real estate financing options tailored to local market",
+    "Community-focused mission with stated commitment to local economic development"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint\u2014only 5 physical locations, all in West Texas or Dallas area, not accessible to customers in most of Texas",
+    "No information provided about minimum account balances, fees, or interest rates for comparison",
+    "No mention of investment services, wealth management, or non-bank financial products beyond basic lending",
+    "Website does not disclose FDIC insurance limits or other regulatory details",
+    "Limited online presence and no indication of neobanking features or digital-first innovation"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 26738,
   "latitude": 31.2158560199737,
   "longitude": -99.8454659897114,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural producers and ranchers in West Texas seeking specialized lending expertise",
+    "Small business owners and startups in Texas who value personalized service and flexible financing",
+    "Entrepreneurs and commercial clients who need relationship banking rather than transactional banking",
+    "Customers in Eden, Rankin, Big Lake, Big Spring, or Dallas looking for community bank alternatives"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Texas Financial Bank is best for agricultural, ranch, and small business borrowers in West Texas or Dallas who prefer personalized community banking relationships and specialized industry expertise. The main caveat is limited geographic availability\u2014this bank only serves customers in specific West Texas markets and Dallas, making it unsuitable for anyone outside these areas.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "220 Jackson Street, Eden, TX 76837",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-03",
+  "last_engine_run": "2026-04-03"
 }

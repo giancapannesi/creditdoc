@@ -1,14 +1,14 @@
 {
   "name": "Sutton Bank",
   "slug": "sutton-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Attica, OH. $1585M in assets. 9 offices.",
-  "description_long": "Sutton Bank is a community bank located in Attica, OH, established in 1878. The bank holds approximately $1585M in total assets and $1353M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering personal and business checking, savings, loans, mortgages, and agricultural financing with branches in Ohio.",
+  "description_long": "Sutton Bank is a full-service FDIC-insured community bank positioned as \"Old-fashioned Innovation,\" combining traditional banking values with modern digital services. The institution serves individuals, small businesses, and agricultural clients across Ohio with a network of physical branches and online banking platforms.\n\nThe bank offers a comprehensive suite of personal banking products including multiple checking account options (Kasasa Cash, Choice, BankAdvantage, Investment), savings accounts, money market accounts, CDs, IRAs, and personal credit cards. For lending, Sutton provides personal loans, auto loans, home mortgages (in partnership with Rocket Mortgage for streamlined application), and home equity lines of credit (HELOCs). The business division serves small to mid-sized companies and agricultural operations with business checking, savings, commercial real estate loans, term loans, operating lines of credit, equipment financing, and leasing options. Agricultural clients have access to specialized ag loans including working capital loans, equipment loans, livestock financing, and ag real estate mortgages.\n\nSutton differentiates itself through strong agricultural lending expertise, partnership with Rocket Mortgage for residential lending, and branded deposit products under the Kasasa platform (offering no-fee checking with cash rewards). The bank emphasizes accessibility, maintains physical branch locations, and provides treasury management and merchant services for business clients. Digital capabilities include online banking, mobile app access, mobile wallet integration, Zelle payments, and remote deposit capture for business customers.\n\nAs a regional community bank, Sutton Bank is most suitable for customers seeking personalized service with FDIC insurance backing and established branch presence in Ohio. The main limitation is geographic constraint\u2014the bank operates primarily in Ohio, making it inaccessible to out-of-state customers. The website does not clearly delineate all service fees or highlight competitive advantages in rates versus national banks.",
   "logo_url": "",
   "website_url": "https://www.suttonbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Free Kasasa Cash Checking and Kasasa Cash Back Checking accounts",
+    "Personal savings accounts, money market accounts, and CDs",
+    "Health Savings Accounts (HSAs) for personal and business",
+    "Individual Retirement Accounts (IRAs)",
+    "Personal loans, auto loans, home mortgages, and HELOCs",
+    "Personal credit cards",
+    "Business checking and savings accounts",
+    "Commercial real estate loans and business term loans",
+    "Operating lines of credit and equipment leasing",
+    "Agricultural loans (ag lines of credit, equipment, livestock, working capital, real estate)",
+    "Mobile banking app, online banking, and mobile wallet",
+    "Zelle payments, remote deposit capture, merchant card services, and treasury management"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1878",
-    "Local community bank with personal service",
-    "9 locations"
+    "FDIC-insured deposits backed by the full faith and credit of the U.S. Government",
+    "No-fee Kasasa Cash checking account with rewards and no minimum balance requirement",
+    "Comprehensive agricultural lending program (ag lines of credit, equipment, livestock, working capital loans)",
+    "Partnership with Rocket Mortgage for streamlined online home loan applications",
+    "Multiple business lending products including commercial real estate, term loans, and equipment leasing",
+    "Digital banking tools including mobile app, Zelle, mobile wallet, and remote deposit capture",
+    "Established community bank presence with physical branch locations and drive-thru access"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: operates primarily in Ohio, unavailable to out-of-state customers",
+    "Website does not transparently disclose account fees, APRs, or rate comparisons versus competitors",
+    "Kasasa products carry qualifying criteria (direct deposit, debit card usage, online statements) not fully detailed on homepage",
+    "Limited clarity on business credit card features and consumer credit card rewards structure",
+    "No mention of investment advisory services despite listing \"Investments\" in navigation menu"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5962,
   "latitude": 41.06440600523,
   "longitude": -82.8870630277726,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Ohio-based small business owners seeking agricultural or commercial lending with personal service",
+    "Individuals wanting no-fee checking with rewards through the Kasasa Cash account",
+    "Homebuyers in Ohio looking to refinance or purchase with streamlined Rocket Mortgage integration",
+    "Agricultural operations requiring specialized lending for equipment, land, or working capital"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Sutton Bank is best for Ohio-based customers\u2014particularly agricultural and small business clients\u2014seeking FDIC-insured banking with established branch relationships and specialized lending expertise. The primary caveat is strict geographic limitation to Ohio; out-of-state customers cannot access accounts, making this unsuitable for those requiring multi-state or national banking convenience.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1 S Main St, Attica, OH 44807",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

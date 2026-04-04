@@ -1,13 +1,13 @@
 {
   "name": "Meridian Postal",
   "slug": "meridian-postal",
-  "category": "payday-alternatives",
+  "category": "check-cashing",
   "subcategories": [
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "Federal Credit Union in , . NCUA insured. 1 location.",
-  "description_long": "Meridian Postal is a federal credit union serving members in , , established in 1932. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "USPS Meridian Post Office location offers domestic money orders and basic financial services typical of postal branches, with standard retail hours and mailing support.",
+  "description_long": "The Meridian Post Office is a United States Postal Service location operated by USPS, the federal mail delivery agency. It is situated in Meridian, Mississippi at 2100 9th Street and functions as a standard USPS retail facility. The location has been miscategorized as a \"payday-alternative\" lender when it is actually a postal service branch offering standard USPS services.\n\nThe Meridian Post Office offers domestic money orders, inquiry money orders, greeting card services, gift card services, and general mailing services including PO Box access and mail pickup options. The facility provides standard retail hours Monday through Friday from 8:30 AM to 4:30 PM, Saturday 8:30 AM to 12:00 PM, and is closed Sundays. The location explicitly states \"There are no financial services available at this location,\" indicating that financial products beyond money orders are not offered. The facility also provides carrier services, bulk mail acceptance during specific hours, and passport services by appointment.\n\nThis location distinguishes itself primarily through government legitimacy and postal service reliability as part of the USPS network. The branch offers 24-hour PO Box access and operates under federal oversight. However, the facility's financial service offerings are extremely limited compared to actual payday alternative lenders, credit unions, or community development financial institutions that provide small loans or credit-building products under 36% APR.\n\nThe Meridian Post Office is fundamentally a mail delivery facility, not a consumer finance provider. While it offers money orders for basic financial transactions, it does not function as a lending institution or financial services company. Consumers seeking actual payday alternatives, emergency cash loans, or credit products should look elsewhere. This profile exists primarily to correct the category miscategorization and provide accurate information about what services are actually available at this postal location.",
   "logo_url": "",
   "website_url": "https://tools.usps.com/find-location.htm?location=1372756",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)"
+    "Domestic money orders",
+    "Inquiry money orders",
+    "Greeting card services",
+    "Gift card services",
+    "PO Box rental and 24-hour access",
+    "Mail pickup (accountable, hold, and notice left)",
+    "Bulk mail acceptance (Mon-Fri 10:00 AM - 2:00 PM)",
+    "Passport appointments and photo services",
+    "Passport walk-in services (Wed-Fri 2:00 PM - 3:00 PM)",
+    "Priority Mail International and general mailing services",
+    "General delivery",
+    "Retail label broker services"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1932",
-    "Member-owned cooperative"
+    "Offers domestic money orders for secure fund transfers without a bank account",
+    "Government-backed USPS operation with federal oversight and stability",
+    "24-hour PO Box access for secure mail retrieval seven days a week",
+    "Multiple pickup service options including accountable mail and hold mail services",
+    "Passport services available by appointment and walk-in",
+    "Low-cost money order alternative to wire transfers for unbanked consumers",
+    "Extended Saturday hours (8:30 AM - 12:00 PM) for working consumers"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Explicitly states 'There are no financial services available at this location' \u2014 does not provide loans or credit products",
+    "Money orders have transaction limits and fees that vary; not a lending product",
+    "Does not offer payday alternatives, emergency loans, or any credit-building services",
+    "Limited to basic postal and money order services; cannot help consumers build credit or access emergency funds",
+    "Closed Sundays and limited weekday hours after 4:30 PM reduce accessibility for some consumers"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +59,7 @@
   "founded_year": 1932,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "24894",
   "published": true,
   "review_status": "published",
@@ -88,20 +99,23 @@
     "ease_of_use": 3.8
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Community-focused financial services"
+    "Unbanked or underbanked consumers needing to send secure payments via money order",
+    "Individuals requiring PO Box rental for mail privacy or business use",
+    "Consumers in Meridian, MS needing federal passport services",
+    "Businesses requiring bulk mail services or general mailing solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Meridian Post Office is a standard USPS postal facility, not a payday alternative lender or consumer finance company. It should be recategorized to 'check-cashing' based on its money order offerings, which are its only financial service. Consumers seeking actual emergency loans, payday alternatives, or credit products must look to legitimate lenders, credit unions, or CDFIs\u2014not postal locations.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
-  "website_needs_review": true
+  "website_needs_review": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

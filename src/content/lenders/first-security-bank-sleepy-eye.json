@@ -1,15 +1,15 @@
 {
   "name": "First Security Bank - Sleepy Eye",
   "slug": "first-security-bank-sleepy-eye",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Sleepy Eye, MN. $193M in assets. 5 offices.",
-  "description_long": "First Security Bank - Sleepy Eye is a community bank located in Sleepy Eye, MN, established in 1882. The bank holds approximately $193M in total assets and $165M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank operating 12 locations across Minnesota, North Dakota, and Iowa since 1878, offering personal, business, and agricultural banking services.",
+  "description_long": "First Security Banks is a regional community banking institution with deep roots in the Upper Midwest, tracing its trust services back to 1878 through First Security Bank \u2013 Mapleton. The organization operates as a network of separate FDIC-insured banks across Minnesota, North Dakota, and Iowa, with 12 physical locations including the flagship Sleepy Eye branch. The bank was established by L.A. Amundson, who remains invested in community development through a substantial scholarship foundation.\n\nThe bank offers a comprehensive suite of retail and commercial banking products: checking and savings accounts, loan products (mortgages, vehicle loans, capital equipment financing), online and mobile banking platforms, e-bill pay, debit card services, and identity theft protection. They provide specialized agricultural banking and farm management services (Iowa locations), crop insurance (Iowa only), and trust services (Iowa only). Business banking includes transaction management and long-term financing solutions tailored to small business growth.\n\nFirst Security Banks distinguishes itself through agricultural and rural market expertise, personal relationship-based banking (\"People you know, experience you trust\"), and deep community ties demonstrated by $8.5+ million in scholarships awarded through the L.A. Amundson Ohana Foundation as of 2025. The bank emphasizes sound financial advice, real-world understanding of commodity markets, and competitive rates with low fees. Multiple locations reduce travel burden for rural customers across three states.\n\nThe primary caveat is structural complexity: First Security Bank \u2013 Sleepy Eye, First Security Bank \u2013 West, First Security Bank \u2013 Canby, and First Security Bank \u2013 Mapleton are separate banks with independent charters and FDIC insurance ($250,000 per depositor per bank). This means deposit insurance does not aggregate across locations, and customers must understand which charter their account resides under. Trust and specialized agricultural services are limited to Iowa locations only.",
   "logo_url": "",
   "website_url": "https://www.firstsecuritybanks.com",
   "affiliate_url": "",
@@ -26,21 +26,34 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Vehicle loans",
+    "Mortgages (home purchase and refinance)",
+    "Capital equipment loans and leasing",
+    "Online banking platform",
+    "Mobile banking",
+    "E-Z Bill Pay",
+    "Debit card services with fraud protection and replacement",
+    "ID theft protection",
+    "Trust services (Iowa locations only)",
+    "Agricultural banking and farm management (Iowa only)",
+    "Crop insurance (Iowa only)",
+    "Business banking and commercial lending"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1882",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured with full government backing; $250,000 standard insurance per depositor per bank",
+    "12 physical locations across MN, ND, and IA reducing travel burden for rural customers",
+    "Specialized agricultural banking, farm management services, and commodity market expertise",
+    "Strong community commitment: $8.5+ million in scholarships awarded through foundation since 1993",
+    "Comprehensive service suite including mobile banking, e-bill pay, and identity theft protection",
+    "Trust services available with institutional history dating to 1878",
+    "Personal relationship-based banking model with emphasis on local decision-making"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Multiple separate bank charters means FDIC insurance does not pool across locations ($250K per bank, not per customer)",
+    "Trust services and agricultural products only available at Iowa locations, limiting utility for ND/MN customers",
+    "Limited to tri-state region (MN, ND, IA); no national presence or online account opening mentioned",
+    "Crop insurance and farm management services limited to Iowa only despite agricultural focus",
+    "Website content does not specify APR ranges, fee schedules, or product terms for comparison shopping"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5252,
   "latitude": 44.2975000172376,
   "longitude": -94.7225819689793,
@@ -94,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Rural agricultural operators and farmers in Minnesota, North Dakota, and Iowa seeking specialized ag lending",
+    "Small business owners in the tri-state region requiring relationship-based financing and local decision-making",
+    "Community-oriented customers valuing local branch access and personal banking relationships over digital-first institutions",
+    "Estate planning clients in Iowa needing trust administration services from an established institutional trustee"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Security Banks is best for rural and small business customers in Minnesota, North Dakota, and Iowa who prioritize local relationships, agricultural expertise, and physical branch access over digital convenience. The critical caveat is the multi-charter structure: customers with accounts across multiple First Security Bank locations do not receive pooled FDIC insurance, meaning deposits above $250,000 at any single chartered bank are uninsured\u2014customers must explicitly verify which charter holds their account.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,11 @@
   ],
   "phone": "",
   "address": "100 Main St E, Sleepy Eye, MN 56085",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

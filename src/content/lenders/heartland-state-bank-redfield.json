@@ -1,15 +1,15 @@
 {
   "name": "Heartland State Bank",
   "slug": "heartland-state-bank-redfield",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Redfield, SD. $155M in assets. 4 offices.",
-  "description_long": "Heartland State Bank is a community bank located in Redfield, SD, established in 1909. The bank holds approximately $155M in total assets and $125M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Independent South Dakota bank operating since 1909, serving four small communities with local ownership and traditional banking services including mobile and online access.",
+  "description_long": "Heartland State Bank is an independent, locally-owned community bank that has been operating since 1909. Based on their website, the institution serves four South Dakota communities: Wessington, Tulare, Highmore, and Redfield. The bank positions itself around the concept of providing \"Uptown Services with the Hometown Touch,\" emphasizing personal relationships and community focus rather than corporate scale.\n\nThe bank offers core deposit products including checking and savings accounts, along with digital banking services. Their primary digital offerings include mobile banking via iOS and Android apps, e-statements available 24/7 for up to three years of records, mobile check deposit functionality, funds transfer between accounts, and account balance viewing. They provide SMS text banking as an alternative access method. The website indicates they have a phone line (605-475-5500) for account changes and customer support.\n\nWhat distinguishes Heartland State Bank is its emphasis on local, independent ownership and long-term community presence spanning over 110 years. The bank appears to differentiate itself through personalized service and accessibility in smaller towns underserved by major national banks. Their mobile deposit feature includes detailed guidance on proper check capture technique, suggesting attention to user experience.\n\nA significant limitation is the sparse information available on their website. Specific product details, interest rates, fees, lending services, and account requirements are not disclosed in the accessible content. The mention of \"Heartland Financial Services Inc.\" with disclaimers about non-FDIC insured products suggests they may offer investment services, but details are unclear. As a small community bank, they likely have limited product breadth compared to regional or national institutions. The website provides minimal information about business accounts, loans, or credit products.",
   "logo_url": "",
   "website_url": "https://www.hsbsd.com",
   "affiliate_url": "",
@@ -24,23 +24,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts (implied, not detailed)",
+    "Savings accounts (implied, not detailed)",
+    "Mobile banking app for iOS and Android",
+    "Mobile check deposit from smartphone",
+    "E-statements available 24/7 with three-year history",
+    "SMS text banking",
+    "Account balance viewing and transaction history",
+    "Funds transfer between customer accounts",
+    "Online banking through website",
+    "Customer service phone line (605-475-5500)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1909",
-    "Local community bank with personal service",
-    "4 locations"
+    "Mobile banking app available on both iOS and Android platforms with check deposit functionality",
+    "24/7 online access to e-statements with three-year history available anytime",
+    "Free mobile and online banking access with no mention of monthly maintenance fees",
+    "Established independent bank with 110+ years of local community presence (since 1909)",
+    "SMS text banking option provides alternative access method for those without smartphones",
+    "Detailed mobile deposit guidance provided to customers for successful transactions",
+    "Local decision-making as independently owned bank rather than corporate-controlled institution"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information on interest rates, APYs, fees, or account minimums",
+    "Limited to four small South Dakota towns, making in-person access impossible for most consumers",
+    "No information about loan products, credit lines, or lending services on website",
+    "Minimal product diversity disclosed\u2014no details on business accounts, investment services, or credit cards",
+    "No online account opening or signup process visible; appears to require in-person or phone contact"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +61,7 @@
   "states_served": [
     "SD"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9007,
   "latitude": 44.8753490088858,
   "longitude": -98.5131069917758,
@@ -94,12 +103,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Residents of Wessington, Tulare, Highmore, or Redfield seeking community-focused local banking",
+    "Customers who value personal relationships and local decision-making over corporate banking",
+    "Individuals who want basic checking, savings, and mobile banking without complex products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Heartland State Bank is best for customers in its four-town South Dakota service area who prioritize local, independent banking and basic digital convenience. The main caveat is the severe geographic limitation and lack of transparent product information\u2014potential customers outside these communities cannot access services, and the website provides almost no details on rates, fees, or loan offerings, requiring direct contact for basic product information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +116,11 @@
   ],
   "phone": "",
   "address": "302 E 7Th Ave, Redfield, SD 57469",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

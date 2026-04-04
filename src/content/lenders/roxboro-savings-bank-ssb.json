@@ -1,7 +1,7 @@
 {
   "name": "Roxboro Savings Bank, Ssb",
   "slug": "roxboro-savings-bank-ssb",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
@@ -9,8 +9,8 @@
     "mutual-bank",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Roxboro, NC. $350M in assets. 2 offices.",
-  "description_long": "Roxboro Savings Bank, Ssb is a community bank located in Roxboro, NC, established in 1923. The bank holds approximately $350M in total assets and $282M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community-focused savings bank offering personal and business checking, savings, mortgages, and loans with emphasis on local decision-making and personalized service.",
+  "description_long": "Roxboro Savings Bank, SSB is a community savings bank that positions itself as a locally-rooted financial institution serving personal and business customers. The bank emphasizes its role as a neighborhood lender where customers interact with familiar community members rather than distant corporate entities. Founded with a commitment to local involvement, the bank maintains physical locations with drive-through service and participates actively in community events and charitable initiatives.\n\nThe bank offers a comprehensive range of retail and commercial banking services. For personal customers, this includes checking accounts (with $50 minimum opening deposit), savings accounts, CDs, IRAs, credit cards, and online/mobile banking. Mortgage services include home purchase loans, refinancing, and home equity lines of credit tailored to various borrower profiles. Business customers can access business checking and savings accounts, merchant services, business credit cards, and commercial loans. The bank also advertises construction loans as a specialty product. Multiple financial calculators are available online to help customers with planning.\n\nRoxboro Savings Bank differentiates itself through its explicit community banking model, messaging around \"local people making local decisions\" and direct involvement in civic life. The bank hosts community events like its 17th Annual Shred Day and canned food drive, offers bilingual services (\"Se habla Espa\u00f1ol\"), and emphasizes relationship-based banking. Its low account opening requirement ($50 for checking) and free banking messaging target accessibility-conscious consumers. The brand position centers on personalized service and trust-building rather than competing on rates or digital-first innovation.\n\nAs a community savings bank, Roxboro Savings Bank serves primarily local and regional customers within its service area. The website provides limited information about specific rates, fees, or comparative advantages beyond the community relationship angle. Prospective customers should contact the bank directly or visit branches for detailed product terms, current rates, and fee structures. The bank appears stable and established, but like all regional institutions, carries concentration risk tied to local economic conditions.",
   "logo_url": "",
   "website_url": "https://WWW.ROXBOROSAVINGS.COM",
   "affiliate_url": "",
@@ -25,23 +25,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "CDs and IRAs",
+    "Personal credit cards",
+    "Online and mobile banking",
+    "Mortgage loans (purchase and refinance)",
+    "Home equity lines of credit (HELOC)",
+    "Business checking and savings accounts",
+    "Business credit cards and merchant services",
+    "Commercial and construction loans",
+    "Financial calculators (mortgage, retirement, loan consolidation, etc.)",
+    "Allpoint ATM network access"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1923",
-    "Local community bank with personal service",
-    "2 locations"
+    "Low minimum deposit requirement ($50) for opening personal checking accounts",
+    "Free personal checking with no mention of monthly fees",
+    "Local decision-making for loan approvals versus remote corporate review",
+    "Bilingual services available (Se habla Espa\u00f1ol)",
+    "Comprehensive product range including mortgages, business loans, and construction loans",
+    "Active community involvement including annual shred day and charitable food drives",
+    "Mobile and online banking options available for convenience",
+    "Allpoint ATM network access for widespread cash withdrawal options"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display current rates, APRs, or fee structures for comparison shopping",
+    "Limited geographic reach as a regional/community bank serving primarily local area",
+    "No information about special programs, promotional rates, or cashback rewards",
+    "Website provides minimal details about business loan terms, equipment financing, or SBA loan offerings",
+    "No information about digital account opening completion or account funding timelines"
   ],
   "contact": {
     "phone": "",
@@ -53,7 +65,7 @@
   "states_served": [
     "NC"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28471,
   "latitude": 36.3905309822366,
   "longitude": -78.9859670395898,
@@ -95,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local residents seeking relationship-based banking with familiar community members",
+    "First-time homebuyers and existing homeowners interested in mortgage and HELOC products",
+    "Small business owners needing construction loans or commercial lending with local decision-making",
+    "Community-minded customers prioritizing local institution support over large national banks"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Roxboro Savings Bank is best for customers within its geographic service area who value personal relationships, local decision-making, and community involvement in their banking partner. The main caveat is that as a regional institution, it has limited geographic reach and the website lacks transparent rate and fee information needed for comparison with larger competitors\u2014direct contact with the bank is necessary for specific pricing details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +121,11 @@
   ],
   "phone": "",
   "address": "313 S Main St, Roxboro, NC 27573",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Benton County State Bank",
   "slug": "benton-county-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Blairstown, IA. $51M in assets. 1 office.",
-  "description_long": "Benton County State Bank is a community bank located in Blairstown, IA, established in 1869. The bank holds approximately $51M in total assets and $38M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Benton County State Bank is a community bank established in 1869 offering deposit accounts, loans, and financial services to individuals and businesses.",
+  "description_long": "Benton County State Bank has operated as a community financial institution since 1869, building its reputation on long-term customer relationships and localized service. The bank serves both individual and commercial customers through a single physical location with specific operating hours (Monday-Thursday 8:30am-3:00pm, Friday 8:30am-5:00pm). Their service model emphasizes understanding customer needs and priorities to deliver tailored financial solutions rather than a broad national presence. The bank maintains an active Community Reinvestment Act (CRA) program, indicating commitment to serving their local assessment area. Their long operational history suggests stability and established roots within their community. However, as a small community bank with limited branch presence and restricted hours, they may not suit customers seeking 24/7 access or extensive branch networks. The institution appears to serve primarily local customers in their geographic area rather than offering online-first or national banking services.",
   "logo_url": "",
   "website_url": "http://www.bentoncountystatebank.com",
   "affiliate_url": "",
@@ -26,21 +26,34 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "ATM and debit card services",
+    "Agricultural loans",
+    "Business loans",
+    "Consumer loans",
+    "Notary services",
+    "Safe deposit boxes",
+    "Bank money orders",
+    "Night depository",
+    "Account reconciliation and research",
+    "Savings bonds"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1869",
-    "Local community bank with personal service",
-    "1 location"
+    "Established community bank with 155+ years of operating history (since 1869)",
+    "Offers notary services to both customers and non-customers",
+    "Comprehensive loan products including agricultural, business, and consumer loans",
+    "Night depository service for after-hours deposits",
+    "Safe deposit box services for document and valuables storage",
+    "Full range of deposit products including checking, savings, CDs, and IRAs",
+    "Account reconciliation and research services available"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited branch presence and restricted operating hours (closes at 3pm most days)",
+    "No mention of extended digital banking capabilities or mobile app features",
+    "Notary services charge fees for non-customers, creating potential barriers",
+    "Limited information available about loan terms, rates, or eligibility requirements on website",
+    "No indication of online account opening or remote service capabilities"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13774,
   "latitude": 41.9084499924949,
   "longitude": -92.0840939656292,
@@ -94,12 +107,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local customers in Benton County, Iowa seeking personalized community banking",
+    "Agricultural borrowers requiring specialized farm lending expertise",
+    "Small business owners needing relationship-based commercial banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Best for established local customers in Benton County, Iowa who value personal relationships and can work within business hours. Main caveat: This is a small community bank with limited hours and no apparent digital-first capabilities, making it unsuitable for customers seeking 24/7 access or those outside the immediate service area.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +120,11 @@
   ],
   "phone": "",
   "address": "212 Locust St Ne, Blairstown, IA 52209",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

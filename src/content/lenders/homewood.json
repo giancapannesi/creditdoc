@@ -1,15 +1,15 @@
 {
   "name": "Homewood Federal Savings Bank",
   "slug": "homewood",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mutual-bank"
   ],
-  "description_short": "FDIC-insured community bank in Baltimore, MD. $67M in assets. 1 office.",
-  "description_long": "Homewood Federal Savings Bank is a community bank located in Baltimore, MD, established in 1916. The bank holds approximately $67M in total assets and $50M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community-focused federal savings bank serving Southeast Baltimore since the early 1920s, offering checking, savings, mortgages, and loans with online banking and mobile app access.",
+  "description_long": "Homewood Federal Savings Bank traces its origins to the early 1920s as the Homewood Permanent Building & Loan Association, formed to serve the Baltimore neighborhoods of Highlandtown and Canton. The institution merged with Clinton Permanent Building & Loan Association in 1960 and converted to a federal savings bank charter in 1987. With nearly a century of operating history, the bank positions itself as a neighborhood lender with deep community roots and a focus on personalized service.\n\nThe bank offers a full range of consumer banking products including checking and savings accounts, online and mobile banking, debit MasterCards, direct deposit, access to over 1,500 surcharge-free ATMs, mortgage products for home purchase and refinancing, personal loans, college financing, and debt consolidation options. Their service model emphasizes both modern digital conveniences (24/7 online banking, mobile app) and traditional personal relationship-building through friendly local staff at their Southeast Baltimore location.\n\nHomewood Federal distinguishes itself through its independent community banking positioning, maintaining neighborhood focus while offering conveniences typically associated with larger institutions. The bank emphasizes integrity, fairness, and long-term customer relationships. They provide educational resources and financial calculators to support customer decision-making, and staff are available to answer questions about their loan and deposit products.\n\nAs a smaller regional institution, Homewood Federal is best suited for consumers seeking personalized service and local relationships rather than national branch networks or cutting-edge fintech features. The bank operates from a single location in Baltimore, which limits in-person accessibility for non-local customers. Their product offerings are standard community bank fare without specialized services, and they do not publicly disclose deposit rates, lending rates, or loan terms on their website.",
   "logo_url": "",
   "website_url": "https://www.homewoodfsb.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts",
+    "Online banking with 24/7 access",
+    "Mobile banking app",
+    "Debit MasterCards",
+    "Direct deposit",
+    "Home mortgages (purchase and refinance)",
+    "Personal loans and debt consolidation",
+    "College financing loans",
+    "Surcharge-free ATM access (1,500+ locations)",
+    "Financial calculators and educational resources",
+    "Secured credit cards (referenced via MasterCard SecureCode enrollment)",
+    "In-person customer service at Baltimore location"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1916",
-    "Local community bank with personal service",
-    "1 location"
+    "Access to 1,500+ surcharge-free ATM locations despite being a small independent bank",
+    "Nearly 100 years of operating history and community presence in Baltimore since early 1920s",
+    "Offers both modern conveniences (online banking, mobile app, 24/7 access) and personalized local service",
+    "Federal savings bank charter since 1987 provides regulatory structure and customer protections",
+    "Full range of mortgage and loan products with knowledgeable staff guidance",
+    "Debit MasterCard, direct deposit, and standard banking features available",
+    "Emphasis on integrity, fairness, and long-term personal relationships with customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Single physical location in Baltimore limits in-person accessibility for customers outside Southeast Baltimore area",
+    "Website does not display current deposit rates, lending rates, or loan terms\u2014requires contacting bank directly",
+    "Limited geographic footprint restricts convenience for non-Baltimore residents despite online banking availability",
+    "No indication of specialized services, investment products, or advanced digital tools compared to larger competitors",
+    "Small institution size may result in fewer resources for customer service compared to national banks"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MD"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 31267,
   "latitude": 39.286726005043,
   "longitude": -76.570512008188,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Baltimore-area residents seeking personalized neighborhood banking with community accountability",
+    "Homebuyers and mortgage refinance customers in Southeast Baltimore wanting local loan guidance",
+    "Customers prioritizing relationship-based banking and personal service over national branch networks",
+    "Small business owners in the greater Baltimore metropolitan area needing local lending relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Homewood Federal is best for Baltimore-area residents and small business owners who value personalized local banking relationships and community accountability over the convenience of national branch networks. Primary caveat: as a single-location institution, it's impractical for customers outside the Baltimore area, and the website lacks rate transparency\u2014serious shoppers must contact the bank directly to compare terms with competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "3228 Eastern Ave, Baltimore, MD 21224",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Boc Bank",
   "slug": "boc-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Mclean, TX. $212M in assets. 4 offices.",
-  "description_long": "Boc Bank is a community bank located in Mclean, TX, established in 1984. The bank holds approximately $212M in total assets and $186M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank with proprietary technology platform designed for businesses that process payments daily, offering next-business-day ACH, no monthly fees, and direct banker access.",
+  "description_long": "BOC Bank is an FDIC-insured community bank that has developed its proprietary banking platform over more than two decades. The company positions itself between traditional legacy banks and fintech companies, combining regulatory stability with modern payment infrastructure. BOC's founding thesis centers on serving businesses that move money regularly and need reliable, friction-free payment systems rather than broad-spectrum banking services.\n\nThe bank offers business checking accounts with no monthly service charges, next-business-day ACH processing, and business-grade payment tools. Their primary product, BOC Collect, enables electronic collection of payments (rent, utilities, fees) with next-day fund availability. They also facilitate bulk payroll processing through ACH file uploads and serve as a banking solution for property managers, municipalities, public agencies, and payroll-focused businesses. Account opening is available online with direct banker support.\n\nBOC differentiates itself through intentional product focus, claiming to avoid the complexity and legacy constraints of traditional banks while offering the stability and accountability that fintech platforms lack. Direct banker access\u2014not call centers or chatbots\u2014is emphasized as a core service differentiator. The platform is explicitly designed around how businesses actually operate, with payment schedules and fee structures (no card fees, no per-transaction wire charges) aligned to business cash flow patterns.\n\nBOC Bank appears genuine in its narrow market positioning: it solves specific payment and cash flow problems for mid-market businesses rather than attempting to be a comprehensive financial services provider. The FDIC insurance and emphasis on real-time settlement provide legitimate appeal for businesses prioritizing payment reliability. However, as a community bank, service may be limited geographically, product breadth is intentionally restricted, and the bank makes no claims about lending products like lines of credit or equipment financing that some business banking customers require.",
   "logo_url": "",
   "website_url": "http://www.bocbanking.com",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking accounts with no monthly maintenance fees",
+    "Next-business-day ACH payment processing and settlement",
+    "BOC Collect electronic payment collection platform for rent and utilities",
+    "Bulk payroll processing via ACH file uploads",
+    "Business-grade payment tools and systems",
+    "Direct banker access and support",
+    "Online account opening",
+    "FDIC insurance on deposits",
+    "Payment reconciliation and clearing systems",
+    "Electronic fund transfer capabilities"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1984",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured community bank providing regulatory safety and accountability",
+    "No monthly maintenance fees or per-transaction wire charges for ACH payments",
+    "Next-business-day ACH settlement and fund availability for collected payments",
+    "Direct access to experienced bankers rather than call centers or automated systems",
+    "Proprietary platform refined over 20+ years specifically for payment processing",
+    "Electronic collection tools (BOC Collect) eliminate card interchange fees and delays",
+    "Bulk payroll processing through single ACH file uploads without per-transaction costs"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Intentionally narrow product focus may not serve businesses needing lines of credit, equipment financing, or lending products",
+    "Community bank status suggests potential geographic service limitations not disclosed on website",
+    "No information provided about account minimums, fee schedules, or other banking costs beyond 'no monthly service charge'",
+    "Limited transparency on customer support hours, SLAs, or service level guarantees",
+    "Positioning between legacy and fintech claims lack specific competitive evidence or third-party validation"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 25328,
   "latitude": 35.2326319949853,
   "longitude": -100.600295011234,
@@ -93,12 +102,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Property managers and apartment owners collecting rent electronically with next-day settlement needs",
+    "Municipalities and public agencies processing utility, fee, and assessment payments at scale",
+    "Mid-market businesses running regular payroll for dozens or hundreds of employees via ACH"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "BOC Bank is best for established mid-market businesses that process high volumes of regular payments (payroll, rent collection, utility payments) and prioritize payment reliability, next-day settlement, and direct banker relationships over broad product offerings. Primary caveat: this is a community bank with intentionally narrow focus; businesses requiring lending products, credit lines, or comprehensive commercial banking services should evaluate traditional banks or SBA lenders instead.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +115,11 @@
   ],
   "phone": "",
   "address": "201 N Main St, Mclean, TX 79057",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

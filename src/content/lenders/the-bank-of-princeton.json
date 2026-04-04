@@ -1,14 +1,14 @@
 {
   "name": "The Bank Of Princeton",
   "slug": "the-bank-of-princeton",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Princeton, NJ. $2283M in assets. 35 offices.",
-  "description_long": "The Bank Of Princeton is a community bank located in Princeton, NJ, established in 2007. The bank holds approximately $2283M in total assets and $1981M in deposits. It operates 35 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank operating in New Jersey, New York, and Pennsylvania offering personal and business checking, savings, mortgages, and home equity lines of credit with FDIC insurance.",
+  "description_long": "The Bank of Princeton is a community-focused financial institution that operates under FDIC insurance, backed by the full faith and credit of the U.S. Government. The bank is part of Princeton Bancorp Inc. (ticker: BPRN) and has been expanding its physical footprint across the tri-state region, with recent branch openings in Medford, Moorestown, Voorhees, Woodbury, Burlington, and Cherry Hill, New Jersey. The organization emphasizes relationship-based banking and community involvement, with employees dedicating hundreds of hours annually to local causes. The Bank of Princeton offers a comprehensive suite of consumer and business financial products designed to serve both personal and commercial banking needs. Their service portfolio includes multiple personal checking account options, customizable savings plans, mortgage loans with various options for homebuyers, and home equity lines of credit (currently advertised at 0.25% below prime rate for 6 months). They provide business accounts and lending solutions for companies of varying complexity, along with digital banking capabilities including mobile check deposit and expense tracking. The bank has recently upgraded its digital banking platform to enable customers to manage accounts anytime and anywhere. What distinguishes The Bank of Princeton is their emphasis on community banking values and local relationship building rather than being a large national institution. They offer account switching assistance through a free switch kit to help customers transition from other financial institutions. The bank also provides personalized recommendations for savings goals and maintains competitive promotional offers for customers seeking to maximize returns. Their geographic expansion strategy suggests growth ambitions while maintaining community-focused operations. An honest assessment reveals that while the bank offers solid community banking services and FDIC protection, the website content does not provide specific details about interest rates on deposit accounts, fee structures, or loan terms that would allow consumers to comparison shop effectively. The promotional rate on home equity lines of credit is time-limited and subject to unspecified terms. Limited information about business lending products, minimum balance requirements, or APRs makes it difficult to assess competitiveness against larger national and regional banks.",
   "logo_url": "",
   "website_url": "https://WWW.THEBANKOFPRINCETON.COM",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (multiple account types)",
+    "Personal savings accounts with custom plan recommendations",
+    "Mortgage loans for home purchase",
+    "Home equity lines of credit",
+    "Business checking accounts",
+    "Business lending and products",
+    "Digital banking platform with online access",
+    "Mobile banking app with check deposit feature",
+    "Account switching assistance (free switch kit)",
+    "Online banking enrollment",
+    "FDIC-insured deposit protection",
+    "Community reinvestment and charitable giving programs"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2007",
-    "Local community bank with personal service",
-    "35 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Multiple personal checking account options with flexible features",
+    "Home equity line of credit at 0.25% below prime for 6 months introductory period",
+    "Free account switching kit to facilitate transfers from other banks",
+    "Mobile banking app with check deposit and spending tracking capabilities",
+    "Personalized savings plan recommendations available",
+    "Active community involvement with employee volunteer hours and charitable donations",
+    "Expanding branch network across New Jersey, New York, and Pennsylvania"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display specific interest rates, APRs, or fee schedules for comparison",
+    "Limited geographic footprint compared to national banks; primarily tri-state region",
+    "Website contains a browser security alert and error message affecting user experience",
+    "Minimal detail provided about business lending products, terms, or requirements",
+    "Promotional rates on home equity lines are time-limited with vague 'thereafter' terms"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "NJ"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58513,
   "latitude": 40.35585598571,
   "longitude": -74.669495026893,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers in New Jersey, New York, and Pennsylvania seeking community-focused banking",
+    "Homebuyers interested in mortgage options with personalized guidance",
+    "Small to mid-sized businesses needing local relationship banking",
+    "Customers wanting to switch from another bank with assistance"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Bank of Princeton is best for customers in the tri-state region seeking traditional community bank services with FDIC protection and personalized service. The main caveat is that the website lacks transparent pricing information (rates, fees, terms), making it necessary to contact the bank directly or visit a branch to compare their offerings against competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "183 Bayard Ln, Princeton, NJ 08540",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }
