@@ -1,14 +1,14 @@
 {
   "name": "Ks Statebank",
   "slug": "ks-statebank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Manhattan, KS. $2643M in assets. 6 offices.",
-  "description_long": "Ks Statebank is a community bank located in Manhattan, KS, established in 1969. The bank holds approximately $2643M in total assets and $2217M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering checking, savings, mortgages, and personal/business loans across Arizona and Kansas with online and mobile banking.",
+  "description_long": "KS StateBank is a regional bank operating in Arizona and Kansas, positioned as a full-service financial institution backed by FDIC insurance and the full faith and credit of the U.S. Government. The bank has established itself as a community-focused lender with a comprehensive product suite designed to serve both personal and business customers.\n\nThe bank offers a broad range of deposit accounts (checking and savings with competitive rates), residential mortgage lending tailored to various situations, personal loans for life milestones and major purchases, and business banking solutions. They provide convenient digital access through online banking with bill payment and transfers, mobile banking with mobile deposit capabilities, and 24/7 telephone banking. A notable business unit, Baystone Government Finance, specializes in equipment financing for communities nationwide.\n\nKS StateBank distinguishes itself through multi-channel accessibility (online, mobile, phone, in-person), a dedicated learning center and FAQ resources for financial education, and specialized lending products including a rebate rewards program and 360Control account management tool. Their emphasis on convenience and customer education suggests positioning as a relationship-focused regional bank rather than a digital-only or discount competitor.\n\nThe bank's main limitation is its geographic restriction to Arizona and Kansas, which limits accessibility for customers outside these states. The website content does not provide detailed information about fee structures, specific interest rates, loan terms, credit requirements, or competitive comparisons that would help consumers make informed decisions. Prospective customers should contact the bank directly or visit branches for detailed product specifications and pricing.",
   "logo_url": "",
   "website_url": "http://ksstate.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking accounts",
+    "FDIC-insured savings accounts",
+    "Residential mortgage lending and origination",
+    "Personal loans for various life purposes",
+    "Online banking with bill payment and transfers",
+    "Mobile banking app with mobile deposit",
+    "24/7 telephone banking system",
+    "Business checking and savings accounts",
+    "Business credit cards",
+    "Commercial loan payments",
+    "KS StateBank Rebate Rewards program",
+    "Baystone Government Finance (equipment financing for municipalities)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1969",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Multi-channel banking access: online, mobile app with mobile deposit, telephone banking 24/7, and in-person branches",
+    "Free online banking with bill payment and bank-to-bank transfers included",
+    "Dedicated learning center and FAQ resources for financial education",
+    "Specialized mortgage lending with tailored home loan solutions for different situations",
+    "Business-focused services including Baystone Government Finance for equipment financing",
+    "Mobile deposit capability for convenience"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to Arizona and Kansas only\u2014not available nationwide",
+    "Website does not disclose fee schedules, making true cost comparison difficult",
+    "Specific interest rates and loan terms not provided on website; requires direct contact",
+    "Limited transparency on credit requirements and loan approval criteria",
+    "No information about minimum account balances or deposit requirements"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 19899,
   "latitude": 39.1904123216823,
   "longitude": -96.6096217076339,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Arizona and Kansas residents seeking full-service banking with FDIC protection",
+    "Homebuyers in AZ/KS looking for residential mortgage solutions",
+    "Small business owners in covered states needing business banking and equipment financing",
+    "Customers who prefer multi-channel banking (online, mobile, phone, and branch access)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "KS StateBank is best for Arizona and Kansas residents seeking a traditional, full-service FDIC-insured bank with modern digital convenience and a focus on customer education. The primary caveat is geographic limitation\u2014the bank only operates in two states\u2014and the lack of publicly available fee and rate information, which requires direct customer contact for accurate pricing comparison.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "1010 Westloop Pl, Manhattan, KS 66502",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

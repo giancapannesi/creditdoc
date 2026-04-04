@@ -1,14 +1,14 @@
 {
   "name": "Firstbank Puerto Rico",
   "slug": "firstbank-puerto-rico",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Santurce, PR. $19112M in assets. 74 offices.",
-  "description_long": "Firstbank Puerto Rico is a community bank located in Santurce, PR, established in 1949. The bank holds approximately $19112M in total assets and $16724M in deposits. It operates 74 office locations. Designated as a Minority Board and Serving Hispanic Community. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FirstBank Puerto Rico offers comprehensive banking services including checking, savings, credit cards, personal loans, mortgages, and auto loans primarily to Puerto Rico residents.",
+  "description_long": "FirstBank Puerto Rico is a full-service bank operating in Puerto Rico with a physical branch network and digital banking platform. The bank has been serving the Puerto Rico market with traditional banking services and maintains a routing number (221571473) indicating FDIC-insured operations. FirstBank positions itself as a mainstream retail and commercial bank offering both personal and business banking solutions.\n\nThe company's service offerings span multiple financial products: deposit accounts (checking, savings, money market, CDs), credit products (personal loans from 5.99% APR, auto loans, mortgages, credit cards with rewards programs), and digital banking through their \"Tu Banca Digital\" mobile app and online platform. They also offer business banking with commercial credit lines, business credit cards, and cash management services. Their insurance division provides travel protection products, though these are not FDIC-insured.\n\nFirstBank distinguishes itself through same-day personal loan approval and funding, promotional financing partnerships (such as 0% APR financing with IKEA for up to 18 months), rewards programs on debit cards, and convenience features like mobile check deposit. They also offer specialized services like valet parking benefits for premium cardholders and The Shop Online platform highlighting local entrepreneurs. The bank maintains accessibility features for users with low vision and provides customer support in Spanish.\n\nAs a regional bank limited to Puerto Rico operations, FirstBank serves a geographically specific market rather than offering nationwide banking. While comprehensive in product offerings, customers outside Puerto Rico cannot access their services. The bank's marketing emphasizes convenience and same-day service, but detailed fee schedules, interest rate transparency, and comparison data with competitors are not readily available on the website.",
   "logo_url": "",
   "website_url": "https://www.1firstbank.com",
   "affiliate_url": "",
@@ -25,21 +25,33 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
+    "Money market and CD products",
+    "Personal loans (5.99% APR, same-day funding)",
+    "Auto loans",
     "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Credit cards with rewards programs",
+    "Business checking and deposit accounts",
+    "Commercial credit lines",
+    "Mobile and online banking (Tu Banca Digital)",
+    "Mobile check deposit",
+    "Travel insurance products"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1949",
-    "Local community bank with personal service",
-    "74 locations"
+    "Same-day personal loan approval and disbursement available",
+    "Personal loans starting at 5.99% APR with terms up to 60 months",
+    "Tu Banca Digital mobile app with 24/7 account access, mobile check deposit, and transfers",
+    "0% promotional APR financing partnerships (e.g., IKEA up to 18 months)",
+    "No monthly service charge promotion ($0 until June 30, 2026)",
+    "Rewards program on debit card purchases",
+    "Routing number verification indicates legitimate FDIC-insured banking operations",
+    "Both personal and business banking services available"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to Puerto Rico geography only\u2014cannot serve mainland US customers",
+    "Specific APR ranges, fees, and credit requirements not transparently disclosed on website",
+    "Insurance products explicitly not FDIC-insured or guaranteed by FirstBank",
+    "No information about minimum deposit requirements, overdraft fees, or other standard banking fees",
+    "Limited details on mortgage terms, rates, or qualification criteria"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "PR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 30387,
   "latitude": 18.4450670138211,
   "longitude": -66.0666599711714,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Puerto Rico residents seeking comprehensive banking with same-day personal loan processing",
+    "Small business owners in Puerto Rico needing business checking and commercial credit lines",
+    "Homebuyers in Puerto Rico looking for mortgage financing options",
+    "Consumers wanting rewards on everyday debit card purchases"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "FirstBank Puerto Rico is best for Puerto Rico residents seeking a full-service bank with convenient digital banking and fast personal loan funding. The critical limitation is geographic: this bank operates exclusively in Puerto Rico and cannot serve mainland US customers, making it unsuitable for anyone outside the territory.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "1519 Ave Ponce De Leon, Santurce, PR 00909",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

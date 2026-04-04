@@ -1,13 +1,13 @@
 {
   "name": "Orrstown Bank",
   "slug": "orrstown-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Harrisburg, PA. $5542M in assets. 47 offices.",
-  "description_long": "Orrstown Bank is a community bank located in Harrisburg, PA, established in 1919. The bank holds approximately $5542M in total assets and $4534M in deposits. It operates 47 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Orrstown Bank is a community bank operating in Pennsylvania and Maryland, offering personal and business banking, mortgages, and wealth management services with local decision-making.",
+  "description_long": "Orrstown Bank is a regional community bank headquartered in Pennsylvania with operations across Pennsylvania and Maryland. The bank has established itself as a locally-focused financial institution that emphasizes community relationships while leveraging larger banking expertise and resources. According to their marketing materials, they rank #1 in Pennsylvania and #12 in the nation among top-performing community banks.\n\nThe bank offers a comprehensive suite of financial services including personal checking and savings accounts, small business banking, mortgage lending (home purchase and refinance), home equity lines of credit, retirement planning, and wealth management through Orrstown Financial Advisors. They specifically highlight their SmartLock Home Equity Line of Credit product with an introductory rate of 1.99% APR for 6 months, then 6.25%-6.50% variable APR thereafter. Their service portfolio spans everyday banking, homeownership financing, business-specific financial solutions, and investment/retirement planning.\n\nOrrstown Bank differentiates itself through its positioning as a \"local decisions, big bank expertise\" institution, emphasizing that industry-specific financial solutions are delivered by experts with community knowledge. They market themselves as a trusted local partner for homeownership, with dedicated resources for first-time homebuyers and pre-qualification services. The bank operates multiple online wealth management portals (NetXInvestor, Albridge, OFA Portal) for account management and investment access.\n\nAs a traditional community bank, Orrstown is best suited for consumers seeking personal or business banking relationships with local decision-making rather than online-only banking. The bank does not appear to specialize in credit repair, debt relief, emergency loans, or alternative financial products. Prospective customers should verify current rates, fees, and service availability in their specific geographic area, as community banks often have limited branch networks and may not serve all regions equally.",
   "logo_url": "",
   "website_url": "https://www.orrstown.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Small business banking and lending",
+    "Mortgages (home purchase and refinance)",
+    "SmartLock Home Equity Lines of Credit",
+    "Business-specific financial solutions and industry expertise",
+    "Retirement planning services",
+    "Wealth management through Orrstown Financial Advisors",
+    "Online investment portals (NetXInvestor, Albridge, OFA Portal)",
+    "Pre-qualification for homeownership",
+    "Homeownership guidance and education"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1919",
-    "Local community bank with personal service",
-    "47 locations"
+    "Ranked #1 in Pennsylvania and #12 nationally among top-performing community banks",
+    "Offers competitive introductory rate of 1.99% APR for 6 months on SmartLock HELOC products",
+    "Provides industry-specific financial solutions for small business banking with local expertise",
+    "Multiple online wealth portals (NetXInvestor, Albridge, OFA Portal) for comprehensive account management",
+    "Local decision-making combined with big bank resources and expertise",
+    "Dedicated homeownership support with pre-qualification and guidance services",
+    "Full-service offerings spanning personal banking, business banking, mortgages, and wealth management"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Pennsylvania and Maryland only",
+    "No indication of specialized products for credit building, credit repair, or emergency lending needs",
+    "Requires Adobe Acrobat Reader X or higher for PDF access, suggesting older website infrastructure",
+    "Wealth management services appear to require separate portal access rather than integrated banking platform",
+    "No transparency provided on specific fees, minimum account balances, or full product pricing on homepage"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "PA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 713,
   "latitude": 40.244580982367,
   "longitude": -76.801087016613,
@@ -92,12 +103,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Pennsylvania and Maryland residents seeking full-service community banking with local relationships",
+    "Small business owners needing industry-specific financial solutions and local decision-makers",
+    "Homebuyers wanting dedicated mortgage support and pre-qualification from a trusted local lender",
+    "Investors and high-net-worth individuals seeking comprehensive wealth management through Orrstown Financial Advisors"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Orrstown Bank is best for Pennsylvania and Maryland residents who prioritize community banking relationships, local decision-making, and full-service financial products over online-only convenience banking. The primary caveat is their limited geographic availability\u2014customers must be in their service areas\u2014and lack of specialization in credit repair, emergency lending, or alternative financial products.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "4750 Lindle Rd, Harrisburg, PA 17111",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

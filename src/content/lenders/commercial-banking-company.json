@@ -1,14 +1,14 @@
 {
   "name": "Commercial Banking Company",
   "slug": "commercial-banking-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Valdosta, GA. $373M in assets. 5 offices.",
-  "description_long": "Commercial Banking Company is a community bank located in Valdosta, GA, established in 1934. The bank holds approximately $373M in total assets and $328M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "South Georgia Community Bank offering personal checking, savings, mortgages, business loans, and CDs with emphasis on personalized service across five local branch locations.",
+  "description_long": "Commercial Banking Company operates as South Georgia Community Bank, a regional community bank headquartered in Valdosta, Georgia. The bank maintains five physical branch locations including Valdosta Main, Tifton, Hahira, Moultrie, and Valdosta Baytree, positioning itself as a true community banking alternative to larger national institutions.\n\nThe bank offers a comprehensive suite of consumer and business banking services including personal checking and savings accounts, CDs and IRAs, mortgages for home purchase and refinance, business banking with loans and lines of credit, construction loans, and personal lending options. They provide online banking, debit cards, automatic transfers, rate watch tools, and digital account management. The company is currently upgrading its core banking system to enhance security and digital experience.\n\nCBC Bank distinguishes itself through emphasis on personal relationships and community connection. Their marketing explicitly positions them as a community bank where staff know customers by name, prioritizes customer service, and tailors solutions to different life stages (students, young adults, active families, retirees). Customer testimonials highlight individual attention and going above-and-beyond service, contrasting with impersonal large bank experiences.\n\nAs a regional community bank, CBC serves a specific geographic market in South Georgia rather than operating nationally. While they offer standard banking products comparable to larger institutions, their value proposition centers on personalized service and local decision-making rather than technological innovation or specialized products. The bank is suitable for consumers prioritizing relationship-based banking in the South Georgia region but may have limitations in digital capabilities and product breadth compared to national banks.",
   "logo_url": "",
   "website_url": "https://www.cbcbank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "CDs and IRAs",
+    "Residential mortgages and home loans",
+    "Mortgage refinancing",
+    "Business banking services",
+    "Business loans",
+    "Construction loans",
+    "Business lines of credit",
+    "Online banking platform",
+    "Debit card services",
+    "Fraud and identity theft protection resources"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1934",
-    "Local community bank with personal service",
-    "5 locations"
+    "Five convenient physical branch locations in South Georgia (Valdosta, Tifton, Hahira, Moultrie)",
+    "Staff emphasizes personalized customer service with relationship-based banking approach",
+    "Comprehensive product suite including mortgages, business loans, construction loans, and personal accounts",
+    "Online banking platform with account management, automatic transfers, and password reset tools",
+    "Competitive mortgage rates with Rate Watch tool and educational resources for home loans",
+    "Business-focused services including lines of credit and construction financing",
+    "Life-stage focused financial planning guidance for students through retirement",
+    "Active community involvement demonstrated through charitable partnerships like CASA"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to South Georgia geographic region with only five branches, not suitable for customers outside service area",
+    "Website indicates core banking system is still being upgraded, suggesting potential temporary service disruptions",
+    "No mention of national reach, mobile app capabilities, or digital-only account options",
+    "Limited information about specific loan terms, rates, fees, or product details on website",
+    "Smaller institution may have fewer specialized financial products compared to national banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "GA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 16246,
   "latitude": 30.8803770089896,
   "longitude": -83.3031909928206,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "South Georgia residents seeking personalized, relationship-based community banking",
+    "Small business owners and entrepreneurs needing construction loans or business lines of credit",
+    "Families and individuals prioritizing local decision-making and personal customer service",
+    "Homebuyers in the region seeking mortgage products with local lending expertise"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Commercial Banking Company (South Georgia Community Bank) is best for South Georgia residents and small business owners who value personalized service and local banking relationships over digital convenience and national reach. The primary caveat is geographic limitation\u2014the bank only operates in South Georgia with five branches, making it unsuitable for customers outside this region, and ongoing system upgrades may temporarily affect service continuity.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "3462 N Valdosta Rd, Valdosta, GA 31602",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

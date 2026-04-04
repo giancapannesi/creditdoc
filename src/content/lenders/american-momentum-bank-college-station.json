@@ -1,13 +1,13 @@
 {
   "name": "American Momentum Bank",
   "slug": "american-momentum-bank-college-station",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in College Station, TX. $2791M in assets. 32 offices.",
-  "description_long": "American Momentum Bank is a community bank located in College Station, TX, established in 2006. The bank holds approximately $2791M in total assets and $2143M in deposits. It operates 32 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal and business checking, savings, lending, and treasury management services across multiple states with a focus on relationship banking.",
+  "description_long": "American Momentum Bank is a regional FDIC-insured bank that provides comprehensive banking services to both personal and business customers. The bank operates multiple banking centers across Texas (College Station, Odessa) and Florida (Tampa), with recent expansion into the New England market announced in February 2026. The institution positions itself as a relationship-focused bank that tailors financial solutions to customer needs rather than offering one-size-fits-all products.\n\nThe bank offers a robust suite of personal banking products including multiple checking account tiers (Basic, Interest, Sterling, Gold Interest, Momentum E Interest, and Momentum@Work), savings accounts, money market accounts, certificates of deposit, IRAs, and HSAs. On the lending side, they provide personal loans, home loans, and personal credit cards. Their business banking division is extensive, featuring multiple business checking options, business savings, commercial money market accounts, treasury management services (cash management, ACH, positive pay, remote deposit capture), merchant card services, and association banking specialization. The lending portfolio includes commercial real estate loans, construction loans, oil and gas loans, business lines of credit, equipment financing, SBA loans (they are designated as an SBA-preferred lender), and business credit cards.\n\nAmerican Momentum Bank distinguishes itself through specialized service divisions, particularly their Association Banking team that provides personalized assistance to property managers and HOA management companies. The bank emphasizes treasury management capabilities with services like zero balance accounts and accounts receivable financing, suggesting a focus on cash flow optimization for business clients. Their recent hiring of key SBA lending personnel and expansion into new markets indicates growth ambitions beyond their traditional Texas and Florida footprint. Community involvement appears important to their brand, with documented volunteer activities at local organizations.\n\nAs a regional bank, American Momentum provides personalized service advantages and relationship banking that larger national banks typically cannot match. However, the bank's geographic limitation to specific banking centers may inconvenience customers outside their service areas, and their product offerings, while comprehensive, may lack some innovative digital-first features found at neobanks. The bank appears well-capitalized and FDIC-insured, making it a stable choice for both personal and business banking needs, particularly for small to mid-sized businesses and those requiring specialized services like association banking or SBA lending.",
   "logo_url": "",
   "website_url": "https://www.americanmomentum.bank",
   "affiliate_url": "",
@@ -22,23 +22,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Basic, Interest, Sterling, Gold Interest, Momentum E Interest, Momentum@Work)",
+    "Personal savings accounts and money market accounts",
+    "Certificates of deposit and Individual Retirement Accounts (IRAs)",
+    "Health Savings Accounts (HSAs)",
+    "Personal loans and home loans",
+    "Personal credit cards",
+    "Business checking accounts (Business Basic, Qualified Interest, Platinum, Full Analysis CML, Bundle)",
+    "Business savings and commercial money market accounts",
+    "Treasury management including cash management, ACH services, positive pay, and zero balance accounts",
+    "Remote deposit capture and merchant card services",
+    "SBA loans and commercial real estate loans",
+    "Construction loans, equipment loans, and business lines of credit",
+    "Association banking services for property managers and HOAs",
+    "Business credit cards",
+    "Digital banking and online bill pay",
+    "Mobile banking with mobile deposit"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2006",
-    "Local community bank with personal service",
-    "32 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Designated SBA-preferred lender with specialized SBA loan programs",
+    "Specialized Association Banking team for property managers and HOA companies",
+    "Comprehensive treasury management services including cash management and positive pay",
+    "Multiple checking account tiers allowing customers to select accounts matching their usage patterns",
+    "Diverse lending portfolio including commercial real estate, construction, equipment, and oil and gas financing",
+    "Active community involvement with documented volunteer programs and local partnerships"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Texas (College Station, Odessa) and Florida (Tampa) banking centers, limiting accessibility for customers outside these areas",
+    "No mention of mobile app innovation or digital-first banking features compared to emerging neobanks",
+    "Requires visiting physical banking centers for some services, unlike fully digital competitors",
+    "No evidence of nationwide ATM network or surcharge-free ATM access guarantees",
+    "Specialization in business and relationship banking may mean less competitive pricing on consumer products compared to larger national banks"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +65,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58309,
   "latitude": 30.650201984984,
   "longitude": -96.2904710212212,
@@ -92,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-sized business owners seeking relationship banking and personalized service",
+    "Property managers and HOA management companies needing specialized association banking expertise",
+    "Businesses requiring SBA loans or commercial real estate financing",
+    "Personal customers in Texas or Florida seeking comprehensive banking with local banking center access"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "American Momentum Bank is best suited for small to mid-sized businesses and personal customers in Texas or Florida seeking relationship-driven banking with specialized services like association banking or SBA lending. The main caveat is geographic limitation\u2014customers outside their banking center locations will find limited in-person support, and the bank lacks the digital innovation and national ATM networks of larger competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-24",
   "cities_served": [
@@ -115,8 +131,11 @@
     "data_period": "2023-present",
     "last_checked": "2026-03-24"
   },
-  "processing_status": "raw",
-  "quality_score": 9,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 12,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

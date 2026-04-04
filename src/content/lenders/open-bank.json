@@ -1,13 +1,13 @@
 {
   "name": "Open Bank",
   "slug": "open-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Los Angeles, CA. $2651M in assets. 17 offices.",
-  "description_long": "Open Bank is a community bank located in Los Angeles, CA, established in 2005. The bank holds approximately $2651M in total assets and $2282M in deposits. It operates 17 office locations. Designated as a Asian or Pacific Islander Americans. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Open Bank is a multi-location bank offering online and mobile banking, cash management, SBA loans up to $5M, home loans, and fund transfer services through Zelle.",
+  "description_long": "Open Bank operates as a full-service bank with headquarters in Los Angeles, California and multiple branch locations across California, Texas, Washington, Virginia, Georgia, and Colorado. The institution provides comprehensive banking services including online and mobile banking platforms, e-statements, and remote deposit capture (RDC) functionality for retail customers. Beyond consumer banking, Open Bank specializes in business lending, offering SBA 7(a) loans up to the maximum amount of $5 million and business lines of credit. They also provide home loan products positioned as fast financial solutions tailored to individual borrower needs. The bank maintains a significant lending infrastructure with Loan Production Offices (LPOs) in multiple states and a dedicated Home Loan Center. Open Bank emphasizes security and convenience, featuring integration with Zelle for peer-to-peer payments, account-to-account transfers, and external account linking. The organization also references community investment and diversity initiatives through the Open Stewardship Foundation. Their service hours are consistent across locations (9am-5pm in respective time zones, Monday-Friday, excluding federal holidays), and they maintain dedicated phone lines for customer service at each location.",
   "logo_url": "",
   "website_url": "https://www.myopenbank.com",
   "affiliate_url": "",
@@ -22,23 +22,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Online banking platform",
+    "Mobile banking application",
+    "Remote Deposit Capture (RDC)",
+    "e-Statements (paperless)",
+    "Zelle peer-to-peer money transfer",
+    "Account-to-account fund transfers",
+    "External account linking and transfers",
+    "SBA 7(a) loans up to $5 million",
+    "Business lines of credit",
+    "Home loan financing",
+    "Cash management services",
+    "In-person banking at 10+ locations"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2005",
-    "Local community bank with personal service",
-    "17 locations"
+    "Nationwide presence with 10+ physical branch locations plus LPOs across six states",
+    "Offers specialized SBA 7(a) loans up to $5 million for small business owners",
+    "Integrated Zelle functionality for fast, safe peer-to-peer money transfers",
+    "Multiple banking channels including online banking, mobile app, and in-person locations",
+    "Remote Deposit Capture (RDC) available for convenient check deposits",
+    "Dedicated home loan services with fast processing and a dedicated loan center",
+    "Account-to-account transfer capabilities with external account linking",
+    "Green e-statements option for paperless banking"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited service hours (9am-5pm weekdays only, excluding holidays) with no 24/7 availability mentioned",
+    "No mention of 24/7 customer support or after-hours emergency contact procedures beyond closing browser",
+    "Website does not display specific product terms, rates, fees, or APR information for loans or accounts",
+    "No information provided about minimum deposit requirements, account types, or deposit insurance details",
+    "Limited detail on home loan options\u2014no mention of FHA, VA, refinance, or specific loan programs"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +62,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57944,
   "latitude": 34.05085099584,
   "longitude": -118.260802979703,
@@ -92,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-sized business owners seeking SBA loans up to $5 million",
+    "Home buyers in California, Texas, Washington, Virginia, Georgia, or Colorado seeking expedited mortgage solutions",
+    "Consumers preferring in-person banking combined with modern digital services",
+    "Businesses needing cash management and fund transfer services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Open Bank is best suited for small to mid-sized business owners seeking SBA loans and homebuyers in their service areas who prefer a bank combining physical locations with digital banking convenience. The main caveat is the lack of specific rate, fee, and product term information on the website, requiring direct contact with branches for detailed pricing and eligibility requirements.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +118,11 @@
   ],
   "phone": "",
   "address": "1000 Wilshire Blvd, Los Angeles, CA 90017",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

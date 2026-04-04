@@ -1,14 +1,14 @@
 {
   "name": "Enterprise Bank",
   "slug": "enterprise-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Omaha, NE. $579M in assets. 4 offices.",
-  "description_long": "Enterprise Bank is a community bank located in Omaha, NE, established in 1991. The bank holds approximately $579M in total assets and $461M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Enterprise Bank is a full-service bank offering personal and business checking, savings, lending, and digital banking solutions with branches and ATM access.",
+  "description_long": "Enterprise Bank is a traditional community bank that provides comprehensive financial services to both personal and business customers. Based on their website presence and service offerings, they operate as a retail bank with physical locations and a digital banking platform. The bank emphasizes fraud prevention and customer security, prominently featuring fraud alerts and secure authentication practices on their homepage.\n\nFor personal customers, Enterprise Bank offers a full suite of deposit products including checking, savings, money market, CDs, IRAs, and Health Savings Accounts. On the lending side, they provide auto loans, home equity loans, and first mortgages with dedicated mortgage specialists. Their online solutions include bill pay, Zelle transfers, eStatements, and mobile banking capabilities. They also offer account services such as debit and credit cards, wire transfers, safe deposit boxes, and check ordering.\n\nFor business customers, Enterprise Bank provides business checking and savings accounts, business CDs, commercial loans, SBA loans, and cash management services. Notable business features include remote deposit, ACH services, merchant processing, sweep services, and integration with Quicken and QuickBooks. Their Business Visa Debit Card and Wire Manager Service cater to operational business needs.\n\nEnterprise Bank distinguishes itself through emphasis on security, local banking relationships, and comprehensive service offerings. However, as a traditional bank, they likely have less competitive rates on deposits compared to online banks, and their mortgage and lending rates would need independent verification. The bank maintains a learning center and provides educational resources to customers. Their contact number (402-330-0200) suggests a Nebraska-based operation with customer service infrastructure.",
   "logo_url": "",
   "website_url": "https://www.ENTERPRISE.BANK",
   "affiliate_url": "",
@@ -23,23 +23,42 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Money market accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Health Savings Accounts (HSAs)",
+    "Auto loans",
+    "Home equity loans",
+    "First mortgage lending with specialist support",
+    "Mobile banking application",
+    "Online bill pay and Zelle transfers",
+    "Business checking and savings accounts",
+    "Commercial and industrial loans",
+    "SBA loan products",
+    "Merchant processing and payment services",
+    "Remote deposit for businesses",
+    "ACH and wire transfer services",
+    "Debit and credit cards",
+    "Safe deposit boxes",
+    "eStatements (digital statements)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1991",
-    "Local community bank with personal service",
-    "4 locations"
+    "Comprehensive product suite covering deposits, lending, and investment products under one institution",
+    "Mobile banking app with full functionality for account management, transfers, and bill pay",
+    "Business banking integration with Quicken and QuickBooks for accounting purposes",
+    "Mortgage specialists available with dedicated mortgage application process and home purchase guidance",
+    "Fraud prevention resources and fraud alerts prominently featured on website",
+    "Multiple account types including Health Savings Accounts (HSAs) and IRAs for retirement planning",
+    "Bill pay and Zelle integration for convenient money transfer options",
+    "Remote deposit capabilities for business customers and cash management services"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "As a traditional bank, likely offers lower savings and CD rates compared to online banks",
+    "Limited information on website regarding specific APY rates, making rate comparison difficult",
+    "Geographic limitation likely to specific regions with physical branch locations",
+    "No information provided about monthly fees, minimum balance requirements, or fee structures",
+    "Mortgage and auto loan rates not disclosed on website, requiring separate inquiry"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +70,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 33380,
   "latitude": 41.264336985193,
   "longitude": -96.118513008635,
@@ -93,12 +112,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking a full-service bank with both personal and business banking needs",
+    "Business owners requiring integrated accounting software connectivity and cash management services",
+    "Homebuyers working with mortgage specialists on purchase or refinance transactions",
+    "Consumers preferring relationship banking through physical branch locations"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Enterprise Bank is best for consumers and small business owners seeking traditional full-service banking with personal relationships, both lending and deposit products, and digital convenience. Primary caveat: rates and fee structures are not transparently disclosed on their website, requiring direct contact for comparison with competitors, and access may be limited to their geographic service area.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +126,10 @@
   ],
   "phone": "",
   "address": "525 N 132Nd Street, Omaha, NE 68154",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

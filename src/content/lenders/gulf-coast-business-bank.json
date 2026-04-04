@@ -1,14 +1,14 @@
 {
   "name": "Gulf Coast Business Bank",
   "slug": "gulf-coast-business-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Fort Myers, FL. $181M in assets. 1 office.",
-  "description_long": "Gulf Coast Business Bank is a community bank located in Fort Myers, FL, established in 2022. The bank holds approximately $181M in total assets and $155M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank serving Fort Myers and Naples, Florida with personal and commercial banking products, online banking, and business lending solutions.",
+  "description_long": "Gulf Coast Business Bank (GCBB) is a community-focused bank headquartered in Southwest Florida, serving the Fort Myers and Naples areas. The bank positions itself as a local alternative to larger national banks, emphasizing personal relationships and local decision-making for business lending. GCBB is FDIC-insured and backed by the full faith and credit of the U.S. Government.\n\nThe bank offers a dual product line serving both personal and commercial customers. On the personal side, GCBB provides checking accounts (Coastal Checking up to 3.05% APY), money market accounts (up to 3.82% APY), CDs (6-month at 3.72% APY and 12-month at 3.67% APY), debit cards, health savings accounts, and standard banking services like bill pay and check ordering. Their commercial offerings include lines of credit, business financing, SBA lending, owner-occupied income property financing, cash management solutions, and BusinessManager\u00ae (an accounts receivable financing program designed to improve cash flow for growing businesses).\n\nGCBB differentiates itself through community banking principles: local knowledge, local support, and personal attention. They emphasize that when local businesses succeed, the entire community benefits. The bank offers online and mobile banking access, treasury management services, fee-free ATM access, and multiple calculators for financial planning. Their BusinessManager\u00ae product specifically targets companies needing immediate cash for outstanding receivables, claiming to serve over 30,000 businesses.\n\nAs a regional community bank, GCBB serves primarily small to mid-sized businesses and individuals in Southwest Florida. The bank's strength is in personalized service and local lending decisions for commercial customers, while their personal banking rates are competitive but not exceptional. The geographic limitation to Fort Myers and Naples is the primary constraint for customers outside this region.",
   "logo_url": "",
   "website_url": "https://www.gcbbswfl.com",
   "affiliate_url": "",
@@ -23,23 +23,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking (Coastal Checking)",
+    "Money market accounts",
+    "Certificates of Deposit (6-month and 12-month terms)",
+    "Online banking platform",
+    "Mobile banking app",
+    "Treasury management services",
+    "Business lines of credit",
+    "SBA lending programs",
+    "Owner-occupied property financing",
+    "BusinessManager\u00ae accounts receivable financing",
+    "Cash management solutions",
+    "Debit cards",
+    "Health Savings Accounts",
+    "Bill pay services",
+    "Fee-free ATM access"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2022",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits with backing of U.S. Government full faith and credit",
+    "Competitive savings rates: up to 3.82% APY on money market and up to 3.72% APY on 6-month CDs",
+    "BusinessManager\u00ae accounts receivable financing program designed to improve business cash flow",
+    "Dual product focus serves both personal and commercial banking needs",
+    "Online and mobile banking access plus treasury management services",
+    "Community bank model emphasizes local decision-making and personal relationships for lending",
+    "SBA lending and multiple commercial financing options (lines of credit, equipment financing, owner-occupied properties)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: only serves Fort Myers and Naples, Florida area; no national or online-only access mentioned",
+    "Personal checking account APY (3.05%) is modest compared to online-only banks",
+    "Limited transparency on fees, minimum balances, or terms for commercial products on website",
+    "No mention of investment services, wealth management, or insurance products",
+    "BusinessManager\u00ae availability and eligibility requirements not clearly detailed on website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +65,7 @@
   "states_served": [
     "FL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 59281,
   "latitude": 26.5652062867606,
   "longitude": -81.85243778017,
@@ -93,12 +107,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-sized businesses in Southwest Florida seeking personalized commercial lending and cash management",
+    "Local entrepreneurs needing accounts receivable financing through BusinessManager\u00ae",
+    "Fort Myers and Naples residents looking for community bank checking and savings accounts"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Gulf Coast Business Bank is best for small to mid-sized businesses and individuals in the Fort Myers and Naples, Florida area seeking personalized community banking with strong commercial lending support. The primary caveat is strict geographic limitation\u2014the bank does not serve customers outside Southwest Florida and does not appear to offer nationwide online banking services.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   ],
   "phone": "",
   "address": "12205 Metro Pkwy, Fort Myers, FL 33966",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

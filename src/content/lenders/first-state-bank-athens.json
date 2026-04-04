@@ -1,14 +1,14 @@
 {
   "name": "First State Bank",
   "slug": "first-state-bank-athens",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Athens, TX. $763M in assets. 8 offices.",
-  "description_long": "First State Bank is a community bank located in Athens, TX, established in 1935. The bank holds approximately $763M in total assets and $674M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "First State Bank is a community bank established in 1935 serving Texas with 7 branch locations across Athens, Corsicana, Gun Barrel City, Mabank, Malakoff, and Forney, offering personal and business banking products.",
+  "description_long": "First State Bank was established in 1935 as Farmers and Merchants State Bank and has maintained its focus on personal relationships and local community commitment for nearly 90 years. The bank operates seven physical branches across central and east Texas, with a primary presence in the Athens area and expansion into surrounding communities. This longevity and regional focus distinguish it from national and online-only competitors.\n\nThe bank offers a comprehensive suite of personal banking services including multiple checking accounts (standard and interest-bearing), money market accounts, savings accounts, HSA accounts, and CDs/IRAs. For business customers, First State Bank provides business checking, savings, CDs, and specialized services like treasury management. Their lending portfolio spans mortgage loans, personal and auto loans, business loans, and agricultural loans\u2014reflecting the rural and small-business nature of their service areas. Digital capabilities include online banking, mobile banking, mobile wallet, mobile deposits, Zelle integration, ATM deposits, and document upload functionality.\n\nFirst State Bank distinguishes itself through emphasis on personal service and community relationships. Customer testimonials highlight friendly employees, personalized attention, and a supportive workplace culture. The bank positions itself as a local alternative to larger institutions, with named staff members featured in testimonials and a focus on knowing customers by name. Their agricultural lending program and business loan products suggest specialization in serving rural and small-business communities that larger banks may underserve.\n\nAs a regional community bank, First State Bank is best suited for customers who prioritize personal service and local decision-making over the broader product selection and technology features of national banks or online-only institutions. Potential limitations include geographic restriction to Texas service areas, likely smaller ATM networks compared to national competitors, and potentially narrower product innovation or investment options. The bank's emphasis on agriculture and small business lending suggests strength in those niches but may indicate less expertise in consumer wealth management or complex financial products.",
   "logo_url": "",
   "website_url": "https://www.bankfsb.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts (standard and interest-bearing)",
+    "Money market accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "HSA (Health Savings Accounts)",
+    "CDs and IRA products",
+    "Business checking and savings accounts",
+    "Mortgage loans",
+    "Personal and auto loans",
+    "Business loans",
+    "Agricultural loans",
+    "Online banking and mobile banking",
+    "Mobile deposits and ATM deposits"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1935",
-    "Local community bank with personal service",
-    "8 locations"
+    "89-year history demonstrating stability and long-term community commitment since 1935",
+    "Multiple branch locations across 6 different Texas cities providing local access and personal relationships",
+    "Comprehensive lending products including specialized agricultural loans reflecting rural community focus",
+    "Full suite of digital banking tools including mobile deposits, mobile wallet, Zelle, and ATM deposits",
+    "Strong emphasis on personalized customer service with named employees featured in testimonials",
+    "Treasury management services available for business customers",
+    "HSA accounts available for health savings needs"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to only Texas locations restricts access for customers outside service areas",
+    "No mention of competitive interest rates or rate comparisons to national banking standards",
+    "Limited information about fee structures, minimum balances, or account requirements on public website",
+    "Smaller likely ATM network compared to national banks may limit convenient cash access",
+    "No mention of investment advisory services, wealth management, or advanced financial products"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15206,
   "latitude": 32.2040640060809,
   "longitude": -95.8540420028633,
@@ -93,12 +104,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and agricultural operators in central/east Texas seeking relationship-based lending",
+    "Local residents in Athens, Corsicana, Gun Barrel City, Mabank, Malakoff, or Forney prioritizing personal service",
+    "Customers seeking straightforward banking products without complexity and valuing face-to-face relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First State Bank is best for customers in its seven-branch Texas service area who prioritize personal relationships and community banking over the broader product selections of national institutions. The main caveat is geographic restriction to Texas and limited public information about rates, fees, and competitive positioning relative to larger banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,10 @@
   ],
   "phone": "",
   "address": "130 E Corsicana St, Athens, TX 75751",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

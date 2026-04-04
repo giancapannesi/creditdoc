@@ -1,14 +1,14 @@
 {
   "name": "1St Bank In Hominy",
   "slug": "1st-bank-in-hominy",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Hominy, OK. $43M in assets. 1 office.",
-  "description_long": "1St Bank In Hominy is a community bank located in Hominy, OK, established in 1906. The bank holds approximately $43M in total assets and $39M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank established in 1906 offering checking, savings, lending, and financial services to individuals and businesses in Hominy, Oklahoma.",
+  "description_long": "1st Bank in Hominy was founded as Bank of Commerce on February 10, 1906, by the Mullendore and Edgington families. The institution has undergone several name changes reflecting consolidations and charter transitions\u2014becoming The National Bank of Commerce (1911), then merging with First National Bank to become The First National Bank in Hominy (1936). The bank has operated continuously for over 100 years as a locally owned and managed financial institution serving the Hominy community.\n\nThe bank offers a comprehensive suite of personal and business banking products. Personal services include checking accounts, savings accounts, certificates of deposit, and individual retirement accounts. On the lending side, they provide consumer loans, commercial loans, real estate loans, agricultural loans, and mobile home loans. Account services feature online banking, e-statements, mobile banking, ATM/debit cards, safe deposit boxes, wire transfers, and notary services. They maintain competitive lobby hours (Mon-Fri 9am-3pm) and extended drive-thru hours (Mon-Fri 8am-5pm, Saturday 8am-12pm).\n\nThe bank distinguishes itself through community-focused positioning, emphasizing personal relationships and local ownership. Their messaging emphasizes that staff are \"friends, neighbors, church members, and leaders in the community.\" They participate in the Transfund No-Surcharge ATM program, allowing cardholders to use Oklahoma QuikTrip and select 7-Eleven locations without surcharges. The bank provides account services exclusively to their customers (money orders, cashier's checks, notary services), reinforcing customer loyalty and engagement.\n\nAs a small community bank, 1st Bank in Hominy serves a limited geographic footprint and may have fewer advanced digital tools compared to larger regional or national institutions. Their fee structure includes standard charges ($27.50 NSF fee, $15 wire transfer fee, $2 ATM foreign transaction fee) that are competitive but not necessarily lower than online banks. The bank's strength lies in personalized service and community integration rather than technological innovation or competitive pricing on fees.",
   "logo_url": "",
   "website_url": "http://www.1stbankhominy.com",
   "affiliate_url": "",
@@ -23,23 +23,40 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts",
+    "Business checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of deposit (CDs)",
+    "Individual retirement accounts (IRAs)",
+    "Consumer loans",
+    "Commercial loans",
+    "Real estate loans",
+    "Agricultural loans",
+    "Mobile home loans",
+    "Online banking and e-statements",
+    "Mobile banking",
+    "ATM/debit cards with Transfund No-Surcharge network access",
+    "Safe deposit boxes (5 sizes)",
+    "Wire transfers (incoming and outgoing)",
+    "Notary services",
+    "Money orders",
+    "Cashier's checks"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1906",
-    "Local community bank with personal service",
-    "1 location"
+    "Over 100 years of continuous operation (founded 1906) demonstrating institutional stability",
+    "Participates in Transfund No-Surcharge network, allowing fee-free ATM access at Oklahoma QuikTrip and select 7-Eleven locations",
+    "Comprehensive lending options including agricultural loans, mobile home loans, and real estate loans tailored to rural/community needs",
+    "Extended drive-thru hours (8am-5pm weekdays, 8am-12pm Saturday) providing convenient access",
+    "Locally owned and managed with staff embedded in the community",
+    "Full-service banking with online banking, mobile banking, and e-statements available",
+    "Safe deposit boxes available in 5 size options ranging from 3x5 to 10x10"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as a small community bank serving primarily Hominy, Oklahoma area",
+    "Relatively high NSF charge of $27.50 compared to some online banks ($15-25 range)",
+    "Foreign ATM transactions cost $2 despite No-Surcharge program participation, limiting true surcharge-free access outside partner network",
+    "Limited lobby hours (9am-3pm weekdays) may be inconvenient for working professionals",
+    "No specific mention of competitive interest rates on savings or CDs\u2014rates not disclosed on website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +68,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4122,
   "latitude": 36.4162809850724,
   "longitude": -96.3944419922281,
@@ -93,12 +110,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Hominy residents seeking personalized, relationship-based banking from community-embedded staff",
+    "Agricultural businesses and farms needing specialized lending products like agricultural and mobile home loans",
+    "Customers prioritizing in-person service and community connection over digital-first banking",
+    "Small business owners seeking local commercial lending with direct decision-maker relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "1st Bank in Hominy is best suited for Hominy-area residents and local business owners who value personal relationships, community integration, and specialized lending products (agricultural, mobile home) over digital innovation or competitive fee pricing. The main caveat is their limited geographic footprint and narrower product sophistication compared to regional or national banks, making them less suitable for customers requiring advanced financial tools, investment products, or those relocating outside the Hominy community.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +124,11 @@
   ],
   "phone": "",
   "address": "117 N Price Ave, Hominy, OK 74035",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

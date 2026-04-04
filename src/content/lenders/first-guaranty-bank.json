@@ -1,13 +1,13 @@
 {
   "name": "First Guaranty Bank",
   "slug": "first-guaranty-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Hammond, LA. $4076M in assets. 30 offices.",
-  "description_long": "First Guaranty Bank is a community bank located in Hammond, LA, established in 1934. The bank holds approximately $4076M in total assets and $3637M in deposits. It operates 30 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "First Guaranty Bank is a multi-state regional bank offering checking, savings, mortgages, business loans, and credit cards across Louisiana, Kentucky, Texas, and West Virginia.",
+  "description_long": "First Guaranty Bank operates as a regional banking institution with a presence across four states: Louisiana, Kentucky, Texas, and West Virginia. The bank is publicly traded on Nasdaq under the ticker symbol FGBI through its parent company, First Guaranty Bancshares. According to their website, they position themselves as \"The Relationship Bank,\" emphasizing community connection and personalized service.\n\nFirst Guaranty Bank offers a comprehensive suite of consumer and business banking products. For consumers, these include personal checking and savings accounts (featuring rates up to 2.53% APY on their ELITE savings account), mortgages for home purchase and refinance, personal credit cards with rewards programs, and online banking access. For businesses, they provide business checking accounts, business loans, business credit cards, and digital services like Autobooks for invoicing and cash flow management. Additional services include a loan payment portal, ATM networks, mobile banking, and personal finance management tools.\n\nThe bank distinguishes itself through community-focused initiatives and financial education programs. They offer \"FGB Financial Foundations,\" a series of six financial wellness seminars covering personal finance topics and identity theft protection, which they make available to community organizations. The bank emphasizes fraud prevention awareness and maintains dedicated fraud alerts and an identity theft center on their website. They also offer tools like ClickSWITCH to help customers transition banking relationships and Personal Finance Manager (PFM) for expense tracking.\n\nAs a traditional regional bank, First Guaranty Bank is subject to standard banking regulations and FDIC insurance protections. However, the website content does not provide specific information about interest rates, fees, loan terms, minimum deposits, or credit requirements. Their digital accessibility appears limited in some areas, as evidenced by Cloudflare security blocks on certain pages. For consumers and businesses seeking full-service banking with local branch presence in their service areas, the bank may be viable, though prospective customers should verify current rates and terms directly.",
   "logo_url": "",
   "website_url": "https://www.fgb.net",
   "affiliate_url": "",
@@ -22,23 +22,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts (ELITE accounts with up to 2.53% APY)",
+    "Business checking accounts",
+    "Mortgages (home purchase and refinance)",
+    "Personal credit cards with rewards programs",
+    "Business credit cards",
+    "Online banking portal with 24/7 access",
+    "Mobile banking applications",
+    "Loan payment portal",
+    "Autobooks digital invoicing and cash flow management",
+    "Personal Finance Manager (PFM) for expense tracking",
+    "ClickSWITCH account switching tool",
+    "ATM network access",
+    "Business loans",
+    "FGB Financial Foundations education seminars",
+    "Fraud alerts and identity theft center resources"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1934",
-    "Local community bank with personal service",
-    "30 locations"
+    "Multi-state regional presence with physical branches and ATM networks across LA, KY, TX, and WV",
+    "ELITE savings account offering competitive APY up to 2.53% for basic savings needs",
+    "Free financial education through FGB Financial Foundations seminars covering personal finance and identity theft protection",
+    "Comprehensive digital banking suite including online banking, mobile banking, and Personal Finance Manager (PFM) for expense tracking",
+    "Business-focused digital tools like Autobooks for invoicing, payment processing, and cash flow management",
+    "Easy account switching through ClickSWITCH tool for recurring deposits and payments",
+    "Publicly traded institution (NASDAQ: FGBI) with transparency and regulatory oversight"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website contains security blocks (Cloudflare) that prevent access to certain pages, limiting transparency on specific loan terms and rates",
+    "No published information on checking account fees, minimum balance requirements, or specific mortgage rates available on homepage",
+    "Limited geographic footprint compared to national banks, restricting accessibility for customers outside LA, KY, TX, and WV",
+    "Website does not clearly disclose APR ranges, credit requirements, or terms for credit card products",
+    "No information provided about alternative banking options like CDs, money market accounts, or investment services on main website"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +65,7 @@
   "states_served": [
     "LA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14028,
   "latitude": 30.5047400065254,
   "longitude": -90.4568140164282,
@@ -92,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Consumers and small business owners in Louisiana, Kentucky, Texas, or West Virginia seeking relationship-based banking with local branch access",
+    "Individuals seeking competitive savings rates and community-focused financial education programs",
+    "Small business owners needing integrated digital invoicing and cash flow management tools",
+    "Customers prioritizing fraud prevention awareness and identity theft protection resources"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Guaranty Bank is best for consumers and small business owners with physical presence in Louisiana, Kentucky, Texas, or West Virginia who value local relationship banking and community involvement. The main caveat is that the bank's website lacks transparent disclosure of current rates, fees, and specific loan terms, requiring customers to contact branches or call directly for detailed product information and pricing.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +121,11 @@
   ],
   "phone": "",
   "address": "400 E Thomas St, Hammond, LA 70401",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

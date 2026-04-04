@@ -1,15 +1,15 @@
 {
   "name": "Regional Missouri Bank",
   "slug": "regional-missouri-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Marceline, MO. $574M in assets. 11 offices.",
-  "description_long": "Regional Missouri Bank is a community bank located in Marceline, MO, established in 1908. The bank holds approximately $574M in total assets and $491M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Regional Missouri Bank is a community bank serving Brookfield, Moberly, and Salisbury, MO with FDIC-insured checking, savings, loans, and business banking products.",
+  "description_long": "Regional Missouri Bank is a traditional community bank operating in Missouri with physical locations in Brookfield, Moberly, Salisbury, and Marceline. The bank is FDIC-insured and positions itself as a local financial institution serving personal and business customers throughout the region.\n\nThe bank offers a comprehensive suite of retail banking products including multiple checking and savings account tiers (Kasasa Cash checking, regular savings, money market accounts, CDs, and IRAs), personal loans, auto loans, and mortgage lending. For business customers, they provide business checking, business credit cards, and specialized lending products including agriculture loans, equipment loans, livestock loans, and farm & land loans. They also offer personal credit cards and services like bill pay, eStatements, and electronic banking tools.\n\nRegional Missouri Bank distinguishes itself through a strong focus on agricultural lending and community-based service, with dedicated agriculture loan products and messaging emphasizing local relationships. They offer surcharge-free ATM access through the MoneyPass network, mobile banking, debit card controls, and financial education resources. The bank has undergone a merger with BNC and markets itself around the theme of local decision-making and community roots.\n\nAs a regional community bank, Regional Missouri Bank is best suited for customers prioritizing local relationships and community banking over digital-first experiences. The website demonstrates full-service banking capabilities but does not highlight competitive advantages in rates, technology innovation, or specialized lending beyond agriculture. Customers should compare rates and fees against larger regional and national competitors before opening accounts.",
   "logo_url": "",
   "website_url": "https://www.regionalmo.bank",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Free Kasasa Cash Checking accounts with rewards",
+    "Free Kasasa Saver accounts",
+    "Personal savings accounts and money market accounts",
+    "Certificates of Deposit (CDs) and Individual Retirement Accounts (IRAs)",
+    "Health Savings Accounts (HSAs)",
+    "Personal loans and auto loans",
+    "Home mortgage loans, construction loans, and land loans",
+    "Business checking and business money market accounts",
+    "Agriculture loans including livestock loans, farm & land loans, equipment loans, and operating lines of credit",
+    "Business credit cards and personal credit cards",
+    "Mobile banking app with 24/7 access",
+    "Surcharge-free ATM network access through MoneyPass"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1908",
-    "Local community bank with personal service",
-    "11 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Surcharge-free ATM access nationwide through MoneyPass network",
+    "Specialized agriculture lending including livestock loans, farm & land loans, and operating lines of credit",
+    "Multiple checking account options including free Kasasa Cash and Kasasa Cash Back accounts",
+    "Mobile banking app available on iOS and Android for 24/7 account access",
+    "Debit card controls app allowing budget limits and card restrictions",
+    "Comprehensive personal and business loan products including mortgages, auto loans, and construction loans"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to three primary physical locations (Brookfield, Moberly, Salisbury) with limited geographic reach",
+    "Website does not display current rates, APYs, or fee schedules publicly",
+    "No mention of online account opening process; apply/enroll buttons present but actual requirements unclear",
+    "No indication of whether accounts can be opened remotely or require in-person visits",
+    "Limited information about competitive advantages in rates, credit standards, or loan approval processes"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 18385,
   "latitude": 39.702757869431,
   "longitude": -92.951834477348,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural businesses and farmers needing specialized farm loans, equipment financing, and livestock lending",
+    "Residents of Brookfield, Moberly, Salisbury, and Marceline seeking relationship-based local banking",
+    "Small business owners requiring comprehensive business checking and lending products",
+    "Customers prioritizing FDIC-insured community banking over digital-only neobanks"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Regional Missouri Bank is best for agricultural businesses, small business owners, and community-focused customers in central Missouri seeking personalized local banking relationships with FDIC insurance. The main caveat is geographic limitation to three primary locations and lack of publicly available rate/fee information, requiring direct contact for accurate product pricing comparison.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "1201 S Missouri Ave, Marceline, MO 64658",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

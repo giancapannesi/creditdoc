@@ -1,14 +1,14 @@
 {
   "name": "The Farmers Bank",
   "slug": "the-farmers-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Nicholasville, KY. $269M in assets. 4 offices.",
-  "description_long": "The Farmers Bank is a community bank located in Nicholasville, KY, established in 1934. The bank holds approximately $269M in total assets and $239M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank operating 3 branches in Jessamine County, Kentucky offering personal & business checking, savings, mortgages, and consumer loans with online and mobile banking.",
+  "description_long": "The Farmers Bank is a locally-rooted community bank serving Jessamine County, Kentucky with a history dating back to its initial charter in the 1930s. The Wilmore Branch, established in 1935, operates as the institution's flagship location, with two additional branches added more recently: Brannon Crossing (2007) and Bell Place (2008). The bank positions itself as a relationship-focused alternative to larger national banks while maintaining modern digital banking capabilities. The institution serves both personal and business customers across the county with a range of traditional banking products. What distinguishes Farmers Bank is its hyperlocal presence and deep community ties spanning nearly 90 years, combined with contemporary digital services like mobile check deposit and online bill pay. The bank offers competitive deposit rates on savings and money market accounts with tiered interest structures, though specific APY rates are not disclosed on their website. Their mortgage lending focuses on home purchases and property improvements with a streamlined application process. For consumers seeking a genuine community bank with physical branch locations rather than a digital-only neobank, Farmers Bank provides that local touchpoint. However, as a small regional institution, they likely offer less product variety and potentially higher fees than larger national banks, and their mortgage rates and loan terms are not transparently posted online for comparison shopping.",
   "logo_url": "",
   "website_url": "https://www.MyFarmersBank.net",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "My Way Checking with unlimited check writing, VISA debit card, and eStatements",
+    "Personal and business savings accounts with competitive tiered interest rates",
+    "Money market accounts with daily interest compounding and quarterly crediting",
+    "Certificates of Deposit (CDs) with daily compounding, credited at maturity",
+    "Individual Retirement Accounts (IRA-CDs) with FDIC insurance",
+    "Mortgage loans for home purchase and property improvement",
+    "Consumer loans with competitive rates and flexible terms",
+    "Mobile banking with balance checking, transfers, check deposits, and bill pay",
+    "Online banking with 24/7 access and Internet Bill Pay",
+    "Fraud monitoring, debit card text alerts, and corporate account takeover protection",
+    "VISA debit cards and MasterCard credit cards",
+    "Check ordering through Deluxe Corp and eStatement delivery"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1934",
-    "Local community bank with personal service",
-    "4 locations"
+    "Three physical branch locations in Jessamine County for in-person service and relationship banking",
+    "Free mobile banking available to all online banking customers with check deposit capability",
+    "FDIC-insured IRA-CD accounts offering low-risk retirement savings with consistent returns",
+    "Comprehensive business banking services including merchant capture and commercial loans",
+    "24/7 online banking and bill pay access with fraud monitoring and debit card text alerts",
+    "Tiered interest rate structure on savings and money market accounts",
+    "Established institution with nearly 90-year history in the community"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Specific APY rates, loan terms, and mortgage rates not disclosed on website\u2014requires contacting bank directly",
+    "Limited to single county service area with only 3 branch locations, restricting convenience for customers outside Jessamine County",
+    "No mention of ATM network partnerships or nationwide ATM access beyond their own 'Smart ATMs'",
+    "No online loan application status tracking or digital mortgage pre-approval process explicitly described",
+    "Minimum balance requirements and account fee structures not detailed on public website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "KY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14894,
   "latitude": 37.8814680026292,
   "longitude": -84.572236027835,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Jessamine County residents seeking relationship-based community banking with local branch access",
+    "Small business owners needing personalized commercial lending and merchant services",
+    "Homebuyers in the Nicholasville and Wilmore areas who prefer working with a local mortgage lender",
+    "Retirees wanting low-risk FDIC-insured IRA-CDs for conservative retirement savings growth"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Farmers Bank is best for Jessamine County residents and small business owners who prioritize personal relationships and local branch access over digital-first banking or lowest-cost rates. The main caveat is that current rates, fees, and loan terms are not transparently published online, requiring direct contact with the bank to compare against larger national competitors, and service territory is limited to a single Kentucky county.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "200 N Main St, Nicholasville, KY 40356",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

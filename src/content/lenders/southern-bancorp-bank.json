@@ -1,13 +1,13 @@
 {
   "name": "Southern Bancorp Bank",
   "slug": "southern-bancorp-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Arkadelphia, AR. $2779M in assets. 57 offices.",
-  "description_long": "Southern Bancorp Bank is a community bank located in Arkadelphia, AR, established in 1884. The bank holds approximately $2779M in total assets and $2118M in deposits. It operates 57 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Southern Bancorp Bank is a community-focused bank providing traditional banking and lending services to underserved communities, combining financial products with financial development tools and advocacy.",
+  "description_long": "Southern Bancorp Bank was founded with a mission to strengthen underserved communities through financial access and investment. The bank operates as a full-service financial institution, distinguishing itself from conventional banks by explicitly targeting and serving populations traditionally underserved by mainstream banking institutions. Their approach combines standard banking products with financial development resources and public policy advocacy.\n\nThe bank offers a comprehensive suite of personal and business banking services. Personal offerings include checking and savings accounts (including Southern Club Checking), home loans, auto/boat/RV loans, and personal loans. For business customers, they provide business checking and savings accounts, treasury management, small business loans, agricultural loans, specialized poultry loans, and commercial loans. Beyond traditional banking, Southern Bancorp provides financial development tools including credit counseling through their Opportunity Center and maintains SouthernPartners.org for additional financial education.\n\nWhat distinguishes Southern Bancorp from traditional banks is their explicit mission focus on underserved communities and their integration of financial development tools alongside lending products. They position themselves as \"a different kind of bank\" that balances responsible lending with financial education and community advocacy. The bank operates physical locations and provides online banking capabilities, accessible in both English and Spanish.\n\nAs a legitimate bank, Southern Bancorp is subject to standard banking regulations and provides conventional financial products. However, website content does not include specific details about interest rates, fees, credit requirements, or competitive terms. Prospective customers should directly contact the bank or visit locations to understand specific product terms and whether they meet lending eligibility criteria.",
   "logo_url": "",
   "website_url": "https://www.banksouthern.com",
   "affiliate_url": "",
@@ -22,23 +22,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Southern Club Checking account",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Treasury management for businesses",
+    "Home loans/mortgages",
+    "Auto, boat, and RV loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Small business loans",
+    "Agricultural loans",
+    "Poultry loans",
+    "Commercial loans",
+    "Financial opportunity/credit counseling through Opportunity Center",
+    "Online banking",
+    "Check reordering services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1884",
-    "Local community bank with personal service",
-    "57 locations"
+    "Explicitly focused on serving underserved and low-to-moderate income communities rather than mainstream customers",
+    "Offers specialized lending products not widely available elsewhere, including agricultural loans and poultry loans",
+    "Provides integrated financial development tools including credit counseling through their Opportunity Center",
+    "Maintains bilingual accessibility (English/Spanish) across website and services",
+    "Combines traditional banking with financial education and public policy advocacy as stated in mission",
+    "Operates physical branch locations for in-person banking services",
+    "Offers full-service business banking including treasury management for cash flow optimization"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no specific information about interest rates, APR, fees, or product-specific terms needed for comparison",
+    "Limited geographic footprint information\u2014no clear indication of how many locations exist or which states/regions are served",
+    "No details on credit score requirements, minimum deposit amounts, or lending qualification criteria for personal or business loans"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +63,7 @@
   "states_served": [
     "AR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1528,
   "latitude": 34.1194090126638,
   "longitude": -93.0537463040341,
@@ -92,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Low-to-moderate income families seeking banking services from an institution focused on their community's financial development",
+    "Agricultural and poultry farmers needing specialized agricultural lending products",
+    "Small business owners in underserved communities seeking community-focused banking and business lending",
+    "Customers seeking bilingual banking services in English and Spanish"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Southern Bancorp Bank is best for low-to-moderate income individuals and families, farmers, and small business owners in underserved communities who value working with a bank explicitly mission-driven to support community financial development. The primary caveat is that specific product terms, rates, fees, and eligibility requirements are not published on their website, requiring direct contact with the bank to assess fit and competitiveness.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +119,10 @@
   ],
   "phone": "",
   "address": "601 Main St, Arkadelphia, AR 71923",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

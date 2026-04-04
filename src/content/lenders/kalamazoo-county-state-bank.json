@@ -1,14 +1,14 @@
 {
   "name": "Kalamazoo County State Bank",
   "slug": "kalamazoo-county-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Schoolcraft, MI. $120M in assets. 3 offices.",
-  "description_long": "Kalamazoo County State Bank is a community bank located in Schoolcraft, MI, established in 1908. The bank holds approximately $120M in total assets and $107M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank serving Kalamazoo County for over 115 years with three local branches offering personal checking, savings, loans, mortgages, and business banking with local underwriting and personal service.",
+  "description_long": "Kalamazoo County State Bank (KCSB) is a locally-owned community bank that has served the Kalamazoo County area for over 115 years. The bank operates three physical branches located in Schoolcraft, Vicksburg, and Mattawan, Michigan, maintaining a strong commitment to the local community through personal relationships and community involvement.\n\nKCSB offers comprehensive banking services including personal checking and savings accounts, personal loans, mortgages (first-time homebuyer, self-build construction, refinancing), business checking and savings accounts, business loans, credit cards, student loans, digital banking with online and mobile platforms, Zelle money transfer, debit cards, and safe deposit boxes. The bank emphasizes quick turnaround times and local decision-making rather than reliance on distant corporate headquarters.\n\nThe bank differentiates itself through its community-focused approach, highlighting that loan underwriting and decisions are made locally by people who live and work in the area. Customer testimonials emphasize the personal touch, long-term relationships, and willingness to serve all banking needs. KCSB markets itself as understanding local markets and being available when customers need support, positioning itself as the alternative to larger national banks.\n\nAs a traditional community bank, KCSB serves customers seeking personal relationships and local decision-making in banking. However, the website does not disclose specific interest rates, fees, account minimums, or lending terms, limiting transparency for comparison shopping. The three-branch footprint means limited physical accessibility compared to regional or national banks, which may disadvantage those outside Kalamazoo County.",
   "logo_url": "",
   "website_url": "https://www.kcsbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Personal loans for various purposes",
+    "Home mortgages (first-time homebuyer, self-build construction, refinancing)",
+    "Business checking and savings accounts",
+    "Business loans for growing enterprises",
+    "Credit cards (personal and business)",
+    "Student loans",
+    "Online banking and bill pay",
+    "Mobile banking with mobile deposit",
+    "Zelle money transfer service",
+    "Debit cards with card controls",
+    "Safe deposit boxes"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1908",
-    "Local community bank with personal service",
-    "3 locations"
+    "Over 115 years of established community banking history and local presence in Kalamazoo County",
+    "Local underwriting and loan decisions made by staff who live in the community, not distant corporate offices",
+    "Personal service model emphasized throughout marketing, with customer testimonials praising relationship-based banking",
+    "Multiple branches (Schoolcraft, Vicksburg, Mattawan) with extended drive-thru hours (until 5:30 PM weekdays) and 24-hour ATMs",
+    "Comprehensive product offering including mortgages, business loans, personal loans, and digital banking options",
+    "Safe deposit boxes available at multiple locations for document and valuables storage",
+    "Digital banking with online banking, mobile banking, mobile deposit, and debit card controls for convenience"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not disclose specific interest rates, APRs, fees, or account minimums, making rate comparison impossible",
+    "Limited geographic footprint with only three branches in Kalamazoo County, restricting accessibility for regional customers",
+    "No information provided about FDIC insurance coverage limits, minimum deposit requirements, or account types beyond category names",
+    "Mobile and digital banking capabilities mentioned but no details on functionality, app ratings, or specific features",
+    "No pricing transparency for mortgages, loan origination fees, business loan terms, or credit card APRs and rewards"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5892,
   "latitude": 42.115637982318,
   "longitude": -85.6375159908261,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Kalamazoo County residents seeking personal relationships with local bankers and community accountability",
+    "Small business owners in the area needing flexible lending decisions and ongoing business banking relationships",
+    "First-time homebuyers who benefit from local mortgage pre-qualification and personalized guidance",
+    "Customers prioritizing local decision-making and community support over national bank convenience or digital-only banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "KCSB is best suited for Kalamazoo County residents and business owners who value personal relationships, local decision-making, and community commitment over the convenience of national bank networks or competitive rate shopping. The primary caveat is the lack of pricing transparency on the website\u2014potential customers must contact branches directly to compare interest rates, fees, and terms against competing banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "223 N Grand St, Schoolcraft, MI 49087",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

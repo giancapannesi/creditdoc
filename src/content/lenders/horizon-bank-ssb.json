@@ -1,14 +1,14 @@
 {
   "name": "Horizon Bank, Ssb",
   "slug": "horizon-bank-ssb",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Austin, TX. $2348M in assets. 6 offices.",
-  "description_long": "Horizon Bank, Ssb is a community bank located in Austin, TX, established in 1905. The bank holds approximately $2348M in total assets and $2063M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Horizon Bank is a Texas-based community bank operating since 1905, offering personal and business banking services across Central Texas with a focus on relationship-driven banking.",
+  "description_long": "Horizon Bank was established in 1905 and has operated continuously as a community bank serving Central Texas for over 120 years. The bank is headquartered in Austin, Texas, and maintains a strong local presence with branches in Austin, Temple, Salado, and Holland. Their positioning emphasizes deep roots in Texas and commitment to serving local businesses and customers throughout the region.\n\nThe bank offers comprehensive personal and business banking services including online banking, checking accounts, business accounts, lockbox services, remote deposit systems, and secure messaging platforms. They provide traditional retail banking services with emphasis on personalized customer relationships rather than automated, transactional banking models. Their service infrastructure includes fraud prevention tools and multiple digital banking channels for customer convenience.\n\nHorizon Bank distinguishes itself through explicit commitment to relationship-based banking and local community involvement. Their marketing emphasizes personal banker relationships, straightforward account terms without excessive complexity, and understanding of Texas business needs. They recently opened a state-of-the-art downtown Austin branch at 600 West 5th Street, demonstrating continued investment in physical infrastructure and local presence. The bank's \"Horizon Manifesto\" articulates values around reducing red tape, remembering customer names, and helping Texas businesses succeed.\n\nAs a small regional bank, Horizon serves a specific geographic market and customer base. While their relationship-focused approach appeals to customers valuing personal service, the bank's limited geographic footprint means they are not a viable option for customers outside their service areas. The website emphasizes banking philosophy but provides limited specific product details, fee structures, or comparative advantages on rates and terms that would differentiate them from larger competitors.",
   "logo_url": "",
   "website_url": "https://www.horizon.bank",
   "affiliate_url": "",
@@ -23,23 +23,31 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business checking accounts",
+    "Online banking with login portal",
+    "Lockbox service for business payments",
+    "Remote deposit system",
+    "Secure messaging between customers and bank",
+    "Fraud prevention and identity protection resources",
+    "Multiple physical branch locations (Austin, Temple, Salado, Holland)",
+    "Retail banking services at downtown Austin flagship branch"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "6 locations"
+    "Established 1905 with over 120 years of continuous operation and deep community roots",
+    "Personal relationship-based banking model with named bankers committed to individual customers",
+    "Straightforward business account terms specifically designed for Texas business needs",
+    "Recent investment in modern downtown Austin branch facility (600 West 5th Street)",
+    "Multiple banking channels including online banking, lockbox services, and remote deposit systems",
+    "Active fraud prevention and security focus with customer education resources",
+    "Community involvement and local business lending focus rather than national corporate orientation"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Central Texas (Austin, Temple, Salado, Holland only)",
+    "Website provides limited specific information on account features, fees, rates, or competitive details",
+    "Smaller institution may lack some technology features or product variety of larger banks",
+    "No mention of specific deposit insurance details, investment services, or wealth management offerings",
+    "Limited accessibility for customers requiring 24/7 branch access or nationwide branch networks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +59,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3256,
   "latitude": 30.26904801385,
   "longitude": -97.748901973362,
@@ -93,12 +101,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Central Texas small business owners seeking relationship-based banking and local decision-making",
+    "Austin-area residents prioritizing personal banker relationships over digital-first banking",
+    "Texas companies with straightforward banking needs who value community bank accessibility",
+    "Local business owners who want banking partners invested in regional economic success"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Horizon Bank is best for Central Texas customers and small business owners who value personal relationships with bankers and want to support a locally-invested financial institution. The primary caveat is strict geographic limitation to Central Texas branches\u2014this is not an option for customers outside their service territory or those seeking nationwide banking convenience.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +115,11 @@
   ],
   "phone": "",
   "address": "600 West 5Th Street, Austin, TX 78701",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

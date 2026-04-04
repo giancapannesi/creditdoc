@@ -1,15 +1,15 @@
 {
   "name": "First Security Bank",
   "slug": "first-security-bank-mapleton",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Mapleton, IA. $63M in assets. 2 offices.",
-  "description_long": "First Security Bank is a community bank located in Mapleton, IA, established in 1878. The bank holds approximately $63M in total assets and $53M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank operating 12 branches across Minnesota, North Dakota, and Iowa with FDIC insurance, offering personal, business, and agricultural banking services.",
+  "description_long": "First Security Banks is a regional community bank with roots in the Upper Midwest, operating since at least 1878 in some locations. The bank maintains 12 branch locations across three states: Minnesota (Sleepy Eye, Benson, Storden, Renville, Lamberton, Canby, Lake Benton), North Dakota (Beulah, Robinson), and Iowa (Mapleton, Danbury). The organization is FDIC-insured and emphasizes local decision-making and personalized service through relationships with customers.\n\nThe bank offers comprehensive financial services across three main segments: Personal Banking (checking accounts, savings accounts, online banking, mobile banking, debit cards, and ID theft protection), Business Banking (business accounts, loans, and capital equipment financing), and Agriculture Banking (farm loans, crop insurance available in Iowa only, and farm management services). Additional services include trust services (available through First Security Bank \u2013 Mapleton since 1878), bill pay, vehicle loans, mortgages, and leasing options. Their marketing emphasizes competitive rates and low fees.\n\nFirst Security Banks distinguishes itself through deep agricultural expertise and relationships in rural communities, offering specialized products like crop insurance and farm management services not typically available at larger institutions. The bank's owner, L.A. Amundson, established a scholarship program in 1993 with a $5 million endowment; as of 2025, the L.A. Amundson Ohana Foundation has awarded over 6,000 scholarships totaling $8.5 million. The bank markets itself as offering \"true banker\" advice with real-world understanding of local markets and agricultural capital needs.\n\nHowever, First Security Banks operates as four separate chartered banks (First Security Bank \u2013 Sleepy Eye, First Security Bank \u2013 West, First Security Bank \u2013 Canby, and First Security Bank \u2013 Mapleton), meaning FDIC insurance coverage is limited to $250,000 per depositor per bank rather than across the entire organization. Geographic reach is limited to a three-state region in the Upper Midwest, making this impractical for customers outside this area. The website lacks transparency on specific rates, fees, or detailed product terms.",
   "logo_url": "",
   "website_url": "https://www.firstsecuritybanks.com",
   "affiliate_url": "",
@@ -26,21 +26,34 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Online banking",
+    "Mobile banking",
+    "Debit cards with fraud protection and replacement services",
+    "Vehicle loans",
+    "Mortgages",
+    "Business loans and capital equipment financing/leasing",
+    "Agricultural loans and crop insurance (Iowa only)",
+    "Farm management services (Iowa only)",
+    "Trust services (Mapleton location)",
+    "E-Z Bill Pay",
+    "ID theft protection",
+    "Realty services (Iowa only)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1878",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits with full faith and credit of U.S. Government backing",
+    "Specialized agricultural banking with crop insurance and farm management services (Iowa locations)",
+    "Trust services available through First Security Bank \u2013 Mapleton since 1878",
+    "Strong community commitment demonstrated by $8.5 million in scholarships awarded through L.A. Amundson Ohana Foundation",
+    "Mobile and online banking available alongside 12 in-person branch locations",
+    "Competitive rates and low fees emphasized as core value proposition",
+    "Personal relationship-based banking model with local decision-making authority"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "FDIC coverage capped at $250,000 per depositor per separate bank charter, not unified across all locations",
+    "Limited geographic footprint restricted to Minnesota, North Dakota, and Iowa only",
+    "Website lacks specific APR rates, fee schedules, or detailed product terms for comparison shopping",
+    "Trust services only available at Mapleton location, not all branches",
+    "Crop insurance and farm management services limited to Iowa locations only"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 251,
   "latitude": 42.1661640108405,
   "longitude": -95.7929560336252,
@@ -94,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural businesses and farmers in Minnesota, North Dakota, and Iowa seeking specialized farm lending and crop insurance",
+    "Small business owners in rural Upper Midwest communities valuing local decision-making and personalized service",
+    "Residents of the three-state service area seeking community-focused banking with strong local ties",
+    "Customers prioritizing in-person relationship banking over digital-first services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Security Banks is best for agricultural businesses, small business owners, and consumers in rural Minnesota, North Dakota, and Iowa who value personalized, relationship-based banking from a locally-owned community institution. The main caveat is that deposits are split across four separate FDIC-insured banks (limiting individual coverage to $250,000 per charter), the geographic footprint excludes most of the U.S., and the website provides no pricing transparency to compare competitiveness against regional or national alternatives.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,11 @@
   ],
   "phone": "",
   "address": "401 Main St, Mapleton, IA 51034",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

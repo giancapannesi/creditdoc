@@ -1,14 +1,14 @@
 {
   "name": "Citizens National Bank Of Texas",
   "slug": "citizens-national-bank-of-texas",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Waxahachie, TX. $2094M in assets. 12 offices.",
-  "description_long": "Citizens National Bank Of Texas is a community bank located in Waxahachie, TX, established in 1868. The bank holds approximately $2094M in total assets and $1795M in deposits. It operates 12 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Citizens National Bank of Texas is a full-service community bank operating since 1868 with 14 branches across north-central Texas, offering personal and business banking, mortgages, and investment services.",
+  "description_long": "Citizens National Bank of Texas has been serving customers for over 155 years, establishing itself as a regional financial institution rooted in north-central Texas. The bank maintains a strong community presence with branches in Waxahachie, Red Oak, Cedar Hill, Midlothian, Ennis, Italy, Burleson, Weatherford, Stephenville, Cleburne, and one location in Tahoe City, California, along with an ATM network.\n\nThe bank offers comprehensive personal banking services including checking and savings accounts, debit cards, certificates of deposit (currently featuring 4.04% APY on 6-month CDs and 3.82% APY on 12-month CDs), and lending products. Their mortgage division (CNB Mortgage) provides home purchase and refinancing options with online application capabilities. Business customers can access new business checking accounts, remote deposit capture, cash management services, and commercial lending. The bank also provides digital banking through mobile apps supporting Apple Pay, Samsung Pay, and Zelle transfers, plus fraud prevention tools like card freezing and spending limit adjustments.\n\nCitizens National Bank distinguishes itself through personalized service delivered by \"live personal bankers\" in their customer contact center, FDIC membership providing deposit protection, and a long institutional history demonstrating community commitment. Their \"mPowered\" marketing suggests a focus on modern digital banking convenience paired with traditional community banking values. The bank actively engages in community involvement, scholarship programs, and donation requests.\n\nAs a regional community bank, Citizens National Bank of Texas is best suited for customers seeking relationship-based banking with local branch access and personalized service rather than those primarily optimizing for online-only convenience or the highest-yield savings rates. The bank's competitive CD rates and full-service offerings make it viable for general banking needs, though customers should compare rates with larger national banks and online-only institutions for savings products.",
   "logo_url": "",
   "website_url": "https://www.cnboftexas.com",
   "affiliate_url": "",
@@ -23,23 +23,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Debit cards with fraud prevention",
+    "CNB Mortgage home loans and refinancing",
+    "Mobile banking app with Apple Pay and Samsung Pay",
+    "Zelle money transfer service",
+    "Business checking accounts",
+    "Remote deposit capture for businesses",
+    "Cash management services",
+    "Commercial lending",
+    "Account alerts and notifications",
+    "Online banking with login access",
+    "ATM network access"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1868",
-    "Local community bank with personal service",
-    "12 locations"
+    "14 physical branch locations across north-central Texas providing local, in-person service",
+    "FDIC member bank ensuring deposits are insured up to regulatory limits",
+    "Competitive CD rates: 4.04% APY on 6-month CDs and 3.82% APY on 12-month CDs (as of 9/9/2025)",
+    "Digital banking capabilities including mobile app with Apple Pay, Samsung Pay, and Zelle integration",
+    "Live personal bankers available in customer contact center for personalized assistance",
+    "CNB Mortgage division with online application for home loans and refinancing",
+    "Card management features including freeze capability and spending limit adjustments through mobile app",
+    "155+ year operating history demonstrating institutional stability and community roots"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to 14 branches primarily in north-central Texas may not serve customers in other regions",
+    "Single out-of-state location (Tahoe City, CA) provides minimal national footprint compared to major banks",
+    "Website does not display specific checking or savings account rates, requiring customer inquiry",
+    "Limited information on business lending products and terms compared to larger regional banks",
+    "No mention of investment advisory services or wealth management despite claiming investment offerings"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +65,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5574,
   "latitude": 32.3871000029087,
   "longitude": -96.8480260003582,
@@ -93,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "North-central Texas residents seeking relationship banking with local branch access and personalized service",
+    "Small business owners in the Ellis County and surrounding areas needing community-based commercial banking",
+    "Customers prioritizing CD investments with competitive rates and FDIC insurance protection",
+    "Individuals valuing long-standing institutional stability and community involvement over digital-only banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Citizens National Bank of Texas is best for customers in north-central Texas seeking full-service community banking with personalized attention, local branch access, and FDIC-insured products. The main caveat is its regional geographic limitation\u2014customers outside Texas or in underserved areas will have limited branch access, and those seeking the highest national deposit rates or purely digital banking may find better options with larger national or online-only banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +121,10 @@
   ],
   "phone": "",
   "address": "200 N Elm St, Waxahachie, TX 75165",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04"
 }

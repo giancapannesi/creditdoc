@@ -1,14 +1,14 @@
 {
   "name": "Elysian Bank",
   "slug": "elysian-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Elysian, MN. $77M in assets. 1 office.",
-  "description_long": "Elysian Bank is a community bank located in Elysian, MN, established in 1907. The bank holds approximately $77M in total assets and $67M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Elysian Bank is a locally-owned Minnesota community bank serving since 1907, offering FDIC-insured checking, savings, loans, and mortgages with personalized service.",
+  "description_long": "Elysian Bank is a locally and family-owned community bank headquartered in Minnesota that has been operating since September 1907. The bank emphasizes its deep roots in the community and personal relationships with customers, positioning itself as an alternative to larger national institutions where customers are known by name rather than account number.\n\nThe bank offers a comprehensive suite of retail and commercial banking products. On the personal side, they provide checking accounts, savings accounts, certificates of deposit (CDs), and personal loans. Their mortgage offerings include purchase loans, refinances, HELOCs, construction loans, land loans, and specialized first-time homebuyer programs. They also offer commercial and agricultural loans, business deposit accounts, and ancillary services including notary services, safe deposit boxes, and Visa gift cards. Notably, they partner with the Federal Home Loan Bank of Des Moines to offer the Mortgage Rate Relief Program, featuring rates starting at 5.377% APR with approximately 1.5% below-market rate reductions for qualified borrowers.\n\nElysian Bank distinguishes itself through its independent, locally-owned structure and emphasis on responsive, community-focused service. Rather than operating as a branch of a larger institution, the bank maintains direct decision-making capability and claims the ability to respond quickly to customer requests. The bank is FDIC-insured and FDIC-regulated, providing standard federal deposit protections. Their staff includes multiple loan officers with NMLS credentials and direct contact information, suggesting accessibility and personal relationship-building.\n\nThe bank operates as a traditional full-service community bank without apparent specialization in niche lending or financial technology innovation. Their website does not highlight competitive advantages in pricing, rate competitiveness (outside the mortgage relief program), or digital banking features compared to larger institutions. For customers seeking cutting-edge fintech, extensive branch networks, or specialized lending products, larger banks or non-bank lenders may offer more options. However, for customers valuing personal service, local decision-making, and traditional banking relationships, Elysian Bank represents a viable community banking option.",
   "logo_url": "",
   "website_url": "https://www.elysianbank.net",
   "affiliate_url": "",
@@ -23,23 +23,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Personal loans (consumer loans)",
+    "Mortgage loans (purchase and refinance)",
+    "HELOC and HELOAN products",
+    "Construction loans",
+    "Land loans",
+    "Commercial loans",
+    "Agricultural loans",
+    "Business deposit accounts",
+    "Notary services",
+    "Safe deposit boxes",
+    "Visa gift cards",
+    "Online banking",
+    "Mortgage Rate Relief Program"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1907",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits backed by the full faith and credit of the U.S. Government",
+    "Mortgage Rate Relief Program offering ~1.5% below-market rates through Federal Home Loan Bank partnership",
+    "Locally and family-owned since 1907 with established reputation and community roots",
+    "Multiple loan officers with NMLS credentials and direct contact information for personal service",
+    "Comprehensive product suite including checking, savings, CDs, personal loans, mortgages, commercial loans, and agricultural loans",
+    "FDIC-regulated institution with full regulatory oversight and compliance",
+    "Specialized programs for first-time homebuyers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic presence as a single-location community bank may restrict accessibility for customers outside Minnesota service area",
+    "Website content does not highlight competitive rates or terms outside the mortgage relief program",
+    "No mention of online-only accounts, digital banking features, or fintech innovations that competitors may offer",
+    "Non-secure email communication policy limits convenience for sensitive inquiries",
+    "Staff directory appears small, potentially limiting availability during peak service times"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +66,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10185,
   "latitude": 44.1984760035754,
   "longitude": -93.6737529997126,
@@ -93,12 +108,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Minnesota residents seeking traditional community banking with personal relationships and local decision-making",
+    "First-time homebuyers qualified for the Mortgage Rate Relief Program seeking below-market mortgage rates",
+    "Small business owners and agricultural operations requiring commercial or ag-specialized lending",
+    "Customers valuing FDIC-insured deposits and prefer banking with locally-owned institutions over national chains"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Elysian Bank is best for Minnesota-based customers seeking traditional community banking relationships, personal service, and FDIC-insured products from a locally-owned institution. The primary caveat is geographic limitation\u2014as a single-location community bank, it may not serve customers outside its Minnesota service area, and it lacks the digital innovation, branch network, and rate competitiveness of larger regional or national banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +122,11 @@
   ],
   "phone": "",
   "address": "121 Main St E, Elysian, MN 56028",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }
