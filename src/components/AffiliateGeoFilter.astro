@@ -1,0 +1,46 @@
+---
+/**
+ * AffiliateGeoFilter — Client-side state restriction enforcement.
+ *
+ * Calls /api/geo (Vercel edge function) to detect visitor US state,
+ * then removes affiliate blocks that violate partner policies:
+ *
+ *   The Credit People: blocked in GA (Georgia law criminalizes credit repair),
+ *                      blocked in OR (TCP self-excludes)
+ *   Lead Stack Media:  blocked in AR, CT, IN, MN, MT, NH, NY, SD, VT, WV
+ *                      (all 4 offers: LowCreditFinance, 50kLoans,
+ *                       SuperPersonalFinder, BorrowMoney)
+ *   WalletHub:         no restrictions
+ *
+ * Fails open — if geo call fails, all affiliates remain visible.
+ * Result cached in sessionStorage to avoid repeat API calls.
+ */
+---
+
+<script>
+(function () {
+  var TCP_BLOCKED  = ['GA', 'OR'];
+  var LS_BLOCKED   = ['AR', 'CT', 'IN', 'MN', 'MT', 'NH', 'NY', 'SD', 'VT', 'WV'];
+
+  function remove(selector) {
+    document.querySelectorAll(selector).forEach(function (el) { el.remove(); });
+  }
+
+  function apply(state) {
+    if (TCP_BLOCKED.indexOf(state) !== -1) remove('[data-affiliate="tcp"]');
+    if (LS_BLOCKED.indexOf(state) !== -1)  remove('[data-affiliate="leadstack"]');
+  }
+
+  var cached = sessionStorage.getItem('_vs');
+  if (cached) { apply(cached); return; }
+
+  fetch('/api/geo')
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      var state = d.country === 'US' ? (d.region || '') : '__';
+      sessionStorage.setItem('_vs', state);
+      apply(state);
+    })
+    .catch(function () { /* fail open */ });
+})();
+</script>

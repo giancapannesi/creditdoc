@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import AffiliateSidebar from '../../components/AffiliateSidebar.astro';
 import AffiliateInline from '../../components/AffiliateInline.astro';
+import AffiliateGeoFilter from '../../components/AffiliateGeoFilter.astro';
 import { getBlogPosts, getBlogPostBySlug, getBlogPostsByCategory, getCategories, getListicles, getWellnessGuideBySlug, getGlossaryTermsForContext } from '../../utils/data';
 import type { BlogPost } from '../../utils/data';
 
@@ -371,4 +372,5 @@ const jsonLd = [
       </div>
     </div>
   </div>
+  <AffiliateGeoFilter />
 </BaseLayout>

@@ -74,7 +74,7 @@ const offerKey = categoryToOffer[category] || 'personal-loans';
 const offer = offers[offerKey];
 ---
 
-<div class="glass-card p-5">
+<div class="glass-card p-5" data-affiliate={offerKey === 'credit-repair' ? 'tcp' : offerKey === 'personal-loans' ? 'leadstack' : ''}>
   <div class="flex items-center gap-2 mb-3">
     <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-700 uppercase tracking-wider">Sponsored</span>
   </div>
