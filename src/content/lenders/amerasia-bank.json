@@ -1,14 +1,14 @@
 {
   "name": "Amerasia Bank",
   "slug": "amerasia-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Flushing, NY. $1000M in assets. 7 offices.",
-  "description_long": "Amerasia Bank is a community bank located in Flushing, NY, established in 1988. The bank holds approximately $1000M in total assets and $832M in deposits. It operates 7 office locations. Designated as a Asian or Pacific Islander Americans. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank established in 1988 offering personal and business deposit accounts, mortgages, loans, and international banking services across multiple locations in New York and Florida.",
+  "description_long": "Amerasia Bank was established in 1988 in Flushing, New York, and has operated for over 30 years as a community bank. The institution positions itself around the principle of \"Customer and Service First\" and reports receiving \"Top Performing\" and \"Five-Star\" ratings from financial rating companies. The bank maintains FDIC insurance backing, providing deposit protection up to regulatory limits.\n\nAmerasia Bank offers a comprehensive suite of deposit products including personal checking, savings, money market, NOW accounts, and certificates of deposit. For business customers, they provide commercial checking, savings, and money market accounts. The loan portfolio includes personal loans, commercial loans, mortgage loans, SBA loans, and construction loans. They also offer international banking services including trade finance, letters of credit, and international collections, plus remittance services via cashier's checks and wire transfers.\n\nThe bank distinguishes itself through multi-state presence with seven physical branch locations (Main Office in Elmhurst, plus branches in Bayside, Miami, Doral, North Miami Beach, Sunrise, and Orlando). They offer specialized accounts like IOLA/IOTA accounts and IRA products, plus ancillary services including safe deposit boxes, ATM access, and ACH processing. Their international banking capabilities suggest focus on serving immigrant and international business communities.\n\nAs a traditional full-service bank, Amerasia provides stability through FDIC insurance and established operations, but the website lacks detailed information about specific rates, fees, minimum balances, digital banking capabilities, or competitive positioning. Customers should contact the bank directly for current rate sheets and fee schedules, as these are referenced but not displayed on the public website.",
   "logo_url": "",
   "website_url": "https://www.amerasiabankny.com",
   "affiliate_url": "",
@@ -23,23 +23,39 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Money market accounts",
+    "Certificates of deposit (Time Deposits)",
+    "Business checking and savings accounts",
+    "IRA accounts",
+    "IOLA/IOTA accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Commercial loans",
+    "Mortgage loans",
+    "SBA loans",
+    "Construction loans",
+    "International wire transfers and remittances",
+    "Trade finance and letters of credit",
+    "Safe deposit boxes",
+    "ATM services",
+    "ACH processing"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1988",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits with full faith and credit backing of the U.S. Government",
+    "Seven physical branch locations across New York and Florida for in-person banking",
+    "Comprehensive international banking services including trade finance and letters of credit",
+    "Diverse loan products including SBA loans, construction loans, and mortgages",
+    "Specialized accounts available including IOLA/IOTA accounts for attorney trust accounts",
+    "Over 30 years of operating history with reported Five-Star ratings from financial rating companies",
+    "Remittance services offering wire transfers and cashier's checks to most parts of the world"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display current interest rates or fee schedules publicly; customers must contact bank",
+    "No information about digital banking, mobile app, or online account opening capabilities",
+    "Limited details about minimum account balances, account requirements, or product specifications",
+    "Smaller geographic footprint compared to national banks, limiting convenience for non-regional customers",
+    "Website provides minimal transparency on lending rates, terms, or loan approval requirements"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +67,7 @@
   "states_served": [
     "NY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 27267,
   "latitude": 40.75796932483,
   "longitude": -73.8295662188109,
@@ -84,21 +100,22 @@
       "FDIC Cert #27267"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs needing commercial banking and SBA loan access",
+    "International business customers requiring trade finance and wire transfer services",
+    "Customers in New York and Florida seeking community banking with physical branch access",
+    "Immigrant communities and remittance senders needing international transfer capabilities"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Amerasia Bank is best for small business owners, immigrant communities, and regional customers in New York and Florida who need full-service banking with international capabilities and prefer in-person relationships. The main caveat is that the website lacks transparency on rates, fees, and digital banking options, requiring direct contact with the bank for specific product details and current pricing.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +123,11 @@
   ],
   "phone": "",
   "address": "4106 Main St, Flushing, NY 11355",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

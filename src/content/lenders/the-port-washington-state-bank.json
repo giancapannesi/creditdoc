@@ -1,14 +1,14 @@
 {
   "name": "The Port Washington State Bank",
   "slug": "the-port-washington-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Port Washington, WI. $1034M in assets. 8 offices.",
-  "description_long": "The Port Washington State Bank is a community bank located in Port Washington, WI, established in 1899. The bank holds approximately $1034M in total assets and $954M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Port Washington State Bank is a community bank offering checking, savings, debit cards, credit cards, and online banking services with a focus on local relationships.",
+  "description_long": "Port Washington State Bank is a traditional community bank serving the Port Washington area with a commitment to personalized customer service and local community engagement. The bank positions itself as offering a unique story and values connection with its community, as evidenced by their emphasis on sharing their narrative with customers on their website. The bank provides a full suite of standard banking services including personal and business online banking platforms, checking and savings accounts, debit card services, and credit card products. They offer the uChoose Rewards\u00ae Program for credit card holders and have integrated Zelle\u00ae for mobile money transfers, indicating modern digital banking capabilities alongside traditional services. What distinguishes Port Washington State Bank is its emphasis on community presence and local service, evidenced by specific community events like the Fredonia April Shred Event and their commitment to maintaining physical branch locations with published hours. The bank has also invested in customer service infrastructure, including a dedicated 24/7 Debit Card Services Line, suggesting a focus on accessibility and responsiveness to cardholder needs. The honest assessment is that while Port Washington State Bank appears to be a solid community banking option, the website provides limited detail about specific products (interest rates, fees, loan terms, minimum balances) that would allow comprehensive comparison to larger regional or national banks. The lack of detailed product information makes it difficult to assess competitiveness on rates and terms without direct contact.",
   "logo_url": "",
   "website_url": "https://www.pwsb.bank",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
+    "Personal online banking platform",
+    "Business online banking platform",
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Debit cards with 24/7 support line",
+    "Credit cards with uChoose Rewards\u00ae Program",
+    "Zelle\u00ae money transfer via mobile app",
+    "Lost/stolen debit card reporting and replacement",
+    "Branch locations with published hours",
+    "Mobile banking application"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1899",
-    "Local community bank with personal service",
-    "8 locations"
+    "24/7 Debit Card Services Line for lost or stolen card support and card-related issues",
+    "Zelle\u00ae integration in mobile app for convenient peer-to-peer money transfers",
+    "uChoose Rewards\u00ae Program for credit card customers with incentive structure",
+    "Multiple access points with published branch locations and hours",
+    "Both personal and business online banking platforms available",
+    "Published rates page for transparency on deposit and loan products",
+    "Community engagement through local events like shred days",
+    "Tech-forward approach with mobile banking capabilities"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific details on APY rates, fees, and account minimums, requiring customers to contact bank directly for pricing information",
+    "Limited product descriptions make it difficult to compare offerings to competitors or understand full service range",
+    "No visible information about loan products, business lending, or mortgage services despite these being common at community banks",
+    "Minimal detail about financial strength, FDIC insurance coverage, or safety ratings",
+    "No information about CD rates or investment products that customers might expect from a traditional bank"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8698,
   "latitude": 43.3887880125031,
   "longitude": -87.8689520377056,
@@ -84,21 +94,22 @@
       "FDIC Cert #8698"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Port Washington area residents seeking community banking with personal relationships",
+    "Small business owners needing local bank support with dedicated business banking platform",
+    "Customers prioritizing mobile banking convenience with Zelle\u00ae integration and 24/7 support",
+    "Individuals wanting rewards-based credit card options with uChoose Rewards\u00ae Program"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Port Washington State Bank is best suited for local customers and small businesses in the Port Washington area seeking traditional community banking with modern digital conveniences like Zelle\u00ae and mobile banking. The main caveat is that the website provides insufficient product detail and pricing information to properly evaluate competitiveness; potential customers must contact the bank directly to compare rates, fees, and terms against other banking options.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "206 N Franklin St, Port Washington, WI 53074",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

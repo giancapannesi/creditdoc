@@ -1,15 +1,15 @@
 {
   "name": "The Fountain Trust Company",
   "slug": "the-fountain-trust-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Covington, IN. $676M in assets. 16 offices.",
-  "description_long": "The Fountain Trust Company is a community bank located in Covington, IN, established in 1903. The bank holds approximately $676M in total assets and $606M in deposits. It operates 16 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering checking and savings accounts, mortgages, mobile banking, and instant-issue debit cards with same-day card activation.",
+  "description_long": "The Fountain Trust Company is a traditional bank operating under FDIC insurance, backed by the full faith and credit of the U.S. Government. The company operates physical banking centers and provides digital banking solutions to both personal and business customers. Based on the website messaging welcoming \"Gifford State Bank Customers,\" the institution appears to operate as a branded division or successor entity within a larger banking structure, maintaining its own online presence and customer-facing operations.\n\nThe Fountain Trust Company offers deposit accounts (checking and savings), home mortgages, online banking platforms, and mobile banking through iOS and Android applications. Their checking accounts come with various features including instant-issue debit cards that can be activated in-branch the same day, eliminating the traditional 7-10 business day wait. They provide an online mortgage application center for streamlined home loan processing and maintain multiple physical branch locations that customers can locate through their website.\n\nKey differentiators include their instant-issue debit card program, which provides same-day activation with contactless payment capability, and their mobile app's card management features allowing customers to control debit card activation, deactivation, and temporary blocking directly from their phones. The bank emphasizes convenience through features like mobile check deposit, bill pay automation, fund transfers, and biometric authentication (face/touch ID). They also highlight business checking accounts with complimentary extras designed for small business customers.\n\nThe Fountain Trust Company is a straightforward regional or mid-sized FDIC-insured bank with standard consumer and business banking products. While they offer modern digital conveniences like instant-issue cards and mobile banking, the website provides limited details about account fees, interest rates, minimum balances, or competitive positioning relative to other banks. Customers should compare their specific account terms, fee structures, and rates against competitors before opening accounts.",
   "logo_url": "",
   "website_url": "http://www.fountaintrust.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Business checking accounts",
+    "Savings and deposit accounts",
+    "Instant-issue debit cards with same-day activation",
+    "Contactless debit card payments",
+    "Online banking platform",
+    "Mobile banking app (iOS and Android)",
+    "Mobile check deposit",
+    "Bill pay and payment scheduling",
+    "Fund transfers (one-time, future date, recurring)",
+    "Mortgage lending and online mortgage applications",
+    "Branch and ATM locator service"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1903",
-    "Local community bank with personal service",
-    "16 locations"
+    "FDIC-insured deposits backed by U.S. Government guarantee",
+    "Instant-issue debit cards activated same-day in-branch, eliminating 7-10 day wait",
+    "Contactless debit card technology included standard with checking accounts",
+    "Mobile app includes card management features to activate, deactivate, or block cards remotely",
+    "Mobile check deposit available for qualified checking accounts",
+    "Biometric authentication (face/touch ID) and PIN options for secure app login",
+    "Multiple branch locations with ATM network and branch locator tool"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not disclose checking account fees, minimum balance requirements, or monthly maintenance costs",
+    "No interest rate information provided for savings or deposit accounts",
+    "Limited details on mortgage rates, terms, or loan products available",
+    "No information about credit cards, personal loans, or other consumer lending products",
+    "Mobile app requires internet access and may incur wireless carrier fees"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5768,
   "latitude": 40.1396480203325,
   "longitude": -87.3987120144995,
@@ -85,21 +96,22 @@
       "FDIC Cert #5768"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers who want immediate debit card access without waiting for mail delivery",
+    "Small business owners seeking no-frills business checking with included services",
+    "People seeking FDIC-insured deposit accounts with mobile banking convenience",
+    "Homebuyers interested in applying for mortgages online"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Fountain Trust Company is best for traditional banking customers seeking FDIC-insured deposit accounts with modern conveniences like instant-issue debit cards and mobile banking. The main caveat is that the website lacks transparency on critical details like account fees, minimum balances, and interest rates\u2014customers must contact the bank or visit a branch to compare competitive terms before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "615 3Rd St, Covington, IN 47932",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

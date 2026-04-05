@@ -1,7 +1,7 @@
 {
   "name": "Arundel Federal Savings Bank",
   "slug": "arundel",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
@@ -9,8 +9,8 @@
     "mutual-bank",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Glen Burnie, MD. $445M in assets. 5 offices.",
-  "description_long": "Arundel Federal Savings Bank is a community bank located in Glen Burnie, MD, established in 1906. The bank holds approximately $445M in total assets and $339M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Arundel Federal Savings Bank is a community-focused financial institution established in 1906, offering checking, savings, mortgages, and business banking services with local branch support.",
+  "description_long": "Arundel Federal Savings Bank has served individuals, businesses, and communities since 1906, positioning itself as a locally-rooted financial institution with deep community ties. The bank emphasizes personal relationships and dedicated support alongside modern digital banking capabilities. Their service model combines traditional branch banking with contemporary online and mobile platforms, allowing customers to manage accounts anywhere, anytime. The institution markets itself as distinct from larger national banks by highlighting community involvement and personalized service.\n\nThe bank offers a comprehensive suite of consumer and business banking products. Personal services include multiple checking account options (standard, rewards-focused, and senior accounts), savings accounts, and 6-month CDs advertised at 3.65% APY. For borrowing needs, they provide home equity loans, construction-to-permanent mortgage loans, and single settlement loans. Business customers can access flexible checking options with digital tools and dedicated business support. All account opening is available online, with online and mobile banking applications for account management.\n\nArundel Federal differentiates itself through its 1906 founding heritage and explicit commitment to supporting local people, businesses, and communities. The bank advertises personalized service, local branch accessibility, and community involvement programs. They emphasize being built specifically for business with dedicated account support, and offer competitive rates on CDs. The website stresses security and modern convenience as core to their platform design.\n\nThe bank operates as a traditional community savings bank with legitimate FDIC-insured offerings. However, the website provides limited specific product details\u2014rates for most products beyond the advertised CD are not displayed, fee structures are not detailed, and detailed loan terms are absent. The 404 errors on the About and Community pages suggest incomplete website infrastructure. As with most banks, competitive advantages depend on specific rate comparisons and fee structures not available on the homepage.",
   "logo_url": "",
   "website_url": "https://www.arundelfederal.com",
   "affiliate_url": "",
@@ -25,23 +25,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts (multiple tiers: standard, business, rewards-focused, senior)",
+    "Savings accounts with FDIC insurance",
+    "6-month Certificates of Deposit (CDs)",
+    "Home equity loans",
+    "Single Settlement Construction-to-Permanent loans",
+    "Residential mortgage loans",
+    "Online banking and account management",
+    "Mobile banking application",
+    "Online account opening",
+    "Business banking with dedicated support",
+    "Community support and charitable involvement programs",
+    "Customer service via phone (410.768.7800) and email"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1906",
-    "Local community bank with personal service",
-    "5 locations"
+    "Established 1906 heritage with 117+ years of community banking experience",
+    "Online account opening available 24/7 for convenience",
+    "Mobile app and online banking platform for account management",
+    "6-month CD rate advertised at 3.65% APY (competitive for fixed-rate savings)",
+    "Dedicated business banking support with flexible checking options",
+    "Construction-to-permanent loan products for custom home builds",
+    "Local branch network with in-person support and community involvement"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited rate transparency\u2014only CD rate disclosed; checking, savings, and loan rates not shown on homepage",
+    "Fee structures for accounts and services not detailed on website",
+    "Website navigation issues with broken links (404 errors on About and Community pages)",
+    "Limited loan product details\u2014terms, APRs, and qualification requirements not specified",
+    "No mention of rewards specifics for 'Rewarding the Year's You've Earned' checking account"
   ],
   "contact": {
     "phone": "",
@@ -53,7 +64,7 @@
   "states_served": [
     "MD"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28780,
   "latitude": 39.1560709938202,
   "longitude": -76.6293519626508,
@@ -95,12 +106,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Maryland/DC-area residents seeking personalized community banking relationships",
+    "Small business owners needing dedicated account support and flexible business checking",
+    "Homebuyers interested in construction-to-permanent or home equity loan products",
+    "Conservative savers seeking FDIC-insured CDs and savings accounts with modest rates"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Arundel Federal Savings Bank is best for community-oriented customers in its service area seeking traditional FDIC-insured banking with local relationship-focused service. The main caveat is that comprehensive product details, rates beyond the advertised CD, and fee information are not available on the website, requiring direct contact for loan terms and competitive rate comparison before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +120,11 @@
   ],
   "phone": "",
   "address": "655 Crain Hwy S, Glen Burnie, MD 21061",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

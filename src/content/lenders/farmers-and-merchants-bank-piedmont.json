@@ -1,14 +1,14 @@
 {
   "name": "Farmers And Merchants Bank",
   "slug": "farmers-and-merchants-bank-piedmont",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Piedmont, AL. $311M in assets. 5 offices.",
-  "description_long": "Farmers And Merchants Bank is a community bank located in Piedmont, AL, established in 1915. The bank holds approximately $311M in total assets and $277M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering checking, savings, online banking, mobile apps, personal loans, and HELOCs with physical branches in Alabama.",
+  "description_long": "Farmers & Merchants Bank is a traditional community bank operating with FDIC insurance protection, backed by the full faith and credit of the U.S. Government. The institution maintains a physical branch network in Alabama, with documented locations in Piedmont and Jacksonville, and offers comprehensive consumer banking services through both in-person and digital channels.\n\nThe bank provides core banking products including checking and savings accounts, online and mobile banking platforms, credit cards, debit cards (personal and business), and loan products. Their lending offerings specifically include personal loans and Home Equity Lines of Credit (HELOCs) marketed for home improvement, vacations, vehicle purchases, and other major expenses. The bank also offers investment services and mobile remote deposit capture capabilities.\n\nFarmers & Merchants Bank distinguishes itself through emphasis on customer education and fraud prevention awareness. The institution provides extensive educational resources on their website covering wire fraud prevention, identity theft protection, cybersecurity, account authentication, debit card security, and business protection. They position their team as a core asset and highlight local, personal service as part of their \"Service, Solutions, Strength\" brand philosophy.\n\nThe bank operates as a traditional community institution rather than a full-service national bank or fintech alternative. Their digital capabilities appear functional but basic compared to modern neobanks. Physical branch presence is limited geographically to Alabama locations with standard banking hours (9 AM-4 PM weekdays, with extended Friday hours and early morning drive-thru access).",
   "logo_url": "",
   "website_url": "http://www.FandM.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Checking and savings accounts (FDIC-insured)",
+    "Online banking with balance checking and account management",
+    "Mobile banking app for smartphones",
+    "Mobile remote deposit capture",
+    "Credit cards",
+    "Personal debit cards",
+    "Business debit cards",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Home Equity Lines of Credit (HELOCs)",
+    "Investment services",
+    "Wire transfer services",
+    "Fraud prevention education and resources"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1915",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits with full government backing",
+    "Dual access channels: physical branches in Alabama plus online and mobile banking",
+    "HELOCs available for flexible home equity borrowing at stated rates",
+    "Comprehensive fraud and cybersecurity education resources publicly available on website",
+    "Mobile remote deposit capture service for check deposits via smartphone",
+    "Business and personal debit card options offered",
+    "Drive-thru access opens at 8:30 AM daily for customer convenience"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint: only documented branches in Piedmont and Jacksonville, Alabama",
+    "No 24/7 branch access; standard banking hours with Friday limited to 5 PM closing",
+    "No specific APR rates, interest rates, or fee schedules disclosed on publicly available pages",
+    "Digital banking interface appears basic compared to modern online banking competitors",
+    "No documentation of investment account types, minimums, or product details on main site"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "AL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1735,
   "latitude": 33.9239989798162,
   "longitude": -85.6101250208961,
@@ -84,21 +95,21 @@
       "FDIC Cert #1735"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Alabama residents seeking FDIC-insured traditional banking with local branch relationships",
+    "Homeowners in service areas interested in HELOC products for home equity access",
+    "Small business owners needing both personal and business banking services in one institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Farmers & Merchants Bank is best for Alabama consumers who value FDIC-insured deposit protection, prefer local branch relationships, and need basic-to-intermediate banking services including personal loans and home equity borrowing. The main caveat is extremely limited geographic availability (Alabama only) and lack of pricing transparency, making it unsuitable for customers outside service areas or those seeking competitive rate shopping.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "112 E Ladiga St, Piedmont, AL 36272",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

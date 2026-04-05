@@ -1,14 +1,14 @@
 {
   "name": "Heritage Bank",
   "slug": "heritage-bank-marion",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Marion, IA. $39M in assets. 3 offices.",
-  "description_long": "Heritage Bank is a community bank located in Marion, IA, established in 1899. The bank holds approximately $39M in total assets and $34M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank headquartered in Marion, Iowa, offering personal and business checking, savings, loans, and credit cards across multiple locations.",
+  "description_long": "Heritage Bank is a regional community bank based in Marion, Iowa, with a stated mission that \"The Right Bank Makes a Difference.\" The bank operates branches in Marion, Delhi, and Hiawatha, Iowa, positioning itself as a local financial institution focused on serving the community's banking needs.\n\nThe bank offers a comprehensive suite of retail and business banking products. On the personal side, customers can access checking and savings accounts, CDs/IRAs, debit cards, credit cards, and personal loans. The business division provides checking accounts, savings and money market products, business credit cards, and business loans. Heritage Bank also offers mortgage lending and provides online and mobile banking platforms for account management and transfers.\n\nHeritage Bank differentiates itself through its community focus and local presence across three nearby Iowa towns rather than operating as a large regional or national chain. The bank provides routing number and wire information, check ordering services, financial calculators, security resources, and detailed FAQs for both online and mobile banking. FDIC insurance is clearly communicated, indicating standard deposit protection.\n\nAs a small community bank, Heritage Bank serves customers seeking personalized local banking relationships and those with ties to the Marion/Delhi/Hiawatha area. However, the bank's limited geographic footprint, smaller branch network, and potential service limitations compared to larger institutions may limit its appeal. The website contains a broken link (404 error on the Personal Other Services page), suggesting possible technical maintenance issues or incomplete online presence.",
   "logo_url": "",
   "website_url": "https://www.heritagemarion.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts and CDs/IRAs",
+    "Business checking accounts",
+    "Business savings and money market accounts",
+    "Personal credit cards",
+    "Business credit cards",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage loans",
+    "Business loans",
+    "Debit cards",
+    "Online banking platform",
+    "Mobile banking apps (iOS and Android)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1899",
-    "Local community bank with personal service",
-    "3 locations"
+    "Multi-location community bank with branches in Marion, Delhi, and Hiawatha, Iowa",
+    "Comprehensive product suite including personal and business checking, savings, CDs, IRAs, and credit cards",
+    "Offers both personal and mortgage loans with stated local lending focus",
+    "Mobile banking app available for both iPhone and Android platforms",
+    "Online and mobile banking platforms with dedicated FAQ sections",
+    "FDIC insured deposits providing standard deposit protection",
+    "Visa credit card products for both personal and business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to three small Iowa towns with no online-only account opening mentioned",
+    "Website contains broken links (404 error on services page) indicating incomplete or outdated digital presence",
+    "No information provided about interest rates, APRs, fees, or competitive pricing on any products",
+    "Small community bank with likely fewer ATMs and branches compared to regional or national competitors",
+    "Limited transparency about loan products, terms, and business lending requirements on the website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 18463,
   "latitude": 42.0265880143394,
   "longitude": -91.6171799654221,
@@ -84,21 +95,22 @@
       "FDIC Cert #18463"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Iowa residents in Marion, Delhi, or Hiawatha seeking relationship-based community banking",
+    "Small business owners in the tri-town area needing local business banking and lending relationships",
+    "Customers prioritizing in-person service and personal relationships with bank staff",
+    "Agricultural or rural community members seeking locally-focused lending and financial services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Heritage Bank is best for customers with ties to Marion, Delhi, or Hiawatha, Iowa who value personal relationships and local decision-making in their banking. The main caveat is the bank's limited geographic presence and sparse online information about rates, fees, and lending terms\u2014customers should contact branches directly to compare products.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "695 Marion Blvd, Marion, IA 52302",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

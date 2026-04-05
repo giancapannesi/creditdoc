@@ -1,15 +1,15 @@
 {
   "name": "State Bank Of Graymont",
   "slug": "state-bank-of-graymont",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Graymont, IL. $323M in assets. 5 offices.",
-  "description_long": "State Bank Of Graymont is a community bank located in Graymont, IL, established in 1913. The bank holds approximately $323M in total assets and $282M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "State Bank of Graymont is a traditional community bank offering commercial lending, mortgages, and retirement planning services through its investment division.",
+  "description_long": "State Bank of Graymont is a community-based financial institution that provides traditional banking and financial services. The bank operates multiple office locations, including a Pontiac East Office that is closing as of February 27, 2026, indicating an active, evolving branch network. The institution maintains an online banking platform for customer convenience and digital account management. As a regional bank, SBG positions itself as a relationship-focused lender serving both personal and commercial customers in its market area.\n\nThe bank's service offerings span three primary areas: commercial lending, mortgage services, and retirement planning. For commercial clients, State Bank of Graymont provides equipment loans and real estate lending with emphasis on building long-term relationships. The mortgage division serves both home purchasers and refinancing customers. Retirement planning is handled through Graymont Investment Services, a dedicated division offering IRAs, Roth IRAs, SEP IRAs, annuities, and employer-sponsored retirement plans including 401(k) and 403(b) programs. Investment services are provided through Midwestern Securities Trading Company, LLC (MSTC), a separate FINRA and SIPC member firm.\n\nState Bank of Graymont distinguishes itself through its integrated investment services division, Graymont Investment Services, which allows customers to access securities and investment advisory services alongside traditional banking. The bank operates with professional compliance standards, with investment professionals available for background checks through FINRA's BrokerCheck system. The emphasis on both commercial lending relationships and comprehensive retirement planning suggests a full-service community bank model rather than a limited-service institution.\n\nThe primary limitation is that detailed product information, specific rates, fees, and eligibility requirements are not disclosed on the public website. The bank's investment services explicitly state that securities are not FDIC-insured and are subject to investment risk, which is appropriate disclosure but indicates customers must understand the distinction between deposit accounts and investment products. The upcoming office closure suggests potential consolidation or restructuring, which customers in affected areas should monitor.",
   "logo_url": "",
   "website_url": "https://www.sbofgray.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Commercial equipment loans",
+    "Commercial real estate lending",
+    "Mortgage origination (purchase and refinance)",
+    "Online banking platform",
+    "Traditional IRA accounts",
+    "Roth IRA accounts",
+    "SEP IRA accounts",
+    "Annuity products",
+    "401(k) plan administration",
+    "403(b) plan administration",
+    "Investment advisory services (through MSTC)",
+    "Securities trading services (through MSTC)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1913",
-    "Local community bank with personal service",
-    "5 locations"
+    "Offers integrated retirement planning through Graymont Investment Services division with multiple plan types (IRAs, 401k, 403b, SEP IRAs, annuities)",
+    "Commercial lending includes both equipment financing and real estate loans with relationship-focused service model",
+    "Investment professionals registered with FINRA and SIPC for securities trading and advisory services",
+    "Online banking platform available for digital account access and management",
+    "Full-service community bank offering mortgages for both purchase and refinance scenarios",
+    "Maintains multiple office locations for in-person customer service",
+    "Clear disclosure that investment services are separate from FDIC-insured deposits"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information about rates, fees, minimum deposits, or loan terms for any product",
+    "Graymont Investment Services is not affiliated with the bank itself; securities are handled by third-party MSTC",
+    "Pontiac East Office closing February 27, 2026, suggesting branch consolidation that may inconvenience local customers",
+    "No information about checking account features, savings account rates, CDs, or other standard deposit products",
+    "Limited details on commercial lending criteria, approval process, or typical loan amounts"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10434,
   "latitude": 40.8772039929764,
   "longitude": -88.7766569986831,
@@ -85,21 +96,22 @@
       "FDIC Cert #10434"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local business owners seeking commercial equipment loans and real estate financing relationships",
+    "Individuals planning retirement who want integrated banking and investment services in one institution",
+    "Home buyers and refinancing customers in the Graymont/Pontiac area seeking mortgage services",
+    "Customers preferring a community bank model with relationship-based lending over large national institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "State Bank of Graymont is best for local business customers needing commercial lending and individuals seeking integrated retirement planning with traditional banking. The main caveat is that specific product details, rates, and eligibility requirements are not publicly disclosed on the website, requiring direct contact with the bank for concrete pricing and terms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "204 Main St, Graymont, IL 61743",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

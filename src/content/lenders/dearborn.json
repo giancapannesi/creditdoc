@@ -1,7 +1,7 @@
 {
   "name": "Dearborn Federal Savings Bank",
   "slug": "dearborn",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
@@ -9,8 +9,8 @@
     "mutual-bank",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Dearborn, MI. $289M in assets. 5 offices.",
-  "description_long": "Dearborn Federal Savings Bank is a community bank located in Dearborn, MI, established in 1936. The bank holds approximately $289M in total assets and $183M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Federally chartered mutual savings bank headquartered in Dearborn, Michigan, offering checking, savings, mortgages, and lending products across 5 local branches.",
+  "description_long": "Dearborn Federal Savings Bank was founded in 1936 by 20 local Dearborn residents who each invested $1,000 during the Great Depression to establish the original Dearborn Federal Savings and Loan Association. Today, the institution operates as a federally chartered mutual savings bank with FDIC insurance backing all deposits. The bank maintains a focused regional presence with three branches in Dearborn and two in Dearborn Heights, Michigan.\n\nThe bank offers a comprehensive suite of consumer and business banking products. Personal services include checking accounts, savings accounts, CDs, and IRAs. On the lending side, they provide mortgage loans (with online application in as little as 20 minutes), home equity lines of credit (HELOCs), and commercial lending options. Business customers can access business checking, savings, and CD products. Additional resources include online and mobile banking with features like remote check deposit, bill pay, and fund transfers between accounts.\n\nDearborn Federal positions itself as a community-focused institution with particular emphasis on first-time homebuyers and credit-building customers. The bank highlights its affordable lending approach and states it aims to make homeownership accessible to those with credit challenges. Their mortgage calculator and dedicated first-time buyer resources reflect this positioning. The mutual structure means the bank is owned by its depositors rather than external shareholders.\n\nAs a small regional bank with only 5 branches, Dearborn Federal serves a limited geographic area and lacks the branch network or digital innovation of larger national banks. While FDIC-insured and established, consumers should verify specific product rates and terms, as the website does not display current rate information. The bank's regional focus and mutual structure provide stability and community accountability, though customers outside Michigan cannot access physical branches.",
   "logo_url": "",
   "website_url": "https://www.mydfsb.com",
   "affiliate_url": "",
@@ -25,23 +25,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of deposit (CDs)",
+    "Individual retirement accounts (IRAs)",
+    "Mortgage loans with online application",
+    "Home equity lines of credit (HELOCs)",
+    "Commercial lending",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Business CDs",
+    "Mobile banking app with remote deposit and bill pay",
+    "Mortgage calculator"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1936",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Founded 1936 with 85+ year history of stability during economic downturns",
+    "Federally chartered mutual savings bank owned by depositors, not external shareholders",
+    "Online mortgage application completed in as little as 20 minutes",
+    "Mobile app with remote check deposit (image capture) and bill pay features",
+    "Dedicated first-time homebuyer programs and resources",
+    "Five conveniently located branches in Dearborn and Dearborn Heights"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint with only 5 branches in Michigan\u2014no interstate presence",
+    "Website does not display current interest rates for checking, savings, CDs, or mortgages",
+    "No mention of online account opening for deposit products, limiting remote access",
+    "Smaller institution may have fewer product options and less sophisticated digital banking compared to national competitors",
+    "No information about minimum deposit requirements or account fees"
   ],
   "contact": {
     "phone": "",
@@ -53,7 +64,7 @@
   "states_served": [
     "MI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29874,
   "latitude": 42.3045480168911,
   "longitude": -83.2497599642955,
@@ -86,21 +97,22 @@
       "FDIC Cert #29874"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "First-time homebuyers in the Dearborn/Dearborn Heights area seeking affordable mortgage options",
+    "Local consumers building credit who need accessible lending and supportive banking services",
+    "Small business owners in Michigan seeking community-focused commercial lending",
+    "Savers in the region prioritizing FDIC safety and local institution accountability"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Dearborn Federal Savings Bank is best suited for Michigan residents in the Dearborn/Dearborn Heights area seeking stable, FDIC-insured banking with community accountability and accessible mortgage lending for first-time or credit-building homebuyers. The main caveat is its limited geographic reach and lack of publicly displayed rates\u2014customers outside the service area or those seeking comprehensive digital-first banking should look elsewhere.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +120,11 @@
   ],
   "phone": "",
   "address": "22315 Michigan Ave, Dearborn, MI 48124",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

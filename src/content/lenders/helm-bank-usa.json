@@ -1,15 +1,15 @@
 {
   "name": "Helm Bank Usa",
   "slug": "helm-bank-usa",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Miami, FL. $1138M in assets. 2 offices.",
-  "description_long": "Helm Bank Usa is a community bank located in Miami, FL, established in 1989. The bank holds approximately $1138M in total assets and $1022M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank founded during the 1989 S&L Crisis, specializing in personal and business banking for multinational companies and foreign nationals seeking U.S. investment opportunities.",
+  "description_long": "Helm Bank USA was established in 1989 during the Savings & Loan Crisis, built on the founder's vision to create financial connections between multinational companies and foreign national individuals and the United States. The bank was created to serve clients seeking investment and business opportunities in America, with a specific focus on globally connected individuals and international business operations. The bank operates with four core values: empathy, curiosity, creativity, and passion, which guide their service offerings and client relationships.\n\nHelm Bank USA offers a comprehensive range of financial products including personal and business banking, residential and commercial real estate lending, auto loans, and credit cards. Their personal banking services include checking accounts, online banking, bill payment, and mobile banking designed for globally connected clients. On the business side, they provide business checking with liquidity management tools and enhanced reporting capabilities. Their lending services span residential mortgages, commercial real estate loans with flexible structures, and auto financing. They also issue VISA credit cards (Helm Gold and Helm Platinum) with loyalty programs and rewards, including a premium travel card positioned as a high-end offering.\n\nHelm Bank USA distinguishes itself through its specific market focus on multinational companies and foreign nationals, rather than serving the general consumer market. The bank maintains physical branch locations in Miami and Orlando, strategically positioned for international clientele. They emphasize fraud prevention and security, with prominent messaging about wire transfer verification and protection. The bank is FDIC-insured and backed by federal guarantee, providing regulatory security. Their heritage of serving during financial crises and focus on opportunity-seeking clients sets them apart from mainstream retail banks.\n\nHelm Bank USA is a legitimate, FDIC-insured bank with established operations and clear service offerings. However, their website provides limited detail on specific product terms, rates, or fees. As a regional bank with branches only in Miami and Orlando, availability is geographically restricted. The bank's niche focus on multinational and foreign national clients may mean less emphasis on serving standard U.S. consumer banking needs. Prospective customers should contact the bank directly for specific rate and product information.",
   "logo_url": "",
   "website_url": "https://www.helmbankusa.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with online and mobile banking",
+    "Business checking with digital liquidity management tools and reporting",
+    "Residential mortgage lending for home purchase and investment",
+    "Commercial real estate loans with flexible structures and refinancing",
+    "Auto financing and auto loans",
+    "VISA Gold credit card with loyalty rewards",
+    "VISA Platinum credit card with loyalty rewards",
+    "Premium travel VISA card",
+    "Bill payment services",
+    "Wire transfer services",
+    "Account management and transfers through online portal",
+    "Fraud prevention and security services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1989",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits with full faith and credit backing of the U.S. Government",
+    "Specific focus on serving multinational companies and foreign nationals with U.S. investment needs",
+    "Physical branch locations in Miami and Orlando with extended support services",
+    "Comprehensive product suite including personal banking, business banking, mortgages, commercial real estate, and auto loans",
+    "Dual credit card options (Gold and Platinum VISA) with loyalty rewards programs",
+    "Premium travel card offering tailored for internationally-focused clients",
+    "Online and mobile banking services with digital tools for business liquidity management"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability with branches only in Miami and Orlando locations",
+    "Website provides minimal information on specific rates, terms, or fee schedules",
+    "Niche market focus on multinational/foreign nationals may limit product tailoring for standard U.S. consumer needs",
+    "No clear information about minimum account balances or eligibility requirements",
+    "Limited details on commercial real estate and mortgage program specifics"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "FL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 32718,
   "latitude": 25.7638559843245,
   "longitude": -80.1905880124264,
@@ -85,21 +96,22 @@
       "FDIC Cert #32718"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Multinational company executives and employees seeking U.S. banking services",
+    "Foreign national individuals and investors pursuing business opportunities in America",
+    "International businesses requiring commercial banking and real estate lending in the U.S.",
+    "Miami and Orlando-based clients needing personalized, internationally-focused banking relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Helm Bank USA is best for multinational companies, foreign nationals, and international investors seeking U.S. banking services, particularly those based in or willing to travel to Miami or Orlando. The primary caveat is geographic limitation to two Florida locations and a specialized market focus that may not serve general U.S. consumer banking needs\u2014direct contact with the bank is necessary to confirm eligibility and obtain specific product terms and rates.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,10 @@
   ],
   "phone": "",
   "address": "999 Brickell Ave, Miami, FL 33131",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Habib American Bank",
   "slug": "habib-american-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in New York, NY. $2739M in assets. 6 offices.",
-  "description_long": "Habib American Bank is a community bank located in New York, NY, established in 1984. The bank holds approximately $2739M in total assets and $2347M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Habib American Bank is a full-service bank offering personal and business banking products including checking, savings, CDs, debit cards, commercial mortgages, and wire transfer services.",
+  "description_long": "Habib American Bank (HAB Bank) operates as a traditional commercial bank with ABA routing number 026007362 and SWIFT code HANYUS33XXX. The bank serves both individual consumers and business clients through a network of physical branches and digital banking platforms. Based on their website presence at hab.bank, they position themselves as a customer-focused institution offering comprehensive financial solutions across personal and commercial segments.\n\nThe bank's service offerings include personal checking and savings accounts, certificates of deposit (CDs) with terms ranging from 1 month to 7 years, VISA debit cards with instant issuance capability, and commercial real estate financing. For business customers, they provide commercial mortgages with fixed interest rates and flexible terms, institutional solutions for trade and risk management, and business savings accounts. Personal customers have access to online banking, eWires (electronic wire transfers), and a Personal Money Tracker budgeting tool. All debit card holders receive fraud protection on unauthorized purchases.\n\nHabib American Bank distinguishes itself through instant-issue debit card service available immediately upon account opening at branch locations, eliminating typical mail delays. They emphasize borderless solutions for institutions and customize products for different life stages. The bank combines traditional banking services with digital convenience features like online banking and wire transfer capabilities. Their focus on both retail and commercial markets suggests a mid-sized community or regional bank model.\n\nAs a traditional bank, HAB Bank is subject to federal banking regulations and deposit insurance protections. However, the website provides limited information about interest rates, fees, minimum account balances, or detailed product terms. Prospective customers would need to visit a branch or contact the bank directly for specific rate information and account requirements. The bank's geographic reach and full range of competitive offerings relative to other financial institutions cannot be determined from the available website content.",
   "logo_url": "",
   "website_url": "https://www.hab.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with free debit cards",
+    "Savings accounts with customizable features",
+    "Certificates of Deposit (1 month to 7 years)",
+    "VISA Debit Cards with instant issuance",
+    "Commercial mortgages with fixed rates",
+    "Commercial real estate financing",
+    "eWires (electronic wire transfers via online banking)",
+    "Business savings and investment accounts",
+    "Personal Money Tracker budgeting tool",
+    "Institutional trade and risk management solutions",
+    "Digital banking login and account access",
+    "Fraud protection on debit card purchases"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1984",
-    "Local community bank with personal service",
-    "6 locations"
+    "Instant-issue VISA debit cards ready to use immediately upon opening an account, with no waiting for mail or activation calls",
+    "Certificates of Deposit available with flexible terms from 1 month to 7 years with fixed interest rates",
+    "Fraud protection on debit card unauthorized purchases included",
+    "Commercial mortgage financing with fixed rates and customizable terms for real estate investors and business relocation",
+    "eWires service combining wire transfer efficiency with online banking convenience for personal and business accounts",
+    "Personal Money Tracker budgeting tool included to help customers monitor spending and manage finances",
+    "Comprehensive product suite serving individuals, businesses, and institutions from a single bank"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display current interest rates for savings accounts, CDs, or other products\u2014customers must visit branch or call for pricing",
+    "No information about minimum account balances, monthly fees, or other account requirements visible on the website",
+    "Limited digital banking details\u2014no mention of mobile app capabilities, bill pay, account transfer features, or online account opening",
+    "No transparency on commercial mortgage rates, terms, or lending requirements",
+    "Instant debit card issuance requires visiting a physical branch location; no remote account opening mentioned"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "NY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 25093,
   "latitude": 40.752860387206,
   "longitude": -73.973683907638,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and commercial real estate investors needing fixed-rate mortgages and business banking services",
+    "Consumers who value immediate debit card access and prefer in-person banking relationships at branch locations",
+    "Savers looking for certificates of deposit with flexible 1-7 year terms as part of a diversified savings strategy",
+    "Individuals seeking fraud-protected debit cards with budgeting tools and online wire transfer capabilities"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Habib American Bank is best for small business owners, commercial real estate investors, and retail customers who value in-person banking relationships and immediate debit card issuance. The main caveat is that the website lacks transparency on interest rates, fees, and minimum balances\u2014making it essential to visit a branch or contact the bank directly before opening an account to understand actual costs and product terms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "150 East 45Th Street, New York, NY 10017",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

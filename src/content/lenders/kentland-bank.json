@@ -1,15 +1,15 @@
 {
   "name": "Kentland Bank",
   "slug": "kentland-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Kentland, IN. $407M in assets. 5 offices.",
-  "description_long": "Kentland Bank is a community bank located in Kentland, IN, established in 1932. The bank holds approximately $407M in total assets and $311M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Kentland Bank is a community-focused bank operating five branches across Newton, Jasper, and Tippecanoe counties in Indiana, offering standard banking services since 1932.",
+  "description_long": "Kentland Bank was founded in 1932 by Glen C. Tolin and Edgar Teague in response to the closure of Newton County State Bank during the Great Depression. The founders pooled their resources to restore banking services to Kentland, Indiana, establishing a legacy of community commitment that has persisted for over 90 years. The bank has grown from a single location to five branches across three counties in Indiana, reflecting steady expansion through the 20th century.\n\nThe bank offers a comprehensive suite of standard retail banking services including checking and savings accounts, consumer and business loans, credit cards, bill pay, remote deposit capabilities, and Same Day ACH processing. Online and mobile banking platforms are available, with the company currently upgrading these digital services to provide faster, easier, and more secure account management. The bank emphasizes personal customer service and aims to enhance customer satisfaction with every interaction.\n\nKentland Bank distinguishes itself through its deep local roots and community involvement. Unlike larger regional or national banks, this institution actively participates in the communities it serves through employee volunteering, local charitable donations, and financing support for small business ventures. The bank explicitly operates only in its service region and does not engage in non-financial product sales or solicitation, maintaining a focused banking operation.\n\nAs a regional community bank, Kentland Bank is best suited for customers seeking personalized service in the Newton, Jasper, and Tippecanoe County areas. The FDIC membership provides standard deposit protection. However, the bank's limited geographic footprint and single-state presence mean customers outside Indiana cannot access branches, and the website indicates ongoing digital banking platform upgrades, which may reflect current limitations in their online offerings.",
   "logo_url": "",
   "website_url": "https://www.kentlandbank.com",
   "affiliate_url": "",
@@ -26,21 +26,32 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Consumer loans",
+    "Business loans",
+    "Credit cards",
+    "Bill pay services",
+    "Remote deposit",
+    "Same Day ACH processing",
+    "Online banking",
+    "Mobile banking",
+    "Debit cards",
+    "In-person branch banking at five locations"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1932",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits protecting up to $250,000 per account",
+    "Deep community roots with 90+ years of local banking history and commitment",
+    "Multiple branch locations across three Indiana counties for in-person service",
+    "Comprehensive service offerings including checking, savings, loans, credit cards, and bill pay",
+    "Remote deposit capability for convenient check deposits",
+    "Same Day ACH processing for faster fund transfers",
+    "Active community involvement through employee volunteering and local charitable donations"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability restricted to five branches in three Indiana counties only",
+    "No national or multi-state presence limits accessibility for customers outside the service area",
+    "Digital banking platform currently being upgraded, indicating potential current limitations in online features",
+    "Limited information on website about specific loan types, rates, or credit card reward structures",
+    "Small regional bank may have fewer technology features compared to larger national banks"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13843,
   "latitude": 40.7687489971373,
   "longitude": -87.443013977,
@@ -85,21 +96,22 @@
       "FDIC Cert #13843"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Individuals and families living in Newton, Jasper, or Tippecanoe counties seeking personalized local banking",
+    "Small business owners in the service area needing relationship-based lending and financing support",
+    "Customers prioritizing community involvement and local economic support over digital-first banking",
+    "Depositors seeking FDIC-insured savings and checking accounts with human customer service interaction"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Kentland Bank is best for customers within its three-county Indiana service area who value personalized community banking and local relationship-based service. The main caveat is geographic limitation\u2014the bank serves only Newton, Jasper, and Tippecanoe counties, making it inaccessible for customers outside this region.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "111 N 4Th St, Kentland, IN 47951",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

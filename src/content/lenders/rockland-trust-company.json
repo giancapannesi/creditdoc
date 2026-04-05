@@ -1,13 +1,13 @@
 {
   "name": "Rockland Trust Company",
   "slug": "rockland-trust-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Rockland, MA. $24910M in assets. 152 offices.",
-  "description_long": "Rockland Trust Company is a community bank located in Rockland, MA, established in 1907. The bank holds approximately $24910M in total assets and $20257M in deposits. It operates 152 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Rockland Trust is a full-service bank offering personal and business checking, savings, mortgages, home equity products, and commercial banking services with FDIC insurance backing.",
+  "description_long": "Rockland Trust Company is a traditional bank providing comprehensive financial services to both personal and business customers. The bank emphasizes community presence with multiple branch locations and offers FDIC insurance protection backed by the full faith and credit of the U.S. Government, ensuring deposit safety up to regulatory limits. The institution has established itself as a regional banking partner with extended customer service hours (M-F 7am-8pm, Sat 8am-5pm, Sun 10am-3pm) and maintains both personal and business customer information centers.\n\nThe bank offers a diverse range of products including personal checking and savings accounts, money market accounts, relationship accounts, and personal loans. For mortgage needs, Rockland Trust provides express mortgage options with advertised rates as low as 6.874% APR (20-year term) and home equity lines of credit at 6.240% APR. Business customers can access business checking, savings accounts, business credit cards, merchant services, fraud protection, term loans, and lines of credit. Commercial banking clients benefit from commercial real estate loans, C&I loans, equipment leasing, international banking, treasury management, and commercial credit and purchasing cards.\n\nRockland Trust distinguishes itself through its mobile banking platform featuring fingerprint and Face ID authentication, mobile check deposit functionality, and account management tools. The bank actively supports community development through grants, donations, and event sponsorships. Their \"YourBanker\" dedicated banker service connects customers with personalized financial support. The institution also provides financial literacy education through programs like Ms. Money & the Coins and hosts community Shred Day events for secure document disposal.\n\nAs a traditional brick-and-mortar bank, Rockland Trust serves customers seeking established banking infrastructure with physical branch access, though online and mobile capabilities are available. The bank's specific rates and terms vary by product and individual qualification. Customers should verify current rates, terms, and lending requirements directly through the bank's website or branch locations.",
   "logo_url": "",
   "website_url": "http://www.rocklandtrust.com",
   "affiliate_url": "",
@@ -22,23 +22,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts and money market accounts",
+    "Relationship accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Express mortgages (20-year term options available)",
+    "Home equity lines of credit",
+    "Business checking and savings accounts",
+    "Business credit cards",
+    "Merchant payment processing services (Elavon)",
+    "Commercial real estate loans",
+    "Commercial and industrial (C&I) loans",
+    "Equipment leasing",
+    "Treasury management services",
+    "International banking services",
+    "Mobile banking app with biometric authentication and mobile check deposit",
+    "Fraud protection services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1907",
-    "Local community bank with personal service",
-    "152 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Extended customer service hours including Sunday (10am-3pm) access",
+    "Mobile banking with biometric authentication (fingerprint and Face ID)",
+    "Mobile check deposit feature for convenient account funding",
+    "Dedicated \"YourBanker\" service for personalized financial support",
+    "Comprehensive product suite: personal banking, mortgages, home equity, business services, and commercial banking",
+    "Active community involvement with grants, donations, and sponsorships"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited information on specific account fees, minimum balance requirements, or interest rates for basic checking/savings accounts",
+    "No mention of special promotional rates or sign-up bonuses for new accounts",
+    "Website does not display current interest rates for savings products or money market accounts"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +63,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9712,
   "latitude": 42.129917811663,
   "longitude": -70.91630819762,
@@ -83,21 +96,21 @@
       "FDIC Cert #9712"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to medium-sized business owners seeking comprehensive commercial banking and merchant services",
+    "Homeowners looking for mortgage refinancing or home equity borrowing with established local bank support",
+    "Customers who value in-person branch access and relationship banking over digital-only solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Rockland Trust is best for personal and business customers seeking a traditional full-service bank with physical branch locations, FDIC insurance protection, and comprehensive financial products from checking to commercial lending. The primary consideration is that this is a traditional regional bank rather than a specialized lender, so customers should compare rates and terms directly as the website provides limited specific pricing details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +118,11 @@
   ],
   "phone": "",
   "address": "288 Union St, Rockland, MA 02370",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

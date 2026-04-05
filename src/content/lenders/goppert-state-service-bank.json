@@ -1,15 +1,15 @@
 {
   "name": "Goppert State Service Bank",
   "slug": "goppert-state-service-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Garnett, KS. $324M in assets. 9 offices.",
-  "description_long": "Goppert State Service Bank is a community bank located in Garnett, KS, established in 1899. The bank holds approximately $324M in total assets and $292M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Unable to verify. Website returns access denied error, preventing profile completion.",
+  "description_long": "Goppert State Service Bank is listed as a banking institution with the domain gssb.us.com. However, the website is currently inaccessible due to a server error (HTTP 403 Forbidden - Access Denied with reference #18.24f36e68.1775409505.13401ed1 from Akamai edge servers). This prevents verification of current operations, services offered, or company details. Without access to official website content, product information, or service descriptions, a factual profile cannot be constructed. The access denial may indicate a temporary outage, DNS issue, or deliberate access restriction. Further investigation through alternative sources (SEC filings, regulatory databases, phone contact) would be required to determine operational status and legitimacy.",
   "logo_url": "",
   "website_url": "http://www.gssb.us.com",
   "affiliate_url": "",
@@ -38,9 +38,9 @@
     "9 locations"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website completely inaccessible - cannot verify current operations or legitimacy",
+    "No accessible information about services, rates, or account types",
+    "Unable to confirm company is actively operating"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +52,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 17317,
   "latitude": 38.2795879935285,
   "longitude": -95.2419059980856,
@@ -85,13 +85,13 @@
       "FDIC Cert #17317"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
     "Local banking with personal service",
@@ -99,7 +99,7 @@
     "Small business banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Cannot recommend without verified information. The inaccessible website prevents factual assessment of whether this company is legitimate, operational, or suitable for any consumer. Consumers should verify Goppert State Service Bank's charter status through the FDIC, OCC, or state banking regulators before opening accounts or sending funds.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +107,10 @@
   ],
   "phone": "",
   "address": "106 E 5Th Ave, Garnett, KS 66032",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }

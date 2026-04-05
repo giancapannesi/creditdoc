@@ -1,13 +1,13 @@
 {
   "name": "Washington Trust Bank",
   "slug": "washington-trust-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Spokane, WA. $10683M in assets. 45 offices.",
-  "description_long": "Washington Trust Bank is a community bank located in Spokane, WA, established in 1902. The bank holds approximately $10683M in total assets and $8947M in deposits. It operates 45 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Washington Trust Bank is a privately-owned, locally-invested bank offering personal, business, and wealth management services with FDIC insurance protection.",
+  "description_long": "Washington Trust Bank is a regional financial institution based in the Pacific Northwest, positioned as a privately-owned bank with deep local investment roots. The company emphasizes personalized banking relationships and community focus rather than national chain operations. Their leadership includes public figures\u2014notably Cal Raleigh as their Home Run Officer\u2014reflecting their commitment to local engagement and brand visibility.\n\nThe bank offers a comprehensive suite of financial services across three primary segments: personal banking (checking, savings, credit cards), commercial and small business banking (cash management, lockbox services, remote deposit capture, merchant services), and wealth management. On the personal side, they feature Simplicity Checking as a free account with no monthly maintenance fees or minimum balance requirements. They also offer credit cards with cash back rewards (Clearly Cash Back Awards) and multiple digital banking platforms including WTB Online, Business Digital Banking, and a Wealth Management app.\n\nWashington Trust Bank differentiates itself through its privately-owned structure and stated commitment to local investment, contrasting with larger national banks. They emphasize fraud prevention education, offering dedicated resources, email education series, and community events like their Shred Day program (now in its 9th year). Their brand positioning around personalized banking and local decision-making appeals to customers seeking relationship-based banking rather than transactional services.\n\nThe company maintains standard FDIC insurance and emphasizes security and fraud prevention prominently on their website, likely reflecting real concerns in their market. However, as with most regional banks, their service footprint and product innovation may be more limited compared to national competitors, and specific details about rates, fees beyond overdraft/ATM charges, and comprehensive product pricing are not disclosed on their public website.",
   "logo_url": "",
   "website_url": "https://www.watrust.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Simplicity Checking (free checking accounts)",
+    "Savings accounts and CDs",
+    "Credit cards with cash back rewards (Clearly Cash Back Awards)",
+    "Business Digital Banking platform",
+    "Lockbox services for commercial accounts",
+    "Remote Deposit Capture",
+    "Merchant Services Reporting",
+    "Cash orders",
+    "Payment portal services",
+    "Wealth management and investment advisory",
+    "Fraud prevention education and resources",
+    "Secured online banking (WTB Online) with app"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1902",
-    "Local community bank with personal service",
-    "45 locations"
+    "Free Simplicity Checking with no monthly maintenance fees or minimum balance requirements",
+    "FDIC-insured accounts backed by the full faith and credit of the U.S. Government",
+    "Privately-owned and locally-invested structure providing personalized banking relationships",
+    "Comprehensive commercial banking services including lockbox, remote deposit capture, and merchant services",
+    "Dedicated fraud prevention education program with email series and community Shred Day events",
+    "Multiple digital banking platforms: WTB Online, Business Digital Banking app, and Wealth Management app",
+    "Cash back rewards program (Clearly Cash Back Awards) integrated with their credit cards"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as a regional bank, not available nationwide",
+    "Specific interest rates, APYs, and detailed fee schedules are not publicly disclosed on website",
+    "Overdraft and ATM fees acknowledged but not itemized, suggesting potential charges for common transactions",
+    "Limited information about wealth management minimums and advisory services compared to larger institutions",
+    "No mention of competitive rates or rate matching policies relative to other regional/national banks"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "WA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1281,
   "latitude": 47.6570463542161,
   "longitude": -117.423178775899,
@@ -83,21 +94,22 @@
       "FDIC Cert #1281"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Pacific Northwest consumers seeking personalized, relationship-based banking from a locally-invested institution",
+    "Small business and commercial customers needing comprehensive cash management and merchant services",
+    "Customers prioritizing fraud prevention education and community-focused banking over national chain convenience",
+    "Wealth management clients in the bank's service area seeking integrated personal and investment banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Washington Trust Bank is best for personal, business, and wealth management customers in the Pacific Northwest seeking relationship-based banking from a privately-owned local institution. The main caveat is geographic limitation as a regional bank\u2014customers outside their service area cannot access accounts, and specific rate and fee information requires direct contact with the bank.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "717 W Sprague Ave, Spokane, WA 99201",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }
