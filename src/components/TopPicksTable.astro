@@ -42,8 +42,11 @@ const sorted = lenders;
             <td class="py-4 px-4">
               <div class="flex items-center gap-3">
                 <div class={`shrink-0 w-10 h-10 rounded-lg border flex items-center justify-center overflow-hidden ${isVerified ? 'bg-amber-50 border-amber-200' : 'bg-bg-alt border-border'}`}>
-                  {lender.logo_url ? (
+                  {lender.logo_url && !lender.logo_url.includes('googleusercontent.com') ? (
                     <img src={lender.logo_url} alt={lender.name} class="w-7 h-7 object-contain" loading="lazy" />
+                  ) : lender.website_url ? (
+                    <img src={`https://icon.horse/icon/${new URL(lender.website_url).hostname}?size=large`} alt={lender.name} class="w-7 h-7 object-contain" loading="lazy" onerror={`this.style.display='none';this.nextElementSibling.style.display='flex'`} />
+                    <span class={`text-xs font-bold hidden items-center justify-center w-full h-full ${isVerified ? 'text-amber-700' : 'text-primary'}`}>{lender.name.charAt(0)}</span>
                   ) : (
                     <span class={`text-xs font-bold ${isVerified ? 'text-amber-700' : 'text-primary'}`}>{lender.name.charAt(0)}</span>
                   )}
