@@ -1,15 +1,15 @@
 {
   "name": "First National Bank",
   "slug": "first-national-bank-rotan",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Rotan, TX. $94M in assets. 1 office.",
-  "description_long": "First National Bank is a community bank located in Rotan, TX, established in 1997. The bank holds approximately $94M in total assets and $88M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank operating since 1907, offering deposit accounts, loans, debit cards, and internet banking to customers in the Rotan, TX area.",
+  "description_long": "First National Bank of Rotan was established in 1907 and has operated as a locally-owned community bank for over a century. The bank transitioned to current ownership in 1997 and maintains its commitment to serving customers and the local community. As an FDIC-insured institution, deposits are backed by the full faith and credit of the U.S. Government, providing depositors with standard federal protection up to applicable limits.\n\nThe bank offers a comprehensive range of deposit products including multiple checking account varieties (Regular Checking, NOW Checking, Club Accounts with family options, and Senior Citizens/Students accounts), savings accounts, Money Market Deposit Accounts (MMDA), and Certificates of Deposit available in terms ranging from 3 to 18 months. Beyond deposits, First National Bank provides loan products across unspecified categories, debit cards, Visa Money Cards, Visa Gift Cards, safety deposit boxes in five sizes, and digital conveniences including internet banking available 24/7 and direct deposit services.\n\nWhat distinguishes First National Bank of Rotan is its emphasis on personalized, community-focused banking. The institution actively encourages customers to visit in person to discuss account options with staff, suggesting a relationship-based approach rather than purely transactional banking. The bank also offers text alert services for debit card activity across major carriers and maintains a straightforward online presence focused on accessibility rather than complexity.\n\nAs a small community bank, First National Bank of Rotan serves a specific geographic market in rural Texas. The website provides limited detail about loan terms, rates, or comprehensive product specifications, which is typical for smaller regional institutions. Prospective customers should contact the bank directly for specific pricing and terms. The emphasis on local service and long-standing community presence may appeal to customers prioritizing relationship banking over digital-first services.",
   "logo_url": "",
   "website_url": "https://www.fnbrotan.com",
   "affiliate_url": "",
@@ -24,23 +24,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Regular Checking Accounts",
+    "NOW Checking Accounts",
+    "Club Accounts and Club Family Accounts",
+    "Senior Citizens and Students Accounts",
+    "Regular Savings Accounts",
+    "Money Market Deposit Accounts (MMDA)",
+    "Certificates of Deposit (3-18 month terms)",
+    "Personal and commercial loans",
+    "Debit Cards",
+    "Visa Money Cards and Visa Gift Cards",
+    "Safety Deposit Boxes (five sizes)",
+    "Internet Banking (24/7 access)",
+    "Direct Deposit",
+    "Instant Debit Card Text Alerts"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1997",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits with federal backing, protecting accounts up to standard limits",
+    "24/7 internet banking available online without branch visit requirements",
+    "Multiple deposit account types tailored to specific demographics (seniors, students, families)",
+    "CDs available in flexible terms from 3 months to 18 months",
+    "Instant debit card text alerts across major carriers (AT&T, Verizon, T-Mobile, Sprint, etc.)",
+    "Five sizes of safety deposit boxes for document and valuables storage",
+    "Long operational history since 1907 with current stable ownership since 1997",
+    "Direct deposit and Visa gift card options for convenience"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no information about interest rates, APYs, or loan terms, requiring in-person visits for pricing",
+    "Limited detail on loan products offered—no specification of types, amounts, or availability",
+    "Small community bank with geographic limitation to Rotan, TX area with no mention of expansion or national service",
+    "Website privacy notice warns against email submission of sensitive information, suggesting limited digital security confidence",
+    "No mention of mobile app, mobile banking, or modern digital features beyond basic internet banking"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +66,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34455,
   "latitude": 32.8526949849225,
   "longitude": -100.4670820108,
@@ -94,12 +108,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Rotan, TX residents seeking relationship-based community banking with FDIC protection",
+    "Savers interested in CDs with flexible 3-18 month terms from a stable, locally-owned institution",
+    "Seniors and students qualifying for specialized deposit account offerings",
+    "Customers prioritizing in-person service and personal consultation over digital-first banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First National Bank of Rotan is best suited for customers in the Rotan, Texas area seeking traditional community banking with federal FDIC protection and personal service. The primary caveat is that the bank provides minimal online information about rates, terms, and loan products, requiring direct contact or in-person visits for specific pricing—which may frustrate customers accustomed to transparent digital banking.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +122,11 @@
   ],
   "phone": "",
   "address": "118 N Garfield Ave, Rotan, TX 79546",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Intracoastal Bank",
   "slug": "intracoastal-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Palm Coast, FL. $551M in assets. 3 offices.",
-  "description_long": "Intracoastal Bank is a community bank located in Palm Coast, FL, established in 2008. The bank holds approximately $551M in total assets and $472M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank serving Flagler and Volusia counties since 2008, offering personal and business banking with a focus on local relationship building and community investment.",
+  "description_long": "Intracoastal Bank is a community-focused financial institution established in 2008, serving the Flagler and Volusia County areas in Florida. The bank positions itself as a relationship-driven alternative to larger national banks, emphasizing personal connections and local knowledge over impersonal banking models.\n\nThe bank offers both personal and business banking services, with dual login portals for each customer type. Services include personal deposits, business accounts, and community lending products designed to support local entrepreneurs and residents. Their marketing emphasizes how customer deposits directly fund loans to local businesses, creating a circular investment in the community.\n\nIntracoastal Bank distinguishes itself through explicit commitment to community investment and local decision-making. Rather than competing on financial products or rates, the bank's differentiation lies in their stated philosophy of treating customers as neighbors rather than account numbers, with testimonials from local businesses (Morello Comfort Specialists, Steve's Famous Diner, Cypress Point Dentistry) praising their partnership approach and community support during \"good times and bad.\"\n\nThe bank operates multiple physical locations in the Flagler and Volusia area and maintains online and mobile banking infrastructure (with secure contact forms and fraud reporting). However, the website provides limited transparency on specific products, rates, fees, or competitive offerings. The company appears small-to-mid-sized based on service availability and does not advertise premium products like investment services or wealth management.",
   "logo_url": "",
   "website_url": "https://www.intracoastal.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Business and personal lending products",
+    "Community development lending and financing",
+    "Online banking platform",
+    "Mobile banking access",
+    "Debit card services with fraud reporting",
+    "Secure online contact and messaging",
+    "In-person branch banking at multiple locations",
+    "Local business advisory and partnership support"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2008",
-    "Local community bank with personal service",
-    "3 locations"
+    "Community-focused lending philosophy with stated commitment to investing deposits back into local businesses",
+    "Multiple physical branch locations in Flagler and Volusia counties for in-person service",
+    "Dual personal and business banking platforms with separate login portals",
+    "Online banking capabilities with secure contact forms for sensitive communications",
+    "Established institution operating since 2008 with demonstrated longevity",
+    "Debit card fraud reporting and responsive customer service emphasized on website",
+    "Accessibility-optimized website with AudioEye support for disabled customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks pricing transparency—no rates, fees, or APY information disclosed for any products",
+    "Limited geographic footprint restricted to Flagler and Volusia counties only; not accessible to most U.S. customers",
+    "Minimal product detail on website; unclear what specific accounts, loan types, or investment options are available",
+    "No mention of FDIC insurance, regulatory certifications, or compliance information on public site",
+    "Small bank size may limit product sophistication and competitive rates compared to larger regional or national competitors"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "FL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58692,
   "latitude": 29.5541419971521,
   "longitude": -81.233467003905,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs in the Flagler and Volusia County region seeking personalized lending relationships",
+    "Residents of coastal Florida (Palm Coast, Daytona Beach, Port Orange) who value local decision-making and community reinvestment",
+    "Customers who prioritize relationship banking and face-to-face service over digital-only banking models",
+    "Local business operators needing flexible, relationship-based financing during business growth or challenging periods"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Intracoastal Bank is best for small business owners and local residents in Flagler and Volusia counties seeking relationship-based community banking rather than product features or competitive rates. The primary caveat is severe geographic limitation—this bank is only accessible to customers in coastal Florida, making it unavailable to the vast majority of consumers, and the website provides almost no transparency on actual rates, fees, or product specifications.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1290 Palm Coast Pkwy Nw, Palm Coast, FL 32137",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

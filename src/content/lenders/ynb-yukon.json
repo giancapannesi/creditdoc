@@ -1,14 +1,14 @@
 {
   "name": "Ynb",
   "slug": "ynb-yukon",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Yukon, OK. $249M in assets. 5 offices.",
-  "description_long": "Ynb is a community bank located in Yukon, OK, established in 1912. The bank holds approximately $249M in total assets and $227M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Yukon National Bank (YNB) is a community bank founded in 1912 serving Yukon, Mustang, and Oklahoma City metro areas with checking accounts, loans, and financial services.",
+  "description_long": "Yukon National Bank was established on July 12, 1912 by John F. Kroutil, whose family immigrated from Czechoslovakia in 1881. The bank's origins are tied to the Yukon Mill and Grain Company, which Mr. Kroutil founded to support local farmers and grain operations in the Oklahoma Territory. During World War I, the Great Depression, and World War II, YNB grew alongside the Mill, which became one of the most modern and largest mills in the American Southwest, producing government flour for armed forces and supporting the prosperous Czech and German farming communities in Canadian Valley.\n\nToday, YNB operates as a full-service community bank with five physical branch locations and nine ATMs serving Yukon, Mustang, and the greater Oklahoma City metropolitan area. The bank offers personal checking and savings accounts, business accounts, consumer and commercial loans (including auto, boat, RV, home improvement, and vacation financing), retirement planning services, and safe deposit boxes. Customers can access accounts through online banking and mobile platforms, with customer service available Monday-Friday, 9:00am-4:30pm at (405) 350-1335.\n\nWhat distinguishes YNB is its deep community roots and long operational history spanning over 110 years. The bank maintains John F. Kroutil's original mission to be \"friendly to all people\" and willing to fund farm equipment, home purchases, vehicles, and livestock. The company emphasizes security awareness, warning customers against unsecured communication methods and phishing attempts, and proactively monitors weather conditions to maintain service availability.\n\nYNB is a traditional regional bank without apparent online-only options or national reach. The bank's website contains limited details about specific loan terms, interest rates, account fees, or product comparisons. As a small community bank, YNB may have less competitive pricing or fewer product options compared to larger national institutions. There is no mention of FDIC insurance details, minimum balance requirements, or comprehensive fee schedules on their website.",
   "logo_url": "",
   "website_url": "https://www.ynbok.com",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Auto loans",
+    "Boat loans",
+    "RV loans",
+    "Home improvement loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Commercial loans",
+    "Retirement planning",
+    "Safe deposit boxes",
+    "Online banking",
+    "ATM access (9 locations)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1912",
-    "Local community bank with personal service",
-    "5 locations"
+    "Over 110 years of operating history with deep roots in Yukon, Oklahoma community",
+    "Five physical branch locations plus nine ATMs for in-person and cash access convenience",
+    "Full suite of services including personal/business accounts, loans, retirement planning, and safe deposit boxes",
+    "Customer service available Monday-Friday, 9:00am-4:30pm with dedicated phone line (405) 350-1335",
+    "Proactive security messaging and customer education about phishing and unsecured communication",
+    "Specialized loan programs for auto, boat, RV, home improvement, and vacation financing",
+    "Online banking enrollment available for remote account access"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to three-county service area (Yukon, Mustang, Oklahoma City metro) with no national presence",
+    "Website lacks specific details on interest rates, APYs, loan terms, account fees, or product comparisons",
+    "No mention of FDIC insurance coverage limits, minimum balance requirements, or fee schedules",
+    "Small community bank may have less competitive rates or fewer product options than national competitors",
+    "Minimal digital banking information beyond basic online login and mobile mentions"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4235,
   "latitude": 35.5070570136919,
   "longitude": -97.7493410174499,
@@ -93,12 +106,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Yukon, Mustang, and Oklahoma City metro area residents seeking personal banking relationships",
+    "Local business owners needing commercial accounts and business lending relationships",
+    "Customers prioritizing in-person branch access and community bank experience",
+    "Farmers and agricultural businesses with equipment and operational financing needs"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "YNB is best for residents of Yukon, Mustang, or surrounding Oklahoma City areas seeking traditional community banking with in-person relationships, loan flexibility, and 110+ years of local history. The main caveat is that the bank's website provides minimal transparency on rates, fees, and terms, and its small size may mean less competitive pricing than national banks\u2014requiring direct contact to compare offerings.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,10 @@
   ],
   "phone": "",
   "address": "401 Elm Ave, Yukon, OK 73099",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }

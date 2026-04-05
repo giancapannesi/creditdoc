@@ -1,14 +1,14 @@
 {
   "name": "Firstoak Bank",
   "slug": "firstoak-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Independence, KS. $241M in assets. 5 offices.",
-  "description_long": "Firstoak Bank is a community bank located in Independence, KS, established in 1881. The bank holds approximately $241M in total assets and $213M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FirstOak Bank is a community bank offering personal and business banking services, including checking, savings, credit cards, home loans, and business financing through online and mobile platforms.",
+  "description_long": "FirstOak Bank is a community-focused banking institution that has operated for over 20 years, as noted in the president's letter on their website. The bank has experienced significant growth in both its customer base and technological capabilities during this period. Their stated mission is to develop and sustain a sound, profitable institution that generates reasonable returns for stockholders while serving the financial needs of customers and their communities.\n\nFirstOak Bank offers a comprehensive range of banking products and services. On the personal side, they provide customized checking and savings accounts (including interest-bearing options and online-only accounts), certificates of deposit (CDs), money market accounts, and Individual Retirement Accounts (IRAs). For borrowing, they offer competitive home loans with low closing costs, three different credit card options with cash back rewards on platinum cards, and personal lending. Their business division provides business checking and savings accounts, merchant services, and business loans for purposes including equipment purchases, inventory, debt payoff, marketing, and payroll support.\n\nFirstOak differentiates itself as a community bank with a lending team that claims to expedite decisions and provide personalized loan products. They emphasize 24/7 access through mobile app and website banking, online account opening, and free calculators for mortgage estimation. The bank maintains physical locations and offers both phone banking and ATM/debit services. Their website highlights competitive rates and what they describe as \"industry low closing costs\" on mortgages.\n\nWhile FirstOak Bank presents itself professionally with a full suite of banking services, the website lacks specific details about interest rates, fee structures, FDIC insurance coverage, or regulatory information. As a regional community bank, their service area may be limited geographically. The website content is primarily marketing-focused rather than providing detailed product specifications or transparent pricing information that would be expected from a major financial institution.",
   "logo_url": "",
   "website_url": "https://www.firstoakbank.com",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (standard and online-only options)",
+    "Personal savings accounts (including interest-bearing accounts)",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Money market accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Home loans and mortgages with mortgage calculators",
+    "Credit cards (three options with cash back rewards on platinum tier)",
+    "Business loans (equipment, inventory, debt payoff, marketing, payroll)",
+    "Online and mobile banking platforms",
+    "Merchant services",
+    "ATM and debit card services",
+    "Phone banking"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1881",
-    "Local community bank with personal service",
-    "5 locations"
+    "Offers 24/7 online and mobile banking access from any internet-connected device",
+    "Provides competitive home loan rates with advertised low closing costs",
+    "Customized checking and savings account options to fit different customer lifestyles",
+    "Cash back rewards available on platinum credit cards",
+    "Free mortgage calculators to help estimate payments, PMI, insurance, and taxes",
+    "Business loan products specifically designed for multiple use cases (equipment, inventory, marketing, payroll)",
+    "Community bank model with experienced lending team claimed to expedite decisions"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not disclose specific APR rates, interest rates, or fee schedules for any products",
+    "Limited information about service area coverage and physical branch locations",
+    "No transparent information about FDIC insurance coverage or regulatory compliance details",
+    "Marketing-heavy website content lacks detailed product specifications and terms",
+    "No information provided about credit requirements or approval criteria for loans and credit cards"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4660,
   "latitude": 37.2238050202019,
   "longitude": -95.7071010375894,
@@ -93,12 +106,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking comprehensive banking services (checking, savings, lending) in one institution",
+    "Small to medium business owners needing business checking, loans, and merchant services",
+    "Homebuyers looking for personalized mortgage lending with competitive rates and low closing costs",
+    "Customers who prefer online and mobile banking access over in-person branch visits"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "FirstOak Bank is best suited for customers seeking a full-service community bank for personal or business banking needs who value local relationships and online accessibility. The main caveat is that the bank's website provides minimal transparency on specific rates, fees, and terms—requiring direct contact with the bank before committing to any product.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   ],
   "phone": "",
   "address": "113 N Penn Ave, Independence, KS 67301",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

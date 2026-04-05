@@ -1,7 +1,7 @@
 {
   "name": "Winchester Co-Operative Bank",
   "slug": "winchester-co-operative-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
@@ -9,8 +9,8 @@
     "mutual-bank",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Winchester, MA. $907M in assets. 2 offices.",
-  "description_long": "Winchester Co-Operative Bank is a community bank located in Winchester, MA, established in 1893. The bank holds approximately $907M in total assets and $737M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "State-chartered cooperative bank founded in 1893, serving Winchester, Woburn, and surrounding Massachusetts communities with personal and business banking products.",
+  "description_long": "Winchester Co-operative Bank was established in 1893 as a mutually owned, state-chartered cooperative institution. Operating for over 130 years, the bank has built its reputation on serving the financial needs of individuals, families, and businesses in the Winchester, Woburn, and surrounding Massachusetts communities. As a cooperative structure, the bank is member-owned rather than shareholder-owned, which aligns its incentives with customer interests rather than external investors.\n\nThe bank offers a comprehensive suite of personal banking services including checking and savings accounts, term certificates, and individual retirement accounts (IRAs). On the lending side, they provide mortgage services (including first-time homebuyer programs), home equity lines and loans, and auto and personal loans. For business customers, Winchester Co-op offers business checking and savings accounts, commercial real Estate lending, and business debit cards. All customers have access to online banking, mobile banking, and Zelle money transfer services.\n\nAs a state-chartered cooperative bank, Winchester Co-op distinguishes itself through dual deposit insurance protection: FDIC insurance plus membership in the Depositors Insurance Fund (DIF), which insures deposits exceeding standard FDIC limits. The cooperative structure means profits are returned to members rather than external shareholders. The bank maintains a physical branch presence at 19 Church Street in Winchester, Massachusetts, combined with digital banking options for account management and service access.\n\nThis is a traditional, community-focused regional bank with limited geographic reach (primarily Massachusetts) and no indication of specialized lending programs, competitive rates compared to national institutions, or fintech innovation. Customers should verify current deposit rates and mortgage rates on the website, as these are not disclosed in the profile. The bank's strength lies in local presence and cooperative structure rather than breadth of products or competitive pricing.",
   "logo_url": "",
   "website_url": "https://www.wcbonline.com",
   "affiliate_url": "",
@@ -25,23 +25,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Term certificates (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Mortgage lending and refinancing",
+    "First-time homebuyer mortgage programs",
+    "Home equity lines and loans",
+    "Auto and personal loans",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Commercial real estate lending",
+    "Online and mobile banking with Zelle money transfer"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1893",
-    "Local community bank with personal service",
-    "2 locations"
+    "Dual deposit insurance protection: FDIC coverage plus DIF insurance for amounts exceeding FDIC limits",
+    "Cooperative ownership structure aligns bank incentives with member interests rather than external shareholders",
+    "Established institution with 130+ years of operational history and local community presence",
+    "Comprehensive mortgage lending including first-time homebuyer programs",
+    "Digital access through online banking, mobile app, and Zelle money transfer services",
+    "State-chartered bank with regulated oversight and transparent NMLS licensing",
+    "Active community involvement documented through partnerships and local fundraising support"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area restricted to Winchester, Woburn, and surrounding communities",
+    "Website does not display current deposit rates, mortgage rates, or loan terms for comparison",
+    "No evidence of specialized products, competitive rate promotions, or digital-first features",
+    "Single physical branch location may limit accessibility compared to regional or national banks",
+    "No information on account fees, minimum balance requirements, or overdraft policies visible on homepage"
   ],
   "contact": {
     "phone": "",
@@ -53,7 +64,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 27238,
   "latitude": 42.4529641971239,
   "longitude": -71.138249678136,
@@ -95,12 +106,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Residents of Winchester, Woburn, and surrounding Massachusetts communities seeking local banking relationships",
+    "Homebuyers in the service area looking for personalized mortgage guidance and first-time buyer programs",
+    "Small business owners in the region needing local commercial banking and relationship-based lending",
+    "Depositors prioritizing cooperative ownership structure and dual insurance protection over online convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Winchester Co-operative Bank is best suited for individuals and businesses in its Massachusetts service area who value local community banking relationships, cooperative ownership structure, and dual deposit insurance protection. The main caveat is the bank's limited geographic footprint and lack of transparent rate information online—interested customers must contact the bank directly or visit the branch to compare rates and fees against alternatives.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +120,11 @@
   ],
   "phone": "",
   "address": "19 Church St, Winchester, MA 01890",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

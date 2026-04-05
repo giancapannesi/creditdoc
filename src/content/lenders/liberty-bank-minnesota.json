@@ -1,15 +1,15 @@
 {
   "name": "Liberty Bank Minnesota",
   "slug": "liberty-bank-minnesota",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Saint Cloud, MN. $284M in assets. 6 offices.",
-  "description_long": "Liberty Bank Minnesota is a community bank located in Saint Cloud, MN, established in 1987. The bank holds approximately $284M in total assets and $255M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Liberty Bank Minnesota is a regional bank serving central Minnesota, specializing in home loans, consumer loans, and business banking services with online and mobile access.",
+  "description_long": "Liberty Bank Minnesota positions itself as a community-focused financial institution serving central Minnesota with a primary emphasis on home lending. The bank has established a local presence by marketing itself specifically as 'Central Minnesota's Home Loan Lender,' indicating a regional rather than national scope of operations. The institution appears to have been operating long enough to have developed multiple service lines and customer bases, though specific founding date or asset size information is not available from their website.\n\nThe bank offers a diverse range of financial products across three main customer segments: personal banking, business banking, and mortgage services. For personal customers, they provide checking and savings accounts, home loans, home equity loans, consumer loans, ATM access, check ordering, and credit card products. Business customers can access dedicated business banking services and business loan products through a separate login portal. The mortgage division operates as a distinct service line, allowing customers to apply for home loans online. Additional services include online and mobile banking platforms, gift cards, and financial security resources.\n\nLiberty Bank Minnesota distinguishes itself through its localized market focus and multi-channel service delivery. The institution has invested in digital banking infrastructure, offering both online banking and mobile banking platforms. They maintain physical ATM networks and provide educational content on financial security. The bank also engages in community outreach through newsletters, special events, and promotional communications to customers.\n\nAs a regional bank, Liberty Bank Minnesota's primary limitation is geographic scope—they appear focused on central Minnesota rather than nationwide availability. The website provides limited detail about specific loan terms, interest rates, credit requirements, or competitive positioning. Website functionality issues noted during review (including error messages on certain login pages) suggest potential technical infrastructure challenges. For consumers outside central Minnesota, national or online-only banks may offer more convenient options.",
   "logo_url": "",
   "website_url": "https://www.libertybankmn.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Home loan origination and mortgage services",
+    "Home equity loans",
+    "Consumer loans",
+    "Personal checking and savings accounts",
+    "Business banking accounts",
+    "Business loans",
+    "Online banking portal",
+    "Mobile banking application",
+    "ATM network access",
+    "Check ordering services",
+    "Credit card products",
+    "Gift cards"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1987",
-    "Local community bank with personal service",
-    "6 locations"
+    "Dedicated home lending focus with specialized mortgage application process",
+    "Comprehensive personal banking services including checking, savings, loans, and ATM access",
+    "Separate business banking portal and loan products for commercial customers",
+    "Mobile banking app available for account management on the go",
+    "Online loan application for mortgages and consumer loans",
+    "Community engagement through newsletters, events, and local marketing",
+    "Financial security education resources and online safety tips"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability restricted to central Minnesota region",
+    "Website contains limited transparency on interest rates, APRs, or loan terms",
+    "Technical issues observed on banking portal login pages (error messages displayed)",
+    "Minimal information about credit requirements or borrowing eligibility criteria",
+    "No visible information about deposit insurance coverage or regulatory status details"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 26891,
   "latitude": 45.548105996823,
   "longitude": -94.1926410022157,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Central Minnesota residents seeking local relationship banking for home purchases",
+    "Small business owners in the region needing dedicated business banking services",
+    "Customers preferring community bank service over large national institutions",
+    "Home buyers looking for a lender with local market expertise"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Liberty Bank Minnesota is best suited for central Minnesota residents and small business owners who value community banking relationships and need comprehensive services from a regional institution with home lending expertise. The primary caveat is geographic limitation—the bank only serves central Minnesota, making it inaccessible for customers outside this region.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "2842 2Nd St S, Saint Cloud, MN 56301",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

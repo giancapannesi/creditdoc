@@ -1,15 +1,15 @@
 {
   "name": "Sandhills State Bank",
   "slug": "sandhills-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in North Platte, NE. $393M in assets. 10 offices.",
-  "description_long": "Sandhills State Bank is a community bank located in North Platte, NE, established in 1902. The bank holds approximately $393M in total assets and $357M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank serving the Nebraska Sandhills region with 10 locations, offering agricultural, business, and personal banking services.",
+  "description_long": "Sandhills State Bank is a community-focused FDIC-insured bank headquartered in the Sandhills region of Nebraska, with 10 branches across rural communities including Bassett, North Platte, Ogallala, Grant, Wauneta, Valentine, Harrison, Alliance, Arthur, and Hyannis. The bank has built its business model around serving the unique financial needs of agricultural operations, small businesses, and individuals in sparsely populated areas where larger national banks have limited presence.\n\nThe bank offers comprehensive deposit solutions including checking accounts, savings, money market accounts, CDs, HSAs, and IRAs across all three customer segments (agriculture, business, personal). On the lending side, they provide agricultural operating loans, livestock and input financing, equipment loans and leasing, commercial and farm real estate mortgages, Farm Service Agency loan programs, home loans, auto loans, and personal loans. Their digital capabilities include online banking, mobile banking with mobile deposit, bill pay, Zelle transfers, text/email alerts, and merchant services including remote deposit capture and ACH payroll processing.\n\nWhat distinguishes Sandhills State Bank is their explicit focus on agricultural lending and rural community banking—their website leads with agriculture-specific products and maintains detailed community links for each branch location. They position themselves as \"The Most Committed Brand in Banking\" with messaging centered on deep community ties and understanding of local agricultural and small business needs. The bank offers both drive-thru and lobby services at most locations, with extended hours in some branches, and maintains multiple contact numbers across their service territory.\n\nThe bank operates in a niche market with limited geographic reach, which means access is restricted to their 10-branch service area in rural Nebraska. While they offer modern digital tools, their competitive position depends heavily on local relationships and agricultural expertise rather than product innovation or pricing advantages versus larger regional or national banks.",
   "logo_url": "",
   "website_url": "https://sandhills.bank",
   "affiliate_url": "",
@@ -24,23 +24,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking accounts (personal, business, agricultural)",
+    "Savings accounts and money market accounts",
+    "CDs, HSAs, and IRA accounts",
+    "Agricultural operating loans and lines of credit",
+    "Livestock and input financing",
+    "Equipment loans and equipment leasing",
+    "Farm Service Agency loan programs",
+    "Commercial and farm real estate mortgages",
+    "Home loans, auto loans, and personal loans",
+    "Online banking and mobile banking with mobile deposit",
+    "Bill pay, Zelle transfers, and text/email alerts",
+    "Business merchant services, ACH payroll, and remote deposit capture",
+    "Positive pay check fraud protection",
+    "Debit and credit cards",
+    "Private banking services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1902",
-    "Local community bank with personal service",
-    "10 locations"
+    "FDIC-insured deposits with full faith and credit backing",
+    "Specialized agricultural lending programs including livestock, equipment, and Farm Service Agency loans",
+    "10 physical branch locations across rural Nebraska communities with drive-thru and lobby services",
+    "Modern digital banking including mobile app, mobile deposit, bill pay, and Zelle transfers",
+    "Business-specific services including merchant services, ACH payroll, remote deposit capture, and positive pay fraud protection",
+    "Flexible account options across personal, business, and agricultural segments",
+    "Strong community integration with local links and resources for each branch location"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability—only serves 10 branches in rural Nebraska, inaccessible to customers outside service area",
+    "Smaller institution may lack some product features or competitive rates compared to regional/national banks",
+    "Website does not display current rates, APYs, or loan terms—customers must contact branches for pricing information",
+    "Restricted service hours at most locations (typically 8am-4pm or 9am-3pm), limiting accessibility for working customers",
+    "Limited information about minimum balance requirements, fees, or account terms on public website"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +66,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13892,
   "latitude": 41.1321959882659,
   "longitude": -100.762490034458,
@@ -94,12 +108,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural operators and farmers needing specialized farm lending, livestock financing, and equipment loans",
+    "Small businesses in rural Nebraska communities seeking personalized service and local decision-making",
+    "Residents of the 10-branch service area (Bassett, North Platte, Ogallala, Grant, Wauneta, Valentine, Harrison, Alliance, Arthur, Hyannis) seeking community banking relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Sandhills State Bank is best for agricultural operations, small businesses, and individuals living in or near their 10-branch Nebraska service territory who value personalized community banking relationships and specialized farm lending. The main caveat is geographic limitation—the bank is only accessible to customers in rural Nebraska, and those outside their service area have no access to their products or services.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,11 @@
   ],
   "phone": "",
   "address": "203 S Dewey St, North Platte, NE 69101",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }
