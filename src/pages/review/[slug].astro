@@ -6,6 +6,7 @@ import DiagnosisCard from '../../components/DiagnosisCard.astro';
 import LenderCard from '../../components/LenderCard.astro';
 import TrustBadge from '../../components/TrustBadge.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
+import { linkifyDescription } from '../../utils/inline-linker';
 import { getAllLenders, getLenderBySlug, formatPrice, getBbbClass, generateDiagnosis, getComparisons, getCategories, getWellnessGuidesByCategory, getGlossaryTermsForContext } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
@@ -101,6 +102,11 @@ const glossaryContextMap: Record<string, string[]> = {
 };
 const glossaryContexts = glossaryContextMap[lender.category] || [];
 const glossaryTerms = getGlossaryTermsForContext(glossaryContexts);
+
+// Auto-link glossary terms and money keywords in description text
+const linkedParagraphs = lender.description_long
+  ? linkifyDescription(lender.description_long, glossaryTerms, lender.slug)
+  : [];
 
 const comparisons = getComparisons().filter(
   c => c.lender_a === lender.slug || c.lender_b === lender.slug
@@ -445,9 +451,14 @@ const jsonLd = [
         <div class="glass-card p-6">
           <h2 class="text-xl font-bold text-text mb-4">{lender.name} Review</h2>
           <div class="prose prose-sm max-w-none text-muted leading-relaxed">
-            {lender.description_long.split('\n\n').map(paragraph => (
-              <p class="mb-4">{paragraph}</p>
-            ))}
+            {linkedParagraphs.length > 0
+              ? linkedParagraphs.map(html => (
+                  <p class="mb-4" set:html={html} />
+                ))
+              : lender.description_long.split('\n\n').map(paragraph => (
+                  <p class="mb-4">{paragraph}</p>
+                ))
+            }
           </div>
         </div>
 
