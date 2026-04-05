@@ -1,14 +1,14 @@
 {
   "name": "First State Bank",
   "slug": "first-state-bank-mendota",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Mendota, IL. $1593M in assets. 20 offices.",
-  "description_long": "First State Bank is a community bank located in Mendota, IL, established in 1940. The bank holds approximately $1593M in total assets and $1305M in deposits. It operates 20 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank serving Northwestern and Central Illinois with personal/business checking, savings, mortgages, loans, and wealth management services.",
+  "description_long": "First State Bank is a regional bank operating in Northwestern and Central Illinois, offering comprehensive financial services to both personal and business customers. The bank emphasizes local presence with multiple branch locations and positions itself as a community-focused institution backed by FDIC insurance and the full faith and credit of the U.S. Government.\n\nThe bank provides a full suite of deposit products including personal and business checking accounts (FSBPremier, FSBStudent, FSBChecking, FSBPlus), savings accounts, money market accounts, certificates of deposit, and individual retirement accounts. On the lending side, First State Bank offers personal loans through Quilo, home mortgage loans, home equity lines of credit, auto loans, and business loans including commercial real estate, term loans, and agriculture/farm machinery financing. They also issue both personal and business credit cards and provide insurance products including home, auto, life, health, commercial, and farm insurance.\n\nFirst State Bank distinguishes itself through specialized offerings like the VISTA Club for customers 50+, Treasury Management services for businesses, IntraFi Network Deposits for expanded FDIC coverage, and mobile/online banking platforms. The bank highlights customer testimonials emphasizing their support for small business entrepreneurs and their streamlined financing processes. Their breadth of services\u2014from basic checking to agricultural lending to wealth management\u2014suggests positioning as a full-service regional bank.\n\nThe bank's primary limitation is geographic restriction to Northwestern and Central Illinois, making it inaccessible to customers outside this service area. While they offer extensive services, the website provides limited specific information about rates, fees, loan terms, or competitive advantages beyond general statements about professionalism and customer service.",
   "logo_url": "",
   "website_url": "https://WWW.FIRSTSTATEBANK.BIZ",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal Checking Accounts (FSBPremier, FSBStudent, FSBChecking, FSBPlus)",
+    "Personal Savings Accounts and Money Market Accounts",
+    "Certificates of Deposit (CDs) and IntraFi Network Deposits (CDARS and Insured Cash Sweep)",
+    "Individual Retirement Accounts (IRAs) and Health Savings Accounts (HSAs)",
+    "Home Mortgage Loans and Home Equity Lines of Credit (HELOC)",
+    "Personal Loans and Auto Loans (including Quilo lending platform)",
+    "Business Checking and Business Savings with Account Analysis services",
+    "Commercial Real Estate Loans and Business Term Loans",
+    "Agriculture Loans and Farm Machinery Loans",
+    "Personal and Business Credit Cards",
+    "Treasury Management including Online Banking, ACH Services, Check Positive Pay, and Remote Deposit Capture",
+    "Home, Auto, Life, Health, Commercial, and Farm Insurance products"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1940",
-    "Local community bank with personal service",
-    "20 locations"
+    "FDIC-insured deposits with full faith and credit of U.S. Government backing",
+    "Specialized VISTA Club membership for customers 50+ with travel programs",
+    "IntraFi Network Deposits (CDARS and Insured Cash Sweep) for expanded deposit protection beyond standard FDIC limits",
+    "Comprehensive agricultural lending products including Farm Machinery Loans and Agriculture Loans",
+    "24/7 banking availability through Online Banking and Mobile App even during branch closures",
+    "Multiple specialized checking accounts designed for different customer needs (Student, Premier, Plus)",
+    "Integrated insurance services including home, auto, life, health, commercial, and farm coverage"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to Northwestern and Central Illinois only\u2014no service for customers outside this region",
+    "Website provides minimal transparency on specific APY rates, APR rates, or fee structures (must contact bank directly)",
+    "Limited information about loan approval times, credit requirements, or specific loan amount ranges beyond personal loans"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15752,
   "latitude": 41.5481273192558,
   "longitude": -89.1185456874099,
@@ -93,12 +102,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs in Northwestern and Central Illinois seeking comprehensive lending and treasury management",
+    "Farmers and agricultural operators needing specialized farm and machinery financing",
+    "Customers 50+ seeking community bank relationships with specialized products like VISTA Club"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First State Bank is best for individuals and businesses located in Northwestern and Central Illinois seeking a full-service regional bank with FDIC insurance, community focus, and specialized products like agricultural lending and senior programs. Primary caveat: geographic limitation restricts access to customers only in Northwestern and Central Illinois, and the website lacks transparent rate and fee information requiring direct contact for pricing details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +115,11 @@
   ],
   "phone": "",
   "address": "706 Washington St, Mendota, IL 61342",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

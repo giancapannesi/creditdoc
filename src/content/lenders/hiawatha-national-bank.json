@@ -1,14 +1,14 @@
 {
   "name": "Hiawatha National Bank",
   "slug": "hiawatha-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Hager City, WI. $756M in assets. 7 offices.",
-  "description_long": "Hiawatha National Bank is a community bank located in Hager City, WI, established in 1917. The bank holds approximately $756M in total assets and $580M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering personal and business checking, savings, mortgages, and digital banking services across multiple Midwest locations.",
+  "description_long": "Hiawatha National Bank (HNB) is a traditional community bank operating in the Midwest with physical branch locations in Hager City, Glenwood City, Maiden Rock, and Hudson, Wisconsin. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing deposit protection up to federal limits.\n\nThe bank offers comprehensive personal banking services including checking and savings accounts, debit/ATM cards with control features, direct deposit, mobile and internet banking, bill pay (H-Pay), and mortgage products for purchase, refinancing, and construction. For business customers, HNB provides cash management tools, remote deposit capabilities, night drop services with locked bags, and business checking accounts. All customers have access to ATM networks with refund programs, mobile deposit via smartphone, and a 4:00 PM cutoff for same-day processing eligibility.\n\nHiawatha National Bank distinguishes itself through personalized service, assigning every client a personal banker as their primary contact. The bank emphasizes customer security with proactive fraud alerts (including warnings about Nacha scam calls), debit card control applications allowing real-time transaction monitoring and merchant-specific restrictions, and 24/7 card support. Safe deposit boxes are available at select locations for document and valuables storage.\n\nAs a traditional community bank, HNB serves customers seeking local relationship banking with FDIC protection and digital convenience. However, the bank operates only in Wisconsin with limited branch locations, and the website provides minimal information about interest rates, account minimums, fees, or competitive product terms\u2014typical limitations for community banks with smaller marketing budgets.",
   "logo_url": "",
   "website_url": "https://www.hnbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business checking accounts with cash management",
+    "Mortgage loans (purchase, refinance, construction)",
+    "Mobile banking app with mobile deposit",
+    "Internet banking and online account access",
+    "Debit/VISA cards with Card Control app",
+    "ATM access with refund program",
+    "Direct deposit (payroll, Social Security, pensions)",
+    "Bill pay (H-Pay)",
+    "Remote deposit for businesses",
+    "Night drop service with locked bags",
+    "Safe deposit boxes"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1917",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits with full federal backing",
+    "Personalized banking with assigned personal banker for each client",
+    "ATM refund program allowing fee-free cash access at any ATM",
+    "Debit Card Control app enables real-time transaction alerts and merchant-specific spending limits",
+    "Mobile deposit and remote deposit capabilities for both personal and business customers",
+    "4:00 PM cutoff time for next-business-day fund availability on deposits",
+    "Night drop service with locked bags available for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Wisconsin (four known branch locations)",
+    "Website lacks transparent information on interest rates, APYs, and fee structures",
+    "No mention of loan products beyond mortgages for personal customers",
+    "Minimal digital innovation marketing compared to neobanks and larger regional competitors",
+    "Limited online account opening or enrollment process information visible on website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13058,
   "latitude": 44.596373999769,
   "longitude": -92.5182730297177,
@@ -93,12 +104,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Wisconsin residents seeking FDIC-insured community banking with personalized service",
+    "Small business owners needing cash management, remote deposit, and local relationship banking",
+    "Customers prioritizing fraud protection and real-time debit card control features"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Hiawatha National Bank is best for Wisconsin residents and small business owners seeking traditional community banking with FDIC insurance, personalized service, and strong fraud protection features. The main caveat is geographic limitation to four Wisconsin locations and lack of transparent pricing information on the website, making it essential for prospective customers to contact the bank directly at (888) 460-8723 or clientservices@hnbank.com for specific rates and fees.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "N1555 770Th St, Hager City, WI 54014",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Blue Mountain",
   "slug": "blue-mountain",
-  "category": "payday-alternatives",
+  "category": "atm",
   "subcategories": [
     "credit-union",
     "fdic-equivalent",
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "State-Chartered Credit Union in , . Low-income designated. NCUA insured. 1 location.",
-  "description_long": "Blue Mountain is a state-chartered credit union serving members in , , established in 1959. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) — small, affordable loans designed to replace predatory payday lending. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "ERROR: Blue Mountain is a ski resort in Pennsylvania, not a financial services company. The categorization as 'payday-alternatives' is incorrect.",
+  "description_long": "Blue Mountain Resort is a winter sports and recreational facility located in Pennsylvania that operates as a ski resort, snowboarding park, and tubing venue. The company is not a financial services provider and does not offer payday loans, payday alternatives, credit products, or any consumer finance services. Based on the website content provided, Blue Mountain operates seasonal skiing and snowboarding during winter months, offers snow tubing experiences, runs a bike park during summer, and provides on-site dining and event facilities. The resort generates revenue from lift ticket sales, season passes, bike park passes, food and beverage operations, and event venue rentals for weddings and corporate functions. There is no factual basis for categorizing this company within any consumer finance category, as it provides recreational and hospitality services exclusively. This appears to be a data entry error where a ski resort was incorrectly added to a consumer finance database.",
   "logo_url": "",
   "website_url": "https://www.skibluemt.com/",
   "affiliate_url": "",
@@ -24,25 +24,31 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)",
-    "Payday Alternative Loans (PALs)"
+    "Ski lift tickets and day passes",
+    "Season passes for skiing/snowboarding",
+    "Snow tubing experiences",
+    "Bike park day passes and season passes",
+    "Summer Adventure Camp for children ages 5-15",
+    "Slopeside Pub & Grill restaurant and bar",
+    "Wedding venue and ceremony site rental",
+    "Corporate meeting and team building event spaces",
+    "Vista Ballroom event hosting",
+    "Easter brunch and dinner buffets",
+    "Mother's Day buffet events",
+    "Snowboard and ski lessons (implied)"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1959",
-    "Member-owned cooperative",
-    "Low-income designated — may offer Payday Alternative Loans (PALs)"
+    "Operates year-round recreational activities (skiing/snowboarding in winter, bike park in summer)",
+    "Offers multiple revenue streams including season passes, day tickets, and lessons",
+    "Provides additional amenities like Slopeside Pub & Grill and event venues",
+    "Hosts community events like Easter egg hunts and special demonstrations",
+    "Offers team building and wedding venue services for additional market segments"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Seasonal business dependent on weather and snow conditions",
+    "Ski resorts in Pennsylvania face limited elevation compared to Western resorts",
+    "Requires significant capital investment in equipment, infrastructure, and maintenance",
+    "This company does not belong in a consumer finance database at all"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +58,7 @@
   "founded_year": 1959,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "68280",
   "published": true,
   "review_status": "published",
@@ -97,14 +103,16 @@
     "Payday loan alternatives (PALs)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "CRITICAL ERROR: Blue Mountain is a ski resort, not a financial services company. It should not be listed in any consumer finance category and should be removed from this database entirely. There is no valid use case for this company within consumer finance research.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Carver Federal Savings Bank",
   "slug": "carver",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in New York, NY. $696M in assets. 7 offices.",
-  "description_long": "Carver Federal Savings Bank is a community bank located in New York, NY, established in 1948. The bank holds approximately $696M in total assets and $585M in deposits. It operates 7 office locations. Designated as a Minority Board and Serving African American Community. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured federal savings bank offering high-yield savings accounts, CDs, and business lending solutions with competitive APY rates up to 4.25%.",
+  "description_long": "Carver Federal Savings Bank is an FDIC-insured financial institution operating as a federally-chartered savings bank. The bank is backed by the full faith and credit of the U.S. Government and maintains a strong focus on community banking and small business support.\n\nThe bank offers a comprehensive range of personal and business banking products. For consumers, they provide high-yield online savings accounts (up to 4.00% APY), money market accounts, and certificates of deposit (up to 4.25% APR with terms from 30 days to 60 months). Personal checking accounts feature no minimum balance requirements and no monthly service charges. For businesses, Carver offers business checking accounts (including their Carver Community Business Free Checking with no monthly fees), business lending solutions, commercial loans, and customized funding options.\n\nCarver distinguishes itself through emphasis on community investment and accessibility. Their personal checking accounts can be opened in 5 minutes with no minimum balance or monthly fees. The bank provides mobile banking capabilities and maintains physical branch locations. Business customers receive tailored solutions and expert guidance focused on growth and expansion opportunities.\n\nThe bank's primary strength lies in competitive savings rates and fee-free checking products. However, the website lacks detailed information about loan rates, specific business loan terms, or comprehensive fee schedules beyond checking accounts. Limited transparency on approval criteria and product details may require customers to contact branches directly for complete information.",
   "logo_url": "",
   "website_url": "http://www.Carverbank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "High-yield online savings accounts (up to 4.00% APY)",
+    "Money market accounts (up to 4.25% APY)",
+    "Certificates of deposit - personal (30 days to 60 months, up to 4.25% APR)",
+    "Certificates of deposit - business",
+    "Personal checking accounts (no minimum balance, no monthly fees)",
+    "Carver Community Business Free Checking",
+    "Business and commercial loans",
+    "Business lending and customized funding solutions",
+    "Mobile banking app",
+    "Online banking platform",
+    "Lost or stolen debit card replacement",
+    "Physical branch banking locations"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1948",
-    "Local community bank with personal service",
-    "7 locations"
+    "High-yield savings accounts earning up to 4.00% APY with daily compounding and FDIC insurance",
+    "Personal checking accounts with zero minimum balance requirements and no monthly service charges",
+    "Business checking (Carver Community Business Free Checking) with no monthly fees and 200 free items per statement cycle",
+    "Certificates of deposit with flexible terms ranging from 30 days to 60 months, up to 4.25% APR",
+    "Fast account opening process (3-5 minutes for online savings and personal checking)",
+    "Mobile banking app available for convenient account management",
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Physical branch locations for in-person banking and personalized service"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific interest rates for business products and business loan APR/terms",
+    "Limited transparency on business lending approval criteria, loan amounts, or repayment terms",
+    "No detailed fee schedule provided beyond checking account information",
+    "Minimal information about alternative products like credit cards or personal loans",
+    "No clear disclosure of minimum deposit requirements for some savings products"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "NY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 30394,
   "latitude": 40.8076593842393,
   "longitude": -73.9447907330211,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Consumers seeking high-yield savings accounts with competitive rates and FDIC protection",
+    "Small business owners needing no-fee checking accounts and community-focused lending",
+    "Savers with flexible timelines interested in certificates of deposit with various term lengths",
+    "Individuals prioritizing accessible, convenient banking with mobile and branch options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Carver Federal Savings Bank is best for consumers and small business owners seeking FDIC-insured savings products with competitive rates and fee-free checking, or businesses needing community-focused lending relationships. The main caveat is that detailed product terms, loan rates, and underwriting criteria are not transparent on their website, requiring direct contact with branches for comprehensive product information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "75 W 125Th St, New York, NY 10027",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

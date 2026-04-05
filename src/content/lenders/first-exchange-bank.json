@@ -1,14 +1,14 @@
 {
   "name": "First Exchange Bank",
   "slug": "first-exchange-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in White Hall, WV. $376M in assets. 7 offices.",
-  "description_long": "First Exchange Bank is a community bank located in White Hall, WV, established in 1932. The bank holds approximately $376M in total assets and $341M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank serving North-Central West Virginia with 7 locations, offering checking, savings, CDs, mortgages, and personal loans with competitive rates.",
+  "description_long": "First Exchange Bank is a community-focused financial institution serving North-Central West Virginia with a strong local presence. The bank has been recognized as the Best Bank in Marion County as of 2025, indicating its reputation within its primary service region. Founded on principles of delivering exceptional personal and financial services, First Exchange Bank operates as a traditional brick-and-mortar community bank with both in-person and digital banking capabilities.\n\nThe bank offers a comprehensive suite of retail banking products including checking and savings accounts, certificates of deposit (CDs), personal loans, mortgages, and online banking services. Their CD offerings are particularly competitive, with rates ranging from 2.32% APY on 36-month CDs to 3.75% APY on 9-month and 12-month special CDs. Customers can open deposit accounts online and apply for mortgages through their web platform. The bank maintains 7 physical locations across the region with drive-thru ATMs at each branch and extended hours for customer convenience.\n\nWhat distinguishes First Exchange Bank is its hyperlocal focus on a specific geographic region rather than national reach. The bank emphasizes community partnership and personal relationships, using language like \"in real life\" to contrast with larger national banks. They offer FDIC-insured CDs with flexible maturity options ranging from 91 days to 72 months and low minimum opening deposits of $500. The White Hall location features a Smart ATM that accepts both cash and check deposits, and the bank provides free mobile banking to customers.\n\nAs a regional community bank, First Exchange Bank's primary limitation is geographic scope\u2014they serve only North-Central West Virginia, making them inaccessible to customers outside this region. While their CD rates are competitive for early 2026, they remain subject to market fluctuations. The bank's online banking capabilities exist but appear relatively basic compared to national digital-first competitors. For customers within their service area seeking traditional banking with local decision-making and personal service, they represent a solid option; for those requiring national reach or advanced digital features, larger institutions may be more appropriate.",
   "logo_url": "",
   "website_url": "https://www.firstexchangebank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts with online account opening",
+    "Savings accounts with online account opening",
+    "Certificates of Deposit (CDs) with rates from 2.32% to 3.75% APY and terms from 91 days to 72 months",
+    "Personal loans with online application capability",
+    "Mortgage loans with online application and processing",
+    "Online banking accessible from any location",
+    "Mobile banking (free to customers)",
+    "Drive-thru ATM access at all 7 branch locations",
+    "Smart ATM with cash and check deposit capability (White Hall location)",
+    "After-hours lost or stolen ATM/debit card support via hotline",
+    "Debit card activation services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1932",
-    "Local community bank with personal service",
-    "7 locations"
+    "Competitive CD rates up to 3.75% APY with flexible maturity options from 91 days to 72 months",
+    "7 conveniently located branches across North-Central West Virginia with drive-thru access at each location",
+    "Smart ATM at White Hall location accepts both cash and check deposits for added convenience",
+    "Can open deposit accounts and apply for mortgages entirely online without visiting a branch",
+    "Free mobile banking with no fees charged by the bank itself",
+    "FDIC-insured deposits with low CD minimum opening balance of $500",
+    "Voted Best Bank in Marion County 2025, indicating strong local reputation and customer satisfaction",
+    "Extended hours including Saturday lobby hours (9am-12pm) at most locations"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: serves only North-Central West Virginia, making it inaccessible to customers outside this region",
+    "Limited digital infrastructure compared to national banks and fintech competitors",
+    "No mention of business banking products, investment services, or wealth management on homepage",
+    "Relatively small institution with only 7 branches, limiting ATM network and service capacity",
+    "CD rates, while competitive, are variable and subject to market changes with no rate-lock guarantees mentioned"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WV"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13020,
   "latitude": 39.4825611000001,
   "longitude": -80.1511278999999,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "West Virginia residents in Marion, Monongalia, and Harrison counties seeking community banking with local decision-making",
+    "Customers prioritizing personal relationships and in-person service over digital-first banking experiences",
+    "Savers looking for competitive CD rates with flexible terms and low minimum deposit requirements",
+    "Homebuyers and mortgage applicants in North-Central West Virginia who prefer working with a local lender"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Exchange Bank is best suited for North-Central West Virginia residents who value community banking, personalized service, and competitive rates over digital convenience or national reach. The primary caveat is strict geographic limitation\u2014the bank operates only in a specific region of West Virginia, making it unavailable to customers outside North-Central WV regardless of product quality.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1 Heritage Way, White Hall, WV 26554",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

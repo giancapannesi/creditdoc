@@ -1,14 +1,14 @@
 {
   "name": "Capital Bank",
   "slug": "capital-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Jacinto City, TX. $673M in assets. 9 offices.",
-  "description_long": "Capital Bank is a community bank located in Jacinto City, TX, established in 1965. The bank holds approximately $673M in total assets and $590M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Capital Bank is an FDIC-insured community bank headquartered in Houston, TX offering comprehensive personal and business banking services including checking, savings, lending, and cash management solutions.",
+  "description_long": "Capital Bank is a community-focused financial institution based in Houston, Texas that has established itself as a local banking alternative for both personal and business customers. The bank emphasizes its commitment to serving the local market with personalized service while maintaining full FDIC insurance protection backed by the U.S. Government.\n\nThe bank offers a comprehensive suite of deposit products including checking accounts, savings accounts, and CDs for personal customers, along with IRA options. For lending, Capital Bank provides consumer loans (personal installment loans, auto/truck/boat/RV financing, home improvement, home equity lines of credit, and mortgages) and business loans (business installment loans, business purpose vehicles, real estate and construction financing, SBA loans, and business lines of credit). Business customers can access standard and premium cash management services, including positive pay, ACH origination, and remote deposit capture.\n\nCapital Bank distinguishes itself through membership in the Allpoint Network, providing access to over 55,000 surcharge-free ATMs worldwide and convenient access at major retailers including Target, CVS, Walgreens, Kroger, and Costco. The bank offers My Rewards debit cards (Gold, Platinum, and Business Platinum) with a free 90-day trial promotion. Digital banking services include online banking, mobile banking for iOS and Android, bill pay, Zelle integration, and eStatements. The bank also provides merchant services and credit card processing for business customers.\n\nAs a traditional community bank, Capital Bank serves customers seeking personalized local banking relationships with established lending and cash management infrastructure. However, prospective customers should note that specific interest rates, loan terms, and fee structures are not detailed on the website, requiring direct contact for pricing information. The bank's strength lies in its comprehensive service offerings and local presence rather than digital innovation.",
   "logo_url": "",
   "website_url": "https://www.capitalbanktx.com",
   "affiliate_url": "",
@@ -23,23 +23,42 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
+    "Personal checking accounts",
+    "Savings accounts and CDs",
+    "Individual Retirement Accounts (IRAs)",
+    "Personal installment loans",
+    "Auto, truck, boat, and RV financing",
+    "Home equity loans and lines of credit",
     "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking and savings accounts",
+    "Business installment loans",
+    "SBA loans and business lines of credit",
+    "Real estate and construction financing",
+    "Cash management (standard and premium with ACH origination, positive pay, remote deposit capture)",
+    "Mobile banking with real-time alerts",
+    "Online banking and bill pay",
+    "Zelle money transfer",
+    "My Rewards debit cards",
+    "Merchant services and credit card processing",
+    "Safe deposit boxes",
+    "Loan Quickpay service",
+    "eStatements"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1965",
-    "Local community bank with personal service",
-    "9 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Access to 55,000+ surcharge-free ATMs worldwide through Allpoint Network membership",
+    "Convenient ATM access at major retailers: Target, CVS, Walgreens, Kroger, and Costco",
+    "Comprehensive lending portfolio including consumer, business, SBA, and real estate financing",
+    "My Rewards debit cards with free 90-day trial promotion (promo code CAPITAL90)",
+    "Premium cash management services for businesses including positive pay and remote deposit capture",
+    "Full-featured digital banking with mobile apps, online banking, Zelle, and bill pay"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Specific interest rates and APRs not disclosed on website; requires direct inquiry for pricing",
+    "No mention of mobile-first or digital-native banking features; appears to be traditional bank",
+    "Limited information about monthly fees, minimum balance requirements, or account terms on public website",
+    "No mention of credit card products offered directly by the bank",
+    "Geographic focus appears limited to Houston-metro area despite ATM network access"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +70,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 19401,
   "latitude": 29.7729509928138,
   "longitude": -95.2461210057354,
@@ -93,12 +112,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs seeking comprehensive cash management and lending services",
+    "Houston-area residents wanting personalized local banking relationships with established community roots",
+    "Customers needing multi-faceted lending options from personal loans to real estate and SBA financing",
+    "Merchants requiring integrated payment processing and business banking solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Capital Bank is best for Houston-area small business owners and personal customers seeking comprehensive traditional banking services with established lending relationships and local decision-making. The main caveat is that pricing, rates, and specific terms require direct contact with the bank, and the institution positions itself as a local/relationship-based bank rather than a digital-first or rate-competitive challenger bank.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +126,10 @@
   ],
   "phone": "",
   "address": "10304 East Fwy, Jacinto City, TX 77029",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }

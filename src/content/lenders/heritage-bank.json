@@ -1,15 +1,15 @@
 {
   "name": "Heritage Bank",
   "slug": "heritage-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Wood River, NE. $594M in assets. 20 offices.",
-  "description_long": "Heritage Bank is a community bank located in Wood River, NE, established in 1884. The bank holds approximately $594M in total assets and $399M in deposits. It operates 20 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Heritage Bank is a community bank offering personal, agricultural, and business banking services with a focus on local relationships and farm-focused financial solutions.",
+  "description_long": "Heritage Bank positions itself as a local, community-focused financial institution with roots in agricultural banking. The bank was established with a mission to serve personal, agricultural, and business customers, emphasizing that 'our success is tied to your success.' The company operates both traditional banking channels and digital platforms, maintaining a local presence while offering modern financial services.\n\nThe bank provides a comprehensive range of products across three primary segments: Personal banking (checking, savings, IRAs, CDs, personal loans, credit cards); Agricultural banking (farm checking/savings accounts, farm-specific loans, farm accounting and management services, and agricultural tools like machinery cost estimators); and Business banking (business checking/savings, small business loans, and commercial services). They also offer professional wealth management, retirement planning, insurance solutions, and realty services through HGI Realty. Digital capabilities include online banking, mobile banking, remote deposit capture, and telephone banking.\n\nHeritage Bank distinguishes itself through specialized agricultural expertise and tools not typically found in mainstream banking. Their farm-focused offerings include dedicated Farm Accounting & Management services, farm machinery cost estimation tools, irrigation cost calculators, and tax planning specifically tailored to agricultural operations. The bank explicitly frames itself around understanding farmer and rancher needs, offering financial analysis, cash flow management, and competitive positioning services. This niche focus differentiates them from national banks.\n\nAs a regional community bank, Heritage Bank serves customers who value local relationships and personalized service, particularly in agricultural communities. However, their website provides limited information about deposit insurance, FDIC membership, specific APR rates, account fees, or loan terms\u2014critical details for consumer decision-making. The lack of transparency around specific product pricing and eligibility requirements is a notable limitation for self-directed research.",
   "logo_url": "",
   "website_url": "https://www.bankonheritage.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts with Cash Back Banking option",
+    "Personal savings accounts and certificates of deposit",
+    "Health savings accounts (HSA)",
+    "Individual retirement accounts (IRA)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Agricultural loans and farm checking/savings accounts",
+    "Small business loans and business checking/savings accounts",
+    "Farm accounting and management services",
+    "Wealth management and retirement planning",
+    "Credit cards (personal and business Heritage Elan cards)",
+    "Remote deposit capture",
+    "Digital banking (online, mobile, telephone banking)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1884",
-    "Local community bank with personal service",
-    "20 locations"
+    "Specialized agricultural banking services including farm accounting, machinery cost estimators, and irrigation calculators",
+    "Multiple digital banking channels: online banking, mobile apps for smartphone/tablet, and telephone banking",
+    "Offers Cash Back Banking checking account described as 'most popular' with easy online application",
+    "Remote deposit capture available for convenient check deposits",
+    "No annual fee Heritage Elan credit cards with competitive rates",
+    "Comprehensive professional services including tax planning, cash flow analysis, and financial reporting for farmers",
+    "Apple Pay integration for secure mobile purchases"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not disclose FDIC insurance status, deposit insurance coverage limits, or bank charter information",
+    "No specific APR rates, account fees, or minimum balance requirements listed for any products",
+    "Limited geographic information\u2014no clear indication of service area or number of physical locations beyond 'Locations' link",
+    "Minimal transparency on loan terms, approval processes, or credit requirements",
+    "No information about whether the bank is NCUA-insured or the regulatory framework under which it operates"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 17145,
   "latitude": 40.8208040105276,
   "longitude": -98.6009439726365,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Farmers and agricultural operators seeking specialized farm accounting and cash flow management services",
+    "Small business owners in rural or agricultural communities wanting local banking relationships",
+    "Personal customers prioritizing digital banking convenience and mobile payment options",
+    "Agricultural professionals needing tax planning and financial analysis tailored to farming operations"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Heritage Bank is best for customers in agricultural regions or farming communities seeking specialized farm banking services combined with traditional personal and business banking. The primary caveat is lack of transparent pricing and regulatory information on their website\u2014customers should contact local branches directly to confirm specific rates, fees, insurance coverage, and lending terms before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "110 E 9Th St, Wood River, NE 68883",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Albany Bank And Trust Company National Association",
   "slug": "albany-bank-and-trust-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Chicago, IL. $730M in assets. 4 offices.",
-  "description_long": "Albany Bank And Trust Company National Association is a community bank located in Chicago, IL, established in 1953. The bank holds approximately $730M in total assets and $602M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Albany Bank and Trust Company National Association (Albank NA) is an FDIC-insured regional bank offering personal and business banking, deposit products, loans, and investment services with locations in the Chicago area.",
+  "description_long": "Albany Bank and Trust Company National Association, operating as Albank NA, is a national bank headquartered in the Albany Park neighborhood of Chicago. The bank has been recognized by Newsweek as Chicago's #1 Regional Bank, indicating a strong local market presence and reputation. Albank operates as a full-service community bank with FDIC insurance backing, providing customers with federal deposit protection.\n\nAlbank offers comprehensive banking services across personal and business segments. For personal customers, they provide deposit products including checking, savings, health savings accounts, and CDs/IRAs, along with lending products such as home equity loans. Business customers can access business checking and savings accounts, CDs, and business/real estate loans. The bank also offers specialized services including land trust services, investment advisory through Albank Investments, and a full suite of digital banking capabilities including online banking, mobile banking with mobile deposit, and Zelle money transfer integration.\n\nThe bank distinguishes itself through specialized offerings not commonly found at all institutions, particularly its Land Trust Services division, which serves both consumer and business clients. Albank also emphasizes high-rate CD products prominently on its homepage and provides comprehensive cash management services for business clients. The bank's recognition as a top regional bank suggests strong customer service and competitive rates within the Chicago market. Their extensive service menu includes international wire transfers, letters of credit, positive pay, remote deposit, and notary services.\n\nAlbank is best suited for customers seeking a regional bank with local presence, competitive rates, and comprehensive services. The main limitation is geographic\u2014the bank appears to operate primarily in the Chicago area based on available information. Customers outside this region would need to verify branch and service availability. As a traditional bank, Albank may not offer the fintech conveniences of neobanks, though they do provide robust digital banking options.",
   "logo_url": "",
   "website_url": "https://www.albanybank.com",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Health Savings Accounts (HSAs)",
+    "CDs and IRAs",
+    "Home equity loans",
+    "Business checking and savings accounts",
+    "Business and real estate loans",
+    "Land trust services",
+    "Mobile banking with mobile deposit",
+    "International wire transfer services",
+    "Merchant credit card services",
+    "Zelle money transfer",
+    "Safe deposit boxes",
+    "Letters of credit (direct, standby, domestic, foreign)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1953",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits backed by U.S. government full faith and credit",
+    "Recognized as Chicago's #1 Regional Bank by Newsweek",
+    "Specialized Land Trust Services available for both personal and business clients",
+    "Comprehensive digital banking including mobile deposit and Zelle integration",
+    "Full-service business banking with cash management and merchant credit card services",
+    "International wire transfer and letter of credit capabilities",
+    "Multiple ATM locations with drive-up and walk-up window services"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation\u2014appears to primarily serve the Chicago area; national availability not clearly established",
+    "No mention of automated investment services, robo-advisors, or modern fintech features",
+    "Limited information on fees, minimum account balances, or rate competitiveness on website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 17230,
   "latitude": 41.9686670098308,
   "longitude": -87.7140389605025,
@@ -93,12 +103,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Chicago-area residents and businesses seeking a locally-recognized regional bank",
+    "Business owners requiring land trust services, cash management, or merchant services",
+    "Customers who value FDIC insurance and traditional banking relationships over fintech convenience",
+    "Individuals needing comprehensive personal and business banking in one institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Albank NA is best for Chicago-area residents and businesses seeking a full-service regional bank with strong local reputation, FDIC insurance, and comprehensive products including specialized land trust services. The main caveat is limited geographic reach\u2014customers outside the Chicago area need to verify service availability, and the bank lacks some modern fintech features of newer digital-first competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,10 @@
   ],
   "phone": "",
   "address": "3400 W Lawrence Ave, Chicago, IL 60625",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }

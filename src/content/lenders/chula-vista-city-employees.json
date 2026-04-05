@@ -24,7 +24,7 @@
     "currency": "USD"
   },
   "services": [
-    "Unable to determine \u2014 website content inaccessible",
+    "Unable to determine — website content inaccessible",
     "Presumed payroll services (based on municipal employee portal standard)",
     "Presumed benefits administration (based on URL structure)",
     "Presumed retirement or pension information (typical for city employees)",
@@ -38,7 +38,7 @@
     "Part of established government infrastructure"
   ],
   "cons": [
-    "Website completely inaccessible to researchers and public verification \u2014 returns 403 Access Denied error",
+    "Website completely inaccessible to researchers and public verification — returns 403 Access Denied error",
     "Cannot verify actual services, features, or current functionality due to access restrictions",
     "No publicly available information about specific financial services or benefits offered",
     "No transparent information available regarding eligibility, enrollment, or how to access services",
@@ -103,10 +103,11 @@
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "enriching",
+  "processing_status": "failed_quarantine",
   "quality_score": 7,
   "enrichment_attempts": 1,
   "no_index": true,
   "has_been_enriched": true,
-  "last_engine_run": "2026-04-04"
+  "last_engine_run": "2026-04-04",
+  "quarantine_reason": "not_consumer_finance"
 }

@@ -1,13 +1,13 @@
 {
   "name": "Optum Bank, Inc.",
   "slug": "optum-bank-inc",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Draper, UT. $20824M in assets. 1 office.",
-  "description_long": "Optum Bank, Inc. is a community bank located in Draper, UT, established in 2003. The bank holds approximately $20824M in total assets and $16038M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Optum Bank specializes in health savings and benefits accounts (HSAs, FSAs, HRAs) with investment options and payment card access for tax-advantaged healthcare spending.",
+  "description_long": "Optum Bank, Inc. is a subsidiary of UnitedHealth Group operating as a financial services provider focused exclusively on administering employer-sponsored health benefits accounts. The company does not offer traditional banking products like checking, savings, or personal loans, but instead serves as a custodian and administrator for health-related savings and spending accounts. Optum Bank manages Health Savings Accounts (HSAs), Flexible Spending Accounts (FSAs), Health Reimbursement Arrangements (HRAs), Dependent Care FSAs (DCSFAs), Medicare Advantage Medical Savings Accounts (MSAs), and commuter benefits programs for employees and their families. Their core offering centers on helping consumers allocate and manage pre-tax dollars designated for healthcare expenses, with the primary benefit being tax savings averaging 30% according to their marketing materials. Optum Bank distinguishes itself through integrated technology, including a mobile application that allows account holders to track balances, manage contributions, upload receipts, and access a payment card for point-of-sale transactions at pharmacies, doctors' offices, and retail health providers. The company also offers HSA investment capabilities, allowing account holders to invest unused balances in mutual funds, and provides educational resources including contribution calculators, account comparisons, and planning tools. Optum Bank's primary strength is its integration within the UnitedHealth ecosystem, giving it scale and connection to major employer health plans. However, users should understand this is not a full-service bank\u2014it's a specialized health benefits administrator. The company's success depends entirely on employer sponsorship; individuals cannot independently establish these accounts without an employer or group plan offering them.",
   "logo_url": "",
   "website_url": "https://www.optumbank.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Health Savings Account (HSA) administration with contribution tracking and balance management",
+    "HSA investment services with mutual fund lineup and investment management options",
+    "Flexible Spending Account (FSA) setup and claims management with receipt upload functionality",
+    "Dependent Care Flexible Spending Account (DCFSA) administration for childcare expenses",
+    "Health Reimbursement Arrangement (HRA) management and claims processing",
+    "Medicare Advantage Medical Savings Account (MSA) administration for eligible seniors",
+    "Commuter benefits program administration for pre-tax transit and parking deductions",
+    "Payment card issuance with point-of-sale access to health account funds",
+    "Digital wallet integration enabling card access via mobile phone or smartwatch",
+    "Account holder mobile application with balance tracking, contribution management, and bill payment",
+    "HSA consolidation services for transferring multiple accounts into single administration",
+    "Employer and provider portals for account administration, claims submission, and enrollment management"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2003",
-    "Local community bank with personal service",
-    "1 location"
+    "Mobile app with real-time balance tracking, contribution management, and digital wallet compatibility for payment card access",
+    "HSA investment options allowing unused balances to grow in mutual funds for long-term healthcare savings",
+    "Automatic expense verification on payment card purchases, eliminating most manual claim submission requirements",
+    "Multi-account consolidation feature allowing customers to combine multiple HSAs into one account",
+    "Payment card accepted at pharmacies, doctors' offices, big box stores, and online retailers for immediate fund access",
+    "Comprehensive educational resources including contribution calculators, account type comparisons, and tax planning guidance",
+    "Commuter benefits administration providing pre-tax savings on transportation and dependent care expenses"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Accounts are employer-sponsored only\u2014individuals cannot open accounts independently without eligible employer plan",
+    "Limited to health-related expenses; cannot be used for general banking, cash withdrawal, or non-qualified purchases",
+    "No traditional banking services such as checking accounts, savings accounts, or personal loans",
+    "Dependent on employer plan features; account capabilities vary based on employer's chosen benefit structure",
+    "Payment card can only be used for qualified medical expenses, not general purchases, limiting flexibility"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "UT"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57408,
   "latitude": 40.5164850179648,
   "longitude": -111.908511022063,
@@ -92,12 +103,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Employees with High Deductible Health Plans (HDHPs) seeking to maximize tax-advantaged HSA savings and investment growth",
+    "Full-time workers with FSA or HRA benefits looking for convenient payment card access and digital account management",
+    "Dual-income households managing dependent care expenses through employer-sponsored DCSFAs and commuter benefits",
+    "Healthcare-conscious consumers wanting to invest HSA funds and plan long-term health expense strategies"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Optum Bank is strictly for employees with employer-sponsored health benefits accounts\u2014not a consumer bank. It's ideal for beneficiaries of HSAs, FSAs, or HRAs seeking streamlined account management, investment options, and convenient payment card access, but requires active employer sponsorship and is limited to qualified healthcare expenses only.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "12921 S Vista Station Blvd, Draper, UT 84020",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

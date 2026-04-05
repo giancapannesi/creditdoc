@@ -1,15 +1,15 @@
 {
   "name": "The First National Bank Of Litchfield",
   "slug": "the-first-national-bank-of-litchfield",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Litchfield, IL. $143M in assets. 2 offices.",
-  "description_long": "The First National Bank Of Litchfield is a community bank located in Litchfield, IL, established in 1860. The bank holds approximately $143M in total assets and $125M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering consumer, real estate, commercial, and agricultural loans with local loan servicing and online/mobile banking.",
+  "description_long": "First National Bank of Litchfield is a traditional community bank that emphasizes local service and relationship banking. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing deposit safety for customers. They operate physical branches and maintain ATM networks while offering digital banking options.\n\nThe bank provides a comprehensive suite of lending products across multiple categories. Consumer loans cover auto purchases, vacations, and debt consolidation. Real estate offerings include fixed-rate mortgages, adjustable-rate mortgages (ARMs), construction loans, and USDA Rural Housing Program financing with 100% LTV options for qualified borrowers. Commercial lending supports business startups, expansions, and equipment financing with flexible repayment structures. Agricultural lending is substantial, including operating lines of credit, machinery financing, livestock loans, farm real estate, and beginning farmer programs in partnership with the Illinois Finance Authority and Farm Services Agency. The bank also offers CDs and IRAs for savings.\n\nKey distinguishing features include local loan servicing\u2014the bank retains mortgage servicing rights rather than selling loans, meaning payments stay local. They offer Freddie Mac mortgage products and specifically market to first-time homebuyers and rural properties. Agricultural borrowers can contact named loan officers (Ken Elmore and Kevin Niemann) for specialized farm lending. Digital options include online banking, mobile banking apps, and paperless statement enrollment.\n\nAs a community bank, First National Bank of Litchfield likely has limited geographic reach and may have fewer technology features than larger national banks. Specific interest rates, fees, and loan terms are not disclosed on their website. The bank appears well-established but provides minimal information about minimum deposits, account requirements, or specific CD rates, which is typical for community banks that require direct contact for rate quotes.",
   "logo_url": "",
   "website_url": "https://www.fnbl.com",
   "affiliate_url": "",
@@ -24,23 +24,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Consumer loans for auto purchases, vacations, and debt consolidation",
+    "Fixed-rate mortgage loans with Freddie Mac products",
+    "Adjustable-rate mortgage (ARM) loans",
+    "Construction loans with interest-only payments during build phase",
+    "USDA Rural Housing Program financing with 100% LTV guarantee",
+    "Commercial loans for business startups, expansion, and equipment",
+    "Agricultural operating lines of credit",
+    "Machinery and equipment financing for farm operations",
+    "Livestock financing for feeder and breeding stock",
+    "Farm real estate purchase and refinancing",
+    "Beginning farmer loans through Illinois Finance Authority partnership",
+    "CDs and IRAs",
+    "Online banking platform",
+    "Mobile banking app",
+    "ATM network access"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1860",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Local loan servicing on mortgages\u2014payments stay with the bank rather than being sold",
+    "USDA Rural Housing Program financing available with 100% LTV for qualified borrowers",
+    "Specialized agricultural lending with named loan officers and programs for beginning farmers",
+    "Flexible construction loan terms with interest-only payments during building phase",
+    "Freddie Mac mortgage products for fixed and adjustable-rate financing",
+    "Online banking, mobile app, and paperless statements available for convenience"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No interest rates, APRs, or specific loan terms disclosed on website",
+    "Limited information about account minimums, monthly fees, or CD rates",
+    "Community bank likely has limited geographic branch network",
+    "Website lacks details on loan approval timelines or application process",
+    "Agricultural lending requires personal contact with specific officers rather than online application"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +66,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3807,
   "latitude": 39.1770340079335,
   "longitude": -89.6550729915756,
@@ -94,12 +108,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Rural homebuyers seeking USDA Rural Housing Program financing with local servicing",
+    "Agricultural operators needing specialized farm lending from officers with industry knowledge",
+    "First-time homebuyers preferring local banks with flexible mortgage terms",
+    "Small business owners in their service area seeking relationship-based commercial lending"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First National Bank of Litchfield is best for rural borrowers, farmers, and first-time homebuyers in their service area who value local relationship banking and loan servicing. The main caveat is that detailed terms, rates, and account information are not available online\u2014potential customers must contact the bank directly to compare offerings with competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +122,11 @@
   ],
   "phone": "",
   "address": "324 N State St, Litchfield, IL 62056",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

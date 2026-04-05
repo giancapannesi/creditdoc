@@ -1,14 +1,14 @@
 {
   "name": "Bank Of Franklin",
   "slug": "bank-of-franklin",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Meadville, MS. $261M in assets. 5 offices.",
-  "description_long": "Bank Of Franklin is a community bank located in Meadville, MS, established in 1912. The bank holds approximately $261M in total assets and $213M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank founded in 1912 offering personal accounts, business banking, mortgages, loans, and retirement planning with branches including a new Natchez location.",
+  "description_long": "Bank of Franklin has operated as a community-focused financial institution since 1912, establishing itself as a trusted local banking option for over a century. The bank maintains FDIC insurance backing, providing deposit protection under the full faith and credit of the U.S. Government. Their longevity and continuous operation suggest stability within the regional banking market.\n\nThe bank offers a comprehensive range of consumer and business financial products. Services include personal checking and savings accounts, business accounts, mortgage lending for purchase/refinance/construction, personal and business loans, and specialized products like their HOPE Loan program (no-fee mortgages). They provide mobile banking capabilities, online account access, loan payment options, and Individual Retirement Account (IRA) planning with dedicated IRA specialists. Recent expansion includes a new Natchez branch location.\n\nBank of Franklin distinguishes itself through personalized, hometown banking service with experienced loan officers who guide borrowers through the mortgage process. Their HOPE Loan product specifically targets homeownership accessibility by eliminating bank fees. The bank emphasizes relationship banking and local community presence rather than digital-only operations, with multiple physical branch locations where customers can meet with financial professionals.\n\nAs a traditional community bank, Bank of Franklin serves customers seeking personal relationships with financial advisors and local decision-making. However, the website provides limited information about account fees, interest rates, minimum balances, loan terms, or competitive product details. Prospective customers would need direct contact to compare pricing against larger national banks or online-only alternatives.",
   "logo_url": "",
   "website_url": "https://www.bankoffranklin.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Mortgage lending (purchase, refinance, construction)",
+    "HOPE Loan mortgages (no-fee)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business loans",
+    "Mobile banking app",
+    "Internet banking/online account access",
+    "Individual Retirement Accounts (IRAs)",
+    "Loan payment processing"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1912",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits with full government backing",
+    "HOPE Loan program eliminates bank fees for qualified home buyers",
+    "Mobile banking available for convenient account access",
+    "Experienced mortgage lenders provide personalized guidance throughout lending process",
+    "Established 1912 with over 110 years of operational history",
+    "Multiple branch locations including new Natchez expansion",
+    "Dedicated IRA specialists for retirement planning consultation",
+    "Comprehensive services (checking, savings, mortgages, business accounts, retirement) under one institution"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited online information about account fees, minimum balances, or interest rates",
+    "No pricing transparency for loans, mortgages, or other products visible on website",
+    "Geographic limitation as community bank may not serve all regions",
+    "Fewer digital-first features compared to online-only banks",
+    "No published information about loan approval rates or typical terms"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "MS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10594,
   "latitude": 31.472606821143,
   "longitude": -90.8892594878325,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local customers in Bank of Franklin's service areas seeking relationship-based banking",
+    "First-time home buyers interested in no-fee mortgage products",
+    "Small business owners needing comprehensive local business banking services",
+    "Retirees and savers planning for retirement with professional guidance"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Franklin is best for customers in their service areas seeking traditional community banking with personalized service and FDIC protection. The main caveat is that the website lacks transparency on pricing, fees, and rates\u2014prospective customers must contact the bank directly at 601-384-2305 to compare offerings against competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "9 Main St E, Meadville, MS 39653",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

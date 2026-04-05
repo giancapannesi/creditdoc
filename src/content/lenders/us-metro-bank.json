@@ -1,14 +1,14 @@
 {
   "name": "Us Metro Bank",
   "slug": "us-metro-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Garden Grove, CA. $1551M in assets. 11 offices.",
-  "description_long": "Us Metro Bank is a community bank located in Garden Grove, CA, established in 2006. The bank holds approximately $1551M in total assets and $1353M in deposits. It operates 11 office locations. Designated as a Asian or Pacific Islander Americans. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "US Metro Bank is a community-focused bank offering personal and business checking accounts, SBA lending, and mobile banking with an emphasis on personalized service and accessibility.",
+  "description_long": "US Metro Bank operates as a traditional banking institution with a stated mission of 'Putting People Ahead.' The bank positions itself around community-based banking principles, emphasizing personal relationships and customized solutions rather than impersonal, one-size-fits-all banking models. The company's website indicates a focus on building trust through accessible, transparent service.\n\nThe bank offers a range of standard banking products including personal checking accounts, business banking services, mobile banking capabilities, and integration with Zelle for money transfers. As a Preferred SBA Lender, US Metro Bank also provides SBA 7(a) and SBA 504 financing programs for small business owners. Both personal and business customers have access to online banking portals and mobile apps for account management.\n\nUS Metro Bank distinguishes itself through several operational characteristics: commitment to accessibility (AudioEye-enabled website), emphasis on specialist teams curating solutions for specific communities, and explicit security protocols including warnings against social engineering attacks. The bank operates with a personalized service model that contrasts with larger national banks, though this is a stated positioning rather than independently verified differentiation.\n\nAs a regional or community bank, US Metro Bank operates within the standard regulatory framework for banking institutions. Customers should verify current offerings, fee structures, interest rates, and account minimums directly, as the website provided contains marketing language rather than detailed product specifications. Like all banks, deposits are subject to FDIC insurance limits (where applicable), and lending decisions depend on credit approval and underwriting standards not detailed on the website.",
   "logo_url": "",
   "website_url": "http://WWW.USMETROBANK.COM",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Business checking accounts",
+    "Personal online banking portal",
+    "Business online banking portal",
+    "Mobile banking application",
+    "SBA 7(a) loans",
+    "SBA 504 loans",
+    "Zelle money transfer service",
+    "Business banking consultation and relationship management",
+    "Customized banking solutions (unspecified)",
+    "Account enrollment and password reset services",
+    "Cybersecurity awareness resources"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2006",
-    "Local community bank with personal service",
-    "11 locations"
+    "Designated Preferred SBA Lender offering both SBA 7(a) and SBA 504 loan programs for small business financing",
+    "Mobile banking app available for managing accounts remotely anytime, anywhere",
+    "Integration with Zelle for peer-to-peer money transfer capability",
+    "Website is AudioEye-enabled and optimized for accessibility, with dedicated assistive technology support",
+    "Explicit security advisory messaging to educate customers about spoofed caller ID and social engineering threats",
+    "Separate business and personal online banking portals for streamlined access",
+    "Community-focused banking model with emphasis on personalized service and customized solutions"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information about account types, interest rates, fees, or minimum balance requirements",
+    "No details provided about FDIC insurance coverage or deposit protection limits",
+    "Limited transparency regarding loan approval criteria, rates, or terms for SBA lending programs",
+    "No information about business hours, branch locations, or customer support contact methods available on main website",
+    "Vague marketing language ('specialists,' 'custom solutions') without concrete examples of differentiating products or services"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58310,
   "latitude": 33.772896986349,
   "longitude": -117.960117961261,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking SBA-backed financing through a bank with direct lending authority",
+    "Personal banking customers in the bank's service area who prefer community banking relationships over national chain banks",
+    "Individuals and businesses requiring accessibility-focused digital banking experiences",
+    "Users who value proactive security communication and fraud awareness education"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "US Metro Bank is best suited for small business owners needing SBA lending options and personal customers seeking community-focused banking relationships in their service area. The primary caveat is that the website is primarily marketing-focused and lacks substantive details about products, rates, fees, and account specifications\u2014all critical factors should be verified directly with the bank before opening accounts or applying for loans.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "9866 Garden Grove Blvd, Garden Grove, CA 92844",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

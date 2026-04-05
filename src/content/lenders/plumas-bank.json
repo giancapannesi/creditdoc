@@ -1,14 +1,14 @@
 {
   "name": "Plumas Bank",
   "slug": "plumas-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Quincy, CA. $2238M in assets. 20 offices.",
-  "description_long": "Plumas Bank is a community bank located in Quincy, CA, established in 1980. The bank holds approximately $2238M in total assets and $1819M in deposits. It operates 20 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Plumas Bank is a locally managed, full-service community bank with 19 branch offices across Northeastern California and Northern Nevada, offering personal and business banking services.",
+  "description_long": "Plumas Bank operates as a locally managed, full-service community bank headquartered in Northern California with a significant presence in the region. The bank maintains 19 physical branch locations across Northeastern California and Northern Nevada, plus loan production offices in California and southern Oregon. According to their website, they position themselves as one of the top performing community banks in the country and hold preferred lender status with the United States Small Business Administration.\n\nThe bank offers a comprehensive suite of retail and commercial banking products. On the personal side, they provide checking and savings accounts, personal loans, CDs, and online/mobile banking platforms. For business customers, Plumas Bank offers business checking accounts, business savings accounts, small business loans, SBA loans, commercial banking services, and dedicated business online banking. Additional services include ATM access, loan payment processing, check ordering, wire transfers, and tax payment options.\n\nPlumas Bank distinguishes itself through its community banking model, emphasizing local decision-making and relationship-based banking. The bank highlights that loan decisions are made locally, resulting in quick turnaround times. They market themselves as a hybrid option—offering traditional in-person banking at physical branches while also providing online, mobile, and remote banking services for customers who prefer digital-first options. The bank also features SBA lending expertise and maintains FDIC insurance backing.\n\nAs a regional community bank, Plumas Bank's reach is geographically limited to Northern California, Northern Nevada, and southern Oregon. While they offer standard banking products and services comparable to larger institutions, customers seeking extensive branch networks nationally or specialized fintech features may find limited options. The bank's strength lies in serving small to mid-sized businesses and individuals seeking personalized local banking relationships rather than those requiring nationwide convenience or cutting-edge digital-only banking.",
   "logo_url": "",
   "website_url": "http://www.plumasbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking accounts",
+    "Business savings accounts",
+    "SBA loans and commercial banking",
+    "CDs (Certificates of Deposit)",
+    "Online and mobile banking platforms",
+    "Business online banking",
+    "ATM access and card activation",
+    "Loan payment processing",
+    "Wire transfer services",
+    "Positive Pay fraud protection service"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1980",
-    "Local community bank with personal service",
-    "20 locations"
+    "19 physical branch locations in Northern California and Northern Nevada for in-person banking",
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "SBA preferred lender status with locally-made loan decisions for faster turnaround",
+    "Comprehensive business banking services including SBA loans and commercial banking",
+    "Hybrid banking model combining in-person branches with online, mobile, and remote services",
+    "Positive Pay service to protect businesses from check and ACH fraud",
+    "Personal and business loan options with flexible terms and quick decisions"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to Northern California, Northern Nevada, and southern Oregon only",
+    "Limited to 19 branches, significantly fewer options than major national banks",
+    "Website does not display specific interest rates, fees, or account terms",
+    "No mention of premium features like investment services, wealth management, or advisory services",
+    "Limited transparency on loan approval requirements or specific loan products available"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 23275,
   "latitude": 39.936443990998,
   "longitude": -120.945274020054,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-sized business owners seeking SBA loans and local lending relationships",
+    "Individuals in Northern California and Northern Nevada wanting community banking with personalized service",
+    "Customers preferring hybrid banking combining in-person relationship banking with digital services",
+    "Businesses needing fraud protection services like Positive Pay for check security"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Plumas Bank is best for small business owners and individuals in Northern California and Northern Nevada seeking a community banking relationship with local loan decision-making and personalized service. The main caveat is that geographic service area is limited to the Northeast California, Northern Nevada, and southern Oregon region, making it unsuitable for customers needing nationwide banking convenience or those outside this territory.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "336 Main St, Quincy, CA 95971",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

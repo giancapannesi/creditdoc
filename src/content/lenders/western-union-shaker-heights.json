@@ -1,10 +1,10 @@
 {
   "name": "Western Union",
   "slug": "western-union-shaker-heights",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union — Money transfer service in Shaker Heights, OH.",
-  "description_long": "Western Union provides Money transfer service. Located at 16400 Chagrin Blvd, Shaker Heights, OH 44120.",
+  "description_short": "Western Union is a global money transfer and payment services company offering domestic and international money transfers, bill payments, and financial services through 150+ U.S. agent locations.",
+  "description_long": "Western Union has operated as a financial services provider for decades, building a network of agent locations across the United States and internationally. The company specializes in enabling consumers to send money, pick up cash transfers, and access various financial services without requiring a traditional bank account. Their agent-based model leverages partnerships with retailers like Walmart, City Market, Safeway, Kroger, and Circle K to provide convenient access to financial services in communities nationwide. Western Union offers both in-store transactions at agent locations and online initiation of transfers, allowing customers flexibility in how they conduct business. The company's primary distinction lies in its extensive physical agent network and long-standing reputation for money movement services, particularly for remittances and cash pickup transactions. Their services extend beyond basic money transfer to include bill payments, mobile top-ups, money orders, prepaid card options, and the ability to receive money on cards. However, Western Union's model relies on agent location hours, which can limit 24/7 access despite online initiation capabilities. Pricing transparency was not evident from the website content provided, and specific fee structures were not disclosed. The company serves primarily unbanked and underbanked populations, immigrants sending remittances, and consumers preferring cash-based transactions over traditional banking.",
   "logo_url": "https://lh6.googleusercontent.com/-31GQx1Rv78Q/AAAAAAAAAAI/AAAAAAAAAAA/ICuSu07yrMI/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/US/en/find-locations.html",
   "affiliate_url": "",
@@ -58,18 +58,48 @@
     "transparency": 0,
     "ease_of_use": 0
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Extensive U.S. network with 150+ agent locations at major retailers (Walmart, Safeway, City Market, Kroger, Circle K)",
+    "24/7 online money transfer initiation through WU.com, with pickup available during agent location hours",
+    "Multiple service offerings beyond basic transfers: bill payment, mobile top-up, money orders, prepaid cards, and inmate payments",
+    "Multiple language support including English, Spanish, Haitian Creole, Chinese, French, and Vietnamese for diverse customer base",
+    "Track transfer capability allows customers to monitor transaction status in real-time",
+    "Rewards program available to incentivize repeat usage",
+    "Ability to receive money directly on card accounts, offering flexibility beyond cash pickup"
+  ],
+  "cons": [
+    "Pickup limited to agent location hours despite 24/7 online initiation, creating timing constraints",
+    "No specific fee or exchange rate information disclosed on the website",
+    "Service interruptions experienced (Orange wallet temporarily unavailable at time of scrape)",
+    "Geolocation dependency on browser settings may prevent users from finding nearest locations",
+    "Some locations offer limited services (e.g., Circle K location limited to money orders only)"
+  ],
+  "best_for": [
+    "Immigrants and international families sending remittances to relatives abroad",
+    "Unbanked and underbanked consumers without access to traditional checking accounts",
+    "Individuals needing quick cash access without maintaining bank accounts",
+    "Consumers preferring in-person transactions and physical verification for financial services"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for immigrants, unbanked consumers, and individuals without bank accounts who need to send or receive money through a trusted, established network of physical locations. The main caveat is that despite 24/7 online transaction initiation, actual cash pickup is limited to agent location hours, which may not accommodate all consumer schedules, and fee transparency is absent from their public-facing website.",
   "services": [
-    "Money transfer service"
+    "Send money domestically and internationally",
+    "Pick up cash transfers at agent locations",
+    "Track money transfers in real-time",
+    "Pay bills through Western Union platform",
+    "Mobile top-up services for prepaid phones",
+    "Money order services",
+    "Western Union Rewards program",
+    "Receive money on prepaid cards",
+    "Western Union Prepaid card products",
+    "Pay inmate services",
+    "Refer a friend program",
+    "Update delivery methods for transfers"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-04-03",
   "review_status": "published",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x8830fcdbb50fb3f9:0x4528da1c4d74ddd0",
     "google_rating": 1.0,
@@ -101,10 +131,10 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-05",
   "no_index": true,
   "contact": {
     "phone": "",
@@ -112,5 +142,6 @@
   },
   "website_found_by": "scrapeforge",
   "website_found_at": "2026-04-04T17:10:00.163437",
-  "email": "email@domain.com"
+  "email": "email@domain.com",
+  "has_been_enriched": true
 }
