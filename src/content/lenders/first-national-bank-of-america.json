@@ -1,14 +1,14 @@
 {
   "name": "First National Bank Of America",
   "slug": "first-national-bank-of-america",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in East Lansing, MI. $6701M in assets. 3 offices.",
-  "description_long": "First National Bank Of America is a community bank located in East Lansing, MI, established in 1955. The bank holds approximately $6701M in total assets and $3837M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Nationally chartered bank offering interest-bearing checking, high-yield savings, competitive CDs, and alternative mortgage solutions across all 50 states.",
+  "description_long": "First National Bank of America (FNBA) is a nationally chartered bank that positions itself as a specialized lender for consumers and businesses outside traditional banking criteria. The bank operates online with no physical branch network, allowing it to serve customers across all 50 states through digital banking infrastructure. FNBA emphasizes accessibility and speed, advertising account opening in under 5 minutes with low minimum balance requirements.\n\nFNBA's core offerings include interest-bearing checking accounts (Signature Checking and Elevate Checking with rates up to 4.50% APY), high-yield savings accounts, and competitive Certificate of Deposit (CD) rates (7-month CDs at 4.05% APY as of the website date). The bank also provides alternative mortgage solutions, including Non-QM (non-qualified mortgage) loans, ITIN home loans, land loans, and loans for unique properties\u2014specifically designed for borrowers who don't fit conventional lending criteria. Additional services include Self-Directed IRA loans, business banking solutions with loans and payment processing, and commercial lending.\n\nFNBA distinguishes itself through specialization in alternative lending and non-traditional income verification for mortgages. The bank was recognized as a 2025 Scotsman Guide Top Mortgage Lender and Top Non-QM Lender, suggesting credibility in the alternative mortgage space. The bank emphasizes competitive rates, online-only convenience, and tailored solutions for credit-challenged borrowers and self-employed individuals. Customer testimonials and Bankrate reviews are highlighted as proof points.\n\nHowever, as a fully online bank with no physical branches, FNBA offers no in-person banking services. The website contains limited transparency regarding loan approval rates, underwriting timelines, or fee structures beyond basic deposit account details. The alternative mortgage focus, while appealing to non-traditional borrowers, may indicate higher risk assessment or narrower lending criteria than mainstream banks. No information is provided about FDIC insurance coverage limits or deposit protections.",
   "logo_url": "",
   "website_url": "https://www.fnba.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Interest-bearing checking accounts (Elevate Checking and Signature Checking)",
+    "High-yield savings accounts",
+    "Certificates of Deposit (CDs) with terms and IRA CD options",
+    "Non-QM alternative mortgages",
+    "ITIN home loans",
+    "Land loans and loans for unique properties",
+    "Home refinancing",
+    "Self-Directed IRA non-recourse loans",
+    "Business checking and savings accounts",
+    "Commercial loans and business lending solutions",
+    "Payment processing solutions for businesses",
+    "Online banking and account management platform"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1955",
-    "Local community bank with personal service",
-    "3 locations"
+    "Interest-bearing checking accounts with rates up to 4.50% APY (Elevate Checking) and tiered rates on Signature Checking (2.51%-2.75% APY)",
+    "Competitive CD rates (4.05% APY on 7-month CDs with only $1,000 minimum) with rates available on IRA CDs",
+    "Specialized alternative mortgage programs including Non-QM loans, ITIN home loans, and loans for unique properties",
+    "Account opening process in under 5 minutes with low minimum balance requirements ($1,000 for checking/CDs)",
+    "Recognized as 2025 Scotsman Guide Top Mortgage Lender and Top Non-QM Lender",
+    "Services all 50 states with no geographic restrictions",
+    "Self-Directed IRA loans and non-recourse loan options for real estate investment",
+    "Business banking solutions including loans and payment processing"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Fully online-only bank with no physical branches limits in-person service options",
+    "Limited fee disclosure on website; $10 monthly service fee on Signature Checking if balance falls below $1,000",
+    "Website lacks transparency on loan approval rates, underwriting timelines, or complete fee schedules",
+    "Alternative mortgage specialization may indicate higher rates or stricter underwriting for non-traditional borrowers",
+    "No clear information about FDIC insurance coverage, deposit protection limits, or bank regulatory charter details"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "MI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 17438,
   "latitude": 42.7476129879931,
   "longitude": -84.4819019941994,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Self-employed and non-traditional income borrowers seeking mortgages without standard W2 verification",
+    "Savers prioritizing competitive interest rates on checking and savings accounts with minimal balance requirements",
+    "Alternative mortgage borrowers including credit-challenged applicants, ITIN holders, and those with unique property types",
+    "Business owners needing integrated banking, lending, and payment processing solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "FNBA is best for self-employed, non-traditional income, and credit-challenged borrowers seeking alternative mortgage solutions, as well as savers looking for competitive deposit rates across all 50 states. The primary caveat is that the bank operates entirely online with no branch network, and transparency regarding loan terms, fees, and approval criteria is limited on the public website.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,10 @@
   ],
   "phone": "",
   "address": "241 E Saginaw St, East Lansing, MI 48823",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }
