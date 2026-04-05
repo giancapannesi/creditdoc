@@ -1,14 +1,14 @@
 {
   "name": "The Peoples Savings Bank",
   "slug": "the-peoples-savings-bank-new-matamoras",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in New Matamoras, OH. $68M in assets. 3 offices.",
-  "description_long": "The Peoples Savings Bank is a community bank located in New Matamoras, OH, established in 1911. The bank holds approximately $68M in total assets and $60M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "The Peoples Savings Bank is a community bank operating since 1911 offering checking accounts, savings products, CDs, and various loan types across three Ohio locations.",
+  "description_long": "The Peoples Savings Bank, founded in 1911, is a locally-operated community bank serving the Ohio River region with the tagline \"The Friendly Bank on the River.\" The institution operates three branch locations in New Matamoras, Newport, and Lower Salem, Ohio, emphasizing personalized service and accessibility to its customer base. The bank recently redesigned its website to improve customer experience and streamline navigation for account management and service inquiries.\n\nThe Peoples Savings Bank offers a range of deposit products including Regular Checking (non-interest bearing with no service charge for direct deposit or $400+ average balance), Now Checking (interest-bearing with $1,000 minimum balance requirement), and Certificates of Deposit with terms ranging from 182 days to 60 months. On the lending side, they provide Auto Loans, Construction Loans, Consumer Loans, Cash Collateral Loans, Commercial Loans, and Real Estate Loans. Customers can access debit cards, online bill pay, and standard banking services through their branch network and phone support.\n\nThe bank distinguishes itself through genuine community banking focused on local relationships rather than national scale. Their emphasis on customer service is reflected in the \"friendly\" branding and willingness to guide customers through applications via phone or in-person visits. The bank maintains extended Friday hours (until 6 PM) and Saturday morning service (9 AM-12 PM), unusual for smaller institutions. Debit cards are issued within 10-14 days of approval.\n\nAs a small regional bank, The Peoples Savings Bank is best suited for customers prioritizing local relationships and community banking over digital-first services or competitive rates. The limited branch footprint (three locations) restricts accessibility for non-local customers. No information about specific interest rates, loan terms, fees beyond basic service charges, or FDIC insurance details is provided on the website. Customers should contact the bank directly for pricing and product comparisons.",
   "logo_url": "",
   "website_url": "http://www.psb1911.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Regular Checking (non-interest bearing with no service charge)",
+    "Now Checking (interest-bearing checking account)",
+    "Certificates of Deposit (182 days to 60 months terms)",
+    "Auto Loans",
+    "Construction Loans",
+    "Consumer Loans",
+    "Cash Collateral Loans",
+    "Commercial Loans",
+    "Real Estate Loans",
+    "Debit Cards",
+    "Online Bill Pay",
+    "Lost/Stolen Debit Card Reporting"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1911",
-    "Local community bank with personal service",
-    "3 locations"
+    "Multiple deposit account options including interest-bearing Now Checking to earn returns on balances",
+    "Diverse loan portfolio including auto, construction, consumer, commercial, and real estate financing",
+    "Extended Friday hours (drive-thru until 6 PM, lobby until 6 PM) and Saturday morning service",
+    "Quick debit card issuance within 10-14 days of approval",
+    "Local community focus with three branch locations across Ohio River region",
+    "Multiple contact methods: phone lines, in-person visits, online contact form",
+    "After-hours debit card fraud reporting line (1-844-202-5333) for security",
+    "Online banking platform with bill pay capabilities for remote account management"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint to three Ohio locations restricts accessibility for most consumers",
+    "Closed all day Thursday with reduced Monday-Wednesday hours (lobby closes 3 PM)",
+    "No transparent information on website regarding interest rates, APYs, loan rates, or fees",
+    "No mention of mobile banking app or digital-only account opening capabilities",
+    "Loan approval timeline described as variable (\"may take longer\" for complex applications) without clarity on actual timeframes"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9439,
   "latitude": 39.5224519863364,
   "longitude": -81.0641180263199,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Ohio residents in the New Matamoras, Newport, or Lower Salem areas seeking local banking relationships",
+    "Small business owners and commercial customers in the tri-county region needing construction and business loans",
+    "Customers prioritizing personalized service and in-person banking over digital-first alternatives",
+    "Real estate investors seeking local construction and real estate financing options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Peoples Savings Bank is best for customers in the New Matamoras, Newport, or Lower Salem, Ohio areas who value local community banking relationships and in-person service. The main caveat is that the bank's limited geographic footprint, reduced weekday hours (closed Thursdays, limited Monday-Wednesday lobby hours), and lack of transparent online pricing information make it impractical for most non-local consumers or those seeking competitive rates.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "710 2Nd St, New Matamoras, OH 45767",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-04",
+  "last_engine_run": "2026-04-04"
 }

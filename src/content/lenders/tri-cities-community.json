@@ -1,15 +1,15 @@
 {
   "name": "Tri-Cities Community",
   "slug": "tri-cities-community",
-  "category": "payday-alternatives",
+  "category": "banking",
   "subcategories": [
     "credit-union",
     "fdic-equivalent",
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "Federal Credit Union in , . Low-income designated. NCUA insured. 1 location.",
-  "description_long": "Tri-Cities Community is a federal credit union serving members in , , established in 1969. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) — small, affordable loans designed to replace predatory payday lending. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "Tri-Cities Community Health is a federally recognized community health center providing primary care, dental, pharmacy, and preventive health services across 6 locations with a sliding fee scale for uninsured and underinsured patients.",
+  "description_long": "Tri-Cities Community Health (TCCH) is a Health Center Program grantee and deemed Public Health Service institution serving the Tri-Cities region. The organization operates under a mission centered on the principle that people matter, providing quality healthcare regardless of patients' economic or insurance status. TCCH has established itself as a critical healthcare access point in its community for several decades, with a commitment to serving vulnerable and underserved populations.\n\nThe organization offers comprehensive whole-body care through multiple service lines including pediatric and adult primary care, dental services, pharmacy services, and specialist care for chronic conditions like diabetes management. Patients can request appointments, access a patient portal, pay bills online, and locate one of six physical locations. TCCH explicitly serves patients with or without insurance and offers sliding fee scale pricing for those who qualify, making healthcare more affordable for low-income residents.\n\nWhat distinguishes TCCH is its explicit commitment to serving populations regardless of legal or economic status, combined with its federal recognition as a Public Health Service entity. The organization demonstrates community engagement through initiatives like providing dental care to homeless populations in partnership with Columbia Basin College and celebrating National Health Center Week. The integrated team-based approach to care coordination across multiple service lines reflects a patient-centered model rather than fragmented specialty care.\n\nThe primary limitation is that TCCH is fundamentally a healthcare provider, not a financial services or credit-related organization. While it addresses affordability through sliding scales and serves low-income populations, it does not provide payday alternatives, emergency loans, or any financial products. The categorization as a payday alternative appears to be an error, as the website contains no financial lending products, loan programs, or credit-building services of any kind.",
   "logo_url": "",
   "website_url": "https://mytcch.org/",
   "affiliate_url": "",
@@ -24,25 +24,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)",
-    "Payday Alternative Loans (PALs)"
+    "Primary care for pediatric patients",
+    "Primary care for adult patients",
+    "Dental care services",
+    "Pharmacy services",
+    "Chronic disease management (diabetes management specified)",
+    "Specialist referral and coordination",
+    "Patient portal access",
+    "Online appointment scheduling",
+    "Online bill payment",
+    "Sliding fee scale assessment",
+    "Care for uninsured and underinsured patients",
+    "Community health outreach programs"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1969",
-    "Member-owned cooperative",
-    "Low-income designated — may offer Payday Alternative Loans (PALs)"
+    "Sliding fee scale available for uninsured and underinsured patients to reduce healthcare costs",
+    "Serves patients regardless of economic or legal status, addressing barriers to care",
+    "Comprehensive whole-body care with integrated specialists from pediatrics through adult care",
+    "Federally recognized Public Health Service grantee status ensures accountability and funding stability",
+    "Multiple access points with 6 locations across the Tri-Cities region",
+    "Online patient portal and bill payment system for convenient account management",
+    "On-site pharmacy services for convenient medication access",
+    "Community outreach programs including dental care for homeless populations"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Not a financial services provider\u2014offers no loans, credit products, or emergency cash services",
+    "Miscategorized as a payday alternative when it is actually a healthcare provider",
+    "Website does not display specific pricing, fee schedules, or APR information",
+    "No information on wait times or appointment availability windows",
+    "Limited detail on specialist availability and referral processes"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +62,7 @@
   "founded_year": 1969,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "19608",
   "published": true,
   "review_status": "published",
@@ -92,20 +102,24 @@
     "ease_of_use": 3.8
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Payday loan alternatives (PALs)"
+    "Uninsured and underinsured individuals seeking affordable primary care and preventive services",
+    "Families with children needing pediatric care and well-child visits",
+    "Low-income patients who qualify for sliding fee scale reductions",
+    "Patients seeking integrated dental, pharmacy, and primary care services in one system"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Tri-Cities Community Health is a federally recognized community health center, not a financial services provider or payday alternative lender. It should be recategorized from 'payday-alternatives' to 'banking' (as the closest general financial access category, though 'healthcare' would be more accurate if available). This organization is best suited for low-income, uninsured, or underinsured individuals seeking affordable healthcare services with sliding fee scale pricing, not for consumers seeking emergency loans or credit products.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
-  "website_needs_review": true
+  "website_needs_review": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-04",
+  "quarantine_reason": "not_consumer_finance"
 }

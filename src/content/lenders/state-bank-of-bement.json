@@ -1,15 +1,15 @@
 {
   "name": "State Bank Of Bement",
   "slug": "state-bank-of-bement",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Bement, IL. $186M in assets. 4 offices.",
-  "description_long": "State Bank Of Bement is a community bank located in Bement, IL, established in 1914. The bank holds approximately $186M in total assets and $158M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering checking, savings, debit cards, mortgages, business banking, and personal lending with local branch support.",
+  "description_long": "State Bank of Bement is a traditional community bank with roots in agricultural lending, operating under FDIC insurance backed by the full faith and credit of the U.S. Government. The bank positions itself as a locally-focused institution with experienced staff available for personal financial guidance and relationship banking.\n\nThe bank offers a comprehensive suite of retail banking services including multiple checking account options, savings accounts, Visa debit cards, mortgage lending, auto loans, business banking solutions, credit cards, and investment services. They provide online and mobile banking platforms for account management, along with financial calculators and educational resources on credit scores and financial planning.\n\nState Bank of Bement distinguishes itself through its emphasis on local experience and community connection, including a foundation focused on community support. They offer specific value-added features like a Round-Up savings program that automatically transfers rounded transaction amounts to savings, Bounce Protection (overdraft privilege) for checking customers, and a Zero Liability debit card policy for fraud protection.\n\nAs a regional community bank, State Bank of Bement serves customers seeking personalized banking relationships and local decision-making, though as a smaller institution they may have fewer digital innovation features compared to national banks or neobanks. Their services appear solid but standard for community banking, with no exceptional rates or unique products highlighted on their website.",
   "logo_url": "",
   "website_url": "https://www.bankbement.com",
   "affiliate_url": "",
@@ -24,23 +24,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "FDIC-insured checking accounts",
     "Savings accounts",
+    "Visa debit cards with fraud protection",
+    "Mortgage lending and home financing",
+    "Auto loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business banking and commercial lending",
+    "Credit cards",
+    "Investment services",
+    "Online and mobile banking platforms",
+    "Round-Up automatic savings transfers",
+    "Bounce Protection overdraft service"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1914",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits with full U.S. government backing",
+    "Round-Up savings program automatically transfers transaction roundups to savings account",
+    "Zero Liability debit card protection for lost or stolen cards",
+    "Bounce Protection overdraft service available to checking customers with opt-in flexibility",
+    "Multiple checking account options to suit different customer needs",
+    "Local branch presence with experienced staff available for personal lending guidance",
+    "Visa debit card accepted worldwide with detailed transaction tracking on statements and mobile banking"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as a small regional bank may restrict branch access for customers outside service area",
+    "Website provides minimal information on specific interest rates, account features, or product details",
+    "No mention of account opening requirements, minimum balances, or fee structures on accessible pages"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +61,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10855,
   "latitude": 39.9226360208926,
   "longitude": -88.5709840378589,
@@ -94,12 +103,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural and rural customers with community banking needs and local relationship preferences",
+    "Small business owners seeking local lending decisions and personalized business banking support",
+    "Consumers prioritizing local branch access and face-to-face banking relationships over digital-first platforms"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "State Bank of Bement is best for customers in their service area seeking traditional community banking with local decision-making, personalized service, and relationship-based lending. The main caveat is their limited geographic footprint and lack of detailed product information online, requiring direct contact for specific rates, terms, and account features.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +116,11 @@
   ],
   "phone": "",
   "address": "180 E Bodman St, Bement, IL 61813",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

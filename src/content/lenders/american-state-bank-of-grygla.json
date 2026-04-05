@@ -1,15 +1,15 @@
 {
   "name": "American State Bank Of Grygla",
   "slug": "american-state-bank-of-grygla",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Grygla, MN. $81M in assets. 2 offices.",
-  "description_long": "American State Bank Of Grygla is a community bank located in Grygla, MN, established in 1976. The bank holds approximately $81M in total assets and $73M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "American State Bank of Grygla is a community bank offering personal and commercial banking services including checking, savings, loans, and online banking across locations in Grygla and Erskine, Minnesota.",
+  "description_long": "American State Bank of Grygla is a regional community bank serving the Grygla and Erskine areas of Minnesota. The bank has established itself as a local financial institution with multiple service locations designed to meet the needs of both individual consumers and small business customers in rural Minnesota communities.\n\nThe bank offers a comprehensive suite of personal banking products including checking and savings accounts, debit cards (Shazam Check Card backed by Mastercard), IRAs, and credit cards. On the commercial side, they provide business checking and savings accounts, credit products, and specialized lending including agriculture loans and business loans. Their digital services include online banking, mobile banking, online bill pay, and online statements, allowing customers to bank remotely. They also offer traditional banking services such as safe deposit boxes, cashier's checks, wire transfers, night deposit services, and overdraft protection.\n\nWhat distinguishes American State Bank of Grygla is its hyperlocal focus and agricultural lending expertise. They specifically advertise agriculture loans alongside business and personal lending options, indicating deep roots in the farming community. The bank operates physical branch locations with extended services like night depositories at both the Grygla front entrance and Erskine back north corner, serving customers outside normal business hours. They also offer fee waivers for Banclub members on certain services, suggesting a loyalty rewards program.\n\nThe bank is well-established with a functional digital presence, though their website content provided focuses primarily on fee schedules and service availability rather than competitive rates or detailed product features. As a small regional institution, they may offer more personalized service than large national banks but likely have fewer products, lower technology sophistication, and narrower service areas compared to larger competitors. Their fee structure appears competitive for community banking, with modest charges for most services.",
   "logo_url": "",
   "website_url": "https://www.asbgrygla.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
+    "Commercial checking and savings accounts",
+    "Agriculture loans",
+    "Business loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Credit cards (personal and commercial)",
+    "Online banking and bill pay",
+    "Mobile banking app",
+    "Debit card (Shazam Check Card backed by Mastercard)",
+    "Safe deposit boxes (6 sizes available)",
+    "Wire transfers (incoming and outgoing, domestic and international)",
+    "Night deposit service at both locations"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1976",
-    "Local community bank with personal service",
-    "2 locations"
+    "Specialized agriculture lending designed for local farming communities",
+    "Night deposit service available at both branch locations for after-hours convenience",
+    "Overdraft protection available to transfer funds between accounts and avoid overdraft fees",
+    "Banclub membership program offering fee waivers on cashier's checks and prepaid gift cards",
+    "ATM access with Mastercard-backed debit card usable nationwide",
+    "Online and mobile banking platforms for remote account management",
+    "Safe deposit boxes in multiple sizes with discounts for automatic charges"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "ATM withdrawal limits of $200 per day for maximum 3 consecutive days restrict cash access",
+    "Daily point-of-sale transaction limit of $1,000 ($200 of which must be ATM withdrawals) may be restrictive for some users",
+    "No rate or APR information provided on website, making competitive comparison difficult",
+    "Limited geographic footprint to two Minnesota locations (Grygla and Erskine) restricts branch access",
+    "Wire transfer fees of $25 outgoing and $50 international outgoing are higher than some competitors"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 22263,
   "latitude": 48.3007579940841,
   "longitude": -95.6189359890385,
@@ -94,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural businesses and farmers in central Minnesota needing specialized farm lending",
+    "Local Grygla and Erskine community members seeking personalized, relationship-based banking",
+    "Small business owners in rural Minnesota requiring commercial checking and business loans",
+    "Customers valuing night deposit convenience and after-hours banking access"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "American State Bank of Grygla is best for customers in the Grygla and Erskine, Minnesota areas seeking personalized community banking with strong agricultural lending expertise and convenient night deposit services. The main caveat is that their small geographic footprint, daily transaction limits, and lack of published rate information make them less suitable for customers needing multi-state access or those shopping competitively on interest rates and fees.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,10 @@
   ],
   "phone": "",
   "address": "102 S Main Ave, Grygla, MN 56727",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }

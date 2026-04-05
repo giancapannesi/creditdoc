@@ -1,13 +1,13 @@
 {
   "name": "Bank Ozk",
   "slug": "bank-ozk",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Little Rock, AR. $40786M in assets. 271 offices.",
-  "description_long": "Bank Ozk is a community bank located in Little Rock, AR, established in 1903. The bank holds approximately $40786M in total assets and $33385M in deposits. It operates 271 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Bank OZK is a full-service bank offering personal and business banking, mortgages, and wealth management with 24/7 online and mobile banking access.",
+  "description_long": "Bank OZK is an FDIC-insured bank headquartered in Little Rock, Arkansas, operating as a comprehensive financial institution serving both personal and business customers. The bank maintains an active online presence at ozk.com and provides digital-first banking services alongside traditional banking products. Bank OZK emphasizes accessibility and convenience as core to its operations, particularly through its 24/7 online and mobile banking platforms. The institution positions itself as customer-focused, with an emphasis on service quality and security.\n\nBank OZK offers a broad range of financial products across multiple categories. For personal banking, they provide checking accounts, savings accounts, CDs with competitive rates (currently advertising up to 4.00% APY on 7-month CDs), IRAs, money market accounts, and personal loans. Their mortgage division offers home loans and HELOCs with experienced lenders. The bank issues credit cards in partnership with First National Bank of Omaha (FNBO). Business customers have access to business checking, savings accounts, loans, treasury management, and merchant services. Specialized services include agricultural lending, association services, government and institutional banking, and trust and wealth management services.\n\nBank OZK distinguishes itself through several operational features. The bank provides 24/7 mobile and online banking availability, positioning convenience as a key differentiator. They offer competitive CD rates prominently advertised on their homepage. The institution maintains dedicated support through a customer care team available Monday-Friday 7am-7pm CT and Saturday 7am-4pm CT via phone (1-800-274-4482). Bank OZK emphasizes online security education and information protection as part of their customer service approach. The bank's specialization in agricultural lending and association services indicates focus on niche markets beyond standard retail banking.\n\nBank OZK functions as a traditional full-service bank rather than a specialized financial services provider. While they offer competitive products and 24/7 digital access, they operate within the standard banking model with typical account opening and credit approval processes. The bank's reliance on partnership with FNBO for credit card issuance suggests limited proprietary card products. As a regional bank, their competitive advantages are primarily in rate offerings and service availability rather than unique financial products or alternative lending models.",
   "logo_url": "",
   "website_url": "http://www.ozk.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with multiple options",
+    "Personal savings accounts and money market accounts",
+    "Certificates of Deposit (CDs) with promotional rates",
+    "Individual Retirement Accounts (IRAs)",
+    "Home mortgage loans and home equity lines of credit (HELOC)",
+    "Personal loans for home improvement and other purposes",
+    "Business checking and savings accounts",
+    "Merchant services for business payment processing",
+    "Agricultural lending services",
+    "Trust and estate services",
+    "Wealth management services",
+    "24/7 mobile and online banking platforms"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1903",
-    "Local community bank with personal service",
-    "271 locations"
+    "24/7 online and mobile banking access available seven days a week",
+    "Competitive CD rates advertised at up to 4.00% APY on 7-month CDs",
+    "FDIC-insured deposits protecting account holders up to standard limits",
+    "Comprehensive product suite including checking, savings, mortgages, loans, and wealth management",
+    "Specialized lending in agriculture and association services indicating niche expertise",
+    "Customer support available Monday-Friday 7am-7pm CT and Saturday 7am-4pm CT",
+    "Online security education resources available to help customers protect against fraud"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Credit cards issued by First National Bank of Omaha rather than directly by Bank OZK, limiting proprietary card benefits",
+    "Customer care hours limited on weekends (Saturday only 7am-4pm CT) with no Sunday support",
+    "Website content does not specify minimum deposit requirements, account fees, or overdraft policies",
+    "No mention of specialty loan products like debt consolidation or alternative lending options",
+    "Limited information about business lending terms, SBA loans, or merchant cash advance availability"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "AR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 110,
   "latitude": 34.8103564068723,
   "longitude": -92.4703932518467,
@@ -92,12 +103,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking 24/7 digital banking access with competitive CD rates",
+    "Agricultural businesses and associations needing specialized lending services",
+    "Individuals wanting comprehensive banking from one institution (checking, savings, mortgages, wealth management)",
+    "Business owners needing both operational banking and merchant services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank OZK is best for customers seeking traditional full-service banking with 24/7 digital access and competitive savings rates. The main caveat is that they operate as a standard bank with conventional approval processes and account requirements—they are not a specialized lender for quick cash, credit repair, debt relief, or alternative lending needs.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-31",
   "cities_served": [
@@ -105,9 +117,9 @@
   ],
   "phone": "",
   "address": "18000 Cantrell Rd, Little Rock, AR 72223",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
+  "processing_status": "pending_approval",
+  "quality_score": 12,
+  "enrichment_attempts": 1,
   "cfpb_data": {
     "found_in_cfpb": true,
     "cfpb_company_name": "BANK OZK",
@@ -117,5 +129,8 @@
     "data_period": "2023-present",
     "last_checked": "2026-03-31"
   },
-  "no_index": true
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

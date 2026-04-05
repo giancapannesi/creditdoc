@@ -1,14 +1,14 @@
 {
   "name": "Tnbank",
   "slug": "tnbank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Oak Ridge, TN. $302M in assets. 6 offices.",
-  "description_long": "Tnbank is a community bank located in Oak Ridge, TN, established in 1995. The bank holds approximately $302M in total assets and $259M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "TNBANK is a regional bank offering checking, savings, loans, and credit cards with FDIC insurance. Positioned as a 'hometown banking' provider serving Tennessee communities.",
+  "description_long": "TNBANK operates as a full-service bank headquartered in Tennessee, with locations in Oak Ridge, Knoxville, and Maryville. The bank emphasizes community roots and personal service under the 'hometown banking' philosophy, positioning itself as an alternative to larger national institutions.\n\nThe bank offers comprehensive financial products across personal and business banking. Personal services include multiple checking account options (Kasasa Cash Checking, Kasasa Cash Back Checking, Gold Checking), savings accounts (Kasasa Saver, Regular Savings), money market accounts, CDs, IRAs, personal credit cards, home loans (mortgages, HELOCs, bridge loans, construction loans), personal loans, and auto loans. Business offerings include tiered business checking (Bronze through Platinum Interest Checking), business savings, business credit cards, business loans (term loans, operating lines of credit, equipment loans, commercial real estate), and SBA 7(a) lending. Additional services include digital banking, remote deposit, payroll solutions, credit card processing, and merchant card services.\n\nTNBANK distinguishes itself through its emphasis on local decision-making and personalized service. The bank leverages Kasasa product partnerships for rewards-based checking and savings accounts. They offer specialized lending products like renovation loans and construction loans, and explicitly market to small business owners and non-profits. The bank highlights accessibility features and positions itself as relationship-focused with \"real people, real solutions.\"\n\nAs a regional bank, TNBANK provides FDIC insurance protection up to applicable limits and maintains transparent fee schedules and rate information. However, availability appears limited to specific Tennessee markets, which may restrict accessibility for customers outside service areas. The website content does not reveal specific interest rates, fee amounts, or detailed product terms, requiring customers to contact the bank directly for pricing information.",
   "logo_url": "",
   "website_url": "https://www.tnbank.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Kasasa Cash Checking, Kasasa Cash Back Checking, Gold Checking)",
+    "Personal savings accounts (Kasasa Saver, Regular Savings, Money Market Accounts)",
+    "Certificates of Deposit (CDs) and Individual Retirement Accounts (IRAs)",
+    "Home loans (mortgages, home equity lines of credit, bridge loans, construction loans, renovation loans)",
+    "Personal loans and auto loans",
+    "Business checking with multiple tier options (Bronze through Platinum Interest Checking)",
+    "Business loans (term loans, operating lines of credit, equipment loans, commercial real estate, SBA 7(a))",
+    "Personal and business credit cards",
+    "Digital banking (personal and business platforms)",
+    "Remote deposit capture and payroll solutions",
+    "Credit card processing and merchant card services",
+    "Debit card management and fraud protection (Kasasa Protect)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1995",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits backed by U.S. government guarantee",
+    "Offers Kasasa rewards-based checking that pays interest for meeting account activity requirements",
+    "Comprehensive loan products including specialized options like renovation loans and bridge loans",
+    "SBA 7(a) lender status provides access to government-backed small business financing",
+    "Multiple tiers of business checking accounts (Bronze through Platinum) to match different business sizes",
+    "Digital banking platform available for both personal and business customers",
+    "Remote deposit capture and payroll solutions for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability restricted to Tennessee locations (Oak Ridge, Knoxville, Maryville area), not suitable for customers outside service regions",
+    "Website does not display specific interest rates, APRs, or fee amounts\u2014customers must contact bank directly for pricing",
+    "No information about minimum account balances or opening deposit requirements visible on website",
+    "Kasasa product partnership limits customization of checking/savings products compared to traditional bank offerings",
+    "No mention of mobile app features, mobile banking capabilities, or app-specific tools on homepage"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34023,
   "latitude": 36.005616009238,
   "longitude": -84.2504309603248,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners in Tennessee seeking personalized lending and relationship-based banking",
+    "Local Tennessee residents prioritizing community banking and hometown service over national chains",
+    "Customers interested in rewards-based checking accounts (Kasasa Cash Checking with interest rewards)",
+    "Real estate investors and builders needing specialized loan products (construction, renovation, bridge loans)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "TNBANK is best for Tennessee-based individuals and small business owners seeking relationship-driven community banking with FDIC protection and specialized lending. The main caveat is geographic limitation to specific Tennessee markets and lack of transparent pricing information online, requiring direct contact to obtain rates and fees.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "401 S Illinois Ave, Oak Ridge, TN 37830",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

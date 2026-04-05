@@ -1,15 +1,15 @@
 {
   "name": "State Savings Bank",
   "slug": "state-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Bedford, IA. $196M in assets. 5 offices.",
-  "description_long": "State Savings Bank is a community bank located in Bedford, IA, established in 1915. The bank holds approximately $196M in total assets and $170M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank founded in 1915 offering checking, savings, loans, credit cards, and digital banking services across five Iowa locations.",
+  "description_long": "State Savings Bank is a community-focused financial institution established in 1915 that has maintained a presence in Iowa for over a century. The bank describes itself as \"The Bank That Service Built\" and emphasizes its commitment to local area projects and community development throughout Iowa.\n\nThe bank offers a comprehensive suite of traditional banking services including checking and savings accounts, personal loans, mortgage lending, and credit products. Their service offerings include mobile banking access, remote deposit and capture capabilities, ACH services, bill pay functionality, and digital wallet integration with Apple Pay, Google Pay, and Samsung Pay. They recently launched a Visa credit card product featuring competitive rates, rewards programs, and no annual fee. Customers can apply for loans and credit products online.\n\nState Savings Bank operates five physical branch locations in Bedford, Cherokee, Clearfield, Creston, and Marcus, Iowa, providing a local banking option with in-person service capabilities. The bank offers free financial calculators for budgeting and financial planning. Their commitment to community involvement and local development distinguishes them from larger regional and national competitors.\n\nAs a small community bank, State Savings Bank is best suited for customers prioritizing local banking relationships and community investment. However, the limited branch footprint (five locations in Iowa only) restricts accessibility for customers outside these specific areas. The website does not provide detailed information about account fees, interest rates, loan terms, or competitive product features that would allow comprehensive comparison with other banking options.",
   "logo_url": "",
   "website_url": "https://www.statesavings.bank",
   "affiliate_url": "",
@@ -24,23 +24,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts",
+    "Personal loans with online application",
+    "Mortgages and home lending",
+    "Visa credit cards with rewards and no annual fee",
+    "Mobile banking app",
+    "Remote deposit capture",
+    "ACH services",
+    "Bill pay services",
+    "Digital wallet integration (Apple Pay, Google Pay, Samsung Pay)",
+    "Online financial calculators",
+    "ATM access across five locations",
+    "In-person branch banking"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1915",
-    "Local community bank with personal service",
-    "5 locations"
+    "Five physical branch locations with ATM access in Iowa communities (Bedford, Cherokee, Clearfield, Creston, Marcus)",
+    "Mobile banking and remote deposit/capture services for convenient account management",
+    "Digital wallet compatibility with Apple Pay, Google Pay, and Samsung Pay",
+    "Visa credit card with no annual fee and rewards program",
+    "Free online financial calculators for budgeting and loan cost analysis",
+    "Online loan application process for convenience",
+    "Bill pay and ACH services available",
+    "Over 100 years of community banking history and local investment commitment"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Only five branch locations, all in Iowa\u2014not accessible for out-of-state customers or those outside service areas",
+    "Website provides no specific information about account fees, minimum balances, or interest rates for comparison",
+    "No details available regarding loan APRs, terms, or qualification requirements",
+    "Limited transparency on credit card APR, rewards rates, and terms compared to national competitors",
+    "No information about FDIC insurance coverage or other deposit protections explicitly stated"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +64,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14773,
   "latitude": 40.667729000872,
   "longitude": -94.719260975122,
@@ -94,12 +106,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Iowa residents in or near Bedford, Cherokee, Clearfield, Creston, or Marcus seeking local community banking",
+    "Customers prioritizing in-person service and local business relationships",
+    "Small business owners or individuals needing basic checking, savings, and lending products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "State Savings Bank is best for Iowa residents in or near its five service communities who value local banking relationships and community involvement. The primary limitation is geographic\u2014this is a small regional bank with no online-only access option and no presence outside Iowa, making it unsuitable for customers outside these specific areas or those seeking broader national banking infrastructure.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "612 Central Ave, Bedford, IA 50833",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

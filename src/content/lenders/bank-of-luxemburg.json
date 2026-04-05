@@ -1,14 +1,14 @@
 {
   "name": "Bank Of Luxemburg",
   "slug": "bank-of-luxemburg",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Luxemburg, WI. $716M in assets. 9 offices.",
-  "description_long": "Bank Of Luxemburg is a community bank located in Luxemburg, WI, established in 1903. The bank holds approximately $716M in total assets and $623M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering checking, savings, CDs, and online account opening with digital banking services and fraud protection measures.",
+  "description_long": "Bank of Luxemburg is a traditional bank that positions itself as an FDIC-insured financial institution backed by the full faith and credit of the U.S. Government. The bank serves consumers seeking basic deposit accounts and savings products through both physical branches and digital channels. The company offers a range of deposit products including checking accounts, savings accounts, certificates of deposit (CDs) with various term lengths, money market accounts, and specialty savings products like Holiday Club accounts. Their service model emphasizes convenience through online account opening, a mobile banking app, digital banking login, and streamlined account switching tools. Bank of Luxemburg differentiates itself through its FDIC insurance guarantee, fraud prevention commitment (explicitly stating they will never request sensitive information via phone), and multi-channel access including physical branches, online portals, and mobile applications. The bank appears to target budget-conscious consumers and savers looking for traditional banking services with modern digital conveniences. However, the available website content does not provide information about loan products, credit cards, interest rates, fee structures, customer service metrics, or competitive advantages beyond deposit insurance. The profile is limited by incomplete website documentation regarding their full service offering, making it difficult to assess comprehensive value proposition.",
   "logo_url": "",
   "website_url": "https://www.bankofluxemburg.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Online checking account opening",
+    "Online savings account opening",
+    "Online certificate of deposit (CD) opening\u201412, 18, 24, 36, 48, and 60-month terms",
+    "Money Market Select accounts",
+    "Holiday Club savings accounts",
+    "Loyalty Checking accounts",
+    "Everyday Checking accounts",
+    "Investor's Savings accounts",
+    "Digital banking login and account access",
+    "Mobile banking app",
+    "Lost/stolen debit card reporting",
+    "Account switching assistance with authorization forms"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1903",
-    "Local community bank with personal service",
-    "9 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Online account opening available for checking, savings, and CD products without branch visit",
+    "Multiple CD term options (12-60 months) for flexible savings strategies",
+    "Free mobile banking app available for digital account access",
+    "Explicit fraud prevention policy prohibiting phone-based requests for sensitive information",
+    "Account switching assistance with checklist and authorization forms provided",
+    "Referral rewards program for existing customers",
+    "Multiple account types (Loyalty Checking, Everyday Checking, Investor's Savings, Money Market Select)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks transparency on interest rates, APYs, and competitive yield information",
+    "No fee schedule or pricing structure disclosed for accounts or services",
+    "Not all accounts and CDs available for online opening\u2014some require branch visit",
+    "Limited information about loan products, credit cards, or broader financial services",
+    "Website does not provide customer service contact information or support hours"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13264,
   "latitude": 44.5398370151128,
   "longitude": -87.7027880156891,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Conservative savers seeking FDIC-insured deposit products and CDs",
+    "Consumers preferring online and mobile banking convenience over in-person banking",
+    "Customers wanting multiple account types (checking, savings, money market) in one institution",
+    "People planning to switch banks who need account opening and transfer support"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Luxemburg is best suited for traditional savers and consumers who value FDIC insurance, online convenience, and multi-product account management in a single institution. The main caveat is that critical information\u2014interest rates, fees, loan products, and complete service offerings\u2014is absent from the available website content, making it difficult to assess competitive positioning or true value proposition compared to other banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,10 @@
   ],
   "phone": "",
   "address": "630 Main St, Luxemburg, WI 54217",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }

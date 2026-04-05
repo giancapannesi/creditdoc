@@ -1,14 +1,14 @@
 {
   "name": "Peoples Bank Of Macon",
   "slug": "peoples-bank-of-macon",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Macon, IL. $24M in assets. 1 office.",
-  "description_long": "Peoples Bank Of Macon is a community bank located in Macon, IL, established in 1964. The bank holds approximately $24M in total assets and $21M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Peoples Bank of Macon is an FDIC-insured bank offering traditional banking services including checking, savings, and deposit accounts to consumers and businesses.",
+  "description_long": "Peoples Bank of Macon is a federally insured financial institution regulated by the FDIC, as documented in the Federal Deposit Insurance Corporation's BankFind Suite database. The bank operates as a traditional commercial bank providing core deposit and banking services to individuals and business customers in its service area. As an FDIC member institution, the bank maintains deposits under the federal insurance program, which protects eligible deposits up to $250,000 per depositor per institution. The bank's primary distinction is its status as a community banking institution with FDIC backing, ensuring customer funds meet federal safety standards. Banking services typically include checking accounts, savings accounts, and certificate of deposit (CD) products, though specific product details are not fully elaborated in the available FDIC source material. Peoples Bank of Macon serves as a traditional banking option for consumers seeking FDIC-insured deposit accounts and basic banking services. The honest assessment is that Peoples Bank of Macon appears to be a conventional community bank without specialized lending programs or advanced digital banking features prominently documented in public records. For consumers seeking comprehensive banking services with federal insurance protection, this institution provides a standard banking option, though prospective customers should verify current product offerings, fee structures, and service capabilities directly with the bank.",
   "logo_url": "",
   "website_url": "https://banks.data.fdic.gov/bankfind-suite/bankfind/details/19105",
   "affiliate_url": "",
@@ -23,23 +23,27 @@
     "currency": "USD"
   },
   "services": [
+    "FDIC-insured deposit accounts",
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificate of Deposit (CD) products",
+    "Deposit insurance coverage",
+    "Federal banking services",
+    "Business deposit services",
+    "Consumer banking services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1964",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits up to $250,000 per depositor per account category",
+    "Federally regulated banking institution with transparent regulatory oversight",
+    "Community bank structure potentially offering personalized service",
+    "Bank holding company structure providing institutional stability",
+    "Access to federal banking system and payment networks"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited product information available in public regulatory filings",
+    "No documentation of digital banking or mobile app capabilities in FDIC records",
+    "Community bank may have limited branch network compared to national banks",
+    "No specialized lending programs documented in available sources"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +55,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 19105,
   "latitude": 39.7103670051835,
   "longitude": -88.9994359989648,
@@ -93,12 +97,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Consumers seeking FDIC-insured deposit accounts in Macon area",
+    "Small business owners needing traditional banking services",
+    "Customers prioritizing federal insurance protection on deposits"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Peoples Bank of Macon is best for consumers in the Macon area who want traditional banking services backed by FDIC insurance protection. The main caveat is that detailed information about current products, fees, interest rates, and service capabilities is not available through this FDIC regulatory source\u2014prospective customers should contact the bank directly for comprehensive details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-04-03",
   "cities_served": [
@@ -106,8 +110,10 @@
   ],
   "phone": "",
   "address": "191 N Front St, Macon, IL 62544",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }

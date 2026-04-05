@@ -1,14 +1,14 @@
 {
   "name": "Barwick Banking Company",
   "slug": "barwick-banking-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Barwick, GA. $728M in assets. 6 offices.",
-  "description_long": "Barwick Banking Company is a community bank located in Barwick, GA, established in 1934. The bank holds approximately $728M in total assets and $590M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Barwick Banking Company is a community-focused bank operating in Georgia and Florida with over 100 years of history, offering personal and business banking with an emphasis on local relationships and personalized service.",
+  "description_long": "Barwick Banking Company has been serving customers for over a hundred years, positioning itself as a locally-owned and operated institution with branches in Barwick GA, Boston GA, and multiple Florida locations including St. Augustine, Daytona Beach, Gainesville, and Palatka. The company emphasizes community roots and relationship-based banking, contrasting itself with larger corporate banking institutions. Their tagline, 'For Locals. By Locals,' reflects their commitment to serving individuals and businesses within their geographic footprint rather than operating as a national chain.\n\nThe bank offers a comprehensive suite of banking services including personal checking and savings accounts, business checking and cash management products, home lending with online mortgage applications, and digital banking platforms for both personal and business customers. They provide standard banking resources such as check ordering, account switching kits, secure file upload capabilities, and fraud reporting tools. Their digital banking platform allows remote account management, and they maintain physical branches for in-person service and relationship building.\n\nBarwick Banking Company differentiates itself through emphasis on personalized attention and relationship banking. Customer testimonials highlight quick turnaround times on business banking setup, dedicated personal banker relationships, and responsive customer service from named staff members. The company positions community ownership as a key advantage over large corporate banks, suggesting that local decision-making and accountability drive their service model. They offer incentives for new account openings, including free gifts mentioned on their website.\n\nThe company operates as a genuine community bank with legitimate operations and regulatory compliance (evidenced by beneficial ownership reporting and investor relations sections). However, they remain geographically limited to specific regions in Georgia and Florida, which restricts accessibility for consumers outside these service areas. Their website does not provide detailed product specifications, fee structures, interest rates, or loan terms that would be necessary for comprehensive comparison shopping. The community-bank model works best for local customers who prioritize relationship banking over convenience banking.",
   "logo_url": "",
   "website_url": "https://www.barwickbank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business checking accounts",
+    "Business cash management products",
+    "Home lending and mortgage services",
+    "Online mortgage applications",
+    "Digital banking for personal customers",
+    "Digital banking for business customers",
+    "Check ordering",
+    "Account switching kits",
+    "Secure file upload",
+    "Elder fraud reporting"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1934",
-    "Local community bank with personal service",
-    "6 locations"
+    "Over 100 years of operating history demonstrating long-term stability",
+    "Locally-owned and operated structure with community decision-making rather than corporate ownership",
+    "Dedicated personal banker relationships with named staff members available for ongoing service",
+    "Rapid account opening and service delivery (testimonial references one-day business account setup)",
+    "Both personal and business banking products under one institution for relationship convenience",
+    "Multiple branch locations across Georgia and Florida for in-person service access",
+    "Online and digital banking platform for remote account management",
+    "Free gifts offered as incentives for new account openings"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Service area limited to specific cities in Georgia and Florida\u2014not accessible to customers outside these regions",
+    "Website lacks detailed product specifications, fee schedules, interest rates, and loan terms for comparison",
+    "No readily available information about minimum deposit requirements, account minimums, or account types offered",
+    "Limited online information about business loan products, terms, and eligibility criteria",
+    "No mention of mobile app availability or advanced digital banking features"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "GA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 22205,
   "latitude": 30.8928900169641,
   "longitude": -83.7388699984825,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs in Georgia and Florida seeking dedicated banker relationships",
+    "Customers in Barwick GA, Boston GA, St. Augustine FL, Daytona Beach FL, Gainesville FL, or Palatka FL who prioritize personal service over digital convenience",
+    "Existing customers switching from large corporate banks seeking community-based alternatives in their area",
+    "Consumers seeking home lending or mortgage services with local decision-making and personalized processing"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Barwick Banking Company is best for customers in their Georgia and Florida service areas who value personalized relationships, local ownership, and responsive service over digital convenience or competitive rate shopping. The main caveat is geographic limitation\u2014this bank only serves specific communities, and potential customers should verify their location is covered and compare their fee structures and rates against competitors, as this information is not prominently featured on their website.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,10 @@
   ],
   "phone": "",
   "address": "2020 E Main St, Barwick, GA 31720",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }

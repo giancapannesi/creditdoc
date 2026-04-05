@@ -1,15 +1,15 @@
 {
   "name": "First National Bank Of Nokomis",
   "slug": "first-national-bank-of-nokomis",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Nokomis, IL. $178M in assets. 4 offices.",
-  "description_long": "First National Bank Of Nokomis is a community bank located in Nokomis, IL, established in 1940. The bank holds approximately $178M in total assets and $157M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "First National Bank of Nokomis is a community bank in Illinois offering checking, savings, CDs, and various loan products with competitive deposit rates and local branch service.",
+  "description_long": "First National Bank of Nokomis operates as a traditional community bank headquartered in Illinois, with at least one branch location in Arthur, IL. The bank has established itself as a local financial institution serving the Nokomis area and surrounding communities, as evidenced by their maintained website and multiple service offerings.\n\nThe bank provides a comprehensive suite of deposit products including checking accounts (Rewards Checking and NOW Accounts), savings accounts, Money Market Deposit Accounts (MMDA), Christmas Club accounts, Individual Retirement Accounts (IRAs), and Certificates of Deposit (CDs) with terms ranging from 91 days to 48 months. On the lending side, they offer consumer loans, real estate loans, farm and business loans, commercial and business loans, personal lines of credit, auto loans, and credit card products. Digital banking services include online banking, mobile banking, internet banking, online bill pay, and integration with Zelle for money transfers.\n\nThe bank distinguishes itself through competitive deposit rates, with their Rewards Checking account offering up to 3.05% APY on balances up to $25,000 (with qualifications), and CD specials including a 5-month special at 3.84% APY. They provide instant-issue debit cards available in branch and ATM fee refunds (up to $15 per statement cycle) for qualifying accounts. The bank emphasizes local service with personal loan officers available and branches with extended hours including Saturday service.\n\nAs a regional community bank, First National Bank of Nokomis appears to serve its local market effectively but has limited national presence. The website content focuses on standard banking products without indication of specialized services or cutting-edge digital innovation. For customers seeking personalized local service and competitive deposit rates, this institution may be suitable, though consumers in other regions would need to verify branch availability or online-only options.",
   "logo_url": "",
   "website_url": "https://www.fnbnokomis.com",
   "affiliate_url": "",
@@ -24,23 +24,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Rewards Checking accounts with tiered APY rates",
+    "NOW Accounts and Health Savings NOW Accounts",
+    "Money Market Deposit Accounts (MMDA)",
+    "Certificates of Deposit with terms from 91 days to 48 months",
+    "Individual Retirement Accounts (IRAs)",
+    "Christmas Club savings accounts",
+    "Real estate loans",
+    "Farm and business loans",
+    "Commercial and business loans",
+    "Personal lines of credit",
+    "Auto loans",
+    "Online and mobile banking with bill pay",
+    "Zelle money transfer integration"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1940",
-    "Local community bank with personal service",
-    "4 locations"
+    "Rewards Checking account offers 3.05% APY on up to $25,000 with reasonable qualifications (direct deposit, e-statements, debit card usage)",
+    "5-Month CD Special at 3.84% APY provides competitive rate for short-term certificate holders",
+    "Instant-issue debit cards available in branch for immediate activation before leaving location",
+    "ATM fee refunds up to $15 per statement cycle for qualified Rewards Checking customers",
+    "Multiple deposit account types including IRAs, MMDA, and Christmas Club accounts for diverse saving goals",
+    "Broad loan offerings including farm loans, real estate loans, and personal lines of credit",
+    "Extended branch hours including Saturday service (8 a.m. to 12 p.m.) for working customers",
+    "Digital banking suite including mobile banking, online bill pay, and Zelle integration"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic presence with only one publicly listed branch location (Arthur, IL) shown on website",
+    "Rewards Checking rate requires multiple qualifications (direct deposit, e-statements, 12 debit card purchases monthly) to earn top APY",
+    "Variable rate on Rewards Checking balances over $25,000 drops to only 0.15% APY, creating a significant rate cliff",
+    "No information provided on credit card rewards, annual fees, or specific terms on website",
+    "No indication of mobile app availability or functionality details beyond mention of 'Mobile Banking'"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15763,
   "latitude": 39.3008130087055,
   "longitude": -89.2863020250976,
@@ -94,12 +107,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Illinois residents seeking personalized banking with competitive deposit rates and Saturday branch access",
+    "Small farmers and business owners needing specialized agricultural and commercial lending relationships",
+    "Savers who can meet Rewards Checking qualifications and maintain balances under $25,000",
+    "Customers prioritizing community bank service over national bank chain convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First National Bank of Nokomis is best for Illinois-based consumers and business owners seeking competitive deposit rates, personalized local service, and specialized lending like farm loans. The main caveat is their apparent limited geographic footprint\u2014the website mentions only one Arthur, IL branch, so customers outside this area should verify whether remote banking or additional locations are available before opening an account.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,11 @@
   ],
   "phone": "",
   "address": "122 W State St, Nokomis, IL 62075",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

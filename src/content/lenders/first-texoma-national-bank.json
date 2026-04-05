@@ -1,14 +1,14 @@
 {
   "name": "First Texoma National Bank",
   "slug": "first-texoma-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Durant, OK. $218M in assets. 5 offices.",
-  "description_long": "First Texoma National Bank is a community bank located in Durant, OK, established in 1898. The bank holds approximately $218M in total assets and $196M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "First Texoma National Bank is a community bank offering personal and business banking services including checking, savings, loans, and online/mobile banking access.",
+  "description_long": "First Texoma National Bank (FTNB) operates as a traditional community bank serving the Texoma region, as indicated by its domain and branding. The bank provides comprehensive banking services designed for both personal and business customers, with a focus on accessibility and digital convenience. FTNB maintains physical branch locations while emphasizing modern digital banking capabilities to serve customers who cannot always visit in person.\n\nThe bank's service offerings span personal banking (checking, savings, personal loans, retirement planning), business banking (business lending and lending expertise), and mortgage services (home purchase and refinance options). FTNB also provides mobile and online banking platforms allowing customers to manage accounts, deposit checks via mobile, pay bills, and access account information 24/7. Additional services include ATM networks, retirement savings consultation, and a free checking account option with e-statement enrollment.\n\nFTNB distinguishes itself through commitment to community development\u2014specifically mentioning support for business development to help the community thrive\u2014and modern accessibility features (AudioEye enabled website). The bank emphasizes low rates on personal loans, affordable monthly payments, and no-fee checking with no minimum balance requirements when customers enroll in e-statements. Their mobile app and 24-hour online services represent a deliberate effort to modernize traditional banking.\n\nAs a regional community bank, FTNB is best suited for customers in the Texoma area seeking relationship-based banking with both digital and in-person service options. The bank appears stable and legitimate based on website infrastructure, though specific details about FDIC insurance, interest rates, and competitive terms are not provided on the homepage. Customers should verify current rates and terms directly with the bank.",
   "logo_url": "",
   "website_url": "https://www.ftnb.net",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Free checking accounts with e-statement enrollment",
+    "Savings accounts for various goals (vacation, education, etc.)",
+    "Personal loans with low rates and affordable payments",
+    "Mobile banking app with check deposit and bill pay",
+    "Online banking portal (personal and business)",
+    "Business lending and financing for business development",
+    "Home loans (purchase and refinance options)",
+    "Retirement planning and retirement savings accounts",
+    "24-hour ATM access and account information",
+    "Credit card payment processing and account information",
+    "Mobile check deposit functionality",
+    "Secure online contact forms and customer service"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1898",
-    "Local community bank with personal service",
-    "5 locations"
+    "Free checking account with no monthly fees and no minimum balance (with e-statement enrollment)",
+    "Mobile deposit feature allowing check deposits via smartphone",
+    "24/7 online banking and account access via website and mobile app",
+    "Personal loans advertised with low rates and affordable monthly payments",
+    "Business lending with emphasis on community development support",
+    "Accessibility-focused website (AudioEye enabled) for users with disabilities",
+    "Multiple contact options including live chat, phone (580-924-4242), and secure contact forms"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation as a regional community bank\u2014may not serve customers outside Texoma area",
+    "Homepage lacks specific details on interest rates, APRs, or fee schedules",
+    "No information about FDIC insurance, deposit protection limits, or regulatory status",
+    "Limited detail on business lending terms, requirements, or loan amounts available",
+    "No mention of investment products, advisory services, or wealth management offerings"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13905,
   "latitude": 33.9914670139511,
   "longitude": -96.3781469857218,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Texoma region residents seeking local community banking with digital convenience",
+    "Small business owners needing business loans and community-focused lending support",
+    "Customers wanting mobile banking with check deposit and bill pay capabilities",
+    "People prioritizing fee-free checking without minimum balance requirements"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Texoma National Bank is best for personal and business customers in the Texoma region seeking traditional community banking with modern digital capabilities. The main caveat is geographic limitation to the Texoma service area and lack of publicly detailed fee/rate information on their website\u2014customers should contact the bank directly to verify current terms and competitive positioning.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "220 W Main St, Durant, OK 74701",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }

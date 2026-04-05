@@ -1,14 +1,14 @@
 {
   "name": "State Bank Of Chilton",
   "slug": "state-bank-of-chilton",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Chilton, WI. $506M in assets. 5 offices.",
-  "description_long": "State Bank Of Chilton is a community bank located in Chilton, WI, established in 1891. The bank holds approximately $506M in total assets and $423M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "State Bank of Chilton is a community bank serving Wisconsin with five branch locations, offering personal and business checking, loans, savings, and investment services with free checking accounts.",
+  "description_long": "State Bank of Chilton operates as a small community bank headquartered in Chilton, Wisconsin, with a clear commitment to personalized service and local community focus. The bank maintains five physical branch locations across Wisconsin (Chilton, Stockbridge, Brookfield, Brillion, and Sherwood), positioning itself as an alternative to larger regional and national banks. The company's origins and detailed history are not extensively documented on their website, but their current positioning emphasizes their status as a small bank with meaningful local resources.\n\nThe bank offers a comprehensive suite of banking services spanning both personal and business segments. Personal services include free checking and savings accounts, debit and credit cards, deposit products with stated competitive rates, health savings accounts (HSAs), personal loans, and online/mobile banking. Business services encompass business checking, loans (particularly small business loans), cash management services, credit card processing, and notifi alerts for transaction monitoring. Additionally, the bank provides investment management and trust services, suggesting a broader wealth management capability than typical community banks. They offer online bill pay, e-statements, and multiple login portals for different account types.\n\nState Bank of Chilton distinguishes itself through several specific operational characteristics. The bank emphasizes free checking accounts explicitly, contrasting with many financial institutions that have eliminated this offering. Their website emphasizes personal, professional service and community-focused rate structures designed to support local customers' financial goals. The bank holds FDIC membership and maintains Equal Housing Lender status, providing regulatory assurance. Each branch location offers both lobby and drive-up services with extended Friday hours (until 6:00 pm at most locations), and all locations have ATMs available. The Brookfield office operates with slightly different hours reflecting its metropolitan location, while the original Chilton office maintains traditional small-town banking hours.\n\nThe primary limitation is geographic constraint\u2014State Bank of Chilton operates exclusively in Wisconsin with limited branch availability outside the immediate Chilton area. Their online banking platform, while present, may lack the technological sophistication of larger banks or newer fintech competitors. The website content is somewhat limited in depth regarding specific loan products, rates, or account terms, requiring customers to contact branches directly for detailed information. For customers seeking a traditional community banking experience with personal service in central Wisconsin, this institution presents a viable option; however, those requiring extensive national branch access or cutting-edge digital banking experiences may need to look elsewhere.",
   "logo_url": "",
   "website_url": "https://www.statebankofchilton.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Free personal checking accounts",
+    "Savings accounts with competitive deposit rates",
+    "Health Savings Accounts (HSAs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking and loans (including small business loans)",
+    "Credit and debit cards (personal and business)",
+    "Online and mobile banking with bill pay functionality",
+    "Cash management services for businesses",
+    "Credit card processing services",
+    "Investment management and trust services",
+    "Notifi alerts for transaction monitoring",
+    "E-statements and digital banking access"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1891",
-    "Local community bank with personal service",
-    "5 locations"
+    "Free checking accounts explicitly offered, uncommon among modern banks",
+    "Five branch locations across Wisconsin with consistent ATM access at all offices",
+    "Extended Friday hours until 6:00 pm at most locations for customer convenience",
+    "FDIC member bank with Equal Housing Lender certification for regulatory protection",
+    "Comprehensive personal and business banking services including investment management and trust services",
+    "Online and mobile banking available with bill pay functionality",
+    "Small community bank structure allows for personal relationship banking and local decision-making",
+    "Health Savings Accounts (HSAs) available as a specialized savings product"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint\u2014only five branches in Wisconsin, with no out-of-state locations",
+    "Website lacks detailed information on specific rates, loan terms, and product features, requiring direct contact with branches",
+    "No mention of 24/7 customer support or chat features typical of modern banking platforms",
+    "Limited transparency on fee structures and account requirements beyond free checking mention",
+    "Appears to lack business credit card and merchant services depth compared to regional banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 12331,
   "latitude": 44.0292600048842,
   "longitude": -88.1622280404727,
@@ -93,12 +105,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Wisconsin residents seeking local community banking with personal service relationships",
+    "Small business owners in central Wisconsin needing straightforward business banking and small business loans",
+    "Customers prioritizing free checking accounts and traditional in-person banking relationships",
+    "Individuals seeking investment management and trust services within a community banking context"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "State Bank of Chilton is best suited for Wisconsin residents and small business owners who value personal community banking relationships and desire free checking accounts with local decision-making. The primary caveat is strict geographic limitation to Wisconsin with only five branch locations, making this bank impractical for customers requiring multi-state access or those who prioritize digital-first banking experiences.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "26 E Main St, Chilton, WI 53014",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Pacific Alliance Bank",
   "slug": "pacific-alliance-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in San Gabriel, CA. $440M in assets. 3 offices.",
-  "description_long": "Pacific Alliance Bank is a community bank located in San Gabriel, CA, established in 2006. The bank holds approximately $440M in total assets and $359M in deposits. It operates 3 office locations. Designated as a Asian or Pacific Islander Americans. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal and business checking, savings, CDs, mortgages, and commercial loans with online and mobile banking access.",
+  "description_long": "Pacific Alliance Bank is a traditional community bank that serves both personal and business customers through its website and physical locations. The institution is FDIC-insured and emphasizes security and government backing on its homepage. The bank operates with NMLS Number 1877390 and maintains an online presence at pacificalliancebank.com with a customer service line at (626) 773-8888.\n\nPacific Alliance Bank offers a comprehensive suite of deposit and loan products. For personal customers, they provide checking accounts, savings accounts, money market accounts, certificates of deposit (CDs), individual retirement accounts, and mortgages with online application capabilities. Business customers can access business checking, business savings, business money market accounts, CDs, commercial loans, lines of credit, term loans, commercial real estate financing, construction loans, and SBA loans. The bank also offers payment processing services through Elavon for merchant customers.\n\nThe bank distinguishes itself through modern digital banking conveniences including mobile banking apps available on both iOS and Android platforms, online bill pay, mobile deposit, eStatements, Zelle integration, and real-time custom account notifications. They offer contactless debit cards and cashier's checks. Additional services include safe deposit boxes, direct deposit, night deposit, wires, remote deposit for business customers, and positive pay/check reconciliation services. The emphasis on digital accessibility while maintaining traditional banking services represents their positioning as a modern community bank.\n\nPacific Alliance Bank appears to be a legitimate, regulated financial institution with proper FDIC insurance and compliance documentation. However, the website provides limited detailed information about specific rates, fees, minimum balances, or product terms\u2014customers must contact the bank directly or visit physical locations for rate quotes and detailed product information. As a community bank, they likely have more limited ATM networks compared to major national banks.",
   "logo_url": "",
   "website_url": "https://www.pacificalliancebank.com",
   "affiliate_url": "",
@@ -23,23 +23,42 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Money market accounts (personal and business)",
+    "Certificates of deposit",
+    "Individual retirement accounts",
+    "Mortgages with online application",
+    "Business checking accounts",
+    "Commercial loans and lines of credit",
+    "SBA loans",
+    "Commercial real estate loans",
+    "Construction loans",
+    "Mobile banking app (iOS and Android)",
+    "Online bill pay",
+    "Mobile deposit",
+    "Zelle peer-to-peer transfers",
+    "Real-time account alerts",
+    "eStatements",
+    "Cashier's checks",
+    "Safe deposit boxes",
+    "Merchant payment services (Elavon)"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2006",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Comprehensive personal banking including checking, savings, IRAs, CDs, and mortgages",
+    "Full-service business banking with SBA loans, construction loans, and commercial real estate financing",
+    "Modern digital banking with mobile apps, mobile deposit, and real-time account alerts",
+    "Zelle integration for peer-to-peer money transfers",
+    "Contactless debit card technology for secure payments",
+    "Online mortgage application portal for convenience"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint\u2014appears to serve primarily the Los Angeles area (626 area code location)",
+    "Website does not display current CD rates, APYs, or fee schedules; customers must call or visit in person",
+    "No information provided about minimum account balances or opening requirements",
+    "Likely smaller ATM network compared to national banks, limiting cash access convenience",
+    "Limited transparency on loan terms, rates, and qualification requirements on website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +70,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58234,
   "latitude": 34.1029770039501,
   "longitude": -118.109837024524,
@@ -93,12 +112,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking SBA loans, commercial real estate financing, and business checking/savings",
+    "Consumers in Southern California seeking FDIC-insured deposit accounts and mortgages from a community bank",
+    "Customers preferring in-person banking relationships combined with modern digital convenience",
+    "Business customers needing merchant payment processing through Elavon integration"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Pacific Alliance Bank is best for small business owners and Southern California consumers who value FDIC insurance, community banking relationships, and modern digital convenience. The main caveat is that detailed product information, rates, and fees are not transparent on their website\u2014prospective customers must contact them directly, and their geographic reach appears limited to the Los Angeles region.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +126,11 @@
   ],
   "phone": "",
   "address": "641 W Las Tunas Dr, San Gabriel, CA 91776",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }
