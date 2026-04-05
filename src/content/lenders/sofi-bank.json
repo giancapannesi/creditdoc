@@ -1,15 +1,16 @@
 {
-  "name": "Sofi Bank, National Association",
+  "name": "SoFi",
   "slug": "sofi-bank",
   "category": "personal-loans",
   "subcategories": [
-    "community-bank",
-    "minority-depository",
-    "consumer-lending"
+    "fintech",
+    "online-bank",
+    "student-loans",
+    "investing"
   ],
-  "description_short": "FDIC-insured community bank in Cottonwood Heights, UT. $46568M in assets. 4 offices.",
-  "description_long": "Sofi Bank, National Association is a community bank located in Cottonwood Heights, UT, established in 1986. The bank holds approximately $46568M in total assets and $39707M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
-  "logo_url": "",
+  "description_short": "SoFi is a publicly traded fintech platform (NASDAQ: SOFI) offering personal loans, student loan refinancing, banking, investing, and credit cards — all in one app with no hidden fees.",
+  "description_long": "SoFi (Social Finance, Inc.) is a publicly traded financial technology company founded in 2011 by Stanford Graduate School of Business students Mike Cagney, Dan Macklin, James Finnigan, and Ian Brady. Originally launched as an alumni-funded student loan platform, SoFi has grown into one of the largest U.S.-based online lenders with 13.7 million members as of 2025. The company is led by CEO Anthony Noto (former COO of Twitter, former CFO of the NFL) and trades on NASDAQ under ticker SOFI.\n\nIn January 2022, SoFi obtained a national bank charter from the OCC through the acquisition of Golden Pacific Bancorp, making it one of the first major fintechs to become a nationally chartered bank. This allows SoFi to hold deposits directly and set its own lending terms. For fiscal year 2025, SoFi reported $3.61 billion in revenue and $481 million in net income — its first profitable year.\n\nSoFi's personal loans range from $5,000 to $100,000 with fixed APRs of 7.74%-35.49% (with autopay and member discounts) and terms of 2-7 years. Origination fees are 0%-7% (borrowers can choose a no-fee option at a higher rate). SoFi charges no late fees and no prepayment penalties on any loan product. Student loan refinancing offers fixed rates from 4.24%-9.99% and variable rates from 5.99%-9.99% with terms of 5-20 years and zero origination or application fees.\n\nBeyond lending, SoFi offers checking and savings accounts (3.30%-4.50% APY with direct deposit), the SoFi Unlimited 2% cash-back credit card (no annual fee, 0% intro APR for 12 months), stock and crypto investing, and insurance products. The SoFi Plus membership ($10/month or free with qualifying direct deposit) unlocks higher savings APYs and boosted rewards.\n\nSoFi differentiates through its all-in-one approach: lending, banking, investing, and insurance in a single app. Members get free career coaching, free financial planning sessions, and unemployment protection that pauses loan payments for up to 12 months if they lose their job. Deposits are FDIC insured up to $2 million through SoFi's sweep program with partner banks.\n\nThe main caveats: SoFi's personal loan APRs can reach 35.49%, which is steep for borrowers with weaker credit. The BBB shows 2,340 complaints in the last three years (622 in the last 12 months), with billing and service issues being the most common — though this is expected for a company serving 13.7 million members. The FTC issued a consent order in 2019 for misleading student loan savings claims (no financial penalty). A data breach class action was filed in February 2026 following a social engineering incident. SoFi does not disclose a minimum credit score requirement, but third-party sources suggest 680+ is typical for personal loan approval.",
+  "logo_url": "/logos/sofi-bank.png",
   "website_url": "https://www.sofi.com",
   "affiliate_url": "",
   "affiliate_program": "",
@@ -17,97 +18,225 @@
     "monthly_price": 0,
     "setup_fee": 0,
     "money_back_guarantee": false,
-    "guarantee_details": "",
+    "guarantee_details": "No money-back guarantee. SoFi offers unemployment protection that pauses loan payments for up to 12 months (in 3-month increments) if borrowers lose their jobs.",
     "free_consultation": true,
-    "tiers": [],
+    "tiers": [
+      {
+        "name": "Personal Loans",
+        "price": 0,
+        "features": [
+          "Loan amounts: $5,000-$100,000",
+          "Fixed APR: 7.74%-35.49% (with autopay + member discounts)",
+          "Terms: 2-7 years",
+          "Origination fee: 0%-7%",
+          "No late fees, no prepayment penalties",
+          "Same-day funding possible",
+          "Soft credit check for rate preview"
+        ]
+      },
+      {
+        "name": "Student Loan Refinancing",
+        "price": 0,
+        "features": [
+          "Fixed APR: 4.24%-9.99%",
+          "Variable APR: 5.99%-9.99% (capped at 13.95%)",
+          "Terms: 5, 7, 10, 15, or 20 years",
+          "No origination, application, or prepayment fees",
+          "Autopay discount: 0.25%"
+        ]
+      },
+      {
+        "name": "SoFi Plus Membership",
+        "price": 10,
+        "features": [
+          "$10/month or free with qualifying direct deposit",
+          "4.50% APY on savings (up to $20K balance)",
+          "Boosted credit card rewards",
+          "Unlimited free financial planning sessions"
+        ]
+      }
+    ],
     "currency": "USD"
   },
-  "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
-  ],
-  "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1986",
-    "Local community bank with personal service",
-    "4 locations"
-  ],
-  "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
-  ],
-  "contact": {
-    "phone": "",
-    "address": "2750 E Cottonwood Pkwy, Cottonwood Heights, UT 84121"
-  },
-  "bbb_rating": "",
-  "founded_year": 1986,
-  "headquarters": "Cottonwood Heights, UT",
-  "states_served": [
-    "UT"
-  ],
-  "data_source": "fdic",
-  "fdic_cert": 26881,
-  "latitude": 40.632182983976,
-  "longitude": -111.813306013035,
-  "published": true,
-  "review_status": "published",
   "features": {
     "credit_monitoring": false,
     "all_three_bureaus": false,
     "goodwill_letters": false,
     "cease_desist_letters": false,
     "debt_validation": false,
-    "credit_education": false,
+    "credit_education": true,
     "identity_theft_protection": false,
-    "score_tracking": false,
+    "score_tracking": true,
     "mobile_app": true,
     "online_portal": true,
     "personal_advisor": true,
     "ai_powered": false
   },
   "company_info": {
-    "founded_year": 1986,
-    "headquarters": "Cottonwood Heights, UT",
-    "city": "Cottonwood Heights",
-    "state": "UT",
-    "employees": "",
-    "bbb_rating": "",
+    "founded_year": 2011,
+    "headquarters": "San Francisco, CA",
+    "city": "San Francisco",
+    "state": "CA",
+    "employees": "5001-10000",
+    "bbb_rating": "A+",
     "bbb_accredited": false,
     "certifications": [
       "FDIC Insured",
-      "FDIC Cert #26881"
+      "OCC National Bank Charter",
+      "NASDAQ: SOFI",
+      "NMLS #1121636"
     ]
   },
-  "rating": 3.5,
-  "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
-  },
-  "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+  "states_served": [
+    "Alabama",
+    "Alaska",
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Colorado",
+    "Connecticut",
+    "Delaware",
+    "Florida",
+    "Georgia",
+    "Hawaii",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Iowa",
+    "Kansas",
+    "Kentucky",
+    "Louisiana",
+    "Maine",
+    "Maryland",
+    "Massachusetts",
+    "Michigan",
+    "Minnesota",
+    "Mississippi",
+    "Missouri",
+    "Montana",
+    "Nebraska",
+    "Nevada",
+    "New Hampshire",
+    "New Jersey",
+    "New Mexico",
+    "New York",
+    "North Carolina",
+    "North Dakota",
+    "Ohio",
+    "Oklahoma",
+    "Oregon",
+    "Pennsylvania",
+    "Rhode Island",
+    "South Carolina",
+    "South Dakota",
+    "Tennessee",
+    "Texas",
+    "Utah",
+    "Vermont",
+    "Virginia",
+    "Washington",
+    "West Virginia",
+    "Wisconsin",
+    "Wyoming",
+    "District of Columbia"
   ],
-  "similar_lenders": [],
-  "diagnosis": "",
-  "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
-  "last_updated": "2026-03-21",
   "cities_served": [
-    "Cottonwood Heights"
+    "San Francisco",
+    "New York",
+    "Los Angeles",
+    "Chicago",
+    "Houston",
+    "Phoenix",
+    "Philadelphia",
+    "San Antonio",
+    "San Diego",
+    "Dallas",
+    "Jacksonville",
+    "Austin",
+    "San Jose",
+    "Fort Worth",
+    "Columbus",
+    "Charlotte",
+    "Indianapolis",
+    "Seattle",
+    "Denver",
+    "Nashville",
+    "Atlanta",
+    "Miami",
+    "Las Vegas",
+    "Detroit",
+    "Memphis"
   ],
-  "phone": "",
-  "address": "2750 E Cottonwood Pkwy, Cottonwood Heights, UT 84121",
+  "rating": 4.2,
+  "rating_breakdown": {
+    "value": 4.5,
+    "effectiveness": 4.3,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
+  },
+  "pros": [
+    "All-in-one financial platform: lending, banking, investing, insurance, and credit card in one app",
+    "No late fees and no prepayment penalties on any loan product",
+    "Unemployment protection pauses loan payments for up to 12 months if you lose your job",
+    "Free career coaching and financial planning sessions for all members",
+    "Personal loans up to $100,000 with same-day funding possible",
+    "High-yield savings: 3.30%-4.50% APY with FDIC insurance up to $2 million",
+    "Publicly traded (NASDAQ: SOFI) with $3.61B revenue in 2025 — transparent financials",
+    "National bank charter allows SoFi to set its own rates and hold deposits directly"
+  ],
+  "cons": [
+    "Personal loan APRs can reach 35.49% — steep for borrowers with weaker credit profiles",
+    "2,340 BBB complaints in 3 years (622 in last 12 months) — high volume even for a company this size",
+    "Not BBB accredited despite A+ letter grade — SoFi has not sought accreditation",
+    "FTC consent order in 2019 for misleading student loan savings claims",
+    "Data breach class action filed February 2026 following social engineering incident",
+    "Origination fees of 0%-7% on personal loans add to cost if the no-fee option isn't chosen",
+    "Minimum credit score not disclosed but estimated at 680+ — not accessible for subprime borrowers"
+  ],
+  "best_for": [
+    "Borrowers with good-to-excellent credit (680+) seeking competitive rates on personal loans up to $100K",
+    "People who want one financial platform for banking, lending, investing, and insurance",
+    "Student loan borrowers looking to refinance at rates from 4.24% with no origination fees",
+    "Consumers who value no-fee banking with high-yield savings and a 2% cash-back credit card"
+  ],
+  "similar_lenders": [
+    "upstart-columbus",
+    "lendingtree",
+    "lendingclub",
+    "prosper",
+    "discover"
+  ],
+  "diagnosis": "SoFi is the most comprehensive fintech lending platform on the market — personal loans, student loan refinancing, banking, investing, and insurance all in one app. The combination of no late fees, unemployment protection, and free financial planning creates genuine value beyond just the loan product. With 13.7 million members, a national bank charter, and $3.61B in 2025 revenue, SoFi has the scale and stability of a major financial institution. The main caveat is that SoFi's best rates are reserved for borrowers with strong credit (estimated 680+); subprime borrowers will face high APRs or won't qualify. The BBB complaint volume (2,340 in 3 years) is significant but proportional to their massive customer base.",
+  "services": [
+    "Personal loans ($5,000-$100,000) with fixed rates and same-day funding",
+    "Student loan refinancing (federal and private) with terms up to 20 years",
+    "SoFi Checking & Savings with up to 4.50% APY and FDIC insurance to $2M",
+    "SoFi Unlimited 2% cash-back credit card with 0% intro APR",
+    "Stock and ETF investing with fractional shares",
+    "Cryptocurrency trading",
+    "Mortgage and home equity loans",
+    "Insurance marketplace (auto, home, life, renters)",
+    "Free career coaching and financial planning",
+    "SoFi Relay for credit score monitoring and spending insights"
+  ],
+  "typical_results_timeline": "Personal loan applications take about 5 minutes. Approval decisions are typically instant. Funding can be same-day for approved loans. Student loan refinancing applications take 10-15 minutes with funding in 2-4 weeks.",
+  "last_updated": "2026-04-05",
+  "review_status": "published",
   "processing_status": "ready_for_index",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": false
+  "quality_score": 15,
+  "enrichment_attempts": 1,
+  "no_index": false,
+  "has_been_enriched": true,
+  "data_source": "enriched",
+  "last_engine_run": "2026-04-05",
+  "contact": {
+    "phone": "+1 855-456-7634",
+    "address": "234 1st Street, San Francisco, CA 94105"
+  },
+  "phone": "+1 855-456-7634",
+  "address": "234 1st Street, San Francisco, CA 94105",
+  "google_rating": 4.0,
+  "google_reviews_count": 0,
+  "website": "https://www.sofi.com"
 }

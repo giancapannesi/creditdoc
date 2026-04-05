@@ -1,14 +1,14 @@
 {
   "name": "First National Bank Of Michigan",
   "slug": "first-national-bank-of-michigan",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Kalamazoo, MI. $986M in assets. 7 offices.",
-  "description_long": "First National Bank Of Michigan is a community bank located in Kalamazoo, MI, established in 2006. The bank holds approximately $986M in total assets and $772M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured Michigan bank offering personal and commercial banking services including checking, savings, CDs, HELOCs, and merchant payment solutions through Clover.",
+  "description_long": "First National Bank of Michigan is a regional bank headquartered in Michigan that positions itself as a locally-focused financial institution serving both personal and business customers. The bank emphasizes FDIC insurance backing and community involvement as core values.\n\nThe bank offers a range of standard banking products including Certificates of Deposit (CDs) with guaranteed rates, Home Equity Lines of Credit (HELOCs) for home improvements and major purchases, online and mobile banking platforms, and eStatements. For commercial customers, they provide merchant services through a partnership with Clover, an all-in-one payment processing and business management system that handles inventory, employee scheduling, payroll, and loyalty programs.\n\nFNBM differentiates itself through emphasis on local leadership and decision-making, direct access to bankers, and community engagement. Their website highlights volunteer work with Lakeshore Habitat for Humanity and customer testimonials praising personalized service. They also actively communicate security information to customers about fraud risks and QR code attacks.\n\nAs a regional bank, FNBM operates within the traditional banking model with standard product offerings. Their strength lies in local service and community ties rather than innovative fintech features. The website content does not reveal comprehensive information about fee structures, rate competitiveness, or the full breadth of lending products, limiting transparent assessment of overall value proposition.",
   "logo_url": "",
   "website_url": "https://www.fnbmichigan.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking and savings accounts",
+    "Certificates of Deposit (CDs) with guaranteed fixed rates",
+    "Home Equity Lines of Credit (HELOCs)",
+    "Online banking platform",
+    "Mobile banking application",
+    "eStatements",
+    "Clover merchant payment processing system",
+    "Clover inventory management",
+    "Clover employee scheduling and payroll",
+    "Clover customer loyalty and rewards programs",
+    "Clover Capital for business working capital",
+    "Fraud and security alerts"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2006",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits with full faith and credit of U.S. Government backing",
+    "Direct access to local bankers and emphasis on personalized service",
+    "Comprehensive Clover merchant services for restaurants, retailers, and service businesses including inventory and payroll management",
+    "Home Equity Lines of Credit (HELOCs) available for remodeling, vehicle purchase, and emergency funds",
+    "Certificates of Deposit with locked-in guaranteed rates for stable savings growth",
+    "Mobile and online banking platforms with eStatements for convenient account management",
+    "Active community involvement including employee volunteer programs"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not transparently display CD rates, HELOC rates, or fee structures for comparison shopping",
+    "Limited information about personal loan options, credit cards, or other consumer credit products",
+    "No mention of competitive rate benchmarks or how their offerings compare to national or online banks",
+    "Merchant services are limited to Clover partnership rather than offering multiple payment processing options",
+    "Regional footprint may limit branch access compared to national banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58259,
   "latitude": 42.292097998919,
   "longitude": -85.5868310414193,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Michigan residents and businesses seeking locally-focused banking with direct banker relationships",
+    "Small businesses and restaurants needing all-in-one payment processing and business management through Clover",
+    "Savers looking for stable CD products and homeowners needing home equity credit lines",
+    "Community-minded customers who value financial institutions with demonstrated local charitable involvement"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First National Bank of Michigan is best for Michigan residents and small business owners who value personal relationships with local bankers and community-focused banking. The main caveat is that the website lacks transparent rate and fee information, making it difficult to compare competitiveness; customers should contact the bank directly or visit branches to evaluate pricing against larger regional and national competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "348 W Michigan Ave, Kalamazoo, MI 49007",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

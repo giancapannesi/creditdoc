@@ -1,14 +1,14 @@
 {
   "name": "Spiritbank",
   "slug": "spiritbank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Tulsa, OK. $936M in assets. 6 offices.",
-  "description_long": "Spiritbank is a community bank located in Tulsa, OK, established in 1916. The bank holds approximately $936M in total assets and $843M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Regional Oklahoma bank offering personal and business banking services across Tulsa, Sapulpa, and Bristow with over 100 years of community banking history.",
+  "description_long": "SpiritBank traces its roots to May 16, 1916, when American National Bank was founded in Bristow, Oklahoma by eight local businessmen shortly after Oklahoma's statehood. The bank developed its distinctive \"family\" atmosphere in the 1930s under Albert Kelly's leadership, establishing what the Kelly family termed the \"ministry of banking\"—a philosophy focused on fulfilling community needs and dreams. Over the past century, the institution has grown significantly while maintaining family ownership three generations later and expanding its footprint across Oklahoma.\n\nSpiritBank provides a comprehensive suite of banking products for both individuals and businesses, including personal checking and savings accounts, business banking and treasury management services, commercial and small business loans, and robust online and mobile banking platforms. Customers can access their accounts anywhere through desktop, mobile app, or in-person at physical locations in Tulsa, Sapulpa, and Bristow. The bank emphasizes security and fraud prevention, with explicit policies never requesting Online Banking credentials, passwords, or one-time passcodes from customers.\n\nWhat distinguishes SpiritBank is its deep community integration and statewide focus on economic development initiatives. The bank positions itself as a leader in championing economic development and incentive programs that create jobs and attract companies to Oklahoma. The Kelly family's continued involvement and the bank's century-long presence in Oklahoma communities reflect a genuine commitment to local relationships rather than transactional banking.\n\nSpiritBank is best suited for individuals and businesses seeking relationship-based banking with a community focus. However, as a regional bank serving primarily Oklahoma, it may have limited convenience for out-of-state customers. The website provides basic service information but lacks detailed product specifications, fee schedules, or interest rate transparency that some consumers require for informed decision-making.",
   "logo_url": "",
   "website_url": "https://www.spiritbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business banking services",
+    "Treasury management for businesses",
+    "Commercial loans",
+    "Small business loans",
+    "Online banking enrollment and access",
+    "Mobile banking app",
+    "Real estate/mortgage services",
+    "Deposit products (implied from full-service banking claim)",
+    "Economic development program coordination",
+    "Community financial services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1916",
-    "Local community bank with personal service",
-    "6 locations"
+    "Over 100 years of established banking history and stability in Oklahoma communities",
+    "Full-service banking for both personal and business customers with treasury management options",
+    "Family-owned with three generations of Kelly family leadership ensuring community focus",
+    "Mobile and online banking available for anywhere access",
+    "Statewide leader in economic development programs and job creation initiatives",
+    "Physical branch locations in Tulsa, Sapulpa, and Bristow for in-person banking",
+    "Strong fraud prevention policies with explicit commitments not to request sensitive credentials"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Regional bank limited primarily to Oklahoma, with no out-of-state branch access mentioned",
+    "Website lacks transparent fee schedules, interest rates, or product-specific details needed for comparison",
+    "Limited information about minimum balances, account requirements, or specific loan terms available online",
+    "No indication of competitive rates compared to national banks or other Oklahoma institutions",
+    "Minimal information about commercial loan products despite claiming to serve businesses"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4048,
   "latitude": 36.0923029929829,
   "longitude": -95.9394410233663,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Oklahoma-based individuals and families seeking relationship banking with community roots",
+    "Small to mid-sized Oklahoma businesses needing treasury management and business loans",
+    "Customers who value family-owned institutions and community economic development",
+    "Residents of Tulsa, Sapulpa, Bristow, and surrounding Oklahoma areas with local branch access needs"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "SpiritBank is best for Oklahoma residents and businesses seeking stable, community-focused banking from a family-owned regional institution with over a century of local presence. The primary caveat is geographic limitation to Oklahoma service areas and lack of transparent pricing/rate information online, requiring direct contact for detailed product and fee comparisons.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "4815 S Harvard Ave, Tulsa, OK 74135",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

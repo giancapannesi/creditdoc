@@ -1,14 +1,14 @@
 {
   "name": "The First National Bank Of Absecon",
   "slug": "the-first-national-bank-of-absecon",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Absecon, NJ. $197M in assets. 4 offices.",
-  "description_long": "The First National Bank Of Absecon is a community bank located in Absecon, NJ, established in 1916. The bank holds approximately $197M in total assets and $178M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank operating in New Jersey since 1916, offering personal and business banking, mortgages, loans, and credit cards across Atlantic County and surrounding regions.",
+  "description_long": "First National Bank of Absecon (FNBA) was established on March 20, 1916, and has operated as an independently owned community bank for over a century. The bank has survived all 12 documented U.S. economic recessions and the Great Depression, positioning itself as an experienced, stable financial institution. Absecon Bancorp is its parent holding company, which recently declared quarterly cash dividends, indicating ongoing profitability.\n\nFNBA offers a comprehensive suite of personal and business banking services including checking and savings accounts, mortgages, home equity loans, personal loans, credit cards (Visa and Mastercard), online banking, mobile banking, bill pay, electronic fund transfers, and 24-hour telephone banking. The bank provides both Visa Platinum credit cards (rewards, cash back, and no-penalty options) and Mastercard debit cards with worldwide ATM access. They maintain branches in Absecon, Galloway Township, and Northfield, with a primary service area spanning Atlantic County, New Jersey, and secondary markets in Burlington, Cape May, Cumberland, Gloucester, and Ocean Counties.\n\nFNBA differentiates itself through a \"family bank\" positioning, emphasizing personal relationships, local decision-making, and ethical business practices. They combine traditional community banking values with modern technology, offering convenient digital services like eStatements, imaged checks, mobile banking, and online fraud monitoring. The bank explicitly markets itself as stress-free, straightforward, and relationship-focused, greeting customers by name and prioritizing understanding of their local markets.\n\nAs a traditional community bank with limited geographic footprint, FNBA is best suited for customers in its service areas seeking personalized service and relationship banking. The main limitation is geographic restriction\u2014they operate only in central/southern New Jersey with three branch locations. Credit card products are issued by TCM Bank, N.A., and subject to credit approval. While established and stable, the bank lacks the digital innovation or nationwide reach of larger institutions.",
   "logo_url": "",
   "website_url": "http://www.fnbabsecon.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
+    "Business checking and cash management accounts",
+    "Online banking and bill pay (personal and business)",
+    "Mobile banking and mobile payments",
+    "Mortgages and home equity loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Visa Platinum credit cards (rewards, cash back, no-penalty editions)",
+    "Mastercard debit cards with worldwide ATM access",
+    "24-hour telephone banking (1-866-809-0301)",
+    "Electronic fund transfers and eStatements",
+    "Imaged checks and check reordering",
+    "Fraud monitoring and zero fraud liability protection"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1916",
-    "Local community bank with personal service",
-    "4 locations"
+    "Over 100 years of banking history with proven survival through 12 recessions and the Great Depression",
+    "Independently owned community bank with local decision-making and personal service approach",
+    "Multiple modern digital services: 24-hour telephone banking, online banking, mobile banking, eStatements, and electronic bill pay",
+    "Three credit card options (rewards, cash back, no-penalty) with chip security and fraud monitoring",
+    "Convenient ATM access through Mastercard debit cards at millions of locations worldwide, 365 days/year",
+    "Mortgage and home equity loan products with online application",
+    "Established dividend-paying institution (parent company Absecon Bancorp recently declared $1.05 per share dividend)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: only serves Atlantic County, NJ and portions of Burlington, Cape May, Cumberland, Gloucester, and Ocean Counties\u2014unavailable outside this region",
+    "Limited branch network with only three physical locations (Absecon, Galloway Township, Northfield)",
+    "Credit cards issued by third-party bank (TCM Bank, N.A.) rather than directly, creating additional approval layer",
+    "No mention of competitive rates, APR details, or fee structures on website\u2014requires application to compare offers",
+    "Smaller institution may lack advanced fintech features or investment products available at larger national banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "NJ"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 6442,
   "latitude": 39.4246679914299,
   "longitude": -74.5003489751836,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "New Jersey residents in Atlantic, Burlington, Cape May, Cumberland, Gloucester, or Ocean counties seeking relationship-based community banking",
+    "Local business owners and entrepreneurs needing business cash management and credit services in central New Jersey",
+    "Customers prioritizing personal service and ethical banking practices over digital-first or nationally-available options",
+    "Homebuyers and refinancing borrowers in the bank's service area seeking mortgage and home equity products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First National Bank of Absecon is best for New Jersey residents within its service territory (Atlantic County and surrounding areas) who value personal relationships, community-based decision-making, and stable, ethical banking. The main caveat is strict geographic limitation to central/southern New Jersey with only three branch locations\u2014prospective customers outside this region cannot use this bank.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "106 New Jersey Ave, Absecon, NJ 08201",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

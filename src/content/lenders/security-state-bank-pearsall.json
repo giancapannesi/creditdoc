@@ -1,14 +1,14 @@
 {
   "name": "Security State Bank",
   "slug": "security-state-bank-pearsall",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Pearsall, TX. $949M in assets. 7 offices.",
-  "description_long": "Security State Bank is a community bank located in Pearsall, TX, established in 1925. The bank holds approximately $949M in total assets and $845M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "South Texas community bank established in 1925, offering checking, savings, loans, and personalized banking services with emphasis on security and local presence.",
+  "description_long": "Security State Bank is a regional bank that has served South Texas since 1925, making it a century-old community financial institution. The bank positions itself as a relationship-focused alternative to larger national banks, emphasizing personal service and local decision-making. Their longevity and established presence in the region suggests institutional stability and community ties.\n\nThe bank offers a full suite of retail and commercial banking products. On the consumer side, they provide multiple checking account tiers (Basic, Regular, Super Now), savings accounts, time deposits, and personal loans. For businesses and agricultural customers, they offer commercial lending and specialized business loans. They maintain a mobile app available on iOS and Android, online banking access, and debit card services with dedicated after-hours support.\n\nSecurity State Bank differentiates itself through several specific service commitments: they actively address fraud prevention with customer security training materials, they maintain a security notice addressing scam awareness, they offer a debit card emergency line (800-500-1044), and they participate visibly in community initiatives (documented food bank donations and charitable partnerships). The bank emphasizes \"Common Courtesy. Uncommon Service\" as their brand positioning, targeting customers seeking personalized banking relationships.\n\nThe bank's main limitations are typical of regional institutions: interest rate information requires direct phone contact rather than online transparency, their product range is narrower than megabanks, and service availability appears limited to South Texas. Customers seeking banking convenience at a smaller, locally-rooted institution will find Security State Bank appropriate, while those prioritizing digital-first banking or national branch networks should consider alternatives.",
   "logo_url": "",
   "website_url": "https://www.securitystbk.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Basic Checking Accounts",
+    "Regular Checking Accounts",
+    "Super Now Checking Accounts",
+    "Personal Savings Accounts",
+    "Time Deposit Accounts",
+    "Money Market Accounts",
+    "Personal Loans",
+    "Business and Agricultural Loans",
+    "Commercial Lending",
+    "Online Banking",
+    "Mobile Banking App (iOS and Android)",
+    "Customer Security Training and Education"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1925",
-    "Local community bank with personal service",
-    "7 locations"
+    "Established 1925 with nearly 100 years of institutional history and community presence in South Texas",
+    "Multiple checking account options (Basic, Regular, Super Now) allowing customers to match account type to usage patterns",
+    "Dedicated 24/7 after-hours debit card support line (800-500-1044) for emergency card issues",
+    "Active fraud prevention program including customer security training and education resources",
+    "Community involvement documented through charitable partnerships and local food bank donations",
+    "Mobile app available on both iOS and Android platforms for digital banking access",
+    "Personal and business lending options including agricultural loans for regional customer base"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Interest rates on savings and deposit products not published online—requires phone contact for current rates",
+    "Limited to South Texas geographic region with no indication of national branch network or ATM partnerships",
+    "Minimal digital transparency: loan terms, fees, and product details not comprehensively listed online",
+    "No mention of FDIC insurance, deposit limits, or standard banking disclosures on website",
+    "No documented online account opening process; website directs customers to call or visit branches"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1497,
   "latitude": 28.9003999852112,
   "longitude": -99.0920789908115,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "South Texas residents seeking community banking with personal relationships and local decision-making",
+    "Agricultural and small business owners needing specialized lending familiar with rural Texas economies",
+    "Customers prioritizing fraud prevention and security education over digital banking convenience",
+    "Long-term customers valuing institutional stability and century-old bank heritage"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Security State Bank is best suited for South Texas-based consumers and business owners who value established community banking relationships, personalized service, and proximity to physical branches over digital-first convenience. The primary caveat is geographic limitation to South Texas and lack of online rate transparency, requiring direct phone contact to compare products with competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1000 N Oak St, Pearsall, TX 78061",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

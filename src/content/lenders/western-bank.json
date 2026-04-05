@@ -1,14 +1,14 @@
 {
   "name": "Western Bank",
   "slug": "western-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Artesia, NM. $305M in assets. 1 office.",
-  "description_long": "Western Bank is a community bank located in Artesia, NM, established in 1948. The bank holds approximately $305M in total assets and $271M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Western Bank of Artesia is an FDIC-insured community bank offering personal and business checking, savings accounts, and commercial lending services with branch locations in the Artesia area.",
+  "description_long": "Western Bank of Artesia is a traditional community bank that serves both personal and commercial banking needs in the Artesia region. The bank is FDIC-insured, meaning deposits are backed by the full faith and credit of the U.S. Government, providing standard deposit protection up to regulatory limits.\n\nThe bank offers a range of core banking products including personal checking accounts (Thrift-Checking and Personal Checking tiers), savings accounts, business checking, and commercial lending services. Personal checking has tiered pricing based on daily balance requirements, with the Personal Checking account charging $12.50 monthly if the daily balance falls below $800. The Thrift-Checking option includes item fees after the first 10 withdrawals per month. The bank provides online and mobile banking platforms, allowing customers to check balances, transfer funds, pay bills, and manage accounts remotely. Additional services include eStatements, check reordering, lost/stolen card reporting, and financial calculators.\n\nWhat distinguishes Western Bank of Artesia is its emphasis on commercial lending alongside personal banking. The website highlights a dedicated lending team specifically positioned to support business owners and entrepreneurs with cash flow needs and startup financing. The bank maintains physical branch locations in the neighborhood, emphasizing personal service and local accessibility alongside digital banking convenience.\n\nThe main limitation evident from the website is the higher monthly service charges compared to some larger regional or national banks, particularly the $12.50 minimum fee for personal checking accounts. The website content provided is limited to homepage and checking product pages, so details on savings rates, loan terms, commercial lending rates, and other comprehensive product offerings are not available for evaluation. Customers in other geographic areas should verify that Western Bank of Artesia has locations serving their community.",
   "logo_url": "",
   "website_url": "https://www.wbartesia.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal Checking (tiered with balance-based fees)",
+    "Thrift-Checking (low-cost checking with per-item fees)",
+    "Business Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Commercial lending and business loans",
+    "Online banking platform",
+    "Mobile banking app",
+    "Bill Pay service",
+    "Lost/Stolen card reporting and replacement",
+    "Check reordering",
+    "eStatements (electronic delivery)",
+    "Financial calculators"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1948",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits with full U.S. Government backing",
+    "Tiered personal checking options including Thrift-Checking for customers seeking lower-cost accounts",
+    "Dedicated commercial lending team explicitly positioned to support business owners and startups",
+    "Online and mobile banking platforms for remote account management and bill pay",
+    "Physical branch locations for in-person service and customer support",
+    "eStatements available to reduce paper and receive statements via email",
+    "Financial calculators available to help customers manage personal finances"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Personal Checking account carries $12.50 monthly service charge if daily balance falls below $800, which may be high for cost-conscious consumers",
+    "Thrift-Checking charges $0.40 per debit/withdrawal after the first 10 monthly transactions, creating ongoing fees for active account users",
+    "Limited geographic availability as a community bank with specific branch locations; not accessible to customers outside the Artesia service area",
+    "Website lacks transparency on savings account rates, CD rates, loan terms, APRs, and other key product pricing details",
+    "No information provided about minimum balance requirements for savings accounts or other deposit products"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "NM"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 16720,
   "latitude": 32.8436390090937,
   "longitude": -104.400077007897,
@@ -93,12 +104,13 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Business owners and entrepreneurs seeking commercial lending and business checking from a bank with local presence",
+    "Customers in the Artesia area who value in-person branch service and community banking relationships",
+    "Personal banking customers able to maintain minimum daily balances of $800+ to avoid monthly checking fees",
+    "Depositors prioritizing FDIC insurance protection and traditional banking security over digital-only banking options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Bank of Artesia is best for business owners and personal customers in the Artesia region seeking traditional FDIC-insured banking with commercial lending support and local branch access. The main caveat is that monthly service charges and per-transaction fees may be higher than some competitors, and geographic availability is limited to the local service area; prospective customers should verify branch accessibility and compare fee structures against other community or regional banks before opening an account.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "320 W Texas Ave, Artesia, NM 88210",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

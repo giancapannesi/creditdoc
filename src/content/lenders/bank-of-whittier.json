@@ -1,14 +1,14 @@
 {
   "name": "Bank Of Whittier, National Association",
   "slug": "bank-of-whittier",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Whittier, CA. $169M in assets. 2 offices.",
-  "description_long": "Bank Of Whittier, National Association is a community bank located in Whittier, CA, established in 1982. The bank holds approximately $169M in total assets and $142M in deposits. It operates 2 office locations. Designated as a Asian or Pacific Islander Americans. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured national bank offering Riba-Free (Islamic) banking products including checking, savings, financing, and retirement accounts across California and Texas locations.",
+  "description_long": "Bank of Whittier, National Association is a federally-chartered national bank that specializes in Riba-Free (Islamic) banking principles, which prohibit interest-based transactions. The bank was founded to serve customers seeking financial products compliant with Islamic law while maintaining full FDIC insurance backing and U.S. regulatory oversight. Operating since at least the early 2000s, the bank has established itself as a niche provider in the faith-based banking market.\n\nThe bank offers comprehensive banking services including FDIC-insured deposit accounts (checking, savings, CDs up to $20 million via CDARS), retirement savings (Traditional IRA, Roth IRA, 401-K Profit Sharing), and Riba-Free financing products for personal, home, business, commercial, non-profit, and auto loans. All deposit products are backed by the full faith and credit of the U.S. Government and feature no ATM fees at Bank of America and Citibank ATMs. The bank maintains physical branch locations in Whittier, California and Richardson, Texas, with hours 9am-5pm weekdays.\n\nBank of Whittier distinguishes itself through its exclusive focus on Islamic finance principles, making it one of few FDIC-insured banks offering comprehensive Riba-Free products in the United States. Their deposit accounts include specialized products like the AMANA Demand Deposit Checking and RF Income Generating accounts. The bank actively combats fraud with a public scam alert stating it does not operate outside the USA and has no representatives abroad. They offer private banking services and provide access to compliance resources.\n\nFor consumers seeking Islamic-compliant banking, Bank of Whittier provides legitimate FDIC protection and regulated financial services. However, the niche market focus means limited branch locations (only California and Texas), potentially higher fees than conventional banks, and limited product diversity compared to major national banks. Prospective customers should verify current rates, fees, and product availability directly, as the website lacks specific rate information and detailed fee schedules.",
   "logo_url": "",
   "website_url": "http://www.whittierbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking accounts (AMANA Demand Deposit Checking)",
+    "FDIC-insured savings accounts (RF Income Generating Savings)",
+    "FDIC-insured Certificates of Deposit (up to $20 million via CDARS)",
+    "Traditional IRA retirement accounts",
+    "Roth IRA retirement accounts",
+    "401-K Profit Sharing plans",
+    "Home financing and refinancing (Riba-Free)",
+    "Business and commercial financing (Riba-Free)",
+    "Non-profit organization financing",
+    "New car financing (Riba-Free)",
+    "Online banking and mobile banking applications",
+    "Safe deposit boxes (Whittier and Richardson locations)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1982",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Comprehensive Riba-Free banking products for Islamic finance compliance across deposit and lending services",
+    "No ATM fees at Bank of America and Citibank ATMs",
+    "Retirement savings accounts including Traditional IRA, Roth IRA, and 401-K Profit Sharing",
+    "CDARS CD accounts insured up to $20 million",
+    "Physical branch locations in both California (Whittier) and Texas (Richardson) with extended hours",
+    "Online and mobile banking services available for account access"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Only two physical branch locations limiting accessibility for most U.S. customers",
+    "Website lacks specific interest rates, APR information, and detailed fee schedules for products",
+    "Niche market positioning (Islamic finance) may limit product variety compared to conventional banks",
+    "Limited information about minimum account balances or opening requirements",
+    "No mention of deposit insurance coverage above FDIC limits or alternative protections"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 24211,
   "latitude": 33.9484380110858,
   "longitude": -118.003792035395,
@@ -93,12 +104,12 @@
     "ease_of_use": 3.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Muslim consumers and faith-based investors seeking FDIC-insured Islamic-compliant banking products",
+    "Customers in California or Texas seeking Riba-Free financing for homes, businesses, or vehicles",
+    "Individuals with large CD investments seeking CDARS multi-million dollar FDIC coverage"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Whittier is best for religiously observant Muslim customers and faith-based investors seeking FDIC-insured banking products compliant with Islamic principles, particularly those in California or Texas. The main caveat is that the bank's limited geographic presence (two branches only) and specialized niche market mean significantly restricted accessibility and product options compared to conventional national banks; customers should verify current rates and fees directly before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "15141 Whittier Blvd, Whittier, CA 90603",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }
