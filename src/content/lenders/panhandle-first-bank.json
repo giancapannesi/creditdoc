@@ -1,15 +1,15 @@
 {
   "name": "Panhandle First Bank",
   "slug": "panhandle-first-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Guymon, OK. $569M in assets. 4 offices.",
-  "description_long": "Panhandle First Bank is a community bank located in Guymon, OK, established in 1976. The bank holds approximately $569M in total assets and $459M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank offering checking accounts, savings products, credit cards, and agricultural lending with FDIC insurance and online banking access.",
+  "description_long": "Panhandle First Bank is a community-focused financial institution that positions itself as a hometown lender emphasizing personal relationships and local support. The bank offers a full suite of retail banking products including multiple checking account tiers, savings vehicles, and credit card services, all backed by FDIC insurance. Their product lineup includes three checking account options (Regular, NOW, and Platinum Club), a MasterCard credit card with rewards, agricultural lending for farmers and ranchers, commercial checking for businesses, and the PFB Learn and Earn app for teaching children financial management. What distinguishes Panhandle First Bank is their explicit community banking positioning, captured in their slogan \"We Keep Buying Personal\" and their emphasis on \"homegrown lending\" and \"hometown support.\" They offer specialized agricultural products tailored to farmers and ranchers, recognizing their regional customer base, and provide financial literacy tools for children through their dedicated app. The bank operates online and physical banking channels with 24/7 online account access and payment capabilities. For consumers seeking traditional banking services from a regional institution, Panhandle First Bank provides standard offerings with community-oriented service, though as a smaller regional bank they may have limited branch networks compared to national institutions. Their credit card rewards program is basic (1 point per dollar spent) and their checking accounts lack specific mention of premium benefits beyond the Platinum Club tier, which suggests competitive but not exceptional product features.",
   "logo_url": "",
   "website_url": "https://www.mypfb.bank",
   "affiliate_url": "",
@@ -24,23 +24,31 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Regular Checking Account (no minimum balance requirement with direct deposit)",
+    "NOW Checking Account (interest-bearing checking with competitive rates)",
+    "Platinum Club Checking Account (with AD&D insurance, cellphone protection, roadside assistance)",
+    "Commercial Checking Account (for business expense management)",
+    "PFB MasterCard Credit Card (with rewards, Zero Liability, rental insurance)",
+    "Agricultural Term Loans (customized for farmers and ranchers)",
+    "Online banking portal (24/7 account access and payments)",
+    "PFB Learn and Earn app (children's financial education with real money management)",
+    "Check ordering service",
+    "Card replacement and fraud protection services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1976",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits backed by U.S. Government full faith and credit",
+    "Three distinct checking account options with different features to match customer needs",
+    "25-day interest-free grace period on credit card purchases",
+    "PFB Learn and Earn app provides financial education tools for children with real money management",
+    "Specialized agricultural loan products for farmers and ranchers with customized terms",
+    "MasterCard benefits include Zero Liability, ID Theft Protection, and rental car insurance",
+    "24/7 online banking and payment access with account management features"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Credit card rewards program is basic (1 point per dollar) with no information on redemption value or special category bonuses",
+    "Limited detail provided on savings account interest rates and APYs despite NOW checking account offering rates",
+    "No mention of physical branch locations or ATM network size, suggesting possible limited accessibility",
+    "Platinum Club checking account benefits appear generic (AD&D insurance, cellphone protection) without specific coverage details or costs"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +60,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 22340,
   "latitude": 36.690378983827,
   "longitude": -101.481258013044,
@@ -85,21 +93,22 @@
       "FDIC Cert #22340"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Farmers and ranchers seeking specialized agricultural lending from a community bank",
+    "Families wanting financial literacy tools through the Learn and Earn app for teaching children money management",
+    "Local business owners seeking commercial checking accounts with personalized service",
+    "Community-oriented customers preferring regional banking relationships over national banks"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Panhandle First Bank is best for consumers in its geographic service area seeking traditional banking services with community-oriented customer relationships, particularly farmers/ranchers needing agricultural products and families interested in financial education tools. The main caveat is that detailed information about rates, fees, branch locations, and competitive positioning relative to national banks is limited on their website, requiring direct contact for complete product comparisons.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +116,11 @@
   ],
   "phone": "",
   "address": "1223 N Main St, Guymon, OK 73942",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

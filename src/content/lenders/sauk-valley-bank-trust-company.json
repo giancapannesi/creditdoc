@@ -1,15 +1,15 @@
 {
   "name": "Sauk Valley Bank & Trust Company",
   "slug": "sauk-valley-bank-trust-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Sterling, IL. $736M in assets. 10 offices.",
-  "description_long": "Sauk Valley Bank & Trust Company is a community bank located in Sterling, IL, established in 1999. The bank holds approximately $736M in total assets and $616M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Sauk Valley Bank & Trust Company is a regional bank offering personal, commercial, and agricultural banking products including checking, savings, mortgages, and business lending services.",
+  "description_long": "Sauk Valley Bank & Trust Company is a regional bank celebrating over 25 years of service to its community as of 2024. The bank operates as a full-service financial institution serving personal, commercial, and agricultural customers across multiple locations. Founded on the principle of being \"The Team You Can Trust,\" the bank has established itself as a fixture in its market through consistent service delivery and community involvement.\n\nThe bank offers a comprehensive suite of banking products across three primary segments. For personal customers, Sauk Valley provides checking accounts (including Green Choice Checking, Student Checking, and Senior Checking), savings products, Certificates of Deposit, mortgages, home equity loans, auto/RV/boat loans, credit cards, and online/mobile banking. Commercial clients can access business checking, savings, money market accounts, treasury management services, merchant services, cash management, remote deposit capture, and commercial lending. Agricultural customers receive specialized ag loans, real estate financing, lines of credit, and equipment leasing.\n\nSauk Valley distinguishes itself through specialized lending programs including an ITIN Home Loan Program for non-SSN holders and Downpayment Plus Programs to assist home buyers. The bank offers unique features like School Spirit Debit Cards that generate donations to local schools with each transaction, and an employee volunteer program called \"Be Great, Donate 8\" focused on community strengthening. Additional services include notary services, license sticker renewals, and night deposit options. The bank also provides private banking services and investment offerings for personal and company-sponsored accounts.\n\nAs a regional bank, Sauk Valley offers the advantage of community-focused service and specialized lending programs unavailable at national institutions. However, customers should verify specific branch locations, product availability, and competitive rates against larger banks. The bank's website emphasizes service quality and community involvement rather than promotional rates, suggesting a relationship-based rather than rate-competitive positioning. For customers seeking personalized service and community connection, Sauk Valley may be suitable; those prioritizing maximum yields on deposits or lowest rates should compare against national competitors.",
   "logo_url": "",
   "website_url": "https://www.saukvalleybank.com",
   "affiliate_url": "",
@@ -24,23 +24,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal Checking (including Green Choice, Student, Senior 55+, and ITIN variants)",
+    "Personal Savings and Certificates of Deposit",
+    "Health Savings Accounts (HSA)",
+    "Mortgages and ITIN Home Loan Program",
+    "Home Equity Loans and Auto/RV/Boat Loans",
+    "Credit Cards",
+    "Business Checking, Savings, and Money Market accounts",
+    "Commercial and Agricultural Lending (installment loans, real estate loans, lines of credit)",
+    "Treasury Management and Merchant Services",
+    "Cash Management and Remote Deposit Capture",
+    "Equipment Leasing (agricultural)",
+    "Online and Mobile Banking"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1999",
-    "Local community bank with personal service",
-    "10 locations"
+    "Offers ITIN Home Loan Program for borrowers without Social Security Numbers",
+    "School Spirit Debit Cards program that donates to local schools with customer purchases",
+    "Specialized agricultural banking segment with ag loans, equipment leasing, and real estate financing",
+    "Green Choice Checking and banking products with environmental focus",
+    "Downpayment Plus Programs providing homebuying assistance",
+    "Treasury Management and merchant services for commercial customers",
+    "Over 25 years of established service in the community",
+    "Multi-segment approach serving personal, commercial, and agricultural customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited information on deposit rates and CD rates on website (requires contacting bank)",
+    "No mention of nationwide ATM network access or fee-free ATM partnerships",
+    "Regional bank with unspecified number of branch locations (customers must verify nearby access)",
+    "Website lacks specific APR/rate information for credit cards and loans",
+    "No mention of digital banking features, mobile app capabilities, or online-only account options that compete with neobanks"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +64,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 35131,
   "latitude": 41.7880338950958,
   "longitude": -89.6991961680815,
@@ -85,21 +97,22 @@
       "FDIC Cert #35131"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Self-employed farmers and agricultural businesses seeking specialized lending and equipment financing",
+    "Non-SSN holders (ITIN applicants) seeking mortgage qualification",
+    "Small to medium business owners needing treasury management and merchant services",
+    "Community-focused customers prioritizing local bank relationships over national brand convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Sauk Valley Bank is best for regional customers seeking personalized, relationship-based banking with specialized programs for underserved populations (ITIN holders, farmers) and community integration. The primary caveat is that as a regional bank, branch/ATM access and product availability may be geographically limited, and rates are not prominently advertised online\u2014requiring direct contact to compare competitiveness against national banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +120,11 @@
   ],
   "phone": "",
   "address": "201 W 3Rd St, Sterling, IL 61081",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

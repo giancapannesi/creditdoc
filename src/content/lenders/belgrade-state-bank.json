@@ -1,14 +1,14 @@
 {
   "name": "Belgrade State Bank",
   "slug": "belgrade-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Belgrade, MO. $535M in assets. 6 offices.",
-  "description_long": "Belgrade State Bank is a community bank located in Belgrade, MO, established in 1906. The bank holds approximately $535M in total assets and $486M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Belgrade State Bank is an FDIC-insured community bank in Belgrade, MO offering checking, savings, CDs, and business lending with 119+ years of service.",
+  "description_long": "Belgrade State Bank has operated for over 119 years as a community-focused financial institution headquartered in Belgrade, Missouri. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing deposit protection up to applicable limits. Their long operational history reflects a commitment to serving local customers and maintaining stable banking operations across generations.\n\nThe bank offers a comprehensive suite of personal and business banking services. For individuals, they provide personal checking accounts, savings accounts, Certificates of Deposit (CDs) with competitive rates (ranging from 3.51% to 3.80% APY as of December 2025), and specialized products like the BSB Club Account featuring rewards, mobile phone coverage, and ID theft protection. For businesses, Belgrade State Bank provides business checking accounts, commercial lending, and SBA loans to support business growth and cash flow management.\n\nBelgrade State Bank distinguishes itself through digital accessibility and community commitment. They offer online account opening completed in minutes, a mobile app for bill pay and fund transfers, after-hours customer support until 10pm, and free financial planning calculators for budgeting, mortgage planning, retirement savings, and loan repayment. The bank actively promotes community outreach and positions itself as locally invested in its service areas.\n\nAs a regional community bank, Belgrade State Bank serves traditional banking needs competently but operates within geographic and product limitations compared to national institutions. Their CD rates are competitive but not exceptionally high, and the website provides limited information about checking account fees, minimum balance requirements, or detailed terms. The bank is suitable for customers seeking personalized service and community banking relationships rather than those seeking the broadest product range or highest yields.",
   "logo_url": "",
   "website_url": "https://belgradestatebank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs) with multiple term options",
+    "BSB Club Account with rewards and insurance benefits",
+    "Business checking accounts",
+    "Commercial lending services",
+    "SBA loans for business expansion",
+    "Online account opening",
+    "Mobile banking app with bill pay and mobile deposits",
+    "Online banking with secure login",
+    "Financial planning calculators",
+    "After-hours customer support"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1906",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits with U.S. Government backing for deposit protection",
+    "119 years of operational history demonstrating stability and longevity",
+    "Competitive CD rates from 3.51-3.80% APY with flexible term options (7-13 months)",
+    "Online account opening available in minutes without branch visit",
+    "After-hours customer support available until 10pm for urgent banking needs",
+    "Mobile app enabling bill pay, mobile deposits, and fund transfers",
+    "Free financial planning calculators for budgeting, mortgage, retirement, and loan analysis",
+    "BSB Club Account with perks including mobile phone coverage and ID theft protection"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks details on checking account monthly fees, minimum balance requirements, and specific terms",
+    "Limited information about savings account APY rates compared to CD offerings",
+    "Regional community bank with likely limited branch network and geographic service area",
+    "No mention of investment products, advisory services, or wealth management options",
+    "CD rates, while competitive, are not industry-leading and subject to change at bank discretion"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 12208,
   "latitude": 37.7864649974678,
   "longitude": -90.8494599959112,
@@ -84,21 +96,22 @@
       "FDIC Cert #12208"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Belgrade, MO residents seeking relationship-based community banking",
+    "Small business owners needing SBA loans and commercial lending support",
+    "Savers interested in CDs with competitive fixed rates and deposit protection",
+    "Customers preferring digital banking convenience with local customer service access"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Belgrade State Bank is best for customers in its service area seeking traditional community banking with digital convenience, deposit safety, and personalized service. The main caveat is that as a regional bank, it likely has limited geographic reach, and customers should verify account terms and fees are competitive for their specific needs since the website provides incomplete fee and rate details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,10 @@
   ],
   "phone": "",
   "address": "14185 Highway C, Belgrade, MO 63622",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }

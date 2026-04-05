@@ -1,15 +1,15 @@
 {
   "name": "First Bank And Trust Company",
   "slug": "first-bank-and-trust-company-minden",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Minden, NE. $94M in assets. 1 office.",
-  "description_long": "First Bank And Trust Company is a community bank located in Minden, NE, established in 1883. The bank holds approximately $94M in total assets and $69M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Community bank in Minden, Nebraska offering checking, savings, loans, and trust services with 25+ years of 5-star Bauer Financial ratings.",
+  "description_long": "First Bank & Trust Company is a community-based bank located in Minden, Nebraska, serving local depositors and borrowers. The bank has maintained strong financial stability, earning a 5-star rating from Bauer Financial for over 25 years, indicating consistent capital adequacy and asset quality. The institution operates both in-person and digital banking channels to serve its customer base.\n\nThe bank offers a comprehensive suite of deposit accounts including multiple checking account tiers (EZ, Essential, Elite, and Exclusive/60+ options), savings accounts, and money market/CD products with recently updated rates. On the lending side, they provide personal loans, home loans with online applications, and maintain a trust department for estate and fiduciary services. Digital conveniences include mobile banking apps, online account opening, mobile deposit, online loan applications, and eStatements.\n\nFirst Bank & Trust distinguishes itself through its commitment to community involvement and customer service accessibility. All checking accounts include free VISA debit cards, complimentary notary services, and mobile deposit at no cost. Customers financing homes through the bank receive an exclusive home loan discount. The bank operates extended drive-up hours (8 am - 5:30 pm weekdays, 8:30 am - 11:30 am Saturday) and maintains an education center with calculators and FAQs.\n\nAs a small regional bank, First Bank & Trust serves primarily local Minden, Nebraska residents and businesses. The institution's size and community focus mean limited branch presence and likely narrower product sophistication compared to larger national banks. Recent ATM security incidents (the website mentions an attempted theft at their Axtell ATM) highlight the operational challenges smaller institutions face.",
   "logo_url": "",
   "website_url": "https://www.firstofminden.com",
   "affiliate_url": "",
@@ -24,23 +24,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "EZ Checking (free with eStatements, no minimum balance)",
+    "Essential Checking (paper statements, no minimum balance)",
+    "Elite Checking (interest-bearing, $2,500 minimum)",
+    "Exclusive Checking for seniors age 60+",
+    "Savings Accounts",
+    "Money Market Accounts with updated deposit rates",
+    "Certificates of Deposit (CDs)",
+    "Personal Loans with online application",
+    "Home Loans (purchase, refinance, new construction)",
+    "Trust Department services",
+    "Mobile Banking and Mobile Apps",
+    "Online Banking with eStatements and Notifi alerts",
+    "Mobile Deposit",
+    "Instant Issue Debit Cards",
+    "Mobile Wallets",
+    "Online and in-person notary services"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1883",
-    "Local community bank with personal service",
-    "1 location"
+    "5-star Bauer Financial rating for 25+ consecutive years demonstrates strong capital and asset quality",
+    "Free VISA debit card, mobile deposit, and notary services included with all checking accounts",
+    "EZ Checking account offers truly free checking with no monthly fee and no minimum balance",
+    "Interest-bearing Elite Checking account available for customers maintaining $2,500+ balance",
+    "Extended drive-up hours (8 am - 5:30 pm weekdays, Saturday hours available) for convenience",
+    "Online account opening and online loan applications reduce need for in-person visits",
+    "Exclusive home loan discount for customers who finance through the bank"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint serving only Minden, Nebraska area with no multi-state presence",
+    "Essential Checking charges $5/month paper statement fee, higher than many competitors",
+    "Elite Checking has $5/month fee if balance drops below $2,500 minimum",
+    "No mention of checking account overdraft protection or fee structure on website",
+    "Recent ATM security incident (attempted theft at Axtell location) suggests asset protection vulnerabilities"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +67,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5438,
   "latitude": 40.4982739922117,
   "longitude": -98.9486730093829,
@@ -85,21 +100,21 @@
       "FDIC Cert #5438"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Minden, Nebraska residents seeking community bank relationships with strong financial stability",
+    "Students and budget-conscious consumers looking for free checking with no minimum balance (EZ Checking)",
+    "Savers with $2,500+ looking for interest-bearing checking combined with local service"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Bank & Trust is best for Minden, Nebraska-area residents seeking stable community banking with proven financial strength and convenient digital services. The main caveat is geographic limitation\u2014this is a local bank without multi-state operations, making it unsuitable for customers who need broader geographic access or higher-tier commercial banking services.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +122,11 @@
   ],
   "phone": "",
   "address": "315 E 4Th St, Minden, NE 68959",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

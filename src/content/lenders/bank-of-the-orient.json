@@ -1,14 +1,14 @@
 {
   "name": "Bank Of The Orient",
   "slug": "bank-of-the-orient",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in San Francisco, CA. $1122M in assets. 10 offices.",
-  "description_long": "Bank Of The Orient is a community bank located in San Francisco, CA, established in 1971. The bank holds approximately $1122M in total assets and $954M in deposits. It operates 10 office locations. Designated as a Asian or Pacific Islander Americans. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering personal and business banking, mortgages, and international trade finance with a presence in California and China.",
+  "description_long": "Bank of the Orient is a full-service community bank that operates with FDIC insurance backing and maintains an international presence, including operations in Xiamen, China. The bank positions itself as a community-focused institution committed to supporting local businesses while also serving individual consumers with comprehensive financial solutions.\n\nThe bank offers a diverse range of services spanning personal banking (checking, savings, certificates of deposit, consumer mortgages, and Zelle\u00ae transfers), business solutions (business checking, savings, term loans, lines of credit, SBA lending, and business online banking), and real estate financing for both residential and commercial properties. They also provide specialized services like CDARS and ICS (likely certificate and deposit services), international trade finance, and loan servicing. Mobile banking is available through their Bank of the Orient Mobile Banking app for 24/7 account access.\n\nBank of the Orient distinguishes itself through its bilingual website (English and Chinese), international trade finance capabilities serving the Xiamen, China market, and emphasis on personalized service for both small business owners and real estate investors. Their SBA lending solutions and real estate expertise suggest a focus on supporting entrepreneurs and property investors. The bank also highlights security awareness with dedicated fraud protection resources and educational materials.\n\nAs a traditional community bank, Bank of the Orient serves a specific geographic and demographic niche rather than positioning as a high-tech or direct banking alternative. The website emphasizes personalized service and relationship banking rather than digital-first features, and customer service availability is limited to business hours (M-F, 9am-5pm PT). The pending core and online banking system upgrade suggests recent technology modernization.",
   "logo_url": "",
   "website_url": "https://www.bankorient.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Certificates of Deposit (CDs) with promotional offerings",
+    "Consumer mortgage lending",
+    "Business checking and savings accounts",
+    "Term loans and lines of credit for businesses",
+    "SBA lending solutions",
+    "Business online banking platform",
+    "Real estate financing for commercial and residential properties",
+    "International trade finance services",
+    "Zelle\u00ae money transfer service",
+    "Mobile banking app",
+    "Loan servicing"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1971",
-    "Local community bank with personal service",
-    "10 locations"
+    "FDIC-insured deposits backed by the full faith and credit of the U.S. Government",
+    "Bilingual website and international presence with Xiamen, China operations for cross-border banking needs",
+    "Mobile banking app available for 24/7 account access and mobile deposits",
+    "SBA lending solutions available for small business owners seeking government-backed financing",
+    "Comprehensive real estate financing for residential, commercial, and mixed-use properties",
+    "Zelle\u00ae integration for fast peer-to-peer money transfers",
+    "International trade finance services supporting import/export businesses"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Customer service center only operates M-F, 9am-5pm PT, limiting weekend and evening support",
+    "Core and online banking systems were undergoing migration as of the provided website content, suggesting potential service disruptions",
+    "No mention of competitive interest rates, account minimums, or fee structures on the public-facing website",
+    "Limited information about specific loan products, terms, or approval timelines for mortgages and business loans",
+    "No indication of digital-first or neobanking features; traditional brick-and-mortar banking model with limited online convenience"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 20387,
   "latitude": 37.795198018567,
   "longitude": -122.408303032819,
@@ -84,21 +95,22 @@
       "FDIC Cert #20387"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking SBA loans and personalized commercial banking relationships",
+    "Real estate investors and developers needing residential, commercial, or mixed-use property financing",
+    "Bilingual customers with international business or family ties to China",
+    "Community members seeking relationship-based banking from a local FDIC-insured institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of the Orient is best for small business owners, real estate investors, and community members seeking personalized relationship banking with international capabilities, particularly those with ties to China. The main caveat is that this is a traditional community bank with limited online-first features and customer service availability only during Pacific Time business hours, making it less suitable for customers requiring 24/7 support or preferring fully digital banking experiences.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1023 Stockton St, San Francisco, CA 94108",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

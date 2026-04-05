@@ -1,14 +1,14 @@
 {
   "name": "The Farmers National Bank Of Danville",
   "slug": "the-farmers-national-bank-of-danville",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Danville, KY. $990M in assets. 15 offices.",
-  "description_long": "The Farmers National Bank Of Danville is a community bank located in Danville, KY, established in 1879. The bank holds approximately $990M in total assets and $889M in deposits. It operates 15 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal and business banking, loans, investments, and credit cards with both consumer and agricultural/equine lending specialties.",
+  "description_long": "Farmers National Bank of Danville is a traditional bank that positions itself as a lifetime banking partner with a history of service to its communities. The institution is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing deposit security for consumer accounts.\n\nThe bank offers comprehensive personal banking services including checking accounts, savings accounts, credit cards, wire transfers, and online banking through both personal and business platforms. For business customers, they provide card processing, treasury management, and specialized lending. Their loan portfolio extends beyond standard mortgages to include agriculture and equine lending, indicating a focus on rural and specialty finance. They also offer investment services through FNB Investments and WealthSouth partnerships.\n\nThe bank distinguishes itself through specialized lending categories uncommon at larger institutions\u2014specifically agriculture and equine financing\u2014suggesting deep roots in rural Kentucky markets. They offer both personal and business-focused mobile apps (iOS and Android), a \"Teller on Demand\" service, and a dedicated customer contact center. Their website emphasizes accessibility with screen-reader mode and extensive financial wellness content.\n\nAs a regional bank, Farmers National Bank operates with traditional banking infrastructure and physical locations, which provides personal service but may lack the digital-first innovation of neobanks or the extensive product breadth of megabanks. Their specialization in agriculture and equine lending appeals to niche markets but suggests potential limitations for customers outside those sectors. The website provides service information but limited transparency on specific rates, fees, or product terms.",
   "logo_url": "",
   "website_url": "https://www.fnbky.com",
   "affiliate_url": "",
@@ -23,23 +23,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Credit cards (personal and business)",
+    "Wire transfers",
+    "Online banking (personal and business platforms)",
+    "Mortgage loans",
+    "Agriculture loans",
+    "Equine loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business loans",
+    "Investment services through FNB Investments and WealthSouth",
+    "Card processing and treasury management for businesses",
+    "Mobile banking apps (iOS and Android)",
+    "Teller on Demand service"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1879",
-    "Local community bank with personal service",
-    "15 locations"
+    "FDIC-insured deposits with U.S. Government backing provides security",
+    "Specialized agriculture and equine lending programs uncommon at most banks",
+    "Dual mobile apps for personal/small business and business-focused users",
+    "Comprehensive personal and business banking with credit cards and investment services",
+    "Teller on Demand service option for customer convenience",
+    "Dedicated customer contact center for support",
+    "Online banking available for both personal and business accounts with security features"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display specific interest rates, APRs, or fee schedules for comparison",
+    "Limited transparency on loan approval requirements or minimum deposit balances",
+    "Regional bank may have fewer physical locations than national competitors",
+    "No clear information about specific credit card rewards or benefits on homepage"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +65,7 @@
   "states_served": [
     "KY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 2740,
   "latitude": 37.6454940008211,
   "longitude": -84.772755962225,
@@ -84,21 +98,22 @@
       "FDIC Cert #2740"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural and farming business owners seeking specialized lending",
+    "Equine industry professionals (horse farms, trainers, breeders)",
+    "Rural Kentucky residents seeking community banking relationships",
+    "Small business owners needing integrated checking, credit cards, and treasury management"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Farmers National Bank is best for small business owners, farmers, and agricultural professionals in rural Kentucky markets who value specialized lending products (particularly agriculture and equine financing) and prefer traditional banking relationships with local service. The primary caveat is that consumers seeking transparent rate comparisons, digital-first banking, or comprehensive product information should shop around, as the website lacks specific pricing and fee details needed for informed decisions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +121,11 @@
   ],
   "phone": "",
   "address": "304 W Main St, Danville, KY 40422",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

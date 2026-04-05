@@ -1,15 +1,15 @@
 {
   "name": "The Citizens Bank",
   "slug": "the-citizens-bank-farmington",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Farmington, NM. $774M in assets. 6 offices.",
-  "description_long": "The Citizens Bank is a community bank located in Farmington, NM, established in 1905. The bank holds approximately $774M in total assets and $673M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Citizens Bank is a community bank serving San Juan County, New Mexico since 1905, offering FDIC-insured checking, savings, loans, and digital banking services.",
+  "description_long": "Citizens Bank has been a cornerstone of San Juan County's financial services since its founding in 1905. Over more than a century, the institution has built its reputation on local, personalized service and community commitment. The bank operates as a traditional full-service bank with multiple branches, including extended-hours locations in Farmington, New Mexico.\n\nThe bank offers a comprehensive suite of consumer and business banking products. These include mobile and online banking platforms, home loans (purchase, construction, refinance), auto loans, credit cards, and business commercial loans. Their digital offerings feature the Brella P2P money transfer app and the ability to control debit cards through mobile devices, allowing customers to block transactions or toggle their card on and off remotely. All deposits are FDIC-insured, providing government-backed protection up to applicable limits.\n\nCitizens Bank differentiates itself through its emphasis on local service and relationship banking. Rather than operating as a national megabank, it maintains a regional focus on San Juan County with staff described as willing to \"walk you through the loan process.\" The bank highlights its extended holiday hours (open on most holidays except Thanksgiving and Christmas) and personalized loan consultations. Their Brella app platform and digital wallet capabilities demonstrate investment in modern fintech security features alongside traditional banking.\n\nAs a community bank, Citizens Bank is best suited for customers who value local relationships and personalized service over large national institutions. However, potential customers should verify current product offerings, competitive rates, and fee structures directly, as the website provides limited pricing transparency. The bank's New Mexico geographic focus means it may have limitations for customers requiring nationwide branch access or those seeking specialized products beyond standard consumer and commercial lending.",
   "logo_url": "",
   "website_url": "https://www.cbnm.com",
   "affiliate_url": "",
@@ -24,23 +24,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts (FDIC-insured)",
+    "Online banking platform with username/password access",
+    "Mobile banking app for account management",
+    "Home loans (purchase, construction, refinance, remodeling)",
+    "Auto loans",
+    "Credit cards",
+    "Commercial business loans",
+    "Brella P2P money transfer app",
+    "Digital wallet and contactless payment options",
+    "Debit card control through mobile (block transactions, toggle card)",
+    "24/7 debit card fraud reporting",
+    "Routing number: 102202078"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits backed by U.S. Government guarantee",
+    "Brella app allows real-time debit card control (block transactions, toggle card on/off)",
+    "Digital wallet and contactless payment options for enhanced security",
+    "Extended holiday hours at two main branches (San Juan and Smith's locations)",
+    "Over 115 years of local community banking history and presence since 1905",
+    "Personalized loan consultations for mortgages, auto loans, and commercial lending",
+    "24/7 fraud reporting line (866-508-2693) and lost card support",
+    "Mobile and online banking apps available for account management"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to San Juan County, New Mexico only",
+    "Website provides no rate information, fee schedules, or APR comparisons for products",
+    "No information about minimum account balances, monthly maintenance fees, or product specifics",
+    "Smaller institution may have fewer ATM locations and less robust technology infrastructure than national banks",
+    "Limited details on credit card rewards programs or competitive advantages versus national card issuers"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +64,7 @@
   "states_served": [
     "NM"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1164,
   "latitude": 36.7283660204748,
   "longitude": -108.211197037348,
@@ -85,21 +97,22 @@
       "FDIC Cert #1164"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 4.0,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "San Juan County, New Mexico residents seeking local relationship banking with personalized service",
+    "Home buyers and borrowers who value face-to-face loan consultations and local decision-making",
+    "Small business owners needing commercial loans from a community-focused lender",
+    "Customers prioritizing digital security features like the Brella app's debit card controls"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Citizens Bank is ideal for San Juan County residents who prioritize relationship banking, personalized service, and local decision-making over convenience and competitive rates at national banks. The main caveat is that this is a small regional bank with limited geographic presence, no published rate information, and potentially higher fees or less competitive products than larger institutions\u2014customers should directly compare specific products, rates, and fees before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +120,11 @@
   ],
   "phone": "",
   "address": "500 W Broadway, Farmington, NM 87401",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Platinum Bank",
   "slug": "platinum-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Oakdale, MN. $694M in assets. 2 offices.",
-  "description_long": "Platinum Bank is a community bank located in Oakdale, MN, established in 2007. The bank holds approximately $694M in total assets and $558M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Platinum Bank is a Minnesota-based community bank founded in 2007, offering business banking, SBA loans, cash management, and private banking services with local decision-making.",
+  "description_long": "Platinum Bank was founded in 2007 to serve the financial needs of business owners throughout the Midwest. The bank has grown to over 90 employees and operates two physical locations in the Twin Cities area: Oakdale and Plymouth, Minnesota. The institution positions itself as a relationship-focused alternative to larger, impersonal financial institutions.\n\nThe bank offers a comprehensive suite of banking services including business banking, SBA loans, cash management solutions, digital banking platforms, and private banking services. They provide personalized financial solutions and emphasize their ability to structure creative arrangements tailored to individual business needs. The bank also maintains a client portal for account management and offers wire transfer services through their platform.\n\nPlatinum Bank distinguishes itself through three core differentiators: local decision-making authority that allows for faster approval decisions, creative solutions customized to specific business situations rather than standardized offerings, and a strategic partnership approach focused on understanding client needs and supporting long-term growth. They emphasize relationship banking and transparent communication, positioning themselves against the typical corporate banking model.\n\nAs a regional community bank, Platinum Bank serves established business owners in the Midwest seeking relationship-based banking with local accountability. However, prospective clients should note that they operate only two physical locations in Minnesota, limiting geographic accessibility. The bank's focus on business and private banking means they may not serve consumers seeking purely personal consumer products at scale, and their service hours (7:30 AM-5:00 PM weekdays) are traditional business hours without evening or weekend availability.",
   "logo_url": "",
   "website_url": "https://www.platinumbankmn.com",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business banking accounts and services",
+    "SBA loan programs and small business financing",
+    "Cash management solutions",
+    "Digital banking platform and online account management",
+    "Private banking services",
+    "Business lines of credit",
+    "Wire transfer services",
+    "Client portal access",
+    "Personalized business financial consulting",
+    "Account transition and onboarding assistance"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2007",
-    "Local community bank with personal service",
-    "2 locations"
+    "Local decision-making authority enabling faster loan approvals without distant corporate bureaucracy",
+    "Founded in 2007 with demonstrated stability and over 90 employees supporting operations",
+    "Offers SBA loan programs specifically designed for small business financing and expansion",
+    "Digital banking platform allowing account management from anywhere, anytime",
+    "Two convenient Twin Cities locations in Oakdale and Plymouth with established banking hours",
+    "Creative solutions approach tailored to individual business situations rather than cookie-cutter services",
+    "FDIC-insured institution with regulatory compliance (NMLS#673646)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to only two physical branch locations in Minnesota, restricting geographic accessibility for out-of-state businesses",
+    "Traditional business hours (7:30 AM-5:00 PM weekdays) with no evening or weekend service availability",
+    "Primary focus on business and private banking means limited consumer retail banking products or services",
+    "Small regional bank with fewer resources and technology infrastructure compared to larger national banks",
+    "No information provided on specific loan terms, rates, or minimum account requirements"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58511,
   "latitude": 44.9622379964973,
   "longitude": -92.951091962378,
@@ -84,21 +93,21 @@
       "FDIC Cert #58511"
     ]
   },
-  "rating": 3.5,
+  "rating": 4.2,
   "rating_breakdown": {
-    "value": 3.8,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 3.6,
-    "ease_of_use": 3.5
+    "value": 5.0,
+    "effectiveness": 3.7,
+    "customer_service": 3.8,
+    "transparency": 3.8,
+    "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Midwest business owners seeking relationship-based banking with local decision-making authority",
+    "Established small to mid-sized companies needing SBA loans or business credit lines",
+    "Business owners in the Twin Cities metro area seeking convenient in-person banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Platinum Bank is best for Midwest business owners and entrepreneurs seeking personalized relationship banking with local decision-making authority rather than corporate standardization. The primary caveat is geographic limitation\u2014their two Minnesota locations serve only businesses in the Twin Cities area\u2014making them unsuitable for companies requiring multi-state or national banking relationships or remote-only operations.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +115,11 @@
   ],
   "phone": "",
   "address": "7667 10Th St N, Oakdale, MN 55128",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }
