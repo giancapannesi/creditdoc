@@ -17,26 +17,27 @@ const monthlyPrice = formatPrice(lender.pricing.monthly_price);
 <article class="glass-card p-5 sm:p-6 flex flex-col h-full">
   <!-- Top: Logo + Name -->
   <div class="flex items-start gap-4">
-    <div class="shrink-0 w-14 h-14 rounded-xl bg-bg-alt border border-border flex items-center justify-center overflow-hidden relative">
-      <span class="text-lg font-bold text-primary absolute inset-0 flex items-center justify-center">
-        {lender.name.charAt(0)}
-      </span>
+    <div class="shrink-0 w-14 h-14 rounded-xl bg-bg-alt border border-border flex items-center justify-center overflow-hidden">
       {lender.logo_url && !lender.logo_url.includes('googleusercontent.com') ? (
         <img
           src={lender.logo_url}
           alt={`${lender.name} logo`}
-          class="w-10 h-10 object-contain relative z-10 bg-bg-alt"
+          class="w-10 h-10 object-contain"
           loading="lazy"
         />
       ) : lender.website_url ? (
         <img
-          src={`https://icon.horse/icon/${new URL(lender.website_url).hostname}?size=large`}
+          src={`https://icons.duckduckgo.com/ip3/${new URL(lender.website_url).hostname}.ico`}
           alt={`${lender.name} logo`}
-          class="w-10 h-10 object-contain relative z-10 bg-bg-alt"
+          class="w-10 h-10 object-contain"
           loading="lazy"
-          onerror="this.remove()"
+          onerror={`this.onerror=function(){this.onerror=null;this.parentElement.innerHTML='<span class=\"text-lg font-bold text-primary\">${lender.name.charAt(0)}</span>'};this.src='https://icon.horse/icon/${new URL(lender.website_url).hostname}?size=large'`}
         />
-      ) : null}
+      ) : (
+        <span class="text-lg font-bold text-primary">
+          {lender.name.charAt(0)}
+        </span>
+      )}
     </div>
     <div class="flex-1 min-w-0">
       <h3 class="text-lg font-semibold text-text truncate">{lender.name}</h3>
