@@ -1,14 +1,14 @@
 {
   "name": "The City National Bank Of Metropolis",
   "slug": "the-city-national-bank-of-metropolis",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Metropolis, IL. $443M in assets. 2 offices.",
-  "description_long": "The City National Bank Of Metropolis is a community bank located in Metropolis, IL, established in 1908. The bank holds approximately $443M in total assets and $346M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Unable to verify. Website currently inaccessible (HTTP 403 error). Cannot confirm company details, services, or legitimacy.",
+  "description_long": "The City National Bank of Metropolis lists a banking category on CreditDoc, but the official website (https://www.cnb-metropolis.com) returns an HTTP 403 Access Denied error, preventing verification of any company information. This access restriction means basic details about the institution\u2014including whether it is an active, legitimate banking entity\u2014cannot be confirmed through primary sources. Without access to official website content, company history, regulatory status, or service offerings cannot be documented. The error persists with reference code 18.892b2117.1775395145.33cb0f54, suggesting either a server configuration issue, domain misconfiguration, or the site being behind access restrictions. Any consumer considering this bank cannot verify its legitimacy, FDIC insurance status, or specific services offered through normal channels. This lack of transparency and accessibility is a significant red flag for a financial institution claiming to serve consumers.",
   "logo_url": "",
   "website_url": "https://www.cnb-metropolis.com",
   "affiliate_url": "",
@@ -37,9 +37,11 @@
     "2 locations"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website completely inaccessible\u2014HTTP 403 error blocks all verification",
+    "Cannot confirm FDIC insurance status or regulatory compliance",
+    "No accessible information about services, fees, or account types",
+    "Unable to verify if company is currently operational",
+    "No public contact information or customer support accessible"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +53,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3814,
   "latitude": 37.1510050059999,
   "longitude": -88.7323129590285,
@@ -98,7 +100,7 @@
     "Small business banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "This profile cannot be completed due to website access denial. Consumers should not proceed with any financial relationship involving this entity until the website is accessible and company legitimacy can be independently verified through regulatory databases (FDIC, OCC, NCUA).",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +108,10 @@
   ],
   "phone": "",
   "address": "423 Ferry St, Metropolis, IL 62960",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-05"
 }
