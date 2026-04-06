@@ -1,14 +1,14 @@
 {
   "name": "Portage Bank",
   "slug": "portage-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Bellevue, WA. $97M in assets. 3 offices.",
-  "description_long": "Portage Bank is a community bank located in Bellevue, WA, established in 1901. The bank holds approximately $97M in total assets and $74M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Portage Bank is a regional bank offering checking accounts, personal and commercial loans, and business fintech solutions through its Portage IQ division.",
+  "description_long": "Portage Bank positions itself as a community-focused financial institution with headquarters in Bellevue, Washington, and a branch presence across the Pacific Northwest and Minnesota. The bank emphasizes partnership-based banking with a stated commitment to knowing customers personally and actively supporting their financial goals. Their service model combines traditional retail banking with emerging business technology capabilities.\n\nThe bank offers three primary product lines: checking accounts for individuals, purchase loans and personal lending, and commercial loans for business customers. Additionally, Portage Bank operates Portage IQ, a dedicated business technology division that provides digital banking infrastructure services including virtual accounts, real-time transaction monitoring, ACH and wire origination, API connectivity, and enhanced security protocols\u2014positioning itself to serve both local businesses and participants in the global payments industry.\n\nPortage Bank distinguishes itself through its explicit focus on business technology integration via Portage IQ, offering capabilities that extend beyond traditional retail banking into fintech enablement. The bank provides both in-person and appointment-based services across multiple locations, maintains a free mobile app for 24/7 account access, and offers bilingual support (English/Spanish). They are FDIC-regulated with NMLS certification (1831756) and maintain published routing numbers and compliance frameworks.\n\nAs a regional bank with limited branch infrastructure (one full-service branch in Bellevue, one in Ceylon, and loan offices in Spokane, Snohomish, and Yakima), Portage Bank's reach is geographically constrained compared to national institutions. The bank's emphasis on business technology services suggests positioning toward commercial clients and fintech partnerships rather than mass-market retail consumers. Website content lacks detailed product specifications, fee schedules, interest rate information, and customer reviews, making comparative evaluation difficult.",
   "logo_url": "",
   "website_url": "https://www.portage.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with online and mobile access",
+    "Purchase loans for personal financing needs",
+    "Commercial loans for business expansion and operations",
+    "Digital onboarding services (via Portage IQ)",
+    "Virtual account creation and management (via Portage IQ)",
+    "Real-time transaction monitoring (via Portage IQ)",
+    "ACH origination and wire transfer services (via Portage IQ)",
+    "API connectivity and integration services (via Portage IQ)",
+    "Access to payment networks (via Portage IQ)",
+    "Enhanced security and regulatory protocol implementation",
+    "Free mobile banking application with 24/7 account access",
+    "Phone, email, and online account opening support"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1901",
-    "Local community bank with personal service",
-    "3 locations"
+    "Portage IQ division offers specialized fintech infrastructure (digital onboarding, virtual accounts, real-time monitoring, API connectivity) for businesses and payment networks",
+    "FDIC-regulated bank with published NMLS certification (1831756) and routing number 091205869, indicating regulatory compliance",
+    "Free mobile app providing 24/7 account access and account management capabilities",
+    "Multiple service channels including in-person branches, loan offices, phone support (507-632-4242, toll-free 833-999-6288), email, and online account opening",
+    "Bilingual website and support (English/Espa\u00f1ol) expanding accessibility",
+    "Extended hours on Wednesdays at main office (until 5:30pm CST) and loan office hours up to 5:00pm PST in Spokane",
+    "Advertised emphasis on partnership model and personalized customer relationship approach"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Very limited geographic footprint with only one full-service branch (Bellevue, WA) and one satellite branch (Ceylon, MN), making in-person banking access extremely limited for most consumers",
+    "No published information on account fees, minimum balances, interest rates, loan terms, or APRs on website\u2014critical pricing information is unavailable for comparison",
+    "Loan offices in Spokane, Snohomish, and Yakima explicitly state no deposits accepted, reducing service accessibility",
+    "No customer reviews, testimonials, or third-party ratings visible on website to assess service quality or customer satisfaction",
+    "Website lacks detailed product specifications, eligibility requirements, or clear differentiation of checking account options beyond generic 'secure, convenient access'"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8197,
   "latitude": 47.618485083798,
   "longitude": -122.196235007626,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Pacific Northwest businesses seeking fintech-enabled banking infrastructure and payment network solutions through Portage IQ",
+    "Commercial loan applicants in Washington state and Minnesota with appointment flexibility and need for business-focused lending",
+    "Existing customers in Bellevue or Ceylon seeking relationship-based community banking with local presence",
+    "Organizations evaluating ACH, wire origination, virtual account, and payment API services for embedded finance needs"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Portage Bank is best suited for commercial customers and fintech partners in the Pacific Northwest seeking infrastructure-level banking services, or existing regional customers valuing relationship banking. The primary caveat is severe geographic limitation (one full-service branch) and complete absence of published pricing, rates, or fees, making it unsuitable for consumers seeking transparent comparison shopping or those outside the Bellevue/Ceylon area.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "880 108Th Avenue Ne, Bellevue, WA 98004",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

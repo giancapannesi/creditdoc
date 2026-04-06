@@ -1,14 +1,14 @@
 {
   "name": "First State Bank",
   "slug": "first-state-bank-eastpointe",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Eastpointe, MI. $1317M in assets. 11 offices.",
-  "description_long": "First State Bank is a community bank located in Eastpointe, MI, established in 1917. The bank holds approximately $1317M in total assets and $1188M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "First State Bank is a community bank serving Southeast Michigan with FDIC insurance, offering checking, savings, mortgages, home equity loans, and business banking with a local relationship-focused approach.",
+  "description_long": "First State Bank is a Southeast Michigan-based community bank with over 100 years of operating history in the region. The bank emphasizes its local presence and relationship-centric approach, positioning itself as an alternative to larger national banks that lack personalized service. The institution is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing deposit security for customers.\n\nThe bank offers a comprehensive suite of personal and business banking products. Personal services include checking and savings accounts, CDs (currently advertising 4.20% APY on 13-month CDs with direct deposit), personal loans, credit cards, mortgages (purchase and refinance), and home equity loans with promotional rates (6.49% APR for the first 12 months on home equity specials). Business customers can access business credit cards, business lines of credit, and dedicated business banking advisory services through their Business Banking Hub. All customers benefit from nationwide fee-free ATMs, mobile banking with mobile deposit, online banking with bill pay, and account alerts.\n\nFirst State Bank differentiates itself through genuine local market expertise and personalized customer care. The website emphasizes that employees live in the community they serve, enabling them to understand local financial goals and market conditions. Customer testimonials highlight the personal touch absent from larger institutions, with one long-term customer noting 60+ years of loyalty. The bank maintains an Executive Team structure and actively engages in community involvement through events and sponsorships.\n\nAs a traditional community bank, First State Bank is best suited for customers prioritizing personal relationships and local decision-making over digital-first experiences or the broadest product selection. The bank is implementing a digital platform upgrade launching May 11, 2026, suggesting current digital capabilities may lag fintech competitors. Geographic limitation to Southeast Michigan and lack of national branch presence may inconvenience customers who relocate or travel frequently.",
   "logo_url": "",
   "website_url": "https://www.fsb.bank",
   "affiliate_url": "",
@@ -25,21 +25,31 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
+    "Certificates of Deposit (CDs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal credit cards",
+    "Mortgage loans (purchase and refinance)",
+    "Home equity loans (fixed-rate)",
+    "Home equity lines of credit (variable-rate)",
+    "Business credit cards",
+    "Business lines of credit",
+    "Mobile banking with deposit capture",
+    "Online banking with bill pay"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1917",
-    "Local community bank with personal service",
-    "11 locations"
+    "FDIC-insured deposits backed by U.S. government guarantee",
+    "Nationwide fee-free ATM access despite regional footprint",
+    "Competitive CD rates (4.20% APY on 13-month with qualifying account)",
+    "Home equity promotional rates as low as 6.49% APR for first 12 months",
+    "Mobile banking with mobile deposit capture capability",
+    "Over 100 years of established banking history and community trust",
+    "Personalized service model with local decision-making authority"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic presence restricted to Southeast Michigan only",
+    "Current digital platform undergoing major upgrade (not launching until May 2026), suggesting existing digital tools may be outdated",
+    "No mention of specific checking account APY rates or promotional checking bonuses on homepage",
+    "Limited transparency on personal loan rates, terms, and eligibility criteria"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "MI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15032,
   "latitude": 42.4640869826377,
   "longitude": -82.9567479914784,
@@ -93,12 +103,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Southeast Michigan residents prioritizing personal relationships and local banking expertise",
+    "Small business owners seeking relationship-based lending and business banking advisory",
+    "Homeowners interested in home equity loans with promotional introductory rates",
+    "Long-term customers valuing stability and community-focused banking over digital innovation"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First State Bank is best for Southeast Michigan residents and small business owners who value personalized service, local decision-making, and community connection over cutting-edge digital banking. The primary caveat is geographic limitation to Southeast Michigan and reliance on an aging digital platform that won't be updated until May 2026, making it less suitable for tech-forward customers or those requiring national banking capabilities.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,10 @@
   ],
   "phone": "",
   "address": "16100 E 9 Mile Rd, Eastpointe, MI 48021",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

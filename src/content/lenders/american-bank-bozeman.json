@@ -1,14 +1,14 @@
 {
   "name": "American Bank",
   "slug": "american-bank-bozeman",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Bozeman, MT. $629M in assets. 6 offices.",
-  "description_long": "American Bank is a community bank located in Bozeman, MT, established in 1970. The bank holds approximately $629M in total assets and $564M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Montana-based FDIC-insured bank operating since 1947, offering personal and business banking with physical branches across Montana and online services.",
+  "description_long": "American Bank is a locally-owned and operated financial institution founded in 1947, serving Montana communities through a network of physical branches and digital banking channels. The bank positions itself as a relationship-driven lender with deep community roots, emphasizing that their bankers volunteer locally and understand regional business needs, particularly in agriculture and real estate lending. American Bank offers a comprehensive range of personal banking services including checking and savings accounts, debit and credit cards, CDs and IRAs, and consumer lending products. On the business side, they provide commercial checking and savings accounts, business credit cards, commercial loans, real estate financing, construction lending, and specialized aircraft financing through their AB Aviation division. The bank distinguishes itself through personalized service and customization, claiming to tailor products to individual customer needs rather than offering one-size-fits-all solutions. As an FDIC-insured institution backed by the U.S. Government, American Bank provides deposit protection and regulatory compliance. Their physical presence across six Montana locations (Big Sky, Big Timber, Bozeman West, Bozeman East, Livingston, Whitefish, and Kalispell) combined with mobile banking, bill pay, mobile deposit, and online banking creates a hybrid retail-digital model. For consumers seeking traditional community banking with local decision-making authority, American Bank represents a mid-sized regional option. However, customers should note the bank operates exclusively in Montana with limited branch density compared to national banks, and the website provides minimal information about rates, fees, or specific product terms.",
   "logo_url": "",
   "website_url": "https://www.americanbankmontana.com",
   "affiliate_url": "",
@@ -23,23 +23,39 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business checking and savings accounts",
+    "Personal and business debit cards",
+    "Personal and business credit cards",
+    "CDs and IRAs",
+    "Consumer lending and personal loans",
+    "Real estate and home equity loans",
+    "Commercial business loans",
+    "Commercial real estate financing",
+    "Commercial construction loans",
+    "Aircraft financing (AB Aviation division)",
+    "Mobile banking app and online banking platform",
+    "Mobile deposit",
+    "Bill pay and fund transfers",
+    "Safe deposit boxes",
+    "Notary services",
+    "24-hour ATM access at select locations"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1970",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits backed by full U.S. Government faith and credit protection",
+    "Montana-owned and operated since 1947 with demonstrated local market stability",
+    "Multiple physical branches across Montana (Big Sky, Bozeman, Livingston, Whitefish, Kalispell) plus 24-hour ATMs at select locations",
+    "Comprehensive personal banking products including checking, savings, CDs, IRAs, and consumer lending",
+    "Specialized business lending expertise in agriculture and commercial real estate financing",
+    "Mobile banking app available on both Google Play and Apple App Store",
+    "Advanced services like mobile deposit, bill pay, and safe deposit boxes available"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Montana only, unsuitable for customers needing multi-state branch access",
+    "Website lacks published interest rates, fee schedules, or specific product terms\u2014customers must contact bank directly for pricing",
+    "Only 6 physical branch locations across entire state creates potential inconvenience for rural Montana residents",
+    "No information about minimum account balances, overdraft policies, or promotional offers available online",
+    "No mention of alternative funding options like payday alternatives or emergency small loans that competitors offer"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +67,7 @@
   "states_served": [
     "MT"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 20311,
   "latitude": 45.6789120080317,
   "longitude": -111.059558005566,
@@ -93,12 +109,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Montana-based small business owners seeking personalized commercial lending and agriculture financing",
+    "Residents of Bozeman, Livingston, Big Sky, Whitefish, and surrounding Montana areas seeking local relationship banking",
+    "Commercial real estate investors and construction companies needing specialized lending expertise",
+    "Customers prioritizing FDIC-insured community banking over national bank convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "American Bank is best for Montana residents and small business owners seeking traditional community banking with personalized service and local decision-making, particularly those with agriculture or commercial real estate financing needs. The primary caveat is geographic restriction to Montana with only six branches, making it unsuitable for multi-state customers, and the absence of published rates/fees online requires direct contact for pricing information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-24",
   "cities_served": [
@@ -115,8 +132,11 @@
     "data_period": "2023-present",
     "last_checked": "2026-03-24"
   },
-  "processing_status": "raw",
-  "quality_score": 9,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 12,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Park Bank, National Association",
   "slug": "park-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Holmen, WI. $80M in assets. 3 offices.",
-  "description_long": "Park Bank, National Association is a community bank located in Holmen, WI, established in 1909. The bank holds approximately $80M in total assets and $67M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving Wisconsin since 1909, offering savings accounts, mortgages, SBA lending, and personal banking with three local branches.",
+  "description_long": "Park Bank, National Association has operated continuously since 1909, when it first opened in Holmen, Wisconsin. The bank's founding loan was for corn seed for spring planting, and its first deposit was $300 into a savings account for a home down payment\u2014a mission that remains central to the bank's identity today. Over the past century, Park Bank has grown to include three branch locations across the Greater Coulee Region: Holmen, La Crosse, and Sparta.\n\nThe bank offers a comprehensive suite of consumer and business banking services. For individuals, Park Bank provides savings accounts with competitive rates, home mortgage loans (including purchase, refinance, and construction lending), online and mobile banking, and personalized loan officer assistance. For small business owners, Park Bank specializes in SBA lending and positions itself as a \"top SBA lender\" with products specifically designed to be business-friendly. All mortgage loans originated by Park Bank are serviced in-house, ensuring continuity throughout the loan lifecycle.\n\nPark Bank distinguishes itself through its commitment to relationship banking and local decision-making. Loan officers work with borrowers throughout the entire process, tellers answer phones in person rather than routing to call centers, and bank officers remain available in the lobby for face-to-face conversations. The bank emphasizes hands-on service and personal attention rather than automated systems, appealing to customers who value direct human interaction. The bank's mobile app (branded \"A Fistful of Banking\") and 24/7 online mortgage center provide digital convenience without abandoning the relationship-based approach.\n\nAs a community bank with limited geographic reach (three Wisconsin locations), Park Bank is not a national option and operates with smaller scale than regional or national competitors. The bank's strength lies in serving established local communities and small business owners who value personalized service and relationship continuity. For customers seeking a traditional banking experience with local accountability and hands-on loan officers, Park Bank delivers on its promise. However, customers seeking the broadest product range, lowest rates nationally, or extensive branch networks should compare options with larger institutions.",
   "logo_url": "",
   "website_url": "https://www.parkbank.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
+    "Savings accounts with competitive money market rates",
     "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of Deposit (CDs)",
+    "Home mortgage loans (purchase, refinance, construction)",
+    "In-house mortgage loan servicing",
+    "SBA small business lending",
+    "Online banking platform",
+    "Mobile banking app",
+    "24/7 mortgage application center",
+    "Mortgage rate checking and payment calculators",
+    "Drive-up banking services",
+    "Personal loan officer consultation"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1909",
-    "Local community bank with personal service",
-    "3 locations"
+    "Competitive savings rates emphasized as \"some of the best in the area\"",
+    "100% in-house mortgage servicing ensures loans stay with originating lender",
+    "Specialized SBA lending program positioned as business-friendly alternative",
+    "Three convenient locations with drive-up services and extended drive-up hours (until 5pm weekdays)",
+    "Personal loan officer relationship management throughout entire lending process",
+    "Phone lines answered by actual tellers rather than automated systems",
+    "24/7 online mortgage application and rate checking through Mortgage Center"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to three Wisconsin locations (Holmen, La Crosse, Sparta)",
+    "Lobby hours are limited to 10am-3pm (Holmen and La Crosse) and 10am-4pm (Sparta), restricting in-person access",
+    "No mention of specific product features, rates, fees, or minimum balance requirements on website",
+    "Smaller institution may have limited product offerings compared to regional banks",
+    "No indication of whether accounts are FDIC insured or specific deposit insurance limits"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13054,
   "latitude": 43.954810013042,
   "longitude": -91.259804028673,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking specialized SBA lending with personalized service",
+    "Homebuyers and borrowers who value ongoing relationship with loan officers",
+    "Residents of Greater Coulee Region (Holmen, La Crosse, Sparta areas) seeking local banking",
+    "Customers who prefer traditional face-to-face banking over digital-only institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Park Bank is ideal for small business owners and homebuyers in Wisconsin's Greater Coulee Region who prioritize personalized service and relationship continuity over convenience and competitive rate shopping. The main caveat is geographic limitation\u2014with only three local branches, Park Bank serves existing community members rather than customers across broader regions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1200 S Main St, Holmen, WI 54636",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Minnwest Bank",
   "slug": "minnwest-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Redwood Falls, MN. $3012M in assets. 36 offices.",
-  "description_long": "Minnwest Bank is a community bank located in Redwood Falls, MN, established in 1941. The bank holds approximately $3012M in total assets and $2645M in deposits. It operates 36 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Minnwest Bank is a community-focused bank offering commercial, agricultural, and personal banking services across multiple locations, with emphasis on business solutions and family farm support.",
+  "description_long": "Minnwest Bank positions itself as a family-owned banking operation that prioritizes customer relationships and personalized service. The bank operates with a dual-focus model: serving as a traditional community bank while maintaining the capacity to handle larger commercial transactions. Their stated philosophy emphasizes being \"big enough to get big deals done and small enough to truly listen,\" reflecting a positioning between large national banks and smaller local institutions.\n\nThe bank offers a comprehensive suite of financial products across three main segments: personal banking, business banking, and agricultural banking. For personal customers, they provide checking and savings accounts (including a cashback checking product earning up to $360 annually), certificates of deposit, retirement accounts, mortgages, auto loans, and various specialized savings products. Their business division includes checking and savings accounts, business loans, lines of credit, SBA loans, leasing options, and cash management services. The agricultural segment specifically targets farmers with products like the Bold Roots Farming Program, farm accelerator loans, equipment financing, and access to state and federal agricultural programs.\n\nMinnwest distinguishes itself through explicit agricultural roots and community bank positioning, particularly emphasizing support for family farms and local agriculture businesses at multiple locations. They offer proprietary digital tools like \"Business IQ,\" described as a Digital CFO service providing personalized business insights. Their personal checking accounts feature a cashback rewards structure, and they provide financial reporting tools including spending analysis and graphical reporting through their digital banking platform. The bank also operates Minnwest Insurance Agency as an affiliate, expanding their financial services ecosystem.\n\nAs a traditional brick-and-mortar bank, Minnwest's primary limitations stem from its community bank model: geographic service limitations (locations concentrated in agricultural regions), likely less competitive rates than national online banks on deposits, and no indication of specialized services for credit-challenged borrowers. The website provides limited transparency on fee structures, APRs, loan terms, or specific product details. Their strengths in personalized service and agricultural expertise come with the tradeoff of potentially less extensive product innovation or digital-first banking experiences compared to fintech alternatives.",
   "logo_url": "",
   "website_url": "https://www.minnwestbank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Minnwest Cashback Checking (personal banking with rewards)",
+    "Business checking and savings accounts (Classic and Platinum tiers)",
+    "Agri-business checking and savings accounts (specialized for farmers)",
+    "Commercial and agricultural loans and lines of credit",
+    "SBA loans for small business financing",
+    "Farm equipment loans and leases",
+    "Business digital banking with Business IQ CFO insights tool",
+    "Mortgages and home equity products (personal)",
+    "Auto, boat, snowmobile, and RV loans",
+    "Certificates of deposit (personal and business)",
+    "Individual retirement accounts (IRA) and health savings accounts (HSA)",
+    "Cash management services and payment processing"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1941",
-    "Local community bank with personal service",
-    "36 locations"
+    "Cashback checking accounts that pay customers up to $360 annually on everyday spending",
+    "Specialized agricultural banking division with Bold Roots Farming Program and farm accelerator loans",
+    "Business IQ digital tool providing free personalized business insights and CFO-level financial analysis",
+    "Comprehensive digital banking platform with spending analysis, financial reporting tools, and graphs",
+    "Explicit commitment to family farms and local agriculture businesses with dedicated agri-business locations",
+    "Multiple checking account tiers (Classic, Platinum) for both business and personal customers",
+    "SBA loans and state/federal agricultural program access for qualified borrowers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as a community bank concentrated in agricultural regions, not nationwide",
+    "No transparent pricing information on website for fees, interest rates, or loan APRs",
+    "No evidence of specialized products for consumers rebuilding credit or with poor credit history",
+    "Affiliate insurance products explicitly disclaimed as not FDIC insured and not bank-guaranteed",
+    "Website content is truncated/incomplete, suggesting navigation and full product details may require contact"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 16958,
   "latitude": 44.5393279821329,
   "longitude": -95.1184460125484,
@@ -94,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural business owners and family farmers seeking specialized lending and operating support",
+    "Small to mid-sized business owners in the Midwest seeking personalized banking relationships",
+    "Personal banking customers in Minnwest service areas seeking cashback rewards on checking accounts",
+    "Business customers looking for integrated cash management and payment processing solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Minnwest Bank is best for small-to-medium business owners, agricultural operators, and personal customers located in their Midwest service areas who value personalized relationships and community banking support. The primary caveat is geographic limitation\u2014this is not a nationwide option\u2014and lack of specialized products for credit-challenged borrowers or fast emergency lending.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "300 S Washington St, Redwood Falls, MN 56283",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Security Bank",
   "slug": "security-bank-tulsa",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Tulsa, OK. $898M in assets. 1 office.",
-  "description_long": "Security Bank is a community bank located in Tulsa, OK, established in 1902. The bank holds approximately $898M in total assets and $792M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank in Oklahoma offering personal and business banking services with a focus on relationship-based, local banking.",
+  "description_long": "Security Bank operates as a community-focused financial institution based in Tulsa, Oklahoma, with origins rooted in a small office approach emphasizing personal relationships over transactional banking. The bank explicitly positions itself as a \"people-first\" institution that prioritizes meaningful partnerships with customers and maintains a commitment to preserving community banking culture. Their service offerings span personal banking products, business banking solutions, business lending, and digital banking capabilities, with emphasis on providing direct support and personalized financial guidance. Security Bank distinguishes itself through its commitment to local community investment and relationship banking rather than a national or digital-first model. The bank maintains FDIC insurance on deposits and operates with traditional branch hours (Tulsa main branch: 9 AM-4 PM lobby; 7:30 AM-6 PM drive-thru weekdays). While positioning as a personal, accessible alternative to larger banks, Security Bank's geographic footprint appears limited to Oklahoma (Tulsa main branch and Edmond loan production office), which restricts accessibility for customers outside this region. Their digital offerings exist but appear secondary to their relationship-banking emphasis, and the website provides limited transparency on specific product rates, terms, loan amounts, or competitive positioning against regional or national alternatives.",
   "logo_url": "",
   "website_url": "http://www.sbtulsa.bank",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and deposit accounts",
+    "Business checking and deposit accounts",
+    "Business lending",
+    "Business loans",
+    "Digital banking platform",
+    "Mobile banking app",
+    "Remote deposit",
+    "Lockbox services",
+    "24/7 telephone banking",
+    "Drive-thru banking",
+    "ATM access through Transfund and QuikTrip partnerships",
+    "Financial consulting and decision-making support"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1902",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Extended drive-thru hours (7:30 AM-6 PM weekdays; 9 AM-12 PM Saturday)",
+    "24/7 telephone banking line for account access",
+    "Surcharge-free ATM access through QuikTrip (65+ locations) and Transfund network (200+ Tulsa metro locations)",
+    "Offers both personal and business banking with business lending services",
+    "Mobile app available for digital banking",
+    "Local relationship-based banking model with direct banker support",
+    "Remote deposit and lockbox services available"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Oklahoma locations only (Tulsa and Edmond)",
+    "Website provides no transparent disclosure of interest rates, APYs, loan terms, or fees",
+    "Oklahoma City location is loan production office only\u2014cannot accept deposits or process withdrawals",
+    "Limited information about specific product offerings, minimum balances, or account types available",
+    "No online account opening process visible on website; requires visit or call to open accounts"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4178,
   "latitude": 36.0905639995311,
   "longitude": -95.8559909629896,
@@ -93,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Oklahoma-based individuals and small business owners seeking personalized banking relationships",
+    "Local business owners needing business lending and streamlined banking operations",
+    "Customers who prefer traditional community banking over large national or digital-only banks",
+    "Businesses in Tulsa and surrounding areas requiring business banking and lending services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Security Bank is best for Oklahoma-based individuals and small business owners who prioritize relationship-based banking and local community investment over digital convenience or competitive product rates. Primary caveat: the bank's transparency is limited regarding specific product terms, rates, and fees, and its geographic availability is restricted to Oklahoma, making it inaccessible for out-of-state customers.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "10727 E 51St St, Tulsa, OK 74146",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

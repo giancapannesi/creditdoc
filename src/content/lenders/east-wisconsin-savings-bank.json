@@ -1,15 +1,15 @@
 {
   "name": "East Wisconsin Savings Bank",
   "slug": "east-wisconsin-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Kaukauna, WI. $271M in assets. 4 offices.",
-  "description_long": "East Wisconsin Savings Bank is a community bank located in Kaukauna, WI, established in 1887. The bank holds approximately $271M in total assets and $218M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "East Wisconsin Savings Bank is a community-focused financial institution founded in 1887 offering personal banking, mortgages, business solutions, and insurance services.",
+  "description_long": "East Wisconsin Savings Bank has operated as a community financial institution since 1887, with a stated mission to enhance the growth and well-being of members and the communities it serves. The bank maintains a local presence with multiple branch locations across Wisconsin and operates an online banking platform for digital access to accounts. The institution positions itself as a relationship-driven bank, emphasizing personalized service and local decision-making for loan applications and servicing. The bank serves both individual consumers and business clients through a comprehensive product suite.\n\nThe bank offers a broad range of personal banking products including checking and savings accounts, certificates of deposit (CDs), personal loans, and home mortgages. On the mortgage side, they provide home purchase loans, construction financing, and home refinancing options, with an emphasis on handling the entire loan process locally from application through funding and ongoing servicing. For insurance needs, they provide auto, home, recreational, business, life, and health insurance through their insurance services division. Additionally, the bank offers treasury solutions and business banking products designed for commercial clients, along with investment services.\n\nEast Wisconsin differentiates itself through its emphasis on local operations and community commitment. All mortgage loan work is completed in-house rather than outsourced, and the bank actively invests in community programs, including a scholarship program that awards $1,000 annually to students demonstrating community service and volunteerism. The bank markets itself as a trusted local partner with experienced staff who understand regional community needs and priorities.\n\nAs a traditional community bank, East Wisconsin Savings Bank appears to be best suited for customers seeking relationship-based banking with local decision-makers and those prioritizing in-house loan servicing. The primary caveat is that as a regional Wisconsin institution, the bank may have limited geographic reach compared to national banks, and product offerings appear more traditional than those of fintech alternatives.",
   "logo_url": "",
   "website_url": "https://WWW.EASTWIS.BANK",
   "affiliate_url": "",
@@ -24,23 +24,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
+    "Certificates of Deposit (CDs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Home purchase mortgages",
+    "Construction loans for home building",
+    "Home refinancing",
+    "Auto insurance",
+    "Home insurance",
+    "Recreational insurance (ATVs, campers, snowmobiles)",
+    "Business insurance",
+    "Life insurance",
+    "Individual and family health insurance",
+    "Investment services",
+    "Treasury solutions",
+    "Business banking and commercial lending",
+    "Online banking platform"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1887",
-    "Local community bank with personal service",
-    "4 locations"
+    "All mortgage loans processed and serviced locally from application through funding, avoiding outsourcing",
+    "Established 137-year operating history since 1887 demonstrating institutional stability",
+    "Comprehensive product suite including personal banking, mortgages, insurance, investments, and business banking under one institution",
+    "Community commitment evidenced by annual scholarship program and stated mission to enhance member well-being",
+    "Offers specialized construction loan products for home building from application through funding",
+    "Insurance services division provides bundled coverage options (auto, home, business, life, health) for potential savings",
+    "Treasury and business banking solutions designed specifically for commercial clients"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as regional Wisconsin bank may restrict accessibility compared to national institutions",
+    "Online banking enrollment portal appears to experience technical issues (endpoint error documented in website data)",
+    "No information provided about account minimums, fees, interest rates, or product-specific pricing",
+    "Website does not clearly specify which products require in-person branch visits versus online access",
+    "Limited transparency about insurance service qualifications and licensing of local agents"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +67,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 30313,
   "latitude": 44.2780889963163,
   "longitude": -88.2726939806122,
@@ -94,12 +109,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Wisconsin residents seeking relationship-based banking with local loan decision-makers",
+    "Homebuyers interested in in-house mortgage servicing and construction financing with local oversight",
+    "Small business owners needing bundled banking and insurance solutions from a single trusted local provider",
+    "Consumers who prioritize community investment and local economic commitment from their financial institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "East Wisconsin Savings Bank is best for Wisconsin-based consumers and small business owners who value relationship banking with local decision-making authority and appreciate in-house mortgage servicing. The primary caveat is limited geographic reach as a regional bank and some apparent technical issues with their online enrollment systems that may affect account opening convenience.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +123,11 @@
   ],
   "phone": "",
   "address": "109 W 2Nd St, Kaukauna, WI 54130",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

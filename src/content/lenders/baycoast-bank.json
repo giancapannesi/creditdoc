@@ -1,14 +1,14 @@
 {
   "name": "Baycoast Bank",
   "slug": "baycoast-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Swansea, MA. $2848M in assets. 25 offices.",
-  "description_long": "Baycoast Bank is a community bank located in Swansea, MA, established in 1851. The bank holds approximately $2848M in total assets and $2435M in deposits. It operates 25 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "BayCoast Bank is a community bank serving Massachusetts and Rhode Island with comprehensive personal and business banking services, lending products, and investment options.",
+  "description_long": "BayCoast Bank operates as a community-focused financial institution serving Massachusetts and Rhode Island. The bank emphasizes its role as a local community bank rather than a national chain, positioning itself around personalized service and regional commitment. Founded to serve both personal and business customers in New England, BayCoast has established a multi-faceted financial services operation.\n\nThe bank offers a comprehensive suite of personal banking products including multiple checking account tiers (Active, Direct, Free, Preferred, Senior/Minor, and Honor Checking for veterans), savings accounts, certificates of deposit, and money market accounts. On the lending side, BayCoast provides personal loans, mortgage loans, home equity lines of credit (HELOC), home equity loans (HELOAN), auto loans, and specialized products like HEAT loans for sustainable home financing. For business customers, they offer business checking accounts (including options for municipalities and non-profits), commercial lending, business lines of credit, and specialized services like cannabis banking in Massachusetts and Rhode Island.\n\nBayCoast distinguishes itself through several affiliated entities and specialized services. The bank operates BayCoast Mortgage Company for mortgage origination, Plimoth Investment Advisors for investment management, and BayCoast Insurance for insurance products. They provide modern digital banking including online and mobile banking, Apple and Google Pay integration, and interactive teller machines. The bank actively promotes financial education through free calculators, K-12 learning modules, and community programs, reflecting a stated commitment to financial literacy across all age groups.\n\nAs a regional community bank, BayCoast offers personalized service and local decision-making, but operates within the constraints of a smaller institution compared to major national banks. Customers should verify specific rates, loan terms, and product availability at their local branch, as community banks often have more variable offerings. The bank's strength lies in serving local Massachusetts and Rhode Island markets rather than providing the broad national reach or specialized services of larger institutions.",
   "logo_url": "",
   "website_url": "https://www.baycoast.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Active, Direct, Free, Preferred, Senior/Minor, Honor Checking for veterans)",
+    "Savings accounts, certificates of deposit, and money market accounts",
+    "Personal loans in Massachusetts and Rhode Island",
+    "Mortgage loans and home purchase financing",
+    "Home equity lines of credit (HELOC) and home equity loans (HELOAN)",
+    "HEAT loans for sustainable home financing",
+    "Auto loans",
+    "Business checking accounts including municipal and non-profit options",
+    "Commercial lending and business lines of credit",
+    "Cannabis banking services in MA and RI",
+    "Mobile and online banking with eStatements",
+    "Credit cards, debit cards, ATM services, and safe deposit boxes"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1851",
-    "Local community bank with personal service",
-    "25 locations"
+    "Multiple free or low-cost checking account options with no monthly service fees and no minimum balance requirements",
+    "Comprehensive lending products including personal loans, mortgages, HELOCs, auto loans, and specialized sustainable home financing (HEAT loans)",
+    "Affiliated mortgage company (BayCoast Mortgage) and investment advisor (Plimoth Investment Advisors) under same institutional umbrella",
+    "Strong emphasis on financial education with free calculators, K-12 learning modules, and financial literacy programs",
+    "Specialized business banking including cannabis banking services in MA and RI, and IOLTA accounts for law firms",
+    "Digital banking options including mobile banking, online banking, Apple/Google Pay, and interactive teller machines",
+    "Community-focused with explicit Community Reinvestment Act programs, donations, sponsorships, and local branch network in MA and RI"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Massachusetts and Rhode Island only, unlike national or regional competitors",
+    "No indication of competitive rate comparisons or rate guarantees compared to other regional and national banks",
+    "Website lacks specific information about minimum opening deposits, account fees beyond checking accounts, or detailed loan terms and APRs",
+    "As a smaller community bank, may have fewer ATM locations and services compared to major national banking chains",
+    "No mention of certain modern fintech features like cryptocurrency services, fractional shares, or robo-advisory services beyond Plimoth Investment Advisors"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 90196,
   "latitude": 41.7589225814486,
   "longitude": -71.2201184086595,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Massachusetts and Rhode Island residents seeking personalized community banking with local decision-making",
+    "Small business owners and non-profits in MA and RI needing specialized accounts and commercial lending relationships",
+    "Cannabis businesses in Massachusetts and Rhode Island requiring banking services",
+    "Families and individuals prioritizing financial education and seeking free checking accounts without minimum balances"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "BayCoast Bank is best for individuals and businesses in Massachusetts and Rhode Island seeking traditional community banking with personalized service, multiple free checking options, and a commitment to financial education. The main caveat is that the bank's services are geographically limited to MA and RI, making it unsuitable for customers seeking multi-state or national banking reach.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "330 Swansea Mall Dr, Swansea, MA 02777",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

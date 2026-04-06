@@ -1,13 +1,13 @@
 {
   "name": "Northwest Bank",
   "slug": "northwest-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Warren, PA. $16772M in assets. 166 offices.",
-  "description_long": "Northwest Bank is a community bank located in Warren, PA, established in 1896. The bank holds approximately $16772M in total assets and $14163M in deposits. It operates 166 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Northwest Bank is a full-service financial institution offering consumer banking, home lending, business banking, and digital financial solutions through online and mobile platforms.",
+  "description_long": "Northwest Bank operates as a traditional banking institution providing comprehensive financial services to both individual consumers and business clients. The bank has established a physical presence with multiple locations and ATMs while maintaining a robust digital banking infrastructure through their website at northwest.com.\n\nThe bank's consumer offerings include checking and savings accounts (specifically Affinity Checking with referral rewards), certificates of deposit (CDs) with competitive rates, home equity lines of credit starting at 4.25% APR, personal loans with fixed rates and terms up to six years, and the Northwest CashBack Visa Signature credit card offering 1.5% cash back on all purchases. For business customers, Northwest Bank provides small business banking services, commercial lending solutions, and business-focused financial planning. All accounts are accessible through online banking and mobile applications with features including bill pay and mobile deposit capabilities.\n\nNorthwest Bank distinguishes itself through its dual focus on consumer and business banking with competitive promotional rates, a referral rewards program (up to $500 annually), and comprehensive digital banking tools with interactive educational demos. The bank emphasizes accessibility with multiple physical locations and ATM networks while positioning itself as a \"banking partner\" that understands business needs and financial planning across different life stages.\n\nAs a traditional bank, Northwest Bank provides FDIC-insured deposit products and established lending relationships, but operates within the constraints of traditional banking models. The institution appears to be a regional or mid-sized bank rather than a national mega-bank, which may affect product availability, rates competitiveness, and service reach depending on geographic location. Consumers should verify rates and terms for specific products against competing institutions.",
   "logo_url": "",
   "website_url": "https://WWW.NORTHWEST.COM",
   "affiliate_url": "",
@@ -22,23 +22,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Affinity Checking accounts with referral rewards program",
+    "Savings accounts and certificates of deposit (CDs)",
+    "Home equity lines of credit (HELOC) at advertised rates as low as 4.25% APR",
+    "Personal loans with fixed rates and up to six-year terms",
+    "Northwest CashBack Visa Signature credit card",
+    "Online banking with bill pay functionality",
+    "Mobile banking and mobile deposit",
+    "Small business banking services",
+    "Commercial lending services",
+    "Multiple physical branch locations",
+    "ATM network access",
+    "Business financial planning and consulting"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1896",
-    "Local community bank with personal service",
-    "166 locations"
+    "Home equity line of credit rates as low as 4.25% APR fixed rate for debt consolidation and home improvement",
+    "Personal loans with fixed rates and flexible terms up to six years for multiple use cases",
+    "1.5% cash back on all purchases with Northwest CashBack Visa Signature credit card",
+    "Referral rewards program offering up to $500 per year with Affinity Checking accounts",
+    "Competitive CD rates advertised as better than traditional savings accounts",
+    "Comprehensive digital banking including mobile deposit and bill pay functionality",
+    "Dual focus on consumer and business banking with specialized small business and commercial services"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability as a regional bank\u2014services and rates may not apply nationwide",
+    "No information provided about minimum balances, monthly fees, or account maintenance costs",
+    "Promotional rates (4.25% on HELOC, CD rates) lack specificity on duration, eligibility requirements, and current standard rates"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +59,7 @@
   "states_served": [
     "PA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28178,
   "latitude": 41.844567987995,
   "longitude": -79.14699898993,
@@ -86,18 +95,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Homeowners seeking home equity lines of credit for debt consolidation or renovations",
+    "Small business owners needing integrated consumer and business banking relationships",
+    "Consumers wanting cash back rewards on everyday credit card purchases",
+    "Savers looking to earn higher interest rates through CDs or money market products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Northwest Bank is best for consumers and small business owners in its service regions seeking traditional banking with competitive rates on home equity products and personal loans, plus cash back rewards on credit card purchases. Primary caveat: availability is likely regional rather than nationwide, and advertised promotional rates require verification for current eligibility and terms before applying.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +115,11 @@
   ],
   "phone": "",
   "address": "100 Liberty St, Warren, PA 16365",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

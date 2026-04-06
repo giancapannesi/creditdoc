@@ -1,14 +1,14 @@
 {
   "name": "Homeland Federal Savings Bank",
   "slug": "homeland",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Columbia, LA. $638M in assets. 5 offices.",
-  "description_long": "Homeland Federal Savings Bank is a community bank located in Columbia, LA, established in 1986. The bank holds approximately $638M in total assets and $556M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Homeland Federal Savings Bank is an FDIC-insured regional bank serving Louisiana since 1986, offering personal and business checking, savings, loans, and digital banking services.",
+  "description_long": "Homeland Federal Savings Bank was founded in 1986 and has built its reputation on what it describes as \"Service, Excellence and Pride.\" Operating as a traditional community bank, it is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing customers with deposit protection up to applicable FDIC limits. The bank emphasizes strong financial integrity and positions itself as a responsible, innovative business partner.\n\nThe bank offers a comprehensive suite of retail and commercial products. For personal customers, these include checking accounts, savings accounts, certificates of deposit (CDs), personal loans, mortgage loans, debit cards (Visa Check Cards), and access to Zelle for money transfers. For business customers, Homeland provides business checking accounts, business loans, and commercial lending services. All customers have access to online banking, mobile banking apps (iOS and Android), Apple Pay integration, ATM networks, and a loan calculator tool. The bank operates five physical branch locations across Louisiana: Columbia, Jena, Monroe, West Monroe, and Olla.\n\nHomeland distinguishes itself as a regional community bank with emphasis on personal service rather than mass-market operations. The bank actively participates in local community involvement, as evidenced by sponsorships like the Rudolph's Rink Grand Opening. It positions \"personal service\" as its most important product and maintains relatively accessible branch locations in smaller Louisiana towns, which differentiates it from larger national banks. The institution also provides fraud protection services with dedicated phone lines (1-800-500-1044 for card cancellation; 1-855-961-1602 for fraud response).\n\nAs a regional community bank, Homeland Federal is suitable for customers seeking personal banking relationships and local branch access in rural Louisiana. However, as a smaller institution, it likely offers fewer advanced digital features and product options compared to national banks, and may have more limited geographic reach. Customers outside the Louisiana service areas cannot access branch services. The website provides limited details on specific interest rates, APYs, loan terms, or fee structures, which is typical for community banks but requires direct contact for pricing information.",
   "logo_url": "",
   "website_url": "https://www.homelandbank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Business checking accounts",
+    "Business loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage loans (home purchase and refinance)",
+    "Debit cards (Visa Check Card with ATM functionality)",
+    "Online banking platform",
+    "Mobile banking apps (iOS and Android)",
+    "Apple Pay integration",
+    "Zelle money transfer service"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1986",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits with full U.S. government backing for deposit protection",
+    "Established 40-year history since 1986 with emphasis on financial integrity and customer service",
+    "Five convenient branch locations across rural Louisiana (Columbia, Jena, Monroe, West Monroe, Olla)",
+    "Comprehensive product suite including personal/business checking, savings, CDs, personal loans, mortgages, and business loans",
+    "Modern digital banking options including mobile apps (iOS/Android), online banking, Apple Pay, and Zelle integration",
+    "Debit card functions as both Visa Check Card and ATM card for versatile access",
+    "Dedicated fraud protection services with direct phone lines for card cancellation and fraud response",
+    "Active community involvement and local engagement initiatives"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to five locations in Louisiana only\u2014no service outside state",
+    "Website lacks specific interest rates, APY disclosures, and fee structures; pricing requires direct contact",
+    "Smaller regional institution likely offers fewer product options and digital features than national banks",
+    "No mention of credit card products despite listing in navigation\u2014service availability unclear",
+    "Limited online transparency regarding loan terms, qualification requirements, and competitive rate comparisons"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "LA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 32459,
   "latitude": 32.0810067656847,
   "longitude": -92.0937484945769,
@@ -93,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Louisiana residents in Columbia, Jena, Monroe, West Monroe, or Olla seeking local branch relationships",
+    "Small business owners in rural Louisiana needing business checking and commercial lending services",
+    "Customers prioritizing personal service and community connection over national bank scale",
+    "Depositors seeking FDIC-insured savings with established local bank stability"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Homeland Federal Savings Bank is best for Louisiana residents seeking traditional community banking with personal service and FDIC-insured deposits in rural areas. The primary caveat is geographic limitation\u2014the bank only serves five Louisiana locations, making it unsuitable for customers outside these areas or those requiring extensive branch networks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "7840 Highway 165, Columbia, LA 71418",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

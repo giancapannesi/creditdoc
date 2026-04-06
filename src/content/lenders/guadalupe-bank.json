@@ -1,14 +1,14 @@
 {
   "name": "Guadalupe Bank",
   "slug": "guadalupe-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Kerrville, TX. $243M in assets. 2 offices.",
-  "description_long": "Guadalupe Bank is a community bank located in Kerrville, TX, established in 2008. The bank holds approximately $243M in total assets and $218M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank serving Kerrville and Fredericksburg, Texas with checking, savings, mortgages, and personal loans through online and mobile platforms.",
+  "description_long": "Guadalupe Bank is a community-focused financial institution operating in the Kerrville and Fredericksburg areas of Texas. The bank emphasizes local presence and personalized service while maintaining federal deposit insurance protections through FDIC backing.\n\nThe institution offers comprehensive banking services across both personal and business segments. Personal banking includes checking accounts, savings and money market accounts, certificates of deposit (CDs), and various loan products including home mortgages, home equity loans, construction loans, refinance loans, and personal loans. Business customers can access business checking, savings accounts, and loans or lines of credit. Digital banking is available through online and mobile platforms, including Zelle integration for peer-to-peer transfers.\n\nGuadalupe Bank distinguishes itself as a community bank with physical branch locations in two towns, offering face-to-face service alongside modern digital banking options. The bank maintains a 24/7 telephone banking line and provides online account access. The institution has been proactive about security awareness, publicly warning customers about fraud attempts and spoofing schemes.\n\nThe bank serves both retail and small business customers in a limited geographic market. While specific rates, fees, and loan terms are not detailed on the publicly available website content, the institution provides standard banking services typical of community banks. Limited information is available about competitive advantages in pricing or specialized lending programs beyond what community banks typically offer.",
   "logo_url": "",
   "website_url": "https://www.guadalupebank.com",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Savings and money market accounts",
+    "Certificates of deposit (CDs)",
+    "Home mortgages and refinance loans",
+    "Construction loans",
+    "Home equity loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking accounts",
+    "Business savings and money market accounts",
+    "Business loans and lines of credit",
+    "Online banking platform",
+    "Mobile banking app with mobile deposits and bill pay",
+    "Zelle peer-to-peer transfer service",
+    "24/7 telephone banking"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2008",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "24/7 telephone banking and online access for account management",
+    "Mobile app with mobile deposit, balance checking, transfers, and bill payment capabilities",
+    "Comprehensive loan products including mortgages, home equity loans, construction loans, and personal loans",
+    "Zelle integration for peer-to-peer money transfers",
+    "Physical branch locations in Kerrville and Fredericksburg for in-person service",
+    "Active fraud monitoring and customer security alerts"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to two geographic locations (Kerrville and Fredericksburg, Texas), restricting access for customers outside these areas",
+    "Website lacks detailed information on interest rates, fees, minimum deposits, or loan terms for comparison shopping",
+    "No mention of specialized products like investment services, wealth management, or business credit card offerings",
+    "Limited information about customer support hours or service capabilities beyond basic banking",
+    "No details provided about competitive advantages in rates or fees versus other community or national banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58768,
   "latitude": 30.03169598525,
   "longitude": -99.1413169722731,
@@ -93,12 +106,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local residents of Kerrville and Fredericksburg, Texas seeking community bank relationships",
+    "Small business owners in the service area needing business checking and lending",
+    "Customers prioritizing in-person banking with branch access plus digital convenience",
+    "Depositors seeking FDIC insurance protection with a locally-rooted institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Guadalupe Bank is best for individuals and small business owners in the Kerrville and Fredericksburg, Texas area seeking traditional community banking with FDIC protection, physical branch access, and modern digital services. The main caveat is geographic limitation\u2014this bank only serves its two Texas locations, making it inaccessible for customers outside the service area or those preferring statewide or national banking options.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   ],
   "phone": "",
   "address": "1309 Bandera Hwy, Kerrville, TX 78028",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Elkhorn Valley Bank & Trust",
   "slug": "elkhorn-valley-bank-trust",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Norfolk, NE. $1417M in assets. 8 offices.",
-  "description_long": "Elkhorn Valley Bank & Trust is a community bank located in Norfolk, NE, established in 1943. The bank holds approximately $1417M in total assets and $1143M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Elkhorn Valley Bank & Trust is a community bank offering personal and business banking services with local decision-making, digital convenience, and competitive CD rates.",
+  "description_long": "Elkhorn Valley Bank & Trust operates as a full-service community bank with a strong emphasis on local relationships and personalized service. The bank maintains multiple physical locations and emphasizes direct customer interactions with named team members, positioning itself as an alternative to large national banks with automated phone systems.\n\nThe bank offers a comprehensive suite of retail and commercial banking products including personal checking and savings accounts, certificates of deposit (CDs) with promotional rates, personal loans, agricultural loans, commercial loans, and mortgage services covering purchase, refinance, and home equity options. They provide digital banking infrastructure through online account opening, mobile banking applications, and e-statements to serve customers seeking modern convenience alongside traditional banking relationships.\n\nElkhorn Valley Bank differentiates itself through emphasis on local decision-making, named loan officers (mentioned in customer testimonials: Zach, Casey, Jodi, Jamie), and a stated commitment to going \"the extra mile\" for customers. Customer reviews highlight availability outside standard hours, personalized problem-solving, and relationship-based service. The bank promotes competitive CD rates (5-month at 3.65% APY, 13-month at 3.75% APY as advertised) and positions itself as combining local service with modern digital convenience.\n\nAs a community bank, Elkhorn Valley Bank serves specific geographic markets (locations mentioned include Yankton and Wayne) rather than offering nationwide coverage. The bank's strength lies in personalized local service for customers within their service territory who value relationship banking. Limitations include geographic restrictions on branch access and the inherent limitations of a smaller institution compared to national banks in terms of product breadth or digital feature innovation.",
   "logo_url": "",
   "website_url": "https://www.evb.bank",
   "affiliate_url": "",
@@ -24,23 +24,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of deposit (CDs) with promotional rates",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Agricultural and commercial loans",
+    "Mortgage services (purchase, refinance, home equity)",
+    "Mobile banking application",
+    "Online banking and account access",
+    "E-statements and digital statement delivery",
+    "Online account opening",
+    "Credit card services",
+    "Business banking accounts"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1943",
-    "Local community bank with personal service",
-    "8 locations"
+    "Advertised CD rates of 3.65-3.75% APY, positioned as competitive offerings",
+    "Mobile banking app available for 24/7 account management and monitoring",
+    "Online account opening available for remote convenience",
+    "Named loan officers and customer service representatives mentioned in testimonials",
+    "Personalized lending solutions for business growth and home purchases",
+    "E-statement digital delivery for secure paperless banking",
+    "Local decision-making emphasized as advantage over national banks",
+    "Extended service availability mentioned (after-hours support in testimonials)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area restricts availability to specific communities",
+    "Smaller institution may offer fewer specialized products compared to large national banks",
+    "Online banking enrollment portal appears non-functional (error message on secondary enrollment URL)",
+    "Limited public information about loan terms, rates, or product details on website",
+    "No mention of FDIC insurance limits, fee schedules, or other standard banking disclosures"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +64,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 16553,
   "latitude": 42.029839019305,
   "longitude": -97.447383961383,
@@ -94,12 +106,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking personalized loan relationships and local decision-making",
+    "Customers within Elkhorn Valley Bank's service territory (Yankton, Wayne areas) prioritizing relationship banking",
+    "Individuals seeking competitive CD rates with local bank stability",
+    "Homebuyers preferring personalized mortgage guidance from local loan officers"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Elkhorn Valley Bank is best for customers within their geographic service territory (primarily South Dakota/Nebraska area based on Yankton and Wayne locations) who value personalized, relationship-based banking from local loan officers over digital-first or national alternatives. The main caveat is limited geographic availability and smaller product selection compared to national banks; customers outside their service area cannot access this bank.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +120,11 @@
   ],
   "phone": "",
   "address": "404 S 25Th St, Norfolk, NE 68701",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

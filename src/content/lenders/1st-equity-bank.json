@@ -1,14 +1,14 @@
 {
   "name": "1St Equity Bank",
   "slug": "1st-equity-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Skokie, IL. $126M in assets. 1 office.",
-  "description_long": "1St Equity Bank is a community bank located in Skokie, IL, established in 1997. The bank holds approximately $126M in total assets and $83M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank in Skokie, IL offering personal and business checking, savings, online banking, wire transfers, and mobile bill pay with local branch service.",
+  "description_long": "1st Equity Bank is a community-focused financial institution headquartered in Skokie, Illinois at 3956 W. Dempster. The bank has been serving the local area with traditional banking services and appears to emphasize accessibility and customer security based on their website messaging around COVID-19 safeguards and security awareness.\n\n1st Equity Bank offers a comprehensive range of consumer and business banking products. These include personal banking services (checking and savings accounts), business banking solutions, online banking with enrollment available, and mobile banking with bill pay functionality. Beyond standard accounts, they provide wire transfers for fund movement, night deposit services for after-hours deposits, coin counting services, and electronic fund transfer capabilities through ACH and other payment networks. The bank supports preauthorized credits (direct deposit) and preauthorized payments (recurring bills).\n\nThe bank distinguishes itself through local, in-person service with a physical branch location and direct phone access (847.676.9200). They offer practical conveniences like night deposit facilities and coin counting for retail customers. The website emphasizes security awareness and compliance disclosures, suggesting a regulated, legitimate banking institution subject to FDIC coverage and regulatory requirements. Their mention of a \"green initiative\" suggests some corporate responsibility positioning.\n\n1st Equity Bank is a traditional brick-and-mortar community bank with no indication of specialized lending products, competitive rates comparison, or technology-first positioning. As a local institution, their service area appears limited geographically. The website provides limited information about specific account features, APY rates, or minimum balance requirements, which typical online banks display prominently. This is appropriate for a smaller regional bank focused on relationship banking rather than digital-first operations.",
   "logo_url": "",
   "website_url": "https://www.1stequitybank.net",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business checking and savings accounts",
+    "Online banking with secure login",
+    "Mobile banking application",
+    "Bill pay services",
+    "Remote deposit capture",
+    "Wire transfers (with fee)",
+    "Night deposit facility",
+    "Coin counting service (10% fee)",
+    "Electronic fund transfers via ACH",
+    "Preauthorized direct deposits",
+    "Preauthorized bill payment arrangements"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1997",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits providing federal protection up to coverage limits",
+    "Night deposit facility available for after-hours banking convenience",
+    "Mobile banking and bill pay services with remote deposit capability",
+    "Wire transfer services available for customers needing to move funds quickly",
+    "Local branch with direct phone support (847.676.9200) for personalized service",
+    "Both personal and business banking services available under one institution",
+    "Online banking enrollment option with secure login and disclosure agreements"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "10% service fee charged for coin counting service, making it expensive for large coin deposits",
+    "Limited geographic service area as a single-branch community bank in Skokie, IL",
+    "Website provides no information about account APY rates, minimum balances, or account feature comparisons",
+    "Wire transfer services explicitly noted to have 'service fee applies' without transparency on fee amounts",
+    "Night deposit processed only on next business day, not immediate credit"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34393,
   "latitude": 42.0411470029695,
   "longitude": -87.7274260333401,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Skokie, Illinois residents seeking relationship banking with in-person branch access",
+    "Small business owners needing both personal and business banking from a single local institution",
+    "Customers prioritizing security and regulatory compliance over digital-first banking convenience",
+    "Users who prefer speaking with a local teller over phone/chat for banking needs"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "1st Equity Bank is best suited for Skokie-area residents and small business owners who value local relationship banking and in-person service over digital convenience and competitive rates. The primary caveat is that this is a single-location community bank with limited service area and no publicly available information about rates or account features, making rate comparison and online account opening difficult.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "3956 Dempster St, Skokie, IL 60076",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

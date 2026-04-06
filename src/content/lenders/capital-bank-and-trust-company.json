@@ -1,14 +1,14 @@
 {
   "name": "Capital Bank And Trust Company",
   "slug": "capital-bank-and-trust-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Irvine, CA. $191M in assets. 2 offices.",
-  "description_long": "Capital Bank And Trust Company is a community bank located in Irvine, CA, established in 2000. The bank holds approximately $191M in total assets and $0M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Capital Group operates American Funds, a financial intermediary serving individual investors, financial professionals, and institutions with investment products and retirement plan administration.",
+  "description_long": "Capital Group is a major financial services company that operates under the American Funds brand, offering investment products and retirement planning solutions to diverse customer segments. The company has established itself as a significant player in asset management, with a focus on serving financial professionals, individual investors, and institutional clients across multiple markets. Their website indicates they manage employer-sponsored retirement plans, private client services, and provide resources for retirement plan investors and sponsors. Capital Group positions itself as a comprehensive financial intermediary with global reach, operating across numerous international markets alongside their United States operations. What distinguishes Capital Group is their segmented approach to serving different customer types\u2014from individual investors to financial advisors and institutional consultants\u2014with tailored tools and resources for each segment. They maintain compliance oversight through FINRA's BrokerCheck and provide detailed disclosures regarding their operations and investment products. The company emphasizes personalization, asking users to identify their role to provide customized experiences and relevant plan information. An honest assessment reveals that while Capital Group is a substantial financial services provider, the website provided offers limited transparency about specific products, fees, performance metrics, or detailed service offerings. The site functions primarily as a navigation hub directing different user types to specialized portals rather than providing comprehensive product information. Prospective clients would need to engage further or visit specific plan websites to understand exact offerings, costs, and investment options. The global presence and FINRA registration suggest legitimacy, but the main limitation is the lack of detailed public information about specific investment strategies, expense ratios, or comparative advantages on the main website.",
   "logo_url": "",
   "website_url": "https://www.americanfunds.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Individual investor brokerage and investment accounts",
+    "American Funds mutual funds and investment products",
+    "Employer-sponsored retirement plan administration",
+    "Retirement plan investor account access and management",
+    "Financial professional advisory platforms",
+    "RIA (Registered Investment Advisor) services",
+    "Private client wealth management services",
+    "Retirement plan sponsor solutions and consulting",
+    "Third-party administrator support",
+    "Institutional investor services",
+    "Plan ID-based routing to specialized retirement portals",
+    "International investment and account services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2000",
-    "Local community bank with personal service",
-    "2 locations"
+    "Serves multiple customer segments with specialized portals for individual investors, financial professionals, retirement plan sponsors, and institutional clients",
+    "FINRA-registered with BrokerCheck verification available for background checks and compliance history",
+    "Global presence across 25+ countries and regions with localized experiences",
+    "Established brand operating American Funds, suggesting long operational history",
+    "Dedicated retirement plan administration with multiple plan ID routing systems for different plan types",
+    "Offers private client services for high-net-worth individuals",
+    "Comprehensive disclosure policies published for investor protection"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides minimal specific information about actual products, fees, or investment strategies",
+    "No transparent pricing or expense ratio information visible on homepage",
+    "Limited detail about performance history or fund-specific data on main website",
+    "Requires navigation to external portals to access account information or specific plan details",
+    "No clear information about minimum investment requirements or account opening process"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 35164,
   "latitude": 33.6721709853374,
   "longitude": -117.766380998197,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Financial professionals and advisors seeking investment products for clients",
+    "Employer-sponsored retirement plan sponsors and administrators",
+    "High-net-worth individuals seeking private client investment services",
+    "Institutional investors and consultants requiring asset management solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Capital Group/American Funds is best for institutional investors, financial professionals, and employer retirement plan sponsors seeking established asset management services with global reach. The main caveat is that the website serves primarily as a navigation interface rather than an information resource, requiring users to engage further through specialized portals to understand specific products, fees, and service details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "6455 Irvine Center Dr, Irvine, CA 92618",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Farmers And Drovers Bank",
   "slug": "farmers-and-drovers-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Council Grove, KS. $220M in assets. 3 offices.",
-  "description_long": "Farmers And Drovers Bank is a community bank located in Council Grove, KS, established in 1882. The bank holds approximately $220M in total assets and $143M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Farmers and Drovers Bank is a traditional banking institution offering checking, savings, mobile banking, and credit card services with fraud protection measures.",
+  "description_long": "Farmers and Drovers Bank operates as a traditional financial institution providing core banking services to consumers and businesses. The bank maintains an online presence through its website at farmersanddrovers.com and emphasizes accessibility through digital channels.\n\nThe bank offers a range of standard banking products including deposit accounts, debit cards, credit cards for both personal and business use, mobile banking access, and mobile check deposit functionality. Their digital platform allows customers to manage accounts, conduct bill pay operations, and access card services remotely through smartphones, tablets, and online portals. The institution maintains dedicated customer support lines for specific needs, including separate numbers for debit card disputes (844-202-5070) and card management issues like travel restrictions or lost cards (833-719-0353).\n\nFarmers and Drovers Bank distinguishes itself through explicit fraud protection messaging and transparency about information security. The bank clearly communicates that it will never request personal or account information during login processes or unsolicited phone contacts, and directs customers to fraud protection resources. This emphasis on customer security appears central to their service positioning.\n\nAs a traditional bank, Farmers and Drovers Bank serves customers seeking conventional banking relationships with digital conveniences. However, the website content is limited and does not provide detailed information about account features, fee structures, interest rates, minimum balance requirements, or specific product differentiators. Prospective customers would need to contact the bank directly or visit their full website for comprehensive product details and comparison against other regional or national banking options.",
   "logo_url": "",
   "website_url": "https://www.farmersanddrovers.com",
   "affiliate_url": "",
@@ -24,23 +24,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts",
+    "Mobile banking via smartphone and tablet",
+    "Mobile check deposit",
+    "Bill pay services",
+    "Consumer credit cards",
+    "Business credit cards",
+    "Debit cards",
+    "Online account access and management",
+    "Card dispute services",
+    "Travel card management",
+    "Lost or declined card replacement",
+    "Fraud protection resources"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1882",
-    "Local community bank with personal service",
-    "3 locations"
+    "Mobile banking access available 24/7 for account management and bill pay",
+    "Mobile deposit feature allows check deposits via smartphone or scanner without visiting a branch",
+    "Separate dedicated phone lines for different card services (disputes vs. travel/lost card issues)",
+    "Online credit card portal for both consumer and business credit cards",
+    "Explicit fraud protection messaging and commitment to never request personal information unsolicited",
+    "Multi-channel access including mobile apps and online platforms"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited website information about account types, fees, interest rates, and minimum balance requirements",
+    "No details provided about CD offerings, savings account rates, or loan products beyond credit cards",
+    "Website does not specify geographic service areas or branch locations",
+    "No information about business account features or commercial lending capabilities despite mentioning business credit cards"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +61,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 12602,
   "latitude": 38.6606959899239,
   "longitude": -96.4907420130869,
@@ -94,12 +103,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking traditional banking with mobile and online access capabilities",
+    "Small business owners needing business credit card and deposit services",
+    "Consumers wanting fraud-protected debit card services with dedicated support lines"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Farmers and Drovers Bank is best for traditional banking customers who want digital convenience without complexity, with emphasis on mobile and online account management. The main caveat is that the website provides minimal product details, so customers must contact the bank directly to compare features, rates, and fees against competitor offerings.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +116,10 @@
   ],
   "phone": "",
   "address": "201 W Main St, Council Grove, KS 66846",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

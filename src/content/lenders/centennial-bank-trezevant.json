@@ -1,14 +1,14 @@
 {
   "name": "Centennial Bank",
   "slug": "centennial-bank-trezevant",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Trezevant, TN. $852M in assets. 14 offices.",
-  "description_long": "Centennial Bank is a community bank located in Trezevant, TN, established in 1916. The bank holds approximately $852M in total assets and $752M in deposits. It operates 14 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Centennial Bank is a family-owned FDIC-insured bank offering personal and business checking, savings, loans, and credit cards with high-yield rewards accounts.",
+  "description_long": "Centennial Bank has operated since 1916 as a family-owned community bank providing comprehensive financial services to personal and business customers. The bank recently absorbed The Bank of Jackson customers on March 23, expanding its customer base and service reach. Centennial Bank positions itself as an innovative regional bank focused on personalized, local service while maintaining modern digital banking capabilities.\n\nThe bank offers a full suite of personal banking products including multiple checking account tiers (Rewards Star, Star Checking, Gold Star Interest Checking, Rising Star Student, and 5 Star Protection Checking), savings accounts, money market accounts, CDs, and IRAs. On the lending side, Centennial provides personal loans, auto loans, debt consolidation loans, home mortgages, and construction loans. Their business division includes business checking accounts, business savings, business loans, SBA loans, commercial real estate financing, and equipment financing. Additionally, Centennial offers credit cards for both personal and business use, featuring rewards programs including cash back options.\n\nCentennial Bank distinguishes itself through high-yield rewards checking accounts (5.00% APY on balances up to $10,000) and a tiered rewards structure across multiple account types. The bank emphasizes accessibility with AudioEye-enabled website optimization and offers value-added services like Zelle transfers, mobile deposit, ATM fee refunds, and an Interactive Teller Machine (ITM) network. They've partnered with Travelers Insurance for auto and home insurance offerings and operate a pre-owned vehicle inventory for direct purchase by customers.\n\nAs a regional bank, Centennial Bank is FDIC-insured and regulated, providing safety guarantees on deposits. However, as a smaller regional institution, they may have more limited branch locations compared to national banks, and their service availability is likely concentrated in specific geographic areas. The website content does not provide specific information about fees, minimum balance requirements, or detailed APR ranges for loans, which are important considerations for prospective customers.",
   "logo_url": "",
   "website_url": "http://www.mycentennial.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Rewards Star, Star Checking, Gold Star Interest Checking, Rising Star Student, 5 Star Protection Checking)",
+    "Personal and business savings accounts, money market accounts, and CDs",
+    "Individual Retirement Accounts (IRAs)",
+    "Personal loans, auto loans, debt consolidation loans, and home mortgages",
+    "Business loans including SBA loans, equipment loans, agriculture loans, and commercial real estate loans",
+    "Personal and business credit cards with rewards programs",
+    "Mobile banking with mobile deposit and online bill pay",
+    "Zelle money transfers and mobile payments",
+    "Debit card services including CardSwap and Card Controls",
+    "Cash management and merchant card services for business customers",
+    "Auto and home insurance through Travelers partnership",
+    "Pre-owned vehicle sales directly to customers"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1916",
-    "Local community bank with personal service",
-    "14 locations"
+    "FDIC-insured deposits backed by U.S. government guarantee",
+    "High-yield checking account offering 5.00% APY on balances up to $10,000",
+    "Family-owned since 1916 with established community banking reputation",
+    "Comprehensive loan products including SBA loans, construction loans, and commercial real estate financing",
+    "Multiple rewards program tiers across checking, savings, and credit card products",
+    "Modern digital services including mobile banking with mobile deposit, Zelle transfers, and Interactive Teller Machines",
+    "Value-added partnerships including Travelers Insurance and pre-owned vehicle inventory"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "As a regional bank, likely limited branch network compared to national banks",
+    "Website does not clearly display fee schedules or specific loan APR ranges",
+    "High-yield APY (5.00%) only applies to balances up to $10,000; amounts above earn 0.01% APY",
+    "Minimum balance requirements and qualification criteria for premium accounts not transparently listed on homepage",
+    "Recently absorbed The Bank of Jackson (March 23 transition), which may indicate ongoing systems integration and potential service disruptions"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8439,
   "latitude": 36.009932018821,
   "longitude": -88.623380990989,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local and regional small business owners seeking comprehensive commercial banking and SBA loan options",
+    "Consumers in Centennial Bank's service areas looking for high-yield checking accounts with rewards programs",
+    "Individuals and businesses seeking FDIC-insured banking with personalized community bank service",
+    "Customers transitioning from The Bank of Jackson who want to maintain local banking relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Centennial Bank is best for small business owners and regional customers seeking comprehensive commercial and personal banking with competitive rewards accounts and FDIC insurance. The main caveat is that as a regional bank, service availability is geographically limited, and the recent acquisition of The Bank of Jackson may affect service consistency during the integration period.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "5420 Broad St S, Trezevant, TN 38258",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

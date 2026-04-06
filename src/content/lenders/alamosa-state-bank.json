@@ -1,15 +1,15 @@
 {
   "name": "Alamosa State Bank",
   "slug": "alamosa-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Alamosa, CO. $338M in assets. 1 office.",
-  "description_long": "Alamosa State Bank is a community bank located in Alamosa, CO, established in 1907. The bank holds approximately $338M in total assets and $296M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Alamosa State Bank is a community bank chartered in 1907, offering personal and business checking, savings, loans, and credit products from locations in Colorado.",
+  "description_long": "Alamosa State Bank was founded in 1907 as Alamosa National Bank with $25,000 in capital and has operated continuously for over 115 years. The bank relocated to its current Main Street location in 1920 and positions itself as a community-focused financial institution serving both personal and business customers in the Alamosa, Colorado area. The bank maintains a routing number (102100853) and advertises a commitment to customer relationships with the tagline \"A Real Community Bank.\"\n\nThe bank offers a comprehensive suite of personal banking services including checking accounts, savings accounts, money market accounts, personal investments, wire transfers, debit/ATM cards, prepaid gift and travel cards, and safe deposit boxes. For business customers, they provide business checking, money market accounts, certificates of deposit, health savings accounts, wire transfers, and business credit and debit cards. Loan products span both personal lending and business lending categories. Digital banking capabilities include personal and business online banking, bill pay, external funds transfers, e-statements, and mobile banking services.\n\nAlamosa State Bank distinguishes itself through its long operational history and local community presence. The bank emphasizes fraud prevention and account security in its messaging and advertises 24-hour phone access (EZ Access) for customers. They offer customer education resources for both personal and business clients and maintain a physical branch with drive-up and commercial lane services at 2225 Main Street in Alamosa, Colorado.\n\nAs a traditional community bank, Alamosa State Bank appears well-suited for customers seeking personalized banking relationships and local presence, though the website provides limited detail on specific rates, fees, loan terms, or competitive advantages versus larger regional or national institutions. The lack of detailed product information online suggests customers may need to contact the bank directly for pricing and terms.",
   "logo_url": "",
   "website_url": "https://www.alamosastatebank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Money market accounts (personal and business)",
+    "Certificates of deposit",
+    "Personal and business wire transfers",
+    "Personal debit/ATM cards",
+    "Prepaid gift and travel cards",
+    "ASB credit cards (personal and business)",
+    "Safe deposit boxes",
+    "Personal and business lending",
+    "Online banking and mobile banking",
+    "Bill pay and e-statements"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1907",
-    "Local community bank with personal service",
-    "1 location"
+    "Long-established community bank with 115+ years of operational history since 1907",
+    "Comprehensive product suite including personal/business checking, savings, loans, credit cards, and investments",
+    "24-hour phone access (EZ Access) for customer support",
+    "Multiple digital banking channels: online banking, bill pay, mobile banking, e-statements",
+    "Physical branch with drive-up and commercial lane services in Alamosa",
+    "Emphasis on fraud prevention and account security messaging",
+    "Health Savings Account (HSA) offerings for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information on interest rates, APRs, and fee structures",
+    "Limited detail on loan terms, minimum deposits, or product eligibility requirements",
+    "No transparent comparison of rates versus regional or national competitors",
+    "Website content is sparse on product details, requiring customers to contact bank directly",
+    "No information on FDIC insurance coverage or other regulatory protections"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "CO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13947,
   "latitude": 37.4742829834457,
   "longitude": -105.891311041029,
@@ -88,18 +99,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Alamosa, Colorado residents seeking personalized community banking relationships",
+    "Small businesses in the Alamosa area needing business checking and lending services",
+    "Customers who value local branch access and personal service over online-only banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Alamosa State Bank is best for individuals and small businesses in the Alamosa, Colorado area seeking traditional community banking with personal service and local branch access. The main caveat is that the website provides minimal transparency on rates, fees, and loan terms, requiring prospective customers to contact the bank directly for pricing information and product comparisons.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +118,11 @@
   ],
   "phone": "",
   "address": "2225 Main St, Alamosa, CO 81101",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

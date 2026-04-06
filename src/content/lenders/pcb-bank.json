@@ -1,13 +1,13 @@
 {
   "name": "Pcb Bank",
   "slug": "pcb-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Los Angeles, CA. $3281M in assets. 19 offices.",
-  "description_long": "Pcb Bank is a community bank located in Los Angeles, CA, established in 2003. The bank holds approximately $3281M in total assets and $2806M in deposits. It operates 19 office locations. Designated as a Asian or Pacific Islander Americans. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "PCB Bank is an FDIC-insured bank offering personal and business checking, savings, loans, and cash management services with both digital and in-person banking options.",
+  "description_long": "PCB Bank is a Los Angeles-based FDIC-insured financial institution headquartered at 3701 Wilshire Boulevard in Los Angeles, California. The bank has established itself as a community-focused institution with a stated commitment to financial literacy, local community support, and client relationship banking. PCB Bank serves both personal and business customers across the greater Los Angeles area with multiple service channels.\n\nThe bank offers a comprehensive range of personal banking services including checking accounts (basic starter and interest-bearing options), savings products, home loans, and mobile/online banking platforms. For business customers, PCB Bank provides cash management services, business loans, remote deposit capabilities, and merchant services. The institution emphasizes digital convenience through downloadable mobile apps (available on App Store and Google Play) and online banking with bill pay functionality. Additionally, the bank offers credit card products and maintains telephone banking available 24/7.\n\nPCB Bank distinguishes itself through its emphasis on relationship banking and partnership with local businesses, highlighting a case study with GEN Korean BBQ's IPO process. The institution demonstrates community commitment through programs including teaching financial literacy in schools, supporting tax filing assistance, and awarding annual scholarships. Security and fraud prevention are highlighted as priorities, with dedicated fraud prevention resources and explicit scam-alert warnings on their website.\n\nAs a traditional bank with physical headquarters and multiple service channels, PCB Bank operates within standard banking regulatory frameworks with FDIC insurance protection. However, the website provides limited detailed information about specific product rates, terms, or fee structures. Customer support is available during business hours (with some 24/7 services), though hours are restricted to PST timezone operations.",
   "logo_url": "",
   "website_url": "https://www.mypcbbank.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (basic starter and interest-bearing options)",
+    "Business checking and cash management services",
+    "Personal and business savings accounts",
+    "Home loans and mortgage services",
+    "Business loans and financing",
+    "Mobile banking app and online banking platform",
+    "Online bill pay",
+    "Remote deposit for business accounts",
+    "Credit card products",
+    "ATM/debit card services with 24/7 replacement",
+    "Telephone banking (24/7)",
+    "Auto loan servicing"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2003",
-    "Local community bank with personal service",
-    "19 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Multiple contact channels including 24/7 telephone banking and dedicated customer call center",
+    "Comprehensive digital banking with mobile app and online bill pay capabilities",
+    "Dedicated cash management and business lending services for commercial clients",
+    "Community-focused with active financial literacy programs and scholarship offerings",
+    "Specialized support services including residential mortgage center and auto loan servicing",
+    "Remote deposit capability for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not disclose specific interest rates, APYs, or fees for any products",
+    "Customer service hours limited to PST timezone with reduced Friday hours (10am-5pm instead of 9am-5pm)",
+    "Limited geographic presence with headquarters in Los Angeles and no mention of branch expansion",
+    "Website provides minimal information about minimum deposit requirements or account features",
+    "No information about overdraft protection, fee structures, or promotional rates visible on site"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57463,
   "latitude": 34.0623109853185,
   "longitude": -118.306969999479,
@@ -83,21 +94,22 @@
       "FDIC Cert #57463"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Los Angeles-area small business owners seeking relationship banking and cash management services",
+    "Personal customers interested in FDIC-insured checking and savings with digital banking convenience",
+    "Businesses pursuing commercial loans or preparing for IPO with community bank partnership",
+    "Customers seeking 24/7 phone banking and multiple account management channels"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "PCB Bank is best for Los Angeles-area residents and small business owners seeking FDIC-insured traditional banking with relationship-focused service and community involvement. The primary caveat is that the bank provides no publicly accessible information about rates, fees, or product terms on their website, requiring direct contact to evaluate competitiveness against other financial institutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "3701 Wilshire Blvd, Los Angeles, CA 90010",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

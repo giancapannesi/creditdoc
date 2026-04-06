@@ -1,15 +1,15 @@
 {
   "name": "Midwest Bank",
   "slug": "midwest-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Pierce, NE. $1253M in assets. 11 offices.",
-  "description_long": "Midwest Bank is a community bank located in Pierce, NE, established in 1882. The bank holds approximately $1253M in total assets and $1045M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community-focused bank offering personal and business banking, home loans, insurance products, and wealth management services across multiple Midwest locations.",
+  "description_long": "Midwest Bank is a regional banking institution serving the Midwest with a community-oriented approach to financial services. The bank emphasizes personal relationships and local presence, with the tagline \"Tu comunidad. Tu banco\" (Your community. Your bank) reflecting its commitment to serving underbanked and Spanish-speaking communities.\n\nThe bank offers a comprehensive suite of financial products including personal checking and savings accounts, credit cards, home loans, personal and auto loans, IRAs, and online/mobile banking services. For business customers, Midwest Bank provides commercial banking, small business checking and savings accounts, business credit cards, business loans and lines of credit, treasury management, agricultural loans, and SBA loans. The bank also operates an insurance division offering home, vehicle, commercial, and agricultural insurance products, alongside wealth management services.\n\nMidwest Bank distinguishes itself through emphasis on community banking relationships, fraud prevention education (hosting free fraud awareness seminars), and specialized services like Positive Pay for business account security. The bank actively promotes financial literacy through blogs, videos, and calculators, and maintains multilingual support including Spanish-language services. Their tagline and messaging emphasize knowing customers by name and understanding their individual goals.\n\nAs a regional bank, Midwest Bank serves traditional banking needs effectively but operates at a smaller scale than national institutions. While the website demonstrates comprehensive product offerings and community commitment, specific information about rates, fees, minimum balances, and competitive advantages versus other regional banks is limited. The bank appears well-established with multiple branches and ATM locations, though exact geographic coverage area is not explicitly stated on the homepage.",
   "logo_url": "",
   "website_url": "https://www.midwest.bank",
   "affiliate_url": "",
@@ -24,23 +24,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Savings accounts and CDs",
+    "Personal and auto loans",
+    "Home loans and mortgages",
+    "Credit cards (personal and business)",
+    "Business checking and savings accounts",
+    "Commercial banking services",
+    "Small business loans and lines of credit",
+    "Agricultural loans",
+    "SBA loans",
+    "Home, vehicle, commercial, and agricultural insurance",
+    "Online and mobile banking",
+    "Individual Retirement Accounts (IRAs)",
+    "Wealth management services",
+    "Treasury management for businesses",
+    "Fraud prevention education and Positive Pay service"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1882",
-    "Local community bank with personal service",
-    "11 locations"
+    "Free fraud awareness seminars and educational events for customers",
+    "Positive Pay service for business accounts to prevent check and ACH fraud",
+    "Bilingual support with Spanish-language services (\"Tu comunidad. Tu banco\")",
+    "Comprehensive product suite from personal banking to agricultural loans and insurance",
+    "Community banking model emphasizing personal banker relationships",
+    "Free financial literacy resources including calculators, videos, and blogs",
+    "SBA loan programs available for small business financing"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display current interest rates, APY, or fee schedules for any products",
+    "Limited geographic information about service area or number of locations",
+    "No information about minimum deposit requirements or account opening processes",
+    "Specific details about insurance products, coverage options, and pricing not available",
+    "No data on customer service hours, response times, or support channels beyond contact requests"
   ],
   "contact": {
     "phone": "",
@@ -52,12 +67,12 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13255,
   "latitude": 42.1988279941486,
   "longitude": -97.5281809817665,
   "published": true,
-  "review_status": "draft",
+  "review_status": "published",
   "features": {
     "credit_monitoring": false,
     "all_three_bureaus": false,
@@ -88,18 +103,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners in the Midwest seeking relationship-based banking and agricultural financing",
+    "Spanish-speaking consumers preferring community bank services with multilingual support",
+    "Individuals seeking comprehensive financial services including banking, lending, insurance, and wealth management under one institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Midwest Bank is best for small business owners, agricultural enterprises, and community-oriented consumers in the Midwest seeking comprehensive banking, lending, and insurance services with a personal touch. The main caveat is that as a regional bank, product availability, rates, and terms may vary by location, and the website provides minimal transparency on pricing and fees that should be verified directly before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +122,11 @@
   ],
   "phone": "",
   "address": "114 W Main St, Pierce, NE 68767",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

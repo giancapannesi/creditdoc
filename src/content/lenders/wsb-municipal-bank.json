@@ -1,13 +1,13 @@
 {
   "name": "Wsb Municipal Bank",
   "slug": "wsb-municipal-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Watertown, NY. $153M in assets. 1 office.",
-  "description_long": "Wsb Municipal Bank is a community bank located in Watertown, NY, established in 1913. The bank holds approximately $153M in total assets and $96M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank in Northern NY offering mortgages, home equity products, and commercial loans with local decision-making and 130+ years of operation.",
+  "description_long": "Watertown Savings Bank (WSB) has served Northern New York communities since 1893, establishing itself as a locally-rooted financial institution with deep community ties. The bank positions itself as a relationship-focused lender rather than a large national chain, emphasizing in-house approvals and personalized service. WSB's core offerings span personal banking (checking, savings, digital banking), residential mortgages, home equity products (HELOCs and HELOANs), and comprehensive commercial lending services. The bank has achieved significant recognition, including a 6-time winner of the Small Business Administration's Lender of the Year Award, demonstrating credibility in business lending. WSB distinguishes itself through local expertise, community investment (nearly $3 million in donations since 2018), and specialized products like their $pare Change automated savings tool. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing standard deposit protection. For consumers seeking traditional banking services with local accountability rather than digital-first or fintech alternatives, WSB represents a conventional community bank model. The main limitation is geographic focus\u2014this is a regional bank serving Northern New York, so it's not accessible to consumers outside this footprint seeking national convenience.",
   "logo_url": "",
   "website_url": "https://www.watertownsavingsbank.com",
   "affiliate_url": "",
@@ -22,23 +22,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Savings accounts and digital banking",
+    "Home Equity Lines of Credit (HELOC)",
+    "Home Equity Loans (HELOAN)",
+    "Residential mortgages (purchase and refinance)",
+    "Small business loans",
+    "SBA loans",
+    "Construction loans",
+    "Commercial mortgages",
+    "Business lines of credit",
+    "Equipment financing",
+    "Letters of credit",
+    "$pare Change automated savings product"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1913",
-    "Local community bank with personal service",
-    "1 location"
+    "6-time SBA Lender of the Year Award winner, demonstrating strong small business lending credentials",
+    "FDIC-insured deposits with full U.S. Government backing",
+    "In-house loan approvals enabling faster decision-making compared to larger banks",
+    "Comprehensive commercial lending suite including SBA loans, construction loans, equipment financing, and business lines of credit",
+    "Established 130+ year history (since 1893) indicating stability and longevity",
+    "Nearly $3 million in community donations since 2018 showing tangible reinvestment in local economy",
+    "Dedicated commercial lending team with direct contact (phone and email support) for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: Regional bank serving only Northern New York, not nationally available",
+    "Limited digital-first features compared to neobanks or larger national banks",
+    "No mention of online account opening, mobile app capabilities, or modern fintech integrations on homepage",
+    "Sparse pricing transparency\u2014mortgage rates, loan terms, and APRs not published on website",
+    "Residential product focus (mortgages, HELOCs) suggests less emphasis on investment accounts or wealth management"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +62,7 @@
   "states_served": [
     "NY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 7274,
   "latitude": 43.9720061998684,
   "longitude": -75.9132164883954,
@@ -92,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Northern New York small business owners seeking SBA-backed financing and local relationship lending",
+    "Homeowners in the region looking for mortgages, home equity lines of credit, or home equity loans",
+    "Consumers prioritizing local community reinvestment and traditional banking relationships over digital convenience",
+    "Commercial borrowers needing equipment financing, construction loans, or business lines of credit with expedited approval"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "WSB is best for Northern New York residents and small business owners who value local decision-making, community reinvestment, and personalized service over digital convenience or national branch networks. The primary caveat is strict geographic limitation\u2014this regional bank serves only Northern New York, making it inaccessible for consumers outside this footprint.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +118,11 @@
   ],
   "phone": "",
   "address": "111 Clinton St, Watertown, NY 13601",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

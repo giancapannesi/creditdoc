@@ -1,14 +1,14 @@
 {
   "name": "Commercial Bank Of Texas, National Association",
   "slug": "commercial-bank-of-texas",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Nacogdoches, TX. $1632M in assets. 23 offices.",
-  "description_long": "Commercial Bank Of Texas, National Association is a community bank located in Nacogdoches, TX, established in 1901. The bank holds approximately $1632M in total assets and $1456M in deposits. It operates 23 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank operating since 1901, offering personal and business banking, loans, credit cards, and wealth management across Texas.",
+  "description_long": "Commercial Bank of Texas, National Association (CBTx) was founded in 1901 in Nacogdoches, Texas, with a mission to serve as the financial cornerstone of its community. Over more than 120 years, the bank has expanded across Texas while maintaining its core philosophy that \"the bank can prosper only as the community prospers.\" This deep-rooted commitment to community investment and local prosperity guides the institution's operations and strategic decisions.\n\nCBTx operates as a full-service community bank offering comprehensive financial products for both personal and business customers. Personal services include checking accounts, savings accounts, CDs, IRAs, auto loans, installment loans, credit cards, and home mortgages with dedicated loan officers. Business customers can access business checking and savings accounts, SBA loans, business loans, and lines of credit. The bank also provides wealth management services and insurance products, positioning itself as a one-stop financial institution. All deposits are FDIC-insured and backed by the full faith and credit of the U.S. Government.\n\nCBTx distinguishes itself through its emphasis on personal relationship banking and community focus rather than competing primarily on rates or digital-first services. The bank's marketing centers on \"Banking Texas Style\"\u2014treating customers with respect, providing friendly service, and using the right financial tool for each customer's specific situation. The bank maintains physical locations across Texas and highlights direct access to loan officers for personalized service. Their long operating history (since 1901) and continued operation as an independent community bank in an era of consolidation demonstrates stability and local commitment.\n\nAs a regional community bank, CBTx serves customers who prioritize personal service and local decision-making over the convenience features or competitive rates offered by larger national banks or digital-native financial institutions. The bank's strength in relationship-based lending and community ties may not appeal to customers seeking the lowest rates or most advanced fintech features. Limited information about specific products, rates, or online banking capabilities is available from the provided website content.",
   "logo_url": "",
   "website_url": "https://www.cbtx.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs) and IRAs",
+    "Home mortgages and home loans with dedicated loan officers",
+    "Auto loans",
+    "SBA loans for small businesses",
+    "Business loans and lines of credit",
+    "Installment loans",
+    "Personal and business credit cards",
+    "Wealth management services",
+    "Insurance products",
+    "Online banking and account management"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1901",
-    "Local community bank with personal service",
-    "23 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Over 120 years of continuous operation (founded 1901) demonstrating stability and local roots",
+    "Operates as independent community bank with local decision-making, not distant corporate headquarters",
+    "Full-service offerings including personal banking, business banking, loans, mortgages, and wealth management under one institution",
+    "Dedicated loan officers available for personalized service rather than automated processes",
+    "Routing number publicly displayed (113102714) indicating established banking infrastructure",
+    "Explicit mission-driven focus on customer satisfaction, personnel development, and community service"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint (Texas-only) restricts access for customers outside the state",
+    "Website provides minimal detail on specific rates, fees, or product terms compared to competitors",
+    "No mention of mobile app or advanced digital banking features that younger customers may expect",
+    "As a smaller regional bank, may have fewer ATM locations and less robust online infrastructure than national institutions",
+    "Limited transparency about loan approval rates, qualification requirements, or APR ranges for various products"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1209,
   "latitude": 31.6036870151775,
   "longitude": -94.6547489867801,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Texas-based business owners and entrepreneurs seeking relationship-based lending and local decision-making",
+    "Customers who prioritize personal service and community connection over lowest rates or digital convenience",
+    "Small to mid-sized businesses needing SBA loans, business credit lines, or working capital financing",
+    "Individuals seeking comprehensive financial services (banking, mortgages, wealth management) from a stable local institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "CBTx is best for Texas residents and businesses seeking relationship-driven banking from a stable, locally-focused community institution with over a century of operations. The main caveat is that customers outside Texas cannot access their services, and those prioritizing digital convenience or the lowest rates will find better options with national banks or fintech competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "215 E Main St, Nacogdoches, TX 75961",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

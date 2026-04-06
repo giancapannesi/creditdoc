@@ -1,14 +1,14 @@
 {
   "name": "County Bank",
   "slug": "county-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Brunswick, MO. $134M in assets. 2 offices.",
-  "description_long": "County Bank is a community bank located in Brunswick, MO, established in 1877. The bank holds approximately $134M in total assets and $115M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering personal and commercial checking accounts, business loans, and mobile banking services across Missouri locations.",
+  "description_long": "County Bank is a traditional community bank with physical branches in Brunswick and Moberly, Missouri, operating as an FDIC-insured institution backed by the full faith and credit of the U.S. Government. The bank serves both personal and commercial customers with a focus on local relationship banking and real estate financing. Their personal banking products include multiple checking account tiers (eZ Cash, eZ Cash Back, Basic, and Ambassador Checking), while their commercial offerings emphasize business loans and commercial real estate financing with stated local real estate knowledge. County Bank distinguishes itself through a strong mobile and digital-first approach, offering mobile check deposit, mobile banking via app or web browser, text banking via SMS, bill pay, and funds transfers accessible from any device. The bank also provides eStatements for paperless account management and positions itself as a convenient alternative to branch visits through comprehensive digital tools. Honestly assessed, County Bank is a solid regional community bank option for customers in Missouri seeking traditional banking services with modern digital convenience, though their geographic footprint is limited to two Missouri cities and their product range is narrower than national megabanks\u2014they appear to lack savings accounts, credit cards, mortgages, and investment services based on their public website.",
   "logo_url": "",
   "website_url": "https://countybankonline.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (eZ Cash, eZ Cash Back, Basic, Ambassador Checking)",
+    "Commercial real estate loans",
+    "Business loans for purchase, refinance, or construction",
+    "Online banking and account management",
+    "Mobile banking app (iOS and Android)",
+    "Mobile check deposit",
+    "Web-based mobile banking",
+    "Text (SMS) banking",
+    "Bill payment services",
+    "Funds transfers between accounts",
+    "eStatements (paperless electronic statements)",
+    "Account alerts and notifications"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1877",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits with full government backing",
+    "Multiple checking account types including rewards-based options (eZ Cash and eZ Cash Back)",
+    "Mobile check deposit capability through app on iOS and Android platforms",
+    "Text banking (SMS) for quick balance and transaction history inquiries",
+    "Free eStatements and online banking with 24/7 account access",
+    "Dedicated commercial real estate loan products with local market expertise",
+    "Multiple contact channels including dedicated lost/stolen card line (844-202-5333)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Only two physical branch locations (Brunswick and Moberly, Missouri) limits accessibility for most consumers",
+    "No mortgage, savings accounts, credit cards, or investment products visible on website",
+    "Mobile check deposits not guaranteed for same-day availability",
+    "Wireless carrier data rates may apply to mobile banking use",
+    "Limited online information about loan rates, terms, fees, and product comparison details"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 12220,
   "latitude": 39.4230699815895,
   "longitude": -93.1313019586407,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners in Missouri seeking commercial real estate or business financing",
+    "Residents of Brunswick or Moberly wanting relationship banking with local knowledge",
+    "Customers preferring traditional community bank service with modern mobile access",
+    "Businesses needing commercial lending with demonstrated local real estate expertise"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "County Bank is best for small business owners and residents of Missouri's Brunswick or Moberly areas seeking community banking with modern digital conveniences and local lending expertise. Primary caveat: extremely limited geographic footprint and product range make this unsuitable for consumers outside these two Missouri cities or those needing mortgages, savings accounts, credit cards, or investment services.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "116 W Broadway St, Brunswick, MO 65236",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

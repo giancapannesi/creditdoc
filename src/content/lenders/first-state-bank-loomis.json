@@ -1,15 +1,15 @@
 {
   "name": "First State Bank",
   "slug": "first-state-bank-loomis",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Loomis, NE. $230M in assets. 4 offices.",
-  "description_long": "First State Bank is a community bank located in Loomis, NE, established in 1945. The bank holds approximately $230M in total assets and $199M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank operating since 1886 with four Nebraska branch locations offering personal and business banking, mortgages, and agricultural loans.",
+  "description_long": "First State Bank was established in 1886, starting with just $15,000 in capital in a hardware store office in Loomis, Nebraska. By 1938, it had grown to hold the largest assets of any bank in Nebraska towns with populations under 1,000. The bank has been family-owned by the Lauritzen family since 1952, providing over 70 years of consistent local ownership. This long-standing community focus remains central to the bank's identity and operations.\n\nFirst State Bank offers a comprehensive range of personal and business banking services across four branch locations: Loomis (headquarters), Alma, Bertrand, and Axtell. Services include checking and savings accounts, mortgage loans, business banking solutions, agricultural loans, and digital banking platforms. The bank emphasizes continuous digital improvements to its online and mobile banking experience. With access to the Allpoint ATM Network, customers have surcharge-free access to 55,000 ATMs worldwide, significantly extending convenience beyond physical branches.\n\nThe bank distinguishes itself through genuine community commitment and multi-generational family stewardship. Leadership is stable and accessible, with named officers at each branch location providing personalized service. The bank's growth through strategic acquisitions\u2014purchasing Harlan County Bank (2006), Bank of Bertrand (2012), and Farmers and Merchants Bank of Axtell (2022)\u2014demonstrates sustained expansion while maintaining local focus. All deposits are FDIC-insured, backed by the full faith and credit of the U.S. Government.\n\nAs a regional community bank, First State Bank is best suited for customers prioritizing personal relationships, local decision-making, and agricultural expertise. The bank's small-town Nebraska roots mean it may lack the technological sophistication, product breadth, or competitive rates of larger national institutions. However, for rural and small-town customers seeking straightforward banking with accessible local leadership, the combination of FDIC safety, agricultural lending expertise, and community roots provides genuine value.",
   "logo_url": "",
   "website_url": "https://www.fsbloomis.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage loans (home purchase and refinance)",
+    "Agricultural loans",
+    "Business banking and commercial services",
+    "Online banking platform",
+    "Mobile banking application",
+    "Surcharge-free ATM access through Allpoint Network (55,000 ATMs)",
+    "Branch services at Loomis, Alma, Bertrand, and Axtell locations",
+    "Loan officer services",
+    "Business loan products",
+    "Digital banking improvements and enhancements"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1945",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits backed by full faith and credit of the U.S. Government",
+    "Access to 55,000 surcharge-free ATMs worldwide through Allpoint Network",
+    "Four branch locations across Nebraska communities (Loomis, Alma, Bertrand, Axtell)",
+    "Specialized agricultural loan services supporting farm customers",
+    "Over 70 years of consistent family ownership by the Lauritzen family",
+    "Named, accessible bank officers at each branch with NMLS credentials",
+    "Continuous digital banking improvements with online and mobile platforms"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to rural Nebraska areas only",
+    "Small community bank structure may lack competitive rates compared to national banks",
+    "Limited product breadth typical of regional banks versus large financial institutions",
+    "Website content does not disclose specific checking/savings account features, fees, or rate information",
+    "Technology capabilities and digital tools likely lag behind fintech and major banks"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 16333,
   "latitude": 40.4771520153047,
   "longitude": -99.5075069831254,
@@ -94,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Rural Nebraska farmers and agricultural business owners needing specialized lending",
+    "Small-town residents prioritizing personal relationships and local decision-making",
+    "Customers seeking traditional community banking with stable, accessible leadership",
+    "Individuals valuing multi-generational family-owned bank stewardship"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First State Bank is best for rural Nebraska customers and agricultural businesses seeking traditional community banking with personal relationships and local ownership. The main caveat is geographic limitation\u2014the four-branch footprint is restricted to rural Nebraska, making this unsuitable for customers outside these areas or those needing national reach and modern fintech capabilities.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "211 Commercial St, Loomis, NE 68958",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

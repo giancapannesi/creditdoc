@@ -1,14 +1,14 @@
 {
   "name": "Century Bank",
   "slug": "century-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Lucedale, MS. $552M in assets. 9 offices.",
-  "description_long": "Century Bank is a community bank located in Lucedale, MS, established in 1903. The bank holds approximately $552M in total assets and $497M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Regional bank serving southeast Mississippi and southwest Alabama with multiple branches, offering personal and business loans, credit cards, and digital banking services.",
+  "description_long": "Century Bank is a regional community bank headquartered in Lucedale, Mississippi, with a presence across southeast Mississippi (including George and Jackson counties) and southwest Alabama (Mobile and Baldwin counties). The bank operates nine physical branch locations and emphasizes personalized banking relationships through its tagline \"We take banking personally.\" Founded to serve local communities, Century Bank positions itself as an accessible alternative to larger national institutions by maintaining multiple branch offices and localized service.\n\nCentury Bank offers a comprehensive range of retail and business banking products. Their service portfolio includes personal loans and lines of credit with competitive rates and flexible terms, business loans for equipment or property purchases, rewards credit cards with low APRs and no annual fees, home equity lines of credit, mobile banking via dedicated app, online banking accessible 24/7, merchant services (including point-of-sale systems and mobile wallet payments), and SecurLOCK card controls for fraud prevention. The bank provides both consumer and commercial lending solutions tailored to regional business needs.\n\nCentury Bank differentiates itself through extensive branch availability across two states with convenient hours, including Saturday service at their Market Place location. Their focus on local relationships, multiple payment options (mobile wallet, point-of-sale), and integrated security features like SecurLOCK distinguish them from online-only banks. The bank emphasizes accessibility through a toll-free number (1-800-841-8350) and local support.\n\nAs a regional bank, Century Bank offers traditional banking services with local accountability, making it suitable for customers who prefer in-person banking and community relationships. However, the website does not disclose FDIC insurance status, interest rates, loan terms, fees, or regulatory details. The limited digital information available suggests this is primarily a local-focused institution without the product breadth or technology sophistication of larger national banks.",
   "logo_url": "",
   "website_url": "https://centurybank.net",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal loans with flexible terms",
+    "Business loans for property, equipment, and working capital",
+    "Home equity lines of credit",
+    "Rewards credit cards with no annual fee",
+    "Secure online banking platform with 24/7 access",
+    "Mobile banking app for account management",
+    "SecurLOCK card control and fraud prevention",
+    "Point-of-sale merchant services",
+    "Mobile wallet payment processing",
+    "Checking and savings accounts (inferred from banking services)",
+    "Wire transfers and payment services (inferred from banking platform)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1903",
-    "Local community bank with personal service",
-    "9 locations"
+    "Nine physical branch locations across Mississippi and Alabama for convenient in-person banking",
+    "24/7 online and mobile banking access through dedicated mobile app and secure online platform",
+    "Rewards credit cards with no annual fee and competitive low APR",
+    "SecurLOCK card control feature allowing customers to manage where and when cards are used",
+    "Extended hours including Saturday morning service at Market Place location",
+    "Personal and business loans with flexible terms and competitive rates",
+    "Home equity lines of credit using home equity as financial security source",
+    "Merchant services including point-of-sale systems and mobile wallet payment options"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not disclose FDIC insurance status or membership in deposit insurance programs",
+    "No interest rates, APRs, fees, or loan terms provided on website for comparison shopping",
+    "Limited to two-state region (Mississippi and Alabama) with no online national service indicated",
+    "No information about minimum account balances, credit score requirements, or eligibility criteria",
+    "Lacks transparency on regulatory compliance, ratings, or recent examination reports"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 11448,
   "latitude": 30.9248033443754,
   "longitude": -88.5954141281998,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local customers in southeast Mississippi or southwest Alabama seeking in-person banking relationships",
+    "Small business owners in covered counties needing equipment financing or business loans",
+    "Consumers who prefer traditional banking with physical branch access over digital-only institutions",
+    "Regional customers wanting personalized service and community-focused lending decisions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Century Bank is best for customers in Mississippi and Alabama who value in-person banking relationships, local decision-making, and branch convenience. The main caveat is that the bank's website lacks crucial transparency on FDIC insurance, interest rates, fees, and loan terms\u2014essential information for comparing this regional bank to competitors\u2014and service is geographically limited to a two-state region.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "4282 Main St, Lucedale, MS 39452",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Grasshopper Bank, N.A.",
   "slug": "grasshopper-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in New York, NY. $1583M in assets. 2 offices.",
-  "description_long": "Grasshopper Bank, N.A. is a community bank located in New York, NY, established in 2019. The bank holds approximately $1583M in total assets and $1424M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Grasshopper Bank, N.A. is an FDIC-insured digital bank offering business checking, savings, and lending solutions for startups, small businesses, and venture capital firms.",
+  "description_long": "Grasshopper Bank, N.A. is a nationally chartered bank (Member FDIC) that launched as a digital-first banking platform designed specifically for business customers rather than consumer lending. The company operates as a full-service bank rather than a fintech lender, offering FDIC-insured deposit accounts and multiple lending programs.\n\nThe bank provides a suite of business banking products including the Innovator Business Checking account (earning up to 1.35% APY with 1% cash back), bundled savings accounts (up to 3.00% APY), and the Accelerator Product Suite for startups. Beyond deposits, Grasshopper offers SBA lending for business acquisitions and refinancing, venture capital and private equity financing, and commercial real estate (CRE) lending. The platform includes digital tools such as mobile check deposit, bill pay, digital invoicing, accounting integration (QuickBooks and Autobooks), cash flow management, and user permission controls.\n\nGrasshopper distinguishes itself through its technology-first approach and industry recognition, having won multiple awards including Banking Tech of the Year (US FinTech Awards 2025), Best Use of Tech in Business Banking (Banking Tech Awards USA 2025), and Banking-as-a-Service Innovation (Future Digital Awards 2025). The bank markets itself to startups, small businesses, venture capital/private equity firms, and fintech companies, positioning embedded finance solutions as a core offering.\n\nAs a full-service bank with lending operations, Grasshopper is a legitimate financial institution subject to banking regulations and FDIC oversight. However, the website content focuses primarily on marketing rather than detailed product terms, APY rates vary by product tier, and specific lending criteria and approval processes are not transparent on the public website.",
   "logo_url": "",
   "website_url": "https://www.grasshopper.bank",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Innovator Business Checking accounts with APY and cash back rewards",
+    "Innovator Money Market Savings accounts (bundled products)",
+    "Accelerator Product Suite for startups",
+    "SBA lending for business acquisition, refinancing, and expansion",
+    "Venture Capital and Private Equity lending",
+    "Commercial Real Estate (CRE) lending",
+    "Mobile check deposit via photo",
+    "Digital bill pay and ACH transfers",
+    "Digital invoice generation and sending",
+    "Accounting automation and QuickBooks integration",
+    "Cash flow management and reporting tools",
+    "User permission management and approval workflows",
+    "Embedded finance solutions for fintech partners"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2019",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits backed by U.S. government guarantee",
+    "Competitive APY rates: up to 1.35% on checking, 3.00% on bundled savings accounts",
+    "1% cash back on select products with no monthly fees",
+    "Free domestic wire transfers when maintaining $25,000+ average balance",
+    "Unlimited check deposits via mobile app with no additional charges",
+    "Integrated accounting automation (QuickBooks and Autobooks compatibility)",
+    "Multiple lending products including SBA loans, CRE financing, and VC/PE funding",
+    "Award-winning digital platform with industry recognition"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Minimum balance requirements ($25,000) to unlock certain benefits like free wire transfers",
+    "Limited transparency on lending approval criteria and specific loan terms on public website",
+    "Focused primarily on business banking, not designed for personal consumer banking",
+    "No details on customer acquisition timeline or account opening speed",
+    "Embedded finance solutions and fintech partnerships may not be relevant to traditional small business owners"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "NY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 59113,
   "latitude": 40.745046357971,
   "longitude": -73.986818266095,
@@ -93,12 +106,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Startups and early-stage companies seeking digital-first business banking with growth-oriented tools",
+    "Small business owners requiring SBA lending, payroll management, and accounting integration",
+    "Venture capital and private equity firms needing specialized treasury management and portfolio company banking",
+    "Fintech companies looking for embedded finance partnerships and banking-as-a-service solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Grasshopper Bank is best for business owners, startups, and VC/PE firms seeking a fully-regulated digital bank with competitive rates and integrated accounting tools. The main caveat is that it is exclusively a business banking platform\u2014personal consumers and those needing personal loans should look elsewhere, and approval for lending products requires meeting unstated business criteria.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   ],
   "phone": "",
   "address": "261 5Th Ave, New York, NY 10016",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

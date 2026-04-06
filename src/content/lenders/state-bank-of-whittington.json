@@ -1,14 +1,14 @@
 {
   "name": "State Bank Of Whittington",
   "slug": "state-bank-of-whittington",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Benton, IL. $177M in assets. 5 offices.",
-  "description_long": "State Bank Of Whittington is a community bank located in Benton, IL, established in 1919. The bank holds approximately $177M in total assets and $158M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank offering personal and business checking, savings, loans, and digital banking services. FDIC-insured with locations in Illinois and a 100+ year history.",
+  "description_long": "State Bank of Whittington has operated since 1919 as a locally owned and operated community bank serving Illinois. The bank is FDIC-insured, meaning deposits are backed by the full faith and credit of the U.S. Government, providing deposit security up to applicable limits. With a stated 5-star rating and recent milestone of celebrating over 100 years in business, the institution positions itself as both a legacy financial institution and a modern digital bank.\n\nThe bank offers a comprehensive suite of personal banking products including multiple checking account options (Free Kasasa Cash Checking, Free Kasasa Cash Back Checking, Kasasa Tunes Checking, InControl Checking, NOW Accounts), personal savings accounts, money market accounts, certificates of deposit, and individual retirement accounts. On the lending side, they provide personal loans, home mortgage loans, home equity loans, auto loans, and personal term loans. For business customers, State Bank of Whittington offers business checking and savings accounts, business money market accounts, commercial real Estate loans, business term loans, business lines of credit, equipment loans, and agriculture loans.\n\nWhat distinguishes State Bank of Whittington is their partnership with Kasasa, offering free checking and savings accounts that pay cash rewards directly to customers. Their Kasasa Protect service provides 24/7 fraud protection. The bank emphasizes modern digital convenience despite its century-old history, offering free online banking, mobile banking, card management tools, and the ability to open accounts online. They maintain physical branch locations in Benton, Christopher, and Sesser, Illinois, creating a hybrid approach combining in-person and digital banking.\n\nThe primary caveat is that State Bank of Whittington appears to be a regional bank with limited geographic reach, serving primarily Illinois communities. While their website presents a full-featured banking platform with competitive Kasasa products, the institution's small-town presence may limit accessibility for customers outside their service area. Detailed rate information, specific loan terms, and fee structures are referenced but not fully displayed on the public website.",
   "logo_url": "",
   "website_url": "https://www.statebankofwhittington.com",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Free Kasasa Cash Checking with cash rewards",
+    "Free Kasasa Cash Back Checking",
+    "Kasasa Tunes Checking",
+    "InControl Checking and NOW Accounts",
+    "Free Kasasa Saver account",
+    "Money Market Accounts and Certificates of Deposit",
+    "Individual Retirement Accounts (IRAs)",
+    "Home Mortgage and Home Equity Loans",
+    "Auto Loans and Personal Term Loans",
+    "Commercial Real Estate Loans and Business Lines of Credit",
+    "Equipment Loans and Agriculture Loans",
+    "Free Online and Mobile Banking with Card Management"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1919",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Free Kasasa Cash checking accounts that pay customers in cash rewards",
+    "Free Kasasa Saver account for easy saving without fees",
+    "24/7 fraud protection through Kasasa Protect service",
+    "Free online banking and mobile banking access",
+    "100+ year operating history as locally owned institution",
+    "Comprehensive lending options including agriculture loans, equipment financing, and commercial real estate"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint\u2014only three Illinois locations (Benton, Christopher, Sesser)",
+    "Specific interest rates and APRs not displayed on website; must contact bank directly",
+    "No clear information about minimum account balances or qualification requirements for Kasasa products",
+    "Small regional bank may lack the branch network and ATM access of national banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 19689,
   "latitude": 37.9982399838037,
   "longitude": -88.9199410234205,
@@ -93,12 +103,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Illinois residents in Benton, Christopher, or Sesser counties seeking community banking with FDIC protection",
+    "Small business owners and farmers needing local relationship banking with agriculture and equipment financing",
+    "Customers interested in cash-back rewards checking accounts without traditional bank fees"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "State Bank of Whittington is best for customers in their service area (Illinois) seeking traditional community banking with modern digital conveniences and FDIC protection. The main caveat is geographic limitation\u2014this bank only serves three Illinois locations, making it inaccessible for customers outside that region; customers should verify they're in a served area before applying.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +116,11 @@
   ],
   "phone": "",
   "address": "200 N Main St, Benton, IL 62812",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

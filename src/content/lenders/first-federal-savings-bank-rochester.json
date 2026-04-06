@@ -1,15 +1,15 @@
 {
   "name": "First Federal Savings Bank",
   "slug": "first-federal-savings-bank-rochester",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Rochester, IN. $673M in assets. 6 offices.",
-  "description_long": "First Federal Savings Bank is a community bank located in Rochester, IN, established in 1965. The bank holds approximately $673M in total assets and $535M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank serving Northern Indiana with deposit accounts, home loans, commercial lending, and investment services.",
+  "description_long": "First Federal Savings Bank is a federally-insured savings bank operating in Northern Indiana with a focus on retail and commercial banking services. The bank offers a full range of deposit products including personal and business checking and savings accounts, CDs, IRAs, and specialized deposit vehicles like ICS and CDARS. Their lending portfolio includes residential mortgages (purchase, refinance, and home equity), commercial loans, and specialty products such as medical professional mortgages. The bank emphasizes accessibility through multiple channels including online banking, mobile banking, and physical branch locations throughout Northern Indiana.\n\nFirst Federal provides both traditional banking services and integrated financial solutions. On the deposit side, they offer Simply Free Checking with promotional incentives, savings accounts, and retirement planning products (IRAs, rollovers, college savings). Their lending division is substantial, featuring home mortgage pre-approval, HELOC products with promotional rates (4.99% APR introductory offer), down payment assistance grants (up to $20,000), and closing cost reduction programs. They also provide integrated services including Zelle transfers, MoneyPass ATM access, investment management, insurance services through First Federal Insurance Services LLC, and financial counseling resources.\n\nThe bank distinguishes itself through its Northern Indiana regional focus and community-oriented approach. They market specific promotional programs like the Launch Down Payment Assistance Program and seasonal specials on closing costs. The availability of medical professional mortgage products suggests specialization in serving specific professional demographics. Their integration of insurance services and investment advisory capabilities provides more comprehensive financial planning than basic banking institutions. The emphasis on multiple contact channels (phone, chat, email) and online account opening indicates modernized operations alongside traditional banking.\n\nAs a community regional bank, First Federal serves a defined geographic market rather than operating nationally, which limits accessibility for non-Indiana residents. While they offer competitive products, the website provides limited transparency on specific account terms, fee schedules, or interest rate comparisons. The bank's size and regional scope mean fewer amenities compared to national banking institutions, though this may appeal to customers preferring local service relationships.",
   "logo_url": "",
   "website_url": "https://www.firstfederalbanking.com",
   "affiliate_url": "",
@@ -24,23 +24,39 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business checking and savings accounts",
+    "CDs and IRAs",
+    "ICS and CDARS deposit products",
+    "Residential mortgages (purchase, refinance, home equity)",
+    "Home equity lines of credit (HELOC)",
+    "Medical professional mortgages",
+    "Commercial loans",
+    "Down payment assistance grants",
+    "Online and mobile banking",
+    "Investment advisory and retirement planning (IRA rollovers, college savings)",
+    "Insurance services through First Federal Insurance Services LLC",
+    "Zelle peer-to-peer transfers",
+    "MoneyPass ATM network access",
+    "Online account opening",
+    "Loan servicing and payments"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1965",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Down Payment Assistance Program offering grants up to $20,000 for qualified borrowers",
+    "Limited-time HELOC introductory rate of 4.99% APR for first 6 months",
+    "Integrated insurance services and investment advisory through affiliated First Federal Insurance Services LLC",
+    "Multiple contact methods including 24/7 online chat, phone support (800-422-3372), and email",
+    "Specialized lending products for medical professionals",
+    "Zelle integration for fast peer-to-peer transfers",
+    "MoneyPass ATM network access for non-proprietary ATM use"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to Northern Indiana service area; not accessible to customers in other regions",
+    "Website lacks detailed fee schedules and specific APY rates for deposit accounts",
+    "No promotional incentive details provided for Simply Free Checking account",
+    "Smaller institution may offer fewer digital banking features than national competitors",
+    "Limited transparency on loan approval criteria and specific mortgage rate terms"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +68,7 @@
   "states_served": [
     "IN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 31516,
   "latitude": 41.0645339968915,
   "longitude": -86.2126759841166,
@@ -88,18 +104,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Northern Indiana residents seeking full-service community banking with local branch access",
+    "First-time homebuyers interested in down payment assistance and closing cost reduction programs",
+    "Medical professionals seeking specialized mortgage products tailored to their income profiles",
+    "Small business owners in Northern Indiana needing commercial lending and business banking services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Federal Savings Bank is best for Northern Indiana residents and small business owners seeking comprehensive community banking with deposit products, mortgage lending, and commercial services backed by FDIC insurance. The main caveat is strict geographic limitation to Northern Indiana and lack of online banking features comparable to national banks, requiring in-person or regional branch access.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +124,11 @@
   ],
   "phone": "",
   "address": "301 E 9Th St, Rochester, IN 46975",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

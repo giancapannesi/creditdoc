@@ -1,14 +1,14 @@
 {
   "name": "Presidential Bank, Fsb",
   "slug": "presidential-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Bethesda, MD. $1057M in assets. 11 offices.",
-  "description_long": "Presidential Bank, Fsb is a community bank located in Bethesda, MD, established in 1985. The bank holds approximately $1057M in total assets and $945M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Presidential Bank is a full-service community and online bank offering checking, savings, home equity products, and digital banking services with ABA# 255073345.",
+  "description_long": "Presidential Bank operates as a full-service community and online bank, providing traditional banking services to consumers and small businesses. The bank maintains physical branch locations while also offering robust online and mobile banking capabilities, indicating a hybrid community bank model that serves both local and remote customers.\n\nThe bank's core service offerings include deposit accounts (checking and savings), home equity lines of credit, online bill payment, wire transfers, and mobile banking through a dedicated app. Customers can manage accounts 24/7 through online banking, mobile app, or SMS text banking, with features like balance checking, fund transfers, check deposits via mobile, and Zelle money transfer integration. The bank also offers loan payment services and account management tools like check reordering and statement access.\n\nPresidential Bank distinguishes itself through its emphasis on accessibility and fraud prevention education. The bank partners with the American Bankers Association to educate customers on fraud awareness and check safety, and actively communicates with customers about security best practices. The mobile app integration includes modern conveniences like mobile check deposit and Zelle transfers, positioning it competitively among community banks.\n\nThe bank's online presence is straightforward but functional. While the website confirms basic banking operations and provides account access portals, detailed information about interest rates, fees, account minimums, and specific product features is limited on the publicly available pages. Customers seeking comprehensive product comparison data would need to contact the bank directly or visit branches.",
   "logo_url": "",
   "website_url": "https://www.presidential.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Online banking with bill payment",
+    "Mobile app banking (iOS and Android)",
+    "SMS text banking for balance checks and transfers",
+    "Wire transfer initiation",
+    "Mobile check deposit",
+    "Zelle money transfer integration",
+    "Home equity lines of credit",
+    "Loan payment services",
+    "Account statement access and check reordering",
+    "Secure messaging to customer service",
+    "Fund transfers between accounts",
+    "Check and debit card services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1985",
-    "Local community bank with personal service",
-    "11 locations"
+    "24/7 online and mobile banking access with comprehensive account management features",
+    "Free bill payment for consumer checking account customers",
+    "Mobile app includes modern features like mobile check deposit and Zelle transfers",
+    "SMS text banking available for quick balance checks and inter-account transfers",
+    "FDIC insured with established ABA routing number (255073345)",
+    "Physical branch locations combined with online accessibility",
+    "Active fraud prevention education partnership with American Bankers Association"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited product information available online; rates, fees, and account minimums not displayed on website",
+    "Geographic presence unclear\u2014branch locations not detailed on homepage",
+    "No information provided about minimum deposit requirements or account types offered",
+    "Website lacks details on credit products, savings rates, or CD offerings",
+    "No transparent fee schedule published online for common banking services"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MD"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 32363,
   "latitude": 38.9845949825759,
   "longitude": -77.0919880071152,
@@ -93,12 +104,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Community members in Presidential Bank's service areas seeking local branch access combined with online banking",
+    "Consumers who value fraud prevention education and security partnerships",
+    "Users wanting modern mobile banking features like check deposit and Zelle integration from a traditional bank"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Presidential Bank is best for consumers in its service area who want traditional community banking with modern digital conveniences, particularly those valuing fraud prevention education and 24/7 online access. The main caveat is that critical product details\u2014interest rates, fees, account minimums, and specific offerings\u2014are not transparent on their website, requiring direct customer contact for informed decision-making.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "4520 East West Hwy, Bethesda, MD 20814",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

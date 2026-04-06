@@ -1,13 +1,13 @@
 {
   "name": "Capital City Bank",
   "slug": "capital-city-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Tallahassee, FL. $4383M in assets. 67 offices.",
-  "description_long": "Capital City Bank is a community bank located in Tallahassee, FL, established in 1907. The bank holds approximately $4383M in total assets and $3756M in deposits. It operates 67 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Capital City Bank is an FDIC-insured bank offering deposit accounts, home equity loans, and commercial loans through both in-person branches and digital banking platforms.",
+  "description_long": "Capital City Bank operates as a traditional full-service bank backed by FDIC insurance and the full faith and credit of the U.S. Government. The bank has established a presence in consumer and commercial banking with a focus on accessible financial services across multiple channels.\n\nThe bank's primary offerings include deposit accounts (personal checking, savings, teen accounts), home equity loans, commercial loans, and credit cards. They provide online loan application capabilities marketed as fast, simple, and secure. Their Carefree Personal Checking account is positioned as a value-added product with enhanced services, peace of mind features, savings components, and exclusive discounts. The bank also offers financial calculators and digital banking tools to help customers manage accounts online.\n\nCapital City Bank differentiates itself through FDIC insurance backing, a multi-language website translation feature (supporting 100+ languages), and an integrated digital banking ecosystem including online banking, credit card management, loan payment portals, and merchant services. They serve both retail customers and commercial clients with specialized services like supply chain finance and lockbox management.\n\nAs a regional bank, Capital City Bank is best suited for customers seeking traditional banking services with FDIC protection and digital convenience. The website provides limited detail on specific rates, fees, minimum balances, or loan terms, which may require direct inquiry. The bank's strength lies in offering comprehensive services under one roof rather than specialization in any particular product category.",
   "logo_url": "",
   "website_url": "https://www.ccbg.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts (Carefree Personal Checking)",
     "Savings accounts",
+    "Teen checking and savings accounts",
+    "Home equity loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Commercial loans",
+    "Credit cards with rewards and cash back options",
+    "Online banking platform",
+    "Credit card account management online",
+    "Loan payment portals",
+    "Merchant services",
+    "Supply chain finance and lockbox management"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1907",
-    "Local community bank with personal service",
-    "67 locations"
+    "FDIC-insured deposits backed by full faith and credit of the U.S. Government",
+    "Carefree Personal Checking account includes value-added services, peace of mind features, and exclusive discounts",
+    "Fast online loan application process for personal and business loans",
+    "Integrated digital banking platform with online account access, credit cards, loan payments, and merchant services",
+    "Commercial services including supply chain finance and lockbox management",
+    "Multi-language support with 100+ language options for accessibility",
+    "Teen checking and savings accounts for younger customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides minimal transparency on APRs, interest rates, or fee schedules",
+    "Limited information about minimum account balances or deposit requirements",
+    "No clear details on loan terms, approval timeframes, or credit requirements",
+    "Commercial services information is sparse and may require contacting the bank directly",
+    "Website does not specify branch locations, making it unclear if the bank operates nationally or regionally"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "FL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9622,
   "latitude": 30.4442760164124,
   "longitude": -84.2802729663813,
@@ -92,12 +103,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking comprehensive traditional banking services with FDIC protection",
+    "Small business owners needing commercial loans and merchant services",
+    "Families wanting teen financial accounts and savings products",
+    "Homeowners interested in home equity loans"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Capital City Bank is best for customers seeking a full-service traditional bank with FDIC insurance and digital convenience for both personal and business banking needs. The main caveat is that the website lacks detailed information about rates, fees, and specific loan terms, requiring direct contact with the bank for comprehensive product comparison and pricing details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "217 N Monroe St, Tallahassee, FL 32301",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

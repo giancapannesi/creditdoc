@@ -1,15 +1,15 @@
 {
   "name": "Peoples State Bank",
   "slug": "peoples-state-bank-westhope",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Westhope, ND. $72M in assets. 2 offices.",
-  "description_long": "Peoples State Bank is a community bank located in Westhope, ND, established in 1906. The bank holds approximately $72M in total assets and $62M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "TD Bank offers FDIC-insured checking, savings, and online banking services backed by the full faith and credit of the U.S. Government, with mobile and digital banking options.",
+  "description_long": "TD Bank, N.A. is a subsidiary of Toronto-Dominion Bank and operates as a full-service retail bank providing deposit and banking services to consumers. The company offers online and mobile banking platforms that allow customers to manage accounts remotely with security features designed to protect against fraud and unauthorized access. TD Bank's deposit products are FDIC-insured up to applicable limits, meaning customer funds are protected by federal insurance. The bank also offers investment and brokerage services through its affiliated TD Private Client Wealth, LLC division, though these securities products are not FDIC-insured and may lose value.\n\nTD Bank's primary service offerings include online banking, mobile banking applications, savings accounts (with current promotional offers of $200 for qualifying activities), and various deposit products. The bank emphasizes its commitment to online and mobile banking security, providing customers with digital-first tools for account management. Account holders can access services 24/7 through online platforms, view account information, and manage transfers remotely. The bank also maintains physical branch locations for in-person banking needs.\n\nTD Bank distinguishes itself through its integration of digital banking with a physical branch network, offering customers both convenience and personal service options. The company provides educational resources and learning materials through its website and maintains customer support channels including phone and online contact options. As a major bank backed by a large international parent company (Toronto-Dominion Bank), TD Bank benefits from substantial resources and infrastructure.\n\nHowever, the website content provided contains only login and promotional information without details on fee structures, interest rates, account minimums, or specific service limitations. Investment and brokerage services explicitly carry no bank guarantee and may result in loss of principal. The profile information available is limited to marketing materials and does not provide comprehensive details about account terms, competitive rates, or fee schedules that consumers would need for full evaluation.",
   "logo_url": "",
   "website_url": "https://onlinebanking.tdbank.com/",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
+    "Online banking platform with login and account access",
+    "Mobile banking application",
+    "Savings accounts with promotional bonuses",
     "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificate of Deposit (CD) products",
+    "Online account management and transfers",
+    "Digital security features and fraud protection",
+    "Investment advisory services through TD Private Client Wealth, LLC",
+    "Securities brokerage services (FINRA/SIPC registered)",
+    "Customer support and help services",
+    "Online banking demo and educational resources",
+    "Physical branch locations for in-person banking"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1906",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "24/7 online and mobile banking access for account management",
+    "Current promotional offer: $200 bonus for qualifying savings account activities",
+    "Integrated online security features and commitment to safe banking experience",
+    "Physical branch network combined with digital banking options",
+    "Affiliated investment services through TD Private Client Wealth for wealth management",
+    "Non-profit educational resources and learning materials for customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no information on fee structures or account minimums",
+    "No disclosed interest rates or APY information for savings products",
+    "Investment services carry explicit risk of principal loss with no bank guarantee",
+    "Limited transparency on specific service terms and conditions on primary landing page",
+    "No clear information on customer support response times or service levels"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "ND"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13196,
   "latitude": 48.9095230069522,
   "longitude": -101.020546034454,
@@ -94,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Consumers seeking FDIC-insured deposit accounts with digital banking convenience",
+    "Customers wanting integrated banking and investment services through one institution",
+    "Digital-first banking users who prefer online and mobile platforms over branch visits",
+    "Individuals interested in wealth management services through affiliated advisory division"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "TD Bank is best suited for consumers seeking a full-service bank combining FDIC-insured deposits with digital banking convenience and potential investment services. The primary caveat is that the publicly available website provides minimal details on rates, fees, and specific account terms, requiring prospective customers to contact the bank directly or visit branches for complete product information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,10 +119,12 @@
   ],
   "phone": "",
   "address": "110 Main St, Westhope, ND 58793",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
   "website_found_by": "scrapeforge",
-  "website_found_at": "2026-04-04T17:29:48.799984"
+  "website_found_at": "2026-04-04T17:29:48.799984",
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

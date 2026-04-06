@@ -1,14 +1,14 @@
 {
   "name": "Sharon Bank",
   "slug": "sharon-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Springfield, PA. $160M in assets. 5 offices.",
-  "description_long": "Sharon Bank is a community bank located in Springfield, PA, established in 1873. The bank holds approximately $160M in total assets and $134M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Sharon Bank is a community-focused FDIC-insured bank operating since 1873, offering personal and business checking, savings, loans, and credit cards with digital banking capabilities.",
+  "description_long": "Sharon Bank has been serving its community for over 150 years, tracing its roots back to 1873. The bank operates as a traditional community bank with FDIC insurance backing all deposits with the full faith and credit of the U.S. Government. Based on their website, they maintain multiple physical locations across Pennsylvania (Springfield, Aston, and Philadelphia areas) while offering modern digital banking services. The bank explicitly positions itself around a '150 Years of Service to the Community' mission and emphasizes local community initiatives.\n\nSharon Bank offers a comprehensive suite of financial products across both personal and business segments. On the personal side, they provide multiple checking account options (1873 High Interest Checking, 1873 Cash Back Checking, NOW Interest Checking, Senior Checking), savings accounts (1873 Saver, Statement Savings, Passbook Savings, Junior Passbook Savings), Money Market accounts, CDs, IRAs, home loans (mortgages and home equity products including a new HELOC), and personal credit cards. For businesses, they offer business checking accounts, business savings, business CDs, commercial loans, residential investment loans, commercial real estate loans, construction loans, business credit cards, and merchant services including remote deposit capture and ACH services.\n\nSharon Bank distinguishes itself through its emphasis on rewards-based checking accounts (the 1873 Rewards program with monthly benefits), competitive home equity loan rates (advertised as low as 5.00% APR), a new HELOC product launch, and high-yield money market offerings for borrowers. The bank offers digital conveniences including 24/7 online banking, a downloadable mobile app, Zelle payments, and paperless statements, combined with traditional in-person service. They also provide integration tools like QuickBooks and Quicken software support, and have implemented accessibility features (AudioEye enabled) on their website.\n\nAs a regional community bank, Sharon Bank serves customers seeking personalized banking relationships with local decision-making, though they operate at a smaller scale than national megabanks. Their product offerings are traditional and comprehensive rather than innovative. The website does not advertise aggressive promotional rates or cutting-edge fintech features, focusing instead on stable, established banking services. For consumers prioritizing community banking, FDIC security, and relationship-based service, Sharon Bank represents a conventional choice, though customers seeking the lowest rates or most advanced digital features may find more competitive options elsewhere.",
   "logo_url": "",
   "website_url": "https://www.sharonbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (High Interest, Cash Back, Demand, NOW, Senior)",
+    "Personal savings accounts and Money Market accounts",
+    "Certificates of Deposit (CDs) and Individual Retirement Accounts (IRAs)",
+    "Home mortgage loans and home equity loans with HELOC products",
+    "Personal and business credit cards with rewards options",
+    "Business checking and savings accounts for small business and non-profit entities",
+    "Commercial loans including construction loans, commercial real estate loans, and residential investment loans",
+    "Digital banking services: 24/7 online banking, mobile app, paperless statements, Zelle payments",
+    "Business services: QuickBooks/Quicken integration, remote deposit capture, ACH services, merchant card services",
+    "Debit cards and card management tools (lost/stolen card reporting, reordering checks)",
+    "Financial calculators and checkbook balancing tools",
+    "IntraFi and SecureNow services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1873",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "150+ years of operating history in the community (since 1873)",
+    "1873 Rewards program offers monthly cash back and interest rewards on checking accounts",
+    "Home equity loan rates advertised as low as 5.00% APR with new HELOC product",
+    "24/7 online banking with downloadable mobile app and Zelle payment integration",
+    "Comprehensive suite for both personal and business banking needs under one institution",
+    "Physical branch locations in multiple Pennsylvania communities (Springfield, Aston, Philadelphia)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint compared to national or regional chains; primarily serves PA areas",
+    "Website does not prominently feature competitive rate comparisons or promotional incentives beyond home equity products",
+    "No mention of advanced fintech features, investment services, or alternative lending products",
+    "Limited transparency on checking account fees and minimum balance requirements visible on home page",
+    "Smaller institution may have fewer ATM locations and less developed mobile app functionality than major banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "PA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28793,
   "latitude": 39.938951018238,
   "longitude": -75.3506860115336,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Pennsylvania residents seeking community banking with local decision-making and personalized service",
+    "Small business owners needing comprehensive banking services (checking, savings, loans, merchant services) from a single institution",
+    "Homeowners looking for competitive home equity loans or HELOCs with rates advertised at 5.00% APR or lower",
+    "Customers prioritizing FDIC safety and traditional banking stability over digital-only or fintech-focused banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Sharon Bank is best for Pennsylvania residents and small business owners seeking traditional, stable community banking with FDIC protection, personalized service, and competitive home equity loan rates. The main caveat is that as a regional community bank, it offers limited geographic reach compared to national banks and does not prominently feature the aggressive promotional rates, cutting-edge digital innovation, or extensive product depth that larger institutions provide.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "900 W Sproul Rd, Springfield, PA 19064",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Bank",
   "slug": "bank-wapello",
-  "category": "personal-loans",
+  "category": "mortgages",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Wapello, IA. $209M in assets. 7 offices.",
-  "description_long": "Bank is a community bank located in Wapello, IA, established in 1931. The bank holds approximately $209M in total assets and $184M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering mortgages, agricultural loans, commercial lending, and aircraft financing since 1900. Provides online and in-person mortgage services.",
+  "description_long": "BANK has operated as a financial institution since 1900, establishing itself as a provider of various lending products backed by FDIC insurance and the full faith and credit of the U.S. Government. The company positions itself as a premier banking and lending institution with a focus on relationship-based lending and community partnerships.\n\nThe bank's primary service offerings include residential mortgage lending with flexible options for personal use, agricultural lending for farm operations, commercial lending for business needs, and specialized aircraft financing. They emphasize accessibility through both online account opening and in-person service, making their mortgage products available to consumers regardless of preferred banking method. The bank also operates a participation network and mortgage aggregation services for partner banks.\n\nBBANK distinguishes itself through its long operational history (since 1900), FDIC insurance backing, and dual-channel delivery model combining digital convenience with local, in-person service. The company markets mortgages as \"personal, local, and trusted,\" suggesting an emphasis on relationship banking rather than purely transactional lending. Their breadth of lending categories (agriculture, commercial, aircraft) indicates they serve diverse borrower profiles beyond standard residential mortgage customers.\n\nHowever, the website provides limited specific information about mortgage terms, rates, loan products, underwriting requirements, or competitive advantages. No details are disclosed regarding APRs, down payment requirements, minimum/maximum loan amounts, or specific loan programs (FHA, VA, jumbo, etc.). The company's website lacks customer testimonials, specific product comparisons, or transparent pricing information that would help borrowers evaluate their offerings against competitors.",
   "logo_url": "",
   "website_url": "https://www.bank.bank",
   "affiliate_url": "",
@@ -23,23 +23,31 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Residential mortgage lending and origination",
+    "Online account opening for new customers",
+    "Agricultural lending and farm financing",
+    "Commercial business lending",
+    "Aircraft financing and aircraft loans",
+    "In-person mortgage consultation and processing",
+    "FDIC-insured deposit accounts",
+    "CD (Certificate of Deposit) special offers",
+    "Mortgage aggregation services for partner banks",
+    "Loan participation network for financial institutions"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1931",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Established financial institution with 100+ years operating history (since 1900)",
+    "Online account opening available for convenience and accessibility",
+    "Multiple lending specialties including agriculture, commercial, and aircraft financing",
+    "Offers both online and in-person mortgage services for customer preference",
+    "Mortgage aggregation and participation network services for bank partners"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific mortgage rates, APRs, or loan term information",
+    "No transparency on down payment requirements, loan limits, or loan-to-value ratios",
+    "No details on specific loan programs offered (FHA, VA, conventional, jumbo, etc.)",
+    "Minimal customer reviews, testimonials, or third-party ratings visible on website",
+    "No information about underwriting timeline, approval rates, or application process details"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +59,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14291,
   "latitude": 41.17344002294,
   "longitude": -91.189888227354,
@@ -87,18 +95,18 @@
   "rating": 4.3,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 4.1,
-    "transparency": 4.5,
+    "transparency": 4.3,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Borrowers seeking in-person mortgage consultation and relationship-based lending",
+    "Agricultural businesses and commercial enterprises needing specialized financing",
+    "Customers in markets where BANK has physical branch presence and local service"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "BANK is best suited for borrowers who value established financial institutions with FDIC backing and prefer relationship banking with in-person service options, or businesses needing agricultural, commercial, or aircraft financing. The primary caveat is that their website provides insufficient detail about specific mortgage products, rates, and terms needed to evaluate competitiveness\u2014borrowers must contact the bank directly for pricing and product specifics.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-31",
   "cities_served": [
@@ -106,9 +114,9 @@
   ],
   "phone": "",
   "address": "409 Highway 61 S, Wapello, IA 52653",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "cfpb_data": {
     "found_in_cfpb": true,
     "cfpb_company_name": "BANK OF AMERICA, NATIONAL ASSOCIATION",
@@ -118,5 +126,7 @@
     "data_period": "2023-present",
     "last_checked": "2026-03-31"
   },
-  "no_index": true
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

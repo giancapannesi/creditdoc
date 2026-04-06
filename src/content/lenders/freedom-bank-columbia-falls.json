@@ -1,14 +1,14 @@
 {
   "name": "Freedom Bank",
   "slug": "freedom-bank-columbia-falls",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Columbia Falls, MT. $144M in assets. 1 office.",
-  "description_long": "Freedom Bank is a community bank located in Columbia Falls, MT, established in 2005. The bank holds approximately $144M in total assets and $125M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community-focused bank serving the Flathead Valley near Glacier National Park with personal and business checking, savings, loans, and online banking since 2005.",
+  "description_long": "Freedom Bank was founded in April 2005 by Don Bennett, starting in his basement before moving to a 980-square-foot trailer for its first year of operation. The bank has grown over two decades to become a cornerstone of the greater Flathead Valley community, now operating from a main location in Columbia Falls, Montana. The bank emphasizes local ownership and community involvement as core to its mission.\n\nFreedom Bank offers a comprehensive suite of banking products including personal checking and savings accounts, health savings accounts (HSAs), personal loans, real estate loans, and home equity loans. On the business side, they provide business checking and savings accounts, business loans, and merchant capture services. All accounts come with access to online banking, mobile banking with mobile check deposit, debit cards with fraud controls and alerts, and safe deposit boxes. The bank maintains extended hours with drive-thru access until 6 PM on weekdays.\n\nWhat distinguishes Freedom Bank is its explicit commitment to local community focus and reinvestment. The bank's tagline \"Focused on You\" reflects a personalized approach, and they maintain transparency through a publicly available Community Reinvestment Act file. They actively address community concerns through educational content about financial scams (rental listing scams, elder financial abuse awareness) and provide resources like secure file upload for customers. The bank has deep roots in Columbia Falls, celebrating 20 years of operation with community events like Heritage Days.\n\nAs a small, community bank, Freedom Bank is limited to a single physical location in Columbia Falls, which may be inconvenient for customers outside the Flathead Valley region. While they offer online and mobile banking to extend reach, their loan products and rates are not prominently detailed on their website, requiring customers to contact the bank directly or visit in person for specific terms. Like most small community banks, they likely have higher fees or less competitive rates compared to large national banks or online-only institutions, though this cannot be definitively confirmed from available website content.",
   "logo_url": "",
   "website_url": "https://www.freedombankmt.com",
   "affiliate_url": "",
@@ -23,23 +23,39 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Health Savings Accounts (HSAs)",
+    "Online banking and login portal",
+    "Mobile banking app with mobile check deposit",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Real estate loans",
+    "Home equity loans",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Business loans",
+    "Merchant capture services",
+    "Debit cards with fraud controls and alerts",
+    "Safe deposit boxes",
+    "Cash management services",
+    "Check ordering",
+    "Secure file upload"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2005",
-    "Local community bank with personal service",
-    "1 location"
+    "Founded and locally owned by Don Bennett since 2005; 20-year history of community reinvestment and local focus",
+    "Extended drive-thru hours (8 AM\u20136 PM weekdays) and Saturday hours for working customers",
+    "Mobile banking with mobile check deposit and debit card controls/fraud alerts built in",
+    "Health Savings Account (HSA) offerings with educational resources to determine fit",
+    "Free educational resources on financial scams, elder fraud awareness, and cyber-safety",
+    "Transparent Community Reinvestment Act public file available on website",
+    "Personal loans, home equity loans, and real estate loans available alongside checking/savings"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Single physical branch location limits accessibility for customers outside Columbia Falls area",
+    "Specific loan rates, terms, and fees not published on website; requires direct contact or in-person visit",
+    "No mention of competitive APY rates for savings accounts or CD products on public website",
+    "Limited digital footprint compared to larger banks; some online services require separate logins",
+    "Small bank scale may result in higher fees, lower rates, or less product variety than national competitors"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +67,7 @@
   "states_served": [
     "MT"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58010,
   "latitude": 48.3704489927601,
   "longitude": -114.189144984907,
@@ -93,12 +109,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Flathead Valley residents and businesses seeking personalized, local banking with community reinvestment focus",
+    "Customers prioritizing local ownership and community involvement over lowest rates or widest product selection",
+    "Small business owners in rural Montana needing accessible relationship-based lending and merchant services",
+    "Health savings account users looking for HSA guidance and integration with local banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Freedom Bank is best for Flathead Valley residents and small businesses prioritizing local ownership, personalized service, and community reinvestment over lowest rates or broadest product selection. The main caveat is that as a single-location community bank, it is geographically limited and does not publicly display competitive rate information, requiring direct contact to evaluate pricing against larger national alternatives.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +123,11 @@
   ],
   "phone": "",
   "address": "530 9Th St W, Columbia Falls, MT 59912",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

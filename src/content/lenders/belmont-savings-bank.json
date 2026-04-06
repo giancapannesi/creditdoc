@@ -1,15 +1,15 @@
 {
   "name": "Belmont Savings Bank",
   "slug": "belmont-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mutual-bank"
   ],
-  "description_short": "FDIC-insured community bank in Bellaire, OH. $583M in assets. 4 offices.",
-  "description_long": "Belmont Savings Bank is a community bank located in Bellaire, OH, established in 1886. The bank holds approximately $583M in total assets and $469M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank with 140 years of history serving the Ohio Valley, offering personal and business banking, loans, mortgages, and digital services.",
+  "description_long": "Belmont Savings Bank (BSB) is a locally-rooted community bank headquartered in Bellaire, Ohio, with a 140-year history of serving the Ohio Valley region. The bank emphasizes personal relationships and localized decision-making, with leadership quotes highlighting the importance of human connection in their service model. They position themselves as an alternative to larger national banks by maintaining local staff and community involvement.\n\nBSB offers a comprehensive range of banking products including personal and business checking accounts, savings vehicles (statement savings, Kasasa Saver, money market accounts, CDs, IRAs), debit and credit cards, and lending products (personal loans, auto loans, mortgages, home equity loans, business loans). They provide digital banking through online banking platforms, BSB Mobile app, digital wallet functionality, Zelle money transfer integration, and online bill pay. Specialized mortgage programs include the Ohio Homebuyer Plus and a First Responder Special Mortgage Program offering 0% down and 100% financing with no PMI for eligible professionals (doctors, nurses, police, firefighters, EMTs, etc.).\n\nKey distinguishing factors include their emphasis on community banking values, 140-year heritage, specialized first responder mortgage products, and integration of modern fintech solutions (Zelle, digital wallet, mobile banking) alongside traditional banking services. They offer Kasasa branded accounts with rewards features. The bank maintains FDIC-standard operations with published routing number (243270671) and NMLS number (408313), indicating regulatory compliance and transparency.\n\nAs a regional community bank, BSB is best suited for customers in the Ohio Valley who value local banking relationships and personalized service over large-scale institutional banking. However, as a smaller institution, they likely have more limited branch locations and service areas compared to national banks, and may not offer all specialized products available at larger competitors. Their focus on first responders and community lending suggests intentional positioning toward specific customer segments rather than broad market appeal.",
   "logo_url": "",
   "website_url": "https://www.bsb.bank",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Kasasa Cash, Kasasa Cash Back, Kasasa Tunes, Value Checking)",
+    "Savings accounts (Kasasa Saver, Statement Savings, Christmas Club, Money Market accounts)",
+    "Certificates of Deposit (CDs) with published rates",
+    "Individual Retirement Accounts (IRAs)",
+    "Personal loans and auto loans",
+    "Mortgage loans including Ohio Homebuyer Plus and First Responder Special Mortgage Program",
+    "Home equity loans",
+    "Business checking and business solutions accounts",
+    "Business loans and business credit cards (BSB Rewards Platinum Visa)",
+    "Online banking platform, BSB Mobile app, and digital wallet",
+    "Zelle money transfer service",
+    "Online bill pay and online loan payment services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1886",
-    "Local community bank with personal service",
-    "4 locations"
+    "140-year history demonstrates longevity and community trust in the Ohio Valley region",
+    "First Responder Special Mortgage Program offers 0% down, 100% financing, and no PMI\u2014eliminating major upfront homebuying barriers",
+    "Integrated digital services including Zelle, mobile app, digital wallet, and online bill pay offer modern banking convenience",
+    "Kasasa branded checking and savings accounts with rewards and cash-back features for meeting activity requirements",
+    "Local decision-making and emphasis on personal relationships appeal to customers seeking human connection in banking",
+    "Ohio Homebuyer Plus program provides specialized support for first-time homebuyers in Ohio",
+    "Remote deposit capture and direct deposit capabilities reduce customer friction for routine transactions"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as regional bank means fewer branch locations and ATMs compared to national banks",
+    "No information provided about competitive interest rates, APRs, or fee structures\u2014crucial for comparing value",
+    "Website lacks details on loan approval timelines, credit requirements, or lending criteria for personal or business loans",
+    "First Responder mortgage program eligibility limited to specific professions, excluding general population from premium offer",
+    "No mention of investment products, wealth management, or advisory services that larger banks typically offer"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28348,
   "latitude": 40.016293018133,
   "longitude": -80.744225960571,
@@ -94,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "First responders (police, firefighters, EMTs, nurses) seeking mortgages with favorable terms and no PMI",
+    "Ohio Valley residents seeking community banking with local decision-making and personal relationships",
+    "Small business owners wanting local business banking with personalized service and relationship-based lending",
+    "First-time homebuyers in Ohio interested in specialized mortgage programs and down payment assistance"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Belmont Savings Bank is best for Ohio Valley residents and first responders who prioritize local banking relationships and community involvement over maximum convenience or competitive rates. The main caveat is that as a regional institution, they have limited geographic reach, and their website provides insufficient pricing information to evaluate competitiveness against larger banks or online alternatives on rates, fees, and loan terms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "426 34Th Street, Bellaire, OH 43906",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

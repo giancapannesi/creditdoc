@@ -1,15 +1,15 @@
 {
   "name": "Peoples National Bank , N.A.",
   "slug": "peoples-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Mount Vernon, IL. $1997M in assets. 25 offices.",
-  "description_long": "Peoples National Bank , N.A. is a community bank located in Mount Vernon, IL, established in 1909. The bank holds approximately $1997M in total assets and $1766M in deposits. It operates 25 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Peoples National Bank is a community bank established in 1909 offering checking, savings, credit cards, mortgages, and business banking services across Illinois locations.",
+  "description_long": "Peoples National Bank, N.A. has been serving customers since 1909 as a community-focused financial institution. The bank is FDIC-insured and operates with membership in the Federal Deposit Insurance Corporation, providing depositor protection backed by the full faith and credit of the U.S. Government. The bank emphasizes personal relationships and local decision-making, positioning itself as an alternative to larger national institutions with \"not a lot of red tape\" and prompt lending decisions.\n\nThe bank offers a comprehensive suite of personal and business banking products. Personal services include multiple checking account options (Free Checking, Cha-CHING Ca$h, Cha-CHING Ca$h Back, Select Checking, Prime 50 Checking), savings accounts, certificates of deposit, IRAs, HSAs, and credit cards. Digital banking channels include online banking, mobile banking, mobile wallet integration, Zelle transfers, and telephone banking. Lending products span personal term loans, auto loans, home mortgages, home equity loans, and ReadyLine loans. Business banking includes business checking, savings, retirement accounts, and specialized loan products for working capital, commercial real estate, and agriculture.\n\nWhat distinguishes Peoples National Bank is its emphasis on community banking with decision-making speed and personalized service. The bank offers distinctive checking products with cash-back or interest-earning features (Cha-CHING accounts), operates multiple physical locations across Illinois (St. Louis, Marion, Mt. Vernon, Southern Illinois regions), and provides nationwide mortgage lending despite regional branch presence. They highlight accessibility features like AudioEye-enabled website access and convenient mobile deposit capabilities to reduce customer branch visits.\n\nAs a regional community bank, Peoples National Bank serves customers seeking personalized service and local decision-making rather than mega-bank bureaucracy. However, the bank's regional focus and smaller branch network may limit convenience for customers outside Illinois service areas. Detailed fee schedules, interest rates, and specific loan terms are not transparent on the website, requiring customers to contact the bank directly for rate shopping and comparison.",
   "logo_url": "",
   "website_url": "https://www.peoplesnationalbank.com",
   "affiliate_url": "",
@@ -24,23 +24,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Free Checking, Cha-CHING Ca$h, Cha-CHING Ca$h Back, Select Checking, Prime 50 Checking)",
+    "Personal savings accounts including Youth Savings and Christmas Saver",
+    "Certificates of Deposit (CDs) for personal and business accounts",
+    "Individual Retirement Accounts (IRAs) and Health Savings Accounts (HSAs)",
+    "Personal and auto loans, home mortgages, home equity loans, and ReadyLine loans",
+    "Business checking, business savings, and business retirement accounts",
+    "Business lending including working capital, commercial real estate, equipment loans, agriculture loans, and operating lines of credit",
+    "Personal and business credit cards",
+    "Digital banking: online banking, mobile banking, mobile wallet, Zelle transfers, and telephone banking",
+    "Mobile deposit and card control features via mobile app",
+    "Treasury management services (reporting, payables, receivables, sweeps, risk management)",
+    "Overdraft protection and check ordering"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1909",
-    "Local community bank with personal service",
-    "25 locations"
+    "FDIC-insured deposits with full federal government backing",
+    "Multiple checking options including cash-back (Cha-CHING Ca$h Back) and high-yield interest accounts",
+    "Free mobile banking with mobile deposit, card controls, and transaction alerts",
+    "Nationwide mortgage lending available despite regional branch presence",
+    "Zelle integration for fast peer-to-peer transfers",
+    "Specialized business lending including agriculture and commercial real estate loans",
+    "Community bank model emphasizing prompt lending decisions with reduced bureaucracy"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited physical branch network restricted to Illinois locations (St. Louis, Marion, Mt. Vernon, Southern Illinois), excluding remote customers",
+    "No transparent rate or fee information available on website\u2014requires direct contact for rate shopping and comparison",
+    "No mention of investment services, wealth management, or advisory offerings beyond basic banking products"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +61,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3809,
   "latitude": 38.3111969885934,
   "longitude": -88.9414530102822,
@@ -94,12 +103,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Illinois residents seeking personalized community banking with quick lending decisions",
+    "Small business owners needing local relationship banking and agricultural or commercial lending",
+    "Customers purchasing homes nationwide who prefer a community bank mortgage lender over national chains",
+    "Consumers prioritizing FDIC protection and digital banking convenience (mobile deposit, Zelle, card controls)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Peoples National Bank is best for Illinois-based personal and business customers seeking FDIC-insured community banking with personalized service, quick loan decisions, and modern digital conveniences like mobile deposit and Zelle. The main caveat is the limited regional branch footprint (Illinois only) and lack of transparent rate/fee information online, requiring direct contact for accurate product comparison and rate quotes.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +117,11 @@
   ],
   "phone": "",
   "address": "520 S 42Nd St, Mount Vernon, IL 62864",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

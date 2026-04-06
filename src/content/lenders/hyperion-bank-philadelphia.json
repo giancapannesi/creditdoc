@@ -1,14 +1,14 @@
 {
   "name": "Hyperion Bank",
   "slug": "hyperion-bank-philadelphia",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Philadelphia, PA. $551M in assets. 2 offices.",
-  "description_long": "Hyperion Bank is a community bank located in Philadelphia, PA, established in 2006. The bank holds approximately $551M in total assets and $461M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Hyperion Bank is an FDIC-insured community bank offering personal and business checking, savings, mortgages, loans, and digital banking services across multiple locations.",
+  "description_long": "Hyperion Bank operates as a traditional community bank with FDIC insurance backing, serving both personal and business customers. The bank maintains multiple physical branches, including locations in Philadelphia and Atlanta, while emphasizing personalized service and local community connections. They are recognized as \"Best Hometown Bank\" in the Inland Empire by Press Enterprise Readers, suggesting established regional presence and community reputation.\n\nThe bank offers a comprehensive suite of financial products for personal customers, including free checking accounts, savings accounts, CDs, IRAs, home mortgage loans, consumer loans, credit and debit cards, and electronic banking services (online banking, mobile apps, bill pay, Zelle, telephone banking). For business customers, they provide business checking, money market accounts, business loans, business credit and debit cards, online cash management, bill pay, mobile banking, remote deposit capture, merchant services, payroll services, ACH and wire transfers, and specialized cash management services.\n\nHyperion Bank distinguishes itself through personalized mortgage lending expertise, free services (free checking, free coin counting, notary services, financial calculators), modern digital options (mobile banking, contactless debit cards, Apple Pay, Zelle integration), and community-focused initiatives including community giving and resource programs. They also provide educational resources on fraud prevention and cybersecurity through their CyberSmart Series.\n\nHyperion Bank is best suited for customers seeking traditional community banking with both in-person and digital options, though consumers should verify specific product terms, rates, and fees through their website or local branches, as detailed pricing information is not fully visible in available content.",
   "logo_url": "",
   "website_url": "https://www.hyperionbank.com",
   "affiliate_url": "",
@@ -23,23 +23,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Free personal checking accounts",
+    "Savings accounts and CDs",
+    "Individual Retirement Accounts (IRAs)",
+    "Home mortgage loans",
+    "Consumer personal loans",
+    "Consumer credit and debit cards",
+    "Business checking and money market accounts",
+    "Business loans and lines of credit",
+    "Online banking and bill pay",
+    "Mobile banking apps",
+    "Zelle money transfer service",
+    "Merchant services and payroll processing",
+    "Remote deposit capture",
+    "Safe deposit boxes",
+    "Notary services",
+    "Wire transfers and ACH transfers"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2006",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Free checking account with no monthly maintenance fee or minimum balance requirement ($100 opening deposit)",
+    "Comprehensive digital banking: online banking, mobile apps, bill pay, Zelle, Apple Pay, contactless cards",
+    "Free ancillary services including notary services, coin counting, financial calculators, and check reordering",
+    "Specialized mortgage lending with expert personal service and dedicated mortgage specialists",
+    "Business account flexibility with Freedom Business Checking offering no monthly fees and no minimum balance",
+    "Multiple physical branch locations with extended hours (24-hour ATM access available)",
+    "Community recognition as \"Best Hometown Bank\" with established regional reputation"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint with only Philadelphia and Atlanta branches mentioned, restricting accessibility for non-regional customers",
+    "Website does not display specific interest rates, APYs, or loan terms, requiring customers to contact branches directly",
+    "Fee schedule referenced but not detailed on homepage, creating uncertainty about potential charges for specific services",
+    "No information about whether they serve non-local customers online or if services are restricted to branch locations"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +66,7 @@
   "states_served": [
     "PA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58371,
   "latitude": 39.969544357438,
   "longitude": -75.1394613832401,
@@ -93,12 +108,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Regional customers in Philadelphia and Atlanta seeking traditional community banking with personal service",
+    "Small business owners needing business checking, loans, and cash management services",
+    "Homebuyers seeking mortgage loans with personalized expert guidance",
+    "Customers valuing in-person banking combined with modern digital and mobile banking options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Hyperion Bank is best for regional customers in Philadelphia and Atlanta who want traditional community banking combined with modern digital services, supported by FDIC insurance and personalized service. The main caveat is that detailed product terms, interest rates, and fees are not publicly displayed online, requiring direct contact with branches to compare offerings and pricing with other financial institutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +123,11 @@
   "phone": "",
   "address": "199 W Girard Ave, Philadelphia, PA 19123",
   "website": "http://www.hyperionbank.com",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

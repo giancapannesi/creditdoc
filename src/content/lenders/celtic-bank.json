@@ -1,13 +1,13 @@
 {
   "name": "Celtic Bank",
   "slug": "celtic-bank",
-  "category": "personal-loans",
+  "category": "business-loans",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Salt Lake City, UT. $4792M in assets. 1 office.",
-  "description_long": "Celtic Bank is a community bank located in Salt Lake City, UT, established in 2001. The bank holds approximately $4792M in total assets and $3442M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Celtic Bank offers SBA loans, equipment financing, and commercial real estate lending to small and medium-sized businesses, combining traditional bank financing with fintech innovation.",
+  "description_long": "Celtic Bank is a commercial lender specializing in government-backed and conventional business financing solutions. The bank positions itself as a technology-enabled financial partner that combines bank-grade lending with fintech innovation to serve business owners and financial technology companies. Their approach integrates traditional banking expertise with modern digital tools.\n\nCeltic Bank offers an extensive range of financing products across multiple categories: SBA loans (7(a) and 504), equipment financing, construction financing, commercial real estate loans, asset-based lending, working capital solutions, USDA B&I loans, renewable energy financing, and supply chain financing. Loan amounts range from $25K for Celtic Express working capital loans up to $10M for USDA B&I projects, with repayment terms extending up to 30 years depending on the loan type. They also provide partnership programs and strategic lending solutions for financial innovators.\n\nCeltic Bank distinguishes itself through specialized in-house teams focused on specific sectors: commercial construction financing and renewable energy financing are explicitly noted as having dedicated departments. The bank offers both SBA-backed products and conventional financing, with the flexibility to combine multiple loan products for larger projects exceeding $5M. Their partnership model includes referral partnerships and strategic lending collaborations with fintech companies, indicating they serve both traditional business owners and digital economy participants.\n\nThe company operates an online banking portal for loan management and payment processing, though their website does not disclose specific interest rates, approval timelines, or credit requirements. As a bank offering primarily larger commercial loans ($25K minimum on most products), Celtic Bank is positioned for established small-to-medium businesses rather than micro-lending or consumer credit. The emphasis on SBA lending and conventional commercial products indicates a focus on creditworthy business entities with documented income and business plans.",
   "logo_url": "",
   "website_url": "http://www.celticbank.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "SBA 7(a) loans ($350K\u2013$5M, up to 25 years)",
+    "SBA 504 loans ($350K\u2013$5M, up to 25 years)",
+    "Celtic Express working capital loans ($25K\u2013$150K, up to 10 years)",
+    "Celtic Advantage business loans ($150K\u2013$350K, up to 25 years)",
+    "USDA B&I loans ($500K\u2013$10M, up to 30 years)",
+    "Equipment financing and leasing ($100K\u2013$3M, up to 7 years)",
+    "Commercial real estate loans ($350K\u2013$5M, up to 25 years, 10% down)",
+    "Construction financing ($350K\u2013$5M, up to 25 years)",
+    "Renewable energy project financing ($350K\u2013$10M, up to 15 years)",
+    "Asset-based lending ($350K\u2013$5M, up to 10 years)",
+    "Supply chain financing ($50K\u2013$1M, up to 10 years)",
+    "Conventional commercial financing (flexible amounts and terms)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2001",
-    "Local community bank with personal service",
-    "1 location"
+    "Offers SBA 7(a) loans up to $5M with 25-year terms, providing lower rates than conventional financing",
+    "Specialized in-house teams for construction and renewable energy financing with dedicated expertise",
+    "Flexible loan combinations allowing financing above $5M by pairing conventional with SBA products",
+    "USDA B&I loans available up to $10M with 30-year terms for rural development projects",
+    "Wide range of loan products ($25K\u2013$10M) covering working capital, equipment, real estate, and acquisition",
+    "Technology-enabled platform with online banking for loan management and payment processing",
+    "Asset-based and supply chain financing options to improve cash flow without traditional collateral requirements"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No interest rates, APRs, or specific fees disclosed on website, making cost comparison difficult",
+    "Minimum loan amounts ($25K\u2013$500K depending on product) exclude micro-businesses and startups",
+    "No information about approval timelines, credit score requirements, or qualification criteria published",
+    "Primarily focused on established businesses with documented financials; unclear support for new ventures",
+    "Limited transparency on prepayment penalties, default terms, or other contractual details"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "UT"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57056,
   "latitude": 40.7633169790559,
   "longitude": -111.88868203754,
@@ -92,12 +103,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small-to-medium business owners seeking SBA-backed financing for acquisition, expansion, or commercial real estate",
+    "Construction companies and contractors needing project-specific financing with dedicated lending expertise",
+    "Renewable energy project developers and rural businesses eligible for USDA B&I loans",
+    "Established businesses with strong financials seeking longer repayment terms and lower rates than conventional lenders"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Celtic Bank is best for established small-to-medium businesses with documented revenue and credit history seeking government-backed or conventional commercial financing. The primary caveat is that their $25K\u2013$500K minimum loan amounts exclude micro-businesses, and lack of published rates, fees, or qualification criteria requires direct contact before applying.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "268 S State St, Salt Lake City, UT 84111",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

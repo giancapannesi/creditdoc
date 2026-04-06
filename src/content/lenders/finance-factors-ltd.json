@@ -1,13 +1,13 @@
 {
   "name": "Finance Factors, Ltd.",
   "slug": "finance-factors-ltd",
-  "category": "personal-loans",
+  "category": "mortgages",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Honolulu, HI. $688M in assets. 14 offices.",
-  "description_long": "Finance Factors, Ltd. is a community bank located in Honolulu, HI, established in 1952. The bank holds approximately $688M in total assets and $532M in deposits. It operates 14 office locations. Designated as a Asian or Pacific Islander Americans. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Hawaii-based mortgage lender offering fixed-rate home loans with FDIC insurance backing. Serves owner-occupants in Hawaii counties with competitive rates and a loan officer network.",
+  "description_long": "Finance Factors, Ltd. is a mortgage lender operating in Hawaii that positions itself as an accessible alternative with the tagline 'If No Can, We Can!' The company emphasizes FDIC insurance backing and claims to be supported by the full faith and credit of the U.S. Government, appealing to borrowers seeking security and stability.\n\nThe company offers 30-year and 15-year fixed-rate mortgage products for owner-occupied residential properties in Hawaii. Their advertised rates as of April 3, 2026 include 5.875% for 30-year fixed loans (with 2.125 points and 6.216% APR) and 5.125% for 15-year fixed loans (with 2.000 points and 5.656% APR). Maximum loan amounts vary by county: $1,249,125 for Honolulu, Kauai, and Hawaii counties, and $1,299,500 for Maui and Kalawao counties. Additionally, the website indicates they offer deposit products including savings accounts, CDs, and IRAs, suggesting broader banking services beyond mortgages alone.\n\nWhat distinguishes Finance Factors is its geographic specialization in Hawaii's residential mortgage market and emphasis on FDIC-insured deposit products. The company maintains a loan officer network accessible through their website and emphasizes their willingness to work with borrowers in an island state market. Their tagline suggests they may cater to borrowers who have faced rejections elsewhere, though specifics are not detailed on their public website.\n\nA key caveat is that Finance Factors explicitly restricts mortgages to qualified owner-occupants of residential real estate located in Hawaii only. The advertised sample payments do not include taxes, insurance, or HOA fees, meaning actual obligations will be significantly higher. The company's broader banking services (savings accounts, CDs, IRAs) are mentioned but not detailed, making it unclear what competitive advantages these products offer compared to traditional banks.",
   "logo_url": "",
   "website_url": "http://www.financefactors.com",
   "affiliate_url": "",
@@ -22,23 +22,29 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "30-year fixed-rate mortgages",
+    "15-year fixed-rate mortgages",
+    "Owner-occupied residential home purchase mortgages",
+    "Loan officer consultations",
+    "FDIC-insured savings accounts",
+    "Certificate of Deposit (CD) accounts",
+    "Individual Retirement Accounts (IRAs)",
+    "Mortgage rate quotes and rate lock services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1952",
-    "Local community bank with personal service",
-    "14 locations"
+    "FDIC-insured deposits backed by U.S. Government, providing security for savings products",
+    "Fixed-rate mortgage options (15-year and 30-year terms) with transparency on APR and points",
+    "Accessible loan officer network available through website for personalized assistance",
+    "Operates in Hawaii market with specific county loan maximums ($1.2-1.3M range)",
+    "Offers multiple deposit products (savings accounts, CDs, IRAs) beyond mortgages",
+    "Clear example calculations showing monthly payments with detailed APR disclosures"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographically restricted to Hawaii only\u2014not available to mainland borrowers",
+    "Limited transparency on underwriting standards, approval criteria, or credit score requirements despite 'If No Can, We Can' messaging",
+    "Advertised rates are for qualified owner-occupants only and exclude taxes, insurance, and PMI, making true cost comparison difficult",
+    "Minimal detail provided on their broader banking services (CDs, IRAs, savings accounts) on the public website",
+    "No information on alternative loan products (FHA, VA, jumbo, refinance options) despite those being common mortgage offerings"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +56,7 @@
   "states_served": [
     "HI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 25158,
   "latitude": 21.3103199895985,
   "longitude": -157.859474000456,
@@ -92,12 +98,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Owner-occupants in Hawaii seeking fixed-rate mortgages with FDIC-insured banking services",
+    "Hawaii residents who may have faced mortgage rejections and want to explore alternative lending options",
+    "Borrowers in Honolulu, Kauai, Hawaii, Maui, and Kalawao counties with loan needs under county maximums"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Finance Factors is best for owner-occupants seeking mortgages within Hawaii who value FDIC insurance and the convenience of deposit products through the same institution. The main caveat is strict geographic limitation to Hawaii only and lack of transparency about credit requirements, despite their inclusive messaging suggesting otherwise.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +111,10 @@
   ],
   "phone": "",
   "address": "1164 Bishop St, Honolulu, HI 96813",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

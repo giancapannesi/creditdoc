@@ -1,15 +1,15 @@
 {
   "name": "First Farmbank",
   "slug": "first-farmbank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Greeley, CO. $380M in assets. 6 offices.",
-  "description_long": "First Farmbank is a community bank located in Greeley, CO, established in 2007. The bank holds approximately $380M in total assets and $324M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering checking, savings, CDs, and lending products with emphasis on local roots and agricultural loans.",
+  "description_long": "First FarmBank is a community-focused FDIC-insured bank that positions itself as deeply rooted in the communities it serves, particularly in Colorado (evidenced by sponsorships and events like the Colorado Farm Show and Weld County initiatives). The bank operates with both personal and business banking divisions, emphasizing relationship-based financial solutions rather than purely transactional banking. Their service philosophy centers on long-term customer relationships and community support as foundational to their identity.\n\nThe bank offers a comprehensive suite of retail banking products including checking accounts, savings accounts, and certificates of deposit with competitive rates. On the lending side, they provide agricultural loans (reflecting their name and market focus), real estate loans, business banking services, and personal loans. They also offer online banking capabilities, financial calculators, and a rewards program called uChoose Rewards tied to credit card purchases. Additional services include check ordering and rate information accessible through their website.\n\nFirst FarmBank distinguishes itself through explicit community commitment, documented through multiple sponsorships and partnerships including the Weld Legacy Foundation, Life Stories Child and Family Advocacy, Colorado FFA Foundation, and the SSG Christopher Birdwell Memorial Honker Down Reception. The 2025 scholarship program awarded 12 local high school seniors with educational scholarships. This contrasts with many larger banks that deprioritize local community engagement. Their tagline \"branches don't make banks local roots do\" explicitly signals their differentiation strategy around community embeddedness rather than branch count.\n\nAs a regional community bank, First FarmBank serves a more limited geographic footprint than national banks, which may restrict accessibility for non-local customers. The website does not prominently display specific interest rates, loan terms, or fee structures, requiring customers to contact the bank or visit in person for detailed pricing information. While community focus is a strength, it inherently means less scalability and potentially fewer digital-first features compared to fintech-focused alternatives.",
   "logo_url": "",
   "website_url": "https://www.firstfarmbank.com",
   "affiliate_url": "",
@@ -24,23 +24,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Checking accounts for everyday purchases",
+    "Savings accounts with competitive rates",
+    "Certificates of Deposit (CDs) with competitive rates",
+    "Agricultural loans (ag-focused lending)",
+    "Real estate loans (home mortgages and property financing)",
+    "Business banking services",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Online banking with deposit, transfer, and account management",
+    "uChoose Rewards credit card rewards program",
+    "Financial calculators",
+    "Check ordering services",
+    "Rate information and comparison tools"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2007",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Specialized agricultural lending products reflecting deep industry expertise and local focus",
+    "Documented community investment with multiple ongoing partnerships (Life Stories, Colorado FFA Foundation, Weld Legacy Foundation)",
+    "2025 scholarship program directly supporting local high school students",
+    "Online banking platform allowing deposits, transfers, and account management from mobile devices",
+    "Relationship-focused lending philosophy emphasizing long-term customer partnerships",
+    "uChoose Rewards program converting everyday credit card purchases into rewards"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display specific interest rates, APRs, or fee schedules\u2014pricing information requires direct contact",
+    "Limited geographic service area as regional bank, reducing accessibility for customers outside Colorado service region",
+    "No prominent mention of digital banking innovation or mobile app features beyond basic online banking",
+    "Agricultural loan focus may limit product relevance for non-farm consumers in their service areas"
   ],
   "contact": {
     "phone": "",
@@ -52,12 +62,12 @@
   "states_served": [
     "CO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58508,
   "latitude": 40.3883279815262,
   "longitude": -104.78524096533,
   "published": true,
-  "review_status": "draft",
+  "review_status": "published",
   "features": {
     "credit_monitoring": false,
     "all_three_bureaus": false,
@@ -85,21 +95,22 @@
       "FDIC Cert #58508"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural businesses and farmers seeking specialized ag lending products",
+    "Colorado residents seeking community-focused banking with local accountability",
+    "Customers prioritizing community involvement and social responsibility in their banking relationship",
+    "Small business owners valuing relationship-based rather than automated lending decisions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First FarmBank is best for Colorado-based customers, particularly in agricultural or rural communities, who value community embeddedness and relationship banking over digital convenience or national brand recognition. The main caveat is that it's a regional bank with limited geographic reach, and prospective customers must contact the bank directly to compare rates and fees, as these are not transparently displayed online.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +118,11 @@
   ],
   "phone": "",
   "address": "2939 65Th Ave, Greeley, CO 80634",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

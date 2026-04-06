@@ -1,14 +1,14 @@
 {
   "name": "Foundation One Bank",
   "slug": "foundation-one-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Waterloo, NE. $178M in assets. 3 offices.",
-  "description_long": "Foundation One Bank is a community bank located in Waterloo, NE, established in 1905. The bank holds approximately $178M in total assets and $150M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal and business checking, savings, lending, and digital banking services across 3 locations with mortgage and commercial lending options.",
+  "description_long": "Foundation One Bank is a traditional FDIC-insured bank that operates as a full-service financial institution serving both personal and business customers. The bank maintains 3 physical locations and emphasizes government-backed deposit insurance protection. Their website indicates they have been established long enough to have a documented history and leadership structure, positioning themselves as a community-focused banking option.\n\nThe bank offers a comprehensive range of deposit products including checking, savings, money market accounts, and certificates of deposit for personal customers, along with IRAs and health savings accounts. For business clients, they provide similar deposit products plus cash management services, ACH processing, and remote deposit capture. On the lending side, Foundation One Bank originates personal loans, auto loans, home equity lines of credit, mortgages, and construction loans. Their business lending includes SBA loans, equipment financing, commercial real estate lending, and investment property financing.\n\nFoundation One Bank distinguishes itself through traditional banking infrastructure combined with digital modernization efforts. They recently redesigned their website and offer mobile banking with card management, mobile deposit, and online bill pay capabilities. The bank explicitly markets debit card self-service through their mobile app and provides merchant services and business bill pay for commercial accounts. They also offer specialized products like mortgage lending with purchase and construction loan options.\n\nAs a regional bank with only 3 locations, Foundation One Bank likely serves a specific geographic area rather than operating nationally. Their emphasis on personal relationship banking (\"knowledgeable staff\" for lending) contrasts with online-only banks, but their service area appears limited compared to major national institutions. Customers should verify branch and ATM access aligns with their location needs.",
   "logo_url": "",
   "website_url": "https://www.foundationonebank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Money market accounts and certificates of deposit",
+    "Individual retirement accounts and health savings accounts",
+    "Mobile banking and mobile deposit",
+    "Online bill pay and eStatements",
+    "Personal loans, auto loans, and home equity lines of credit",
+    "Mortgage loans and construction loans",
+    "Business checking, savings, and cash management",
+    "SBA loans and business equipment financing",
+    "Commercial real estate and investment property financing",
+    "Business credit cards and merchant services",
+    "Wire transfers and ACH services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits with full government backing explicitly stated",
+    "Comprehensive mortgage lending including purchase, construction, and equity line options",
+    "Business-focused services including SBA loans, equipment financing, and commercial real estate lending",
+    "Recent website redesign and mobile app with debit card self-service management",
+    "Multiple digital solutions including mobile deposit, online bill pay, and eStatements",
+    "Cash management and ACH services for business customers",
+    "Safe deposit boxes and merchant services for commercial accounts"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to 3 physical locations, suggesting restricted geographic service area",
+    "No information provided about specific interest rates, fees, or minimum balance requirements",
+    "No online-only banking option mentioned, requiring in-person visits for some services",
+    "Limited transparency about loan approval criteria or lending terms on public website",
+    "No mention of 24/7 customer support, suggesting limited after-hours service availability"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 18761,
   "latitude": 41.2830839917451,
   "longitude": -96.2905039621007,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking SBA loans and commercial lending relationships",
+    "Customers in the bank's 3-location service area needing traditional branch banking",
+    "Homebuyers seeking mortgage options including construction and equity line financing",
+    "Businesses requiring merchant services and commercial bill pay capabilities"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Foundation One Bank is best for small business owners and personal customers located within their 3-branch service area who value traditional relationship banking combined with modern digital tools. The main caveat is that their limited physical footprint suggests they serve a specific geographic region, so customers should verify their location is served before opening an account.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "23804 Cedar Dr, Waterloo, NE 68069",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

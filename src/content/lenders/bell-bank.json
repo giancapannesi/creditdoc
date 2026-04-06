@@ -1,13 +1,13 @@
 {
   "name": "Bell Bank",
   "slug": "bell-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Fargo, ND. $14444M in assets. 34 offices.",
-  "description_long": "Bell Bank is a community bank located in Fargo, ND, established in 1966. The bank holds approximately $14444M in total assets and $12376M in deposits. It operates 34 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bell Bank is a full-service bank offering checking, savings, loans, investment services, and insurance products to personal and business customers.",
+  "description_long": "Bell Bank is a regional bank that operates as a comprehensive financial services provider serving both personal and business customers. The bank has positioned itself as a strong financial institution, with leadership noting they are ranked among the strongest banks in the country according to BauerFinancial rankings. The company maintains an active digital presence and appears to serve customers across multiple states with both physical locations and digital banking capabilities.\n\nBell Bank offers a broad suite of financial products including personal banking (checking accounts with competitive features marketed as \"America's Best Checking,\" savings accounts, CDs, and IRAs), personal loans (auto, boat, motorcycle, personal loans), mortgage services (home purchase and home equity products), credit cards (including a Zero+ card with introductory rates), and wealth management services (financial planning, trusts, estates, retirement plans). They have also established Bell Insurance as a wholly-owned subsidiary offering auto, homeowners, life, health, and Medicare insurance products.\n\nThe bank distinguishes itself through digital-first banking options including mobile and online platforms, competitive rates on savings products (featuring an Elite Money Market Savings account at 3.01% APY), and an integrated insurance subsidiary. They emphasize convenience through online account opening, mobile banking apps for iOS and Android, and a network of physical locations. The company also highlights educational resources through their Youth Education Hub and various financial calculators.\n\nAs a traditional full-service bank, Bell Bank serves customers seeking comprehensive financial services under one roof. However, as with all banks, customers should be aware of account maintenance fees (such as the $10 fee if minimum balance is not maintained on certain accounts), withdrawal limits on savings products, and that rates are variable and subject to change. The bank's strength lies in serving customers who value convenience, competitive rates, and integrated financial services rather than those seeking specialized solutions.",
   "logo_url": "",
   "website_url": "https://www.bell.bank",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts (America's Best Checking with competitive features)",
+    "Savings accounts and Elite Money Market Savings",
+    "CDs and IRAs with multiple term options",
+    "Personal credit cards including Zero+ card",
+    "Mortgage loans and home equity loans",
+    "Personal loans, auto loans, boat/motorhome/camper loans",
+    "Wealth management and financial planning services",
+    "Trusts and estates planning",
+    "Retirement planning services",
+    "Auto insurance",
+    "Homeowners insurance",
+    "Life, health, and Medicare insurance through Bell Insurance"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1966",
-    "Local community bank with personal service",
-    "34 locations"
+    "Offers competitive savings rates including Elite Money Market Savings at 3.01% APY with $25,000 minimum balance",
+    "Comprehensive product suite including banking, lending, investments, and insurance all under one roof",
+    "Digital banking capabilities with mobile apps for iOS and Android plus online banking platform",
+    "Can open checking accounts online in minutes without visiting a branch",
+    "Ranked among the strongest banks in the country according to BauerFinancial",
+    "Zero+ Credit Card offers low introductory rates on purchases and balance transfers",
+    "America's Best Checking account advertises FREE features with no competitive match"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Elite Money Market Savings account charges $10 monthly fee if minimum $25,000 balance falls below threshold",
+    "Savings accounts limited to 6 withdrawals per month before $5 fees apply per withdrawal",
+    "Variable APY rates on savings products may decrease after account opening",
+    "Credit cards issued by third-party Elan Financial Services, not proprietary to Bell Bank",
+    "Limited information on personal loan rates, terms, and approval requirements available on website"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "ND"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 19581,
   "latitude": 46.87401646137,
   "longitude": -96.787470270315,
@@ -92,12 +103,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking integrated banking, lending, investment, and insurance services from a single provider",
+    "Digital-savvy users who prefer mobile and online banking with minimal branch visits",
+    "Homebuyers and refinancing customers needing mortgage products with dedicated loan officers",
+    "High-balance savers with $25,000+ seeking competitive yields on money market and CD products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bell Bank is best for customers who want a traditional full-service bank with strong digital capabilities, competitive rates, and integrated insurance services. The main caveat is that customers must maintain minimum balances to avoid fees on premium savings accounts, and savings products are subject to withdrawal limits and variable rate structures.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,10 @@
   ],
   "phone": "",
   "address": "520 Main Ave, Fargo, ND 58103",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

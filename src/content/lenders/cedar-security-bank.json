@@ -1,15 +1,15 @@
 {
   "name": "Cedar Security Bank",
   "slug": "cedar-security-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Fordyce, NE. $60M in assets. 3 offices.",
-  "description_long": "Cedar Security Bank is a community bank located in Fordyce, NE, established in 1984. The bank holds approximately $60M in total assets and $48M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Cedar Security Bank is an online bank offering checking, savings, and bill pay services with mobile banking access and integration with Intuit accounting software.",
+  "description_long": "Cedar Security Bank operates as a digital banking institution accessible through online and mobile platforms. The bank positions itself as a modern alternative to traditional brick-and-mortar banking, emphasizing convenient digital-first account management. The website URL suggests a security-focused approach to online banking infrastructure. However, the company's digital presence is minimal, with the homepage primarily serving as a login portal rather than a marketing or information resource. The institution appears to operate under or in connection with Insite National Bank, based on references found in the website navigation, though this relationship is not explicitly clarified in the provided content. Cedar Security Bank offers standard consumer banking products including checking and savings accounts, along with additional financial management tools. Key service offerings include online bill pay, mobile app banking, debit card management, and integration with Intuit Direct Connect for accounting software users. The bank supports both personal and business customer needs, with specific accommodations for accounting professionals using Quicken or QuickBooks. The minimal public information available makes it difficult to assess this institution's competitive positioning within the broader banking landscape. The website lacks details on interest rates, fees, minimum deposits, customer service hours, or detailed product specifications that consumers typically rely upon when evaluating banks. The presence of physical locations and hours suggests a hybrid model combining online banking with some branch infrastructure, though specific branch locations are not provided in the visible content. Cedar Security Bank appears to serve customers already familiar with digital banking who prefer self-service account management and may have accounting software integration needs. For potential customers, the lack of transparent product information and competitive details on the public-facing website presents a significant barrier to evaluation. The institution would benefit from more comprehensive online documentation of rates, fees, and account features to compete effectively in the crowded digital banking market.",
   "logo_url": "",
   "website_url": "https://onlinebanking.cedarsecurity.com/",
   "affiliate_url": "",
@@ -24,23 +24,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Online checking accounts",
+    "Online savings accounts",
+    "Mobile app banking",
+    "Online bill pay",
+    "Debit card services",
+    "Lost or stolen debit card replacement",
+    "Intuit Direct Connect integration for QuickBooks",
+    "Intuit Direct Connect integration for Quicken",
+    "Physical branch locations",
+    "Personal account type",
+    "Business account type"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1984",
-    "Local community bank with personal service",
-    "3 locations"
+    "Offers integrated bill pay functionality for simplified payment management",
+    "Compatible with Intuit Direct Connect for QuickBooks and Quicken users",
+    "Mobile app banking available for on-the-go account access",
+    "Debit card services with lost or stolen card replacement support",
+    "Maintains physical branch locations with posted hours for in-person banking",
+    "Online-first platform reduces need for physical branch visits",
+    "Supports both personal and business account types"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Minimal public information about interest rates, APYs, or account fees on website",
+    "No visible details on minimum deposit requirements or account opening process",
+    "Unclear relationship with 'Insite National Bank' creates confusion about institutional structure",
+    "Website functions primarily as a login portal with limited consumer education or marketing content",
+    "No transparent information about customer service availability or support channels"
   ],
   "contact": {
     "phone": "",
@@ -52,12 +62,12 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 25591,
   "latitude": 42.6990539825983,
   "longitude": -97.3626610251901,
   "published": true,
-  "review_status": "draft",
+  "review_status": "published",
   "features": {
     "credit_monitoring": false,
     "all_three_bureaus": false,
@@ -88,18 +98,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "QuickBooks and Quicken users who benefit from direct accounting software integration",
+    "Customers comfortable with digital-first banking and online account management",
+    "Small business owners seeking integrated accounting and banking solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Cedar Security Bank is best suited for digitally-savvy consumers and accountants who use Intuit software and want online banking convenience with basic checking, savings, and bill pay capabilities. The primary caveat is the absence of publicly available information about rates, fees, and specific product terms, making it difficult for consumers to compare this bank against competitors before opening an account.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +117,10 @@
   ],
   "phone": "",
   "address": "117 Main St, Fordyce, NE 68736",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

@@ -1,15 +1,15 @@
 {
   "name": "The Lemont National Bank",
   "slug": "the-lemont-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Lemont, IL. $49M in assets. 1 office.",
-  "description_long": "The Lemont National Bank is a community bank located in Lemont, IL, established in 1901. The bank holds approximately $49M in total assets and $47M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank offering checking, savings, loans, and debit cards with NCUA federal insurance. Currently merging with NuMark Credit Union.",
+  "description_long": "Lemont National Bank is a locally owned and headquartered community bank that provides traditional banking services to personal and business customers. The institution is federally insured by the NCUA, indicating it operates under credit union oversight or has merged with a credit union entity. According to their website, the bank is in the process of merging with NuMark Credit Union, which represents a significant organizational transition.\n\nThe bank offers a comprehensive range of deposit and lending products. For personal customers, they provide checking accounts, savings accounts, and various loan products including HELOCs and home financing with competitive rates. Business customers have access to dedicated checking accounts, savings accounts, and business lending solutions. Additional services include online and mobile banking platforms, Visa debit cards with the CardValet fraud protection app, credit cards, and telephone banking support. They advertise CD specials as a current promotional focus.\n\nLemont National Bank distinguishes itself primarily through its community focus and local decision-making. Their marketing emphasizes being a \"locally owned and headquartered community bank\" that can provide \"fast loan decisions\" on mortgage and HELOC products. The CardValet mobile app provides additional fraud protection and spending control features beyond standard debit card functionality. The bank also offers traditional services like wire transfers and travel tips resources.\n\nA key consideration is that the website prominently features information about the pending merger with NuMark Credit Union, which creates uncertainty about the bank's independent future and potential changes to products, services, or branding. While they offer standard banking products competitively, the website provides limited specific information about rates, fees, account minimums, or loan terms. The merger status should be clarified before opening new accounts, as customer experiences may change post-merger.",
   "logo_url": "",
   "website_url": "https://www.lemontnationalbank.com",
   "affiliate_url": "",
@@ -24,23 +24,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Home loans and HELOC products",
+    "Business loans",
+    "Visa debit cards",
+    "Credit cards",
+    "Online banking platform",
+    "Mobile banking app",
+    "CardValet fraud protection app",
+    "Telephone banking (1-800-449-0149)",
+    "Wire transfer services",
+    "CD special offers"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1901",
-    "Local community bank with personal service",
-    "1 location"
+    "NCUA federal insurance protects deposits",
+    "CardValet app provides real-time fraud protection and card control",
+    "Advertises fast loan decisions as a locally headquartered community bank",
+    "Offers both personal and business banking products under one institution",
+    "Mobile and online banking available for account management",
+    "Free Visa debit card with option to request via application",
+    "Dedicated telephone banking line and card reporting hotline available 24/7"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Pending merger with NuMark Credit Union creates uncertainty about service continuity and future changes",
+    "Website lacks specific information about APYs, APRs, fees, or account minimums for comparison",
+    "Limited detail provided about loan products, eligibility requirements, or approval timelines",
+    "No information about whether accounts were transferred or if branding has changed post-merger announcement",
+    "Sparse information about credit card offerings compared to deposit and loan products"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3693,
   "latitude": 41.6563000072056,
   "longitude": -87.9993110001084,
@@ -94,12 +107,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Community-focused customers seeking local decision-making for home loans and HELOCs",
+    "Small business owners needing integrated personal and business banking services",
+    "Customers prioritizing fraud protection tools and mobile banking convenience",
+    "Individuals seeking NCUA-insured deposits in a traditional community bank setting"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Lemont National Bank is best for community-minded personal and business customers seeking traditional banking services with NCUA insurance protection and local loan decision-making. However, the pending merger with NuMark Credit Union is a critical caveat\u2014customers should verify current status, service availability, and any changes to accounts or branding before banking with them, as the transition may impact products and operations.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,11 @@
   ],
   "phone": "",
   "address": "1201 State St, Lemont, IL 60439",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

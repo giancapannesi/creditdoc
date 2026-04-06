@@ -1,14 +1,14 @@
 {
   "name": "First Vision Bank Of Tennessee",
   "slug": "first-vision-bank-of-tennessee",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Tullahoma, TN. $426M in assets. 5 offices.",
-  "description_long": "First Vision Bank Of Tennessee is a community bank located in Tullahoma, TN, established in 2005. The bank holds approximately $426M in total assets and $369M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank in Tennessee offering personal/business checking, savings, mortgages, and personal loans through four local branch locations.",
+  "description_long": "First Vision Bank is a community-focused FDIC-insured bank operating in Tennessee with physical locations in Tullahoma, Murfreesboro, Decherd, and Manchester. The bank emphasizes relationship-based banking and personalized service, positioning itself around the motto \"Your Vision. Our Mission.\" Founded with a commitment to active community involvement, First Vision Bank serves both personal and business customers throughout middle Tennessee.\n\nThe bank offers a comprehensive suite of banking products including personal and business checking accounts, savings accounts with Kasasa\u00ae rewards options, home mortgage products through First Vision Mortgage (purchase, refinance, and home equity options), and personal loans for vehicles, boats, farm equipment, and other purposes. They provide online banking, mobile banking, merchant services, cash management, and payroll services. The mortgage division operates from their Tullahoma headquarters with extended business hours (8 a.m.\u20135 p.m. weekdays).\n\nFirst Vision Bank differentiates itself through emphasis on personalized relationship banking rather than one-size-fits-all solutions. The bank highlights that banking professionals personally meet with customers to tailor solutions to individual needs. They maintain Saturday drive-thru hours at their Tullahoma and Decherd locations, providing weekend access. The bank is a Federal Reserve System member and maintains NMLS# 879526.\n\nAs a regional community bank, First Vision Bank offers traditional banking services with local decision-making and branch accessibility. However, the website provides limited information about specific rates, fees, account minimums, or competitive product details. Customers seeking transparent rate comparisons or specialized digital-banking experiences may need to contact branches directly for detailed pricing information.",
   "logo_url": "",
   "website_url": "https://www.fvb.bank",
   "affiliate_url": "",
@@ -23,23 +23,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Business checking accounts",
+    "Personal savings accounts",
+    "Kasasa\u00ae rewards checking and savings accounts",
+    "Home purchase mortgages",
+    "Mortgage refinancing",
+    "Home equity loans",
+    "Personal auto loans",
+    "Boat loans",
+    "Farm equipment loans",
+    "Online banking platform",
+    "Mobile banking application",
+    "Merchant services",
+    "Cash management services",
+    "Payroll services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2005",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits with backing by full faith and credit of U.S. Government",
+    "Multiple Tennessee branch locations (Tullahoma, Murfreesboro, Decherd, Manchester) with extended Saturday drive-thru hours at Tullahoma and Decherd",
+    "Kasasa\u00ae rewards account options available for checking and savings",
+    "Full-service mortgage division (First Vision Mortgage) with dedicated staff and extended weekday hours",
+    "Personal loans available for diverse purposes including vehicles, boats, and farm equipment",
+    "Online and mobile banking platforms available for account management",
+    "Federal Reserve System member with established regulatory compliance and transparency",
+    "Strong community banking focus with dedicated professionals and personalized service approach"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to four Tennessee locations; not accessible to customers outside middle Tennessee",
+    "Website lacks specific information about interest rates, APRs, account fees, or minimum balance requirements",
+    "No mention of specialized services like investment advisory, wealth management, or business banking tools that larger banks offer",
+    "After-hours customer service requires calling 1-800-500-1044 rather than 24/7 support",
+    "Minimal digital innovation mentioned; no details about advanced fintech features or standalone mobile app capabilities"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +66,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58201,
   "latitude": 35.3749790067668,
   "longitude": -86.2241649749801,
@@ -84,21 +99,22 @@
       "FDIC Cert #58201"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Middle Tennessee residents seeking community-focused banking with local branch relationships and personalized service",
+    "Small business owners in Tennessee requiring both business banking and access to mortgage products through the same institution",
+    "Homebuyers and homeowners in Tennessee interested in purchasing, refinancing, or accessing home equity through a local lender",
+    "Customers prioritizing FDIC insurance and Federal Reserve membership with in-person banking convenience over digital-first banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Vision Bank is best for middle Tennessee residents and business owners who value relationship-based community banking and have access to one of the four branch locations. The main caveat is limited geographic availability and lack of transparent pricing information on the website\u2014customers must contact branches directly for rates, fees, and specific product terms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +122,11 @@
   ],
   "phone": "",
   "address": "1401 N Jackson St, Tullahoma, TN 37388",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

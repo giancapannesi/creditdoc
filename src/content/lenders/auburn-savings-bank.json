@@ -1,15 +1,15 @@
 {
   "name": "Auburn Savings Bank, Fsb",
   "slug": "auburn-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Auburn, ME. $102M in assets. 2 offices.",
-  "description_long": "Auburn Savings Bank, Fsb is a community bank located in Auburn, ME, established in 1887. The bank holds approximately $102M in total assets and $76M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Auburn Savings Bank, FSB is a community bank serving Lewiston-Auburn since 1887, offering personal and business banking with local decision-making and relationship-focused service.",
+  "description_long": "Auburn Savings Bank, FSB has been a cornerstone of the Lewiston-Auburn community for over 135 years, since its founding in 1887. The bank positions itself as a locally-focused financial institution that prioritizes personalized service and understanding individual customer needs rather than treating customers as account numbers. Their leadership emphasizes that banking is about people and community success, not just account balances and bottom lines.\n\nThe bank offers a comprehensive range of consumer and business banking services. On the personal side, they provide checking and savings accounts (including Premier Rewards Checking), Health Savings Accounts at 2.25% APY, home loans with rates like 5.845% APR, auto loans with fast in-house decision-making, and mobile banking with mobile deposit capabilities. Business services include customized business checking accounts, business loans for startups and expansion, construction loans with fixed rates, and personalized financial solutions. They also advertise debit card integration with mobile payment apps and bill pay functionality.\n\nWhat distinguishes Auburn Savings Bank is their explicit commitment to local decision-making and personal relationships. Customer testimonials highlight that the bank president is accessible during the loan process, loan officers will meet customers at dealerships, and the institution prioritizes understanding \"the how and the why\" behind customer financial needs. They emphasize being a neighbor-focused bank where customers receive tailored solutions rather than one-size-fits-all products. Their 135-year history in the community and stated philosophy of nurturing relationships and fostering local business ambition are central to their brand positioning.\n\nAs a traditional community bank, Auburn Savings serves customers seeking personalized service and local relationships over large national banks. However, customers should verify current rates and account terms, as the website shows example rates (5.845% APR on mortgages, 2.25% APY on HSAs) subject to credit approval. The bank's geographic focus on Lewiston-Auburn may limit convenience for customers outside the region, though they offer online and mobile banking. Their emphasis on relationship-based banking suggests they may be more suitable for customers willing to build ongoing relationships rather than those seeking quick, transactional services.",
   "logo_url": "",
   "website_url": "https://www.auburnsavings.com",
   "affiliate_url": "",
@@ -24,23 +24,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Premier Rewards Checking Accounts with rewards structure",
+    "Personal checking with Bill Pay and Mobile Deposit",
+    "Business Checking with free online/mobile banking",
+    "Health Savings Accounts at 2.25% APY",
+    "Home purchase and refinance mortgages",
+    "Auto loans with in-house decision-making",
+    "Construction loans with fixed rates",
+    "Business loans for startups and expansion",
+    "Mobile banking with check deposit functionality",
+    "Debit card integration with mobile payment apps",
+    "Online banking platform",
+    "Personalized financial consulting"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1887",
-    "Local community bank with personal service",
-    "2 locations"
+    "Established community bank with 135+ years of local history and commitment to Lewiston-Auburn",
+    "Local decision-making on loans with fast in-house processing rather than corporate approval chains",
+    "Premier Rewards Checking accounts that pay customers to bank there with reward structure",
+    "Health Savings Accounts offered at 2.25% APY competitive rate",
+    "Accessible leadership\u2014customer testimonials confirm bank president is involved in loan processes",
+    "Mobile banking with mobile check deposit, transfers, and balance checks",
+    "Comprehensive product range: personal/business checking, mortgages, auto loans, construction loans, business loans",
+    "Flexible underwriting approach\u2014multiple testimonials highlight willingness to find customized solutions"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation\u2014primarily serves Lewiston-Auburn area; inconvenient for customers outside region",
+    "Limited information on website regarding fees, account minimums beyond checking ($25) and business ($100)",
+    "Mortgage and savings rates shown are examples subject to credit approval\u2014actual rates not transparently listed",
+    "No mention of CD rates, money market accounts, or other savings products beyond HSAs and basic savings",
+    "Relationship-focused model may result in slower service for customers seeking quick, transactional banking"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +64,7 @@
   "states_served": [
     "ME"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28288,
   "latitude": 44.0978342406907,
   "longitude": -70.2319964627884,
@@ -94,12 +106,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs in Lewiston-Auburn seeking personalized lending and local relationships",
+    "Homebuyers and mortgage refinancers in the region wanting accessible loan officers and flexible terms",
+    "Individuals seeking Health Savings Accounts with competitive APY rates",
+    "Community-minded customers who prioritize local banking relationships over national bank convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Auburn Savings Bank is best for individuals and small business owners in the Lewiston-Auburn area who value personalized service, local relationships, and accessible decision-makers over the convenience of large national banks. The primary caveat is geographic limitation\u2014customers outside the region may find the bank inconvenient despite online options, and those seeking quick, impersonal transactions may be better served by larger institutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +120,11 @@
   ],
   "phone": "",
   "address": "256 Court St, Auburn, ME 04210",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

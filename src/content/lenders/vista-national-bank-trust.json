@@ -1,14 +1,14 @@
 {
   "name": "Vista National Bank & Trust",
   "slug": "vista-national-bank-trust",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Harveyville, KS. $63M in assets. 1 office.",
-  "description_long": "Vista National Bank & Trust is a community bank located in Harveyville, KS, established in 1920. The bank holds approximately $63M in total assets and $54M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Ventura National Bank & Trust (formerly VNBT) is an independent bank offering personal and business banking, wealth management, and lending services with concierge support.",
+  "description_long": "Ventura National Bank & Trust, formerly known as Ventura National Bank & Trust (rebranded from VNBT), operates as a full-service independent bank providing comprehensive financial services to individuals and businesses. The institution positions itself as a relationship-focused bank that emphasizes personalized concierge banking rather than a purely transactional approach.\n\nThe bank offers a wide range of financial products and services including personal and business checking accounts, savings accounts, certificates of deposit (CDs), money market accounts, personal and business lending (including SBA loans and equipment financing), lines of credit, investment services, and trust administration. They provide digital convenience through online banking and a mobile app, alongside traditional in-person banking relationships.\n\nVentura National Bank & Trust distinguishes itself through its emphasis on \"Total Balance Sheet Management\" and concierge wealth management services. The bank explicitly markets itself as an independent institution and offers specialized services including tax efficiency planning, business succession planning, estate administration, philanthropic planning, and insurance services. Their 24/7 customer support phone line (866-551-2266) suggests a commitment to accessibility. All deposits are FDIC-insured.\n\nAs an independent bank, VNBT likely serves high-net-worth individuals and established small-to-medium businesses seeking personalized service and comprehensive financial solutions. However, the website provides limited information about specific product terms, rates, minimum balances, or fee structures, which may require direct contact for detailed information. The recent rebranding and website migration suggest an evolving institution in transition.",
   "logo_url": "",
   "website_url": "https://www.myvista.bank",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal and business checking accounts",
+    "Savings accounts and money market accounts",
+    "Certificates of Deposit (CDs)",
+    "SBA loans and equipment financing",
+    "Lines of credit",
+    "Wealth management and investment services",
+    "Trust services and estate administration",
+    "Business succession planning and business sale pre-planning",
+    "Tax efficiency planning",
+    "Philanthropic planning and charitable giving strategies",
+    "Online banking and mobile banking app",
+    "Bill pay services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1920",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "24/7 customer support available by phone at (866) 551-2266",
+    "Comprehensive suite of services including wealth management, tax planning, and trust administration under one institution",
+    "Specializes in business succession planning and business sale pre-planning for small business owners",
+    "Offers expanded FDIC-insured deposit products including CDs and money market accounts",
+    "Independent bank structure allows for personalized concierge banking relationships",
+    "SBA loans and equipment financing available for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website contains minimal information about specific product rates, terms, fees, or minimum account balances requiring direct contact",
+    "Recent rebranding from VNBT suggests the institution is in transition, with updated website URL (www.vnbt.bank) and email requiring customer awareness",
+    "As an independent bank focused on wealth management and concierge services, likely targets higher-net-worth individuals rather than budget-conscious consumers",
+    "Limited transparency about eligibility requirements for different service tiers and lending products"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4683,
   "latitude": 38.7915470119526,
   "longitude": -95.9604550413603,
@@ -87,18 +97,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs seeking comprehensive financing (SBA loans, equipment loans, lines of credit) and business succession planning",
+    "High-net-worth individuals and families wanting consolidated wealth management, tax efficiency planning, and estate administration from a single relationship manager",
+    "Business professionals needing integrated personal and business banking with trust and philanthropic planning services",
+    "Customers prioritizing personalized concierge-level service and relationship banking over digital-first banking platforms"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Ventura National Bank & Trust is best suited for small business owners and affluent individuals seeking comprehensive, relationship-driven banking with integrated wealth management and specialized business services. The main caveat is that as an independent bank emphasizing concierge services and wealth management, it likely requires substantial account balances and focuses on higher-net-worth clients rather than serving as a budget-friendly option for average consumers.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,10 @@
   ],
   "phone": "",
   "address": "197 Main St, Harveyville, KS 66431",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

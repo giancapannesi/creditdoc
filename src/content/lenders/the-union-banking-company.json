@@ -1,14 +1,14 @@
 {
   "name": "The Union Banking Company",
   "slug": "the-union-banking-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in West Mansfield, OH. $52M in assets. 2 offices.",
-  "description_long": "The Union Banking Company is a community bank located in West Mansfield, OH, established in 1928. The bank holds approximately $52M in total assets and $42M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "The Union Banking Company is an FDIC-insured bank offering personal and business banking services including checking, savings, loans, and deposit products.",
+  "description_long": "The Union Banking Company operates as a traditional community bank providing comprehensive financial services to both personal and business customers. Based on their website presence at bankatubc.com, they position themselves as a full-service financial institution with FDIC insurance protection, indicating they meet federal banking regulations and deposit insurance requirements.\n\nTheir service offerings span multiple categories: personal banking (checking accounts), business banking (business checking), various loan products (mortgages, construction loans, auto loans, personal loans), and deposit products including CDs and IRAs. They provide online banking capabilities, financial calculators, and online enrollment for new customers. Their loan services are particularly comprehensive, covering real estate financing with fixed-rate options, construction loans with favorable terms, home equity products, and consumer lending for vehicles and recreational equipment.\n\nThe bank emphasizes fixed-rate lending products across multiple terms, with specific attention to construction financing that allows interest-only payments during the building phase. They offer home equity loans in 5, 7, and 10-year terms, and mortgage options in 10, 15, 20, 25, and 30-year periods. Their willingness to finance non-owner-occupied rental properties and provide CD-secured loans demonstrates flexibility in lending criteria.\n\nAs a traditional community bank, The Union Banking Company serves customers seeking conventional banking relationships with local presence (indicated by \"Locations and Hours\" navigation). However, the website provides limited detail on specific rates, fees, or competitive advantages beyond basic service descriptions. Their online presence is functional but minimal, lacking detailed product specifications, rate information, or customer testimonials that would help consumers make informed decisions.",
   "logo_url": "",
   "website_url": "https://www.bankatubc.com",
   "affiliate_url": "",
@@ -23,23 +23,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Business checking accounts",
+    "Fixed-rate mortgage loans (10, 15, 20, 25, 30-year terms)",
+    "Construction loans with favorable terms and draw structure",
+    "Home equity loans (5, 7, 10-year fixed terms)",
+    "Non-owner occupied rental property loans",
+    "Auto loans (purchase and refinance)",
+    "Recreational vehicle financing (boats, campers, ATVs, snowmobiles)",
+    "Personal loans at competitive rates",
+    "CD-secured loans",
+    "Certificates of Deposit and IRAs",
+    "Online banking with login and password reset",
+    "Commercial and agricultural lending",
+    "Financial calculators"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1928",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits providing up to $250,000 protection per account category",
+    "Comprehensive mortgage options with fixed rates in 10, 15, 20, 25, and 30-year terms",
+    "Construction loans with interest-only payment periods and flexible 4-system draw structure",
+    "Home equity loans with multiple term options (5, 7, 10 years) at fixed rates",
+    "Online banking platform with financial calculators and secure login features",
+    "Full-service business banking including commercial and agricultural lending",
+    "Flexible consumer lending including auto loans, RV financing, and CD-secured loans",
+    "Equal Housing Lender status indicating non-discriminatory lending practices"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides minimal rate, fee, or APR information for product comparison",
+    "Limited online presence with sparse details about loan terms or qualification criteria",
+    "No information about minimum deposit requirements, balance thresholds, or account limitations",
+    "Lack of customer reviews or testimonials to assess service quality and satisfaction",
+    "No details on mobile banking capabilities beyond basic online banking mention"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +65,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15326,
   "latitude": 40.4021069921563,
   "longitude": -83.54477102102,
@@ -93,12 +107,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Consumers seeking traditional community banking with local branch relationships",
+    "Homebuyers and refinancers looking for fixed-rate mortgage options across multiple terms",
+    "Small business owners needing commercial lending and business checking accounts",
+    "Rural or agricultural borrowers requiring specialized commercial and agricultural lending"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Union Banking Company is best for consumers seeking traditional community bank services with emphasis on fixed-rate lending products, particularly those interested in mortgages, construction financing, or business banking relationships. Primary caveat: the website lacks competitive rate information, fee transparency, and detailed product specifications necessary for informed comparison shopping\u2014consumers must contact the bank directly for current terms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +121,10 @@
   ],
   "phone": "",
   "address": "105 East Center Street, West Mansfield, OH 43358",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Mainstreet Bank",
   "slug": "mainstreet-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Fairfax, VA. $2209M in assets. 7 offices.",
-  "description_long": "Mainstreet Bank is a community bank located in Fairfax, VA, established in 2004. The bank holds approximately $2209M in total assets and $1902M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving the Greater Washington area with commercial lending, business and personal banking, and merchant services. FDIC-insured with focus on personalized customer relationships.",
+  "description_long": "MainStreet Bank is a community-focused financial institution serving the Greater Washington region, including a recent expansion to Middleburg. The bank emphasizes personalized banking relationships and local expertise, positioning itself as an alternative to larger national banks by maintaining a customer-centric approach and reflecting the cultural diversity of its service area.\n\nThe bank offers a comprehensive range of financial services across both personal and commercial segments. Personal banking includes checking and savings accounts, money market accounts, certificates of deposit, ICS & CDARS products, online services with bill pay, auto loans, and overdraft protection. For businesses, MainStreet provides commercial lending solutions including construction & renovation lending, commercial real estate lending, government contract lending, SBA lending, medical practice lending, professional service lending, and hospitality-specific lending. Additional services include lines of credit, treasury management services, and merchant services featuring EMV-compatible terminals, POS systems, internet gateways, and smartphone payment processing.\n\nMainStreet Bank distinguishes itself through its emphasis on combining cutting-edge banking technology with personalized service. The bank invests in the latest banking products and technology while maintaining a commitment to understanding individual customer needs and local business requirements. Their treasury management services and diverse commercial lending specializations (medical practices, professional services, government contractors) suggest targeted expertise in specific market segments. The bank also emphasizes community investment and neighborhood engagement.\n\nAs a legitimate FDIC-insured bank (NMLS# 416495), MainStreet Bank is suitable for customers seeking traditional banking services with a community bank relationship model. However, the website provides limited detail on specific rates, fees, or product terms, which is typical for community banks that tailor offerings to individual customers. Customers requiring transparent, published pricing or specialized fintech features may need to contact the bank directly for detailed product information.",
   "logo_url": "",
   "website_url": "https://www.mstreetbank.com",
   "affiliate_url": "",
@@ -23,23 +23,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings and money market accounts",
+    "Certificates of deposit (CDs)",
+    "ICS & CDARS products for deposit security",
+    "Online banking and bill pay services",
+    "Auto loans",
+    "Overdraft protection",
+    "Commercial real estate lending",
+    "SBA lending programs",
+    "Medical practice lending",
+    "Government contract lending",
+    "Hospitality industry lending",
+    "Treasury management services",
+    "Merchant services with POS systems",
+    "Remote deposit check scanning via MainStreet Connect",
+    "ACH debit services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2004",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Specialized commercial lending expertise in medical practices, professional services, hospitality, and government contractors",
+    "Treasury management services available for business customers requiring cash management solutions",
+    "Remote deposit check scanning via MainStreet Connect platform",
+    "Merchant services with EMV-compatible terminals and smartphone processing capabilities",
+    "Two-factor authentication security with Symantec VIP token support",
+    "Recent expansion to Middleburg reflects growth and commitment to regional service"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no published fee schedules or interest rate information, requiring direct contact for pricing",
+    "Limited information on minimum account balances, balance requirements, or product-specific terms",
+    "No indication of mobile app features or functionality beyond digital banking login and remote deposit",
+    "Appears to be regional bank with limited geographic footprint compared to national competitors",
+    "No online comparison tools or rate calculators available on website for rate-shopping"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +66,7 @@
   "states_served": [
     "VA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57742,
   "latitude": 38.8619039947455,
   "longitude": -77.2928840375007,
@@ -84,21 +99,22 @@
       "FDIC Cert #57742"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-sized business owners in the Greater Washington area seeking relationship-based commercial lending",
+    "Medical professionals and practices requiring specialized lending solutions",
+    "Personal banking customers preferring community bank service with local decision-making",
+    "Merchants requiring full-service POS systems and payment processing solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "MainStreet Bank is best for businesses and personal customers in the Greater Washington area seeking relationship-driven banking with specialized expertise in commercial lending. The primary caveat is that detailed pricing, rates, and product terms are not published online\u2014customers must contact the bank directly to evaluate specific offerings and compare costs against national competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +122,11 @@
   ],
   "phone": "",
   "address": "10089 Fairfax Blvd, Fairfax, VA 22030",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

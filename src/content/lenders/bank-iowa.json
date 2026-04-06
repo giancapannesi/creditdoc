@@ -1,15 +1,15 @@
 {
   "name": "Bank Iowa",
   "slug": "bank-iowa",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in West Des Moines, IA. $2415M in assets. 25 offices.",
-  "description_long": "Bank Iowa is a community bank located in West Des Moines, IA, established in 1923. The bank holds approximately $2415M in total assets and $2030M in deposits. It operates 25 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bank Iowa is a community bank offering personal and business banking services across 24 locations in Iowa, with checking accounts, mortgages, agricultural lending, and deposit products.",
+  "description_long": "Bank Iowa is a regional community bank that has been serving clients for 50 years, positioning itself as a local partner combining innovation with hometown values. The institution operates 24 physical locations across Iowa and provides a full spectrum of banking services to both personal and business customers in their communities.\n\nThe bank offers personal banking products including checking accounts, savings vehicles, certificates of deposit (currently advertising 3.91% APY), home mortgages, and a Platinum Rewards Credit Card. For business customers, Bank Iowa provides agricultural lending, commercial checking, treasury management services, and business lending solutions. Their digital offerings include mobile deposits, bill pay, eStatements, and online account management.\n\nBank Iowa differentiates itself through community involvement and local presence, emphasizing active involvement in the communities they serve through event sponsorships, school partnerships, and support for small businesses and nonprofits. They position themselves at the intersection of high-tech banking (online services, mobile banking) and community-focused service with local decision-making.\n\nThe bank provides standard banking services comparable to other community banks. Their main strengths are local presence and community engagement. However, as a regional bank with limited locations, they may not offer the convenience of national ATM networks, and their product suite appears more traditional compared to fintech-forward competitors. The website emphasizes fraud protection education and financial wellness resources, suggesting an educational approach to client relationships.",
   "logo_url": "",
   "website_url": "https://www.bankiowa.bank",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Savings accounts and certificate of deposit products",
+    "Home mortgage lending and refinancing",
+    "Platinum Rewards Credit Card",
+    "Mobile deposits and mobile banking",
+    "Bill pay services",
+    "eStatements",
+    "Agricultural lending and ag-focused services",
+    "Commercial checking accounts",
+    "Treasury management for businesses",
+    "Identity theft protection services",
+    "Financial education and fraud protection resources"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1923",
-    "Local community bank with personal service",
-    "25 locations"
+    "24 physical locations across Iowa with drive-up options at select branches",
+    "Competitive CD rates advertised at 3.91% APY",
+    "Comprehensive personal and business banking services including agricultural lending",
+    "Free financial calculators and fraud protection education resources available to all customers",
+    "Platinum Rewards Credit Card with rewards program tied to spending",
+    "Free identity theft services and expert support for identity protection",
+    "Mobile banking features including mobile deposits, bill pay, and eStatements"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint (24 Iowa locations only) compared to national banks",
+    "No mention of competitive checking account rates or interest-bearing checking options",
+    "Lacks transparency on fees, minimum balances, or account requirements on their website",
+    "Limited online customer service availability (M-F 8am-5pm, Sat 9am-12pm only)",
+    "No mention of nationwide ATM network access or fee reimbursement for out-of-network ATM usage"
   ],
   "contact": {
     "phone": "",
@@ -52,12 +63,12 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14521,
   "latitude": 41.5871280159741,
   "longitude": -93.8083279755937,
   "published": true,
-  "review_status": "draft",
+  "review_status": "published",
   "features": {
     "credit_monitoring": false,
     "all_three_bureaus": false,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Iowa residents seeking community-focused banking with local branch access",
+    "Agricultural businesses and farmers needing specialized ag lending services",
+    "Small business owners wanting treasury management and commercial banking services",
+    "Savers seeking competitive CD rates with personalized service"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank Iowa is best suited for Iowa residents and agricultural businesses seeking personalized, community-oriented banking with local decision-making and branch access. The main caveat is their limited geographic footprint\u2014they only operate in Iowa, making them inaccessible for customers outside the state or those requiring nationwide ATM convenience.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "1225 Jordan Creek Pkwy, West Des Moines, IA 50266",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-05",
+  "last_engine_run": "2026-04-05"
 }

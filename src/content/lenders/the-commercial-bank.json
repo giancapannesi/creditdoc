@@ -1,14 +1,14 @@
 {
   "name": "The Commercial Bank",
   "slug": "the-commercial-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Honea Path, SC. $264M in assets. 8 offices.",
-  "description_long": "The Commercial Bank is a community bank located in Honea Path, SC, established in 1934. The bank holds approximately $264M in total assets and $232M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal and business checking, savings, lending, and digital banking services across multiple locations.",
+  "description_long": "The Commercial Bank is a traditional community bank operating with FDIC insurance backing, as indicated by their prominent homepage messaging about full faith and credit of the U.S. Government. The bank has been established long enough to maintain multiple branch locations and a routing number (053206961), positioning itself as a stable, regulated financial institution rather than a fintech or neobank alternative.\n\nThe Commercial Bank offers a comprehensive suite of consumer and business banking products. On the personal side, they provide checking accounts, savings accounts, Certificates of Deposit (CDs), Individual Retirement Accounts (IRAs), personal loans, auto and recreational vehicle loans, home equity lines of credit, and mortgage lending. For business customers, they offer business checking accounts, tiered non-personal money market accounts, and civic checking accounts, along with dedicated business lending. Additional services include ATM and debit cards, credit cards, safe deposit boxes, overdraft protection (Smart Reserve), 24-hour phone banking, internet banking, and mobile banking via their downloadable app.\n\nThe Commercial Bank distinguishes itself through membership in the MoneyPass ATM Network, providing cardholders surcharge-free ATM access. They emphasize the personal relationship aspect with messaging like \"The People You Know,\" suggesting a community-focused approach. The bank provides mobile banking capabilities for on-the-go account management and highlights early retirement planning resources. Their marketing emphasizes lending products tailored to individual needs, from home purchases to personal cash needs.\n\nAs a traditional bank, The Commercial Bank is best suited for customers seeking FDIC-protected deposits and comprehensive lending under one roof. However, the website provides limited detail on account fees, interest rates, loan terms, minimum balance requirements, or competitive rates compared to online banks. Customers interested in this institution should contact them directly or visit branches to evaluate specific account features and pricing.",
   "logo_url": "",
   "website_url": "https://www.thecommercialbanksc.com",
   "affiliate_url": "",
@@ -23,23 +23,41 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Business checking accounts",
+    "Tiered non-personal money market accounts",
+    "Civic checking accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Auto and recreational vehicle loans",
+    "Home equity loans and lines of credit",
+    "Home and mortgage loans",
+    "Business loans",
+    "ATM and debit cards",
+    "Credit cards",
+    "Safe deposit boxes",
+    "Smart Reserve and overdraft protection",
+    "Mobile banking application",
+    "Internet banking",
+    "24-hour phone banking"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1934",
-    "Local community bank with personal service",
-    "8 locations"
+    "FDIC-insured deposits backed by full faith and credit of the U.S. Government",
+    "Membership in MoneyPass ATM Network providing surcharge-free ATM access",
+    "Comprehensive product suite including checking, savings, CDs, IRAs, personal loans, auto loans, home equity, and mortgages",
+    "Dedicated business banking solutions with business checking, money market, and business lending",
+    "Mobile banking app available for iPhone and Android for convenient account management",
+    "24-hour phone banking support for account inquiries outside business hours",
+    "Multiple branch and ATM locations with lost/stolen card reporting available 24/7 at 1-800-383-8000"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information on account fees, minimum balance requirements, or interest rates for comparison",
+    "No transparent pricing details for personal loans, auto loans, or mortgage lending products",
+    "Limited disclosure of loan approval requirements, terms, or APR ranges for any lending products",
+    "Community bank with likely limited geographic footprint compared to national banks",
+    "No mention of online-only account opening or fully digital onboarding process"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +69,7 @@
   "states_served": [
     "SC"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14642,
   "latitude": 34.4457579937045,
   "longitude": -82.3918399877808,
@@ -93,12 +111,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local community members seeking FDIC-protected deposit accounts and traditional banking services",
+    "Small business owners needing integrated checking, money market, and business lending solutions",
+    "Customers prioritizing in-person branch relationships and personal service over digital-only banking",
+    "Borrowers seeking home mortgages, home equity lines of credit, or auto loans from a local institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Commercial Bank is best for local customers seeking traditional FDIC-insured banking with comprehensive lending and in-person branch service. The main caveat is that the website provides minimal transparency on fees, rates, and loan terms\u2014prospective customers must contact the bank directly or visit branches to compare offerings against online and national banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +125,10 @@
   ],
   "phone": "",
   "address": "4 Church St, Honea Path, SC 29654",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

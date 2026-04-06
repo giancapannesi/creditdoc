@@ -1,14 +1,14 @@
 {
   "name": "Potomac Bank",
   "slug": "potomac-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Charles Town, WV. $943M in assets. 9 offices.",
-  "description_long": "Potomac Bank is a community bank located in Charles Town, WV, established in 1870. The bank holds approximately $943M in total assets and $813M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Potomac Bank is a full-service bank offering personal and business banking products, including checking accounts, mortgages, debit cards, and SBA-backed small business loans.",
+  "description_long": "Potomac Bank operates as a traditional commercial bank providing comprehensive financial services to both individual consumers and business clients. The institution positions itself as a community-focused bank with a emphasis on personalized service and local relationships. The bank maintains an active web presence at potomac.bank and advertises multiple physical locations, though specific location details were inaccessible during research due to website security restrictions.\n\nThe bank's product suite includes personal checking accounts, debit cards (Visa-backed), mortgage lending and prequalification, personal loans with calculators for monthly payment estimation, and a robust business banking division. As a Small Business Administration (SBA) Preferred Lender, Potomac Bank specializes in SBA 7(a) and 504 loan programs. The business division also offers cash management services, lines of credit, and personalized lending solutions designed for small to mid-sized enterprises. The bank provides financial advisory services and mortgage application assistance through dedicated staff.\n\nPotomac Bank distinguishes itself primarily through its SBA lending credentials and emphasis on personalized business banking. Their marketing highlights the availability of business banking specialists and customized cash management solutions. The bank offers online financial calculators covering mortgages, auto affordability, rent-versus-buy analysis, and savings planning. The institution brands itself around convenience (Visa debit card acceptance everywhere) and simplifying customers' financial lives through comprehensive service offerings.\n\nAs a traditional brick-and-mortar bank, Potomac Bank's main limitation is lack of transparency in accessible online information\u2014key pages about the institution and appointment booking were blocked by Cloudflare security during research, preventing verification of specific rates, fees, branch locations, or detailed product specifications. Prospective customers must contact the bank directly or visit physical locations to obtain pricing and detailed terms. The website content provides marketing messaging rather than concrete product terms, interest rates, or fee schedules.",
   "logo_url": "",
   "website_url": "https://www.potomac.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Visa debit cards with fraud prevention",
+    "Mortgage lending and prequalification",
+    "SBA 7(a) loan programs",
+    "SBA 504 loan programs",
+    "Business cash management services",
+    "Business lines of credit",
+    "Small business loans",
+    "Financial advisory services",
+    "Online financial calculators",
+    "Appointment scheduling with financial advisors",
+    "Online account opening"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1870",
-    "Local community bank with personal service",
-    "9 locations"
+    "SBA Preferred Lender status for 7(a) and 504 small business loans, indicating established expertise in federal lending programs",
+    "Dedicated business banking division with specialized business lending specialists and personalized service",
+    "Customized cash management services tailored to individual company needs",
+    "Online financial calculators for mortgages, auto loans, rent-vs-buy decisions, and savings planning",
+    "Multiple service channels including in-person appointments, online account opening, and business lending consultations",
+    "Visa-backed debit cards accepted globally with fraud prevention resources",
+    "Mortgage prequalification available online"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited online transparency\u2014key informational pages inaccessible due to Cloudflare security blocks, preventing verification of rates, fees, and terms",
+    "No specific interest rates, APRs, or fee schedules disclosed on publicly accessible website content",
+    "Requires direct contact or in-person visit to obtain detailed product pricing and application terms",
+    "Website content is primarily marketing-focused rather than providing concrete product specifications",
+    "Physical branch presence required for full account management and loan consultation, limiting accessibility for remote customers"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WV"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9023,
   "latitude": 39.2888889970672,
   "longitude": -77.8592649930433,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking SBA-backed financing with personalized service",
+    "Local customers with access to Potomac Bank physical branch locations",
+    "Consumers seeking comprehensive banking services including mortgages, checking, and business lending under one institution",
+    "Business owners needing customized cash management and working capital solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Potomac Bank is best for small business owners and individuals seeking traditional full-service banking with personalized attention, particularly those who value SBA lending expertise and have access to physical branch locations. The primary caveat is that the bank's website provides limited pricing and product detail transparency, requiring customers to contact the bank directly or visit in person to obtain rates, fees, and specific loan terms before applying.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "111 E Washington St, Charles Town, WV 25414",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

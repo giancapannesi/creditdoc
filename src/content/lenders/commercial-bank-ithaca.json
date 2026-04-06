@@ -1,14 +1,14 @@
 {
   "name": "Commercial Bank",
   "slug": "commercial-bank-ithaca",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Ithaca, MI. $554M in assets. 11 offices.",
-  "description_long": "Commercial Bank is a community bank located in Ithaca, MI, established in 1962. The bank holds approximately $554M in total assets and $478M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Regional Michigan bank established in 1893, offering checking accounts, mortgages, auto loans, and business banking with FDIC insurance and a focus on personalized customer service.",
+  "description_long": "Commercial Bank has operated as a community bank in Central Michigan for over 130 years, establishing itself as a trusted financial institution with deep roots in the region. The bank maintains FDIC insurance backed by the full faith and credit of the U.S. Government, providing account protection and stability for depositors.\n\nThe bank offers a comprehensive range of retail and commercial banking products. Consumer services include checking accounts, mortgage options for home purchase/refinance/construction, auto loans, and renovation financing. Business customers have access to dedicated lending teams and business banking solutions. The bank provides both in-person branch banking and digital services through Online Banking and Digital One platforms.\n\nCommercial Bank distinguishes itself through emphasis on personalized, relationship-based service. Customer testimonials highlight 20+ year relationships, individual treatment rather than being \"a number on a balance sheet,\" and responsive, transparent lending processes. The bank operates multiple branches across Central Michigan (St. Louis, Gratiot County areas mentioned) and serves both individual consumers and long-term business clients.\n\nAs a regional community bank, Commercial Bank's primary advantage is localized service and decision-making. However, customers should understand that as a smaller institution without national reach, product availability may be more limited than large national banks, and online features may be less developed than fintech alternatives.",
   "logo_url": "",
   "website_url": "https://www.commercial-bank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts with online enrollment",
+    "Savings accounts and deposit products",
+    "Online banking platform",
+    "Digital One banking service",
+    "Mortgage loans (purchase, refinance, construction)",
+    "Auto loans",
+    "Home renovation loans",
+    "Business banking and lending",
+    "Fraud protection education",
+    "Personalized rate quotes",
+    "Loan application processing",
+    "Multiple branch locations across Central Michigan"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1962",
-    "Local community bank with personal service",
-    "11 locations"
+    "FDIC insured with 130+ year operating history and Bauer Financial 5-Star Rating",
+    "Multiple mortgage options including construction, purchase, refinance, and renovation loans",
+    "Transparent, relationship-based lending process with dedicated lending teams",
+    "Long customer retention (20+ year relationships documented) indicating service quality",
+    "Auto loans and renovation financing available beyond basic banking",
+    "Digital banking options (Online Banking, Digital One) plus in-person branch service",
+    "Fraud education resources and security protocols clearly communicated"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Central Michigan reduces accessibility for broader customer base",
+    "Website content sparse on specific loan terms, rates, and APR information",
+    "No mention of competitive checking account features, fees, or CD rates compared to national banks",
+    "Limited detail on business banking product depth or commercial lending capabilities",
+    "No information on online-only account opening or digital-first banking experience comparable to neobanks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 18584,
   "latitude": 43.2922579922212,
   "longitude": -84.6080310291648,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Central Michigan residents seeking relationship-based community banking with local branch access",
+    "Home buyers and refinancers wanting transparent mortgage processes with personal lending support",
+    "Small business owners requiring long-term banking relationships and personalized commercial lending",
+    "Consumers prioritizing FDIC-insured stability and established institutional trust over digital convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Commercial Bank is ideal for Central Michigan residents and businesses seeking traditional community banking with FDIC protection and relationship-focused service. The main caveat is limited geographic availability outside Michigan and sparse online rate/fee transparency, making it less suitable for customers seeking national reach or detailed digital product comparison.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "101 N Pine River St, Ithaca, MI 48847",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

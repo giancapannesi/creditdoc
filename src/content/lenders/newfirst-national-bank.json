@@ -1,14 +1,14 @@
 {
   "name": "Newfirst National Bank",
   "slug": "newfirst-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in El Campo, TX. $944M in assets. 9 offices.",
-  "description_long": "Newfirst National Bank is a community bank located in El Campo, TX, established in 1902. The bank holds approximately $944M in total assets and $824M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "NewFirst National Bank is a full-service bank offering personal and business banking products including checking, savings, loans, and digital banking services.",
+  "description_long": "NewFirst National Bank operates as a traditional community bank providing comprehensive financial services to both personal and business customers. The bank maintains an online presence at newfirst.com and offers accessibility features including AudioEye toolbar support for users requiring assistive technologies.\n\nThe bank's service offerings span multiple categories. For personal customers, NewFirst provides deposit products (checking, savings, money market accounts, and CDs), digital banking through mobile apps and online platforms, bill pay capabilities, debit card management via CardHub, and lending solutions including personal loans, real estate loans, and agricultural loans. Business customers can access similar deposit products plus treasury management services, e-corp online banking, lockbox express, and merchant services. The lending division offers agricultural, real estate, commercial, and personal loans across both segments.\n\nNewFirst distinguishes itself through several specific features: CardHub technology allowing debit card control, TransferNow money transfer tool for managing multiple accounts, CDARS/ICS deposit products for larger accounts, and 24/7 mobile banking capabilities. The bank emphasizes local business support and provides specialized lending for agricultural operations. They also maintain a proactive fraud prevention program with public warnings about common scam tactics.\n\nAs a traditional bank, NewFirst is best suited for customers seeking conventional banking relationships with physical branch access, multiple deposit and loan products, and integrated online/mobile services. However, the website provides limited information about interest rates, fees, credit requirements, or competitive positioning, making it difficult to assess value proposition compared to digital banks or credit unions.",
   "logo_url": "",
   "website_url": "https://WWW.NEWFIRST.COM",
   "affiliate_url": "",
@@ -23,23 +23,39 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Money market accounts and CDs",
+    "CDARS/ICS deposit products",
+    "Business checking accounts",
+    "Mobile banking with check deposit",
+    "Bill pay services",
+    "CardHub debit card management",
+    "TransferNow money transfer tool",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Real estate loans",
+    "Agricultural loans",
+    "Commercial lending",
+    "E-banking and e-corp online banking",
+    "Treasury management services",
+    "Merchant services",
+    "Lockbox express",
+    "Credit card services (application through Card Service Center)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1902",
-    "Local community bank with personal service",
-    "9 locations"
+    "Comprehensive product suite including checking, savings, CDs, CDARS/ICS, and multiple loan types",
+    "Mobile banking app with check deposit and bill pay capabilities available anytime",
+    "CardHub debit card management tool for fraud prevention and card control",
+    "TransferNow money transfer tool for managing finances across multiple accounts",
+    "24/7 online credit card account access via cardaccount.net",
+    "24-hour toll-free customer service at 800-367-7576",
+    "Specialized lending for agricultural, commercial, real estate, and personal needs"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks transparency on APR rates, monthly fees, or minimum balance requirements for deposit accounts",
+    "No information provided about credit score requirements for loan products",
+    "Limited details on mobile app features compared to competitors' offerings",
+    "Credit card application process requires manual PDF download, printing, and faxing rather than online application",
+    "No mention of deposit insurance (FDIC) coverage details or limits on the website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +67,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3183,
   "latitude": 29.1973768151963,
   "longitude": -96.2687883340252,
@@ -93,12 +109,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking agricultural or commercial lending with local bank relationship",
+    "Customers who prefer traditional banking with physical branches and comprehensive loan access",
+    "Individuals managing finances across multiple accounts who benefit from TransferNow integration",
+    "Business customers needing treasury management services and merchant processing capabilities"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "NewFirst National Bank is best for small business owners and individuals seeking a full-service community bank with specialized lending for agriculture and commercial ventures, plus convenient digital banking options. The main caveat is that the website provides insufficient detail on rates, fees, and credit requirements to determine actual competitiveness, requiring direct contact with the bank for specific product terms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +123,10 @@
   ],
   "phone": "",
   "address": "200 E Jackson St, El Campo, TX 77437",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Murphy Bank",
   "slug": "murphy-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Fresno, CA. $365M in assets. 2 offices.",
-  "description_long": "Murphy Bank is a community bank located in Fresno, CA, established in 1984. The bank holds approximately $365M in total assets and $304M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured specialty bank established in 1984, focusing on mobile home loans, farm equipment financing, and commercial vehicle loans across California.",
+  "description_long": "Murphy Bank was founded in 1984 by Charles \"Mike\" Murphy with a mission to provide honest, high-quality banking services to individuals and small businesses in California. The bank grew out of Murphy's 30+ years of finance experience and his determination to avoid the marginal banking practices he witnessed harming customers and companies. Today, Murphy Bank maintains FDIC insurance and operates as a specialty bank with a clear focus on underserved lending segments rather than traditional consumer banking.\n\nMurphy Bank offers three primary lending specialties: mobile home financing (purchases, refinancing, and improvements), farm equipment and machinery loans (new and used), and commercial trucking and vehicle financing (semi-trucks and owner-operator vehicles). Beyond lending, the bank provides Certificates of Deposit and savings accounts, positioning itself as a full-service financial institution. The bank operates two main offices serving California\u2014one in Fresno and one in San Luis Obispo\u2014with dedicated phone lines for savings and lending inquiries.\n\nWhat distinguishes Murphy Bank is its hyper-specialization in niche lending categories where mainstream banks often have limited expertise or interest. The company emphasizes local decision-making, customized loan structures, and detailed market knowledge in farm, mobile home, and commercial vehicle sectors. The bank also runs a community recognition program called \"Spotlight on Business Awards,\" producing and airing radio advertisements for selected small businesses at no cost, suggesting genuine community investment beyond profit extraction.\n\nHonestly, Murphy Bank appears to be a legitimate regional specialty lender with nearly 40 years of operating history and FDIC backing. However, the website provides no information about loan terms, APR ranges, approval timelines, credit requirements, or pricing\u2014all critical consumer decision factors. The reliance on phone contact for loan inquiries and lack of transparent online application processes may create friction for digitally-oriented borrowers. As a regional bank serving primarily California, geographic limitations will exclude many U.S. consumers.",
   "logo_url": "",
   "website_url": "https://www.murphybank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Mobile home purchase financing",
+    "Mobile home refinancing",
+    "Mobile home improvement loans",
+    "Farm equipment and machinery loans (new and used)",
+    "Farm equipment leasing options",
+    "Semi-truck and commercial vehicle financing",
+    "Owner-operator vehicle financing",
+    "Certificates of Deposit (CDs)",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured deposit accounts",
+    "Customized commercial loan structuring",
+    "Community business recognition and sponsorship programs"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1984",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "39-year operating history (established 1984) demonstrates stability and market expertise",
+    "Specialized lending focus in underserved categories (mobile homes, farm equipment, commercial trucking) with customized loan structures",
+    "Local decision-making and relationship banking model mentioned in customer testimonials",
+    "Community engagement through Spotlight on Business Awards program (free radio advertising for selected small businesses)",
+    "Two physical locations with dedicated lending and savings phone lines for direct contact",
+    "Positive customer testimonials specifically mentioning fast, professional, and friendly service"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No online pricing transparency\u2014APR ranges, fees, and loan terms not disclosed on website; requires phone inquiry",
+    "Geographic limitation: serves primarily California only (Fresno and San Luis Obispo offices); unavailable to most U.S. consumers",
+    "No online loan application process visible; appears to require phone contact and manual underwriting, potentially slower than digital competitors",
+    "Limited product breadth\u2014specialization in three loan categories means no personal loans, auto loans for regular consumers, or traditional mortgage products",
+    "Website lacks clear credit score requirements, debt-to-income limits, or approval timeline information"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 25726,
   "latitude": 36.8117199823315,
   "longitude": -119.808004991993,
@@ -93,12 +104,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "California residents purchasing or refinancing mobile homes seeking specialized lending expertise",
+    "Farm owners and agricultural operators needing equipment financing with lenders familiar with farming business cycles",
+    "Commercial truck operators and small trucking business owners seeking semi-truck and vehicle financing"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Murphy Bank is best suited for California-based agricultural operators, mobile home buyers, and commercial trucking business owners who value specialized lending expertise and relationship banking over digital convenience. The main caveat is lack of online transparency regarding rates and terms, plus geographic limitation to California and specialization constraints that eliminate most consumer segments.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "5180 N Palm Ave, Fresno, CA 93704",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

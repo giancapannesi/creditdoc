@@ -1,15 +1,15 @@
 {
   "name": "Sweetwater Regional",
   "slug": "sweetwater-regional",
-  "category": "payday-alternatives",
+  "category": "atm",
   "subcategories": [
     "credit-union",
     "fdic-equivalent",
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "Federal Credit Union in , . Low-income designated. NCUA insured. 3 locations.",
-  "description_long": "Sweetwater Regional is a federal credit union serving members in , , established in 1956. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) — small, affordable loans designed to replace predatory payday lending. The credit union operates 3 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "ERROR: This is not a financial services company. Sweetwater Summit Regional Park is a San Diego County public park offering camping, day-use facilities, trails, and recreational activities\u2014not consumer finance services.",
+  "description_long": "CRITICAL MISCATEGORIZATION DETECTED: Sweetwater Regional (Sweetwater Summit Regional Park) is a 3,218 Summit Meadow Road public recreation facility operated by San Diego County Parks and Recreation, not a payday-alternative lender or any financial services company. The website content provided shows exclusively park amenities including camping reservations, day-use hours, parking information, hiking trails, and recreational activities. There is no evidence of lending, credit products, loan services, or financial assistance offerings on this domain. The URL https://www.sdparks.org/content/sdparks/en/park-pages/SweetwaterSummit.html confirms this is an official San Diego Parks Department property page. This entry appears to have been created in error, possibly due to a data import mistake, name confusion, or deliberate mistagging. No legitimate financial services profile can be built from park recreation content. The company does not offer payday loans, alternative credit products, or any consumer finance services whatsoever. CreditDoc should remove this entry entirely or recategorize it as non-financial.",
   "logo_url": "",
   "website_url": "https://www.sdparks.org/content/sdparks/en/park-pages/SweetwaterSummit.html",
   "affiliate_url": "",
@@ -24,25 +24,27 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)",
-    "Payday Alternative Loans (PALs)"
+    "Campsite reservations",
+    "Day-use park access ($5 parking)",
+    "Seasonal splash pad",
+    "Fishing at Sweetwater Reservoir",
+    "15 miles of hiking trails",
+    "Picnic area rentals",
+    "Community room rentals",
+    "Play areas and exercise course"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
+    "Not-for-profit \u2014 typically lower fees and better rates than banks",
+    "NCUA insured \u2014 deposits protected up to $250,000",
     "Established in 1956",
     "Member-owned cooperative",
-    "Low-income designated — may offer Payday Alternative Loans (PALs)"
+    "Low-income designated \u2014 may offer Payday Alternative Loans (PALs)"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "CRITICAL: This is a public recreational park with zero financial services offerings",
+    "Completely miscategorized in payday-alternatives category",
+    "No lending products, credit services, or financial assistance available",
+    "Website contains only park reservation and activity information"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +54,7 @@
   "founded_year": 1956,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "11377",
   "published": true,
   "review_status": "draft",
@@ -97,15 +99,17 @@
     "Payday loan alternatives (PALs)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "PROFILE INVALID: Sweetwater Summit Regional Park is a San Diego County public park facility, not a financial services company. This entry should be removed from CreditDoc entirely as it serves zero consumer finance functions and cannot ethically be presented as a payday alternative or any lending product.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
-  "website_needs_review": true
+  "website_needs_review": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }
