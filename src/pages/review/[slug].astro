@@ -188,10 +188,11 @@ const websiteWarnings: Record<string, { label: string; detail: string }> = {
 const warning = websiteWarnings[websiteStatus];
 
 // FinancialService inherits from LocalBusiness in schema.org.
-// Use single type — Google's Rich Results Test rejects array types as parent for Review snippets.
+// Google requires an eligible type (LocalBusiness, Product, etc.) for Review snippets.
+// Array type includes both for semantic accuracy + rich result eligibility.
 const financialService: Record<string, any> = {
   '@context': 'https://schema.org',
-  '@type': 'FinancialService',
+  '@type': ['FinancialService', 'LocalBusiness'],
   name: lender.name,
   description: lender.description_short,
   url: lender.website_url?.trim() ? lender.website_url : `https://creditdoc.co/review/${lender.slug}/`,
