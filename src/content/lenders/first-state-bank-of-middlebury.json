@@ -1,14 +1,14 @@
 {
   "name": "First State Bank Of Middlebury",
   "slug": "first-state-bank-of-middlebury",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Middlebury, IN. $813M in assets. 6 offices.",
-  "description_long": "First State Bank Of Middlebury is a community bank located in Middlebury, IN, established in 1910. The bank holds approximately $813M in total assets and $654M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "First State Bank is a locally-owned community bank in Middlebury, Indiana serving consumer, agricultural, business and commercial clients since 1910 with comprehensive deposit, lending, and wealth management services.",
+  "description_long": "First State Bank has operated as an independent community bank for over 110 years, establishing deep roots in Middlebury, Indiana and surrounding areas. Founded in 1910, the institution positions itself around 'hometown values' and local decision-making rather than corporate banking structures. The bank maintains a routing number (071208297) and headquarters at 111 South Main Street in Middlebury, serving multiple locations within their market area.\n\nThe bank offers a full spectrum of consumer banking products including checking and savings accounts, credit cards with rewards programs (earning 10 cents per transaction when swiped as credit), personal loans, mortgages, and trust and wealth management services. For business customers, they provide commercial checking and savings accounts, business credit and borrowing products, and online banking tools. Their digital offerings include 24/7 online banking, mobile app access, bill pay, person-to-person payments through FSB Fast Pay and Zelle integration, mobile check deposit, digital wallet compatibility, and debit card management features with transaction alerts and budgeting tools.\n\nFirst State Bank distinguishes itself through community-focused banking, school spirit debit card programs tied to local institutions, and long-standing relationships in their service area. They emphasize security features (card on/off switches, secure messaging), convenience through online account opening, and educational resources including financial literacy content. The bank actively promotes scam prevention awareness as a community responsibility, positioning itself as a partner in customer financial protection.\n\nAs a regional community bank, First State Bank provides personalized service and local decision-making that larger institutions cannot match. However, their geographic footprint is limited to the Middlebury, Indiana area and surrounding communities, and their online presence suggests a smaller technology infrastructure compared to national banks or neobanks. The bank serves customers seeking relationship-based banking with direct community ties rather than those prioritizing cutting-edge fintech features or the widest product variety.",
   "logo_url": "",
   "website_url": "https://www.Bfirst.bank",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts with online account opening",
+    "Business checking and savings accounts for commercial clients",
+    "Personal and business credit cards with rewards programs",
+    "Mortgage lending including home purchase and refinancing",
+    "Personal loans and business credit products",
+    "Trust and wealth management services",
+    "24/7 online banking with bill pay and fund transfers",
+    "Mobile banking app with mobile check deposit",
+    "Person-to-person payments via FSB Fast Pay and Zelle",
+    "Digital wallet integration and debit card management",
+    "School spirit debit card programs",
+    "Financial literacy resources and calculators"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1910",
-    "Local community bank with personal service",
-    "6 locations"
+    "Online account opening available for quick account establishment",
+    "24/7 online and mobile banking with comprehensive digital features",
+    "Rewards checking with 10 cents earned per credit card transaction",
+    "School spirit debit card program supporting local schools",
+    "FSB Fast Pay person-to-person payment service and Zelle integration",
+    "Trust and wealth management services for estate planning",
+    "Mobile check deposit and digital wallet support",
+    "Over 110 years of local community banking experience"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic service area limited to Middlebury, Indiana region; no national footprint",
+    "Limited information provided about specific loan terms, interest rates, and APR offerings",
+    "Smaller institution may have fewer ATM locations compared to national banks",
+    "Website lacks detail on minimum account balances, monthly fees, or product-specific terms",
+    "No clear information about business loan programs, SBA lending, or commercial credit options"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "IN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8745,
   "latitude": 41.6748240132233,
   "longitude": -85.7064180009563,
@@ -87,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Middlebury, Indiana residents seeking relationship-based community banking with local decision-making",
+    "Small business owners and agricultural customers in the local service area",
+    "Families wanting to support local schools through school spirit debit card programs",
+    "Customers prioritizing trust and wealth management services with personal relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First State Bank is best suited for customers in the Middlebury, Indiana area seeking personalized community banking with local ownership, long-standing relationships, and comprehensive financial services. The primary caveat is geographic limitation\u2014this bank only serves its local region and is not accessible to customers outside the Middlebury area, making it unsuitable for those seeking national banking reach or digital-first banking experiences.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,10 @@
   ],
   "phone": "",
   "address": "111 South Main Street, Middlebury, IN 46540",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

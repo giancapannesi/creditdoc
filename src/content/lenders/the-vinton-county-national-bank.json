@@ -1,14 +1,14 @@
 {
   "name": "The Vinton County National Bank",
   "slug": "the-vinton-county-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Mcarthur, OH. $1541M in assets. 17 offices.",
-  "description_long": "The Vinton County National Bank is a community bank located in Mcarthur, OH, established in 1867. The bank holds approximately $1541M in total assets and $1355M in deposits. It operates 17 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Vinton County National Bank is a community bank serving Southern and Central Ohio with 16 branch locations offering checking, savings, loans, and credit cards.",
+  "description_long": "Vinton County National Bank (VCNB) is a regional community bank headquartered in McArthur, Ohio, serving Southern and Central Ohio communities. The bank operates 16 physical branch locations across the region, including branches in Ashville, Bremen, Canal Winchester, Chillicothe, Circleville, Commercial Point, Grove City, Jackson, Lancaster, Laurelville, Logan, McArthur, Pataskala, and Richmond Dale, plus an ATM-only location in Wilkesville. VCNB positions itself as a family-oriented community bank focused on local service and accessibility. The bank offers a comprehensive suite of consumer and business banking products. On the personal side, VCNB provides multiple checking account options (Rewards Checking, Classic Checking, Checking My Way, Student accounts, and Community Champion Checking), savings products including Health Savings Accounts and Ohio Homebuyer Plus Savings, CDs and IRAs, and lending products including auto loans, personal loans, mortgage loans with various programs (fixed/adjustable rates, FHA/VA/USDA, land and construction loans, manufactured home loans, and equity loans). The bank also issues custom debit cards, credit cards with uChoose Rewards program, and gift/reloadable cards. For business customers, VCNB offers business checking, Health Savings Accounts, CDs, and business lending. VCNB distinguishes itself through its extensive local branch network in a multi-county region and community-focused branding emphasizing personal service. The bank provides online and mobile banking platforms, Zelle integration, and ATM access across its network. Their customer service appears accessible, with AudioEye accessibility features and a central phone line (800.542.5004) for inquiries and appointments. The bank operates as a traditional community banking institution rather than a fintech or neobank, emphasizing in-person relationships and local decision-making typical of regional banks. Most information on their website focuses on product menus rather than detailed terms, rates, or competitive positioning, which is typical for established regional banks.",
   "logo_url": "",
   "website_url": "https://www.vcnbfamily.bank",
   "affiliate_url": "",
@@ -23,23 +23,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts (Rewards, Classic, Checking My Way, Student, Community Champion)",
+    "Savings and money market accounts",
+    "Ohio Homebuyer Plus Savings product",
+    "Health Savings Accounts (personal and business)",
+    "CDs and IRAs",
+    "Auto loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage loans (fixed/adjustable, FHA/VA/USDA programs, land, construction, manufactured home, equity loans)",
+    "Business checking accounts",
+    "Business loans and lending services",
+    "Credit cards with uChoose Rewards program",
+    "Debit cards and custom debit cards",
+    "Gift and reloadable cards",
+    "Online and mobile banking",
+    "Zelle money transfer service"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1867",
-    "Local community bank with personal service",
-    "17 locations"
+    "16 branch locations across Southern and Central Ohio providing extensive local coverage",
+    "Multiple checking account options tailored to different customer segments (students, rewards seekers, community-focused customers)",
+    "Comprehensive mortgage lending including FHA, VA, USDA, land, construction, and manufactured home loans",
+    "uChoose Rewards credit card program offering customizable rewards",
+    "Online and mobile banking with Zelle payment integration",
+    "Health Savings Accounts available for both personal and business customers",
+    "Accessibility features including AudioEye toolbar for vision-impaired users"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information on interest rates, APYs, loan terms, or fees for comparison shopping",
+    "Limited details on credit card features, rewards rates, or annual fees",
+    "No information about minimum account balances or account maintenance requirements",
+    "Small regional bank with limited geographic reach outside Southern and Central Ohio",
+    "No indication of digital-only accounts or remote account opening capabilities"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +65,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 6636,
   "latitude": 39.247091002412,
   "longitude": -82.480629991032,
@@ -93,12 +107,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Southern and Central Ohio residents seeking in-person banking relationships and local branch access",
+    "Customers needing comprehensive mortgage options including specialty programs (FHA, VA, USDA, construction)",
+    "Small business owners requiring business checking and lending products from a community-focused bank",
+    "Health savings account users needing HSA products from a local institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "VCNB is best suited for individuals and small businesses in Southern and Central Ohio seeking traditional community banking with strong local branch presence and personalized service. The main caveat is that their website provides limited transparency on specific rates, fees, and terms, requiring direct contact with the bank for detailed product information and rate comparisons.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +121,11 @@
   ],
   "phone": "",
   "address": "203 West Main Street, Mcarthur, OH 45651",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

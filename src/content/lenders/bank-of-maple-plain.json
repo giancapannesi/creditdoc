@@ -1,14 +1,14 @@
 {
   "name": "Bank Of Maple Plain",
   "slug": "bank-of-maple-plain",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Maple Plain, MN. $85M in assets. 1 office.",
-  "description_long": "Bank Of Maple Plain is a community bank located in Maple Plain, MN, established in 1905. The bank holds approximately $85M in total assets and $74M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving Maple Plain, MN since 1905, offering FDIC-insured checking, savings, mortgages, and business banking with local decision-making.",
+  "description_long": "Bank of Maple Plain is a community bank established in 1905 that continues to serve the Maple Plain, Minnesota area with traditional and digital banking services. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing deposit protection for customers. With over a century of local presence, the bank emphasizes personal relationships and avoiding automated customer service systems.\n\nThe bank offers a comprehensive suite of retail and business banking services. For consumers, these include checking and savings accounts, mortgage loans for home purchase, refinancing, and construction, online and mobile banking, debit cards with MasterCard acceptance, and access to 37,000 surcharge-free MoneyPass ATMs nationwide. For businesses, Bank of Maple Plain provides dedicated business banking services with direct access to decision-makers, designed to support business growth and goal achievement.\n\nBank of Maple Plain distinguishes itself through its commitment to personalized customer service and local decision-making. The bank explicitly promises customers will not encounter automated phone systems or \"buttons to push,\" emphasizing real human interaction. Their mobile banking app includes biometric login and check deposit features. The debit card offers contactless technology and mobile wallet compatibility, combining modern features with traditional community banking values.\n\nAs a small community bank, Bank of Maple Plain is best suited for customers who prioritize personal relationships and local banking over digital-first experiences. The bank's limited geographic footprint (single location in Maple Plain) and focus on traditional banking hours may be restrictive for customers requiring extensive branch networks or 24/7 service centers. Customers seeking specialized financial products or competitive rates across multiple product categories should compare offerings, as community banks may have limitations in rate competitiveness or product breadth compared to larger institutions.",
   "logo_url": "",
   "website_url": "https://www.bankofmapleplain.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking accounts",
+    "FDIC-insured savings accounts",
+    "Online banking with secure messaging",
+    "Mobile banking app with biometric login and check deposit",
+    "Phone banking services",
+    "Mortgage loans for home purchase, construction, and refinancing",
+    "Business checking and banking services",
+    "MasterCard debit card with contactless and mobile wallet technology",
+    "ATM access to 37,000 surcharge-free MoneyPass ATMs",
+    "Check reordering services",
+    "Financial calculators",
+    "Fraud monitoring and lost/stolen card reporting"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "No automated phone systems; direct access to human customer service representatives",
+    "Access to 37,000 surcharge-free MoneyPass ATMs across the country despite single physical location",
+    "Mobile banking app with biometric login and mobile check deposit functionality",
+    "Debit card with contactless technology and mobile wallet enabled for modern payments",
+    "Direct access to decision-makers for business banking customers invested in their success",
+    "Established community bank with 118+ years of local service since 1905"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Single physical location limits convenience for customers outside Maple Plain, MN area",
+    "Limited lobby hours (9am-4pm Mon-Thu, 9am-5pm Fri) restrict in-person banking accessibility",
+    "No mention of competitive interest rates, online account opening, or digital-first features",
+    "Small community bank may have limited product offerings compared to regional or national banks",
+    "No information provided about checking account fees, minimum balances, or product-specific terms"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9332,
   "latitude": 45.0057060015414,
   "longitude": -93.6505020193991,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Maple Plain, Minnesota residents seeking personal relationships with local banking decision-makers",
+    "Business owners wanting dedicated support from an invested local bank partner",
+    "Customers who prefer human customer service over automated phone systems",
+    "Homebuyers seeking mortgage assistance from a community lender with local expertise"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Maple Plain is best for Maple Plain-area residents and local business owners who value personal relationships and human customer service over digital convenience. The primary caveat is geographic limitation: this single-location community bank serves a narrow geographic area and may not be suitable for customers requiring extensive branch access, 24/7 service, or competitive rates across multiple product categories.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "4980 Highway 12, Maple Plain, MN 55359",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

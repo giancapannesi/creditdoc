@@ -1,13 +1,13 @@
 {
   "name": "Banco Popular De Puerto Rico",
   "slug": "banco-popular-de-puerto-rico",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in San Juan, PR. $59766M in assets. 166 offices.",
-  "description_long": "Banco Popular De Puerto Rico is a community bank located in San Juan, PR, established in 1999. The bank holds approximately $59766M in total assets and $54800M in deposits. It operates 166 office locations. Designated as a Minority Board and Serving Hispanic Community. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Banco Popular de Puerto Rico is a full-service bank offering deposit accounts, credit products, insurance, and investment services to consumers and businesses across Puerto Rico, the US Virgin Islands, and select US locations.",
+  "description_long": "Banco Popular de Puerto Rico (BPPR) is a long-established financial institution serving Puerto Rico and the broader Caribbean region. The bank operates with routing number 021502011 and maintains an extensive branch and ATM network across its service territories. As a traditional commercial bank, it has evolved to offer both in-person and digital banking solutions to meet modern consumer expectations.\n\nThe bank provides a comprehensive suite of financial products including deposit accounts (checking and savings), personal and commercial loans, credit cards (Visa Infinite and Signature offerings), IRAs and investment funds, insurance products through its subsidiary Popular Insurance LLC, and business banking solutions. Digital offerings include Mi Banco (online banking portal), Mi Banco M\u00f3vil (mobile app with text message banking), Web Cash Manager for businesses, Portfolio Online, and Trust Online services. The bank also offers credit monitoring through Mi Cr\u00e9dito, which provides free access to credit reports and credit scores.\n\nBanco Popular distinguishes itself through its deep regional presence in Puerto Rico and the Caribbean, integrated insurance offerings (life insurance LifeCare products, travel insurance), investment products like IRA Total Return Funds, and loyalty programs such as PREMIA rewards. The bank emphasizes security with a dedicated Security Center and positions itself as a digital-forward institution while maintaining traditional branch banking. Commercial clients have access to specialized platforms including Commercial Credit Card Manager, Commercial Images Portal, and Remote Deposit services.\n\nAs a traditional commercial bank, BPPR is well-suited for consumers and businesses seeking comprehensive, locally-rooted financial services with both digital and branch-based options. However, consumers comparing rates and fees should conduct thorough research, as the website does not prominently display specific APRs, deposit rates, or fee schedules. The institution's Puerto Rico focus means limited accessibility for mainland US consumers seeking primary banking relationships.",
   "logo_url": "",
   "website_url": "https://www.popular.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings deposit accounts",
+    "Personal and commercial loan products",
+    "Visa Infinite and Visa Signature credit cards with rewards (PREMIA)",
+    "IRA and investment funds (IRA Popular Total Return Funds)",
+    "Life insurance (LifeCare) and travel insurance through Popular Insurance",
+    "Mi Banco online banking portal with account management",
+    "Mi Banco M\u00f3vil mobile app and text message banking",
+    "Web Cash Manager and Commercial Credit Card Manager for businesses",
+    "Remote deposit and check imaging services",
+    "Mi Cr\u00e9dito free credit score and credit report access",
+    "Portfolio Online and Trust Online investment management",
+    "MultiPago bill payment service"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1999",
-    "Local community bank with personal service",
-    "166 locations"
+    "Extensive local branch and ATM network throughout Puerto Rico and US Virgin Islands",
+    "Integrated insurance subsidiary offering life insurance and travel protection products",
+    "Free credit score and credit report access through Mi Cr\u00e9dito tool",
+    "Comprehensive digital banking suite including mobile app, online portal, and text banking",
+    "Specialized business banking platforms with remote deposit and cash management tools",
+    "Multi-language support (Spanish/English) reflecting regional customer base",
+    "Loyalty rewards program (PREMIA) integrated with credit card offerings"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display specific deposit rates, loan APRs, or fee schedules for comparison",
+    "Primarily Puerto Rico-focused limits accessibility for mainland US banking customers",
+    "No transparent information about minimum deposit requirements or account opening processes on homepage",
+    "Insurance products involve third-party operator (Chubb/Popular Insurance) adding complexity",
+    "Limited English-language content suggests less accommodation for non-Spanish-speaking customers"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "PR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34968,
   "latitude": 18.4269640240171,
   "longitude": -66.0587196579213,
@@ -92,12 +103,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Puerto Rico and US Virgin Islands residents seeking comprehensive local banking with branch access",
+    "Small to medium businesses requiring integrated banking, credit, and cash management solutions",
+    "Customers prioritizing regional financial institution relationships with insurance bundling options",
+    "Spanish-speaking consumers preferring bilingual banking support and local community presence"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Banco Popular de Puerto Rico is best for Puerto Rico residents and Caribbean-based consumers and businesses seeking a traditional full-service bank with integrated insurance, investment, and business solutions. The primary caveat is that the website lacks transparent pricing information (rates, fees, minimums), and the institution's regional focus severely limits utility for mainland US customers seeking primary banking relationships.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-29",
   "cities_served": [
@@ -105,9 +117,9 @@
   ],
   "phone": "",
   "address": "209 Avenida Luis Munoz Rivera, San Juan, PR 00918",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
+  "processing_status": "pending_approval",
+  "quality_score": 12,
+  "enrichment_attempts": 1,
   "cfpb_data": {
     "found_in_cfpb": true,
     "cfpb_company_name": "BANCO POPULAR DE PUERTO RICO",
@@ -117,5 +129,8 @@
     "data_period": "2023-present",
     "last_checked": "2026-03-29"
   },
-  "no_index": true
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

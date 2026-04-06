@@ -1,15 +1,15 @@
 {
   "name": "Exchange Bank & Trust",
   "slug": "exchange-bank-trust",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Atchison, KS. $631M in assets. 10 offices.",
-  "description_long": "Exchange Bank & Trust is a community bank located in Atchison, KS, established in 1856. The bank holds approximately $631M in total assets and $543M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal, business, and military checking/savings accounts, loans, mortgages, and credit cards with locations in Kansas.",
+  "description_long": "Exchange Bank & Trust is a traditional community bank headquartered in Kansas with a demonstrated history of over 160 years serving local farmers and residents. The bank holds FDIC insurance backing, providing deposit protection up to regulatory limits. They maintain physical locations in Atchison, Leavenworth, and Basehor, Kansas, and offer comprehensive financial services across personal, business, and military customer segments.\n\nThe bank provides a full suite of deposit products including multiple checking account tiers (Flex, Rewards, 50 Plus Interest, Commercial, Military variants), savings accounts, money market accounts, and CDs. Loan offerings span personal term loans, auto loans, home mortgages, HELOCs, agricultural loans, commercial real estate financing, equipment loans, business lines of credit, working capital loans, and SBA loans. They also issue personal and business credit cards, provide investment services, and offer Medicare solutions for qualifying customers.\n\nExchange Bank & Trust differentiates itself through specialized account structures for distinct demographics: senior-focused 50 Plus accounts, youth savings accounts, military-exclusive checking with preferential rates, and agricultural lending expertise spanning 160+ years. They provide digital banking capabilities, person-to-person payments, remote deposit capture, merchant services, and cash management tools. The bank emphasizes accessibility (AudioEye enabled website) and community involvement through their published Community Reinvestment Act file.\n\nAs a regional community bank, Exchange Bank & Trust is best suited for customers seeking relationship banking with local branch access in the Kansas tri-city area. The main caveat is geographic limitation\u2014their physical footprint appears concentrated in northeastern Kansas, which may not serve customers in other states or those preferring nationwide branch networks. Online banking and digital-first consumers may find larger national banks more feature-rich.",
   "logo_url": "",
   "website_url": "https://WWW.EBT.BANK",
   "affiliate_url": "",
@@ -24,23 +24,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Flex, Rewards, 50 Plus, Interest)",
+    "Business checking and commercial checking accounts",
+    "Military checking accounts (Advantage, Executive, Interest, Rewards variants)",
+    "Personal and business savings accounts",
+    "Money market accounts",
+    "Certificates of Deposit (CDs) for personal and business",
+    "Home mortgage loans and home equity lines of credit (HELOC)",
+    "Auto loans with free pre-approval",
+    "Commercial real estate loans",
+    "SBA loans and small business financing",
+    "Equipment loans",
+    "Agricultural loans",
+    "Business and personal credit cards"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1856",
-    "Local community bank with personal service",
-    "10 locations"
+    "FDIC-insured deposits with full faith and credit of U.S. Government backing",
+    "Specialized military checking accounts with dedicated rates and services for active duty and veterans",
+    "Over 160 years of agricultural lending expertise and community farming relationships",
+    "Multiple account tiers designed for specific demographics (50+ seniors, youth, military, small business)",
+    "Comprehensive loan products including SBA loans, equipment financing, and commercial real estate",
+    "Free pre-approval on auto loans to help customers negotiate from strength",
+    "Digital banking, person-to-person payments, and remote deposit capture capabilities",
+    "Accessibility-focused website with AudioEye toolbar and optimization features"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: Physical locations only in Atchison, Leavenworth, and Basehor, Kansas\u2014not suitable for out-of-state customers needing branch access",
+    "Limited information on website regarding specific APR/rates, fees, or loan terms to compare competitively",
+    "No mention of mobile app features, mobile check deposit specifics, or modern digital banking parity with national banks",
+    "Credit card section shows 'Sorry, content not available'\u2014offerings not detailed on website",
+    "No information provided about minimum account balances, overdraft fees, or monthly maintenance charges"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4619,
   "latitude": 39.5616189854041,
   "longitude": -95.1207470126081,
@@ -94,12 +107,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Kansas-based small business owners seeking relationship lending and agricultural expertise",
+    "Active military members and veterans in northeastern Kansas seeking specialized military accounts",
+    "Farmers and agricultural businesses leveraging 160+ years of farm lending experience",
+    "Customers ages 50+ in the bank's service area seeking senior-focused checking and savings products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Exchange Bank & Trust is best for Kansas-area customers (particularly farmers, seniors, military, and small business owners) seeking relationship banking with FDIC insurance and community expertise. The primary caveat is strict geographic limitation\u2014their service footprint appears confined to northeastern Kansas, making them unsuitable for customers outside this region or those requiring nationwide branch access.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,11 @@
   ],
   "phone": "",
   "address": "600 Commercial St, Atchison, KS 66002",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

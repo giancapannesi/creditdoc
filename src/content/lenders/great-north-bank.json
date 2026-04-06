@@ -1,14 +1,14 @@
 {
   "name": "Great North Bank",
   "slug": "great-north-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Florence, WI. $218M in assets. 3 offices.",
-  "description_long": "Great North Bank is a community bank located in Florence, WI, established in 1891. The bank holds approximately $218M in total assets and $172M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Veteran-owned independent bank offering personal banking, mortgage loans, and business banking services across multiple states with online and branch access.",
+  "description_long": "Great North Bank is a veteran-owned, independently operated financial institution that positions itself as committed to personalized banking relationships. The bank was founded with a mission to serve customers through tailored financial solutions rather than one-size-fits-all products. They operate physical locations across multiple states (DC, FL, MI, MD, VA, WI) and offer digital banking capabilities including online banking and Zelle integration.\n\nThe bank's service offerings span three primary segments: Personal Banking with customized account solutions, Mortgage Loans for home purchases with flexible options designed to make financing convenient and affordable, and Business Banking with services tailored to specific business needs. They provide account opening through an online portal that requires standard identification (SSN, driver's license/passport) and maintains a minimum opening deposit requirement. Customer support is available via phone at 844.688.4844 during standard business hours (8:30am-4:30pm CT, M-F) and email contact.\n\nWhat distinguishes Great North Bank is its explicit veteran ownership branding and emphasis on independence from larger banking networks. This positioning suggests a focus on community-oriented banking and personalized service rather than competing on rate competitiveness. The bank maintains both digital and physical infrastructure, indicating a hybrid banking model.\n\nAs a regional bank with limited geographic footprint, Great North Bank's primary limitation is geographic availability restricted to six states. The website provides minimal specific information about rates, fees, account types, or product details\u2014customers must contact the bank directly or visit locations to obtain pricing information. For consumers seeking detailed product comparisons or those outside their service areas, this bank may not be accessible.",
   "logo_url": "",
   "website_url": "https://www.greatnorthbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Online banking portal with login access",
+    "Zelle peer-to-peer payment integration",
+    "Mortgage loans for home purchases",
+    "Mortgage refinancing services",
+    "Business checking and business banking accounts",
+    "Business financial services customized to industry needs",
+    "Account opening application (online)",
+    "Phone customer support (844.688.4844)",
+    "Email support for account opening and general inquiries",
+    "Physical branch locations in six states",
+    "Deposit services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1891",
-    "Local community bank with personal service",
-    "3 locations"
+    "Veteran-owned business model with explicit commitment to supporting veteran community",
+    "Offers both online banking and physical branch locations for hybrid service access",
+    "Zelle integration for fast peer-to-peer money transfers included in online banking",
+    "Personalized approach to banking with emphasis on tailored solutions rather than standardized products",
+    "Multiple service lines (personal, mortgage, business) allow customers to consolidate banking relationships",
+    "Dedicated customer support available by phone and email during business hours",
+    "Online account opening available for qualified applicants in service states"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitations: only operates in DC, FL, MI, MD, VA, and WI\u2014unavailable to most U.S. consumers",
+    "Website lacks specific information on rates, fees, minimum balances, or account features\u2014requires direct contact to compare products",
+    "No published information about mobile app, mobile banking, or digital-only account types",
+    "Opening deposit requirement exists but amount not specified on website",
+    "Limited transparency on mortgage loan rates, terms, or lending criteria compared to larger competitors"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15146,
   "latitude": 45.9221700094278,
   "longitude": -88.2502619960579,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Residents of DC, FL, MI, MD, VA, or WI seeking community bank relationship with veteran-owned business",
+    "Veterans and military families seeking to support veteran-owned financial institutions",
+    "Small business owners in service states needing customized business banking solutions",
+    "Homebuyers in service areas open to personalized mortgage guidance and flexible lending options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Great North Bank is best for residents of its six-state service area (DC, FL, MI, MD, VA, WI) who value veteran-owned banking and prefer personalized service over digital-first convenience. The primary caveat is severely limited geographic availability and minimal online transparency about specific products, rates, and fees\u2014customers must engage directly with the bank to evaluate offerings.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "541 Central Ave, Florence, WI 54121",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,7 +1,7 @@
 {
   "name": "Tucumcari Federal Savings And Loan Association",
   "slug": "tucumcari-federal-savings-and-loan-association",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
@@ -9,8 +9,8 @@
     "mutual-bank",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Tucumcari, NM. $37M in assets. 1 office.",
-  "description_long": "Tucumcari Federal Savings And Loan Association is a community bank located in Tucumcari, NM, established in 1934. The bank holds approximately $37M in total assets and $27M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Mutual savings bank serving Tucumcari and Quay County since 1934, offering mortgages, deposit accounts, and online banking with local underwriting and community reinvestment focus.",
+  "description_long": "Tucumcari Federal Savings & Loan Association (TFSL) has operated as a community-focused mutual bank in Tucumcari, New Mexico for over 90 years, established in 1934. As a mutual bank, it is owned by its account holders rather than external shareholders, allowing the institution to prioritize member interests over investor returns. The bank reinvests profits directly into the Tucumcari and Quay County community through local donations, sponsorships, and small business support.\n\nTFSL offers a range of financial services including mortgage lending for home purchases and refinancing, deposit accounts (savings and checking), online and mobile banking, bill pay and fund transfers, and personal financial advisory services. Their mortgage division emphasizes local underwriting, competitive rates, and personalized service throughout the loan lifecycle. The bank provides 24/7 access to accounts through mobile-friendly online banking tools and maintains multiple customer service channels including phone support and in-person visits.\n\nThe institution distinguishes itself through several key commitments: it will never sell or transfer customer loans (maintaining life-of-loan service), employs a board of directors composed of local business leaders, and provides personalized financial advice tailored to individual goals. Their mutual structure means profits are reinvested locally rather than distributed to distant shareholders. The bank actively sponsors community events, supports local 4-H programs, and partners with organizations like Tucumcari MainStreet.\n\nAs a small, regional mutual bank, TFSL is best suited for customers seeking local relationships and community-focused banking in the Tucumcari area. While they offer competitive products and genuine commitment to their community, their geographic service area appears limited to New Mexico, and their product range is more traditional than that of larger regional or national banks. FDIC insurance provides deposit protection up to regulatory limits.",
   "logo_url": "",
   "website_url": "https://www.tucfed.com",
   "affiliate_url": "",
@@ -25,23 +25,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Mortgage lending for home purchase",
+    "Mortgage refinancing",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts",
+    "Online banking access",
+    "Mobile banking",
+    "Bill pay",
+    "Fund transfers",
+    "Personalized financial advisory",
+    "Debit/ATM cards with PIN management",
+    "Lost or stolen card reporting",
+    "Card fraud reporting and protection"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1934",
-    "Local community bank with personal service",
-    "1 location"
+    "Mutual bank structure owned by account holders, ensuring profits reinvest locally rather than go to external shareholders",
+    "Commitment to life-of-loan service\u2014TFSL never sells or transfers customer loans to third parties",
+    "Local underwriting with approval decisions made by people who know the community, not call centers",
+    "Over 90 years of continuous service to Tucumcari and Quay County with strong community involvement",
+    "24/7 mobile-friendly online banking with bill pay, transfers, and account management",
+    "Personalized financial advice from knowledgeable staff tailored to individual customer goals",
+    "FDIC insurance backing deposits with full faith and credit of U.S. Government"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area restricted to Tucumcari and Quay County, New Mexico",
+    "As a small regional bank, likely offers fewer product varieties and technology features than large national competitors",
+    "Website content does not specify mortgage rates, loan terms, or competitive rate comparisons",
+    "No mention of specialized lending products like FHA, VA, or reverse mortgages despite being in mortgage category",
+    "Small mutual banks may have higher overhead reflected in fees or rates compared to larger institutions"
   ],
   "contact": {
     "phone": "",
@@ -53,7 +64,7 @@
   "states_served": [
     "NM"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29059,
   "latitude": 35.1767410036068,
   "longitude": -103.725132971874,
@@ -95,12 +106,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Tucumcari residents seeking mortgage financing with personalized service and local underwriting",
+    "Community-minded depositors who want to support local reinvestment rather than distant shareholders",
+    "Homebuyers and refinancers preferring to maintain relationships with the same lender throughout the loan lifecycle",
+    "Small business owners in Quay County seeking local banking relationships and business support"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Tucumcari Federal is best for homebuyers and existing residents of Tucumcari/Quay County seeking local relationship banking with genuine community commitment and life-of-loan service continuity. The primary caveat is geographic limitation\u2014this mutual bank serves only a small regional market, so it is not accessible to customers outside the Tucumcari area.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +120,11 @@
   ],
   "phone": "",
   "address": "301 S 1St St, Tucumcari, NM 88401",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

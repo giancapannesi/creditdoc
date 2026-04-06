@@ -1,14 +1,14 @@
 {
   "name": "Grand Savings Bank",
   "slug": "grand-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Grove, OK. $1014M in assets. 15 offices.",
-  "description_long": "Grand Savings Bank is a community bank located in Grove, OK, established in 1981. The bank holds approximately $1014M in total assets and $891M in deposits. It operates 15 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank offering personal and business checking, savings, mortgages, loans, and digital banking services across multiple branch locations.",
+  "description_long": "Grand Savings Bank is a community-focused financial institution celebrating over 40 years of service, with a strong presence in the Fort Smith area. The bank positions itself around convenience and personalized service, emphasizing that banking should be built around customer needs rather than forcing customers to fit rigid banking models.\n\nThe bank offers a comprehensive suite of retail and commercial banking products. Personal services include checking and savings accounts, consumer loans, mortgage lending, investing and retirement planning, and digital tools including mobile banking and text banking. For businesses, GSB provides commercial checking and savings accounts, business borrowing, and tailored commercial solutions. The bank also features newer offerings like a digital wallet for point-of-sale payments, positive pay fraud prevention, e-Documents enrollment, and text banking through a dedicated customer care center.\n\nGrand Savings Bank differentiates itself through genuine community banking values and modern digital accessibility. Rather than positioning as a large national bank, GSB emphasizes local relationship banking\u2014recently welcoming a new Market President\u2014while simultaneously offering contemporary digital conveniences like mobile check deposit, real-time transaction tracking, and text-based customer support. The bank provides mortgage specialists and customized business solutions, suggesting a consultative approach.\n\nAs a regional community bank, GSB is best suited for customers seeking personal relationships with their bank while maintaining access to modern digital tools. The main limitation is geographic reach, as services appear concentrated in the Fort Smith area, making this less suitable for customers requiring nationwide branch networks. Their product depth appears solid but not exceptional compared to national banks.",
   "logo_url": "",
   "website_url": "https://www.grandsavingsbank.com",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Consumer loan applications",
+    "Mortgage loans and refinancing",
+    "Mobile banking application",
+    "Text banking via customer care center",
+    "Digital wallet for contactless payments",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Commercial and business loans",
+    "Positive Pay check fraud prevention",
+    "e-Documents enrollment and digital document management"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1981",
-    "Local community bank with personal service",
-    "15 locations"
+    "Text banking available through dedicated customer care center (918-787-8555) for convenient customer support",
+    "Mobile banking app with real-time transaction tracking, mobile check deposit, and bill pay capabilities",
+    "Positive Pay fraud prevention tool available to prevent check fraud before it occurs",
+    "Digital wallet for contactless point-of-sale payments directly from smartphone",
+    "e-Documents enrollment to reduce paper clutter and manage documents digitally",
+    "40+ years of established community banking heritage and local presence",
+    "Customized banking solutions designed to meet individual and business-specific needs"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint, primarily serving Fort Smith area, restricting accessibility for out-of-region customers",
+    "Requires in-person branch visit for identification verification even with online application submission",
+    "Website lacks specific details on loan rates, APRs, account fees, or product terms",
+    "No mention of FDIC insurance limits or deposit protection details for customer reassurance"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 32084,
   "latitude": 36.5857009992868,
   "longitude": -94.7697099739545,
@@ -93,12 +103,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Fort Smith area residents seeking community bank relationships with modern digital convenience",
+    "Small business owners needing personalized commercial banking solutions and local relationship managers",
+    "Homebuyers who value direct access to mortgage specialists and consultative home financing guidance",
+    "Customers who prefer text-based and mobile banking support over traditional phone or in-branch interactions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Grand Savings Bank is best for Fort Smith-area customers and small business owners who value personal relationships with local bankers combined with modern digital banking tools. The primary caveat is geographic limitation\u2014this is a regional community bank with no indication of nationwide presence, making it unsuitable for customers requiring multi-state branch access or those outside the Fort Smith market.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,10 @@
   ],
   "phone": "",
   "address": "1022 S Main St, Grove, OK 74344",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

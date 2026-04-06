@@ -1,14 +1,14 @@
 {
   "name": "Mega Bank",
   "slug": "mega-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in San Gabriel, CA. $510M in assets. 4 offices.",
-  "description_long": "Mega Bank is a community bank located in San Gabriel, CA, established in 2008. The bank holds approximately $510M in total assets and $433M in deposits. It operates 4 office locations. Designated as a Asian or Pacific Islander Americans. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank based in San Gabriel, CA offering personal and business deposit accounts, online banking, and commercial lending products.",
+  "description_long": "Mega Bank is a regional FDIC-insured financial institution headquartered in San Gabriel, California. The bank is backed by the full faith and credit of the U.S. Government through FDIC insurance, providing deposit protection up to federal limits. The institution has earned a Super Premier Performance classification, indicating strong operational and financial metrics within the banking industry.\n\nMega Bank serves both personal and business customers with a comprehensive suite of deposit products including checking accounts, savings accounts, money market accounts, and CDs. On the personal side, they offer individual retirement accounts (IRAs), debit cards, and personal credit cards. Their online and mobile banking platform provides services such as bill pay, Zelle transfers, wire transfers, mobile deposits, and eStatements. For business customers, the bank provides business checking and savings accounts, ACH origination, remote deposit capture, online wire transfers, and business credit cards. The lending division offers commercial real estate financing, construction loans, commercial loans, and small business loans.\n\nMega Bank distinguishes itself through its regional presence in California and emphasis on digital-first banking. The bank maintains physical branch locations with posted hours and offers both iOS and Android mobile banking applications available free in respective app stores. They emphasize security through a dedicated Security Center and provide transparent fee schedules and rate information. The bank publishes financial information, maintains a Community Reinvestment Act (CRA) public file, and operates with clear privacy and compliance disclosures.\n\nAs a regional bank, Mega Bank's reach is geographically limited compared to national institutions, and specific product features, APY rates, and fee structures are not detailed on the public website. Customers considering this institution should review current rates and fee schedules directly, as competitive positioning relative to national and online banks cannot be assessed from available information.",
   "logo_url": "",
   "website_url": "https://www.megabankusa.com",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Money market deposit accounts",
+    "Certificates of deposit (CDs)",
+    "Individual retirement accounts (IRAs)",
+    "Business checking and savings accounts",
+    "Mobile banking and mobile check deposit",
+    "Bill pay and Zelle money transfers",
+    "Wire transfers (personal and business)",
+    "Commercial real estate loans",
+    "Construction loans",
+    "Small business loans"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2008",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits with full government backing",
+    "Dual-platform mobile banking apps available on iOS and Android",
+    "Comprehensive business lending options including commercial real estate, construction, and SBA small business loans",
+    "Digital services including Zelle money transfers, bill pay, and mobile check deposit",
+    "Earned Super Premier Performance classification",
+    "Transparent security focus with dedicated Security Center",
+    "Both personal and business credit card offerings"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic presence (San Gabriel, CA based) with no indication of multi-state branch network",
+    "No specific APY rates, loan rates, or fee amounts disclosed on public website",
+    "No online account opening flow visible on website",
+    "Limited information about minimum balances or account eligibility requirements"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58401,
   "latitude": 34.0798750119656,
   "longitude": -118.103486978497,
@@ -93,12 +103,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "California-based small business owners seeking local commercial lending relationships",
+    "Individuals in San Gabriel area wanting branch-based banking with digital convenience",
+    "Business customers needing specialized services like ACH origination and remote deposit capture"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Mega Bank is best for customers in the San Gabriel, California area seeking a full-service regional bank with both physical branch locations and modern digital banking capabilities. The main caveat is that specific rates, fees, and product terms are not published online, requiring direct contact with the bank for detailed comparisons against national or online banking alternatives.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +116,11 @@
   ],
   "phone": "",
   "address": "245 W Valley Blvd, San Gabriel, CA 91776",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Community Bank",
   "slug": "community-bank-lexington",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Lexington, TN. $347M in assets. 4 offices.",
-  "description_long": "Community Bank is a community bank located in Lexington, TN, established in 1961. The bank holds approximately $347M in total assets and $299M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering personal and business checking, savings, loans, mortgages, and credit cards with online and mobile banking services.",
+  "description_long": "Community Bank is a traditional community bank offering comprehensive personal and business banking services. The institution is FDIC-insured, providing deposit protection backed by the full faith and credit of the U.S. Government. Based on their website presence at community-bank.net and phone number (731) 968-6624, they operate multiple physical branch locations with varying hours.\n\nThe bank provides a full suite of personal banking products including three checking account options (Community Advantage, Community Basic, and Community Interest Checking), savings accounts with high-yield options, money market accounts, and Individual Retirement Accounts (IRAs). For lending, they offer personal loans, home mortgages, home construction loans, home equity lines of credit (HELOC), auto financing through a dedicated Auto Finance Division, and recreational vehicle loans. They also issue personal Visa debit cards and personal credit cards with rewards programs.\n\nFor business customers, Community Bank offers business checking accounts, business Visa debit cards, business credit cards with no annual fees, business term loans, lines of credit, commercial real estate loans, equipment loans, and agriculture-specific lending. Digital services include online banking with bill pay, mobile banking with mobile deposit capability, eStatements, and a Round-Up Savings Program for automated savings. They provide merchant card services and cash management tools for business customers.\n\nAs a traditional brick-and-mortar community bank, Community Bank differentiates itself through local branch presence and personalized service for both consumers and small businesses. However, they experienced online banking maintenance downtime (noted for May 14), and their service offerings are standard for regional banks. They are best suited for customers seeking FDIC-insured products, those preferring in-person branch interactions, and small business owners needing comprehensive commercial services in their service area.",
   "logo_url": "",
   "website_url": "https://www.community-bank.net",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (three tiers: Advantage, Basic, Interest Checking)",
+    "Personal savings accounts including high-yield savings and money market accounts",
+    "Individual Retirement Accounts (IRAs)",
+    "Personal loans and auto financing through Auto Finance Division",
+    "Home mortgages, home construction loans, and home equity lines of credit (HELOC)",
+    "Recreational vehicle loans",
+    "Personal and business Visa debit cards",
+    "Personal and business credit cards with rewards and no annual fees",
+    "Business checking and business loans (term loans, lines of credit, commercial real estate, equipment, agriculture)",
+    "Online banking with bill pay and eStatements",
+    "Mobile banking with mobile deposit",
+    "Round-Up Savings Program and secure document upload"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1961",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits backed by U.S. Government full faith and credit",
+    "Three different personal checking account tiers (Advantage, Basic, Interest) for customer choice",
+    "Dedicated Auto Finance Division for specialized auto and RV lending",
+    "Round-Up Savings Program enabling automated savings from debit card purchases",
+    "Comprehensive business banking including agriculture loans, equipment financing, and commercial real estate",
+    "Business credit cards with no annual fees and competitive rates",
+    "Mobile banking with mobile deposit functionality for convenient account management",
+    "Multiple physical branch locations with extended Saturday hours at some locations"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website experienced online banking maintenance downtime with extended outage periods",
+    "Limited information on interest rates, APYs, and lending terms on public website",
+    "No mention of overdraft protection, minimum balance requirements, or account fee structures",
+    "Standard community bank offerings without distinctive digital-first or innovative product features",
+    "Geographic service limitation to branch locations (likely regional rather than national)"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 31272,
   "latitude": 35.6490750977551,
   "longitude": -88.3924285546594,
@@ -87,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and agricultural enterprises needing comprehensive commercial banking services",
+    "Customers who prefer in-person branch interactions and local relationship banking",
+    "Those seeking FDIC-insured deposits with traditional banking safety and stability",
+    "Auto and vehicle loan applicants who benefit from the dedicated Auto Finance Division"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Community Bank is best for customers in their service area seeking traditional FDIC-insured banking with local branch access and comprehensive personal/business products. The main caveat is that they appear to be a regional community bank with limited geographic reach, and potential customers should verify branch proximity and confirm current service availability given recent website maintenance issues.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +120,10 @@
   "phone": "",
   "address": "19 Natchez Trace Dr S, Lexington, TN 38351",
   "website": "http://www.communitybank.net",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

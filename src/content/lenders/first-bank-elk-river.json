@@ -1,14 +1,14 @@
 {
   "name": "First Bank Elk River",
   "slug": "first-bank-elk-river",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Elk River, MN. $364M in assets. 4 offices.",
-  "description_long": "First Bank Elk River is a community bank located in Elk River, MN, established in 1907. The bank holds approximately $364M in total assets and $270M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "First Bank Elk River is a community bank offering checking, savings, CDs, mortgages, business loans, and personal lending with multiple Minnesota locations.",
+  "description_long": "First Bank Elk River is a traditional community bank headquartered in Elk River, Minnesota, serving the greater Minneapolis-St. Paul metro area through four physical branch locations. The bank operates as an FDIC-insured institution backed by the full faith and credit of the U.S. Government, providing deposit protection for customer accounts.\n\nThe bank offers a comprehensive suite of financial products and services including deposit accounts (checking, savings, CDs, and IRAs), online and mobile banking with remote deposit capability, personal loans for various needs, business banking solutions, mortgage lending services, fraud prevention tools, and personal financial management features through their Insights platform. They provide financial calculators to help customers estimate payments and loan amounts, check reordering services, and access to both proprietary ATMs and MoneyPass ATM networks.\n\nFirst Bank Elk River distinguishes itself through community presence with four branch locations across Elk River, Rogers, and Anoka, Minnesota, offering personalized service during business hours. The bank emphasizes business banking expertise and mortgage lending support, positioning itself as a resource for both personal and commercial banking needs. Their marketing highlights reliable fraud prevention, financial goal-setting tools, and the convenience of modern digital banking alongside traditional in-person service.\n\nAs a regional community bank, First Bank Elk River serves customers seeking local banking relationships rather than national megabank alternatives. The bank's geographic footprint is limited to the Twin Cities metro area, and their website does not disclose specific interest rates, loan terms, minimum balances, or fees. Customers should contact branches directly or visit the website for current CD/IRA rate specials and specific product terms before opening accounts or applying for loans.",
   "logo_url": "",
   "website_url": "https://www.elkriver.bank",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts",
+    "CDs and IRA products with promotional rates",
+    "Online banking and mobile app access",
+    "Remote deposit capture",
+    "Personal loans for various needs",
+    "Business banking and business loans",
+    "Mortgage lending (home purchase and refinance)",
+    "Fraud prevention and security tools",
+    "Personal Financial Management (Insights platform)",
+    "Financial calculators",
+    "Check reordering",
+    "ATM access (proprietary and MoneyPass network)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1907",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits backed by U.S. Government",
+    "Four physical branch locations with extended hours at some locations (8:30am-5pm weekdays, some Saturday hours)",
+    "Mobile app and online banking with remote deposit capability",
+    "Current CD and IRA rate specials advertised on homepage",
+    "Offers both personal loans and dedicated business banking solutions with stated lending expertise",
+    "Mortgage lending team dedicated to home purchase and refinance support",
+    "Personal Financial Management tool (Insights) for budgeting, cash flow, and goal-setting",
+    "Fraud prevention resources and security education for customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Minnesota metro area (Elk River, Rogers, Anoka only)",
+    "Main office lobby hours only 9am-4pm weekdays with no weekend access",
+    "Website does not display current rates, fees, minimum balances, or specific loan terms",
+    "No information about product competitiveness, APRs, or how rates compare to competitors",
+    "Limited details on business loan types, personal loan amounts, or mortgage product specifics"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5136,
   "latitude": 45.3036770016438,
   "longitude": -93.5692439943409,
@@ -93,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Minnesota residents in the Elk River, Rogers, and Anoka areas seeking local community banking",
+    "Small business owners needing dedicated business banking expertise and local relationships",
+    "Customers prioritizing FDIC insurance and in-person branch service over online-only banks",
+    "Homebuyers in the Twin Cities metro area looking for mortgage lending support"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Bank Elk River is best for customers in the Twin Cities metro area who value local community banking relationships, in-person branch access, and FDIC-insured deposits. The main caveat is that specific rates, fees, and loan terms are not transparent on their website\u2014customers must contact branches directly or visit in person to compare products against competitors before making banking decisions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "812 Main St Nw, Elk River, MN 55330",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

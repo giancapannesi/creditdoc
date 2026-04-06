@@ -1,15 +1,15 @@
 {
   "name": "Availa Bank",
   "slug": "availa-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Carroll, IA. $1692M in assets. 15 offices.",
-  "description_long": "Availa Bank is a community bank located in Carroll, IA, established in 1870. The bank holds approximately $1692M in total assets and $1350M in deposits. It operates 15 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering checking, savings, mortgages, business loans, and agricultural financing across Iowa with 24/7 online banking.",
+  "description_long": "Availa Bank is a community-focused financial institution that operates as a traditional full-service bank with FDIC insurance backing. The bank emphasizes local decision-making and availability across multiple service channels, which is reflected in its name and operational philosophy. Founded to serve communities directly, Availa Bank has built its reputation on combining traditional banking services with modern digital convenience.\n\nThe bank offers comprehensive personal banking products including electronic banking, checking and savings accounts, certificates of deposit (CDs), and credit cards. For customers seeking credit management tools, Availa Bank provides Credit Sense, a free credit score monitoring service integrated into their mobile and online banking platforms. Their mortgage lending division emphasizes personalized service, featuring a dedicated team of mortgage lenders and a 24/7 online mortgage application system. The bank also serves business customers with cash management solutions, business checking and savings accounts, credit cards, and merchant processing services. Additionally, Availa Bank provides personal loans, home loans, commercial loans, and specialized agricultural lending to support farming communities.\n\nAvail Bank distinguishes itself through its community-oriented approach and local decision-making capabilities. The bank holds a 5-Star Superior Rating from Bauer Financial, indicating strong financial stability and performance metrics. Beyond financial services, Availa Bank publishes a community impact report documenting team and bank-wide charitable contributions. The bank offers modern conveniences like mobile check deposit (Tap. Snap. Deposit), instant-issue debit cards at physical locations, and card monitoring via text message for fraud protection. Their focus on agricultural lending and business growth demonstrates specialization beyond typical retail banking.\n\nAs a regional community bank, Availa Bank is well-positioned for customers prioritizing local relationship banking and personalized service. However, the website does not provide information about fee structures, interest rates, minimum deposits, or loan terms, making it difficult to assess competitiveness without direct contact. The bank's service area appears concentrated in Iowa, which may limit accessibility for out-of-state customers despite 24/7 online banking availability.",
   "logo_url": "",
   "website_url": "https://www.availa.bank",
   "affiliate_url": "",
@@ -24,23 +24,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "FDIC-insured checking and savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Personal credit cards and business credit cards",
+    "Home mortgage lending with online 24/7 application",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Commercial business loans and cash management",
+    "Agricultural loans and financing",
+    "Free Credit Sense credit score monitoring and management tool",
+    "Mobile check deposit via smartphone",
+    "Instant-issue debit cards",
+    "Merchant processing services for businesses",
+    "Card fraud monitoring and text message alerts"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1870",
-    "Local community bank with personal service",
-    "15 locations"
+    "FDIC-insured deposits backed by full faith and credit of the U.S. Government",
+    "5-Star Superior Rating from Bauer Financial demonstrates strong financial stability",
+    "Free Credit Sense tool for credit score monitoring and management integrated into mobile and online banking",
+    "24/7 online mortgage application system allowing home loan applications anytime, anywhere",
+    "Mobile check deposit feature (Tap. Snap. Deposit) enables deposits via smartphone without visiting branch or ATM",
+    "Instant-issue debit cards available at branch locations for immediate access",
+    "Specialized agricultural lending division supporting family farming operations",
+    "Card monitoring via text message for fraud alerts and transaction verification"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No fee schedule or pricing information available on website, requiring direct contact for cost details",
+    "Service area appears limited to Iowa communities, potentially restricting accessibility for out-of-state customers",
+    "Interest rates, APRs, and loan terms not disclosed online; competitiveness cannot be assessed without application",
+    "Limited information about credit card rewards, benefits, or terms of service",
+    "Minimum account balance requirements and CD rate information not published on website"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +64,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 11771,
   "latitude": 42.0662660161342,
   "longitude": -94.8679169616047,
@@ -94,12 +106,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Iowa-based customers seeking relationship banking with local decision-making and personalized service",
+    "Agricultural businesses and family farms requiring specialized lending and business banking services",
+    "Homebuyers interested in mortgages with potential rate relief through the Mortgage Rate Relief program",
+    "Small business owners needing comprehensive cash management, merchant processing, and business credit solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Availa Bank is best for Iowa-based customers and agricultural businesses seeking personalized relationship banking with local decision-making and community commitment. The primary caveat is that complete pricing, interest rate, and term information is not available online, requiring direct contact to evaluate competitiveness and suitability for specific financial needs.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-29",
   "cities_served": [
@@ -107,9 +120,9 @@
   ],
   "phone": "",
   "address": "126 W 6Th St, Carroll, IA 51401",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
+  "processing_status": "pending_approval",
+  "quality_score": 12,
+  "enrichment_attempts": 1,
   "cfpb_data": {
     "found_in_cfpb": true,
     "cfpb_company_name": "DISCOVER BANK",
@@ -119,5 +132,8 @@
     "data_period": "2023-present",
     "last_checked": "2026-03-29"
   },
-  "no_index": true
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

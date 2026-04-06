@@ -1,15 +1,15 @@
 {
   "name": "The Bank Of Protection",
   "slug": "the-bank-of-protection",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Protection, KS. $146M in assets. 5 offices.",
-  "description_long": "The Bank Of Protection is a community bank located in Protection, KS, established in 1980. The bank holds approximately $146M in total assets and $118M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "The Bank of Protection is a traditional bank offering checking accounts, loans, and mobile banking services with a focus on personal financial management.",
+  "description_long": "The Bank of Protection operates as a traditional community bank providing standard retail banking services to consumers. Based on the available website content, the institution offers core banking products including checking accounts designed for everyday money management and personal loan products to help customers achieve financial goals. The bank emphasizes accessibility through multiple service channels, including physical branch locations, online platforms, and mobile banking applications available on both iOS and Android devices. Their service infrastructure suggests a full-service regional or community banking model. The bank's fee structure indicates they operate with traditional banking economics, charging standard fees for overdrafts ($22), insufficient funds ($25), wire transfers ($20 outgoing, $5 incoming), and other transaction services. Mobile banking appears to be a key differentiator in their service delivery, allowing customers account access and transaction capabilities from any location. The bank maintains privacy protections and regulatory compliance measures outlined in their Internet Privacy Policy. However, the website content provided is limited to basic service descriptions, fee schedules, and privacy information, which restricts detailed assessment of their competitive positioning, interest rates, loan terms, or customer service reputation.",
   "logo_url": "",
   "website_url": "https://www.bankofprotection.com",
   "affiliate_url": "",
@@ -24,23 +24,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts for everyday money management",
+    "Personal loans for various life goals and purchases",
+    "Mobile banking application for iOS and Android",
+    "Wire transfers (domestic and international)",
+    "Stop payment requests for checks and ACH transactions",
+    "Money orders and cashier's checks",
+    "ATM access",
+    "Escrow account setup and management",
+    "Check printing services",
+    "Overdraft protection (with associated fees)",
+    "Telephone transfer requests",
+    "Account statements and courtesy statements"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1980",
-    "Local community bank with personal service",
-    "5 locations"
+    "Mobile banking app available on both iOS (Apple App Store) and Android (Google Play Store) for account access anywhere",
+    "Physical branch locations with defined hours for in-person service",
+    "Comprehensive fee schedule clearly published and transparent to customers",
+    "Internet privacy policy in place explicitly protecting customer personal information",
+    "Money transfer services including wire transfers and money orders",
+    "Stop payment request capability for checking and money market accounts",
+    "Escrow account services for financial planning and property management"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited product information available on website\u2014no interest rates, APYs, or competitive terms disclosed for checking or savings accounts",
+    "Relatively high overdraft fees ($22 per incident) and insufficient funds fees ($25) compared to online banking alternatives",
+    "Wire transfer fees are above-average, particularly international transfers at $60",
+    "No information about account minimums, promotional rates, or customer service hours"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +62,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 23099,
   "latitude": 37.203156076001,
   "longitude": -99.483913518248,
@@ -94,12 +104,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers who prefer traditional banking with physical branch access for in-person transactions",
+    "People seeking straightforward checking and savings products without complex features",
+    "Borrowers interested in personal loans from a community bank"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Bank of Protection is best suited for consumers seeking traditional community banking services who value physical branch access and mobile convenience. The primary caveat is the limited transparency on the website regarding competitive interest rates, account minimums, and promotional terms, which makes it difficult to assess value proposition without direct contact with the bank.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +117,10 @@
   ],
   "phone": "",
   "address": "302 N Broadway, Protection, KS 67127",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

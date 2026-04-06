@@ -1,14 +1,14 @@
 {
   "name": "Anna State Bank",
   "slug": "anna-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Anna, IL. $112M in assets. 1 office.",
-  "description_long": "Anna State Bank is a community bank located in Anna, IL, established in 1930. The bank holds approximately $112M in total assets and $98M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank in Anna, IL offering FDIC-insured checking, savings, debit cards, and loan services since 1930. Emphasizes personal service with mobile and online banking.",
+  "description_long": "Anna State Bank has been operating in Anna, Illinois since 1930, positioning itself as a community-focused institution that is \"big enough to provide all of your banking needs\" while remaining \"small enough to know your name.\" The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing deposit security for qualifying accounts.\n\nThe bank offers a comprehensive range of consumer and business banking services. On the personal side, this includes checking and savings accounts, IRAs, ASB Visa Debit Cards, and loan products covering real estate, home equity lines, auto loans, and personal loans. Business customers can access business checking and savings accounts, operating lines of credit, and commercial lending services. All customers have access to online banking and a recently launched mobile app available on iOS and Android platforms.\n\nAnna State Bank distinguishes itself through personalized service and CardValet fraud protection tools that allow customers to control their debit cards remotely\u2014including turning cards on/off, setting transaction limits, blocking international transactions, and customizing alerts. The bank also provides Visa Account Updater Service to automatically update card information with recurring payment providers, reducing the inconvenience of expired card information. Customers can contact loan officers directly and access real estate loan inquiry services through the website.\n\nAs a traditional community bank, Anna State Bank serves customers seeking straightforward banking products with local relationship management rather than specialty financial services. The institution is best suited for individuals and small businesses in or near the Anna, Illinois area seeking convenient online and mobile banking alongside traditional deposit and lending products. Customers should note that the bank's service area appears regional, and loan products are standard offerings without information suggesting competitive rates or specialty programs.",
   "logo_url": "",
   "website_url": "https://www.annastate.com",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Individual Retirement Accounts (IRAs)",
+    "Business checking accounts",
+    "Business savings accounts",
+    "ASB Visa Debit Cards with CardValet fraud management",
+    "Real estate loans and mortgages",
+    "Home equity lines of credit",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Auto loans",
+    "Commercial operating lines of credit",
+    "Online banking platform with login access",
+    "Mobile banking app (iOS and Android)",
+    "Visa Account Updater Service for recurring payments"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1930",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "CardValet fraud protection allows instant card on/off controls, transaction limits, and location-based restrictions",
+    "Recently launched mobile app for iOS and Android with full account access",
+    "Visa Account Updater Service automatically updates card info for recurring payments",
+    "Offers full suite of services (checking, savings, IRAs, business accounts, multiple loan types)",
+    "Personal relationship banking model with direct access to loan officers",
+    "Long community presence since 1930 provides institutional stability"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No information on competitive interest rates for savings accounts or CDs compared to national banks",
+    "Geographic limitation to Anna, IL area suggests limited branch network and local-only service area",
+    "Website does not disclose loan terms, APRs, or lending requirements for personal or commercial loans",
+    "No mention of fee structures for checking accounts, overdraft fees, or other service charges",
+    "Foreign travel notifications require manual contact with bookkeeping department rather than digital process"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 11682,
   "latitude": 37.4604499933591,
   "longitude": -89.2463429780893,
@@ -93,12 +106,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Individuals and families in Anna, IL seeking comprehensive banking with personalized service and local relationships",
+    "Small business owners needing business checking, savings, and operating lines of credit in the Illinois area",
+    "Customers prioritizing fraud protection tools and mobile banking for debit card management",
+    "People seeking FDIC-insured deposits with straightforward checking and savings products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Anna State Bank is best for individuals and small businesses in the Anna, Illinois area seeking traditional community banking with FDIC-insured deposits, debit card services with strong fraud controls, and personal relationships with loan officers. The main caveat is that the bank appears geographically limited to its local market, and the website provides minimal information on competitive rates, fee structures, or detailed lending terms, requiring direct contact for specific pricing and product details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   ],
   "phone": "",
   "address": "100 E Vienna St, Anna, IL 62906",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

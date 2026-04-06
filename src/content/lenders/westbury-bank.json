@@ -1,14 +1,14 @@
 {
   "name": "Westbury Bank",
   "slug": "westbury-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Waukesha, WI. $792M in assets. 9 offices.",
-  "description_long": "Westbury Bank is a community bank located in Waukesha, WI, established in 1926. The bank holds approximately $792M in total assets and $717M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Westbury Bank is a community-focused Wisconsin bank offering personal and business checking, savings, credit cards, and HSAs with emphasis on fraud protection and local engagement.",
+  "description_long": "Westbury Bank is a community-based bank operating in Wisconsin that is approaching its 100-year anniversary in 2026. The institution positions itself as a customer-first bank dedicated to serving local communities with personalized financial solutions rather than aggressive sales tactics. The bank has invested in modernizing its digital infrastructure, recently launching upgraded online and mobile banking platforms designed for ease of use. Westbury Bank offers a comprehensive suite of consumer and business banking services including checking accounts, savings products, health savings accounts, debit cards, and credit card offerings. They have recently introduced the Visa Zero+ Credit Card with promotional low introductory rates on purchases and balance transfers. The bank distinguishes itself through strong fraud prevention initiatives, active community involvement with financial literacy seminars and local events, and a commitment to personalized customer service. Customer testimonials highlight the professionalism and approachability of their banking staff, particularly in areas like retirement planning, estate planning, and student account setup. A notable feature is their dedicated fraud prevention focus, with messaging about protecting customers of all ages and specific solutions for business fraud prevention. The bank operates multiple physical locations with advertised hours and maintains a direct customer service phone line. Westbury Bank appears to be a solid regional banking option for customers seeking a community-oriented institution with modern digital capabilities, particularly those in Wisconsin who value local banking relationships and fraud protection.",
   "logo_url": "",
   "website_url": "https://westburybankwi.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts",
+    "Business checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Health Savings Accounts (HSA) with tiered APY rates",
+    "Online and mobile banking platform",
+    "Debit card services with mobile app management",
+    "Credit cards (including Visa Zero+ with promotional rates)",
+    "Online account opening",
+    "Fraud protection and prevention services",
+    "Retirement planning and estate planning services",
+    "Multiple physical branch locations",
+    "Customer service via phone (1-800-679-8287)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1926",
-    "Local community bank with personal service",
-    "9 locations"
+    "Recently upgraded online and mobile banking platform with improved user interface and functionality",
+    "Health Savings Account with tiered APY rates (0.25% for balances under $10K, 0.40% for $10K+)",
+    "Online account opening available, reducing time needed to become a customer",
+    "Comprehensive fraud protection messaging and dedicated fraud prevention solutions for business customers",
+    "Active community engagement with financial literacy seminars and local events",
+    "Personalized banking services including retirement planning and estate planning assistance",
+    "New Visa Zero+ Credit Card with low introductory rates on purchases and balance transfers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited information on specific APY rates for standard checking and savings accounts beyond HSA offerings",
+    "No transparency regarding minimum deposit requirements or account maintenance fees",
+    "Appears to be geographically limited to Wisconsin communities, reducing accessibility for out-of-state customers",
+    "No information provided about business loan products, commercial lending, or SBA loan offerings",
+    "Limited detail on debit card features beyond basic mobile app management and spending alerts"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28400,
   "latitude": 43.053362017057,
   "longitude": -88.211527964199,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Wisconsin residents seeking community-focused banking with personalized service",
+    "Customers prioritizing fraud protection and security for personal and business accounts",
+    "Business owners looking for local banking relationships with dedicated fraud solutions",
+    "Individuals interested in health savings accounts with competitive tiered rates"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Westbury Bank is best for Wisconsin-based consumers and small business owners seeking a traditional community bank with modern digital capabilities and strong fraud protection focus. The main caveat is geographic limitation to Wisconsin communities and lack of detailed information about competitive rates and fee structures compared to other regional or national banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "N16W23250 Stone Ridge Dr, Waukesha, WI 53188",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,13 +1,13 @@
 {
   "name": "S.T.E.C.",
   "slug": "stec",
-  "category": "payday-alternatives",
+  "category": "banking",
   "subcategories": [
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "Federal Credit Union in , . NCUA insured. 1 location.",
-  "description_long": "S.T.E.C. is a federal credit union serving members in , , established in 1968. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "Federal credit union offering routing number services and ACH/wire transfer capabilities. NCUA-insured with routing number 313189757.",
+  "description_long": "S.T.E.C. Credit Union is a federally-insured credit union operating under NCUA oversight with NCUA ID 18816 and RSSD ID 789181. The organization provides standard credit union banking services with a primary focus on routing number information and electronic fund transfer capabilities. The website functions primarily as a routing number lookup and educational resource rather than a full-service consumer banking portal. S.T.E.C. offers ACH routing services for automated electronic transactions including direct deposits, electronic payments, federal and state tax payments, and collections. They facilitate Fedwire transfers for real-time fund movement between accounts, both domestically and internationally. The organization distinguishes itself through NCUA federal insurance protection, which safeguards member deposits. Their EIN is 746105165, and routing number 313189757 serves as the primary identifier for transactions. The website content emphasizes educational information about routing numbers, ACH processing, and wire transfer mechanics rather than detailed product offerings or account types. S.T.E.C. appears to position itself as a traditional federally-insured credit union focused on electronic banking infrastructure. However, the website provides limited detail about membership eligibility, account types, interest rates, fees, or consumer-facing products beyond basic routing and transfer capabilities. The organization's online presence focuses heavily on informational content about banking processes rather than marketing specific financial products or services to prospective members.",
   "logo_url": "",
   "website_url": "https://banks-america.com/routing-number/s.t.e.c./",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)"
+    "ACH routing for direct deposits",
+    "ACH routing for electronic payroll payments",
+    "ACH routing for dividend and annuity deposits",
+    "ACH routing for federal and state tax payments",
+    "ACH routing for electronic collections",
+    "Fedwire real-time domestic fund transfers",
+    "Fedwire international wire transfers",
+    "Wire transfer recipient account setup",
+    "Check ordering services",
+    "Routing number lookup by branch",
+    "NCUA member deposit insurance",
+    "Electronic payment processing"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1968",
-    "Member-owned cooperative"
+    "NCUA federal insurance protection on member deposits",
+    "Supports ACH transactions for payroll direct deposits and automated payments",
+    "Facilitates Fedwire real-time transfer service for urgent fund movement",
+    "Processes multiple payment types including federal and state tax payments",
+    "Clear routing number (313189757) for all electronic transactions",
+    "Established federal credit union with documented regulatory ID and EIN",
+    "Supports both domestic and international wire transfer capability"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Website provides minimal information about membership eligibility or account products",
+    "No details on interest rates, APYs, or fee structures disclosed",
+    "Limited information about physical branch locations or service areas",
+    "No consumer-facing product comparison or application process visible",
+    "Routing number information focuses on lookup rather than account management tools"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +59,7 @@
   "founded_year": 1968,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "18816",
   "published": true,
   "review_status": "draft",
@@ -88,21 +99,23 @@
     "ease_of_use": 4.2
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Community-focused financial services"
+    "Members seeking NCUA-insured deposit protection",
+    "Consumers needing ACH or wire transfer capabilities",
+    "Businesses requiring electronic batch payment processing"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "S.T.E.C. Credit Union is best suited for members already enrolled who need routing information for electronic transactions or businesses requiring ACH batch processing capabilities. The primary caveat is that the website functions as an informational routing lookup resource rather than a comprehensive consumer banking portal, offering minimal detail on account types, fees, rates, or membership enrollment processes.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-03-21",
   "cities_served": [],
   "phone": "(479) 966-4380",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
   "website_found_by": "scrapeforge",
-  "website_found_at": "2026-04-04T17:04:51.312457"
+  "website_found_at": "2026-04-04T17:04:51.312457",
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Mrv Banks",
   "slug": "mrv-banks",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Sainte Genevieve, MO. $862M in assets. 5 offices.",
-  "description_long": "Mrv Banks is a community bank located in Sainte Genevieve, MO, established in 2007. The bank holds approximately $862M in total assets and $731M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "MRV Banks is a community-focused bank offering personal checking, savings, CDs, business accounts, and mobile banking with emphasis on local decision-making and personalized service.",
+  "description_long": "MRV Banks operates as a community bank with a stated commitment to serving local markets and making decisions that prioritize customer and community interests. The bank emphasizes personal relationships and local expertise as core differentiators in their banking model. Founded on the principle of being \"from here,\" MRV Banks structures its operations around understanding and serving the specific needs of the communities it operates in.\n\nThe bank offers a range of personal banking products including checking and savings accounts, Certificates of Deposit (CDs) with current rates of 3.85% APY for 3 and 6-month terms and 3.75% APY for 12-month terms, business banking services, and specialty products like the ScoreCard Rewards debit card program. They provide business account solutions with personalized services designed for small business needs. Additionally, MRV Banks offers a 50+ age-gated product line called the STARZ50+ Club with exclusive benefits for older customers.\n\nKey distinguishing features include real people answering phones rather than automated systems, instant-issued debit cards with customization options, Apple Pay integration, mobile banking via their app with 24/7 account access, bill pay functionality, and mobile check deposit. The bank also offers resources and calculators to help customers make informed decisions. Their marketing emphasizes community commitment and a personal approach to banking that contrasts with larger institutions.\n\nAs a community bank, MRV Banks serves a specific geographic market with localized decision-making. The website demonstrates modern banking conveniences like digital account opening and online banking, though specific information about deposit insurance, lending terms, account fees, and full service details are not comprehensively detailed on the homepage. Customers seeking a personal banking relationship in a local market may find value here, though those requiring extensive service options or specialized products may need to verify availability.",
   "logo_url": "",
   "website_url": "http://www.mrvbanks.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts with multiple options",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of Deposit (CDs) with terms from 3 to 12 months",
+    "Business checking and business account products",
+    "Mobile banking application with 24/7 access",
+    "Bill pay and online payment services",
+    "Mobile check deposit",
+    "Instant-issued debit cards with customization options",
+    "Apple Pay integration",
+    "ScoreCard Rewards debit card rewards program",
+    "STARZ50+ Club for customers 50 and older",
+    "Online account opening"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2007",
-    "Local community bank with personal service",
-    "5 locations"
+    "Offers competitive CD rates up to 3.85% APY with low $1,000 minimum balance requirements",
+    "Instant-issued debit cards with Apple Pay integration and real-time card control features",
+    "Mobile banking app with 24/7 account access, bill pay, and mobile check deposit capabilities",
+    "ScoreCard Rewards program allowing customers to earn rewards simply by using their debit card",
+    "Real person customer service (phones answered by people, not automated systems)",
+    "Community-focused decision making with emphasis on local customer relationships",
+    "STARZ50+ Club providing exclusive benefits and services for customers age 50 and older",
+    "Easy account switching assistance with streamlined transfer of direct deposits"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area as a community bank (specific markets not detailed on website)",
+    "Homepage lacks detailed information on account fees, minimum balance requirements for checking, and complete product terms",
+    "No information provided about FDIC insurance coverage or other deposit protections",
+    "Business banking and lending products described only in general terms without specific rate or product details",
+    "Limited accessibility details beyond AudioEye toolbar mention; full accessibility features not comprehensively documented"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58619,
   "latitude": 37.968327821218,
   "longitude": -90.055688149322,
@@ -93,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers in MRV Banks' service communities seeking personal relationship-based banking",
+    "Small business owners wanting personalized business banking and community support",
+    "Savers looking for competitive CD rates with low opening minimums",
+    "Customers age 50+ interested in specialized products through the STARZ50+ Club"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "MRV Banks is best suited for customers within its service communities who value personal relationships, local decision-making, and competitive rates over nationwide branch networks. The main caveat is that as a community bank, service availability is geographically limited, and prospective customers should verify both their location's coverage and detailed terms for specific account types before opening.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,10 @@
   ],
   "phone": "",
   "address": "871 Sainte Genevieve Drive, Sainte Genevieve, MO 63670",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

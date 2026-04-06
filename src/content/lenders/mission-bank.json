@@ -1,14 +1,14 @@
 {
   "name": "Mission Bank",
   "slug": "mission-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Bakersfield, CA. $1884M in assets. 7 offices.",
-  "description_long": "Mission Bank is a community bank located in Bakersfield, CA, established in 1998. The bank holds approximately $1884M in total assets and $1658M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering business accounts, SBA lending, commercial loans, and 1031 exchange facilitation services.",
+  "description_long": "Mission Bank is a locally-based bank headquartered in Bakersfield, California, with multiple office locations throughout the state. The bank positions itself as a community-focused institution emphasizing personalized service and local relationships for business customers. Mission Bank offers a comprehensive suite of banking services including business checking and savings accounts, digital banking, online banking platforms with treasury management services, and remote deposit capture for business customers. The bank specializes in lending products including SBA loans for small business financing, commercial project financing, and agricultural loans, alongside standard banking services. Mission Bank distinguishes itself through its locally-based operation and emphasis on relationship banking, with dedicated banker connections and willingness to consult with customers' attorneys and financial advisors. The bank also operates Mission 1031 Exchange, LLC, a wholly-owned subsidiary serving as a nationwide qualified intermediary for Section 1031 tax-deferred property exchanges, maintaining FDIC-insured segregated accounts and FEA membership. For consumers seeking business banking or investment property exchange services, Mission Bank provides FDIC insurance protection and traditional bank safety features. However, the bank's website content focuses predominantly on business services rather than consumer retail banking, suggesting this is primarily a business-oriented institution rather than a general consumer bank.",
   "logo_url": "",
   "website_url": "https://www.missionbank.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking and savings accounts",
+    "Online banking platform with login access",
+    "Treasury Management Services",
+    "Remote Deposit Capture for business customers",
+    "SBA loans and small business lending",
+    "Commercial loans for project financing",
+    "Agricultural loans",
+    "1031 Exchange facilitation (Mission 1031 Exchange, LLC subsidiary)",
+    "Credit Card services (MyCardStatement)",
+    "Financial calculators",
+    "Educational resources and learning center",
+    "In-person banking at multiple California locations"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1998",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Specializes in SBA loans and small business lending with dedicated banker support",
+    "Operates Mission 1031 Exchange subsidiary as nationwide qualified intermediary with FEA membership",
+    "1031 Exchange deposits held in segregated FDIC-insured accounts with monthly statements and transaction accounting",
+    "Offers agricultural loans as specialized lending product",
+    "Multiple office locations throughout California providing in-person access",
+    "Treasury Management Services and Remote Deposit Capture for business efficiency"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website content suggests primarily business-focused services with limited consumer retail banking information",
+    "No mention of consumer checking/savings account features, interest rates, or minimum balance requirements",
+    "1031 Exchange service requires phone contact for consultation rather than transparent online pricing",
+    "Limited information about personal lending, credit cards, or other consumer products beyond brief MyCardStatement reference",
+    "Requires customers to contact bank directly for most services rather than providing self-service details online"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34805,
   "latitude": 35.3741310096225,
   "longitude": -119.016773029704,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking SBA loans and commercial financing",
+    "Real estate investors conducting 1031 tax-deferred property exchanges",
+    "Agricultural businesses and farms requiring specialized ag lending",
+    "Commercial enterprises needing treasury management and business banking services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Mission Bank is best for small business owners, agricultural enterprises, and real estate investors seeking relationship-based banking with specialized lending products and 1031 exchange services. The main caveat is that this is a business-focused bank with limited publicly available information about consumer retail banking services, making it less suitable for individual consumers seeking basic checking/savings accounts without business banking needs.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1301 17Th St, Bakersfield, CA 93301",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

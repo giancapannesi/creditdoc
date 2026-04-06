@@ -1,15 +1,15 @@
 {
   "name": "Farmers And Merchants Bank",
   "slug": "farmers-and-merchants-bank-maysville",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Maysville, OK. $23M in assets. 1 office.",
-  "description_long": "Farmers And Merchants Bank is a community bank located in Maysville, OK, established in 1908. The bank holds approximately $23M in total assets and $20M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Unable to verify. Website returns server errors preventing access to company information, services, or operational details.",
+  "description_long": "Farmers And Merchants Bank operates under the domain fmbokonline.com, suggesting an online banking platform. However, the website is currently inaccessible due to critical infrastructure failures. The server is returning unhandled exceptions indicating database connectivity issues with SQL Server, preventing any retrieval of company information, service offerings, or operational details.\n\nAt present, no factual information about their specific banking services, product offerings, account types, or fee structures can be verified from their web presence. The error logs suggest the site relies on a backend database system that is either down, misconfigured, or unreachable, leaving the public-facing website non-functional.\n\nWithout access to their website content, marketing materials, or service descriptions, it is impossible to identify what distinguishes this bank from competitors or what specific strengths they may offer to consumers.\n\nCONSUMER CAUTION: The inability to access their website raises immediate concerns about operational stability and technical infrastructure. Consumers cannot review account terms, fee schedules, interest rates, or verify current services. Any banking relationship requires reliable digital access, which this institution currently cannot provide.",
   "logo_url": "",
   "website_url": "http://www.fmbokonline.com",
   "affiliate_url": "",
@@ -32,15 +32,17 @@
     "FDIC insured deposits"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
+    "FDIC insured \u2014 deposits protected up to $250,000",
     "Established in 1908",
     "Local community bank with personal service",
     "1 location"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website completely non-functional with unrecoverable server errors",
+    "SQL Server database connection failures prevent any public information access",
+    "No accessible information about services, products, fees, or rates",
+    "Critical infrastructure issues suggest potential operational problems",
+    "Cannot verify current business operations or legitimacy from web presence"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +54,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4144,
   "latitude": 34.8178727055165,
   "longitude": -97.4086522499471,
@@ -99,7 +101,7 @@
     "Small business banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "This profile cannot be completed. The website for Farmers And Merchants Bank is non-functional due to critical server errors, making it impossible to verify company information, services, legitimacy, or consumer suitability. Prospective customers should not attempt to open accounts or conduct banking business until the institution resolves its infrastructure failures and restores website access.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +109,10 @@
   ],
   "phone": "",
   "address": "621 Main Street, Maysville, OK 73057",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

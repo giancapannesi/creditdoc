@@ -1,13 +1,13 @@
 {
   "name": "Bankers' Bank Of Kansas",
   "slug": "bankers-bank-of-kansas",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Wichita, KS. $214M in assets. 1 office.",
-  "description_long": "Bankers' Bank Of Kansas is a community bank located in Wichita, KS, established in 1988. The bank holds approximately $214M in total assets and $134M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bankers' Bank of Kansas is a community-focused financial institution founded in 1988 that provides banking services exclusively to other banks throughout Kansas.",
+  "description_long": "Bankers' Bank of Kansas (BBOK) was established in 1988 with a mission centered on community banking principles. The institution positions itself as a partner to community banks, offering specialized financial services designed to support banks building their local communities. Their tagline, \"Backing the banks building our communities,\" reflects their core business model of serving banks rather than individual consumers directly.\n\nBBOK offers a range of services tailored to community banks, including compliance support, fraud detection and prevention resources, and customer experience solutions. The company provides resources on critical banking topics such as OFAC (Office of Foreign Assets Control) clearing, credit card fraud prevention, and regulatory compliance briefings. They maintain a customer bank login portal for their institutional clients to access services and information.\n\nWhat distinguishes BBOK is their exclusive focus on serving banks rather than the general public. Their tenured staff emphasizes solution-driven approaches to meet the specific needs of their bank customers. The institution maintains FDIC membership and positions themselves as solution providers with deep expertise in community banking challenges and regulatory requirements.\n\nBBOK operates as a wholesale or correspondent bank serving an institutional client base. Consumers seeking personal banking services would need to work through one of BBOK's member banks rather than directly with BBOK. The company's website offers limited detail about specific product features, focusing instead on compliance education and staff expertise.",
   "logo_url": "",
   "website_url": "https://www.bbok.com",
   "affiliate_url": "",
@@ -22,23 +22,30 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Correspondent banking services for member banks",
+    "OFAC compliance and clearing support",
+    "Credit card fraud detection and prevention resources",
+    "Regulatory compliance briefings and education",
+    "Customer bank portal login and account access",
+    "Community banking solutions and consultation",
+    "Institutional customer service and support",
+    "FDIC-insured banking services for member institutions"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1988",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured institution providing security for member bank deposits",
+    "Founded in 1988 with 35+ years of community banking experience",
+    "Exclusive focus on community banks eliminates conflicts of interest with retail banking",
+    "Provides specialized compliance resources including OFAC clearing guidance",
+    "Offers fraud prevention education on evolving threats like credit card fraud",
+    "Solution-driven approach with tenured staff experienced in community banking needs",
+    "Member login portal for secure access to customer bank services"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Does not offer direct consumer banking services\u2014individuals must access through member banks",
+    "Website provides minimal detail about specific products, rates, or service offerings",
+    "Limited transparency about fees, terms, or pricing structures available to the public",
+    "Serves only Kansas-based banks, limiting geographic availability for consumers in other states",
+    "Institutional-focused business model means consumer protections and disclosure standards may differ from retail banks"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +57,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 27351,
   "latitude": 37.6959909860492,
   "longitude": -97.2641370339618,
@@ -92,12 +99,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Community banks seeking correspondent banking services and compliance support",
+    "Kansas-based banks needing fraud detection and regulatory guidance resources",
+    "Financial institutions looking for a partner with deep community banking expertise"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bankers' Bank of Kansas is designed exclusively for other banks, not individual consumers. Individuals seeking banking services should open accounts at one of BBOK's member community banks rather than attempting to bank directly with BBOK. The main caveat is that this is a wholesale/correspondent bank serving an institutional client base, making it inaccessible to the general public.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +112,11 @@
   ],
   "phone": "",
   "address": "555 N Woodlawn St, Wichita, KS 67208",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Savers Co-Operative Bank",
   "slug": "savers-co-operative-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mutual-bank"
   ],
-  "description_short": "FDIC-insured community bank in Southbridge, MA. $792M in assets. 7 offices.",
-  "description_long": "Savers Co-Operative Bank is a community bank located in Southbridge, MA, established in 1910. The bank holds approximately $792M in total assets and $555M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Savers Co-Operative Bank offers personal and business banking services including checking, savings, home loans, and digital banking tools through branches and online platforms.",
+  "description_long": "Savers Co-Operative Bank is a full-service financial institution providing comprehensive banking solutions for both personal and business customers. The bank operates physical branches and ATMs while maintaining a robust online and mobile banking presence, indicating a hybrid traditional-digital banking model.\n\nThe bank's service offerings span personal banking (checking, savings, home equity lines of credit, personal lending, credit cards, youth banking), business banking (business checking and savings, business lending, business debit and credit cards), and investment services for both segments. They feature promotional products including a home equity line of credit with a 4.99% APR introductory rate for 12 months, followed by a 6.75% variable rate. Additional products include CDs, custom debit card designs, mobile wallet integration (Apple Pay, Google Pay, Samsung Pay), the uChoose Rewards program, and money management tools through MX Money Management\u2122.\n\nSavers Bank distinguishes itself through specific digital tools and features not universally offered by all banks: Roll It Up savings automation (rounding up purchases to the nearest dollar), the uChoose Rewards program with category-based bonus opportunities, custom debit card designs, secure messaging through online and mobile banking, and MX Money Management integration for budget tracking and goal-setting. The bank emphasizes community support, maintains a CRA Public File, and publishes a blog (Savers Two Cents) focused on financial literacy.\n\nThe bank's strengths lie in its comprehensive service menu and digital convenience features. However, the website provides limited transparency on account fees, minimum balance requirements, APY rates for savings and checking products, credit card APR ranges, or specific loan terms. The lack of detailed fee schedules and rate information is a notable limitation for consumers comparing banking options. No information about FDIC insurance coverage limits or specific credit union status is evident from the available content.",
   "logo_url": "",
   "website_url": "http://www.saversbank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts and CDs",
+    "Home equity lines of credit",
+    "Home purchase and refinance mortgages",
+    "Personal loans and credit cards",
+    "Investment services (personal)",
+    "Youth banking accounts and products",
+    "Business checking and savings accounts",
+    "Business lending and lines of credit",
+    "Business debit and credit cards",
+    "Online and mobile banking with secure messaging",
+    "Branch and ATM locations with locator tool"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1910",
-    "Local community bank with personal service",
-    "7 locations"
+    "Competitive home equity line of credit introductory rate at 4.99% APR for 12 months",
+    "Roll It Up savings feature automates savings by rounding debit card purchases to nearest dollar",
+    "uChoose Rewards program with category-specific bonus points (groceries, dining, gas)",
+    "MX Money Management\u2122 integration allows budget tracking, spending analysis, and goal-setting in one dashboard",
+    "Mobile wallet compatibility with Apple Pay, Google Pay, and Samsung Pay",
+    "Custom debit card designs allowing personalized card selection",
+    "Comprehensive service offerings combining personal banking, business banking, mortgages, and investment services"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not disclose checking or savings account fees, minimum balance requirements, or monthly maintenance charges",
+    "APY rates for savings accounts and CDs not displayed on accessible pages; customers must request current rates",
+    "Limited transparency on personal loan terms, APR ranges, or credit card APR structures",
+    "No information about FDIC deposit insurance coverage or specific insurance limits",
+    "Lacks published information on application timelines, approval rates, or specific lending criteria"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 26455,
   "latitude": 42.0751616042457,
   "longitude": -72.0331975501185,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Consumers seeking integrated personal and business banking from a single institution",
+    "Homeowners interested in home equity lines of credit with promotional introductory rates",
+    "Tech-savvy customers wanting digital banking tools including mobile wallets and money management apps",
+    "Small business owners needing comprehensive business banking with lending and cash management solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Savers Co-Operative Bank is best suited for consumers and small business owners seeking a traditional bank with modern digital convenience features and competitive promotional rates on home equity products. Primary caveat: the bank's website lacks essential transparency on standard account fees, interest rates, and loan terms, requiring customers to contact the bank directly (800.649.3036) to compare offerings against competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "270 Main St, Southbridge, MA 01550",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

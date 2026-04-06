@@ -1,14 +1,14 @@
 {
   "name": "Greenfield Banking Company",
   "slug": "greenfield-banking-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Greenfield, TN. $148M in assets. 2 offices.",
-  "description_long": "Greenfield Banking Company is a community bank located in Greenfield, TN, established in 1935. The bank holds approximately $148M in total assets and $131M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Greenfield Banking Company is a traditional bank offering checking, savings, loans, and deposit services with both standard and Kasasa-branded account options.",
+  "description_long": "Greenfield Banking Company is a traditional full-service bank that provides comprehensive banking solutions to personal and business customers. Based on their website presence and service offerings, they appear to be a community or regional bank focused on retail and commercial banking services. The company emphasizes personalized service, stating they work to 'identify ways to serve you better, to simplify your banking affairs, and to minimize your cost of borrowing.'\n\nThe bank offers a range of deposit and lending products including personal checking accounts, business checking accounts, savings accounts, Kasasa Cash Back checking with rewards, Kasasa savings accounts, and Certificates of Deposit. On the lending side, they provide auto loans, personal loans, mortgage loans, commercial loans, and agriculture loans. They also offer ancillary services such as safe deposit boxes, debit cards with specified daily limits, wire transfers, cashier's checks, and account maintenance services.\n\nGreenfield Banking distinguishes itself through partnerships with Kasasa, a fintech platform that enables reward-bearing checking and savings products. They offer cash back on debit card purchases and ATM fee refunds on qualifying accounts. The bank emphasizes online banking accessibility with online enrollment, demos, and login capabilities, suggesting they've invested in digital banking infrastructure alongside traditional branch services.\n\nAs a traditional bank, Greenfield operates within standard regulatory frameworks and offers FDIC-insured deposit accounts. However, the website provides limited transparency regarding interest rates, specific loan terms, or minimum balance requirements. Prospective customers would need to contact the bank directly for detailed product terms, which may be inconvenient compared to banks with fully transparent online pricing.",
   "logo_url": "",
   "website_url": "https://www.greenfieldbank.com",
   "affiliate_url": "",
@@ -23,23 +23,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Kasasa Cash Back checking with debit rewards",
+    "Business checking accounts",
+    "Personal savings accounts",
+    "Kasasa savings accounts with high interest",
+    "Auto loans and refinancing",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage loans",
+    "Commercial loans",
+    "Agriculture loans",
+    "Certificates of Deposit",
+    "Safe deposit boxes (4 sizes)",
+    "Online banking with enrollment and demo",
+    "Wire transfers (domestic and international)",
+    "Cashier's checks",
+    "Debit cards with daily limits"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1935",
-    "Local community bank with personal service",
-    "2 locations"
+    "Offers Kasasa Cash Back checking with refunds on nationwide ATM withdrawal fees and cash back on debit purchases",
+    "Provides multiple loan types including auto, mortgage, personal, commercial, and agriculture loans",
+    "Safe deposit boxes available in four sizes ($15-$45 annually) for established customers",
+    "Online banking platform with online enrollment and demo features",
+    "Kasasa savings accounts earning high interest on checking balances",
+    "Competitive fee structure for wire transfers ($20 domestic, $35 international) and stop payments ($20)",
+    "Certificate of Deposit special offerings for new money deposits"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no interest rates, APRs, or minimum balance information\u2014customers must call or visit in person for pricing details",
+    "Limited online transparency about loan terms, rates, or approval processes compared to modern banks",
+    "Safe deposit boxes and many services restricted to established customers only",
+    "Daily debit card withdrawal limit of only $510 and purchase limit of $1,000 may be restrictive for some customers",
+    "Dormant account fees of $10/month after 12 months of inactivity penalize inactive customers"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +66,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15255,
   "latitude": 36.1538119968743,
   "longitude": -88.7998379901051,
@@ -87,18 +102,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking rewards-based checking with ATM fee refunds through Kasasa partnerships",
+    "Small business owners and agricultural customers needing commercial lending relationships",
+    "Community-minded customers preferring traditional bank service with local branch access",
+    "Borrowers seeking multiple loan types from one institution (auto, mortgage, personal, agricultural)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Greenfield Banking Company is best for customers seeking a full-service traditional bank with rewards checking accounts and diverse lending options, particularly those in agricultural or commercial sectors. The primary caveat is that essential product details like interest rates and loan terms are not published online, requiring direct contact with the bank before comparing offerings\u2014a significant disadvantage versus transparent digital-first banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +122,11 @@
   ],
   "phone": "",
   "address": "112 N Front St, Greenfield, TN 38230",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

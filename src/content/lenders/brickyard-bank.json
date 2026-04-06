@@ -1,14 +1,14 @@
 {
   "name": "Brickyard Bank",
   "slug": "brickyard-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Lincolnwood, IL. $177M in assets. 3 offices.",
-  "description_long": "Brickyard Bank is a community bank located in Lincolnwood, IL, established in 1979. The bank holds approximately $177M in total assets and $137M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Brickyard Bank is a full-service bank offering personal and business checking, savings, loans, and digital banking services with free online and mobile banking.",
+  "description_long": "Brickyard Bank operates as a traditional community bank providing comprehensive financial services to both personal and business customers. The bank positions itself as a relationship-focused institution emphasizing friendly and helpful staff alongside modern digital banking capabilities. Their service model combines traditional banking products with contemporary fintech integrations to serve customers in personal and small-to-medium business segments. The bank's online presence demonstrates commitment to digital accessibility, though specific details about charter type, FDIC coverage limits, and competitive positioning remain limited on their public website.",
   "logo_url": "",
   "website_url": "http://www.brickyardbank.net",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Money market accounts",
+    "CDs and IRAs",
+    "Business checking and savings accounts",
+    "Business money market accounts",
+    "Commercial loans (refinancing and new construction)",
+    "Free online banking with bill pay",
+    "Free mobile banking with mobile deposit",
+    "Mobile payment integration (Apple Pay, Samsung Pay, Google Pay)",
+    "Safety deposit boxes",
+    "Wire transfers (domestic and international)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1979",
-    "Local community bank with personal service",
-    "3 locations"
+    "Free online banking with bill pay and 18-month statement history",
+    "Free mobile banking with mobile deposit capture and check imaging",
+    "Real-time account alerts via Notifi integration for fraud prevention",
+    "Integrated mobile payment support (Apple Pay, Samsung Pay, Google Pay, Zelle)",
+    "Comprehensive business online banking portal with multiple account management",
+    "Safety deposit boxes, domestic and international wire transfers available",
+    "Emphasis on identity theft prevention education and consumer resources",
+    "CardValet mobile device alerts for debit card protection"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks transparent pricing: no APRs, fee schedules, or minimum balance requirements disclosed",
+    "Limited information on loan products: no specific terms, rates, or approval criteria provided",
+    "No details on FDIC insurance coverage limits or deposit protection specifics",
+    "Minimal competitive positioning or rate comparisons to help consumers evaluate value",
+    "Website functionality is basic; missing customer reviews, testimonials, or third-party ratings"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 22811,
   "latitude": 42.0022180080424,
   "longitude": -87.7272879833948,
@@ -93,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to medium-sized business owners seeking relationship-based commercial banking",
+    "Consumers wanting free mobile banking with deposit capture features",
+    "Individuals prioritizing real-time fraud alerts and digital banking integration",
+    "Customers seeking traditional community bank service with modern digital tools"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Brickyard Bank is best suited for small business owners and individuals seeking relationship-based community banking with modern digital conveniences like free mobile banking and integrated mobile payments. Primary caveat: the bank's website lacks critical transparency on rates, fees, and product terms, requiring direct contact to evaluate competitiveness against larger regional banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "6676 N Lincoln Ave, Lincolnwood, IL 60712",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Bluff View Bank",
   "slug": "bluff-view-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Galesville, WI. $152M in assets. 3 offices.",
-  "description_long": "Bluff View Bank is a community bank located in Galesville, WI, established in 1883. The bank holds approximately $152M in total assets and $119M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bluff View Bank is a community bank offering retail and business banking services across three Wisconsin locations with FDIC protection and online banking access.",
+  "description_long": "Bluff View Bank operates as a traditional community bank owned by Gale Bank Holding Company, serving customers across Wisconsin with physical branches in Galesville, Trempealeau, and Holmen. The bank is FDIC-insured and maintains NMLS ID 683940, providing deposit protection up to federal limits. The institution targets both retail consumers and business customers seeking local banking relationships with accessible customer service.\n\nThe bank offers standard retail banking products including checking and savings accounts, online banking enrollment, mortgage services with published rate information, and business banking solutions. Customers can access financial planning tools through online calculators and receive consumer education tips. The bank provides multiple contact channels including phone support at three branch locations and an after-hours debit card fraud line (1-800-383-8000), plus secure contact forms for sensitive communications.\n\nBluff View Bank distinguishes itself as a community-focused institution with physical branch presence in smaller Wisconsin markets rather than nationwide digital-only operations. The bank emphasizes accessibility, featuring AudioEye toolbar compatibility on its website for users with assistive technology needs. Routing number 091803591 facilitates direct deposit and ACH transfers. The website provides wire instructions, fee schedules, and disclosures, indicating regulatory compliance documentation.\n\nThe bank's profile is limited by minimal published information about specific product features, interest rates, or fee structures on the homepage. The website lacks details on mortgage terms, loan products, CD rates, or business banking specialties. No information appears regarding mobile app capabilities, investment services, or wealth management. Customer service operates during standard business hours at branch locations, potentially limiting access for those outside posted schedules.",
   "logo_url": "",
   "website_url": "https://www.bluffviewbank.com",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Retail checking and savings accounts",
+    "Online banking enrollment and account access",
+    "Business banking accounts and services",
+    "Mortgage lending with published rate information",
+    "Debit card services with 24/7 fraud reporting",
+    "Financial planning calculators (online tools)",
+    "Wire transfer services",
+    "Secure contact forms for account inquiries",
+    "Consumer tips and financial education resources",
+    "Direct deposit and ACH transfer capability (via routing number 091803591)",
+    "Account password reset and login support"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1883",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC member bank providing up to $250,000 deposit protection per account category",
+    "Three physical branch locations in Wisconsin for in-person banking and local relationships",
+    "24/7 after-hours debit card fraud reporting line (1-800-383-8000)",
+    "AudioEye-enabled website with accessibility toolbar for users with assistive technology needs",
+    "Secure contact form option for sensitive inquiries instead of standard contact form",
+    "Online banking enrollment and access available for retail customers",
+    "Financial calculators and consumer education resources published on website"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited branch network restricted to three Wisconsin locations, not suitable for multi-state customers",
+    "Website does not publish specific interest rates, fees, or product terms, requiring direct contact",
+    "No information about mobile banking app capabilities or digital-only features",
+    "Customer service restricted to standard business hours at branch locations",
+    "Website lacks details on mortgage products, loan types, business banking services, or CD offerings"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8693,
   "latitude": 44.0830090009063,
   "longitude": -91.3493449666301,
@@ -93,12 +103,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Wisconsin residents in Galesville, Trempealeau, or Holmen seeking community bank relationships",
+    "Small business owners preferring local banking with dedicated business services",
+    "Consumers wanting FDIC-insured deposits with in-person branch access and personal service"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bluff View Bank is best for Wisconsin-based consumers and small business owners in its three-location service area seeking traditional community banking with FDIC protection and personal service. The main caveat is the severely limited geographic footprint and minimal online product transparency\u2014customers must contact branches directly to learn specific rates, fees, and product details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +116,11 @@
   ],
   "phone": "",
   "address": "16893 S Main St, Galesville, WI 54630",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

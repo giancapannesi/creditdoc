@@ -8,8 +8,8 @@
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "State-Chartered Credit Union in , . Low-income designated. NCUA insured. 1 location.",
-  "description_long": "Alamo City is a state-chartered credit union serving members in , , established in 1955. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) — small, affordable loans designed to replace predatory payday lending. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "Alamo is a car rental company offering vehicles across the U.S., Latin America, and the Caribbean. This is NOT a consumer finance company and should not be listed on CreditDoc.",
+  "description_long": "Alamo Rent a Car is a vehicle rental company owned by Enterprise Holdings, Inc., one of the world's largest car rental operations. The company operates rental locations across the United States, Latin America, the Caribbean, and Canada, providing short-term vehicle access to consumers and businesses. Alamo offers a full fleet of vehicles including cars, SUVs, trucks, and vans available for daily, weekly, or longer rental periods.\n\nThe company's core service is car rental with ancillary offerings like accelerated check-in, one-way rentals, the Alamo Deal Retriever tool, and partnerships with travel agents and tour operators. They operate an Alamo Insiders loyalty program that provides 5% discounts on pay-later base rates for members. Their digital infrastructure includes a mobile app, online reservation system, and low-touch check-in options.\n\nAlamo distinguishes itself through its 'Standard of Care' promise, featuring the Complete Clean Pledge for vehicle sanitation, low-touch digital transactions, and exceptional customer service. They emphasize vehicle maintenance standards and continuous innovation in rental technology to improve the customer experience.\n\nCritically, Alamo is a car rental company\u2014not a consumer finance provider, credit lender, or financial services firm. This company has NO business being categorized as 'payday-alternatives' on a consumer finance platform. This is a data integrity error that must be corrected immediately.",
   "logo_url": "",
   "website_url": "https://www.alamo.com/",
   "affiliate_url": "",
@@ -24,25 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)",
-    "Payday Alternative Loans (PALs)"
+    "Car rental (daily, weekly, long-term)",
+    "SUV rentals",
+    "Truck rentals",
+    "Van rentals",
+    "One-way car rental",
+    "Accelerated check-in",
+    "Online reservation and modification system",
+    "Alamo Insiders loyalty program",
+    "Mobile app with booking functionality",
+    "Alamo Deal Retriever tool",
+    "Partner rewards program partnerships",
+    "Travel agent and tour operator services"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1955",
-    "Member-owned cooperative",
-    "Low-income designated — may offer Payday Alternative Loans (PALs)"
+    "Offers 5% discount for Alamo Insiders on pay-later base rates",
+    "Complete Clean Pledge ensures vehicles meet elevated cleaning and sanitation standards",
+    "Accelerated check-in reduces time spent at rental counters",
+    "One-way rental options provide flexibility for point-to-point travel",
+    "Wide geographic coverage across U.S., Latin America, and Caribbean",
+    "Multiple vehicle classes available (cars, SUVs, trucks, vans)",
+    "Mobile app and digital reservation tools for convenient booking"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Not a financial services provider\u2014this categorization is entirely incorrect for a consumer finance database",
+    "Pay-later discount only applies to base rates; taxes, fees, and surcharges excluded from discount",
+    "Youthful driver surcharges apply for drivers under 25",
+    "Additional charges for optional services like damage waiver are not included in base rates",
+    "Company is designed for vehicle rental, not personal finance or emergency cash needs"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +61,7 @@
   "founded_year": 1955,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "61267",
   "published": true,
   "review_status": "draft",
@@ -97,14 +106,16 @@
     "Payday loan alternatives (PALs)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "CRITICAL ERROR: Alamo is a car rental company, not a consumer finance provider. This listing should be removed from CreditDoc immediately. There is no legitimate financial product or credit service offered by Alamo that would qualify it for any consumer finance category.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-04",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

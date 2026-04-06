@@ -1,14 +1,14 @@
 {
   "name": "Miners Exchange Bank",
   "slug": "miners-exchange-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Coeburn, VA. $95M in assets. 5 offices.",
-  "description_long": "Miners Exchange Bank is a community bank located in Coeburn, VA, established in 1982. The bank holds approximately $95M in total assets and $82M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Miners Exchange Bank is a local community bank offering online banking, debit cards, and bill pay services through multiple convenient branch locations.",
+  "description_long": "Miners Exchange Bank is a traditional community bank that emphasizes local service and personal relationships with customers. The bank operates multiple physical branch locations and invites customers to visit in person to experience their service model. They position themselves as an alternative to larger banks by highlighting their local presence and commitment to accommodating customers.\n\nThe bank's primary offerings include online banking access, debit card services with fraud monitoring, bill pay processing, and standard banking account services. Their debit card program includes automated fraud detection with real-time text notifications via short code 37268. Customers can enroll in online banking and manage their accounts remotely, though the bank emphasizes the option to visit physical locations for in-person service.\n\nMiners Exchange Bank distinguishes itself through its commitment to local banking and personal customer service. They actively communicate with customers about security threats, including a specific customer notice warning of phone number spoofing scams targeting their customers. The bank has taken steps to educate customers about fraud prevention and maintains a customer awareness section on their website addressing identity theft and scam reporting.\n\nThe bank's website provides essential banking services but remains relatively basic in functionality and feature descriptions. Information about specific account types, interest rates, fees, loan products, and credit services is not detailed on the homepage. Their 2026 holiday schedule and fraud alert system demonstrate operational transparency, but potential customers seeking comprehensive product information would need to contact the bank directly or visit a branch location.",
   "logo_url": "",
   "website_url": "https://www.mymeb.com",
   "affiliate_url": "",
@@ -23,23 +23,30 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Online banking portal with account access and management",
+    "Debit card issuance with fraud monitoring",
+    "Premium EnFact\u00ae text fraud alerts via short code 37268",
+    "Bill pay processing through online banking",
+    "Debit card application through website",
+    "Multi-location branch banking services",
+    "Customer awareness and fraud prevention resources",
+    "Online banking enrollment"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1982",
-    "Local community bank with personal service",
-    "5 locations"
+    "Premium EnFact\u00ae text-based fraud monitoring on debit cards with real-time alerts and confirmation process",
+    "Multiple convenient physical branch locations for in-person banking services",
+    "Online banking and debit card application available through website",
+    "No charge for fraud alert text notification service (though data rates may apply)",
+    "Transparent customer notice actively warning about spoofing scams and phone number fraud",
+    "Bill pay processing services available through online banking",
+    "Dedicated customer awareness section addressing identity theft and scam prevention"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited product information on website\u2014no details on account types, interest rates, or fees",
+    "No mention of credit cards, personal loans, mortgages, or other credit products",
+    "Bill pay processing suspended on bank holidays with no alternative processing window mentioned",
+    "Basic website functionality with limited service descriptions compared to regional or national banks",
+    "No information about minimum balances, account requirements, or lending services"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +58,7 @@
   "states_served": [
     "VA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 23989,
   "latitude": 36.940976012005,
   "longitude": -82.4824529711541,
@@ -93,12 +100,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers in the bank's service area seeking personalized local banking relationships",
+    "Debit card users wanting real-time fraud monitoring and text-based alerts",
+    "People who prefer in-person banking interactions over digital-only neobanks"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Miners Exchange Bank is best for customers in their service area who value local, community-based banking and personal relationships over digital convenience. The primary caveat is that their website provides minimal information about loan products, credit services, account types, or pricing\u2014interested consumers must visit a branch or contact them directly to learn about complete offerings beyond basic debit card and online banking services.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +113,11 @@
   ],
   "phone": "",
   "address": "483 Front St W, Coeburn, VA 24230",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

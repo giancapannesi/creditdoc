@@ -1,14 +1,14 @@
 {
   "name": "Local Bank",
   "slug": "local-bank-tuscaloosa",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Tuscaloosa, AL. $110M in assets. 3 offices.",
-  "description_long": "Local Bank is a community bank located in Tuscaloosa, AL, established in 1914. The bank holds approximately $110M in total assets and $85M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Local Bank is an FDIC-insured community bank offering checking, savings, CDs, and money market accounts with competitive rates and specialized programs for first responders and military.",
+  "description_long": "Local Bank operates as a community-focused FDIC-insured bank headquartered in Tuscaloosa, Alabama. The institution emphasizes local decision-making and personalized service, positioning itself as an alternative to larger national banks. The bank maintains NMLS# 826648 and displays its routing number (062104397) prominently, indicating full regulatory compliance.\n\nThe bank's product suite includes standard consumer banking services: checking accounts (including the \"Local Beginners\" account with no monthly fees and $10 Birthday Bucks deposits), savings accounts, money market accounts, and CDs. Current rates advertised include up to 3.85% APY on 7-month CDs, 3.50% APY on money market accounts, and 1.00% APY on savings. They offer business checking with up to 2.01% APY, business loans, and business checking account upgrades. A $250 bonus is available for qualifying new checking account openings.\n\nLocal Bank differentiates itself through community-focused initiatives and specialized offerings. They maintain a \"Local Heroes\" program specifically for first responders, active/retired military, medical professionals, and educators. Recent news items highlight community engagement, including hosting a renters-to-owners seminar in Tuscaloosa and involvement in local organizations like the Home Builders Association. Digital banking capabilities include online account management and a mobile app for on-the-go banking.\n\nThe bank appears to be a legitimate regional institution with proper federal insurance and licensing. However, consumers should verify current rates before opening accounts, as the website notes rates are accurate as of 1/1/26 and may change. The bank's geographic focus on Tuscaloosa and Alabama operations suggests it may have limited physical branch presence outside this region, though digital banking options partially offset this limitation.",
   "logo_url": "",
   "website_url": "https://mylocal.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking accounts with Local Beginners product (no monthly fees, $10 birthday bonus)",
+    "Savings accounts with up to 1.00% APY",
+    "Money market accounts with up to 3.50% APY",
+    "Certificates of Deposit (CDs) with up to 3.85% APY (7-month terms)",
+    "Business checking accounts with up to 2.01% APY",
+    "Business loans and business loan services",
+    "Digital banking platform with online account access and fund transfers",
+    "Mobile banking app for account management and deposits",
+    "Debit card services with lost/stolen card reporting",
+    "Check payment mailing services",
+    "Local Heroes program for first responders, military, medical professionals, and educators",
+    "New account opening with $250 bonus availability"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1914",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits with full federal backing and no monthly fees on Local Beginners checking accounts",
+    "Competitive CD rates up to 3.85% APY (7-month) and money market rates up to 3.50% APY as of stated date",
+    "Local Heroes program offering specialized benefits for first responders, military, medical professionals, and educators",
+    "$250 bonus available for qualifying new checking account openings",
+    "Full digital banking suite including online account management and mobile app for convenience",
+    "Community-focused institution with transparent routing number and proper NMLS licensing (826648)",
+    "Business checking accounts with up to 2.01% APY and dedicated business loan products"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Rates accurate only as of 1/1/26 and subject to change; no rate guarantee information provided",
+    "Limited geographic presence appears focused on Tuscaloosa, Alabama area with unclear branch availability",
+    "Website lacks detailed fee schedules, overdraft policies, and minimum balance requirements for most accounts",
+    "No mention of credit products, credit cards, mortgages, or other expanded financial services typically offered by regional banks",
+    "Customer support primarily phone-based (844-226-5525); limited information about in-person service availability"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "AL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9614,
   "latitude": 33.233598001876,
   "longitude": -87.537608029106,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "First responders and military members seeking specialized Local Heroes program benefits",
+    "Alabama residents in the Tuscaloosa area looking for local decision-making and community banking",
+    "Consumers seeking competitive savings and CD rates with FDIC insurance protection",
+    "Small business owners needing business checking with competitive APY rates"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Local Bank is best for Alabama residents and Tuscaloosa-area consumers seeking competitive savings/CD rates with community-focused service, FDIC protection, and specialized benefits for military and first responders. The main caveat is the apparent geographic limitation to a regional market, limited product diversity compared to larger banks, and the need to verify current rates which may have changed since the stated 1/1/26 date.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "205 Mcfarland Cir N, Tuscaloosa, AL 35406",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

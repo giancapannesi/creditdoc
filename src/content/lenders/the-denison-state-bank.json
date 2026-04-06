@@ -1,15 +1,15 @@
 {
   "name": "The Denison State Bank",
   "slug": "the-denison-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Holton, KS. $469M in assets. 5 offices.",
-  "description_long": "The Denison State Bank is a community bank located in Holton, KS, established in 1901. The bank holds approximately $469M in total assets and $384M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Denison State Bank is a Kansas-chartered community bank founded in 1901 with $469M in assets, offering checking, savings, loans, and digital banking across four northeast Kansas locations.",
+  "description_long": "Denison State Bank was chartered by the State of Kansas in February 1901 in Denison, Kansas, and has operated continuously under its original name for over 120 years. The bank is locally owned through Denison Bancshares Inc., a holding company based in Holton, Kansas, with governance by a 7-member board of directors all residing in the Holton or Topeka area. As of December 31, 2025, the bank maintains $469 million in total assets, $383 million in deposits, and $305 million in net loans, serving customers across four branches in Holton, Hoyt, Meriden, and Topeka.\n\nDenison State Bank offers a comprehensive suite of deposit and lending products including checking and payment accounts, savings options, consumer and commercial loans, mortgage applications, and a DSB-branded Visa credit card. The bank provides digital banking through DSBconnect online platform and a mobile banking app, along with services such as debit cards with Apple Pay/Google Pay integration, overdraft transfer protection, ACH payments, and credit card-based loan payments. Customers can access financial calculators, fraud education resources, and multilingual support through their website.\n\nThe bank distinguishes itself through its deep community roots, local ownership, and long operational history. It has earned a 5-Star safety and soundness rating from Bauer Financial and an A+ rating from DepositAccounts.com, backed by FDIC insurance and a Certificate (#15305). The bank maintains a lean workforce of 67 full-time and 11 part-time employees, suggesting personalized service in a community banking context. Its mission explicitly emphasizes long-lasting customer relationships, fair dealing, and positive community contribution.\n\nDenison State Bank is a legitimate, well-capitalized community bank suitable for customers seeking traditional banking services with local ownership and oversight. However, as a regional bank with only four branch locations in northeast Kansas, it offers limited geographic convenience for non-local customers and likely fewer digital features or competitive rates compared to larger national or online-only banks. Prospective customers should verify current deposit and loan rates against national alternatives, and those relocating outside northeast Kansas would need to consider branch access limitations.",
   "logo_url": "",
   "website_url": "http://www.dsbks.com",
   "affiliate_url": "",
@@ -24,23 +24,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and payment accounts",
+    "Savings deposit accounts",
+    "Certificates of Deposit (CDs)",
+    "Personal and consumer loans",
+    "Mortgage loans and online mortgage applications",
+    "Commercial and business loans",
+    "DSB-branded Visa credit card",
+    "Visa debit card with Apple Pay/Google Pay integration",
+    "DSBconnect digital banking platform with multi-factor authentication",
+    "Mobile banking app",
+    "ACH transfers and bill payment",
+    "Overdraft transfer protection",
+    "Financial calculators and fraud education resources"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1901",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits backed by U.S. Government full faith and credit",
+    "5-Star safety and soundness rating from Bauer Financial; A+ rating from DepositAccounts.com",
+    "Locally-owned through Denison Bancshares Inc. with 7-member board residing in service areas",
+    "124+ years of continuous operation under original charter (founded 1901)",
+    "$469 million in assets as of December 31, 2025, demonstrating financial stability",
+    "Digital banking via DSBconnect platform and mobile app with multi-factor authentication (OOBA)",
+    "DSB-branded Visa credit card and debit card with Apple Pay/Google Pay integration",
+    "Active fraud protection education and scam alert communication to customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Only four branch locations (Holton, Hoyt, Meriden, Topeka) limits accessibility outside northeast Kansas",
+    "Meriden branch under remodeling through June 2026, temporarily reducing service capacity",
+    "No information on website about competitive deposit rates or loan rates relative to regional/national banks",
+    "Limited detail on mortgage, business loan, or investment products compared to larger regional institutions",
+    "Small workforce (67 full-time, 11 part-time) may result in longer wait times during peak periods"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15305,
   "latitude": 39.464327008214,
   "longitude": -95.7366630042608,
@@ -94,12 +107,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Northeast Kansas residents seeking traditional community banking with local ownership and relationship-based service",
+    "Customers prioritizing FDIC safety ratings and long-term institutional stability over digital innovation",
+    "Small businesses and agricultural customers in the Holton, Hoyt, Meriden, or Topeka areas",
+    "Customers relocating to or established in northeast Kansas seeking personalized loan and deposit services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Denison State Bank is best for customers in northeast Kansas seeking stable, FDIC-insured community banking with local ownership and personalized service. The main caveat is geographic limitation to four branches in a rural/small-city region; customers outside this area or requiring extensive digital innovation would be better served by larger regional or online-only banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,11 @@
   ],
   "phone": "",
   "address": "421 New York Ave, Holton, KS 66436",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

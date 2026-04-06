@@ -1,14 +1,14 @@
 {
   "name": "Bank Of Erath",
   "slug": "bank-of-erath",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Erath, LA. $109M in assets. 3 offices.",
-  "description_long": "Bank Of Erath is a community bank located in Erath, LA, established in 1910. The bank holds approximately $109M in total assets and $94M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bank of Erath is a community bank in Louisiana offering checking accounts, debit cards, mobile banking, and basic financial services with no online bill payment fees for internet banking.",
+  "description_long": "Bank of Erath is a community bank headquartered in Erath, Louisiana, operating since at least the time of this website's content. The bank maintains a physical presence with multiple locations and serves both individual and student customers in the region. Founded as a traditional brick-and-mortar institution, Bank of Erath has modernized its offerings to include digital banking options while maintaining its local community focus.\n\nBank of Erath offers core banking services including checking and savings accounts, with specific programs for students featuring free checking with valid student ID and state ID. The bank provides internet banking with 24/7 account access at no charge, mobile banking through a dedicated app, and mobile wallet integration with Apple Pay, Google Pay, and Samsung Pay. Additional services include mobile check deposit, debit cards, ATM access, safe deposit boxes in multiple sizes, wire transfers, money orders, cashier's checks, certified checks, and reloadable gift cards. The bank also offers online bill payment for a $4.95 monthly fee and electronic statements.\n\nBank of Erath distinguishes itself through its emphasis on student banking with free accounts and no monthly fees, mobile-first convenience features like mobile deposit and mobile wallets, and transparent fee structures published on their website. The bank positions itself as a local, accessible alternative to larger national banks while adopting modern digital banking capabilities. Their multi-location presence in Louisiana suggests commitment to regional service and community banking relationships.\n\nThe bank's services are fairly standard for community banks, with some limitations worth noting. The $4.95 monthly online bill payment fee is an additional cost not all banks charge. Debit card usage carries a $2.00 monthly fee, which is less common at larger institutions. Foreign ATM fees are charged at $0.50 per inquiry or $2.00 per withdrawal, plus machine owner fees. The website provides limited information about loan products, credit products, or savings account rates, making it difficult to assess competitiveness in those areas. Bank of Erath appears best suited for students and local Louisiana residents seeking personal banking relationships rather than consumers requiring extensive loan products or investment services.",
   "logo_url": "",
   "website_url": "https://www.bankoferath.com",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Student checking accounts (free with valid student ID and state ID)",
+    "Internet banking with 24/7 account access",
+    "Mobile banking app",
+    "Mobile deposit (check deposits from mobile device)",
+    "Mobile wallets (Apple Pay, Google Pay, Samsung Pay)",
+    "Debit cards with ATM access",
+    "Safe deposit boxes (six sizes, $25 deposit required, $30-$200 annual rental)",
+    "Online bill payment ($4.95 monthly fee)",
+    "Electronic statements",
+    "Wire transfers (incoming free, outgoing $15)",
+    "Money orders ($1 per $100, max $10)",
+    "Cashier's checks ($2 per $100, max $25 per check)",
+    "Certified checks ($50 per check)",
+    "Reloadable gift cards"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1910",
-    "Local community bank with personal service",
-    "3 locations"
+    "Free checking accounts for students with valid student ID and state ID",
+    "No charge for internet banking with 24/7 account access",
+    "Mobile deposit allows check deposits from anywhere via mobile app",
+    "Supports three major mobile wallet platforms: Apple Pay, Google Pay, and Samsung Pay",
+    "No ATM fees when using Bank of Erath ATMs",
+    "Safe deposit boxes available in six different sizes with clear annual rental pricing",
+    "Transparent fee schedule published on website covering all major services"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "$4.95 monthly fee for online bill payment service, which competes with banks offering this free",
+    "$2.00 monthly debit card fee plus $0.50 per foreign ATM inquiry or $2.00 per withdrawal in addition to machine owner fees",
+    "No information provided on website about loan products, interest rates, or savings account rates making comparison difficult",
+    "Limited service offerings compared to larger regional or national banks",
+    "Safe deposit box contents carry no insurance protection"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "LA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8532,
   "latitude": 29.9572739889646,
   "longitude": -92.0350170005276,
@@ -93,12 +106,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "College and university students in Louisiana seeking free basic checking accounts",
+    "Local Louisiana residents who value community banking relationships and in-person service",
+    "Customers comfortable with lower fee structures but accepting of modest monthly charges for premium features",
+    "Users of mobile banking and digital wallets seeking convenient account access"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Erath is best for students and local Louisiana residents seeking accessible, transparent community banking with modern digital conveniences. The main caveat is that limited information about loan products, credit offerings, and account rates makes it difficult to assess overall competitiveness, and the $4.95 monthly bill payment fee and $2 monthly debit card fee may be higher than alternatives.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   ],
   "phone": "",
   "address": "105 W Edward St, Erath, LA 70533",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

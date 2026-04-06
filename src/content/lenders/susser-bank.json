@@ -1,13 +1,13 @@
 {
   "name": "Susser Bank",
   "slug": "susser-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Dallas, TX. $2883M in assets. 11 offices.",
-  "description_long": "Susser Bank is a community bank located in Dallas, TX, established in 1959. The bank holds approximately $2883M in total assets and $2565M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Susser Bank is a community-focused bank serving business clients with customized financing solutions and long-term partnership approach.",
+  "description_long": "Susser Bank operates as a regional bank with a stated mission centered on long-term relationships rather than short-term profits, as evidenced by their tagline 'Built to Last. Not to Sell.' The bank's parent company, Susser Banc Holdings Corporation, redomiciled to Texas in February 2026, reinforcing its commitment to the state where it operates multiple banking centers, including locations in Arlington and Austin.\n\nThe bank offers customized financial solutions tailored to business clients' specific needs, with a focus on understanding their strategic goals and challenges. They provide services including business financing, technology banking, and lines of credit. The bank maintains physical banking centers and offers digital banking through a mobile app, allowing clients to manage their accounts and cards online.\n\nSusser Bank distinguishes itself through relationship-based banking and personalized service. Their marketing emphasizes commitment to customer service excellence, flexibility in creating financing solutions, and genuine interest in client success. The bank has a dedicated Director of Technology Banking position (filled in March 2026), indicating specialization in serving tech sector clients. Client testimonials highlight responsiveness, understanding of business needs, and willingness to work creatively on financing arrangements.\n\nThe bank primarily targets established business owners and family businesses rather than individual consumers seeking personal banking products. Their client base appears concentrated in real estate, hospitality, engineering, and professional services sectors. However, the website provides limited detail on specific loan products, interest rates, fees, or eligibility requirements, making it difficult to assess overall competitiveness or accessibility for different business sizes.",
   "logo_url": "",
   "website_url": "https://www.susserbank.com/",
   "affiliate_url": "",
@@ -22,23 +22,30 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business financing and loans",
+    "Technology banking (specialized lending for tech sector)",
+    "Lines of credit for businesses",
+    "Mobile app banking and account management",
+    "Card management services",
+    "Physical banking centers with in-person service",
+    "Customized financial solutions and strategic consulting",
+    "Commercial real estate financing (inferred from client base)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1959",
-    "Local community bank with personal service",
-    "11 locations"
+    "Relationship-based banking approach with emphasis on understanding client business models and challenges",
+    "Flexible financing solutions designed to meet specific client needs rather than one-size-fits-all products",
+    "Multiple physical banking centers with accessible staff (clients report immediate assistance regardless of who answers)",
+    "Technology banking specialization with dedicated director role, indicating expertise in fintech/tech sector lending",
+    "Long-term stability commitment explicitly stated in corporate messaging and reinforced by Texas redomiciliation",
+    "Community involvement including financing for nonprofit expansion (JFS Dallas 100,000 sq ft campus)",
+    "Digital banking access through mobile app for account and card management"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no specific information about loan products, rates, terms, or APRs, making comparison impossible",
+    "No indication of services for individual consumers\u2014appears to serve only business clients, limiting accessibility",
+    "Marketing materials are testimonial-heavy but lack concrete details about eligibility criteria or minimum loan amounts",
+    "Limited transparency on fees, early repayment penalties, or other standard banking terms",
+    "No mention of FDIC insurance, regulatory oversight details, or financial stability metrics visible on website"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +57,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34885,
   "latitude": 32.806012130056,
   "longitude": -96.816001785571,
@@ -92,12 +99,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Established business owners seeking personalized financing and long-term banking relationships",
+    "Family businesses requiring flexible, relationship-based loan structuring and ongoing partnership",
+    "Technology and fintech companies needing specialized lending expertise through their technology banking division",
+    "Real estate, hospitality, and professional services firms requiring customized business financing"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Susser Bank is best for established business owners and family businesses seeking relationship-focused banking with flexible, customized financing rather than consumers seeking personal banking products or standardized loans. The primary caveat is lack of transparency on the website regarding specific products, rates, terms, and eligibility\u2014requiring direct contact with the bank to understand whether they serve your business size and industry.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +113,10 @@
   ],
   "phone": "",
   "address": "4020 Maple Ave, Dallas, TX 75219",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

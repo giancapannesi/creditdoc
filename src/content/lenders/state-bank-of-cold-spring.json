@@ -1,14 +1,14 @@
 {
   "name": "State Bank Of Cold Spring",
   "slug": "state-bank-of-cold-spring",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Cold Spring, MN. $80M in assets. 1 office.",
-  "description_long": "State Bank Of Cold Spring is a community bank located in Cold Spring, MN, established in 1908. The bank holds approximately $80M in total assets and $72M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank chartered in 1908 offering personal and business banking, checking, savings, credit cards, and mortgage services with local roots in Cold Spring.",
+  "description_long": "State Bank of Cold Spring is a locally-owned, independent community bank that has served the Cold Spring area since its charter in 1908, marking over 100 years of continuous operation. The bank positions itself as 'small enough to know you, large enough to serve you,' emphasizing personal relationships and community ties as core to its business model.\n\nThe bank provides a comprehensive suite of financial services spanning personal banking (checking, savings, CDs, IRAs, HSAs), credit products (personal and business credit cards), mortgage services (conventional fixed, construction, home equity, and refinance loans), merchant processing, remote deposit capture, and digital banking tools. They offer both consumer and business customers access to online banking, mobile banking with remote check deposit, debit cards, and ATM networks. Business customers can access merchant processing through partnerships with United Bankers Bank, credit card programs with rewards, and merchant deposit capture technology available for lease.\n\nThe bank distinguishes itself through local ownership and decision-making, long-standing community relationships spanning over a century, and partnerships with established payment processors (United Bankers Bank, ICBA Bancard, TCM Bank) to offer competitive rates and national-level service features. Their mobile app emphasizes convenience with free remote deposit capture, and they maintain 24/7 customer service for lost/stolen card reporting through partnered networks.\n\nAs a traditional community bank, State Bank of Cold Spring is suitable for customers seeking personalized service and local decision-making, though their service area appears limited to the Cold Spring region. The bank's emphasis on personal relationships and community involvement may appeal to long-term residents, though specific competitive rate comparisons and detailed product terms are not available on their website.",
   "logo_url": "",
   "website_url": "https://www.statebankcoldspring.com",
   "affiliate_url": "",
@@ -25,21 +25,32 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Health Savings Accounts (HSAs)",
+    "Personal and business credit cards with rewards",
+    "Conventional fixed-rate mortgages",
+    "Construction loans",
+    "Home equity loans",
+    "Mortgage refinancing",
+    "Merchant processing (through United Bankers Bank partnership)",
+    "Remote deposit capture for businesses"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1908",
-    "Local community bank with personal service",
-    "1 location"
+    "Over 100 years of continuous operation since 1908 demonstrates stability and local institutional presence",
+    "Free mobile banking app with remote deposit capture for iPhone and Android",
+    "Local, independent, family-owned bank structure allows community-based decision making",
+    "24/7 lost/stolen card reporting through partnered networks with toll-free after-hours line",
+    "Competitive merchant processing rates through United Bankers Bank partnership",
+    "Diverse product offerings including IRAs, HSAs, CDs, home equity loans, and construction loans",
+    "Business credit cards with rewards points for travel and merchandise plus fraud monitoring"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area restricted to Cold Spring region reduces accessibility for remote customers",
+    "Website does not display specific APR rates, fee schedules, or account minimums for comparison shopping",
+    "Limited information about deposit insurance coverage (FDIC) and account protections explicitly stated",
+    "Mobile app functionality described only for check deposit, not full account management features",
+    "No information about overdraft protection, account alerts, or advanced digital banking features"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 12444,
   "latitude": 45.4560019986033,
   "longitude": -94.4292779706555,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Cold Spring residents seeking personalized banking relationships with community decision-makers",
+    "Small to mid-sized local businesses needing merchant processing and remote deposit capabilities",
+    "Home buyers in the area requiring mortgage services including construction and refinance options",
+    "Customers prioritizing local institution stability and 100+ year banking history over digital-only platforms"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "State Bank of Cold Spring is best for Cold Spring-area residents and local businesses seeking relationship-based banking with community decision-making and a stable 100+ year institution. The main caveat is that service appears geographically limited to the Cold Spring region, and their website lacks transparent pricing and rate information necessary for competitive financial comparison.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "401 Main St, Cold Spring, MN 56320",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

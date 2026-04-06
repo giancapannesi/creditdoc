@@ -1,14 +1,14 @@
 {
   "name": "Liberty Bank",
   "slug": "liberty-bank-poulsbo",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Poulsbo, WA. $196M in assets. 1 office.",
-  "description_long": "Liberty Bank is a community bank located in Poulsbo, WA, established in 2009. The bank holds approximately $196M in total assets and $160M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank headquartered in Poulsbo, WA, offering business and personal checking, savings, loans, and mortgage financing across West Sound and Greater Seattle.",
+  "description_long": "Liberty Bank is a community bank based in Poulsbo, Washington, serving the West Sound and Greater Seattle regions. The bank positions itself as a different kind of community bank, emphasizing local expertise, personalized service, and innovative technology rather than the impersonal approach of larger institutions. The bank has been active in local community engagement, as evidenced by sponsorships of regional leadership programs and chamber of commerce events.\n\nLiberty Bank offers a comprehensive suite of business and personal banking services. For individuals, they provide multiple checking account options (including student checking and senior-focused Essential Plus checking), savings accounts, money market accounts, and residential mortgage financing. For businesses, they offer business checking with various tiers, business loans, commercial real estate financing, and business management solutions including remote deposit capture. The bank also provides personal loans, lines of credit, and financing for property purchases both residential and commercial.\n\nThe bank distinguishes itself through several specific service offerings. They maintain a professional courier service for door-to-door business pick-ups and deliveries, which is uncommon among regional banks. Their checking accounts feature tiered options with varying transaction allowances (200-1000 free combined debit/credit items depending on account type) and competitive fee structures. Online banking with bill pay is included across all account types, and they offer reduced-rate remote deposit capture for business customers. They emphasize a \"pro-business approach\" and claim to listen to client needs rather than applying one-size-fits-all solutions.\n\nLiberty Bank is appropriate for businesses and individuals in the Pacific Northwest seeking personalized banking relationships with a local institution. However, the bank's geographic footprint is limited to the West Sound and Greater Seattle region, making it inaccessible to customers outside this area. Service fees remain present even with competitive minimums ($500-$2,500 depending on account type), and the bank does not clearly advertise premium rates or competitive advantages on savings products or loan rates compared to larger regional or national institutions.",
   "logo_url": "",
   "website_url": "https://www.libertybanknw.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business Checking Accounts (multiple tiers: Essentials, Premium, Analysis)",
+    "Personal Checking Accounts (standard, student, Essential Plus for age 55+)",
+    "Community Checking for Non-Profit Organizations",
+    "Savings Accounts",
+    "Money Market Accounts",
+    "Business Loans and Lines of Credit",
+    "Personal Loans",
+    "Residential Mortgage Financing",
+    "Commercial Real Estate Financing",
+    "Remote Deposit Capture (RDC)",
+    "Online Banking with Bill Pay",
+    "Professional Courier Service for business pickups and deliveries"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2009",
-    "Local community bank with personal service",
-    "1 location"
+    "Professional courier service for door-to-door business pickups and deliveries",
+    "Multiple checking account tiers with high transaction allowances (up to 1,000 free combined debit/credit items monthly)",
+    "Remote Deposit Capture available for business accounts with reduced rates",
+    "Fee-free online banking with bill pay included on all account types",
+    "Dedicated business loan team described as 'seasoned' with stated commitment to listening to client needs",
+    "Community engagement and local sponsorships (Leadership Kitsap, Chamber of Commerce)",
+    "Waived domestic ATM charges across all account types"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: only serves West Sound and Greater Seattle region, not accessible nationally",
+    "Monthly service fees required unless minimum average balance maintained ($500-$2,500 depending on account)",
+    "Website does not disclose specific interest rates, APRs, or loan terms for competitive comparison",
+    "Analysis Checking account charges per-item fees ($0.08 deposited, $0.12 debit/credit) which could be expensive for high-volume transactions",
+    "No mention of investment services, wealth management, or advisory services beyond basic lending"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58778,
   "latitude": 47.746412011253,
   "longitude": -122.640085271812,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-sized businesses in the Pacific Northwest seeking personalized banking relationships",
+    "Local professionals and business owners who value community connection and face-to-face service",
+    "Customers in West Sound and Greater Seattle region who prefer regional banks over national chains",
+    "Businesses with regular check deposits who benefit from remote deposit capture functionality"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Liberty Bank is best suited for small-to-medium businesses and individuals in the West Sound and Greater Seattle region who prioritize personalized service and local community connection over the widest product selection. The primary caveat is geographic restriction\u2014the bank does not serve customers outside its regional footprint, and it does not publicly disclose competitive rate information on savings or loan products, requiring direct inquiry for pricing comparison.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "20150 7Th Ave Ne, Poulsbo, WA 98370",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

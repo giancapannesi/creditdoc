@@ -1,13 +1,13 @@
 {
   "name": "Investar Bank, National Association",
   "slug": "investar-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Baton Rouge, LA. $2827M in assets. 38 offices.",
-  "description_long": "Investar Bank, National Association is a community bank located in Baton Rouge, LA, established in 2006. The bank holds approximately $2827M in total assets and $2360M in deposits. It operates 38 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Investar Bank is a full-service community bank serving the Southeastern U.S. with personal, small business, and commercial banking products including checking, savings, loans, and digital banking services.",
+  "description_long": "Investar Bank, National Association operates as a community bank focused on delivering full-service banking to households and businesses across the Southeastern United States. The bank emphasizes personal service combined with big-bank capabilities, positioning itself as an alternative to the consolidation trend in banking where community banks are disappearing. The company maintains an investor relations program and operates as a publicly traded entity with SEC filings and analyst coverage available to investors.\n\nThe bank offers a comprehensive range of deposit and lending products across three customer segments: Personal Banking (checking, savings, CDs, IRAs, HELOCs, auto loans, and unsecured loans), Small Business Banking (business checking, savings, real estate loans, equipment financing, business credit cards, and treasury management), and Commercial Banking (commercial checking, savings, real estate loans, equipment financing, unsecured loans, commercial cards, and litigation financing). Customers can access services through physical branch locations, online banking platforms, mobile applications, and video banking consultations. Additional services include bill pay, mobile check deposit, Zelle transfers, digital wallet integration, and access to the Allpoint ATM network.\n\nInvestar Bank differentiates itself through its emphasis on local relationship banking and personal service while maintaining 24/7/365 digital accessibility. The bank explicitly markets itself as providing \"down-home service\" and personal attention from local professionals. They highlight security awareness and fraud prevention, including explicit scam alerts and educational resources on identity theft, phishing, and online security. The company offers Video Banking for remote consultations with team members.\n\nThe main limitation is geographic scope\u2014services are limited to the Southeastern United States, making this bank unsuitable for customers in other regions. While the website presents comprehensive product offerings, specific terms, rates, fees, and eligibility requirements are not disclosed on the public-facing site. The bank's community-focused model may appeal more to customers prioritizing personal service over aggressive promotional rates or niche fintech features.",
   "logo_url": "",
   "website_url": "http://www.investarbank.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Personal CDs and IRAs",
+    "Home Equity Lines of Credit (HELOC)",
+    "Auto, marine, and titled collateral loans",
+    "Unsecured personal loans",
+    "Small business checking and savings accounts",
+    "Small business real estate loans",
+    "Small business credit cards",
+    "Commercial checking and deposit accounts",
+    "Commercial real estate and equipment financing",
+    "Online and mobile banking with bill pay and mobile check deposit",
+    "Video banking consultations"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2006",
-    "Local community bank with personal service",
-    "38 locations"
+    "24/7/365 digital banking access including online banking, mobile app, and video banking consultations",
+    "Full suite of personal, small business, and commercial banking products under one institution",
+    "Access to Allpoint ATM network for widespread cash access",
+    "Integration with popular digital payment options and mobile wallets",
+    "Explicit fraud prevention messaging and security education resources on identity theft and phishing",
+    "eStatements option for secure, paperless account management",
+    "Multiple account enrollment options for personal, small business, and commercial customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to Southeastern United States only\u2014not available nationwide",
+    "Specific rates, fees, APRs, and product terms not disclosed on website",
+    "No information about minimum balance requirements, overdraft policies, or loan qualification criteria",
+    "Limited transparency on interest rates compared to competitors; no rate comparison tools provided",
+    "No mention of promotional rates, cash bonuses, or incentive programs for new accounts"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "LA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58316,
   "latitude": 30.397279649227,
   "longitude": -91.114192768519,
@@ -92,12 +103,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Southeastern U.S. residents seeking personal relationship banking with local branch access",
+    "Small business owners and commercial customers needing tailored financing and treasury management",
+    "Customers prioritizing community bank service and personal attention over online-only banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Investar Bank is best for Southeastern U.S. customers (personal, small business, or commercial) who value relationship banking and local service combined with modern digital convenience. The primary caveat is strict geographic limitation\u2014this bank only serves the Southeastern region, making it inaccessible to customers outside that area.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +116,10 @@
   ],
   "phone": "",
   "address": "7244 Perkins Rd, Baton Rouge, LA 70808",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

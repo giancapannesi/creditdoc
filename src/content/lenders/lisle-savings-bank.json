@@ -1,7 +1,7 @@
 {
   "name": "Lisle Savings Bank",
   "slug": "lisle-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
@@ -9,8 +9,8 @@
     "mutual-bank",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Lisle, IL. $545M in assets. 4 offices.",
-  "description_long": "Lisle Savings Bank is a community bank located in Lisle, IL, established in 1917. The bank holds approximately $545M in total assets and $386M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Lisle Savings Bank is a community-focused bank offering checking, savings, CDs, and mortgages with competitive rates and over 100 years of local roots.",
+  "description_long": "Lisle Savings Bank has operated as a community bank for over 100 years, maintaining a local presence in the Illinois area with multiple branches. The bank emphasizes its commitment to keeping customer deposits and loan investments within the community rather than selling loans to larger institutions. This local ownership model distinguishes it from national chain banks that prioritize branch expansion over community relationships.\n\nThe bank offers a comprehensive suite of consumer and small business banking products. Deposit accounts include High Interest Checking (5.00% APY), Mortgage Advantage Checking (5.50% APY), Traditional Checking (0.15% APY), and Home Business Checking (0.05% APY). Savings options include High Interest Savings (3.00% APY), Statement Savings (0.70% APY), Money Market accounts (1.25% APY), and CDs with terms ranging from 9 months to 24 months (0.50%-0.65% APY). The bank also provides mortgage lending across multiple term lengths (10-30 years, currently ranging from 5.269%-5.997% APR) and maintains an online/mobile banking platform with bill pay and transfer capabilities.\n\nLisle Savings Bank differentiates itself through its community-banking philosophy, emphasizing that customer money stays local and loans are never sold to other institutions. The bank highlights its combination of digital banking technology with personalized customer service and accessibility features. Its tagline \"Building Relationships for Generations\" underscores a focus on long-term customer relationships rather than transactional banking. The bank maintains physical branches with updated operating hours and provides multiple contact channels including phone and email customer care.\n\nThe bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing standard deposit protection. A significant caveat is that the bank was undergoing major digital banking system maintenance as of November 2025, which temporarily disrupted online and mobile access, required customers to re-establish external transfers and alerts, and necessitated temporary password protocols. This suggests potential ongoing technical transitions that customers should be aware of.",
   "logo_url": "",
   "website_url": "http://WWW.LSB.BANK",
   "affiliate_url": "",
@@ -25,23 +25,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "High Interest Checking (5.00% APY)",
+    "Mortgage Advantage Checking (5.50% APY)",
+    "Traditional Checking (0.15% APY)",
+    "Home Business Checking (0.05% APY)",
+    "High Interest Savings (3.00% APY)",
+    "Statement Savings (0.70% APY)",
+    "Insured Money Market accounts (1.25% APY)",
+    "Certificates of Deposit (9-24 months, 0.50%-0.65% APY)",
+    "Mortgage lending (10-30 year terms, 5.269%-5.997% APR)",
+    "Online and mobile banking with bill pay",
+    "Internal and external transfers",
+    "ATM access via locator tool"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1917",
-    "Local community bank with personal service",
-    "4 locations"
+    "High Interest Checking account earning 5.00% APY, significantly above traditional checking rates",
+    "Mortgage Advantage Checking at 5.50% APY for customers with mortgages",
+    "Over 100 years of community banking history with commitment to local lending",
+    "Never sells loans to other banks\u2014all customer investments remain local",
+    "FDIC-insured deposits with full faith and credit backing",
+    "Multiple branch locations with extended hours (including Saturday banking)",
+    "Comprehensive digital banking with online and mobile app access, plus traditional in-person service"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Recent major system maintenance (November 2025) caused temporary loss of online/mobile banking access and required customers to re-establish external transfers and alerts",
+    "CD rates are relatively low (0.50%-0.65% APY across all terms) compared to high-yield online banks",
+    "Traditional checking and home business checking rates are minimal (0.15% and 0.05% APY respectively)",
+    "Limited to local/regional community banking rather than national branch network availability",
+    "Website indicates ongoing digital service improvements, suggesting potential for future system disruptions"
   ],
   "contact": {
     "phone": "",
@@ -53,7 +64,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29800,
   "latitude": 41.7862000185001,
   "longitude": -88.0806000382083,
@@ -95,12 +106,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Illinois residents seeking community banking with personalized service and commitment to local lending",
+    "Customers prioritizing high-yield checking accounts (5.00%-5.50% APY) over traditional savings rates",
+    "Mortgage customers interested in Mortgage Advantage Checking rates and local mortgage origination",
+    "Community-minded depositors who prefer their money to support local loans rather than be sold to national institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Lisle Savings Bank is best for Illinois-area customers who value community banking relationships and are willing to accept lower CD rates in exchange for high-yield checking accounts and the assurance that their deposits support local lending. The primary caveat is that customers should be prepared for potential digital banking disruptions, as evidenced by the 2025 system maintenance that temporarily disabled online/mobile access and required account reconfigurations.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +120,11 @@
   ],
   "phone": "",
   "address": "1450 Maple Ave, Lisle, IL 60532",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

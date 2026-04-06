@@ -1,14 +1,14 @@
 {
   "name": "First Utah Bank",
   "slug": "first-utah-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Salt Lake City, UT. $846M in assets. 7 offices.",
-  "description_long": "First Utah Bank is a community bank located in Salt Lake City, UT, established in 1978. The bank holds approximately $846M in total assets and $734M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community-focused bank headquartered in Salt Lake City offering personal and business checking, savings, loans, and treasury management services across 7 Utah locations.",
+  "description_long": "First Utah Bank is a locally-owned and operated community bank based in Salt Lake City, Utah. According to their website, the institution is wholly-owned and operated by people who live and work in Utah, positioning itself as a true community bank rather than a national chain. The bank has been serving the Utah business and personal banking markets with a focus on local relationships and decision-making.\n\nFirst Utah Bank offers a comprehensive range of personal banking services including multiple checking account types (Money Back Checking, Full Service Checking, Interest Checking), savings products (Personal Money Market, Personal Savings, Companion Savings), debit cards, and mobile/internet banking. For business customers, they provide free business checking, commercial checking, business savings, business money market accounts, business credit cards, SBA loans, term loans, lines of credit, and treasury management services. All deposits are FDIC-insured.\n\nThe bank distinguishes itself through its community-bank positioning and emphasis on personal relationships. Their marketing tagline \"Redefining Possible. One Relationship at a Time\" reflects their relationship-focused approach. They explicitly state they can \"do just about anything other institutions can do, but often better, faster, and for less cost,\" and notably mention that \"when other banks say no, we say let's explore\" regarding lending decisions. The bank maintains 7 physical locations across the Salt Lake City metropolitan area including branches in Lehi, Midvale, Riverton, Sandy, and City Center.\n\nAs a community bank, First Utah Bank serves a specific regional market rather than operating nationally. Their strength lies in local decision-making and business relationships, but they lack the branch network and digital innovation of larger institutions. Customers should verify current rates and terms on their website, as competitive offerings vary by account type and location.",
   "logo_url": "",
   "website_url": "https://www.firstutahbank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Money Back Checking, Full Service Checking, Interest Checking)",
+    "Personal savings accounts (Personal Money Market, Personal Savings, Companion Savings)",
+    "Business checking accounts (Free Business Checking, Commercial Checking)",
+    "Business savings accounts (Business Money Market, Business Saving)",
+    "Personal debit cards",
+    "Business debit cards",
+    "Business credit cards (eZCard)",
+    "SBA loans",
+    "Term loans",
+    "Lines of credit",
+    "Treasury management services",
+    "Merchant services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1978",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Free business checking accounts with no stated monthly fees",
+    "Multiple checking account options tailored to different customer needs (Money Back, Full Service, Interest-bearing)",
+    "SBA loans and business lending options available for small business owners",
+    "7 physical branch locations across Salt Lake City metropolitan area for in-person service",
+    "Treasury management and merchant services for business customers",
+    "Stated willingness to approve loans when other banks decline (\"when other banks say no\")",
+    "Mobile banking and internet banking available for both personal and business accounts"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Utah only\u2014no national or multi-state presence",
+    "Website content does not disclose specific interest rates, APYs, or APRs for products",
+    "No mention of advanced digital banking features, fintech integrations, or premium mobile app capabilities",
+    "Limited transparency about loan approval criteria or lending decision timeline",
+    "No information about minimum account balances, overdraft fees, or other service charges visible on homepage"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "UT"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 22738,
   "latitude": 40.6879839956239,
   "longitude": -111.824861975305,
@@ -93,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Utah-based small business owners seeking relationship-driven lending and business banking",
+    "Local residents and businesses in Salt Lake City metro area who value in-person branch service",
+    "Customers who prefer community banking with local decision-makers over national chains",
+    "Business borrowers with non-traditional profiles who may be declined by larger banks"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Utah Bank is best for Utah residents and small business owners who value community banking relationships, local decision-making, and personalized service over digital convenience. The main caveat is that they operate exclusively in Utah with limited branch presence, and their website lacks specific pricing, rate, and fee transparency needed to compare competitively with other banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "3826 S 2300 E, Salt Lake City, UT 84109",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

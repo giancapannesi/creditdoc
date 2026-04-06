@@ -1,15 +1,15 @@
 {
   "name": "Bank Of England",
   "slug": "bank-of-england",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in England, AR. $329M in assets. 151 offices.",
-  "description_long": "Bank Of England is a community bank located in England, AR, established in 1898. The bank holds approximately $329M in total assets and $249M in deposits. It operates 151 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank in England, Arkansas offering consumer and business banking, agricultural lending, mortgages, and insurance since 1898 with 6 local branch locations.",
+  "description_long": "Bank of England is a locally owned community bank headquartered in England, Arkansas, with a century-long history of serving the region since its founding in 1898. The bank operates as an independent institution where lending decisions are made locally, distinguishing it from larger national chains. It maintains FDIC insurance backing and offers the full range of modern banking services while preserving community-focused operations.\n\nThe bank provides comprehensive financial services including consumer checking and savings accounts, CDs, IRAs, HSAs, debit and gift cards, mobile banking, and online bill pay. On the lending side, they offer mortgages through Bank of England Mortgage, consumer loans, business checking and savings, agricultural loans (a specialty), business loans, and credit cards. Additional services include cash management for businesses, remote deposit capture, and mobile deposit. The bank family also includes an independent insurance agency offering auto, home, farm, crop, business owners, life, and health insurance.\n\nBank of England distinguishes itself through its specialized expertise in agricultural finance, which it explicitly highlights as a core competency. The bank emphasizes its 100+ years of stability and local decision-making, positioning itself as a relationship-focused alternative to larger institutions. All six branch locations are in the England, Arkansas area, enabling face-to-face service and community involvement. Leadership actively participates in church, school, and community activities.\n\nThe primary limitation is geographic scope\u2014this is strictly a regional bank serving England, Arkansas and surrounding community areas, not available to customers outside this footprint. The website provides limited detail on specific product rates, terms, or competitive positioning. Customers seeking national reach, extensive branch networks, or specialized digital-only banking would find better alternatives elsewhere.",
   "logo_url": "",
   "website_url": "https://www.bankofengland-ar.com",
   "affiliate_url": "",
@@ -24,23 +24,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Consumer checking accounts",
+    "Consumer savings accounts",
+    "CDs, IRAs, and HSAs",
+    "Mobile banking and online banking",
+    "Debit cards and gift cards",
+    "Mobile deposit and remote deposit capture",
+    "Mortgage lending through Bank of England Mortgage",
+    "Consumer personal loans",
+    "Business checking and savings accounts",
+    "Agricultural loans and agribusiness lending",
+    "Business loans",
+    "Credit cards",
+    "Business cash management services",
+    "Online bill pay",
+    "Full-line insurance agency (auto, home, farm, crop, business, life, health)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1898",
-    "Local community bank with personal service",
-    "151 locations"
+    "100+ years of operating history and stability in the community since 1898",
+    "Specialized agricultural lending expertise as a core service offering",
+    "Locally-made lending decisions rather than centralized corporate approval",
+    "Six physical branch locations for face-to-face service in England, Arkansas area",
+    "Full-service banking including checking, savings, mortgages, business services, and insurance under one family",
+    "FDIC-insured deposits backed by U.S. Government",
+    "24-hour customer service hotlines for debit cards (800-523-4175) and credit cards (800-883-0131)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographically limited to England, Arkansas and surrounding areas only\u2014no national reach or online-only access",
+    "Website lacks specific rate information, fee schedules, or competitive comparisons for products",
+    "Limited digital innovation indicators; website appears dated with older design and minimal mobile-first optimization",
+    "Debit card support limited to M-Friday 8am-4pm local hours for non-emergency issues",
+    "No mention of account minimums, APY rates, or loan term specifics to compare competitively"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +66,7 @@
   "states_served": [
     "AR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13303,
   "latitude": 34.5450628430327,
   "longitude": -91.8737936913379,
@@ -94,12 +108,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural businesses and farmers in Arkansas seeking specialized farm and crop lending expertise",
+    "England, Arkansas residents and local businesses wanting relationship-based banking with local decision-makers",
+    "Community-minded customers prioritizing stability and personal service over digital convenience",
+    "Small business owners needing cash management, business loans, and local credit card options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of England is best for agricultural businesses, small business owners, and long-time England, Arkansas residents who value local decision-making, relationship banking, and specialized farm lending over digital convenience and competitive rate shopping. The main caveat is strict geographic limitation\u2014this regional bank only serves the England, Arkansas community and is inaccessible to customers elsewhere.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +122,10 @@
   ],
   "phone": "",
   "address": "123 S Main St, England, AR 72046",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Pointbank",
   "slug": "pointbank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Pilot Point, TX. $1084M in assets. 10 offices.",
-  "description_long": "Pointbank is a community bank located in Pilot Point, TX, established in 1892. The bank holds approximately $1084M in total assets and $994M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "PointBank is a community bank serving Denton County since 1884, offering personal and business checking, savings, credit cards, and local loan decisions with 9 branches.",
+  "description_long": "PointBank is a locally-owned community bank that has served Denton County continuously since 1884, making it the oldest bank in the region. The institution positions itself as a traditional relationship-based lender with deep community ties rather than a large corporate financial institution. With 9 branches across Denton County and a Customer Care Team based locally, PointBank emphasizes personalized service and decision-making authority at the local level.\n\nPointBank offers a comprehensive range of banking services including free e-checking for both personal and business customers (with e-statement enrollment), online banking and treasury management, mobile banking available 24/7, business credit cards, and personal credit cards with rewards programs. They advertise competitive rates including credit cards starting at 11.99% APR and balance transfer promotions at 4.99% introductory APR for 9 months. The bank also features personal and business banking products, though specific details on savings accounts, CDs, and mortgage offerings are not prominently detailed on their homepage.\n\nWhat distinguishes PointBank is their emphasis on local decision-making, community involvement (including business breakfast networking events), and personal relationship banking. They highlight that \"real bank decisions\" are made locally rather than at corporate headquarters, and their Customer Care Team answers phones in Denton County. The bank positions community investment and relationship banking as core differentiators in an increasingly digital financial landscape.\n\nAs a regional community bank, PointBank offers traditional banking products and local service, but their website lacks detailed rate comparisons, specific product terms, and comprehensive service descriptions that would allow consumers to fully evaluate their offerings against competitors. The accessibility features mentioned (AudioEye toolbar) suggest attention to inclusive design, though the website content itself is relatively sparse on specific product details, APYs for deposit products, and loan terms.",
   "logo_url": "",
   "website_url": "https://www.pointbank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Free personal e-checking with no monthly service charge",
+    "Business e-checking accounts",
+    "Online banking and treasury management",
+    "24/7 mobile banking application",
+    "Personal credit cards with rewards points program",
+    "Business credit cards",
+    "Balance transfer credit card promotions",
+    "Local loan origination and decision-making",
+    "9 physical branch locations across Denton County",
+    "Customer Care Team phone support",
+    "Business breakfast networking events",
+    "Secure online contact forms for sensitive communications"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1892",
-    "Local community bank with personal service",
-    "10 locations"
+    "Free e-checking with no monthly service charge and no minimum balance requirement for personal and business customers",
+    "Locally-owned and operated since 1884 with loan decisions made in Denton County rather than at corporate headquarters",
+    "Customer Care Team based locally in Denton County available by phone at 940-686-7000 or 972-434-3200",
+    "9 physical branch locations for in-person banking and relationship management",
+    "24/7 mobile banking app and online banking with treasury management tools",
+    "Credit card rewards program with points earned on every purchase",
+    "Balance transfer promotional rates at 4.99% introductory APR for 9 months",
+    "Community involvement through business breakfasts and local networking events"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Denton County only, not suitable for customers requiring multi-state access",
+    "Website provides minimal detail on deposit product APYs, loan terms, and fees compared to competitors",
+    "No information visible about mortgage products, refinancing, or home lending services on homepage",
+    "Credit card APR starts at 11.99%, which is on the higher end compared to many national card issuers",
+    "No mention of investment products, wealth management, or financial advisory services"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3389,
   "latitude": 33.3945110130098,
   "longitude": -96.9472809773624,
@@ -93,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Denton County residents and small business owners seeking relationship-based community banking",
+    "Business owners who benefit from networking opportunities and local decision-making authority",
+    "Customers who value in-person branch service and knowing their banker by name",
+    "Those seeking no-fee checking with straightforward banking without minimum balance requirements"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "PointBank is best for Denton County residents and small business owners who prioritize local relationship banking, personalized service, and decision-making authority over competitive rates or extensive product variety. The main caveat is their limited geographic footprint and relatively sparse online information about specific rates, terms, and product details, requiring direct contact with local branches for comprehensive account and loan comparisons.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "200 S Highway 377, Pilot Point, TX 76258",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

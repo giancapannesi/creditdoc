@@ -1,13 +1,13 @@
 {
   "name": "Stearns Bank National Association",
   "slug": "stearns-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Saint Cloud, MN. $3344M in assets. 7 offices.",
-  "description_long": "Stearns Bank National Association is a community bank located in Saint Cloud, MN, established in 1912. The bank holds approximately $3344M in total assets and $2576M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Stearns Bank National Association is a majority women-owned, employee-owned bank offering SBA loans, equipment financing, commercial real estate, and specialized Sharia-compliant banking services.",
+  "description_long": "Stearns Bank National Association is a national bank driven by a mission of economic empowerment and inclusive growth. Founded on the belief that opportunity exists for all, the institution operates as both a majority women-owned business and an employee-owned bank, with women comprising significant portions of leadership and the governing board. The bank has built its reputation on serving entrepreneurs, small businesses, nonprofits, and underserved communities across the United States.\n\nThe bank offers a comprehensive suite of banking products and services including small business loans, SBA loans, equipment financing, commercial real estate lending, USDA Rural Development financing, and personal banking products. They provide business checking and savings accounts with no minimum balance requirements, fee-free ATM access, online banking, and certificates of deposit. A notable offering is Stearns Salaam Banking, a Sharia-compliant division with products reviewed and approved by an independent Sharia Advisory Board composed of renowned Islamic finance scholars, enabling Muslim Americans to access banking services aligned with their faith principles.\n\nStearns Bank distinguishes itself through its explicit commitment to community impact and inclusive growth. The institution emphasizes that profits are secondary to people and purpose, with employees operating under an ownership mentality and entrepreneurial spirit. They have extended FDIC protection, competitive rates, and specialized lending expertise. The bank demonstrates measurable community commitment through $1.2B in loans to entrepreneurs, $1M in charitable donations, $19M in community investments, and 3,000 volunteer hours. Their leadership team includes diverse executives, and their board comprises individuals with backgrounds in enterprise data governance, technology leadership, and business ownership.\n\nStearns Bank is best suited for small business owners, entrepreneurs, and individuals seeking community-focused banking with values-aligned financial solutions. The Salaam Banking division specifically serves Muslim Americans and those seeking Sharia-compliant products. However, as a specialized lender focused on business and community development, they may have more stringent underwriting requirements than traditional banks, and their product offerings are narrower than large national banks. Customers should verify service availability in their geographic location.",
   "logo_url": "",
   "website_url": "https://www.stearnsbank.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Small business loans",
+    "SBA loans",
+    "Equipment financing",
+    "Commercial real estate lending",
+    "USDA Rural Development financing",
+    "Nonprofit banking services",
+    "Business checking and savings accounts",
+    "Certificates of deposit (CDs)",
+    "Personal checking accounts (Above The Norm Checking)",
+    "Sharia-compliant deposit products (Stearns Salaam Banking)",
+    "Sharia-compliant financing products (Stearns Salaam Banking)",
+    "Online banking and digital access"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1912",
-    "Local community bank with personal service",
-    "7 locations"
+    "Majority women-owned and employee-owned structure aligns incentives with customer service",
+    "Specialized Sharia-compliant banking through Stearns Salaam with independent Islamic finance scholars on advisory board",
+    "Extended FDIC protection beyond standard limits for additional deposit security",
+    "No minimum balance requirements and fee-free ATMs on personal banking products",
+    "Demonstrated community impact with $1.2B in loans to entrepreneurs and $19M in community investments",
+    "SBA and USDA Rural Development lending expertise for underserved small business segments",
+    "Specialized nonprofit banking services tailored to the nonprofit sector"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint may restrict accessibility for customers outside served regions",
+    "Emphasis on specialty lending (SBA, equipment, commercial real estate) may mean less competitive rates on standard products",
+    "Website does not clearly disclose current APR ranges, fees, or specific product terms",
+    "As a smaller institution compared to national banks, may have fewer branch locations and limited ATM networks",
+    "Specialty focus on business lending may result in stricter underwriting standards for personal products"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10988,
   "latitude": 45.5501469902462,
   "longitude": -94.213314966398,
@@ -86,18 +97,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs seeking SBA-backed or equipment financing",
+    "Muslim Americans and others seeking Sharia-compliant banking products and services",
+    "Nonprofit organizations requiring specialized banking and financial services",
+    "Community-minded individuals who prioritize working with values-driven, employee-owned financial institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Stearns Bank National Association is best for small business owners, entrepreneurs, and Muslim Americans seeking values-aligned banking with community impact focus and specialized lending expertise. The primary caveat is limited geographic availability and a business-lending emphasis that may result in fewer consumer-friendly products compared to large national banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "4191 2Nd St S, Saint Cloud, MN 56301",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,13 +1,13 @@
 {
   "name": "Beacon",
   "slug": "beacon",
-  "category": "payday-alternatives",
+  "category": "atm",
   "subcategories": [
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "Federal Credit Union in , . NCUA insured. 4 locations.",
-  "description_long": "Beacon is a federal credit union serving members in , , established in 1949. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. The credit union operates 4 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "Beacon is a local government GIS (Geographic Information System) platform providing web-based access to property records, assessor data, and public records across multiple U.S. counties and municipalities.",
+  "description_long": "Beacon is a web-based Geographic Information System (GIS) platform operated by Schneider Corporation that provides public access to local government property records and geographic data. The platform aggregates assessor records, property appraisals, and county/municipal records across dozens of counties and cities in over 20 U.S. states including Florida, Georgia, Colorado, Illinois, Indiana, and others.\n\nThe service allows users to search and view property information, assessments, and records through an interactive map-based interface. Users can log in to accounts, purchase subscriptions for enhanced access, and browse detailed county and municipal property data organized by state and locality. The platform serves as a centralized portal for accessing public records that would otherwise require visiting individual county assessor offices or navigating separate municipal systems.\n\nBeacon distinguishes itself by offering comprehensive coverage across multiple states and counties through a single unified platform, making property record research more convenient than visiting individual county assessor websites. The GIS-based interface provides geographic context and mapping tools that standard text-based record searches do not offer. The platform appears designed primarily for real estate professionals, property researchers, government staff, and members of the public conducting property due diligence.\n\nHowever, Beacon is fundamentally a public records access platform, not a consumer finance product. It provides no lending, credit services, financial products, or payday alternatives. The current categorization as a \"payday-alternative\" is factually incorrect\u2014this is a government data aggregation service with no relevance to consumer lending or credit needs.",
   "logo_url": "",
   "website_url": "https://beacon.schneidercorp.com/",
   "affiliate_url": "",
@@ -22,23 +22,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)"
+    "Web-based GIS mapping interface for property records",
+    "County assessor record aggregation and search",
+    "Property appraisal data access",
+    "Municipal property record access",
+    "User account creation and login management",
+    "Subscription-based premium access",
+    "Multi-state property record database (20+ states)",
+    "County and municipality record organization and browsing",
+    "Geographic mapping tools for property location",
+    "Public record data integration",
+    "Property assessment information retrieval"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1949",
-    "Member-owned cooperative"
+    "Covers property records across 20+ states and dozens of counties through single platform",
+    "Provides GIS mapping interface for geographic context alongside property data",
+    "Aggregates records from multiple county assessor offices into unified searchable database",
+    "Subscription model available for users needing frequent access to records",
+    "Includes property appraisal data, assessment information, and public record integration",
+    "User account system allows saved searches and personalized access"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Not a consumer finance product\u2014provides no lending, credit services, or payday alternatives",
+    "Requires subscription purchase for full access beyond basic viewing",
+    "Coverage limited to selected counties and municipalities, not nationwide",
+    "Platform appears designed for real estate professionals and government staff, not general consumers",
+    "No relevance to credit building, emergency cash needs, or financial assistance"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +57,7 @@
   "founded_year": 1949,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "6062",
   "published": true,
   "review_status": "draft",
@@ -88,19 +97,22 @@
     "ease_of_use": 4.2
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Community-focused financial services"
+    "Real estate professionals conducting property due diligence and market research",
+    "Property appraisers and assessors accessing multi-county records",
+    "Government staff managing local property records and assessments",
+    "Researchers and attorneys requiring historical property information"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Beacon is a government GIS and public records platform, not a consumer finance or payday alternative service. It should be recategorized from \"payday-alternatives\" to \"atm\" or removed entirely from CreditDoc as it falls outside the consumer finance lending and credit services scope of the platform.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

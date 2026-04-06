@@ -1,14 +1,14 @@
 {
   "name": "Farmers & Merchants Bank",
   "slug": "farmers-merchants-bank-miamisburg",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Miamisburg, OH. $355M in assets. 5 offices.",
-  "description_long": "Farmers & Merchants Bank is a community bank located in Miamisburg, OH, established in 1923. The bank holds approximately $355M in total assets and $303M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Farmers & Merchants Bank is a full-service FDIC-insured bank offering personal and business checking, savings, loans, and digital banking services with Kasasa reward accounts.",
+  "description_long": "Farmers & Merchants Bank is a traditional community bank operating under FDIC insurance, backed by the full faith and credit of the U.S. Government. The bank positions itself as a 'hometown bank' alternative to larger national institutions, with a focus on personalized service and lower fees.\n\nThe bank offers a comprehensive suite of products across personal and business banking. On the personal side, they provide multiple checking account options (including Kasasa Cash and Kasasa Cash Back checking with high APY rewards), savings accounts, CDs, IRAs, HSAs, debit and credit cards, and personal loans. For business customers, they offer business checking, savings, CDs, multiple loan types (term loans, equipment loans, commercial real estate, SBA/USDA loans), lines of credit, treasury management, and agri-business financing. They also provide mortgage products including home loans, HELOCs, and an Ohio Homebuyer Plus Program.\n\nTheir primary distinguishing feature is the Kasasa product suite, particularly their reward-bearing checking and savings accounts. Their marketing emphasizes cost savings for business customers, citing examples of businesses saving $2,000+ monthly by switching from larger banks. They highlight accessibility features, free digital banking with bill pay, mobile banking with mobile deposit, mobile wallet functionality, and a comprehensive online portal for account management.\n\nWhile the bank offers legitimate products and FDIC protection, consumers should note that the website contains minimal specific information about rates, fees, account minimums, or APY details beyond the advertised 2.00% APY on qualifying Kasasa accounts. The reliance on Kasasa products and qualification calendars suggests some accounts may have specific requirements or conditions for earning advertised rates. As a regional bank, their service area and product availability may be geographically limited.",
   "logo_url": "",
   "website_url": "https://www.bankwithfm.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Kasasa Cash, Kasasa Cash Back, Free, Economy, Freedom)",
+    "Personal savings accounts (Kasasa Saver, Super Saver, Youth Savings, Christmas Club)",
+    "Certificates of Deposit (CDs) for personal and business",
+    "Individual Retirement Accounts (IRAs) and Health Savings Accounts (HSAs)",
+    "Business checking accounts (Free Business, Economy Business, Freedom Business)",
+    "Business loans (term loans, equipment loans, commercial real estate, SBA, USDA B&I, lines of credit, farm/agri-business loans)",
+    "Mortgage and home equity products (home loans, home equity loans, HELOCs, Ohio Homebuyer Plus)",
+    "Personal and auto loans, RV loans, secured term loans, student loans",
+    "Online banking, bill pay, mobile banking with mobile deposit, and mobile wallet",
+    "Treasury management solutions for businesses",
+    "Personal and business debit and credit cards",
+    "Zelle digital money transfer service"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1923",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits with full U.S. Government backing",
+    "Kasasa Cash and Kasasa Cash Back checking accounts offer high-yield APY (2.00% advertised) with no monthly maintenance fees",
+    "Free digital banking including online bill pay, mobile banking, and mobile deposit",
+    "Multiple account types for both personal and business customers, including specialized products like Ohio Homebuyer Plus",
+    "Comprehensive loan offerings spanning personal, business, farm/agri-business, and real estate financing",
+    "Business customers report significant fee savings (examples cite $2,000+ monthly reductions vs. larger banks)",
+    "Treasury management and specialized services for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides minimal clarity on fee structures, account minimums, and APY requirements despite prominent Kasasa promotion",
+    "Kasasa account benefits appear conditional on monthly qualification requirements (per Kasasa Qualification Calendar reference), creating potential complexity",
+    "Limited geographic information available; likely operates only in Ohio and surrounding regions, restricting accessibility for national customers",
+    "No specific details provided on interest rates for standard savings accounts, CDs, or loan products",
+    "Website lacks transparency on how qualification criteria and monthly balance thresholds affect actual earning rates"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9462,
   "latitude": 39.6407480070557,
   "longitude": -84.2884380297216,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Ohio-based small to mid-sized business owners seeking lower-fee checking and specialized business lending",
+    "Personal customers wanting reward-bearing checking accounts with high APY and no maintenance fees",
+    "Homebuyers in Ohio interested in specialized mortgage programs like the Ohio Homebuyer Plus initiative",
+    "Farm and agri-business owners requiring specialized agricultural lending products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Farmers & Merchants Bank is best for regional customers (primarily Ohio) seeking a community bank alternative to large national institutions, particularly businesses looking to reduce banking fees and individuals wanting high-yield checking. The main caveat is that Kasasa account rates appear to have monthly qualification requirements, and the website lacks transparent detail on actual fees, minimums, and rate conditions, requiring direct contact to understand true costs and earning potential.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "41 S 1St St, Miamisburg, OH 45342",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

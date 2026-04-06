@@ -1,15 +1,15 @@
 {
   "name": "Gateway Bank, F.S.B.",
   "slug": "gateway-bank-fsb",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Oakland, CA. $260M in assets. 2 offices.",
-  "description_long": "Gateway Bank, F.S.B. is a community bank located in Oakland, CA, established in 1990. The bank holds approximately $260M in total assets and $203M in deposits. It operates 2 office locations. Designated as a Asian or Pacific Islander Americans. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Gateway Bank, F.S.B. is a federal savings bank offering personal and commercial banking services including checking, savings, CDs, IRAs, and commercial loans with online banking and cash management solutions.",
+  "description_long": "Gateway Bank, F.S.B. operates as a federally chartered savings bank providing comprehensive banking services to both personal and commercial customers. The bank maintains at least one physical location in Walnut Creek, California (1801 N. California Blvd, Suite 101), with an online banking platform serving remote customers. The institution positions itself as a community-focused financial institution committed to exceeding client expectations through personalized service and reliable financial solutions.\n\nThe bank's service portfolio spans personal banking products including checking accounts, savings accounts, Certificates of Deposit (CDs), and Individual Retirement Accounts (IRAs). On the commercial side, Gateway Bank offers business and commercial checking, business savings and CD accounts, cash management solutions, and commercial loans for multi-unit properties and commercial buildings. The bank provides online banking with fund transfer capabilities, access to the MoneyPass\u00ae Network for surcharge-free ATM withdrawals, and specialized business services including Positive Pay fraud prevention (for both checks and ACH transactions), online wire transfers for domestic funds movement, ACH tax payments, and ACH origination for payroll and recurring payments.\n\nGateway Bank distinguishes itself through integrated fraud prevention solutions, particularly its dual-layered Positive Pay system for businesses that blocks forged checks, prevents duplicate payments, and filters unauthorized ACH transactions. The bank emphasizes security across all platforms with encrypted transmissions, multi-factor authentication, and compliance with industry standards like NACHA rules. Their cash management suite targets businesses seeking to automate treasury operations and improve cash flow through electronic payment processing rather than paper-based methods.\n\nAs a smaller regional bank, Gateway Bank serves a defined geographic area with personalized service capabilities, though customers should confirm current branch locations and service availability. The website provides limited information about deposit insurance details, specific interest rates, minimum account balances, or loan terms, which are standard considerations for banking decisions. The bank appears well-positioned for small to mid-sized businesses and individuals seeking relationship-based banking with modern digital capabilities, but prospective customers should contact them directly for detailed product specifications.",
   "logo_url": "",
   "website_url": "https://www.gatewayfsb.com",
   "affiliate_url": "",
@@ -24,23 +24,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Business and commercial checking",
+    "Business savings and CD accounts",
+    "Commercial loans for properties and buildings",
+    "Cash management business solutions",
+    "Online banking with fund transfers",
+    "MoneyPass\u00ae Network surcharge-free ATM access",
+    "Positive Pay fraud prevention (checks and ACH)",
+    "Online wire transfers (domestic)",
+    "ACH tax payment processing",
+    "ACH origination and payroll services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1990",
-    "Local community bank with personal service",
-    "2 locations"
+    "Offers Positive Pay fraud prevention for both paper checks and ACH transactions with real-time alerts and exception reporting",
+    "Provides MoneyPass\u00ae Network access for surcharge-free ATM withdrawals nationwide",
+    "Delivers same-day or next-day domestic wire transfer processing with real-time tracking through secure online platform",
+    "Supports automated ACH origination for payroll, tax payments, and recurring customer billing with batch processing capability",
+    "Combines personal and commercial banking under one institution, simplifying finances for small business owners",
+    "Offers comprehensive IRA and CD products for retirement planning and savings goals",
+    "Implements multi-factor authentication and encrypted transmissions across online banking and wire transfer services"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited branch presence (only Walnut Creek location confirmed on website) restricts in-person service access for most customers",
+    "Website lacks specific information on deposit insurance coverage, interest rates, minimum balances, or loan terms",
+    "No mention of mobile banking app or mobile-specific features despite offering comprehensive online banking",
+    "No information provided about commercial loan rates, terms, or approval processes for business customers",
+    "Limited transparency about fees associated with various services, wire transfers, or ACH origination"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 33103,
   "latitude": 37.800353140477,
   "longitude": -122.271378860935,
@@ -94,12 +107,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-sized business owners needing integrated cash management and fraud prevention solutions",
+    "California-based individuals and businesses seeking personalized banking with modern digital capabilities",
+    "Companies processing frequent ACH payments, tax payments, or wire transfers who need fraud protection",
+    "Entrepreneurs managing both personal and business finances who prefer consolidated banking relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Gateway Bank is best for California-based small business owners and individuals seeking relationship-based banking with integrated fraud prevention and cash management tools. The primary caveat is limited branch accessibility and lack of detailed product specifications online, requiring direct contact to compare rates, fees, and specific loan terms with competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,10 @@
   ],
   "phone": "",
   "address": "388 9Th St, Oakland, CA 94607",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

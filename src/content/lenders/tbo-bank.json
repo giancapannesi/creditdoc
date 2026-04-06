@@ -1,15 +1,15 @@
 {
   "name": "Tbo Bank",
   "slug": "tbo-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "consumer-lending"
   ],
-  "description_short": "FDIC-insured community bank in Orrick, MO. $209M in assets. 2 offices.",
-  "description_long": "Tbo Bank is a community bank located in Orrick, MO, established in 1902. The bank holds approximately $209M in total assets and $180M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Full-service bank offering personal checking, savings, emergency loans, IRAs, CDs, and business financing with over 120 years of history.",
+  "description_long": "TBO Bank is a traditional bank with over 120 years of operating history, originating from a small Missouri town. The company emphasizes a \"hometown spirit\" approach to banking while expanding into new communities with both in-person and digital services. They position themselves as a relationship-focused bank that combines old-school reliability with modern convenience.\n\nTBO Bank offers a comprehensive suite of consumer and business banking products. On the consumer side, they provide personal checking and savings accounts, Individual Retirement Accounts (IRAs), Certificates of Deposit (CDs) with guaranteed returns, and emergency loans with fixed monthly payments and biweekly direct debit options. For businesses, they offer business loans, corporate account setup, ACH processing, wire transfers, bill pay, and vendor import services.\n\nThe company distinguishes itself through multi-channel accessibility (in-person branches, online, and mobile), fast loan approval processes (same-day to next-business-day funding), and emphasis on personal service for business clients. Customer reviews highlight quick online application processes, immediate approval notifications, and responsive support for account setup and loan processing. They market their loans as tools for unexpected financial needs with transparent, fixed payment structures.\n\nHowever, customer reviews consistently identify higher interest rates on emergency loans as a significant drawback. Multiple reviewers explicitly mention \"high interest rate\" as a concern, though some note that faster repayment reduces total interest paid. The company appears positioned for consumers needing fast access to credit rather than competitive rates, and their loan products seem designed for short-term borrowing rather than long-term affordability.",
   "logo_url": "",
   "website_url": "https://www.tbobank.com",
   "affiliate_url": "",
@@ -24,23 +24,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Emergency loans with fixed payments",
+    "Individual Retirement Accounts (IRAs)",
+    "Certificates of Deposit (CDs)",
+    "Business loans and financing",
+    "Business checking accounts",
+    "ACH processing",
+    "Wire transfers",
+    "Bill pay services",
+    "Vendor import for business accounts",
+    "Mobile and online banking"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1902",
-    "Local community bank with personal service",
-    "2 locations"
+    "Fast online approval process with same-day or next-business-day funding for emergency loans",
+    "24/7 online account access and application capability (customers report applying at 2 AM)",
+    "Fixed monthly payments with biweekly direct deposit deduction simplify budgeting",
+    "Comprehensive business services including ACH processing, wire transfers, vendor import, and multiple corporate accounts",
+    "120+ year operating history and established reputation in banking industry",
+    "Responsive customer service for account setup and loan processing",
+    "Multiple account access channels: physical branches, online, and mobile app"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Consistently higher interest rates on emergency loans compared to market alternatives",
+    "Loan products designed for fast repayment, not long-term affordability (biweekly payments can strain budgets)",
+    "Limited information on website regarding specific APR ranges, fees, or rate disclosure",
+    "Customer reviews suggest minimum payments may not be adequate to control interest costs"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +62,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10597,
   "latitude": 39.212440005137,
   "longitude": -94.122178030257,
@@ -94,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Consumers with stable employment and direct deposit who need emergency funds quickly",
+    "Small business owners seeking relationship-based banking with multiple corporate accounts and ACH services",
+    "Customers prioritizing speed and accessibility over lowest possible interest rates",
+    "Long-term savers interested in CDs and IRAs with traditional banking oversight"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "TBO Bank is best for consumers and small businesses that value speed, accessibility, and personal service over lowest-cost financing. The critical caveat is their higher interest rates on emergency loans\u2014while funding is fast and convenient, borrowers should understand they're paying a premium for quick access to credit and plan to repay loans quickly to minimize interest costs.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +118,10 @@
   ],
   "phone": "",
   "address": "113 E South Front St, Orrick, MO 64077",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

@@ -1,14 +1,14 @@
 {
   "name": "West Point Bank",
   "slug": "west-point-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Radcliff, KY. $553M in assets. 5 offices.",
-  "description_long": "West Point Bank is a community bank located in Radcliff, KY, established in 1914. The bank holds approximately $553M in total assets and $471M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "West Point Bank is a Kentucky-based community bank offering personal and business banking services, including deposits, loans, and financial management tools.",
+  "description_long": "West Point Bank operates as a community-focused financial institution serving Kentucky and Southern Indiana markets. The bank is part of the First Breckinridge Bancshares family, a portfolio of seven banks operating across the region, which provides it with broader institutional support while maintaining local decision-making capabilities.\n\nThe bank offers a comprehensive range of banking products for both personal and business customers. Personal banking services include high-yield savings accounts (3.30% APY), 182-day certificates of deposit (3.95% APY), and an \"Insights\" financial management tool designed to help customers organize their finances. For lending, they provide mortgages for home purchases and refinancing, construction loans with flexible terms, and bridge loans to facilitate home transitions. Business banking services are also available, though specific product details are limited on the website.\n\nWest Point Bank distinguishes itself through its emphasis on local banking relationships and community integration. Their tagline \"We listen, then we lend\" suggests a relationship-focused approach to lending decisions. The bank recently rolled out new personal and business debit cards and actively invests in branch infrastructure, as evidenced by their mention of a Glendale Branch remodel. As part of First Breckinridge Bancshares, they benefit from multi-state operations while maintaining individual brand identity.\n\nThe main limitation is that the website provides minimal detail on specific loan terms, interest rates (beyond savings products), fees, or business banking offerings. Prospective customers would need to contact the bank directly or visit a branch for comprehensive product information. The bank's geographic focus on Kentucky and Southern Indiana means it is not accessible to customers in other regions seeking traditional in-person banking relationships.",
   "logo_url": "",
   "website_url": "https://www.westpointbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "High-yield savings accounts (3.30% APY)",
+    "182-day certificates of deposit (3.95% APY)",
+    "Financial management tool (Insights)",
+    "Mortgage loans for home purchase",
+    "Mortgage refinancing",
+    "Construction loans",
+    "Bridge loans",
+    "Personal debit cards",
+    "Business debit cards",
+    "Online banking login",
+    "Multiple branch locations",
+    "Business banking accounts"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1914",
-    "Local community bank with personal service",
-    "5 locations"
+    "Offers high-yield savings at 3.30% APY, competitive for traditional banks",
+    "182-day CD rate of 3.95% APY provides fixed-rate savings option",
+    "Includes financial management tool (\"Insights\") to help organize finances",
+    "Part of larger First Breckinridge Bancshares network providing stability",
+    "Serves both personal and business banking needs under one institution",
+    "Recently upgraded debit card offerings and invests in branch modernization",
+    "Local community-focused approach with multiple branch locations"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific details on loan terms, APRs, and fees for mortgages and construction loans",
+    "Limited geographic reach restricted to Kentucky and Southern Indiana only",
+    "Business banking services mentioned but not described in detail on website",
+    "No mention of online lending, digital accounts, or remote account opening capabilities",
+    "Minimal information about account minimums, overdraft policies, or other checking account terms"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "KY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 12166,
   "latitude": 37.8361200205219,
   "longitude": -85.9479339914154,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Kentuckians and Southern Indiana residents seeking community-based banking with personal relationships",
+    "Homebuyers and refinancers in their service area looking for local mortgage services",
+    "Small business owners needing integrated personal and business banking solutions",
+    "Savers prioritizing competitive rates through high-yield savings and CDs"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "West Point Bank is best for customers in Kentucky or Southern Indiana seeking traditional community banking with personal service and competitive deposit rates. The main caveat is that detailed product information (loan rates, fees, terms) is not available on their website, requiring direct customer contact to evaluate specific offerings.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "600 W Lincoln Trail Blvd, Radcliff, KY 40160",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Small Business Bank",
   "slug": "small-business-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Lenexa, KS. $73M in assets. 1 office.",
-  "description_long": "Small Business Bank is a community bank located in Lenexa, KS, established in 1984. The bank holds approximately $73M in total assets and $68M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Online-only bank specializing in free business checking, savings accounts, and debit cards for micro and small business owners across the US.",
+  "description_long": "Small Business Bank is a digital-first financial institution focused exclusively on serving micro and small business owners. The company operates entirely online, eliminating the need for customers to visit physical branches, and markets itself as a bank where small business banking is the singular focus rather than a secondary service offering.\n\nThe bank offers three primary checking account products tailored to different business structures: Sole Proprietor accounts for 1099 contractors and independent contractors, MicroBusiness accounts for single-owner business entities, and Small Business accounts for entities with multiple owners. All checking accounts feature zero monthly maintenance fees, no minimum balance requirements, secure mobile banking with check deposit capability, and a MasterCard MicroPayment debit card included with new accounts. They also offer Business High Yield Savings accounts with balance-based interest rate tiers, FDIC insurance up to $250,000, mobile check deposit, and no monthly fees.\n\nSmall Business Bank distinguishes itself through its explicit focus on underserved micro and small business segments rather than mid-market or enterprise clients. The company emphasizes personal service, simplified onboarding (online signup only, no branch visits required), and transparent pricing with no hidden fees. A significant competitive differentiator is that the minimum initial deposit required is only $200, lower than many traditional business banking options.\n\nThe company is undergoing a major platform migration scheduled for April 20, 2026, which will introduce expanded online functionality, improved Bill Pay services, and a redesigned mobile app. As a digital-only bank, customers must be comfortable with purely online/mobile banking channels and cannot conduct in-person transactions. Interest rates on savings accounts are not disclosed on the homepage and require customers to visit a separate rate schedule page.",
   "logo_url": "",
   "website_url": "https://www.smallbusinessbank.com",
   "affiliate_url": "",
@@ -24,23 +24,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Free Sole Proprietor checking accounts for 1099 contractors and independent contractors",
+    "Free MicroBusiness checking for single-owner business entities",
+    "Free Small Business checking for multi-owner business entities",
+    "Business High Yield Savings accounts with balance-based interest tiers",
+    "MasterCard MicroPayment debit cards for business transactions",
+    "Mobile banking platform with check deposit functionality",
+    "Online account signup and onboarding",
+    "Bill Pay services (launching April 20, 2026)",
+    "FDIC deposit insurance up to $250,000",
+    "Account management via mobile app and online portal",
+    "Customer support via phone (913-492-1300 local line, 855-635-9696 account help line)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1984",
-    "Local community bank with personal service",
-    "1 location"
+    "No monthly maintenance fees on any checking or savings account",
+    "Free mobile banking with check deposit functionality included",
+    "Only $200 minimum initial deposit required to open an account",
+    "Completely online signup process\u2014no branch visit needed",
+    "MasterCard debit card included with new checking accounts at no additional cost",
+    "FDIC insurance coverage up to $250,000 on savings accounts",
+    "Three distinct checking account types designed for different business structures (sole prop, single-owner entities, multi-owner entities)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Digital-only bank with no physical branch locations for in-person service or cash handling",
+    "Interest rates for Business High Yield Savings accounts not prominently displayed\u2014requires visiting separate page",
+    "Limited service channels (only phone and online support available via 855-635-9696)",
+    "Major platform conversion scheduled for April 2026 may temporarily disrupt service",
+    "No mention of business lines of credit, commercial loans, or other business lending products beyond debit cards"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +62,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 25744,
   "latitude": 38.9615199803196,
   "longitude": -94.7418959693713,
@@ -94,12 +104,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Sole proprietors and independent contractors (1099 workers) seeking free business checking",
+    "Micro business owners with single or multiple ownership structures who prioritize low fees and online convenience",
+    "Small business owners across the US who do not require physical branch access or in-person banking services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Small Business Bank is best for sole proprietors, independent contractors, and small business owners who operate nationally and want no-fee business checking with simplified online onboarding. The primary caveat is that this is a digital-only bank with no physical branches\u2014customers uncomfortable with purely online/mobile banking or who need in-person cash handling should choose an alternative.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +117,11 @@
   ],
   "phone": "",
   "address": "13423 W 92Nd St, Lenexa, KS 66215",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

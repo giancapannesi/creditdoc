@@ -1,14 +1,14 @@
 {
   "name": "The Dart Bank",
   "slug": "the-dart-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Mason, MI. $1433M in assets. 4 offices.",
-  "description_long": "The Dart Bank is a community bank located in Mason, MI, established in 1925. The bank holds approximately $1433M in total assets and $1230M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Dart Bank is a full-service bank offering personal, commercial, and mortgage banking services with a focus on relationship-based service and community involvement since 1925.",
+  "description_long": "Dart Bank has operated as a community-focused financial institution since 1925, establishing itself as a relationship-driven bank committed to the markets it serves. The bank maintains a team of over 300 employees across multiple locations and emphasizes personalized service and deep community roots as core differentiators in the banking space.\n\nThe bank offers a comprehensive suite of banking products including checking and savings accounts, certificates of deposit (currently featuring a 6-month CD at 3.55% APY), mortgage services, and specialized business banking solutions. Their service portfolio extends to treasury management for businesses, escrow account management through their Secure Escrow product, mobile banking with check deposit capabilities, online banking access, and bill payment and fund transfer functionality. They also provide ATM access and support commercial customers with custom-tailored solutions designed around specific business needs.\n\nDart Bank distinguishes itself through emphasis on community engagement, noting \"since 1925\" heritage in marketing materials and highlighting extensive volunteer hours and donations to communities served. The bank positions relationship banking as a core value, contrasting with larger institutions. Their treasury management and business banking services are marketed as custom-tailored rather than one-size-fits-all, and they offer specialized products like Secure Escrow for business operations streamlining.\n\nAs a traditional bank, Dart Bank serves customers seeking FDIC-insured deposit products and conventional lending services. However, the website provides limited detail on interest rates beyond the CD special, lending criteria, fees, or competitive positioning on rates. Community bank status may mean fewer digital conveniences compared to neobanks, though mobile banking is available. The bank does not appear to specialize in credit-building products, alternative lending, or services for credit-challenged consumers.",
   "logo_url": "",
   "website_url": "https://www.dart.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Certificates of deposit (6-month CD at 3.55% APY)",
+    "Mortgage applications and home lending",
+    "Online banking portal with multi-device access",
+    "Mobile banking application with mobile check deposit",
+    "Bill payment and electronic fund transfers",
+    "Treasury management services for businesses",
+    "Secure Escrow account management for business operations",
+    "Business banking with custom-tailored solutions",
+    "ATM network and cash access",
+    "eStatements and digital document access",
+    "Fraud prevention tools (check and ACH fraud prevention)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1925",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured banking services with established 99-year history (since 1925)",
+    "Competitive CD rate of 3.55% APY on 6-month certificates",
+    "Mobile banking app with check deposit, bill pay, and fund transfers",
+    "Specialized treasury management and business banking with custom-tailored solutions",
+    "Secure Escrow product specifically designed to streamline business operations",
+    "Over 300 employees across multiple locations enabling relationship-based service",
+    "Active community involvement with documented volunteer and donation programs"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks fee transparency\u2014no disclosed checking/savings account maintenance fees or minimum balances",
+    "Limited rate information beyond single CD special; no posted savings account or money market rates",
+    "No indication of specialized products for credit building, credit repair, or alternative lending",
+    "Community bank model may offer fewer digital conveniences and branch locations than national banks",
+    "Mortgage and business loan terms, rates, and qualification criteria not detailed on website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5033,
   "latitude": 42.5797059911209,
   "longitude": -84.4451979754703,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking relationship banking and custom treasury management services",
+    "Community-oriented customers valuing local reinvestment and personalized service",
+    "Savers looking for FDIC protection and competitive CD rates with established bank stability",
+    "Businesses needing escrow account management and operational streamlining solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Dart Bank is best for small business owners, savers, and community-minded consumers seeking traditional, relationship-based banking with FDIC insurance and established stability. The main caveat is that detailed pricing, rates, and loan terms are not transparent on their website, requiring direct contact to compare competitiveness against other banks and credit unions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "368 S Park St, Mason, MI 48854",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

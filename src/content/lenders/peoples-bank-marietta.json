@@ -1,13 +1,13 @@
 {
   "name": "Peoples Bank",
   "slug": "peoples-bank-marietta",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Marietta, OH. $9637M in assets. 135 offices.",
-  "description_long": "Peoples Bank is a community bank located in Marietta, OH, established in 1902. The bank holds approximately $9637M in total assets and $7750M in deposits. It operates 135 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Regional bank offering checking, savings, CDs, auto loans, mortgages, and business banking services across OH, WV, KY, VA, DC, and MD.",
+  "description_long": "Peoples Bank operates as a regional banking institution serving customers across the Mid-Atlantic and Southeast regions, with a primary focus on community-based financial services. The bank markets itself with the tagline \"Working Together. Building Success,\" emphasizing relationship-driven banking and personalized guidance.\n\nThe institution offers a comprehensive suite of consumer and business financial products. For consumers, this includes traditional deposit accounts (checking and savings), Certificate of Deposit (CD) products with competitive rates, credit cards, auto and vehicle loans, home mortgages, and personal insurance solutions. For businesses, Peoples Bank provides merchant services for point-of-sale and online payments, business banking with dedicated business bankers, agency banking support for independent insurance agencies, and specialized lending products like life insurance premium financing for high-net-worth clients.\n\nPeoples Bank distinguishes itself through several service differentiators: they offer flexible CD terms (5-month and 13-month options with the same rate), dedicated business banker relationships (evidenced by named staff in their marketing), a specialized nationwide division for life insurance premium financing, and support for independent insurance agencies. The bank emphasizes digital convenience through online banking, eStatements, and paperless account management.\n\nHowever, Peoples Bank's service footprint is geographically limited to specific states (OH, WV, KY, VA, DC, MD), which restricts accessibility for customers outside these regions. The website provides limited specific information about rates, fees, or product terms, requiring customers to contact the bank or visit branches for detailed offerings. As a traditional regional bank, it may lack some of the technological innovations or lower fees found at national banks or fintech alternatives.",
   "logo_url": "",
   "website_url": "https://www.peoplesbancorp.com/",
   "affiliate_url": "",
@@ -24,21 +24,32 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of Deposit (5-month and 13-month terms)",
+    "Credit cards",
+    "Auto and vehicle loans (new and refinance)",
+    "Home mortgages (purchase and refinance)",
+    "Personal insurance products",
+    "Life insurance premium financing",
+    "Merchant services (point-of-sale and online payment processing)",
+    "Business banking with dedicated business bankers",
+    "Agency banking for independent insurance agencies",
+    "Online banking and eStatements"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1902",
-    "Local community bank with personal service",
-    "135 locations"
+    "Offers both 5-month and 13-month CD products with identical rates, providing flexible savings terms",
+    "Provides dedicated business banker relationships with named staff available in multiple Kentucky and Ohio locations",
+    "Introduced specialized nationwide division (Peoples Life Premium Finance) for high-net-worth lending and wealth strategy support",
+    "Supports independent insurance agencies with dedicated agency banking services for acquisitions and growth financing",
+    "Offers comprehensive merchant services for businesses operating online, in-store, or on-the-go",
+    "Provides digital convenience through online banking, eStatements, and paperless account management",
+    "Customer service available Monday-Friday 8am-7pm EST and Saturday 8am-5pm EST with multiple contact methods"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic service limitation restricted to OH, WV, KY, VA, DC, and MD only\u2014not available nationally",
+    "Website lacks specific rate information, APYs (except reference to \"one great APY\"), and fee schedules requiring customer contact for details",
+    "Limited transparency about product terms, minimum deposits, and qualification requirements for various loan products",
+    "No mention of mobile app features, mobile banking capabilities, or investment advisory services typically offered by larger regional banks",
+    "Requires existing deposit account or state residency in service area to open new accounts online"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 6544,
   "latitude": 39.4149599873531,
   "longitude": -81.4547609824011,
@@ -92,12 +103,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Business owners in the Mid-Atlantic and Southeast seeking dedicated relationship banking with named business bankers",
+    "High-net-worth individuals seeking life insurance premium financing and wealth preservation strategies",
+    "Independent insurance agencies looking for financing support for growth, acquisitions, and succession planning",
+    "Consumers in OH, WV, KY, VA, DC, or MD seeking community-based banking with personalized mortgage and auto lending"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Peoples Bank is best for consumers and small business owners in the Mid-Atlantic and Southeast regions seeking traditional relationship-based banking with personalized service. The primary caveat is strict geographic limitation to six states (OH, WV, KY, VA, DC, MD), making it inaccessible for out-of-region customers, and limited online transparency requiring direct contact to compare rates and terms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "138 Putnam St, Marietta, OH 45750",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

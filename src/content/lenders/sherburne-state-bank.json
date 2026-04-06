@@ -1,14 +1,14 @@
 {
   "name": "Sherburne State Bank",
   "slug": "sherburne-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Becker, MN. $337M in assets. 3 offices.",
-  "description_long": "Sherburne State Bank is a community bank located in Becker, MN, established in 1920. The bank holds approximately $337M in total assets and $279M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving Minnesota since 1920 with FDIC insurance, offering personal banking, mortgages, business loans, and digital banking services.",
+  "description_long": "Sherburne State Bank is an independently owned community bank that has operated since 1920, primarily serving the Monticello, Becker, and Princeton areas of Minnesota. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing depositors with federal protection on their accounts. The institution emphasizes local ownership and reinvestment in the communities it serves, with management and staff living and working in the same areas where customers reside.\n\nThe bank offers comprehensive personal banking services including checking and savings accounts, personal loans, mortgages, home equity lines of credit, and notary services. On the business side, Sherburne State Bank provides business checking and savings accounts, business loans, construction and land financing, and cash management services. All customers have access to digital banking through online and mobile platforms, enabling account balance checks, transfers, and bill pay. Telephone banking is also available 24/7 at 877-261-5556 for account management without internet access.\n\nSherburne State Bank distinguishes itself as a locally-owned alternative to larger regional or national banks. The bank's leadership and employees are rooted in the communities they serve, which they position as ensuring alignment with local economic interests. Their emphasis on personalized service is evident in their construction and land lending approach, which involves working directly with business owners to understand unique financial goals rather than applying standardized criteria.\n\nAs a traditional community bank, Sherburne State Bank serves customers seeking personal relationships with their financial institution and those who prefer supporting local businesses. However, the bank operates only three physical branches across a limited geographic area, and their website contains access restrictions on some informational pages. Like most regional banks, they likely offer fewer digital innovation features compared to larger institutions or fintech competitors.",
   "logo_url": "",
   "website_url": "https://www.sherburnestatebank.com",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Home purchase mortgages",
+    "Home refinancing",
+    "Construction and land loans",
+    "Home equity lines of credit",
+    "Fix-up/home improvement loans",
+    "Business checking and savings accounts",
+    "Business loans",
+    "Cash management services",
+    "Online banking and bill pay",
+    "Mobile banking",
+    "24/7 telephone banking",
+    "Notary services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1920",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Independently owned community bank operating since 1920 with strong local roots",
+    "Comprehensive personal banking including mortgages, home equity, and personal loans",
+    "Full suite of business banking services including construction and land loans",
+    "24/7 telephone banking available for account management and transfers",
+    "Digital banking options through online and mobile platforms",
+    "Three branch locations across Monticello, Becker, and Princeton, Minnesota"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to central Minnesota (3 branches only)",
+    "Website has restricted access pages, limiting transparency on certain information",
+    "No indication of competitive rate offerings or product comparisons",
+    "Limited online presence and digital marketing compared to larger institutions",
+    "No mention of investment services, wealth management, or advanced financial products"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10169,
   "latitude": 45.3892090010407,
   "longitude": -93.8696450339023,
@@ -87,18 +100,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Minnesota residents in Monticello, Becker, or Princeton seeking relationship-based banking",
+    "Small business owners and construction companies in the service area needing personalized lending",
+    "Homebuyers and homeowners seeking mortgages and home equity financing from a local lender",
+    "Community-focused customers who prefer supporting locally-owned financial institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Sherburne State Bank is best for central Minnesota residents and business owners seeking traditional community banking with local decision-making and personalized service. The main caveat is that the bank's value proposition relies heavily on local relationships and community investment, making it primarily relevant only to customers in its three-county service area\u2014those outside this region have no access to branches or services.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   ],
   "phone": "",
   "address": "12500 Sherburne Avenue, Becker, MN 55308",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

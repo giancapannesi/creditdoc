@@ -1,13 +1,13 @@
 {
   "name": "Comenity Bank",
   "slug": "comenity-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Wilmington, DE. $7760M in assets. 1 office.",
-  "description_long": "Comenity Bank is a community bank located in Wilmington, DE, established in 1989. The bank holds approximately $7760M in total assets and $3743M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bread Savings is an online savings platform operated by Comenity Capital Bank offering high-yield savings accounts, CDs, and retirement accounts with competitive rates and no monthly fees.",
+  "description_long": "Bread Savings is a digital savings product line operated under Bread Financial, a larger financial services company. The platform provides online-only deposit accounts including high-yield savings accounts (HYSAs), certificates of deposit (CDs) with terms ranging from 3 months to 5 years, and retirement accounts (Traditional and Roth IRAs). The actual banking operations and FDIC insurance are provided through Comenity Capital Bank, which holds customer deposits up to the $250,000 FDIC limit per ownership category.\n\nBread Savings offers three primary products: a High-Yield Savings Account with 4.00% APY requiring a $100 minimum deposit, CDs with rates up to 4.15% APY (9-month) requiring $1,500 minimum, and retirement savings vehicles combining IRA tax advantages with high-yield rates. All accounts feature zero monthly maintenance fees, no incoming wire transfer fees, FDIC insurance protection, and mobile app access for account management. The platform emphasizes online onboarding with minimal friction\u2014accounts can be opened entirely online by U.S. citizens or resident aliens aged 18+ with valid Social Security numbers and physical U.S. addresses.\n\nBread Savings differentiates itself through transparent fee structure (explicitly no hidden fees), immediate interest accrual upon deposit, automatic CD renewal options, and integration with the broader Bread Financial ecosystem of credit cards and personal loans. The platform targets consumers seeking straightforward online savings without branch requirements or complex fee structures. Rates are variable for HYSAs but fixed-term for CDs, allowing savers to choose between flexibility and guaranteed returns.\n\nAs an online-only bank, Bread Savings has inherent limitations: no physical branches, no in-person support, and variable rates on savings accounts mean returns can fluctuate downward. The $100-$1,500 minimum deposits are moderate barriers for emergency savings. The platform is best suited for digitally-native consumers with existing internet banking experience and sufficient savings to meet minimums, not for those requiring in-person banking services or sub-$100 opening amounts.",
   "logo_url": "",
   "website_url": "https://savings.breadfinancial.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "High-Yield Savings Account with 4.00% APY and $100 minimum",
+    "Certificates of Deposit with fixed rates and 3-month to 5-year terms",
+    "Traditional IRA accounts with high-yield savings rates",
+    "Roth IRA accounts with high-yield savings rates",
+    "Online account opening and digital onboarding",
+    "Mobile app for account management and fund transfers",
+    "Automatic CD renewal at maturity",
+    "Zero monthly maintenance fees",
+    "Incoming wire transfer fees waived",
+    "FDIC insurance up to $250,000 per ownership category",
+    "Customer support via Help Center and contact channels",
+    "Integration with Bread Financial credit cards and personal loans"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1989",
-    "Local community bank with personal service",
-    "1 location"
+    "Competitive APY rates: 4.00% on HYSA and up to 4.15% on 9-month CDs as of April 2026",
+    "Zero monthly maintenance fees and no incoming wire transfer fees",
+    "FDIC insurance up to $250,000 per depositor through Comenity Capital Bank",
+    "Low minimum opening deposits: $100 for HYSA and $1,500 for CDs",
+    "Mobile app for account management and fund transfers from other banks",
+    "Automatic CD renewal option to continue earning without manual intervention",
+    "IRA options (Traditional and Roth) combining tax advantages with high-yield rates"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Online-only platform with no physical branches or in-person support options",
+    "Variable rates on HYSAs can decrease at any time without notice",
+    "Relatively high minimum deposit for CDs ($1,500) compared to some competitors",
+    "Limited to U.S. citizens and resident aliens; requires Social Security number and physical U.S. address",
+    "Early withdrawal penalties apply to CDs before maturity, reducing liquidity"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "DE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 27499,
   "latitude": 39.8143070050582,
   "longitude": -75.5512379647937,
@@ -92,12 +103,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Tech-savvy savers comfortable managing accounts entirely through mobile apps and online platforms",
+    "Consumers with $1,500+ to invest in fixed-rate CDs seeking guaranteed returns over 3 months to 5 years",
+    "Individuals planning retirement who want IRA accounts with competitive APY rates and tax advantages",
+    "Online banking users already within the Bread Financial ecosystem (credit card or loan customers) seeking integrated financial management"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bread Savings is ideal for digitally-native savers with at least $100-$1,500 to deposit who prioritize competitive rates, transparent fees, and mobile-first account management. The main caveat is that this is an online-only platform with no physical branches, variable rates on savings accounts, and early withdrawal penalties on CDs\u2014it is not suitable for consumers requiring in-person banking or maximum account flexibility.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,10 @@
   ],
   "phone": "",
   "address": "1 Righter Pkwy, Wilmington, DE 19803",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

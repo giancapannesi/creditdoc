@@ -1,15 +1,15 @@
 {
   "name": "Dakota Western Bank",
   "slug": "dakota-western-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Bowman, ND. $421M in assets. 5 offices.",
-  "description_long": "Dakota Western Bank is a community bank located in Bowman, ND, established in 1910. The bank holds approximately $421M in total assets and $369M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Dakota Western Bank is a regional bank offering personal and business banking services including checking, savings, lending, and online banking across multiple locations.",
+  "description_long": "Dakota Western Bank operates as a full-service regional bank providing comprehensive financial services to personal and business customers. The bank maintains multiple branch locations and emphasizes accessibility through both in-person banking and digital channels. Based on their website content, they serve communities in North Dakota with a focus on agricultural lending alongside traditional banking services.\n\nThe bank offers a broad range of deposit products including checking accounts, savings accounts, money market accounts, CDs, and IRAs for personal customers, along with health savings accounts. For lending, Dakota Western Bank provides auto loans, real estate loans, personal loans, agricultural loans, and commercial loans. They also offer card services and online banking solutions including bill pay, eStatements, and loan applications through both personal and business portals. Mobile banking capabilities allow customers to access accounts via smartphone or tablet.\n\nDakota Western Bank distinguishes itself through specialized agricultural lending expertise and emphasis on local community relationships. The bank promotes quick online account opening for checking accounts and highlights competitive CD rates. They maintain a MoneyPass ATM network for expanded cash access and offer mobile deposit functionality for business and personal customers. The organization supports community engagement through scholarship programs and actively recruits lending staff to expand service capacity.\n\nAs a regional bank, Dakota Western Bank serves customers who prefer established local banking relationships over online-only or national institutions. However, the website provides limited specific information about rates, fees, minimum balances, or detailed product terms. Customers considering switching from other banks should request complete fee schedules and rate information, as these critical details are not transparently displayed on the public website.",
   "logo_url": "",
   "website_url": "https://www.dwb.bank",
   "affiliate_url": "",
@@ -24,23 +24,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts and money market accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Health Savings Accounts",
+    "Auto loans",
+    "Real estate loans and mortgages",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Agricultural loans",
+    "Commercial loans",
+    "Online banking and bill pay",
+    "Mobile banking and mobile deposit",
+    "Business checking and savings accounts",
+    "ACH origination for business customers",
+    "Debit card services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1910",
-    "Local community bank with personal service",
-    "5 locations"
+    "Offers online checking account opening with no in-branch visit required",
+    "Provides specialized agricultural lending with dedicated lending team",
+    "Multiple branch locations with extended accessibility through MoneyPass ATM network",
+    "Mobile banking and mobile deposit capabilities for both personal and business accounts",
+    "Comprehensive product lineup including CDs, IRAs, health savings, and business banking services",
+    "Bill pay, eStatements, and ACH origination services for business customers",
+    "Community engagement through scholarship programs and local lending expertise"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display specific interest rates, APYs, or fees for any products",
+    "Limited geographic availability as a regional bank serving primarily North Dakota markets",
+    "Minimum account balance requirements and terms not disclosed on public website",
+    "No transparent pricing comparison tools or fee schedules readily available",
+    "Requires customers to contact branch or visit website for specific product details rather than immediate disclosure"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +66,7 @@
   "states_served": [
     "ND"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8637,
   "latitude": 46.1800942975132,
   "longitude": -103.395101137962,
@@ -94,12 +108,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "North Dakota agricultural businesses and farmers seeking specialized ag lending",
+    "Local customers preferring in-person banking relationships with regional institutions",
+    "Small business owners needing commercial loans and business banking services",
+    "Customers seeking comprehensive personal banking with CD and savings options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Dakota Western Bank is best for North Dakota residents and agricultural businesses seeking full-service regional banking with personalized lending relationships and local branch access. The main caveat is that specific product rates, fees, and terms are not transparently disclosed online, requiring customers to contact the bank directly for pricing comparisons before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +122,11 @@
   ],
   "phone": "",
   "address": "202 S Main St, Bowman, ND 58623",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

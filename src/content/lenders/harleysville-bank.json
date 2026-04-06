@@ -1,14 +1,14 @@
 {
   "name": "Harleysville Bank",
   "slug": "harleysville-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Harleysville, PA. $940M in assets. 7 offices.",
-  "description_long": "Harleysville Bank is a community bank located in Harleysville, PA, established in 1915. The bank holds approximately $940M in total assets and $687M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering personal and business banking services, including checking, savings, mobile banking, and cash management solutions for over a century.",
+  "description_long": "Harleysville Bank is a community-focused financial institution with over 100 years of operational history. The bank emphasizes its role as a trusted resource for both personal and business customers, building its reputation on dependable service and flexible financial solutions rooted in community engagement.\n\nThe bank offers a comprehensive suite of banking products and services including personal deposit accounts (Harleysville Cash Rewards with tiered APY rates up to 3.75%), online banking, mobile banking applications, business banking services, business debit MasterCards, and cash management tools. Their business banking platform includes Priority Online Banking with real-time account access, bill payment services, ACH and wire transfers, positive pay fraud prevention, and mobile check deposit capabilities.\n\nHarleysville Bank distinguishes itself through its emphasis on community banking values, FDIC insurance backing, and integrated fraud protection features. The bank offers free mobile and online banking platforms, free business bill payment services, and free business debit cards with customizable spending limits. Their platform supports multiple user accounts with differentiated access rights for business customers.\n\nAs a traditional community bank, Harleysville Bank serves customers seeking established banking relationships with personal service. However, the website provides limited information about loan products, interest rates for savings accounts not meeting qualification thresholds, specific branch locations, or detailed product comparisons. The institution appears well-suited for customers prioritizing community banking relationships over online-only banking options.",
   "logo_url": "",
   "website_url": "https://www.harleysvillebank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts with Harleysville Cash Rewards",
+    "Online banking with account transfers, bill payment, and statement management",
+    "Free mobile banking app with check deposit and biometric login",
+    "Priority Online Business Banking with real-time account access",
+    "Business bill payment service with recurring payment scheduling",
+    "Business debit MasterCard with customizable employee spending limits",
+    "ACH and domestic wire transfer capabilities",
+    "Priority Remote Deposit for businesses",
+    "Positive Pay fraud prevention system",
+    "Mobile banking with balance inquiries and alerts",
+    "Financial calculators",
+    "Account access for multiple users with differentiated rights"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1915",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits backed by U.S. Government full faith and credit",
+    "3.75% APY available on Harleysville Cash Rewards balances up to $25,000 (when qualifications met)",
+    "Free mobile banking app with biometric login and mobile check deposit",
+    "Free business bill payment service with recurring payment scheduling",
+    "Free business debit MasterCard with employer-customizable spending limits",
+    "Positive Pay fraud prevention system for business customers to block forged/altered checks",
+    "Priority Online Banking with real-time account information, ACH transfers, and wire capabilities",
+    "Dedicated fraud support line (1-833-735-1892) for debit card fraud reporting"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Only 0.02% APY on Cash Rewards if qualification requirements not met\u2014significant rate penalty",
+    "Website provides no details on personal loan products, credit cards, mortgage services, or rates",
+    "Limited transparency about specific branch locations (referenced but not listed on homepage)",
+    "No information about overdraft fees, minimum balances, or other account terms and conditions",
+    "No online account opening capability mentioned; enrollment process details absent"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "PA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 31461,
   "latitude": 40.2677540109808,
   "longitude": -75.3751859792393,
@@ -87,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to medium business owners seeking integrated business banking and cash management tools",
+    "Community-focused customers prioritizing personal relationships over digital-first banking",
+    "Depositors seeking FDIC-insured savings with competitive APY rates on qualified balances",
+    "Businesses needing fraud prevention tools like Positive Pay and check validation services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Harleysville Bank is best for small business owners and community-oriented depositors seeking integrated banking services with personal service and fraud protection tools. The main caveat is that the website lacks critical details about loan products, card offerings, specific rates, and account terms\u2014interested customers must contact the bank directly for comprehensive product and pricing information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "271 Main St, Harleysville, PA 19438",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

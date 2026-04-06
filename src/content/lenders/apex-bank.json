@@ -1,15 +1,15 @@
 {
   "name": "Apex Bank",
   "slug": "apex-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Camden, TN. $1374M in assets. 22 offices.",
-  "description_long": "Apex Bank is a community bank located in Camden, TN, established in 1931. The bank holds approximately $1374M in total assets and $1064M in deposits. It operates 22 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Apex Bank is a financial institution offering banking services. Limited website content available for detailed profile assessment.",
+  "description_long": "Apex Bank operates as a banking institution with a web presence at apexbank.com. Based on the available website content, the company maintains standard banking infrastructure including secure server architecture, load balancing, and session management systems. The website implements standard cookie consent protocols and analytics tracking typical of modern financial institutions. Without access to the substantive banking service pages, product details, or institutional information beyond the technical infrastructure and consent management framework, a comprehensive assessment of Apex Bank's specific offerings, service range, and competitive positioning cannot be accurately determined. The website demonstrates basic security infrastructure with Cloudflare protection, bot detection mechanisms, and Google Analytics implementation. The cookie infrastructure suggests support for personalized content delivery and marketing analytics. The presence of formsite functionality indicates web-based form processing capability. Financial institutions of this type typically offer checking, savings, lending, and deposit services, but specific confirmation of Apex Bank's exact product suite requires access to their main service pages.",
   "logo_url": "",
   "website_url": "https://www.apexbank.com",
   "affiliate_url": "",
@@ -24,23 +24,24 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Web-based banking portal (implied by session management infrastructure)",
+    "Form processing and customer interaction (Formsite integration)",
+    "Website analytics and traffic monitoring",
+    "Bot detection and fraud prevention",
+    "Content personalization services",
+    "Load balancing and server optimization"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1931",
-    "Local community bank with personal service",
-    "22 locations"
+    "Implements security measures including bot detection (reCAPTCHA) and Cloudflare protection",
+    "Uses load balancing infrastructure (AWS ALB/CORS) for optimized user experience",
+    "Maintains session management capabilities for secure user interactions",
+    "Employs Google Analytics for website performance monitoring"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website content provided is primarily technical cookie/consent information with no accessible banking products or services detail",
+    "Unable to verify specific account types, interest rates, fees, or lending products from available content",
+    "No information available regarding FDIC insurance status, company background, or institutional credentials",
+    "Limited transparency regarding customer service options, support channels, or service areas"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +53,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9176,
   "latitude": 36.0576170012623,
   "longitude": -88.0962470397801,
@@ -94,12 +95,11 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Unable to determine from available website content",
+    "Profile completion requires access to actual banking service pages"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Apex Bank appears to be a legitimate banking institution, but the website content provided consists exclusively of technical infrastructure and cookie consent information. A complete profile assessment is impossible without access to substantive information about their actual banking products, services, fees, interest rates, and institutional details. Potential customers should navigate to the main site pages to evaluate specific offerings.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +107,10 @@
   ],
   "phone": "",
   "address": "102 E Main St, Camden, TN 38320",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Austin Capital Bank Ssb",
   "slug": "austin-capital-bank-ssb",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "consumer-lending"
   ],
-  "description_short": "FDIC-insured community bank in Austin, TX. $469M in assets. 15 offices.",
-  "description_long": "Austin Capital Bank Ssb is a community bank located in Austin, TX, established in 2006. The bank holds approximately $469M in total assets and $373M in deposits. It operates 15 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Austin Capital Bank is a technology-driven digital bank offering savings accounts, CDs, and money market accounts with a focus on security innovation, serving over 1 million users nationwide.",
+  "description_long": "Austin Capital Bank is a digital-first banking institution based in Austin, Texas that combines traditional community banking services with modern fintech capabilities. Founded with a mission to reimagine how banks protect and serve customers, the company operates on a national scale while maintaining community banking principles. The bank has been recognized as one of the fastest-growing and most innovative private companies in the U.S.\n\nAustin Capital Bank's primary offerings include deposit products such as high-yield savings accounts, certificates of deposit (CDs), money market accounts, and branded savings programs including Jackpot Savings and Rainy Day savings options. Their flagship product is the Fort Knox High-Security Savings Account, launched in July 2025, which features biometric identity verification and proprietary Closed-Loop technology designed to eliminate password-based vulnerabilities. The bank also provides checking accounts and online banking services with recently upgraded digital platforms.\n\nThe company distinguishes itself through a strong emphasis on security innovation, employing over 50 engineers to develop proprietary fraud prevention technology. Their Fort Knox account removes passwords entirely and uses biometric verification, positioning it as an industry-leading security product. Austin Capital Bank markets itself as thinking like a technology company rather than a traditional bank, combining banking expertise with state-of-the-art technological innovation.\n\nHowever, the website reveals limited information about their complete service offerings, fee structures, interest rates, and regulatory details. While they serve over 1 million users and focus heavily on security, potential customers should note that detailed pricing, minimum balance requirements, and FDIC insurance specifics are not clearly presented on the homepage. The recent migration to a new online banking platform required customer support contact for setup, suggesting potential transition growing pains.",
   "logo_url": "",
   "website_url": "https://www.austincapitalbank.com",
   "affiliate_url": "",
@@ -24,23 +24,33 @@
     "currency": "USD"
   },
   "services": [
+    "Fort Knox High-Security Savings Account with biometric verification",
+    "High-yield savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Money Market accounts",
+    "Jackpot Savings accounts with recurring deposit automation",
+    "MegaPrize savings options",
+    "Rainy Day emergency savings programs",
+    "Online banking platform with digital login",
     "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Customer support via phone (512-693-3600)",
+    "Digital banking platform migration and onboarding"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2006",
-    "Local community bank with personal service",
-    "15 locations"
+    "Fort Knox High-Security Savings Account uses biometric verification and eliminates passwords, reducing fraud vulnerability",
+    "Serves over 1 million users nationwide with technology-driven approach to banking",
+    "Multiple branded savings options (Jackpot Savings, Rainy Day, MegaPrize) designed for different financial goals",
+    "Recently launched high-yield secure savings account with proprietary Closed-Loop technology",
+    "Offers CDs, money market accounts, and checking accounts alongside savings products",
+    "Recognized as one of the fastest-growing and most innovative private companies in the U.S.",
+    "Combines traditional community banking with state-of-the-art technological innovation"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "New online banking platform requires customer support contact (512-693-3600) for first-time login setup, suggesting potential usability friction",
+    "Website lacks transparent information on interest rates, account fees, and minimum balance requirements",
+    "Limited details provided about FDIC insurance coverage and regulatory protections",
+    "Customer support phone number may indicate gaps in self-service digital onboarding",
+    "Minimal information about checking account features, overdraft policies, or other banking services beyond savings products"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58082,
   "latitude": 30.366153996608,
   "longitude": -97.739578028088,
@@ -94,12 +104,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Security-conscious savers seeking biometric authentication and advanced fraud protection for emergency funds",
+    "Customers building emergency reserves (3-9 months expenses) through automated recurring deposits",
+    "Tech-forward consumers who prefer digital banking with modern security standards over traditional banks"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Austin Capital Bank is best for security-conscious savers who prioritize fraud protection and want to build emergency reserves through automated savings vehicles. The main caveat is that critical banking details like interest rates, fees, minimum balances, and full FDIC protections are not transparently disclosed on their website, requiring direct customer contact for complete information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +117,10 @@
   ],
   "phone": "",
   "address": "3305 Steck Ave Ste 275, Austin, TX 78757",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

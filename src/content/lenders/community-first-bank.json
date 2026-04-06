@@ -1,15 +1,15 @@
 {
   "name": "Community First Bank",
   "slug": "community-first-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Butler, MO. $267M in assets. 4 offices.",
-  "description_long": "Community First Bank is a community bank located in Butler, MO, established in 1932. The bank holds approximately $267M in total assets and $244M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community First Bank is a West-Central Missouri community bank serving since 1997, offering deposit accounts, lending, CDs, IRAs, and investment services with local relationship banking.",
+  "description_long": "Community First Bank has been operating as a local community bank in West-Central Missouri since 1997. The bank positions itself as combining the deposit and loan services of a national brand with the convenience and personal service of a hometown institution. They emphasize local decision-making and community ties, with team members who are neighbors in the communities they serve.\n\nThe bank offers a comprehensive range of retail banking services including checking and savings accounts, personal and commercial lending, certificate of deposit (CD) accounts with terms ranging from 3 months to 60 months, individual retirement accounts (IRAs), money market accounts, and safe deposit boxes at four physical locations. They provide mobile banking through a dedicated app available on iPhone and Android, along with four proprietary ATM locations and nationwide surcharge-free ATM access through Money Pass and Shazam Privileged networks.\n\nCommunity First Bank differentiates itself through genuine local relationship banking rather than corporate banking chains. They advertise direct access to personal bankers, flexibility in lending products, and knowledge of local community needs. The bank also offers promotional coupons and discounts to local merchants for account holders, emphasizing community integration beyond standard banking services.\n\nThe bank operates as a traditional brick-and-mortar community bank with standard FDIC insurance coverage (up to $250,000 for IRAs). Their CD products have structured early withdrawal penalties ranging from 3 to 12 months of interest depending on term length. This is a straightforward regional bank suitable for customers seeking traditional banking services with local relationship management, though they do not appear to offer the specialized services found at larger national institutions.",
   "logo_url": "",
   "website_url": "https://www.communityfirstbank.net",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts with local merchant discounts",
+    "Savings accounts with added coupons and benefits",
+    "Personal and commercial lending with flexible terms",
+    "Certificate of Deposit (CD) accounts with 12 different term options (3 months to 60 months)",
+    "Individual Retirement Accounts (IRAs) with FDIC insurance up to $250,000",
+    "Money Market accounts",
+    "Safe deposit boxes at four locations",
+    "Mobile banking app for iPhone and Android",
+    "Proprietary ATM network (4 locations)",
+    "Nationwide surcharge-free ATM access via Money Pass and Shazam Privileged networks",
+    "Online banking portal with login access",
+    "Bill payment services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1932",
-    "Local community bank with personal service",
-    "4 locations"
+    "Four physical branch locations plus four proprietary ATMs in West-Central Missouri service area",
+    "Nationwide surcharge-free ATM access through Money Pass and Shazam Privileged networks",
+    "CD terms range from 3 months to 60 months with competitive rates displayed transparently",
+    "FDIC insurance coverage up to $250,000 on IRA accounts for security",
+    "Mobile banking app available for both iPhone and Android with real-time account access",
+    "Local merchant coupons and discounts for checking and savings account holders",
+    "Low minimum balance requirement of $1,000 to open CD accounts"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to West-Central Missouri only",
+    "Safe deposit box contents are explicitly not insured by FDIC, requiring additional insurance",
+    "Early withdrawal penalties on CDs range from 3 to 12 months of interest, which can be substantial on longer-term accounts",
+    "No mention of online account opening or remote services for non-local customers",
+    "Four ATM locations may not provide adequate coverage for rural or dispersed areas within their region"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10595,
   "latitude": 38.256889722061,
   "longitude": -94.3464420686189,
@@ -94,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "West-Central Missouri residents seeking traditional banking with local relationship management and community ties",
+    "Customers wanting FDIC-insured CD accounts and IRAs with in-person banker consultation for retirement planning",
+    "Small business owners and individuals needing flexible lending products with local decision-making",
+    "Customers who value locally-based customer service and community merchant discounts over national chain banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Community First Bank is best for West-Central Missouri residents who value local relationship banking, community involvement, and in-person service over digital-first or national options. The main caveat is limited geographic availability\u2014this bank serves only its local region and is not practical for customers outside West-Central Missouri or those requiring extensive online-only banking capabilities.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "915 W Fort Scott St, Butler, MO 64730",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

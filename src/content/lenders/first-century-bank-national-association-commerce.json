@@ -1,14 +1,14 @@
 {
   "name": "First Century Bank, National Association",
   "slug": "first-century-bank-national-association-commerce",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Commerce, GA. $984M in assets. 2 offices.",
-  "description_long": "First Century Bank, National Association is a community bank located in Commerce, GA, established in 2002. The bank holds approximately $984M in total assets and $846M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Full-service community bank offering checking, savings, loans, and specialized payment services including prepaid cards and ACH processing for individuals and businesses.",
+  "description_long": "First Century Bank, National Association is a community-focused financial institution that recently merged with First Covenant Bank to strengthen its market position and service capacity. The merger brought together two institutions with aligned values centered on customer service and community support. First Century Bank operates as a principle member of both Mastercard and Visa, positioning itself as a significant player in the payment processing space.\n\nThe bank offers a comprehensive suite of products across personal and business banking. Personal offerings include checking accounts, savings accounts (including junior and holiday savings options), and money market accounts, along with personal, automobile, and residential loans. For business clients, they provide business checking and loan products. Beyond traditional banking, First Century has developed a substantial payments division that includes prepaid card sponsorships, ACH processing services, and specialized payment solutions for various industries. They also serve community associations with dedicated banking and payment processing services.\n\nFirst Century distinguishes itself through its emphasis on technology-enabled payment solutions and consultative business approach. The bank is consistently ranked as one of the top prepaid card issuers in the country and offers customized ACH solutions spanning payroll, utility collections, B2B payments, and third-party loan processing. They provide free online banking with bill pay capabilities, paperless statement options, and multiple contact channels including phone and email support. Their refund advance loan programs (Jackson Hewitt and SBTPG Fast Cash Advance) indicate additional specialty lending services.\n\nAs a community bank, First Century is best suited for customers seeking relationship-based banking with local branch access and personalized service. However, the bank appears to focus significantly on B2B payment processing and institutional services, which may mean retail customers are secondary to their business operations strategy. The website emphasizes corporate payment solutions more prominently than consumer products, suggesting institutional clients are a primary revenue driver.",
   "logo_url": "",
   "website_url": "https://www.myfirstcenturybank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts and money market accounts",
+    "Business checking accounts",
+    "Personal, business, automobile, and residential loans",
+    "Prepaid card sponsorships (travel, payroll, GPR, incentive, reloadable, nonreloadable)",
+    "ACH origination services (payroll, utility collections, B2B payments)",
+    "Third-party sender (TPS) ACH processing",
+    "Mass payout and account withdrawal services",
+    "Community association banking and HOA origination services",
+    "Online bill pay with recurring payment capabilities",
+    "Free online banking and paperless statements",
+    "Jackson Hewitt Refund Advance loans",
+    "SBTPG Fast Cash Advance refund loans"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2002",
-    "Local community bank with personal service",
-    "2 locations"
+    "Consistently ranked as one of the top prepaid card issuers in the country with Mastercard and Visa principal membership",
+    "Comprehensive product suite including personal and business checking, savings, loans, and specialized payment services",
+    "Free online bill pay with recurring payment options and financial monitoring reports",
+    "Multiple communication channels: online banking, phone (800-332-8231), email, and in-person branches with extended drive-thru hours",
+    "Paperless banking option reducing mail fraud risk with anytime, anywhere online access",
+    "Customized ACH solutions for diverse industries including payroll, utility collections, and B2B payments",
+    "Recently merged with First Covenant Bank to enhance service capacity and growth positioning"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited branch locations mentioned (only Commerce Branch hours listed), suggesting limited physical footprint",
+    "Website emphasizes B2B payment processing more heavily than consumer banking products",
+    "No information provided about interest rates, fees, minimum deposit requirements, or competitive account terms",
+    "Refund advance loan program phone numbers require separate calls, adding friction to customer service",
+    "No mention of mobile app, mobile banking capabilities, or modern digital banking conveniences"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "GA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57123,
   "latitude": 34.2032800122179,
   "longitude": -83.4578129665264,
@@ -84,21 +95,22 @@
       "FDIC Cert #57123"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Business owners and corporations seeking customized payment processing and ACH solutions",
+    "Community association managers needing specialized banking and payment sponsorship services",
+    "Small to mid-sized companies interested in prepaid card programs for payroll or vendor payments",
+    "Individuals seeking traditional community banking with relationship-based service and local branch access"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Century Bank is best for business clients and community associations requiring specialized payment processing solutions, and for individuals seeking traditional community banking with personalized service. The primary caveat is that this institution operates with a heavy B2B and institutional focus; retail consumers should verify competitive pricing, fees, and digital capabilities before opening accounts, as the website emphasizes corporate payment solutions substantially more than consumer banking advantages.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1731 N Elm St, Commerce, GA 30529",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

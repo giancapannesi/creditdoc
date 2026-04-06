@@ -1,14 +1,14 @@
 {
   "name": "Farmers And Merchants Union Bank",
   "slug": "farmers-and-merchants-union-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Columbus, WI. $683M in assets. 13 offices.",
-  "description_long": "Farmers And Merchants Union Bank is a community bank located in Columbus, WI, established in 1861. The bank holds approximately $683M in total assets and $582M in deposits. It operates 13 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Farmers & Merchants Union Bank is a community bank offering personal and business checking, savings, debit cards, credit cards, and ATM access across multiple Wisconsin locations.",
+  "description_long": "Farmers & Merchants Union Bank (FMUB) is a community-based financial institution serving customers through multiple physical locations in Wisconsin. The bank operates as a traditional full-service bank with FDIC membership, indicating deposit insurance protection up to regulatory limits. The institution has absorbed the American Bank of Beaver Dam customer base, expanding its service area and customer reach. FMUB positions itself as a local banking alternative with personal relationships and community engagement.\n\nThe bank offers a comprehensive suite of consumer and business banking services including checking and savings accounts, Visa debit cards (personal and business), Visa credit cards for various customer segments (consumers, young adults, and businesses), and prepaid/reloadable Mastercard options. Customers can access accounts through online banking, mobile banking apps, and in-person at branch locations. The bank provides real-time debit card transaction posting, digital wallet integration (Apple Pay, Google Pay, Samsung Pay), and card management tools through Card Valet for transaction monitoring and spending controls. ATM access extends beyond FMUB locations through MoneyPass and ATM Access networks.\n\nFMUB distinguishes itself through community-focused services including free document shredding events, cyber awareness tools (dark web email scanning), and direct phone support for lost or stolen cards during both business and non-business hours. The bank offers 24/7 ATM access at all locations and emphasizes real-time transaction posting rather than legacy multi-day processing delays. Mobile banking capabilities include mobile check deposit and bill payment features. The institution actively communicates with customers through email updates, FAQs, and seasonal promotions.\n\nAs a traditional regional bank, FMUB serves customers who value local branch access and personal service but may have limited product diversity compared to larger national institutions. The website content focuses on core banking services without advertising premium wealth management, investment advisory, or specialized lending products. The bank's strength lies in accessible community banking rather than comprehensive financial services or competitive product innovation.",
   "logo_url": "",
   "website_url": "https://WWW.FMUB.BANK",
   "affiliate_url": "",
@@ -23,23 +23,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business checking and savings accounts",
+    "Personal Visa debit cards with real-time posting",
+    "Business Visa debit cards",
+    "Visa credit cards (consumer, young adult, and business segments)",
+    "Prepaid Mastercard gift cards (loadable and transferable)",
+    "Reloadable prepaid cards with direct deposit capability",
+    "International travel prepaid cards",
+    "Digital wallet integration (Apple Pay, Google Pay, Samsung Pay)",
+    "Card Valet transaction monitoring and spending controls via mobile app",
+    "Online banking and account management",
+    "Mobile banking with check deposit and bill payment",
+    "24/7 ATM access at branch locations and partner networks (MoneyPass, ATM Access)",
+    "Lost and stolen card reporting and replacement",
+    "eStatements and tax document delivery (1099 forms)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1861",
-    "Local community bank with personal service",
-    "13 locations"
+    "FDIC membership provides deposit insurance protection for consumer accounts",
+    "Real-time debit transaction posting eliminates multi-day processing delays",
+    "Digital wallet integration supports Apple Pay, Google Pay, and Samsung Pay",
+    "Card Valet feature offers real-time transaction alerts and customizable spending controls",
+    "Extended ATM access through MoneyPass and ATM Access networks beyond FMUB locations",
+    "24/7 ATM availability at all FMUB branch locations",
+    "Dedicated lost/stolen card support available during non-business hours (800-472-3272)",
+    "Free community services including document shredding events and dark web email scanning tool"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint\u2014primarily Wisconsin-based with no apparent national expansion or online-only banking option",
+    "Website content does not advertise competitive APRs, promotional rates, or differentiated yield on savings products",
+    "No mention of investment services, wealth management, or advisory offerings for customers seeking comprehensive financial planning",
+    "Mobile check deposit and bill pay mentioned but not detailed; feature parity with national banks unclear",
+    "Prepaid card offerings are basic (gift cards, travel cards) with limited reloadable card details"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +66,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14445,
   "latitude": 43.338682001149,
   "longitude": -89.015698986601,
@@ -93,12 +108,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Wisconsin residents seeking local branch access and personal banking relationships",
+    "Small business owners and entrepreneurs needing business checking and debit card services",
+    "Customers prioritizing real-time transaction visibility and mobile spending controls",
+    "Community-oriented depositors valuing FDIC protection and local financial institution support"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Farmers & Merchants Union Bank is best for Wisconsin customers and small business owners who prioritize local branch access, community relationships, and modern digital banking features like real-time transaction posting and mobile wallet support. The main caveat is geographic limitation\u2014the bank operates primarily in Wisconsin with no apparent national online banking option, making it unsuitable for customers seeking nationwide reach or those relocating outside the service area.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +122,11 @@
   ],
   "phone": "",
   "address": "159 W James St, Columbus, WI 53925",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

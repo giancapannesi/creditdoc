@@ -1,15 +1,15 @@
 {
   "name": "First National Bank",
   "slug": "first-national-bank-heavener",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Heavener, OK. $102M in assets. 3 offices.",
-  "description_long": "First National Bank is a community bank located in Heavener, OK, established in 1910. The bank holds approximately $102M in total assets and $88M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering checking, savings, mortgages, and business loans with mobile banking and local branch access.",
+  "description_long": "First National Bank (FNB) operates as a traditional community bank serving customers through physical branches and digital channels. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing deposit protection up to federal limits. Based on their website domain (okfnb.com), the bank appears to operate primarily in Oklahoma with a focus on local relationship banking.\n\nFNB offers a comprehensive suite of retail and commercial banking products. On the consumer side, they provide checking accounts (Peak Checking), high-yield savings accounts, mortgage loans, credit cards (Visa Platinum), and Visa Reloadable Debit Cards. Their digital offerings include a state-of-the-art mobile banking app, online banking with 24-hour access, mobile pay functionality, and the BaZing mobile app for local discounts. For business customers, they provide commercial loans for equipment and real estate purchases.\n\nThe bank emphasizes their \"Peak Banking\" service philosophy, which centers on customer experience across all touchpoints\u2014from phone support to loan closing. They highlight employee recognition through a monthly Featured Employee of the Month program, suggesting a culture focused on service quality. Their marketing emphasizes convenience, local expertise, and the combination of traditional banking relationships with modern digital tools.\n\nAs a community bank, FNB's primary limitation is likely geographic\u2014services appear concentrated in Oklahoma based on available information. While they offer competitive products like high-yield savings and reloadable debit cards, they do not appear to differentiate on pricing or have specialized lending programs. The website provides limited transparency on specific interest rates, fees, or loan terms, requiring customers to contact branches directly for detailed product information.",
   "logo_url": "",
   "website_url": "https://www.okfnb.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Peak Checking accounts",
+    "High-yield savings accounts",
+    "Mortgage loans for home purchase",
+    "Mobile banking app",
+    "Online banking (24-hour access)",
+    "Mobile pay and digital wallet integration",
+    "Visa Platinum credit cards",
+    "Visa Reloadable Debit Cards",
+    "Commercial loans (equipment and real estate)",
+    "ATM access",
+    "Check ordering",
+    "Local branch and ATM locator"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1910",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits with full government backing",
+    "Mobile banking app with 24-hour online access",
+    "Mobile pay capability integrated with debit cards and digital wallets",
+    "High-yield savings accounts available",
+    "Local mortgage lending with in-person guidance through loan process",
+    "Specialized commercial lending for small business equipment and real estate",
+    "Reloadable Visa Debit Card accepted at ATMs and point-of-sale nationwide"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation\u2014services appear limited to Oklahoma region based on website domain",
+    "Lacks transparency on specific interest rates, APYs, and fee schedules on homepage",
+    "No information provided about minimum balance requirements or account maintenance fees",
+    "Limited detail on credit card rewards, benefits, or APR for Visa Platinum card",
+    "No mention of investment services, wealth management, or advisory services"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4111,
   "latitude": 34.8895134352084,
   "longitude": -94.6007707211715,
@@ -94,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Oklahoma residents seeking traditional community banking with local branch relationships",
+    "Homebuyers in service area looking for local mortgage guidance and processing",
+    "Small business owners needing commercial loans for equipment or property",
+    "Customers wanting FDIC-insured deposits with mobile banking convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First National Bank is best for Oklahoma-area consumers and small business owners seeking a traditional community banking experience with modern digital convenience and FDIC deposit protection. The main caveat is the apparent geographic limitation to Oklahoma and lack of transparent pricing information, requiring direct contact with branches for specific rates and terms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,10 @@
   ],
   "phone": "",
   "address": "400 E 1St St, Heavener, OK 74937",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

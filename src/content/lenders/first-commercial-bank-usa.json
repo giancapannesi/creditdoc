@@ -1,14 +1,14 @@
 {
   "name": "First Commercial Bank (Usa)",
   "slug": "first-commercial-bank-usa",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Alhambra, CA. $836M in assets. 8 offices.",
-  "description_long": "First Commercial Bank (Usa) is a community bank located in Alhambra, CA, established in 1997. The bank holds approximately $836M in total assets and $638M in deposits. It operates 8 office locations. Designated as a Minority Board and Serving Asian or Pacific Islander Community. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal and commercial banking, loans, and online services with a 5-Star BauerFinancial rating for financial strength and stability.",
+  "description_long": "First Commercial Bank (USA) is a federally insured financial institution that operates as a full-service bank with both personal and commercial banking divisions. The bank is backed by FDIC insurance and the full faith and credit of the U.S. Government, providing depositors with federal protection on eligible accounts. According to their website, the institution has achieved a 5-Star rating from BauerFinancial, the nation's premier bank rating firm, classifying it as a \"superior\" financial institution for 2025.\n\nThe bank offers a comprehensive suite of financial products and services spanning personal banking, commercial banking, loan products, and international services. Customers can access checking and savings accounts, certificates of deposit (TCDs), various loan products, and bill pay functionality. The bank provides both in-person banking at physical locations and digital access through online banking platforms available 24/7, with separate portals for personal and business customers. Online banking features include account balance viewing, transaction history access, money transfers, bill payment, and transaction downloads for personal financial management.\n\nFirst Commercial Bank (USA) distinguishes itself through its emphasis on customer service (\"Customer First, Service Foremost\") and its commitment to serving diverse customer bases, offering bilingual website support in English and Traditional Chinese. The institution maintains dedicated customer service channels including email (internetbanking@bankfcb.com) and phone support (888-526-0350). The bank's focus on both retail and commercial customers, combined with its strong financial stability rating, positions it as a full-service community bank.\n\nHowever, the website content is limited in specific details about loan terms, interest rates, account minimums, or product pricing. While the bank advertises loan solutions and commercial banking, concrete information about competitive rates, fees, or specific loan products is not provided on the pages available. Prospective customers would need to contact the bank directly for detailed product information and pricing comparisons.",
   "logo_url": "",
   "website_url": "https://bankfcb.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (TCDs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Commercial banking solutions",
+    "Business loans and financing",
+    "Online banking (personal and business portals)",
+    "Bill pay services",
+    "Money transfers between accounts",
+    "International services",
+    "Transaction history and account balance viewing",
+    "Transaction download to personal financial management software"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1997",
-    "Local community bank with personal service",
-    "8 locations"
+    "FDIC-insured deposits backed by U.S. Government full faith and credit",
+    "5-Star BauerFinancial rating for financial strength and stability (2025)",
+    "24/7 online banking access for personal and business accounts",
+    "18 months of transaction history available in online banking platform",
+    "Bilingual support in English and Traditional Chinese",
+    "Multiple account types available: checking, savings, TCDs, and loan accounts",
+    "Dedicated customer service via phone (888-526-0350) and email (internetbanking@bankfcb.com)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information about interest rates, APYs, or account minimums",
+    "Limited details on loan products, terms, and eligibility requirements",
+    "No pricing transparency for fees or service charges on main website",
+    "Minimal information about physical branch locations or hours",
+    "Account information updates only on business days, not real-time"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34496,
   "latitude": 34.0958849918544,
   "longitude": -118.124491022026,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking FDIC-insured banking with strong financial stability credentials",
+    "Bilingual customers (English/Traditional Chinese speakers) seeking full-service banking",
+    "Small business owners needing commercial banking and loan solutions",
+    "Customers prioritizing 24/7 online and bill pay services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Commercial Bank (USA) is best suited for customers seeking a federally insured, full-service bank with strong financial stability credentials and 24/7 digital banking access. The main caveat is that the website provides minimal transparency on interest rates, fees, and specific loan terms\u2014customers must contact the bank directly for detailed pricing and product comparisons before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "200 E Main St, Alhambra, CA 91801",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06"
 }

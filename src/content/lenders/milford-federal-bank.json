@@ -1,7 +1,7 @@
 {
   "name": "Milford Federal Bank",
   "slug": "milford-federal-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
@@ -9,8 +9,8 @@
     "mutual-bank",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Milford, MA. $541M in assets. 4 offices.",
-  "description_long": "Milford Federal Bank is a community bank located in Milford, MA, established in 1937. The bank holds approximately $541M in total assets and $433M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Milford Federal Bank is a community-focused financial institution offering deposit accounts, mortgages, home equity loans, and business lending with online banking services.",
+  "description_long": "Milford Federal Bank operates as a traditional community bank providing comprehensive financial services to over 20,000 customers. The institution emphasizes personalized service and community support, positioning itself as a bank that tailors products to individual customer needs rather than a one-size-fits-all lender.\n\nThe bank offers three primary service categories: deposit accounts (savings accounts tailored to different financial goals), loans and mortgages (home purchases, refinancing, and home equity products), and business services (business loans with flexible terms and competitive rates). They provide online banking access available 24/7, bill pay functionality, and e-statement delivery to reduce paperwork and improve account security.\n\nMilford Federal distinguishes itself through emphasis on personalized service, easy application and closing processes for loans, and community focus. Their website highlights efforts to \"support our community in all the ways we can\" and presents banking as simplified through their guidance and support. They position themselves as flexible lenders willing to tailor loan structures to customer needs.\n\nKey limitations are notable: the website displays \"0 branches\" and \"0 employees,\" which appears to be a template error or indicates incomplete profile data that raises questions about the bank's current operational structure and physical presence. The website provides limited information about specific product rates, terms, eligibility requirements, or concrete details about account features. The content relies heavily on aspirational messaging rather than concrete product specifications.",
   "logo_url": "",
   "website_url": "https://www.milfordfederal.com",
   "affiliate_url": "",
@@ -25,23 +25,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Savings accounts for various financial goals (vacation, college, etc.)",
+    "Mortgage loans for home purchase",
+    "Mortgage refinancing",
+    "Home equity loans",
+    "Business loans with flexible terms",
+    "Online banking platform (24/7 access)",
+    "Bill pay service",
+    "E-statement delivery and management",
+    "Deposit account selection guidance",
+    "Loan application and closing support"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1937",
-    "Local community bank with personal service",
-    "4 locations"
+    "24/7 free online banking access for account management and transactions",
+    "Free bill pay service covering utility companies and various payees",
+    "Flexible business lending with competitive rates tailored to applicant needs",
+    "Home equity and mortgage loan options including refinancing",
+    "E-statement delivery reduces paper mail and improves account security",
+    "Serves over 20,000 customers, indicating established customer base",
+    "Online-focused operations reduce overhead typically passed to customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website shows '0 branches' and '0 employees,' suggesting operational data issues or lack of physical banking locations",
+    "No specific interest rates, APRs, or fee information disclosed on website",
+    "Limited details on loan terms, qualification requirements, or application timelines",
+    "No information about account minimums, deposit insurance details, or specific savings account features",
+    "Minimal transparency about business loan product types, maximum loan amounts, or SBA lending status"
   ],
   "contact": {
     "phone": "",
@@ -53,7 +62,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29835,
   "latitude": 42.1387130264839,
   "longitude": -71.5209310834859,
@@ -89,18 +98,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Community-minded customers seeking personalized banking relationships",
+    "Small business owners seeking flexible lending with tailored terms",
+    "Homebuyers and homeowners seeking mortgages and home equity products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Milford Federal Bank is best suited for customers seeking traditional community banking with personalized service, particularly small business owners and homebuyers in their service area. Primary caveat: the website contains technical errors (showing 0 branches and 0 employees) that raise questions about current operational status, and lacks concrete product details, rates, and terms needed for informed financial decisions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +117,11 @@
   ],
   "phone": "",
   "address": "246 Main St, Milford, MA 01757",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

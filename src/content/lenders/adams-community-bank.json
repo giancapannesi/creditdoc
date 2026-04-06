@@ -1,15 +1,15 @@
 {
   "name": "Adams Community Bank",
   "slug": "adams-community-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Adams, MA. $1031M in assets. 10 offices.",
-  "description_long": "Adams Community Bank is a community bank located in Adams, MA, established in 1869. The bank holds approximately $1031M in total assets and $830M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Independent community savings bank established in 1869, offering checking, savings, CDs, mortgages, and fraud protection services to individuals and businesses.",
+  "description_long": "Adams Community Bank is an independent community savings bank that has served customers since 1869, positioning itself as a locally-focused financial institution in the Berkshires region. The bank emphasizes its mutual ownership structure and dedication to building trusted, long-term relationships with both individual customers and local businesses rather than prioritizing rapid growth or expansion.\n\nThe bank offers a range of standard banking products including checking accounts (Premier Checking tier available), high-yield savings accounts, certificates of deposit (CDs) with seasonal promotional rates, and mortgage services. Current promotions include a 12-month Business CD special, a high-yield savings account with online-only limited-time rates, and an 11-month CD with bonus rates for Premier Checking customers. They provide online banking access, financial calculators, and educational resources through ACB University to help customers make informed financial decisions.\n\nAdams Community Bank differentiates itself through its community-focused mission and core values emphasizing customer service, local support, and employee engagement. The bank has partnered with Carefull to provide customers with free account, credit, and identity monitoring to protect against fraud, scams, and identity theft. They offer additional resources including a ScamCheck tool, a Security Center with identity theft education, and multiple contact channels (phone, email, in-person) for customer support.\n\nThe bank appears well-positioned for customers seeking traditional banking services from a locally-owned institution rather than a national chain. However, as a regional community bank, it may have limited branch locations and product variety compared to larger institutions, and specific details about account fees, interest rates, and loan products are not fully detailed on their website.",
   "logo_url": "",
   "website_url": "https://www.adamscommunity.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Online banking with login access",
+    "Checking accounts (Premier Checking tier)",
+    "High-yield savings accounts (online-only limited-time offer)",
+    "Certificates of deposit (12-month Business CD, 11-month limited-time CD)",
+    "Mortgage services (origination and refinancing)",
+    "Free account, credit, and identity monitoring via Carefull",
+    "ScamCheck fraud detection tool for email/text/message verification",
+    "ACB University financial education resources",
+    "Financial calculators for refinancing and mortgage planning",
+    "Security Center with identity theft protection education",
+    "Customer support via phone, email, and in-person",
+    "Account and fraud protection services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1869",
-    "Local community bank with personal service",
-    "10 locations"
+    "Free fraud, credit, and identity monitoring through Carefull partnership\u2014no additional cost to customers",
+    "Established 155+ year history (since 1869) providing stability and long-term community presence",
+    "Mutually owned structure means the bank is not shareholder-driven and can prioritize customer interests",
+    "Seasonal promotional rates on CDs and high-yield savings accounts with bonus rates for Premier Checking customers",
+    "ACB University educational resource to help customers make informed financial decisions",
+    "Multiple contact methods available (phone, email, in-person) with commitment to customer service",
+    "Free financial calculators to help customers evaluate mortgage refinancing and payment options"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic reach as a regional community bank\u2014may not have branches or services available in all areas",
+    "Minimal details provided about specific account fees, interest rates, APYs, or loan terms on website",
+    "No information about FDIC insurance coverage, deposit insurance limits, or regulatory details",
+    "Limited product offerings compared to national banks\u2014no mention of investment services, wealth management, or business banking beyond basic CDs",
+    "Website lacks transparency on mortgage rates, personal loan options, or business loan products"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 90140,
   "latitude": 42.6207275700852,
   "longitude": -73.1196413995324,
@@ -94,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers in the Berkshires region seeking relationship-based banking from a locally-owned institution",
+    "Small business owners wanting community bank support for business CDs and local lending",
+    "Customers prioritizing fraud protection and identity monitoring as built-in banking features",
+    "Individuals seeking personalized customer service and in-person banking relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Adams Community Bank is best for customers in the Berkshires region seeking traditional banking services from a stable, community-focused institution with free fraud protection included. The main caveat is limited geographic availability and minimal public information about specific rates, fees, and product terms, requiring direct contact with the bank for detailed pricing and service information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "2 Center St, Adams, MA 01220",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }
