@@ -1,14 +1,14 @@
 {
   "name": "Gateway Bank",
   "slug": "gateway-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Mendota Heights, MN. $301M in assets. 2 offices.",
-  "description_long": "Gateway Bank is a community bank located in Mendota Heights, MN, established in 2004. The bank holds approximately $301M in total assets and $263M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community-focused FDIC-insured bank offering personalized checking, savings, and business financing with an emphasis on local investment and relationship banking.",
+  "description_long": "Gateway Bank positions itself as a community-oriented financial institution that prioritizes personalized banking relationships over large regional or national alternatives. The bank serves both personal and business clients, with particular emphasis on multi-family housing financing and small business growth. Based on their website messaging, they have established themselves in their local market through direct client relationships and long-term customer retention.\n\nThe bank offers a range of core banking services including personal checking and savings accounts with competitive rates, online banking, remote deposit capabilities, and business financing options. They emphasize having personalized bankers who work with customers to find accounts and financing solutions tailored to individual needs. Their business lending appears to focus on growth financing and real estate/multi-family housing projects. Standard banking features include online login, lost/stolen card reporting, and rate information tools.\n\nGateway Bank differentiates itself through community investment and relationship banking. Their marketing emphasizes local charitable giving, sponsorship of community events, and the value of banking with an institution \"rooted in your values.\" Customer testimonials highlight long-term relationships (one customer reports 15+ years) and personal banker relationships by name. They position themselves as an alternative to \"large regional banks\" with the implication of superior service and local accountability.\n\nAs a community bank, Gateway offers personalized service and local decision-making that larger institutions typically cannot match. However, they appear to be a regional institution with limited branch locations, which may restrict accessibility for customers outside their service area. The website provides limited specific information about account features, rate competitiveness, fees, or detailed lending requirements, requiring customers to contact the bank directly for detailed product information. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.gateway.bank",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with competitive rates",
+    "Savings accounts with competitive rates",
+    "Online banking platform with login portal",
+    "Remote deposit capability",
+    "Multi-family housing financing options",
+    "Business growth financing",
+    "Lost and stolen card reporting",
+    "Rate information tools and calculators",
+    "Personal banker consultations for account selection",
+    "Community sponsorship and charitable giving programs"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2004",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits backed by U.S. government",
+    "Personalized banker relationships with named representatives helping clients long-term",
+    "Multi-family housing and business financing options to support growth",
+    "Online banking and remote deposit capabilities for convenience",
+    "Community investment focus with charitable giving and local event sponsorship",
+    "Competitive account rates offered across checking and savings products",
+    "Long customer retention documented with testimonials citing 15+ year relationships"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability as regional bank, likely restricts access outside service territory",
+    "Website provides minimal specific information about rates, fees, or account features",
+    "No details provided about minimum balances, overdraft fees, or account requirements",
+    "Limited transparency on specific lending criteria or qualification requirements for business financing",
+    "Small institution may have fewer ATM locations and services compared to larger banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57644,
   "latitude": 44.8850948572555,
   "longitude": -93.1230836702153,
@@ -84,21 +93,22 @@
       "FDIC Cert #57644"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs seeking relationship-based lending and multi-family housing financing",
+    "Community-minded customers who value local investment and personalized banking service",
+    "Customers in their geographic service area seeking alternatives to large regional banks",
+    "Real estate investors and developers specializing in multi-family properties"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Gateway Bank is best suited for small business owners, real estate investors, and community-minded customers within their service territory who prioritize relationship banking and local reinvestment over the convenience of large national institutions. The primary caveat is geographic limitation as a regional bank, combined with sparse public information about specific rates, fees, and lending terms requiring direct customer inquiry.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +116,11 @@
   ],
   "phone": "",
   "address": "745 Market St, Mendota Heights, MN 55118",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

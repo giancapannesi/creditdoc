@@ -1,14 +1,14 @@
 {
   "name": "Cbbc Bank",
   "slug": "cbbc-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Maryville, TN. $545M in assets. 7 offices.",
-  "description_long": "Cbbc Bank is a community bank located in Maryville, TN, established in 1973. The bank holds approximately $545M in total assets and $468M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "CBBC Bank is an FDIC-insured community bank serving Blount County, Tennessee, offering checking, savings, loans, and online banking services.",
+  "description_long": "CBBC Bank is a regional community bank based in Blount County, Tennessee, operating as a full-service financial institution backed by FDIC insurance and the full faith and credit of the U.S. Government. The bank has established itself as a local banking option with physical branch locations and ATM networks throughout its service area.\n\nThe bank offers a comprehensive suite of financial products including personal and business checking accounts, savings and money market accounts, online banking through BankOnLine, credit cards, and various lending products. On the lending side, CBBC provides mortgage loans for home purchases and refinancing, auto loans, personal loans, home equity loans, and CD-secured loans. Customers can access services through multiple channels: physical branches, online banking, mobile apps (Apple App Store and Google Play Store), and Interactive Teller Machines (ITMs) with extended hours and live Teller Connect support.\n\nCBBC Bank distinguishes itself through 24/7 self-service banking via ITMs and online platforms, convenience features like online check reordering, and a focus on community relationships typical of regional banks. The bank emphasizes accessibility with features including screen-reader mode and an accessibility guide, suggesting attention to diverse customer needs. Their marketing emphasizes personalized service and the ability to bank \"anytime, anywhere\" while maintaining local branch presence.\n\nAs a traditional community bank, CBBC is best suited for customers seeking FDIC-insured deposit products and conventional lending through a locally-rooted institution. The lack of detailed rate information, product-specific terms, and fee structures on the website makes it difficult to assess competitive positioning on pricing. Like many regional banks, CBBC's service area appears geographically limited to Tennessee, which may be a constraint for customers seeking nationwide accessibility. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.cbbc.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Business checking accounts",
+    "Savings and money market accounts",
+    "Online banking (BankOnLine)",
+    "Mobile banking apps (iOS and Android)",
+    "Mortgage loans (home purchase and refinance)",
+    "Auto loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Home equity loans",
+    "CD-secured loans",
+    "Credit cards",
+    "Interactive Teller Machines (24/7 access with Teller Connect)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1973",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "24/7 Interactive Teller Machines (ITMs) with extended banking hours and live Teller Connect support",
+    "Multiple product offerings: checking, savings, mortgages, auto loans, personal loans, credit cards, and CD-secured loans",
+    "Online banking platform (BankOnLine) with mobile apps for iOS and Android",
+    "Physical branch and ATM locator tool for finding nearby locations",
+    "Online check reordering service for customer convenience",
+    "Accessibility features including screen-reader mode and accessibility guides"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area (Blount County, Tennessee focus) restricts accessibility for non-local customers",
+    "Website lacks specific information about rates, fees, APYs, and loan terms needed for comparison shopping",
+    "No details provided about minimum deposit requirements, account balance thresholds, or eligibility criteria",
+    "Limited transparency about business loan programs, specific credit card products, or mortgage options",
+    "No information about overdraft fees, foreign transaction fees, or other common banking charges"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 21227,
   "latitude": 35.7575830052409,
   "longitude": -83.9691020194297,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Blount County, Tennessee residents seeking FDIC-insured local banking with personal service",
+    "Home buyers and refinancers in the service area looking for mortgage products",
+    "Small business owners needing business checking and local lending relationships",
+    "Customers preferring 24/7 self-service banking through ITMs and online platforms"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "CBBC Bank is best for Blount County, Tennessee residents and businesses seeking traditional FDIC-insured banking services with local branch presence and 24/7 self-service options. The main caveat is that detailed pricing information, rate comparisons, and specific terms are not available on their website, requiring direct contact with the bank for accurate rate and fee comparison.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "330 E Broadway Ave, Maryville, TN 37804",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

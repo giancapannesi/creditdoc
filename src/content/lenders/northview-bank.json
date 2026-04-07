@@ -1,14 +1,14 @@
 {
   "name": "Northview Bank",
   "slug": "northview-bank",
-  "category": "personal-loans",
+  "category": "mortgages",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Sandstone, MN. $470M in assets. 12 offices.",
-  "description_long": "Northview Bank is a community bank located in Sandstone, MN, established in 1908. The bank holds approximately $470M in total assets and $391M in deposits. It operates 12 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Regional bank serving Minnesota and Wisconsin for 100+ years, specializing in mortgages, vacation property loans, and land financing with in-house underwriting.",
+  "description_long": "Northview Bank is a locally owned financial institution that has served Minnesota and Wisconsin for over 100 years under the leadership of the Pogatchnik family. The bank operates as a community-focused lender with branches throughout the upper Midwest, emphasizing personal relationships and local decision-making rather than corporate bureaucracy.\n\nThe bank's primary offerings include home mortgages, home equity loans, construction loans, vacation property loans (cabin loans, lakeshore property loans, hunting land loans), and land loans. They explicitly market expertise in financing bare land\u2014a niche they've developed over decades. Many mortgage products are underwritten in-house, allowing for faster turnaround times and greater flexibility than national lenders. The bank also provides personal banking, business banking, and investment advisory services.\n\nNorthview Bank distinguishes itself through local ownership and decision-making authority, extensive experience in specialty property financing (particularly cabin and land loans), in-house underwriting for competitive rates, and demonstrated community engagement (Toys for Tots sponsorships, charitable giving). Their marketing emphasizes \"Minnesota Nice\" values and family-oriented lending practices. The bank provides online banking, mobile apps, loan officer access, and rate calculators.\n\nAs a regional bank, Northview Bank is best suited for borrowers in Minnesota and Wisconsin seeking mortgage or specialty property financing who value personal service and local decision-making. However, their geographic limitation and smaller size mean less product diversity than national banks, potentially higher rates than some competitors, and limited online application processes based on website presentation.",
   "logo_url": "",
   "website_url": "http://www.northviewbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Home mortgage loans (purchase and refinance)",
+    "Cabin loans and vacation property financing",
+    "Lakeshore property loans",
+    "Hunting land loans",
+    "Bare land and land loans",
+    "Home equity loans",
+    "Construction loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business banking and loans",
+    "Investment advisory services",
+    "Personal banking (checking, savings, debit cards)",
+    "Online banking and mobile app access"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1908",
-    "Local community bank with personal service",
-    "12 locations"
+    "Over 100 years of operating history and local ownership under founding family leadership",
+    "Specialized expertise in bare land financing and cabin/vacation property loans developed over decades",
+    "In-house underwriting of many mortgage products enabling faster closings and greater flexibility",
+    "Community-focused with demonstrated charitable involvement (Toys for Tots, local sponsorships)",
+    "Local decision-making and service\u2014not corporate call centers",
+    "Multiple specialty loan products (hunting land loans, lakeshore property loans, cabin loans) unavailable at traditional lenders",
+    "Competitive rates marketed alongside personalized service approach"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to Minnesota and Wisconsin only\u2014not available nationwide",
+    "Website lacks transparent rate information, APR ranges, or loan term details needed for comparison",
+    "Limited online application capability\u2014requires phone contact (1-800-450-7575) or in-person visit",
+    "Smaller institution means fewer loan programs and less product diversity than national banks",
+    "No mention of FHA, VA, USDA, or reverse mortgage products available at larger lenders"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10956,
   "latitude": 46.1331490083286,
   "longitude": -92.8656760104306,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Minnesota and Wisconsin borrowers purchasing primary homes or investment properties who value personal service",
+    "Land buyers and cabin/vacation property purchasers seeking specialized financing expertise",
+    "Borrowers seeking faster closing times through in-house underwriting and local decision-making",
+    "Community-minded borrowers who prefer supporting locally owned financial institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Northview Bank is ideal for borrowers in Minnesota and Wisconsin seeking mortgages or specialty property financing (especially land, cabin, or vacation properties) who prioritize personal service and local decision-making over lowest rates. The primary caveat is geographic limitation and the need to contact by phone or visit branches in person, as the website provides minimal rate transparency or online application functionality.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "510 Main St, Sandstone, MN 55072",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

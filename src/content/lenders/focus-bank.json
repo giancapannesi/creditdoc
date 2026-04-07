@@ -1,14 +1,14 @@
 {
   "name": "Focus Bank",
   "slug": "focus-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Charleston, MO. $881M in assets. 11 offices.",
-  "description_long": "Focus Bank is a community bank located in Charleston, MO, established in 1930. The bank holds approximately $881M in total assets and $670M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured regional bank offering personal and business checking, savings, loans, and credit cards with branches in Arkansas and Missouri.",
+  "description_long": "Focus Bank is a regional financial institution that operates as a traditional FDIC-insured bank with physical locations in Paragould and Jonesboro, Arkansas, as well as Sikeston, Missouri. The bank serves both personal and business customers through a combination of in-branch and digital banking channels. Founded to serve the local community, Focus Bank positions itself as a relationship-based lender willing to work with local businesses and residents.\n\nThe bank offers a comprehensive suite of personal banking products including multiple checking account tiers (Really Free Checking, High Interest Checking, Direct Interest Checking, 50+ Interest Checking), savings accounts, money market accounts, CDs with promotional rates (7-month at 3.80% APY and 11-month at 3.75% APY), IRAs, and personal loans. On the business side, they provide business checking accounts, business savings, cash management services, merchant card services, employee checking solutions, and business loans. Additional services include home mortgage loans, auto loans, home equity lines of credit, construction loans, agriculture loans, and equipment leasing. Credit products include both personal and business credit cards through Mastercard.\n\nFocus Bank distinguishes itself through several localized features: cannabis banking services for eligible businesses, agriculture lending expertise reflecting regional customer base, Notifi real-time alert system for account monitoring, a Focus Rewards program, a Tell-A-Friend referral program, and accessible digital banking platforms including mobile banking and mobile wallet integration. The bank emphasizes accessibility with AudioEye optimization and provides educational resources through partnerships with Banzai Financial Literacy and FFIEC.\n\nAs a regional bank with limited geographic footprint, Focus Bank is best suited for customers in their service areas seeking relationship banking with local decision-making. The trade-off is limited branch access compared to national banks, and customers outside Arkansas and Missouri cannot access physical locations. Their product offerings are solid but not differentiated from larger competitors, and no specific information about rates competitiveness or fee structures is detailed on the homepage.",
   "logo_url": "",
   "website_url": "https://www.focusbank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Really Free, High Interest, Direct Interest, 50+ Interest)",
+    "Personal savings products (Simple Savings, Money Market Accounts, Christmas Club, CDs, IRAs)",
+    "Personal loans and personal credit cards",
+    "Business checking accounts and business savings",
+    "Business loans, commercial real estate loans, and business credit cards",
+    "Home mortgage loans, construction loans, home equity loans, and HELOCs",
+    "Auto loans and agricultural loans",
+    "Equipment and vehicle leasing",
+    "Cash management and merchant card services",
+    "Mobile banking, digital banking, and bill pay",
+    "Real-time account alerts (Notifi)",
+    "Mastercard debit cards and mobile wallet integration"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1930",
-    "Local community bank with personal service",
-    "11 locations"
+    "FDIC-insured deposits with full faith and credit backing from U.S. Government",
+    "Multiple checking account options including specialized accounts for seniors (50+)",
+    "Competitive CD rates advertised (3.80% APY for 7-month, 3.75% APY for 11-month online CDs)",
+    "Cannabis banking services available, addressing underserved business segment",
+    "Real-time Notifi alerts for account monitoring via email or text",
+    "Agriculture and equipment lending expertise serving rural/business customers",
+    "Free referral rewards program (Tell-A-Friend) incentivizing customer acquisition",
+    "Accessible digital banking including mobile banking and mobile wallet support"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint (only Paragould, Jonesboro AR and Sikeston MO) restricts accessibility for most U.S. consumers",
+    "No information provided about competitive fee schedules or APR rates on personal/business loans on main website",
+    "Limited differentiation in product offerings compared to larger regional and national banks",
+    "No mention of special programs like down payment assistance, first-time homebuyer programs, or other consumer protections",
+    "Sparse details about business lending approval criteria or SBA lending specialization despite business-focused marketing"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1426,
   "latitude": 36.923392,
   "longitude": -89.350154,
@@ -93,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Residents and businesses in Paragould/Jonesboro, Arkansas or Sikeston, Missouri seeking relationship banking",
+    "Legitimate cannabis businesses in their service area needing banking services",
+    "Agricultural businesses and farmers requiring specialized lending and cash management",
+    "Small to mid-sized businesses seeking local decision-making and personalized service"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Focus Bank is best for customers in its Arkansas and Missouri service areas who value local banking relationships and need comprehensive personal or business financial services. The primary caveat is severe geographic limitation\u2014the bank operates only in three specific locations, making it inaccessible to the vast majority of U.S. consumers seeking national or online-only banking options.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "101 South Main Street, Charleston, MO 63834",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

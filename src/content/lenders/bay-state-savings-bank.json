@@ -1,14 +1,14 @@
 {
   "name": "Bay State Savings Bank",
   "slug": "bay-state-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Worcester, MA. $572M in assets. 7 offices.",
-  "description_long": "Bay State Savings Bank is a community bank located in Worcester, MA, established in 1895. The bank holds approximately $572M in total assets and $510M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bay State Savings Bank is a community-focused bank offering personal and business banking services including checking, savings, mortgages, and loans across multiple Massachusetts locations.",
+  "description_long": "Bay State Savings Bank operates as a traditional community bank with a strong local presence in Massachusetts, with branches mentioned in Worcester (Burncoat Street and Grafton Street locations), Auburn, and Shrewsbury. The bank emphasizes personal relationship banking and local community commitment as core differentiators from larger national institutions. They offer a comprehensive range of banking products including savings and checking accounts, mortgage lending for home purchases, personal and business loans, and credit-building services. The bank provides digital banking capabilities including mobile app access and ATM networks for account management and cash access. What distinguishes Bay State Savings Bank is their consistent emphasis on personalized customer service and staff familiarity with individual clients\u2014multiple customer testimonials specifically mention staff members knowing customers by name and going above and beyond typical banking services. Customer reviews highlight particular loan officers like Jeff Locke and client experience managers like Emily Perry by name, suggesting a genuine relationship-based approach rather than transactional banking. The bank appears to serve both personal consumers seeking mortgages and small business owners requiring business checking and lending relationships. However, the website provides minimal specific information about product features, interest rates, fees, loan terms, or eligibility requirements. No details are available about FDIC insurance coverage, specific APR ranges, minimum deposit requirements, or competitive advantages in terms of rates versus larger banks. The testimonial-heavy marketing approach, while suggesting strong customer satisfaction, does not substitute for transparent product information that consumers typically need to make informed banking decisions. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://baystatesavingsbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Mortgage lending for home purchases",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business loans",
+    "Mobile banking app",
+    "ATM network access",
+    "Bill payment services",
+    "Credit building services",
+    "Small business relationship lending"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1895",
-    "Local community bank with personal service",
-    "7 locations"
+    "Multiple branch locations in central Massachusetts (Worcester, Auburn, Shrewsbury area) for in-person banking",
+    "Named loan officers like Jeff Locke and client experience staff available for personalized mortgage and business lending support",
+    "Mobile app and ATM network for remote account access and cash withdrawals",
+    "Long-term customer relationships documented\u2014some customers banking for 20-40 years",
+    "Small business lending available with dedicated relationship management",
+    "Mortgage lending services for home purchases with expedited processing mentioned",
+    "Staff recognition programs and emphasis on employee knowledge and friendliness consistently mentioned"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no specific information about interest rates, APRs, or fee structures for any products",
+    "No details on minimum deposit requirements, account opening options online versus in-branch, or product eligibility criteria",
+    "Limited service area appears confined to central Massachusetts with no indication of online-only or remote account opening",
+    "No information about special loan programs (FHA, VA, USDA mortgages) despite website mentioning 'Secure a Loan' generically",
+    "Website relies entirely on customer testimonials without third-party verification or published product specifications"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 90311,
   "latitude": 42.2615932357784,
   "longitude": -71.8018809109004,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Central Massachusetts residents seeking relationship-based community banking with in-person support",
+    "Small business owners needing dedicated lending relationships and business account management",
+    "Home buyers in Massachusetts seeking mortgage lending with personalized loan officer support",
+    "Customers prioritizing staff familiarity and local community banking over online-only or national bank options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bay State Savings Bank is best for central Massachusetts residents and small business owners who value personalized, relationship-based banking with known staff and local community commitment. The main caveat is that the website lacks transparent product information (rates, fees, terms, eligibility), making it necessary to contact branches directly for specific pricing and feature comparisons before opening an account.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "28 Franklin St, Worcester, MA 01608",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

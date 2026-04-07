@@ -1,14 +1,14 @@
 {
   "name": "Southeastern Bank",
   "slug": "southeastern-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Darien, GA. $623M in assets. 10 offices.",
-  "description_long": "Southeastern Bank is a community bank located in Darien, GA, established in 1889. The bank holds approximately $623M in total assets and $545M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Southeastern Bank is a Georgia-based community bank established in 1888 with 11 locations across coastal Georgia and northeast Florida, offering traditional deposit accounts, loans, and digital banking services.",
+  "description_long": "Southeastern Bank was established in 1888 and has spent over a century serving customers and communities throughout coastal Georgia and northeast Florida. The bank is a subsidiary of Southeastern Banking Corporation, a bank holding company headquartered in Darien, Georgia, and maintains its headquarters at 1010 North Way in Darien, GA. As a regional community bank, Southeastern Bank has built its reputation on long-term customer relationships and deep community involvement.\n\nSoutheastern Bank offers a comprehensive suite of banking products for both personal and business customers. On the personal side, customers can access checking and savings accounts, money market accounts, CDs, personal loans, credit cards, and overdraft protection. The bank also provides specialized loan products including marine and boat loans. For business customers, Southeastern Bank offers business checking and savings accounts, business loans, business cash management services, and commercial credit card payment solutions. All customers benefit from 24/7 online and mobile banking platforms, bill pay functionality, eStatements, and fraud protection services including Falcon Fraud Management and Brella debit card protection.\n\nWhat distinguishes Southeastern Bank is its strong community focus and longevity as a regional institution. The bank operates the Southeastern Bank Community Foundation, a registered 501(c)(3) organization that reinvests in local communities through grant cycles awarding $1,000 to $5,000 to eligible charitable, educational, and community organizations. The bank also provides specialized products like marine and boat loans, reflecting its understanding of regional customer needs in coastal Georgia and northeast Florida. As a publicly traded company (OTCID: SEBC), Southeastern Bank maintains investor relations transparency and provides quarterly financial updates and annual reports to shareholders.\n\nSoutheastern Bank is best suited for customers in coastal Georgia and northeast Florida seeking traditional community banking with established local presence and personal service. The main limitation is geographic\u2014the bank operates only 11 branches in a specific regional area and may not be accessible to customers outside southeast Georgia and northeast Florida. While the bank offers digital banking 24/7, it lacks the extensive branch network or national presence of larger institutions, making it primarily a regional option rather than a national banking solution. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.southeasternbank.com",
   "affiliate_url": "",
@@ -23,23 +23,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Money market accounts",
+    "Certificates of Deposit (CDs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Credit cards",
+    "Overdraft protection",
+    "Marine and boat loans",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Business loans",
+    "Business cash management services",
+    "Online banking with bill pay",
+    "Mobile banking applications",
+    "eStatements",
+    "Falcon Fraud Management",
+    "Brella debit card protection"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1889",
-    "Local community bank with personal service",
-    "10 locations"
+    "Established in 1888 with 135+ years of banking history and community trust in coastal Georgia and northeast Florida",
+    "11 physical branch locations throughout southeast Georgia and northeast Florida for in-person banking",
+    "24/7 online and mobile banking platforms for convenient account access anytime",
+    "Specialized marine and boat loan products tailored to regional customer needs",
+    "Active community foundation that reinvests in local communities through charitable grants",
+    "Comprehensive business banking services including business cash management and commercial solutions",
+    "Fraud protection features including Falcon Fraud Management and Brella debit card protection"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint with only 11 branches in coastal Georgia and northeast Florida\u2014not accessible nationwide",
+    "As a smaller regional bank, may have limited product variety compared to national banking institutions",
+    "No mention of investment services, wealth management, or advanced financial planning services",
+    "Smaller institution may offer lower CD rates or savings rates compared to larger national competitors"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +66,7 @@
   "states_served": [
     "GA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5685,
   "latitude": 31.3769499963973,
   "longitude": -81.4329849655894,
@@ -87,18 +102,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Coastal Georgia and northeast Florida residents seeking community banking with local branch access",
+    "Small business owners in the bank's service area needing business checking, loans, and cash management",
+    "Marine and boating industry customers requiring specialized financing products",
+    "Customers who value long-term relationships with established regional financial institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Southeastern Bank is best for residents and small business owners in coastal Georgia and northeast Florida who prioritize community banking, local branch access, and a bank with deep regional roots and community involvement. The primary caveat is geographic limitation\u2014this bank is not a viable option for customers outside its 11-branch service area in southeast Georgia and northeast Florida, and it lacks the extensive product range or national infrastructure of larger banking institutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +122,10 @@
   ],
   "phone": "",
   "address": "1010 North Way, Darien, GA 31305",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

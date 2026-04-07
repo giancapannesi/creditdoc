@@ -1,14 +1,14 @@
 {
   "name": "Bay Bank",
   "slug": "bay-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Green Bay, WI. $310M in assets. 3 offices.",
-  "description_long": "Bay Bank is a community bank located in Green Bay, WI, established in 1995. The bank holds approximately $310M in total assets and $266M in deposits. It operates 3 office locations. Designated as a Native American or Native Alaskan American. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bay Bank is a full-service bank offering personal loans, business loans, mortgages, and online banking services with mobile access and real-time account alerts.",
+  "description_long": "Bay Bank operates as a traditional community bank providing comprehensive financial services to both personal and business customers. The institution maintains a physical branch network alongside digital banking capabilities, positioning itself as a hybrid banking solution for customers who value both in-person and remote account management.\n\nThe bank's service offerings span personal loans, business loans (with a specialty focus on small business lending), Section 184 mortgages (HUD-backed loans), and standard deposit products accessible through online and mobile banking platforms. They provide real-time account alerts, cash management services for businesses, and educational resources through their online education center covering both personal and business financial products.\n\nBay Bank distinguishes itself through its stated specialization in small business lending and offering HUD Section 184 mortgages, which are government-backed loans typically available to Native American borrowers and tribes. The bank emphasizes accessibility features on its website and provides multiple account management channels including online banking, mobile applications, and traditional branch locations with phone and email support.\n\nAs a traditional community bank, Bay Bank serves customers seeking conventional banking relationships with local presence. However, the website provides limited details about interest rates, loan terms, fees, or specific eligibility requirements. Prospective customers should directly contact the bank or visit branches to compare their rates and terms against other financial institutions, particularly for personal and business loan products. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.baybankgb.com",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal loans with online application option",
+    "Business loans specializing in small business financing",
+    "Section 184 mortgages (HUD-backed home loans)",
+    "Online banking with account management anytime, anywhere",
+    "Mobile banking application for on-the-go account access",
+    "Real-time account alerts via customer's preferred contact method",
+    "Business cash management services",
+    "Online education center with product tutorials",
+    "Phone support for customer inquiries",
+    "Email support and secure contact forms",
+    "Multiple physical branch locations",
+    "Calculator tools on website"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1995",
-    "Local community bank with personal service",
-    "3 locations"
+    "Offers HUD Section 184 mortgages, a specialized product for eligible borrowers including Native Americans",
+    "Provides real-time account alerts that notify customers immediately when account activity occurs",
+    "Specializes in small business lending with dedicated business loan products",
+    "Multi-channel access including online banking, mobile app, phone support, and physical branch locations",
+    "Includes business cash management services for company account holders",
+    "Features an online education center with tutorials on products and services",
+    "Website is AudioEye-enabled with accessibility features for users with disabilities"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information about interest rates, APRs, or loan terms for any products",
+    "No details provided about fees, minimum account balances, or eligibility requirements",
+    "Limited transparency on application process, approval timelines, or loan decision criteria"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34052,
   "latitude": 44.4931850184189,
   "longitude": -88.1045889612774,
@@ -87,18 +96,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking local banking relationships with specialized business lending",
+    "Customers eligible for HUD Section 184 mortgages seeking government-backed home financing",
+    "Individuals preferring a traditional bank with both online and physical branch access",
+    "Account holders wanting real-time transaction monitoring and alert capabilities"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bay Bank is best for small business owners and individuals seeking a traditional community banking relationship with both digital and in-person service options, particularly those eligible for HUD Section 184 mortgages. Prospective customers should contact the bank directly to obtain specific rate quotes, fee schedules, and loan terms before making a decision, as this information is not available on their website.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +116,11 @@
   ],
   "phone": "",
   "address": "2555 Packerland Dr, Green Bay, WI 54313",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

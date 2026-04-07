@@ -1,15 +1,15 @@
 {
   "name": "Diamond Bank",
   "slug": "diamond-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Murfreesboro, AR. $932M in assets. 14 offices.",
-  "description_long": "Diamond Bank is a community bank located in Murfreesboro, AR, established in 1904. The bank holds approximately $932M in total assets and $818M in deposits. It operates 14 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank offering FDIC-insured checking, savings, loans, and credit cards for personal and business customers.",
+  "description_long": "Diamond Bank positions itself as \"The Natural Choice for Community Banking,\" operating as a traditional FDIC-insured bank backed by the full faith and credit of the U.S. Government. The bank serves both personal and business customers with a focus on local community presence, indicated by their \"Diamond Owned\" designation and emphasis on physical locations and personal service.\n\nThe bank offers a comprehensive suite of financial products across deposits, loans, and credit services. For personal customers, this includes checking and savings accounts, money market accounts, CDs, IRAs, Round Up Savings, and safe deposit boxes. Their loan products span consumer loans and credit cards (Platinum and Classic options). For business and agricultural customers, Diamond Bank provides business checking and savings accounts, CDs, agricultural loans, business loans, merchant services, cash management, and business credit cards. They also offer specialized services like Autobooks and CDARS & ICS services for deposit protection.\n\nDiamond Bank distinguishes itself through its emphasis on community banking and customer education. The bank features extensive fraud and scam prevention resources, including guides on wire fraud, job scams, caller ID spoofing, and phishing. They offer modern digital banking capabilities including mobile banking, mobile deposits, online bill pay, person-to-person payments, digital wallets, contactless payments, and ATM deposits. Their Platinum Credit Card features a 0% intro APR for 6 billing cycles on purchases and balance transfers, and they promote a Christmas Club savings account at 4.06% APY.\n\nAs a traditional community bank, Diamond Bank serves customers seeking local banking relationships and FDIC protection. However, the website provides limited information about account minimums, specific APY rates for standard accounts, fee structures, or detailed loan terms. The bank's strength lies in its physical presence and comprehensive product range, but prospective customers will need to contact branches or visit in-person for detailed pricing and terms information. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.diamond.bank",
   "affiliate_url": "",
@@ -24,23 +24,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Savings and money market accounts",
+    "CDs and IRAs",
+    "Round Up Savings program",
+    "Safe deposit boxes",
+    "Consumer loans and payment services",
+    "Platinum and Classic credit cards",
+    "Business and agricultural loans",
+    "Business checking and savings accounts",
+    "Merchant services and cash management",
+    "Mobile banking and mobile deposits",
+    "Online bill pay and person-to-person payments",
+    "Digital wallets and contactless payments",
+    "Autobooks and CDARS & ICS deposit protection services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1904",
-    "Local community bank with personal service",
-    "14 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Comprehensive product suite including checking, savings, CDs, IRAs, loans, and credit cards",
+    "Dual 0% intro APR offer on Platinum Credit Card for purchases and balance transfers (6 billing cycles)",
+    "Competitive Christmas Club savings rate at 4.06% APY on balances up to $3,000",
+    "Extensive digital banking capabilities including mobile deposits, online bill pay, and contactless payments",
+    "Agricultural loan specialization suggesting rural/community focus",
+    "Comprehensive fraud and scam education resources (wire fraud, job scams, phishing, caller ID spoofing guides)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information on account minimums, monthly fees, or maintenance requirements",
+    "Limited transparency on APY rates for standard savings and money market accounts",
+    "Loan terms, rates, and qualification criteria not disclosed on website",
+    "No information about geographic service area or branch expansion plans",
+    "Website does not specify whether they offer online account opening or require in-person visits"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "AR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1527,
   "latitude": 34.0622084712194,
   "longitude": -93.6878141175489,
@@ -88,18 +101,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking local community banking with physical branch relationships",
+    "Agricultural and small business owners needing specialized lending products",
+    "People prioritizing FDIC insurance and traditional banking security over fintech features",
+    "Holiday savers looking for competitive rates through their Christmas Club program"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Diamond Bank is best for customers seeking traditional community banking with FDIC protection, local branch access, and a full range of personal and business financial products. The primary caveat is that the website provides minimal transparency on account fees, rate structures, and loan terms\u2014prospective customers must contact the bank directly for specific pricing and qualification details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,11 @@
   ],
   "phone": "",
   "address": "319 E Main, Murfreesboro, AR 71958",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

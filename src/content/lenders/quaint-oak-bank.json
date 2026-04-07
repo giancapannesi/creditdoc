@@ -1,14 +1,14 @@
 {
   "name": "Quaint Oak Bank",
   "slug": "quaint-oak-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Southampton, PA. $677M in assets. 3 offices.",
-  "description_long": "Quaint Oak Bank is a community bank located in Southampton, PA, established in 1926. The bank holds approximately $677M in total assets and $604M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Full-service bank offering commercial banking, business loans, personal banking, and SBA financing with 95+ years of experience and SBA Preferred Lender status.",
+  "description_long": "Quaint Oak Bank is an established financial institution with over 95 years of history serving both business and consumer customers. The bank positions itself as a forward-thinking partner focused on commercial banking and small business growth, with a stated motto of \"In Your Best Interest.\" They operate as a family of companies designed to benefit both businesses and consumers alike.\n\nThe bank offers a comprehensive suite of services including business deposit accounts (checking, savings, CDs, money market accounts), commercial lending solutions, SBA 7(a) loans up to $5 million with 7-25 year repayment terms, lines of credit, and personal banking products including retirement accounts and military packages. As an SBA Preferred Lender (PLP), they have in-house credit decision authority, which they claim streamlines the loan approval process. They also provide commercial bill pay, ACH transfers, wire transfers, and remote deposit capture for business customers.\n\nQuaint Oak differentiates itself primarily through SBA Preferred Lender status, which allows faster loan processing without typical SBA delays, and their emphasis on personalized, long-term customer relationships. Their website highlights a collaborative approach and customized solutions tailored to individual business goals. The bank also publishes educational content about SBA loans for specific industries (e.g., manufacturing).\n\nAs a traditional bank, Quaint Oak appears to serve established businesses and personal banking customers seeking comprehensive financial services rather than serving the underbanked, credit-challenged, or emergency borrowing market. Their focus on commercial lending and business banking means they likely require solid credit and established business history. Website content is professional but limited in transparency regarding specific rates, fees, or detailed product terms. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.quaintoak.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking accounts with remote deposit capture",
+    "Business savings accounts, CDs, and money market accounts",
+    "ACH and wire transfers for business customers",
+    "Commercial bill pay",
+    "SBA 7(a) loans up to $5 million",
+    "Commercial lines of credit",
+    "Business deposit accounts",
+    "Personal retirement accounts",
+    "Military banking packages",
+    "SBA Preferred Lender (PLP) loan processing",
+    "Customized commercial lending solutions",
+    "Certificates of deposit (business and personal)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1926",
-    "Local community bank with personal service",
-    "3 locations"
+    "SBA Preferred Lender status enables faster loan decisions made in-house without SBA processing delays",
+    "SBA 7(a) loans available up to $5 million with flexible 7-25 year repayment terms",
+    "Over 95 years of operating history and established reputation as a financial institution",
+    "Comprehensive business banking suite including checking, savings, CDs, and money market accounts",
+    "Specialized services for business customers including ACH, wire transfers, commercial bill pay, and remote deposit capture",
+    "Offers personal banking products including retirement accounts and military-specific packages",
+    "Educational content and resources for business owners (blog, featured articles on industry-specific lending)",
+    "Multilingual website support (English, Spanish, French, German)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not disclose specific interest rates, fees, APRs, or loan terms, requiring direct contact for pricing",
+    "As a traditional bank, likely requires established credit history and established business operations, limiting accessibility for startups or credit-challenged borrowers",
+    "No information provided about minimum account balances, deposit requirements, or eligibility criteria for various products",
+    "Limited transparency about underwriting standards, approval rates, or typical processing timelines despite SBA PLP status claim",
+    "Website focuses heavily on commercial banking; personal banking product details and benefits are minimal compared to business offerings"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "PA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 35497,
   "latitude": 40.171320824564,
   "longitude": -75.0446175311811,
@@ -87,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Established small to mid-size business owners seeking SBA-backed financing with faster approval processes",
+    "Commercial customers needing comprehensive banking services (deposits, lending, cash management)",
+    "Business owners in manufacturing and other industries requiring equipment financing or expansion capital",
+    "Military service members and veterans seeking banking services with military-specific packages"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Quaint Oak Bank is best suited for established businesses and business owners with solid credit seeking comprehensive commercial banking and SBA-backed financing. The primary caveat is that as a traditional bank with emphasis on commercial lending, they likely have minimum credit score and business history requirements that exclude startups, newly formed businesses, and credit-challenged borrowers seeking rapid funding or alternative lending.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "501 Knowles Ave, Southampton, PA 18966",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

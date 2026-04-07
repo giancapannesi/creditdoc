@@ -1,14 +1,14 @@
 {
   "name": "Pike National Bank",
   "slug": "pike-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Mccomb, MS. $383M in assets. 5 offices.",
-  "description_long": "Pike National Bank is a community bank located in Mccomb, MS, established in 1985. The bank holds approximately $383M in total assets and $326M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Pike National Bank is a locally owned community bank in Southwest Mississippi offering FDIC-insured checking, savings, mortgages, auto loans, HELOCs, and personal loans with a focus on personalized banking relationships.",
+  "description_long": "Pike National Bank operates as a community-focused financial institution serving Southwest Mississippi. Based on their website at pnb-ms.net, they position themselves as a locally owned bank where customers interact with their neighbors rather than distant corporate entities. The bank emphasizes personal relationships and local decision-making in their banking model.\n\nThe bank offers a comprehensive suite of consumer and business banking products. For personal banking, they provide checking and savings accounts, mortgages with pre-qualification services, home equity lines of credit (HELOCs), auto loans, and personal loans. They also offer digital banking conveniences including online banking, Apple Pay and Google Pay integration for debit cards, and check reordering services. Their business banking division serves both small and large enterprises with checking accounts and customized loan solutions.\n\nPike National Bank differentiates itself through its community-oriented approach and emphasis on personalized service. Their tagline \"It's not the bank, it's the banker\" reflects their positioning around individual relationships rather than impersonal corporate banking. They highlight FDIC insurance protection and maintain physical branch locations with posted hours, suggesting a traditional brick-and-mortar presence typical of regional community banks.\n\nAs a community bank, Pike National Bank is best suited for customers who value local decision-making and personal banking relationships over the broader product portfolios or digital-first experiences of national banks. However, the website provides limited information about specific loan terms, interest rates, fees, or competitive positioning, making it difficult to assess how their offerings compare to larger regional or national competitors on pricing and features.",
   "logo_url": "",
   "website_url": "https://www.pnb-ms.net",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Mortgage loans with pre-qualification",
+    "Home Equity Lines of Credit (HELOC)",
+    "Auto loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking accounts",
+    "Business loan solutions",
+    "Online banking platform",
+    "Digital wallet integration (Apple Pay, Google Pay)",
+    "Check reordering",
+    "Debit card services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1985",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Locally owned and operated with emphasis on personalized banker relationships",
+    "Comprehensive product suite including mortgages, auto loans, HELOCs, and personal loans",
+    "Digital banking integration with Apple Pay and Google Pay for debit cards",
+    "Dedicated business banking division with customized solutions for various business sizes",
+    "Physical branch locations in Southwest Mississippi with posted hours",
+    "Pre-qualification process for mortgages to help guide customers through home buying"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Southwest Mississippi may reduce accessibility for customers outside region",
+    "Website provides no specific information on interest rates, APRs, or loan terms for comparison shopping",
+    "No prominent information about customer service hours, response times, or support channels beyond contact request form",
+    "Limited details on fees, minimum account balances, or other cost structures",
+    "No information about online loan application capabilities or digital onboarding processes"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 26379,
   "latitude": 31.2524910137302,
   "longitude": -90.4701949704765,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Southwest Mississippi residents seeking personalized, relationship-based community banking",
+    "Small to medium business owners needing customized business checking and loan solutions",
+    "Home buyers in the service area seeking pre-qualified mortgage guidance and local decision-making",
+    "Customers who prioritize local ownership and community ties over national banking convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Pike National Bank is best for Southwest Mississippi residents and small business owners who value personalized, relationship-driven community banking over the convenience and breadth of national institutions. The main caveat is the bank's limited geographic footprint and lack of transparent pricing information on the website, making it difficult to evaluate competitive loan rates or fee structures.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "350 Rawls Dr, Mccomb, MS 39648",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

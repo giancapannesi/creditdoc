@@ -1,14 +1,14 @@
 {
   "name": "Oriental Bank",
   "slug": "oriental-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in San Juan, PR. $12385M in assets. 45 offices.",
-  "description_long": "Oriental Bank is a community bank located in San Juan, PR, established in 1965. The bank holds approximately $12385M in total assets and $10265M in deposits. It operates 45 office locations. Designated as a Minority Board and Serving Hispanic Community. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Oriental Bank is a financial institution operating in Puerto Rico and the U.S. Virgin Islands, offering checking accounts, loans, and business banking services.",
+  "description_long": "Oriental Bank operates as a traditional banking institution primarily serving customers in Puerto Rico and the U.S. Virgin Islands. The bank holds ABA routing number 221571415 and maintains a physical branch network across its service territories. The company has been established as a regional banking provider with a focus on personal and commercial banking relationships.\n\nThe bank offers a range of personal banking products including free checking accounts with no minimum deposit requirements, no maintenance fees, and no minimum balance requirements. Oriental Bank also provides personal loans, auto loans, and mortgage lending services to customers. Additionally, the institution serves small and medium-sized businesses with commercial banking solutions tailored to business needs. Online account management is available through their digital banking portal, allowing customers to monitor accounts, make loan payments, and request documents.\n\nOriental Bank distinguishes itself through its free checking account offering ($0 deposit, no fees, no minimum balance) and its established branch and ATM network across Puerto Rico and the U.S. Virgin Islands. The bank provides accessibility services for customers with low vision and offers multilingual support including interpreter services at select locations. Their physical presence includes sucursales (branches), ATMs, drive-through windows (autobanco), live teller ATMs (cajero en vivo), and rapid deposit services.\n\nAs a regional bank with a primarily Spanish-language website and localized operations, Oriental Bank is best positioned for residents of Puerto Rico and the U.S. Virgin Islands seeking traditional banking with a physical branch presence. Customers outside these territories would not have convenient access to banking services. The bank's product offerings appear standard for regional institutions, without notable specialization in niche lending or innovative fintech features.",
   "logo_url": "",
   "website_url": "http://www.orientalbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Free checking accounts (Cuenta Libre) with no minimum deposit, no maintenance fees, no minimum balance",
+    "Personal loan products with online calculator tool",
+    "Auto loan products with online calculator tool",
+    "Mortgage lending with online calculator tool",
+    "Business banking and commercial lending solutions",
+    "Online account management portal for payments, monitoring, and document requests",
+    "ATM network access across service territories",
+    "Drive-through banking (autobanco)",
+    "Live teller ATMs (cajero en vivo)",
+    "Rapid deposit services (dep\u00f3sito r\u00e1pido)",
+    "Loan Loss Mitigation Centers",
+    "Interpreter services at select locations"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1965",
-    "Local community bank with personal service",
-    "45 locations"
+    "Free checking account with $0 initial deposit, no monthly maintenance fees, and no minimum balance requirement",
+    "Established branch and ATM network across Puerto Rico and U.S. Virgin Islands for physical banking access",
+    "Multiple account management channels including online portal for loan payments, account monitoring, and document requests",
+    "Personal, auto, and mortgage loan calculators available on website for customer planning",
+    "Accessibility features including low vision accommodations and interpreter services at select locations",
+    "Multilingual support with both Spanish and English language options",
+    "Rapid deposit services and drive-through windows (autobanco) for convenient banking"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to Puerto Rico and U.S. Virgin Islands only\u2014no mainland U.S. presence",
+    "Website content lacks specific details on interest rates, APRs, fees for specific products, or loan terms",
+    "Limited information about competitive advantages, special promotions, or unique product features compared to other regional banks",
+    "No details provided about minimum credit scores, loan approval processes, or qualification requirements",
+    "Sparse information about business banking features despite marketing to small business customers"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "PR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 31469,
   "latitude": 18.4255129976317,
   "longitude": -66.0590640390567,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Residents of Puerto Rico or U.S. Virgin Islands seeking basic checking and savings accounts",
+    "Small business owners operating in Puerto Rico or U.S. Virgin Islands needing commercial banking services",
+    "Customers preferring traditional branch banking with in-person support and ATM access",
+    "Spanish-language preference customers in Oriental Bank's service territories"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Oriental Bank is best for residents of Puerto Rico or the U.S. Virgin Islands seeking traditional banking services with physical branch access and a free checking account option. The primary limitation is strict geographic restriction to these territories\u2014mainland U.S. customers cannot access services. The website provides minimal transparency on rates, fees, and specific terms for loans and credit products.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "254 Munoz Rivera, San Juan, PR 00918",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Eureka Savings Bank",
   "slug": "eureka-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mutual-bank"
   ],
-  "description_short": "FDIC-insured community bank in La Salle, IL. $431M in assets. 5 offices.",
-  "description_long": "Eureka Savings Bank is a community bank located in La Salle, IL, established in 1885. The bank holds approximately $431M in total assets and $317M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Eureka Savings Bank is a community bank established in 1885 serving Illinois Valley with checking, savings, mortgages, and business lending.",
+  "description_long": "Eureka Savings Bank has operated continuously since 1885, establishing itself as a longstanding financial institution in the Illinois Valley region. The bank emphasizes community involvement, with both the organization and its employees actively donating time and money to the communities they serve. Operating from five branch locations, the bank has built its reputation on mortgage lending and personal banking services over more than a century.\n\nThe bank offers a comprehensive suite of consumer and business banking products. For consumers, these include Essential Checking and Essential Plus Checking Accounts, savings products, certificates of deposit (CDs), instant-issue debit cards, mortgage loans, and agricultural loans. The bank also provides business checking accounts and business real estate loans for commercial customers. Digital services include online banking with username/password access, a mobile app for account management and transactions, and online calculators to estimate savings growth and loan payments.\n\nEureka Savings Bank distinguishes itself through its century-long local presence and focus on agricultural lending, which it specifically markets as offering more than quick financing\u2014positioning agricultural loans as tools to help farming operations thrive. The bank actively combats fraud by educating customers about caller ID spoofing and clearly stating it will never request PINs, passwords, or sensitive card details. This emphasis on security awareness and community roots sets it apart from larger regional and national banks.\n\nHowever, the bank has significant geographic and operational limitations. Online account opening is not available; customers must visit a physical branch to establish accounts. The bank explicitly checks zip codes to determine service eligibility, indicating limited geographic reach. Additionally, the website provides minimal detail on interest rates, fees, minimum balance requirements, or competitive APY figures for checking and savings accounts, making it difficult for prospective customers to assess value proposition.",
   "logo_url": "",
   "website_url": "http://www.eurekasavings.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Essential Checking Accounts",
+    "Essential Plus Checking Accounts",
+    "Business Checking Accounts",
+    "Savings Accounts",
+    "Certificates of Deposit (CDs)",
+    "Mortgage Loans",
+    "Business Real Estate Loans",
+    "Agricultural Loans",
+    "Instant-Issue Debit Cards",
+    "Online Banking with username/password access",
+    "Mobile Banking App",
+    "Online Calculators for savings and loan estimates"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1885",
-    "Local community bank with personal service",
-    "5 locations"
+    "Established institution with 138+ years of history and stability since 1885",
+    "Offers specialized agricultural lending positioned to support farm enterprise growth",
+    "Five physical branch locations providing in-person customer service",
+    "Mobile app and online banking available for account access and transactions",
+    "Instant-issue debit cards for immediate purchase capability",
+    "Business checking and commercial real estate loan products for entrepreneurs",
+    "Active community involvement with documented charitable donations and employee participation"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No online account opening capability\u2014requires in-person branch visit to open accounts",
+    "Limited geographic service area with zip code eligibility checks",
+    "Website lacks transparency on specific rates, fees, minimum balances, and APY for checking/savings products",
+    "Limited digital capabilities compared to larger banks\u2014no online loan application mentioned",
+    "No information on CD rates, mortgage rates, or agricultural loan terms provided on website"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28401,
   "latitude": 41.3300860167155,
   "longitude": -89.0950180259976,
@@ -94,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Residents within Eureka Savings Bank's service area seeking community banking relationships",
+    "Agricultural customers needing specialized farm financing and local lending expertise",
+    "Consumers prioritizing in-person banking and direct branch relationships over digital-first banking",
+    "Small business owners requiring local business checking and commercial real estate lending"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Eureka Savings Bank is best for customers within its Illinois Valley service area who value local banking relationships, community involvement, and specialized agricultural lending. The primary caveat is geographic limitation\u2014the bank's service area is restricted by zip code, and the lack of online account opening means prospective customers must visit a physical branch, making it unsuitable for out-of-area or digitally-focused consumers.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "250 Marquette St, La Salle, IL 61301",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

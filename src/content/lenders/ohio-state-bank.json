@@ -1,14 +1,14 @@
 {
   "name": "Ohio State Bank",
   "slug": "ohio-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Bexley, OH. $483M in assets. 2 offices.",
-  "description_long": "Ohio State Bank is a community bank located in Bexley, OH, established in 2019. The bank holds approximately $483M in total assets and $411M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Ohio State Bank is a locally-owned, FDIC-insured community bank operating in Central Ohio since 2019, offering personal and business banking with emphasis on relationship-based service.",
+  "description_long": "Ohio State Bank is an Ohio state-chartered, FDIC-insured nonmember commercial bank that opened in 2019 with two locations in Bexley and Upper Arlington, Ohio. The bank is locally owned and operated with leadership that includes Dave Mallett (President/CEO), Andrew Morbitzer (CCO), and Ingrid Phillips (CFO/COO), all described as having significant banking experience and community presence. The institution positions itself as a community bank committed to personal relationships over sales metrics.\n\nOhio State Bank offers a full range of personal banking services including personal accounts, personal loans, and mortgage services. On the business side, they provide business checking and savings accounts, business loans, and tailored solutions for small business owners. The bank emphasizes accessible decision-making with both in-person and online banking options. Their website highlights fraud detection capabilities, as evidenced by a customer testimonial about caught fraud attempts.\n\nThe bank differentiates itself through several specific claims: bankers are described as \"uncommonly available\" via phone, text, and email; they proactively monitor accounts to prevent unnecessary fees; they provide \"timely, local decision-making\" without bureaucratic delays; and leadership highlights \"creativity, flexibility, and possibility\" in problem-solving. Customer testimonials emphasize personal service, no fees charged, and professional treatment from staff members who know clients by name.\n\nLimitations based on available information include: the bank operates only two physical locations in a limited geographic area (Bexley and Upper Arlington, Ohio), making it inaccessible for out-of-state customers; no specific information is provided about account types, interest rates, minimum balances, or fee structures despite customer claims of \"no fees\"; mortgage services are mentioned but with minimal detail; and the bank's relative newness (opened 2019) means limited long-term track record compared to established institutions. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.bankatosb.com",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage lending (purchase and refinance)",
+    "Business checking and savings accounts",
+    "Business loans",
+    "Fraud detection and monitoring",
+    "In-person banking at two Central Ohio locations",
+    "Online banking platform",
+    "Mobile banking (text and email communication)",
+    "Direct banker access and consultation"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2019",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits with state charter backing",
+    "Proactive fraud monitoring with documented successful fraud prevention",
+    "Bankers available via multiple channels: in-person, phone, text, and email",
+    "Locally owned and operated with community-focused leadership",
+    "Personal relationships with named bankers rather than script-based service",
+    "Customers report zero fees on accounts despite bank services",
+    "Quick decision-making on loans without corporate bureaucracy"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Only two physical locations in Central Ohio (Bexley and Upper Arlington), severely limiting geographic accessibility",
+    "Opened in 2019, providing minimal long-term operating history compared to established banks",
+    "No publicly disclosed information about specific account types, interest rates, minimum balances, or fee schedules despite customer fee claims",
+    "Mortgage services mentioned but with no details on rates, terms, or product offerings",
+    "No mention of mobile app, digital wallet, or advanced fintech features for online-only banking"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 59144,
   "latitude": 39.9576349928778,
   "longitude": -82.9428379717017,
@@ -87,18 +96,19 @@
   "rating": 4.1,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 3.7,
+    "transparency": 3.5,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Central Ohio residents and small business owners seeking relationship-based banking within Bexley and Upper Arlington areas",
+    "Customers prioritizing personalized service and local decision-making over digital-first banking",
+    "Small business owners requiring hands-on guidance and flexible lending solutions",
+    "Individuals seeking fraud-conscious banking with proactive account monitoring"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Ohio State Bank is best suited for Central Ohio residents and small business owners who value relationship-driven banking and can visit one of their two physical locations in Bexley or Upper Arlington. The primary caveat is severe geographic limitation\u2014the bank's two-location footprint makes it inaccessible for anyone outside these specific areas, and lack of national or regional reach restricts its viability as a primary banking institution for geographically diverse customers.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +116,11 @@
   ],
   "phone": "",
   "address": "2106 E Main St, Bexley, OH 43209",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

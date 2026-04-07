@@ -1,15 +1,15 @@
 {
   "name": "Rolette State Bank",
   "slug": "rolette-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Rolette, ND. $49M in assets. 1 office.",
-  "description_long": "Rolette State Bank is a community bank located in Rolette, ND, established in 1928. The bank holds approximately $49M in total assets and $44M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Rolette State Bank is a community bank offering personal, business, and agricultural banking services with 24-hour online access and competitive rates on deposits and loans.",
+  "description_long": "Rolette State Bank is a traditional community bank serving the Rolette area, with a physical presence and online banking capabilities. The bank positions itself as a full-service financial institution capable of meeting diverse customer needs across personal, business, and agricultural sectors. Their website indicates they have been operating long enough to establish competitive rate offerings and a range of standard banking products. The bank emphasizes accessibility through both digital channels (24-hour online banking) and traditional services (night deposit boxes, in-person banking). Rolette State Bank offers a comprehensive suite of deposit accounts including checking accounts with specialized tiers (regular NOW accounts, senior citizen accounts for those 55+, and student accounts), savings accounts, and certificates of deposit with terms ranging from 7 days to 5 years. On the lending side, they provide agri loans, commercial loans, and appear to offer mortgage/payment calculator tools, suggesting mortgage lending capabilities. Their service menu also includes IRAs with competitive rates, ATM/debit card access through a CashCard Network, direct deposit, wire transfers, safe deposit boxes in multiple sizes, and night deposit services. What distinguishes Rolette State Bank is its explicit focus on agricultural lending alongside standard commercial and personal banking\u2014reflecting its community roots. The bank operates with a direct contact model, listing a single phone number (701-246-3395) prominently for questions, suggesting a smaller, relationship-oriented institution rather than a large national chain. However, the company provides minimal detail on their website about specific loan terms, rates, minimum deposits, or account fees, requiring customers to contact the bank directly for most pricing information. The website is functional but sparse on comparative details that would help consumers evaluate whether Rolette State Bank's offerings are truly competitive against other regional or national banks.",
   "logo_url": "",
   "website_url": "https://www.rolettestatebank.com",
   "affiliate_url": "",
@@ -24,23 +24,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "24-hour online banking",
+    "Personal checking accounts",
+    "Senior citizen checking accounts (age 55+)",
+    "Student checking accounts",
+    "Passbook savings accounts",
+    "Certificates of deposit (7 days to 5 years)",
+    "Individual Retirement Accounts (IRAs)",
+    "Agricultural loans",
+    "Commercial loans",
+    "ATM/debit cards and CashCard Network access",
+    "Direct deposit",
+    "Wire transfers (Monday-Friday, 9am-5pm)",
+    "Safe deposit boxes",
+    "Night deposit services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1928",
-    "Local community bank with personal service",
-    "1 location"
+    "24-hour online banking access for convenient account management",
+    "Specialized checking accounts for seniors (55+) and students with potentially favorable terms",
+    "Agricultural loan specialization serving farmers and agribusiness customers",
+    "Certificates of deposit available in multiple short and long-term options (7 days to 5 years)",
+    "Night deposit service enabling 24/7 deposits outside banking hours",
+    "Safe deposit box services in multiple sizes for document and valuables protection",
+    "Access to CashCard Network ATMs for widespread cash withdrawal capability"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no specific rate information, APRs, or fee schedules\u2014customers must call for details",
+    "No mention of mobile banking app despite 24-hour online banking claims",
+    "Limited information about loan products, terms, or eligibility requirements for mortgages and commercial loans",
+    "No details on minimum deposit requirements or account minimums for checking/savings products",
+    "Appears to be a small regional bank with limited geographic reach and no indication of FDIC insurance messaging"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "ND"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9120,
   "latitude": 48.6610300846994,
   "longitude": -99.8449105838336,
@@ -94,12 +107,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Farmers and agricultural businesses seeking specialized agri-lending in the Rolette region",
+    "Senior citizens (55+) looking for age-appropriate checking account products",
+    "Small business owners needing local relationship banking and commercial lending"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Rolette State Bank is best for customers in the Rolette, North Dakota area seeking traditional community banking with a strong agricultural focus and those who prefer relationship-based local banking over large national institutions. The main caveat is that the website provides almost no pricing transparency\u2014customers must contact the bank directly via phone to compare rates, fees, and terms against competitors, making it difficult to assess value proposition without direct inquiry.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +120,11 @@
   ],
   "phone": "",
   "address": "209 Main Street, Rolette, ND 58366",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

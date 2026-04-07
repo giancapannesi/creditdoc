@@ -1,14 +1,14 @@
 {
   "name": "Bank Of Weston",
   "slug": "bank-of-weston",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Weston, MO. $230M in assets. 3 offices.",
-  "description_long": "Bank Of Weston is a community bank located in Weston, MO, established in 1893. The bank holds approximately $230M in total assets and $202M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal and business checking, savings, mortgages, and digital banking services with online and mobile access.",
+  "description_long": "Bank of Weston is a traditional FDIC-insured bank that provides comprehensive banking services to both personal and business customers. The bank emphasizes accessibility and modern digital capabilities alongside traditional in-person banking through physical branch locations. Based on their website, they operate as a full-service community bank with a focus on making banking convenient for busy customers.\n\nThe bank offers a range of personal banking products including checking accounts, savings accounts, personal loans, home mortgage loans, home equity lines of credit (HELOCs), and debit cards. For business customers, they provide dedicated business banking solutions and accounts. Their digital banking suite includes free online banking with bill pay capabilities, mobile banking via web and app (iOS and Android), and mobile deposit functionality that allows customers to deposit checks remotely from their phones.\n\nBank of Weston differentiates itself through emphasis on digital convenience combined with in-person accessibility. They highlight FDIC insurance protection backed by the U.S. Government, stress-free account switching with a three-step process, and financial calculators to help customers plan and budget. Their mobile banking is positioned as available to both personal and business customers, and they emphasize that digital services are free and secure.\n\nAs a traditional bank, Bank of Weston is best suited for customers who want comprehensive banking services with both digital and branch access. However, the website provides limited specific detail about interest rates, account fees, minimum balances, or competitive advantages in pricing. The information presented is primarily promotional, lacking specifics that would allow direct product comparison with competitors. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.bankofweston.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (multiple account types to compare)",
+    "Personal savings accounts",
+    "Online banking with eStatements and fund transfers",
+    "Bill pay with scheduled payments and reminders",
+    "Mobile banking via web and native apps",
+    "Mobile deposit for checks",
+    "Home mortgage loans with knowledgeable lenders",
+    "Home equity lines of credit (HELOCs)",
+    "Business checking and business banking accounts",
+    "Debit cards",
+    "Financial calculators",
+    "Account-to-account fund transfers (one-time and recurring)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1893",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Free mobile deposit feature for checking account holders to deposit checks remotely",
+    "Free online banking and bill pay with ability to schedule payments in advance",
+    "Mobile banking available via both web browsing and dedicated apps (iOS and Android)",
+    "Offers both personal and business banking accounts and solutions",
+    "Multiple contact methods and branch locations for in-person service",
+    "Account switching assistance with documented three-step process"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information about interest rates, APYs, or account fees",
+    "No details provided about minimum account balances or balance requirements",
+    "Limited transparency on approval criteria, credit checks, or underwriting standards",
+    "No information about loan products beyond mortgages and HELOCs for personal customers",
+    "Website does not specify geographic service areas or number of branch locations"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1418,
   "latitude": 39.4227870085383,
   "longitude": -94.8989429953038,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking a full-service bank with both digital and branch access",
+    "Small business owners needing dedicated business banking solutions",
+    "Homebuyers or homeowners interested in mortgages and home equity products",
+    "Customers prioritizing FDIC insurance protection and traditional bank stability"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Weston is best for customers who want a traditional FDIC-insured bank with modern digital banking capabilities and in-person branch access. The main caveat is that their website provides minimal specific information about rates, fees, terms, or competitive advantages, requiring customers to contact the bank directly for detailed product comparisons and pricing.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "18255 Highway 45 North, Weston, MO 64098",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

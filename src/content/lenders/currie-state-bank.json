@@ -1,15 +1,15 @@
 {
   "name": "Currie State Bank",
   "slug": "currie-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Currie, MN. $102M in assets. 2 offices.",
-  "description_long": "Currie State Bank is a community bank located in Currie, MN, established in 1931. The bank holds approximately $102M in total assets and $89M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Independent, locally-owned community bank in Minnesota with two branches offering checking, savings, agricultural loans, and online banking services.",
+  "description_long": "Currie State Bank is an independent, home-owned community bank headquartered in Currie, Minnesota, with a second location in Okabena. The bank operates as a traditional retail banking institution serving rural Minnesota communities. Founded on principles of hometown banking, the institution positions itself as a relationship-based lender deeply embedded in its service area.\n\nThe bank offers a comprehensive suite of standard banking products including checking accounts, savings accounts, Certificates of Deposit (CDs), Individual Retirement Accounts (IRAs), and Health Savings Accounts (HSAs). They provide online and mobile banking platforms with features like bill pay, two-step verification, mobile check deposit, debit card controls, biometric login options, and travel notices. Additional services include business banking with payroll file submission, wire transfers, and stop payment requests. Agricultural lending is prominently featured as a core business line, with the bank marketing itself as \"here to support our area farmers with Ag loans to fit your needs.\"\n\nWhat distinguishes Currie State Bank is its explicitly independent, locally-owned structure in an era of banking consolidation. The bank emphasizes security features and modernization (Intuit Direct Connect integration for accounting software, new mobile app functionality) while maintaining personal service. Their focus on agricultural lending and community support reflects their rural Minnesota positioning. The two-branch footprint suggests intentional local focus rather than regional expansion.\n\nAs a traditional community bank, Currie State Bank is best suited for customers seeking relationship banking, agricultural financing, or those preferring to bank with a locally-owned institution. The limited branch network may be a constraint for customers seeking convenience across broader geographies. No information on deposit insurance, interest rates, fees, or loan terms is publicly available on the website, which is typical but limits consumer decision-making. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.curriestatebank.com",
   "affiliate_url": "",
@@ -26,21 +26,32 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Health Savings Accounts (HSAs)",
+    "Agricultural loans",
+    "Online bill pay",
+    "Mobile banking app with debit card controls and biometric login",
+    "Business banking with payroll file submission",
+    "Wire transfers and stop payment requests",
+    "Two-step verification security",
+    "Intuit Direct Connect integration for accounting software"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1931",
-    "Local community bank with personal service",
-    "2 locations"
+    "Independent, home-owned bank with explicit local community focus rather than corporate chain structure",
+    "Specialized agricultural lending with marketed flexibility (\"Ag loans to fit your needs\")",
+    "Modern digital features including mobile app with biometric login, debit card controls, and travel notices",
+    "Two-step verification and explicit security messaging regarding cookie policies and account protection",
+    "Bill pay functionality integrated into online banking platform",
+    "Business banking suite including payroll file submission and wire transfers",
+    "Integration with Quicken and QuickBooks via Intuit Direct Connect for small business accounting"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Only two physical branch locations (Currie and Okabena), limiting accessibility for customers outside these areas",
+    "Website does not display current interest rates, annual percentage yields (APYs), or fee schedules for informed comparison",
+    "Limited public information on loan products, terms, credit requirements, or eligibility criteria",
+    "No mention of FDIC insurance, deposit limits, or other regulatory protections on the website",
+    "No online account opening capability mentioned; appears to require in-person visit or phone contact to open accounts"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8833,
   "latitude": 44.0706109926433,
   "longitude": -95.6664990147885,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural producers and farmers in rural Minnesota seeking specialized farm lending with personal relationships",
+    "Residents of Currie or Okabena, Minnesota seeking local banking with community commitment",
+    "Small business owners in the service area needing integrated business banking and payroll processing",
+    "Customers prioritizing relationship banking and local ownership over national bank convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Currie State Bank is best for agricultural borrowers and community residents in rural Minnesota seeking relationship banking from a locally-owned institution. The primary caveat is the limited geographic footprint (two branches only) and lack of publicly available rate and fee information needed to compare products with competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "141 Mill St, Currie, MN 56123",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

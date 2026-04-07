@@ -1,14 +1,14 @@
 {
   "name": "The Citizens Bank Company",
   "slug": "the-citizens-bank-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Beverly, OH. $331M in assets. 5 offices.",
-  "description_long": "The Citizens Bank Company is a community bank located in Beverly, OH, established in 1863. The bank holds approximately $331M in total assets and $289M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "The Citizens Bank Company is an FDIC-insured bank offering checking, savings, CDs, IRAs, credit cards, debit cards, mortgages, and mobile banking services.",
+  "description_long": "The Citizens Bank Company is a traditional bank providing a full suite of financial services to retail customers. The bank operates multiple physical branch locations and has recently redesigned its website to improve customer experience and navigation. As an FDIC-insured institution, deposits are backed by the full faith and credit of the U.S. Government, providing standard deposit protection up to applicable limits.\n\nThe bank offers a comprehensive range of products including no-fee basic checking accounts, personal savings plans, debit cards, credit cards with rewards and benefits, certificates of deposit (CDs), and retirement accounts (IRAs). They also provide mortgage lending services with multiple loan options, assistance with the application-to-closing process, and help selecting appropriate mortgage products. Additionally, the bank offers online and mobile banking platforms with bill pay functionality, account management tools, and financial calculators to assist customers with decision-making.\n\nThe Citizens Bank Company distinguishes itself through its emphasis on accessibility and security. The bank actively communicates fraud prevention practices (assuring customers it will never request debit card numbers or online credentials via unsolicited contact) and maintains a user-friendly mobile banking application compatible with multiple devices. Their website highlights competitive deposit rates and the availability of in-person branch support for personalized financial guidance.\n\nAs a regional or community bank, The Citizens Bank Company serves customers seeking traditional banking services with physical branch access and personal service. However, the website provides limited information about specific product features, fee structures, interest rates, credit card rewards programs, or mortgage terms. Prospective customers would need to contact the bank directly or visit a branch for detailed product comparisons and rate information. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.thecitizens.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking accounts with no monthly fees",
+    "Personal savings accounts and personalized savings plans",
+    "Debit cards for everyday purchases with convenience and security features",
+    "Credit cards with rewards and benefits",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs) with tax-deferred growth",
+    "Mortgage lending with multiple loan options",
+    "Mobile banking application with 24/7 account access",
+    "Online bill pay from desktop and mobile devices",
+    "Financial calculators for informed decision-making",
+    "Account balance inquiries and transaction research",
+    "Fund transfer capabilities"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1863",
-    "Local community bank with personal service",
-    "5 locations"
+    "FDIC-insured deposits backed by U.S. Government, providing standard deposit protection",
+    "No monthly fees on basic checking accounts with easy access to funds",
+    "Mobile banking app available 24/7 with account balance checks, fund transfers, and bill pay",
+    "Multiple physical branch locations for in-person banking and personalized service",
+    "Variety of mortgage loan options with guidance through application to closing",
+    "Competitive deposit rates available for review and comparison on website",
+    "Proactive fraud prevention communication and security protocols"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited specific information on website regarding fee structures, interest rates, or product features",
+    "No details provided about credit card rewards programs, APR, or benefits",
+    "Mobile app has technical restrictions (not compatible with Android tablets, jail-broken/rooted devices, or devices below 470x320dp resolution)",
+    "Sparse details on mortgage terms, rates, loan types (FHA/VA/conventional), or refinance options",
+    "Limited information about business banking services or availability of business accounts"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10266,
   "latitude": 39.549209996848,
   "longitude": -81.6310410395409,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking traditional banking with physical branch access and in-person support",
+    "Consumers prioritizing FDIC-insured deposits and government-backed deposit protection",
+    "Individuals interested in bundled banking services (checking, savings, mortgages) from a single provider",
+    "Home buyers exploring mortgage lending options with personalized guidance"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Citizens Bank Company is best for consumers seeking full-service banking with traditional branch access, FDIC-insured deposits, and personalized mortgage guidance. The primary caveat is that the website lacks detailed product specifications, rate information, and fee structures\u2014customers must contact the bank directly for comprehensive product comparisons and specific terms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "501 5Th St, Beverly, OH 45715",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

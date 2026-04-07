@@ -1,15 +1,15 @@
 {
   "name": "Haskell National Bank",
   "slug": "haskell-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Haskell, TX. $74M in assets. 2 offices.",
-  "description_long": "Haskell National Bank is a community bank located in Haskell, TX, established in 1890. The bank holds approximately $74M in total assets and $65M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank with two Texas locations offering personal and business banking, loans, and deposit products to rural and small-town customers.",
+  "description_long": "Haskell National Bank is a community-focused financial institution operating two branches in Texas: one in Haskell (established as a regional bank serving rural areas) and one in Abilene. The bank positions itself as a relationship-based lender serving agriculture, construction, and small business communities in West Texas.\n\nThe bank offers comprehensive personal banking services including checking and savings accounts, CDs, IRAs, and various loan products (mortgages, construction loans, livestock and equipment loans, operating loans). Business customers access dedicated checking, money market accounts, and business lending. Additional services include online and mobile banking, credit cards, wire transfers, safe deposit boxes, and financial calculators.\n\nHaskell National Bank differentiates itself through specialization in agricultural and construction lending, which aligns with the rural Texas economy. The bank emphasizes personal service with dedicated phone lines for each location and maintains a community-oriented approach, as evidenced by links to local organizations and Community Reinvestment Act disclosures. Their fee structure is transparent and published online.\n\nAs a small regional bank, Haskell National Bank is best suited for customers in their service areas seeking relationship-based banking rather than digital-first experiences. Customers should note the limited branch network (two locations only) and the moderately high fees for certain services (NSF charges of $35, overdraft rates at 18% annually). The bank appears financially sound but lacks the technology infrastructure or national presence of larger institutions. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.haskellnationalbank.com",
   "affiliate_url": "",
@@ -24,23 +24,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Savings and money market accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Mortgage loans",
+    "Construction loans",
+    "Livestock and equipment loans",
+    "Business operating and equipment loans",
+    "Online banking",
+    "Mobile banking",
+    "Credit cards",
+    "Wire transfers (incoming and outgoing)",
+    "Safe deposit boxes",
+    "Cashier's checks"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1890",
-    "Local community bank with personal service",
-    "2 locations"
+    "Specialization in agricultural lending (livestock, equipment, operating loans) tailored to rural Texas economy",
+    "Free incoming wire transfers for customers; reasonable $25 outgoing wire fee",
+    "Free incoming collections service",
+    "Transparent, published fee schedule available online for comparison",
+    "Personal relationship banking with dedicated local phone numbers for each branch",
+    "Construction and equipment financing options explicitly marketed and available",
+    "Safe deposit boxes available at reasonable rates ($10-$50 annually depending on size)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint with only two branch locations in Texas (Haskell and Abilene)",
+    "High NSF (non-sufficient funds) fee of $35 per item and 18% annual overdraft balance charge",
+    "Account closure fee of $25 if closed within 90 days may discourage short-term customers",
+    "No mention of competitive interest rates or yield information on savings/CD products",
+    "IRA transfer fee of $25 and early IRA closure fee of $50 are restrictive for account flexibility"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +65,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14399,
   "latitude": 33.1573319868917,
   "longitude": -99.7355049754193,
@@ -88,18 +101,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural and ranching businesses in West Texas seeking specialized lending expertise",
+    "Construction companies needing construction loans and equipment financing",
+    "Small business owners in Haskell and Abilene areas wanting relationship-based banking",
+    "Rural residential customers seeking mortgage and personal lending in their local communities"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Haskell National Bank is best for small business owners, farmers, ranchers, and rural residents in the Haskell and Abilene, Texas areas seeking specialized agricultural and construction lending with personal service. The main caveat is the limited branch network and geographic service area\u2014this bank is not suitable for customers outside West Texas or those seeking national banking reach or digital-first services.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +121,11 @@
   ],
   "phone": "",
   "address": "601 N 1St St, Haskell, TX 79521",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

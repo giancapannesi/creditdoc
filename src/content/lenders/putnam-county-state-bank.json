@@ -1,15 +1,15 @@
 {
   "name": "Putnam County State Bank",
   "slug": "putnam-county-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Unionville, MO. $314M in assets. 2 offices.",
-  "description_long": "Putnam County State Bank is a community bank located in Unionville, MO, established in 1979. The bank holds approximately $314M in total assets and $269M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Putnam County State Bank is an FDIC-insured community bank offering checking, savings, CDs, agricultural loans, and digital banking services with local branch support.",
+  "description_long": "Putnam County State Bank is a community-focused financial institution that serves customers through both physical branches and digital platforms. The bank emphasizes local, friendly service while maintaining FDIC insurance protection backed by the U.S. Government, providing customers with security and confidence in their deposits.\n\nThe bank offers a comprehensive suite of consumer and business banking services including checking and savings accounts, competitive CD products, online and mobile banking, debit cards, ACH and wire transfers, bill pay, and specialized agricultural lending for farmers and rural businesses. Their digital offerings include mobile banking apps for account management, check deposits, and bill payments, alongside traditional services like check reordering and financial calculators.\n\nPutnam County State Bank distinguishes itself through its emphasis on agricultural lending tailored to farmers and rural businesses, combined with a commitment to personalized local service. The bank provides transparent fee structures (e.g., $15 domestic wire transfers, $50 international) and competitive CD rates, with accessibility features and a focus on fraud prevention resources for customers.\n\nThe bank is best suited for customers seeking community banking with local branch relationships, particularly farmers and rural business owners seeking specialized agricultural credit. However, customers should be aware of specific account limitations, such as the 9 free savings account withdrawals per quarter policy with $1 per transfer fees thereafter, and the 5-day hold on incoming external transfers\u2014restrictions that may not apply at larger regional or national banks. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.putnamcountystatebank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts",
+    "Certificates of Deposit (CDs) with competitive rates",
+    "Agricultural loans for farmers and rural businesses",
+    "Online banking with account management and fund transfers",
+    "Mobile banking app for balance checks, check deposits, and bill payments",
+    "Debit cards with EMV chip and contactless payment options",
+    "ACH transfers (standard 1-3 business days or same-day for $15 fee)",
+    "Wire transfers (domestic $15, international $50)",
+    "Bill pay for utilities, credit cards, and person-to-person payments",
+    "External fund transfers to/from other banks (with 5-day hold on incoming)",
+    "Check reordering service",
+    "Financial calculators and fraud prevention resources"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1979",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits backed by full faith and credit of the U.S. Government",
+    "Specialized agricultural loans designed for farmers and rural businesses",
+    "Competitive CD rates with transparent pricing information available",
+    "Mobile banking app for remote account management, check deposits, and bill payments",
+    "Transparent fee structure clearly disclosed (e.g., $15 domestic wires, $50 international wires, $1 per excess withdrawal)",
+    "Online bill pay for utilities, credit cards, service providers, and person-to-person payments",
+    "Fraud prevention resources and security features including PIN verification, EMV chip, and contactless payment options"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to 9 free savings account withdrawals per quarter; $1 fee per additional withdrawal and online transfer capability is disabled after reaching limit",
+    "5-day hold on all incoming external transfers delays access to funds from other banks",
+    "ACH same-day transfer available only with $15 fee, while standard ACH takes 1-3 business days",
+    "International wire transfers charged at $50, which may be higher than some larger banks",
+    "Limited information on the website about checking account features, minimum balance requirements, or interest rates on deposits"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 22895,
   "latitude": 40.4770323690139,
   "longitude": -93.0011145581432,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Farmers and rural business owners needing specialized agricultural lending and local financial relationships",
+    "Community members seeking FDIC-insured banking with personalized local branch support",
+    "Customers prioritizing mobile and online banking convenience for everyday transactions",
+    "Individuals looking for transparent fee structures and competitive CD products for savings"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Putnam County State Bank is best for community-oriented customers, particularly farmers and rural business owners, who value local branch relationships and personalized service alongside digital banking convenience. The primary caveat is the restrictive savings account withdrawal policy (9 free per quarter, then $1 fees and service suspension), which differs significantly from most modern banks and could frustrate customers with frequent transfer needs.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "1522 Main St, Unionville, MO 63565",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

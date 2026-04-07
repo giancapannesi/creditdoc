@@ -1,13 +1,13 @@
 {
   "name": "First Bank",
   "slug": "first-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in St. Louis, MO. $6652M in assets. 76 offices.",
-  "description_long": "First Bank is a community bank located in St. Louis, MO, established in 1906. The bank holds approximately $6652M in total assets and $5974M in deposits. It operates 76 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "First Bank is a regional bank offering personal and business checking, savings, CDs, loans, mortgages, and wealth management across Missouri, Illinois, and California.",
+  "description_long": "First Bank operates as a multi-state regional bank with a physical and digital presence across Missouri, Illinois, and California. The institution serves both personal and business customers through traditional branch banking and comprehensive online/mobile platforms. Founded as a community-focused financial institution, First Bank has evolved to offer a full suite of retail and commercial banking products.\n\nFirst Bank's service offerings include personal checking and savings accounts (including their Icon Checking product with up to 2.60% APY and Icon High-Yield Savings at 2.75% APY), Certificates of Deposit (currently promoting 3.65% APY on 7-month CDs), personal and business loans, mortgage services, credit cards, and wealth management. The bank provides digital access through Personal eBanking, Business eBanking, a mobile app (First Bank On The Go), ATMs/ITMs, telephone banking, and in-branch services. Business customers can access specialized services including Remote Deposit, Lockbox Services, Receivables Online, and Retirement Plan Services.\n\nFirst Bank differentiates itself through competitive APY rates on deposit products, a sweepstakes promotion for Icon Checking account holders, multiple digital banking channels including ITM (Interactive Teller Machine) virtual banking, and community involvement initiatives. The bank emphasizes educational resources through a Financial Education Center and calculators to help customers plan their financial goals. Their CEO message emphasizes long-term responsibility and community impact.\n\nAs a regional bank, First Bank operates within the standard regulatory framework of FDIC-insured deposits and established banking practices. Customers should be aware that service availability may vary by state, and some products require in-branch visits. The bank's competitive rates suggest active management of deposit products, though rates should always be compared with national online banks. For business customers, the breadth of specialized services indicates a serious commercial banking division. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://WWW.FIRST.BANK",
   "affiliate_url": "",
@@ -22,23 +22,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Icon Checking Account with up to 2.60% APY",
+    "Icon High-Yield Savings Account at 2.75% APY",
+    "Certificates of Deposit (7-month promotional rate 3.65% APY)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business loans and lines of credit",
+    "Mortgage lending (purchase, refinance, mortgage online platform)",
+    "Credit cards",
+    "Personal and Business eBanking platforms",
+    "First Bank On The Go mobile app",
+    "Wealth management services",
+    "Business Remote Deposit and Lockbox Services",
+    "ATM and ITM (Interactive Teller Machine) access with virtual banking",
+    "Retirement Plan Services (sponsor and participant)",
+    "Brokerage services",
+    "Automated telephone banking (800-760-BANK)",
+    "Check reordering and management"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1906",
-    "Local community bank with personal service",
-    "76 locations"
+    "Competitive APY rates: Icon Checking up to 2.60% APY and Icon High-Yield Savings at 2.75% APY",
+    "Promotional 7-Month CD rate of 3.65% APY",
+    "Multiple digital access channels including Personal/Business eBanking, First Bank On The Go mobile app, and ITM virtual banking",
+    "Comprehensive business banking services including Remote Deposit, Lockbox Services, Receivables Online, and Retirement Plan Services",
+    "Multi-channel customer support via phone (800-760-BANK), online, mobile app, and in-branch",
+    "Sweepstakes promotion for Icon Checking account holders with branded prizes",
+    "Financial education resources including calculators and Financial Education Center"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint: only operates in Missouri, Illinois, and California (no nationwide presence)",
+    "Some account opening and services require in-branch visits; not fully online bank experience",
+    "Promotional rates are time-limited and subject to change; ongoing rates not clearly disclosed on website",
+    "No information provided about minimum deposit requirements, monthly fees, or other account terms",
+    "Business banking services appear to require phone contact or branch visit rather than fully online setup"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +65,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 12229,
   "latitude": 38.6719450069,
   "longitude": -90.445325025565,
@@ -86,18 +101,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Personal customers in MO, IL, or CA seeking competitive savings and checking rates",
+    "Small business owners needing comprehensive commercial banking services including receivables and retirement plan administration",
+    "Customers wanting integrated digital and branch banking options with human banker access via ITM"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Bank is best for customers in Missouri, Illinois, or California who want a traditional regional bank with competitive deposit rates and value in-person banking options alongside digital access. The main caveat is that this is a regional bank, not a national institution, and some services require branch interaction rather than being fully online\u2014making it less suitable for customers seeking purely digital-first banking or those outside the three-state service area.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +120,11 @@
   ],
   "phone": "",
   "address": "11901 Olive Boulevard, St. Louis, MO 63141",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

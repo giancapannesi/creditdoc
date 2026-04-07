@@ -1,14 +1,14 @@
 {
   "name": "Main Street Bank",
   "slug": "main-street-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Marlborough, MA. $1671M in assets. 6 offices.",
-  "description_long": "Main Street Bank is a community bank located in Marlborough, MA, established in 1860. The bank holds approximately $1671M in total assets and $1323M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured mutual bank with 6 branch locations in Massachusetts offering personal and business checking, savings, mortgages, and loans with emphasis on personalized, community-focused service.",
+  "description_long": "Main Street Bank is a mutual bank that has operated in Massachusetts communities for generations. As a mutual institution (member-owned rather than shareholder-owned), the bank emphasizes long-term community commitment over profit maximization. The bank operates six physical locations across central Massachusetts: Ayer, Hudson, Marlborough (main office), Northborough, Pepperell, and Southborough, providing traditional banking services with in-person customer support.\n\nThe bank offers a comprehensive range of retail and business banking products including checking and savings accounts, certificates of deposit (CDs), mortgages (home purchase and refinance), equity lines and loans, personal loans, financial planning services, and retirement accounts. They provide digital conveniences including online banking, video connect services, wire transfers, and check ordering. Business customers can access workplace banking solutions. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government.\n\nMain Street Bank distinguishes itself by positioning personalized, relationship-based banking against the trend toward purely digital, transaction-focused banking. The bank emphasizes knowing customers by name and face, community engagement through a charitable foundation, and staff accessibility. Customer testimonials highlight consistent personal service, knowledge of local customers, and community support. The bank provides financial education resources including Banzai Financial Education and home buying resources, plus fraud prevention guidance.\n\nAs a regional mutual bank with limited geographic presence (6 branches in central Massachusetts only), Main Street Bank is best suited for customers in their service areas seeking traditional banking with personal relationships rather than those requiring extensive national branch networks or specialized financial services. The bank's mutual structure suggests stability but may limit product innovation or competitive rates compared to larger institutions. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.bankmainstreet.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts with e-banking and online access",
+    "Personal savings accounts and certificates of deposit (CDs)",
+    "Mortgage lending for home purchase and refinance",
+    "Home equity lines and loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking and business accounts",
+    "Retirement accounts and financial planning services",
+    "Wire transfers",
+    "Check ordering services",
+    "Video connect remote banking",
+    "Workplace banking programs for businesses",
+    "Financial education (Banzai Financial Education and home buying resources)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1860",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits with U.S. Government backing provides deposit safety up to $250,000 per account category",
+    "Mutual bank structure means member-owned focus on community benefit rather than shareholder profits",
+    "Six physical branch locations with extended hours allowing in-person service and relationship banking",
+    "Comprehensive product suite including mortgages, equity lines, personal loans, and business banking",
+    "Strong community engagement with charitable foundation and documented support for local nonprofits",
+    "Online and digital services including online banking, video connect, and wire transfers alongside branch access",
+    "Consistently positive customer reviews highlighting personalized service and staff knowledge of customers by name"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint (6 branches in central Massachusetts only) makes it inaccessible for customers outside service area",
+    "Website content does not disclose specific interest rates, fees, minimum balances, or competitive rate comparisons",
+    "No mention of advanced features like investment services, wealth management, or specialized commercial lending products",
+    "Smaller bank size may result in fewer ATM locations and less extensive online functionality compared to major banks",
+    "No information provided about mobile app capabilities, mobile check deposit, or other digital conveniences expected at modern banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 90235,
   "latitude": 42.3454232897355,
   "longitude": -71.5463697405282,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Central Massachusetts residents seeking relationship banking with local branch access and personalized customer service",
+    "Small to medium business owners in the bank's service area needing integrated business and personal banking",
+    "Customers prioritizing community-focused banking and support for local nonprofits over maximum rate competitiveness",
+    "Individuals who value knowing their banker personally and prefer in-person service over purely digital banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Main Street Bank is best for central Massachusetts residents and small business owners who value personalized, relationship-based banking with local branch access and community engagement. The primary caveat is strict geographic limitation to 6 branches in central Massachusetts, making it inaccessible outside this service area, combined with lack of disclosed rate and fee information online to evaluate competitiveness against larger regional or national banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "81 Granger Blvd, Marlborough, MA 01752",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

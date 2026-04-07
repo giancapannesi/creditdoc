@@ -1,15 +1,15 @@
 {
   "name": "Clare Bank, National Association",
   "slug": "clare-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Platteville, WI. $349M in assets. 8 offices.",
-  "description_long": "Clare Bank, National Association is a community bank located in Platteville, WI, established in 1905. The bank holds approximately $349M in total assets and $290M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank with 8 locations across Southwest Wisconsin offering checking, savings, mortgages, debit cards, and online banking services.",
+  "description_long": "Clare Bank, National Association is a regional community bank headquartered in Platteville, Wisconsin, serving Southwest Wisconsin with eight convenient branch locations across Platteville, Bloomington, Boscobel, Fennimore, Kieler, and Montfort. The bank has established itself as a local financial institution focused on personalized service and accessibility to its rural and small-town customer base.\n\nThe bank offers a comprehensive suite of retail banking services including checking and savings accounts, ATM and debit card access, online banking with bill pay functionality, and a notable emphasis on in-house mortgage lending. Clare Bank provides mortgage options including 1, 3, and 5-year balloon mortgages as well as 10 and 15-year fixed mortgages, with the bank advertising fast approval, competitive rates, low closing costs, and hassle-free loan modifications. Additional services include online check ordering, e-statements, account transfers, balance inquiries, and the ability to make deposits via debit card at ATMs.\n\nClare Bank distinguishes itself through its hyperlocal presence and commitment to physical branch accessibility in an increasingly digital banking landscape. The bank operates extended drive-up hours (opening at 7:30 a.m. for drive-up service) across multiple locations and maintains Saturday drive-up service in Platteville. Online banking, bill pay, and mortgage application services are available 24/7, bridging digital convenience with community-oriented service. The bank positions itself with the tagline \"We Can Do That,\" suggesting willingness to work with customers on loan modifications and customized products.\n\nAs a community bank, Clare Bank is best suited for customers in Southwest Wisconsin seeking relationship-based banking with local decision-making and personalized mortgage service. The limitation is geographic\u2014the bank operates only in a defined regional area with eight branches, making it inaccessible to customers outside Southwest Wisconsin. Additionally, the website contains limited information regarding deposit insurance coverage, account fees, interest rates, minimum balance requirements, or specific loan terms, which are critical details for consumer decision-making. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.clarebank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts",
+    "ATM and debit card services with worldwide access",
+    "Online banking with 24/7 access",
+    "Bill pay services (transitioning to CheckFree platform in January 2026)",
+    "1, 3, and 5-year balloon mortgages",
+    "10 and 15-year fixed mortgages",
+    "Online mortgage loan applications",
+    "Hassle-free loan modifications",
+    "Online check ordering",
+    "E-statements and paperless banking",
+    "Account transfers between checking and savings",
+    "ATM balance inquiries and cash withdrawals"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "8 locations"
+    "8 physical branch locations across Southwest Wisconsin with drive-up service at 4 locations",
+    "Extended drive-up hours opening at 7:30 a.m. at all drive-up locations",
+    "Saturday drive-up service in Platteville from 9 a.m. to 12 p.m.",
+    "In-house mortgage lending with 1, 3, 5-year balloon and 10, 15-year fixed options",
+    "24/7 online banking, bill pay, and mortgage application portal access",
+    "Hassle-free loan modifications explicitly mentioned as available",
+    "Debit cards usable worldwide at ATMs and retail locations with deposit capability"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Only serves Southwest Wisconsin\u2014no nationwide or online-only banking option for out-of-state customers",
+    "Website lacks essential details on deposit insurance (FDIC coverage), account fees, minimum balances, and interest rates",
+    "Mortgage applications note 'not everyone will qualify' with no published underwriting criteria or rate information",
+    "Limited branch hours (8 a.m. to 5 p.m. weekdays, Saturday drive-up only in one location) compared to larger banks",
+    "Upcoming bill pay platform migration to CheckFree in January 2026 may require customers to take 'additional actions'"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1022,
   "latitude": 42.7332870162713,
   "longitude": -90.4821390148635,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Southwest Wisconsin residents seeking personalized mortgage lending with local bank relationships",
+    "Small business owners and farmers in rural Wisconsin communities needing accessible branch service",
+    "Customers who value physical branch interaction and drive-up convenience over digital-only banking",
+    "Homebuyers interested in flexible mortgage terms (balloon or fixed) with in-house lending decisions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Clare Bank is best for customers in Southwest Wisconsin seeking community-based banking with accessible physical branches, personalized service, and in-house mortgage lending. The main caveat is that this is a strictly regional bank limited to eight Wisconsin locations, making it unsuitable for customers outside the service area or those preferring nationwide/online-only banking options.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "345 W Pine St, Platteville, WI 53818",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

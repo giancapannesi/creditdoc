@@ -1,15 +1,15 @@
 {
   "name": "Bank Of Camilla",
   "slug": "bank-of-camilla",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Camilla, GA. $196M in assets. 1 office.",
-  "description_long": "Bank Of Camilla is a community bank located in Camilla, GA, established in 1890. The bank holds approximately $196M in total assets and $155M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bank of Camilla is a community bank in Georgia offering personal and commercial banking services including checking, savings, loans, mortgages, and digital banking options.",
+  "description_long": "Bank of Camilla is a traditional community bank headquartered in Camilla, Georgia, operating from their main location at 50 East Broad Street. The bank has established itself as a local financial institution serving both personal and commercial customers in the South Georgia region. Their history and emphasis on being \"the friendly bank\" suggests long-standing community ties, though specific founding details are not provided on their website.\n\nThe bank offers a comprehensive suite of personal banking products including checking and savings accounts, personal loans, mortgages, debit cards, and credit cards. On the commercial side, they provide business checking and savings accounts, commercial loans, and business credit cards. Their electronic banking services include 24/7 online banking, mobile banking, mobile deposit, online bill pay, and telephone banking. They also offer specialized savings products such as CDs and IRAs.\n\nBank of Camilla distinguishes itself through traditional brick-and-mortar banking with local presence and customer service, complemented by modern digital banking capabilities. The bank operates extended hours (9 AM-4 PM Monday-Thursday, 9 AM-5 PM Friday for lobby; 8:30 AM-4 PM and 8:30 AM-5 PM respectively for drive-in) and maintains multiple contact channels including phone, fax, mail, and specialized support lines for card services. Their emphasis on security and privacy is evident throughout their website communications.\n\nAs a regional community bank, Bank of Camilla serves customers who prefer local banking relationships with personalized service. However, the website provides limited information about specific loan terms, interest rates, fees, or account requirements. The bank appears to be a solid choice for customers in the Camilla, Georgia area seeking traditional banking services, though those outside this region or seeking specialized financial products may find limitations. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.bankofcamilla.net",
   "affiliate_url": "",
@@ -24,23 +24,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Commercial checking accounts",
+    "Commercial savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business loans",
+    "Mortgage loans",
+    "Online banking with 24/7 account access",
+    "Mobile banking and mobile deposit",
+    "Online bill pay",
+    "Telephone banking",
+    "Debit cards",
+    "Credit cards",
+    "Business credit cards"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1890",
-    "Local community bank with personal service",
-    "1 location"
+    "24/7 online banking access for account management and bill pay",
+    "Mobile banking and mobile deposit capabilities for digital-first customers",
+    "Personalized service emphasis as a community-focused local bank",
+    "Extended drive-in hours (8:30 AM start) for convenient access",
+    "Comprehensive product range including personal loans, mortgages, CDs, and IRAs",
+    "Dedicated fraud and lost card support lines for quick resolution",
+    "Multiple contact methods available (phone, fax, mail) beyond digital channels"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic reach as a single-location community bank serving only the Camilla, Georgia area",
+    "Website lacks specific information on interest rates, APRs, fees, or account minimums",
+    "No information about FDIC insurance coverage or deposit protections",
+    "Lobby hours limited to 4-5 PM close, which may not accommodate all work schedules",
+    "Website provides minimal detail about loan qualification requirements or terms"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +67,7 @@
   "states_served": [
     "GA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 17190,
   "latitude": 31.2314329907445,
   "longitude": -84.2067800202439,
@@ -88,18 +103,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Residents and businesses in the Camilla, Georgia area seeking personalized local banking",
+    "Customers who prefer traditional brick-and-mortar banking combined with digital services",
+    "Small business owners looking for commercial checking, savings, and lending products",
+    "Homebuyers in South Georgia seeking mortgage financing from a local lender"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Camilla is best suited for customers in the Camilla, Georgia area who value community banking relationships and want a combination of traditional in-person service with modern digital banking capabilities. The main caveat is the bank's limited geographic presence\u2014it appears to operate only one location, making it inaccessible for customers outside the immediate Camilla area, and the website lacks critical information about rates and fees needed to compare competitiveness with regional and national banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +123,11 @@
   ],
   "phone": "",
   "address": "50 E Broad St, Camilla, GA 31730",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

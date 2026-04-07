@@ -1,15 +1,15 @@
 {
   "name": "Rivers Edge Bank",
   "slug": "rivers-edge-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Marion, SD. $337M in assets. 5 offices.",
-  "description_long": "Rivers Edge Bank is a community bank located in Marion, SD, established in 1904. The bank holds approximately $337M in total assets and $273M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving South Dakota and Iowa with mortgage lending, agricultural financing, and digital banking tools like mobile deposit and bill pay.",
+  "description_long": "Rivers Edge Bank is a community bank operating in the South Dakota and Iowa border region, with physical locations in Bridgewater, SD and Hawarden, IA. The bank positions itself as a locally-rooted financial institution where decision-makers live and work in the communities they serve, emphasizing relationship-based banking rather than transactional volume.\n\nThe bank offers residential real estate lending with in-house and secondary market mortgage options, agriculture lending with competitive rates and online access, and crop insurance products through licensed agents partnering with premier crop insurance providers. For retail customers, Rivers Edge provides mobile deposit, bill pay, online banking, business online banking, and mortgage calculators. They maintain 24-hour ATM access at their Bridgewater location and offer traditional lobby and drive-thru hours at both branches.\n\nWhat distinguishes Rivers Edge is its explicit focus on agricultural and rural lending alongside residential mortgages, combined with an emphasis on personal relationships and local decision-making. Customer testimonials highlight trust built over years of personal relationships and the bank's role in supporting local business growth through partnership-oriented lending. The bank targets both individual consumers and small to mid-sized agricultural and energy businesses.\n\nLimitations include a very limited geographic footprint (only two small-town branches), restricted operating hours (lobby closes midday for lunch, limited evening hours), and no apparent online account opening or broader digital banking infrastructure visible on their website. The bank appears suited only to customers in or near their service areas and those with agricultural or rural business needs. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.riversedge.bank",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Residential real estate lending (purchase mortgages)",
+    "In-house mortgage underwriting",
+    "Secondary market mortgage options",
+    "Agriculture lending with customizable terms",
+    "Crop insurance products",
+    "Livestock revenue protection insurance",
+    "Mobile deposit for checks",
+    "Bill pay with flexible scheduling",
+    "Business online banking",
+    "Mortgage calculator",
+    "Financial calculators",
+    "24-hour ATM access (Bridgewater location)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1904",
-    "Local community bank with personal service",
-    "5 locations"
+    "Offers specialized agriculture lending with customizable repayment options and online access",
+    "Provides crop insurance and livestock revenue protection through licensed agents",
+    "In-house mortgage underwriting option plus secondary market access for diverse lending scenarios",
+    "Mobile deposit feature allows check deposits from anywhere without branch visits",
+    "Bill pay with flexible timing options (immediate or scheduled payment)",
+    "Relationship-based lending model with local decision-makers, verified through customer testimonials",
+    "24-hour ATM access at Bridgewater location"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Only two physical branch locations in small towns (Bridgewater, SD and Hawarden, IA), severely limiting accessibility",
+    "Lobby hours include midday closures (12:00-12:30 PM) and limited evening hours, with no 24/7 digital-only options mentioned",
+    "No visible information about account opening, fee structures, interest rates, or specific loan terms on website",
+    "Limited digital banking capabilities mentioned\u2014no online account opening, mobile app details, or modern neobanking features",
+    "No apparent FDIC insurance, regulatory status, or compliance information disclosed on the website"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "SD"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9935,
   "latitude": 43.4235990203096,
   "longitude": -97.2610489731939,
@@ -88,18 +99,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural business owners and farmers in South Dakota and Iowa seeking specialized crop/livestock lending",
+    "Rural small business owners in the Bridgewater, SD or Hawarden, IA areas seeking relationship-based lending and personal banking relationships",
+    "Homebuyers in South Dakota and Iowa seeking mortgage lending with local underwriting and decision-making"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Rivers Edge Bank is best for agricultural business owners, rural residents, and small business operators in South Dakota and Iowa who prioritize relationship-based banking and local decision-making. The primary caveat is geographic limitation\u2014the bank operates only two small-town branches and is not accessible to customers outside this specific region, making it unsuitable for anyone outside South Dakota/Iowa or those requiring convenient multi-location access.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +118,11 @@
   ],
   "phone": "",
   "address": "211 N Broadway Ave, Marion, SD 57043",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

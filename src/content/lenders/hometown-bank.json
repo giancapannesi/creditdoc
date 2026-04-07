@@ -1,14 +1,14 @@
 {
   "name": "Hometown  Bank",
   "slug": "hometown-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Carver, MN. $663M in assets. 11 offices.",
-  "description_long": "Hometown  Bank is a community bank located in Carver, MN, established in 1924. The bank holds approximately $663M in total assets and $586M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank serving Minnesota with 11 local branches, offering personal/business banking, mortgages, and insurance with local lending decisions.",
+  "description_long": "HomeTown Bank is a Minnesota-based community bank that has established itself as a local financial institution with roots in the Upper Midwest. The bank operates 11 physical branch locations across Minnesota communities including Carver, Cleveland, Henderson, Jordan, Le Sueur, Olivia, Redwood Falls, Shakopee, St. Peter, Victoria, and Waconia. As an FDIC-insured institution (NMLS #403208), deposits are backed by the full faith and credit of the U.S. Government, providing standard federal deposit protection.\n\nThe bank's service offerings span personal banking, business banking, mortgage lending, and insurance products. They provide checking and savings accounts, mobile banking access, fund transfers, cash access, and account status monitoring. Their mortgage division markets itself as offering local lending decisions for home purchases and refinancing. The insurance division suggests they offer financial protection products, though specific details are limited on their public website. Business customers can access dedicated business banking services and cash management tools.\n\nHomeTown Bank differentiates itself through emphasis on local decision-making and community presence. Their marketing explicitly contrasts their approach with national banks, highlighting the ability to speak with local employees in person rather than contacting representatives in other states. The bank actively participates in community involvement through donations, volunteering, and partnerships. Customer testimonials emphasize friendly, helpful staff willing to assist with questions face-to-face.\n\nAs a regional community bank with limited geographic footprint, HomeTown Bank is best suited for customers in their service areas who value personal relationships and local banking decisions. The bank does not appear to offer specialized lending products (personal loans, emergency cash, debt relief) that some consumers may seek. Online banking and mobile access provide modern convenience, but the service scope is narrower than national or super-regional institutions. Their strength lies in traditional community banking rather than specialty financial services. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.myht.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business checking and savings accounts",
+    "Mobile banking application",
+    "Fund transfers and online bill payment",
+    "Cash access and ATM services",
+    "Account status monitoring and alerts",
+    "Mortgage lending for home purchase and refinance",
+    "Mortgage loan origination with local decision-making",
+    "Business banking services",
+    "Cash management tools for business customers",
+    "Insurance products (type not specified)",
+    "Online and mobile banking enrollment"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1924",
-    "Local community bank with personal service",
-    "11 locations"
+    "FDIC-insured deposits with full U.S. Government backing",
+    "11 convenient physical branch locations across Minnesota communities",
+    "Local lending decisions for mortgages and business loans rather than centralized underwriting",
+    "Mobile banking app for account access and transactions anytime, anywhere",
+    "In-person customer service with friendly, knowledgeable local staff",
+    "Active community involvement through donations, volunteering, and partnerships",
+    "Routing number 291270461 for direct deposit and ACH transfers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Minnesota only\u2014no national presence",
+    "Does not appear to offer personal loans, emergency cash, or specialized lending products",
+    "Specific details about insurance products and coverage types not disclosed on website",
+    "No information about fees, interest rates, or account minimums published online",
+    "Limited branch network (11 locations) may not serve all Minnesota regions"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 31028,
   "latitude": 44.773740477289,
   "longitude": -93.643420903777,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Minnesota residents in Carver, Cleveland, Henderson, Jordan, Le Sueur, Olivia, Redwood Falls, Shakopee, St. Peter, Victoria, or Waconia who prefer local banking relationships",
+    "Small business owners seeking local lending decisions and personalized business banking",
+    "Homebuyers in the bank's service area wanting mortgage lending from local lenders",
+    "Customers who value in-person banking and community-focused financial institutions over national chains"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "HomeTown Bank is best for Minnesota residents in their 11-branch service area who prioritize local decision-making, personal relationships, and community involvement over the convenience of national banking networks. The main caveat is that their geographic limitation and absence of specialized lending products (personal loans, emergency cash, debt relief) means they cannot serve customers outside Minnesota or those seeking non-traditional financial services.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1600 Monroe Drive, Carver, MN 55315",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Mountainone Bank",
   "slug": "mountainone-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in North Adams, MA. $1050M in assets. 6 offices.",
-  "description_long": "Mountainone Bank is a community bank located in North Adams, MA, established in 1848. The bank holds approximately $1050M in total assets and $781M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "MountainOne Bank is a mutual bank offering checking, savings, mortgages, credit cards, and investments. Established in 1848, they serve local communities across multiple states.",
+  "description_long": "MountainOne Bank has operated as a community-focused financial institution since 1848, emphasizing local presence and service to individuals and businesses. The parent company recently merged with Mechanics Cooperative Bank into a combined Mutual Holding Company called MountainOne Financial, MHC, strengthening their operational scale. They offer a comprehensive suite of financial services including deposit accounts (checking, savings, money market, CDs), mortgage lending, credit cards, investment management through Investor 360, and insurance products through MountainOne Insurance Agency. The bank operates digital banking platforms with mobile and online access, along with physical branch locations, particularly in the Berkshire County area of Massachusetts and surrounding regions. MountainOne distinguishes itself through community engagement programs including a Community Dividend Program, financial education outreach, and employee volunteer services. They market specialized products like ADU financing (up to 90% of home's future value for accessory dwelling units), a first-time homebuyer credit of $650, and partnerships like offering Greenlight debit cards for children at no cost to existing customers. Their security approach emphasizes fraud monitoring tools and enhanced account protection. The bank maintains a quirky brand identity featuring Mo, their spokesgoat mascot. Recent expansions include opening a new insurance office in Great Barrington in 2026, and they actively promote executive promotions and operational improvements. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.mountainone.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Money market accounts",
+    "Certificates of Deposit (CDs)",
+    "Mortgage lending and refinancing",
+    "ADU (accessory dwelling unit) financing",
+    "Credit card products",
+    "Investment management (Investor 360 platform)",
+    "Insurance products and agency services",
+    "Digital banking platform",
+    "Mobile banking",
+    "Fraud monitoring and account protection"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1848",
-    "Local community bank with personal service",
-    "6 locations"
+    "Established 176-year history (founded 1848) demonstrates long-term stability and community roots",
+    "Offers specialized ADU financing up to 90% of home's future value for rental units and guest spaces",
+    "First-time homebuyer program includes $650 credit incentive",
+    "Provides Greenlight debit card and money app for children at no cost (normally $70/year value)",
+    "Comprehensive service offerings including banking, investments, insurance, and mortgages under one organization",
+    "Digital banking available with online and mobile access",
+    "Active community engagement through Community Dividend Program and financial education outreach"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitations\u2014primarily serves Massachusetts and surrounding areas; not a national or nationwide bank",
+    "Website shows scheduled maintenance downtime (Sunday 12am-4am), suggesting potential reliability concerns",
+    "Limited specific detail on deposit account rates, APYs, or fee structures available on homepage",
+    "No transparent information on credit card features, rewards programs, or qualification requirements",
+    "Recent merger (MountainOne Bank + Mechanics Cooperative Bank) may cause service integration or process changes"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 90253,
   "latitude": 42.6992696070575,
   "longitude": -73.1109385532844,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Massachusetts and Berkshire County residents seeking community-focused banking with personal service",
+    "First-time homebuyers looking for down payment assistance and specialized mortgage programs",
+    "Homeowners interested in ADU financing to add rental income or guest space to existing properties",
+    "Families wanting to introduce children to financial management through free Greenlight debit card access"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "MountainOne Bank is best for consumers in the Massachusetts/Berkshire County region seeking traditional, full-service community banking with personalized service, home financing, and specialized programs like ADU lending or first-time homebuyer credits. The main caveat is geographic limitation\u2014they are not a national bank, so out-of-region customers will have limited branch access and may find better options with larger nationwide institutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "93 Main St, North Adams, MA 01247",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

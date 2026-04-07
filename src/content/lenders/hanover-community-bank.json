@@ -1,14 +1,14 @@
 {
   "name": "Hanover Community Bank",
   "slug": "hanover-community-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Garden City Park, NY. $2382M in assets. 10 offices.",
-  "description_long": "Hanover Community Bank is a community bank located in Garden City Park, NY, established in 2009. The bank holds approximately $2382M in total assets and $2029M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering personal and business checking, savings, and commercial lending with competitive rates on deposit accounts.",
+  "description_long": "Hanover Community Bank is a full-service FDIC-insured financial institution that positions itself as combining the strength of a larger bank with the personalized service of a community lender. The bank operates through both personal and business banking divisions, serving customers through online account opening and a customer service team available 24/7 at 1-877-548-8880.\n\nThe bank's primary offerings include Max Cash Checking Rewards accounts (advertised at 5.50-5.75% APY on balances up to $25,000), personal savings accounts, business cash management services, and commercial lending products. Their lending portfolio includes commercial & industrial loans, investment property financing, and cash management services designed to streamline business operations. The bank emphasizes local decision-making and personalized service in their lending approach.\n\nHanover Bank differentiates itself through its community-focused mission statement, emphasizing employee development, community engagement, and partnerships. The bank highlights fraud and scam protection resources and maintains strong FDIC insurance backing. Their tagline \"With the strength of a big bank and the care of a community partner\" reflects their positioning as a hybrid between institutional banking and local service.\n\nHanover Bank is best suited for consumers seeking FDIC-insured deposit products with higher checking account yields and small to mid-sized business owners needing commercial lending and cash management services. Prospective customers should note that the website provides limited detail on fees, minimum balance requirements, and specific lending terms, requiring direct contact for complete product information. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.hanoverbank.com",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Max Cash Checking Rewards accounts with tiered APY",
+    "Personal savings accounts",
+    "Business checking and cash management services",
+    "Commercial & Industrial Loans",
+    "Investment Property Lending and financing",
+    "Online account enrollment and opening",
+    "Mobile and digital banking access",
+    "Fraud protection and scam prevention resources",
+    "Business loan applications with local decision-making",
+    "Account management and customer service support"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2009",
-    "Local community bank with personal service",
-    "10 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Max Cash Checking Rewards offers competitive 5.50-5.75% APY on balances up to $25,000",
+    "Online account opening available in minutes for checking accounts",
+    "24/7 customer service team accessible at 1-877-548-8880",
+    "Dedicated business banking division with cash management and commercial lending services",
+    "Local decision-making authority for commercial & industrial loan approvals",
+    "Fraud and scam protection resources and education provided to customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks transparency on account fees, minimum balances, and specific APR terms for loans",
+    "Limited information about savings account rates, CD offerings, or other deposit products beyond Max Cash Checking",
+    "No clear details on loan approval timeframes, required documentation, or eligibility criteria for business lending",
+    "Minimal information about mobile app functionality or digital banking features",
+    "No pricing or comparison information for business services like cash management"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "NY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58675,
   "latitude": 40.7381212714771,
   "longitude": -73.6697452858415,
@@ -84,21 +93,22 @@
       "FDIC Cert #58675"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Consumers seeking high-yield checking accounts with FDIC insurance backing",
+    "Small to mid-sized business owners needing commercial lending and treasury management services",
+    "Customers prioritizing community-focused banking with personalized service",
+    "Businesses requiring investment property or commercial & industrial financing"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Hanover Community Bank is best for deposit customers seeking competitive checking yields with FDIC insurance and small business owners needing commercial lending with local relationship management. Primary caveat: the website provides minimal detail on fees, rates beyond the checking account, and lending terms\u2014direct contact is necessary to evaluate specific products and costs.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +116,11 @@
   ],
   "phone": "",
   "address": "2131 Jericho Tpke, Garden City Park, NY 11040",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

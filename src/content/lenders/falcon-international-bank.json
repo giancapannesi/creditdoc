@@ -1,14 +1,14 @@
 {
   "name": "Falcon International Bank",
   "slug": "falcon-international-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Laredo, TX. $2179M in assets. 20 offices.",
-  "description_long": "Falcon International Bank is a community bank located in Laredo, TX, established in 1986. The bank holds approximately $2179M in total assets and $1905M in deposits. It operates 20 office locations. Designated as a Hispanic American. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank with $2.1B in assets, 18 branches across Texas, and digital banking services including checking, savings, loans, and investments.",
+  "description_long": "Falcon International Bank is a Texas-based community bank that has built its operations around faith-based values and family-oriented service. The bank was established with a mission emphasizing integrity, customer relationships, and community impact, as evidenced by their motto 'Guided by Faith... Grounded by Family... Committed to You.' With over 400 team members and $2.1 billion in total assets as of December 31, 2025, the bank operates 18 physical branch locations across South and Central Texas, including Laredo, San Antonio, McAllen, Brownsville, Eagle Pass, Del Rio, Zapata, and Buda, plus a loan production office in Austin.\n\nFalcon International offers a comprehensive suite of consumer and business banking products. Their core offerings include free checking and savings accounts with no monthly fees or minimum balance requirements (beyond a $100 opening deposit), rewards checking that pays high interest for qualifying customers, business checking with unlimited check writing, personal and business loans, investment services, and insurance products. The bank provides modern digital banking through mobile and online banking platforms, allowing customers to manage accounts remotely. They also offer instant-issue debit cards and maintain a 24-hour teller service.\n\nThe bank distinguishes itself through FDIC insurance protection backed by the U.S. Government, a strong community presence with active involvement in local events and employee recognition programs, and transparent fee structures. Their Rewards Checking product specifically targets customers seeking to enhance earnings without monthly service fees. The bank demonstrates corporate social responsibility through their 'Impact in Motion' initiative, which showcases community engagement and local growth stories. They serve a diverse geographic region across Texas with particular strength in the South Texas market.\n\nWhile Falcon International Bank offers competitive products and genuine community banking benefits, prospective customers should note that inactivity fees apply after 90 consecutive days without customer-initiated activity ($5 for personal checking, $10 for business checking). The bank's 18-branch network, while substantial for a regional institution, provides less geographic coverage than large national banks. Digital-first consumers seeking the absolute broadest product range or lowest rates may find more options with larger financial institutions, though Falcon's community focus and local expertise represent its primary value proposition. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.falconbank.com",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Free personal checking accounts",
+    "Rewards checking with interest earnings",
+    "Free business checking with unlimited check writing",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal and business loans",
+    "Investment services",
+    "Insurance products",
+    "Mobile banking app",
+    "Online banking platform",
+    "Instant-issue debit cards",
+    "24-hour teller service",
+    "Money orders and wire transfer capabilities (implied via financial services)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1986",
-    "Local community bank with personal service",
-    "20 locations"
+    "FDIC-insured accounts backed by full faith and credit of U.S. Government",
+    "Free checking with no monthly service fees, no minimum balance requirement, and no per-item fees",
+    "Free instant-issue debit cards and free e-statements",
+    "Rewards Checking account that pays high interest with no fees for qualifying months",
+    "Unlimited check writing on business checking accounts",
+    "18 branch locations across South and Central Texas for in-person banking",
+    "Mobile and online banking platforms available for account management",
+    "$2.1 billion in total assets demonstrating financial stability",
+    "Community involvement and local impact initiatives",
+    "Business checking option with $100 minimum to open and no per-item fees"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Inactivity fees imposed after 90 consecutive days of no customer-initiated activity ($5 personal, $10 business)",
+    "Geographic presence limited to Texas; no national or multi-state branch network",
+    "Limited product information provided on website regarding specific loan terms, interest rates, or investment options",
+    "Rewards Checking has qualification requirements not fully detailed on homepage ('every month you qualify')"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 26856,
   "latitude": 27.5758439943082,
   "longitude": -99.4748299659578,
@@ -87,18 +100,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Texas residents seeking FDIC-insured community banking with local branch access and personalized service",
+    "Business owners in South/Central Texas needing low-fee business checking and relationship-based lending",
+    "Customers valuing faith-based and community-focused financial institutions over large national banks",
+    "Active account holders who maintain regular banking transactions and want to avoid inactivity fees"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Falcon International Bank is best for Texas residents and business owners seeking community-oriented FDIC-insured banking with local branch relationships and transparent fee structures. The main caveat is the inactivity fee ($5-$10 monthly) if accounts remain unused for 90+ days, and limited geographic reach outside Texas\u2014making this a regional choice rather than a national alternative.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   ],
   "phone": "",
   "address": "7718 Mcpherson Rd Bldg F, Laredo, TX 78045",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

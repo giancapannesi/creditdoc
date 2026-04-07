@@ -1,13 +1,13 @@
 {
   "name": "County",
   "slug": "county",
-  "category": "payday-alternatives",
+  "category": "banking",
   "subcategories": [
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "State-Chartered Credit Union in , . NCUA insured. 3 locations.",
-  "description_long": "County is a state-chartered credit union serving members in , , established in 1970. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. The credit union operates 3 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "Los Angeles County government website providing access to county services, payment systems, and public resources. Not a financial services company.",
+  "description_long": "Los Angeles County Government is the official administrative body serving Los Angeles County, California. It operates as a public sector entity governed by five elected Board of Supervisors members and provides comprehensive services to county residents. The organization serves as the executive and legislative head of the nation's largest and most complex county government, managing a vast array of public services and infrastructure. The website (lacounty.gov) functions as the central hub for county residents to access information and conduct official business with the county government. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://lacounty.gov/",
   "affiliate_url": "",
@@ -22,23 +22,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)"
+    "Online payment systems for property taxes",
+    "Boat slip payment processing",
+    "County donation processing",
+    "Services locator by geographic area and category",
+    "County office contact information and directory",
+    "Parks and gardens information and access",
+    "Public library system access and information",
+    "Health centers locator and information",
+    "Sheriff and police station locator",
+    "Veterans services locator",
+    "Public Board of Supervisors meeting streams",
+    "Document request and processing services",
+    "Fraud and complaint reporting mechanisms"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1970",
-    "Member-owned cooperative"
+    "Official government entity with transparent, publicly accountable governance",
+    "Multilingual support available in 11 languages for accessibility",
+    "Online payment systems for county services and taxes available 24/7",
+    "Services Locator tool helps residents find 7+ categories of county facilities",
+    "Free access to county newsroom, videos, photos, and public information",
+    "Active community engagement through Board of Supervisors meetings (streamed live)",
+    "Fraud reporting and complaint mechanisms available (844-901-0001)"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Website is government information portal, NOT a financial services or lending platform",
+    "Does not offer any credit products, loans, or payday alternatives despite categorization",
+    "Limited to payment processing for county obligations only",
+    "Not designed for financial hardship assistance or credit counseling",
+    "Miscategorization as 'payday-alternatives' is fundamentally inaccurate and misleading"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +60,7 @@
   "founded_year": 1970,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "64056",
   "published": true,
   "review_status": "draft",
@@ -82,26 +94,30 @@
   "rating": 4.1,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.7,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.2
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Community-focused financial services"
+    "Los Angeles County residents needing to pay property taxes or county fees",
+    "Individuals seeking county government services, permits, or public records",
+    "Community members accessing public libraries, parks, health centers, or veterans services",
+    "Residents requiring wildfire recovery resources or emergency county assistance"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Los Angeles County Government is a public sector entity, not a financial services provider. This profile should NOT be listed in consumer finance categories. The categorization as 'payday-alternatives' is factually incorrect and misleading to consumers seeking actual credit or lending products. Residents should not contact LA County Government for financial assistance, credit products, or payday alternatives.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
-  "website_needs_review": true
+  "website_needs_review": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06",
+  "quarantine_reason": "not_consumer_finance"
 }

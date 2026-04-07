@@ -1,15 +1,15 @@
 {
   "name": "Menard  Bank",
   "slug": "menard-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Menard, TX. $87M in assets. 1 office.",
-  "description_long": "Menard  Bank is a community bank located in Menard, TX, established in 1919. The bank holds approximately $87M in total assets and $79M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Menard Bank is an FDIC-insured bank offering 24-hour online and telephone banking access, checking, savings, CDs, and loan services with convenient digital account management.",
+  "description_long": "Menard Bank operates as a traditional FDIC-insured financial institution backed by the full faith and credit of the U.S. Government. The bank is powered by DCI (a banking platform provider) and maintains a physical presence while offering robust digital banking options. Founded to serve customers seeking reliable banking services with government deposit protection, Menard Bank positions itself as a secure option for fundamental banking needs. The bank's primary service area appears centered around Texas, with a phone number indicating operations in that region.\n\nThe bank offers core banking products including checking and savings accounts, certificates of deposit (CDs), and loan products. Their service suite includes debit cards with associated mobile app management (Brella Card Manager), cashier's checks, check reordering, and fraud reporting. Account holders can access their funds and conduct transactions through multiple channels: traditional in-person banking during business hours, 24-hour telephone banking via TeleBank, and web-based banking through TeleWeb. These services enable customers to check balances, review transaction history, transfer funds, make loan payments, manage pending ACH transactions, and submit stop-payment requests.\n\nMenard Bank distinguishes itself through comprehensive 24-hour access options that combine older telephone banking technology (TeleBank) with modern web-based solutions (TeleWeb), allowing customers to maintain account access and conduct transactions regardless of branch hours. The bank's emphasis on security, government insurance protection, and multiple access methods appeals to traditional banking customers. Their inclusion of both premium services (debit cards with mobile management) and administrative services (cashier's checks, fraud reporting) suggests a full-service community bank approach.\n\nThe website content is minimal and primarily technical, lacking detailed information about product features, interest rates, fees, loan terms, or competitive positioning. The reliance on outdated technology descriptions (touch-tone telephone banking) and sparse digital marketing presence suggests Menard Bank may be a smaller regional institution. Prospective customers should contact the bank directly for specific product details, current rates, fee schedules, and lending requirements, as this information is not available on their limited web presence. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.menardbank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking and savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Loan products and loan payment processing",
+    "TeleBank telephone banking (24-hour access via touch-tone phone)",
+    "TeleWeb web-based banking platform",
+    "Debit cards with Brella Card Manager mobile app",
+    "Fund transfers between accounts",
+    "Cashier's checks",
+    "Check reordering",
+    "Fraud reporting and lost/stolen debit card reporting",
+    "Stop-payment request processing",
+    "ACH transaction management and pending transaction viewing"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1919",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits backed by the full faith and credit of the U.S. Government",
+    "24-hour telephone banking access via TeleBank without branch hour restrictions",
+    "Web-based banking (TeleWeb) with fund transfers, bill payments, and transaction management available anytime",
+    "Multiple account access methods including debit cards with mobile app management (Brella Card Manager)",
+    "Ability to conduct loan payments, check stop-pay requests, and manage ACH transactions remotely",
+    "Secure, confidential online banking platform with personal account security",
+    "Full-service banking including cashier's checks and fraud reporting capabilities"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Minimal online presence and outdated website design limit product information accessibility",
+    "No published interest rates, APYs, or fee schedules available on the website",
+    "Limited geographic service area with no information about branch locations or expansion plans",
+    "Sparse digital marketing and online banking features compared to larger national or neobanks",
+    "Reliance on legacy telephone banking system (touch-tone) alongside modern web banking creates inconsistent experience"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3336,
   "latitude": 30.9159710122812,
   "longitude": -99.7861650305736,
@@ -88,18 +99,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Traditional banking customers in the Texas service area seeking FDIC-insured accounts",
+    "Customers who prefer 24-hour account access without visiting physical branches",
+    "Business owners or individuals needing cashier's checks and fraud reporting services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Menard Bank is best for established customers in its Texas service area seeking traditional, FDIC-insured banking with 24-hour digital access options. The primary caveat is that the bank's minimal online presence and lack of published rates or fee information make it difficult for prospective customers to evaluate products and competitive positioning; direct contact with the bank is necessary for detailed information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +118,10 @@
   ],
   "phone": "",
   "address": "201 Ellis St, Menard, TX 76859",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

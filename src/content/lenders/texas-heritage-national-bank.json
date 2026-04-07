@@ -1,14 +1,14 @@
 {
   "name": "Texas Heritage National Bank",
   "slug": "texas-heritage-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Daingerfield, TX. $958M in assets. 6 offices.",
-  "description_long": "Texas Heritage National Bank is a community bank located in Daingerfield, TX, established in 1892. The bank holds approximately $958M in total assets and $801M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Texas Heritage National Bank is a 136-year-old community bank headquartered in Daingerfield, Texas, offering personal and business checking, savings, loans, and mortgages across seven regional branches.",
+  "description_long": "Texas Heritage National Bank was chartered in 1889 as The Bank of Daingerfield and became a national bank in 1892, making it one of the oldest continuously operating banks in Texas. The bank has successfully navigated major economic crises including the Great Depression and the 1980s banking crisis, establishing itself as a stable financial institution rooted in Northeast Texas. Today, it operates with headquarters in Daingerfield while maintaining a presence across the piney woods region and into the DFW metroplex.\n\nThe bank offers a comprehensive suite of consumer and business banking services. For personal customers, they provide checking and savings accounts, certificates of deposit, individual retirement accounts, personal loans, and mortgage products including first-time homebuyer and refinance options. Business customers can access tiered rewards checking accounts, business savings products, and commercial lending solutions. Additionally, they offer agricultural loans, mobile banking, debit cards, treasury management for businesses, and financial calculators. All deposits are FDIC-insured.\n\nTexas Heritage distinguishes itself through an emphasis on relationship-based banking rather than transactional processes. Their marketing consistently highlights speaking to real people instead of automated systems, personalized lending decisions by actual lenders rather than algorithmic approval, and custom solutions tailored to individual circumstances. The bank emphasizes its 136-year history and deep community roots as differentiators, positioning itself against larger national banks with a \"Banking the Texas Way\" brand philosophy centered on handshakes over scripts and partnerships over paperwork.\n\nAs a regional community bank, Texas Heritage provides traditional banking services without the scale or technological features of major national banks or fintech alternatives. Their geographic footprint, while expanding, remains concentrated in Texas with seven locations. Customers seeking extensive digital banking innovation, nationwide branch networks, or specialized services may find limitations. However, for those prioritizing personal relationships, local decision-making, and regional banking stability, the bank's 136-year operational history and community focus represent genuine strengths. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.thnb.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Business checking with tiered rewards",
+    "Personal and business savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Individual Retirement Accounts (IRAs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Real estate loans and mortgages",
+    "Commercial lending",
+    "Agricultural loans",
+    "Mobile banking",
+    "Debit cards",
+    "Treasury management for businesses"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1892",
-    "Local community bank with personal service",
-    "6 locations"
+    "136 years of continuous operation with proven stability through the Great Depression and 1980s banking crisis",
+    "Seven branch locations across Texas including DFW metroplex and Northeast piney woods regions",
+    "Specialized agricultural lending available, reflecting regional economic needs",
+    "Emphasis on relationship-based banking with real people making lending decisions rather than automated systems",
+    "Full FDIC insurance protection on deposits",
+    "Mobile banking and online access alongside in-person service",
+    "Treasury management services available for business customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint compared to national banks\u2014only seven Texas locations",
+    "No indication of competitive interest rates or fee structures on website",
+    "Limited mention of digital banking capabilities or mobile app features compared to modern fintech competitors",
+    "Regional bank status may mean fewer specialized products or services compared to large national institutions",
+    "Business hours limited to Monday-Friday 8am-5pm with no weekend service"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 3161,
   "latitude": 33.0315889804771,
   "longitude": -94.7227549714608,
@@ -87,18 +98,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Texas residents seeking long-term banking relationships with local decision-makers",
+    "Small business owners and agricultural operations in North and Central Texas",
+    "Customers who prefer speaking with bank employees over automated systems and value personalized service"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Texas Heritage National Bank is best for Texas-based individuals and small business owners who prioritize personal relationships, local decision-making, and community banking over technological innovation or national convenience. The main caveat is that their limited branch network (seven locations) and regional focus may not suit customers requiring nationwide access or those seeking cutting-edge digital banking features.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,10 @@
   ],
   "phone": "",
   "address": "107 Webb St, Daingerfield, TX 75638",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

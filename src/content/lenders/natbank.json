@@ -1,15 +1,15 @@
 {
   "name": "Natbank, National Association",
   "slug": "natbank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Hollywood, FL. $279M in assets. 4 offices.",
-  "description_long": "Natbank, National Association is a community bank located in Hollywood, FL, established in 1994. The bank holds approximately $279M in total assets and $190M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Natbank is a Florida-based bank serving Canadians and seasonal residents with bilingual personal banking, mortgages, and credit cards for over 30 years.",
+  "description_long": "Natbank, National Association operates as a specialized banking subsidiary targeting Canadian nationals and seasonal Florida residents. Established for over 30 years, the institution positions itself as a bridge for Canadians seeking banking services in Florida, with advisory services offered in both French and English to accommodate the Canadian market. The bank operates four physical branches in Boynton Beach, Hollywood, Pompano Beach, and Naples, Florida.\n\nThe company offers comprehensive personal banking products including checking and savings accounts, certificates of deposit, USD-denominated credit cards with 1% cashback rewards, and mortgage financing for residential properties in Florida. Digital banking capabilities include online account access, Zelle\u00ae fund transfers, mobile deposits, bill payments, and TransferNow\u00ae money transfers. Remote account opening is available for existing National Bank of Canada customers. The bank emphasizes fraud protection through SecureNow\u2122 cybersecurity features and EnFact\u00ae Premium text-based security alerts, plus Zero Liability credit card protection.\n\nNatbank differentiates itself primarily through cultural and linguistic specialization\u2014specifically targeting Canadian customers who spend winters in Florida or plan retirement there. The bilingual advisory service and understanding of Canadian banking culture are positioned as key differentiators. The bank also offers no-fee Zelle\u00ae transfers and access to over 1,200 Presto\u00ae ATM locations at Publix grocery stores, plus deposit-accepting ATMs at all four branches.\n\nA significant limitation is geographic scope: the institution operates exclusively in Florida with no national footprint, making it unsuitable for customers outside the state or those requiring multi-state banking infrastructure. The company's focus on Canadian expats and seasonal residents creates a niche market positioning rather than broad consumer appeal. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.natbank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts with no-fee Zelle\u00ae transfers",
+    "Certificates of deposit (CDs)",
+    "USD-denominated credit cards with 1% cashback and Zero Liability protection",
+    "Mortgage financing for residential and condo purchases in Florida",
+    "Online banking platform with bill payment functionality",
+    "Mobile deposit capture",
+    "TransferNow\u00ae international money transfers",
+    "Remote account opening for eligible customers",
+    "SecureNow\u2122 cybersecurity with one-time passcode verification",
+    "EnFact\u00ae Premium SMS security alerts for fraudulent transaction detection",
+    "DocuSign electronic signature for remote transactions",
+    "Bilingual (French/English) financial advisory services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1994",
-    "Local community bank with personal service",
-    "4 locations"
+    "Bilingual (French/English) advisory services with demonstrated understanding of Canadian culture and financial preferences",
+    "No-fee Zelle\u00ae transfers and access to 1,200+ Presto\u00ae ATMs at Publix locations plus in-branch deposit ATMs",
+    "Remote account opening available for National Bank of Canada customers without in-person visits",
+    "1% cashback on USD credit cards with Zero Liability fraud protection and 24/7 SMS security alerts",
+    "Specialized financing expertise for Florida property purchases with flexible variable rates",
+    "SecureNow\u2122 cybersecurity system with SMS/phone-based identity verification for suspicious activity",
+    "Electronic signature (DocuSign) capability for fully remote banking transactions"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Strictly Florida-based with only 4 branches, unsuitable for customers outside the state or requiring national banking access",
+    "Limited online banking features\u2014company website indicates improvements are still 'coming soon' for self-management profiles and bill capture",
+    "Text message security alerts only work with US phone numbers, creating friction for Canadian customers with Canadian phone plans",
+    "Niche market positioning means fewer financial products and services compared to large national banks",
+    "No mention of savings account interest rates or deposit insurance details on public-facing website"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "FL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 33959,
   "latitude": 26.044413999675,
   "longitude": -80.1599629689753,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Canadian expatriates and retirees spending winters or retiring in Florida seeking bilingual banking support",
+    "Seasonal Florida residents from Canada needing a dedicated banking relationship in the US",
+    "National Bank of Canada customers opening Florida accounts for property purchases or investment",
+    "French-speaking Canadians prioritizing culturally-aware banking advice and customer service"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Natbank is best for Canadian nationals or seasonal residents seeking specialized banking services in Florida with bilingual support. The main caveat is strict geographic limitation to Florida\u2014customers cannot access services outside the state, and the institution lacks the infrastructure and breadth of services of national banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,10 @@
   ],
   "phone": "",
   "address": "4031 Oakwood Blvd, Hollywood, FL 33020",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Goldwater Bank, N.A.",
   "slug": "goldwater-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Phoenix, AZ. $515M in assets. 2 offices.",
-  "description_long": "Goldwater Bank, N.A. is a community bank located in Phoenix, AZ, established in 2007. The bank holds approximately $515M in total assets and $368M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Arizona-based community bank offering personal and business checking, savings, CDs, and home loans with competitive rates and relationship-focused service.",
+  "description_long": "Goldwater Bank, N.A. is an Arizona-owned, headquartered, and operated community bank located in Scottsdale with branches in Phoenix and Lake Havasu City. The bank was acquired by Kent Wiechert in 2015 in a stock purchase transaction and operates alongside affiliated Weststar Mortgage for complementary lending services. The bank emphasizes relationship banking and personal service as core differentiators in a competitive market.\n\nGoldwater Bank offers a full suite of personal banking products including checking and savings accounts, high-yield savings accounts (4.00% APY), certificates of deposit with terms ranging from 180 days to 12 months (3.75%-4.00% APY), and a proprietary Goldwater Liquid CD product (3.25% APY with no early withdrawal penalty). Business banking options include business checking, business high-yield savings (4.00% APY), and business lending. The bank also provides home loans and maintains online and mobile banking platforms for account management, fund transfers, bill payment, and credit applications accessible 24/7.\n\nGoldwater Bank distinguishes itself through its emphasis on community banking values\u2014explicitly marketing itself as \"Arizona Owned, Arizona Headquartered, Arizona Operated.\" The institution prioritizes customer-centric service through dedicated Personal Bankers and lending professionals, positioning relationship banking as its core competitive advantage. The bank has integrated modern digital platforms (online and mobile banking) while maintaining local branch presence and direct customer accessibility through phone, email, and online chat support.\n\nAs a community bank, Goldwater Bank serves customers seeking personalized service and local decision-making rather than large national bank standardization. However, as a smaller regional institution, it has limited geographic reach (only two Arizona locations), which may restrict accessibility for customers outside Phoenix and Lake Havasu City. The bank's rates, while advertised as competitive, require comparison with other institutions to verify actual competitiveness. No information about deposit insurance, minimum balance requirements, or fee structures is provided on the website. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://goldwaterbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "High-yield savings accounts (personal)",
+    "Business checking accounts",
+    "Business high-yield savings accounts",
+    "Certificates of deposit (180-day, 12-month terms)",
+    "Goldwater Liquid CD (12-month no-penalty CD)",
+    "Home loan origination",
+    "Online banking platform",
+    "Mobile banking application",
+    "Bill payment services",
+    "Positive Pay fraud prevention service"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2007",
-    "Local community bank with personal service",
-    "2 locations"
+    "Competitive high-yield savings rates at 4.00% APY for both personal and business accounts",
+    "Arizona-based community bank with local decision-making and relationship banking focus",
+    "24/7 online and mobile banking access with bill pay, fund transfers, and credit applications",
+    "No-penalty liquid CD option (Goldwater Liquid CD) allowing early withdrawal without fees",
+    "Multiple product offerings including checking, savings, CDs, home loans, and business banking",
+    "Dedicated Personal Bankers and lending professionals for personalized service",
+    "Multiple contact channels: phone, email, online chat for customer support"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic presence with only two branch locations (Phoenix and Lake Havasu City)",
+    "Website does not disclose account minimum balance requirements or monthly maintenance fees",
+    "No published information about FDIC insurance coverage or deposit protections",
+    "Rates require independent verification as 'competitive' claim is unsubstantiated on website",
+    "Smaller regional bank with fewer ATM locations and less infrastructure than national banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "AZ"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58405,
   "latitude": 33.5086989791639,
   "longitude": -112.027206985293,
@@ -84,21 +95,22 @@
       "FDIC Cert #58405"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Arizona residents seeking personalized community banking with relationship-focused service",
+    "Small business owners needing business checking and lending with local decision-making",
+    "Savers and CD investors comparing rates across community banks in the Phoenix/Lake Havasu region",
+    "Customers prioritizing local ownership and community bank values over national bank convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Goldwater Bank is best for Arizona-based individuals and small businesses seeking personalized community banking service with competitive deposit rates and local relationship management. Primary caveat: the bank's limited geographic footprint (two Arizona locations only) and smaller institution size make it unsuitable for customers outside its service area or those requiring extensive branch and ATM networks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "2525 E Camelback Rd, Phoenix, AZ 85016",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

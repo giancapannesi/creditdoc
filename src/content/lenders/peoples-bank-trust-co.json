@@ -1,14 +1,14 @@
 {
   "name": "Peoples Bank & Trust Co.",
   "slug": "peoples-bank-trust-co",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Troy, MO. $914M in assets. 10 offices.",
-  "description_long": "Peoples Bank & Trust Co. is a community bank located in Troy, MO, established in 1924. The bank holds approximately $914M in total assets and $808M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving Lincoln, St. Charles, and Pike County, Missouri, offering FDIC-insured checking, savings, personal loans, mortgages, and business lending.",
+  "description_long": "Peoples Bank & Trust is a community bank headquartered in Missouri that serves customers across Lincoln, St. Charles, and Pike County. The institution emphasizes its role as a local financial partner focused on understanding and serving community needs rather than operating as a large national bank. The bank operates with FDIC insurance backing, providing federal deposit protection up to applicable limits.\n\nThe bank offers a range of consumer and business financial products including checking and savings accounts (including their Peoples Reward Checking product that earns interest and refunds ATM fees), mobile banking, online account opening, personal loans, mortgages, and business loans. They provide digital banking capabilities including online banking platforms, a mobile app, and online payment processing. Their Smart Start Checking Account is specifically marketed toward students entering the workforce. Community involvement is emphasized through local initiatives like their Community Shred Day and fundraising partnerships with local schools.\n\nPeoples Bank & Trust differentiates itself as a \"hometown banking\" institution with physical branch locations and a focus on personal customer service from local staff. Their marketing emphasizes the advantage of working directly with decision-makers and loan officers who understand local business and community context, contrasting themselves with large national banks. The bank actively participates in community engagement through educational content on financial literacy and local charitable partnerships.\n\nAs a regional community bank, Peoples Bank & Trust's primary limitation is geographic\u2014services are only available to customers in their specific Missouri service areas. The website does not disclose specific interest rates, loan terms, APRs, or detailed fee structures, requiring prospective customers to contact the bank directly. For customers outside their coverage region or those seeking more specialized financial products, other options would be necessary. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://pbtc.net",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "FDIC-insured checking accounts",
+    "Peoples Reward Checking with interest earnings and ATM fee refunds",
+    "Smart Start Checking Account for students",
+    "Online account opening and application",
+    "Mobile banking app",
+    "Online banking portal with bill payment",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage lending (home purchase and refinance)",
+    "Business loans and commercial lending",
+    "Direct deposit setup",
+    "Debit cards",
+    "Trust services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1924",
-    "Local community bank with personal service",
-    "10 locations"
+    "FDIC-insured deposits with full federal backing",
+    "Peoples Reward Checking earns interest and refunds ATM fees",
+    "Online account opening available, no minimum balance or monthly fees on Smart Start Checking",
+    "Mobile banking app provides on-the-go account access and payment capabilities",
+    "Personal loan and mortgage application process available online",
+    "Dedicated business lending solutions with local loan officer relationships",
+    "Community involvement through charitable initiatives and financial literacy education"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: services only available in Lincoln, St. Charles, and Pike County, Missouri",
+    "Website does not display interest rates, APRs, or detailed fee schedules\u2014requires direct contact for pricing",
+    "Limited information about specific loan approval criteria or processing timelines",
+    "No mention of alternative banking channels (e.g., credit union partnerships, nationwide ATM networks beyond fee refunds)",
+    "Small regional bank means fewer product options compared to major national banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8903,
   "latitude": 38.980280188369,
   "longitude": -90.976781188965,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Missouri residents in Lincoln, St. Charles, and Pike County seeking community banking with personal service",
+    "Small business owners needing local lending relationships and decision-maker access",
+    "Students opening their first checking account with no minimum balance requirements",
+    "Customers prioritizing FDIC-insured deposits and local community involvement"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Peoples Bank & Trust is best for Missouri residents in Lincoln, St. Charles, and Pike County seeking relationship-based community banking with FDIC protection and personal service from local staff. The primary caveat is geographic restriction\u2014this bank does not serve customers outside their three-county Missouri service area, and detailed pricing information requires direct contact with the bank.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "430 E Wood St, Troy, MO 63379",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

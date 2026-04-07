@@ -1,13 +1,13 @@
 {
   "name": "Country Trust Bank",
   "slug": "country-trust-bank",
-  "category": "personal-loans",
+  "category": "insurance",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Bloomington, IL. $38M in assets. 1 office.",
-  "description_long": "Country Trust Bank is a community bank located in Bloomington, IL, established in 2000. The bank holds approximately $38M in total assets and $1M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "COUNTRY Financial is a multi-line insurance company offering auto, home, life, farm, and business coverage, plus investment and retirement products through affiliated entities.",
+  "description_long": "COUNTRY Financial is a family of affiliated insurance and financial services companies headquartered in Bloomington, Illinois. The organization traces back decades as a mutual insurance provider and has expanded into comprehensive financial services. The company operates through multiple legal entities: COUNTRY Life Insurance Company and COUNTRY Investors Life Assurance Company for life insurance; COUNTRY Mutual, COUNTRY Casualty, and COUNTRY Preferred for property and casualty coverage; COUNTRY Trust Bank for banking services; and COUNTRY Capital Management Company as a registered broker/dealer.\n\nCOUNTRY Financial offers auto insurance, home insurance, life insurance, farm insurance, and business insurance as core products. Beyond insurance, they provide investment management services, retirement planning, trust services, 529 college savings plans, annuities, and business retirement solutions. They emphasize local representation with agents who provide personalized service and can meet customers through video, phone, or in-person meetings. The company advertises a multi-policy discount up to 30% for bundling coverage types.\n\nThe company distinguishes itself through several claimed differentiators: Forbes recognition as the #1 life insurance provider in America and a top-10 U.S. insurance company overall; a stated 9 out of 10 client recommendation rate; claims adjusters who allegedly know coverage and understand customers' situations; and an emphasis on personalized service beyond standardized solutions. They highlight their mobile app as award-winning and market their approach as \"more than insurance\" by bundling financial planning and investment services.\n\nWhile COUNTRY Financial presents as a comprehensive financial services provider with significant brand recognition, potential customers should note that investment products are not FDIC-insured, may lose value, and carry no bank guarantee. The company is substantial and established, but consumers should evaluate specific policy terms, rates, and coverage options against competitors. Discounts and availability vary significantly by state, which may affect actual value proposition.",
   "logo_url": "",
   "website_url": "https://www.countryfinancial.com/",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Auto insurance with multiple coverage types",
+    "Homeowners insurance",
+    "Life insurance products",
+    "Farm and crop insurance",
+    "Business insurance and commercial coverage",
+    "Retirement planning and investment management",
+    "529 college savings plans",
+    "Annuities and deferred income annuities",
+    "Business retirement plan services",
+    "Trust services",
+    "Financial planning services",
+    "Mobile app for policy management and claims reporting"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2000",
-    "Local community bank with personal service",
-    "1 location"
+    "Forbes-ranked #1 life insurance provider in America with top-10 overall insurance company recognition",
+    "Multi-policy discount up to 30% for bundling auto, home, life, farm, or business coverage",
+    "Local agents available for personalized consultation via video, phone, or in-person meetings",
+    "Comprehensive product suite including insurance, investments, retirement planning, and trust services under one organization",
+    "Claims adjusters trained on specific customer coverage and oriented toward customer support",
+    "Award-winning mobile app for policy management and claims support",
+    "9 out of 10 clients recommend the company according to stated 2023 survey data"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Investment and retirement products are not FDIC-insured, may lose value, and have no bank guarantee",
+    "Discounts and service availability vary significantly by state, limiting consistency nationwide",
+    "Website search results indicate content gaps (Forbes ranking article returns 404 error)",
+    "Must work with local agents rather than purely online/self-service model for many interactions",
+    "Not a banking-first institution; banking services are secondary to insurance focus"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 35602,
   "latitude": 40.50134989922,
   "longitude": -88.9412744757446,
@@ -86,18 +97,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking bundled auto, home, and life insurance with local agent relationships",
+    "Rural and farm property owners needing specialized farm and agricultural coverage",
+    "Consumers wanting integrated retirement planning and investment services alongside insurance"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "COUNTRY Financial is best for consumers seeking comprehensive insurance coverage bundled with investment and retirement services, particularly those in rural areas or with farm properties who value local agent relationships. The main caveat is that investment products carry no FDIC protection and availability of discounts and services varies significantly by state, requiring customers to verify specifics for their location.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +116,10 @@
   ],
   "phone": "",
   "address": "1711 General Electric Rd, Bloomington, IL 61704",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

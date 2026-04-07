@@ -1,15 +1,15 @@
 {
   "name": "The Bank Of Steinauer",
   "slug": "the-bank-of-steinauer",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Steinauer, NE. $19M in assets. 1 office.",
-  "description_long": "The Bank Of Steinauer is a community bank located in Steinauer, NE, established in 1888. The bank holds approximately $19M in total assets and $17M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bank of Steinauer is a community bank in Nebraska offering traditional banking services including checking, savings, CDs, loans, and online banking from their main branch in Steinauer.",
+  "description_long": "Bank of Steinauer is a regional community bank headquartered in Steinauer, Nebraska, serving customers in rural Nebraska through a single main branch location at 215 Main Street and an ATM at a local Pawnee City grocery store. The bank provides comprehensive traditional banking services including deposits (checking, savings, certificates of deposit), consumer and agricultural lending, and online account management. Their service offerings span personal banking products like MasterCard check cards and safe deposit boxes, as well as business-oriented services including wire transfers, notary services, and various loan types tailored to agricultural and residential borrowers. The bank distinguishes itself through real-time online transaction posting, free online banking with Quicken/QuickBooks integration, and integration with local business services like The B.J. Steinauer Agency for insurance products. As a small community bank, Bank of Steinauer serves primarily local and regional customers who value direct relationships with bank staff and familiarity with agricultural financing, though the institution's limited branch presence and lack of prominent digital-first features may limit appeal to customers seeking extensive ATM networks or advanced fintech capabilities. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.bankofsteinauer.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Online banking with real-time transaction posting",
+    "Certificates of Deposit (3-48 month terms, $500 minimum)",
+    "Consumer loans",
+    "Automobile loans",
+    "Agricultural loans",
+    "Farm real estate loans",
+    "Residential loans",
+    "MasterCard check cards",
+    "Wire transfers",
+    "Safe deposit box rental",
+    "Direct deposit and direct debit",
+    "Notary services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1888",
-    "Local community bank with personal service",
-    "1 location"
+    "FREE online banking with real-time transaction posting for transfers and MasterCard purchases",
+    "Quicken/QuickBooks integration for small business and personal accounting",
+    "Specialized agricultural lending including Farm Real Estate Loans and Agricultural Loans",
+    "Certificates of Deposit with multiple term options (3, 6, 9, 12, 24, 36, 48 months) and low $500 minimum deposit",
+    "Identity Theft Coverage included with account services",
+    "Imaged statements and paperless banking options available",
+    "Saturday morning ATM access at Pawnee City location (8am-11am)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited branch presence with only one physical location in Steinauer and one ATM at a grocery store",
+    "Restricted business hours (closed by 4pm weekdays, 2pm Thursdays, closed Sundays)",
+    "No mention of FDIC insurance details or limits in available documentation",
+    "Insurance services through third-party agency explicitly noted as 'not FDIC insured'",
+    "Early CD withdrawals subject to penalties with no rate information provided"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10635,
   "latitude": 40.2073800005984,
   "longitude": -96.2343199812967,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural borrowers and farmers seeking specialized farm and equipment financing",
+    "Small business owners in rural Nebraska wanting local banking relationships and QuickBooks integration",
+    "Community residents in Steinauer and surrounding areas valuing in-person service and local decision-making",
+    "Customers seeking basic banking with free online access without needing extensive branch networks"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Steinauer is best for rural Nebraska residents and agricultural borrowers who prefer traditional community banking with in-person relationships and specialized farm lending options. The main caveat is the limited geographic reach and branch hours\u2014customers outside the immediate Steinauer/Pawnee City area or those requiring extensive ATM networks and extended hours should consider larger regional banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "215 Main St, Steinauer, NE 68441",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

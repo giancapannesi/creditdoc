@@ -1,7 +1,7 @@
 {
   "name": "Tarboro Savings Bank, Ssb",
   "slug": "tarboro-savings-bank-ssb",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
@@ -9,9 +9,9 @@
     "mutual-bank",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Tarboro, NC. $55M in assets. 1 office.",
-  "description_long": "Tarboro Savings Bank, Ssb is a community bank located in Tarboro, NC, established in 1906. The bank holds approximately $55M in total assets and $49M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
-  "logo_url": "",
+  "description_short": "Community-owned savings bank in Tarboro, NC, established 1906, specializing in mortgages and deposit accounts with emphasis on personal service.",
+  "description_long": "Tarboro Savings Bank is a locally-owned and independently-operated savings bank established in 1906, serving the Tarboro and Edgecombe County area in North Carolina. The institution markets itself as \"THE Only Home-Based Bank\" in its region and positions itself as service-driven rather than profit-driven, emphasizing its community roots and tradition of personal service.\n\nThe bank offers a range of traditional banking products including deposit accounts, savings accounts, home mortgage loans, and home equity loans. They specifically highlight their specialization in adjustable and flexible mortgage loans, with all mortgages kept in-house rather than sold off. The bank also provides debit card services with fraud monitoring capabilities and offers mobile app functionality through Card Valet for account management.\n\nTarboro Savings Bank distinguishes itself through its local ownership structure, longevity in the community (117+ years), and commitment to keeping loan origination and servicing in-house. Their marketing emphasizes personal relationships and hands-on service rather than automated banking, reflected in their tagline \"Where personal service is tradition.\" The institution actively communicates its community focus and willingness to work with customers on affordable loan options.\n\nAs a traditional community bank, Tarboro Savings Bank serves customers seeking personalized banking relationships and mortgage products from a locally-accountable institution. However, as a smaller regional bank, they may have fewer digital banking features and product offerings compared to larger national banks. Customers should verify the full range of products available and compare rates and terms with larger institutions. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
+  "logo_url": "/logos/tarboro-savings-bank-ssb.png",
   "website_url": "https://www.tarborosavingsbank.com",
   "affiliate_url": "",
   "affiliate_program": "",
@@ -25,23 +25,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Deposit accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Home mortgage loans (adjustable and flexible options)",
+    "Home equity loans",
+    "Debit card services with fraud monitoring",
+    "Text message fraud alerts",
+    "Card Valet mobile app for card management",
+    "FDIC Electronic Deposit Insurance estimator access",
+    "Personal banking consultations",
+    "Lost or stolen card reporting (1-800-472-3272)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1906",
-    "Local community bank with personal service",
-    "1 location"
+    "Locally-owned and independent bank with 117+ years of community presence since 1906",
+    "All mortgage loans are kept in-house, meaning customers work directly with the originating bank rather than having loans sold",
+    "Specializes in adjustable and flexible mortgage loan options",
+    "Offers text message fraud alerts for debit card activity",
+    "Card Valet mobile app available for account holders to control cards",
+    "Established relationship with community and personal service orientation",
+    "FDIC deposit insurance coverage available"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to single physical location in Tarboro, NC with no branches mentioned",
+    "Business hours restricted to weekday 9am-5pm with no weekend service",
+    "As a small regional bank, likely limited digital banking features compared to national banks",
+    "No indication of online account opening or remote loan application processes",
+    "Limited product diversity compared to larger financial institutions"
   ],
   "contact": {
     "phone": "",
@@ -53,7 +62,7 @@
   "states_served": [
     "NC"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29061,
   "latitude": 35.8986280140926,
   "longitude": -77.5351949676569,
@@ -89,18 +98,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Tarboro and Edgecombe County residents seeking personalized mortgage lending with local relationship managers",
+    "Homeowners wanting mortgages kept in-house and not sold in secondary markets",
+    "Community-focused savers and borrowers who prioritize personal service over automated banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Tarboro Savings Bank is best for North Carolina residents in the Tarboro/Edgecombe County area seeking traditional, relationship-based banking with in-house mortgage lending from a locally accountable institution. The primary caveat is the bank's limited geographic footprint and service hours, making it impractical for customers outside its service area or those requiring 24/7 digital banking capabilities.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +117,11 @@
   ],
   "phone": "",
   "address": "501 N Main St, Tarboro, NC 27886",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

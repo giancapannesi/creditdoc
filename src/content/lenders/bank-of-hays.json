@@ -1,15 +1,15 @@
 {
   "name": "Bank Of Hays",
   "slug": "bank-of-hays",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Hays, KS. $370M in assets. 4 offices.",
-  "description_long": "Bank Of Hays is a community bank located in Hays, KS, established in 1907. The bank holds approximately $370M in total assets and $318M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bank of Hays is a community bank offering FDIC-insured checking, savings, and business accounts with online banking, debit card rewards, and commercial lending services.",
+  "description_long": "Bank of Hays operates as a traditional community bank with a commitment to both consumer and business banking services. The institution emphasizes FDIC insurance protection and modern digital banking accessibility through their online and mobile platforms. Their website highlights environmental sustainability initiatives, including solar panel installations at their facilities, reflecting a community-focused approach to operations.\n\nThe bank serves both personal and business customers with a comprehensive suite of financial products. For consumers, they offer checking and savings accounts, online banking with 24/7 access, mobile banking capabilities, home loans, and a new debit card purchase rewards program. For business customers, they provide retail business internet banking, small business loans, SBA loans, commercial checking and savings accounts, safe deposit boxes, wire transfers, ACH payroll origination, merchant remote deposit, lock box services, automated loan sweeps, and access to commercial credit cards through a partner bank (Bankers Bank of Wichita).\n\nBank of Hays distinguishes itself through localized service with multiple branch locations and a focus on personalized customer account representatives. Their business banking offerings are notably comprehensive for a community bank, including specialized services like automated loan sweeps, merchant deposit processing, and ACH payroll origination. The bank's emphasis on environmental responsibility through visible sustainability measures (solar panels) and encouragement of paperless banking (eStatements) differentiates them in the market.\n\nAs a regional community bank, Bank of Hays is best suited for customers seeking traditional banking relationships with local branch access and personalized service. The honest assessment is that while they offer competitive services and FDIC protection, their services appear regionally limited (suggesting they may not serve all U.S. areas), and some specialized services require approval or involve additional fees. Customers expecting the broadest product range or most competitive rates may need to compare offerings across multiple institutions.",
   "logo_url": "",
   "website_url": "https://www.bankofhays.com",
   "affiliate_url": "",
@@ -24,23 +24,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts with FDIC insurance",
+    "Online banking with 24/7 secure account access",
+    "Mobile banking application",
+    "Debit card purchase rewards program",
+    "Home loans and mortgages",
+    "Small business loans and SBA loans",
+    "Retail business internet banking with fund transfers and check imaging",
+    "ACH and wire transfer originations",
+    "ACH payroll origination and processing",
+    "Merchant remote deposit with scanner-based processing",
+    "Lock box accounts for accounts receivable payment processing",
+    "Automated loan sweep feature",
+    "Safe deposit boxes in multiple sizes",
+    "Commercial credit cards through preferred partner",
+    "Zelle payment service"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1907",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "New debit card purchase rewards program with automatic monthly account credits",
+    "24/7 online and mobile banking access with secure account management",
+    "Comprehensive business services including ACH payroll origination and merchant deposit processing",
+    "Safe deposit boxes available in multiple sizes across branch locations",
+    "Automated loan sweep feature to manage borrowing costs and overdraft prevention",
+    "Environmental commitment demonstrated through solar panel installations and eStatements incentives"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Regional bank with limited branch availability (specific service area not clearly defined on website)",
+    "Many business services require approval and involve additional fees (setup fees, monthly fees, scanner costs)",
+    "Commercial credit cards issued through third-party partner (Bankers Bank of Wichita) rather than directly",
+    "Safe deposit box carries late fees ($20 after 90 days past due) and $25 per unreturned key penalty",
+    "Box drilling costs are charged to customer, adding potential unexpected expenses"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +66,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 17769,
   "latitude": 38.884853980916,
   "longitude": -99.3370319806677,
@@ -94,12 +108,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-size business owners needing comprehensive payroll and deposit processing services",
+    "Local consumers seeking FDIC-insured accounts with community bank relationship and branch access",
+    "Businesses receiving regular customer payments that could benefit from lock box services",
+    "Customers interested in rewards-based debit card usage with automatic monthly credits"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Hays is best for small business owners and local consumers seeking traditional community banking with FDIC protection and personalized service. The main caveat is that as a regional bank, availability is geographically limited, and some business services require approval and carry additional fees; customers should verify service area coverage and compare fee structures before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +122,11 @@
   ],
   "phone": "",
   "address": "1000 W 27Th St, Hays, KS 67601",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

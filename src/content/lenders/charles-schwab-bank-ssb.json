@@ -1,14 +1,14 @@
 {
   "name": "Charles Schwab Bank, Ssb",
   "slug": "charles-schwab-bank-ssb",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Westlake, TX. $253772M in assets. 1 office.",
-  "description_long": "Charles Schwab Bank, Ssb is a community bank located in Westlake, TX, established in 2003. The bank holds approximately $253772M in total assets and $230499M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Charles Schwab Bank is an FDIC-insured bank offering checking, savings accounts, and mortgage financing solutions designed for investor clients.",
+  "description_long": "Charles Schwab Bank, SSB is a subsidiary bank within the Charles Schwab ecosystem, established to serve the banking needs of the company's investor clientele. While Charles Schwab & Co. is primarily known as a brokerage and investment firm, this bank division extends the company's services into traditional deposit and lending products. The bank maintains FDIC insurance protection on deposits, distinguishing it as a regulated financial institution rather than a brokerage-only operation.\n\nCharles Schwab Bank offers three primary product categories: Schwab Bank Investor Checking, an FDIC-insured account with free debit cards, mobile app, and bill pay services; Schwab Bank Investor Savings, providing competitive variable APY with no monthly service fees; and mortgage financing solutions delivered through a partnership with Rocket Mortgage. The checking and savings products are positioned as no-frills accounts with variable rates and minimal fees, specifically designed for the bank's existing investor base.\n\nWhat distinguishes this bank is its integration within the Charles Schwab investment platform rather than traditional banking innovation. The company explicitly targets investor clients rather than the general public, positioning its banking products as complementary services to investment accounts. The mortgage lending is outsourced to Rocket Mortgage, LLC, which operates independently and is not affiliated with Schwab or its parent corporation, limiting direct mortgage origination capabilities.\n\nThe bank operates as a limited-service institution focused on deposit products and third-party mortgage referrals rather than a full-service retail bank. Prospective customers should understand that this is designed primarily for existing Schwab investors and may lack the competitive advantages or personalized service found at larger retail banks or specialized financial institutions. The reliance on Rocket Mortgage for home lending means mortgage services operate outside Schwab Bank's direct control. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.schwabbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking accounts (Schwab Bank Investor Checking)",
+    "FDIC-insured savings accounts (Schwab Bank Investor Savings)",
+    "Free debit cards with checking accounts",
+    "Mobile banking app",
+    "Online bill pay",
+    "Mobile bill pay",
+    "Free standard checks",
+    "Mortgage financing solutions (via Rocket Mortgage partnership)",
+    "Variable APY savings accounts",
+    "Wire transfer and payment services",
+    "Account login and online account management",
+    "SchwabSafe security services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2003",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC insurance on all deposit accounts, protecting up to $250,000 per depositor per institution",
+    "No monthly service fees on Schwab Bank Investor Savings accounts",
+    "Free debit cards and free mobile app for Schwab Bank Investor Checking",
+    "Free online and mobile bill pay services included with checking accounts",
+    "Competitive variable APY on savings accounts with no minimum balance requirements mentioned",
+    "Free standard checks included with checking accounts",
+    "Community Reinvestment Act (CRA) and Home Mortgage Disclosure Act (HMDA) compliance documentation available"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited product range compared to full-service banks\u2014only checking, savings, and mortgage referrals",
+    "Mortgage lending is handled exclusively through Rocket Mortgage partnership, not directly by the bank",
+    "Website navigation issues (404 errors on product pages) suggest potential customer service accessibility problems",
+    "No mention of investment management integration or special features leveraging parent company's brokerage services",
+    "Designed primarily for existing Schwab investors; may not be accessible or marketed to general public"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57450,
   "latitude": 32.9962919899245,
   "longitude": -97.2092100033579,
@@ -84,21 +95,21 @@
       "FDIC Cert #57450"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Existing Charles Schwab brokerage and investment account holders seeking integrated banking services",
+    "Investor-focused consumers who want FDIC-protected deposit accounts alongside investment portfolios",
+    "Homebuyers referred through Schwab who want simplified mortgage application processes"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Charles Schwab Bank is best for existing Schwab investors who want to consolidate their banking and investment accounts in one ecosystem while maintaining FDIC protection. The primary caveat is that this is a specialized, limited-service bank designed as an extension of the Schwab investment platform rather than a standalone retail banking alternative, with mortgage services outsourced to a third party.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "3000 Schwab Way, Westlake, TX 76262",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

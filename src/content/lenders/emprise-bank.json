@@ -1,14 +1,14 @@
 {
   "name": "Emprise Bank",
   "slug": "emprise-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Wichita, KS. $2751M in assets. 33 offices.",
-  "description_long": "Emprise Bank is a community bank located in Wichita, KS, established in 1910. The bank holds approximately $2751M in total assets and $2479M in deposits. It operates 33 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Emprise Bank is a full-service bank offering checking, savings, personal loans, credit cards, and wealth management with 55,000 surcharge-free ATMs nationwide.",
+  "description_long": "Emprise Bank operates as a traditional retail bank providing comprehensive consumer and business financial services. The institution maintains a national footprint through branch locations and an extensive ATM network, positioning itself as a mainstream banking provider rather than a niche lender. The company's 2024 Annual Report indicates a focus on organizational transitions while emphasizing customer empowerment and relationship building.\n\nThe bank's primary service offerings include personal and business checking accounts, savings accounts, personal loans starting at 9.79% APR, credit cards, wealth management services, and a proprietary product called CashPlease\u00ae. They provide digital banking options including online account access, e-business services, and video banking appointments alongside traditional in-branch services. The routing number 101100579 confirms institutional banking infrastructure with standard Federal Reserve participation.\n\nEmprise Bank distinguishes itself through emphasis on digital convenience combined with traditional banking services. The availability of 55,000 surcharge-free ATMs provides competitive network access. The bank highlights security features including multi-factor authentication and cybersecurity education, along with financial literacy content around credit scores and consumer protection against scams.\n\nThe bank presents as an established institutional provider rather than a specialized lender. While basic rate information is available on their website, specific APR ranges for products other than personal loans and detailed fee structures are not transparently listed in available content. As a traditional bank, Emprise may have higher account minimums and less flexibility than online-only alternatives, though this cannot be confirmed from the provided website content. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.emprisebank.com",
   "affiliate_url": "",
@@ -25,21 +25,30 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal loans (9.79% APR minimum)",
+    "Credit cards",
+    "Wealth management and investment services",
+    "E-business banking for commercial customers",
+    "CashPlease\u00ae proprietary financial product",
+    "Digital/online banking access",
+    "Video banking appointments",
+    "Phone banking support",
+    "In-branch consultation services",
+    "Loan portal access"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1910",
-    "Local community bank with personal service",
-    "33 locations"
+    "Access to 55,000 surcharge-free ATMs nationwide for account holders",
+    "Personal loans available with rates starting at 9.79% APR for debt consolidation",
+    "Multiple digital banking channels including video, phone, and in-branch appointments",
+    "Multi-factor authentication (MFA) security features for account protection",
+    "Comprehensive financial education content on credit scores, fraud prevention, and financial planning",
+    "Dedicated e-business services and loan portal for business customers",
+    "Wealth management services available through dedicated sign-in portal"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Specific APR ranges, fees, and account requirements not transparently displayed on website for most products",
+    "Limited information about minimum balance requirements or monthly maintenance fees",
+    "Personal loan rates starting at 9.79% may not be competitive for borrowers with excellent credit"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4789,
   "latitude": 37.6893210027783,
   "longitude": -97.3359720396511,
@@ -87,18 +96,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking a full-service traditional bank with national branch and ATM access",
+    "Borrowers interested in consolidating debt through personal loans with fixed terms",
+    "Business owners needing comprehensive banking and business services in one institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Emprise Bank is best for customers who value the combination of traditional banking services with digital convenience and want access to a nationwide ATM network. The primary caveat is that detailed pricing, fee structures, and specific product terms are not fully transparent on their website, requiring direct contact for accurate rate and requirement information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +115,10 @@
   ],
   "phone": "",
   "address": "257 N Broadway Ave, Wichita, KS 67202",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

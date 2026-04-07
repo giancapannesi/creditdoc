@@ -1,13 +1,13 @@
 {
   "name": "Nicolet National Bank",
   "slug": "nicolet-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Green Bay, WI. $9170M in assets. 61 offices.",
-  "description_long": "Nicolet National Bank is a community bank located in Green Bay, WI, established in 2000. The bank holds approximately $9170M in total assets and $7920M in deposits. It operates 61 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Nicolet National Bank is a community bank offering checking, savings, home lending, and business banking services with high-yield checking accounts earning up to 3.00% APY.",
+  "description_long": "Nicolet National Bank operates as a traditional community bank providing comprehensive financial services to personal, business, and agricultural customers. The bank emphasizes a relationship-based approach centered on what they describe as 'Real People, Real Conversations' and shared success. Recent company activity includes Nicolet Bankshares' acquisition of MidWestOne Financial Group, indicating organizational growth and consolidation. The bank maintains physical branch locations alongside digital banking channels, positioning itself as a hybrid service provider.\n\nNicolet's core offerings include multiple checking account tiers (Value, Platinum, Student, Real Rewards, and Real Cash Back), savings products, money market and CD accounts, home lending, credit cards, and comprehensive business banking services including commercial banking, treasury management, and retirement plan services. The Real Rewards Checking account stands out as their flagship product, offering up to 3.00% APY on balances up to $25,000 with no monthly fees or minimum balance requirements. Their checking product line is segmented by customer type\u2014students, high-net-worth individuals, and reward-focused consumers\u2014suggesting a deliberate market positioning strategy.\n\nNicolet differentiates itself through offering multiple specialized checking account products rather than one-size-fits-all banking, nationwide ATM access to 30,000 fee-free machines, and competitive interest rates on deposit accounts. The bank also provides fraud awareness education and digital-first conveniences including free mobile banking, mobile deposits, and online bill pay. Their emphasis on agricultural banking and business treasury management services addresses underserved market segments beyond typical consumer banking.\n\nThe bank's primary limitation is geographic presence\u2014the website references specific branch locations without immediately clarifying service area, suggesting limited branch footprint compared to national banks. While they offer competitive checking rates, the 3.00% APY on Real Rewards is capped at $25,000 in balances, meaning customers with larger deposits earn standard rates on excess funds. As a regional/community bank, Nicolet may have fewer product options and lower loan limits compared to national banking institutions. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.nicoletbank.com",
   "affiliate_url": "",
@@ -22,23 +22,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Real Rewards Checking (3.00% APY up to $25,000)",
+    "Value Checking (basic checking with $4 monthly fee waiver conditions)",
+    "Platinum Checking (interest-bearing account for high-net-worth customers)",
+    "Student Checking (no fees, no minimums, ages 15-25)",
+    "Real Cash Back Checking (cash back rewards program)",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Money Market accounts",
+    "CDs (Certificates of Deposit)",
+    "Home Lending/Mortgage services",
+    "Credit Cards",
+    "Commercial Banking",
+    "Treasury Management Services",
+    "Retirement Plan Services",
+    "Wealth Management",
+    "Mobile and Online Banking",
+    "Mobile Deposit"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2000",
-    "Local community bank with personal service",
-    "61 locations"
+    "Real Rewards Checking offers 3.00% APY on balances up to $25,000 with no monthly fees or minimum balance",
+    "Access to 30,000 fee-free ATMs nationwide despite being a regional bank",
+    "Multiple checking account options tailored to specific customer segments (students, high-net-worth, reward-seekers)",
+    "Student Checking includes 5 free non-Nicolet ATM transactions per billing cycle at no cost",
+    "Real Cash Back Checking provides up to $108 annual cash back earnings",
+    "Free mobile banking and mobile deposits across all checking account types",
+    "Specialized services for underserved segments including agricultural banking and business treasury management"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "3.00% APY on Real Rewards Checking is capped at $25,000 balances\u2014excess funds earn lower rates",
+    "Geographic limitations unclear from website; appears to be regional bank with limited branch footprint compared to national competitors",
+    "Limited details provided about loan products, interest rates, credit card terms, or mortgage offerings on main website",
+    "No mention of customer service awards, ratings, or third-party validation of service quality",
+    "Website content is repetitive and lacks detailed fee schedules or comprehensive product comparisons"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +65,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57038,
   "latitude": 44.515260017717,
   "longitude": -88.016118979089,
@@ -86,18 +101,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Students aged 15-25 seeking a no-fee checking account with ATM access",
+    "Customers with balances under $25,000 wanting high-yield checking without minimum requirements",
+    "Business owners needing specialized treasury management and commercial banking services",
+    "Agricultural customers seeking banking solutions tailored to farming operations"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Nicolet National Bank is best for regional customers seeking competitive deposit rates, especially those with balances under $25,000 who want high-yield checking without fees. The main caveat is that as a community/regional bank, service area may be geographically limited, and the website lacks transparency on loan products, rates, and full fee schedules that would enable comprehensive comparison with national competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +121,10 @@
   ],
   "phone": "",
   "address": "111 North Washington Street, Green Bay, WI 54301",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

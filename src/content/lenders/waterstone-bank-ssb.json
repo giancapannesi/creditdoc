@@ -1,14 +1,14 @@
 {
   "name": "Waterstone Bank, Ssb",
   "slug": "waterstone-bank-ssb",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Wauwatosa, WI. $2259M in assets. 16 offices.",
-  "description_long": "Waterstone Bank, Ssb is a community bank located in Wauwatosa, WI, established in 1921. The bank holds approximately $2259M in total assets and $1476M in deposits. It operates 16 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "WaterStone Bank is a regional FDIC-insured bank serving Southeast Wisconsin since 1921, offering personal and business banking with 14 locations across Milwaukee, Waukesha, and Washington counties.",
+  "description_long": "WaterStone Bank has operated as a community-focused financial institution for over 100 years, establishing itself as a stable banking presence in Southeast Wisconsin. The bank was founded in 1921 and has maintained a local operation model, with particular emphasis on serving suburban Milwaukee residents and small businesses throughout the region.\n\nThe bank offers a comprehensive suite of personal banking products including checking accounts, savings accounts, certificates of deposit (CDs), money market accounts, and IRA accounts. On the lending side, they provide mortgage products, home equity products, personal loans, and credit services. For business customers, WaterStone Bank offers business checking, business savings, small business lending, and commercial loans. Digital banking services include online and mobile banking with bill pay, fund transfers, mobile check deposit, and integration with Zelle for peer-to-peer payments.\n\nWaterStone Bank distinguishes itself through its emphasis on personal service and community involvement. The bank highlights dedicated professionals providing personalized support, local convenience with 14 physical branches, and active investment in neighborhood charitable contributions. They offer appointment scheduling for services like account opening, notary services, overdraft protection, and currency exchange. Their promotional offerings include competitive rates on money market accounts (3.00% APY for 12 months on Ultimate Money Market accounts with $5,000 minimum) and promotional CD options.\n\nAs a traditional regional bank, WaterStone Bank is best suited for customers seeking personal service and community banking relationships rather than digital-first or fintech solutions. However, prospective customers should note that the bank operates only in Southeast Wisconsin, limiting accessibility for those outside the service area. The requirement for physical branch visits for certain services and the regional-only footprint may be disadvantageous for highly mobile or geographically dispersed customers.",
   "logo_url": "",
   "website_url": "https://www.wsbonline.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with debit card access",
+    "Personal savings accounts and money market accounts",
+    "Certificates of Deposit (CDs) with promotional rates",
+    "IRA accounts",
+    "Mortgage products for home purchase and refinance",
+    "Home equity products and lines of credit",
+    "Personal loans and credit products",
+    "Business checking and savings accounts",
+    "Small business and commercial lending",
+    "Online and mobile banking with bill pay and fund transfer",
+    "Mobile check deposit",
+    "Zelle peer-to-peer payment integration",
+    "Notary services, overdraft protection, and currency exchange"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1921",
-    "Local community bank with personal service",
-    "16 locations"
+    "FDIC-insured deposits backed by U.S. government guarantee",
+    "14 local branch locations across Milwaukee, Waukesha, and Washington counties for in-person service",
+    "Over 100 years of operational history since 1921 demonstrating institutional stability",
+    "Competitive promotional rates: 3.00% APY on Ultimate Money Market accounts for 12 months",
+    "Comprehensive digital banking including mobile check deposit and Zelle integration",
+    "Personalized service with appointment scheduling for account opening and specialized services",
+    "Full-service offerings including mortgages, home equity, business loans, and investment products"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: only serves Southeast Wisconsin (Milwaukee, Waukesha, Washington counties), excluding most U.S. customers",
+    "Promotional rates require new money and have limited-time terms, standard rates not prominently displayed",
+    "Some services appear to require in-person branch visits, limiting convenience for remote customers",
+    "Limited information provided on website about business lending rates, terms, and eligibility requirements",
+    "No mention of account maintenance fees, minimum balance requirements, or overdraft fee structures"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28513,
   "latitude": 43.0478470181338,
   "longitude": -88.0527990255751,
@@ -93,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Southeast Wisconsin residents seeking personalized community banking relationships and local branch access",
+    "Small business owners in the Milwaukee metro area needing comprehensive commercial lending and business services",
+    "Homebuyers and homeowners in the service area interested in mortgage and home equity products with local loan officers",
+    "Customers prioritizing FDIC insurance, institutional stability, and traditional banking over fintech solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "WaterStone Bank is best for Southeast Wisconsin residents and small business owners who value personalized service, local branch relationships, and institutional stability. The primary caveat is strict geographic limitation\u2014the bank only operates in three Wisconsin counties, making it inaccessible for customers outside the Milwaukee metro area.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "11200 W Plank Ct, Wauwatosa, WI 53226",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

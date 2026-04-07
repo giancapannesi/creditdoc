@@ -1,15 +1,15 @@
 {
   "name": "Bravera Bank",
   "slug": "bravera-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Dickinson, ND. $3833M in assets. 35 offices.",
-  "description_long": "Bravera Bank is a community bank located in Dickinson, ND, established in 1977. The bank holds approximately $3833M in total assets and $3357M in deposits. It operates 35 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Regional bank with 37 locations across North Dakota, Montana, and Minnesota offering checking, savings, loans, mortgages, insurance, and wealth management since 1906.",
+  "description_long": "Bravera Bank is a regional financial institution with roots dating back to 1906, operating as part of Bravera Holdings Corp alongside Bravera Insurance and Bravera Wealth. The bank maintains 37 locations across 27 communities in North Dakota (including Bismarck, Fargo, Minot, Dickinson, and Watford City), Montana (Billings, Great Falls, Helena, Glendive), and Minnesota (Albertville, Kerkhoven). The institution is FDIC-insured and backed by the full faith and credit of the U.S. Government.\n\nBravera Bank offers a comprehensive range of personal and business banking services including checking and savings accounts, certificates of deposit (CDs), credit cards with Scorecard Rewards, personal loans, mortgages (including FHA/VA options), and online banking. The bank also provides business solutions such as merchant payment processing via Clover Flex terminals, employer-sponsored retirement plans, personal trust services, mineral management, and treasury services. Investment and insurance products are offered through affiliated entities.\n\nThe bank distinguishes itself through integrated financial services under one holding company structure, allowing customers to access banking, insurance, and wealth management from a single provider. Bravera emphasizes community commitment, having invested over $1.6 million back into communities in 2025 and facilitating 4,700+ employee volunteer hours. The bank actively partners with local organizations and educational institutions. Customer testimonials highlight personalized service and staff relationships as key differentiators in an increasingly digital banking landscape.\n\nBravera is best suited for customers in its regional footprint seeking traditional full-service banking with community connection. The primary limitation is geographic restriction\u2014the bank only operates in North Dakota, Montana, and Minnesota, making it unavailable for customers outside these states. As a regional institution competing against national banks, product features and rates may vary, and some specialized services available at larger institutions may not be offered. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.bravera.bank",
   "affiliate_url": "",
@@ -24,23 +24,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
+    "Certificates of deposit (CDs)",
+    "Credit cards with Scorecard Rewards program",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage lending (home purchase, refinance, FHA/VA loans)",
+    "Online banking and account management",
+    "Business checking and commercial banking",
+    "Merchant payment processing (Clover Flex terminals)",
+    "Employer-sponsored retirement plans",
+    "Personal trust services",
+    "Mineral management services",
+    "Treasury services for businesses",
+    "Bravera Insurance products and claims support",
+    "Wealth management and investment advisory (Equipt Planning + Investing)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1977",
-    "Local community bank with personal service",
-    "35 locations"
+    "FDIC-insured deposits backed by U.S. Government full faith and credit",
+    "37 locations across 27 communities providing local branch access in ND, MT, and MN",
+    "Integrated financial services including banking, insurance, and wealth management under one holding company",
+    "Scorecard Rewards credit card program with rewards structure",
+    "Personal checking account sign-up bonus of $200 (current promotion)",
+    "Comprehensive mortgage offerings including FHA/VA options and refinancing",
+    "Community investment focus with $1.6 million reinvested locally in 2025",
+    "24/7 insurance support line for policyholders"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: only operates in North Dakota, Montana, and Minnesota\u2014not accessible to customers outside these states",
+    "Website does not display current interest rates, APYs, or loan terms\u2014customers must contact branch or login to compare rates",
+    "Limited information on credit card rewards structure, annual percentage rates (APR), or fee schedules",
+    "No mention of mobile app features, mobile banking capabilities, or digital-only account opening process",
+    "Investment and insurance products explicitly disclaimed as not FDIC-insured and subject to loss"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +66,7 @@
   "states_served": [
     "ND"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 22559,
   "latitude": 46.881251175367,
   "longitude": -102.786483197839,
@@ -88,18 +102,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers in North Dakota, Montana, and Minnesota seeking personalized banking with community connection",
+    "Business owners needing integrated banking, payment processing (Clover Flex), and employer retirement plan solutions",
+    "Individuals seeking one-stop financial services combining banking, insurance, and wealth management",
+    "Customers valuing local branch relationships and community-invested financial institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bravera Bank is best for individuals and business owners located in North Dakota, Montana, and Minnesota who value personalized service, community investment, and integrated financial services. The primary caveat is strict geographic limitation\u2014this regional bank is entirely unavailable outside its three-state footprint, making it unsuitable for mobile or out-of-state customers despite strong local offerings.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +122,11 @@
   ],
   "phone": "",
   "address": "220 1St Ave W, Dickinson, ND 58601",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

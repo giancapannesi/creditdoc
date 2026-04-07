@@ -1,10 +1,10 @@
 {
   "name": "Western Union Money Order Only",
   "slug": "western-union-money-order-only-sacramento",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union Money Order Only — Money order service in Sacramento, CA.",
-  "description_long": "Western Union Money Order Only provides Money order service. Located at 2005 Marconi Ave, Sacramento, CA 95821.",
+  "description_short": "Western Union operates 1,500+ agent locations across the US offering money orders, cash pickups, bill payments, and money transfers as a trusted alternative to checks since 1851.",
+  "description_long": "Western Union is a century-old money transfer and financial services company established in 1851 that has evolved into a global network for sending and receiving funds. The company operates primarily through agent locations at retail stores, grocery chains, and bank partners rather than as a standalone storefront, making their services accessible at thousands of convenient points across the United States. Their core business centers on in-person financial transactions that serve customers without reliable banking access or those preferring cash-based money movement. Western Union's website emphasizes their role as 'a trusted alternative to checks' and highlights their encryption and fraud prevention measures as core differentiators in the money services space.\n\nWestern Union offers a comprehensive suite of check-cashing and money services at participating agent locations. Customers can purchase and cash money orders, send domestic and international money transfers, receive cash pickups via MTCN (Money Transfer Control Number), pay bills including utilities and rent, and apply for Western Union prepaid Visa cards. The company provides both in-person and hybrid transaction options, allowing customers to register transfers online or via their mobile app and then complete payment in cash at a physical location. They accept cash, debit cards, and credit cards at select locations for payment of transfer fees.\n\nWestern Union distinguishes itself through its extensive physical footprint\u2014available at major retailers like Walmart and grocery chains\u2014making services accessible without visiting a dedicated office. Their hybrid online-to-in-person model allows customers to save time by pre-registering transfers before visiting an agent location. The company emphasizes security through encryption and fraud prevention, and they offer international transfers with real-time exchange rates without providing in-person currency exchange services. Their 172-year operational history and integration with major financial institutions and retailers provide stability and convenience.\n\nHowever, Western Union's service model has inherent limitations. They do not provide currency exchange services at agent locations, only money transfers with exchange applied at time of receipt. Pricing varies significantly by transfer method, destination, and payment option, requiring customers to use their cost calculator to compare fees. The company's reliance on agent locations means service availability and hours depend entirely on the hosting retailer, creating inconsistency across the network. Additionally, while they offer prepaid cards and multiple payment methods, the fundamental service remains transactional rather than relationship-based banking.",
   "logo_url": "https://lh6.googleusercontent.com/-VEkxc4NOqsU/AAAAAAAAAAI/AAAAAAAAAAA/gyjsJKY5uYQ/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/us/en/locations.html",
   "affiliate_url": "",
@@ -58,18 +58,49 @@
     "transparency": 2.0,
     "ease_of_use": 3.9
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Extensive physical network with 1,500+ locations at Walmart, grocery chains, and bank partners across the US",
+    "Fast cash pickup service\u2014recipients can access funds in minutes using MTCN at participating locations",
+    "Hybrid transaction model allows customers to register transfers online/via app and pay in cash in-store to save time",
+    "Money orders explicitly positioned as 'trusted alternative to checks' for sending cash securely",
+    "Accepts multiple payment methods including cash, debit cards, and credit cards at select locations",
+    "Encryption and fraud prevention measures to protect money transfers",
+    "International money transfer capability with automatic exchange rate conversion at time of receipt",
+    "Bill payment services available at participating locations for utilities, rent, car payments"
+  ],
+  "cons": [
+    "Service hours and availability vary by host retailer location\u2014no guaranteed consistent access",
+    "No in-person currency exchange services offered; exchange rates applied only at time of foreign receipt",
+    "Fees vary significantly by transfer method, destination, and payment option with no transparent posted rates on homepage",
+    "Prepaid card option requires application and credit check alternative, adding friction to cash-only users",
+    "Limited to agent locations at third-party retailers rather than dedicated storefronts, creating dependence on host business hours"
+  ],
+  "best_for": [
+    "Unbanked or underbanked individuals needing reliable cash-based money movement without a traditional bank account",
+    "People sending money internationally who prefer in-person verification and don't need foreign currency exchange",
+    "Customers seeking money orders as a secure alternative to mailing checks or cash",
+    "Individuals making one-time or occasional bill payments at locations without online bill-pay options"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for unbanked consumers and international remitters who need reliable in-person cash-based money movement and bill payment services at convenient retail locations. The main caveat is that service quality, hours, and availability depend entirely on the host retailer, and transparent fee information requires visiting a location or using their online calculator rather than being posted upfront.",
   "services": [
-    "Money order service"
+    "In-person domestic money transfers at agent locations",
+    "International money transfers with real-time exchange rates",
+    "Money order purchase and cashing at participating locations",
+    "Cash pickup via MTCN at participating agent locations",
+    "Bill payment services (utilities, rent, car payments) at participating locations",
+    "Western Union prepaid Visa card application and enrollment",
+    "Online/mobile app transfer registration with in-person cash payment completion",
+    "Money Transfer Control Number (MTCN) generation and tracking",
+    "Service availability at Walmart locations nationwide",
+    "Service availability at bank partner locations",
+    "Service availability at grocery chain and retail store locations",
+    "Multi-payment option processing (cash, debit, select credit cards)"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-04-02",
   "review_status": "draft",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x809ad931d85c641b:0x29807a779a489e50",
     "google_rating": 1.0,
@@ -101,13 +132,14 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-07",
   "no_index": true,
   "contact": {
     "phone": "",
     "address": ""
-  }
+  },
+  "has_been_enriched": true
 }

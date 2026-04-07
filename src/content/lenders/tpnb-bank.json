@@ -1,15 +1,15 @@
 {
   "name": "Tpnb Bank",
   "slug": "tpnb-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Paris, MO. $118M in assets. 2 offices.",
-  "description_long": "Tpnb Bank is a community bank located in Paris, MO, established in 1865. The bank holds approximately $118M in total assets and $99M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "TPNB Bank is an FDIC-insured bank offering personal and business checking accounts, credit cards, consumer loans, and mobile banking services.",
+  "description_long": "TPNB Bank operates as a traditional community-focused financial institution with FDIC insurance backing all deposits. The bank emphasizes its role as a community partner and positions itself as a lender with expertise across multiple consumer finance products. Their service model combines traditional banking with modern digital convenience, offering both in-person and 24/7 remote account access.\n\nThe bank's primary offerings include personal and business checking accounts (marketed as \"Key Checking\" with lifestyle-focused perks), personal and business credit cards (recently launched), consumer loans (auto, boat, RV, and other purchases), and agricultural loans. They provide comprehensive online and mobile banking platforms with features like mobile check deposit, bill pay, fund transfers, loan payments, and transaction organization tools. Additional services include telephone banking available 24/7 at (888) 639-0854 and financial calculators to assist in financial decision-making.\n\nTpnb Bank distinguishes itself through community engagement, agricultural lending specialization, and emphasis on 24/7 accessibility regardless of traditional office hours. The bank promotes identity theft and fraud protection resources and positions itself as a partner through community involvement initiatives. Their marketing emphasizes helping customers finance major life moments and growing alongside the community.\n\nThe primary limitation is the lack of detailed information on their website about specific loan terms, credit card APRs, interest rates, fees, or eligibility requirements. As a regional/community bank, their product availability may be geographically limited. The website provides no information about minimum deposit requirements, account fees, or comparative advantages versus other banking institutions. Without transparent pricing and terms clearly stated, consumers would need to contact the bank directly for specific product details and rates. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.tpnbbank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking accounts with personalized dashboard features",
+    "Personal credit cards (newly offered)",
+    "Business credit cards (newly offered)",
+    "Online and mobile banking with account viewing and transaction management",
+    "Mobile check deposit through mobile app",
+    "Online and mobile bill pay services",
+    "Fund transfer capabilities between accounts",
+    "Loan payment processing through online/mobile platforms",
+    "Telephone banking (24/7) at (888) 639-0854",
+    "Consumer loans (auto, boat, RV financing and refinancing)",
+    "Agricultural loans",
+    "Financial calculators for planning and decision support"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1865",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits backed by full faith and credit of the U.S. Government",
+    "24/7 mobile and online banking with mobile check deposit capability",
+    "Dedicated telephone banking support available 24 hours, 7 days a week at (888) 639-0854",
+    "Specialized agricultural lending expertise mentioned as core service",
+    "Recently launched both personal and business credit card products",
+    "Online bill pay and fund transfer services included with checking accounts",
+    "Financial calculators provided to help customers with decision-making"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information about APRs, interest rates, and fees for any products",
+    "No details provided on minimum deposit requirements or account maintenance fees",
+    "Limited geographic availability information suggests this may be a regional bank with restricted service areas",
+    "No information about credit card rewards, benefits, or comparison to competitor offerings",
+    "Agricultural lending focus suggests less emphasis on serving non-agricultural consumers"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4556,
   "latitude": 39.4812890046655,
   "longitude": -91.999921971932,
@@ -88,18 +99,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural customers seeking specialized lending products and community banking relationships",
+    "Consumers wanting 24/7 digital banking access combined with traditional bank stability and FDIC protection",
+    "Customers in the bank's service area seeking multiple products from a single institution (checking, credit cards, loans)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "TPNB Bank is best for existing or prospective customers in their service area seeking traditional FDIC-insured banking with modern digital convenience and 24/7 access. The main caveat is the website's complete lack of transparency regarding rates, fees, and specific product terms, requiring customers to contact the bank directly for pricing information before making any decisions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +118,10 @@
   ],
   "phone": "",
   "address": "118 N Main St, Paris, MO 65275",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

@@ -1,13 +1,13 @@
 {
   "name": "Citibank, National Association",
   "slug": "citibank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Sioux Falls, SD. $1836436M in assets. 957 offices.",
-  "description_long": "Citibank, National Association is a community bank located in Sioux Falls, SD, established in 1812. The bank holds approximately $1836436M in total assets and $1465300M in deposits. It operates 957 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Citibank, National Association is a major U.S. bank offering checking, savings, mortgages, personal loans, credit cards, and investment services through online and branch channels.",
+  "description_long": "Citibank, National Association is one of the largest banking institutions in the United States, operating as a subsidiary of Citigroup. The company has maintained a significant retail and commercial banking presence for decades, serving millions of customers through both digital and physical branch networks. Their website indicates a comprehensive financial services platform built to serve diverse customer segments from individual consumers to small business owners.\n\nCitibank offers a broad suite of deposit products including checking accounts, savings accounts, and certificates of deposit (CDs) with published rates. On the lending side, they provide personal loans, home mortgages (purchase and refinance), home equity products, overdraft lines of credit, and small business lending. Their credit card portfolio includes rewards cards, balance transfer cards, cash back cards, travel cards, and retail partnerships like the American Airlines AAdvantage card. Investment services span self-directed investing, guided investing, and advisory relationships through their Citigold and Citigold Private Client wealth management divisions.\n\nCitibank distinguishes itself through its integrated platform combining traditional banking with investment and wealth management services, particularly through tiered offerings like Citi Priority and Citigold that provide enhanced benefits to higher-net-worth customers. They advertise bonus offers and pre-qualification tools, suggest debt consolidation resources, and operate a nationwide ATM network. Their website emphasizes educational content through learning centers for mortgages, personal loans, and credit knowledge. The company also serves small business customers with dedicated banking and lending products.\n\nAs a major national bank, Citibank provides institutional stability and FDIC insurance on deposits, but consumers should understand they are evaluating a large corporation with complex fee structures and terms that require detailed reading. While the website showcases product breadth, actual APRs, fees, and terms vary significantly by product, credit profile, and account type. Customers should carefully compare rates with competitors and review specific product disclosures before committing. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.citibank.com",
   "affiliate_url": "",
@@ -24,21 +24,32 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
+    "Certificates of Deposit (CDs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Home mortgages (purchase and refinance)",
+    "Home equity loans and lines of credit",
+    "Overdraft lines of credit",
+    "Credit cards (rewards, balance transfer, cash back, travel, retail, business)",
+    "Small business banking and lending",
+    "Self-directed investing",
+    "Guided investing",
+    "Wealth management advisory services (Citigold, Citigold Private Client)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1812",
-    "Local community bank with personal service",
-    "957 locations"
+    "Comprehensive product suite integrating banking, lending, credit cards, and investing in one institution",
+    "National ATM network for convenient cash access across the country",
+    "Multiple credit card options including rewards cards and co-branded airline card with bonus miles",
+    "Home equity and personal loan products available alongside mortgages for cross-selling convenience",
+    "Tiered wealth management services (Citigold, Citigold Private Client) for higher-net-worth customers",
+    "Educational resources including mortgage calculators, debt consolidation tools, and learning centers",
+    "Small business banking and lending products for entrepreneurs"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "As a large bank, fees and rate structures are complex and may not be competitive compared to online-only or neobanks",
+    "Website displays maintenance alerts indicating service interruptions affect credit card information access",
+    "APR and specific rate information not provided on website\u2014customers must apply or request details",
+    "Credit card bonus miles subject to 48-month eligibility restrictions limiting repeat applications",
+    "Debt consolidation and personal loan terms require application review without upfront rate disclosure"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "SD"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 7213,
   "latitude": 43.4936437353,
   "longitude": -96.788849428663,
@@ -86,18 +97,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking an all-in-one banking, lending, and investment platform from a nationally recognized institution",
+    "High-net-worth individuals interested in dedicated wealth management through Citigold Private Client",
+    "Small business owners needing integrated business banking and lending services",
+    "Frequent travelers interested in co-branded airline rewards cards with bonus miles"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Citibank is best for consumers seeking a comprehensive financial institution offering banking, credit, lending, and investing under one roof, particularly those with higher net worth interested in wealth management services. The main caveat is that as a large traditional bank, specific rates and fees are not transparently disclosed on their website and require individual applications, making rate comparison challenging before commitment.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "5800 S Corporate Pl, Sioux Falls, SD 57108",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

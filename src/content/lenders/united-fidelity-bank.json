@@ -1,13 +1,13 @@
 {
   "name": "United Fidelity Bank, Fsb",
   "slug": "united-fidelity-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Evansville, IN. $6292M in assets. 22 offices.",
-  "description_long": "United Fidelity Bank, Fsb is a community bank located in Evansville, IN, established in 1931. The bank holds approximately $6292M in total assets and $5420M in deposits. It operates 22 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "United Fidelity Bank, FSB is a federally insured bank offering checking, savings, CDs, IRAs, and online banking with nationwide ATM access through multiple networks.",
+  "description_long": "United Fidelity Bank, FSB operates as a federally chartered savings bank with Member FDIC insurance protection for customer deposits. The institution provides comprehensive retail and business banking services designed to serve both personal and commercial customers seeking traditional bank products and digital convenience.\n\nThe bank's core product offerings include personal checking and savings accounts, certificates of deposit (CDs) with advertised rates (6-month CD at 4.20% APY at time of website snapshot), Individual Retirement Accounts (IRAs) for retirement planning, and online banking platforms accessible via web and mobile applications. Customers can transfer funds through Zelle\u00ae for peer-to-peer money movement, access mortgage rate information, and order personalized checks. The bank emphasizes security with new authentication enhancements to online and mobile banking systems.\n\nUnited Fidelity Bank distinguishes itself through extensive ATM network accessibility, affiliated with Allpoint\u00ae, MoneyPass\u00ae, and Alliance One\u2122 networks, providing surcharge-free access to over 1 million ATMs nationwide. The bank offers both personal and business banking portals with separate login systems, suggesting established infrastructure for commercial customers. The institution maintains a clear focus on digital-first banking convenience while preserving traditional banking services.\n\nThe bank is best suited for customers seeking FDIC-insured deposit products with straightforward digital banking tools. Primary limitations evident from the website include lack of information about loan products (personal loans, auto loans, home equity lines), limited detail on account fees and minimum balance requirements beyond the $1,000 CD minimum, and no visible discussion of competitive advantages relative to other regional or national banks. The website content is marketing-focused rather than comprehensive, limiting transparency around full product specifications. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.unitedfidelity.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of Deposit (CDs) with minimum $1,000 deposit",
+    "Individual Retirement Accounts (IRAs)",
+    "Online banking portal",
+    "Mobile banking apps (iOS/Android)",
+    "Zelle\u00ae money transfer service",
+    "Debit card with mobile activation",
+    "Business banking (Ultimate Access portal)",
+    "Mortgage rate shopping tool",
+    "Personalized checks ordering",
+    "Surcharge-free ATM access (1M+ ATMs via Allpoint, MoneyPass, Alliance One networks)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1931",
-    "Local community bank with personal service",
-    "22 locations"
+    "FDIC insurance on deposits (Member FDIC status confirmed)",
+    "Nationwide surcharge-free ATM access through three affiliated networks (Allpoint, MoneyPass, Alliance One) covering 1+ million ATMs",
+    "Zelle\u00ae integration for fast peer-to-peer money transfers via email or phone number",
+    "Dedicated business banking portal (Ultimate Access) separate from personal banking",
+    "Mobile app with fingerprint/biometric authentication capability",
+    "New security enhancements to online and mobile banking explicitly mentioned",
+    "IRA and retirement planning accounts available"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks details on checking/savings account fees, minimum balances, and monthly maintenance charges",
+    "No information about loan products (personal loans, auto loans, home equity lines) typically offered by full-service banks",
+    "Limited transparency on CD rates and terms beyond single 6-month example; rates noted as 'subject to change'",
+    "No detail on business loan products despite business banking portal existence",
+    "Mortgage rate checking tool mentioned but no indication of mortgage origination services offered directly"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "IN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29566,
   "latitude": 37.9721,
   "longitude": -87.571589,
@@ -86,18 +97,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking FDIC-insured checking and savings accounts with digital banking convenience",
+    "Savers interested in CDs and IRAs for retirement planning at a federally chartered institution",
+    "Travelers and frequent ATM users needing extensive surcharge-free withdrawal access nationally",
+    "Small business owners requiring basic business checking and banking services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "United Fidelity Bank is best for customers seeking traditional FDIC-insured banking products (checking, savings, CDs, IRAs) with modern digital convenience and extensive ATM access. The primary caveat is that the website provides minimal transparency on account fees, terms, and competitive rates, requiring customers to login or contact the bank directly for detailed product specifications.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "18 Nw 4Th St, Evansville, IN 47708",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

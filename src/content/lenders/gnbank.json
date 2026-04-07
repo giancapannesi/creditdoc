@@ -1,15 +1,15 @@
 {
   "name": "Gnbank, National Association",
   "slug": "gnbank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Girard, KS. $1023M in assets. 15 offices.",
-  "description_long": "Gnbank, National Association is a community bank located in Girard, KS, established in 1929. The bank holds approximately $1023M in total assets and $823M in deposits. It operates 15 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured national bank founded in 1918 offering personal checking, business treasury services, agricultural lending, mortgages, and digital banking solutions.",
+  "description_long": "GNBank, National Association is a federally chartered bank established in 1918 with a century-long history of serving customers with a focus on traditional banking values. The institution is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing deposit safety guarantees up to regulatory limits.\n\nThe bank offers a comprehensive suite of financial products including personal checking accounts, digital banking services, personal loans, mortgage lending, and specialized agricultural financing. For commercial customers, GNBank provides Treasury Services featuring ACH origination, wire transfers, merchant processing, positive pay, remote deposit capture, and business digital banking through their Autobooks platform. They also offer premium checking account enhancements called Advantage benefits for $5 monthly, which include roadside assistance, phone protection, and identity monitoring.\n\nGNBank distinguishes itself through its agricultural lending focus, explicitly marketing specialized loan products for farm purchase and equipment maintenance. The bank emphasizes accessibility through multiple service channels including online digital banking, online payment portals, and physical branch locations. Their Treasury Services are specifically tailored for commercial customers seeking flexibility in managing accounts and transactions.\n\nAs a traditional community-focused national bank, GNBank serves a specific geographic and customer base rather than positioning itself as a digital-first or high-yield alternative to conventional banking. Their service offerings are standard for regional banks, with no mention of competitive rates, premium yields, or innovative fintech features on their public-facing website. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.gn-bank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Digital/online banking with account access and fund transfers",
+    "Online payment portal for bill payments",
+    "Personal loans for various purposes",
+    "Mortgage lending and home purchase financing",
+    "Agricultural loans for farm purchase and equipment maintenance",
+    "Business Treasury Services including ACH origination",
+    "Wire transfer services",
+    "Merchant processing services",
+    "Positive Pay fraud prevention",
+    "Remote Deposit Capture",
+    "Autobooks business digital banking platform"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1929",
-    "Local community bank with personal service",
-    "15 locations"
+    "FDIC-insured deposits with full U.S. Government backing",
+    "Founded in 1918 with over 100 years of banking history and established operations",
+    "Specialized agricultural lending programs for farm purchases and equipment financing",
+    "Treasury Services with ACH origination, wire transfers, and merchant processing for businesses",
+    "Remote Deposit Capture allows check deposits without visiting branch during business hours",
+    "Digital banking available 24/7 for account access, transfers, and bill payments",
+    "Advantage benefits package includes identity monitoring and fraud protection for $5/month"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides minimal information about interest rates, APYs, or account terms",
+    "No mention of competitive rates or how they compare to other banks",
+    "Limited geographic presence indicated by 'nearest GNBank location' language suggests regional rather than national availability",
+    "Advantage benefits require additional $5 monthly fee for basic protections like identity monitoring",
+    "Treasury Services fee structure not disclosed on website; requires contacting branch directly"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4673,
   "latitude": 37.5110950029973,
   "longitude": -94.8432070272245,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural business owners seeking specialized farm and equipment financing",
+    "Small business owners needing commercial banking with Treasury Services and merchant processing",
+    "Customers in GNBank's service region seeking traditional FDIC-insured banking with branch relationships",
+    "Businesses requiring ACH origination, wire transfers, and remote deposit capabilities"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "GNBank is best suited for small-to-medium businesses and agricultural customers seeking traditional relationship-based banking with specialized farm lending, as well as consumers in their geographic service area who prefer FDIC-insured deposits over fintech alternatives. The primary caveat is that this is a regional bank with limited geographic footprint and minimal public information about rates or terms, requiring direct contact with local branches for specific product details and pricing.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "100 E Forest Ave, Girard, KS 66743",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

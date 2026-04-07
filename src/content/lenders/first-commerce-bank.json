@@ -1,15 +1,15 @@
 {
   "name": "First Commerce Bank",
   "slug": "first-commerce-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Marysville, KS. $138M in assets. 2 offices.",
-  "description_long": "First Commerce Bank is a community bank located in Marysville, KS, established in 2002. The bank holds approximately $138M in total assets and $121M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "First Commerce Bank is a traditional bank offering checking, savings, mobile banking, and online bill pay services with home purchase grants up to $15,000.",
+  "description_long": "First Commerce Bank is a federally-regulated financial institution operating under NMLS# 409563 with routing number 101114976. The bank positions itself as a community-focused institution emphasizing personal service with the tagline \"Experience the Difference.\" Their website indicates they serve both new and existing customers with account-related inquiries.\n\nThe bank offers core banking services including mobile banking, online bill pay, checking and savings accounts, and loan products. They advertise a distinctive home purchase grant program offering up to $15,000 to qualifying customers looking to buy a home. Their digital infrastructure includes online and mobile banking platforms, calculators for financial planning, and check ordering services.\n\nFirst Commerce Bank distinguishes itself through its home purchase grant program, which is a direct incentive for mortgage-ready customers not commonly featured by larger national banks. They emphasize security and privacy with explicit warnings about email communication limitations and detailed error resolution procedures compliant with electronic transfer regulations.\n\nThe website reveals a mid-sized regional bank with functional but basic online presence. The site lacks detailed product specifications, APY rates, fee structures, and minimum balance requirements. Limited information is publicly available about specific account types, interest rates, or comprehensive loan offerings beyond mortgages. Customer support appears to rely heavily on phone contact and in-person branch visits rather than comprehensive online resources. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.bankfirstcommerce.com",
   "affiliate_url": "",
@@ -26,21 +26,32 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mobile banking application",
+    "Online bill pay",
+    "Home purchase grants (up to $15,000)",
+    "Loan products and applications",
+    "Check ordering",
+    "Lost or stolen card reporting and replacement",
+    "Financial calculators",
+    "Online and mobile banking platforms",
+    "E-statements signup",
+    "Error resolution and dispute services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2002",
-    "Local community bank with personal service",
-    "2 locations"
+    "Home purchase grant program offering up to $15,000 for qualifying homebuyers",
+    "Mobile banking app for account management on-the-go",
+    "Online bill pay service for convenient payment management",
+    "Multiple physical branch locations for in-person banking",
+    "Lost or stolen card reporting available 24/7 via dedicated phone line (877-226-2351)",
+    "FDIC-regulated institution with clear disclosure documentation",
+    "Check ordering service available directly through website"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information on APY rates, fees, and minimum balance requirements for accounts",
+    "No pricing transparency for loan products or mortgage rates",
+    "Limited online account opening or application process visible on website",
+    "Email communication explicitly not recommended for account issues, requiring phone calls or branch visits",
+    "Minimal product information, calculators, and educational resources compared to larger banks"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57273,
   "latitude": 39.8419630107665,
   "longitude": -96.6466399639131,
@@ -85,21 +96,22 @@
       "FDIC Cert #57273"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Home buyers interested in down payment assistance grants",
+    "Customers preferring traditional banking with physical branch access",
+    "Individuals seeking regional bank relationship versus national institutions",
+    "Existing customers managing accounts through mobile and online platforms"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Commerce Bank is best for customers seeking traditional brick-and-mortar banking with community focus, particularly those interested in the home purchase grant program. Primary caveat: the website provides minimal transparency on rates, fees, and product details, requiring direct contact with branches or customer service for specific account information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "902 Broadway, Marysville, KS 66508",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

@@ -1,13 +1,13 @@
 {
   "name": "Bankers' Bank Of The West",
   "slug": "bankers-bank-of-the-west",
-  "category": "personal-loans",
+  "category": "business-loans",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Denver, CO. $442M in assets. 1 office.",
-  "description_long": "Bankers' Bank Of The West is a community bank located in Denver, CO, established in 1980. The bank holds approximately $442M in total assets and $247M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bankers' Bank of the West is a wholesale bank serving community banks with loan participations, cash management, and operational services\u2014not a consumer personal loan lender.",
+  "description_long": "Bankers' Bank of the West operates as a correspondent bank and wholesale financial institution designed exclusively to serve community banks and financial institutions, not individual consumers. The company explicitly states it does not open consumer accounts or online accounts, positioning itself as a back-office partner that helps community banks manage their own lending and operational needs.\n\nThe company offers loan participations (agricultural, construction, and real estate), cash management services including international check deposits and wire processing, bank card services, safekeeping, and merchant services. They also provide FedNow\u00ae education and participation support, currency orders and deposits, collection items processing, and consulting services through affiliated entities Bank Strategies, LLC and CivITas Bank Solutions for cybersecurity and strategic guidance.\n\nBankers' Bank of the West differentiates itself through deep integration with the Federal Reserve ecosystem, specialized expertise in helping community banks transition away from discontinued FedGlobal\u00ae services, and a comprehensive suite of operational solutions designed specifically for mid-size financial institutions. Their value proposition centers on enabling community banks to serve their customers more effectively by outsourcing correspondent banking functions.\n\nThis company is fundamentally misclassified in the \"personal-loans\" category. It is a B2B wholesale bank, not a consumer lender. Individual consumers cannot obtain personal loans from this institution\u2014they must work through their own community bank to access any services that might eventually involve Bankers' Bank of the West as a behind-the-scenes partner.",
   "logo_url": "",
   "website_url": "https://www.bbwest.com",
   "affiliate_url": "",
@@ -22,23 +22,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Loan participations for agricultural lending",
+    "Loan participations for construction lending",
+    "Loan participations for real estate lending",
+    "International check deposit processing",
+    "Wire transfer services",
+    "Currency orders and deposits",
+    "Collection items processing",
+    "Cash management and liquidity services",
+    "Bank card services",
+    "Safekeeping services",
+    "Merchant services",
+    "FedNow\u00ae education and participation support",
+    "Cybersecurity consulting (CivITas Bank Solutions)",
+    "Strategic banking consulting (Bank Strategies, LLC)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1980",
-    "Local community bank with personal service",
-    "1 location"
+    "Provides loan participations for agricultural, construction, and real estate lending, allowing smaller banks to offer larger loans",
+    "Offers international banking services including foreign check deposits, currency orders, and wire processing to support customer needs",
+    "Delivers FedNow\u00ae participation and education to help community banks stay current with Federal Reserve payment modernization",
+    "Specializes in transitioning clients away from discontinued Federal Reserve services (FedGlobal\u00ae ACH and foreign check services)",
+    "Provides cybersecurity and information security consulting through CivITas Bank Solutions with financial institution-specific expertise",
+    "Offers merchant services with emphasis on customer support and economic participation enablement",
+    "Comprehensive cash management platform integrating multiple operational services in one relationship"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Explicitly does not open consumer accounts\u2014impossible for individuals to directly access services",
+    "B2B-only model means consumers must work through their community bank as an intermediary with no direct control",
+    "Limited transparency on pricing, terms, or specific loan participation rates and requirements from public website",
+    "Website content focuses on institutional features with minimal detail on how services actually function or compare competitively",
+    "No online account access or digital-first capabilities promoted, suggesting legacy operational infrastructure"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +63,7 @@
   "states_served": [
     "CO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 23210,
   "latitude": 39.7495899953645,
   "longitude": -104.992568010927,
@@ -86,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Community bank executives seeking loan participation opportunities to expand lending capacity",
+    "Regional financial institutions needing wholesale correspondent banking and cash management services",
+    "Banks seeking to transition away from discontinued Federal Reserve payment services",
+    "Community banks requiring cybersecurity consulting and FedNow\u00ae implementation support"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bankers' Bank of the West is exclusively a wholesale correspondent bank for community financial institutions, not a consumer lender. Individual consumers cannot apply for loans or open accounts directly with this company\u2014this listing is fundamentally miscategorized and should be removed from consumer finance directories or reclassified to a business/wholesale banking category.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +119,11 @@
   ],
   "phone": "",
   "address": "1099 18Th St, Denver, CO 80202",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

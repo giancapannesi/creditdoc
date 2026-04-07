@@ -1,13 +1,13 @@
 {
   "name": "Citizens Business Bank, National Association",
   "slug": "citizens-business-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Ontario, CA. $15635M in assets. 70 offices.",
-  "description_long": "Citizens Business Bank, National Association is a community bank located in Ontario, CA, established in 1974. The bank holds approximately $15635M in total assets and $12128M in deposits. It operates 70 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Citizens Business Bank is an FDIC-insured national bank serving small to medium-sized businesses since 1974, offering relationship-based banking, merchant solutions, and industry-specific financial services.",
+  "description_long": "Citizens Business Bank, National Association, has been operating since 1974 as a dedicated financial services provider focused exclusively on California's small to medium-sized business market. The bank is backed by CVB Financial Corp., a publicly traded holding company recognized by S&P Global Market Intelligence as one of the top 50 performing U.S. public banks with assets greater than $10 billion. The institution maintains strong financial health, reporting $209.3 million in net earnings as of December 31, 2025, with 195 consecutive quarters of profitability and 146 consecutive quarters of cash dividends paid.\n\nCitizens Business Bank offers a comprehensive suite of business banking solutions including relationship banking services, merchant payment solutions, business card options, fraud prevention services, and international services. The bank provides industry-specific expertise across 13 specialized sectors including industrial and manufacturing, property management, agriculture, nonprofit organizations, professional services, medical practices, dairy and livestock operations, government entities, title and escrow companies, labor management, and fiduciary deposit services. Their relationship banking model emphasizes personalized financial strategies tailored to individual business needs rather than one-size-fits-all solutions.\n\nThe bank distinguishes itself through its emphasis on relationship banking, where dedicated relationship bankers take time to understand each client's business, industry, and long-term vision. Citizens Business Bank has earned multiple third-party recognitions including a BBB+ Stable rating from Fitch Ratings (2025), a five-star \"Superior\" rating from BauerFinancial (2025), recognition as a Super Premier Performing Bank by Findley Reports (2025), inclusion in Forbes' 2025 Best Banks in America, ranking #8 on Los Angeles Times' 2025 Top 50 Banks in Southern California, and a 2024 Best Employee Engagement Award from AwardCo. The bank maintains physical locations and ATM networks for customer convenience.\n\nAs a traditional FDIC-insured national bank, Citizens Business Bank serves established small to medium-sized businesses rather than startups or businesses requiring quick approval processes. While the relationship banking model offers personalized service, it typically requires more extensive vetting and documentation compared to online lenders. The bank's focus on California and specific industries means it may not serve businesses outside their geographic footprint or those in non-specialized sectors. The recent merger announcement with Heritage Bank of Commerce may create transition considerations for existing clients. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.cbbank.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Relationship banking with dedicated industry-specific bankers",
+    "Merchant payment solutions and streamlined payment options",
+    "Business card solutions tailored to company needs",
+    "Fraud prevention services for risk reduction",
+    "International services",
+    "Fiduciary deposit services",
+    "Industry-specialized financial strategies",
+    "Government banking services",
+    "Title and escrow company banking",
+    "Agricultural and dairy/livestock financing",
+    "Nonprofit organization banking",
+    "Professional services and medical practice banking"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1974",
-    "Local community bank with personal service",
-    "70 locations"
+    "195 consecutive quarters of profitability demonstrating long-term financial stability",
+    "Specialized industry expertise across 13 distinct business sectors with dedicated relationship banking",
+    "FDIC-insured deposits with full backing of U.S. Government faith and credit",
+    "BBB+ Stable rating from Fitch Ratings and five-star rating from BauerFinancial",
+    "Ranked #8 on Los Angeles Times' 2025 Top 50 Banks in Southern California",
+    "146 consecutive quarters of cash dividends paid showing consistent shareholder returns",
+    "Comprehensive suite including merchant solutions, business cards, and fraud prevention services"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic focus primarily on California limits accessibility for businesses in other states",
+    "Relationship banking model requires more extensive underwriting and longer approval timelines than online lenders",
+    "Pending merger with Heritage Bank of Commerce may create service disruptions or operational changes for existing customers",
+    "Specialization in specific industries may limit options for businesses outside their 13 focus sectors",
+    "No indication of digital-first or fast-funding options for time-sensitive business needs"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 21716,
   "latitude": 34.071314951438,
   "longitude": -117.576597946499,
@@ -86,18 +97,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Established small to medium-sized businesses in California seeking personalized relationship banking",
+    "Businesses in specialized industries (manufacturing, agriculture, nonprofits, medical practices, professional services) needing sector-specific financial strategies",
+    "Companies requiring comprehensive solutions including merchant services, business cards, and fraud prevention tools",
+    "Businesses prioritizing stability and long-term banking partnerships over rapid approval processes"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Citizens Business Bank is best for established small to medium-sized California-based businesses in specialized industries seeking personalized relationship banking from a financially stable, FDIC-insured institution with deep industry expertise. The main caveat is that the relationship banking model requires more extensive vetting and longer approval timelines than digital lenders, and the pending merger may impact service continuity.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,10 @@
   ],
   "phone": "",
   "address": "701 N Haven Ave, Ontario, CA 91764",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

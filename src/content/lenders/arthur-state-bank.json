@@ -1,14 +1,14 @@
 {
   "name": "Arthur State Bank",
   "slug": "arthur-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Union, SC. $814M in assets. 19 offices.",
-  "description_long": "Arthur State Bank is a community bank located in Union, SC, established in 1933. The bank holds approximately $814M in total assets and $667M in deposits. It operates 19 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Family-owned independent bank offering personal and business checking, savings, mortgages, loans, and wealth management services with digital banking tools.",
+  "description_long": "Arthur State Bank is an independent, family-owned bank that has maintained continuous operation under its original founding families, positioning itself as a institution rooted in tradition and community commitment. The bank serves both personal and business customers with a comprehensive suite of financial products including checking and savings accounts, certificates of deposit, personal and business loans, mortgage lending, and trust and wealth management services. The bank distinguishes itself through personalized service combined with modern digital capabilities, including online banking, mobile app access, cash management tools, and innovative features like MyCardRules for debit card controls. Arthur State Bank operates physical locations in South Carolina and emphasizes low down payment mortgages without PMI for first-time homebuyers, along with specialized lending programs for healthcare professionals and military personnel. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.arthurstatebank.com",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Money market accounts",
+    "Certificates of deposit (CDs and CDARs)",
+    "Individual retirement accounts (IRAs)",
+    "Safe deposit boxes",
+    "Personal and business loans",
+    "Mortgage lending with online mortgage center",
+    "Credit cards and debit cards",
+    "Online and mobile banking",
+    "Cash management and remote deposit capture",
+    "Trust services and wealth management",
+    "Overdraft protection"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1933",
-    "Local community bank with personal service",
-    "19 locations"
+    "Family-owned and independent bank with legacy stability and long-standing community roots",
+    "Offers mortgages with low down payment options and no PMI for first-time homebuyers",
+    "Comprehensive digital services including online banking, mobile app, and remote deposit capture",
+    "MyCardRules feature allows customers to control debit cards with transaction limits and instant alerts",
+    "Dedicated trust and wealth management services for estate planning and personalized wealth goals",
+    "Free mobile banking when opening a checking account",
+    "Specialized lending programs for healthcare professionals and military personnel (Hometown Heroes)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitations appear restricted to South Carolina based on website closing procedures",
+    "No mention of competitive interest rates or rate comparisons for savings products",
+    "Limited information on fees, minimum balance requirements, or APR details for loans and credit products"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "SC"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15085,
   "latitude": 34.7149700134597,
   "longitude": -81.6235539883485,
@@ -87,18 +96,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "First-time homebuyers in South Carolina seeking low down payment mortgages without PMI",
+    "Healthcare professionals and military personnel with access to specialized lending programs",
+    "Business owners requiring comprehensive business banking, cash management, and remote deposit services",
+    "High-net-worth individuals seeking professional trust and wealth management services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Arthur State Bank is best for South Carolina residents seeking traditional full-service banking with personal relationships combined with modern digital tools, particularly first-time homebuyers and business owners. The main caveat is that the bank appears geographically limited to South Carolina, and specific pricing, rates, and fee structures are not disclosed on the public website.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +116,11 @@
   ],
   "phone": "",
   "address": "100 E Main St, Union, SC 29379",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

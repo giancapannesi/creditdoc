@@ -1,14 +1,14 @@
 {
   "name": "Bankwest",
   "slug": "bankwest",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Rockford, MN. $248M in assets. 3 offices.",
-  "description_long": "Bankwest is a community bank located in Rockford, MN, established in 1948. The bank holds approximately $248M in total assets and $226M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving Minnesota with personal and business checking, savings, loans, and mobile banking. FDIC-insured with branches in Rockford, Hanover, and Buffalo.",
+  "description_long": "Bankwest is a community-focused bank operating in Minnesota with physical branches in Rockford, Hanover, and Buffalo. The bank positions itself as a relationship-driven institution that combines traditional banking services with modern digital convenience. Keith Argabright serves as President, and the organization emphasizes community impact and legacy-building in its messaging.\n\nBankwest offers a comprehensive range of personal banking products including multiple checking account tiers (Rewards, Cash Back, Choice, and Preferred Checking), savings accounts, money market accounts, IRAs, and CDs. On the lending side, they provide home mortgage loans, home equity loans, personal loans, and auto loans including RV and boat financing. For business customers, Bankwest offers business checking accounts (including non-profit accounts), business savings, business loans with flexible terms, SBA lending, commercial real estate financing, and equipment loans.\n\nKey distinguishing features include their 2.50% cash back offer on debit card purchases through Cash Back Checking, completely free services (internet banking, mobile banking, e-statements, surcharge-free ATMs), and a promise of \"fast, flexible financing tailored to your specific needs\" for business clients. The bank emphasizes accessibility, with AudioEye-enabled website optimization and a focus on mobile-first banking convenience. They maintain FDIC insurance backed by the full faith and credit of the U.S. Government.\n\nBankwest appears to be a solid regional community bank without the scale or branch network of major national banks. While they offer competitive products and free digital services, their geographic limitation to Minnesota and smaller asset base may mean fewer specialized products or lower rates compared to larger national competitors. The emphasis on community impact and personalized service suggests they may be best suited for customers who value relationship banking over purely online or discount banking models. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.bankwestmn.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Rewards, Cash Back, Choice, Preferred)",
+    "Personal savings accounts and money market accounts",
+    "Individual Retirement Accounts (IRAs) and Certificates of Deposit (CDs)",
+    "Home mortgage loans and home equity loans/HELOC",
+    "Personal loans and auto loans including RV and boat financing",
+    "Business checking accounts including non-profit accounts",
+    "Business loans, SBA loans, and commercial real estate loans",
+    "Equipment financing and operating lines of credit",
+    "Mobile banking with mobile deposit",
+    "Internet banking and electronic statements",
+    "Merchant card services and remote deposit capture",
+    "Overdraft protection and sweep services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1948",
-    "Local community bank with personal service",
-    "3 locations"
+    "2.50% cash back on debit card purchases with Cash Back Checking account",
+    "Completely free services including internet banking, mobile banking, e-statements, and surcharge-free ATMs",
+    "Full FDIC insurance protection for deposits",
+    "Comprehensive business lending including SBA loans, commercial real estate, and equipment financing",
+    "Multiple checking account options (Rewards, Cash Back, Choice, Preferred) allowing account customization",
+    "Mobile banking with mobile deposit capability for remote check deposits",
+    "Free overdraft protection services and sweep services available",
+    "Community-focused institution emphasizing local impact and customer relationships"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to Minnesota locations (Rockford, Hanover, Buffalo) restricts accessibility for out-of-state customers",
+    "Limited branch network compared to national banks, reducing convenience for customers who travel frequently",
+    "No mention of specific APR rates or competitive rate comparisons available on website",
+    "Smaller institution may have fewer specialized financial products or services compared to major banks",
+    "No apparent online-only or neobank option for fully remote banking without visiting physical branches"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 16704,
   "latitude": 45.0875179865805,
   "longitude": -93.7359540135301,
@@ -87,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Minnesota residents in the Rockford, Hanover, or Buffalo areas seeking relationship-based community banking",
+    "Small business owners and non-profits looking for personalized business lending and flexible financing terms",
+    "Consumers prioritizing cash back rewards and free digital banking services over premium account features",
+    "Customers who value face-to-face banking relationships and community-focused financial institutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bankwest is best for Minnesota residents and small business owners in their service areas who value personalized community banking relationships and free digital services like mobile banking and surcharge-free ATMs. The main caveat is their limited geographic footprint to three Minnesota locations, which restricts accessibility for out-of-state customers or those requiring broader branch networks, and the lack of transparent rate information online may require direct contact with the bank for competitive comparison.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "5921 Main St, Rockford, MN 55373",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

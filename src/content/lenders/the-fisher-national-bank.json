@@ -1,14 +1,14 @@
 {
   "name": "The Fisher National Bank",
   "slug": "the-fisher-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Fisher, IL. $364M in assets. 6 offices.",
-  "description_long": "The Fisher National Bank is a community bank located in Fisher, IL, established in 1955. The bank holds approximately $364M in total assets and $308M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Fisher National Bank is a community-focused full-service bank operating since 1955, offering checking, savings, loans, credit cards, and wealth management services through digital and branch channels.",
+  "description_long": "Fisher National Bank (FNB) has been serving its community since 1955, establishing itself as a regional community bank with a commitment to personalized banking experiences. The bank operates through physical branch locations and digital banking platforms, positioning itself as an alternative to larger national banks by emphasizing local relationships and customer service.\n\nFisher National Bank provides a comprehensive suite of banking products including checking and savings accounts, personal and business loans, mortgages, credit cards, and wealth management services. Their digital offerings include online banking, mobile banking app, online bill pay, and mobile deposit capabilities. FNB Wealth Management is a division offering securities, insurance, and investment advisory services through Midwestern Securities Trading Company, LLC (MSTC), which is a separate FINRA/SIPC-registered entity not affiliated with the bank itself.\n\nThe bank differentiates itself through emphasis on customer service quality and community orientation. Customer testimonials highlight staff friendliness, professional mortgage assistance, personalized service, and willingness to go \"the extra mile.\" The bank explicitly markets itself as offering a more personalized banking experience compared to larger institutions, with specific employee names mentioned in customer reviews suggesting relationship-based banking.\n\nAs a traditional community bank, Fisher National Bank serves customers seeking local banking relationships and personalized service, though specific product terms, rates, fees, and loan approval criteria are not detailed on the website. The wealth management division's separation from the bank itself means investment products carry distinct regulatory structures and disclaimers. The bank appears strongest for mortgage lending and relationship-based banking rather than for specialized lending products or fintech-driven services. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.fishernational.com",
   "affiliate_url": "",
@@ -26,20 +26,31 @@
     "Checking accounts",
     "Savings accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgages (home purchase and refinance)",
+    "Business loans and business banking services",
+    "Credit cards",
+    "Online banking platform",
+    "Mobile banking app",
+    "Online bill pay with late-fee guarantee",
+    "Mobile deposit",
+    "Wealth management and investment advisory services",
+    "Securities and insurance services through MSTC"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1955",
-    "Local community bank with personal service",
-    "6 locations"
+    "Free mobile banking app with balance viewing, fund transfers, bill pay, mobile deposit, and debit card controls",
+    "Online bill pay with late-fee guarantee\u2014if properly scheduled payments are lost or delayed, customer is never penalized",
+    "Seamless bank switching assistance with dedicated service representatives to guide account transition process",
+    "Multiple customer testimonials praising mortgage expertise, with specific loan officers (Damian, Garrett, Ryan, Jason) mentioned by name",
+    "Enhanced security features and updated digital banking platform synchronized with mobile app",
+    "Community-focused positioning since 1955 with emphasis on personalized, relationship-based banking",
+    "Dedicated business banking services and credit card options alongside personal accounts"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "FNB Wealth Management's investment and securities services are not FDIC-insured and carry investment risk including potential loss of principal",
+    "Wealth management division operated by separate unaffiliated entity (MSTC), creating potential service fragmentation",
+    "Website provides no specific information on account fees, interest rates, APRs, or loan terms\u2014customers must contact branches or use calculators",
+    "Limited geographic presence as regional community bank compared to national competitors",
+    "No information about account opening requirements, minimum balances, or qualification criteria for loans"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 17513,
   "latitude": 40.311211999651,
   "longitude": -88.349327039136,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking personalized mortgage lending with named relationship managers",
+    "Community members preferring local banking relationships over large national institutions",
+    "Individuals wanting comprehensive digital banking access (app, online, bill pay, mobile deposit) through a traditional bank",
+    "Small business owners seeking business banking services with local decision-making"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Fisher National Bank is best for community members and small business owners seeking personalized, relationship-based banking with local branch access and digital convenience. The main caveat is that specific product terms, rates, and fees are not disclosed online, requiring direct customer contact with branches, and wealth management services operate through a separate unaffiliated entity with distinct regulatory protections and risks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "102 E Division St, Fisher, IL 61843",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Bank Of Vici",
   "slug": "bank-of-vici",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Vici, OK. $29M in assets. 1 office.",
-  "description_long": "Bank Of Vici is a community bank located in Vici, OK, established in 1902. The bank holds approximately $29M in total assets and $27M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving Vici, Oklahoma since 1902, offering personal and business banking services including loans, online banking, and debit cards.",
+  "description_long": "Bank of Vici is a longstanding community bank with over 120 years of history, having been chartered on October 22, 1902. The institution has survived major economic events including the 1907 money panic, the 1929 market breakdown, the 1933 bank moratorium, multiple wars, and the oil and gas industry cycles. Currently led by President and CEO David G Trimble, the bank has grown from $230,000 in assets at its 1927 milestone to over $22 million in total assets by its 100th anniversary in 2002.\n\nBank of Vici offers a range of standard banking services including personal and business enrollment in digital banking, online banking with 24/7 customer support, loan payment processing, loan origination, debit cards with design customization options, mobile banking, and a night depository service. The bank provides loan calculators and maintains both lobby and drive-in access during business hours. Their digital banking platform allows customers to send secured emails for account inquiries and access online services remotely.\n\nWhat distinguishes Bank of Vici is its deeply rooted community commitment and local focus. The bank explicitly states it strives to serve farmers, ranchers, and business people of the community and has maintained a philosophy of giving back to the community since its founding, including support for school activities and civic affairs. As a small, independently-operated community bank, it operates with a personal touch rather than as part of a national chain.\n\nThe bank operates with limited hours (Monday-Friday 9 AM-3 PM only, closed Saturdays) and maintains a single physical location in Vici, Oklahoma. While it offers modern digital banking capabilities, its reach and service availability are geographically restricted to the local community. Prospective customers outside the Vici area should verify account accessibility before opening. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.bankofvici.com",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal digital banking enrollment",
+    "Business digital banking enrollment",
+    "Online banking with 24/7 support",
+    "Mobile banking application",
+    "Loan origination and underwriting",
+    "Loan payment processing",
+    "Customizable debit cards",
+    "Night depository service",
+    "Loan calculators",
+    "Secured email communication for account inquiries",
+    "Drive-in banking access",
+    "Lobby banking access"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1902",
-    "Local community bank with personal service",
-    "1 location"
+    "24/7 customer support for online banking inquiries and issues",
+    "Over 120 years of operational history and community stability since 1902",
+    "Customizable debit card design options for personalization",
+    "Mobile banking and online banking platforms for remote account access",
+    "Secure email messaging through online banking for sensitive account questions",
+    "Night depository service for after-hours deposits",
+    "Active community involvement with documented civic and school support"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Single branch location limits accessibility to Vici, Oklahoma area only",
+    "Limited lobby and drive-in hours (Monday-Friday 9 AM-3 PM, closed Saturdays)",
+    "Small institution with limited assets may restrict loan amounts or product variety compared to larger banks",
+    "Website provides minimal detail on account types, interest rates, fees, or specific loan products"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 420,
   "latitude": 36.1500250111101,
   "longitude": -99.2993499614761,
@@ -87,18 +97,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local residents and business owners in Vici, Oklahoma seeking personalized community banking",
+    "Farmers and ranchers in the region needing relationship-based banking services",
+    "Customers prioritizing local institution support and community involvement over national bank convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Vici is best for individuals and businesses already located in or serving the Vici, Oklahoma area who value local banking relationships and community involvement. The primary caveat is geographic limitation\u2014this is a single-branch community bank with no online account opening or service for customers outside the Vici region, and the institution does not publicly disclose product details, rates, or fees on its website.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +116,11 @@
   ],
   "phone": "",
   "address": "121 W Broadway, Vici, OK 73859",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

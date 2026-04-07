@@ -1,14 +1,14 @@
 {
   "name": "New Era Bank",
   "slug": "new-era-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Fredericktown, MO. $439M in assets. 8 offices.",
-  "description_long": "New Era Bank is a community bank located in Fredericktown, MO, established in 1934. The bank holds approximately $439M in total assets and $374M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering checking, savings, personal loans, mortgages, and identity theft protection through their New Direction Account.",
+  "description_long": "New Era Bank is a community-focused FDIC-insured bank that operates with a stated mission to provide personalized banking services. The bank operates physical branch locations and emphasizes experienced staff and customer service as core differentiators in their market positioning. Based on their website routing number (081502637) and phone contact (573-783-3336), they operate as a traditional retail bank rather than a digital-only institution.\n\nThe bank offers a comprehensive suite of consumer banking products including checking and savings accounts, personal loans, mortgage lending (with specific first-time homebuyer programs), online and mobile banking, loan payment processing, and debit card services. Their marketing emphasizes practical features like a Round Up savings program (automatically transferring purchase round-up differences to savings), SecureSwipe debit card controls, and loan calculators to help customers make informed decisions.\n\nWhat distinguishes New Era Bank is their bundled identity theft protection offering. The New Direction Account includes IdProtect\u00ae, an identity theft protection service that covers not only fraudulent activity on the bank's own accounts but also identity theft across any accounts unrelated to the bank. This service includes managed recovery services, up to $10,000 reimbursement for identity theft expenses, daily credit monitoring, and coverage extending to joint account holders, spouses, dependent children up to age 25, and co-living parents.\n\nAs a traditional community bank, New Era Bank serves customers who prefer in-person banking relationships and local branch access over fully digital banking solutions. However, their service breadth is limited compared to large national banks, and their online presence suggests moderate digital banking capabilities. The identity theft protection bundling is genuinely valuable but represents one account type rather than a bank-wide feature, potentially limiting appeal to customers who prioritize different account structures. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.newerabank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Checking and savings accounts (including New Direction Account)",
+    "Online and mobile banking",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage lending and first-time homebuyer programs",
+    "Loan payment processing",
+    "Debit card services with SecureSwipe control",
+    "Round Up automated savings program",
+    "Identity theft protection (IdProtect\u00ae) with recovery services",
+    "Loan calculator tools",
+    "WebChat customer service",
+    "Lost/stolen card reporting",
+    "Mortgage guidance and counseling"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1934",
-    "Local community bank with personal service",
-    "8 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "New Direction Account includes IdProtect\u00ae identity theft protection covering family members up to age 25 and co-living parents",
+    "Identity theft protection includes managed recovery services and up to $10,000 reimbursement for identity theft expenses",
+    "Round Up savings program automatically transfers purchase differences to designated accounts for automated savings",
+    "SecureSwipe debit card control feature allows customers to toggle card on/off via mobile phone",
+    "First-time homebuyer mortgage guidance and support programs available",
+    "Online and mobile banking options plus in-person branch access for relationship-based service"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as community bank compared to national banking alternatives",
+    "Identity theft protection benefits limited to New Direction Account type, not available across all accounts",
+    "Website does not display specific APR rates, fees, or product terms for comparison shopping",
+    "No information provided about savings account interest rates or competitive positioning",
+    "Loan products mentioned but no details on approval process, timelines, or specific loan terms"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14546,
   "latitude": 37.5594320136865,
   "longitude": -90.2925339947886,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "First-time homebuyers seeking local mortgage guidance and relationship-based lending",
+    "Customers prioritizing identity theft protection and willing to structure finances around the New Direction Account",
+    "Community-oriented banking customers who value in-person branch relationships over digital-only banking",
+    "Families wanting bundled identity theft coverage extending to dependents and elderly parents"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "New Era Bank is best suited for community-oriented consumers seeking personalized banking relationships with local branch access and particularly attractive to first-time homebuyers or families prioritizing family-inclusive identity theft protection. The main caveat is that they operate as a regional community bank without the service breadth or digital sophistication of national institutions, and competitive product terms are not transparently displayed online.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "101 S Mine La Motte St, Fredericktown, MO 63645",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

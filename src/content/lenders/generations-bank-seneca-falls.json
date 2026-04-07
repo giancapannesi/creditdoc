@@ -1,15 +1,15 @@
 {
   "name": "Generations Bank",
   "slug": "generations-bank-seneca-falls",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "consumer-lending"
   ],
-  "description_short": "FDIC-insured community bank in Seneca Falls, NY. $347M in assets. 10 offices.",
-  "description_long": "Generations Bank is a community bank located in Seneca Falls, NY, established in 1870. The bank holds approximately $347M in total assets and $298M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "ESL Federal Credit Union is a Rochester, NY-based credit union offering personal loans, online banking, and investment services to eligible members with federal NCUA insurance.",
+  "description_long": "ESL Federal Credit Union is a member-owned financial cooperative headquartered at 225 Chestnut Street in Rochester, New York. The organization has been serving its community for decades and recently appointed Tom Rogers as President and CEO following his 13+ years with the institution. As a federally insured credit union, ESL operates under NCUA protection and maintains registered service marks including TEL-E$L and CheckOK.\n\nESL offers a comprehensive suite of financial products including personal loans designed for debt consolidation and major purchases, online and mobile banking platforms for both personal and business members, investment account services through Account View, trust services, and ATM access across their network. The credit union provides checking and savings products, competitive interest rates, and dedicated business banking solutions. Members can access their accounts through dedicated mobile apps for both iOS and Android, with separate applications for personal and business banking.\n\nThe institution distinguishes itself through its community focus, active careers program, and commitment to member education. ESL provides financial clarity tools, online statement enrollment for paperless management, and fraud protection resources. The credit union operates drive-up ATMs and branch locations, offering convenient physical access alongside digital banking capabilities. They maintain an ABA routing number (222371863) and actively promote membership eligibility across their service area.\n\nHowever, the website reveals some operational limitations. The self-serve password reset tool is currently unavailable, requiring members to contact customer service directly for account access issues. The site contains minimal detail about specific loan terms, rates, or membership eligibility criteria beyond the standard credit union requirement. Product documentation and detailed fee schedules are not readily accessible from the homepage, potentially requiring direct member inquiry. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.mygenbank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal loans for consolidation and purchases",
+    "Online banking platform with secure login",
+    "Mobile banking apps (iOS and Android for personal and business)",
+    "Checking and savings accounts",
+    "Investment account services through Account View",
+    "Trust services via ESL Trust Services, LLC",
+    "Business banking with dedicated applications",
+    "ATM network with drive-up locations",
+    "Online statements and paperless document access",
+    "Fraud protection and lost/stolen card reporting",
+    "Community organization funding and grants",
+    "Competitive rate checking and financial products"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1870",
-    "Local community bank with personal service",
-    "10 locations"
+    "Federal NCUA insurance protection for member deposits",
+    "Dual mobile banking apps for personal and business accounts",
+    "Competitive rates advertised on website with rate comparison tool",
+    "Multiple account access options: online banking, mobile app, and physical branches with drive-up ATMs",
+    "Community funding and support programs for local organizations",
+    "Trust services and investment account management through Account View",
+    "Established institution with 13+ year tenure of current leadership"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Self-serve password reset currently unavailable\u2014members must contact customer service",
+    "Limited publicly available information about specific loan terms, APRs, and eligibility requirements",
+    "Membership eligibility restrictions apply (credit union membership requirements not detailed on site)",
+    "Minimal detail on fees, minimum balances, or account requirements visible on homepage",
+    "No information about online account opening or remote membership application process"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "NY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 16040,
   "latitude": 42.911456689663,
   "longitude": -76.79684979692,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Rochester, NY area residents seeking NCUA-insured banking with community roots",
+    "Small business owners needing dedicated business banking and lending solutions",
+    "Members wanting integrated personal, business, and investment account management",
+    "Consumers prioritizing credit union member-owned structure over corporate banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "ESL Federal Credit Union is best for residents and small business owners in the Rochester, NY area seeking traditional credit union banking with NCUA insurance protection and community focus. Primary caveat: limited online transparency regarding specific loan terms, rates, and membership eligibility criteria requires direct contact with the institution before applying.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,10 @@
   ],
   "phone": "",
   "address": "19 Cayuga St, Seneca Falls, NY 13148",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Chippewa Valley Bank",
   "slug": "chippewa-valley-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Hayward, WI. $716M in assets. 13 offices.",
-  "description_long": "Chippewa Valley Bank is a community bank located in Hayward, WI, established in 1917. The bank holds approximately $716M in total assets and $539M in deposits. It operates 13 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Chippewa Valley Bank is a full-service regional bank offering personal and business checking, savings, lending, and digital banking services through online and mobile platforms.",
+  "description_long": "Chippewa Valley Bank operates as a traditional community bank providing comprehensive financial services to both personal and business customers. The institution has established itself as a trusted regional financial provider with a physical branch network and digital banking infrastructure. Based on their website presence, the bank has been operating long enough to have a documented history and community roots, suggesting stability in the regional market. The bank maintains a professional online presence with detailed service offerings and customer support infrastructure. Chippewa Valley Bank offers a broad range of deposit products including checking accounts, savings accounts, money market accounts, HSA accounts, CDs, and IRAs for personal customers, alongside equivalent business deposit products. For lending, they provide personal loans and mortgage loans on the personal side, plus business loans for commercial customers. Digital services include online banking, mobile banking with mobile deposit capability, bill pay, eStatements, Zelle money transfer, phone banking, and wire transfers. Additional conveniences include safe deposit boxes, notary services, money orders, night deposit, and ATM access. What distinguishes Chippewa Valley Bank is their emphasis on integrated digital-first banking combined with traditional relationship banking services. They promote simplified account management through a single phone number (866-282-3501) and offer multiple access channels including mobile apps, online portals, and phone banking. The bank has implemented upcoming alert features for transaction notifications and maintains merchant card services for business customers. However, as a regional bank, their competitive advantage relies on local market presence and personalized service rather than technological innovation or specialty lending products. They do not appear to offer credit cards, which limits their appeal to customers seeking rewards or balance transfer products. The institution positions itself as an accessible, all-in-one banking solution for customers who value both digital convenience and traditional banking relationships in their geographic area. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.chippewavalleybank.com",
   "affiliate_url": "",
@@ -23,23 +23,42 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Money market accounts",
+    "Health Savings Accounts (HSA)",
+    "Certificates of Deposit (CD)",
+    "Individual Retirement Accounts (IRA)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage loans (home purchase and refinance)",
+    "Business checking and savings accounts",
+    "Business loans",
+    "Merchant card services",
+    "Online and mobile banking with mobile deposit",
+    "Bill pay and eStatements",
+    "Zelle money transfer",
+    "Phone banking",
+    "Safe deposit boxes",
+    "Wire transfers",
+    "Money orders",
+    "Notary services",
+    "Night deposit services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1917",
-    "Local community bank with personal service",
-    "13 locations"
+    "Comprehensive deposit products including HSAs and IRAs for personal customers",
+    "Multiple digital banking channels: online banking, mobile banking, mobile deposit, and phone banking",
+    "Zelle integration for fast peer-to-peer money transfers",
+    "Merchant card services available for business customers",
+    "Centralized customer support through one phone number (866-282-3501)",
+    "Bill pay and eStatement options for digital account management",
+    "Physical branch network with ATM locations and safe deposit services"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No credit card products offered, limiting rewards or balance transfer options",
+    "Regional bank with limited geographic reach compared to national institutions",
+    "No indication of specialized lending products or competitive rates for specific borrower profiles",
+    "Limited information about fees, minimums, or rate structures on the website",
+    "No apparent investment or wealth management services mentioned"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +70,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 12322,
   "latitude": 46.0062770014658,
   "longitude": -91.4804640000129,
@@ -87,18 +106,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking integrated business checking, merchant services, and lending in one institution",
+    "Individuals looking for traditional full-service banking with both digital and in-person support options",
+    "Customers in the Chippewa Valley region who prioritize local bank relationships and community reinvestment",
+    "Employees seeking HSA and retirement account options alongside standard deposit accounts"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Chippewa Valley Bank is best for individuals and small business owners in their service region who want an all-in-one banking relationship with both convenient digital tools and traditional in-person support. The main caveat is that as a regional bank without credit card products or specialized lending offerings, they may not be competitive for customers seeking specific financial products like rewards cards, investment management, or non-traditional lending options.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +126,11 @@
   ],
   "phone": "",
   "address": "15755 W County Road B, Hayward, WI 54843",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

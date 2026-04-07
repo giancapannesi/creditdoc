@@ -1,14 +1,14 @@
 {
   "name": "Oxford Bank",
   "slug": "oxford-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Oxford, MI. $1089M in assets. 9 offices.",
-  "description_long": "Oxford Bank is a community bank located in Oxford, MI, established in 1884. The bank holds approximately $1089M in total assets and $965M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Oxford Bank is a Michigan-based FDIC-insured community bank offering personal and business checking, savings, loans, and mortgages with digital banking and local branch access.",
+  "description_long": "Oxford Bank is a community bank with 140 years of history, operating as an FDIC-insured institution backed by the full faith and credit of the U.S. Government. The bank is powered by First Branch and maintains physical branch locations alongside digital banking capabilities. Their mission emphasizes being a local bank that cares about community involvement and customer relationships.\n\nThe bank offers comprehensive personal banking products including Kasasa checking and savings accounts, money market accounts, CDs, and IRAs. For borrowing, they provide personal loans, home mortgages, home equity lines of credit, auto loans, and student loans. Business customers can access multiple checking and savings account tiers, business term loans, business lines of credit, SBA loans, and commercial real estate loans. Additional services include credit cards through Oxford Commercial Finance, bill pay, mobile wallet, debit cards, and merchant card services for business customers.\n\nOxford Bank distinguishes itself through free financial education programs (Kasasa rewards, GreenPath Financial Wellness, financial literacy courses), community engagement (shred days, client appreciation events), and accessibility features on their website. They offer both personal and business wealth management services and provide accessible online banking enrollment. The bank explicitly warns customers about scam attempts and maintains fraud prevention resources.\n\nAs a traditional community bank, Oxford Bank is best suited for customers seeking personalized local banking with FDIC protection and comprehensive lending options. However, the website does not disclose specific APRs, fees beyond a fee schedule reference, interest rates, or loan terms, limiting ability to compare competitiveness. Their digital offerings appear functional but not positioned as fintech-driven alternatives to larger national banks. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.oxfordbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Free Kasasa Cash Checking with cash rewards",
+    "Free Kasasa Saver with automated savings features",
+    "Personal savings accounts, money market accounts, and CDs",
+    "Individual Retirement Accounts (IRAs)",
+    "Personal loans, auto loans, and student loans",
+    "Home mortgage loans and home equity lines of credit (HELOC)",
+    "Business checking and savings accounts with multiple tiers",
+    "SBA loans, business term loans, and business lines of credit",
+    "Commercial real estate loans",
+    "Mobile banking and online bill pay (iPay)",
+    "Merchant card services and treasury management",
+    "Credit cards through Oxford Commercial Finance"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1884",
-    "Local community bank with personal service",
-    "9 locations"
+    "FDIC-insured deposits with full government backing",
+    "Kasasa rewards checking that pays cash back with no monthly fees",
+    "Free financial education and wellness programs including GreenPath counseling",
+    "Comprehensive product range: checking, savings, CDs, mortgages, personal loans, business loans, and SBA lending",
+    "Mobile banking and digital access including online account opening",
+    "Community-focused services like free document shredding events",
+    "140-year operating history suggesting stability and local market knowledge"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not disclose specific interest rates, APRs, or loan terms for comparison",
+    "No pricing transparency on fees beyond a referenced fee schedule not shown in content",
+    "Limited information about minimum balances or account requirements",
+    "Digital banking positioned as supplement to branches rather than primary offering, suggesting weaker fintech capabilities than online-first banks",
+    "No mention of customer service hours or response times for support"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9719,
   "latitude": 42.8233439860974,
   "longitude": -83.2633010126945,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Michigan residents seeking FDIC-insured personal and business banking with local branch access",
+    "Small business owners needing relationship-based lending and SBA loan options",
+    "Customers prioritizing community bank values and personalized service over digital-only platforms",
+    "Families looking for free financial education and wealth management alongside deposit products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Oxford Bank is best for Michigan customers and small business owners seeking FDIC-insured banking with local branch relationships, community engagement, and comprehensive lending options. The main caveat is lack of rate and fee transparency on the website\u2014prospective customers must contact the bank directly to compare competitiveness against other banks and online alternatives.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "60 S Washington St, Oxford, MI 48371",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

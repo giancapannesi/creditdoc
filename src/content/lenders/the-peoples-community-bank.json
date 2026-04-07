@@ -1,14 +1,14 @@
 {
   "name": "The Peoples Community Bank",
   "slug": "the-peoples-community-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Mazomanie, WI. $394M in assets. 6 offices.",
-  "description_long": "The Peoples Community Bank is a community bank located in Mazomanie, WI, established in 1891. The bank holds approximately $394M in total assets and $345M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Independent community bank operating since 1891, offering personal and business banking, mortgages, and lending services with FDIC insurance and local decision-making.",
+  "description_long": "The Peoples Community Bank is an independent, community-focused financial institution that has served its customers since 1891. The bank emphasizes its commitment to remaining independent and locally owned, with a mission centered on knowing customers personally and providing sound financial advice rooted in community relationships. The bank operates with the philosophy of \"Simply Good Banking,\" prioritizing warm customer service and personal attention over purely transactional efficiency.\n\nThe bank offers a comprehensive range of personal and business banking services including deposit accounts, personal loans, mortgages across multiple term lengths (10, 15, 20, and 30-year fixed rates), and specialized products like College Saver CDs. For businesses, they provide Positive Pay fraud protection, check verification services, and support for small businesses and agricultural operations. Online and mobile banking capabilities are available, with recent system migrations to newer platforms. Additional tools include ATM locators, deposit rate information, password reset functions, and e-alert services.\n\nWhat distinguishes The Peoples Community Bank is its explicit commitment to independence and community embeddedness. The bank actively promotes its local hiring and decision-making, has been recognized as a Top Workplace by the Wisconsin State Journal for three consecutive years, and emphasizes that staff live and raise families in the communities they serve. The organization prioritizes agricultural and small business support and maintains transparent communication through newsletters, blogs, and community engagement initiatives.\n\nAs a mid-sized community bank, The Peoples Community Bank serves customers seeking personalized service and local decision-making, though their service area appears geographically limited to specific regions where they maintain physical branches. Customers should verify that their location falls within the bank's service territory before applying. Mortgage rates displayed suggest competitive but market-standard pricing as of the website snapshot. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.thepcb.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Checking and savings accounts (deposit accounts)",
+    "Certificates of Deposit (CDs) including College Saver CD",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage lending (10, 15, 20, and 30-year fixed-rate options)",
+    "Business checking and payment services",
+    "Positive Pay fraud protection and check verification",
+    "Online and mobile banking platform",
+    "ATM network access with locator tool",
+    "E-alerts and account monitoring services",
+    "Tax refund protection education and identity theft prevention resources",
+    "QuickBooks and Quicken software integration",
+    "Current deposit rates information tool"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1891",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits with full faith and credit backing of the U.S. Government",
+    "Independent community bank with 135+ year history (since 1891) and commitment to staying locally owned",
+    "Recognized as Top Workplace for 3 consecutive years by Wisconsin State Journal",
+    "Offers multiple mortgage term options (10, 15, 20, 30-year fixed rates) with current rates displayed",
+    "Personal relationships and local decision-making emphasized rather than corporate bureaucracy",
+    "Active support for small businesses and agricultural operations",
+    "Positive Pay fraud protection service for business accounts with transaction verification and alerts"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Service area appears geographically limited to specific regions with physical branch presence",
+    "Limited information on deposit APYs and rates visible on main website; requires navigation to rate tool",
+    "No mention of investment services, wealth management, or advisory services beyond basic lending",
+    "Website content suggests primarily Wisconsin-focused operations, limiting accessibility for out-of-state customers",
+    "Personal loan and deposit account details sparse; specifics must be obtained through direct contact"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15046,
   "latitude": 43.172160993876,
   "longitude": -89.7980970096766,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and agricultural operations seeking relationship-based banking in Wisconsin region",
+    "Customers prioritizing personal service and local decision-making over online-only banking platforms",
+    "Homebuyers seeking fixed-rate mortgages with local loan officers and community-based lending",
+    "Customers within the bank's geographic service area seeking FDIC-insured savings and checking accounts"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Peoples Community Bank is best for individuals and small businesses within its service area who value personalized relationships, local decision-making, and community banking over large national institutions. The main caveat is geographic limitation\u2014customers must verify their location falls within the bank's branch and service territory, as the bank is not a nationwide online bank and appears to operate primarily in Wisconsin.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "222 W Commercial St, Mazomanie, WI 53560",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

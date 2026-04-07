@@ -1,14 +1,14 @@
 {
   "name": "First Option Bank",
   "slug": "first-option-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Osawatomie, KS. $816M in assets. 10 offices.",
-  "description_long": "First Option Bank is a community bank located in Osawatomie, KS, established in 1923. The bank holds approximately $816M in total assets and $735M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank established in 1923 offering checking, savings, home loans, credit cards, and investment services with FDIC insurance protection.",
+  "description_long": "First Option Bank is a community-focused financial institution that has served customers since 1923, positioning itself as a trusted local banking partner dedicated to understanding and serving the specific needs of the communities it operates in. The bank provides a comprehensive suite of traditional banking services including deposit accounts (checking and savings), mortgage loans, personal loans, credit cards, and online banking through their Pony Express platform. Their service offerings extend to business banking solutions, home equity loans, and a unique School Logo Debit Card program that donates to local schools. On the investment side, they offer retirement planning services, custodial accounts (UGMA/UTMA), employer-sponsored retirement plans, Coverdell Education Savings Accounts, and agency and custody agreements with personalized investment consultation. What distinguishes First Option Bank is their emphasis on community banking and local relationships\u2014they highlight their $2.5 million in donations to local schools through their debit card program and offer personalized one-on-one service from investment professionals. They provide online banking conveniences while maintaining physical branch locations, and actively promote security awareness by warning customers that legitimate bank representatives will never request passwords or security codes. However, as a traditional community bank, First Option Bank likely lacks the fintech features or aggressive promotional rates that newer financial institutions offer, and their investment products carry standard disclaimers that they are not FDIC-insured. Geographic availability is likely limited to their service areas, and the website does not disclose specific rates, fees, or account minimums that would be critical for consumer comparison. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.firstoptionbank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "FDIC-insured checking and savings accounts",
+    "Home loans and mortgage refinancing",
+    "Home equity loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business deposit accounts and lending solutions",
+    "Credit cards with fraud protection",
+    "School Logo Debit Card with school donation program",
+    "Online banking (Pony Express) with bill pay and e-statements",
+    "Retirement planning and investment portfolio management",
+    "Employer-sponsored retirement plans",
+    "Coverdell Education Savings Accounts",
+    "UGMA and UTMA custodial accounts",
+    "Agency and custody account management"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1923",
-    "Local community bank with personal service",
-    "10 locations"
+    "FDIC-insured deposits backed by full faith and credit of the U.S. Government",
+    "Long-established institution since 1923 with demonstrated community commitment",
+    "School Logo Debit Card program has donated over $2.5 million to local schools",
+    "Comprehensive banking services from deposits to home equity loans under one institution",
+    "Free one-on-one investment consultation with professionals to create personalized portfolio strategy",
+    "Multiple retirement savings options including employer-sponsored plans and Coverdell Education Savings Accounts",
+    "Online banking platform (Pony Express) with bill pay, balance checking, and e-statement enrollment"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Investment and insurance products explicitly not FDIC-insured or backed by government guarantee",
+    "Website lacks transparency on specific interest rates, APYs, fees, and account minimums for comparison",
+    "Geographic availability likely limited to specific service areas with no indication of expansion",
+    "No mention of competitive promotional rates or incentives for new customers",
+    "Limited information about business loan products or small business support beyond general mention"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4746,
   "latitude": 38.4985549880651,
   "longitude": -94.9511500145081,
@@ -87,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Community-oriented consumers seeking local banking relationships and personal service",
+    "Parents who want a school-supporting debit card that gives back to education",
+    "Individuals planning retirement who prefer one-on-one financial guidance from bank professionals",
+    "Small business owners in their service areas looking for traditional business banking solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Option Bank is best for individuals and small businesses in their service areas who value community banking, personalized service, and school-supporting features over aggressive digital innovation or rate shopping. The main caveat is that specific rates, fees, and account minimums are not disclosed on their website, making it difficult to compare competitiveness with other institutions without direct contact.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "601 Main St, Osawatomie, KS 66064",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Bank Of Perry County",
   "slug": "bank-of-perry-county",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "consumer-lending"
   ],
-  "description_short": "FDIC-insured community bank in Lobelville, TN. $243M in assets. 3 offices.",
-  "description_long": "Bank Of Perry County is a community bank located in Lobelville, TN, established in 1905. The bank holds approximately $243M in total assets and $214M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bank of Perry County is an FDIC-insured regional bank offering checking, savings, and loan products with multiple service tiers and fee structures.",
+  "description_long": "Bank of Perry County is a traditional community bank that operates multiple branches and maintains FDIC insurance protection for customer deposits. The institution provides core banking services including various checking and savings account options, personal loans, and mortgage products. Their service model emphasizes account tiering with different minimum balance requirements and monthly fees based on account type, allowing customers to select products matching their banking activity levels. The bank distinguishes itself through tiered account options (Regular, VIP Club, NOW accounts) with varying fee structures, competitive transaction limits on lower-tier accounts, and optional club memberships providing perks like free checks and limited insurance products. A notable feature is their 24/7 account information access via phone and dedicated fraud reporting line. However, the bank's fee structure is relatively complex, with maintenance charges triggered by falling below minimum daily balances, per-debit fees on savings accounts after six monthly transactions, and additional charges on checking accounts exceeding 50 debits monthly. The \"accidental death insurance\" offered with premium accounts is explicitly not FDIC-insured and not guaranteed by the bank, representing a secondary insurance product rather than core banking protection. This structure may appeal to customers seeking basic banking services but could burden those with unpredictable spending patterns or lower account balances. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://thebankonthego.com",
   "affiliate_url": "",
@@ -24,23 +24,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Regular Savings Account with quarterly interest compounding",
+    "VIP NOW checking account with interest, unlimited transactions, and accidental death insurance",
+    "Regular Checking Account with per-debit fees and maintenance charge structure",
+    "VIP Club checking account with $9/month fee and unlimited transactions",
+    "NOW (Negotiable Order of Withdrawal) checking account with monthly interest and $1,000 minimum balance",
+    "Personal loans with variable terms and rates",
+    "Mortgage products including home purchase and refinance options",
+    "Online banking enrollment and account management",
+    "24/7 account information access via automated phone system",
+    "Debit card fraud reporting services",
+    "Cashier's check services (free with VIP accounts)",
+    "Newsletter signup and customer communication services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Multiple account tiers (Regular, VIP Club, NOW accounts) to match different banking needs",
+    "24/7 account information access via toll-free phone line (1-877-699-7779)",
+    "Dedicated fraud reporting line for debit card issues (1-800-554-8969)",
+    "Online banking with PIN-based security using Social Security Number last four digits",
+    "VIP Club and Club accounts offer unlimited transactions and free cashier's checks",
+    "Interest compounds and credits monthly or quarterly depending on account type",
+    "All branches open on Good Friday per their announced holiday schedule"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Complex fee structure with $2.00 per debit charge on savings accounts after 6 monthly transactions",
+    "$7.00 monthly maintenance fee on Regular Checking if daily balance falls below $600",
+    "$0.25 per debit fee on Regular Checking for transactions beyond 50 per month, and $6.00-$9.00 monthly club fees",
+    "High minimum balance requirements ($250-$1,000) required to open accounts and avoid fees",
+    "\"Accidental death insurance\" explicitly not FDIC-insured and not guaranteed by the bank, carrying investment risk"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +64,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1713,
   "latitude": 35.7716200108508,
   "longitude": -87.7832309844826,
@@ -88,18 +100,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers with stable employment and consistent minimum daily balances above $600-$1,000",
+    "Individuals seeking FDIC protection with moderate transaction activity (under 50-56 monthly debits)",
+    "Borrowers interested in mortgage or personal loan products from a community bank",
+    "Users prioritizing 24/7 phone access and online banking with traditional security methods"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Perry County is best for traditional banking customers with steady income, moderate transaction volume, and the ability to maintain minimum daily balances to avoid fees. The primary caveat is that fee avoidance requires discipline: those with irregular spending patterns, frequent transactions, or lower account balances may face significant cumulative charges that offset any interest earnings.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +120,10 @@
   ],
   "phone": "",
   "address": "33 S Main St, Lobelville, TN 37097",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Security National Bank Of South Dakota",
   "slug": "security-national-bank-of-south-dakota",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Dakota Dunes, SD. $238M in assets. 3 offices.",
-  "description_long": "Security National Bank Of South Dakota is a community bank located in Dakota Dunes, SD, established in 1997. The bank holds approximately $238M in total assets and $184M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Security National Bank of South Dakota is a local community bank serving the Sioux Falls and Dakota Dunes areas with retail banking products including checking, savings, mortgages, and home equity loans.",
+  "description_long": "Security National Bank of South Dakota operates as a regional community bank with a focus on personalized service in South Dakota. The bank maintains multiple branch locations in the Sioux Falls and Dakota Dunes areas, emphasizing local accessibility and relationship-based banking.\n\nThe bank offers a comprehensive suite of retail banking services including deposit accounts (checking and savings), mortgage lending with calculators and specialized loan officers, home equity loans, credit products accessible via mobile app with live credit score access, and fraud prevention services. They provide both lobby and drive-up banking hours at their locations, with extended drive-up hours available.\n\nSecurity National Bank distinguishes itself through emphasis on personalized customer service, positioning itself against larger national banks like Wells Fargo. Customer testimonials highlight the availability of live customer service representatives without phone menu systems, convenient hours, friendly staff, and responsive problem-solving. The bank also offers a free Financial Learning Center for customer education on money management topics.\n\nAs a traditional community bank, Security National Bank is best suited for customers in their service area seeking personalized banking relationships rather than digital-first services. The bank's website shows technical limitations (outdated browser warnings) which may indicate slower digital infrastructure development compared to modern fintech alternatives. Their service footprint appears limited to South Dakota locations, restricting accessibility for customers outside this region. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.snbsd.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings deposit accounts",
+    "Mortgage lending and home purchase financing",
+    "Home equity loans",
+    "Credit products with mobile app access",
+    "Live credit score monitoring through mobile app",
+    "Mortgage calculator tool",
+    "Financial Learning Center (free educational resources)",
+    "Fraud prevention services",
+    "Drive-up and lobby banking at branch locations",
+    "Lost/stolen card reporting (24/7 hotline)",
+    "Online account inquiry and appointment scheduling",
+    "Branch-based mortgage, account opening, and customer service appointments"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1997",
-    "Local community bank with personal service",
-    "3 locations"
+    "Live customer service representatives available without phone menu navigation",
+    "Multiple convenient branch locations in Sioux Falls and Dakota Dunes with extended drive-up hours",
+    "Free Financial Learning Center providing interactive money management education",
+    "Mortgage calculator and specialized mortgage lending with dedicated loan officers",
+    "Live credit score access through SNB SD mobile app for account holders",
+    "Home equity loans available for home-based borrowing needs",
+    "24/7 lost/stolen card reporting hotline (1-800-236-2442)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area restricted to South Dakota locations only",
+    "Website shows significant technical limitations with outdated browser warnings and poor web standards compliance",
+    "No mention of digital banking capabilities, online account opening, or modern fintech features",
+    "Limited branch network compared to regional or national banks",
+    "Mortgage phone line has South Dakota area code (712-277-6785) limiting toll-free accessibility"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "SD"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34394,
   "latitude": 42.5023929926112,
   "longitude": -96.4954709990395,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "South Dakota residents in Sioux Falls or Dakota Dunes seeking personalized banking relationships",
+    "Homebuyers in their service area needing mortgage lending with direct access to loan officers",
+    "Customers switching from large national banks preferring community bank service model",
+    "Individuals valuing live customer service and personal relationships over digital-only banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Security National Bank is best for South Dakota residents in the Sioux Falls or Dakota Dunes areas who prioritize personalized customer service and local banking relationships over digital convenience. The primary caveat is that the bank's service area is geographically limited to South Dakota, and their website suggests limited digital banking infrastructure, making them unsuitable for customers seeking modern online-first banking experiences or those located outside their service territory.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "325 Dakota Dunes Blvd, Dakota Dunes, SD 57049",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

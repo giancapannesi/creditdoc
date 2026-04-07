@@ -1,14 +1,14 @@
 {
   "name": "Concordia Bank Of Concordia, Missouri",
   "slug": "concordia-bank-of-concordia-missouri",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Concordia, MO. $128M in assets. 4 offices.",
-  "description_long": "Concordia Bank Of Concordia, Missouri is a community bank located in Concordia, MO, established in 1932. The bank holds approximately $128M in total assets and $113M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank in Missouri offering checking accounts, savings products, mobile banking, and refinancing services with emphasis on personalized customer service.",
+  "description_long": "Concordia Bank is a traditional community bank headquartered in Concordia, Missouri, with additional branches in Odessa and Laurie. The bank operates multiple physical locations with drive-through facilities and maintains standard banking hours Monday through Friday, with limited Saturday service at select branches. Founded on the principle of combining modern banking technology with old-fashioned customer service, Concordia Bank serves the central Missouri region through in-person and digital banking channels.\n\nThe bank's primary offerings include Kasasa\u00ae checking accounts (including a cash-back checking product earning 2% cash back up to $6 monthly), mobile deposit functionality, ATM fee refunds (up to $20 per monthly cycle), and mortgage refinancing services. Customers can access online banking, mobile apps for check deposits, and debit card services. The bank advertises competitive rates for refinancing and promotes its Kasasa\u00ae product line as a primary checking account option with rewards structures tied to debit card usage and direct deposits.\n\nConcordia Bank distinguishes itself through multi-branch accessibility across Missouri, Saturday banking hours at some locations, and specific Kasasa\u00ae account qualifications (requiring 10 debit card transactions and one direct deposit per cycle with a $100 minimum opening balance). The bank emphasizes cybersecurity with \"STOP. THINK. CONNECT\u2122\" messaging and maintains a privacy policy complying with federal consumer protection standards. The routing number is 101917843.\n\nAs a community bank, Concordia Bank offers limited product diversity compared to large national banks\u2014the website does not advertise business loans, investment services, credit cards, or comprehensive lending products beyond mortgages. The bank explicitly states it has no affiliates and does not engage in affiliate marketing or non-affiliate marketing sharing. Customers seeking extensive financial services beyond basic checking, savings, and mortgage refinancing would need to supplement with other providers. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.concordia-bank.com",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Kasasa\u00ae Cash Back checking (2% cash back up to $6/month)",
+    "Kasasa\u00ae checking with ATM fee refunds",
+    "Mobile banking app with mobile deposit functionality",
+    "Online banking platform",
+    "Debit card services",
+    "ATM fee refunds (up to $20 per monthly cycle)",
+    "Mortgage refinancing and consultation services",
+    "Direct deposit and bill pay services",
+    "Drive-through banking facilities",
+    "In-person teller services at 4 branch locations"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1932",
-    "Local community bank with personal service",
-    "4 locations"
+    "Kasasa\u00ae Cash Back checking earns 2% cash back (up to $6/month) with straightforward qualification requirements",
+    "ATM fee refunds up to $20 per monthly cycle nationwide",
+    "Mobile deposit capability available through Concordia Bank mobile app",
+    "Multiple branch locations in Missouri (Concordia, Odessa, Laurie) with drive-through facilities",
+    "Saturday banking hours available at Odessa and Laurie branches (9am-12pm)",
+    "No minimum balance requirement after account opening for Kasasa\u00ae Cash Back",
+    "Strong privacy protection stance with explicit statement against affiliate and non-affiliate marketing sharing"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to 4 physical branch locations across Missouri\u2014not suitable for customers needing broader geographic access",
+    "No advertised credit card products, business banking, or investment services",
+    "Kasasa\u00ae qualification requirements (10 debit transactions + 1 direct deposit monthly) may be difficult for some consumers to meet consistently",
+    "Limited Saturday hours (9am-12pm only) and no Sunday banking at any location",
+    "Website does not detail savings account rates, CD rates, or comprehensive loan product offerings"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 13788,
   "latitude": 38.983223996583,
   "longitude": -93.5679339866936,
@@ -87,18 +96,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Central Missouri residents in Concordia, Odessa, or Laurie seeking community banking with personal relationships",
+    "Customers who make frequent debit purchases and have regular direct deposits (to maximize Kasasa\u00ae benefits)",
+    "Homeowners considering mortgage refinancing in Missouri with preference for local lender consultation"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Concordia Bank is best for customers in central Missouri seeking community-based banking with modern digital tools and personalized service. Primary caveat: this is a small regional bank with only 4 locations, making it suitable only for those in its service areas; customers needing comprehensive financial services (business loans, investments, credit cards) or those in other states should look elsewhere.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +115,11 @@
   ],
   "phone": "",
   "address": "547 S Main St, Concordia, MO 64020",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

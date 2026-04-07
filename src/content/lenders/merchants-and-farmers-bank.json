@@ -1,14 +1,14 @@
 {
   "name": "Merchants And Farmers Bank",
   "slug": "merchants-and-farmers-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Dumas, AR. $271M in assets. 3 offices.",
-  "description_long": "Merchants And Farmers Bank is a community bank located in Dumas, AR, established in 1909. The bank holds approximately $271M in total assets and $231M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering checking, savings, personal loans, credit cards, and digital banking services with mobile app and online account management.",
+  "description_long": "Merchants & Farmers Bank is a traditional community bank operating under FDIC insurance protection. The bank emphasizes personalized service combined with modern digital banking capabilities to serve both personal and business customers. Based on their website presence at mfbanknet.com, they position themselves as a locally-focused financial institution with a primary service area appearing to center on Arkansas (indicated by their 870 area code phone number).\n\nThe bank offers a comprehensive suite of retail banking products including checking and savings accounts, personal loans for various purposes (medical bills, home renovation, vacations, emergencies), credit cards with rewards programs (uChoose Rewards), equipment loans, and business checking accounts. Their digital service offerings include mobile banking, mobile deposit capabilities, online bill pay, eStatements, digital wallet integration, and personal online banking platforms with separate access for business customers. Account holders can manage finances across computers, tablets, and mobile phones.\n\nMerchandise & Farmers Bank differentiates itself through emphasizing personal service alongside technology, offering an account finder tool to help customers select appropriate products, and maintaining dual online banking portals for personal and business needs. Their marketing emphasizes solving \"everyday banking challenges\" and positions banking as something that \"doesn't have to be complicated.\" The bank actively promotes mobile security awareness and provides multilingual (Spanish) interface options.\n\nAs a traditional community bank, Merchants & Farmers Bank is best suited for customers seeking FDIC-insured deposit accounts and basic lending products from an established institution. However, the website provides limited information about specific product features, fee structures, interest rates, or loan terms. Potential customers should contact the bank directly at (870) 382-4311 for detailed product specifications and pricing information before opening accounts or applying for credit. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.mfbanknet.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Personal online banking platform",
+    "Business checking accounts",
+    "Business online banking platform",
+    "Mobile banking app with mobile deposit",
+    "Personal loans (unsecured, multiple purposes)",
+    "Equipment loans",
+    "Credit cards with uChoose Rewards program",
+    "Digital wallet integration",
+    "Online bill pay",
+    "eStatements"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1909",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Mobile app with mobile deposit and mobile banking available on iOS and Android",
+    "eStatements offered at no charge for all checking and savings accounts",
+    "Digital wallet integration compatible with preferred mobile wallet services",
+    "Separate business online banking platform with dedicated login system",
+    "Personal loans available for multiple purposes without stated restrictions",
+    "Account finder tool to help customers identify appropriate checking accounts",
+    "Multilingual interface available (Spanish language support)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no fee schedule, APR rates, or specific product terms",
+    "Limited geographic footprint suggested by single local phone number",
+    "No information about minimum balance requirements or account limitations",
+    "Business loan products not detailed on consumer-facing website",
+    "Website lacks comparison tools or detailed product feature matrices"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "AR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8735,
   "latitude": 33.88213450722,
   "longitude": -91.483307479086,
@@ -87,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Individuals seeking FDIC-insured checking and savings accounts in their service area",
+    "Customers needing personal loans for specific purposes (medical, home renovation, emergencies)",
+    "Small business owners requiring business checking and account management",
+    "Mobile-first banking customers who want deposit and payment capabilities from phones"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Merchants & Farmers Bank is best for customers in their service area seeking traditional FDIC-insured banking with modern digital capabilities. The main caveat is that the website lacks detailed product specifications, fee information, and rate schedules, requiring direct contact with the bank for concrete pricing and terms before account opening or loan applications.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "500 Highway 65 S, Dumas, AR 71639",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

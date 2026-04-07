@@ -1,14 +1,14 @@
 {
   "name": "Crossroads Bank",
   "slug": "crossroads-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Yoakum, TX. $381M in assets. 4 offices.",
-  "description_long": "Crossroads Bank is a community bank located in Yoakum, TX, established in 1931. The bank holds approximately $381M in total assets and $348M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank serving South Texas with locations in Yoakum, Victoria, and Hallettsville. Offers online banking, loan services, and debit card management.",
+  "description_long": "Crossroads Bank is a local community bank operating in South Texas with physical branches in Yoakum, Victoria, and Hallettsville. The bank positions itself as an FDIC-insured institution backed by the full faith and credit of the U.S. Government, providing traditional banking services to its regional market.\n\nThe bank offers core banking services including online banking access, loan payment processing, debit and ATM cards, and digital account management through their mobile app. Customers can enroll in online banking, make loan payments via ACH or credit/debit card, set up debit card alerts, and monitor account activity remotely. The bank also provides a referral program offering free gifts for customer recommendations.\n\nCrossroads Bank distinguishes itself as a community-focused institution serving a specific regional area rather than operating as a national chain. Their online loan payment center accepts multiple payment methods (ACH bank drafts, Visa, MasterCard, and Discover) and provides convenient payment options for existing loan customers. The bank maintains traditional operating hours, including closures for religious observances.\n\nAs a regional community bank, Crossroads Bank serves customers seeking local banking relationships in South Texas. However, the website content is limited and does not provide comprehensive information about deposit products (checking/savings account types), interest rates, loan products beyond payment processing, minimum balance requirements, or fee structures beyond the 2.50% debit/credit card payment processing fee.",
   "logo_url": "",
   "website_url": "https://www.crbanktx.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured deposit accounts",
+    "Online banking platform with login and enrollment",
+    "Online loan payment center",
+    "ACH bank draft loan payments",
+    "Credit and debit card loan payments (Visa, MasterCard, Discover)",
+    "Debit and ATM cards",
+    "Lost/stolen card replacement services",
+    "Mobile app with debit card alerts",
+    "Transaction monitoring and tracking",
+    "Customer referral program",
+    "Physical branch banking at three locations",
+    "Standard banking hours with holiday closures"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1931",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC insurance protection on deposits backed by U.S. Government",
+    "Multiple convenient payment methods for loans (ACH free, credit/debit card accepted)",
+    "Online banking and mobile app with debit card alerts and transaction monitoring",
+    "Three physical branch locations for in-person banking in South Texas communities",
+    "ACH loan payments processed free of charge (no transaction fee)",
+    "Tell-A-Friend referral program with free gift incentives",
+    "Lost/stolen debit card assistance and replacement services"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "2.50% fee charged on all debit and credit card loan payments (significant for large payments)",
+    "Limited geographic service area restricted to South Texas region only",
+    "Website provides minimal information about deposit account types, rates, or loan products",
+    "No apparent online account opening or digital-first banking experience described",
+    "Limited information about business banking or investment services"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10709,
   "latitude": 29.2898190157906,
   "longitude": -97.1532810000485,
@@ -93,12 +104,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "South Texas residents in Yoakum, Victoria, or Hallettsville seeking local banking relationships",
+    "Existing Crossroads Bank loan customers needing convenient online payment options",
+    "Community-minded depositors preferring FDIC-insured regional banks over national chains"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Crossroads Bank is best for South Texas residents who value community banking and prefer conducting business with a local institution they can visit in person. The main caveat is that this is a regional bank with limited geographic availability and the website lacks detailed information about deposit products, rates, minimum balances, and the full loan product range available.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "406 W Grand Ave, Yoakum, TX 77995",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

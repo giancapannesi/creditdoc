@@ -1,14 +1,14 @@
 {
   "name": "Medallion Bank",
   "slug": "medallion-bank",
-  "category": "personal-loans",
+  "category": "business-loans",
   "subcategories": [
     "community-bank",
     "minority-depository",
     "consumer-lending"
   ],
-  "description_short": "FDIC-insured community bank in Salt Lake City, UT. $2621M in assets. 1 office.",
-  "description_long": "Medallion Bank is a community bank located in Salt Lake City, UT, established in 2003. The bank holds approximately $2621M in total assets and $2090M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Medallion Bank provides point-of-sale consumer financing for RV/boat dealers and home improvement contractors, plus banking-as-a-service partnerships for lenders.",
+  "description_long": "Medallion Bank specializes in indirect consumer lending through B2B partnerships rather than direct-to-consumer loans. The company functions as a financing facilitator, providing point-of-sale lending solutions to dealers and contractors who want to offer their customers financing options at the moment of purchase. Their business model centers on partnering with recreation vehicle dealers, boat dealers, home improvement contractors, and strategic partners building lending platforms.\n\nMedallion Bank's core services include financing programs for RV and boat purchases through recreation dealers, home improvement project financing for contractors, and banking-as-a-service (BaaS) solutions for strategic partners seeking lending program support and regulatory compliance assistance. For borrowers, they offer online account management through two platforms depending on loan origination date (my.medallionbank.com for post-November 2024 loans, Accountinfo.com for earlier loans). They explicitly market themselves as serving customers with credit challenges, positioning inclusive lending as a competitive advantage for their dealer partners.\n\nThe company distinguishes itself through dedicated, specialized support for each market segment\u2014separate phone lines, account management systems, and even different holiday schedules between recreation and home improvement departments reflect their segmented approach. They emphasize modern technology paired with traditional customer service, and operate extended borrower services hours (Monday-Friday 8am-11pm MT, Saturday 9am-1pm MT) compared to standard business hours. Their advocacy work on Capitol Hill suggests engagement with regulatory and policy issues affecting their lending model.\n\nMedallion Bank is fundamentally a B2B lending enabler, not a direct consumer lender. This positioning means consumers cannot apply directly but must go through their dealer or contractor network. Their profitability depends on volume through partners, and their success requires robust dealer relationships. While their inclusive lending approach is genuinely consumer-friendly, prospective borrowers have no direct control over whether financing will be available\u2014it depends entirely on whether their chosen dealer or contractor partners with Medallion.",
   "logo_url": "",
   "website_url": "https://www.medallionbank.com",
   "affiliate_url": "",
@@ -23,23 +23,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Point-of-sale RV and boat financing through recreation vehicle dealer partnerships",
+    "Home improvement project financing through contractor partnerships",
+    "Banking-as-a-service (BaaS) lending program support and regulatory compliance infrastructure",
+    "Online loan account management and payment processing (my.medallionbank.com for post-November 2024 loans)",
+    "Legacy loan account management (Accountinfo.com for loans funded before November 2024)",
+    "Borrower customer service and loan support (8am-11pm MT weekdays, 9am-1pm MT Saturdays)",
+    "Dealer and contractor business development and financing solutions consultation",
+    "Inclusive lending programs targeting customers with credit challenges or limited credit history",
+    "Technology platform partnerships for embedded lending in third-party financing platforms",
+    "Dedicated support lines for recreation dealers (866-688-6983) and home improvement contractors (888-833-8570)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2003",
-    "Local community bank with personal service",
-    "1 location"
+    "Extended customer service hours for borrowers (8am-11pm MT weekdays, 9am-1pm MT Saturdays) beyond typical business hours",
+    "Explicitly designed to serve customers with credit challenges through partner dealers, expanding access for subprime borrowers",
+    "Dual online account management platforms with transition support for borrowers with loans from different time periods",
+    "Specialized support teams for distinct markets (recreation, home improvement) with dedicated phone lines and expertise",
+    "Banking-as-a-service partnerships enable regulatory compliance support for lenders building their own platforms",
+    "Point-of-sale financing eliminates need for consumers to apply separately\u2014integrated into dealer/contractor purchase process",
+    "Transparent holiday schedule and operational hours published clearly for all customer types"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No direct consumer application process\u2014financing only available through partner dealers and contractors, limiting borrower choice",
+    "Consumers cannot shop rates or terms independently; available only if their specific dealer/contractor uses Medallion",
+    "Website provides minimal information about loan terms, rates, eligibility requirements, or APR ranges for consumers",
+    "Account management system migration (pre/post-November 2024 split) creates potential confusion for some borrowers",
+    "No transparent disclosure of whether subprime lending comes with significantly higher rates or fees"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +60,7 @@
   "states_served": [
     "UT"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57449,
   "latitude": 40.6312468511198,
   "longitude": -111.861202470894,
@@ -84,21 +93,22 @@
       "FDIC Cert #57449"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "RV and boat buyers purchasing from dealers partnered with Medallion Bank who have limited credit options elsewhere",
+    "Home improvement contractors seeking to offer financing as a value-added service to their customers",
+    "Recreation dealers wanting to expand their addressable market by offering credit-inclusive purchasing options",
+    "Financial technology companies and strategic partners building lending platforms requiring banking-as-a-service infrastructure"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Medallion Bank is best for consumers purchasing RVs, boats, or home improvements through dealers or contractors already partnered with the company\u2014particularly those with limited credit options. The primary caveat is that financing availability depends entirely on whether your specific dealer or contractor uses Medallion; you cannot apply directly or shop rates independently as an individual consumer.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +116,11 @@
   ],
   "phone": "",
   "address": "1100 E 6600 S, Salt Lake City, UT 84121",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

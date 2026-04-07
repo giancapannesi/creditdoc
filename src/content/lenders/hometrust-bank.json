@@ -1,13 +1,13 @@
 {
   "name": "Hometrust Bank",
   "slug": "hometrust-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Asheville, NC. $4544M in assets. 33 offices.",
-  "description_long": "Hometrust Bank is a community bank located in Asheville, NC, established in 1926. The bank holds approximately $4544M in total assets and $3718M in deposits. It operates 33 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "HomeTrust Bank is a community-focused bank offering personal and business banking, mortgages, and investment services through relationships with third-party providers.",
+  "description_long": "HomeTrust Bank operates as a traditional community bank serving customers across multiple states including Georgia, North Carolina, South Carolina, Tennessee, and Virginia. The bank is part of HomeTrust Bancshares, Inc., a publicly traded holding company that reports quarterly financial results. The institution maintains a physical branch network and offers digital banking capabilities including online and mobile banking platforms.\n\nHomeTrust Bank provides a comprehensive range of banking products and services. For personal customers, they offer checking and savings accounts, debit cards with mobile wallet integration, mortgages (for purchase, refinancing, and construction), and financial planning resources. The business division serves small and mid-sized companies with commercial banking, business accounts, and tailored lending solutions. Investment services are delivered through a relationship with Osaic Institutions, Inc., providing customers access to IRAs, mutual funds, stocks, bonds, annuities, REITs, 529 plans, and insurance products. The bank also offers financial consulting and investment advisory services through dedicated representatives.\n\nHomeTrust Bank differentiates itself through local banking expertise and personalized service. Their commercial banking division emphasizes relationships with \"seasoned local bankers\" who understand regional business needs. The bank promotes accessibility features including AudioEye-enabled website optimization and mobile contactless payment options. They maintain dedicated investment services representatives across their geographic footprint and offer complimentary financial planning consultations.\n\nAs a traditional regional bank, HomeTrust Bank is best suited for customers seeking established banking infrastructure, branch access, and relationship-based service rather than fintech-driven solutions. The reliance on third-party providers (Osaic Institutions) for investment services means investment offerings are not proprietary. The website emphasizes business and mortgage lending, suggesting these are primary growth areas, while detailed information about deposit rates, account fees, and specific loan terms is not provided in available content. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.htb.com",
   "affiliate_url": "",
@@ -22,23 +22,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business and commercial bank accounts",
+    "Online and mobile banking platforms",
+    "Mortgage origination and refinancing",
+    "Construction loans",
+    "Commercial lending and business lines of credit",
+    "Investment advisory and financial planning services",
+    "IRA accounts and retirement planning",
+    "Mutual funds, stocks, bonds, and annuities",
+    "REIT investments",
+    "529 college savings plans",
+    "Insurance services through investment division",
+    "Debit cards with mobile wallet support",
+    "Financial consulting with dedicated representatives"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1926",
-    "Local community bank with personal service",
-    "33 locations"
+    "Multi-state branch network across Southeast with physical locations for in-person banking",
+    "Comprehensive investment services through Osaic Institutions partnership including IRAs, mutual funds, stocks, bonds, annuities, and 529 plans",
+    "Dedicated investment representatives and complimentary financial planning consultations available",
+    "Mobile wallet integration and contactless payment options for debit cards",
+    "Specialized commercial and small business banking with experienced local banker teams",
+    "Full-service mortgage offerings including construction, purchase, and refinance options",
+    "Accessible website design with AudioEye optimization for users with disabilities"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Investment services are provided through third-party Osaic Institutions rather than proprietary offerings",
+    "Website lacks transparent disclosure of account fees, interest rates, minimum balances, and loan terms",
+    "Limited information about deposit products (CDs, money market accounts, savings account specifics)",
+    "No mention of digital-only or neobank features that competitors may offer",
+    "Geographic service area limited to Southeast U.S. (GA, NC, SC, TN, VA)"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +63,7 @@
   "states_served": [
     "NC"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 27677,
   "latitude": 35.5986010169604,
   "longitude": -82.5526809983666,
@@ -86,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small and mid-sized business owners seeking relationship-based commercial banking and local expertise",
+    "Homebuyers in the Southeast looking for mortgage options with personal service",
+    "Customers prioritizing branch access and in-person banking relationships over digital-only platforms",
+    "Individuals seeking integrated investment planning and financial advisory services alongside banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "HomeTrust Bank is best for established customers and businesses in the Southeast seeking traditional community banking with branch access, personalized service, and integrated investment options. The main caveat is that investment services depend on a third-party provider (Osaic), and the bank does not clearly disclose pricing, rates, or account terms on their primary website, requiring customers to contact branches directly for detailed product information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +119,11 @@
   ],
   "phone": "",
   "address": "10 Woodfin St, Asheville, NC 28801",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

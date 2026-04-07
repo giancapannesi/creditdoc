@@ -1,14 +1,14 @@
 {
   "name": "First National Bank Of Pulaski",
   "slug": "first-national-bank-of-pulaski",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Pulaski, TN. $1502M in assets. 14 offices.",
-  "description_long": "First National Bank Of Pulaski is a community bank located in Pulaski, TN, established in 1938. The bank holds approximately $1502M in total assets and $1341M in deposits. It operates 14 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "First National Bank is a community bank offering personal and business banking services including checking, savings, loans, credit cards, and investment products.",
+  "description_long": "First National Bank of Pulaski is a traditional community bank providing comprehensive financial services to both personal and business customers. The bank operates through multiple physical locations and maintains a strong digital presence with online and mobile banking platforms.\n\nThe bank offers a full range of personal banking products including checking and savings accounts, certificates of deposit, IRAs, credit cards, and personal loans. For borrowers, they provide auto loans, home equity lines of credit, mortgage options, and personal loans. Their business banking division serves small to medium-sized businesses with commercial loans, business credit cards, cash management services, and dedicated business lenders. Additionally, they offer specialty products like construction loans and a school banking program.\n\nFirst National Bank distinguishes itself as a community-focused institution, emphasizing local presence with multiple branch locations and community involvement through events, heritage club travel, and a student advisory board. They provide both traditional in-person banking and modern digital solutions, including bill pay, eStatements, mobile wallet integration with Zelle, and dedicated mobile apps for both personal and business users.\n\nAs a traditional community bank, First National Bank serves customers who value personalized service and local relationships. However, as a brick-and-mortar institution, they may have limited competitive advantages in terms of rates or fees compared to larger national banks or online-only financial institutions. Their strength lies in community integration and personalized service rather than cutting-edge financial innovation. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.fnbforyou.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
+    "Certificates of Deposit (CDs) and Individual Retirement Accounts (IRAs)",
+    "Personal credit cards",
+    "Auto loans",
+    "Home equity lines of credit",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgage products and refinancing",
+    "Business loans and commercial financing",
+    "Business credit cards",
+    "Online bill pay and eStatements",
+    "Mobile banking apps (iOS and Android)",
+    "Construction loans"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1938",
-    "Local community bank with personal service",
-    "14 locations"
+    "Offers comprehensive personal banking with checking, savings, CDs, and IRAs in one institution",
+    "Dedicated business banking division with commercial loans, cash management, and business lenders",
+    "Multiple service channels including physical locations, online banking, and mobile apps for iOS and Android",
+    "Modern digital features including Zelle integration for peer-to-peer payments and mobile wallet support",
+    "Community-focused with local branch locations, events, and student advisory board involvement",
+    "Construction loan product for specialized borrowing needs",
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No specific APR, rate, or fee information provided on website to compare competitiveness",
+    "Limited geographic presence as community bank versus national banks with broader branch networks",
+    "No mention of investment advisory services or wealth management for higher-net-worth customers",
+    "Website content is primarily promotional navigation; minimal substantive product details or transparency",
+    "No information on required minimum balances, account maintenance fees, or specific loan terms"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15572,
   "latitude": 35.1972949808451,
   "longitude": -87.0311180348653,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local community members in Pulaski area seeking personalized banking relationships",
+    "Small to medium-sized business owners needing commercial loans and cash management services",
+    "Customers who prefer in-person banking interactions at physical branch locations",
+    "Homebuyers seeking mortgage options or home equity products from a community lender"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First National Bank is best for individuals and small business owners in the Pulaski area seeking comprehensive banking services with a community focus and personalized service. The main caveat is that as a traditional community bank, they may not offer the most competitive rates compared to national banks or online-only institutions, and prospective customers should compare specific rates and fees before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "206 S 1St St, Pulaski, TN 38478",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

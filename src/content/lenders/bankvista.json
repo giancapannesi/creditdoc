@@ -1,14 +1,14 @@
 {
   "name": "Bankvista",
   "slug": "bankvista",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Sartell, MN. $633M in assets. 3 offices.",
-  "description_long": "Bankvista is a community bank located in Sartell, MN, established in 2000. The bank holds approximately $633M in total assets and $509M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "BankVista is a community bank offering FDIC-insured checking, savings, loans, and credit cards for both personal and business customers across Minnesota locations.",
+  "description_long": "BankVista is a community-based bank operating with FDIC insurance across multiple Minnesota locations including Sartell, Mankato, Chaska, and St. Cloud. The bank emphasizes local lending and personalized service through its tagline \"Bank Smart. Bank Local.\" and maintains a focus on supporting both individual consumers and small business owners.\n\nThe bank offers a comprehensive suite of personal banking products including Kasasa-branded checking and savings accounts with rewards features, certificates of deposit, IRAs, and various loan products (personal loans, auto loans, RV loans, home mortgages, and home equity loans). For business customers, BankVista provides business checking accounts, business savings options, SBA loans, equipment financing, commercial real estate loans, construction loans, and business credit cards. They also offer digital banking tools including online banking, mobile deposit, bill pay, Zelle integration, and ACH management services.\n\nBankVista distinguishes itself through several specific offerings: they advertise a 5.00% APY on their Free Kasasa Cash Checking account with nationwide ATM fee refunds, they have been recognized as \"Minnesota SBA Lender of the Year\" for 10 consecutive years, and they emphasize rapid approval processes (approvals noted within an hour in testimonials). Their business solutions include specialized services like Positive Pay, Wire Manager, Remote Deposit Capture, and Merchant Card Services. The bank also provides educational resources including financial literacy programs through MoneyIQ and financial calculators.\n\nAs a regional community bank, BankVista's primary strength lies in personalized local lending and business support, particularly for small business owners. However, customers seeking national branch networks or the broadest product selection may find limitations. The bank's geographic focus on Minnesota means it is not accessible to out-of-state customers seeking in-person services, though online banking capabilities may extend reach. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.bankvista.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Free Kasasa Cash Checking with 5.00% APY and ATM fee refunds",
+    "Small Business Administration (SBA) loans",
+    "Business term loans and lines of credit",
+    "Commercial real estate and construction loans",
+    "Equipment loans",
+    "Personal loans, auto loans, and RV loans",
+    "Home mortgage loans and home equity loans",
+    "Online banking and mobile banking with mobile deposit",
+    "Business and personal credit cards",
+    "Certificates of deposit (CDs) and money market accounts",
+    "Individual Retirement Accounts (IRAs)",
+    "Zelle money transfer service"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2000",
-    "Local community bank with personal service",
-    "3 locations"
+    "5.00% APY offered on Free Kasasa Cash Checking account with nationwide ATM fee refunds",
+    "Recognized as Minnesota SBA Lender of the Year for 10 consecutive years",
+    "Rapid business loan approvals documented (approvals within one hour per testimonials)",
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Comprehensive business solutions including Positive Pay, ACH Manager, Remote Deposit Capture, and Wire Manager",
+    "Multiple account types including specialized options for nonprofits and customers age 55+",
+    "Local mortgage lenders available for personalized home financing"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: only operates in Minnesota locations (Sartell, Mankato, Chaska, St. Cloud), not suitable for out-of-state customers seeking in-person banking",
+    "Limited to regional community bank without national branch network",
+    "No mention of investment advisory services or wealth management for higher-net-worth customers",
+    "Limited transparency on specific interest rates, fees, or APR ranges for loans on public website",
+    "Relatively small institution may have fewer digital innovation features compared to larger national or online banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 35406,
   "latitude": 45.5949499810091,
   "longitude": -94.1940500001395,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Minnesota-based small business owners seeking SBA loans and rapid approval timelines",
+    "Local Minnesota residents wanting personalized service and community bank relationships",
+    "Business customers needing specialized solutions like Positive Pay, ACH management, and merchant services",
+    "Consumers interested in high-yield checking accounts with cash rewards features"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "BankVista is best for Minnesota residents and small business owners seeking personalized local banking with strong SBA lending credentials and competitive checking account rates. The primary limitation is geographic restriction to Minnesota locations; customers outside this region cannot access in-person services, though online banking may be available.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "125 Twin Rivers Ct, Sartell, MN 56377",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

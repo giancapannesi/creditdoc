@@ -1,15 +1,15 @@
 {
   "name": "Heartland Bank",
   "slug": "heartland-bank-geneva",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Geneva, NE. $940M in assets. 15 offices.",
-  "description_long": "Heartland Bank is a community bank located in Geneva, NE, established in 1899. The bank holds approximately $940M in total assets and $713M in deposits. It operates 15 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Full-service community bank serving Nebraska since 1899 with 15 locations offering personal, business, and agricultural banking products.",
+  "description_long": "Heartland Bank is a Nebraska-based community bank with a 127-year operating history, established in 1899. The bank operates 15 branch locations across Nebraska, including larger markets like Kearney, Grand Island, Hastings, and Geneva, as well as smaller rural communities such as Aurora, Burwell, Daykin, and Ord. The bank positions itself as a locally-rooted institution where decisions are made by regional professionals familiar with Nebraska's specific economic and community needs.\n\nHeartland Bank offers comprehensive personal banking services including checking accounts, savings accounts, CDs, IRAs, debit and credit cards, personal loans, auto loans, and mortgage loans. For business customers, they provide business checking, business CDs, business credit cards, business loans, and merchant services including card processing, ACH origination, and positive pay tools. The bank also serves the agricultural sector with dedicated ag loans and specialized calculators for farm operations. Beyond core banking, Heartland operates affiliated entities including Heartland Trust Company, NorthPointe Insurance, and Sandstone Wealth Management.\n\nHeartland Bank distinguishes itself through local decision-making authority and personalized service from relationship managers and universal bankers who understand community-specific needs. The bank emphasizes modern digital convenience alongside traditional community banking, offering online and mobile banking platforms, fraud prevention resources, and specialized tools like mortgage calculators and business loan calculators. Their routing number (104901597) and established infrastructure indicate FDIC membership and regulatory compliance typical of traditional community banks.\n\nThe bank's strength lies in serving customers with deep community roots and those requiring relationship-based banking decisions, particularly in Nebraska rural and mid-sized markets. However, as a regional institution, Heartland Bank lacks the branch network density of national banks, the rate competitiveness of online-only banks, or the specialized fintech capabilities of neobanks. Customers seeking nationwide convenience, maximum deposit rates, or cutting-edge digital-only products may find better alternatives. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.myheartland.bank",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Certificates of Deposit (CDs) and Individual Retirement Accounts (IRAs)",
+    "Insured Cash Sweep (ICS) accounts",
+    "Debit and credit cards",
+    "Personal and auto loans",
+    "Mortgage loans with first-time homebuyer resources",
+    "Business checking and savings accounts",
+    "Business loans and business credit cards",
+    "Agricultural loans with specialized calculators",
+    "Merchant card processing and ACH origination services",
+    "Online and mobile banking platforms",
+    "Trust services through Heartland Trust Company"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1899",
-    "Local community bank with personal service",
-    "15 locations"
+    "15 physical branch locations across Nebraska with established community presence since 1899",
+    "Local decision-making by experienced professionals who understand regional agricultural and business needs",
+    "Comprehensive product suite: checking, savings, CDs, IRAs, personal loans, auto loans, mortgages, business loans, and ag loans",
+    "Dedicated agricultural lending with specialized ag loan calculators and relationship managers",
+    "Related trust, insurance, and wealth management services through affiliated companies",
+    "Modern digital banking with online and mobile platforms plus fraud prevention resource centers",
+    "Merchant services for businesses including card processing, ACH origination, and positive pay tools"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint to Nebraska only, not accessible to customers outside the state",
+    "No mention of specific interest rates, APRs, or fee structures on website",
+    "Smaller institution with likely less competitive deposit rates compared to national online banks",
+    "No mention of unique digital-first features or fintech partnerships that newer banks offer",
+    "Agricultural focus may limit product tailoring for non-farm business or personal customers"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 18740,
   "latitude": 40.525992987922,
   "longitude": -97.603112011032,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Nebraska residents and business owners seeking relationship-based community banking with local decision-making",
+    "Agricultural operations needing specialized farm lending and expertise from dedicated ag lenders",
+    "Small business owners in Nebraska requiring personalized service and merchant processing capabilities",
+    "Customers prioritizing physical branch access and face-to-face relationship management over digital-only banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Heartland Bank is best for Nebraska-based personal and business customers who value local decision-making, relationship banking, and community connection over rate optimization or nationwide convenience. The main caveat is geographic limitation\u2014this bank only serves Nebraska, making it unsuitable for customers outside the state or those requiring multi-state banking flexibility.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "896 G St, Geneva, NE 68361",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

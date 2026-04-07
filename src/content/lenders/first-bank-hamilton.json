@@ -1,13 +1,13 @@
 {
   "name": "First Bank",
   "slug": "first-bank-hamilton",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Hamilton, NJ. $3958M in assets. 26 offices.",
-  "description_long": "First Bank is a community bank located in Hamilton, NJ, established in 2007. The bank holds approximately $3958M in total assets and $3202M in deposits. It operates 26 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal and business checking, savings, lending, and digital banking services with branch locations nationwide.",
+  "description_long": "First Bank is a traditional FDIC-insured bank that serves both personal and business customers through physical branch locations and digital channels. The bank has been positioning itself around the tagline \"Personal Bankers. Real Relationships,\" emphasizing relationship-based banking rather than purely digital-first operations.\n\nThe bank offers a comprehensive suite of financial products across personal and business segments. On the personal side, they provide multiple checking account tiers (Basic, E-Checking, Relationship, 50 First, Community, and GenGold), savings accounts, money market accounts, CDs, IRAs, personal loans, auto loans, residential mortgages, home equity loans and lines of credit, and personal credit cards. For business customers, First Bank offers various checking accounts (Business First, Nonprofit, Commercial Analysis, Business Escrow), business savings and money market accounts, merchant services, government banking, asset-based lending, SBA lending, commercial & industrial lending, construction financing, and business credit cards. Their business lending includes Business Express loans up to $350,000 with online application and quick response times.\n\nFirst Bank distinguishes itself through multiple digital banking channels (online, mobile, and telephone banking) alongside traditional branch banking, suggesting a hybrid approach rather than pure digital disruption. They highlight fast online account opening for both consumer and business accounts, offer treasury management services for business customers, and feature competitive CD rates (3.75% APY for 12-month CDs noted on their site). The bank also maintains a charitable foundation and active corporate social responsibility programs, plus investor relations and career opportunities, indicating a mid-to-large regional or national bank structure.\n\nThe website reveals a traditional bank with broad product offerings but limited differentiation on rates or fees visible at first glance. The site contains generic banking language and marketing promises without standout features for rate shoppers. While FDIC insurance provides safety and the multi-channel approach offers flexibility, prospective customers would need to dig into specific fee schedules and current rate sheets (linked but not detailed in the public site content) to evaluate competitive positioning versus digital-first banks or other regional alternatives.",
   "logo_url": "",
   "website_url": "https://www.myfirstbank.com",
   "affiliate_url": "",
@@ -22,23 +22,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal and Business Checking Accounts (multiple tiers)",
+    "Savings Accounts and Money Market Accounts",
+    "CDs and IRAs",
+    "Residential Mortgage Loans",
+    "Home Equity Loans and Home Equity Lines of Credit",
+    "Personal Auto Loans",
+    "Personal and Business Credit Cards",
+    "Business Lending (SBA, asset-based, term loans, lines of credit, construction financing)",
+    "Treasury Management and Escrow Management",
+    "Merchant Services",
+    "Online, Mobile, and Telephone Banking",
+    "Government Banking Services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2007",
-    "Local community bank with personal service",
-    "26 locations"
+    "FDIC-insured deposits backed by U.S. Government full faith and credit",
+    "Multiple checking account options designed for different customer needs (Basic, Relationship, GenGold, 50 First, Community, Nonprofit, Business)",
+    "Comprehensive business lending including SBA loans, asset-based lending, and Business Express loans up to $350,000",
+    "Multi-channel digital access (online, mobile, and telephone banking) alongside physical branches",
+    "Fast online account opening for both personal and business accounts",
+    "Wide range of loan products including mortgages, auto loans, home equity, and personal secured loans",
+    "Business treasury management and merchant services for commercial customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display specific fee structures or APY rates for most products (requires drilling into detailed pages)",
+    "No mention of fee waivers, no-fee accounts, or competitive rate advantages versus digital banks",
+    "Limited transparency on approval timelines for personal loans or mortgage processing (only 'minutes' for Business Express)"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +59,7 @@
   "states_served": [
     "NJ"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58481,
   "latitude": 40.203703991232,
   "longitude": -74.663184962544,
@@ -92,12 +101,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-size business owners needing comprehensive banking and lending relationships with SBA or asset-based options",
+    "Personal customers seeking traditional branch access combined with digital banking flexibility",
+    "Nonprofit organizations requiring specialized nonprofit checking accounts and banking relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Bank is best for customers who prioritize branch access and relationship-based banking alongside digital convenience, particularly small-to-mid-size business owners seeking comprehensive lending options. The main caveat is that rate and fee competitiveness are not immediately transparent on their public website, requiring detailed comparison shopping before account opening.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +114,10 @@
   ],
   "phone": "",
   "address": "2465 Kuser Rd, Hamilton, NJ 08690",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

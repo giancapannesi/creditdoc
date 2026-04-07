@@ -1,15 +1,15 @@
 {
   "name": "Trucommunity Bank",
   "slug": "trucommunity-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Garrison, ND. $330M in assets. 4 offices.",
-  "description_long": "Trucommunity Bank is a community bank located in Garrison, ND, established in 1935. The bank holds approximately $330M in total assets and $276M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering checking, savings, debit cards, lending, and mortgage services with fee-free ATM access through MoneyPass network.",
+  "description_long": "TruCommunity Bank is a traditional community bank that operates with FDIC insurance backing, providing customers with federal deposit protection. The institution positions itself as a community-focused alternative to larger national banks, emphasizing personalized service and accessibility through both physical locations and digital channels.\n\nThe bank offers a comprehensive suite of retail banking products including checking and savings accounts, debit/ATM cards, mortgage lending, retirement savings products, and consumer lending services. They provide online banking access, e-statements, and mobile app functionality for account management. A key feature is their membership in the MoneyPass network, which provides access to over 32,000 fee-free ATMs nationwide\u2014a service the bank covers through membership fees rather than passing costs to customers.\n\nTruCommunity Bank distinguishes itself through several customer-focused initiatives: no ATM fees for customers using the MoneyPass network or their own ATMs, integration of debit cards with major digital wallets (Apple Pay, Google Pay, Samsung Pay), and cash-back options at point-of-sale without fees. They highlight their commitment to low-fee banking with messaging centered on \"Why Spend it on Fees?\" and promote mortgage products with tagline \"Give Your Dreams a HOME!\" Their routing number (091302720) is publicly available, indicating established banking infrastructure.\n\nAs a community bank, TruCommunity Bank serves customers seeking traditional banking services with FDIC protection and fee-conscious ATM access. However, the website provides limited information about specific account types, interest rates, minimum balance requirements, or detailed lending terms. The bank mentions \"one location that NEVER CLOSES\" but does not clearly specify physical branch count or service areas, limiting visibility into their geographic footprint and full service availability.",
   "logo_url": "",
   "website_url": "https://www.trucommunity.bank",
   "affiliate_url": "",
@@ -24,23 +24,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts with FDIC insurance",
+    "Debit/ATM cards with contactless payment capability",
+    "MoneyPass network access to 32,000+ fee-free ATMs nationwide",
+    "Digital wallet integration (Apple Pay, Google Pay, Samsung Pay)",
+    "Online banking with username/password authentication",
+    "E-statements (paperless account statements)",
+    "Mortgage lending and home financing products",
+    "Consumer lending services",
+    "Retirement savings products",
+    "Mobile banking app",
+    "Cash-back at point-of-sale for debit transactions",
+    "Customer service during regular banking hours"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1935",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Access to 32,000+ fee-free ATMs nationwide through MoneyPass network membership",
+    "No ATM fees passed to customers despite bank paying membership fees",
+    "Debit card integration with Apple Pay, Google Pay, and Samsung Pay for contactless payments",
+    "Cash-back option at retail merchants without fees via debit card PIN",
+    "Mobile app available for account access and management",
+    "E-statements option for secure, paperless account management",
+    "Mortgage lending products available with personalized service focus"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks transparent information on specific account types, interest rates, and minimum balance requirements",
+    "Limited clarity on branch locations and geographic service area despite claiming 'one location that NEVER CLOSES'",
+    "Minimal details about lending products, rates, terms, and qualification criteria",
+    "No information about checking account features, overdraft policies, or fee structures beyond ATM fees",
+    "Website does not disclose retirement savings product details, investment options, or fees"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +64,7 @@
   "states_served": [
     "ND"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15306,
   "latitude": 47.6525057700875,
   "longitude": -101.41732565328,
@@ -94,12 +106,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking traditional FDIC-insured banking with federal deposit protection",
+    "Fee-conscious consumers who prioritize avoiding ATM and transaction fees",
+    "Users wanting digital payment integration with Apple Pay, Google Pay, or Samsung Pay",
+    "Individuals in the bank's service area looking for community banking relationship"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "TruCommunity Bank is best suited for consumers seeking traditional FDIC-insured community banking with strong emphasis on fee-free ATM access and digital payment capabilities. The main caveat is the website's lack of transparency regarding specific account features, rates, terms, and service area coverage, requiring prospective customers to contact the bank directly for detailed product information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +120,11 @@
   ],
   "phone": "",
   "address": "102 N Main St, Garrison, ND 58540",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

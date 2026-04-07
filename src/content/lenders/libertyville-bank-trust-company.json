@@ -1,13 +1,13 @@
 {
   "name": "Libertyville Bank & Trust Company, National Association",
   "slug": "libertyville-bank-trust-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Libertyville, IL. $3136M in assets. 8 offices.",
-  "description_long": "Libertyville Bank & Trust Company, National Association is a community bank located in Libertyville, IL, established in 1995. The bank holds approximately $3136M in total assets and $2653M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Libertyville Bank & Trust Company is a national association bank offering personal, small business, and commercial banking services with a focus on community-based financial solutions.",
+  "description_long": "Libertyville Bank & Trust Company, National Association operates as a full-service community bank providing comprehensive financial services across personal, small business, and commercial segments. The bank is part of the Wintrust Financial Corporation family, which positions it within a larger network of community-focused financial institutions. The company maintains a physical presence through multiple locations and emphasizes personalized banking relationships through local expertise.\n\nThe bank offers a broad spectrum of products and services including personal checking and savings accounts, credit cards, mortgages, home equity lines of credit, and credit building services. For small business clients, they provide business checking and savings accounts, cash management solutions, SBA loans, real estate financing, and commercial credit cards. Commercial clients have access to asset-based lending, capital markets services, commercial leasing, treasury management, and international services. Additionally, the bank offers wealth management services, retirement benefits advisory, and specialized industry solutions for construction, franchises, government entities, and professional practices.\n\nLibertyville Bank distinguishes itself through its emphasis on community banking combined with access to Wintrust's broader resources and expertise. The bank features specialized programs such as the Platinum Adventures Club and Junior Savers Club for personal customers, and offers industry-specific lending groups including construction, franchise finance, and healthcare sectors. Their digital banking platform and online account opening capabilities reflect modernization efforts alongside traditional relationship-based banking. The organization actively promotes financial education content and maintains visible community engagement through events and local partnerships.\n\nAs a national association bank within a larger holding company, Libertyville Bank provides traditional banking services without the fintech innovation or alternative lending focus of newer financial institutions. Customers seeking highly specialized products like personal installment loans, payday alternatives, or credit repair services will not find these offerings. The bank's strength lies in traditional banking relationships rather than technological disruption or niche financial solutions.",
   "logo_url": "",
   "website_url": "https://www.libertyvillebank.com",
   "affiliate_url": "",
@@ -22,23 +22,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Certificate of Deposit (CD) products",
+    "Credit cards for personal and small business use",
+    "Mortgage origination and refinancing",
+    "Home Equity Lines of Credit (HELOC)",
+    "Small business checking and savings accounts",
+    "SBA loan origination and servicing",
+    "Commercial real estate financing",
+    "Asset-based lending for commercial clients",
+    "Treasury management and cash management services",
+    "Wealth management and private client services",
+    "International banking services",
+    "Commercial equipment leasing"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1995",
-    "Local community bank with personal service",
-    "8 locations"
+    "Comprehensive product suite including checking, savings, CDs, credit cards, mortgages, and HELOCs in one institution",
+    "Specialized SBA lending programs and commercial real estate financing for business customers",
+    "Industry-specific lending groups for construction, franchises, government, and professional practices",
+    "Access to Wintrust Financial Corporation's broader resources including capital markets and international services",
+    "Financial education content and resources available for personal financial management and small business growth",
+    "Multiple physical locations with ability to search branches and schedule in-person appointments",
+    "Wealth management and private client services for higher-net-worth customers",
+    "Community-focused banking culture with local event participation and Platinum Adventures Club membership benefits"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No credit repair or credit building loan products specifically advertised (only credit cards for building credit)",
+    "No personal loan products visible for debt consolidation, medical expenses, or other borrowing needs",
+    "Limited transparency on specific account fees, interest rates, and account minimums on public website",
+    "Website design and navigation could be clearer; significant amount of content and menu items create complexity",
+    "No mention of fintech features like mobile-first design, instant account opening, or automated savings tools"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +63,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34073,
   "latitude": 42.2879834902882,
   "longitude": -87.9545583426741,
@@ -86,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs seeking traditional SBA loans and commercial banking relationships",
+    "Customers in specialized industries (construction, franchises, healthcare, government) needing tailored lending solutions",
+    "Individuals and families seeking comprehensive personal banking (checking, savings, mortgages, wealth management) from a single provider",
+    "Commercial clients requiring treasury management, asset-based lending, or international banking services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Libertyville Bank & Trust Company is best for customers seeking traditional full-service banking with a community focus and access to specialized commercial lending, particularly those in specific industries. The main caveat is that this is a conventional bank without alternative lending products, fintech innovation, or specialized credit services\u2014customers needing personal loans, credit repair, or alternative financial products should look elsewhere.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +119,11 @@
   ],
   "phone": "",
   "address": "507 N Milwaukee Ave, Libertyville, IL 60048",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

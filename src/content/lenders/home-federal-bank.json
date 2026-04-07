@@ -1,14 +1,14 @@
 {
   "name": "Home Federal Bank",
   "slug": "home-federal-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Shreveport, LA. $622M in assets. 11 offices.",
-  "description_long": "Home Federal Bank is a community bank located in Shreveport, LA, established in 1924. The bank holds approximately $622M in total assets and $556M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured full-service bank operating since 1924, offering personal and business checking, savings, lending, and mortgage services with online and mobile banking.",
+  "description_long": "Home Federal Bank has been in operation since 1924, establishing itself as a stable, fully capitalized financial institution built on prudent and responsible business practices. The bank emphasizes its longevity and strength as foundational elements of its service model, positioning itself as a reliable community bank focused on long-term customer relationships.\n\nHome Federal Bank provides a comprehensive suite of banking services including multiple personal checking accounts (Cash Back Checking, Smart Rewards Checking, Premium Checking, Prime Checking, 55 Plus Senior Checking, New Start Checking), savings products (Smart Savings, Relationship Savings, Minor Savings, Certificates of Deposit, Money Market), and lending products (personal loans, business loans, and mortgage loans). The bank also offers business banking solutions with specialized checking accounts, merchant card services, and cash management services. All deposits are FDIC-insured, backed by the full faith and credit of the U.S. Government.\n\nHome Federal Bank distinguishes itself through its emphasis on relationship banking and rapid decision-making. The bank highlights that customers sit \"at the table with the same people who can make decisions and make them quickly,\" suggesting a local decision-making structure rather than centralized corporate approval. They provide a full suite of financial calculators covering investment, retirement, loans, education planning, mortgages, and various personal finance scenarios. The bank maintains both personal and business online banking platforms with features including bill pay, fund transfers, express pay, eStatements, and account alerts. Mobile banking is available through free apps for smartphones and tablets.\n\nWhile Home Federal Bank offers extensive services and emphasizes stability, the website provides limited detail about specific loan terms, interest rates, or competitive advantages. The bank's geographic reach and physical location details are not fully specified in the provided content. Like many traditional banks, they may have higher minimum balance requirements or fewer promotional rates compared to online-only alternatives, though this is not explicitly stated.",
   "logo_url": "",
   "website_url": "https://www.hfb.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (6 types including rewards and senior accounts)",
+    "Personal savings accounts and minor savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Money Market and Compass Money Market accounts",
+    "Personal and business loans",
+    "Mortgage loans with online application",
+    "Business checking accounts (4 types with varying features)",
+    "Business savings and priority banking services",
+    "Merchant card services and cash management services",
+    "Platinum credit cards (personal and business)",
+    "Online banking with bill pay, fund transfers, and express pay",
+    "Mobile banking apps for iOS and iPad"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1924",
-    "Local community bank with personal service",
-    "11 locations"
+    "FDIC-insured deposits backed by U.S. Government full faith and credit",
+    "100+ years of operational history since 1924, emphasizing stability and capitalization",
+    "Relationship banking model with local decision-makers who can approve loans quickly",
+    "Free mobile banking app available for iOS and Android with full-featured access",
+    "Comprehensive calculator library for retirement, mortgages, college savings, and loan planning",
+    "Multiple specialized checking accounts for different customer segments (seniors, new accounts, rewards)",
+    "Integrated personal and business online banking with bill pay, transfers, and eStatements"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no information on interest rates, APYs, or fee schedules for comparison",
+    "Limited details on geographic service area or number of physical branch locations",
+    "No information about minimum balance requirements or account opening criteria",
+    "Requires online banking enrollment to access mobile app, adding an extra step for new users",
+    "Security warning on homepage about scammers using their phone number suggests potential fraud vulnerability in public perception"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "LA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 27654,
   "latitude": 32.4492800200588,
   "longitude": -93.720387981143,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking relationship banking with local decision-makers for loans and mortgages",
+    "Individuals wanting FDIC-insured deposits with 100+ years of bank stability",
+    "Small business owners needing integrated checking, savings, and merchant services",
+    "Customers preferring comprehensive online and mobile banking with bill pay and fund transfers"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Home Federal Bank is best for customers who value relationship banking with local decision-making authority and prioritize bank stability and FDIC insurance. The main caveat is that the website lacks transparent pricing information, interest rates, and competitive details necessary for consumers to evaluate whether Home Federal Bank's products are competitively priced compared to alternatives.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "222 Florida St, Shreveport, LA 71105",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

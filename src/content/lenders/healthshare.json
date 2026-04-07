@@ -1,15 +1,15 @@
 {
   "name": "Healthshare",
   "slug": "healthshare",
-  "category": "payday-alternatives",
+  "category": "banking",
   "subcategories": [
     "credit-union",
     "fdic-equivalent",
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "State-Chartered Credit Union in , . Low-income designated. NCUA insured. 3 locations.",
-  "description_long": "Healthshare is a state-chartered credit union serving members in , , established in 1955. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) — small, affordable loans designed to replace predatory payday lending. The credit union operates 3 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "Health Share of Oregon is a managed care organization serving Oregon Health Plan (Medicaid) members in three counties, providing coordinated health coverage and care access.",
+  "description_long": "Health Share of Oregon is a managed care organization that serves as an intermediary between Oregon Health Plan (OHP) members and healthcare providers. OHP is Oregon's state Medicaid program offering no-cost health coverage to qualifying individuals and families. The organization operates specifically in Clackamas, Multnomah, and Washington counties, functioning as a health plan administrator rather than a direct lender or financial services provider.\n\nHealth Share of Oregon coordinates access to a network of health plans, doctors, dentists, therapists, clinics, and related healthcare resources. Their services include helping members find and schedule appointments with medical providers, access dental care, obtain mental health and substance use services, and utilize transportation assistance through their Ride to Care program. Members can view their plan benefits, access ID cards, manage coverage renewals, and update personal information through their portal.\n\nWhat distinguishes Health Share of Oregon is their focus on vulnerable populations\u2014specifically Medicaid-eligible Oregonians\u2014and their emphasis on connecting members to comprehensive care including medical, dental, and behavioral health services. They provide multilingual support in at least nine languages and maintain dedicated customer service to help members navigate their benefits and access care coordination.\n\nImportantly, Health Share of Oregon is a healthcare administrator, not a consumer finance company. They do not provide loans, credit services, or financial products. The current categorization as a payday-alternative is factually incorrect. This organization is best understood as a health plan administrator within the banking/healthcare coordination category, as it manages access to publicly-funded health coverage rather than offering financial services or credit alternatives.",
   "logo_url": "",
   "website_url": "https://www.healthshareoregon.org/",
   "affiliate_url": "",
@@ -24,25 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)",
-    "Payday Alternative Loans (PALs)"
+    "Oregon Health Plan (Medicaid) health coverage administration",
+    "Provider network coordination and management",
+    "Doctor and dentist finder and appointment scheduling",
+    "Mental health and substance use disorder services",
+    "Dental coverage and provider access",
+    "Ride to Care transportation program",
+    "Member ID card access and management",
+    "Coverage renewal assistance",
+    "Plan benefits information and member handbook",
+    "Customer service and complaint handling",
+    "Multilingual support and language interpretation",
+    "Care coordination for eligible members"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1955",
-    "Member-owned cooperative",
-    "Low-income designated — may offer Payday Alternative Loans (PALs)"
+    "No-cost health coverage for eligible Oregon Health Plan members, including medical, dental, and mental health benefits",
+    "Largest network of health plans, doctors, dentists, therapists, and clinics in their service area",
+    "Free Ride to Care transportation program to help members access appointments",
+    "Multilingual support available in at least 9 languages including Spanish, Arabic, Korean, Russian, Chinese, Somali, Ukrainian, and Vietnamese",
+    "Comprehensive benefits management including coverage renewal and ID card access",
+    "Serves vulnerable populations across three Oregon counties with coordinated care approach",
+    "Member handbook and FAQs available to explain benefits and coverage details"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Only serves three Oregon counties (Clackamas, Multnomah, Washington), geographically limited",
+    "Recent data breach disclosed on their website, raising security and privacy concerns",
+    "Health plan administrator role means members' care is dependent on contracted provider network quality",
+    "Eligibility limited to Oregon Health Plan (Medicaid) members\u2014does not serve general population",
+    "Not a consumer finance product and should not be listed in payday-alternative or lending categories"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +61,7 @@
   "founded_year": 1955,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "66317",
   "published": true,
   "review_status": "draft",
@@ -92,20 +101,23 @@
     "ease_of_use": 4.2
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Payday loan alternatives (PALs)"
+    "Oregon Medicaid (OHP) eligible individuals and families in Clackamas, Multnomah, or Washington counties",
+    "Low-income Oregon residents seeking coordinated healthcare access without cost",
+    "Medicaid members who need assistance navigating health plan benefits and provider networks",
+    "Multilingual speakers requiring healthcare services in languages beyond English"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Health Share of Oregon is a managed Medicaid health plan administrator, not a consumer finance or lending company. It should not be categorized as a payday-alternative or any lending category. This organization is best suited for low-income Oregonians in three counties who qualify for Medicaid and need coordinated healthcare access; the primary caveat is geographic and eligibility restrictions.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-05",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
-  "website_needs_review": true
+  "website_needs_review": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

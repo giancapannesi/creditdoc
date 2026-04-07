@@ -1,14 +1,14 @@
 {
   "name": "The Bank Of South Carolina",
   "slug": "the-bank-of-south-carolina",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Charleston, SC. $576M in assets. 6 offices.",
-  "description_long": "The Bank Of South Carolina is a community bank located in Charleston, SC, established in 1987. The bank holds approximately $576M in total assets and $502M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "The Bank of South Carolina is a regional bank founded in 1987 offering personal banking, business banking, and mortgage services to South Carolina customers with a focus on personalized service and local relationships.",
+  "description_long": "The Bank of South Carolina was established in 1987 with a founding mission centered on personal service, lasting customer relationships, responsiveness, and attention to detail. Operating for over 35 years, the institution has maintained its commitment to these core principles while serving families and businesses throughout South Carolina's lowcountry region. The bank positions itself as a hometown alternative to larger national institutions, emphasizing deep community roots and personalized financial guidance.\n\nThe bank offers a comprehensive suite of financial services across three primary divisions: personal banking for individuals seeking checking, savings, and financial planning support; business banking designed to help startups and established companies with lending, process management, and growth tools; and mortgage services including home purchase loans, refinancing, and investment property financing. All deposit accounts are FDIC-insured, backed by the full faith and credit of the U.S. Government. The bank provides both in-person branch banking and online/digital banking platforms (eSafe and eCorp) for customer convenience.\n\nThe Bank of South Carolina differentiates itself through its emphasis on personal relationships and local market knowledge rather than one-size-fits-all banking. The institution has received Bauer Financial's five-star rating for over 40 consecutive years, an independent validation of financial stability and performance. The bank actively supports local businesses and families in achieving financial goals, positioning itself as invested in customer success rather than purely transactional banking. Recent financial performance shows consistent dividend declarations and share repurchase authorizations, indicating shareholder confidence and stability.\n\nAs a regional bank, The Bank of South Carolina is best suited for customers within their South Carolina service area seeking relationship-based banking with local decision-making. The primary limitation is geographic restriction\u2014the bank does not appear to offer nationwide online banking accessibility to customers outside South Carolina. Additionally, the website does not provide specific details about product rates, fees, minimum balances, or loan terms, requiring prospective customers to contact the bank directly for pricing information. The institution targets customers valuing personalized service over digital-first banking experiences. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.banksc.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts (FDIC-insured)",
+    "Online personal banking platform (eSafe)",
+    "Online business banking platform (eCorp)",
+    "Business checking and cash management services",
+    "Business lending and lines of credit",
+    "Mortgage origination for home purchase",
+    "Mortgage refinancing services",
+    "Investment property financing",
+    "Startup and small business lending",
+    "Personal financial planning and advisory",
+    "Deposit account management",
+    "Customer service via branch locations and digital platforms"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1987",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits backed by U.S. Government, ensuring deposit protection up to $250,000 per account type",
+    "40+ consecutive five-star ratings from Bauer Financial, demonstrating long-term financial stability and performance",
+    "Founded in 1987 with 35+ years of local market experience and community relationships in South Carolina",
+    "Dual-platform digital access via eSafe (personal) and eCorp (business) alongside in-person branch banking",
+    "Personalized mortgage lending with competitive rate shopping and detailed guidance through the home purchase process",
+    "Comprehensive business banking services including lending, payment processing, and growth-focused tools",
+    "Local ownership and decision-making, contrasting with national bank standardized policies"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability\u2014appears to serve only South Carolina lowcountry region, excluding most U.S. customers",
+    "Website provides no specific information about interest rates, APYs, fees, or minimum balance requirements",
+    "No transparent pricing or product comparison tools available online; customers must contact bank for quotes",
+    "Limited information about digital banking features, mobile app capabilities, or online service limitations",
+    "No mention of investment services, wealth management, or advanced financial products beyond basic banking and mortgages"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "SC"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 26912,
   "latitude": 32.7832803795036,
   "longitude": -79.9317348096202,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "South Carolina families and individuals seeking relationship-based banking with local branch access and personalized financial guidance",
+    "South Carolina small business owners and entrepreneurs needing customized lending and business banking services from local decision-makers",
+    "Homebuyers in South Carolina lowcountry region wanting competitive mortgage rates with detailed personal service through the lending process",
+    "Customers prioritizing financial institution stability and long-term track record over digital banking convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Bank of South Carolina is ideal for South Carolina residents and businesses seeking personal, relationship-driven banking with proven financial stability (40+ years of five-star ratings) and local decision-making. The primary caveat is strict geographic limitation to South Carolina; customers outside this region cannot access the bank's services, and even within the state, the website lacks transparent pricing, making rate and fee comparison impossible without direct contact.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "256 Meeting St, Charleston, SC 29401",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

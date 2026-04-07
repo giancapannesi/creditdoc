@@ -1,13 +1,13 @@
 {
   "name": "Popular Bank",
   "slug": "popular-bank-new-york",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in New York, NY. $15061M in assets. 38 offices.",
-  "description_long": "Popular Bank is a community bank located in New York, NY, established in 1999. The bank holds approximately $15061M in total assets and $12034M in deposits. It operates 38 office locations. Designated as a Minority Board and Serving Hispanic Community. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Popular Bank is a full-service regional bank offering checking, savings, credit cards, personal loans, and investment services across the U.S., Puerto Rico, and Virgin Islands.",
+  "description_long": "Popular Bank is the U.S. banking subsidiary of Popular, Inc., a publicly traded financial services provider founded in 1893. Popular Bank itself opened in the Bronx, New York in 1961 and has grown to become one of the 50 largest U.S. banks by assets. The organization operates across three primary regions: the mainland United States, Puerto Rico, and the U.S. Virgin Islands, maintaining a century-long heritage of customer-focused banking.\n\nPopular Bank offers a comprehensive suite of consumer and business financial products. On the retail side, they provide checking and savings accounts, certificates of deposit (CDs) with tiered rate structures, money market accounts, and IRAs. They issue eight different credit card options and Mastercard debit cards. In the lending space, they offer personal loans for debt consolidation and credit building, home equity lines of credit, and mortgage services. Their investment division, Popular Investments, provides access to stocks, bonds, mutual funds, annuities, insurance products, and retirement and educational planning services. They also offer online and mobile banking with 24/7 account access and a private banking program called Popular Private Client with concierge services.\n\nPopular Bank distinguishes itself through multi-generational relationship banking, emphasizing long-term financial partnerships rather than transactional interactions. They provide extensive ATM access through 55,000+ Allpoint ATMs worldwide plus their own branch network. Their tiered CD rates reward larger deposits with higher APYs (up to 3.85% APY on $1M+ deposits). They also operate a payment processing platform called Clover for business clients, targeting professional practices and service-based businesses.\n\nAs a regional bank with significant scale, Popular Bank serves established banking needs well but operates primarily in three geographic regions. Their strengths lie in comprehensive product offerings and long-standing institutional credibility. The main limitation is geographic concentration outside their core markets, and their rates and products are competitive rather than leading-edge compared to national banks or fintech alternatives. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.popularbank.com",
   "affiliate_url": "",
@@ -22,23 +22,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts (including Easy Access Checking)",
+    "Savings accounts and money market accounts",
+    "Certificates of deposit (CDs) with tiered rate structure",
+    "Individual Retirement Accounts (IRAs)",
+    "Eight credit card options",
+    "Mastercard debit cards",
+    "Personal loans for debt consolidation and credit building",
+    "Home equity lines of credit",
+    "Mortgage lending services",
+    "Investment products (stocks, bonds, mutual funds)",
+    "Annuities and insurance products",
+    "Retirement and educational planning services",
+    "Online and mobile banking (24/7 access)",
+    "Clover payment processing platform for businesses",
+    "Popular Private Client concierge banking"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1999",
-    "Local community bank with personal service",
-    "38 locations"
+    "Access to 55,000+ Allpoint ATMs worldwide plus owned branch network across three regions",
+    "Tiered CD rates with APY up to 3.85% for deposits of $1M+, rewarding larger savings",
+    "Eight credit card options allowing customers to select based on specific needs",
+    "24/7 online and mobile banking access with full account management",
+    "Comprehensive product suite from checking through retirement planning under one institution",
+    "Popular Private Client program offering concierge banking and VIP services",
+    "Over 130 years of institutional history with established market presence"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitations\u2014primarily serves U.S., Puerto Rico, and Virgin Islands only",
+    "Rates are competitive but not leading compared to online-only banks or credit unions",
+    "No specific mention of fee structures, minimum balances, or account maintenance costs on homepage",
+    "Private Client program likely requires high minimum assets, excluding average consumers"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +63,7 @@
   "states_served": [
     "NY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34967,
   "latitude": 40.7040426324606,
   "longitude": -74.0114339878836,
@@ -86,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers in New York, New Jersey, South Florida, Puerto Rico, or Virgin Islands seeking comprehensive banking",
+    "Multi-generational families wanting long-term banking relationships with one institution",
+    "Business owners and professional practices needing integrated banking and payment processing (Clover)",
+    "High-net-worth individuals interested in private banking, investments, and wealth management services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Popular Bank is best for customers in its core geographic regions (Northeast U.S., Puerto Rico, Virgin Islands) who value comprehensive, relationship-based banking from an established regional institution. The main caveat is that it operates only in three regional markets and its rates are competitive but not exceptional compared to national online banks, making it less suitable for rate-focused savers or customers outside its service areas.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   "phone": "",
   "address": "85 Broad St, New York, NY 10004",
   "website": "https://www.popularbank.com",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

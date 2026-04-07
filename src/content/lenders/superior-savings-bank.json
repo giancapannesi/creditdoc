@@ -1,7 +1,7 @@
 {
   "name": "Superior Savings Bank",
   "slug": "superior-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
@@ -9,8 +9,8 @@
     "mutual-bank",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Superior, WI. $94M in assets. 1 office.",
-  "description_long": "Superior Savings Bank is a community bank located in Superior, WI, established in 1924. The bank holds approximately $94M in total assets and $77M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank chartered in 1924 offering personal banking, mortgages, mobile banking, and ATM access through QwikBank locations in Douglas County, Wisconsin.",
+  "description_long": "Superior Savings Bank was originally chartered in 1924 as \"State Building \u2013 Loan and Savings Association\" with the primary mission of serving the community with residential real estate loans and providing a safe deposit location for local residents. The institution converted to its current charter as Superior Savings Bank on January 1, 1993, and has maintained its original headquarters at 1130 Tower Avenue in Superior, Wisconsin since 1960. As the longest-standing community bank in Douglas County, the institution has built its reputation on deep local roots and personalized service.\n\nThe bank offers a comprehensive suite of consumer banking products including personal checking and savings accounts, certificates of deposit (CDs), investment products, personal loans, and mortgage financing. Their mortgage services include home purchase loans, construction loans, and refinancing options. Customers can access accounts through online banking, mobile banking applications, e-statements available 24/7, and a network of QwikBank ATMs that feature full-service deposit capabilities. The bank partners with established lending programs including WHEDA (Wisconsin Housing and Economic Development Authority) and the Federal Home Loan Bank's Downpayment Plus program to expand homeownership access.\n\nWhat distinguishes Superior Savings Bank is its positioning as a community-focused institution with 100+ years of local presence and commitment to Douglas County residents. The bank actively invests in modern banking technology (mobile banking, e-statements, accessibility features) while maintaining personalized service orientation. Their partnership with established state and federal lending programs demonstrates commitment to expanding homeownership access for income-eligible buyers, including down payment assistance programs.\n\nAs a traditional community bank, Superior Savings Bank is best suited for customers seeking local relationship banking with modern conveniences. The website provides basic product information but lacks detailed rate disclosures, fee schedules, or product comparisons. Prospective customers will need to contact the bank directly or visit a physical location for comprehensive pricing and eligibility information on specific products. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.ss-bank.com",
   "affiliate_url": "",
@@ -25,23 +25,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
+    "Certificates of Deposit (CDs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Home purchase mortgage loans",
+    "Home construction loans",
+    "Home refinance loans",
+    "Mobile banking application",
+    "Online banking portal with bill pay",
+    "E-statements (24/7 access)",
+    "QwikBank ATM network with deposit capability",
+    "Investment products",
+    "WHEDA mortgage program partnerships"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1924",
-    "Local community bank with personal service",
-    "1 location"
+    "Longest-standing community bank in Douglas County with 100+ years of established presence and local commitment",
+    "Offers mortgage products with partnerships to WHEDA and Downpayment Plus programs for income-eligible first-time homebuyers",
+    "Full-suite digital banking including 24/7 mobile banking, e-statements, and online account management",
+    "QwikBank ATM network with full deposit capability for convenient after-hours access",
+    "Member FDIC and Equal Housing Lender certification providing deposit protection and fair lending assurance",
+    "Accessible website design with AudioEye accessibility toolbar for customers with visual impairments",
+    "Personal loan options and certificate of deposit (CD) products for savings goals"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted primarily to Douglas County, Wisconsin \u2014 not available to customers in most other states",
+    "Website lacks current interest rates, fee schedules, and product comparison details requiring customers to contact bank directly",
+    "No clear disclosure of minimum account balances, opening deposit requirements, or qualification criteria for personal loans",
+    "No mention of business banking services despite being chartered as a full commercial bank entity"
   ],
   "contact": {
     "phone": "",
@@ -53,7 +63,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28790,
   "latitude": 46.7245050178489,
   "longitude": -92.1034290045981,
@@ -89,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Douglas County, Wisconsin residents seeking personalized community banking with local decision-making",
+    "First-time homebuyers and existing homeowners interested in WHEDA or down payment assistance programs",
+    "Customers prioritizing relationship banking and local ATM access over online-only banking convenience",
+    "Individuals seeking a traditional bank with modern digital capabilities and accessibility features"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Superior Savings Bank is best for residents of Douglas County, Wisconsin seeking traditional community banking with modern digital conveniences and personalized mortgage service. The primary caveat is severe geographic limitation \u2014 the bank operates only in Douglas County and is not available to customers outside this region, making it unsuitable for those seeking multi-state banking access.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +119,11 @@
   ],
   "phone": "",
   "address": "1130 Tower Ave, Superior, WI 54880",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

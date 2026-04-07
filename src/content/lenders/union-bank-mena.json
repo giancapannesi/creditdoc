@@ -1,14 +1,14 @@
 {
   "name": "Union Bank",
   "slug": "union-bank-mena",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Mena, AR. $678M in assets. 11 offices.",
-  "description_long": "Union Bank is a community bank located in Mena, AR, established in 1934. The bank holds approximately $678M in total assets and $598M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving West Central Arkansas and the River Valley with 10 locations, offering personal and business checking, savings, lending, and mortgage products with local decision-making.",
+  "description_long": "Union Bank is a regional community bank deeply rooted in West Central Arkansas and the River Valley, operating 10 branch locations throughout the area. The bank emphasizes local ownership and decision-making as a core differentiator from larger national institutions. The institution is FDIC-insured and backed by the full faith and credit of the U.S. Government, providing standard deposit protection.\n\nUnion Bank offers a comprehensive suite of financial products including personal checking and savings accounts, business checking and savings, debit cards, digital banking services, credit cards, personal loans, mortgage lending (conventional, USDA, FHA, VA, home equity, and refinance options), business loans, and agriculture lending. They provide Zelle money transfer capabilities and feature MyFi 360, a personal financial planning tool accessible through their mobile app that tracks expenses, manages cash flow, sets financial goals, and links external accounts. The bank also offers online account opening through their \"Open Anywhere\" platform.\n\nUnion Bank distinguishes itself through a \"high-touch and high-tech\" approach, combining modern digital conveniences with personalized local service. Their marketing emphasizes community commitment and relationship-based banking\u2014the bank positions itself as serving customers, neighbors, and friends rather than operating as a purely transactional institution. The website features customer testimonials spanning decades-long relationships, highlighting customer retention and community presence. Local decision-making is explicitly positioned as a competitive advantage against larger regional and national banks.\n\nAs a regional community bank, Union Bank is best suited for customers in its service areas who value personal relationships and local decision-making over potentially lower rates at larger institutions. The bank's product offerings are standard for community banks; no premium or specialized financial products are evident from the website. Customers seeking highly competitive rates, extensive branch networks, or specialized investment products may find better options elsewhere. The geographic limitation to West Central Arkansas and the River Valley is a significant constraint for non-local customers. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.gounion.bank",
   "affiliate_url": "",
@@ -23,23 +23,43 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Debit cards (personal and business)",
+    "Digital banking platform",
+    "Zelle money transfer service",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Credit cards",
+    "Conventional mortgage loans",
+    "FHA home loans",
+    "VA home loans",
+    "USDA home loans",
+    "Home equity loans",
+    "Mortgage refinancing",
+    "Business lending",
+    "Agriculture lending",
+    "MyFi 360 financial planning tool",
+    "Online account opening (Open Anywhere)",
+    "Financial calculators"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1934",
-    "Local community bank with personal service",
-    "11 locations"
+    "FDIC-insured deposits backed by U.S. Government guarantee",
+    "10 branch locations throughout West Central Arkansas and River Valley service area",
+    "Local decision-making and community-focused banking model",
+    "MyFi 360 financial planning tool included in mobile app with expense tracking and goal-setting",
+    "Online account opening available through 'Open Anywhere' platform",
+    "Multiple mortgage product options including FHA, VA, USDA, and conventional loans",
+    "Zelle integration for peer-to-peer money transfers",
+    "Agriculture lending available for rural customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Service area limited to West Central Arkansas and River Valley only\u2014no online-only national banking option",
+    "No specific rate information, fee schedules, or product comparison data provided on website",
+    "Limited digital banking features described; no mention of investment products, wealth management, or advanced business banking services",
+    "Smaller institution may have higher minimum balances or fewer ATM locations than national banks",
+    "No information about customer service availability, phone support hours, or service quality metrics"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +71,7 @@
   "states_served": [
     "AR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14597,
   "latitude": 34.58548683421,
   "longitude": -94.228632475356,
@@ -87,18 +107,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "West Central Arkansas and River Valley residents seeking relationship-based community banking",
+    "Small business owners and agricultural operators needing local lending decisions",
+    "Customers who value long-term banking relationships and personal service over rate optimization",
+    "Families seeking straightforward checking, savings, and mortgage products with local branch access"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Union Bank is best for customers living in or near West Central Arkansas and the River Valley who prioritize community relationships and local decision-making over rate shopping. The primary caveat is geographic limitation\u2014this is exclusively a regional bank with no national presence, making it unsuitable for customers outside its service area or those seeking the convenience and rates of larger national or online banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +127,11 @@
   ],
   "phone": "",
   "address": "303 Highway 71 N, Mena, AR 71953",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

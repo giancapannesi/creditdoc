@@ -1,15 +1,15 @@
 {
   "name": "Community State Bank Of Canton",
   "slug": "community-state-bank-of-canton",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Canton, OK. $69M in assets. 2 offices.",
-  "description_long": "Community State Bank Of Canton is a community bank located in Canton, OK, established in 1985. The bank holds approximately $69M in total assets and $60M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community State Bank of Canton is an Oklahoma-based community bank offering personal and business checking, savings, loans, and deposit services across two locations.",
+  "description_long": "Community State Bank of Canton is a regional community bank headquartered in Canton, Oklahoma, with an additional branch in Seiling. The bank emphasizes its local roots and commitment to serving both individual consumers and business customers in the community with personalized service paired with modern banking conveniences.\n\nThe bank offers a comprehensive range of deposit accounts including personal checking, business checking, and savings accounts. On the lending side, they provide personal loans and business loans to qualified applicants. Beyond core banking, they provide account services such as debit cards (with ATM access), cashier's checks, money orders, wire transfers, safe deposit boxes, night deposit services, notary services, and check reordering through a third-party provider (Whit-Co Checks). They also offer savings bond redemption and life insurance (Accidental Death and Dismemberment coverage) through their Bank Check Club program.\n\nWhat distinguishes Community State Bank of Canton is its explicit positioning as a local, community-focused institution rather than a national chain. Both branches offer physical night deposit boxes for after-hours transactions, and the bank maintains notary services at both locations for customer convenience. The emphasis on personalized service and local decision-making is a recurring theme throughout their marketing materials.\n\nThe bank operates a straightforward service model typical of regional community banks. Limitations include no international wire transfer capability and various fees attached to services (debit card maintenance, safe deposit box rental, wire transfers, cashier's checks, and money orders). Their website provides basic information but lacks detailed rate information, loan terms, or account fee schedules, requiring customers to contact the bank directly for specifics. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.csbcanton.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Business checking accounts",
+    "Personal and business savings accounts",
+    "Certificates of Deposit (CDs)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business loans",
+    "Debit cards with ATM access",
+    "Cashier's checks and money orders",
+    "Wire transfers (domestic only)",
+    "Safe deposit boxes (multiple sizes)",
+    "Night deposit boxes (both locations)",
+    "Notary services (both locations)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1985",
-    "Local community bank with personal service",
-    "2 locations"
+    "Two physical branch locations (Canton and Seiling) with night deposit boxes at both for after-hours deposits",
+    "Notary services available at both locations for customer convenience",
+    "Debit cards function as ATM cards for cash access beyond just checking withdrawals",
+    "Both personal and business lending products available from a single institution",
+    "Accidental Death and Dismemberment insurance available through Bank Check Club program",
+    "Safe deposit boxes available in multiple sizes at both branch locations",
+    "Online check reordering capability through integrated third-party service (Whit-Co Checks)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Does not offer international wire transfers, limiting options for customers with international payment needs",
+    "Debit cards subject to monthly maintenance fees, adding recurring costs to account holders",
+    "Website lacks specific rate information, fee schedules, or detailed loan terms\u2014requires calling for pricing",
+    "Limited geographic footprint restricted to Canton and Seiling, Oklahoma only",
+    "Safe deposit box rental requires annual fees plus additional charges for lost keys or box drilling"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 26416,
   "latitude": 36.05337218581,
   "longitude": -98.5884200947327,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and self-employed individuals in the Canton/Seiling Oklahoma area seeking local relationship banking",
+    "Long-term residents of northwestern Oklahoma seeking community-focused banking with personalized service",
+    "Customers who value physical branch access and after-hours deposit capabilities",
+    "Individuals and businesses needing basic lending products from a locally-operated institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Community State Bank of Canton is best for small business owners, self-employed individuals, and long-term residents of northwestern Oklahoma seeking personalized, local banking services. The main caveat is the lack of transparent pricing information on their website and limited geographic reach confined to two Oklahoma locations, requiring direct contact for rate and fee details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "101 W Main St, Canton, OK 73724",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

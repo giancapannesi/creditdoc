@@ -1,14 +1,14 @@
 {
   "name": "State Bank",
   "slug": "state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Waterloo, IL. $304M in assets. 5 offices.",
-  "description_long": "State Bank is a community bank located in Waterloo, IL, established in 1894. The bank holds approximately $304M in total assets and $261M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "State Bank is a regional community bank offering personal and business banking, lending, and deposit products across Illinois and Missouri with five branch locations.",
+  "description_long": "State Bank operates as a community-focused financial institution serving the Illinois and Missouri region with a primary presence in the Columbia, Waterloo, Valmeyer, and St. Louis areas. The bank was established with an emphasis on personalized customer service and local relationship banking, positioning itself as more than just a transactional institution but as a community partner invested in customer success.\n\nState Bank's service offerings include personal checking and savings accounts, business banking solutions, lending services (personal loans and mortgages), certificate of deposit accounts, wire transfer capabilities, and specialized commercial lending for business growth. They highlight a cash back rewards checking account offering 3% back on debit card purchases for the first $200 spent monthly. The bank provides both digital banking through a mobile app and online platform, as well as in-person services across five physical branch locations with extended hours including Saturday availability.\n\nThe bank distinguishes itself through emphasis on personalized customer service, describing themselves as \"neighbors\" rather than distant corporate entities, and highlighting their willingness to support small business growth with relationship-based lending decisions. They promote cutting-edge technology infrastructure including mobile banking, online platforms, and advanced security features. Customer testimonials emphasize staff quality, account management transparency, and responsive service across both personal and business segments.\n\nState Bank is a legitimate regional banking institution with verifiable branch locations, phone numbers, and standard banking operations. The primary limitation is geographic scope\u2014they operate only five branches across Illinois and Missouri, making them inaccessible to customers outside this region. No specific deposit insurance information, loan terms, rate details, or regulatory filings are provided on the website, requiring customers to contact branches directly for detailed product specifications and pricing. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.sbw.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with cash back rewards (3% on first $200 debit purchases)",
+    "Personal savings accounts",
+    "Certificate of Deposit (CD) accounts with competitive rates",
+    "Business checking and savings accounts",
+    "Commercial lending and business loans for expansion and operations",
+    "Personal loans for various purposes",
+    "Mortgage lending for home purchase and refinance",
+    "Wire transfer services (send and receive funds)",
+    "Mobile banking app with 24/7 access",
+    "Online banking platform",
+    "Text concierge support service",
+    "Check reordering and account management tools"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1894",
-    "Local community bank with personal service",
-    "5 locations"
+    "3% cash back rewards on debit card purchases up to $200 monthly on designated checking accounts",
+    "Five physical branch locations with extended Saturday hours (8:30am-12pm) for in-person banking",
+    "Personalized business lending with dedicated commercial lending team willing to review business plans",
+    "24/7 digital access through mobile app and online banking platform with stated advanced security features",
+    "Text concierge service (833-244-2077) for customer support beyond traditional phone banking",
+    "Competitive CD rates highlighted as available for savings maximization",
+    "Same-day wire transfer capabilities mentioned in service offerings"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Illinois and Missouri with only five branches, making access impossible for most U.S. consumers",
+    "No specific loan terms, APR rates, or product pricing details disclosed on website\u2014requires direct contact with branches",
+    "Website does not mention FDIC insurance coverage, making deposit safety protections unclear to potential customers",
+    "No information on minimum account balances, monthly fees, or maintenance requirements for any products",
+    "Limited information about business lending criteria, approval timelines, or specific loan products available"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 12706,
   "latitude": 38.355772997418,
   "longitude": -90.154469967892,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners in Illinois and Missouri seeking relationship-based lending with personal attention to business plans",
+    "Consumers in Columbia, Waterloo, Valmeyer, or St. Louis areas seeking community banking with extended branch hours",
+    "Customers wanting cash back rewards on debit card spending without traditional credit card requirements",
+    "Individuals seeking home purchase or refinance mortgages with local lender relationship management"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "State Bank is best for small business owners and consumers within Illinois and Missouri seeking relationship-based community banking with personalized service and extended branch access. The primary caveat is strict geographic limitation\u2014the bank operates only five branches across two states, making it inaccessible to the vast majority of U.S. consumers, and specific product terms/rates are not disclosed online.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "885 N Illinois Route 3, Waterloo, IL 62298",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

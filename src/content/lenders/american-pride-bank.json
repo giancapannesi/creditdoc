@@ -1,14 +1,14 @@
 {
   "name": "American Pride Bank",
   "slug": "american-pride-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Macon, GA. $773M in assets. 5 offices.",
-  "description_long": "American Pride Bank is a community bank located in Macon, GA, established in 2007. The bank holds approximately $773M in total assets and $646M in deposits. It operates 5 office locations. Designated as a Multi-Racial American. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering checking, savings, credit cards, and retirement products designed for small business owners and entrepreneurs.",
+  "description_long": "American Pride Bank is a full-service FDIC-insured bank founded by and for owner-operators, entrepreneurs, and small business owners. The bank was established with the explicit mission to serve individuals building wealth and growing businesses from the ground up, positioning itself as a partner for families and business owners rather than a mass-market financial institution.\n\nThe bank offers a comprehensive suite of personal and business financial products. Personal services include checking accounts with competitive interest rates (currently 5.00% APY on balances up to $100,000 through their American Rewards checking account), credit cards with multiple reward structures (low-rate, cash-back, and flexible rewards options), debit cards, mobile banking through the APB app, and CD-based Individual Retirement Accounts. Business products are advertised but not detailed on the pages provided. All deposit accounts are FDIC-insured, backed by the full faith and credit of the U.S. Government.\n\nAmerican Pride Bank distinguishes itself through several features: proactive fraud detection with text and phone alerts for debit card transactions, card suspension capability directly through the mobile app, zero fraud liability on credit cards (issued through Elan Financial Services), 24/7 cardmember service, and community involvement initiatives. The bank emphasizes accessibility with screen-reader support and provides educational tools like a retirement calculator. The mobile app enables check deposit, bill pay, balance checking, and card management.\n\nThe bank appears well-positioned for its target demographic but operates with limited transparency regarding interest rates on savings accounts, loan products, branch locations, and specific business banking terms. The website provides foundational information but lacks detail on fee structures, specific APYs for various products beyond the checking account, and minimum account requirements. As an FDIC-insured institution, it offers deposit protection, but interested customers would need additional research to compare rates and terms with competitors. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.americanpridebank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "FDIC-insured checking accounts with American Rewards program",
+    "High-yield savings with 5.00% APY on balances up to $100,000",
+    "CD-based Individual Retirement Accounts (IRAs)",
+    "Personal credit cards with rewards, cash-back, and low-rate options",
+    "Business credit cards",
+    "Free debit cards with fraud alert system",
+    "Mobile banking app with check mobile deposit and bill pay",
+    "Zero fraud liability protection on credit cards",
+    "24/7 cardmember customer service",
+    "Card suspension management through mobile app",
+    "Retirement planning calculator",
+    "Community involvement and partnership programs"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2007",
-    "Local community bank with personal service",
-    "5 locations"
+    "5.00% APY on American Rewards checking account (up to $100,000 balance)",
+    "FDIC-insured deposits backed by full U.S. Government faith and credit",
+    "Zero fraud liability on credit cards issued through Elan Financial Services",
+    "Advanced fraud detection with real-time text alerts and optional phone confirmation",
+    "Card suspension feature available directly within mobile app without calling bank",
+    "Free mobile banking app with check deposit, bill pay, and account management",
+    "24/7 cardmember service and customer support",
+    "CD-based IRA products for retirement savings with online calculator tool"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not clearly disclose interest rates for savings accounts, money market accounts, or CDs",
+    "Minimum deposit and account balance requirements not specified on available pages",
+    "Limited information about business banking products despite targeting small business owners",
+    "No details on loan products, lines of credit, or mortgage services despite being a full-service bank",
+    "Physical branch locations and hours not displayed on provided website content"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "GA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58584,
   "latitude": 32.8156820092423,
   "longitude": -83.7071129790075,
@@ -84,21 +96,22 @@
       "FDIC Cert #58584"
     ]
   },
-  "rating": 4.2,
+  "rating": 4.3,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 4.1,
-    "transparency": 4.3,
+    "transparency": 4.1,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and entrepreneurs seeking a bank designed specifically for their needs",
+    "Consumers wanting high-yield checking with competitive APY and rewards structure",
+    "Individuals prioritizing proactive fraud detection and card management convenience",
+    "Savers interested in CD-based retirement accounts with online planning tools"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "American Pride Bank is best for entrepreneurs, small business owners, and individuals seeking a bank explicitly designed around their growth needs, particularly those interested in high-yield checking and rewards-focused products. The main caveat is that the website lacks critical transparency on rates for most products beyond checking, fee structures, minimum requirements, and the full scope of business banking offerings\u2014requiring direct contact or deeper research before account opening.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-24",
   "cities_served": [
@@ -115,8 +128,11 @@
     "data_period": "2023-present",
     "last_checked": "2026-03-24"
   },
-  "processing_status": "raw",
-  "quality_score": 9,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 12,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

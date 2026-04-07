@@ -1,13 +1,13 @@
 {
   "name": "Poppy Bank",
   "slug": "poppy-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Santa Rosa, CA. $7585M in assets. 39 offices.",
-  "description_long": "Poppy Bank is a community bank located in Santa Rosa, CA, established in 2005. The bank holds approximately $7585M in total assets and $5908M in deposits. It operates 39 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank serving California with personal and business checking, savings, CDs, credit cards, and commercial lending services.",
+  "description_long": "Poppy Bank is a California-based FDIC-insured bank that provides comprehensive banking services to both personal and business customers. The institution emphasizes its commitment to supporting local communities and economic prosperity, with a stated mission focused on meeting client banking needs while making a positive difference in the communities it serves. The bank maintains physical locations across multiple California regions including Sonoma County, Los Angeles, San Diego, Bay Area, and Sacramento based on their advertising footprint.\n\nThe bank offers a full suite of personal banking products including checking accounts, savings and money market accounts, personal and IRA certificates of deposit, personal credit cards, and digital/mobile banking platforms. For business customers, Poppy Bank provides business checking accounts, savings and money market accounts, business credit cards, commercial lending, treasury management services, and additional business services. They also offer specialized products like the Poppy Blooms Youth Savings Account for younger customers and resources for homeowners facing financial challenges.\n\nPoppy Bank distinguishes itself through FDIC insurance backing, community-focused lending practices highlighted in their business spotlight content, and a commitment to supporting local businesses and nonprofits. Their website features business case studies and financial education content, suggesting a relationship-based approach rather than a purely digital-first model. The bank provides both toll-free customer service and maintains physical branch locations for in-person banking.\n\nAs a regional bank, Poppy Bank likely has more limited geographic reach and potentially fewer digital conveniences compared to national online banks. Their specific product rates, fees, and competitive advantages are not detailed on the provided website content, making detailed product comparisons difficult. The bank appears positioned for California residents and businesses seeking community-oriented banking with traditional personal service. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.poppy.bank",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings and money market accounts",
+    "Personal and IRA certificates of deposit",
+    "Personal credit cards",
+    "Business checking accounts",
+    "Business savings and money market accounts",
+    "Business credit cards",
+    "Commercial lending services",
+    "Treasury management services",
+    "Digital and mobile banking platforms",
+    "Youth savings accounts (Poppy Blooms)",
+    "Homeowner assistance and support programs"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2005",
-    "Local community bank with personal service",
-    "39 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Comprehensive product suite including checking, savings, CDs, credit cards, and commercial lending",
+    "Multiple physical locations across California regions for in-person banking",
+    "Specialized offerings like youth savings accounts (Poppy Blooms) and homeowner assistance programs",
+    "Dedicated treasury management and commercial lending teams for business customers",
+    "Community-focused lending with published business spotlights and local impact initiatives",
+    "Mobile and digital banking platforms alongside traditional service options"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to California only, not available nationwide",
+    "Specific interest rates, APYs, and fee schedules not disclosed on website",
+    "Limited information about product competitiveness versus national and online banks",
+    "No mention of specialized services like investment management or wealth advisory",
+    "Online account opening process details not fully transparent on website"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "CA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57903,
   "latitude": 38.437869757618,
   "longitude": -122.71322820462,
@@ -83,21 +94,22 @@
       "FDIC Cert #57903"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "California-based small business owners seeking relationship-based commercial banking",
+    "Local individuals and families preferring branch-based banking with community connection",
+    "Parents looking for youth savings products with financial education focus",
+    "Homeowners needing financial assistance programs and mortgage-related services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Poppy Bank is best suited for California residents and small-to-medium businesses seeking full-service banking with community relationships and local branch access. The primary caveat is limited geographic availability outside California and lack of publicly disclosed competitive rates, requiring direct contact to compare products against national alternatives.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,10 @@
   ],
   "phone": "",
   "address": "111 Santa Rosa Avenue, Santa Rosa, CA 95404",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

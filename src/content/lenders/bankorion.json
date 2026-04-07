@@ -1,14 +1,14 @@
 {
   "name": "Bankorion",
   "slug": "bankorion",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Orion, IL. $676M in assets. 9 offices.",
-  "description_long": "Bankorion is a community bank located in Orion, IL, established in 1890. The bank holds approximately $676M in total assets and $563M in deposits. It operates 9 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "BankORION is a community bank serving the Greater Quad Cities area with checking, savings, mortgages, personal loans, and CDs through local branches and digital banking.",
+  "description_long": "BankORION is a regional bank focused on serving customers in the Greater Quad Cities area. The institution positions itself as a local banking alternative, emphasizing personalized service and community relationships rather than large national chain banking.\n\nThe bank offers a comprehensive suite of retail banking services including deposit accounts (checking, savings), Certificates of Deposit with promotional rates, mortgage lending, personal loans, and vehicle financing. Customers can access services through physical branch locations, online banking, and a mobile application. The bank promotes its mobile app as featuring streamlined banking tools and a Personal Financial Management tool.\n\nBankORION distinguishes itself through relationship-based lending, as evidenced by customer testimonials highlighting specific loan officers like Mike Ducey for mortgage services. The bank emphasizes local decision-making and personalized attention throughout the lending process. They currently promote a CD special offering 9 months at 3.75% APY, suggesting competitive deposit products.\n\nAs a regional community bank, BankORION serves a specific geographic footprint (Quad Cities area) rather than operating nationally. The website provides limited transparency regarding FDIC insurance status, specific loan terms, APRs, or detailed product specifications. The company focuses marketing on retail banking and mortgage services but provides minimal information about deposit insurance, lending standards, or regulatory standing on the public website. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://WWW.BANKORION.COM",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Checking and savings accounts",
+    "Certificates of Deposit (CDs) with promotional rates",
+    "Mortgage lending and home loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Vehicle/auto loans and financing",
+    "Online banking platform with account management",
+    "Mobile banking application with Personal Financial Management tools",
+    "Positive Pay fraud prevention for business accounts",
+    "Financial calculators and budgeting tools",
+    "Switch/transfer services for customers moving from other banks",
+    "Pre-approval processes for mortgages",
+    "Debit card and check services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1890",
-    "Local community bank with personal service",
-    "9 locations"
+    "Offers personalized mortgage lending with named relationship managers (e.g., Mike Ducey) credited in customer testimonials",
+    "Provides mobile app with integrated Personal Financial Management tools for budgeting and financial planning",
+    "Promotes competitive CD rates (3.75% for 9-month terms as advertised)",
+    "Offers comprehensive loan products including mortgages, personal loans, and vehicle financing in one institution",
+    "Includes fraud prevention tools and education, with Positive Pay enrollment for business accounts",
+    "Provides online and mobile banking with account access, transfers, and convenience features",
+    "Located in community with multiple physical branch locations for in-person service"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability\u2014serves only Greater Quad Cities area, not available nationally",
+    "Website lacks specific APR, interest rate, or detailed loan term information for comparison shopping",
+    "No transparent disclosure of FDIC insurance coverage or regulatory information on public website",
+    "Limited information about account fees, minimum balances, or qualification requirements",
+    "Website does not display business hours, complete branch locations, or phone numbers prominently"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 11739,
   "latitude": 41.3532230031459,
   "longitude": -90.3818359646862,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Greater Quad Cities residents seeking relationship-based local banking with named loan officers",
+    "Home buyers who prioritize personalized mortgage service and local decision-making over online-only lending",
+    "Community members seeking traditional banking services (checking, savings, CDs) with physical branch access",
+    "Small business owners needing fraud prevention tools and local business account management"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "BankORION is best for Greater Quad Cities residents who value personalized, relationship-based banking and local mortgage service over national chain convenience. The main caveat is that the bank operates exclusively in a limited geographic region and provides minimal online transparency regarding rates, terms, and fees\u2014prospective customers must visit a branch or call directly for specific product information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1114 4Th St, Orion, IL 61273",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }
