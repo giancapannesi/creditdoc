@@ -1,14 +1,14 @@
 {
   "name": "Meade County Bank",
   "slug": "meade-county-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Brandenburg, KY. $448M in assets. 4 offices.",
-  "description_long": "Meade County Bank is a community bank located in Brandenburg, KY, established in 1984. The bank holds approximately $448M in total assets and $377M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Kentucky-based community bank offering personal and business checking, savings, mortgages, and construction financing across multiple local branches.",
+  "description_long": "Meade County Bank is a community bank operating as part of the First Breckinridge Bancshares family, which serves Kentucky and Southern Indiana through a portfolio of seven banks. The bank positions itself as a local, relationship-focused institution emphasizing personalized service with the tagline \"We listen, then we lend.\"\n\nThe bank offers a comprehensive suite of personal banking products including checking and savings accounts, certificates of deposit (currently offering 4.00% APY on 6-month CDs), and financial management tools like their Insights platform for budget organization. On the business side, Meade County Bank provides mortgage lending for home purchases and refinances, construction financing with flexible terms, and bridge loans to facilitate home transitions. They also offer online banking, debit cards, and fraud detection tools like Positive Pay.\n\nMeade County Bank distinguishes itself through local community presence and emphasis on relationship banking. They offer a $50 bonus for new student checking accounts and position themselves within a larger regional network of Kentucky banks, suggesting stability and expanded resources beyond a single-location institution. Their membership in First Breckinridge Bancshares provides access to broader banking services and community involvement, as evidenced by their scholarship programs.\n\nAs a traditional community bank, Meade County Bank serves customers seeking local service and relationship-based lending decisions. However, consumers should be aware they are a regional institution with limited branch locations compared to national banks, and their product offerings appear more traditional without extensive digital-first features. Interest rates and fees should be compared directly with competitors, and availability of services may depend on location within their service areas.",
   "logo_url": "",
   "website_url": "https://www.meadecountybank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with student checking bonus",
+    "Savings accounts and Certificate of Deposit products",
+    "Online banking and account login services",
+    "Debit card activation and PIN management",
+    "Mortgage lending for home purchase and refinance",
+    "Construction financing and bridge loans",
+    "Positive Pay check fraud detection",
+    "Insights financial management platform",
+    "Lost card reporting and replacement",
+    "Multiple branch locations for in-person banking",
+    "Customer support via phone and branch visits",
+    "Business banking services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1984",
-    "Local community bank with personal service",
-    "4 locations"
+    "6-month CDs offer competitive 4.00% APY according to current website",
+    "Student checking account bonus of $50 for new accounts",
+    "Positive Pay fraud detection tool included for checking accounts",
+    "Insights financial management platform to help organize and track finances",
+    "Part of larger First Breckinridge Bancshares network with seven Kentucky/Indiana banks",
+    "Offers construction and bridge loans alongside standard mortgage products",
+    "Community scholarship program demonstrates local commitment"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited branch network compared to national banks; service dependent on location in Kentucky/Southern Indiana",
+    "Website does not display interest rates for checking/savings accounts or loan terms",
+    "No mention of mobile banking app features or digital-first capabilities",
+    "Minimal information about overdraft fees, minimum balances, or other account terms",
+    "Traditional bank model may lack fintech conveniences younger consumers expect"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "KY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 25173,
   "latitude": 37.9899209868116,
   "longitude": -86.1909759911667,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Kentucky and Southern Indiana residents seeking community-focused relationship banking",
+    "Small business owners needing construction or bridge financing with personalized service",
+    "Homebuyers in the region looking for mortgage lending from a local institution",
+    "Students opening their first checking account with the $50 bonus incentive"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Meade County Bank is best for customers in Kentucky and Southern Indiana seeking traditional community banking with personal service and relationship-based lending decisions. The main caveat is limited geographic availability and a lack of transparency on the website regarding rates, fees, and digital banking features\u2014requiring direct contact with the bank for detailed product information and comparison shopping.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "2175 Bypass Rd, Brandenburg, KY 40108",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

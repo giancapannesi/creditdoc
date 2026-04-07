@@ -1,15 +1,15 @@
 {
   "name": "New Bedford",
   "slug": "new-bedford",
-  "category": "payday-alternatives",
+  "category": "banking",
   "subcategories": [
     "credit-union",
     "fdic-equivalent",
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "State-Chartered Credit Union in , . Low-income designated. NCUA insured. 2 locations.",
-  "description_long": "New Bedford is a state-chartered credit union serving members in , , established in 1932. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) — small, affordable loans designed to replace predatory payday lending. The credit union operates 2 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "Official municipal government website for New Bedford, Massachusetts. Provides access to city services, permits, and public information rather than financial products.",
+  "description_long": "New Bedford is a city government website serving as the official digital presence of New Bedford, Massachusetts. The site functions as a municipal portal rather than a financial services company, offering residents and businesses access to city administrative services, public records, and government information. The website is protected by Cloudflare security services to ensure safe access to municipal data and services. However, the site appears to have access or loading issues, as the captured content shows only a security verification page rather than functional service offerings. Based on the URL and context, this appears to be a misclassification in the CreditDoc database. New Bedford is a city government entity, not a financial services provider of any kind. The site would typically offer services like permit applications, tax information, voting records, public meeting notices, and other municipal administrative functions\u2014none of which relate to consumer finance, lending, credit services, or the payday-alternatives category. The current categorization as a payday alternative is factually incorrect and appears to be a data entry error.",
   "logo_url": "",
   "website_url": "https://www.newbedford-ma.gov/",
   "affiliate_url": "",
@@ -33,16 +33,18 @@
     "Payday Alternative Loans (PALs)"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
+    "Not-for-profit \u2014 typically lower fees and better rates than banks",
+    "NCUA insured \u2014 deposits protected up to $250,000",
     "Established in 1932",
     "Member-owned cooperative",
-    "Low-income designated — may offer Payday Alternative Loans (PALs)"
+    "Low-income designated \u2014 may offer Payday Alternative Loans (PALs)"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Not a financial services company\u2014is a municipal government website",
+    "Currently miscategorized as a payday-alternatives lender when it offers no lending products",
+    "Website shows only security verification page; full content not accessible for review",
+    "No consumer finance services, loans, or credit products offered",
+    "Listing creates consumer confusion by appearing in financial services directories"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +54,7 @@
   "founded_year": 1932,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "66733",
   "published": true,
   "review_status": "draft",
@@ -97,14 +99,16 @@
     "Payday loan alternatives (PALs)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "This is a municipal government website for the City of New Bedford, Massachusetts, not a financial services provider. It should be immediately removed from the CreditDoc consumer finance database as it offers no lending, credit, or payday-alternative products of any kind.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

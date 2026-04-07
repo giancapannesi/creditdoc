@@ -1,13 +1,13 @@
 {
   "name": "Harris Employees",
   "slug": "harris-employees",
-  "category": "payday-alternatives",
+  "category": "banking",
   "subcategories": [
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "State-Chartered Credit Union in , . NCUA insured. 1 location.",
-  "description_long": "Harris Employees is a state-chartered credit union serving members in , , established in 1947. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "Harris Health System employee portal providing access to HR resources, benefits management, and internal systems for active employees and retirees of the Harris County public health system.",
+  "description_long": "Harris Health System is a public healthcare organization serving Harris County, Texas, with a comprehensive network of hospitals, clinics, and specialty care facilities. The \"Employees\" section of their website functions as an internal portal rather than a consumer financial product\u2014it provides Harris Health staff with access to employment-related resources and administrative tools. The portal offers active employees and retirees access to self-service systems including leave management, benefit premium payments, wellness programs, and learning management tools. What distinguishes this offering is its integration with Harris Health's broader institutional infrastructure, including Imprivata authentication, PeopleSoft payroll systems, and Citrix portal access, reflecting a large public healthcare employer's internal HR ecosystem. However, this is fundamentally an employee intranet resource, not a consumer financial service product. There is no evidence on the provided website content of any payday alternative loans, employer advances, emergency cash products, or financial lending services offered through this portal. The miscategorization appears to stem from confusion between an employer's internal benefits administration platform and actual consumer financial products. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.harrishealth.org/Pages/Employees.aspx",
   "affiliate_url": "",
@@ -22,23 +22,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)"
+    "PeopleSoft Employee Self-Service payroll and HR access",
+    "Online Benefit Premium Payments",
+    "Leave Management system",
+    "Healthy@Harris Employee Wellness program",
+    "Recognition Connection employee recognition platform",
+    "Retiree Resources access",
+    "Saba Learning Management System (LMS)",
+    "Emergency Management resources",
+    "Citrix Portal access for remote systems",
+    "Web Mail and M365 email access",
+    "Account unlock and password reset functionality"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1947",
-    "Member-owned cooperative"
+    "Integrated access to multiple employee systems from a single portal",
+    "Wellness program (Healthy@Harris) available to active employees",
+    "Online benefit premium payment functionality for convenient management",
+    "Support for both active employees and retirees",
+    "Two-factor authentication via Imprivata for security",
+    "Learning management system (Saba LMS) for professional development"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Not a consumer financial product\u2014restricted to Harris Health employees only",
+    "No lending, emergency cash, or paycheck advance services evident",
+    "Portal access requires employment at Harris Health System",
+    "Requires downloaded software (Imprivata) for authentication",
+    "No public-facing financial services available through this platform"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +57,7 @@
   "founded_year": 1947,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "67563",
   "published": true,
   "review_status": "draft",
@@ -82,25 +91,28 @@
   "rating": 4.1,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.7,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.2
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Community-focused financial services"
+    "Active Harris Health System employees needing HR and benefits access",
+    "Harris Health retirees managing retirement resources and benefits",
+    "Staff requiring learning and development resources through Saba LMS"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "This is an employee intranet portal for Harris Health System staff, not a consumer financial product. It should not be categorized as a payday alternative or any consumer lending category. The correct categorization is 'banking' as an internal portal operated by a healthcare employer, though even this is imprecise\u2014this is strictly an HR/benefits administration tool with no consumer financial services.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 7,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06",
+  "quarantine_reason": "not_consumer_finance"
 }

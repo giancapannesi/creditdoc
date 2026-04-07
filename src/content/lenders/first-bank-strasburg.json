@@ -1,14 +1,14 @@
 {
   "name": "First Bank",
   "slug": "first-bank-strasburg",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Strasburg, VA. $2039M in assets. 33 offices.",
-  "description_long": "First Bank is a community bank located in Strasburg, VA, established in 1907. The bank holds approximately $2039M in total assets and $1816M in deposits. It operates 33 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "First Bank is a Virginia-based FDIC-insured bank offering personal and business checking, savings, lending, credit cards, and wealth management services with a focus on security and customizable banking solutions.",
+  "description_long": "First Bank operates as a full-service community bank headquartered in Virginia, serving both personal and business customers. The bank emphasizes security as a core value, prominently warning customers about fraud prevention and clarifying that First Bank will never solicit personal information via phone, email, or text. The institution is FDIC-insured, meaning deposits are backed by the full faith and credit of the U.S. Government up to applicable limits.\n\nThe bank offers a comprehensive range of financial products across personal and business banking. For personal customers, First Bank provides checking and savings accounts, mortgage lending, home equity lines of credit, auto loans, personal loans, credit cards with rewards programs (CardCash\u2122 Rewards), Visa check cards, prepaid cards, and wealth management services including investment accounts, living trusts, and estate planning. For business customers, the bank offers business checking and savings, treasury management tools, positive pay fraud protection, payroll services, merchant services, business sweep accounts, auto/equipment loans, construction loans, commercial mortgages, and industry-specific solutions for healthcare, municipal, hospitality, and non-profit sectors.\n\nFirst Bank distinguishes itself through multiple convenience channels including 24/7 online banking, mobile banking, telephone banking, and a mobile wallet feature allowing customers to add their Visa check card to mobile devices or smartwatches. The bank's Positive Pay service provides an additional security layer for business customers by monitoring check activity to reduce fraud risk. Their emphasis on \"power in one\" suggests a focus on consolidating banking services for customer simplification. The bank maintains physical branch locations with published hours and offers direct contact via phone (888.647.1265) and email.\n\nAs a traditional community bank, First Bank serves customers seeking comprehensive banking relationships with local service and multiple product options. However, the website content provided is limited in specific details about rates, fees, account minimums, or comparative advantages versus competitors. The bank's emphasis on security messaging and fraud prevention indicates awareness of customer concerns, though specific details about identity theft protection beyond general warnings are not detailed in available content. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.fbvirginia.com",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
+    "Business checking and savings accounts",
+    "Mortgage lending and home equity lines of credit",
+    "Auto and equipment loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Visa check cards and ATM cards",
+    "Credit cards with CardCash\u2122 Rewards Program",
+    "Prepaid cards",
+    "Online and mobile banking with 24/7 access",
+    "Mobile wallet integration for card payments",
+    "Positive Pay fraud protection for business customers",
+    "Treasury management and payroll services for businesses",
+    "Wealth management including investment accounts, trusts, and estate planning"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1907",
-    "Local community bank with personal service",
-    "33 locations"
+    "FDIC-insured deposits backed by full U.S. Government faith and credit",
+    "24/7 access to banking via online, mobile, and telephone channels",
+    "Mobile wallet integration allowing Visa check card addition to mobile devices and smartwatches",
+    "Positive Pay fraud protection service for business customers monitoring check activity",
+    "Comprehensive personal and business product suite including mortgages, auto loans, credit cards, and wealth management",
+    "Industry-specific business lending for healthcare, municipal, hospitality, and non-profit sectors",
+    "Security-first messaging with clear commitment never to solicit personal information via unsecured channels"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website content does not disclose specific interest rates, APRs, or fee structures for accounts and products",
+    "No mention of account minimums, balance requirements, or promotional incentives for opening accounts",
+    "Limited information about digital banking features or mobile app capabilities beyond basic online/mobile banking reference"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "VA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 6917,
   "latitude": 38.989507993213,
   "longitude": -78.362053035927,
@@ -87,18 +97,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Virginia residents and business owners seeking a full-service community bank with local branch access",
+    "Customers prioritizing security and fraud prevention across personal and business accounts",
+    "Businesses in healthcare, municipal government, hospitality, and non-profit sectors with industry-specific lending needs"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Bank is best for Virginia customers and businesses seeking comprehensive banking services with local branch relationships and strong security practices. The main caveat is that specific product rates, fees, and account minimums are not disclosed on the website, requiring direct contact with the bank for pricing and comparison shopping.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +116,10 @@
   ],
   "phone": "",
   "address": "112 W King St, Strasburg, VA 22657",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

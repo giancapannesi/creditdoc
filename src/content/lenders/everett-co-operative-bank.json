@@ -1,14 +1,14 @@
 {
   "name": "Everett Co-Operative Bank",
   "slug": "everett-co-operative-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Everett, MA. $1605M in assets. 3 offices.",
-  "description_long": "Everett Co-Operative Bank is a community bank located in Everett, MA, established in 1890. The bank holds approximately $1605M in total assets and $1144M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving Massachusetts with branches in Everett, Lynnfield, and Woburn, offering checking, savings, CDs, credit cards, and home loans with FDIC insurance.",
+  "description_long": "Everett Co-Operative Bank is a community-focused financial institution operating in the Massachusetts area with physical locations in Everett, Lynnfield, and Woburn. The bank is a member of the FDIC and Member DIF, ensuring customer deposits are insured in full. The company is owned by parent company ECB Bancorp, Inc., which maintains investor relations for those interested in the organization's financial performance.\n\nThe bank offers a comprehensive range of personal and business banking services, including checking and savings accounts, Certificate of Deposit (CD) products, credit cards, and home loan financing. Their current product offerings include a 6 or 24-month CD with 4.00% APY (subject to change), a 0% introductory APR credit card offering, and a promotional $20 monthly incentive for new checking account customers in Massachusetts. Personal and business customers can enroll in online banking and access mobile app functionality.\n\nEverett Bank differentiates itself through emphasis on convenience and modern banking accessibility. The institution promotes 24/7 mobile app and online banking capabilities, allowing customers to pay bills, transfer funds, check balances, and deposit checks remotely. The bank also prioritizes customer security, with published policies explicitly stating they will never request sensitive account information via unsolicited communications and providing a direct fraud reporting number (617-387-1110).\n\nThe website content confirms Everett Bank operates as a traditional community bank with standard product offerings comparable to regional institutions. No unique lending programs, specialized credit-building tools, or distinctive financial products beyond standard banking services are advertised. The bank serves a defined geographic region and maintains traditional branch-based operations supplemented by digital banking options. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.everettbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts with online enrollment",
+    "Business checking accounts with online enrollment",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "6-month and 24-month Certificate of Deposit (CD) products",
+    "Credit cards with 0% introductory APR offer",
+    "Online banking platform with bill pay functionality",
+    "Mobile banking app with 24/7 access",
+    "Mobile check deposit",
+    "Fund transfer services",
+    "Home loan products",
+    "Account balance inquiry",
+    "Business banking services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1890",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC insured deposits provide full deposit protection for customer funds",
+    "24/7 mobile app and online banking with bill pay, fund transfers, balance checking, and mobile check deposit",
+    "Competitive CD rates advertised at 4.00% APY for 6 or 24-month terms",
+    "0% introductory APR credit card offer available to qualified applicants",
+    "Local community bank with three physical branch locations in Massachusetts",
+    "$20 monthly promotional incentive for new checking account customers (MA only)",
+    "Published security protocols and fraud prevention guidance with direct fraud hotline"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to three Massachusetts locations (Everett, Lynnfield, Woburn)",
+    "Website content does not specify minimum deposit requirements for checking/savings accounts or APYs for basic deposit products",
+    "No information provided about business loan products, business credit cards, or commercial banking services beyond account types",
+    "CD rates and promotional offers explicitly subject to change without notice, limiting rate certainty",
+    "New checking account bonus ($20/month) limited to Massachusetts residents only"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 26444,
   "latitude": 42.4062661837816,
   "longitude": -71.0558500378653,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Massachusetts residents in or near Everett, Lynnfield, or Woburn seeking community bank services",
+    "Customers prioritizing FDIC deposit insurance and local branch accessibility",
+    "Small business owners needing basic checking and business banking services",
+    "CD investors seeking competitive rates on fixed-term deposit products"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Everett Co-Operative Bank is best for Massachusetts residents in the Everett, Lynnfield, or Woburn areas who value community banking relationships, FDIC protection, and modern digital banking access. The primary caveat is geographic limitation\u2014this bank operates only three branches in Massachusetts and serves no other regions, making it unsuitable for customers outside these specific areas or those requiring multi-state banking access.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "419 Broadway, Everett, MA 02149",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

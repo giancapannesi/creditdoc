@@ -1,14 +1,14 @@
 {
   "name": "Mcbank",
   "slug": "mcbank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Goldthwaite, TX. $456M in assets. 4 offices.",
-  "description_long": "Mcbank is a community bank located in Goldthwaite, TX, established in 1908. The bank holds approximately $456M in total assets and $417M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "MCBank is a community bank with four locations in Central Texas offering personal and business banking, loans, mortgages, and debit card services with 24/7 support.",
+  "description_long": "MCBank operates as a traditional community bank headquartered in Central Texas with four physical branch locations. The bank serves both personal and business customers through standard retail banking operations. Founded to serve local communities, MCBank maintains a regional focus rather than national presence, emphasizing personalized service through in-person branch visits and local accessibility.\n\nThe bank offers a comprehensive suite of consumer and business banking products including checking and savings accounts, personal loans, business loans, and mortgage services. Their mortgage offerings are highlighted as a specialty, with messaging around \"Build. Buy. Renovate\" home financing options. MCBank provides online and mobile banking platforms for account management, along with consumer debit cards (now Mastercard with EMV chip technology) and business payment solutions. The bank emphasizes loan origination and mortgage lending as core service lines.\n\nMCBank distinguishes itself through community presence with four physical locations in Central Texas and a commitment to personalized service. They offer uChoose Rewards debit card enrollment and provide 24/7 debit card support with fraud protection features including text alerts and card controls management. The bank provides Spanish-language customer support and positions itself as a locally-oriented alternative to larger national banks.\n\nAs a regional community bank, MCBank's reach is limited geographically to Central Texas. No information is available on their website regarding deposit insurance (FDIC status), interest rates, fees, minimum balance requirements, or loan approval standards. The website lacks detailed product comparison tools, digital-first banking features, or competitive rate information that customers typically use for bank selection. Limited online presence suggests this bank targets customers who value branch relationships over digital-first banking. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.mc.bank",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
+    "Business checking and savings accounts",
+    "Home mortgages (purchase and potentially refinance)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business loans",
+    "Consumer debit cards with Mastercard and EMV chip technology",
+    "Online banking platform",
+    "Mobile banking application",
+    "24/7 debit card support and fraud protection",
+    "uChoose Rewards debit card program",
+    "Check reordering services",
+    "Lost or stolen card reporting services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1908",
-    "Local community bank with personal service",
-    "4 locations"
+    "Four physical branch locations in Central Texas for in-person service",
+    "24/7 debit card support with dedicated card specialist line (1-800-285-2216)",
+    "EMV chip card technology with fraud protection including text alerts and card controls",
+    "uChoose Rewards program for consumer debit cardholders",
+    "Bilingual support with Spanish language customer service line (1-800-992-6202)",
+    "Specialized mortgage lending with dedicated home financing products",
+    "Mobile banking app available for account management",
+    "Online banking platform with secure contact form for sensitive communications"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability restricted to Central Texas (four locations only)",
+    "Website lacks detailed information about deposit insurance (FDIC) status, fees, rates, or account minimums",
+    "No information provided about loan products, approval requirements, APRs, or pricing",
+    "Minimal digital banking innovation compared to neobanks; traditional community bank model",
+    "No mention of business banking features, capabilities, or products despite offering business accounts"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15669,
   "latitude": 31.4497870167018,
   "longitude": -98.5704230324228,
@@ -87,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Central Texas residents seeking community bank relationships with local branch access",
+    "Home buyers interested in mortgage lending from a local lender",
+    "Small business owners in the MCBank service area looking for personal relationships with lenders",
+    "Customers who prefer in-person banking and relationship-based service over digital-only banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "MCBank is best for Central Texas residents who value community banking relationships, local branch access, and personalized service for mortgages and lending. The main caveat is that MCBank's four-location footprint and lack of digital-first features make it unsuitable for customers seeking broad geographic access, competitive rate transparency, or modern fintech banking experiences.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "1017 Parker St, Goldthwaite, TX 76844",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

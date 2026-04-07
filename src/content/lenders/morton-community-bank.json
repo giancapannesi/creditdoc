@@ -1,14 +1,14 @@
 {
   "name": "Morton Community Bank",
   "slug": "morton-community-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Morton, IL. $5399M in assets. 50 offices.",
-  "description_long": "Morton Community Bank is a community bank located in Morton, IL, established in 1961. The bank holds approximately $5399M in total assets and $4676M in deposits. It operates 50 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Morton Community Bank (Hometown Community Banks) is an Illinois-chartered bank offering checking, savings, digital banking, mortgages, business lending, and agricultural services across multiple locations.",
+  "description_long": "Morton Community Bank is an Illinois-chartered community bank operating under the Hometown Community Banks umbrella, which includes Clock Tower Community Bank. Based in Morton, Illinois, the institution is FDIC-insured and regulated under NMLS #422122. The bank has established itself as a regional financial institution serving both individual consumers and business customers across multiple service lines.\n\nThe bank offers comprehensive retail banking services including checking and savings accounts, digital/online banking, debit cards with rewards features (Pocket Change), home equity loans, and mortgage lending. For business customers, Morton Community Bank provides commercial lending up to $60 million, agricultural banking services, business credit cards, and a full suite of business operations support. The institution also partners with external providers for credit cards (rewards-based), TurboTax preparation, and operates within the MoneyPass ATM network providing surcharge-free access to 37,000+ nationwide ATMs.\n\nMorton Community Bank differentiates itself through community-focused banking with emphasis on personal service (\"We have Time for you\"), agricultural banking specialization, and substantial commercial lending capacity. The bank offers digital banking tools including Card Control for transaction monitoring and travel planning, and Pocket Change savings automation. Their routing number (071123204) and multiple locations suggest an established regional presence with both physical and digital access points.\n\nAs a regional community bank, Morton Community Bank is best suited for customers seeking local relationship banking rather than national megabank convenience. The institution's strength in agricultural and commercial lending indicates particular competency in those sectors. However, the website provides limited information about fee structures, specific interest rates, minimum balances, or competitive product details that would allow comprehensive comparison against larger institutions.",
   "logo_url": "",
   "website_url": "https://www.hometownbanks.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts",
+    "Online/digital banking with account management",
+    "Home equity loans",
+    "Mortgage lending (home purchase and refinance)",
+    "Commercial lending (up to $60 million)",
+    "Agricultural banking services",
+    "Business credit cards",
+    "Rewards credit cards",
+    "Debit cards with Pocket Change savings feature",
+    "Card Control mobile app transaction monitoring",
+    "MoneyPass ATM network access (37,000+ nationwide)",
+    "eZBusiness card management platform"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1961",
-    "Local community bank with personal service",
-    "50 locations"
+    "FDIC-insured deposits with Member FDIC status",
+    "Surcharge-free access to 37,000+ MoneyPass ATMs nationwide",
+    "Commercial lending up to $60 million for business customers",
+    "Specialized agricultural banking services for farm operations",
+    "Pocket Change automated savings feature with debit card purchases",
+    "Card Control mobile app for transaction monitoring and travel planning",
+    "Digital banking capabilities for account management and money transfers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display specific interest rates, APYs, or fee schedules on main pages (fee schedule exists but not linked in footer)",
+    "Limited geographic reach as regional Illinois bank may not serve all customers",
+    "Employment/careers page blocked by Cloudflare security verification, limiting transparency about hiring",
+    "Minimal product comparison information available relative to national competitors",
+    "No information about minimum deposit requirements, balance thresholds, or account opening terms"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 18429,
   "latitude": 40.6179089800538,
   "longitude": -89.4674790415296,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural businesses and farmers in Illinois seeking specialized farm banking services",
+    "Small to mid-sized businesses needing commercial lending up to $60 million",
+    "Illinois residents preferring local community banking relationships over national megabanks",
+    "Consumers seeking surcharge-free ATM access through the MoneyPass network"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Morton Community Bank is best for Illinois-based consumers and businesses seeking personalized community banking with strength in agricultural and commercial lending. Primary caveat: as a regional bank with limited online presence and missing rate/fee transparency, customers should verify specific terms and compare rates against national competitors before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "721 W Jackson St, Morton, IL 61550",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

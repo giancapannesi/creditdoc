@@ -1,14 +1,14 @@
 {
   "name": "Connectone Bank",
   "slug": "connectone-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Englewood Cliffs, NJ. $13994M in assets. 62 offices.",
-  "description_long": "Connectone Bank is a community bank located in Englewood Cliffs, NJ, established in 2005. The bank holds approximately $13994M in total assets and $11296M in deposits. It operates 62 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank offering checking, savings, loans, and mortgages with FDIC insurance across New Jersey, New York, and South Florida locations.",
+  "description_long": "ConnectOne Bank is a regional community bank headquartered in Englewood Cliffs, New Jersey, operating as an FDIC-insured institution backed by the full faith and credit of the U.S. Government. The bank positions itself as a relationship-focused alternative to large national banks, emphasizing personalized service and attention to customer needs across personal and business banking.\n\nThe bank offers a comprehensive suite of retail and commercial banking products, including checking and savings accounts, certificates of deposit (CDs), business bank accounts, personal loans, mortgages, home equity loans, and industry-specific lending solutions. They provide 24/7 digital banking through online account management tools and mobile access, allowing customers to bank from anywhere. The bank also offers extended FDIC coverage beyond standard limits and maintains physical branches across New Jersey, New York, and South Florida for in-person service.\n\nConnectOne differentiates itself through competitive deposit rates, customized lending solutions, and what they describe as \"industry-leading speed of execution.\" Customer testimonials emphasize the bank's responsiveness and dedication to serving their local communities, contrasting their model with impersonal megabanks. The bank actively addresses digital security concerns through educational resources about wire fraud and imposter scams, demonstrating awareness of modern banking threats.\n\nAs a regional community bank, ConnectOne serves both retail customers and small-to-medium business clients. However, their geographic footprint is limited to three states, and specific product details, fee structures, and competitive rate comparisons are not fully detailed on their website. The bank's emphasis on relationship banking and local service appeals to customers prioritizing personal attention, though those seeking nationwide branch networks may find limitations. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.connectonebank.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Certificates of Deposit (CDs) with extended FDIC coverage",
+    "Business checking and savings accounts",
+    "Mortgage lending (home purchase and refinance)",
+    "Home equity loans and lines of credit",
+    "Personal and business loan products",
+    "Customized lending solutions by industry",
+    "Online and mobile banking with 24/7 access",
+    "Business online banking platform",
+    "Appointment scheduling with personal bankers",
+    "Digital security resources and fraud prevention education",
+    "Wire transfer and payment processing services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2005",
-    "Local community bank with personal service",
-    "62 locations"
+    "FDIC-insured with extended coverage beyond standard deposit insurance limits",
+    "24/7 digital banking and online account management accessible from anywhere",
+    "Community bank model emphasizing personalized service and relationship building",
+    "Multiple physical locations across New Jersey, New York, and South Florida for in-person service",
+    "Offers comprehensive products including checking, savings, business accounts, mortgages, and loans",
+    "Competitive deposit rates highlighted as a key feature",
+    "Customized lending solutions available for different industries and business needs",
+    "Proactive digital security education with guides on wire fraud and imposter scam prevention"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to New Jersey, New York, and South Florida only",
+    "Specific fee schedules, interest rates, and APRs not transparently listed on main website",
+    "No clear information about minimum account balances or deposit requirements",
+    "Limited detail on business loan terms, eligibility criteria, or loan amounts available",
+    "Lack of comparison data showing competitive advantage over national or online-only banks"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "NJ"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57919,
   "latitude": 40.8725139828736,
   "longitude": -73.9529429720496,
@@ -84,21 +96,22 @@
       "FDIC Cert #57919"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and self-employed professionals seeking customized lending and industry-specific solutions",
+    "Customers in New Jersey, New York, or South Florida seeking relationship-based banking with local branch access",
+    "Depositors looking for extended FDIC coverage and personalized account management",
+    "Individuals preferring community bank service model over large national bank alternatives"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "ConnectOne Bank is best for customers in its three-state service area (NJ, NY, FL) who prioritize relationship-based banking, personalized service, and community bank values over national bank convenience. The main caveat is geographic limitation\u2014the bank operates only in select regions, making it unavailable for customers outside these states, and specific product terms and fees require direct inquiry rather than transparent online disclosure.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "301 Sylvan Ave, Englewood Cliffs, NJ 07632",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

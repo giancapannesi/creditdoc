@@ -1,14 +1,14 @@
 {
   "name": "Nebraskaland Bank",
   "slug": "nebraskaland-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in North Platte, NE. $986M in assets. 6 offices.",
-  "description_long": "Nebraskaland Bank is a community bank located in North Platte, NE, established in 1998. The bank holds approximately $986M in total assets and $752M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "NebraskaLand Bank is an FDIC-insured community bank offering personal and business checking, savings, mortgages, loans, and digital banking services across Nebraska.",
+  "description_long": "NebraskaLand Bank operates as a community-focused financial institution with FDIC insurance backing, positioning itself as a locally-engaged alternative to larger national banks. The bank emphasizes personalized service and deep community involvement through charitable donations, volunteer hours, and educational scholarships. Founded on principles of supporting local financial strength, the institution has donated over $251,400 to community causes since 2004 and granted $108,500 in scholarships since 2014.\n\nThe bank offers comprehensive personal banking products including checking and savings accounts, certificates of deposit, individual retirement accounts, health savings accounts, mortgages with competitive rates and flexible terms, credit cards, and consumer loans. Their business and agriculture division provides business checking, agricultural lending, business lending, business credit cards, payables and receivables management, and specialized business savings products. All customers gain access to digital banking platforms, mobile banking applications, online bill payment, and Zelle\u00ae money transfer services.\n\nNebraskaLand Bank distinguishes itself through community commitment, offering homebuyer grants, financial literacy programs through NebraskaLand University, an online education center, podcast, blog, and fraud protection resources. The bank emphasizes personalized service with staff willing to discuss customer goals and provide honest guidance on financial feasibility. Their dual focus on both personal and agricultural/business lending reflects deep roots in Nebraska's economy.\n\nAs a regional community bank, NebraskaLand Bank is best suited for customers prioritizing local relationships and community impact over the convenience of nationwide branch networks or the aggressive rates sometimes offered by online-only banks. Customers should verify specific product rates, terms, and minimum deposit requirements directly, as the website provides general product descriptions without detailed fee schedules or comparative rate information. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.nebraskalandbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and digital banking accounts",
+    "Savings accounts and money market accounts",
+    "Certificates of deposit (CDs)",
+    "Individual retirement accounts (IRAs)",
+    "Health savings accounts (HSAs)",
+    "Mortgage loans with competitive rates and flexible terms",
+    "Homebuyer grants program",
+    "Personal credit cards and consumer loans",
+    "Business checking and business digital banking",
+    "Agricultural lending and business lending",
+    "Business credit cards and business savings products",
+    "Mobile banking and Zelle\u00ae money transfer service"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1998",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits with full faith and credit of U.S. Government backing",
+    "Specialized agricultural lending and business solutions tailored to Nebraska economy",
+    "Strong community commitment with $251,400+ donated since 2004 and 1,545+ volunteer hours in 2025",
+    "Financial literacy scholarship program (NebraskaLand University) supporting student financial education",
+    "Comprehensive digital banking and mobile app access for account management from anywhere",
+    "Homebuyer grants program providing additional support for mortgage customers",
+    "Personalized service model where staff discuss customer goals and provide honest feasibility guidance"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as regional bank may restrict branch access for customers outside Nebraska",
+    "Website lacks specific APR rates, fees, minimum deposit requirements, and product terms needed for comparison shopping",
+    "No mention of competitive advantages in deposit rates or loan terms compared to national banks or online alternatives",
+    "Fraud alert language suggests institution has experienced credential theft and spoofing issues targeting customers",
+    "No information provided about account opening requirements, credit score minimums, or qualification criteria"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34811,
   "latitude": 41.1218223578653,
   "longitude": -100.762940127875,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Nebraska-based small business owners and agricultural operators seeking specialized lending and local relationships",
+    "Community-minded consumers prioritizing local bank support and charitable impact alongside banking services",
+    "First-time homebuyers interested in mortgage products combined with educational support and homebuyer grants",
+    "Customers valuing in-person service and relationship banking over digital-only or national chain alternatives"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "NebraskaLand Bank is best for Nebraska residents and business owners seeking community-focused banking with personalized service, local decision-making, and strong community involvement. The primary caveat is that customers must contact the bank directly for specific rates, fees, and product terms, as the website emphasizes community values and service offerings without providing the comparative financial details needed to evaluate competitiveness against national banks and online alternatives.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "1400 S Dewey St, North Platte, NE 69101",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

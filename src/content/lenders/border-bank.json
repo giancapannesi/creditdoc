@@ -1,15 +1,15 @@
 {
   "name": "Border Bank",
   "slug": "border-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Fargo, ND. $1063M in assets. 11 offices.",
-  "description_long": "Border Bank is a community bank located in Fargo, ND, established in 1972. The bank holds approximately $1063M in total assets and $913M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving Minnesota and North Dakota with FDIC-insured checking, savings, loans, and treasury management services for individuals and businesses.",
+  "description_long": "Border Bank is a community-focused financial institution operating in Minnesota and North Dakota. The bank emphasizes local service and personal relationships, positioning itself as a neighbor-oriented alternative to larger financial institutions. Their tagline\u2014\"Tech-focused with a human touch\"\u2014reflects their strategy of combining digital banking convenience with in-person, relationship-based service delivered on a first-name basis.\n\nThe bank offers comprehensive personal banking products including checking accounts, savings accounts, CDs, IRAs, and HSAs. For borrowing needs, they provide personal loans, mortgages, and credit cards with overdraft coverage and safe deposit boxes. On the business side, Border Bank offers commercial and agricultural lending, treasury management tools (ACH origination, positive pay, remote deposit capture), merchant card services, and business checking and savings accounts. All deposits are FDIC-insured, backed by the full faith and credit of the U.S. Government.\n\nBorder Bank distinguishes itself through commitment to community engagement and local decision-making. Their website emphasizes customer success stories, community giving initiatives, and a philosophy that \"your success is our success.\" They maintain physical branch locations with specific hours and provide multiple access points including online and mobile banking, ATMs, and field service capabilities. The bank also offers educational resources through an education center and calculators to help customers make informed financial decisions.\n\nBorder Bank is appropriate for individuals and businesses in Minnesota and North Dakota seeking relationship-based banking with local accountability. However, as a regional community bank with limited geographic footprint, they may not be suitable for customers requiring extensive national branch networks or specialized financial products. Geographic limitation is the primary constraint for potential customers outside their service areas.",
   "logo_url": "",
   "website_url": "https://www.border.bank",
   "affiliate_url": "",
@@ -24,23 +24,39 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Checking accounts (personal and business)",
+    "Savings accounts and CDs",
+    "IRAs and HSAs",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Mortgages",
+    "Credit cards (personal and business)",
+    "Agricultural loans",
+    "Commercial loans",
+    "Treasury management services",
+    "ACH origination",
+    "Remote deposit capture",
+    "Merchant card services",
+    "Online and mobile banking",
+    "Safe deposit boxes",
+    "Overdraft coverage",
+    "Debit cards"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1972",
-    "Local community bank with personal service",
-    "11 locations"
+    "FDIC-insured deposits with full government backing for deposit safety",
+    "Dual-state regional presence in Minnesota and North Dakota with multiple physical locations",
+    "Comprehensive personal and business banking services under one institution, including ag lending",
+    "Treasury management tools specifically for business customers (ACH origination, positive pay, remote deposit capture)",
+    "Emphasis on personal service and local decision-making with first-name relationship model",
+    "Mobile and online banking platform for convenience alongside in-person branch service",
+    "Flexible personal loan options for major purchases and home projects with local service",
+    "Community-focused with documented commitment to local nonprofits and initiatives"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation restricts availability to only Minnesota and North Dakota locations",
+    "Limited branch network compared to national banks, reducing physical access points",
+    "No indication of competitive rates or APR information disclosed on public website",
+    "Smaller institution may have fewer specialized financial products compared to large national banks",
+    "Routing number 091216133 identifies as smaller regional bank with likely higher minimums than online-only alternatives"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +68,7 @@
   "states_served": [
     "ND"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 20776,
   "latitude": 46.8539766719816,
   "longitude": -96.8634875942317,
@@ -94,12 +110,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Individuals and business owners in Minnesota and North Dakota seeking community banking relationships",
+    "Agricultural businesses needing ag-specific lending and commercial services",
+    "Small to medium businesses requiring treasury management and merchant services with local support",
+    "Customers prioritizing personal banking relationships and local decision-making over convenience of large national networks"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Border Bank is best for individuals and businesses in Minnesota and North Dakota who value personal, relationship-based banking and community connection over the convenience of national branch networks. The primary caveat is strict geographic limitation\u2014this bank only serves these two states, making it unsuitable for customers outside this region or those requiring multi-state banking flexibility.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +124,11 @@
   ],
   "phone": "",
   "address": "4530 17Th Ave S, Fargo, ND 58103",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

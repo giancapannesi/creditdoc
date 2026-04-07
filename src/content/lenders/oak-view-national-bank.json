@@ -1,14 +1,14 @@
 {
   "name": "Oak View National Bank",
   "slug": "oak-view-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Warrenton, VA. $878M in assets. 4 offices.",
-  "description_long": "Oak View National Bank is a community bank located in Warrenton, VA, established in 2009. The bank holds approximately $878M in total assets and $714M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Oak View National Bank is a full-service bank offering personal checking, savings, CDs, consumer loans, credit cards, and business banking services with competitive rates and instant debit card issuance.",
+  "description_long": "Oak View National Bank operates as a traditional community bank providing comprehensive financial services to both personal and business customers. The bank maintains a multi-branch physical presence where customers can conduct in-person transactions during regular business hours. Their service model emphasizes accessibility and straightforward account structures designed to reduce complexity for everyday banking needs.\n\nThe bank's personal banking offerings include checking accounts marketed as simple and benefit-focused, savings accounts with tiered APY rates, certificates of deposit (CDs) with competitive rates, consumer loans for vehicle purchases and debt consolidation, and branded credit cards with rewards or low-rate options. Their business banking division provides lending solutions for startups and established companies, online banking platforms, and treasury management services including ACH origination, remote deposit capture, and merchant card services. All customers have access to online banking with stated industry-standard security protections.\n\nOak View National Bank distinguishes itself through instant debit card issuance at physical branches\u2014customers can walk in and receive a replacement card printed on-site without delay. They also advertise \"real rates\" and \"real savings,\" positioning themselves against more complex banking products, with specific promotional rates highlighted such as 3.50% APY on 6-month CDs and 3.00% APY on qualified savings accounts. The bank's messaging emphasizes personalized service, with team members helping customers identify solutions for specific financial goals including homeownership, retirement savings, and general financial security.\n\nAs a traditional banking institution, Oak View National Bank is fundamentally a deposit and lending business rather than a financial technology company or specialized lender. The website provides limited detail on specific loan terms, APR ranges, minimum account balances, or fee structures. Customers seeking detailed product specifications, comparison shopping, or specialized lending products outside traditional bank offerings would need to contact the bank directly. The bank's strength lies in conventional banking services for customers who value in-person branch access and straightforward account options. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://WWW.OAKVIEWBANK.COM",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Savings accounts with tiered APY rates",
+    "Certificates of Deposit (CDs) with varying terms",
+    "Consumer loans for vehicle purchases, appliance purchases, and debt consolidation",
+    "Credit cards with rewards or low-rate options",
+    "Business lending for startups and established companies",
+    "Business online banking platform",
+    "Treasury management services including ACH origination",
+    "Remote deposit capture for businesses",
+    "Merchant card services",
+    "Mortgages for home purchase and refinancing",
+    "Instant debit card issuance at physical branches"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2009",
-    "Local community bank with personal service",
-    "4 locations"
+    "Instant debit card issuance at branches eliminates wait time for replacement cards",
+    "Competitive promotional rates: 3.50% APY on 6-month CDs and 3.00% APY on qualified savings accounts",
+    "Simple checking account structure without complex balance requirements and excessive rules",
+    "Comprehensive business banking services including treasury management and merchant card processing",
+    "Full-service offerings spanning personal loans, credit cards, mortgages, and business lending",
+    "Online banking platform with stated industry-standard security protections",
+    "Multi-branch physical presence for in-person banking and service",
+    "Personalized financial planning assistance from bank team members"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website provides no information on checking account fees, minimum balance requirements, or overdraft policies",
+    "Limited transparency on consumer loan APR ranges, terms, or eligibility requirements",
+    "No details provided on credit card interest rates, annual fees, or rewards program specifics",
+    "Promotional rates may require account qualification or deposit minimums not disclosed on website",
+    "No information on whether the bank offers products for credit building or serves customers with poor credit"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "VA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58827,
   "latitude": 38.716700011267,
   "longitude": -77.806500996373,
@@ -84,21 +96,22 @@
       "FDIC Cert #58827"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers who value in-person branch access and prefer traditional banking relationships",
+    "Small business owners and startups seeking conventional business loans and treasury services",
+    "Savers looking for competitive CD rates and high-yield savings accounts without complexity",
+    "Customers seeking convenient debit card replacement without waiting for mail delivery"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Oak View National Bank is best for customers who prioritize traditional in-person banking, straightforward account structures, and competitive rates on savings and CDs. The main caveat is that the website lacks critical product details including fee schedules, loan APR ranges, and minimum balance requirements\u2014customers must contact the bank directly for comprehensive product comparison and eligibility verification.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,10 @@
   ],
   "phone": "",
   "address": "340 Waterloo Street, Warrenton, VA 20186",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

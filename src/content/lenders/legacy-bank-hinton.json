@@ -1,14 +1,14 @@
 {
   "name": "Legacy Bank",
   "slug": "legacy-bank-hinton",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Hinton, OK. $661M in assets. 10 offices.",
-  "description_long": "Legacy Bank is a community bank located in Hinton, OK, established in 1902. The bank holds approximately $661M in total assets and $596M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Oklahoma-based community bank offering personal and business checking/savings accounts, plus merchant services including Clover POS systems for payment processing.",
+  "description_long": "Legacy Bank is a regional bank with deep roots in Oklahoma's rural communities, as reflected in their acorn-and-oak-leaf logo symbolizing growth and financial legacy-building. The bank serves both personal and business customers through traditional banking products and modern business solutions. For personal customers, Legacy Bank offers four unique checking account options (some with cash back or interest features) and three interest-earning savings accounts. Their business division provides merchant services centered around Clover POS systems\u2014all-in-one payment and business management platforms designed for restaurants, retail, e-commerce, and service businesses. Legacy Bank partners with Clover to offer multiple hardware configurations (Kiosk, Station Solo/Duo, Flex, Go, Mini, and FD150 Terminal) plus virtual payment options, with flexible pricing models including Swipe/Non-Swipe plans (as low as 2.6% + $0.15 per transaction) and Interchange Plus structures (as low as Interchange + 0.2%). The bank emphasizes personalized service, with a dedicated merchant services contact (Jack Auten) and customer testimonials praising staff helpfulness and ease of use. Their website highlights substantial cost savings examples for existing customers who switched to Clover, ranging from $1,100 to $16,000+ annually depending on business volume. What sets Legacy Bank apart is their community focus, willingness to educate customers about fraud prevention, and integration of modern POS technology with traditional banking relationships. However, the website provides limited detail on account fees, interest rates, minimum balances, or specific terms, making comprehensive product comparison difficult. Additionally, while Clover services are prominent, no information is available about other business services mentioned but not detailed, such as traditional business loans, lines of credit, or other financial products. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.legacybank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal Checking Accounts (4 unique options with cash back or interest features)",
+    "Personal Savings Accounts (3 interest-earning options)",
+    "Clover Kiosk POS System for quick-service restaurants",
+    "Clover Station Solo all-in-one POS system",
+    "Clover Station Duo dual-screen POS system",
+    "Clover Virtual Terminal for card-keyed and web-based payments",
+    "Clover Flex mobile payment acceptance",
+    "Clover Go Bluetooth payment terminal",
+    "Clover Mini compact POS device",
+    "FD150 Terminal affordable payment terminal",
+    "Email invoice and online payment processing",
+    "Web Banking platform with login access"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1902",
-    "Local community bank with personal service",
-    "10 locations"
+    "Clover POS systems offer transparent, tiered pricing with documented customer savings of $1,100\u2013$16,000+ annually",
+    "Multiple Clover hardware options (7+ configurations) accommodate different business types from QSR to e-commerce",
+    "Dedicated merchant services contact (Jack Auten) provides personalized support",
+    "Community-focused Oklahoma bank with emphasis on rural communities and long-term customer relationships",
+    "Clover platform integrates payment processing, inventory management, team management, and invoicing in one system",
+    "Virtual Terminal and email invoice payment options for online and remote transactions",
+    "Customer testimonials consistently praise staff courtesy, responsiveness, and ease of use"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks clarity on personal account fees, minimum balances, interest rates, and APY for checking/savings products",
+    "Limited detail on non-POS business services mentioned ('Other Business Services') without specific products described",
+    "No information about traditional small business loans, lines of credit, SBA financing, or other business lending products",
+    "Clover service plans require qualification ('For qualified customers'), with no stated approval criteria or alternative options",
+    "Geographic focus on Oklahoma may limit accessibility or relevance for customers outside the region"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 4042,
   "latitude": 35.4713638753956,
   "longitude": -98.3555816446402,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-sized business owners (restaurants, retail, service providers) seeking integrated POS and payment processing",
+    "Oklahoma-based individuals and families seeking community banking with personal service",
+    "Merchants processing $30K\u2013$1.7M+ in annual sales looking to reduce existing payment processing costs",
+    "Business owners wanting to consolidate payment, inventory, and team management on one platform"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Legacy Bank is best for Oklahoma-based small business owners and families seeking personalized community banking integrated with modern merchant services, particularly those in hospitality, retail, or service industries processing $30K+/year in sales. Primary caveat: the website omits critical details on personal account terms (fees, minimums, rates) and traditional business lending products, requiring direct contact to fully evaluate their complete offerings and competitive positioning.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "101 W Main St, Hinton, OK 73047",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

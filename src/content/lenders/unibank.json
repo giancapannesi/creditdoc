@@ -1,14 +1,14 @@
 {
   "name": "Unibank",
   "slug": "unibank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Lynnwood, WA. $409M in assets. 4 offices.",
-  "description_long": "Unibank is a community bank located in Lynnwood, WA, established in 2006. The bank holds approximately $409M in total assets and $338M in deposits. It operates 4 office locations. Designated as a Asian or Pacific Islander Americans. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal and business checking, savings accounts, CDs, and commercial loans with online banking and mobile check deposit.",
+  "description_long": "UniBank is a traditional FDIC-insured bank operating in the United States with a primary focus on serving individuals and businesses in their local communities. The institution positions itself as a provider of essential financing and banking services, emphasizing both personal and commercial solutions. According to their website, they maintain FDIC insurance backed by the full faith and credit of the U.S. Government, indicating they are a federally regulated depository institution.\n\nThe bank offers a comprehensive range of deposit products including personal checking accounts (with $100 minimum opening deposit and surcharge-free MoneyPass ATM access), personal savings accounts, and Certificates of Deposit with terms ranging from 10 days to 10 years. For businesses, they provide Business Checking accounts and a full spectrum of Commercial loan products with described \"fast loan approvals.\" Their digital services include free online banking with advanced authentication, bill pay functionality, mobile banking with remote check deposit capabilities, account balance alerts, and transaction history viewing.\n\nUniBank differentiates itself through its emphasis on digital accessibility combined with traditional banking services. The bank highlights interest-bearing account options, competitive deposit rates, and the ability to export financial data in multiple formats (Quicken, QuickBooks, text, Excel). They also advertise surcharge-free ATM access through the MoneyPass network and offer both one-time and recurring bill payments through their online platform. The institution actively recruits talent with mentions of competitive salary, bonus packages, and 401k plans.\n\nAs a regional bank, UniBank serves a specific geographic market (website phone indicates Pacific time zone operations). While they offer modern digital banking features, they remain geographically limited compared to national banks. Their service hours (9AM-5PM PST Monday-Friday for online banking support) and mention of \"location nearest you\" indicate a branch-based model rather than a fully digital-only operation. For consumers seeking nationwide presence and 24/7 digital support, larger banks may be more suitable. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.unibankusa.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with low minimum deposit",
+    "Personal savings accounts",
+    "Certificates of Deposit (10 days to 10 years terms)",
+    "Business checking accounts",
+    "Commercial and government-guaranteed loans",
+    "Free online banking with real-time account balances and transaction history",
+    "Bill pay service with one-time and recurring payments",
+    "Mobile banking app with remote check deposit",
+    "Account balance alerts",
+    "Electronic statement downloads (5-year history)",
+    "Data export to Quicken, QuickBooks, text, and Excel formats",
+    "MoneyPass surcharge-free ATM access"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2006",
-    "Local community bank with personal service",
-    "4 locations"
+    "FDIC-insured deposits with full government backing",
+    "Free online banking and bill pay with advanced authentication security",
+    "Mobile check deposit feature allowing deposits from smartphone",
+    "Surcharge-free ATM access through MoneyPass network",
+    "Low minimum opening deposit of $100 for personal checking accounts",
+    "CDs with flexible terms from 10 days to 10 years with guaranteed rates",
+    "Commercial loans with fast approval process for businesses"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic availability with regional branch footprint only",
+    "Online banking support limited to 9AM-5PM PST weekdays only",
+    "No mention of 24/7 customer service availability",
+    "Website content lacks details on specific APY rates and loan terms",
+    "Certain fees apply to bill pay services (stop payments and overnight checks)"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58407,
   "latitude": 47.8234949837548,
   "longitude": -122.312303000275,
@@ -84,21 +95,21 @@
       "FDIC Cert #58407"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking local relationship banking with fast commercial loan approvals",
+    "Individuals in their service area wanting FDIC-insured savings and competitive CD rates",
+    "Tech-savvy consumers who want digital banking features (mobile check deposit, online transfers) from a traditional bank"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "UniBank is best suited for small business owners and consumers within their service area who value a traditional bank with solid digital features, FDIC insurance, and personalized service. The main caveat is their regional limitation\u2014customers outside their geographic footprint cannot access their services, and those seeking 24/7 support will need to look elsewhere.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "19315 Highway 99, Lynnwood, WA 98036",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Legence Bank",
   "slug": "legence-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Eldorado, IL. $649M in assets. 12 offices.",
-  "description_long": "Legence Bank is a community bank located in Eldorado, IL, established in 1906. The bank holds approximately $649M in total assets and $571M in deposits. It operates 12 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal and business checking, savings, loans, and digital banking services. Member FDIC with mortgage, agricultural, and SBA lending options.",
+  "description_long": "Legence Bank is a traditional community bank that operates as an FDIC-insured financial institution backed by the full faith and credit of the U.S. Government. The bank positions itself as a relationship-focused lender committed to family, innovation, community partnership, and local support. With a robust digital infrastructure, Legence serves both personal and business customers through multiple channels including online banking, mobile deposit, and in-person branch locations.\n\nThe bank offers a comprehensive suite of personal banking products including checking accounts (Star Checking, Smart Checking, 50 First Select Checking), savings vehicles (Passbook Savings, Money Market Accounts, CDs, IRAs), and personal loans. On the business side, Legence provides business checking, savings, digital banking, cash management, remote deposit, and merchant card services. Their lending portfolio is particularly strong in three areas: home loans with mortgage lenders, agricultural loans (real estate, livestock, equipment, operating lines), and small business loans including SBA-preferred lending, commercial real estate, and business lines of credit. They also offer equipment leasing, solar loans, and auto loans.\n\nLegence distinguishes itself through specialized agricultural lending programs (AgXpress Loans, Beginning Farmer & Rancher Loans), a dedicated leasing division covering equipment and municipal leasing, and community-focused initiatives including scholarships and financial literacy education through their Go!Learn program. Their digital services include SPIN P2P payments, Card Controls, debit card alerts, and the Go!Focus budgeting tool. The bank emphasizes accessibility with AudioEye optimization and provides local business expert support with dedicated lender teams.\n\nAs a traditional regional bank, Legence serves established customers seeking relationship-based banking with community involvement. The main limitation is they do not appear to serve customers seeking non-traditional lending (same-day emergency cash, credit building, or credit repair services). Their product offerings are standard banking fare without specialty consumer finance solutions. Customer testimonials and community involvement suggest solid service quality, though APR rates, fee structures, and competitive positioning relative to larger banks are not detailed on their public website. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.legencebank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts (Star Checking, Smart Checking, 50 First Select Checking, Stellar Start Teen)",
+    "Personal savings products (Passbook Savings, Young Saver, Money Market, CDs, IRAs)",
+    "Personal loans for various purposes (family, auto, vacation)",
+    "Home loans and mortgage lending",
+    "Home Equity Lines of Credit (HELOC)",
+    "Agricultural loans (real estate, livestock, equipment, operating lines, Beginning Farmer programs)",
+    "Business checking and savings accounts",
+    "SBA loans and business lines of credit",
+    "Commercial real estate and solar loans",
+    "Equipment leasing and municipal leasing",
+    "Online banking, mobile deposit, and SPIN P2P payments",
+    "Merchant card services and business credit cards"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1906",
-    "Local community bank with personal service",
-    "12 locations"
+    "FDIC-insured deposits with full government backing for safety",
+    "Specialized agricultural lending programs including Beginning Farmer & Rancher Loans and AgXpress financing",
+    "SBA-preferred lender status enabling favorable small business lending",
+    "Dedicated leasing division for equipment, municipal, and agriculture equipment financing",
+    "Comprehensive digital banking suite with mobile deposit, P2P payments (SPIN), and budgeting tools (Go!Focus)",
+    "Local business expert support with dedicated mortgage, business, and agriculture lender teams",
+    "Community-focused programs including scholarships and financial literacy education (Go!Learn)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited information on competitive interest rates, APRs, or fee schedules publicly available on website",
+    "No same-day or emergency lending options for consumers needing rapid access to cash",
+    "No credit-building products or credit repair services for consumers with poor credit history",
+    "Geographic limitation likely to specific regions based on branch and location-based service model",
+    "Standard checking and savings account offerings without distinctive rewards or premium benefits compared to national banks"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10886,
   "latitude": 37.8077370104416,
   "longitude": -88.439870033618,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural borrowers seeking specialized farming loans, equipment financing, and rancher support",
+    "Small business owners qualifying for SBA lending or seeking local relationship-based banking",
+    "Homebuyers working with mortgage lenders for personalized home loan origination",
+    "Community-minded customers valuing local bank partnerships and financial literacy education"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Legence Bank is best for established personal customers, small business owners, and agricultural borrowers seeking relationship-based community banking with FDIC protection and specialized lending. The main caveat is that Legence does not serve consumers needing emergency cash, credit repair, credit-building products, or non-traditional lending solutions\u2014it functions as a standard regional bank focused on conventional banking products and relationship lending.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "1108 Us Highway 45 N, Eldorado, IL 62930",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

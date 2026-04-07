@@ -1,14 +1,14 @@
 {
   "name": "Wells Fargo Bank South Central, National Association",
   "slug": "wells-fargo-bank-south-central",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Houston, TX. $2815M in assets. 1 office.",
-  "description_long": "Wells Fargo Bank South Central, National Association is a community bank located in Houston, TX, established in 1894. The bank holds approximately $2815M in total assets and $1916M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Wells Fargo Bank South Central is a major national bank offering checking, savings, credit cards, mortgages, personal loans, and auto loans through online and branch banking.",
+  "description_long": "Wells Fargo Bank South Central, National Association is one of the largest banking institutions in the United States, providing comprehensive consumer financial services across multiple product lines. The bank has established itself as a major player in retail banking with a nationwide branch and ATM network, accessible through both physical locations and digital channels.\n\nThe bank offers an extensive suite of banking products including multiple checking account tiers (Clear Access, Everyday, Prime, and Premier Checking), savings accounts (Way2Save and Platinum Savings), certificates of deposit, credit cards with rewards programs, home mortgages (purchase and refinance), personal loans for various purposes (debt consolidation, home improvement, large expenses), and auto financing. Their digital banking platform includes Wells Fargo Online and a mobile app with money transfer capabilities, fraud reporting, and account management tools.\n\nWells Fargo differentiates itself through tiered relationship banking benefits, particularly through their Premier tier offering enhanced rates and benefits. They provide specialized accounts for students and teens, offer first-time homebuyer programs, and include educational tools like calculators and learning centers. The bank integrates financial goal planning through LifeSync and provides FICO credit score access to customers.\n\nAs a traditional full-service bank, Wells Fargo serves customers seeking comprehensive banking relationships with multiple products under one institution. However, customers should evaluate whether their specific needs\u2014particularly regarding competitive rates on savings and checking products\u2014align with what Wells Fargo offers compared to online-only banks. The bank's broad product availability appeals to those seeking convenience and relationship banking, though specialized fintech companies may offer higher yields or lower fees for individual products. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.wellsfargo.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts (Clear Access, Everyday, Prime, Premier tiers)",
+    "Savings accounts and CDs (Way2Save, Platinum Savings, Wells Fargo CDs)",
+    "Credit cards (cash back, rewards, 0% intro APR, travel, balance transfer, business)",
+    "Mortgages (home purchase, refinance, first-time homebuyer programs)",
+    "Personal loans (debt consolidation, home improvement, large expense financing)",
+    "Auto loans (new and used vehicle financing)",
+    "Digital banking (Wells Fargo Online, mobile app, money transfer)",
+    "Fraud prevention and security services",
+    "Global remittance and foreign exchange",
+    "Debt consolidation tools",
+    "Financial goal planning (LifeSync)",
+    "Student and teen banking accounts"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1894",
-    "Local community bank with personal service",
-    "1 location"
+    "Comprehensive product suite allows bundling of checking, savings, credit cards, mortgages, and loans in one relationship",
+    "Multiple checking account options with different benefit tiers to match various customer needs",
+    "Wells Fargo Mobile app and online banking platform for account management, transfers, and fraud reporting",
+    "Educational resources including calculators, learning centers, and FICO credit score access",
+    "Specialized programs for first-time homebuyers and students/teens with dedicated account options",
+    "Global remittance and foreign exchange services available",
+    "Premier tier relationship banking with enhanced rates and benefits for higher-balance customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No interest rates or APY information disclosed on website, requiring separate inquiry for competitive comparison",
+    "No mention of fee structures or overdraft service costs, creating uncertainty about total account costs",
+    "Limited transparency on credit card APR ranges and personal loan rate offerings without prequalification",
+    "History of regulatory issues and customer service controversies not addressed on marketing website",
+    "No promotional bonus amounts specified for most accounts except the $325 checking bonus mentioned"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5146,
   "latitude": 29.77540898592,
   "longitude": -95.3819869623436,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking a single financial institution for multiple banking products (checking, savings, loans, mortgages)",
+    "First-time homebuyers and students looking for specialized account programs and educational resources",
+    "Customers who value branch access and prefer in-person banking relationships combined with digital options",
+    "Individuals interested in tiered relationship banking with Premier-level perks and benefits"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Wells Fargo Bank South Central is best for consumers seeking a comprehensive, full-service banking relationship with multiple products available in one institution and the convenience of branch access. The main caveat is that competitive rates and fee structures are not transparently disclosed on their marketing website, requiring direct inquiry to evaluate whether their products offer better value than specialized fintech alternatives for individual banking needs.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "2005 Taylor St, Houston, TX 77007",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

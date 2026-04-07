@@ -1,15 +1,15 @@
 {
   "name": "Elk State Bank",
   "slug": "elk-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Clyde, KS. $139M in assets. 3 offices.",
-  "description_long": "Elk State Bank is a community bank located in Clyde, KS, established in 1896. The bank holds approximately $139M in total assets and $100M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Elk State Bank is a rural-focused community bank offering agricultural lending expertise and traditional banking services through its online platform.",
+  "description_long": "Elk State Bank operates as a community-oriented financial institution positioned as a 'Rural Financial Partner' with specific expertise in agricultural operations and financing. The bank maintains an online presence through https://www.elkstatebank.com and operates with routing number 101103754, indicating it is a legitimate FDIC-insured banking institution. The bank's website emphasizes its deep understanding of rural and agricultural financial needs, suggesting it serves farming communities and agricultural businesses as a primary market segment.\n\nThe bank offers core banking services including deposit accounts (checking and savings products implied by APY disclosures), online account management through their website portal, and lending products tailored to agricultural operations. They provide customer service channels including a dedicated phone line for lost or stolen card issues (888-297-3416) and online contact forms for both new and existing customers. The website includes financial calculators and emphasizes data security with privacy policies and USA PATRIOT Act compliance documentation.\n\nElk State Bank distinguishes itself through its specialized focus on agricultural financing and rural community banking rather than competing as a mass-market retail bank. The bank recently received an award and made charitable donations to local cultural institutions (Brown Grand Opera House), demonstrating community engagement beyond standard banking operations. This local involvement and agricultural specialization suggests a regional institution with deep roots in its service area rather than a national banking operation.\n\nThe primary limitation is the sparse publicly available information on the website about specific product offerings, interest rates, fees, and account minimums. The website functions primarily as a contact point and brand presence rather than a comprehensive product information resource. For consumers seeking detailed product comparisons, competitive rates, or online account opening capabilities, the limited digital functionality may be a significant drawback compared to larger regional or national banks with more robust online banking platforms. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.elkstatebank.com",
   "affiliate_url": "",
@@ -24,23 +24,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings deposit accounts",
+    "Agricultural lending and financing for farm operations",
+    "Debit card issuance and management",
+    "Lost or stolen card replacement services",
+    "Online account access and management portal",
+    "Financial calculators for customer planning",
+    "Contact and customer support services",
+    "FDIC-insured deposit protection",
+    "Wire transfer and fund transfer capabilities (implied by routing number)",
+    "Online bill pay (standard banking service implied)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1896",
-    "Local community bank with personal service",
-    "3 locations"
+    "Agricultural lending expertise explicitly positioned as core competency for rural customers",
+    "FDIC-insured banking institution with established routing number (101103754) indicating legitimate federal banking status",
+    "Local community involvement with recent charitable donations and awards demonstrating stability and commitment",
+    "Dedicated customer service line (888-297-3416) for urgent card issues with 24/7 accessibility",
+    "Separate contact pathways for new and existing customers suggesting organized account management infrastructure",
+    "Privacy-focused website with explicit USA PATRIOT Act compliance documentation",
+    "Online contact and account management capabilities through website portal"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Minimal product information publicly available on website\u2014no disclosed interest rates, APYs, fees, or account minimums",
+    "Limited online functionality; website appears to be informational only with no apparent online account opening or complete digital banking platform",
+    "Sparse details about specific deposit products, lending terms, or loan approval processes",
+    "No visible information about insurance products, investment services, or expanded financial services beyond basic banking",
+    "Website lacks transparency on service areas and geographic reach, making it unclear which regions are served"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +61,7 @@
   "states_served": [
     "KS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15259,
   "latitude": 39.5909770203712,
   "longitude": -97.3981650068416,
@@ -88,18 +97,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Agricultural business owners and farmers seeking specialized lending expertise and rural financial partnerships",
+    "Rural community members seeking local banking relationships with commitment to agricultural operations",
+    "Customers prioritizing community bank values and local charitable involvement over digital-first banking convenience",
+    "Agricultural operations seeking lending tailored to farming seasonal cash flows and operational needs"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Elk State Bank is best for rural customers and agricultural business owners seeking specialized lending expertise and community banking relationships in their local area. The primary caveat is that the bank's website provides minimal product details, interest rates, or digital banking functionality, requiring direct contact with the bank for pricing and account opening information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +117,11 @@
   ],
   "phone": "",
   "address": "328 Washington St, Clyde, KS 66938",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

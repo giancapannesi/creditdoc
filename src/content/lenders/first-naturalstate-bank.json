@@ -1,14 +1,14 @@
 {
   "name": "First Naturalstate Bank",
   "slug": "first-naturalstate-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Mcgehee, AR. $102M in assets. 3 offices.",
-  "description_long": "First Naturalstate Bank is a community bank located in Mcgehee, AR, established in 1974. The bank holds approximately $102M in total assets and $84M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank in McGehee, Arkansas offering personal checking/savings accounts, loans, mortgages, and merchant services through Elavon payment solutions.",
+  "description_long": "First NaturalState Bank of McGehee was chartered in 1974 and has operated continuously in Deska County for nearly 50 years. Originally led by founder Fred Denton who served 35 years as President/CEO, the bank transitioned to state charter oversight in 2016 under President Jim Daniels, a University of Arkansas graduate and McGehee native. This conversion resulted in the bank's current name and expanded regulatory framework.\n\nThe bank offers a full range of community banking services including personal and business checking accounts, savings accounts with $100 minimum deposit, personal and auto loans, home mortgages, and safety deposit boxes ranging from 3\u00d75 to 10\u00d710 sizes. They provide merchant payment solutions through Elavon, an industry-leading processor, with support for in-person, online, and mobile payments including Apple Pay and Android Pay. Additional services include free checking for customers over 65 and next-business-day funding for merchant transactions.\n\nFirst NaturalState Bank distinguishes itself as a locally-rooted community institution with continuous operation since 1974 and direct relationships with experienced loan officers. They offer competitive account minimums ($100 for savings) and provide merchant services with 24/7/365 U.S.-based customer support, dedicated account managers, and industry-specific solutions for restaurants, healthcare, retail, and professional services.\n\nAs a regional community bank, First NaturalState Bank serves local depositors and business owners but lacks the digital-first features, nationwide branch networks, or competitive rates typical of larger institutions. The savings account structure includes withdrawal limits and fees for balances under $25, which may disadvantage frequent savers. Their website provides limited detail on interest rates, loan terms, and specific fees, requiring customers to contact the bank directly for pricing information. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.fnsbank.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Business checking accounts",
+    "Personal savings accounts (minimum $100)",
+    "Account balance checks and transaction history",
+    "Funds transfers between accounts",
+    "Personal auto loans",
+    "Home mortgages",
+    "Merchant services through Elavon (in-person, online, mobile)",
+    "Smart terminals and Point of Sale systems",
+    "Apple Pay and Android Pay acceptance",
+    "Safety deposit boxes (3\u00d75 to 10\u00d710 sizes)",
+    "Free checking for customers over 65"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1974",
-    "Local community bank with personal service",
-    "3 locations"
+    "Long operational history (chartered 1974) with continuous community presence in McGehee, Arkansas",
+    "Low savings account minimum deposit of $100",
+    "Free checking accounts for customers over 65 years old",
+    "Merchant services through Elavon with next-business-day funding and 24/7/365 U.S.-based support",
+    "Full-service offerings including personal loans, auto loans, and mortgages in one institution",
+    "Safety deposit boxes available in multiple sizes (3\u00d75 to 10\u00d710)",
+    "Industry-specific payment solutions for restaurants, healthcare, retail, and professional services"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Savings account charges $1 for every month balance falls below $25, creating frequent fees for low-balance customers",
+    "Only three withdrawals allowed per quarter from savings accounts before $2 fees apply, limiting liquidity",
+    "Website provides no interest rates, APRs, or specific fee schedules\u2014customers must call or visit in person for pricing",
+    "Limited to single location in McGehee, Arkansas with no online account opening mentioned",
+    "Email server is unsecured with explicit warning against sending sensitive information"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "AR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 21379,
   "latitude": 33.6322356172056,
   "longitude": -91.3987536874594,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local McGehee and Deska County residents seeking community banking with personal relationships",
+    "Small business owners needing merchant payment processing alongside business checking accounts",
+    "Customers over 65 seeking free checking account options",
+    "Borrowers preferring to apply for auto loans, mortgages, or personal loans directly with experienced loan officers"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First NaturalState Bank is best for McGehee-area residents and local business owners who value community banking relationships and full-service offerings in one institution. The main caveat is limited digital capabilities, a single physical location, and withdrawal restrictions on savings accounts that may not suit customers needing frequent access or online-first banking.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "500 N 2Nd St, Mcgehee, AR 71654",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

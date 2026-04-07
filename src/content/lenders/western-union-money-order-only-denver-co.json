@@ -1,10 +1,10 @@
 {
   "name": "Western Union Money Order Only",
   "slug": "western-union-money-order-only-denver-co",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union Money Order Only — Money order service in Denver, CO.",
-  "description_long": "Western Union Money Order Only provides Money order service. Located at 4500 Peoria St, Denver, CO 80239.",
+  "description_short": "Western Union is a global money transfer and financial services company offering money orders, cash pickup, bill payments, and wire transfers through 150+ agent locations in Denver.",
+  "description_long": "Western Union is a long-established financial services company with a global presence, operating through a network of authorized agents in retail locations throughout Denver and beyond. The company specializes in enabling consumers to send money internationally and domestically, pick up cash from transfers, and access related financial services without requiring a traditional bank account. Their Denver service area includes 150+ agent locations at major retailers like King Soopers, Walgreens, Safeway, Circle K, Jack Market, and 7-Eleven, providing accessibility across the city with varying hours and service offerings. Western Union distinguishes itself by offering 24/7 online initiation of transfers with in-store payment and pickup options, multilingual support (English, Spanish, Haitian Creole, Chinese, French, Vietnamese), and a rewards program for frequent users. The company also provides supplementary services including mobile top-ups, bill payments, prepaid card options, inmate payments, and the ability to receive money on a card. However, consumers should note that Western Union is primarily a money transfer and pickup service rather than a full-service check-cashing operation, though many agent locations do offer money order services specifically. Some locations have limitations\u2014for example, certain 7-Eleven and Circle K locations offer money orders only, while one Walgreens location has a $300 maximum payout limit.",
   "logo_url": "https://lh4.googleusercontent.com/-xYJaxXNLbLE/AAAAAAAAAAI/AAAAAAAAAAA/MIxxhj49DTk/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/global-services/find-locations/us/co/denver?WUCountry=US&WULanguage=en&country=US&q=1801+Wynkoop+St,+Denver,+CO+80202,+USA",
   "affiliate_url": "",
@@ -58,18 +58,47 @@
     "transparency": 2.0,
     "ease_of_use": 3.9
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "150+ agent locations in Denver area for convenient access to services",
+    "24/7 online platform allowing customers to initiate transfers anytime, with in-store payment based on agent hours",
+    "Multiple payment methods and service options (money transfers, cash pickup, money orders, bill payments, mobile top-ups)",
+    "Multilingual support in 6 languages including Spanish, Haitian Creole, Chinese, French, and Vietnamese",
+    "Extended operating hours at many locations, with some agents open until 11:59 PM",
+    "Western Union Rewards program for recurring customers",
+    "No bank account required to send or receive money"
+  ],
+  "cons": [
+    "Not all agent locations offer identical services\u2014some are money order-only locations with limited functionality",
+    "Payout limits at certain locations (e.g., $300 maximum at Walgreens #356)",
+    "Service availability depends on third-party retail agent hours, which vary by location",
+    "Western Union's transfer fees and exchange rates are typically higher than bank alternatives",
+    "Website experienced technical issues during testing (Orange wallet temporarily unavailable message)"
+  ],
+  "best_for": [
+    "Unbanked or underbanked individuals who need to send money without a traditional bank account",
+    "International remittance senders supporting family or contacts abroad",
+    "Consumers needing quick cash pickup from transferred funds in Denver area"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for unbanked consumers and international remittance senders who need reliable, multilingual access to money transfer and cash pickup services across Denver's retail network. The main caveat is that service availability varies significantly by agent location\u2014some offer limited services (money orders only), and consumers must verify specific services and payout limits at their chosen location before relying on Western Union for time-sensitive transactions.",
   "services": [
-    "Money order service"
+    "Domestic and international money transfers",
+    "Cash pickup from transferred funds",
+    "Money order services",
+    "Bill payment",
+    "Wire transfers",
+    "Mobile top-up services",
+    "Inmate payment services",
+    "Western Union Rewards program",
+    "Prepaid card services",
+    "Money transfer tracking",
+    "Receive money on card options",
+    "Online transfer initiation (24/7)"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-03-21",
   "review_status": "draft",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x876c7b8c20b8ef51:0xe4b30a8b1e5f1680",
     "google_rating": 3.0,
@@ -101,10 +130,10 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-07",
   "no_index": true,
   "contact": {
     "phone": "",
@@ -112,5 +141,6 @@
   },
   "website_found_by": "scrapeforge",
   "website_found_at": "2026-04-04T17:14:50.025851",
-  "email": "email@domain.com"
+  "email": "email@domain.com",
+  "has_been_enriched": true
 }

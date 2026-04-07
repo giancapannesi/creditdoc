@@ -1,13 +1,13 @@
 {
   "name": "Smartbank",
   "slug": "smartbank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Pigeon Forge, TN. $5854M in assets. 43 offices.",
-  "description_long": "Smartbank is a community bank located in Pigeon Forge, TN, established in 2007. The bank holds approximately $5854M in total assets and $5162M in deposits. It operates 43 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "SmartBank is a full-service bank offering personal and business checking, savings, loans, mortgages, credit cards, and digital banking services across Tennessee locations.",
+  "description_long": "SmartBank is a regional bank that positions itself as offering a differentiated approach to banking called \"The SmartBank Way.\" The company operates multiple locations throughout Tennessee and serves both personal and commercial customers. Based on their website structure and service offerings, SmartBank appears to be an established, FDIC-insured banking institution rather than a neobank or fintech startup. The bank emphasizes traditional banking relationships combined with modern digital capabilities. SmartBank offers a comprehensive suite of personal banking products including checking accounts, savings accounts, personal loans, mortgages, credit cards, and debit cards. They also provide business banking services such as business checking, business savings, business loans, dealer floor plan programs, and treasury management services. Their digital banking platform includes online banking, mobile banking with mobile check deposit, online bill pay, Zelle money transfers, mobile wallet functionality, and debit card controls accessible through their mobile app. Beyond core banking, SmartBank partners with Raymond James Financial Services for investment products and wealth management services, offers private banking for high-net-worth clients, provides mortgage services for home purchases and refinancing, and operates SBK Insurance as an independent insurance agency. What distinguishes SmartBank is their emphasis on security and fraud prevention, including dedicated identity theft protection through their debit card, 24/7 fraud expertise, and explicit messaging about never requesting sensitive account information. They market themselves as a \"Great Place to Work\" certified employer and emphasize corporate social responsibility and community investment. The company also highlights the convenience of their digital tools like mobile wallet, Zelle integration, and debit card controls. However, SmartBank's reach appears limited to Tennessee based on the website mentioning \"locations throughout Tennessee,\" making them a regional rather than national bank. While they offer comprehensive services, availability is geographically restricted, and the website provides limited detail on specific product terms, rates, or fees. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.smartbank.com",
   "affiliate_url": "",
@@ -22,23 +22,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Personal loans and mortgages",
+    "Personal and business credit cards",
+    "Debit cards with ID theft protection",
+    "Online banking with bill pay functionality",
+    "Mobile banking with mobile check deposit and mobile wallet",
+    "Business checking and savings accounts",
+    "Business loans and dealer floor plan financing",
+    "Treasury management and corporate cash management",
+    "Private banking and wealth management services",
+    "Investment services through Raymond James partnership",
+    "Mortgage services for purchase and refinancing",
+    "Insurance services through SBK Insurance subsidiary",
+    "Zelle money transfer service",
+    "Debit card controls and fraud alerts"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2007",
-    "Local community bank with personal service",
-    "43 locations"
+    "Comprehensive service offerings including personal banking, business banking, mortgages, investments, and insurance under one institution",
+    "Strong digital banking capabilities including mobile check deposit, mobile wallet, Zelle integration, and debit card controls via app",
+    "24/7 customer support through SmartLine24 telebanking (888.868.0608) and lost card assistance",
+    "Identity theft protection bundled with debit card at no additional cost, with 24/7 fraud expertise",
+    "Private banking and wealth management services through Raymond James partnership for higher-net-worth clients",
+    "Multiple account type options with interactive questionnaire to help customers choose the right checking account",
+    "Established regional bank with multiple Tennessee locations and FDIC insurance protection"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to Tennessee only, making services unavailable to customers in other states",
+    "Website provides no information about account fees, minimum balances, interest rates, or APRs for any products",
+    "Limited transparency regarding mortgage terms, loan rates, or credit card rewards and benefits",
+    "No mention of specialized products for credit building or credit repair for customers with poor credit histories",
+    "Mobile banking and digital tools mentioned but no detail provided on functionality, app ratings, or user experience"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +64,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58463,
   "latitude": 35.8110919854655,
   "longitude": -83.5762950235867,
@@ -83,21 +97,22 @@
       "FDIC Cert #58463"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Tennessee residents seeking a full-service regional bank with both digital and in-person banking options",
+    "Business owners needing comprehensive commercial banking, treasury management, and dealer financing programs",
+    "High-net-worth individuals interested in private banking, wealth management, and integrated investment services",
+    "Customers prioritizing security features, identity theft protection, and fraud prevention capabilities"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "SmartBank is best for Tennessee residents and businesses seeking a traditional full-service regional bank with modern digital capabilities, comprehensive product offerings, and a focus on security and customer service. The main caveat is geographic limitation to Tennessee and lack of detailed rate and fee information online, requiring customers to contact the bank directly for specific pricing and product terms.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +120,11 @@
   ],
   "phone": "",
   "address": "2430 Teaster Ln, Pigeon Forge, TN 37863",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

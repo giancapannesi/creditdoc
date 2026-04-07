@@ -1,14 +1,14 @@
 {
   "name": "Village Bank",
   "slug": "village-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Saint Francis, MN. $418M in assets. 4 offices.",
-  "description_long": "Village Bank is a community bank located in Saint Francis, MN, established in 1993. The bank holds approximately $418M in total assets and $361M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Village Bank is a full-service bank offering personal and business checking, savings, loans, and mortgage services with both online and in-person banking options.",
+  "description_long": "Village Bank operates as a traditional retail and online banking institution providing comprehensive financial services to both individual and business customers. The bank maintains physical branch locations while offering digital banking channels, positioning itself as a community-focused financial institution.\n\nThe bank's service portfolio spans deposit products (checking, savings, money market, CDs, HSAs, IRAs), online banking services (online banking platform, bill pay, mobile banking, eStatements, Zelle integration), and an extensive lending menu including personal loans, auto loans, recreational loans, business loans, real estate loans, equipment financing, SBA financing, construction loans, and various mortgage products. They also offer specialized services like cannabis banking for business customers and business credit card processing.\n\nVillage Bank distinguishes itself through niche lending products not commonly offered by all banks, including barndominium/shouse loans, lot loans, bridge loans, and construction-to-permanent loans. They market themselves as community-focused with content through \"The Village Voice\" blog, career opportunities, and a stated commitment to \"Building Better Communities.\" The bank emphasizes accessibility, having integrated AudioEye technology into their website.\n\nAs a traditional bank, Village Bank serves customers seeking established banking infrastructure, but lacks transparency on their website regarding specific rates, fees, minimum balance requirements, or regulatory information. No FDIC insurance disclosures or detailed terms appear in the available content. Their strength lies in product breadth and specialized lending, though they provide limited public information about competitiveness compared to alternatives. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.villagebankonline.bank",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Savings and money market accounts",
+    "Certificates of Deposit (CDs)",
+    "Health Savings Accounts (HSAs)",
+    "Individual Retirement Accounts (IRAs)",
+    "Online banking platform and bill pay",
+    "Mobile banking application",
+    "Personal loans, auto loans, and recreational loans",
+    "Business loans, SBA financing, and equipment financing",
+    "Mortgage services including construction loans and barndominium/shouse loans",
+    "Business checking and business savings accounts",
+    "Cannabis banking services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1993",
-    "Local community bank with personal service",
-    "4 locations"
+    "Extensive loan product variety including specialty options like barndominium/shouse loans, lot loans, and bridge loans not widely available",
+    "Cannabis banking services for business customers, a specialized niche offering",
+    "Comprehensive mortgage services including construction-to-permanent and construction loans",
+    "Multi-channel access including online banking, mobile app, bill pay, and 24/7 telephone banking",
+    "SBA financing and equipment financing options for business customers",
+    "Health Savings Account (HSA) and Individual Retirement Account (IRA) offerings",
+    "Zelle integration for peer-to-peer money transfers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website contains no information about interest rates, APYs, or APRs for any products",
+    "No fee structure, minimum balance requirements, or account terms disclosed online",
+    "Limited transparency regarding FDIC insurance coverage or regulatory oversight details",
+    "Website does not specify whether the bank is state-chartered, federally-chartered, or credit union status",
+    "No customer reviews, ratings, or third-party verification data available on the website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 33761,
   "latitude": 45.3867100204279,
   "longitude": -93.3518409791178,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Business owners seeking specialized lending (SBA loans, equipment financing, cannabis banking)",
+    "Customers interested in niche real estate products (barndominium loans, lot loans, bridge loans)",
+    "Individuals wanting full-service banking with both traditional and digital channels",
+    "Borrowers needing construction or construction-to-permanent financing"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Village Bank is best for customers seeking comprehensive banking services with access to specialized lending products, particularly for construction, real estate, or business purposes. The primary caveat is the complete lack of rate, fee, and terms transparency on their public website\u2014prospective customers must contact the bank directly to compare offerings against competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "3350 Bridge St Nw, Saint Francis, MN 55070",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

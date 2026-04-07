@@ -1,14 +1,14 @@
 {
   "name": "Security Bank Of Southwest Missouri",
   "slug": "security-bank-of-southwest-missouri",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Cassville, MO. $142M in assets. 3 offices.",
-  "description_long": "Security Bank Of Southwest Missouri is a community bank located in Cassville, MO, established in 1985. The bank holds approximately $142M in total assets and $124M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank with 3 branches in Southwest Missouri offering checking, savings, CDs, lending, and online banking services to individuals and businesses.",
+  "description_long": "Security Bank of Southwest Missouri is a regional community bank headquartered in Cassville, Missouri, with a physical presence spanning three locations in Barry County: Cassville, Exeter, and Wheaton. The bank has established itself as a local financial institution serving both personal and business customers in Southwest Missouri.\n\nThe bank offers a comprehensive suite of core banking products including personal and business checking accounts, savings accounts, certificates of deposit (CDs), individual retirement accounts (IRAs), and a lending center for credit products. They provide online and mobile banking capabilities, telephone banking, ATM access, and debit cards (Shazam brand). The bank also offers specialized services such as safe deposit boxes, wire transfers, cashier's checks, and notary services.\n\nSecurity Bank distinguishes itself through its community-focused approach, maintaining physical branches in smaller Missouri towns rather than pursuing aggressive expansion. The bank publishes specific deposit rates publicly and provides financial calculators on their website. They emphasize transparency regarding fees and safeguarding of personal information, with dedicated security information and privacy policy pages.\n\nAs a traditional community bank, Security Bank appeals primarily to customers seeking personalized service and local decision-making rather than digital-first banking. However, the bank's limited geographic footprint means accessibility is restricted to Southwest Missouri residents. The detailed fee schedule suggests the bank operates on a traditional fee-based model common among smaller regional banks, which may result in higher costs for certain services compared to larger national institutions. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://SBSWMO.COM",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts",
+    "Business checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of deposit (CDs) and IRAs",
+    "Online and mobile banking with mobile app",
+    "Telephone banking",
+    "Shazam debit cards with ATM/replacement services",
+    "Wire transfers (incoming, outgoing, and international)",
+    "Safe deposit boxes (multiple sizes)",
+    "Cashier's checks and official checks",
+    "Notary services",
+    "Check cashing services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1985",
-    "Local community bank with personal service",
-    "3 locations"
+    "Multiple physical branch locations in Cassville, Exeter, and Wheaton for in-person banking",
+    "Comprehensive fee transparency with detailed published fee schedule on website",
+    "Offers both personal and business checking accounts with distinct products",
+    "Mobile banking app and online enrollment capabilities for digital banking needs",
+    "Safe deposit boxes available in three sizes with affordable annual fees ($15-$40)",
+    "Telephone banking option for customers preferring non-digital account access",
+    "Published current deposit rates available to prospective customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic reach restricted to three small towns in Barry County, Missouri",
+    "Multiple fees for common services ($15 for overdrafts, $15 for return checks, $10 for stop payments)",
+    "International wire transfer fees are notably high at $60 per transaction",
+    "No mention of mobile check deposit or mobile wallet features on website",
+    "Safe deposit box forced entry fee of $100 minimum is substantial"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 26520,
   "latitude": 36.6709077253898,
   "longitude": -93.8831473661588,
@@ -87,18 +98,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Southwest Missouri residents seeking community banking with local branch access",
+    "Small business owners in Barry County needing business checking and lending services",
+    "Customers preferring traditional banking relationships and in-person service"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Security Bank of Southwest Missouri is best for individuals and small businesses located in Barry County who value local community banking relationships and in-person branch access. The primary caveat is the bank's limited geographic footprint\u2014it serves only three small Missouri towns, making it inaccessible to customers outside this region.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "1321 Old Highway 37, Cassville, MO 65625",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

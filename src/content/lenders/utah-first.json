@@ -1,15 +1,15 @@
 {
   "name": "Utah First",
   "slug": "utah-first",
-  "category": "payday-alternatives",
+  "category": "atm",
   "subcategories": [
     "credit-union",
     "fdic-equivalent",
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "Federal Credit Union in , . Low-income designated. NCUA insured. 11 locations.",
-  "description_long": "Utah First is a federal credit union serving members in , , established in 1935. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) — small, affordable loans designed to replace predatory payday lending. The credit union operates 11 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "ERROR: The provided URL is for Utah First Credit Union Amphitheatre, an outdoor concert venue in West Valley City, Utah\u2014not a consumer finance company.",
+  "description_long": "CRITICAL ISSUE: The website provided (https://en.wikipedia.org/wiki/Utah_First_Credit_Union_Amphitheatre) contains information about an outdoor amphitheater venue, not a financial services company. The Utah First Credit Union Amphitheatre is a 25,000-capacity outdoor performance venue located at 5150 S 6055 West in West Valley City, Utah, that opened in July 2003. It was previously named the USANA Amphitheatre from 2003-2024 before Utah First Credit Union purchased naming rights in January 2024. The venue is operated by Live Nation and hosts concerts from May through October annually, featuring major artists and music festivals. This is fundamentally a music venue and entertainment property, not a financial institution or consumer finance company. While the venue is named after Utah First Credit Union (a legitimate financial institution), the website content provided contains zero information about any financial products, services, lending practices, APRs, fees, or consumer finance offerings. The naming rights agreement indicates only a sponsorship relationship between the credit union and the amphitheater operator. No factual company profile for consumer finance services can be constructed from venue information.",
   "logo_url": "",
   "website_url": "https://en.wikipedia.org/wiki/Utah_First_Credit_Union_Amphitheatre",
   "affiliate_url": "",
@@ -33,16 +33,17 @@
     "Payday Alternative Loans (PALs)"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
+    "Not-for-profit \u2014 typically lower fees and better rates than banks",
+    "NCUA insured \u2014 deposits protected up to $250,000",
     "Established in 1935",
     "Member-owned cooperative",
-    "Low-income designated — may offer Payday Alternative Loans (PALs)"
+    "Low-income designated \u2014 may offer Payday Alternative Loans (PALs)"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "FATAL ERROR: Provided URL is for a concert venue, not a financial services company",
+    "No financial product information available on the website",
+    "Impossible to verify lending terms, rates, or consumer finance services",
+    "Cannot assess legitimate financial credentials or regulatory compliance from venue data"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +53,7 @@
   "founded_year": 1935,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "528",
   "published": true,
   "review_status": "draft",
@@ -86,9 +87,9 @@
   "rating": 4.1,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.9,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.2
   },
   "best_for": [
@@ -97,16 +98,19 @@
     "Payday loan alternatives (PALs)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "RESEARCH ERROR: The provided URL does not contain information about a consumer finance company. Utah First Credit Union Amphitheatre is an outdoor music venue owned by United Concerts and operated by Live Nation. To build a factual profile for Utah First Credit Union's financial services, you must provide the credit union's actual website (not the amphitheater venue page) with information about their PAL programs, lending products, rates, and member services.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-03-21",
   "cities_served": [],
   "phone": "(201) 809-2308",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
   "website_found_by": "scrapeforge",
-  "website_found_at": "2026-04-04T17:19:41.404314"
+  "website_found_at": "2026-04-04T17:19:41.404314",
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06",
+  "quarantine_reason": "not_consumer_finance"
 }

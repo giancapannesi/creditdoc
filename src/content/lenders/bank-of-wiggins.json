@@ -1,14 +1,14 @@
 {
   "name": "Bank Of Wiggins",
   "slug": "bank-of-wiggins",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Wiggins, MS. $230M in assets. 3 offices.",
-  "description_long": "Bank Of Wiggins is a community bank located in Wiggins, MS, established in 1916. The bank holds approximately $230M in total assets and $207M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bank of Wiggins is a community-focused bank offering personal and business checking, savings, CDs, IRAs, debit cards, and loans with over 100 years of service since 1916.",
+  "description_long": "Bank of Wiggins is an FDIC-insured bank that has served its community for over 100 years, having been established in 1916. The bank emphasizes its role as a local institution where customers, directors, and employees are members of the same community, positioning itself as a relationship-based alternative to larger national banks. The bank operates multiple physical locations with regular business hours and provides both in-person and online banking services.\n\nBank of Wiggins offers a comprehensive suite of personal banking products including checking accounts, savings accounts, CDs, IRAs, and debit cards. On the business side, they provide business checking accounts, business savings accounts, and commercial loans. The debit card program includes access to extensive ATM networks through partnerships with NYCE, Cirrus, and Maestro, as well as membership in the SUM Program which provides surcharge-free access to over 2,800 ATMs. Premium account tiers offer enhanced ATM benefits with reduced or eliminated network fees.\n\nThe bank distinguishes itself through its century-plus history of operation, community integration, and emphasis on personalized service. They explicitly warn customers that the bank will never call, text, or email requesting account numbers or PINs, and provide dedicated fraud reporting (601-928-5233). The website includes educational content on cybersecurity best practices and maintains transparency about third-party website links and email security limitations.\n\nAs a traditional community bank, Bank of Wiggins serves customers seeking local banking relationships and standard deposit products. However, the website provides limited information about specific product features, interest rates, loan terms, fees, or competitive advantages. Customers should contact the bank directly for detailed pricing and product information. The lack of online service detail may indicate limited digital banking capabilities compared to larger institutions. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.bankofwiggins.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "CDs (Certificates of Deposit)",
+    "IRAs (Individual Retirement Accounts)",
+    "Debit cards with MasterCard access",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Commercial loans",
+    "Online banking platform",
+    "SUM Program ATM network access (2,800+ surcharge-free ATMs)",
+    "NYCE, Cirrus, and Maestro ATM access",
+    "Fraud protection and reporting services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1916",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits with over 100 years of operating history since 1916",
+    "SUM Program membership provides surcharge-free ATM access at 2,800+ locations nationwide",
+    "Debit card accepted at terminals displaying NYCE, Cirrus, Maestro, and MasterCard logos",
+    "Premium and Premium Plus account tiers offer reduced or eliminated ATM network fees",
+    "Explicit anti-fraud commitment with dedicated fraud hotline (601-928-5233)",
+    "Community-focused operations with multiple local branch locations and extended hours",
+    "Cybersecurity education and best practices guidance available on website"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "ATM network fees imposed for non-Bank of Wiggins ATMs except for Premium account holders",
+    "Website lacks specific details on interest rates, APYs, fees, and product terms",
+    "Limited information about loan products, rates, and eligibility requirements",
+    "Email communication explicitly noted as insecure with recommendation not to share sensitive information",
+    "No apparent mobile app or detailed online banking capabilities described on website"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "MS"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 8250,
   "latitude": 30.8580309808524,
   "longitude": -89.1387060140905,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Community members seeking local relationship banking with established institutions",
+    "Customers prioritizing FDIC insurance and traditional deposit products",
+    "Business owners needing local checking, savings, and commercial loan services",
+    "People willing to visit physical branches for account management and services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Wiggins is best for community-oriented customers seeking traditional banking services from an established, FDIC-insured institution with deep local roots. The main caveat is that the website provides minimal detail on product specifications, rates, and fees\u2014direct contact with the bank is necessary to evaluate competitive offerings and suitability for specific financial needs.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "109 Pine Ave W, Wiggins, MS 39577",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

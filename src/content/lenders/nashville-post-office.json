@@ -1,13 +1,13 @@
 {
   "name": "Nashville Post Office",
   "slug": "nashville-post-office",
-  "category": "payday-alternatives",
+  "category": "banking",
   "subcategories": [
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "State-Chartered Credit Union in , . NCUA insured. 1 location.",
-  "description_long": "Nashville Post Office is a state-chartered credit union serving members in , , established in 1925. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "Nashville Main Office is a USPS post office location offering mailing services, PO boxes, passport services, and limited financial services including money orders.",
+  "description_long": "Nashville Main Office is a United States Postal Service (USPS) location operated by the federal government, serving the Nashville, Tennessee area from its main facility at 525 Royal Parkway. As a government-run post office, it provides comprehensive postal and related services to residential and business customers throughout the region. The facility offers a broad range of USPS services including domestic and international mailing, PO box rentals, money order services, passport appointment scheduling and photo services, self-service kiosks, and bulk mail services. The location distinguishes itself through extended hours (open until 6 PM weekdays and Sundays, with limited Sunday morning service), 24-hour self-service kiosk access, and government-backed credibility and reliability. However, the website explicitly states 'There are no financial services available at this location,' which contradicts the original check-cashing categorization\u2014the facility does not offer check cashing, wire transfers, or advanced financial services beyond money orders. This is a standard post office with basic financial transaction capabilities limited to money order issuance, making it suitable for customers needing postal and government ID services rather than comprehensive financial services. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://tools.usps.com/locations/details/1444400",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)"
+    "Domestic money orders",
+    "Inquiry money orders",
+    "PO box rental and access",
+    "Passport appointment scheduling",
+    "Passport photo services",
+    "Digital photo appointments",
+    "Passport walk-in services (limited hours)",
+    "Self-service kiosks (24 hours)",
+    "Bulk mail acceptance",
+    "Priority Mail International",
+    "Business Reply Mail account management",
+    "Call referral services"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1925",
-    "Member-owned cooperative"
+    "Extended operating hours: 8 AM-6 PM weekdays, 9 AM-6 PM Saturday, 10 AM-6 PM Sunday",
+    "24-hour self-service kiosk access for basic services",
+    "Domestic money orders available",
+    "PO box services with 24-hour access",
+    "Passport appointment scheduling and photo services available",
+    "Bulk mail acceptance for business customers",
+    "Multiple nearby locations (Hermitage, East Nashville, Donelson) for convenience"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "No financial services available\u2014does not offer check cashing, wire transfers, or bill payment despite categorization",
+    "Limited passport services\u2014no walk-in service except Mon/Wed-Fri 10:30-11:30 AM",
+    "Mailing services listed as unavailable at this location despite being a post office",
+    "No pickup services available at this location",
+    "Business services extremely limited\u2014no new business reply mail permits or business account balance checks"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +59,7 @@
   "founded_year": 1925,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "67922",
   "published": true,
   "review_status": "draft",
@@ -82,26 +93,29 @@
   "rating": 4.1,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.7,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.2
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Community-focused financial services"
+    "Customers needing to purchase money orders for bill payment or fund transfers",
+    "People applying for or renewing passports with advance appointment availability",
+    "PO box renters needing 24-hour mailbox access",
+    "Bulk mail senders and businesses handling large mailings"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Nashville Main Office is a government post office suitable for customers needing money orders, PO boxes, passport services, and domestic/international mailing\u2014not a financial services provider. The critical caveat is that despite its check-cashing categorization, the facility explicitly does not offer check cashing, wire transfers, or other advanced financial services, making it fundamentally misclassified in the current database.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-03",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
-  "website_needs_review": true
+  "website_needs_review": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Citizens Bank Of The South",
   "slug": "citizens-bank-of-the-south",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Sandersville, GA. $362M in assets. 3 offices.",
-  "description_long": "Citizens Bank Of The South is a community bank located in Sandersville, GA, established in 1965. The bank holds approximately $362M in total assets and $309M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank operating in Georgia for over 55 years, offering personal and business checking, savings, loans, and mortgages across four locations.",
+  "description_long": "Citizens Bank of the South (CBOTS) has been serving its community for over 55 years with a focus on personal and professional service. The bank operates four convenient locations in Georgia, including offices in Sandersville, Statesboro, and Milledgeville, positioning itself as a traditional community bank rather than a national chain. CBOTS offers a comprehensive suite of banking products designed for both personal and business customers seeking local relationship-based banking.\n\nThe bank provides personal products including checking and savings accounts, CDs and IRAs, debit and credit cards, and personal loans. For business customers, CBOTS offers business checking, business savings, business credit cards, and business loans. The bank also provides mortgage lending services and has invested in modern digital banking capabilities including online banking, mobile banking, SMS text banking, remote deposit, and integration with digital wallets like Apple Pay and Google Wallet. Additional services include electronic funds transfers, Zelle integration, and comprehensive cybersecurity resources.\n\nCBOTS distinguishes itself through its emphasis on community banking and personal service at a local level, rather than competing as a large national institution. The bank maintains traditional lobby hours (Monday-Friday 8:30am-5:00pm) with limited Saturday drive-through service at their main Sandersville location. Their marketing message \"Simple Banking, Your Way\" reflects a philosophy of tailored solutions for local customers. The bank emphasizes FDIC insurance protection and maintains compliance programs including Community Reinvestment Act commitments.\n\nAs a regional community bank, CBOTS is best suited for customers who prioritize local relationships and personalized service over extensive branch networks or cutting-edge digital-only banking. The limited geographic footprint (four locations in central Georgia) means accessibility is restricted to this specific region. While the bank has modernized with digital services, customers seeking nationwide branch access or the latest fintech features may find larger institutions more suitable. The bank represents a traditional banking model focused on community roots rather than market disruption.",
   "logo_url": "",
   "website_url": "https://www.cbots.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "CDs and IRAs",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking accounts",
+    "Business savings accounts",
+    "Business credit cards",
+    "Business loans",
+    "Mortgage lending and refinancing",
+    "Online banking (OLB) with e-alerts",
+    "Mobile banking and SMS text banking",
+    "Digital wallet integration (Apple Pay, Google Wallet, Zelle)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1965",
-    "Local community bank with personal service",
-    "3 locations"
+    "Over 55 years of established community banking history and local presence in Georgia",
+    "Comprehensive product suite including personal/business checking, savings, loans, and mortgages all under one institution",
+    "Modern digital banking options including online banking, mobile banking, Apple Pay, Google Wallet, and Zelle integration",
+    "FDIC deposit insurance protection for customer funds",
+    "Dedicated customer service phone line (1-877-99-CBOTS) with personalized support",
+    "Four physical branch locations with extended drive-through hours for in-person service",
+    "Additional resources including cybersecurity guides and identity theft protection information"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Extremely limited geographic footprint restricted to four locations in central Georgia only",
+    "Limited Saturday hours (drive-through only 9am-12pm at main location) restricts weekend banking access",
+    "No information provided on specific product features, rates, fees, or APRs for any accounts or loans",
+    "Small community bank with likely fewer digital innovation capabilities compared to national banks",
+    "No mention of 24/7 customer support or international banking services"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "GA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 19420,
   "latitude": 32.9818099890751,
   "longitude": -82.8116859974394,
@@ -93,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Central Georgia residents seeking personalized community banking with local branch relationships",
+    "Small business owners in Sandersville, Statesboro, or Milledgeville areas preferring local lending relationships",
+    "Customers who value traditional in-person banking interactions over purely digital banking models",
+    "Individuals seeking FDIC-insured deposit accounts with comprehensive loan and mortgage options in a single institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Citizens Bank of the South is best for central Georgia residents and small business owners who prioritize relationship-based banking and personalized service from a locally-rooted institution. The primary caveat is strict geographic limitation to four locations in a three-county area, making it inaccessible to anyone outside this specific region and impractical for customers needing broader branch access or those who relocate.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "132 S Harris St, Sandersville, GA 31082",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

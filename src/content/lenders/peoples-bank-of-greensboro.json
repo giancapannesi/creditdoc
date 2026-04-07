@@ -1,15 +1,15 @@
 {
   "name": "Peoples Bank Of Greensboro",
   "slug": "peoples-bank-of-greensboro",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Greensboro, AL. $115M in assets. 1 office.",
-  "description_long": "Peoples Bank Of Greensboro is a community bank located in Greensboro, AL, established in 1904. The bank holds approximately $115M in total assets and $109M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving Greensboro, AL since 1904, offering checking, savings, loans, and digital banking with mobile check deposit capabilities.",
+  "description_long": "Peoples Bank of Greensboro is a longstanding community financial institution that has served the Greensboro, Alabama area for over 120 years, establishing itself as a local banking fixture since 1904. The bank operates from its main location at 1402 State Street in Greensboro, AL, with traditional banking hours Monday through Thursday 8:30 AM to 4:00 PM, Friday 8:30 AM to 5:30 PM, and a 24-hour telephone banking inquiry line.\n\nThe bank offers a comprehensive suite of consumer and business banking products. On the deposit side, they provide multiple checking account options including standard checking, Student Checking, Senior Checking, BANCLUB Checking, and NOW Checking accounts, along with savings accounts, Money Market accounts, and Certificates of Deposit. For retirement planning, they offer both Traditional and Roth Individual Retirement Accounts. Lending services include consumer loans and business loans. Their digital offerings include online banking, mobile banking with the newly promoted mobile check deposit feature, e-statements, and security features designed to protect customer accounts.\n\nWhat distinguishes Peoples Bank of Greensboro is its emphasis on community banking and local accessibility combined with modern digital conveniences. The recent rollout of mobile check deposit\u2014allowing customers to deposit checks anytime and anywhere\u2014demonstrates an effort to blend traditional community banking with contemporary digital banking expectations. The bank provides detailed educational resources including cybersecurity guides, debit card security information, and IRA notices, suggesting a commitment to customer financial literacy.\n\nAs a small community bank, Peoples Bank of Greensboro is best suited for individuals and small businesses in the Greensboro, AL area seeking personalized banking relationships and local decision-making. However, customers should be aware that as a smaller institution, they may have more limited product offerings and branch locations compared to regional or national banks, and their digital platform capabilities may not match those of larger financial institutions. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.peoplesbankofgreensboro.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Checking accounts (standard, Student, Senior, BANCLUB, NOW)",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Money Market accounts",
+    "Certificates of Deposit",
+    "Traditional IRA accounts",
+    "Roth IRA accounts",
+    "Consumer loans",
+    "Business loans",
+    "Online banking platform",
+    "Mobile banking with mobile check deposit",
+    "e-Statements",
+    "24-hour telephone banking inquiry line"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1904",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits with Electronic Deposit Insurance Estimator tool available",
+    "Mobile check deposit functionality allowing deposits anytime, anywhere",
+    "Multiple specialized checking account types (Student, Senior, BANCLUB, NOW) tailored to different customer needs",
+    "24-hour telephone banking inquiry line for customer access outside branch hours",
+    "Comprehensive retirement account options including both Traditional and Roth IRAs",
+    "Online and mobile banking with e-statements and security features",
+    "Over 120 years of community banking history and local presence since 1904"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited branch locations restricted to Greensboro, AL area with no evidence of multi-state presence",
+    "Restricted business hours (closed weekends, limited weekday hours) compared to larger banks with extended availability",
+    "Website provides minimal detail on loan products, rates, terms, or eligibility requirements for consumer and business loans",
+    "No evidence of advanced digital features like mobile app functionality beyond mobile check deposit",
+    "Limited information about fee structures beyond reference to a fee schedule PDF, creating uncertainty about account costs"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "AL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 1730,
   "latitude": 32.699404332593,
   "longitude": -87.595780421993,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Greensboro, AL residents seeking convenient local banking with personalized service",
+    "Small business owners in the area looking for community-focused business lending and checking services",
+    "Students and seniors eligible for specialized checking account products",
+    "Customers prioritizing FDIC insurance protection and traditional banking relationships over digital-only banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Peoples Bank of Greensboro is best for individuals and small businesses in the Greensboro, AL area seeking traditional community banking with modern digital conveniences like mobile check deposit. The main caveat is that as a small, geographically limited community bank, customers should expect fewer branch locations, more restricted hours, and potentially less robust digital capabilities compared to regional or national banking institutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "1402 State St, Greensboro, AL 36744",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

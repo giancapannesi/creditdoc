@@ -1,15 +1,15 @@
 {
   "name": "Citizens State Bank Of Lankin",
   "slug": "citizens-state-bank-of-lankin",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Lankin, ND. $72M in assets. 4 offices.",
-  "description_long": "Citizens State Bank Of Lankin is a community bank located in Lankin, ND, established in 1905. The bank holds approximately $72M in total assets and $61M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Unable to verify. Website currently unreachable with DNS resolution error on Cloudflare network as of April 2026.",
+  "description_long": "Citizens State Bank of Lankin is listed as a banking institution in the current database. However, a critical issue prevents verification of current operations: the company's website (www.csb100.com) is currently returning a Cloudflare DNS resolution error (Error 1001), indicating the domain cannot be resolved on Cloudflare's network. This error suggests either the website is in early setup stages with Cloudflare, or there is a configuration problem with the domain's DNS settings. Without access to the website content, services, or current business information, it is impossible to verify what banking products or services this institution currently offers, their geographic service area, or operational status. The DNS error was recorded on April 6, 2026 at 19:35:11 UTC. Standard banking institutions typically offer checking accounts, savings accounts, certificates of deposit (CDs), and lending products, but these specifics cannot be confirmed for this company. The inability to access the website raises questions about the institution's current operational capacity and online presence. Until the website is restored and accessible, comprehensive verification of this company's current offerings and legitimacy cannot be completed. Potential customers should attempt to contact the bank through alternative means or verify its status through regulatory databases before opening accounts. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.csb100.com",
   "affiliate_url": "",
@@ -32,15 +32,17 @@
     "FDIC insured deposits"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
+    "FDIC insured \u2014 deposits protected up to $250,000",
     "Established in 1905",
     "Local community bank with personal service",
     "4 locations"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website completely inaccessible due to DNS resolution error",
+    "No verifiable current business information available online",
+    "Unable to confirm services, products, or operational status",
+    "No contact information or alternative web presence could be verified",
+    "Cloudflare error suggests potential configuration or setup issues"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +54,7 @@
   "states_served": [
     "ND"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 9422,
   "latitude": 48.3142573059956,
   "longitude": -97.9234261765373,
@@ -88,9 +90,9 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
@@ -99,7 +101,7 @@
     "Small business banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "This company cannot be properly evaluated at this time due to website unavailability. The DNS resolution error prevents access to any verifiable information about current services or operations. Consumers should not proceed without independently verifying the bank's status through regulatory agencies or alternative contact methods.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +109,10 @@
   ],
   "phone": "",
   "address": "401 Main Street, Lankin, ND 58250",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

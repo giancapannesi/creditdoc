@@ -1,10 +1,10 @@
 {
   "name": "Western Union Money Order Only",
   "slug": "western-union-money-order-only-mesa",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union Money Order Only — Money order service in Mesa, AZ.",
-  "description_long": "Western Union Money Order Only provides Money order service. Located at 507 E University Dr #4, Mesa, AZ 85203.",
+  "description_short": "Western Union operates 1,850+ agent locations across the US offering money transfers, bill payments, money orders, and cash pickup services since 1851.",
+  "description_long": "Western Union is a long-established money services company founded in 1851, with a century-plus history of facilitating domestic and international financial transactions. The company operates through a network of agent locations at retail stores, grocery chains, banks, and dedicated offices across the United States, making their services widely accessible to consumers.\n\nWestern Union's core services include in-person money transfers (domestic and international), bill payment processing for utilities and rent, money order issuance and cashing, and cash pickup from transfers sent by others. Customers can also receive funds via prepaid Visa cards. The company offers hybrid functionality, allowing customers to initiate transfers online or through their mobile app and then complete payment in cash at a physical location, streamlining the process.\n\nWestern Union's distinguishing factors include their massive physical footprint (hundreds of retail partnerships including Walmart), established brand recognition dating back 170+ years, encryption and fraud prevention protections, and the ability to track transfers via Money Transfer Control Numbers (MTCNs). They serve both unbanked and banked consumers, offering an alternative to traditional banking channels for those who prefer in-person transactions or lack bank accounts.\n\nA key limitation is that Western Union does not conduct currency exchange at physical locations\u2014international recipients receive funds in local currency based on real-time exchange rates, but customers cannot exchange currency themselves. Pricing varies significantly by transfer method, payment option, and destination, requiring customers to use their cost calculator for comparison. The service is location and hour-dependent, with agent locations operating on varying schedules based on host businesses.",
   "logo_url": "https://lh4.googleusercontent.com/-JhaWs-ElIxA/AAAAAAAAAAI/AAAAAAAAAAA/oI4NpfMTvu8/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/us/en/locations.html",
   "affiliate_url": "",
@@ -58,18 +58,49 @@
     "transparency": 2.0,
     "ease_of_use": 3.9
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "1,850+ agent locations across US including Walmart, grocery chains, and retail partners for convenient access",
+    "170+ year operating history with established security, encryption, and fraud prevention measures",
+    "Money Transfer Control Numbers (MTCNs) allow customers to track transfers and recipients to know when funds arrive",
+    "Hybrid online-to-offline model: register transfer online/via app and pay in cash at agent location to save counter time",
+    "Multiple receive options including cash pickup, prepaid Visa cards, and money order deposit capability",
+    "Bill payment services for utilities, rent, and car payments at participating locations",
+    "First online international transfer fee-free (promotional offer)",
+    "Accept multiple payment methods including cash, debit, and credit cards at select locations"
+  ],
+  "cons": [
+    "No currency exchange services at physical locations; exchange rates are set at time of transfer, not customer-controlled",
+    "Prices vary significantly by transfer method, payment option, and destination\u2014requires cost calculator to compare before sending",
+    "Agent location hours vary by host business; customers must check location-specific hours",
+    "Service requires valid ID for both sender and recipient, limiting accessibility for undocumented individuals",
+    "Money order services only available at 'participating locations,' creating inconsistent availability across the network"
+  ],
+  "best_for": [
+    "Unbanked or underbanked consumers who prefer in-person cash transactions over bank transfers",
+    "Individuals sending domestic or international money to family and friends without bank accounts",
+    "Customers needing to pay bills, rent, or utilities at locations without traditional banking access",
+    "People who need immediate money order services as an alternative to checks"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for unbanked consumers and those needing reliable in-person money transfer or bill payment services without bank accounts. The primary caveat is that pricing varies significantly by method and destination, and service availability depends on participating agent locations with varying hours\u2014customers should verify local availability and use the cost calculator before committing to a transfer.",
   "services": [
-    "Money order service"
+    "In-person domestic money transfers",
+    "In-person international money transfers with real-time exchange rates",
+    "Bill payment processing (utilities, rent, car payments) at participating locations",
+    "Money order purchase at participating locations",
+    "Money order cashing at participating locations",
+    "Cash pickup from sent transfers using MTCN and valid ID",
+    "Western Union Prepaid Visa Card account funding",
+    "Online transfer initiation with in-person cash payment at agent locations",
+    "Mobile app money transfer registration",
+    "Money Transfer Control Number (MTCN) tracking",
+    "Bank account direct transfer options (select transfers)",
+    "Multiple payment methods (cash, debit, credit at select locations)"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-04-03",
   "review_status": "draft",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x872ba795df492013:0xcec91b7571892cce",
     "google_rating": 1.0,
@@ -101,13 +132,14 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-07",
   "no_index": true,
   "contact": {
     "phone": "",
     "address": ""
-  }
+  },
+  "has_been_enriched": true
 }

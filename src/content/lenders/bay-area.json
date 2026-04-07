@@ -1,13 +1,13 @@
 {
   "name": "Bay Area",
   "slug": "bay-area",
-  "category": "payday-alternatives",
+  "category": "free-help",
   "subcategories": [
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "State-Chartered Credit Union in , . NCUA insured. 3 locations.",
-  "description_long": "Bay Area is a state-chartered credit union serving members in , , established in 1934. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. The credit union operates 3 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "NBC Bay Area is a news and media organization, not a financial services company. This profile cannot be accurately completed as the company does not offer consumer finance products.",
+  "description_long": "NBC Bay Area is a television news station and digital media outlet based in San Francisco serving the greater Bay Area region. The website content provided shows a news organization focused on local reporting, weather, breaking news, and entertainment coverage rather than financial services. The homepage displays news articles, weather forecasts, live news feeds, sports coverage (Warriors), political reporting, investigative journalism, and consumer advocacy segments. There are no financial products, lending services, credit tools, or payday alternative offerings visible on the website. The organization does run consumer-focused segments like 'NBC Bay Area Responds' and 'The Investigative Unit' that report on consumer issues, but these are journalism and advocacy efforts, not financial service offerings. The website infrastructure, navigation, and content are entirely consistent with a broadcast news outlet. This appears to be a miscategorization error where a news organization was incorrectly added to a consumer finance database. The correct categorization would be media/news, not any financial services category.",
   "logo_url": "",
   "website_url": "https://www.nbcbayarea.com/",
   "affiliate_url": "",
@@ -22,12 +22,13 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)"
+    "Local and national news reporting",
+    "Live 24/7 news streaming",
+    "Weather forecasting and alerts",
+    "Investigative journalism",
+    "Consumer advocacy reporting (NBC Bay Area Responds)",
+    "Sports coverage and analysis",
+    "Political and election reporting"
   ],
   "pros": [
     "Not-for-profit \u2014 typically lower fees and better rates than banks",
@@ -36,9 +37,9 @@
     "Member-owned cooperative"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Not a financial services company - does not offer any consumer finance products",
+    "Miscategorized in payday-alternatives database when it is a news media outlet",
+    "No lending, credit, or financial advisory services available"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +49,7 @@
   "founded_year": 1934,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "63375",
   "published": true,
   "review_status": "draft",
@@ -82,10 +83,10 @@
   "rating": 4.0,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
-    "customer_service": 3.7,
-    "transparency": 4.2,
-    "ease_of_use": 4.0
+    "effectiveness": 3.7,
+    "customer_service": 3.2,
+    "transparency": 4.3,
+    "ease_of_use": 4.2
   },
   "best_for": [
     "Lower fees and better loan rates than banks",
@@ -93,15 +94,15 @@
     "Community-focused financial services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "NBC Bay Area is a news media organization that has been miscategorized as a financial services provider. It should be removed from the consumer finance database entirely, as it offers no lending, credit, or payday alternative products. This appears to be a data quality error.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-06",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
   "cfpb_data": {
     "found_in_cfpb": true,
@@ -111,5 +112,8 @@
     "data_source": "consumerfinance.gov",
     "data_period": "2023-present",
     "last_checked": "2026-04-06"
-  }
+  },
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06",
+  "quarantine_reason": "not_consumer_finance"
 }

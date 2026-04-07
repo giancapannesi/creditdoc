@@ -1,14 +1,14 @@
 {
   "name": "Northwestern Mutual Wealth Management",
   "slug": "northwestern-mutual-wealth-management",
-  "category": "personal-loans",
+  "category": "mortgages",
   "subcategories": [
     "community-bank",
     "minority-depository",
     "mortgage-lending"
   ],
-  "description_short": "FDIC-insured community bank in Milwaukee, WI. $465M in assets. 1 office.",
-  "description_long": "Northwestern Mutual Wealth Management is a community bank located in Milwaukee, WI, established in 2001. The bank holds approximately $465M in total assets and $50M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Northwestern Mutual is a 167-year-old financial services company offering life insurance, financial planning, disability insurance, and investment advisory services through local financial advisors.",
+  "description_long": "Northwestern Mutual was founded 167 years ago and has established itself as a major player in the financial services industry, particularly in life insurance and wealth management. The company operates as a mutual organization backed by some of the highest financial strength ratings available\u2014AAA, Aa1, and AA+ from all four major rating agencies\u2014and ranks among the top 10 U.S. independent investment broker-dealers. Northwestern Mutual's primary business model centers on matching consumers with local financial advisors who provide personalized financial planning and product recommendations. The company offers a comprehensive suite of products including life insurance, disability income insurance, long-term care planning, financial planning services, investment advisory accounts, and brokerage services. What distinguishes Northwestern Mutual is its emphasis on comprehensive financial planning through advisor relationships rather than direct-to-consumer online transactions. The company positions itself around the concept of \"A Better Way to Money,\" which emphasizes deeper conversations, personalized solutions from their exclusive product portfolio, and outcomes-based planning. Advisors are trained to identify financial blind spots and opportunities across all life stages. Northwestern Mutual's business model relies on advisor commissions and asset-based fees rather than transactional pricing, which means consumers work with representatives to access their products. The company's strength lies in its financial stability, brand recognition, and integrated advisory approach, though consumers should note that the company primarily serves clients who want ongoing advisor relationships rather than self-directed investing or quick online solutions.",
   "logo_url": "",
   "website_url": "https://www.northwesternmutual.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Comprehensive financial planning and strategy development",
+    "Term and permanent life insurance products",
+    "Disability income insurance",
+    "Long-term care insurance planning",
+    "Investment advisory services with personalized portfolio matching",
+    "Brokerage accounts and commission-based trading services",
+    "Exclusive market commentary and investment research",
+    "Private wealth management for high-net-worth clients",
+    "Quarterly asset-based advisory fees for managed accounts",
+    "Financial goal tracking and plan evolution services",
+    "Life & Money financial planning newsletter and educational resources",
+    "Local financial advisor matching and relationship management"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2001",
-    "Local community bank with personal service",
-    "1 location"
+    "Highest available financial strength ratings (AAA, Aa1, AA+) from all four major rating agencies, indicating exceptional stability",
+    "167 years of operational history and consistent dividend payments ($9.2B expected in 2026)",
+    "Ranked #1 for consumer experience among life insurance companies in 2024",
+    "Comprehensive integrated planning approach across insurance, investments, and financial planning from single advisor",
+    "Top 10 ranked U.S. independent investment broker-dealer with exclusive product portfolio",
+    "Transparent fee structure disclosed upfront for advisory services (asset-based quarterly fees), insurance premiums, and brokerage commissions",
+    "FORTUNE 125 company with backing of a major established institution"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Advisor-dependent model means service quality and recommendations vary based on individual advisor expertise and incentives",
+    "Limited transparency on actual fee ranges and product costs until you engage with an advisor",
+    "Commission-based compensation structure for advisors may create incentive misalignment despite stated fiduciary commitment",
+    "Not suitable for consumers seeking low-cost index investing or fully passive management strategies",
+    "Regional availability and advisor access may vary; not all geographic areas equally served"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57093,
   "latitude": 43.0394610078258,
   "longitude": -87.9022179673902,
@@ -84,21 +95,22 @@
       "FDIC Cert #57093"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "High-net-worth individuals and families seeking comprehensive wealth management and life insurance planning",
+    "Consumers who prefer working with a dedicated financial advisor for integrated planning across multiple life stages",
+    "Business owners and professionals needing coordinated solutions for income protection, estate planning, and investments",
+    "Individuals prioritizing an established, financially stable institution with long operational history"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Northwestern Mutual is best suited for affluent consumers and professionals who want a comprehensive, advisor-driven approach to financial planning and life insurance with the backing of a stable, established institution. The main caveat is that this model requires ongoing advisor relationships and involves commission-based compensation, which may not align with consumers seeking transparent, low-cost, or purely self-directed investment solutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "720 E Wisconsin Ave, Milwaukee, WI 53202",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

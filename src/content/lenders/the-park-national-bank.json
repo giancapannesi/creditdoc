@@ -1,13 +1,13 @@
 {
   "name": "The Park National Bank",
   "slug": "the-park-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Newark, OH. $9743M in assets. 113 offices.",
-  "description_long": "The Park National Bank is a community bank located in Newark, OH, established in 1908. The bank holds approximately $9743M in total assets and $8344M in deposits. It operates 113 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Park National Bank is a full-service bank offering checking, savings, lending, investment management, and wealth planning services for both personal and business customers.",
+  "description_long": "Park National Bank operates as a comprehensive financial institution serving both retail and commercial customers. The bank provides traditional banking services including deposit accounts, credit products, and investment advisory services through a multi-channel platform accessible via online, mobile, and physical locations.\n\nThe bank's service portfolio spans personal banking with checking and savings accounts, certificates of deposit, credit cards, and health savings accounts; consumer lending including vehicle loans, home loans, home equity lines of credit, and refinancing options; and investment services including IRAs, 401(k) rollovers, investment management, and retirement planning. For business customers, Park National Bank offers commercial checking, business credit cards, commercial loans, SBA and government loan programs, agricultural financing, equipment financing, and treasury management services.\n\nPark National Bank distinguishes itself through a breadth of specialized offerings including aircraft financing, lender finance programs, merchant services, lockbox services, and trust/estate planning services. The bank emphasizes digital accessibility with online banking, mobile banking, mobile deposit, and Zelle integration alongside traditional in-person services at multiple locations.\n\nAs a traditional bank, Park National Bank is subject to federal banking regulations and FDIC insurance protections on deposits. The company positions itself as a relationship-based financial institution rather than a fintech alternative, with resources dedicated to financial education, retirement planning, and wealth management for affluent customers.",
   "logo_url": "",
   "website_url": "https://www.parknationalbank.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Certificates of Deposit (CDs)",
+    "Health Savings Accounts (HSAs)",
+    "Individual Retirement Accounts (IRAs) - both deposit and investment-based",
+    "Credit cards for personal and business use",
+    "Vehicle loans and personal loans",
+    "Home purchase loans, refinancing, and home equity lines of credit",
+    "Commercial loans, SBA loans, and agricultural financing",
+    "Equipment financing and aircraft financing",
+    "Investment management and 401(k) rollovers",
+    "Wealth management, retirement planning, and trust services",
+    "Digital banking including online banking, mobile banking, and mobile deposit"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1908",
-    "Local community bank with personal service",
-    "113 locations"
+    "Comprehensive service offering across personal banking, lending, investments, and wealth management in a single institution",
+    "Specialized business lending programs including SBA loans, agricultural financing, aircraft financing, and equipment leasing",
+    "Multiple digital channels including online banking, mobile banking, mobile deposit, and Zelle integration for convenience",
+    "Trust, estate planning, and custody services for customers requiring wealth transfer and guardianship solutions",
+    "Dedicated financial planning and retirement services including 401(k) rollovers and investment management",
+    "Health Savings Accounts (HSAs) and specialized retirement accounts for tax-advantaged savings",
+    "FDIC insurance protection on deposits and established regulatory oversight as a traditional bank"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Requires account opening and ongoing banking relationship rather than offering quick access to credit for emergency needs",
+    "Loan approval processes may be slower than online-only alternative lenders due to traditional underwriting standards",
+    "Investment and wealth management services may require minimum account balances not specified on public website",
+    "Limited detail on fee structures, interest rates, and competitive terms available on the public website",
+    "Geographic limitation to specific locations may restrict accessibility for customers outside service areas"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "OH"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 6653,
   "latitude": 40.05936858247,
   "longitude": -82.403158406915,
@@ -92,12 +103,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers seeking a single comprehensive financial institution for banking, lending, and investment needs",
+    "Small business owners and agricultural customers requiring specialized commercial lending programs",
+    "Affluent customers needing integrated wealth management, trust services, and estate planning",
+    "Individuals prioritizing relationship banking with financial advisors over self-service digital platforms"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Park National Bank is best for customers seeking a traditional, full-service bank with integrated lending, investment, and wealth management services. The primary caveat is that this is a relationship-based bank requiring account opening rather than a quick-credit provider, and customers should verify specific terms, rates, and fees directly with the bank as these details are not prominently displayed on the public website.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "50 N 3Rd St, Newark, OH 43055",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

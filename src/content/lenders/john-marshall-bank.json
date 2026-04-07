@@ -1,14 +1,14 @@
 {
   "name": "John Marshall Bank",
   "slug": "john-marshall-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Reston, VA. $2329M in assets. 8 offices.",
-  "description_long": "John Marshall Bank is a community bank located in Reston, VA, established in 2006. The bank holds approximately $2329M in total assets and $1980M in deposits. It operates 8 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "John Marshall Bank is a full-service bank offering personal and business banking, commercial real estate lending, SBA loans, and specialized services for contractors, nonprofits, and property managers in the DC Metro area.",
+  "description_long": "John Marshall Bank is a regional bank serving the DC Metropolitan area with a comprehensive suite of banking products and financial services. The institution positions itself as a relationship-focused lender with particular expertise in commercial real estate, small business lending, and specialized industry segments.\n\nThe bank offers extensive personal banking products including checking and savings accounts, personal loans, mortgages, HELOCs, credit cards, and personal insurance. On the business side, John Marshall Bank provides commercial checking and savings accounts, business loans, SBA loans (including SBA 8a Program and SBA Express up to $500,000), treasury management services, business credit cards, and an \"Escrow Optimizer\" platform for managing third-party funds. They also offer specialized mortgage programs like \"Home Pursuit\" for low down payment mortgages and investment property mortgages.\n\nWhat distinguishes John Marshall Bank is their deep vertical expertise in specific industry segments: commercial real estate, health services, general and trade contractors, government contractors, nonprofits and associations, property management, professional services, and community associations. They market themselves as specialists in the DC Metro commercial real estate market and emphasize innovative financial technology solutions, particularly for high-transaction-volume businesses like property management companies. Their Positive Pay fraud mitigation service and comprehensive online and mobile banking platforms are highlighted as competitive advantages.\n\nAs a regional bank, John Marshall Bank operates primarily in the DC Metro area and maintains physical locations, leadership team, and community involvement programs. They publish deposit rates, maintain an investor relations section, and provide educational resources through their Business Center, Personal Finance guides, Fraud Prevention Security Center, Financial Elder Abuse Center, and financial calculators. The bank appears financially stable with ongoing product expansion (recent SBA Express launch) and active marketing campaigns. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.johnmarshallbank.com",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business checking accounts and Commercial Banking Deluxe",
+    "Business savings accounts",
+    "Personal and business online and mobile banking",
+    "Personal loans and business loans",
+    "SBA loans (including SBA 8a Program and SBA Express up to $500,000)",
+    "Mortgages and investment property mortgages",
+    "Home Pursuit low down payment mortgage program",
+    "HELOC (Home Equity Lines of Credit)",
+    "Personal and business credit cards",
+    "Treasury management services",
+    "Escrow Optimizer third-party fund management platform",
+    "Business and personal insurance",
+    "Positive Pay fraud mitigation service"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2006",
-    "Local community bank with personal service",
-    "8 locations"
+    "Specialized SBA lending programs including SBA 8a Program and newly expanded SBA Express loans up to $500,000",
+    "Deep vertical expertise in commercial real estate, a particular strength in the DC Metro market",
+    "Innovative technology solutions like Escrow Optimizer specifically designed for property managers and escrow operations",
+    "Comprehensive personal and business banking with integrated online and mobile platforms",
+    "Positive Pay fraud protection service integrated with online banking for business accounts",
+    "Low down payment mortgage programs (Home Pursuit) specifically marketed for families and professionals",
+    "Specialized lending programs for underserved segments: nonprofits, government contractors, health services, charter schools"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation to DC Metro area may restrict accessibility for customers outside the region",
+    "No mention of competitive APY rates or deposit rates specifics in available content; only a 3.90% APY CD referenced",
+    "Limited information about business credit card rewards or terms compared to national competitors",
+    "No evidence of digital banking innovations like neobank features or fintech partnerships beyond their core services",
+    "Escrow Optimizer appears to be a specialized platform with unclear adoption or industry standing"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "VA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58243,
   "latitude": 38.9522149362379,
   "longitude": -77.3359845380001,
@@ -84,21 +97,22 @@
       "FDIC Cert #58243"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Commercial real estate developers and investors in the DC Metropolitan area seeking specialized lending expertise",
+    "Property management companies requiring high-volume transaction processing and innovative financial technology",
+    "Small business owners and contractors seeking SBA loans and specialized lending for their industry vertical",
+    "Nonprofits, associations, and community organizations requiring mission-aligned banking services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "John Marshall Bank is best for DC Metro-area business owners, real estate professionals, property managers, and nonprofits seeking specialized lending expertise and relationship banking. The primary caveat is geographic limitation to the DC Metropolitan region; customers outside this area should verify branch and service availability.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   ],
   "phone": "",
   "address": "1943 Isaac Newton Sq E, Reston, VA 20190",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

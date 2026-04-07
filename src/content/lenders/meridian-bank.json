@@ -1,14 +1,14 @@
 {
   "name": "Meridian Bank",
   "slug": "meridian-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Wayne, PA. $2560M in assets. 6 offices.",
-  "description_long": "Meridian Bank is a community bank located in Wayne, PA, established in 2004. The bank holds approximately $2560M in total assets and $2163M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Meridian Bank is a locally-based community bank in the Delaware Valley offering full-service banking including personal accounts, business lending, mortgages, and cash management solutions.",
+  "description_long": "Meridian Bank operates as a community-focused financial institution serving the Delaware Valley region with FDIC insurance backing. The bank emphasizes a high-touch, personalized approach to banking services rather than a purely digital model, positioning itself as entrepreneurial and committed to supporting local businesses and individuals.\n\nThe bank's service portfolio spans personal banking (checking, savings, CDs), business lending (commercial real estate loans, SBA loans, cash management), mortgages through Meridian Mortgage\u00ae, credit cards, and treasury management solutions. They highlight expertise in specialized business financial areas and offer competitive CD rates (3.60% APY for 6-month terms as of the website snapshot). The institution maintains separate login portals for personal accounts, business accounts, treasury management, and credit cards.\n\nMeridian differentiates itself through relationship-based banking, emphasizing \"empowered employees\" and \"loyal customers\" and their unique approach to commercial lending. They target entrepreneurs and growing businesses in the Delaware Valley, positioning themselves as understanding the local business community's needs better than larger national banks.\n\nAs a regional community bank, Meridian offers personalized service and local decision-making but operates with more limited geographic reach than national competitors. The website focuses heavily on business and commercial services rather than consumer-focused features, suggesting their primary target market is small to mid-sized businesses rather than retail consumers. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.meridianbanker.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Certificate of Deposit (CDs) with posted APY rates",
+    "Business checking and savings accounts",
+    "Commercial real estate loans",
+    "SBA loans",
+    "Cash management services",
+    "Treasury management solutions",
+    "Credit cards (personal and business)",
+    "Mortgage lending through Meridian Mortgage\u00ae",
+    "Depositor FDIC insurance protection",
+    "Business treasury management portal",
+    "Career opportunities/employment services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2004",
-    "Local community bank with personal service",
-    "6 locations"
+    "FDIC-insured deposits backed by full faith and credit of the U.S. Government",
+    "Competitive CD rates publicly displayed (3.60% APY for 6-month CDs)",
+    "Specialized commercial lending expertise including SBA loans and commercial real estate financing",
+    "Dedicated cash management services designed to help businesses operate more efficiently",
+    "Relationship-based lending model with high-touch approach rather than automated decisions",
+    "Integrated mortgage services through Meridian Mortgage\u00ae subsidiary",
+    "Website includes accessibility features (screen reader compatibility, keyboard navigation)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as regional bank (Delaware Valley only, not national coverage)",
+    "Website focuses primarily on business services with less emphasis on consumer banking products",
+    "No specific information provided about checking account fees, minimum balances, or consumer account terms",
+    "Limited visibility into personal loan or credit card product details on homepage",
+    "No mention of digital banking innovation, mobile app capabilities, or fintech integrations"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "PA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57777,
   "latitude": 40.044102700645,
   "longitude": -75.391754814774,
@@ -84,21 +95,22 @@
       "FDIC Cert #57777"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to mid-sized business owners in the Delaware Valley seeking relationship-based lending",
+    "Entrepreneurs needing commercial real estate financing or SBA loans with local decision-making",
+    "Depositors prioritizing FDIC safety and community bank service in the Delaware Valley region",
+    "Businesses requiring specialized cash management and treasury services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Meridian Bank is best for Delaware Valley business owners and entrepreneurs seeking personalized, relationship-based banking with commercial lending expertise, or depositors prioritizing FDIC-insured community banking. The main caveat is that this is a regional bank with limited geographic reach, and the website emphasizes commercial services over consumer products, so retail banking customers may find limited product information or prefer national alternatives.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "220 W. Lancaster Avenue, Wayne, PA 19087",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

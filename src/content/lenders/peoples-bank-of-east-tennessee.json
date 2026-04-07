@@ -1,14 +1,14 @@
 {
   "name": "Peoples Bank Of East Tennessee",
   "slug": "peoples-bank-of-east-tennessee",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Madisonville, TN. $437M in assets. 12 offices.",
-  "description_long": "Peoples Bank Of East Tennessee is a community bank located in Madisonville, TN, established in 1997. The bank holds approximately $437M in total assets and $391M in deposits. It operates 12 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Locally-owned community bank in East Tennessee offering personal and business checking, savings, loans, and mortgages with 11 branch locations.",
+  "description_long": "Peoples Bank of East Tennessee was established in 1997 and is headquartered in Madisonville, Tennessee. The bank operates as a community-focused financial institution with 11 physical branch locations across East Tennessee, including Athens, Blue Ridge, Ducktown, Loudon, Maryville, McCaysville, Sweetwater, Tellico Plains, and Vonore. The bank's stated philosophy emphasizes long-term customer relationships and personalized service rather than treating customers as transaction numbers.\n\nThe bank offers a comprehensive suite of personal banking products including checking and savings accounts, money market accounts, certificates of deposit, IRAs, and safe deposit boxes. For borrowing needs, Peoples Bank provides personal loans, auto loans, mortgage loans, and their proprietary CashPlease short-term cash loans. On the business side, they offer business checking, business savings, NOW accounts, money market accounts, and business loans. All deposit accounts are FDIC-insured up to the federally allowed limit of $250,000.\n\nPeoples Bank differentiates itself as a locally-owned and operated institution rather than a national chain, emphasizing community investment and personalized relationships. The bank provides online banking access, travel and fraud protection services, and dedicated fraud prevention through their Falcon Fraud department. Their CashPlease product is positioned as a simpler alternative to traditional payday loans.\n\nAs a community bank, Peoples Bank serves a specific geographic region in East Tennessee and may have more limited product sophistication or technology features compared to larger national banks. The bank's focus on relationship banking and local decision-making appeals to customers who prioritize community connection over convenience or advanced digital features. Their 11-branch footprint means accessibility is limited to East Tennessee residents. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.PBET.bank",
   "affiliate_url": "",
@@ -23,23 +23,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Money market accounts",
+    "Certificates of deposit (CDs)",
+    "Individual retirement accounts (IRAs)",
+    "Safe deposit boxes",
+    "Personal loans and auto loans",
+    "CashPlease short-term cash loans",
+    "Mortgage loans for home purchase and refinance",
+    "Business checking accounts",
+    "Business savings and NOW accounts",
+    "Business loans and lines of credit",
+    "Online banking platform",
+    "Travel and fraud protection services",
+    "Overdraft coverage options"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1997",
-    "Local community bank with personal service",
-    "12 locations"
+    "FDIC deposit insurance protection up to $250,000 for all accounts",
+    "11 physical branch locations across East Tennessee for in-person banking",
+    "CashPlease short-term loans positioned as simpler alternative to payday loans with fewer hassles",
+    "Online banking access available for account management anytime",
+    "Dedicated fraud protection with Falcon Fraud department and travel protection services",
+    "Locally-owned and operated since 1997 with community investment focus",
+    "Comprehensive product range including personal loans, mortgages, business loans, and retirement accounts"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: only 11 branches in East Tennessee region, not accessible to most US consumers",
+    "No mention of mobile app or advanced digital banking features compared to modern fintech competitors",
+    "CashPlease product lacks specific details on APR, fees, or terms on the website",
+    "Limited information about interest rates, minimum deposit requirements, or account features",
+    "No indication of online mortgage application completion or loan approval timelines"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +65,7 @@
   "states_served": [
     "TN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34517,
   "latitude": 35.5158619934301,
   "longitude": -84.3590780274752,
@@ -87,18 +101,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "East Tennessee residents seeking community banking with personalized service and local decision-making",
+    "Small business owners in the region needing business checking, loans, and relationship-based banking",
+    "Customers prioritizing FDIC-insured deposits and in-person banking relationships over digital convenience",
+    "Borrowers seeking personal, auto, or mortgage loans through a locally-accountable institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Peoples Bank of East Tennessee is best for existing or prospective residents of East Tennessee seeking traditional community banking with personalized service, FDIC insurance, and relationship-based lending. The primary caveat is severe geographic limitation\u2014with only 11 branches in one region, this bank is not accessible to consumers outside East Tennessee and lacks the digital sophistication and convenience features of larger national or online banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +121,11 @@
   ],
   "phone": "",
   "address": "4511 Highway 411, Madisonville, TN 37354",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

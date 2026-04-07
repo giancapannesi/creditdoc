@@ -1,15 +1,15 @@
 {
   "name": "Global Innovations Bank",
   "slug": "global-innovations-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Kiester, MN. $118M in assets. 1 office.",
-  "description_long": "Global Innovations Bank is a community bank located in Kiester, MN, established in 1889. The bank holds approximately $118M in total assets and $109M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Global Innovations Bank is an online/mobile-first bank offering checking accounts, bill pay, and P2P transfers with fee-free global ATM access and high-interest earning accounts.",
+  "description_long": "Global Innovations Bank is a digital banking institution headquartered in Kiester, Minnesota, positioned as a hybrid between community banking personalization and modern fintech convenience. The bank emphasizes accessibility through mobile and online platforms rather than physical branch networks, targeting customers who want traditional banking services without geographical limitations.\n\nThe bank offers three primary checking account tiers: Essential Checking ($3 monthly fee, waivable), Premier Checking (interest-bearing with $5 fee waivable under certain conditions), and G.I. Bank Elite Checking (specialized for U.S. service members and their families). All accounts include core features such as debit cards, online bill pay, P2P payments, mobile check deposit, real-time transaction viewing, and budget management tools. A key differentiator is their advertised fee-free ATM network available globally, though specific ATM provider details are not disclosed on the homepage.\n\nGlobal Innovations Bank distinguishes itself through its explicit focus on international accessibility\u2014\"Banking Wherever In The World You Are\"\u2014and commitment to high-interest earning accounts. Recent policy updates (effective 07/01/2025) show proactive adjustment of funds availability schedules, increasing check hold thresholds and exception hold amounts. The bank maintains transparency regarding cookie policies and data privacy, utilizing Cloudflare for security and Google Analytics for performance tracking.\n\nHowever, the website provides limited operational details. No information is available regarding deposit insurance (FDIC coverage assumed but unconfirmed), interest rates on accounts, loan products, credit lines, or customer service availability. The incomplete G.I. Bank Elite Checking description and lack of fee schedules, account minimums, or contact information creates uncertainty for prospective customers. The digital-only model may disadvantage customers preferring in-person support. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.gibank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Essential Checking account with online/app access",
+    "Premier Checking interest-bearing account",
+    "G.I. Bank Elite Checking for military service members",
+    "Mobile banking application (iOS and Android)",
+    "Online account management platform",
+    "Mobile check deposit functionality",
+    "Online bill pay and payment services",
+    "P2P payment transfers",
+    "Global fee-free ATM network access",
+    "Real-time transaction viewing",
+    "Budget management and spending tracking tools",
+    "E-statement delivery and direct deposit options"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1889",
-    "Local community bank with personal service",
-    "1 location"
+    "Mobile-first platform with iOS and Android apps offering full-service banking capabilities including mobile check deposit",
+    "Global fee-free ATM network positioning for international users and frequent travelers",
+    "Three account tiers with flexible fee-waiver conditions (e-statements, direct deposit, minimum balance options)",
+    "High-interest earning accounts explicitly advertised as a core feature",
+    "P2P payment service and bill pay functionality included across all checking tiers",
+    "Specialized G.I. Bank Elite Checking account for U.S. military service members and families",
+    "Real-time transaction visibility and budget tracking/spending management tools"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks critical details: no interest rates, FDIC insurance confirmation, or comprehensive fee schedule displayed",
+    "Digital-only model provides no physical branch access or in-person support options",
+    "G.I. Bank Elite Checking description is incomplete, preventing full product evaluation",
+    "No information provided on loan products, credit lines, overdraft policies, or customer service hours",
+    "Limited transparency on ATM network provider and actual geographic coverage outside claims"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "MN"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5175,
   "latitude": 43.5371380176102,
   "longitude": -93.7120049883202,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "International travelers and expatriates needing global ATM access without fees",
+    "Tech-savvy customers preferring mobile/online banking over branch-based services",
+    "U.S. military service members seeking specialized account benefits and fee waiver opportunities",
+    "Customers seeking interest-bearing checking accounts with flexible fee-waiver conditions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Global Innovations Bank is best for digitally-native customers and international travelers seeking accessible, interest-bearing checking accounts with global ATM access. The primary caveat is the lack of transparent fee schedules, interest rate disclosure, and comprehensive product information on their website, requiring direct inquiry before account opening.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "101 N Main St, Kiester, MN 56051",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

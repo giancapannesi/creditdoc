@@ -1,14 +1,14 @@
 {
   "name": "Woodtrust Bank",
   "slug": "woodtrust-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Wisconsin Rapids, WI. $663M in assets. 7 offices.",
-  "description_long": "Woodtrust Bank is a community bank located in Wisconsin Rapids, WI, established in 1891. The bank holds approximately $663M in total assets and $571M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "WoodTrust Bank is a privately owned, full-service financial institution founded in 1891, serving individuals, families, and businesses across 35 states with $8.2B in total client assets.",
+  "description_long": "WoodTrust Bank traces its origins to Wood County National Bank, established in 1891 in Wisconsin. The institution has evolved into one of the largest privately owned, full-service financial institutions in the United States, maintaining its independence while expanding its client base across 35 states. The bank is led by Chairman Steve Bell and President Chad Kane, who emphasize the organization's foundation built on loyal customers and dedicated employees.\n\nWoodTrust Bank offers comprehensive financial services to individual, family, corporate, and not-for-profit customers. The bank operates seven physical branch locations in Wisconsin (Wisconsin Rapids, Plover, Wausau, and Manitowish Waters) and provides online banking services including a Mortgage Center for loan applications and rate quotes. Services span traditional banking products, wealth management, and mortgage lending, supported by what the bank describes as advanced technology and customized service offerings.\n\nThe institution distinguishes itself through its status as a privately owned bank with $700 million in bank assets and $7.5 billion in assets under management. WoodTrust emphasizes a client-focused approach guided by foundational mission and values principles, positioning itself as offering personalized financial partnership unlike larger, impersonal institutions. The bank's longevity\u2014operating for over 130 years\u2014and regional stability are presented as key differentiators.\n\nAs a regional bank with limited geographic footprint (seven locations in Wisconsin area), WoodTrust serves primarily regional customers despite claiming clients in 35 states. The bank's private ownership structure and emphasis on personal relationships align well with customers seeking relationship banking rather than transactional services. However, the limited branch network compared to national banks may create accessibility challenges for customers outside Wisconsin. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.woodtrust.com",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking and savings accounts",
+    "Certificate of Deposit (CD) products",
+    "Mortgage lending \u2014 home purchase and refinance",
+    "Online Mortgage Center with rate quotes",
+    "Wealth management services",
+    "Assets under management ($7.5B AUM)",
+    "Corporate banking services",
+    "Not-for-profit banking services",
+    "Online banking platform",
+    "Personal and family financial planning",
+    "Loan products (specific types not detailed)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1891",
-    "Local community bank with personal service",
-    "7 locations"
+    "Established 1891 \u2014 over 130 years of operational history and regional stability",
+    "Privately owned and independent \u2014 not subject to large corporate consolidation pressures",
+    "$8.2 billion in total client assets and $7.5 billion assets under management demonstrate substantial scale",
+    "Full-service institution offering banking, mortgages, and wealth management in one place",
+    "Online Mortgage Center with personalized rate quotes based on current market rates",
+    "Serves diverse customer types: individuals, families, corporations, and not-for-profit organizations",
+    "Emphasis on customized services and experienced staff rather than commoditized products"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited physical branch network \u2014 only 7 locations, all concentrated in Wisconsin area, restricting in-person access for most of their 35-state customer base",
+    "Website provides minimal specific details on product features, fee structures, interest rates, or lending terms",
+    "No mention of online-only account opening or full digital banking capabilities despite serving nationwide clients",
+    "Unclear whether they serve retail customers nationwide or primarily serve institutional/commercial clients outside Wisconsin",
+    "No information on deposit insurance coverage, minimum account balances, or account management fees"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5335,
   "latitude": 44.3909490175503,
   "longitude": -89.8246030182692,
@@ -87,18 +97,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Wisconsin-based individuals and families seeking relationship banking with local decision-makers",
+    "Small to mid-sized businesses and not-for-profit organizations needing customized financial solutions",
+    "Customers who value bank independence and long-term stability over national brand recognition",
+    "Borrowers seeking mortgage services from a lender with local market knowledge and personalized underwriting"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "WoodTrust Bank is best suited for Wisconsin-based customers and regional businesses seeking personalized relationship banking from an established, independent institution. The primary caveat is limited branch accessibility for customers outside Wisconsin despite claiming a 35-state presence, making it primarily a regional rather than national banking option despite its scale.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "181 2Nd St S, Wisconsin Rapids, WI 54494",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

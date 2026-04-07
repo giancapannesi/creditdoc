@@ -1,15 +1,15 @@
 {
   "name": "Liberty Trust & Savings Bank",
   "slug": "liberty-trust-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Durant, IA. $181M in assets. 3 offices.",
-  "description_long": "Liberty Trust & Savings Bank is a community bank located in Durant, IA, established in 1905. The bank holds approximately $181M in total assets and $146M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering checking, savings, CDs, mortgages, and business lending with online and mobile banking services.",
+  "description_long": "Liberty Trust & Savings Bank is a traditional community bank that emphasizes FDIC insurance protection backed by the full faith and credit of the U.S. Government. The bank serves both personal and business customers through a network of physical locations and digital channels.\n\nThe bank offers a comprehensive suite of deposit products including personal and business checking, savings accounts, money market accounts, certificates of deposit (CDs), individual retirement accounts (IRAs), and specialized products like Christmas Club accounts and children's savings. On the lending side, Liberty Trust provides personal consumer loans and mortgages for individuals, along with business loans and agricultural loans for commercial customers.\n\nLiberty Trust distinguishes itself through integrated online and mobile banking capabilities, including mobile deposit, bill pay, eStatements, and eAlerts. The bank provides business-focused services such as cash management, remote deposit, ACH and payroll services, and maintains traditional services like night deposit, safety deposit boxes, wire transfers, and check reordering. Their mobile app allows customers to check balances, transfer funds, and deposit checks remotely.\n\nAs a traditional community bank, Liberty Trust relies on physical branch locations and ATM networks rather than operating as a neobank or purely digital institution. The bank appears to serve a regional customer base and emphasizes compliance and security through published disclosures, privacy policies, and online security measures. Like most traditional banks, they offer standard products at competitive rates rather than specialized high-yield or premium alternatives. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.mylibertytrust.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Savings accounts and money market accounts",
+    "Certificates of deposit (CDs) for personal and business",
+    "Individual retirement accounts (IRAs)",
+    "Children's savings accounts",
+    "Personal consumer loans and mortgages",
+    "Business checking, savings, and CDs",
+    "Business loans and agricultural loans",
+    "Mobile banking and mobile deposit",
+    "Online banking, bill pay, and eStatements",
+    "ACH and payroll services",
+    "Cash management and remote deposit for businesses"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC-insured deposits backed by full faith and credit of the U.S. Government",
+    "Comprehensive mobile banking app enabling balance checks, transfers, and mobile deposit",
+    "Diverse lending products including mortgages, consumer loans, business loans, and agricultural loans",
+    "Business-focused services including ACH, payroll processing, cash management, and remote deposit",
+    "Multiple deposit account types including CDs, IRAs, money market, and specialty accounts like Christmas Club",
+    "Traditional banking services including safety deposit boxes, night deposit, wire transfers, and check reordering",
+    "eStatements and eAlerts for digital account management and paperless banking"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to regional branch network rather than nationwide availability like larger banks",
+    "Website does not display current rates, fees, or specific APY information for deposit products",
+    "No mention of premium features like premium checking rewards, cashback, or high-yield savings accounts",
+    "Agricultural lending focus may indicate specialized rather than universal small business capabilities",
+    "No information provided about minimum balance requirements or account opening incentives"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10121,
   "latitude": 41.6006559886041,
   "longitude": -90.9086700113996,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners needing agricultural, commercial, or payroll services with local branch support",
+    "Individuals seeking traditional banking with FDIC insurance and mobile convenience in their region",
+    "Mortgage applicants preferring community bank relationship over national lenders",
+    "Customers prioritizing established bank safety and regulatory compliance over fintech alternatives"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Liberty Trust & Savings Bank is best suited for individuals and small businesses in their service region seeking traditional FDIC-insured banking with mobile convenience and local branch support. The primary caveat is that product rates, fees, and specific terms are not disclosed online, requiring direct contact with the bank for comparison shopping.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "502 8Th Ave, Durant, IA 52747",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Broadstreet Bank S S B",
   "slug": "broadstreet-bank-s-s-b",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Mineola, TX. $429M in assets. 7 offices.",
-  "description_long": "Broadstreet Bank S S B is a community bank located in Mineola, TX, established in 1934. The bank holds approximately $429M in total assets and $332M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank in Mineola, TX offering personal checking, savings, CDs, business accounts, and mortgage/commercial loans with local branch service.",
+  "description_long": "Broadstreet Bank is a community bank headquartered in Mineola, Texas, operating as a federally insured institution backed by the full faith and credit of the U.S. Government. The bank emphasizes personal, localized service and positions itself as a trusted financial partner for both individual consumers and small business owners in its service area.\n\nThe bank offers a comprehensive range of personal banking products including checking accounts (with a $25 minimum for Freedom Checking), savings accounts, and certificates of deposit with promotional rates. For businesses, Broadstreet provides business checking with free notary service and bill pay, plus commercial lending for expansion, equipment purchase, and inventory growth. They also offer personal loans (for cars, boats, and projects), mortgage loans for home purchases, and student checking accounts. Digital banking is available through their mobile app and online banking platform, with features like temporary spending limit controls.\n\nBroadstreet differentiates itself through its emphasis on community banking and personalized service. The bank highlights competitive rates, convenient branch locations, and \"the personal touch and responsiveness\" that distinguishes them from larger institutions. They position themselves as understanding local business needs and willing to work through the loan process with customers rather than treating them as transaction numbers.\n\nAs a small regional bank, Broadstreet's reach is geographically limited to their physical branch locations in Texas. While they offer modern conveniences like mobile banking and online account opening, their service model is fundamentally tied to in-person relationships and local presence. The website provides limited transparency on specific APRs, fees, or competitive rate comparisons, requiring customers to contact branches directly for detailed pricing. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.broadstreet.bank",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts with $25 minimum opening deposit",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs) with promotional rates",
+    "Business checking accounts with free notary and bill pay",
+    "Student checking accounts",
+    "Mortgage loans for home purchase",
+    "Commercial loans for business expansion and equipment",
+    "Personal loans for auto, boat, and personal projects",
+    "Mobile banking app with Card Controls and Temporary Limits",
+    "Online banking platform",
+    "Loan payment processing via mobile app",
+    "Check ordering by phone"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1934",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured deposits with federal backing",
+    "Very low minimum deposit of $25 to open personal checking account",
+    "Free notary service and bill pay for business checking customers",
+    "Mobile app with Card Controls and Temporary Limits spending feature",
+    "Loan payment capability in app without requiring a deposit account",
+    "Multiple personal loan types (auto, boat, personal project loans)",
+    "Commercial lending specifically designed for small business growth",
+    "Student checking account tailored for student financial independence"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic service area restricted to physical branch locations in Texas",
+    "Website lacks specific APR, fee schedules, or rate transparency for comparison shopping",
+    "No mention of online-only account opening or remote banking onboarding",
+    "Minimal information about overdraft fees, minimum balance requirements, or account maintenance costs",
+    "Limited details on loan approval criteria or timeline"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 28868,
   "latitude": 32.6636189886665,
   "longitude": -95.4910930225118,
@@ -87,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Individuals and families in the Mineola, TX area seeking relationship-based banking with personalized service",
+    "Small business owners needing commercial lending and business checking with local support",
+    "Students looking for accounts designed specifically for building financial independence",
+    "Consumers with $25-$100 to open a checking account who prefer community bank relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Broadstreet Bank is best for consumers in the Mineola, Texas area who value personalized, relationship-based banking and are willing to visit physical branch locations. The main caveat is that this is a geographically limited regional bank without significant online banking convenience or transparent pricing information, making it unsuitable for remote customers or those comparing rates across multiple institutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "215 W Broad St, Mineola, TX 75773",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

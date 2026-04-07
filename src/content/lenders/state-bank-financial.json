@@ -1,14 +1,14 @@
 {
   "name": "State Bank Financial",
   "slug": "state-bank-financial",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in La Crosse, WI. $520M in assets. 5 offices.",
-  "description_long": "State Bank Financial is a community bank located in La Crosse, WI, established in 1858. The bank holds approximately $520M in total assets and $407M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured bank offering personal and business checking, savings, home loans, and credit products with 160+ years of banking history and a focus on local communities.",
+  "description_long": "State Bank Financial is an established financial institution with over 160 years of banking experience, operating as a full-service bank with FDIC insurance backing. The company serves both personal and business customers through a comprehensive suite of financial products delivered via physical branches, online banking, and mobile applications. Their website emphasizes accessibility and community focus, positioning themselves as a bank that \"steps forward\" for small business support rather than backing away from this segment.\n\nThe bank offers a wide range of personal banking products including multiple checking account tiers (Basic, CashBack, Independence, Fifty Checking), savings accounts with competitive rates (3% APY for Junior Banker accounts on balances below $10,000), certificates of deposit, IRAs, HSAs, and credit products including home loans, personal loans, auto loans, and Visa credit/debit cards. For business customers, they provide business checking accounts, business savings, treasury management solutions, SBA loans, equipment financing, commercial real estate loans, and agricultural lending including FSA and crop loans.\n\nState Bank Financial differentiates itself through specialized offerings rarely found at larger institutions: agriculture loans, treasury management solutions for businesses, IOLTA (Interest on Lawyer Trust Account) products, IBRETA (Interest-Bearing Real Estate Trust Account), and Raymond James Financial advisory services through their Platinum Banking tier. Their mobile app includes debit card controls for fraud prevention, they support Zelle for digital payments, and they market themselves as \"Hometown Mortgages\" with a local lending approach.\n\nThe company appears well-positioned for traditional banking customers seeking FDIC-insured products and local community relationships. However, this is a regional or mid-sized bank rather than a national digital-first fintech, so rates and product availability may vary by location. The website does not provide specific APR information or comparative rate details, requiring customers to call for rate quotes. No mention of premium or promotional offers beyond the Junior Banker 3% APY account is publicly detailed. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.statebankfinancial.bank",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal Checking (Basic, CashBack, Independence, Fifty Checking variants)",
+    "Personal Savings, Junior Banker Savings, Money Market Accounts",
+    "Certificates of Deposit (CDs) - Personal and Business",
+    "Home Loans and Home Equity Lines of Credit (HELOC)",
+    "Personal Loans, Auto/Recreation Loans, Personal Lines of Credit",
+    "Business Checking (Simplifier, Maximizer, Analyzed variants) and Business Savings",
+    "Business & Agriculture Loans, SBA Loans, Commercial Real Estate Loans, Equipment Financing",
+    "Treasury Management Solutions and Collections Solutions",
+    "Visa Credit Cards and Visa Business Credit Cards",
+    "Mobile Banking with Mobile Deposit and Debit Card Controls",
+    "Online Bill Pay and Zelle Money Transfer",
+    "Platinum Banking with Raymond James Financial Advisory Services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1858",
-    "Local community bank with personal service",
-    "5 locations"
+    "CashBack Checking account offering 3% cash back on debit card purchases (up to $20/month)",
+    "Junior Banker savings account with 3.00% APY on balances below $10,000",
+    "Full FDIC insurance protection backed by U.S. Government",
+    "Specialized lending for agriculture, including FSA and crop loans",
+    "Treasury management and collections solutions for business customers",
+    "Mobile app with debit card controls and mobile deposit for fraud prevention",
+    "Raymond James Financial advisory services through Platinum Banking tier",
+    "Multiple checking account options tailored to different customer needs (Basic, CashBack, Independence, Fifty)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display rates or APR information; customers must call for rate quotes",
+    "No clear indication of whether this is a national bank or regional institution, limiting accessibility for out-of-area customers",
+    "Limited transparency about minimum balance requirements, monthly fees, or account maintenance costs on public website",
+    "No online loan application process visible; mortgage rates and terms require contacting the bank directly",
+    "Small business loan details are vague; no specific loan amounts, terms, or SBA product specifics listed"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "WI"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10383,
   "latitude": 43.8124800165242,
   "longitude": -91.2507850170372,
@@ -87,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking local relationship banking with treasury management and specialized lending",
+    "Agricultural customers needing FSA loans, crop financing, and farm-focused financial products",
+    "Customers who value debit card cash back rewards (up to $20/month) combined with FDIC protection",
+    "Individuals seeking high-yield savings (3% APY) in low-balance accounts and mortgage lending through community relationships"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "State Bank Financial is best for customers who prefer traditional FDIC-insured banking with local community relationships, particularly small business owners and agricultural customers seeking specialized lending. The main caveat is that this appears to be a regional bank without published rates online, requiring direct contact for pricing, and location-dependent account availability limits nationwide accessibility.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "401 Main St, La Crosse, WI 54601",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

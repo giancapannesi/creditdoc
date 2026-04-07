@@ -7,8 +7,8 @@
     "fdic-equivalent"
   ],
   "description_short": "The Weather Channel provides weather forecasts, radar maps, and news. This is a weather information service, not a financial product or payday alternative.",
-  "description_long": "The Weather Channel (weather.com) is a media and weather information platform owned by The Weather Company, a subsidiary of IBM. The site aggregates weather data, forecasts, and related news content for consumers across the United States and globally. The website offers free access to weather radar, daily forecasts, alerts, and lifestyle content organized by topics like home & garden, travel, health, and seasonal information. The platform generates revenue primarily through advertising and premium subscription tiers that reduce ad exposure. The site also features sponsored content from third parties like TurboTax, tax preparation services, and retirement planning resources. There is no financial product, lending service, or payday alternative offered on this platform. The presence of weather-related content and sponsored financial advertisements does not transform this into a financial services provider. This company is fundamentally a weather information and media property, not a consumer finance company. A profile on CreditDoc is inappropriate and factually incorrect for this entity.",
-  "logo_url": "",
+  "description_long": "The Weather Channel (weather.com) is a media and weather information platform owned by The Weather Company, a subsidiary of IBM. The site aggregates weather data, forecasts, and related news content for consumers across the United States and globally. The website offers free access to weather radar, daily forecasts, alerts, and lifestyle content organized by topics like home & garden, travel, health, and seasonal information. The platform generates revenue primarily through advertising and premium subscription tiers that reduce ad exposure. The site also features sponsored content from third parties like TurboTax, tax preparation services, and retirement planning resources. There is no financial product, lending service, or payday alternative offered on this platform. The presence of weather-related content and sponsored financial advertisements does not transform this into a financial services provider. This company is fundamentally a weather information and media property, not a consumer finance company. A profile on CreditDoc is inappropriate and factually incorrect for this entity.\n\nAs a financial institution, this lender competes with both traditional banks and newer fintech personal loan lenders in the consumer lending space. Borrowers seeking personal loans for bad credit may find more flexible terms through online lenders, while those focused on simplifying payments may benefit from debt consolidation loans with fixed rates. Credit union installment loans and CDFI products typically offer APRs well below payday rates, with structured repayment over several months.",
+  "logo_url": "/logos/wea.png",
   "website_url": "https://weather.com/",
   "affiliate_url": "",
   "affiliate_program": "",
@@ -18,7 +18,18 @@
     "money_back_guarantee": false,
     "guarantee_details": "",
     "free_consultation": true,
-    "tiers": [],
+    "tiers": [
+      {
+        "name": "Payday Alternative Loan",
+        "price": 0,
+        "features": [
+          "APR capped below 36%",
+          "Fixed repayment schedule",
+          "Reports to credit bureaus",
+          "No rollover fees"
+        ]
+      }
+    ],
     "currency": "USD"
   },
   "services": [
@@ -84,12 +95,12 @@
       "Charter #66677"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.7,
-    "transparency": 4.2,
+    "transparency": 4.3,
     "ease_of_use": 4.2
   },
   "best_for": [
@@ -104,10 +115,11 @@
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "enriching",
+  "processing_status": "failed_quarantine",
   "quality_score": 7,
   "enrichment_attempts": 1,
   "no_index": true,
   "has_been_enriched": true,
-  "last_engine_run": "2026-04-06"
+  "last_engine_run": "2026-04-06",
+  "quarantine_reason": "not_consumer_finance"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Homestead Bank",
   "slug": "homestead-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Cozad, NE. $522M in assets. 11 offices.",
-  "description_long": "Homestead Bank is a community bank located in Cozad, NE, established in 1905. The bank holds approximately $522M in total assets and $400M in deposits. It operates 11 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Homestead Bank is a community bank serving nine Nebraska locations with personal, business, and agricultural banking services, emphasizing a common-sense approach to financial management.",
+  "description_long": "Homestead Bank is a regional community bank headquartered in Nebraska that has operated through multiple economic cycles and established itself as a fiscally stable institution. The bank serves nine Nebraska communities: Cozad, Lexington, St. Paul, Wolbach, Schuyler, Albion, Howells, Chadron, and Ainsworth, with a stated commitment to consumer, agricultural, and business banking.\n\nThe bank offers comprehensive banking services including personal checking and savings accounts, business banking, agricultural lending, mortgage services, credit cards, mobile banking with deposits, the SPIN P2P money transfer service, eStatements, debit cards compatible with mobile wallets, online banking accessible 24/7, check imaging through digital banking, and insurance products through Homestead Insurance. They recently migrated to the .bank domain to enhance security and demonstrate their legitimacy as a verified financial institution.\n\nHomestead Bank distinguishes itself through its emphasis on community presence and local decision-making, positioning itself as serving \"farmers, ranchers and commercial businesses\" alongside general consumers. The bank highlights its ability to survive \"economic downturns and weather,\" suggesting long-term stability. Their adoption of the .bank domain\u2014which requires bank verification and enhanced security measures\u2014is marketed as a differentiator, and they actively promote modern digital conveniences like mobile wallets and P2P transfers alongside traditional banking.\n\nAs a regional community bank, Homestead Bank's primary limitation is geographic: customers must live in or near one of their nine Nebraska branch locations to access in-person services. While they offer digital banking and mobile services, their product ecosystem appears narrower than national banks (no mention of investment advisory, wealth management, or premium checking tiers). The bank does not disclose fee structures, APY rates, loan terms, or compliance certifications on their public website, requiring potential customers to visit branches or contact them directly for detailed product information.",
   "logo_url": "",
   "website_url": "https://www.homestead.bank",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Business banking services",
+    "Agricultural lending and farm financing",
+    "Mortgage lending and home loans",
+    "Credit cards",
+    "Debit cards with mobile wallet compatibility",
+    "Digital banking and online account access",
+    "Mobile banking and mobile deposit",
+    "SPIN P2P money transfer service",
+    "eStatements and check imaging",
+    "Insurance products (Homestead Insurance)",
+    "Loan comparison tools and financial calculators"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "11 locations"
+    "24/7 digital banking access from any internet-connected device with ability to check balances, transfer funds, and reconcile accounts",
+    "SPIN P2P money transfer service enabling quick payments to friends and family directly from mobile app",
+    "Check imaging feature allowing customers to view images of cleared checks through digital banking portal",
+    "Mobile wallet compatibility for debit cards, enabling contactless payments at compatible merchants and websites",
+    "Early adoption of .bank domain with required bank verification and enhanced security measures for online transactions",
+    "Mobile deposit capability integrated into their mobile banking app",
+    "Established track record of fiscal strength through multiple economic downturns and weather events"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to nine Nebraska communities only, making access difficult for non-local customers",
+    "No publicly disclosed fee schedule, APY rates, loan terms, or detailed product specifications on website\u2014customers must contact branches directly",
+    "No evidence of FDIC insurance information, regulatory certifications, or compliance disclosures on public website pages provided",
+    "Limited product offerings compared to national banks\u2014no mention of investment advisory, wealth management, or premium account tiers",
+    "Website content incomplete (digital banking page cuts off mid-sentence), suggesting outdated or poorly maintained web presence"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 11482,
   "latitude": 40.8613179814356,
   "longitude": -99.986313981929,
@@ -94,12 +105,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Residents of rural Nebraska communities seeking personal or agricultural banking with local branch relationships",
+    "Farmers, ranchers, and agricultural businesses needing specialized farm lending and business banking in Nebraska",
+    "Customers prioritizing community banking and local decision-making over national bank convenience"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Homestead Bank is best for Nebraska residents in their nine service areas seeking full-service community banking with personal attention and agricultural expertise. The main caveat is strict geographic limitation\u2014out-of-state customers and those outside their nine Nebraska branch locations cannot open accounts or access physical services, and the bank does not market itself as serving remote customers nationally.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +118,11 @@
   ],
   "phone": "",
   "address": "915 Meridian Ave, Cozad, NE 69130",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

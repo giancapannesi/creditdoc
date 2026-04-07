@@ -1,14 +1,14 @@
 {
   "name": "Middletown State Bank",
   "slug": "middletown-state-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Middletown, IL. $46M in assets. 3 offices.",
-  "description_long": "Middletown State Bank is a community bank located in Middletown, IL, established in 1917. The bank holds approximately $46M in total assets and $38M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving Middletown, Greenview, and Latham, Illinois since 1917, offering personal and business checking, savings, loans, and online banking services.",
+  "description_long": "Middletown State Bank was founded in 1917 as the Marbold State Bank of Middletown and continues to operate as a community-focused financial institution. The bank maintains three physical branch locations across Illinois in Middletown, Greenview, and Latham, positioning itself as a convenient local banking option for the communities it serves.\n\nThe bank offers a comprehensive suite of personal and business banking services including checking and savings accounts, debit cards, personal and business loans, online banking, mobile banking, and financial calculators. Customers can access these services through multiple channels: in-person at branch locations, via online banking platforms, through mobile applications, and via drive-up windows at all locations.\n\nMiddletown State Bank distinguishes itself through personalized community service, with specific emphasis on convenience features like night depositories at all branches, safe deposit boxes ranging from $15\u2013$25 annually, drive-up banking, and extended Friday hours at the Latham branch (until 6 p.m.). The bank also offers wire transfer services (Latham branch only) and faxing services at all locations, plus financial planning tools to support customer decision-making.\n\nAs a traditional community bank, Middletown State Bank is best suited for customers seeking local, in-person banking relationships and those living or operating businesses in central Illinois. However, the bank's service offerings and technology features appear limited compared to larger regional or national banks, and specific product details (interest rates, loan terms, minimum deposits) are not disclosed on the website. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://middletownstatebank.com",
   "affiliate_url": "",
@@ -23,23 +23,36 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Personal checking accounts",
     "Savings accounts",
+    "Business checking accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business loans",
+    "Debit cards",
+    "Online banking",
+    "Mobile banking",
+    "Safe deposit boxes ($15\u2013$25 annually)",
+    "Night depository service",
+    "Drive-up banking",
+    "Wire transfers (Latham branch only; $12 incoming/$22 outgoing)",
+    "Fax services (incoming $2\u20133, outgoing $3\u20134)",
+    "Financial calculators"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1917",
-    "Local community bank with personal service",
-    "3 locations"
+    "Three convenient branch locations across Illinois with extended Saturday hours (8 a.m.\u2013Noon drive-up)",
+    "Personalized community banking with 100+ years of local history and established relationships",
+    "Night depository service at all branches for after-hours deposits and document submission",
+    "Safe deposit boxes available at affordable annual rates ($15\u2013$25) at all locations",
+    "Extended Friday hours at Latham branch (8 a.m.\u20136 p.m.) for working customers",
+    "Wire transfer services available with posted fee structure ($12 incoming, $22 outgoing)",
+    "Full-service offerings including personal loans, business checking, online and mobile banking"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited service area restricted to three small Illinois towns (Middletown, Greenview, Latham)",
+    "Wire transfer service only available at Latham branch, not all locations",
+    "No interest rates, APRs, minimum deposit requirements, or loan terms disclosed on website",
+    "Latham branch has restricted hours (8 a.m.\u20133 p.m. Mon\u2013Wed, Noon Thu) compared to other branches",
+    "Limited technology visibility; no information about mobile app features, online banking capabilities, or digital security certifications"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +64,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 10463,
   "latitude": 40.1005350007212,
   "longitude": -89.59083400182,
@@ -87,18 +100,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Residents of Middletown, Greenview, or Latham, Illinois seeking convenient local banking",
+    "Small business owners in central Illinois needing personalized business checking and loan services",
+    "Customers who value in-person relationships and prefer community banks over large national chains",
+    "Individuals needing safe deposit boxes and after-hours deposit services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Middletown State Bank is best for customers living in or operating businesses within its three-branch Illinois service area who value community relationships and personalized service. The primary caveat is that the bank's service area is geographically limited and much information about specific products, rates, and terms is not publicly available on the website, requiring direct contact with branch staff.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +120,11 @@
   ],
   "phone": "",
   "address": "100 N Madison St, Middletown, IL 62666",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

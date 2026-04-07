@@ -1,14 +1,14 @@
 {
   "name": "Bank Of Lexington, Inc.",
   "slug": "bank-of-lexington-inc",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Lexington, KY. $401M in assets. 4 offices.",
-  "description_long": "Bank Of Lexington, Inc. is a community bank located in Lexington, KY, established in 2006. The bank holds approximately $401M in total assets and $350M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bank of Lexington is a community bank serving Kentucky with checking, savings, CDs, and lending products. Part of First Breckenridge Bancshares' seven-bank network.",
+  "description_long": "Bank of Lexington operates as a local community bank based in Kentucky, positioned as part of the larger First Breckenridge Bancshares family, which operates seven banks across Kentucky and Southern Indiana. The bank emphasizes a community-focused approach with the tagline \"My Easy-Earnings-kind of bank\" and promotes local banking as a core value proposition.\n\nThe bank offers a comprehensive suite of personal and business banking services. On the deposit side, they provide Easy Earn High Yield Checking, Cash Back Checking, savings accounts, and CD products (6- and 12-month terms with promotional rates). For lending, Bank of Lexington offers mortgages (purchase and refinance), construction loans, bridge loans, and general business lending. They also provide safekeeping services at all four branch locations and online banking access.\n\nBank of Lexington distinguishes itself through its emphasis on personalized service with the statement \"We listen, then we lend.\" The bank operates four physical branch locations and has recently relocated the Polo Club Branch to Sir Barton Way. Their marketing emphasizes the benefits of \"shopping local and banking local\" and targets consumers seeking community-oriented financial institutions rather than national megabanks.\n\nAs a mid-sized regional bank, Bank of Lexington appeals primarily to local Kentucky customers seeking relationship banking with physical branch access. The bank demonstrates attention to security and fraud awareness through published educational content on cell fraud, cyber care, computer tips, and online security. However, as a smaller regional institution, they likely offer fewer digital innovation features compared to larger banks or neobanks, and their product offerings appear more traditional in nature.",
   "logo_url": "",
   "website_url": "https://www.bankoflexington.net",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
+    "Easy Earn High Yield Checking accounts",
+    "Cash Back Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "6-month certificates of deposit",
+    "12-month certificates of deposit",
+    "Home purchase mortgages",
+    "Mortgage refinancing",
+    "Construction loans",
+    "Bridge loans",
+    "Business lending",
+    "Online banking platform",
+    "Safekeeping/safe deposit boxes",
+    "Lost card replacement services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2006",
-    "Local community bank with personal service",
-    "4 locations"
+    "Offers high-yield checking products (Easy Earn High Yield Checking) with cash back options",
+    "Provides CD specials with 6- and 12-month terms for savers",
+    "Four physical branch locations for in-person service and relationship banking",
+    "Comprehensive lending portfolio including mortgages, construction, and bridge loans",
+    "Published security and fraud awareness resources for customers",
+    "Online banking access available for digital convenience",
+    "Safekeeping services available at all four branch locations"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to Kentucky and Southern Indiana market with only four branches",
+    "Smaller institution may have fewer digital features or mobile app capabilities compared to national banks",
+    "No mention of specific APY rates, loan terms, or product fee structures on website",
+    "Limited information about business banking products and requirements",
+    "Website does not clearly articulate competitive advantages in pricing or rates versus regional competitors"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "KY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 58164,
   "latitude": 38.013713982894,
   "longitude": -84.5533690343394,
@@ -93,12 +105,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Kentucky-based individuals seeking personalized community banking with branch access",
+    "Local homebuyers and refinance customers wanting relationship-based mortgage lending",
+    "Small business owners in Kentucky needing flexible construction and business financing",
+    "Consumers prioritizing physical branch locations and local economic support over digital-first banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Lexington is best for Kentucky residents who value community banking relationships, personalized service, and physical branch access over digital convenience and competitive rate shopping. The main caveat is that as a smaller regional bank, it offers limited geographic footprint and likely cannot match the product variety, rates, or technology features of larger national banks or online-focused institutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "761 Corporate Dr, Lexington, KY 40503",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

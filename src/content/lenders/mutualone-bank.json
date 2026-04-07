@@ -1,15 +1,15 @@
 {
   "name": "Mutualone Bank",
   "slug": "mutualone-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mutual-bank"
   ],
-  "description_short": "FDIC-insured community bank in Framingham, MA. $1253M in assets. 3 offices.",
-  "description_long": "Mutualone Bank is a community bank located in Framingham, MA, established in 1889. The bank holds approximately $1253M in total assets and $936M in deposits. It operates 3 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "MutualOne Bank is an FDIC-insured full-service bank offering personal and business checking, savings, mortgages, loans, and digital banking services.",
+  "description_long": "MutualOne Bank is a traditional full-service bank that operates both personal and business banking divisions. The bank is FDIC-insured and backed by the full faith and credit of the U.S. Government, with additional deposit protection through the Depositors Insurance Fund (DIF) for amounts exceeding standard FDIC limits. Based on their website structure and service offerings, they appear to be a regional bank with physical branch locations.\n\nThe bank offers a comprehensive suite of personal banking products including checking accounts, savings and money market accounts, CDs and IRAs, student accounts, mortgages, home equity loans, personal loans, and Mass Save HEAT Loans (energy-efficiency financing). For business customers, MutualOne provides business checking and savings accounts, non-profit accounts, commercial loans, commercial real estate loans, small business loans, and cash management services. Both personal and business customers have access to debit cards with contactless payments, card controls, rewards programs, and digital banking platforms including mobile banking.\n\nMutualOne differentiates itself through specific features like Early Pay Day (receiving paychecks up to 2 days early), debit card round-up programs, Positive Pay for business fraud prevention, and a focus on local community banking with physical office locations. They provide comprehensive rate information and calculators for various products, plus resources like security centers and disclosures.\n\nAs a traditional regional bank, MutualOne serves customers who prefer brick-and-mortar banking relationships alongside digital conveniences. However, the website does not provide specific information about interest rates, account fees, minimum balances, loan terms, or competitive positioning compared to other banks, making it difficult to assess value proposition or accessibility for budget-conscious consumers.",
   "logo_url": "",
   "website_url": "https://www.mutualone.com",
   "affiliate_url": "",
@@ -24,23 +24,38 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Savings and money market accounts",
+    "CDs and IRAs",
+    "Student savings accounts",
+    "Mortgages and refinancing",
+    "Home equity loans",
+    "Mass Save HEAT Loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking and savings accounts",
+    "Commercial and commercial real estate loans",
+    "Small business loans",
+    "Mobile and online banking",
+    "Bill payment services",
+    "Positive Pay fraud prevention",
+    "Debit cards with rewards and contactless payments",
+    "Early Pay Day paycheck advance"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1889",
-    "Local community bank with personal service",
-    "3 locations"
+    "FDIC insurance backed by U.S. Government plus additional DIF coverage for deposits exceeding FDIC limits",
+    "Early Pay Day feature allows direct deposit paychecks up to 2 days early",
+    "Comprehensive personal and business banking services under one institution",
+    "Debit card rewards program and round-up savings feature",
+    "Positive Pay fraud prevention service for business accounts",
+    "Physical branch locations for in-person banking and support",
+    "Mass Save HEAT Loans for energy-efficient home improvements"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website does not display interest rates, APYs, or APRs for any products, requiring customers to visit in person or call for pricing",
+    "No information about account minimum balances, monthly fees, or fee structures visible on the website",
+    "Limited transparency about loan approval criteria, terms, or qualification requirements",
+    "No mention of online account opening ease, funding timelines, or application processes",
+    "Regional bank with physical locations may limit accessibility for customers outside service areas"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +67,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 26395,
   "latitude": 42.300516908197,
   "longitude": -71.4073608216864,
@@ -94,12 +109,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking integrated personal and business banking relationships",
+    "Homeowners interested in mortgages, home equity loans, or energy-efficiency financing",
+    "Consumers who value in-person banking relationships and local community banks",
+    "Businesses needing fraud prevention services like Positive Pay and cash management tools"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "MutualOne Bank is best for customers seeking traditional full-service banking with both personal and business products, local branch relationships, and specialized services like early paycheck access and energy-efficiency financing. The primary caveat is lack of transparency on rates and fees on their public website, requiring direct customer inquiry for pricing information.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +123,11 @@
   ],
   "phone": "",
   "address": "828 Concord St, Framingham, MA 01701",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Frontier Bank",
   "slug": "frontier-bank-sioux-falls",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Sioux Falls, SD. $342M in assets. 5 offices.",
-  "description_long": "Frontier Bank is a community bank located in Sioux Falls, SD, established in 1994. The bank holds approximately $342M in total assets and $311M in deposits. It operates 5 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank operating in Iowa and South Dakota, offering checking, savings, mortgages, business lending, and merchant services through digital and in-person channels.",
+  "description_long": "Frontier Bank is a regional FDIC-insured bank serving Iowa and South Dakota communities with a focus on local relationships and accessible banking services. The institution positions itself as a modernized community bank that combines traditional banking with digital convenience, offering both personal and business financial solutions backed by federal deposit insurance.\n\nThe bank's primary offerings include personal banking products (checking and savings accounts), business services (merchant processing, business loans, cash management), mortgage lending, wealth management and trust services, and credit cards. Their flagship product is the BIG DEAL Cash checking account, which advertises up to 4.05% APY on balances up to $25,000, ATM fee refunds, and no monthly fees. For businesses, Frontier partners with Fiserv for merchant services including Clover point-of-sale systems, payment processing, and business management tools.\n\nFrontier Bank differentiates itself through a partnership model (Fiserv for merchant services), localized engagement with business consultants, and convenient digital banking features including mobile banking and video tellers. Their referral program offers tangible incentives (Sealy humidifier fans) for account openings. The merchant services division emphasizes 24/7/365 support, fraud protection up to $100,000, and next-business-day hardware replacement.\n\nAs a traditional community bank, Frontier Bank is best suited for customers seeking FDIC-insured deposits and relationship-based banking in Iowa and South Dakota. The high APY on their checking account is competitive for the current environment, though tied to a $25,000 balance cap. Business customers should note that merchant services are provided through a third-party partner rather than in-house, which may affect customization and pricing control. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.frontierbank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Checking accounts (BIG DEAL Cash with up to 4.05% APY)",
+    "High-interest savings accounts",
+    "Credit cards",
+    "Mortgages (home purchase and refinance implied)",
+    "Home equity loans and lines of credit",
+    "Business lending and lines of credit",
+    "Merchant services and payment processing (via Fiserv partnership)",
+    "Clover point-of-sale systems and business management software",
+    "Wealth management and trust services",
+    "Cash management solutions for businesses",
+    "Mobile banking and video teller services",
+    "Online banking portal with account alerts and fraud monitoring"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1994",
-    "Local community bank with personal service",
-    "5 locations"
+    "High-yield checking account (up to 4.05% APY) on balances up to $25,000 with no monthly fees",
+    "Full FDIC insurance protection backed by U.S. government guarantee",
+    "24/7/365 merchant services support and next-business-day hardware replacement for business customers",
+    "Merchant fraud protection up to $100,000 (with Clover Security Plus)",
+    "ATM fee refunds included in BIG DEAL Cash checking account",
+    "Mobile banking and video teller options for convenient access",
+    "Dedicated business consultants and proactive 90-day onboarding for merchant customers"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic limitation: only operates in Iowa and South Dakota; not available nationally",
+    "High APY on checking account only applies to balances up to $25,000; balances above that earn standard rates",
+    "Merchant services provided through third-party partner (Fiserv/Clover) rather than proprietary platform, limiting direct control",
+    "No specific information provided about minimum opening balances, early account closure fees, or other account restrictions",
+    "Limited transparency on mortgage rates and terms compared to some competitors"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "SD"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 33922,
   "latitude": 43.54689337944,
   "longitude": -96.7270281988788,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Iowa and South Dakota residents seeking FDIC-insured checking and savings with competitive high-yield rates",
+    "Small to mid-sized local businesses in their service area needing integrated merchant processing and payment solutions",
+    "Customers prioritizing relationship-based banking with local branch access and personalized service",
+    "Business owners looking for 24/7 merchant support and comprehensive business management tools via point-of-sale systems"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Frontier Bank is ideal for Iowa and South Dakota residents and business owners seeking a community-focused, FDIC-insured bank with competitive deposit rates and integrated business solutions. The main caveat is geographic limitation\u2014the bank does not serve customers outside Iowa and South Dakota, making it inaccessible to those outside its service footprint.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "101 S Phillips Ave, Sioux Falls, SD 57104",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

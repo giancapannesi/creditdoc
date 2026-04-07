@@ -1,13 +1,13 @@
 {
   "name": "Central Bank & Trust Co.",
   "slug": "central-bank-trust-co",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Lexington, KY. $3943M in assets. 28 offices.",
-  "description_long": "Central Bank & Trust Co. is a community bank located in Lexington, KY, established in 1938. The bank holds approximately $3943M in total assets and $3073M in deposits. It operates 28 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank offering checking, credit cards, mortgages, loans, and insurance products with 80 years of local market presence.",
+  "description_long": "Central Bank & Trust Co. is an established community bank celebrating its 80th year of operation. The company positions itself as a neighborhood-focused financial institution with deep roots in local communities, emphasizing long-term customer relationships and personalized service. The bank operates physical locations including a recently opened branch in Spring House and maintains service areas in Lexington and Louisville, Kentucky based on contact phone numbers.\n\nThe company offers a comprehensive suite of financial products including personal and business checking accounts, credit cards with various reward structures, mortgage financing for home purchases and refinancing, personal loans, and insurance services through Central Insurance Services. Their digital offerings include online banking through \"Central NET\" and a mobile app for account management, balance transfers, and mobile check deposits. Insurance products span auto, home, life, and health coverage with emphasis on competitive pricing and professional advisory services.\n\nCentral Bank differentiates itself through community integration and relationship-based banking rather than digital-only services. They provide personalized mortgage assistance with guidance through financing options, maintain a fraud education hub to help customers protect finances, and emphasize that loan officers and representatives will \"walk through\" options with customers. The 80-year heritage is prominently featured as evidence of stability and community commitment.\n\nThe company operates as a traditional regional bank with standard offerings rather than innovative fintech solutions. While they provide essential banking services competently, they lack specialization in high-yield savings, premium credit card rewards, or cutting-edge digital features. Their service area appears limited to Kentucky markets, which may restrict accessibility for customers outside these regions. Insurance services are offered through partnerships rather than in-house underwriting. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.centralbank.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Credit cards",
+    "Mortgage loans and refinancing",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Auto insurance",
+    "Home/homeowner insurance",
+    "Life insurance",
+    "Online banking (Central NET)",
+    "Mobile banking app with check deposit",
+    "Insurance advisory services",
+    "Fraud protection education (Fraud Hub)",
+    "Account transfers and balance management"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1938",
-    "Local community bank with personal service",
-    "28 locations"
+    "80-year operating history demonstrates institutional stability and community longevity",
+    "Comprehensive product suite including checking, credit cards, mortgages, loans, and insurance in one institution",
+    "Mobile app with deposit capture and transfer functionality for account management",
+    "Personalized mortgage guidance with loan officers who walk customers through financing options",
+    "Dedicated Fraud Hub educational resource to help customers identify and avoid fraud",
+    "Multiple contact channels (phone, branch visits) for personalized service rather than automated systems",
+    "Competitive auto and home insurance pricing with discount programs (driving record, age-based)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Service area appears limited to Kentucky (Lexington and Louisville regions) based on contact information",
+    "No mention of competitive interest rates on savings products or CD offerings",
+    "Insurance products are partnered services rather than proprietary offerings",
+    "Limited transparency about credit card rewards structures or APR ranges on website",
+    "No indication of specialized products for underserved populations (no mention of credit builder loans, secured cards, or alternative lending)"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "KY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 15815,
   "latitude": 38.047695517562,
   "longitude": -84.500367410714,
@@ -86,18 +97,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Kentucky residents seeking one-stop banking with mortgage and insurance needs",
+    "Community-focused customers who prefer relationship banking over digital-only options",
+    "Homebuyers seeking personalized mortgage guidance and local lender relationships",
+    "Customers needing multiple financial products (checking, credit, insurance) from a single trusted institution"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Central Bank & Trust Co. is best for Kentucky-based customers seeking traditional full-service community banking with integrated mortgage, loan, and insurance services. The main caveat is geographic limitation to Kentucky markets and lack of differentiated digital products or competitive rate transparency\u2014making it suitable for relationship-based banking preferences rather than rate shopping or specialized financial solutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +117,11 @@
   ],
   "phone": "",
   "address": "300 W Vine St, Lexington, KY 40507",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

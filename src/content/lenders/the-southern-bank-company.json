@@ -1,14 +1,14 @@
 {
   "name": "The Southern Bank Company",
   "slug": "the-southern-bank-company",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Gadsden, AL. $130M in assets. 4 offices.",
-  "description_long": "The Southern Bank Company is a community bank located in Gadsden, AL, established in 1936. The bank holds approximately $130M in total assets and $103M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank founded in 1936 offering personal and business banking, mortgages, consumer loans, and commercial financing across Northeast Alabama with nationwide digital access.",
+  "description_long": "The Southern Bank Company was originally founded in 1936 as First Federal Savings and Loan and has maintained continuous operations as a community-focused financial institution. The bank serves customers across Northeast Alabama with physical branch locations while extending its reach nationally through online banking platforms. The company holds NMLS ID 797027 and operates as a full-service bank regulated under the Community Reinvestment Act.\n\nThe bank offers comprehensive personal banking products including personal checking accounts, mortgage loans, consumer loans, and home equity lines of credit. For business customers, The Southern Bank provides commercial financing solutions including real estate purchase loans, equipment financing, lines of credit, and invoice factoring through their altLINE service. They also offer online banking access, a new digital wallet feature compatible with Apple Pay and Google Wallet, and nationwide ATM access with no fees.\n\nThe Southern Bank distinguishes itself as a community bank with emphasis on local decision-making and personalized service. Their website highlights a commitment to customer feedback and \"clear, uncompromising customer service.\" They actively recruit local staff, offer scholarship programs to the community, and maintain transparent CRA public file documentation. The bank has not opened or closed any branches in the past three years, indicating stability.\n\nAs a regional community bank, The Southern Bank serves customers who value local relationships and personalized service over larger national institutions. However, their branch footprint remains limited to Northeast Alabama, and their product offerings are more traditional compared to fintech alternatives. Customers seeking specialized lending products or rates competitive with larger national banks may find limited options, and the bank's digital capabilities, while modernizing, remain basic compared to major national players. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.sobanco.com",
   "affiliate_url": "",
@@ -23,23 +23,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Savings accounts and CDs",
+    "Mortgage loans for home purchase",
+    "Home equity lines of credit",
+    "Consumer loans",
+    "Business checking and accounts",
+    "Commercial real estate financing",
+    "Equipment financing",
+    "Business lines of credit",
+    "altLINE invoice factoring services",
+    "Online banking platform",
+    "Digital wallet integration (Apple Pay/Google Wallet)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1936",
-    "Local community bank with personal service",
-    "4 locations"
+    "No-fee ATM access nationwide despite being a regional bank",
+    "New digital wallet feature allowing debit card integration with Apple Pay and Google Wallet",
+    "Founded in 1936 with 90+ years of community banking history and stability",
+    "Offers both personal and business banking under one institution",
+    "altLINE invoice factoring service specifically serves small and medium-sized businesses",
+    "Active community involvement including annual scholarship programs",
+    "24/7 lost card reporting available at 1-866-546-8273",
+    "Transparent CRA public file documentation readily available online"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Physical branch locations limited to Northeast Alabama region only",
+    "No indication of competitive rates or rate comparisons on website",
+    "Digital banking platform appears basic compared to major national banks and neobanks",
+    "Limited product innovation\u2014traditional banking focus with no mention of investment services, wealth management, or advisory services",
+    "Small institution means fewer resources for customer support and product development compared to national competitors"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +63,7 @@
   "states_served": [
     "AL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29731,
   "latitude": 34.0131670069011,
   "longitude": -86.0076920157334,
@@ -87,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to medium-sized business owners in Northeast Alabama seeking personalized commercial financing",
+    "Homebuyers in Northern Alabama looking for mortgage loans from a local lender",
+    "Customers who value community banking relationships and local decision-making over large national banks",
+    "Individuals seeking basic personal banking with nationwide ATM access and online capabilities"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "The Southern Bank Company is best for small-to-medium businesses and individuals in Northeast Alabama seeking personalized community banking with local decision-making and relationship-based service. The main caveat is that their physical presence is limited to Northern Alabama, and their digital and product offerings are more traditional and basic compared to larger national banks or fintech alternatives, making them potentially less suitable for customers seeking cutting-edge digital banking or specialized financial services.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +119,11 @@
   ],
   "phone": "",
   "address": "221 S 6Th St, Gadsden, AL 35901",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

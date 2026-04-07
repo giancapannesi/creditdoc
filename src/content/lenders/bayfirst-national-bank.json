@@ -1,14 +1,14 @@
 {
   "name": "Bayfirst National Bank",
   "slug": "bayfirst-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Saint Petersburg, FL. $1299M in assets. 12 offices.",
-  "description_long": "Bayfirst National Bank is a community bank located in Saint Petersburg, FL, established in 1999. The bank holds approximately $1299M in total assets and $1185M in deposits. It operates 12 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "BayFirst Financial is a community bank offering personal and business banking solutions with digital tools, competitive rates, and local expertise for customers seeking alternatives to large national banks.",
+  "description_long": "BayFirst Financial positions itself as a community bank focused on delivering comprehensive banking solutions with a local touch. The company operates through digital and in-person channels, emphasizing personalized service and accessibility for both personal and business customers. Their marketing strategy centers on the tagline 'Here For What's Next' and 'Banking on Your Terms,' suggesting a customer-centric approach to financial services.\n\nThe bank offers a broad range of services spanning personal banking (checking accounts, savings accounts, CDs, auto loans, mortgages, home equity loans, and personal loans) and business banking (business checking, business savings, CDs, business lending, merchant services, and treasury management). Their technology platform includes a mobile banking app, online banking capabilities, and integrations with popular business tools like Shopify and QuickBooks. Features include RoundUp savings automation, Forward Pay (2-day early direct deposit), contactless debit cards, free credit score monitoring, and access to 55,000 free ATMs.\n\nBayFirst differentiates itself through emphasis on community banking relationships and local expertise, highlighted by customer testimonials about personalized service and business integration capabilities. They offer a 'SwitchKit' to facilitate account switching from competitors, a referral program offering up to $600, and positioning themselves as offering 'big bank' features with community bank relationships. Their accessibility features, including AudioEye optimization, demonstrate attention to inclusive design.\n\nThe main caveat is that BayFirst appears to be a regional or mid-sized bank rather than a nationwide institution, though their website provides limited clarity on geographic availability. Specific product details like APR ranges, fee structures, and minimum balance requirements are not disclosed on the website homepage, requiring customers to navigate further for concrete terms. The bank's competitive positioning relies heavily on service quality and technology rather than rates or innovative financial products. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.bayfirstfinancial.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts and CDs",
+    "Auto, boat, and vehicle loans",
+    "Mortgage loans",
+    "Home equity loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking accounts",
+    "Business savings accounts and CDs",
+    "Business lending services",
+    "Merchant services",
+    "Treasury management services",
+    "Mobile and online banking app"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1999",
-    "Local community bank with personal service",
-    "12 locations"
+    "Access to 55,000 free ATMs nationwide through network partnerships",
+    "RoundUp feature automatically saves spare change from debit card purchases",
+    "Forward Pay allows customers to access direct deposit funds 2 days early",
+    "Free credit score monitoring included with accounts",
+    "Seamless integration with business tools like Shopify and QuickBooks",
+    "SwitchKit program simplifies switching from competing banks with six-step process",
+    "Referral program offers up to $600 for referring friends and family"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website homepage lacks specific APR ranges, interest rates, or fee schedules for products",
+    "Geographic service area and branch locations not clearly specified on main website",
+    "Limited transparency on minimum account balances or monthly maintenance fees",
+    "No mention of specialized products like high-yield savings or premium checking tiers",
+    "Comparison to 'big banks' in marketing suggests potential rate or feature disadvantages versus larger competitors"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "FL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34997,
   "latitude": 27.7707920166528,
   "longitude": -82.6435229753347,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners seeking integrated accounting and banking solutions",
+    "Personal customers wanting community bank relationships with modern digital features",
+    "Individuals switching from larger national banks who value local service",
+    "Customers prioritizing automated savings tools and early direct deposit access"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "BayFirst Financial is best for personal and small business customers in their service area who prioritize convenience, technology integration, and personalized service over rate shopping. The main caveat is that specific pricing and geographic availability information is not disclosed on their public website, requiring direct contact to determine competitiveness and whether the bank serves your location.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "700 Central Ave, Saint Petersburg, FL 33701",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

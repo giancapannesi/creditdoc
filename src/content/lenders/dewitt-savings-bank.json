@@ -1,15 +1,15 @@
 {
   "name": "Dewitt Savings Bank",
   "slug": "dewitt-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mutual-bank"
   ],
-  "description_short": "FDIC-insured community bank in Clinton, IL. $174M in assets. 2 offices.",
-  "description_long": "Dewitt Savings Bank is a community bank located in Clinton, IL, established in 1887. The bank holds approximately $174M in total assets and $148M in deposits. It operates 2 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank serving Central Illinois since 1887, specializing in mortgages, checking/savings accounts, and digital banking with local decision-making.",
+  "description_long": "DeWitt Savings Bank is a locally owned and operated community bank headquartered in Clinton, Illinois, with a 137-year history dating back to 1887. The bank has built its reputation on personalized service, strong community relationships, and hometown values while maintaining FDIC insurance protection backed by the U.S. Government.\n\nThe bank offers a comprehensive range of banking services including checking and savings accounts, personal and business loans, and mortgage lending\u2014which remains their core specialty since founding. Customers can access accounts through multiple channels: in-person at physical branch locations, via secure online banking with bill pay capabilities, through Zelle money transfers, mobile app banking, and drive-thru services. The bank also provides eStatements and digital account management tools available 24/7.\n\nDeWitt Savings Bank distinguishes itself through local decision-making authority rather than corporate bureaucracy, competitive rates and terms, hands-on mortgage expertise, and direct community engagement. Their emphasis on personalized service contrasts with larger national banks, and their century-plus track record demonstrates stability and long-term commitment to Central Illinois residents.\n\nThe bank does have notable service limitations: they primarily serve Illinois residents only (applicants must be over 18 and reside in Illinois, with out-of-state applicants requiring special evaluation), operate with limited physical locations in Clinton, and the website provides minimal transparency on specific rates, fees, or detailed product terms. Borrowers outside their service area may face approval delays or denial. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.dewittsavingsbank.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Checking and savings accounts",
+    "Mortgage loans (purchase and refinance)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business loans",
+    "Online banking with bill pay",
+    "Zelle money transfer",
+    "Mobile app banking",
+    "eStatements with PDF download",
+    "Loan portal access",
+    "Mortgage loan portal",
+    "Drive-thru banking",
+    "ATM access at branch locations"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1887",
-    "Local community bank with personal service",
-    "2 locations"
+    "FDIC-insured deposits backed by U.S. Government guarantee",
+    "137-year operating history demonstrates stability and longevity",
+    "Mortgages are core specialty with deep expertise since 1887",
+    "Local decision-making and personalized service versus corporate policies",
+    "24/7 online banking with Zelle money transfer integration",
+    "Multiple access channels: online, mobile app, branch, and drive-thru",
+    "Community engagement focus and competitive rates advertised"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Severely limited service area\u2014Illinois residents only; out-of-state applicants face approval uncertainty",
+    "Only one location listed (Clinton, IL) limits physical accessibility",
+    "Website provides no transparent rate or fee information for any products",
+    "Minimal detail on specific loan products, terms, or eligibility requirements",
+    "Email explicitly marked as insecure; no chat or phone support details provided on homepage"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29535,
   "latitude": 40.1523839869315,
   "longitude": -88.9631509915754,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Illinois residents seeking reliable local mortgage lending with personalized attention",
+    "Central Illinois customers preferring community bank relationships over national chains",
+    "Homebuyers and refinancers in the bank's service area wanting specialized mortgage expertise",
+    "Savers and borrowers who value FDIC protection and long-established institutional stability"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "DeWitt Savings Bank is best suited for Illinois residents seeking traditional community banking with strong mortgage expertise and FDIC protection. The primary caveat is their strict geographic limitation to Illinois only\u2014borrowers outside this state may face denial or delays in approval, making them unavailable for most non-Illinois consumers.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "302 W Main St, Clinton, IL 61727",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

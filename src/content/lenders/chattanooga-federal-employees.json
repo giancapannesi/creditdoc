@@ -1,13 +1,13 @@
 {
   "name": "Chattanooga Federal Employees",
   "slug": "chattanooga-federal-employees",
-  "category": "payday-alternatives",
+  "category": "banking",
   "subcategories": [
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "State-Chartered Credit Union in , . NCUA insured. 1 location.",
-  "description_long": "Chattanooga Federal Employees is a state-chartered credit union serving members in , , established in 1925. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "ERROR: Website mismatch detected. URL points to Chattanooga tourism bureau, not a financial services company or credit union.",
+  "description_long": "CRITICAL DATA INTEGRITY ISSUE: The provided website (visitchattanooga.com) is the official tourism and visitor bureau for Chattanooga, Tennessee\u2014not a financial institution. The site contains event listings, hotel recommendations, hiking trails, restaurant guides, and travel inspiration content managed by the Chattanooga Tourism Co. There is no financial services, credit union, or lending operations information present. The company name 'Chattanooga Federal Employees' suggests a potential federal credit union, but the provided URL does not correspond to this entity. The website footer shows it is powered by Simpleview, a destination marketing organization (DMO) platform provider. No payday alternative lending, credit union membership information, employee advance programs, or financial products are mentioned anywhere on the website. This appears to be either a database error where the wrong URL was assigned to the company profile, or the company name does not match the website domain. Without access to the actual financial institution's website or legitimate contact information, it is impossible to accurately assess services, rates, membership requirements, or lending terms. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.visitchattanooga.com/",
   "affiliate_url": "",
@@ -30,15 +30,16 @@
     "NCUA insured deposits (up to $250K)"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
+    "Not-for-profit \u2014 typically lower fees and better rates than banks",
+    "NCUA insured \u2014 deposits protected up to $250,000",
     "Established in 1925",
     "Member-owned cooperative"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Website URL does not match company name\u2014appears to be tourism bureau not a financial institution",
+    "No financial services, lending products, or credit union information discoverable on site",
+    "Cannot verify if 'Chattanooga Federal Employees' credit union exists or is currently operational",
+    "Profile cannot be completed without correct website or verified company information"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +49,7 @@
   "founded_year": 1925,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "62537",
   "published": true,
   "review_status": "draft",
@@ -79,13 +80,13 @@
       "Charter #62537"
     ]
   },
-  "rating": 4.0,
+  "rating": 4.1,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.7,
-    "transparency": 4.2,
-    "ease_of_use": 4.0
+    "transparency": 4.0,
+    "ease_of_use": 4.2
   },
   "best_for": [
     "Lower fees and better loan rates than banks",
@@ -93,14 +94,17 @@
     "Community-focused financial services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "PROFILE CANNOT BE COMPLETED: The website provided does not belong to a financial services company. Verification of the correct URL for Chattanooga Federal Employees credit union or similar entity is required before an accurate profile can be generated. Recommend data audit to correct company-to-website mapping.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-06",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 7,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-06",
+  "quarantine_reason": "not_consumer_finance"
 }

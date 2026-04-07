@@ -1,14 +1,14 @@
 {
   "name": "Axiom Bank, National Association",
   "slug": "axiom-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Maitland, FL. $784M in assets. 7 offices.",
-  "description_long": "Axiom Bank, National Association is a community bank located in Maitland, FL, established in 1962. The bank holds approximately $784M in total assets and $658M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Axiom Bank, National Association is a Florida-based bank offering personal and commercial banking services, including checking, savings, lending, and specialized asset-based financing through its Axiom Commercial Finance division.",
+  "description_long": "Axiom Bank, National Association operates as a full-service commercial bank headquartered in Florida with a focus on both retail and business customers. The institution provides comprehensive banking solutions spanning personal financial services, small business banking, and commercial lending relationships. According to their website, Axiom Bank positions itself as a community-focused institution committed to financial wellness and innovation in customer service delivery.\n\nThe bank's service offerings include personal checking and savings accounts, certificates of deposit (CDs), individual retirement accounts (IRAs), and a mobile banking application for account management. On the business side, Axiom offers small business checking, business savings and CDs, commercial lending, commercial deposits, treasury management services, and a dedicated Axiom Commercial Finance division specializing in asset-based lending and equipment financing for small to medium-sized businesses. The commercial finance unit provides cash advances leveraging accounts receivable, inventory, and plant/property/equipment as collateral.\n\nAxiom Bank distinguishes itself through claimed emphasis on personal relationships, particularly within its commercial banking segment where experienced bankers serve as \"visionaries for their clients.\" The bank highlights modern digital solutions and a mobile app platform designed to provide convenient account access. They maintain an active fraud prevention program with dedicated communication channels for reporting suspicious activity, and provide customer education on security best practices and regulatory changes such as the ISO 20022 payment standards implementation.\n\nAs a National Association bank, Axiom operates under federal banking regulations. The company maintains multiple branch locations across Florida and a call center with recently adjusted weekend hours (Saturdays 9AM-1PM effective June 21, 2025). While the website demonstrates active operations and regulatory compliance efforts, specific information regarding deposit insurance coverage limits, loan approval rates, fee structures, and competitive rate comparisons is not disclosed on the publicly available website content. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.axiombanking.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Certificates of Deposit (CDs) and IRAs",
+    "Mobile banking application",
+    "Small business checking accounts",
+    "Small business savings and CDs",
+    "Commercial lending services",
+    "Commercial deposits and treasury management",
+    "Asset-based lending (Axiom Commercial Finance)",
+    "Equipment financing",
+    "InsuredSafe for Small Businesses",
+    "Wire transfer services with ISO 20022 compliance"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1962",
-    "Local community bank with personal service",
-    "7 locations"
+    "Mobile banking app available for convenient account management and access",
+    "Dedicated fraud protection program with 24/7 reporting channels (fraud@axiombanking.com and 800-584-0015)",
+    "Specialized asset-based lending division (Axiom Commercial Finance) for small to medium-sized businesses",
+    "Comprehensive treasury management and commercial deposit services for business clients",
+    "Personal relationship banking model with experienced commercial bankers",
+    "Full suite of personal products including checking, savings, CDs, and IRAs",
+    "Proactive communication about regulatory changes (ISO 20022 implementation guidance)"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint as Florida-focused institution may restrict branch access for non-Florida customers",
+    "No information available about deposit rates, loan rates, or fee schedules on website",
+    "Call center operates limited weekend hours (9AM-1PM Saturday only), reducing accessibility",
+    "Website does not clearly disclose FDIC deposit insurance coverage or specific lending criteria",
+    "No details provided about minimum account balances, opening requirements, or qualification thresholds"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "FL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 31390,
   "latitude": 28.6285420081711,
   "longitude": -81.395498999113,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small to medium-sized Florida businesses seeking asset-based lending and equipment financing",
+    "Commercial clients requiring treasury management and personal banking relationships with experienced bankers",
+    "Florida-based consumers wanting local branch access combined with mobile banking convenience",
+    "Business owners leveraging accounts receivable or inventory as collateral for working capital"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Axiom Bank is best suited for Florida-based individuals and small to medium-sized businesses seeking personalized commercial banking relationships with integrated digital banking convenience. The main caveat is that specific pricing, rate, and fee information is not disclosed on their website, requiring direct contact with the bank to compare competitiveness with other regional or national banking alternatives.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "258 Southhall Ln, Maitland, FL 32751",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

@@ -1,15 +1,15 @@
 {
   "name": "Sawyer Savings Bank",
   "slug": "sawyer-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "mutual-bank"
   ],
-  "description_short": "FDIC-insured community bank in Saugerties, NY. $288M in assets. 4 offices.",
-  "description_long": "Sawyer Savings Bank is a community bank located in Saugerties, NY, established in 1871. The bank holds approximately $288M in total assets and $238M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Mutual savings bank serving the Hudson Valley since 1871, offering checking, savings, mortgages, and business banking with a community-focused mission.",
+  "description_long": "Sawyer Savings Bank was originally chartered as Saugerties Savings Bank on February 1, 1871, by twenty-one citizens of Saugerties, New York. The institution changed its name to Sawyer Savings Bank in 1973 and has operated continuously for over 150 years, weathering multiple business cycles while maintaining its commitment to the Hudson Valley community. As a mutual institution, the bank holds all assets in trust exclusively for depositors rather than shareholders.\n\nThe bank offers a comprehensive suite of consumer and business banking services including checking and savings accounts, high-yield savings products, certificates of deposit, money market accounts, mortgage lending for home purchases and refinances, digital banking through web and mobile platforms, business banking with deposit and lending solutions, and community support programs. Their digital offerings are described as powered by technology and backed by people, featuring real-time transaction tracking, mobile check deposits, and bill payment capabilities.\n\nSawyer Savings Bank distinguishes itself through its mutual ownership structure, where all earnings benefit depositors rather than external shareholders. The institution has invested deeply in the Hudson Valley through community programs including backpack and scholarship programs for students, support for first responders, food bank partnerships, and direct sponsorships for local organizations. The bank maintains a strong local presence with multiple branches and provides multilingual support in nine languages.\n\nAs a traditional community bank, Sawyer Savings Bank is best suited for customers seeking personalized service and local decision-making rather than those seeking the lowest rates across all products. The institution's strength lies in its community integration and mutual structure, though specifics on rate competitiveness, account fees, and minimum balance requirements are not disclosed on their website. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.SawyerSavings.bank",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
+    "High-yield savings accounts",
     "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Money market accounts",
+    "Certificates of deposit (CDs)",
+    "Mortgage lending for home purchases",
+    "Mortgage refinancing",
+    "Residential mortgage origination and loan processing",
+    "Business banking and business deposit accounts",
+    "Mobile banking app with check deposit and bill pay",
+    "Digital banking platform",
+    "Current rate information and financial calculators",
+    "Customer support via phone and in-branch consultations"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1871",
-    "Local community bank with personal service",
-    "4 locations"
+    "Mutual institution structure means all assets held in trust for depositors with no external shareholders",
+    "Over 150 years of continuous operation and stability in the Hudson Valley community",
+    "Mobile banking app with real-time transaction tracking, mobile check deposit, and bill payment features",
+    "High-yield savings account offering available, with current rates displayed on website",
+    "Comprehensive community investment programs including scholarships, first responder support, and food bank partnerships",
+    "Multilingual customer support available in nine languages including English, Spanish, French, German, Italian, Japanese, Korean, Portuguese, and Russian",
+    "Full-service offerings including mortgages, business banking, and digital solutions alongside traditional deposit products"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No pricing transparency on account fees, minimum balances, or rate details shown on public website",
+    "Limited branch network appears concentrated in Hudson Valley region, not a national presence",
+    "No information provided about overdraft protection, ATM network, or fee structures for common banking services",
+    "Website does not disclose FDIC insurance coverage limits or account protection details",
+    "No clear information about business account terms, lending rates, or qualification requirements"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "NY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 16039,
   "latitude": 42.0788165750349,
   "longitude": -73.9542310191105,
@@ -88,18 +99,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Hudson Valley residents and businesses seeking personalized community banking with local decision-making",
+    "Customers who prioritize mutual institution ownership and community investment over maximum rate shopping",
+    "Spanish-speaking and multilingual customers needing accessible banking services in their preferred language",
+    "Small business owners seeking relationship banking from a locally-rooted lender with mortgage and business lending expertise"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Sawyer Savings Bank is best for Hudson Valley customers who value community-rooted banking, local relationships, and mutual institution ownership over maximum rate shopping. The primary caveat is the lack of transparent pricing and rate information on their public website, requiring customers to contact the bank directly at 888-772-1871 or visit a branch to compare terms against national online banks.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -107,8 +119,11 @@
   ],
   "phone": "",
   "address": "87 Market St, Saugerties, NY 12477",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

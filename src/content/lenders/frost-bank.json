@@ -1,13 +1,13 @@
 {
   "name": "Frost  Bank",
   "slug": "frost-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in San Antonio, TX. $53128M in assets. 219 offices.",
-  "description_long": "Frost  Bank is a community bank located in San Antonio, TX, established in 1899. The bank holds approximately $53128M in total assets and $43333M in deposits. It operates 219 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Texas-based bank offering checking, savings, loans, mortgages, and wealth management with 155+ years of history and #1 ranking for consumer satisfaction in Texas for 17 consecutive years.",
+  "description_long": "Frost Bank is a Texas-based financial institution with over 155 years of operating history, positioned as a major regional bank with significant national presence. The company operates as a full-service retail and commercial bank, serving personal, small business, and commercial customers across Texas with multiple locations statewide.\n\nFrost Bank offers comprehensive banking products including checking and savings accounts, certificates of deposit (currently offering 3.50% APY on 90-day jumbo CDs), personal loans, mortgages, small business administration (SBA) loans, commercial lines of credit, merchant services, private banking, wealth management, treasury management, insurance, and business bank cards. They emphasize digital banking with a 4.9/5-rated mobile app and provide 24/7 live human customer support via phone and live chat rather than automated systems.\n\nThe bank distinguishes itself through customer service excellence, having ranked #1 in Texas for Consumer Banking Customer Satisfaction according to JD Power for 17 consecutive years. They also hold national recognition for small business and middle market banking across multiple categories (customer service, overall satisfaction, ease of doing business, and cash management). The company is listed as a 2025 Top Performing Bank by American Banker, ranking #4 among banks with over $50 billion in assets. Beyond financial services, Frost emphasizes community involvement through charitable initiatives including affordable housing development support, Alzheimer's awareness fundraising, and local seasonal events.\n\nHowever, Frost Bank is primarily a regional Texas-based institution, which may limit accessibility for customers outside Texas. The website does not provide detailed pricing information, fee structures, or specific APR ranges for loans and mortgages, requiring potential customers to contact the bank directly for rate quotes. While the company emphasizes personal service and community connection, this positioning may appeal more to relationship-focused customers than those seeking purely digital or discount banking alternatives.",
   "logo_url": "",
   "website_url": "https://www.frostbank.com",
   "affiliate_url": "",
@@ -22,23 +22,35 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking and savings accounts",
+    "Certificates of deposit (3.50% APY on 90-day jumbo CDs)",
+    "Mortgages (home purchase and refinance implied)",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Small Business Administration (SBA) loans",
+    "Small business checking and savings accounts",
+    "Lines of credit (Frost Line of Credit for inventory, growth, seasonal needs)",
+    "Merchant services and Zelle business tags",
+    "Commercial treasury management",
+    "Commercial insurance products",
+    "Business bank cards",
+    "Private banking and wealth management services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1899",
-    "Local community bank with personal service",
-    "219 locations"
+    "Ranked #1 in Texas for Consumer Banking Customer Satisfaction for 17 consecutive years (JD Power 2026)",
+    "155+ years of banking history with established operational infrastructure and stability",
+    "4.9/5-rated mobile app providing state-of-the-art digital banking experience",
+    "24/7 live human customer support via phone and live chat (not automated systems or bots)",
+    "Competitive CD rates: currently 3.50% APY on 90-day jumbo certificates of deposit",
+    "National recognition for small business and middle market banking across five categories",
+    "Comprehensive service offerings including personal, small business, commercial, private banking, and wealth management",
+    "Expanding branch network with locations throughout Texas"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited to Texas geography, making it inaccessible for customers outside the state",
+    "Website lacks specific pricing, fee structures, and APR ranges\u2014requires direct contact for rate quotes",
+    "No mention of online account opening process or detailed digital onboarding experience",
+    "Limited information about minimum deposit requirements or account maintenance fees",
+    "Regional focus may result in fewer technology innovations compared to national or fintech competitors"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 5510,
   "latitude": 29.4268790164156,
   "longitude": -98.4956639998107,
@@ -92,12 +104,13 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Texas residents seeking a relationship-based bank with award-winning customer service",
+    "Small business owners in Texas requiring SBA loans, merchant services, and business banking solutions",
+    "Customers prioritizing 24/7 live human support over automated phone systems",
+    "Individuals seeking high-yield CD products and comprehensive wealth management services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Frost Bank is best for Texas residents and businesses seeking full-service banking with exceptional customer service and a relationship-focused approach, backed by 17 consecutive years of #1 satisfaction rankings in the state. The main caveat is geographic limitation to Texas and lack of transparent pricing information online, requiring customers to contact the bank directly for specific rates and fees.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +118,11 @@
   ],
   "phone": "",
   "address": "111 W Houston St, San Antonio, TX 78205",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

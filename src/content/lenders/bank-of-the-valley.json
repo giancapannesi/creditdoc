@@ -1,15 +1,15 @@
 {
   "name": "Bank Of The Valley",
   "slug": "bank-of-the-valley",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Bellwood, NE. $543M in assets. 7 offices.",
-  "description_long": "Bank Of The Valley is a community bank located in Bellwood, NE, established in 1984. The bank holds approximately $543M in total assets and $456M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank serving Nebraska with personal, agricultural, and business banking across 7 locations. Offers checking, savings, loans, and digital banking services.",
+  "description_long": "Bank of the Valley is a community bank operating across Nebraska with branch locations in Bellwood, David City, Platte Center, Columbus, Humphrey, and Schuyler. The bank has been serving local communities with a focus on relationship-based banking and personalized service. As a traditional community bank, they emphasize local decision-making and understanding their customers' individual needs.\n\nThe bank offers a comprehensive range of banking products including personal checking and savings accounts, time certificates (CDs), loan products, health savings accounts, and agricultural banking services. For business customers, they provide remote deposit capture, ACH origination, merchant card processing, debit card fraud prevention, and recently introduced MOOV for mobile payment acceptance. Digital services include online banking, mobile banking, mobile deposit, online bill pay, eStatements, and person-to-person payment capabilities.\n\nBank of the Valley distinguishes itself through its community-focused approach and emphasis on flexible, responsive service. Their stated philosophy centers on relationships, local decision-making authority, and the ability to adapt services to changing customer needs. The bank positions itself as accessible and personal compared to larger national institutions, with multiple branch locations and ATMs throughout their service area.\n\nAs a regional community bank, Bank of the Valley serves customers seeking local banking relationships and personalized service. However, consumers should note that specific product details, interest rates, fees, and loan terms are not clearly outlined on the website. Prospective customers will need to contact branches directly or visit in person for detailed pricing information. The bank does not appear to offer some digital-only or specialized financial products that larger banks provide. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.bankofthevalley.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Time certificates (CDs)",
+    "Loan products (personal and commercial)",
+    "Health savings accounts",
+    "Online banking platform",
+    "Mobile banking and mobile deposit",
+    "Online bill pay",
+    "Business remote deposit capture",
+    "ACH origination services",
+    "Merchant card processing",
+    "MOOV mobile payment solution for businesses"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1984",
-    "Local community bank with personal service",
-    "7 locations"
+    "Multiple branch locations across Nebraska (7 locations including downtown David City option)",
+    "Full-service banking including personal, agricultural, and business accounts",
+    "Mobile banking and deposit capabilities for convenience",
+    "Merchant card processing and MOOV mobile payment solution for businesses",
+    "ATM network access across service areas",
+    "Online bill pay and person-to-person payment services",
+    "Community-focused approach with local decision-making authority"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to Nebraska communities only",
+    "Website does not display current interest rates, APYs, or fee schedules",
+    "No information about minimum account balances or product-specific terms",
+    "Limited digital product innovation compared to larger regional or national banks",
+    "Loan products and terms not detailed on website, requiring direct customer contact"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "NE"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 25291,
   "latitude": 41.3429449877436,
   "longitude": -97.2389469841677,
@@ -88,18 +99,19 @@
   "rating": 4.3,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 4.1,
-    "transparency": 4.5,
+    "transparency": 4.3,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Small business owners and farmers in Nebraska seeking relationship banking",
+    "Local residents in Bellwood, David City, Platte Center, Columbus, Humphrey, and Schuyler seeking community banking",
+    "Agricultural customers needing specialized farming financial services",
+    "Customers who prefer in-person banking relationships over digital-only options"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of the Valley is best suited for customers in its Nebraska service areas seeking personalized, relationship-based community banking with local decision-making. The main caveat is that specific product details, rates, and fees are not published online, requiring direct contact with branches for pricing and terms evaluation.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-31",
   "cities_served": [
@@ -107,9 +119,9 @@
   ],
   "phone": "",
   "address": "404 State St, Bellwood, NE 68624",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
+  "processing_status": "pending_approval",
+  "quality_score": 12,
+  "enrichment_attempts": 1,
   "cfpb_data": {
     "found_in_cfpb": true,
     "cfpb_company_name": "VALLEY NATIONAL BANCORP",
@@ -119,5 +131,8 @@
     "data_period": "2023-present",
     "last_checked": "2026-03-31"
   },
-  "no_index": true
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

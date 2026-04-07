@@ -1,15 +1,15 @@
 {
   "name": "First Community Bank",
   "slug": "first-community-bank-newell",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Newell, IA. $117M in assets. 4 offices.",
-  "description_long": "First Community Bank is a community bank located in Newell, IA, established in 1912. The bank holds approximately $117M in total assets and $99M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "First Community Bank is a regional bank offering agricultural, consumer, and residential loans alongside deposit products like checking, savings, and CDs.",
+  "description_long": "First Community Bank operates as a traditional community bank with a strong presence in agricultural lending, as evidenced by their dedicated agriculture loans section and references to locations in rural areas (Newell, Iowa). The bank has modernized its operations with digital banking tools while maintaining traditional banking services. Their website indicates they serve both agricultural and non-agricultural customers across multiple loan and deposit product categories.\n\nFirst Community Bank offers a comprehensive suite of banking products including three loan categories (Agriculture, Consumer, Residential), deposit accounts (Checking, Savings, Certificates of Deposit), and specialized services like crop insurance and agency services. They provide digital conveniences including mobile banking via the FCB4U app, mobile wallet integration (Apple Pay, Google Pay, Samsung Pay), and the Brella fraud alert system for debit card monitoring. Educational resources are prominent on their site, with multiple financial calculators and cybersecurity information.\n\nThe bank distinguishes itself through specialized agricultural financing products including breeding stock loans, feeder livestock loans, machinery loans, farmland purchase/refinance options, and FSA Guaranty/Beginning Farmer programs. This focus on ag lending suggests deep expertise in rural and farming communities. They also emphasize consumer protection through fraud prevention tools and educational content about scams and identity theft.\n\nAs a regional community bank, First Community Bank serves customers seeking traditional banking services with agricultural lending expertise. However, the website provides limited detail on specific loan terms, APRs, fees, or competitive advantages compared to larger institutions. No information is available about deposit insurance specifics, minimum balance requirements, or detailed product pricing. Their agricultural focus may mean limited options for customers outside farming sectors. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.fcb4u.com",
   "affiliate_url": "",
@@ -24,23 +24,34 @@
     "currency": "USD"
   },
   "services": [
+    "Agriculture loans (lines of credit, breeding stock, feeder livestock, machinery, farmland)",
+    "Consumer loans",
+    "Residential mortgage loans",
     "Checking accounts",
     "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Certificates of Deposit (CDs)",
+    "Crop insurance services",
+    "Mobile banking via FCB4U app",
+    "Debit card fraud monitoring (Brella)",
+    "Mobile wallet services (Apple Pay, Google Pay, Samsung Pay)",
+    "Financial calculators (mortgage, retirement, loan consolidation, education planning)",
+    "Check ordering services"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1912",
-    "Local community bank with personal service",
-    "4 locations"
+    "Specialized agricultural lending products including breeding stock loans, feeder livestock loans, and FSA Guaranty programs",
+    "Digital banking convenience through FCB4U mobile app with real-time fraud alerts via Brella debit card monitoring",
+    "Mobile wallet integration with Apple Pay, Google Pay, and Samsung Pay for contactless payments",
+    "Extensive financial education tools including mortgage, retirement, loan consolidation, and rent-or-buy calculators",
+    "Community-focused with local branch locations and emphasis on agricultural industry partnerships",
+    "Cybersecurity education and identity theft protection resources prominently featured",
+    "Paperless eStatements option to reduce environmental impact"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks specific information on loan rates, APRs, fees, or minimum balance requirements",
+    "Limited transparency on deposit insurance coverage and account terms",
+    "Heavy agricultural focus may limit product relevance for non-farming consumers",
+    "No comparison tools or competitive rate information provided on website",
+    "Limited details on consumer loan amounts, approval timelines, or qualification criteria"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "IA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14904,
   "latitude": 42.6056269847814,
   "longitude": -95.0021610199484,
@@ -88,18 +99,18 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Farmers and agricultural businesses needing specialized lending for equipment, livestock, and land",
+    "Rural residents seeking community banking with local branch relationships",
+    "Consumers interested in mobile banking with fraud protection features"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "First Community Bank is best for farmers, agricultural businesses, and rural residents seeking community banking with specialized agricultural lending products and modern digital conveniences. The main caveat is that the website provides minimal pricing and terms information, making it difficult to assess competitiveness; prospective customers must contact branches directly for loan rates, fees, and specific product details.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -108,8 +119,11 @@
   "phone": "",
   "address": "119 S Fulton St, Newell, IA 50568",
   "website": "https://www.firstcommunitybank.com/locate",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

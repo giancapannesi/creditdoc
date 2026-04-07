@@ -1,14 +1,14 @@
 {
   "name": "Bank Of Madison",
   "slug": "bank-of-madison",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Madison, GA. $426M in assets. 4 offices.",
-  "description_long": "Bank Of Madison is a community bank located in Madison, GA, established in 1890. The bank holds approximately $426M in total assets and $380M in deposits. It operates 4 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Bank of Madison is a community-focused bank offering personal and business checking, savings, loans, and mortgage services with a commitment to local service and relationship banking.",
+  "description_long": "Bank of Madison operates as a traditional community bank serving the Madison, Georgia area (based on the .com domain and 706 area code). The bank emphasizes a deep commitment to its local community, with a stated philosophy of preserving history, respecting heritage, and building on foundations of professionalism and strong leadership. The institution positions itself as understanding and valuing individual customer relationships over transactional banking.\n\nThe bank offers a comprehensive suite of consumer and business financial products. For personal customers, they provide checking and savings accounts, personal loans, and mortgage services including a mortgage calculator tool. For business customers, they offer dedicated business checking and savings accounts, business loans, and related services. Online banking is available with digital sign-up and login capabilities, and the bank maintains a phone banking line at (706) 342-1953.\n\nBank of Madison differentiates itself through an explicit customer service philosophy centered on personalization, convenience, and community integration. Their stated commitments include getting to know customers individually by name, greeting them with smiles, understanding individual financial needs, and treating customers as they want to be treated. They emphasize continuous learning about financial products to stay current and demonstrate ongoing security of client financial information both in offices and online.\n\nAs a traditional brick-and-mortar community bank, Bank of Madison faces inherent limitations compared to larger institutions. The website provides minimal information about specific product features, rates, fees, or competitive advantages. There is no transparent disclosure of interest rates, account minimums, loan terms, or mortgage rates. The company actively warns about fraudulent calls and texts impersonating the bank, suggesting potential reputation confusion in the market. Without detailed product specifications or rate information publicly available, potential customers must contact the bank directly to evaluate competitiveness. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.bankofmadisonga.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business checking accounts",
+    "Business savings accounts",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business loans",
+    "Mortgage services",
+    "Mortgage calculator tool",
+    "Online banking with sign-up and sign-in",
+    "Phone banking at (706) 342-1953",
+    "Stolen or missing card reporting",
+    "Online banking tutorial videos"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1890",
-    "Local community bank with personal service",
-    "4 locations"
+    "Comprehensive product suite including personal and business checking, savings, loans, and mortgages in one institution",
+    "Online banking platform with tutorials for new users, enabling digital account management",
+    "Explicit commitment to personalized customer relationships and getting to know customers by name",
+    "Local community focus with emphasis on understanding individual financial needs",
+    "Active fraud prevention awareness, educating customers about unauthorized contact attempts",
+    "Both personal and business loan products available alongside deposit accounts",
+    "Mortgage calculator tool available on website for customer convenience"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "No interest rates, APYs, or fee schedules published on website; customers must contact bank directly for pricing",
+    "Minimal product detail transparency (no account minimums, loan terms, or mortgage rate information disclosed)",
+    "Limited geographic reach as a community bank; primarily serves Madison, Georgia area",
+    "Website lacks details about regulatory compliance, FDIC insurance status, or certifications",
+    "No online account opening process visible; signup appears to redirect to banking platform without clear enrollment steps"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "GA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 148,
   "latitude": 33.5967349883154,
   "longitude": -83.4672769734018,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Madison, Georgia residents seeking relationship-based banking with personalized service",
+    "Small business owners needing integrated business checking, savings, and lending solutions",
+    "Homebuyers in the Madison area seeking local mortgage origination and flexible service",
+    "Customers who prioritize knowing their banker personally and community reinvestment"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Bank of Madison is best for local Georgia residents and small business owners who value community banking relationships and personalized service over digital-first experiences or competitive rate shopping. The main caveat is that the bank does not publicly disclose rates, fees, or product terms online, requiring direct contact with the bank to evaluate competitiveness or suitability for specific financial needs.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "133 N Main St, Madison, GA 30650",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

@@ -1,14 +1,14 @@
 {
   "name": "Asian Bank",
   "slug": "asian-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Philadelphia, PA. $660M in assets. 3 offices.",
-  "description_long": "Asian Bank is a community bank located in Philadelphia, PA, established in 1999. The bank holds approximately $660M in total assets and $480M in deposits. It operates 3 office locations. Designated as a Asian or Pacific Islander Americans. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Unable to verify. Website returns access denied error, preventing profile completion.",
+  "description_long": "Asian Bank's website (http://www.theasianbank.com) is currently inaccessible, returning an HTTP 403 Access Denied error. This prevents verification of the company's current operations, service offerings, regulatory status, or legitimacy. Without access to official company information, a factual profile cannot be responsibly constructed. The error reference (#18.ddfcc317.1775520560.264018a) suggests a server-side access restriction rather than a temporary outage. For consumers considering this institution, the website unavailability raises immediate red flags about operational status and transparency. Traditional banking institutions maintain reliable web presence for customer access and regulatory compliance. The inability to access basic company information makes due diligence impossible. A legitimate financial services company should provide accessible, clear information about its services, licensing, and contact details. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "http://www.theasianbank.com",
   "affiliate_url": "",
@@ -31,15 +31,16 @@
     "FDIC insured deposits"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
+    "FDIC insured \u2014 deposits protected up to $250,000",
     "Established in 1999",
     "Local community bank with personal service",
     "3 locations"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website completely inaccessible \u2014 cannot verify company legitimacy or current operations",
+    "No verifiable information about regulatory licensing, FDIC insurance, or compliance status",
+    "Unable to confirm services offered, fee structures, or account types available",
+    "No accessible customer contact information or support channels visible"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +52,7 @@
   "states_served": [
     "PA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34759,
   "latitude": 39.9556999886202,
   "longitude": -75.1567779738255,
@@ -87,9 +88,9 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
@@ -98,7 +99,7 @@
     "Small business banking"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Cannot recommend until website accessibility and company legitimacy are verified. Consumers should contact the company through alternative channels and verify regulatory status with FDIC, OCC, or relevant banking authorities before opening accounts or depositing funds.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +107,10 @@
   ],
   "phone": "",
   "address": "1023 Race St, Philadelphia, PA 19107",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

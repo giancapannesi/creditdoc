@@ -1,14 +1,14 @@
 {
   "name": "Connections Bank",
   "slug": "connections-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Platte City, MO. $493M in assets. 10 offices.",
-  "description_long": "Connections Bank is a community bank located in Platte City, MO, established in 1934. The bank holds approximately $493M in total assets and $439M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank offering checking, savings, loans, and mobile banking through their Click app platform.",
+  "description_long": "Connections Bank is an FDIC-insured financial institution operating as a community-focused regional bank. The bank emphasizes personal relationships and local service, with multiple branch locations and a commitment to understanding individual customer needs. Their tagline \"Make the connection\" reflects their positioning around relationship-based banking rather than purely digital or national scale operations.\n\nThe bank offers a comprehensive suite of financial products including deposit accounts (specifically highlighted: Preferred Interest Checking with perks), online and mobile banking via their \"Click by Connections Bank\" application, and various loan products. Loan offerings include home loans, auto loans, business loans, and agricultural credit products. They provide standard banking services such as debit cards, check ordering, mobile deposit, text banking, and online payment processing.\n\nConnections Bank distinguishes itself through community engagement and member benefits programs. They operate the Platinum 50 Club for customers aged 50+, offering free cashier's checks, money orders, discounted safe deposit boxes, and organized social events and travel opportunities. This loyalty program indicates a focus on customer retention and relationship deepening beyond basic transactional banking. They also offer scholarships for high school seniors, demonstrating community investment.\n\nThe bank operates as a traditional brick-and-mortar institution with multiple physical locations, combining in-person service with modern digital banking tools. While comprehensive, they appear to be a regional or community bank rather than a national institution, limiting convenience for customers outside their service area. Their digital offerings (Click app, mobile deposit, card control features) are competitive, though detailed fee schedules and rate information are not available from the homepage content provided. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.connections.bank",
   "affiliate_url": "",
@@ -23,23 +23,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Preferred Interest Checking accounts",
+    "FDIC-insured savings and deposit accounts",
+    "Click by Connections Bank mobile and online banking app",
+    "Mobile deposit functionality",
+    "Text banking and balance alerts",
+    "Debit card with card control features",
+    "Home loan products",
+    "Auto loan products",
+    "Business loan products",
+    "Agricultural credit (Ag Credit)",
+    "Online loan payment processing",
+    "Check reordering through online banking",
+    "Lost debit card replacement assistance",
+    "ATM network access",
+    "Platinum 50 Club membership (age 50+)"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1934",
-    "Local community bank with personal service",
-    "10 locations"
+    "FDIC-insured deposits backed by full faith and credit of U.S. Government",
+    "Click mobile app offers mobile deposit, text banking, card control, and real-time balance alerts",
+    "Platinum 50 Club provides free cashier's checks, money orders, and free safe deposit box first year",
+    "Multiple loan product offerings including home, auto, business, and agricultural credit",
+    "Preferred Interest Checking account includes perks (specific benefits not detailed but highlighted as advantage)",
+    "Online and mobile banking available with card control feature to turn debit card on/off",
+    "Community-focused with scholarships for high school seniors and organized senior social events"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Regional or community bank with limited branch/ATM network availability outside service area",
+    "Specific interest rates, APRs, and fee schedules not disclosed on website homepage",
+    "Limited transparency on loan approval requirements and terms for auto, home, or business products",
+    "No information provided about credit monitoring, credit building tools, or credit card offerings",
+    "Platinum 50 Club has age 50+ restriction, excluding younger customers from certain benefits"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +65,7 @@
   "states_served": [
     "MO"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 14025,
   "latitude": 39.366402993615,
   "longitude": -94.773402034665,
@@ -87,18 +101,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers aged 50+ seeking community bank relationships with loyalty rewards and social engagement",
+    "Small business owners and agricultural borrowers needing specialized lending products",
+    "Regional customers seeking traditional banking with modern digital convenience (mobile deposit, card controls)",
+    "Homebuyers and auto loan seekers preferring local relationship banking over national lenders"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Connections Bank is best for customers seeking a traditional community bank with modern digital conveniences, particularly those aged 50+ interested in relationship banking and loyalty programs. Main caveats: service is likely limited to specific regions, detailed rates and fees are not publicly disclosed on their website, and loan approval requirements are not transparent without direct inquiry.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +121,11 @@
   ],
   "phone": "",
   "address": "1100 Branch St, Platte City, MO 64079",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-06",
+  "last_engine_run": "2026-04-06"
 }

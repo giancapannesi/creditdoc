@@ -1,13 +1,13 @@
 {
   "name": "Tcm Bank, National Association",
   "slug": "tcm-bank",
-  "category": "personal-loans",
+  "category": "credit-cards",
   "subcategories": [
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Tampa, FL. $395M in assets. 1 office.",
-  "description_long": "Tcm Bank, National Association is a community bank located in Tampa, FL, established in 1998. The bank holds approximately $395M in total assets and $303M in deposits. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "TCM Bank, N.A. is a credit card issuer and servicer for community banks, operating the Total Card Management\u00ae program serving 750+ partner banks and 530,000+ cardholders.",
+  "description_long": "TCM Bank, National Association is a subsidiary of ICBA Payments focused exclusively on credit card solutions for community banks. Founded on the principle of strengthening community banks rather than competing with them, TCM operates as a specialized credit card issuer and servicer rather than a consumer-facing bank. The company has built partnerships with over 750 community banks across the United States, serving more than 530,000 cardholders through these institutional relationships.\n\nTCM Bank offers three primary service lines: the Total Card Management\u00ae program, which allows community banks to offer credit cards without managing the program internally; portfolio purchasing services for acquiring existing credit card portfolios from partner banks; and cardholder services for existing cardholders issued through their bank partners. The company positions itself as the only credit card portfolio purchaser in the industry dedicated exclusively to working with community banks rather than competing against them. They handle underwriting, customer service, fraud management, and operational support on behalf of their agent banks.\n\nWhat distinguishes TCM Bank is its explicit commitment to the community banking sector and its refusal to cross-sell competing financial products to partner bank customers. The company emphasizes ease of partnership, with testimonials highlighting straightforward onboarding, responsive underwriting teams, and user-friendly online portals for agent banks. Their focus on supporting community banks' ability to compete with major credit card issuers differentiates them from national issuers that prioritize direct consumer acquisition.\n\nTCM Bank operates as a B2B service provider rather than a direct consumer lender, meaning individual consumers cannot apply directly for TCM credit cards\u2014they must apply through their community bank partner. The company does not publish details about card types, APRs, fees, rewards programs, or underwriting standards on their public website, as these vary by partner bank agreements. Consumers seeking TCM-issued cards must contact their community bank directly.",
   "logo_url": "",
   "website_url": "https://www.tcmbank.com",
   "affiliate_url": "",
@@ -22,23 +22,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Credit card issuance on behalf of community bank partners",
+    "Total Card Management\u00ae agent program for community banks",
+    "Credit card portfolio purchasing from community banks",
+    "Credit card underwriting and approval decisions",
+    "Cardholder customer service and support",
+    "Fraud prevention and risk management",
+    "Online portal and resources for agent banks",
+    "Onboarding and implementation support for new partner banks",
+    "Transaction and payment processing",
+    "Credit limit management and account servicing"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1998",
-    "Local community bank with personal service",
-    "1 location"
+    "Partners with 750+ community banks, providing cardholders access through trusted local institutions",
+    "Serves 530,000+ cardholders, demonstrating scale and stability in the credit card space",
+    "Only credit card portfolio purchaser dedicated to community banks rather than competing with them",
+    "Handles underwriting, fraud management, and customer service on behalf of partner banks",
+    "Offers portfolio purchasing services to help community banks acquire existing credit card customers",
+    "Provides user-friendly online portal and resources for agent bank partners",
+    "Responsive underwriting team that collaborates with partner banks on credit decisions"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Not a direct consumer lender\u2014individuals cannot apply for cards directly; must go through partner community bank",
+    "Limited public transparency on card types, APRs, fees, rewards, and specific underwriting criteria",
+    "Website lacks cardholder education content, comparison tools, or detailed product specifications",
+    "No consumer-facing application process or direct marketing of card features",
+    "Cardholder support available only for existing cardholders issued through partner banks"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +59,7 @@
   "states_served": [
     "FL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 34535,
   "latitude": 27.957072019557,
   "longitude": -82.5365959585349,
@@ -92,12 +101,12 @@
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers of community banks seeking credit card options issued through their local bank",
+    "Community banks looking to launch or expand credit card programs without internal management overhead",
+    "Community banks seeking to purchase existing credit card portfolios to grow customer base"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "TCM Bank is best for customers of community banks who want credit card options issued through their local financial institution, and for community banks seeking to offer credit cards without internal program management. The primary caveat is that TCM operates exclusively as a B2B service provider\u2014consumers cannot apply directly and must work through their community bank partner to access TCM-issued credit cards.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -105,8 +114,11 @@
   ],
   "phone": "",
   "address": "3501 E Frontage Rd, Tampa, FL 33607",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

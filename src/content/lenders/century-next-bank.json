@@ -1,14 +1,14 @@
 {
   "name": "Century Next Bank",
   "slug": "century-next-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Ruston, LA. $877M in assets. 7 offices.",
-  "description_long": "Century Next Bank is a community bank located in Ruston, LA, established in 1905. The bank holds approximately $877M in total assets and $761M in deposits. It operates 7 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "FDIC-insured community bank serving Louisiana with personal and business checking, savings, loans, and cash management services.",
+  "description_long": "Century Next Bank (CNext) is a community bank headquartered in Ruston, Louisiana, with locations in Lincoln, Ouachita, and Ashley County. The bank has been operating as a full-service financial institution offering traditional banking products and services to both personal and business customers. Their website emphasizes local community involvement and relationship-based banking with a personal touch.\n\nCNext offers a comprehensive suite of banking products including personal checking and savings accounts, business checking and savings accounts, and a variety of loan products. On the loan side, they provide mortgage loans, reverse mortgages, home equity lines of credit, home construction loans, personal loans, and business loans. For business customers specifically, they offer cash management tools including ACH services, employee payroll processing, consumer/business drafts, EFTPS tax payments, positive pay fraud protection, merchant services, night deposit, and remote deposit capture ($75/month).\n\nThe bank distinguishes itself through its emphasis on community involvement, local branch presence, and relationship-based service. They highlight their \"family\" culture and personal touch approach to banking. Their remote deposit capture service allows business customers to deposit checks electronically without visiting a branch, and they offer multiple payment channels including online banking, automated voice response, and chat support.\n\nAs a traditional community bank, CNext serves customers who prefer local banking relationships and branch access. However, the website provides limited information about specific loan terms, interest rates, fees beyond remote deposit capture pricing, or competitive advantages. Customers seeking detailed product comparisons or transparent pricing would need to contact the bank directly. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.cnext.bank",
   "affiliate_url": "",
@@ -23,23 +23,40 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business checking accounts",
+    "Business savings accounts",
+    "Mortgage loans",
+    "Reverse mortgages",
+    "Home equity lines of credit",
+    "Home construction loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business loans",
+    "Remote deposit capture ($75/month)",
+    "ACH services for electronic debits and credits",
+    "Employee payroll processing via direct deposit",
+    "Positive pay fraud detection",
+    "Merchant services (credit/debit card processing)",
+    "Night deposit service",
+    "EFTPS electronic tax payment",
+    "Online banking with login portal"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1905",
-    "Local community bank with personal service",
-    "7 locations"
+    "FDIC-insured with full faith and credit backing",
+    "Multiple physical branch locations in Louisiana for in-person service",
+    "Remote deposit capture for business customers enables check deposits without visiting branch ($75/month)",
+    "Comprehensive business banking services including ACH, payroll processing, and positive pay fraud protection",
+    "Multiple loan products including mortgages, reverse mortgages, HELOCs, and personal/business loans",
+    "24/7 access through online banking and automated voice response line (800-225-5113)",
+    "Active community involvement and local commitment demonstrated on website"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Website lacks transparent pricing for most products; only remote deposit capture fee listed ($75/month)",
+    "Limited information about interest rates, APRs, or loan terms to enable comparison shopping",
+    "No mention of mobile app or mobile banking capabilities despite online banking availability",
+    "Geographic limitation to Louisiana markets may not serve customers in other states",
+    "Minimal detail about business loan products, eligibility requirements, or underwriting timeline"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +68,7 @@
   "states_served": [
     "LA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 29700,
   "latitude": 32.5329219841086,
   "longitude": -92.6382560341797,
@@ -87,18 +104,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Louisiana residents and businesses seeking community bank relationships with local branch access",
+    "Small to mid-sized businesses needing cash management tools like ACH, payroll processing, and remote deposit",
+    "Homebuyers seeking mortgage products or existing homeowners interested in reverse mortgages or HELOCs",
+    "Customers prioritizing FDIC-insured deposits and traditional banking over digital-first services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Century Next Bank is best for Louisiana customers seeking traditional community banking with physical branches, relationship-based service, and access to both personal and business banking products including loans. Primary caveat: the website provides minimal transparency on pricing, rates, and terms\u2014customers must contact the bank directly for detailed product information and comparison shopping.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +124,11 @@
   ],
   "phone": "",
   "address": "505 N Vienna St, Ruston, LA 71270",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

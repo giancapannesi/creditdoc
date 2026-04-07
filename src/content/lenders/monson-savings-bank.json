@@ -1,14 +1,14 @@
 {
   "name": "Monson Savings Bank",
   "slug": "monson-savings-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Monson, MA. $754M in assets. 6 offices.",
-  "description_long": "Monson Savings Bank is a community bank located in Monson, MA, established in 1872. The bank holds approximately $754M in total assets and $652M in deposits. It operates 6 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Monson Savings Bank is a local, FDIC-insured community bank offering checking, savings, mortgages, business loans, and credit products with a focus on homeownership assistance.",
+  "description_long": "Monson Savings Bank is a community-based bank that has established itself as a trusted local financial institution, evidenced by their '150th Anniversary' milestone mentioned on their website. As a Member FDIC institution, all customer deposits are fully insured through both the FDIC and DIF, providing security up to applicable limits. The bank operates multiple physical locations with extended hours and digital banking capabilities, serving both personal and business customers across their service area.\n\nThe bank offers a comprehensive range of banking products including multiple checking account tiers (MoneyMaking Checking, CashBack Checking, Student Checking, Free Checking, Fresh Start Checking), savings accounts (MoneyMaking Savings, Statement Savings, Smart Start Savings), and certificates of deposit. On the lending side, Monson Savings provides personal loans, home mortgages with specialized first-time homebuyer programs, home equity lines of credit, construction loans, and a robust business lending portfolio including SBA loans, commercial real estate loans, and business lines of credit. They also issue both personal and business credit cards, including a secured credit card option for credit building.\n\nMonson Savings distinguishes itself through specialized homeownership programs, including a First Time Homebuyer Loan Program, partnerships with homeownership assistance programs, Mass Save\u00ae energy efficiency financing, and HEAT Loans. Their CashBack Checking account specifically advertises up to $240 annual cash back with nationwide ATM refunds. The bank emphasizes strong community involvement through a Community Giving Initiative and sponsorship programs. They provide robust digital banking services including Zelle\u00ae money transfer, remote check deposit, mobile wallet integration, and comprehensive cash management services for business customers.\n\nMonson Savings Bank is well-suited for customers seeking community-focused banking with established local presence and personalized service. However, like most traditional banks, they likely have less competitive rates on deposits compared to online-only banks, and their geographic service area may be limited to their specific region. Customers should compare their rates and fee structures against national alternatives, and verify that their specific location is served by the bank before opening an account. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.monsonsavings.bank",
   "affiliate_url": "",
@@ -23,23 +23,33 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts (MoneyMaking, CashBack, Student, Free, Fresh Start tiers)",
+    "Personal savings accounts (MoneyMaking, Statement, Smart Start, Holiday Club)",
+    "Certificates of Deposit (CDs) for both personal and business customers",
+    "Individual Retirement Accounts (IRAs)",
+    "Home mortgage loans with First Time Homebuyer programs",
+    "Home equity lines of credit (HELOCs)",
+    "Construction loans",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Business checking and savings accounts",
+    "SBA loans and commercial real estate loans",
+    "Personal and business credit cards (including secured credit cards)",
+    "Digital banking, mobile wallet, Zelle\u00ae transfers, and remote check deposit"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1872",
-    "Local community bank with personal service",
-    "6 locations"
+    "CashBack Checking account pays up to $240 annually with nationwide ATM refunds included",
+    "Comprehensive homeownership programs including First Time Homebuyer Loan Program and Mass Save\u00ae energy efficiency financing",
+    "100% deposit insurance through both FDIC and DIF, providing enhanced security",
+    "Established community bank with 150-year history and multiple physical locations",
+    "Robust digital banking including Zelle\u00ae money transfer, remote check deposit, and mobile wallet",
+    "Full business banking suite with SBA loans, commercial lending, and cash management services",
+    "Secured credit card option available for credit building purposes"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Geographic service may be limited to their regional footprint; not a national or online-only bank",
+    "Rates not displayed on homepage; customers must contact bank or visit locations for current rate quotes",
+    "No mention of fee transparency or account maintenance costs in available website content",
+    "Limited information about minimum opening deposits or account qualification requirements online"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +61,7 @@
   "states_served": [
     "MA"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 90245,
   "latitude": 42.0987480283243,
   "longitude": -72.3144569212172,
@@ -87,18 +97,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "First-time homebuyers seeking specialized mortgage programs and homeownership assistance",
+    "Local business owners needing comprehensive commercial lending and cash management services",
+    "Customers valuing community banking relationships and established local presence over online convenience",
+    "Individuals in their service area seeking FDIC-insured savings with cash back rewards"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Monson Savings Bank is best for customers in their service area seeking traditional community banking with specialized homeownership programs, strong deposit insurance, and established local presence. The main caveat is that as a regional community bank, they likely cannot compete with online banks on deposit rates, and their service area is geographically limited\u2014customers should verify their location is served before applying.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +117,11 @@
   ],
   "phone": "",
   "address": "146 Main St, Monson, MA 01057",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }

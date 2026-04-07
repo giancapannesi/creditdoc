@@ -1,14 +1,14 @@
 {
   "name": "Legacy National Bank",
   "slug": "legacy-national-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Springdale, AR. $1176M in assets. 10 offices.",
-  "description_long": "Legacy National Bank is a community bank located in Springdale, AR, established in 2005. The bank holds approximately $1176M in total assets and $1035M in deposits. It operates 10 office locations. Designated as a NONE. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Legacy National Bank is a locally owned community bank headquartered in Springdale, Arkansas, offering personal and business checking, savings, loans, and digital banking services across 10 branch locations.",
+  "description_long": "Legacy National Bank is a community-focused financial institution based in Springdale, Arkansas, with its headquarters at 4055 W. Sunset. The bank operates 10 branch locations throughout Northwest Arkansas, including offices in Springdale, Rogers (Pinnacle branch), Fayetteville, Bentonville, Gravette, Hiwasse, and Lincoln. The bank emphasizes its local ownership and commitment to the Northwest Arkansas community as core values.\n\nThe bank offers a comprehensive range of financial services including personal checking and savings accounts, personal and home loans, commercial checking and business services, business credit cards, agricultural loans, and home equity financing. They provide digital banking through their LegacyNOW platform with online and mobile banking capabilities. Customers have access to free ATMs worldwide and can use Interactive Teller Machines (ITMs) at most locations. The bank also offers check reordering services and secure document upload capabilities for loan applications.\n\nLegacy National Bank distinguishes itself through its emphasis on personalized service and community connection. Rather than operating as a large national chain, the bank positions itself as locally owned and dedicated to helping customers achieve unique financial goals. They offer specialized products including agricultural loans alongside standard retail banking, suggesting a regional focus on serving both urban and rural communities. The bank also emphasizes that account options are designed to fit individual needs.\n\nAs a traditional community bank, Legacy National Bank is best suited for customers seeking personal relationships with their financial institution and those with ties to the Northwest Arkansas region. However, the website provides limited information about loan terms, interest rates, fees, or specific product details, making it difficult to compare competitiveness against larger regional or national banks. The bank's service hours vary by location, and some branches have reduced lobby hours, which may not suit customers needing extended weekday availability. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.legacyar.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
+    "Personal checking accounts",
+    "Personal savings accounts",
+    "Business checking accounts",
+    "Home loans and mortgage financing",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Commercial loans",
+    "Construction loans",
+    "Agricultural loans",
+    "Business credit cards",
+    "Personal credit cards",
+    "Online and mobile banking (LegacyNOW platform)",
+    "Interactive Teller Machine (ITM) access"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 2005",
-    "Local community bank with personal service",
-    "10 locations"
+    "10 convenient branch locations across Northwest Arkansas (Springdale, Rogers, Fayetteville, Bentonville, Gravette, Hiwasse, Lincoln)",
+    "Free ATM access worldwide for customers",
+    "Specialized agricultural loan products available for rural customers",
+    "Interactive Teller Machines (ITMs) at most locations for extended access (7am-7pm weekdays, 9am-12pm Saturdays)",
+    "LegacyNOW digital banking platform with online and mobile banking capabilities",
+    "Locally owned community bank with emphasis on personalized service",
+    "Comprehensive loan offerings including home loans, personal loans, commercial loans, and construction loans"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited information on website about interest rates, APRs, or fee structures for products",
+    "Some branch locations have reduced lobby hours (South Springdale only 10am-3pm, Downtown Bentonville has no drive-thru)",
+    "No mention of account opening requirements, minimum balances, or product-specific terms",
+    "Geographic limitation to Northwest Arkansas region may restrict availability for out-of-state customers",
+    "Website lacks details on customer service ratings, security features, or insurance coverage details"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "AR"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 57953,
   "latitude": 36.1746919882366,
   "longitude": -94.1752782250639,
@@ -84,21 +95,22 @@
       "FDIC Cert #57953"
     ]
   },
-  "rating": 4.1,
+  "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.0,
+    "transparency": 3.8,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Customers living or working in Northwest Arkansas seeking personal relationships with their bank",
+    "Agricultural businesses and rural customers needing specialized farm lending",
+    "Small business owners requiring local business banking and personalized service",
+    "Customers willing to use digital banking (LegacyNOW) combined with branch services"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Legacy National Bank is best for Northwest Arkansas residents and businesses seeking community banking with personal service and local decision-making. The main caveat is the regional geographic limitation and lack of transparent pricing information on the website, which makes it difficult to assess competitiveness on rates and fees compared to larger financial institutions.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,10 @@
   ],
   "phone": "",
   "address": "4055 W Sunset Ave, Springdale, AR 72762",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-07"
 }

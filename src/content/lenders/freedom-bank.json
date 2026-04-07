@@ -1,14 +1,14 @@
 {
   "name": "Freedom Bank",
   "slug": "freedom-bank",
-  "category": "personal-loans",
+  "category": "banking",
   "subcategories": [
     "community-bank",
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Alamo, TX. $302M in assets. 6 offices.",
-  "description_long": "Freedom Bank is a community bank located in Alamo, TX, established in 1958. The bank holds approximately $302M in total assets and $247M in deposits. It operates 6 office locations. Designated as a Hispanic American. FDIC insured — deposits protected up to $250,000.",
+  "description_short": "Community bank headquartered in South Texas offering personal and business banking with Saturday hours, same-day loan decisions, and local decision-making.",
+  "description_long": "Freedom Bank is a community bank rooted in South Texas with over six decades of history serving the region. The bank emphasizes local ownership and reinvestment in South Texas communities, particularly the Rio Grande Valley, with a stated commitment to supporting businesses, schools, and neighborhoods. They position themselves as a relationship-focused alternative to larger national banks.\n\nFreedom Bank offers comprehensive personal banking services including checking and savings accounts, CDs, credit cards, mortgages, personal and auto loans, lines of credit, safe deposit boxes, mobile banking, and Zelle integration. On the business side, they provide commercial checking, business credit cards, commercial loans, lines of credit, and merchant services. They also highlight a \"guided switching\" service where a personal banker assists customers in transitioning from other banks. Current CD rates advertised include 4.07% APY on 6-month IRA CDs and 3.82% APY on 12-month IRA CDs (with $1,000 minimum).\n\nThe bank differentiates itself through several operational choices: Saturday banking hours, same-day loan decisions with local loan officers who have approval authority, and emphasis on personal relationships (\"known by name, not by number\"). They market themselves as having understanding of South Texas-specific business sectors including agriculture and ranching. The bank is FDIC insured and holds CDFI (Community Development Financial Institution) status.\n\nAs a regional community bank, Freedom Bank is best suited for customers in South Texas who value local decision-making and relationship banking over digital-first experiences or extensive branch networks. The main limitation is geographic scope\u2014they appear to operate primarily in South Texas, making them inaccessible to customers outside that region. Many banks offer installment loans with fixed monthly payments, giving borrowers a clear payoff timeline.",
   "logo_url": "",
   "website_url": "https://www.freedombanktexas.com",
   "affiliate_url": "",
@@ -23,23 +23,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts",
+    "Certificates of Deposit (CDs) including IRA CDs",
+    "Personal and business credit cards",
+    "Home mortgages with competitive rates",
+    "Personal loans and auto loans",
+    "Commercial loans and lines of credit for businesses",
+    "Safe deposit boxes",
+    "Mobile banking app",
+    "Zelle money transfer integration",
+    "Merchant services for businesses",
+    "Guided account switching service",
+    "Business checking accounts"
   ],
   "pros": [
-    "FDIC insured — deposits protected up to $250,000",
-    "Established in 1958",
-    "Local community bank with personal service",
-    "6 locations"
+    "Saturday banking hours, unusual for traditional banks",
+    "Same-day loan decisions with local loan officers who have approval authority",
+    "CDFI status indicates commitment to underserved communities",
+    "Advertised CD rates (4.07% on 6-month IRA CDs) competitive at time of website",
+    "Personal banker assignment for account switching assistance",
+    "Deep local expertise in South Texas agriculture, ranching, and small business sectors",
+    "FDIC insured with transparent emphasis on customer protection"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Limited geographic footprint restricted to South Texas, not accessible nationally",
+    "Website does not disclose checking/savings account rates or monthly fees",
+    "No mention of online-only accounts or digital banking features beyond mobile app and Zelle",
+    "Limited information on credit card rewards, terms, or approval criteria",
+    "No mention of investment services, wealth management, or advisory services"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +62,7 @@
   "states_served": [
     "TX"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 17881,
   "latitude": 26.1902369867034,
   "longitude": -98.1230370225958,
@@ -87,18 +98,19 @@
   "rating": 4.2,
   "rating_breakdown": {
     "value": 5.0,
-    "effectiveness": 3.5,
+    "effectiveness": 3.7,
     "customer_service": 3.8,
-    "transparency": 4.2,
+    "transparency": 4.0,
     "ease_of_use": 4.5
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "South Texas small business owners in agriculture, ranching, or retail who value quick loan decisions",
+    "Families and individuals in the Rio Grande Valley who prefer relationship banking and Saturday hours",
+    "Community-minded customers who want their deposits reinvested locally",
+    "Customers switching from larger banks who value personal banker support through transition"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Freedom Bank is best for South Texas residents and business owners who prioritize relationship banking, local decision-making, and Saturday accessibility over digital convenience or national branch networks. The primary caveat is severe geographic limitation\u2014the bank serves only South Texas and is not an option for customers outside that region.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -106,8 +118,11 @@
   ],
   "phone": "",
   "address": "533 N Alamo Rd, Alamo, TX 78516",
-  "processing_status": "raw",
-  "quality_score": 8,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-07",
+  "last_engine_run": "2026-04-07"
 }
