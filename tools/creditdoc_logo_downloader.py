@@ -38,7 +38,8 @@ LENDER_DIR = PROJECT_ROOT / "src" / "content" / "lenders"
 LOGO_DIR = PROJECT_ROOT / "public" / "logos"
 
 # Favicon fallback APIs (for lenders with no logo_url)
-GOOGLE_FAVICON = "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://{host}&size=128"
+# GOOGLE_FAVICON REMOVED — returns Google-branded icons, trademark liability
+DDG_FAVICON = "https://icons.duckduckgo.com/ip3/{host}.ico"
 ICON_HORSE = "https://icon.horse/icon/{host}"
 
 RATE_LIMIT = 10
@@ -143,10 +144,10 @@ def download_url(url, timeout=15):
 
 
 def download_favicon(host):
-    """Fallback: try faviconV2 then icon.horse."""
-    content, ct = download_url(GOOGLE_FAVICON.format(host=host))
+    """Fallback: try DDG then icon.horse. Google faviconV2 removed (trademark risk)."""
+    content, ct = download_url(DDG_FAVICON.format(host=host))
     if content:
-        return content, ct, "faviconV2"
+        return content, ct, "DDG"
 
     content, ct = download_url(ICON_HORSE.format(host=host))
     if content:
