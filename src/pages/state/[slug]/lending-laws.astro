@@ -16,7 +16,7 @@ export function getStaticPaths() {
 
 const { stateInfo, data } = Astro.props;
 const lenders = getLendersInState(stateInfo.abbr);
-const creditRepairLenders = lenders.filter(l => l.category === 'fix-my-credit' || l.category === 'credit-counseling');
+const creditRepairLenders = lenders.filter(l => l.category === 'credit-repair' || l.category === 'credit-counseling');
 
 const cr = data.credit_repair_laws || {};
 const lt = data.lending_types || {};

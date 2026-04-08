@@ -1,7 +1,7 @@
 {
   "name": "First US Financials",
   "slug": "first-us-financials",
-  "category": "fix-my-credit",
+  "category": "credit-repair",
   "subcategories": [],
   "description_short": "First US Financials — Credit counseling service in San Diego, CA.",
   "description_long": "First US Financials provides Credit counseling service. Located at 12707 High Bluff Dr suite 28, San Diego, CA 92130.",
@@ -101,7 +101,7 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 0,
   "enrichment_attempts": 0,
   "last_engine_run": "2026-03-31",
@@ -110,5 +110,6 @@
     "phone": "",
     "address": ""
   },
-  "website_needs_review": true
+  "website_needs_review": true,
+  "quarantine_reason": "not_consumer_finance"
 }

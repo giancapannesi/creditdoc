@@ -1,10 +1,10 @@
 {
   "name": "Western Union Money Order Only",
   "slug": "western-union-money-order-only-del-valle",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union Money Order Only — Money order service in Del Valle, TX.",
-  "description_long": "Western Union Money Order Only provides Money order service. Located at 2001 E Hwy 71 E, Del Valle, TX 78617.",
+  "description_short": "Western Union operates a global money transfer and financial services network with 500,000+ agent locations offering money orders, bill payments, and cash pickup services.",
+  "description_long": "Western Union is a long-established financial services company operating one of the world's largest agent-based networks for money movement. Founded over 150 years ago, the company has evolved from telegraph-based communications to become a primary provider of cross-border and domestic money transfer services. The company maintains an extensive U.S. presence through partnerships with major retailers including Walmart, Safeway, City Market, Circle K, and Kroger, making their services widely accessible across the country.\n\nWestern Union's core offerings include money transfer (both domestic and international), money order issuance, cash pickup services, bill payment capabilities, and mobile top-up functionality. Customers can initiate transfers online through WU.com with 24/7 access, then complete transactions in-store at agent locations during business hours. The platform supports multiple languages including English, Spanish, Haitian Creole, Chinese, French, and Vietnamese, reflecting their diverse customer base. Additional services include Western Union Rewards loyalty programs, prepaid card services, inmate payment options, and delivery method management.\n\nWestern Union's primary distinction is the sheer scale and ubiquity of their agent network\u2014with 500,000+ locations worldwide and extensive U.S. coverage through grocery chains and convenience stores. This retail-based model provides physical accessibility that purely digital competitors cannot match. Their multi-language support, long operational history, and brand recognition in immigrant communities also differentiate them significantly. The ability to start transactions online and complete them in-store offers flexibility that pure digital services lack.\n\nA critical limitation is that Western Union operates as a money transfer intermediary, not a bank or credit union, meaning they do not offer traditional banking products, credit-building features, or lending services. Money order services are location-specific (as evidenced by the notation at Circle K #0682 location), suggesting inconsistent availability. Their fee structure is not transparent on the location finder, and historically Western Union has faced criticism for high fees on international transfers. The company is best suited for consumers who need physical locations for cash-based transactions rather than those seeking comprehensive financial services or investment in credit history.",
   "logo_url": "",
   "website_url": "https://location.westernunion.com/",
   "affiliate_url": "",
@@ -58,18 +58,48 @@
     "transparency": 2.0,
     "ease_of_use": 3.9
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Massive agent network of 500,000+ global locations with extensive U.S. presence at major retailers (Walmart, Safeway, City Market, Circle K, Kroger)",
+    "24/7 online initiation through WU.com with flexible in-store completion based on agent hours",
+    "Multi-language support (English, Spanish, Haitian Creole, Chinese, French, Vietnamese) serving diverse customer populations",
+    "Physical cash pickup capability eliminating need for bank accounts\u2014critical for unbanked populations",
+    "Fast transfer processing with real-time tracking capabilities for sent money",
+    "Loyalty rewards program (Western Union Rewards) available to frequent users",
+    "Specialized services including inmate payments, mobile top-ups, and bill payment options"
+  ],
+  "cons": [
+    "Money order services not available at all locations\u2014website explicitly notes location-specific availability restrictions",
+    "No transparent fee structure displayed on location finder; historical pattern of high fees on international transfers",
+    "Operates solely as transfer intermediary without banking products, credit-building tools, or lending services",
+    "Orange Wallet payment method shown as temporarily unavailable, suggesting service reliability issues",
+    "In-store completion dependent on agent location hours, limiting true 24/7 access despite online-first capability"
+  ],
+  "best_for": [
+    "Unbanked and underbanked consumers without traditional bank accounts needing physical cash access",
+    "Immigrant communities sending remittances internationally with multi-language support needs",
+    "Consumers in rural areas relying on retail-based agent networks for financial services",
+    "Users requiring both online convenience and in-person transaction capability"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for unbanked and underbanked consumers who need physical locations to send money, receive cash, or pay bills, particularly immigrant communities utilizing their extensive retail agent network and multilingual support. The primary caveat is that money order availability is location-specific and inconsistent, and the company charges fees on transactions without transparent pricing displayed on their website.",
   "services": [
-    "Money order service"
+    "Domestic money transfers (send and receive)",
+    "International money transfers",
+    "Money order issuance",
+    "Cash pickup services at agent locations",
+    "Bill payment processing",
+    "Mobile top-up (phone credit)",
+    "Online transaction initiation (WU.com with 24/7 access)",
+    "In-store payment completion",
+    "Money transfer tracking",
+    "Western Union Rewards loyalty program",
+    "Prepaid card services",
+    "Inmate payment services"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-04-03",
   "review_status": "draft",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x8644b7d2ee4caee1:0xbf7c0dff5b932358",
     "google_rating": 1.0,
@@ -101,14 +131,15 @@
       ]
     }
   },
-  "processing_status": "raw",
-  "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "processing_status": "ready_for_index",
+  "quality_score": 10,
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-08",
   "no_index": true,
   "website_needs_review": true,
   "contact": {
     "phone": "",
     "address": ""
-  }
+  },
+  "has_been_enriched": true
 }

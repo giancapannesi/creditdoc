@@ -14,7 +14,7 @@ interface Props {
 const { category } = Astro.props;
 
 // Credit repair categories → The Credit People CTA
-const isCreditRepair = ['credit-repair', 'fix-my-credit', 'debt-relief'].includes(category);
+const isCreditRepair = ['credit-repair', 'debt-relief'].includes(category);
 // Loan categories → Lead Stack loan matching
 const isLoans = ['personal-loans', 'emergency-cash', 'payday-alternatives'].includes(category);
 // Credit building → WalletHub

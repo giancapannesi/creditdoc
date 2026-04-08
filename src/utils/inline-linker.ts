@@ -46,8 +46,14 @@ const MONEY_LINKS: MoneyLink[] = [
   { phrase: 'credit score simulator', url: '/tools/credit-score-simulator/', title: 'Credit Score Simulator' },
   { phrase: 'borrowing power', url: '/tools/borrowing-power-quiz/', title: 'Borrowing Power Quiz' },
   { phrase: 'debt payoff calculator', url: '/tools/debt-payoff-calculator/', title: 'Debt Payoff Calculator' },
-  { phrase: 'credit repair', url: '/categories/fix-my-credit/', title: 'Credit Repair Companies' },
+  { phrase: 'credit repair', url: '/categories/credit-repair/', title: 'Credit Repair Companies' },
+  { phrase: 'fix my credit', url: '/categories/credit-repair/', title: 'Credit Repair Companies' },
   { phrase: 'debt relief', url: '/categories/debt-relief/', title: 'Debt Relief Services' },
+  { phrase: 'best instalment loans', url: '/best/best-personal-loan-lenders/', title: 'Best Personal Loan Lenders' },
+  { phrase: 'personal installment loans', url: '/best/best-personal-loan-lenders/', title: 'Best Personal Loan Lenders' },
+  { phrase: 'installment lenders', url: '/best/best-personal-loan-lenders/', title: 'Best Personal Loan Lenders' },
+  { phrase: 'instalment loan', url: '/categories/personal-loans/', title: 'Personal Loan Lenders' },
+  { phrase: 'installment loans', url: '/categories/personal-loans/', title: 'Personal Loan Lenders' },
   { phrase: 'personal loans', url: '/categories/personal-loans/', title: 'Personal Loan Lenders' },
 ];
 

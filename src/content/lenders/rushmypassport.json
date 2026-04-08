@@ -1,7 +1,7 @@
 {
   "name": "RushMyPassport",
   "slug": "rushmypassport",
-  "category": "fix-my-credit",
+  "category": "credit-repair",
   "subcategories": [],
   "description_short": "RushMyPassport — Passport office in New York, NY.",
   "description_long": "RushMyPassport provides Passport office. Located at 60 E 42nd St #3220, New York, NY 10165.",
@@ -101,7 +101,7 @@
       ]
     }
   },
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 1,
   "enrichment_attempts": 0,
   "last_engine_run": "2026-03-31",
@@ -110,5 +110,6 @@
   "contact": {
     "phone": "",
     "address": ""
-  }
+  },
+  "quarantine_reason": "not_consumer_finance"
 }
