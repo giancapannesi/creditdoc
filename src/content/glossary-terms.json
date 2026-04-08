@@ -1,343 +1,17 @@
 [
   {
-    "slug": "apr",
-    "term": "APR",
-    "full_form": "Annual Percentage Rate",
-    "category": "interest-and-rates",
-    "plain_definition": "The total yearly cost of borrowing money, including the interest rate plus any fees the lender charges. Think of it as the 'true price tag' on a loan.",
-    "why_it_matters": "Lenders must show APR by law (Truth in Lending Act) because the interest rate alone can hide fees. Comparing APR across lenders is the most reliable way to find the cheapest loan.",
-    "example": "You borrow $10,000 at 6% interest for 3 years, but there's a $300 origination fee. The interest rate is 6%, but the APR is 6.9% because it includes that fee. You'd pay $304/month and $946 total in interest.",
-    "page_contexts": ["state", "lending-laws", "review-personal-loans", "review-emergency-cash", "review-mortgages", "review-business-loans", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "interest-rate",
-    "term": "Interest Rate",
-    "full_form": "Interest Rate",
-    "category": "interest-and-rates",
-    "plain_definition": "The percentage a lender charges you for borrowing their money, calculated on the amount you still owe. It's the lender's profit for taking the risk of lending to you.",
-    "why_it_matters": "Even a 1% difference in interest rate can cost you thousands over a loan's life. Lower rates mean less money out of your pocket.",
-    "example": "On a $20,000 car loan for 5 years: at 5% you pay $2,645 in interest. At 8% you pay $4,332. That 3% difference costs you $1,687 extra.",
-    "page_contexts": ["state", "lending-laws", "review-personal-loans", "review-mortgages", "review-business-loans", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "compound-interest",
-    "term": "Compound Interest",
-    "full_form": "Compound Interest",
-    "category": "interest-and-rates",
-    "plain_definition": "Interest calculated on both the original amount borrowed AND the interest that's already been added. It's 'interest on interest' — and it makes debt grow faster than you'd expect.",
-    "why_it_matters": "Credit cards and many loans use compound interest. If you only make minimum payments, compound interest is why a $3,000 balance can take 15 years to pay off.",
-    "example": "You owe $1,000 at 20% annual interest compounded monthly. After month 1 you owe $1,016.67. Month 2, interest is charged on $1,016.67 (not $1,000), so you owe $1,033.61. After 1 year without payments: $1,219.",
-    "page_contexts": ["state", "review-personal-loans", "review-emergency-cash", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "simple-interest",
-    "term": "Simple Interest",
-    "full_form": "Simple Interest",
-    "category": "interest-and-rates",
-    "plain_definition": "Interest calculated only on the original amount borrowed, not on accumulated interest. It's the simpler, cheaper type of interest.",
-    "why_it_matters": "Most auto loans and some personal loans use simple interest. Paying early saves you money because interest is only on what you still owe.",
-    "example": "You borrow $5,000 at 8% simple interest for 2 years. Interest = $5,000 x 0.08 x 2 = $800 total. You repay $5,800. With compound interest, you'd owe more.",
-    "page_contexts": ["review-personal-loans", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "fixed-rate",
-    "term": "Fixed Rate",
-    "full_form": "Fixed Interest Rate",
-    "category": "interest-and-rates",
-    "plain_definition": "An interest rate that stays the same for the entire life of the loan. Your monthly payment never changes.",
-    "why_it_matters": "Fixed rates protect you from market changes. If rates go up, your payment stays the same. The tradeoff: fixed rates are usually slightly higher than starting variable rates.",
-    "example": "You get a 30-year mortgage at 6.5% fixed. Whether rates rise to 9% or drop to 4% over the next 30 years, your payment stays at $1,264/month on a $200,000 loan.",
-    "page_contexts": ["state", "lending-laws", "review-personal-loans", "review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "variable-rate",
-    "term": "Variable Rate",
-    "full_form": "Variable (Adjustable) Interest Rate",
-    "category": "interest-and-rates",
-    "plain_definition": "An interest rate that can go up or down over time, usually tied to a benchmark like the prime rate. Your monthly payment changes when the rate changes.",
-    "why_it_matters": "Variable rates often start lower than fixed rates to attract borrowers, but they can increase significantly. Many people who got hurt in the 2008 crisis had adjustable-rate mortgages.",
-    "example": "You start with a 5/1 ARM mortgage at 5.5%. For the first 5 years you pay $1,136/month on $200,000. Then the rate adjusts to 7.5%, and your payment jumps to $1,398/month.",
-    "page_contexts": ["lending-laws", "review-personal-loans", "review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "mapr",
-    "term": "MAPR",
-    "full_form": "Military Annual Percentage Rate",
-    "category": "interest-and-rates",
-    "plain_definition": "A special APR calculation used for military servicemembers that includes ALL costs — fees, insurance, and add-ons — capped at 36% by federal law.",
-    "why_it_matters": "The Military Lending Act protects active-duty servicemembers and their families from predatory lending. Any lender charging above 36% MAPR to military is breaking federal law.",
-    "example": "A payday lender charges a $15 fee per $100 borrowed for 2 weeks. For civilians, that's technically legal in some states. For military: that works out to 391% MAPR — illegal under the MLA.",
-    "page_contexts": ["lending-laws", "review-emergency-cash"]
-  },
-  {
-    "slug": "prime-rate",
-    "term": "Prime Rate",
-    "full_form": "Prime Rate",
-    "category": "interest-and-rates",
-    "plain_definition": "The base interest rate that banks charge their most creditworthy customers. Most consumer loans are priced as 'prime plus' a certain percentage based on your risk.",
-    "why_it_matters": "When the Federal Reserve raises interest rates, the prime rate goes up, and so does the rate on your credit cards, HELOCs, and variable-rate loans.",
-    "example": "The prime rate is 8.5%. Your credit card charges 'prime + 15%', so your rate is 23.5%. If the Fed raises rates by 0.25%, your credit card rate goes to 23.75%.",
-    "page_contexts": ["state", "lending-laws", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "usury-rate",
-    "term": "Usury Rate",
-    "full_form": "Usury Rate (Interest Rate Cap)",
-    "category": "interest-and-rates",
-    "plain_definition": "The maximum interest rate a lender can legally charge in a particular state. Charging above this rate is called 'usury' and is illegal.",
-    "why_it_matters": "Usury laws are your main legal protection against predatory interest rates. But beware: some states have weak or no usury caps, and federal banks can sometimes override state limits.",
-    "example": "New York caps interest at 16% for most consumer loans (25% is criminal usury). If a lender tries to charge you 30% in NY, that loan is unenforceable — you could fight it in court.",
-    "page_contexts": ["state", "lending-laws", "review-emergency-cash", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "penalty-apr",
-    "term": "Penalty APR",
-    "full_form": "Penalty Annual Percentage Rate",
-    "category": "interest-and-rates",
-    "plain_definition": "A higher interest rate that kicks in when you violate your card agreement — usually by paying late or going over your credit limit. It can be nearly double your normal rate.",
-    "why_it_matters": "One late payment can trigger a penalty APR of 29.99% on your entire balance, and it can last 6 months or longer. Read your card agreement to know the triggers.",
-    "example": "Your credit card rate is 19.99%. You miss a payment by 61+ days. The bank triggers a 29.99% penalty APR. On a $5,000 balance, that's $125/month in interest instead of $83.",
-    "page_contexts": ["review-credit-repair", "wellness-understanding-credit"]
-  },
-  {
-    "slug": "principal",
-    "term": "Principal",
-    "full_form": "Loan Principal",
-    "category": "how-loans-work",
-    "plain_definition": "The original amount of money you borrowed, before any interest or fees are added. It's the 'real' amount of your debt.",
-    "why_it_matters": "Your interest is calculated on the principal. Paying extra toward principal (not just interest) is the fastest way to reduce your total cost and pay off a loan early.",
-    "example": "You borrow $25,000 for a car. That $25,000 is your principal. Your first payment of $450 might split as $150 toward interest and $300 toward principal, bringing your balance to $24,700.",
-    "page_contexts": ["state", "lending-laws", "review-personal-loans", "review-business-loans", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "loan-term",
-    "term": "Loan Term (Tenor)",
-    "full_form": "Loan Term / Tenor",
-    "category": "how-loans-work",
-    "plain_definition": "How long you have to repay the loan, measured in months or years. A shorter term means higher monthly payments but less total interest paid.",
-    "why_it_matters": "Longer terms feel more affordable monthly but cost much more overall. A 30-year mortgage costs almost double in interest compared to a 15-year mortgage on the same amount.",
-    "example": "Borrowing $200,000 at 6.5%: A 15-year term costs $1,742/month ($113,561 total interest). A 30-year term costs $1,264/month ($255,088 total interest). You save $141,527 with the shorter term.",
-    "page_contexts": ["state", "lending-laws", "review-personal-loans", "review-mortgages", "review-business-loans", "wellness-loans-and-interest"]
-  },
-  {
     "slug": "amortization",
     "term": "Amortization",
     "full_form": "Loan Amortization",
     "category": "how-loans-work",
     "plain_definition": "The process of paying off a loan through regular payments that cover both principal and interest. Early payments are mostly interest; later payments are mostly principal.",
-    "why_it_matters": "Understanding amortization explains why paying extra early in a loan saves the most money — you're reducing the principal that interest is calculated on.",
+    "why_it_matters": "Understanding amortization explains why paying extra early in a loan saves the most money \u2014 you're reducing the principal that interest is calculated on.",
     "example": "Month 1 of a $200,000 mortgage at 6%: your $1,199 payment splits as $1,000 interest + $199 principal. By month 300: only $47 goes to interest and $1,152 goes to principal.",
-    "page_contexts": ["review-personal-loans", "review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "balloon-payment",
-    "term": "Balloon Payment",
-    "full_form": "Balloon Payment",
-    "category": "how-loans-work",
-    "plain_definition": "A large lump-sum payment due at the end of a loan, after a period of smaller monthly payments. The loan isn't fully paid off by the regular payments — the balloon settles it.",
-    "why_it_matters": "Balloon payments make monthly payments look affordable but create a financial cliff. If you can't pay or refinance at the end, you could lose your home or asset.",
-    "example": "A 5-year balloon mortgage on $200,000: you pay $1,054/month (as if it were a 30-year loan), but after 5 years you owe a balloon of $186,108 all at once.",
-    "page_contexts": ["lending-laws", "review-personal-loans", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "prepayment-penalty",
-    "term": "Prepayment Penalty",
-    "full_form": "Prepayment Penalty",
-    "category": "how-loans-work",
-    "plain_definition": "A fee some lenders charge if you pay off your loan early. The lender loses the interest they expected to earn, so they penalize you for leaving early.",
-    "why_it_matters": "Always ask about prepayment penalties before signing. They can trap you in a high-rate loan even if you find a better deal to refinance into.",
-    "example": "Your mortgage has a 2% prepayment penalty for the first 3 years. If you refinance after year 2 on a $200,000 balance, you'd owe a $4,000 penalty fee.",
-    "page_contexts": ["lending-laws", "review-personal-loans", "review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "origination-fee",
-    "term": "Origination Fee",
-    "full_form": "Loan Origination Fee",
-    "category": "how-loans-work",
-    "plain_definition": "A one-time fee the lender charges to process and set up your loan. It covers their costs for underwriting, verifying your information, and preparing paperwork.",
-    "why_it_matters": "Origination fees are usually 1-8% of the loan amount and are often deducted from your loan proceeds — so you receive less than you borrowed.",
-    "example": "You're approved for a $10,000 personal loan with a 5% origination fee. The lender deducts $500 upfront, so you receive $9,500 in your bank account but owe $10,000 plus interest.",
-    "page_contexts": ["state", "lending-laws", "review-personal-loans", "review-business-loans", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "collateral",
-    "term": "Collateral",
-    "full_form": "Loan Collateral",
-    "category": "how-loans-work",
-    "plain_definition": "An asset you pledge to the lender as security for a loan. If you stop paying, the lender can seize and sell that asset to recover their money.",
-    "why_it_matters": "Secured loans (with collateral) have lower interest rates because the lender has less risk. But you could lose your home, car, or savings if you default.",
-    "example": "A mortgage uses your house as collateral. A car loan uses your vehicle. A title loan uses your car title. If you miss payments, the lender can foreclose or repossess.",
-    "page_contexts": ["state", "lending-laws", "review-personal-loans", "review-emergency-cash", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "cosigner",
-    "term": "Cosigner",
-    "full_form": "Loan Cosigner",
-    "category": "how-loans-work",
-    "plain_definition": "A person who agrees to repay your loan if you can't. They're equally responsible for the debt, and their credit is affected by your payment behavior.",
-    "why_it_matters": "Cosigning helps people with thin credit get approved or get better rates. But it's a huge risk for the cosigner — they're on the hook for the full amount if you default.",
-    "example": "A parent cosigns their child's $30,000 student loan. The child stops paying after 6 months. The parent is now legally required to make the payments or face collections, lawsuits, and credit damage.",
-    "page_contexts": ["review-personal-loans", "review-business-loans", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "default",
-    "term": "Default",
-    "full_form": "Loan Default",
-    "category": "how-loans-work",
-    "plain_definition": "When you fail to repay a loan according to the agreed terms — usually after 90-180 days of missed payments. It's the point where the lender gives up on collecting normally.",
-    "why_it_matters": "Default triggers severe consequences: credit score drops 100+ points, the debt may be sent to collections, you could be sued, and your wages or assets could be seized.",
-    "example": "You miss 4 consecutive car payments. The lender declares your loan in default, repossesses your car, sells it at auction for $8,000, and you still owe the remaining $5,000 (called a deficiency balance).",
-    "page_contexts": ["state", "lending-laws", "review-personal-loans", "review-debt-relief", "wellness-financial-recovery"]
-  },
-  {
-    "slug": "refinancing",
-    "term": "Refinancing",
-    "full_form": "Loan Refinancing",
-    "category": "how-loans-work",
-    "plain_definition": "Replacing your current loan with a new one, usually at a lower interest rate or with different terms. The new loan pays off the old one.",
-    "why_it_matters": "Refinancing can save thousands if rates drop or your credit improves. But watch for fees — a $3,000 refinancing cost needs to be offset by monthly savings.",
-    "example": "You have a $180,000 mortgage at 7.5% ($1,259/month). You refinance to 6% ($1,079/month), saving $180/month. With $3,000 in closing costs, you break even in 17 months.",
-    "page_contexts": ["lending-laws", "review-personal-loans", "review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "underwriting",
-    "term": "Underwriting",
-    "full_form": "Loan Underwriting",
-    "category": "how-loans-work",
-    "plain_definition": "The process where a lender evaluates your finances — income, debts, credit history, assets — to decide whether to approve your loan and at what rate.",
-    "why_it_matters": "Understanding what underwriters look for helps you prepare a stronger application. They check your DTI ratio, employment stability, credit score, and the asset's value.",
-    "example": "You apply for a mortgage. The underwriter reviews your pay stubs (income), bank statements (savings), credit report (history), and orders an appraisal (home value). This takes 2-4 weeks.",
-    "page_contexts": ["review-personal-loans", "review-mortgages", "review-business-loans", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "secured-vs-unsecured",
-    "term": "Secured vs. Unsecured Loan",
-    "full_form": "Secured vs. Unsecured Loan",
-    "category": "how-loans-work",
-    "plain_definition": "A secured loan is backed by collateral (an asset the lender can seize). An unsecured loan has no collateral — the lender relies only on your promise to repay.",
-    "why_it_matters": "Secured loans have lower rates because the lender has less risk. Unsecured loans (credit cards, personal loans) charge higher rates but you don't risk losing an asset.",
-    "example": "Auto loan (secured): 6% APR — lender can repossess your car. Personal loan (unsecured): 12% APR — no collateral, but higher rate. Same borrower, same credit score.",
-    "page_contexts": ["state", "lending-laws", "review-personal-loans", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "credit-score",
-    "term": "Credit Score",
-    "full_form": "Credit Score",
-    "category": "credit-and-scoring",
-    "plain_definition": "A 3-digit number (300-850) that summarizes how reliably you've handled borrowed money. Higher scores mean lower risk to lenders and better loan terms for you.",
-    "why_it_matters": "Your credit score determines whether you get approved and at what rate. A 100-point difference can mean thousands of dollars more or less in interest over a loan's life.",
-    "example": "On a $250,000 30-year mortgage: a 760 score gets you 6.2% ($1,536/month). A 660 score gets 7.4% ($1,729/month). Over 30 years, the lower score costs you $69,480 more.",
-    "page_contexts": ["state", "review-credit-repair", "review-build-credit", "review-credit-monitoring", "wellness-understanding-credit", "wellness-credit-repair"]
-  },
-  {
-    "slug": "fico-score",
-    "term": "FICO Score",
-    "full_form": "Fair Isaac Corporation Score",
-    "category": "credit-and-scoring",
-    "plain_definition": "The most widely used credit scoring model, created by Fair Isaac Corporation. 90% of top lenders use FICO scores for lending decisions.",
-    "why_it_matters": "FICO has many versions (FICO 8, 9, 10). Mortgage lenders still use older versions (FICO 2, 4, 5), so your mortgage score may differ from what free apps show you.",
-    "example": "Your FICO 8 score (used for credit cards) is 740. Your FICO 5 score (used for mortgages) is 725 because it weighs collections differently. Same credit history, different scores.",
-    "page_contexts": ["state", "review-credit-repair", "review-credit-monitoring", "wellness-understanding-credit", "wellness-credit-repair"]
-  },
-  {
-    "slug": "vantagescore",
-    "term": "VantageScore",
-    "full_form": "VantageScore",
-    "category": "credit-and-scoring",
-    "plain_definition": "An alternative credit scoring model created by the three major credit bureaus (Equifax, Experian, TransUnion). Same 300-850 range as FICO but uses a slightly different formula.",
-    "why_it_matters": "Many free credit monitoring apps show VantageScore, not FICO. Your VantageScore may be 20-40 points different from the FICO score a lender actually uses.",
-    "example": "Credit Karma shows your VantageScore 3.0 as 720. You apply for a mortgage and the lender pulls your FICO 2 score: it's 695. Different model, different number, different rate offered.",
-    "page_contexts": ["review-credit-repair", "review-credit-monitoring", "wellness-understanding-credit"]
-  },
-  {
-    "slug": "credit-report",
-    "term": "Credit Report",
-    "full_form": "Consumer Credit Report",
-    "category": "credit-and-scoring",
-    "plain_definition": "A detailed record of your borrowing history maintained by credit bureaus. It lists every loan, credit card, payment history, collection, and public record tied to your name.",
-    "why_it_matters": "Errors on credit reports are common — 1 in 5 consumers has at least one mistake. Checking your report regularly is the first step to fixing errors that are costing you money.",
-    "example": "You pull your free report from AnnualCreditReport.com and find a $2,400 medical collection you already paid. You dispute it, the bureau verifies it's resolved, and your score goes up 40 points.",
-    "page_contexts": ["state", "review-credit-repair", "review-credit-monitoring", "wellness-understanding-credit", "wellness-credit-repair"]
-  },
-  {
-    "slug": "credit-utilization",
-    "term": "Credit Utilization",
-    "full_form": "Credit Utilization Ratio",
-    "category": "credit-and-scoring",
-    "plain_definition": "The percentage of your available credit that you're currently using. If you have $10,000 in credit limits and owe $3,000, your utilization is 30%.",
-    "why_it_matters": "Utilization is the second-biggest factor in your credit score (after payment history). Keeping it below 30% helps your score; below 10% is ideal.",
-    "example": "You have 3 cards with a $15,000 total limit. You're carrying $4,500 in balances (30% utilization). Paying down to $1,500 (10% utilization) could boost your score by 20-50 points.",
-    "page_contexts": ["review-credit-repair", "review-build-credit", "review-credit-monitoring", "wellness-understanding-credit", "wellness-credit-repair"]
-  },
-  {
-    "slug": "hard-inquiry",
-    "term": "Hard Inquiry",
-    "full_form": "Hard Credit Inquiry (Hard Pull)",
-    "category": "credit-and-scoring",
-    "plain_definition": "When a lender checks your credit report because you've applied for credit. Each hard inquiry can lower your score by 5-10 points and stays on your report for 2 years.",
-    "why_it_matters": "Multiple hard inquiries in a short period suggest you're desperately seeking credit, which is a red flag. Exception: mortgage and auto loan shopping within 14-45 days counts as one inquiry.",
-    "example": "You apply for 5 credit cards in one month. Each application triggers a hard inquiry. Your score drops 25-50 points from the inquiries alone, making each subsequent application harder.",
-    "page_contexts": ["review-credit-repair", "review-credit-monitoring", "wellness-understanding-credit", "wellness-credit-repair"]
-  },
-  {
-    "slug": "soft-inquiry",
-    "term": "Soft Inquiry",
-    "full_form": "Soft Credit Inquiry (Soft Pull)",
-    "category": "credit-and-scoring",
-    "plain_definition": "A credit check that does NOT affect your score. Happens when you check your own credit, when lenders pre-qualify you, or when employers do background checks.",
-    "why_it_matters": "You can check your own credit as often as you want without penalty. Prequalification offers from lenders also use soft pulls, so shopping around is safe.",
-    "example": "You use Credit Karma to check your score (soft pull — no impact). A credit card company sends you a pre-approved offer (soft pull). You then apply for the card (hard pull — small impact).",
-    "page_contexts": ["review-credit-repair", "review-credit-monitoring", "wellness-understanding-credit"]
-  },
-  {
-    "slug": "credit-bureau",
-    "term": "Credit Bureau",
-    "full_form": "Credit Reporting Agency (Bureau)",
-    "category": "credit-and-scoring",
-    "plain_definition": "A company that collects and sells information about your credit history. The three major bureaus are Equifax, Experian, and TransUnion.",
-    "why_it_matters": "Not all lenders report to all three bureaus, so your reports may differ. You should check all three reports because an error on one could be costing you money.",
-    "example": "Your car loan only reports to Equifax and TransUnion. Your Experian report doesn't show that good payment history, so your Experian score is 15 points lower.",
-    "page_contexts": ["state", "review-credit-repair", "review-credit-monitoring", "wellness-understanding-credit"]
-  },
-  {
-    "slug": "credit-freeze",
-    "term": "Credit Freeze",
-    "full_form": "Security Freeze / Credit Freeze",
-    "category": "credit-and-scoring",
-    "plain_definition": "A free tool that locks your credit report so no one (including you) can open new accounts until you lift it. It's the strongest protection against identity theft.",
-    "why_it_matters": "A credit freeze prevents criminals from opening loans in your name, even if they have your Social Security number. It's free by law and doesn't affect your credit score.",
-    "example": "Your data was in a breach. You freeze your credit at all 3 bureaus (takes 10 minutes online). A thief tries to open a credit card in your name — denied because the lender can't pull your frozen report.",
-    "page_contexts": ["review-credit-repair", "review-credit-monitoring", "wellness-understanding-credit"]
-  },
-  {
-    "slug": "credit-mix",
-    "term": "Credit Mix",
-    "full_form": "Credit Mix (Types of Credit)",
-    "category": "credit-and-scoring",
-    "plain_definition": "The variety of credit accounts you have — credit cards (revolving), auto loans (installment), mortgage, student loans, etc. Having multiple types shows you can manage different kinds of debt.",
-    "why_it_matters": "Credit mix accounts for about 10% of your FICO score. Having only credit cards isn't as strong as having a card, an installment loan, and a mortgage.",
-    "example": "Borrower A has 3 credit cards. Borrower B has 2 credit cards, a car loan, and a student loan. Even with the same payment history and utilization, Borrower B's score is typically higher.",
-    "page_contexts": ["review-credit-repair", "review-build-credit", "wellness-understanding-credit"]
-  },
-  {
-    "slug": "late-fee",
-    "term": "Late Fee",
-    "full_form": "Late Payment Fee",
-    "category": "fees-and-costs",
-    "plain_definition": "A charge added to your account when you miss a payment deadline. Most credit cards charge $29-$41 per late payment, and many loans have similar penalties.",
-    "why_it_matters": "The fee itself hurts, but the real damage is to your credit score. A payment 30+ days late stays on your credit report for 7 years and can drop your score 60-110 points.",
-    "example": "Your credit card payment of $150 is due March 1. You pay on March 18. The bank charges a $39 late fee. If it's 30+ days late, it gets reported to credit bureaus and your 760 score drops to 670.",
-    "page_contexts": ["state", "review-credit-repair", "review-personal-loans", "review-emergency-cash", "wellness-everyday-finance"]
-  },
-  {
-    "slug": "nsf-fee",
-    "term": "NSF Fee",
-    "full_form": "Non-Sufficient Funds Fee",
-    "category": "fees-and-costs",
-    "plain_definition": "A fee your bank charges when a payment bounces because there isn't enough money in your account. Also called a 'bounced check fee' or 'returned payment fee.'",
-    "why_it_matters": "NSF fees hit you twice — your bank charges you AND the company you were trying to pay may charge their own returned payment fee. That's $50-70 for one missed payment.",
-    "example": "Your auto-pay tries to pull $350 for rent, but you only have $280 in checking. Your bank charges $35 NSF fee. Your landlord charges $25 returned payment fee. Total damage: $60 in fees.",
-    "page_contexts": ["review-emergency-cash", "wellness-everyday-finance"]
+    "page_contexts": [
+      "review-personal-loans",
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
   },
   {
     "slug": "annual-fee",
@@ -346,328 +20,29 @@
     "category": "fees-and-costs",
     "plain_definition": "A yearly charge for having a credit card or loan account, billed automatically to your account. Premium cards charge more but offer better rewards.",
     "why_it_matters": "A $95 annual fee only makes sense if the card's rewards and benefits are worth more than $95 to you. Many excellent cards have no annual fee at all.",
-    "example": "A travel card charges $95/year but gives 2x points on travel. If you spend $5,000/year on travel, you earn $100 in points — the fee pays for itself. If you only spend $2,000, it doesn't.",
-    "page_contexts": ["wellness-everyday-finance", "wellness-understanding-credit"]
+    "example": "A travel card charges $95/year but gives 2x points on travel. If you spend $5,000/year on travel, you earn $100 in points \u2014 the fee pays for itself. If you only spend $2,000, it doesn't.",
+    "page_contexts": [
+      "wellness-everyday-finance",
+      "wellness-understanding-credit"
+    ]
   },
   {
-    "slug": "setup-fee",
-    "term": "Setup Fee",
-    "full_form": "Setup Fee / First Work Fee",
-    "category": "fees-and-costs",
-    "plain_definition": "A one-time fee charged at the beginning of a service, often by credit repair companies, to cover the cost of your initial credit analysis and account setup.",
-    "why_it_matters": "Legitimate credit repair companies are NOT allowed to charge before they do work (per the Credit Repair Organizations Act). A setup fee before any results is a red flag.",
-    "example": "Company A charges $99 setup fee before doing anything (potential CROA violation). Company B does a free audit first, then charges a $199 work fee only after completing work (legitimate).",
-    "page_contexts": ["state", "review-credit-repair", "wellness-credit-repair"]
-  },
-  {
-    "slug": "finance-charge",
-    "term": "Finance Charge",
-    "full_form": "Finance Charge",
-    "category": "fees-and-costs",
-    "plain_definition": "The total cost of borrowing, including interest and all fees combined. The lender must disclose this number under the Truth in Lending Act.",
-    "why_it_matters": "The finance charge gives you the total dollar amount you'll pay beyond the principal. It's the clearest picture of what a loan actually costs you.",
-    "example": "You borrow $15,000 for 4 years at 8% APR with a $450 origination fee. Finance charge: $2,612 (interest) + $450 (fee) = $3,062 total. You repay $18,062 for a $15,000 loan.",
-    "page_contexts": ["state", "lending-laws", "review-personal-loans", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "closing-costs",
-    "term": "Closing Costs",
-    "full_form": "Mortgage Closing Costs",
-    "category": "fees-and-costs",
-    "plain_definition": "The fees paid when finalizing a home purchase or refinance — typically 2-5% of the loan amount. They include appraisal, title insurance, attorney fees, and lender fees.",
-    "why_it_matters": "Closing costs can add $6,000-$15,000 to a home purchase that buyers don't always budget for. Some can be negotiated or rolled into the loan.",
-    "example": "You buy a $300,000 home. Closing costs at 3% = $9,000. That includes: appraisal $500, title insurance $1,500, attorney $800, origination fee $3,000, taxes/escrow $3,200.",
-    "page_contexts": ["lending-laws", "review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "points",
-    "term": "Points (Discount Points)",
-    "full_form": "Mortgage Discount Points",
-    "category": "fees-and-costs",
-    "plain_definition": "Upfront fees you pay to the lender at closing to buy a lower interest rate. One point = 1% of the loan amount and typically reduces your rate by 0.25%.",
-    "why_it_matters": "Points make sense if you plan to stay in the home long enough for the monthly savings to exceed the upfront cost. That breakeven point is usually 4-6 years.",
-    "example": "On a $250,000 mortgage at 6.5%: you pay 1 point ($2,500) to get 6.25%. Monthly payment drops from $1,580 to $1,539 — saving $41/month. Breakeven in 61 months (5 years).",
-    "page_contexts": ["review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "service-fee",
-    "term": "Service Fee",
-    "full_form": "Monthly Service Fee",
-    "category": "fees-and-costs",
-    "plain_definition": "A recurring charge for maintaining a financial account or receiving ongoing services, such as credit monitoring, credit repair, or loan servicing.",
-    "why_it_matters": "Monthly service fees add up quickly. A $79/month credit repair service costs $948/year — make sure the value justifies the ongoing expense.",
-    "example": "A credit repair company charges $79/month to dispute items on your report. After 6 months ($474 spent), they've removed 3 negative items and your score went up 65 points. Was it worth it? Depends on your situation.",
-    "page_contexts": ["review-credit-repair", "wellness-credit-repair", "wellness-everyday-finance"]
-  },
-  {
-    "slug": "usury",
-    "term": "Usury",
-    "full_form": "Usury (Illegal Interest)",
-    "category": "legal-terms",
-    "plain_definition": "The practice of charging interest rates higher than what the law allows. Usury laws set state-specific caps on how much lenders can charge.",
-    "why_it_matters": "If a lender charges usurious rates, the loan may be void, penalties can be reduced, or you may be entitled to damages. Know your state's limits.",
-    "example": "Your state caps consumer loans at 24% APR. An online lender charges you 36%. That loan may be unenforceable, and you might only need to repay the principal — no interest or fees.",
-    "page_contexts": ["state", "lending-laws", "review-emergency-cash", "wellness-financial-recovery"]
-  },
-  {
-    "slug": "cfpb",
-    "term": "CFPB",
-    "full_form": "Consumer Financial Protection Bureau",
-    "category": "legal-terms",
-    "plain_definition": "A federal agency created in 2010 to protect consumers from unfair financial practices. They write rules, supervise financial companies, and handle consumer complaints.",
-    "why_it_matters": "The CFPB is your most powerful ally against predatory lenders. Filing a complaint with them gets a response from the company within 15 days — companies take CFPB complaints seriously.",
-    "example": "A debt collector calls your workplace after you told them to stop. You file a CFPB complaint online. Within 15 days, the collection agency responds and agrees to stop. The CFPB tracks complaint patterns across all companies.",
-    "page_contexts": ["lending-laws", "review-credit-repair", "review-debt-relief", "wellness-financial-recovery"]
-  },
-  {
-    "slug": "fcra",
-    "term": "FCRA",
-    "full_form": "Fair Credit Reporting Act",
-    "category": "legal-terms",
-    "plain_definition": "The federal law that regulates how credit bureaus collect, share, and use your information. It gives you the right to see your report, dispute errors, and limit who can access it.",
-    "why_it_matters": "FCRA is the legal basis for disputing errors on your credit report. Bureaus must investigate within 30 days and remove inaccurate information. You can sue if they violate your rights.",
-    "example": "You dispute an incorrect collection on your Equifax report. Under FCRA, Equifax has 30 days to investigate. If they can't verify it, they must remove it. If they ignore your dispute, you can sue for damages.",
-    "page_contexts": ["lending-laws", "review-credit-repair", "wellness-credit-repair", "wellness-understanding-credit"]
-  },
-  {
-    "slug": "croa",
-    "term": "CROA",
-    "full_form": "Credit Repair Organizations Act",
-    "category": "legal-terms",
-    "plain_definition": "A federal law that regulates credit repair companies. It bans them from charging upfront fees, making false promises, and requires written contracts with a 3-day cancellation right.",
-    "why_it_matters": "CROA protects you from credit repair scams. If a company demands payment before doing any work, they're likely violating federal law. Legitimate companies charge after results.",
-    "example": "A company says 'Pay $500 upfront and we'll remove all negative items guaranteed.' That violates CROA on two counts: upfront fees and guaranteed results. Legitimate companies charge monthly after work begins.",
-    "page_contexts": ["state", "lending-laws", "review-credit-repair", "wellness-credit-repair"]
-  },
-  {
-    "slug": "mla",
-    "term": "MLA",
-    "full_form": "Military Lending Act",
-    "category": "legal-terms",
-    "plain_definition": "A federal law that caps interest at 36% MAPR for active-duty servicemembers and their dependents. It covers payday loans, auto title loans, and consumer credit up to certain amounts.",
-    "why_it_matters": "The MLA exists because predatory lenders historically targeted military bases. Violating the MLA voids the loan — servicemembers don't have to repay illegally priced loans.",
-    "example": "An active-duty soldier takes a $2,000 payday loan at 400% APR. Under the MLA, that loan is void. The lender can only collect the original $2,000 principal — not the interest.",
-    "page_contexts": ["lending-laws"]
-  },
-  {
-    "slug": "scra",
-    "term": "SCRA",
-    "full_form": "Servicemembers Civil Relief Act",
-    "category": "legal-terms",
-    "plain_definition": "A federal law that caps interest at 6% on debts taken before military service and provides protections against foreclosure, repossession, and lease termination during deployment.",
-    "why_it_matters": "If you had a 22% credit card before enlisting, SCRA can force the bank to cap it at 6% while you serve. It also prevents losing your home or car while deployed.",
-    "example": "A soldier has a pre-service auto loan at 9%. Under SCRA, the rate drops to 6% during active duty. On a $25,000 balance, that saves about $62/month — $744/year.",
-    "page_contexts": ["lending-laws"]
-  },
-  {
-    "slug": "statute-of-limitations",
-    "term": "Statute of Limitations",
-    "full_form": "Statute of Limitations (Debt)",
-    "category": "legal-terms",
-    "plain_definition": "A time limit (typically 3-6 years, varies by state) after which a creditor can no longer sue you to collect a debt. The debt still exists, but they lose the legal power to force payment.",
-    "why_it_matters": "Knowing your state's statute of limitations prevents you from being tricked into paying debts that are legally uncollectable. Beware: making a payment can restart the clock.",
-    "example": "You have a $3,000 credit card debt from 2019. Your state has a 4-year statute of limitations. In 2024, a collector calls demanding payment. The statute has expired — they cannot sue you.",
-    "page_contexts": ["lending-laws", "review-debt-relief", "wellness-financial-recovery"]
-  },
-  {
-    "slug": "truth-in-lending",
-    "term": "TILA",
-    "full_form": "Truth in Lending Act",
-    "category": "legal-terms",
-    "plain_definition": "A federal law requiring lenders to clearly disclose loan terms — APR, finance charge, total payments, and payment schedule — before you sign. No hidden costs allowed.",
-    "why_it_matters": "TILA gives you the right to compare loan offers on equal terms. Every lender must show costs the same way, making it easier to find the best deal.",
-    "example": "Two lenders offer you a car loan. Lender A says '5.9% rate.' Lender B says '6.2% APR.' Under TILA, both must show APR — Lender A's true APR with fees is actually 6.8%, making Lender B cheaper.",
-    "page_contexts": ["lending-laws", "review-personal-loans", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "fdcpa",
-    "term": "FDCPA",
-    "full_form": "Fair Debt Collection Practices Act",
-    "category": "legal-terms",
-    "plain_definition": "A federal law that limits what debt collectors can do. They can't call before 8am or after 9pm, can't harass you, can't lie, and must stop contacting you if you request in writing.",
-    "why_it_matters": "Knowing your FDCPA rights stops abusive collection tactics. If a collector violates the law, you can sue for up to $1,000 per violation plus attorney fees.",
-    "example": "A collector calls your workplace 3 times after you told them not to. That's 3 FDCPA violations. You hire a consumer attorney (free — they get paid by the collector). The collector settles for $3,000.",
-    "page_contexts": ["lending-laws", "review-debt-relief", "review-credit-repair", "wellness-financial-recovery"]
-  },
-  {
-    "slug": "garnishment",
-    "term": "Garnishment",
-    "full_form": "Wage Garnishment",
-    "category": "legal-terms",
-    "plain_definition": "A court order that requires your employer to withhold part of your paycheck and send it directly to a creditor. Usually happens after a creditor sues you and wins a judgment.",
-    "why_it_matters": "Federal law limits garnishment to 25% of disposable income. Some states have lower limits. Student loans and taxes can be garnished without a court order.",
-    "example": "You owe $8,000 on a defaulted credit card. The bank sues, gets a judgment, and garnishes your wages. On a $3,000/month net paycheck, they take $750/month until the debt is paid.",
-    "page_contexts": ["lending-laws", "review-debt-relief", "wellness-financial-recovery"]
-  },
-  {
-    "slug": "dti-ratio",
-    "term": "DTI Ratio",
-    "full_form": "Debt-to-Income Ratio",
-    "category": "debt-and-recovery",
-    "plain_definition": "The percentage of your monthly gross income that goes toward paying debts. Lenders use it to judge whether you can afford another loan payment.",
-    "why_it_matters": "Most lenders want DTI below 36% for personal loans and below 43% for mortgages. Above that, you're considered overextended and likely to be denied.",
-    "example": "You earn $5,000/month gross. Your debts: $1,200 mortgage + $300 car + $200 student loans = $1,700/month. DTI = 34%. A new $400/month loan would push you to 42% — risky for lenders.",
-    "page_contexts": ["state", "lending-laws", "review-personal-loans", "review-mortgages", "review-debt-relief", "wellness-loans-and-interest", "wellness-financial-recovery"]
-  },
-  {
-    "slug": "debt-consolidation",
-    "term": "Debt Consolidation",
-    "full_form": "Debt Consolidation",
-    "category": "debt-and-recovery",
-    "plain_definition": "Combining multiple debts into one single loan with one monthly payment, ideally at a lower interest rate. It simplifies repayment and can reduce total interest.",
-    "why_it_matters": "Consolidation works best when you get a lower rate than your existing debts. But it doesn't reduce what you owe — and extending the term can mean paying more total interest.",
-    "example": "You have: $5,000 at 22% (credit card), $3,000 at 18% (store card), $2,000 at 25% (payday loan). A $10,000 consolidation loan at 11% saves you ~$2,100 in interest over 3 years.",
-    "page_contexts": ["review-debt-relief", "review-personal-loans", "wellness-financial-recovery"]
-  },
-  {
-    "slug": "debt-settlement",
-    "term": "Debt Settlement",
-    "full_form": "Debt Settlement / Negotiation",
-    "category": "debt-and-recovery",
-    "plain_definition": "Negotiating with creditors to accept less than the full amount you owe — typically 40-60 cents on the dollar. Usually done after you've already fallen behind on payments.",
-    "why_it_matters": "Settlement can save thousands, but it severely damages your credit (settled accounts show for 7 years) and the IRS may tax the forgiven amount as income.",
-    "example": "You owe $15,000 on a credit card and negotiate a settlement of $7,500 (50%). You save $7,500 but: your credit drops 100+ points, the account shows 'settled' for 7 years, and you may owe taxes on the $7,500 forgiven.",
-    "page_contexts": ["review-debt-relief", "wellness-financial-recovery"]
-  },
-  {
-    "slug": "charge-off",
-    "term": "Charge-Off",
-    "full_form": "Charge-Off",
-    "category": "debt-and-recovery",
-    "plain_definition": "When a creditor declares your debt a loss after 180 days of nonpayment and removes it from their books. But you still owe the money — they just stop expecting to collect it themselves.",
-    "why_it_matters": "A charge-off is one of the most damaging entries on your credit report and stays for 7 years. The debt is usually sold to a collection agency who will pursue you for it.",
-    "example": "You stop paying your $4,000 credit card. After 180 days, the bank charges it off and sells the debt to a collector for $800. The collector now contacts you demanding the full $4,000 (they profit from what they collect above $800).",
-    "page_contexts": ["review-credit-repair", "review-debt-relief", "wellness-financial-recovery", "wellness-credit-repair"]
-  },
-  {
-    "slug": "collections",
-    "term": "Collections",
-    "full_form": "Debt Collections",
-    "category": "debt-and-recovery",
-    "plain_definition": "When an unpaid debt is transferred or sold to a third-party collection agency that specializes in recovering the money. Collection accounts appear on your credit report for 7 years.",
-    "why_it_matters": "Even a $50 collection account can drop your score 50-100 points. Some newer FICO models (FICO 9) ignore paid collections, but many lenders still use older models.",
-    "example": "An old $200 gym bill goes to collections. It appears on all 3 credit reports and drops your 720 score to 640. Paying it helps with newer scoring models but under FICO 8 (still widely used), a paid collection still hurts.",
-    "page_contexts": ["state", "review-credit-repair", "review-debt-relief", "wellness-financial-recovery", "wellness-credit-repair"]
-  },
-  {
-    "slug": "bankruptcy-chapter-7",
-    "term": "Chapter 7 Bankruptcy",
-    "full_form": "Chapter 7 Bankruptcy (Liquidation)",
-    "category": "debt-and-recovery",
-    "plain_definition": "A type of bankruptcy that wipes out most unsecured debts (credit cards, medical bills) by liquidating non-exempt assets. It stays on your credit for 10 years.",
-    "why_it_matters": "Chapter 7 gives you a fresh start but at a steep cost: 10 years on your credit, difficulty getting loans, and you may lose assets. Income must be below your state's median to qualify.",
-    "example": "You have $45,000 in credit card debt and earn $35,000/year. Chapter 7 erases the debt. You keep exempt property (basic car, household items). Your score drops to ~500 but you're debt-free.",
-    "page_contexts": ["lending-laws", "review-debt-relief", "wellness-financial-recovery"]
-  },
-  {
-    "slug": "bankruptcy-chapter-13",
-    "term": "Chapter 13 Bankruptcy",
-    "full_form": "Chapter 13 Bankruptcy (Reorganization)",
-    "category": "debt-and-recovery",
-    "plain_definition": "A type of bankruptcy where you keep your assets but follow a court-approved 3-5 year repayment plan to pay back some or all of your debts. Stays on credit for 7 years.",
-    "why_it_matters": "Chapter 13 is better than Chapter 7 if you have a home or assets you want to keep. It can stop foreclosure and let you catch up on mortgage payments over 3-5 years.",
-    "example": "You're 3 months behind on your mortgage and have $30,000 in credit card debt. Chapter 13 stops foreclosure and puts you on a 5-year plan: you pay $600/month to catch up on the mortgage and pay 40% of the credit card debt.",
-    "page_contexts": ["lending-laws", "review-debt-relief", "wellness-financial-recovery"]
-  },
-  {
-    "slug": "judgment",
-    "term": "Judgment",
-    "full_form": "Court Judgment (Debt)",
-    "category": "debt-and-recovery",
-    "plain_definition": "A court ruling that says you legally owe a specific amount to a creditor. It gives the creditor power to garnish wages, freeze bank accounts, or place liens on your property.",
-    "why_it_matters": "Judgments are enforceable for 10-20 years (varies by state) and can be renewed. They give creditors far more collection power than a simple unpaid debt.",
-    "example": "A credit card company sues you for $8,000 and wins a judgment. They can now garnish 25% of your paycheck ($750/month on a $3,000 net salary) and freeze your bank account.",
-    "page_contexts": ["lending-laws", "review-debt-relief", "wellness-financial-recovery"]
-  },
-  {
-    "slug": "ltv",
-    "term": "LTV",
-    "full_form": "Loan-to-Value Ratio",
-    "category": "mortgages",
-    "plain_definition": "The ratio of your loan amount to the property's appraised value, expressed as a percentage. It tells the lender how much of the home's value they're financing.",
-    "why_it_matters": "LTV above 80% usually requires Private Mortgage Insurance (PMI), which adds $100-300/month. Lower LTV = lower risk for lender = better rate for you.",
-    "example": "Home value: $300,000. Down payment: $60,000. Loan: $240,000. LTV = 80%. You avoid PMI. If you only put $30,000 down (90% LTV), you'd pay PMI until you reach 80%.",
-    "page_contexts": ["lending-laws", "review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "pmi",
-    "term": "PMI",
-    "full_form": "Private Mortgage Insurance",
-    "category": "mortgages",
-    "plain_definition": "Insurance that protects the LENDER (not you) if you default on a mortgage with less than 20% down payment. You pay the premium, but it only covers the lender's loss.",
-    "why_it_matters": "PMI typically costs 0.5-1.5% of the loan per year and adds nothing to your equity. Once you reach 20% equity, you can request it be removed.",
-    "example": "On a $250,000 loan with 10% down, PMI at 0.8% = $2,000/year ($167/month). After 5 years, your home's value rises and your equity reaches 20%. You request PMI removal and save $167/month.",
-    "page_contexts": ["lending-laws", "review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "escrow",
-    "term": "Escrow",
-    "full_form": "Escrow Account",
-    "category": "mortgages",
-    "plain_definition": "An account managed by your mortgage lender that holds money for property taxes and homeowners insurance. A portion of each mortgage payment goes into escrow, and the lender pays these bills for you.",
-    "why_it_matters": "Escrow ensures taxes and insurance are always paid on time (protecting the lender's investment). Your monthly payment may go up if taxes or insurance increase.",
-    "example": "Your mortgage payment is $1,400: $1,050 principal+interest + $250 property taxes + $100 insurance. The $350 for taxes/insurance goes into escrow. The lender pays your tax bill in December from escrow.",
-    "page_contexts": ["review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "fha-loan",
-    "term": "FHA Loan",
-    "full_form": "Federal Housing Administration Loan",
-    "category": "mortgages",
-    "plain_definition": "A government-insured mortgage that allows lower down payments (as low as 3.5%) and lower credit score requirements (580+). The FHA insures the loan, reducing risk for lenders.",
-    "why_it_matters": "FHA loans make homeownership accessible for first-time buyers and those with imperfect credit. The tradeoff: you must pay Mortgage Insurance Premium (MIP) for the life of the loan.",
-    "example": "You have a 620 credit score and $10,500 saved. On a $300,000 home: FHA lets you put 3.5% down ($10,500) vs. conventional requiring 5-20% down ($15,000-$60,000).",
-    "page_contexts": ["lending-laws", "review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "va-loan",
-    "term": "VA Loan",
-    "full_form": "Department of Veterans Affairs Loan",
-    "category": "mortgages",
-    "plain_definition": "A mortgage guaranteed by the Department of Veterans Affairs for eligible military members, veterans, and surviving spouses. Key benefits: no down payment required and no PMI.",
-    "why_it_matters": "VA loans are among the best mortgage deals available — 0% down, no PMI, and competitive rates. They're earned through military service and can be used multiple times.",
-    "example": "A veteran buys a $350,000 home with a VA loan: $0 down, no PMI, 5.8% rate ($2,054/month). A comparable conventional loan with 5% down would require $17,500 down plus $175/month PMI.",
-    "page_contexts": ["lending-laws", "review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "mortgage-refinancing",
-    "term": "Mortgage Refinancing",
-    "full_form": "Mortgage Refinancing",
-    "category": "mortgages",
-    "plain_definition": "Replacing your current mortgage with a new one, usually to get a lower rate, change the loan term, or pull cash out of your home equity.",
-    "why_it_matters": "A 1% rate reduction on a $250,000 mortgage saves ~$150/month ($54,000 over 30 years). But closing costs of 2-5% mean you need to stay long enough to break even.",
-    "example": "You have a $300,000 mortgage at 7.5% ($2,098/month). Rates drop to 6%. Refinancing costs $8,000 in closing. New payment: $1,799/month. Monthly savings: $299. Breakeven: 27 months.",
-    "page_contexts": ["review-mortgages", "wellness-loans-and-interest"]
-  },
-  {
-    "slug": "grace-period",
-    "term": "Grace Period",
-    "full_form": "Credit Card Grace Period",
-    "category": "credit-cards",
-    "plain_definition": "The time between the end of your billing cycle and the payment due date — usually 21-25 days — during which you can pay your balance in full without being charged interest.",
-    "why_it_matters": "If you pay in full every month, you effectively borrow money for free during the grace period. But carry any balance, and you lose the grace period on new purchases too.",
-    "example": "Your billing cycle ends March 15 and payment is due April 6 (21-day grace period). If you pay the full $800 balance by April 6, you pay $0 in interest. If you pay $600, you lose the grace period.",
-    "page_contexts": ["wellness-everyday-finance", "wellness-understanding-credit"]
-  },
-  {
-    "slug": "minimum-payment",
-    "term": "Minimum Payment",
-    "full_form": "Minimum Payment Due",
-    "category": "credit-cards",
-    "plain_definition": "The smallest amount you must pay each month to keep your account in good standing — usually 1-3% of the balance or $25, whichever is more. Paying only this amount keeps you in debt for years.",
-    "why_it_matters": "Minimum payments are designed to keep you paying interest as long as possible. On a $5,000 balance at 22%, minimum payments would take 20+ years and cost over $8,000 in interest.",
-    "example": "You owe $5,000 at 22% APR. Minimum payment: $100/month. At that rate, it takes 9 years to pay off and you pay $5,840 in interest — more than you originally borrowed.",
-    "page_contexts": ["review-credit-repair", "wellness-everyday-finance", "wellness-understanding-credit"]
-  },
-  {
-    "slug": "cash-advance",
-    "term": "Cash Advance",
-    "full_form": "Credit Card Cash Advance",
-    "category": "credit-cards",
-    "plain_definition": "Using your credit card to get cash from an ATM or bank. It's one of the most expensive ways to borrow — higher interest rate, immediate interest accrual (no grace period), and an upfront fee.",
-    "why_it_matters": "Cash advances are a debt trap: 25-30% APR with no grace period plus a 3-5% fee. Interest starts the second you withdraw, not at the end of the billing cycle.",
-    "example": "You take a $500 cash advance. Fee: $25 (5%). Interest: 28% APR starting immediately. After 30 days, you owe $536.67. After 6 months of minimum payments, you've paid $85 in interest on $500.",
-    "page_contexts": ["review-emergency-cash", "wellness-everyday-finance"]
+    "slug": "apr",
+    "term": "APR",
+    "full_form": "Annual Percentage Rate",
+    "category": "interest-and-rates",
+    "plain_definition": "The total yearly cost of borrowing money, including the interest rate plus any fees the lender charges. Think of it as the 'true price tag' on a loan.",
+    "why_it_matters": "Lenders must show APR by law (Truth in Lending Act) because the interest rate alone can hide fees. Comparing APR across lenders is the most reliable way to find the cheapest loan.",
+    "example": "You borrow $10,000 at 6% interest for 3 years, but there's a $300 origination fee. The interest rate is 6%, but the APR is 6.9% because it includes that fee. You'd pay $304/month and $946 total in interest.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-personal-loans",
+      "review-emergency-cash",
+      "review-mortgages",
+      "review-business-loans",
+      "wellness-loans-and-interest"
+    ]
   },
   {
     "slug": "balance-transfer",
@@ -677,7 +52,200 @@
     "plain_definition": "Moving debt from one credit card to another, usually to take advantage of a lower interest rate (often 0% for 12-21 months). There's typically a 3-5% transfer fee.",
     "why_it_matters": "A 0% balance transfer can save hundreds in interest and help you pay down debt faster. But you must pay off the balance before the promotional period ends, or the rate jumps.",
     "example": "You owe $8,000 at 22% APR ($147/month in interest). You transfer to a 0% APR card with a 3% fee ($240). For 18 months, $0 interest. If you pay $444/month, you're debt-free before the promo ends.",
-    "page_contexts": ["review-credit-repair", "wellness-everyday-finance", "wellness-understanding-credit"]
+    "page_contexts": [
+      "review-credit-repair",
+      "wellness-everyday-finance",
+      "wellness-understanding-credit"
+    ]
+  },
+  {
+    "slug": "balloon-payment",
+    "term": "Balloon Payment",
+    "full_form": "Balloon Payment",
+    "category": "how-loans-work",
+    "plain_definition": "A large lump-sum payment due at the end of a loan, after a period of smaller monthly payments. The loan isn't fully paid off by the regular payments \u2014 the balloon settles it.",
+    "why_it_matters": "Balloon payments make monthly payments look affordable but create a financial cliff. If you can't pay or refinance at the end, you could lose your home or asset.",
+    "example": "A 5-year balloon mortgage on $200,000: you pay $1,054/month (as if it were a 30-year loan), but after 5 years you owe a balloon of $186,108 all at once.",
+    "page_contexts": [
+      "lending-laws",
+      "review-personal-loans",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "bankruptcy-chapter-13",
+    "term": "Chapter 13 Bankruptcy",
+    "full_form": "Chapter 13 Bankruptcy (Reorganization)",
+    "category": "debt-and-recovery",
+    "plain_definition": "A type of bankruptcy where you keep your assets but follow a court-approved 3-5 year repayment plan to pay back some or all of your debts. Stays on credit for 7 years.",
+    "why_it_matters": "Chapter 13 is better than Chapter 7 if you have a home or assets you want to keep. It can stop foreclosure and let you catch up on mortgage payments over 3-5 years.",
+    "example": "You're 3 months behind on your mortgage and have $30,000 in credit card debt. Chapter 13 stops foreclosure and puts you on a 5-year plan: you pay $600/month to catch up on the mortgage and pay 40% of the credit card debt.",
+    "page_contexts": [
+      "lending-laws",
+      "review-debt-relief",
+      "wellness-financial-recovery"
+    ]
+  },
+  {
+    "slug": "bankruptcy-chapter-7",
+    "term": "Chapter 7 Bankruptcy",
+    "full_form": "Chapter 7 Bankruptcy (Liquidation)",
+    "category": "debt-and-recovery",
+    "plain_definition": "A type of bankruptcy that wipes out most unsecured debts (credit cards, medical bills) by liquidating non-exempt assets. It stays on your credit for 10 years.",
+    "why_it_matters": "Chapter 7 gives you a fresh start but at a steep cost: 10 years on your credit, difficulty getting loans, and you may lose assets. Income must be below your state's median to qualify.",
+    "example": "You have $45,000 in credit card debt and earn $35,000/year. Chapter 7 erases the debt. You keep exempt property (basic car, household items). Your score drops to ~500 but you're debt-free.",
+    "page_contexts": [
+      "lending-laws",
+      "review-debt-relief",
+      "wellness-financial-recovery"
+    ]
+  },
+  {
+    "slug": "cash-advance",
+    "term": "Cash Advance",
+    "full_form": "Credit Card Cash Advance",
+    "category": "credit-cards",
+    "plain_definition": "Using your credit card to get cash from an ATM or bank. It's one of the most expensive ways to borrow \u2014 higher interest rate, immediate interest accrual (no grace period), and an upfront fee.",
+    "why_it_matters": "Cash advances are a debt trap: 25-30% APR with no grace period plus a 3-5% fee. Interest starts the second you withdraw, not at the end of the billing cycle.",
+    "example": "You take a $500 cash advance. Fee: $25 (5%). Interest: 28% APR starting immediately. After 30 days, you owe $536.67. After 6 months of minimum payments, you've paid $85 in interest on $500.",
+    "page_contexts": [
+      "review-emergency-cash",
+      "wellness-everyday-finance"
+    ]
+  },
+  {
+    "slug": "cfpb",
+    "term": "CFPB",
+    "full_form": "Consumer Financial Protection Bureau",
+    "category": "legal-terms",
+    "plain_definition": "A federal agency created in 2010 to protect consumers from unfair financial practices. They write rules, supervise financial companies, and handle consumer complaints.",
+    "why_it_matters": "The CFPB is your most powerful ally against predatory lenders. Filing a complaint with them gets a response from the company within 15 days \u2014 companies take CFPB complaints seriously.",
+    "example": "A debt collector calls your workplace after you told them to stop. You file a CFPB complaint online. Within 15 days, the collection agency responds and agrees to stop. The CFPB tracks complaint patterns across all companies.",
+    "page_contexts": [
+      "lending-laws",
+      "review-credit-repair",
+      "review-debt-relief",
+      "wellness-financial-recovery"
+    ]
+  },
+  {
+    "slug": "charge-off",
+    "term": "Charge-Off",
+    "full_form": "Charge-Off",
+    "category": "debt-and-recovery",
+    "plain_definition": "When a creditor declares your debt a loss after 180 days of nonpayment and removes it from their books. But you still owe the money \u2014 they just stop expecting to collect it themselves.",
+    "why_it_matters": "A charge-off is one of the most damaging entries on your credit report and stays for 7 years. The debt is usually sold to a collection agency who will pursue you for it.",
+    "example": "You stop paying your $4,000 credit card. After 180 days, the bank charges it off and sells the debt to a collector for $800. The collector now contacts you demanding the full $4,000 (they profit from what they collect above $800).",
+    "page_contexts": [
+      "review-credit-repair",
+      "review-debt-relief",
+      "wellness-financial-recovery",
+      "wellness-credit-repair"
+    ]
+  },
+  {
+    "slug": "closing-costs",
+    "term": "Closing Costs",
+    "full_form": "Mortgage Closing Costs",
+    "category": "fees-and-costs",
+    "plain_definition": "The fees paid when finalizing a home purchase or refinance \u2014 typically 2-5% of the loan amount. They include appraisal, title insurance, attorney fees, and lender fees.",
+    "why_it_matters": "Closing costs can add $6,000-$15,000 to a home purchase that buyers don't always budget for. Some can be negotiated or rolled into the loan.",
+    "example": "You buy a $300,000 home. Closing costs at 3% = $9,000. That includes: appraisal $500, title insurance $1,500, attorney $800, origination fee $3,000, taxes/escrow $3,200.",
+    "page_contexts": [
+      "lending-laws",
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "collateral",
+    "term": "Collateral",
+    "full_form": "Loan Collateral",
+    "category": "how-loans-work",
+    "plain_definition": "An asset you pledge to the lender as security for a loan. If you stop paying, the lender can seize and sell that asset to recover their money.",
+    "why_it_matters": "Secured loans (with collateral) have lower interest rates because the lender has less risk. But you could lose your home, car, or savings if you default.",
+    "example": "A mortgage uses your house as collateral. A car loan uses your vehicle. A title loan uses your car title. If you miss payments, the lender can foreclose or repossess.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-personal-loans",
+      "review-emergency-cash",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "collections",
+    "term": "Collections",
+    "full_form": "Debt Collections",
+    "category": "debt-and-recovery",
+    "plain_definition": "When an unpaid debt is transferred or sold to a third-party collection agency that specializes in recovering the money. Collection accounts appear on your credit report for 7 years.",
+    "why_it_matters": "Even a $50 collection account can drop your score 50-100 points. Some newer FICO models (FICO 9) ignore paid collections, but many lenders still use older models.",
+    "example": "An old $200 gym bill goes to collections. It appears on all 3 credit reports and drops your 720 score to 640. Paying it helps with newer scoring models but under FICO 8 (still widely used), a paid collection still hurts.",
+    "page_contexts": [
+      "state",
+      "review-credit-repair",
+      "review-debt-relief",
+      "wellness-financial-recovery",
+      "wellness-credit-repair"
+    ]
+  },
+  {
+    "slug": "compound-interest",
+    "term": "Compound Interest",
+    "full_form": "Compound Interest",
+    "category": "interest-and-rates",
+    "plain_definition": "Interest calculated on both the original amount borrowed AND the interest that's already been added. It's 'interest on interest' \u2014 and it makes debt grow faster than you'd expect.",
+    "why_it_matters": "Credit cards and many loans use compound interest. If you only make minimum payments, compound interest is why a $3,000 balance can take 15 years to pay off.",
+    "example": "You owe $1,000 at 20% annual interest compounded monthly. After month 1 you owe $1,016.67. Month 2, interest is charged on $1,016.67 (not $1,000), so you owe $1,033.61. After 1 year without payments: $1,219.",
+    "page_contexts": [
+      "state",
+      "review-personal-loans",
+      "review-emergency-cash",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "cosigner",
+    "term": "Cosigner",
+    "full_form": "Loan Cosigner",
+    "category": "how-loans-work",
+    "plain_definition": "A person who agrees to repay your loan if you can't. They're equally responsible for the debt, and their credit is affected by your payment behavior.",
+    "why_it_matters": "Cosigning helps people with thin credit get approved or get better rates. But it's a huge risk for the cosigner \u2014 they're on the hook for the full amount if you default.",
+    "example": "A parent cosigns their child's $30,000 student loan. The child stops paying after 6 months. The parent is now legally required to make the payments or face collections, lawsuits, and credit damage.",
+    "page_contexts": [
+      "review-personal-loans",
+      "review-business-loans",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "credit-bureau",
+    "term": "Credit Bureau",
+    "full_form": "Credit Reporting Agency (Bureau)",
+    "category": "credit-and-scoring",
+    "plain_definition": "A company that collects and sells information about your credit history. The three major bureaus are Equifax, Experian, and TransUnion.",
+    "why_it_matters": "Not all lenders report to all three bureaus, so your reports may differ. You should check all three reports because an error on one could be costing you money.",
+    "example": "Your car loan only reports to Equifax and TransUnion. Your Experian report doesn't show that good payment history, so your Experian score is 15 points lower.",
+    "page_contexts": [
+      "state",
+      "review-credit-repair",
+      "review-credit-monitoring",
+      "wellness-understanding-credit"
+    ]
+  },
+  {
+    "slug": "credit-freeze",
+    "term": "Credit Freeze",
+    "full_form": "Security Freeze / Credit Freeze",
+    "category": "credit-and-scoring",
+    "plain_definition": "A free tool that locks your credit report so no one (including you) can open new accounts until you lift it. It's the strongest protection against identity theft.",
+    "why_it_matters": "A credit freeze prevents criminals from opening loans in your name, even if they have your Social Security number. It's free by law and doesn't affect your credit score.",
+    "example": "Your data was in a breach. You freeze your credit at all 3 bureaus (takes 10 minutes online). A thief tries to open a credit card in your name \u2014 denied because the lender can't pull your frozen report.",
+    "page_contexts": [
+      "review-credit-repair",
+      "review-credit-monitoring",
+      "wellness-understanding-credit"
+    ]
   },
   {
     "slug": "credit-limit",
@@ -687,16 +255,784 @@
     "plain_definition": "The maximum amount a credit card company allows you to borrow on a single card. Going over this limit can trigger fees and hurt your credit score.",
     "why_it_matters": "Your credit limit directly affects your utilization ratio. A higher limit with the same spending means lower utilization and a better score. You can request limit increases.",
     "example": "Card A: $3,000 limit, you spend $1,500 = 50% utilization (bad). Card B: $10,000 limit, you spend $1,500 = 15% utilization (good). Same spending, different impact on your score.",
-    "page_contexts": ["review-build-credit", "wellness-understanding-credit", "wellness-everyday-finance"]
+    "page_contexts": [
+      "review-build-credit",
+      "wellness-understanding-credit",
+      "wellness-everyday-finance"
+    ]
+  },
+  {
+    "slug": "credit-mix",
+    "term": "Credit Mix",
+    "full_form": "Credit Mix (Types of Credit)",
+    "category": "credit-and-scoring",
+    "plain_definition": "The variety of credit accounts you have \u2014 credit cards (revolving), auto loans (installment), mortgage, student loans, etc. Having multiple types shows you can manage different kinds of debt.",
+    "why_it_matters": "Credit mix accounts for about 10% of your FICO score. Having only credit cards isn't as strong as having a card, an installment loan, and a mortgage.",
+    "example": "Borrower A has 3 credit cards. Borrower B has 2 credit cards, a car loan, and a student loan. Even with the same payment history and utilization, Borrower B's score is typically higher.",
+    "page_contexts": [
+      "review-credit-repair",
+      "review-build-credit",
+      "wellness-understanding-credit"
+    ]
+  },
+  {
+    "slug": "credit-report",
+    "term": "Credit Report",
+    "full_form": "Consumer Credit Report",
+    "category": "credit-and-scoring",
+    "plain_definition": "A detailed record of your borrowing history maintained by credit bureaus. It lists every loan, credit card, payment history, collection, and public record tied to your name.",
+    "why_it_matters": "Errors on credit reports are common \u2014 1 in 5 consumers has at least one mistake. Checking your report regularly is the first step to fixing errors that are costing you money.",
+    "example": "You pull your free report from AnnualCreditReport.com and find a $2,400 medical collection you already paid. You dispute it, the bureau verifies it's resolved, and your score goes up 40 points.",
+    "page_contexts": [
+      "state",
+      "review-credit-repair",
+      "review-credit-monitoring",
+      "wellness-understanding-credit",
+      "wellness-credit-repair"
+    ]
+  },
+  {
+    "slug": "credit-score",
+    "term": "Credit Score",
+    "full_form": "Credit Score",
+    "category": "credit-and-scoring",
+    "plain_definition": "A 3-digit number (300-850) that summarizes how reliably you've handled borrowed money. Higher scores mean lower risk to lenders and better loan terms for you.",
+    "why_it_matters": "Your credit score determines whether you get approved and at what rate. A 100-point difference can mean thousands of dollars more or less in interest over a loan's life.",
+    "example": "On a $250,000 30-year mortgage: a 760 score gets you 6.2% ($1,536/month). A 660 score gets 7.4% ($1,729/month). Over 30 years, the lower score costs you $69,480 more.",
+    "page_contexts": [
+      "state",
+      "review-credit-repair",
+      "review-build-credit",
+      "review-credit-monitoring",
+      "wellness-understanding-credit",
+      "wellness-credit-repair"
+    ]
+  },
+  {
+    "slug": "credit-utilization",
+    "term": "Credit Utilization",
+    "full_form": "Credit Utilization Ratio",
+    "category": "credit-and-scoring",
+    "plain_definition": "The percentage of your available credit that you're currently using. If you have $10,000 in credit limits and owe $3,000, your utilization is 30%.",
+    "why_it_matters": "Utilization is the second-biggest factor in your credit score (after payment history). Keeping it below 30% helps your score; below 10% is ideal.",
+    "example": "You have 3 cards with a $15,000 total limit. You're carrying $4,500 in balances (30% utilization). Paying down to $1,500 (10% utilization) could boost your score by 20-50 points.",
+    "page_contexts": [
+      "review-credit-repair",
+      "review-build-credit",
+      "review-credit-monitoring",
+      "wellness-understanding-credit",
+      "wellness-credit-repair"
+    ]
+  },
+  {
+    "slug": "croa",
+    "term": "CROA",
+    "full_form": "Credit Repair Organizations Act",
+    "category": "legal-terms",
+    "plain_definition": "A federal law that regulates credit repair companies. It bans them from charging upfront fees, making false promises, and requires written contracts with a 3-day cancellation right.",
+    "why_it_matters": "CROA protects you from credit repair scams. If a company demands payment before doing any work, they're likely violating federal law. Legitimate companies charge after results.",
+    "example": "A company says 'Pay $500 upfront and we'll remove all negative items guaranteed.' That violates CROA on two counts: upfront fees and guaranteed results. Legitimate companies charge monthly after work begins.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-credit-repair",
+      "wellness-credit-repair"
+    ]
+  },
+  {
+    "slug": "debt-consolidation",
+    "term": "Debt Consolidation",
+    "full_form": "Debt Consolidation",
+    "category": "debt-and-recovery",
+    "plain_definition": "Combining multiple debts into one single loan with one monthly payment, ideally at a lower interest rate. It simplifies repayment and can reduce total interest.",
+    "why_it_matters": "Consolidation works best when you get a lower rate than your existing debts. But it doesn't reduce what you owe \u2014 and extending the term can mean paying more total interest.",
+    "example": "You have: $5,000 at 22% (credit card), $3,000 at 18% (store card), $2,000 at 25% (payday loan). A $10,000 consolidation loan at 11% saves you ~$2,100 in interest over 3 years.",
+    "page_contexts": [
+      "review-debt-relief",
+      "review-personal-loans",
+      "wellness-financial-recovery"
+    ]
+  },
+  {
+    "slug": "debt-settlement",
+    "term": "Debt Settlement",
+    "full_form": "Debt Settlement / Negotiation",
+    "category": "debt-and-recovery",
+    "plain_definition": "Negotiating with creditors to accept less than the full amount you owe \u2014 typically 40-60 cents on the dollar. Usually done after you've already fallen behind on payments.",
+    "why_it_matters": "Settlement can save thousands, but it severely damages your credit (settled accounts show for 7 years) and the IRS may tax the forgiven amount as income.",
+    "example": "You owe $15,000 on a credit card and negotiate a settlement of $7,500 (50%). You save $7,500 but: your credit drops 100+ points, the account shows 'settled' for 7 years, and you may owe taxes on the $7,500 forgiven.",
+    "page_contexts": [
+      "review-debt-relief",
+      "wellness-financial-recovery"
+    ]
+  },
+  {
+    "slug": "default",
+    "term": "Default",
+    "full_form": "Loan Default",
+    "category": "how-loans-work",
+    "plain_definition": "When you fail to repay a loan according to the agreed terms \u2014 usually after 90-180 days of missed payments. It's the point where the lender gives up on collecting normally.",
+    "why_it_matters": "Default triggers severe consequences: credit score drops 100+ points, the debt may be sent to collections, you could be sued, and your wages or assets could be seized.",
+    "example": "You miss 4 consecutive car payments. The lender declares your loan in default, repossesses your car, sells it at auction for $8,000, and you still owe the remaining $5,000 (called a deficiency balance).",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-personal-loans",
+      "review-debt-relief",
+      "wellness-financial-recovery"
+    ]
+  },
+  {
+    "slug": "dti-ratio",
+    "term": "DTI Ratio",
+    "full_form": "Debt-to-Income Ratio",
+    "category": "debt-and-recovery",
+    "plain_definition": "The percentage of your monthly gross income that goes toward paying debts. Lenders use it to judge whether you can afford another loan payment.",
+    "why_it_matters": "Most lenders want DTI below 36% for personal loans and below 43% for mortgages. Above that, you're considered overextended and likely to be denied.",
+    "example": "You earn $5,000/month gross. Your debts: $1,200 mortgage + $300 car + $200 student loans = $1,700/month. DTI = 34%. A new $400/month loan would push you to 42% \u2014 risky for lenders.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-personal-loans",
+      "review-mortgages",
+      "review-debt-relief",
+      "wellness-loans-and-interest",
+      "wellness-financial-recovery"
+    ]
+  },
+  {
+    "slug": "escrow",
+    "term": "Escrow",
+    "full_form": "Escrow Account",
+    "category": "mortgages",
+    "plain_definition": "An account managed by your mortgage lender that holds money for property taxes and homeowners insurance. A portion of each mortgage payment goes into escrow, and the lender pays these bills for you.",
+    "why_it_matters": "Escrow ensures taxes and insurance are always paid on time (protecting the lender's investment). Your monthly payment may go up if taxes or insurance increase.",
+    "example": "Your mortgage payment is $1,400: $1,050 principal+interest + $250 property taxes + $100 insurance. The $350 for taxes/insurance goes into escrow. The lender pays your tax bill in December from escrow.",
+    "page_contexts": [
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "fcra",
+    "term": "FCRA",
+    "full_form": "Fair Credit Reporting Act",
+    "category": "legal-terms",
+    "plain_definition": "The federal law that regulates how credit bureaus collect, share, and use your information. It gives you the right to see your report, dispute errors, and limit who can access it.",
+    "why_it_matters": "FCRA is the legal basis for disputing errors on your credit report. Bureaus must investigate within 30 days and remove inaccurate information. You can sue if they violate your rights.",
+    "example": "You dispute an incorrect collection on your Equifax report. Under FCRA, Equifax has 30 days to investigate. If they can't verify it, they must remove it. If they ignore your dispute, you can sue for damages.",
+    "page_contexts": [
+      "lending-laws",
+      "review-credit-repair",
+      "wellness-credit-repair",
+      "wellness-understanding-credit"
+    ]
+  },
+  {
+    "slug": "fdcpa",
+    "term": "FDCPA",
+    "full_form": "Fair Debt Collection Practices Act",
+    "category": "legal-terms",
+    "plain_definition": "A federal law that limits what debt collectors can do. They can't call before 8am or after 9pm, can't harass you, can't lie, and must stop contacting you if you request in writing.",
+    "why_it_matters": "Knowing your FDCPA rights stops abusive collection tactics. If a collector violates the law, you can sue for up to $1,000 per violation plus attorney fees.",
+    "example": "A collector calls your workplace 3 times after you told them not to. That's 3 FDCPA violations. You hire a consumer attorney (free \u2014 they get paid by the collector). The collector settles for $3,000.",
+    "page_contexts": [
+      "lending-laws",
+      "review-debt-relief",
+      "review-credit-repair",
+      "wellness-financial-recovery"
+    ]
+  },
+  {
+    "slug": "fha-loan",
+    "term": "FHA Loan",
+    "full_form": "Federal Housing Administration Loan",
+    "category": "mortgages",
+    "plain_definition": "A government-insured mortgage that allows lower down payments (as low as 3.5%) and lower credit score requirements (580+). The FHA insures the loan, reducing risk for lenders.",
+    "why_it_matters": "FHA loans make homeownership accessible for first-time buyers and those with imperfect credit. The tradeoff: you must pay Mortgage Insurance Premium (MIP) for the life of the loan.",
+    "example": "You have a 620 credit score and $10,500 saved. On a $300,000 home: FHA lets you put 3.5% down ($10,500) vs. conventional requiring 5-20% down ($15,000-$60,000).",
+    "page_contexts": [
+      "lending-laws",
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "fico-score",
+    "term": "FICO Score",
+    "full_form": "Fair Isaac Corporation Score",
+    "category": "credit-and-scoring",
+    "plain_definition": "The most widely used credit scoring model, created by Fair Isaac Corporation. 90% of top lenders use FICO scores for lending decisions.",
+    "why_it_matters": "FICO has many versions (FICO 8, 9, 10). Mortgage lenders still use older versions (FICO 2, 4, 5), so your mortgage score may differ from what free apps show you.",
+    "example": "Your FICO 8 score (used for credit cards) is 740. Your FICO 5 score (used for mortgages) is 725 because it weighs collections differently. Same credit history, different scores.",
+    "page_contexts": [
+      "state",
+      "review-credit-repair",
+      "review-credit-monitoring",
+      "wellness-understanding-credit",
+      "wellness-credit-repair"
+    ]
+  },
+  {
+    "slug": "finance-charge",
+    "term": "Finance Charge",
+    "full_form": "Finance Charge",
+    "category": "fees-and-costs",
+    "plain_definition": "The total cost of borrowing, including interest and all fees combined. The lender must disclose this number under the Truth in Lending Act.",
+    "why_it_matters": "The finance charge gives you the total dollar amount you'll pay beyond the principal. It's the clearest picture of what a loan actually costs you.",
+    "example": "You borrow $15,000 for 4 years at 8% APR with a $450 origination fee. Finance charge: $2,612 (interest) + $450 (fee) = $3,062 total. You repay $18,062 for a $15,000 loan.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-personal-loans",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "fixed-rate",
+    "term": "Fixed Rate",
+    "full_form": "Fixed Interest Rate",
+    "category": "interest-and-rates",
+    "plain_definition": "An interest rate that stays the same for the entire life of the loan. Your monthly payment never changes.",
+    "why_it_matters": "Fixed rates protect you from market changes. If rates go up, your payment stays the same. The tradeoff: fixed rates are usually slightly higher than starting variable rates.",
+    "example": "You get a 30-year mortgage at 6.5% fixed. Whether rates rise to 9% or drop to 4% over the next 30 years, your payment stays at $1,264/month on a $200,000 loan.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-personal-loans",
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "garnishment",
+    "term": "Garnishment",
+    "full_form": "Wage Garnishment",
+    "category": "legal-terms",
+    "plain_definition": "A court order that requires your employer to withhold part of your paycheck and send it directly to a creditor. Usually happens after a creditor sues you and wins a judgment.",
+    "why_it_matters": "Federal law limits garnishment to 25% of disposable income. Some states have lower limits. Student loans and taxes can be garnished without a court order.",
+    "example": "You owe $8,000 on a defaulted credit card. The bank sues, gets a judgment, and garnishes your wages. On a $3,000/month net paycheck, they take $750/month until the debt is paid.",
+    "page_contexts": [
+      "lending-laws",
+      "review-debt-relief",
+      "wellness-financial-recovery"
+    ]
+  },
+  {
+    "slug": "grace-period",
+    "term": "Grace Period",
+    "full_form": "Credit Card Grace Period",
+    "category": "credit-cards",
+    "plain_definition": "The time between the end of your billing cycle and the payment due date \u2014 usually 21-25 days \u2014 during which you can pay your balance in full without being charged interest.",
+    "why_it_matters": "If you pay in full every month, you effectively borrow money for free during the grace period. But carry any balance, and you lose the grace period on new purchases too.",
+    "example": "Your billing cycle ends March 15 and payment is due April 6 (21-day grace period). If you pay the full $800 balance by April 6, you pay $0 in interest. If you pay $600, you lose the grace period.",
+    "page_contexts": [
+      "wellness-everyday-finance",
+      "wellness-understanding-credit"
+    ]
+  },
+  {
+    "slug": "hard-inquiry",
+    "term": "Hard Inquiry",
+    "full_form": "Hard Credit Inquiry (Hard Pull)",
+    "category": "credit-and-scoring",
+    "plain_definition": "When a lender checks your credit report because you've applied for credit. Each hard inquiry can lower your score by 5-10 points and stays on your report for 2 years.",
+    "why_it_matters": "Multiple hard inquiries in a short period suggest you're desperately seeking credit, which is a red flag. Exception: mortgage and auto loan shopping within 14-45 days counts as one inquiry.",
+    "example": "You apply for 5 credit cards in one month. Each application triggers a hard inquiry. Your score drops 25-50 points from the inquiries alone, making each subsequent application harder.",
+    "page_contexts": [
+      "review-credit-repair",
+      "review-credit-monitoring",
+      "wellness-understanding-credit",
+      "wellness-credit-repair"
+    ]
+  },
+  {
+    "slug": "installment-loan",
+    "term": "Installment Loan",
+    "full_form": "Installment Loan",
+    "category": "loan-types",
+    "plain_definition": "A loan you repay in fixed monthly payments over a set period \u2014 typically 12 to 60 months. Each payment covers part of the principal plus interest. Personal loans, auto loans, mortgages, and student loans are all installment loans.",
+    "why_it_matters": "Installment loans are the most common way Americans borrow money. Unlike revolving credit (credit cards), installment loans have a clear end date and predictable payments. Making on-time installment payments builds your credit history across all three bureaus.",
+    "example": "You borrow $5,000 as a personal installment loan at 12% APR for 36 months. Your fixed monthly payment is $166. After 36 payments totaling $5,978, the loan is paid off. You paid $978 in interest but built 36 months of positive payment history on your credit report.",
+    "page_contexts": [
+      "review-personal-loans",
+      "review-emergency-cash",
+      "review-debt-relief",
+      "wellness-loans-and-interest",
+      "state",
+      "lending-laws",
+      "review-credit-repair",
+      "review-build-credit"
+    ]
+  },
+  {
+    "slug": "interest-rate",
+    "term": "Interest Rate",
+    "full_form": "Interest Rate",
+    "category": "interest-and-rates",
+    "plain_definition": "The percentage a lender charges you for borrowing their money, calculated on the amount you still owe. It's the lender's profit for taking the risk of lending to you.",
+    "why_it_matters": "Even a 1% difference in interest rate can cost you thousands over a loan's life. Lower rates mean less money out of your pocket.",
+    "example": "On a $20,000 car loan for 5 years: at 5% you pay $2,645 in interest. At 8% you pay $4,332. That 3% difference costs you $1,687 extra.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-personal-loans",
+      "review-mortgages",
+      "review-business-loans",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "judgment",
+    "term": "Judgment",
+    "full_form": "Court Judgment (Debt)",
+    "category": "debt-and-recovery",
+    "plain_definition": "A court ruling that says you legally owe a specific amount to a creditor. It gives the creditor power to garnish wages, freeze bank accounts, or place liens on your property.",
+    "why_it_matters": "Judgments are enforceable for 10-20 years (varies by state) and can be renewed. They give creditors far more collection power than a simple unpaid debt.",
+    "example": "A credit card company sues you for $8,000 and wins a judgment. They can now garnish 25% of your paycheck ($750/month on a $3,000 net salary) and freeze your bank account.",
+    "page_contexts": [
+      "lending-laws",
+      "review-debt-relief",
+      "wellness-financial-recovery"
+    ]
+  },
+  {
+    "slug": "late-fee",
+    "term": "Late Fee",
+    "full_form": "Late Payment Fee",
+    "category": "fees-and-costs",
+    "plain_definition": "A charge added to your account when you miss a payment deadline. Most credit cards charge $29-$41 per late payment, and many loans have similar penalties.",
+    "why_it_matters": "The fee itself hurts, but the real damage is to your credit score. A payment 30+ days late stays on your credit report for 7 years and can drop your score 60-110 points.",
+    "example": "Your credit card payment of $150 is due March 1. You pay on March 18. The bank charges a $39 late fee. If it's 30+ days late, it gets reported to credit bureaus and your 760 score drops to 670.",
+    "page_contexts": [
+      "state",
+      "review-credit-repair",
+      "review-personal-loans",
+      "review-emergency-cash",
+      "wellness-everyday-finance"
+    ]
+  },
+  {
+    "slug": "loan-term",
+    "term": "Loan Term (Tenor)",
+    "full_form": "Loan Term / Tenor",
+    "category": "how-loans-work",
+    "plain_definition": "How long you have to repay the loan, measured in months or years. A shorter term means higher monthly payments but less total interest paid.",
+    "why_it_matters": "Longer terms feel more affordable monthly but cost much more overall. A 30-year mortgage costs almost double in interest compared to a 15-year mortgage on the same amount.",
+    "example": "Borrowing $200,000 at 6.5%: A 15-year term costs $1,742/month ($113,561 total interest). A 30-year term costs $1,264/month ($255,088 total interest). You save $141,527 with the shorter term.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-personal-loans",
+      "review-mortgages",
+      "review-business-loans",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "ltv",
+    "term": "LTV",
+    "full_form": "Loan-to-Value Ratio",
+    "category": "mortgages",
+    "plain_definition": "The ratio of your loan amount to the property's appraised value, expressed as a percentage. It tells the lender how much of the home's value they're financing.",
+    "why_it_matters": "LTV above 80% usually requires Private Mortgage Insurance (PMI), which adds $100-300/month. Lower LTV = lower risk for lender = better rate for you.",
+    "example": "Home value: $300,000. Down payment: $60,000. Loan: $240,000. LTV = 80%. You avoid PMI. If you only put $30,000 down (90% LTV), you'd pay PMI until you reach 80%.",
+    "page_contexts": [
+      "lending-laws",
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "mapr",
+    "term": "MAPR",
+    "full_form": "Military Annual Percentage Rate",
+    "category": "interest-and-rates",
+    "plain_definition": "A special APR calculation used for military servicemembers that includes ALL costs \u2014 fees, insurance, and add-ons \u2014 capped at 36% by federal law.",
+    "why_it_matters": "The Military Lending Act protects active-duty servicemembers and their families from predatory lending. Any lender charging above 36% MAPR to military is breaking federal law.",
+    "example": "A payday lender charges a $15 fee per $100 borrowed for 2 weeks. For civilians, that's technically legal in some states. For military: that works out to 391% MAPR \u2014 illegal under the MLA.",
+    "page_contexts": [
+      "lending-laws",
+      "review-emergency-cash"
+    ]
+  },
+  {
+    "slug": "minimum-payment",
+    "term": "Minimum Payment",
+    "full_form": "Minimum Payment Due",
+    "category": "credit-cards",
+    "plain_definition": "The smallest amount you must pay each month to keep your account in good standing \u2014 usually 1-3% of the balance or $25, whichever is more. Paying only this amount keeps you in debt for years.",
+    "why_it_matters": "Minimum payments are designed to keep you paying interest as long as possible. On a $5,000 balance at 22%, minimum payments would take 20+ years and cost over $8,000 in interest.",
+    "example": "You owe $5,000 at 22% APR. Minimum payment: $100/month. At that rate, it takes 9 years to pay off and you pay $5,840 in interest \u2014 more than you originally borrowed.",
+    "page_contexts": [
+      "review-credit-repair",
+      "wellness-everyday-finance",
+      "wellness-understanding-credit"
+    ]
+  },
+  {
+    "slug": "mla",
+    "term": "MLA",
+    "full_form": "Military Lending Act",
+    "category": "legal-terms",
+    "plain_definition": "A federal law that caps interest at 36% MAPR for active-duty servicemembers and their dependents. It covers payday loans, auto title loans, and consumer credit up to certain amounts.",
+    "why_it_matters": "The MLA exists because predatory lenders historically targeted military bases. Violating the MLA voids the loan \u2014 servicemembers don't have to repay illegally priced loans.",
+    "example": "An active-duty soldier takes a $2,000 payday loan at 400% APR. Under the MLA, that loan is void. The lender can only collect the original $2,000 principal \u2014 not the interest.",
+    "page_contexts": [
+      "lending-laws"
+    ]
+  },
+  {
+    "slug": "mortgage-refinancing",
+    "term": "Mortgage Refinancing",
+    "full_form": "Mortgage Refinancing",
+    "category": "mortgages",
+    "plain_definition": "Replacing your current mortgage with a new one, usually to get a lower rate, change the loan term, or pull cash out of your home equity.",
+    "why_it_matters": "A 1% rate reduction on a $250,000 mortgage saves ~$150/month ($54,000 over 30 years). But closing costs of 2-5% mean you need to stay long enough to break even.",
+    "example": "You have a $300,000 mortgage at 7.5% ($2,098/month). Rates drop to 6%. Refinancing costs $8,000 in closing. New payment: $1,799/month. Monthly savings: $299. Breakeven: 27 months.",
+    "page_contexts": [
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "nsf-fee",
+    "term": "NSF Fee",
+    "full_form": "Non-Sufficient Funds Fee",
+    "category": "fees-and-costs",
+    "plain_definition": "A fee your bank charges when a payment bounces because there isn't enough money in your account. Also called a 'bounced check fee' or 'returned payment fee.'",
+    "why_it_matters": "NSF fees hit you twice \u2014 your bank charges you AND the company you were trying to pay may charge their own returned payment fee. That's $50-70 for one missed payment.",
+    "example": "Your auto-pay tries to pull $350 for rent, but you only have $280 in checking. Your bank charges $35 NSF fee. Your landlord charges $25 returned payment fee. Total damage: $60 in fees.",
+    "page_contexts": [
+      "review-emergency-cash",
+      "wellness-everyday-finance"
+    ]
+  },
+  {
+    "slug": "origination-fee",
+    "term": "Origination Fee",
+    "full_form": "Loan Origination Fee",
+    "category": "how-loans-work",
+    "plain_definition": "A one-time fee the lender charges to process and set up your loan. It covers their costs for underwriting, verifying your information, and preparing paperwork.",
+    "why_it_matters": "Origination fees are usually 1-8% of the loan amount and are often deducted from your loan proceeds \u2014 so you receive less than you borrowed.",
+    "example": "You're approved for a $10,000 personal loan with a 5% origination fee. The lender deducts $500 upfront, so you receive $9,500 in your bank account but owe $10,000 plus interest.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-personal-loans",
+      "review-business-loans",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "penalty-apr",
+    "term": "Penalty APR",
+    "full_form": "Penalty Annual Percentage Rate",
+    "category": "interest-and-rates",
+    "plain_definition": "A higher interest rate that kicks in when you violate your card agreement \u2014 usually by paying late or going over your credit limit. It can be nearly double your normal rate.",
+    "why_it_matters": "One late payment can trigger a penalty APR of 29.99% on your entire balance, and it can last 6 months or longer. Read your card agreement to know the triggers.",
+    "example": "Your credit card rate is 19.99%. You miss a payment by 61+ days. The bank triggers a 29.99% penalty APR. On a $5,000 balance, that's $125/month in interest instead of $83.",
+    "page_contexts": [
+      "review-credit-repair",
+      "wellness-understanding-credit"
+    ]
+  },
+  {
+    "slug": "pmi",
+    "term": "PMI",
+    "full_form": "Private Mortgage Insurance",
+    "category": "mortgages",
+    "plain_definition": "Insurance that protects the LENDER (not you) if you default on a mortgage with less than 20% down payment. You pay the premium, but it only covers the lender's loss.",
+    "why_it_matters": "PMI typically costs 0.5-1.5% of the loan per year and adds nothing to your equity. Once you reach 20% equity, you can request it be removed.",
+    "example": "On a $250,000 loan with 10% down, PMI at 0.8% = $2,000/year ($167/month). After 5 years, your home's value rises and your equity reaches 20%. You request PMI removal and save $167/month.",
+    "page_contexts": [
+      "lending-laws",
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "points",
+    "term": "Points (Discount Points)",
+    "full_form": "Mortgage Discount Points",
+    "category": "fees-and-costs",
+    "plain_definition": "Upfront fees you pay to the lender at closing to buy a lower interest rate. One point = 1% of the loan amount and typically reduces your rate by 0.25%.",
+    "why_it_matters": "Points make sense if you plan to stay in the home long enough for the monthly savings to exceed the upfront cost. That breakeven point is usually 4-6 years.",
+    "example": "On a $250,000 mortgage at 6.5%: you pay 1 point ($2,500) to get 6.25%. Monthly payment drops from $1,580 to $1,539 \u2014 saving $41/month. Breakeven in 61 months (5 years).",
+    "page_contexts": [
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "prepayment-penalty",
+    "term": "Prepayment Penalty",
+    "full_form": "Prepayment Penalty",
+    "category": "how-loans-work",
+    "plain_definition": "A fee some lenders charge if you pay off your loan early. The lender loses the interest they expected to earn, so they penalize you for leaving early.",
+    "why_it_matters": "Always ask about prepayment penalties before signing. They can trap you in a high-rate loan even if you find a better deal to refinance into.",
+    "example": "Your mortgage has a 2% prepayment penalty for the first 3 years. If you refinance after year 2 on a $200,000 balance, you'd owe a $4,000 penalty fee.",
+    "page_contexts": [
+      "lending-laws",
+      "review-personal-loans",
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "prime-rate",
+    "term": "Prime Rate",
+    "full_form": "Prime Rate",
+    "category": "interest-and-rates",
+    "plain_definition": "The base interest rate that banks charge their most creditworthy customers. Most consumer loans are priced as 'prime plus' a certain percentage based on your risk.",
+    "why_it_matters": "When the Federal Reserve raises interest rates, the prime rate goes up, and so does the rate on your credit cards, HELOCs, and variable-rate loans.",
+    "example": "The prime rate is 8.5%. Your credit card charges 'prime + 15%', so your rate is 23.5%. If the Fed raises rates by 0.25%, your credit card rate goes to 23.75%.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "principal",
+    "term": "Principal",
+    "full_form": "Loan Principal",
+    "category": "how-loans-work",
+    "plain_definition": "The original amount of money you borrowed, before any interest or fees are added. It's the 'real' amount of your debt.",
+    "why_it_matters": "Your interest is calculated on the principal. Paying extra toward principal (not just interest) is the fastest way to reduce your total cost and pay off a loan early.",
+    "example": "You borrow $25,000 for a car. That $25,000 is your principal. Your first payment of $450 might split as $150 toward interest and $300 toward principal, bringing your balance to $24,700.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-personal-loans",
+      "review-business-loans",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "refinancing",
+    "term": "Refinancing",
+    "full_form": "Loan Refinancing",
+    "category": "how-loans-work",
+    "plain_definition": "Replacing your current loan with a new one, usually at a lower interest rate or with different terms. The new loan pays off the old one.",
+    "why_it_matters": "Refinancing can save thousands if rates drop or your credit improves. But watch for fees \u2014 a $3,000 refinancing cost needs to be offset by monthly savings.",
+    "example": "You have a $180,000 mortgage at 7.5% ($1,259/month). You refinance to 6% ($1,079/month), saving $180/month. With $3,000 in closing costs, you break even in 17 months.",
+    "page_contexts": [
+      "lending-laws",
+      "review-personal-loans",
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
   },
   {
     "slug": "revolving-credit",
     "term": "Revolving Credit",
     "full_form": "Revolving Credit Line",
     "category": "credit-cards",
-    "plain_definition": "A type of credit that lets you borrow, repay, and borrow again up to a set limit — like a credit card or home equity line (HELOC). There's no fixed end date.",
+    "plain_definition": "A type of credit that lets you borrow, repay, and borrow again up to a set limit \u2014 like a credit card or home equity line (HELOC). There's no fixed end date.",
     "why_it_matters": "Revolving credit gives flexibility but requires discipline. Because there's no forced payoff date, it's easy to carry balances for years and pay enormous interest.",
     "example": "Your credit card limit is $5,000. You charge $2,000, pay back $1,500, then charge $800 more. Your balance is now $1,300 and you still have $3,700 available to borrow again.",
-    "page_contexts": ["wellness-understanding-credit", "wellness-everyday-finance"]
+    "page_contexts": [
+      "wellness-understanding-credit",
+      "wellness-everyday-finance"
+    ]
+  },
+  {
+    "slug": "scra",
+    "term": "SCRA",
+    "full_form": "Servicemembers Civil Relief Act",
+    "category": "legal-terms",
+    "plain_definition": "A federal law that caps interest at 6% on debts taken before military service and provides protections against foreclosure, repossession, and lease termination during deployment.",
+    "why_it_matters": "If you had a 22% credit card before enlisting, SCRA can force the bank to cap it at 6% while you serve. It also prevents losing your home or car while deployed.",
+    "example": "A soldier has a pre-service auto loan at 9%. Under SCRA, the rate drops to 6% during active duty. On a $25,000 balance, that saves about $62/month \u2014 $744/year.",
+    "page_contexts": [
+      "lending-laws"
+    ]
+  },
+  {
+    "slug": "secured-vs-unsecured",
+    "term": "Secured vs. Unsecured Loan",
+    "full_form": "Secured vs. Unsecured Loan",
+    "category": "how-loans-work",
+    "plain_definition": "A secured loan is backed by collateral (an asset the lender can seize). An unsecured loan has no collateral \u2014 the lender relies only on your promise to repay.",
+    "why_it_matters": "Secured loans have lower rates because the lender has less risk. Unsecured loans (credit cards, personal loans) charge higher rates but you don't risk losing an asset.",
+    "example": "Auto loan (secured): 6% APR \u2014 lender can repossess your car. Personal loan (unsecured): 12% APR \u2014 no collateral, but higher rate. Same borrower, same credit score.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-personal-loans",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "service-fee",
+    "term": "Service Fee",
+    "full_form": "Monthly Service Fee",
+    "category": "fees-and-costs",
+    "plain_definition": "A recurring charge for maintaining a financial account or receiving ongoing services, such as credit monitoring, credit repair, or loan servicing.",
+    "why_it_matters": "Monthly service fees add up quickly. A $79/month credit repair service costs $948/year \u2014 make sure the value justifies the ongoing expense.",
+    "example": "A credit repair company charges $79/month to dispute items on your report. After 6 months ($474 spent), they've removed 3 negative items and your score went up 65 points. Was it worth it? Depends on your situation.",
+    "page_contexts": [
+      "review-credit-repair",
+      "wellness-credit-repair",
+      "wellness-everyday-finance"
+    ]
+  },
+  {
+    "slug": "setup-fee",
+    "term": "Setup Fee",
+    "full_form": "Setup Fee / First Work Fee",
+    "category": "fees-and-costs",
+    "plain_definition": "A one-time fee charged at the beginning of a service, often by credit repair companies, to cover the cost of your initial credit analysis and account setup.",
+    "why_it_matters": "Legitimate credit repair companies are NOT allowed to charge before they do work (per the Credit Repair Organizations Act). A setup fee before any results is a red flag.",
+    "example": "Company A charges $99 setup fee before doing anything (potential CROA violation). Company B does a free audit first, then charges a $199 work fee only after completing work (legitimate).",
+    "page_contexts": [
+      "state",
+      "review-credit-repair",
+      "wellness-credit-repair"
+    ]
+  },
+  {
+    "slug": "simple-interest",
+    "term": "Simple Interest",
+    "full_form": "Simple Interest",
+    "category": "interest-and-rates",
+    "plain_definition": "Interest calculated only on the original amount borrowed, not on accumulated interest. It's the simpler, cheaper type of interest.",
+    "why_it_matters": "Most auto loans and some personal loans use simple interest. Paying early saves you money because interest is only on what you still owe.",
+    "example": "You borrow $5,000 at 8% simple interest for 2 years. Interest = $5,000 x 0.08 x 2 = $800 total. You repay $5,800. With compound interest, you'd owe more.",
+    "page_contexts": [
+      "review-personal-loans",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "soft-inquiry",
+    "term": "Soft Inquiry",
+    "full_form": "Soft Credit Inquiry (Soft Pull)",
+    "category": "credit-and-scoring",
+    "plain_definition": "A credit check that does NOT affect your score. Happens when you check your own credit, when lenders pre-qualify you, or when employers do background checks.",
+    "why_it_matters": "You can check your own credit as often as you want without penalty. Prequalification offers from lenders also use soft pulls, so shopping around is safe.",
+    "example": "You use Credit Karma to check your score (soft pull \u2014 no impact). A credit card company sends you a pre-approved offer (soft pull). You then apply for the card (hard pull \u2014 small impact).",
+    "page_contexts": [
+      "review-credit-repair",
+      "review-credit-monitoring",
+      "wellness-understanding-credit"
+    ]
+  },
+  {
+    "slug": "statute-of-limitations",
+    "term": "Statute of Limitations",
+    "full_form": "Statute of Limitations (Debt)",
+    "category": "legal-terms",
+    "plain_definition": "A time limit (typically 3-6 years, varies by state) after which a creditor can no longer sue you to collect a debt. The debt still exists, but they lose the legal power to force payment.",
+    "why_it_matters": "Knowing your state's statute of limitations prevents you from being tricked into paying debts that are legally uncollectable. Beware: making a payment can restart the clock.",
+    "example": "You have a $3,000 credit card debt from 2019. Your state has a 4-year statute of limitations. In 2024, a collector calls demanding payment. The statute has expired \u2014 they cannot sue you.",
+    "page_contexts": [
+      "lending-laws",
+      "review-debt-relief",
+      "wellness-financial-recovery"
+    ]
+  },
+  {
+    "slug": "truth-in-lending",
+    "term": "TILA",
+    "full_form": "Truth in Lending Act",
+    "category": "legal-terms",
+    "plain_definition": "A federal law requiring lenders to clearly disclose loan terms \u2014 APR, finance charge, total payments, and payment schedule \u2014 before you sign. No hidden costs allowed.",
+    "why_it_matters": "TILA gives you the right to compare loan offers on equal terms. Every lender must show costs the same way, making it easier to find the best deal.",
+    "example": "Two lenders offer you a car loan. Lender A says '5.9% rate.' Lender B says '6.2% APR.' Under TILA, both must show APR \u2014 Lender A's true APR with fees is actually 6.8%, making Lender B cheaper.",
+    "page_contexts": [
+      "lending-laws",
+      "review-personal-loans",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "underwriting",
+    "term": "Underwriting",
+    "full_form": "Loan Underwriting",
+    "category": "how-loans-work",
+    "plain_definition": "The process where a lender evaluates your finances \u2014 income, debts, credit history, assets \u2014 to decide whether to approve your loan and at what rate.",
+    "why_it_matters": "Understanding what underwriters look for helps you prepare a stronger application. They check your DTI ratio, employment stability, credit score, and the asset's value.",
+    "example": "You apply for a mortgage. The underwriter reviews your pay stubs (income), bank statements (savings), credit report (history), and orders an appraisal (home value). This takes 2-4 weeks.",
+    "page_contexts": [
+      "review-personal-loans",
+      "review-mortgages",
+      "review-business-loans",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "usury",
+    "term": "Usury",
+    "full_form": "Usury (Illegal Interest)",
+    "category": "legal-terms",
+    "plain_definition": "The practice of charging interest rates higher than what the law allows. Usury laws set state-specific caps on how much lenders can charge.",
+    "why_it_matters": "If a lender charges usurious rates, the loan may be void, penalties can be reduced, or you may be entitled to damages. Know your state's limits.",
+    "example": "Your state caps consumer loans at 24% APR. An online lender charges you 36%. That loan may be unenforceable, and you might only need to repay the principal \u2014 no interest or fees.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-emergency-cash",
+      "wellness-financial-recovery"
+    ]
+  },
+  {
+    "slug": "usury-rate",
+    "term": "Usury Rate",
+    "full_form": "Usury Rate (Interest Rate Cap)",
+    "category": "interest-and-rates",
+    "plain_definition": "The maximum interest rate a lender can legally charge in a particular state. Charging above this rate is called 'usury' and is illegal.",
+    "why_it_matters": "Usury laws are your main legal protection against predatory interest rates. But beware: some states have weak or no usury caps, and federal banks can sometimes override state limits.",
+    "example": "New York caps interest at 16% for most consumer loans (25% is criminal usury). If a lender tries to charge you 30% in NY, that loan is unenforceable \u2014 you could fight it in court.",
+    "page_contexts": [
+      "state",
+      "lending-laws",
+      "review-emergency-cash",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "va-loan",
+    "term": "VA Loan",
+    "full_form": "Department of Veterans Affairs Loan",
+    "category": "mortgages",
+    "plain_definition": "A mortgage guaranteed by the Department of Veterans Affairs for eligible military members, veterans, and surviving spouses. Key benefits: no down payment required and no PMI.",
+    "why_it_matters": "VA loans are among the best mortgage deals available \u2014 0% down, no PMI, and competitive rates. They're earned through military service and can be used multiple times.",
+    "example": "A veteran buys a $350,000 home with a VA loan: $0 down, no PMI, 5.8% rate ($2,054/month). A comparable conventional loan with 5% down would require $17,500 down plus $175/month PMI.",
+    "page_contexts": [
+      "lending-laws",
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
+  },
+  {
+    "slug": "vantagescore",
+    "term": "VantageScore",
+    "full_form": "VantageScore",
+    "category": "credit-and-scoring",
+    "plain_definition": "An alternative credit scoring model created by the three major credit bureaus (Equifax, Experian, TransUnion). Same 300-850 range as FICO but uses a slightly different formula.",
+    "why_it_matters": "Many free credit monitoring apps show VantageScore, not FICO. Your VantageScore may be 20-40 points different from the FICO score a lender actually uses.",
+    "example": "Credit Karma shows your VantageScore 3.0 as 720. You apply for a mortgage and the lender pulls your FICO 2 score: it's 695. Different model, different number, different rate offered.",
+    "page_contexts": [
+      "review-credit-repair",
+      "review-credit-monitoring",
+      "wellness-understanding-credit"
+    ]
+  },
+  {
+    "slug": "variable-rate",
+    "term": "Variable Rate",
+    "full_form": "Variable (Adjustable) Interest Rate",
+    "category": "interest-and-rates",
+    "plain_definition": "An interest rate that can go up or down over time, usually tied to a benchmark like the prime rate. Your monthly payment changes when the rate changes.",
+    "why_it_matters": "Variable rates often start lower than fixed rates to attract borrowers, but they can increase significantly. Many people who got hurt in the 2008 crisis had adjustable-rate mortgages.",
+    "example": "You start with a 5/1 ARM mortgage at 5.5%. For the first 5 years you pay $1,136/month on $200,000. Then the rate adjusts to 7.5%, and your payment jumps to $1,398/month.",
+    "page_contexts": [
+      "lending-laws",
+      "review-personal-loans",
+      "review-mortgages",
+      "wellness-loans-and-interest"
+    ]
   }
 ]
