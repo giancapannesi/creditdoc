@@ -1,10 +1,10 @@
 {
   "name": "Western Union Money Order Only",
   "slug": "western-union-money-order-only-seattle",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union Money Order Only — Money order service in Seattle, WA.",
-  "description_long": "Western Union Money Order Only provides Money order service. Located at 819 Virginia St, Seattle, WA 98101.",
+  "description_short": "Western Union operates hundreds of agent locations across the US offering money transfers, money orders, bill payments, and cash pickup services since 1851.",
+  "description_long": "Western Union is a global money transfer service established in 1851 that has evolved into a multi-service financial platform with extensive physical presence across the United States. The company operates through hundreds of agent locations\u2014including partnerships with major retailers like Walmart, grocery chains, and banking institutions\u2014making their services highly accessible to consumers seeking in-person financial transactions.\n\nWestern Union's core offerings include domestic and international money transfers, money order issuance and cashing, bill payment services (utilities, rent, car payments), cash pickup from transferred funds, and prepaid card loading. Customers can initiate transfers online or through their mobile app and complete transactions in person at agent locations, or handle entire transactions at the counter with valid ID. The company provides Money Transfer Control Numbers (MTCNs) for tracking and recipient verification.\n\nThe company distinguishes itself through its 170+ years of operational history, massive network of accessible locations integrated into everyday shopping destinations, and hybrid service model allowing online initiation with in-person completion. They emphasize encryption and fraud prevention measures, offer same-day service availability at many locations, and provide multiple payment methods (cash, debit card, credit card at select locations).\n\nWestern Union is a straightforward service provider for specific, transactional needs rather than a comprehensive financial institution. While reliable and convenient for their stated services, they do not offer currency exchange at locations, and pricing varies significantly by transfer method and destination. Their service is most valuable for customers who need physical location access and prefer in-person transaction completion.",
   "logo_url": "https://lh3.googleusercontent.com/-bnomlhwQ6gI/AAAAAAAAAAI/AAAAAAAAAAA/BG6PyHzfads/s44-p-k-no-ns-nd/photo.jpg",
   "website_url": "https://www.westernunion.com/us/en/locations.html",
   "affiliate_url": "",
@@ -58,18 +58,49 @@
     "transparency": 2.0,
     "ease_of_use": 3.9
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Extensive network with hundreds of agent locations including Walmart, grocery chains, and bank partners across the US",
+    "Hybrid service model: start transfer online/via app and complete in person to save time at counter",
+    "Money orders available as trusted alternative to checks with purchase and cashing at participating locations",
+    "Same-day or quick cash pickup available for received transfers via MTCN verification",
+    "Multiple payment options accepted: cash, debit card, and credit card at select locations",
+    "Free first online international money transfer",
+    "Bill payment services available at participating locations (utilities, rent, car payments)",
+    "Operational since 1851 with stated encryption and fraud prevention protections"
+  ],
+  "cons": [
+    "No currency exchange services provided at physical locations\u2014international recipients get local currency based on rate at time of transfer with no control over exchange",
+    "Pricing varies significantly between online and in-person transactions; website encourages users to use cost calculator but doesn't publish standard rates",
+    "Service hours depend on host location (Walmart, grocery store, bank partner) rather than dedicated Western Union hours, creating inconsistent availability",
+    "Limited details on fees structure provided\u2014customers must contact specific location or use calculator to determine actual costs",
+    "Money orders must be cashed at participating locations or deposited in bank account; not all Western Union locations process them"
+  ],
+  "best_for": [
+    "Unbanked or underbanked consumers needing reliable in-person cash transfer and money order services",
+    "People sending domestic or international remittances to family or friends without bank accounts",
+    "Bill payers without online banking access who need in-person utility, rent, or payment services",
+    "Consumers preferring to initiate transfers online but complete transactions in physical locations with cash"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union is best for consumers who need reliable, in-person money transfer and payment services and prefer physical transaction locations over digital-only platforms. The main caveat is that pricing is opaque and varies considerably by method and destination\u2014users must actively compare costs and understand that in-person transactions may cost differently than online alternatives.",
   "services": [
-    "Money order service"
+    "Domestic money transfers in person at agent locations",
+    "International money transfers with MTCN tracking",
+    "Money order purchase at participating locations",
+    "Money order cashing and verification",
+    "Bill payment services (utilities, rent, car payments) at participating locations",
+    "Cash pickup from transferred funds using MTCN and valid ID",
+    "Prepaid Visa Card loading and account opening",
+    "Online and mobile app money transfer initiation",
+    "In-person money transfer completion with valid ID",
+    "Money Transfer Control Number (MTCN) generation and tracking",
+    "Service at retail locations (Walmart, grocery chains, bank partners)",
+    "Payment processing (cash, debit card, credit card at select locations)"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-04-02",
   "review_status": "draft",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x549015df240fbabf:0xbbcca8519a34f5ea",
     "google_rating": 1.8,
@@ -101,13 +132,14 @@
       ]
     }
   },
-  "processing_status": "raw",
-  "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "processing_status": "ready_for_index",
+  "quality_score": 10,
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-08",
   "no_index": true,
   "contact": {
     "phone": "",
     "address": ""
-  }
+  },
+  "has_been_enriched": true
 }

@@ -693,18 +693,18 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
 
         // Category recommendations based on purpose
         const purposeCategories = {
-          'debt-consolidation': ['debt-relief', 'personal-loans', 'fix-my-credit'],
+          'debt-consolidation': ['debt-relief', 'personal-loans', 'credit-repair'],
           'emergency': ['emergency-cash', 'payday-alternatives', 'personal-loans'],
           'major-purchase': ['personal-loans', 'build-credit'],
-          'credit-repair': ['fix-my-credit', 'credit-monitoring', 'free-help'],
-          'just-looking': ['credit-monitoring', 'personal-loans', 'fix-my-credit'],
+          'credit-repair': ['credit-repair', 'credit-monitoring', 'free-help'],
+          'just-looking': ['credit-monitoring', 'personal-loans', 'credit-repair'],
         };
 
         // Adjust categories based on credit score
-        let categories = purposeCategories[a[4]] || ['personal-loans', 'fix-my-credit'];
+        let categories = purposeCategories[a[4]] || ['personal-loans', 'credit-repair'];
         if (a[3] === 'poor' || a[3] === 'unknown') {
           // Prepend credit repair for poor/unknown credit
-          categories = ['fix-my-credit', ...categories.filter(c => c !== 'fix-my-credit')];
+          categories = ['credit-repair', ...categories.filter(c => c !== 'credit-repair')];
         }
 
         // Build insights
@@ -741,7 +741,7 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
         const actions = [];
         if (a[3] === 'poor' || a[3] === 'unknown') {
           actions.push({ text: 'Check your credit report for free', link: '/financial-wellness/how-to-get-free-credit-report/', type: 'primary' });
-          actions.push({ text: 'Explore credit repair companies', link: '/categories/fix-my-credit/', type: 'secondary' });
+          actions.push({ text: 'Explore credit repair companies', link: '/categories/credit-repair/', type: 'secondary' });
         }
         if (a[4] === 'debt-consolidation') {
           actions.push({ text: 'Compare debt relief options', link: '/categories/debt-relief/', type: 'primary' });
@@ -752,11 +752,11 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
         } else if (a[4] === 'major-purchase') {
           actions.push({ text: 'Compare personal loan rates', link: '/categories/personal-loans/', type: 'primary' });
         } else if (a[4] === 'credit-repair') {
-          actions.push({ text: 'Compare credit repair companies', link: '/categories/fix-my-credit/', type: 'primary' });
+          actions.push({ text: 'Compare credit repair companies', link: '/categories/credit-repair/', type: 'primary' });
           actions.push({ text: 'Read: DIY credit repair guide', link: '/financial-wellness/diy-credit-repair-step-by-step/', type: 'secondary' });
         }
         if (actions.length < 3) {
-          actions.push({ text: 'Browse all categories', link: '/categories/fix-my-credit/', type: 'secondary' });
+          actions.push({ text: 'Browse all categories', link: '/categories/credit-repair/', type: 'secondary' });
         }
 
         return { score, label, color, badgeBg, lowRange, highRange, maxLoan, currentDTI, apr, insights, actions, categories };
@@ -847,7 +847,7 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
         });
 
         if (shown.size === 0) {
-          lendersGrid.innerHTML = '<p class="text-sm text-muted">We\'re building our lender recommendations. Browse our <a href="/categories/fix-my-credit/" class="text-primary hover:underline">categories</a> to explore options.</p>';
+          lendersGrid.innerHTML = '<p class="text-sm text-muted">We\'re building our lender recommendations. Browse our <a href="/categories/credit-repair/" class="text-primary hover:underline">categories</a> to explore options.</p>';
         }
 
         // GA4 event

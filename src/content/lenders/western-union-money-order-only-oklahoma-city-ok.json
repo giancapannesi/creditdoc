@@ -1,10 +1,10 @@
 {
   "name": "Western Union Money Order Only",
   "slug": "western-union-money-order-only-oklahoma-city-ok",
-  "category": "emergency-cash",
+  "category": "check-cashing",
   "subcategories": [],
-  "description_short": "Western Union Money Order Only — Money order service in Oklahoma City, OK.",
-  "description_long": "Western Union Money Order Only provides Money order service. Located at 4700 N Western Ave, Oklahoma City, OK 73118.",
+  "description_short": "Western Union operates a global money transfer network with 500K+ agent locations offering money orders, cash pickup, bill payment, and wire transfers through retail partners.",
+  "description_long": "Western Union is a century-old money movement company operating one of the world's largest networks of physical agent locations for financial services. The company primarily functions through partnerships with major retailers like Walmart, Safeway, City Market, Circle K, and Kroger, rather than operating standalone branches. Customers can access Western Union services at these retail agent locations during store hours, with availability varying by location and service type.\n\nThe company's core offerings include: sending money domestically and internationally, picking up cash transfers, money order issuance, bill payment services, wire transfers, prepaid card services, mobile top-up functionality, and inmate payment services. Customers can initiate transactions online 24/7 through WU.com and complete payment in-store at agent locations. The platform includes tracking capabilities, account history, a rewards program, and multi-language support (English, Spanish, Haitian Creole, Chinese, French, Vietnamese).\n\nWestern Union's primary distinction is its unmatched physical agent network density\u2014particularly in underbanked and rural areas where bank branches are scarce. The company explicitly notes that certain locations offer \"Money Order Services only,\" indicating that not all agents provide the full service portfolio, which is transparent on their location finder tool. Their 24/7 online initiation with in-store completion flexibility differentiates them from traditional banks with fixed hours.\n\nThe honest assessment: Western Union serves essential infrastructure for unbanked/underbanked populations and international remittances, but the distributed agent model means service quality and availability are inconsistent. Fees are not transparent on the location finder, and the company's historical regulatory scrutiny around money laundering compliance should factor into consumer decision-making. The emphasis on \"Money Order Services only\" at select locations suggests service fragmentation that may create consumer friction.",
   "logo_url": "",
   "website_url": "https://www.westernunion.com/us/en/find-locations.html",
   "affiliate_url": "",
@@ -58,18 +58,48 @@
     "transparency": 2.0,
     "ease_of_use": 3.9
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Massive agent network with 150+ locations visible in single state search, including rural areas underserved by banks",
+    "24/7 online transaction initiation through WU.com with flexible in-store completion during agent hours",
+    "Multi-language support across 6 languages including Spanish, Haitian Creole, and Vietnamese",
+    "Money orders available at retail locations with extended hours (some Circle K locations open until 11:59 PM)",
+    "Integrated services including bill payment, mobile top-up, prepaid cards, and inmate payments beyond money orders",
+    "Transaction tracking and account history features for money movement verification",
+    "Rewards program offering incentives for repeat users"
+  ],
+  "cons": [
+    "Service availability inconsistent\u2014location finder explicitly notes \"Money Order Services only\" at select agents, limiting full functionality",
+    "Fees and pricing not disclosed on location-finding interface, requiring in-store inquiry or online estimation tool",
+    "Dependent on retail partner hours rather than dedicated locations, creating access limitations during off-hours",
+    "Historical regulatory and compliance scrutiny around money laundering and fraud prevention may create additional documentation requirements",
+    "Website navigation complexity with multiple menu options and payment method errors ('Orange wallet temporarily unavailable') affecting user experience"
+  ],
+  "best_for": [
+    "Unbanked and underbanked consumers in rural areas without branch banking access",
+    "International remittance senders needing domestic cash pickup by family members",
+    "Consumers seeking money orders at extended retail hours (evenings/weekends) when banks are closed",
+    "Incarcerated individuals' family members making inmate commissary payments"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Western Union's money order and cash services are best for consumers in underbanked areas without bank access, particularly those needing weekend/evening service or international remittance capabilities. The main caveat is that service availability varies significantly by agent location, fees are opaque upfront, and the distributed retail model means inconsistent service quality\u2014verify specific agent capabilities and pricing before relying on this service.",
   "services": [
-    "Money order service"
+    "Money order issuance at retail agent locations",
+    "Domestic money transfer with cash pickup",
+    "International money transfer",
+    "Bill payment services",
+    "Wire transfers",
+    "Prepaid card services (Western Union Prepaid)",
+    "Mobile top-up for phone accounts",
+    "Inmate payment services",
+    "Transaction tracking and history",
+    "Online money transfer initiation (24/7 at WU.com)",
+    "Rewards program membership",
+    "Receiver management and delivery method updates"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-03-21",
   "review_status": "draft",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x87b21b070bede843:0xf17ed13b2706f4f5",
     "google_rating": 1.0,
@@ -101,10 +131,10 @@
       ]
     }
   },
-  "processing_status": "raw",
-  "quality_score": 1,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "processing_status": "ready_for_index",
+  "quality_score": 10,
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-08",
   "no_index": true,
   "contact": {
     "phone": "",
@@ -112,5 +142,6 @@
   },
   "website_found_by": "scrapeforge",
   "website_found_at": "2026-04-04T17:10:02.629482",
-  "email": "email@domain.com"
+  "email": "email@domain.com",
+  "has_been_enriched": true
 }

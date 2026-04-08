@@ -1,6 +1,6 @@
 ---
 const categories = [
-  { value: 'fix-my-credit', label: 'Fix My Credit', type: 'credit-repair' },
+  { value: 'credit-repair', label: 'Credit Repair', type: 'credit-repair' },
   { value: 'personal-loans', label: 'I Need a Loan', type: 'loan' },
   { value: 'emergency-cash', label: 'Emergency Cash', type: 'loan' },
   { value: 'payday-alternatives', label: 'Payday Alternatives', type: 'loan' },
@@ -22,7 +22,7 @@ import { US_STATES } from '../utils/data';
 // Context-aware follow-up option sets — each category gets filters that
 // match how consumers actually shop for that type of service
 const contextOptions = {
-  'fix-my-credit': {
+  'credit-repair': {
     second: {
       label: "What's your issue?",
       name: 'issue',
@@ -222,7 +222,7 @@ const contextOptionsJson = JSON.stringify(contextOptions);
 
 // Map categories to their context key
 const categoryContextMap = {
-  'fix-my-credit': 'fix-my-credit',
+  'credit-repair': 'credit-repair',
   'personal-loans': 'loan',
   'emergency-cash': 'emergency-cash',
   'payday-alternatives': 'payday-alternatives',

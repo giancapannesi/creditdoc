@@ -267,12 +267,12 @@ const stateEntries = US_STATES.map(state => ({
       const loanCategories = ['personal-loans', 'emergency-cash', 'payday-alternatives'];
       const isLoanMode = params.mode === 'loans' || loanCategories.indexOf(params.category) !== -1;
 
-      // Category keyword aliases — so searching "credit repair" matches fix-my-credit
+      // Category keyword aliases — so searching "credit repair" matches credit-repair
       const categoryAliases = {
-        'credit repair': 'fix-my-credit',
-        'fix my credit': 'fix-my-credit',
-        'fix credit': 'fix-my-credit',
-        'repair credit': 'fix-my-credit',
+        'credit repair': 'credit-repair',
+        'fix my credit': 'credit-repair',
+        'fix credit': 'credit-repair',
+        'repair credit': 'credit-repair',
         'personal loan': 'personal-loans',
         'personal loans': 'personal-loans',
         'payday loan': 'payday-alternatives',
@@ -369,7 +369,7 @@ const stateEntries = US_STATES.map(state => ({
       let headingText = 'All Companies';
       if (params.category) {
         const categoryLabels = {
-          'fix-my-credit': 'Credit Repair',
+          'credit-repair': 'Credit Repair',
           'personal-loans': 'Personal Loans',
           'emergency-cash': 'Emergency Cash',
           'payday-alternatives': 'Payday Alternatives',

@@ -20,7 +20,6 @@ const isServiceCategory = category.filter_type === 'service';
 
 // Map category to wellness guide category
 const guideMap: Record<string, string> = {
-  'fix-my-credit': 'credit-repair',
   'credit-repair': 'credit-repair',
   'debt-relief': 'financial-recovery',
   'personal-loans': 'loans-and-interest',
@@ -136,7 +135,7 @@ const jsonLd = [
         </p>
         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
-            href="/categories/fix-my-credit/"
+            href="/categories/credit-repair/"
             class="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors"
           >
             Browse Credit Repair Companies

@@ -6,7 +6,7 @@ const currentPath = Astro.url.pathname;
 
 /* Group categories by section for the dropdown */
 const creditRepair = categories.filter(c =>
-  ['fix-my-credit', 'build-credit', 'credit-monitoring', 'credit-cards'].includes(c.slug)
+  ['credit-repair', 'build-credit', 'credit-monitoring', 'credit-cards'].includes(c.slug)
 );
 const loansCash = categories.filter(c =>
   ['personal-loans', 'emergency-cash', 'payday-alternatives', 'business-loans', 'mortgages'].includes(c.slug)
