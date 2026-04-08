@@ -8,10 +8,10 @@
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "Federal Credit Union in , . Low-income designated. NCUA insured. 8 locations.",
-  "description_long": "San Francisco is a federal credit union serving members in , , established in 1954. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) — small, affordable loans designed to replace predatory payday lending. The credit union operates 8 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "San Francisco's official city government website (sf.gov) provides access to municipal services, permits, housing assistance, business resources, and elected official information.",
+  "description_long": "San Francisco's official website (sf.gov) is the primary digital portal for the City and County of San Francisco's government services and information. Launched to consolidate municipal resources, the site serves as the central hub for residents, businesses, and city staff to access government functions. The website offers comprehensive services spanning housing assistance, business registration and support, job searches, permitting, voting information, and contact details for elected officials including Mayor Daniel Lurie and the Board of Supervisors. SF.gov distinguishes itself as a legitimate government resource by providing direct access to municipal departments, housing programs that include affordable rental options and home-buying assistance through City programs, and the Rent Board resources for tenant and landlord disputes. The site also maintains current information on elected officers including the Public Defender, District Attorney, Sheriff, Treasurer, Assessor-Recorder, and City Attorney. However, it's important to note that SF.gov is a government information portal, not a financial services provider or consumer finance company. It does not offer loans, credit products, financial counseling, or any regulated financial services. While the housing section mentions rent affordability programs and home-buying assistance, these are municipal housing programs, not consumer finance products. Users should not expect credit evaluation, lending decisions, or traditional financial products from this resource.",
   "logo_url": "",
-  "website_url": "",
+  "website_url": "https://www.sf.gov/",
   "affiliate_url": "",
   "affiliate_program": "",
   "pricing": {
@@ -24,25 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)",
-    "Payday Alternative Loans (PALs)"
+    "Property tax bill payment and information",
+    "Job search and employment listings",
+    "Marriage licensing and ceremonies at City Hall",
+    "Building permits and safety compliance resources",
+    "Business registration, licensing, and closure information",
+    "Affordable housing rental assistance programs",
+    "City-assisted home-buying information",
+    "Rent Board tenant and landlord resources",
+    "Voter registration and voting information",
+    "Public records access",
+    "Elected official contact information",
+    "Municipal events and meeting calendars"
   ],
   "pros": [
-    "Not-for-profit — typically lower fees and better rates than banks",
-    "NCUA insured — deposits protected up to $250,000",
-    "Established in 1954",
-    "Member-owned cooperative",
-    "Low-income designated — may offer Payday Alternative Loans (PALs)"
+    "Official government source with verified, accurate municipal information",
+    "Provides free housing assistance information including affordable rental programs and city-backed home-buying help",
+    "Free job search portal for employment opportunities",
+    "Direct access to elected officials and government representatives",
+    "Comprehensive permitting and business registration guidance",
+    "Free Rent Board resources for tenant and landlord information",
+    "Centralized municipal services reducing need to visit multiple agencies"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Not a financial services provider\u2014cannot offer loans or credit products",
+    "Housing assistance information is municipal programs, not consumer finance solutions",
+    "Website is informational only; does not process financial transactions",
+    "Not regulated by financial oversight bodies like CFPB or state banking regulators",
+    "Does not address individual credit repair, debt management, or personal lending needs"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +61,7 @@
   "founded_year": 1954,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "24542",
   "published": true,
   "review_status": "draft",
@@ -92,19 +101,23 @@
     "ease_of_use": 4.0
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Payday loan alternatives (PALs)"
+    "San Francisco residents seeking municipal services and government information",
+    "Small business owners looking for city licensing and registration guidance",
+    "Job seekers in San Francisco",
+    "Tenants and landlords seeking Rent Board dispute resources"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "SF.gov is San Francisco's official government website and is completely miscategorized as a payday-alternative lender. This is a municipal information portal providing free government services, not a financial services provider. It should not appear on CreditDoc and is not appropriate for any consumer finance category.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
-  "last_updated": "2026-03-21",
+  "last_updated": "2026-04-08",
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "enriching",
   "quality_score": 7,
-  "enrichment_attempts": 0,
-  "no_index": true
+  "enrichment_attempts": 1,
+  "no_index": true,
+  "website_needs_review": true,
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-08"
 }
