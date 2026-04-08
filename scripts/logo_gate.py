@@ -36,7 +36,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 LENDER_DIR = PROJECT_ROOT / "src" / "content" / "lenders"
 LOGO_DIR = PROJECT_ROOT / "public" / "logos"
 
-GOOGLE_FAVICON = "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://{host}&size=128"
+# GOOGLE_FAVICON REMOVED — returns Google-branded icons, trademark liability
+DDG_FAVICON = "https://icons.duckduckgo.com/ip3/{host}.ico"
 ICON_HORSE = "https://icon.horse/icon/{host}"
 
 # CreditDoc brand colors for placeholders
@@ -97,7 +98,7 @@ def fetch_favicon(website_url):
     if not host:
         return None
 
-    for url in [GOOGLE_FAVICON.format(host=host), ICON_HORSE.format(host=host)]:
+    for url in [DDG_FAVICON.format(host=host), ICON_HORSE.format(host=host)]:
         try:
             r = requests.get(url, timeout=10, allow_redirects=True,
                            headers={"User-Agent": "Mozilla/5.0 CreditDoc/1.0"})
