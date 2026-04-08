@@ -131,7 +131,7 @@ const jsonLd = [
             )}
             <div class="w-16 h-16 rounded-2xl bg-bg-alt border border-border flex items-center justify-center mx-auto overflow-hidden">
               {lender.logo_url ? (
-                <img src={lender.logo_url} alt={`${lender.name} logo`} class="w-12 h-12 object-contain" loading="lazy" />
+                <img src={lender.logo_url} alt={`${lender.name} logo`} class="w-12 h-12 object-contain" loading="lazy" onerror={`this.onerror=null;this.parentElement.innerHTML='<span class="text-xl font-bold text-primary">${lender.name.charAt(0)}</span>'`} />
               ) : (
                 <span class="text-xl font-bold text-primary">{lender.name.charAt(0)}</span>
               )}

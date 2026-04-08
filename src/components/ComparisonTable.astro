@@ -75,7 +75,7 @@ const winnerBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-ligh
           <div class="flex flex-col items-center gap-2">
             <div class="w-12 h-12 rounded-xl bg-bg-alt border border-border flex items-center justify-center overflow-hidden">
               {lenderA.logo_url ? (
-                <img src={lenderA.logo_url} alt={lenderA.name} class="w-8 h-8 object-contain" loading="lazy" />
+                <img src={lenderA.logo_url} alt={lenderA.name} class="w-8 h-8 object-contain" loading="lazy" onerror={`this.onerror=null;this.parentElement.innerHTML='<span class="text-sm font-bold text-primary">${lenderA.name.charAt(0)}</span>'`} />
               ) : (
                 <span class="text-sm font-bold text-primary">{lenderA.name.charAt(0)}</span>
               )}
@@ -89,7 +89,7 @@ const winnerBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-ligh
           <div class="flex flex-col items-center gap-2">
             <div class="w-12 h-12 rounded-xl bg-bg-alt border border-border flex items-center justify-center overflow-hidden">
               {lenderB.logo_url ? (
-                <img src={lenderB.logo_url} alt={lenderB.name} class="w-8 h-8 object-contain" loading="lazy" />
+                <img src={lenderB.logo_url} alt={lenderB.name} class="w-8 h-8 object-contain" loading="lazy" onerror={`this.onerror=null;this.parentElement.innerHTML='<span class="text-sm font-bold text-primary">${lenderB.name.charAt(0)}</span>'`} />
               ) : (
                 <span class="text-sm font-bold text-primary">{lenderB.name.charAt(0)}</span>
               )}

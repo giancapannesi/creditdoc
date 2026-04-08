@@ -24,6 +24,7 @@ const monthlyPrice = formatPrice(lender.pricing.monthly_price);
           alt={`${lender.name} logo`}
           class="w-10 h-10 object-contain"
           loading="lazy"
+          onerror={`this.onerror=null;this.parentElement.innerHTML='<span class="text-lg font-bold text-primary">${lender.name.charAt(0)}</span>'`}
         />
       ) : lender.website_url ? (
         <img
@@ -31,7 +32,7 @@ const monthlyPrice = formatPrice(lender.pricing.monthly_price);
           alt={`${lender.name} logo`}
           class="w-10 h-10 object-contain"
           loading="lazy"
-          onerror={`this.onerror=function(){this.onerror=null;this.parentElement.innerHTML='<span class=\"text-lg font-bold text-primary\">${lender.name.charAt(0)}</span>'};this.src='https://icon.horse/icon/${new URL(lender.website_url).hostname}?size=large'`}
+          onerror={`this.onerror=function(){this.onerror=null;this.parentElement.innerHTML='<span class="text-lg font-bold text-primary">${lender.name.charAt(0)}</span>'};this.src='https://icon.horse/icon/${new URL(lender.website_url).hostname}?size=large'`}
         />
       ) : (
         <span class="text-lg font-bold text-primary">
