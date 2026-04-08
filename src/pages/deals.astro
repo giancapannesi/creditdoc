@@ -40,7 +40,7 @@ const specials = getSpecials();
               <div class="flex items-start gap-4 mb-4">
                 <div class="w-12 h-12 rounded-xl bg-bg-alt border border-border flex items-center justify-center shrink-0 overflow-hidden">
                   {lender?.logo_url ? (
-                    <img src={lender.logo_url} alt={`${special.lender_name} logo`} class="w-8 h-8 object-contain" loading="lazy" />
+                    <img src={lender.logo_url} alt={`${special.lender_name} logo`} class="w-8 h-8 object-contain" loading="lazy" onerror={`this.onerror=null;this.parentElement.innerHTML='<span class="text-sm font-bold text-primary">${special.lender_name.charAt(0)}</span>'`} />
                   ) : (
                     <span class="text-sm font-bold text-primary">{special.lender_name.charAt(0)}</span>
                   )}
