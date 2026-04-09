@@ -37,6 +37,17 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 LENDER_DIR = PROJECT_ROOT / "src" / "content" / "lenders"
 LOGO_DIR = PROJECT_ROOT / "public" / "logos"
 
+# === CreditDoc DB API (Phase 3 dual-write — 2026-04-09) ===
+# logo_url is a PERSISTENT field. The logo downloader is a legitimate source
+# of improvements (empty → local path, or upgrade external to local).
+# Uses force=True since it's an intentional persistent-field update.
+sys.path.insert(0, str(PROJECT_ROOT / "tools"))
+try:
+    from creditdoc_db import CreditDocDB, ProtectedProfileError
+    HAS_PERSISTENCE_DB = True
+except Exception:
+    HAS_PERSISTENCE_DB = False
+
 # Favicon fallback APIs (for lenders with no logo_url)
 # GOOGLE_FAVICON REMOVED — returns Google-branded icons, trademark liability
 DDG_FAVICON = "https://icons.duckduckgo.com/ip3/{host}.ico"
@@ -157,10 +168,34 @@ def download_favicon(host):
 
 
 def update_json(json_path, logo_path):
-    """Set logo_url in lender JSON."""
+    """Set logo_url in lender JSON AND mirror to persistence DB."""
     data = json.loads(json_path.read_text())
+    slug = data.get('slug') or json_path.stem
+
+    # Write to JSON file (legacy, for Astro build)
     data["logo_url"] = logo_path
     json_path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+
+    # Dual-write: mirror to persistence DB (Phase 3)
+    # logo_url is PERSISTENT — use force=True since the downloader is the
+    # authoritative source of logo path values
+    if not HAS_PERSISTENCE_DB:
+        return
+
+    try:
+        with CreditDocDB() as db:
+            if db.lender_exists(slug):
+                db.update_lender(
+                    slug,
+                    {"logo_url": logo_path},
+                    updated_by='logo_downloader',
+                    reason=f'Logo localized to {logo_path}',
+                    force=True,
+                )
+    except ProtectedProfileError:
+        print(f"  DB blocked (protected): {slug}")
+    except Exception as e:
+        print(f"  DB mirror failed: {type(e).__name__}: {e}")
 
 
 def print_stats():

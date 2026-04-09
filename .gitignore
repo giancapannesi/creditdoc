@@ -17,3 +17,9 @@ AUDIT_REPORT_*.md
 audit-*.md
 content_drip_log.json
 scripts/__pycache__/
+tools/__pycache__/
+
+# Persistence DB (Phase 3 — SQLite source of truth, backed up separately)
+data/creditdoc.db
+data/creditdoc.db-wal
+data/creditdoc.db-shm
