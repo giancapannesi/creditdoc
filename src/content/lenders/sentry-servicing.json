@@ -4,7 +4,7 @@
   "category": "credit-repair",
   "subcategories": [],
   "description_short": "Unable to verify company profile. Website access denied and no alternative data available for factual assessment.",
-  "description_long": "Sentry Servicing was listed under the 'fix-my-credit' category on CreditDoc with a website URL pointing to a Zillow profile page. However, the attempt to access https://www.zillow.com/profile/sentryservicing resulted in a bot-detection barrier preventing content review. This is highly unusual—Zillow profiles are typically real estate agent or broker pages, not credit repair service websites, suggesting a potential miscategorization or incorrect URL. Without access to the company's actual website, marketing materials, terms of service, or customer documentation, no factual assessment of their services, business model, or offerings can be generated. The bot-detection block may indicate the page uses aggressive anti-scraping measures, but more likely indicates this URL does not represent an active or legitimate credit repair company web presence. Any profile generated without verified website content would constitute speculation rather than fact-based consumer research.",
+  "description_long": "Sentry Servicing was listed under the 'fix-my-credit' category on CreditDoc with a website URL pointing to a Zillow profile page. However, the attempt to access https://www.zillow.com/profile/sentryservicing resulted in a bot-detection barrier preventing content review. This is highly unusual\u2014Zillow profiles are typically real estate agent or broker pages, not credit repair service websites, suggesting a potential miscategorization or incorrect URL. Without access to the company's actual website, marketing materials, terms of service, or customer documentation, no factual assessment of their services, business model, or offerings can be generated. The bot-detection block may indicate the page uses aggressive anti-scraping measures, but more likely indicates this URL does not represent an active or legitimate credit repair company web presence. Any profile generated without verified website content would constitute speculation rather than fact-based consumer research.",
   "logo_url": "",
   "website_url": "https://www.zillow.com/profile/sentryservicing",
   "affiliate_url": "",
@@ -67,7 +67,7 @@
   ],
   "best_for": [],
   "similar_lenders": [],
-  "diagnosis": "Cannot recommend or profile Sentry Servicing without accessible company website and verifiable business information. This entry requires verification—either the URL is incorrect, the company is inactive, or the categorization is wrong. Do not include in CreditDoc without updated and accessible company data.",
+  "diagnosis": "Cannot recommend or profile Sentry Servicing without accessible company website and verifiable business information. This entry requires verification\u2014either the URL is incorrect, the company is inactive, or the categorization is wrong. Do not include in CreditDoc without updated and accessible company data.",
   "services": [
     "Credit counseling service"
   ],
@@ -84,7 +84,7 @@
     "phone": "+1 888-742-4023",
     "working_hours": {}
   },
-  "processing_status": "enriching",
+  "processing_status": "failed_quarantine",
   "quality_score": 1,
   "enrichment_attempts": 1,
   "last_engine_run": "2026-04-08",
@@ -94,5 +94,6 @@
     "phone": "",
     "address": ""
   },
-  "has_been_enriched": true
+  "has_been_enriched": true,
+  "quarantine_reason": "not_consumer_finance"
 }
