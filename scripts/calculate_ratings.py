@@ -25,6 +25,19 @@ import sys
 LENDERS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                            "src", "content", "lenders")
 
+# === CreditDoc DB API (Phase 3 dual-write — 2026-04-09) ===
+# rating_breakdown is a PERSISTENT field. The calculator is a legitimate
+# source of improvements to it, so it uses force=True when mirroring to DB.
+# rating (number) is transient — recalculated from rating_breakdown.
+_TOOLS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                          "tools")
+sys.path.insert(0, _TOOLS_DIR)
+try:
+    from creditdoc_db import CreditDocDB, ProtectedProfileError
+    HAS_PERSISTENCE_DB = True
+except Exception:
+    HAS_PERSISTENCE_DB = False
+
 WEIGHTS = {
     "value": 0.20,
     "effectiveness": 0.25,
@@ -347,8 +360,39 @@ def load_profile(slug):
 
 
 def save_profile(data, path):
+    # Write to JSON file (legacy, for Astro build)
     with open(path, "w") as f:
         json.dump(data, f, indent=2)
+
+    # Dual-write: mirror to persistence DB (Phase 3)
+    # rating_breakdown is PERSISTENT — use force=True since the calculator
+    # is a legitimate source of rating improvements. rating (number) is transient.
+    if not HAS_PERSISTENCE_DB:
+        return
+
+    slug = data.get('slug') or os.path.basename(path).replace('.json', '')
+    update_fields = {}
+    if 'rating' in data:
+        update_fields['rating'] = data['rating']
+    if 'rating_breakdown' in data:
+        update_fields['rating_breakdown'] = data['rating_breakdown']
+    if not update_fields:
+        return
+
+    try:
+        with CreditDocDB() as db:
+            if db.lender_exists(slug):
+                db.update_lender(
+                    slug,
+                    update_fields,
+                    updated_by='rating_calculator',
+                    reason='5-dim rating recalculation',
+                    force=True,
+                )
+    except ProtectedProfileError:
+        print(f"  DB blocked (protected): {slug}")
+    except Exception as e:
+        print(f"  DB mirror failed: {type(e).__name__}: {e}")
 
 
 def format_comparison(slug, old_rating, old_breakdown, new_rating, new_breakdown):
