@@ -55,6 +55,14 @@ const MONEY_LINKS: MoneyLink[] = [
   { phrase: 'instalment loan', url: '/categories/personal-loans/', title: 'Personal Loan Lenders' },
   { phrase: 'installment loans', url: '/categories/personal-loans/', title: 'Personal Loan Lenders' },
   { phrase: 'personal loans', url: '/categories/personal-loans/', title: 'Personal Loan Lenders' },
+  // 2026-04-15: added to cover all 18 live /best/ listicles per INTERLINKING_MAP.md
+  { phrase: 'no credit check credit cards', url: '/best/best-no-credit-check-cards/', title: 'Best No Credit Check Cards' },
+  { phrase: 'no credit check cards', url: '/best/best-no-credit-check-cards/', title: 'Best No Credit Check Cards' },
+  { phrase: 'cheapest personal loans', url: '/best/cheapest-personal-loans/', title: 'Cheapest Personal Loans' },
+  { phrase: 'lowest rate personal loans', url: '/best/cheapest-personal-loans/', title: 'Cheapest Personal Loans' },
+  { phrase: 'credit repair money back guarantee', url: '/best/best-credit-repair-money-back-guarantee/', title: 'Credit Repair with Money Back Guarantee' },
+  { phrase: 'credit repair for veterans', url: '/best/best-credit-repair-veterans/', title: 'Best Credit Repair for Veterans' },
+  { phrase: 'credit repair after bankruptcy', url: '/best/best-credit-repair-after-bankruptcy/', title: 'Best Credit Repair After Bankruptcy' },
 ];
 
 const SORTED_MONEY_LINKS = [...MONEY_LINKS].sort((a, b) => b.phrase.length - a.phrase.length);
@@ -139,6 +147,7 @@ function linkifyParagraph(
 
 /**
  * Process full description_long. Each term linked only once across all paragraphs.
+ * Used by /review/[slug].astro — caps stay at 5 money + 5 glossary (legacy behaviour).
  */
 export function linkifyDescription(
   descriptionLong: string,
@@ -152,4 +161,36 @@ export function linkifyDescription(
   return descriptionLong.split('\n\n').map(paragraph =>
     linkifyParagraph(paragraph, glossaryTerms, usedPhrases, moneyBudget, glossaryBudget)
   );
+}
+
+/**
+ * Per-page linker factory. Holds usedPhrases + budget ACROSS multiple calls,
+ * so a template rendering N sections can call linker(section1) ... linker(sectionN)
+ * and the "each term linked once per page" rule persists across sections.
+ *
+ * Used by /answers/[slug].astro — default caps 8 money + 8 glossary (per Apr 12 plan).
+ */
+export interface PageLinker {
+  (text: string): string[];
+  usedPhrases: Set<string>;
+  moneyRemaining: () => number;
+  glossaryRemaining: () => number;
+}
+
+export function createLinker(
+  glossaryTerms: GlossaryTerm[],
+  opts: { moneyBudget?: number; glossaryBudget?: number } = {},
+): PageLinker {
+  const usedPhrases = new Set<string>();
+  const moneyBudget = { remaining: opts.moneyBudget ?? 8 };
+  const glossaryBudget = { remaining: opts.glossaryBudget ?? 8 };
+
+  const fn = ((text: string): string[] =>
+    text.split('\n\n').map(paragraph =>
+      linkifyParagraph(paragraph, glossaryTerms, usedPhrases, moneyBudget, glossaryBudget)
+    )) as PageLinker;
+  fn.usedPhrases = usedPhrases;
+  fn.moneyRemaining = () => moneyBudget.remaining;
+  fn.glossaryRemaining = () => glossaryBudget.remaining;
+  return fn;
 }
