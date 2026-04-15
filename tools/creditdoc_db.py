@@ -605,6 +605,156 @@ class CreditDocDB:
         )
         self.conn.commit()
 
+    # ═══════════════════════════════════════════════════════════════
+    # CLUSTER ANSWERS (Apr 15 2026 — cluster content plan executor)
+    # ═══════════════════════════════════════════════════════════════
+
+    def get_cluster_answer(self, slug):
+        row = self.conn.execute(
+            "SELECT data FROM cluster_answers WHERE slug = ?", (slug,)
+        ).fetchone()
+        return json.loads(row["data"]) if row else None
+
+    def list_cluster_answers(self, status=None, pillar=None, cluster_id=None):
+        sql = "SELECT data FROM cluster_answers WHERE 1=1"
+        params = []
+        if status:
+            sql += " AND status = ?"
+            params.append(status)
+        if pillar:
+            sql += " AND cluster_pillar = ?"
+            params.append(pillar)
+        if cluster_id:
+            sql += " AND cluster_id = ?"
+            params.append(cluster_id)
+        sql += " ORDER BY updated_at DESC"
+        rows = self.conn.execute(sql, params).fetchall()
+        return [json.loads(r["data"]) for r in rows]
+
+    def count_cluster_answers(self, status=None, pillar=None):
+        sql = "SELECT COUNT(*) as n FROM cluster_answers WHERE 1=1"
+        params = []
+        if status:
+            sql += " AND status = ?"
+            params.append(status)
+        if pillar:
+            sql += " AND cluster_pillar = ?"
+            params.append(pillar)
+        return self.conn.execute(sql, params).fetchone()["n"]
+
+    def upsert_cluster_answer(self, slug, data: dict, updated_by: str, force: bool = False):
+        """
+        Upsert a cluster answer. `data` must include: cluster_id, cluster_pillar, title,
+        h1, meta_description, target_money_page, banner_category. All other fields
+        go into the JSON `data` blob.
+
+        Protection: will not REPLACE an existing published row unless force=True or
+        updated_by='founder'. Publishing a draft (status draft->published) is always
+        allowed for the script that wrote the draft.
+        """
+        if not slug:
+            raise ValueError("cluster_answer must have a slug")
+        required = ["cluster_id", "cluster_pillar", "title", "h1",
+                    "meta_description", "target_money_page", "banner_category"]
+        missing = [f for f in required if not data.get(f)]
+        if missing:
+            raise ValueError(f"cluster_answer {slug} missing required fields: {missing}")
+
+        existing = self.conn.execute(
+            "SELECT status FROM cluster_answers WHERE slug = ?", (slug,)
+        ).fetchone()
+        if existing and existing["status"] == "published" and not force and updated_by != "founder":
+            raise ProtectedProfileError(
+                f"cluster_answer '{slug}' is already published. Pass force=True to overwrite."
+            )
+
+        ts = _now()
+        status = data.get("status", "draft")
+        published_at = data.get("published_at") or (ts if status == "published" else None)
+        last_updated = data.get("last_updated") or ts
+
+        self.conn.execute(
+            """INSERT OR REPLACE INTO cluster_answers
+               (slug, cluster_id, cluster_pillar, title, h1, meta_description,
+                target_money_page, banner_category, data, compliance_score,
+                compliance_passed, status, published_at, last_updated,
+                created_at, updated_at, updated_by)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+                       COALESCE((SELECT created_at FROM cluster_answers WHERE slug = ?), ?),
+                       ?, ?)""",
+            (
+                slug,
+                data["cluster_id"],
+                data["cluster_pillar"],
+                data["title"],
+                data["h1"],
+                data["meta_description"],
+                data["target_money_page"],
+                data["banner_category"],
+                json.dumps(data, separators=(",", ":")),
+                int(data.get("compliance_score") or 0),
+                1 if data.get("compliance_passed") else 0,
+                status,
+                published_at,
+                last_updated,
+                slug,  # for COALESCE created_at lookup
+                ts,
+                ts,
+                updated_by,
+            ),
+        )
+        self.conn.execute(
+            """INSERT INTO audit_log (slug, table_name, field_changed, changed_by, changed_at, reason)
+               VALUES (?, 'cluster_answers', 'UPSERT', ?, ?, ?)""",
+            (slug, updated_by, ts, f"cluster_answer upserted status={status} score={data.get('compliance_score') or 0}"),
+        )
+        self.conn.commit()
+
+    def delete_cluster_answer(self, slug, updated_by: str):
+        if updated_by != "founder":
+            raise ProtectedProfileError(
+                f"delete_cluster_answer requires updated_by='founder' (got '{updated_by}')"
+            )
+        ts = _now()
+        self.conn.execute("DELETE FROM cluster_answers WHERE slug = ?", (slug,))
+        self.conn.execute(
+            """INSERT INTO audit_log (slug, table_name, field_changed, changed_by, changed_at, reason)
+               VALUES (?, 'cluster_answers', 'DELETE', ?, ?, 'founder-initiated delete')""",
+            (slug, updated_by, ts),
+        )
+        self.conn.commit()
+
+    def export_cluster_answers_to_json(self, output_dir=None):
+        """
+        Export all status='published' cluster_answers rows to
+        creditdoc/src/content/answers/{slug}.json (the Astro content collection).
+        Returns the list of slugs written.
+        """
+        import pathlib
+        if output_dir is None:
+            output_dir = pathlib.Path(__file__).resolve().parent.parent / "src" / "content" / "answers"
+        output_dir = pathlib.Path(output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        rows = self.conn.execute(
+            "SELECT slug, data FROM cluster_answers WHERE status = 'published'"
+        ).fetchall()
+
+        written = []
+        ts = _now()
+        for row in rows:
+            slug = row["slug"]
+            data = json.loads(row["data"])
+            out = output_dir / f"{slug}.json"
+            out.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+            written.append(slug)
+            self.conn.execute(
+                "UPDATE cluster_answers SET exported_at = ? WHERE slug = ?",
+                (ts, slug),
+            )
+        self.conn.commit()
+        return written
+
     def get_all_comparisons(self):
         return [json.loads(r["data"]) for r in self.conn.execute("SELECT data FROM comparisons").fetchall()]
 

@@ -519,6 +519,115 @@ export function getBlogPostsByCategory(category: string): BlogPost[] {
   return getBlogPosts().filter(p => p.category === category);
 }
 
+// --- Cluster Answers (Apr 15 2026 — cluster content plan) ---
+// Source of truth: cluster_answers table in creditdoc.db
+// Exported to src/content/answers/{slug}.json by CreditDocDB.export_cluster_answers_to_json()
+// Only status='published' rows are exported.
+
+const ANSWERS_DIR = path.join(process.cwd(), 'src/content/answers');
+
+export type ClusterPillar =
+  | 'credit-score'
+  | 'credit-repair'
+  | 'build-credit'
+  | 'personal-loans'
+  | 'debt-relief'
+  | 'credit-cards'
+  | 'credit-monitoring'
+  | 'identity-theft'
+  | 'financial-wellness';
+
+export type BannerCategory =
+  | 'credit-repair'
+  | 'personal-loans'
+  | 'build-credit'
+  | 'debt-relief'
+  | 'credit-monitoring'
+  | 'identity-theft';
+
+export interface ClusterAnswerSection {
+  heading: string;
+  content: string;
+}
+
+export interface ClusterAnswerFAQ {
+  question: string;
+  answer: string;
+}
+
+export interface ClusterAnswerInternalLink {
+  phrase: string;
+  url: string;
+  type: 'glossary' | 'money_listicle' | 'lender_profile' | 'sibling_answer' | 'category';
+}
+
+export interface ClusterAnswerPrimarySource {
+  name: string;
+  url: string;
+}
+
+export interface ClusterAnswer {
+  slug: string;
+  cluster_id: string;
+  cluster_pillar: ClusterPillar;
+  title: string;
+  h1: string;
+  meta_description: string;
+  target_money_page: string;
+  banner_category: BannerCategory;
+  questions_answered: string[];
+  sections: ClusterAnswerSection[];
+  faq_schema: ClusterAnswerFAQ[];
+  internal_links: ClusterAnswerInternalLink[];
+  primary_sources: ClusterAnswerPrimarySource[];
+  author?: string;
+  reviewed_by?: string;
+  published_at?: string;
+  last_updated?: string;
+  youtube_script?: string;
+  reel_script?: string;
+  email_snippet?: string;
+  compliance_score?: number;
+  compliance_passed?: boolean;
+  status?: 'draft' | 'ready_for_review' | 'approved' | 'published';
+}
+
+let _clusterAnswersCache: ClusterAnswer[] | null = null;
+
+export function getClusterAnswers(): ClusterAnswer[] {
+  if (_clusterAnswersCache) return _clusterAnswersCache;
+  if (!fs.existsSync(ANSWERS_DIR)) {
+    _clusterAnswersCache = [];
+    return _clusterAnswersCache;
+  }
+  const files = fs.readdirSync(ANSWERS_DIR).filter(f => f.endsWith('.json'));
+  _clusterAnswersCache = files.map(f => {
+    const raw = fs.readFileSync(path.join(ANSWERS_DIR, f), 'utf-8');
+    return JSON.parse(raw) as ClusterAnswer;
+  });
+  return _clusterAnswersCache;
+}
+
+export function getClusterAnswerBySlug(slug: string): ClusterAnswer | undefined {
+  return getClusterAnswers().find(a => a.slug === slug);
+}
+
+export function getClusterAnswersByPillar(pillar: ClusterPillar): ClusterAnswer[] {
+  return getClusterAnswers().filter(a => a.cluster_pillar === pillar);
+}
+
+export function getClusterAnswersByCluster(cluster_id: string): ClusterAnswer[] {
+  return getClusterAnswers().filter(a => a.cluster_id === cluster_id);
+}
+
+export function getSiblingClusterAnswers(slug: string, limit: number = 4): ClusterAnswer[] {
+  const self = getClusterAnswerBySlug(slug);
+  if (!self) return [];
+  return getClusterAnswers()
+    .filter(a => a.slug !== slug && a.cluster_pillar === self.cluster_pillar)
+    .slice(0, limit);
+}
+
 // --- Education Search Data ---
 
 export function getEducationSearchData() {
