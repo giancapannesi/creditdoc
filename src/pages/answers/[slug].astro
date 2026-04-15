@@ -21,7 +21,7 @@ const { slug } = Astro.params;
 const answer = getClusterAnswerBySlug(slug!)!;
 const siblings = getSiblingClusterAnswers(slug!, 4);
 
-// Glossary context based on cluster pillar — feeds the inline linker.
+// Glossary context feeds the inline linker.
 const glossaryTerms = getGlossaryTermsForContext([
   `cluster-${answer.cluster_pillar}`,
   `answer-${answer.cluster_id}`,
@@ -30,33 +30,45 @@ const glossaryTerms = getGlossaryTermsForContext([
   'blog-personal-loans',
 ]);
 
-// Apply the inline linker with per-page state so caps persist across sections.
-// Caps: 8 money + 8 glossary total for the whole page (per Apr 12 plan).
+// Per-page linker: 8 money + 8 glossary caps persist across all sections.
 const linker = createLinker(glossaryTerms, { moneyBudget: 8, glossaryBudget: 8 });
 const linkedSections = answer.sections.map(section => ({
   heading: section.heading,
   content: linker(section.content).join('\n\n'),
 }));
 
-// Convert simple markdown (headings, bold, tables, lists) to HTML.
-// We intentionally use a small inline renderer rather than a full MD pipeline —
-// sections come from the cluster executor (Phase 3) which is prompted to
-// produce the same minimal subset.
+// Derive key takeaways from the first sentence of the first 4 sections (used in TL;DR card).
+function firstSentence(md: string): string {
+  const plain = md.replace(/[#*_`|]/g, '').replace(/\s+/g, ' ').trim();
+  const m = plain.match(/^(.*?[.!?])(\s|$)/);
+  return (m ? m[1] : plain.slice(0, 160)).trim();
+}
+const keyTakeaways = answer.sections.slice(0, 4).map(s => firstSentence(s.content)).filter(Boolean);
+
+// Convert a minimal markdown subset to HTML (tables, headings, lists, bold, italic).
+// Matches typography of existing site components (glass-card with dark text).
 function mdToHtml(src: string): string {
   const lines = src.split('\n');
   const out: string[] = [];
-  let inTable = false;
   let tableRows: string[][] = [];
+  let inTable = false;
   let inList = false;
+
+  function inline(s: string): string {
+    return s
+      .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-semibold text-text">$1</strong>')
+      .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
+  }
 
   const flushTable = () => {
     if (!tableRows.length) return;
     const [header, _sep, ...body] = tableRows;
-    out.push('<div class="overflow-x-auto my-6"><table class="w-full text-sm border border-border rounded-lg overflow-hidden">');
-    out.push('<thead class="bg-bg-alt"><tr>' + header.map(c => `<th class="px-4 py-2 text-left font-semibold">${inline(c)}</th>`).join('') + '</tr></thead>');
+    out.push('<div class="my-6 overflow-x-auto rounded-lg border border-border">');
+    out.push('<table class="w-full text-sm">');
+    out.push('<thead class="bg-bg-alt"><tr>' + header.map(c => `<th class="px-4 py-2.5 text-left font-semibold text-text">${inline(c)}</th>`).join('') + '</tr></thead>');
     out.push('<tbody>');
     for (const row of body) {
-      out.push('<tr class="border-t border-border">' + row.map(c => `<td class="px-4 py-2">${inline(c)}</td>`).join('') + '</tr>');
+      out.push('<tr class="border-t border-border">' + row.map(c => `<td class="px-4 py-2.5 text-text">${inline(c)}</td>`).join('') + '</tr>');
     }
     out.push('</tbody></table></div>');
     tableRows = [];
@@ -65,14 +77,6 @@ function mdToHtml(src: string): string {
   const flushList = () => {
     if (inList) { out.push('</ul>'); inList = false; }
   };
-
-  function inline(s: string): string {
-    // Preserve HTML that the linker already inserted (<a>, <strong>, etc.) —
-    // apply bold for **x** and italic for *x* only outside tags.
-    return s
-      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-      .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
-  }
 
   for (const raw of lines) {
     const line = raw.trimEnd();
@@ -86,13 +90,13 @@ function mdToHtml(src: string): string {
     }
     if (line.startsWith('### ')) {
       flushList();
-      out.push(`<h3 class="text-xl font-semibold mt-6 mb-3 text-text">${inline(line.slice(4))}</h3>`);
+      out.push(`<h4 class="text-lg font-semibold text-text mt-6 mb-2">${inline(line.slice(4))}</h4>`);
     } else if (line.startsWith('## ')) {
       flushList();
-      out.push(`<h3 class="text-2xl font-semibold mt-6 mb-3 text-text">${inline(line.slice(3))}</h3>`);
+      out.push(`<h4 class="text-lg font-semibold text-text mt-6 mb-2">${inline(line.slice(3))}</h4>`);
     } else if (line.startsWith('- ')) {
-      if (!inList) { out.push('<ul class="list-disc pl-6 my-3 space-y-1 text-text">'); inList = true; }
-      out.push(`<li>${inline(line.slice(2))}</li>`);
+      if (!inList) { out.push('<ul class="list-disc pl-6 my-3 space-y-1.5 text-text">'); inList = true; }
+      out.push(`<li class="leading-relaxed">${inline(line.slice(2))}</li>`);
     } else if (line === '') {
       flushList();
       out.push('');
@@ -109,20 +113,27 @@ function mdToHtml(src: string): string {
 const canonicalUrl = `https://creditdoc.co/answers/${answer.slug}/`;
 const siteName = 'CreditDoc';
 
-// JSON-LD: Article + FAQPage + BreadcrumbList
+// JSON-LD
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: answer.h1,
   description: answer.meta_description,
-  author: { '@type': 'Organization', name: answer.author || 'CreditDoc Editorial' },
+  author: {
+    '@type': 'Person',
+    name: 'Harvey Brooks',
+    jobTitle: 'Senior Financial Editor',
+    url: 'https://creditdoc.co/about/',
+  },
   publisher: {
     '@type': 'Organization',
     name: siteName,
-    logo: { '@type': 'ImageObject', url: 'https://creditdoc.co/logo.png' },
+    url: 'https://creditdoc.co',
+    logo: { '@type': 'ImageObject', url: 'https://creditdoc.co/favicon.svg' },
   },
   datePublished: answer.published_at || answer.last_updated,
   dateModified: answer.last_updated || answer.published_at,
+  image: 'https://creditdoc.co/og-default.png',
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
 };
 
@@ -145,83 +156,126 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 3, name: answer.h1, item: canonicalUrl },
   ],
 };
+
+const jsonLd = [articleSchema, faqSchema, breadcrumbSchema];
 ---
 
 <BaseLayout
   title={answer.title}
   description={answer.meta_description}
   canonical={canonicalUrl}
+  jsonLd={jsonLd}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <!-- Breadcrumbs -->
+  <nav class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li><a href="/answers/" class="hover:text-primary transition-colors">Answers</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li class="text-text font-medium truncate">{answer.h1}</li>
+    </ol>
+  </nav>
 
-  <article class="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
-    <nav class="text-sm text-muted mb-4">
-      <a href="/" class="hover:text-primary">Home</a>
-      <span class="mx-2">/</span>
-      <a href="/answers/" class="hover:text-primary">Answers</a>
-      <span class="mx-2">/</span>
-      <span class="text-text">{answer.cluster_pillar.replace('-', ' ')}</span>
-    </nav>
+  <!-- Header -->
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <h1 class="text-2xl sm:text-3xl font-bold text-text">{answer.h1}</h1>
+      <p class="mt-3 text-muted leading-relaxed">{answer.meta_description}</p>
+      <p class="mt-3 text-sm text-muted">Written by <a href="/about/" class="text-primary hover:underline font-medium">Harvey Brooks</a>, Senior Financial Editor</p>
+    </div>
+  </section>
 
-    <h1 class="text-3xl sm:text-4xl font-bold text-text mb-4 leading-tight">{answer.h1}</h1>
+  <!-- TL;DR / Key Takeaways -->
+  {keyTakeaways.length > 0 && (
+    <section class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
+      <div class="rounded-xl border-2 border-primary/30 bg-gradient-to-r from-primary/5 to-primary/10 p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary text-white uppercase tracking-wide">Key Takeaways</span>
+          <span class="text-xs text-muted">Quick answers to the core questions</span>
+        </div>
+        <ul class="space-y-1.5">
+          {keyTakeaways.map((t) => (
+            <li class="flex items-start gap-2 text-sm text-muted">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
+              </svg>
+              <span set:html={t} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
 
-    <p class="text-lg text-muted mb-6 leading-relaxed">{answer.meta_description}</p>
-
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
-      <div>
+  <!-- Main content + sidebar -->
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
+      <!-- Main column -->
+      <div class="space-y-6">
         {linkedSections.map((section, idx) => (
-          <section class="mb-8">
-            <h2 class="text-2xl font-bold text-text mt-8 mb-4">{section.heading}</h2>
+          <article class="glass-card p-6">
+            <h2 class="text-xl sm:text-2xl font-bold text-text mb-4">{section.heading}</h2>
             <div set:html={mdToHtml(section.content)} />
-            {idx === 1 && <AffiliateInline category={answer.banner_category} />}
-          </section>
+            {idx === 1 && <div class="mt-6"><AffiliateInline category={answer.banner_category} /></div>}
+          </article>
         ))}
 
+        {/* Money CTA */}
+        <div class="rounded-xl border-2 border-primary/30 bg-gradient-to-r from-primary/5 to-primary/10 p-6">
+          <h2 class="text-xl font-bold text-text mb-2">Ready to take action?</h2>
+          <p class="text-muted mb-4">Compare our top-rated options for this topic and find the right fit for your situation.</p>
+          <a
+            href={answer.target_money_page}
+            class="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary-hover transition-colors"
+          >
+            See the full comparison
+            <svg xmlns="http://www.w3.org/2000/svg" class="ml-1.5 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </div>
+
+        {/* FAQ */}
         {answer.faq_schema && answer.faq_schema.length > 0 && (
-          <section class="mt-12">
-            <h2 class="text-2xl font-bold text-text mb-6">Frequently Asked Questions</h2>
+          <section id="faq">
+            <h2 class="text-2xl font-bold text-text mb-4">Frequently Asked Questions</h2>
             <div class="space-y-4">
               {answer.faq_schema.map(f => (
-                <details class="rounded-lg border border-border bg-bg-alt p-4">
-                  <summary class="font-semibold text-text cursor-pointer">{f.question}</summary>
-                  <p class="mt-2 text-text leading-relaxed">{f.answer}</p>
+                <details class="glass-card p-5 group" open>
+                  <summary class="flex items-center justify-between cursor-pointer list-none">
+                    <h3 class="text-base font-semibold text-text pr-4">{f.question}</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-muted shrink-0 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/>
+                    </svg>
+                  </summary>
+                  <p class="mt-3 text-sm text-muted leading-relaxed">{f.answer}</p>
                 </details>
               ))}
             </div>
           </section>
         )}
 
-        <section class="mt-12 rounded-xl border border-primary/30 bg-primary/5 p-6">
-          <h2 class="text-xl font-bold text-text mb-2">Ready to take action?</h2>
-          <p class="text-text mb-4">Compare our top-rated options and find the right fit for your situation.</p>
-          <a
-            href={answer.target_money_page}
-            class="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary-hover transition-colors"
-          >
-            See the full list →
-          </a>
-        </section>
-
+        {/* Related answers */}
         {siblings.length > 0 && (
-          <section class="mt-12">
-            <h2 class="text-2xl font-bold text-text mb-6">Related Answers</h2>
+          <section>
+            <h2 class="text-2xl font-bold text-text mb-4">Related Answers</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {siblings.map(s => (
-                <a href={`/answers/${s.slug}/`} class="block rounded-lg border border-border bg-bg-alt p-4 hover:border-primary transition-colors">
-                  <div class="text-sm text-primary font-semibold mb-1">{s.cluster_pillar.replace('-', ' ')}</div>
-                  <div class="text-text font-semibold">{s.h1}</div>
+                <a href={`/answers/${s.slug}/`} class="glass-card p-4 block hover:border-primary transition-colors">
+                  <div class="text-xs text-primary font-semibold uppercase tracking-wide mb-1">{s.cluster_pillar.replace('-', ' ')}</div>
+                  <div class="text-text font-semibold leading-snug">{s.h1}</div>
                 </a>
               ))}
             </div>
           </section>
         )}
 
+        {/* Sources */}
         {answer.primary_sources && answer.primary_sources.length > 0 && (
-          <section class="mt-12 text-sm">
-            <h2 class="text-base font-semibold text-muted mb-2">Sources</h2>
-            <ul class="list-disc pl-6 space-y-1 text-muted">
+          <section class="rounded-lg border border-border bg-bg-alt p-5">
+            <h2 class="text-base font-semibold text-text mb-3">Sources</h2>
+            <ul class="list-disc pl-6 space-y-1.5 text-sm text-muted">
               {answer.primary_sources.map(src => (
                 <li><a href={src.url} rel="nofollow noopener" class="hover:text-primary underline">{src.name}</a></li>
               ))}
@@ -230,17 +284,35 @@ const breadcrumbSchema = {
         )}
       </div>
 
-      <aside class="space-y-6">
+      <!-- Sidebar -->
+      <aside class="space-y-6 lg:sticky lg:top-6 self-start">
         <AffiliateSidebar category={answer.banner_category} />
       </aside>
     </div>
+  </section>
 
-    <section class="mx-auto max-w-4xl px-4 py-8 mt-12">
-      <div class="rounded-lg bg-bg-alt border border-border p-4">
-        <p class="text-xs text-muted leading-relaxed">
-          <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to products and services mentioned on this page. These commissions help us maintain our free research. Our editorial team independently evaluates all services. Compensation does not influence our ratings or rankings. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
+  <!-- Author / E-E-A-T -->
+  <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+    <div class="rounded-xl border border-border bg-white p-5 flex gap-4">
+      <div class="flex-shrink-0">
+        <div class="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center text-white text-sm font-bold">HB</div>
+      </div>
+      <div>
+        <p class="text-sm font-semibold text-text">Harvey Brooks</p>
+        <p class="text-xs text-primary font-medium">Senior Financial Editor</p>
+        <p class="mt-2 text-xs text-muted leading-relaxed">
+          Harvey Brooks is a consumer finance writer specializing in credit repair, personal lending, and debt management. With over a decade covering the industry, he makes financial literacy accessible to everyday Americans. <a href="/about/" class="text-primary hover:underline">About our editorial team</a>.
         </p>
       </div>
-    </section>
-  </article>
+    </div>
+  </section>
+
+  <!-- Affiliate Disclosure -->
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="rounded-lg bg-bg-alt border border-border p-4">
+      <p class="text-xs text-muted leading-relaxed">
+        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to products and services mentioned on this page. These commissions help us maintain our free research. Our editorial team independently evaluates all services. Compensation does not influence our ratings or rankings. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
+      </p>
+    </div>
+  </section>
 </BaseLayout>
