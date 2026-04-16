@@ -208,6 +208,11 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema];
     </section>
   )}
 
+  <!-- Affiliate offer — above the fold, after Key Takeaways -->
+  <section class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
+    <AffiliateInline category={answer.banner_category} />
+  </section>
+
   <!-- Main content (full-width, matching /best/ layout) -->
   <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
     <div class="space-y-6">
@@ -215,7 +220,6 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema];
           <article class="glass-card p-6">
             <h2 class="text-xl sm:text-2xl font-bold text-text mb-4">{section.heading}</h2>
             <div set:html={mdToHtml(section.content)} />
-            {idx === 1 && <div class="mt-6"><AffiliateInline category={answer.banner_category} /></div>}
             {idx === 4 && <div class="mt-6"><AffiliateSidebar category={answer.banner_category} /></div>}
           </article>
         ))}
