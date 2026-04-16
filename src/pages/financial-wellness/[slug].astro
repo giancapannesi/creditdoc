@@ -66,7 +66,19 @@ const wellnessBannerMap: Record<string, string> = {
 };
 const bannerCategory = wellnessBannerMap[guide.category] || 'personal-loans';
 
-// JSON-LD: Article + FAQPage + BreadcrumbList
+// Map wellness category to recommended /best/ listicle
+const wellnessListicleMap: Record<string, { name: string; url: string }> = {
+  'understanding-credit': { name: 'Best Credit Monitoring Services', url: 'https://creditdoc.co/best/best-credit-monitoring-services/' },
+  'building-credit': { name: 'Best Credit Builder Loans', url: 'https://creditdoc.co/best/best-credit-builder-loans/' },
+  'budgeting-and-saving': { name: 'Best Personal Loan Lenders', url: 'https://creditdoc.co/best/best-personal-loan-lenders/' },
+  'loans-and-interest': { name: 'Best Personal Loans for Bad Credit', url: 'https://creditdoc.co/best/best-personal-loans-bad-credit/' },
+  'financial-recovery': { name: 'Best Debt Relief Companies', url: 'https://creditdoc.co/best/best-debt-relief-companies/' },
+  'everyday-finance': { name: 'Best Cash Advance Apps', url: 'https://creditdoc.co/best/best-cash-advance-apps/' },
+  'credit-repair': { name: 'Best Credit Repair Companies', url: 'https://creditdoc.co/best/best-credit-repair-companies/' },
+};
+const recommendedListicle = wellnessListicleMap[guide.category];
+
+// JSON-LD: Article + FAQPage + BreadcrumbList + WebPage with significantLink
 const jsonLd = [
   {
     "@context": "https://schema.org",
@@ -112,7 +124,17 @@ const jsonLd = [
       { "@type": "ListItem", "position": 2, "name": "Financial Wellness", "item": "https://creditdoc.co/financial-wellness/" },
       { "@type": "ListItem", "position": 3, "name": guide.title, "item": `https://creditdoc.co/financial-wellness/${guide.slug}/` }
     ]
-  }
+  },
+  ...(recommendedListicle ? [{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `https://creditdoc.co/financial-wellness/${guide.slug}/`,
+    "significantLink": recommendedListicle.url,
+    "relatedLink": [
+      "https://creditdoc.co/financial-wellness/",
+      recommendedListicle.url,
+    ],
+  }] : []),
 ];
 ---
 
