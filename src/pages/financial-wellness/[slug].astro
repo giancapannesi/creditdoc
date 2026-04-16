@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
+import AffiliateInline from '../../components/AffiliateInline.astro';
 import { getWellnessGuides, getWellnessGuideBySlug, getWellnessGuidesByCategory, getCategories, getGlossaryTermsForContext } from '../../utils/data';
+import { createLinker } from '../../utils/inline-linker';
 import type { WellnessGuide } from '../../utils/data';
 
 export function getStaticPaths() {
@@ -44,6 +46,25 @@ const wellnessGlossaryMap: Record<string, string[]> = {
 };
 const glossaryContexts = wellnessGlossaryMap[guide.category] || [];
 const glossaryTerms = getGlossaryTermsForContext(glossaryContexts);
+
+// Per-page linker: auto-links money keywords → /best/ listicles + glossary terms
+const linker = createLinker(glossaryTerms, { moneyBudget: 8, glossaryBudget: 8 });
+const linkedSections = guide.sections.map(section => ({
+  heading: section.heading,
+  content: linker(section.content).join('\n\n'),
+}));
+
+// Map wellness category to affiliate banner category
+const wellnessBannerMap: Record<string, string> = {
+  'understanding-credit': 'credit-monitoring',
+  'building-credit': 'build-credit',
+  'budgeting-and-saving': 'personal-loans',
+  'loans-and-interest': 'personal-loans',
+  'financial-recovery': 'debt-relief',
+  'everyday-finance': 'personal-loans',
+  'credit-repair': 'credit-repair',
+};
+const bannerCategory = wellnessBannerMap[guide.category] || 'personal-loans';
 
 // JSON-LD: Article + FAQPage + BreadcrumbList
 const jsonLd = [
@@ -144,7 +165,7 @@ const jsonLd = [
 
       <!-- Main Column -->
       <div class="lg:col-span-2 space-y-8">
-        {guide.sections.map((section, i) => (
+        {linkedSections.map((section, i) => (
           <section id={`section-${i}`}>
             <h2 class="text-xl font-bold text-text mb-4">{section.heading}</h2>
             <div class="prose-content text-sm text-muted leading-relaxed space-y-4">
@@ -172,6 +193,7 @@ const jsonLd = [
                 return <p set:html={paragraph.replace(/\*\*(.*?)\*\*/g, '<strong class="text-text">$1</strong>')} />;
               })}
             </div>
+            {i === 1 && <div class="mt-6"><AffiliateInline category={bannerCategory} /></div>}
           </section>
         ))}
 
