@@ -43,6 +43,10 @@ const ogImg = ogImage || 'https://creditdoc.co/og-default.png';
   {noindex && <meta name="robots" content="noindex, nofollow" />}
   <link rel="canonical" href={canonicalUrl} />
 
+  <!-- DNS prefetch for external resources -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://icons.duckduckgo.com" />
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
