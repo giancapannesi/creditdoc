@@ -79,11 +79,14 @@ if (faqSchemaItems.length > 0) {
     mainEntity: faqSchemaItems,
   });
 }
+
+const canonicalUrl = `https://creditdoc.co/best/${listicle.slug}/`;
 ---
 
 <BaseLayout
   title={listicle.seo_title}
   description={listicle.seo_description}
+  canonical={canonicalUrl}
   jsonLd={jsonLd}
 >
   <!-- Breadcrumbs -->

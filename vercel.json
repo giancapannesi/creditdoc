@@ -9,6 +9,36 @@
       "source": "/categories/fix-my-credit",
       "destination": "/categories/credit-repair/",
       "permanent": true
+    },
+    {
+      "source": "/review/undefined/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/review/null/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/undefined/",
+      "destination": "/blog/",
+      "permanent": false
+    },
+    {
+      "source": "/lenders/:slug/",
+      "destination": "/review/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/lender/:slug/",
+      "destination": "/review/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/reviews/:slug/",
+      "destination": "/review/:slug/",
+      "permanent": true
     }
   ]
 }
