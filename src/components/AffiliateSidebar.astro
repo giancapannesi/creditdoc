@@ -26,8 +26,9 @@ type Offer = {
   description: string;
   cta: string;
   url: string;
-  banner?: string;  // 300x250 banner path (optional)
+  banner?: string;
   disclosure: string;
+  extraLinks?: { label: string; url: string }[];
 };
 
 const offers: Record<string, Offer> = {
@@ -47,6 +48,10 @@ const offers: Record<string, Offer> = {
     cta: 'Check Your Options',
     url: 'https://lowcreditfinance.com/?aff146570',
     disclosure: 'CreditDoc earns a commission if you apply.',
+    extraLinks: [
+      { label: 'Loans Up to $50K', url: 'https://50kloans.com/?aff146559' },
+      { label: 'Find Personal Loans', url: 'https://superpersonalfinder.com/?aff146562' },
+    ],
   },
   'build-credit': {
     name: 'WalletHub',
@@ -96,6 +101,21 @@ const offer = offers[offerKey];
   >
     {offer.cta}
   </a>
+
+  {offer.extraLinks && offer.extraLinks.length > 0 && (
+    <div class="mt-2 flex flex-col gap-1.5">
+      {offer.extraLinks.map(link => (
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          class="block w-full text-center px-3 py-2 rounded-lg border border-border text-xs font-semibold text-text hover:bg-bg-alt transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  )}
 
   <p class="mt-2 text-[10px] text-muted/60 leading-tight">
     {offer.disclosure} <a href="/disclosure/" class="underline hover:text-muted">Full disclosure</a>.
