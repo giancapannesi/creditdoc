@@ -325,9 +325,12 @@ const jsonLd = [
     })),
   }] : []),
 ];
+
+const canonicalUrl = `https://creditdoc.co/review/${lender.slug}/`;
 ---
 
 <BaseLayout
+  canonical={canonicalUrl}
   title={(() => {
     if (lender.seo_title) return lender.seo_title;
     const city = lender.company_info?.city;
