@@ -208,16 +208,15 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema];
     </section>
   )}
 
-  <!-- Main content + sidebar -->
+  <!-- Main content (full-width, matching /best/ layout) -->
   <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
-      <!-- Main column -->
-      <div class="space-y-6">
+    <div class="space-y-6">
         {linkedSections.map((section, idx) => (
           <article class="glass-card p-6">
             <h2 class="text-xl sm:text-2xl font-bold text-text mb-4">{section.heading}</h2>
             <div set:html={mdToHtml(section.content)} />
             {idx === 1 && <div class="mt-6"><AffiliateInline category={answer.banner_category} /></div>}
+            {idx === 4 && <div class="mt-6"><AffiliateSidebar category={answer.banner_category} /></div>}
           </article>
         ))}
 
@@ -283,11 +282,6 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema];
           </section>
         )}
       </div>
-
-      <!-- Sidebar -->
-      <aside class="space-y-6 lg:sticky lg:top-6 self-start">
-        <AffiliateSidebar category={answer.banner_category} />
-      </aside>
     </div>
   </section>
 
