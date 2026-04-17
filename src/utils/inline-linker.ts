@@ -63,6 +63,18 @@ const MONEY_LINKS: MoneyLink[] = [
   { phrase: 'credit repair money back guarantee', url: '/best/best-credit-repair-money-back-guarantee/', title: 'Credit Repair with Money Back Guarantee' },
   { phrase: 'credit repair for veterans', url: '/best/best-credit-repair-veterans/', title: 'Best Credit Repair for Veterans' },
   { phrase: 'credit repair after bankruptcy', url: '/best/best-credit-repair-after-bankruptcy/', title: 'Best Credit Repair After Bankruptcy' },
+  // 2026-04-17: business loan keywords — pointing to /categories/ until /best/ pages built
+  { phrase: 'small business loans', url: '/categories/business-loans/', title: 'Small Business Loans' },
+  { phrase: 'small business loan', url: '/categories/business-loans/', title: 'Small Business Loans' },
+  { phrase: 'business line of credit', url: '/categories/business-loans/', title: 'Business Loans' },
+  { phrase: 'SBA loans', url: '/categories/business-loans/', title: 'Business Loans' },
+  { phrase: 'SBA loan', url: '/categories/business-loans/', title: 'Business Loans' },
+  { phrase: 'merchant cash advance', url: '/categories/business-loans/', title: 'Business Loans' },
+  { phrase: 'equipment financing', url: '/categories/business-loans/', title: 'Business Loans' },
+  { phrase: 'invoice factoring', url: '/categories/business-loans/', title: 'Business Loans' },
+  { phrase: 'business funding', url: '/categories/business-loans/', title: 'Business Loans' },
+  { phrase: 'working capital loan', url: '/categories/business-loans/', title: 'Business Loans' },
+  { phrase: 'business loans', url: '/categories/business-loans/', title: 'Business Loans' },
 ];
 
 const SORTED_MONEY_LINKS = [...MONEY_LINKS].sort((a, b) => b.phrase.length - a.phrase.length);
