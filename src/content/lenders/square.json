@@ -1,12 +1,12 @@
 {
-  "name": "Square",
+  "name": "Square Financial Services",
   "slug": "square",
   "category": "business-loans",
   "subcategories": [
     "credit-builder"
   ],
-  "description_short": "Square provides payment processing, POS systems, and business management tools for small businesses across food, retail, beauty, and service industries.",
-  "description_long": "Square is an all-in-one business platform founded to help small business owners manage their operations efficiently. The company offers a comprehensive suite of tools including payment processing hardware (terminals, registers, readers), point-of-sale systems, and back-office management features. Square serves diverse business types including food and beverage establishments, retail shops, beauty salons, and service providers.\n\nSquare's core offerings include multiple hardware options for accepting payments (handheld devices, countertop terminals, registers, kiosks, and contactless readers), POS software customized for different industries (restaurants, retail, appointments), customer management tools (loyalty programs, gift cards, customer directory), staff management (shifts, payroll), and banking services (checking, savings, loans, credit cards). The platform also supports online ordering, invoicing, websites, Bitcoin payments, and marketplace integration. Additionally, Square provides marketing tools including messages and AI-powered features, along with developer APIs and partner ecosystems.\n\nSquare's distinguishing factors include its industry-specific solutions tailored to different business types, integrated hardware and software ecosystem, and the breadth of services from payment processing through banking and lending. The company positions itself as a complete business solution rather than a single-function provider, allowing businesses to consolidate multiple vendors into one platform.\n\nA key consideration is that while Square's website emphasizes its comprehensive capabilities, the profile provided focuses on product features and business types served rather than detailed pricing, lending terms, or comparison metrics. Users should note that Square offers loans as part of its banking suite, but detailed information about loan products, approval criteria, rates, and terms is not visible in the provided website content.",
+  "description_short": "Square Financial Services (Block, Inc.) offers invitation-only business loans from $100 to $350,000 with a flat 10-16% fee, instant funding to Square Checking, and daily repayment tied to card sales. $32B+ funded since 2014.",
+  "description_long": "Square Financial Services, a subsidiary of Block, Inc. (formerly Square, Inc.), has been offering business loans since 2014 through its Square Capital program. Since launch, the company has funded over $32 billion to small businesses \u2014 making it one of the largest fintech lenders by volume. The program notably serves underrepresented business owners, with 58% of loans going to women-owned businesses and 36% to minority-owned businesses.\n\nSquare offers a single loan product structured as a merchant cash advance with a daily sales deduction. Loan amounts range from $100 to $350,000, with an average repayment period of approximately 10 months and a maximum term of 18 months. The cost structure is a flat fee of 10% to 16% of the loan amount \u2014 there is no APR, interest rate, or compounding. The fee is fixed at origination regardless of how quickly or slowly the loan is repaid.\n\nThe critical distinction with Square is that its loan program is invitation-only. You cannot apply for a Square loan directly \u2014 you must be an active Square seller processing transactions through the Square payment ecosystem. Square uses your sales data to determine eligibility and pre-qualify you for a specific loan amount. This data-driven approach means there is no hard credit pull and no minimum credit score requirement is disclosed.\n\nFunding is instant when deposited to a Square Checking account, or one business day to an external bank account. Repayment happens automatically as a fixed percentage deducted from each day's card sales processed through Square, which means payment amounts adjust naturally with business volume \u2014 slower days mean smaller payments.\n\nCollateral requirements vary by loan size: under $100,000 requires no collateral; $100,000 to $250,000 may involve a UCC filing; and loans over $250,000 may require a personal guarantee. Square does not report loan activity to credit bureaus, so payments will not build business credit.\n\nThe simplicity of Square's pricing is genuinely distinctive \u2014 a flat 10-16% fee with no hidden charges is among the most transparent cost structures in business lending. However, there is no benefit to early repayment since the fee is fixed, and the invitation-only model means you cannot access funding unless Square decides to offer it to you. For existing Square sellers needing fast, simply-priced working capital up to $350,000, the program is hard to beat on convenience and cost clarity.",
   "logo_url": "/logos/square.png",
   "website_url": "https://squareup.com",
   "affiliate_url": "",
@@ -15,33 +15,72 @@
     "monthly_price": 0,
     "setup_fee": 0,
     "money_back_guarantee": false,
-    "guarantee_details": "Contact provider for current pricing and guarantee details.",
-    "free_consultation": true,
-    "tiers": [],
-    "currency": "USD"
+    "free_consultation": false,
+    "currency": "USD",
+    "tiers": [
+      {
+        "name": "Small Loan (under $100K)",
+        "price": "Flat fee 10-16%",
+        "features": [
+          "$100-$99,999",
+          "No collateral required",
+          "Instant to Square Checking",
+          "Daily sales deduction",
+          "No hard credit pull",
+          "Max 18 months"
+        ]
+      },
+      {
+        "name": "Mid-Size Loan ($100K-$250K)",
+        "price": "Flat fee 10-16%",
+        "features": [
+          "$100,000-$250,000",
+          "UCC filing may apply",
+          "Instant to Square Checking",
+          "Daily sales deduction",
+          "No hard credit pull",
+          "Max 18 months"
+        ]
+      },
+      {
+        "name": "Large Loan ($250K+)",
+        "price": "Flat fee 10-16%",
+        "features": [
+          "$250,001-$350,000",
+          "Personal guarantee may be required",
+          "1 business day to external bank",
+          "Daily sales deduction",
+          "No hard credit pull",
+          "Max 18 months"
+        ]
+      }
+    ]
   },
   "features": {
-    "credit_monitoring": true,
-    "all_three_bureaus": false,
-    "goodwill_letters": false,
-    "cease_desist_letters": false,
-    "debt_validation": false,
-    "credit_education": true,
-    "identity_theft_protection": false,
-    "score_tracking": true,
-    "mobile_app": false,
-    "online_portal": true,
-    "personal_advisor": false,
-    "ai_powered": false
+    "min_credit_score": "Not disclosed",
+    "min_time_in_business": "Active Square seller",
+    "min_annual_revenue": "~$10,000",
+    "max_loan_amount": "$350,000",
+    "funding_speed": "Instant (Square Checking) / 1 business day (external)",
+    "prepayment_penalty": "None, but no savings (flat fee)",
+    "credit_pull_type": "No hard pull",
+    "reports_to_bureaus": false,
+    "collateral_required": "Varies by loan size",
+    "invitation_only": true,
+    "repayment_structure": "Daily percentage of card sales"
   },
   "company_info": {
-    "founded_year": 0,
+    "founded_year": 2009,
     "headquarters": "San Francisco, CA",
     "city": "San Francisco",
     "state": "CA",
     "employees": "",
     "bbb_rating": "NR",
-    "bbb_accredited": false
+    "bbb_accredited": false,
+    "parent_company": "Block, Inc. (NYSE: SQ)",
+    "loan_program_launched": 2014,
+    "track_record": "$32B+ funded since 2014",
+    "equity_focus": "58% women-owned, 36% minority-owned businesses"
   },
   "states_served": [
     "California"
@@ -51,67 +90,59 @@
   ],
   "rating": 4.0,
   "rating_breakdown": {
-    "value": 5.0,
-    "effectiveness": 3.2,
-    "customer_service": 3.9,
-    "transparency": 3.5,
-    "ease_of_use": 4.3
+    "value": 4.0,
+    "effectiveness": 4.0,
+    "customer_service": 3.5,
+    "transparency": 4.5,
+    "ease_of_use": 5.0
   },
   "pros": [
-    "Industry-specific POS solutions customized for food & beverage, retail, beauty, and services",
-    "Integrated hardware ecosystem with multiple form factors (terminals, registers, handheld devices, kiosks)",
-    "Comprehensive staff management including shifts and payroll integration",
-    "Built-in customer loyalty, gift card, and marketing automation tools",
-    "Online ordering and website integration capabilities",
-    "Bitcoin payment support across all business types",
-    "Developer APIs and partner marketplace for extended functionality"
+    "$32B+ funded since 2014 \u2014 one of the largest fintech lenders by volume",
+    "Flat 10-16% fee is among the most transparent pricing in business lending",
+    "Instant funding to Square Checking account \u2014 no waiting for bank transfer",
+    "No hard credit pull and no minimum credit score disclosed",
+    "Daily payment adjusts automatically with sales volume \u2014 slower days mean smaller payments",
+    "Strong equity track record: 58% women-owned, 36% minority-owned businesses funded"
   ],
   "cons": [
-    "Website content does not specify pricing, processing fees, or loan APR/terms",
-    "Limited transparency on loan qualification requirements or funding speed",
-    "No information provided about customer support availability or response times",
-    "Loan products mentioned but not detailed in available content",
-    "Unclear which features require paid upgrades versus included in base service"
+    "Invitation-only \u2014 cannot apply unless Square pre-qualifies you as an active seller",
+    "No savings from early repayment since the flat fee is fixed at origination",
+    "Must be an existing Square payment processing customer to access loans",
+    "Single loan product only \u2014 no lines of credit, SBA loans, or equipment financing",
+    "Does not report to credit bureaus \u2014 payments won't build business credit",
+    "Maximum loan amount capped at $350,000 \u2014 insufficient for larger capital needs"
   ],
   "best_for": [
-    "Small food and beverage businesses (cafes, restaurants, food trucks, bars)",
-    "Retail shops requiring inventory tracking and multi-location management",
-    "Appointment-based businesses (salons, spas, healthcare practices)",
-    "Service professionals needing payment processing and team scheduling"
+    "Existing Square sellers needing fast, simply-priced working capital",
+    "Businesses wanting transparent flat-fee pricing with no hidden charges",
+    "Merchants who prefer daily payment amounts that adjust with sales volume",
+    "Women-owned and minority-owned businesses (58% and 36% of Square loans)"
   ],
   "similar_lenders": [
-    "litvak-legal-group-pllc-bankruptcy-and-tax",
-    "community-national-bank-trust-of-texas",
-    "popular-bank",
-    "standard-chartered-usa",
-    "cousino-weinzimmer"
+    "ondeck",
+    "biz2credit",
+    "national-funding",
+    "fora-financial",
+    "mulligan-funding"
   ],
-  "diagnosis": "Square is best for small to mid-sized businesses seeking an integrated, industry-specific platform combining payments, POS, staffing, and banking services. The main caveat is that detailed loan terms, pricing, and underwriting criteria are not disclosed on the public website—interested borrowers should contact Square directly for specific financing information.",
+  "diagnosis": "Square is best for small to mid-sized businesses seeking an integrated, industry-specific platform combining payments, POS, staffing, and banking services. The main caveat is that detailed loan terms, pricing, and underwriting criteria are not disclosed on the public website\u2014interested borrowers should contact Square directly for specific financing information.",
   "services": [
-    "Payment processing and point-of-sale systems",
-    "Hardware including terminals, registers, kiosks, and contactless readers",
-    "Restaurant POS and retail POS software",
-    "Appointment scheduling and management",
-    "Online ordering and storefront creation",
-    "Customer loyalty programs and gift card management",
-    "Payroll and staff shift management",
-    "Business banking (checking, savings, credit cards)",
-    "Small business loans",
-    "Invoice generation and payment collection",
-    "Marketing messages and customer communications",
-    "Reporting and analytics"
+    "Business Loans ($100-$350,000)",
+    "Merchant Cash Advance (daily sales deduction)",
+    "Instant Funding to Square Checking",
+    "Square Payment Ecosystem Integration"
   ],
   "typical_results_timeline": "Results vary by individual situation. Contact the provider to discuss expected timelines for your specific needs.",
-  "last_updated": "2026-03-19",
+  "last_updated": "2026-04-17",
   "review_status": "published",
-  "data_source": "enriched",
+  "data_source": "primary-source-verified",
   "google_rating": 2.1,
   "google_reviews_count": 533,
   "phone": "+1 855-700-6000",
   "address": "Market St, San Francisco, CA 94103",
   "website": "https://squareup.com",
   "processing_status": "ready_for_index",
-  "quality_score": 12,
+  "quality_score": 16,
   "enrichment_attempts": 1,
   "no_index": false,
   "has_been_enriched": true,
@@ -120,5 +151,6 @@
   "contact": {
     "phone": "",
     "address": ""
-  }
+  },
+  "meta_description": "Square Capital review 2026: invitation-only business loans $100-$350K, flat 10-16% fee, instant funding, daily payment from sales. $32B+ funded. Block, Inc. subsidiary."
 }
