@@ -8,8 +8,8 @@
     "low-income-designated",
     "payday-alternative-loans"
   ],
-  "description_short": "Black Hills is a federally-insured credit union based in Rapid City, SD. Member-owned and not-for-profit, it provides everyday banking, lending, and savings services to its membership.",
-  "description_long": "Black Hills is a federal credit union serving members in , , established in 1941. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. This credit union carries a low-income designation, meaning it serves predominantly low-income members and may offer special programs like Payday Alternative Loans (PALs) \u2014 small, affordable loans designed to replace predatory payday lending. The credit union operates 21 branch locations. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "CUScore is an independent directory and comparison tool for federally insured credit unions, providing NCUA financial data, health scores, and branch location information for 4,374 credit unions across America.",
+  "description_long": "CUScore operates as a comprehensive directory and research platform for credit union discovery and comparison in the United States. The platform aggregates and publishes quarterly financial data from the National Credit Union Administration (NCUA), enabling consumers and researchers to explore the credit union industry landscape across all 50 states, Washington D.C., and U.S. territories. The site explicitly states it is an independent directory not affiliated with the NCUA or any individual credit union.\n\nThe platform offers several core features for credit union research and comparison. Users can browse and compare 4,374 federally insured credit unions using metrics including total assets, membership size, net worth ratios, and financial health scores. The directory provides state-by-state browsing capabilities and national rankings that highlight the largest credit unions by total assets. The site includes detailed comparative data showing the industry encompasses 146 million members nationwide with combined assets of $2.456 trillion as of Q4 2025, and maintains an average net worth ratio of 11.2% across the industry.\n\nCUScore distinguishes itself through its educational approach and data transparency. Beyond the directory function, the platform provides educational guides comparing credit unions to banks, explaining how to join a credit union, and defining what credit unions are and how they operate. The comparison charts highlight structural differences in ownership, purpose, deposit insurance, interest rates, fees, and governance between credit unions and traditional banks. All financial data is sourced directly from NCUA Quarterly Call Reports and clearly dated, providing verifiable, official regulatory information rather than proprietary analysis.\n\nThe platform serves as a reference tool rather than a service provider. CUScore does not offer accounts, loans, or financial products\u2014it functions purely as an information aggregator and comparison directory. Users seeking to join a credit union must contact individual institutions directly. The value proposition relies entirely on data accuracy, comprehensiveness of the directory, and educational content quality. This positions CUScore as a research utility for consumers comparing credit union options rather than a financial services provider.",
   "logo_url": "",
   "website_url": "https://www.cuscore.org",
   "affiliate_url": "",
@@ -24,25 +24,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)",
-    "Payday Alternative Loans (PALs)"
+    "Directory search of 4,374 federally insured credit unions with NCUA financial data",
+    "Financial health scoring and ratings for credit unions",
+    "State-by-state credit union browsing and filtering",
+    "National rankings of credit unions by total assets",
+    "Branch location information for credit unions",
+    "Quarterly financial data including total assets, membership counts, and net worth ratios",
+    "Educational guide: What Is a Credit Union",
+    "Educational guide: Credit Union vs. Bank comparison",
+    "Educational guide: How to Join a Credit Union",
+    "Industry statistics and aggregate data (146M members, $2.456T assets, 11.2% avg net worth ratio)",
+    "NCUA regulatory compliance information and insurance details",
+    "Credit union popular selection highlights and top 10 largest rankings"
   ],
   "pros": [
-    "Not-for-profit \u2014 typically lower fees and better rates than banks",
-    "NCUA insured \u2014 deposits protected up to $250,000",
-    "Established in 1941",
-    "Member-owned cooperative",
-    "Low-income designated \u2014 may offer Payday Alternative Loans (PALs)"
+    "Comprehensive directory covering 4,374 federally insured credit unions with complete NCUA regulatory data",
+    "Provides objective health scores and financial metrics for comparing credit union stability and performance",
+    "State-by-state browsing with nationwide rankings by total assets, enabling targeted searches",
+    "Free educational guides explaining credit union structures, membership requirements, and CU vs. bank comparisons",
+    "Data sourced directly from official NCUA Quarterly Call Reports, ensuring regulatory accuracy and transparency",
+    "Clearly states independence from NCUA and individual credit unions, reducing bias concerns",
+    "Updated quarterly with current financial data (Q4 2025 as of March 2026), maintaining relevance"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Directory only\u2014cannot open accounts, apply for loans, or conduct transactions directly through the platform",
+    "State-level asset totals display as $0, suggesting incomplete data presentation or technical issues in the interface",
+    "Limited depth on individual credit union product offerings, rates, or membership eligibility criteria",
+    "No personalized recommendation engine\u2014users must manually compare institutions without decision support",
+    "Mobile functionality and user experience not evident from website content; unclear how accessible platform is across devices"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +61,7 @@
   "founded_year": 1941,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "4365",
   "published": true,
   "review_status": "draft",
@@ -92,20 +101,21 @@
     "ease_of_use": 4.0
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Payday loan alternatives (PALs)"
+    "Consumers researching which credit union to join by comparing financial health and size across states",
+    "Individuals learning the differences between credit unions and traditional banks before deciding where to bank",
+    "Researchers and analysts needing authoritative NCUA financial data and credit union industry benchmarks",
+    "People relocating who need to find federally insured credit unions in their new state"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "CUScore is best for consumers and researchers seeking objective, regulatory-based information to compare and evaluate credit unions before joining. The key caveat is that CUScore is a reference tool only\u2014it provides no account opening, lending, or transactional services, so users must contact credit unions directly to actually join or apply for products.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-04-09",
   "cities_served": [],
   "phone": "6053430891",
   "address": ",  ",
-  "processing_status": "raw",
-  "quality_score": 7,
-  "enrichment_attempts": 0,
+  "processing_status": "ready_for_index",
+  "quality_score": 12,
+  "enrichment_attempts": 1,
   "no_index": true,
   "cfpb_data": {
     "found_in_cfpb": true,
@@ -124,5 +134,7 @@
   "state": "SD",
   "meta_title": "Black Hills \u2014 Credit Union in Rapid City, SD | CreditDoc",
   "meta_description": "Black Hills \u2014 NCUA-insured credit union in Rapid City, SD. Member-owned, not-for-profit. Loans, savings, and member services.",
-  "website": "https://www.cuscore.org"
+  "website": "https://www.cuscore.org",
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-17"
 }

@@ -6,8 +6,8 @@
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "Fo Me Bo Co is a federally-insured credit union based in WABASH, IN. Member-owned and not-for-profit, it provides everyday banking, lending, and savings services to its membership.",
-  "description_long": "Fo Me Bo Co is a federal credit union serving members in , , established in 1969. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "Rates and Info is a rate comparison tool for banks, credit unions, and online banks, helping consumers find highest-yielding savings accounts, CDs, mortgages, and loans in their area.",
+  "description_long": "Rates and Info (ratesandinfo.com) is a financial rate comparison platform designed to help consumers identify the best interest rates and loan terms across multiple financial institutions. The site aggregates current rates for savings products, certificates of deposit (CDs), mortgages, home equity lines of credit, and auto loans, with location-based filtering to show relevant local and online options. The platform displays rates from a diverse array of financial institutions including traditional banks, credit unions, online banks, and mortgage lenders, allowing side-by-side comparison of Annual Percentage Yield (APY), minimum deposit requirements, and loan terms. What distinguishes Rates and Info is its focus on rate transparency and accessibility\u2014users can filter by location (the site shows Honolulu, HI as an example) and product type to identify the highest-yielding options available to them, making it easier to compare hundreds of potential providers at once rather than visiting individual websites. The platform includes educational content explaining financial terminology like APY and Truth in Savings regulations. However, it's important to note that Rates and Info is a rate comparison aggregator, not a direct lender or financial institution itself\u2014it does not issue accounts, process loans, or hold customer deposits. The site generates revenue through advertiser disclosures and partnerships with featured lenders.",
   "logo_url": "",
   "website_url": "https://www.ratesandinfo.com",
   "affiliate_url": "",
@@ -22,23 +22,32 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)"
+    "Savings account rate comparison and search",
+    "Certificate of Deposit (CD) rate comparison (12-month and 24-month terms)",
+    "30-year fixed mortgage rate comparison",
+    "Home Equity Line of Credit (HELOC) rate comparison",
+    "3-year auto loan rate comparison",
+    "Location-based rate filtering by city/state",
+    "Advertiser disclosure and transparency on featured lenders",
+    "Financial education content on APY and savings terminology",
+    "Branch search functionality for banks and credit unions",
+    "Minimum deposit requirement disclosure for savings products"
   ],
   "pros": [
-    "Not-for-profit \u2014 typically lower fees and better rates than banks",
-    "NCUA insured \u2014 deposits protected up to $250,000",
-    "Established in 1969",
-    "Member-owned cooperative"
+    "Aggregates rates from 50+ banks, credit unions, and online lenders in one searchable platform",
+    "Location-based filtering shows rates relevant to user's geographic area (e.g., Honolulu, HI)",
+    "Displays minimum deposit/loan requirements alongside APY for easy qualification assessment",
+    "Covers multiple product categories: savings accounts, CDs (12-month and 24-month), mortgages, HELOCs, and auto loans",
+    "Includes educational content explaining financial terminology and savings regulations",
+    "Shows rates from diverse institution types: traditional banks, credit unions, online banks, and mortgage lenders",
+    "Updated rate data (some listings show recent update dates like 2026-04-16)"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Rates and Info is not a lender\u2014users cannot open accounts directly; must visit featured lenders' websites",
+    "Does not appear to offer personalized rate quotes or pre-qualification tools beyond rate display",
+    "Limited transparency on how frequently rates are updated; some listings lack update timestamps",
+    "Relies on advertiser relationships, which may influence which lenders receive prominent placement",
+    "No comparison of fees, terms, or customer service quality beyond basic rate and minimum deposit information"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +57,7 @@
   "founded_year": 1969,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "19432",
   "published": true,
   "review_status": "draft",
@@ -88,20 +97,21 @@
     "ease_of_use": 4.0
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Community-focused financial services"
+    "Consumers shopping for the highest savings rates across multiple banks and credit unions simultaneously",
+    "Home buyers and refinancers comparing mortgage rates from 20+ lenders at once",
+    "Savers looking for CD laddering options with clear APY and minimum deposit comparisons",
+    "Borrowers seeking home equity lines of credit, auto loans, and other credit products with transparent rate display"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Rates and Info is best for consumers who want to quickly compare interest rates and loan terms across 50+ financial institutions without visiting each lender's website individually. The main caveat is that this is a comparison aggregator, not a lender\u2014users must apply directly with featured institutions, and advertiser relationships may influence which lenders are prominently displayed.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-03-21",
   "cities_served": [],
   "phone": "2605630334",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
   "ncua_charter_number": "19432",
   "ncua_official_name": "FO ME BO CO",
@@ -111,5 +121,8 @@
   "state": "IN",
   "meta_title": "Fo Me Bo Co \u2014 Credit Union in WABASH, IN | CreditDoc",
   "meta_description": "Fo Me Bo Co \u2014 NCUA-insured credit union in WABASH, IN. Member-owned, not-for-profit. Loans, savings, and member services.",
-  "website": "https://www.ratesandinfo.com"
+  "website": "https://www.ratesandinfo.com",
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-16",
+  "quarantine_reason": "not_consumer_finance"
 }
