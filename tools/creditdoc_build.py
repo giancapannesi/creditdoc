@@ -63,6 +63,39 @@ def export_changed_lenders(db):
     return exported
 
 
+def export_changed_cluster_answers(db):
+    """Export only cluster_answers that changed since last export (per-file, like lenders)."""
+    ANSWERS_DIR = CONTENT_DIR / "answers"
+    ANSWERS_DIR.mkdir(parents=True, exist_ok=True)
+
+    rows = db.conn.execute(
+        """SELECT slug, data FROM cluster_answers
+           WHERE status = 'published'
+             AND (exported_at IS NULL OR updated_at > exported_at)"""
+    ).fetchall()
+
+    if not rows:
+        print("No cluster_answers changes to export.")
+        return []
+
+    print(f"Exporting {len(rows)} changed cluster_answers...")
+    exported = []
+    ts = now_iso()
+    for row in rows:
+        slug = row["slug"]
+        data = json.loads(row["data"])
+        out = ANSWERS_DIR / f"{slug}.json"
+        out.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+        db.conn.execute(
+            "UPDATE cluster_answers SET exported_at = ? WHERE slug = ?",
+            (ts, slug),
+        )
+        exported.append(slug)
+    db.conn.commit()
+    print(f"  Exported {len(exported)} cluster_answers to JSON.")
+    return exported
+
+
 def export_changed_content(db):
     """Export content tables that have changes since last export."""
     content_map = {
@@ -110,6 +143,14 @@ def get_status(db):
         if changed > 0:
             content_changes[table] = changed
 
+    # Changed cluster_answers
+    try:
+        answer_changes = db.conn.execute(
+            "SELECT COUNT(*) FROM cluster_answers WHERE status='published' AND (exported_at IS NULL OR updated_at > exported_at)"
+        ).fetchone()[0]
+    except Exception:
+        answer_changes = 0
+
     # Last build
     last_build = db.conn.execute(
         "SELECT * FROM builds ORDER BY id DESC LIMIT 1"
@@ -125,6 +166,8 @@ def get_status(db):
             print(f"  {table}: {count}")
     else:
         print(f"Content changes:         none")
+    if answer_changes:
+        print(f"Cluster answers to export: {answer_changes}")
 
     if last_build:
         print(f"\nLast build:")
@@ -138,7 +181,7 @@ def get_status(db):
     return lender_count, content_changes
 
 
-def git_commit_changes(exported_slugs, content_exported, push=False):
+def git_commit_changes(exported_slugs, content_exported, push=False, answer_slugs=None):
     """Stage DB-exported files AND any other modified files under src/content/.
     Commits and optionally pushes. This is backward-compatible with the old
     git add -A pattern — dual-write scripts that modified JSON without going
@@ -167,6 +210,11 @@ def git_commit_changes(exported_slugs, content_exported, push=False):
         if content_files:
             subprocess.run(["git", "add"] + content_files, check=True, capture_output=True)
 
+    # Step 2b: Stage cluster_answers JSON files
+    if answer_slugs:
+        files = [f"src/content/answers/{slug}.json" for slug in answer_slugs]
+        subprocess.run(["git", "add"] + files, check=True, capture_output=True)
+
     # Step 3: CATCH-UP — stage any other modified/untracked files under src/content/lenders/
     # Uses -z (null-separated) to handle paths with special chars / unicode
     result = subprocess.run(
@@ -181,8 +229,8 @@ def git_commit_changes(exported_slugs, content_exported, push=False):
                 continue
             status = entry[:2]
             path = entry[3:]
-            # Stage modified (M), added (A), untracked (??), deleted (D)
-            if status.strip() in ("M", "A", "??", "AM", "MM"):
+            # Stage modified (M), added (A), untracked (??), deleted (D), renamed (R)
+            if status.strip() in ("M", "A", "??", "AM", "MM", "D", "AD", "MD", "R"):
                 catchup_files.append(path)
         if catchup_files:
             # Batch in groups of 500
@@ -206,7 +254,7 @@ def git_commit_changes(exported_slugs, content_exported, push=False):
             path = entry[3:]
             # Only content JSON files at the src/content/ root (not lenders subdir)
             if (path.endswith(".json") and "/lenders/" not in path
-                and status.strip() in ("M", "A", "??", "AM", "MM")):
+                and status.strip() in ("M", "A", "??", "AM", "MM", "D", "AD", "MD", "R")):
                 catchup_content.append(path)
         if catchup_content:
             subprocess.run(["git", "add", "--"] + catchup_content, check=True, capture_output=True)
@@ -246,6 +294,8 @@ def git_commit_changes(exported_slugs, content_exported, push=False):
     parts = []
     if exported_slugs:
         parts.append(f"{len(exported_slugs)} lenders")
+    if answer_slugs:
+        parts.append(f"{len(answer_slugs)} answers")
     if content_exported:
         for table, count in content_exported.items():
             parts.append(f"{count} {table.replace('_', ' ')}")
@@ -384,6 +434,7 @@ def main():
 
         elif args.export_only:
             exported_slugs = export_changed_lenders(db)
+            export_changed_cluster_answers(db)
             content = export_changed_content(db)
             db.conn.execute(
                 "UPDATE builds SET completed_at=?, lenders_exported=?, lenders_changed=?, status='completed' WHERE id=?",
@@ -393,12 +444,23 @@ def main():
 
         elif args.export_and_commit or args.export_and_push:
             exported_slugs = export_changed_lenders(db)
+            answer_slugs = export_changed_cluster_answers(db)
             content = export_changed_content(db)
 
-            if exported_slugs or content:
+            # Pre-push validation: catch null arrays before they crash Vercel
+            if exported_slugs or content or answer_slugs:
+                validate_script = os.path.join(os.path.dirname(__file__), "validate_build_data.py")
+                if os.path.exists(validate_script):
+                    import subprocess as _sp
+                    vr = _sp.run([sys.executable, validate_script, "--fix"], capture_output=True, text=True)
+                    if vr.stdout:
+                        print(vr.stdout.strip())
+
+            if exported_slugs or content or answer_slugs:
                 committed = git_commit_changes(
                     exported_slugs, content,
-                    push=args.export_and_push
+                    push=args.export_and_push,
+                    answer_slugs=answer_slugs,
                 )
             else:
                 committed = False
