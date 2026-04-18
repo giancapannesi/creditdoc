@@ -172,7 +172,17 @@ export function getAllLenders(): Lender[] {
   const files = fs.readdirSync(LENDERS_DIR).filter(f => f.endsWith('.json'));
   _lendersCache = files.map(f => {
     const raw = fs.readFileSync(path.join(LENDERS_DIR, f), 'utf-8');
-    return JSON.parse(raw) as Lender;
+    const l = JSON.parse(raw) as Lender;
+    // Defensive: ensure array fields are never null/undefined (prevents build crashes)
+    l.subcategories = Array.isArray(l.subcategories) ? l.subcategories : [];
+    l.states_served = Array.isArray(l.states_served) ? l.states_served : [];
+    l.cities_served = Array.isArray(l.cities_served) ? l.cities_served : [];
+    l.best_for = Array.isArray(l.best_for) ? l.best_for : [];
+    l.services = Array.isArray(l.services) ? l.services : [];
+    l.similar_lenders = Array.isArray(l.similar_lenders) ? l.similar_lenders : [];
+    l.pros = Array.isArray(l.pros) ? l.pros : [];
+    l.cons = Array.isArray(l.cons) ? l.cons : [];
+    return l;
   }).filter(l => {
     // State-machine gate: ready_for_index (live) + pending_approval (live but noindex, for founder review)
     if (l.processing_status) return l.processing_status === 'ready_for_index' || l.processing_status === 'pending_approval';
@@ -187,23 +197,24 @@ export function getLenderBySlug(slug: string): Lender | undefined {
 }
 
 export function getLendersByCategory(category: string): Lender[] {
-  return getAllLenders().filter(l => l.category === category || l.subcategories.includes(category));
+  return getAllLenders().filter(l => l.category === category || (l.subcategories ?? []).includes(category));
 }
 
 export function getLendersByState(state: string): Lender[] {
   const s = state.toLowerCase();
-  return getAllLenders().filter(l =>
-    l.states_served.some(st => st.toLowerCase() === s) ||
-    l.states_served.includes('All 50 States')
-  );
+  return getAllLenders().filter(l => {
+    const states = l.states_served ?? [];
+    return states.some(st => st.toLowerCase() === s) || states.includes('All 50 States');
+  });
 }
 
 export function getLendersByCity(city: string): Lender[] {
   const c = city.toLowerCase();
-  return getAllLenders().filter(l =>
-    l.cities_served.some(ct => ct.toLowerCase() === c) ||
-    l.states_served.includes('All 50 States')
-  );
+  return getAllLenders().filter(l => {
+    const cities = l.cities_served ?? [];
+    const states = l.states_served ?? [];
+    return cities.some(ct => ct.toLowerCase() === c) || states.includes('All 50 States');
+  });
 }
 
 export function getCategories(): Category[] {
