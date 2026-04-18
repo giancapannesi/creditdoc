@@ -6,8 +6,8 @@
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "Civic Central is a federally-insured credit union based in Jefferson City, MO. Member-owned and not-for-profit, it provides everyday banking, lending, and savings services to its membership.",
-  "description_long": "Civic Central is a state-chartered credit union serving members in , , established in 1939. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "LendMesh is a free loan comparison platform connecting borrowers with credit unions and banks to find the best rates on mortgages, auto loans, personal loans, and other financing products.",
+  "description_long": "LendMesh is a loan comparison and matching platform that aggregates lending options from credit unions and banks across the United States. Founded with a mission to simplify the borrowing journey, the company positions itself as a transparent marketplace where consumers can compare loan offers side-by-side without obligation or impact to their credit score.\n\nThe platform offers comparisons across six major loan categories: mortgages (including FHA, VA, and conventional options), auto loans (new, used, and refinance), personal loans, student loans and refinancing, home equity loans and HELOCs, and home affordability tools. Users can access a mortgage calculator and home affordability calculator to help plan their purchases. The company claims to have served 10,000+ borrowers and matched $50M+ in loans.\n\nLendMesh differentiates itself through its emphasis on transparency and zero-obligation matching. The platform uses bank-level encryption for data protection, provides free rate comparisons without credit score impact, and highlights that users have full control over which offers to pursue. The website features regularly updated rate articles and news (as of April 2026) tracking current mortgage, auto, student loan, and HELOC rates across different loan types.\n\nHowever, LendMesh is fundamentally a lead generation and comparison platform, not a direct lender. The company does not originate loans itself but connects borrowers to third-party lenders and credit unions. Users should understand that \"free\" services are typically monetized through lender partnerships and referral fees. While the platform offers convenience, borrowers should independently verify rates and terms with lenders, as quoted rates may vary based on individual creditworthiness and other factors not disclosed on the comparison interface.",
   "logo_url": "",
   "website_url": "https://www.lendmesh.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)"
+    "Mortgage loan comparison and rate matching (conventional, FHA, VA)",
+    "Auto loan rate comparison (new, used, and refinance)",
+    "Personal loan comparison for consolidation, home improvement, and expenses",
+    "Student loan and refinance rate comparison",
+    "Home equity loan and HELOC rate comparison",
+    "Mortgage calculator tool",
+    "Home affordability calculator",
+    "Free rate quote requests with no credit impact",
+    "Lender matching and offer delivery",
+    "Daily updated rate tracking and news articles",
+    "Data protection with bank-level encryption",
+    "Zero-obligation application process"
   ],
   "pros": [
-    "Not-for-profit \u2014 typically lower fees and better rates than banks",
-    "NCUA insured \u2014 deposits protected up to $250,000",
-    "Established in 1939",
-    "Member-owned cooperative"
+    "Completely free to use with no hidden fees or obligations to apply",
+    "Multiple loan types compared in one platform (mortgages, auto, personal, student, home equity)",
+    "Rate checks do not impact credit score, only soft pulls",
+    "Bank-level encryption and strict privacy standards for data protection",
+    "Includes helpful tools like mortgage calculator and home affordability calculator",
+    "Regularly updated rate tracking across loan categories with daily news articles",
+    "10,000+ customers served and $50M+ in loans matched"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Not a direct lender\u2014borrowers must complete applications with third-party lenders after comparison",
+    "Company monetizes through lender referral fees, which may influence which lenders are prominently featured",
+    "Final rates offered by lenders may differ significantly from comparison rates based on individual credit and qualification factors",
+    "Limited transparency on how rates are calculated or updated",
+    "Website content is primarily marketing-focused with limited consumer education on loan terms and comparison methodology"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +59,7 @@
   "founded_year": 1939,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "62598",
   "published": true,
   "review_status": "draft",
@@ -88,20 +99,21 @@
     "ease_of_use": 4.0
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Community-focused financial services"
+    "Homebuyers and refinancers seeking to compare mortgage rates from multiple lenders at once",
+    "Auto buyers looking to compare loan rates across credit unions and banks without hard credit inquiries",
+    "Borrowers comfortable with providing personal information to third-party lenders after initial comparison",
+    "Consumers who want to compare multiple loan products (mortgage, auto, personal) using a single platform"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "LendMesh is best for borrowers seeking a convenient one-stop comparison of rates across multiple loan types and lenders without initial credit impact. The primary caveat is that LendMesh itself does not lend\u2014it is a lead generation platform that connects users to third-party lenders, so borrowers must be prepared to complete separate applications and should verify final terms independently with lenders.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-03-21",
   "cities_served": [],
   "phone": "5736365338",
   "address": ",  ",
-  "processing_status": "raw",
-  "quality_score": 7,
-  "enrichment_attempts": 0,
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
   "no_index": true,
   "ncua_charter_number": "62598",
   "ncua_official_name": "CIVIC CENTRAL",
@@ -111,5 +123,7 @@
   "state": "MO",
   "meta_title": "Civic Central \u2014 Jefferson City, MO Credit Union | CreditDoc",
   "meta_description": "Civic Central \u2014 NCUA-insured credit union in Jefferson City, MO. Member-owned, not-for-profit. Loans, savings, and member services.",
-  "website": "https://www.lendmesh.com"
+  "website": "https://www.lendmesh.com",
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-17"
 }

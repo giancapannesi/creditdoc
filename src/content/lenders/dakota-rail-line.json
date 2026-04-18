@@ -6,8 +6,8 @@
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "Dakota Rail Line is a federally-insured credit union based in HURON, SD. Member-owned and not-for-profit, it provides everyday banking, lending, and savings services to its membership.",
-  "description_long": "Dakota Rail Line is a federal credit union serving members in , , established in 1954. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "CUScore is a directory and comparison tool for federally insured credit unions across America, providing NCUA financial data, health scores, and branch locations for over 4,300 institutions.",
+  "description_long": "CUScore operates as an independent online directory and research platform dedicated to helping consumers find and compare credit unions across all 50 states and U.S. territories. The platform aggregates quarterly financial data from the National Credit Union Administration (NCUA) for 4,374 federally insured credit unions, representing 146 million members and $2.45 trillion in combined assets as of Q4 2025.\n\nThe platform provides comprehensive tools for credit union research and comparison, including searchable databases by state, national rankings of the largest credit unions, health score ratings (letter grades based on financial metrics), membership data, total assets, and branch location information. CUScore also offers educational guides covering credit union fundamentals, how credit unions compare to traditional banks, membership eligibility requirements, and the benefits of joining a credit union. The directory includes popular institutions like Navy Federal Credit Union, Pentagon Federal Credit Union, BECU, Alliant Credit Union, and Schools First FCU.\n\nCUScore distinguishes itself as an independent, neutral research tool rather than a marketing platform for any particular credit union. The platform uses objective NCUA Quarterly Call Report data to provide standardized financial health scores and asset rankings, enabling transparent side-by-side comparisons. The site includes detailed educational content explaining structural differences between credit unions and banks, including ownership models, deposit insurance, fee structures, and governance differences.\n\nCUScore is most valuable as a research and discovery tool rather than a transactional platform. While comprehensive, the site functions as a directory pointing consumers toward credit unions rather than facilitating account opening, lending, or deposits directly. The platform's value depends on users actively researching and applying to credit unions independently after using the comparison tools.",
   "logo_url": "",
   "website_url": "https://www.cuscore.org",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)"
+    "Credit union directory and search by state",
+    "National rankings of largest credit unions by assets",
+    "Financial health scoring (letter grades) for credit unions",
+    "Quarterly financial data from NCUA Call Reports",
+    "Membership and total assets data for comparison",
+    "Branch location information for credit unions",
+    "Credit union vs. bank comparison guide and educational content",
+    "Credit union eligibility and membership information",
+    "Top 10 credit union rankings with detailed financial metrics",
+    "State-by-state credit union count and asset totals",
+    "Educational guides on what credit unions are and how they work",
+    "Industry statistics (146M members, $2.45T assets, 11.2% avg net worth ratio)"
   ],
   "pros": [
-    "Not-for-profit \u2014 typically lower fees and better rates than banks",
-    "NCUA insured \u2014 deposits protected up to $250,000",
-    "Established in 1954",
-    "Member-owned cooperative"
+    "Covers 4,374 federally insured credit unions with Q4 2025 NCUA financial data and health score ratings",
+    "Enables state-by-state browsing and comparison across all 50 states, D.C., and U.S. territories",
+    "Provides ranking of top 10 largest credit unions by assets with detailed financial metrics",
+    "Free educational guides comparing credit unions vs. banks with specific differences in fees, rates, and membership",
+    "Displays membership numbers and total assets for transparent size and scale comparison",
+    "Independent directory not affiliated with NCUA or any credit union, ensuring neutral information",
+    "Includes popular credit unions like Navy Federal ($197.2B assets) and Pentagon Federal ($29.3B assets)"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "Directory only\u2014does not facilitate account opening, deposits, or lending directly; users must contact credit unions separately",
+    "Limited filtering and sorting options within state databases; searching by specific criteria (membership eligibility, loan products) not clearly available",
+    "Educational content is basic and generic; no detailed product comparisons (loan rates, savings APYs, specific fees) between individual credit unions",
+    "Health scores shown as letter grades without explanation of methodology or scoring criteria",
+    "No user reviews, member feedback, or qualitative information about member experiences with individual credit unions"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +59,7 @@
   "founded_year": 1954,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "9907",
   "published": true,
   "review_status": "draft",
@@ -88,20 +99,20 @@
     "ease_of_use": 4.0
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Community-focused financial services"
+    "Consumers researching credit union basics and comparing the credit union vs. bank model before deciding where to bank",
+    "People looking to identify federally insured credit unions in their state or region by size and financial health",
+    "Individuals seeking to understand credit union structure and benefits before determining membership eligibility"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "CUScore is best for consumers in the research and discovery phase who want to learn about credit unions, understand how they differ from banks, and identify federally insured options in their area. The primary caveat is that CUScore is a reference tool only\u2014it does not process applications, open accounts, or provide lending; users must independently contact credit unions to join and apply for products.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-03-21",
   "cities_served": [],
   "phone": "6053523648",
   "address": ",  ",
-  "processing_status": "raw",
-  "quality_score": 7,
-  "enrichment_attempts": 0,
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
   "no_index": true,
   "ncua_charter_number": "9907",
   "ncua_official_name": "DAKOTA RAIL LINE",
@@ -111,5 +122,7 @@
   "state": "SD",
   "meta_title": "Dakota Rail Line \u2014 Credit Union in HURON, SD | CreditDoc",
   "meta_description": "Dakota Rail Line \u2014 NCUA-insured credit union in HURON, SD. Member-owned, not-for-profit. Loans, savings, and member services.",
-  "website": "https://www.cuscore.org"
+  "website": "https://www.cuscore.org",
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-17"
 }

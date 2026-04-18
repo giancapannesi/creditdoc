@@ -6,8 +6,8 @@
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "Duluth Police Department Employees is a federally-insured credit union based in DULUTH, MN. Member-owned and not-for-profit, it provides everyday banking, lending, and savings services to its membership.",
-  "description_long": "Duluth Police Department Employees is a state-chartered credit union serving members in , , established in 1934. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "CUScore is a directory and comparison tool for federally insured credit unions across America, providing NCUA financial data, health scores, and branch locations for 4,374 institutions.",
+  "description_long": "CUScore is an independent online directory and comparison platform launched to help consumers research and compare credit unions across all 50 states, D.C., and U.S. territories. The platform aggregates quarterly financial data from the National Credit Union Administration (NCUA) for over 4,300 federally insured credit unions, representing 146 million members and $2.5 trillion in combined assets. Rather than offering financial products directly, CUScore functions as an educational and research resource that enables consumers to evaluate credit unions by financial health scores, total assets, membership size, and state location. The platform positions itself as an independent entity, explicitly stating it is not affiliated with the NCUA or any individual credit union. CUScore distinguishes itself through its comprehensive comparative framework, allowing consumers to browse credit unions by state and access rankings of the largest institutions by assets. The platform emphasizes member education through free guides covering credit union fundamentals, credit union versus bank comparisons, and membership eligibility requirements. The site presents factual, NCUA-sourced data and maintains transparency about its data sourcing and update frequency (Q4 2025). However, as a directory rather than a credit union itself, CUScore cannot process member accounts, loans, or financial transactions\u2014it serves purely an informational function. Users seeking actual credit union services must apply directly to member-owned institutions after researching options through this platform.",
   "logo_url": "",
   "website_url": "https://www.cuscore.org",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)"
+    "Search and browse 4,374 federally insured credit unions by state location",
+    "View top 10 largest credit unions ranked by total assets with health scores",
+    "Access NCUA quarterly financial data (Q4 2025) and industry statistics",
+    "Compare credit union versus bank features, rates, fees, and insurance coverage",
+    "Read free educational guides on credit union basics and membership eligibility",
+    "View nationwide membership totals and combined industry asset information",
+    "Sort and filter credit unions by state with aggregate asset totals",
+    "Access credit union health scores and financial ratios (Net Worth Ratio)",
+    "Review popular credit union options with member counts and assets",
+    "Read guides on how to join a credit union and find membership requirements",
+    "Explore credit union industry rankings and comparative analysis tools",
+    "View member-owned cooperative versus shareholder-owned bank structural differences"
   ],
   "pros": [
-    "Not-for-profit \u2014 typically lower fees and better rates than banks",
-    "NCUA insured \u2014 deposits protected up to $250,000",
-    "Established in 1934",
-    "Member-owned cooperative"
+    "Comprehensive directory of 4,374 federally insured credit unions with NCUA data and health scores",
+    "Free educational guides comparing credit unions versus banks and explaining membership requirements",
+    "Browse and filter credit unions by all 50 states, D.C., and U.S. territories",
+    "Top 10 rankings of largest credit unions by total assets with health ratings (A+, A, B+, B)",
+    "Access to Q4 2025 NCUA quarterly call report data updated March 2026",
+    "Shows member counts and total assets for transparency and financial comparison",
+    "Independent platform explicitly states it is not affiliated with NCUA or any individual credit union"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "CUScore is a directory only\u2014cannot open accounts, process loans, or conduct financial transactions",
+    "Limited feature set compared to actual credit union websites; no account management tools available",
+    "State-level aggregate data shown as $0 totals on main browsing interface, which is confusing and uninformative",
+    "Does not provide individual credit union detailed profiles, rates, fees, or product comparisons",
+    "Membership eligibility filters not available\u2014users must research individual credit union requirements separately"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +59,7 @@
   "founded_year": 1934,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "64359",
   "published": true,
   "review_status": "draft",
@@ -88,20 +99,21 @@
     "ease_of_use": 4.0
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Community-focused financial services"
+    "Consumers researching which credit union to join in their state or nationwide",
+    "People comparing financial institutions and evaluating credit unions versus banks",
+    "Individuals seeking educational information about credit union structure, benefits, and membership",
+    "Researchers and analysts studying the credit union industry and institutional financial health"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "CUScore is best for consumers and researchers seeking to evaluate and compare credit unions across America using NCUA financial data and health scores before choosing where to apply for membership. The critical caveat is that CUScore is a research and directory platform only\u2014it does not itself offer credit union services, accounts, loans, or products; users must apply directly to actual credit union institutions identified through this site.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-03-21",
   "cities_served": [],
   "phone": "2187305140",
   "address": ",  ",
-  "processing_status": "raw",
-  "quality_score": 7,
-  "enrichment_attempts": 0,
+  "processing_status": "ready_for_index",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
   "no_index": true,
   "ncua_charter_number": "64359",
   "ncua_official_name": "DULUTH POLICE DEPARTMENT EMPLOYEES",
@@ -111,5 +123,7 @@
   "state": "MN",
   "meta_title": "Duluth Police Department Employees (DULUTH, MN) | CreditDoc",
   "meta_description": "Duluth Police Department Employees \u2014 NCUA-insured credit union in DULUTH, MN. Member-owned, not-for-profit. Loans, savings, and member services.",
-  "website": "https://www.cuscore.org"
+  "website": "https://www.cuscore.org",
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-17"
 }

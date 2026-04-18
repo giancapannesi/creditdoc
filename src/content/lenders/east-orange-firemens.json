@@ -6,8 +6,8 @@
     "credit-union",
     "fdic-equivalent"
   ],
-  "description_short": "East Orange Firemens is a federally-insured credit union based in Bloomfield, NJ. Member-owned and not-for-profit, it provides everyday banking, lending, and savings services to its membership.",
-  "description_long": "East Orange Firemens is a federal credit union serving members in , , established in 1956. As a not-for-profit financial cooperative, credit unions typically offer lower loan rates, higher savings rates, and fewer fees than traditional banks. Deposits are federally insured up to $250,000 by the National Credit Union Administration (NCUA).",
+  "description_short": "LendMesh is a loan comparison platform that connects borrowers with credit unions and banks to find the best rates across mortgages, auto loans, personal loans, and more.",
+  "description_long": "LendMesh is a loan marketplace and comparison platform designed to simplify the borrowing process for consumers seeking competitive rates from multiple lenders. The company operates as a third-party aggregator that does not originate loans directly but instead matches borrowers with vetted credit unions and banks nationwide. Founded on the mission to eliminate guesswork and hidden fees from borrowing, LendMesh has served over 10,000 borrowers and facilitated more than $50 million in loan matches.\n\nThe platform offers comparison tools and rate matching across six major loan categories: mortgage loans (purchase and refinance), auto loans (new, used, and refinancing), personal loans (consolidation, home improvement, unexpected expenses), student loans (college and refinance), home equity loans and HELOCs, and various mortgage types including FHA and VA loans. Users can access calculators for mortgages and home affordability assessments. The platform publishes regular rate updates and news articles tracking current lending rates across product categories.\n\nLendMesh distinguishes itself through a commitment to transparency and consumer protection. The service is completely free to use with no hidden fees or obligations. The company emphasizes that rate inquiries do not impact credit scores and protects personal information with bank-level encryption. Their model allows consumers to compare multiple offers side-by-side before deciding which lender to work with, providing choice and control in the borrowing decision.\n\nHowever, as a comparison platform rather than a direct lender, LendMesh cannot guarantee loan approval or final rates, and actual terms depend on individual creditworthiness and lender decisions. The platform's value depends entirely on the quality and competitiveness of the partner lenders available in a user's area. Users should recognize that while rate comparisons are free, actually applying for loans through partner lenders will trigger credit inquiries that do affect credit scores.",
   "logo_url": "",
   "website_url": "https://www.lendmesh.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts (share drafts)",
-    "Savings accounts (share accounts)",
-    "Personal loans (typically lower rates than banks)",
-    "Auto loans",
-    "Mortgage lending",
-    "NCUA insured deposits (up to $250K)"
+    "Mortgage loan comparison (purchase and refinance)",
+    "FHA and VA mortgage rate matching",
+    "Auto loan comparison (new, used, and refinance)",
+    "Personal loan matching and comparison",
+    "Student loan and student loan refinance comparison",
+    "Home equity loan and HELOC rate matching",
+    "Mortgage affordability calculator",
+    "Mortgage payment calculator",
+    "Free rate inquiry (soft pull, no credit impact)",
+    "Side-by-side offer comparison across multiple lenders",
+    "Current rate news and market updates",
+    "Partner lender vetting for trust and service quality"
   ],
   "pros": [
-    "Not-for-profit \u2014 typically lower fees and better rates than banks",
-    "NCUA insured \u2014 deposits protected up to $250,000",
-    "Established in 1956",
-    "Member-owned cooperative"
+    "Completely free service with no hidden fees, charges, or obligations to compare loan offers",
+    "Soft inquiry rate checks do not negatively impact credit score before formal application",
+    "Side-by-side comparison of multiple lender offers in one platform across six major loan categories",
+    "Loan comparison across 10,000+ borrowers with $50M+ in matched loans demonstrates significant scale",
+    "Built-in calculators for mortgage affordability and mortgage payments help borrowers plan ahead",
+    "Bank-level encryption and strict privacy standards protect personal information",
+    "Regular published rate updates (daily/weekly news articles) keep borrowers informed of market conditions"
   ],
   "cons": [
-    "Membership requirements may apply (geographic, employer, or affiliation)",
-    "Fewer branches and ATMs than large banks",
-    "May have limited digital banking features"
+    "LendMesh does not originate or fund loans directly, so approval depends entirely on partner lenders' individual criteria",
+    "Actual final interest rates and terms offered may differ significantly from comparison quotes shown",
+    "Limited detail on which specific credit unions and banks are partner lenders, making it difficult to verify availability in all regions",
+    "Formal loan applications through partner lenders will trigger hard credit inquiries that do impact credit scores, despite free comparison process",
+    "No guarantee of competitive rates in all markets or for all credit profiles, as availability varies by geography and creditworthiness"
   ],
   "contact": {
     "phone": "",
@@ -48,7 +59,7 @@
   "founded_year": 1956,
   "headquarters": ", ",
   "states_served": [],
-  "data_source": "ncua",
+  "data_source": "enriched",
   "ncua_charter": "11014",
   "published": true,
   "review_status": "draft",
@@ -88,20 +99,21 @@
     "ease_of_use": 4.0
   },
   "best_for": [
-    "Lower fees and better loan rates than banks",
-    "Member-owned cooperative banking",
-    "Community-focused financial services"
+    "Homebuyers and refinancers seeking to compare mortgage rates from multiple lenders in one place",
+    "Auto loan shoppers wanting to compare rates for new, used, or refinanced vehicles across different institutions",
+    "Borrowers with good-to-excellent credit looking to leverage competition between lenders to secure better terms",
+    "Consumers wanting to understand rate trends and current market conditions before applying for loans"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "LendMesh is best for borrowers with established credit who want to compare loan rates across multiple lenders without initial credit impact, particularly for mortgages, auto loans, and personal loans. The main caveat is that LendMesh is a comparison platform, not a lender\u2014actual loan approval, final rates, and terms depend on partner lenders' underwriting and the borrower's creditworthiness, and formal applications will trigger hard credit inquiries.",
   "typical_results_timeline": "Membership approval and account opening typically takes 1-3 business days. Loan decisions are usually faster than traditional banks.",
   "last_updated": "2026-03-21",
   "cities_served": [],
   "phone": "9736770969",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 7,
-  "enrichment_attempts": 0,
+  "enrichment_attempts": 1,
   "no_index": true,
   "ncua_charter_number": "11014",
   "ncua_official_name": "EAST ORANGE FIREMENS",
@@ -111,5 +123,8 @@
   "state": "NJ",
   "meta_title": "East Orange Firemens (Bloomfield, NJ) | CreditDoc",
   "meta_description": "East Orange Firemens \u2014 NCUA-insured credit union in Bloomfield, NJ. Member-owned, not-for-profit. Loans, savings, and member services.",
-  "website": "https://www.lendmesh.com"
+  "website": "https://www.lendmesh.com",
+  "has_been_enriched": true,
+  "last_engine_run": "2026-04-16",
+  "quarantine_reason": "not_consumer_finance"
 }
