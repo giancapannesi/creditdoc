@@ -1,6 +1,44 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+// Entity-type badge matrix (2026-04-19) — governs which category of lender
+// is eligible to show the "Free Consultation" and "Free to Use" badges.
+// Background: pawn shops, check cashers, ATMs etc. don't offer consultations
+// and aren't free to use (they charge per-transaction). Gate badges accordingly.
+export const ENTITY_TYPE_BADGE_MATRIX: Record<string, {freeConsult: boolean; freeToUse: boolean}> = {
+  'credit-repair':       {freeConsult: true,  freeToUse: false},
+  'fix-my-credit':       {freeConsult: true,  freeToUse: false},
+  'debt-relief':         {freeConsult: true,  freeToUse: false},
+  'debt-settlement':     {freeConsult: true,  freeToUse: false},
+  'credit-counseling':   {freeConsult: true,  freeToUse: false},
+  'bankruptcy-services': {freeConsult: true,  freeToUse: false},
+  'free-help':           {freeConsult: true,  freeToUse: true},
+  'get-out-of-debt':     {freeConsult: true,  freeToUse: false},
+  'insurance':           {freeConsult: true,  freeToUse: false},
+  'build-my-credit':     {freeConsult: false, freeToUse: false},
+  'monitor-protect':     {freeConsult: false, freeToUse: true},
+  'credit-monitoring':   {freeConsult: false, freeToUse: true},
+  'identity-theft':      {freeConsult: false, freeToUse: true},
+  'personal-loans':      {freeConsult: false, freeToUse: false},
+  'business-loans':      {freeConsult: false, freeToUse: false},
+  'mortgages':           {freeConsult: false, freeToUse: false},
+  'emergency-cash':      {freeConsult: false, freeToUse: false},
+  'payday-alternatives': {freeConsult: false, freeToUse: false},
+  'credit-cards':        {freeConsult: false, freeToUse: false},
+  'banking':             {freeConsult: false, freeToUse: false},
+  'banks':               {freeConsult: false, freeToUse: false},
+  'credit-unions':       {freeConsult: false, freeToUse: false},
+  'pawn-shops':          {freeConsult: false, freeToUse: false},
+  'check-cashing':       {freeConsult: false, freeToUse: false},
+  'atms-cash-access':    {freeConsult: false, freeToUse: false},
+  'atms':                {freeConsult: false, freeToUse: false},
+  'cash-access':         {freeConsult: false, freeToUse: false},
+};
+
+export function getBadgeEligibility(category: string): {freeConsult: boolean; freeToUse: boolean} {
+  return ENTITY_TYPE_BADGE_MATRIX[category] || {freeConsult: false, freeToUse: false};
+}
+
 export interface LenderPricing {
   monthly_price: number;
   setup_fee: number;

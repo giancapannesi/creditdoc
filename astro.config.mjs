@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://creditdoc.co',
+  site: 'https://www.creditdoc.co',
   output: 'static',
   build: {
     format: 'directory',

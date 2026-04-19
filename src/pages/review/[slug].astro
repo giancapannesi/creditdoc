@@ -7,7 +7,7 @@ import LenderCard from '../../components/LenderCard.astro';
 import TrustBadge from '../../components/TrustBadge.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import { linkifyDescription } from '../../utils/inline-linker';
-import { getAllLenders, getLenderBySlug, formatPrice, getBbbClass, generateDiagnosis, getComparisons, getCategories, getWellnessGuidesByCategory, getGlossaryTermsForContext } from '../../utils/data';
+import { getAllLenders, getLenderBySlug, formatPrice, getBbbClass, generateDiagnosis, getComparisons, getCategories, getWellnessGuidesByCategory, getGlossaryTermsForContext, getBadgeEligibility } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
 const STATE_ABBR: Record<string, string> = {
@@ -118,7 +118,12 @@ const lowestPrice = lender.pricing.tiers.length > 0
   : lender.pricing.monthly_price;
 const hasPricing = lowestPrice > 0 || lender.pricing.tiers.length > 0;
 const isFreeService = lender.pricing.monthly_price === 0 && lender.pricing.setup_fee === 0 && lender.pricing.tiers.length === 0 && lender.pricing.free_consultation === true;
-const priceDisplay = hasPricing ? `From ${formatPrice(lowestPrice)}/mo` : isFreeService ? 'Free to Use' : 'Contact for Pricing';
+const badges = getBadgeEligibility(lender.category);
+const priceDisplay = hasPricing
+  ? `From ${formatPrice(lowestPrice)}/mo`
+  : (isFreeService && badges.freeToUse)
+    ? 'Free to Use'
+    : 'Contact for Pricing';
 
 // Category-aware feature labels — credit repair features only show on credit repair pages
 const creditRepairFeatures: Record<string, string> = {
@@ -153,11 +158,21 @@ const ratingCategories = [
   { label: 'Ease of Use', value: lender.rating_breakdown.ease_of_use },
 ];
 
+const hq = lender.company_info?.headquarters?.trim();
+const year = lender.company_info?.founded_year;
+const bbb = lender.company_info?.bbb_rating?.trim();
+const bbbAcc = lender.company_info?.bbb_accredited;
+
+const legitParts = [`Yes. ${lender.name} is a registered company`];
+if (hq) legitParts.push(`headquartered in ${hq}`);
+if (year) legitParts.push(`founded in ${year}`);
+let legitAnswer = legitParts.join(', ') + '.';
+if (bbb && bbb !== 'NR' && bbb !== 'N/A' && bbb !== '') {
+  legitAnswer += ` They hold a ${bbb} rating with the Better Business Bureau${bbbAcc ? ' and are BBB-accredited' : ''}.`;
+}
+
 const faqs = [
-  {
-    question: `Is ${lender.name} legitimate?`,
-    answer: `Yes. ${lender.name} is a registered company headquartered in ${lender.company_info.headquarters}${lender.company_info.founded_year ? `, founded in ${lender.company_info.founded_year}` : ''}. They hold a ${lender.company_info.bbb_rating} rating with the Better Business Bureau${lender.company_info.bbb_accredited ? ' and are BBB-accredited' : ''}.`,
-  },
+  { question: `Is ${lender.name} legitimate?`, answer: legitAnswer },
   ...(hasPricing ? [{
     question: `How much does ${lender.name} cost?`,
     answer: `${lender.name} plans start at ${formatPrice(lowestPrice)} per month${lender.pricing.setup_fee > 0 ? ` with a ${formatPrice(lender.pricing.setup_fee)} setup fee` : lender.pricing.first_work_fee > 0 ? `. There is no setup fee — only a ${formatPrice(lender.pricing.first_work_fee)} work fee charged after the detailed audit analysis` : ' with no setup fee'}. ${lender.pricing.money_back_guarantee ? lender.pricing.guarantee_details : 'No money-back guarantee is offered.'}`,
@@ -213,45 +228,31 @@ if (lender.company_info?.phone) {
   financialService.telephone = lender.company_info.phone;
 }
 
-// AggregateRating — must match visible RatingStars component on page.
-// Always use reviewCount (not ratingCount) because every page has an editorial review.
-// ratingCount triggers GSC "Review snippets: Invalid object type for field" errors
-// when a Review object is also present.
 const clampedRating = Math.min(5, Math.max(1, lender.rating));
-if (lender.rating > 0 && lender.rating <= 5) {
-  financialService.aggregateRating = {
-    '@type': 'AggregateRating',
-    ratingValue: clampedRating.toFixed(1),
-    bestRating: '5',
-    worstRating: '1',
-    reviewCount: ((lender.google_reviews_count || 0) > 0
-      ? lender.google_reviews_count.toString()
-      : '1'
-    ),
-  };
-}
 
-// Review — enables star snippets in Google SERPs.
-// Uses the editorial diagnosis as the review body.
+// Review — CreditDoc organization-attributed algorithmic score (not a customer review).
+// Enables star snippets in Google SERPs. Body references the methodology page so
+// the scoring formula is discoverable + Rich Results-policy compliant.
 if (lender.rating > 0 && lender.rating <= 5) {
   const diagnosisText = diagnosis?.summary || lender.description_short || '';
-  if (diagnosisText.length > 10) {
-    financialService.review = {
-      '@type': 'Review',
-      author: {
-        '@type': 'Person',
-        name: 'Harvey Brooks',
-        url: 'https://creditdoc.co/about/',
-      },
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: clampedRating.toFixed(1),
-        bestRating: '5',
-        worstRating: '1',
-      },
-      reviewBody: diagnosisText,
-    };
-  }
+  financialService.review = {
+    '@type': 'Review',
+    author: {
+      '@type': 'Organization',
+      name: 'CreditDoc',
+      url: 'https://www.creditdoc.co/',
+    },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: clampedRating.toFixed(1),
+      bestRating: '5',
+      worstRating: '1',
+    },
+    reviewBody: diagnosisText.length > 10
+      ? `${diagnosisText} CreditDoc Rating derived from our 5-factor methodology — see https://www.creditdoc.co/methodology/ for scoring details.`
+      : `CreditDoc Rating derived from our 5-factor methodology. See https://www.creditdoc.co/methodology/ for scoring details.`,
+    datePublished: lender.last_reviewed_at || lender.last_updated || new Date().toISOString().slice(0,10),
+  };
 }
 
 // Price range hint
@@ -272,15 +273,20 @@ const cardProductSchema = isCardProduct ? {
   },
   category: 'Credit Card',
   ...(lender.rating > 0 && lender.rating <= 5 ? {
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: Math.min(5, Math.max(1, lender.rating)).toFixed(1),
-      bestRating: '5',
-      worstRating: '1',
-      reviewCount: ((lender.google_reviews_count || 0) > 0
-        ? lender.google_reviews_count.toString()
-        : '1'
-      ),
+    review: {
+      '@type': 'Review',
+      author: {
+        '@type': 'Organization',
+        name: 'CreditDoc',
+        url: 'https://www.creditdoc.co/',
+      },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: Math.min(5, Math.max(1, lender.rating)).toFixed(1),
+        bestRating: '5',
+        worstRating: '1',
+      },
+      reviewBody: `CreditDoc Rating derived from our 5-factor methodology. See https://www.creditdoc.co/methodology/ for scoring details.`,
     },
   } : {}),
   offers: lender.pricing.tiers.map((tier: any) => ({
@@ -327,10 +333,16 @@ const jsonLd = [
 ];
 
 const canonicalUrl = `https://creditdoc.co/review/${lender.slug}/`;
+
+// Per-entity OG image: prefer logo, fall through to default in BaseLayout
+const ogImageUrl = lender.logo_url?.trim()
+  ? (lender.logo_url.startsWith('http') ? lender.logo_url : `https://www.creditdoc.co${lender.logo_url}`)
+  : undefined;
 ---
 
 <BaseLayout
   canonical={canonicalUrl}
+  ogImage={ogImageUrl}
   title={(() => {
     if (lender.seo_title) return lender.seo_title;
     const city = lender.company_info?.city;
@@ -402,9 +414,15 @@ const canonicalUrl = `https://creditdoc.co/review/${lender.slug}/`;
             <RatingStars rating={lender.rating} size="md" showValue={true} />
           </div>
           <p class="mt-3 text-muted leading-relaxed">{lender.description_short}</p>
-          {isEnriched && (
+          {lender.is_protected ? (
             <p class="mt-2 text-xs text-muted">
-              Editorially reviewed by <a href="/about/" class="text-primary hover:underline">Harvey Brooks</a>
+              Editorially reviewed by <a href="/about/harvey-brooks/" class="text-primary hover:underline">Harvey Brooks</a>
+              · Rating from <a href="/methodology/" class="text-primary hover:underline">CreditDoc methodology</a>
+            </p>
+          ) : (
+            <p class="mt-2 text-xs text-muted">
+              Data compiled from public sources
+              · Rating from <a href="/methodology/" class="text-primary hover:underline">CreditDoc methodology</a>
             </p>
           )}
         </div>
@@ -415,13 +433,15 @@ const canonicalUrl = `https://creditdoc.co/review/${lender.slug}/`;
         <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-primary-light text-primary">
           {priceDisplay}
         </span>
+        {bbb && bbb !== 'NR' && bbb !== 'N/A' && (
         <span class:list={['inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold', bbbClass]}>
-          BBB: {lender.company_info.bbb_rating}
+          BBB: {bbb}
         </span>
+        )}
         {lender.verified_provider && (
           <TrustBadge type="verified-provider" text="Verified Provider" />
         )}
-        {lender.pricing.free_consultation && (
+        {lender.pricing.free_consultation && badges.freeConsult && (
           <TrustBadge type="verified" text="Free Consultation" />
         )}
         {lender.pricing.money_back_guarantee && (
@@ -725,24 +745,28 @@ const canonicalUrl = `https://creditdoc.co/review/${lender.slug}/`;
                 <dd class="text-sm font-medium text-text">{lender.company_info.founded_year}</dd>
               </div>
             )}
+            {hq && (
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">Headquarters</dt>
-              <dd class="text-sm font-medium text-text">{lender.company_info.headquarters}</dd>
+              <dd class="text-sm font-medium text-text">{hq}</dd>
             </div>
+            )}
             {lender.company_info.employees && (
               <div class="flex items-center justify-between py-2 border-b border-border/50">
                 <dt class="text-sm text-muted">Employees</dt>
                 <dd class="text-sm font-medium text-text">{lender.company_info.employees}</dd>
               </div>
             )}
+            {bbb && bbb !== 'NR' && bbb !== 'N/A' && (
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">BBB Rating</dt>
               <dd>
                 <span class:list={['inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold', bbbClass]}>
-                  {lender.company_info.bbb_rating}
+                  {bbb}
                 </span>
               </dd>
             </div>
+            )}
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">BBB Accredited</dt>
               <dd class="text-sm font-medium text-text">{lender.company_info.bbb_accredited ? 'Yes' : 'No'}</dd>
@@ -761,7 +785,7 @@ const canonicalUrl = `https://creditdoc.co/review/${lender.slug}/`;
             )}
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">Starting Price</dt>
-              <dd class="text-sm font-medium text-text">{hasPricing ? `${formatPrice(lowestPrice)}/mo` : isFreeService ? 'Free to Use' : 'Contact provider'}</dd>
+              <dd class="text-sm font-medium text-text">{hasPricing ? `${formatPrice(lowestPrice)}/mo` : (isFreeService && badges.freeToUse) ? 'Free to Use' : 'Contact provider'}</dd>
             </div>
             {lender.pricing.setup_fee > 0 ? (
             <div class="flex items-center justify-between py-2 border-b border-border/50">
@@ -779,10 +803,12 @@ const canonicalUrl = `https://creditdoc.co/review/${lender.slug}/`;
               <dd class="text-sm font-medium text-text">None</dd>
             </div>
             )}
+            {badges.freeConsult && (
             <div class="flex items-center justify-between py-2 border-b border-border/50">
               <dt class="text-sm text-muted">Free Consultation</dt>
               <dd class="text-sm font-medium text-text">{lender.pricing.free_consultation ? 'Yes' : 'No'}</dd>
             </div>
+            )}
             <div class="flex items-center justify-between py-2">
               <dt class="text-sm text-muted">Money-Back Guarantee</dt>
               <dd class="text-sm font-medium text-text">{lender.pricing.money_back_guarantee ? 'Yes' : 'No'}</dd>
