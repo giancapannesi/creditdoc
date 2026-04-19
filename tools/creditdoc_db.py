@@ -217,11 +217,20 @@ class CreditDocDB:
         return self._row_to_lender(row)
 
     def get_lender_data(self, slug):
-        """Get just the JSON data for a lender (what goes in the file)."""
-        row = self.conn.execute("SELECT data FROM lenders WHERE slug = ?", (slug,)).fetchone()
+        """Get just the JSON data for a lender (what goes in the file).
+
+        Merges the lenders.brand_slug column into the returned dict so that
+        exported JSON files include brand_slug without touching the JSON blob.
+        """
+        row = self.conn.execute(
+            "SELECT data, brand_slug FROM lenders WHERE slug = ?", (slug,)
+        ).fetchone()
         if not row:
             return None
-        return json.loads(row["data"])
+        data = json.loads(row["data"])
+        # Inject brand_slug from the column (may be None/null)
+        data["brand_slug"] = row["brand_slug"]
+        return data
 
     def lender_exists(self, slug):
         """Check if a lender exists in the database."""

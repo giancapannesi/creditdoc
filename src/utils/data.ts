@@ -106,6 +106,8 @@ export interface Lender {
   typical_results_timeline: string;
   last_updated: string;
   review_status: string;
+  // Brand/chain metadata (optional — set for multi-location chains)
+  brand_slug?: string | null;
   // Directory listing fields (optional — from Outscraper DB)
   data_source?: string;
   google_rating?: number;
@@ -497,6 +499,57 @@ export function getGlossaryTermsForContext(contexts: string[]): GlossaryTerm[] {
   return getGlossaryTerms().filter(t =>
     t.page_contexts.some(c => contexts.includes(c))
   );
+}
+
+// --- Brand / Chain helpers (Stage 2 chain-differentiation plan) ---
+
+export interface BrandFAQ {
+  q: string;
+  a: string;
+}
+
+export interface BrandInfo {
+  slug: string;
+  display_name: string;
+  summary_short: string;
+  summary_long: string;
+  faq: BrandFAQ[];
+  official_website: string | null;
+  parent_company?: string;
+  category: string;
+  last_reviewed: string;
+  location_count?: number;
+}
+
+const BRANDS_DIR = path.join(process.cwd(), 'src/content/brands');
+
+let _brandsCache: BrandInfo[] | null = null;
+
+export function getAllBrands(): BrandInfo[] {
+  if (_brandsCache) return _brandsCache;
+  if (!fs.existsSync(BRANDS_DIR)) {
+    _brandsCache = [];
+    return _brandsCache;
+  }
+  const files = fs.readdirSync(BRANDS_DIR).filter(f => f.endsWith('.json'));
+  const lenders = getAllLenders();
+  _brandsCache = files.map(f => {
+    const raw = fs.readFileSync(path.join(BRANDS_DIR, f), 'utf-8');
+    const brand = JSON.parse(raw) as BrandInfo;
+    // Compute location_count from lenders at read time
+    brand.location_count = lenders.filter(l => l.brand_slug === brand.slug).length;
+    return brand;
+  });
+  return _brandsCache;
+}
+
+export function getBrandInfo(slug: string): BrandInfo | null {
+  const brands = getAllBrands();
+  return brands.find(b => b.slug === slug) ?? null;
+}
+
+export function getLendersByBrand(slug: string): Lender[] {
+  return getAllLenders().filter(l => l.brand_slug === slug);
 }
 
 export const TOP_CITIES: { city: string; state: string; lat: number; lng: number }[] = [
