@@ -43,6 +43,9 @@ export default defineConfig({
         } else if (url.includes('/categories/')) {
           item.priority = 0.7;
           item.changefreq = 'weekly';
+        } else if (url.includes('/brand/')) {
+          item.priority = 0.75;
+          item.changefreq = 'weekly';
         }
         return item;
       },
