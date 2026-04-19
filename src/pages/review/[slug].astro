@@ -7,7 +7,7 @@ import LenderCard from '../../components/LenderCard.astro';
 import TrustBadge from '../../components/TrustBadge.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import { linkifyDescription } from '../../utils/inline-linker';
-import { getAllLenders, getLenderBySlug, formatPrice, getBbbClass, generateDiagnosis, getComparisons, getCategories, getWellnessGuidesByCategory, getGlossaryTermsForContext, getBadgeEligibility } from '../../utils/data';
+import { getAllLenders, getLenderBySlug, formatPrice, getBbbClass, generateDiagnosis, getComparisons, getCategories, getWellnessGuidesByCategory, getGlossaryTermsForContext, getBadgeEligibility, getBrandInfo } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
 const STATE_ABBR: Record<string, string> = {
@@ -334,6 +334,9 @@ const jsonLd = [
 
 const canonicalUrl = `https://www.creditdoc.co/review/${lender.slug}/`;
 
+// Brand/chain link — only present if lender belongs to an approved chain
+const brandInfo = lender.brand_slug ? getBrandInfo(lender.brand_slug) : null;
+
 // Per-entity OG image: prefer logo, fall through to default in BaseLayout
 const ogImageUrl = lender.logo_url?.trim()
   ? (lender.logo_url.startsWith('http') ? lender.logo_url : `https://www.creditdoc.co${lender.logo_url}`)
@@ -377,6 +380,15 @@ const ogImageUrl = lender.logo_url?.trim()
       <li class="text-text font-medium">{lender.name}</li>
     </ol>
   </nav>
+
+  <!-- Brand/Chain Callout — only for chain locations -->
+  {brandInfo && (
+    <div class="mx-auto max-w-7xl px-4 pt-3 sm:px-6 lg:px-8">
+      <div class="text-sm text-muted">
+        Part of the <a href={`/brand/${lender.brand_slug}/`} class="text-primary hover:underline font-medium">{brandInfo.display_name}</a> chain &middot; {brandInfo.location_count} locations
+      </div>
+    </div>
+  )}
 
   <!-- Website Health Warning Banner -->
   {hasWebsiteWarning && warning && (
