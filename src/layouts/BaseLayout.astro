@@ -16,7 +16,7 @@ const { title: rawTitle, description: rawDesc, canonical, ogImage, jsonLd, noind
 const title = rawTitle.length > 65 ? rawTitle.slice(0, 62) + '...' : rawTitle;
 const description = rawDesc.length > 160 ? rawDesc.slice(0, 157) + '...' : rawDesc;
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
-const ogImg = ogImage || 'https://creditdoc.co/og-default.png';
+const ogImg = ogImage || 'https://www.creditdoc.co/og-default.png';
 ---
 
 <!doctype html>

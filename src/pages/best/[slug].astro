@@ -24,8 +24,8 @@ const jsonLd = [
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://creditdoc.co/' },
-      { '@type': 'ListItem', position: 2, name: listicle.title, item: `https://creditdoc.co/best/${listicle.slug}/` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+      { '@type': 'ListItem', position: 2, name: listicle.title, item: `https://www.creditdoc.co/best/${listicle.slug}/` },
     ],
   },
   {
@@ -38,7 +38,7 @@ const jsonLd = [
       '@type': 'ListItem',
       position: i + 1,
       name: lender.name,
-      url: `https://creditdoc.co/review/${lender.slug}/`,
+      url: `https://www.creditdoc.co/review/${lender.slug}/`,
     })),
   },
   {
@@ -50,16 +50,16 @@ const jsonLd = [
       '@type': 'Person',
       name: 'Harvey Brooks',
       jobTitle: 'Senior Financial Editor',
-      url: 'https://creditdoc.co/about/',
+      url: 'https://www.creditdoc.co/about/',
     },
     publisher: {
       '@type': 'Organization',
       name: 'CreditDoc',
-      url: 'https://creditdoc.co',
-      logo: { '@type': 'ImageObject', url: 'https://creditdoc.co/favicon.svg' },
+      url: 'https://www.creditdoc.co',
+      logo: { '@type': 'ImageObject', url: 'https://www.creditdoc.co/favicon.svg' },
     },
-    image: 'https://creditdoc.co/og-default.png',
-    url: `https://creditdoc.co/best/${listicle.slug}/`,
+    image: 'https://www.creditdoc.co/og-default.png',
+    url: `https://www.creditdoc.co/best/${listicle.slug}/`,
   },
 ];
 
@@ -80,7 +80,7 @@ if (faqSchemaItems.length > 0) {
   });
 }
 
-const canonicalUrl = `https://creditdoc.co/best/${listicle.slug}/`;
+const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
 ---
 
 <BaseLayout

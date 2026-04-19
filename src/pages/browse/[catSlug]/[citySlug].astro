@@ -52,7 +52,7 @@ const jsonLd = [
     "@type": "CollectionPage",
     "name": `${category.name} in ${cityInfo.city}, ${cityInfo.state}`,
     "description": description,
-    "url": `https://creditdoc.co/browse/${category.slug}/${cityInfo.slug}/`,
+    "url": `https://www.creditdoc.co/browse/${category.slug}/${cityInfo.slug}/`,
     "about": {
       "@type": "City",
       "name": cityInfo.city,
@@ -69,17 +69,17 @@ const jsonLd = [
       "@type": "ListItem",
       "position": i + 1,
       "name": l.name,
-      "url": `https://creditdoc.co/review/${l.slug}/`,
+      "url": `https://www.creditdoc.co/review/${l.slug}/`,
     })),
   }] : []),
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://creditdoc.co/" },
-      { "@type": "ListItem", "position": 2, "name": "Cities", "item": "https://creditdoc.co/city/" },
-      { "@type": "ListItem", "position": 3, "name": `${cityInfo.city}, ${cityInfo.stateAbbr}`, "item": `https://creditdoc.co/city/${cityInfo.slug}/` },
-      { "@type": "ListItem", "position": 4, "name": category.name, "item": `https://creditdoc.co/browse/${category.slug}/${cityInfo.slug}/` },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/" },
+      { "@type": "ListItem", "position": 2, "name": "Cities", "item": "https://www.creditdoc.co/city/" },
+      { "@type": "ListItem", "position": 3, "name": `${cityInfo.city}, ${cityInfo.stateAbbr}`, "item": `https://www.creditdoc.co/city/${cityInfo.slug}/` },
+      { "@type": "ListItem", "position": 4, "name": category.name, "item": `https://www.creditdoc.co/browse/${category.slug}/${cityInfo.slug}/` },
     ]
   }
 ];

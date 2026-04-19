@@ -38,12 +38,12 @@ const jsonLd = {
   "@type": "DefinedTermSet",
   "name": "CreditDoc Credit & Lending Glossary",
   "description": description,
-  "url": "https://creditdoc.co/glossary/",
+  "url": "https://www.creditdoc.co/glossary/",
   "hasDefinedTerm": glossaryTerms.map(t => ({
     "@type": "DefinedTerm",
     "name": t.term,
     "description": t.plain_definition,
-    "url": `https://creditdoc.co/glossary/#${t.slug}`,
+    "url": `https://www.creditdoc.co/glossary/#${t.slug}`,
   })),
 };
 ---

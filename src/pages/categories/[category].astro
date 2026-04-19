@@ -40,21 +40,21 @@ const jsonLd = [
     '@type': 'CollectionPage',
     name: category.name,
     description: category.seo_description,
-    url: `https://creditdoc.co/categories/${categorySlug}/`,
+    url: `https://www.creditdoc.co/categories/${categorySlug}/`,
     numberOfItems: lenders.length,
     provider: {
       '@type': 'Organization',
       name: 'CreditDoc',
-      url: 'https://creditdoc.co',
+      url: 'https://www.creditdoc.co',
     },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://creditdoc.co/' },
-      { '@type': 'ListItem', position: 2, name: 'Categories', item: 'https://creditdoc.co/' },
-      { '@type': 'ListItem', position: 3, name: category.name, item: `https://creditdoc.co/categories/${categorySlug}/` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+      { '@type': 'ListItem', position: 2, name: 'Categories', item: 'https://www.creditdoc.co/' },
+      { '@type': 'ListItem', position: 3, name: category.name, item: `https://www.creditdoc.co/categories/${categorySlug}/` },
     ],
   },
   ...(topLenders.length > 0 ? [{
@@ -67,7 +67,7 @@ const jsonLd = [
       '@type': 'ListItem',
       position: i + 1,
       name: l.name,
-      url: `https://creditdoc.co/review/${l.slug}/`,
+      url: `https://www.creditdoc.co/review/${l.slug}/`,
     })),
   }] : []),
 ];

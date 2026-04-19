@@ -110,7 +110,7 @@ function mdToHtml(src: string): string {
   return out.join('\n');
 }
 
-const canonicalUrl = `https://creditdoc.co/answers/${answer.slug}/`;
+const canonicalUrl = `https://www.creditdoc.co/answers/${answer.slug}/`;
 const siteName = 'CreditDoc';
 
 // JSON-LD
@@ -123,17 +123,17 @@ const articleSchema = {
     '@type': 'Person',
     name: 'Harvey Brooks',
     jobTitle: 'Senior Financial Editor',
-    url: 'https://creditdoc.co/about/',
+    url: 'https://www.creditdoc.co/about/',
   },
   publisher: {
     '@type': 'Organization',
     name: siteName,
-    url: 'https://creditdoc.co',
-    logo: { '@type': 'ImageObject', url: 'https://creditdoc.co/favicon.svg' },
+    url: 'https://www.creditdoc.co',
+    logo: { '@type': 'ImageObject', url: 'https://www.creditdoc.co/favicon.svg' },
   },
   datePublished: answer.published_at || answer.last_updated,
   dateModified: answer.last_updated || answer.published_at,
-  image: 'https://creditdoc.co/og-default.png',
+  image: 'https://www.creditdoc.co/og-default.png',
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
 };
 
@@ -151,8 +151,8 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://creditdoc.co/' },
-    { '@type': 'ListItem', position: 2, name: 'Answers', item: 'https://creditdoc.co/answers/' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+    { '@type': 'ListItem', position: 2, name: 'Answers', item: 'https://www.creditdoc.co/answers/' },
     { '@type': 'ListItem', position: 3, name: answer.h1, item: canonicalUrl },
   ],
 };
