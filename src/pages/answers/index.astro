@@ -1,0 +1,126 @@
+---
+import fs from 'fs';
+import path from 'path';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const ANSWERS_DIR = path.join(process.cwd(), 'src/content/answers');
+const files = fs.readdirSync(ANSWERS_DIR).filter(f => f.endsWith('.json'));
+const answers = files
+  .map(f => JSON.parse(fs.readFileSync(path.join(ANSWERS_DIR, f), 'utf-8')))
+  .sort((a, b) => (b.last_updated || '').localeCompare(a.last_updated || ''));
+
+function truncate(text: string, max: number): string {
+  if (!text) return '';
+  return text.length <= max ? text : text.slice(0, max - 1) + '…';
+}
+
+const canonicalUrl = 'https://www.creditdoc.co/answers/';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+    { '@type': 'ListItem', position: 2, name: 'Answers', item: canonicalUrl },
+  ],
+};
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  url: canonicalUrl,
+  name: 'Answers to Your Credit & Finance Questions',
+  publisher: {
+    '@type': 'Organization',
+    name: 'CreditDoc',
+    url: 'https://www.creditdoc.co',
+    logo: { '@type': 'ImageObject', url: 'https://www.creditdoc.co/favicon.svg' },
+  },
+};
+
+const jsonLd = [collectionSchema, breadcrumbSchema];
+---
+
+<BaseLayout
+  title="Answers to Your Credit & Finance Questions | CreditDoc"
+  description="Clear, research-backed answers to the credit and personal finance questions real people are searching for. Topics cover credit repair, loans, debt, and more."
+  canonical={canonicalUrl}
+  jsonLd={jsonLd}
+>
+  <nav class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li class="text-text font-medium">Answers</li>
+    </ol>
+  </nav>
+
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <h1 class="text-2xl sm:text-3xl font-bold text-text">Answers to Your Credit & Finance Questions</h1>
+      <p class="mt-3 text-muted leading-relaxed">
+        CreditDoc publishes in-depth answers to the credit and personal finance questions people actually search for — from how APR is calculated to whether debt settlement hurts your score.
+        Each answer is written by our editorial team and draws on primary sources including the CFPB, FICO, and federal lending regulations.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+    <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+      <div class="lg:col-span-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {answers.map(answer => (
+            <a href={`/answers/${answer.slug}/`} class="glass-card p-5 block hover:border-primary transition-colors group">
+              <div class="text-xs text-primary font-semibold uppercase tracking-wide mb-2">
+                {answer.category ? answer.category.replace(/-/g, ' ') : 'Finance'}
+              </div>
+              <h2 class="text-base font-semibold text-text group-hover:text-primary transition-colors leading-snug mb-2">
+                {answer.h1 || answer.title}
+              </h2>
+              <p class="text-sm text-muted leading-relaxed mb-3">
+                {truncate(answer.meta_description || answer.answer_summary || '', 160)}
+              </p>
+              {answer.last_updated && (
+                <span class="inline-block text-xs text-muted border border-border rounded px-2 py-0.5">
+                  Updated {answer.last_updated}
+                </span>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <aside class="mt-8 lg:mt-0 space-y-6">
+        <div class="glass-card p-5">
+          <h2 class="text-base font-semibold text-text mb-4">Top Comparison Guides</h2>
+          <ul class="space-y-3 text-sm">
+            <li>
+              <a href="/best/best-credit-repair-companies/" class="text-primary hover:underline font-medium leading-snug block">
+                Best Credit Repair Companies
+              </a>
+              <span class="text-xs text-muted">Compare BBB-rated services</span>
+            </li>
+            <li>
+              <a href="/best/best-personal-loan-lenders/" class="text-primary hover:underline font-medium leading-snug block">
+                Best Personal Loan Lenders
+              </a>
+              <span class="text-xs text-muted">Compare rates & terms</span>
+            </li>
+            <li>
+              <a href="/best/best-debt-relief-companies/" class="text-primary hover:underline font-medium leading-snug block">
+                Best Debt Relief Companies
+              </a>
+              <span class="text-xs text-muted">Settlement & consolidation options</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rounded-lg border border-border bg-bg-alt p-4">
+          <p class="text-xs text-muted leading-relaxed">
+            <strong class="text-text">Editorial note:</strong> All answers are researched and written by CreditDoc's editorial team. We do not accept sponsored content in our answers section. <a href="/about/" class="text-primary hover:underline">About our team</a>.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
