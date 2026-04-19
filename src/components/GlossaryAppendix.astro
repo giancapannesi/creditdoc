@@ -45,12 +45,12 @@ const jsonLd = {
   "@type": "DefinedTermSet",
   "name": heading,
   "description": "Plain-language financial term definitions for consumers",
-  "url": "https://creditdoc.co/financial-wellness/",
+  "url": "https://www.creditdoc.co/financial-wellness/",
   "hasDefinedTerm": terms.map(t => ({
     "@type": "DefinedTerm",
     "name": t.full_form || t.term,
     "description": t.plain_definition,
-    "inDefinedTermSet": "https://creditdoc.co/financial-wellness/"
+    "inDefinedTermSet": "https://www.creditdoc.co/financial-wellness/"
   }))
 };
 ---

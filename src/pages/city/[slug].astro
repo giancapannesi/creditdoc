@@ -47,7 +47,7 @@ const jsonLd = [
     "@type": "CollectionPage",
     "name": `Credit Repair & Financial Services in ${cityInfo.city}, ${cityInfo.state}`,
     "description": `Find ${lenders.length} credit repair companies, personal lenders, and financial services in ${cityInfo.city}, ${cityInfo.stateAbbr}. Compare ratings, pricing, and BBB ratings.`,
-    "url": `https://creditdoc.co/city/${cityInfo.slug}/`,
+    "url": `https://www.creditdoc.co/city/${cityInfo.slug}/`,
     "about": {
       "@type": "City",
       "name": cityInfo.city,
@@ -67,16 +67,16 @@ const jsonLd = [
       "@type": "ListItem",
       "position": i + 1,
       "name": l.name,
-      "url": `https://creditdoc.co/review/${l.slug}/`,
+      "url": `https://www.creditdoc.co/review/${l.slug}/`,
     })),
   }] : []),
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://creditdoc.co/" },
-      { "@type": "ListItem", "position": 2, "name": "Cities", "item": "https://creditdoc.co/city/" },
-      { "@type": "ListItem", "position": 3, "name": `${cityInfo.city}, ${cityInfo.stateAbbr}`, "item": `https://creditdoc.co/city/${cityInfo.slug}/` }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/" },
+      { "@type": "ListItem", "position": 2, "name": "Cities", "item": "https://www.creditdoc.co/city/" },
+      { "@type": "ListItem", "position": 3, "name": `${cityInfo.city}, ${cityInfo.stateAbbr}`, "item": `https://www.creditdoc.co/city/${cityInfo.slug}/` }
     ]
   }
 ];
