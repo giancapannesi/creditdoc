@@ -91,6 +91,21 @@ _Each row = a decision that a human would normally make. Kept for audit. Reverse
 - Dispatched Stage 2.1-2.5 to Sonnet 4.6 (all 5 tasks, single background agent — all additive, all free, no destructive ops)
 - Scheduled next wakeup in 30 min
 
+### 2026-04-19 18:22 CAT (wakeup 7 + completion)
+- **Stage 3 Batch 1 (WU) COMPLETE + PUSHED.** Commits: ea35e38657 (original 143 rewrites), 6230b5fa9a (22-file fix commit for the 18 miscategorized + 2 manual-fix stragglers).
+- Final: 0 WU rows contain "credit union" or "Western Sun" text. Verified in DB.
+- Audit trail: changed_by IN ('lead_rewriter', 'revert_wu_credit_union_miscategorization', 'category_fix_wu', 'manual_fix_wu_straggler'). Rollback capable.
+- **Stage 3 Batch 2 (MoneyGram) DISPATCHED** as background agent a983029fb8e3c9905. Hardened prompt: category is now a hint-only (not quotable), auto-skip on name/description mismatch. Should prevent the Western-Sun class of corruption from propagating to new chains.
+- Telegram update 3 sent.
+- Vercel building 6230b5fa9a; production verify pending.
+
+### 2026-04-19 18:00 CAT (wakeup 6)
+- First re-run (PID 649936) cache-hit 17 of 18 bad WU rows — restored the SAME bad "operates as credit union" output (cache key = slug+desc, revert kept desc same, hash stable).
+- Only brisbane got fresh rewrite (probably cache miss/corruption).
+- Cleared the 18 bad cache entries via keyed lookup.
+- Re-running lead_rewriter now (background task bk50vxupb). ETA ~15 min for 18 fresh CLI calls.
+- After re-run: verify 18 rows have factually correct text, export JSONs, git commit on top of ea35e38657, push, verify production.
+
 ### 2026-04-19 19:26 CAT (wakeup 5)
 - Stage 3.1 COMPLETE: lead_rewriter.py built and running.
 - Stage 3.2 Batch 1 COMPLETE: 143/149 Western Union pages rewritten (96% success rate, well under 15% fail threshold). 6 rows skipped (either no phone, no address parseable, or cached no-change).
