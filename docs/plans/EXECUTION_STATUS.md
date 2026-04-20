@@ -45,7 +45,8 @@
   - first-cash-pawn (26/33 pages — commit 1327c097a0, 2026-04-20)
   - check-n-go (27/33 pages — commit f4eb7f89d1, 2026-04-20)
   - value-pawn-jewelry (26/31 pages — commit a0c4c6c05f, 2026-04-20)
-  - loanmax-title-loans (25/31 pages — 2026-04-20, below)
+  - loanmax-title-loans (25/31 pages — commit 408d4e38ab, 2026-04-20)
+  - titlemax-title-pawns (25/29 pages — 2026-04-20, below)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
