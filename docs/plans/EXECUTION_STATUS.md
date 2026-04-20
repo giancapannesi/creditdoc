@@ -22,7 +22,10 @@
 - [x] Stage 2.5 — sitemap update (7fa24dfb26)
 - [x] build export — 1898 chain lender JSONs with brand_slug (99c3513079)
 - [x] Stage 3.1 — lead_rewriter.py (tools/lead_rewriter.py, 23KB)
-- [x] Stage 3.2 — batch rewrites (Western Union Batch 1: 143/149 pages — commit ea35e38657, 2026-04-19 17:25 UTC)
+- [x] Stage 3.2 — batch rewrites:
+  - Western Union (143/149 pages — commit ea35e38657, 2026-04-19)
+  - MoneyGram (158/178 pages — commit 95d812acda, 2026-04-20)
+  - Ace Cash Express (112/138 pages — commit 34d4e7181b, 2026-04-20)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
