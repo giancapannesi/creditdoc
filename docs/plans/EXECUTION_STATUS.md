@@ -37,7 +37,8 @@
   - speedy-cash (33/40 pages — commit 081b214a38, 2026-04-20)
   - us-cash-advance (28/39 pages — commit f4d481f878, 2026-04-20)
   - loan-for-any-purpose (29/37 pages — commit 06a1902732, 2026-04-20)
-  - check-into-cash (25/37 pages — 2026-04-20, below)
+  - check-into-cash (25/37 pages — commit eeac185283, 2026-04-20)
+  - checksmart (30/36 pages — 2026-04-20, below)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
