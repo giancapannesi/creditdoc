@@ -46,7 +46,8 @@
   - check-n-go (27/33 pages — commit f4eb7f89d1, 2026-04-20)
   - value-pawn-jewelry (26/31 pages — commit a0c4c6c05f, 2026-04-20)
   - loanmax-title-loans (25/31 pages — commit 408d4e38ab, 2026-04-20)
-  - titlemax-title-pawns (25/29 pages — 2026-04-20, below)
+  - titlemax-title-pawns (25/29 pages — commit 6fe39d59e1, 2026-04-20)
+  - swift-title-loans (15/27 pages — 2026-04-20, below. Accepted high 40.7% fail per two-pass directive — fails parked for pass 2.)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
