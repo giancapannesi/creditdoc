@@ -34,7 +34,8 @@
   - WU Money Order Only (20/58 pages — commit 95d7add9f6, 2026-04-20, high skip — pre-WU-MO miscategorization)
   - 5 Star Car Title Loans (0/57 — all already location-led, no rewrites needed, 2026-04-20)
   - ezpawn (36/46 pages — commit 78677f6397, 2026-04-20)
-  - speedy-cash (33/40 pages — 2026-04-20, below)
+  - speedy-cash (33/40 pages — commit 081b214a38, 2026-04-20)
+  - us-cash-advance (28/39 pages — 2026-04-20, below)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
