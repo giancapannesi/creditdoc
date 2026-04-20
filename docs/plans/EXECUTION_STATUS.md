@@ -43,7 +43,8 @@
   - first-state-bank (SKIPPED — independent community banks sharing a name, not a chain)
   - farmers-state-bank (SKIPPED — same reason as first-state-bank)
   - first-cash-pawn (26/33 pages — commit 1327c097a0, 2026-04-20)
-  - check-n-go (27/33 pages — 2026-04-20, below)
+  - check-n-go (27/33 pages — commit f4eb7f89d1, 2026-04-20)
+  - value-pawn-jewelry (26/31 pages — 2026-04-20, below)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
