@@ -31,7 +31,9 @@
   - TitleMax Title Loans (64/77 pages — commit d7e5cf620b, 2026-04-20)
   - PLS Check Cashers (51/60 pages — commit 20d65bc967, 2026-04-20)
   - Montana Capital (54/60 pages — commit 9642f7e8b0, 2026-04-20)
-  - WU Money Order Only (20/58 pages — 2026-04-20, high skip — pre-WU-MO miscategorization)
+  - WU Money Order Only (20/58 pages — commit 95d7add9f6, 2026-04-20, high skip — pre-WU-MO miscategorization)
+  - 5 Star Car Title Loans (0/57 — all already location-led, no rewrites needed, 2026-04-20)
+  - ezpawn (36/46 pages — 2026-04-20, below)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
