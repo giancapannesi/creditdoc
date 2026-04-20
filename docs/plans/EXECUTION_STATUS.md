@@ -48,7 +48,8 @@
   - loanmax-title-loans (25/31 pages — commit 408d4e38ab, 2026-04-20)
   - titlemax-title-pawns (25/29 pages — commit 6fe39d59e1, 2026-04-20)
   - swift-title-loans (15/27 pages — commit 4459ba4a54, 2026-04-20, 40.7% fail accepted per two-pass directive)
-  - primo-personal-loans (16/25 pages — 2026-04-20, below. 36.0% fail accepted per two-pass directive — fails parked for pass 2.)
+  - primo-personal-loans (16/25 pages — commit e21d225453, 2026-04-20, 36.0% fail accepted per two-pass directive)
+  - lendnation (17/24 pages — 2026-04-20, below. 25.0% fail accepted per two-pass directive.)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
