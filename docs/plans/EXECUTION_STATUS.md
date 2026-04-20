@@ -27,7 +27,8 @@
   - MoneyGram (158/178 pages — commit 95d812acda, 2026-04-20)
   - Ace Cash Express (112/138 pages — commit 34d4e7181b, 2026-04-20)
   - Advance America (75/106 pages — commit 3865bfb9ad, 2026-04-20)
-  - Cash America Pawn (62/84 pages — 2026-04-20, below)
+  - Cash America Pawn (62/84 pages — commit 5004e56f23, 2026-04-20)
+  - TitleMax Title Loans (64/77 pages — 2026-04-20, below)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
