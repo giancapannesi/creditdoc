@@ -39,7 +39,10 @@
   - loan-for-any-purpose (29/37 pages — commit 06a1902732, 2026-04-20)
   - check-into-cash (25/37 pages — commit eeac185283, 2026-04-20)
   - checksmart (30/36 pages — commit cfaf833953, 2026-04-20)
-  - superb-cash-advance (22/35 pages — 2026-04-20, below)
+  - superb-cash-advance (22/35 pages — commit 7708014f67, 2026-04-20)
+  - first-state-bank (SKIPPED — independent community banks sharing a name, not a chain)
+  - farmers-state-bank (SKIPPED — same reason as first-state-bank)
+  - first-cash-pawn (26/33 pages — 2026-04-20, below)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
