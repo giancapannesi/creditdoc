@@ -70,7 +70,8 @@
   - easy-payday-loans (3/11 pages — commit 3e87fb156f, 2026-04-21, 54.5% fail — mostly CLI timeouts, accepted per two-pass directive)
   - consumer-credit-counseling-services (8/10 pages — commit 0f600136aa, 2026-04-21, 10.0% fail — clean batch)
   - cash-store (8/8 pages — commit 9c4e254738, 2026-04-21, 0% fail — perfect batch)
-  - world-finance (7/7 pages — 2026-04-21, below. 0% fail — perfect batch)
+  - world-finance (7/7 pages — commit fc382297a4, 2026-04-21, 0% fail — perfect batch)
+  - oportun (3/4 pages — 2026-04-21, below. 25.0% fail — 1 CLI timeout accepted per two-pass directive)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
