@@ -51,7 +51,8 @@
   - primo-personal-loans (16/25 pages — commit e21d225453, 2026-04-20, 36.0% fail accepted per two-pass directive)
   - lendnation (17/24 pages — commit 3066a1c884, 2026-04-20, 25.0% fail accepted per two-pass directive)
   - california-check-cashing-stores (22/23 pages — commit 0fec715e41, 2026-04-20, 4.3% fail — clean batch)
-  - dolex-dollar-express (16/19 pages — 2026-04-20, below. 15.8% fail accepted per two-pass directive.)
+  - dolex-dollar-express (16/19 pages — commit a5bd4550d5, 2026-04-20, 15.8% fail accepted per two-pass directive)
+  - loanstar-title-loans (14/17 pages — 2026-04-21, below. 17.6% fail accepted per two-pass directive.)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
