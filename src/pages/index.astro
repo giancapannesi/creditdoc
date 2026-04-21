@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import FilterBar from '../components/FilterBar.astro';
 import TopPicksTable from '../components/TopPicksTable.astro';
 import CategoryCard from '../components/CategoryCard.astro';
+import LenderNameSearch from '../components/LenderNameSearch.astro';
 import { getAllLenders, getCategories, getSpecials, getWellnessGuides, formatPrice } from '../utils/data';
 
 const lenders = getAllLenders();
@@ -167,7 +168,10 @@ const jsonLd = [
         <p class="mt-4 text-lg text-muted sm:text-xl leading-relaxed">
           We've diagnosed the fine print on 200+ credit repair companies, lenders, and financial services. Compare by price, rating, and what actually matters.
         </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <div class="mt-8">
+          <LenderNameSearch variant="hero" />
+        </div>
+        <div class="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href="#top-picks"
             class="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary-hover transition-colors min-h-[44px]"
@@ -214,6 +218,15 @@ const jsonLd = [
       {orderedCategories.map(category => (
         <CategoryCard category={category} />
       ))}
+    </div>
+
+    <!-- Second name-search placement — for scrollers who passed the hero -->
+    <div class="mt-10 pt-8 border-t border-border">
+      <div class="text-center mb-4">
+        <h3 class="text-lg font-semibold text-text">Looking for a specific company?</h3>
+        <p class="mt-1 text-sm text-muted">Search 15,000+ lender reviews by name</p>
+      </div>
+      <LenderNameSearch variant="inline" />
     </div>
   </section>
 

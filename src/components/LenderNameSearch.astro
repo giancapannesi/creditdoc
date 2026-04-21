@@ -1,0 +1,212 @@
+---
+// LenderNameSearch — typeahead input for finding a lender review by company name.
+// - Index (~1.3 MB raw, ~260 KB gzipped) is lazy-loaded on FIRST focus, not on page load.
+// - Fuse.js for typo tolerance, also lazy-loaded from jsdelivr on first focus.
+// - Can be placed multiple times on a page; each instance shares the same cached fetch.
+//
+// Props:
+//   variant?: 'hero' | 'inline'   — styling preset. Defaults to 'inline'.
+//   placeholder?: string          — input placeholder override.
+export interface Props {
+  variant?: 'hero' | 'inline';
+  placeholder?: string;
+}
+const { variant = 'inline', placeholder = 'Search by company name (e.g. "EZ Credit", "WalletHub")' } = Astro.props;
+
+// Unique id so multiple instances on the same page don't collide
+const uid = `lns_${Math.random().toString(36).slice(2, 10)}`;
+
+const wrapperClass = variant === 'hero'
+  ? 'w-full max-w-2xl mx-auto'
+  : 'w-full max-w-3xl mx-auto';
+
+const inputClass = variant === 'hero'
+  ? 'w-full pl-12 pr-4 py-4 text-base rounded-xl border-2 border-border bg-white text-text shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all'
+  : 'w-full pl-11 pr-4 py-3 text-sm rounded-lg border border-border bg-white text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all';
+---
+
+<div class={`lns-root ${wrapperClass}`} data-uid={uid}>
+  <div class="relative">
+    <svg xmlns="http://www.w3.org/2000/svg" class:list={['absolute top-1/2 -translate-y-1/2 pointer-events-none text-muted', variant === 'hero' ? 'left-4 h-5 w-5' : 'left-3.5 h-4 w-4']} viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
+    </svg>
+    <input
+      type="text"
+      id={`${uid}-input`}
+      class={inputClass}
+      placeholder={placeholder}
+      autocomplete="off"
+      spellcheck="false"
+      aria-label="Search lenders by name"
+      aria-autocomplete="list"
+      aria-controls={`${uid}-dropdown`}
+    />
+    <!-- Loading spinner overlay (only while index is being fetched) -->
+    <div id={`${uid}-spinner`} class:list={['absolute top-1/2 -translate-y-1/2 hidden', variant === 'hero' ? 'right-4' : 'right-3.5']}>
+      <svg class="animate-spin h-4 w-4 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+      </svg>
+    </div>
+  </div>
+
+  <div
+    id={`${uid}-dropdown`}
+    role="listbox"
+    class="relative z-30 mt-2 hidden rounded-lg border border-border bg-white shadow-lg overflow-hidden"
+  ></div>
+</div>
+
+<script>
+  // Module-level cache shared across all instances on the page
+  // @ts-ignore — attach to window for instance-to-instance sharing
+  const G = (window.__creditdocLenderSearch ||= {
+    index: null as Array<{ s: string; n: string; c: string; st: string }> | null,
+    fuse: null as any,
+    loading: null as Promise<void> | null,
+  });
+
+  async function ensureIndex(): Promise<void> {
+    if (G.index && G.fuse) return;
+    if (G.loading) return G.loading;
+    G.loading = (async () => {
+      // Lazy-load Fuse.js from jsdelivr (CDN cache hit across sites)
+      const [fuseMod, resp] = await Promise.all([
+        import(/* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.mjs'),
+        fetch('/search/lender-name-index.json', { cache: 'force-cache' }),
+      ]);
+      if (!resp.ok) throw new Error(`index fetch ${resp.status}`);
+      G.index = await resp.json();
+      const Fuse = (fuseMod as any).default ?? (fuseMod as any);
+      G.fuse = new Fuse(G.index, {
+        keys: ['n'],
+        threshold: 0.3,           // typo tolerance — lower = stricter, higher = fuzzier
+        ignoreLocation: true,
+        minMatchCharLength: 2,
+        shouldSort: true,
+        includeScore: false,
+      });
+    })();
+    return G.loading;
+  }
+
+  function escapeHtml(s: string): string {
+    return s.replace(/[&<>"']/g, c => (
+      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' } as Record<string, string>
+    )[c]);
+  }
+
+  function initInstance(root: HTMLElement) {
+    const uid = root.dataset.uid!;
+    const input = document.getElementById(`${uid}-input`) as HTMLInputElement;
+    const dropdown = document.getElementById(`${uid}-dropdown`) as HTMLElement;
+    const spinner = document.getElementById(`${uid}-spinner`) as HTMLElement;
+    let activeIndex = -1;
+    let currentResults: Array<{ s: string; n: string; c: string; st: string }> = [];
+
+    function hide() {
+      dropdown.classList.add('hidden');
+      dropdown.innerHTML = '';
+      activeIndex = -1;
+    }
+
+    function render(results: typeof currentResults, query: string) {
+      if (!results.length) {
+        dropdown.innerHTML = `
+          <div class="px-4 py-3 text-sm text-muted">
+            No company matches <span class="font-semibold text-text">"${escapeHtml(query)}"</span>.
+            <a href="/categories/" class="ml-1 text-primary hover:underline">Browse categories</a>
+            or
+            <a href="/search/?q=${encodeURIComponent(query)}" class="text-primary hover:underline">open full search</a>.
+          </div>`;
+        dropdown.classList.remove('hidden');
+        return;
+      }
+      dropdown.innerHTML = results.map((r, i) => {
+        const loc = [r.c, r.st].filter(Boolean).join(', ');
+        return `<a href="/review/${encodeURIComponent(r.s)}/" role="option" data-idx="${i}" class="lns-item flex items-center justify-between gap-3 px-4 py-3 text-sm hover:bg-bg-alt border-b border-border last:border-b-0">
+          <span class="font-medium text-text truncate">${escapeHtml(r.n)}</span>
+          ${loc ? `<span class="text-xs text-muted shrink-0">${escapeHtml(loc)}</span>` : ''}
+        </a>`;
+      }).join('');
+      dropdown.classList.remove('hidden');
+    }
+
+    function updateActive() {
+      dropdown.querySelectorAll<HTMLElement>('.lns-item').forEach((el, i) => {
+        if (i === activeIndex) {
+          el.classList.add('bg-bg-alt');
+          el.scrollIntoView({ block: 'nearest' });
+        } else {
+          el.classList.remove('bg-bg-alt');
+        }
+      });
+    }
+
+    let debounce: number | undefined;
+    async function onInput() {
+      const q = input.value.trim();
+      if (q.length < 2) {
+        hide();
+        return;
+      }
+      await loadAndMaybeSpin();
+      if (!G.fuse) return;
+      const hits = G.fuse.search(q, { limit: 10 }).map((h: any) => h.item);
+      currentResults = hits;
+      activeIndex = -1;
+      render(hits, q);
+    }
+
+    async function loadAndMaybeSpin() {
+      if (G.index && G.fuse) return;
+      spinner.classList.remove('hidden');
+      try {
+        await ensureIndex();
+      } catch (e) {
+        dropdown.innerHTML = `<div class="px-4 py-3 text-sm text-red-600">Search unavailable right now. <a href="/search/" class="underline">Use full search</a>.</div>`;
+        dropdown.classList.remove('hidden');
+      } finally {
+        spinner.classList.add('hidden');
+      }
+    }
+
+    input.addEventListener('focus', () => { loadAndMaybeSpin(); });
+    input.addEventListener('input', () => {
+      clearTimeout(debounce);
+      debounce = window.setTimeout(onInput, 100);
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!currentResults.length) return;
+        activeIndex = (activeIndex + 1) % currentResults.length;
+        updateActive();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (!currentResults.length) return;
+        activeIndex = activeIndex <= 0 ? currentResults.length - 1 : activeIndex - 1;
+        updateActive();
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const q = input.value.trim();
+        if (activeIndex >= 0 && currentResults[activeIndex]) {
+          location.href = `/review/${encodeURIComponent(currentResults[activeIndex].s)}/`;
+        } else if (currentResults.length) {
+          location.href = `/review/${encodeURIComponent(currentResults[0].s)}/`;
+        } else if (q) {
+          location.href = `/search/?q=${encodeURIComponent(q)}`;
+        }
+      } else if (e.key === 'Escape') {
+        hide();
+        input.blur();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!root.contains(e.target as Node)) hide();
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('.lns-root').forEach(initInstance);
+</script>
