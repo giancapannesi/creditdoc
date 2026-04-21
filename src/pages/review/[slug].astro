@@ -102,9 +102,15 @@ const glossaryContextMap: Record<string, string[]> = {
 const glossaryContexts = glossaryContextMap[lender.category] || [];
 const glossaryTerms = getGlossaryTermsForContext(glossaryContexts);
 
-// Auto-link glossary terms and money keywords in description text
+// Auto-link glossary terms and money keywords in description text.
+// If lender has affiliate_url + affiliate_anchors, the first match of each
+// anchor phrase becomes a highlighted affiliate CTA (takes priority).
+const affiliateConfig = lender.affiliate_url && Array.isArray(lender.affiliate_anchors) && lender.affiliate_anchors.length
+  ? { url: lender.affiliate_url, anchors: lender.affiliate_anchors }
+  : undefined;
+
 const linkedParagraphs = lender.description_long
-  ? linkifyDescription(lender.description_long, glossaryTerms, lender.slug)
+  ? linkifyDescription(lender.description_long, glossaryTerms, lender.slug, affiliateConfig)
   : [];
 
 const comparisons = getComparisons().filter(

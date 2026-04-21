@@ -75,6 +75,8 @@ export interface Lender {
   website_url: string;
   affiliate_url: string;
   affiliate_program: string;
+  // Optional: phrases in description_long to convert to highlighted affiliate CTA links
+  affiliate_anchors?: string[];
   pricing: LenderPricing;
   features: LenderFeatures;
   company_info: {
