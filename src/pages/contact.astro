@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "Contact CreditDoc | Partnerships, Editorial & Press Inquiries";
+const description = "Get in touch with CreditDoc. Partnership inquiries at partners@creditdoc.co. Editorial corrections, press, and legal requests at contact@creditdoc.co.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact CreditDoc",
+    "description": description,
+    "url": "https://www.creditdoc.co/contact/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "CreditDoc",
+      "url": "https://www.creditdoc.co",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "partnerships",
+          "email": "partners@creditdoc.co",
+          "areaServed": "US",
+          "availableLanguage": ["English"]
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "contact@creditdoc.co",
+          "areaServed": "US",
+          "availableLanguage": ["English"]
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "press inquiries",
+          "email": "contact@creditdoc.co",
+          "areaServed": "US",
+          "availableLanguage": ["English"]
+        }
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/" },
+      { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://www.creditdoc.co/contact/" }
+    ]
+  }
+];
+
+const contactChannels = [
+  {
+    title: "Partnerships & Business Inquiries",
+    description: "Lender partnerships, affiliate program applications, advertising, featured listings, and B2B opportunities.",
+    email: "partners@creditdoc.co",
+    subject: "Partnership Inquiry",
+    response: "We aim to respond within 3 business days.",
+    icon: "briefcase"
+  },
+  {
+    title: "Editorial & Corrections",
+    description: "Report an inaccuracy, request a review update, or share feedback about our content. If you're a company profiled on CreditDoc and want to claim or update your listing, start here.",
+    email: "contact@creditdoc.co",
+    subject: "Correction Request",
+    response: "We review all correction requests within 5 business days.",
+    icon: "pencil"
+  },
+  {
+    title: "Press & Media",
+    description: "Journalists, researchers, and policy organizations. Data requests, interviews, expert commentary on consumer credit, lending, and credit repair.",
+    email: "contact@creditdoc.co",
+    subject: "PRESS",
+    response: "We aim to respond to media inquiries within 24 hours.",
+    icon: "newspaper",
+    link: "/press/",
+    linkLabel: "See our press kit"
+  },
+  {
+    title: "Privacy, Legal & Do Not Sell",
+    description: "CCPA/CPRA data requests, Do Not Sell or Share My Personal Information, privacy concerns, and general legal matters.",
+    email: "contact@creditdoc.co",
+    subject: "Privacy Request",
+    response: "We respond to verifiable privacy requests within 45 days as required by law.",
+    icon: "shield"
+  }
+];
+
+const regulatoryLinks = [
+  { name: 'Privacy Policy', href: '/privacy/' },
+  { name: 'Terms of Service', href: '/terms/' },
+  { name: 'Disclaimer', href: '/disclaimer/' },
+  { name: 'Affiliate Disclosure', href: '/disclosure/' },
+  { name: 'Editorial Policy', href: '/editorial-policy/' },
+  { name: 'Methodology', href: '/methodology/' },
+  { name: 'Accessibility', href: '/accessibility/' },
+  { name: 'Do Not Sell My Info', href: '/do-not-sell/' },
+  { name: 'FAQ', href: '/faq/' },
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <nav class="max-w-4xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">Contact</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <!-- Hero -->
+    <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">Contact CreditDoc</h1>
+    <p class="text-lg text-muted max-w-2xl mb-8">
+      We're an independent consumer lending directory. Pick the channel that matches your request — we read every email and route it to the right person.
+    </p>
+
+    <!-- Contact channels -->
+    <section class="grid gap-5 sm:grid-cols-2 mb-10">
+      {contactChannels.map(channel => (
+        <div class="glass-card p-6 flex flex-col">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-light text-primary flex-shrink-0">
+              {channel.icon === 'briefcase' && (
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0" />
+                </svg>
+              )}
+              {channel.icon === 'pencil' && (
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                </svg>
+              )}
+              {channel.icon === 'newspaper' && (
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+                </svg>
+              )}
+              {channel.icon === 'shield' && (
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+              )}
+            </div>
+            <h2 class="text-lg font-semibold text-text leading-tight">{channel.title}</h2>
+          </div>
+          <p class="text-sm text-muted leading-relaxed mb-4 flex-grow">{channel.description}</p>
+          <div class="space-y-2">
+            <a
+              href={`mailto:${channel.email}?subject=${encodeURIComponent(channel.subject)}`}
+              class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline break-all"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+              </svg>
+              <span>{channel.email}</span>
+            </a>
+            <p class="text-xs text-muted">{channel.response}</p>
+            {channel.link && (
+              <a href={channel.link} class="text-xs text-primary hover:underline inline-block mt-1">{channel.linkLabel} →</a>
+            )}
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <!-- Before you email -->
+    <section class="glass-card p-6 mb-10">
+      <h2 class="text-lg font-bold text-text mb-3">Before you email</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        Many common questions are answered on other pages — you'll get a faster response if the information is already published:
+      </p>
+      <ul class="text-sm text-muted space-y-2 ml-4 list-disc">
+        <li>General questions about how CreditDoc works → <a href="/faq/" class="text-primary hover:underline">FAQ</a></li>
+        <li>How we rate and review companies → <a href="/methodology/" class="text-primary hover:underline">Methodology</a></li>
+        <li>How we earn money and editorial independence → <a href="/disclosure/" class="text-primary hover:underline">Affiliate Disclosure</a></li>
+        <li>Our editorial standards → <a href="/editorial-policy/" class="text-primary hover:underline">Editorial Policy</a></li>
+        <li>Who we are → <a href="/about/" class="text-primary hover:underline">About CreditDoc</a></li>
+      </ul>
+    </section>
+
+    <!-- Regulatory & Legal -->
+    <section class="mb-10">
+      <h2 class="text-xl font-bold text-text mb-4">Regulatory & Legal Pages</h2>
+      <div class="glass-card p-6">
+        <p class="text-sm text-muted mb-4">
+          CreditDoc operates under the following policies. Please review the relevant document before contacting us about a regulatory matter:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+          {regulatoryLinks.map(link => (
+            <a href={link.href} class="text-sm text-primary hover:underline inline-flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+              {link.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="mb-4">
+      <div class="rounded-lg bg-bg-alt border border-border p-5">
+        <h2 class="text-sm font-semibold text-text uppercase tracking-wider mb-3">Important Disclaimers</h2>
+        <div class="space-y-3 text-xs text-muted leading-relaxed">
+          <p>
+            <strong class="text-text">Not a lender or credit repair company.</strong> CreditDoc is an independent comparison and review website. We do not originate loans, repair credit, provide credit counseling, or perform any regulated financial service. We do not take applications or issue approvals. Any transaction is between you and the third-party provider.
+          </p>
+          <p>
+            <strong class="text-text">Not financial, legal, or tax advice.</strong> Information on CreditDoc is for general educational purposes only and does not constitute personalized financial, legal, or tax advice. For advice specific to your situation, consult a qualified professional licensed in your state.
+          </p>
+          <p>
+            <strong class="text-text">Affiliate compensation.</strong> CreditDoc may earn a commission when you click on certain links, open an account, or complete an application with a company featured on this site. These relationships help fund our free research. Compensation does not influence our ratings, rankings, or editorial content. See our <a href="/disclosure/" class="text-primary hover:underline">full affiliate disclosure</a>.
+          </p>
+          <p>
+            <strong class="text-text">Rates, terms & availability.</strong> Products, rates, fees, and terms are provided by third parties and can change without notice. We make reasonable efforts to keep information current but cannot guarantee accuracy at the moment you apply. Always verify terms directly with the provider.
+          </p>
+          <p>
+            <strong class="text-text">State availability.</strong> Not every product or company listed on CreditDoc is available in every state. Some services are restricted or prohibited by state law. CreditDoc does not endorse any product or provider.
+          </p>
+          <p>
+            <strong class="text-text">Response times.</strong> We're a small team and reply in the order messages are received. Partnership inquiries: 3 business days. Corrections: 5 business days. Press: within 24 hours. Privacy requests: within 45 days per CCPA/CPRA. Please do not send duplicate messages.
+          </p>
+          <p>
+            <strong class="text-text">Do not send sensitive personal information.</strong> Never email us your full Social Security number, date of birth, account numbers, passwords, or a photo of your ID. We will never ask for this information by email. If you believe a message asking for such details came from CreditDoc, it did not — please report it to <a href="mailto:contact@creditdoc.co" class="text-primary hover:underline">contact@creditdoc.co</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <p class="text-xs text-muted text-center">
+      CreditDoc is operated by Cosmic Phoenix LLC, a Wyoming limited liability company. For service of legal process or formal correspondence requiring a physical address, please request it via email at <a href="mailto:contact@creditdoc.co" class="text-primary hover:underline">contact@creditdoc.co</a>.
+    </p>
+  </div>
+</BaseLayout>
