@@ -6,7 +6,7 @@ import DiagnosisCard from '../../components/DiagnosisCard.astro';
 import LenderCard from '../../components/LenderCard.astro';
 import TrustBadge from '../../components/TrustBadge.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
-import { linkifyDescription } from '../../utils/inline-linker';
+import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
 import { getAllLenders, getLenderBySlug, formatPrice, getBbbClass, generateDiagnosis, getComparisons, getCategories, getWellnessGuidesByCategory, getGlossaryTermsForContext, getBadgeEligibility, getBrandInfo } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
@@ -495,7 +495,7 @@ const ogImageUrl = lender.logo_url?.trim()
               ? linkedParagraphs.map(html => (
                   <p class="mb-4" set:html={html} />
                 ))
-              : lender.description_long.split('\n\n').map(paragraph => (
+              : autoParagraphs(lender.description_long).split('\n\n').map(paragraph => (
                   <p class="mb-4">{paragraph}</p>
                 ))
             }
@@ -764,9 +764,9 @@ const ogImageUrl = lender.logo_url?.trim()
               </div>
             )}
             {hq && (
-            <div class="flex items-center justify-between py-2 border-b border-border/50">
-              <dt class="text-sm text-muted">Headquarters</dt>
-              <dd class="text-sm font-medium text-text">{hq}</dd>
+            <div class="flex items-start justify-between gap-3 py-2 border-b border-border/50">
+              <dt class="text-sm text-muted shrink-0">Headquarters</dt>
+              <dd class="text-sm font-medium text-text text-right break-words min-w-0">{hq}</dd>
             </div>
             )}
             {lender.company_info.employees && (
