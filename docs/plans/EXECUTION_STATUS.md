@@ -60,7 +60,8 @@
   - onemain-financial (5/13 pages — commit 36568909fd, 2026-04-21, 61.5% fail — accepted per two-pass directive)
   - allied-cash-advance (8/13 pages — commit 73718549ff, 2026-04-21, 38.5% fail — accepted per two-pass directive)
   - ria-money-transfer (11/12 pages — commit fd3a305404, 2026-04-21, 8.3% fail — clean batch)
-  - orlandi-valuta (6/10 pages — 2026-04-21, below. 40.0% fail — accepted per two-pass directive.)
+  - orlandi-valuta (6/10 pages — commit b51b868149, 2026-04-21, 40.0% fail — accepted per two-pass directive)
+  - chase-bank (11/11 pages — 2026-04-21, below. 0% fail — perfect batch.)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
