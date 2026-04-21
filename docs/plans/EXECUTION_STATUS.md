@@ -63,7 +63,8 @@
   - orlandi-valuta (6/10 pages — commit b51b868149, 2026-04-21, 40.0% fail — accepted per two-pass directive)
   - chase-bank (11/11 pages — commit 6de484cafe, 2026-04-21, 0% fail — perfect batch)
   - bank-of-america-financial-center (11/11 pages — commit d44f7a6d91, 2026-04-21, 0% fail — perfect batch)
-  - texas-car-title-and-payday-loan-services-inc (10/11 pages — 2026-04-21, below. 9.1% fail — clean batch.)
+  - texas-car-title-and-payday-loan-services-inc (10/11 pages — commit fc23c9dda7, 2026-04-21, 9.1% fail)
+  - sam-check-cashing-machine (10/15 pages — 2026-04-21, below. 33.3% fail — accepted per two-pass directive.)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
