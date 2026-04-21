@@ -128,15 +128,24 @@ def load_candidates(conn: sqlite3.Connection, limit: int, slug: str | None) -> l
         like_clauses = " OR ".join(
             [
                 "json_extract(data,'$.description_long') LIKE '%404 error%'",
+                "json_extract(data,'$.description_long') LIKE '%multiple 404%'",
                 "json_extract(data,'$.description_long') LIKE '%website content provided%'",
                 "json_extract(data,'$.description_long') LIKE '%the website provided%'",
                 "json_extract(data,'$.description_long') LIKE '%based on the website%'",
+                "json_extract(data,'$.description_long') LIKE '%based on the provided%'",
                 "json_extract(data,'$.description_long') LIKE '%the provided content%'",
+                "json_extract(data,'$.description_long') LIKE '%the content provided%'",
+                "json_extract(data,'$.description_long') LIKE '%the content suggests%'",
+                "json_extract(data,'$.description_long') LIKE '%the scraped%'",
+                "json_extract(data,'$.description_long') LIKE '%web scraping%'",
                 "json_extract(data,'$.description_long') LIKE '%Sorry, this type of loan%'",
                 "json_extract(data,'$.description_long') LIKE '%suggesting either outdated%'",
+                "json_extract(data,'$.description_long') LIKE '%website content indicates%'",
                 "json_extract(data,'$.description_long') LIKE '%website explicitly states%'",
                 "json_extract(data,'$.description_long') LIKE '%outdated links%'",
                 "json_extract(data,'$.description_long') LIKE '%appears to vary by state%'",
+                "json_extract(data,'$.description_long') LIKE '%this is not available in this state%'",
+                "json_extract(data,'$.description_long') LIKE '%limited availability in certain geographic%'",
             ]
         )
         q = f"""
