@@ -37,12 +37,27 @@
       "permanent": true
     },
     {
+      "source": "/lenders/:slug",
+      "destination": "/review/:slug/",
+      "permanent": true
+    },
+    {
       "source": "/lender/:slug/",
       "destination": "/review/:slug/",
       "permanent": true
     },
     {
+      "source": "/lender/:slug",
+      "destination": "/review/:slug/",
+      "permanent": true
+    },
+    {
       "source": "/reviews/:slug/",
+      "destination": "/review/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/reviews/:slug",
       "destination": "/review/:slug/",
       "permanent": true
     },
