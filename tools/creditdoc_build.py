@@ -45,7 +45,8 @@ def export_changed_lenders(db):
     """Export only lenders that changed since last export."""
     rows = db.conn.execute(
         """SELECT slug FROM lenders
-           WHERE exported_at IS NULL OR updated_at > exported_at"""
+           WHERE (exported_at IS NULL OR updated_at > exported_at)
+             AND COALESCE(processing_status,'') <> 'archived'"""
     ).fetchall()
     slugs = [r["slug"] for r in rows]
 
