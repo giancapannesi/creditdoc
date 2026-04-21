@@ -99,6 +99,44 @@ def normalize_digits(s: str | None) -> str:
     return d
 
 
+TOLL_FREE_PREFIXES = {"800", "833", "844", "855", "866", "877", "888"}
+
+
+def phones_match(db_phone: str | None, api_phone: str | None) -> bool:
+    """Exact match, or one side is corporate toll-free (chain rollup).
+    Scraped directories often list the chain's 800 line while Places returns
+    the local branch number — both are legitimate contact points.
+    """
+    db_n = normalize_digits(db_phone)
+    api_n = normalize_digits(api_phone)
+    if not db_n or not api_n:
+        return False
+    if db_n == api_n:
+        return True
+    if db_n[:3] in TOLL_FREE_PREFIXES or api_n[:3] in TOLL_FREE_PREFIXES:
+        return True
+    return False
+
+
+def extract_street_number(addr: str | None) -> str | None:
+    """First 1-6 digit run immediately followed by whitespace + a letter —
+    catches the street number even when the address starts with a company
+    prefix ("Check Cashers, 2032 Candler Rd..." → 2032).
+    """
+    if not addr:
+        return None
+    m = re.search(r"\b(\d{1,6})\s+[A-Za-z]", addr)
+    return m.group(1) if m else None
+
+
+def street_numbers_match(db_addr: str | None, api_addr: str | None) -> bool:
+    db_num = extract_street_number(db_addr)
+    api_num = extract_street_number(api_addr)
+    if not db_num or not api_num:
+        return True  # can't verify — defer to host-mismatch + name overlap
+    return db_num == api_num
+
+
 def brand_tokens(brand: str) -> set[str]:
     """Significant tokens from brand name for host-overlap check."""
     stop = {"the", "of", "and", "a", "an", "inc", "llc", "co",
@@ -330,15 +368,11 @@ def main():
             continue
 
         # Sanity checks
-        api_phone = normalize_digits(place.get("nationalPhoneNumber"))
-        db_phone = normalize_digits(row["phone"])
-        phone_ok = bool(api_phone and db_phone and api_phone == db_phone)
+        phone_ok = phones_match(row["phone"], place.get("nationalPhoneNumber"))
         if not phone_ok:
             phone_mismatches += 1
 
-        db_num = re.match(r"^(\d+)", row["address"] or "")
-        api_num = re.match(r"^(\d+)", place.get("formattedAddress") or "")
-        street_ok = bool(db_num and api_num and db_num.group(1) == api_num.group(1))
+        street_ok = street_numbers_match(row["address"], place.get("formattedAddress"))
         if not street_ok:
             street_mismatches += 1
 
