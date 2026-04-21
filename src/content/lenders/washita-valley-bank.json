@@ -8,8 +8,8 @@
     "minority-depository",
     "agricultural-lending"
   ],
-  "description_short": "FDIC-insured community bank in Fort Cobb, OK. $61M in assets. 1 office.",
-  "description_long": "Washita Valley Bank is a community bank located in Fort Cobb, OK, established in 1902. The bank holds approximately $61M in total assets and $52M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Washita Valley Bank is a 5-star rated FDIC-insured community bank operating since 1902, offering full-service banking including checking, savings, CDs, IRAs, loans, and online banking.",
+  "description_long": "Washita Valley Bank has served as a hometown financial institution since 1902, establishing itself as a community-focused bank in Oklahoma. Under the leadership of CEO/President Michael Sebastian, the bank emphasizes customer service and personal relationships, positioning itself as a modern alternative to impersonal larger institutions while maintaining traditional banking values. The bank achieved a 5-star rating and was ranked among the Top 100 small banks in Oklahoma as of 2015.\n\nWashita Valley Bank offers comprehensive personal banking products including checking and savings accounts, Certificates of Deposit (CDs) with maturities ranging from 6 to 24 months (minimum $2,500 deposit), and Individual Retirement Accounts (IRAs) with a $100 minimum deposit. Additional services include personal loans, bill pay functionality, online and mobile banking platforms, debit/ATM cards, and surcharge-free ATM access through the TransFund ATM Locator network. The bank uses the daily balance method to calculate interest on all interest-bearing accounts and compounds interest semi-annually on most products.\n\nThe bank distinguishes itself through its emphasis on personalized customer service, long operational history, and community banking approach. Updated banking hours (effective August 22, 2025) reflect expanded Friday hours (9:00 AM - 5:00 PM for lobby and drive-thru) and reduced weekday hours (9:00 AM - 3:00 PM Monday-Thursday), suggesting operational adjustments to serve their customer base. Interest rates are variable and subject to change at the bank's discretion, with penalty structures clearly outlined for early CD and IRA withdrawals.\n\nAs a traditional community bank, Washita Valley Bank is best suited for customers seeking personalized service and relationship-based banking rather than digital-first or discount banking experiences. Prospective customers should note that the bank does not appear to offer promotional rates or competitive advantages typical of larger institutions, and current APY information requires contacting the bank directly or visiting their rate sheet.",
   "logo_url": "",
   "website_url": "http://www.washitavalleybank.com",
   "affiliate_url": "",
@@ -26,21 +26,32 @@
   "services": [
     "Checking accounts",
     "Savings accounts",
+    "Certificates of Deposit (6, 12, 18, and 24-month maturities)",
+    "Individual Retirement Accounts (IRAs) with 12-month auto-renewable certificates",
     "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Bill pay services",
+    "Online banking platform",
+    "Mobile banking platform",
+    "Debit/ATM cards",
+    "Surcharge-free ATM access via TransFund network",
+    "Financial calculators and planning tools",
+    "CRA Public File access"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1902",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured bank with 5-star rating and 120+ years of operational history since 1902",
+    "Low minimum deposits for IRAs ($100) and accessible CD products ($2,500 minimum)",
+    "Transparent penalty structure for early CD/IRA withdrawals (1 month's interest for \u22641 year terms, 3 months for >1 year)",
+    "Surcharge-free ATM access through TransFund network with mobile ATM locator app",
+    "Full-service banking including checking, savings, loans, bill pay, and online/mobile banking",
+    "Community-focused institution with emphasis on personalized customer service and local presence",
+    "Semi-annual interest compounding on CDs with optional early interest withdrawal capability"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Significantly reduced weekday banking hours (9:00 AM - 3:00 PM Monday-Thursday) limit accessibility for traditional work-schedule customers",
+    "Variable interest rates subject to change at bank's discretion with no rate guarantees or promotional offerings mentioned",
+    "No current rate information displayed on website; customers must contact bank directly or access separate rate sheet to compare APYs",
+    "Limited online information about loan products, terms, and rates for personal borrowing",
+    "Small bank may lack advanced digital banking features or investment products available at larger institutions"
   ],
   "contact": {
     "phone": "",
@@ -52,7 +63,7 @@
   "states_served": [
     "OK"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 2308,
   "latitude": 35.0972469919814,
   "longitude": -98.4359319593925,
@@ -110,12 +121,13 @@
     "ease_of_use": 4.3
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Local Oklahoma residents seeking relationship-based community banking with personalized service",
+    "Customers prioritizing FDIC insurance safety and long-term institutional stability over competitive rates",
+    "Savers interested in CDs and IRAs with transparent, predictable early withdrawal penalties",
+    "Individuals with flexible schedules who can visit during expanded Friday hours (9:00 AM - 5:00 PM)"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Washita Valley Bank is best for customers in Oklahoma seeking traditional, personalized community banking with FDIC safety and a 120-year institutional track record. The primary caveat is that reduced weekday hours (9 AM-3 PM) and variable rates without published APYs require direct contact with the bank, making rate shopping and account access more cumbersome than digital-first competitors.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -123,9 +135,9 @@
   ],
   "phone": "(405) 643-2305",
   "address": "204 N Hazlett St, Fort Cobb, OK 73038",
-  "processing_status": "raw",
-  "quality_score": 7,
-  "enrichment_attempts": 0,
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
   "no_index": true,
   "places_enrichment": {
     "place_id": "ChIJ-c_1IX-yrYcRNrSzDlfXBcM",
@@ -229,5 +241,8 @@
     "establishment"
   ],
   "places_last_checked": "2026-04-21T10:47:45.718981+00:00",
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-21",
+  "last_engine_run": "2026-04-21",
   "brand_slug": null
 }
