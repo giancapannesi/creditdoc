@@ -89,15 +89,41 @@ function escapeRegex(str: string): string {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+export interface AffiliateConfig {
+  url: string;
+  anchors: string[];
+}
+
 function linkifyParagraph(
   text: string,
   glossaryTerms: GlossaryTerm[],
   usedPhrases: Set<string>,
   moneyBudget: { remaining: number },
   glossaryBudget: { remaining: number },
+  affiliateConfig?: AffiliateConfig,
 ): string {
   const linked = new Array(text.length).fill(false);
   const replacements: [number, number, string][] = [];
+
+  // Affiliate anchors (highest priority, highlighted pill style, no budget)
+  if (affiliateConfig?.url && affiliateConfig.anchors?.length) {
+    for (const anchor of affiliateConfig.anchors) {
+      const lower = anchor.toLowerCase();
+      if (usedPhrases.has(lower)) continue;
+      const regex = new RegExp(`\\b(${escapeRegex(anchor)})\\b`, 'i');
+      const match = regex.exec(text);
+      if (!match) continue;
+      const start = match.index;
+      const end = start + match[0].length;
+      if (linked.slice(start, end).some(Boolean)) continue;
+
+      replacements.push([start, end,
+        `<a href="${affiliateConfig.url}" target="_blank" rel="noopener noreferrer nofollow sponsored" class="inline-flex items-center gap-1 bg-primary/10 text-primary font-semibold px-2 py-0.5 rounded-md border border-primary/30 hover:bg-primary hover:text-white transition-colors no-underline">${escapeHtml(match[0])}<svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5zm7.5-2.25a.75.75 0 01.75-.75h4a.75.75 0 01.75.75v4a.75.75 0 01-1.5 0V5.56l-5.22 5.22a.75.75 0 11-1.06-1.06l5.22-5.22h-2.19a.75.75 0 01-.75-.75z" clip-rule="evenodd"/></svg></a>`
+      ]);
+      for (let i = start; i < end; i++) linked[i] = true;
+      usedPhrases.add(lower);
+    }
+  }
 
   // Money links
   for (const ml of SORTED_MONEY_LINKS) {
@@ -167,13 +193,14 @@ export function linkifyDescription(
   descriptionLong: string,
   glossaryTerms: GlossaryTerm[],
   currentSlug: string = '',
+  affiliateConfig?: AffiliateConfig,
 ): string[] {
   const usedPhrases = new Set<string>();
   const moneyBudget = { remaining: 5 };
   const glossaryBudget = { remaining: 5 };
 
   return descriptionLong.split('\n\n').map(paragraph =>
-    linkifyParagraph(paragraph, glossaryTerms, usedPhrases, moneyBudget, glossaryBudget)
+    linkifyParagraph(paragraph, glossaryTerms, usedPhrases, moneyBudget, glossaryBudget, affiliateConfig)
   );
 }
 
