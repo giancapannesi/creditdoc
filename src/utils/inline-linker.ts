@@ -186,6 +186,24 @@ function linkifyParagraph(
 }
 
 /**
+ * Auto-insert paragraph breaks into walls of text that have none.
+ * Groups sentences into paragraphs of ~3 sentences so the description renders
+ * as readable chunks instead of one massive block. If the text already has
+ * explicit \n\n breaks, leave it alone.
+ */
+export function autoParagraphs(text: string): string {
+  if (!text) return text;
+  if (text.includes('\n\n')) return text;
+  const sentences = text.match(/[^.!?]+[.!?]+(?:\s+|$)/g);
+  if (!sentences || sentences.length <= 3) return text;
+  const out: string[] = [];
+  for (let i = 0; i < sentences.length; i += 3) {
+    out.push(sentences.slice(i, i + 3).join('').trim());
+  }
+  return out.filter(Boolean).join('\n\n');
+}
+
+/**
  * Process full description_long. Each term linked only once across all paragraphs.
  * Used by /review/[slug].astro — caps stay at 5 money + 5 glossary (legacy behaviour).
  */
@@ -199,7 +217,7 @@ export function linkifyDescription(
   const moneyBudget = { remaining: 5 };
   const glossaryBudget = { remaining: 5 };
 
-  return descriptionLong.split('\n\n').map(paragraph =>
+  return autoParagraphs(descriptionLong).split('\n\n').map(paragraph =>
     linkifyParagraph(paragraph, glossaryTerms, usedPhrases, moneyBudget, glossaryBudget, affiliateConfig)
   );
 }
@@ -227,7 +245,7 @@ export function createLinker(
   const glossaryBudget = { remaining: opts.glossaryBudget ?? 8 };
 
   const fn = ((text: string): string[] =>
-    text.split('\n\n').map(paragraph =>
+    autoParagraphs(text).split('\n\n').map(paragraph =>
       linkifyParagraph(paragraph, glossaryTerms, usedPhrases, moneyBudget, glossaryBudget)
     )) as PageLinker;
   fn.usedPhrases = usedPhrases;
