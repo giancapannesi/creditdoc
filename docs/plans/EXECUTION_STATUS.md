@@ -55,7 +55,8 @@
   - loanstar-title-loans (14/17 pages — commit ccf7ed30ce, 2026-04-21, 17.6% fail accepted per two-pass directive)
   - pawn1st (11/14 pages — commit 5b187f2e7d, 2026-04-21, 21.4% fail accepted per two-pass directive)
   - la-familia-pawn-and-jewelry (11/14 pages — commit 2537a75d04, 2026-04-21, 21.4% fail accepted per two-pass directive)
-  - instaloan (12/14 pages — 2026-04-21, below. 14.3% fail — under guardrail.)
+  - instaloan (12/14 pages — commit ef89189ecc, 2026-04-21, 14.3% fail — under guardrail)
+  - superpawn (6/13 pages — 2026-04-21, below. 15.4% fail + no-change hits — DB only registered 6 true writes.)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
