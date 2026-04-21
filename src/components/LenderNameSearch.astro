@@ -59,12 +59,29 @@ const inputClass = variant === 'hero'
 
 <script>
   // Module-level cache shared across all instances on the page
+  type LenderHit = { s: string; n: string; c: string; st: string; p?: number };
   // @ts-ignore — attach to window for instance-to-instance sharing
   const G = (window.__creditdocLenderSearch ||= {
-    index: null as Array<{ s: string; n: string; c: string; st: string }> | null,
+    index: null as LenderHit[] | null,
     fuse: null as any,
     loading: null as Promise<void> | null,
   });
+
+  // Rank hits: Founder Approved first → name starts with query → shortest name.
+  // Without this, Fuse's default sort promotes short noise like "Bank of America ATM"
+  // above the canonical "Bank of America" entry.
+  function rankHits(hits: LenderHit[], query: string): LenderHit[] {
+    const q = query.trim().toLowerCase();
+    return hits.slice().sort((a, b) => {
+      const ap = a.p ? 1 : 0;
+      const bp = b.p ? 1 : 0;
+      if (ap !== bp) return bp - ap;
+      const as = a.n.toLowerCase().startsWith(q) ? 1 : 0;
+      const bs = b.n.toLowerCase().startsWith(q) ? 1 : 0;
+      if (as !== bs) return bs - as;
+      return a.n.length - b.n.length;
+    });
+  }
 
   async function ensureIndex(): Promise<void> {
     if (G.index && G.fuse) return;
@@ -102,7 +119,9 @@ const inputClass = variant === 'hero'
     const dropdown = document.getElementById(`${uid}-dropdown`) as HTMLElement;
     const spinner = document.getElementById(`${uid}-spinner`) as HTMLElement;
     let activeIndex = -1;
-    let currentResults: Array<{ s: string; n: string; c: string; st: string }> = [];
+    let currentResults: LenderHit[] = [];
+    let currentQuery = '';
+    let currentTotal = 0;
 
     function hide() {
       dropdown.classList.add('hidden');
@@ -110,7 +129,7 @@ const inputClass = variant === 'hero'
       activeIndex = -1;
     }
 
-    function render(results: typeof currentResults, query: string) {
+    function render(results: typeof currentResults, query: string, totalMatches: number) {
       if (!results.length) {
         dropdown.innerHTML = `
           <div class="px-4 py-3 text-sm text-muted">
@@ -122,13 +141,20 @@ const inputClass = variant === 'hero'
         dropdown.classList.remove('hidden');
         return;
       }
-      dropdown.innerHTML = results.map((r, i) => {
+      const itemsHtml = results.map((r, i) => {
         const loc = [r.c, r.st].filter(Boolean).join(', ');
+        const badge = r.p ? '<span class="inline-flex items-center rounded-full bg-primary/10 text-primary px-2 py-0.5 text-[10px] font-semibold mr-2 shrink-0">FA</span>' : '';
         return `<a href="/review/${encodeURIComponent(r.s)}/" role="option" data-idx="${i}" class="lns-item flex items-center justify-between gap-3 px-4 py-3 text-sm hover:bg-bg-alt border-b border-border last:border-b-0">
-          <span class="font-medium text-text truncate">${escapeHtml(r.n)}</span>
+          <span class="flex items-center min-w-0 flex-1">${badge}<span class="font-medium text-text truncate">${escapeHtml(r.n)}</span></span>
           ${loc ? `<span class="text-xs text-muted shrink-0">${escapeHtml(loc)}</span>` : ''}
         </a>`;
       }).join('');
+      const moreCount = totalMatches - results.length;
+      const footer = `<a href="/search/?q=${encodeURIComponent(query)}" class="flex items-center justify-center gap-1.5 px-4 py-3 text-sm font-semibold text-primary hover:bg-primary-light border-t border-border bg-bg-alt/50">
+          ${moreCount > 0 ? `See all ${totalMatches} matches for "${escapeHtml(query)}"` : `Open full search for "${escapeHtml(query)}"`}
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
+        </a>`;
+      dropdown.innerHTML = itemsHtml + footer;
       dropdown.classList.remove('hidden');
     }
 
@@ -152,10 +178,16 @@ const inputClass = variant === 'hero'
       }
       await loadAndMaybeSpin();
       if (!G.fuse) return;
-      const hits = G.fuse.search(q, { limit: 10 }).map((h: any) => h.item);
-      currentResults = hits;
+      // Pull a wider slice so the FA/startsWith re-rank has room to work,
+      // then keep the top 8 for the dropdown.
+      const allHits: LenderHit[] = G.fuse.search(q, { limit: 50 }).map((h: any) => h.item);
+      const ranked = rankHits(allHits, q);
+      const shown = ranked.slice(0, 8);
+      currentResults = shown;
+      currentQuery = q;
+      currentTotal = allHits.length;
       activeIndex = -1;
-      render(hits, q);
+      render(shown, q, allHits.length);
     }
 
     async function loadAndMaybeSpin() {
@@ -190,10 +222,11 @@ const inputClass = variant === 'hero'
       } else if (e.key === 'Enter') {
         e.preventDefault();
         const q = input.value.trim();
+        // Arrow-selected item → open that review.
+        // Otherwise → send to the full results page (don't auto-pick the top Fuse hit;
+        // that's how "Bank of America ATM" was winning over canonical Bank of America).
         if (activeIndex >= 0 && currentResults[activeIndex]) {
           location.href = `/review/${encodeURIComponent(currentResults[activeIndex].s)}/`;
-        } else if (currentResults.length) {
-          location.href = `/review/${encodeURIComponent(currentResults[0].s)}/`;
         } else if (q) {
           location.href = `/search/?q=${encodeURIComponent(q)}`;
         }
