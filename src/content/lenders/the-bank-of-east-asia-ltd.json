@@ -6,8 +6,8 @@
     "community-bank",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in New York, NY. $422M in assets. 1 office.",
-  "description_long": "The Bank Of East Asia Ltd. is a community bank located in New York, NY, established in 1984. The bank holds approximately $422M in total assets and $19M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "The Bank of East Asia Ltd. is a Hong Kong-based FDIC-equivalent bank offering personal banking, wealth management, corporate financing, and investment services across Asia.",
+  "description_long": "The Bank of East Asia (BEA) is a long-established Hong Kong bank operating as a full-service financial institution with a regional presence across Greater China, the United States, and Southeast Asia. The bank serves retail, private, and corporate clients through multiple banking channels and service lines. BEA offers comprehensive personal banking products including all-in-one accounts, mortgage loans, consumer loans, credit cards, and multi-currency debit cards. The bank has invested in digital infrastructure with BEA Online and BEA Mobile platforms, and offers mobile account opening capabilities. BEA distinguishes itself through its regional network spanning Hong Kong, mainland China, Macau, Taiwan, New York, Singapore, and the United Kingdom, making it particularly well-suited for cross-border and international banking needs. The bank operates specialized divisions including Wealth Management with private banking services, wholesale banking for businesses, and insurance services in partnership with AIA and Blue Cross. BEA also provides investment services through BEA Securities with platforms for stocks, futures, and derivative trading, along with MPF (Mandatory Provident Fund) management and trust services. The bank's recent initiatives include the BEA GOAL product targeting financial goal-based banking, SupremeGold Private for wealth accumulation, and cross-boundary wealth management services connecting Greater Bay Area opportunities. As a regulated Hong Kong bank, BEA provides deposit protection under Hong Kong's banking regulatory framework and maintains compliance with international standards including FATCA and Common Reporting Standards. The institution combines traditional banking stability with modern digital convenience, though availability of services and product specifics are primarily focused on Asian markets and affluent clients.",
   "logo_url": "",
   "website_url": "http://www.hkbea.com",
   "affiliate_url": "",
@@ -22,23 +22,34 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "Personal checking and savings accounts (All-in-One Accounts, Supreme, SupremeGold tiers)",
+    "Mortgage loans and consumer loans",
+    "Credit cards and multi-currency debit cards",
+    "Mobile banking (BEA Mobile app with account opening)",
+    "Investment solutions including unit trusts, structured products, bonds, and derivatives",
+    "Securities trading (stocks, futures, derivative warrants) through BEA SmarTrade and online platforms",
+    "Private banking and wealth management services",
+    "Corporate and SME financing with accelerated approval",
+    "Trade services and payment/cash management for businesses",
+    "Life and general insurance products in partnership with AIA and Blue Cross",
+    "MPF (Mandatory Provident Fund) management and administration",
+    "Trust services and estate planning"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 1984",
-    "Local community bank with personal service",
-    "1 location"
+    "Regional network across Greater China, USA, and Southeast Asia enabling cross-border banking and international services",
+    "Comprehensive wealth management and private banking services through SupremeGold consulting teams",
+    "Digital-first capabilities including mobile account opening, BEA Mobile app, and online trading platforms (BEA SmarTrade, East Asia Securities Cybertrading)",
+    "Diverse investment options including unit trusts, structured products, bonds, derivatives, and discretionary portfolio management",
+    "Specialized business banking with fast approval (BEA Enterprise Easy Fund in 3 days) and SME financing solutions",
+    "Multi-currency services and cross-boundary payment capabilities, particularly for Mainland China connections",
+    "Insurance bundling through partnerships with AIA and Blue Cross, including travel protection and life insurance"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Primarily Asia-focused with limited presence in Western markets; mainly serves Hong Kong and regional customers",
+    "Website content does not clearly specify minimum account balances, fees, or interest rate schedules for personal accounts",
+    "Wealth management and private banking services appear oriented toward affluent clients; limited transparency on entry requirements for SupremeGold tiers",
+    "No mention of basic consumer protections like fraud liability guarantees or specific deposit insurance coverage amounts",
+    "Complex product offerings across investment, insurance, and trusts may require substantial financial literacy; no clear guidance for entry-level retail customers"
   ],
   "contact": {
     "phone": "",
@@ -50,7 +61,7 @@
   "states_served": [
     "NY"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 26028,
   "latitude": 40.7610901169298,
   "longitude": -73.9737993264449,
@@ -109,12 +120,13 @@
     "ease_of_use": 4.3
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Hong Kong and Asia-based individuals seeking personal banking with cross-border capabilities",
+    "Affluent clients interested in comprehensive wealth management and private banking services",
+    "Small and medium-sized businesses requiring corporate financing, trade services, and cash management solutions",
+    "International investors seeking exposure to Asian markets through stock, futures, and derivatives trading platforms"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Best for Hong Kong residents, regional Asian clients, and businesses seeking a full-service bank with cross-border capabilities and sophisticated wealth management options. Primary caveat: services and product availability are Asia-centric; international customers outside the bank's regional network may face limitations, and retail customers should verify specific account requirements and fees before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -122,9 +134,9 @@
   ],
   "phone": "(212) 219-8288",
   "address": "540 Madison Ave, New York, NY 10022",
-  "processing_status": "raw",
-  "quality_score": 7,
-  "enrichment_attempts": 0,
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
   "no_index": true,
   "places_enrichment": {
     "place_id": "ChIJme3vA_tYwokRjFdgxjGbpTU",
@@ -228,5 +240,8 @@
     "establishment"
   ],
   "places_last_checked": "2026-04-21T10:46:28.247682+00:00",
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-21",
+  "last_engine_run": "2026-04-21",
   "brand_slug": null
 }

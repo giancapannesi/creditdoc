@@ -7,8 +7,8 @@
     "fdic-insured",
     "minority-depository"
   ],
-  "description_short": "FDIC-insured community bank in Huntsville, AL. $89M in assets. 1 office.",
-  "description_long": "Nova Bank is a community bank located in Huntsville, AL, established in 2024. The bank holds approximately $89M in total assets and $64M in deposits. Designated as a NONE. FDIC insured \u2014 deposits protected up to $250,000.",
+  "description_short": "Nova Bank is an FDIC-insured community bank in Alabama offering personal and commercial banking services including home loans, auto loans, CDs, and money market accounts.",
+  "description_long": "Nova Bank is a community-focused FDIC-insured bank operating in Alabama with a commitment to personalized service and local market understanding. The institution is backed by the full faith and credit of the U.S. Government through FDIC insurance, providing deposit protection up to regulatory limits. The bank emphasizes its role as a community lender with an accessible, transparent approach to financial services.\n\nNova Bank offers a comprehensive suite of retail and commercial banking products. On the deposit side, they provide certificates of deposit (CDs) with competitive rates (3.75% APY for 6-month CDs, 3.45% APY for 12-month CDs as of the website snapshot), money market accounts (3.25% APY), and online banking access with mobile banking capabilities. For borrowing, they offer home loans (including purchase, refinance, and new construction financing), auto loans, commercial loans, and specialized mortgage products including conventional, FHA, VA, and USDA financing options, plus HELOC and HELOAN products.\n\nNova Bank differentiates itself through its community bank positioning and stated commitment to \"inNOVAtive\" mortgage solutions tailored to individual needs. The bank maintains licensed mortgage originators (NMLS# 2578734 and NMLS# 1382831) and provides financial calculators and educational resources on its website. Leadership visibility is emphasized through published executive bios for the President, CEO, COO, CFO, and Chief Compliance Officer, suggesting transparency and accountability structures.\n\nAs a regional community bank, Nova Bank's primary limitations are geographic (Alabama-focused operations) and the typical constraints of smaller institutions regarding product breadth compared to national banks. The website shows promotional rates on deposits but notes these are variable and subject to change, with minimum balance requirements and potential fee reductions to earnings. No specific information is provided regarding checking account offerings, business account features, or detailed loan terms and approval processes on the public website.",
   "logo_url": "",
   "website_url": "https://www.nova.bank",
   "affiliate_url": "",
@@ -23,23 +23,37 @@
     "currency": "USD"
   },
   "services": [
-    "Checking accounts",
-    "Savings accounts",
-    "Personal loans",
-    "Mortgage lending",
-    "Business banking",
-    "FDIC insured deposits"
+    "6-month and 12-month certificate of deposit (CDs)",
+    "Money market accounts",
+    "Online banking account management",
+    "Mobile banking application",
+    "Home purchase loans",
+    "Home refinance loans",
+    "New construction financing",
+    "Auto loans",
+    "FHA mortgage loans",
+    "VA mortgage loans",
+    "USDA mortgage loans",
+    "HELOC (Home Equity Line of Credit) products",
+    "HELOAN (Home Equity Loan) products",
+    "Commercial and 1-4 family investor loans",
+    "Financial calculators"
   ],
   "pros": [
-    "FDIC insured \u2014 deposits protected up to $250,000",
-    "Established in 2024",
-    "Local community bank with personal service",
-    "1 location"
+    "FDIC-insured deposits backed by U.S. Government full faith and credit",
+    "Competitive CD rates (3.75% APY for 6-month CDs) with transparent APY disclosure",
+    "Diverse mortgage products including FHA, VA, and USDA loan options",
+    "Mobile banking and online account access available",
+    "Community bank model emphasizing personalized service and local market knowledge",
+    "Multiple licensed mortgage originators (two NMLS registrations indicate substantial lending volume)",
+    "Offers both consumer and commercial banking products in one institution"
   ],
   "cons": [
-    "Limited to local service area",
-    "May have fewer digital/mobile banking features than national banks",
-    "Fewer ATM locations than large banks"
+    "Rates on deposits are variable and subject to change without notice",
+    "Minimum balance requirements exist to open accounts and obtain advertised APY rates",
+    "Geographic limitation: appears to serve Alabama market only, not national availability",
+    "Fees may reduce earnings on savings products (explicitly noted on website)",
+    "Limited transparency on website regarding checking account features, overdraft policies, or specific loan terms and approval requirements"
   ],
   "contact": {
     "phone": "",
@@ -51,7 +65,7 @@
   "states_served": [
     "AL"
   ],
-  "data_source": "fdic",
+  "data_source": "enriched",
   "fdic_cert": 59326,
   "latitude": 34.725833001885,
   "longitude": -86.582818984325,
@@ -109,12 +123,13 @@
     "ease_of_use": 4.3
   },
   "best_for": [
-    "Local banking with personal service",
-    "FDIC-insured deposits",
-    "Small business banking"
+    "Alabama residents seeking FDIC-insured deposit products with personalized community bank service",
+    "Homebuyers interested in conventional, FHA, VA, or USDA mortgage financing with local relationship banking",
+    "Small business owners and commercial borrowers preferring community bank relationship model over national bank impersonality",
+    "Auto loan borrowers and real estate investors seeking customized lending solutions"
   ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "Nova Bank is best for Alabama residents and commercial borrowers seeking FDIC-insured banking with a community bank relationship model and diversified mortgage options including government-backed loans. The primary caveat is geographic limitation to Alabama operations and the variable nature of promotional deposit rates, which require careful review of current terms, minimum balances, and fee structures before opening accounts.",
   "typical_results_timeline": "Account opening typically takes 1-3 business days. Loan decisions vary by product.",
   "last_updated": "2026-03-21",
   "cities_served": [
@@ -122,9 +137,9 @@
   ],
   "phone": "(256) 800-6682",
   "address": "532 Madison St Se, Huntsville, AL 35801",
-  "processing_status": "raw",
-  "quality_score": 7,
-  "enrichment_attempts": 0,
+  "processing_status": "pending_approval",
+  "quality_score": 11,
+  "enrichment_attempts": 1,
   "no_index": true,
   "places_enrichment": {
     "place_id": "ChIJa5GbioFtYogROHYutGVKU9c",
@@ -228,5 +243,8 @@
     "establishment"
   ],
   "places_last_checked": "2026-04-21T10:43:07.439587+00:00",
+  "has_been_enriched": true,
+  "qc_passed_at": "2026-04-21",
+  "last_engine_run": "2026-04-21",
   "brand_slug": null
 }
