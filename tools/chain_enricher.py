@@ -36,6 +36,9 @@ from pathlib import Path
 import httpx
 from dotenv import load_dotenv
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from description_meta_scrubber import scrub_description  # noqa: E402
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tools.creditdoc_db import CreditDocDB
 
@@ -277,6 +280,7 @@ def fetch_candidate_rows(limit: int, chain: str | None) -> list[dict]:
             "address": d.get("address"),
             "phone": d.get("phone"),
             "pass1_desc": d.get("description_short"),
+            "desc_long": d.get("description_long") or "",
         })
     conn.close()
     return out
@@ -369,13 +373,27 @@ def main():
             "host_mismatch": host, "facts": facts, "new_desc": new_desc,
         })
 
+        # Bolt-on: scrub AI meta-commentary from description_long in the same write.
+        # Only writes the long field if (a) something was scrubbed AND (b) the
+        # cleaned result is still ≥200 chars. Protects against over-zealous drops.
+        long_update = {}
+        dropped_long = []
+        orig_long = row.get("desc_long") or ""
+        if orig_long:
+            cleaned_long, dropped_long = scrub_description(orig_long)
+            if dropped_long and len(cleaned_long) >= 200:
+                long_update["description_long"] = cleaned_long
+        results[-1]["long_scrubbed"] = len(dropped_long)
+        results[-1]["long_kept_unchanged"] = bool(dropped_long and not long_update)
+
         if args.apply:
+            payload = {"description_short": new_desc, **long_update}
             try:
                 r = db.update_lender(
                     row["slug"],
-                    {"description_short": new_desc},
+                    payload,
                     updated_by="chain_enricher_pass2",
-                    reason=f"Pass 2 enrichment; facts={len(facts)}; host={host}",
+                    reason=f"Pass 2 enrichment; facts={len(facts)}; host={host}; long_scrubbed={len(dropped_long)}",
                     force=True,
                 )
                 results[-1]["action"] = "written" if r["changed"] else "unchanged"
