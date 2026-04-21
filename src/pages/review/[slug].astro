@@ -268,11 +268,15 @@ if (lender.pricing?.monthly_price > 0) {
 
 // Product schema for credit cards (annual_fee tiers)
 const isCardProduct = lender.pricing?.tiers?.some((t: any) => t.price_type === 'annual_fee');
+const productImage = lender.logo_url?.trim()
+  ? (lender.logo_url.startsWith('http') ? lender.logo_url : `https://www.creditdoc.co${lender.logo_url}`)
+  : 'https://www.creditdoc.co/og-default.png';
 const cardProductSchema = isCardProduct ? {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: lender.name,
   description: lender.description_short,
+  image: productImage,
   brand: {
     '@type': 'Brand',
     name: lender.company_info?.issuing_bank || lender.name,
@@ -309,6 +313,30 @@ const cardProductSchema = isCardProduct ? {
     },
     availability: 'https://schema.org/InStock',
     url: lender.affiliate_url || lender.website_url || `https://www.creditdoc.co/review/${lender.slug}/`,
+    // Credit cards ship digitally — include explicit policies to satisfy
+    // Google's Product rich results validation.
+    hasMerchantReturnPolicy: {
+      '@type': 'MerchantReturnPolicy',
+      applicableCountry: 'US',
+      returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+    },
+    shippingDetails: {
+      '@type': 'OfferShippingDetails',
+      shippingRate: {
+        '@type': 'MonetaryAmount',
+        value: '0',
+        currency: 'USD',
+      },
+      shippingDestination: {
+        '@type': 'DefinedRegion',
+        addressCountry: 'US',
+      },
+      deliveryTime: {
+        '@type': 'ShippingDeliveryTime',
+        handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
+        transitTime: { '@type': 'QuantitativeValue', minValue: 5, maxValue: 10, unitCode: 'DAY' },
+      },
+    },
   })),
 } : null;
 
