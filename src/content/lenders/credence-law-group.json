@@ -3,10 +3,10 @@
   "slug": "credence-law-group",
   "category": "credit-repair",
   "subcategories": [],
-  "description_short": "Credence Law Group — Consultant in Chicago, IL.",
+  "description_short": "Credence Law Group \u2014 Consultant in Chicago, IL.",
   "description_long": "Credence Law Group provides Consultant. Located at 180 N Stetson Ave, Chicago, IL 60601.",
   "logo_url": "",
-  "website_url": "",
+  "website_url": "http://credencelawgroup.com",
   "affiliate_url": "",
   "affiliate_program": "",
   "phone": "+1 888-502-3121",
@@ -42,7 +42,15 @@
     "employees": "",
     "bbb_rating": "NR",
     "bbb_accredited": false,
-    "certifications": []
+    "certifications": [],
+    "zip": "60601",
+    "country": "US",
+    "neighborhood": "Chicago Loop",
+    "street_number": "180",
+    "route": "North Stetson Avenue",
+    "county": "Cook County",
+    "lat": 41.885423599999996,
+    "lng": -87.622704
   },
   "states_served": [
     "Illinois"
@@ -79,7 +87,7 @@
     "phone": "+1 888-502-3121",
     "working_hours": {}
   },
-  "processing_status": "raw",
+  "processing_status": "failed_quarantine",
   "quality_score": 0,
   "enrichment_attempts": 0,
   "last_engine_run": "2026-03-31",
@@ -87,5 +95,66 @@
   "contact": {
     "phone": "",
     "address": ""
-  }
+  },
+  "places_enrichment": {
+    "place_id": "ChIJQ00bIKYsDogRo7dUv2yOl24",
+    "match_name": "Credence Law Group",
+    "primary_type": "Consultant",
+    "types": [
+      "consultant",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "business_status": "OPERATIONAL",
+    "phone_national": "(888) 502-3121",
+    "phone_international": "+1 888-502-3121",
+    "website_uri_raw": "http://credencelawgroup.com/",
+    "website_uri_clean": "http://credencelawgroup.com",
+    "website_flags": {
+      "host": "credencelawgroup.com",
+      "is_social": false,
+      "is_https": false,
+      "is_google_business_site": false
+    },
+    "formatted_address": "180 N Stetson Ave, Chicago, IL 60601, USA",
+    "short_formatted_address": "180 N Stetson Ave, Chicago",
+    "adr_format_address": "<span class=\"street-address\">180 N Stetson Ave</span>, <span class=\"locality\">Chicago</span>, <span class=\"region\">IL</span> <span class=\"postal-code\">60601</span>, <span class=\"country-name\">USA</span>",
+    "structured_address": {
+      "street_number": "180",
+      "route": "North Stetson Avenue",
+      "county": "Cook County"
+    },
+    "plus_code": "86HJV9PG+5W",
+    "compound_plus_code": "V9PG+5W Chicago, IL, USA",
+    "lat": 41.885423599999996,
+    "lng": -87.622704,
+    "viewport": {
+      "low": {
+        "latitude": 41.8840716197085,
+        "longitude": -87.62385373029151
+      },
+      "high": {
+        "latitude": 41.88676958029149,
+        "longitude": -87.62115576970851
+      }
+    },
+    "google_maps_uri": "https://maps.google.com/?cid=7968994663372994467&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+    "icon_background_color": "#7B9EB0",
+    "checked_at": "2026-04-21T10:36:50.728873+00:00"
+  },
+  "google_place_id": "ChIJQ00bIKYsDogRo7dUv2yOl24",
+  "google_maps_uri": "https://maps.google.com/?cid=7968994663372994467&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+  "google_business_status": "OPERATIONAL",
+  "google_primary_type": "Consultant",
+  "google_types": [
+    "consultant",
+    "point_of_interest",
+    "service",
+    "establishment"
+  ],
+  "places_last_checked": "2026-04-21T10:36:50.728873+00:00",
+  "quarantine_reason": "not_consumer_finance",
+  "brand_slug": null
 }
