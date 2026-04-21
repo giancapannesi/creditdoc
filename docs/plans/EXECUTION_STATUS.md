@@ -64,7 +64,8 @@
   - chase-bank (11/11 pages — commit 6de484cafe, 2026-04-21, 0% fail — perfect batch)
   - bank-of-america-financial-center (11/11 pages — commit d44f7a6d91, 2026-04-21, 0% fail — perfect batch)
   - texas-car-title-and-payday-loan-services-inc (10/11 pages — commit fc23c9dda7, 2026-04-21, 9.1% fail)
-  - sam-check-cashing-machine (10/15 pages — 2026-04-21, below. 33.3% fail — accepted per two-pass directive.)
+  - sam-check-cashing-machine (10/15 pages — commit d1ed9c5e83, 2026-04-21, 33.3% fail accepted per two-pass directive)
+  - payday-loans-cash (5/15 pages — 2026-04-21, below. 46.7% fail accepted per two-pass directive)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
