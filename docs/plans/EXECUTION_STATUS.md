@@ -67,7 +67,8 @@
   - sam-check-cashing-machine (10/15 pages — commit d1ed9c5e83, 2026-04-21, 33.3% fail accepted per two-pass directive)
   - payday-loans-cash (5/15 pages — commit 7fa7e9f64a, 2026-04-21, 46.7% fail accepted per two-pass directive)
   - nccl-no-credit-check-loans (12/13 pages — commit 8580ff6265, 2026-04-21, 7.7% fail — clean batch)
-  - easy-payday-loans (3/11 pages — 2026-04-21, below. 54.5% fail — mostly CLI timeouts, accepted per two-pass directive)
+  - easy-payday-loans (3/11 pages — commit 3e87fb156f, 2026-04-21, 54.5% fail — mostly CLI timeouts, accepted per two-pass directive)
+  - consumer-credit-counseling-services (8/10 pages — 2026-04-21, below. 10.0% fail — clean batch)
 - [ ] Stage 4.1 — daily chain monitor + Telegram
 - [ ] Stage 4.2 — weekly GSC chain report
 
