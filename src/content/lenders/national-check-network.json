@@ -1,10 +1,10 @@
 {
   "name": "National Check Network",
   "slug": "national-check-network",
-  "category": "emergency-cash",
+  "category": "personal-loans",
   "subcategories": [],
-  "description_short": "National Check Network \u2014 Check cashing service in Colorado Springs, CO.",
-  "description_long": "National Check Network provides Check cashing service. Located at 3617 Betty Dr, Colorado Springs, CO 80917.",
+  "description_short": "PlanBLoan is a loan marketplace that connects borrowers to lenders offering personal loans up to $5,000. The platform handles applications but does not originate or fund loans itself.",
+  "description_long": "PlanBLoan operates as a loan lead marketplace rather than a direct lender. The company provides an online platform where consumers can submit loan requests and be matched with third-party lenders willing to offer personal loans. The service targets borrowers seeking quick access to cash without lengthy application processes.\n\nPlanBLoan's core offering is a three-step process: submit a loan request through their online form (specifying desired loan amount between $200\u2013$5,000), review loan offers from partnered lenders, and receive funds if an offer is accepted. The platform claims SSL security protection and emphasizes no obligation to accept any lender offers. The company explicitly states it is not a lender and does not make loan decisions, perform credit underwriting, or participate in servicing.\n\nPlanBLoan distinguishes itself by emphasizing speed, simplicity, and transparency. The platform charges no fees for its matching service and claims lenders cannot impose hidden charges through PlanBLoan itself. The company provides educational information about APRs, interest rates, and financial implications, though it correctly disclaims responsibility for actual loan terms determined by partnered lenders. The platform notes that initial loan requests trigger soft inquiries (no credit impact), while lenders may conduct hard inquiries.\n\nA critical caveat is that PlanBLoan functions solely as a marketplace intermediary and provides minimal protection regarding lender practices, APRs (which can range from 4.99% to 450% for personal loans), late fees, collection practices, or loan renewal policies. Borrowers assume full responsibility for reviewing lender agreements before acceptance. The disconnect between PlanBLoan's claims of 'transparency' and its inability to guarantee lender conduct or terms represents a significant limitation.",
   "logo_url": "",
   "website_url": "http://getcashnow.space",
   "affiliate_url": "",
@@ -75,18 +75,45 @@
     "transparency": 2.0,
     "ease_of_use": 3.7
   },
-  "pros": [],
-  "cons": [],
-  "best_for": [],
+  "pros": [
+    "Fast application process requiring only email, desired loan amount, and last 4 SSN digits",
+    "No direct fees charged by PlanBLoan for its matching service",
+    "Soft inquiry at application stage does not impact credit score",
+    "No obligation to accept any lender offers; borrowers can decline without penalty",
+    "SSL 2048-bit encryption for data protection during submission",
+    "Educational content explaining APRs, interest rates, and loan financial implications",
+    "Loan amounts range from $200 to $5,000, accessible for various financial needs"
+  ],
+  "cons": [
+    "PlanBLoan cannot guarantee or disclose specific APR terms (ranging 4.99%\u2013450% for personal loans) before lender selection",
+    "Lenders may perform hard inquiries that negatively impact credit scores; PlanBLoan has no control over this",
+    "No involvement in loan servicing, collection, or dispute resolution\u2014all responsibility falls to partnered lenders",
+    "Borrower consent to marketing emails from PlanBLoan and unknown 'Marketing Partners' is mandatory to proceed",
+    "Limited recourse if a lender engages in predatory practices; company disclaims responsibility for lender conduct"
+  ],
+  "best_for": [
+    "Borrowers seeking quick loan matching without direct lender contact or lengthy applications",
+    "Consumers with fair-to-good credit seeking personal loans under $5,000 for immediate needs",
+    "Individuals willing to review and compare multiple lender offers before committing"
+  ],
   "similar_lenders": [],
-  "diagnosis": "",
+  "diagnosis": "PlanBLoan is best suited for borrowers who need quick personal loan matching and are comfortable reviewing lender terms independently. The critical caveat is that PlanBLoan is a lead marketplace, not a lender\u2014it provides no underwriting, rate guarantees, or consumer protections beyond data security, making actual loan terms entirely dependent on partnered lenders' discretion and practices.",
   "services": [
-    "Check cashing service"
+    "Online loan request submission form (email, loan amount, SSN verification)",
+    "Loan marketplace matching borrowers with third-party lenders",
+    "Soft inquiry credit check (does not impact credit score)",
+    "Multi-lender offer comparison for personal loans",
+    "Educational resources on APR, interest rates, and loan costs",
+    "SSL-encrypted data submission and security protection",
+    "Free marketplace service with no origination fees charged by PlanBLoan",
+    "Marketing partner network connecting borrowers to additional loan products",
+    "Loan amount range selection ($200\u2013$5,000 in four tiers)",
+    "Terms of Use and Privacy Policy documentation with Notice at Collection"
   ],
   "typical_results_timeline": "",
   "last_updated": "2026-03-21",
   "review_status": "draft",
-  "data_source": "outscraper",
+  "data_source": "enriched",
   "google_data": {
     "google_id": "0x87134f4e5a3f2a29:0xd722497dd833412e",
     "google_rating": null,
@@ -100,10 +127,10 @@
       ]
     }
   },
-  "processing_status": "raw",
-  "quality_score": 0,
-  "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
+  "processing_status": "ready_for_index",
+  "quality_score": 10,
+  "enrichment_attempts": 1,
+  "last_engine_run": "2026-04-22",
   "no_index": true,
   "contact": {
     "phone": "",
@@ -203,5 +230,6 @@
     "establishment"
   ],
   "places_last_checked": "2026-04-21T10:42:46.819688+00:00",
+  "has_been_enriched": true,
   "brand_slug": null
 }

@@ -125,11 +125,15 @@ const lowestPrice = lender.pricing.tiers.length > 0
 const hasPricing = lowestPrice > 0 || lender.pricing.tiers.length > 0;
 const isFreeService = lender.pricing.monthly_price === 0 && lender.pricing.setup_fee === 0 && lender.pricing.tiers.length === 0 && lender.pricing.free_consultation === true;
 const badges = getBadgeEligibility(lender.category);
+const bankingCategories = ['banking', 'credit-unions', 'mortgage-lenders', 'auto-loans-new', 'auto-loans-used', 'student-loans'];
+const isRatesVaryCategory = bankingCategories.includes(lender.category);
 const priceDisplay = hasPricing
   ? `From ${formatPrice(lowestPrice)}/mo`
   : (isFreeService && badges.freeToUse)
     ? 'Free to Use'
-    : 'Contact for Pricing';
+    : isRatesVaryCategory
+      ? 'Rates vary'
+      : null;
 
 // Category-aware feature labels — credit repair features only show on credit repair pages
 const creditRepairFeatures: Record<string, string> = {
@@ -388,9 +392,9 @@ const ogImageUrl = lender.logo_url?.trim()
     const loc = city ? ` ${city}` : '';
     const locSuffix = loc ? `${loc}${stAbbr ? ', ' + stAbbr : ''}` : '';
     const nameWithLoc = locSuffix ? `${lender.name}${locSuffix}` : lender.name;
-    if (nameWithLoc.length <= 35) return `${nameWithLoc} Review (2026) | CreditDoc`;
-    if (nameWithLoc.length <= 50) return `${nameWithLoc} Review (2026)`;
-    return `${nameWithLoc.slice(0, 53)} Review`;
+    if (nameWithLoc.length <= 45) return `${nameWithLoc} | CreditDoc`;
+    if (nameWithLoc.length <= 60) return nameWithLoc;
+    return nameWithLoc.slice(0, 60);
   })()}
   description={(() => {
     const base = lender.description_short || `${lender.name} review with pricing, ratings, and features.`;
@@ -476,9 +480,17 @@ const ogImageUrl = lender.logo_url?.trim()
 
       <!-- Quick Badges -->
       <div class="mt-6 flex flex-wrap items-center gap-3">
-        <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-primary-light text-primary">
-          {priceDisplay}
-        </span>
+        {priceDisplay && (
+          priceDisplay === 'Rates vary' && lender.website_url ? (
+            <a href={lender.website_url} target="_blank" rel="nofollow noopener sponsored" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-primary-light text-primary hover:bg-primary/15 transition-colors">
+              See current rates &rarr;
+            </a>
+          ) : (
+            <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-primary-light text-primary">
+              {priceDisplay}
+            </span>
+          )
+        )}
         {bbb && bbb !== 'NR' && bbb !== 'N/A' && (
         <span class:list={['inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold', bbbClass]}>
           BBB: {bbb}
