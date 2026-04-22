@@ -169,7 +169,9 @@ function linkifyParagraph(
   moneyBudget: { remaining: number },
   glossaryBudget: { remaining: number },
   affiliateConfig?: AffiliateConfig,
+  currentCategory: string = '',
 ): string {
+  const selfRefUrl = currentCategory ? `/categories/${currentCategory}/` : '';
   const linked = new Array(text.length).fill(false);
   const replacements: [number, number, string][] = [];
 
@@ -196,6 +198,9 @@ function linkifyParagraph(
   // Money links
   for (const ml of SORTED_MONEY_LINKS) {
     if (moneyBudget.remaining <= 0) break;
+    // Skip self-referential links (e.g. "savings accounts" on a banking page
+    // pointing at /categories/banking/ — that's the page the user is on).
+    if (selfRefUrl && ml.url === selfRefUrl) continue;
     const lower = ml.phrase.toLowerCase();
     if (usedPhrases.has(lower)) continue;
 
@@ -280,13 +285,14 @@ export function linkifyDescription(
   glossaryTerms: GlossaryTerm[],
   currentSlug: string = '',
   affiliateConfig?: AffiliateConfig,
+  currentCategory: string = '',
 ): string[] {
   const usedPhrases = new Set<string>();
   const moneyBudget = { remaining: 5 };
   const glossaryBudget = { remaining: 5 };
 
   return autoParagraphs(descriptionLong).split('\n\n').map(paragraph =>
-    linkifyParagraph(paragraph, glossaryTerms, usedPhrases, moneyBudget, glossaryBudget, affiliateConfig)
+    linkifyParagraph(paragraph, glossaryTerms, usedPhrases, moneyBudget, glossaryBudget, affiliateConfig, currentCategory)
   );
 }
 
