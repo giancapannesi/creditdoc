@@ -415,7 +415,13 @@ const ogImageUrl = lender.logo_url?.trim()
       <li><span class="mx-1">/</span></li>
       <li><a href={`/categories/${lender.category}/`} class="hover:text-primary transition-colors">{category?.name || lender.category}</a></li>
       <li><span class="mx-1">/</span></li>
-      <li class="text-text font-medium">{lender.name}</li>
+      <li class="text-text font-medium">{lender.name}{(() => {
+        const city = lender.company_info?.city;
+        const state = lender.company_info?.state;
+        const stAbbr = state ? (STATE_ABBR[state] || state.slice(0, 2).toUpperCase()) : '';
+        if (!city) return '';
+        return ` — ${city}${stAbbr ? ', ' + stAbbr : ''}`;
+      })()}</li>
     </ol>
   </nav>
 
@@ -459,7 +465,15 @@ const ogImageUrl = lender.logo_url?.trim()
         </div>
 
         <div class="flex-1">
-          <h1 class="text-2xl sm:text-3xl font-bold text-text">{lender.name}</h1>
+          <h1 class="text-2xl sm:text-3xl font-bold text-text">
+            {lender.name}{(() => {
+              const city = lender.company_info?.city;
+              const state = lender.company_info?.state;
+              const stAbbr = state ? (STATE_ABBR[state] || state.slice(0, 2).toUpperCase()) : '';
+              if (!city) return '';
+              return ` in ${city}${stAbbr ? ', ' + stAbbr : ''}`;
+            })()}
+          </h1>
           <div class="flex items-center gap-3 mt-2">
             <RatingStars rating={lender.rating} size="md" showValue={true} />
           </div>
