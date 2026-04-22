@@ -381,6 +381,37 @@ class CreditDocDB:
                 unchanged += 1
                 continue
 
+            # ─── FEDERAL-ID GUARD ───────────────────────────────────
+            # Rows with an FDIC cert or NCUA charter are federally
+            # identified institutions. Their category is fixed by
+            # federal record and must not be auto-reclassified.
+            # Prevents the Apr 14 2026 incident where an autonomous
+            # engine moved credit-union rows into wrong categories
+            # via name-only matching.
+            if field == "category" and not is_founder:
+                has_fdic = data.get("fdic_cert") not in (None, "")
+                has_ncua = data.get("ncua_charter_number") not in (None, "")
+                if has_fdic or has_ncua:
+                    blocked_replace.append(field)
+                    self.conn.execute(
+                        """INSERT INTO audit_log
+                           (slug, table_name, field_changed, old_value, new_value,
+                            changed_by, changed_at, reason)
+                           VALUES (?, 'lenders', ?, ?, ?, ?, ?, ?)""",
+                        (
+                            slug,
+                            "BLOCKED_FEDERAL_ID:category",
+                            json.dumps(old_value)[:500] if old_value is not None else None,
+                            json.dumps(new_value)[:500] if new_value is not None else None,
+                            updated_by,
+                            ts,
+                            f"BLOCKED: category change on federally-identified row "
+                            f"(fdic={has_fdic}, ncua={has_ncua}) "
+                            f"({reason or 'no reason'})",
+                        ),
+                    )
+                    continue
+
             # ─── PERSISTENT FIELD PROTECTION ───────────────────────
             if field in PERSISTENT_FIELDS and not is_founder:
                 old_is_empty = _is_empty(old_value)
