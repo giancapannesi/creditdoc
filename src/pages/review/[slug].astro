@@ -110,7 +110,7 @@ const affiliateConfig = lender.affiliate_url && Array.isArray(lender.affiliate_a
   : undefined;
 
 const linkedParagraphs = lender.description_long
-  ? linkifyDescription(lender.description_long, glossaryTerms, lender.slug, affiliateConfig)
+  ? linkifyDescription(lender.description_long, glossaryTerms, lender.slug, affiliateConfig, lender.category)
   : [];
 
 const comparisons = getComparisons().filter(
