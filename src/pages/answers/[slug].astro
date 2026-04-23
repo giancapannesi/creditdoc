@@ -164,6 +164,11 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema];
   title={answer.title}
   description={answer.meta_description}
   canonical={canonicalUrl}
+  ogType="article"
+  articlePublishedTime={answer.published_at || answer.last_updated}
+  articleModifiedTime={answer.last_updated || answer.published_at}
+  articleAuthor="Harvey Brooks"
+  articleSection={answer.cluster_pillar}
   jsonLd={jsonLd}
 >
   <!-- Breadcrumbs -->
