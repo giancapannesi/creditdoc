@@ -71,24 +71,25 @@ def render_markdown(week_rows: list[dict], total: int, by_pillar: dict,
     if not week_rows:
         lines.append("_No pages published in this window._")
     else:
-        lines.append("| # | Date (UTC) | Pillar | Compliance | Slug |")
-        lines.append("|---|-----------|--------|-----------:|------|")
+        lines.append("| # | Date (UTC) | Pillar | Compliance | URL |")
+        lines.append("|---|-----------|--------|-----------:|-----|")
         for i, r in enumerate(week_rows, 1):
             date = (r["published_at"] or "")[:10]
             comp = f"{r['compliance_score']}/10"
+            url = f"{SITE_BASE}/{r['slug']}/"
             lines.append(
-                f"| {i} | {date} | {r['cluster_pillar']} | {comp} | "
-                f"[{r['slug']}]({SITE_BASE}/{r['slug']}/) |"
+                f"| {i} | {date} | {r['cluster_pillar']} | {comp} | {url} |"
             )
         lines.append("")
         lines.append("### Titles + meta")
         lines.append("")
         for r in week_rows:
+            url = f"{SITE_BASE}/{r['slug']}/"
             lines.append(f"**{r['title']}**  ")
-            lines.append(f"URL: {SITE_BASE}/{r['slug']}/  ")
-            lines.append(f"H1: {r['h1']}  ")
-            lines.append(f"Meta: {r['meta_description']}  ")
-            lines.append(f"Money page: {r['target_money_page']}  ")
+            lines.append(f"**URL:** {url}  ")
+            lines.append(f"**H1:** {r['h1']}  ")
+            lines.append(f"**Meta:** {r['meta_description']}  ")
+            lines.append(f"**Money page:** https://creditdoc.co{r['target_money_page']}  ")
             lines.append("")
     lines += [
         "## All-time by pillar",
