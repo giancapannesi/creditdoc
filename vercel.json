@@ -104,6 +104,10 @@
     {"source": "/review/pawn-shop-watches-etc/", "destination": "/categories/pawn-shops/", "permanent": true},
     {"source": "/review/pawn-shop-watches-etc", "destination": "/categories/pawn-shops/", "permanent": true}
   ],
+  "rewrites": [
+    {"source": "/review/:slug", "destination": "/api/gone"},
+    {"source": "/review/:slug/", "destination": "/api/gone"}
+  ],
   "headers": [
     {
       "source": "/(.*)",
