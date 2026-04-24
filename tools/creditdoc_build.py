@@ -350,8 +350,15 @@ def _verify_protected_match_db():
     with open(protected_path) as f:
         protected = set(json.load(f).get("profiles", []))
 
+    def _strip_nulls(d):
+        if isinstance(d, dict):
+            return {k: _strip_nulls(v) for k, v in d.items() if v is not None}
+        if isinstance(d, list):
+            return [_strip_nulls(x) for x in d]
+        return d
+
     def canon(d):
-        return json.dumps(d, sort_keys=True, separators=(",", ":"))
+        return json.dumps(_strip_nulls(d), sort_keys=True, separators=(",", ":"))
 
     with CreditDocDB() as db:
         for fpath in staged_lender_files:
