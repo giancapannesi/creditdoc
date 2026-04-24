@@ -17,6 +17,30 @@ const { category } = Astro.props;
 const isCreditRepair = ['credit-repair', 'debt-relief'].includes(category);
 // Credit building → WalletHub
 const isBuildCredit = ['build-credit', 'credit-monitoring'].includes(category);
+
+// Loan categories → internal link to a congruent /best/ money page.
+// Editorial, not sponsored — matches the reader's next-step intent.
+const loanLinks: Record<string, { title: string; subtitle: string; href: string; cta: string }> = {
+  'personal-loans': {
+    title: 'Compare Personal Loans',
+    subtitle: 'Side-by-side rates, terms, and approval odds from our top-ranked lenders.',
+    href: '/best/best-personal-loan-lenders/',
+    cta: 'See Our Picks',
+  },
+  'emergency-cash': {
+    title: 'Need Cash Fast?',
+    subtitle: "Cash advance apps that don't run a hard credit check, ranked by speed and fees.",
+    href: '/best/best-cash-advance-apps/',
+    cta: 'See Cash Apps',
+  },
+  'payday-alternatives': {
+    title: 'Payday Loan Alternatives',
+    subtitle: 'Safer borrowing options with lower APRs and longer payback windows.',
+    href: '/best/best-payday-loan-alternatives/',
+    cta: 'See Alternatives',
+  },
+};
+const loanLink = loanLinks[category];
 ---
 
 {isCreditRepair && (
@@ -42,6 +66,31 @@ const isBuildCredit = ['build-credit', 'credit-monitoring'].includes(category);
           </svg>
         </a>
         <p class="mt-1.5 text-[10px] text-muted/50">Sponsored &middot; <a href="/disclosure/" class="underline">Disclosure</a></p>
+      </div>
+    </div>
+  </div>
+)}
+
+{loanLink && (
+  <div class="rounded-xl border border-border bg-bg-alt p-5 my-8">
+    <div class="flex items-start gap-3">
+      <div class="shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm9 0a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1V4zM3 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1v-3zm9 0a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-3z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+      <div class="flex-1">
+        <p class="text-sm font-semibold text-text">{loanLink.title}</p>
+        <p class="mt-1 text-xs text-muted leading-relaxed">{loanLink.subtitle}</p>
+        <a
+          href={loanLink.href}
+          class="mt-2 inline-flex items-center px-3.5 py-2 rounded-lg bg-primary text-white text-xs font-semibold hover:bg-primary-hover transition-colors"
+        >
+          {loanLink.cta}
+          <svg xmlns="http://www.w3.org/2000/svg" class="ml-1.5 h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+          </svg>
+        </a>
       </div>
     </div>
   </div>
