@@ -261,7 +261,14 @@ export function getLendersByCity(city: string): Lender[] {
 
 export function getCategories(): Category[] {
   const raw = fs.readFileSync(path.join(CONTENT_DIR, 'categories.json'), 'utf-8');
-  return JSON.parse(raw) as Category[];
+  const categories = JSON.parse(raw) as Category[];
+  // Compute count dynamically so homepage matches the real /categories/<slug>/ listing.
+  // Stored count in categories.json is legacy hand-curated and out of sync with the lenders export.
+  const lenders = getAllLenders();
+  return categories.map(c => ({
+    ...c,
+    count: lenders.filter(l => l.category === c.slug || (l.subcategories ?? []).includes(c.slug)).length,
+  }));
 }
 
 export function getComparisons(): Comparison[] {
