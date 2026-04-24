@@ -41,18 +41,6 @@ const offers: Record<string, Offer> = {
     banner: '/affiliates/tcp/The worst credit ever 300x250-1.jpg',
     disclosure: 'CreditDoc earns a commission if you sign up.',
   },
-  'personal-loans': {
-    name: 'Compare Personal Loans',
-    tagline: 'Find Your Best Rate',
-    description: 'Check options from multiple lenders with one form. No hard credit pull to see what you qualify for.',
-    cta: 'Check Your Options',
-    url: 'https://lowcreditfinance.com/?aff146570',
-    disclosure: 'CreditDoc earns a commission if you apply.',
-    extraLinks: [
-      { label: 'Loans Up to $50K', url: 'https://50kloans.com/?aff146559' },
-      { label: 'Find Personal Loans', url: 'https://superpersonalfinder.com/?aff146562' },
-    ],
-  },
   'build-credit': {
     name: 'WalletHub',
     tagline: 'Free Credit Monitoring',
@@ -67,18 +55,15 @@ const offers: Record<string, Offer> = {
 const categoryToOffer: Record<string, string> = {
   'credit-repair': 'credit-repair',
   'debt-relief': 'credit-repair',
-  'personal-loans': 'personal-loans',
-  'emergency-cash': 'personal-loans',
-  'payday-alternatives': 'personal-loans',
   'build-credit': 'build-credit',
   'credit-monitoring': 'build-credit',
 };
 
-const offerKey = categoryToOffer[category] || 'personal-loans';
+const offerKey = categoryToOffer[category] || 'build-credit';
 const offer = offers[offerKey];
 ---
 
-<div class="glass-card p-5" data-affiliate={offerKey === 'credit-repair' ? 'tcp' : offerKey === 'personal-loans' ? 'leadstack' : ''}>
+<div class="glass-card p-5" data-affiliate={offerKey === 'credit-repair' ? 'tcp' : ''}>
   <div class="flex items-center gap-2 mb-3">
     <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-700 uppercase tracking-wider">Sponsored</span>
   </div>
