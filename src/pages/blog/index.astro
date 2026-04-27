@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getBlogPosts, getBlogPostsByCategory } from '../../utils/data';
 
-const posts = getBlogPosts().sort((a, b) =>
+const posts = (await getBlogPosts()).sort((a, b) =>
   new Date(b.publish_date).getTime() - new Date(a.publish_date).getTime()
 );
 

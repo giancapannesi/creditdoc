@@ -1,10 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { queryJsonRows, queryJsonRow, queryRows } from './db';
 
 // Entity-type badge matrix (2026-04-19) — governs which category of lender
 // is eligible to show the "Free Consultation" and "Free to Use" badges.
-// Background: pawn shops, check cashers, ATMs etc. don't offer consultations
-// and aren't free to use (they charge per-transaction). Gate badges accordingly.
 export const ENTITY_TYPE_BADGE_MATRIX: Record<string, {freeConsult: boolean; freeToUse: boolean}> = {
   'credit-repair':       {freeConsult: true,  freeToUse: false},
   'fix-my-credit':       {freeConsult: true,  freeToUse: false},
@@ -75,7 +74,6 @@ export interface Lender {
   website_url: string;
   affiliate_url: string;
   affiliate_program: string;
-  // Optional: phrases in description_long to convert to highlighted affiliate CTA links
   affiliate_anchors?: string[];
   pricing: LenderPricing;
   features: LenderFeatures;
@@ -108,15 +106,13 @@ export interface Lender {
   typical_results_timeline: string;
   last_updated: string;
   review_status: string;
-  // Brand/chain metadata (optional — set for multi-location chains)
+  processing_status?: string;
   brand_slug?: string | null;
-  // Directory listing fields (optional — from Outscraper DB)
   data_source?: string;
   google_rating?: number;
   google_reviews_count?: number;
   phone?: string;
   address?: string;
-  // Loan-specific fields (optional — only for loan lenders)
   loan_details?: {
     min_amount: number;
     max_amount: number;
@@ -204,108 +200,190 @@ export interface WellnessGuide {
   faq: { question: string; answer: string }[];
 }
 
-const LENDERS_DIR = path.join(process.cwd(), 'src/content/lenders');
 const CONTENT_DIR = path.join(process.cwd(), 'src/content');
 
+// === Lenders (DB-backed) ===
+
+const LENDER_LIVE_FILTER = "processing_status IN ('ready_for_index', 'pending_approval')";
+
 let _lendersCache: Lender[] | null = null;
+let _lendersPromise: Promise<Lender[]> | null = null;
 
-export function getAllLenders(): Lender[] {
+function normalizeLender(l: Lender): Lender {
+  l.subcategories = Array.isArray(l.subcategories) ? l.subcategories : [];
+  l.states_served = Array.isArray(l.states_served) ? l.states_served : [];
+  l.cities_served = Array.isArray(l.cities_served) ? l.cities_served : [];
+  l.best_for = Array.isArray(l.best_for) ? l.best_for : [];
+  l.services = Array.isArray(l.services) ? l.services : [];
+  l.similar_lenders = Array.isArray(l.similar_lenders) ? l.similar_lenders : [];
+  l.pros = Array.isArray(l.pros) ? l.pros : [];
+  l.cons = Array.isArray(l.cons) ? l.cons : [];
+  return l;
+}
+
+export async function getAllLenders(): Promise<Lender[]> {
   if (_lendersCache) return _lendersCache;
-  const files = fs.readdirSync(LENDERS_DIR).filter(f => f.endsWith('.json'));
-  _lendersCache = files.map(f => {
-    const raw = fs.readFileSync(path.join(LENDERS_DIR, f), 'utf-8');
-    const l = JSON.parse(raw) as Lender;
-    // Defensive: ensure array fields are never null/undefined (prevents build crashes)
-    l.subcategories = Array.isArray(l.subcategories) ? l.subcategories : [];
-    l.states_served = Array.isArray(l.states_served) ? l.states_served : [];
-    l.cities_served = Array.isArray(l.cities_served) ? l.cities_served : [];
-    l.best_for = Array.isArray(l.best_for) ? l.best_for : [];
-    l.services = Array.isArray(l.services) ? l.services : [];
-    l.similar_lenders = Array.isArray(l.similar_lenders) ? l.similar_lenders : [];
-    l.pros = Array.isArray(l.pros) ? l.pros : [];
-    l.cons = Array.isArray(l.cons) ? l.cons : [];
-    return l;
-  }).filter(l => {
-    // State-machine gate: ready_for_index (live) + pending_approval (live but noindex, for founder review)
-    if (l.processing_status) return l.processing_status === 'ready_for_index' || l.processing_status === 'pending_approval';
-    // Backward compatibility: if migration hasn't run yet, use old logic
-    return l.review_status === 'published';
+  if (_lendersPromise) return _lendersPromise;
+  _lendersPromise = queryJsonRows<Lender>(
+    `SELECT data FROM lenders WHERE ${LENDER_LIVE_FILTER}`
+  ).then(rows => {
+    _lendersCache = rows.map(normalizeLender);
+    return _lendersCache;
   });
-  return _lendersCache;
+  return _lendersPromise;
 }
 
-export function getLenderBySlug(slug: string): Lender | undefined {
-  return getAllLenders().find(l => l.slug === slug);
+export async function getLenderBySlug(slug: string): Promise<Lender | undefined> {
+  if (_lendersCache) return _lendersCache.find(l => l.slug === slug);
+  const r = await queryJsonRow<Lender>(
+    `SELECT data FROM lenders WHERE slug = ? AND ${LENDER_LIVE_FILTER}`,
+    [slug]
+  );
+  return r ? normalizeLender(r) : undefined;
 }
 
-export function getLendersByCategory(category: string): Lender[] {
-  return getAllLenders().filter(l => l.category === category || (l.subcategories ?? []).includes(category));
+export async function getLendersByCategory(category: string): Promise<Lender[]> {
+  if (_lendersCache) {
+    return _lendersCache.filter(l => l.category === category || (l.subcategories ?? []).includes(category));
+  }
+  const rows = await queryJsonRows<Lender>(
+    `SELECT data FROM lenders WHERE ${LENDER_LIVE_FILTER}
+     AND (json_extract(data, '$.category') = ?
+          OR EXISTS (SELECT 1 FROM json_each(json_extract(data, '$.subcategories')) WHERE value = ?))`,
+    [category, category]
+  );
+  return rows.map(normalizeLender);
 }
 
-export function getLendersByState(state: string): Lender[] {
-  const s = state.toLowerCase();
-  return getAllLenders().filter(l => {
-    const states = l.states_served ?? [];
-    return states.some(st => st.toLowerCase() === s) || states.includes('All 50 States');
-  });
+export async function getLendersByState(state: string): Promise<Lender[]> {
+  if (_lendersCache) {
+    const s = state.toLowerCase();
+    return _lendersCache.filter(l => {
+      const states = l.states_served ?? [];
+      return states.some(st => st.toLowerCase() === s) || states.includes('All 50 States');
+    });
+  }
+  const rows = await queryJsonRows<Lender>(
+    `SELECT data FROM lenders WHERE ${LENDER_LIVE_FILTER}
+     AND (EXISTS (SELECT 1 FROM json_each(json_extract(data, '$.states_served')) WHERE LOWER(value) = LOWER(?))
+          OR EXISTS (SELECT 1 FROM json_each(json_extract(data, '$.states_served')) WHERE value = 'All 50 States'))`,
+    [state]
+  );
+  return rows.map(normalizeLender);
 }
 
-export function getLendersByCity(city: string): Lender[] {
-  const c = city.toLowerCase();
-  return getAllLenders().filter(l => {
-    const cities = l.cities_served ?? [];
-    const states = l.states_served ?? [];
-    return cities.some(ct => ct.toLowerCase() === c) || states.includes('All 50 States');
-  });
+export async function getLendersByCity(city: string): Promise<Lender[]> {
+  if (_lendersCache) {
+    const c = city.toLowerCase();
+    return _lendersCache.filter(l => {
+      const cities = l.cities_served ?? [];
+      const states = l.states_served ?? [];
+      return cities.some(ct => ct.toLowerCase() === c) || states.includes('All 50 States');
+    });
+  }
+  const rows = await queryJsonRows<Lender>(
+    `SELECT data FROM lenders WHERE ${LENDER_LIVE_FILTER}
+     AND (EXISTS (SELECT 1 FROM json_each(json_extract(data, '$.cities_served')) WHERE LOWER(value) = LOWER(?))
+          OR EXISTS (SELECT 1 FROM json_each(json_extract(data, '$.states_served')) WHERE value = 'All 50 States'))`,
+    [city]
+  );
+  return rows.map(normalizeLender);
 }
 
-export function getCategories(): Category[] {
-  const raw = fs.readFileSync(path.join(CONTENT_DIR, 'categories.json'), 'utf-8');
-  const categories = JSON.parse(raw) as Category[];
-  // Compute count dynamically so homepage matches the real /categories/<slug>/ listing.
-  // Stored count in categories.json is legacy hand-curated and out of sync with the lenders export.
-  const lenders = getAllLenders();
-  return categories.map(c => ({
+// === Categories (DB-backed, count derived from lenders) ===
+
+let _categoriesCache: Category[] | null = null;
+
+export async function getCategories(): Promise<Category[]> {
+  if (_categoriesCache) return _categoriesCache;
+  const rawCategories = await queryJsonRows<Category>("SELECT data FROM categories");
+  // Count via SQL aggregation, not by pulling all 20K lenders.
+  const countRows = await queryRows(
+    `SELECT json_extract(data, '$.category') AS cat, COUNT(*) AS n
+     FROM lenders WHERE ${LENDER_LIVE_FILTER}
+     GROUP BY cat`
+  );
+  const subcatRows = await queryRows(
+    `SELECT je.value AS cat, COUNT(*) AS n
+     FROM lenders, json_each(json_extract(lenders.data, '$.subcategories')) AS je
+     WHERE ${LENDER_LIVE_FILTER}
+     GROUP BY je.value`
+  );
+  const countMap = new Map<string, number>();
+  for (const r of countRows) countMap.set(String(r.cat), Number(r.n));
+  for (const r of subcatRows) {
+    const k = String(r.cat);
+    countMap.set(k, (countMap.get(k) ?? 0) + Number(r.n));
+  }
+  _categoriesCache = rawCategories.map(c => ({
     ...c,
-    count: lenders.filter(l => l.category === c.slug || (l.subcategories ?? []).includes(c.slug)).length,
+    count: countMap.get(c.slug) ?? 0,
   }));
+  return _categoriesCache;
 }
 
-export function getComparisons(): Comparison[] {
-  const raw = fs.readFileSync(path.join(CONTENT_DIR, 'comparisons.json'), 'utf-8');
-  return JSON.parse(raw) as Comparison[];
+// === Comparisons (DB-backed) ===
+
+let _comparisonsCache: Comparison[] | null = null;
+
+export async function getComparisons(): Promise<Comparison[]> {
+  if (_comparisonsCache) return _comparisonsCache;
+  _comparisonsCache = await queryJsonRows<Comparison>("SELECT data FROM comparisons");
+  return _comparisonsCache;
 }
 
-export function getComparisonBySlug(slug: string): Comparison | undefined {
-  return getComparisons().find(c => c.slug === slug);
+export async function getComparisonBySlug(slug: string): Promise<Comparison | undefined> {
+  if (_comparisonsCache) return _comparisonsCache.find(c => c.slug === slug);
+  const r = await queryJsonRow<Comparison>("SELECT data FROM comparisons WHERE slug = ?", [slug]);
+  return r ?? undefined;
 }
 
-export function getListicles(): Listicle[] {
-  const raw = fs.readFileSync(path.join(CONTENT_DIR, 'listicles.json'), 'utf-8');
-  return JSON.parse(raw) as Listicle[];
+// === Listicles (DB-backed) ===
+
+let _listiclesCache: Listicle[] | null = null;
+
+export async function getListicles(): Promise<Listicle[]> {
+  if (_listiclesCache) return _listiclesCache;
+  _listiclesCache = await queryJsonRows<Listicle>("SELECT data FROM listicles");
+  return _listiclesCache;
 }
 
-export function getListicleBySlug(slug: string): Listicle | undefined {
-  return getListicles().find(l => l.slug === slug);
+export async function getListicleBySlug(slug: string): Promise<Listicle | undefined> {
+  if (_listiclesCache) return _listiclesCache.find(l => l.slug === slug);
+  const r = await queryJsonRow<Listicle>("SELECT data FROM listicles WHERE slug = ?", [slug]);
+  return r ?? undefined;
 }
+
+// === Specials (JSON-only — no DB table) ===
 
 export function getSpecials(): Special[] {
-  const raw = fs.readFileSync(path.join(CONTENT_DIR, 'specials.json'), 'utf-8');
-  return JSON.parse(raw) as Special[];
+  const p = path.join(CONTENT_DIR, 'specials.json');
+  if (!fs.existsSync(p)) return [];
+  return JSON.parse(fs.readFileSync(p, 'utf-8')) as Special[];
 }
 
-export function getWellnessGuides(): WellnessGuide[] {
-  const raw = fs.readFileSync(path.join(CONTENT_DIR, 'wellness-guides.json'), 'utf-8');
-  return JSON.parse(raw) as WellnessGuide[];
+// === Wellness guides (DB-backed) ===
+
+let _wellnessCache: WellnessGuide[] | null = null;
+
+export async function getWellnessGuides(): Promise<WellnessGuide[]> {
+  if (_wellnessCache) return _wellnessCache;
+  _wellnessCache = await queryJsonRows<WellnessGuide>("SELECT data FROM wellness_guides");
+  return _wellnessCache;
 }
 
-export function getWellnessGuideBySlug(slug: string): WellnessGuide | undefined {
-  return getWellnessGuides().find(g => g.slug === slug);
+export async function getWellnessGuideBySlug(slug: string): Promise<WellnessGuide | undefined> {
+  if (_wellnessCache) return _wellnessCache.find(g => g.slug === slug);
+  const r = await queryJsonRow<WellnessGuide>("SELECT data FROM wellness_guides WHERE slug = ?", [slug]);
+  return r ?? undefined;
 }
 
-export function getWellnessGuidesByCategory(category: string): WellnessGuide[] {
-  return getWellnessGuides().filter(g => g.category === category);
+export async function getWellnessGuidesByCategory(category: string): Promise<WellnessGuide[]> {
+  const all = await getWellnessGuides();
+  return all.filter(g => g.category === category);
 }
+
+// === Pure helpers (sync) ===
 
 export function getBbbClass(rating: string): string {
   if (rating === 'A+') return 'bbb-a-plus';
@@ -330,9 +408,11 @@ export function generateDiagnosis(lender: Lender): string {
   return `Ideal for ${bestFor}. Strength: ${topPro}. Watch out for: ${topCon}.`;
 }
 
-export function getAllStates(): string[] {
+// === Geography aggregations (derived from lenders, async) ===
+
+export async function getAllStates(): Promise<string[]> {
   const states = new Set<string>();
-  for (const l of getAllLenders()) {
+  for (const l of await getAllLenders()) {
     for (const s of l.states_served) {
       if (s !== 'All 50 States') states.add(s);
     }
@@ -340,9 +420,9 @@ export function getAllStates(): string[] {
   return Array.from(states).sort();
 }
 
-export function getAllCities(): string[] {
+export async function getAllCities(): Promise<string[]> {
   const cities = new Set<string>();
-  for (const l of getAllLenders()) {
+  for (const l of await getAllLenders()) {
     for (const c of l.cities_served) {
       cities.add(c);
     }
@@ -358,9 +438,9 @@ export interface CityInfo {
   count: number;
 }
 
-export function getCitiesWithLenders(minCount: number = 5): CityInfo[] {
+export async function getCitiesWithLenders(minCount: number = 5): Promise<CityInfo[]> {
   const cityMap = new Map<string, { city: string; state: string; count: number }>();
-  for (const l of getAllLenders()) {
+  for (const l of await getAllLenders()) {
     const city = l.company_info.city;
     const state = l.company_info.state;
     if (!city || !state) continue;
@@ -394,8 +474,9 @@ export function getCitiesWithLenders(minCount: number = 5): CityInfo[] {
     .sort((a, b) => b.count - a.count);
 }
 
-export function getLendersByCityState(city: string, stateAbbr: string): Lender[] {
-  return getAllLenders().filter(l =>
+export async function getLendersByCityState(city: string, stateAbbr: string): Promise<Lender[]> {
+  const all = await getAllLenders();
+  return all.filter(l =>
     l.company_info.city === city && l.company_info.state === stateAbbr
   );
 }
@@ -434,9 +515,9 @@ export interface StateInfo {
   topCities: string[];
 }
 
-export function getStatesWithLenders(minCount: number = 1): StateInfo[] {
+export async function getStatesWithLenders(minCount: number = 1): Promise<StateInfo[]> {
   const stateMap = new Map<string, { count: number; cities: Set<string> }>();
-  for (const l of getAllLenders()) {
+  for (const l of await getAllLenders()) {
     const abbr = l.company_info.state;
     if (!abbr) continue;
     if (!stateMap.has(abbr)) stateMap.set(abbr, { count: 0, cities: new Set() });
@@ -466,9 +547,12 @@ export function getStatesWithLenders(minCount: number = 1): StateInfo[] {
     .sort((a, b) => b.lenderCount - a.lenderCount);
 }
 
-export function getLendersInState(stateAbbr: string): Lender[] {
-  return getAllLenders().filter(l => l.company_info.state === stateAbbr);
+export async function getLendersInState(stateAbbr: string): Promise<Lender[]> {
+  const all = await getAllLenders();
+  return all.filter(l => l.company_info.state === stateAbbr);
 }
+
+// === States data (JSON-only — no DB table) ===
 
 export function getStateData(): Record<string, any> {
   const dataPath = path.join(process.cwd(), 'src/content/states.json');
@@ -476,7 +560,6 @@ export function getStateData(): Record<string, any> {
   return JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
 }
 
-/** Returns all 50 states from states.json — no lender-count dependency */
 export function getAllStatesInfo(): { name: string; abbr: string; slug: string }[] {
   const data = getStateData();
   return Object.entries(data).map(([abbr, info]: [string, any]) => ({
@@ -486,7 +569,7 @@ export function getAllStatesInfo(): { name: string; abbr: string; slug: string }
   }));
 }
 
-// --- Glossary Terms ---
+// === Glossary terms (JSON-only — no DB table) ===
 
 export interface GlossaryTerm {
   slug: string;
@@ -510,7 +593,7 @@ export function getGlossaryTermsForContext(contexts: string[]): GlossaryTerm[] {
   );
 }
 
-// --- Brand / Chain helpers (Stage 2 chain-differentiation plan) ---
+// === Brands (JSON-only — no DB table) ===
 
 export interface BrandFAQ {
   q: string;
@@ -534,31 +617,31 @@ const BRANDS_DIR = path.join(process.cwd(), 'src/content/brands');
 
 let _brandsCache: BrandInfo[] | null = null;
 
-export function getAllBrands(): BrandInfo[] {
+export async function getAllBrands(): Promise<BrandInfo[]> {
   if (_brandsCache) return _brandsCache;
   if (!fs.existsSync(BRANDS_DIR)) {
     _brandsCache = [];
     return _brandsCache;
   }
   const files = fs.readdirSync(BRANDS_DIR).filter(f => f.endsWith('.json'));
-  const lenders = getAllLenders();
+  const lenders = await getAllLenders();
   _brandsCache = files.map(f => {
     const raw = fs.readFileSync(path.join(BRANDS_DIR, f), 'utf-8');
     const brand = JSON.parse(raw) as BrandInfo;
-    // Compute location_count from lenders at read time
     brand.location_count = lenders.filter(l => l.brand_slug === brand.slug).length;
     return brand;
   });
   return _brandsCache;
 }
 
-export function getBrandInfo(slug: string): BrandInfo | null {
-  const brands = getAllBrands();
+export async function getBrandInfo(slug: string): Promise<BrandInfo | null> {
+  const brands = await getAllBrands();
   return brands.find(b => b.slug === slug) ?? null;
 }
 
-export function getLendersByBrand(slug: string): Lender[] {
-  return getAllLenders().filter(l => l.brand_slug === slug);
+export async function getLendersByBrand(slug: string): Promise<Lender[]> {
+  const all = await getAllLenders();
+  return all.filter(l => l.brand_slug === slug);
 }
 
 export const TOP_CITIES: { city: string; state: string; lat: number; lng: number }[] = [
@@ -589,7 +672,7 @@ export const TOP_CITIES: { city: string; state: string; lat: number; lng: number
   { city: 'Memphis', state: 'Tennessee', lat: 35.1495, lng: -90.0490 },
 ];
 
-// --- Blog Posts ---
+// === Blog posts (DB-backed, status-filtered) ===
 
 export interface BlogPost {
   slug: string;
@@ -611,31 +694,34 @@ export interface BlogPost {
   tags: string[];
 }
 
-export function getBlogPosts(): BlogPost[] {
-  const raw = fs.readFileSync(path.join(CONTENT_DIR, 'blog-posts.json'), 'utf-8');
-  const all = JSON.parse(raw) as BlogPost[];
-  return all.filter(p => p.status === 'published');
+let _publishedBlogCache: BlogPost[] | null = null;
+let _allBlogCache: BlogPost[] | null = null;
+
+export async function getBlogPosts(): Promise<BlogPost[]> {
+  if (_publishedBlogCache) return _publishedBlogCache;
+  _publishedBlogCache = await queryJsonRows<BlogPost>(
+    "SELECT data FROM blog_posts WHERE status = 'published'"
+  );
+  return _publishedBlogCache;
 }
 
-export function getAllBlogPosts(): BlogPost[] {
-  const raw = fs.readFileSync(path.join(CONTENT_DIR, 'blog-posts.json'), 'utf-8');
-  return JSON.parse(raw) as BlogPost[];
+export async function getAllBlogPosts(): Promise<BlogPost[]> {
+  if (_allBlogCache) return _allBlogCache;
+  _allBlogCache = await queryJsonRows<BlogPost>("SELECT data FROM blog_posts");
+  return _allBlogCache;
 }
 
-export function getBlogPostBySlug(slug: string): BlogPost | undefined {
-  return getBlogPosts().find(p => p.slug === slug);
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
+  const all = await getBlogPosts();
+  return all.find(p => p.slug === slug);
 }
 
-export function getBlogPostsByCategory(category: string): BlogPost[] {
-  return getBlogPosts().filter(p => p.category === category);
+export async function getBlogPostsByCategory(category: string): Promise<BlogPost[]> {
+  const all = await getBlogPosts();
+  return all.filter(p => p.category === category);
 }
 
-// --- Cluster Answers (Apr 15 2026 — cluster content plan) ---
-// Source of truth: cluster_answers table in creditdoc.db
-// Exported to src/content/answers/{slug}.json by CreditDocDB.export_cluster_answers_to_json()
-// Only status='published' rows are exported.
-
-const ANSWERS_DIR = path.join(process.cwd(), 'src/content/answers');
+// === Cluster answers (DB-backed) ===
 
 export type ClusterPillar =
   | 'credit-score'
@@ -705,75 +791,74 @@ export interface ClusterAnswer {
 
 let _clusterAnswersCache: ClusterAnswer[] | null = null;
 
-export function getClusterAnswers(): ClusterAnswer[] {
+export async function getClusterAnswers(): Promise<ClusterAnswer[]> {
   if (_clusterAnswersCache) return _clusterAnswersCache;
-  if (!fs.existsSync(ANSWERS_DIR)) {
-    _clusterAnswersCache = [];
-    return _clusterAnswersCache;
-  }
-  const files = fs.readdirSync(ANSWERS_DIR).filter(f => f.endsWith('.json'));
-  _clusterAnswersCache = files.map(f => {
-    const raw = fs.readFileSync(path.join(ANSWERS_DIR, f), 'utf-8');
-    return JSON.parse(raw) as ClusterAnswer;
-  });
+  _clusterAnswersCache = await queryJsonRows<ClusterAnswer>(
+    "SELECT data FROM cluster_answers WHERE status = 'published'"
+  );
   return _clusterAnswersCache;
 }
 
-export function getClusterAnswerBySlug(slug: string): ClusterAnswer | undefined {
-  return getClusterAnswers().find(a => a.slug === slug);
+export async function getClusterAnswerBySlug(slug: string): Promise<ClusterAnswer | undefined> {
+  const all = await getClusterAnswers();
+  return all.find(a => a.slug === slug);
 }
 
-export function getClusterAnswersByPillar(pillar: ClusterPillar): ClusterAnswer[] {
-  return getClusterAnswers().filter(a => a.cluster_pillar === pillar);
+export async function getClusterAnswersByPillar(pillar: ClusterPillar): Promise<ClusterAnswer[]> {
+  const all = await getClusterAnswers();
+  return all.filter(a => a.cluster_pillar === pillar);
 }
 
-export function getClusterAnswersByCluster(cluster_id: string): ClusterAnswer[] {
-  return getClusterAnswers().filter(a => a.cluster_id === cluster_id);
+export async function getClusterAnswersByCluster(cluster_id: string): Promise<ClusterAnswer[]> {
+  const all = await getClusterAnswers();
+  return all.filter(a => a.cluster_id === cluster_id);
 }
 
-export function getSiblingClusterAnswers(slug: string, limit: number = 4): ClusterAnswer[] {
-  const self = getClusterAnswerBySlug(slug);
+export async function getSiblingClusterAnswers(slug: string, limit: number = 4): Promise<ClusterAnswer[]> {
+  const self = await getClusterAnswerBySlug(slug);
   if (!self) return [];
-  return getClusterAnswers()
+  const all = await getClusterAnswers();
+  return all
     .filter(a => a.slug !== slug && a.cluster_pillar === self.cluster_pillar)
     .slice(0, limit);
 }
 
-// --- Education Search Data ---
+// === Education search composite ===
 
-export function getEducationSearchData() {
-  const guides = getWellnessGuides().map(g => ({
-    slug: g.slug,
-    title: g.title,
-    description: g.description,
-    category: g.category,
-    read_time: g.read_time,
-    type: 'guide' as const,
-    url: `/financial-wellness/${g.slug}/`,
-    key_takeaways: g.key_takeaways,
-  }));
+export async function getEducationSearchData() {
+  const [guides, posts] = await Promise.all([getWellnessGuides(), getBlogPosts()]);
+  const terms = getGlossaryTerms();
 
-  const terms = getGlossaryTerms().map(t => ({
-    slug: t.slug,
-    title: t.term,
-    description: t.plain_definition,
-    category: t.category,
-    full_form: t.full_form,
-    type: 'term' as const,
-    url: `/glossary/#${t.slug}`,
-  }));
-
-  const posts = getBlogPosts().map(p => ({
-    slug: p.slug,
-    title: p.title,
-    description: p.description,
-    category: p.category,
-    read_time: p.read_time,
-    tags: p.tags,
-    type: 'post' as const,
-    url: `/blog/${p.slug}/`,
-    key_takeaways: p.key_takeaways,
-  }));
-
-  return { guides, terms, posts };
+  return {
+    guides: guides.map(g => ({
+      slug: g.slug,
+      title: g.title,
+      description: g.description,
+      category: g.category,
+      read_time: g.read_time,
+      type: 'guide' as const,
+      url: `/financial-wellness/${g.slug}/`,
+      key_takeaways: g.key_takeaways,
+    })),
+    terms: terms.map(t => ({
+      slug: t.slug,
+      title: t.term,
+      description: t.plain_definition,
+      category: t.category,
+      full_form: t.full_form,
+      type: 'term' as const,
+      url: `/glossary/#${t.slug}`,
+    })),
+    posts: posts.map(p => ({
+      slug: p.slug,
+      title: p.title,
+      description: p.description,
+      category: p.category,
+      read_time: p.read_time,
+      tags: p.tags,
+      type: 'post' as const,
+      url: `/blog/${p.slug}/`,
+      key_takeaways: p.key_takeaways,
+    })),
+  };
 }

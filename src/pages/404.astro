@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCategories } from '../utils/data';
 
 const TARGET_SLUGS = ['credit-repair', 'personal-loans', 'debt-relief', 'credit-unions', 'banking', 'business-loans'];
-const allCategories = getCategories();
+const allCategories = await getCategories();
 const categories = TARGET_SLUGS
   .map(slug => allCategories.find(c => c.slug === slug))
   .filter(Boolean);

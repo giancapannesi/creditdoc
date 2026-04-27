@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import AffiliateInline from '../../components/AffiliateInline.astro';
@@ -6,21 +8,15 @@ import { getWellnessGuides, getWellnessGuideBySlug, getWellnessGuidesByCategory,
 import { createLinker } from '../../utils/inline-linker';
 import type { WellnessGuide } from '../../utils/data';
 
-export function getStaticPaths() {
-  const guides = getWellnessGuides();
-  return guides.map(guide => ({
-    params: { slug: guide.slug },
-  }));
-}
 
 const { slug } = Astro.params;
-const guide = getWellnessGuideBySlug(slug!)!;
+const guide = await getWellnessGuideBySlug(slug!);
+if (!guide) return new Response('Not found', { status: 404 });
 
-const relatedGuides = guide.related_guides
-  .map(s => getWellnessGuideBySlug(s))
+const relatedGuides = (await Promise.all(guide.related_guides.map(s => getWellnessGuideBySlug(s))))
   .filter((g): g is WellnessGuide => g !== undefined);
 
-const categories = getCategories();
+const categories = await getCategories();
 const relatedCategories = guide.related_categories
   .map(slug => categories.find(c => c.slug === slug))
   .filter((c): c is NonNullable<typeof c> => c !== undefined);
