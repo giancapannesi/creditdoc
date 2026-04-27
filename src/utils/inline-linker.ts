@@ -77,6 +77,20 @@ const MONEY_LINKS: MoneyLink[] = [
   { phrase: 'business funding', url: '/best/best-small-business-loans/', title: 'Best Small Business Loans' },
   { phrase: 'working capital loan', url: '/best/best-small-business-loans/', title: 'Best Small Business Loans' },
   { phrase: 'business loans', url: '/best/best-small-business-loans/', title: 'Best Small Business Loans' },
+  // 2026-04-27 P0.6 follow-up: fill remaining biz-loan keyword gaps from
+  // BUSINESS_LOANS_CONTENT_PIPELINE_PLAN.md Phase B. Lifts inbound coverage
+  // on 9 orphan biz-loan money pages across all /answers/ + /review/* text.
+  { phrase: 'business loan', url: '/best/best-small-business-loans/', title: 'Best Small Business Loans' },
+  { phrase: 'commercial loan', url: '/best/best-small-business-loans/', title: 'Best Small Business Loans' },
+  { phrase: 'SBA 7(a) loan', url: '/best/best-sba-loans/', title: 'Best SBA Loans' },
+  { phrase: 'SBA 7a loan', url: '/best/best-sba-loans/', title: 'Best SBA Loans' },
+  { phrase: 'MCA', url: '/best/best-merchant-cash-advance/', title: 'Best Merchant Cash Advance' },
+  { phrase: 'equipment loan', url: '/best/best-equipment-financing/', title: 'Best Equipment Financing' },
+  { phrase: 'startup funding', url: '/best/best-startup-business-loans/', title: 'Best Startup Business Loans' },
+  { phrase: 'startup loan', url: '/best/best-startup-business-loans/', title: 'Best Startup Business Loans' },
+  { phrase: 'bad credit business loan', url: '/best/best-bad-credit-business-loans/', title: 'Best Bad Credit Business Loans' },
+  { phrase: 'accounts receivable financing', url: '/best/best-invoice-factoring/', title: 'Best Invoice Factoring' },
+  { phrase: 'working capital', url: '/best/best-business-lines-of-credit/', title: 'Best Business Lines of Credit' },
   // 2026-04-21: widen coverage for non-credit-repair verticals — pawn, bankruptcy,
   // mortgages, emergency-cash (title/payday), check-cashing, banking, credit unions,
   // auto finance. Fires inline links on the 117 Tier A Places-enriched profiles and
