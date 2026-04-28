@@ -6,10 +6,10 @@ import CategoryCard from '../components/CategoryCard.astro';
 import LenderNameSearch from '../components/LenderNameSearch.astro';
 import { getAllLenders, getCategories, getSpecials, getWellnessGuides, formatPrice } from '../utils/data';
 
-const lenders = await getAllLenders();
-const categories = await getCategories();
+const lenders = getAllLenders();
+const categories = getCategories();
 const specials = getSpecials().slice(0, 3);
-const wellnessGuides = (await getWellnessGuides()).slice(0, 3);
+const wellnessGuides = getWellnessGuides().slice(0, 3);
 
 // Top Picks: STRICT quality gate — only the best profiles belong on the front page.
 // Rules:

@@ -1,13 +1,21 @@
 ---
-export const prerender = false;
-
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../../components/GlossaryAppendix.astro';
 import { getAllStatesInfo, getStatesWithLenders, getStateData, getLendersInState, getGlossaryTermsForContext } from '../../../utils/data';
 
+export function getStaticPaths() {
+  const states = getAllStatesInfo();
+  const stateData = getStateData();
+  return states
+    .filter(s => stateData[s.abbr]?.credit_repair_laws)
+    .map(s => ({
+      params: { slug: s.slug },
+      props: { stateInfo: s, data: stateData[s.abbr] },
+    }));
+}
 
 const { stateInfo, data } = Astro.props;
-const lenders = await getLendersInState(stateInfo.abbr);
+const lenders = getLendersInState(stateInfo.abbr);
 const creditRepairLenders = lenders.filter(l => l.category === 'credit-repair' || l.category === 'credit-counseling');
 
 const cr = data.credit_repair_laws || {};
@@ -416,7 +424,7 @@ const psc = paydayStatusColor(data.payday_loan_status || '');
         <div class="glass-card p-5" style="pointer-events: none;">
           <h3 class="font-bold text-text mb-3">Other State Laws</h3>
           <div class="flex flex-wrap gap-1.5">
-            {(await getStatesWithLenders(10)).filter(s => s.abbr !== stateInfo.abbr).slice(0, 12).map(s => (
+            {getStatesWithLenders(10).filter(s => s.abbr !== stateInfo.abbr).slice(0, 12).map(s => (
               <a href={`/state/${s.slug}/lending-laws/`} class="text-xs px-2.5 py-1 rounded-full border border-border text-muted hover:text-primary hover:border-primary transition-colors" style="pointer-events: auto;">
                 {s.abbr}
               </a>

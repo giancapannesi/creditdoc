@@ -1,7 +1,7 @@
 ---
 import { getCategories } from '../utils/data';
 
-const categories = await getCategories();
+const categories = getCategories();
 const currentPath = Astro.url.pathname;
 
 /* Group categories by section for the dropdown */

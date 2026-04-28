@@ -2,10 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCategories, getLendersByCategory, getWellnessGuides, getComparisons, getCitiesWithLenders } from '../utils/data';
 
-const categories = await getCategories();
-const guides = await getWellnessGuides();
-const comparisons = await getComparisons();
-const cityPages = await getCitiesWithLenders(5);
+const categories = getCategories();
+const guides = getWellnessGuides();
+const comparisons = getComparisons();
+const cityPages = getCitiesWithLenders(5);
 
 // Group guides by category
 const guidesByCategory: Record<string, typeof guides> = {};
@@ -15,11 +15,11 @@ for (const g of guides) {
 }
 
 // Top lenders per category (top 10 by rating)
-const categoryData = await Promise.all(categories.map(async cat => {
-  const lenders = await getLendersByCategory(cat.slug);
+const categoryData = categories.map(cat => {
+  const lenders = getLendersByCategory(cat.slug);
   const top = [...lenders].sort((a, b) => b.rating - a.rating).slice(0, 10);
   return { category: cat, lenders, top };
-}));
+});
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -59,10 +59,10 @@ const jsonLd = {
       <div>
         <h2 class="text-lg font-bold text-text mb-3">Categories</h2>
         <ul class="space-y-1.5 text-sm">
-          {categoryData.map(({ category: cat, lenders }) => (
+          {categories.map(cat => (
             <li>
               <a href={`/categories/${cat.slug}/`} class="text-primary hover:underline">{cat.name}</a>
-              <span class="text-muted text-xs ml-1">({lenders.length})</span>
+              <span class="text-muted text-xs ml-1">({getLendersByCategory(cat.slug).length})</span>
             </li>
           ))}
         </ul>

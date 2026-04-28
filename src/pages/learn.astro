@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getEducationSearchData } from '../utils/data';
 
-const searchData = await getEducationSearchData();
+const searchData = getEducationSearchData();
 const totalCount = searchData.guides.length + searchData.terms.length + searchData.posts.length;
 
 const jsonLd = {

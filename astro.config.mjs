@@ -2,41 +2,10 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://www.creditdoc.co',
   output: 'static',
-  adapter: vercel({
-    isr: {
-      expiration: 60 * 60 * 24, // 24h default; per-route can override via headers
-    },
-    // Bundle the slim SQLite + better-sqlite3 native module into the serverless
-    // function so SSR routes can read in-process (no network round-trips).
-    // node-file-trace can't follow createRequire(), so we add them explicitly.
-    includeFiles: [
-      './data/creditdoc-slim.db',
-      './node_modules/better-sqlite3/build/Release/better_sqlite3.node',
-      './node_modules/better-sqlite3/lib/index.js',
-      './node_modules/better-sqlite3/lib/database.js',
-      './node_modules/better-sqlite3/lib/sqlite-error.js',
-      './node_modules/better-sqlite3/lib/util.js',
-      './node_modules/better-sqlite3/lib/methods/aggregate.js',
-      './node_modules/better-sqlite3/lib/methods/backup.js',
-      './node_modules/better-sqlite3/lib/methods/function.js',
-      './node_modules/better-sqlite3/lib/methods/inspect.js',
-      './node_modules/better-sqlite3/lib/methods/pragma.js',
-      './node_modules/better-sqlite3/lib/methods/serialize.js',
-      './node_modules/better-sqlite3/lib/methods/table.js',
-      './node_modules/better-sqlite3/lib/methods/transaction.js',
-      './node_modules/better-sqlite3/lib/methods/wrappers.js',
-      './node_modules/better-sqlite3/package.json',
-      './node_modules/bindings/bindings.js',
-      './node_modules/bindings/package.json',
-      './node_modules/file-uri-to-path/index.js',
-      './node_modules/file-uri-to-path/package.json',
-    ],
-  }),
   build: {
     format: 'directory',
   },

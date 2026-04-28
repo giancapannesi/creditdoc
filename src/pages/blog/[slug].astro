@@ -1,6 +1,4 @@
 ---
-export const prerender = false;
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import AffiliateSidebar from '../../components/AffiliateSidebar.astro';
@@ -9,19 +7,25 @@ import AffiliateGeoFilter from '../../components/AffiliateGeoFilter.astro';
 import { getBlogPosts, getBlogPostBySlug, getBlogPostsByCategory, getCategories, getListicles, getWellnessGuideBySlug, getGlossaryTermsForContext } from '../../utils/data';
 import type { BlogPost } from '../../utils/data';
 
+export function getStaticPaths() {
+  const posts = getBlogPosts();
+  return posts.map(post => ({
+    params: { slug: post.slug },
+  }));
+}
 
 const { slug } = Astro.params;
-const post = await getBlogPostBySlug(slug!);
-if (!post) return new Response('Not found', { status: 404 });
+const post = getBlogPostBySlug(slug!)!;
 
-const relatedPosts = (await getBlogPostsByCategory(post.category))
+const relatedPosts = getBlogPostsByCategory(post.category)
   .filter(p => p.slug !== post.slug)
   .slice(0, 3);
 
-const relatedGuides = (await Promise.all(post.related_guides.map(s => getWellnessGuideBySlug(s))))
+const relatedGuides = post.related_guides
+  .map(s => getWellnessGuideBySlug(s))
   .filter((g): g is NonNullable<typeof g> => g !== undefined);
 
-const categories = await getCategories();
+const categories = getCategories();
 const relatedCategories = post.related_categories
   .map(slug => categories.find(c => c.slug === slug))
   .filter((c): c is NonNullable<typeof c> => c !== undefined);
@@ -40,7 +44,7 @@ const blogCategoryToListicleCategory: Record<string, string[]> = {
   'emergency-cash': ['payday-alternatives', 'emergency-cash'],
 };
 const matchingListicleCategories = blogCategoryToListicleCategory[post.category] || [];
-const relatedListicles = (await getListicles())
+const relatedListicles = getListicles()
   .filter(l => matchingListicleCategories.includes(l.category))
   .slice(0, 3);
 

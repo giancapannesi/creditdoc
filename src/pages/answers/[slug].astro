@@ -1,6 +1,4 @@
 ---
-export const prerender = false;
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AffiliateInline from '../../components/AffiliateInline.astro';
 import AffiliateSidebar from '../../components/AffiliateSidebar.astro';
@@ -12,11 +10,16 @@ import {
   getGlossaryTermsForContext,
 } from '../../utils/data';
 
+export function getStaticPaths() {
+  const answers = getClusterAnswers();
+  return answers.map(a => ({
+    params: { slug: a.slug },
+  }));
+}
 
 const { slug } = Astro.params;
-const answer = await getClusterAnswerBySlug(slug!);
-if (!answer) return new Response('Not found', { status: 404 });
-const siblings = await getSiblingClusterAnswers(slug!, 4);
+const answer = getClusterAnswerBySlug(slug!)!;
+const siblings = getSiblingClusterAnswers(slug!, 4);
 
 // Glossary context feeds the inline linker.
 const glossaryTerms = getGlossaryTermsForContext([

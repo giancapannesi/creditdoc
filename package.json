@@ -6,18 +6,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "rebuild-slim-db": "./scripts/build_slim_db.sh",
-    "build:full": "./scripts/build_slim_db.sh && astro build"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
-    "@astrojs/vercel": "^9.0.5",
     "@fontsource/inter": "^5.2.8",
-    "@libsql/client": "^0.17.3",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.17.1",
-    "better-sqlite3": "^12.9.0",
     "tailwindcss": "^4.2.1"
   }
 }

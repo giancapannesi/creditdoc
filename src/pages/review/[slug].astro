@@ -1,6 +1,4 @@
 ---
-export const prerender = false;
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RatingStars from '../../components/RatingStars.astro';
 import ProsCons from '../../components/ProsCons.astro';
@@ -26,17 +24,23 @@ const STATE_ABBR: Record<string, string> = {
   'District of Columbia':'DC'
 };
 
+export function getStaticPaths() {
+  const lenders = getAllLenders();
+  return lenders.map(lender => ({
+    params: { slug: lender.slug },
+  }));
+}
 
 const { slug } = Astro.params;
-const lender = await getLenderBySlug(slug!);
-if (!lender) return new Response('Not found', { status: 404 });
+const lender = getLenderBySlug(slug!)!;
 
-const allLenders = await getAllLenders();
-const similarLenders = (await Promise.all(lender.similar_lenders.map(s => getLenderBySlug(s))))
+const allLenders = getAllLenders();
+const similarLenders = lender.similar_lenders
+  .map(s => getLenderBySlug(s))
   .filter((l): l is Lender => l !== undefined)
   .slice(0, 3);
 
-const categories = await getCategories();
+const categories = getCategories();
 const category = categories.find(c => c.slug === lender.category);
 
 // Fallback chain: similar → nearby → same category → same state
@@ -79,7 +83,7 @@ const categoryGuideMap: Record<string, string> = {
   'buy-here-pay-here': 'loans-and-interest',
 };
 const guideCategory = categoryGuideMap[lender.category] || 'understanding-credit';
-const relatedWellnessGuides = (await getWellnessGuidesByCategory(guideCategory)).slice(0, 3);
+const relatedWellnessGuides = getWellnessGuidesByCategory(guideCategory).slice(0, 3);
 
 // Map lender category to glossary contexts
 const glossaryContextMap: Record<string, string[]> = {
@@ -109,14 +113,8 @@ const linkedParagraphs = lender.description_long
   ? linkifyDescription(lender.description_long, glossaryTerms, lender.slug, affiliateConfig, lender.category)
   : [];
 
-const comparisons = (await getComparisons()).filter(
+const comparisons = getComparisons().filter(
   c => c.lender_a === lender.slug || c.lender_b === lender.slug
-);
-const comparisonsWithOther = await Promise.all(
-  comparisons.map(async comp => {
-    const otherSlug = comp.lender_a === lender.slug ? comp.lender_b : comp.lender_a;
-    return { comp, otherSlug, otherLender: await getLenderBySlug(otherSlug) };
-  })
 );
 
 const diagnosis = generateDiagnosis(lender);
@@ -375,7 +373,7 @@ const jsonLd = [
 const canonicalUrl = `https://www.creditdoc.co/review/${lender.slug}/`;
 
 // Brand/chain link — only present if lender belongs to an approved chain
-const brandInfo = lender.brand_slug ? await getBrandInfo(lender.brand_slug) : null;
+const brandInfo = lender.brand_slug ? getBrandInfo(lender.brand_slug) : null;
 
 // Per-entity OG image: prefer logo, fall through to default in BaseLayout
 const ogImageUrl = lender.logo_url?.trim()
@@ -1019,7 +1017,9 @@ const ogImageUrl = lender.logo_url?.trim()
     <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <h2 class="text-xl font-bold text-text mb-4">Compare {lender.name} With Others</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {comparisonsWithOther.map(({ comp, otherSlug, otherLender }) => {
+        {comparisons.map(comp => {
+          const otherSlug = comp.lender_a === lender.slug ? comp.lender_b : comp.lender_a;
+          const otherLender = getLenderBySlug(otherSlug);
           return (
             <a
               href={`/compare/${comp.slug}/`}

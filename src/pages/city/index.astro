@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCitiesWithLenders } from '../../utils/data';
 
-const cities = await getCitiesWithLenders(5);
+const cities = getCitiesWithLenders(5);
 const totalLenders = cities.reduce((sum, c) => sum + c.count, 0);
 
 // Group by state

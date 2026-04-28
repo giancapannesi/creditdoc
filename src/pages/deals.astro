@@ -3,12 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getSpecials, getLenderBySlug, getBbbClass } from '../utils/data';
 
 const specials = getSpecials();
-const specialsWithLenders = await Promise.all(
-  specials.map(async (special) => ({
-    special,
-    lender: await getLenderBySlug(special.lender_slug),
-  }))
-);
 ---
 
 <BaseLayout
@@ -37,7 +31,8 @@ const specialsWithLenders = await Promise.all(
   <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     {specials.length > 0 ? (
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {specialsWithLenders.map(({ special, lender }) => {
+        {specials.map(special => {
+          const lender = getLenderBySlug(special.lender_slug);
           const bbbCls = lender ? getBbbClass(lender.company_info.bbb_rating) : '';
           return (
             <div class="glass-card p-6 flex flex-col">

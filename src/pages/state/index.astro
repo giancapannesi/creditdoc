@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getStatesWithLenders, getStateData } from '../../utils/data';
 
-const states = await getStatesWithLenders(1);
+const states = getStatesWithLenders(1);
 const stateData = getStateData();
 const totalLenders = states.reduce((s, st) => s + st.lenderCount, 0);
 

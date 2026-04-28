@@ -1,20 +1,21 @@
 ---
-export const prerender = false;
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
 import { getCitiesWithLenders, getLendersByCityState, getCategories, getStateData } from '../../utils/data';
 import type { CityInfo, Lender } from '../../utils/data';
 
+export function getStaticPaths() {
+  const cities = getCitiesWithLenders(5);
+  const stateData = getStateData();
+  return cities.map(city => ({
+    params: { slug: city.slug },
+    props: { cityInfo: city, sd: stateData[city.stateAbbr] || null },
+  }));
+}
 
-const { slug } = Astro.params;
-const allCities = await getCitiesWithLenders(0);
-const cityInfo = allCities.find(c => c.slug === slug) as CityInfo | undefined;
-if (!cityInfo) return new Response('City not found', { status: 404 });
-const sd = getStateData()[cityInfo.stateAbbr] ?? {};
-
-const lenders = await getLendersByCityState(cityInfo.city, cityInfo.stateAbbr);
-const categories = await getCategories();
+const { cityInfo, sd } = Astro.props as { cityInfo: CityInfo; sd: any };
+const lenders = getLendersByCityState(cityInfo.city, cityInfo.stateAbbr);
+const categories = getCategories();
 
 // Group lenders by category
 const categoryGroups = new Map<string, Lender[]>();
@@ -294,7 +295,7 @@ const jsonLd = [
   <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     <h2 class="text-xl font-bold text-text mb-6">Browse Other Cities</h2>
     <div class="flex flex-wrap gap-2">
-      {(await getCitiesWithLenders(30)).filter(c => c.slug !== cityInfo.slug).slice(0, 24).map(city => (
+      {getCitiesWithLenders(30).filter(c => c.slug !== cityInfo.slug).slice(0, 24).map(city => (
         <a
           href={`/city/${city.slug}/`}
           class="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-sm text-text hover:border-primary/30 hover:bg-primary-light/20 transition-colors"
