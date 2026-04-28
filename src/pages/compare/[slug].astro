@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ComparisonTable from '../../components/ComparisonTable.astro';
 import DiagnosisCard from '../../components/DiagnosisCard.astro';
@@ -6,21 +8,15 @@ import RatingStars from '../../components/RatingStars.astro';
 import { getComparisons, getLenderBySlug, formatPrice, getBbbClass } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
-export function getStaticPaths() {
-  const comparisons = getComparisons();
-  return comparisons
-    .filter(comp => getLenderBySlug(comp.lender_a) && getLenderBySlug(comp.lender_b))
-    .map(comp => ({
-      params: { slug: comp.slug },
-    }));
-}
 
 const { slug } = Astro.params;
-const comparisons = getComparisons();
-const comparison = comparisons.find(c => c.slug === slug)!;
+const comparisons = await getComparisons();
+const comparison = comparisons.find(c => c.slug === slug);
+if (!comparison) return new Response('Not found', { status: 404 });
 
-const lenderA = getLenderBySlug(comparison.lender_a)!;
-const lenderB = getLenderBySlug(comparison.lender_b)!;
+const lenderA = await getLenderBySlug(comparison.lender_a);
+const lenderB = await getLenderBySlug(comparison.lender_b);
+if (!lenderA || !lenderB) return new Response('Comparison data missing', { status: 404 });
 
 const winnerLender = comparison.winner === comparison.lender_a ? lenderA : lenderB;
 

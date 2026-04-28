@@ -23,3 +23,9 @@ tools/__pycache__/
 data/creditdoc.db
 data/creditdoc.db-wal
 data/creditdoc.db-shm
+
+# Architecture overhaul: archived JSONs (kept on disk, never shipped)
+.archived-content/
+
+# Slim DB rebuild temp files
+data/creditdoc-slim.db.tmp.*

@@ -2,8 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAllLenders, getCategories } from '../../utils/data';
 
-const categories = getCategories();
-const allLenders = getAllLenders();
+const categories = await getCategories();
+const allLenders = await getAllLenders();
 
 // Build recommendation data: top lenders per category (only enriched/quality ones)
 const categoryRecommendations: Record<string, { name: string; slug: string; rating: number; category: string; description: string; website_url: string; free_consultation: boolean; money_back: boolean }[]> = {};

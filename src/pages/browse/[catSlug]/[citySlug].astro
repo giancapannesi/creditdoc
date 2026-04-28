@@ -1,37 +1,25 @@
 ---
+export const prerender = false;
+
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import LenderCard from '../../../components/LenderCard.astro';
 import { getCitiesWithLenders, getLendersByCityState, getCategories, getStateData } from '../../../utils/data';
 import type { CityInfo, Lender, Category } from '../../../utils/data';
 
-export function getStaticPaths() {
-  const cities = getCitiesWithLenders(5);
-  const categories = getCategories();
-  const stateData = getStateData();
-  const paths: any[] = [];
 
-  for (const city of cities) {
-    const lenders = getLendersByCityState(city.city, city.stateAbbr);
-    for (const cat of categories) {
-      const catLenders = lenders.filter(l => l.category === cat.slug);
-      if (catLenders.length >= 5) {
-        paths.push({
-          params: { catSlug: cat.slug, citySlug: city.slug },
-          props: {
-            cityInfo: city,
-            category: cat,
-            lenders: catLenders,
-            sd: stateData[city.stateAbbr] || null,
-          },
-        });
-      }
-    }
-  }
+const { catSlug, citySlug } = Astro.params;
 
-  return paths;
-}
+const allCities = await getCitiesWithLenders(0);
+const cityInfo = allCities.find(c => c.slug === citySlug) as CityInfo | undefined;
+if (!cityInfo) return new Response('City not found', { status: 404 });
 
-const { cityInfo, category, lenders, sd } = Astro.props;
+const categories = await getCategories();
+const category = categories.find(c => c.slug === catSlug) as Category | undefined;
+if (!category) return new Response('Category not found', { status: 404 });
+
+const allInCity = await getLendersByCityState(cityInfo.city, cityInfo.stateAbbr);
+const lenders = allInCity.filter(l => l.category === catSlug || (l.subcategories ?? []).includes(catSlug!));
+const sd = getStateData()[cityInfo.stateAbbr] ?? {};
 
 // Sort lenders: rated first (by rating desc), then by name
 const sorted = [...lenders].sort((a, b) => {

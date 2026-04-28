@@ -2,10 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAllLenders, getStatesWithLenders, getStateData, getCitiesWithLenders } from '../../utils/data';
 
-const allLenders = getAllLenders();
-const states = getStatesWithLenders(1);
+const allLenders = await getAllLenders();
+const states = await getStatesWithLenders(1);
 const stateData = getStateData();
-const cities = getCitiesWithLenders(5);
+const cities = await getCitiesWithLenders(5);
 
 // Compute report statistics
 const totalLenders = allLenders.length;

@@ -1,32 +1,31 @@
 ---
+export const prerender = false;
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import { getAllStatesInfo, getStatesWithLenders, getLendersInState, getStateData, getCategories, getCitiesWithLenders, getGlossaryTermsForContext } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
-export function getStaticPaths() {
-  const allStates = getAllStatesInfo();
-  const statesWithLenders = getStatesWithLenders(1);
-  const stateData = getStateData();
 
-  // Build pages for ALL 50 states, enriching with lender counts where available
-  return allStates.map(s => {
-    const withLenders = statesWithLenders.find(sw => sw.abbr === s.abbr);
-    return {
-      params: { slug: s.slug },
-      props: {
-        stateInfo: withLenders || { ...s, lenderCount: 0, cityCount: 0 },
-        data: stateData[s.abbr] || null,
-      },
-    };
-  });
-}
+const { slug } = Astro.params;
+const allStates = getAllStatesInfo();
+const stateInfoBase = allStates.find(s => s.slug === slug);
+if (!stateInfoBase) return new Response('State not found', { status: 404 });
 
-const { stateInfo, data } = Astro.props;
-const lenders = getLendersInState(stateInfo.abbr);
-const categories = getCategories();
-const allCities = getCitiesWithLenders(5);
+const statesData = getStateData();
+const data = statesData[stateInfoBase.abbr];
+const statesWithCounts = await getStatesWithLenders(0);
+const stateCount = statesWithCounts.find(s => s.abbr === stateInfoBase.abbr);
+const stateInfo = {
+  ...stateInfoBase,
+  lenderCount: stateCount?.count ?? 0,
+  cityCount: stateCount?.cityCount ?? 0,
+};
+
+const lenders = await getLendersInState(stateInfo.abbr);
+const categories = await getCategories();
+const allCities = await getCitiesWithLenders(5);
 const stateCities = allCities.filter(c => c.stateAbbr === stateInfo.abbr);
 const glossaryTerms = getGlossaryTermsForContext(['state']);
 
@@ -376,7 +375,7 @@ const fmtCurrency = (n: number) => n ? '$' + n.toLocaleString('en-US') : 'N/A';
         <div class="glass-card p-5" style="pointer-events: none;">
           <h3 class="font-bold text-text mb-3">Other States</h3>
           <div class="flex flex-wrap gap-1.5">
-            {getStatesWithLenders(10).filter(s => s.abbr !== stateInfo.abbr).slice(0, 12).map(s => (
+            {(await getStatesWithLenders(10)).filter(s => s.abbr !== stateInfo.abbr).slice(0, 12).map(s => (
               <a href={`/state/${s.slug}/`} class="text-xs px-2.5 py-1 rounded-full border border-border text-muted hover:text-primary hover:border-primary transition-colors" style="pointer-events: auto;">
                 {s.abbr}
               </a>

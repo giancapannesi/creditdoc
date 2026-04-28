@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getWellnessGuides, getWellnessGuidesByCategory } from '../../utils/data';
 
-const guides = getWellnessGuides();
+const guides = await getWellnessGuides();
 
 const topicCategories = [
   {
@@ -97,8 +97,7 @@ const jsonLd = {
       <p class="mt-2 text-muted">Find guides organized by what you're trying to learn.</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {topicCategories.map(topic => {
-        const topicGuides = getWellnessGuidesByCategory(topic.slug);
+      {(await Promise.all(topicCategories.map(async topic => ({ topic, topicGuides: await getWellnessGuidesByCategory(topic.slug) })))).map(({ topic, topicGuides }) => {
         return (
           <div class="glass-card p-6">
             <div class="flex items-center gap-3 mb-4">

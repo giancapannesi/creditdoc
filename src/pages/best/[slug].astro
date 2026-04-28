@@ -1,22 +1,18 @@
 ---
+export const prerender = false;
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RatingStars from '../../components/RatingStars.astro';
 import { getListicles, getLenderBySlug, formatPrice, getBbbClass } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
-export function getStaticPaths() {
-  const listicles = getListicles();
-  return listicles.map(listicle => ({
-    params: { slug: listicle.slug },
-  }));
-}
 
 const { slug } = Astro.params;
-const listicles = getListicles();
-const listicle = listicles.find(l => l.slug === slug)!;
+const listicles = await getListicles();
+const listicle = listicles.find(l => l.slug === slug);
+if (!listicle) return new Response('Not found', { status: 404 });
 
-const rankedLenders = listicle.lenders
-  .map(s => getLenderBySlug(s))
+const rankedLenders = (await Promise.all(listicle.lenders.map(s => getLenderBySlug(s))))
   .filter((l): l is Lender => l !== undefined);
 
 const jsonLd = [

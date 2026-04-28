@@ -1,25 +1,21 @@
 ---
+export const prerender = false;
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
 import { getAllBrands, getLendersByBrand, getBrandInfo } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
-export function getStaticPaths() {
-  const brands = getAllBrands();
-  return brands.map(brand => ({
-    params: { brand: brand.slug },
-  }));
-}
 
 const { brand: brandSlug } = Astro.params;
-const brandInfo = getBrandInfo(brandSlug!);
+const brandInfo = await getBrandInfo(brandSlug!);
 
 // Safety: should never happen if getStaticPaths is correct
 if (!brandInfo) {
   return Astro.redirect('/404');
 }
 
-const lenders = getLendersByBrand(brandSlug!);
+const lenders = await getLendersByBrand(brandSlug!);
 const locationCount = lenders.length;
 
 // Group lenders by state
