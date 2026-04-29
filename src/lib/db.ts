@@ -289,6 +289,232 @@ export async function getBrandBySlugRuntime(
   return rows?.[0] ?? null;
 }
 
+// ============================================================================
+// CDM-REV Stage A.3 — states / categories / glossary_terms runtime fetchers
+// ============================================================================
+// Same pattern as A.2: PostgREST anon read, body_inline jsonb. Returns []/null
+// when env not wired so build-mode doesn't crash. Apply A.3 DDL + backfill
+// before pointing live SSR routes at these.
+
+export interface RuntimeState {
+  code: string;            // 'AL'
+  name: string;
+  abbr: string;
+  body_inline: Record<string, unknown> | null;
+  updated_at: string;
+}
+
+export async function getStateByCodeRuntime(
+  code: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeState | null> {
+  if (!code) return null;
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/states` +
+    `?code=eq.${encodeURIComponent(code.toUpperCase())}` +
+    `&select=code,name,abbr,body_inline,updated_at` +
+    `&limit=1`;
+  const rows = await _restGet<RuntimeState>(url, env);
+  return rows?.[0] ?? null;
+}
+
+export async function getAllStatesRuntime(
+  env?: RuntimeLenderEnv
+): Promise<RuntimeState[]> {
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/states` +
+    `?select=code,name,abbr,body_inline,updated_at` +
+    `&order=code.asc`;
+  const rows = await _restGet<RuntimeState>(url, env);
+  return rows ?? [];
+}
+
+export interface RuntimeCategory {
+  slug: string;
+  name: string;
+  body_inline: Record<string, unknown> | null;
+  updated_at: string;
+}
+
+export async function getAllCategoriesRuntime(
+  env?: RuntimeLenderEnv
+): Promise<RuntimeCategory[]> {
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/categories` +
+    `?select=slug,name,body_inline,updated_at` +
+    `&order=slug.asc`;
+  const rows = await _restGet<RuntimeCategory>(url, env);
+  return rows ?? [];
+}
+
+export async function getCategoryBySlugRuntime(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeCategory | null> {
+  if (!slug) return null;
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/categories` +
+    `?slug=eq.${encodeURIComponent(slug)}` +
+    `&select=slug,name,body_inline,updated_at` +
+    `&limit=1`;
+  const rows = await _restGet<RuntimeCategory>(url, env);
+  return rows?.[0] ?? null;
+}
+
+export interface RuntimeGlossaryTerm {
+  slug: string;
+  term: string;
+  category: string | null;
+  body_inline: Record<string, unknown> | null;
+  updated_at: string;
+}
+
+/**
+ * Fetch glossary terms whose body_inline.page_contexts intersects any of the
+ * provided contexts. Uses PostgREST array-overlap on the jsonb path (GIN-indexed).
+ * Returns [] if env is unwired or the contexts list is empty.
+ */
+export async function getGlossaryTermsForContextsRuntime(
+  contexts: string[],
+  env?: RuntimeLenderEnv
+): Promise<RuntimeGlossaryTerm[]> {
+  if (!contexts.length) return [];
+  // PostgREST cs.{...} = jsonb @> array. We OR each context to mimic "any-of".
+  // Simpler: pull all and filter client-side — only 71 rows, ~80 KB total. The
+  // overhead vs. crafting a complex jsonb operator is not worth the bytes saved.
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/glossary_terms` +
+    `?select=slug,term,category,body_inline,updated_at` +
+    `&order=slug.asc`;
+  const rows = await _restGet<RuntimeGlossaryTerm>(url, env);
+  if (!rows) return [];
+  const set = new Set(contexts);
+  return rows.filter((row) => {
+    const pc = (row.body_inline?.page_contexts ?? []) as unknown;
+    if (!Array.isArray(pc)) return false;
+    return pc.some((c) => typeof c === "string" && set.has(c));
+  });
+}
+
+// ============================================================================
+// CDM-REV Stage A.4 — blog_posts / listicles / answers / specials runtime fetchers
+// ============================================================================
+
+export interface RuntimeBlogPost {
+  slug: string;
+  title: string;
+  category: string | null;
+  status: string;          // 'published' (RLS already filters; this is for typing)
+  publish_date: string | null;
+  body_inline: Record<string, unknown> | null;
+  updated_at: string;
+}
+
+export async function getBlogPostBySlugRuntime(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeBlogPost | null> {
+  if (!slug) return null;
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/blog_posts` +
+    `?slug=eq.${encodeURIComponent(slug)}` +
+    `&select=slug,title,category,status,publish_date,body_inline,updated_at` +
+    `&limit=1`;
+  const rows = await _restGet<RuntimeBlogPost>(url, env);
+  return rows?.[0] ?? null;
+}
+
+export async function getBlogPostsByCategoryRuntime(
+  category: string,
+  env?: RuntimeLenderEnv,
+  limit = 6
+): Promise<RuntimeBlogPost[]> {
+  if (!category) return [];
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/blog_posts` +
+    `?category=eq.${encodeURIComponent(category)}` +
+    `&select=slug,title,category,status,publish_date,body_inline,updated_at` +
+    `&order=publish_date.desc.nullslast` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeBlogPost>(url, env);
+  return rows ?? [];
+}
+
+export interface RuntimeListicle {
+  slug: string;
+  title: string;
+  target_keyword: string | null;
+  category: string | null;
+  body_inline: Record<string, unknown> | null;
+  updated_at: string;
+}
+
+export async function getListicleBySlugRuntime(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeListicle | null> {
+  if (!slug) return null;
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/listicles` +
+    `?slug=eq.${encodeURIComponent(slug)}` +
+    `&select=slug,title,target_keyword,category,body_inline,updated_at` +
+    `&limit=1`;
+  const rows = await _restGet<RuntimeListicle>(url, env);
+  return rows?.[0] ?? null;
+}
+
+export interface RuntimeAnswer {
+  slug: string;
+  title: string;
+  cluster_id: string | null;
+  cluster_pillar: string | null;
+  banner_category: string | null;
+  target_money_page: string | null;
+  compliance_score: number | null;
+  compliance_passed: boolean;
+  body_inline: Record<string, unknown> | null;
+  updated_at: string;
+}
+
+export async function getAnswerBySlugRuntime(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeAnswer | null> {
+  if (!slug) return null;
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/answers` +
+    `?slug=eq.${encodeURIComponent(slug)}` +
+    `&select=slug,title,cluster_id,cluster_pillar,banner_category,target_money_page,compliance_score,compliance_passed,body_inline,updated_at` +
+    `&limit=1`;
+  const rows = await _restGet<RuntimeAnswer>(url, env);
+  return rows?.[0] ?? null;
+}
+
+export interface RuntimeSpecial {
+  id: string;
+  lender_slug: string;
+  deal_title: string;
+  valid_until: string | null;
+  body_inline: Record<string, unknown> | null;
+  updated_at: string;
+}
+
+export async function getSpecialsForLenderRuntime(
+  lenderSlug: string,
+  env?: RuntimeLenderEnv,
+  limit = 5
+): Promise<RuntimeSpecial[]> {
+  if (!lenderSlug) return [];
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/specials` +
+    `?lender_slug=eq.${encodeURIComponent(lenderSlug)}` +
+    `&select=id,lender_slug,deal_title,valid_until,body_inline,updated_at` +
+    `&order=updated_at.desc` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeSpecial>(url, env);
+  return rows ?? [];
+}
+
 // Type alias for Cloudflare Workers R2 binding (no @cloudflare/workers-types
 // import to keep the dep graph tight; the adapter provides the runtime).
 type R2Bucket = {
