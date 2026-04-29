@@ -1,7 +1,7 @@
-# CreditDoc — LIVE STATE (as of 2026-04-29 09:55 UTC)
+# CreditDoc — LIVE STATE (as of 2026-04-29 10:05 UTC)
 
 ## Branch
-- Working branch: `cdm-rev-hybrid` (off `main`, **5 commits ahead, NOT pushed**)
+- Working branch: `cdm-rev-hybrid` (off `main`, **7 commits ahead, NOT pushed**)
 - `main`: untouched. Last commit `88e6836d8d` (DB export Apr 28).
 - `arch-overhaul`: parallel-window territory — DO NOT TOUCH.
 - Stash: `pre-cdm-rev-hybrid-branch-stash 2026-04-29T09:11Z` — 549 modified `src/content/lenders/*.json` files (DB-export drift). Stashed cleanly before branch creation.
@@ -21,11 +21,12 @@
 | 1.1 — branch `cdm-rev-hybrid` | ✅ DONE | Created off `main` after stashing 549 lender drift files. |
 | 1.2 — `@astrojs/cloudflare` + `output: 'static'` (Astro 5 hybrid) | ✅ DONE | Commit `24b0f94ddf`. Adapter v12.6 (Astro-5-compatible). Astro 5 hybrid pattern: `output: 'static'` + adapter + per-route `prerender = false` flag. |
 | 1.3.A — SSR scaffolding (cache.ts, db.ts, wrangler.toml) | ✅ DONE | Commit `96b501472d`. Cache API helper + Supabase READ-ONLY runtime helper. Lazy module init — no live calls at build. |
-| 1.3.B — convert `/review/[slug]` to SSR | ⏸ PAUSED | Blocked on data-layer decision (see `CREDITDOC_NEXT.md` §1). |
-| 1.4 — wire CF Cache API around SSR handler | partial — helper ready | Will plug in once 1.3.B ships. |
-| 1.5 — `wrangler pages dev` local SSR preview | not started | Local dev only — safe to do once 1.3.B ships. |
-| 1.6 — `wrangler pages deploy dist` (preview) | not started | Preview environment — does not touch live `creditdoc.co`. |
-| 1.7 — TTFB measurements + Phase 1 acceptance gate | not started | Acceptance bar: build /review/* prerender=0s, TTFB warm <100ms p95, OBJ-1=GREEN. |
+| 1.3.B — Option C pilot `/r/[slug]` SSR | ✅ DONE | Commit `e49d29a1e8`. TS endpoint, db.ts (anon PostgREST), cache.ts wrap. Catalog-row-only — body content gated on Option A. noindex pilot. |
+| 1.3.B — `/review/[slug]` cutover (Option A) | ⏸ PAUSED | Needs Jammi greenlight: ALTER TABLE lenders ADD body_r2_key + body_inline + R2 backfill. Live DB write = off-limits this loop. |
+| 1.4 — wire CF Cache API around SSR handler | ✅ DONE | cacheWrap() integrated in `/r/[slug]` (commit `e49d29a1e8`). |
+| 1.5 — `wrangler pages dev` local SSR preview | not run | Needs full `astro build` first (>10min today — that IS the OBJ-1 problem we're fixing). Defer until 1.3.B-Option-A or Jammi ok's a long build. |
+| 1.6 — `wrangler pages deploy dist` (preview) | not run | Preview environment — does not touch live `creditdoc.co`. Same precondition as 1.5. |
+| 1.7 — TTFB measurements + Phase 1 acceptance gate | not run | Acceptance bar: TTFB warm <100ms p95, OBJ-1=GREEN. Needs preview deploy first. |
 | 2.x — revalidation Worker + DB-write wiring | not started | PAUSE for Jammi greenlight before 2.3 (touches `creditdoc_db.py` production tool) and 2.4 (live row probe). |
 | 3.1–3.5 — audit_log triggers, RLS audit, DPA, token register, cookie banner | not started | PAUSE for Jammi greenlight before 3.1 (live Supabase trigger creation). |
 | 3.6 — privacy/terms pages | ✅ ALREADY LIVE | VERIFIED today: `/privacy/`, `/terms/`, `/disclosure/` all 200. DO NOT redo. |
@@ -33,22 +34,29 @@
 | 4.3 — extending_the_app.md doc | ✅ DONE | Commit `ace7bd78c4`. 6-step howto for adding a new SSR surface. |
 | RULE 10 handoff docs | ✅ DONE | Commit `bdd057e2f5`. `CREDITDOC_NOW.md` + `CREDITDOC_NEXT.md` + Phase 0.4 inventory. |
 
-## Verifier baseline (Apr 29 09:55 UTC, branch cdm-rev-hybrid)
+## Verifier baseline (Apr 29 10:05 UTC, branch cdm-rev-hybrid)
 
 ```
-OBJ-1: RED   — hybrid mode active (output: 'static' + CF adapter), but no SSR pilot route yet (Phase 1.3.B not shipped).
-OBJ-2: RED   — audit_log table exists, fn_audit_row() missing, 0/4 trigger coverage on lenders|cluster_answers|lead_captures|user_quiz_responses.
-OBJ-3: GREEN — helpers (cache.ts + db.ts) in place. New SSR route can be added in ~20 LOC. Patterns documented in docs/architecture/extending_the_app.md.
+OBJ-1: AMBER — SSR pilot at src/pages/r/[slug].ts detected. Revalidation endpoint not yet wired — DB writes do not invalidate cache. GREEN requires Phase 2 (off-limits this loop).
+OBJ-2: RED   — audit_log table exists, fn_audit_row() missing, 0/4 trigger coverage. Phase 3.1 = off-limits this loop.
+OBJ-3: GREEN — helpers (cache.ts + db.ts) in place. New SSR route ~20 LOC. Pattern in docs/architecture/extending_the_app.md.
 ```
 
-OBJ-3 flipped GREEN (was RED 09:30 UTC) because Phase 1.3.A scaffolding shipped + Phase 4.3 howto doc landed. OBJ-1 + OBJ-2 stay RED — gated on Phase 1.3.B (data-layer decision) and Phase 3.1 (live trigger creation), both off-limits this loop.
+Trajectory this loop:
+- 09:30 UTC start: RED / RED / RED
+- 09:35 UTC: Phase 1.2 + 1.3.A scaffolding committed → no traffic-light change yet
+- 09:55 UTC: Phase 4.3 + 3.7 docs committed → OBJ-3 flips RED→GREEN
+- 10:05 UTC: Phase 1.3.B Option C pilot committed → OBJ-1 flips RED→AMBER
+
+OBJ-2 and final OBJ-1 GREEN both gated on off-limits live-system work.
 
 Re-run any time: `python3 tools/verify_strategic_objectives.py`
 
 ## Known issues / open questions
-- Full `astro build` still slow (>10 min on the 17K+ static prerender). This is the OBJ-1 problem we're fixing — Phase 1.3.B will move `/review/[slug]` (~20K pages) off prerender, dropping bulk of build time.
-- `body_r2_key` and `body_inline` columns DO NOT exist on Supabase `lenders` yet. Phase 1.3.B needs them (or an alternative data path) before SSR can serve lender bodies.
+- Full `astro build` still slow (>10 min on the 17K+ static prerender). This is the OBJ-1 problem we're fixing — `/review/[slug]` cutover (Option A) will move ~20K pages off prerender. Pilot at `/r/[slug]` proves the architecture without depending on the long build finishing.
+- Live `lenders` table is a 12-column catalog index ONLY: `slug, name, category, state, brand_slug, has_logo, seo_tier, processing_status, checksum, id, created_at, updated_at`. NO `brand_name`, `city`, `rating`, `body_r2_key`, `body_inline`. Body content (description, services, hours) is in `src/content/lenders/*.json` and not runtime-readable from the Worker. Option A would add `body_r2_key` + `body_inline` columns + backfill.
 - Stashed 549 `src/content/lenders/*.json` drift on main — need a separate "DB export sync to main" commit at some point (not on `cdm-rev-hybrid`).
+- `wrangler pages dev` not yet run because it needs a build to complete first (>10min). Pilot route compiles clean (tsc has no errors in `src/lib/db.ts`, `src/lib/cache.ts`, `src/pages/r/[slug].ts`).
 
 ## Loop authority
 Currently in `/loop` mode with directive: "until you finish all the work that doesnt involve touching the live database or system". Off-limits this loop:
