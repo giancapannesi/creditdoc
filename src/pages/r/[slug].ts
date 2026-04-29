@@ -17,9 +17,9 @@
  */
 import type { APIContext } from "astro";
 import {
-  getLenderBySlugRuntime,
+  getLenderWithBodyBySlugRuntime,
   contentVersionOf,
-  type RuntimeLender,
+  type RuntimeLenderWithBody,
 } from "../../lib/db";
 import { cacheWrap } from "../../lib/cache";
 
@@ -33,12 +33,32 @@ function escapeHtml(s: string): string {
     .replace(/"/g, "&quot;");
 }
 
-function renderHtml(lender: RuntimeLender, ver: number): string {
+function renderList(items: unknown, ordered = false): string {
+  if (!Array.isArray(items) || items.length === 0) return "";
+  const tag = ordered ? "ol" : "ul";
+  return `<${tag}>${items
+    .map((x) => `<li>${escapeHtml(String(x))}</li>`)
+    .join("")}</${tag}>`;
+}
+
+function renderHtml(lender: RuntimeLenderWithBody, ver: number): string {
+  const body = (lender.body_inline ?? {}) as Record<string, unknown>;
   const name = escapeHtml(lender.name);
   const cat = escapeHtml(lender.category);
   const state = lender.state ? escapeHtml(lender.state) : "";
   const reviewHref = `/review/${encodeURIComponent(lender.slug)}/`;
   const verIso = new Date(ver * 1000).toISOString();
+  const descShort = body.description_short
+    ? escapeHtml(String(body.description_short))
+    : "";
+  const descLong = body.description_long
+    ? escapeHtml(String(body.description_long))
+    : "";
+  const rating = body.rating ? escapeHtml(String(body.rating)) : "";
+  const pros = renderList(body.pros);
+  const cons = renderList(body.cons);
+  const services = renderList(body.services);
+  const bodyFieldCount = Object.keys(body).length;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,19 +66,23 @@ function renderHtml(lender: RuntimeLender, ver: number): string {
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>${name} — CreditDoc (SSR pilot)</title>
+  <meta name="description" content="${descShort}">
   <link rel="canonical" href="${reviewHref}">
 </head>
-<body style="font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem;">
-  <p style="color:#888;font-size:0.875rem">CreditDoc · SSR pilot · /r/${escapeHtml(lender.slug)}</p>
-  <h1 style="margin:0.5rem 0">${name}</h1>
+<body style="font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6;">
+  <p style="color:#888;font-size:0.875rem">CreditDoc · SSR pilot · /r/${escapeHtml(lender.slug)} · body fields: ${bodyFieldCount}</p>
+  <h1 style="margin:0.5rem 0">${name}${rating ? ` <span style="color:#c80;font-size:1rem">★ ${rating}</span>` : ""}</h1>
   <p style="color:#444">${cat}${state ? ` · ${state}` : ""}</p>
+  ${descShort ? `<p style="font-style:italic;color:#222">${descShort}</p>` : ""}
+  ${descLong ? `<h2>About</h2><p>${descLong}</p>` : ""}
+  ${pros ? `<h2>Pros</h2>${pros}` : ""}
+  ${cons ? `<h2>Cons</h2>${cons}` : ""}
+  ${services ? `<h2>Services</h2>${services}` : ""}
   <hr style="margin:2rem 0;border:none;border-top:1px solid #eee">
-  <p>This is the SSR-rendered catalog row for <strong>${name}</strong>.</p>
-  <p>For the full lender review, see the static page at <a href="${reviewHref}">${reviewHref}</a>.</p>
-  <hr style="margin:2rem 0;border:none;border-top:1px solid #eee">
+  <p>For the full styled review, see <a href="${reviewHref}">${reviewHref}</a>.</p>
   <p style="color:#888;font-size:0.75rem">
     Content version: ${ver} (${verIso})<br>
-    Architecture: Astro 5 hybrid · Cloudflare Pages Workers · Supabase PostgREST anon
+    Architecture: Astro 5 hybrid · Cloudflare Pages Workers · Supabase PostgREST anon · body_inline jsonb
   </p>
 </body>
 </html>`;
@@ -75,7 +99,7 @@ export async function GET(ctx: APIContext): Promise<Response> {
     | { SUPABASE_URL?: string; SUPABASE_ANON_KEY?: string }
     | undefined;
 
-  const lender = await getLenderBySlugRuntime(slug, env);
+  const lender = await getLenderWithBodyBySlugRuntime(slug, env);
   if (!lender) {
     return new Response("Lender not found", {
       status: 404,
