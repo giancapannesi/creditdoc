@@ -13,7 +13,12 @@ export default defineConfig({
   site: 'https://www.creditdoc.co',
   output: 'static',
   adapter: cloudflare({
-    imageService: 'compile',
+    // 'passthrough' avoids bundling sharp/detect-libc into the worker (which
+    // breaks workerd at runtime — bare require('fs')/'child_process'). Static
+    // images in dist/_astro/ are still optimized at build time. SSR pages do
+    // not currently use Astro's <Image> runtime — if that changes, switch to
+    // 'cloudflare' (Workers Image Resizing) rather than 'compile'.
+    imageService: 'passthrough',
   }),
   build: {
     format: 'directory',
