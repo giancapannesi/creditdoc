@@ -103,6 +103,7 @@ def check_obj1(env: dict) -> CheckResult:
     pkg_json = REPO_ROOT / "package.json"
     review_page = REPO_ROOT / "src" / "pages" / "review" / "[slug].astro"
     revalidate_route = REPO_ROOT / "src" / "pages" / "api" / "revalidate.ts"
+    pages_dir = REPO_ROOT / "src" / "pages"
 
     cfg_text = astro_cfg.read_text() if astro_cfg.exists() else ""
     pkg_text = pkg_json.read_text() if pkg_json.exists() else ""
@@ -115,6 +116,21 @@ def check_obj1(env: dict) -> CheckResult:
     review_is_ssr = "prerender = false" in review_text or "prerender=false" in review_text
     has_revalidate_route = revalidate_route.exists()
 
+    # Scan ALL pages for any SSR opt-in (prerender = false). The /review/[slug]
+    # cutover requires a data-layer change that is off-limits this loop, so the
+    # SSR pilot may live at a parallel route (e.g. /r/[slug]).
+    ssr_pilot_routes: list[str] = []
+    if pages_dir.exists():
+        for p in pages_dir.rglob("*"):
+            if p.is_file() and p.suffix in (".astro", ".ts", ".js", ".mjs"):
+                try:
+                    txt = p.read_text(errors="ignore")
+                except Exception:
+                    continue
+                if "prerender = false" in txt or "prerender=false" in txt:
+                    ssr_pilot_routes.append(str(p.relative_to(REPO_ROOT)))
+    has_any_ssr_pilot = bool(ssr_pilot_routes)
+
     # Astro 5 hybrid = output: 'static' + adapter present (per-route opt-in via prerender flag).
     is_hybrid = (is_static or is_server) and has_cf_adapter_dep and has_cf_adapter_in_cfg
 
@@ -124,6 +140,7 @@ def check_obj1(env: dict) -> CheckResult:
         cf_adapter_in_config=has_cf_adapter_in_cfg,
         hybrid_active=is_hybrid,
         review_slug_ssr=review_is_ssr,
+        ssr_pilot_routes=ssr_pilot_routes,
         revalidate_endpoint_present=has_revalidate_route,
     )
 
@@ -135,7 +152,7 @@ def check_obj1(env: dict) -> CheckResult:
             detail=detail,
         )
 
-    if is_hybrid and not review_is_ssr:
+    if is_hybrid and not has_any_ssr_pilot:
         return CheckResult(
             obj="OBJ-1",
             status="RED",
@@ -143,15 +160,15 @@ def check_obj1(env: dict) -> CheckResult:
             detail=detail,
         )
 
-    if is_hybrid and review_is_ssr and not has_revalidate_route:
+    if is_hybrid and has_any_ssr_pilot and not has_revalidate_route:
         return CheckResult(
             obj="OBJ-1",
             status="AMBER",
-            summary="Hybrid + SSR pilot route shipped. Revalidation endpoint not yet wired — DB writes do not invalidate cache.",
+            summary=f"Hybrid + SSR pilot route shipped ({', '.join(ssr_pilot_routes)}). Revalidation endpoint not yet wired — DB writes do not invalidate cache.",
             detail=detail,
         )
 
-    if is_hybrid and review_is_ssr and has_revalidate_route:
+    if is_hybrid and has_any_ssr_pilot and has_revalidate_route:
         # Phase 2 ship — could probe an end-to-end edit but that touches live DB.
         # Verifier remains read-only; mark AMBER until Phase 2 acceptance probe documented.
         # Acceptance gate must show p95 ≤ 10s in a phase-2 commit-tagged run.

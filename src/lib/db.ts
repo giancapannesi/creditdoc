@@ -1,7 +1,7 @@
 /**
  * CDM-REV-2026-04-29 Phase 1.3 — Supabase READ-ONLY runtime data layer.
  *
- * Used by SSR routes (e.g. /review/[slug]) running on Cloudflare Workers.
+ * Used by SSR routes (e.g. /r/[slug]) running on Cloudflare Workers.
  * Uses the anon key + Postgres RLS for safety. Service-role NEVER ships to the
  * Worker; that path stays server-side only via tools/creditdoc_db.py + the
  * Phase 2 /api/revalidate endpoint.
@@ -12,33 +12,45 @@
  * Runtime env (set as Pages secrets at deploy time, NOT committed):
  *   SUPABASE_URL          — https://<ref>.supabase.co
  *   SUPABASE_ANON_KEY     — public anon JWT (RLS-protected)
+ *
+ * SCHEMA NOTE (2026-04-29):
+ *   The live `lenders` table is a catalog index — it has slug + name +
+ *   category + state + processing_status + brand_slug + has_logo +
+ *   seo_tier + checksum + updated_at, AND NOTHING ELSE. Body content
+ *   (description, services, hours, etc.) lives in src/content/lenders/*.json
+ *   today and is NOT runtime-readable from the Worker.
+ *
+ *   To serve a full lender body via SSR we will need either:
+ *     (a) ALTER TABLE public.lenders ADD body_r2_key text, body_inline jsonb
+ *         + backfill (requires Jammi greenlight — Option A in CREDITDOC_NEXT.md), OR
+ *     (b) `lender_bodies` side table joined on slug.
+ *
+ *   Until then, this helper returns the catalog row only. The /r/[slug] pilot
+ *   route renders a minimal page from the catalog row — proof-of-concept for
+ *   OBJ-1, not the final UX.
  */
-
-// Phase 1.3 status: SCAFFOLDING ONLY. The actual Supabase client is added in
-// the next iteration once Jammi greenlights the data-flow change. The shape
-// + interface below are stable so callers can be written against them today.
 
 export interface RuntimeLender {
   slug: string;
-  brand_name: string;
+  name: string;
   category: string;
-  state?: string;
-  city?: string;
-  rating?: number;
+  state: string | null;
+  brand_slug: string | null;
+  has_logo: boolean;
+  seo_tier: string | null;
   /** ISO8601 — used as the cache-busting content-version. */
   updated_at: string;
-  /** R2 object key for the body JSON; null if body lives in catalog row. */
-  body_r2_key?: string | null;
-  /** Catalog-row body (used while R2 migration is incomplete). */
-  body_inline?: Record<string, unknown> | null;
 }
 
 export interface RuntimeLenderEnv {
   SUPABASE_URL?: string;
   SUPABASE_ANON_KEY?: string;
-  /** R2 bucket binding for body JSON (lazy-fetched per slug). */
+  /** R2 bucket binding for body JSON (lazy-fetched per slug — Phase 1.6 wiring). */
   ASSETS?: R2Bucket;
 }
+
+const CATALOG_COLUMNS =
+  "slug,name,category,state,brand_slug,has_logo,seo_tier,updated_at";
 
 /**
  * Read-only lookup of one lender by slug.
@@ -54,15 +66,13 @@ export async function getLenderBySlugRuntime(
   env?: RuntimeLenderEnv
 ): Promise<RuntimeLender | null> {
   if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) {
-    // Build-time / preview without secrets — caller falls back to 404 or
-    // build-time content-collection helper.
     return null;
   }
 
-  // PostgREST GET with RLS. Single-row fetch.
-  const url = `${env.SUPABASE_URL}/rest/v1/lenders` +
+  const url =
+    `${env.SUPABASE_URL}/rest/v1/lenders` +
     `?slug=eq.${encodeURIComponent(slug)}` +
-    `&select=slug,brand_name,category,state,city,rating,updated_at,body_r2_key,body_inline` +
+    `&select=${CATALOG_COLUMNS}` +
     `&processing_status=eq.ready_for_index` +
     `&limit=1`;
 
@@ -70,29 +80,13 @@ export async function getLenderBySlugRuntime(
     headers: {
       apikey: env.SUPABASE_ANON_KEY,
       authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
-      accept: 'application/json',
+      accept: "application/json",
     },
-    // Tight timeout — SSR routes must stay fast.
     signal: AbortSignal.timeout(2500),
   });
   if (!res.ok) return null;
   const rows = (await res.json()) as RuntimeLender[];
   return rows[0] ?? null;
-}
-
-/**
- * Fetch the body JSON for a lender from R2 if the catalog row points to one.
- * Falls back to body_inline if no R2 key.
- */
-export async function getLenderBody(
-  lender: RuntimeLender,
-  env?: RuntimeLenderEnv
-): Promise<Record<string, unknown> | null> {
-  if (lender.body_inline) return lender.body_inline;
-  if (!lender.body_r2_key || !env?.ASSETS) return null;
-  const obj = await env.ASSETS.get(lender.body_r2_key);
-  if (!obj) return null;
-  return (await obj.json<Record<string, unknown>>()) ?? null;
 }
 
 /**
