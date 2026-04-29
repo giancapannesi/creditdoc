@@ -26,7 +26,15 @@ const STATE_ABBR: Record<string, string> = {
 
 export function getStaticPaths() {
   const lenders = getAllLenders();
-  return lenders.map(lender => ({
+  // CDM-REV-2026-04-29 short-circuit: cap prerender during Phase 1.5/1.6/1.7
+  // smoke testing so the full build finishes <2min. Set LENDERS_PRERENDER_LIMIT
+  // to a positive integer to truncate; absent / 0 / non-numeric = full build.
+  // The /review/[slug] cutover (Option A) will move all of these to SSR
+  // and remove this branch entirely.
+  const limitRaw = (typeof process !== 'undefined' && process.env && process.env.LENDERS_PRERENDER_LIMIT) || '';
+  const limit = parseInt(limitRaw, 10);
+  const subset = (Number.isFinite(limit) && limit > 0) ? lenders.slice(0, limit) : lenders;
+  return subset.map(lender => ({
     params: { slug: lender.slug },
   }));
 }
