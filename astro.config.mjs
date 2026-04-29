@@ -2,10 +2,19 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import cloudflare from '@astrojs/cloudflare';
 
+// CDM-REV-2026-04-29 Phase 1.2 — hybrid output + Cloudflare adapter.
+// Per-route prerender flag controls SSR vs static. Marketing pages stay
+// prerendered; high-churn routes (/review/[slug] etc.) opt-in to SSR via
+// `export const prerender = false;` in the page module.
 export default defineConfig({
   site: 'https://www.creditdoc.co',
-  output: 'static',
+  output: 'hybrid',
+  adapter: cloudflare({
+    mode: 'directory',
+    imageService: 'compile',
+  }),
   build: {
     format: 'directory',
   },
