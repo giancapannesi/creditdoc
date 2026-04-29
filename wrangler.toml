@@ -1,6 +1,46 @@
+# CDM-REV-2026-04-29 Phase 1 — Cloudflare Pages config.
+# Astro hybrid mode + @astrojs/cloudflare adapter (mode: 'directory').
+#
+# Production deploy: `wrangler pages deploy dist`
+# Local SSR dev:     `wrangler pages dev` (Phase 1.5)
+#
+# DO NOT BIND PRODUCTION KV/R2 NAMESPACES HERE until Phase 1.6 (preview deploy)
+# is greenlit. Bindings below are placeholders documenting the intended wiring;
+# uncomment + fill IDs only when the preview deploy is authorized.
+
 name = "creditdoc"
 compatibility_date = "2024-09-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "./dist"
 
+# Static assets shipped alongside Workers SSR routes.
+# `not_found_handling = "single-page-application"` would catch-all to /404.html;
+# we use "404-page" so missing slugs render the bespoke 404 with breadcrumbs.
 [assets]
 directory = "./dist"
 not_found_handling = "404-page"
+
+# ---------------------------------------------------------------------------
+# Bindings (placeholders — fill IDs at Phase 1.6 / 2.2 deploy time)
+# ---------------------------------------------------------------------------
+
+# Phase 1: R2 bucket for lender body JSON + assets (creditdoc-assets, 35K objects).
+# [[r2_buckets]]
+# binding = "ASSETS"
+# bucket_name = "creditdoc-assets"
+# preview_bucket_name = "creditdoc-assets"
+
+# Phase 2: KV namespace for content-version per slug + per tag (revalidation).
+# [[kv_namespaces]]
+# binding = "VERSIONS"
+# id = "<fill-from-cloudflare-dashboard-after-creation>"
+# preview_id = "<preview-namespace-id>"
+
+# Phase 2: Service binding for /api/revalidate token (loaded via secret, not here).
+# Set via: `wrangler pages secret put REVALIDATE_TOKEN`
+
+# Phase 1.3: Supabase read-only credentials (anon key, RLS-gated).
+# Set via:
+#   `wrangler pages secret put SUPABASE_URL`
+#   `wrangler pages secret put SUPABASE_ANON_KEY`
+# DO NOT put service_role here. Read-only path uses anon + RLS.

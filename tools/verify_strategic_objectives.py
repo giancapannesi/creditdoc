@@ -109,27 +109,41 @@ def check_obj1(env: dict) -> CheckResult:
     review_text = review_page.read_text() if review_page.exists() else ""
 
     is_static = "output: 'static'" in cfg_text or 'output: "static"' in cfg_text
-    is_hybrid = "output: 'hybrid'" in cfg_text or 'output: "hybrid"' in cfg_text
+    is_server = "output: 'server'" in cfg_text or 'output: "server"' in cfg_text
+    has_cf_adapter_in_cfg = "adapter: cloudflare(" in cfg_text or "adapter:cloudflare(" in cfg_text
     has_cf_adapter_dep = "@astrojs/cloudflare" in pkg_text
     review_is_ssr = "prerender = false" in review_text or "prerender=false" in review_text
     has_revalidate_route = revalidate_route.exists()
 
+    # Astro 5 hybrid = output: 'static' + adapter present (per-route opt-in via prerender flag).
+    is_hybrid = (is_static or is_server) and has_cf_adapter_dep and has_cf_adapter_in_cfg
+
     detail.update(
-        astro_output="hybrid" if is_hybrid else ("static" if is_static else "unknown"),
+        astro_output="server" if is_server else ("static" if is_static else "unknown"),
         cf_adapter_installed=has_cf_adapter_dep,
+        cf_adapter_in_config=has_cf_adapter_in_cfg,
+        hybrid_active=is_hybrid,
         review_slug_ssr=review_is_ssr,
         revalidate_endpoint_present=has_revalidate_route,
     )
 
-    if is_static and not has_cf_adapter_dep:
+    if not is_hybrid:
         return CheckResult(
             obj="OBJ-1",
             status="RED",
-            summary="Static output. Every change requires full rebuild + git push. No on-the-fly updates.",
+            summary="Static output without CF adapter. Every change requires full rebuild + git push. No on-the-fly updates.",
             detail=detail,
         )
 
-    if is_hybrid and has_cf_adapter_dep and review_is_ssr and not has_revalidate_route:
+    if is_hybrid and not review_is_ssr:
+        return CheckResult(
+            obj="OBJ-1",
+            status="RED",
+            summary="Hybrid mode active but no SSR pilot route. Phase 1.3 not shipped.",
+            detail=detail,
+        )
+
+    if is_hybrid and review_is_ssr and not has_revalidate_route:
         return CheckResult(
             obj="OBJ-1",
             status="AMBER",
@@ -137,7 +151,7 @@ def check_obj1(env: dict) -> CheckResult:
             detail=detail,
         )
 
-    if is_hybrid and has_cf_adapter_dep and review_is_ssr and has_revalidate_route:
+    if is_hybrid and review_is_ssr and has_revalidate_route:
         # Phase 2 ship — could probe an end-to-end edit but that touches live DB.
         # Verifier remains read-only; mark AMBER until Phase 2 acceptance probe documented.
         # Acceptance gate must show p95 ≤ 10s in a phase-2 commit-tagged run.
