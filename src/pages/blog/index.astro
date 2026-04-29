@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getBlogPosts, getBlogPostsByCategory } from '../../utils/data';
+import { getBlogPosts, getBlogPostsByCategory } from '../../utils/data-build';
 
 const posts = getBlogPosts().sort((a, b) =>
   new Date(b.publish_date).getTime() - new Date(a.publish_date).getTime()

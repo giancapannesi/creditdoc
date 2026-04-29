@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RatingStars from '../../components/RatingStars.astro';
-import { getListicles, getLenderBySlug, formatPrice, getBbbClass } from '../../utils/data';
+import { getListicles, getLenderBySlug } from '../../utils/data-build';
+import { formatPrice, getBbbClass } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
 export function getStaticPaths() {

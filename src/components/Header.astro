@@ -1,5 +1,5 @@
 ---
-import { getCategories } from '../utils/data';
+import { getCategoriesRuntime as getCategories } from '../utils/data-runtime';
 
 const categories = getCategories();
 const currentPath = Astro.url.pathname;

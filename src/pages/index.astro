@@ -4,7 +4,8 @@ import FilterBar from '../components/FilterBar.astro';
 import TopPicksTable from '../components/TopPicksTable.astro';
 import CategoryCard from '../components/CategoryCard.astro';
 import LenderNameSearch from '../components/LenderNameSearch.astro';
-import { getAllLenders, getCategories, getSpecials, getWellnessGuides, formatPrice } from '../utils/data';
+import { getAllLenders, getCategories, getSpecials, getWellnessGuides } from '../utils/data-build';
+import { formatPrice } from '../utils/data';
 
 const lenders = getAllLenders();
 const categories = getCategories();

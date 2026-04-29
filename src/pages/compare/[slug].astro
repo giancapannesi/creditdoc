@@ -3,7 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ComparisonTable from '../../components/ComparisonTable.astro';
 import DiagnosisCard from '../../components/DiagnosisCard.astro';
 import RatingStars from '../../components/RatingStars.astro';
-import { getComparisons, getLenderBySlug, formatPrice, getBbbClass } from '../../utils/data';
+import { getComparisons, getLenderBySlug } from '../../utils/data-build';
+import { formatPrice, getBbbClass } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 
 export function getStaticPaths() {

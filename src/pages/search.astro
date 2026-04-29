@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SearchBar from '../components/SearchBar.astro';
-import { getAllLenders, US_STATES, STATE_ABBREVIATIONS } from '../utils/data';
+import { getAllLenders } from '../utils/data-build';
+import { US_STATES, STATE_ABBREVIATIONS } from '../utils/data';
 
 const lenders = getAllLenders();
 

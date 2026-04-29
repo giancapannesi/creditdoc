@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
-import { getCategories, getLendersByCategory, getWellnessGuidesByCategory } from '../../utils/data';
+import { getCategories, getLendersByCategory, getWellnessGuidesByCategory } from '../../utils/data-build';
 
 export function getStaticPaths() {
   const categories = getCategories();

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../../components/GlossaryAppendix.astro';
-import { getAllStatesInfo, getStatesWithLenders, getStateData, getLendersInState, getGlossaryTermsForContext } from '../../../utils/data';
+import { getAllStatesInfo, getStatesWithLenders, getStateData, getLendersInState, getGlossaryTermsForContext } from '../../../utils/data-build';
 
 export function getStaticPaths() {
   const states = getAllStatesInfo();
