@@ -13,21 +13,53 @@ So Phase 1.3.B (convert `/review/[slug]` to SSR) cannot ship until we pick a dat
 
 ### Three options (only Option C is fully inside the loop authority)
 
-#### Option A — DB columns + R2 bodies (correct long-term, off-limits this loop)
-Add to Supabase `lenders`:
-- `body_r2_key text` — R2 path for the JSON body, `null` for FA-tier inline rows
-- `body_inline jsonb` — body as JSONB for hot rows (FAs, top-100), `null` otherwise
+#### Option A — DB columns + bodies inline (correct long-term, off-limits this loop)
 
-Worker reads `lenders` row via PostgREST → if `body_inline` populated, render from it; else
-`env.ASSETS.get(body_r2_key)` → render. `db.ts` is already wired for both fallbacks.
+**Updated 2026-04-29 10:15 UTC — sized the data, A.1 (all inline) is viable.**
 
+Body-content size distribution measured against `src/content/lenders/*.json`:
+- 20,813 files, 133.2 MB raw
+- avg 6.6 KB / p50 6.9 KB / p95 8.7 KB / p99 11.8 KB / max 17.3 KB
+- After Postgres TOAST + zstd → estimated ~40–60 MB stored, well within Supabase free-tier 500 MB cap
+- No file >50 KB → R2 split is unnecessary for body content
+
+**Recommended A.1 — all inline, no R2 split:**
+```sql
+-- ALTER (one-shot, ~5s for 20K rows on Supabase free):
+ALTER TABLE public.lenders
+  ADD COLUMN body_inline jsonb;
+
+-- Backfill (run from a server with the JSON files; CSV-streamed to keep tx small):
+-- pseudocode:
+--   for each src/content/lenders/<slug>.json:
+--     write CSV row: <slug>,<json_compact>
+--   then: \copy lenders_body_staging(slug,body_inline) FROM '...' CSV
+--   then: UPDATE lenders l SET body_inline = s.body_inline
+--         FROM lenders_body_staging s WHERE l.slug = s.slug;
+
+-- Optional R2 fallback column (kept null for now; future-proof):
+ALTER TABLE public.lenders
+  ADD COLUMN body_r2_key text;
+```
+
+After ALTER:
+1. Update `src/lib/db.ts` `CATALOG_COLUMNS` to also SELECT `body_inline,body_r2_key`
+2. Update `RuntimeLender` interface to add the two fields back
+3. Convert `/review/[slug]` to use `getLenderBySlugRuntime` instead of build-time `fs.readdirSync`
+4. Keep `/r/[slug]` pilot for one cycle as a smoke check, then delete (Phase 4.4)
+
+**Tradeoffs:**
 - ✅ True OBJ-1: row update → cache evict → next request rebuilds in <50ms
-- ✅ Smallest data over wire
-- ❌ Requires Supabase ALTER TABLE + 20K-row backfill (LIVE WRITE — off-limits this loop)
-- ❌ Requires R2 upload for ~17K rows that won't fit `body_inline` (≈100MB, OK)
+- ✅ Single round-trip per page (no R2 GET hop)
+- ✅ Simplest db.ts code path
+- ✅ Backfill is a one-shot ~5 minute job (`tools/creditdoc_db_backfill_body_inline.py` to be written when approved)
+- ❌ Requires Supabase ALTER TABLE + 20K-row UPDATE (LIVE WRITE — off-limits this loop)
+- ❌ Adds ~50 MB to Postgres footprint (acceptable: free tier is 500 MB, lenders rows + body still <100 MB after compression)
+- ⚠ Future-proofing: add `body_r2_key` even though A.1 leaves it null, so the schema doesn't need a second migration when (if) we move to R2.
 
-**To unblock:** Jammi greenlights ALTER TABLE + one-time backfill. Backfill script reads
-existing `src/content/lenders/*.json`, splits FA/non-FA, writes columns + R2.
+**To unblock:** Jammi runs the SQL above (or greenlights us to run it), THEN greenlights the backfill script run, THEN we ship the `/review/[slug]` SSR cutover.
+
+**Rollback plan:** `ALTER TABLE public.lenders DROP COLUMN body_inline, DROP COLUMN body_r2_key;` — non-destructive to existing data; static `/review/[slug]` keeps working from JSON files. ~5 min revert.
 
 #### Option B — Bundle JSONs into the worker (cheap but defeats OBJ-1)
 At build, copy a pruned set of lender JSONs into `dist/_lenders/<slug>.json`. Worker fetches
