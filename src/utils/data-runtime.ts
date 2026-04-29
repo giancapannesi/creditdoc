@@ -38,12 +38,31 @@ import {
   getWellnessGuidesByCategoryRuntime as _getWellnessGuidesByCategoryDb,
   getComparisonsForLenderRuntime as _getComparisonsForLenderDb,
   getBrandBySlugRuntime as _getBrandBySlugDb,
+  // Stage A.3 — states / categories / glossary
+  getAllCategoriesRuntime as _getAllCategoriesDb,
+  getCategoryBySlugRuntime as _getCategoryBySlugDb,
+  getGlossaryTermsForContextsRuntime as _getGlossaryTermsForContextsDb,
+  getStateByCodeRuntime as _getStateByCodeDb,
+  getAllStatesRuntime as _getAllStatesDb,
+  // Stage A.4 — blog / listicles / answers / specials
+  getBlogPostBySlugRuntime as _getBlogPostBySlugDb,
+  getBlogPostsByCategoryRuntime as _getBlogPostsByCategoryDb,
+  getListicleBySlugRuntime as _getListicleBySlugDb,
+  getAnswerBySlugRuntime as _getAnswerBySlugDb,
+  getSpecialsForLenderRuntime as _getSpecialsForLenderDb,
   type RuntimeLender,
   type RuntimeLenderWithBody,
   type RuntimeLenderEnv,
   type RuntimeWellnessGuide,
   type RuntimeComparison,
   type RuntimeBrand,
+  type RuntimeCategory,
+  type RuntimeGlossaryTerm,
+  type RuntimeState,
+  type RuntimeBlogPost,
+  type RuntimeListicle,
+  type RuntimeAnswer,
+  type RuntimeSpecial,
 } from "../lib/db";
 
 // Re-export pure helpers from data.ts that are safe in Worker context (no fs).
@@ -165,6 +184,238 @@ export async function getComparisonsForLenderRuntime(
  */
 export function getComparisonsRuntime(): Comparison[] {
   return [];
+}
+
+// ============================================================================
+// CDM-REV Stage A.3 / A.4 — DB-backed content shape adapters
+// ============================================================================
+// These coexist with the build-time bundled JSON imports above. Once the A.3
+// + A.4 backfills are applied, call sites can flip from the sync bundled
+// helpers (getCategoriesRuntime / getGlossaryTermsForContextRuntime) to the
+// async DB-backed versions below. Until then, the bundled versions stay so
+// build-mode preview works without env vars.
+
+function _shapeCategoryFromRow(row: RuntimeCategory): Category {
+  const body = (row.body_inline ?? {}) as Partial<Category>;
+  return {
+    ...(body as Category),
+    slug: row.slug,
+    name: row.name || (body as Category).name || row.slug,
+  };
+}
+
+export async function getCategoriesRuntimeFromDb(
+  env?: RuntimeLenderEnv
+): Promise<Category[]> {
+  const rows = await _getAllCategoriesDb(env);
+  return rows.map(_shapeCategoryFromRow);
+}
+
+export async function getCategoryBySlugRuntimeFromDb(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<Category | null> {
+  const row = await _getCategoryBySlugDb(slug, env);
+  return row ? _shapeCategoryFromRow(row) : null;
+}
+
+function _shapeGlossaryTermFromRow(row: RuntimeGlossaryTerm): GlossaryTerm {
+  const body = (row.body_inline ?? {}) as Partial<GlossaryTerm>;
+  return {
+    ...(body as GlossaryTerm),
+    slug: row.slug,
+    term: row.term || (body as GlossaryTerm).term || row.slug,
+    category: row.category ?? body.category ?? "",
+    page_contexts: Array.isArray(body.page_contexts) ? body.page_contexts : [],
+  };
+}
+
+export async function getGlossaryTermsForContextRuntimeFromDb(
+  contexts: string[],
+  env?: RuntimeLenderEnv
+): Promise<GlossaryTerm[]> {
+  if (!contexts.length) return [];
+  const rows = await _getGlossaryTermsForContextsDb(contexts, env);
+  return rows.map(_shapeGlossaryTermFromRow);
+}
+
+/**
+ * State shape adapter — there is no build-time interface, so we return the
+ * raw body_inline merged with the catalog cols. Call sites should spread
+ * what they need.
+ */
+export interface StateInfoRuntime {
+  code: string;
+  name: string;
+  abbr: string;
+  // Spread fields from body_inline: capital, usury_cap, consumer_protection_*,
+  // licensing_board, payday_loan_status, max_payday_amount, etc.
+  [key: string]: unknown;
+}
+
+function _shapeState(row: RuntimeState): StateInfoRuntime {
+  const body = (row.body_inline ?? {}) as Record<string, unknown>;
+  return {
+    ...body,
+    code: row.code,
+    name: row.name,
+    abbr: row.abbr,
+  };
+}
+
+export async function getStateByCodeRuntimeFromDb(
+  code: string,
+  env?: RuntimeLenderEnv
+): Promise<StateInfoRuntime | null> {
+  const row = await _getStateByCodeDb(code, env);
+  return row ? _shapeState(row) : null;
+}
+
+export async function getAllStatesRuntimeFromDb(
+  env?: RuntimeLenderEnv
+): Promise<StateInfoRuntime[]> {
+  const rows = await _getAllStatesDb(env);
+  return rows.map(_shapeState);
+}
+
+/**
+ * Blog post / listicle / answer / special shape adapters. These mirror the
+ * build-time interfaces (e.g. BlogPost) but the DB is the source of truth —
+ * body_inline keys override duplicated catalog cols.
+ */
+
+export interface BlogPostRuntime {
+  slug: string;
+  title: string;
+  category: string | null;
+  status: string;
+  publish_date: string | null;
+  last_updated: string;
+  [key: string]: unknown;
+}
+
+function _shapeBlogPost(row: RuntimeBlogPost): BlogPostRuntime {
+  const body = (row.body_inline ?? {}) as Record<string, unknown>;
+  return {
+    ...body,
+    slug: row.slug,
+    title: row.title || (body.title as string) || row.slug,
+    category: row.category,
+    status: row.status,
+    publish_date: row.publish_date,
+    last_updated: row.updated_at,
+  };
+}
+
+export async function getBlogPostBySlugRuntimeFromDb(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<BlogPostRuntime | null> {
+  const row = await _getBlogPostBySlugDb(slug, env);
+  return row ? _shapeBlogPost(row) : null;
+}
+
+export async function getBlogPostsByCategoryRuntimeFromDb(
+  category: string,
+  env?: RuntimeLenderEnv,
+  limit = 6
+): Promise<BlogPostRuntime[]> {
+  const rows = await _getBlogPostsByCategoryDb(category, env, limit);
+  return rows.map(_shapeBlogPost);
+}
+
+export interface ListicleRuntime {
+  slug: string;
+  title: string;
+  target_keyword: string | null;
+  category: string | null;
+  last_updated: string;
+  [key: string]: unknown;
+}
+
+function _shapeListicle(row: RuntimeListicle): ListicleRuntime {
+  const body = (row.body_inline ?? {}) as Record<string, unknown>;
+  return {
+    ...body,
+    slug: row.slug,
+    title: row.title || (body.title as string) || row.slug,
+    target_keyword: row.target_keyword,
+    category: row.category,
+    last_updated: row.updated_at,
+  };
+}
+
+export async function getListicleBySlugRuntimeFromDb(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<ListicleRuntime | null> {
+  const row = await _getListicleBySlugDb(slug, env);
+  return row ? _shapeListicle(row) : null;
+}
+
+export interface AnswerRuntime {
+  slug: string;
+  title: string;
+  cluster_id: string | null;
+  cluster_pillar: string | null;
+  banner_category: string | null;
+  target_money_page: string | null;
+  compliance_passed: boolean;
+  last_updated: string;
+  [key: string]: unknown;
+}
+
+function _shapeAnswer(row: RuntimeAnswer): AnswerRuntime {
+  const body = (row.body_inline ?? {}) as Record<string, unknown>;
+  return {
+    ...body,
+    slug: row.slug,
+    title: row.title || (body.title as string) || row.slug,
+    cluster_id: row.cluster_id,
+    cluster_pillar: row.cluster_pillar,
+    banner_category: row.banner_category,
+    target_money_page: row.target_money_page,
+    compliance_passed: row.compliance_passed,
+    last_updated: row.updated_at,
+  };
+}
+
+export async function getAnswerBySlugRuntimeFromDb(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<AnswerRuntime | null> {
+  const row = await _getAnswerBySlugDb(slug, env);
+  return row ? _shapeAnswer(row) : null;
+}
+
+export interface SpecialRuntime {
+  id: string;
+  lender_slug: string;
+  deal_title: string;
+  valid_until: string | null;
+  last_updated: string;
+  [key: string]: unknown;
+}
+
+function _shapeSpecial(row: RuntimeSpecial): SpecialRuntime {
+  const body = (row.body_inline ?? {}) as Record<string, unknown>;
+  return {
+    ...body,
+    id: row.id,
+    lender_slug: row.lender_slug,
+    deal_title: row.deal_title,
+    valid_until: row.valid_until,
+    last_updated: row.updated_at,
+  };
+}
+
+export async function getSpecialsForLenderRuntimeFromDb(
+  lenderSlug: string,
+  env?: RuntimeLenderEnv,
+  limit = 5
+): Promise<SpecialRuntime[]> {
+  const rows = await _getSpecialsForLenderDb(lenderSlug, env, limit);
+  return rows.map(_shapeSpecial);
 }
 
 /**
