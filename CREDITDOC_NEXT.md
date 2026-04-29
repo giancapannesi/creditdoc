@@ -1,129 +1,119 @@
-# CreditDoc — NEXT (RULE 10 handoff, written 2026-04-29 09:40 UTC)
+# CreditDoc — NEXT (RULE 10 handoff, last updated 2026-04-29 13:14 UTC)
 
-## Decision waiting on Jammi (BLOCKS Phase 1.3.B → 1.7)
+## What needs Jammi greenlight, in order
 
-**The question:** how does the SSR `/review/[slug]` route get its data on Cloudflare Workers?
+All five items below are NOT-IN-LOOP — they touch the live DB or a production tool, so /loop directive "no live database or system" forbids them. Each block has the exact command to run after greenlight. Run them in order.
 
-`src/pages/review/[slug].astro` (1087 LOC) currently uses `getStaticPaths()` and imports
-from `src/utils/data.ts`, which uses `fs.readdirSync('src/content/lenders/')` to load
-20,814 JSON files at build. None of that runs on Workers — `fs` is a Node API and `src/`
-is not in the worker bundle.
+### 1. Apply Stage A.2 backfill — wellness + comparisons + brands (303 rows)
 
-So Phase 1.3.B (convert `/review/[slug]` to SSR) cannot ship until we pick a data path.
-
-### Three options (only Option C is fully inside the loop authority)
-
-#### Option A — DB columns + bodies inline (correct long-term, off-limits this loop)
-
-**Updated 2026-04-29 10:15 UTC — sized the data, A.1 (all inline) is viable.**
-
-Body-content size distribution measured against `src/content/lenders/*.json`:
-- 20,813 files, 133.2 MB raw
-- avg 6.6 KB / p50 6.9 KB / p95 8.7 KB / p99 11.8 KB / max 17.3 KB
-- After Postgres TOAST + zstd → estimated ~40–60 MB stored, well within Supabase free-tier 500 MB cap
-- No file >50 KB → R2 split is unnecessary for body content
-
-**Recommended A.1 — all inline, no R2 split:**
-```sql
--- ALTER (one-shot, ~5s for 20K rows on Supabase free):
-ALTER TABLE public.lenders
-  ADD COLUMN body_inline jsonb;
-
--- Backfill (run from a server with the JSON files; CSV-streamed to keep tx small):
--- pseudocode:
---   for each src/content/lenders/<slug>.json:
---     write CSV row: <slug>,<json_compact>
---   then: \copy lenders_body_staging(slug,body_inline) FROM '...' CSV
---   then: UPDATE lenders l SET body_inline = s.body_inline
---         FROM lenders_body_staging s WHERE l.slug = s.slug;
-
--- Optional R2 fallback column (kept null for now; future-proof):
-ALTER TABLE public.lenders
-  ADD COLUMN body_r2_key text;
+```bash
+cd /srv/BusinessOps/creditdoc
+python3 tools/creditdoc_db_backfill_a2_content.py --apply --i-have-jammi-greenlight
 ```
 
-After ALTER:
-1. Update `src/lib/db.ts` `CATALOG_COLUMNS` to also SELECT `body_inline,body_r2_key`
-2. Update `RuntimeLender` interface to add the two fields back
-3. Convert `/review/[slug]` to use `getLenderBySlugRuntime` instead of build-time `fs.readdirSync`
-4. Keep `/r/[slug]` pilot for one cycle as a smoke check, then delete (Phase 4.4)
+Pre-flight refuses if any of the 3 tables is non-empty. Loads CSVs already on disk at `tmp_a2_csv/{wellness,comparisons,brands}.csv`.
 
-**Tradeoffs:**
-- ✅ True OBJ-1: row update → cache evict → next request rebuilds in <50ms
-- ✅ Single round-trip per page (no R2 GET hop)
-- ✅ Simplest db.ts code path
-- ✅ Backfill is a one-shot ~5 minute job (`tools/creditdoc_db_backfill_body_inline.py` to be written when approved)
-- ❌ Requires Supabase ALTER TABLE + 20K-row UPDATE (LIVE WRITE — off-limits this loop)
-- ❌ Adds ~50 MB to Postgres footprint (acceptable: free tier is 500 MB, lenders rows + body still <100 MB after compression)
-- ⚠ Future-proofing: add `body_r2_key` even though A.1 leaves it null, so the schema doesn't need a second migration when (if) we move to R2.
+Post-apply spot-check (3 PostgREST GETs, anon key in `tools/.supabase-creditdoc.env`):
+```bash
+SUPA_URL=$(grep ^SUPABASE_URL tools/.supabase-creditdoc.env | cut -d= -f2)
+ANON=$(grep ^SUPABASE_ANON_KEY tools/.supabase-creditdoc.env | cut -d= -f2)
+curl -s "$SUPA_URL/rest/v1/wellness_guides?limit=1" -H "apikey: $ANON" | head -c 200
+curl -s "$SUPA_URL/rest/v1/comparisons?limit=1" -H "apikey: $ANON" | head -c 200
+curl -s "$SUPA_URL/rest/v1/brands?limit=1" -H "apikey: $ANON" | head -c 200
+```
 
-**To unblock:** Jammi runs the SQL above (or greenlights us to run it), THEN greenlights the backfill script run, THEN we ship the `/review/[slug]` SSR cutover.
+### 2. Apply Stage A.3 — states + categories + glossary_terms (139 rows)
 
-**Rollback plan:** `ALTER TABLE public.lenders DROP COLUMN body_inline, DROP COLUMN body_r2_key;` — non-destructive to existing data; static `/review/[slug]` keeps working from JSON files. ~5 min revert.
+DDL artifact: `supabase/migrations/2026-04-29_cdm_rev_a3_states_categories_glossary.sql`. Two steps:
 
-#### Option B — Bundle JSONs into the worker (cheap but defeats OBJ-1)
-At build, copy a pruned set of lender JSONs into `dist/_lenders/<slug>.json`. Worker fetches
-its own static asset for the body, fetches the catalog row from Supabase only for cache-key
-versioning.
+```bash
+# 2a. Apply DDL (Supabase MCP execute_sql or psql)
+psql "$DB_URL" -f supabase/migrations/2026-04-29_cdm_rev_a3_states_categories_glossary.sql
 
-- ✅ Zero schema change
-- ✅ No live DB write
-- ❌ Defeats OBJ-1 — body still needs a build to update. Same problem as today.
-- ❌ Worker bundle bloats by ~100MB if we don't aggressively prune
+# 2b. Backfill
+python3 tools/creditdoc_db_backfill_a3_content.py --apply --i-have-jammi-greenlight
+```
 
-**Verdict:** doesn't solve the problem we set out to solve. Skip.
+### 3. Apply Stage A.4 — blog + listicles + answers + specials (77 rows)
 
-#### Option C — `/r/[slug]` pilot route (recommended for this loop) ⭐
-Create a NEW SSR route `/r/[slug]` that uses ONLY `db.ts`. It reads `lenders` row
-via PostgREST, renders a minimal HTML body (brand name, category, rating, description,
-website, phone — what we already have on the `lenders` row today, no `body_*` needed yet).
+```bash
+psql "$DB_URL" -f supabase/migrations/2026-04-29_cdm_rev_a4_blog_listicles_answers_specials.sql
+python3 tools/creditdoc_db_backfill_a4_content.py --apply --i-have-jammi-greenlight
+```
 
-Existing `/review/[slug]` stays static + prerendered. `/r/[slug]` is the SSR pilot that
-proves the architecture and unblocks Phase 1.4 (cache wiring) + 1.5 (wrangler dev) + 1.6
-(preview deploy) + 1.7 (TTFB measurements + acceptance gate).
+### 4. Set Pages preview env: `REVALIDATE_TOKEN`
 
-When Jammi greenlights Option A, we cut over `/review/[slug]` to the same pattern and
-delete `/r/[slug]`.
+```bash
+TOKEN=$(openssl rand -hex 32)
+echo "Token (save in 1Password as 'CreditDoc Revalidate Token'): $TOKEN"
+# Set on cdm-rev-hybrid preview env:
+curl -X PATCH "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT/pages/projects/creditdoc" \
+  -H "X-Auth-Key: $CF_GLOBAL_KEY" -H "X-Auth-Email: $CF_EMAIL" \
+  -H "Content-Type: application/json" \
+  -d "{\"deployment_configs\":{\"preview\":{\"env_vars\":{\"REVALIDATE_TOKEN\":{\"value\":\"$TOKEN\",\"type\":\"secret_text\"}}}}}"
+# Then redeploy preview so the secret is bound:
+npx wrangler pages deploy dist --project-name creditdoc --branch cdm-rev-hybrid
+```
 
-- ✅ Inside loop authority — no live DB write, no production traffic touched
-- ✅ Lets us ship Phase 1.4–1.7 + measure OBJ-1
-- ✅ ~80–100 LOC for the route + already-built helpers
-- ❌ Body content limited to columns that exist on `lenders` today (no rich body until Option A lands)
+### 5. Phase 2.3 — wire `tools/creditdoc_db.py` → POST /api/revalidate
 
-**Recommend:** ship Option C this loop. Phase 1.3.B becomes "pilot SSR on `/r/[slug]`".
-Final cutover stays gated on Jammi's Option A approval.
+Modify `tools/creditdoc_db.py` so every successful `update_lender / update_brand / update_wellness / update_comparison / update_blog / update_listicle / update_answer / update_special` writer also POSTs to the preview endpoint:
 
-## What is safe to ship in this loop after Option C is greenlit
+```python
+import os, requests
+TOKEN = os.environ.get("REVALIDATE_TOKEN")
+def _ping_revalidate(type_: str, slug: str) -> None:
+    if not TOKEN:
+        return  # Soft-fail in dev
+    try:
+        requests.post(
+            "https://cdm-rev-hybrid.creditdoc.pages.dev/api/revalidate",
+            headers={"x-revalidate-token": TOKEN, "content-type": "application/json"},
+            json={"type": type_, "slug": slug},
+            timeout=8,
+        )
+    except Exception:
+        pass  # Non-blocking. Cache busts via updated_at regardless.
+```
 
-1. **Phase 1.3.B (rev'd)** — `/r/[slug]` SSR pilot using `db.ts` (~80 LOC).
-2. **Phase 1.4** — wire `cache.ts` around the `/r/[slug]` handler. Cache key = pathname + `contentVersionOf(lender)`.
-3. **Phase 1.5** — `wrangler pages dev` local SSR preview. Verify `/r/<known-slug>` renders.
-4. **Phase 1.6** — `wrangler pages deploy dist --project=creditdoc` (PREVIEW environment only — does NOT touch live `creditdoc.co`).
-5. **Phase 1.7** — TTFB measurements on the preview URL: cold/warm p50/p95. Acceptance bar: warm <100ms p95, cold <600ms p95. Re-run verifier — OBJ-1 should flip GREEN.
-6. **Phase 4.3 doc** — `creditdoc/docs/architecture/extending_the_app.md` "How to add a new SSR route in 6 steps". Doc-only, safe.
-7. **Phase 3.7 doc** — encryption-at-rest verification (doc-only — Supabase-managed, just record what's already true).
+Sequence: writer commits row → trigger bumps `updated_at` → Python pings `/api/revalidate` → endpoint pre-warms canonical URL → next user request hits a HIT not a MISS.
 
-## What is OFF-LIMITS this loop (do not start)
+---
 
-- Phase 2.3 — wiring `/api/revalidate` to `tools/creditdoc_db.py` (production tool — needs Jammi greenlight)
-- Phase 2.4 — live row probe to verify update→evict→serve (live DB write)
-- Phase 3.1 — creating `audit_log` triggers (live Supabase DDL)
-- Phase 3.2 — RLS audit policy changes (live Supabase DDL)
-- DNS changes (Phase 6 cutover only)
-- Vercel production changes (Phase 6 only)
-- CF Pages **production** deploy (preview is OK)
+## After all 5 greenlights land
 
-## When to ping Jammi
+| Acceptance criterion | How to verify |
+|---|---|
+| OBJ-1 GREEN end-to-end | Edit a lender row → next request to `/review/<slug>/` on the preview shows new content within 10s globally |
+| `/review/[slug]` HTML diff <0.1% vs Vercel | Run `tools/cdm_rev_html_diff.sh` against 20 sample slugs (script not yet written — list it here when written) |
+| Build still <30s | `time npx astro build` on a clean checkout (was 372s before A.1) |
+| Worker bundle <500 KB gzipped | `find dist/_worker.js -name '*.mjs' -exec cat {} + \| gzip -c \| wc -c` (currently 285 KB) |
 
-- Before Phase 1.6 (preview deploy) — confirm token / CF account access is set
-- Before any of the off-limits items above is unblocked
-- If full `astro build` keeps timing out at >10min on `cdm-rev-hybrid` and we need to short-circuit prerender for the build to finish
+Once all four are green, schedule the production cutover (Phase 6 — DNS flip from Vercel to CF Pages production branch). That step needs a separate greenlight + 24h notice.
 
-## Files to read before continuing
+---
 
-- `creditdoc/CREDITDOC_NOW.md` — live state (commits, branch, verifier baseline)
-- `creditdoc/docs/plans/2026-04-29_REVISED_MIGRATION_PLAN_HYBRID_FIRST.md` — full plan rev 4
-- `CreditDoc Project Improvement/2026-04-29_CREDITDOC_SITE_ARCHITECTURE.md` — A.1–A.14 build plan
-- Memory: `creditdoc_north_star.md` — three OBJs, rule of forfeit
-- Memory: `project_creditdoc_cloudflare_migration.md` — original CDM plan
-- Memory: `project_creditdoc_arch_overhaul_parallel.md` — `arch-overhaul` is OWNED BY ANOTHER WINDOW
+## What NOT to do
+
+- Do NOT touch `arch-overhaul` branch (parallel-window territory).
+- Do NOT push `cdm-rev-hybrid` to remote without explicit "push it" from Jammi.
+- Do NOT redo `/privacy/`, `/terms/`, `/disclosure/` — they are LIVE and 200 OK.
+- Do NOT call `--apply` on any backfill script without `--i-have-jammi-greenlight`.
+- Do NOT modify `tools/creditdoc_db.py` (production tool) before Phase 2.3 greenlight.
+- Do NOT set `REVALIDATE_TOKEN` on Vercel — only on the CF Pages preview.
+- Do NOT auto-flip DNS. Production cutover is a separate explicitly-approved step.
+
+---
+
+## Reference: branch state at handoff
+
+- Working branch: `cdm-rev-hybrid` (15 commits ahead of `main`, NOT pushed)
+- Latest commit: `8c8c790806` — A.3 + A.4 artifacts
+- `main`: untouched
+- `arch-overhaul`: parallel-window, off-limits
+- Live `creditdoc.co`: serving previous Vercel static build, untouched
+
+Re-check verifier any time:
+```bash
+python3 tools/verify_strategic_objectives.py
+```
