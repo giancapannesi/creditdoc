@@ -137,6 +137,39 @@ class ProtectedProfileError(Exception):
     pass
 
 
+# ─── CDM-REV Phase 2.3 — revalidate ping ─────────────────────────────
+# Every successful writer below pings the preview /api/revalidate endpoint
+# so the edge cache pre-warms the canonical URL on the next request.
+# Soft-fails when REVALIDATE_TOKEN env var is missing (dev/CI), so this is
+# always safe to leave wired in.
+_REVALIDATE_URL = os.environ.get(
+    "REVALIDATE_URL",
+    "https://cdm-rev-hybrid.creditdoc.pages.dev/api/revalidate",
+)
+
+
+def _ping_revalidate(type_: str, slug: str) -> None:
+    token = os.environ.get("REVALIDATE_TOKEN")
+    if not token or not slug:
+        return
+    try:
+        import urllib.request
+        body = json.dumps({"type": type_, "slug": slug}).encode("utf-8")
+        req = urllib.request.Request(
+            _REVALIDATE_URL,
+            data=body,
+            method="POST",
+            headers={
+                "x-revalidate-token": token,
+                "content-type": "application/json",
+            },
+        )
+        urllib.request.urlopen(req, timeout=8).read()
+    except Exception:
+        # Pre-warm is opportunistic — never block the writer on it.
+        pass
+
+
 class PersistentFieldError(Exception):
     """Raised when a non-founder tries to overwrite a persistent field."""
     pass
@@ -506,6 +539,7 @@ class CreditDocDB:
                 ),
             )
             self.conn.commit()
+            _ping_revalidate("lender", slug)
         elif blocked_wipe or blocked_replace:
             # Commit the blocked-attempt audit entries even if no real changes
             self.conn.commit()
@@ -556,6 +590,7 @@ class CreditDocDB:
             (slug, slug, updated_by, ts),
         )
         self.conn.commit()
+        _ping_revalidate("lender", slug)
 
     def set_protected(self, slug, protected=True, updated_by="founder"):
         """Mark a profile as protected (founder only)."""
@@ -574,6 +609,7 @@ class CreditDocDB:
             (slug, str(not protected), str(protected), ts, "Protection status changed"),
         )
         self.conn.commit()
+        _ping_revalidate("lender", slug)
 
     # ═══════════════════════════════════════════════════════════════
     # CONTENT READS & WRITES
@@ -608,6 +644,7 @@ class CreditDocDB:
             (slug, updated_by, ts),
         )
         self.conn.commit()
+        _ping_revalidate("blog", slug)
 
     def add_comparison(self, data: dict, updated_by: str):
         slug = data.get("slug", "")
@@ -620,6 +657,7 @@ class CreditDocDB:
             (slug, json.dumps(data, separators=(",", ":")), _checksum(data), ts, updated_by),
         )
         self.conn.commit()
+        _ping_revalidate("comparison", slug)
 
     def add_wellness_guide(self, data: dict, updated_by: str):
         slug = data.get("slug", "")
@@ -632,6 +670,7 @@ class CreditDocDB:
             (slug, json.dumps(data, separators=(",", ":")), _checksum(data), ts, updated_by),
         )
         self.conn.commit()
+        _ping_revalidate("wellness", slug)
 
     def add_listicle(self, data: dict, updated_by: str):
         slug = data.get("slug", "")
@@ -644,6 +683,7 @@ class CreditDocDB:
             (slug, json.dumps(data, separators=(",", ":")), _checksum(data), ts, updated_by),
         )
         self.conn.commit()
+        _ping_revalidate("listicle", slug)
 
     # ═══════════════════════════════════════════════════════════════
     # CLUSTER ANSWERS (Apr 15 2026 — cluster content plan executor)
@@ -749,6 +789,7 @@ class CreditDocDB:
             (slug, updated_by, ts, f"cluster_answer upserted status={status} score={data.get('compliance_score') or 0}"),
         )
         self.conn.commit()
+        _ping_revalidate("answer", slug)
 
     def delete_cluster_answer(self, slug, updated_by: str):
         if updated_by != "founder":
@@ -763,6 +804,7 @@ class CreditDocDB:
             (slug, updated_by, ts),
         )
         self.conn.commit()
+        _ping_revalidate("answer", slug)
 
     def export_cluster_answers_to_json(self, output_dir=None):
         """

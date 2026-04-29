@@ -18,7 +18,10 @@
  * Token rotation: edit the Pages secret + redeploy. No code change.
  *
  * Body shape:
- *   { type: "lender" | "wellness" | "comparison" | "brand", slug: "string" }
+ *   { type: ContentType, slug: "string" }
+ *   ContentType ∈ lender | wellness | comparison | brand
+ *                | blog | listicle | answer | special
+ *                | category | state | glossary
  *
  * Response:
  *   200 { ok: true, type, slug, prewarmed: boolean }
@@ -29,14 +32,39 @@ import type { APIRoute } from "astro";
 
 export const prerender = false;
 
+type ContentType =
+  | "lender"
+  | "wellness"
+  | "comparison"
+  | "brand"
+  | "blog"
+  | "listicle"
+  | "answer"
+  | "special"
+  | "category"
+  | "state"
+  | "glossary";
+
 interface RevalidatePayload {
-  type: "lender" | "wellness" | "comparison" | "brand";
+  type: ContentType;
   slug: string;
 }
 
-const VALID_TYPES = new Set(["lender", "wellness", "comparison", "brand"]);
+const VALID_TYPES = new Set<ContentType>([
+  "lender",
+  "wellness",
+  "comparison",
+  "brand",
+  "blog",
+  "listicle",
+  "answer",
+  "special",
+  "category",
+  "state",
+  "glossary",
+]);
 
-function _canonicalUrlFor(type: RevalidatePayload["type"], slug: string, origin: string): string | null {
+function _canonicalUrlFor(type: ContentType, slug: string, origin: string): string | null {
   const slugEnc = encodeURIComponent(slug);
   switch (type) {
     case "lender":
@@ -47,6 +75,22 @@ function _canonicalUrlFor(type: RevalidatePayload["type"], slug: string, origin:
       return `${origin}/compare/${slugEnc}/`;
     case "brand":
       return `${origin}/chains/${slugEnc}/`;
+    case "blog":
+      return `${origin}/blog/${slugEnc}/`;
+    case "listicle":
+      return `${origin}/best/${slugEnc}/`;
+    case "answer":
+      return `${origin}/answers/${slugEnc}/`;
+    case "special":
+      // Specials don't have a canonical page of their own; the lender page
+      // surfaces them. The lender writer will fire its own revalidate.
+      return null;
+    case "category":
+      return `${origin}/categories/${slugEnc}/`;
+    case "state":
+      return `${origin}/state/${slugEnc}/`;
+    case "glossary":
+      return `${origin}/glossary/${slugEnc}/`;
     default:
       return null;
   }
@@ -92,7 +136,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return new Response(
       JSON.stringify({
         ok: false,
-        error: "expected { type: 'lender'|'wellness'|'comparison'|'brand', slug: string }",
+        error:
+          "expected { type: 'lender'|'wellness'|'comparison'|'brand'|'blog'|'listicle'|'answer'|'special'|'category'|'state'|'glossary', slug: string }",
       }),
       { status: 400, headers: { "content-type": "application/json" } }
     );
