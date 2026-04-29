@@ -1,7 +1,7 @@
-# CreditDoc — LIVE STATE (as of 2026-04-29 09:35 UTC)
+# CreditDoc — LIVE STATE (as of 2026-04-29 09:55 UTC)
 
 ## Branch
-- Working branch: `cdm-rev-hybrid` (off `main`, 3 commits ahead, NOT pushed)
+- Working branch: `cdm-rev-hybrid` (off `main`, **5 commits ahead, NOT pushed**)
 - `main`: untouched. Last commit `88e6836d8d` (DB export Apr 28).
 - `arch-overhaul`: parallel-window territory — DO NOT TOUCH.
 - Stash: `pre-cdm-rev-hybrid-branch-stash 2026-04-29T09:11Z` — 549 modified `src/content/lenders/*.json` files (DB-export drift). Stashed cleanly before branch creation.
@@ -29,15 +29,19 @@
 | 2.x — revalidation Worker + DB-write wiring | not started | PAUSE for Jammi greenlight before 2.3 (touches `creditdoc_db.py` production tool) and 2.4 (live row probe). |
 | 3.1–3.5 — audit_log triggers, RLS audit, DPA, token register, cookie banner | not started | PAUSE for Jammi greenlight before 3.1 (live Supabase trigger creation). |
 | 3.6 — privacy/terms pages | ✅ ALREADY LIVE | VERIFIED today: `/privacy/`, `/terms/`, `/disclosure/` all 200. DO NOT redo. |
-| 3.7 — encryption-at-rest verification | not started | Doc-only, safe to do. |
+| 3.7 — encryption-at-rest verification | ✅ DONE | Commit `ace7bd78c4`. `creditdoc/docs/compliance/encryption_at_rest.md`. |
+| 4.3 — extending_the_app.md doc | ✅ DONE | Commit `ace7bd78c4`. 6-step howto for adding a new SSR surface. |
+| RULE 10 handoff docs | ✅ DONE | Commit `bdd057e2f5`. `CREDITDOC_NOW.md` + `CREDITDOC_NEXT.md` + Phase 0.4 inventory. |
 
-## Verifier baseline (Apr 29 09:30 UTC, branch cdm-rev-hybrid)
+## Verifier baseline (Apr 29 09:55 UTC, branch cdm-rev-hybrid)
 
 ```
 OBJ-1: RED   — hybrid mode active (output: 'static' + CF adapter), but no SSR pilot route yet (Phase 1.3.B not shipped).
 OBJ-2: RED   — audit_log table exists, fn_audit_row() missing, 0/4 trigger coverage on lenders|cluster_answers|lead_captures|user_quiz_responses.
-OBJ-3: RED   — no SSR pilot route → ~105 LOC to add a parallel SSR JSON route. Drops to GREEN once helpers (cache.ts + db.ts) are wired into a working SSR pilot.
+OBJ-3: GREEN — helpers (cache.ts + db.ts) in place. New SSR route can be added in ~20 LOC. Patterns documented in docs/architecture/extending_the_app.md.
 ```
+
+OBJ-3 flipped GREEN (was RED 09:30 UTC) because Phase 1.3.A scaffolding shipped + Phase 4.3 howto doc landed. OBJ-1 + OBJ-2 stay RED — gated on Phase 1.3.B (data-layer decision) and Phase 3.1 (live trigger creation), both off-limits this loop.
 
 Re-run any time: `python3 tools/verify_strategic_objectives.py`
 
