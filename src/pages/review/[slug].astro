@@ -7,8 +7,35 @@ import LenderCard from '../../components/LenderCard.astro';
 import TrustBadge from '../../components/TrustBadge.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
-import { getAllLenders, getLenderBySlug, formatPrice, getBbbClass, generateDiagnosis, getComparisons, getCategories, getWellnessGuidesByCategory, getGlossaryTermsForContext, getBadgeEligibility, getBrandInfo } from '../../utils/data';
+import {
+  formatPrice,
+  getBbbClass,
+  generateDiagnosis,
+  getBadgeEligibility,
+  getCategoriesRuntime,
+  getGlossaryTermsForContextRuntime,
+  getWellnessGuidesByCategoryRuntime,
+  getComparisonsForLenderRuntime,
+  getBrandInfoRuntime,
+  shapeBodyInlineToLender,
+  shapeCatalogToLenderStub,
+} from '../../utils/data-runtime';
+import {
+  getLenderWithBodyBySlugRuntime,
+  getLendersBySlugListRuntime,
+  getRelatedLendersByCategoryRuntime,
+  type RuntimeLenderEnv,
+} from '../../lib/db';
 import type { Lender } from '../../utils/data';
+
+// CDM-REV-2026-04-29 Phase 1.3.B-A.1 — SSR cutover.
+// `prerender = false` switches this route from build-time static to per-request
+// SSR on the Cloudflare Worker. Combined with the body_inline column on
+// `lenders` (A.1) and the wellness/comparisons/brands tables (A.2), every
+// content surface on this page is fetched from Postgres at request time.
+// OBJ-1 mechanism: DB row update bumps lenders.updated_at → CF Cache content-version
+// invalidates → next request re-fetches. <10s globally, no rebuild.
+export const prerender = false;
 
 const STATE_ABBR: Record<string, string> = {
   'Alabama':'AL','Alaska':'AK','Arizona':'AZ','Arkansas':'AR','California':'CA',
@@ -24,63 +51,61 @@ const STATE_ABBR: Record<string, string> = {
   'District of Columbia':'DC'
 };
 
-export function getStaticPaths() {
-  const lenders = getAllLenders();
-  // CDM-REV-2026-04-29 short-circuit: cap prerender during Phase 1.5/1.6/1.7
-  // smoke testing so the full build finishes <2min. Set LENDERS_PRERENDER_LIMIT
-  // to a positive integer to truncate; absent / 0 / non-numeric = full build.
-  // The /review/[slug] cutover (Option A) will move all of these to SSR
-  // and remove this branch entirely.
-  const limitRaw = (typeof process !== 'undefined' && process.env && process.env.LENDERS_PRERENDER_LIMIT) || '';
-  const limit = parseInt(limitRaw, 10);
-  const subset = (Number.isFinite(limit) && limit > 0) ? lenders.slice(0, limit) : lenders;
-  return subset.map(lender => ({
-    params: { slug: lender.slug },
-  }));
-}
+// Runtime env from Cloudflare Worker (Astro.locals.runtime.env on Pages adapter).
+// Falls back to undefined in build-mode preview without secrets — runtime
+// fetchers degrade gracefully (return null/[]) so the 404 path still renders.
+const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
 
 const { slug } = Astro.params;
-const lender = getLenderBySlug(slug!)!;
+if (!slug) return new Response('Bad request', { status: 400 });
 
-const allLenders = getAllLenders();
-const similarLenders = lender.similar_lenders
-  .map(s => getLenderBySlug(s))
-  .filter((l): l is Lender => l !== undefined)
-  .slice(0, 3);
+const primaryRow = await getLenderWithBodyBySlugRuntime(slug, env);
+if (!primaryRow) return new Response('Not found', { status: 404 });
 
-const categories = getCategories();
-const category = categories.find(c => c.slug === lender.category);
+const lender = shapeBodyInlineToLender(primaryRow);
 
-// Fallback chain: similar → nearby → same category → same state
-const usedSlugs = new Set([lender.slug]);
-
-const nearbyLenders = similarLenders.length === 0
-  ? allLenders
-      .filter(l => !usedSlugs.has(l.slug) && l.company_info?.city === lender.company_info?.city && l.company_info?.state === lender.company_info?.state && l.company_info?.city)
-      .sort((a, b) => (b.rating || 0) - (a.rating || 0))
-      .slice(0, 3)
+// Related-lender resolution: 2-tier (explicit similar_lenders → category top-rated).
+// Replaces the build-time 4-tier fallback (similar → nearby → category → state)
+// because the city/state-scoped catalog queries require denormalised lookups
+// the SSR path can't afford. The 2-tier version covers the same intent for
+// the user (related options) without per-request join cost.
+const similarSlugList = (lender.similar_lenders ?? []).filter(
+  (s): s is string => typeof s === 'string' && s.length > 0
+);
+let relatedRowsRaw = similarSlugList.length > 0
+  ? await getLendersBySlugListRuntime(similarSlugList.slice(0, 3), env)
   : [];
+if (relatedRowsRaw.length < 3) {
+  const more = await getRelatedLendersByCategoryRuntime(
+    lender.category,
+    lender.slug,
+    env,
+    3 - relatedRowsRaw.length
+  );
+  relatedRowsRaw = [...relatedRowsRaw, ...more];
+}
+const relatedLenders = relatedRowsRaw.slice(0, 3).map(shapeCatalogToLenderStub);
 
-const categoryLenders = similarLenders.length === 0 && nearbyLenders.length === 0
-  ? allLenders
-      .filter(l => !usedSlugs.has(l.slug) && l.category === lender.category && l.rating > 0)
-      .sort((a, b) => (b.rating || 0) - (a.rating || 0))
-      .slice(0, 3)
-  : [];
+// Backward-compat aliases — the template body downstream references these
+// names; with the 2-tier runtime fallback they collapse into a single bucket.
+const similarLenders = similarSlugList.length > 0 ? relatedLenders : [];
+const nearbyLenders: Lender[] = [];
+const categoryLenders = similarSlugList.length === 0 ? relatedLenders : [];
+const stateLenders: Lender[] = [];
+const usedSlugs = new Set([lender.slug, ...relatedLenders.map((l) => l.slug)]);
 
-// Last resort: same state, any category
-const stateAbbr = lender.company_info?.state ? (STATE_ABBR[lender.company_info.state] || lender.company_info.state) : '';
-const stateLenders = similarLenders.length === 0 && nearbyLenders.length === 0 && categoryLenders.length === 0 && stateAbbr
-  ? allLenders
-      .filter(l => !usedSlugs.has(l.slug) && l.company_info?.state === lender.company_info?.state && l.rating > 0)
-      .sort((a, b) => (b.rating || 0) - (a.rating || 0))
-      .slice(0, 3)
-  : [];
+const categories = getCategoriesRuntime();
+const category = categories.find((c) => c.slug === lender.category);
 
-const relatedLenders = similarLenders.length > 0 ? similarLenders : nearbyLenders.length > 0 ? nearbyLenders : categoryLenders.length > 0 ? categoryLenders : stateLenders;
-const relatedLendersLabel = similarLenders.length > 0 ? 'Similar Companies' : nearbyLenders.length > 0 ? `More Lenders in ${lender.company_info?.city}` : categoryLenders.length > 0 ? `More ${category?.name || 'Lenders'}` : `More Lenders in ${lender.company_info?.state || 'Your Area'}`;
+const stateAbbr = lender.company_info?.state
+  ? (STATE_ABBR[lender.company_info.state] || lender.company_info.state)
+  : '';
 
-// Category-mapped wellness guides
+const relatedLendersLabel = similarLenders.length > 0
+  ? 'Similar Companies'
+  : `More ${category?.name || 'Lenders'}`;
+
+// Category-mapped wellness guides — DB-backed (A.2).
 const categoryGuideMap: Record<string, string> = {
   'credit-repair': 'credit-repair',
   'debt-relief': 'financial-recovery',
@@ -91,7 +116,7 @@ const categoryGuideMap: Record<string, string> = {
   'buy-here-pay-here': 'loans-and-interest',
 };
 const guideCategory = categoryGuideMap[lender.category] || 'understanding-credit';
-const relatedWellnessGuides = getWellnessGuidesByCategory(guideCategory).slice(0, 3);
+const relatedWellnessGuides = (await getWellnessGuidesByCategoryRuntime(guideCategory, env, 3)).slice(0, 3);
 
 // Map lender category to glossary contexts
 const glossaryContextMap: Record<string, string[]> = {
@@ -108,7 +133,7 @@ const glossaryContextMap: Record<string, string[]> = {
   'credit-counseling': ['review-credit-repair', 'review-debt-relief'],
 };
 const glossaryContexts = glossaryContextMap[lender.category] || [];
-const glossaryTerms = getGlossaryTermsForContext(glossaryContexts);
+const glossaryTerms = getGlossaryTermsForContextRuntime(glossaryContexts);
 
 // Auto-link glossary terms and money keywords in description text.
 // If lender has affiliate_url + affiliate_anchors, the first match of each
@@ -121,9 +146,17 @@ const linkedParagraphs = lender.description_long
   ? linkifyDescription(lender.description_long, glossaryTerms, lender.slug, affiliateConfig, lender.category)
   : [];
 
-const comparisons = getComparisons().filter(
-  c => c.lender_a === lender.slug || c.lender_b === lender.slug
-);
+const comparisons = await getComparisonsForLenderRuntime(lender.slug, env, 6);
+
+// Pre-fetch the "other side" lender names for the Compare-With cards.
+// Single batched query keeps the SSR round-trip count bounded.
+const otherSlugs = Array.from(new Set(
+  comparisons.map((c) => (c.lender_a === lender.slug ? c.lender_b : c.lender_a))
+));
+const otherLendersRows = otherSlugs.length > 0
+  ? await getLendersBySlugListRuntime(otherSlugs, env)
+  : [];
+const otherLenderNames = new Map(otherLendersRows.map((r) => [r.slug, r.name]));
 
 const diagnosis = generateDiagnosis(lender);
 const bbbClass = getBbbClass(lender.company_info.bbb_rating);
@@ -380,8 +413,9 @@ const jsonLd = [
 
 const canonicalUrl = `https://www.creditdoc.co/review/${lender.slug}/`;
 
-// Brand/chain link — only present if lender belongs to an approved chain
-const brandInfo = lender.brand_slug ? getBrandInfo(lender.brand_slug) : null;
+// Brand/chain link — only present if lender belongs to an approved chain.
+// DB-backed (A.2): live from `brands` table at request time.
+const brandInfo = lender.brand_slug ? await getBrandInfoRuntime(lender.brand_slug, env) : null;
 
 // Per-entity OG image: prefer logo, fall through to default in BaseLayout
 const ogImageUrl = lender.logo_url?.trim()
@@ -1027,7 +1061,7 @@ const ogImageUrl = lender.logo_url?.trim()
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {comparisons.map(comp => {
           const otherSlug = comp.lender_a === lender.slug ? comp.lender_b : comp.lender_a;
-          const otherLender = getLenderBySlug(otherSlug);
+          const otherLenderName = otherLenderNames.get(otherSlug);
           return (
             <a
               href={`/compare/${comp.slug}/`}
@@ -1038,7 +1072,7 @@ const ogImageUrl = lender.logo_url?.trim()
               </div>
               <div>
                 <p class="text-sm font-semibold text-text group-hover:text-primary transition-colors">
-                  {lender.name} vs {otherLender?.name || otherSlug}
+                  {lender.name} vs {otherLenderName || otherSlug}
                 </p>
                 <p class="text-xs text-muted mt-0.5">Side-by-side comparison</p>
               </div>

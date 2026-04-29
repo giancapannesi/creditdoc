@@ -13,21 +13,13 @@
  *   SUPABASE_URL          — https://<ref>.supabase.co
  *   SUPABASE_ANON_KEY     — public anon JWT (RLS-protected)
  *
- * SCHEMA NOTE (2026-04-29):
- *   The live `lenders` table is a catalog index — it has slug + name +
- *   category + state + processing_status + brand_slug + has_logo +
- *   seo_tier + checksum + updated_at, AND NOTHING ELSE. Body content
- *   (description, services, hours, etc.) lives in src/content/lenders/*.json
- *   today and is NOT runtime-readable from the Worker.
- *
- *   To serve a full lender body via SSR we will need either:
- *     (a) ALTER TABLE public.lenders ADD body_r2_key text, body_inline jsonb
- *         + backfill (requires Jammi greenlight — Option A in CREDITDOC_NEXT.md), OR
- *     (b) `lender_bodies` side table joined on slug.
- *
- *   Until then, this helper returns the catalog row only. The /r/[slug] pilot
- *   route renders a minimal page from the catalog row — proof-of-concept for
- *   OBJ-1, not the final UX.
+ * SCHEMA NOTE (2026-04-29 — Option A.1 LANDED):
+ *   `lenders` now has 14 columns: the original 12-column catalog index plus
+ *   `body_inline jsonb` (full review body — description, pros, cons, pricing,
+ *   services, etc.) and `body_r2_key text` (reserved for future R2 split).
+ *   body_inline backfilled from src/content/lenders/<slug>.json on 2026-04-29.
+ *   Use getLenderWithBodyBySlugRuntime() for full-page SSR; use
+ *   getLenderBySlugRuntime() for catalog-only views.
  */
 
 export interface RuntimeLender {
@@ -90,11 +82,211 @@ export async function getLenderBySlugRuntime(
 }
 
 /**
+ * Same as getLenderBySlugRuntime but also pulls the body_inline jsonb blob.
+ * Use this for full /review/[slug]-style SSR. Returns null on not-found.
+ */
+export interface RuntimeLenderWithBody extends RuntimeLender {
+  body_inline: Record<string, unknown> | null;
+}
+
+const FULL_COLUMNS = `${CATALOG_COLUMNS},body_inline`;
+
+export async function getLenderWithBodyBySlugRuntime(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeLenderWithBody | null> {
+  if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return null;
+  const url =
+    `${env.SUPABASE_URL}/rest/v1/lenders` +
+    `?slug=eq.${encodeURIComponent(slug)}` +
+    `&select=${FULL_COLUMNS}` +
+    `&processing_status=eq.ready_for_index` +
+    `&limit=1`;
+  const res = await fetch(url, {
+    headers: {
+      apikey: env.SUPABASE_ANON_KEY,
+      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+      accept: "application/json",
+    },
+    signal: AbortSignal.timeout(2500),
+  });
+  if (!res.ok) return null;
+  const rows = (await res.json()) as RuntimeLenderWithBody[];
+  return rows[0] ?? null;
+}
+
+/**
+ * Catalog-only listing of lenders in a category, ordered by rating desc.
+ * Used by /review/[slug] SSR for the related-lender sidebar (replaces the
+ * build-time `getAllLenders().filter(...).sort(...)` chain). Returns up to
+ * `limit` rows excluding `excludeSlug`.
+ *
+ * NOTE: PostgREST treats `select=` columns as projection — we use the catalog
+ * columns only (no body_inline) to keep the response payload small.
+ */
+export async function getRelatedLendersByCategoryRuntime(
+  category: string,
+  excludeSlug: string,
+  env?: RuntimeLenderEnv,
+  limit = 10
+): Promise<RuntimeLender[]> {
+  if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return [];
+  const url =
+    `${env.SUPABASE_URL}/rest/v1/lenders` +
+    `?category=eq.${encodeURIComponent(category)}` +
+    `&slug=neq.${encodeURIComponent(excludeSlug)}` +
+    `&processing_status=eq.ready_for_index` +
+    `&select=${CATALOG_COLUMNS}` +
+    `&order=updated_at.desc` +
+    `&limit=${limit}`;
+  const res = await fetch(url, {
+    headers: {
+      apikey: env.SUPABASE_ANON_KEY,
+      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+      accept: "application/json",
+    },
+    signal: AbortSignal.timeout(2500),
+  });
+  if (!res.ok) return [];
+  return (await res.json()) as RuntimeLender[];
+}
+
+/**
+ * Catalog-only fetch of multiple specific slugs. Used to resolve the
+ * `similar_lenders` array (which stores slugs) into catalog rows for the
+ * related-lender sidebar.
+ */
+export async function getLendersBySlugListRuntime(
+  slugs: string[],
+  env?: RuntimeLenderEnv
+): Promise<RuntimeLender[]> {
+  if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return [];
+  if (!slugs.length) return [];
+  const inList = slugs.map(encodeURIComponent).join(",");
+  const url =
+    `${env.SUPABASE_URL}/rest/v1/lenders` +
+    `?slug=in.(${inList})` +
+    `&processing_status=eq.ready_for_index` +
+    `&select=${CATALOG_COLUMNS}` +
+    `&limit=${slugs.length}`;
+  const res = await fetch(url, {
+    headers: {
+      apikey: env.SUPABASE_ANON_KEY,
+      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+      accept: "application/json",
+    },
+    signal: AbortSignal.timeout(2500),
+  });
+  if (!res.ok) return [];
+  return (await res.json()) as RuntimeLender[];
+}
+
+/**
  * Convert ISO updated_at to a stable monotonic int for cache key.
  */
 export function contentVersionOf(lender: RuntimeLender): number {
   const t = Date.parse(lender.updated_at);
   return Number.isFinite(t) ? Math.floor(t / 1000) : 0;
+}
+
+// ============================================================================
+// CDM-REV Stage A.2 — wellness_guides / comparisons / brands runtime fetchers
+// ============================================================================
+// Same pattern as lenders: PostgREST anon read, body_inline jsonb holds the
+// full document, RLS-protected, set_updated_at trigger bumps cache key on any
+// row write. Returns [] / null when env not wired (build/preview without secrets)
+// so callers degrade gracefully.
+
+async function _restGet<T>(
+  url: string,
+  env: RuntimeLenderEnv | undefined
+): Promise<T[] | null> {
+  if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return null;
+  const res = await fetch(url, {
+    headers: {
+      apikey: env.SUPABASE_ANON_KEY,
+      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+      accept: "application/json",
+    },
+    signal: AbortSignal.timeout(2500),
+  });
+  if (!res.ok) return null;
+  return (await res.json()) as T[];
+}
+
+export interface RuntimeWellnessGuide {
+  slug: string;
+  title: string;
+  category: string | null;
+  body_inline: Record<string, unknown> | null;
+  updated_at: string;
+}
+
+export async function getWellnessGuidesByCategoryRuntime(
+  category: string,
+  env?: RuntimeLenderEnv,
+  limit = 6
+): Promise<RuntimeWellnessGuide[]> {
+  if (!category) return [];
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/wellness_guides` +
+    `?category=eq.${encodeURIComponent(category)}` +
+    `&select=slug,title,category,body_inline,updated_at` +
+    `&order=updated_at.desc` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeWellnessGuide>(url, env);
+  return rows ?? [];
+}
+
+export interface RuntimeComparison {
+  slug: string;
+  lender_a: string;
+  lender_b: string;
+  body_inline: Record<string, unknown> | null;
+  updated_at: string;
+}
+
+/**
+ * Comparisons that mention the given lender slug as either side.
+ * Used by /review/[slug] to render the "vs other lenders" sidebar.
+ */
+export async function getComparisonsForLenderRuntime(
+  lenderSlug: string,
+  env?: RuntimeLenderEnv,
+  limit = 6
+): Promise<RuntimeComparison[]> {
+  if (!lenderSlug) return [];
+  const slugEnc = encodeURIComponent(lenderSlug);
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/comparisons` +
+    `?or=(lender_a.eq.${slugEnc},lender_b.eq.${slugEnc})` +
+    `&select=slug,lender_a,lender_b,body_inline,updated_at` +
+    `&order=updated_at.desc` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeComparison>(url, env);
+  return rows ?? [];
+}
+
+export interface RuntimeBrand {
+  slug: string;
+  display_name: string;
+  category: string | null;
+  body_inline: Record<string, unknown> | null;
+  updated_at: string;
+}
+
+export async function getBrandBySlugRuntime(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeBrand | null> {
+  if (!slug) return null;
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/brands` +
+    `?slug=eq.${encodeURIComponent(slug)}` +
+    `&select=slug,display_name,category,body_inline,updated_at` +
+    `&limit=1`;
+  const rows = await _restGet<RuntimeBrand>(url, env);
+  return rows?.[0] ?? null;
 }
 
 // Type alias for Cloudflare Workers R2 binding (no @cloudflare/workers-types

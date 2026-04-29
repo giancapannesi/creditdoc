@@ -1,4 +1,23 @@
-# CreditDoc — LIVE STATE (as of 2026-04-29 10:36 UTC)
+# CreditDoc — LIVE STATE (as of 2026-04-29 13:05 UTC)
+
+## CDM-REV Phase 1.3.B — Stage A.2 IN PROGRESS / `/review/[slug]` SSR LANDED
+
+**SSR cutover landed (commit pending):**
+- `src/pages/review/[slug].astro` rewired: `export const prerender = false`, fs-bound helpers replaced with runtime fetchers from `src/utils/data-runtime.ts` + `src/lib/db.ts`. `getStaticPaths` removed. 4-tier related-lender fallback collapsed to 2-tier (similar → category top-rated). Comparison "vs" cards now use a single batched lender-name lookup.
+- `astro build` clean: 141s, gzipped Worker script = **286 KB** (well under the 1 MB Worker limit). Build output had 0 `/review/` prerender lines — the 372s prerender penalty for this route is gone.
+- Stage A.2 DDL applied to live Supabase: `wellness_guides` (slug PK + body_inline jsonb), `comparisons` (slug PK + lender_a/lender_b + body_inline jsonb), `brands` (slug PK + display_name + body_inline jsonb). Each: indexes, RLS-on, anon SELECT policy, set_updated_at trigger. Tables EMPTY.
+- Stage A.2 backfill script ready: `tools/creditdoc_db_backfill_a2_content.py` — dry-run completed, CSVs generated (81 wellness / 165 comparisons / 57 brands). `--apply --i-have-jammi-greenlight` HELD pending Jammi greenlight per /loop "no live DB write" directive.
+- `src/lib/db.ts` extended with `getWellnessGuidesByCategoryRuntime`, `getComparisonsForLenderRuntime`, `getBrandBySlugRuntime` (all anon PostgREST, 2.5s timeout, gracefully return [] / null when env not wired).
+- `src/utils/data-runtime.ts` extended with shape adapters; brand glob bundling RETIRED in favour of DB lookup.
+
+**Pending Jammi greenlights (all live-DB or production-tool work):**
+1. Run `--apply` on the A.2 backfill script (writes 303 rows total to 3 brand-new empty tables).
+2. Stages A.3 (states + categories + glossary_terms) and A.4 (blog_posts + listicles + answers + specials) DDL + backfill.
+3. Phase 2.3 (wire `tools/creditdoc_db.py` → POST /api/revalidate) — production-tool modification.
+
+---
+
+# Earlier state (Apr 29 10:36 UTC) — preserved below for trajectory.
 
 ## Branch
 - Working branch: `cdm-rev-hybrid` (off `main`, **13 commits ahead, NOT pushed**)
