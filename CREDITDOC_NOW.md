@@ -4,6 +4,54 @@
 
 ---
 
+## RIGHT NOW — 2026-04-30 ~14:20 UTC (iter 17) · 🟡 PHASE 6 CUTOVER PLAYBOOK SHIPPED, AWAITING DEPLOY UNBLOCK
+
+**Deploy status (14:20 UTC):** Watcher PID 1566760 elapsed ~63 min, poll #64, no `x-cdm-version`. No new origin commits since iter 16. CF token still empty.
+
+**🤖 ITER 17 — `docs/plans/2026-04-30_PHASE_6_CUTOVER_PLAYBOOK.md`** (213 LOC, commit `2c33a0d8e1`)
+
+The single doc Jammi reads at cutover GO time. No more spelunking across 8 plan files. Sections:
+- 10-row pre-flight checklist (all must be GREEN before flip)
+- T-30 → T-0 → T+5 → T+30 → T+2h → T+24h sequence
+- 6 abort criteria mapped to Drills 1-5
+- 5 open items needing Jammi input pre-T-30 (DNS TTL schedule, CF "Promote prior" access, Supabase PITR window, cutover time-of-day, comms channels)
+
+**Why now:** Phase 1 acceptance orchestrator gives GO/NO-GO, rollback playbook covers reverts, but the cutover ITSELF was scattered across the migration plan + rollback playbook + e2e probe usage. With evening deadline pressure ("we need to be concluding testing this evening"), having Jammi click GO without pre-staged playbook = avoidable delay.
+
+**🛑 OFFLINE GATE STATUS — all closeable items now CLOSED + cutover ready to run:**
+| Gate | Status | Notes |
+|------|--------|-------|
+| 5.1 SSR /answers /best | ✅ GREEN | Committed prior iters |
+| 5.1 SSR /state | ⬜ A.5-gated | Needs MV migration (Jammi) |
+| 5.2 panel diff (gate d) | ✅ GREEN | 50/50 0% baseline |
+| 5.3 cacheWrap middleware | ✅ GREEN | Deployed in code |
+| 5.5 e2e probe tool | ✅ GREEN | Tool exists; live run deploy-gated |
+| 5.7 revalidate path (gate f) | ✅ GREEN | HTTP 405 endpoint wired |
+| 5.8 audit log scaffolding | ⬜ Deferred | Deploy + DB-writes-needed |
+| 5.9.1 rollback playbook | ✅ GREEN | Drafted iter 9 |
+| 5.9.2 rollback tooling | ✅ GREEN | Verified iter 16 |
+| 5.9.3 dress rehearsal | ⬜ Deploy-gated | All prereqs ready |
+| 5.10 OBJ verifier | ✅ GREEN | Tool wired into orchestrator |
+| Phase 1 acceptance orch | ✅ GREEN | Iter 15 shipped |
+| **Phase 6 cutover playbook** | ✅ GREEN | **Iter 17 shipped** |
+
+**🛑 ACTION JAMMI — STILL need ONE of:**
+1. **Single click:** dash.cloudflare.com → Workers & Pages → `creditdoc` → latest deployment (~10h+ old) → `⋯` → **"Retry deployment"**
+2. **OR paste me a CF Pages:Edit token** to `/srv/BusinessOps/tools/.creditdoc-migration.env` (chmod 600).
+3. **OR tell me what you see in the dash** so I can root-cause.
+
+**User signal:** "we need to be concluding testing this evening" — evening deadline. Watcher fires combined cutover-gate verdict on recovery. Phase 6 playbook ready for Jammi to read at GO.
+
+---
+
+## ITER 17 PROGRESS
+
+Built `docs/plans/2026-04-30_PHASE_6_CUTOVER_PLAYBOOK.md` (213 LOC) — single-doc cutover checklist. Maintenance-mode commitment from iter 16 was for *tools*, not *docs*. The playbook unlocks Jammi-readiness when deploy returns.
+
+**Why this matters for OBJ-1:** Cutover IS the OBJ-1 ship moment. A pre-staged playbook means Jammi GO → DNS flipped → T+24h hold runs as a tight sequence rather than ad-hoc. Removes the "Claude has to remember what to do at T+30" failure mode mid-cutover.
+
+---
+
 ## RIGHT NOW — 2026-04-30 ~13:55 UTC (iter 16) · 🟡 PHASE 5.9.2 TOOLING VERIFIED OFFLINE, ALL OFFLINE GATES CLOSED, AWAITING DEPLOY
 
 **Deploy status (13:55 UTC):** Watcher PID 1566760 elapsed ~40 min, poll #36, no `x-cdm-version`. No new origin commits. CF token still empty.
