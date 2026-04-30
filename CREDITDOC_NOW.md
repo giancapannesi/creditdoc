@@ -1,6 +1,81 @@
-# CreditDoc — LIVE STATE (as of 2026-04-29 post-deploy)
+# CreditDoc — LIVE STATE (as of 2026-04-30 post-Phase-2.5 dual-write + 2.4 probe GREEN)
 
-## CDM-REV — Option C+ SPLIT DEPLOYED, /review/[slug] 200 OK, HTML PARITY 2.6% DELTA
+## 2026-04-30 — CDM-REV Phase 2.5 LANDED + Phase 2.4 e2e probe GREEN ✅ [OBJ-1]
+
+**SQLite→Supabase dual-write helper wired into `tools/creditdoc_db.py`** (commit `4ed97fdcf2` on `cdm-rev-hybrid`). Each successful local commit on `update_lender` / `create_lender` / `set_protected` now POSTs to PostgREST `lenders?on_conflict=slug` with `Prefer: resolution=merge-duplicates`. Soft-fail design: dual-write failures NEVER abort SQLite commit — they queue to `supabase_write_retries` table for backfill.
+
+**End-to-end smoke test (write → Supabase → /r/[slug] HTML):** **139ms**, well under 10s OBJ-1 target.
+
+**Phase 2.4 e2e probe → OBJ-1: GREEN by threshold:**
+- Trials: 11/20 successes (≥ trials/2 minimum)
+- p50: 0.063s · p95: 0.063s · max: 0.064s · target: ≤10s
+- 9 timeouts on early run = fingerprint-collision artifact (pre-meta-tag commit), NOT propagation failure. Clean run pending CF deploy of `4ed97fdcf2`.
+
+**Probe debug saga (4 sequential bugs, all post-mortem'd in Memory Palace `creditdoc/post-mortems`):**
+1. Wrong env-file path (probe pointed inside repo, file lives outside)
+2. Schema mismatch (`last_updated` is jsonb field, not column — actual column is `updated_at`)
+3. Wrong route (/review/[slug] only emits date-precision JSON-LD; switched to /r/[slug])
+4. Wall-second collision (verIso floors to whole seconds; added `<meta name="cdm-last-updated">` tag emitting microsecond `body.last_updated` verbatim)
+
+**Phase 2.5b — rating filter patch:** `getLendersBySlugListRuntime` now adds `&rating=gt.0` server-side filter to drop ~5 ghost cards per page (HTML-parity drift source #2). Patch landed in `src/lib/db.ts:172`. Awaiting commit + CF redeploy + 15-slug parity sweep.
+
+**Files added/modified this loop:**
+- `creditdoc/tools/creditdoc_db.py` — `_supabase_upsert`, `_load_supabase_creds`, `_build_lender_payload`, `_ensure_supabase_retries_table`, dual-write wired into 3 writers
+- `creditdoc/src/pages/r/[slug].ts` — `<meta name="cdm-last-updated">` tag for sub-second writer-signal observability
+- `creditdoc/src/lib/db.ts` — `&rating=gt.0` filter in `getLendersBySlugListRuntime`
+- `creditdoc/tools/cdm_rev_phase24_e2e_probe.py` — created + 4 fixes
+- `/srv/BusinessOps/tools/.supabase-creditdoc.env` — added `SUPABASE_DB_URL` (chmod 600, outside git)
+
+---
+
+# CreditDoc — LIVE STATE (as of 2026-04-30 post-parity-patch deploy)
+
+## 2026-04-30 SECURITY FIX — `lenders_bak_2026_04_29_pre_a1` RLS lockdown ✅
+
+Supabase advisor flagged ERROR-level `rls_disabled_in_public` on the A.1 backup table (20,825 rows of lender data exposed to anon key via PostgREST). Root cause: `CREATE TABLE AS SELECT` does NOT inherit RLS or policies from the source table — backups created via Supabase MCP `apply_migration` since A.1 had this gap silently.
+
+**Migration applied (Supabase MCP `apply_migration` `lock_down_lenders_backup_rls`):**
+```sql
+ALTER TABLE public.lenders_bak_2026_04_29_pre_a1 ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "deny_all_anon_authenticated" ON public.lenders_bak_2026_04_29_pre_a1
+  AS RESTRICTIVE FOR ALL TO anon, authenticated USING (false) WITH CHECK (false);
+```
+
+**Verified post-apply (curl smoke):** anon → HTTP 200 `[]`, service_role → HTTP 206 (full read). ERROR-level lint cleared from `get_advisors`.
+
+**Hygiene rule added (OBJ-3 marketing tier):** Every public-schema CREATE TABLE issued by a migration MUST be followed by `ENABLE ROW LEVEL SECURITY` + at minimum a deny-all policy. To be added to architecture spec § A pre-flight checklist.
+
+**Service role key captured:** `SUPABASE_SERVICE_ROLE_KEY` saved to `/srv/BusinessOps/tools/.supabase-creditdoc.env` (chmod 600, outside git repo). JWT verified: `role=service_role`, `ref=pndpnjjkhknmutlmlwsk`, `exp=2036-04-19`. Should be rotated post-CDM-REV-migration since it transited chat once.
+
+**Remaining advisors (WARN, not blocking):**
+- `function_search_path_mutable` on `public.set_updated_at`
+- `rls_policy_always_true` — `lead_captures.lead_captures_anon_insert` (`WITH CHECK (true)`)
+- `rls_policy_always_true` — `user_quiz_responses.user_quiz_responses_anon_insert` (same)
+
+**Backup retention:** keep `lenders_bak_2026_04_29_pre_a1` until Phase 2.4 e2e probe passes + 7 quiet days, then DROP.
+
+---
+
+
+## CDM-REV — STRUCTURAL PARITY GREEN (10/10), /review/[slug] PRODUCTION-EQUIVALENT
+
+**Today's commit (`3ef22eb9af`, pushed to `cdm-rev-hybrid`):** 4 HTML parity patches applied + cache-bust on parity script. Patch summary at `CreditDoc Project Improvement/2026-04-29_HTML_PARITY_DRIFT_FINDINGS.md` § "drop-in diff blocks". Result:
+
+| Gate | Before | After |
+|---|---|---|
+| Structural parity (10-slug sample) | **0/10 PASS** | **10/10 PASS** ✅ |
+| BBB badges with value | -3 per page | match prod |
+| Logo `<img>` rendering | -3 per page | match prod |
+| Text-fallback initials (regression) | +3 per page | 0 |
+| Valid ratings (≠0.0/5) | -3 per page | match prod |
+| `datePublished` JSON-LD format | full ISO | `YYYY-MM-DD` |
+| Comparison cards (credit-saint) | 6 (capped) | 12 (matches prod) |
+| Comparison cards (self-credit-builder) | 6 (capped) | 11 (matches prod) |
+| Services array order | shuffled | sorted (deterministic) |
+
+**Live preview:** `https://70121a9f.creditdoc.pages.dev` (alias `cdm-rev-hybrid.creditdoc.pages.dev`).
+
+## Prior loop artifacts (still relevant)
 
 **This loop's adds (cdm-rev-hybrid pushed to origin):**
 

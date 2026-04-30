@@ -166,10 +166,15 @@ export async function getLendersBySlugListRuntime(
   if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return [];
   if (!slugs.length) return [];
   const inList = slugs.map(encodeURIComponent).join(",");
+  // CDM-REV Phase 2.5b — rating>0 server-side filter. similar_lenders sidebar
+  // hides cards whose rating is null/0; pushing the filter to PostgREST drops
+  // ~5 ghost cards per page on average (HTML-parity drift source #2 from the
+  // 2026-04-29 findings doc).
   const url =
     `${env.SUPABASE_URL}/rest/v1/lenders` +
     `?slug=in.(${inList})` +
     `&processing_status=eq.ready_for_index` +
+    `&rating=gt.0` +
     `&select=${FULL_COLUMNS}` +
     `&limit=${slugs.length}`;
   const res = await fetch(url, {
