@@ -247,7 +247,8 @@ def check_obj2(env: dict) -> CheckResult:
     detail["fn_audit_row_function"] = fn_present
 
     # Which write-target tables have audit trigger?
-    write_targets = ("lenders", "cluster_answers", "lead_captures", "user_quiz_responses")
+    # Apr 30: corrected list — table is `answers`, not `cluster_answers`.
+    write_targets = ("lenders", "answers", "lead_captures", "user_quiz_responses")
     rc, out, err = _psql(
         env,
         f"""SELECT event_object_table
