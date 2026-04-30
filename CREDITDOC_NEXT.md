@@ -1,8 +1,12 @@
 # CreditDoc — NEXT (RULE 10 handoff, last updated 2026-04-30 post-2.5b-fix + linter + dangling-refs report + token register)
 
-## ✅ LANDED (Apr 30 PM late) — Phase 3.4 scoped token register [OBJ-3]
+## ✅ LANDED (Apr 30 PM late) — Phase 3.4 token register + Phase 3.5 cookie consent [OBJ-3]
 
-`docs/compliance/token_register.md` (commit `754c88ea2e`) — single source of truth for every credential CreditDoc relies on. Tier 1 marketing-site posture today; this register becomes the migration entry-point when KYB / lending product surfaces activate. Quarterly review, next due 2026-07-30. Phase 3.4 of CDM-REV plan now done.
+**Phase 3.4 — `docs/compliance/token_register.md`** (commit `754c88ea2e`): single source of truth for every credential. CF + Supabase + R2 + REVALIDATE_TOKEN + GSC/GA4 + Places + social + DPA attestations. Quarterly review, next due 2026-07-30.
+
+**Phase 3.5 — Cookie consent + GA4 default-deny** (commit `fd3c477908`): `CookieConsent.astro` pinned bottom-of-viewport, two buttons (Accept / Decline), localStorage `cd_consent` persistence. BaseLayout switched to Google Consent Mode v2 — `gtag('consent', 'default', {analytics_storage: 'denied', ...})` runs BEFORE the gtag library loads, so measurement queues until opt-in. Banner only shows for genuinely new visitors (prior consent silently restored).
+
+CDM-REV Phase 3 (compliance baseline) is now substantively complete: 3.1 audit_log triggers GREEN, 3.2 RLS hygiene rule documented, 3.4 token register, 3.5 consent. Remaining: 3.3 DPA PDFs (needs CF + Supabase dashboard access — Jammi-side), 3.6 verify privacy.astro/terms.astro copy is current.
 
 ## ⏸ AWAITING JAMMI GREENLIGHT — Dangling similar_lenders prune (Apr 30 PM) [OBJ-1]
 
