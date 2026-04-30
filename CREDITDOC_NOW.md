@@ -4,18 +4,35 @@
 
 ---
 
-## RIGHT NOW — 2026-04-30 ~11:38 UTC (iter 11) · 🟡 ALL ROLLBACK TOOLING SHIPPED, DEPLOY STILL BLOCKED
+## RIGHT NOW — 2026-04-30 ~12:10 UTC (iter 12) · 🟡 DEPLOY-RECOVERY WATCHER ARMED, DEPLOY STILL BLOCKED
 
-**Deploy status:** Last successful CF Pages build was ~04:00 UTC. 7 commits now pushed to `cdm-rev-hybrid` since — none built. Verified at 11:37 UTC: 5 commit-prefixed deploy URLs (`c76f12a1` → `44db458c2a`) ALL return 404. Branch alias `cdm-rev-hybrid.creditdoc.pages.dev` returns HTTP 200 but serves the LAST KNOWN GOOD HTML (no `x-cdm-version`, `cache-control: max-age=0, must-revalidate`). Webhook-kick FAILED.
+**Deploy status:** Last successful CF Pages build was ~04:00 UTC. 8 commits now pushed to `cdm-rev-hybrid` since — none built. Verified at 12:07 UTC: branch alias still serves last-good HTML, no `x-cdm-version`, `cache-control: public, max-age=0, must-revalidate`. Origin has no new Jammi commits. CF token still empty.
 
-**Auth state UNCHANGED:** CF API token empty. `wrangler whoami` not authenticated. Cannot drive deploys autonomously.
+**🤖 NEW THIS LOOP — autonomous watcher armed (PID 1559109, max 6h):** `tools/cdm_rev_deploy_watcher.py` is running in background. Polls the SSR probe URL every 60s. When `x-cdm-version` first appears it auto-fires Phase 5.5b live e2e probe (`--route all --apply --trials 10`) and emails Harvey → gian.eao@gmail.com with the verdict. Result: the moment Jammi unblocks deploy, he gets a verdict in his inbox in <60s — no waiting for the 25-min /loop cycle.
 
-**🛑 ACTION JAMMI — pick ONE:**
-1. **Single click:** dash.cloudflare.com → Workers & Pages → `creditdoc` → latest deployment (~7h old) → `⋯` → **"Retry deployment"**
-2. **OR paste me a CF Pages:Edit token** and I'll drive every redeploy via `wrangler` for the rest of the migration. Token goes in `/srv/BusinessOps/tools/.creditdoc-migration.env` (chmod 600).
-3. **OR tell me what you see in the dash** — building? red error? auth-disconnected banner? — so I can root-cause instead of guess.
+**🛑 ACTION JAMMI — still need ONE of:**
+1. **Single click:** dash.cloudflare.com → Workers & Pages → `creditdoc` → latest deployment (~8h old) → `⋯` → **"Retry deployment"**
+2. **OR paste me a CF Pages:Edit token** to `/srv/BusinessOps/tools/.creditdoc-migration.env` (chmod 600).
+3. **OR tell me what you see in the dash** so I can root-cause.
 
-**User signal:** "we need to be concluding testing this evening" — evening deadline. Live e2e testing is impossible until deploy unblocks. Offline work continues.
+**User signal:** "we need to be concluding testing this evening" — evening deadline. Live e2e testing now auto-fires when deploy returns. Offline work continues until then.
+
+---
+
+## ITER 12 PROGRESS (parallel work while deploy blocked)
+
+**Commit `424f20e049` — Phase 5.9.5 deploy-recovery watcher** (push 12:10 UTC).
+
+`tools/cdm_rev_deploy_watcher.py` (202 LOC). GET-polls `https://cdm-rev-hybrid.creditdoc.pages.dev/answers/are-small-business-loans-worth-it/` every 60s. When `x-cdm-version` first appears in response headers it:
+1. Spawns `python3 tools/cdm_rev_phase24_e2e_probe.py --route all --apply --trials 10`
+2. Captures verdict + last 80 stdout lines + JSON report path (`data/cdm_rev_phase24_probe_latest.json`)
+3. Sends Harvey email to gian.eao@gmail.com with subject `[CDM-REV] Deploy recovered + e2e probe PASS|FAIL`
+
+Logs to `data/cdm_rev_deploy_watcher.log`. Has `--notify-only` mode (skip --apply probe), `--max-hours` cap (default 4), `--poll-seconds` (default 60). Sets a custom UA because CF Pages 403s default Python UA.
+
+**Now running in background:** PID 1559109, --max-hours 6, --poll-seconds 60. Will exit when deploy detected OR 6h elapses.
+
+This collapses the time-to-verdict for Jammi's "concluding testing this evening" from "Jammi clicks Retry → deploy builds 3min → /loop wakes 25min later → I run probe" to "Jammi clicks Retry → deploy builds 3min → 60s later results in his inbox."
 
 ---
 
@@ -140,4 +157,4 @@ This unblocks the Phase 6 cutover gate ("§5.9 Rollback wrapper rehearsed and ti
 
 ---
 
-_Last updated 2026-04-30 11:38 UTC (iter 11)._
+_Last updated 2026-04-30 12:10 UTC (iter 12)._
