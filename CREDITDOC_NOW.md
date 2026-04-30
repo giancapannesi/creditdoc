@@ -4,6 +4,27 @@
 
 ---
 
+## RIGHT NOW — 2026-04-30 ~15:14 UTC (iter 19) · 🟡 STILL MAINTENANCE — DEPLOY BLOCKED 2H+, EVENING DEADLINE ~4H AWAY
+
+**Deploy status (15:14 UTC):** Watcher PID 1566760 elapsed ~2h, poll #119, no `x-cdm-version`. No new origin commits. CF token still empty. Watcher 6h budget expires ~19:14 UTC = 21:14 CAT (Jammi's evening).
+
+**🤖 ITER 19 — true maintenance still.** No new artifacts. All offline work already shipped iters 13-17.
+
+**🛑 ACTION JAMMI — STILL need ONE of:**
+1. **Single click:** dash.cloudflare.com → Workers & Pages → `creditdoc` → latest deployment → `⋯` → **"Retry deployment"**
+2. **OR paste me a CF Pages:Edit token** to `/srv/BusinessOps/tools/.creditdoc-migration.env` (chmod 600).
+3. **OR tell me what you see in the dash** so I can root-cause.
+
+If no deploy unblock by 19:14 UTC, watcher will email a TIMEOUT verdict to Harvey. Iter 19 just confirms watcher is healthy and continues to wait.
+
+---
+
+## ITER 19 PROGRESS
+
+Maintenance only. Watcher PID 1566760 alive at poll #119. Deploy unchanged.
+
+---
+
 ## RIGHT NOW — 2026-04-30 ~14:47 UTC (iter 18) · 🟡 TRUE MAINTENANCE MODE — DEPLOY STILL BLOCKED, ALL OFFLINE WORK COMPLETE
 
 **Deploy status (14:47 UTC):** Watcher PID 1566760 elapsed ~93 min, poll #93, no `x-cdm-version`. No new origin commits. CF token still empty. Watcher 6h budget expires ~19:14 UTC (end-of-evening CAT).
