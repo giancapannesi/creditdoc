@@ -4,31 +4,92 @@ import AffiliateInline from '../../components/AffiliateInline.astro';
 import AffiliateSidebar from '../../components/AffiliateSidebar.astro';
 import { createLinker } from '../../utils/inline-linker';
 import {
-  getClusterAnswers,
-  getClusterAnswerBySlug,
-  getSiblingClusterAnswers,
-  getGlossaryTermsForContext,
-} from '../../utils/data-build';
+  getAnswerBySlugRuntime,
+  getSiblingAnswersByPillarRuntime,
+  getGlossaryTermsForContextsRuntime,
+  type RuntimeAnswer,
+} from '../../lib/db';
 
-export function getStaticPaths() {
-  const answers = getClusterAnswers();
-  return answers.map(a => ({
-    params: { slug: a.slug },
-  }));
-}
+// CDM-REV Phase 5.1 [OBJ-1] — SSR (no rebuild).
+// DB row update at T+0 → URL serves new HTML at T+≤cache TTL.
+// Cache layer: Cache-Control headers below; per-version Cache-API wrap is the
+// next-loop polish (see middleware TODO in src/lib/cache.ts header).
+export const prerender = false;
 
 const { slug } = Astro.params;
-const answer = getClusterAnswerBySlug(slug!)!;
-const siblings = getSiblingClusterAnswers(slug!, 4);
+const env = (Astro.locals as any)?.runtime?.env as
+  | { SUPABASE_URL?: string; SUPABASE_ANON_KEY?: string }
+  | undefined;
 
-// Glossary context feeds the inline linker.
-const glossaryTerms = getGlossaryTermsForContext([
-  `cluster-${answer.cluster_pillar}`,
-  `answer-${answer.cluster_id}`,
-  'blog-credit-score',
-  'blog-credit-repair',
-  'blog-personal-loans',
-]);
+const row = slug ? await getAnswerBySlugRuntime(slug, env) : null;
+if (!row) {
+  return new Response('Answer not found', {
+    status: 404,
+    headers: { 'content-type': 'text/plain; charset=utf-8' },
+  });
+}
+
+// Hydrate the legacy ClusterAnswer shape from top-level columns + body_inline.
+// All fields the existing template references must be present on `answer`.
+const b = (row.body_inline ?? {}) as Record<string, any>;
+const answer = {
+  slug: row.slug,
+  title: row.title || b.title,
+  h1: b.h1 || row.title,
+  meta_description: b.meta_description as string,
+  cluster_id: row.cluster_id || b.cluster_id,
+  cluster_pillar: (row.cluster_pillar || b.cluster_pillar) as string,
+  banner_category: row.banner_category || b.banner_category,
+  target_money_page: row.target_money_page || b.target_money_page,
+  sections: (b.sections ?? []) as Array<{ heading: string; content: string }>,
+  faq_schema: (b.faq_schema ?? []) as Array<{ question: string; answer: string }>,
+  primary_sources: (b.primary_sources ?? []) as Array<{ name: string; url: string }>,
+  last_updated: (b.last_updated as string) || row.updated_at,
+  published_at: b.published_at as string | undefined,
+};
+
+const siblingsRaw = await getSiblingAnswersByPillarRuntime(
+  answer.cluster_pillar,
+  answer.slug,
+  env,
+  4,
+);
+const siblings = siblingsRaw.map((s: RuntimeAnswer) => {
+  const sb = (s.body_inline ?? {}) as Record<string, any>;
+  return {
+    slug: s.slug,
+    h1: (sb.h1 as string) || s.title,
+    cluster_pillar: (s.cluster_pillar || sb.cluster_pillar) as string,
+  };
+});
+
+// Glossary context feeds the inline linker. Pull rows + map to linker shape.
+const glossaryRows = await getGlossaryTermsForContextsRuntime(
+  [
+    `cluster-${answer.cluster_pillar}`,
+    `answer-${answer.cluster_id}`,
+    'blog-credit-score',
+    'blog-credit-repair',
+    'blog-personal-loans',
+  ],
+  env,
+);
+const glossaryTerms = glossaryRows.map((g) => {
+  const gb = (g.body_inline ?? {}) as Record<string, any>;
+  return {
+    term: g.term,
+    slug: g.slug,
+    plain_definition: (gb.plain_definition as string) ?? '',
+  };
+});
+
+// Edge cache headers — keep response cacheable until /api/revalidate purges
+// or until version-keyed Cache-API wrap lands. 24h max-age matches /r/[slug].
+const verSec = Math.floor(Date.parse(row.updated_at) / 1000);
+Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
+Astro.response.headers.set('x-cdm-route', '/answers/[slug]');
+Astro.response.headers.set('x-cdm-slug', answer.slug);
+Astro.response.headers.set('x-cdm-version', String(verSec));
 
 // Per-page linker: 8 money + 8 glossary caps persist across all sections.
 const linker = createLinker(glossaryTerms, { moneyBudget: 8, glossaryBudget: 8 });

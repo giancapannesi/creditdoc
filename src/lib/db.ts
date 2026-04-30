@@ -501,6 +501,29 @@ export async function getAnswerBySlugRuntime(
   return rows?.[0] ?? null;
 }
 
+/**
+ * Sibling answers in the same cluster_pillar, excluding the current slug.
+ * Mirrors src/utils/data-build.getSiblingClusterAnswers but reads Supabase at
+ * runtime so SSR /answers/[slug] doesn't need fs / build-time JSONs.
+ */
+export async function getSiblingAnswersByPillarRuntime(
+  pillar: string,
+  excludeSlug: string,
+  env?: RuntimeLenderEnv,
+  limit = 4
+): Promise<RuntimeAnswer[]> {
+  if (!pillar) return [];
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/answers` +
+    `?cluster_pillar=eq.${encodeURIComponent(pillar)}` +
+    `&slug=neq.${encodeURIComponent(excludeSlug)}` +
+    `&select=slug,title,cluster_id,cluster_pillar,banner_category,target_money_page,compliance_score,compliance_passed,body_inline,updated_at` +
+    `&order=updated_at.desc` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeAnswer>(url, env);
+  return rows ?? [];
+}
+
 export interface RuntimeSpecial {
   id: string;
   lender_slug: string;
