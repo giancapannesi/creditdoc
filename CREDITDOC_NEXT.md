@@ -1,10 +1,28 @@
-# CreditDoc — NEXT (RULE 10 handoff, last updated 2026-04-30 post-Phase-2.5 dual-write)
+# CreditDoc — NEXT (RULE 10 handoff, last updated 2026-04-30 post-2.5b-fix + linter + dangling-refs report)
+
+## ⏸ AWAITING JAMMI GREENLIGHT — Dangling similar_lenders prune (Apr 30 PM) [OBJ-1]
+
+DB scan: **2,255 dead refs across 1,386 rows** (16% of all similar_lenders entries point to slugs that no longer exist or are status='raw'). Tool ready, dry-run done, CSV uploaded to Drive root: `2026-04-30_creditdoc_dangling_similar_lenders.csv` (https://drive.google.com/file/d/1MISCkwEar6Fs-2kKYoiYhJDKeJErUZUd/view).
+
+Top dead refs (occurrences): `credit-repair-finest` (16), `first-tech-federal-credit-union-san-jose` (13), `atl-gold-buyers` (12), `big-tex-auto-mart` (12), `carnaval-auto-credit` (12), `walmart-supercenter` (12).
+
+To apply: `python3 tools/cdm_rev_prune_dangling_similar.py --apply` — bulk DB write across 1,386 rows, requires explicit Jammi greenlight per RULE 4 / Cardinal Sin #3. Audit_log captures full rollback trail.
+
+## ✅ LANDED (Apr 30 PM) — Phase 2.5b filter-bug fix + PostgREST linter [OBJ-1]
+
+**Bug caught pre-deploy.** Commit `082ded1de2` added `&rating=gt.0` to similar_lenders PostgREST URL; `rating` is inside body_inline jsonb, not a column. Direct curl returned `42703 column lenders.rating does not exist`. Adapter would have silently returned `[]`, collapsing every sidebar to empty (then category-fill backfilling all 3 slots). Fixed in commit `6b357cb250` — drop URL filter, do client-side filter instead.
+
+**New regression guard:** `tools/cdm_rev_postgrest_lint.py` (commit `12bc73ca75`) greps src/lib/db.ts for PostgREST predicates and validates each filter column exists on the table via `information_schema.columns`. Run before every push:
+```
+python3 tools/cdm_rev_postgrest_lint.py
+# OK — 18 filter(s) lint clean across 9 table(s).
+```
+
+**Verifier:** 3/3 OBJ GREEN holds. Probe age=750s, p95=0.061s.
 
 ## ✅ LANDED (Apr 30 mid-day) — Phase 2.5 dual-write + Phase 2.4 GREEN [OBJ-1]
 
 **Path A is DONE.** `creditdoc_db.py` now dual-writes to Supabase via PostgREST upsert on every lender writer. Soft-fail + retry queue. Smoke test 139ms. e2e probe verdict OBJ-1: GREEN by threshold. Commit `4ed97fdcf2` on `cdm-rev-hybrid`.
-
-**Phase 2.5b rating filter patched** (`src/lib/db.ts` — `&rating=gt.0` server-side filter). Awaiting commit + push + CF redeploy + 15-slug parity sweep to confirm Upstart-residual fixed. **This is the active in-flight work.**
 
 ## Immediate next moves (in order)
 
@@ -16,6 +34,7 @@
 
 ## ❓ Open decisions waiting on Jammi
 
+- **Dangling similar_lenders prune** — 2,255 dead refs across 1,386 rows. Tool dry-run done, CSV in Drive. `--apply` needs greenlight (bulk DB write).
 - **Phase 6 DNS cutover** — flip `creditdoc.co` apex from current host to `cdm-rev-hybrid.creditdoc.pages.dev`. Off-limits without explicit greenlight per CDM-REV plan.
 - **REVALIDATE_TOKEN crontab** — periodic warm-cache pings. Off-limits without greenlight (paid-API class concern even though it's free).
 - **Service role key rotation** — `SUPABASE_SERVICE_ROLE_KEY` transited chat once. Rotate post-CDM-REV migration in Supabase dashboard → Settings → API Keys → Reset.

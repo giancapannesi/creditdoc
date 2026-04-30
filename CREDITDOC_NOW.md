@@ -1,4 +1,18 @@
-# CreditDoc — LIVE STATE (as of 2026-04-30 post-Phase-2.5 dual-write + 2.4 probe GREEN)
+# CreditDoc — LIVE STATE (as of 2026-04-30 post-Phase-2.5b filter-fix)
+
+## 2026-04-30 — Phase 2.5b filter bug caught pre-deploy ✅ [OBJ-1]
+
+**THE BUG**: commit `082ded1de2` added `&rating=gt.0` to the PostgREST URL for similar_lenders, but `rating` is NOT a top-level column on `lenders` — it lives inside `body_inline` (jsonb). PostgREST returns `42703 column does not exist`, the adapter falls through to `if (!res.ok) return []`, and every sidebar collapses to zero similar_lenders cards.
+
+**THE CATCH**: I noticed Upstart parity drift (preview 3 cards vs prod 2 cards) and started investigating instead of accepting it. Direct curl against PostgREST reproduced the 42703. Bug was caught BEFORE the CF deploy of 082ded1de2 had a chance to break every sidebar in production-equivalent.
+
+**THE FIX** (commit `6b357cb250`): drop the broken URL filter; do `rating > 0` filter client-side after fetch. Payload bounded to ≤3 slugs anyway. Pushed to `cdm-rev-hybrid`.
+
+**VERIFIER**: 3/3 OBJ GREEN holds (probe age=750s, p95=0.061s).
+
+**LESSON**: regex-scan src/lib/db.ts for `&col=` patterns and assert each `col` exists on the actual table schema before any future PostgREST predicate change.
+
+---
 
 ## 2026-04-30 — CDM-REV Phase 2.5 LANDED + Phase 2.4 e2e probe GREEN ✅ [OBJ-1]
 
