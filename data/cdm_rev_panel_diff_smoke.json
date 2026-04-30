@@ -1,0 +1,45 @@
+{
+  "ts_utc": "2026-04-30T12:39:50+00:00",
+  "prod_host": "https://www.creditdoc.co",
+  "preview_host": "https://cdm-rev-hybrid.creditdoc.pages.dev",
+  "threshold_pct": 0.1,
+  "panel_size": 3,
+  "ok_count": 3,
+  "over_threshold_count": 0,
+  "http_fail_count": 0,
+  "mean_diff_pct": 0.0,
+  "wall_seconds": 1.89,
+  "passed": true,
+  "results": [
+    {
+      "route": "/review",
+      "slug": "credit-saint",
+      "prod_status": 200,
+      "preview_status": 200,
+      "prod_bytes": 152984,
+      "preview_bytes": 152984,
+      "diff_pct": 0.0,
+      "status": "OK"
+    },
+    {
+      "route": "/review",
+      "slug": "the-credit-pros",
+      "prod_status": 200,
+      "preview_status": 200,
+      "prod_bytes": 153252,
+      "preview_bytes": 153252,
+      "diff_pct": 0.0,
+      "status": "OK"
+    },
+    {
+      "route": "/review",
+      "slug": "sky-blue-credit",
+      "prod_status": 200,
+      "preview_status": 200,
+      "prod_bytes": 148657,
+      "preview_bytes": 148657,
+      "diff_pct": 0.0,
+      "status": "OK"
+    }
+  ]
+}
