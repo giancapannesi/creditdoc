@@ -48,6 +48,13 @@ function renderHtml(lender: RuntimeLenderWithBody, ver: number): string {
   const state = lender.state ? escapeHtml(lender.state) : "";
   const reviewHref = `/review/${encodeURIComponent(lender.slug)}/`;
   const verIso = new Date(ver * 1000).toISOString();
+  // CDM-REV Phase 2.4 — emit the source-of-truth last_updated string verbatim
+  // so end-to-end propagation probes (e.g. cdm_rev_phase24_e2e_probe.py) can
+  // observe sub-second writer activity. verIso above floors to whole seconds
+  // because the Cache-API key uses second precision.
+  const lastUpdatedRaw = body.last_updated
+    ? escapeHtml(String(body.last_updated))
+    : "";
   const descShort = body.description_short
     ? escapeHtml(String(body.description_short))
     : "";
@@ -67,6 +74,7 @@ function renderHtml(lender: RuntimeLenderWithBody, ver: number): string {
   <meta name="robots" content="noindex,nofollow">
   <title>${name} — CreditDoc (SSR pilot)</title>
   <meta name="description" content="${descShort}">
+  <meta name="cdm-last-updated" content="${lastUpdatedRaw}">
   <link rel="canonical" href="${reviewHref}">
 </head>
 <body style="font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6;">

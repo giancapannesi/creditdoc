@@ -170,6 +170,104 @@ def _ping_revalidate(type_: str, slug: str) -> None:
         pass
 
 
+# ─── CDM-REV Phase 2.5 — Supabase dual-write (Path A) ────────────────
+# Writers below mirror the SQLite row to Supabase via PostgREST upsert
+# so that SSR (which reads from Supabase) stays in lockstep with the
+# editorial source of truth (SQLite). Soft-fails on any error and
+# enqueues the payload to supabase_write_retries for later replay,
+# so a transient outage never blocks the writer.
+_SUPABASE_ENV_FILE = Path("/srv/BusinessOps/tools/.supabase-creditdoc.env")
+_supabase_creds_cache = None  # (url, key) tuple, set on first call
+
+
+def _load_supabase_creds():
+    """Lazy-load (SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY) from env or env file."""
+    global _supabase_creds_cache
+    if _supabase_creds_cache is not None:
+        return _supabase_creds_cache
+    url = os.environ.get("SUPABASE_URL")
+    key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+    if not (url and key) and _SUPABASE_ENV_FILE.exists():
+        try:
+            for line in _SUPABASE_ENV_FILE.read_text().splitlines():
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                k, _, v = line.partition("=")
+                v = v.strip().strip("'").strip('"')
+                k = k.strip()
+                if k == "SUPABASE_URL" and not url:
+                    url = v
+                elif k == "SUPABASE_SERVICE_ROLE_KEY" and not key:
+                    key = v
+        except Exception:
+            pass
+    _supabase_creds_cache = (url or None, key or None)
+    return _supabase_creds_cache
+
+
+def _supabase_upsert(table: str, slug: str, payload: dict, db_conn=None) -> bool:
+    """
+    Mirror a SQLite write to Supabase via PostgREST upsert (POST + on_conflict).
+
+    Soft-fails on any error: returns False and (if db_conn given) enqueues the
+    payload to supabase_write_retries for a later sync sweep. Never raises.
+    """
+    if not slug or not payload:
+        return False
+    url, key = _load_supabase_creds()
+    if not url or not key:
+        return False  # Unconfigured (dev/CI) — silent no-op.
+    payload = {k: v for k, v in payload.items() if v is not None}
+    payload["slug"] = slug
+    try:
+        import urllib.request
+        body = json.dumps(payload, separators=(",", ":"), default=str).encode("utf-8")
+        req = urllib.request.Request(
+            f"{url.rstrip('/')}/rest/v1/{table}?on_conflict=slug",
+            data=body,
+            method="POST",
+            headers={
+                "apikey": key,
+                "authorization": f"Bearer {key}",
+                "content-type": "application/json",
+                "prefer": "resolution=merge-duplicates,return=minimal",
+            },
+        )
+        urllib.request.urlopen(req, timeout=8).read()
+        return True
+    except Exception as e:
+        if db_conn is not None:
+            try:
+                db_conn.execute(
+                    """INSERT INTO supabase_write_retries
+                       (table_name, slug, payload_json, created_at,
+                        attempt_count, last_attempted_at, last_error)
+                       VALUES (?, ?, ?, ?, 1, ?, ?)""",
+                    (table, slug,
+                     json.dumps(payload, separators=(",", ":"), default=str),
+                     _now(), _now(), str(e)[:500]),
+                )
+                db_conn.commit()
+            except Exception:
+                pass
+        return False
+
+
+def _build_lender_payload(data: dict, checksum: str, ts: str) -> dict:
+    """Map SQLite lender data → Supabase lenders columns (incl. body_inline)."""
+    return {
+        "name": data.get("name"),
+        "category": data.get("category"),
+        "state": data.get("state"),
+        "processing_status": data.get("processing_status"),
+        "has_logo": bool(data.get("logo_url")),
+        "checksum": checksum,
+        "updated_at": ts,
+        "body_inline": data,
+    }
+
+
 class PersistentFieldError(Exception):
     """Raised when a non-founder tries to overwrite a persistent field."""
     pass
@@ -222,6 +320,28 @@ class CreditDocDB:
         self.conn.row_factory = sqlite3.Row
         self.conn.execute("PRAGMA journal_mode=WAL")
         self.conn.execute("PRAGMA foreign_keys=ON")
+        self._ensure_supabase_retries_table()
+
+    def _ensure_supabase_retries_table(self):
+        """Idempotent CREATE for the dual-write retry queue (CDM-REV Phase 2.5)."""
+        self.conn.execute(
+            """CREATE TABLE IF NOT EXISTS supabase_write_retries (
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   table_name TEXT NOT NULL,
+                   slug TEXT NOT NULL,
+                   payload_json TEXT NOT NULL,
+                   created_at TEXT NOT NULL,
+                   attempt_count INTEGER NOT NULL DEFAULT 0,
+                   last_attempted_at TEXT,
+                   last_error TEXT,
+                   resolved_at TEXT
+               )"""
+        )
+        self.conn.execute(
+            "CREATE INDEX IF NOT EXISTS idx_supa_retry_pending "
+            "ON supabase_write_retries(resolved_at, table_name, slug)"
+        )
+        self.conn.commit()
 
     def close(self):
         self.conn.close()
@@ -540,6 +660,11 @@ class CreditDocDB:
             )
             self.conn.commit()
             _ping_revalidate("lender", slug)
+            _supabase_upsert(
+                "lenders", slug,
+                _build_lender_payload(data, checksum, ts),
+                db_conn=self.conn,
+            )
         elif blocked_wipe or blocked_replace:
             # Commit the blocked-attempt audit entries even if no real changes
             self.conn.commit()
@@ -591,9 +716,19 @@ class CreditDocDB:
         )
         self.conn.commit()
         _ping_revalidate("lender", slug)
+        _supabase_upsert(
+            "lenders", slug,
+            _build_lender_payload(data, checksum, ts),
+            db_conn=self.conn,
+        )
 
     def set_protected(self, slug, protected=True, updated_by="founder"):
-        """Mark a profile as protected (founder only)."""
+        """Mark a profile as protected (founder only).
+
+        Note: Supabase lenders schema has no is_protected column, so this
+        write is SQLite-only. Revalidate ping still fires so any cached SSR
+        view that gates on protection regenerates.
+        """
         if updated_by != "founder":
             raise ProtectedProfileError("Only founder can change protection status")
 
@@ -610,6 +745,12 @@ class CreditDocDB:
         )
         self.conn.commit()
         _ping_revalidate("lender", slug)
+        # Mirror the new updated_at to Supabase so the row's freshness stays in sync.
+        _supabase_upsert(
+            "lenders", slug,
+            {"updated_at": ts},
+            db_conn=self.conn,
+        )
 
     # ═══════════════════════════════════════════════════════════════
     # CONTENT READS & WRITES
