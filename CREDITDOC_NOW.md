@@ -4,17 +4,87 @@
 
 ---
 
-## RIGHT NOW — 2026-04-30 ~16:42 UTC (iter 22) · 🟡 MAINTENANCE — POLL #204, ~3.5H IN, ~2.5H BUDGET LEFT
+## SESSION SUMMARY — 2026-04-30 (iters 13-23) · 🟡 OFFLINE GATES GREEN, DEPLOY BLOCKED, A.5 DEFECT FOUND
 
-**Deploy status (16:42 UTC):** Watcher PID 1566760 alive, poll #204, no `x-cdm-version`. Budget expires ~19:14 UTC = 21:14 CAT (Jammi's evening).
+### What this session accomplished
 
-**🛑 ACTION JAMMI — same as prior iters** (CF dash retry / Pages:Edit token / dash state).
+Phase 1 cutover gates that **don't require a live deploy** are GREEN. Phase 6 cutover playbook is shipped. Watcher is wired to dual-fire e2e + panel diff the moment CF Pages comes back. Phase 5.9.2 rollback tooling is verified (not rebuilt — RULE 6 caught a near-miss).
+
+**Iter 23 finding:** A.5 migration as-written has a state-name normalization defect — `body_inline.company_info.state` is 50/50 split (8,515 abbrev / 8,155 full names). `UPPER()` alone won't normalize. Doc + fix options at `docs/plans/2026-04-30_A5_DEFECT_STATE_NAME_NORMALIZATION.md`. Holding migration application.
+
+### Deploy state (17:18 UTC)
+
+- Watcher PID 1566760, poll #214+, elapsed ~3:38, budget expires ~19:14 UTC = 21:14 CAT
+- Origin HEAD `bfad00c03f` (iter 22 NOW.md update, 16:42 UTC) — not built
+- Earlier commit `b7b1b032ac` (TTH Bot daily cron, 15:32 UTC) — also not built
+- Last successful CF Pages build: ~04:00 UTC (~13h ago)
+- No `x-cdm-version` header on `cdm-rev-hybrid.creditdoc.pages.dev`
+- CF token in `/srv/BusinessOps/.env` is account:read only — Pages API endpoints return Auth 10000 → cannot trigger deploy via API
+
+### Tools shipped this session (8 commits)
+
+| Tool | Commit | LOC | What |
+|---|---|---|---|
+| `cdm_rev_panel_diff.py` | `4266f858c7` | 250 | Phase 5.2 50-URL HTML diff (cutover gate (d)). Baseline 50/50 OK, mean 0.0%. |
+| `cdm_rev_deploy_watcher.py` | `e0202f8b72` | 266 | Polls SSR header, dual-fires 5.5b + 5.2 on recovery, emails verdict. |
+| `cdm_rev_phase1_acceptance.py` | `52b76b3f51` | ~330 | Single-cmd 4-gate orchestrator: (a) e2e (d) panel (e) OBJ verifier (f) revalidate. |
+| `cdm_rev_snapshot_counts.py` | `208bcb5dc9` | 191 | Phase 5.9.2 row-count snapshot. Live-verified 20K lenders, 2.22s wall. |
+| `cdm_rev_rollback_drill.sh` | `44db458c2a` | 175 | Drill 1 automated wrapper, ≤300s pass criterion. |
+| `cdm_rev_revert_route.sh` | `208bcb5dc9` | 87 | Drill 2 single-route prerender flip. |
+| `2026-04-30_PHASE_5_9_ROLLBACK_REHEARSAL.md` | `88e6a0851a` | 197 | 5 drills + dress rehearsal protocol. |
+| `2026-04-30_PHASE_6_CUTOVER_PLAYBOOK.md` | `2c33a0d8e1` | 213 | Single-doc Jammi DNS-flip checklist (10-row pre-flight + T-30/0/+5/+30/+2h/+24h). |
+
+### Cutover-gate status (Phase 1 acceptance, last full run iter 17)
+
+| Gate | Status | Notes |
+|---|---|---|
+| (a) Phase 5.5b e2e probe | ⬜ BLOCKED | needs live SSR — auto-fires when watcher detects |
+| (d) Phase 5.2 panel diff | ✅ GREEN | 50/50 OK, mean 0.0%, 9.11s wall |
+| (e) OBJ verifier | 🟡 AMBER | OBJ-1 needs live SSR to measure T+10s; OBJ-2/3 GREEN offline |
+| (f) Revalidate path | ✅ GREEN | HTTP 405 = endpoint wired |
+
+### A.5 migration verification (iter 23, NEW)
+
+- DB connection: ✅ working (`db.pndpnjjkhknmutlmlwsk.supabase.co`)
+- lenders count: 20,825 rows
+- `state_abbr` / `city_norm` columns: ❌ not present
+- `state_lender_counts` / `state_city_lender_counts` MVs: ❌ not present
+- **Defect:** body_inline state column is 50/50 abbrev/full-name → migration's `UPPER()` produces broken column
+- **Fix:** see `docs/plans/2026-04-30_A5_DEFECT_STATE_NAME_NORMALIZATION.md` Option 1 (50-state CASE)
+
+### 🛑 ACTIONS NEEDED FROM JAMMI (in priority order)
+
+1. **CF Pages deploy retry** — dash.cloudflare.com → Workers & Pages → `creditdoc` (or `cdm-rev-hybrid`) project → latest deployment → `⋯` → **Retry deployment**. Single click. OR paste a token with `Account: Cloudflare Pages — Edit` scope into `/srv/BusinessOps/tools/.creditdoc-migration.env` as `CF_API_TOKEN=…` (chmod 600).
+2. **A.5 defect fix approval** — confirm Option 1 (50-state CASE in migration). I'll rewrite + apply once approved.
+3. **DNS TTL pre-lowering schedule** — need ≥24h before T-0; currently unknown.
+
+If (1) happens: watcher auto-fires both gates, emails verdict. Next iter applies A.5 (post-fix) + ships /state SSR.
+If (1) doesn't happen by 19:14 UTC: watcher emails TIMEOUT verdict; cutover slips to next session.
 
 ---
 
-## ITER 22 PROGRESS
+## RIGHT NOW — 2026-04-30 ~17:18 UTC (iter 23) · 🟡 A.5 DEFECT IDENTIFIED, MIGRATION HELD
 
-Maintenance only. No state change.
+**Deploy status (17:18 UTC):** Watcher PID 1566760 alive, poll #214, no `x-cdm-version`. Budget ~1:56h left.
+
+**🆕 ITER 23 finding:** A.5 migration has state-name normalization defect (50/50 abbrev/full-name split in source data). `UPPER()` alone breaks `state_lender_counts` MV (would emit 100 rows not 50). Holding migration. Defect doc shipped: `docs/plans/2026-04-30_A5_DEFECT_STATE_NAME_NORMALIZATION.md`. Recommended fix: Option 1 (50-state CASE in migration). Awaits Jammi approval.
+
+**🛑 ACTION JAMMI — TWO DECISIONS PENDING:**
+1. CF Pages dash retry (same as iters 18-22)
+2. A.5 defect fix approval (NEW — Option 1 recommended)
+
+---
+
+## ITER 23 PROGRESS
+
+- Verified Supabase DB connection works (20,825 lenders rows confirmed)
+- Confirmed A.5 migration not yet applied (no state_abbr column, no MVs)
+- **Caught defect:** state values split 8,515 abbrev / 8,155 full names — UPPER() insufficient
+- Shipped `docs/plans/2026-04-30_A5_DEFECT_STATE_NAME_NORMALIZATION.md` (3 fix options + recommended path)
+- Did NOT apply migration (RULE 4: no stupid shit — broken column to prod = bulk-data harm)
+- Did NOT ship /state SSR (depends on A.5)
+
+**Net iter 23:** investigative, not productive in code-shipped terms — but caught a cutover-blocking defect before it hit prod. RULE 6 (check before building) + RULE 4 (no stupid bulk) both honored.
 
 ---
 
