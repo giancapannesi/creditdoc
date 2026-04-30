@@ -28,7 +28,7 @@ import { defineMiddleware } from 'astro:middleware';
 const NAMESPACE = 'creditdoc-v1-mw';
 
 interface CacheableRoute {
-  table: 'answers' | 'lenders';
+  table: 'answers' | 'lenders' | 'listicles';
   /** Maps URL pathname → row slug. Returns null if path is not an SSR row page. */
   match: (pathname: string) => string | null;
   /** Optional: route variant tag (for cache-key namespacing). */

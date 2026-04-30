@@ -567,6 +567,93 @@ export async function getSpecialsForLenderRuntime(
   return rows ?? [];
 }
 
+// ---------------------------------------------------------------------------
+// CDM-REV Phase 5.1.b — state-page aggregates (depend on migration
+// 2026-04-30_cdm_rev_a5_state_aggregates.sql which adds:
+//   - lenders.state_abbr  (generated from body_inline.company_info.state)
+//   - lenders.city_norm   (generated from body_inline.company_info.city)
+//   - state_lender_counts MV       (state_abbr, lender_count, city_count)
+//   - state_city_lender_counts MV  (state_abbr, city, city_display, lender_count)
+// All four exposed read-only to anon via PostgREST.
+// ---------------------------------------------------------------------------
+
+export interface RuntimeStateAggregate {
+  state_abbr: string;
+  lender_count: number;
+  city_count: number;
+}
+
+export async function getStateAggregateRuntime(
+  abbr: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeStateAggregate | null> {
+  if (!abbr) return null;
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/state_lender_counts` +
+    `?state_abbr=eq.${encodeURIComponent(abbr.toUpperCase())}` +
+    `&select=state_abbr,lender_count,city_count` +
+    `&limit=1`;
+  const rows = await _restGet<RuntimeStateAggregate>(url, env);
+  return rows?.[0] ?? null;
+}
+
+export async function getAllStateAggregatesRuntime(
+  env?: RuntimeLenderEnv
+): Promise<RuntimeStateAggregate[]> {
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/state_lender_counts` +
+    `?select=state_abbr,lender_count,city_count` +
+    `&order=lender_count.desc`;
+  const rows = await _restGet<RuntimeStateAggregate>(url, env);
+  return rows ?? [];
+}
+
+export interface RuntimeStateCityAggregate {
+  state_abbr: string;
+  city: string;
+  city_display: string | null;
+  lender_count: number;
+}
+
+export async function getStateCitiesAggregateRuntime(
+  abbr: string,
+  env?: RuntimeLenderEnv,
+  limit = 50
+): Promise<RuntimeStateCityAggregate[]> {
+  if (!abbr) return [];
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/state_city_lender_counts` +
+    `?state_abbr=eq.${encodeURIComponent(abbr.toUpperCase())}` +
+    `&select=state_abbr,city,city_display,lender_count` +
+    `&order=lender_count.desc` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeStateCityAggregate>(url, env);
+  return rows ?? [];
+}
+
+/**
+ * Lenders in a given state — uses the new generated `state_abbr` column so
+ * PostgREST can filter without jsonb deep-path (which returns 500s).
+ * Returns the catalog projection + body_inline so the page can hydrate
+ * existing card markup without a second round-trip.
+ */
+export async function getLendersByStateRuntime(
+  abbr: string,
+  env?: RuntimeLenderEnv,
+  limit = 200
+): Promise<Array<RuntimeLender & { body_inline: Record<string, unknown> | null }>> {
+  if (!abbr) return [];
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/lenders` +
+    `?state_abbr=eq.${encodeURIComponent(abbr.toUpperCase())}` +
+    `&processing_status=eq.ready_for_index` +
+    `&select=${CATALOG_COLUMNS},body_inline` +
+    `&order=updated_at.desc` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeLender & { body_inline: Record<string, unknown> | null }>(url, env);
+  return rows ?? [];
+}
+
 // Type alias for Cloudflare Workers R2 binding (no @cloudflare/workers-types
 // import to keep the dep graph tight; the adapter provides the runtime).
 type R2Bucket = {
