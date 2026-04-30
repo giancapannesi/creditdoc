@@ -4,6 +4,20 @@
 
 ---
 
+## RIGHT NOW — 2026-04-30 ~16:42 UTC (iter 22) · 🟡 MAINTENANCE — POLL #204, ~3.5H IN, ~2.5H BUDGET LEFT
+
+**Deploy status (16:42 UTC):** Watcher PID 1566760 alive, poll #204, no `x-cdm-version`. Budget expires ~19:14 UTC = 21:14 CAT (Jammi's evening).
+
+**🛑 ACTION JAMMI — same as prior iters** (CF dash retry / Pages:Edit token / dash state).
+
+---
+
+## ITER 22 PROGRESS
+
+Maintenance only. No state change.
+
+---
+
 ## RIGHT NOW — 2026-04-30 ~16:11 UTC (iter 21) · 🟡 MAINTENANCE — POLL #173, NEW EVIDENCE: BOT COMMIT 15:32 ALSO NOT BUILT
 
 **Deploy status (16:11 UTC):** Watcher PID 1566760 alive, poll #173, no `x-cdm-version`. Watcher 6h budget expires ~19:14 UTC.
