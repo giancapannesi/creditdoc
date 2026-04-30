@@ -236,8 +236,24 @@ def main(argv: list[str]) -> int:
             else ("AMBER" if args.apply else "DRY-RUN")
         ),
         "details": [asdict(t) for t in trials],
+        "ts_unix": int(time.time()),
     }
     print(json.dumps(summary, indent=2))
+
+    # Persist latest probe result so verify_strategic_objectives.py can
+    # read OBJ-1 verdict directly instead of staying AMBER forever.
+    artifact_dir = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data"
+    )
+    try:
+        os.makedirs(artifact_dir, exist_ok=True)
+        with open(
+            os.path.join(artifact_dir, "cdm_rev_phase24_probe_latest.json"), "w"
+        ) as f:
+            json.dump(summary, f, indent=2)
+    except Exception:
+        pass
+
     return 0 if summary["obj1_verdict"] == "GREEN" else 1
 
 

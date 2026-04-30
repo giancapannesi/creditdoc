@@ -169,9 +169,35 @@ def check_obj1(env: dict) -> CheckResult:
         )
 
     if is_hybrid and has_any_ssr_pilot and has_revalidate_route:
-        # Phase 2 ship — could probe an end-to-end edit but that touches live DB.
-        # Verifier remains read-only; mark AMBER until Phase 2 acceptance probe documented.
-        # Acceptance gate must show p95 ≤ 10s in a phase-2 commit-tagged run.
+        # Phase 2 ship — read the latest probe artifact (CDM-REV Phase 2.4).
+        # Probe writes data/cdm_rev_phase24_probe_latest.json with fields:
+        #   obj1_verdict (GREEN|AMBER|DRY-RUN), p95_s, target_p95_s, ts_unix.
+        # If artifact is fresh (≤7 days) and verdict GREEN → upgrade to GREEN.
+        import time as _t
+        probe_path = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            "data", "cdm_rev_phase24_probe_latest.json",
+        )
+        if os.path.exists(probe_path):
+            try:
+                with open(probe_path) as f:
+                    probe = json.load(f)
+                age_s = _t.time() - probe.get("ts_unix", 0)
+                detail["probe_verdict"] = probe.get("obj1_verdict")
+                detail["probe_p95_s"] = probe.get("p95_s")
+                detail["probe_age_s"] = int(age_s)
+                if probe.get("obj1_verdict") == "GREEN" and age_s <= 7 * 86400:
+                    return CheckResult(
+                        obj="OBJ-1",
+                        status="GREEN",
+                        summary=(
+                            f"Phase 2.4 e2e probe GREEN — p95={probe.get('p95_s')}s "
+                            f"≤ {probe.get('target_p95_s')}s target."
+                        ),
+                        detail=detail,
+                    )
+            except Exception as e:
+                detail["probe_read_error"] = str(e)[:200]
         return CheckResult(
             obj="OBJ-1",
             status="AMBER",
