@@ -490,7 +490,7 @@ export function shapeBodyInlineToLender(row: RuntimeLenderWithBody): Lender {
     name: row.name,
     slug: row.slug,
     category: row.category,
-    last_updated: row.updated_at,
+    last_updated: (row.updated_at ?? '').slice(0, 10),
   };
   // Defensive normalization (mirrors the build-time path in getAllLenders).
   merged.subcategories = Array.isArray(merged.subcategories) ? merged.subcategories : [];
@@ -514,7 +514,7 @@ export function shapeCatalogToLenderStub(row: RuntimeLender): Lender {
     name: row.name,
     slug: row.slug,
     category: row.category,
-    last_updated: row.updated_at,
+    last_updated: (row.updated_at ?? '').slice(0, 10),
   };
   stub.brand_slug = row.brand_slug ?? null;
   if (row.state) {

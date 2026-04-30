@@ -72,19 +72,21 @@ const lender = shapeBodyInlineToLender(primaryRow);
 const similarSlugList = (lender.similar_lenders ?? []).filter(
   (s): s is string => typeof s === 'string' && s.length > 0
 );
-let relatedRowsRaw = similarSlugList.length > 0
+const slugRows = similarSlugList.length > 0
   ? await getLendersBySlugListRuntime(similarSlugList.slice(0, 3), env)
   : [];
-if (relatedRowsRaw.length < 3) {
+const slugLenders = slugRows.map(shapeBodyInlineToLender);
+let categoryStubs: Lender[] = [];
+if (slugLenders.length < 3) {
   const more = await getRelatedLendersByCategoryRuntime(
     lender.category,
     lender.slug,
     env,
-    3 - relatedRowsRaw.length
+    3 - slugLenders.length
   );
-  relatedRowsRaw = [...relatedRowsRaw, ...more];
+  categoryStubs = more.map(shapeCatalogToLenderStub);
 }
-const relatedLenders = relatedRowsRaw.slice(0, 3).map(shapeCatalogToLenderStub);
+const relatedLenders: Lender[] = [...slugLenders, ...categoryStubs].slice(0, 3);
 
 // Backward-compat aliases — the template body downstream references these
 // names; with the 2-tier runtime fallback they collapse into a single bucket.
@@ -146,7 +148,7 @@ const linkedParagraphs = lender.description_long
   ? linkifyDescription(lender.description_long, glossaryTerms, lender.slug, affiliateConfig, lender.category)
   : [];
 
-const comparisons = await getComparisonsForLenderRuntime(lender.slug, env, 6);
+const comparisons = await getComparisonsForLenderRuntime(lender.slug, env, 50);
 
 // Pre-fetch the "other side" lender names for the Compare-With cards.
 // Single batched query keeps the SSR round-trip count bounded.
@@ -603,7 +605,7 @@ const ogImageUrl = lender.logo_url?.trim()
 
           <!-- Services list -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
-            {lender.services.map(service => (
+            {[...lender.services].sort().map(service => (
               <div class="flex items-start gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-positive shrink-0" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>

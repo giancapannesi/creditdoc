@@ -152,14 +152,17 @@ export async function getRelatedLendersByCategoryRuntime(
 }
 
 /**
- * Catalog-only fetch of multiple specific slugs. Used to resolve the
- * `similar_lenders` array (which stores slugs) into catalog rows for the
- * related-lender sidebar.
+ * Catalog + body_inline fetch of multiple specific slugs. Used to resolve the
+ * `similar_lenders` array (which stores slugs) into full hydratable rows for
+ * the related-lender sidebar (logo, rating, pricing, BBB, services, etc.).
+ *
+ * Returns RuntimeLenderWithBody[] so the caller can hydrate via
+ * shapeBodyInlineToLender. Payload is bounded — call sites pass ≤3 slugs.
  */
 export async function getLendersBySlugListRuntime(
   slugs: string[],
   env?: RuntimeLenderEnv
-): Promise<RuntimeLender[]> {
+): Promise<RuntimeLenderWithBody[]> {
   if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return [];
   if (!slugs.length) return [];
   const inList = slugs.map(encodeURIComponent).join(",");
@@ -167,7 +170,7 @@ export async function getLendersBySlugListRuntime(
     `${env.SUPABASE_URL}/rest/v1/lenders` +
     `?slug=in.(${inList})` +
     `&processing_status=eq.ready_for_index` +
-    `&select=${CATALOG_COLUMNS}` +
+    `&select=${FULL_COLUMNS}` +
     `&limit=${slugs.length}`;
   const res = await fetch(url, {
     headers: {
@@ -178,7 +181,7 @@ export async function getLendersBySlugListRuntime(
     signal: AbortSignal.timeout(2500),
   });
   if (!res.ok) return [];
-  return (await res.json()) as RuntimeLender[];
+  return (await res.json()) as RuntimeLenderWithBody[];
 }
 
 /**
@@ -253,7 +256,7 @@ export interface RuntimeComparison {
 export async function getComparisonsForLenderRuntime(
   lenderSlug: string,
   env?: RuntimeLenderEnv,
-  limit = 6
+  limit = 50
 ): Promise<RuntimeComparison[]> {
   if (!lenderSlug) return [];
   const slugEnc = encodeURIComponent(lenderSlug);
