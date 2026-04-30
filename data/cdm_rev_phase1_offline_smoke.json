@@ -1,0 +1,50 @@
+{
+  "ts_utc": "2026-04-30T13:45:30+00:00",
+  "preview_host": "https://cdm-rev-hybrid.creditdoc.pages.dev",
+  "overall_status": "AMBER",
+  "cutover_ready": false,
+  "gates": [
+    {
+      "gate": "(a) e2e latency",
+      "status": "SKIPPED",
+      "summary": "Skipped per --skip-probe (offline mode)."
+    },
+    {
+      "gate": "(d) HTML diff parity",
+      "status": "GREEN",
+      "summary": "OK=50/50 over=0 http_fail=0 mean=0.0% (exit=0, wall=10.4s)",
+      "wall_s": 10.4,
+      "exit_code": 0,
+      "panel_size": 50,
+      "ok_count": 50,
+      "over_threshold_count": 0,
+      "http_fail_count": 0,
+      "mean_diff_pct": 0.0,
+      "json_path": "/srv/BusinessOps/creditdoc/data/cdm_rev_phase1_panel.json"
+    },
+    {
+      "gate": "(e) OBJ verifier",
+      "status": "AMBER",
+      "summary": "OBJ-1=AMBER OBJ-2=GREEN OBJ-3=GREEN (exit=1)",
+      "exit_code": 1,
+      "obj_statuses": {
+        "OBJ-1": "AMBER",
+        "OBJ-2": "GREEN",
+        "OBJ-3": "GREEN"
+      },
+      "obj_summaries": {
+        "OBJ-1": "Hybrid + SSR + revalidate endpoint present. Run Phase 2 acceptance probe to upgrade to GREEN.",
+        "OBJ-2": "Full trigger coverage: 4/4 write-target tables.",
+        "OBJ-3": "New SSR route can be added in ~20 LOC. Patterns + helpers in place."
+      }
+    },
+    {
+      "gate": "(f) revalidate path",
+      "status": "GREEN",
+      "summary": "reachable (HTTP 405)",
+      "url": "https://cdm-rev-hybrid.creditdoc.pages.dev/api/revalidate?ping=1",
+      "http_status": 405,
+      "body_head": ""
+    }
+  ]
+}
