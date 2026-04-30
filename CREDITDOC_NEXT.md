@@ -1,5 +1,11 @@
 # CreditDoc — NEXT (RULE 10 handoff, last updated 2026-04-30 post-2.5b-fix + linter + dangling-refs report + token register)
 
+## ✅ LANDED (Apr 30 PM late) — Phase 3.4 + 3.5 + 3.6 + Phase 5.4 [OBJ-1, OBJ-3]
+
+**Phase 5.4 — SSR health-check poller** (commit `081fd0162b`): `tools/cdm_rev_health_poller.py`. Single-shot poll of 5 URLs on the preview, records status / TTFB / body / cf-cache / cdm-last-updated meta tag. JSON-lines log to `data/health/poll-YYYYMMDD.jsonl`. First run: 5/5 status=200, p95 TTFB 0.540s, 3 /r/ URLs flagged for missing meta tag (the same CF deploy-lag we already knew about — when CF picks up `4ed97fdcf2`+ this flips to PASS). Cron wiring deferred (needs Jammi greenlight).
+
+**Phase 3.6 — Privacy policy mentions consent banner** (commit `e116ed6b60`): bumps Last Updated date, describes the on-site banner.
+
 ## ✅ LANDED (Apr 30 PM late) — Phase 3.4 token register + Phase 3.5 cookie consent [OBJ-3]
 
 **Phase 3.4 — `docs/compliance/token_register.md`** (commit `754c88ea2e`): single source of truth for every credential. CF + Supabase + R2 + REVALIDATE_TOKEN + GSC/GA4 + Places + social + DPA attestations. Quarterly review, next due 2026-07-30.
