@@ -1,0 +1,133 @@
+---
+// Phase 3.5 — Cookie consent banner.
+// Gates GA4 (and any future ad pixels) until the visitor opts in.
+// Uses Google Consent Mode v2: BaseLayout sets default = denied before gtag
+// loads; this component flips to granted on Accept and persists the choice
+// in localStorage under `cd_consent` (values: "granted" | "denied").
+//
+// Privacy posture: marketing-site Tier 1 (no FS providers yet). When KYB /
+// payment / lending surfaces activate, this banner is the entry-point for
+// granular per-purpose toggles (GLBA + GDPR + CCPA).
+---
+
+<div id="cd-cookie-banner" class="cd-cookie-banner" hidden>
+  <div class="cd-cookie-banner__inner">
+    <p class="cd-cookie-banner__copy">
+      We use cookies to measure how the site is used (Google Analytics) so we can
+      improve it. No advertising or cross-site tracking. See our
+      <a href="/privacy">privacy policy</a> for details.
+    </p>
+    <div class="cd-cookie-banner__actions">
+      <button type="button" id="cd-cookie-decline" class="cd-cookie-banner__btn cd-cookie-banner__btn--ghost">
+        Decline
+      </button>
+      <button type="button" id="cd-cookie-accept" class="cd-cookie-banner__btn cd-cookie-banner__btn--primary">
+        Accept
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cd-cookie-banner {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 9999;
+    background: #0f172a;
+    color: #f8fafc;
+    border-top: 1px solid #1e293b;
+    padding: 0.875rem 1rem;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.25);
+  }
+  .cd-cookie-banner__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+  .cd-cookie-banner__copy {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  .cd-cookie-banner__copy a {
+    color: #93c5fd;
+    text-decoration: underline;
+  }
+  .cd-cookie-banner__actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+  .cd-cookie-banner__btn {
+    appearance: none;
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 96px;
+  }
+  .cd-cookie-banner__btn--primary {
+    background: #2563eb;
+    color: #fff;
+  }
+  .cd-cookie-banner__btn--primary:hover { background: #1d4ed8; }
+  .cd-cookie-banner__btn--ghost {
+    background: transparent;
+    color: #cbd5e1;
+    border-color: #334155;
+  }
+  .cd-cookie-banner__btn--ghost:hover { background: #1e293b; }
+  @media (min-width: 640px) {
+    .cd-cookie-banner__inner { flex-direction: row; align-items: center; }
+    .cd-cookie-banner__copy { flex: 1; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var STORAGE_KEY = 'cd_consent';
+    var STORAGE_TS = 'cd_consent_ts';
+    var banner = document.getElementById('cd-cookie-banner');
+    if (!banner) return;
+
+    function readConsent() {
+      try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+    }
+    function writeConsent(value) {
+      try {
+        localStorage.setItem(STORAGE_KEY, value);
+        localStorage.setItem(STORAGE_TS, String(Date.now()));
+      } catch (e) {}
+    }
+    function applyConsent(value) {
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', {
+          analytics_storage: value === 'granted' ? 'granted' : 'denied',
+        });
+      }
+    }
+
+    var prior = readConsent();
+    if (prior === 'granted' || prior === 'denied') {
+      applyConsent(prior);
+      return;
+    }
+    banner.hidden = false;
+
+    document.getElementById('cd-cookie-accept').addEventListener('click', function () {
+      writeConsent('granted');
+      applyConsent('granted');
+      banner.hidden = true;
+    });
+    document.getElementById('cd-cookie-decline').addEventListener('click', function () {
+      writeConsent('denied');
+      applyConsent('denied');
+      banner.hidden = true;
+    });
+  })();
+</script>

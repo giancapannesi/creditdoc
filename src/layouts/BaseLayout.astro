@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -47,14 +48,27 @@ const resolvedOgType = ogType || 'website';
   <meta name="impact-site-verification" value="df51c98d-280b-421a-85a8-0cf69f2fad48" />
   <meta name="p:domain_verify" content="bf5a253c11c084976f9375cfe1a363b0" />
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBSCZ1GRXL"></script>
-  <script>
+  <!-- Google Analytics — Consent Mode v2: default-deny until cookie banner accepted. -->
+  <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500,
+    });
+    try {
+      var prior = localStorage.getItem('cd_consent');
+      if (prior === 'granted') {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
+    } catch (e) {}
     gtag('js', new Date());
     gtag('config', 'G-ZBSCZ1GRXL');
   </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBSCZ1GRXL"></script>
 
   <title>{title}</title>
   <meta name="description" content={description} />
@@ -109,5 +123,6 @@ const resolvedOgType = ogType || 'website';
     <slot />
   </main>
   <Footer />
+  <CookieConsent />
 </body>
 </html>
