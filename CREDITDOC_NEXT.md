@@ -1,4 +1,8 @@
-# CreditDoc — NEXT (RULE 10 handoff, last updated 2026-04-30 post-2.5b-fix + linter + dangling-refs report)
+# CreditDoc — NEXT (RULE 10 handoff, last updated 2026-04-30 post-2.5b-fix + linter + dangling-refs report + token register)
+
+## ✅ LANDED (Apr 30 PM late) — Phase 3.4 scoped token register [OBJ-3]
+
+`docs/compliance/token_register.md` (commit `754c88ea2e`) — single source of truth for every credential CreditDoc relies on. Tier 1 marketing-site posture today; this register becomes the migration entry-point when KYB / lending product surfaces activate. Quarterly review, next due 2026-07-30. Phase 3.4 of CDM-REV plan now done.
 
 ## ⏸ AWAITING JAMMI GREENLIGHT — Dangling similar_lenders prune (Apr 30 PM) [OBJ-1]
 
