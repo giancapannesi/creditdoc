@@ -1,13 +1,37 @@
 ---
-import fs from 'fs';
-import path from 'path';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllAnswersRuntime, type RuntimeLenderEnv } from '../../lib/db';
 
-const ANSWERS_DIR = path.join(process.cwd(), 'src/content/answers');
-const files = fs.readdirSync(ANSWERS_DIR).filter(f => f.endsWith('.json'));
-const answers = files
-  .map(f => JSON.parse(fs.readFileSync(path.join(ANSWERS_DIR, f), 'utf-8')))
-  .sort((a, b) => (b.last_updated || '').localeCompare(a.last_updated || ''));
+// CDM-REV Phase 5.1 [OBJ-1] — SSR (no rebuild).
+// Index of all answers — pulls rows from Supabase at request time so adding
+// or editing an answer doesn't require a `git push` + Pages rebuild.
+export const prerender = false;
+
+const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
+const rows = await getAllAnswersRuntime(env);
+
+// Hydrate the legacy answer shape from top-level columns + body_inline
+// so the existing card markup keeps working unchanged.
+const answers = rows.map((row) => {
+  const b = (row.body_inline ?? {}) as Record<string, any>;
+  return {
+    slug: row.slug,
+    title: row.title || b.title,
+    h1: b.h1 || row.title,
+    meta_description: b.meta_description as string | undefined,
+    answer_summary: b.answer_summary as string | undefined,
+    category: (row.banner_category || b.banner_category || b.category) as string | undefined,
+    last_updated: (b.last_updated as string | undefined) || row.updated_at,
+  };
+});
+
+// Edge cache headers — index reflects latest row update across the table.
+const latestVerSec = answers.length
+  ? Math.floor(Date.parse(answers[0].last_updated || '0') / 1000)
+  : 0;
+Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
+Astro.response.headers.set('x-cdm-route', '/answers/index');
+Astro.response.headers.set('x-cdm-version', String(latestVerSec));
 
 function truncate(text: string, max: number): string {
   if (!text) return '';

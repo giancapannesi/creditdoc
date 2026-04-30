@@ -524,6 +524,24 @@ export async function getSiblingAnswersByPillarRuntime(
   return rows ?? [];
 }
 
+/**
+ * All published answers, ordered by recency. Used by /answers/index.astro
+ * SSR (Phase 5.1) so the index page doesn't fs.readdirSync src/content/answers.
+ * Hard cap at 500 to keep payload bounded; we only have ~14 rows today.
+ */
+export async function getAllAnswersRuntime(
+  env?: RuntimeLenderEnv,
+  limit = 500
+): Promise<RuntimeAnswer[]> {
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/answers` +
+    `?select=slug,title,cluster_id,cluster_pillar,banner_category,target_money_page,compliance_score,compliance_passed,body_inline,updated_at` +
+    `&order=updated_at.desc` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeAnswer>(url, env);
+  return rows ?? [];
+}
+
 export interface RuntimeSpecial {
   id: string;
   lender_slug: string;
