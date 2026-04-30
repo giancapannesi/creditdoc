@@ -4,9 +4,14 @@ CDM-REV deploy-recovery watcher.
 
 Polls the SSR probe URL every 60s. When `x-cdm-version` first appears in
 the response headers (= CF Pages has built one of the queued commits and
-SSR is live), fires the Phase 5.5b live e2e probe and emails Harvey the
-verdict so Jammi gets results in his inbox without waiting for the next
-/loop wakeup.
+SSR is live), fires BOTH cutover gates and emails Harvey a combined verdict:
+
+  - Phase 5.5b e2e probe (latency: does ≤10s hold under load? 10 trials × 3 routes)
+  - Phase 5.2  panel diff (cutover gate (d): <0.1% byte delta on 50-URL panel)
+
+Combined PASS only when both gates green. Jammi gets the full cutover-gate
+result in his inbox in <60s of deploy recovery without waiting for the
+next /loop wakeup.
 
 Use:
     # Foreground, 4h max:
@@ -120,6 +125,41 @@ def run_e2e_probe(notify_only: bool) -> tuple[bool, str, str | None]:
         return False, f"e2e probe crashed: {e!r}", None
 
 
+def run_panel_diff(notify_only: bool) -> tuple[bool, str, str | None]:
+    """Run Phase 5.2 50-URL cutover-gate (d) parity diff. Returns (success, summary_text, json_path).
+
+    Runs whether notify_only or not — panel diff doesn't require --apply, it
+    just curls 50 URLs across both prod + preview hosts and compares bytes.
+    Cheap, ~10s wall time. Verifies cutover gate (d) "<0.1% byte delta on all
+    SSR routes" — without this, the e2e probe alone gives latency but not parity.
+    """
+    json_path = REPO_ROOT / "data" / "cdm_rev_panel_diff_postdeploy.json"
+    cmd = [
+        "python3",
+        str(REPO_ROOT / "tools" / "cdm_rev_panel_diff.py"),
+        "--json", str(json_path),
+    ]
+    log(f"running panel diff: {' '.join(cmd)}")
+    try:
+        result = subprocess.run(
+            cmd, cwd=REPO_ROOT, timeout=120, capture_output=True, text=True
+        )
+        ok = result.returncode == 0
+        json_existed = json_path.exists()
+        summary = (
+            f"exit={result.returncode}\n\n"
+            f"--- stdout (last 60 lines) ---\n"
+            + "\n".join(result.stdout.splitlines()[-60:])
+            + "\n\n--- stderr ---\n"
+            + result.stderr[-1000:]
+        )
+        return ok, summary, str(json_path) if json_existed else None
+    except subprocess.TimeoutExpired:
+        return False, "panel diff timed out (>2min — should be ~10s)", None
+    except Exception as e:
+        return False, f"panel diff crashed: {e!r}", None
+
+
 def send_harvey_email(subject: str, body: str) -> bool:
     """Send via harvey_email.py CLI. Returns True on send."""
     cmd = [
@@ -168,24 +208,47 @@ def main() -> int:
         )
         if is_deploy_live(headers):
             log(f"DEPLOY RECOVERED — x-cdm-version={version!r}")
-            ok, summary, json_path = run_e2e_probe(args.notify_only)
-            verdict = "PASS" if ok else "FAIL"
-            subject = f"[CDM-REV] Deploy recovered + e2e probe {verdict}"
+
+            # Phase 5.5b e2e probe (latency: does ≤10s hold under load?).
+            e2e_ok, e2e_summary, e2e_json = run_e2e_probe(args.notify_only)
+            e2e_verdict = "PASS" if e2e_ok else "FAIL"
+
+            # Phase 5.2 panel diff (cutover gate (d): <0.1% byte delta).
+            # Always runs (cheap, ~10s) — gives parity verdict alongside latency.
+            panel_ok, panel_summary, panel_json = run_panel_diff(args.notify_only)
+            panel_verdict = "PASS" if panel_ok else "FAIL"
+
+            combined_ok = e2e_ok and panel_ok
+            combined_verdict = "PASS" if combined_ok else "FAIL"
+            subject = (
+                f"[CDM-REV] Deploy recovered + cutover gates {combined_verdict} "
+                f"(5.5b={e2e_verdict}, 5.2={panel_verdict})"
+            )
             body_lines = [
                 f"CF Pages deploy is BACK as of {datetime.now(timezone.utc).isoformat(timespec='seconds')}.",
                 f"x-cdm-version: {version}",
                 f"Probe URL: {args.probe_url}",
                 "",
-                "Phase 5.5b e2e probe result (10 trials × 3 routes):",
-                f"  Verdict: {verdict}",
+                f"Combined verdict: {combined_verdict}",
+                f"  Phase 5.5b (e2e latency, 10×3 routes): {e2e_verdict}",
+                f"  Phase 5.2  (cutover gate (d), 50-URL parity): {panel_verdict}",
                 "",
-                "Probe output summary:",
-                summary,
+                "=" * 70,
+                "Phase 5.5b e2e probe summary:",
+                "=" * 70,
+                e2e_summary,
+                "",
+                "=" * 70,
+                "Phase 5.2 panel diff summary:",
+                "=" * 70,
+                panel_summary,
             ]
-            if json_path:
-                body_lines.append(f"\nFull JSON report: {json_path}")
+            if e2e_json:
+                body_lines.append(f"\nPhase 5.5b JSON: {e2e_json}")
+            if panel_json:
+                body_lines.append(f"Phase 5.2 JSON:  {panel_json}")
             send_harvey_email(subject, "\n".join(body_lines))
-            return 0 if ok else 3
+            return 0 if combined_ok else 3
         time.sleep(args.poll_seconds)
 
     log(f"watcher TIMEOUT after {args.max_hours}h — deploy never recovered")
