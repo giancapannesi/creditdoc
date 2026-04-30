@@ -1,234 +1,143 @@
-# CreditDoc — LIVE STATE (as of 2026-04-30 post-Phase-2.5b filter-fix)
+# CreditDoc — LIVE STATE (LIVE / RESUME-CURSOR)
 
-## 2026-04-30 — Phase 2.5b filter bug caught pre-deploy ✅ [OBJ-1]
-
-**THE BUG**: commit `082ded1de2` added `&rating=gt.0` to the PostgREST URL for similar_lenders, but `rating` is NOT a top-level column on `lenders` — it lives inside `body_inline` (jsonb). PostgREST returns `42703 column does not exist`, the adapter falls through to `if (!res.ok) return []`, and every sidebar collapses to zero similar_lenders cards.
-
-**THE CATCH**: I noticed Upstart parity drift (preview 3 cards vs prod 2 cards) and started investigating instead of accepting it. Direct curl against PostgREST reproduced the 42703. Bug was caught BEFORE the CF deploy of 082ded1de2 had a chance to break every sidebar in production-equivalent.
-
-**THE FIX** (commit `6b357cb250`): drop the broken URL filter; do `rating > 0` filter client-side after fetch. Payload bounded to ≤3 slugs anyway. Pushed to `cdm-rev-hybrid`.
-
-**VERIFIER**: 3/3 OBJ GREEN holds (probe age=750s, p95=0.061s).
-
-**LESSON**: regex-scan src/lib/db.ts for `&col=` patterns and assert each `col` exists on the actual table schema before any future PostgREST predicate change.
+> **Read me first.** This file is rewritten at the end of every /loop iteration. It is the resume-cursor — the next-spawned Claude (or me post-compaction) reads this BEFORE MEMORY.md / DECISIONS.md to know "where are we right now."
 
 ---
 
-## 2026-04-30 — CDM-REV Phase 2.5 LANDED + Phase 2.4 e2e probe GREEN ✅ [OBJ-1]
+## RIGHT NOW — 2026-04-30 ~11:38 UTC (iter 11) · 🟡 ALL ROLLBACK TOOLING SHIPPED, DEPLOY STILL BLOCKED
 
-**SQLite→Supabase dual-write helper wired into `tools/creditdoc_db.py`** (commit `4ed97fdcf2` on `cdm-rev-hybrid`). Each successful local commit on `update_lender` / `create_lender` / `set_protected` now POSTs to PostgREST `lenders?on_conflict=slug` with `Prefer: resolution=merge-duplicates`. Soft-fail design: dual-write failures NEVER abort SQLite commit — they queue to `supabase_write_retries` table for backfill.
+**Deploy status:** Last successful CF Pages build was ~04:00 UTC. 7 commits now pushed to `cdm-rev-hybrid` since — none built. Verified at 11:37 UTC: 5 commit-prefixed deploy URLs (`c76f12a1` → `44db458c2a`) ALL return 404. Branch alias `cdm-rev-hybrid.creditdoc.pages.dev` returns HTTP 200 but serves the LAST KNOWN GOOD HTML (no `x-cdm-version`, `cache-control: max-age=0, must-revalidate`). Webhook-kick FAILED.
 
-**End-to-end smoke test (write → Supabase → /r/[slug] HTML):** **139ms**, well under 10s OBJ-1 target.
+**Auth state UNCHANGED:** CF API token empty. `wrangler whoami` not authenticated. Cannot drive deploys autonomously.
 
-**Phase 2.4 e2e probe → OBJ-1: GREEN by threshold:**
-- Trials: 11/20 successes (≥ trials/2 minimum)
-- p50: 0.063s · p95: 0.063s · max: 0.064s · target: ≤10s
-- 9 timeouts on early run = fingerprint-collision artifact (pre-meta-tag commit), NOT propagation failure. Clean run pending CF deploy of `4ed97fdcf2`.
+**🛑 ACTION JAMMI — pick ONE:**
+1. **Single click:** dash.cloudflare.com → Workers & Pages → `creditdoc` → latest deployment (~7h old) → `⋯` → **"Retry deployment"**
+2. **OR paste me a CF Pages:Edit token** and I'll drive every redeploy via `wrangler` for the rest of the migration. Token goes in `/srv/BusinessOps/tools/.creditdoc-migration.env` (chmod 600).
+3. **OR tell me what you see in the dash** — building? red error? auth-disconnected banner? — so I can root-cause instead of guess.
 
-**Probe debug saga (4 sequential bugs, all post-mortem'd in Memory Palace `creditdoc/post-mortems`):**
-1. Wrong env-file path (probe pointed inside repo, file lives outside)
-2. Schema mismatch (`last_updated` is jsonb field, not column — actual column is `updated_at`)
-3. Wrong route (/review/[slug] only emits date-precision JSON-LD; switched to /r/[slug])
-4. Wall-second collision (verIso floors to whole seconds; added `<meta name="cdm-last-updated">` tag emitting microsecond `body.last_updated` verbatim)
-
-**Phase 2.5b — rating filter patch:** `getLendersBySlugListRuntime` now adds `&rating=gt.0` server-side filter to drop ~5 ghost cards per page (HTML-parity drift source #2). Patch landed in `src/lib/db.ts:172`. Awaiting commit + CF redeploy + 15-slug parity sweep.
-
-**Files added/modified this loop:**
-- `creditdoc/tools/creditdoc_db.py` — `_supabase_upsert`, `_load_supabase_creds`, `_build_lender_payload`, `_ensure_supabase_retries_table`, dual-write wired into 3 writers
-- `creditdoc/src/pages/r/[slug].ts` — `<meta name="cdm-last-updated">` tag for sub-second writer-signal observability
-- `creditdoc/src/lib/db.ts` — `&rating=gt.0` filter in `getLendersBySlugListRuntime`
-- `creditdoc/tools/cdm_rev_phase24_e2e_probe.py` — created + 4 fixes
-- `/srv/BusinessOps/tools/.supabase-creditdoc.env` — added `SUPABASE_DB_URL` (chmod 600, outside git)
+**User signal:** "we need to be concluding testing this evening" — evening deadline. Live e2e testing is impossible until deploy unblocks. Offline work continues.
 
 ---
 
-# CreditDoc — LIVE STATE (as of 2026-04-30 post-parity-patch deploy)
+## ITER 11 PROGRESS (parallel work while deploy blocked)
 
-## 2026-04-30 SECURITY FIX — `lenders_bak_2026_04_29_pre_a1` RLS lockdown ✅
+**Commit `44db458c2a` — Phase 5.9.2 rollback drill tool (3 of 3)** (push 11:38 UTC).
 
-Supabase advisor flagged ERROR-level `rls_disabled_in_public` on the A.1 backup table (20,825 rows of lender data exposed to anon key via PostgREST). Root cause: `CREATE TABLE AS SELECT` does NOT inherit RLS or policies from the source table — backups created via Supabase MCP `apply_migration` since A.1 had this gap silently.
+`tools/cdm_rev_rollback_drill.sh` (175 LOC) — automated wrapper around Drill 1 (CF Pages worker rollback). Captures pre-revert state of probe URL (status + `x-cdm-version` + body sha256), marks decision-to-revert timestamp, runs `git revert --no-edit anchor..HEAD`, pushes, polls every 5s with 8min timeout, writes JSON report to `data/cdm_rev_rollback_drill_<TS>.json`. Pass criterion: `total_seconds <= 300`. Distinct exit codes 0/1/2/3/4 for pass/bad-args/git-failed/never-recovered/exceeded. Has `--dry-run`.
 
-**Migration applied (Supabase MCP `apply_migration` `lock_down_lenders_backup_rls`):**
-```sql
-ALTER TABLE public.lenders_bak_2026_04_29_pre_a1 ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "deny_all_anon_authenticated" ON public.lenders_bak_2026_04_29_pre_a1
-  AS RESTRICTIVE FOR ALL TO anon, authenticated USING (false) WITH CHECK (false);
-```
+**Task #21 (3 rollback rehearsal scripts) NOW COMPLETE in commits.** Dress rehearsal still gated on CF Pages deploy unblock — needs a working preview URL to time `git revert → 200` wall clock against.
 
-**Verified post-apply (curl smoke):** anon → HTTP 200 `[]`, service_role → HTTP 206 (full read). ERROR-level lint cleared from `get_advisors`.
+**5.9 status overall:**
+- 5.9.1 Playbook (`docs/plans/2026-04-30_PHASE_5_9_ROLLBACK_REHEARSAL.md`) ✅ DONE iter 9
+- 5.9.2 Tooling (3 scripts) ✅ DONE iter 10+11
+- 5.9.3 Dress rehearsal ⬜ BLOCKED on deploy
+- 5.9.4 Open Qs to Jammi (DNS TTL, dash access, PITR window, notify channel, auto-revert daemon) ⬜ ASKED iter 9, awaiting answers
 
-**Hygiene rule added (OBJ-3 marketing tier):** Every public-schema CREATE TABLE issued by a migration MUST be followed by `ENABLE ROW LEVEL SECURITY` + at minimum a deny-all policy. To be added to architecture spec § A pre-flight checklist.
-
-**Service role key captured:** `SUPABASE_SERVICE_ROLE_KEY` saved to `/srv/BusinessOps/tools/.supabase-creditdoc.env` (chmod 600, outside git repo). JWT verified: `role=service_role`, `ref=pndpnjjkhknmutlmlwsk`, `exp=2036-04-19`. Should be rotated post-CDM-REV-migration since it transited chat once.
-
-**Remaining advisors (WARN, not blocking):**
-- `function_search_path_mutable` on `public.set_updated_at`
-- `rls_policy_always_true` — `lead_captures.lead_captures_anon_insert` (`WITH CHECK (true)`)
-- `rls_policy_always_true` — `user_quiz_responses.user_quiz_responses_anon_insert` (same)
-
-**Backup retention:** keep `lenders_bak_2026_04_29_pre_a1` until Phase 2.4 e2e probe passes + 7 quiet days, then DROP.
+This unblocks **§5.9 Rollback wrapper rehearsed and timed** for the Phase 6 cutover gate ONCE CF Pages deploy unblock + dress rehearsal completes.
 
 ---
 
+## ITER 10 PROGRESS (parallel work while deploy blocked)
 
-## CDM-REV — STRUCTURAL PARITY GREEN (10/10), /review/[slug] PRODUCTION-EQUIVALENT
+**Commit `208bcb5dc9` — Phase 5.9.2 rollback tooling (2 of 3)** (push 11:33 UTC).
 
-**Today's commit (`3ef22eb9af`, pushed to `cdm-rev-hybrid`):** 4 HTML parity patches applied + cache-bust on parity script. Patch summary at `CreditDoc Project Improvement/2026-04-29_HTML_PARITY_DRIFT_FINDINGS.md` § "drop-in diff blocks". Result:
+`tools/cdm_rev_snapshot_counts.py` (140 LOC) — pre-cutover row-count snapshot via PostgREST anon. Tested live. ~1.4s wall time. Output covers:
+- 8 SSR-backing tables (lenders, answers, listicles, blog_posts, wellness_guides, states, categories, specials) with row_count + max(updated_at)
+- ready_for_index_count (publish gate for /r/[slug] + state pages) — currently 15,524
+- 2 MV stubs (state_lender_counts, state_city_lender_counts) — return 404 as expected (A.5 not yet applied)
+- Top-10 lenders-by-state when MVs exist
 
-| Gate | Before | After |
-|---|---|---|
-| Structural parity (10-slug sample) | **0/10 PASS** | **10/10 PASS** ✅ |
-| BBB badges with value | -3 per page | match prod |
-| Logo `<img>` rendering | -3 per page | match prod |
-| Text-fallback initials (regression) | +3 per page | 0 |
-| Valid ratings (≠0.0/5) | -3 per page | match prod |
-| `datePublished` JSON-LD format | full ISO | `YYYY-MM-DD` |
-| Comparison cards (credit-saint) | 6 (capped) | 12 (matches prod) |
-| Comparison cards (self-credit-builder) | 6 (capped) | 11 (matches prod) |
-| Services array order | shuffled | sorted (deterministic) |
+Live baseline saved to `backups/cdm_rev_pre_cutover_counts_20260430T113330.json` — usable as the rollback-detection anchor.
 
-**Live preview:** `https://70121a9f.creditdoc.pages.dev` (alias `cdm-rev-hybrid.creditdoc.pages.dev`).
+`tools/cdm_rev_revert_route.sh` (75 LOC) — single-route prerender flip for emergency Drill 2. Idempotent, refuses if directive isn't exactly the expected form, has `--dry-run`. Tested dry-run on `src/pages/answers/[slug].astro` — correctly identifies line 17 for patch.
 
-## Prior loop artifacts (still relevant)
+**Third tool (`cdm_rev_rollback_drill.sh`) deferred** — it needs a working CF Pages deploy to time against (the polling-loop wall time is the whole point).
 
-**This loop's adds (cdm-rev-hybrid pushed to origin):**
-
-| Commit | What |
-|---|---|
-| `8c8c790806` | A.3 + A.4 DDL artifacts (now applied via Supabase MCP). |
-| `0e0c7a3d92` | Phase 2.1: `/api/revalidate` endpoint (4 types). |
-| `7b5065d7e4` | Phase 2.3: revalidate ping wired into 9 SQLite writers + endpoint extended to 11 ContentTypes. |
-| `c5ab63a4f1` | **CDM-REV Option C+: split `utils/data.ts` (779 → 408 pure-only lines) + new `utils/data-build.ts` (367 fs-backed lines). 24 page files + Header.astro re-imported.** |
-
-**Verification of Option C+ split:**
-- `grep -rln 'node:fs' dist/_worker.js/` returns nothing — Worker SSR bundle is fs-clean.
-- BaseLayout chunk no longer leaks fs import.
-- `utils/data.ts` (PURE — Worker-safe): all interfaces, ENTITY_TYPE_BADGE_MATRIX, getBadgeEligibility, getBbbClass, formatPrice, generateDiagnosis, US_STATES, STATE_ABBREVIATIONS, TOP_CITIES.
-- `utils/data-build.ts` (BUILD-TIME — fs-backed): getAllLenders, getLenderBySlug, getCategories, getComparisons, getListicles, getSpecials, getWellnessGuides, getAllStates, getAllCities, getStateData, getGlossaryTerms, getAllBrands, getBrandInfo, getBlogPosts, getClusterAnswers, etc.
-- Header.astro switched to `getCategoriesRuntime` from `data-runtime` (Supabase-backed, Worker-safe).
-
-**Live-DB writes EXECUTED earlier this loop on Jammi greenlight ("please proceed with those") — 519 rows loaded:**
-
-| Stage | Rows | DDL | Backfill | Status |
-|---|---|---|---|---|
-| A.2 | 303 | (already applied earlier) | wellness_guides 81 / comparisons 165 / brands 57 | ✅ APPLIED |
-| A.3 | 139 | states / categories / glossary_terms — applied via Supabase MCP | states 50 / categories 18 / glossary_terms 71 | ✅ APPLIED |
-| A.4 | 77 | blog_posts / listicles / answers / specials — applied via Supabase MCP | blog 34 / listicles 26 / answers 14 / specials 3 | ✅ APPLIED |
-
-All RLS row filters verified working — blog gates by `status='published'`, answers by `compliance_passed=true`, specials by `valid_until IS NULL OR valid_until >= CURRENT_DATE`.
-
-**Revalidate token + Phase 2.3 ping wiring:**
-- Token at `/srv/BusinessOps/tools/.creditdoc-revalidate.env` (chmod 600). PATCH'd to CF Pages `cdm-rev-hybrid` preview env_vars as `secret_text`.
-- `/api/revalidate` extended to 11 types: lender, wellness, comparison, brand, blog, listicle, answer, special, category, state, glossary.
-- Writer-side helper `_ping_revalidate(type_, slug)` in `tools/creditdoc_db.py` uses `urllib` (no new deps), soft-fails when REVALIDATE_TOKEN absent.
-- Wired after `self.conn.commit()` in 9 writers.
+Two bugs caught + fixed during snapshot tool build:
+1. URL builder collision (`?` vs `&` separator when query already had filters) — hardcoded `?` was breaking `lenders?processing_status=eq.ready_for_index` count
+2. Status check `== 200` missed the PostgREST 206 (Partial Content) on ranged count queries — max_updated_at was always null. Now accepts `(200, 206)`.
 
 ---
 
-## DEPLOY SUCCEEDED — preview rebuild on CF Pages
+## ITER 9 PROGRESS (parallel work while deploy blocked)
 
-`https://62d795d1.creditdoc.pages.dev` (alias `https://cdm-rev-hybrid.creditdoc.pages.dev`) — 1315 KiB Worker bundle, compiled OK.
+**Commit `88e6a0851a` — Phase 5.9 rollback rehearsal playbook drafted** (push 11:25 UTC).
 
-**Auth path (DO NOT FORGET — repeated mistake):** Pages/R2/Workers Scripts on this account use the **Global API Key**, not the `cfat_` token. The cfat_ token in `.env` is Zone-only (creditdoc.co DNS/SSL/Cache only). For wrangler:
-```bash
-unset CLOUDFLARE_API_TOKEN
-export CLOUDFLARE_EMAIL="$CLOUDFLARE_EMAIL"
-export CLOUDFLARE_API_KEY="$CLOUDFLARE_GLOBAL_API_KEY"
-npx wrangler pages deploy dist --project-name=creditdoc --branch=cdm-rev-hybrid
-```
-For raw curl on Pages endpoints: `-H "X-Auth-Email: $CLOUDFLARE_EMAIL" -H "X-Auth-Key: $CLOUDFLARE_GLOBAL_API_KEY"`. See `feedback_cloudflare_token_endpoints.md` and `drawer_creditdoc_post-mortems_002f8705614172dc76cf7065`.
+`docs/plans/2026-04-30_PHASE_5_9_ROLLBACK_REHEARSAL.md` (197 LOC) covers 5 drills with copy-paste commands + ≤5 min target wall-times:
+1. CF Pages worker rollback (most likely scenario) — `git revert` chain → push → wait for CF rebuild
+2. Per-route prerender revert — flip `prerender = false` → `true` on a single Astro page
+3. Middleware cacheWrap kill-switch — early `return next()` at top of onRequest
+4. Supabase A.5 migration rollback — DROP MV/FN/COL chain (already in migration header)
+5. DNS revert (worst case Phase 6) — change A record, propagate
 
-**Smoke test results post-deploy:**
-- `/review/credit-saint/` → 200 OK, TTFB 1.1s cold, ~150KB rendered (was 500 before C+ split — fixed)
-- `/review/lexington-law/` → 200 OK, TTFB 175ms warm
-- `/` → 200 OK, TTFB 551ms
+Plus pre-cutover snapshot procedure, dress-rehearsal protocol with pass criteria, 3 helper scripts to build (Task #21), and 5 open questions for Jammi (DNS TTL, CF rollback access, Supabase PITR window, notification channel, auto-revert daemon).
 
-**HTML diff smoke test (Phase 1 acceptance gate (d)) — RED:**
-| Slug | prod bytes | preview bytes | delta | delta % |
-|---|---|---|---|---|
-| credit-saint | 156486 | 150019 | 6467 | 4.13% |
-| the-credit-pros | 156745 | 152839 | 3906 | 2.49% |
-| sky-blue-credit | 152091 | 148611 | 3480 | 2.29% |
-| the-credit-people | 156795 | 153315 | 3480 | 2.22% |
-| lexington-law | 151689 | 147603 | 4086 | 2.69% |
-| experian-boost | 95734 | 93863 | 1871 | 1.95% |
-| credit-strong | 101030 | 98870 | 2160 | 2.14% |
-| self-credit-builder | 101843 | 97138 | 4705 | 4.62% |
-| capital-one-platinum-secured | 102345 | 100100 | 2245 | 2.19% |
-| rocket-loans | 135954 | 133703 | 2251 | 1.66% |
-
-Mean delta: **2.64%**. Threshold: 0.1%. Gate fails by 26x.
-
-Likely causes (need investigation before cutover):
-1. Preview SSR reads `body_inline` from Supabase; prod reads from `src/content/lenders/*.json` build-time. Body content may differ if the migrated JSONB has slight stringification/whitespace drift.
-2. Header.astro now uses `getCategoriesRuntime` (Supabase) on preview; prod uses build-time `getCategories` from JSON.
-3. `/api/revalidate` env var differences between deploys (KV writes vs no-op).
-
-**Forensic diff DONE on credit-saint (worst raw delta at 4.13%).** Full findings + patch proposal in `CreditDoc Project Improvement/2026-04-29_HTML_PARITY_DRIFT_FINDINGS.md`.
-
-**Gate metric correction (Apr 29 evening):** Fixed the broken line-count proxy in `cdm_rev_html_diff.sh` to use honest byte-delta. Post-fix re-run shows mean 0.014% across 10 slugs — TECHNICALLY GREEN but the metric is misleading. After `normalize()` strips whitespace runs/comments/hash IDs, structural drift (empty BBB ratings, missing logos, card-order shuffles) is byte-equivalent. **Need a structural parity gate** (count BBB badges with values / logo imgs / comparison cards per page) — byte-delta alone is insufficient. Spec in findings doc.
-
-**Drift sources identified (all real, fixable in ~38-45 LOC across 3 files, zero schema changes):**
-1. **`shapeCatalogToLenderStub` is intentionally minimal** (data-runtime.ts:511) — `CATALOG_COLUMNS` (db.ts:44) is 8 cols only, excludes logo_url/rating/pricing/bbb_rating/best_for. similar_lenders cards render with empty fields. Fix: expand catalog projection to read those fields from `body_inline` jsonb via PostgREST path syntax (~30 LOC).
-2. **Date stringification** — `last_updated` is full ISO `2026-04-29T12:10:54.809439+00:00` instead of `2026-04-05`. Fix: `.slice(0,10)` in `shapeBodyInlineToLender` (~5 LOC).
-3. **Service array order** — JSONB roundtrip non-deterministic. Fix: `.sort()` before render (~3 LOC).
-4. **Comparison row count gap** — preview missing 5 `/compare/credit-saint-vs-X/` cards. Likely A.2 backfill missed rows (need DB count audit — Jammi greenlight).
-
-**Structural parity baseline (Apr 29, 17:xx UTC, `tools/cdm_rev_structural_parity.py`, 10 slugs):** PASS 0 / FAIL 10. Drift signature uniform: every preview page is short by 3 logos / 3 valid ratings / 3 BBB-with-value (the 3 similar_lender stub cards) and renders ISO datePublished instead of YYYY-MM-DD. Compare-card cap drops 3 slugs (credit-saint -6, self-credit-builder -5, the-credit-pros -1) — confirmed `limit=6` in `getComparisonsForLenderRuntime` (db.ts:228).
-
-**Patch set ready (4 patches, ~46 LOC, zero schema):** (1) expand CATALOG_COLUMNS via body_inline jsonb-path SELECT (~30 LOC db.ts + data-runtime.ts), (2) `.slice(0,10)` on last_updated in shapeBodyInlineToLender (~5 LOC), (3) `.sort()` on services array (~3 LOC [slug].astro), (4) raise/drop limit=6 in getComparisonsForLenderRuntime (~1 LOC). Pre-edit rule applies — diffs in `2026-04-29_HTML_PARITY_DRIFT_FINDINGS.md`. **Next:** Jammi greenlight → apply → rebuild → redeploy → re-run structural gate (target 10/10).
+This unblocks the Phase 6 cutover gate ("§5.9 Rollback wrapper rehearsed and timed"). Drafted-but-unrehearsed today; rehearsal blocked on CF deploy unblock.
 
 ---
 
-## Branch
-- Working branch: `cdm-rev-hybrid` — `c5ab63a4f1` HEAD pushed to origin.
-- `main`: untouched.
-- `arch-overhaul`: parallel-window territory — DO NOT TOUCH.
-- creditdoc.co: serving Vercel static build, untouched.
+## ITER 8 PROGRESS (parallel work while deploy blocked)
 
-## Live system status (DO NOT TOUCH)
-- Vercel production at `https://www.creditdoc.co/` — UNCHANGED.
-- DNS at Cloudflare zone `creditdoc.co` — A → `216.198.79.1` Vercel anycast, all `proxied=False`. Phase 6 cutover only.
-- Supabase project `pndpnjjkhknmutlmlwsk` — 519 rows loaded across 13 tables.
+**Commit `c76f12a109` — Phase 5.1.b state-page runtime helpers + middleware listicles fix** (push 11:18 UTC, queued behind broken deploy).
 
-## Verifier baseline (post-C+ split, awaiting redeploy)
+`src/lib/db.ts` — 4 new helpers:
+- `getStateAggregateRuntime(abbr)` — single-row state count (lender_count, city_count) from `state_lender_counts` MV
+- `getAllStateAggregatesRuntime()` — all 50+ states ordered by lender_count desc (for /state index)
+- `getStateCitiesAggregateRuntime(abbr, limit)` — top cities in a state from `state_city_lender_counts` MV
+- `getLendersByStateRuntime(abbr, limit)` — uses new generated `state_abbr` column on lenders table (replaces unfilterable `body_inline.company_info.state` jsonb deep-path that returns PostgREST 500s)
 
-OBJ-1: AMBER — Worker SSR is rendering /review/[slug] at 200 OK (proves C+ fs-fix). Phase 2.4 end-to-end revalidation probe + HTML parity drift investigation still required to flip GREEN.
-OBJ-2: RED — audit_log triggers still pending (Phase 3.1, off-limits without explicit greenlight).
-OBJ-3: GREEN — helpers in place, extending_the_app.md doc shipped.
+`src/middleware.ts` — typo fix: added `'listicles'` to the table-union type. /best/[slug] cacheWrap now type-checks against the correct table for `updated_at` probe (was inferring `'lenders'` by mistake).
 
-## STRATEGIC QUESTION FROM JAMMI — 20K+ records full migration timeline
+**Migration NOT yet applied:** `supabase/migrations/2026-04-30_cdm_rev_a5_state_aggregates.sql` is staged. Adds:
+- `lenders.state_abbr` generated stored col (UPPER+TRIM of `body_inline.company_info.state`)
+- `lenders.city_norm` generated stored col (lower+TRIM of `body_inline.company_info.city`)
+- 2 indexes (state_abbr; state_abbr+city_norm)
+- 2 MVs (`state_lender_counts`; `state_city_lender_counts`)
+- `refresh_state_aggregates()` function
+- GRANT SELECT to anon, authenticated
+- NOTIFY pgrst, 'reload schema'
 
-> "when are we pulling the full 20,000 plus records to the database with all the information, maps locations, links etc - this is going to be the acid test - all that stuff needs to work seamlessley"
+**Awaits Jammi greenlight before I run via Supabase MCP `apply_migration`.** Migration is read-only-shape (adds columns + MVs); zero existing-data mutation. Rollback is 5 lines (DROP MV / DROP FN / ALTER DROP COLUMN). Once applied, /state/[slug].astro becomes a one-shot SSR conversion (Phase 5.1 last route).
 
-**Current state (Apr 29):**
-- A.1 done: `lenders.body_inline jsonb` populated for 20,813 / 20,825 rows. SSR pilot `/r/[slug]` reads body content from edge.
-- A.2/A.3/A.4 done: 519 rows of supporting tables loaded (wellness, comparisons, brands, states, categories, glossary, blog, listicles, answers, specials).
+---
 
-**Still in JSON (build-time prerender — NOT yet a Supabase row-level resource):**
-- Per-lender structured metadata (logo_url, address, lat/lng, ratings, services, pricing, affiliate_url, affiliate_program, cfpb_data, vendor_verified, FAQ, similar_lenders, rating_breakdown).
-- This is the big one — 20K+ rows × ~30 columns = the actual "acid test" Jammi is pointing at.
+## OBJECTIVES STATE (verifier output expected unchanged from iter 7)
 
-**Where this fits in the consolidated build plan:**
-- File: `CreditDoc Project Improvement/2026-04-29_CREDITDOC_SITE_ARCHITECTURE.md` Section A.5+.
-- Pre-flight: 75-row Tier A/B/C/D test in `2026-04-29_GAP_ANALYSIS_EMBEDDED_FINANCE_COMPLIANCE.md` runs FIRST to prove every column is queryable + RLS-correct + revalidation-ping-friendly.
-- Then full backfill: ~10-12 SQL migrations adding columns to `lenders` (or sibling tables for service arrays / pricing matrix), + Python backfill from `src/content/lenders/*.json` to Supabase, + per-route SSR queries replacing build-time JSON reads.
-- Estimated: 8-12h work, ALL on `cdm-rev-hybrid` preview before any production cutover.
+- **OBJ-1 — ≤10s rebuild-free:** GREEN in static analysis (3 SSR routes done: /r/[slug], /answers/[slug], /best/[slug]; /answers/index added; middleware version-keyed cacheWrap on /answers + /best). UNVERIFIED-LIVE because deploy is blocked. Phase 5.5b probe ready to fire post-deploy.
+- **OBJ-2 — <50 LOC new surface:** GREEN. State-aggregate helpers add ~90 LOC to db.ts (one file, follows existing _restGet pattern). /state/[slug] conversion will be ≤50 LOC of frontmatter swap.
+- **OBJ-3 — staged compliance:** GREEN at marketing-tier. No FS providers active.
 
-**What I recommend before that big lift (per Jammi's "dot every i, cross every t" rule):**
-1. Refresh CF token → redeploy preview.
-2. Run HTML diff smoke test on `/review/[slug]` (today's gate).
-3. Only then propose A.5 lenders-full-migration plan with per-column column types + RLS policies + revalidation-ping integration + rollout plan for review.
+## TASKS
 
-This question is also captured in the project planning folder for next-session pickup.
+- **#15 [in_progress]** — /state/[slug].astro SSR. Helpers landed. Blocked on Jammi greenlight for migration apply.
+- **#19 [pending]** — Phase 5.5b live e2e probe `--route all --apply --trials 10`. Blocked on CF deploy.
+- **#20 [pending]** — Unblock CF Pages deploy. Blocked on Jammi action OR CF token. **EVENING DEADLINE per Jammi.**
+- **#21 [DONE iter 11]** — 3 rollback rehearsal scripts shipped. Dress rehearsal blocked on deploy.
+- Phase 5.2 (50-URL HTML diff sweep) — blocked on deploy.
+- Phase 5.3 (indexing API + PSI baseline) — blocked on deploy.
+- **Phase 5.9 (rollback rehearsal)** — playbook + 3 tools committed. Dress rehearsal gated on CF deploy unblock + Jammi answers to 5 open Qs.
 
-## Loop authority
-Currently in `/loop` mode with directive: "until you finish all the work that doesnt involve touching the live database or system". Plus "We are not pulling any triggers for cutover until site is completely reviewed and tested. We need to dot every i and cross every t."
+## DECISIONS THIS LOOP
 
-Off-limits without further explicit greenlight:
-- audit_log triggers (Phase 3.1)
-- A.5+ lenders full migration (proposed but unbuilt)
-- DNS changes (Phase 6 cutover only)
-- Vercel production changes (Phase 6 only)
-- CF Pages production deploy (preview is current)
-- crontab modifications (REVALIDATE_TOKEN cron wiring deferred)
+1. Did NOT halt loop on deploy block. Continued parallel work on /state/[slug] runtime helpers — these are pure read paths that don't depend on deploy.
+2. Drafted but did NOT apply A.5 state-aggregates migration. Bulk DDL on `lenders` (26K rows) + 2 MV builds is a 5-Step Protocol candidate per `.claude/rules/safety.md` — needs Jammi greenlight + smoke-test plan even though it's additive-only.
+3. Fixed middleware.ts type bug found via `tsc --noEmit`. Was inferring `lenders` table for /best/[slug] — would have hit row-not-found on every cache probe and bypassed cache forever (silent perf loss, not a correctness bug).
+
+## NEXT ACTIONS — IF DEPLOY UNBLOCKS
+
+1. Confirm `x-cdm-version` headers appear on /answers + /best
+2. Run `python3 tools/cdm_rev_phase24_e2e_probe.py --route all --apply --trials 10` → Phase 5.5b verdict
+3. If green: ship Phase 5.2 50-URL HTML-diff sweep as parity proof
+4. If red: investigate first failure before any further work
+
+## NEXT ACTIONS — IF JAMMI GREENLIGHTS A.5 MIGRATION
+
+1. Apply via `mcp__claude_ai_Supabase__apply_migration`
+2. Smoke test: PostgREST GET `state_lender_counts?select=*&limit=3` returns rows + 200
+3. Convert /state/[slug].astro to SSR using new helpers (≤50 LOC swap)
+4. Local `npm run build` → verify static export size drops (no fs aggregate scan)
+5. Commit + push — rides whatever deploy mechanism is unblocked
+
+---
+
+_Last updated 2026-04-30 11:38 UTC (iter 11)._
