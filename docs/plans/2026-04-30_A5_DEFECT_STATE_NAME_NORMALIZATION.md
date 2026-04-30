@@ -115,10 +115,17 @@ $$;
 
 ## Status
 
-- **Defect identified:** ✅ DONE 2026-04-30 17:15 UTC
-- **Fix selected:** ⬜ TODO (Jammi to confirm Option 1)
-- **Migration rewritten:** ⬜ TODO
-- **Migration applied:** ⬜ TODO (post-rewrite)
-- **/state SSR ships:** ⬜ TODO (post-A.5)
+- **Defect identified:** ✅ DONE 2026-04-30 17:15 UTC (iter 23)
+- **Fix selected:** 🟡 RECOMMENDED Option 1 — Jammi to confirm
+- **v2 migration rewritten:** ✅ DONE 2026-04-30 17:46 UTC (iter 24) — `supabase/migrations/2026-04-30_cdm_rev_a5_state_aggregates_v2.sql`
+- **v2 CASE validated against prod (read-only):** ✅ DONE 2026-04-30 17:46 UTC
+  - Distinct `state_abbr` values: **60** (50 states + DC + 9 territories/garbage codes), down from 103 raw shapes
+  - Texas correctly merges: full-name "Texas" 1,246 + abbrev "TX" 973 → **TX = 2,219**
+  - California correctly merges: 1,073 + 616 → **CA = 1,689**
+  - Garbage codes (LL/ST/HO/US/FM/PM) pass through harmlessly (3+2+1+1+1+1 = 9 rows total, won't match real /state queries)
+- **Migration applied:** ⬜ TODO — awaits Jammi confirm of Option 1
+- **/state SSR ships:** ⬜ TODO (post-A.5 apply)
 
 **Iter 23 conclusion:** caught the defect before applying. RULE 4 (no stupid shit) prevented a bad migration to prod. Documented for next iter.
+
+**Iter 24 conclusion:** v2 migration written + read-only validated. Distribution confirms CASE produces clean 60-value column (Texas 2,219, California 1,689, etc.). Apply is now a single `psql` command once Jammi approves.

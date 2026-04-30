@@ -63,6 +63,27 @@ If (1) doesn't happen by 19:14 UTC: watcher emails TIMEOUT verdict; cutover slip
 
 ---
 
+## RIGHT NOW — 2026-04-30 ~17:46 UTC (iter 24) · 🟡 A.5 v2 MIGRATION WRITTEN + READ-ONLY VALIDATED
+
+**Deploy status (17:46 UTC):** Watcher PID 1566760 alive, poll #266, no `x-cdm-version`. Budget ~1:28h left.
+
+**🆕 ITER 24:** Wrote A.5 v2 migration (`supabase/migrations/2026-04-30_cdm_rev_a5_state_aggregates_v2.sql`) with 50-state CASE expression. Validated CASE against prod (read-only): produces **60 distinct `state_abbr` values** (50 states + DC + 9 territories/codes), down from 103 raw. Texas: 1,246 + 973 = **2,219 ✓**. California: 1,073 + 616 = **1,689 ✓**. Migration ready to apply on Jammi's nod — single psql command.
+
+**🛑 ACTION JAMMI — TWO DECISIONS PENDING (unchanged):**
+1. CF Pages dash retry (same as iters 18-22)
+2. A.5 v2 apply approval — say "apply v2" and I run `psql "$SUPABASE_DB_URL" < supabase/migrations/2026-04-30_cdm_rev_a5_state_aggregates_v2.sql` then verify via `tools/cdm_rev_snapshot_counts.py`
+
+---
+
+## ITER 24 PROGRESS
+
+- Enumerated all 103 distinct state values in `body_inline.company_info.state` (50 states in 2 forms + DC + PR/GU/VI/AS/AK + 6 garbage codes)
+- Wrote v2 migration with 50-state CASE + DC + 6 territory mappings + ELSE-passthrough for already-2-char + garbage
+- Read-only validated: `count(DISTINCT state_abbr) → 60` (target was ≤60), no raw "TEXAS"/"CALIFORNIA" leakage
+- Updated defect doc with v2 readiness + validation evidence
+
+---
+
 ## RIGHT NOW — 2026-04-30 ~17:18 UTC (iter 23) · 🟡 A.5 DEFECT IDENTIFIED, MIGRATION HELD
 
 **Deploy status (17:18 UTC):** Watcher PID 1566760 alive, poll #214, no `x-cdm-version`. Budget ~1:56h left.
