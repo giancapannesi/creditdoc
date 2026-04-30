@@ -1,24 +1,68 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RatingStars from '../../components/RatingStars.astro';
-import { getListicles, getLenderBySlug } from '../../utils/data-build';
 import { formatPrice, getBbbClass } from '../../utils/data';
 import type { Lender } from '../../utils/data';
+import { shapeBodyInlineToLender } from '../../utils/data-runtime';
+import {
+  getListicleBySlugRuntime,
+  getLendersBySlugListRuntime,
+  type RuntimeLenderEnv,
+} from '../../lib/db';
 
-export function getStaticPaths() {
-  const listicles = getListicles();
-  return listicles.map(listicle => ({
-    params: { slug: listicle.slug },
-  }));
+// CDM-REV Phase 5.1 [OBJ-1] — SSR (no rebuild).
+// DB row update at T+0 → URL serves new HTML at T+≤cache TTL. Mirrors the
+// /answers/[slug] flip from earlier in the loop. Listicle body + ranked-lender
+// rows fetched from Supabase at request time.
+export const prerender = false;
+
+const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
+const { slug } = Astro.params;
+if (!slug) return new Response('Bad request', { status: 400 });
+
+const listicleRow = await getListicleBySlugRuntime(slug, env);
+if (!listicleRow) {
+  return new Response('Listicle not found', {
+    status: 404,
+    headers: { 'content-type': 'text/plain; charset=utf-8' },
+  });
 }
 
-const { slug } = Astro.params;
-const listicles = getListicles();
-const listicle = listicles.find(l => l.slug === slug)!;
+// Hydrate the legacy listicle shape from top-level columns + body_inline.
+const lb = (listicleRow.body_inline ?? {}) as Record<string, any>;
+const listicle = {
+  slug: listicleRow.slug,
+  title: (listicleRow.title || lb.title) as string,
+  category: (listicleRow.category || lb.category) as string | undefined,
+  target_keyword: (listicleRow.target_keyword || lb.target_keyword) as string | undefined,
+  description: (lb.description ?? '') as string,
+  seo_title: (lb.seo_title ?? listicleRow.title) as string,
+  seo_description: (lb.seo_description ?? lb.description ?? '') as string,
+  intro: (lb.intro ?? '') as string,
+  tldr: (lb.tldr ?? '') as string | undefined,
+  key_takeaways: (lb.key_takeaways ?? []) as string[],
+  lenders: (lb.lenders ?? []) as string[],
+  faq: (lb.faq ?? []) as Array<{ q: string; a: string }>,
+};
 
-const rankedLenders = listicle.lenders
-  .map(s => getLenderBySlug(s))
-  .filter((l): l is Lender => l !== undefined);
+// Resolve the ranked-lender slug list to full hydrated Lender objects.
+const slugRows = listicle.lenders.length > 0
+  ? await getLendersBySlugListRuntime(listicle.lenders, env)
+  : [];
+// Preserve the editorial order: getLendersBySlugListRuntime returns rows in
+// PostgREST natural order, not the order specified in the slug list.
+const slugRowMap = new Map(slugRows.map((r) => [r.slug, r]));
+const rankedLenders: Lender[] = listicle.lenders
+  .map((s) => slugRowMap.get(s))
+  .filter((r): r is NonNullable<typeof r> => Boolean(r))
+  .map(shapeBodyInlineToLender);
+
+// Edge cache headers — matches /answers/[slug] flip pattern.
+const verSec = Math.floor(Date.parse(listicleRow.updated_at) / 1000);
+Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
+Astro.response.headers.set('x-cdm-route', '/best/[slug]');
+Astro.response.headers.set('x-cdm-slug', listicle.slug);
+Astro.response.headers.set('x-cdm-version', String(verSec));
 
 const jsonLd = [
   {
