@@ -4,6 +4,61 @@
 
 ---
 
+## RIGHT NOW — 2026-04-30 ~13:55 UTC (iter 16) · 🟡 PHASE 5.9.2 TOOLING VERIFIED OFFLINE, ALL OFFLINE GATES CLOSED, AWAITING DEPLOY
+
+**Deploy status (13:55 UTC):** Watcher PID 1566760 elapsed ~40 min, poll #36, no `x-cdm-version`. No new origin commits. CF token still empty.
+
+**🤖 ITER 16 — verification-not-rebuild:**
+
+Found Phase 5.9.2 rehearsal tooling **already shipped** (commits `208bcb5dc9` + `44db458c2a`):
+- `tools/cdm_rev_snapshot_counts.py` (191 LOC) — pre-cutover row count + max(updated_at) anchor
+- `tools/cdm_rev_rollback_drill.sh` (175 LOC) — automated CF Pages worker rollback timing
+- `tools/cdm_rev_revert_route.sh` (87 LOC) — flips per-route prerender false→true
+
+**Live verification of `cdm_rev_snapshot_counts.py --no-write`:**
+- 15524 lenders ready_for_index ✅
+- answers=14, blog_posts=34, listicles=26, wellness_guides=81, states=50, categories=18, specials=3 ✅
+- Last lenders.updated_at = 2026-04-30T09:16 (pre-deploy-block, expected) ✅
+- A.5 MVs `state_lender_counts` + `state_city_lender_counts` = 404 (NOT YET APPLIED) — confirms `/state/[slug]` SSR conversion (task #15) is A.5-migration-gated
+- Wall: 2.22s
+
+**Phase 5.9 dress rehearsal status:** all 3 tools exist + verified runnable. Dress rehearsal itself still gated on deploy + A.5 migration application.
+
+**🛑 OFFLINE GATE STATUS — all closeable items now CLOSED:**
+| Gate | Status | Notes |
+|------|--------|-------|
+| 5.1 SSR /answers /best | ✅ GREEN | Committed prior iters |
+| 5.1 SSR /state | ⬜ A.5-gated | Needs MV migration (Jammi) |
+| 5.2 panel diff (gate d) | ✅ GREEN | 50/50 0% baseline |
+| 5.3 cacheWrap middleware | ✅ GREEN | Deployed in code |
+| 5.5 e2e probe tool | ✅ GREEN | Tool exists; live run deploy-gated |
+| 5.7 revalidate path (gate f) | ✅ GREEN | HTTP 405 endpoint wired |
+| 5.8 audit log scaffolding | ⬜ Deferred | Deploy + DB-writes-needed |
+| 5.9.1 rollback playbook | ✅ GREEN | Drafted iter 9 |
+| 5.9.2 rollback tooling | ✅ GREEN | Verified iter 16 |
+| 5.9.3 dress rehearsal | ⬜ Deploy-gated | All prereqs ready |
+| 5.10 OBJ verifier | ✅ GREEN | Tool wired into orchestrator |
+| Phase 1 acceptance orch | ✅ GREEN | Iter 15 shipped |
+
+**🛑 ACTION JAMMI — STILL need ONE of:**
+1. **Single click:** dash.cloudflare.com → Workers & Pages → `creditdoc` → latest deployment (~10h+ old) → `⋯` → **"Retry deployment"**
+2. **OR paste me a CF Pages:Edit token** to `/srv/BusinessOps/tools/.creditdoc-migration.env` (chmod 600).
+3. **OR tell me what you see in the dash** so I can root-cause.
+
+**User signal:** "we need to be concluding testing this evening" — evening deadline. Watcher fires combined cutover-gate verdict on recovery. Orchestrator gives on-demand verdict at any point. Cannot autonomously progress further until deploy unblocks.
+
+---
+
+## ITER 16 PROGRESS (verification, no new shipping)
+
+Inspected `tools/cdm_rev_snapshot_counts.py` — confirmed it: loads `.supabase-creditdoc.env`, runs PostgREST `count=exact` against 8 tables + 2 MVs, captures `max(updated_at)` per table, writes JSON to `backups/cdm_rev_pre_cutover_counts_<TS>.json`. Live `--no-write` smoke verified end-to-end.
+
+Updated MEMORY.md and DECISIONS.md to reflect Phase 5.9.2 = DONE (was previously TODO in plan doc). No new tool commits this iter — prevents the "rebuild what already exists" anti-pattern called out in `feedback_read_memory_first.md`.
+
+**Why this matters for OBJ-1:** Phase 6 cutover is gated on a rehearsed rollback per the plan §Phase 5.9 acceptance. Tooling-verified moves rehearsal from "build first" to "schedule with Jammi" — one fewer step on the cutover critical path.
+
+---
+
 ## RIGHT NOW — 2026-04-30 ~13:45 UTC (iter 15) · 🟡 PHASE 1 ACCEPTANCE ORCHESTRATOR SHIPPED, WATCHER ARMED, DEPLOY STILL BLOCKED
 
 **Deploy status (13:45 UTC):** Watcher PID 1566760 elapsed ~30 min, poll #28, no `x-cdm-version`. No new origin commits. CF token still empty.
