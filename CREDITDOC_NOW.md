@@ -4,6 +4,22 @@
 
 ---
 
+## RIGHT NOW — 2026-04-30 ~16:11 UTC (iter 21) · 🟡 MAINTENANCE — POLL #173, NEW EVIDENCE: BOT COMMIT 15:32 ALSO NOT BUILT
+
+**Deploy status (16:11 UTC):** Watcher PID 1566760 alive, poll #173, no `x-cdm-version`. Watcher 6h budget expires ~19:14 UTC.
+
+**🔍 New evidence:** Origin commit `b7b1b032ac` "Add 5 comparison pages" (TradingToolsHub Bot, daily cron at 15:32 UTC) still not built ~40 min later. Confirms CF Pages git-integration is **genuinely broken** at the trigger level — not just my pushes being ignored. Even legitimate cron-driven commits aren't firing builds. This is exactly the failure mode Jammi's "Retry deployment" click is designed to recover from.
+
+**🛑 ACTION JAMMI — same as prior iters** (CF dash retry click / Pages:Edit token / dash state).
+
+---
+
+## ITER 21 PROGRESS
+
+Maintenance. Watcher healthy. New diagnostic data point: bot-cron commit also stuck = git-integration broken not push-specific.
+
+---
+
 ## RIGHT NOW — 2026-04-30 ~15:40 UTC (iter 20) · 🟡 MAINTENANCE — POLL #142, 2.5H IN, ~3.5H BUDGET LEFT
 
 **Deploy status (15:40 UTC):** Watcher PID 1566760 alive, poll #142, no `x-cdm-version`. No new commits. No CF token. Watcher 6h budget expires ~19:14 UTC.
