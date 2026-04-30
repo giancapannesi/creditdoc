@@ -4,6 +4,31 @@
 
 ---
 
+## RIGHT NOW — 2026-04-30 ~14:47 UTC (iter 18) · 🟡 TRUE MAINTENANCE MODE — DEPLOY STILL BLOCKED, ALL OFFLINE WORK COMPLETE
+
+**Deploy status (14:47 UTC):** Watcher PID 1566760 elapsed ~93 min, poll #93, no `x-cdm-version`. No new origin commits. CF token still empty. Watcher 6h budget expires ~19:14 UTC (end-of-evening CAT).
+
+**🤖 ITER 18 — true maintenance mode (no new docs, no new tools).**
+
+All offline-buildable Phase 1 + Phase 6 prep work shipped in iters 13-17. Iter 18 confirms watcher health and writes hygiene. No new artifacts.
+
+**🛑 ACTION JAMMI — STILL need ONE of:**
+1. **Single click:** dash.cloudflare.com → Workers & Pages → `creditdoc` → latest deployment → `⋯` → **"Retry deployment"**
+2. **OR paste me a CF Pages:Edit token** to `/srv/BusinessOps/tools/.creditdoc-migration.env` (chmod 600).
+3. **OR tell me what you see in the dash** so I can root-cause.
+
+**User signal:** "we need to be concluding testing this evening" — evening deadline (CAT, UTC+2) approaches. Without Jammi action by ~19:14 UTC = 21:14 CAT, watcher times out and emails the failure verdict.
+
+**Iter cadence:** dynamic, ~25-30 min between checks. Will continue until deploy unblocks OR Jammi calls hold.
+
+---
+
+## ITER 18 PROGRESS
+
+Maintenance only. Watcher PID 1566760 alive at poll #93. No new commits to ship.
+
+---
+
 ## RIGHT NOW — 2026-04-30 ~14:20 UTC (iter 17) · 🟡 PHASE 6 CUTOVER PLAYBOOK SHIPPED, AWAITING DEPLOY UNBLOCK
 
 **Deploy status (14:20 UTC):** Watcher PID 1566760 elapsed ~63 min, poll #64, no `x-cdm-version`. No new origin commits since iter 16. CF token still empty.
