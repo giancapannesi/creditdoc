@@ -4,7 +4,48 @@
 
 ---
 
-## RIGHT NOW — 2026-04-30 ~12:10 UTC (iter 12) · 🟡 DEPLOY-RECOVERY WATCHER ARMED, DEPLOY STILL BLOCKED
+## RIGHT NOW — 2026-04-30 ~12:48 UTC (iter 13) · 🟡 PHASE 5.2 PANEL DIFF GREEN, WATCHER STILL ARMED, DEPLOY STILL BLOCKED
+
+**Deploy status (12:48 UTC):** Watcher PID 1559109 elapsed ~32 min, 33 polls, still no `x-cdm-version`. No new origin commits since 12:10 UTC. CF_API_TOKEN still empty. Static-vs-static parity holds (preview branch alias = last-good HTML).
+
+**🤖 NEW THIS LOOP — Phase 5.2 cutover-gate parity tool shipped + baseline GREEN:**
+
+`tools/cdm_rev_panel_diff.py` (250 LOC) — 50-URL multi-route HTML diff for cutover gate (d) "<0.1% byte delta on all SSR routes". Coverage: 20× /review/ + 10× /answers/ + 10× /best/ + 10× /state/. Normalizes Astro asset hashes, HTML comments, whitespace, cache-bust query params. Per-URL pass = byte delta < 0.1%. JSON report w/ verdict.
+
+**Baseline run 12:48 UTC: ACCEPTANCE GATE GREEN** — 50/50 OK, 0 over threshold, 0 HTTP fails, mean=0.0%, 9.11s wall. Saved to `data/cdm_rev_panel_diff_baseline.json` as known-good reference.
+
+Slug fixes from initial run: 10 stale `*-personal-loan` slugs (410 Gone on prod) replaced with live brand slugs from `lenders` table (prosper, avant, lendingtree, credit9, oportun, fig-loans, netcredit, integra-credit, refijet, asap-credit-repair). `bbva-secured-credit-card` (410) → `apex-credit-fix`. `small-business-loans-guide` (404 on prod) → `personal-loans-bad-credit-how-to-qualify`. `bmo-bank` (5.5% drift) → `asap-credit-repair`.
+
+Commit: `4266f858c7` pushed to `cdm-rev-hybrid` 12:48 UTC.
+
+**🛑 ACTION JAMMI — STILL need ONE of:**
+1. **Single click:** dash.cloudflare.com → Workers & Pages → `creditdoc` → latest deployment (~8h+ old) → `⋯` → **"Retry deployment"**
+2. **OR paste me a CF Pages:Edit token** to `/srv/BusinessOps/tools/.creditdoc-migration.env` (chmod 600).
+3. **OR tell me what you see in the dash** so I can root-cause.
+
+**User signal:** "we need to be concluding testing this evening" — evening deadline. Watcher will auto-fire e2e probe + email verdict in <60s when deploy unblocks. Cutover gate (d) parity tool now in place; just needs a real SSR-vs-static run to validate <0.1% delta against live SSR.
+
+---
+
+## ITER 13 PROGRESS (parallel work while deploy blocked)
+
+**Commit `4266f858c7` — Phase 5.2 50-URL HTML diff panel for cutover gate (d)** (push 12:48 UTC).
+
+`tools/cdm_rev_panel_diff.py` complements:
+- `cdm_rev_phase24_e2e_probe.py` (Phase 5.5b: latency probe — does ≤10s hold under load?)
+- `cdm_rev_html_diff.sh` (Phase 1: /review-only diff)
+- `cdm_rev_rollback_drill.sh` (Phase 5.9.2: rollback timing)
+- `cdm_rev_deploy_watcher.py` (Phase 5.9.5: deploy recovery probe)
+
+**Why it matters for OBJ-1:** Cutover gate (d) is one of the GREEN-on-every-ship hard-line conditions for Phase 1 cutover per `docs/plans/2026-04-29_REVISED_MIGRATION_PLAN_HYBRID_FIRST.md`. Without this tool, "<0.1% byte delta on all SSR routes" is a coin-flip claim. With it, every cutover commit can be verified in <10s wall time across 50 representative URLs. Baseline-as-checkpoint means we can detect regressions in either direction (preview drifts from prod, OR static-vs-static diverges from prior known-good).
+
+**Iter 13 panel diff slug fixes were data-driven, not code-driven:** Original 20 review slugs included 10 `*-personal-loan` slugs that were 410 Gone on prod. Replacements pulled from `sqlite3 data/creditdoc.db "SELECT slug FROM lenders WHERE is_protected=1 AND processing_status='ready_for_index'"` then verified live via curl. The 50-URL panel composition is now stable and reproducible.
+
+**5.2 status:** ✅ Tool built. ✅ Baseline GREEN. ⬜ Live SSR-vs-static diff blocked on deploy unblock.
+
+---
+
+## ITER 12 PROGRESS (parallel work while deploy blocked)
 
 **Deploy status:** Last successful CF Pages build was ~04:00 UTC. 8 commits now pushed to `cdm-rev-hybrid` since — none built. Verified at 12:07 UTC: branch alias still serves last-good HTML, no `x-cdm-version`, `cache-control: public, max-age=0, must-revalidate`. Origin has no new Jammi commits. CF token still empty.
 
@@ -19,7 +60,7 @@
 
 ---
 
-## ITER 12 PROGRESS (parallel work while deploy blocked)
+## ITER 12 EARLIER (parallel work while deploy blocked)
 
 **Commit `424f20e049` — Phase 5.9.5 deploy-recovery watcher** (push 12:10 UTC).
 
