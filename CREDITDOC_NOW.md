@@ -4,7 +4,44 @@
 
 ---
 
-## RIGHT NOW — 2026-04-30 ~12:48 UTC (iter 13) · 🟡 PHASE 5.2 PANEL DIFF GREEN, WATCHER STILL ARMED, DEPLOY STILL BLOCKED
+## RIGHT NOW — 2026-04-30 ~13:15 UTC (iter 14) · 🟡 WATCHER NOW FIRES BOTH CUTOVER GATES, DEPLOY STILL BLOCKED
+
+**Deploy status (13:15 UTC):** OLD watcher PID 1559109 reached poll 64 (~64 min) without `x-cdm-version`. Killed and restarted with NEW combined-gate code as PID 1566760. New watcher poll #1 fired 13:14 UTC. No new origin commits since 12:48. CF_API_TOKEN still empty.
+
+**🤖 NEW THIS LOOP — watcher fires BOTH cutover gates on deploy recovery:**
+
+`tools/cdm_rev_deploy_watcher.py` upgraded (commit `e0202f8b72`). When deploy detected, runs:
+- **Phase 5.5b** e2e probe (latency: does ≤10s hold under load? 10 trials × 3 routes)
+- **Phase 5.2** panel diff (cutover gate (d): <0.1% byte delta on 50-URL panel)
+
+Combined PASS only when both green. Subject line carries both: `[CDM-REV] Deploy recovered + cutover gates PASS (5.5b=PASS, 5.2=PASS)`. Panel diff is cheap (~10s wall) — adds <10s to total verdict.
+
+Why both: 5.5b proves SSR latency promise; 5.2 proves SSR HTML matches static HTML. Without 5.2, latency PASS could ship broken/missing content. Without 5.5b, parity PASS could ship at 30s p95. Cutover requires both.
+
+**🛑 ACTION JAMMI — STILL need ONE of:**
+1. **Single click:** dash.cloudflare.com → Workers & Pages → `creditdoc` → latest deployment (~9h+ old) → `⋯` → **"Retry deployment"**
+2. **OR paste me a CF Pages:Edit token** to `/srv/BusinessOps/tools/.creditdoc-migration.env` (chmod 600).
+3. **OR tell me what you see in the dash** so I can root-cause.
+
+**User signal:** "we need to be concluding testing this evening" — evening deadline. Watcher will email full cutover-gate verdict in <60s when deploy unblocks.
+
+---
+
+## ITER 14 PROGRESS (parallel work while deploy blocked)
+
+**Commit `e0202f8b72` — Phase 5.9.5 watcher fires BOTH cutover gates** (push 13:15 UTC).
+
+Added `run_panel_diff()` function to `cdm_rev_deploy_watcher.py` and wired into the post-deploy execution path. Email body now has two summary blocks (5.5b stdout + 5.2 stdout) plus combined verdict subject + JSON paths for both gates.
+
+Smoke-tested: `run_panel_diff()` returns ok=True with JSON path. Restart sequence clean: kill old PID 1559109 (graceful) → spawn new PID 1566760 → poll #1 confirmed.
+
+**Why this matters for "concluding testing this evening":** Jammi was about to get a single-gate verdict (latency only). The cutover gate (d) is in the migration plan as a hard-line GREEN requirement, not optional. Without panel diff in the same email, "concluding testing" is incomplete — could mean "5.5b passed" but not "cutover is safe to pull the trigger." Now one email = both gates = cutover-ready signal.
+
+**5.9.5 status:** ✅ Tool complete. ⬜ Live verification blocked on deploy unblock (which will exercise both gates on first poll-detection).
+
+---
+
+## ITER 13 EARLIER (parallel work while deploy blocked)
 
 **Deploy status (12:48 UTC):** Watcher PID 1559109 elapsed ~32 min, 33 polls, still no `x-cdm-version`. No new origin commits since 12:10 UTC. CF_API_TOKEN still empty. Static-vs-static parity holds (preview branch alias = last-good HTML).
 
