@@ -14,13 +14,9 @@
 
 CDM-REV Phase 3 (compliance baseline) is now substantively complete: 3.1 audit_log triggers GREEN, 3.2 RLS hygiene rule documented, 3.4 token register, 3.5 consent. Remaining: 3.3 DPA PDFs (needs CF + Supabase dashboard access — Jammi-side), 3.6 verify privacy.astro/terms.astro copy is current.
 
-## ⏸ AWAITING JAMMI GREENLIGHT — Dangling similar_lenders prune (Apr 30 PM) [OBJ-1]
+## ✅ LANDED (Apr 30 PM late) — Dangling similar_lenders prune APPLIED [OBJ-1]
 
-DB scan: **2,255 dead refs across 1,386 rows** (16% of all similar_lenders entries point to slugs that no longer exist or are status='raw'). Tool ready, dry-run done, CSV uploaded to Drive root: `2026-04-30_creditdoc_dangling_similar_lenders.csv` (https://drive.google.com/file/d/1MISCkwEar6Fs-2kKYoiYhJDKeJErUZUd/view).
-
-Top dead refs (occurrences): `credit-repair-finest` (16), `first-tech-federal-credit-union-san-jose` (13), `atl-gold-buyers` (12), `big-tex-auto-mart` (12), `carnaval-auto-credit` (12), `walmart-supercenter` (12).
-
-To apply: `python3 tools/cdm_rev_prune_dangling_similar.py --apply` — bulk DB write across 1,386 rows, requires explicit Jammi greenlight per RULE 4 / Cardinal Sin #3. Audit_log captures full rollback trail.
+Jammi verbal greenlight 2026-04-30 ("if its dead data then its warranted cleanup"). `python3 tools/cdm_rev_prune_dangling_similar.py --apply` ran clean: **1,386/1,386 rows updated, 0 failed**. 14,013 refs → 11,758 refs (2,255 dead removed). Re-scan confirms 0 remaining dead refs. Audit_log holds full rollback trail per row.
 
 ## ✅ LANDED (Apr 30 PM) — Phase 2.5b filter-bug fix + PostgREST linter [OBJ-1]
 
@@ -48,7 +44,6 @@ python3 tools/cdm_rev_postgrest_lint.py
 
 ## ❓ Open decisions waiting on Jammi
 
-- **Dangling similar_lenders prune** — 2,255 dead refs across 1,386 rows. Tool dry-run done, CSV in Drive. `--apply` needs greenlight (bulk DB write).
 - **Phase 6 DNS cutover** — flip `creditdoc.co` apex from current host to `cdm-rev-hybrid.creditdoc.pages.dev`. Off-limits without explicit greenlight per CDM-REV plan.
 - **REVALIDATE_TOKEN crontab** — periodic warm-cache pings. Off-limits without greenlight (paid-API class concern even though it's free).
 - **Service role key rotation** — `SUPABASE_SERVICE_ROLE_KEY` transited chat once. Rotate post-CDM-REV migration in Supabase dashboard → Settings → API Keys → Reset.
