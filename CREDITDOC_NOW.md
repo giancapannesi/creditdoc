@@ -4,7 +4,54 @@
 
 ---
 
-## RIGHT NOW — 2026-04-30 ~13:15 UTC (iter 14) · 🟡 WATCHER NOW FIRES BOTH CUTOVER GATES, DEPLOY STILL BLOCKED
+## RIGHT NOW — 2026-04-30 ~13:45 UTC (iter 15) · 🟡 PHASE 1 ACCEPTANCE ORCHESTRATOR SHIPPED, WATCHER ARMED, DEPLOY STILL BLOCKED
+
+**Deploy status (13:45 UTC):** Watcher PID 1566760 elapsed ~30 min, poll #28, no `x-cdm-version`. No new origin commits. CF token still empty.
+
+**🤖 NEW THIS LOOP — Phase 1 cutover acceptance orchestrator:**
+
+`tools/cdm_rev_phase1_acceptance.py` (commit `52b76b3f51`) — single-command "GO/NO-GO for Phase 6" verdict. Runs all 4 Phase 1 acceptance gates with combined GREEN/AMBER/RED + JSON. Skip flags: `--skip-probe`, `--skip-panel`, `--skip-obj`, `--skip-revalidate`.
+
+Gates per migration plan §Phase 5:
+- **(a)** e2e latency (5.5b probe, p95 ≤ 10s) — needs SSR/deploy
+- **(d)** HTML diff parity (5.2 panel diff, <0.1% byte delta) — works offline
+- **(e)** OBJ verifier (5.10 verify_strategic_objectives, all GREEN) — works offline
+- **(f)** revalidate path (Phase 1 gate (b), endpoint reachable) — works offline
+
+**Offline smoke verdict (current pre-deploy state):**
+- (a) SKIPPED, (d) GREEN 50/50 0%, (e) AMBER (OBJ-1 wants live probe), (f) GREEN HTTP 405 (endpoint wired)
+- Overall: AMBER. Cutover-ready: NO.
+
+When deploy unblocks: (a) and (e) go GREEN → overall GREEN → `cutover_ready=true`. This is THE one-command verdict for Phase 6 trigger.
+
+**🛑 ACTION JAMMI — STILL need ONE of:**
+1. **Single click:** dash.cloudflare.com → Workers & Pages → `creditdoc` → latest deployment (~10h+ old) → `⋯` → **"Retry deployment"**
+2. **OR paste me a CF Pages:Edit token** to `/srv/BusinessOps/tools/.creditdoc-migration.env` (chmod 600).
+3. **OR tell me what you see in the dash** so I can root-cause.
+
+**User signal:** "we need to be concluding testing this evening" — evening deadline. Watcher fires combined cutover-gate verdict on recovery. Orchestrator gives on-demand verdict at any point.
+
+---
+
+## ITER 15 PROGRESS (parallel work while deploy blocked)
+
+**Commit `52b76b3f51` — Phase 1 cutover acceptance orchestrator** (push 13:45 UTC).
+
+`tools/cdm_rev_phase1_acceptance.py` complements:
+- `cdm_rev_panel_diff.py` (Phase 5.2 — runs as gate (d))
+- `cdm_rev_phase24_e2e_probe.py` (Phase 5.5b — runs as gate (a))
+- `verify_strategic_objectives.py` (Phase 5.10 — runs as gate (e))
+- `cdm_rev_deploy_watcher.py` (Phase 5.9.5 — auto-runs (a)+(d) on recovery)
+
+**Why this matters for OBJ-1:** Phase 6 cutover requires "all 10 sub-items pass" per migration plan §Phase 5 acceptance gate. Until now there was no single command that exercised the gates and emitted GO/NO-GO. Without it, "ready for cutover?" was a multi-tool spelunking exercise. With it, `python3 tools/cdm_rev_phase1_acceptance.py` returns exit 0 = GO, exit 2 = NOT YET, with per-gate detail.
+
+**Offline smoke today proves the orchestrator wiring + (d) + (f) gates work without SSR.** When deploy unblocks, the same command reruns and (a) + (e) go GREEN.
+
+**5.10 status:** ✅ Tool exists. ⬜ Live verdict gated on deploy unblock.
+
+---
+
+## ITER 14 EARLIER (parallel work while deploy blocked)
 
 **Deploy status (13:15 UTC):** OLD watcher PID 1559109 reached poll 64 (~64 min) without `x-cdm-version`. Killed and restarted with NEW combined-gate code as PID 1566760. New watcher poll #1 fired 13:14 UTC. No new origin commits since 12:48. CF_API_TOKEN still empty.
 
