@@ -166,15 +166,13 @@ export async function getLendersBySlugListRuntime(
   if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return [];
   if (!slugs.length) return [];
   const inList = slugs.map(encodeURIComponent).join(",");
-  // CDM-REV Phase 2.5b — rating>0 server-side filter. similar_lenders sidebar
-  // hides cards whose rating is null/0; pushing the filter to PostgREST drops
-  // ~5 ghost cards per page on average (HTML-parity drift source #2 from the
-  // 2026-04-29 findings doc).
+  // CDM-REV Phase 2.5b — drop ghost cards whose rating is null/0/missing.
+  // `rating` lives inside body_inline (jsonb), not as a top-level column, so
+  // a PostgREST `&rating=gt.0` filter returns 42703. Filter client-side.
   const url =
     `${env.SUPABASE_URL}/rest/v1/lenders` +
     `?slug=in.(${inList})` +
     `&processing_status=eq.ready_for_index` +
-    `&rating=gt.0` +
     `&select=${FULL_COLUMNS}` +
     `&limit=${slugs.length}`;
   const res = await fetch(url, {
@@ -186,7 +184,12 @@ export async function getLendersBySlugListRuntime(
     signal: AbortSignal.timeout(2500),
   });
   if (!res.ok) return [];
-  return (await res.json()) as RuntimeLenderWithBody[];
+  const rows = (await res.json()) as RuntimeLenderWithBody[];
+  return rows.filter((r) => {
+    const raw = (r as { body_inline?: { rating?: unknown } })?.body_inline?.rating;
+    const n = typeof raw === "number" ? raw : Number(raw);
+    return Number.isFinite(n) && n > 0;
+  });
 }
 
 /**
