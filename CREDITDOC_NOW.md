@@ -4,6 +4,47 @@
 
 ---
 
+## ITER 35 (12:27 CAT, 2026-05-01) — 🟡 SECURITY HEADERS COMMITTED + PUSHED, AWAITING DEPLOY VERIFICATION
+
+**Bottom line:** Jammi greenlit the full safe-set security headers (HTTPS-only posture confirmed). Code committed and pushed (`c1d7e17044` on `cdm-rev-hybrid`). Worker has NOT yet picked up the new build — at iter-end timestamp, `curl -sI` against `/state/wyoming/` still shows zero security headers. Two paths forward depending on whether CF Worker Builds is wired up.
+
+### What shipped
+**Commit `c1d7e17044`** — `src/middleware.ts` (+45 LOC):
+- New `applySecurityHeaders(res)` helper applied on all 7 response return paths (cached HIT, fresh MISS, BYPASS-NOENV, BYPASS-NOVERSION, BYPASS-BADVERSION, non-cacheable GET, non-GET).
+- Headers also baked into the cached copy via `applySecurityHeaders(cacheable)` before `cache.put` — so a HIT served from a stale PoP carries the protection.
+- Header set: `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN` (safer than DENY for future internal embeds), `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), magnetometer=(), gyroscope=(), accelerometer=()`, `Strict-Transport-Security: max-age=63072000; includeSubDomains` (no `preload` directive yet — that's irreversible and needs a separate decision).
+
+**Build clean:** `npm run build` completed in 35.04s, zero errors.
+
+### ⚠️ DEPLOY BLOCKED — token issue
+`npx wrangler deploy` fails with `code: 9106` Authentication failed on `/memberships`. The `CLOUDFLARE_API_TOKEN` in `/srv/BusinessOps/.env` lacks the `User → Memberships: Read` permission that wrangler needs for its account preflight. **This is the same issue documented in CREDITDOC_NEXT.md line 185 — Jammi-only token refresh.**
+
+### Two paths forward (Jammi pick when next at the keyboard)
+
+**Path A — CF Worker Builds auto-deploys from git push.** If `creditdoc.fancy-glitter-38f7.workers.dev` is wired to GitHub Worker Builds for the `cdm-rev-hybrid` branch, the push of `c1d7e17044` will trigger an auto-deploy in ~60-180s. Verify with:
+```bash
+curl -sI "https://creditdoc.fancy-glitter-38f7.workers.dev/state/wyoming/" -H "User-Agent: Mozilla/5.0" | grep -iE "x-content-type|x-frame|referrer-policy|permissions-policy|strict-transport"
+```
+If the 5 headers appear, deploy succeeded — nothing further needed.
+
+**Path B — Token refresh needed.** If after ~5 minutes those headers are still absent, CF Worker Builds is NOT wired and Jammi must refresh `CLOUDFLARE_API_TOKEN` in `/srv/BusinessOps/.env` with a token that includes `User → Memberships: Read` (also needs `Workers Scripts: Edit`, `Account Settings: Read`, `Zone: Read`). Then I can run `wrangler deploy` to push the live Worker.
+
+### Iter 34 deliverables (carryover — still current)
+1. **Audit doc filed:** `/srv/BusinessOps/CreditDoc Project Improvement/2026-05-01_BUILD_ARCHITECTURE_AUDIT.md` (472 lines). Drive: https://drive.google.com/file/d/1o4DBPls4RDS3nNvzeBQGdIvCsBxEhzfm/view
+2. **Task #28 closed (commit `3bbe9ad574`):** Probe trial-2 collision fixed via `_resolve_slug_pool`. 30 trials all GREEN.
+
+### What Jammi can do right now
+1. Wait ~3 min, then `curl -sI` the URL above to check if CF Worker Builds picked up the push.
+2. If headers absent: refresh `CLOUDFLARE_API_TOKEN` per CREDITDOC_NEXT.md line 185.
+3. Read the audit doc on Drive (link above).
+4. Open `https://creditdoc.fancy-glitter-38f7.workers.dev` and click around — that comparison still holds; security headers are additive.
+5. Green-light DNS flip whenever you're ready — Jammi-only action.
+
+### Loop status
+**STOPPED at iter 35** — token refresh is the permission gate per `/loop` directive ("until you need a permission from me"). Resume on next `/loop` or new instruction. Memory Palace + DECISIONS.md + diary updated for iter 34; iter 35 will be added on resume after deploy verification.
+
+---
+
 ## ITER 34 (12:10 CAT, 2026-05-01) — 🟢 AUDIT DOC FILED + TASK #28 CLOSED — PAUSED ON SECURITY-HEADERS PERMISSION GATE
 
 **Bottom line:** /loop iter 34 stopped per loop directive "until you need a permission from me." OBJ-1 + OBJ-2 hard-line green. OBJ-3 Tier 1 hardening gap surfaced (security headers — Worker emits zero, Vercel prod also emits zero, so DNS flip is parity-safe). Awaiting Jammi greenlight on header set. Cutover-readiness = YES unchanged.
