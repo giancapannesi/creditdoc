@@ -27,6 +27,43 @@ import { defineMiddleware } from 'astro:middleware';
 
 const NAMESPACE = 'creditdoc-v1-mw';
 
+// CDM-REV iter 35 — Tier 1 OBJ-3 security-header hardening.
+// Applied to every response (cached HIT, fresh MISS, BYPASS, non-cacheable, non-GET).
+// Headers chosen with Jammi (2026-05-01): full safe set, HTTPS-only posture confirmed.
+function applySecurityHeaders(res: Response): Response {
+  // X-Content-Type-Options: stop browsers MIME-sniffing — defends against
+  // a non-JS file being interpreted as a script.
+  if (!res.headers.has('x-content-type-options')) {
+    res.headers.set('x-content-type-options', 'nosniff');
+  }
+  // X-Frame-Options: SAMEORIGIN allows our own pages to embed each other
+  // (e.g. future widgets) but blocks third-party iframe embedding (clickjacking).
+  if (!res.headers.has('x-frame-options')) {
+    res.headers.set('x-frame-options', 'SAMEORIGIN');
+  }
+  // Referrer-Policy: send only the origin (creditdoc.co) on cross-origin
+  // navigation, full URL on same-origin. Affiliate networks still get the
+  // origin so attribution should keep working.
+  if (!res.headers.has('referrer-policy')) {
+    res.headers.set('referrer-policy', 'strict-origin-when-cross-origin');
+  }
+  // Permissions-Policy: disable browser APIs we don't use. Defense against
+  // a hijacked script silently activating camera/mic/geolocation/etc.
+  if (!res.headers.has('permissions-policy')) {
+    res.headers.set(
+      'permissions-policy',
+      'camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), magnetometer=(), gyroscope=(), accelerometer=()'
+    );
+  }
+  // HSTS: 2 years, includeSubDomains. HTTPS-only confirmed by Jammi.
+  // No `preload` directive yet — that requires explicit submission to
+  // Chrome's preload list and is irreversible.
+  if (!res.headers.has('strict-transport-security')) {
+    res.headers.set('strict-transport-security', 'max-age=63072000; includeSubDomains');
+  }
+  return res;
+}
+
 interface CacheableRoute {
   table: 'answers' | 'lenders' | 'listicles';
   /** Maps URL pathname → row slug. Returns null if path is not an SSR row page. */
@@ -106,7 +143,7 @@ function buildCacheKey(req: Request, pathname: string, verSec: number, variant: 
 
 export const onRequest = defineMiddleware(async (context, next) => {
   // Only cache GETs of HTML routes.
-  if (context.request.method !== 'GET') return next();
+  if (context.request.method !== 'GET') return applySecurityHeaders(await next());
 
   const url = new URL(context.request.url);
   const pathname = url.pathname;
@@ -120,14 +157,14 @@ export const onRequest = defineMiddleware(async (context, next) => {
       break;
     }
   }
-  if (!matched) return next();
+  if (!matched) return applySecurityHeaders(await next());
 
   const env = (context.locals as any)?.runtime?.env as RuntimeEnvLike | undefined;
   if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) {
     // Build-mode preview or env not configured — don't cache, just pass.
     const fresh = await next();
     fresh.headers.set('x-cdm-cache', 'BYPASS-NOENV');
-    return fresh;
+    return applySecurityHeaders(fresh);
   }
 
   // Version probe — if it fails, skip caching for this request.
@@ -135,14 +172,14 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (!updatedAt) {
     const fresh = await next();
     fresh.headers.set('x-cdm-cache', 'BYPASS-NOVERSION');
-    return fresh;
+    return applySecurityHeaders(fresh);
   }
 
   const verSec = Math.floor(Date.parse(updatedAt) / 1000);
   if (!Number.isFinite(verSec) || verSec <= 0) {
     const fresh = await next();
     fresh.headers.set('x-cdm-cache', 'BYPASS-BADVERSION');
-    return fresh;
+    return applySecurityHeaders(fresh);
   }
 
   // @ts-expect-error caches global is provided by Cloudflare Workers runtime
@@ -155,7 +192,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     out.headers.set('x-cdm-cache', 'HIT');
     out.headers.set('x-cdm-version', String(verSec));
     out.headers.set('x-cdm-route', `mw:${matched.route.variant}`);
-    return out;
+    return applySecurityHeaders(out);
   }
 
   // Miss → render → cache.put with version-keyed key.
@@ -172,6 +209,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
     cacheable.headers.set('x-cdm-version', String(verSec));
     cacheable.headers.set('x-cdm-cache', 'MISS-STORED');
     cacheable.headers.set('x-cdm-route', `mw:${matched.route.variant}`);
+    // Security headers are baked into the cached copy too — so a HIT served
+    // from a stale PoP still carries the protection.
+    applySecurityHeaders(cacheable);
     try {
       await cache.put(key, cacheable);
     } catch {
@@ -181,5 +221,5 @@ export const onRequest = defineMiddleware(async (context, next) => {
   fresh.headers.set('x-cdm-cache', 'MISS');
   fresh.headers.set('x-cdm-version', String(verSec));
   fresh.headers.set('x-cdm-route', `mw:${matched.route.variant}`);
-  return fresh;
+  return applySecurityHeaders(fresh);
 });

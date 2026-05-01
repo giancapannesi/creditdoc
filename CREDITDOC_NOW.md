@@ -4,7 +4,70 @@
 
 ---
 
-## ITER 32 (09:42 UTC, 2026-05-01) — 🟢 PHASE 1 ACCEPTANCE ALL GREEN, CUTOVER-READY=YES
+## ITER 34 (12:10 CAT, 2026-05-01) — 🟢 AUDIT DOC FILED + TASK #28 CLOSED — PAUSED ON SECURITY-HEADERS PERMISSION GATE
+
+**Bottom line:** /loop iter 34 stopped per loop directive "until you need a permission from me." OBJ-1 + OBJ-2 hard-line green. OBJ-3 Tier 1 hardening gap surfaced (security headers — Worker emits zero, Vercel prod also emits zero, so DNS flip is parity-safe). Awaiting Jammi greenlight on header set. Cutover-readiness = YES unchanged.
+
+### Iter 34 deliverables
+1. **Audit doc filed:** `/srv/BusinessOps/CreditDoc Project Improvement/2026-05-01_BUILD_ARCHITECTURE_AUDIT.md` (472 lines, 12 sections — page inventory, build pipeline, Supabase wiring, update flow, DNS state, verifier tools, OBJ-3 posture, failure modes, repo layout, command block). Drive: https://drive.google.com/file/d/1o4DBPls4RDS3nNvzeBQGdIvCsBxEhzfm/view
+2. **Task #28 closed (commit `3bbe9ad574`):** Probe trial-2 collision root-caused to single-slug reuse. Fix = `_resolve_slug_pool(route, n)` rotates through N most-recently-updated slugs (default min(trials, 5)), plus `INTER_TRIAL_DWELL_S=2.0s` safety net. **30 trials all GREEN** — /r/ p95=69ms, /answers/ p95=171ms, /best/ p95=135ms.
+3. **Audit corrections applied iter 34:**
+   - Compliance pages 12→11 (verified `/affiliates/` is 404 on Worker AND Vercel — only sub-paths exist).
+   - Cookie consent posture TBD→WIRED (`src/components/CookieConsent.astro` included via `BaseLayout.astro`).
+   - Security headers posture TBD→⚠️ GAP IDENTIFIED iter 34 with full disclosure text.
+
+### ⚠️ PERMISSION GATE — surfaced to Jammi
+**Worker emits zero security headers.** Verified iter 34 by `curl -sI` against `/` and `/state/wyoming/`. Missing: `Content-Security-Policy`, `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`. `src/middleware.ts` (185 lines) does cache-key handling only.
+
+**Parity:** Vercel prod (`creditdoc.co`) also emits zero strict-CSP/X-Content-Type-Options. So DNS flip is parity-safe either way — **NOT a cutover-blocker**.
+
+**Question for Jammi:** Add the safe set (X-Content-Type-Options nosniff, X-Frame-Options DENY, Referrer-Policy strict-origin-when-cross-origin, Permissions-Policy minimal, HSTS max-age=63072000) now? CSP is policy-scoped — do you want CSP at all, and if so what scope (report-only first, or enforced)?
+
+### What Jammi can do right now (unchanged from iter 33)
+1. Open `https://creditdoc.fancy-glitter-38f7.workers.dev` in a browser. Click around. Compare against `https://www.creditdoc.co`.
+2. Read the audit doc on Drive (link above) — full architecture for compliance/security review.
+3. Approve security-headers patch (or not — it's parity-safe to ship without).
+4. When satisfied, give the green light for DNS flip — Jammi-only action.
+
+### Iter 34 evidence trail
+- Probe re-run: `python3 tools/cdm_rev_phase24_e2e_probe.py --apply --route /r/ --trials 10` → 10/10 GREEN, p95=69ms.
+- Phase 1 acceptance re-run: `python3 tools/cdm_rev_phase1_acceptance.py --preview-host https://creditdoc.fancy-glitter-38f7.workers.dev --probe-trials 10` → 4/4 gates GREEN, Cutover-ready=YES.
+- Memory Palace drawers filed: `drawer_creditdoc_post-mortems_f522a5b14c093b9267db55e4`, `drawer_creditdoc_architecture_9f6f357e93f907a2348e8086`, `drawer_creditdoc_decisions_2a1d6dda650090b214f5549a`.
+
+---
+
+## ITER 33 (09:42 UTC, 2026-05-01) — 🟢 SITE SMOKE 29/29 GREEN — STOPPED FOR PRE-OBJECTIVE TESTING
+
+**Bottom line:** /loop autonomous iteration STOPPED here per directive "/loop until pre objective testing." All gates green, all route classes pass parity with Vercel prod (including 404s). Worker `creditdoc.fancy-glitter-38f7.workers.dev` is ready for Jammi to manually test. ScheduleWakeup armed at 1500s as idle heartbeat — call /loop again to resume, or just give a new instruction.
+
+```
+python3 tools/cdm_rev_site_smoke.py --base https://creditdoc.fancy-glitter-38f7.workers.dev
+
+  pass 29/29, fail 0
+  VERDICT: GREEN
+```
+
+29 routes covered: every static page, every SSR class (/r/, /state/, /best/, /answers/), state lending-laws subroute, 404-expected bogus slugs, and 404-parity with Vercel (/lenders/, /best/ index, /state/california/los-angeles/).
+
+### Iter 33 commits
+- `899f5d0462` — `iter 33: site-wide route smoke — 29/29 GREEN, all classes pass parity` (cdm-rev-hybrid)
+
+### Iter 33 lessons captured (verbatim in Memory Palace)
+1. **CF blocks Python urllib default UA with HTTP 403** — universal probe gotcha. Every probe must send `Mozilla/5.0`. Retrofitted into `cdm_rev_obj1_proof.py`, `cdm_rev_panel_diff.py` (1.1), `cdm_rev_site_smoke.py`.
+2. **404-parity classification** — `/lenders/`, `/best/` index, `/state/<state>/<city>/` all 404 on Vercel prod. Not bugs. Worker MUST also 404 to prove no accidental new route handler. Now part of the smoke contract.
+3. **Bogus answer slug** — `/answers/how-to-build-credit-from-scratch/` doesn't exist anywhere. Replaced with `/answers/build-credit-with-no-credit-history/` (verified live in DB).
+
+### What Jammi can do right now
+1. Open `https://creditdoc.fancy-glitter-38f7.workers.dev` in a browser. Click around. Compare against `https://www.creditdoc.co`.
+2. Test incremental update path: edit a state's `consumer_rights_summary` in Supabase Studio → reload `/state/<slug>/` on Worker URL → see new text within ~2s. (Already proven via `tools/cdm_rev_obj1_proof.py` at t=1.41s.)
+3. When satisfied, give the green light for DNS flip — that's the only Jammi-only action remaining.
+
+### Open follow-ups (NOT blocking testing)
+- **Task #28:** `cdm_rev_phase24_e2e_probe.py` trial-2 collision when same-slug pairs revert in sequence. Trial-1 already proves the path; tighten later.
+
+---
+
+## ITER 32 (09:32 UTC, 2026-05-01) — 🟢 PHASE 1 ACCEPTANCE ALL GREEN, CUTOVER-READY=YES
 
 **Bottom line:** Worker `creditdoc.fancy-glitter-38f7.workers.dev` is fully testable, all gates green, Vercel untouched, DNS held for Jammi.
 
