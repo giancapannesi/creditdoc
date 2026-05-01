@@ -329,6 +329,26 @@ export async function getStateByCodeRuntime(
   return rows?.[0] ?? null;
 }
 
+/**
+ * Look up a state by URL slug (e.g., 'california', 'new-york'). The states
+ * table has no slug column, so we reverse the slug→name convention used by
+ * data-build.ts (lowercase + hyphens for spaces) and match on name (ILIKE).
+ */
+export async function getStateBySlugRuntime(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeState | null> {
+  if (!slug) return null;
+  const name = slug.replace(/-/g, " ");
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/states` +
+    `?name=ilike.${encodeURIComponent(name)}` +
+    `&select=code,name,abbr,body_inline,updated_at` +
+    `&limit=1`;
+  const rows = await _restGet<RuntimeState>(url, env);
+  return rows?.[0] ?? null;
+}
+
 export async function getAllStatesRuntime(
   env?: RuntimeLenderEnv
 ): Promise<RuntimeState[]> {
@@ -651,6 +671,62 @@ export async function getLendersByStateRuntime(
     `&order=updated_at.desc` +
     `&limit=${limit}`;
   const rows = await _restGet<RuntimeLender & { body_inline: Record<string, unknown> | null }>(url, env);
+  return rows ?? [];
+}
+
+export interface RuntimeStateCount {
+  state_abbr: string;
+  lender_count: number;
+  city_count: number;
+}
+
+export async function getTopStatesRuntime(
+  env?: RuntimeLenderEnv,
+  limit = 13
+): Promise<RuntimeStateCount[]> {
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/state_lender_counts` +
+    `?select=state_abbr,lender_count,city_count` +
+    `&order=lender_count.desc` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeStateCount>(url, env);
+  return rows ?? [];
+}
+
+export async function getStateCountRuntime(
+  abbr: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeStateCount | null> {
+  if (!abbr) return null;
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/state_lender_counts` +
+    `?state_abbr=eq.${encodeURIComponent(abbr.toUpperCase())}` +
+    `&select=state_abbr,lender_count,city_count` +
+    `&limit=1`;
+  const rows = await _restGet<RuntimeStateCount>(url, env);
+  return rows?.[0] ?? null;
+}
+
+export interface RuntimeStateCity {
+  state_abbr: string;
+  city: string;
+  city_display: string;
+  lender_count: number;
+}
+
+export async function getStateCitiesRuntime(
+  abbr: string,
+  env?: RuntimeLenderEnv,
+  limit = 30
+): Promise<RuntimeStateCity[]> {
+  if (!abbr) return [];
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/state_city_lender_counts` +
+    `?state_abbr=eq.${encodeURIComponent(abbr.toUpperCase())}` +
+    `&select=state_abbr,city,city_display,lender_count` +
+    `&order=lender_count.desc` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeStateCity>(url, env);
   return rows ?? [];
 }
 
