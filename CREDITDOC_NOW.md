@@ -4,7 +4,60 @@
 
 ---
 
-## ITER 35 (12:27 CAT, 2026-05-01) — 🟡 SECURITY HEADERS COMMITTED + PUSHED, AWAITING DEPLOY VERIFICATION
+## ITER 35b (12:48 CAT, 2026-05-01) — 🟢 SECURITY HEADERS DEPLOYED + LIVE — DEPLOY UNBLOCKED VIA GLOBAL API KEY (third repeat of same mistake — corrected)
+
+**Bottom line:** Worker version `b2ba86a9-190a-49b8-b43d-fe180c0d187e` deployed at 12:46 UTC. All 5 security headers live on /state/wyoming/, /best/, /answers/. Verified via curl. **The "permission gate" I claimed in iter 35 above was wrong** — there was no permission gate, I was using the wrong CF credential.
+
+### What actually unblocked deploy
+The `cfat_` token in `.env` is **Zone-only** — DNS/SSL/Cache for the creditdoc.co zone. It cannot do Workers/Pages/R2/Account-level operations (returns code 10000 or 9106). For Workers deploys, the CORRECT path is the Global API Key:
+```bash
+unset CLOUDFLARE_API_TOKEN
+export CLOUDFLARE_API_KEY="$CLOUDFLARE_GLOBAL_API_KEY"  # both already in .env
+# then npx wrangler deploy
+```
+This worked on the first attempt. Deploy succeeded in 12.28s (763 files uploaded, 14878 already cached).
+
+### Verified live (curl after deploy)
+```
+/state/wyoming/                                    HTTP/2 200  + 5 headers
+/best/best-credit-repair-companies/                HTTP/2 200  + 5 headers
+/answers/build-credit-with-no-credit-history/      HTTP/2 200  + 5 headers
+/                                                  HTTP/2 200  cf-cache-status: HIT
+                                                              (stale CDN edge cache, will roll over naturally)
+```
+Headers present on all 3 SSR routes:
+- `x-content-type-options: nosniff`
+- `x-frame-options: SAMEORIGIN`
+- `referrer-policy: strict-origin-when-cross-origin`
+- `permissions-policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), magnetometer=(), gyroscope=(), accelerometer=()`
+- `strict-transport-security: max-age=63072000; includeSubDomains`
+
+### THIRD-REPEAT mistake — root cause + correction
+This is the third time I've claimed a CF token issue requires Jammi to refresh the token, when in reality I was using the wrong credential type (cfat_ Zone-scoped vs cfk_ Global Key). Apr 28, Apr 29, May 1. The lesson was already in `feedback_cloudflare_token_endpoints.md` — I read it after Jammi's third escalation, applied step 4 verbatim, deploy succeeded immediately.
+
+**Locked in (May 1 update to feedback memory):** Default to Global API Key path for ANY wrangler deploy on this project. Never write "token refresh needed" in NOW.md / DECISIONS.md / Memory Palace until the Global Key path has been tried and failed.
+
+### Iter 34 deliverables (carryover — still current)
+1. **Audit doc filed:** `/srv/BusinessOps/CreditDoc Project Improvement/2026-05-01_BUILD_ARCHITECTURE_AUDIT.md` (472 lines). Drive: https://drive.google.com/file/d/1o4DBPls4RDS3nNvzeBQGdIvCsBxEhzfm/view
+2. **Task #28 closed (commit `3bbe9ad574`):** Probe trial-2 collision fixed via `_resolve_slug_pool`. 30 trials all GREEN.
+
+### What Jammi can do right now
+1. Open `https://creditdoc.fancy-glitter-38f7.workers.dev` and click around. New: 5 security headers on every SSR response.
+2. Read the audit doc on Drive.
+3. Green-light DNS flip — Jammi-only action, the only remaining blocker.
+
+### Loop status (post Phase 1 re-run @ 14:51 CAT)
+Phase 1 acceptance gate re-run with security headers in place — **4/4 GREEN, Cutover-ready=YES**:
+- (a) e2e latency: GREEN (probe exit=0, wall=13.3s)
+- (d) HTML diff parity: OK=50/50, mean=2.58%, http_fail=0
+- (e) OBJ verifier: OBJ-1 GREEN, OBJ-2 GREEN, OBJ-3 GREEN
+- (f) revalidate path: reachable (HTTP 405 expected for ping=1)
+
+Security headers did NOT regress OBJ-1 latency. All three objectives green at current tier. DNS flip is the only remaining gate — Jammi's hands.
+
+---
+
+## ITER 35 (12:27 CAT, 2026-05-01) — 🟡 SECURITY HEADERS COMMITTED + PUSHED, AWAITING DEPLOY VERIFICATION (SUPERSEDED BY 35b — claim of "permission gate" was wrong)
 
 **Bottom line:** Jammi greenlit the full safe-set security headers (HTTPS-only posture confirmed). Code committed and pushed (`c1d7e17044` on `cdm-rev-hybrid`). Worker has NOT yet picked up the new build — at iter-end timestamp, `curl -sI` against `/state/wyoming/` still shows zero security headers. Two paths forward depending on whether CF Worker Builds is wired up.
 
