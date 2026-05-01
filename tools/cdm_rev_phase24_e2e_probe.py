@@ -73,6 +73,13 @@ DEFAULT_TRIALS = 20
 P95_TARGET_S = 10.0
 POLL_INTERVAL_S = 0.5
 POLL_TIMEOUT_S = 30.0
+# Settle window between trials on the same slug — lets the prior write fully
+# propagate so trial K's pre-GET captures a stable post-trial-(K-1) fingerprint.
+# 0.0 when slugs rotate (no same-slug pair). Tuned 2.0s for safety on collisions.
+INTER_TRIAL_DWELL_S = 2.0
+# Default pool size when caller doesn't pin --slug/--slugs. Capped at trials so
+# we don't fetch more rows than we'll consume.
+DEFAULT_SLUG_POOL = 5
 SUPABASE_ENV_FILE = "/srv/BusinessOps/tools/.supabase-creditdoc.env"
 
 # Route profiles — each has a URL template, the table to UPDATE, a default
@@ -197,13 +204,24 @@ def _resolve_default_slug(route: str) -> Optional[str]:
     """Resolve a default slug for routes that don't ship one (e.g. answers
     where slugs are content-driven). Picks the most-recently-updated row
     via PostgREST anon REST."""
+    pool = _resolve_slug_pool(route, n=1)
+    return pool[0] if pool else None
+
+
+def _resolve_slug_pool(route: str, n: int) -> list[str]:
+    """Fetch up to `n` most-recently-updated slugs for the route's table.
+
+    Used to rotate across trials so trial K doesn't race trial K-1's still-
+    propagating updated_at on the same slug (Task #28). For lenders we filter
+    on processing_status=ready_for_index; for answers we filter on
+    compliance_passed=true so we don't probe drafts.
+    """
     profile = ROUTE_PROFILES[route]
-    if profile["default_slug"]:
-        return profile["default_slug"]
     table = profile["table"]
-    # Read SUPABASE_URL + ANON_KEY from the env file
     if not os.path.exists(SUPABASE_ENV_FILE):
-        return None
+        if profile["default_slug"]:
+            return [profile["default_slug"]]
+        return []
     try:
         proc = subprocess.run(
             ["bash", "-c",
@@ -212,19 +230,30 @@ def _resolve_default_slug(route: str) -> Optional[str]:
         )
         url_key = (proc.stdout or "").strip()
         if "|" not in url_key:
-            return None
+            return [profile["default_slug"]] if profile["default_slug"] else []
         sb_url, anon = url_key.split("|", 1)
         if not sb_url or not anon:
-            return None
-        req = Request(
-            f"{sb_url}/rest/v1/{table}?select=slug&order=updated_at.desc&limit=1",
-            headers={"apikey": anon, "authorization": f"Bearer {anon}"},
+            return [profile["default_slug"]] if profile["default_slug"] else []
+        # Per-table filter: only probe slugs that are actually publishable.
+        if table == "lenders":
+            filt = "&processing_status=eq.ready_for_index"
+        elif table == "answers":
+            filt = "&compliance_passed=eq.true"
+        else:
+            filt = ""
+        url = (
+            f"{sb_url}/rest/v1/{table}"
+            f"?select=slug&order=updated_at.desc&limit={max(1, n)}{filt}"
         )
+        req = Request(url, headers={"apikey": anon, "authorization": f"Bearer {anon}"})
         with urlopen(req, timeout=8) as r:
             rows = json.loads(r.read())
-            return rows[0]["slug"] if rows else None
+            slugs = [row["slug"] for row in rows if row.get("slug")]
+            if slugs:
+                return slugs
     except Exception:
-        return None
+        pass
+    return [profile["default_slug"]] if profile["default_slug"] else []
 
 
 def run_trial(route: str, slug: str, dry: bool) -> Trial:
@@ -292,10 +321,17 @@ def _run_route(route: str, slugs: list[str], trials: int, apply: bool) -> tuple[
           file=sys.stderr)
     print(f"# slugs={slugs} trials={trials}", file=sys.stderr)
     out: list[Trial] = []
+    last_slug: Optional[str] = None
     for i in range(trials):
         slug = slugs[i % len(slugs)]
+        # Task #28: when consecutive trials hit the same slug, dwell long
+        # enough for the prior write to settle. With pool>1 (which is now the
+        # default) this almost never fires — but keeps single-slug runs sane.
+        if apply and last_slug == slug and i > 0 and INTER_TRIAL_DWELL_S > 0:
+            time.sleep(INTER_TRIAL_DWELL_S)
         t = run_trial(route, slug, dry=not apply)
         out.append(t)
+        last_slug = slug
         ok = "OK" if (not t.error or t.error == "dry-run (no write)") and not t.timed_out else "FAIL"
         print(
             f"  [{route}] trial {i+1:2d}/{trials}  {slug:35s}  {ok}  "
@@ -337,11 +373,14 @@ def main(argv: list[str]) -> int:
         elif args.slug and len(routes) == 1:
             slugs = [args.slug]
         else:
-            d = _resolve_default_slug(route)
-            if not d:
-                print(f"  [{route}] could not resolve default slug — skipping", file=sys.stderr)
+            # Task #28: rotate across a pool of N slugs to avoid same-slug
+            # collisions where trial K's pre-GET races trial K-1's still-
+            # propagating updated_at. Pool size = min(trials, DEFAULT_SLUG_POOL).
+            pool_n = min(args.trials, DEFAULT_SLUG_POOL)
+            slugs = _resolve_slug_pool(route, n=pool_n)
+            if not slugs:
+                print(f"  [{route}] could not resolve slug pool — skipping", file=sys.stderr)
                 continue
-            slugs = [d]
         ts, summary = _run_route(route, slugs, args.trials, args.apply)
         per_route_trials[route] = [asdict(t) for t in ts]
         per_route_summary[route] = summary
