@@ -1,196 +1,352 @@
 {
   "preview": "https://cdm-rev-hybrid.creditdoc.pages.dev",
-  "trials": 20,
   "applied": true,
-  "successes": 11,
-  "timeouts": 9,
-  "errors": 9,
-  "p50_s": 0.051640731981024146,
-  "p95_s": 0.06144555297214538,
-  "max_s": 0.06144555297214538,
-  "target_p95_s": 10.0,
-  "obj1_verdict": "GREEN",
-  "details": [
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "9588ff2c9c6ef3ce",
-      "post_fingerprint": "aba1b5bc2f64775b",
-      "latency_s": 0.052026421995833516,
-      "polls": 1,
-      "timed_out": false,
-      "error": null
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "aba1b5bc2f64775b",
-      "post_fingerprint": "aba1b5bc2f64775b",
-      "latency_s": 30.0,
-      "polls": 55,
-      "timed_out": true,
-      "error": "fingerprint never changed"
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "aba1b5bc2f64775b",
-      "post_fingerprint": "1a5a9e8e65146ec8",
-      "latency_s": 0.05238755396567285,
-      "polls": 1,
-      "timed_out": false,
-      "error": null
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "1a5a9e8e65146ec8",
-      "post_fingerprint": "1a5a9e8e65146ec8",
-      "latency_s": 30.0,
-      "polls": 55,
-      "timed_out": true,
-      "error": "fingerprint never changed"
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "1a5a9e8e65146ec8",
-      "post_fingerprint": "6c662d4ce74ac166",
-      "latency_s": 0.04769002099055797,
-      "polls": 1,
-      "timed_out": false,
-      "error": null
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "6c662d4ce74ac166",
-      "post_fingerprint": "37f19c10491e9a37",
-      "latency_s": 0.051640731981024146,
-      "polls": 1,
-      "timed_out": false,
-      "error": null
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "37f19c10491e9a37",
-      "post_fingerprint": "37f19c10491e9a37",
-      "latency_s": 30.0,
-      "polls": 55,
-      "timed_out": true,
-      "error": "fingerprint never changed"
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "37f19c10491e9a37",
-      "post_fingerprint": "4aa35886a8f1efa4",
-      "latency_s": 0.04845112096518278,
-      "polls": 1,
-      "timed_out": false,
-      "error": null
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "4aa35886a8f1efa4",
-      "post_fingerprint": "4aa35886a8f1efa4",
-      "latency_s": 30.0,
-      "polls": 55,
-      "timed_out": true,
-      "error": "fingerprint never changed"
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "4aa35886a8f1efa4",
-      "post_fingerprint": "a4bd4e996c6504b8",
-      "latency_s": 0.06144555297214538,
-      "polls": 1,
-      "timed_out": false,
-      "error": null
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "a4bd4e996c6504b8",
-      "post_fingerprint": "a4bd4e996c6504b8",
-      "latency_s": 30.0,
-      "polls": 55,
-      "timed_out": true,
-      "error": "fingerprint never changed"
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "a4bd4e996c6504b8",
-      "post_fingerprint": "4de5ce47236c6ea6",
-      "latency_s": 0.053683195961639285,
-      "polls": 1,
-      "timed_out": false,
-      "error": null
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "4de5ce47236c6ea6",
-      "post_fingerprint": "4de5ce47236c6ea6",
-      "latency_s": 30.0,
-      "polls": 55,
-      "timed_out": true,
-      "error": "fingerprint never changed"
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "4de5ce47236c6ea6",
-      "post_fingerprint": "8582a42e08db69cc",
-      "latency_s": 0.04915120801888406,
-      "polls": 1,
-      "timed_out": false,
-      "error": null
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "8582a42e08db69cc",
-      "post_fingerprint": "fbc3913a1379c269",
-      "latency_s": 0.05263800104148686,
-      "polls": 1,
-      "timed_out": false,
-      "error": null
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "fbc3913a1379c269",
-      "post_fingerprint": "fbc3913a1379c269",
-      "latency_s": 30.0,
-      "polls": 55,
-      "timed_out": true,
-      "error": "fingerprint never changed"
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "fbc3913a1379c269",
-      "post_fingerprint": "d6683abf2ef1ce07",
-      "latency_s": 0.04807436198461801,
-      "polls": 1,
-      "timed_out": false,
-      "error": null
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "d6683abf2ef1ce07",
-      "post_fingerprint": "d6683abf2ef1ce07",
-      "latency_s": 30.0,
-      "polls": 55,
-      "timed_out": true,
-      "error": "fingerprint never changed"
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "d6683abf2ef1ce07",
-      "post_fingerprint": "7f25f0193a09bc3b",
-      "latency_s": 0.046363719971850514,
-      "polls": 1,
-      "timed_out": false,
-      "error": null
-    },
-    {
-      "slug": "credit-saint",
-      "pre_fingerprint": "7f25f0193a09bc3b",
-      "post_fingerprint": "7f25f0193a09bc3b",
-      "latency_s": 30.0,
-      "polls": 55,
-      "timed_out": true,
-      "error": "fingerprint never changed"
-    }
+  "routes_executed": [
+    "r",
+    "answers",
+    "best"
   ],
-  "ts_unix": 1777535173
+  "per_route": {
+    "r": {
+      "trials": 10,
+      "successes": 6,
+      "timeouts": 4,
+      "errors": 4,
+      "p50_s": 0.05404894449748099,
+      "p95_s": 0.06430546496994793,
+      "max_s": 0.06430546496994793,
+      "obj1_verdict": "GREEN"
+    },
+    "answers": {
+      "trials": 10,
+      "successes": 6,
+      "timeouts": 4,
+      "errors": 4,
+      "p50_s": 0.17485382297309116,
+      "p95_s": 0.2180607080226764,
+      "max_s": 0.2180607080226764,
+      "obj1_verdict": "GREEN"
+    },
+    "best": {
+      "trials": 10,
+      "successes": 6,
+      "timeouts": 4,
+      "errors": 4,
+      "p50_s": 0.1263813450350426,
+      "p95_s": 0.1322739759925753,
+      "max_s": 0.1322739759925753,
+      "obj1_verdict": "GREEN"
+    }
+  },
+  "obj1_verdict": "GREEN",
+  "target_p95_s": 10.0,
+  "details_by_route": {
+    "r": [
+      {
+        "route": "r",
+        "slug": "credit-saint",
+        "pre_fingerprint": "4f4e39fed13fed24",
+        "post_fingerprint": "25a543358eb57df3",
+        "latency_s": 0.05161171895451844,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "r",
+        "slug": "credit-saint",
+        "pre_fingerprint": "25a543358eb57df3",
+        "post_fingerprint": "25a543358eb57df3",
+        "latency_s": 30.0,
+        "polls": 54,
+        "timed_out": true,
+        "error": "fingerprint never changed"
+      },
+      {
+        "route": "r",
+        "slug": "credit-saint",
+        "pre_fingerprint": "25a543358eb57df3",
+        "post_fingerprint": "50683591a837527f",
+        "latency_s": 0.054735330981202424,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "r",
+        "slug": "credit-saint",
+        "pre_fingerprint": "50683591a837527f",
+        "post_fingerprint": "50683591a837527f",
+        "latency_s": 30.0,
+        "polls": 54,
+        "timed_out": true,
+        "error": "fingerprint never changed"
+      },
+      {
+        "route": "r",
+        "slug": "credit-saint",
+        "pre_fingerprint": "50683591a837527f",
+        "post_fingerprint": "9a2554a6de131a51",
+        "latency_s": 0.05336255801375955,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "r",
+        "slug": "credit-saint",
+        "pre_fingerprint": "9a2554a6de131a51",
+        "post_fingerprint": "9a2554a6de131a51",
+        "latency_s": 30.0,
+        "polls": 55,
+        "timed_out": true,
+        "error": "fingerprint never changed"
+      },
+      {
+        "route": "r",
+        "slug": "credit-saint",
+        "pre_fingerprint": "9a2554a6de131a51",
+        "post_fingerprint": "50ee9b055fe4ffd3",
+        "latency_s": 0.05574256996624172,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "r",
+        "slug": "credit-saint",
+        "pre_fingerprint": "50ee9b055fe4ffd3",
+        "post_fingerprint": "50ee9b055fe4ffd3",
+        "latency_s": 30.0,
+        "polls": 54,
+        "timed_out": true,
+        "error": "fingerprint never changed"
+      },
+      {
+        "route": "r",
+        "slug": "credit-saint",
+        "pre_fingerprint": "50ee9b055fe4ffd3",
+        "post_fingerprint": "cd9f3e7d04a5859f",
+        "latency_s": 0.06430546496994793,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "r",
+        "slug": "credit-saint",
+        "pre_fingerprint": "cd9f3e7d04a5859f",
+        "post_fingerprint": "3e53c8c2f0da3f1d",
+        "latency_s": 0.05269777902867645,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      }
+    ],
+    "answers": [
+      {
+        "route": "answers",
+        "slug": "are-small-business-loans-worth-it",
+        "pre_fingerprint": "9c7d8af567feb638",
+        "post_fingerprint": "3e53c8c2f0da3f1d",
+        "latency_s": 0.1840514779323712,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "answers",
+        "slug": "are-small-business-loans-worth-it",
+        "pre_fingerprint": "3e53c8c2f0da3f1d",
+        "post_fingerprint": "3e53c8c2f0da3f1d",
+        "latency_s": 30.0,
+        "polls": 55,
+        "timed_out": true,
+        "error": "fingerprint never changed"
+      },
+      {
+        "route": "answers",
+        "slug": "are-small-business-loans-worth-it",
+        "pre_fingerprint": "3e53c8c2f0da3f1d",
+        "post_fingerprint": "337bf049a3609f74",
+        "latency_s": 0.17412765393964946,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "answers",
+        "slug": "are-small-business-loans-worth-it",
+        "pre_fingerprint": "337bf049a3609f74",
+        "post_fingerprint": "337bf049a3609f74",
+        "latency_s": 30.0,
+        "polls": 55,
+        "timed_out": true,
+        "error": "fingerprint never changed"
+      },
+      {
+        "route": "answers",
+        "slug": "are-small-business-loans-worth-it",
+        "pre_fingerprint": "337bf049a3609f74",
+        "post_fingerprint": "af59e683bba31ed2",
+        "latency_s": 0.1640593979973346,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "answers",
+        "slug": "are-small-business-loans-worth-it",
+        "pre_fingerprint": "af59e683bba31ed2",
+        "post_fingerprint": "af59e683bba31ed2",
+        "latency_s": 30.0,
+        "polls": 55,
+        "timed_out": true,
+        "error": "fingerprint never changed"
+      },
+      {
+        "route": "answers",
+        "slug": "are-small-business-loans-worth-it",
+        "pre_fingerprint": "af59e683bba31ed2",
+        "post_fingerprint": "5250e03abdc04cf5",
+        "latency_s": 0.2180607080226764,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "answers",
+        "slug": "are-small-business-loans-worth-it",
+        "pre_fingerprint": "5250e03abdc04cf5",
+        "post_fingerprint": "706de57135a58d4e",
+        "latency_s": 0.15629802900366485,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "answers",
+        "slug": "are-small-business-loans-worth-it",
+        "pre_fingerprint": "706de57135a58d4e",
+        "post_fingerprint": "706de57135a58d4e",
+        "latency_s": 30.0,
+        "polls": 55,
+        "timed_out": true,
+        "error": "fingerprint never changed"
+      },
+      {
+        "route": "answers",
+        "slug": "are-small-business-loans-worth-it",
+        "pre_fingerprint": "706de57135a58d4e",
+        "post_fingerprint": "bd12196db750efaf",
+        "latency_s": 0.17557999200653285,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      }
+    ],
+    "best": [
+      {
+        "route": "best",
+        "slug": "best-credit-repair-companies",
+        "pre_fingerprint": "3c42e4617ec8b0f8",
+        "post_fingerprint": "bd12196db750efaf",
+        "latency_s": 0.1322739759925753,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "best",
+        "slug": "best-credit-repair-companies",
+        "pre_fingerprint": "bd12196db750efaf",
+        "post_fingerprint": "25e1db62da896e81",
+        "latency_s": 0.1281887999502942,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "best",
+        "slug": "best-credit-repair-companies",
+        "pre_fingerprint": "25e1db62da896e81",
+        "post_fingerprint": "25e1db62da896e81",
+        "latency_s": 30.0,
+        "polls": 55,
+        "timed_out": true,
+        "error": "fingerprint never changed"
+      },
+      {
+        "route": "best",
+        "slug": "best-credit-repair-companies",
+        "pre_fingerprint": "25e1db62da896e81",
+        "post_fingerprint": "8864030794425b41",
+        "latency_s": 0.12462052702903748,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "best",
+        "slug": "best-credit-repair-companies",
+        "pre_fingerprint": "8864030794425b41",
+        "post_fingerprint": "5e452aa32fb58d45",
+        "latency_s": 0.11793074000161141,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "best",
+        "slug": "best-credit-repair-companies",
+        "pre_fingerprint": "5e452aa32fb58d45",
+        "post_fingerprint": "5e452aa32fb58d45",
+        "latency_s": 30.0,
+        "polls": 55,
+        "timed_out": true,
+        "error": "fingerprint never changed"
+      },
+      {
+        "route": "best",
+        "slug": "best-credit-repair-companies",
+        "pre_fingerprint": "5e452aa32fb58d45",
+        "post_fingerprint": "a3302649fbbc6aaa",
+        "latency_s": 0.12814216304104775,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "best",
+        "slug": "best-credit-repair-companies",
+        "pre_fingerprint": "a3302649fbbc6aaa",
+        "post_fingerprint": "a3302649fbbc6aaa",
+        "latency_s": 30.0,
+        "polls": 55,
+        "timed_out": true,
+        "error": "fingerprint never changed"
+      },
+      {
+        "route": "best",
+        "slug": "best-credit-repair-companies",
+        "pre_fingerprint": "a3302649fbbc6aaa",
+        "post_fingerprint": "7712291bba60f781",
+        "latency_s": 0.11618303705472499,
+        "polls": 1,
+        "timed_out": false,
+        "error": null
+      },
+      {
+        "route": "best",
+        "slug": "best-credit-repair-companies",
+        "pre_fingerprint": "7712291bba60f781",
+        "post_fingerprint": "7712291bba60f781",
+        "latency_s": 30.0,
+        "polls": 55,
+        "timed_out": true,
+        "error": "fingerprint never changed"
+      }
+    ]
+  },
+  "ts_unix": 1777623862
 }
