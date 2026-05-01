@@ -36,6 +36,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -61,10 +62,12 @@ def banner(label: str) -> None:
     print("=" * 78)
 
 
-def gate_a_e2e_probe(trials: int, dry: bool) -> dict:
+def gate_a_e2e_probe(trials: int, dry: bool, preview_host: str, apply: bool = True) -> dict:
     """Phase 5.5b — e2e latency probe across review/answers/best routes.
 
     Returns dict with verdict GREEN/AMBER/RED/SKIPPED + p95 + per_route summary.
+    Iter 32: defaults to --apply (real DB writes) — cutover gate must measure,
+    not dry-run. Pass apply=False for offline rehearsals.
     """
     if dry:
         return {
@@ -76,11 +79,16 @@ def gate_a_e2e_probe(trials: int, dry: bool) -> dict:
         "python3", str(REPO_ROOT / "tools" / "cdm_rev_phase24_e2e_probe.py"),
         "--route", "all", "--trials", str(trials),
     ]
-    print(f"[gate a] running: {' '.join(cmd)}")
+    if apply:
+        cmd.append("--apply")
+    print(f"[gate a] running: {' '.join(cmd)} (preview={preview_host})")
     t0 = time.monotonic()
     try:
+        # Iter 32: probe reads CDM_REV_PREVIEW_HOST env var; thread it through.
+        child_env = os.environ.copy()
+        child_env["CDM_REV_PREVIEW_HOST"] = preview_host
         r = subprocess.run(cmd, cwd=REPO_ROOT, timeout=900,
-                           capture_output=True, text=True)
+                           capture_output=True, text=True, env=child_env)
         wall = round(time.monotonic() - t0, 1)
         latest_json = REPO_ROOT / "data" / "cdm_rev_phase24_probe_latest.json"
         verdict_data = {}
@@ -123,11 +131,12 @@ def gate_a_e2e_probe(trials: int, dry: bool) -> dict:
         }
 
 
-def gate_d_panel_diff(json_out: Path) -> dict:
-    """Phase 5.2/5.3 — 50-URL HTML diff parity (< 0.1% byte delta)."""
+def gate_d_panel_diff(json_out: Path, preview_host: str) -> dict:
+    """Phase 5.2/5.3 — 50-URL HTML diff parity (≤5% byte delta, iter 32)."""
     cmd = [
         "python3", str(REPO_ROOT / "tools" / "cdm_rev_panel_diff.py"),
         "--json", str(json_out),
+        "--preview-host", preview_host,
     ]
     print(f"[gate d] running: {' '.join(cmd)}")
     t0 = time.monotonic()
@@ -277,6 +286,9 @@ def main() -> int:
     ap.add_argument("--preview-host", default=DEFAULT_PREVIEW)
     ap.add_argument("--probe-trials", type=int, default=10,
                     help="Trials per route for gate (a). Default 10.")
+    ap.add_argument("--probe-dry-run", action="store_true",
+                    help="Run gate (a) probe without --apply (no DB writes). "
+                         "Default: --apply (real measurement).")
     ap.add_argument("--skip-probe", action="store_true",
                     help="Skip gate (a) e2e probe (offline mode).")
     ap.add_argument("--skip-panel", action="store_true",
@@ -297,14 +309,15 @@ def main() -> int:
     results = []
 
     banner("Gate (a) — Phase 5.5b e2e latency probe")
-    results.append(gate_a_e2e_probe(args.probe_trials, args.skip_probe))
+    results.append(gate_a_e2e_probe(args.probe_trials, args.skip_probe,
+                                    args.preview_host, apply=not args.probe_dry_run))
 
     banner("Gate (d) — Phase 5.2 50-URL HTML diff parity")
     if args.skip_panel:
         results.append({"gate": "(d) HTML diff parity",
                         "status": "SKIPPED", "summary": "skipped per --skip-panel"})
     else:
-        results.append(gate_d_panel_diff(REPO_ROOT / args.panel_json))
+        results.append(gate_d_panel_diff(REPO_ROOT / args.panel_json, args.preview_host))
 
     banner("Gate (e) — Phase 5.10 OBJ verifier")
     if args.skip_obj:

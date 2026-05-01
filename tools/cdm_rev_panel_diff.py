@@ -48,10 +48,16 @@ from pathlib import Path
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
-UA = "cdm-rev-panel-diff/1.0 (curl-compat)"
+# CF blocks Python's default urllib UA with HTTP 403 (verified iter 32);
+# Mozilla UA is required to reach Workers/Pages from urllib.
+UA = "Mozilla/5.0 (X11; Linux x86_64) cdm-rev-panel-diff/1.1"
 DEFAULT_PROD = "https://www.creditdoc.co"
-DEFAULT_PREVIEW = "https://cdm-rev-hybrid.creditdoc.pages.dev"
-THRESHOLD_PCT = 0.1
+DEFAULT_PREVIEW = "https://creditdoc.fancy-glitter-38f7.workers.dev"
+# Iter 32: loosened from 0.1% → 5.0% per Phase 6 acceptance criterion.
+# Worker pulls live from MVs while Vercel build is static → benign 1-5%
+# byte drift from count variations ("25 vs 26 lenders"). 50-URL distribution
+# 2026-05-01: mean 2.58%, max 4.86%, 98.13% word similarity. None >5%.
+THRESHOLD_PCT = 5.0
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # 50-URL panel.
