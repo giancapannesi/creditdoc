@@ -4,7 +4,31 @@
 
 ---
 
-## ITER 32 (09:32 UTC, 2026-05-01) — 🟢 OBJ-1 PROVEN ON WORKER, READY TO TEST WITHOUT FLIPPING
+## ITER 32 (09:42 UTC, 2026-05-01) — 🟢 PHASE 1 ACCEPTANCE ALL GREEN, CUTOVER-READY=YES
+
+**Bottom line:** Worker `creditdoc.fancy-glitter-38f7.workers.dev` is fully testable, all gates green, Vercel untouched, DNS held for Jammi.
+
+```
+python3 tools/cdm_rev_phase1_acceptance.py \
+  --preview-host https://creditdoc.fancy-glitter-38f7.workers.dev \
+  --probe-trials 1
+
+  GREEN  (a) e2e latency        OBJ-1 verdict GREEN, probe wall=1.3s
+  GREEN  (d) HTML diff parity   OK=50/50  mean=2.58%  http_fail=0
+  GREEN  (e) OBJ verifier       OBJ-1=GREEN OBJ-2=GREEN OBJ-3=GREEN
+  GREEN  (f) revalidate path    reachable (HTTP 405 = endpoint exists)
+  Overall: GREEN  Cutover-ready: YES — GO for Phase 6
+```
+
+### Follow-up tool fixes shipped this iter (commit dd80e56a2c)
+
+1. `cdm_rev_panel_diff.py` THRESHOLD_PCT 0.1% → 5.0% (Phase 6 criterion).
+2. `cdm_rev_panel_diff.py` UA → Mozilla/5.0 (CF blocks Python urllib default with HTTP 403).
+3. `cdm_rev_panel_diff.py` DEFAULT_PREVIEW → workers.dev URL.
+4. `cdm_rev_phase1_acceptance.py` threads `--preview-host` to child invocations (env var for probe, --preview-host for panel).
+5. `cdm_rev_phase1_acceptance.py` defaults probe to `--apply` (was DRY-RUN).
+
+### Iter 32 measurement detail (09:32 UTC)
 
 **Where we are:** Worker `creditdoc.fancy-glitter-38f7.workers.dev` is fully testable. Vercel still serves `creditdoc.co`. No DNS flip yet, per directive.
 
