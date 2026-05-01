@@ -41,14 +41,16 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 DEFAULT_URLS = [
-    "https://cdm-rev-hybrid.creditdoc.pages.dev/r/upstart",
-    "https://cdm-rev-hybrid.creditdoc.pages.dev/r/lendingclub",
-    "https://cdm-rev-hybrid.creditdoc.pages.dev/r/sofi",
-    "https://cdm-rev-hybrid.creditdoc.pages.dev/review/upstart",
-    "https://cdm-rev-hybrid.creditdoc.pages.dev/",
+    # Live Worker host — pages.dev project was deleted in iter 30 (May 1 cleanup).
+    # Post-DNS-flip swap to https://creditdoc.co — single edit, no CLI arg change needed.
+    "https://creditdoc.fancy-glitter-38f7.workers.dev/r/upstart",
+    "https://creditdoc.fancy-glitter-38f7.workers.dev/best/best-credit-repair-companies/",
+    "https://creditdoc.fancy-glitter-38f7.workers.dev/answers/build-credit-with-no-credit-history/",
+    "https://creditdoc.fancy-glitter-38f7.workers.dev/state/wyoming/",
+    "https://creditdoc.fancy-glitter-38f7.workers.dev/",
 ]
 LOG_DIR = Path(__file__).parent.parent / "data" / "health"
-META_RE = re.compile(rb'<meta\s+name="cdm-last-updated"\s+content="(\d+)"')
+META_RE = re.compile(rb'<meta\s+name="cdm-last-updated"\s+content="([^"]+)"')
 
 
 def poll(url: str, timeout: float = 5.0) -> dict:
@@ -65,10 +67,14 @@ def poll(url: str, timeout: float = 5.0) -> dict:
             rec["bytes"] = len(body)
             m = META_RE.search(body)
             if m:
+                # Captured value may be either a Unix epoch or an ISO date
+                # string ("2026-03-19"). Try int first, fall back to string —
+                # presence is what matters for the soft-gate.
+                raw = m.group(1).decode("utf-8", "replace")
                 try:
-                    rec["meta_ts"] = int(m.group(1))
+                    rec["meta_ts"] = int(raw)
                 except ValueError:
-                    pass
+                    rec["meta_ts"] = raw
     except Exception as exc:
         rec["error"] = f"{type(exc).__name__}: {exc}"
         rec["ttfb_s"] = round(time.perf_counter() - t0, 4)
