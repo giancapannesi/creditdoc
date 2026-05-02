@@ -144,7 +144,9 @@ class ProtectedProfileError(Exception):
 # always safe to leave wired in.
 _REVALIDATE_URL = os.environ.get(
     "REVALIDATE_URL",
-    "https://cdm-rev-hybrid.creditdoc.pages.dev/api/revalidate",
+    # Live Worker host — pages.dev project deleted iter 30. Post-DNS-flip
+    # swap to https://creditdoc.co/api/revalidate (single edit).
+    "https://creditdoc.fancy-glitter-38f7.workers.dev/api/revalidate",
 )
 
 
@@ -162,6 +164,11 @@ def _ping_revalidate(type_: str, slug: str) -> None:
             headers={
                 "x-revalidate-token": token,
                 "content-type": "application/json",
+                # iter 36 fix: Cloudflare bot management 403s the default
+                # `Python-urllib/3.x` UA on the *.workers.dev hostname, which
+                # would silently fail every cron-fired revalidate. Use a
+                # browser-shaped UA so the ping reaches the Worker.
+                "user-agent": "Mozilla/5.0 (compatible; CreditDocRevalidate/1.0)",
             },
         )
         urllib.request.urlopen(req, timeout=8).read()
