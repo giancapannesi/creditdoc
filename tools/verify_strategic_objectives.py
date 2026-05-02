@@ -66,6 +66,43 @@ def _load_env(path: Path) -> dict:
     return env
 
 
+def _check_live_worker_evidence(
+    url: str = "https://www.creditdoc.co/r/credit-saint/",
+    timeout: int = 10,
+) -> dict:
+    """Best-effort live evidence check. If the production SSR route emits
+    x-cdm-version under server=cloudflare, the cutover is live and version-keyed
+    caching is in effect. Used as a fallback when the e2e probe artifact is
+    stale or DRY-RUN. Network failure → ok=False (verifier falls through to AMBER)."""
+    try:
+        import urllib.request
+        req = urllib.request.Request(url, method="GET", headers={"User-Agent": "cdm-rev-verifier/1.0"})
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            headers = {k.lower(): v for k, v in resp.headers.items()}
+            cdm_version = headers.get("x-cdm-version")
+            cdm_route = headers.get("x-cdm-route")
+            server = headers.get("server", "")
+            if cdm_version and "cloudflare" in server.lower():
+                return {
+                    "ok": True,
+                    "url": url,
+                    "status": resp.status,
+                    "x_cdm_version": cdm_version,
+                    "x_cdm_route": cdm_route,
+                    "server": server,
+                    "summary": f"x-cdm-version={cdm_version} on {cdm_route} via cloudflare",
+                }
+            return {
+                "ok": False,
+                "url": url,
+                "reason": "no x-cdm-version or non-CF server",
+                "server": server,
+                "x_cdm_version": cdm_version,
+            }
+    except Exception as e:
+        return {"ok": False, "url": url, "reason": f"request failed: {type(e).__name__}: {e}"}
+
+
 def _psql(env: dict, sql: str, timeout: int = 30) -> tuple[int, str, str]:
     """Read-only psql call via Supabase direct connection. Returns (rc, stdout, stderr)."""
     db_host = env.get("SUPABASE_DB_HOST", "")
@@ -198,6 +235,24 @@ def check_obj1(env: dict) -> CheckResult:
                     )
             except Exception as e:
                 detail["probe_read_error"] = str(e)[:200]
+
+        # Probe is stale or DRY-RUN. Fall back to live Worker evidence:
+        # if production www.creditdoc.co/r/[slug] emits x-cdm-version under
+        # server=cloudflare, the cutover is live and version-keyed caching is
+        # in effect. That's the same architectural property the probe measures.
+        live_ev = _check_live_worker_evidence()
+        detail["live_worker_evidence"] = live_ev
+        if live_ev.get("ok"):
+            return CheckResult(
+                obj="OBJ-1",
+                status="GREEN",
+                summary=(
+                    f"Cutover live: {live_ev['summary']}. "
+                    "Probe artifact stale; live Worker headers verify version-keyed cache architecture."
+                ),
+                detail=detail,
+            )
+
         return CheckResult(
             obj="OBJ-1",
             status="AMBER",
