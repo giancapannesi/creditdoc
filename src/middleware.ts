@@ -65,11 +65,18 @@ function applySecurityHeaders(res: Response): Response {
 }
 
 interface CacheableRoute {
-  table: 'answers' | 'lenders' | 'listicles';
+  table: 'answers' | 'lenders' | 'listicles' | 'categories';
   /** Maps URL pathname → row slug. Returns null if path is not an SSR row page. */
   match: (pathname: string) => string | null;
   /** Optional: route variant tag (for cache-key namespacing). */
   variant?: string;
+  /**
+   * Optional override for version lookup. Default behavior: fetch
+   * <table>.updated_at WHERE slug=<slug>. Aggregate routes (categories, etc.)
+   * supply a custom function that returns MAX(updated_at) across all rows
+   * the page renders, so any underlying row edit busts the cache key.
+   */
+  versionFetch?: (slug: string, env: RuntimeEnvLike) => Promise<string | null>;
 }
 
 // Slug-pattern routes — middleware will fetch updated_at for the matched row
@@ -99,11 +106,85 @@ const CACHEABLE_ROUTES: CacheableRoute[] = [
       return m ? m[1] : null;
     },
   },
+  {
+    // /categories/[category] — aggregate route. The page renders the category
+    // metadata row + top-48 lenders sorted by rating. Any of those underlying
+    // rows updating must bust the cache key. We compute version as the max of
+    // (categories.updated_at, MAX(lenders.updated_at WHERE category=slug AND ready_for_index)).
+    // Lender edits dominate in practice; category metadata edits are rare but
+    // also covered.
+    table: 'categories',
+    variant: 'category-slug',
+    match: (p) => {
+      const m = p.match(/^\/categories\/([^/]+)\/?$/);
+      return m ? m[1] : null;
+    },
+    versionFetch: fetchCategoryAggregateVersion,
+  },
 ];
 
 interface RuntimeEnvLike {
   SUPABASE_URL?: string;
   SUPABASE_ANON_KEY?: string;
+}
+
+/**
+ * Aggregate version for /categories/[slug] — returns the max updated_at across
+ * the category metadata row AND every lender row in that category.
+ *
+ * Two parallel PostgREST round-trips (~30-40ms each from a Worker, negligible).
+ * If either fails we return null and the request bypasses cache (BYPASS-NOVERSION).
+ *
+ * The lender query relies on the same composite partial index that powers
+ * the page's main query (lenders_category_rating_ready_idx) — but we order by
+ * updated_at DESC instead of rating, so the index isn't used. Workload is
+ * tiny (~5K rows for banking), and `select=updated_at&limit=1` keeps the
+ * payload minimal. If category sizes grow 10×, add a second partial index
+ * `(category, updated_at DESC) WHERE processing_status='ready_for_index'`.
+ */
+async function fetchCategoryAggregateVersion(
+  slug: string,
+  env: RuntimeEnvLike
+): Promise<string | null> {
+  if (!env.SUPABASE_URL || !env.SUPABASE_ANON_KEY) return null;
+  const headers = {
+    apikey: env.SUPABASE_ANON_KEY,
+    authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+  };
+  const catUrl =
+    `${env.SUPABASE_URL}/rest/v1/categories` +
+    `?slug=eq.${encodeURIComponent(slug)}` +
+    `&select=updated_at` +
+    `&limit=1`;
+  const lenderUrl =
+    `${env.SUPABASE_URL}/rest/v1/lenders` +
+    `?category=eq.${encodeURIComponent(slug)}` +
+    `&processing_status=eq.ready_for_index` +
+    `&select=updated_at` +
+    `&order=updated_at.desc` +
+    `&limit=1`;
+  try {
+    const [catRes, lenderRes] = await Promise.all([
+      fetch(catUrl, { headers, signal: AbortSignal.timeout(2000) }),
+      fetch(lenderUrl, { headers, signal: AbortSignal.timeout(2000) }),
+    ]);
+    if (!catRes.ok || !lenderRes.ok) return null;
+    const [catRows, lenderRows] = await Promise.all([
+      catRes.json() as Promise<Array<{ updated_at?: string }>>,
+      lenderRes.json() as Promise<Array<{ updated_at?: string }>>,
+    ]);
+    const candidates = [
+      catRows?.[0]?.updated_at,
+      lenderRows?.[0]?.updated_at,
+    ].filter((s): s is string => typeof s === 'string' && s.length > 0);
+    if (candidates.length === 0) return null;
+    // Lex compare works for ISO 8601 timestamps; both come from PostgreSQL
+    // timestamp with time zone so format is consistent.
+    candidates.sort();
+    return candidates[candidates.length - 1];
+  } catch {
+    return null;
+  }
 }
 
 async function fetchUpdatedAt(
@@ -168,7 +249,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
   }
 
   // Version probe — if it fails, skip caching for this request.
-  const updatedAt = await fetchUpdatedAt(matched.route.table, matched.slug, env);
+  // Aggregate routes (e.g. /categories/) supply their own versionFetch that
+  // returns MAX(updated_at) across all underlying rows so any edit busts the
+  // cache key globally.
+  const updatedAt = matched.route.versionFetch
+    ? await matched.route.versionFetch(matched.slug, env)
+    : await fetchUpdatedAt(matched.route.table, matched.slug, env);
   if (!updatedAt) {
     const fresh = await next();
     fresh.headers.set('x-cdm-cache', 'BYPASS-NOVERSION');

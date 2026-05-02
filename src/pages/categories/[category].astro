@@ -95,7 +95,11 @@ const jsonLd = [
   }] : []),
 ];
 
-Astro.response.headers.set('cache-control', 'public, max-age=300, s-maxage=300');
+// Cache-Control intentionally permissive — invalidation is handled by
+// middleware (cdm-rev iter 39): the cache key includes MAX(updated_at) across
+// the category row + every lender in that category, so any DB write busts the
+// key globally and the next request re-renders. No deploy/purge needed.
+Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400, immutable');
 Astro.response.headers.set('x-cdm-rev-source', 'ssr-category');
 Astro.response.headers.set('x-cdm-route', '/categories/[category]');
 Astro.response.headers.set('x-cdm-slug', categorySlug || '');
