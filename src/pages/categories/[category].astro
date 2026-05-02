@@ -1,24 +1,38 @@
 ---
+export const prerender = false;
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
-import { getCategories, getLendersByCategory, getWellnessGuidesByCategory } from '../../utils/data-build';
+import { getCategoryBySlugRuntime, getTopLendersByCategoryRuntime, getCategoryCountRuntime, getWellnessGuidesByCategoryRuntime } from '../../lib/db';
+import { shapeBodyInlineToLender } from '../../utils/data-runtime';
+import type { Lender } from '../../utils/data';
 
-export function getStaticPaths() {
-  const categories = getCategories();
-  return categories.map(category => ({
-    params: { category: category.slug },
-  }));
+const env = (Astro.locals as any).runtime?.env;
+const { category: categorySlug } = Astro.params;
+
+const [categoryRow, lenderRowsTop, totalForCategory] = await Promise.all([
+  getCategoryBySlugRuntime(categorySlug!, env),
+  getTopLendersByCategoryRuntime(categorySlug!, env, 48),
+  getCategoryCountRuntime(categorySlug!, env),
+]);
+
+if (!categoryRow) {
+  return new Response('Not found', { status: 404 });
 }
 
-const { category: categorySlug } = Astro.params;
-const categories = getCategories();
-const category = categories.find(c => c.slug === categorySlug)!;
-const lenders = getLendersByCategory(categorySlug!);
+const categoryBody = (categoryRow.body_inline ?? {}) as Record<string, any>;
+const category = {
+  slug: categoryRow.slug,
+  name: categoryRow.name,
+  description: (categoryBody.description as string) || '',
+  seo_title: (categoryBody.seo_title as string) || `${categoryRow.name} | CreditDoc`,
+  seo_description: (categoryBody.seo_description as string) || (categoryBody.description as string) || '',
+  filter_type: (categoryBody.filter_type as string) || '',
+};
 
-const isLoanCategory = category.filter_type === 'loan';
-const isServiceCategory = category.filter_type === 'service';
+const lenders: Lender[] = lenderRowsTop.map(shapeBodyInlineToLender);
+const totalCount = Number.isFinite(totalForCategory) && totalForCategory > 0 ? totalForCategory : lenders.length;
 
-// Map category to wellness guide category
 const guideMap: Record<string, string> = {
   'credit-repair': 'credit-repair',
   'debt-relief': 'financial-recovery',
@@ -29,10 +43,19 @@ const guideMap: Record<string, string> = {
   'buy-here-pay-here': 'loans-and-interest',
 };
 const guideCategory = guideMap[categorySlug!] || 'understanding-credit';
-const categoryWellnessGuides = getWellnessGuidesByCategory(guideCategory).slice(0, 4);
+const wellnessRows = await getWellnessGuidesByCategoryRuntime(guideCategory, env, 4);
+const categoryWellnessGuides = wellnessRows.map((g: any) => {
+  const body = (g.body_inline ?? {}) as Record<string, any>;
+  return {
+    slug: g.slug,
+    title: g.title,
+    description: (body.description as string) || (body.excerpt as string) || '',
+    category_label: (body.category_label as string) || (g.category as string) || '',
+  };
+});
 
-// Build top lenders list for ItemList schema (up to 10)
-const topLenders = [...lenders].sort((a, b) => b.rating - a.rating).slice(0, 10);
+const isLoanCategory = category.filter_type === 'loan';
+const topLenders = lenders.slice(0, 10);
 
 const jsonLd = [
   {
@@ -41,7 +64,7 @@ const jsonLd = [
     name: category.name,
     description: category.seo_description,
     url: `https://www.creditdoc.co/categories/${categorySlug}/`,
-    numberOfItems: lenders.length,
+    numberOfItems: totalCount,
     provider: {
       '@type': 'Organization',
       name: 'CreditDoc',
@@ -71,12 +94,17 @@ const jsonLd = [
     })),
   }] : []),
 ];
+
+Astro.response.headers.set('cache-control', 'public, max-age=300, s-maxage=300');
+Astro.response.headers.set('x-cdm-rev-source', 'ssr-category');
+Astro.response.headers.set('x-cdm-route', '/categories/[category]');
+Astro.response.headers.set('x-cdm-slug', categorySlug || '');
 ---
 
 <BaseLayout
   title={category.seo_title}
   description={category.seo_description}
-  noindex={lenders.length === 0}
+  noindex={totalCount === 0}
   jsonLd={jsonLd}
 >
   <!-- Breadcrumbs -->
@@ -102,19 +130,19 @@ const jsonLd = [
   <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
     {lenders.length > 0 ? (
       <div>
-        <p class="text-sm text-muted mb-6">{lenders.length} {lenders.length === 1 ? 'company' : 'companies'} found</p>
+        <p class="text-sm text-muted mb-6">{totalCount} {totalCount === 1 ? 'company' : 'companies'} found</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {lenders.sort((a, b) => b.rating - a.rating).slice(0, 48).map(lender => (
+          {lenders.map(lender => (
             <LenderCard lender={lender} />
           ))}
         </div>
-        {lenders.length > 48 && (
+        {totalCount > 48 && (
           <div class="mt-8 text-center">
             <a
               href={`/search/?category=${categorySlug}`}
               class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-primary text-primary text-sm font-semibold hover:bg-primary-light transition-colors"
             >
-              View All {lenders.length} Companies
+              View All {totalCount} Companies
               <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/>
               </svg>

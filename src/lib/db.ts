@@ -190,6 +190,72 @@ export async function getLendersByBrandRuntime(
   return (await res.json()) as RuntimeLenderWithBody[];
 }
 
+/**
+ * Top-N lenders by category, sorted by rating DESC.
+ * Used by /categories/[category] SSR. Index `lenders_category_rating_ready_idx`
+ * makes this O(log n) even for banking (4796 rows).
+ *
+ * The `rating` column is a STORED generated column reading body_inline->>'rating'.
+ * Returns FULL_COLUMNS (catalog + body_inline) for LenderCard hydration.
+ */
+export async function getTopLendersByCategoryRuntime(
+  category: string,
+  env?: RuntimeLenderEnv,
+  limit = 48
+): Promise<RuntimeLenderWithBody[]> {
+  if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return [];
+  if (!category) return [];
+  const url =
+    `${env.SUPABASE_URL}/rest/v1/lenders` +
+    `?category=eq.${encodeURIComponent(category)}` +
+    `&processing_status=eq.ready_for_index` +
+    `&select=${FULL_COLUMNS}` +
+    `&order=rating.desc.nullslast,updated_at.desc` +
+    `&limit=${limit}`;
+  const res = await fetch(url, {
+    headers: {
+      apikey: env.SUPABASE_ANON_KEY,
+      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+      accept: "application/json",
+      prefer: "count=exact",
+    },
+    signal: AbortSignal.timeout(4000),
+  });
+  if (!res.ok) return [];
+  const rows = (await res.json()) as RuntimeLenderWithBody[];
+  // Stash count from Content-Range header onto first row (caller can pull off [0]).
+  const range = res.headers.get("content-range") || "";
+  const total = range.includes("/") ? parseInt(range.split("/")[1] || "0", 10) : rows.length;
+  if (rows.length > 0) (rows[0] as any).__total_count__ = total;
+  return rows;
+}
+
+export async function getCategoryCountRuntime(
+  category: string,
+  env?: RuntimeLenderEnv
+): Promise<number> {
+  if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return 0;
+  if (!category) return 0;
+  const url =
+    `${env.SUPABASE_URL}/rest/v1/lenders` +
+    `?category=eq.${encodeURIComponent(category)}` +
+    `&processing_status=eq.ready_for_index` +
+    `&select=slug` +
+    `&limit=1`;
+  const res = await fetch(url, {
+    headers: {
+      apikey: env.SUPABASE_ANON_KEY,
+      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+      accept: "application/json",
+      prefer: "count=exact",
+    },
+    signal: AbortSignal.timeout(2500),
+  });
+  if (!res.ok) return 0;
+  const range = res.headers.get("content-range") || "";
+  return range.includes("/") ? parseInt(range.split("/")[1] || "0", 10) : 0;
+}
+
 export async function getLendersBySlugListRuntime(
   slugs: string[],
   env?: RuntimeLenderEnv

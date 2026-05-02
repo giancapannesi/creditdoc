@@ -1,6 +1,8 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import { execSync } from 'node:child_process';
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
@@ -12,10 +14,19 @@ import cloudflare from '@astrojs/cloudflare';
 const SITE = 'https://www.creditdoc.co';
 function ssrSitemapPages() {
   try {
+    // iter 37 fix: brand sitemap entries must cross-check against an actual
+    // brand record file in src/content/brands/, otherwise crawlers hit a 404
+    // (DB has lenders with brand_slug, but no matching brand profile exists).
+    const brandFiles = new Set(
+      readdirSync(join(process.cwd(), 'src/content/brands'))
+        .filter((f) => f.endsWith('.json'))
+        .map((f) => f.replace(/\.json$/, ''))
+    );
     const sql = `
       SELECT 'blog/' || slug FROM blog_posts WHERE status='published';
       SELECT 'financial-wellness/' || slug FROM wellness_guides;
-      SELECT DISTINCT 'brand/' || brand_slug FROM lenders
+      SELECT 'categories/' || slug FROM categories;
+      SELECT DISTINCT brand_slug FROM lenders
         WHERE brand_slug IS NOT NULL AND brand_slug <> ''
           AND processing_status='ready_for_index';
     `;
@@ -23,11 +34,27 @@ function ssrSitemapPages() {
       encoding: 'utf8',
       cwd: process.cwd(),
     });
-    return out
-      .split('\n')
-      .map((s) => s.trim())
-      .filter(Boolean)
-      .map((path) => `${SITE}/${path}/`);
+    const lines = out.split('\n').map((s) => s.trim()).filter(Boolean);
+    let droppedBrands = 0;
+    const urls = [];
+    for (const line of lines) {
+      // Brand slug rows are bare slugs (no '/'); blog/wellness rows already
+      // carry their prefix. Differentiate by '/' presence.
+      if (!line.includes('/')) {
+        // Bare brand slug — keep only if a matching brand file exists.
+        if (brandFiles.has(line)) {
+          urls.push(`${SITE}/brand/${line}/`);
+        } else {
+          droppedBrands += 1;
+        }
+      } else {
+        urls.push(`${SITE}/${line}/`);
+      }
+    }
+    if (droppedBrands > 0) {
+      console.log(`[sitemap] dropped ${droppedBrands} brand slug(s) with no brand record`);
+    }
+    return urls;
   } catch (err) {
     console.warn('[sitemap] ssrSitemapPages failed:', err.message);
     return [];
