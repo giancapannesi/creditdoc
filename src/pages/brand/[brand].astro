@@ -1,26 +1,29 @@
 ---
+export const prerender = false;
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
-import { getAllBrands, getLendersByBrand, getBrandInfo } from '../../utils/data-build';
+import { getBrandInfoRuntime, shapeBodyInlineToLender } from '../../utils/data-runtime';
+import { getLendersByBrandRuntime } from '../../lib/db';
 import type { Lender } from '../../utils/data';
 
-export function getStaticPaths() {
-  const brands = getAllBrands();
-  return brands.map(brand => ({
-    params: { brand: brand.slug },
-  }));
-}
-
+const env = (Astro.locals as any).runtime?.env;
 const { brand: brandSlug } = Astro.params;
-const brandInfo = getBrandInfo(brandSlug!);
 
-// Safety: should never happen if getStaticPaths is correct
+const [brandInfo, lenderRows] = await Promise.all([
+  getBrandInfoRuntime(brandSlug!, env),
+  getLendersByBrandRuntime(brandSlug!, env),
+]);
+
 if (!brandInfo) {
-  return Astro.redirect('/404');
+  return new Response('Not found', { status: 404 });
 }
 
-const lenders = getLendersByBrand(brandSlug!);
+const lenders: Lender[] = lenderRows.map(shapeBodyInlineToLender);
 const locationCount = lenders.length;
+
+Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
+Astro.response.headers.set('x-cdm-rev-source', 'ssr-brand');
 
 // Group lenders by state
 const byState = new Map<string, Lender[]>();

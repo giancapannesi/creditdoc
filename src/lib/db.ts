@@ -159,6 +159,37 @@ export async function getRelatedLendersByCategoryRuntime(
  * Returns RuntimeLenderWithBody[] so the caller can hydrate via
  * shapeBodyInlineToLender. Payload is bounded — call sites pass ≤3 slugs.
  */
+/**
+ * Catalog + body_inline fetch of all lenders attached to a brand_slug. Used by
+ * /brand/[brand] SSR. Bounded by max brand size (~180 rows for moneygram).
+ * Returns RuntimeLenderWithBody[] so the caller can hydrate via
+ * shapeBodyInlineToLender for full LenderCard rendering.
+ */
+export async function getLendersByBrandRuntime(
+  brandSlug: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeLenderWithBody[]> {
+  if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return [];
+  if (!brandSlug) return [];
+  const url =
+    `${env.SUPABASE_URL}/rest/v1/lenders` +
+    `?brand_slug=eq.${encodeURIComponent(brandSlug)}` +
+    `&processing_status=eq.ready_for_index` +
+    `&select=${FULL_COLUMNS}` +
+    `&order=state.asc,name.asc` +
+    `&limit=500`;
+  const res = await fetch(url, {
+    headers: {
+      apikey: env.SUPABASE_ANON_KEY,
+      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+      accept: "application/json",
+    },
+    signal: AbortSignal.timeout(4000),
+  });
+  if (!res.ok) return [];
+  return (await res.json()) as RuntimeLenderWithBody[];
+}
+
 export async function getLendersBySlugListRuntime(
   slugs: string[],
   env?: RuntimeLenderEnv
@@ -247,6 +278,20 @@ export async function getWellnessGuidesByCategoryRuntime(
     `&limit=${limit}`;
   const rows = await _restGet<RuntimeWellnessGuide>(url, env);
   return rows ?? [];
+}
+
+export async function getWellnessGuideBySlugRuntime(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeWellnessGuide | null> {
+  if (!slug) return null;
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/wellness_guides` +
+    `?slug=eq.${encodeURIComponent(slug)}` +
+    `&select=slug,title,category,body_inline,updated_at` +
+    `&limit=1`;
+  const rows = await _restGet<RuntimeWellnessGuide>(url, env);
+  return rows?.[0] ?? null;
 }
 
 export interface RuntimeComparison {
@@ -492,6 +537,25 @@ export async function getListicleBySlugRuntime(
     `&limit=1`;
   const rows = await _restGet<RuntimeListicle>(url, env);
   return rows?.[0] ?? null;
+}
+
+export async function getListiclesByCategoriesRuntime(
+  categories: string[],
+  env?: RuntimeLenderEnv,
+  limit = 6
+): Promise<RuntimeListicle[]> {
+  if (!categories?.length) return [];
+  const inList = categories
+    .map((c) => `"${c.replace(/"/g, '\\"')}"`)
+    .join(",");
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/listicles` +
+    `?category=in.(${inList})` +
+    `&select=slug,title,target_keyword,category,body_inline,updated_at` +
+    `&order=updated_at.desc` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeListicle>(url, env);
+  return rows ?? [];
 }
 
 export interface RuntimeAnswer {

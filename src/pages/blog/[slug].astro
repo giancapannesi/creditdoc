@@ -1,52 +1,86 @@
 ---
+export const prerender = false;
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import AffiliateSidebar from '../../components/AffiliateSidebar.astro';
 import AffiliateInline from '../../components/AffiliateInline.astro';
 import AffiliateGeoFilter from '../../components/AffiliateGeoFilter.astro';
-import { getBlogPosts, getBlogPostBySlug, getBlogPostsByCategory, getCategories, getListicles, getWellnessGuideBySlug, getGlossaryTermsForContext } from '../../utils/data-build';
-import type { BlogPost } from '../../utils/data';
+import {
+  getBlogPostBySlugRuntimeFromDb,
+  getBlogPostsByCategoryRuntimeFromDb,
+  getCategoriesRuntimeFromDb,
+  getWellnessGuideBySlugRuntimeFromDb,
+  getGlossaryTermsForContextRuntimeFromDb,
+} from '../../utils/data-runtime';
+import { getListiclesByCategoriesRuntime } from '../../lib/db';
 
-export function getStaticPaths() {
-  const posts = getBlogPosts();
-  return posts.map(post => ({
-    params: { slug: post.slug },
-  }));
+const env = (Astro.locals as any).runtime?.env;
+const { slug } = Astro.params;
+
+const post = await getBlogPostBySlugRuntimeFromDb(slug!, env);
+if (!post) {
+  return new Response('Not found', { status: 404 });
 }
 
-const { slug } = Astro.params;
-const post = getBlogPostBySlug(slug!)!;
+const postCategory = (post.category ?? '') as string;
+const postTags = Array.isArray(post.tags) ? (post.tags as string[]) : [];
+const postRelatedGuides = Array.isArray(post.related_guides) ? (post.related_guides as string[]) : [];
+const postRelatedCategories = Array.isArray(post.related_categories) ? (post.related_categories as string[]) : [];
+const postSections = Array.isArray(post.sections) ? (post.sections as Array<{ heading: string; content: string }>) : [];
+const postFaq = Array.isArray(post.faq) ? (post.faq as Array<{ question: string; answer: string }>) : [];
+const postKeyTakeaways = Array.isArray(post.key_takeaways) ? (post.key_takeaways as string[]) : [];
 
-const relatedPosts = getBlogPostsByCategory(post.category)
-  .filter(p => p.slug !== post.slug)
+// Run sidebar fetches in parallel
+const [relatedPostsRaw, categories, relatedGuidesRaw, glossaryTerms, relatedListiclesRaw] = await Promise.all([
+  postCategory
+    ? getBlogPostsByCategoryRuntimeFromDb(postCategory, env, 6)
+    : Promise.resolve([] as Awaited<ReturnType<typeof getBlogPostsByCategoryRuntimeFromDb>>),
+  getCategoriesRuntimeFromDb(env),
+  Promise.all(postRelatedGuides.map((s) => getWellnessGuideBySlugRuntimeFromDb(s, env))),
+  getGlossaryTermsForContextRuntimeFromDb(postTags.map((t) => `blog-${t}`), env),
+  (() => {
+    const blogCategoryToListicleCategory: Record<string, string[]> = {
+      'personal-loans': ['personal-loans'],
+      'credit-repair': ['credit-repair'],
+      'debt-relief': ['debt-relief'],
+      'build-credit': ['build-credit'],
+      'credit-monitoring': ['credit-monitoring'],
+      'emergency-cash': ['payday-alternatives', 'emergency-cash'],
+    };
+    const cats = blogCategoryToListicleCategory[postCategory] || [];
+    return cats.length ? getListiclesByCategoriesRuntime(cats, env, 3) : Promise.resolve([]);
+  })(),
+]);
+
+const relatedPosts = relatedPostsRaw
+  .filter((p) => p.slug !== post.slug)
   .slice(0, 3);
 
-const relatedGuides = post.related_guides
-  .map(s => getWellnessGuideBySlug(s))
-  .filter((g): g is NonNullable<typeof g> => g !== undefined);
+const relatedGuides = relatedGuidesRaw.filter((g): g is NonNullable<typeof g> => g != null);
 
-const categories = getCategories();
-const relatedCategories = post.related_categories
-  .map(slug => categories.find(c => c.slug === slug))
+const relatedCategories = postRelatedCategories
+  .map((s) => categories.find((c) => c.slug === s))
   .filter((c): c is NonNullable<typeof c> => c !== undefined);
 
-// Glossary terms based on tags
-const glossaryContexts = post.tags.map(t => `blog-${t}`);
-const glossaryTerms = getGlossaryTermsForContext(glossaryContexts);
+const relatedListicles = (relatedListiclesRaw ?? []).slice(0, 3).map((row) => {
+  const body = (row.body_inline ?? {}) as Record<string, unknown>;
+  return {
+    slug: row.slug,
+    title: row.title || (body.title as string) || row.slug,
+    category: row.category,
+  };
+});
 
-// Cross-link: match blog category to relevant listicles
-const blogCategoryToListicleCategory: Record<string, string[]> = {
-  'personal-loans': ['personal-loans'],
-  'credit-repair': ['credit-repair'],
-  'debt-relief': ['debt-relief'],
-  'build-credit': ['build-credit'],
-  'credit-monitoring': ['credit-monitoring'],
-  'emergency-cash': ['payday-alternatives', 'emergency-cash'],
-};
-const matchingListicleCategories = blogCategoryToListicleCategory[post.category] || [];
-const relatedListicles = getListicles()
-  .filter(l => matchingListicleCategories.includes(l.category))
-  .slice(0, 3);
+const seoTitle = (post.seo_title as string) || post.title;
+const seoDescription = (post.seo_description as string) || '';
+const categoryLabel = (post.category_label as string) || '';
+const readTime = (post.read_time as string) || '';
+const description = (post.description as string) || '';
+
+// Cache headers — DB row update bumps updated_at, but we still want CDN cache.
+Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
+Astro.response.headers.set('x-cdm-rev-source', 'ssr-blog');
 
 // JSON-LD: Article + FAQPage + BreadcrumbList
 const jsonLd = [
@@ -54,7 +88,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": post.title,
-    "description": post.seo_description,
+    "description": seoDescription,
     "image": "https://www.creditdoc.co/og-default.png",
     "url": `https://www.creditdoc.co/blog/${post.slug}/`,
     "datePublished": post.publish_date,
@@ -76,12 +110,12 @@ const jsonLd = [
       "@type": "WebPage",
       "@id": `https://www.creditdoc.co/blog/${post.slug}/`
     },
-    "keywords": post.tags.join(', ')
+    "keywords": postTags.join(', ')
   },
-  ...(post.faq.length > 0 ? [{
+  ...(postFaq.length > 0 ? [{
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": post.faq.map(f => ({
+    "mainEntity": postFaq.map(f => ({
       "@type": "Question",
       "name": f.question,
       "acceptedAnswer": { "@type": "Answer", "text": f.answer }
@@ -100,8 +134,8 @@ const jsonLd = [
 ---
 
 <BaseLayout
-  title={post.seo_title}
-  description={post.seo_description}
+  title={seoTitle}
+  description={seoDescription}
   jsonLd={jsonLd}
 >
   <!-- Breadcrumbs -->
@@ -126,21 +160,21 @@ const jsonLd = [
     <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <div class="max-w-3xl">
         <div class="flex items-center gap-3 mb-4">
-          <span class="inline-block rounded-full bg-primary-light px-3 py-1 text-xs font-semibold text-primary uppercase tracking-wider">{post.category_label}</span>
-          <span class="text-sm text-muted">{post.read_time} read</span>
+          <span class="inline-block rounded-full bg-primary-light px-3 py-1 text-xs font-semibold text-primary uppercase tracking-wider">{categoryLabel}</span>
+          <span class="text-sm text-muted">{readTime} read</span>
         </div>
         <h1 class="text-3xl font-bold text-text sm:text-4xl leading-tight">{post.title}</h1>
-        <p class="mt-4 text-lg text-muted leading-relaxed">{post.description}</p>
+        <p class="mt-4 text-lg text-muted leading-relaxed">{description}</p>
         <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted">
           <span>Written by <a href="/about/" class="text-primary hover:underline font-medium">Harvey Brooks</a></span>
           <span class="text-border">|</span>
           <span>Reviewed by the CreditDoc Editorial Team</span>
           <span class="text-border">|</span>
-          <span>Published {new Date(post.publish_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+          <span>Published {post.publish_date ? new Date(post.publish_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : ''}</span>
         </div>
-        {post.tags.length > 0 && (
+        {postTags.length > 0 && (
           <div class="mt-4 flex flex-wrap gap-2">
-            {post.tags.map(tag => (
+            {postTags.map(tag => (
               <span class="inline-block rounded-full bg-bg-alt px-2.5 py-0.5 text-[11px] font-medium text-muted border border-border">
                 {tag.replace(/-/g, ' ')}
               </span>
@@ -157,7 +191,7 @@ const jsonLd = [
 
       <!-- Main Column -->
       <div class="lg:col-span-2 space-y-8">
-        {post.sections.map((section, i) => (
+        {postSections.map((section, i) => (
           <Fragment>
             <section id={`section-${i}`}>
               <h2 class="text-xl font-bold text-text mb-4">{section.heading}</h2>
@@ -187,18 +221,18 @@ const jsonLd = [
                 })}
               </div>
             </section>
-            {i === 1 && post.sections.length > 3 && (
-              <AffiliateInline category={post.category} />
+            {i === 1 && postSections.length > 3 && (
+              <AffiliateInline category={postCategory} />
             )}
           </Fragment>
         ))}
 
         <!-- FAQ Section -->
-        {post.faq.length > 0 && (
+        {postFaq.length > 0 && (
           <section id="faq" class="border-t border-border pt-8">
             <h2 class="text-xl font-bold text-text mb-6">Frequently Asked Questions</h2>
             <div class="space-y-4">
-              {post.faq.map(item => (
+              {postFaq.map(item => (
                 <details class="glass-card p-5 group">
                   <summary class="flex items-center justify-between cursor-pointer list-none text-base font-semibold text-text">
                     {item.question}
@@ -251,7 +285,7 @@ const jsonLd = [
             Key Takeaways
           </h3>
           <ul class="space-y-2">
-            {post.key_takeaways.map(takeaway => (
+            {postKeyTakeaways.map(takeaway => (
               <li class="flex gap-2 text-sm text-muted leading-relaxed">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary flex-shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
@@ -271,7 +305,7 @@ const jsonLd = [
             In This Article
           </h3>
           <nav class="space-y-1.5">
-            {post.sections.map((section, i) => (
+            {postSections.map((section, i) => (
               <a
                 href={`#section-${i}`}
                 class="block text-sm text-muted hover:text-primary transition-colors py-0.5"
@@ -279,7 +313,7 @@ const jsonLd = [
                 {section.heading}
               </a>
             ))}
-            {post.faq.length > 0 && (
+            {postFaq.length > 0 && (
               <a href="#faq" class="block text-sm text-muted hover:text-primary transition-colors py-0.5">
                 FAQ
               </a>
@@ -290,7 +324,7 @@ const jsonLd = [
         <!-- Related Posts -->
         {relatedPosts.length > 0 && (
           <div class="glass-card p-5">
-            <h3 class="text-base font-semibold text-text mb-3">More on {post.category_label}</h3>
+            <h3 class="text-base font-semibold text-text mb-3">More on {categoryLabel}</h3>
             <div class="space-y-3">
               {relatedPosts.map(related => (
                 <a
@@ -298,7 +332,7 @@ const jsonLd = [
                   class="block rounded-lg border border-border p-3 hover:border-primary/30 hover:bg-primary-light/20 transition-colors"
                 >
                   <p class="text-sm font-medium text-text leading-snug">{related.title}</p>
-                  <p class="mt-1 text-xs text-muted">{related.read_time}</p>
+                  <p class="mt-1 text-xs text-muted">{(related.read_time as string) || ''}</p>
                 </a>
               ))}
             </div>
@@ -316,7 +350,7 @@ const jsonLd = [
                   class="block rounded-lg border border-border p-3 hover:border-primary/30 hover:bg-primary-light/20 transition-colors"
                 >
                   <p class="text-sm font-medium text-text leading-snug">{guide.title}</p>
-                  <p class="mt-1 text-xs text-muted">{guide.read_time}</p>
+                  <p class="mt-1 text-xs text-muted">{((guide as any).read_time as string) || ''}</p>
                 </a>
               ))}
             </div>
@@ -324,7 +358,7 @@ const jsonLd = [
         )}
 
         <!-- Affiliate Sidebar -->
-        <AffiliateSidebar category={post.category} />
+        <AffiliateSidebar category={postCategory} />
 
         <!-- Recommended Services (cross-link to listicles) -->
         {relatedListicles.length > 0 && (

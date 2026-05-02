@@ -36,6 +36,7 @@ import {
   getRelatedLendersByCategoryRuntime,
   getLendersBySlugListRuntime,
   getWellnessGuidesByCategoryRuntime as _getWellnessGuidesByCategoryDb,
+  getWellnessGuideBySlugRuntime as _getWellnessGuideBySlugDb,
   getComparisonsForLenderRuntime as _getComparisonsForLenderDb,
   getBrandBySlugRuntime as _getBrandBySlugDb,
   // Stage A.3 — states / categories / glossary
@@ -48,6 +49,7 @@ import {
   getBlogPostBySlugRuntime as _getBlogPostBySlugDb,
   getBlogPostsByCategoryRuntime as _getBlogPostsByCategoryDb,
   getListicleBySlugRuntime as _getListicleBySlugDb,
+  getListiclesByCategoriesRuntime as _getListiclesByCategoriesDb,
   getAnswerBySlugRuntime as _getAnswerBySlugDb,
   getSpecialsForLenderRuntime as _getSpecialsForLenderDb,
   type RuntimeLender,
@@ -150,6 +152,15 @@ export async function getWellnessGuidesByCategoryRuntime(
   if (!category) return [];
   const rows = await _getWellnessGuidesByCategoryDb(category, env, limit);
   return rows.map(_shapeWellness);
+}
+
+export async function getWellnessGuideBySlugRuntimeFromDb(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<WellnessGuide | null> {
+  if (!slug) return null;
+  const row = await _getWellnessGuideBySlugDb(slug, env);
+  return row ? _shapeWellness(row) : null;
 }
 
 function _shapeComparison(row: RuntimeComparison): Comparison {

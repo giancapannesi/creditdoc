@@ -1,8 +1,40 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { execSync } from 'node:child_process';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
+
+// CDM-REV iter 36 (Task #41): SSR routes (/blog/<slug>, /financial-wellness/<slug>,
+// /brand/<slug>) have no getStaticPaths, so @astrojs/sitemap can't discover them.
+// Pull per-slug URLs from the local SQLite source-of-truth at build time and
+// inject via customPages. Sync execSync is fine — runs once at build, ~50ms.
+const SITE = 'https://www.creditdoc.co';
+function ssrSitemapPages() {
+  try {
+    const sql = `
+      SELECT 'blog/' || slug FROM blog_posts WHERE status='published';
+      SELECT 'financial-wellness/' || slug FROM wellness_guides;
+      SELECT DISTINCT 'brand/' || brand_slug FROM lenders
+        WHERE brand_slug IS NOT NULL AND brand_slug <> ''
+          AND processing_status='ready_for_index';
+    `;
+    const out = execSync(`sqlite3 data/creditdoc.db "${sql.replace(/\n\s+/g, ' ').replace(/"/g, '\\"')}"`, {
+      encoding: 'utf8',
+      cwd: process.cwd(),
+    });
+    return out
+      .split('\n')
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .map((path) => `${SITE}/${path}/`);
+  } catch (err) {
+    console.warn('[sitemap] ssrSitemapPages failed:', err.message);
+    return [];
+  }
+}
+const ssrPages = ssrSitemapPages();
+console.log(`[sitemap] injecting ${ssrPages.length} SSR route URLs`);
 
 // CDM-REV-2026-04-29 Phase 1.2 — Cloudflare adapter for hybrid SSR.
 // In Astro 5, `output: 'static'` is the new hybrid: pages prerender by default,
@@ -30,6 +62,7 @@ export default defineConfig({
     sitemap({
       // Split into multiple sitemaps (~5000 URLs each) for crawl efficiency
       entryLimit: 5000,
+      customPages: ssrPages,
       // Set priority + changefreq per page type
       serialize(item) {
         const url = item.url;
