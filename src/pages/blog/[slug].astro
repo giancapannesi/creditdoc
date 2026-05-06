@@ -112,13 +112,13 @@ const jsonLd = [
     },
     "keywords": postTags.join(', ')
   },
-  ...(postFaq.length > 0 ? [{
+  ...((postFaq.filter(f => f.question?.trim() && f.answer?.trim())).length > 0 ? [{
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": postFaq.map(f => ({
+    "mainEntity": postFaq.filter(f => f.question?.trim() && f.answer?.trim()).map(f => ({
       "@type": "Question",
-      "name": f.question,
-      "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+      "name": f.question.trim(),
+      "acceptedAnswer": { "@type": "Answer", "text": f.answer.trim() }
     }))
   }] : []),
   {

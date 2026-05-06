@@ -108,15 +108,18 @@ const jsonLd = [
   },
 ];
 
-// FAQPage schema (if FAQ data exists)
-const faqSchemaItems = (listicle.faq || []).map((item: { q: string; a: string }) => ({
-  '@type': 'Question',
-  name: item.q,
-  acceptedAnswer: {
-    '@type': 'Answer',
-    text: item.a,
-  },
-}));
+// FAQPage schema (if FAQ data exists) — filter out items missing q or a so Google
+// doesn't see "Missing field 'text' in mainEntity.acceptedAnswer".
+const faqSchemaItems = (listicle.faq || [])
+  .filter((item: { q?: string; a?: string }) => item.q?.trim() && item.a?.trim())
+  .map((item: { q: string; a: string }) => ({
+    '@type': 'Question',
+    name: item.q.trim(),
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a.trim(),
+    },
+  }));
 if (faqSchemaItems.length > 0) {
   jsonLd.push({
     '@context': 'https://schema.org',
