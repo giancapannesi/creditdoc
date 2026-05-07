@@ -91,6 +91,15 @@ const MONEY_LINKS: MoneyLink[] = [
   { phrase: 'bad credit business loan', url: '/best/best-bad-credit-business-loans/', title: 'Best Bad Credit Business Loans' },
   { phrase: 'accounts receivable financing', url: '/best/best-invoice-factoring/', title: 'Best Invoice Factoring' },
   { phrase: 'working capital', url: '/best/best-business-lines-of-credit/', title: 'Best Business Lines of Credit' },
+  // 2026-05-07: bridging loans get their own dedicated /best/ money page. All
+  // bridge/bridging keywords route there, not /categories/mortgages/. Other
+  // hard-money/fix-flip keywords still need their own /best/* listicles built.
+  { phrase: 'bridging loans', url: '/best/best-bridging-loans/', title: 'Best Bridging Loans' },
+  { phrase: 'bridging loan', url: '/best/best-bridging-loans/', title: 'Best Bridging Loans' },
+  { phrase: 'bridge loans', url: '/best/best-bridging-loans/', title: 'Best Bridging Loans' },
+  { phrase: 'bridge loan', url: '/best/best-bridging-loans/', title: 'Best Bridging Loans' },
+  { phrase: 'real estate loans', url: '/categories/mortgages/', title: 'Real Estate Loans' },
+  { phrase: 'real estate loan', url: '/categories/mortgages/', title: 'Real Estate Loans' },
   // 2026-04-21: widen coverage for non-credit-repair verticals — pawn, bankruptcy,
   // mortgages, emergency-cash (title/payday), check-cashing, banking, credit unions,
   // auto finance. Fires inline links on the 117 Tier A Places-enriched profiles and
