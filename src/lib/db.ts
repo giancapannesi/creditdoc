@@ -32,6 +32,7 @@ export interface RuntimeLender {
   seo_tier: string | null;
   /** ISO8601 — used as the cache-busting content-version. */
   updated_at: string;
+  processing_status: string;
 }
 
 export interface RuntimeLenderEnv {
@@ -42,7 +43,7 @@ export interface RuntimeLenderEnv {
 }
 
 const CATALOG_COLUMNS =
-  "slug,name,category,state,brand_slug,has_logo,seo_tier,updated_at";
+  "slug,name,category,state,brand_slug,has_logo,seo_tier,updated_at,processing_status";
 
 /**
  * Read-only lookup of one lender by slug.
@@ -100,7 +101,7 @@ export async function getLenderWithBodyBySlugRuntime(
     `${env.SUPABASE_URL}/rest/v1/lenders` +
     `?slug=eq.${encodeURIComponent(slug)}` +
     `&select=${FULL_COLUMNS}` +
-    `&processing_status=eq.ready_for_index` +
+    `&processing_status=in.(ready_for_index,pending_approval)` +
     `&limit=1`;
   const res = await fetch(url, {
     headers: {

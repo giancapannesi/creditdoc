@@ -449,7 +449,7 @@ const ogImageUrl = lender.logo_url?.trim()
     return base.slice(0, 155);
   })()}
   jsonLd={jsonLd}
-  noindex={isSkeleton}
+  noindex={isSkeleton || primaryRow.processing_status !== 'ready_for_index'}
 >
   <!-- Breadcrumbs -->
   <nav class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8" aria-label="Breadcrumb">
