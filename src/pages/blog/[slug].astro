@@ -14,6 +14,7 @@ import {
   getGlossaryTermsForContextRuntimeFromDb,
 } from '../../utils/data-runtime';
 import { getListiclesByCategoriesRuntime } from '../../lib/db';
+import { createLinker } from '../../utils/inline-linker';
 
 const env = (Astro.locals as any).runtime?.env;
 const { slug } = Astro.params;
@@ -77,6 +78,24 @@ const seoDescription = (post.seo_description as string) || '';
 const categoryLabel = (post.category_label as string) || '';
 const readTime = (post.read_time as string) || '';
 const description = (post.description as string) || '';
+
+// Run inline-linker on blog sections for internal links to money pages, tools, answers
+const linker = createLinker(glossaryTerms, { moneyBudget: 6, glossaryBudget: 6 });
+const linkedSections = postSections.map(section => ({
+  heading: section.heading,
+  content: linker(section.content).join('\n\n'),
+}));
+
+// Fetch related answers for interconnecting block
+let relatedAnswers: { slug: string; title: string }[] = [];
+if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
+  const pillar = postCategory || '';
+  if (pillar) {
+    const headers = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
+    const aRes = await fetch(`${env.SUPABASE_URL}/rest/v1/answers?cluster_pillar=eq.${encodeURIComponent(pillar)}&select=slug,title&limit=6`, { headers, signal: AbortSignal.timeout(3000) }).catch(() => null);
+    if (aRes?.ok) relatedAnswers = await aRes.json();
+  }
+}
 
 // Cache headers — DB row update bumps updated_at, but we still want CDN cache.
 Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
@@ -191,7 +210,7 @@ const jsonLd = [
 
       <!-- Main Column -->
       <div class="lg:col-span-2 space-y-8">
-        {postSections.map((section, i) => (
+        {linkedSections.map((section, i) => (
           <Fragment>
             <section id={`section-${i}`}>
               <h2 class="text-xl font-bold text-text mb-4">{section.heading}</h2>
@@ -266,6 +285,48 @@ const jsonLd = [
         <!-- Glossary Appendix -->
         <GlossaryAppendix terms={glossaryTerms} />
 
+        <!-- Related Questions -->
+        {relatedAnswers.length > 0 && (
+          <section class="border-t border-border pt-8">
+            <div class="glass-card p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold text-text">Related Questions</h2>
+                <a href="/answers/" class="text-sm text-primary hover:underline">View all &rarr;</a>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {relatedAnswers.map(q => (
+                  <a href={`/answers/${q.slug}/`} class="glass-card p-4 block hover:border-primary transition-colors group">
+                    <span class="text-sm font-medium text-text group-hover:text-primary transition-colors">
+                      {q.title.replace(/ \| CreditDoc$/, '')}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        <!-- CreditDoc Tools -->
+        <section class="border-t border-border pt-8">
+          <div class="glass-card p-6">
+            <h2 class="text-lg font-semibold text-text mb-4">Free Tools</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <a href="/tools/credit-score-simulator/" class="glass-card p-4 block hover:border-primary transition-colors group text-center">
+                <p class="text-sm font-medium text-text group-hover:text-primary">Credit Score Simulator</p>
+                <p class="text-xs text-muted mt-1">See how actions affect your score</p>
+              </a>
+              <a href="/tools/debt-payoff-calculator/" class="glass-card p-4 block hover:border-primary transition-colors group text-center">
+                <p class="text-sm font-medium text-text group-hover:text-primary">Debt Payoff Calculator</p>
+                <p class="text-xs text-muted mt-1">Plan your debt-free date</p>
+              </a>
+              <a href="/tools/borrowing-power-quiz/" class="glass-card p-4 block hover:border-primary transition-colors group text-center">
+                <p class="text-sm font-medium text-text group-hover:text-primary">Borrowing Power Quiz</p>
+                <p class="text-xs text-muted mt-1">Find out what you qualify for</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
         <!-- Disclaimer -->
         <div class="rounded-lg bg-bg-alt p-4 border border-border">
           <p class="text-xs text-muted leading-relaxed">
@@ -305,7 +366,7 @@ const jsonLd = [
             In This Article
           </h3>
           <nav class="space-y-1.5">
-            {postSections.map((section, i) => (
+            {linkedSections.map((section, i) => (
               <a
                 href={`#section-${i}`}
                 class="block text-sm text-muted hover:text-primary transition-colors py-0.5"

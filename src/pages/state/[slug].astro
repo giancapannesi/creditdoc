@@ -5,8 +5,9 @@ import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import {
   getCategoriesRuntime,
   getGlossaryTermsForContextRuntime,
+  shapeBodyInlineToLender,
 } from '../../utils/data-runtime';
-import { shapeBodyInlineToLender } from '../../utils/data-runtime';
+import { createLinker } from '../../utils/inline-linker';
 import {
   getStateBySlugRuntime,
   getStateCountRuntime,
@@ -70,6 +71,13 @@ const lenders: Lender[] = lenderRows.map(r => shapeBodyInlineToLender(r as any))
 
 const categories = getCategoriesRuntime();
 const glossaryTerms = getGlossaryTermsForContextRuntime(['state']);
+const linker = createLinker(glossaryTerms, { moneyBudget: 5, glossaryBudget: 5 });
+const linkedConsumerRights = data?.consumer_rights_summary
+  ? linker(data.consumer_rights_summary).join(' ')
+  : '';
+const linkedRegulations = data?.key_regulations
+  ? (data.key_regulations as string[]).map((reg: string) => linker(reg).join(' '))
+  : [];
 
 // "Other States" sidebar — top 13 by lender count, joined to states table for
 // human-readable name + URL slug. Single bounded query; result <2KB.
@@ -161,6 +169,25 @@ const jsonLd = [
 // Format numbers
 const fmt = (n: number) => n?.toLocaleString('en-US') || 'N/A';
 const fmtCurrency = (n: number) => n ? '$' + n.toLocaleString('en-US') : 'N/A';
+
+// Find the dominant category for this state's lenders to match related content
+const topCategory = sortedGroups.length > 0 ? sortedGroups[0][0] : '';
+
+// Fetch related questions and blog posts
+let relatedQuestions: { slug: string; title: string }[] = [];
+let relatedPosts: { slug: string; title: string }[] = [];
+
+if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
+  const headers = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
+  const qFilter = topCategory ? `cluster_pillar=eq.${encodeURIComponent(topCategory)}&` : '';
+  const bFilter = topCategory ? `category=eq.${encodeURIComponent(topCategory)}&` : '';
+  const [qRes, bRes] = await Promise.all([
+    fetch(`${env.SUPABASE_URL}/rest/v1/answers?${qFilter}select=slug,title&limit=6`, { headers, signal: AbortSignal.timeout(3000) }).catch(() => null),
+    fetch(`${env.SUPABASE_URL}/rest/v1/blog_posts?${bFilter}select=slug,title&limit=6`, { headers, signal: AbortSignal.timeout(3000) }).catch(() => null),
+  ]);
+  if (qRes?.ok) relatedQuestions = await qRes.json();
+  if (bRes?.ok) relatedPosts = await bRes.json();
+}
 ---
 
 <BaseLayout title={title} description={description} jsonLd={jsonLd}>
@@ -326,19 +353,29 @@ const fmtCurrency = (n: number) => n ? '$' + n.toLocaleString('en-US') : 'N/A';
                 </div>
               )}
 
-              {data.key_regulations && data.key_regulations.map((reg: string) => (
-                <div class="flex items-start gap-3">
-                  <div class="w-8 h-8 rounded-lg bg-bg-alt flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <svg class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              {linkedRegulations.length > 0
+                ? linkedRegulations.map((html: string) => (
+                  <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-bg-alt flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <p class="text-sm text-muted" set:html={html} />
                   </div>
-                  <p class="text-sm text-muted">{reg}</p>
-                </div>
-              ))}
+                ))
+                : data.key_regulations && data.key_regulations.map((reg: string) => (
+                  <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-bg-alt flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <p class="text-sm text-muted">{reg}</p>
+                  </div>
+                ))
+              }
             </div>
 
             {data.consumer_rights_summary && (
               <div class="mt-4 p-4 rounded-xl bg-primary-light/50 border border-primary/10">
-                <p class="text-sm text-text leading-relaxed">{data.consumer_rights_summary}</p>
+                <p class="text-sm text-text leading-relaxed" set:html={linkedConsumerRights || data.consumer_rights_summary} />
               </div>
             )}
 
@@ -460,6 +497,61 @@ const fmtCurrency = (n: number) => n ? '$' + n.toLocaleString('en-US') : 'N/A';
 
     <!-- Glossary Appendix -->
     <GlossaryAppendix terms={glossaryTerms} />
+
+    <!-- Related Questions -->
+    {relatedQuestions.length > 0 && (
+      <section class="mt-10">
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold text-text">
+              Common Questions About {catNames[topCategory] || topCategory.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}
+            </h2>
+            <a href="/answers/" class="text-sm text-primary hover:underline">View all questions &rarr;</a>
+          </div>
+          <p class="text-sm text-muted mb-4">
+            Get answers to frequently asked questions about financial services in {stateInfo.name}.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {relatedQuestions.map(q => (
+              <a
+                href={`/answers/${q.slug}/`}
+                class="glass-card p-4 block hover:border-primary transition-colors group"
+              >
+                <span class="text-sm font-medium text-text group-hover:text-primary transition-colors">
+                  {q.title.replace(/ \| CreditDoc$/, '')}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Related Blog Posts -->
+    {relatedPosts.length > 0 && (
+      <section class="mt-6">
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold text-text">
+              Guides & Resources
+            </h2>
+            <a href="/blog/" class="text-sm text-primary hover:underline">Browse all articles &rarr;</a>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {relatedPosts.map(post => (
+              <a
+                href={`/blog/${post.slug}/`}
+                class="glass-card p-4 block hover:border-primary transition-colors group"
+              >
+                <span class="text-sm font-medium text-text group-hover:text-primary transition-colors">
+                  {post.title}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
 
     <!-- Disclaimer -->
     <div class="mt-12 bg-bg-alt border border-border rounded-xl p-4">

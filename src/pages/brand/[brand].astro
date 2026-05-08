@@ -3,7 +3,8 @@ export const prerender = false;
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
-import { getBrandInfoRuntime, shapeBodyInlineToLender } from '../../utils/data-runtime';
+import { getBrandInfoRuntime, shapeBodyInlineToLender, getGlossaryTermsForContextRuntime } from '../../utils/data-runtime';
+import { createLinker } from '../../utils/inline-linker';
 import { getLendersByBrandRuntime } from '../../lib/db';
 import type { Lender } from '../../utils/data';
 
@@ -39,6 +40,67 @@ const sortedStates = Array.from(byState.keys()).sort();
 // Compute stats
 const statesCount = sortedStates.length;
 
+// Aggregate lender data for brand overview
+const ratings = lenders.map(l => l.rating).filter(r => r && r > 0);
+const avgRating = ratings.length > 0 ? (ratings.reduce((a, b) => a + b, 0) / ratings.length) : 0;
+
+const allServices = new Set<string>();
+const allPros = new Map<string, number>();
+const allCons = new Map<string, number>();
+let hasFreeConsultation = false;
+let companyHeadquarters = '';
+let companyFounded = 0;
+let bbbRating = '';
+let phoneNumber = '';
+
+for (const l of lenders) {
+  if (l.services) l.services.forEach(s => allServices.add(s));
+  if (l.pros) l.pros.forEach(p => allPros.set(p, (allPros.get(p) || 0) + 1));
+  if (l.cons) l.cons.forEach(c => allCons.set(c, (allCons.get(c) || 0) + 1));
+  if (l.pricing?.free_consultation) hasFreeConsultation = true;
+  if (!companyHeadquarters && l.company_info?.headquarters) companyHeadquarters = l.company_info.headquarters;
+  if (!companyFounded && l.company_info?.founded_year) companyFounded = l.company_info.founded_year;
+  if (!bbbRating && l.company_info?.bbb_rating && l.company_info.bbb_rating !== 'NR') bbbRating = l.company_info.bbb_rating;
+  if (!phoneNumber && l.phone) phoneNumber = l.phone;
+}
+
+const topPros = [...allPros.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5).map(e => e[0]);
+const topCons = [...allCons.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4).map(e => e[0]);
+const servicesList = [...allServices].sort();
+
+// Aggregate rating breakdown
+const breakdownKeys = ['value', 'effectiveness', 'customer_service', 'transparency', 'ease_of_use'] as const;
+const avgBreakdown: Record<string, number> = {};
+for (const key of breakdownKeys) {
+  const vals = lenders.map(l => l.rating_breakdown?.[key]).filter((v): v is number => !!v && v > 0);
+  if (vals.length > 0) avgBreakdown[key] = +(vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1);
+}
+
+// Fetch related questions and blog posts by category
+const category = brandInfo.category;
+let relatedQuestions: { slug: string; title: string }[] = [];
+let relatedPosts: { slug: string; title: string }[] = [];
+
+if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
+  const headers = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
+  const [qRes, bRes] = await Promise.all([
+    fetch(`${env.SUPABASE_URL}/rest/v1/answers?cluster_pillar=eq.${encodeURIComponent(category)}&select=slug,title&limit=6`, { headers, signal: AbortSignal.timeout(3000) }).catch(() => null),
+    fetch(`${env.SUPABASE_URL}/rest/v1/blog_posts?category=eq.${encodeURIComponent(category)}&select=slug,title&limit=6`, { headers, signal: AbortSignal.timeout(3000) }).catch(() => null),
+  ]);
+  if (qRes?.ok) relatedQuestions = await qRes.json();
+  if (bRes?.ok) relatedPosts = await bRes.json();
+}
+
+const glossaryTerms = getGlossaryTermsForContextRuntime(['brand']);
+const linker = createLinker(glossaryTerms, { moneyBudget: 5, glossaryBudget: 5 });
+const linkedSummary = brandInfo.summary_long
+  ? brandInfo.summary_long.split('\n\n').map((para: string) => linker(para).join(' '))
+  : [];
+const linkedFaq = (brandInfo.faq || []).map((item: { q: string; a: string }) => ({
+  q: item.q,
+  a: linker(item.a).join(' '),
+}));
+
 // Build JSON-LD
 const canonicalUrl = `https://www.creditdoc.co/brand/${brandSlug}/`;
 
@@ -49,6 +111,15 @@ const jsonLd = [
     name: brandInfo.display_name,
     url: brandInfo.official_website ?? undefined,
     description: brandInfo.summary_short,
+    ...(avgRating > 0 ? {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: avgRating.toFixed(1),
+        ratingCount: ratings.length,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    } : {}),
   },
   {
     '@context': 'https://schema.org',
@@ -108,7 +179,14 @@ const description = `Browse all ${locationCount} ${brandInfo.display_name} locat
         </p>
 
         <!-- Stats bar -->
-        <div class="mt-5 flex flex-wrap gap-4">
+        <div class="mt-5 flex flex-wrap gap-3">
+          {avgRating > 0 && (
+            <div class="glass-card px-4 py-2 text-sm flex items-center gap-1.5">
+              <span class="text-yellow-400 text-base">&#9733;</span>
+              <span class="font-semibold text-text">{avgRating.toFixed(1)}</span>
+              <span class="text-muted">/ 5</span>
+            </div>
+          )}
           <div class="glass-card px-4 py-2 text-sm">
             <span class="font-semibold text-text">{locationCount}</span>
             <span class="text-muted ml-1">locations</span>
@@ -117,6 +195,12 @@ const description = `Browse all ${locationCount} ${brandInfo.display_name} locat
             <span class="font-semibold text-text">{statesCount}</span>
             <span class="text-muted ml-1">states</span>
           </div>
+          {servicesList.length > 0 && (
+            <div class="glass-card px-4 py-2 text-sm">
+              <span class="font-semibold text-text">{servicesList.length}</span>
+              <span class="text-muted ml-1">services</span>
+            </div>
+          )}
           <div class="glass-card px-4 py-2 text-sm">
             <span class="text-muted">Category:</span>
             <a
@@ -126,7 +210,115 @@ const description = `Browse all ${locationCount} ${brandInfo.display_name} locat
               {brandInfo.category.replace(/-/g, ' ')}
             </a>
           </div>
+          {hasFreeConsultation && (
+            <div class="glass-card px-4 py-2 text-sm text-green-400 font-medium">
+              Free Consultation
+            </div>
+          )}
         </div>
+
+        <!-- Rating breakdown -->
+        {Object.keys(avgBreakdown).length > 0 && (
+          <div class="mt-6 glass-card p-5">
+            <h2 class="text-lg font-semibold text-text mb-3">Rating Breakdown</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+              {Object.entries(avgBreakdown).map(([key, val]) => (
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-primary">{val}</div>
+                  <div class="text-xs text-muted mt-1 capitalize">{key.replace(/_/g, ' ')}</div>
+                  <div class="mt-1.5 h-1.5 rounded-full bg-surface overflow-hidden">
+                    <div class="h-full rounded-full bg-primary" style={`width: ${(val / 5) * 100}%`} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Services offered -->
+        {servicesList.length > 0 && (
+          <div class="mt-6 glass-card p-5">
+            <h2 class="text-lg font-semibold text-text mb-3">Services Offered</h2>
+            <div class="flex flex-wrap gap-2">
+              {servicesList.map(service => (
+                <span class="px-3 py-1.5 text-sm rounded-full bg-surface text-muted border border-border">
+                  {service}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Pros and Cons -->
+        {(topPros.length > 0 || topCons.length > 0) && (
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {topPros.length > 0 && (
+              <div class="glass-card p-5">
+                <h2 class="text-lg font-semibold text-text mb-3 flex items-center gap-2">
+                  <span class="text-green-400">&#10003;</span> Strengths
+                </h2>
+                <ul class="space-y-2">
+                  {topPros.map(pro => (
+                    <li class="text-sm text-muted flex gap-2">
+                      <span class="text-green-400 flex-shrink-0 mt-0.5">+</span>
+                      <span>{pro}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {topCons.length > 0 && (
+              <div class="glass-card p-5">
+                <h2 class="text-lg font-semibold text-text mb-3 flex items-center gap-2">
+                  <span class="text-red-400">&#10007;</span> Things to Consider
+                </h2>
+                <ul class="space-y-2">
+                  {topCons.map(con => (
+                    <li class="text-sm text-muted flex gap-2">
+                      <span class="text-red-400 flex-shrink-0 mt-0.5">&ndash;</span>
+                      <span>{con}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
+
+        <!-- Company info -->
+        {(companyHeadquarters || companyFounded || bbbRating || phoneNumber) && (
+          <div class="mt-6 glass-card p-5">
+            <h2 class="text-lg font-semibold text-text mb-3">Company Details</h2>
+            <dl class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
+              {companyFounded > 0 && (
+                <div>
+                  <dt class="text-muted">Founded</dt>
+                  <dd class="font-semibold text-text mt-0.5">{companyFounded}</dd>
+                </div>
+              )}
+              {companyHeadquarters && (
+                <div class="col-span-2">
+                  <dt class="text-muted">Headquarters</dt>
+                  <dd class="font-semibold text-text mt-0.5">{companyHeadquarters}</dd>
+                </div>
+              )}
+              {bbbRating && (
+                <div>
+                  <dt class="text-muted">BBB Rating</dt>
+                  <dd class="font-semibold text-text mt-0.5">{bbbRating}</dd>
+                </div>
+              )}
+              {phoneNumber && (
+                <div>
+                  <dt class="text-muted">Phone</dt>
+                  <dd class="font-semibold text-text mt-0.5">
+                    <a href={`tel:${phoneNumber}`} class="text-primary hover:underline">{phoneNumber}</a>
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </div>
+        )}
 
         <!-- State-grouped locations -->
         <div class="mt-8 space-y-4">
@@ -161,9 +353,10 @@ const description = `Browse all ${locationCount} ${brandInfo.display_name} locat
         <div class="glass-card p-5 space-y-4">
           <h2 class="text-base font-semibold text-text">About {brandInfo.display_name}</h2>
           <div class="text-sm text-muted leading-relaxed prose prose-sm max-w-none">
-            {brandInfo.summary_long.split('\n\n').map((para: string) => (
-              <p>{para}</p>
-            ))}
+            {linkedSummary.length > 0
+              ? linkedSummary.map((html: string) => <p set:html={html} />)
+              : brandInfo.summary_long.split('\n\n').map((para: string) => <p>{para}</p>)
+            }
           </div>
           {brandInfo.official_website && (
             <a
@@ -198,10 +391,10 @@ const description = `Browse all ${locationCount} ${brandInfo.display_name} locat
           <div class="glass-card p-5 mt-4 space-y-3">
             <h2 class="text-base font-semibold text-text">Common Questions</h2>
             <dl class="space-y-4">
-              {brandInfo.faq.map((item: { q: string; a: string }) => (
+              {linkedFaq.map((item: { q: string; a: string }) => (
                 <div>
                   <dt class="text-sm font-medium text-text">{item.q}</dt>
-                  <dd class="mt-1 text-sm text-muted">{item.a}</dd>
+                  <dd class="mt-1 text-sm text-muted" set:html={item.a} />
                 </div>
               ))}
             </dl>
@@ -210,4 +403,59 @@ const description = `Browse all ${locationCount} ${brandInfo.display_name} locat
       </aside>
     </div>
   </section>
+
+  <!-- Related Questions -->
+  {relatedQuestions.length > 0 && (
+    <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+      <div class="glass-card p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold text-text">
+            Questions About {brandInfo.category.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}
+          </h2>
+          <a href="/answers/" class="text-sm text-primary hover:underline">View all questions &rarr;</a>
+        </div>
+        <p class="text-sm text-muted mb-4">
+          Get answers to common questions about {brandInfo.display_name} and {brandInfo.category.replace(/-/g, ' ')} in general.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {relatedQuestions.map(q => (
+            <a
+              href={`/answers/${q.slug}/`}
+              class="glass-card p-4 block hover:border-primary transition-colors group"
+            >
+              <span class="text-sm font-medium text-text group-hover:text-primary transition-colors">
+                {q.title.replace(/ \| CreditDoc$/, '')}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Related Blog Posts -->
+  {relatedPosts.length > 0 && (
+    <section class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+      <div class="glass-card p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold text-text">
+            Learn More About {brandInfo.category.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}
+          </h2>
+          <a href="/blog/" class="text-sm text-primary hover:underline">Browse all articles &rarr;</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {relatedPosts.map(post => (
+            <a
+              href={`/blog/${post.slug}/`}
+              class="glass-card p-4 block hover:border-primary transition-colors group"
+            >
+              <span class="text-sm font-medium text-text group-hover:text-primary transition-colors">
+                {post.title}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 </BaseLayout>

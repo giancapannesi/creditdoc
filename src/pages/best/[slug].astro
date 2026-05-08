@@ -3,7 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import RatingStars from '../../components/RatingStars.astro';
 import { formatPrice, getBbbClass } from '../../utils/data';
 import type { Lender } from '../../utils/data';
-import { shapeBodyInlineToLender } from '../../utils/data-runtime';
+import { shapeBodyInlineToLender, getGlossaryTermsForContextRuntime } from '../../utils/data-runtime';
+import { createLinker } from '../../utils/inline-linker';
 import {
   getListicleBySlugRuntime,
   getLendersBySlugListRuntime,
@@ -56,6 +57,14 @@ const rankedLenders: Lender[] = listicle.lenders
   .map((s) => slugRowMap.get(s))
   .filter((r): r is NonNullable<typeof r> => Boolean(r))
   .map(shapeBodyInlineToLender);
+
+const glossaryTerms = getGlossaryTermsForContextRuntime(['best', 'listicle']);
+const linker = createLinker(glossaryTerms, { moneyBudget: 5, glossaryBudget: 5 });
+const linkedIntro = listicle.intro ? linker(listicle.intro).join('\n\n') : '';
+const linkedFaq = (listicle.faq || []).map((item: { q: string; a: string }) => ({
+  q: item.q,
+  a: linker(item.a).join(' '),
+}));
 
 // Edge cache headers — matches /answers/[slug] flip pattern.
 const verSec = Math.floor(Date.parse(listicleRow.updated_at) / 1000);
@@ -186,7 +195,7 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
   <!-- Intro -->
   <section class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
     <div class="glass-card p-6">
-      <p class="text-sm text-muted leading-relaxed">{listicle.intro}</p>
+      <p class="text-sm text-muted leading-relaxed" set:html={linkedIntro || listicle.intro} />
     </div>
   </section>
 
@@ -307,7 +316,7 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
     <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8" id="faq">
       <h2 class="text-2xl font-bold text-text mb-6">Frequently Asked Questions</h2>
       <div class="space-y-4">
-        {listicle.faq.map((item: { q: string; a: string }) => (
+        {linkedFaq.map((item: { q: string; a: string }) => (
           <details class="glass-card p-5 group" open>
             <summary class="flex items-center justify-between cursor-pointer list-none">
               <h3 class="text-base font-semibold text-text pr-4">{item.q}</h3>
@@ -315,7 +324,7 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
                 <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/>
               </svg>
             </summary>
-            <p class="mt-3 text-sm text-muted leading-relaxed">{item.a}</p>
+            <p class="mt-3 text-sm text-muted leading-relaxed" set:html={item.a} />
           </details>
         ))}
       </div>
