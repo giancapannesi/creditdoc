@@ -8,9 +8,14 @@ and move users toward money: money pages, drip, blog, education.
 
 Push tiers (in order):
     1. Money pages         /best/<slug>/              (listicles)
-    2. Drip                /answers/<slug>/           (cluster_answers, published)
-    3. Blog                /blog/<slug>/              (blog_posts)
-    4. Education           /financial-wellness/<slug>/ (wellness_guides)
+    2. Blog                /blog/<slug>/              (blog_posts)
+    3. Brand hubs          /brand/<slug>/             (brand JSON exists)
+    4. Compare pages       /compare/<slug>/           (comparisons)
+    5. State pages         /state/<slug>/             (already tracked in GSC)
+
+EXCLUDED (Jammi submits these manually via GSC Request Indexing, 10/day):
+    - Drip                /answers/<slug>/
+    - Education           /financial-wellness/<slug>/
 
 Quota: 200/day Google Indexing API, unlimited IndexNow (Bing/AI search).
 
@@ -27,6 +32,7 @@ import os
 import sys
 import time
 from datetime import datetime, timezone
+from pathlib import Path
 
 import requests
 
@@ -35,7 +41,7 @@ from creditdoc_db import CreditDocDB
 
 # Import proven functions from gsc_indexing.py
 sys.path.insert(0, "/srv/BusinessOps/tools")
-from gsc_indexing import get_indexing_api_token, push_indexing_api
+from gsc_indexing import get_indexing_api_token, push_indexing_api  # push_indexing_api now stamps shared cooldown
 
 TELEGRAM_TOKEN = "8552358080:AAFC8FjKxQdj_NJyqwMbgUZrxKzUrn83tGY"
 TELEGRAM_CHAT_ID = "1351661181"
@@ -43,50 +49,158 @@ TELEGRAM_CHAT_ID = "1351661181"
 INDEXNOW_KEY = "f2018aa106044007bf54b7cde9067a1e"  # verified: /f2018...txt live
 INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow"
 
-SITE = "https://creditdoc.co"
+SITE = "https://www.creditdoc.co"  # canonical (matches indexation_status + GSC property)
+SITE_INDEXING_API = "https://creditdoc.co"  # GSC property is non-www; Indexing API rejects www
 GOOGLE_DAILY_QUOTA = 200
+BRANDS_DIR = Path(__file__).resolve().parents[1] / "src" / "content" / "brands"
+
+# Re-push window: re-submit a confirmed-indexed URL only if it hasn't been
+# pushed to the Indexing API in the last RESUBMIT_DAYS, AND its content
+# probably changed. For now: never re-push PASS rows (Google has them).
+RESUBMIT_DAYS = 30
 
 
-def fetch_priority_urls(db, limit):
-    """Publishable URLs only: money pages, drip, blog, education.
+def fetch_priority_urls(db, limit, force_all=False):
+    """Publishable URLs only: money pages, drip, education, blog, brand,
+    compare, and state pages.
     /review/* lender profiles are NEVER pushed (founder rule 2026-04-24).
+
+    Quota-conserving filter (2026-05-03, hardened):
+      - PUSH ONLY urls with indexation_status.verdict='NEUTRAL' (verified not-indexed)
+      - SKIP 'PASS' (Google has them) — quota waste
+      - SKIP unchecked / unknown (no row, NULL verdict) — pushing blind is idiotic.
+        These get inspected by creditdoc_daily_gsc_queue (06:15 UTC) and become
+        eligible the next day once their verdict comes back NEUTRAL.
+      - SKIP urls submitted via Indexing API in last RESUBMIT_DAYS (cooldown) —
+        Google has the request; nagging it again wastes quota.
+    Pass force_all=True to bypass the filter (catastrophic re-index only).
     """
     urls = []
 
-    # 1. Money pages — highest commercial intent
-    for r in db.conn.execute(
-        "SELECT slug FROM listicles ORDER BY slug"
-    ).fetchall():
-        urls.append({"url": f"{SITE}/best/{r['slug']}/",
-                     "slug": r["slug"], "tier": "money"})
+    brand_slugs = [
+        p.stem for p in sorted(BRANDS_DIR.glob("*.json"))
+        if p.stem and "/" not in p.stem
+    ]
+    db.conn.execute("DROP TABLE IF EXISTS temp_publishable_brand_slugs")
+    db.conn.execute("CREATE TEMP TABLE temp_publishable_brand_slugs (slug TEXT PRIMARY KEY)")
+    db.conn.executemany(
+        "INSERT OR IGNORE INTO temp_publishable_brand_slugs (slug) VALUES (?)",
+        [(s,) for s in brand_slugs],
+    )
 
-    # 2. Drip (/answers/) — published cluster answers only
-    for r in db.conn.execute(
-        "SELECT slug FROM cluster_answers "
-        "WHERE status='published' AND published_at IS NOT NULL "
-        "ORDER BY published_at DESC"
-    ).fetchall():
-        urls.append({"url": f"{SITE}/answers/{r['slug']}/",
-                     "slug": r["slug"], "tier": "drip"})
+    # Answers + wellness are excluded: Jammi submits those manually via GSC
+    # Request Indexing (10/day). Automated API handles everything else.
+    publishable_cte = f"""
+    publishable AS (
+      SELECT 'money' AS tier, 'best/' || slug AS path, slug AS sort_key
+        FROM listicles
+      UNION ALL
+      SELECT 'blog' AS tier, 'blog/' || slug AS path, COALESCE(updated_at, slug) AS sort_key
+        FROM blog_posts
+        WHERE status='published'
+      UNION ALL
+      SELECT 'brand' AS tier, 'brand/' || b.slug AS path, b.slug AS sort_key
+        FROM temp_publishable_brand_slugs b
+        JOIN (
+          SELECT DISTINCT brand_slug
+          FROM lenders
+          WHERE brand_slug IS NOT NULL
+            AND brand_slug <> ''
+            AND processing_status='ready_for_index'
+        ) l ON l.brand_slug = b.slug
+      UNION ALL
+      SELECT 'compare' AS tier, 'compare/' || slug AS path, COALESCE(updated_at, slug) AS sort_key
+        FROM comparisons
+      UNION ALL
+      SELECT DISTINCT 'state' AS tier,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS sort_key
+        FROM indexation_status
+        WHERE page_url LIKE '{SITE}/state/%'
+    )"""
 
-    # 3. Blog posts
-    for r in db.conn.execute(
-        "SELECT slug FROM blog_posts ORDER BY updated_at DESC"
-    ).fetchall():
-        urls.append({"url": f"{SITE}/blog/{r['slug']}/",
-                     "slug": r["slug"], "tier": "blog"})
+    if force_all:
+        # Emergency re-index: bypass all filters, push everything.
+        status_cte = ""
+        join_clause = "LEFT JOIN indexation_status i"
+        where_filter = ""
+    else:
+        # Normal mode: INNER JOIN forces an indexation_status row to exist,
+        # verdict must be NEUTRAL, and cooldown must be expired.
+        status_cte = """,
+    eligible_status AS (
+      SELECT
+        page_url,
+        MIN(last_request_indexing_submitted) AS last_request_indexing_submitted
+      FROM indexation_status
+      WHERE verdict = 'NEUTRAL'
+        AND COALESCE(coverage_state, '') != 'Alternate page with proper canonical tag'
+      GROUP BY page_url
+    )"""
+        join_clause = "JOIN eligible_status i"
+        where_filter = (
+            f"WHERE (i.last_request_indexing_submitted IS NULL "
+            f"     OR i.last_request_indexing_submitted < datetime('now', '-{RESUBMIT_DAYS} days'))"
+        )
 
-    # 4. Wellness guides (education)
-    for r in db.conn.execute(
-        "SELECT slug FROM wellness_guides ORDER BY updated_at DESC"
-    ).fetchall():
-        urls.append({"url": f"{SITE}/financial-wellness/{r['slug']}/",
-                     "slug": r["slug"], "tier": "wellness"})
+    sql = f"""
+    WITH {publishable_cte}
+    {status_cte}
+    SELECT p.tier, p.path,
+           CASE WHEN i.page_url IS NULL THEN 'UNCHECKED' ELSE 'NEUTRAL' END AS verdict,
+           i.last_request_indexing_submitted AS last_pushed
+    FROM publishable p
+    {join_clause} ON i.page_url = '{SITE}/' || p.path || '/'
+    {where_filter}
+    ORDER BY
+      CASE p.tier
+        WHEN 'money' THEN 1
+        WHEN 'blog' THEN 2
+        WHEN 'brand' THEN 3
+        WHEN 'compare' THEN 4
+        WHEN 'state' THEN 5
+        ELSE 99
+      END,
+      p.sort_key DESC
+    """
+    for r in db.conn.execute(sql).fetchall():
+        urls.append({
+            "url": f"{SITE}/{r['path']}/",
+            "slug": r["path"].split("/")[-1],
+            "tier": r["tier"],
+            "verdict": r["verdict"],
+        })
 
-    print(f"  Money:    {sum(1 for u in urls if u['tier']=='money')}")
-    print(f"  Drip:     {sum(1 for u in urls if u['tier']=='drip')}")
-    print(f"  Blog:     {sum(1 for u in urls if u['tier']=='blog')}")
-    print(f"  Wellness: {sum(1 for u in urls if u['tier']=='wellness')}")
+    skipped = {"indexed": 0, "unchecked": 0, "cooldown": 0}
+    if not force_all:
+        # Show why URLs were filtered out so quota savings are visible.
+        breakdown = db.conn.execute(f"""
+            WITH {publishable_cte}
+            SELECT
+              SUM(CASE WHEN i.verdict='PASS' THEN 1 ELSE 0 END) AS indexed,
+              SUM(CASE WHEN i.verdict IS NULL OR i.verdict NOT IN ('NEUTRAL','PASS') THEN 1 ELSE 0 END) AS unchecked,
+              SUM(CASE WHEN i.verdict='NEUTRAL'
+                       AND i.last_request_indexing_submitted IS NOT NULL
+                       AND i.last_request_indexing_submitted >= datetime('now', '-{RESUBMIT_DAYS} days')
+                       THEN 1 ELSE 0 END) AS cooldown
+            FROM publishable p
+            LEFT JOIN indexation_status i ON i.page_url = '{SITE}/' || p.path || '/'
+        """).fetchone()
+        skipped["indexed"] = breakdown[0] or 0
+        skipped["unchecked"] = breakdown[1] or 0
+        skipped["cooldown"] = breakdown[2] or 0
+
+    by_tier = {t: sum(1 for u in urls if u["tier"] == t) for t in ("money", "blog", "brand", "compare", "state")}
+    print(f"  Money:    {by_tier['money']}")
+    print(f"  Blog:     {by_tier['blog']}")
+    print(f"  Brand:    {by_tier['brand']}")
+    print(f"  Compare:  {by_tier['compare']}")
+    print(f"  State:    {by_tier['state']}")
+    print(f"  (Answers + wellness excluded — Jammi submits manually)")
+    if not force_all:
+        print(f"  (Skipped {skipped['indexed']} already indexed (PASS), "
+              f"{skipped['unchecked']} unverified, "
+              f"{skipped['cooldown']} in {RESUBMIT_DAYS}-day cooldown)")
     return urls[:limit]
 
 
@@ -110,6 +224,24 @@ def push_indexnow(url_list):
     except Exception as e:
         print(f"  IndexNow exception: {e}")
         return 0, len(url_list)
+
+
+def stamp_submitted(db, urls):
+    """Mark URLs as just-pushed-to-Indexing-API in indexation_status.
+    Without this, the daily email queue will re-suggest the same URLs tomorrow,
+    and the cooldown filter on the priority indexer never engages."""
+    if not urls:
+        return 0
+    placeholders = ",".join("?" * len(urls))
+    db.conn.execute(
+        f"""UPDATE indexation_status
+            SET last_request_indexing_submitted = datetime('now'),
+                request_indexing_count = COALESCE(request_indexing_count, 0) + 1
+            WHERE page_url IN ({placeholders})""",
+        urls,
+    )
+    db.conn.commit()
+    return db.conn.total_changes
 
 
 def send_telegram(message):
@@ -168,9 +300,17 @@ def main():
         print(f"\n[2/2] Google Indexing API push (quota: {GOOGLE_DAILY_QUOTA}/day)...")
         sa_token = get_indexing_api_token()
         if sa_token:
-            urls_only = [u["url"] for u in url_list[:GOOGLE_DAILY_QUOTA]]
+            urls_only = [u["url"].replace(SITE, SITE_INDEXING_API) for u in url_list[:GOOGLE_DAILY_QUOTA]]
             g_ok, g_fail = push_indexing_api(sa_token, urls_only)
             print(f"  Google: {g_ok} OK, {g_fail} failed")
+            # Stamp the URLs that were actually accepted (push_indexing_api
+            # returns ok-count and stops early on 429 — first g_ok URLs are the
+            # ones Google has now seen). Without this stamp, tomorrow's daily
+            # email queue and the cooldown filter both miss the submission.
+            if g_ok:
+                www_urls = [u.replace(SITE_INDEXING_API, SITE) for u in urls_only[:g_ok]]
+                n = stamp_submitted(db, www_urls)
+                print(f"  DB stamped: {n} rows (cooldown applies for {RESUBMIT_DAYS}d)")
         else:
             print("  Skipped: no service account token")
 
@@ -178,13 +318,14 @@ def main():
     money_count = sum(1 for u in url_list if u['tier'] == 'money')
     drip_count = sum(1 for u in url_list if u['tier'] == 'drip')
     blog_count = sum(1 for u in url_list if u['tier'] == 'blog')
-    well_count = sum(1 for u in url_list if u['tier'] == 'wellness')
+    brand_count = sum(1 for u in url_list if u['tier'] == 'brand')
+    compare_count = sum(1 for u in url_list if u['tier'] == 'compare')
     msg = (
         f"<b>📊 CreditDoc Priority Indexing</b>\n"
         f"{ts}\n\n"
         f"<b>Queue:</b> {len(url_list)} URLs "
-        f"(money: {money_count}, drip: {drip_count}, "
-        f"blog: {blog_count}, wellness: {well_count})\n\n"
+        f"(money: {money_count}, blog: {blog_count}, "
+        f"brand: {brand_count}, compare: {compare_count})\n\n"
         f"<b>IndexNow:</b> {in_ok} OK / {in_fail} fail\n"
     )
     if not args.indexnow_only:
