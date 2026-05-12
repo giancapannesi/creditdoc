@@ -4,6 +4,843 @@
 
 ---
 
+## 10:00 CAT, 2026-05-12 — PIPELINE REPAIR SESSION
+
+**What just happened — 5 fixes shipped:**
+
+1. **Google Indexing API 403 fixed.** Was sending `www.creditdoc.co` but GSC property is `creditdoc.co`. Now sends non-www. Verified: 152 OK. Also excluded answers/wellness (Jammi submits manually) and added brand/compare/state tiers. Commit `8c03ccf997`.
+
+2. **Blog generator crash fixed.** Old queue items had `title` not `topic` key. 4 days lost (May 9-12). Added fallback. Tested: 3 posts generated.
+
+3. **Wellness generator queue refilled.** 66 topics exhausted May 3. 9 days lost. Added Wave 3 (40 topics). Tested: 2 guides generated.
+
+4. **Supabase sync for ALL content tables.** `add_blog_post`, `add_wellness_guide`, `add_comparison`, `upsert_cluster_answer` now auto-sync to Supabase. Previously only lenders synced — all new content was invisible to the live Worker. Commit `2e03b2b0dd`. Backfilled 2 wellness + 5 blog posts.
+
+5. **Daily smoke test created.** `tools/creditdoc_smoke_test.py` at 05:00 UTC. 9 checks covering DB, queues, imports, site health, Supabase sync. Emails Harvey on failure. All 9 passing.
+
+**Worker version:** `b6995349` (deployed this session). Deploy command:
+```bash
+cd /srv/BusinessOps/creditdoc && source /srv/BusinessOps/.env && unset CLOUDFLARE_API_TOKEN && export CLOUDFLARE_API_KEY="$CLOUDFLARE_GLOBAL_API_KEY" && export CLOUDFLARE_EMAIL="contact@creditdoc.co" && npx wrangler deploy
+```
+
+**Content pipeline status (all verified working):**
+| Pipeline | Cron | Status | Queue |
+|----------|------|--------|-------|
+| Blog | 06:30 UTC, 2/day | FIXED | 49 pending |
+| Wellness | 15:00 UTC, 2/day | FIXED | 34 remaining |
+| Answers | 13:00 UTC Mon-Fri | Working | — |
+| Comparisons | 15:30 UTC, 5/day | Working | — |
+| Indexing | 08:00 UTC | FIXED | 152 pushed today |
+| Smoke test | 05:00 UTC | NEW | 9/9 pass |
+
+---
+
+## 02:00 CAT, 2026-05-12 — CONSUMER COMPLAINTS PAGE LIVE
+
+**What just happened:**
+- Built and deployed `/research/consumer-complaints/` — SSR page explaining CFPB complaint data
+- Live at: https://www.creditdoc.co/research/consumer-complaints/
+- Sections: Why CreditDoc Shows This, How CFPB Complaints Work, What Numbers Mean, How CreditDoc Integrates, Top-25 Leaderboard (live from Supabase), What Data Doesn't Tell You, How to File a Complaint
+- Leaderboard deduplicates location variants (Capital One Bank / Capital One / Capital One NA → one entry)
+- Rich internal links to /categories/, /review/wells-fargo-bank/, /answers/, /best/
+- JSON-LD Article + BreadcrumbList schema
+- Research index page updated with new card at top (May 2026)
+- Worker version: `ad7ee474-9856-47f3-b987-e739c3d06099`
+
+---
+
+## 07:35 CAT, 2026-05-11 — CANARY PAGE LIVE — AWAITING JAMMI REVIEW
+
+**What just happened:**
+- Alias sprint: +28 entities (OneMain 26 locations + SoFi 2). Total: 7,193
+- Supabase sync: 7,152 stats + 60 enforcement + 6,299 SBA rankings pushed
+- Code deployed to Worker (version `a6566066`, flag ON via secret `7251c215`)
+- **CANARY LIVE:** https://www.creditdoc.co/review/wells-fargo-bank/
+  - Consumer Complaint Record: 21,333 complaints, 20.8% relief, Stable trend
+  - CFPB Enforcement: 5 actions ($3.7B + $1B + $100M + $3.6M + $9)
+  - SBA Lending Record: national + state rankings
+  - 4,203 FDIC branches
+- **GATE: Jammi must review canary before batch rollout**
+
+**Data pipeline — ALL PHASES COMPLETE:**
+
+| Phase | Data | Records | Status |
+|-------|------|---------|--------|
+| 0 | Schema + DB | 11 tables | ✅ COMPLETE |
+| 1 | CFPB Enforcement | 385 actions | ✅ COMPLETE |
+| 2 | CFPB Complaints | 9,804,908 | ✅ COMPLETE (stats computed) |
+| 3 | FDIC Locations | 78,347 + 27,832 inst | ✅ COMPLETE |
+| 4 | SBA Loans | 373,980 + rankings | ✅ COMPLETE |
+| — | Entity Resolution | 7,165 matches | ✅ COMPLETE |
+
+**Phase 5 — Deploy Plan v2 (AWAITING JAMMI APPROVAL):**
+
+| Stage | What | Status |
+|-------|------|--------|
+| 0 | Alias sprint — OneMain (26 locations) + SoFi (2) added | ✅ DONE |
+| 1 | Sync regulator.db → Supabase (7,152 + 60 + 6,299 rows) | ✅ DONE |
+| 2 | Deploy code to Worker with flag OFF → verified zero change | ✅ DONE |
+| 3 | Enable flag → Wells Fargo canary LIVE | ✅ DONE |
+| GATE | **Jammi approved canary** | ✅ APPROVED |
+| 4 | Batched spot-checks: all 4 batches verified (13 pages + 3 negative) | ✅ DONE |
+| 5 | Daily sync cron (05:30 UTC) | ✅ DONE |
+
+**Two-key safety:** Code deploy + `ENABLE_REGULATOR_BLOCKS` env var both required. Flag off = component vanishes instantly. `wrangler rollback` = 30s code undo. `TRUNCATE` = 30s data undo. Nothing touches `lenders` table or creditdoc.db.
+
+**Canary page:** `wells-fargo-bank` — has all 3 data types (21,333 complaints/12mo, 5 enforcement actions, 193 SBA state rankings). 100% match confidence.
+
+**Coverage when fully rolled out:**
+- 432 lender pages get complaint data
+- 33 lender pages show enforcement actions
+- 1,667 lender pages show SBA rankings
+- 4,207 lender pages show FDIC branch counts
+- Known gaps: Chase (jpmorgan chase), Discover (discover bank), OneMain, SoFi, Navient — fixed in Stage 0
+
+**Check:** `sqlite3 creditdoc/data/regulator.db "SELECT COUNT(*), MIN(date_received), MAX(date_received) FROM cfpb_complaints"`
+
+---
+
+## 17:30 CAT, 2026-05-08 — REGULATORY DATA LAYER PROJECT PLAN COMPLETE
+
+**Detailed project plan written and approved for planning:**
+- Local: `CreditDoc Project Improvement/2026-05-08_REGULATORY_DATA_LAYER_PROJECT_PLAN.md`
+- Google Drive: https://drive.google.com/drive/folders/13Zm9_MD1S4MduPGBTugT3pSyew3cFtyK (PDF + MD)
+
+**Next action after Phase 2 completes:** compute company stats, entity matching, then Phase 5 render integration.
+
+---
+
+## 15:00 CAT, 2026-05-08 — SIMILAR_LENDERS BACKFILL + BATCH 7 PARTIAL + THREE PROJECTS QUEUED
+
+**similar_lenders backfill COMPLETE:** 13,113 pages written (12,863 standard + 250 founder override). Logic: same category + same state, sorted by rating, top 5 peers. Falls back to national if < 3 state peers. Every /review/ page now shows "Similar Companies" with relevant local peers instead of generic category fallback. Massive internal linking win.
+- Verify: `sqlite3 creditdoc/data/creditdoc.db "SELECT COUNT(*) FROM lenders WHERE updated_by='data_quality_similar_lenders'"`
+- Live confirmed: ninnescah-valley-bank (KS banking), just-pawn (IL pawn shops), the-offices-of-britri (TX credit repair), path-loans (NY mortgages)
+
+**Batch 7 partial:**
+- 275 CU phones written from NCUA data (`data_quality_batch7_phone`)
+- 11 bank websites written from FDIC data (`data_quality_batch7_website`)
+- Logo fetcher launched on 2,326 lenders via `scraper/creditdoc_logo_fetcher.py` (background, check `logs/logo_fetcher_batch7.log`)
+- Remaining blocked: 4,238 bank phones (FDIC doesn't publish), 432 websites, logos pending fetcher completion
+
+**Three major projects formally queued (all NOT STARTED, gated on Jammi GO):**
+
+| # | Project | Tracking File | Depends On |
+|---|---------|--------------|------------|
+| 1 | Regulatory Data Layer (CFPB/SBA/FDIC → regulator.db) | `creditdoc/CREDITDOC_REGULATORY_LAYER.md` | Jammi GO |
+| 2 | City Hub Pages (500+ cities at /cities/[state]/[city]/) | `creditdoc/CREDITDOC_CITY_HUBS.md` | Regulatory layer live |
+| 3 | Quiz Pages & Lead Funnels (10 quizzes at /qualify/) | `creditdoc/CREDITDOC_QUIZ_FUNNELS.md` | 30+ ranked phrases |
+
+Full plans in `CreditDoc Project Improvement/`: regulatory (2026-04-21_REGULATORY_DATA_LAYER_PLAN.md), cities (2026-04-21_CITY_HUB_TEMPLATE_SPEC.md), quizzes (Master SEO Plan Phase 2.2).
+
+---
+
+## 09:30 CAT, 2026-05-08 — DATA QUALITY PROJECT (7-BATCH PLAN) [SEO / data quality] — BATCHES 1-6 COMPLETE
+
+**8,823 pages fixed. Zero failures. All live-verified on www.creditdoc.co.**
+
+**Full plan:** `CreditDoc Project Improvement/2026-05-08_DATA_QUALITY_PROJECT_PLAN.md`
+
+| Batch | What | Pages | Status | DB `updated_by` |
+|-------|------|-------|--------|-----------------|
+| 1 | Truncated titles (name chopped mid-word in Google) | 826 | ✅ 825 done, 1 protected | `data_quality_batch1` |
+| 2 | Titles missing city/state (weak local signal) | 1,286 | ✅ 1,283 done, 3 protected | `data_quality_batch2` |
+| 3 | Empty "Advantages" section on page (missing pros) | 164 | ✅ 164 done | `data_quality_batch3` |
+| 4 | Empty best_for section | 157 | ✅ 157 done | `data_quality_batch4` |
+| 5 | Missing cons (2 pages only) | 2 | ✅ 2 done | `data_quality_batch5` |
+| 6 | Meta description quality upgrade (fallback exists but generic) | 6,392 | ✅ 6,392 done | `data_quality_batch6` |
+| 7 | Phone/logo/website enrichment (needs external data) | 6,795 | ⬜ DEFERRED | — |
+
+**Founder-protected skips (4 total — correct behavior):**
+- Batch 1: `cents-savvy-tax-resolution-and-credit-repair`
+- Batch 2: `celtic-bank`, `rapid-finance`, `smartbiz-bank`
+
+**Two SSR code fixes deployed (without these, DB writes wouldn't render):**
+1. `src/utils/data-runtime.ts:506-508` — mapped `body_inline.meta_title` → `lender.seo_title` (DB stores `meta_title`, SSR template reads `seo_title`)
+2. `src/pages/review/[slug].astro:442` — added `if (lender.meta_description) return` before `description_short` fallback
+3. Cloudflare Worker deploys: `4bbf1d59` (title fix) → `2c8bf47c` (meta desc fix)
+
+**How to verify this work was done (for any future session):**
+```bash
+# Count pages with meta_title written by this project
+sqlite3 creditdoc/data/creditdoc.db "SELECT updated_by, COUNT(*) FROM lenders WHERE updated_by LIKE 'data_quality_batch%' GROUP BY updated_by"
+# Confirm zero missing pros/cons/best_for
+python3 -c "import sqlite3,json; conn=sqlite3.connect('creditdoc/data/creditdoc.db'); print(sum(1 for s,d in conn.execute(\"SELECT slug,data FROM lenders WHERE processing_status='ready_for_index'\") if not json.loads(d).get('pros')))"
+# Spot-check live title
+curl -s 'https://www.creditdoc.co/review/abbeville-building-loan-a-state-chartered-savings-bank/' | grep -oP '<title>[^<]+</title>'
+```
+
+**DO NOT REDO THIS WORK.** All 8,823 writes are in the DB with `updated_by` tags. The SSR code fixes are deployed. If a future session proposes "we need to fill missing titles/descriptions/pros" — run the verify commands above first.
+
+---
+
+## 13:30 CAT, 2026-05-07 — INLINE LINKER DEDUPE-BY-URL FIX [SEO / on-page]
+
+**Problem.** Jammi: "I am seeing no links in the description to keywords and money pages... it needs to be smart linking and not just dumb ass shit all linking to the same thing."
+
+**Investigation (RULE 1 — paste output, then diagnose).** Sampled 30 random review pages. 18/30 already had inline money-page links rendered at SSR via `src/utils/inline-linker.ts` `linkifyDescription`. The 12 with zero links had bodies that genuinely don't mention any of the 100+ matched phrases. The "any old shit" pattern: `lily-advance` rendered THREE links — "merchant cash advance" + "MCA" + "cash advance" — with two of them pointing to the same `/best/best-merchant-cash-advance/`. The existing code dedupes by phrase (`usedPhrases` Set) but not by destination URL.
+
+**Fix.** Added `usedUrls` Set alongside `usedPhrases` in `src/utils/inline-linker.ts`. Each money page can now be the target of max 1 inline link per body. Tightened money budget 5→4 distinct URLs per body. ~5 lines changed total. Glossary linking unchanged.
+
+**NOT changed.** Did NOT swap the existing 100+ phrase MONEY_LINKS list. Per CLAUDE.md "no SEO content changes in last 7 days, Google needs measurement time" — the list was last touched today (bridging-loans entry 2026-05-07) and earlier on 2026-04-27 (P0.6) and 2026-04-21. Replacing it now resets the measurement clock for marginal mapping gain. The cluster-research-validated 11-target draft map lives at `creditdoc/data/money_page_map.json` as a reference doc; entries should be promoted into MONEY_LINKS one at a time as GSC data justifies.
+
+**Verification (live, after deploy).**
+- `lily-advance`: was 3 links with 2 pointing to same target → now 3 links to 3 different targets.
+- `triad-bank-national-association-tulsa`: was 5 links → now 3 (4th and 5th were dupe-URL hits, correctly blocked).
+- Other pages unchanged where they had no dupes.
+
+**Deploy.** Build 29.55s. `wrangler deploy` via Global API Key path. Worker version `3a2d60e9-f263-45ec-a6fa-29df79541275` live on `creditdoc`.
+
+---
+
+## 09:50 CAT, 2026-05-07 — CITY SLUG NORMALIZATION + 301 LEDGER FIXED LOCALLY [SEO / sitemap]
+
+**Baseline captured from local artifacts/stored GSC before edits.**
+- Built city sitemap before fix: 267 city URLs.
+- Bad city sitemap URLs before fix: 149 full-state or `%20` variants, e.g. `/city/dallas-texas/`, `/city/jersey-city-new%20jersey/`, `/city/durham-north%20carolina/`.
+- Stored GSC city evidence: 69 city page URLs with impressions, 418 total impressions. Duplicate impression groups found: 5 canonical families (`arlington-tx`, `austin-tx`, `denver-co`, `fort-worth-tx`, `jacksonville-fl`).
+- City URL Inspection evidence: none found in `gsc_review_indexed` for `/city/` pages. Live GSC was not used in this run.
+
+**Implemented.**
+1. `src/utils/data-build.ts` now normalizes `company_info.state` to 2-letter abbreviations before city grouping and city lender lookup. This collapses mixed `TX`/`Texas` rows onto `/city/<city>-tx/`.
+2. `src/middleware.ts` has a runtime city full-state redirect guard for Worker-routed paths.
+3. `public/_redirects` adds 164 explicit Cloudflare static-asset 301s for known malformed/full-state city URLs from the old sitemap, including hyphen alternatives for multi-word states.
+4. `docs/redirect-ledger.md` records 50 state-pattern redirect rules, expected duration, and retirement review rules. These 301s are intentionally long-lived SEO preservation rules, not temporary cleanup.
+
+**Verification.**
+- `npm run build` passed.
+- City sitemap after fix: 258 city URLs.
+- Bad city sitemap URLs after fix: 0.
+- Generated city folders with spaces/full-state suffixes: 0 found.
+- Collapse examples verified: Dallas before `/city/dallas-texas/` + `/city/dallas-tx/`, after only `/city/dallas-tx/`; Jersey City after only `/city/jersey-city-nj/`; Durham after `/city/durham-nc/`.
+- Local Wrangler parsed `164 valid redirect rules`.
+- Local redirect checks: `/city/dallas-texas/`, `/city/jersey-city-new%20jersey/`, `/city/durham-north%20carolina/` all 301 in one hop to final canonical 200. Canonical `/city/dallas-tx/` and `/city/jersey-city-nj/` return 200 with no redirect.
+
+**Deploy + live verification.**
+- Deployed at 2026-05-07 08:03 UTC with the documented Global API Key auth path (`unset CLOUDFLARE_API_TOKEN; export CLOUDFLARE_API_KEY="$CLOUDFLARE_GLOBAL_API_KEY"`).
+- Worker deployed: `creditdoc`; version `8b502c80-3cfe-476c-a1a5-4f700e858a28`.
+- Correct endpoint verified: production `https://www.creditdoc.co`, not only workers.dev.
+- Live checks: `/city/dallas-texas/`, `/city/jersey-city-new%20jersey/`, `/city/durham-north%20carolina/` all 301 directly to canonical city URLs, and final targets return 200 in one redirect.
+- Live sitemap check: `https://www.creditdoc.co/sitemap-0.xml` has 260 city URLs and 0 `%20`/full-state city URL matches.
+
+**GSC check after deploy.**
+- Existing GSC OAuth credentials are wired and token refresh works.
+- Read endpoint works on `sc-domain:creditdoc.co`. GSC already has the correct production sitemap registered: `https://www.creditdoc.co/sitemap-index.xml`.
+- GSC sitemap record: last submitted `2026-04-27T13:02:26.581Z`, last downloaded `2026-04-27T13:02:27.620Z`, sitemap index, `0` errors, `0` warnings.
+- API resubmit attempt on 2026-05-07 returned 403 `ACCESS_TOKEN_SCOPE_INSUFFICIENT` for `SitemapsService.Submit`; current saved refresh token can read Search Console data but cannot perform sitemap submit writes.
+
+**Still open.**
+- ~~Manual GSC resubmit~~ ✅ founder resubmitted manually via GSC console on 2026-05-07. Live sitemap (with city-slug fix + 2 drift-lender Supabase fix) now in Google's queue. Expect GSC `lastDownloaded` to advance within ~24h.
+- OAuth re-auth with full `https://www.googleapis.com/auth/webmasters` scope still pending if we want scriptable submits in future.
+- Monitor weekly. Do not retire city 301s until old URLs show no meaningful impressions/crawls for at least 90 days, preferably 12 months for URLs with existing impressions.
+
+---
+
+## 10:30 CAT, 2026-05-07 — GSC AUDIT BEYOND CITY %20 FOUND 4 ISSUES [SEO / sitemap] — #1 RESOLVED
+
+Codex is fixing the city-slug `%20` bug at `creditdoc/src/utils/data-build.ts:169` (state portion not sanitized). The audit beyond that surfaced four other items, all verified on disk before listing:
+
+1. **Sitemap↔Supabase status drift — 2 lenders 404 despite being in sitemap.** **RESOLVED 2026-05-07 ~10:25 CAT.**
+   - `/review/the-bank-of-east-asia-ltd-new-york/` — was: local `ready_for_index`, Supabase `enriching` → 404. Now: Supabase `ready_for_index`, **live 200**.
+   - `/review/vital-rankings-credit-improvement/` — was: local `ready_for_index`, Supabase `raw` → 404. Now: Supabase `ready_for_index`, **live 200**.
+   - **Fix applied.** PostgREST upsert with on_conflict=slug, payload built from SQLite truth (incl. body_inline). Sitemap-vs-live now 100% (15,531/15,531).
+   - **Root cause NOT identified.** Supabase `updated_at` for both rows was ~24h AFTER the engine's audit_log promotion, with different checksums — i.e. something writes to Supabase outside the DB API and reverts status. Out of 15,531 RFI rows, only these 2 drifted, so it's rare. No sync guard added (would treat symptom). If recurrence happens, hunt the writer.
+
+2. **Non-ASCII slugs — 12 ready_for_index lenders.** Examples: `abacus-federal-savings-bank-国宝银行-...`, `casa-de-empeño-anaheim`, `crédito-texas`, `golden-jewelry-loan-pawn-shop-골든-전당포`. All return 200 but URLs encode badly and look spammy.
+
+3. **Trailing-dash slugs — 2 ready_for_index lenders.** `community-development-corporation-of-long-island-dba-community-development-long-`, `pennsylvania-community-real-estate-corp-dba-tenant-union-representative-network-`. Slug-generator bug.
+
+4. **Excessively long slugs — 20 ready_for_index lenders >80 chars (9 of those >100 chars).** Hurts CTR and looks spammy.
+
+**Recommended priority.** ~~#1 today~~ ✅ done. #2/#3/#4 left **deliberately untouched** — founder decision 2026-05-07: those 34 URLs are live + indexed; per `MEMORY.md` rule "never propose title/meta/slug rewrites — Google needs measurement time". Slugs are aesthetic, not GSC blockers (0 sitemap-404 now). Generators can be patched later for FUTURE imports without disturbing existing rows.
+
+**Retracted last turn.** Floated a "sync coverage gap" theory (sync only sees 551 lenders). Wrong — `creditdoc_db_sync.py` is JSON→SQLite incremental and the 551 = files modified that day, not total scope. `lenders` table has 20,825 rows in BOTH local SQLite and Supabase.
+
+**Memory.** `memory/project_multisite_sitemap_audit_2026-05-07.md` — full audit incl. parallel runs on TTH, Thyolo, Tenders.
+
+---
+
+## 09:30 CAT, 2026-05-07 — INDEXING API QUOTA STARVATION FIXED [SEO / cron / quota]
+
+**Problem.** Google Indexing API quota = 200 publish/day shared across one GCP project for 5 sites. Old cron: TTH at 08:00 UTC pushed 484 uncapped URLs daily → ate 156 → CreditDoc at 08:15 UTC got 0. TTH had no cooldown so the same ~156 URLs got re-pushed daily, never giving Google time to crawl before nagging again.
+
+**Fix.**
+1. `tools/gsc_indexing.py` — added `--max-push N` (default 30) per-site cap and `--cooldown-days N` (default 7) shared cooldown via `data/indexing_cooldown.json`. `push_indexing_api()` stamps accepted URLs so all sites coordinate.
+2. Cron reorder (revenue first):
+   - `0  8 * * *` CreditDoc priority_indexing (was 15 8)
+   - `30 8 * * *` TTH `--max-push 30`
+   - `0  9 * * *` TraderTrac `--max-push 30`
+   - `30 11 * * *` Thyolo `--max-push 30`
+   - `45 11 * * *` Tenders `--max-push 30`
+3. 30 × 5 = 150 max push/day ÷ 200 quota = 50 buffer. Backup `backups/crontab_pre_indexing_reorder_20260507_0627.txt`. `verify_crons.sh` → OK 56.
+
+**Verified.** `python3 tools/gsc_indexing.py --site tradertrac --push-only --max-push 2` → log: `Pushing 2 URLs (skipped 0 in 7d cooldown, capped at 2)`, then 429 (TTH already burned today; that's the LAST time).
+
+**Watch tomorrow.** After 08:00 UTC: `tail -30 logs/creditdoc_indexing.log` should show `Google: 30 OK, 0 failed`. The 403s seen in today's log were quota-exhaustion masquerading as auth failures — `sc-domain:creditdoc.co` is a Domain property (covers apex + www) and the service account is verified there, so there is no www-vs-non-www auth problem.
+
+**Why this was a recurrence.** May 3 fix landed cooldown only on CreditDoc's script. Other 4 sites kept using uncapped `gsc_indexing.py`, defeating the CreditDoc fix. Both scripts now share the same cooldown ledger.
+
+**Memory.** `memory/project_indexing_quota_fix.md`.
+
+---
+
+## 07:50 CAT, 2026-05-07 — CLOUDFLARE "ALWAYS USE HTTPS" ENABLED [SEO / canonical fix]
+
+**Trigger.** May 6 `creditdoc_gsc_audit.py` first run flagged 147 unknown URLs across brand/compare/financial-wellness/state buckets, plus 19.9K site-wide entries in GSC "Alternate page with proper canonical tag." Investigation traced the alternate-canonical bloat to an http/https duplicate-URL bug.
+
+**Bug.** `http://www.creditdoc.co/` was serving 200 directly (no HTTPS upgrade) → Google indexed http and https variants as separate URLs, then collapsed via canonical, producing the 19.9K alternate count.
+
+**Cloudflare zone state BEFORE:** `always_use_https=off`, `automatic_https_rewrites=on`, `ssl=full`.
+
+**Fix applied 07:42 CAT.** `PATCH /zones/b644afdfb731703f578f6885ca1774b4/settings/always_use_https {"value":"on"}` using `CLOUDFLARE_API_TOKEN` (cfat_, Zone-scoped). API returned success.
+
+**Verified live:**
+- `http://www.creditdoc.co/` → 301 → `https://www.creditdoc.co/` → 200 ✓
+- `http://creditdoc.co/` → redirect chain → `https://www.creditdoc.co/` → 200 ✓
+- `https://www.creditdoc.co/` → 200 (canonical to itself) ✓
+
+**Expected:** GSC "Alternate page" count drops gradually over 2–4 weeks as Google re-crawls. No traffic impact.
+
+**NEXT (open):**
+1. Resubmit `sitemap-index.xml` in GSC to trigger re-crawl. Not yet done.
+2. Re-run `creditdoc_gsc_audit.py` on day 9 to see canonical count drop.
+
+**Memory written:** `memory/DECISIONS.md` (07:50 CAT entry), `memory/project_creditdoc_always_use_https_fix.md`.
+
+---
+
+## ITER 42 — PHRASE UNIVERSE TRACKER LIVE (17:30 CAT, 2026-05-02) [OBJ-1][OBJ-2]
+
+**Trigger.** Jammi: "yes I want to build that We have access to a lot of google API s that allow us access to the keywords" — after I caught myself about to rebuild the G1/G2 mature-gate scoreboard already implemented in `creditdoc_phase1_kpi.py:170-297`.
+
+**Built today.**
+1. `tools/gsc_weekly_pull.py` — Mon 07:30 UTC site-wide GSC pull (`sc-domain:creditdoc.co`, dim=query+page, last 28d, 3d lag, paginated). Idempotent on window. Schema (`gsc_weekly_pulls`/`gsc_query_history`/`gsc_page_history`) existed since Apr 26 migration; writer was the missing piece.
+2. `creditdoc_phase1_kpi.py` — added `collect_phrase_universe()` + text/HTML "Phrase universe" section. Joins to `keyword_volume.db.phrases` (the 7,964-phrase selected universe) for in-universe ledger. Movers up/down/new/dropped vs prior pull (gated to ≥5d window-end gap so same-week pulls aren't compared).
+3. CSV at `creditdoc/data/exports/creditdoc_phrase_universe_tracking_2026-05-02.csv` (7,964 rows). Drive: `1hmq7W4DTp4Bus7oxDxRwrKulT2Q5yxST` in CreditDoc Keywords folder.
+4. Cron appended (Mon 07:30 UTC). `verify_crons.sh`: OK 56/56.
+
+**First pull headline numbers (window 2026-04-01 → 2026-04-29):**
+- 3,089 queries / 5,104 imps / 1 click / sitewide CTR 0.020%
+- **2 of 7,964 selected phrases (0.0%) got any impressions.** Editorial universe is pre-impression. 93% of impressions are brand-name searches (lender directory dominance).
+- 5 striking-distance queries / 437 striking pages
+
+**The keyword project's main objective — iterated.** See `CreditDoc Project Improvement/2026-04-20_KEYWORD_TRACKING_PLAN.md` header (now updated 2026-05-02 PM).
+
+**First Monday email with universe section ships May 4 (08:00 UTC).** First movers section ships May 11 (needs 2nd pull ≥5 days after first).
+
+**Memory written this iter:**
+- `memory/project_creditdoc_phrase_universe_tracker.md` (full ref)
+- `memory/MEMORY.md` Iter 42 pinned entry
+- `memory/DECISIONS.md` 17:30 CAT entry
+- This NOW.md section
+- `CREDITDOC_NEXT.md` next-step parking
+- Memory Palace drawer: wing=CreditDoc room=keyword-tracking (pending)
+
+---
+
+## POST-SHIP HYGIENE — 08:50 CAT, 2026-05-03 [OBJ-1][OBJ-3]
+
+After iter 43 c0327 went live, two follow-ups closed before this NOW.md was rewritten:
+
+1. **Vercel ghost archive.** `creditdoc/vercel.json` (4905 bytes) and `creditdoc/.vercel/` → `creditdoc/_archive_vercel/{vercel.json, dotvercel/}`. The repo no longer carries Vercel config; the archive preserves pre-cutover topology for forensics. Apex `creditdoc.co` DNS still grey-cloud Vercel (legacy, not authoritative for `www`) — untouched per cutover plan.
+
+2. **Backup & recovery plan.** `CreditDoc Project Improvement/2026-05-03_BACKUP_AND_RECOVERY_PLAN.md` — verified architecture, verified backups (Supabase pg_dump → R2 daily 06:00 UTC with 30-day lifecycle; SQLite daily 06:50 UTC with 7d/4w/12m), gap analysis A-G, recovery procedures 4.1–4.6. Five action items A-E created as tasks #51-55, awaiting Jammi greenlight (R2 logo mirror is top — 14K logos are SPOF).
+
+3. **Lies-caught + memory pin.** `lies_caught.md` entry #7 logged ("Vercel push freeze" said 4× while shipping iter 43 over a Cloudflare-only stack). New pin `memory/creditdoc_live_architecture.md` with verify command (`grep -E '^(name|main|compatibility_date)' creditdoc/wrangler.toml` — if it exists, it's Cloudflare).
+
+DECISIONS.md appended with full entry. Memory Palace drawers written: `wing=CreditDoc room=architecture` (live inventory), `wing=CreditDoc room=post-mortems` (Vercel terminology + re-discovery loop), `wing=CreditDoc room=decisions` (today's actions). Diary entry filed.
+
+**Next autonomous tick:** Mon 2026-05-04 13:00 UTC drip cron picks c0312 (cluster_spec, credit-cards, prio 2698, "easy approval credit card"). No `wrangler deploy` will run; SSR + revalidate handles the publish.
+
+---
+
+## ITER 43 — SHIP-READY: PROPOSED EXECUTOR PRE-STAGED + EXTENDED LIVE TEST PASSING (17:55 CAT, 2026-05-02) [OBJ-1]
+
+**ITER 43 SHIPPED 08:28 CAT (May 3) — c0327 LIVE on creditdoc.co** [OBJ-1]
+
+Greenlight: "ok go ahead make sure the questions that are published are properly linked and formatted on the website" → executed.
+
+1. `cp tools/creditdoc_cluster_executor.py.proposed → tools/creditdoc_cluster_executor.py` (backup at `.bak.iter43`, md5 f8daea7f...).
+2. Caught + fixed extra call-site bug at line 219: `pillar_of(cluster["id"])` → `pillar_of(cluster)` inside `build_prompt()`. Without this fix prompt embedded `Pillar: financial-wellness / Banner: credit-monitoring` (fallback) instead of the correct `personal-loans / personal-loans`.
+3. Live preview: prompt builds correctly with right pillar/banner/money_page.
+4. Live ship `--asset c0327` (no `--apply`, no `git push`/`wrangler deploy` required — SSR reads DB at request time): Claude generated 17,482 bytes, compliance 10/10, slug `how-to-find-best-personal-loan-lenders`. cluster_answers row written, cluster_spec.status flipped to published.
+5. Discovered default-mode skips Supabase sync; ran `creditdoc_build.py --export-only` (1 cluster_answers + 550 lenders + 10 comparisons + 5 wellness exported) → `sync_cluster_answers_to_supabase.py --apply` (1 missing → upserted).
+6. **Live audit https://www.creditdoc.co/answers/how-to-find-best-personal-loan-lenders/**:
+   - HTTP 200
+   - Title: "How to Find the Best Personal Loan Lenders | CreditDoc" (`| CreditDoc` suffix correct)
+   - H1: "How to Find the Best Personal Loan Lenders (Step-by-Step for 2026)"
+   - 1 H1 + 10 H2
+   - Schema: FAQPage, BreadcrumbList, 6 Question, 6 Answer
+   - Internal money_page links (5 distinct): `/best/best-personal-loan-lenders/` (target, 2x), `/best/best-personal-loans-bad-credit/`, `/best/best-debt-consolidation-loans/`, `/best/best-credit-repair-companies/`, `/best/best-credit-builder-loans/` — proper cross-pillar weave
+
+**Queue state post-ship.** 700/710 pickable (12 blocked total). Cron `0 13 * * 1-5` fires Mon May 4 13:00 UTC autonomously and will pick c0312.
+
+**Next 10 (highest publish_priority first):**
+| # | id | src | pillar | prio | name |
+|---|----|-----|--------|------|------|
+| 1 | c0312 | cluster_spec | credit-cards | 2698 | easy approval credit card |
+| 2 | c0366 | cluster_spec | personal-loans | 1804 | best personal loans bad credit |
+| 3 | c0452 | cluster_spec | credit-cards | 1344 | top secured credit cards |
+| 4 | c0308 | cluster_spec | credit-cards | 1069 | no credit check cards |
+| 5 | c0448 | cluster_spec | credit-cards |  508 | best credit card to build credit |
+| 6 | c0458 | cluster_spec | credit-cards |  317 | how to apply for secured credit cards |
+| 7 | bl-rates | json | business-loans |  290 | Business Loan Rates and Fees Explained |
+| 8 | bl-apply | json | business-loans |  270 | How to Apply for a Business Loan |
+| 9 | c0180 | cluster_spec | debt-relief |  258 | best debt consolidation loans for bad credit |
+| 10 | bl-sba | json | business-loans |  250 | How to Get an SBA Loan |
+
+**Old heartbeat:** 08:18 CAT (May 3 local) — md5sums stable (proposed `421544811d761ef9645c6a66e5c0be8f`). Loop ran tight 30-min idle ticks until greenlight at 08:24 CAT.
+
+**Pre-staged for one-`cp` ship:**
+- `tools/creditdoc_cluster_executor.py.proposed` (577 lines, +119 vs live) — ALL 5 edits applied: sqlite3 import, load_clusters merge, pillar_of dispatch, pick_next_cluster dedup, line 256 call-site, line 391 state-write-back block. Syntax validated.
+- `CreditDoc Project Improvement/2026-05-02_EXECUTOR_MERGE.diff` — 194-line unified diff for review.
+
+**Pillar mapping fix caught while pre-staging.** The patch's initial `pillar_to_label` used new names (`small-business`, `personal-finance`, etc.) — would have produced inconsistent `cluster_pillar` values across the corpus vs the 16 already-published /answers/. Realigned 1..7 to legacy `PILLAR_MAP` labels (`business-loans`, `personal-loans`, `credit-cards`, `build-credit`, `credit-monitoring`, `credit-repair`, `debt-relief`). Test asserts no schema drift.
+
+**Extended live test (`/tmp/test_proposed_executor.py`) — runs the actual proposed module, not a simulation.** ALL CHECKS PASSED:
+```
+MODULE LOAD: OK (sqlite3 + CreditDocDB resolve)
+load_clusters: 49 JSON + 662 cluster_spec = 711 (100% source-tagged)
+pillar_of: JSON dict ✓ | spec dict ✓ | legacy str API ✓
+All 7 cluster_spec pillars resolve to legacy PILLAR_MAP labels (no drift)
+pick_next_cluster: top=c0327 (4779), dedup vs cluster_answers (11 rows) + state (3 rows) ✓
+asset_override: hit ✓ | miss raises ValueError ✓
+```
+
+**Ship steps when Jammi says "go on #2":**
+1. `cp tools/creditdoc_cluster_executor.py tools/creditdoc_cluster_executor.py.bak.iter43`
+2. `cp tools/creditdoc_cluster_executor.py.proposed tools/creditdoc_cluster_executor.py`
+3. `python3 tools/creditdoc_cluster_executor.py --asset c0327 --dry-run` → show prompt
+4. (optional) `python3 tools/creditdoc_cluster_executor.py --asset c0327` → DB write, no `git push` / `wrangler deploy` needed (SSR Worker reads Supabase at request time)
+5. Show generated /answers/ to Jammi → Mon 13:00 UTC cron does the rest
+
+**Decision #1 (prompt overwrite) DEFERRED** — staged template (8.7KB, 14 placeholders incl. `{{primary_keyword}}`, `{{intent_description}}`) has entirely different schema than current 6.2KB/6-placeholder template. NOT a simple `cp`. Needs `build_prompt()` rewrite + `seo_web.yaml` wiring + voice rotation = ~2-4h follow-up. Recommend ship #2 alone today.
+
+---
+
+## ITER 43 — CLUSTER MERGE RECIPE + PATCH AUTHORED, AWAITING GREENLIGHT (15:43 CAT, 2026-05-02) [OBJ-1]
+
+**Trigger.** Loop fire continuation: *"until finished and then prepare to ship. I want some live tests before shipping but needs to ship today."*
+
+**Authored.**
+- `CreditDoc Project Improvement/2026-05-02_EXECUTOR_MERGE_RECIPE.md` — full merge recipe replacing the Apr 28 swap. 3 function replacements + 1 call-site update + 1 state-write-back addition.
+- `CreditDoc Project Improvement/2026-05-02_EXECUTOR_MERGE_PATCH.py.new` — exact code for the 3 function replacements + state block. Reviewable, not yet applied.
+
+**Live test (read-only, against real data).** `/tmp/test_merge_logic.py` — simulates `load_clusters()` + `pick_next_cluster()` against live DB + JSON. ALL ASSERTIONS PASSED:
+```
+JSON: 49 | cluster_spec: 662 | total: 711
+After dedup (cluster_id-blocked): 701 pickable
+Top: c0327 best personal loan lenders | source=cluster_spec | pillar=2 | priority=4779.0
+JSON entries still pickable (not orphaned): 39 ← accumulate rule satisfied
+money_page normalization: c0327 → /best/best-personal-loan-lenders/  ✓
+All 7 pillars present in cluster_spec  ✓
+```
+
+**Top-10 merged queue Jammi will see at first run:**
+```
+cluster_spec  c0327          p=  4779.0  /best/best-personal-loan-lenders/
+cluster_spec  c0312          p=  2697.8  /best/best-no-credit-check-cards/
+cluster_spec  c0366          p=  1804.3  /best/best-personal-loans-bad-credit/
+cluster_spec  c0452          p=  1344.0  /best/best-secured-credit-cards/
+cluster_spec  c0308          p=  1069.2  /best/best-no-credit-check-cards/
+cluster_spec  c0448          p=   508.5  /best/best-secured-credit-cards/
+cluster_spec  c0458          p=   317.2  /best/best-secured-credit-cards/
+json          bl-rates       p=   290.0  /best/best-small-business-loans/
+json          bl-apply       p=   270.0  /best/best-small-business-loans/
+cluster_spec  c0180          p=   258.0  /best/best-debt-consolidation-loans/
+```
+
+**Schema corrections caught vs Apr 28 swap recipe.**
+- `cluster_spec` column is `money_page` not `money_page_slug`
+- `cluster_spec.money_page` is bare slug (`best-personal-loan-lenders`); JSON + `cluster_answers.target_money_page` use `/best/X/` — **normalize bare → path on read**
+- Question source for `c0xxx` rows is `cluster_spec.secondary_phrases` (JSON list of phrases)
+- Dedup is by `cluster_id` not `money_page` — JSON intentionally has multiple cluster_ids per money_page (e.g. `bl-best`, `bl-rates`, `bl-apply` all → /best/best-small-business-loans/ for topical authority)
+
+**Awaiting Jammi greenlight before code change.** Recipe is the deliverable today; the actual patch needs his "go" because it touches the production cron path. Two independent decisions:
+1. Decision #1 — overwrite `tools/templates/cluster_asset_prompt.md` (Opus 4.6 mandate, persona variation, SERP strategy injection). Lower risk, can ship alone.
+2. Decision #2 — apply the merge patch (`load_clusters` + `pillar_of` + `pick_next_cluster` + state write-back). Higher risk, can ship alone.
+
+**If Jammi says "go" on Decision #2:**
+1. Apply 3 function replacements + call-site update (~15 min)
+2. `--asset c0327 --dry-run` → show prompt preview
+3. `--asset c0327` (no --apply) → live Claude CLI call → DB write only, no git push
+4. Show generated /answers/ page to Jammi
+5. If approved → next-day cron picks it up, no manual run needed
+
+**Memory written this iter (this NOW.md update is part of it).** Recipe + patch files cross-reference `feedback_accumulate_dont_swap_pipelines.md` and `project_creditdoc_cluster_pipeline_state_may2.md`.
+
+---
+
+## CLUSTER /answers/ PIPELINE — REALITY CHECK + ACCUMULATE RULE (16:10 CAT, 2026-05-02) [OBJ-1][hygiene]
+
+**Trigger.** Jammi: *"Why are the 662 questions locked at the moment and I hope they are being drip fed"* → *"I want to know why its a swap - are you sure this shouldnt be cumulative"* → *"yah I remember stopping the agent from wanting to stop the other automation but I dont want that - we need to accumulate authority - its important to make sure these things are rich and helpful."*
+
+**Ground truth from DB + cron + executor source (verified May 2):**
+- Drip IS firing — `0 13 * * 1-5 creditdoc_cluster_executor.py --apply`. Last publish 2026-05-01 13:01 UTC (`how-much-can-you-borrow-with-your-credit-score`). 16 /answers/ published total, 5 in the last 14d.
+- Executor reads only `CreditDoc Project Improvement/CLUSTER_MAP.json` (49 clusters, 16 published, ~33 unshipped).
+- `cluster_spec` table has 662 queued rows — invisible to the current executor.
+- Cluster_id overlap between the two sources: **0** (different ID schemes — JSON is topic-prefixed `bl-best`/`pl-bad-credit`, table is numeric `c0001`-`c0662`).
+
+**The Apr 28 plan was wrong-shaped.** A "swap" (point executor at cluster_spec, stop reading JSON) orphans the 33 unshipped hand-curated entries forever. Swap is dead.
+
+**New rule:** ACCUMULATE, don't swap. Saved as `feedback_accumulate_dont_swap_pipelines.md` and pinned in MEMORY.md. Topical authority compounds — every well-crafted page deepens cluster coverage. Default on any future "should we replace pipeline X with Y" question is "no, run them in parallel, dedup at output."
+
+**New plan shape (recipe to be authored, not yet executed):**
+1. Author `CreditDoc Project Improvement/2026-05-02_EXECUTOR_MERGE_RECIPE.md` replacing `2026-04-28_EXECUTOR_SWAP_RECIPE.md`.
+2. Executor reads BOTH sources into a unified candidate list, sorted by priority DESC.
+3. Dedup at publish by `money_page` slug (some JSON topics may exist under different `c0xxx` IDs — verify at pick time, not pre-merge).
+4. Existing 1/day Mon-Fri cron unchanged. CLUSTER_MAP.json drip never stops.
+5. Total addressable: 49 + 662 = **711 clusters**.
+6. Apr 28 #1 (Opus 4.6 prompt template upgrade — persona variation, SERP strategy injection from `cluster_spec.serp_strategy`) is a **separate** decision that still applies and still needs Jammi greenlight.
+
+**Pending Jammi greenlights (after recipe is rewritten):**
+- #1 — overwrite `tools/templates/cluster_asset_prompt.md` with upgraded Opus 4.6 mandate version
+- #2 — wire executor to merged queue (NEW shape, replaces "swap to cluster_spec")
+- #4 — 5-row cluster_spec dedupe (BEGIN/COMMIT preview at `creditdoc/data/exports/cluster_spec_dedupe_preview_2026-04-28.md`)
+- #5 — top-100 SERP analysis (~$10 DataForSEO)
+
+**Memory written this iter:**
+- `feedback_accumulate_dont_swap_pipelines.md` (rule)
+- `project_creditdoc_cluster_pipeline_state_may2.md` (full pipeline ground-truth)
+- DECISIONS.md entry 16:10 CAT
+- Memory Palace drawer (creditdoc/decisions)
+- MEMORY.md index updated
+
+**Next finishable.** Draft `2026-05-02_EXECUTOR_MERGE_RECIPE.md` so Jammi can greenlight the cluster pipeline expansion. Read-only authoring — no code touched until recipe approved.
+
+---
+
+## ITER 41 — SSR SITEMAP PARITY GUARD + INDEXNOW PUSH (15:35 CAT, 2026-05-02) [OBJ-2]
+
+**Trigger.** Loop directive after iter 40 shipped: "until finished and then prepare to ship. I want some live tests before shipping but needs to ship today." Iter 40 fixed the symptom (15,527 missing /review/ URLs); iter 41 stops the cause from biting again, and pushes the new URLs to crawlers without waiting for GSC's natural sitemap re-fetch.
+
+**(a) SSR-sitemap parity guard — `scripts/check_ssr_sitemap_parity.mjs` + `npm prebuild` hook.** Walks `src/pages/**/*.astro|.ts`, finds every SSR route (`export const prerender = false`), derives the URL prefix, and asserts `astro.config.mjs ssrSitemapPages()` has either an SQL literal (`'blog/' || slug`) or a JS template literal (`/brand/${...}/`) that references it. Exempts API endpoints, `/r/[slug]` (intentional noindex), single-page SSR routes, and `/state/[slug]` (companion `state/[slug]/lending-laws/` getStaticPaths walks each state). Wired as `prebuild` in package.json so `npm run build` runs the check first. Tested both ways: passes on current state (14 SSR routes checked, all per-slug prefixes covered); fails when /review/ SELECT removed (caught with the exact error message a future iter would see). Commit `f7afd43313`.
+
+**(b) IndexNow push — 15,527/15,527 accepted.** Smoke test (10 URLs) → HTTP 200. Bulk push in 2 chunks (7,800 + 7,727) → both HTTP 200. Total `15,527 OK, 0 failed`. URLs pushed via `tools/indexnow.py` with the existing `f2018aa106044007bf54b7cde9067a1e` key (creditdoc.co key file verified live). IndexNow feeds Bing → ChatGPT Search / Perplexity / Microsoft Copilot. For Google: GSC is auto-registered with the sitemap-index.xml at the canonical location and will re-crawl on its own schedule (typically <72h for a sitemap-index this size, faster for the most-linked URLs).
+
+**Blocked: GSC sitemap submit via API.** Our OAuth credentials at `/srv/BusinessOps/tools/.gsc-credentials.json` only have `webmasters.readonly` scope. Submit needs full `webmasters` scope. Re-running `tools/gsc_auth.py` requires interactive browser login (Jammi). Filed as next-session work — low priority because the sitemap is auto-registered and Google will re-fetch naturally; this is a "nice-to-have accelerator," not a blocker.
+
+**OBJ-2 progress.** Future-proof hygiene: pattern that hit 3× now caught at build-time before merge. Adding a new SSR route now requires either (1) adding a SELECT in `ssrSitemapPages()`, or (2) a deliberate EXEMPT entry in the guard with a one-line reason. The guard exits non-zero, which means a missed parity will block the npm build path. Belt-and-braces: even if someone runs `astro build` directly bypassing prebuild, the failure surfaces in CI when wrangler runs.
+
+**Live tests.** All passed:
+- `npm run prebuild` → `[ssr-sitemap-parity] OK — checked 14 SSR routes, all per-slug prefixes covered.`
+- Negative test (review/ SELECT removed) → guard exits 1 with route-specific error (rolled back immediately)
+- IndexNow smoke (10 URLs) → 200
+- IndexNow bulk (15,527 URLs in 2 chunks) → 200, 200
+
+**Files:** `scripts/check_ssr_sitemap_parity.mjs` (new), `package.json` (+ `prebuild` script). Commit `f7afd43313` on `cdm-rev-hybrid`.
+
+**Follow-ups for next session.**
+- Re-auth GSC OAuth with full `webmasters` scope so future sitemap submits are scriptable (interactive — Jammi needed)
+- /compare/[slug] raw SSR flip (next backlog item from iter 39 closeout)
+- Cluster executor swap (Apr 28 Tier-1 #1+#2 — awaits Jammi greenlight, unlocks 662 cluster pages)
+
+---
+
+## ITER 39 (renamed from "iter 41" in earlier draft) — VERSION-KEYED CACHE FOR /categories/ — LIVE-VERIFIED (14:54 CAT, 2026-05-02) [OBJ-1]
+
+**Why this iter exists.** Iter 39 commit `1fb760333d` shipped the code for an aggregate-version-keyed CF Workers cache on `/categories/[category]/`, but live-verification was deferred. Pre-compaction me chased a phantom bug for an hour because I was using `curl -I` (HEAD), and the middleware correctly skips cache logic on non-GET. Real bug: my testing tool. No code change required.
+
+**Deployment.** Worker version `6fc05907-35a8-427b-8b16-d7c15670b10d`. Wrangler via Global API Key path (cfat_ Zone-only token cannot deploy Workers — see `.claude/rules/lies_caught.md` entry 2, 4× recurrence). Bundle confirmed: `dist/_worker.js/_astro-internal_middleware.mjs` lines 47-61 contain the categories route + `versionFetch: fetchCategoryAggregateVersion`.
+
+**E2E live verification (curl with real GET, not HEAD).**
+1. First GET → `x-cdm-cache: MISS`, `x-cdm-route: mw:category-slug`, `x-cdm-version: 1777639915`
+2. Second GET → `x-cdm-cache: HIT` (same version) — CF cache.default working
+3. PATCH `categories.updated_at` for `credit-repair` → wait 2s → GET → MISS with NEW version `1777726360`
+4. PATCH `lenders.updated_at` for any ready_for_index row in category=credit-repair → wait 2s → GET → MISS with NEW version `1777726375`
+5. Subsequent GET → HIT under new key
+
+Aggregate-version logic confirmed: middleware computes `MAX(categories.updated_at, MAX(lenders.updated_at WHERE category=slug AND ready_for_index))` and includes it in the cache key. Either side of the aggregate flips → key dies → next request rebuilds → new key cached.
+
+**OBJ-1 GREEN end-to-end for /categories/.** A row update in Supabase reaches the live URL globally in ≤2s with no purge call, no rebuild, no git push. This was the entire point of OBJ-1.
+
+**Carryover from earlier iters in this session (already on disk):**
+- `lies_caught.md` entry 2 updated: 4× recurrence (2026-05-02 = `/user/tokens/verify` on a cfat_ Zone token, claimed token rejected, asked Jammi to refresh — wrong endpoint, wrong cred class for the operation).
+
+**Next backlog item.** `/compare/[slug]` raw SSR flip (Pattern A — small set, no aggregate version needed). Then `/state/[slug]/lending-laws`, then index pages, then `static_pages` table for the 17 legal/policy/about pages. See `memory/project_creditdoc_static_to_ssr_migration.md`.
+
+---
+
+## ITER 40 — /review/ × 15,527 ADDED TO SITEMAP (14:32 CAT, 2026-05-02) [OBJ-1]
+
+**Trigger.** Jammi: *"what's wrong with the sitemap now"*. Investigation found `/review/[slug]` (the canonical public lender review page) is SSR + indexable + had **zero** sitemap entries. 15,527 lender pages with no sitemap-driven discovery.
+
+**Root cause.** Three SSR rollouts in a row forgot to update `astro.config.mjs` `ssrSitemapPages()`:
+- Phase 1.3.B-A.1 (Apr 29) flipped `/review/[slug]` to SSR — never added to injector
+- iter 36 (`5c0808f104`) added blog/wellness/brand/categories — missed /review/
+- iter 39 (`a06da1934e`) added /best/ + /answers/ — still missed /review/
+
+This is the **third recurrence** of the "sitemap regression after SSR flip" pattern documented in `feedback_sitemap_regression_after_ssr_flip.md`. The injector is a separate file from the prerender flag — there's no compiler error if you forget to add it. Need a build-time check that walks routes and asserts SSR routes have a sitemap source.
+
+**Fix.** One SELECT line:
+```sql
+SELECT 'review/' || slug FROM lenders WHERE processing_status='ready_for_index';
+```
+Commit `491b9138bd`. Worker version `e24bb3e1-6edc-4066-a855-40758f7a3880`.
+
+**Live verification (14:42 CAT).**
+- Build clean (51.16s). `[sitemap] injecting 15759 SSR route URLs` (was 232).
+- Sitemap auto-shards into 4 files (entryLimit 5000): `sitemap-0.xml` 5000 + `sitemap-1.xml` 5000 + `sitemap-2.xml` 5000 + `sitemap-3.xml` 1,772 = **16,772 live URLs total** (was 1,245 — +1,247% discoverability).
+- /review/ count in live sitemap: 0 → 15,527 (verified via grep + DB diff; 2 unicode-slug entries were truncated by my regex but ARE in the sitemap).
+- 5 random /review/ HTTP test: all 200, all <500ms.
+- `sitemap-index.xml` correctly references all 4 sub-sitemaps.
+
+**OBJ-1 GREEN.** The canonical public lender directory is now sitemap-discoverable end-to-end.
+
+**Follow-up to consider.** Build-time guard: walk `src/pages/`, find all routes with `prerender = false`, assert each has a corresponding SQL source in `ssrSitemapPages()`. Would have caught this pattern automatically.
+
+---
+
+## ITER 39 — STALLED-PAGES AUDIT + SITEMAP DEPLOYED (14:30 CAT, 2026-05-02) [OBJ-1]
+
+**Trigger.** Jammi: *"please go back and find all those pages we worked on that we were not able to upgrade because of the Vercel update failure"*. Loop directive: *"until finished and then prepare to ship. I want some live tests before shipping but needs to ship today"*.
+
+**Sitemap fix shipped.** Worker `9f11bd55-d1d6-4806-8d10-fb1a6ac5428e` (commit `a06da1934e`). `astro.config.mjs` `ssrSitemapPages()` now also pulls `/best/` (26 money pages) + `/answers/` (16 published clusters) from `data/creditdoc.db`. Live sitemap: 1,203 → 1,245 URLs. Build log confirmed `[sitemap] injecting 232 SSR route URLs`. 10/10 spot-check HTTP 200. GSC tracker synced (1,241 → 1,245). Tomorrow's 06:15 UTC queue: 3 money + 7 answers in top-10 (was wellness-only this morning).
+
+**Stalled-work audit produced.** Read-only doc at `CreditDoc Project Improvement/2026-05-02_STALLED_PAGES_AUDIT.md`. Five buckets, only one is the real backlog:
+
+| Bucket | Count | Status | Greenlight needed? |
+|---|---:|---|---|
+| 1. Cluster /answers/ queued | **662** | Apr 28 Tier-1 #1+#2 (executor swap) — recipe at `2026-04-28_EXECUTOR_SWAP_RECIPE.md` | **YES** — biggest unblock |
+| 2. Cluster dedupe (skip) | 5 | Apr 28 Tier-1 #4 — BEGIN/COMMIT preview ready | YES (low risk) |
+| 3. SERP-unanalyzed clusters | 526 | Apr 28 Tier-1 #5 — top-100 ~$10 DataForSEO | YES (paid API) |
+| 4. Wellness guides for FA | 76 | Carryover — pages already live SSR, content review only | Async |
+| 5. Lender "unexported" rows | 504 | **FALSE POSITIVE** — `/review/[slug]` SSR serves live from DB; flag is decorative now | No action |
+
+**Why now ship-ready.** When the Apr 28 queue was authored, /answers/[slug] was static and any new publish wouldn't reach live without a 12+ min `git push` build. Since iter 36 + cutover, /answers/[slug] is SSR — new rows are live within ~10s of revalidate. The Vercel-freeze blocker is gone.
+
+**One Jammi-review item buried in pipeline.** Lender `clark-county` is `pending_approval`, updated 2026-05-01 16:02 UTC (cfpb_enricher).
+
+**Not shipped this iter.** The Tier-1 cluster executor swap. Recipe ready, risk $0, but it's a behavior change to a content pipeline — needs Jammi's "go".
+
+**Live re-verification (14:38 CAT, second pass).** Sitemap-vs-DB parity perfect — `comm -23` and `comm -13` both empty for /best/ × 26 and /answers/ × 16. 5 spot-checked /best/ pages all HTTP 200 in <200ms (`best-bad-credit-business-loans`, `best-business-lines-of-credit`, `best-cash-advance-apps`, `best-credit-builder-loans`, `best-credit-counseling-agencies`). All 6 BusinessOps sites HTTP 200.
+
+---
+
+## ITER 38 — /categories/[category] FLIPPED TO SSR (13:30 CAT, 2026-05-02) [OBJ-1]
+
+**Stage 1 of the static→SSR migration backlog.** Rule (Jammi 2026-05-02 verbatim): *"all of those should be database related and so should all new pages - when we build a page it should come from the db so if we update it then it should update on the site"*. Iter 36 had deferred categories saying "needs materialized view" — found a simpler way.
+
+**The problem.** `/categories/<cat>/` was prerendered from JSON at deploy time. A row update in `lenders` (rating change, new entry, status flip) didn't reach the live URL until the next `git push`. Banking has 4,796 lenders, credit-unions 2,313, pawn-shops 1,607 — and the top-48-by-rating sort lives inside `lenders.body_inline` jsonb. PostgREST `?order=` can't reference jsonb expressions, so direct SSR was blocked on sort performance.
+
+**The fix.** STORED generated column on lenders + composite index:
+```sql
+ALTER TABLE lenders ADD COLUMN rating numeric GENERATED ALWAYS AS
+  (NULLIF(body_inline->>'rating','')::numeric) STORED;
+CREATE INDEX CONCURRENTLY lenders_category_rating_ready_idx
+  ON lenders (category, rating DESC NULLS LAST)
+  WHERE processing_status='ready_for_index';
+```
+Generated columns auto-recompute when `body_inline` changes — no triggers, no refresh logic, no materialized-view staleness. Sort is now O(log n) on the partial index even at 4,796 rows.
+
+**Code:**
+- `src/lib/db.ts` — `getTopLendersByCategoryRuntime` (rating-sorted top-N) + `getCategoryCountRuntime` (count from PostgREST `prefer: count=exact` Content-Range header).
+- `src/pages/categories/[category].astro` — `prerender = false`, parallel `Promise.all` fetch of (category meta, top 48, total count, wellness guides), `shapeBodyInlineToLender` hydration. Headers: `cache-control: public, max-age=300, s-maxage=300`, `x-cdm-rev-source: ssr-category`, `x-cdm-route: /categories/[category]`.
+- `astro.config.mjs` — 18 categories injected into sitemap `customPages` per `feedback_sitemap_regression_after_ssr_flip.md` rule. Also added `/best/` + `/answers/` to the same injector (caught while at it — both were SSR but their slugs weren't being pulled from the DB into the sitemap).
+
+**Cache strategy.** Page-level `s-maxage=300` (5 min) only — NOT added to middleware `CACHEABLE_ROUTES`. Reason: category pages aggregate many lender rows, so version-keying on `category.updated_at` would miss lender edits. The 5-min edge cache + row-level updates on `/r/[slug]` is the correct tradeoff for list views.
+
+**Commits.** `89f4469b11` (the flip) + `a06da1934e` (sitemap broadening to also pull /best/ and /answers/).
+
+**Verified live (13:30 CAT).** All 7 representative categories return 200 + `x-cdm-rev-source: ssr-category` + `x-cdm-route: /categories/[category]`. `/categories/banking/` shows `lendingclub` (4.8) first → matches DB order exactly, total `4796 companies found`. `verify_strategic_objectives.py` 3/3 GREEN. Sitemap has all 18 categories.
+
+**Backlog after Stage 1** (per `project_creditdoc_static_to_ssr_migration.md`):
+2. `/compare/[slug]/` — Pattern A (raw SSR fine)
+3. `/state/[slug]/lending-laws` — Pattern A
+4. Index pages: `/state/`, `/city/`, `/blog/`, `/financial-wellness/` — Pattern A batch
+5. Build `static_pages` table + flip 17 legal/policy/about pages
+6. `/city/[slug]/` — Pattern B (same generated-column approach as categories, by city)
+7. `/browse/[cat]/[city]/` — Pattern B (biggest URL footprint)
+8. Homepage + `/specials` + `/press` + research/tools — Pattern A batch
+
+---
+
+## GSC DAILY QUEUE FIXED — won't run dry, picks money pages first (12:45 CAT, 2026-05-02) [hygiene]
+
+**The complaint.** Jammi: *"can you check why the cron didnt send me the daily listing of URLS by email for me to submit to GSC please"* → after diagnosis: *"the queue is empty is the most stupid fucking bullshit excuse I have ever heard"* → *"we have money pages not submitted, we have all sorts of education pages"* → *"dont let this run out - pick the pages that are going to make a difference and make sure I get ten every day"*. He was right — the cron was broken three different ways at once.
+
+**What was actually wrong (three compounding bugs).**
+1. **Tracker undersized.** `indexation_status` had 153 of 1,203 sitemap URLs. 1,088 site pages were invisible to the picker.
+2. **Tier filter typo.** SQL `LIKE '%/wellness/%'` doesn't match the actual path `/financial-wellness/` (no slash before `wellness`). 81 wellness pages excluded by typo.
+3. **Pool too narrow.** Only 4 tiers eligible (best/answers/wellness/blog ≈ 153 URLs). State, city, compare, brand, categories — 550 URLs of priority pages — completely excluded. After yesterday's 30-day cooldown stamps, eligible pool = 0. Script silently exited. No email.
+
+**What's fixed in `tools/creditdoc_daily_gsc_queue.py` (this session).**
+- Backfilled all 1,203 sitemap URLs into `indexation_status` (was 153 → now 1,241).
+- Added `sync_sitemap()` that runs on every cron firing — pulls `https://www.creditdoc.co/sitemap-0.xml` and inserts new URLs as `NEVER_POLLED`. New pages enter the queue automatically the morning after publication.
+- Tier filter typo fixed (`/wellness/` → `/financial-wellness/`).
+- Expanded eligible tiers to 9: money > answers > wellness > blog > state > brand > compare > categories > city. Money first ("pages that make a difference"), programmatic listings last.
+- **Removed the hard 30-day cooldown filter.** Cooldown is now a soft preference inside `ORDER BY` — least-recently-submitted page always re-cycles. With 671 priority URLs at 10/day this gives ~67 days between resubmissions and the queue NEVER drains.
+- Added empty-state alert email — if pool ever does hit zero (it can't, but defensive), Jammi gets a diagnostic table by email instead of silent failure.
+
+**Live test (12:35 CAT).** Today's queue email already shipped at 12:42 CAT (id `0100019de848d36c-...`) before the second-pass fix — picked 10 wellness URLs because money pages were stamped yesterday. Tomorrow's 06:15 UTC cron will pick money/answers first under the new ordering. Verified in AgentMail inbox at the API level (per CLAUDE.md "verify against API not memory" rule).
+
+**What you'll see going forward.** Every morning at 06:15 UTC: 10 URLs in your inbox with money pages first, then answers, then wellness, then blog. Drive CSV link inline. CSV attached. Submit them in GSC URL Inspection → Request Indexing in order.
+
+---
+
+## DEALS PAGE FA-PROTECTED (11:00 CAT, 2026-05-02) [OBJ-2]
+
+`/deals/` is now Founder-Approved. Same protection class as DB lenders with `is_protected = 1`. Two artifacts:
+
+1. **`creditdoc/data/protected_static_pages.json`** — new registry, mirrors `data/protected_profiles.json` but for static `.astro` pages. Lists `src/pages/deals.astro` with approval timestamp, approver, approved revision worker, and notes.
+2. **FA-marker comment block** at the top of `src/pages/deals.astro` frontmatter so any future agent editing the file sees the protection notice immediately.
+
+**Rule.** Any change to `/deals/` requires (1) explicit founder approval, (2) diff shown before deploy, (3) entry in DECISIONS.md noting the approved revision + worker version. Equivalent to the lender-profile FA flow but for static pages.
+
+---
+
+## DEALS PAGE UPGRADED — first content-edit pushed through the new infrastructure (10:50 CAT, 2026-05-02) [OBJ-2]
+
+**What this proves.** The whole point of the cutover was so we could update the site without weekend-long rebuilds. Jammi asked me to use the `/deals/` page as a real test of that pipeline. I did the upgrade, pushed it through the new infrastructure, and verified it on the live domain.
+
+**What changed on `/deals/`** (it was thin — Jammi flagged it: *"I am surprised this page wasn't flagged as light"*):
+- New title and meta description that lead with credit repair education, not just deals.
+- Removed the stale "Updated March 2026" badge.
+- New **"Before you compare deals"** section: 3 paragraphs (what credit repair is/is not, what's illegal under CROA, your DIY rights) + 3 orientation cards.
+- New **"Why people turn to credit repair"** subsection: 3 paragraphs covering the actual life paths into damaged credit (medical bills, job loss, divorce, identity theft, thin file, post-bankruptcy, co-signed loans, utilization spikes, predatory lending, bureau errors). 9 internal links to the financial wellness library + 1 outbound link to the CFPB complaint database. All 11 linked guides return 200.
+- New **"Learn before you commit"** section in a contrast band: 6-card grid of educational guides + a "browse the full library" link.
+- New **"Quick answers"** FAQ: 4 plain-English Q&As, each linking to the relevant deep guide.
+- Affiliate disclosure block at the bottom.
+
+**Pipeline test result: clean end-to-end.**
+1. Edit `src/pages/deals.astro` locally.
+2. `npm run build` → 32s.
+3. `wrangler deploy` → 21s upload + instant propagation.
+4. `curl https://www.creditdoc.co/deals/` → HTTP 200, 47KB, new content present, all internal links resolve.
+5. Total time from "save file" to "live on production": ~1 minute.
+
+**Worker version after this upgrade:** `01afe80e-bb78-41b0-8bee-74c521a5471b`.
+
+**This is the OBJ-2 test result.** Static page upgrades through the new pipeline = same minute-scale latency we proved for live database edits with `upstart-columbus`. The upgrade workflow works. We can ship content improvements as fast as we can write them.
+
+---
+
+## CUTOVER DONE — `www.creditdoc.co` is on the new Worker (10:18 CAT, 2026-05-02) [OBJ-1]
+
+**The flip is done.** No more Vercel for `www.creditdoc.co`. The new site is live, on Cloudflare, serving everything (homepage, blog, financial-wellness, brand pages, lender reviews, search). I pulled the trigger via API after you said "not tomorrow morning - now".
+
+**Jammi's reaction after the flip:** "its super fast".
+
+**Two things I had to change (both via Cloudflare API, both reversible in one call each):**
+1. **Bound the Worker route** `www.creditdoc.co/*` → `creditdoc` script.
+2. **Flipped `www` CNAME from grey cloud to orange cloud** — Cloudflare now proxies the traffic, which is the prerequisite for the Worker route to actually fire. (Pre-flight gotcha: a route binding alone wouldn't have done anything while DNS was grey-cloud.)
+
+**Live update test on the actual production URL passed:**
+- Edited `upstart-columbus` description in the database.
+- Pinged the refresh endpoint.
+- 5 seconds later, `https://www.creditdoc.co/r/upstart-columbus/` showed the new description.
+- Reverted using the SQLite source-of-truth.
+- 5 seconds later, original back.
+
+This is OBJ-1 proven on the real domain — change the database, see it live within seconds, no rebuild.
+
+**Rollback if anything goes wrong** (one curl each):
+- Remove the Worker route → traffic falls through to Vercel via the still-pointing CNAME.
+- Flip `proxied` back to false on the `www` CNAME → goes direct to Vercel again.
+
+Both are instant. Vercel is still receiving requests for the apex `creditdoc.co` (no www) — that's untouched, only `www` was flipped.
+
+**Two things I learned mid-cutover, saved to memory:**
+1. The SQLite database doesn't have a `body_inline` column (that's Supabase-only). All content lives in a JSON column called `data` — query with `json_extract(data, '$.description_short')`. I burned one round-trip on this before catching it.
+2. The `/api/revalidate/` endpoint wants the token in an `x-revalidate-token` header, not `Authorization: Bearer` (Bearer = 401).
+
+---
+
+## ITER 37 LIVE — three pre-ship gaps fixed, live-update test passed (10:00 CAT, 2026-05-02) [OBJ-1] [OBJ-3]
+
+**Bottom line:** All three things you asked me to fix before the switchover are now on the live test address, working. End-to-end "edit the database → see the change on the page within 5 seconds" was tested for real, and worked.
+
+**Worker version live now:** `17807bf2-ce57-4587-ad96-10bb2b1d1600` on `creditdoc.fancy-glitter-38f7.workers.dev`. (Replaces yesterday's `1df76d8e`.)
+
+**The three fixes (all live, all verified):**
+
+1. **Security headers now apply to every page on the site** — not just the database-driven ones. Before this fix, the homepage, about page, privacy page, terms page etc. had none of the standard browser security headers (the things that stop sites from being framed by other people, sniffed-typed, leaking referrers, etc.). Now they all do.
+
+2. **Two broken brand pages are no longer in the sitemap.** Two brands (`coinflip` and `chase-atm`) were listed in the sitemap but didn't actually have a brand profile to land on, so Google would have crawled them and hit a 404. They're now filtered out at build time. Sitemap dropped from 1,205 → 1,203 URLs.
+
+3. **The search page now queries the live database instead of bundling everything into the page.** The old search page was a 20MB file (it inlined ~18,000 lender records into the HTML so the search box could filter them in your browser). New search page is a 51KB shell that calls a database endpoint on every search. This is also the fix for the "Eze Pawn vs Eze Credit" issue — searching for `ez` now returns every lender with "EZ" anywhere in name, description, or services (EZ Pawn Corp, EZPAWN Luxe, The EZ Agency, etc., 60 matches total).
+
+**The live update test that proves the architecture works:**
+1. I edited a lender's description in the database directly (`upstart-columbus`, set it to a recognizable test string).
+2. I pinged the "tell the live site to refresh" endpoint — it responded in 42ms.
+3. I waited 5 seconds.
+4. The live page on the test address showed the new description. ✅
+5. I reverted the change using the SQLite source-of-truth backup.
+6. 5 seconds later, the live page was back to the original. ✅
+
+This is the "OBJ-1" promise — change the database, see it live globally within seconds, no rebuild — proven on a real Worker.
+
+**What's still pending tomorrow morning:** the actual flip of `www.creditdoc.co` from Vercel to the new Worker. That's the dashboard-click action only you can do (Cloudflare → Workers & Pages → creditdoc → Domains & Routes → add `www.creditdoc.co/*` route). Rollback = remove the route, instantly back on Vercel.
+
+**Two notes for awareness, not blockers:**
+- I caught a bug in yesterday's smoke test: it claimed 8 regulatory pages were live, but 4 of them used invented slugs (`/cookie-policy/`, `/disclosures/`, `/editorial-guidelines/`, `/compliance-licensing/`). The actual regulatory pages are all live and working — they're just at slightly different paths (`/disclosure/` singular, `/editorial-policy/`, etc.). The test had a bug, the site doesn't.
+- A small piece of the search backend tried to filter by sub-category but the database access layer (PostgREST) doesn't support that filter style inside an `or=()` query — it gave a parser error. I fell back to top-level category match only. Most lenders only have one category anyway. Logged for after the cutover if you want sub-category filtering back.
+
+---
+
+## Latest code is now on the live website (09:23 CAT, 2026-05-02) — DEPLOY DONE & VERIFIED [OBJ-1]
+
+**Bottom line:** Pushed. Everything checks out. The website is now ready for tomorrow's switchover.
+
+**What I did:** ran the deploy command. New version `1df76d8e-3491-44c1-a5f8-c9dce3a845bc` is live on the test address (`creditdoc.fancy-glitter-38f7.workers.dev`). 732 new files uploaded.
+
+**What I tested afterwards (5 checks, all passed):**
+1. **Blog page test** — opened a real blog post on the live test address. Returns 200 OK. Confirms it's now built on every visit (not pre-baked), so future blog edits to the database will appear within seconds.
+2. **Financial-wellness page test** — same. 200 OK. Same behaviour.
+3. **Brand page test** — same. 200 OK. Same behaviour.
+4. **Sitemap test** — the file Google reads to find every page on the site has all 1,205 URLs, including the 174 from the three page types I just made dynamic (blog 34, financial-wellness 81, brand 59). Without my earlier fix this would have shown only the homepage and a handful of static pages — Google would have lost track of three-quarters of the site overnight.
+5. **The 4am script test** — simulated tomorrow's daily database sync from a stripped-down environment (same as the cron job runs in). The "tell the website to refresh this page's cache" message went through and got a 200 OK in 52 milliseconds. Yesterday this would have been silently rejected by Cloudflare's bot filter.
+
+**What still remains for tomorrow morning (your part):** point the domain `www.creditdoc.co` from the old hosting (Vercel) at the new one (Cloudflare). All site behaviour will then run on the code I just pushed, and the daily 4am sync will start updating live pages without needing a rebuild. Step-by-step in the switchover review PDF on Drive.
+
+## ITER 36 close-out (09:08 CAT, 2026-05-02) — 🟢 ALL 4 TASKS DONE — CUTOVER REVIEW ON DRIVE — DEPLOY GREENLIT [OBJ-1]
+
+**Bottom line:** SSR flips landed (commit `5c0808f104`), revalidate UA fix landed (commit `aebfb1cb1b`), crons applied with env-source prefix (verify_crons 56/56), cutover-readiness review filed and uploaded to Drive. **Deploy greenlit by Jammi 09:20 CAT.**
+
+**Cutover review:** [`2026-05-02_CDM-REV_Cutover_Readiness_Review.pdf`](https://drive.google.com/file/d/1QXRAkZAzkMUsTrTGPnVfNomVe0dI0Hdh/view) — full Good/Bad/Unavoidable + DNS flip checklist + rollback plan. Local copy at `CreditDoc Project Improvement/2026-05-02_CUTOVER_READINESS_REVIEW.md`.
+
+### Completed in this loop
+- **#41 sitemap fix** — `astro.config.mjs` injects 174 SSR-route URLs (blog 34 + wellness 81 + brand 59) via `customPages` from local SQLite at build time.
+- **#33 cron prefix** — both writer crons (`creditdoc_db_sync` daily 07:00 UTC, `creditdoc_guardian` hourly :05) now source `.creditdoc-revalidate.env` and export REVALIDATE_TOKEN. `verify_crons.sh`: 56/56.
+- **#34 revalidate ping E2E** — caught + fixed Cloudflare bot-management 403 on `Python-urllib/3.x` UA. `_ping_revalidate` now sends browser-shaped UA. End-to-end test under cron-shaped env: HTTP 200 in 52ms, Worker returns `{"ok":true,"target":"<canonical>"}`. Same commit also fixed the `_REVALIDATE_URL` default that still pointed at the deleted `pages.dev` host.
+- **#35 cutover review** — full audit on Drive (link above). All architecture gates GREEN; one operational gate (deploy iter 36) before DNS flip.
+
+### Original bottom line — preserved for context
+Three more high-churn routes flipped to SSR (blog, financial-wellness, brand) so a single DB row edit propagates to the live URL in seconds without a rebuild. Sitemap regression caught + fixed in same commit.
+
+### What shipped this iter (commit `5c0808f104`)
+- `/blog/[slug]/`, `/financial-wellness/[slug]/`, `/brand/[brand]/` now `prerender = false`. Worker middleware reads from Supabase + caches with `updated_at` as cache key. Same revalidation path as `/review/[slug]/` already on prod.
+- New runtime helpers in `src/lib/db.ts`: `getWellnessGuideBySlugRuntime`, `getListiclesByCategoriesRuntime`, `getLendersByBrandRuntime`. Wrapper `getWellnessGuideBySlugRuntimeFromDb` in `src/utils/data-runtime.ts`.
+- Cache headers on all three: `cache-control: public, max-age=86400, s-maxage=86400` + `x-cdm-rev-source: ssr-{blog,wellness,brand}`.
+- **Sitemap regression fixed** — `@astrojs/sitemap` only walks getStaticPaths-generated routes, so per-slug URLs for the flipped routes had silently dropped out of `dist/sitemap-0.xml`. Patch in `astro.config.mjs` reads slugs from local SQLite (`data/creditdoc.db`) at build time via `execSync('sqlite3 …')`, feeds them through `customPages`. Restored: blog 34, financial-wellness 81, brand 59 = 174 URLs.
+- Build: 58.31s, zero errors.
+
+### Categories deferred (NOT a regression)
+`/categories/[category].astro` was the 4th candidate but was deliberately dropped from this iter — banking has 4796 lenders, credit-unions 2313. Top-48-by-rating sort needs `body_inline.rating`, can't push down to PostgREST cleanly. Right path is a precomputed materialized view + revalidation hook on lender writes, not raw SSR. Tracked separately, NOT urgent.
+
+### What this DOES NOT touch
+- Worker code unchanged (middleware was already SSR-capable).
+- Prerendered marketing pages (`/`, `/about/`, `/best/*`, `/answers/`, `/state/`, `/tools/`, `/categories/`) — still static, no behavior change.
+- Lender JSON exports — intentionally not staged (per CreditDoc CLAUDE.md, only `creditdoc_build.py` exports those).
+- Production traffic — branch `cdm-rev-hybrid`, deployed to `creditdoc.fancy-glitter-38f7.workers.dev` only. DNS still points at the old host.
+
+### ⏸ PAUSED AT TASK #33 — needs Jammi override
+**Task #33 — Append `cd /srv/BusinessOps/creditdoc && set -a && . .env && set +a &&` env-source prefix to writer crons (so revalidate webhook actually fires when crons mutate DB rows).**
+- Pre-prepared crontab edit at `/tmp/crontab_edit.txt` (139 lines).
+- Apply via `cat /tmp/crontab_edit.txt | crontab -` — guard wrapper accepts stdin OK.
+- Bypass-guard alternative: `cat /tmp/crontab_edit.txt | /usr/bin/crontab.real -`.
+- After apply: `tools/verify_crons.sh` (must pass) + smoke-test one writer cron to confirm `[revalidate] 200` shows in `/srv/BusinessOps/creditdoc/data/cd_guardian.log`.
+- **Why I'm waiting:** Jammi's verbatim directive — "I will give you ovverride when you get there." Crontab modifications are RULE 4 territory (no bulk infra changes without approval).
+
+### Remaining queue (resumes once #33 greenlit)
+- **#34 — Live-test revalidate ping end-to-end:** trigger one no-op DB write (e.g., `creditdoc_db.py` set+revert on a non-protected row) → tail `cd_guardian.log` for `[revalidate] 200` → curl the affected URL twice with 5s gap → confirm `x-cdm-cache: MISS` then `HIT` with new `etag`.
+- **#35 — Cutover-readiness review for tomorrow AM:** full audit (Worker secrets, `_REVALIDATE_URL`, build status, DB state, cron health, OBJ verifier, DNS-flip checklist + rollback plan). Output to `CreditDoc Project Improvement/2026-05-02_CUTOVER_READINESS_REVIEW.md` + Drive.
+
+### Loop status
+- /loop iteration 36 done. Saved memory + this NOW.md per loop hygiene.
+- NOT scheduling next wakeup — gated on Jammi's "go" for crontab. Next iteration starts when Jammi types either "go" / "override" / a paste of the apply command.
+
+---
+
 ## ITER 35b (12:48 CAT, 2026-05-01) — 🟢 SECURITY HEADERS DEPLOYED + LIVE — DEPLOY UNBLOCKED VIA GLOBAL API KEY (third repeat of same mistake — corrected)
 
 **Bottom line:** Worker version `b2ba86a9-190a-49b8-b43d-fe180c0d187e` deployed at 12:46 UTC. All 5 security headers live on /state/wyoming/, /best/, /answers/. Verified via curl. **The "permission gate" I claimed in iter 35 above was wrong** — there was no permission gate, I was using the wrong CF credential.

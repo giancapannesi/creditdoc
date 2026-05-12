@@ -1,4 +1,100 @@
-# CreditDoc — NEXT (RULE 10 handoff, last updated 2026-04-30 post-2.5b-fix + linter + dangling-refs report + token register)
+# CreditDoc — NEXT (RULE 10 handoff, last updated 2026-05-12 pipeline repair)
+
+## Immediate priorities
+
+1. **Monitor pipeline health.** Smoke test runs 05:00 UTC. If it catches failures, fix same day. The 4-day blog gap and 9-day wellness gap happened because nothing alerted.
+
+2. **Strategic analysis.** Jammi asked "what is the next highest-impact thing we can do" — session pivoted to fixing broken pipelines before answering. Verified data: 287/18,968 indexed, 0 organic clicks yet (domain is 8 weeks old). The regulatory layer is LIVE. City guides + localized quiz are the planned next content layer (see `project_creditdoc_city_guides_plan.md`).
+
+3. **Wellness Wave 3 will exhaust in ~17 days** (34 remaining ÷ 2/day). Need Wave 4 before then or the queue goes empty again. The smoke test will catch it, but proactive refill is better.
+
+4. **Blog queue has 49 items** — good for ~24 days at 2/day.
+
+## DO NOT
+
+- Do not touch Supabase sync — it's working. All 4 content write methods now auto-sync.
+- Do not rewrite any SEO content changed in last 7 days.
+- Do not touch the indexing script — verified 152 OK today. Let it run.
+- Do not use CLOUDFLARE_API_TOKEN for wrangler deploy — must unset it and use CLOUDFLARE_API_KEY.
+
+## Previously completed (kept for reference)
+
+Deploy details:
+- Worker: `creditdoc`
+- Version: `8b502c80-3cfe-476c-a1a5-4f700e858a28`
+- Deployed at 2026-05-07 08:03 UTC using the documented Global API Key auth path, not the zone-only `CLOUDFLARE_API_TOKEN`.
+
+Completed checks:
+1. Test live:
+   - `https://www.creditdoc.co/city/dallas-texas/` → 301 → `/city/dallas-tx/` → 200
+   - `https://www.creditdoc.co/city/jersey-city-new%20jersey/` → 301 → `/city/jersey-city-nj/` → 200
+   - `https://www.creditdoc.co/city/durham-north%20carolina/` → 301 → `/city/durham-nc/` → 200
+   - canonical city URLs like `/city/dallas-tx/` return 200 with no redirect.
+2. Live sitemap check: `https://www.creditdoc.co/sitemap-0.xml` has 260 city URLs and 0 `%20`/full-state city URL matches.
+
+GSC status:
+1. Existing GSC OAuth credentials are wired and refresh successfully.
+2. Read endpoint works on `sc-domain:creditdoc.co`.
+3. GSC already has the correct production sitemap registered: `https://www.creditdoc.co/sitemap-index.xml`; last submitted `2026-04-27T13:02:26.581Z`, last downloaded `2026-04-27T13:02:27.620Z`, sitemap index, `0` errors, `0` warnings.
+4. API resubmit was attempted on 2026-05-07 and Google returned 403 `ACCESS_TOKEN_SCOPE_INSUFFICIENT` for `SitemapsService.Submit`. The saved refresh token can read GSC but cannot submit sitemaps until re-authorized with full `https://www.googleapis.com/auth/webmasters` scope.
+
+Remaining:
+1. Manual GSC resubmit or OAuth re-auth with full `webmasters` scope if scriptable sitemap submit is required.
+2. Monitor weekly in stored/live GSC. Keep city 301s at least 12 months for old URLs that had impressions; never remove before 90 days with zero meaningful impressions/crawls.
+
+Reference files:
+- Code normalization: `src/utils/data-build.ts`
+- Runtime fallback guard: `src/middleware.ts`
+- Static Cloudflare redirect rules: `public/_redirects`
+- Durable ledger: `docs/redirect-ledger.md`
+- Baseline/results: top entry in `CREDITDOC_NOW.md`
+
+## ✅ CUTOVER DONE — `www.creditdoc.co` is live on the new Worker
+
+The DNS flip is done. Both API calls (Worker route bind + CNAME proxy flip) succeeded at ~10:18 CAT, 2026-05-02. 7/7 smoke tests GREEN on the real production URL. OBJ-1 (live database update → live page in ~5s) proven on `www.creditdoc.co/r/upstart-columbus/`.
+
+**Worker live on production:** `17807bf2-ce57-4587-ad96-10bb2b1d1600` via Cloudflare zone `b644afdfb731703f578f6885ca1774b4`, route ID `9e0f031ee146425182f0a083d328897e`.
+
+**Apex `creditdoc.co` (no www) was NOT flipped — it still points at Vercel.** If you want apex → Worker too, that's a separate flip:
+- Add Worker route `creditdoc.co/*` → `creditdoc`
+- Add `creditdoc.co` proxied DNS record (currently `A 216.198.79.1 proxied=False` → Vercel; would need to be Cloudflare-proxied for the route to fire)
+
+For now, the canonical site is `https://www.creditdoc.co` and the apex is a Vercel fallback. Most users hit www anyway, but Google may still show some apex links until they re-crawl. Decision: leave for now, or flip in a follow-up.
+
+---
+
+## 🟢 ORIGINAL NEXT ACTION (now superseded — kept for reference)
+**~~Tomorrow morning switchover (2026-05-03, Jammi-side)~~** — done same-day at Jammi's request.
+
+The latest version on the live test address now includes **three extra fixes Jammi asked for** before the switchover (security headers on static pages, broken brand pages dropped from the sitemap, search page rewritten to query the database instead of bundling a 20MB blob into the page). Live "edit the database, see it on the page within 5 seconds" was tested end-to-end and worked.
+
+**Active worker version:** `17807bf2-ce57-4587-ad96-10bb2b1d1600` (replaces yesterday's `1df76d8e`).
+
+The switchover steps below are unchanged.
+
+## 🟢 ORIGINAL NEXT ACTION — Tomorrow morning switchover (2026-05-03, Jammi-side)
+
+The latest code is on the live website now. Three things still need to happen tomorrow morning (in this order):
+
+1. **Open Cloudflare dashboard → Workers & Pages → `creditdoc` → Domains & Routes.**
+2. **Add the route `www.creditdoc.co/*`** pointing at the `creditdoc` worker. (This is the action that "moves" the live website from Vercel to Cloudflare.)
+3. **Test in a browser:** `https://www.creditdoc.co/` returns the homepage; `https://www.creditdoc.co/blog/<any-real-slug>/` shows the blog post; `https://www.creditdoc.co/r/upstart/` shows the lender review.
+
+**Step-by-step in the switchover review PDF:** [Drive link](https://drive.google.com/file/d/1QXRAkZAzkMUsTrTGPnVfNomVe0dI0Hdh/view) — sections "DNS flip checklist" and "Rollback plan."
+
+If anything looks wrong: rollback is one click — remove the Cloudflare route. The website goes straight back to Vercel.
+
+**Why this is needed:** the new code is live but only on a test address (`creditdoc.fancy-glitter-38f7.workers.dev`). Visitors going to `www.creditdoc.co` are still hitting the old Vercel build. Step 2 above is what moves them across.
+
+## Cleanup tasks for after the switchover (NOT urgent, can wait days)
+
+- Patch the test probe `tools/cdm_rev_phase24_e2e_probe.py` — its default address still points at a deleted host (`cdm-rev-hybrid.creditdoc.pages.dev`). Should be `https://www.creditdoc.co`.
+- Build a precomputed lender-by-category table so `/categories/<category>/` pages can also update without rebuilds. Currently still pre-baked (works fine, just not as fast to update).
+- Review and commit the 5 misc local files not yet pushed to git: `CREDITDOC_NOW.md`, the migration plan doc, two `tools/*.astro` test pages, and `html-diff.sh`.
+
+---
+
+
 
 ## ✅ LANDED (Apr 30 PM late) — Phase 3.4 + 3.5 + 3.6 + Phase 5.4 [OBJ-1, OBJ-3]
 
