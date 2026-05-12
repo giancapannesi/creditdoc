@@ -43,8 +43,8 @@ from creditdoc_db import CreditDocDB
 sys.path.insert(0, "/srv/BusinessOps/tools")
 from gsc_indexing import get_indexing_api_token, push_indexing_api  # push_indexing_api now stamps shared cooldown
 
-TELEGRAM_TOKEN = "8552358080:AAFC8FjKxQdj_NJyqwMbgUZrxKzUrn83tGY"
-TELEGRAM_CHAT_ID = "1351661181"
+TELEGRAM_TOKEN = ""  # removed — all alerts via Harvey email (cron_alert.py)
+TELEGRAM_CHAT_ID = ""
 
 INDEXNOW_KEY = "f2018aa106044007bf54b7cde9067a1e"  # verified: /f2018...txt live
 INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow"
@@ -245,19 +245,7 @@ def stamp_submitted(db, urls):
 
 
 def send_telegram(message):
-    try:
-        requests.post(
-            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-            json={
-                "chat_id": TELEGRAM_CHAT_ID,
-                "text": message[:4000],
-                "parse_mode": "HTML",
-                "disable_web_page_preview": True,
-            },
-            timeout=10,
-        )
-    except Exception as e:
-        print(f"Telegram failed: {e}")
+    return  # DISABLED — all CreditDoc alerts via Harvey email (cron_alert.py)
 
 
 def main():
