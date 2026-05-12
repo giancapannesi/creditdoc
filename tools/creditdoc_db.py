@@ -323,8 +323,9 @@ class CreditDocDB:
         self.db_path = Path(db_path) if db_path else DB_PATH
         if not self.db_path.exists():
             raise FileNotFoundError(f"Database not found: {self.db_path}. Run migrate first.")
-        self.conn = sqlite3.connect(str(self.db_path))
+        self.conn = sqlite3.connect(str(self.db_path), timeout=30)
         self.conn.row_factory = sqlite3.Row
+        self.conn.execute("PRAGMA busy_timeout=30000")
         self.conn.execute("PRAGMA journal_mode=WAL")
         self.conn.execute("PRAGMA foreign_keys=ON")
         self._ensure_supabase_retries_table()
@@ -793,6 +794,18 @@ class CreditDocDB:
         )
         self.conn.commit()
         _ping_revalidate("blog", slug)
+        _supabase_upsert(
+            "blog_posts", slug,
+            {
+                "title": data.get("title", ""),
+                "category": data.get("category", ""),
+                "status": status,
+                "publish_date": data.get("publish_date", data.get("date", "")),
+                "body_inline": data,
+                "updated_at": ts,
+            },
+            db_conn=self.conn,
+        )
 
     def add_comparison(self, data: dict, updated_by: str):
         slug = data.get("slug", "")
@@ -806,6 +819,16 @@ class CreditDocDB:
         )
         self.conn.commit()
         _ping_revalidate("comparison", slug)
+        _supabase_upsert(
+            "comparisons", slug,
+            {
+                "lender_a": data.get("lender_a", ""),
+                "lender_b": data.get("lender_b", ""),
+                "body_inline": data,
+                "updated_at": ts,
+            },
+            db_conn=self.conn,
+        )
 
     def add_wellness_guide(self, data: dict, updated_by: str):
         slug = data.get("slug", "")
@@ -819,6 +842,16 @@ class CreditDocDB:
         )
         self.conn.commit()
         _ping_revalidate("wellness", slug)
+        _supabase_upsert(
+            "wellness_guides", slug,
+            {
+                "title": data.get("title", ""),
+                "category": data.get("category", ""),
+                "body_inline": data,
+                "updated_at": ts,
+            },
+            db_conn=self.conn,
+        )
 
     def add_listicle(self, data: dict, updated_by: str):
         slug = data.get("slug", "")
@@ -938,6 +971,21 @@ class CreditDocDB:
         )
         self.conn.commit()
         _ping_revalidate("answer", slug)
+        _supabase_upsert(
+            "answers", slug,
+            {
+                "title": data["title"],
+                "cluster_id": data["cluster_id"],
+                "cluster_pillar": data["cluster_pillar"],
+                "banner_category": data["banner_category"],
+                "target_money_page": data["target_money_page"],
+                "compliance_score": int(data.get("compliance_score") or 0),
+                "compliance_passed": bool(data.get("compliance_passed")),
+                "body_inline": data,
+                "updated_at": ts,
+            },
+            db_conn=self.conn,
+        )
 
     def delete_cluster_answer(self, slug, updated_by: str):
         if updated_by != "founder":
