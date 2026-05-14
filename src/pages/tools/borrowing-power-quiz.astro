@@ -40,11 +40,7 @@ const jsonLd = {
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Web",
   "image": "https://www.creditdoc.co/og-default.png",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
+  "isAccessibleForFree": true,
   "author": {
     "@type": "Person",
     "name": "CreditDoc Editorial Team",
@@ -461,6 +457,26 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
           </div>
         </div>
 
+        <!-- Email Capture -->
+        <div id="email-capture" class="glass-card p-6 mb-6 border-2 border-primary/30" style="pointer-events: auto;">
+          <h3 class="font-bold text-text mb-2 flex items-center gap-2">
+            <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+            Get Your Full Credit Report & Tips
+          </h3>
+          <p class="text-sm text-muted mb-4">Enter your email to receive personalized credit improvement tips based on your score — free, no spam.</p>
+          <form id="email-form" class="flex flex-col sm:flex-row gap-3">
+            <input type="text" id="capture-name" placeholder="First name" class="flex-shrink-0 sm:w-36 px-4 py-2.5 rounded-lg bg-bg border border-border text-text placeholder-muted focus:outline-none focus:border-primary" />
+            <input type="email" id="capture-email" placeholder="Email address" required class="flex-1 px-4 py-2.5 rounded-lg bg-bg border border-border text-text placeholder-muted focus:outline-none focus:border-primary" />
+            <button type="submit" class="px-6 py-2.5 bg-primary text-white rounded-lg font-medium hover:bg-primary-hover transition-colors whitespace-nowrap">Send My Tips</button>
+          </form>
+          <div id="email-success" class="hidden text-center py-3">
+            <p class="text-primary font-medium">✓ You're in! Check your inbox for your first tip.</p>
+          </div>
+          <div id="email-error" class="hidden text-center py-3">
+            <p class="text-red-500 text-sm">Something went wrong. Please try again.</p>
+          </div>
+        </div>
+
         <!-- Personalized Insights -->
         <div id="result-insights" class="glass-card p-6 mb-6" style="pointer-events: none;">
           <h3 class="font-bold text-text mb-3 flex items-center gap-2">
@@ -860,6 +876,50 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
             quiz_label: r.label,
           });
         }
+      }
+    });
+    // Email capture form
+    const emailForm = document.getElementById('email-form');
+    const emailSuccess = document.getElementById('email-success');
+    const emailError = document.getElementById('email-error');
+
+    emailForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = (document.getElementById('capture-name') as HTMLInputElement).value.trim();
+      const email = (document.getElementById('capture-email') as HTMLInputElement).value.trim();
+      if (!email) return;
+
+      const btn = emailForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      try {
+        const body = new URLSearchParams({
+          list: 'rCzcu8brUim88T892Y85IqRQ',
+          email,
+          name,
+          boolean: 'true',
+        });
+        const res = await fetch('https://sendy.creditdoc.co/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString(),
+        });
+        const text = await res.text();
+        if (text.trim() === '1' || text.includes('Already subscribed')) {
+          emailForm.classList.add('hidden');
+          emailSuccess.classList.remove('hidden');
+          emailError.classList.add('hidden');
+          if (typeof gtag === 'function') {
+            gtag('event', 'quiz_email_capture', { event_category: 'engagement' });
+          }
+        } else {
+          throw new Error(text);
+        }
+      } catch {
+        emailError.classList.remove('hidden');
+        btn.textContent = 'Send My Tips';
+        btn.disabled = false;
       }
     });
   </script>
