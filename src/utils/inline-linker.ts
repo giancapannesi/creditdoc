@@ -168,6 +168,14 @@ const MONEY_LINKS: MoneyLink[] = [
   { phrase: 'car finance', url: '/categories/personal-loans/', title: 'Personal & Auto Loans' },
   { phrase: 'car loans', url: '/categories/personal-loans/', title: 'Personal & Auto Loans' },
   { phrase: 'car loan', url: '/categories/personal-loans/', title: 'Personal & Auto Loans' },
+  { phrase: 'consumer complaints', url: '/research/consumer-complaints/', title: 'Consumer Complaint Data' },
+  { phrase: 'CFPB complaints', url: '/research/consumer-complaints/', title: 'Consumer Complaint Data' },
+  { phrase: 'CFPB data', url: '/research/consumer-complaints/', title: 'Consumer Complaint Data' },
+  { phrase: 'complaint resolution', url: '/research/consumer-complaints/', title: 'Consumer Complaint Data' },
+  { phrase: 'consumer protection data', url: '/research/consumer-complaints/', title: 'Consumer Complaint Data' },
+  { phrase: 'consumer response profiles', url: '/trends/', title: 'Consumer Response Profiles' },
+  { phrase: 'consumer response data', url: '/trends/', title: 'Consumer Response Data' },
+  { phrase: 'response profiles', url: '/trends/', title: 'Consumer Response Profiles' },
 ];
 
 const SORTED_MONEY_LINKS = [...MONEY_LINKS].sort((a, b) => b.phrase.length - a.phrase.length);
@@ -189,6 +197,7 @@ function linkifyParagraph(
   text: string,
   glossaryTerms: GlossaryTerm[],
   usedPhrases: Set<string>,
+  usedUrls: Set<string>,
   moneyBudget: { remaining: number },
   glossaryBudget: { remaining: number },
   affiliateConfig?: AffiliateConfig,
@@ -226,6 +235,7 @@ function linkifyParagraph(
     if (selfRefUrl && ml.url === selfRefUrl) continue;
     const lower = ml.phrase.toLowerCase();
     if (usedPhrases.has(lower)) continue;
+    if (usedUrls.has(ml.url)) continue;
 
     const regex = new RegExp(`\\b(${escapeRegex(ml.phrase)})\\b`, 'i');
     const match = regex.exec(text);
@@ -240,6 +250,7 @@ function linkifyParagraph(
     ]);
     for (let i = start; i < end; i++) linked[i] = true;
     usedPhrases.add(lower);
+    usedUrls.add(ml.url);
     moneyBudget.remaining--;
   }
 
@@ -311,11 +322,12 @@ export function linkifyDescription(
   currentCategory: string = '',
 ): string[] {
   const usedPhrases = new Set<string>();
-  const moneyBudget = { remaining: 5 };
+  const usedUrls = new Set<string>();
+  const moneyBudget = { remaining: 4 };
   const glossaryBudget = { remaining: 5 };
 
   return autoParagraphs(descriptionLong).split('\n\n').map(paragraph =>
-    linkifyParagraph(paragraph, glossaryTerms, usedPhrases, moneyBudget, glossaryBudget, affiliateConfig, currentCategory)
+    linkifyParagraph(paragraph, glossaryTerms, usedPhrases, usedUrls, moneyBudget, glossaryBudget, affiliateConfig, currentCategory)
   );
 }
 
@@ -338,12 +350,13 @@ export function createLinker(
   opts: { moneyBudget?: number; glossaryBudget?: number } = {},
 ): PageLinker {
   const usedPhrases = new Set<string>();
+  const usedUrls = new Set<string>();
   const moneyBudget = { remaining: opts.moneyBudget ?? 8 };
   const glossaryBudget = { remaining: opts.glossaryBudget ?? 8 };
 
   const fn = ((text: string): string[] =>
     autoParagraphs(text).split('\n\n').map(paragraph =>
-      linkifyParagraph(paragraph, glossaryTerms, usedPhrases, moneyBudget, glossaryBudget)
+      linkifyParagraph(paragraph, glossaryTerms, usedPhrases, usedUrls, moneyBudget, glossaryBudget)
     )) as PageLinker;
   fn.usedPhrases = usedPhrases;
   fn.moneyRemaining = () => moneyBudget.remaining;

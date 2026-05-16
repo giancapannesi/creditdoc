@@ -150,6 +150,16 @@ const services = categories.filter(c =>
       </a>
 
       <a
+        href="/courses/"
+        class:list={[
+          "text-sm font-medium transition-colors py-2",
+          currentPath.startsWith('/courses') ? 'text-primary' : 'text-text hover:text-primary'
+        ]}
+      >
+        Courses
+      </a>
+
+      <a
         href="/learn/"
         class:list={[
           "text-sm font-medium transition-colors py-2",
@@ -265,6 +275,9 @@ const services = categories.filter(c =>
       </a>
       <a href="/financial-wellness/" class="block rounded-lg px-3 py-3 text-sm font-medium text-text hover:bg-bg-alt transition-colors">
         Wellness
+      </a>
+      <a href="/courses/" class="block rounded-lg px-3 py-3 text-sm font-medium text-text hover:bg-bg-alt transition-colors">
+        Courses
       </a>
       <a href="/learn/" class="block rounded-lg px-3 py-3 text-sm font-medium text-text hover:bg-bg-alt transition-colors">
         Learn

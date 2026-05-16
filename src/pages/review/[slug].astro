@@ -6,6 +6,7 @@ import DiagnosisCard from '../../components/DiagnosisCard.astro';
 import LenderCard from '../../components/LenderCard.astro';
 import TrustBadge from '../../components/TrustBadge.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
+import RegulatoryRecord from '../../components/RegulatoryRecord.astro';
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
 import {
   formatPrice,
@@ -24,6 +25,7 @@ import {
   getLenderWithBodyBySlugRuntime,
   getLendersBySlugListRuntime,
   getRelatedLendersByCategoryRuntime,
+  getRegulatorDataRuntime,
   type RuntimeLenderEnv,
 } from '../../lib/db';
 import type { Lender } from '../../utils/data';
@@ -147,6 +149,8 @@ const affiliateConfig = lender.affiliate_url && Array.isArray(lender.affiliate_a
 const linkedParagraphs = lender.description_long
   ? linkifyDescription(lender.description_long, glossaryTerms, lender.slug, affiliateConfig, lender.category)
   : [];
+
+const regulatorData = await getRegulatorDataRuntime(lender.slug, env as any);
 
 const comparisons = await getComparisonsForLenderRuntime(lender.slug, env, 50);
 
@@ -308,6 +312,18 @@ if (lender.rating > 0 && lender.rating <= 5) {
   };
 }
 
+// AggregateRating from real Google Reviews data (not editorial scores).
+// Only added when actual customer review data exists (google_rating + google_reviews_count).
+if (lender.google_rating && lender.google_rating > 0 && lender.google_rating <= 5 && lender.google_reviews_count && lender.google_reviews_count >= 1) {
+  financialService.aggregateRating = {
+    '@type': 'AggregateRating',
+    ratingValue: lender.google_rating.toFixed(1),
+    bestRating: '5',
+    worstRating: '1',
+    reviewCount: lender.google_reviews_count,
+  };
+}
+
 // Price range hint
 if (lender.pricing?.monthly_price > 0) {
   financialService.priceRange = `$${lender.pricing.monthly_price}/mo`;
@@ -440,6 +456,7 @@ const ogImageUrl = lender.logo_url?.trim()
     return nameWithLoc.slice(0, 60);
   })()}
   description={(() => {
+    if (lender.meta_description) return lender.meta_description.slice(0, 155);
     const base = lender.description_short || `${lender.name} review with pricing, ratings, and features.`;
     const city = lender.company_info?.city;
     if (city && !base.includes(city)) {
@@ -829,6 +846,11 @@ const ogImageUrl = lender.logo_url?.trim()
           </div>
         )}
 
+        {/* Regulatory data — dynamic from regulator.db → Supabase sync */}
+        {regulatorData && (
+          <RegulatoryRecord data={regulatorData} lenderName={lender.name} />
+        )}
+
         <!-- FAQ -->
         <div class="glass-card p-6">
           <h2 class="text-xl font-bold text-text mb-4">Frequently Asked Questions</h2>
@@ -1097,6 +1119,111 @@ const ogImageUrl = lender.logo_url?.trim()
     </section>
   )}
 
+  <!-- Mini Fit Quiz -->
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-6 border-primary/20 border" id="fit-quiz">
+      <h2 class="text-xl font-bold text-text mb-2">Is {lender.name} Right for You?</h2>
+      <p class="text-sm text-muted mb-5">Answer 3 quick questions to see if this provider matches your needs.</p>
+      <div id="quiz-questions">
+        <div class="quiz-step" data-step="1">
+          <p class="text-sm font-semibold text-text mb-3">1. What's your primary financial goal?</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="repair">Improve my credit score</button>
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="loan">Get a loan or financing</button>
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="debt">Manage or consolidate debt</button>
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="build">Build credit from scratch</button>
+          </div>
+        </div>
+        <div class="quiz-step hidden" data-step="2">
+          <p class="text-sm font-semibold text-text mb-3">2. What's your current credit situation?</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="poor">Poor (below 580)</button>
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="fair">Fair (580-669)</button>
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="good">Good (670-739)</button>
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="excellent">Excellent (740+)</button>
+          </div>
+        </div>
+        <div class="quiz-step hidden" data-step="3">
+          <p class="text-sm font-semibold text-text mb-3">3. What matters most to you in a provider?</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="price">Low cost / free options</button>
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="speed">Fast results</button>
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="trust">Reputation & trust</button>
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="service">Full-service support</button>
+          </div>
+        </div>
+        <div class="quiz-step hidden" data-step="result">
+          <div class="text-center py-4">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+            </div>
+            <p class="text-lg font-bold text-text mb-2" id="quiz-verdict"></p>
+            <p class="text-sm text-muted mb-4" id="quiz-reason"></p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+              {(lender.affiliate_url || lender.website_url) && (
+                <a href={lender.affiliate_url || lender.website_url} target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors">
+                  Visit {lender.name}
+                </a>
+              )}
+              <a href="/best/best-credit-repair-companies/" class="inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-lg border border-border text-text hover:bg-bg-alt transition-colors">
+                Compare alternatives
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script define:vars={{ quizCategory: lender.category, quizServices: lender.services, quizHasGuarantee: lender.pricing?.money_back_guarantee || false, quizHasFreeConsult: lender.pricing?.free_consultation || false, quizRating: lender.rating, quizName: lender.name }}>
+    (function() {
+      const quiz = document.getElementById('fit-quiz');
+      if (!quiz) return;
+      const answers = [];
+      const steps = quiz.querySelectorAll('.quiz-step');
+      quiz.addEventListener('click', function(e) {
+        const btn = e.target.closest('.quiz-btn');
+        if (!btn) return;
+        answers.push(btn.dataset.value);
+        const currentStep = btn.closest('.quiz-step');
+        const nextStepNum = parseInt(currentStep.dataset.step) + 1;
+        currentStep.classList.add('hidden');
+        const nextStep = nextStepNum <= 3
+          ? quiz.querySelector('[data-step="' + nextStepNum + '"]')
+          : quiz.querySelector('[data-step="result"]');
+        if (nextStep) {
+          nextStep.classList.remove('hidden');
+          if (nextStepNum > 3) showResult();
+        }
+      });
+      function showResult() {
+        const [goal, credit, priority] = answers;
+        let score = 0;
+        const cats = (quizCategory || '').toLowerCase();
+        if (goal === 'repair' && (cats.includes('credit repair') || cats.includes('credit'))) score += 2;
+        if (goal === 'loan' && (cats.includes('lend') || cats.includes('loan') || cats.includes('mortgage'))) score += 2;
+        if (goal === 'debt' && (cats.includes('debt') || cats.includes('consolidat'))) score += 2;
+        if (goal === 'build' && (cats.includes('credit') || cats.includes('bank'))) score += 1;
+        if (priority === 'price' && (quizHasFreeConsult || quizHasGuarantee)) score += 1;
+        if (priority === 'trust' && quizRating >= 4) score += 1;
+        if (priority === 'service' && quizServices && quizServices.length >= 4) score += 1;
+        if (credit === 'poor' && (cats.includes('credit repair') || cats.includes('bad credit'))) score += 1;
+        const verdict = document.getElementById('quiz-verdict');
+        const reason = document.getElementById('quiz-reason');
+        if (score >= 3) {
+          verdict.textContent = quizName + ' looks like a strong match!';
+          reason.textContent = 'Based on your goals and preferences, this provider aligns well with what you\'re looking for.';
+        } else if (score >= 1) {
+          verdict.textContent = quizName + ' could be a good option.';
+          reason.textContent = 'This provider offers relevant services. We recommend comparing a few options to find your best fit.';
+        } else {
+          verdict.textContent = 'You might want to explore other options.';
+          reason.textContent = 'Based on your specific needs, other providers may be a better match. Check our comparison page for alternatives.';
+        }
+      }
+    })();
+  </script>
+
   <!-- Related Financial Wellness Guides -->
   {relatedWellnessGuides.length > 0 && (
     <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
@@ -1112,6 +1239,34 @@ const ogImageUrl = lender.logo_url?.trim()
       </div>
     </section>
   )}
+
+  <!-- Course & Quiz CTAs -->
+  <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <a href="/courses/credit-fundamentals/" class="glass-card p-5 hover:border-primary transition-colors group flex gap-4 items-start">
+        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-text group-hover:text-primary transition-colors">Free Credit Fundamentals Course</h3>
+          <p class="mt-1 text-xs text-muted">Learn how credit scores work, how to dispute errors, and build credit from scratch. 10 modules, zero cost.</p>
+        </div>
+      </a>
+      <a href="/tools/borrowing-power-quiz/" class="glass-card p-5 hover:border-primary transition-colors group flex gap-4 items-start">
+        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-primary-light flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-text group-hover:text-primary transition-colors">Borrowing Power Quiz</h3>
+          <p class="mt-1 text-xs text-muted">Find out how much you could borrow in 60 seconds. Free, private, no credit impact.</p>
+        </div>
+      </a>
+    </div>
+  </section>
 
   <!-- Glossary Appendix -->
   {glossaryTerms.length > 0 && (

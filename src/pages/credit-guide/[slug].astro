@@ -1,0 +1,576 @@
+---
+export const prerender = false;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LenderCard from '../../components/LenderCard.astro';
+import {
+  getCategoriesRuntime,
+  shapeBodyInlineToLender,
+} from '../../utils/data-runtime';
+import { createLinker } from '../../utils/inline-linker';
+import {
+  getCityGuideBySlugRuntime,
+  getCityGuidesByStateRuntime,
+  getStateBySlugRuntime,
+  getLendersByStateRuntime,
+  type RuntimeLenderEnv,
+  type RuntimeCityGuide,
+} from '../../lib/db';
+import type { Lender } from '../../utils/data';
+
+const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
+const { slug } = Astro.params;
+if (!slug) return new Response('Bad request', { status: 400 });
+
+const guide = await getCityGuideBySlugRuntime(slug, env);
+if (!guide) {
+  return new Response('Not found', {
+    status: 404,
+    headers: { 'content-type': 'text/plain; charset=utf-8' },
+  });
+}
+
+const city = guide.city;
+const stateAbbr = guide.state_abbr;
+const stateName = guide.state_name;
+const data = guide.body_inline ?? {};
+
+const stateSlug = stateName.toLowerCase().replace(/ /g, '-');
+const stateRow = await getStateBySlugRuntime(stateSlug, env);
+const stateData = (stateRow?.body_inline ?? null) as Record<string, any> | null;
+
+// Extract credit repair laws object for structured rendering
+const creditRepairLaws = stateData?.credit_repair_laws && typeof stateData.credit_repair_laws === 'object'
+  ? stateData.credit_repair_laws as { state_statute?: string; statute_code?: string; bond_required?: boolean; bond_amount?: string; upfront_fees_prohibited?: boolean; cancellation_period_days?: number; registration_required?: boolean; registration_agency?: string; key_provisions?: string[] }
+  : null;
+const creditRepairSummary = creditRepairLaws
+  ? `${creditRepairLaws.state_statute || 'State credit repair law'}${creditRepairLaws.statute_code ? ` (${creditRepairLaws.statute_code})` : ''}. ${creditRepairLaws.upfront_fees_prohibited ? 'Upfront fees prohibited. ' : ''}${creditRepairLaws.cancellation_period_days ? `${creditRepairLaws.cancellation_period_days}-day cancellation period. ` : ''}${creditRepairLaws.bond_required ? `$${creditRepairLaws.bond_amount || '25,000'} bond required.` : ''}`
+  : typeof stateData?.credit_repair_laws === 'string' ? stateData.credit_repair_laws : null;
+
+// Lenders in this state (for local lender section)
+const lenderRows = await getLendersByStateRuntime(stateAbbr, env, 30);
+const lenders: Lender[] = lenderRows.map(r => shapeBodyInlineToLender(r as any));
+
+// Filter out broken lenders (no description or error messages in description)
+const validLenders = lenders.filter(l => {
+  const desc = l.description_short || '';
+  if (desc.includes('403 Forbidden') || desc.includes('Unable to verify') || desc.includes('Unable to generate')) return false;
+  if (!desc || desc.length < 30) return false;
+  return true;
+});
+
+// Filter lenders that mention this city
+const cityLenders = validLenders.filter(l => {
+  const lCity = (l as any).city || '';
+  return lCity.toLowerCase() === city.toLowerCase();
+});
+const nearbyLenders = cityLenders.length > 0 ? cityLenders : validLenders.slice(0, 12);
+
+// Categories
+const categories = getCategoriesRuntime();
+const catNames: Record<string, string> = {};
+for (const cat of categories) catNames[cat.slug] = cat.name;
+
+// Category groups from nearby lenders
+const categoryGroups = new Map<string, Lender[]>();
+for (const l of nearbyLenders) {
+  if (!categoryGroups.has(l.category)) categoryGroups.set(l.category, []);
+  categoryGroups.get(l.category)!.push(l);
+}
+
+// Sibling city guides in same state
+const siblingGuides = await getCityGuidesByStateRuntime(stateAbbr, env, 20);
+const otherCities = siblingGuides.filter(g => g.slug !== slug).slice(0, 12);
+
+// Fetch wellness guides and answers for the bottom section
+let wellnessGuides: { slug: string; title: string }[] = [];
+let answerPages: { slug: string; title: string }[] = [];
+if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
+  const hdrs = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
+  const [wRes, aRes] = await Promise.all([
+    fetch(`${env.SUPABASE_URL}/rest/v1/wellness_guides?select=slug,title&limit=6`, { headers: hdrs, signal: AbortSignal.timeout(3000) }).catch(() => null),
+    fetch(`${env.SUPABASE_URL}/rest/v1/answers?select=slug,title&limit=6`, { headers: hdrs, signal: AbortSignal.timeout(3000) }).catch(() => null),
+  ]);
+  if (wRes?.ok) wellnessGuides = await wRes.json();
+  if (aRes?.ok) answerPages = await aRes.json();
+}
+
+// Format helpers
+const fmt = (n: number | null) => n?.toLocaleString('en-US') || '—';
+const fmtCurrency = (n: number | null) => n ? '$' + n.toLocaleString('en-US') : '—';
+const fmtPct = (n: number | null) => n != null ? n + '%' : '—';
+
+// SEO
+const title = guide.seo_title || `Credit Repair & Financial Services in ${city}, ${stateAbbr} | CreditDoc`;
+const description = guide.meta_description || `Find credit repair companies, personal lenders, SBA resources, and financial services in ${city}, ${stateName}. Local credit guide with ${stateName} lending laws and consumer protections.`;
+
+// Editorial content from body_inline — run through smart linker
+const linker = createLinker([], { moneyBudget: 6, glossaryBudget: 0 });
+
+// Localized questions from body_inline — answers run through smart linker
+const localQuestionsRaw: { q: string; a: string }[] = data.local_questions || [];
+const localQuestions = localQuestionsRaw.map(faq => {
+  const hasHtml = /<[a-z][\s\S]*>/i.test(faq.a);
+  return {
+    q: faq.q,
+    a: hasHtml ? faq.a : linker(faq.a).join(''),
+  };
+});
+
+// Local resources from body_inline
+const localResources: { name: string; type: string; address?: string; phone?: string; url?: string }[] = data.local_resources || [];
+const editorialRaw: string = data.editorial || '';
+// Editorial is stored as HTML with <p> tags. Split on paragraph boundaries,
+// strip tags, run each paragraph through the linker for internal links,
+// then re-wrap in <p> tags.
+const editorialParas = editorialRaw
+  .split(/<\/p>\s*<p>/i)
+  .map(p => p.replace(/<\/?p[^>]*>/gi, '').trim())
+  .filter(Boolean);
+const editorial = editorialParas
+  .map(p => `<p>${linker(p).join(' ')}</p>`)
+  .join('');
+const creditTipsRaw: string[] = data.credit_tips || [];
+const creditTips: string[] = creditTipsRaw.map(tip => linker(tip).join(''));
+const sbaInfo: { office?: string; address?: string; phone?: string; programs?: string[] } = data.sba_info || {};
+const consumerProtection: { agency?: string; phone?: string; url?: string; filing_info?: string } = data.consumer_protection || {};
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": `Credit Guide for ${city}, ${stateAbbr}`,
+    "description": description,
+    "url": `https://www.creditdoc.co/credit-guide/${slug}/`,
+    "about": {
+      "@type": "City",
+      "name": city,
+      "containedInPlace": { "@type": "State", "name": stateName }
+    },
+    "publisher": { "@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/" },
+      { "@type": "ListItem", "position": 2, "name": stateName, "item": `https://www.creditdoc.co/state/${stateSlug}/` },
+      { "@type": "ListItem", "position": 3, "name": `${city} Credit Guide`, "item": `https://www.creditdoc.co/credit-guide/${slug}/` }
+    ]
+  },
+  ...(localQuestions.length > 0 ? [{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": localQuestions.slice(0, 10).map(faq => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": { "@type": "Answer", "text": faq.a }
+    }))
+  }] : [])
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Breadcrumbs -->
+  <nav class="max-w-6xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href={`/state/${stateSlug}/`} class="hover:text-primary transition-colors">{stateName}</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">{city} Credit Guide</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Hero -->
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">
+        Credit Repair & Financial Services in {city}, {stateAbbr}
+      </h1>
+      <p class="text-lg text-muted max-w-3xl">
+        Your complete local credit guide for {city}, {stateName}. Find credit repair companies, compare lenders, understand {stateName} lending laws, and access local financial resources.
+      </p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+      {guide.population && (
+        <div class="glass-card p-4 text-center" style="pointer-events: none;">
+          <p class="text-2xl font-bold text-primary">{fmt(guide.population)}</p>
+          <p class="text-xs text-muted mt-1">Population</p>
+        </div>
+      )}
+      {guide.median_income && (
+        <div class="glass-card p-4 text-center" style="pointer-events: none;">
+          <p class="text-2xl font-bold text-text">{fmtCurrency(guide.median_income)}</p>
+          <p class="text-xs text-muted mt-1">Median Income</p>
+        </div>
+      )}
+      {guide.avg_credit_score && (
+        <div class="glass-card p-4 text-center" style="pointer-events: none;">
+          <p class="text-2xl font-bold text-text">{guide.avg_credit_score}</p>
+          <p class="text-xs text-muted mt-1">Avg Credit Score</p>
+        </div>
+      )}
+      <div class="glass-card p-4 text-center" style="pointer-events: none;">
+        <p class="text-2xl font-bold text-text">{nearbyLenders.length}</p>
+        <p class="text-xs text-muted mt-1">Listed Companies</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content (2 cols) -->
+      <div class="lg:col-span-2 space-y-8">
+
+        <!-- Editorial / Credit Landscape -->
+        {editorial && (
+          <section class="glass-card p-6">
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21" /></svg>
+              Credit Landscape in {city}
+            </h2>
+            <div class="prose prose-sm text-muted max-w-none [&>p]:mb-4 [&>p:last-child]:mb-0" set:html={editorial} />
+          </section>
+        )}
+
+        <!-- Localized Questions & Answers (FAQ) -->
+        {localQuestions.length > 0 && (
+          <section class="glass-card p-6">
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
+              Credit Questions People Ask in {city}
+            </h2>
+            <div class="space-y-4">
+              {localQuestions.map(faq => (
+                <details class="group border border-border rounded-lg">
+                  <summary class="cursor-pointer px-4 py-3 text-sm font-semibold text-text flex items-center justify-between hover:bg-surface-alt transition-colors rounded-lg">
+                    {faq.q}
+                    <svg class="w-4 h-4 text-muted group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                  </summary>
+                  <div class="px-4 pb-4 text-sm text-muted" set:html={faq.a} />
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- State Lending Laws (pulled from parent state) -->
+        {stateData && (
+          <section class="glass-card p-6">
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+              {stateName} Lending Laws That Apply in {city}
+            </h2>
+            <div class="space-y-3">
+              {stateData.usury_cap && (
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-primary-light flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-text text-sm">Interest Rate Cap</p>
+                    <p class="text-sm text-muted">{stateData.usury_cap}</p>
+                  </div>
+                </div>
+              )}
+              {stateData.payday_loan_status && (
+                <div class="flex items-start gap-3">
+                  <div class:list={["w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5",
+                    stateData.payday_loan_status === 'Banned' ? 'bg-positive-light' : stateData.payday_loan_status === 'Restricted' ? 'bg-warning-light' : 'bg-negative-light']}>
+                    <svg class:list={["w-4 h-4",
+                      stateData.payday_loan_status === 'Banned' ? 'text-positive' : stateData.payday_loan_status === 'Restricted' ? 'text-warning' : 'text-negative']}
+                      fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-text text-sm">Payday Lending</p>
+                    <p class="text-sm text-muted">{stateData.payday_loan_status} in {stateName}</p>
+                  </div>
+                </div>
+              )}
+              {creditRepairSummary && (
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-primary-light flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-text text-sm">Credit Repair Regulations</p>
+                    <p class="text-sm text-muted">{creditRepairSummary}</p>
+                  </div>
+                </div>
+              )}
+              {stateData.consumer_rights_summary && (
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-primary-light flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-text text-sm">Consumer Rights</p>
+                    <p class="text-sm text-muted">{stateData.consumer_rights_summary}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div class="mt-4 pt-3 border-t border-border">
+              <a href={`/state/${stateSlug}/lending-laws/`} class="text-sm text-primary hover:underline">
+                View full {stateName} lending laws &rarr;
+              </a>
+            </div>
+          </section>
+        )}
+
+        <!-- SBA & Small Business Resources -->
+        {(sbaInfo.office || data.sba_lenders?.length > 0) && (
+          <section class="glass-card p-6">
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
+              SBA & Small Business Resources Near {city}
+            </h2>
+            {sbaInfo.office && (
+              <div class="mb-4 p-4 bg-surface-alt rounded-lg">
+                <p class="font-semibold text-text text-sm">{sbaInfo.office}</p>
+                {sbaInfo.address && <p class="text-sm text-muted">{sbaInfo.address}</p>}
+                {sbaInfo.phone && <p class="text-sm text-muted">{sbaInfo.phone}</p>}
+                {sbaInfo.programs && sbaInfo.programs.length > 0 && (
+                  <div class="mt-2 flex flex-wrap gap-2">
+                    {sbaInfo.programs.map(p => (
+                      <span class="text-xs px-2 py-1 bg-primary-light text-primary rounded-full">{p}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+            <a href="/best/best-sba-loans/" class="text-sm text-primary hover:underline">
+              Compare top SBA lenders nationally &rarr;
+            </a>
+          </section>
+        )}
+
+        <!-- Credit Improvement Tips -->
+        {creditTips.length > 0 && (
+          <section class="glass-card p-6">
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+              How to Improve Your Credit in {city}
+            </h2>
+            <ol class="space-y-3 list-decimal list-inside">
+              {creditTips.map(tip => (
+                <li class="text-sm text-muted leading-relaxed" set:html={tip} />
+              ))}
+            </ol>
+            <div class="mt-4 pt-3 border-t border-border flex flex-wrap gap-3">
+              <a href="/best/best-credit-repair-companies/" class="text-sm text-primary hover:underline">Best credit repair companies &rarr;</a>
+              <a href="/tools/borrowing-power-quiz/" class="text-sm text-primary hover:underline">Check your borrowing power &rarr;</a>
+            </div>
+          </section>
+        )}
+
+        <!-- Consumer Protection -->
+        {consumerProtection.agency && (
+          <section class="glass-card p-6">
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+              Consumer Protection in {stateName}
+            </h2>
+            <div class="p-4 bg-surface-alt rounded-lg">
+              <p class="font-semibold text-text text-sm">{consumerProtection.agency}</p>
+              {consumerProtection.phone && <p class="text-sm text-muted mt-1">Phone: {consumerProtection.phone}</p>}
+              {consumerProtection.url && <p class="text-sm text-muted mt-1"><a href={consumerProtection.url} target="_blank" rel="noopener" class="text-primary hover:underline">{consumerProtection.url}</a></p>}
+              {consumerProtection.filing_info && <p class="text-sm text-muted mt-2">{consumerProtection.filing_info}</p>}
+            </div>
+          </section>
+        )}
+
+        <!-- Local Lenders -->
+        {nearbyLenders.length > 0 && (
+          <section>
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21" /></svg>
+              {cityLenders.length > 0 ? `Financial Services in ${city}` : `Financial Services in ${stateName}`}
+            </h2>
+
+            {nearbyLenders.length >= 3 && (
+              <div class="glass-card p-4 mb-6 overflow-x-auto">
+                <h3 class="text-sm font-semibold text-text mb-3">Quick Comparison</h3>
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="border-b border-border">
+                      <th class="text-left py-2 pr-3 text-muted font-medium">Provider</th>
+                      <th class="text-center py-2 px-2 text-muted font-medium">Rating</th>
+                      <th class="text-center py-2 px-2 text-muted font-medium">Category</th>
+                      <th class="text-center py-2 pl-2 text-muted font-medium">Services</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {nearbyLenders.slice(0, 5).map(l => (
+                      <tr class="border-b border-border/50">
+                        <td class="py-2 pr-3">
+                          <a href={`/review/${l.slug}/`} class="text-primary hover:underline font-medium truncate block max-w-[180px]">{l.name}</a>
+                        </td>
+                        <td class="text-center py-2 px-2">
+                          <span class="font-semibold text-text">{l.rating > 0 ? l.rating.toFixed(1) : '—'}</span>
+                        </td>
+                        <td class="text-center py-2 px-2">
+                          <span class="text-xs text-muted">{catNames[l.category] || l.category}</span>
+                        </td>
+                        <td class="text-center py-2 pl-2">
+                          <span class="text-xs text-muted">{l.services?.length || 0}</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            <div class="space-y-4">
+              {nearbyLenders.slice(0, 12).map(lender => (
+                <LenderCard lender={lender} />
+              ))}
+            </div>
+            <div class="mt-4">
+              <a href={`/state/${stateSlug}/`} class="text-sm text-primary hover:underline">
+                View all lenders in {stateName} &rarr;
+              </a>
+            </div>
+          </section>
+        )}
+
+        <!-- Local Resources -->
+        {localResources.length > 0 && (
+          <section class="glass-card p-6">
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+              Local Help & Resources in {city}
+            </h2>
+            <div class="space-y-3">
+              {localResources.map(r => (
+                <div class="p-3 bg-surface-alt rounded-lg">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="text-xs px-2 py-0.5 bg-primary-light text-primary rounded-full">{r.type}</span>
+                    <p class="font-semibold text-text text-sm">{r.name}</p>
+                  </div>
+                  {r.address && <p class="text-xs text-muted">{r.address}</p>}
+                  {r.phone && <p class="text-xs text-muted">{r.phone}</p>}
+                  {r.url && <a href={r.url} target="_blank" rel="noopener" class="text-xs text-primary hover:underline">{r.url}</a>}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Financial Wellness Articles -->
+        {wellnessGuides.length > 0 && (
+          <section class="glass-card p-6">
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+              Financial Wellness Articles
+            </h2>
+            <p class="text-sm text-muted mb-4">Expert guides to help {city} residents build better financial habits and improve their credit health.</p>
+            <ul class="space-y-3">
+              {wellnessGuides.map(guide => (
+                <li>
+                  <a href={`/financial-wellness/${guide.slug}/`} class="text-sm text-primary hover:underline flex items-center gap-2">
+                    <svg class="w-3 h-3 text-muted flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                    {guide.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-4 pt-3 border-t border-border">
+              <a href="/financial-wellness/" class="text-sm text-primary hover:underline">View all financial wellness guides &rarr;</a>
+            </div>
+          </section>
+        )}
+
+        <!-- Related Answers -->
+        {answerPages.length > 0 && (
+          <section class="glass-card p-6">
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
+              Common Credit Questions
+            </h2>
+            <ul class="space-y-3">
+              {answerPages.map(answer => (
+                <li>
+                  <a href={`/answers/${answer.slug}/`} class="text-sm text-primary hover:underline flex items-center gap-2">
+                    <svg class="w-3 h-3 text-muted flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                    {answer.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-4 pt-3 border-t border-border">
+              <a href="/answers/" class="text-sm text-primary hover:underline">View all credit answers &rarr;</a>
+            </div>
+          </section>
+        )}
+      </div>
+
+      <!-- Sidebar (1 col) -->
+      <aside class="space-y-6">
+        <!-- Financial Services Categories -->
+        <div class="glass-card p-5" style="pointer-events: none;">
+          <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">Browse by Category</h3>
+          <ul class="space-y-2">
+            {categories.slice(0, 10).map(cat => (
+              <li>
+                <a href={`/categories/${cat.slug}/`} class="text-sm text-muted hover:text-primary transition-colors flex items-center justify-between" style="pointer-events: auto;">
+                  <span>{cat.name}</span>
+                  {categoryGroups.get(cat.slug) && (
+                    <span class="text-xs bg-primary-light text-primary px-2 py-0.5 rounded-full">{categoryGroups.get(cat.slug)!.length}</span>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Money Pages CTA -->
+        <div class="glass-card p-5 border-primary border" style="pointer-events: none;">
+          <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">Top Picks for {city}</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/best/best-credit-repair-companies/" class="text-primary hover:underline" style="pointer-events: auto;">Best Credit Repair Companies</a></li>
+            <li><a href="/best/best-personal-loan-lenders/" class="text-primary hover:underline" style="pointer-events: auto;">Best Personal Loans</a></li>
+            <li><a href="/best/best-sba-loans/" class="text-primary hover:underline" style="pointer-events: auto;">Best SBA Lenders</a></li>
+            <li><a href="/best/best-debt-relief-companies/" class="text-primary hover:underline" style="pointer-events: auto;">Best Debt Relief</a></li>
+            <li><a href="/best/best-secured-credit-cards/" class="text-primary hover:underline" style="pointer-events: auto;">Best Credit Cards</a></li>
+          </ul>
+          <div class="mt-4">
+            <a href="/tools/borrowing-power-quiz/" class="block w-full text-center py-2 px-4 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors" style="pointer-events: auto;">
+              Check Your Borrowing Power
+            </a>
+          </div>
+        </div>
+
+        <!-- Other Cities in State -->
+        {otherCities.length > 0 && (
+          <div class="glass-card p-5" style="pointer-events: none;">
+            <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">More {stateName} Cities</h3>
+            <ul class="space-y-2">
+              {otherCities.map(g => (
+                <li>
+                  <a href={`/credit-guide/${g.slug}/`} class="text-sm text-muted hover:text-primary transition-colors flex items-center justify-between" style="pointer-events: auto;">
+                    <span>{g.city}</span>
+                    {g.population && <span class="text-xs text-muted">{fmt(g.population)}</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <!-- State Page Link -->
+        <div class="glass-card p-5" style="pointer-events: none;">
+          <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">{stateName} Overview</h3>
+          <p class="text-sm text-muted mb-3">
+            View all lenders, lending laws, and consumer protections across {stateName}.
+          </p>
+          <a href={`/state/${stateSlug}/`} class="text-sm text-primary hover:underline" style="pointer-events: auto;">
+            {stateName} credit guide &rarr;
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
