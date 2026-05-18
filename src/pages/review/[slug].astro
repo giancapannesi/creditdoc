@@ -11,7 +11,6 @@ import HMDARecord from '../../components/HMDARecord.astro';
 import InfoLink from '../../components/InfoLink.astro';
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
 import {
-  formatPrice,
   getBbbClass,
   generateDiagnosis,
   getBadgeEligibility,
@@ -170,23 +169,7 @@ const otherLenderNames = new Map(otherLendersRows.map((r) => [r.slug, r.name]));
 
 const diagnosis = generateDiagnosis(lender);
 const bbbClass = getBbbClass(lender.company_info.bbb_rating);
-const lowestPrice = lender.pricing.tiers.length > 0
-  ? Math.min(...lender.pricing.tiers.map(t => t.price))
-  : lender.pricing.monthly_price;
-const subscriptionCategories = ['credit-repair', 'credit-monitoring', 'debt-relief', 'build-credit', 'fix-my-credit'];
-const isSubscriptionCategory = subscriptionCategories.includes(lender.category);
-const hasPricing = lowestPrice > 0 || (lender.pricing.tiers.length > 0 && (lowestPrice > 0 || isSubscriptionCategory));
-const isFreeService = lender.pricing.monthly_price === 0 && lender.pricing.setup_fee === 0 && lender.pricing.tiers.length === 0 && lender.pricing.free_consultation === true;
 const badges = getBadgeEligibility(lender.category);
-const bankingCategories = ['banking', 'credit-unions', 'mortgage-lenders', 'auto-loans-new', 'auto-loans-used', 'student-loans'];
-const isRatesVaryCategory = bankingCategories.includes(lender.category);
-const priceDisplay = hasPricing
-  ? `From ${formatPrice(lowestPrice)}/mo`
-  : (isFreeService && badges.freeToUse)
-    ? 'Free to Use'
-    : isRatesVaryCategory
-      ? 'Rates vary'
-      : null;
 
 // Category-aware feature labels — credit repair features only show on credit repair pages
 const creditRepairFeatures: Record<string, string> = {
@@ -276,41 +259,6 @@ if (cfpb.found_in_cfpb && cfpb.resolution_rate != null) {
   });
 }
 
-// 5. Pricing FAQ — only for companies with meaningful pricing data
-const pricingTiers = lender.pricing?.tiers ?? [];
-const paidTiers = pricingTiers.filter((t: any) => t.price > 0);
-if (paidTiers.length >= 2) {
-  const tierSummary = paidTiers.slice(0, 3).map((t: any) => `${t.name} at ${formatPrice(t.price)}/mo`).join(', ');
-  const setupPart = lender.pricing.setup_fee > 0 ? ` Setup fee: ${formatPrice(lender.pricing.setup_fee)}.` : '';
-  const guaranteePart = lender.pricing.money_back_guarantee ? ' Money-back guarantee offered.' : '';
-  faqCandidates.push({
-    question: `How much does ${lender.name} charge?`,
-    answer: `${lender.name} offers ${paidTiers.length} plan${paidTiers.length > 1 ? 's' : ''}: ${tierSummary}.${setupPart}${guaranteePart}`,
-    priority: 11,
-  });
-} else if (paidTiers.length === 1) {
-  const t = paidTiers[0];
-  faqCandidates.push({
-    question: `How much does ${lender.name} charge?`,
-    answer: `${lender.name}'s ${t.name} plan costs ${formatPrice(t.price)} per month.${lender.pricing.setup_fee > 0 ? ` Setup fee: ${formatPrice(lender.pricing.setup_fee)}.` : ''}${lender.pricing.money_back_guarantee ? ' Money-back guarantee offered.' : ''}`,
-    priority: 7,
-  });
-} else if (isSubscriptionCategory && pricingTiers.length >= 2) {
-  const tierSummary = pricingTiers.slice(0, 3).map((t: any) => `${t.name} at ${formatPrice(t.price)}/mo`).join(', ');
-  const setupPart = lender.pricing.setup_fee > 0 ? ` Setup fee: ${formatPrice(lender.pricing.setup_fee)}.` : '';
-  const guaranteePart = lender.pricing.money_back_guarantee ? ' Money-back guarantee offered.' : '';
-  faqCandidates.push({
-    question: `How much does ${lender.name} charge?`,
-    answer: `${lender.name} offers ${pricingTiers.length} plan${pricingTiers.length > 1 ? 's' : ''}: ${tierSummary}.${setupPart}${guaranteePart}`,
-    priority: 11,
-  });
-} else if (hasPricing && lowestPrice > 0) {
-  faqCandidates.push({
-    question: `How much does ${lender.name} charge?`,
-    answer: `${lender.name} starts at ${formatPrice(lowestPrice)} per month.${lender.pricing.setup_fee > 0 ? ` Setup fee: ${formatPrice(lender.pricing.setup_fee)}.` : ''}${lender.pricing.money_back_guarantee ? ' Money-back guarantee offered.' : ''}`,
-    priority: 7,
-  });
-}
 
 // 6. Comparison FAQ — only when we have named competitors (99%)
 if (relatedLenders.length >= 2) {
@@ -671,17 +619,6 @@ const ogImageUrl = lender.logo_url?.trim()
 
       <!-- Quick Badges -->
       <div class="mt-6 flex flex-wrap items-center gap-3">
-        {priceDisplay && (
-          priceDisplay === 'Rates vary' && lender.website_url ? (
-            <a href={lender.website_url} target="_blank" rel="nofollow noopener sponsored" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-primary-light text-primary hover:bg-primary/15 transition-colors">
-              See current rates &rarr;
-            </a>
-          ) : (
-            <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-primary-light text-primary">
-              {priceDisplay}
-            </span>
-          )
-        )}
         {bbb && bbb !== 'NR' && bbb !== 'N/A' && (
         <span class:list={['inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold', bbbClass]}>
           BBB: {bbb}
@@ -689,12 +626,6 @@ const ogImageUrl = lender.logo_url?.trim()
         )}
         {lender.verified_provider && (
           <TrustBadge type="verified-provider" text="Verified Provider" />
-        )}
-        {lender.pricing.free_consultation && badges.freeConsult && (
-          <TrustBadge type="verified" text="Free Consultation" />
-        )}
-        {lender.pricing.money_back_guarantee && (
-          <TrustBadge type="money-back" text="Money-Back Guarantee" />
         )}
         {(lender.affiliate_url || lender.website_url) && (
         <a
@@ -771,88 +702,6 @@ const ogImageUrl = lender.logo_url?.trim()
           </div>
         </div>
 
-        <!-- Pricing Tiers — hide for non-subscription categories when all tiers are free -->
-        {lender.pricing.tiers.length > 0 && (isSubscriptionCategory || lender.pricing.tiers.some((t: any) => t.price > 0)) && (
-          <div class="glass-card p-6">
-            <h2 class="text-xl font-bold text-text mb-4">Pricing Plans</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {lender.pricing.tiers.map((tier, i) => (
-                <div class:list={[
-                  'rounded-xl border p-5 flex flex-col',
-                  i === 1 ? 'border-primary bg-primary-light/20 ring-1 ring-primary/20' : 'border-border bg-white'
-                ]}>
-                  {i === 1 && (
-                    <span class="inline-flex self-start items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary text-white mb-2">
-                      Most Popular
-                    </span>
-                  )}
-                  <h3 class="text-base font-semibold text-text">{tier.name}</h3>
-                  <div class="mt-2">
-                    {/\d+-month|flat.rate/i.test(tier.name) ? (
-                      <>
-                        <span class="text-2xl font-bold text-text">{formatPrice(tier.price)}</span>
-                        <span class="text-sm text-muted"> total</span>
-                      </>
-                    ) : (
-                      <>
-                        <span class="text-2xl font-bold text-text">{formatPrice(tier.price)}</span>
-                        <span class="text-sm text-muted">/mo</span>
-                      </>
-                    )}
-                  </div>
-                  {lender.pricing.setup_fee > 0 ? (
-                    <p class="text-xs text-muted mt-1">+ {formatPrice(lender.pricing.setup_fee)} setup fee</p>
-                  ) : lender.pricing.first_work_fee > 0 ? (
-                    <p class="text-xs text-muted mt-1">No setup fee — {formatPrice(lender.pricing.first_work_fee)} work fee after audit only</p>
-                  ) : null}
-                  <ul class="mt-4 space-y-2 flex-1">
-                    {tier.features.map(feature => (
-                      <li class="flex items-start gap-2 text-sm text-muted">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-positive shrink-0" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  {(lender.affiliate_url || lender.website_url) && (
-                  <a
-                    href={lender.affiliate_url || lender.website_url}
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                    class:list={[
-                      'mt-4 flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors min-h-[44px]',
-                      i === 1 ? 'bg-primary text-white hover:bg-primary-hover' : 'border border-border text-text hover:bg-bg-alt'
-                    ]}
-                  >
-                    Get Started
-                  </a>
-                  )}
-                </div>
-              ))}
-            </div>
-            {lender.pricing.money_back_guarantee && lender.pricing.guarantee_name && (
-              <div class="mt-6 rounded-xl border-2 border-amber-300 bg-amber-50 p-5">
-                <div class="flex items-start gap-3">
-                  <div class="shrink-0 mt-0.5">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-600" viewBox="0 0 24 24" fill="currentColor">
-                      <path fill-rule="evenodd" d="M12.516 2.17a.75.75 0 00-1.032 0 11.209 11.209 0 01-7.877 3.08.75.75 0 00-.722.515A12.74 12.74 0 002.25 9.75c0 5.942 4.064 10.932 9.563 12.348a.749.749 0 00.374 0c5.499-1.416 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 00-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08zm3.094 8.016a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 class="text-lg font-bold text-amber-900">{lender.pricing.guarantee_name}</h3>
-                    <p class="mt-1 text-sm text-amber-800 leading-relaxed">{lender.pricing.guarantee_details}</p>
-                  </div>
-                </div>
-              </div>
-            )}
-            {lender.pricing.money_back_guarantee && !lender.pricing.guarantee_name && (
-              <p class="mt-4 text-xs text-muted text-center">
-                {lender.pricing.guarantee_details}
-              </p>
-            )}
-          </div>
-        )}
 
         <!-- Pros & Cons -->
         <div>
@@ -1042,36 +891,6 @@ const ogImageUrl = lender.logo_url?.trim()
                 </dd>
               </div>
             )}
-            <div class="flex items-center justify-between py-2 border-b border-border/50">
-              <dt class="text-sm text-muted">Starting Price</dt>
-              <dd class="text-sm font-medium text-text">{hasPricing ? `${formatPrice(lowestPrice)}/mo` : (isFreeService && badges.freeToUse) ? 'Free to Use' : 'Contact provider'}</dd>
-            </div>
-            {lender.pricing.setup_fee > 0 ? (
-            <div class="flex items-center justify-between py-2 border-b border-border/50">
-              <dt class="text-sm text-muted">Setup Fee</dt>
-              <dd class="text-sm font-medium text-text">{formatPrice(lender.pricing.setup_fee)}</dd>
-            </div>
-            ) : lender.pricing.first_work_fee > 0 ? (
-            <div class="flex items-center justify-between py-2 border-b border-border/50">
-              <dt class="text-sm text-muted">Fees</dt>
-              <dd class="text-sm font-medium text-text">No Setup Fee — {formatPrice(lender.pricing.first_work_fee)} Work Fee only after audit</dd>
-            </div>
-            ) : (
-            <div class="flex items-center justify-between py-2 border-b border-border/50">
-              <dt class="text-sm text-muted">Setup Fee</dt>
-              <dd class="text-sm font-medium text-text">None</dd>
-            </div>
-            )}
-            {badges.freeConsult && (
-            <div class="flex items-center justify-between py-2 border-b border-border/50">
-              <dt class="text-sm text-muted">Free Consultation</dt>
-              <dd class="text-sm font-medium text-text">{lender.pricing.free_consultation ? 'Yes' : 'No'}</dd>
-            </div>
-            )}
-            <div class="flex items-center justify-between py-2">
-              <dt class="text-sm text-muted">Money-Back Guarantee</dt>
-              <dd class="text-sm font-medium text-text">{lender.pricing.money_back_guarantee ? 'Yes' : 'No'}</dd>
-            </div>
           </dl>
           {(lender.affiliate_url || lender.website_url) ? (
           <a
