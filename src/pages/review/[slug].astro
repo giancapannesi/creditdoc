@@ -7,6 +7,8 @@ import LenderCard from '../../components/LenderCard.astro';
 import TrustBadge from '../../components/TrustBadge.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import RegulatoryRecord from '../../components/RegulatoryRecord.astro';
+import HMDARecord from '../../components/HMDARecord.astro';
+import InfoLink from '../../components/InfoLink.astro';
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
 import {
   formatPrice,
@@ -26,6 +28,7 @@ import {
   getLendersBySlugListRuntime,
   getRelatedLendersByCategoryRuntime,
   getRegulatorDataRuntime,
+  getHMDADataRuntime,
   type RuntimeLenderEnv,
 } from '../../lib/db';
 import type { Lender } from '../../utils/data';
@@ -151,6 +154,7 @@ const linkedParagraphs = lender.description_long
   : [];
 
 const regulatorData = await getRegulatorDataRuntime(lender.slug, env as any);
+const hmdaData = await getHMDADataRuntime(lender.slug, env as any);
 
 const comparisons = await getComparisonsForLenderRuntime(lender.slug, env, 50);
 
@@ -169,7 +173,9 @@ const bbbClass = getBbbClass(lender.company_info.bbb_rating);
 const lowestPrice = lender.pricing.tiers.length > 0
   ? Math.min(...lender.pricing.tiers.map(t => t.price))
   : lender.pricing.monthly_price;
-const hasPricing = lowestPrice > 0 || lender.pricing.tiers.length > 0;
+const subscriptionCategories = ['credit-repair', 'credit-monitoring', 'debt-relief', 'build-credit', 'fix-my-credit'];
+const isSubscriptionCategory = subscriptionCategories.includes(lender.category);
+const hasPricing = lowestPrice > 0 || (lender.pricing.tiers.length > 0 && (lowestPrice > 0 || isSubscriptionCategory));
 const isFreeService = lender.pricing.monthly_price === 0 && lender.pricing.setup_fee === 0 && lender.pricing.tiers.length === 0 && lender.pricing.free_consultation === true;
 const badges = getBadgeEligibility(lender.category);
 const bankingCategories = ['banking', 'credit-unions', 'mortgage-lenders', 'auto-loans-new', 'auto-loans-used', 'student-loans'];
@@ -220,25 +226,135 @@ const year = lender.company_info?.founded_year;
 const bbb = lender.company_info?.bbb_rating?.trim();
 const bbbAcc = lender.company_info?.bbb_accredited;
 
-const legitParts = [`Yes. ${lender.name} is a registered company`];
-if (hq) legitParts.push(`headquartered in ${hq}`);
-if (year) legitParts.push(`founded in ${year}`);
-let legitAnswer = legitParts.join(', ') + '.';
-if (bbb && bbb !== 'NR' && bbb !== 'N/A' && bbb !== '') {
-  legitAnswer += ` They hold a ${bbb} rating with the Better Business Bureau${bbbAcc ? ' and are BBB-accredited' : ''}.`;
+// --- Data-driven FAQ builder (unique per company) ---
+const faqCandidates: Array<{ question: string; answer: string; priority: number }> = [];
+
+// 1. Services FAQ — what does this company actually do? (100% coverage)
+const svcList = lender.services ?? [];
+if (svcList.length >= 2) {
+  const svcDisplay = svcList.slice(0, 5).join(', ') + (svcList.length > 5 ? `, and ${svcList.length - 5} more` : '');
+  faqCandidates.push({
+    question: `What services does ${lender.name} offer?`,
+    answer: `${lender.name} offers ${svcList.length} services including ${svcDisplay}.`,
+    priority: 10,
+  });
 }
 
-const faqs = [
-  { question: `Is ${lender.name} legitimate?`, answer: legitAnswer },
-  ...(hasPricing ? [{
-    question: `How much does ${lender.name} cost?`,
-    answer: `${lender.name} plans start at ${formatPrice(lowestPrice)} per month${lender.pricing.setup_fee > 0 ? ` with a ${formatPrice(lender.pricing.setup_fee)} setup fee` : lender.pricing.first_work_fee > 0 ? `. There is no setup fee — only a ${formatPrice(lender.pricing.first_work_fee)} work fee charged after the detailed audit analysis` : ' with no setup fee'}. ${lender.pricing.money_back_guarantee ? lender.pricing.guarantee_details : 'No money-back guarantee is offered.'}`,
-  }] : []),
-  ...(lender.typical_results_timeline?.trim() ? [{
-    question: `How long does ${lender.name} take to show results?`,
-    answer: lender.typical_results_timeline,
-  }] : []),
-].filter(faq => faq.answer && faq.answer.trim().length > 0);
+// 2. Best-for FAQ — who should use this company? (100% coverage)
+const bestFor = lender.best_for ?? [];
+if (bestFor.length >= 1) {
+  faqCandidates.push({
+    question: `Who is ${lender.name} best suited for?`,
+    answer: `${lender.name} is best suited for ${bestFor.join(', ')}.`,
+    priority: 9,
+  });
+}
+
+// 3. Pros & cons FAQ — unique per company (100% coverage)
+const prosList = lender.pros ?? [];
+const consList = lender.cons ?? [];
+if (prosList.length >= 1 && consList.length >= 1) {
+  const topPros = prosList.slice(0, 3).join('; ');
+  const topCons = consList.slice(0, 2).join('; ');
+  faqCandidates.push({
+    question: `What are the strengths and weaknesses of ${lender.name}?`,
+    answer: `Key strengths: ${topPros}. Areas to consider: ${topCons}.`,
+    priority: 8,
+  });
+}
+
+// 4. CFPB complaint response FAQ — only for companies with CFPB data (3%, ~475)
+const cfpb = lender.cfpb_data ?? {};
+if (cfpb.found_in_cfpb && cfpb.resolution_rate != null) {
+  const timelyPart = cfpb.timely_response_rate != null
+    ? `, with ${cfpb.timely_response_rate}% of those responses delivered within the CFPB's 15-day window`
+    : '';
+  faqCandidates.push({
+    question: `Does ${lender.name} respond to consumer complaints?`,
+    answer: `According to CFPB data (${cfpb.data_period || 'recent'}), ${lender.name} has a ${cfpb.resolution_rate}% response rate to consumer complaints${timelyPart}. Response rate measures whether the company replied — not whether the consumer's issue was resolved in their favor.`,
+    priority: 12,
+  });
+}
+
+// 5. Pricing FAQ — only for companies with meaningful pricing data
+const pricingTiers = lender.pricing?.tiers ?? [];
+const paidTiers = pricingTiers.filter((t: any) => t.price > 0);
+if (paidTiers.length >= 2) {
+  const tierSummary = paidTiers.slice(0, 3).map((t: any) => `${t.name} at ${formatPrice(t.price)}/mo`).join(', ');
+  const setupPart = lender.pricing.setup_fee > 0 ? ` Setup fee: ${formatPrice(lender.pricing.setup_fee)}.` : '';
+  const guaranteePart = lender.pricing.money_back_guarantee ? ' Money-back guarantee offered.' : '';
+  faqCandidates.push({
+    question: `How much does ${lender.name} charge?`,
+    answer: `${lender.name} offers ${paidTiers.length} plan${paidTiers.length > 1 ? 's' : ''}: ${tierSummary}.${setupPart}${guaranteePart}`,
+    priority: 11,
+  });
+} else if (paidTiers.length === 1) {
+  const t = paidTiers[0];
+  faqCandidates.push({
+    question: `How much does ${lender.name} charge?`,
+    answer: `${lender.name}'s ${t.name} plan costs ${formatPrice(t.price)} per month.${lender.pricing.setup_fee > 0 ? ` Setup fee: ${formatPrice(lender.pricing.setup_fee)}.` : ''}${lender.pricing.money_back_guarantee ? ' Money-back guarantee offered.' : ''}`,
+    priority: 7,
+  });
+} else if (isSubscriptionCategory && pricingTiers.length >= 2) {
+  const tierSummary = pricingTiers.slice(0, 3).map((t: any) => `${t.name} at ${formatPrice(t.price)}/mo`).join(', ');
+  const setupPart = lender.pricing.setup_fee > 0 ? ` Setup fee: ${formatPrice(lender.pricing.setup_fee)}.` : '';
+  const guaranteePart = lender.pricing.money_back_guarantee ? ' Money-back guarantee offered.' : '';
+  faqCandidates.push({
+    question: `How much does ${lender.name} charge?`,
+    answer: `${lender.name} offers ${pricingTiers.length} plan${pricingTiers.length > 1 ? 's' : ''}: ${tierSummary}.${setupPart}${guaranteePart}`,
+    priority: 11,
+  });
+} else if (hasPricing && lowestPrice > 0) {
+  faqCandidates.push({
+    question: `How much does ${lender.name} charge?`,
+    answer: `${lender.name} starts at ${formatPrice(lowestPrice)} per month.${lender.pricing.setup_fee > 0 ? ` Setup fee: ${formatPrice(lender.pricing.setup_fee)}.` : ''}${lender.pricing.money_back_guarantee ? ' Money-back guarantee offered.' : ''}`,
+    priority: 7,
+  });
+}
+
+// 6. Comparison FAQ — only when we have named competitors (99%)
+if (relatedLenders.length >= 2) {
+  const compNames = relatedLenders.map(l => l.name).join(', ');
+  const catLabel = category?.name || 'financial services';
+  faqCandidates.push({
+    question: `How does ${lender.name} compare to similar companies?`,
+    answer: `In the ${catLabel} category, comparable providers include ${compNames}. Each company has different strengths — compare services, pricing, and consumer complaint records to find the best fit.`,
+    priority: 6,
+  });
+}
+
+// 7. Geographic coverage FAQ — only when states_served exists (82%)
+const statesServed = (lender as any).states_served ?? [];
+if (statesServed.length >= 2 && statesServed.length <= 50) {
+  const stateCount = statesServed.length;
+  const statePreview = statesServed.slice(0, 8).join(', ') + (stateCount > 8 ? `, and ${stateCount - 8} more states` : '');
+  faqCandidates.push({
+    question: `Where does ${lender.name} operate?`,
+    answer: `${lender.name} serves customers in ${stateCount} states including ${statePreview}.`,
+    priority: 5,
+  });
+} else if (statesServed.length > 50) {
+  faqCandidates.push({
+    question: `Where does ${lender.name} operate?`,
+    answer: `${lender.name} operates nationwide across all 50 states.`,
+    priority: 5,
+  });
+}
+
+// 8. BBB FAQ — only when real BBB data exists (1.2%, ~185)
+if (bbb && bbb !== 'NR' && bbb !== 'N/A' && bbb !== '') {
+  faqCandidates.push({
+    question: `Is ${lender.name} accredited by the Better Business Bureau?`,
+    answer: `${lender.name} holds a ${bbb} rating with the Better Business Bureau${bbbAcc ? ' and is BBB-accredited' : ' but is not BBB-accredited'}.`,
+    priority: 4,
+  });
+}
+
+// Sort by priority (highest first), take top 6
+const faqs = faqCandidates
+  .sort((a, b) => b.priority - a.priority)
+  .slice(0, 6)
+  .map(({ question, answer }) => ({ question, answer }));
 
 // Quality score — persisted by the autonomous engine, fallback to 0
 const qualityScore = lender.quality_score ?? 0;
@@ -536,6 +652,7 @@ const ogImageUrl = lender.logo_url?.trim()
           </h1>
           <div class="flex items-center gap-3 mt-2">
             <RatingStars rating={lender.rating} size="md" showValue={true} />
+            <InfoLink href="/about/creditdoc-data/#rating" label="How our rating works" />
           </div>
           <p class="mt-3 text-muted leading-relaxed">{lender.description_short}</p>
           {lender.is_protected ? (
@@ -654,8 +771,8 @@ const ogImageUrl = lender.logo_url?.trim()
           </div>
         </div>
 
-        <!-- Pricing Tiers -->
-        {lender.pricing.tiers.length > 0 && (
+        <!-- Pricing Tiers — hide for non-subscription categories when all tiers are free -->
+        {lender.pricing.tiers.length > 0 && (isSubscriptionCategory || lender.pricing.tiers.some((t: any) => t.price > 0)) && (
           <div class="glass-card p-6">
             <h2 class="text-xl font-bold text-text mb-4">Pricing Plans</h2>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -745,7 +862,7 @@ const ogImageUrl = lender.logo_url?.trim()
 
         <!-- Rating Breakdown -->
         <div class="glass-card p-6">
-          <h2 class="text-xl font-bold text-text mb-4">Rating Breakdown</h2>
+          <h2 class="text-xl font-bold text-text mb-4">Rating Breakdown<InfoLink href="/about/creditdoc-data/#rating" label="How our 5-factor rating works" /></h2>
           <div class="space-y-3">
             {ratingCategories.map(cat => (
               <div class="flex items-center gap-4">
@@ -849,6 +966,11 @@ const ogImageUrl = lender.logo_url?.trim()
         {/* Regulatory data — dynamic from regulator.db → Supabase sync */}
         {regulatorData && (
           <RegulatoryRecord data={regulatorData} lenderName={lender.name} />
+        )}
+
+        {/* HMDA mortgage lending transparency */}
+        {hmdaData && (
+          <HMDARecord data={hmdaData} lenderName={lender.name} />
         )}
 
         <!-- FAQ -->
@@ -1017,13 +1139,13 @@ const ogImageUrl = lender.logo_url?.trim()
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 2a.75.75 0 01.75.75v.258a33.186 33.186 0 016.668.83.75.75 0 01-.336 1.461 31.28 31.28 0 00-1.103-.232l1.702 7.545a.75.75 0 01-.387.832A4.981 4.981 0 0115 14c-.825 0-1.606-.2-2.294-.556a.75.75 0 01-.387-.832l1.77-7.849a31.743 31.743 0 00-3.339-.254v11.505a20.01 20.01 0 013.78.501.75.75 0 11-.339 1.462A18.558 18.558 0 0010 17.5c-1.442 0-2.845.165-4.191.477a.75.75 0 01-.338-1.462 20.01 20.01 0 013.779-.501V4.509c-1.129.026-2.243.112-3.34.254l1.771 7.85a.75.75 0 01-.387.83A4.981 4.981 0 015 14a4.981 4.981 0 01-2.294-.556.75.75 0 01-.387-.832L4.02 5.067c-.37.07-.738.148-1.103.232a.75.75 0 01-.336-1.462 33.053 33.053 0 016.668-.829V2.75A.75.75 0 0110 2zM5 12.662l-1.395-6.178A31.27 31.27 0 005 6.19c.474-.034.95-.058 1.428-.074L5 12.662zm10 0l-1.395-6.546c.478.016.954.04 1.428.074.466.034.93.077 1.395.128L15 12.662z" clip-rule="evenodd"/>
               </svg>
-              <h3 class="text-base font-semibold text-text">CFPB Transparency Report</h3>
+              <h3 class="text-base font-semibold text-text">CFPB Transparency Report<InfoLink href="/about/creditdoc-data/#cfpb-data" label="How we use CFPB data" /></h3>
             </div>
             <p class="text-xs text-muted mb-3">Public data from the Consumer Financial Protection Bureau</p>
             <dl class="space-y-2">
               {lender.cfpb_data.resolution_rate > 0 && (
                 <div class="flex items-center justify-between py-1.5">
-                  <dt class="text-sm text-muted">Issues Resolved</dt>
+                  <dt class="text-sm text-muted">Response Rate*<InfoLink href="/about/creditdoc-data/#cfpb-data" label="What Response Rate means" /></dt>
                   <dd class:list={[
                     'text-sm font-semibold',
                     lender.cfpb_data.resolution_rate >= 90 ? 'text-positive' :
@@ -1035,7 +1157,7 @@ const ogImageUrl = lender.logo_url?.trim()
               )}
               {lender.cfpb_data.timely_response_rate > 0 && (
                 <div class="flex items-center justify-between py-1.5">
-                  <dt class="text-sm text-muted">Timely Responses</dt>
+                  <dt class="text-sm text-muted">On-Time Response**<InfoLink href="/about/creditdoc-data/#cfpb-data" label="What On-Time Response means" /></dt>
                   <dd class:list={[
                     'text-sm font-semibold',
                     lender.cfpb_data.timely_response_rate >= 90 ? 'text-positive' :
@@ -1046,7 +1168,11 @@ const ogImageUrl = lender.logo_url?.trim()
                 </div>
               )}
             </dl>
-            <p class="mt-3 text-[10px] text-muted/70 leading-relaxed">
+            <div class="mt-3 space-y-1">
+              <p class="text-[10px] text-muted/70 leading-relaxed">* Percentage of consumer complaints that received a company response (does not indicate the complaint was resolved in the consumer's favor)</p>
+              <p class="text-[10px] text-muted/70 leading-relaxed">** Percentage of responses delivered within the CFPB's 15-day window</p>
+            </div>
+            <p class="mt-2 text-[10px] text-muted/70 leading-relaxed">
               Source: <a href="https://www.consumerfinance.gov/data-research/consumer-complaints/" target="_blank" rel="noopener noreferrer" class="underline hover:text-primary">consumerfinance.gov</a>
               {lender.cfpb_data.last_checked && ` | Last checked ${lender.cfpb_data.last_checked}`}
             </p>
@@ -1110,7 +1236,7 @@ const ogImageUrl = lender.logo_url?.trim()
   <!-- Related Lenders -->
   {relatedLenders.length > 0 && (
     <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <h2 class="text-xl font-bold text-text mb-4">{relatedLendersLabel}</h2>
+      <h2 class="text-xl font-bold text-text mb-4">{relatedLendersLabel}<InfoLink href="/about/creditdoc-data/#similar-companies" label="How we find similar companies" /></h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {relatedLenders.map(related => (
           <LenderCard lender={related} />
