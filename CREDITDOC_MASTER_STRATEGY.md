@@ -50,13 +50,8 @@ NerdWallet made $75 in year 1 and $65,000 in year 2. Tim Chen almost quit in 201
 
 ## PHASE 1: FOUNDATION (This Week)
 
-### 1.1 Jammi's Author Bio — E-E-A-T Emergency
-**Why:** ALL five research reports flag this as the #1 missing signal. 72% of top-ranking YMYL pages now display detailed author credentials. Without this, Google will not rank CreditDoc.
-**Action:**
-- Create `/about/jammi/` author page (MBA Warwick, 15 years consumer finance, specific expertise areas)
-- Add "Written by Jammi Capannesi" with link to author page on every wellness guide, comparison, and editorial page
-- Add "Editorially reviewed by Jammi Capannesi" on enriched lender profiles (even batch-reviewed)
-- Add `Person` schema with `sameAs` links (LinkedIn, CreditDoc about page)
+### ~~1.1 Author Bio~~ — SCRAPPED (Jammi 2026-05-13)
+Not applicable to a 30K-page directory. Authority comes from data depth and coverage, not author attribution.
 
 ### 1.2 Tighten Index Quality
 **Why:** Google's June 2025 update moved from "ranking adjustments to complete page removal" for thin content. 20,000+ skeleton pages risk pulling down the entire domain.

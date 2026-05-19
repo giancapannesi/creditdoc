@@ -69,6 +69,24 @@ Idea: build a CreditDoc-owned Debt And Credit Letter Template Library under
 `src/pages/resources/credit-report-checklist/`. Do not create a new layout and
 do not copy competitor templates.
 
+Implementation slice completed locally 2026-05-19:
+
+- Shared component: `src/components/LetterTemplatePage.astro`
+- Hub: `/resources/debt-credit-letter-templates/`
+- Pages:
+  - `/resources/debt-credit-letter-templates/debt-validation-letter/`
+  - `/resources/debt-credit-letter-templates/cease-and-desist-debt-collector-letter/`
+  - `/resources/debt-credit-letter-templates/pay-for-delete-letter/`
+- Added hub card to `src/pages/resources/index.astro`.
+- `npm run build` passed.
+- Deployed 2026-05-19 after founder reported live 404.
+- Cloudflare Worker Version ID: `415115ec-4150-471a-a256-f7cef10ba526`
+- Verified live `200`:
+  - `https://www.creditdoc.co/resources/debt-credit-letter-templates/`
+  - `https://www.creditdoc.co/resources/debt-credit-letter-templates/debt-validation-letter/`
+  - `https://www.creditdoc.co/resources/debt-credit-letter-templates/cease-and-desist-debt-collector-letter/`
+  - `https://www.creditdoc.co/resources/debt-credit-letter-templates/pay-for-delete-letter/`
+
 ---
 
 ## CRITICAL RULES

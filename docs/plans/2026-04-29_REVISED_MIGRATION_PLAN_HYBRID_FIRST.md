@@ -148,6 +148,42 @@ This rule exists because **CDM-2026-04-28 was executed end-to-end without addres
 - Final post-mortem written to template at `_TEMPLATE_PROJECT_POSTMORTEM.md`.
 - Goal-verification gate run weekly during this period.
 
+### Phase 8 — SQLITE RETIREMENT / SUPABASE-CANONICAL (Path B — POST-CUTOVER ONLY)
+**Goal:** Retire `data/creditdoc.db` SQLite. Supabase becomes the single source of truth. Eliminates the dual-write surface area that Phase 2.3.C (Path A) introduces.
+
+**Pre-conditions (all must be GREEN before Phase 8 starts):**
+- Phases 0-7 GREEN. OBJ-1/2 GREEN at every weekly verifier run for 30 consecutive days.
+- Phase 6 cutover complete on production DNS. Phase 7 30-day monitor showing no regressions.
+- Phase 2.3.C Path A `pending_supabase_writes` retry table near-empty (< 10 rows lifetime, < 1 active) for 14 consecutive days — proving Supabase writes are reliable.
+- Jammi explicit greenlight + 48h notice (this is a destructive refactor of the safety-net layer).
+
+**Why this is Phase 8, not now:** Path A (Phase 2.3.C) keeps SQLite as canonical and Supabase as best-effort. That preserves the guardian/sync/backup/protected_profiles safety net that has saved Jammi's content multiple times. Phase 8 removes that net. Doing it before cutover stabilizes is the kind of change that took prior agents off the rails. Order matters.
+
+**Scope (~1-2 days, ~400-600 LOC churn):**
+- 8.1 Audit all 37+ `creditdoc_*.py` tools for SQLite reads. Catalog each in a migration sheet (tool, what it reads, what it writes, target Supabase table or sentence "retire").
+- 8.2 Rewrite `creditdoc_db.py` writers: Supabase REST PATCH becomes canonical write. Remove SQLite UPDATE. Remove `pending_supabase_writes` retry path (no longer needed). Keep `_ping_revalidate()` post-write.
+- 8.3 Retire `creditdoc_db_sync.py` (currently JSON→SQLite bridge — both sides become Supabase, bridge becomes meaningless).
+- 8.4 Rewrite `creditdoc_db_backup.py` as Supabase backup. Use `pg_dump` against `SUPABASE_DB_URL` to a daily file in `backups/supabase/`. Or rely on Supabase point-in-time recovery (Project Settings → Database → Backups) and document the rollback procedure.
+- 8.5 Rewrite `creditdoc_guardian.py` drift heal: source-of-truth becomes Supabase, drift target becomes JSON files (only if JSON files are still a surface — they may not be by Phase 8).
+- 8.6 Move `data/protected_profiles.json` enforcement: either to a Supabase `protected_slugs` table joined into the writer's protection check, OR to RLS policies on `lenders` that block updates by slug. Pick the simpler one. Audit log must show the protection block.
+- 8.7 Rewrite `creditdoc_build.py` exporter: Supabase → JSON files (if Astro still needs them) or retire (if `cdm-rev-hybrid` SSR has fully replaced the SSG path).
+- 8.8 Pre-commit hook that blocks JSON commits: review for relevance once JSON files are no longer the surface. Likely retire.
+- 8.9 Audit_log: currently a SQLite table. Either copy live audit rows to Supabase via a one-time migration script OR retain a SQLite-only audit-archive store (for forensic continuity). Decide and document.
+- 8.10 Archive `data/creditdoc.db` → `backups/sqlite_pre_phase8_<date>.db.gz`. Remove from active path. Update `CLAUDE.md` THE RULE section to point at Supabase, not SQLite.
+- 8.11 30-day post-Phase-8 monitor. Same cadence as Phase 7. Verify no orphaned SQLite reads, no protected-profile regressions, no audit gaps.
+
+**Acceptance gate:**
+- `find /srv/BusinessOps/creditdoc/tools -name '*.py' | xargs grep -l 'creditdoc.db\|sqlite3' | wc -l` returns 0 (or only the archive script).
+- Guardian + backup + sync no-longer-required units removed from crontab.
+- All 9 writer paths now hit Supabase as canonical, audit_log row in Postgres on every write, ping fires.
+- `verify_strategic_objectives.py` OBJ-1/2/3 still GREEN.
+
+**Risk class:** HIGH. Removes a safety net that has caught real bugs (logo wipes, FA profile attacks, blog vanishings). Phase 8 must be undertaken with full awareness that the SQLite checkpoint is what's saved Jammi's content. Mitigation: full SQLite archive in 8.10, Phase 7 30-day stability proof as pre-condition, 14-day Path-A reliability proof as pre-condition.
+
+**OBJ moved:** OBJ-2 (future-proof) becomes structurally cleaner (single source of truth, no dual-write reasoning). No OBJ-1 or OBJ-3 movement — those are already GREEN by this point.
+
+**Why on the plan now (recorded 2026-04-30):** The architectural gap discovered today (creditdoc_db.py is SQLite-only, SSR reads Supabase, no bridge) was solved short-term with Path A. Path B is the principled fix. Recording it as Phase 8 ensures it isn't lost in the post-cutover lull and isn't started before the architecture is stable. Jammi greenlit this sequencing verbatim: "Please put the final phase of moving to B right at the end after the migration and make sure its recorded as part of the project so we can address it at the end."
+
 ---
 
 ## SECTION C — LOOP PROTOCOL
