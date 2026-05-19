@@ -22,6 +22,13 @@ this cleanup pass.
   - `32348f2dbb chore: secure CreditDoc repo hygiene docs`
 - Committed the follow-up local secret/temp ignore pass:
   - `d08948b4d8 chore: ignore local secret and temp artifacts`
+- Committed this cleanup log and the CreditDoc agent entrypoint:
+  - `fe783f36cd docs: record CreditDoc cleanup handoff`
+- Committed reviewed AI Council, strategy, SEO, and targeting documentation:
+  - `57499eeefb docs: add CreditDoc strategy research`
+- Committed ignore rules for bulky local research/import bundles and generated
+  analysis outputs:
+  - `0f90c68a91 chore: ignore local research outputs`
 
 ## Lender JSON Archive
 
@@ -85,10 +92,13 @@ this cleanup pass.
 ## Current Caveats
 
 - The repo still contains many unrelated existing modified and untracked files:
-  strategy docs, AI Council notes, SEO research, Astro code changes, data
-  exports, HMDA work, and project folders.
-- Those were not committed, deleted, moved, or rewritten during this cleanup
-  pass.
+  Astro code changes, runtime/data changes, Cloudflare/Vercel transition files,
+  generated public assets, and tool changes.
+- Strategy docs, AI Council notes, and SEO research docs were reviewed for
+  obvious credential leakage and committed as documentation.
+- Bulky local research/import folders and generated analysis outputs were not
+  moved or deleted; they were ignored so they stop obscuring reviewable source
+  changes.
 - Live-site code changes still need a separate review before any commit or
   deployment decision.
 - The database remains the source of truth for live lender pages, but lender
