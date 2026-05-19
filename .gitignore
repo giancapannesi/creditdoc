@@ -42,6 +42,22 @@ backups/
 *.sql.gz
 Sendy/*.zip
 
+# Local research/import bundles kept on VPS, not active site source
+Keywords Project Folder/
+US Cities/
+hmda_project/
+_archive_vercel/
+
+# Generated local analysis outputs
+data/exports/*.csv
+data/exports/striking_distance_*.md
+data/health/
+data/cluster_state.json
+data/cdm_rev_panel_diff_*.json
+data/dangling_similar_lenders.csv
+data/phase1_*_latest.json
+data/quarantined_lenders_*.csv
+
 # Local Wrangler dev/build cache
 .wrangler/
 node_modules/.wrangler/
