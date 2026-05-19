@@ -1,0 +1,317 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const title = 'Credit Report Checklist: Review & Dispute Errors | CreditDoc';
+const description = 'Use this free CreditDoc checklist to review credit reports, spot errors, gather dispute documents, and track bureau responses step by step.';
+const canonical = 'https://www.creditdoc.co/resources/credit-report-checklist/';
+
+const steps = [
+  {
+    title: 'Get your official reports',
+    text: 'Use AnnualCreditReport.com, the federally authorized source for free credit reports from Equifax, Experian, and TransUnion. You should not need to enter a credit card number.',
+  },
+  {
+    title: 'Check identity information first',
+    text: 'Confirm your name variations, current and former addresses, date of birth, and other identifying details. Wrong identity data can signal a mixed file or identity theft issue.',
+  },
+  {
+    title: 'Review every account',
+    text: 'Look for accounts you do not recognize, duplicate collections, incorrect late payments, wrong balances, missing credit limits, and accounts marked open or closed incorrectly.',
+  },
+  {
+    title: 'Gather documents before disputing',
+    text: 'Save the report page showing the error, account statements, payment confirmations, letters from creditors, identity theft reports, or any other proof that supports your dispute.',
+  },
+  {
+    title: 'Dispute with each bureau reporting the error',
+    text: 'Equifax, Experian, and TransUnion maintain separate files. If the same error appears on more than one report, dispute it with each bureau separately.',
+  },
+  {
+    title: 'Track responses and next steps',
+    text: 'Credit bureaus generally have 30 days to investigate most disputes. Save confirmation numbers, dates submitted, results letters, and updated reports.',
+  },
+];
+
+const checklist = [
+  'I used AnnualCreditReport.com or a credit bureau directly.',
+  'I saved a copy of each report before making changes.',
+  'I checked personal information for mixed-file or identity errors.',
+  'I reviewed account names, balances, limits, dates, and payment history.',
+  'I marked any account I do not recognize.',
+  'I looked for duplicate collections or debts reported more than once.',
+  'I gathered statements, receipts, letters, or identity theft documents.',
+  'I disputed each error with every bureau showing that error.',
+  'I saved dispute confirmation numbers and submission dates.',
+  'I reviewed the investigation results and updated report.',
+];
+
+const relatedAnswers = [
+  {
+    title: 'How much can you borrow with your credit score?',
+    href: '/answers/how-much-can-you-borrow-with-your-credit-score/',
+    text: 'Use this after reviewing your report to understand how score ranges can affect borrowing options.',
+  },
+  {
+    title: 'How to build credit score fast',
+    href: '/answers/how-to-build-credit-score-fast/',
+    text: 'Focus on practical steps after you confirm your report information is accurate.',
+  },
+  {
+    title: 'Should I get a secured credit card to build credit?',
+    href: '/answers/should-i-get-a-secured-credit-card-to-build-credit/',
+    text: 'Compare secured-card basics before opening a new account to rebuild credit.',
+  },
+  {
+    title: 'Can I do debt consolidation myself?',
+    href: '/answers/can-i-do-debt-consolidation-myself/',
+    text: 'A useful next read if your report review shows several balances or collection accounts.',
+  },
+];
+
+const wellnessGuides = [
+  {
+    title: 'How to Read Your Credit Report',
+    href: '/financial-wellness/how-credit-reports-work/',
+    text: 'Use this guide if you need more detail on report sections, trade lines, inquiries, and collections.',
+  },
+  {
+    title: 'How to Dispute Errors on Your Credit Report',
+    href: '/financial-wellness/dispute-credit-report-errors/',
+    text: 'A focused walkthrough for filing disputes and tracking bureau responses.',
+  },
+  {
+    title: 'Credit Repair Scams: 8 Red Flags',
+    href: '/financial-wellness/credit-repair-scams/',
+    text: 'Review this before hiring anyone who promises fast credit repair results.',
+  },
+  {
+    title: 'Your Legal Rights: FCRA and CROA',
+    href: '/financial-wellness/credit-repair-rights-fcra-croa/',
+    text: 'Plain-English rights guide for credit reporting and credit repair issues.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Credit Report Checklist: Review and Dispute Errors',
+    description,
+    url: canonical,
+    datePublished: '2026-05-08',
+    dateModified: '2026-05-08',
+    author: { '@type': 'Organization', name: 'CreditDoc Editorial Team' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'CreditDoc',
+      url: 'https://www.creditdoc.co',
+      logo: { '@type': 'ImageObject', url: 'https://www.creditdoc.co/favicon.svg' },
+    },
+    mainEntityOfPage: canonical,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to check and dispute your credit report',
+    description,
+    totalTime: 'PT45M',
+    supply: [
+      { '@type': 'HowToSupply', name: 'Credit reports from Equifax, Experian, and TransUnion' },
+      { '@type': 'HowToSupply', name: 'Account statements or payment records' },
+      { '@type': 'HowToSupply', name: 'Dispute confirmation records' },
+    ],
+    step: steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.title,
+      text: step.text,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: 'https://www.creditdoc.co/resources/' },
+      { '@type': 'ListItem', position: 3, name: 'Credit Report Checklist', item: canonical },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLd={jsonLd}
+  ogType="article"
+  articlePublishedTime="2026-05-08"
+  articleModifiedTime="2026-05-08"
+  articleAuthor="CreditDoc Editorial Team"
+  articleSection="Credit Reports"
+  publicResource={true}
+>
+  <nav class="mx-auto max-w-5xl px-4 pt-6 text-sm text-muted" aria-label="Breadcrumb">
+    <a href="/" class="hover:text-primary">Home</a>
+    <span class="px-2">/</span>
+    <a href="/resources/" class="hover:text-primary">Resources</a>
+    <span class="px-2">/</span>
+    <span class="text-text">Credit Report Checklist</span>
+  </nav>
+
+  <section class="border-b border-border bg-white">
+    <div class="mx-auto grid max-w-5xl gap-8 px-4 py-12 md:grid-cols-[1.4fr_0.8fr] md:items-center">
+      <div>
+        <span class="inline-flex rounded-full bg-primary-light px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">Free public resource</span>
+        <h1 class="mt-5 text-3xl font-bold leading-tight text-text sm:text-5xl">How to Check and Dispute Your Credit Report</h1>
+        <p class="mt-5 text-lg leading-relaxed text-muted">
+          Use this checklist to get your official credit reports, review them for common errors, collect documents, and understand the basic dispute process.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="/resources/credit-report-checklist/print/" class="inline-flex min-h-[44px] items-center rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white hover:bg-primary-hover">
+            Open printable checklist
+          </a>
+          <a href="#checklist" class="inline-flex min-h-[44px] items-center rounded-lg border border-border px-5 py-3 text-sm font-semibold text-text hover:bg-bg-alt">
+            View checklist
+          </a>
+        </div>
+      </div>
+      <aside class="rounded-xl border border-primary/20 bg-primary-light/30 p-6">
+        <h2 class="text-base font-bold text-text">Designed for</h2>
+        <ul class="mt-4 space-y-3 text-sm leading-relaxed text-muted">
+          <li>Library patrons learning credit basics</li>
+          <li>Students building credit for the first time</li>
+          <li>Consumers preparing a dispute file</li>
+          <li>Financial educators who need a handout</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <div class="mx-auto grid max-w-5xl gap-10 px-4 py-12 lg:grid-cols-[1fr_280px]">
+    <main class="space-y-12">
+      <section>
+        <h2 class="text-2xl font-bold text-text">Before you start</h2>
+        <div class="mt-5 rounded-xl border border-border bg-white p-6 text-sm leading-relaxed text-muted">
+          <p>
+            Your credit report is the file used to calculate your credit scores and evaluate applications for credit, housing, insurance, and other services. The three major credit bureaus keep separate reports, so an error may appear on one report, two reports, or all three.
+          </p>
+          <p class="mt-4">
+            This page is educational and does not replace legal advice. If you suspect identity theft, fraud, or a serious credit reporting violation, consider contacting the Consumer Financial Protection Bureau, the Federal Trade Commission, your state consumer agency, or a qualified consumer attorney.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-text">Step-by-step process</h2>
+        <ol class="mt-6 space-y-4">
+          {steps.map((step, index) => (
+            <li class="rounded-xl border border-border bg-white p-5">
+              <div class="flex gap-4">
+                <span class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">{index + 1}</span>
+                <div>
+                  <h3 class="font-semibold text-text">{step.title}</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-muted">{step.text}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section id="checklist">
+        <h2 class="text-2xl font-bold text-text">Credit report review checklist</h2>
+        <div class="mt-6 rounded-xl border border-border bg-white p-6">
+          <ul class="grid gap-3 sm:grid-cols-2">
+            {checklist.map((item) => (
+              <li class="flex gap-3 text-sm leading-relaxed text-muted">
+                <span class="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded border border-border bg-bg-alt"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-text">Common errors to look for</h2>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          {[
+            'Accounts that are not yours',
+            'Payments marked late when paid on time',
+            'Wrong balance, limit, or account status',
+            'Duplicate collections for the same debt',
+            'Outdated negative information',
+            'Incorrect names, addresses, or identity details',
+          ].map((item) => (
+            <div class="rounded-xl border border-border bg-white p-5">
+              <h3 class="text-sm font-semibold text-text">{item}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-text">Official resources</h2>
+        <div class="mt-6 rounded-xl border border-border bg-white p-6">
+          <ul class="space-y-4 text-sm leading-relaxed text-muted">
+            <li><a class="font-medium text-primary hover:underline" href="https://www.annualcreditreport.com/" rel="noopener noreferrer">AnnualCreditReport.com</a>: federally authorized source for free credit reports.</li>
+            <li><a class="font-medium text-primary hover:underline" href="https://www.consumerfinance.gov/consumer-tools/credit-reports-and-scores/" rel="noopener noreferrer">Consumer Financial Protection Bureau</a>: credit report, score, and dispute education.</li>
+            <li><a class="font-medium text-primary hover:underline" href="https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports" rel="noopener noreferrer">Federal Trade Commission</a>: guidance on disputing credit report errors.</li>
+            <li><a class="font-medium text-primary hover:underline" href="https://consumer.ftc.gov/articles/credit-repair-scams" rel="noopener noreferrer">FTC credit repair scam warnings</a>: signs that a credit repair offer may be risky.</li>
+            <li><a class="font-medium text-primary hover:underline" href="https://www.consumerfinance.gov/complaint/" rel="noopener noreferrer">CFPB complaint portal</a>: file a complaint about a financial product or service.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-text">More CreditDoc guides on this topic</h2>
+        <p class="mt-3 text-sm leading-relaxed text-muted">
+          The checklist is intentionally short. These wellness guides provide the deeper explanations behind the worksheet.
+        </p>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          {wellnessGuides.map((guide) => (
+            <a href={guide.href} class="rounded-xl border border-border bg-white p-5 hover:border-primary hover:shadow-sm">
+              <h3 class="font-semibold text-text">{guide.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{guide.text}</p>
+              <span class="mt-4 inline-flex text-sm font-semibold text-primary">Read guide</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-text">Related CreditDoc answers</h2>
+        <p class="mt-3 text-sm leading-relaxed text-muted">
+          After you check your reports, these plain-English answers can help you decide what to learn next. They are separate from the printable checklist so the checklist stays easy to use.
+        </p>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          {relatedAnswers.map((item) => (
+            <a href={item.href} class="rounded-xl border border-border bg-white p-5 hover:border-primary hover:shadow-sm">
+              <h3 class="font-semibold text-text">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
+              <span class="mt-4 inline-flex text-sm font-semibold text-primary">Read answer</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
+      <div class="rounded-xl border border-border bg-white p-5">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-muted">Resource links</h2>
+        <ul class="mt-4 space-y-3 text-sm">
+          <li><a href="#checklist" class="text-primary hover:underline">Checklist</a></li>
+          <li><a href="/resources/credit-report-checklist/print/" class="text-primary hover:underline">Printable version</a></li>
+          <li><a href="/financial-wellness/how-credit-reports-work/" class="text-primary hover:underline">How credit reports work</a></li>
+          <li><a href="/financial-wellness/credit-score-basics/" class="text-primary hover:underline">Credit score basics</a></li>
+          <li><a href="/answers/how-to-build-credit-score-fast/" class="text-primary hover:underline">Build credit safely</a></li>
+        </ul>
+      </div>
+      <div class="rounded-xl border border-primary/20 bg-primary-light/30 p-5">
+        <h2 class="text-sm font-bold text-text">For educators and libraries</h2>
+        <p class="mt-2 text-sm leading-relaxed text-muted">You may link to this free public page as a consumer-credit education resource. The printable version is not gated and does not require signup.</p>
+      </div>
+    </aside>
+  </div>
+</BaseLayout>

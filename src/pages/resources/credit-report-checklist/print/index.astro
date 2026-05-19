@@ -1,0 +1,184 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+
+const title = 'Printable Credit Report Checklist | Review & Dispute Errors';
+const description = 'Print a one-page checklist for reviewing credit reports, marking errors, gathering dispute documents, and tracking bureau responses.';
+const canonical = 'https://www.creditdoc.co/resources/credit-report-checklist/print/';
+
+const sections = [
+  {
+    heading: 'Get the right reports',
+    items: [
+      'Use AnnualCreditReport.com or the credit bureaus directly.',
+      'Download or save reports from Equifax, Experian, and TransUnion.',
+      'Save the date you pulled each report.',
+    ],
+  },
+  {
+    heading: 'Check identity details',
+    items: [
+      'Name and spelling variations are correct.',
+      'Current and former addresses look familiar.',
+      'No unfamiliar employer, phone, or identity details appear.',
+    ],
+  },
+  {
+    heading: 'Review accounts',
+    items: [
+      'Every account belongs to you.',
+      'Balances, limits, and payment history look right.',
+      'No duplicate collection account appears for the same debt.',
+      'Closed accounts are not marked open incorrectly.',
+      'Negative items are not older than the reporting period allowed by law.',
+    ],
+  },
+  {
+    heading: 'Prepare a dispute file',
+    items: [
+      'Circle or note the exact error on the report.',
+      'Collect statements, receipts, letters, or identity theft records.',
+      'Write down the account name, account number, bureau, and error.',
+      'Keep copies of everything you send.',
+    ],
+  },
+  {
+    heading: 'Track follow-up',
+    items: [
+      'Save dispute confirmation numbers.',
+      'Write down submission dates.',
+      'Review the bureau response and updated report.',
+      'Escalate to CFPB, FTC, a state agency, or legal help if needed.',
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} publicResource={true}>
+  <style>
+    @media print {
+      header,
+      footer,
+      .no-print {
+        display: none !important;
+      }
+
+      body {
+        background: white !important;
+      }
+
+      main {
+        color: #111827;
+      }
+
+      .print-page {
+        padding: 0 !important;
+        max-width: none !important;
+      }
+
+      .print-card {
+        border: 1px solid #d1d5db !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+      }
+    }
+  </style>
+
+  <div class="no-print border-b border-border bg-white">
+    <div class="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-3 px-4 py-4">
+      <a href="/resources/credit-report-checklist/" class="text-sm font-medium text-primary hover:underline">Back to full guide</a>
+      <button onclick="window.print()" class="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover">Print checklist</button>
+    </div>
+  </div>
+
+  <section class="no-print border-b border-border bg-white">
+    <div class="mx-auto max-w-4xl px-4 py-8">
+      <p class="text-xs font-semibold uppercase tracking-wider text-primary">Printable resource</p>
+      <h1 class="mt-2 text-3xl font-bold text-text">Credit Report Review and Dispute Checklist</h1>
+      <p class="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
+        This page is formatted for printing, but it is still part of the CreditDoc resources library. Use the full guide for explanations, official links, and dispute-process context.
+      </p>
+    </div>
+  </section>
+
+  <article class="print-page mx-auto max-w-4xl px-4 py-8">
+    <header class="mb-6 border-b border-border pb-5">
+      <p class="text-xs font-semibold uppercase tracking-wider text-primary">CreditDoc free public resource</p>
+      <h1 class="mt-2 text-3xl font-bold text-text">Credit Report Review and Dispute Checklist</h1>
+      <p class="mt-3 text-sm leading-relaxed text-muted">
+        Use this worksheet when reviewing reports from Equifax, Experian, and TransUnion. It is educational and does not replace legal advice.
+      </p>
+    </header>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      {sections.map((section) => (
+        <section class="print-card rounded-lg border border-border bg-white p-5">
+          <h2 class="text-base font-bold text-text">{section.heading}</h2>
+          <ul class="mt-4 space-y-3">
+            {section.items.map((item) => (
+              <li class="flex gap-3 text-sm leading-snug text-muted">
+                <span class="mt-0.5 h-4 w-4 flex-shrink-0 rounded border border-border"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+
+    <section class="print-card mt-4 rounded-lg border border-border bg-white p-5">
+      <h2 class="text-base font-bold text-text">Dispute log</h2>
+      <div class="mt-4 overflow-hidden rounded-lg border border-border">
+        <table class="w-full border-collapse text-left text-xs">
+          <thead class="bg-bg-alt text-text">
+            <tr>
+              <th class="border-b border-border p-2">Bureau</th>
+              <th class="border-b border-border p-2">Account / error</th>
+              <th class="border-b border-border p-2">Date sent</th>
+              <th class="border-b border-border p-2">Confirmation</th>
+              <th class="border-b border-border p-2">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[1, 2, 3, 4].map(() => (
+              <tr>
+                <td class="h-9 border-b border-border p-2"></td>
+                <td class="border-b border-border p-2"></td>
+                <td class="border-b border-border p-2"></td>
+                <td class="border-b border-border p-2"></td>
+                <td class="border-b border-border p-2"></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="mt-5 text-xs leading-relaxed text-muted">
+      Official resources: AnnualCreditReport.com, ConsumerFinance.gov, FTC.gov. Full guide: https://www.creditdoc.co/resources/credit-report-checklist/
+    </footer>
+  </article>
+
+  <section class="no-print border-t border-border bg-white">
+    <div class="mx-auto max-w-4xl px-4 py-10">
+      <h2 class="text-2xl font-bold text-text">More to read after printing</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <a href="/resources/credit-report-checklist/" class="rounded-xl border border-border bg-white p-5 hover:border-primary">
+          <h3 class="font-semibold text-text">Full credit report guide</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">Read the complete explanation behind each checklist step.</p>
+        </a>
+        <a href="/financial-wellness/dispute-credit-report-errors/" class="rounded-xl border border-border bg-white p-5 hover:border-primary">
+          <h3 class="font-semibold text-text">Dispute credit report errors</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">Get a deeper step-by-step guide to the dispute process.</p>
+        </a>
+        <a href="/financial-wellness/credit-repair-scams/" class="rounded-xl border border-border bg-white p-5 hover:border-primary">
+          <h3 class="font-semibold text-text">Credit repair scam red flags</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">Know what to avoid before paying for help.</p>
+        </a>
+        <a href="/answers/how-to-build-credit-score-fast/" class="rounded-xl border border-border bg-white p-5 hover:border-primary">
+          <h3 class="font-semibold text-text">How to build credit score fast</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">Learn the highest-impact habits after you confirm your report is accurate.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
