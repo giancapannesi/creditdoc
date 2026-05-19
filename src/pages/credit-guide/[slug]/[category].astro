@@ -1,0 +1,470 @@
+---
+export const prerender = false;
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LenderCard from '../../../components/LenderCard.astro';
+import {
+  getCategoriesRuntime,
+  shapeBodyInlineToLender,
+} from '../../../utils/data-runtime';
+import {
+  getCityGuideBySlugRuntime,
+  getCityGuidesByStateRuntime,
+  getStateBySlugRuntime,
+  type RuntimeLenderEnv,
+} from '../../../lib/db';
+import type { Lender } from '../../../utils/data';
+
+const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
+const { slug, category } = Astro.params;
+if (!slug || !category) return new Response('Bad request', { status: 400 });
+
+const guide = await getCityGuideBySlugRuntime(slug, env);
+if (!guide) {
+  return new Response('Not found', { status: 404, headers: { 'content-type': 'text/plain; charset=utf-8' } });
+}
+
+const city = guide.city;
+const stateAbbr = guide.state_abbr;
+const stateName = guide.state_name;
+const stateSlug = stateName.toLowerCase().replace(/ /g, '-');
+
+// Fetch state data for localized intro
+const stateRow = await getStateBySlugRuntime(stateSlug, env);
+const stateData = (stateRow?.body_inline ?? null) as Record<string, any> | null;
+
+// Build localized intro based on category + state data
+const categoryIntros: Record<string, (city: string, state: string, data: any) => string> = {
+  'credit-repair': (c, s, d) => {
+    const laws = d?.credit_repair_laws;
+    const upfront = laws?.upfront_fees_prohibited ? 'State law prohibits credit repair companies from charging upfront fees before services are delivered.' : '';
+    const bond = laws?.bond_required ? ` Companies must maintain a ${laws.bond_amount || '$25,000'} surety bond.` : '';
+    const cancel = laws?.cancellation_period_days ? ` You have ${laws.cancellation_period_days} days to cancel any credit repair contract without penalty.` : '';
+    return `Looking for credit repair help in ${c}, ${s}? Federal law (CROA) protects your right to dispute inaccurate items on your credit report, and ${s} adds additional consumer protections. ${upfront}${bond}${cancel} Below are credit repair companies serving ${c} residents — compare their services, check their CFPB complaint record, and verify they follow ${s} regulations before signing any contract.`;
+  },
+  'personal-loans': (c, s, d) => {
+    const usury = d?.usury_cap ? `${s} caps interest rates at ${d.usury_cap}.` : '';
+    return `Need a personal loan in ${c}, ${s}? ${usury} Whether you're consolidating debt, covering an emergency expense, or funding a major purchase, compare lenders below based on APR, loan amounts, and eligibility requirements. ${s} residents should verify any lender is properly licensed with the state Department of Banking before borrowing.`;
+  },
+  'emergency-cash': (c, s, d) => {
+    const payday = d?.payday_loan_status === 'Banned' ? `${s} has banned payday lending, protecting consumers from predatory rates.` : d?.payday_loan_status === 'Restricted' ? `${s} restricts payday lending with rate caps and loan limits.` : `Payday loans are available in ${s} but often carry extremely high APRs.`;
+    return `Need emergency cash in ${c}, ${s}? ${payday} The providers below offer alternatives for ${c} residents facing urgent financial needs — including title loans, pawn services, and emergency personal loans. Compare options carefully and understand all fees before borrowing.`;
+  },
+  'debt-relief': (c, s, d) => {
+    return `Struggling with debt in ${c}, ${s}? Debt relief companies can negotiate with creditors to reduce what you owe, consolidate payments, or create a structured repayment plan. ${s} has specific statutes of limitation on debt collection that affect your rights. Review the debt relief providers below serving ${c} residents, and consider consulting a HUD-approved credit counselor before committing to any program.`;
+  },
+  'build-credit': (c, s, _d) => {
+    return `Building credit in ${c}, ${s}? Whether you're starting from scratch or rebuilding after financial hardship, the programs below help ${c} residents establish and strengthen their credit profiles. Look for secured credit cards, credit-builder loans, and reporting services that help demonstrate responsible credit behavior to the bureaus.`;
+  },
+  'free-help': (c, s, _d) => {
+    return `Looking for free financial help in ${c}, ${s}? Non-profit credit counseling agencies, legal aid organizations, and government-funded programs offer no-cost assistance to ${c} residents dealing with debt, foreclosure, or credit issues. HUD-approved counselors are required to provide free initial consultations. Below are free resources available in your area.`;
+  },
+  'business-loans': (c, s, _d) => {
+    return `Need business financing in ${c}, ${s}? From SBA-backed loans to microloans and lines of credit, ${c} entrepreneurs have multiple options. The SBA ${s} District Office can connect you with approved lenders and free business mentoring through SCORE. Compare business lenders below based on loan size, rates, and eligibility for ${s}-based businesses.`;
+  },
+  'pawn-shops': (c, s, _d) => {
+    return `Looking for pawn shops in ${c}, ${s}? Pawn loans let you borrow against personal property without a credit check — you get cash immediately and reclaim your item when you repay. ${s} regulates pawn transactions including maximum interest rates and minimum redemption periods. Compare licensed pawn shops serving ${c} below.`;
+  },
+  'payday-alternatives': (c, s, d) => {
+    const payday = d?.payday_loan_status === 'Banned' ? `Since ${s} bans payday lending, these alternatives are especially important for ${c} residents needing short-term cash.` : `These alternatives typically offer better rates than traditional payday loans available in ${s}.`;
+    return `Looking for payday loan alternatives in ${c}, ${s}? ${payday} Credit union payday alternative loans (PALs), employer advances, and emergency assistance programs offer lower-cost options for short-term borrowing needs.`;
+  },
+};
+
+const categories = getCategoriesRuntime();
+const catInfo = categories.find(c => c.slug === category);
+if (!catInfo) {
+  return new Response('Category not found', { status: 404, headers: { 'content-type': 'text/plain; charset=utf-8' } });
+}
+
+const catName = catInfo.name;
+const isAtmCategory = category === 'atm';
+
+const introFn = categoryIntros[category];
+const localIntro = isAtmCategory
+  ? `Use this page to browse selected ATM and cash access profiles associated with ${stateName}. CreditDoc does not maintain a complete, real-time inventory of every ATM in ${city}; for the nearest machine, verify availability directly with your bank, credit union, or ATM network before you go.`
+  : introFn
+    ? introFn(city, stateName, stateData)
+    : `Find ${catName.toLowerCase()} providers serving ${city}, ${stateName}. Compare local and statewide options available to ${city} residents, check ratings, and make an informed choice.`;
+
+// Fetch lenders in this state + category from Supabase
+let lenders: Lender[] = [];
+if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
+  const hdrs = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
+  const url = `${env.SUPABASE_URL}/rest/v1/lenders?state_abbr=eq.${stateAbbr}&category=eq.${encodeURIComponent(category)}&processing_status=eq.ready_for_index&select=slug,name,category,state,brand_slug,has_logo,seo_tier,updated_at,processing_status,body_inline&order=updated_at.desc&limit=100`;
+  const res = await fetch(url, { headers: hdrs, signal: AbortSignal.timeout(8000) }).catch(() => null);
+  if (res?.ok) {
+    const rows = await res.json();
+    lenders = rows.map((r: any) => shapeBodyInlineToLender(r)).filter((l: Lender) => {
+      const desc = l.description_short || '';
+      if (desc.includes('403 Forbidden') || desc.includes('Unable to verify') || desc.includes('Unable to generate')) return false;
+      if (!desc || desc.length < 30) return false;
+      return true;
+    });
+  }
+}
+
+// City-specific lenders first, then rest of state
+const cityLower = city.toLowerCase().replace(/\s+/g, '-');
+const cityLenders = lenders.filter(l => {
+  if (l.slug && l.slug.includes(cityLower)) return true;
+  return false;
+});
+const stateLenders = lenders.filter(l => !cityLenders.includes(l));
+const sortedLenders = [...cityLenders, ...stateLenders];
+
+// Sibling city guides
+const siblingGuides = await getCityGuidesByStateRuntime(stateAbbr, env, 12);
+const otherCities = siblingGuides.filter(g => g.slug !== slug).slice(0, 8);
+
+// Related categories for sidebar
+const relatedCategories = categories.filter(c => c.slug !== category).slice(0, 10);
+
+// Category-to-answer keyword mapping for relevant questions
+const categoryAnswerKeywords: Record<string, string[]> = {
+  'credit-repair': ['build-credit-score-fast', 'build-credit-with-no', 'does-credit-score-affect'],
+  'personal-loans': ['best-personal-loans-bad-credit', 'how-to-get-a-personal-loan', 'personal-loan-interest-rates', 'how-to-find-best-personal-loan', 'how-much-can-you-borrow'],
+  'emergency-cash': ['best-personal-loans-bad-credit', 'how-much-can-you-borrow', 'how-to-get-a-personal-loan'],
+  'debt-relief': ['debt-consolidation-loans-bad-credit', 'debt-consolidation-vs-personal', 'can-i-do-debt-consolidation', 'can-you-do-debt-consolidation'],
+  'build-credit': ['build-credit-with-no', 'build-credit-score-fast', 'secured-credit-card', 'top-secured-credit-cards'],
+  'free-help': ['can-i-do-debt-consolidation-myself', 'can-you-do-debt-consolidation-yourself', 'build-credit-with-no'],
+  'business-loans': ['small-business-loans', 'how-to-apply-for-a-business-loan', 'how-to-get-an-sba-loan', 'business-loan-rates-fees', 'business-line-of-credit'],
+  'pawn-shops': ['how-much-can-you-borrow', 'best-personal-loans-bad-credit'],
+  'credit-monitoring': ['does-credit-score-affect', 'build-credit-score-fast'],
+  'payday-alternatives': ['best-personal-loans-bad-credit', 'how-much-can-you-borrow', 'how-to-get-a-personal-loan'],
+  'credit-cards': ['easy-approval-credit-cards', 'how-credit-card-interest-works', 'no-credit-check-cards', 'secured-credit-card'],
+  'banking': ['how-much-can-you-borrow', 'how-to-get-a-personal-loan'],
+  'credit-unions': ['how-much-can-you-borrow', 'build-credit-with-no'],
+};
+const answerKeywords = categoryAnswerKeywords[category] || ['personal-loan', 'credit-score'];
+
+// Fetch related answers for this category
+let answerPages: { slug: string; title: string }[] = [];
+if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
+  const hdrs = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
+  const orFilter = answerKeywords.map(k => `slug.ilike.*${k}*`).join(',');
+  const aRes = await fetch(
+    `${env.SUPABASE_URL}/rest/v1/answers?select=slug,title&or=(${orFilter})&limit=6`,
+    { headers: hdrs, signal: AbortSignal.timeout(3000) }
+  ).catch(() => null);
+  if (aRes?.ok) answerPages = await aRes.json();
+}
+
+const title = `${catName} in ${city}, ${stateAbbr} — Local Directory | CreditDoc`;
+const description = isAtmCategory
+  ? `Browse selected ATM and cash access profiles for ${city}, ${stateName}. Verify current ATM availability directly with your bank, credit union, or ATM network.`
+  : `Find the best ${catName.toLowerCase()} serving ${city}, ${stateName}. Compare ${sortedLenders.length}+ local and statewide providers with ratings, reviews, and contact information.`;
+
+const listName = isAtmCategory && cityLenders.length === 0
+  ? `Selected ${stateName} ${catName} Profiles`
+  : `${catName} Serving ${city}, ${stateAbbr}`;
+
+const today = new Date().toISOString().slice(0, 10);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+      { '@type': 'ListItem', position: 2, name: stateName, item: `https://www.creditdoc.co/state/${stateSlug}/` },
+      { '@type': 'ListItem', position: 3, name: `${city} Credit Guide`, item: `https://www.creditdoc.co/credit-guide/${slug}/` },
+      { '@type': 'ListItem', position: 4, name: `${catName} in ${city}`, item: `https://www.creditdoc.co/credit-guide/${slug}/${category}/` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description: description,
+    url: `https://www.creditdoc.co/credit-guide/${slug}/${category}/`,
+    inLanguage: 'en-US',
+    dateModified: today,
+    about: {
+      '@type': 'FinancialService',
+      serviceType: catName,
+      areaServed: {
+        '@type': 'City',
+        name: city,
+        containedInPlace: { '@type': 'State', name: stateName },
+      },
+    },
+    publisher: { '@type': 'Organization', name: 'CreditDoc', url: 'https://www.creditdoc.co' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: listName,
+    url: `https://www.creditdoc.co/credit-guide/${slug}/${category}/`,
+    numberOfItems: sortedLenders.length,
+    itemListElement: sortedLenders.slice(0, 12).map((lender, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'FinancialService',
+        name: lender.name,
+        url: `https://www.creditdoc.co/review/${lender.slug}/`,
+        serviceType: catName,
+        areaServed: {
+          '@type': cityLenders.includes(lender) ? 'City' : 'State',
+          name: cityLenders.includes(lender) ? city : stateName,
+        },
+      },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Breadcrumbs -->
+  <nav class="max-w-6xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted flex-wrap">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href={`/state/${stateSlug}/`} class="hover:text-primary transition-colors">{stateName}</a></li>
+      <li class="text-border">/</li>
+      <li><a href={`/credit-guide/${slug}/`} class="hover:text-primary transition-colors">{city}</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">{catName}</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Hero -->
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">
+        {catName} in {city}, {stateAbbr}
+      </h1>
+      <p class="text-lg text-muted max-w-3xl">
+        {isAtmCategory
+          ? `Browse selected ATM and cash access profiles for ${city}, ${stateName}. This is not a complete count of every ATM in the city; confirm current locations and availability with your bank, credit union, or ATM network.`
+          : sortedLenders.length > 0
+          ? `Compare ${sortedLenders.length} ${catName.toLowerCase()} providers serving ${city}, ${stateName}. Find local offices, read reviews, and get the help you need.`
+          : `Find ${catName.toLowerCase()} providers serving ${city}, ${stateName}. Browse statewide options available to ${city} residents.`
+        }
+      </p>
+    </div>
+
+    <!-- Quick Stats -->
+    {!isAtmCategory && (
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+        <div class="glass-card p-4 text-center" style="pointer-events: none;">
+          <p class="text-2xl font-bold text-primary">{sortedLenders.length}</p>
+          <p class="text-xs text-muted mt-1">{catName} Providers</p>
+        </div>
+        {cityLenders.length > 0 && (
+          <div class="glass-card p-4 text-center" style="pointer-events: none;">
+            <p class="text-2xl font-bold text-text">{cityLenders.length}</p>
+            <p class="text-xs text-muted mt-1">In {city} Specifically</p>
+          </div>
+        )}
+        <div class="glass-card p-4 text-center" style="pointer-events: none;">
+          <p class="text-2xl font-bold text-text">{stateLenders.length}</p>
+          <p class="text-xs text-muted mt-1">Serving {stateAbbr} Statewide</p>
+        </div>
+      </div>
+    )}
+
+    <!-- Localized Intro -->
+    <div class="glass-card p-6 mb-8">
+      <p class="text-sm text-muted leading-relaxed">{localIntro}</p>
+      <div class="mt-3 flex flex-wrap gap-3 text-xs">
+        <a href={`/state/${stateSlug}/lending-laws/`} class="text-primary hover:underline">{stateName} lending laws &rarr;</a>
+        <a href={`/credit-guide/${slug}/`} class="text-primary hover:underline">{city} full guide &rarr;</a>
+        <a href="/tools/borrowing-power-quiz/" class="text-primary hover:underline">Check your borrowing power &rarr;</a>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content (2 cols) -->
+      <div class="lg:col-span-2 space-y-6">
+        {sortedLenders.length > 0 ? (
+          <>
+            {cityLenders.length > 0 && (
+              <section class="glass-card p-6">
+                <h2 class="text-xl font-bold text-text mb-2">{catName} Located in {city}</h2>
+                <p class="text-sm text-muted mb-4">These providers have offices or are specifically located in {city}, {stateAbbr}.</p>
+                <div class="grid grid-cols-1 gap-3">
+                  {cityLenders.slice(0, 12).map(lender => (
+                    <a href={`/review/${lender.slug}/`} class="block glass-card p-4 hover:border-primary border border-transparent transition-colors">
+                      <div class="flex items-center gap-3">
+                        <div class="shrink-0 w-10 h-10 rounded-lg bg-bg-alt border border-border flex items-center justify-center overflow-hidden">
+                          {lender.logo_url && !lender.logo_url.includes('googleusercontent.com') ? (
+                            <img src={lender.logo_url} alt={`${lender.name} logo`} class="w-7 h-7 object-contain" loading="lazy" />
+                          ) : (
+                            <span class="text-sm font-bold text-primary">{lender.name.charAt(0)}</span>
+                          )}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                          <p class="font-semibold text-text text-sm truncate">{lender.name}</p>
+                          <p class="text-xs text-muted line-clamp-1">{lender.description_short}</p>
+                        </div>
+                        <svg class="w-4 h-4 text-muted flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+                {cityLenders.length > 12 && (
+                  <p class="text-sm text-muted mt-3 text-center">+ {cityLenders.length - 12} more in {city}</p>
+                )}
+              </section>
+            )}
+
+            <section class="glass-card p-6">
+              <h2 class="text-xl font-bold text-text mb-2">
+                {cityLenders.length > 0
+                  ? `More ${catName} Serving ${city}, ${stateAbbr}`
+                  : listName}
+              </h2>
+              <p class="text-sm text-muted mb-4">
+                {isAtmCategory
+                  ? `These are selected ${stateName} cash-access profiles in CreditDoc's directory, not a complete inventory of ${city} ATMs.`
+                  : `Statewide providers available to ${city} residents.`}
+              </p>
+              <div class="grid grid-cols-1 gap-3">
+                {stateLenders.slice(0, 12).map(lender => (
+                  <a href={`/review/${lender.slug}/`} class="block glass-card p-4 hover:border-primary border border-transparent transition-colors">
+                    <div class="flex items-center gap-3">
+                      <div class="shrink-0 w-10 h-10 rounded-lg bg-bg-alt border border-border flex items-center justify-center overflow-hidden">
+                        {lender.logo_url && !lender.logo_url.includes('googleusercontent.com') ? (
+                          <img src={lender.logo_url} alt={`${lender.name} logo`} class="w-7 h-7 object-contain" loading="lazy" />
+                        ) : (
+                          <span class="text-sm font-bold text-primary">{lender.name.charAt(0)}</span>
+                        )}
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-text text-sm truncate">{lender.name}</p>
+                        <p class="text-xs text-muted line-clamp-1">{lender.description_short}</p>
+                      </div>
+                      <svg class="w-4 h-4 text-muted flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                    </div>
+                  </a>
+                ))}
+              </div>
+              {stateLenders.length > 12 && (
+                <p class="text-sm text-muted mt-3 text-center">
+                  Showing 12 of {stateLenders.length} statewide providers. <a href={`/categories/${category}/`} class="text-primary hover:underline">View all {catName} nationally &rarr;</a>
+                </p>
+              )}
+            </section>
+          </>
+        ) : (
+          <div class="glass-card p-8 text-center">
+            <p class="text-lg text-muted mb-4">No {catName.toLowerCase()} providers found specifically in {city}, {stateAbbr} yet.</p>
+            <p class="text-sm text-muted mb-6">We're continuously adding providers. In the meantime, check the statewide directory.</p>
+            <a href={`/categories/${category}/`} class="inline-block px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors">
+              Browse All {catName} &rarr;
+            </a>
+          </div>
+        )}
+
+        {!isAtmCategory && (
+          <!-- Quiz CTA -->
+          <div class="glass-card p-6 mt-6 border border-primary bg-gradient-to-r from-primary/5 to-transparent">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" /></svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-lg font-bold text-text mb-1">Not Sure Where to Start in {city}?</h3>
+                <p class="text-sm text-muted mb-4">
+                  Take our free 2-minute quiz to find out what {catName.toLowerCase()} options you qualify for based on your credit profile and location.
+                </p>
+                <a href="/tools/borrowing-power-quiz/" class="inline-block px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors">
+                  Take the Borrowing Power Quiz &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- Related Questions -->
+        {!isAtmCategory && answerPages.length > 0 && (
+          <section class="glass-card p-6 mt-6">
+            <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
+              {catName} Questions for {city} Residents
+            </h2>
+            <ul class="space-y-3">
+              {answerPages.map(answer => (
+                <li>
+                  <a href={`/answers/${answer.slug}/`} class="text-sm text-primary hover:underline flex items-center gap-2">
+                    <svg class="w-3 h-3 text-muted flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                    {answer.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-4 pt-3 border-t border-border">
+              <a href="/answers/" class="text-sm text-primary hover:underline">More credit & lending answers for {city} &rarr;</a>
+            </div>
+          </section>
+        )}
+
+        <!-- Back to city guide CTA -->
+        <div class="glass-card p-6 mt-6">
+          <h3 class="text-lg font-bold text-text mb-2">Explore More in {city}</h3>
+          <p class="text-sm text-muted mb-4">
+            {city} has resources across credit repair, lending, debt relief, and more. See the full local guide.
+          </p>
+          <a href={`/credit-guide/${slug}/`} class="text-primary font-semibold hover:underline">
+            &larr; Back to {city}, {stateAbbr} Credit Guide
+          </a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-6">
+        <!-- Other Categories in this City -->
+        <div class="glass-card p-5" style="pointer-events: none;">
+          <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">More Services in {city}</h3>
+          <ul class="space-y-2">
+            {relatedCategories.map(cat => (
+              <li>
+                <a href={`/credit-guide/${slug}/${cat.slug}/`} class="text-sm text-muted hover:text-primary transition-colors" style="pointer-events: auto;">
+                  {cat.name} in {city}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Other Cities -->
+        {otherCities.length > 0 && (
+          <div class="glass-card p-5" style="pointer-events: none;">
+            <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">{catName} in Other {stateName} Cities</h3>
+            <ul class="space-y-2">
+              {otherCities.map(g => (
+                <li>
+                  <a href={`/credit-guide/${g.slug}/${category}/`} class="text-sm text-muted hover:text-primary transition-colors" style="pointer-events: auto;">
+                    {catName} in {g.city}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <!-- State Link -->
+        <div class="glass-card p-5" style="pointer-events: none;">
+          <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">{stateName} Overview</h3>
+          <p class="text-sm text-muted mb-3">
+            View all lenders and lending laws across {stateName}.
+          </p>
+          <a href={`/state/${stateSlug}/`} class="text-sm text-primary hover:underline" style="pointer-events: auto;">
+            {stateName} credit guide &rarr;
+          </a>
+        </div>
+
+        <!-- Borrowing Power Quiz -->
+        <div class="glass-card p-5 border-primary border" style="pointer-events: none;">
+          <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">Check Your Options</h3>
+          <p class="text-sm text-muted mb-3">Find out what you qualify for in {city}.</p>
+          <a href="/tools/borrowing-power-quiz/" class="block w-full text-center py-2 px-4 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors" style="pointer-events: auto;">
+            Borrowing Power Quiz
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

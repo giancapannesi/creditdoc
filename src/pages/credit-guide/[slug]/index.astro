@@ -1,22 +1,24 @@
 ---
 export const prerender = false;
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import LenderCard from '../../components/LenderCard.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LenderCard from '../../../components/LenderCard.astro';
 import {
   getCategoriesRuntime,
   shapeBodyInlineToLender,
-} from '../../utils/data-runtime';
-import { createLinker } from '../../utils/inline-linker';
+} from '../../../utils/data-runtime';
+import { createLinker } from '../../../utils/inline-linker';
 import {
   getCityGuideBySlugRuntime,
   getCityGuidesByStateRuntime,
   getStateBySlugRuntime,
   getLendersByStateRuntime,
+  getStateCountRuntime,
   type RuntimeLenderEnv,
   type RuntimeCityGuide,
-} from '../../lib/db';
-import type { Lender } from '../../utils/data';
+  type HMDAGeoStats,
+} from '../../../lib/db';
+import type { Lender } from '../../../utils/data';
 
 const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
 const { slug } = Astro.params;
@@ -47,9 +49,10 @@ const creditRepairSummary = creditRepairLaws
   ? `${creditRepairLaws.state_statute || 'State credit repair law'}${creditRepairLaws.statute_code ? ` (${creditRepairLaws.statute_code})` : ''}. ${creditRepairLaws.upfront_fees_prohibited ? 'Upfront fees prohibited. ' : ''}${creditRepairLaws.cancellation_period_days ? `${creditRepairLaws.cancellation_period_days}-day cancellation period. ` : ''}${creditRepairLaws.bond_required ? `$${creditRepairLaws.bond_amount || '25,000'} bond required.` : ''}`
   : typeof stateData?.credit_repair_laws === 'string' ? stateData.credit_repair_laws : null;
 
-// Lenders in this state (for local lender section)
+// Lenders in this state (for local lender section — limit to 30 for display; count from lightweight view)
 const lenderRows = await getLendersByStateRuntime(stateAbbr, env, 30);
 const lenders: Lender[] = lenderRows.map(r => shapeBodyInlineToLender(r as any));
+const stateCount = await getStateCountRuntime(stateAbbr, env);
 
 // Filter out broken lenders (no description or error messages in description)
 const validLenders = lenders.filter(l => {
@@ -59,10 +62,13 @@ const validLenders = lenders.filter(l => {
   return true;
 });
 
-// Filter lenders that mention this city
+// Filter lenders that match this city (by city field OR slug containing city name)
+const cityLower = city.toLowerCase().replace(/\s+/g, '-');
 const cityLenders = validLenders.filter(l => {
   const lCity = (l as any).city || '';
-  return lCity.toLowerCase() === city.toLowerCase();
+  if (lCity.toLowerCase() === city.toLowerCase()) return true;
+  if (l.slug && l.slug.includes(cityLower)) return true;
+  return false;
 });
 const nearbyLenders = cityLenders.length > 0 ? cityLenders : validLenders.slice(0, 12);
 
@@ -89,10 +95,36 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
   const hdrs = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
   const [wRes, aRes] = await Promise.all([
     fetch(`${env.SUPABASE_URL}/rest/v1/wellness_guides?select=slug,title&limit=6`, { headers: hdrs, signal: AbortSignal.timeout(3000) }).catch(() => null),
-    fetch(`${env.SUPABASE_URL}/rest/v1/answers?select=slug,title&limit=6`, { headers: hdrs, signal: AbortSignal.timeout(3000) }).catch(() => null),
+    fetch(`${env.SUPABASE_URL}/rest/v1/answers?select=slug,title&or=(slug.ilike.*personal-loans-bad-credit*,slug.ilike.*debt-consolidation*,slug.ilike.*build-credit*,slug.ilike.*how-to-get-a-personal-loan*,slug.ilike.*how-much-can-you-borrow*,slug.ilike.*small-business-loans*,slug.ilike.*secured-credit-card*)&limit=8`, { headers: hdrs, signal: AbortSignal.timeout(3000) }).catch(() => null),
   ]);
   if (wRes?.ok) wellnessGuides = await wRes.json();
   if (aRes?.ok) answerPages = await aRes.json();
+}
+
+// HMDA top lenders for this state
+let hmdaTopLenders: { slug: string; state_code: string; total_applications: number; total_originated: number; approval_rate: number; low_income_approval_rate: number | null }[] = [];
+if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
+  const hdrs = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
+  const geoRes = await fetch(
+    `${env.SUPABASE_URL}/rest/v1/hmda_geo_stats?state_code=eq.${encodeURIComponent(stateAbbr)}&total_applications=gte.100&order=approval_rate.desc&limit=10`,
+    { headers: hdrs, signal: AbortSignal.timeout(2000) }
+  ).catch(() => null);
+  if (geoRes?.ok) hmdaTopLenders = await geoRes.json();
+}
+
+// Get lender names for HMDA slugs
+let hmdaLenderNames: Record<string, string> = {};
+if (hmdaTopLenders.length > 0 && env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
+  const hdrs = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
+  const slugList = hmdaTopLenders.map(l => `"${l.slug}"`).join(',');
+  const nameRes = await fetch(
+    `${env.SUPABASE_URL}/rest/v1/lenders?slug=in.(${slugList})&select=slug,name`,
+    { headers: hdrs, signal: AbortSignal.timeout(2000) }
+  ).catch(() => null);
+  if (nameRes?.ok) {
+    const rows: { slug: string; name: string }[] = await nameRes.json();
+    for (const r of rows) hmdaLenderNames[r.slug] = r.name;
+  }
 }
 
 // Format helpers
@@ -105,7 +137,7 @@ const title = guide.seo_title || `Credit Repair & Financial Services in ${city},
 const description = guide.meta_description || `Find credit repair companies, personal lenders, SBA resources, and financial services in ${city}, ${stateName}. Local credit guide with ${stateName} lending laws and consumer protections.`;
 
 // Editorial content from body_inline — run through smart linker
-const linker = createLinker([], { moneyBudget: 6, glossaryBudget: 0 });
+const linker = createLinker([], { moneyBudget: 10, glossaryBudget: 0 });
 
 // Localized questions from body_inline — answers run through smart linker
 const localQuestionsRaw: { q: string; a: string }[] = data.local_questions || [];
@@ -214,7 +246,7 @@ const jsonLd = [
         </div>
       )}
       <div class="glass-card p-4 text-center" style="pointer-events: none;">
-        <p class="text-2xl font-bold text-text">{nearbyLenders.length}</p>
+        <p class="text-2xl font-bold text-text">{stateCount?.lender_count ?? validLenders.length}</p>
         <p class="text-xs text-muted mt-1">Listed Companies</p>
       </div>
     </div>
@@ -341,7 +373,7 @@ const jsonLd = [
               </div>
             )}
             <a href="/best/best-sba-loans/" class="text-sm text-primary hover:underline">
-              Compare top SBA lenders nationally &rarr;
+              Best SBA lenders serving {city} &rarr;
             </a>
           </section>
         )}
@@ -359,8 +391,8 @@ const jsonLd = [
               ))}
             </ol>
             <div class="mt-4 pt-3 border-t border-border flex flex-wrap gap-3">
-              <a href="/best/best-credit-repair-companies/" class="text-sm text-primary hover:underline">Best credit repair companies &rarr;</a>
-              <a href="/tools/borrowing-power-quiz/" class="text-sm text-primary hover:underline">Check your borrowing power &rarr;</a>
+              <a href="/best/best-credit-repair-companies/" class="text-sm text-primary hover:underline">Credit repair options in {city} &rarr;</a>
+              <a href="/tools/borrowing-power-quiz/" class="text-sm text-primary hover:underline">Check your borrowing power in {city} &rarr;</a>
             </div>
           </section>
         )}
@@ -378,6 +410,60 @@ const jsonLd = [
               {consumerProtection.url && <p class="text-sm text-muted mt-1"><a href={consumerProtection.url} target="_blank" rel="noopener" class="text-primary hover:underline">{consumerProtection.url}</a></p>}
               {consumerProtection.filing_info && <p class="text-sm text-muted mt-2">{consumerProtection.filing_info}</p>}
             </div>
+          </section>
+        )}
+
+        <!-- HMDA Mortgage Approval Data -->
+        {hmdaTopLenders.length >= 3 && (
+          <section class="glass-card p-6">
+            <h2 class="text-xl font-bold text-text mb-2 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" /></svg>
+              Which Banks Approve the Most Near {city}?
+            </h2>
+            <p class="text-sm text-muted mb-4">
+              Mortgage lenders ranked by approval rate for applicants in {city}, {stateName}. Based on {new Date().getFullYear() - 1} federal HMDA filings.
+            </p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-border">
+                    <th class="text-left py-2 pr-3 text-muted font-medium">Lender</th>
+                    <th class="text-center py-2 px-2 text-muted font-medium">Approval Rate</th>
+                    <th class="text-center py-2 px-2 text-muted font-medium">Low-Income Rate</th>
+                    <th class="text-center py-2 pl-2 text-muted font-medium">Applications</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {hmdaTopLenders.map((lender, i) => (
+                    <tr class="border-b border-border/50">
+                      <td class="py-2 pr-3">
+                        {hmdaLenderNames[lender.slug] ? (
+                          <a href={`/review/${lender.slug}/`} class="text-primary hover:underline font-medium truncate block max-w-[200px]">
+                            {hmdaLenderNames[lender.slug]}
+                          </a>
+                        ) : (
+                          <span class="text-text truncate block max-w-[200px]">{lender.slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</span>
+                        )}
+                      </td>
+                      <td class="text-center py-2 px-2">
+                        <span class="font-semibold text-primary">{lender.approval_rate}%</span>
+                      </td>
+                      <td class="text-center py-2 px-2">
+                        <span class={`font-medium ${lender.low_income_approval_rate && lender.low_income_approval_rate > 60 ? 'text-positive' : 'text-text'}`}>
+                          {lender.low_income_approval_rate != null ? `${lender.low_income_approval_rate}%` : '—'}
+                        </span>
+                      </td>
+                      <td class="text-center py-2 pl-2 text-muted">
+                        {lender.total_applications.toLocaleString('en-US')}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-xs text-muted/60 mt-3">
+              Source: CFPB Home Mortgage Disclosure Act (HMDA), 2023. Low-income = applicant income under $50K. Minimum 100 applications in {stateAbbr}.
+            </p>
           </section>
         )}
 
@@ -464,9 +550,9 @@ const jsonLd = [
           <section class="glass-card p-6">
             <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
               <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
-              Financial Wellness Articles
+              Financial Wellness for {city} Residents
             </h2>
-            <p class="text-sm text-muted mb-4">Expert guides to help {city} residents build better financial habits and improve their credit health.</p>
+            <p class="text-sm text-muted mb-4">Expert guides to help consumers in {city}, {stateAbbr} build better financial habits and improve their credit health.</p>
             <ul class="space-y-3">
               {wellnessGuides.map(guide => (
                 <li>
@@ -478,7 +564,7 @@ const jsonLd = [
               ))}
             </ul>
             <div class="mt-4 pt-3 border-t border-border">
-              <a href="/financial-wellness/" class="text-sm text-primary hover:underline">View all financial wellness guides &rarr;</a>
+              <a href="/financial-wellness/" class="text-sm text-primary hover:underline">More financial wellness guides for {city} residents &rarr;</a>
             </div>
           </section>
         )}
@@ -488,8 +574,9 @@ const jsonLd = [
           <section class="glass-card p-6">
             <h2 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
               <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
-              Common Credit Questions
+              Credit & Lending Questions for {city} Residents
             </h2>
+            <p class="text-sm text-muted mb-4">Answers to common financial questions relevant to consumers in {city}, {stateAbbr}.</p>
             <ul class="space-y-3">
               {answerPages.map(answer => (
                 <li>
@@ -501,7 +588,7 @@ const jsonLd = [
               ))}
             </ul>
             <div class="mt-4 pt-3 border-t border-border">
-              <a href="/answers/" class="text-sm text-primary hover:underline">View all credit answers &rarr;</a>
+              <a href="/answers/" class="text-sm text-primary hover:underline">More credit & lending answers for {city} &rarr;</a>
             </div>
           </section>
         )}
@@ -511,12 +598,12 @@ const jsonLd = [
       <aside class="space-y-6">
         <!-- Financial Services Categories -->
         <div class="glass-card p-5" style="pointer-events: none;">
-          <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">Browse by Category</h3>
+          <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">Financial Services in {city}</h3>
           <ul class="space-y-2">
             {categories.slice(0, 10).map(cat => (
               <li>
-                <a href={`/categories/${cat.slug}/`} class="text-sm text-muted hover:text-primary transition-colors flex items-center justify-between" style="pointer-events: auto;">
-                  <span>{cat.name}</span>
+                <a href={`/credit-guide/${slug}/${cat.slug}/`} class="text-sm text-muted hover:text-primary transition-colors flex items-center justify-between" style="pointer-events: auto;">
+                  <span>{cat.name} in {city}</span>
                   {categoryGroups.get(cat.slug) && (
                     <span class="text-xs bg-primary-light text-primary px-2 py-0.5 rounded-full">{categoryGroups.get(cat.slug)!.length}</span>
                   )}
@@ -528,17 +615,20 @@ const jsonLd = [
 
         <!-- Money Pages CTA -->
         <div class="glass-card p-5 border-primary border" style="pointer-events: none;">
-          <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">Top Picks for {city}</h3>
+          <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">Top Picks for {city} Residents</h3>
           <ul class="space-y-2 text-sm">
-            <li><a href="/best/best-credit-repair-companies/" class="text-primary hover:underline" style="pointer-events: auto;">Best Credit Repair Companies</a></li>
-            <li><a href="/best/best-personal-loan-lenders/" class="text-primary hover:underline" style="pointer-events: auto;">Best Personal Loans</a></li>
-            <li><a href="/best/best-sba-loans/" class="text-primary hover:underline" style="pointer-events: auto;">Best SBA Lenders</a></li>
-            <li><a href="/best/best-debt-relief-companies/" class="text-primary hover:underline" style="pointer-events: auto;">Best Debt Relief</a></li>
-            <li><a href="/best/best-secured-credit-cards/" class="text-primary hover:underline" style="pointer-events: auto;">Best Credit Cards</a></li>
+            <li><a href={`/credit-guide/${slug}/credit-repair/`} class="text-primary hover:underline" style="pointer-events: auto;">Credit Repair in {city}</a></li>
+            <li><a href={`/credit-guide/${slug}/personal-loans/`} class="text-primary hover:underline" style="pointer-events: auto;">I Need a Loan in {city}</a></li>
+            <li><a href={`/credit-guide/${slug}/emergency-cash/`} class="text-primary hover:underline" style="pointer-events: auto;">Emergency Cash in {city}</a></li>
+            <li><a href={`/credit-guide/${slug}/debt-relief/`} class="text-primary hover:underline" style="pointer-events: auto;">Get Out of Debt in {city}</a></li>
+            <li><a href={`/credit-guide/${slug}/build-credit/`} class="text-primary hover:underline" style="pointer-events: auto;">Build My Credit in {city}</a></li>
+            <li><a href={`/credit-guide/${slug}/free-help/`} class="text-primary hover:underline" style="pointer-events: auto;">Free Help in {city}</a></li>
+            <li><a href={`/credit-guide/${slug}/business-loans/`} class="text-primary hover:underline" style="pointer-events: auto;">Small Business Loans in {city}</a></li>
+            <li><a href={`/credit-guide/${slug}/pawn-shops/`} class="text-primary hover:underline" style="pointer-events: auto;">Pawn Shops in {city}</a></li>
           </ul>
           <div class="mt-4">
             <a href="/tools/borrowing-power-quiz/" class="block w-full text-center py-2 px-4 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors" style="pointer-events: auto;">
-              Check Your Borrowing Power
+              Check Your Borrowing Power in {city}
             </a>
           </div>
         </div>
