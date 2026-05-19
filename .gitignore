@@ -10,6 +10,8 @@ dist/
 
 # Claude agent data (may contain cached secrets)
 .claude-flow/
+.secrets/
+**/.secrets/
 
 # Generated reports
 AUDIT_REPORT_*.md
@@ -34,6 +36,7 @@ tools/*.db
 
 # Local generated exports, scratch files, archives, and backups
 tmp_*/
+tmp_*
 backups/
 *.dump
 *.sql.gz
