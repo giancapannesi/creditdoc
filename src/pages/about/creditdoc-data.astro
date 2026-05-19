@@ -1,0 +1,432 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Our Data Explained — Ratings, CFPB & Regulatory Sources | CreditDoc';
+const description = 'How CreditDoc ratings work, what CFPB response rates mean, and where our regulatory data comes from. Every metric exists to help you make better financial decisions.';
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Our Data Explained — Ratings, CFPB & Regulatory Sources",
+    "description": description,
+    "url": "https://www.creditdoc.co/about/creditdoc-data/",
+    "datePublished": "2026-05-17",
+    "dateModified": "2026-05-17",
+    "isPartOf": { "@type": "WebSite", "name": "CreditDoc", "url": "https://www.creditdoc.co" },
+    "publisher": { "@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/" },
+      { "@type": "ListItem", "position": 2, "name": "About", "item": "https://www.creditdoc.co/about/" },
+      { "@type": "ListItem", "position": 3, "name": "Our Data", "item": "https://www.creditdoc.co/about/creditdoc-data/" }
+    ]
+  }
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <!-- Breadcrumb -->
+  <nav class="mx-auto max-w-4xl px-4 pt-6 sm:px-6 lg:px-8" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li><a href="/about/" class="hover:text-primary transition-colors">About</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li class="text-text font-medium">Our Data</li>
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+    <span class="inline-block rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-6">Transparency</span>
+    <h1 class="text-3xl sm:text-4xl font-bold text-text">Our Data — How CreditDoc Works</h1>
+    <div class="mt-6 space-y-4 text-muted leading-relaxed">
+      <p>
+        CreditDoc is built on publicly verifiable data. Every number on our pages has a source you can check yourself. We use federal databases (CFPB, FDIC, HMDA, SBA), state regulatory filings, and verified company information — all designed to help you make better financial decisions.
+      </p>
+      <p>
+        Everything we display exists to benefit <strong class="text-text">you</strong> — the consumer trying to navigate a confusing financial landscape. We don't accept payment for higher ratings or better placement. Our ratings come from data, not deals.
+      </p>
+      <p>
+        Our methodology is completely transparent. This page explains exactly what every metric means, how it's calculated, and where the data comes from. We believe you deserve to understand what you're looking at.
+      </p>
+      <p>
+        Our data is <strong class="text-text">constantly updated</strong> — CFPB complaints sync daily, company information refreshes automatically, state regulatory changes are incorporated as they happen. Every page shows when it was last updated so you know how fresh the information is. You're never looking at stale data.
+      </p>
+      <p class="text-sm">
+        If you find an error, <a href="/contact/" class="text-primary hover:underline">contact us</a> — we correct mistakes within 24 hours.
+      </p>
+    </div>
+  </section>
+
+  <!-- Table of Contents -->
+  <section class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <div class="glass-card p-6">
+      <h2 class="text-lg font-bold text-text mb-4">What's on this page</h2>
+      <nav class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <a href="#rating" class="text-sm text-primary hover:underline">1. CreditDoc Rating</a>
+        <a href="#cfpb-data" class="text-sm text-primary hover:underline">2. CFPB Transparency Report</a>
+        <a href="#diagnosis" class="text-sm text-primary hover:underline">3. CreditDoc Diagnosis</a>
+        <a href="#pricing" class="text-sm text-primary hover:underline">4. Pricing & Fees</a>
+        <a href="#similar-companies" class="text-sm text-primary hover:underline">5. Similar Companies</a>
+        <a href="#state-data" class="text-sm text-primary hover:underline">6. State & Local Regulations</a>
+        <a href="#city-guides" class="text-sm text-primary hover:underline">7. City Guides</a>
+        <a href="#reviews" class="text-sm text-primary hover:underline">8. Company Reviews</a>
+        <a href="#locations" class="text-sm text-primary hover:underline">9. Location & Map Data</a>
+        <a href="#regulatory-data" class="text-sm text-primary hover:underline">10. Regulatory Data Sources</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Sections -->
+  <section class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8 space-y-16">
+
+    <!-- Section 1: Rating -->
+    <div id="rating">
+      <h2 class="text-2xl font-bold text-text mb-4">1. CreditDoc Rating</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        The star rating you see on every company profile (e.g., 4.2/5) is CreditDoc's proprietary composite score. It is NOT a user-submitted rating or a popularity vote.
+      </p>
+      <div class="glass-card p-5 space-y-4">
+        <h3 class="text-base font-semibold text-text">Our 5-Factor System</h3>
+        <p class="text-sm text-muted leading-relaxed">Each company is evaluated across five factors, scored 1.0–5.0. The overall rating is the weighted average:</p>
+        <div class="space-y-3">
+          <div class="flex items-start gap-3">
+            <span class="shrink-0 w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center text-xs font-bold">1</span>
+            <div>
+              <p class="text-sm font-semibold text-text">Value</p>
+              <p class="text-xs text-muted">Is the service worth the price? Monthly fees, setup costs, money-back guarantees, and cost-to-benefit ratio.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="shrink-0 w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center text-xs font-bold">2</span>
+            <div>
+              <p class="text-sm font-semibold text-text">Effectiveness</p>
+              <p class="text-xs text-muted">Does it work? Track record, CFPB resolution data, customer outcomes, and industry results.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="shrink-0 w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center text-xs font-bold">3</span>
+            <div>
+              <p class="text-sm font-semibold text-text">Reputation</p>
+              <p class="text-xs text-muted">What do others say? BBB rating, Google reviews, CFPB complaint patterns, and regulatory standing.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="shrink-0 w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center text-xs font-bold">4</span>
+            <div>
+              <p class="text-sm font-semibold text-text">Transparency</p>
+              <p class="text-xs text-muted">Are they upfront? Clear pricing, no hidden fees, accessible contracts, and honest marketing.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="shrink-0 w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center text-xs font-bold">5</span>
+            <div>
+              <p class="text-sm font-semibold text-text">Customer Experience</p>
+              <p class="text-xs text-muted">What's it like to use? Response times, portal quality, communication, and cancellation process.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 space-y-2">
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">How this differs from Google Reviews:</strong> Google ratings are popularity votes from self-selected reviewers. Our rating is a methodological assessment using verifiable data points. A company with 5.0 stars on Google may score 3.2 here if their CFPB data shows poor resolution or their pricing lacks transparency.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">How this differs from BBB:</strong> BBB ratings measure business practices and complaint handling processes. Our rating also includes value, effectiveness, and customer experience — factors BBB doesn't score.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          Ratings are recalculated whenever new data arrives. The "Updated" date on each profile shows when the most recent data was incorporated.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 2: CFPB -->
+    <div id="cfpb-data">
+      <h2 class="text-2xl font-bold text-text mb-4">2. CFPB Transparency Report</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        The Consumer Financial Protection Bureau (CFPB) is a U.S. federal agency that collects and publishes consumer complaints about financial companies. We sync this data daily and display it on every company profile.
+      </p>
+      <div class="glass-card p-5 space-y-4">
+        <h3 class="text-base font-semibold text-text">What Each Metric Means</h3>
+        <dl class="space-y-4">
+          <div>
+            <dt class="text-sm font-semibold text-text">Response Rate</dt>
+            <dd class="text-xs text-muted mt-1">The percentage of consumer complaints that received ANY response from the company. A 100% response rate means the company replied to every complaint — but it does NOT mean every consumer was helped or satisfied. A company can respond "we disagree" to every complaint and still show 100%.</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold text-text">On-Time Response</dt>
+            <dd class="text-xs text-muted mt-1">The percentage of responses delivered within the CFPB's 15-business-day deadline. Companies that consistently miss this deadline may face CFPB enforcement action.</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold text-text">Resolved with Relief</dt>
+            <dd class="text-xs text-muted mt-1">The percentage of complaints where the consumer received actual monetary relief (refund, credit, fee waiver) or non-monetary relief (account correction, policy change). This is the strongest indicator of consumer-friendly resolution.</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold text-text">Complaints (12 months)</dt>
+            <dd class="text-xs text-muted mt-1">Total complaints filed against this company in the last 12 months. Important context: a high number does NOT necessarily mean a bad company. Bank of America has 100,000+ complaints because they serve 67 million customers. What matters is the rate relative to company size and the resolution quality.</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold text-text">Complaint Trend</dt>
+            <dd class="text-xs text-muted mt-1">"Stable" means complaint volume is roughly the same as the prior 12-month period. "Rising" means complaints are increasing. "Declining" means they're decreasing. We calculate this by comparing the most recent 12 months against the previous 12 months.</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="mt-4 space-y-2">
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Color coding:</strong> Green (≥90%), Yellow (70–89%), Red (&lt;70%). These thresholds reflect industry norms — most legitimate companies respond to 90%+ of complaints.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Limitations:</strong> CFPB data only includes complaints, not positive experiences. It is self-reported by consumers and not independently verified. A complaint being filed does not mean the company did anything wrong.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Data freshness:</strong> Synced daily from the <a href="https://www.consumerfinance.gov/data-research/consumer-complaints/" target="_blank" rel="noopener" class="text-primary hover:underline">CFPB Consumer Complaint Database</a>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 3: Diagnosis -->
+    <div id="diagnosis">
+      <h2 class="text-2xl font-bold text-text mb-4">3. CreditDoc Diagnosis</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        The "Doctor's Verdict" card on each profile is our editorial summary of a company's strengths and weaknesses. We use a medical metaphor because CreditDoc helps diagnose the financial health of companies — just as a doctor gives you a clear verdict after examining the data.
+      </p>
+      <div class="glass-card p-5 space-y-4">
+        <h3 class="text-base font-semibold text-text">What Each Part Means</h3>
+        <dl class="space-y-4">
+          <div>
+            <dt class="text-sm font-semibold text-text">"Ideal for..."</dt>
+            <dd class="text-xs text-muted mt-1">The type of consumer who would benefit most from this company, based on their services, pricing tier, and specialization. Derived from category analysis and service offerings.</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold text-text">"Strength..."</dt>
+            <dd class="text-xs text-muted mt-1">The company's highest-scoring factor or most notable differentiator. This is what they do better than competitors in their category.</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold text-text">"Watch out for..."</dt>
+            <dd class="text-xs text-muted mt-1">The company's lowest-scoring factor or most common complaint theme from CFPB data. This is what you should be aware of before signing up.</dd>
+          </div>
+        </dl>
+      </div>
+      <p class="mt-4 text-sm text-muted leading-relaxed">
+        The diagnosis is generated from real company data — services offered, pricing structure, CFPB complaint patterns, and user reviews. It updates whenever the underlying data changes significantly.
+      </p>
+    </div>
+
+    <!-- Section 4: Pricing -->
+    <div id="pricing">
+      <h2 class="text-2xl font-bold text-text mb-4">4. Pricing & Fees</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        Every profile shows pricing information to help you compare costs before committing. Here's what each field means:
+      </p>
+      <div class="glass-card p-5 space-y-4">
+        <dl class="space-y-4">
+          <div>
+            <dt class="text-sm font-semibold text-text">Starting Price</dt>
+            <dd class="text-xs text-muted mt-1">The lowest advertised monthly cost for the company's base service tier. "Free/mo" means the company does not charge a recurring monthly subscription fee — common for BNPL lenders, free credit monitoring services, and some non-profit counselors. It does NOT mean the service has zero cost (lenders charge interest, some services charge per-use fees).</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold text-text">Setup Fee</dt>
+            <dd class="text-xs text-muted mt-1">A one-time enrollment or activation cost charged when you first sign up. "None" means no upfront cost to begin using the service.</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold text-text">Money-Back Guarantee</dt>
+            <dd class="text-xs text-muted mt-1">"Yes" means the company has a written refund policy — typically a specific number of days during which you can cancel for a full refund. "No" means no formal guarantee is offered (you may still be able to cancel, but refunds are not guaranteed).</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="mt-4 space-y-2">
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Pricing varies by category:</strong>
+        </p>
+        <ul class="text-sm text-muted space-y-1 ml-4 list-disc">
+          <li><strong class="text-text">Credit repair:</strong> Monthly subscription ($50–$150/mo) + setup fee</li>
+          <li><strong class="text-text">Personal loans:</strong> No monthly fee — cost is APR + origination fee</li>
+          <li><strong class="text-text">BNPL (Buy Now Pay Later):</strong> No monthly fee — cost is interest on longer-term plans</li>
+          <li><strong class="text-text">Credit monitoring:</strong> Often free for basic tier, premium $10–$40/mo</li>
+          <li><strong class="text-text">Non-profit counseling:</strong> Free or low-cost (funded by creditor grants)</li>
+        </ul>
+        <p class="text-sm text-muted leading-relaxed">
+          Source: company websites. Verified quarterly. Prices may change — always confirm directly with the provider before signing up.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 5: Similar Companies -->
+    <div id="similar-companies">
+      <h2 class="text-2xl font-bold text-text mb-4">5. Similar Companies</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        At the bottom of each profile, we show companies that offer similar services in the same area. This helps you compare options without searching separately for each one.
+      </p>
+      <div class="glass-card p-5 space-y-3">
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">How they're selected:</strong> Same service category + same state, sorted by CreditDoc rating. If you're looking at a credit repair company in Georgia, the similar companies are other credit repair providers also serving Georgia.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Important:</strong> The ratings shown on similar company cards are THEIR OWN ratings — not the rating of the company you're currently viewing. A main company rated 4.2 may show similar companies rated 4.9 because those companies scored higher in our methodology.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Why this matters:</strong> Comparison shopping is essential for financial services. Seeing alternatives side-by-side helps you evaluate whether the company you're looking at is the best fit, or whether a competitor might serve you better.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 6: State Data -->
+    <div id="state-data">
+      <h2 class="text-2xl font-bold text-text mb-4">6. State & Local Regulations</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        Financial services are heavily regulated at the state level. The rules in your state determine what companies can charge, what protections you have, and what's illegal. We surface this information so you know your rights.
+      </p>
+      <div class="glass-card p-5 space-y-4">
+        <dl class="space-y-4">
+          <div>
+            <dt class="text-sm font-semibold text-text">Usury Caps</dt>
+            <dd class="text-xs text-muted mt-1">The maximum interest rate a lender can charge in your state. Some states cap at 36% APR, others have no cap. Knowing your state's limit tells you whether a rate offer is within legal bounds.</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold text-text">Payday Loan Status</dt>
+            <dd class="text-xs text-muted mt-1">"Banned" means your state prohibits payday lending entirely. "Allowed" means it's legal with regulations. "Restricted" means it's legal but with strict limits on amounts, rollovers, or fees.</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold text-text">Credit Repair Regulations</dt>
+            <dd class="text-xs text-muted mt-1">Many states prohibit credit repair companies from charging upfront fees before work is performed. Some require surety bonds or specific cancellation periods. We display these rules so you know what a company is legally required to offer you.</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold text-text">FDIC Branch Count</dt>
+            <dd class="text-xs text-muted mt-1">The number of federally insured branch locations in your area. Higher counts mean more physical access points and stronger regulatory oversight (FDIC-insured institutions are subject to regular examinations).</dd>
+          </div>
+        </dl>
+      </div>
+      <p class="mt-4 text-sm text-muted leading-relaxed">
+        Data sources: state statutes, FDIC BankFind, NMLS Consumer Access. Updated quarterly as legislation changes.
+      </p>
+    </div>
+
+    <!-- Section 7: City Guides -->
+    <div id="city-guides">
+      <h2 class="text-2xl font-bold text-text mb-4">7. City Guides</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        Our city guides are local financial resource hubs built for your specific city. Financial services vary dramatically by location — what's available in Atlanta is different from what's available in Austin. A national "best of" list doesn't help you if those companies don't serve your area.
+      </p>
+      <div class="glass-card p-5 space-y-3">
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">What you'll find:</strong> Local providers that serve your city, state-specific regulations that apply to you, HMDA lending data for your area, and localized answers to questions like "what are the best credit repair companies in my city?"
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Category sub-pages:</strong> Each city has dedicated pages for specific needs — credit repair, personal loans, emergency cash, debt relief, and more. These show only providers that serve your city and state, filtered by the service you actually need.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">How providers are listed:</strong> Companies physically located in your city appear first, followed by statewide providers that serve your area. This ensures you see the most local options before seeing larger regional companies.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Why local matters:</strong> State laws determine what fees are legal, what protections you have, and what recourse you have if something goes wrong. A company may be excellent in one state and unable to operate in another. Our city guides account for this.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 8: Reviews -->
+    <div id="reviews">
+      <h2 class="text-2xl font-bold text-text mb-4">8. Company Reviews</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        A CreditDoc review page is a data profile — not an opinion piece. We compile publicly available information about financial services companies into a standardized format so you can compare them objectively.
+      </p>
+      <div class="glass-card p-5 space-y-3">
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">How companies get listed:</strong> We track every identifiable financial services provider in our covered categories. Companies are NOT listed because they pay us — and they cannot pay to be removed. If a company provides financial services to consumers, it belongs in our directory.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">What's on every profile:</strong> CreditDoc rating, CFPB transparency data, editorial diagnosis, pricing, location and map, similar companies, and frequently asked questions.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">How we verify information:</strong> Company details are cross-referenced against state licensing databases (NMLS), Secretary of State business filings, FDIC BankFind, and company websites.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Editorial independence:</strong> No company can pay for a higher rating, better placement, or removal of negative data. If the CFPB data shows problems, we show it. If a company has regulatory actions against it, we display that. Our obligation is to you, the consumer — not to the companies we profile.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Update frequency:</strong> Data refreshes daily (CFPB sync). Full editorial review on a quarterly cycle. The "Updated" badge on each profile shows the most recent refresh date.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 9: Locations -->
+    <div id="locations">
+      <h2 class="text-2xl font-bold text-text mb-4">9. Location & Map Data</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        Each company profile includes location information and an embedded map to help you find physical offices near you.
+      </p>
+      <div class="glass-card p-5 space-y-3">
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Data sources:</strong> Company-reported addresses, state licensing records (NMLS), and FDIC BankFind for insured institutions.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">What the map shows:</strong> The company's headquarters or nearest branch. For multi-location companies, we show each branch as a separate profile because they may serve different areas, have different hours, or be regulated by different state offices.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">"Serving" vs "Located in":</strong> Some companies serve your area remotely without a physical local office. They appear in your city's results if they're licensed to operate in your state. Companies with a physical location in your city are listed first.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Limitations:</strong> Map pins are approximate and based on the address on file. Always verify hours, exact location, and appointment requirements directly with the company before visiting.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 10: Regulatory -->
+    <div id="regulatory-data">
+      <h2 class="text-2xl font-bold text-text mb-4">10. Regulatory Data Sources</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        CreditDoc tracks regulatory information from multiple federal and state sources to give you a complete picture of how financial companies are governed and whether they operate within the law.
+      </p>
+      <div class="glass-card p-5 space-y-4">
+        <div>
+          <h3 class="text-sm font-semibold text-text mb-2">Federal Sources</h3>
+          <ul class="text-xs text-muted space-y-1.5 ml-4 list-disc">
+            <li><strong class="text-text">CFPB</strong> — Consumer complaints, enforcement actions, consent orders</li>
+            <li><strong class="text-text">FDIC</strong> — Bank supervision, insurance status, branch locations, examination results</li>
+            <li><strong class="text-text">NMLS</strong> — Licensing verification for mortgage lenders, loan originators, and financial services companies</li>
+            <li><strong class="text-text">SEC</strong> — Public company filings for publicly traded financial services firms</li>
+            <li><strong class="text-text">SBA</strong> — Small business lending programs, lender participation data</li>
+            <li><strong class="text-text">HMDA</strong> — Home Mortgage Disclosure Act data showing approval/denial rates by institution, geography, and borrower demographics</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-text mb-2">State Sources</h3>
+          <ul class="text-xs text-muted space-y-1.5 ml-4 list-disc">
+            <li><strong class="text-text">State Banking Departments</strong> — licensing records, examination findings</li>
+            <li><strong class="text-text">Attorney General Offices</strong> — enforcement actions, settlement agreements, consumer alerts</li>
+            <li><strong class="text-text">State Statutes</strong> — usury caps, payday loan regulations, Credit Repair Organization Acts</li>
+            <li><strong class="text-text">Secretary of State</strong> — business registration, corporate status verification</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-4 space-y-2">
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">What enforcement actions mean:</strong> A company with CFPB consent orders or state AG settlements has been formally disciplined for violating consumer protection laws. This is public record and factored into our assessment. It doesn't mean the company is necessarily bad today — but it means they have a history you should be aware of.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Licensing status:</strong> We verify companies are properly licensed in the states where they operate. Unlicensed operators are flagged. Operating without required licenses is illegal in most states and removes consumer protections.
+        </p>
+        <p class="text-sm text-muted leading-relaxed">
+          <strong class="text-text">Why this matters to you:</strong> A company's regulatory history tells you how they've treated consumers in the past, whether they follow the law, and whether they're supervised by authorities who can intervene if something goes wrong. This data is continuously refreshed as new enforcement actions, licensing changes, and regulatory filings become public.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="mx-auto max-w-4xl px-4 pb-16 sm:px-6 lg:px-8">
+    <div class="glass-card p-6 text-center">
+      <h2 class="text-lg font-bold text-text mb-2">Questions about our data?</h2>
+      <p class="text-sm text-muted mb-4">If something on our site is unclear, or you believe data is incorrect, we want to hear from you.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="/contact/" class="inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors">Contact Us</a>
+        <a href="/methodology/" class="inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-lg border border-border text-text hover:bg-bg-alt transition-colors">Full Methodology</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

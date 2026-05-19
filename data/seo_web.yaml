@@ -1,0 +1,1748 @@
+# SEO web — the keyword/content architecture for CreditDoc
+# Last updated: 2026-04-26
+#
+# Each entry below defines an INTENT — a real searcher anxiety or qualification question
+# that maps to one or more money pages. The keyword pipeline reads this file:
+#   - Stage 1 uses `seed_phrases` as inputs to autocomplete + PAA expansion
+#   - Stage 5 uses `primary_money_page` to route every cluster to a single owner
+#   - Internal linking uses `secondary_money_pages` to wire siblings
+#
+# Pattern: anxiety-questions are GOLD because they reveal latent commercial intent.
+# Someone asking "do I need to be profitable to get a loan" doesn't search "best small business loan"
+# but they ARE a P1 lead. Their question is the point of contact.
+#
+# Schema:
+#   pillars.<N>.intents.<intent_key>:
+#     description:           one-line plain-English summary of the borrower/searcher state
+#     primary_money_page:    slug of the money page that owns this intent (must exist in config.yaml)
+#     secondary_money_pages: list of cross-pillar or sibling slugs to internally link to
+#     seed_phrases:          5-12 natural-language seeds. Autocomplete + PAA do the multiplier.
+
+pillars:
+
+  1:
+    name: Business Loans
+    intents:
+
+      time_in_business:
+        description: "SMB owner whose business is too new to qualify with traditional lenders"
+        primary_money_page: best-startup-business-loans
+        secondary_money_pages:
+          - best-small-business-loans
+          - best-bad-credit-business-loans
+          - best-merchant-cash-advance
+        seed_phrases:
+          # ---- Question-form (the way real people type into Google) ----
+          - "how can a new business get a loan"
+          - "how does a new business get a loan"
+          - "how do i get a loan for my new business"
+          - "how do i finance a new business"
+          - "how do i fund a new business"
+          - "how do i borrow money for my new business"
+          - "what's the best way for a small business to get a loan"
+          - "what's the best way for a startup to get funding"
+          - "what's the easiest way to get a business loan"
+          - "what's the fastest way to get a business loan"
+          - "where can a new business borrow money"
+          - "where do new businesses get loans"
+          - "where do startups get money"
+          - "where do small businesses get funding"
+          - "can a new business get a loan"
+          - "can a brand new business get a loan"
+          - "can a startup get a business loan"
+          - "can a 6 month old business get a loan"
+          - "can a 3 month old business get a loan"
+          - "can a 90 day old business get a loan"
+          - "can a 1 year old business get a loan"
+          - "can i get a loan for a business i just started"
+          - "can i get a loan for a business with no history"
+          - "what interest rate will a small business get"
+          - "what interest rate will a new business get"
+          - "what rates can a new business get"
+          - "what's a typical rate for a startup loan"
+          - "what credit score do i need for a startup loan"
+          - "how new can a business be to get a loan"
+          - "how soon can a business get a loan after opening"
+          # ---- Statement-form (people don't always phrase as questions) ----
+          - "new business needs a loan"
+          - "my new business needs a loan"
+          - "business just started needs a loan"
+          - "i just started a business and need money"
+          - "i just opened my business and need a loan"
+          - "small business loan for new business"
+          - "loan for a business i just opened"
+          - "loan for a business i just started"
+          - "loans for businesses that just opened"
+          - "loans for businesses less than a year old"
+          - "newly opened business loan"
+          - "recently opened business loan"
+          - "just formed llc needs a loan"
+          - "just incorporated business loan"
+          - "business formed last month needs loan"
+          - "business loans without track record"
+          - "business loans with only 6 months"
+          - "business loans with no history"
+          - "loan for business under 1 year"
+          # ---- Synonym/vocabulary variants (same intent, different words) ----
+          - "small business borrowing for new business"
+          - "small business funding for startup"
+          - "small business financing for new company"
+          - "startup capital for new business"
+          - "money for a new business"
+          - "credit for a new business"
+          # ---- Time-bucketed minimum-requirement queries ----
+          - "shortest time in business for funding"
+          - "minimum time in business for sba"
+          - "minimum time in business for sba 7a loan"
+          - "minimum time in business for line of credit"
+          - "minimum time in business for term loan"
+          - "minimum time in business for mca"
+          - "minimum age of business for sba loan"
+          - "do i need years in business for a loan"
+          - "what's the minimum time in business for a loan"
+          - "do banks require time in business for loans"
+
+      profitability:
+        description: "SMB not yet profitable / losing money / inconsistent revenue"
+        primary_money_page: best-startup-business-loans
+        secondary_money_pages:
+          - best-bad-credit-business-loans
+          - best-business-lines-of-credit
+        seed_phrases:
+          # Conversational natural-language phrasings
+          - "do i need to be profitable to get a business loan"
+          - "do you have to be profitable for a business loan"
+          - "can i get a loan if my business is losing money"
+          - "can i get a business loan if i'm not profitable yet"
+          - "can a business losing money get a loan"
+          - "can my business borrow if we're not making money"
+          - "business loan if not profitable"
+          - "business loan with no revenue yet"
+          - "loan for a business that's not profitable"
+          - "loan for business with negative cash flow"
+          - "loan for business at a loss"
+          - "business loan when revenue is low"
+          - "business loan when business is losing money"
+          - "minimum revenue to qualify for business loan"
+          - "minimum monthly revenue for business loan"
+          - "minimum monthly revenue for sba loan"
+          - "minimum monthly revenue for mca"
+          - "minimum profit to get a business loan"
+          - "what if i don't have profits for sba loan"
+          - "do banks lend to unprofitable businesses"
+          - "can a pre-revenue business get funding"
+          - "loan for business that isn't making money yet"
+          - "what counts as revenue for a business loan"
+          - "do you need a P&L for a business loan"
+          - "business loan without tax returns"
+          - "business loan without profit and loss statement"
+
+      personal_credit:
+        description: "SMB owner with bad/limited personal credit — hard for SBA / banks"
+        primary_money_page: best-bad-credit-business-loans
+        secondary_money_pages:
+          - best-merchant-cash-advance
+          - best-small-business-loans
+          - best-credit-repair-companies   # cross-pillar to P6
+        seed_phrases:
+          # Conversational natural-language phrasings
+          - "can i get a business loan with bad credit"
+          - "can my business get a loan if my personal credit is bad"
+          - "will my bad credit stop me getting a business loan"
+          - "does personal credit matter for business loan"
+          - "does personal credit affect business loan approval"
+          - "do they pull personal credit for a business loan"
+          - "do business loans use personal credit"
+          - "business loan with bad personal credit"
+          - "business loan with 500 personal credit"
+          - "business loan with 580 credit score"
+          - "business loan with 600 credit score"
+          - "business loan with 620 credit score"
+          - "business loan after personal bankruptcy"
+          - "business loan with chapter 7 on credit"
+          - "business loan after foreclosure"
+          - "business loan no personal guarantee"
+          - "business loan no personal credit check"
+          - "business loan that doesn't pull personal credit"
+          - "business loans that don't use personal credit"
+          - "what credit score do i need for an sba loan"
+          - "what credit score for a small business loan"
+          - "minimum credit score for business loan"
+          - "minimum personal credit score for sba"
+          - "can my business build credit instead of using mine"
+          - "how to get a business loan when personal credit is bad"
+
+      industry:
+        description: "Industry-specific qualification — restaurants, trucking, medical, retail, cannabis, construction, ecommerce, etc."
+        primary_money_page: best-small-business-loans
+        secondary_money_pages:
+          - best-equipment-financing
+          - best-merchant-cash-advance
+        seed_phrases:
+          # Question-form per industry
+          - "how do restaurants get business loans"
+          - "how do truckers get business loans"
+          - "how do contractors get business loans"
+          - "how do ecommerce businesses get loans"
+          - "how do daycare owners get business loans"
+          - "best lender for restaurant business loans"
+          - "best lender for trucking company loans"
+          - "best lender for retail store loans"
+          - "what business loan is best for a restaurant"
+          - "what loan is best for a trucking company"
+          - "what's the best loan for an ecommerce business"
+          - "is sba 7a good for restaurants"
+          - "is mca good for restaurants"
+          - "do banks lend to restaurants"
+          - "do banks lend to truckers"
+          - "do banks lend to construction companies"
+          # Statement-form per industry
+          - "business loan for restaurant"
+          - "business loan for restaurant owner"
+          - "business loan for new restaurant"
+          - "business loan for trucking"
+          - "business loan for trucking company"
+          - "business loan for owner operator trucker"
+          - "loan for medical practice"
+          - "loan for dental practice"
+          - "loan for chiropractor"
+          - "loan for veterinary practice"
+          - "loan for retail store"
+          - "loan for clothing store"
+          - "loan for liquor store"
+          - "loan for convenience store"
+          - "loan for construction company"
+          - "loan for hvac company"
+          - "loan for plumbing company"
+          - "loan for landscaping business"
+          - "loan for ecommerce business"
+          - "loan for amazon seller"
+          - "loan for shopify store"
+          - "loan for cannabis business"
+          - "loan for dispensary"
+          - "loan for franchise"
+          - "loan for franchise owner"
+          - "loan for food truck"
+          - "loan for gym owner"
+          - "loan for daycare"
+          - "loan for salon"
+          - "loan for barber shop"
+          - "loan for nail salon"
+          - "loan for auto repair shop"
+          - "loan for car wash"
+          - "loan for laundromat"
+          - "loan for real estate agent"
+          - "loan for insurance agent"
+          # Retail / store fronts
+          - "loan for hardware store"
+          - "loan for small hardware store"
+          - "loan for ace hardware franchise"
+          - "loan for true value franchise"
+          - "loan for general store"
+          - "loan for pharmacy"
+          - "loan for independent pharmacy"
+          - "loan for compounding pharmacy"
+          - "loan for grocery store"
+          - "loan for bodega"
+          - "loan for gas station"
+          - "loan for gas station with convenience store"
+          # Smaller franchises (often the cash buyer base)
+          - "loan to buy subway franchise"
+          - "loan to buy dunkin franchise"
+          - "loan to buy jiffy lube franchise"
+          - "loan to buy 7-eleven franchise"
+          - "loan to buy ups store franchise"
+          - "loan to buy planet fitness franchise"
+          - "loan to buy anytime fitness franchise"
+          - "loan to buy supercuts franchise"
+          - "loan to buy great clips franchise"
+          - "loan to buy domino's pizza franchise"
+          - "loan to buy taco bell franchise"
+          - "loan to buy chipotle franchise"
+          - "loan to buy starbucks franchise"
+          - "loan to buy popeye's franchise"
+          # Specialty
+          - "loan for tattoo shop"
+          - "loan for vape shop"
+          - "loan for liquor store"
+          - "loan for funeral home"
+          - "loan for catering business"
+          - "loan for cleaning business"
+          - "loan for trucking owner operator"
+          - "loan for fleet trucking"
+
+      agricultural:
+        description: "Farmers + ranchers + ag-related businesses — distinct lending ecosystem (USDA FSA, Farm Credit System, beginning farmer programs). Different rules from regular SBL."
+        primary_money_page: best-small-business-loans
+        secondary_money_pages:
+          - best-equipment-financing
+          - best-bad-credit-business-loans
+          - best-startup-business-loans
+        seed_phrases:
+          # Direct
+          - "farming loans"
+          - "farm loans"
+          - "agricultural business loan"
+          - "ag loan"
+          - "loan for farmer"
+          - "loan for farm"
+          - "loan for ranch"
+          - "loan for cattle ranch"
+          - "loan for dairy farm"
+          - "loan for crop farm"
+          - "loan for poultry farm"
+          - "loan for vineyard"
+          - "loan for orchard"
+          # Specific products / programs
+          - "usda farm loan"
+          - "fsa farm loan"
+          - "farm service agency loan"
+          - "farm credit loan"
+          - "beginning farmer loan"
+          - "young farmer loan"
+          - "operating loan for farm"
+          - "farm equipment loan"
+          - "farmland purchase loan"
+          - "loan to buy a farm"
+          - "loan to buy farmland"
+          # Question-form
+          - "how do farmers get loans"
+          - "how do beginning farmers get loans"
+          - "how does a usda farm loan work"
+          - "what credit score for a farm loan"
+          - "can a new farmer get a loan"
+          - "can a small farm get a business loan"
+          - "are there grants for new farmers"
+          - "how to finance starting a farm"
+          - "best loan for buying farm equipment"
+          - "best loan for cattle"
+          - "loan for farm with bad credit"
+
+      collateral:
+        description: "SMB without collateral / unsecured borrowing intent"
+        primary_money_page: best-business-lines-of-credit
+        secondary_money_pages:
+          - best-small-business-loans
+          - best-merchant-cash-advance
+        seed_phrases:
+          # Question-form
+          - "do i need collateral for a business loan"
+          - "do i need collateral for an sba loan"
+          - "do i need collateral for a line of credit"
+          - "do business loans require collateral"
+          - "what is collateral for a business loan"
+          - "what counts as collateral for a business loan"
+          - "can i use my house as collateral for a business loan"
+          - "can i use my car as collateral for a business loan"
+          - "can i use inventory as collateral"
+          - "can i use accounts receivable as collateral"
+          - "what if i don't have collateral for a business loan"
+          - "how do i get a business loan with no collateral"
+          - "where can i get an unsecured business loan"
+          - "is there such a thing as an unsecured sba loan"
+          # Statement-form
+          - "unsecured business loan"
+          - "unsecured business line of credit"
+          - "unsecured business loan bad credit"
+          - "unsecured business loan startup"
+          - "business loan no collateral"
+          - "business loan no collateral required"
+          - "business loan without collateral"
+          - "business loan without putting up assets"
+          - "business line of credit no collateral"
+          - "business line of credit unsecured"
+          - "no collateral business loan online"
+          - "no collateral working capital loan"
+          - "no collateral mca"
+          # Risk-aversion
+          - "what happens if i can't repay an unsecured business loan"
+          - "is unsecured business loan more expensive"
+          - "unsecured vs secured business loan"
+
+      owner_profile:
+        description: "Women, veterans, minorities, first-time owners — segment-specific qualification"
+        primary_money_page: best-small-business-loans
+        secondary_money_pages:
+          - best-sba-loans
+          - best-startup-business-loans
+        seed_phrases:
+          # Women
+          - "business loan for women"
+          - "business loan for woman-owned business"
+          - "best business loan for women entrepreneurs"
+          - "sba loan for women"
+          - "grants and loans for women in business"
+          - "women's business funding"
+          - "how do women get small business loans"
+          # Veterans
+          - "business loan for veterans"
+          - "sba loan for veterans"
+          - "sba veterans advantage loan"
+          - "best business loan for veterans"
+          - "how do veterans get business loans"
+          - "business loan for disabled veterans"
+          - "veteran-owned business loan"
+          - "vosb business loan"
+          # Minorities
+          - "business loan for minorities"
+          - "business loan for minority-owned business"
+          - "minority business loans"
+          - "minority business grants and loans"
+          - "best lender for minority-owned business"
+          - "sba loan for minorities"
+          - "loan for black-owned business"
+          - "loan for hispanic-owned business"
+          - "loan for asian-owned business"
+          - "loan for native-american-owned business"
+          # First-time / immigrant / felons
+          - "first time business owner loan"
+          - "loan for first-time entrepreneur"
+          - "business loan for new entrepreneur"
+          - "business loan for immigrant"
+          - "business loan for non-citizen"
+          - "business loan with itin"
+          - "business loan for ex-felon"
+          - "business loan for someone with criminal record"
+          # Single parent / non-traditional
+          - "business loan for single mom"
+          - "business loan for single parent"
+
+      amount_small:
+        description: "Small SMB borrow ($5K–$50K) — too small for SBA, fits MCA / LOC"
+        primary_money_page: best-merchant-cash-advance
+        secondary_money_pages:
+          - best-business-lines-of-credit
+          - best-small-business-loans
+        seed_phrases:
+          - "small business loan $10000"
+          - "business loan under $25k"
+          - "$5000 business loan"
+          - "small business loan 50k"
+
+      amount_large:
+        description: "Larger SMB borrow ($250K+) — SBA / equipment / commercial real estate territory"
+        primary_money_page: best-sba-loans
+        secondary_money_pages:
+          - best-equipment-financing
+          - best-small-business-loans
+        seed_phrases:
+          - "business loan over $500k"
+          - "business loan $1 million"
+          - "large sba loan"
+          - "biggest sba loan amount"
+
+      speed:
+        description: "SMB needs cash fast — emergency / opportunistic"
+        primary_money_page: best-merchant-cash-advance
+        secondary_money_pages:
+          - best-business-lines-of-credit
+        seed_phrases:
+          # Question-form
+          - "how fast can i get a business loan"
+          - "how quickly can i get a business loan"
+          - "what's the fastest business loan"
+          - "what business loan is the quickest"
+          - "can i get a business loan today"
+          - "can i get a business loan in 24 hours"
+          - "can i get an mca same day"
+          - "how long does an mca take to fund"
+          - "how long does a business line of credit take"
+          - "how long does an sba loan take"
+          - "what's the fastest sba loan"
+          - "fastest funding business loan"
+          # Statement-form
+          - "same day business loan"
+          - "same day business funding"
+          - "instant business loan"
+          - "instant approval business loan"
+          - "fast business funding"
+          - "fast business loan online"
+          - "business loan 24 hour approval"
+          - "business loan 48 hour funding"
+          - "business loan funded today"
+          - "business loan next day"
+          - "emergency business loan"
+          - "emergency business funding"
+          - "rush business loan"
+          - "quick business cash advance"
+
+      product_specific:
+        description: "Searcher already knows the product type — equipment, invoice factoring, MCA, SBA"
+        primary_money_page: best-equipment-financing
+        secondary_money_pages:
+          - best-invoice-factoring
+          - best-merchant-cash-advance
+          - best-sba-loans
+        seed_phrases:
+          - "how does equipment financing work"
+          - "what is invoice factoring"
+          - "merchant cash advance vs term loan"
+          - "sba loan vs conventional loan"
+
+      decline_recovery:
+        description: "Already declined by a bank / SBA / lender — looking for alternatives"
+        primary_money_page: best-bad-credit-business-loans
+        secondary_money_pages:
+          - best-merchant-cash-advance
+          - best-small-business-loans
+        seed_phrases:
+          # The "i was just rejected" scenario
+          - "business loan after being declined"
+          - "business loan after being denied"
+          - "business loan after bank rejection"
+          - "what to do if denied a business loan"
+          - "what to do after sba loan denial"
+          - "what to do when business loan is denied"
+          - "denied business loan from bank what next"
+          - "denied sba loan now what"
+          - "got denied for a business loan what next"
+          - "business loan denied bad credit"
+          - "business loan denied no revenue"
+          - "business loan denied insufficient time in business"
+          - "why do banks deny business loans"
+          - "why was my business loan denied"
+          - "common reasons sba loans get denied"
+          - "i was rejected for a business loan"
+          - "rejected by bank for business loan"
+          # Alternatives
+          - "business loans for people who get denied"
+          - "alternatives to sba loans if denied"
+          - "alternatives to bank business loans"
+          - "non-bank business loan options"
+          - "business loan lenders that approve when banks don't"
+          - "lenders that approve businesses banks reject"
+          - "easy approval business loan for rejected applicants"
+          # Reapply / fix
+          - "how long after denial can i reapply for sba"
+          - "how to improve chances of business loan approval"
+          - "how to qualify for a business loan after being denied"
+
+      growth_capital:
+        description: "Searcher's problem is GROWTH, not lack of cash. They may not realize a loan is the answer — these are top-of-funnel prospects who need education + a path to a loan product."
+        primary_money_page: best-small-business-loans
+        secondary_money_pages:
+          - best-business-lines-of-credit
+          - best-sba-loans
+          - best-equipment-financing
+        seed_phrases:
+          # The growth-without-loan framing
+          - "how can a small business grow without capital"
+          - "how to grow a small business with no money"
+          - "how to scale a small business with no funding"
+          - "ways to grow a business without a loan"
+          - "can you grow a business without taking on debt"
+          - "bootstrap vs loan for small business growth"
+          # Growth-with-funding framing (when they realize a loan helps)
+          - "how to use a business loan to grow"
+          - "best loan to grow a small business"
+          - "best way to fund small business expansion"
+          - "loan for business expansion"
+          - "how to finance business growth"
+          - "how to fund a second location"
+          - "how to fund opening another store"
+          - "loan for business expansion to second location"
+          - "loan for hiring more staff"
+          - "loan for inventory expansion"
+          - "loan for marketing budget"
+          - "loan to scale ecommerce business"
+          - "how do successful businesses fund growth"
+          - "how do i scale my business with a loan"
+
+      investment_framing:
+        description: "Sophisticated vocabulary: searcher uses 'investment' / 'capital' instead of 'loan'. Often more analytical, comparing options. Term-loan / SBA / line-of-credit fit."
+        primary_money_page: best-small-business-loans
+        secondary_money_pages:
+          - best-sba-loans
+          - best-business-lines-of-credit
+          - best-equipment-financing
+        seed_phrases:
+          - "small business investment for growth"
+          - "small business investment options"
+          - "small business capital options"
+          - "small business funding options"
+          - "small business financing options"
+          - "best small business funding"
+          - "best small business financing"
+          - "where to get capital for a small business"
+          - "where to get growth capital"
+          - "growth capital for small business"
+          - "working capital for small business"
+          - "raise capital for small business"
+          - "raise money for small business"
+          - "small business capital sources"
+          - "small business funding sources"
+          - "alternative funding for small business"
+          - "non-bank business financing"
+          - "fintech business funding"
+          - "smb funding options"
+          - "smb capital"
+
+      franchise_specific:
+        description: "Franchise owner / aspiring franchisee — distinct qualification path (franchise fee, royalty model, franchisor approval matrix)"
+        primary_money_page: best-small-business-loans
+        secondary_money_pages:
+          - best-sba-loans
+          - best-startup-business-loans
+          - best-equipment-financing
+        seed_phrases:
+          - "small business lending for franchises"
+          - "franchise business loan"
+          - "best loan for franchise"
+          - "best loan to buy a franchise"
+          - "best loan for franchise owner"
+          - "how to finance a franchise"
+          - "how to get a loan to buy a franchise"
+          - "how do i get money to buy a franchise"
+          - "sba loan for franchise"
+          - "sba 7a for franchise purchase"
+          - "franchise financing options"
+          - "franchise loan requirements"
+          - "loan to buy mcdonald's franchise"
+          - "loan to buy chick-fil-a franchise"
+          - "loan to buy subway franchise"
+          - "loan to buy ups store franchise"
+          - "how much down payment to buy a franchise"
+          - "franchise loan with bad credit"
+          - "franchise startup costs financing"
+          - "franchise expansion loan"
+          - "loan for franchise renewal"
+          - "loan for second franchise location"
+          - "how does someone get a small business loan for a franchise"
+          - "how do you get approved for a franchise loan"
+          - "how do you finance buying into a franchise"
+          - "what's the best way to fund a franchise purchase"
+          - "what credit score for a franchise loan"
+
+
+  2:
+    name: Consumer Loans
+    intents:
+
+      credit_tier_subprime:
+        description: "Bad credit (<620) consumer who needs a loan and worries about approval"
+        primary_money_page: best-personal-loans-bad-credit
+        secondary_money_pages:
+          - best-personal-loan-lenders
+          - best-credit-repair-companies   # cross-pillar to P6
+        seed_phrases:
+          - "personal loan with 580 credit score"
+          - "personal loan with 600 credit score"
+          - "personal loan with 620 credit score"
+          - "personal loan with 640 credit score"
+          - "personal loan bad credit"
+          - "loan with low credit score"
+          - "loan with poor credit"
+          - "personal loan after bankruptcy"
+          # Conversational
+          - "can i get a loan with bad credit"
+          - "can i get a personal loan with a 580"
+          - "can i get a loan with a 600 credit score"
+          - "where can i get a loan with bad credit"
+          - "who will lend to me with bad credit"
+          - "what's the easiest loan to get with bad credit"
+          - "is there any loan i can get with bad credit"
+          - "how bad is my credit really"
+          - "can i still get a loan if my credit is in the 500s"
+          - "do any lenders accept 580 credit score"
+          - "what loans can i actually qualify for with bad credit"
+          - "are there real loans for people with bad credit"
+          - "loans for bad credit that aren't a scam"
+          - "honest loans for bad credit"
+          - "loans for people who keep getting denied"
+
+      income_situation:
+        description: "Self-employed, gig worker, no W2 — non-standard income proof"
+        primary_money_page: best-personal-loan-lenders
+        secondary_money_pages:
+          - best-personal-loans-bad-credit
+        seed_phrases:
+          # Self-employed
+          - "personal loan for self employed"
+          - "personal loan for self-employed with bad credit"
+          - "best personal loan for self-employed"
+          - "how to get a personal loan when self-employed"
+          - "can self-employed get a personal loan"
+          - "do banks give loans to self-employed"
+          - "what proof of income do self-employed need for loan"
+          - "self-employed personal loan no tax returns"
+          # Gig / 1099
+          - "personal loan for gig workers"
+          - "loan for uber driver"
+          - "loan for doordash driver"
+          - "personal loan for 1099 contractor"
+          - "loan for freelancer"
+          - "loan for independent contractor"
+          - "can a gig worker get a personal loan"
+          # No W2 / no proof of income
+          - "loan without proof of income"
+          - "personal loan no w2"
+          - "personal loan no income verification"
+          - "personal loan no pay stubs"
+          - "personal loan no documentation"
+          - "stated income personal loan"
+          - "loan without showing income"
+          # Retired / SSI / disability
+          - "personal loan for retiree"
+          - "personal loan for senior"
+          - "personal loan on social security"
+          - "personal loan on ssi"
+          - "personal loan on disability"
+          - "loan for someone on fixed income"
+          # Unemployed
+          - "personal loan when unemployed"
+          - "loan when out of work"
+          - "loan for stay at home parent"
+
+      emergency_use:
+        description: "Crisis-driven small-amount loan need — medical, car repair, funeral, eviction"
+        primary_money_page: best-cash-advance-apps
+        secondary_money_pages:
+          - best-payday-loan-alternatives
+          - best-personal-loans-bad-credit
+        seed_phrases:
+          # Medical
+          - "loan for medical bills"
+          - "loan for surgery"
+          - "loan for dental work"
+          - "loan for emergency vet bills"
+          - "loan to pay hospital bill"
+          - "medical loan with bad credit"
+          # Car / transport
+          - "loan for car repair"
+          - "loan for new car battery"
+          - "loan for car insurance"
+          - "loan for transmission repair"
+          - "loan to fix my car"
+          # Housing crisis
+          - "loan for eviction"
+          - "loan to stop eviction"
+          - "loan for rent"
+          - "loan to pay rent"
+          - "loan for security deposit"
+          - "loan to move out"
+          - "loan to relocate for work"
+          # Family / life events
+          - "loan for funeral"
+          - "loan for funeral expenses"
+          - "loan to pay for funeral"
+          - "loan for divorce"
+          - "loan for legal fees"
+          # General emergency
+          - "emergency loan"
+          - "emergency loan with bad credit"
+          - "emergency loan no credit check"
+          - "loan for unexpected expenses"
+          - "loan when i need money fast"
+          - "i need money today loan"
+          - "i need a loan i'm desperate"
+          - "loan for someone in financial crisis"
+
+      amount_small_short_term:
+        description: "Small short-term cash need (<$1000) — the audience that types 'payday loan' but routes safely"
+        primary_money_page: best-cash-advance-apps
+        secondary_money_pages:
+          - best-payday-loan-alternatives
+        seed_phrases:
+          - "loan for $500"
+          - "loan for $1000"
+          - "small loan with bad credit"
+          - "short term loan online"
+          - "instant loan no credit check"
+
+      consolidation_purpose:
+        description: "Carrying multiple debts, looking to consolidate"
+        primary_money_page: best-debt-consolidation-loans
+        secondary_money_pages:
+          - best-personal-loan-lenders
+          - cheapest-personal-loans
+          - best-debt-relief-companies   # cross-pillar to P7
+        seed_phrases:
+          # Question-form
+          - "how do i consolidate my credit card debt"
+          - "how do i pay off all my credit cards"
+          - "how do i combine all my debts into one"
+          - "what's the best way to consolidate debt"
+          - "is it smart to consolidate debt"
+          - "is debt consolidation worth it"
+          - "should i get a personal loan to pay off credit cards"
+          - "can i consolidate debt with bad credit"
+          - "can i consolidate debt with no credit check"
+          - "how does debt consolidation affect credit"
+          - "does consolidating debt hurt your credit"
+          # Statement-form
+          - "personal loan to consolidate credit card debt"
+          - "loan to pay off credit cards"
+          - "consolidation loan with bad credit"
+          - "consolidate $10000 in credit card debt"
+          - "consolidate $20000 in credit card debt"
+          - "consolidate $30000 in credit card debt"
+          - "consolidate medical debt"
+          - "consolidate student loans and credit card debt together"
+          # Comparison
+          - "debt consolidation vs personal loan"
+          - "debt consolidation vs balance transfer"
+          - "debt consolidation vs settlement"
+          - "debt consolidation vs bankruptcy"
+          - "0 percent balance transfer vs personal loan"
+
+      specific_purchase:
+        description: "Targeted purchase intent — wedding, moving, home improvement, vacation"
+        primary_money_page: best-personal-loan-lenders
+        secondary_money_pages:
+          - cheapest-personal-loans
+        seed_phrases:
+          - "loan for wedding"
+          - "loan for moving"
+          - "loan for home improvement"
+          - "loan for vacation"
+          - "loan to buy a car"
+
+      cheapest_rate_search:
+        description: "Rate-aware searcher comparing APRs"
+        primary_money_page: cheapest-personal-loans
+        secondary_money_pages:
+          - best-personal-loan-lenders
+        seed_phrases:
+          # Rate-shopping question-form
+          - "what's the lowest personal loan rate"
+          - "what's the cheapest personal loan"
+          - "who has the cheapest personal loan rates"
+          - "where to get the lowest personal loan rate"
+          - "what credit score for the lowest personal loan rate"
+          - "is 7% a good personal loan rate"
+          - "is 10% a good personal loan rate"
+          - "what's a good apr for a personal loan"
+          - "average personal loan rate"
+          - "average personal loan apr 2026"
+          - "current personal loan rates"
+          # Statement-form
+          - "lowest interest personal loan"
+          - "lowest apr personal loan"
+          - "cheapest personal loan rates"
+          - "cheapest personal loan with bad credit"
+          - "best personal loan apr"
+          - "personal loan with lowest fees"
+          - "personal loan no origination fee"
+          - "personal loan no prepayment penalty"
+          - "cheapest personal loan for excellent credit"
+          - "low rate personal loan"
+          - "low interest personal loan online"
+          # Comparison
+          - "credit union vs bank for cheapest personal loan"
+          - "is a credit union personal loan cheaper"
+          - "online lenders vs banks for personal loan rates"
+
+      speed:
+        description: "Fast cash, same day"
+        primary_money_page: best-cash-advance-apps
+        secondary_money_pages:
+          - best-personal-loan-lenders
+          - best-payday-loan-alternatives
+        seed_phrases:
+          - "same day personal loan"
+          - "instant approval personal loan"
+          - "personal loan funded today"
+
+
+  3:
+    name: Credit Cards
+    intents:
+
+      approval_anxiety_bad_credit:
+        description: "Bad credit applicant worried about denial"
+        primary_money_page: best-no-credit-check-cards
+        secondary_money_pages:
+          - best-secured-credit-cards
+        seed_phrases:
+          # Question-form
+          - "what credit card can i get with bad credit"
+          - "what credit card will approve me with bad credit"
+          - "what's the easiest credit card to get with bad credit"
+          - "which credit card will approve me with low credit score"
+          - "can i get a credit card with 500 credit score"
+          - "can i get a credit card with 550 credit score"
+          - "can i get a credit card with 580 credit score"
+          - "can i get a credit card after bankruptcy"
+          - "can i get a credit card with no credit check"
+          - "are there really credit cards with no credit check"
+          - "how do i get approved for a credit card with bad credit"
+          # Statement-form
+          - "credit card guaranteed approval"
+          - "credit card guaranteed approval bad credit"
+          - "credit card guaranteed approval no deposit"
+          - "credit card no credit check"
+          - "credit card no credit check no deposit"
+          - "easy approval credit card"
+          - "easy approval credit card bad credit"
+          - "credit card for 500 score"
+          - "credit card for 550 score"
+          - "credit card for 580 score"
+          - "credit card after bankruptcy"
+          - "credit card after chapter 7"
+          - "credit card after chapter 13"
+          - "credit card during chapter 13"
+          - "credit card with collections on report"
+          - "credit card with charge offs on report"
+          - "starter credit card for bad credit"
+          - "best subprime credit card"
+
+      build_credit:
+        description: "Wants to actively build credit using a card"
+        primary_money_page: best-secured-credit-cards
+        secondary_money_pages:
+          - best-credit-builder-loans   # cross-pillar to P4
+        seed_phrases:
+          # Question-form
+          - "what's the best credit card to build credit"
+          - "what's the fastest way to build credit with a credit card"
+          - "how do i build credit with a credit card"
+          - "how do secured credit cards build credit"
+          - "how do credit-builder cards work"
+          - "do secured credit cards really build credit"
+          - "how long until my secured credit card builds my credit"
+          - "what's the fastest credit card to build credit"
+          - "is a secured credit card worth it to build credit"
+          - "should i get a secured or unsecured credit card to build credit"
+          - "which secured card has the best graduation"
+          # Statement-form
+          - "best credit card to build credit"
+          - "best credit card to build credit fast"
+          - "best credit card to build credit from scratch"
+          - "best secured credit card to build credit"
+          - "best credit card for first-time credit builders"
+          - "credit-builder credit card"
+          - "credit-builder card vs credit-builder loan"
+          - "secured credit card to rebuild credit after bankruptcy"
+          - "credit card to repair credit"
+          - "credit card to fix credit"
+          - "credit card to raise credit score fast"
+          - "credit card with low deposit"
+          - "secured credit card with $200 deposit"
+
+      first_card:
+        description: "First-time card applicant — student / young adult / no history"
+        primary_money_page: best-secured-credit-cards
+        secondary_money_pages:
+          - best-no-credit-check-cards
+        seed_phrases:
+          # Question-form
+          - "what's the best first credit card"
+          - "what credit card should i get as my first card"
+          - "what's a good first credit card with no credit history"
+          - "how do i get my first credit card with no history"
+          - "can i get a credit card with no credit history"
+          - "do i need credit history for a credit card"
+          - "what's the easiest first credit card to get"
+          - "do you need a job to get a first credit card"
+          - "do you need a cosigner for a first credit card"
+          - "can a college student get a credit card with no income"
+          - "best credit card for an 18 year old"
+          - "best credit card for a 21 year old with no credit"
+          # Statement-form
+          - "first credit card no credit history"
+          - "first credit card for college student"
+          - "first credit card for young adult"
+          - "first credit card after high school"
+          - "credit card for first time user"
+          - "credit card for first time applicant"
+          - "credit card with no credit history"
+          - "credit card for someone who has never had credit"
+          - "credit card for new immigrant"
+          - "credit card itin only"
+          - "starter card no credit"
+
+      build_credit:
+        description: "Want to actively build credit using a card"
+        primary_money_page: best-secured-credit-cards
+        secondary_money_pages:
+          - best-credit-builder-loans   # cross-pillar to P4
+        seed_phrases:
+          - "best credit card to build credit"
+          - "secured credit card to rebuild credit"
+          - "credit card for first time user"
+          - "how to build credit with a credit card"
+
+      first_card:
+        description: "First-time card applicant — student / young adult / no history"
+        primary_money_page: best-secured-credit-cards
+        secondary_money_pages:
+          - best-no-credit-check-cards
+        seed_phrases:
+          - "first credit card no credit history"
+          - "credit card for college student"
+          - "credit card with no credit history"
+
+
+  4:
+    name: Credit Building
+    intents:
+
+      starting_from_zero:
+        description: "No credit at all — needs to start"
+        primary_money_page: best-credit-builder-loans
+        secondary_money_pages:
+          - best-secured-credit-cards   # cross-pillar to P3
+          - best-rent-reporting-services
+        seed_phrases:
+          # Question-form
+          - "how do i start building credit from nothing"
+          - "how do i build credit if i have no credit history"
+          - "how do i build credit at 18"
+          - "how do i build credit as a college student"
+          - "how do i build credit as an immigrant"
+          - "how do i build credit after moving to the us"
+          - "how does a credit builder loan work"
+          - "do credit builder loans actually work"
+          - "how long does a credit builder loan take to build credit"
+          - "what's the fastest way to build credit"
+          - "what's the best way to build credit from scratch"
+          - "what's better credit builder loan or secured card"
+          # Statement-form
+          - "how to build credit from scratch"
+          - "how to start building credit"
+          - "build credit with no history"
+          - "build credit no credit history"
+          - "credit builder loan how it works"
+          - "credit builder loan explained"
+          - "credit builder loan vs secured card"
+          - "credit builder loan with no checking account"
+          - "credit builder loan online"
+          - "fastest way to build credit"
+          - "fastest way to build credit at 18"
+          - "fastest way to build credit with no income"
+          - "self credit builder loan review"
+          - "kikoff credit builder review"
+          - "credit strong credit builder review"
+          - "moneylion credit builder plus review"
+
+      after_setback:
+        description: "Rebuilding after bankruptcy / foreclosure / collections / repossession"
+        primary_money_page: best-credit-builder-loans
+        secondary_money_pages:
+          - best-credit-repair-after-bankruptcy   # cross-pillar to P6
+          - best-secured-credit-cards
+        seed_phrases:
+          # Question-form
+          - "how do i rebuild credit after bankruptcy"
+          - "how do i rebuild credit after chapter 7"
+          - "how do i rebuild credit after chapter 13"
+          - "how do i rebuild credit after foreclosure"
+          - "how do i rebuild credit after a repossession"
+          - "how do i rebuild credit after a charge off"
+          - "how do i rebuild credit after divorce"
+          - "how long does it take to rebuild credit after bankruptcy"
+          - "what's the fastest way to rebuild credit after bankruptcy"
+          - "can i rebuild credit while still in chapter 13"
+          - "what's the best credit builder loan after bankruptcy"
+          - "what's the best secured card after bankruptcy"
+          # Statement-form
+          - "rebuild credit after bankruptcy"
+          - "rebuild credit after foreclosure"
+          - "rebuild credit after eviction"
+          - "rebuild credit after divorce"
+          - "rebuild credit after repossession"
+          - "credit builder loan after charge off"
+          - "credit builder loan after bankruptcy"
+          - "credit builder loan after collections"
+          - "rebuild credit fast after bankruptcy discharge"
+
+      rent_payment_reporting:
+        description: "Wants to use rent payments as a credit signal"
+        primary_money_page: best-rent-reporting-services
+        secondary_money_pages:
+          - best-credit-builder-loans
+        seed_phrases:
+          # Question-form
+          - "does paying rent build credit"
+          - "does rent show up on credit report"
+          - "how do i report my rent to credit bureaus"
+          - "does my landlord report my rent"
+          - "how does rent reporting work"
+          - "is rent reporting worth it"
+          - "what's the best rent reporting service"
+          - "does experian boost include rent"
+          - "can i get my back rent reported to credit bureaus"
+          - "do all credit bureaus accept rent reporting"
+          - "how much does rent reporting raise your credit score"
+          # Statement-form
+          - "report rent to credit bureau"
+          - "report rent to experian"
+          - "report rent to transunion"
+          - "report rent to equifax"
+          - "rent reporting service review"
+          - "rent reporting for landlords"
+          - "best rent reporting service for tenants"
+          - "free rent reporting"
+          - "rent reporting backdated"
+          - "rentreporters review"
+          - "renttrack review"
+          - "boom rent reporting review"
+          - "self rent track"
+
+
+  5:
+    name: Credit Score / Monitoring
+    intents:
+
+      score_movement_anxiety:
+        description: "Score dropped / changed unexpectedly"
+        primary_money_page: best-credit-monitoring-services
+        secondary_money_pages:
+          - best-credit-repair-companies   # cross-pillar to P6
+        seed_phrases:
+          # Question-form
+          - "why did my credit score drop"
+          - "why did my credit score drop for no reason"
+          - "why did my credit score drop after paying off a card"
+          - "why did my credit score drop after closing a card"
+          - "why did my credit score go down 30 points"
+          - "why did my credit score go down 50 points"
+          - "why did my credit score go down 100 points"
+          - "what causes credit score to drop suddenly"
+          - "how do i find out why my credit score dropped"
+          - "is it normal for credit score to fluctuate"
+          - "how often should i check my credit score"
+          # Statement-form
+          - "credit score went down for no reason"
+          - "credit score dropped 30 points"
+          - "credit score dropped 50 points"
+          - "credit score dropped 100 points"
+          - "credit score dropped after paying off debt"
+          - "credit score dropped after closing account"
+          - "credit score dropped after applying for loan"
+          - "credit score dropped after dispute"
+          - "credit score keeps fluctuating"
+          - "how to track credit score changes"
+          - "best app to track credit score weekly"
+          - "credit score notifications"
+          - "real time credit score monitoring"
+
+      free_options:
+        description: "Wants free score / monitoring"
+        primary_money_page: best-credit-monitoring-services
+        secondary_money_pages: []
+        seed_phrases:
+          # Question-form
+          - "where can i get my credit score for free"
+          - "where can i get my credit report for free"
+          - "is there a way to check credit score for free"
+          - "is credit karma actually free"
+          - "is credit karma legit"
+          - "is credit karma score accurate"
+          - "is credit sesame free"
+          - "what's the difference between credit karma and myfico"
+          - "what's the most accurate free credit score"
+          - "can i get my fico score for free"
+          - "how do i check my credit without paying"
+          # Statement-form
+          - "free credit score"
+          - "free credit score check"
+          - "free credit score no credit card"
+          - "free credit score app"
+          - "free credit score app no trial"
+          - "free credit monitoring"
+          - "free credit monitoring no credit card"
+          - "free credit report"
+          - "free credit report annual"
+          - "annualcreditreport.com legit"
+          - "best free credit score app"
+          - "best free credit monitoring service"
+
+      identity_theft:
+        description: "Suspects or experienced identity theft / fraud"
+        primary_money_page: best-identity-theft-protection
+        secondary_money_pages:
+          - best-credit-monitoring-services
+        seed_phrases:
+          # Question-form
+          - "what do i do if my identity is stolen"
+          - "what do i do if someone opens a credit card in my name"
+          - "what do i do if someone opens an account in my name"
+          - "how do i report identity theft"
+          - "how do i recover from identity theft"
+          - "how do i freeze my credit"
+          - "how do i lock my credit"
+          - "what's the difference between credit freeze and credit lock"
+          - "what's the difference between fraud alert and credit freeze"
+          - "should i freeze my credit if my data was breached"
+          - "is identity theft protection worth it"
+          - "is lifelock worth it"
+          - "is aura worth it"
+          - "what's the best identity theft protection"
+          # Statement-form
+          - "identity theft what to do"
+          - "identity theft recovery steps"
+          - "fraud alert vs credit freeze"
+          - "credit freeze vs credit lock"
+          - "best identity theft protection service"
+          - "best id theft protection for families"
+          - "lifelock vs aura"
+          - "lifelock vs identityforce"
+          - "aura review"
+          - "identityguard review"
+          - "experian identityworks review"
+          - "someone opened a credit card in my name"
+          - "someone used my ssn what do i do"
+
+
+  6:
+    name: Credit Repair
+    intents:
+
+      after_bankruptcy:
+        description: "Recently filed/discharged Chapter 7 or 13"
+        primary_money_page: best-credit-repair-after-bankruptcy
+        secondary_money_pages:
+          - best-credit-repair-companies
+          - best-credit-builder-loans   # cross-pillar to P4
+        seed_phrases:
+          - "credit repair after chapter 7"
+          - "credit repair after chapter 13"
+          - "how long to rebuild credit after bankruptcy"
+          - "remove bankruptcy from credit report"
+
+      veteran:
+        description: "Military / veteran specifically"
+        primary_money_page: best-credit-repair-veterans
+        secondary_money_pages:
+          - best-credit-repair-companies
+        seed_phrases:
+          # Question-form
+          - "is there free credit repair for veterans"
+          - "is there military credit repair assistance"
+          - "what credit repair companies serve veterans"
+          - "are there discounts on credit repair for veterans"
+          - "can the va help with credit repair"
+          - "does usaa offer credit repair"
+          - "how do i fix my credit as a veteran"
+          - "how do i rebuild credit after deployment"
+          - "what credit repair company is best for active military"
+          - "are there credit repair scams targeting veterans"
+          # Statement-form
+          - "credit repair for veterans"
+          - "credit repair for active military"
+          - "credit repair for active duty service members"
+          - "credit repair for retired military"
+          - "free credit repair for veterans"
+          - "low cost credit repair for veterans"
+          - "veterans credit repair non-profit"
+          - "credit repair scams targeting veterans"
+          - "scra credit protection"
+          - "military lending act credit"
+          - "credit repair after deployment"
+          - "credit repair after pcs move"
+
+      money_back_guarantee:
+        description: "Risk-averse — wants money-back guarantee from credit repair company"
+        primary_money_page: best-credit-repair-money-back-guarantee
+        secondary_money_pages:
+          - best-credit-repair-companies
+        seed_phrases:
+          # Question-form
+          - "do credit repair companies offer money back guarantee"
+          - "what credit repair company has the best refund policy"
+          - "can i get my money back from credit repair if it doesn't work"
+          - "is credit repair worth the risk if it doesn't work"
+          - "do credit repair companies offer guarantees"
+          - "what happens if credit repair doesn't improve my score"
+          - "is there a credit repair company with a satisfaction guarantee"
+          - "can i sue a credit repair company that didn't deliver"
+          - "do i pay credit repair upfront or after results"
+          - "is monthly credit repair safer than upfront fee"
+          # Statement-form
+          - "credit repair money back guarantee"
+          - "credit repair guaranteed results"
+          - "credit repair company refund policy"
+          - "is credit repair worth the risk"
+          - "credit repair pay after results"
+          - "credit repair no upfront fees"
+          - "performance based credit repair"
+          - "credit repair satisfaction guarantee"
+          - "credit repair contract terms"
+          - "credit repair scam warning signs"
+
+      specific_item_removal:
+        description: "Wants to remove a specific negative item — charge-off, collection, late, inquiry"
+        primary_money_page: best-credit-repair-companies
+        secondary_money_pages: []
+        seed_phrases:
+          # Charge-off
+          - "how to remove a charge off"
+          - "how to remove a charge off from my credit report"
+          - "can a charge off be removed if paid"
+          - "can a credit repair company remove a charge off"
+          - "how long does a charge off stay on credit report"
+          - "do paid charge offs hurt your credit"
+          - "should i pay a charge off"
+          # Collection
+          - "how to remove a collection from credit report"
+          - "how to remove a paid collection from credit report"
+          - "how to dispute a collection"
+          - "can i pay to delete a collection"
+          - "what is pay for delete"
+          - "how to negotiate pay for delete"
+          - "how long does a collection stay on credit report"
+          - "does paying a collection improve credit"
+          # Late payment
+          - "how to remove late payments"
+          - "how to remove a 30 day late payment"
+          - "how to remove a 60 day late payment"
+          - "how to remove a 90 day late payment"
+          - "can i ask creditor to remove late payment"
+          - "does goodwill letter work for late payments"
+          # Hard inquiry
+          - "how to remove a hard inquiry"
+          - "how to remove unauthorized hard inquiries"
+          - "how long does a hard inquiry stay on credit"
+          - "do hard inquiries hurt credit score a lot"
+          # Repossession / foreclosure
+          - "how to remove a repossession from credit report"
+          - "how to remove a foreclosure from credit report"
+          - "how long does a repo stay on credit"
+          # Bankruptcy
+          - "can a bankruptcy be removed from credit report"
+          - "how long does bankruptcy stay on credit report"
+          - "can i remove a chapter 7 from credit report"
+          # Process / who can do it
+          - "can i dispute negative items myself"
+          - "diy credit dispute letter"
+          - "what is a 609 dispute letter"
+          - "do credit repair companies actually work"
+          - "which credit repair company is best for removing collections"
+
+      diy_vs_hire:
+        description: "Considering DIY credit repair vs paying a service"
+        primary_money_page: best-credit-repair-companies
+        secondary_money_pages: []
+        seed_phrases:
+          # Question-form
+          - "should i hire a credit repair company or do it myself"
+          - "is it cheaper to do credit repair myself"
+          - "is diy credit repair better than hiring"
+          - "can i really fix my credit myself"
+          - "can i remove negative items myself"
+          - "what can a credit repair company do that i can't"
+          - "is paying for credit repair worth it"
+          - "is credit repair worth the cost"
+          - "are credit repair companies legal"
+          - "are credit repair companies a scam"
+          - "what's the success rate of credit repair companies"
+          - "what does a credit repair company actually do"
+          # Statement-form
+          - "diy credit repair vs hire"
+          - "credit repair myself vs company"
+          - "is credit repair worth it"
+          - "can i fix my credit myself"
+          - "credit repair for free"
+          - "diy credit repair guide"
+          - "diy credit dispute templates"
+          - "credit repair guide step by step"
+          - "credit repair toolkit"
+          - "how to write a 609 dispute letter"
+          - "how to write a goodwill letter"
+          - "credit repair software diy"
+          - "dispute bee review"
+          - "credit versio review"
+          - "dovly review"
+
+      regulatory_anxiety:
+        description: "Has a non-credit issue (license, job, housing) but the cause is credit"
+        primary_money_page: best-credit-repair-companies
+        secondary_money_pages:
+          - best-credit-monitoring-services
+        seed_phrases:
+          # The "I have a problem in life and I think credit is causing it" pattern
+          - "will my credit score affect my job application"
+          - "does an employer check credit score"
+          - "can bad credit stop me getting a job"
+          - "can bad credit affect my background check"
+          - "can bad credit affect my security clearance"
+          - "can bad credit stop me getting a professional license"
+          - "will a charge-off affect my license application"
+          - "will collections affect my driver's license"
+          - "does credit affect cdl license"
+          - "does credit score affect getting an apartment"
+          - "can bad credit stop me from renting"
+          - "will my credit score stop me from buying a house"
+          - "what credit score do i need to rent an apartment"
+          - "can bad credit affect my mortgage application"
+          - "will my landlord check my credit"
+          - "does bad credit affect car insurance rates"
+          - "can credit history affect my immigration"
+          - "does credit affect my marriage"
+          - "will my partner's bad credit affect mine"
+          - "does opening a joint account hurt my credit"
+          - "will my credit affect my child's college loan"
+          - "can bad credit affect getting utilities"
+          - "do utility companies check credit"
+
+
+  7:
+    name: Debt Relief / Consolidation
+    intents:
+
+      decision_help:
+        description: "Comparing options — settlement vs consolidation vs bankruptcy vs counseling"
+        primary_money_page: best-debt-relief-companies
+        secondary_money_pages:
+          - best-debt-consolidation-loans
+          - best-credit-counseling-agencies
+        seed_phrases:
+          # Comparison
+          - "debt settlement vs consolidation"
+          - "debt settlement vs bankruptcy"
+          - "debt consolidation vs bankruptcy"
+          - "debt management plan vs settlement"
+          - "consumer credit counseling vs debt settlement"
+          - "what is the difference between debt settlement and consolidation"
+          - "what is the difference between debt management and consolidation"
+          # Question-form decision help
+          - "should i settle my debts or consolidate"
+          - "should i file bankruptcy or settle"
+          - "should i use a debt relief company or do it myself"
+          - "should i pay off debt or settle for less"
+          - "what's the smartest way to get out of debt"
+          - "what's the fastest way to pay off debt"
+          - "what's the cheapest way to get out of debt"
+          - "is debt settlement legit"
+          - "is debt settlement worth it"
+          - "is debt consolidation worth it"
+          - "is debt management worth it"
+          - "how does debt settlement work"
+          - "how long does debt settlement take"
+          - "what happens to my credit if i settle"
+          - "what happens after debt settlement"
+          # Outcome / consequence
+          - "does debt settlement ruin your credit"
+          - "does debt consolidation hurt credit"
+          - "does debt management hurt credit"
+          - "do creditors have to accept debt settlement"
+          - "can creditors sue you during debt settlement"
+          - "tax implications of debt settlement"
+          - "is settled debt taxable"
+
+      credit_card_debt:
+        description: "Specifically credit card debt overload"
+        primary_money_page: best-debt-consolidation-loans
+        secondary_money_pages:
+          - best-debt-relief-companies
+          - best-credit-counseling-agencies
+        seed_phrases:
+          # Question-form
+          - "how do i get out of credit card debt"
+          - "how do i pay off credit card debt fast"
+          - "how do i pay off credit card debt with no money"
+          - "how do i consolidate credit card debt"
+          - "how do i settle credit card debt"
+          - "should i pay off credit card with personal loan"
+          - "should i transfer credit card balance"
+          - "what's the fastest way to pay off credit card debt"
+          - "what's the best way to pay off credit card debt"
+          - "is debt consolidation a good idea for credit cards"
+          - "is debt settlement a good idea for credit cards"
+          - "can i negotiate my credit card debt myself"
+          # Statement-form
+          - "how to pay off credit card debt"
+          - "how to pay off credit card debt fast"
+          - "consolidate credit card debt"
+          - "consolidate credit card debt with bad credit"
+          - "credit card debt help"
+          - "credit card debt help for low income"
+          - "credit card debt over $20k"
+          - "credit card debt over $30k"
+          - "credit card debt over $50k"
+          - "credit card debt forgiveness"
+          - "credit card debt relief programs"
+          - "snowball method credit card debt"
+          - "avalanche method credit card debt"
+          - "balance transfer credit card debt"
+          - "personal loan to pay off credit cards"
+          - "401k loan to pay off credit cards"
+
+      garnishment_creditor_pressure:
+        description: "Active wage garnishment, lawsuits, creditor calls"
+        primary_money_page: best-debt-relief-companies
+        secondary_money_pages:
+          - best-credit-counseling-agencies
+        seed_phrases:
+          # Question-form
+          - "how do i stop wage garnishment"
+          - "can i stop a wage garnishment that already started"
+          - "how long does wage garnishment last"
+          - "how do i stop creditor calls"
+          - "can creditors call me at work"
+          - "what do i do if i'm being sued for credit card debt"
+          - "what happens if i ignore a credit card lawsuit"
+          - "can i settle a debt after being sued"
+          - "what do i do when collectors call"
+          - "are debt collectors allowed to call my family"
+          - "can i get my wages garnished for credit card debt"
+          - "is a debt relief company legit if i'm being sued"
+          # Statement-form
+          - "stop wage garnishment"
+          - "stop wage garnishment fast"
+          - "stop creditor calls"
+          - "stop debt collector calls"
+          - "stop creditor harassment"
+          - "being sued for credit card debt"
+          - "being sued by debt collector"
+          - "served with credit card lawsuit"
+          - "what to do when creditors call"
+          - "fdcpa rights"
+          - "fair debt collection practices act"
+          - "cease and desist letter to creditors"
+          - "debt collector calling family"
+          - "judgment against me for credit card debt"
+          - "wage garnishment exemption"
+
+      medical_debt:
+        description: "Specifically medical debt"
+        primary_money_page: best-debt-relief-companies
+        secondary_money_pages:
+          - best-credit-counseling-agencies
+          - best-credit-repair-companies   # cross-pillar to P6 (medical collections)
+        seed_phrases:
+          # Question-form
+          - "how do i handle medical debt"
+          - "how do i pay off medical debt"
+          - "how do i negotiate medical bills"
+          - "how do i settle medical debt"
+          - "how do i remove medical collections from credit report"
+          - "is medical debt forgiven on credit reports"
+          - "is medical debt different from other debt"
+          - "do hospitals negotiate medical bills"
+          - "can i get medical debt forgiven"
+          - "what happens if i don't pay medical debt"
+          - "can medical debt go to collections"
+          - "does medical debt hurt your credit"
+          - "is there government help for medical debt"
+          # Statement-form
+          - "how to handle medical debt"
+          - "negotiate medical bills"
+          - "negotiate medical bills script"
+          - "medical debt forgiveness"
+          - "medical debt forgiveness program"
+          - "medical debt relief for low income"
+          - "remove medical collection from credit"
+          - "remove paid medical collection from credit"
+          - "medical debt collection lawsuit"
+          - "medical debt over $10000"
+          - "medical bill financial assistance"
+          - "rip medical debt"
+          - "hospital financial assistance application"
+
+      bankruptcy_alternative:
+        description: "Trying to avoid bankruptcy"
+        primary_money_page: best-debt-relief-companies
+        secondary_money_pages:
+          - best-credit-counseling-agencies
+        seed_phrases:
+          # Question-form
+          - "how do i avoid filing bankruptcy"
+          - "what are alternatives to bankruptcy"
+          - "is debt settlement better than bankruptcy"
+          - "is debt consolidation better than bankruptcy"
+          - "is debt management plan better than bankruptcy"
+          - "should i file bankruptcy or settle"
+          - "how bad is bankruptcy on credit report"
+          - "how long does bankruptcy stay on credit"
+          - "what's the difference between chapter 7 and chapter 13"
+          - "do i qualify for chapter 7 bankruptcy"
+          - "what counts as enough debt for bankruptcy"
+          - "is bankruptcy ever the right choice"
+          # Statement-form
+          - "alternatives to bankruptcy"
+          - "alternatives to chapter 7 bankruptcy"
+          - "alternatives to chapter 13 bankruptcy"
+          - "how to avoid filing bankruptcy"
+          - "debt settlement vs chapter 7"
+          - "debt settlement vs chapter 13"
+          - "debt consolidation vs bankruptcy"
+          - "debt management plan vs bankruptcy"
+          - "credit counseling vs bankruptcy"
+          - "before filing bankruptcy"
+          - "non-profit debt relief"
+          - "debt resolution program"
+
+      garnishment_creditor_pressure:
+        description: "Active wage garnishment, lawsuits, creditor calls"
+        primary_money_page: best-debt-relief-companies
+        secondary_money_pages:
+          - best-credit-counseling-agencies
+        seed_phrases:
+          - "stop wage garnishment"
+          - "stop creditor calls"
+          - "being sued for credit card debt"
+          - "what to do when creditors call"
+
+      medical_debt:
+        description: "Specifically medical debt"
+        primary_money_page: best-debt-relief-companies
+        secondary_money_pages:
+          - best-credit-counseling-agencies
+          - best-credit-repair-companies   # cross-pillar to P6 (medical collections)
+        seed_phrases:
+          - "how to handle medical debt"
+          - "negotiate medical bills"
+          - "medical debt forgiveness"
+          - "remove medical collection from credit"
+
+      bankruptcy_alternative:
+        description: "Trying to avoid bankruptcy"
+        primary_money_page: best-debt-relief-companies
+        secondary_money_pages:
+          - best-credit-counseling-agencies
+        seed_phrases:
+          - "alternatives to bankruptcy"
+          - "how to avoid filing bankruptcy"
+          - "debt settlement vs chapter 7"
+
+
+# ============================================================================
+# PERSONAS — narrative case-study layer
+# ============================================================================
+#
+# Each persona is a fictional but plausible borrower whose life touches multiple
+# pillars + a city + a life-stage. Their story becomes a narrative /answers/ page
+# that ranks on long-tail story queries AND wires 3-5 money pages together via
+# in-context internal links.
+#
+# Why this matters for SEO:
+#   - Generic listicles get diluted by NerdWallet/Bankrate. Narrative case-studies
+#     rank for queries those sites don't bother to write for.
+#   - Stories give us 1500-3000 words of natural keyword density without stuffing.
+#   - Each persona becomes a "hub" that links to 4-5 money pages in context —
+#     this is the topical-authority flywheel Frey Chu describes.
+#   - Geo-anchored personas (Bob from Buffalo, Maria from Houston) directly
+#     support the city/state geo expansion layer.
+#
+# Persona schema:
+#   id:              short slug used in URL / internal linking
+#   name:            character name
+#   geo:             city + state (must align with our geo expansion eligibility)
+#   life_stage:      one-line life context
+#   pillars_touched: ordered list of pillar IDs the story wires together
+#   money_pages_linked: money page slugs the narrative references in context
+#   anxieties:       the borrower-anxiety questions the story answers
+#   narrative_hook:  the headline / hook that makes someone click
+
+personas:
+
+  bob_buffalo_smb_owner:
+    name: "Bob Carter"
+    geo: "Buffalo, NY"
+    life_stage: "Mid-40s. Just opened a small restaurant 8 months ago. Two teenage daughters. Bad personal credit from a 2019 medical bankruptcy. Wife works part-time."
+    pillars_touched: [1, 6, 5, 2, 3]
+    money_pages_linked:
+      - best-startup-business-loans          # P1 — the new-business loan need
+      - best-bad-credit-business-loans       # P1 — bad personal credit overlay
+      - best-credit-repair-after-bankruptcy  # P6 — fixing his post-bankruptcy score
+      - best-credit-monitoring-services      # P5 — tracking score recovery
+      - best-personal-loan-lenders           # P2 — secondary, for personal-side cash crunch
+    anxieties:
+      - "can a business that's been open less than a year qualify for an SBA loan"
+      - "does my 2019 bankruptcy still count against me for a business loan"
+      - "what credit score do I need to get a business loan in New York"
+      - "best lenders for restaurant business loans"
+      - "how do I rebuild my personal credit while running a business"
+      - "merchant cash advance vs SBA loan for restaurants"
+    narrative_hook: "How Bob from Buffalo got his restaurant funded with a 580 credit score and an 8-month-old business"
+    seed_questions:
+      - "business loan for restaurant 8 months in business"
+      - "sba loan denied bad personal credit"
+      - "merchant cash advance for restaurant"
+      - "credit repair after restaurant business loan"
+      - "buffalo new york business loan options"
+
+  maria_houston_single_mom:
+    name: "Maria Lopez"
+    geo: "Houston, TX"
+    life_stage: "Single mother, two young children. Works as a self-employed home health aide. No W2. Needs both a personal loan to cover a car repair AND wants to start a small home-services business."
+    pillars_touched: [2, 1, 4, 5]
+    money_pages_linked:
+      - best-personal-loans-bad-credit        # P2 — emergency personal need
+      - best-cash-advance-apps                # P2 — fast small-amount option
+      - best-startup-business-loans           # P1 — future business loan
+      - best-credit-builder-loans             # P4 — building credit for the future
+      - best-credit-monitoring-services       # P5 — tracking the climb
+    anxieties:
+      - "personal loan for self-employed with no W2"
+      - "small loan for car repair under $1000"
+      - "how to get a business loan if I'm self-employed"
+      - "best way to build credit when self-employed"
+      - "houston texas personal loan lenders"
+    narrative_hook: "How Maria juggled a $600 car repair and a startup dream in Houston without a W2"
+    seed_questions:
+      - "personal loan self employed no w2"
+      - "loan for car repair bad credit"
+      - "houston small business loan single mom"
+      - "credit builder loan for self employed"
+
+  jane_recent_grad_phoenix:
+    name: "Jane Chen"
+    geo: "Phoenix, AZ"
+    life_stage: "Recent college grad, age 23. No credit history. First job. Needs a car for the new commute, plus eventually wants a credit card to build credit. Worried about student loan refi options."
+    pillars_touched: [4, 3, 2, 5]
+    money_pages_linked:
+      - best-credit-builder-loans          # P4 — start from zero
+      - best-secured-credit-cards          # P3 — first card
+      - best-personal-loan-lenders         # P2 — eventual auto refi / personal
+      - best-rent-reporting-services       # P4 — using rent to build credit
+      - best-credit-monitoring-services    # P5 — track progress
+    anxieties:
+      - "how to build credit from scratch at 22"
+      - "first credit card with no credit history"
+      - "how does rent reporting build credit"
+      - "best secured credit card for college grad"
+      - "phoenix az credit builder loan"
+    narrative_hook: "Jane just graduated and has zero credit — here's the 12-month plan that got her to 720"
+    seed_questions:
+      - "credit builder loan for recent college graduate"
+      - "first credit card no credit history college grad"
+      - "rent reporting service does it work"
+
+  david_veteran_retiree:
+    name: "David Marshall"
+    geo: "Tampa, FL"
+    life_stage: "Retired Army veteran, age 62. Pension + social security. Has $35K in credit card debt from medical bills + helping adult kids. Considering debt consolidation, settlement, or bankruptcy."
+    pillars_touched: [7, 6, 5, 2]
+    money_pages_linked:
+      - best-debt-consolidation-loans        # P7 primary path
+      - best-debt-relief-companies           # P7 settlement option
+      - best-credit-counseling-agencies      # P7 nonprofit option
+      - best-credit-repair-veterans          # P6 — veteran-specific repair
+      - best-credit-monitoring-services      # P5 — score during the process
+    anxieties:
+      - "debt consolidation vs settlement for veterans"
+      - "how to handle $35000 credit card debt at 62"
+      - "free credit repair for veterans"
+      - "should I file bankruptcy at 62 or do debt settlement"
+      - "tampa fl debt relief companies"
+    narrative_hook: "How David, a retired veteran with $35K in credit card debt, picked between settlement and consolidation"
+    seed_questions:
+      - "debt consolidation for retired veteran"
+      - "credit card debt help for seniors"
+      - "veteran credit repair after medical bankruptcy"
+
+  raj_immigrant_business_owner:
+    name: "Raj Patel"
+    geo: "Edison, NJ"
+    life_stage: "Recent immigrant (5 years in US). Owns a convenience store. Limited US credit history despite running a profitable business. Needs working capital + wants to expand."
+    pillars_touched: [1, 4, 6]
+    money_pages_linked:
+      - best-bad-credit-business-loans       # P1 — limited US credit
+      - best-business-lines-of-credit        # P1 — working capital
+      - best-merchant-cash-advance           # P1 — fast option
+      - best-credit-builder-loans            # P4 — building US credit
+      - best-credit-repair-companies         # P6 — if any errors on report
+    anxieties:
+      - "business loan for new immigrant"
+      - "no credit history but profitable business"
+      - "how to build US credit as an immigrant business owner"
+      - "convenience store business loan"
+      - "merchant cash advance for ITIN holders"
+    narrative_hook: "How Raj got working capital for his New Jersey store with 5 years of US credit and no SSN-tied score"
+    seed_questions:
+      - "business loan for immigrant no credit"
+      - "merchant cash advance itin"
+      - "build us credit as new immigrant"
