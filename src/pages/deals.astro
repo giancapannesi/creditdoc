@@ -1,35 +1,148 @@
 ---
+// ============================================================
+// FA-PROTECTED PAGE — DO NOT AUTO-EDIT
+// Status: Founder-Approved 2026-05-02 by Jammi
+// Approved revision: Worker 030c2aa0-887f-418b-bb3f-934dea589634
+// To change: get explicit founder approval, show diff before deploy.
+// Registry: creditdoc/data/protected_static_pages.json
+// ============================================================
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getSpecials, getLenderBySlug } from '../utils/data-build';
 import { getBbbClass } from '../utils/data';
 
 const specials = getSpecials();
+
+const orientationCards = [
+  {
+    slug: 'how-credit-repair-works',
+    title: 'How credit repair actually works',
+    blurb: 'Step-by-step: what a credit repair company does, what you do, and what the bureaus do.',
+  },
+  {
+    slug: 'diy-vs-credit-repair-company',
+    title: 'DIY vs hiring a company',
+    blurb: 'You can dispute errors yourself for free under FCRA. Here is when paying makes sense and when it does not.',
+  },
+  {
+    slug: 'credit-repair-scams',
+    title: '8 red flags to watch for',
+    blurb: 'Up-front fees, "guaranteed" score jumps, new identity offers — what a legitimate company never asks you to do.',
+  },
+];
+
+const learningCards = [
+  {
+    slug: 'choosing-credit-repair-company',
+    title: 'How to Choose a Credit Repair Company',
+    blurb: 'The questions to ask before you sign — pricing, contracts, cancellation, and verification.',
+  },
+  {
+    slug: 'credit-repair-rights-fcra-croa',
+    title: 'Your Rights Under FCRA & CROA',
+    blurb: 'Federal law gives you specific protections. What companies legally can and cannot do.',
+  },
+  {
+    slug: 'dispute-credit-report-errors',
+    title: 'How to Dispute Errors Yourself',
+    blurb: 'The free DIY path: how disputes work, what evidence to send, what timeframes to expect.',
+  },
+  {
+    slug: 'credit-score-basics',
+    title: 'Understanding Your Credit Score',
+    blurb: 'The five factors that move your score and which ones move it fastest.',
+  },
+  {
+    slug: 'how-long-credit-repair-takes',
+    title: 'Realistic Credit Repair Timelines',
+    blurb: 'What you can change in 30, 90, 180 days — and what genuinely takes years.',
+  },
+  {
+    slug: 'credit-repair-after-bankruptcy',
+    title: 'Credit Repair After Bankruptcy',
+    blurb: 'Special-case roadmap for rebuilding after Chapter 7 or 13.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'How long does credit repair take?',
+    a: 'Most legitimate disputes resolve in 30-45 days per round. A full clean-up of inaccurate items often runs 3-6 months. Anyone promising results in days is selling you something.',
+    href: '/financial-wellness/how-long-credit-repair-takes/',
+  },
+  {
+    q: 'Can I do this myself?',
+    a: 'Yes. The Fair Credit Reporting Act gives you the right to dispute any item directly with the bureaus at no cost. A paid service mostly buys you time and follow-through, not access.',
+    href: '/financial-wellness/diy-vs-credit-repair-company/',
+  },
+  {
+    q: 'What can credit repair NOT do?',
+    a: 'It cannot remove information that is accurate, timely, and verifiable. Late payments you actually missed, charge-offs that really happened, recent bankruptcies — these stay until they age off.',
+    href: '/financial-wellness/credit-myths-debunked/',
+  },
+  {
+    q: 'How do I avoid scams?',
+    a: 'Never pay before service is performed (illegal under CROA). Never accept a "new credit identity." Never hand over your Social Security number to an unverified company. Read the 8 red flags below.',
+    href: '/financial-wellness/credit-repair-scams/',
+  },
+];
 ---
 
 <BaseLayout
-  title="Current Deals & Promotions | CreditDoc"
-  description="Browse current deals, discounts, and promotions from top credit repair companies. Find promo codes and special offers."
+  title="Credit Repair Deals & Promotions | CreditDoc"
+  description="Current deals from credit repair companies — plus what credit repair actually does, your rights under federal law, and how to spot scams before you sign."
 >
   <!-- Header -->
   <section class="bg-white border-b border-border">
     <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center">
-        <div class="inline-flex items-center px-3 py-1 rounded-full bg-warning-light text-warning text-xs font-semibold mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.5 3A2.5 2.5 0 003 5.5v2.879a2.5 2.5 0 00.732 1.767l6.5 6.5a2.5 2.5 0 003.536 0l2.878-2.878a2.5 2.5 0 000-3.536l-6.5-6.5A2.5 2.5 0 008.38 3H5.5zM6 7a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-          </svg>
-          Updated March 2026
-        </div>
-        <h1 class="text-2xl sm:text-3xl font-bold text-text">Current Deals & Promotions</h1>
-        <p class="mt-3 text-muted leading-relaxed">
-          Save money on credit repair services with these current promotions, discounts, and special offers.
+      <h1 class="text-2xl sm:text-3xl font-bold text-text">Credit Repair Deals & Promotions</h1>
+      <p class="mt-3 text-muted leading-relaxed">
+        Save on credit repair services with current discounts and promo codes — and learn what credit repair really does, what it cannot do, and what your rights are under federal law before you commit.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section A: Before you compare deals -->
+  <section class="mx-auto max-w-7xl px-4 pt-12 sm:px-6 lg:px-8">
+    <div>
+      <h2 class="text-xl sm:text-2xl font-bold text-text">Before you compare deals</h2>
+      <div class="mt-4 space-y-3 text-sm sm:text-base text-muted leading-relaxed">
+        <p>
+          Credit repair is the process of identifying inaccurate, outdated, or unverifiable items on your credit report and disputing them with the credit bureaus. It is <strong class="text-text">not</strong> the same as credit counseling (debt management) or credit building (using new accounts to lift your score).
+        </p>
+        <p>
+          A credit repair company cannot legally remove information that is accurate, timely, and verifiable — and under the Credit Repair Organizations Act (CROA), they cannot charge you up front, guarantee a score increase, or tell you to misrepresent your identity. If a company asks you to do any of those things, walk away.
+        </p>
+        <p>
+          You also have the right to dispute every item yourself, directly with Experian, Equifax, and TransUnion, at no cost. Hiring a service buys you time, follow-through, and process knowledge — not access. Make sure you understand which one you actually need before you redeem a deal below.
         </p>
       </div>
+
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+      {orientationCards.map(card => (
+        <a href={`/financial-wellness/${card.slug}/`} class="glass-card p-5 block hover:border-primary transition-colors">
+          <h3 class="text-base font-semibold text-text">{card.title}</h3>
+          <p class="mt-2 text-sm text-muted leading-relaxed">{card.blurb}</p>
+          <span class="mt-3 inline-flex items-center text-sm font-medium text-primary">
+            Read guide
+            <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </span>
+        </a>
+      ))}
     </div>
   </section>
 
   <!-- Deals Grid -->
   <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mb-6">
+      <h2 class="text-xl sm:text-2xl font-bold text-text">Current deals</h2>
+      <p class="mt-2 text-sm text-muted leading-relaxed">
+        Verified offers from credit repair companies we have profiled. Click "Read profile" before redeeming so you know exactly what you are buying.
+      </p>
+    </div>
     {specials.length > 0 ? (
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {specials.map(special => {
@@ -47,7 +160,7 @@ const specials = getSpecials();
                   )}
                 </div>
                 <div class="min-w-0">
-                  <h2 class="text-base font-semibold text-text">{special.lender_name}</h2>
+                  <h3 class="text-base font-semibold text-text">{special.lender_name}</h3>
                   {lender && (
                     <div class="flex items-center gap-2 mt-1">
                       <span class:list={['inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold', bbbCls]}>
@@ -112,7 +225,7 @@ const specials = getSpecials();
                     href={`/review/${lender.slug}/`}
                     class="flex-1 text-center px-4 py-2.5 text-sm font-medium rounded-lg border border-border text-text hover:bg-bg-alt transition-colors"
                   >
-                    Read Review
+                    Read profile
                   </a>
                 )}
                 <a
@@ -135,23 +248,98 @@ const specials = getSpecials();
             <path fill-rule="evenodd" d="M5.5 3A2.5 2.5 0 003 5.5v2.879a2.5 2.5 0 00.732 1.767l6.5 6.5a2.5 2.5 0 003.536 0l2.878-2.878a2.5 2.5 0 000-3.536l-6.5-6.5A2.5 2.5 0 008.38 3H5.5zM6 7a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
           </svg>
         </div>
-        <h2 class="text-lg font-semibold text-text">No Active Deals</h2>
-        <p class="mt-2 text-sm text-muted">Check back soon for new promotions and special offers.</p>
+        <h2 class="text-lg font-semibold text-text">No active deals right now</h2>
+        <p class="mt-2 text-sm text-muted">Check back soon. In the meantime, the educational guides below are the best place to start.</p>
         <a
           href="/"
           class="mt-6 inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors"
         >
-          Browse All Companies
+          Browse all credit repair companies
         </a>
       </div>
     )}
   </section>
 
+  <!-- Why people turn to credit repair -->
+  <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div>
+      <h2 class="text-xl sm:text-2xl font-bold text-text">Why people turn to credit repair</h2>
+      <div class="mt-4 space-y-3 text-sm sm:text-base text-muted leading-relaxed">
+        <p>
+          Almost nobody plans for damaged credit. People get there through life — <a href="/financial-wellness/medical-debt-guide/" class="text-primary hover:underline">a medical bill that should have been covered by insurance</a>, a job loss that turned a 30-day late into a <a href="/financial-wellness/what-happens-miss-payment/" class="text-primary hover:underline">90-day collection</a>, <a href="/financial-wellness/credit-repair-after-divorce/" class="text-primary hover:underline">a divorce that left a joint card forgotten</a>, <a href="/financial-wellness/identity-theft-recovery/" class="text-primary hover:underline">identity theft that opened accounts in someone else's name</a>. <a href="/financial-wellness/credit-for-young-adults/" class="text-primary hover:underline">Younger borrowers hit thin-file problems</a> before they ever miss a payment, because there is no history yet for lenders to score against. <a href="/financial-wellness/credit-repair-after-bankruptcy/" class="text-primary hover:underline">People rebuilding after a Chapter 7 or Chapter 13</a> carry items that age slowly even after they have done everything right.
+        </p>
+        <p>
+          Other paths in are quieter but just as common. <a href="/financial-wellness/cosigner-guide/" class="text-primary hover:underline">A co-signed student loan or auto loan</a> that the other person stopped paying. A medical collection that was sent to the bureaus before the insurer finished processing. A credit-limit cut on an old card that <a href="/financial-wellness/credit-utilization-guide/" class="text-primary hover:underline">pushed utilization above 90% overnight</a>. <a href="/financial-wellness/payday-loan-alternatives/" class="text-primary hover:underline">Predatory lending — payday loans, title loans, subprime auto</a> — that traps borrowers in late-payment cycles by design. And <a href="/financial-wellness/dispute-credit-report-errors/" class="text-primary hover:underline">errors from the bureaus themselves</a>: mixed files where two people with similar names share a report, paid accounts that still show as open, balances that never updated, charge-offs reporting twice. The <a href="https://www.consumerfinance.gov/data-research/consumer-complaints/" target="_blank" rel="noopener noreferrer">Consumer Financial Protection Bureau</a> receives more complaints about credit reporting than about any other category, year after year.
+        </p>
+        <p>
+          <a href="/financial-wellness/what-credit-repair-companies-do/" class="text-primary hover:underline">Credit repair, when it is done legitimately</a>, is just the process of cleaning up what does not belong on the file — so the rest of your life (your rent application, your car loan, your homeowners insurance premium, the deposit on your next apartment) stops paying for a problem that may not even be yours to begin with. The <a href="/financial-wellness/" class="text-primary hover:underline">CreditDoc financial wellness library</a> covers each of these situations in detail, with step-by-step instructions for the parts you can do yourself.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section B: Learn before you commit -->
+  <section class="bg-bg-alt border-y border-border">
+    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div>
+        <h2 class="text-xl sm:text-2xl font-bold text-text">Learn before you commit</h2>
+        <p class="mt-2 text-sm sm:text-base text-muted leading-relaxed">
+          Six guides written by our editorial team, covering everything from your federal rights to realistic timelines. Each one is designed to be read in under 10 minutes.
+        </p>
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {learningCards.map(card => (
+          <a href={`/financial-wellness/${card.slug}/`} class="glass-card p-5 block hover:border-primary transition-colors">
+            <h3 class="text-base font-semibold text-text">{card.title}</h3>
+            <p class="mt-2 text-sm text-muted leading-relaxed">{card.blurb}</p>
+            <span class="mt-3 inline-flex items-center text-sm font-medium text-primary">
+              Read guide
+              <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-8">
+        <a href="/financial-wellness/" class="inline-flex items-center text-sm font-medium text-primary hover:text-primary-hover">
+          Browse the full financial wellness library
+          <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section C: Quick FAQ -->
+  <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div>
+      <h2 class="text-xl sm:text-2xl font-bold text-text">Quick answers</h2>
+      <div class="mt-6 space-y-4">
+        {faqs.map(item => (
+          <div class="glass-card p-5">
+            <h3 class="text-base font-semibold text-text">{item.q}</h3>
+            <p class="mt-2 text-sm text-muted leading-relaxed">{item.a}</p>
+            <a href={item.href} class="mt-3 inline-flex items-center text-sm font-medium text-primary hover:text-primary-hover">
+              Read full guide
+              <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Affiliate Disclosure -->
-  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+  <section class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
     <div class="rounded-lg bg-bg-alt border border-border p-4">
       <p class="text-xs text-muted leading-relaxed">
-        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to the services featured on this page. Our editorial team independently verifies all deals and promotions. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
+        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to the services featured on this page. Compensation does not influence our editorial coverage — every company we link to has been independently profiled by our team. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
       </p>
     </div>
   </section>

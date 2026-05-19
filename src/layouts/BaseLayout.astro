@@ -16,6 +16,7 @@ interface Props {
   articleSection?: string;
   jsonLd?: object;
   noindex?: boolean;
+  publicResource?: boolean;
 }
 
 const {
@@ -30,6 +31,7 @@ const {
   articleSection,
   jsonLd,
   noindex,
+  publicResource = false,
 } = Astro.props;
 const title = rawTitle.length > 65 ? rawTitle.slice(0, 62) + '...' : rawTitle;
 const description = rawDesc.length > 160 ? rawDesc.slice(0, 157) + '...' : rawDesc;
@@ -118,11 +120,104 @@ const resolvedOgType = ogType || 'website';
   )}
 </head>
 <body class="min-h-screen flex flex-col">
-  <Header />
+  {publicResource ? (
+    <header class="border-b border-border bg-white">
+      <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <a href="/" class="flex items-center gap-2 text-primary font-bold text-xl hover:opacity-90 transition-opacity">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/>
+            <path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/>
+            <circle cx="20" cy="10" r="2"/>
+          </svg>
+          <span>CreditDoc</span>
+        </a>
+        <div class="hidden items-center gap-6 md:flex">
+          <a href="/resources/" class="text-sm font-medium text-text hover:text-primary">Resources</a>
+          <a href="/financial-wellness/" class="text-sm font-medium text-text hover:text-primary">Wellness</a>
+          <a href="/tools/" class="text-sm font-medium text-text hover:text-primary">Tools</a>
+          <a href="/learn/" class="text-sm font-medium text-text hover:text-primary">Learn</a>
+          <a href="/about/" class="text-sm font-medium text-text hover:text-primary">About</a>
+          <a href="/contact/" class="text-sm font-medium text-text hover:text-primary">Contact</a>
+        </div>
+      </nav>
+    </header>
+  ) : (
+    <Header />
+  )}
   <main class="flex-1">
     <slot />
   </main>
-  <Footer />
+  {publicResource ? (
+    <footer class="border-t border-border bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <a href="/" class="flex items-center gap-2 text-primary font-bold text-xl">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/>
+                <path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/>
+                <circle cx="20" cy="10" r="2"/>
+              </svg>
+              <span>CreditDoc</span>
+            </a>
+            <p class="mt-3 text-sm leading-relaxed text-muted">
+              Free consumer finance resources for educational use. Resource pages contain no affiliate links, no lead forms, and no paid placement.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-semibold text-text uppercase tracking-wider">Education</h3>
+            <ul class="mt-4 space-y-3">
+              <li><a href="/resources/" class="text-sm text-muted hover:text-primary">Free Resources</a></li>
+              <li><a href="/resources/credit-report-checklist/" class="text-sm text-muted hover:text-primary">Credit Report Checklist</a></li>
+              <li><a href="/financial-wellness/" class="text-sm text-muted hover:text-primary">Financial Wellness</a></li>
+              <li><a href="/learn/" class="text-sm text-muted hover:text-primary">Learn Center</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-semibold text-text uppercase tracking-wider">Tools</h3>
+            <ul class="mt-4 space-y-3">
+              <li><a href="/tools/credit-score-simulator/" class="text-sm text-muted hover:text-primary">Credit Score Simulator</a></li>
+              <li><a href="/tools/debt-payoff-calculator/" class="text-sm text-muted hover:text-primary">Debt Payoff Calculator</a></li>
+              <li><a href="/tools/borrowing-power-quiz/" class="text-sm text-muted hover:text-primary">Borrowing Power Quiz</a></li>
+              <li><a href="/glossary/" class="text-sm text-muted hover:text-primary">Glossary</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-semibold text-text uppercase tracking-wider">Company</h3>
+            <ul class="mt-4 space-y-3">
+              <li><a href="/about/" class="text-sm text-muted hover:text-primary">About</a></li>
+              <li><a href="/contact/" class="text-sm text-muted hover:text-primary">Contact</a></li>
+              <li><a href="/methodology/" class="text-sm text-muted hover:text-primary">Methodology</a></li>
+              <li><a href="/editorial-policy/" class="text-sm text-muted hover:text-primary">Editorial Policy</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-10 rounded-lg border border-border bg-bg-alt p-4">
+          <p class="text-xs leading-relaxed text-muted">
+            <strong class="text-text">Resource disclosure:</strong> CreditDoc resource pages are built for consumer education and may be used by libraries, universities, nonprofit educators, and public agencies as supplemental references. These resource pages do not contain affiliate links or lead forms. Other areas of CreditDoc may include commercial comparisons or affiliate-supported reviews.
+          </p>
+        </div>
+
+        <div class="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
+          <p class="text-xs text-muted">
+            &copy; {new Date().getFullYear()} CreditDoc. All rights reserved.
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <a href="/privacy/" class="text-xs text-muted hover:text-primary">Privacy</a>
+            <a href="/terms/" class="text-xs text-muted hover:text-primary">Terms</a>
+            <a href="/disclaimer/" class="text-xs text-muted hover:text-primary">Disclaimer</a>
+            <a href="/accessibility/" class="text-xs text-muted hover:text-primary">Accessibility</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  ) : (
+    <Footer />
+  )}
   <CookieConsent />
 </body>
 </html>
