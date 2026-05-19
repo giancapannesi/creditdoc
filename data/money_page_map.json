@@ -1,0 +1,136 @@
+{
+  "_meta": {
+    "version": "draft-2",
+    "created": "2026-05-07",
+    "purpose": "Curated keyword->money-page map. Backed by Keywords Project Folder/CLUSTER_MAP_TOP30.md (proven query volume) + CATEGORY_PILLAR_MAPPING.md (which lender categories belong to which pillar). 11 targets only — pillars + the highest-intent commercial sub-clusters. No niche/overlap pages.",
+    "rules": [
+      "Match is case-insensitive, word-boundary, longest-phrase-wins.",
+      "First occurrence of any phrase per body only.",
+      "Skip if phrase already inside <a>, <h1-6>, or after a negation token (no/not/doesn't/does not/won't/cannot) within 30 chars.",
+      "Lender's category must be in money page's category_whitelist.",
+      "Self-block: a lender never links to a money page that already lists it.",
+      "Per-page cap: max 2 distinct money-page links per body (was 3 in draft-1, tightened).",
+      "Per-target cap: backlink_cap stops further bodies from linking once reached.",
+      "Total cap = ~4,200 across 20.2k corpus → avg 0.21 inbound links per body. Most bodies 0-1, top-fit 2."
+    ],
+    "dropped_from_draft_1": [
+      "best-credit-repair-money-back-guarantee (subset of P6)",
+      "best-credit-repair-veterans (niche, no cluster volume)",
+      "best-credit-repair-after-bankruptcy (niche)",
+      "best-no-credit-check-cards (low-credibility category)",
+      "cheapest-personal-loans (overlap with P2 hub)",
+      "best-credit-counseling-agencies (overlap with P6)",
+      "best-rent-reporting-services (niche)",
+      "best-identity-theft-protection (overlap with P5)",
+      "best-business-lines-of-credit (overlap with P1)",
+      "best-merchant-cash-advance (overlap with P1)",
+      "best-equipment-financing (overlap with P1)",
+      "best-startup-business-loans (overlap with P1)",
+      "best-bad-credit-business-loans (overlap with P1)",
+      "best-invoice-factoring (overlap with P1)",
+      "best-bridging-loans (no cluster volume)",
+      "best-payday-loan-alternatives (overlap with cash-advance-apps)"
+    ]
+  },
+  "money_pages": [
+    {
+      "slug": "best-small-business-loans",
+      "url": "/best/best-small-business-loans/",
+      "pillar": "P1",
+      "cluster_evidence": "CLUSTER_MAP #1 — Best Small Business Loans, 701 questions, intent 0.19, priority 835",
+      "category_whitelist": ["business-loans"],
+      "match_phrases": ["small business loans", "small business loan", "small business financing"],
+      "backlink_cap": 400
+    },
+    {
+      "slug": "best-sba-loans",
+      "url": "/best/best-sba-loans/",
+      "pillar": "P1",
+      "cluster_evidence": "Sub-cluster of Best Small Business Loans — 'sba loans' is a primary sample question. Specific phrase, separate hub.",
+      "category_whitelist": ["business-loans"],
+      "match_phrases": ["SBA loans", "SBA loan", "Small Business Administration loan"],
+      "backlink_cap": 250
+    },
+    {
+      "slug": "best-personal-loan-lenders",
+      "url": "/best/best-personal-loan-lenders/",
+      "pillar": "P2",
+      "cluster_evidence": "CLUSTER_MAP #9 — Best Personal Loan Lenders, 156 questions, intent 0.49 (HIGHEST commercial intent in top-30)",
+      "category_whitelist": ["personal-loans"],
+      "match_phrases": ["personal loan lenders", "personal loan lender", "personal loan provider"],
+      "backlink_cap": 300
+    },
+    {
+      "slug": "best-personal-loans-bad-credit",
+      "url": "/best/best-personal-loans-bad-credit/",
+      "pillar": "P2",
+      "cluster_evidence": "CLUSTER_MAP #4 — Personal Loans for Bad Credit, 312 questions, intent 0.10, priority 342",
+      "category_whitelist": ["personal-loans", "emergency-cash", "payday-alternatives"],
+      "match_phrases": ["personal loans for bad credit", "personal loan for bad credit", "bad-credit personal loan", "bad credit personal loans", "bad credit personal loan"],
+      "backlink_cap": 700
+    },
+    {
+      "slug": "best-debt-consolidation-loans",
+      "url": "/best/best-debt-consolidation-loans/",
+      "pillar": "P7",
+      "cluster_evidence": "CLUSTER_MAP #2 — Best Debt Consolidation Loans, 426 questions, intent 0.16, priority 493",
+      "category_whitelist": ["personal-loans", "debt-relief", "bankruptcy"],
+      "match_phrases": ["debt consolidation loans", "debt consolidation loan", "consolidation loan"],
+      "backlink_cap": 500
+    },
+    {
+      "slug": "best-debt-relief-companies",
+      "url": "/best/best-debt-relief-companies/",
+      "pillar": "P7",
+      "cluster_evidence": "CLUSTER_MAP #19 — Best Debt Relief Companies, 127 questions, intent 0.13, priority 143",
+      "category_whitelist": ["debt-relief", "bankruptcy"],
+      "match_phrases": ["debt relief companies", "debt relief company", "debt settlement companies", "debt settlement company"],
+      "backlink_cap": 300
+    },
+    {
+      "slug": "best-credit-builder-loans",
+      "url": "/best/best-credit-builder-loans/",
+      "pillar": "P4",
+      "cluster_evidence": "CLUSTER_MAP #27 — Best Credit Builder Loans, 100 questions, intent 0.19, priority 119. Also #7 (Build Credit Score Fast) and #8 (Build Credit With No History) route here.",
+      "category_whitelist": ["build-credit", "credit-unions"],
+      "match_phrases": ["credit builder loans", "credit builder loan", "credit-builder loan", "credit-builder loans"],
+      "backlink_cap": 250
+    },
+    {
+      "slug": "best-secured-credit-cards",
+      "url": "/best/best-secured-credit-cards/",
+      "pillar": "P3",
+      "cluster_evidence": "CLUSTER_MAP #13 — Best Secured Credit Cards, 177 questions, intent 0.10, priority 194",
+      "category_whitelist": ["credit-cards", "build-credit"],
+      "match_phrases": ["secured credit cards", "secured credit card"],
+      "backlink_cap": 200
+    },
+    {
+      "slug": "best-credit-repair-companies",
+      "url": "/best/best-credit-repair-companies/",
+      "pillar": "P6",
+      "cluster_evidence": "CLUSTER_MAP #30 — Best Credit Repair Companies, 69 questions, intent 0.32. Also #17 (Remove Charge-Offs), #24 (Remove Late Payments), #26 (Remove Collections) route here.",
+      "category_whitelist": ["credit-repair", "fix-my-credit"],
+      "match_phrases": ["credit repair companies", "credit repair company", "credit repair services", "credit repair service"],
+      "backlink_cap": 700
+    },
+    {
+      "slug": "best-credit-monitoring-services",
+      "url": "/best/best-credit-monitoring-services/",
+      "pillar": "P5",
+      "cluster_evidence": "CLUSTER_MAP #29 — Best Credit Monitoring Services, 88 questions, intent 0.16, priority 102",
+      "category_whitelist": ["credit-monitoring", "credit-repair"],
+      "match_phrases": ["credit monitoring services", "credit monitoring service"],
+      "backlink_cap": 200
+    },
+    {
+      "slug": "best-cash-advance-apps",
+      "url": "/best/best-cash-advance-apps/",
+      "pillar": "P2-adjacent",
+      "cluster_evidence": "Listicle exists; high commercial-intent phrase; 'cash advance app' is unambiguous (no overlap with merchant cash advance because phrase requires 'app').",
+      "category_whitelist": ["emergency-cash", "payday-alternatives"],
+      "match_phrases": ["cash advance apps", "cash advance app", "paycheck advance app"],
+      "backlink_cap": 400
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import { execSync } from 'node:child_process';
-import { readdirSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
@@ -57,6 +57,47 @@ function ssrSitemapPages() {
     if (droppedBrands > 0) {
       console.log(`[sitemap] dropped ${droppedBrands} brand slug(s) with no brand record`);
     }
+
+    // City guides live in Supabase (not local SQLite). Read anon key from env
+    // file and fetch slugs at build time via REST.
+    try {
+      const envFile = join(process.cwd(), '..', 'tools', '.supabase-creditdoc.env');
+      const envLines = readFileSync(envFile, 'utf8').split('\n');
+      let anonKey = process.env.SUPABASE_ANON_KEY || '';
+      for (const ln of envLines) {
+        const m = ln.match(/^SUPABASE_ANON_KEY=["']?([^"'\s]+)/);
+        if (m) { anonKey = m[1]; break; }
+      }
+      if (anonKey) {
+        const cgOut = execSync(
+          `curl -s "https://pndpnjjkhknmutlmlwsk.supabase.co/rest/v1/city_guides?status=eq.ready_for_index&select=slug" -H "apikey: ${anonKey}" -H "Authorization: Bearer ${anonKey}"`,
+          { encoding: 'utf8', timeout: 5000 }
+        );
+        const cityGuides = JSON.parse(cgOut);
+        if (Array.isArray(cityGuides)) {
+          const categorySlugs = [
+            'credit-repair', 'personal-loans', 'emergency-cash', 'payday-alternatives',
+            'debt-relief', 'build-credit', 'credit-monitoring', 'free-help',
+            'pawn-shops', 'atm', 'credit-cards', 'business-loans', 'mortgages',
+            'bankruptcy', 'check-cashing', 'insurance', 'banking', 'credit-unions',
+          ];
+          for (const cg of cityGuides) {
+            if (cg.slug) {
+              urls.push(`${SITE}/credit-guide/${cg.slug}/`);
+              for (const cat of categorySlugs) {
+                urls.push(`${SITE}/credit-guide/${cg.slug}/${cat}/`);
+              }
+            }
+          }
+          if (cityGuides.length > 0) {
+            console.log(`[sitemap] added ${cityGuides.length} city guide(s) + ${cityGuides.length * categorySlugs.length} category sub-pages`);
+          }
+        }
+      }
+    } catch (cgErr) {
+      console.warn('[sitemap] city guides fetch failed (non-fatal):', cgErr.message);
+    }
+
     return urls;
   } catch (err) {
     console.warn('[sitemap] ssrSitemapPages failed:', err.message);

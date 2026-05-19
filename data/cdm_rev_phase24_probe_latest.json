@@ -1,352 +1,226 @@
 {
   "preview": "https://creditdoc.fancy-glitter-38f7.workers.dev",
-  "applied": true,
+  "applied": false,
   "routes_executed": [
-    "r",
-    "answers",
-    "best"
+    "r"
   ],
   "per_route": {
     "r": {
-      "trials": 10,
-      "successes": 10,
+      "trials": 20,
+      "successes": 0,
       "timeouts": 0,
       "errors": 0,
-      "p50_s": 0.07156212051631883,
-      "p95_s": 0.08720929501578212,
-      "max_s": 0.08720929501578212,
-      "obj1_verdict": "GREEN"
-    },
-    "answers": {
-      "trials": 10,
-      "successes": 10,
-      "timeouts": 0,
-      "errors": 0,
-      "p50_s": 0.1794404939864762,
-      "p95_s": 0.2638693950138986,
-      "max_s": 0.2638693950138986,
-      "obj1_verdict": "GREEN"
-    },
-    "best": {
-      "trials": 10,
-      "successes": 10,
-      "timeouts": 0,
-      "errors": 0,
-      "p50_s": 0.14406042953487486,
-      "p95_s": 0.2089182420168072,
-      "max_s": 0.2089182420168072,
-      "obj1_verdict": "GREEN"
+      "p50_s": null,
+      "p95_s": null,
+      "max_s": null,
+      "obj1_verdict": "DRY-RUN"
     }
   },
-  "obj1_verdict": "GREEN",
+  "obj1_verdict": "DRY-RUN",
   "target_p95_s": 10.0,
   "details_by_route": {
     "r": [
       {
         "route": "r",
-        "slug": "credit-saint",
-        "pre_fingerprint": "4d3e5eaf0e03b391",
-        "post_fingerprint": "e50a60da748a1fa4",
-        "latency_s": 0.08720929501578212,
-        "polls": 1,
+        "slug": "civic-financial",
+        "pre_fingerprint": "4689879209ccff87",
+        "post_fingerprint": "4689879209ccff87",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
         "route": "r",
-        "slug": "city-national-bank-corsicana",
-        "pre_fingerprint": "4d3e5eaf0e03b391",
-        "post_fingerprint": "896823279a895819",
-        "latency_s": 0.0669908239506185,
-        "polls": 1,
+        "slug": "civic",
+        "pre_fingerprint": "28b0b0c08157f3a6",
+        "post_fingerprint": "28b0b0c08157f3a6",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
         "route": "r",
-        "slug": "city-national-bank",
-        "pre_fingerprint": "ee0206c51e578230",
-        "post_fingerprint": "896823279a895819",
-        "latency_s": 0.07434805005323142,
-        "polls": 1,
+        "slug": "invicta-credit-solutions",
+        "pre_fingerprint": "98f061b6ed3dec1f",
+        "post_fingerprint": "98f061b6ed3dec1f",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
-      },
-      {
-        "route": "r",
-        "slug": "city",
-        "pre_fingerprint": "ee0206c51e578230",
-        "post_fingerprint": "56d2067470e8170c",
-        "latency_s": 0.07606549700722098,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
         "route": "r",
         "slug": "citizens-savings-bank-spillville",
-        "pre_fingerprint": "ee0206c51e578230",
-        "post_fingerprint": "56d2067470e8170c",
-        "latency_s": 0.06295010098256171,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
-      },
-      {
-        "route": "r",
-        "slug": "credit-saint",
-        "pre_fingerprint": "e50a60da748a1fa4",
-        "post_fingerprint": "56d2067470e8170c",
-        "latency_s": 0.07809968304354697,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
-      },
-      {
-        "route": "r",
-        "slug": "city-national-bank-corsicana",
-        "pre_fingerprint": "896823279a895819",
-        "post_fingerprint": "56d2067470e8170c",
-        "latency_s": 0.0654995299410075,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
-      },
-      {
-        "route": "r",
-        "slug": "city-national-bank",
-        "pre_fingerprint": "896823279a895819",
+        "pre_fingerprint": "31e8c857a6e86f11",
         "post_fingerprint": "31e8c857a6e86f11",
-        "latency_s": 0.06413146399427205,
-        "polls": 1,
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
         "route": "r",
         "slug": "city",
-        "pre_fingerprint": "56d2067470e8170c",
+        "pre_fingerprint": "31e8c857a6e86f11",
         "post_fingerprint": "31e8c857a6e86f11",
-        "latency_s": 0.07926609797868878,
-        "polls": 1,
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
+      },
+      {
+        "route": "r",
+        "slug": "civic-financial",
+        "pre_fingerprint": "4689879209ccff87",
+        "post_fingerprint": "4689879209ccff87",
+        "latency_s": 0.0,
+        "polls": 0,
+        "timed_out": false,
+        "error": "dry-run (no write)"
+      },
+      {
+        "route": "r",
+        "slug": "civic",
+        "pre_fingerprint": "28b0b0c08157f3a6",
+        "post_fingerprint": "28b0b0c08157f3a6",
+        "latency_s": 0.0,
+        "polls": 0,
+        "timed_out": false,
+        "error": "dry-run (no write)"
+      },
+      {
+        "route": "r",
+        "slug": "invicta-credit-solutions",
+        "pre_fingerprint": "98f061b6ed3dec1f",
+        "post_fingerprint": "98f061b6ed3dec1f",
+        "latency_s": 0.0,
+        "polls": 0,
+        "timed_out": false,
+        "error": "dry-run (no write)"
       },
       {
         "route": "r",
         "slug": "citizens-savings-bank-spillville",
-        "pre_fingerprint": "56d2067470e8170c",
+        "pre_fingerprint": "31e8c857a6e86f11",
         "post_fingerprint": "31e8c857a6e86f11",
-        "latency_s": 0.06877619097940624,
-        "polls": 1,
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
-      }
-    ],
-    "answers": [
-      {
-        "route": "answers",
-        "slug": "are-small-business-loans-worth-it",
-        "pre_fingerprint": "37646dd4439c81b8",
-        "post_fingerprint": "a619e2a920ffe408",
-        "latency_s": 0.2638693950138986,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
-        "route": "answers",
-        "slug": "build-credit-with-no-credit-history",
-        "pre_fingerprint": "d670ea449a3a702c",
-        "post_fingerprint": "a619e2a920ffe408",
-        "latency_s": 0.20107800397090614,
-        "polls": 1,
+        "route": "r",
+        "slug": "city",
+        "pre_fingerprint": "31e8c857a6e86f11",
+        "post_fingerprint": "31e8c857a6e86f11",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
-        "route": "answers",
-        "slug": "build-credit-with-no-history",
-        "pre_fingerprint": "d670ea449a3a702c",
-        "post_fingerprint": "2358977bea62c77d",
-        "latency_s": 0.16618809197098017,
-        "polls": 1,
+        "route": "r",
+        "slug": "civic-financial",
+        "pre_fingerprint": "4689879209ccff87",
+        "post_fingerprint": "4689879209ccff87",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
-        "route": "answers",
-        "slug": "can-i-do-debt-consolidation-myself",
-        "pre_fingerprint": "f7288a2471e8b487",
-        "post_fingerprint": "2358977bea62c77d",
-        "latency_s": 0.18299034994561225,
-        "polls": 1,
+        "route": "r",
+        "slug": "civic",
+        "pre_fingerprint": "28b0b0c08157f3a6",
+        "post_fingerprint": "28b0b0c08157f3a6",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
-        "route": "answers",
-        "slug": "can-i-get-a-car-loan-with-my-credit-score",
-        "pre_fingerprint": "f7288a2471e8b487",
-        "post_fingerprint": "740678088c2fbd61",
-        "latency_s": 0.1953208539634943,
-        "polls": 1,
+        "route": "r",
+        "slug": "invicta-credit-solutions",
+        "pre_fingerprint": "98f061b6ed3dec1f",
+        "post_fingerprint": "98f061b6ed3dec1f",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
-        "route": "answers",
-        "slug": "are-small-business-loans-worth-it",
-        "pre_fingerprint": "a619e2a920ffe408",
-        "post_fingerprint": "740678088c2fbd61",
-        "latency_s": 0.17883169697597623,
-        "polls": 1,
+        "route": "r",
+        "slug": "citizens-savings-bank-spillville",
+        "pre_fingerprint": "31e8c857a6e86f11",
+        "post_fingerprint": "31e8c857a6e86f11",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
-        "route": "answers",
-        "slug": "build-credit-with-no-credit-history",
-        "pre_fingerprint": "a619e2a920ffe408",
-        "post_fingerprint": "740678088c2fbd61",
-        "latency_s": 0.144798998022452,
-        "polls": 1,
+        "route": "r",
+        "slug": "city",
+        "pre_fingerprint": "31e8c857a6e86f11",
+        "post_fingerprint": "31e8c857a6e86f11",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
-        "route": "answers",
-        "slug": "build-credit-with-no-history",
-        "pre_fingerprint": "2358977bea62c77d",
-        "post_fingerprint": "7f8cbe90dc1e4bc8",
-        "latency_s": 0.14930264302529395,
-        "polls": 1,
+        "route": "r",
+        "slug": "civic-financial",
+        "pre_fingerprint": "4689879209ccff87",
+        "post_fingerprint": "4689879209ccff87",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
-        "route": "answers",
-        "slug": "can-i-do-debt-consolidation-myself",
-        "pre_fingerprint": "2358977bea62c77d",
-        "post_fingerprint": "7f8cbe90dc1e4bc8",
-        "latency_s": 0.1800492909969762,
-        "polls": 1,
+        "route": "r",
+        "slug": "civic",
+        "pre_fingerprint": "28b0b0c08157f3a6",
+        "post_fingerprint": "28b0b0c08157f3a6",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
-        "route": "answers",
-        "slug": "can-i-get-a-car-loan-with-my-credit-score",
-        "pre_fingerprint": "740678088c2fbd61",
-        "post_fingerprint": "2a80ce824fb62e9c",
-        "latency_s": 0.15348968701437116,
-        "polls": 1,
+        "route": "r",
+        "slug": "invicta-credit-solutions",
+        "pre_fingerprint": "98f061b6ed3dec1f",
+        "post_fingerprint": "98f061b6ed3dec1f",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
-      }
-    ],
-    "best": [
-      {
-        "route": "best",
-        "slug": "best-credit-repair-companies",
-        "pre_fingerprint": "ad66a9bc830b4fc4",
-        "post_fingerprint": "2a80ce824fb62e9c",
-        "latency_s": 0.16646222199779004,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
-        "route": "best",
-        "slug": "best-credit-repair-money-back-guarantee",
-        "pre_fingerprint": "ad66a9bc830b4fc4",
-        "post_fingerprint": "bec79167f8e166bf",
-        "latency_s": 0.15465985098853707,
-        "polls": 1,
+        "route": "r",
+        "slug": "citizens-savings-bank-spillville",
+        "pre_fingerprint": "31e8c857a6e86f11",
+        "post_fingerprint": "31e8c857a6e86f11",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       },
       {
-        "route": "best",
-        "slug": "best-personal-loans-bad-credit",
-        "pre_fingerprint": "b54ea87f1e8754e7",
-        "post_fingerprint": "bec79167f8e166bf",
-        "latency_s": 0.2089182420168072,
-        "polls": 1,
+        "route": "r",
+        "slug": "city",
+        "pre_fingerprint": "31e8c857a6e86f11",
+        "post_fingerprint": "31e8c857a6e86f11",
+        "latency_s": 0.0,
+        "polls": 0,
         "timed_out": false,
-        "error": null
-      },
-      {
-        "route": "best",
-        "slug": "best-debt-consolidation-loans",
-        "pre_fingerprint": "b54ea87f1e8754e7",
-        "post_fingerprint": "bec79167f8e166bf",
-        "latency_s": 0.13373441901057959,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
-      },
-      {
-        "route": "best",
-        "slug": "best-credit-builder-loans",
-        "pre_fingerprint": "b54ea87f1e8754e7",
-        "post_fingerprint": "2b465483ab344c02",
-        "latency_s": 0.14746579609345645,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
-      },
-      {
-        "route": "best",
-        "slug": "best-credit-repair-companies",
-        "pre_fingerprint": "2a80ce824fb62e9c",
-        "post_fingerprint": "2b465483ab344c02",
-        "latency_s": 0.15157725207973272,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
-      },
-      {
-        "route": "best",
-        "slug": "best-credit-repair-money-back-guarantee",
-        "pre_fingerprint": "bec79167f8e166bf",
-        "post_fingerprint": "d3f92532af934e8f",
-        "latency_s": 0.13578963500913233,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
-      },
-      {
-        "route": "best",
-        "slug": "best-personal-loans-bad-credit",
-        "pre_fingerprint": "bec79167f8e166bf",
-        "post_fingerprint": "d3f92532af934e8f",
-        "latency_s": 0.12522038910537958,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
-      },
-      {
-        "route": "best",
-        "slug": "best-debt-consolidation-loans",
-        "pre_fingerprint": "bec79167f8e166bf",
-        "post_fingerprint": "d3f92532af934e8f",
-        "latency_s": 0.12939683406148106,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
-      },
-      {
-        "route": "best",
-        "slug": "best-credit-builder-loans",
-        "pre_fingerprint": "2b465483ab344c02",
-        "post_fingerprint": "a4a765038605ca04",
-        "latency_s": 0.14065506297629327,
-        "polls": 1,
-        "timed_out": false,
-        "error": null
+        "error": "dry-run (no write)"
       }
     ]
   },
-  "ts_unix": 1777639925
+  "ts_unix": 1777705402
 }

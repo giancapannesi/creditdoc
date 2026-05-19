@@ -79,11 +79,11 @@ normalize() {
   #  - whitespace runs
   # then output to stdout.
   sed -E '
-    s|/_astro/[^"]+\.[a-zA-Z0-9_-]{8,}\.(js|css|woff2)|/_astro/HASH.&|g;
-    s|<!--.*-->||g;
-    s|>[[:space:]]+<|><|g;
-    s|[[:space:]]+| |g;
-    s|("|content="|description="|content_url="|"\?_v=)[0-9TZ:.\-]{8,}|\1NORM|g;
+    s#/_astro/[^"]+\.[a-zA-Z0-9_-]{8,}\.(js|css|woff2)#/_astro/HASH.&#g
+    s#<!--.*-->##g
+    s#>[[:space:]]+<#><#g
+    s#[[:space:]]+# #g
+    s#(content="|description="|content_url="|\?_v=)[0-9TZ:.\-]{8,}#\1NORM#g
   '
 }
 
@@ -120,13 +120,15 @@ for slug in "${SLUGS[@]}"; do
   prod_bytes=$(wc -c < "$prod_norm")
   prev_bytes=$(wc -c < "$prev_norm")
 
-  # Bytes-different (rough): wc -l of diff -u
-  diff_lines=$(diff -u "$prod_norm" "$prev_norm" | grep -cE "^[+-]" || true)
-  # Approximate percent: char-level Levenshtein is too slow for full pages,
-  # so we use line-diff count / total lines as a coarse proxy.
-  total_lines=$(wc -l < "$prod_norm")
-  if [[ "$total_lines" -eq 0 ]]; then total_lines=1; fi
-  pct=$(awk -v d="$diff_lines" -v t="$total_lines" 'BEGIN { printf "%.3f", (d/t)*100 }')
+  # Honest byte-delta percent (replaces 2026-04-29 broken line-count proxy that
+  # over-reported ~20% for actual <0.01% byte deltas because minified HTML is
+  # one giant line). |delta| / max(prod, prev) gives a stable symmetric measure.
+  if [[ "$prod_bytes" -eq 0 ]] && [[ "$prev_bytes" -eq 0 ]]; then
+    pct="0.000"
+  else
+    pct=$(awk -v p="$prod_bytes" -v v="$prev_bytes" \
+      'BEGIN { d = (p>v) ? p-v : v-p; m = (p>v) ? p : v; printf "%.3f", (d/m)*100 }')
+  fi
 
   status="OK"
   if (( $(awk -v p="$pct" 'BEGIN { print (p > 0.1) }') )); then

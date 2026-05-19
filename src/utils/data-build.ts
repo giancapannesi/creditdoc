@@ -28,6 +28,29 @@ const ANSWERS_DIR = path.join(process.cwd(), 'src/content/answers');
 
 let _lendersCache: Lender[] | null = null;
 
+const ABBR_TO_FULL_STATE: Record<string, string> = Object.fromEntries(
+  Object.entries(STATE_ABBREVIATIONS).map(([full, abbr]) => [abbr, full])
+);
+
+function normalizeStateAbbr(state: string | null | undefined): string | null {
+  if (!state) return null;
+  const trimmed = state.trim();
+  if (!trimmed) return null;
+
+  const upper = trimmed.toUpperCase();
+  if (ABBR_TO_FULL_STATE[upper]) return upper;
+
+  return STATE_ABBREVIATIONS[trimmed] ?? null;
+}
+
+function slugifyCity(city: string): string {
+  return city
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 export function getAllLenders(): Lender[] {
   if (_lendersCache) return _lendersCache;
   const files = fs.readdirSync(LENDERS_DIR).filter(f => f.endsWith('.json'));
@@ -146,27 +169,23 @@ export function getCitiesWithLenders(minCount: number = 5): CityInfo[] {
   const cityMap = new Map<string, { city: string; state: string; count: number }>();
   for (const l of getAllLenders()) {
     const city = l.company_info.city;
-    const state = l.company_info.state;
+    const state = normalizeStateAbbr(l.company_info.state);
     if (!city || !state) continue;
-    const key = `${city}|${state}`;
+    const cityKey = city.trim().toLowerCase();
+    const key = `${cityKey}|${state}`;
     const existing = cityMap.get(key);
     if (existing) {
       existing.count++;
     } else {
-      cityMap.set(key, { city, state, count: 1 });
+      cityMap.set(key, { city: city.trim(), state, count: 1 });
     }
-  }
-
-  const abbrevToFull: Record<string, string> = {};
-  for (const [full, abbr] of Object.entries(STATE_ABBREVIATIONS)) {
-    abbrevToFull[abbr] = full;
   }
 
   return Array.from(cityMap.values())
     .filter(c => c.count >= minCount)
     .map(c => {
-      const fullState = abbrevToFull[c.state] || c.state;
-      const slug = `${c.city.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${c.state.toLowerCase()}`;
+      const fullState = ABBR_TO_FULL_STATE[c.state] || c.state;
+      const slug = `${slugifyCity(c.city)}-${c.state.toLowerCase()}`;
       return {
         city: c.city,
         state: fullState,
@@ -179,8 +198,11 @@ export function getCitiesWithLenders(minCount: number = 5): CityInfo[] {
 }
 
 export function getLendersByCityState(city: string, stateAbbr: string): Lender[] {
+  const cityKey = city.trim().toLowerCase();
+  const targetState = normalizeStateAbbr(stateAbbr);
   return getAllLenders().filter(l =>
-    l.company_info.city === city && l.company_info.state === stateAbbr
+    l.company_info.city?.trim().toLowerCase() === cityKey &&
+    normalizeStateAbbr(l.company_info.state) === targetState
   );
 }
 

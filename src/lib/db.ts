@@ -861,6 +861,231 @@ export async function getStateCitiesRuntime(
   return rows ?? [];
 }
 
+// ============================================================================
+// Regulatory data layer — Phase 5 render integration
+// ============================================================================
+// Queries the regulator_* tables (pushed from regulator.db via sync script).
+// Feature-flagged via ENABLE_REGULATOR_BLOCKS env var on the Worker.
+
+export interface RegulatorCompanyStats {
+  creditdoc_slug: string;
+  company_name: string;
+  match_confidence: number;
+  total_complaints_alltime: number;
+  total_complaints_12mo: number;
+  total_complaints_3mo: number;
+  timely_response_rate: number | null;
+  resolved_with_relief_rate: number | null;
+  top_issue_1: string | null;
+  top_issue_1_pct: number | null;
+  top_issue_2: string | null;
+  top_issue_2_pct: number | null;
+  top_issue_3: string | null;
+  top_issue_3_pct: number | null;
+  complaint_trend: string | null;
+  fdic_branch_count: number;
+}
+
+export interface RegulatorEnforcement {
+  action_date: string | null;
+  penalty_amount: number | null;
+  title: string | null;
+  description: string | null;
+  case_url: string | null;
+}
+
+export interface RegulatorSbaRanking {
+  fiscal_year: number;
+  program: string;
+  state: string | null;
+  loan_count: number;
+  total_approval: number;
+  rank_state: number | null;
+  rank_national: number | null;
+}
+
+export interface RegulatorData {
+  stats: RegulatorCompanyStats | null;
+  enforcement: RegulatorEnforcement[];
+  sba: RegulatorSbaRanking[];
+}
+
+export async function getRegulatorDataRuntime(
+  slug: string,
+  env?: RuntimeLenderEnv & { ENABLE_REGULATOR_BLOCKS?: string }
+): Promise<RegulatorData | null> {
+  if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return null;
+  if (env.ENABLE_REGULATOR_BLOCKS !== "true") return null;
+
+  const base = env.SUPABASE_URL;
+  const headers = {
+    apikey: env.SUPABASE_ANON_KEY,
+    authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+    accept: "application/json",
+  };
+
+  const [statsRes, enfRes, sbaRes] = await Promise.all([
+    fetch(
+      `${base}/rest/v1/regulator_company_stats?creditdoc_slug=eq.${encodeURIComponent(slug)}&limit=1`,
+      { headers, signal: AbortSignal.timeout(2000) }
+    ).catch(() => null),
+    fetch(
+      `${base}/rest/v1/regulator_enforcement?creditdoc_slug=eq.${encodeURIComponent(slug)}&order=action_date.desc&limit=10`,
+      { headers, signal: AbortSignal.timeout(2000) }
+    ).catch(() => null),
+    fetch(
+      `${base}/rest/v1/regulator_sba_rankings?creditdoc_slug=eq.${encodeURIComponent(slug)}&order=fiscal_year.desc&limit=10`,
+      { headers, signal: AbortSignal.timeout(2000) }
+    ).catch(() => null),
+  ]);
+
+  const stats: RegulatorCompanyStats | null =
+    statsRes?.ok
+      ? ((await statsRes.json()) as RegulatorCompanyStats[])[0] ?? null
+      : null;
+
+  if (!stats || stats.match_confidence < 0.85 || stats.total_complaints_alltime < 5) {
+    return null;
+  }
+
+  const enforcement: RegulatorEnforcement[] =
+    enfRes?.ok ? ((await enfRes.json()) as RegulatorEnforcement[]) : [];
+
+  const sba: RegulatorSbaRanking[] =
+    sbaRes?.ok ? ((await sbaRes.json()) as RegulatorSbaRanking[]) : [];
+
+  return { stats, enforcement, sba };
+}
+
+// ── City Guides ──────────────────────────────────────────────────────
+
+export interface RuntimeCityGuide {
+  id: number;
+  slug: string;
+  city: string;
+  state_abbr: string;
+  state_name: string;
+  population: number | null;
+  median_income: number | null;
+  avg_credit_score: number | null;
+  cost_of_living_index: number | null;
+  poverty_rate: number | null;
+  unbanked_rate: number | null;
+  body_inline: Record<string, any> | null;
+  seo_title: string | null;
+  meta_description: string | null;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export async function getCityGuideBySlugRuntime(
+  slug: string,
+  env?: RuntimeLenderEnv
+): Promise<RuntimeCityGuide | null> {
+  if (!slug) return null;
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/city_guides` +
+    `?slug=eq.${encodeURIComponent(slug)}` +
+    `&status=eq.ready_for_index` +
+    `&select=*` +
+    `&limit=1`;
+  const rows = await _restGet<RuntimeCityGuide>(url, env);
+  return rows?.[0] ?? null;
+}
+
+export async function getCityGuidesByStateRuntime(
+  stateAbbr: string,
+  env?: RuntimeLenderEnv,
+  limit = 50
+): Promise<RuntimeCityGuide[]> {
+  const url =
+    `${env?.SUPABASE_URL}/rest/v1/city_guides` +
+    `?state_abbr=eq.${encodeURIComponent(stateAbbr)}` +
+    `&status=eq.ready_for_index` +
+    `&select=slug,city,state_abbr,state_name,population` +
+    `&order=population.desc.nullslast` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeCityGuide>(url, env);
+  return rows ?? [];
+}
+
+// ─── HMDA Lending Data ───────────────────────────────────────────────
+
+export interface HMDALenderStats {
+  slug: string;
+  year: number;
+  total_applications: number;
+  total_originated: number;
+  total_approved_not_accepted: number;
+  total_denied: number;
+  total_preapproval_denied: number;
+  approval_rate: number;
+  avg_loan_amount: number;
+  states_served: number;
+  income_under_50k_apps: number;
+  income_under_50k_rate: number | null;
+  income_50_100k_apps: number;
+  income_50_100k_rate: number | null;
+  income_100_200k_apps: number;
+  income_100_200k_rate: number | null;
+  income_over_200k_apps: number;
+  income_over_200k_rate: number | null;
+  denial_reasons_json: string | null;
+}
+
+export interface HMDAGeoStats {
+  slug: string;
+  state_code: string;
+  year: number;
+  total_applications: number;
+  total_originated: number;
+  total_denied: number;
+  approval_rate: number;
+  low_income_approval_rate: number | null;
+}
+
+export interface HMDAData {
+  stats: HMDALenderStats;
+  geo: HMDAGeoStats[];
+}
+
+export async function getHMDADataRuntime(
+  slug: string,
+  env?: RuntimeLenderEnv & { ENABLE_REGULATOR_BLOCKS?: string }
+): Promise<HMDAData | null> {
+  if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return null;
+  if (env.ENABLE_REGULATOR_BLOCKS !== "true") return null;
+
+  const base = env.SUPABASE_URL;
+  const headers = {
+    apikey: env.SUPABASE_ANON_KEY,
+    authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+    accept: "application/json",
+  };
+
+  const [statsRes, geoRes] = await Promise.all([
+    fetch(
+      `${base}/rest/v1/hmda_lender_stats?slug=eq.${encodeURIComponent(slug)}&limit=1`,
+      { headers, signal: AbortSignal.timeout(2000) }
+    ).catch(() => null),
+    fetch(
+      `${base}/rest/v1/hmda_geo_stats?slug=eq.${encodeURIComponent(slug)}&order=total_applications.desc&limit=10`,
+      { headers, signal: AbortSignal.timeout(2000) }
+    ).catch(() => null),
+  ]);
+
+  const statsRows = statsRes?.ok ? await statsRes.json() as HMDALenderStats[] : [];
+  const geoRows = geoRes?.ok ? await geoRes.json() as HMDAGeoStats[] : [];
+
+  if (!statsRows.length) return null;
+
+  return {
+    stats: statsRows[0],
+    geo: geoRows,
+  };
+}
+
 // Type alias for Cloudflare Workers R2 binding (no @cloudflare/workers-types
 // import to keep the dep graph tight; the adapter provides the runtime).
 type R2Bucket = {

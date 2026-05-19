@@ -6,12 +6,13 @@ FOUNDER RULE 2026-04-24: Never submit /review/<slug>/ lender profiles
 (FA or otherwise) to search engines. Only submit the pages that earn clicks
 and move users toward money: money pages, drip, blog, education.
 
-Push tiers (in order):
-    1. Money pages         /best/<slug>/              (listicles)
-    2. Blog                /blog/<slug>/              (blog_posts)
-    3. Brand hubs          /brand/<slug>/             (brand JSON exists)
-    4. Compare pages       /compare/<slug>/           (comparisons)
-    5. State pages         /state/<slug>/             (already tracked in GSC)
+Push tiers (in order — per AI Council 2026-05-13, reordered 2026-05-14):
+    1. City guides         /credit-guide/<slug>/      (fastest-ranking, council #1)
+    2. Money pages         /best/<slug>/              (listicles)
+    3. Blog                /blog/<slug>/              (blog_posts)
+    4. Brand hubs          /brand/<slug>/             (brand JSON exists)
+    5. Compare pages       /compare/<slug>/           (comparisons)
+    6. State pages         /state/<slug>/             (already tracked in GSC)
 
 EXCLUDED (Jammi submits these manually via GSC Request Indexing, 10/day):
     - Drip                /answers/<slug>/
@@ -90,8 +91,15 @@ def fetch_priority_urls(db, limit, force_all=False):
 
     # Answers + wellness are excluded: Jammi submits those manually via GSC
     # Request Indexing (10/day). Automated API handles everything else.
+    # City guides added + promoted to tier 1 per AI Council (2026-05-14).
     publishable_cte = f"""
     publishable AS (
+      SELECT DISTINCT 'city' AS tier,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS sort_key
+        FROM indexation_status
+        WHERE page_url LIKE '{SITE}/credit-guide/%'
+      UNION ALL
       SELECT 'money' AS tier, 'best/' || slug AS path, slug AS sort_key
         FROM listicles
       UNION ALL
@@ -154,11 +162,12 @@ def fetch_priority_urls(db, limit, force_all=False):
     {where_filter}
     ORDER BY
       CASE p.tier
-        WHEN 'money' THEN 1
-        WHEN 'blog' THEN 2
-        WHEN 'brand' THEN 3
-        WHEN 'compare' THEN 4
-        WHEN 'state' THEN 5
+        WHEN 'city' THEN 1
+        WHEN 'money' THEN 2
+        WHEN 'blog' THEN 3
+        WHEN 'brand' THEN 4
+        WHEN 'compare' THEN 5
+        WHEN 'state' THEN 6
         ELSE 99
       END,
       p.sort_key DESC
@@ -190,7 +199,8 @@ def fetch_priority_urls(db, limit, force_all=False):
         skipped["unchecked"] = breakdown[1] or 0
         skipped["cooldown"] = breakdown[2] or 0
 
-    by_tier = {t: sum(1 for u in urls if u["tier"] == t) for t in ("money", "blog", "brand", "compare", "state")}
+    by_tier = {t: sum(1 for u in urls if u["tier"] == t) for t in ("city", "money", "blog", "brand", "compare", "state")}
+    print(f"  City:     {by_tier['city']}")
     print(f"  Money:    {by_tier['money']}")
     print(f"  Blog:     {by_tier['blog']}")
     print(f"  Brand:    {by_tier['brand']}")

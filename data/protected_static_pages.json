@@ -1,0 +1,65 @@
+{
+  "_doc": "Founder-Approved (FA) content on CreditDoc that is NOT a lender row. Lenders use `lenders.is_protected = 1`. This file covers FA static .astro pages and FA DB-driven content (wellness guides, blog posts, etc.). Do NOT auto-edit anything listed here. Get explicit Jammi approval and show diff before deploying any change.",
+  "_rule": "Any change to a path listed here requires: (1) explicit founder approval, (2) diff shown before deploy, (3) entry in DECISIONS.md noting the approved revision + worker version (for static .astro) or the approved DB row updated_at (for DB-driven content).",
+  "pages": [
+    {
+      "type": "static_astro",
+      "path": "src/pages/deals.astro",
+      "url": "/deals/",
+      "approved_at": "2026-05-02T10:30:00+02:00",
+      "approved_by": "Jammi",
+      "approved_revision_worker": "030c2aa0-887f-418b-bb3f-934dea589634",
+      "notes": "Approved after iter 37 cutover content upgrade — 'Before you compare deals' / 'Current deals' / 'Why people turn to credit repair' / 'Learn before you commit' / 'Quick answers' structure. 11 verified internal wellness links + CFPB outbound."
+    },
+    {
+      "type": "wellness_guide",
+      "db_table": "wellness_guides",
+      "db_slug": "50-30-20-budget-rule",
+      "url": "/financial-wellness/50-30-20-budget-rule/",
+      "approved_at": "2026-05-02T12:50:00+02:00",
+      "approved_by": "Jammi",
+      "approved_db_updated_at": "2026-04-08T18:03:30Z",
+      "notes": "DB-driven wellness guide. Jammi flagged 2026-05-02: 'this page is really good should be FA'. is_protected=true also written into wellness_guides.data JSON. SSR page (no rebuild needed). Editing requires founder approval; the wellness generator is already append-only and skips existing slugs."
+    },
+    {
+      "type": "wellness_guide",
+      "db_table": "wellness_guides",
+      "db_slug": "609-dispute-letter-truth",
+      "url": "/financial-wellness/609-dispute-letter-truth/",
+      "approved_at": "2026-05-02T12:55:00+02:00",
+      "approved_by": "Jammi",
+      "approved_db_updated_at": "2026-04-08",
+      "notes": "DB-driven wellness guide. Jammi flagged 2026-05-02: 'this one is FA too'. Title: 'Section 609 Dispute Letters: What They Actually Do (and Don't Do)'. is_protected=true in wellness_guides.data JSON. SSR page (no rebuild needed)."
+    },
+    {
+      "type": "wellness_guide",
+      "db_table": "wellness_guides",
+      "db_slug": "authorized-user-strategy",
+      "url": "/financial-wellness/authorized-user-strategy/",
+      "approved_at": "2026-05-02T12:58:00+02:00",
+      "approved_by": "Jammi",
+      "approved_db_updated_at": "2026-04-08",
+      "notes": "DB-driven wellness guide. Jammi flagged 2026-05-02: 'and this one'. Title: 'Authorized User Strategy: Piggyback on Someone Else's Credit'. is_protected=true in wellness_guides.data JSON. SSR page (no rebuild needed)."
+    },
+    {
+      "type": "wellness_guide",
+      "db_table": "wellness_guides",
+      "db_slug": "auto-loans-bad-credit",
+      "url": "/financial-wellness/auto-loans-bad-credit/",
+      "approved_at": "2026-05-02T13:00:00+02:00",
+      "approved_by": "Jammi",
+      "approved_db_updated_at": "2026-04-08",
+      "notes": "DB-driven wellness guide. Jammi flagged 2026-05-02: 'and this one'. Title: 'Auto Loans with Bad Credit: How to Get Approved Without Overpaying'. is_protected=true in wellness_guides.data JSON. SSR page (no rebuild needed)."
+    },
+    {
+      "type": "wellness_guide",
+      "db_table": "wellness_guides",
+      "db_slug": "bank-fees-avoid",
+      "url": "/financial-wellness/bank-fees-avoid/",
+      "approved_at": "2026-05-02T13:02:00+02:00",
+      "approved_by": "Jammi",
+      "approved_db_updated_at": "2026-04-08",
+      "notes": "DB-driven wellness guide. Jammi flagged 2026-05-02: 'and this one'. Title: 'Bank Fees You're Probably Paying (and How to Stop)'. is_protected=true in wellness_guides.data JSON. SSR page (no rebuild needed)."
+    }
+  ]
+}

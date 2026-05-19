@@ -501,8 +501,14 @@ export function shapeBodyInlineToLender(row: RuntimeLenderWithBody): Lender {
     name: row.name,
     slug: row.slug,
     category: row.category,
+    processing_status: row.processing_status,
+    no_index: row.processing_status !== 'ready_for_index',
     last_updated: (row.updated_at ?? '').slice(0, 10),
   };
+  // Map body_inline.meta_title → seo_title (DB uses meta_title, SSR expects seo_title)
+  if (!merged.seo_title && (body as any).meta_title) {
+    merged.seo_title = (body as any).meta_title;
+  }
   // Defensive normalization (mirrors the build-time path in getAllLenders).
   merged.subcategories = Array.isArray(merged.subcategories) ? merged.subcategories : [];
   merged.states_served = Array.isArray(merged.states_served) ? merged.states_served : [];

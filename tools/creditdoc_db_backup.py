@@ -25,6 +25,7 @@ import gzip
 import os
 import shutil
 import sqlite3
+import subprocess
 import sys
 import time
 from datetime import datetime, timezone
@@ -39,6 +40,17 @@ LOG_PATH = Path("/srv/BusinessOps/logs/creditdoc_db_backup.log")
 KEEP_DAILY = 7
 KEEP_WEEKLY = 4
 KEEP_MONTHLY = 12
+
+# R2 offsite mirror (Action D of 2026-05-03 backup plan).
+# Uploads each successfully-built daily/weekly/monthly archive to
+# r2://creditdoc-assets/backups/sqlite/<filename>. Inherits the existing
+# `backups/` 30-day lifecycle rule on the bucket.
+R2_BUCKET = "creditdoc-assets"
+R2_PREFIX = "backups/sqlite"
+ENV_FILES = (
+    Path("/srv/BusinessOps/.env"),
+    Path("/srv/BusinessOps/tools/.supabase-creditdoc.env"),
+)
 
 
 def log(msg, to_file=True):
@@ -157,6 +169,62 @@ def verify_backup(gz_path):
         return False
 
 
+def _load_dotenv() -> dict:
+    """Read .env and tools/.supabase-creditdoc.env (the supabase backup script's
+    pattern — same Global API Key + email path works for any R2 PUT)."""
+    env: dict[str, str] = {}
+    for fp in ENV_FILES:
+        if not fp.exists():
+            continue
+        for line in fp.read_text().splitlines():
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            k, _, v = line.partition("=")
+            env[k.strip()] = v.strip().strip('"').strip("'")
+    return env
+
+
+def upload_to_r2(gz_path: Path) -> bool:
+    """PUT the gzipped backup to r2://creditdoc-assets/backups/sqlite/<name>.
+
+    Uses Global API Key + Email (Zone-only API_TOKEN gets 403 on R2 endpoints).
+    Returns True on success, False on failure (logged but not fatal — local
+    backup is still valid).
+    """
+    env = _load_dotenv()
+    cf_email = env.get("CLOUDFLARE_EMAIL")
+    cf_key = env.get("CLOUDFLARE_GLOBAL_API_KEY")
+    cf_acct = env.get("CLOUDFLARE_ACCOUNT_ID")
+    if not (cf_email and cf_key and cf_acct):
+        log("  R2 upload SKIPPED: missing CLOUDFLARE_EMAIL/_GLOBAL_API_KEY/_ACCOUNT_ID")
+        return False
+
+    object_key = f"{R2_PREFIX}/{gz_path.name}"
+    upload_url = (
+        f"https://api.cloudflare.com/client/v4/accounts/{cf_acct}"
+        f"/r2/buckets/{R2_BUCKET}/objects/{object_key}"
+    )
+    cmd = [
+        "curl", "--silent", "--show-error", "--fail-with-body",
+        "-X", "PUT", upload_url,
+        "-H", f"X-Auth-Email: {cf_email}",
+        "-H", f"X-Auth-Key: {cf_key}",
+        "-H", "Content-Type: application/octet-stream",
+        "--data-binary", f"@{gz_path}",
+    ]
+    log(f"  R2 upload START → r2://{R2_BUCKET}/{object_key}")
+    try:
+        subprocess.run(cmd, check=True, capture_output=True, text=True)
+    except subprocess.CalledProcessError as e:
+        body = (e.stdout or "") + (e.stderr or "")
+        log(f"  R2 upload FAIL: {body.strip()[:300]}")
+        return False
+    size_mb = os.path.getsize(gz_path) / (1024 * 1024)
+    log(f"  R2 upload OK ({size_mb:.1f} MB → r2://{R2_BUCKET}/{object_key})")
+    return True
+
+
 def rotate_backups(backup_dir=BACKUP_DIR):
     """Apply retention policy — keep N daily/weekly/monthly."""
     if not backup_dir.exists():
@@ -251,6 +319,10 @@ def main():
     parser.add_argument("--list", action="store_true", help="List existing backups")
     parser.add_argument("--verify", type=str, help="Verify a specific backup file")
     parser.add_argument("--stats", action="store_true", help="Show backup stats")
+    parser.add_argument("--no-upload", action="store_true",
+                        help="Skip R2 offsite upload (Action D, default ON)")
+    parser.add_argument("--upload-existing", type=str, default=None,
+                        help="Just upload an existing .db.gz (for backfills); skip backup")
     args = parser.parse_args()
 
     if args.list:
@@ -270,11 +342,26 @@ def main():
         stats()
         return
 
+    # --upload-existing: upload an already-built archive without running backup
+    if args.upload_existing:
+        path = Path(args.upload_existing)
+        if not path.exists():
+            print(f"File not found: {path}")
+            sys.exit(1)
+        ok = upload_to_r2(path)
+        sys.exit(0 if ok else 1)
+
     # Default: run backup
     result = backup_database()
     if result is None:
         log("BACKUP FAILED")
         sys.exit(1)
+
+    # Action D — offsite mirror to R2 (default ON, use --no-upload to skip)
+    if not args.no_upload:
+        upload_to_r2(result)
+    else:
+        log("  R2 upload skipped (--no-upload)")
 
     log("BACKUP SUCCESS")
 
