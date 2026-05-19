@@ -18,11 +18,26 @@ audit-*.md
 content_drip_log.json
 scripts/__pycache__/
 tools/__pycache__/
+__pycache__/
+**/__pycache__/
 
 # Persistence DB (Phase 3 — SQLite source of truth, backed up separately)
 data/creditdoc.db
 data/creditdoc.db-wal
 data/creditdoc.db-shm
+data/*.db
+data/*.db-*
+data/*.db.*
+tools/*.db
+*.sqlite
+*.sqlite3
+
+# Local generated exports, scratch files, archives, and backups
+tmp_*/
+backups/
+*.dump
+*.sql.gz
+Sendy/*.zip
 
 # Local Wrangler dev/build cache
 .wrangler/
