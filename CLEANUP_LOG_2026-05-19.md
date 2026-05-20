@@ -29,6 +29,14 @@ this cleanup pass.
 - Committed ignore rules for bulky local research/import bundles and generated
   analysis outputs:
   - `0f90c68a91 chore: ignore local research outputs`
+- Committed remaining reviewable buckets after `npm run build` passed:
+  - `a037a06383 docs: update CreditDoc operating plans`
+  - `4eabbbac47 feat: add resource templates and credit course`
+  - `f96c723639 feat: add regulatory data layer tooling`
+  - `3cf08ebe44 feat: preserve Cloudflare runtime migration`
+  - `d48d93b322 feat: split credit guide category routes`
+  - `5f798e7007 docs: add revalidate cron proposal`
+  - `02ce8835d4 feat: polish CreditDoc page surfaces`
 
 ## Lender JSON Archive
 
@@ -91,16 +99,14 @@ this cleanup pass.
 
 ## Current Caveats
 
-- The repo still contains many unrelated existing modified and untracked files:
-  Astro code changes, runtime/data changes, Cloudflare/Vercel transition files,
-  generated public assets, and tool changes.
+- The repo was left with no visible unstaged or untracked files.
 - Strategy docs, AI Council notes, and SEO research docs were reviewed for
   obvious credential leakage and committed as documentation.
 - Bulky local research/import folders and generated analysis outputs were not
   moved or deleted; they were ignored so they stop obscuring reviewable source
   changes.
-- Live-site code changes still need a separate review before any commit or
-  deployment decision.
+- Live-site code changes were committed only after `npm run build` completed
+  successfully. No deploy was run during this cleanup continuation.
 - The database remains the source of truth for live lender pages, but lender
   JSON files are still operationally sensitive because tooling can read or sync
   them.
