@@ -3,7 +3,7 @@
   "slug": "pacific-check-cashing-financial",
   "category": "credit-repair",
   "subcategories": [],
-  "description_short": "Pacific Check Cashing & Financial Services — financial services in Jersey City, NJ.",
+  "description_short": "Pacific Check Cashing & Financial Services \u2014 financial services in Jersey City, NJ.",
   "description_long": "Pacific Check Cashing & Financial Services provides financial services. Located at 315 Pacific Ave, Jersey City, NJ 07304.",
   "logo_url": "",
   "website_url": "",
@@ -79,13 +79,19 @@
     "phone": "",
     "working_hours": {}
   },
-  "processing_status": "raw",
+  "processing_status": "pending_approval",
   "quality_score": 0,
   "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
   "no_index": true,
   "contact": {
     "phone": "",
     "address": ""
-  }
+  },
+  "review_upgrade_batch": "TRIAGE-DATA",
+  "review_upgrade_status": "source_category_hold_noindex",
+  "review_upgrade_at": "2026-05-23",
+  "review_upgrade_note": "Name/address suggest check-cashing/financial services but DB category is credit repair and source depth is thin; keep noindex until category/source validation.",
+  "indexing_decision": "hold_until_category_verified",
+  "exclude_from_review_upgrade_queue": true,
+  "brand_slug": null
 }

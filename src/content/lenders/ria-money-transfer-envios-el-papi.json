@@ -3,7 +3,7 @@
   "slug": "ria-money-transfer-envios-el-papi",
   "category": "credit-repair",
   "subcategories": [],
-  "description_short": "Ria Money Transfer - Envios El Papi — Servicio de transferencias de dinero in San Diego, CA.",
+  "description_short": "Ria Money Transfer - Envios El Papi \u2014 Servicio de transferencias de dinero in San Diego, CA.",
   "description_long": "Ria Money Transfer - Envios El Papi provides Servicio de transferencias de dinero. Located at 3495 University Ave, San Diego, CA 92104.",
   "logo_url": "https://www.riamoneytransfer.com/_next/static/media/ria-logo.94de361a.svg",
   "website_url": "https://www.riamoneytransfer.com/en-us/",
@@ -101,14 +101,20 @@
       ]
     }
   },
-  "processing_status": "failed_quarantine",
+  "processing_status": "pending_approval",
   "quality_score": 0,
   "enrichment_attempts": 0,
-  "last_engine_run": "2026-03-31",
   "no_index": true,
   "quarantine_reason": "food_not_financial",
   "contact": {
     "phone": "",
     "address": ""
-  }
+  },
+  "review_upgrade_batch": "HOLD-JOIN",
+  "review_upgrade_status": "money_services_rebuild_candidate_noindex",
+  "review_upgrade_at": "2026-05-23",
+  "review_upgrade_note": "Ria money transfer location appears to be money-services, not credit repair. Keep noindex; candidate for chain/money-services rebuild, not normal review upgrade.",
+  "indexing_decision": "rebuild_as_money_services_before_index_decision",
+  "exclude_from_review_upgrade_queue": true,
+  "brand_slug": null
 }

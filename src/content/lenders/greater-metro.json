@@ -103,12 +103,18 @@
   "cities_served": [],
   "phone": "",
   "address": ",  ",
-  "processing_status": "failed_quarantine",
+  "processing_status": "pending_approval",
   "quality_score": 7,
   "enrichment_attempts": 1,
   "no_index": true,
   "website_needs_review": true,
   "has_been_enriched": true,
-  "last_engine_run": "2026-04-07",
-  "quarantine_reason": "not_consumer_finance"
+  "quarantine_reason": "not_consumer_finance",
+  "review_upgrade_batch": "HOLD-JOIN",
+  "review_upgrade_status": "bad_source_archive_hold_noindex",
+  "review_upgrade_at": "2026-05-23",
+  "review_upgrade_note": "Stored source points to Merriam-Webster dictionary, not a finance provider; keep noindex and exclude from upgrade/index queues unless correct entity source is found.",
+  "indexing_decision": "do_not_index_without_new_source_evidence",
+  "exclude_from_review_upgrade_queue": true,
+  "brand_slug": null
 }
