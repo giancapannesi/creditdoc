@@ -87,6 +87,57 @@ Implementation slice completed locally 2026-05-19:
   - `https://www.creditdoc.co/resources/debt-credit-letter-templates/cease-and-desist-debt-collector-letter/`
   - `https://www.creditdoc.co/resources/debt-credit-letter-templates/pay-for-delete-letter/`
 
+## 2026-05-21 — Robots/Sitemap Search Console Incident
+
+Founder reported new GSC reason: `Blocked by robots.txt`.
+
+Root cause verified: the new letter pages were not blocked. The conflict was
+`https://www.creditdoc.co/search/`: `public/robots.txt` correctly protects
+`/search/`, but Astro sitemap auto-discovered `src/pages/search.astro` and
+submitted `/search/` in `sitemap-3.xml`.
+
+Fix shipped 2026-05-21:
+
+- Keep `public/robots.txt` protected with `Disallow: /search/`.
+- Add `@astrojs/sitemap` `filter()` in `astro.config.mjs` to exclude `/search/`.
+- Add post-build guard `scripts/check_sitemap_robots_conflicts.mjs`.
+- Add `npm run postbuild` so future builds fail if a robots-blocked URL is
+  submitted in generated XML sitemaps.
+- Cloudflare Worker Version ID: `d21bbcf9-0414-4dd1-8997-d6467a1fe5e0`
+- Verified live:
+  - `https://www.creditdoc.co/robots.txt` returns `200 text/plain` and still
+    contains `Disallow: /search/`.
+  - `sitemap-0.xml` through `sitemap-3.xml` contain zero `/search/` URLs.
+  - Letter-template pages still return `200 text/html`.
+
+Important: do not "fix" this class of warning by removing robots protection.
+Keep robots protected and exclude protected/internal URLs from sitemaps.
+
+Follow-up shipped 2026-05-21:
+
+- Added explicit `/sitemap.xml` route redirecting `301` to `/sitemap-index.xml`
+  because live `/sitemap.xml` returned `404` even though robots pointed at the
+  correct sitemap index.
+- Cloudflare Worker Version ID: `2af08802-edd7-47c6-852f-4a6128d69689`
+- Verified live:
+  - `https://www.creditdoc.co/sitemap.xml` returns `301` to
+    `https://www.creditdoc.co/sitemap-index.xml`.
+  - `https://www.creditdoc.co/sitemap-index.xml` returns `200 application/xml`.
+
+Same-day GSC audit:
+
+- Report: `/srv/BusinessOps/data/creditdoc_gsc_audit/gsc_audit_2026-05-21.md`
+- Inspected 528 URLs across 12 buckets: 253 indexed, 275 not indexed.
+- Main non-indexing reason is `URL is unknown to Google`, concentrated in
+  brand, browse, compare, state, city, and newer root/guide URLs.
+- Review-page non-indexing is mostly `Alternate page with proper canonical tag`;
+  sample URLs inspected live during the incident had current `www` canonicals,
+  so these rows appear mostly stale from older Google crawls.
+- One review URL was reported as `Excluded by noindex tag`:
+  `/review/electrical-workers-no-22/`. Local content has
+  `processing_status: ready_for_index`; recheck live HTML and GSC after DNS is
+  stable before changing content.
+
 ---
 
 ## CRITICAL RULES
@@ -162,3 +213,686 @@ Implementation slice completed locally 2026-05-19:
 - Don't pause any content pipeline without Jammi approval
 - Don't conflate Vercel with CreditDoc (it's Cloudflare Workers)
 - Don't display unverified data as fact — ever — on a YMYL financial site
+
+
+## 2026-05-22 - CreditDoc Click Growth Review Pages Workpack
+
+Saved a memorable review-page SEO workpack at:
+
+`/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Click_Growth_Review_Pages_2026-05-22`
+
+The workpack uses real stored GSC data only. Latest pull used: `pull_id=10`, window `2026-04-17` to `2026-05-15`. It contains top review pages by impressions, page-one review pages, a scored priority worklist, latest top queries, and verified findings from `src/pages/review/[slug].astro`.
+
+Immediate next SEO task: optimise review pages that already have impressions/page-one positions but low or zero clicks, especially commercial categories and pages whose listing status/metadata may be weak. Memory Palace mirror: `/root/.claude/projects/-srv-BusinessOps/memory/creditdoc_click_growth_review_pages_2026-05-22.md`.
+
+## 2026-05-22 - Review Page Growth Plan + Safe Slice
+
+Saved the comprehensive implementation plan:
+
+`/srv/BusinessOps/creditdoc/docs/plans/2026-05-22-review-page-growth.md`
+
+Easy pointer in Project Improvement:
+
+`/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Growth_Plan_2026-05-22.md`
+
+Created Batch 1 from real GSC data only:
+
+`/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Growth_Batch_1_2026-05-22.csv`
+
+Batch notes:
+
+`/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Growth_Batch_1_Notes_2026-05-22.md`
+
+Safe code slice completed locally:
+
+- Added `getAnswersByPillarRuntime()` in `src/lib/db.ts`.
+- Added a category-aware `Related Questions` block to `src/pages/review/[slug].astro`, linking review pages to existing `/answers/` rows by answer pillar.
+- Fixed the review page mini-quiz category matching so it uses actual slug categories like `credit-repair`, `personal-loans`, and `debt-relief` instead of phrase checks like `credit repair`.
+- Ran `npm run build`; build passed, including robots contract, SSR sitemap parity, and sitemap/robots conflict postbuild checks.
+
+No deployment performed. Do not deploy from the current dirty worktree unless the release scope is intentionally reviewed.
+
+## 2026-05-23 - CreditDoc SEO Growth Skill
+
+Created and validated a dedicated Codex skill for CreditDoc SEO work:
+
+`/srv/BusinessOps/.agents/skills/creditdoc-seo-growth/SKILL.md`
+
+Purpose: make future Codex sessions follow the CreditDoc-specific SEO operating method: real GSC data first, database as source of truth, YMYL-safe metadata, review-page batching, internal linking, build verification, and post-change measurement.
+
+Validation: `python3 /root/.codex/skills/.system/skill-creator/scripts/quick_validate.py /srv/BusinessOps/.agents/skills/creditdoc-seo-growth` returned `Skill is valid!`
+
+## 2026-05-23 - Review Page Upgrade Pilot: Marco's Credit Services
+
+Completed the first one-page review upgrade pilot using the protected-page workflow.
+
+Pilot page:
+
+`https://www.creditdoc.co/review/marcos-credit/`
+
+Why this page:
+
+- Batch 1 page with 72 impressions, 0 clicks, average position 4.4.
+- `ready_for_index`, `quality_score=11`.
+- `is_protected=1`, so it proved the FA/founder-protected workflow.
+
+Reusable template saved:
+
+`/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Template_2026-05-23.md`
+
+Pilot notes saved:
+
+`/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Marcos_Credit_2026-05-23.md`
+
+DB changes applied via `CreditDocDB.update_lender(..., updated_by='founder')`:
+
+- Added `seo_title`: `Marco's Credit Services Review: Credit Repair in Dallas, TX`
+- Replaced truncated `meta_description` with a complete factual description.
+- Replaced messy/off-category `similar_lenders` with cleaner credit-repair comparables from existing DB rows.
+
+Verification:
+
+- DB update changed 3 fields, with no blocked wipes or replacements.
+- `is_protected` remained `1`.
+- Audit log recorded all 3 fields changed by `founder`.
+- Live page returned `200`.
+- Live title/meta/canonical updated.
+- Live page has no `noindex`.
+
+## 2026-05-23 - Review Template Deploy For Live Preview
+
+Deployed the reviewed review-page template/runtime slice from an isolated clean worktree, not from the dirty main repo.
+
+Deploy copy:
+
+`/tmp/creditdoc-review-deploy-20260523070435`
+
+Files intentionally included in the deploy copy:
+
+- `astro.config.mjs`
+- `package.json`
+- `scripts/check_robots_contract.mjs`
+- `scripts/check_sitemap_robots_conflicts.mjs`
+- `src/pages/sitemap.xml.ts`
+- `src/lib/db.ts`
+- `src/pages/review/[slug].astro`
+- Current local DB mirror copied only for build-time sitemap generation.
+
+Files intentionally not included: unrelated modified `src/content/lenders/*.json` files from the dirty main worktree.
+
+What shipped:
+
+- Review pages now render a category-aware `Related Questions` block from existing `/answers/` rows.
+- Review-page mini quiz category scoring now uses real category slugs instead of phrase substring checks.
+- Existing sitemap/robots safeguards remained active.
+
+Verification:
+
+- Isolated build passed after copying the current local DB mirror: robots contract OK, SSR sitemap parity OK, `16051` SSR route URLs injected, sitemap/robots postbuild OK.
+- `./deploy.sh` succeeded.
+- Cloudflare Worker Version ID: `c150ba08-345c-4d94-b7c8-1746f3119764`
+- Live smoke checks passed: homepage, CSS, `/credit-guide/austin-tx/`, `/review/lexington-law/`, `/answers/best-debt-consolidation-loans-bad-credit/`, `/best/best-credit-repair-companies/`.
+- `https://www.creditdoc.co/review/marcos-credit/` returns `200`, remains indexable, has the new title/meta, and now shows the `Related Questions` block.
+
+## 2026-05-23 - Review Page Stickiness / Intent Bridge Deploy
+
+Added and deployed a compact review-page intent bridge after `Related Questions`.
+
+Purpose: make review pages more useful to real visitors and AI readers without dumping more content onto the page. The section is visible and factual, not hidden SEO text.
+
+What shipped:
+
+- `Quick Summary` with three factual bullets: what the provider is, what the page helps verify, and where the user can continue.
+- `Next Steps` links mapped to common visitor intent:
+  - Find contact or location
+  - Check specific services
+  - Match your need via the fit quiz
+  - Compare alternatives
+  - Improve your position via the relevant financial wellness guide
+  - Learn the basics via the free Credit Fundamentals course
+- Added section anchors for `#services`, `#contact-location`, `#related-companies`, and existing `#fit-quiz`.
+
+Deploy safety:
+
+- Built and deployed from isolated worktree `/tmp/creditdoc-review-deploy-20260523070435`.
+- Repaired the isolated `/tmp/tools/.supabase-creditdoc.env` lookup before deploy so sitemap enrichment matched the main build: 85 city guides, 1530 category sub-pages, 17666 SSR URLs injected.
+- Did not include unrelated dirty lender JSON changes.
+
+Verification:
+
+- Main build passed.
+- Isolated build passed with full sitemap enrichment and sitemap/robots postbuild check.
+- `./deploy.sh` passed.
+- Cloudflare Worker Version ID: `aac915bf-29b9-411f-8446-fd1111ac9a4c`
+- Live `https://www.creditdoc.co/review/marcos-credit/` returned `200` and contains `Quick Summary`, `Find contact or location`, `Check specific services`, `Match your need`, `Compare alternatives`, `Improve your position`, and `Learn the basics`.
+
+## 2026-05-23 - Review Rollout Order Changed: Raw/Blank Rows First
+
+Jammi corrected the rollout order: before upgrading the clean `ready_for_index`
+review pages in normal SEO batches, handle the raw/quarantine/pending and blank
+GSC rows first because they are already getting impressions and could receive
+potential clicks.
+
+New rollout folder:
+
+`/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/`
+
+Files:
+
+- `README.md` - phased rollout plan.
+- `review_page_rollout_queue_250.csv` - full 250-page GSC-visible queue.
+- `phase_1_raw_blank_triage_queue.csv` - first-priority risky rows.
+
+Phase 1 audit result from the 250-page GSC priority workpack:
+
+- `53` risky rows total.
+- `19` DB-backed raw/quarantine rows are live `404` at the review URL.
+- `1` pending page is live `200` with `noindex, nofollow`.
+- `32` rows are missing from the local DB under the GSC slug and are live `404`.
+- `1` URL-encoded slug join gap: `joyeria-empe%C3%B1os` maps to DB slug `joyeria-empeños` and resolves live.
+
+New execution order:
+
+1. Resolve/classify all `53` risky rows first.
+2. Only then start `REVIEW-UPGRADE-01` through `REVIEW-UPGRADE-14` for the `197` clean `ready_for_index` GSC-visible pages.
+3. Keep batches small and live-audited; do not do a giant all-pages update.
+
+## 2026-05-23 - Phase 1 Risky Review Queue Cleaned From Live 404s
+
+Phase 1 of the review-page cleanup now has a verified live state:
+
+- `32` risky rows were rescued to DB-backed `pending_approval` pages and return `200` with `noindex, nofollow`.
+- `20` true missing/stale GSC review slugs now `302` to relevant live category or city/category pages.
+- `1` encoded slug, `joyeria-empe%C3%B1os`, resolves live `200`.
+- `0` rows in the Phase 1 risky queue remain live `404`.
+
+Deploy:
+
+- Isolated worktree: `/tmp/creditdoc-review-deploy-20260523070435`.
+- Command: `./deploy.sh`.
+- Worker Version ID: `fffa9c34-048a-45c0-a8ea-6808ffadc509`.
+- Deploy smoke checks passed.
+
+Evidence:
+
+- Queue: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_raw_blank_triage_queue.csv`.
+- Checkpoint: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/PHASE_1_CHECKPOINT_2026-05-23.md`.
+
+Important:
+
+- The rescued pages are not approved for indexing yet.
+- Next work is manual quality review of the `32` pending/noindex rows in small batches: keep noindex, archive, enrich, or approve only after factual review.
+
+Follow-on quality audit:
+
+- Created `phase_1_pending_noindex_quality_review_queue.csv`.
+- Created `PHASE_1_PENDING_NOINDEX_QUALITY_REVIEW.md`.
+- Initial split: `12` rows need enrichment/manual review before indexing; `20` rows should stay noindex or be considered for archive/rebuild after validation.
+- Redirected 3 suspect rescued profiles instead of showing weak/bad review pages: `greater-metro`, `jm-auto-title-service-titulos-y-placas-surety-bond-title`, `the-ivy-league-solutions`.
+- Increased sitemap city-guide fetch timeout from `5s` to `20s`; verified full sitemap enrichment before deploy.
+- Follow-up Worker Version ID: `b3b57d61-d978-4201-a9d2-5d947b8eee8f`.
+- Final Phase 1 audit: `29` rescued rows are `200 noindex,nofollow`; `23` rows are `302` to live `200` destinations; `1` encoded slug resolves `200`; `0` rows remain live `404`.
+- Added factual DB-backed `seo_title` and `meta_description` to the 9 manual-review lane rows. Live verification confirmed updated titles/metas are visible and all 9 still return `noindex, nofollow`.
+- Final follow-up redirected 4 additional mismatched hold-lane pages. Latest Worker Version ID: `f599f32b-a481-416e-924f-294c1e5d3fc3`.
+- Current final Phase 1 audit: `25` rescued rows are `200 noindex,nofollow`; `27` rows are `302` to live `200` destinations; `1` encoded slug resolves `200`; `0` rows remain live `404`.
+- Jammi approved `tax-debt-relief-alphabet-city` after manual review. DB-only update set it `ready_for_index`, removed `no_index`, and marked `review_status=approved`; live verification confirmed no robots `noindex`.
+- Current queues were uploaded to Google Drive as Google Sheets in `SEO Reports / CreditDoc`.
+- Operating rule: individual manual approvals are incremental DB updates. Do not rebuild/redeploy the full site for each single approval; batch sitemap refreshes unless immediate sitemap deployment is specifically requested.
+- Manual review correction: Jammi said the original list was not good; treat the Phase 1 list as a cleanup worklist, not approval-ready pages.
+- Rejected/held: `ny-identity-theft-group` category mismatch, `four-brothers-money-orders-and-bill-payment` missing content.
+- Deleted/archived: `luxury-lifestyles-the-buying-house`.
+- Vigo group: 45 Vigo records removed from index eligibility via DB-only updates (`no_index=true`, `review_status=needs_vigo_group_rework`, `vigo_group_fix_required=true`; ready rows moved to `pending_approval`). Representative live checks confirmed `noindex,nofollow`.
+- Drive sheets refreshed: `CreditDoc Phase 1 Cleanup Worklist - 2026-05-23` and `CreditDoc Vigo Group Fix Audit - 2026-05-23`.
+
+Vigo follow-up repair completed 2026-05-23:
+
+- DB backup before writes: `data/backups/creditdoc_before_vigo_chain_repair_2026-05-23.sqlite`.
+- Patched `tools/creditdoc_db.py` so `CreditDocDB.update_lender()` carries `brand_slug` and `state` through local catalog writes and Supabase upsert payloads.
+- Applied DB-only noindex-safe chain/location repair to all 45 Vigo rows:
+  - `brand_slug=vigo`
+  - `category=check-cashing`
+  - `processing_status=pending_approval`
+  - `no_index=true`
+  - `review_status=chain_repaired_pending_founder_review`
+  - factual location-led title/meta/description/best_for/pros/cons from existing DB fields only
+- Verification:
+  - `python3 -m py_compile tools/creditdoc_db.py` passed.
+  - Local DB count: 45 Vigo rows under `brand_slug=vigo`, `category=check-cashing`, `pending_approval`, `no_index=true`.
+  - Supabase samples (`vigo-kansas-city`, `vigo-seattle-wa`, `vigo-long-beach`, `vigo-west-new-york`) show `brand_slug=vigo`, `category=check-cashing`, `no_index=true`.
+  - Live samples still show `noindex,nofollow` and now show location-led Vigo copy.
+- Report: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/VIGO_CHAIN_REPAIR_2026-05-23.md`.
+- Applied CSV: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/CreditDoc_vigo_chain_repair_applied_2026-05-23.csv`.
+- Do not index Vigo until Jammi samples the batch. Create/review a `/brand/vigo/` record before any future promotion.
+
+# CreditDoc Review Page Regulatory Context Discovery - 2026-05-23
+
+Jammi identified that CreditDoc's regulatory data layer should be one of the strongest differentiators and expected it to be wired into review pages. Discovery confirmed it is only partially wired.
+
+Key finding:
+
+- Federal/company regulator data is present in `/srv/BusinessOps/creditdoc/data/regulator.db` and synced to Supabase tables:
+  - `regulator_company_stats`
+  - `regulator_enforcement`
+  - `regulator_sba_rankings`
+- State-law regulatory data is present in Supabase `states.body_inline` and local `src/content/states.json`.
+- Local `state_regulatory_data` table exists in `creditdoc.db`, but has `0` rows and is not available in Supabase.
+- Review pages currently render only company-level regulator data through `getRegulatorDataRuntime(lender.slug, env)` in `src/lib/db.ts` / `src/pages/review/[slug].astro`.
+- `getRegulatorDataRuntime()` is gated by `ENABLE_REGULATOR_BLOCKS=true` and only returns data when a matched company has `match_confidence >= 0.85` and `total_complaints_alltime >= 5`.
+- Vigo has no company-level CFPB/enforcement match in `regulator.db`, so no regulator block appears.
+- State-law data is already used on `/state/`, `/state/[slug]/lending-laws/`, `/city/`, `/browse/`, and `/credit-guide/`, but it is not wired into `/review/[slug]/`.
+
+Strategic conclusion:
+
+- The next high-leverage quality improvement is a reusable review-page `State Consumer Finance Context` / `Regulatory Context` block.
+- It should fetch existing `states.body_inline` by lender `company_info.state` / state abbreviation and render conservative, category-aware state context.
+- This is a major differentiator: directory + location + services + regulatory context.
+
+Safe wording rules:
+
+- Present state-level consumer finance context only.
+- Do not claim a specific lender/location is licensed unless direct license proof is present.
+- Do not apply FDIC/NCUA/HMDA data unless the lender record is actually matched to bank/credit-union/mortgage data.
+- For Vigo/check-cashing/money-services pages, use state regulator, complaint resources, payday/installment/check-cashing/money-services context where available; avoid bank-specific claims.
+
+Recommended implementation order:
+
+1. Add a reusable review-page regulatory context component fed from `states.body_inline`.
+2. Show it only when the lender has a state.
+3. Start with noindexed Vigo pages as pilot.
+4. Verify wording/live rendering while noindexed.
+5. Roll out more broadly to review pages after build/deploy review.
+6. Later enrich state data further with official money-transmitter/check-casher license lookup URLs where verifiable.
+
+Important: This touches YMYL presentation. Keep language factual and cautious. No unverified licensing, pricing, or compliance claims.
+
+Implementation progress 2026-05-23:
+
+- Added `src/components/StateRegulatoryContext.astro`.
+- Wired `/review/[slug]/` to fetch `getStateByCodeRuntimeFromDb(stateAbbr, env)` and render the new block when a lender row has a resolvable state.
+- The block is deliberately conservative:
+  - labels the section as state-level consumer finance context;
+  - says it does not confirm that the lender or location is licensed;
+  - separates this from company-specific CFPB/enforcement/HMDA blocks;
+  - shows state regulator, consumer protection agency, complaint resources, selected statute links, and category-aware credit/loan/money-services context from existing `states.body_inline`.
+- Verification: `npm run build` passed on 2026-05-23, including prebuild robots/parity checks and postbuild sitemap/robots conflict check.
+- No deploy was performed in this step.
+- Sequencing remains: finish the original Phase 1 bad-page cleanup / 33-page work first, then move to the 250 review-page upgrade queue in controlled batches.
+
+Phase 1 status tidy 2026-05-23:
+
+- Created DB backup: `data/backups/creditdoc_before_phase1_status_tidy_2026-05-23.sqlite`.
+- Marked 9 noindexed Phase 1 hold rows with explicit `review_status` values so they stop appearing as generic `draft` rows:
+  - 7 weak rows -> `quality_hold_noindex_needs_validation`
+  - `ny-identity-theft-group` -> `category_mismatch_noindex_founder_review`
+  - `four-brothers-money-orders-and-bill-payment` -> `content_rebuild_required_noindex_founder_review`
+- All 9 remain `processing_status=pending_approval` and `no_index=true`.
+- Supabase mirror verified after replaying 6 timed-out writes from the retry queue.
+- Live spot checks confirmed `noindex,nofollow` for `ny-identity-theft-group`, `four-brothers-money-orders-and-bill-payment`, and `the-debt-crushers`.
+- Created cleaned queue: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_remaining_action_queue_2026-05-23.csv`.
+- Remaining Phase 1 action rows: 17.
+- Report: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/PHASE_1_STATUS_TIDY_2026-05-23.md`.
+
+Phase 1 validation classification 2026-05-23:
+
+- Created DB backup: `data/backups/creditdoc_before_phase1_validation_classification_2026-05-23.sqlite`.
+- Classified 9 weak/rejected noindex rows using public validation evidence where available.
+- Category-corrected `envios-de-dinero-money-orders-pago-de-billes` from `emergency-cash` to `check-cashing` because it is a money-transfer / money-orders / bill-payment listing and CreditDoc's closest category is `Check Cashing & Money Services`.
+- Added `validation_notes` and specific `review_status` values for:
+  - `the-debt-crushers`
+  - `a-loans-checks-cashed`
+  - `fix-my-auto-credit-score`
+  - `my-credit-advice-credit-repair-and-consultation`
+  - `envios-de-dinero-money-orders-pago-de-billes`
+  - `808-credit-pros`
+  - `dac-credit-repair`
+  - `ny-identity-theft-group`
+  - `four-brothers-money-orders-and-bill-payment`
+- All affected rows remain `pending_approval` and `no_index=true`.
+- Supabase mirror verified; pending retry rows for these slugs: `0`.
+- Report: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/PHASE_1_VALIDATION_CLASSIFICATION_2026-05-23.md`.
+- Classified CSV: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_remaining_action_queue_classified_2026-05-23.csv`.
+
+Phase 1 manual-candidate classification 2026-05-23:
+
+- Created backup: `data/backups/creditdoc_before_phase1_manual_candidate_classification_2026-05-23.sqlite`.
+- Classified all 8 metadata-enriched manual-review rows; all remain `pending_approval` and `no_index=true`.
+- Notable findings:
+  - `ez-credit-disputes` is BBB-validated as credit repair, but stored website is wrong.
+  - `snap-loans-cash-orlando` official site returns 200, but needs YMYL review before indexing because it is loan matching / lead-gen.
+  - `life-changers-agency` appears to be tax preparation, not credit repair.
+  - `rose-financial-solutions` official site is outsourced finance/accounting/FaaS, not consumer credit repair.
+  - `credit-repair-outfit-philadelphia` has public listing evidence, but stored website is likely wrong.
+- Supabase mirror verified; pending retry rows: `0`.
+- Final decision matrix saved:
+  - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_final_decision_matrix_2026-05-23.csv`
+  - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/PHASE_1_FINAL_DECISION_MATRIX_2026-05-23.md`
+
+Phase 1 wrong website cleanup 2026-05-23:
+
+- Created backup: `data/backups/creditdoc_before_phase1_wrong_website_cleanup_2026-05-23.sqlite`.
+- Removed clearly wrong/nonfunctional website fields from 4 noindexed rows:
+  - `credit-repair-outfit-philadelphia`
+  - `ez-credit-disputes`
+  - `rose-financial-solutions`
+  - `crushing-on-credit`
+- All 4 remain `processing_status=pending_approval` and `no_index=true`.
+- Supabase retry rows for these 4 slugs: `0`.
+- Live verification confirmed all 4 still show `noindex,nofollow`, and removed outbound domains no longer appear in the live HTML.
+- Report: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/PHASE_1_WRONG_WEBSITE_CLEANUP_2026-05-23.md`.
+- Remaining issue: some noindexed generated page copy/schema can still carry old category assumptions. Next pass should decide archive, redirect, rebuild, or manual approval before any indexing.
+
+Review held-page schema guard 2026-05-23:
+
+- Updated `src/pages/review/[slug].astro` so held/skeleton/noindexed pages emit breadcrumb schema only.
+- Ready/indexable review pages keep existing entity/review/aggregate-rating/FAQ schema behavior.
+- Removed stale fallback meta wording that said `review with pricing, ratings, and features`; fallback now uses services/contact/review signals/alternatives.
+- Verification: `npm run build` passed, including robots contract, SSR sitemap parity, and sitemap/robots conflict check.
+- No deploy was performed.
+- Report: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/REVIEW_HELD_PAGE_SCHEMA_GUARD_2026-05-23.md`.
+
+Phase 1 decision buckets and neutralization 2026-05-23:
+
+- Added durable `phase1_decision_*` fields to the 17 remaining held rows.
+- Refreshed queue:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_decision_bucket_queue_2026-05-23.csv`
+- Neutralized visible generated claims on 12 unresolved rows so accidental visitors see held-for-review copy instead of confident category/service claims:
+  - archive candidates: `808-credit-pros`, `fix-my-auto-credit-score`, `four-brothers-money-orders-and-bill-payment`
+  - archive/redirect candidates: `ny-identity-theft-group`, `rose-financial-solutions`, `life-changers-agency`
+  - source/category/location holds: `a-loans-checks-cashed`, `dac-credit-repair`, `my-credit-advice-credit-repair-and-consultation`, `the-debt-crushers`, `mycredit-smash`, `the-peeples-solution`
+- Removed TaxBuzz website/logo from `life-changers-agency`.
+- Rebuilt `envios-de-dinero-money-orders-pago-de-billes` as conservative money-services copy; still noindexed pending manual review.
+- Cleaned `ez-credit-disputes` as a manual approval candidate after wrong website removal; still noindexed pending manual review.
+- All 17 rows remain `pending_approval` and `no_index=true`.
+- Supabase unresolved retry rows for these 17 slugs: `0`.
+- No `REVALIDATE_TOKEN` was present in `/srv/BusinessOps/.env`, so cache revalidation was not forced.
+- No deploy was performed.
+- Report: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/PHASE_1_DECISION_BUCKET_AND_NEUTRALIZATION_2026-05-23.md`.
+
+Phase 1 final three neutralization 2026-05-23:
+
+- Neutralized the remaining 3 non-neutral held pages:
+  - `snap-loans-cash-orlando`
+  - `credit-repair-outfit-philadelphia`
+  - `crushing-on-credit`
+- Removed outbound `orlando.snaploans.cash` and logo from `snap-loans-cash-orlando` while YMYL/manual review is pending.
+- All 17 remaining Phase 1 rows remain `pending_approval` and `no_index=true`.
+- Full Phase 1 state now:
+  - 15 neutralized held pages
+  - 1 rebuilt pending manual review: `envios-de-dinero-money-orders-pago-de-billes`
+  - 1 cleaned pending manual review: `ez-credit-disputes`
+- Narrow scan of the 15 neutralized rows found no remaining dollar loan amounts, next-business-day funding, bad-credit marketing, guarantee/money-back language, verified-lender claims, or inflated 5.0/exceptional-reputation phrasing in visible description/pros/cons/service fields.
+- Supabase unresolved retry rows for the final 3 slugs: `0`.
+- No deploy was performed.
+- Report: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/PHASE_1_FINAL_THREE_NEUTRALIZATION_2026-05-23.md`.
+
+Phase 1 final treatment labels 2026-05-23:
+
+- Added proposed final-treatment labels to the 15 neutralized held rows.
+- No redirects were implemented; this is decision labeling only.
+- Queue:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_neutralized_final_treatment_queue_2026-05-23.csv`
+- Treatment counts:
+  - `archive_hold`: 5
+  - `redirect_candidate`: 3
+  - `hold_for_research`: 4
+  - `hold_for_manual_review`: 1
+  - `resolve_or_redirect_candidate`: 1
+  - `ymyl_hold_or_redirect_candidate`: 1
+- All labeled rows remain `pending_approval` and `no_index=true`.
+- Supabase unresolved retry rows for the 15 labeled slugs: `0`.
+- No deploy was performed.
+- Report: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/PHASE_1_FINAL_TREATMENT_LABELS_2026-05-23.md`.
+
+Phase 1 review deploy 2026-05-23:
+
+- Deployed via `/srv/BusinessOps/creditdoc/deploy.sh`.
+- Build, deploy, cache purge, and smoke checks passed.
+- Worker version: `24ffa62d-d8ba-48fa-b8b3-c7c60b0ffa35`.
+- Live checks confirmed:
+  - `snap-loans-cash-orlando` is held/noindex and the removed Snap outbound domain did not appear.
+  - `ez-credit-disputes` is noindex.
+  - `envios-de-dinero-money-orders-pago-de-billes` is noindex with rebuilt money-services copy.
+  - `lexington-law` still emits rich review schema signals.
+- Report: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/PHASE_1_REVIEW_DEPLOY_2026-05-23.md`.
+
+Founder live review approvals 2026-05-23:
+
+- Jammi reviewed and approved these live pages as acceptable:
+  - `ez-credit-disputes`
+  - `envios-de-dinero-money-orders-pago-de-billes`
+- Database fields added:
+  - `founder_review_status=approved_by_jammi`
+  - `phase1_manual_review_result=approved_for_next_indexing_decision`
+  - `founder_reviewed_at=2026-05-23`
+- Both pages remain `no_index=true` until an explicit indexing batch decision.
+- Backup before approval markers:
+  `data/backups/creditdoc_before_jammi_manual_approvals_2026-05-23.sqlite`
+
+Lexington Law approval 2026-05-23:
+
+- Jammi reviewed and approved `lexington-law` live page quality.
+- Current status remains `ready_for_index`; `no_index=false`.
+- Added `founder_review_status=approved_by_jammi` and
+  `founder_reviewed_at=2026-05-23`.
+- Backup before marker:
+  `data/backups/creditdoc_before_jammi_lexington_approval_2026-05-23.sqlite`
+
+Phase 1 remaining resolution pass 2026-05-23:
+
+- Closed 5 archive-hold rows as excluded from future review upgrade/index queues
+  unless new source evidence appears:
+  `808-credit-pros`, `a-loans-checks-cashed`, `dac-credit-repair`,
+  `fix-my-auto-credit-score`, `four-brothers-money-orders-and-bill-payment`.
+- Marked 3 category-mismatch pages as redirect-ready holds, but did not
+  implement redirects:
+  `life-changers-agency`, `ny-identity-theft-group`,
+  `rose-financial-solutions`.
+- Marked rebuild candidates:
+  `the-debt-crushers`, `crushing-on-credit`.
+- Kept research holds:
+  `credit-repair-outfit-philadelphia`,
+  `my-credit-advice-credit-repair-and-consultation`, `mycredit-smash`,
+  `the-peeples-solution`.
+- Kept `snap-loans-cash-orlando` as YMYL lead-generation hold.
+- All 15 remain `no_index=true`; unresolved Supabase retry rows: `0`.
+- Queue:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_remaining_resolution_queue_2026-05-23.csv`
+- Split queues:
+  - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_rebuild_candidates_2026-05-23.csv`
+  - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_redirect_candidates_2026-05-23.csv`
+  - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_research_and_ymyl_holds_2026-05-23.csv`
+- Live verification after classification: all 15 URLs return `200`, show
+  `noindex`, and do not emit `FinancialService` or `FAQPage` schema.
+- Report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/PHASE_1_REMAINING_RESOLUTION_PASS_2026-05-23.md`
+
+The Debt Crushers rebuild 2026-05-23:
+
+- Rebuilt `the-debt-crushers` from reachable official-site evidence.
+- Added cautious location caveat because sources reference both San Francisco
+  origin/listing evidence and Las Vegas expansion.
+- Kept `no_index=true`.
+- Set `review_status=rebuilt_pending_location_review_noindex`.
+- Set `founder_review_status=pending_jammi_review`.
+- Live check: page returns `200`, includes the rebuilt wording, remains
+  `noindex`, and does not emit `FinancialService` or `FAQPage` schema.
+- Report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/THE_DEBT_CRUSHERS_REBUILD_2026-05-23.md`
+
+Crushing on Credit rebuild 2026-05-23:
+
+- Rebuilt `crushing-on-credit` from trademark evidence and third-party New York
+  credit-repair listing evidence.
+- Kept provider website removed/unlinked because SSL/default-hosting issues
+  remain.
+- Kept `no_index=true`.
+- Set `review_status=rebuilt_pending_source_review_noindex`.
+- Set `founder_review_status=pending_jammi_review`.
+- Live check: page returns `200`, includes rebuilt credit consultation/credit
+  restoration wording, remains `noindex`, and does not emit `FinancialService`
+  or `FAQPage` schema.
+- Report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/CRUSHING_ON_CREDIT_REBUILD_2026-05-23.md`
+
+My Credit Advice rebuild 2026-05-23:
+
+- Rebuilt `my-credit-advice-credit-repair-and-consultation` as a cautious
+  noindex source-hold page from third-party address/phone/category evidence.
+- Kept explicit caveat that `mycreditadvice.com` still fails DNS from the VPS.
+- Kept `no_index=true`.
+- Set `review_status=rebuilt_third_party_source_hold_noindex`.
+- Set `founder_review_status=pending_jammi_review`.
+- Live check: page returns `200`, includes rebuilt Miami Gardens / DNS caveat,
+  remains `noindex`, and does not emit `FinancialService` or `FAQPage` schema.
+- Report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/MY_CREDIT_ADVICE_REBUILD_2026-05-23.md`
+
+Credit Repair Outfit Philadelphia rebuild 2026-05-23:
+
+- Rebuilt `credit-repair-outfit-philadelphia` as a cautious noindex source-check
+  page from exact third-party listing evidence.
+- Kept explicit caveat that no provider-owned website/source has been verified.
+- Kept `no_index=true`.
+- Set `review_status=rebuilt_thin_source_hold_noindex`.
+- Set `founder_review_status=pending_jammi_review`.
+- Live check: page returns `200`, includes the rebuilt third-party-source
+  caveat, remains `noindex`, and does not emit `FinancialService` or `FAQPage`
+  schema.
+- Report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/CREDIT_REPAIR_OUTFIT_REBUILD_2026-05-23.md`
+
+Snap Loans Cash Orlando YMYL rebuild 2026-05-23:
+
+- Rebuilt `snap-loans-cash-orlando` as a cautious noindex YMYL lead-generation
+  page.
+- Added clear marketplace / not-a-direct-lender / third-party-provider caveats.
+- Kept `no_index=true` and did not restore outbound provider link.
+- Set `review_status=rebuilt_ymyl_leadgen_hold_noindex`.
+- Set `founder_review_status=pending_jammi_review`.
+- Live check: page returns `200`, includes the rebuilt lead-gen caveat, remains
+  `noindex`, does not emit `FinancialService` or `FAQPage` schema, and
+  `orlando.snaploans.cash` remains absent.
+- Report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/SNAP_LOANS_CASH_ORLANDO_YMYL_REBUILD_2026-05-23.md`
+
+Phase 1 current outcome 2026-05-23:
+
+- Closed archive holds: 6.
+- Closed category-mismatch redirect-ready holds: 3.
+- Closed category-mismatch hold: 1.
+- Rebuilt / pending Jammi review or source policy: 5.
+- Pending Jammi review queue:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_rebuilt_pending_jammi_review_2026-05-23.csv`
+- Final safety verification: all 15 held URLs return `200`, remain `noindex`,
+  emit no `FinancialService` schema, emit no `FAQPage` schema.
+- Unresolved Supabase retry rows for the batch: `0`.
+
+Review upgrade batch 01 meta cleanup 2026-05-23:
+
+- Updated SEO titles/metas for 15 `REVIEW-UPGRADE-01` pages from the 250-page
+  rollout queue.
+- No index status changes.
+- All titles <=65 chars; all metas <=155 chars.
+- Unresolved Supabase retry rows: `0`.
+- Live spot checks confirmed updated title/meta output and no accidental
+  noindex on sampled pages.
+- CSV:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/review_upgrade_01_meta_updates_2026-05-23.csv`
+- Report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/REVIEW_UPGRADE_01_META_2026-05-23.md`
+
+Review upgrade batch 02 meta cleanup 2026-05-23:
+
+- Updated SEO titles/metas for 15 `REVIEW-UPGRADE-02` pages from the 250-page
+  rollout queue.
+- No index status changes.
+- All titles <=65 chars; all metas <=155 chars.
+- Unresolved Supabase retry rows: `0`.
+- Live spot checks confirmed updated title/meta output and no accidental
+  noindex on sampled pages.
+- CSV:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/review_upgrade_02_meta_updates_2026-05-23.csv`
+- Report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/REVIEW_UPGRADE_02_META_2026-05-23.md`
+
+Review upgrade batch 03 meta cleanup 2026-05-23:
+
+- Updated SEO titles/metas for 15 `REVIEW-UPGRADE-03` pages from the 250-page
+  rollout queue.
+- No index status changes.
+- All titles <=65 chars; all metas <=155 chars.
+- Unresolved Supabase retry rows: `0`.
+- Live spot checks confirmed updated title/meta output and no accidental
+  noindex on sampled pages.
+- CSV:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/review_upgrade_03_meta_updates_2026-05-23.csv`
+- Report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/REVIEW_UPGRADE_03_META_2026-05-23.md`
+
+Review upgrade batch 04 meta cleanup 2026-05-23:
+
+- Updated SEO titles/metas for 15 `REVIEW-UPGRADE-04` pages from the 250-page
+  rollout queue.
+- No index status changes.
+- All titles <=65 chars; all metas <=155 chars.
+- Unresolved Supabase retry rows: `0`.
+- Live spot checks confirmed updated title/meta output and no accidental
+  noindex on sampled pages.
+- CSV:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/review_upgrade_04_meta_updates_2026-05-23.csv`
+- Report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/REVIEW_UPGRADE_04_META_2026-05-23.md`
+
+Review upgrade batch 05 meta cleanup 2026-05-23:
+
+- Updated SEO titles/metas for 15 `REVIEW-UPGRADE-05` pages from the 250-page
+  rollout queue.
+- No index status changes.
+- All titles <=65 chars; all metas <=155 chars.
+- Unresolved Supabase retry rows: `0`.
+- Live spot checks confirmed updated title/meta output and no accidental
+  noindex on sampled pages.
+- Total review upgrade meta updates completed today: `75`.
+- CSV:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/review_upgrade_05_meta_updates_2026-05-23.csv`
+- Report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/REVIEW_UPGRADE_05_META_2026-05-23.md`
+
+Review rollout 250 completion 2026-05-23:
+
+- Completed all 250 rows in
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/review_page_rollout_queue_250.csv`.
+- Updated metadata for `REVIEW-UPGRADE-01` through `REVIEW-UPGRADE-14`:
+  197 queue rows / 196 unique DB slugs due one duplicate queue slug.
+- Resolved encoded HOLD-JOIN slug `joyeria-empe%C3%B1os` to DB slug
+  `joyeria-empeños` and updated metadata.
+- Classified all `TRIAGE-DATA` and `HOLD-JOIN` rows instead of forcing unsafe
+  normal upgrades.
+- Completion CSV:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/review_rollout_250_completion_status_2026-05-23.csv`
+- Verification:
+  - every queue row has a recorded outcome;
+  - no SEO title over 65 chars where present;
+  - no meta over 155 chars where present;
+  - queue-specific unresolved Supabase retry rows: `0`;
+  - sampled live pages showed updated metadata and correct index/noindex state.
+- Report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/REVIEW_ROLLOUT_250_COMPLETION_2026-05-23.md`
+
+Git cleanup and autonomous engine stop 2026-05-25:
+
+- Archived 577 dirty generated lender JSON versions to:
+  `/srv/BusinessOps/CreditDoc Project Improvement/git-cleanup-2026-05-25/`
+- Restored `src/content/lenders/*.json` tracked files because the database is
+  the source of truth and the dirty changes were generated/export churn.
+- Found the active writer: `creditdoc-engine.service` was still running
+  `/srv/BusinessOps/tools/creditdoc_engine_loop.sh` even though the cron entry
+  for `creditdoc_autonomous_engine.py` had been disabled.
+- Stopped and disabled `creditdoc-engine.service`.
+- Set `/etc/systemd/system/creditdoc-engine.service` to `Restart=no`.
+- Added an explicit guard to `/srv/BusinessOps/tools/creditdoc_engine_loop.sh`;
+  it now exits unless `/srv/BusinessOps/tools/.creditdoc-engine-enabled`
+  exists.
+- Do not restart this engine without Jammi approval. If it is intentionally
+  restarted later, first verify it no longer writes operational metadata such as
+  `last_engine_run` into tracked lender JSON files.

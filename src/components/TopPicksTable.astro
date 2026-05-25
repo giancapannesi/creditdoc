@@ -29,6 +29,7 @@ const sorted = lenders;
       {sorted.map((lender, i) => {
         const bbbClass = getBbbClass(lender.company_info.bbb_rating);
         const isVerified = lender.verified_provider === true;
+        const showGoogleRating = Boolean(lender.google_rating && lender.google_rating > 0 && !(lender.google_rating > 5) && lender.google_reviews_count && lender.google_reviews_count >= 1);
         return (
           <tr class={`hover:bg-bg-alt/50 transition-colors ${isVerified ? 'bg-amber-50/40 border-l-2 border-l-amber-400' : 'bg-white'}`}>
             <!-- Rank -->
@@ -64,9 +65,12 @@ const sorted = lenders;
                       </span>
                     )}
                   </div>
-                  <div class="mt-0.5">
-                    <RatingStars rating={lender.rating} size="sm" />
-                  </div>
+                  {showGoogleRating && (
+                    <div class="mt-0.5">
+                      <RatingStars rating={lender.google_rating} size="sm" />
+                      <p class="mt-0.5 text-[11px] text-muted">Google rating from {lender.google_reviews_count.toLocaleString()} reviews</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </td>

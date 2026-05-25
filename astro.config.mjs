@@ -71,7 +71,7 @@ function ssrSitemapPages() {
       if (anonKey) {
         const cgOut = execSync(
           `curl -s "https://pndpnjjkhknmutlmlwsk.supabase.co/rest/v1/city_guides?status=eq.ready_for_index&select=slug" -H "apikey: ${anonKey}" -H "Authorization: Bearer ${anonKey}"`,
-          { encoding: 'utf8', timeout: 5000 }
+          { encoding: 'utf8', timeout: 20000 }
         );
         const cityGuides = JSON.parse(cgOut);
         if (Array.isArray(cityGuides)) {
@@ -134,6 +134,13 @@ export default defineConfig({
       // Split into multiple sitemaps (~5000 URLs each) for crawl efficiency
       entryLimit: 5000,
       customPages: ssrPages,
+      // /search/ is an internal utility page with a page-level noindex meta.
+      // Do not submit it in XML sitemaps; Search Console otherwise reports it
+      // as a robots/indexing conflict when robots rules change.
+      filter(page) {
+        const url = new URL(page);
+        return url.pathname !== '/search/';
+      },
       // Set priority + changefreq per page type
       serialize(item) {
         const url = item.url;

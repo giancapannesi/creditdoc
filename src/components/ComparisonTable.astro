@@ -21,6 +21,12 @@ function ratingWinner(a: number, b: number): 'a' | 'b' | 'tie' {
   return a > b ? 'a' : 'b';
 }
 
+function googleRating(lender: Lender): number {
+  return lender.google_rating && lender.google_rating > 0 && !(lender.google_rating > 5) && lender.google_reviews_count && lender.google_reviews_count >= 1
+    ? lender.google_rating
+    : 0;
+}
+
 function bbbRank(rating: string): number {
   const ranks: Record<string, number> = { 'A+': 7, 'A': 6, 'B+': 5, 'B': 4, 'C+': 3, 'C': 2, 'C-': 1, 'F': 0 };
   return ranks[rating] ?? -1;
@@ -44,7 +50,7 @@ const winners = {
   setup: priceWinner(lenderA.pricing.setup_fee, lenderB.pricing.setup_fee),
   bbb: bbbWinner(lenderA.company_info.bbb_rating, lenderB.company_info.bbb_rating),
   guarantee: lenderA.pricing.money_back_guarantee === lenderB.pricing.money_back_guarantee ? 'tie' as const : (lenderA.pricing.money_back_guarantee ? 'a' as const : 'b' as const),
-  rating: ratingWinner(lenderA.rating, lenderB.rating),
+  rating: ratingWinner(googleRating(lenderA), googleRating(lenderB)),
 };
 
 const featureKeys: { key: keyof Lender['features']; label: string }[] = [
@@ -169,17 +175,31 @@ const winnerBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-ligh
 
       <!-- Rating -->
       <tr class="hover:bg-bg-alt/50 transition-colors">
-        <td class="py-3 px-4 font-medium text-text">Our Rating</td>
+        <td class="py-3 px-4 font-medium text-text">Google Rating</td>
         <td class="py-3 px-4 text-center">
           <div class="inline-flex flex-col items-center gap-1">
-            <RatingStars rating={lenderA.rating} size="sm" />
-            {winners.rating === 'a' && <span class={winnerBadge}>Best</span>}
+            {googleRating(lenderA) > 0 ? (
+              <>
+                <RatingStars rating={googleRating(lenderA)} size="sm" />
+                <span class="text-xs text-muted">{lenderA.google_reviews_count?.toLocaleString()} reviews</span>
+                {winners.rating === 'a' && <span class={winnerBadge}>Best</span>}
+              </>
+            ) : (
+              <span class="text-xs text-muted">No verified Google rating</span>
+            )}
           </div>
         </td>
         <td class="py-3 px-4 text-center">
           <div class="inline-flex flex-col items-center gap-1">
-            <RatingStars rating={lenderB.rating} size="sm" />
-            {winners.rating === 'b' && <span class={winnerBadge}>Best</span>}
+            {googleRating(lenderB) > 0 ? (
+              <>
+                <RatingStars rating={googleRating(lenderB)} size="sm" />
+                <span class="text-xs text-muted">{lenderB.google_reviews_count?.toLocaleString()} reviews</span>
+                {winners.rating === 'b' && <span class={winnerBadge}>Best</span>}
+              </>
+            ) : (
+              <span class="text-xs text-muted">No verified Google rating</span>
+            )}
           </div>
         </td>
       </tr>

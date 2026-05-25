@@ -5,16 +5,16 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Our Research Methodology",
-  "description": "How CreditDoc evaluates and rates credit repair companies, personal lenders, and financial services.",
+  "description": "How CreditDoc researches financial service providers and displays Google review ratings when available.",
   "url": "https://www.creditdoc.co/methodology/",
   "datePublished": "2026-03-15",
-  "dateModified": "2026-03-22"
+  "dateModified": "2026-05-25"
 };
 ---
 
 <BaseLayout
-  title="Our Research Methodology | How We Rate Credit Repair Companies - CreditDoc"
-  description="Learn how CreditDoc evaluates credit repair companies and financial services using our 5-factor rating system, including data sources, review process, and independence standards."
+  title="Our Research Methodology | Google Ratings & Editorial Review - CreditDoc"
+  description="Learn how CreditDoc researches credit repair companies and financial services, how visible star ratings use stored Google ratings, and how our editorial review process works."
   jsonLd={jsonLd}
 >
   <!-- Hero -->
@@ -23,7 +23,7 @@ const jsonLd = {
       <span class="inline-block rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-6">Methodology</span>
       <h1 class="text-4xl font-bold text-text sm:text-5xl">Our Research Methodology</h1>
       <p class="mt-6 text-lg text-muted leading-relaxed max-w-2xl mx-auto">
-        Every review and rating on CreditDoc follows a rigorous, repeatable research process. Here's exactly how we evaluate the companies featured on our site.
+        CreditDoc separates public Google review ratings from our own editorial research. Here is how we collect data, review companies, and decide what to show.
       </p>
     </div>
   </section>
@@ -32,11 +32,11 @@ const jsonLd = {
   <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
     <div class="space-y-16">
 
-      <!-- 5-Factor Rating System -->
+      <!-- Google Rating Policy -->
       <div>
-        <h2 class="text-2xl font-bold text-text mb-6">Our 5-Factor Rating System</h2>
+        <h2 class="text-2xl font-bold text-text mb-6">How Star Ratings Work</h2>
         <p class="text-sm text-muted leading-relaxed mb-8">
-          Every company listed on CreditDoc is evaluated across five core factors. Each factor is scored on a scale of 1.0 to 5.0, and the overall rating is an equally weighted average of all five scores.
+          When a CreditDoc page shows a star rating, it is the stored Google rating for that business, shown with the stored Google review count. We do not create or display a public CreditDoc algorithmic star score.
         </p>
 
         <div class="space-y-4">
@@ -44,9 +44,9 @@ const jsonLd = {
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white font-bold text-sm">1</div>
               <div>
-                <h3 class="text-lg font-semibold text-text">Value</h3>
+                <h3 class="text-lg font-semibold text-text">Google rating and review count</h3>
                 <p class="mt-2 text-sm text-muted leading-relaxed">
-                  Is the service worth the price? We evaluate monthly fees, setup costs, money-back guarantees, and the overall cost-to-benefit ratio. We compare pricing against the breadth and quality of services offered, and consider whether lower-priced alternatives deliver comparable results.
+                  The visible rating is based on stored Google review data when a valid rating and review count are available. If that data is missing, incomplete, or not suitable for display, CreditDoc shows no star rating.
                 </p>
               </div>
             </div>
@@ -56,9 +56,9 @@ const jsonLd = {
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white font-bold text-sm">2</div>
               <div>
-                <h3 class="text-lg font-semibold text-text">Effectiveness</h3>
+                <h3 class="text-lg font-semibold text-text">Editorial review is separate</h3>
                 <p class="mt-2 text-sm text-muted leading-relaxed">
-                  Does the company deliver results? We analyze publicly available outcomes data, user-reported score improvements, CFPB complaint volumes relative to company size, and the range of dispute strategies employed (goodwill letters, debt validation, cease-and-desist letters, etc.).
+                  CreditDoc editorial analysis uses public information such as company services, pricing, BBB data, CFPB complaint data, licensing or regulatory records, location information, and direct company research. That analysis informs our written review, not a public star score.
                 </p>
               </div>
             </div>
@@ -68,9 +68,9 @@ const jsonLd = {
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white font-bold text-sm">3</div>
               <div>
-                <h3 class="text-lg font-semibold text-text">Customer Service</h3>
+                <h3 class="text-lg font-semibold text-text">Schema follows the same rule</h3>
                 <p class="mt-2 text-sm text-muted leading-relaxed">
-                  How responsive and helpful is the company? We evaluate availability of support channels (phone, email, chat), whether clients are assigned a dedicated advisor, response times based on user reports, and overall customer satisfaction as reflected in third-party reviews.
+                  Review pages only emit AggregateRating schema when a valid stored Google rating and review count are available. We do not mark up an internal CreditDoc score as a consumer rating.
                 </p>
               </div>
             </div>
@@ -80,9 +80,9 @@ const jsonLd = {
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white font-bold text-sm">4</div>
               <div>
-                <h3 class="text-lg font-semibold text-text">Transparency</h3>
+                <h3 class="text-lg font-semibold text-text">Manual review pages may withhold ratings</h3>
                 <p class="mt-2 text-sm text-muted leading-relaxed">
-                  Is the company upfront about pricing, processes, and realistic expectations? We evaluate whether pricing is clearly displayed on the website, whether the company makes unrealistic promises (such as guaranteeing specific score increases), and the clarity of their contracts and terms of service.
+                  Pages that are incomplete, under manual review, noindexed, or lacking reliable Google review data do not show a star rating. This prevents unsupported ratings from appearing on low-confidence profiles.
                 </p>
               </div>
             </div>
@@ -92,9 +92,9 @@ const jsonLd = {
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white font-bold text-sm">5</div>
               <div>
-                <h3 class="text-lg font-semibold text-text">Ease of Use</h3>
+                <h3 class="text-lg font-semibold text-text">Compensation cannot change ratings</h3>
                 <p class="mt-2 text-sm text-muted leading-relaxed">
-                  How easy is it to get started and stay informed? We evaluate the sign-up process, whether the company offers a mobile app or online portal, the quality of progress tracking tools, and overall user experience based on public reviews.
+                  Affiliate compensation cannot change a stored Google rating, review count, editorial review, correction decision, or recommendation.
                 </p>
               </div>
             </div>
@@ -106,7 +106,7 @@ const jsonLd = {
       <div>
         <h2 class="text-2xl font-bold text-text mb-6">Our Data Sources</h2>
         <p class="text-sm text-muted leading-relaxed mb-6">
-          We cross-reference multiple independent data sources to form a comprehensive picture of each company. No single source determines our rating.
+          We cross-reference multiple independent data sources to form a comprehensive picture of each company. No single source determines our written review.
         </p>
         <div class="grid gap-4 sm:grid-cols-2">
           <div class="rounded-xl border border-border bg-white p-5">
@@ -164,14 +164,14 @@ const jsonLd = {
               <div class="flex-shrink-0 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white text-sm font-bold sm:h-12 sm:w-12">3</div>
               <div class="pt-1 sm:pt-2">
                 <h3 class="text-base font-semibold text-text">Expert Analysis</h3>
-                <p class="mt-1 text-sm text-muted leading-relaxed">Our team applies the 5-factor rating system, writes the detailed review narrative, identifies pros/cons, and determines "best for" categories.</p>
+                <p class="mt-1 text-sm text-muted leading-relaxed">Our team writes the detailed review narrative, identifies pros/cons, checks safety caveats, and determines "best for" categories. Star ratings remain limited to stored Google rating data when available.</p>
               </div>
             </div>
             <div class="relative flex gap-4 sm:gap-6">
               <div class="flex-shrink-0 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white text-sm font-bold sm:h-12 sm:w-12">4</div>
               <div class="pt-1 sm:pt-2">
                 <h3 class="text-base font-semibold text-text">Peer Review</h3>
-                <p class="mt-1 text-sm text-muted leading-relaxed">Ratings and review content are cross-checked for accuracy, consistency with our methodology, and fairness.</p>
+                <p class="mt-1 text-sm text-muted leading-relaxed">Review content is cross-checked for accuracy, consistency with our methodology, and fairness. Stored Google rating data is checked separately before it is displayed.</p>
               </div>
             </div>
             <div class="relative flex gap-4 sm:gap-6">
@@ -209,7 +209,7 @@ const jsonLd = {
                 <td class="px-6 py-3 text-muted">Monthly</td>
               </tr>
               <tr>
-                <td class="px-6 py-3 text-muted">Full review and ratings</td>
+                <td class="px-6 py-3 text-muted">Full review and Google rating display check</td>
                 <td class="px-6 py-3 text-muted">Quarterly</td>
               </tr>
               <tr>
@@ -241,7 +241,7 @@ const jsonLd = {
             CreditDoc earns revenue through affiliate partnerships with some of the companies listed on our site. When you click certain links and sign up for a service, we may receive a referral fee. This is how we fund our research and keep the site free for consumers.
           </p>
           <p class="text-sm text-text leading-relaxed mb-4">
-            <strong>However, compensation never influences our editorial content.</strong> Our ratings, rankings, and recommendations are determined solely by our research methodology described above. We frequently feature and recommend companies that do not have an affiliate relationship with us.
+            <strong>However, compensation never influences our editorial content.</strong> It cannot change stored Google rating data, review counts, written reviews, correction decisions, or recommendations. We frequently feature and recommend companies that do not have an affiliate relationship with us.
           </p>
           <p class="text-sm text-text leading-relaxed">
             If you believe any of our reviews contain inaccurate information, we encourage you to contact us at <a href="mailto:contact@creditdoc.co" class="text-primary hover:underline">contact@creditdoc.co</a>. We take corrections seriously and will investigate promptly. For our full affiliate disclosure, visit our <a href="/disclosure/" class="text-primary hover:underline">Disclosure page</a>.
@@ -249,43 +249,29 @@ const jsonLd = {
         </div>
       </div>
 
-      <!-- Rating Scale -->
+      <!-- Rating Display Rules -->
       <div>
-        <h2 class="text-2xl font-bold text-text mb-6">Rating Scale</h2>
+        <h2 class="text-2xl font-bold text-text mb-6">Rating Display Rules</h2>
         <div class="space-y-3">
           <div class="flex items-center gap-4 rounded-xl border border-border bg-white p-4">
-            <div class="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-lg bg-positive-light text-positive font-bold text-lg">5.0</div>
+            <div class="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-lg bg-positive-light text-positive font-bold text-lg">Yes</div>
             <div>
-              <p class="text-sm font-semibold text-text">Outstanding</p>
-              <p class="text-xs text-muted">Exceptional across all five evaluation criteria. Industry-leading in multiple areas.</p>
+              <p class="text-sm font-semibold text-text">A Google rating is shown</p>
+              <p class="text-xs text-muted">Only when the database has a valid stored Google rating and a stored Google review count.</p>
             </div>
           </div>
           <div class="flex items-center gap-4 rounded-xl border border-border bg-white p-4">
-            <div class="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-lg bg-positive-light text-positive font-bold text-lg">4.0</div>
+            <div class="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-lg bg-warning-light text-warning font-bold text-lg">No</div>
             <div>
-              <p class="text-sm font-semibold text-text">Excellent</p>
-              <p class="text-xs text-muted">Strong performance overall with minor areas for improvement. Recommended.</p>
+              <p class="text-sm font-semibold text-text">No internal score is substituted</p>
+              <p class="text-xs text-muted">If Google rating data is unavailable or a page needs manual review, the profile shows no verified Google rating.</p>
             </div>
           </div>
           <div class="flex items-center gap-4 rounded-xl border border-border bg-white p-4">
-            <div class="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-lg bg-warning-light text-warning font-bold text-lg">3.0</div>
+            <div class="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-lg bg-primary-light text-primary font-bold text-lg">SEO</div>
             <div>
-              <p class="text-sm font-semibold text-text">Good</p>
-              <p class="text-xs text-muted">Solid service with notable strengths and weaknesses. Worth considering depending on your priorities.</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-4 rounded-xl border border-border bg-white p-4">
-            <div class="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-lg bg-warning-light text-warning font-bold text-lg">2.0</div>
-            <div>
-              <p class="text-sm font-semibold text-text">Below Average</p>
-              <p class="text-xs text-muted">Significant concerns in one or more areas. Proceed with caution and consider alternatives.</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-4 rounded-xl border border-border bg-white p-4">
-            <div class="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-lg bg-negative-light text-negative font-bold text-lg">1.0</div>
-            <div>
-              <p class="text-sm font-semibold text-text">Poor</p>
-              <p class="text-xs text-muted">Serious issues identified. Significant red flags, regulatory concerns, or consistent negative consumer reports.</p>
+              <p class="text-sm font-semibold text-text">Structured data follows the visible page</p>
+              <p class="text-xs text-muted">AggregateRating schema is emitted only when the same Google rating is visible to users.</p>
             </div>
           </div>
         </div>
@@ -296,7 +282,7 @@ const jsonLd = {
         <h2 class="text-2xl font-bold text-text mb-6">Suggest a Correction</h2>
         <div class="rounded-xl border border-border bg-white p-6 sm:p-8">
           <p class="text-sm text-muted leading-relaxed mb-4">
-            We strive for accuracy in everything we publish, but we're not infallible. If you notice incorrect pricing, outdated information, a factual error, or believe a rating doesn't reflect the current state of a company, please let us know.
+            We strive for accuracy in everything we publish, but we're not infallible. If you notice incorrect pricing, outdated information, a factual error, or believe a displayed Google rating is stale or incorrect, please let us know.
           </p>
           <p class="text-sm text-muted leading-relaxed">
             Email us at <a href="mailto:contact@creditdoc.co" class="text-primary hover:underline">contact@creditdoc.co</a> with the subject line "Correction Request" and include:
@@ -315,7 +301,7 @@ const jsonLd = {
       <!-- Last Updated -->
       <div class="text-center">
         <p class="text-xs text-muted">
-          Last updated: March 22, 2026 | CreditDoc is a property of Cosmic Phoenix LLC, a Wyoming limited liability company.
+          Last updated: May 25, 2026 | CreditDoc is a property of Cosmic Phoenix LLC, a Wyoming limited liability company.
         </p>
       </div>
 

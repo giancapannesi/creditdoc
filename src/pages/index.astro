@@ -17,7 +17,7 @@ const wellnessGuides = getWellnessGuides().slice(0, 3);
 //   1. Credit repair / counseling / debt relief categories ONLY
 //   2. Must be enriched with real editorial content (>200 chars)
 //   3. Quality score >= 8 (out of ~20) — no skeleton or thin profiles
-//   4. Rating >= 3.0 — no downgraded or flagged profiles
+//   4. Google rating >= 3.0 when available — no downgraded or flagged profiles
 //   5. No website_status flags (dead/hacked/parked/ssl_expired)
 //   6. Deduplicated by company name
 //   7. Verified providers always sort first
@@ -29,7 +29,7 @@ const topPicks = lenders
     const enriched = l.has_been_enriched === true;
     const hasContent = (l.description_long || '').length > 200;
     const relevantCategory = TOP_PICK_CATEGORIES.includes(l.category);
-    const goodRating = (l.rating || 0) >= 3.0;
+    const goodRating = l.google_rating && l.google_rating >= 3.0 && !(l.google_rating > 5) && l.google_reviews_count && l.google_reviews_count >= 1;
     const isVerified = l.verified_provider === true;
     const goodQuality = isVerified || (l.quality_score || 0) >= 8;  // Verified providers always qualify
     const noWarning = !(l as any).website_status;
@@ -44,11 +44,11 @@ const topPicks = lenders
     const tierA = a.data_source === 'verified' ? 3 : a.data_source === 'editorial' ? 2 : 1;
     const tierB = b.data_source === 'verified' ? 3 : b.data_source === 'editorial' ? 2 : 1;
     if (tierA !== tierB) return tierB - tierA;
-    // Then by quality score, then rating
+    // Then by quality score, then stored Google rating
     const qA = a.quality_score || 0;
     const qB = b.quality_score || 0;
     if (qA !== qB) return qB - qA;
-    return (b.rating || 0) - (a.rating || 0);
+    return (b.google_rating || 0) - (a.google_rating || 0);
   })
   .filter(l => {
     // Deduplicate: keep first (highest quality) entry per company name
@@ -167,7 +167,7 @@ const jsonLd = [
           <span class="text-primary"> We Just Compare.</span>
         </h1>
         <p class="mt-4 text-lg text-muted sm:text-xl leading-relaxed">
-          We've diagnosed the fine print on 200+ credit repair companies, lenders, and financial services. Compare by price, rating, and what actually matters.
+          We've diagnosed the fine print on 200+ credit repair companies, lenders, and financial services. Compare by price, Google rating where available, and what actually matters.
         </p>
         <div class="mt-8">
           <LenderNameSearch variant="hero" />

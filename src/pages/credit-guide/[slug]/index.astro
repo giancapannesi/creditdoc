@@ -494,7 +494,7 @@ const jsonLd = [
                           <a href={`/review/${l.slug}/`} class="text-primary hover:underline font-medium truncate block max-w-[180px]">{l.name}</a>
                         </td>
                         <td class="text-center py-2 px-2">
-                          <span class="font-semibold text-text">{l.rating > 0 ? l.rating.toFixed(1) : '—'}</span>
+                          <span class="font-semibold text-text">{l.google_rating && l.google_rating > 0 && !(l.google_rating > 5) && l.google_reviews_count && l.google_reviews_count >= 1 ? l.google_rating.toFixed(1) : '—'}</span>
                         </td>
                         <td class="text-center py-2 px-2">
                           <span class="text-xs text-muted">{catNames[l.category] || l.category}</span>

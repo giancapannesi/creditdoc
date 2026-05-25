@@ -110,10 +110,10 @@ const sortedGroups = Array.from(categoryGroups.entries())
 const catNames: Record<string, string> = {};
 for (const cat of categories) catNames[cat.slug] = cat.name;
 
-// Top-rated lenders
+// Top lenders with verified Google ratings
 const topLenders = [...lenders]
-  .filter(l => l.rating > 0 && l.description_short?.length > 20)
-  .sort((a, b) => b.rating - a.rating)
+  .filter(l => l.google_rating && l.google_rating > 0 && !(l.google_rating > 5) && l.google_reviews_count && l.google_reviews_count >= 1 && l.description_short?.length > 20)
+  .sort((a, b) => (b.google_rating || 0) - (a.google_rating || 0))
   .slice(0, 10);
 
 const hasLenders = stateInfo.lenderCount > 0;
@@ -160,7 +160,7 @@ const jsonLd = [
         "@type": "FinancialService",
         "name": l.name,
         "url": `https://www.creditdoc.co/review/${l.slug}/`,
-        ...(l.rating > 0 ? { "aggregateRating": { "@type": "AggregateRating", "ratingValue": l.rating, "bestRating": 5, "worstRating": 1, "ratingCount": l.google_reviews_count || 1 } } : {})
+        ...(l.google_rating && l.google_rating > 0 && !(l.google_rating > 5) && l.google_reviews_count && l.google_reviews_count >= 1 ? { "aggregateRating": { "@type": "AggregateRating", "ratingValue": l.google_rating, "bestRating": 5, "worstRating": 1, "ratingCount": l.google_reviews_count } } : {})
       }
     }))
   }] : [])

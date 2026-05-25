@@ -207,6 +207,7 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
         const lowestPrice = lender.pricing.tiers.length > 0
           ? Math.min(...lender.pricing.tiers.map(t => t.price))
           : lender.pricing.monthly_price;
+        const showGoogleRating = Boolean(lender.google_rating && lender.google_rating > 0 && !(lender.google_rating > 5) && lender.google_reviews_count && lender.google_reviews_count >= 1);
         return (
           <article class="glass-card p-6 relative">
             <!-- Rank Badge -->
@@ -228,7 +229,14 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
               <div class="flex-1 min-w-0">
                 <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                   <h2 class="text-lg font-bold text-text">{lender.name}</h2>
-                  <RatingStars rating={lender.rating} size="sm" showValue={true} />
+                  {showGoogleRating ? (
+                    <div>
+                      <RatingStars rating={lender.google_rating} size="sm" showValue={true} />
+                      <p class="mt-0.5 text-xs text-muted">Google rating from {lender.google_reviews_count.toLocaleString()} reviews</p>
+                    </div>
+                  ) : (
+                    <span class="text-xs text-muted">No verified Google rating</span>
+                  )}
                 </div>
 
                 <!-- Key Stats -->

@@ -35,8 +35,9 @@ for (const cat of categories) {
   catNames[cat.slug] = cat.name;
 }
 
-// Top-rated lenders for featured section
-const topLenders = [...lenders].sort((a, b) => b.rating - a.rating).slice(0, 6);
+// Top lenders for featured section, ordered by stored Google rating where available
+const googleRatingValue = (l: Lender) => l.google_rating && l.google_rating > 0 && !(l.google_rating > 5) && l.google_reviews_count && l.google_reviews_count >= 1 ? l.google_rating : 0;
+const topLenders = [...lenders].sort((a, b) => googleRatingValue(b) - googleRatingValue(a)).slice(0, 6);
 
 // Map center (use city name for Google Maps embed)
 const mapQuery = `${cityInfo.city}, ${cityInfo.stateAbbr}`;
@@ -204,7 +205,7 @@ const jsonLd = [
         </a>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.sort((a: any, b: any) => b.rating - a.rating).slice(0, 6).map((lender: any) => (
+        {items.sort((a: any, b: any) => googleRatingValue(b) - googleRatingValue(a)).slice(0, 6).map((lender: any) => (
           <LenderCard lender={lender} />
         ))}
       </div>

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pinterest Connection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <main class="shell narrow">
+      <section class="panel">
+        <h1>{{ "Pinterest Connected" if ok else "Pinterest Connection Failed" }}</h1>
+        <p>{{ message }}</p>
+        <a class="button-link" href="/">Return to dashboard</a>
+      </section>
+    </main>
+  </body>
+</html>

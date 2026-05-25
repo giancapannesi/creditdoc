@@ -18,6 +18,39 @@ Previous sessions: `AI_COUNCIL_SESSION_[1-5]_2026-05-13.md`
 
 ## Immediate Next Actions (approved by founder)
 
+### 0A. Review Page Growth Plan - Execute In Controlled Batches
+
+Use the local Codex skill for this work:
+
+- `/srv/BusinessOps/.agents/skills/creditdoc-seo-growth/SKILL.md`
+
+Plan saved:
+
+- `/srv/BusinessOps/creditdoc/docs/plans/2026-05-22-review-page-growth.md`
+- Pointer: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Growth_Plan_2026-05-22.md`
+
+Batch 1 saved:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Growth_Batch_1_2026-05-22.csv`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Growth_Batch_1_Notes_2026-05-22.md`
+
+Completed locally, not deployed:
+
+- `src/lib/db.ts`: added `getAnswersByPillarRuntime()`.
+- `src/pages/review/[slug].astro`: added category-aware related `/answers/` links.
+- `src/pages/review/[slug].astro`: fixed mini-quiz scoring against actual category slugs.
+- `npm run build` passed.
+
+Next steps:
+
+1. Continue one-page upgrades using `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Template_2026-05-23.md`.
+2. Use the Marco's Credit Services pilot as the pattern for protected FA pages: DB API founder override, do not unset protection, verify audit log and live page.
+3. Manually review Batch 1 pages, especially raw/pending/quarantined rows, before any indexability or metadata changes.
+4. Improve SEO titles/metas for selected `ready_for_index` pages through the DB update path only.
+5. Re-run `npm run build` when template/code changes are included.
+6. Deploy only from a reviewed release scope.
+7. Measure against GSC pull `10` baseline after the next GSC pull and again after 21-28 days.
+
 ### 0. Preserve ATM City-Category Count Fix
 
 - User flagged `/credit-guide/anaheim-ca/atm/`: page claimed only `1` ATM/cash-access provider in Anaheim, which is obviously misleading.
@@ -133,6 +166,9 @@ wellness-generator batch.
 - Don't conflate Vercel with CreditDoc (it's Cloudflare Workers)
 - Don't propose author bio / personal E-E-A-T (SCRAPPED permanently)
 - Don't use bare `wrangler deploy` — always use `./deploy.sh`
+- Don't remove robots protections to clear a GSC warning. If a protected URL is
+  in XML sitemaps, fix the sitemap generator and keep `public/robots.txt`
+  protected. `npm run postbuild` now checks this.
 
 ---
 
@@ -148,3 +184,212 @@ wellness-generator batch.
 | Course pages | `src/pages/courses/credit-fundamentals/[slug].astro` |
 | Sendy course list | ID=2, hash=`Yj7BPjltZ5YG9nUBw892y93g` |
 | Autoresponder | ares_id=1, 8 emails |
+
+# CreditDoc Review Page Regulatory Context Discovery - 2026-05-23
+
+Jammi identified that CreditDoc's regulatory data layer should be one of the strongest differentiators and expected it to be wired into review pages. Discovery confirmed it is only partially wired.
+
+Key finding:
+
+- Federal/company regulator data is present in `/srv/BusinessOps/creditdoc/data/regulator.db` and synced to Supabase tables:
+  - `regulator_company_stats`
+  - `regulator_enforcement`
+  - `regulator_sba_rankings`
+- State-law regulatory data is present in Supabase `states.body_inline` and local `src/content/states.json`.
+- Local `state_regulatory_data` table exists in `creditdoc.db`, but has `0` rows and is not available in Supabase.
+- Review pages currently render only company-level regulator data through `getRegulatorDataRuntime(lender.slug, env)` in `src/lib/db.ts` / `src/pages/review/[slug].astro`.
+- `getRegulatorDataRuntime()` is gated by `ENABLE_REGULATOR_BLOCKS=true` and only returns data when a matched company has `match_confidence >= 0.85` and `total_complaints_alltime >= 5`.
+- Vigo has no company-level CFPB/enforcement match in `regulator.db`, so no regulator block appears.
+- State-law data is already used on `/state/`, `/state/[slug]/lending-laws/`, `/city/`, `/browse/`, and `/credit-guide/`, but it is not wired into `/review/[slug]/`.
+
+Strategic conclusion:
+
+- The next high-leverage quality improvement is a reusable review-page `State Consumer Finance Context` / `Regulatory Context` block.
+- It should fetch existing `states.body_inline` by lender `company_info.state` / state abbreviation and render conservative, category-aware state context.
+- This is a major differentiator: directory + location + services + regulatory context.
+
+Safe wording rules:
+
+- Present state-level consumer finance context only.
+- Do not claim a specific lender/location is licensed unless direct license proof is present.
+- Do not apply FDIC/NCUA/HMDA data unless the lender record is actually matched to bank/credit-union/mortgage data.
+- For Vigo/check-cashing/money-services pages, use state regulator, complaint resources, payday/installment/check-cashing/money-services context where available; avoid bank-specific claims.
+
+Recommended implementation order:
+
+1. Add a reusable review-page regulatory context component fed from `states.body_inline`.
+2. Show it only when the lender has a state.
+3. Start with noindexed Vigo pages as pilot.
+4. Verify wording/live rendering while noindexed.
+5. Roll out more broadly to review pages after build/deploy review.
+6. Later enrich state data further with official money-transmitter/check-casher license lookup URLs where verifiable.
+
+Important: This touches YMYL presentation. Keep language factual and cautious. No unverified licensing, pricing, or compliance claims.
+
+Implementation progress 2026-05-23:
+
+- Added `src/components/StateRegulatoryContext.astro`.
+- Wired `src/pages/review/[slug].astro` to fetch state context through `getStateByCodeRuntimeFromDb()` and render it beside the existing regulatory/HMDA area.
+- `npm run build` passed with robots/sitemap checks.
+- No deploy was performed.
+
+Next sequencing:
+
+1. Keep the 45 Vigo profiles noindexed while Jammi samples them.
+2. Work the cleaned 17-row Phase 1 queue before indexing or expanding:
+   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_remaining_action_queue_2026-05-23.csv`
+3. After Phase 1 is clean, move into the 250 review-page upgrade queue in small batches.
+4. Later enrichment opportunity: add official state money-transmitter/check-casher lookup URLs after source verification.
+
+Phase 1 status tidy completed 2026-05-23:
+
+- Backup: `data/backups/creditdoc_before_phase1_status_tidy_2026-05-23.sqlite`.
+- 9 noindexed hold rows now have explicit hold/reject `review_status` values.
+- Supabase mirror verified.
+- Live spot checks remain `noindex,nofollow`.
+- Report: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/PHASE_1_STATUS_TIDY_2026-05-23.md`.
+
+Phase 1 validation classification completed 2026-05-23:
+
+- Backup: `data/backups/creditdoc_before_phase1_validation_classification_2026-05-23.sqlite`.
+- Classified weak/rejected rows with `validation_notes`.
+- Corrected `envios-de-dinero-money-orders-pago-de-billes` to `category=check-cashing`.
+- All remain `pending_approval` and `no_index=true`.
+- Supabase verified; pending retry rows: `0`.
+- Use the classified queue for the next pass:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_remaining_action_queue_classified_2026-05-23.csv`
+
+Phase 1 manual-candidate classification completed 2026-05-23:
+
+- Backup: `data/backups/creditdoc_before_phase1_manual_candidate_classification_2026-05-23.sqlite`.
+- All 8 manual-review candidates now have explicit `review_status` and `validation_notes`.
+- All remain `pending_approval` and `no_index=true`.
+- Supabase verified; pending retry rows: `0`.
+- Final decision matrix:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/PHASE_1_FINAL_DECISION_MATRIX_2026-05-23.md`
+
+Next safest Phase 1 task:
+
+- Wrong website fields were removed on 2026-05-23 for:
+  `credit-repair-outfit-philadelphia`, `ez-credit-disputes`,
+  `rose-financial-solutions`, and `crushing-on-credit`.
+- Held/skeleton/noindexed review pages now emit breadcrumb schema only; do not
+  rely on this as a substitute for cleanup, because visible page copy still
+  needs archive/rebuild/approval decisions.
+- Decide archive/redirect/rebuild for clear category mismatches and non-validated rows.
+- Do not promote/index anything from Phase 1 until its decision is completed and approved.
+
+Suggested next decision groups:
+
+- 15 unresolved rows have now been neutralized with held-for-review copy, but
+  still need final archive/redirect/hold decisions.
+- `envios-de-dinero-money-orders-pago-de-billes` has been rebuilt as a
+  conservative money-services page and is pending manual review.
+- `ez-credit-disputes` has been cleaned as a manual approval candidate and is
+  pending manual review.
+- Next pass should decide final treatment for the 15 neutralized rows:
+  redirect, archive, or keep held for later source research.
+- Do not index the two review-ready candidates until manual review confirms
+  facts and suitability.
+
+Final-treatment labels now exist for the 15 neutralized rows:
+
+- Queue: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/phase_1_neutralized_final_treatment_queue_2026-05-23.csv`
+- Any redirect implementation is a separate code/deploy decision. Do not add
+  redirects casually from the dirty working tree.
+- Safest next loop is manual review of the two review-ready candidates, then
+  move to the 250-page upgrade queue once Phase 1 is closed.
+
+Review deploy completed 2026-05-23:
+
+- Current cleanup state is live for review after a successful `deploy.sh` run.
+- Review these first:
+  `snap-loans-cash-orlando`, `ez-credit-disputes`,
+  `envios-de-dinero-money-orders-pago-de-billes`, and `lexington-law`.
+- After review, continue with final archive/redirect/hold decisions for the 15
+  neutralized rows before moving into the 250-page upgrade queue.
+
+Founder review status:
+
+- Approved by Jammi for next indexing decision:
+  `ez-credit-disputes`,
+  `envios-de-dinero-money-orders-pago-de-billes`.
+- Approved mature/indexable page:
+  `lexington-law`.
+- Do not flip indexing individually. Put approved pages into a small indexing
+  decision batch after confirming title/meta/canonical/internal links.
+- Continue fixing the remaining Phase 1 pages first: archive, redirect, research
+  hold, or rebuild, depending on each row's evidence.
+
+Phase 1 next execution:
+
+- Do not spend upgrade effort on the 5 closed archive holds unless new source
+  evidence appears.
+- Redirect batch is separate and not implemented yet:
+  `life-changers-agency`, `ny-identity-theft-group`,
+  `rose-financial-solutions`.
+- Best next rebuild candidates:
+  review `the-debt-crushers` and `crushing-on-credit` with Jammi.
+- YMYL template work is required before considering `snap-loans-cash-orlando`.
+- Research holds need stronger source/category validation before index:
+  `credit-repair-outfit-philadelphia`,
+  `my-credit-advice-credit-repair-and-consultation`, `mycredit-smash`,
+  `the-peeples-solution`.
+
+The Debt Crushers is rebuilt and ready for Jammi review:
+
+- Review URL: `https://www.creditdoc.co/review/the-debt-crushers/`
+- Keep noindex until Jammi approves location wording and indexability.
+
+Crushing on Credit is rebuilt and ready for Jammi review:
+
+- Review URL: `https://www.creditdoc.co/review/crushing-on-credit/`
+- Keep noindex until Jammi approves source caveat and indexability.
+
+My Credit Advice is rebuilt and ready for Jammi review:
+
+- Review URL:
+  `https://www.creditdoc.co/review/my-credit-advice-credit-repair-and-consultation/`
+- Keep noindex unless a provider-owned source is verified or Jammi approves
+  indexability with the source caveat.
+
+Credit Repair Outfit Philadelphia is rebuilt and ready for Jammi review:
+
+- Review URL:
+  `https://www.creditdoc.co/review/credit-repair-outfit-philadelphia/`
+- Keep noindex unless a provider-owned source is verified or Jammi approves
+  indexability with the thin-source caveat.
+
+Snap Loans Cash Orlando is rebuilt and ready for Jammi review:
+
+- Review URL: `https://www.creditdoc.co/review/snap-loans-cash-orlando/`
+- Keep noindex until CreditDoc has an explicit lead-generation/YMYL index
+  policy and Jammi approves the page treatment.
+
+Immediate review queue:
+
+- `the-debt-crushers`
+- `crushing-on-credit`
+- `my-credit-advice-credit-repair-and-consultation`
+- `credit-repair-outfit-philadelphia`
+- `snap-loans-cash-orlando`
+
+All five are improved but remain noindexed. After Jammi review, decide whether
+to keep held, request more source work, or move approved pages into a small
+indexing decision batch.
+
+250-page rollout progress:
+
+- Completed metadata cleanup for `REVIEW-UPGRADE-01` through
+  `REVIEW-UPGRADE-14`: 197 queue rows / 196 unique DB slugs due one duplicate
+  queue slug.
+- No index status changes were made in these batches.
+- The 250-row queue now has a completion CSV:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Review_Page_Upgrade_Rollout_2026-05-23/review_rollout_250_completion_status_2026-05-23.csv`
+- Next work is not more blind batching. Next work is review/decision:
+  - Jammi review of the 5 rebuilt noindex pages.
+  - Decide whether `ez-credit-disputes` and
+    `envios-de-dinero-money-orders-pago-de-billes` can enter a small indexing
+    decision batch.
+  - Decide Vigo chain indexing policy.
+  - Separate redirect batch for stale/category-mismatch rows if desired.

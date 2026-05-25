@@ -56,7 +56,7 @@ interface CompactLender {
   n: string; // name
   c: string; // category
   sc: string[]; // subcategories
-  r: number; // rating
+  r: number; // stored Google rating, only when paired with Google review count
   mp: number; // monthly_price
   bb: string; // bbb_rating
   mg: boolean; // money_back_guarantee
@@ -85,7 +85,7 @@ function compact(r: RawLender): CompactLender {
     n: r.name,
     c: r.category,
     sc: b.subcategories || [],
-    r: b.rating || 0,
+    r: b.google_rating && b.google_rating > 0 && !(b.google_rating > 5) && b.google_reviews_count && b.google_reviews_count >= 1 ? b.google_rating : 0,
     mp: b.pricing?.monthly_price || 0,
     bb: b.company_info?.bbb_rating || 'NR',
     mg: !!b.pricing?.money_back_guarantee,
@@ -203,7 +203,7 @@ export const GET: APIRoute = async ({ url, locals }) => {
       return true;
     });
 
-  // Default ranking: enriched first, then quality_score desc, then rating desc.
+  // Default ranking: enriched first, then quality_score desc, then stored Google rating desc.
   compactRows.sort((a, b) => {
     if (a.en !== b.en) return b.en - a.en;
     const aTier = a.qs >= 10 ? 2 : a.qs >= 5 ? 1 : 0;

@@ -6,11 +6,13 @@ import TrustBadge from './TrustBadge.astro';
 
 interface Props {
   lender: Lender;
+  showRatings?: boolean;
 }
 
-const { lender } = Astro.props;
+const { lender, showRatings = true } = Astro.props;
 
 const bbbClass = getBbbClass(lender.company_info.bbb_rating);
+const showGoogleRating = showRatings && lender.google_rating && lender.google_rating > 0 && !(lender.google_rating > 5) && lender.google_reviews_count && lender.google_reviews_count >= 1;
 ---
 
 <article class="glass-card p-5 sm:p-6 flex flex-col h-full">
@@ -41,22 +43,33 @@ const bbbClass = getBbbClass(lender.company_info.bbb_rating);
     </div>
     <div class="flex-1 min-w-0">
       <h3 class="text-lg font-semibold text-text truncate">{lender.name}</h3>
-      <p class="text-sm text-muted mt-0.5 line-clamp-2">{lender.description_short}</p>
+      <p class="text-sm text-muted mt-0.5 line-clamp-2">
+        {showRatings
+          ? lender.description_short
+          : 'View this provider profile and compare verified details before choosing a service.'}
+      </p>
     </div>
   </div>
 
   <!-- Rating -->
-  <div class="mt-4">
-    <RatingStars rating={lender.rating} size="sm" />
-  </div>
+  {showGoogleRating && (
+    <div class="mt-4">
+      <RatingStars rating={lender.google_rating} size="sm" />
+      <p class="mt-1 text-xs text-muted">
+        Google rating from {lender.google_reviews_count.toLocaleString()} review{lender.google_reviews_count === 1 ? '' : 's'}
+      </p>
+    </div>
+  )}
 
   <!-- Badges Row -->
-  <div class="mt-3 flex flex-wrap items-center gap-2">
-    <!-- BBB Rating pill -->
-    <span class={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${bbbClass}`}>
-      BBB: {lender.company_info.bbb_rating}
-    </span>
-  </div>
+  {showRatings && (
+    <div class="mt-3 flex flex-wrap items-center gap-2">
+      <!-- BBB Rating pill -->
+      <span class={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${bbbClass}`}>
+        BBB: {lender.company_info.bbb_rating}
+      </span>
+    </div>
+  )}
 
   <!-- Best For -->
   {lender.best_for.length > 0 && (

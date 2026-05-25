@@ -1,14 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const title = 'Our Data Explained — Ratings, CFPB & Regulatory Sources | CreditDoc';
-const description = 'How CreditDoc ratings work, what CFPB response rates mean, and where our regulatory data comes from. Every metric exists to help you make better financial decisions.';
+const title = 'Our Data Explained — Google Ratings, CFPB & Regulatory Sources | CreditDoc';
+const description = 'How CreditDoc uses stored Google ratings, what CFPB response rates mean, and where our regulatory data comes from. Every metric exists to help you make better financial decisions.';
 
 const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Our Data Explained — Ratings, CFPB & Regulatory Sources",
+    "name": "Our Data Explained — Google Ratings, CFPB & Regulatory Sources",
     "description": description,
     "url": "https://www.creditdoc.co/about/creditdoc-data/",
     "datePublished": "2026-05-17",
@@ -49,7 +49,7 @@ const jsonLd = [
         CreditDoc is built on publicly verifiable data. Every number on our pages has a source you can check yourself. We use federal databases (CFPB, FDIC, HMDA, SBA), state regulatory filings, and verified company information — all designed to help you make better financial decisions.
       </p>
       <p>
-        Everything we display exists to benefit <strong class="text-text">you</strong> — the consumer trying to navigate a confusing financial landscape. We don't accept payment for higher ratings or better placement. Our ratings come from data, not deals.
+        Everything we display exists to benefit <strong class="text-text">you</strong> — the consumer trying to navigate a confusing financial landscape. We don't accept payment to change editorial reviews, correction decisions, recommendations, or stored Google rating data.
       </p>
       <p>
         Our methodology is completely transparent. This page explains exactly what every metric means, how it's calculated, and where the data comes from. We believe you deserve to understand what you're looking at.
@@ -68,7 +68,7 @@ const jsonLd = [
     <div class="glass-card p-6">
       <h2 class="text-lg font-bold text-text mb-4">What's on this page</h2>
       <nav class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-        <a href="#rating" class="text-sm text-primary hover:underline">1. CreditDoc Rating</a>
+        <a href="#rating" class="text-sm text-primary hover:underline">1. Google Rating</a>
         <a href="#cfpb-data" class="text-sm text-primary hover:underline">2. CFPB Transparency Report</a>
         <a href="#diagnosis" class="text-sm text-primary hover:underline">3. CreditDoc Diagnosis</a>
         <a href="#pricing" class="text-sm text-primary hover:underline">4. Pricing & Fees</a>
@@ -87,60 +87,60 @@ const jsonLd = [
 
     <!-- Section 1: Rating -->
     <div id="rating">
-      <h2 class="text-2xl font-bold text-text mb-4">1. CreditDoc Rating</h2>
+      <h2 class="text-2xl font-bold text-text mb-4">1. Google Rating</h2>
       <p class="text-sm text-muted leading-relaxed mb-4">
-        The star rating you see on every company profile (e.g., 4.2/5) is CreditDoc's proprietary composite score. It is NOT a user-submitted rating or a popularity vote.
+        The star rating you see on a company profile is the stored Google rating for that business, shown with the stored Google review count. It is not a CreditDoc-created score.
       </p>
       <div class="glass-card p-5 space-y-4">
-        <h3 class="text-base font-semibold text-text">Our 5-Factor System</h3>
-        <p class="text-sm text-muted leading-relaxed">Each company is evaluated across five factors, scored 1.0–5.0. The overall rating is the weighted average:</p>
+        <h3 class="text-base font-semibold text-text">When We Show It</h3>
+        <p class="text-sm text-muted leading-relaxed">CreditDoc shows a star rating only when the database has both a valid stored Google rating and a stored Google review count.</p>
         <div class="space-y-3">
           <div class="flex items-start gap-3">
             <span class="shrink-0 w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center text-xs font-bold">1</span>
             <div>
-              <p class="text-sm font-semibold text-text">Value</p>
-              <p class="text-xs text-muted">Is the service worth the price? Monthly fees, setup costs, money-back guarantees, and cost-to-benefit ratio.</p>
+              <p class="text-sm font-semibold text-text">Source</p>
+              <p class="text-xs text-muted">Stored Google business rating data and the associated Google review count.</p>
             </div>
           </div>
           <div class="flex items-start gap-3">
             <span class="shrink-0 w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center text-xs font-bold">2</span>
             <div>
-              <p class="text-sm font-semibold text-text">Effectiveness</p>
-              <p class="text-xs text-muted">Does it work? Track record, CFPB resolution data, customer outcomes, and industry results.</p>
+              <p class="text-sm font-semibold text-text">No fallback score</p>
+              <p class="text-xs text-muted">If Google rating data is missing, incomplete, or unsuitable, CreditDoc shows no star rating instead of substituting an internal score.</p>
             </div>
           </div>
           <div class="flex items-start gap-3">
             <span class="shrink-0 w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center text-xs font-bold">3</span>
             <div>
-              <p class="text-sm font-semibold text-text">Reputation</p>
-              <p class="text-xs text-muted">What do others say? BBB rating, Google reviews, CFPB complaint patterns, and regulatory standing.</p>
+              <p class="text-sm font-semibold text-text">Structured data</p>
+              <p class="text-xs text-muted">AggregateRating schema is emitted only when the same Google rating is visible on the page.</p>
             </div>
           </div>
           <div class="flex items-start gap-3">
             <span class="shrink-0 w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center text-xs font-bold">4</span>
             <div>
-              <p class="text-sm font-semibold text-text">Transparency</p>
-              <p class="text-xs text-muted">Are they upfront? Clear pricing, no hidden fees, accessible contracts, and honest marketing.</p>
+              <p class="text-sm font-semibold text-text">Editorial separation</p>
+              <p class="text-xs text-muted">CreditDoc's written diagnosis and pros/cons are editorial analysis; they do not set the star rating.</p>
             </div>
           </div>
           <div class="flex items-start gap-3">
             <span class="shrink-0 w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center text-xs font-bold">5</span>
             <div>
-              <p class="text-sm font-semibold text-text">Customer Experience</p>
-              <p class="text-xs text-muted">What's it like to use? Response times, portal quality, communication, and cancellation process.</p>
+              <p class="text-sm font-semibold text-text">Independence</p>
+              <p class="text-xs text-muted">Companies cannot pay to change stored Google rating data, review count, editorial content, or correction decisions.</p>
             </div>
           </div>
         </div>
       </div>
       <div class="mt-4 space-y-2">
         <p class="text-sm text-muted leading-relaxed">
-          <strong class="text-text">How this differs from Google Reviews:</strong> Google ratings are popularity votes from self-selected reviewers. Our rating is a methodological assessment using verifiable data points. A company with 5.0 stars on Google may score 3.2 here if their CFPB data shows poor resolution or their pricing lacks transparency.
+          <strong class="text-text">How this differs from CreditDoc editorial review:</strong> Google ratings reflect Google reviewer feedback. CreditDoc editorial review separately looks at services, pricing, CFPB complaint data, BBB information, regulatory records, and public company information.
         </p>
         <p class="text-sm text-muted leading-relaxed">
-          <strong class="text-text">How this differs from BBB:</strong> BBB ratings measure business practices and complaint handling processes. Our rating also includes value, effectiveness, and customer experience — factors BBB doesn't score.
+          <strong class="text-text">How this differs from BBB:</strong> BBB ratings measure business practices and complaint handling processes. They are a separate data point and are not converted into CreditDoc star ratings.
         </p>
         <p class="text-sm text-muted leading-relaxed">
-          Ratings are recalculated whenever new data arrives. The "Updated" date on each profile shows when the most recent data was incorporated.
+          The "Updated" date on each profile shows when the page or underlying data was last refreshed.
         </p>
       </div>
     </div>
@@ -264,10 +264,10 @@ const jsonLd = [
       </p>
       <div class="glass-card p-5 space-y-3">
         <p class="text-sm text-muted leading-relaxed">
-          <strong class="text-text">How they're selected:</strong> Same service category + same state, sorted by CreditDoc rating. If you're looking at a credit repair company in Georgia, the similar companies are other credit repair providers also serving Georgia.
+          <strong class="text-text">How they're selected:</strong> Same service category plus relevant geography where available. If you're looking at a credit repair company in Georgia, similar companies are other credit repair providers that may serve the same area or category.
         </p>
         <p class="text-sm text-muted leading-relaxed">
-          <strong class="text-text">Important:</strong> The ratings shown on similar company cards are THEIR OWN ratings — not the rating of the company you're currently viewing. A main company rated 4.2 may show similar companies rated 4.9 because those companies scored higher in our methodology.
+          <strong class="text-text">Important:</strong> Ratings shown on similar company cards are those companies' own stored Google ratings when available. They are not the rating of the company you're currently viewing.
         </p>
         <p class="text-sm text-muted leading-relaxed">
           <strong class="text-text">Why this matters:</strong> Comparison shopping is essential for financial services. Seeing alternatives side-by-side helps you evaluate whether the company you're looking at is the best fit, or whether a competitor might serve you better.

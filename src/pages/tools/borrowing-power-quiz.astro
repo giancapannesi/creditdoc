@@ -6,17 +6,18 @@ const categories = getCategories();
 const allLenders = getAllLenders();
 
 // Build recommendation data: top lenders per category (only enriched/quality ones)
-const categoryRecommendations: Record<string, { name: string; slug: string; rating: number; category: string; description: string; website_url: string; free_consultation: boolean; money_back: boolean }[]> = {};
+const categoryRecommendations: Record<string, { name: string; slug: string; google_rating: number; google_reviews_count: number; category: string; description: string; website_url: string; free_consultation: boolean; money_back: boolean }[]> = {};
 
 for (const cat of categories) {
   const catLenders = allLenders
-    .filter(l => l.category === cat.slug && l.rating > 0 && l.description_short && l.description_short.length > 30)
-    .sort((a, b) => b.rating - a.rating)
+    .filter(l => l.category === cat.slug && l.google_rating && l.google_rating > 0 && !(l.google_rating > 5) && l.google_reviews_count && l.google_reviews_count >= 1 && l.description_short && l.description_short.length > 30)
+    .sort((a, b) => (b.google_rating || 0) - (a.google_rating || 0))
     .slice(0, 8)
     .map(l => ({
       name: l.name,
       slug: l.slug,
-      rating: l.rating,
+      google_rating: l.google_rating || 0,
+      google_reviews_count: l.google_reviews_count || 0,
       category: l.category,
       description: l.description_short?.substring(0, 120) || '',
       website_url: l.website_url || '',
@@ -1023,7 +1024,8 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
                 <p class="text-sm text-muted truncate">${l.description}</p>
               </div>
               <div class="text-right flex-shrink-0">
-                <p class="font-bold text-primary">${l.rating.toFixed(1)}</p>
+                <p class="font-bold text-primary">${l.google_rating.toFixed(1)}</p>
+                <p class="text-[11px] text-muted">${l.google_reviews_count.toLocaleString()} Google reviews</p>
                 <p class="text-xs text-muted">${l.free_consultation ? 'Free consult' : l.money_back ? 'Money-back' : 'View details'}</p>
               </div>
               <svg class="w-4 h-4 text-muted flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>`;

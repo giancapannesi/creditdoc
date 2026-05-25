@@ -676,6 +676,26 @@ export async function getSiblingAnswersByPillarRuntime(
 }
 
 /**
+ * Published answers in a content pillar. Used by non-answer SSR routes for
+ * contextual internal links into the /answers/ hub.
+ */
+export async function getAnswersByPillarRuntime(
+  pillar: string,
+  env?: RuntimeLenderEnv,
+  limit = 4
+): Promise<RuntimeAnswer[]> {
+  if (!pillar || !env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return [];
+  const url =
+    `${env.SUPABASE_URL}/rest/v1/answers` +
+    `?cluster_pillar=eq.${encodeURIComponent(pillar)}` +
+    `&select=slug,title,cluster_id,cluster_pillar,banner_category,target_money_page,compliance_score,compliance_passed,body_inline,updated_at` +
+    `&order=updated_at.desc` +
+    `&limit=${limit}`;
+  const rows = await _restGet<RuntimeAnswer>(url, env);
+  return rows ?? [];
+}
+
+/**
  * All published answers, ordered by recency. Used by /answers/index.astro
  * SSR (Phase 5.1) so the index page doesn't fs.readdirSync src/content/answers.
  * Hard cap at 500 to keep payload bounded; we only have ~14 rows today.

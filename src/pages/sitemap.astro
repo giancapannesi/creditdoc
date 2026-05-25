@@ -14,10 +14,11 @@ for (const g of guides) {
   guidesByCategory[g.category_label].push(g);
 }
 
-// Top lenders per category (top 10 by rating)
+// Top lenders per category (top 10 by stored Google rating where available)
 const categoryData = categories.map(cat => {
   const lenders = getLendersByCategory(cat.slug);
-  const top = [...lenders].sort((a, b) => b.rating - a.rating).slice(0, 10);
+  const googleRatingValue = (l: any) => l.google_rating && l.google_rating > 0 && !(l.google_rating > 5) && l.google_reviews_count && l.google_reviews_count >= 1 ? l.google_rating : 0;
+  const top = [...lenders].sort((a, b) => googleRatingValue(b) - googleRatingValue(a)).slice(0, 10);
   return { category: cat, lenders, top };
 });
 
@@ -131,7 +132,7 @@ const jsonLd = {
               {top.map(l => (
                 <li class="flex items-center justify-between">
                   <a href={`/review/${l.slug}/`} class="text-primary hover:underline truncate mr-2">{l.name}</a>
-                  {l.rating > 0 && <span class="text-xs text-muted shrink-0">{l.rating.toFixed(1)}/5</span>}
+                  {l.google_rating && l.google_rating > 0 && !(l.google_rating > 5) && l.google_reviews_count && l.google_reviews_count >= 1 && <span class="text-xs text-muted shrink-0">{l.google_rating.toFixed(1)}/5 Google</span>}
                 </li>
               ))}
             </ul>

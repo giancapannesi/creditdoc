@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CreditDoc Pinterest Creator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <div class="wordmark"><span>Credit</span>Doc</div>
+          <p>Pinterest Creator and Scheduler</p>
+        </div>
+        <div class="top-actions">
+          <span id="connection" class="status">Checking Pinterest...</span>
+          <a class="button-link" href="/connect">Connect Pinterest</a>
+          <form method="post" action="/disconnect"><button class="secondary">Disconnect</button></form>
+          <form method="post" action="/logout"><button class="secondary">Logout</button></form>
+        </div>
+      </header>
+
+      <section class="grid">
+        <article class="panel">
+          <h2>1. Connect Pinterest Account</h2>
+          <p class="muted">Authorize CreditDoc to read the connected Pinterest account and boards.</p>
+          <a class="button-link wide" href="/connect">Connect Pinterest Account</a>
+          <div class="token-box">
+            <label>Generated test access token<input id="access-token" type="password" autocomplete="off" placeholder="Paste read-only test token"></label>
+            <button id="connect-token" class="secondary">Connect with test token</button>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>2. Verify Pinterest Access</h2>
+          <p class="muted">Confirm the connected account and board list returned by Pinterest.</p>
+          <div class="button-row">
+            <button id="check-account">Fetch account</button>
+            <button id="check-boards">Fetch boards</button>
+          </div>
+          <div id="api-output" class="status-card">Ready.</div>
+        </article>
+
+        <article class="panel">
+          <h2>3. Create Pin</h2>
+          <label>Board<select id="board"></select></label>
+          <label>Title<input id="title" value="3 Moves That Actually Raise Your Credit Score"></label>
+          <label>Description<textarea id="description">Dispute report errors, lower utilization, and keep old positive accounts open. CreditDoc helps borrowers understand which moves matter before applying. #CreditScore #CreditRepair</textarea></label>
+          <label>Destination URL<input id="link" value="https://www.creditdoc.co/"></label>
+          <label>Image URL or uploaded path<input id="image-path" value="/og-default.png"></label>
+          <label>Alt text<input id="alt-text" value="CreditDoc credit score improvement checklist graphic"></label>
+          <label>Upload image<input id="upload" type="file" accept="image/*"></label>
+          <div class="button-row">
+            <button id="save-pin">Save draft</button>
+            <button id="post-now">Post now</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <h2>Queue and Results</h2>
+        <div id="pins" class="pins"></div>
+      </section>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

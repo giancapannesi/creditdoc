@@ -85,7 +85,7 @@ const localIntro = isAtmCategory
   ? `Use this page to browse selected ATM and cash access profiles associated with ${stateName}. CreditDoc does not maintain a complete, real-time inventory of every ATM in ${city}; for the nearest machine, verify availability directly with your bank, credit union, or ATM network before you go.`
   : introFn
     ? introFn(city, stateName, stateData)
-    : `Find ${catName.toLowerCase()} providers serving ${city}, ${stateName}. Compare local and statewide options available to ${city} residents, check ratings, and make an informed choice.`;
+    : `Find ${catName.toLowerCase()} providers serving ${city}, ${stateName}. Compare local and statewide options available to ${city} residents, check Google ratings where available, and make an informed choice.`;
 
 // Fetch lenders in this state + category from Supabase
 let lenders: Lender[] = [];
@@ -153,7 +153,7 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
 const title = `${catName} in ${city}, ${stateAbbr} — Local Directory | CreditDoc`;
 const description = isAtmCategory
   ? `Browse selected ATM and cash access profiles for ${city}, ${stateName}. Verify current ATM availability directly with your bank, credit union, or ATM network.`
-  : `Find the best ${catName.toLowerCase()} serving ${city}, ${stateName}. Compare ${sortedLenders.length}+ local and statewide providers with ratings, reviews, and contact information.`;
+  : `Find the best ${catName.toLowerCase()} serving ${city}, ${stateName}. Compare ${sortedLenders.length}+ local and statewide providers with Google ratings where available, reviews, and contact information.`;
 
 const listName = isAtmCategory && cityLenders.length === 0
   ? `Selected ${stateName} ${catName} Profiles`
