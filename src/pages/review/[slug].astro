@@ -9,6 +9,7 @@ import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import RegulatoryRecord from '../../components/RegulatoryRecord.astro';
 import HMDARecord from '../../components/HMDARecord.astro';
 import InfoLink from '../../components/InfoLink.astro';
+import StateRegulatoryContext from '../../components/StateRegulatoryContext.astro';
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
 import {
   getBbbClass,
@@ -19,6 +20,7 @@ import {
   getWellnessGuidesByCategoryRuntime,
   getComparisonsForLenderRuntime,
   getBrandInfoRuntime,
+  getStateByCodeRuntimeFromDb,
   shapeBodyInlineToLender,
   shapeCatalogToLenderStub,
 } from '../../utils/data-runtime';
@@ -28,6 +30,7 @@ import {
   getRelatedLendersByCategoryRuntime,
   getRegulatorDataRuntime,
   getHMDADataRuntime,
+  getAnswersByPillarRuntime,
   type RuntimeLenderEnv,
 } from '../../lib/db';
 import type { Lender } from '../../utils/data';
@@ -62,6 +65,40 @@ const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
 
 const { slug } = Astro.params;
 if (!slug) return new Response('Bad request', { status: 400 });
+
+const staleReviewRedirects: Record<string, string> = {
+  'first-heritage-loan-firm': '/categories/personal-loans/',
+  'compramos-todo-tipo-de-carros': '/categories/personal-loans/',
+  'used-cars-for-sale-miami-financing-available-auto-dealer': '/credit-guide/miami-fl/personal-loans/',
+  'auto-savings': '/categories/personal-loans/',
+  'thinksmart-financial': '/categories/personal-loans/',
+  '3f-auto-sales-llc-albuquerque-nm': '/credit-guide/albuquerque-nm/personal-loans/',
+  'atkins-auto': '/categories/personal-loans/',
+  'az-debt-relief-group': '/categories/debt-relief/',
+  'argus-check-cashing-inside-danys-supermarket': '/categories/check-cashing/',
+  'midtown-gold-and-silver-buyers': '/categories/pawn-shops/',
+  'flat-rate-auto-outlet': '/categories/personal-loans/',
+  'pjs-auto-sales': '/categories/personal-loans/',
+  'hall-pre-owned-express-and-buying-center': '/categories/personal-loans/',
+  'star-motor-express-auto-sales': '/categories/personal-loans/',
+  'a2z-express-mart': '/categories/check-cashing/',
+  'direct-motorsport-of-virginia-beach': '/credit-guide/virginia-beach-va/personal-loans/',
+  '1st-budget-car-outlet': '/categories/personal-loans/',
+  'alvarez-motorsports': '/categories/personal-loans/',
+  'new-car-dealers-dallas': '/credit-guide/dallas-tx/personal-loans/',
+  'mayra-cars-indy': '/credit-guide/indianapolis-in/personal-loans/',
+  'greater-metro': '/categories/credit-unions/',
+  'jm-auto-title-service-titulos-y-placas-surety-bond-title': '/credit-guide/dallas-tx/personal-loans/',
+  'the-ivy-league-solutions': '/categories/credit-repair/',
+  'pacific-check-cashing-financial': '/categories/check-cashing/',
+  'autocarhouston-autos-usados': '/credit-guide/houston-tx/personal-loans/',
+  'auto-titles-and-bonds': '/credit-guide/dallas-tx/personal-loans/',
+  'ria-money-transfer-envios-el-papi': '/credit-guide/san-diego-ca/check-cashing/',
+};
+
+if (staleReviewRedirects[slug]) {
+  return Astro.redirect(staleReviewRedirects[slug], 302);
+}
 
 const primaryRow = await getLenderWithBodyBySlugRuntime(slug, env);
 if (!primaryRow) return new Response('Not found', { status: 404 });
@@ -102,6 +139,13 @@ const usedSlugs = new Set([lender.slug, ...relatedLenders.map((l) => l.slug)]);
 
 const categories = getCategoriesRuntime();
 const category = categories.find((c) => c.slug === lender.category);
+const categoryLinkFallbacks: Record<string, string> = {
+  'credit-counseling': '/best/best-credit-counseling-agencies/',
+};
+const categoryHref = category
+  ? `/categories/${lender.category}/`
+  : (categoryLinkFallbacks[lender.category] || '/categories/');
+const absoluteCategoryHref = `https://www.creditdoc.co${categoryHref}`;
 
 const stateAbbr = lender.company_info?.state
   ? (STATE_ABBR[lender.company_info.state] || lender.company_info.state)
@@ -123,6 +167,47 @@ const categoryGuideMap: Record<string, string> = {
 };
 const guideCategory = categoryGuideMap[lender.category] || 'understanding-credit';
 const relatedWellnessGuides = (await getWellnessGuidesByCategoryRuntime(guideCategory, env, 3)).slice(0, 3);
+
+const answerPillarMap: Record<string, string> = {
+  'personal-loans': 'personal-loans',
+  'business-loans': 'business-loans',
+  'debt-relief': 'debt-relief',
+  'credit-repair': 'credit-score',
+  'credit-counseling': 'debt-relief',
+  'build-credit': 'build-credit',
+  'credit-monitoring': 'credit-score',
+  'credit-cards': 'credit-cards',
+  'banking': 'personal-loans',
+  'credit-unions': 'personal-loans',
+  'emergency-cash': 'personal-loans',
+  'payday-alternatives': 'personal-loans',
+  'check-cashing': 'personal-loans',
+  'pawn-shops': 'personal-loans',
+  'free-help': 'debt-relief',
+  'bankruptcy': 'debt-relief',
+  'mortgages': 'personal-loans',
+};
+const relatedAnswerPillar = answerPillarMap[lender.category] || 'credit-score';
+const relatedAnswers = await getAnswersByPillarRuntime(relatedAnswerPillar, env, 4);
+
+const cityName = lender.company_info?.city || '';
+const regionName = stateAbbr || lender.company_info?.state || '';
+const locationLabel = [cityName, regionName].filter(Boolean).join(', ');
+const categoryLabel = category?.name || lender.category.replace(/-/g, ' ');
+const stateRegulatoryContext = stateAbbr
+  ? await getStateByCodeRuntimeFromDb(stateAbbr, env)
+  : null;
+const primaryWellnessGuide = relatedWellnessGuides[0];
+const nextStepWellnessHref = primaryWellnessGuide
+  ? `/financial-wellness/${primaryWellnessGuide.slug}/`
+  : '/financial-wellness/';
+const nextStepWellnessTitle = primaryWellnessGuide?.title || 'Financial Wellness Guides';
+const reviewSummaryItems = [
+  `${lender.name} is listed as a ${categoryLabel}${locationLabel ? ` provider in ${locationLabel}` : ' provider'} on CreditDoc.`,
+  `Use this page to check contact details, location, listed services, review signals, FAQs, and similar providers before deciding what to do next.`,
+  `If you need a loan, account, installment option, credit help, or debt support, start with the fit quiz and compare alternatives before contacting a provider.`,
+  `For broader context, continue into the free Credit Fundamentals course or a relevant financial wellness guide.`,
+];
 
 // Map lender category to glossary contexts
 const glossaryContextMap: Record<string, string[]> = {
@@ -195,14 +280,6 @@ const generalFeatures: Record<string, string> = {
   identity_theft_protection: 'Identity Theft Protection',
 };
 const featureLabels = category?.filter_type === 'credit-repair' ? creditRepairFeatures : generalFeatures;
-
-const ratingCategories = [
-  { label: 'Value', value: lender.rating_breakdown.value },
-  { label: 'Effectiveness', value: lender.rating_breakdown.effectiveness },
-  { label: 'Customer Service', value: lender.rating_breakdown.customer_service },
-  { label: 'Transparency', value: lender.rating_breakdown.transparency },
-  { label: 'Ease of Use', value: lender.rating_breakdown.ease_of_use },
-];
 
 const hq = lender.company_info?.headquarters?.trim();
 const year = lender.company_info?.founded_year;
@@ -309,6 +386,7 @@ const qualityScore = lender.quality_score ?? 0;
 const isPendingApproval = lender.processing_status === 'pending_approval';
 const isSkeleton = qualityScore < 3 || isPendingApproval || lender.no_index === true;
 const isEnriched = lender.has_been_enriched === true || lender.data_source === 'enriched' || lender.data_source === 'editorial' || lender.data_source === 'verified';
+const showGoogleRating = !isSkeleton && lender.google_rating && lender.google_rating > 0 && !(lender.google_rating > 5) && lender.google_reviews_count && lender.google_reviews_count >= 1;
 
 // Website health warnings
 const websiteStatus = (lender as any).website_status || '';
@@ -349,36 +427,9 @@ if (lender.company_info?.phone) {
   financialService.telephone = lender.company_info.phone;
 }
 
-const clampedRating = Math.min(5, Math.max(1, lender.rating));
-
-// Review — CreditDoc organization-attributed algorithmic score (not a customer review).
-// Enables star snippets in Google SERPs. Body references the methodology page so
-// the scoring formula is discoverable + Rich Results-policy compliant.
-if (lender.rating > 0 && lender.rating <= 5) {
-  const diagnosisText = diagnosis?.summary || lender.description_short || '';
-  financialService.review = {
-    '@type': 'Review',
-    author: {
-      '@type': 'Organization',
-      name: 'CreditDoc',
-      url: 'https://www.creditdoc.co/',
-    },
-    reviewRating: {
-      '@type': 'Rating',
-      ratingValue: clampedRating.toFixed(1),
-      bestRating: '5',
-      worstRating: '1',
-    },
-    reviewBody: diagnosisText.length > 10
-      ? `${diagnosisText} CreditDoc Rating derived from our 5-factor methodology — see https://www.creditdoc.co/methodology/ for scoring details.`
-      : `CreditDoc Rating derived from our 5-factor methodology. See https://www.creditdoc.co/methodology/ for scoring details.`,
-    datePublished: lender.last_reviewed_at || lender.last_updated || new Date().toISOString().slice(0,10),
-  };
-}
-
 // AggregateRating from real Google Reviews data (not editorial scores).
 // Only added when actual customer review data exists (google_rating + google_reviews_count).
-if (lender.google_rating && lender.google_rating > 0 && lender.google_rating <= 5 && lender.google_reviews_count && lender.google_reviews_count >= 1) {
+if (showGoogleRating) {
   financialService.aggregateRating = {
     '@type': 'AggregateRating',
     ratingValue: lender.google_rating.toFixed(1),
@@ -389,30 +440,34 @@ if (lender.google_rating && lender.google_rating > 0 && lender.google_rating <= 
 }
 
 
-const jsonLd = [
-  financialService,
-  {
+const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
-      { '@type': 'ListItem', position: 2, name: category?.name || lender.category, item: `https://www.creditdoc.co/categories/${lender.category}/` },
+      { '@type': 'ListItem', position: 2, name: category?.name || lender.category, item: absoluteCategoryHref },
       { '@type': 'ListItem', position: 3, name: lender.name, item: `https://www.creditdoc.co/review/${lender.slug}/` },
     ],
-  },
-  ...(faqs.length > 0 ? [{
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map(faq => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  }] : []),
-];
+  };
+const shouldEmitEntitySchema = !isSkeleton && primaryRow.processing_status === 'ready_for_index';
+const jsonLd = shouldEmitEntitySchema
+  ? [
+      financialService,
+      breadcrumbSchema,
+      ...(faqs.length > 0 ? [{
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map(faq => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+          },
+        })),
+      }] : []),
+    ]
+  : [breadcrumbSchema];
 
 const canonicalUrl = `https://www.creditdoc.co/review/${lender.slug}/`;
 
@@ -442,7 +497,7 @@ const ogImageUrl = lender.logo_url?.trim()
   })()}
   description={(() => {
     if (lender.meta_description) return lender.meta_description.slice(0, 155);
-    const base = lender.description_short || `${lender.name} review with pricing, ratings, and features.`;
+    const base = lender.description_short || `${lender.name} review with services, contact details, review signals, and alternatives.`;
     const city = lender.company_info?.city;
     if (city && !base.includes(city)) {
       const locNote = ` Located in ${city}${lender.company_info?.state ? ', ' + lender.company_info.state : ''}.`;
@@ -458,7 +513,7 @@ const ogImageUrl = lender.logo_url?.trim()
     <ol class="flex items-center gap-1.5 text-sm text-muted">
       <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
       <li><span class="mx-1">/</span></li>
-      <li><a href={`/categories/${lender.category}/`} class="hover:text-primary transition-colors">{category?.name || lender.category}</a></li>
+      <li><a href={categoryHref} class="hover:text-primary transition-colors">{category?.name || lender.category}</a></li>
       <li><span class="mx-1">/</span></li>
       <li class="text-text font-medium">{lender.name}{(() => {
         const city = lender.company_info?.city;
@@ -519,20 +574,24 @@ const ogImageUrl = lender.logo_url?.trim()
               return ` in ${city}${stAbbr ? ', ' + stAbbr : ''}`;
             })()}
           </h1>
-          <div class="flex items-center gap-3 mt-2">
-            <RatingStars rating={lender.rating} size="md" showValue={true} />
-            <InfoLink href="/about/creditdoc-data/#rating" label="How our rating works" />
-          </div>
+          {showGoogleRating ? (
+            <div class="flex items-center gap-3 mt-2">
+              <RatingStars rating={lender.google_rating} size="md" showValue={true} />
+              <span class="text-sm text-muted">Google rating from {lender.google_reviews_count.toLocaleString()} review{lender.google_reviews_count === 1 ? '' : 's'}</span>
+            </div>
+          ) : (
+            <p class="mt-2 text-sm font-medium text-muted">No verified Google rating available.</p>
+          )}
           <p class="mt-3 text-muted leading-relaxed">{lender.description_short}</p>
           {lender.is_protected ? (
             <p class="mt-2 text-xs text-muted">
               Editorially reviewed by <a href="/about/harvey-brooks/" class="text-primary hover:underline">Harvey Brooks</a>
-              · Rating from <a href="/methodology/" class="text-primary hover:underline">CreditDoc methodology</a>
+              · Google rating shown only when a stored review count is available
             </p>
           ) : (
             <p class="mt-2 text-xs text-muted">
               Data compiled from public sources
-              · Rating from <a href="/methodology/" class="text-primary hover:underline">CreditDoc methodology</a>
+              {showGoogleRating && <> · Google rating shown when a stored review count is available</>}
             </p>
           )}
         </div>
@@ -571,7 +630,7 @@ const ogImageUrl = lender.logo_url?.trim()
       <!-- Main Content -->
       <div class="lg:col-span-2 space-y-8">
         <!-- Description -->
-        <div class="glass-card p-6">
+        <div class="glass-card p-6" id="services">
           <h2 class="text-xl font-bold text-text mb-4">{lender.name} Review</h2>
           <div class="prose prose-sm max-w-none text-muted leading-relaxed">
             {linkedParagraphs.length > 0
@@ -628,25 +687,6 @@ const ogImageUrl = lender.logo_url?.trim()
         <div>
           <h2 class="text-xl font-bold text-text mb-4">Pros & Cons</h2>
           <ProsCons pros={lender.pros} cons={lender.cons} />
-        </div>
-
-        <!-- Rating Breakdown -->
-        <div class="glass-card p-6">
-          <h2 class="text-xl font-bold text-text mb-4">Rating Breakdown<InfoLink href="/about/creditdoc-data/#rating" label="How our 5-factor rating works" /></h2>
-          <div class="space-y-3">
-            {ratingCategories.map(cat => (
-              <div class="flex items-center gap-4">
-                <span class="text-sm font-medium text-text w-32 shrink-0">{cat.label}</span>
-                <div class="flex-1 h-2.5 bg-bg-alt rounded-full overflow-hidden">
-                  <div
-                    class="h-full bg-primary rounded-full transition-all"
-                    style={`width: ${(cat.value / 5) * 100}%`}
-                  ></div>
-                </div>
-                <span class="text-sm font-semibold text-text w-8 text-right">{cat.value.toFixed(1)}</span>
-              </div>
-            ))}
-          </div>
         </div>
 
         <!-- Internal Cross-Sell Banner (secured cards) -->
@@ -736,6 +776,18 @@ const ogImageUrl = lender.logo_url?.trim()
         {/* Regulatory data — dynamic from regulator.db → Supabase sync */}
         {regulatorData && (
           <RegulatoryRecord data={regulatorData} lenderName={lender.name} />
+        )}
+
+        {/* State-level consumer finance context from the states table. */}
+        {stateRegulatoryContext && (
+          <StateRegulatoryContext
+            data={stateRegulatoryContext}
+            lenderName={lender.name}
+            lenderCategory={lender.category}
+            categoryLabel={categoryLabel}
+            cityName={cityName}
+            stateAbbr={stateAbbr}
+          />
         )}
 
         {/* HMDA mortgage lending transparency */}
@@ -828,7 +880,7 @@ const ogImageUrl = lender.logo_url?.trim()
 
           {/* Contact & Location */}
           {(lender.phone || lender.address) && (
-            <div class="mt-4 pt-4 border-t border-border/50 space-y-2">
+            <div class="mt-4 pt-4 border-t border-border/50 space-y-2" id="contact-location">
               {lender.phone && (
                 <a href={`tel:${lender.phone}`} class="flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" viewBox="0 0 20 20" fill="currentColor">
@@ -946,7 +998,7 @@ const ogImageUrl = lender.logo_url?.trim()
 
   <!-- Compare With Section -->
   {comparisons.length > 0 && (
-    <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8" id="related-companies">
       <h2 class="text-xl font-bold text-text mb-4">Compare {lender.name} With Others</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {comparisons.map(comp => {
@@ -979,7 +1031,7 @@ const ogImageUrl = lender.logo_url?.trim()
       <h2 class="text-xl font-bold text-text mb-4">{relatedLendersLabel}<InfoLink href="/about/creditdoc-data/#similar-companies" label="How we find similar companies" /></h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {relatedLenders.map(related => (
-          <LenderCard lender={related} />
+          <LenderCard lender={related} showRatings={showGoogleRating} />
         ))}
       </div>
     </section>
@@ -1041,7 +1093,7 @@ const ogImageUrl = lender.logo_url?.trim()
     </div>
   </section>
 
-  <script define:vars={{ quizCategory: lender.category, quizServices: lender.services, quizHasGuarantee: lender.pricing?.money_back_guarantee || false, quizHasFreeConsult: lender.pricing?.free_consultation || false, quizRating: lender.rating, quizName: lender.name }}>
+  <script define:vars={{ quizCategory: lender.category, quizServices: lender.services, quizHasGuarantee: lender.pricing?.money_back_guarantee || false, quizHasFreeConsult: lender.pricing?.free_consultation || false, quizRating: showGoogleRating ? lender.google_rating : 0, quizName: lender.name }}>
     (function() {
       const quiz = document.getElementById('fit-quiz');
       if (!quiz) return;
@@ -1066,14 +1118,18 @@ const ogImageUrl = lender.logo_url?.trim()
         const [goal, credit, priority] = answers;
         let score = 0;
         const cats = (quizCategory || '').toLowerCase();
-        if (goal === 'repair' && (cats.includes('credit repair') || cats.includes('credit'))) score += 2;
-        if (goal === 'loan' && (cats.includes('lend') || cats.includes('loan') || cats.includes('mortgage'))) score += 2;
-        if (goal === 'debt' && (cats.includes('debt') || cats.includes('consolidat'))) score += 2;
-        if (goal === 'build' && (cats.includes('credit') || cats.includes('bank'))) score += 1;
+        const creditRepairCats = new Set(['credit-repair', 'credit-monitoring', 'build-credit']);
+        const loanCats = new Set(['personal-loans', 'business-loans', 'mortgages', 'emergency-cash', 'payday-alternatives']);
+        const debtCats = new Set(['debt-relief', 'credit-counseling', 'bankruptcy']);
+        const buildCats = new Set(['build-credit', 'credit-repair', 'credit-monitoring', 'banking']);
+        if (goal === 'repair' && creditRepairCats.has(cats)) score += 2;
+        if (goal === 'loan' && loanCats.has(cats)) score += 2;
+        if (goal === 'debt' && debtCats.has(cats)) score += 2;
+        if (goal === 'build' && buildCats.has(cats)) score += 1;
         if (priority === 'price' && (quizHasFreeConsult || quizHasGuarantee)) score += 1;
         if (priority === 'trust' && quizRating >= 4) score += 1;
         if (priority === 'service' && quizServices && quizServices.length >= 4) score += 1;
-        if (credit === 'poor' && (cats.includes('credit repair') || cats.includes('bad credit'))) score += 1;
+        if (credit === 'poor' && (creditRepairCats.has(cats) || loanCats.has(cats))) score += 1;
         const verdict = document.getElementById('quiz-verdict');
         const reason = document.getElementById('quiz-reason');
         if (score >= 3) {
@@ -1089,6 +1145,75 @@ const ogImageUrl = lender.logo_url?.trim()
       }
     })();
   </script>
+
+  <!-- Related Questions -->
+  {relatedAnswers.length > 0 && (
+    <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+      <div class="glass-card p-6">
+        <div class="flex items-center justify-between gap-4 mb-4">
+          <h2 class="text-lg font-bold text-text">Related Questions</h2>
+          <a href="/answers/" class="text-sm text-primary hover:underline">View all</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {relatedAnswers.map(answer => (
+            <a href={`/answers/${answer.slug}/`} class="glass-card p-4 block hover:border-primary transition-colors group">
+              <span class="text-sm font-medium text-text group-hover:text-primary transition-colors">
+                {answer.title.replace(/ \| CreditDoc$/, '')}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Review Summary & Next Steps -->
+  <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+    <div class="glass-card p-6">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div class="lg:col-span-2">
+          <h2 class="text-lg font-bold text-text">Quick Summary</h2>
+          <ul class="mt-3 space-y-2 text-sm text-muted leading-relaxed">
+            {reviewSummaryItems.map(item => (
+              <li class="flex gap-2">
+                <span class="mt-2 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="lg:col-span-3">
+          <h2 class="text-lg font-bold text-text">Next Steps</h2>
+          <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <a href="#contact-location" class="rounded-lg border border-border bg-white/60 p-4 hover:border-primary transition-colors group">
+              <span class="block text-sm font-semibold text-text group-hover:text-primary transition-colors">Find contact or location</span>
+              <span class="mt-1 block text-xs text-muted leading-relaxed">Check phone, address, map, and website availability.</span>
+            </a>
+            <a href="#services" class="rounded-lg border border-border bg-white/60 p-4 hover:border-primary transition-colors group">
+              <span class="block text-sm font-semibold text-text group-hover:text-primary transition-colors">Check specific services</span>
+              <span class="mt-1 block text-xs text-muted leading-relaxed">See whether the provider lists the help you need.</span>
+            </a>
+            <a href="#fit-quiz" class="rounded-lg border border-border bg-white/60 p-4 hover:border-primary transition-colors group">
+              <span class="block text-sm font-semibold text-text group-hover:text-primary transition-colors">Match your need</span>
+              <span class="mt-1 block text-xs text-muted leading-relaxed">Use the quiz for loans, credit help, debt support, or credit building.</span>
+            </a>
+            <a href="#related-companies" class="rounded-lg border border-border bg-white/60 p-4 hover:border-primary transition-colors group">
+              <span class="block text-sm font-semibold text-text group-hover:text-primary transition-colors">Compare alternatives</span>
+              <span class="mt-1 block text-xs text-muted leading-relaxed">Review similar providers before making contact.</span>
+            </a>
+            <a href={nextStepWellnessHref} class="rounded-lg border border-border bg-white/60 p-4 hover:border-primary transition-colors group">
+              <span class="block text-sm font-semibold text-text group-hover:text-primary transition-colors">Improve your position</span>
+              <span class="mt-1 block text-xs text-muted leading-relaxed">{nextStepWellnessTitle}</span>
+            </a>
+            <a href="/courses/credit-fundamentals/" class="rounded-lg border border-border bg-white/60 p-4 hover:border-primary transition-colors group">
+              <span class="block text-sm font-semibold text-text group-hover:text-primary transition-colors">Learn the basics</span>
+              <span class="mt-1 block text-xs text-muted leading-relaxed">Start the free Credit Fundamentals course.</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Related Financial Wellness Guides -->
   {relatedWellnessGuides.length > 0 && (
@@ -1145,7 +1270,7 @@ const ogImageUrl = lender.logo_url?.trim()
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="rounded-lg bg-bg-alt border border-border p-4">
       <p class="text-xs text-muted leading-relaxed">
-        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to {lender.name} and other services. These commissions help us maintain our free research. Our editorial team independently evaluates all services. Compensation does not influence our ratings or rankings. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
+        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to {lender.name} and other services. These commissions help us maintain our free research. Our editorial team independently evaluates all services. Compensation does not influence editorial reviews, page order, or recommendations; visible star ratings use stored Google review ratings when available. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
       </p>
     </div>
   </section>
