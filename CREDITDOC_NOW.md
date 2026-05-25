@@ -91,27 +91,35 @@ Implementation slice completed locally 2026-05-19:
 
 Founder reported new GSC reason: `Blocked by robots.txt`.
 
-Root cause verified: the new letter pages were not blocked. The conflict was
-`https://www.creditdoc.co/search/`: `public/robots.txt` correctly protects
-`/search/`, but Astro sitemap auto-discovered `src/pages/search.astro` and
+Root cause verified at the time: the new letter pages were not blocked. The
+conflict was `https://www.creditdoc.co/search/`: `public/robots.txt` blocked
+`/search/`, and Astro sitemap auto-discovered `src/pages/search.astro` and
 submitted `/search/` in `sitemap-3.xml`.
 
 Fix shipped 2026-05-21:
 
-- Keep `public/robots.txt` protected with `Disallow: /search/`.
+- Historical action, superseded 2026-05-25: kept `public/robots.txt` protected
+  with the old `/search/` disallow rule.
 - Add `@astrojs/sitemap` `filter()` in `astro.config.mjs` to exclude `/search/`.
 - Add post-build guard `scripts/check_sitemap_robots_conflicts.mjs`.
 - Add `npm run postbuild` so future builds fail if a robots-blocked URL is
   submitted in generated XML sitemaps.
 - Cloudflare Worker Version ID: `d21bbcf9-0414-4dd1-8997-d6467a1fe5e0`
 - Verified live:
-  - `https://www.creditdoc.co/robots.txt` returns `200 text/plain` and still
-    contains `Disallow: /search/`.
+  - `https://www.creditdoc.co/robots.txt` returned `200 text/plain` and still
+    contained the old `/search/` disallow rule at that time.
   - `sitemap-0.xml` through `sitemap-3.xml` contain zero `/search/` URLs.
   - Letter-template pages still return `200 text/html`.
 
-Important: do not "fix" this class of warning by removing robots protection.
-Keep robots protected and exclude protected/internal URLs from sitemaps.
+Superseded 2026-05-25: this handled sitemap submission, but GSC later showed
+parameterized `/search/?state=...` URLs under "Blocked by robots.txt". Because
+`/search/` already has `<meta name="robots" content="noindex, nofollow">` and
+canonicalizes to `https://www.creditdoc.co/search/`, robots-blocking it prevents
+Google from seeing the noindex directive. The correct current policy is:
+
+- keep `/search/` out of XML sitemaps;
+- keep `/search/` page-level `noindex, nofollow`;
+- do not block `/search/` in `robots.txt`.
 
 Follow-up shipped 2026-05-21:
 

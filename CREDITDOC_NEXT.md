@@ -166,9 +166,10 @@ wellness-generator batch.
 - Don't conflate Vercel with CreditDoc (it's Cloudflare Workers)
 - Don't propose author bio / personal E-E-A-T (SCRAPPED permanently)
 - Don't use bare `wrangler deploy` — always use `./deploy.sh`
-- Don't remove robots protections to clear a GSC warning. If a protected URL is
-  in XML sitemaps, fix the sitemap generator and keep `public/robots.txt`
-  protected. `npm run postbuild` now checks this.
+- Don't robots-block pages that already carry page-level `noindex`. If Google
+  cannot crawl them, it cannot see the noindex directive and GSC reports
+  "Blocked by robots.txt". Keep `/search/` out of XML sitemaps, but allow crawl
+  so its `noindex,nofollow` and canonical can be processed.
 
 ---
 

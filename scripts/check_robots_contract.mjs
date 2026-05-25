@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-// Build-time guard for robots.txt rules that are intentional protections.
-// This prevents accidental removal of internal route blocks during SEO fixes.
+// Build-time guard for robots.txt rules that must stay aligned with indexation
+// policy. Crawlable noindex pages must not be robots-blocked, otherwise Google
+// cannot see the noindex directive and Search Console reports blocked URLs.
 
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -12,8 +13,11 @@ const ROBOTS = join(ROOT, 'public/robots.txt');
 const REQUIRED_LINES = [
   'User-agent: *',
   'Allow: /',
-  'Disallow: /search/',
   'Sitemap: https://www.creditdoc.co/sitemap-index.xml',
+];
+
+const FORBIDDEN_LINES = [
+  'Disallow: /search/',
 ];
 
 function main() {
@@ -26,18 +30,22 @@ function main() {
   );
 
   const missing = REQUIRED_LINES.filter((line) => !lines.has(line));
-  if (missing.length) {
+  const forbidden = FORBIDDEN_LINES.filter((line) => lines.has(line));
+  if (missing.length || forbidden.length) {
     console.error('');
     console.error('robots.txt contract FAILED:');
     for (const line of missing) {
       console.error(`  - missing required line: ${line}`);
     }
+    for (const line of forbidden) {
+      console.error(`  - forbidden line present: ${line}`);
+    }
     console.error('');
-    console.error('Do not remove protected robots rules without founder approval.');
+    console.error('Keep /search/ crawlable so Google can see its page-level noindex directive.');
     process.exit(1);
   }
 
-  console.log(`[robots-contract] OK — protected robots rules present.`);
+  console.log(`[robots-contract] OK — robots.txt allows crawlable noindex handling.`);
 }
 
 main();
