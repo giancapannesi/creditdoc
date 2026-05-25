@@ -37,7 +37,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from creditdoc_db import CreditDocDB, ProtectedProfileError
+from creditdoc_db import CreditDocDB, ProtectedProfileError, JSON_EXPORT_EXCLUDED_FIELDS
 
 PROJECT_DIR = Path(__file__).parent.parent
 LENDERS_DIR = PROJECT_DIR / "src" / "content" / "lenders"
@@ -63,6 +63,14 @@ def checksum_json(data):
     """Canonical JSON hash — sorted keys, compact separators."""
     canonical = json.dumps(data, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(canonical.encode()).hexdigest()
+
+
+def public_lender_payload(data):
+    """Return the exported/public lender payload, excluding automation metadata."""
+    cleaned = dict(data)
+    for field in JSON_EXPORT_EXCLUDED_FIELDS:
+        cleaned.pop(field, None)
+    return cleaned
 
 
 def get_last_sync_time(db):
@@ -130,7 +138,8 @@ def sync_lender_file(db, fpath, slug, dry_run=False):
         log(f"  ERROR {slug}: {e}")
         return "error"
 
-    file_checksum = checksum_json(file_data)
+    file_public_data = public_lender_payload(file_data)
+    file_checksum = checksum_json(file_public_data)
 
     # Check if lender exists in DB
     existing = db.get_lender(slug)
@@ -149,7 +158,9 @@ def sync_lender_file(db, fpath, slug, dry_run=False):
             return "error"
 
     # Compare checksums
-    if existing["checksum"] == file_checksum:
+    existing_public_data = public_lender_payload(existing["data"])
+    existing_checksum = checksum_json(existing_public_data)
+    if existing_checksum == file_checksum:
         return "unchanged"
 
     # Checksums differ — file has been modified
@@ -161,27 +172,28 @@ def sync_lender_file(db, fpath, slug, dry_run=False):
         log(f"    File checksum: {file_checksum[:16]}...")
         return "drift_blocked"
 
-    # Non-protected profile — update DB to match JSON
-    if dry_run:
-        log(f"  [DRY RUN] UPDATE: {slug}")
-        return "updated"
-
     # Diff which fields changed (for better audit logs)
     changed_fields = {}
-    for key, new_val in file_data.items():
-        old_val = existing["data"].get(key)
+    for key, new_val in file_public_data.items():
+        old_val = existing_public_data.get(key)
         if json.dumps(old_val, sort_keys=True) != json.dumps(new_val, sort_keys=True):
             changed_fields[key] = new_val
 
     # Also catch removed fields
-    for key in existing["data"]:
-        if key not in file_data:
+    for key in existing_public_data:
+        if key not in file_public_data:
             changed_fields[key] = None  # Marking for removal
 
     if not changed_fields:
-        # Checksums differ but no field-level diff — shouldn't happen, but log it
-        log(f"  WARN {slug}: checksum mismatch but no field diff")
+        # Checksums can differ when a tracked JSON file contains ignored
+        # automation metadata such as last_engine_run. That is not public
+        # content drift and should not dirty DB state or alert operators.
         return "unchanged"
+
+    # Non-protected profile — update DB to match JSON
+    if dry_run:
+        log(f"  [DRY RUN] UPDATE: {slug}")
+        return "updated"
 
     try:
         # Use update_lender to log individual field changes to audit_log

@@ -56,6 +56,13 @@ LENDERS_DIR = PROJECT_DIR / "src" / "content" / "lenders"
 CONTENT_DIR = PROJECT_DIR / "src" / "content"
 LOGOS_DIR = PROJECT_DIR / "public" / "logos"
 
+# Fields used only by internal automation. They are useful inside SQLite but
+# should not be serialized into tracked lender JSON files, otherwise routine
+# bookkeeping makes the Git worktree look like real content changed.
+JSON_EXPORT_EXCLUDED_FIELDS = {
+    "last_engine_run",
+}
+
 
 # ─── Persistence Rules ──────────────────────────────────────────────
 # PERSISTENT FIELDS — editorial content that must NEVER be lost or silently
@@ -114,7 +121,9 @@ TRANSIENT_FIELDS = {
     "data_source",
     "website_needs_review",
     "qc_passed_at",
+    "brand_slug",
     # Location data — can be updated if improved
+    "state",
     "website_url",
     "website",
     "phone",
@@ -267,6 +276,7 @@ def _build_lender_payload(data: dict, checksum: str, ts: str) -> dict:
         "name": data.get("name"),
         "category": data.get("category"),
         "state": data.get("state"),
+        "brand_slug": data.get("brand_slug"),
         "processing_status": data.get("processing_status"),
         "has_logo": bool(data.get("logo_url")),
         "checksum": checksum,
@@ -369,7 +379,8 @@ class CreditDocDB:
         row = self.conn.execute(
             """SELECT slug, data, category, processing_status, is_protected,
                       is_enriched, quality_score, logo_path, website_url,
-                      checksum, created_at, updated_at, updated_by, exported_at
+                      checksum, created_at, updated_at, updated_by, exported_at,
+                      brand_slug, state
                FROM lenders WHERE slug = ?""",
             (slug,),
         ).fetchone()
@@ -377,7 +388,7 @@ class CreditDocDB:
             return None
         return self._row_to_lender(row)
 
-    def get_lender_data(self, slug):
+    def get_lender_data(self, slug, include_operational=False):
         """Get just the JSON data for a lender (what goes in the file).
 
         Merges the lenders.brand_slug column into the returned dict so that
@@ -389,6 +400,9 @@ class CreditDocDB:
         if not row:
             return None
         data = json.loads(row["data"])
+        if not include_operational:
+            for field in JSON_EXPORT_EXCLUDED_FIELDS:
+                data.pop(field, None)
         # Inject brand_slug from the column (may be None/null)
         data["brand_slug"] = row["brand_slug"]
         return data
@@ -653,17 +667,21 @@ class CreditDocDB:
             quality_score = data.get("quality_score", lender["quality_score"]) or 0
             logo_path = data.get("logo_url", lender["logo_path"])
             website_url = data.get("website_url", "") or data.get("website", lender["website_url"])
+            brand_slug = data.get("brand_slug", lender.get("brand_slug"))
+            state = data.get("state", lender.get("state"))
 
             self.conn.execute(
                 """UPDATE lenders SET
                       data = ?, category = ?, processing_status = ?,
                       is_enriched = ?, quality_score = ?, logo_path = ?,
-                      website_url = ?, checksum = ?, updated_at = ?, updated_by = ?
+                      website_url = ?, brand_slug = ?, state = ?,
+                      checksum = ?, updated_at = ?, updated_by = ?
                    WHERE slug = ?""",
                 (
                     json.dumps(data, separators=(",", ":")),
                     category, processing_status, is_enriched, quality_score,
-                    logo_path, website_url, checksum, ts, updated_by, slug,
+                    logo_path, website_url, brand_slug, state,
+                    checksum, ts, updated_by, slug,
                 ),
             )
             self.conn.commit()
@@ -1130,6 +1148,19 @@ class CreditDocDB:
             return False
 
         filepath = output_dir / f"{slug}.json"
+        if filepath.exists():
+            try:
+                existing = json.loads(filepath.read_text())
+                if existing == data:
+                    ts = _now()
+                    self.conn.execute(
+                        "UPDATE lenders SET exported_at = ? WHERE slug = ?", (ts, slug)
+                    )
+                    self.conn.commit()
+                    return False
+            except Exception:
+                pass
+
         with open(filepath, "w") as f:
             json.dump(data, f, indent=2)
 
@@ -1266,6 +1297,8 @@ class CreditDocDB:
             "updated_at": row["updated_at"],
             "updated_by": row["updated_by"],
             "exported_at": row["exported_at"],
+            "brand_slug": row["brand_slug"],
+            "state": row["state"],
         }
 
 
