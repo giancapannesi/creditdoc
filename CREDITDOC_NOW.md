@@ -896,3 +896,20 @@ Git cleanup and autonomous engine stop 2026-05-25:
 - Do not restart this engine without Jammi approval. If it is intentionally
   restarted later, first verify it no longer writes operational metadata such as
   `last_engine_run` into tracked lender JSON files.
+
+Autonomous growth ops plan ready for activation 2026-05-25:
+
+- Plan file:
+  `/srv/BusinessOps/creditdoc/docs/plans/2026-05-25-autonomous-creditdoc-growth-ops-plan.md`
+- Commit:
+  `bd0355b00c Plan autonomous CreditDoc growth ops`
+- Google Drive copy:
+  `https://drive.google.com/file/d/1pzPBFUtP4lVoFnQj3yKYJ7JHHxPeOdhb/view?usp=drivesdk`
+- Email sent to `gian.eao@gmail.com` using the correct AgentMail path:
+  `/srv/BusinessOps/.venv/bin/python /srv/BusinessOps/tools/harvey_email.py send ...`
+- Do not use system `python3` for AgentMail. The `agentmail` dependency is in
+  the BusinessOps venv.
+- Tomorrow's intended action: activate the autonomous CreditDoc growth operating
+  loop from the plan, starting with safe daily checks, GSC workpack generation,
+  repo cleanliness, automation status, and live URL status verification. Keep
+  `creditdoc-engine.service` stopped unless Jammi explicitly approves restart.
