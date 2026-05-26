@@ -500,9 +500,31 @@ Phase 1 write status:
   `personal-loans` -> `banking`; `is_protected` remained `1`.
 - Post-fix candidate CSV regenerated:
   `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/cfpb_responsiveness_candidates_enriched_after_phase1_fixes_2026-05-26.csv`
+- Phase 1B safe DB fixes completed:
+  - `first-technology`: `banking` -> `credit-unions`; official URL set to
+    `https://www.firsttechfed.com/`; pending profile review.
+  - `mountain-america`: `banking` -> `credit-unions`; official URL set to
+    `https://www.macu.com/`; pending profile review.
+  - `sarma`: `mortgages` -> `credit-monitoring`; pending category-policy
+    review because it is a B2B credit reporting/data/collections provider.
+  - No unresolved Supabase retry rows for the three writes.
+- Phase 1B candidate CSV regenerated:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/cfpb_responsiveness_candidates_enriched_after_phase1b_fixes_2026-05-26.csv`
+- Top-50 audit classification is complete. Current top-50 disposition:
+  - 40 `yes_pending_final_methodology`
+  - 5 `pending_profile_review`
+  - 3 `pending_post_regen_review`
+  - 1 `pending_fintech_policy` (`moneylion`; do not auto-change)
+  - 1 `pending_category_policy` (`sarma`; B2B/data/collections policy needed)
 
 Next execution:
 
-1. Continue manual classification of remaining top-50 candidates.
-2. Re-check Supabase retry queue after any additional writes.
-3. Keep updating the workpack README and `CREDITDOC_NOW/NEXT` after each batch.
+1. Review the 5 `pending_profile_review` rows before public report use:
+   `first-technology`, `mountain-america`, `wafd-bank-seattle`,
+   `hancock-whitney-bank-gulfport`, and `san-diego-county`.
+2. Decide fintech/multi-product category policy for `moneylion`.
+3. Decide whether B2B credit reporting/data/collections providers such as
+   `sarma` belong in the public CFPB responsiveness report or should be a
+   separate category/table.
+4. Move to Phase 3 final candidate/methodology work only after those decisions.
+5. Keep updating the workpack README and `CREDITDOC_NOW/NEXT` after each batch.

@@ -1128,3 +1128,34 @@ Bottom-up local authority + CFPB responsiveness project 2026-05-26:
 - Regenerated set remains 131 rows. Corrected rows now appear as `banking`;
   banking count increased to 57, personal-loans decreased to 18, mortgages
   decreased to 9.
+- Phase 1B category/profile cleanup completed:
+  - Backup:
+    `data/backups/creditdoc_before_regulator_category_cleanup_phase1b_2026-05-26.sqlite`
+  - `first-technology`: `banking` -> `credit-unions`; weak Instrumentl URL
+    replaced with official `https://www.firsttechfed.com/`.
+  - `mountain-america`: `banking` -> `credit-unions`; Wikipedia URL replaced
+    with official `https://www.macu.com/`.
+  - `sarma`: `mortgages` -> `credit-monitoring`; kept pending category-policy
+    review because it is a B2B credit reporting/data/collections provider, not
+    a lender.
+  - All three writes used `CreditDocDB.update_lender(...,
+    updated_by='regulator_category_cleanup')`, audit logged, with no unresolved
+    Supabase retry rows.
+  - `moneylion` was deliberately not changed. It is founder-protected and
+    genuinely multi-product, so it is marked `pending_fintech_policy` instead
+    of forced into `personal-loans`.
+- Regenerated Phase 1B candidate CSV:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/cfpb_responsiveness_candidates_enriched_after_phase1b_fixes_2026-05-26.csv`
+- Phase 1 top-50 audit status:
+  - all top-50 rows classified
+  - 40 `yes_pending_final_methodology`
+  - 5 `pending_profile_review`
+  - 3 `pending_post_regen_review`
+  - 1 `pending_fintech_policy`
+  - 1 `pending_category_policy`
+- Confirmed entity/profile notes:
+  - `firstbank` and `independent-bank-memphis` are confirmed by FDIC cert and
+    official website; use clarifying location/entity context in public copy.
+  - `wafd-bank-seattle`, `hancock-whitney-bank-gulfport`, and
+    `san-diego-county` are confirmed matches but remain pending profile review
+    because their CreditDoc rows are draft/brand-profile review candidates.

@@ -111,7 +111,7 @@ Phase 1:
 
 - top 50 candidates classified
 - all obvious category/profile mismatches marked
-- no DB writes yet
+- no public report work until classification is complete
 
 Phase 2:
 
@@ -141,3 +141,30 @@ This is not "waiting for Google." This cleanup improves the lender intelligence 
 - CFPB/data research
 - provider outreach
 - future routing/matching
+
+## Progress - 2026-05-26
+
+Phase 1 top-50 classification is complete.
+
+Safe Phase 2 fixes applied through the CreditDoc DB API:
+
+- `synovus-bank`: `mortgages` -> `banking`
+- `goldman-sachs-bank-usa`: `pawn-shops` -> `banking` with founder-authorized
+  override because the federal-ID guard correctly blocked a non-founder
+  category change.
+- `bmo-bank`: `personal-loans` -> `banking` with founder-authorized override
+  because the row is founder-protected; protection remained enabled.
+- `first-technology`: `banking` -> `credit-unions`; weak source URL replaced
+  with official `https://www.firsttechfed.com/`.
+- `mountain-america`: `banking` -> `credit-unions`; Wikipedia URL replaced
+  with official `https://www.macu.com/`.
+- `sarma`: `mortgages` -> `credit-monitoring`; remains pending public-report
+  category policy because it is a B2B credit reporting/data/collections
+  provider.
+
+Manual holds before public report:
+
+- `moneylion`: leave unchanged pending fintech/multi-product category policy.
+- `first-technology`, `mountain-america`, `wafd-bank-seattle`,
+  `hancock-whitney-bank-gulfport`, and `san-diego-county`: confirmed matches,
+  but profile copy/status should be reviewed before report publication.
