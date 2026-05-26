@@ -168,3 +168,17 @@ Manual holds before public report:
 - `first-technology`, `mountain-america`, `wafd-bank-seattle`,
   `hancock-whitney-bank-gulfport`, and `san-diego-county`: confirmed matches,
   but profile copy/status should be reviewed before report publication.
+
+Profile review batch completed:
+
+- `first-technology`, `mountain-america`, `wafd-bank-seattle`,
+  `hancock-whitney-bank-gulfport`, and `san-diego-county` were reviewed and
+  cleaned through the DB API.
+- The five rows now have category-correct display names/meta/copy and
+  `review_status: published`.
+- First Tech and Mountain America no longer rely on weak Instrumentl/Wikipedia
+  source language in their profile copy.
+- WaFd and Hancock Whitney now have aligned official website fields.
+- After this batch, the top-50 queue has 45 rows ready for final methodology,
+  3 rows pending post-regeneration confirmation, and 2 policy holds
+  (`moneylion`, `sarma`).
