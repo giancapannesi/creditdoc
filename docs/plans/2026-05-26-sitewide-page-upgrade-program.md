@@ -1302,3 +1302,37 @@ Notes:
   `dist/_worker.js/pages/blog/_slug_.astro.mjs`.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 052: Blog Related Guide Titles
+
+Date: 2026-05-26
+Implementation commit: `de73dbf8fb` (`feat: soften blog related guide titles`)
+
+Scope:
+
+- `src/pages/blog/[slug].astro`
+
+What changed:
+
+- Applied `softenEducationalTeaserCopy()` to related financial-wellness guide
+  titles rendered in the blog sidebar.
+- Preserved guide slugs, `/financial-wellness/` links, read-time display, and
+  sidebar layout.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and built `/blog/[slug]` worker route-module scans confirmed related
+  guide titles are softened before rendering.
+- `git diff --check` passed.
+
+Notes:
+
+- This pairs with Batch 051 to cover both related-listicle and related-guide
+  title paths in the blog sidebar.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
