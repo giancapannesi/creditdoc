@@ -2962,3 +2962,68 @@ Notes:
   than highlighting a provider.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 087: Comparison Consumer Protection Copy Softening
+
+Date: 2026-05-26
+Implementation commit: `19987ab63d` (`fix: soften comparison consumer protection copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared safe-copy replacements for consumer-protection, superiority,
+  borrower-profile, and recommendation-style comparison fragments.
+- Replaced `critical 72-hour listed satisfaction term` with
+  `listed 72-hour satisfaction term`.
+- Replaced `genuine consumer protection`, `substantial consumer protection`,
+  and broad `consumer protections` phrasing with listed consumer-protection
+  context.
+- Replaced `superior consumer-facing tools`, `is superior for`, `superior for`,
+  `better serves consumers`, and `better addresses actual emergency expenses`
+  with listed-context language.
+- Replaced `risk-averse borrowers`, `for qualified borrowers`, and
+  `riskier for most users seeking` with borrower/provider-criteria and
+  comparison-risk context.
+- Added final-pass cleanup for generated `profile with more listed fields for...`,
+  `the profile the profile...`, `stored outcome fields serving`,
+  `trustworthy for`, and `Compare ... only when` / `compare ... only when`
+  fragments.
+- Preserved source comparison records, source lender records, pricing values,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged JSON changes
+  affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for targeted raw phrases:
+  `the profile the profile`, `profile with more listed fields for`,
+  `stored outcome fields serving`, `is superior for`, `superior for`,
+  `riskier for most users`, `for most users seeking`,
+  `Consumers should explore`, or `trustworthy for`.
+- Targeted rendered checks confirmed replacement language on:
+  `/compare/ace-cash-express-miami-fl-vs-ace-cash-express/`,
+  `/compare/midland-credit-management-vs-american-profit-recovery/`,
+  `/compare/incharge-debt-solutions-vs-detroit-wealth-club/`,
+  `/compare/smartcredit-vs-dovly/`,
+  `/compare/greenlight-financial-vs-the-credit-gal/`,
+  `/compare/kikoff-vs-gocreditme-lake-western/`,
+  `/compare/cambridge-credit-counseling-vs-clarifi/`, and
+  `/compare/ace-cash-express-miami-fl-vs-advance-america-claymont/`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/ace-cash-express-miami-fl-vs-advance-america-claymont/`,
+  `/compare/kikoff-vs-gocreditme-lake-western/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
