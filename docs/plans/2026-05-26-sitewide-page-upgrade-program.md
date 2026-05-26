@@ -565,6 +565,63 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 074: Comparison Risk And Timing Claims
+
+Date: 2026-05-26
+Implementation commit: `df4d255e33` (`feat: soften comparison risk and timing claims`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Extended `softenYmylCopy()` to convert remaining generated comparison
+  endorsement-style phrases into profile-context wording before rendering.
+- Softened `lower-risk`, `safer`, `more trustworthy`, `more reliable and
+  accountable`, `superior BBB`, `stronger credentials`, and similar comparison
+  summary language into listed-field, trust-signal, or context-to-verify copy.
+- Reworded guarantee/refund phrasing such as `guarantee terms`,
+  `lacks this guarantee`, `unconditional listed refund term`, and
+  `transparent guarantee policies` into published refund-term or
+  refund-policy context.
+- Reworded `same-day funding` and `next-day funding` variants into
+  funding-timing claims to verify so city, browse, and comparison output does
+  not imply timing certainty.
+- Preserved source comparison records, city/browse/review routes, slugs,
+  category mappings, rankings, ratings, links, cards, tables, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- `dist/compare` scan returned no matches for targeted risky phrases including
+  `lower-risk`, `more trustworthy`, `trustworthy choice`, `more reliable and
+  accountable`, `superior BBB`, `stronger BBB reputation`, `crucial consumer
+  protection`, `guarantee terms`, `significantly stronger credentials`,
+  `stronger business practices`, `guarantee policies`, and `outperforms`.
+- Targeted rendered checks confirmed safer wording on:
+  `/compare/ace-cash-express-new-orleans-la-vs-ace-cash-express-terrytown/`,
+  `/compare/ecreditadvisor-vs-the-credit-people/`, and
+  `/compare/credit-saint-vs-the-credit-people/`.
+- `dist/city` and `dist/browse` scan returned no matches for raw
+  `same-day funding claims to verify` or `next-day funding claims to verify`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/learn/`, `/blog/`, `/categories/fintech/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Helper-only change; no source records, route generation, slug generation,
+  ranking logic, category assignment, or page layout changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 038: Comparison Guide Label Copy
 
 Date: 2026-05-26
