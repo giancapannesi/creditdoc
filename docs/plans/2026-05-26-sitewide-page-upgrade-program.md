@@ -1659,3 +1659,41 @@ Notes:
   changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 061: Remaining Wellness Decision Titles
+
+Date: 2026-05-26
+Implementation commit: `70ae41eeaa` (`feat: soften remaining wellness decision titles`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added final safe-copy handling for financial-wellness guide list titles that
+  still rendered as direct personal-decision prompts.
+- Softened `Which Should You Choose?` to `Trade-Offs to Compare`.
+- Softened `What You Actually Need` to `Account Trade-Offs to Compare`.
+- Cleaned up `How to Evaluate Your Financial Account Protection?` to
+  `Financial Account Protection Evaluation Guide`.
+- Preserved source guide records, slugs, URLs, route structure, and page
+  templates.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- `git diff --check` passed.
+- Generated `dist/financial-wellness/index.html` and `dist/sitemap/index.html`
+  confirmed targeted direct-decision phrases were removed and representative
+  softened titles were present.
+
+Notes:
+
+- This continues the central-helper strategy from Batches 059 and 060.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
