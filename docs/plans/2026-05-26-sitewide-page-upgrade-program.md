@@ -600,3 +600,37 @@ Notes:
 - Raw comparison JSON was not edited.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 034: Score Simulator And Checklist Copy
+
+Date: 2026-05-26  
+Implementation commit: `62901c345c` (`feat: soften score simulator copy`)
+
+Scope:
+
+- `src/pages/tools/credit-score-simulator.astro`
+- `src/pages/resources/credit-report-checklist/index.astro`
+
+What changed:
+
+- Reframed the score simulator CTA away from improving scores faster and toward
+  additional credit report context.
+- Rewrote the score-change FAQ to avoid timing and point-change promises.
+- Reframed the checklist related-answer copy from `help you decide` to
+  comparison/learning language.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Generated tools/resources scan was clean for the targeted fast-score,
+  point-change, and `help you decide` phrases.
+- `git diff --check` passed.
+
+Notes:
+
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
