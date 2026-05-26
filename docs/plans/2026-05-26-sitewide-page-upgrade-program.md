@@ -3093,6 +3093,52 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 097: State Lending-Law Provider Copy Softening
+
+Date: 2026-05-26
+Implementation commit: `a149a5a3eb` (`fix: soften state lending law provider copy`)
+
+Scope:
+
+- `src/pages/state/[slug]/lending-laws.astro`
+
+What changed:
+
+- Replaced the state lending-law sidebar sentence that could render as
+  `Compare  verified credit repair companies...` for zero-count states.
+- Added singular/plural provider-count handling for states with listed credit
+  repair provider profiles.
+- Reframed the sidebar CTA away from `verified credit repair companies` into
+  listed provider-profile and state-rule context.
+- Preserved state law data, provider records, routes, CTA destination, legal
+  resources, and page layout.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered `dist/state` scan returned no matches for `Compare
+  verified credit repair companies`, numbered `Compare ... verified credit
+  repair companies`, blank-count `Compare  verified credit repair companies`,
+  or `verified credit repair companies`.
+- Positive rendered scan confirmed replacement language including listed credit
+  repair provider profiles and local provider listings/state-rule context.
+- Production spot checks returned HTTP 200 for `/`,
+  `/state/texas/lending-laws/`, `/state/alaska/lending-laws/`,
+  `/state/wisconsin/lending-laws/`, `/state/ohio/lending-laws/`, `/robots.txt`,
+  and `/sitemap-index.xml`.
+
+Notes:
+
+- Remaining `guarantee` and `qualify` matches in state lending-law rendered
+  scans were legal-context uses, such as VA-guaranteed loans, property-tax
+  eligibility, or warnings that credit repair outcomes cannot be guaranteed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 095: Remaining Category Metadata and Provider Snippet Claim Softening
 
 Date: 2026-05-26
