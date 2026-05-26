@@ -12,8 +12,28 @@ const { lenderA, lenderB } = Astro.props;
 
 // Determine winners for each row
 function priceWinner(a: number, b: number): 'a' | 'b' | 'tie' {
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return 'tie';
   if (a === b) return 'tie';
   return a < b ? 'a' : 'b';
+}
+
+function listedPrice(price: number | undefined): number | null {
+  return typeof price === 'number' && Number.isFinite(price) && price >= 0 ? price : null;
+}
+
+function lowestListedMonthlyPrice(lender: Lender): number | null {
+  const monthlyPrice = listedPrice(lender.pricing.monthly_price);
+  const comparableTiers = lender.pricing.tiers
+    .map(tier => listedPrice(tier.price))
+    .filter((price): price is number => price !== null)
+    .filter(price => monthlyPrice === null || monthlyPrice === 0 || price <= monthlyPrice * 2);
+
+  if (comparableTiers.length > 0) return Math.min(...comparableTiers);
+  return monthlyPrice;
+}
+
+function formatMonthlyPrice(price: number | null): string {
+  return price === null ? 'No listed monthly price' : `From ${formatPrice(price)}/mo`;
 }
 
 function ratingWinner(a: number, b: number): 'a' | 'b' | 'tie' {
@@ -38,15 +58,11 @@ function bbbWinner(a: string, b: string): 'a' | 'b' | 'tie' {
   return ra > rb ? 'a' : 'b';
 }
 
-const lowestPriceA = lenderA.pricing.tiers.length > 0
-  ? Math.min(...lenderA.pricing.tiers.filter(t => t.price <= lenderA.pricing.monthly_price * 2).map(t => t.price))
-  : lenderA.pricing.monthly_price;
-const lowestPriceB = lenderB.pricing.tiers.length > 0
-  ? Math.min(...lenderB.pricing.tiers.filter(t => t.price <= lenderB.pricing.monthly_price * 2).map(t => t.price))
-  : lenderB.pricing.monthly_price;
+const lowestPriceA = lowestListedMonthlyPrice(lenderA);
+const lowestPriceB = lowestListedMonthlyPrice(lenderB);
 
 const winners = {
-  price: priceWinner(lowestPriceA, lowestPriceB),
+  price: lowestPriceA === null || lowestPriceB === null ? 'tie' as const : priceWinner(lowestPriceA, lowestPriceB),
   setup: priceWinner(lenderA.pricing.setup_fee, lenderB.pricing.setup_fee),
   bbb: bbbWinner(lenderA.company_info.bbb_rating, lenderB.company_info.bbb_rating),
   guarantee: lenderA.pricing.money_back_guarantee === lenderB.pricing.money_back_guarantee ? 'tie' as const : (lenderA.pricing.money_back_guarantee ? 'a' as const : 'b' as const),
@@ -113,11 +129,11 @@ const comparisonBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-
       <tr class="hover:bg-bg-alt/50 transition-colors">
         <td class="py-3 px-4 font-medium text-text">Monthly Price</td>
         <td class="py-3 px-4 text-center">
-          <span class="font-semibold">From {formatPrice(lowestPriceA)}/mo</span>
+          <span class="font-semibold">{formatMonthlyPrice(lowestPriceA)}</span>
           {winners.price === 'a' && <span class={comparisonBadge}>Lower</span>}
         </td>
         <td class="py-3 px-4 text-center">
-          <span class="font-semibold">From {formatPrice(lowestPriceB)}/mo</span>
+          <span class="font-semibold">{formatMonthlyPrice(lowestPriceB)}</span>
           {winners.price === 'b' && <span class={comparisonBadge}>Lower</span>}
         </td>
       </tr>

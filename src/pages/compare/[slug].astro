@@ -47,7 +47,7 @@ function softenComparisonText(text: string): string {
 
 const safeSummary = softenComparisonText(comparison.summary);
 const safeWinnerReason = softenComparisonText(comparison.winner_reason);
-const displayComparisonTitle = softenComparisonText(comparison.title);
+const displayComparisonTitle = `${lenderA.name} vs ${lenderB.name} (2026)`;
 const lenderASignals = lenderA.best_for.slice(0, 2).map(softenComparisonText).join('. ');
 const lenderBSignals = lenderB.best_for.slice(0, 2).map(softenComparisonText).join('. ');
 const lenderAStrength = softenComparisonText(lenderA.pros[0] || 'Review the profile fields before contacting the provider');
@@ -57,6 +57,49 @@ function setupFeeContext(lender: Lender): string {
   return lender.pricing.setup_fee > 0
     ? `${lender.name} lists a ${formatPrice(lender.pricing.setup_fee)} setup fee`
     : `${lender.name} has no listed setup fee`;
+}
+
+function listedPrice(price: number | undefined): number | null {
+  return typeof price === 'number' && Number.isFinite(price) && price >= 0 ? price : null;
+}
+
+function lowestListedMonthlyPrice(lender: Lender): number | null {
+  const monthlyPrice = listedPrice(lender.pricing.monthly_price);
+  const comparableTiers = lender.pricing.tiers
+    .map(tier => listedPrice(tier.price))
+    .filter((price): price is number => price !== null)
+    .filter(price => monthlyPrice === null || monthlyPrice === 0 || price <= monthlyPrice * 2);
+
+  if (comparableTiers.length > 0) return Math.min(...comparableTiers);
+  return monthlyPrice;
+}
+
+function monthlyPriceLabel(lender: Lender): string {
+  const price = lowestListedMonthlyPrice(lender);
+  return price === null ? 'No listed monthly price' : `From ${formatPrice(price)}/mo`;
+}
+
+const lenderAMonthlyPrice = lowestListedMonthlyPrice(lenderA);
+const lenderBMonthlyPrice = lowestListedMonthlyPrice(lenderB);
+
+function monthlyPriceFaqAnswer(): string {
+  const aContext = `${lenderA.name}: ${monthlyPriceLabel(lenderA)}`;
+  const bContext = `${lenderB.name}: ${monthlyPriceLabel(lenderB)}`;
+  const setupContext = `Setup fees can change first-month cost: ${setupFeeContext(lenderA)}, while ${setupFeeContext(lenderB)}.`;
+
+  if (lenderAMonthlyPrice === null || lenderBMonthlyPrice === null) {
+    return `The stored monthly-price fields are incomplete for this comparison. Current listed context: ${aContext}; ${bContext}. ${setupContext}`;
+  }
+
+  if (lenderAMonthlyPrice < lenderBMonthlyPrice) {
+    return `${lenderA.name} lists the lower monthly price at ${formatPrice(lenderAMonthlyPrice)}/mo, compared with ${lenderB.name} at ${formatPrice(lenderBMonthlyPrice)}/mo. ${setupContext}`;
+  }
+
+  if (lenderAMonthlyPrice > lenderBMonthlyPrice) {
+    return `${lenderB.name} lists the lower monthly price at ${formatPrice(lenderBMonthlyPrice)}/mo, compared with ${lenderA.name} at ${formatPrice(lenderAMonthlyPrice)}/mo. ${setupContext}`;
+  }
+
+  return `Both ${lenderA.name} and ${lenderB.name} list the same monthly price of ${formatPrice(lenderAMonthlyPrice)}/mo. ${setupContext}`;
 }
 
 const categoryLabels: Record<string, string> = {
@@ -79,11 +122,7 @@ const categoryContextCards = comparedCategories.map(category => ({
 const faqs = [
   {
     question: `Which lists the lower monthly price, ${lenderA.name} or ${lenderB.name}?`,
-    answer: lenderA.pricing.monthly_price < lenderB.pricing.monthly_price
-      ? `${lenderA.name} lists the lower monthly price at ${formatPrice(lenderA.pricing.monthly_price)}/mo, compared with ${lenderB.name} at ${formatPrice(lenderB.pricing.monthly_price)}/mo. Setup fees can change first-month cost: ${setupFeeContext(lenderA)}, while ${setupFeeContext(lenderB)}.`
-      : lenderA.pricing.monthly_price > lenderB.pricing.monthly_price
-        ? `${lenderB.name} lists the lower monthly price at ${formatPrice(lenderB.pricing.monthly_price)}/mo, compared with ${lenderA.name} at ${formatPrice(lenderA.pricing.monthly_price)}/mo. Setup fees can change first-month cost: ${setupFeeContext(lenderB)}, while ${setupFeeContext(lenderA)}.`
-        : `Both ${lenderA.name} and ${lenderB.name} list the same monthly price of ${formatPrice(lenderA.pricing.monthly_price)}/mo. Setup fees can change first-month cost: ${setupFeeContext(lenderA)}, while ${setupFeeContext(lenderB)}.`,
+    answer: monthlyPriceFaqAnswer(),
   },
   {
     question: `Which has the higher stored BBB rating, ${lenderA.name} or ${lenderB.name}?`,
@@ -203,7 +242,7 @@ const jsonLd = [
             </div>
             <div class="mt-3 flex flex-wrap items-center justify-center gap-2">
               <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-primary-light text-primary">
-                From {formatPrice(lender.pricing.tiers[0]?.price || lender.pricing.monthly_price)}/mo
+                {monthlyPriceLabel(lender)}
               </span>
               <span class:list={['inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold', bbbCls]}>
                 BBB: {lender.company_info.bbb_rating}
