@@ -48,6 +48,29 @@ Do not deploy Batch 009 until the concurrent dirty Batch 001 normalization files
 are committed or cleared, so the deploy does not accidentally include unrelated
 local changes.
 
+## 2026-05-26 — CFPB Report Release Assets
+
+**Status: in progress. Do not touch concurrent dirty Batch 001 lender files.**
+
+Release-assets work started for the public CFPB responsiveness report:
+
+- Report route:
+  `/research/most-responsive-consumer-finance-providers-2026/`
+- Workpack log:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/release_assets_log_2026-05-26.md`
+- Added an internal link from `/about/creditdoc-data/` CFPB methodology copy to
+  the public report.
+- Added an "Original Research Reports" section on `/about/creditdoc-data/`
+  linking to the report.
+- Added a "Latest Research" card on `/press/` linking to the report.
+- Drafted press pitch and provider outreach copy in the CFPB workpack.
+
+Next within this release-assets thread:
+
+- Verify build for the release-assets changes.
+- Commit only the release-assets files; leave the nine dirty Batch 001 lender
+  normalization files alone.
+
 ## 2026-05-26 — Noindex Cleanup Batches 006-007
 
 **Status: deployed and live-verified. Worktree clean after commit.**
