@@ -86,6 +86,8 @@ export function softenYmylCopy(text: string): string {
     .replace(/\bmore reliable choice\b/gi, 'profile with more available trust signals')
     .replace(/\bmore reliable and accountable\b/gi, 'with more available accountability fields')
     .replace(/\breliable choice\b/gi, 'profile with available trust signals')
+    .replace(/\bthe safer pick\b/gi, 'the profile with more listed risk-context fields')
+    .replace(/\bsafer pick\b/gi, 'profile with more listed risk-context fields')
     .replace(/\bclear choice\b/gi, 'clearer profile to compare')
     .replace(/\bthe better choice\b/gi, 'the clearer profile to compare')
     .replace(/\bbetter choice\b/gi, 'clearer profile to compare')
@@ -93,7 +95,6 @@ export function softenYmylCopy(text: string): string {
     .replace(/\bbest choice\b/gi, 'profile to compare')
     .replace(/\bstrong choice\b/gi, 'profile with notable listed fields')
     .replace(/\bstronger choice\b/gi, 'profile with more listed fields')
-    .replace(/\bsafer pick\b/gi, 'profile with more listed risk-context fields')
     .replace(/\bstronger pick\b/gi, 'profile with more listed fields')
     .replace(/\bbetter risk mitigation\b/gi, 'more listed risk-context fields')
     .replace(/\bbest options\b/gi, 'options to compare')
@@ -121,6 +122,8 @@ export function softenYmylCopy(text: string): string {
     .replace(/\benhancing borrower protection\b/gi, 'adding listed borrower-protection context')
     .replace(/\bhigher trust\b/gi, 'more trust-signal context')
     .replace(/\bstrong [A-F][+-]? BBB rating\b/gi, 'BBB rating')
+    .replace(/\bwith a (A\+?|A-|F|NR) BBB rating\b/g, 'with an $1 BBB rating')
+    .replace(/\ba (A\+?|A-|F|NR) BBB rating\b/g, 'an $1 BBB rating')
     .replace(/\bstrong BBB\b/gi, 'BBB')
     .replace(/\bstrong Google reviews\b/gi, 'many Google reviews')
     .replace(/\bsignificantly stronger credentials\b/gi, 'more listed credential fields')
@@ -350,7 +353,13 @@ export function softenYmylCopy(text: string): string {
     .replace(/\badvertised advertised 0% interest to verify loans to verify\b/gi, 'advertised 0% interest loans to verify')
     .replace(/\ba advertised 0% interest\b/gi, 'an advertised 0% interest')
     .replace(/\bneed emergency-cash timing to verify\b/gi, 'are researching emergency-cash timing')
-    .replace(/\bneeding ([^.]+?) in emergency-cash timing to verify\b/gi, 'researching emergency-cash timing for $1');
+    .replace(/\bneeding ([^.]+?) in emergency-cash timing to verify\b/gi, 'researching emergency-cash timing for $1')
+    .replace(/\bthe with more listed risk-context fields, profile with more available trust signals\b/gi, 'the profile with more listed risk-context fields and available trust signals')
+    .replace(/\bthe with more listed risk-context fields, more sustainable choice\b/gi, 'the profile with more listed risk-context fields and sustainability context')
+    .replace(/\bthe with more listed risk-context fields, more affordable choice\b/gi, 'the profile with more listed risk-context fields and listed-cost context')
+    .replace(/\bthe with more listed risk-context fields, more legitimate option\b/gi, 'the profile with more listed risk-context fields and methodology context')
+    .replace(/\bthe with more listed risk-context fields pick\b/gi, 'the profile with more listed risk-context fields')
+    .replace(/\bthe with more listed risk-context fields\b/gi, 'the profile with more listed risk-context fields');
 }
 
 export function softenEducationalTeaserCopy(text: string): string {
