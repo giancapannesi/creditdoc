@@ -937,7 +937,8 @@ Search robots/noindex regression prevention 2026-05-26:
   `/search/` robots block returns.
 - Added live operational guards outside the repo:
   `/srv/BusinessOps/tools/creditdoc_smoke_test.py` now checks this daily, and
-  `/srv/BusinessOps/tools/creditdoc_site_monitor.sh` checks it every 5 minutes.
+  `/srv/BusinessOps/tools/creditdoc_site_monitor.sh` checks it once every
+  24 hours at 05:30 UTC.
 - Verification on 2026-05-26: smoke test passed `10/10`; site monitor exited
   `0`; live `robots.txt` does not block `/search/`; live search URL has
   `noindex,nofollow` and canonical to `/search/`.
@@ -959,3 +960,37 @@ Content engine firing verification 2026-05-26:
   blog scheduler already fired; blog generator, city guides, content drip,
   questions/answers, financial wellness, and comparisons were correctly pending
   because their scheduled times had not arrived.
+
+Content engine queue reserve guard 2026-05-26:
+
+- Expanded `/srv/BusinessOps/tools/creditdoc_content_engine_daily_verify.py`
+  so it checks queue reserves as well as same-day firing:
+  blog queue, city guide queue, questions/answers clusters, financial wellness
+  queue, comparison queue, and the legacy content drip source queue.
+- Queue thresholds at time of change:
+  blog minimum 10 pending, city guides minimum 100 tracked, answers minimum
+  50 pending, wellness minimum 10 remaining, comparisons minimum 50 remaining.
+  The legacy content drip queue is allowed to be 0 because it reports all
+  lenders processed.
+- Found a real near-miss: blog queue had only 5 pending items. Tightened
+  `/srv/BusinessOps/tools/creditdoc_blog.py` so it auto-refills when pending
+  count is `<= 10`, not only `< 5`.
+- Refilled the blog queue through the existing question-bank refill path.
+  It rose from 5 pending to 20 pending, then today's blog runs generated new
+  posts and left 16 pending.
+- Found another real reliability bug: Anthropic SDK calls could hang because
+  the timeout was only applied to the CLI fallback. Added SDK request timeouts
+  in the blog generator, city guide generator, shared `creditdoc_oauth.py`, and
+  autonomous engine helper.
+- Added a conservative timeout to `/srv/BusinessOps/tools/cron_alert.py`:
+  default 3600 seconds, configurable with `CRON_ALERT_TIMEOUT_SECS`. Hung cron
+  jobs now exit `124` and send the same AgentMail failure alert instead of
+  running silently forever.
+- Verification at 2026-05-26 06:37 UTC:
+  `creditdoc_content_engine_daily_verify.py --dry-run --allow-pending` passed
+  all due/pending engine checks and all queue reserve checks.
+- Today's blog generation verified live:
+  `/blog/are-credit-card-balance-transfers-a-good-idea/`,
+  `/blog/are-credit-card-balance-transfers-worth-it/`,
+  `/blog/are-credit-card-interest-rates-capped/`, and
+  `/blog/are-credit-card-interest-rates-going-down/` all returned HTTP 200.
