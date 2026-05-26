@@ -204,3 +204,17 @@ Ongoing operating plan:
 - Added `docs/plans/2026-05-26-profile-quality-agent.md` to define the
   dedicated profile-quality workflow, queue priority, source rules, DB write
   rules, documentation requirements, cadence, and success metrics.
+
+Fintech category launch:
+
+- Added `fintech` as a public CreditDoc category for app-first financial
+  technology providers.
+- Initial launch cohort moved into `fintech`: `moneylion`, `chime`, `brigit`,
+  `earnin`, `dave-banking`, `kikoff`, `self-credit-builder`,
+  `self-financial`, `sofi`, `sofi-bank`, and `varo-bank`.
+- MoneyLion is no longer a CFPB report policy hold; it should be treated as a
+  Fintech / multi-product app candidate instead of a traditional bank.
+- Sarma remains the only top-50 policy hold because it is a B2B credit
+  reporting/data/collections provider.
+- Detailed launch plan:
+  `docs/plans/2026-05-26-fintech-category-launch.md`

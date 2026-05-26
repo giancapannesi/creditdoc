@@ -1208,6 +1208,22 @@ Bottom-up local authority + CFPB responsiveness project 2026-05-26:
     - 1 `pending_category_policy` (`sarma`)
 - Added profile-quality operating plan:
   `docs/plans/2026-05-26-profile-quality-agent.md`
+- Fintech category launched:
+  - Backup:
+    `data/backups/creditdoc_before_fintech_category_launch_2026-05-26.sqlite`
+  - New category slug/name: `fintech` / `Fintech`.
+  - Added category to SQLite, exported `src/content/categories.json`, and
+    upserted Supabase `public.categories`.
+  - Moved initial app-first cohort to `fintech` through DB API:
+    `moneylion`, `chime`, `brigit`, `earnin`, `dave-banking`, `kikoff`,
+    `self-credit-builder`, `self-financial`, `sofi`, `sofi-bank`, and
+    `varo-bank`.
+  - Founder authorization was used where profile protection required it:
+    `moneylion`, `chime`, `kikoff`, `self-credit-builder`, and `sofi-bank`.
+  - Verified Supabase has 11 ready Fintech lenders.
+  - MoneyLion moved from CFPB policy hold to
+    `yes_pending_final_methodology` as a Fintech / multi-product app.
+  - Sarma remains the only top-50 policy hold.
 
 ## 2026-05-26 — Noindex Cleanup Batch 004
 

@@ -561,19 +561,31 @@ Phase 1 write status:
   - all three are `published`
   - no unresolved Supabase retry rows
 - Updated top-50 disposition:
-  - 48 `yes_pending_final_methodology`
-  - 1 `pending_fintech_policy` (`moneylion`)
+  - 49 `yes_pending_final_methodology`
   - 1 `pending_category_policy` (`sarma`)
 - Profile-quality operating plan added:
   `docs/plans/2026-05-26-profile-quality-agent.md`
+- Fintech category launched:
+  - new public category `fintech` / `Fintech`
+  - initial cohort moved through DB API and exported:
+    `moneylion`, `chime`, `brigit`, `earnin`, `dave-banking`, `kikoff`,
+    `self-credit-builder`, `self-financial`, `sofi`, `sofi-bank`,
+    `varo-bank`
+  - category row synced to Supabase and verified with 11 ready lenders
+  - MoneyLion is no longer a CFPB policy hold; treat it as Fintech /
+    multi-product app in methodology
+  - detailed plan:
+    `docs/plans/2026-05-26-fintech-category-launch.md`
 
 Next execution:
 
-1. Decide fintech/multi-product category policy for `moneylion`.
-2. Decide whether B2B credit reporting/data/collections providers such as
+1. Decide whether B2B credit reporting/data/collections providers such as
    `sarma` belong in the public CFPB responsiveness report or should be a
    separate category/table.
-3. Move to Phase 3 final candidate/methodology work only after those decisions.
-4. Run the profile-quality workflow continuously against the next CFPB/regulator
+2. Move to Phase 3 final candidate/methodology work only after that decision.
+3. Run the profile-quality workflow continuously against the next CFPB/regulator
    candidates and high-internal-link lender profiles.
+4. Start Fintech profile-quality cleanup: normalize official websites, clean
+   draft profiles (`dave-banking`, `sofi`), and decide duplicate handling for
+   `sofi` vs `sofi-bank`.
 5. Keep updating the workpack README and `CREDITDOC_NOW/NEXT` after each batch.

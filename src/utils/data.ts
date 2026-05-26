@@ -20,6 +20,7 @@ export const ENTITY_TYPE_BADGE_MATRIX: Record<string, {freeConsult: boolean; fre
   'monitor-protect':     {freeConsult: false, freeToUse: true},
   'credit-monitoring':   {freeConsult: false, freeToUse: true},
   'identity-theft':      {freeConsult: false, freeToUse: true},
+  'fintech':             {freeConsult: false, freeToUse: false},
   'personal-loans':      {freeConsult: false, freeToUse: false},
   'business-loans':      {freeConsult: false, freeToUse: false},
   'mortgages':           {freeConsult: false, freeToUse: false},

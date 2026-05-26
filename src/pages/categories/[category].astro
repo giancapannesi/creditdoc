@@ -7,15 +7,30 @@ import { getCategoryBySlugRuntime, getTopLendersByCategoryRuntime, getCategoryCo
 import { shapeBodyInlineToLender, getGlossaryTermsForContextRuntime } from '../../utils/data-runtime';
 import { createLinker } from '../../utils/inline-linker';
 import type { Lender } from '../../utils/data';
+import categoriesData from '../../content/categories.json';
 
 const env = (Astro.locals as any).runtime?.env;
 const { category: categorySlug } = Astro.params;
 
-const [categoryRow, lenderRowsTop, totalForCategory] = await Promise.all([
+const [categoryRowRaw, lenderRowsTop, totalForCategory] = await Promise.all([
   getCategoryBySlugRuntime(categorySlug!, env),
   getTopLendersByCategoryRuntime(categorySlug!, env, 48),
   getCategoryCountRuntime(categorySlug!, env),
 ]);
+
+const fallbackCategories = Object.fromEntries(
+  (categoriesData as any[]).map((category) => [
+    category.slug,
+    {
+      slug: category.slug,
+      name: category.name,
+      body_inline: category,
+      updated_at: '',
+    },
+  ])
+);
+
+const categoryRow = categoryRowRaw ?? fallbackCategories[categorySlug!];
 
 if (!categoryRow) {
   return new Response('Not found', { status: 404 });
