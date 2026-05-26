@@ -1918,3 +1918,50 @@ Notes:
   records, URLs, slugs, or search behavior changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 067: Blog and Learn Best-Copy Snippets
+
+Date: 2026-05-26
+Implementation commit: `6b52ebc3d3` (`feat: soften blog and learn best-copy snippets`)
+
+Scope:
+
+- `src/pages/blog/index.astro`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Reworded the `/blog/` Answer clusters context tile from `when you need a
+  focused next question` to `for focused follow-up questions`.
+- Extended `softenEducationalTeaserCopy()` with phrase-specific replacements
+  for remaining rendered blog/Learn teaser and search-payload copy around
+  `best time`, `best budget`, `best defense`, `generally best`, `fits your
+  situation best`, and `best-performing`.
+- Corrected the helper artifact `Which Free Score results?` to
+  `Free Score Comparison`.
+- Preserved blog post records, wellness guide records, `/blog/` and `/learn/`
+  routes, result URLs, slugs, categories, and search behavior.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- `git diff --check` passed.
+- Generated `dist/blog/index.html` and `dist/learn/index.html` confirmed the
+  targeted raw phrases were absent.
+- Generated output confirmed replacement copy was present, including `Learn
+  timing factors for applying`, `which tool has relevant comparison signals`,
+  `A useful budget is one you can stick with`, `it is a key defense`, and
+  `Free Score Comparison`.
+
+Notes:
+
+- Phrase-specific helper coverage was used instead of a broad lowercase `best`
+  replacement because many remaining `best` matches are route slugs, provider
+  names, or quoted third-party rankings.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
