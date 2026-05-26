@@ -3027,3 +3027,57 @@ Notes:
   records changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 088: Comparison Review and Pricing Claim Softening
+
+Date: 2026-05-26
+Implementation commit: `10039854e1` (`fix: soften comparison review and pricing claims`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared safe-copy replacements for comparison summaries and winner notes
+  that framed review ratings, pricing predictability, and user fit as broad
+  recommendations.
+- Replaced `superior Google review ratings` with `higher stored Google review
+  signals`.
+- Replaced `provides better predictable pricing` with `lists more predictable
+  pricing context`.
+- Replaced `appeals only to clients` with `may be relevant to clients`.
+- Replaced `for most consumers` and `For most clients` with comparison-context
+  wording.
+- Replaced `predictable subscription costs outweigh` and `fees that easily
+  exceed` with less deterministic pricing-comparison language.
+- Preserved source comparison records, source lender records, pricing values,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged JSON changes
+  affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for targeted raw phrases:
+  `superior Google review ratings`, `provides better predictable pricing`,
+  `for most consumers`, `For most clients`, `appeals only to clients`,
+  `predictable subscription costs outweigh`, `fees that easily exceed`, or
+  `clients comparing with minimal`.
+- Targeted rendered checks confirmed replacement language on
+  `/compare/the-credit-repairmen-vs-credit360-credit-repair/` in visible
+  summary, JSON-LD article description, FAQ JSON-LD, research note, and FAQ body.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/the-credit-repairmen-vs-credit360-credit-repair/`,
+  `/compare/credit-blueprint-vs-the-credit-repairmen/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
