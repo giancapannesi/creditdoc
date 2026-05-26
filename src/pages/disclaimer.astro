@@ -10,6 +10,13 @@ const jsonLd = {
   "datePublished": "2026-03-19",
   "dateModified": "2026-03-19"
 };
+
+const contextLinks = [
+  { href: '/resources/credit-report-checklist/', label: 'Credit Report Checklist', description: 'Use a practical checklist when reviewing report entries and dispute topics.' },
+  { href: '/resources/debt-credit-letter-templates/', label: 'Letter Templates', description: 'Review template examples for credit-report and debt correspondence.' },
+  { href: '/state/', label: 'State Rule Context', description: 'Start with state-level lending and credit repair context before comparing providers.' },
+  { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Review public complaint patterns and CFPB data limitations.' },
+];
 ---
 
 <BaseLayout
@@ -171,7 +178,7 @@ const jsonLd = {
             Some links on CreditDoc are affiliate links. This means we may receive compensation -- in the form of referral fees, commissions, or other payment -- when you click on certain links and/or sign up for products or services featured on this website. This compensation helps fund our research and allows us to provide free content to consumers.
           </p>
           <p class="text-sm text-muted leading-relaxed">
-            <strong>This compensation does not influence our editorial reviews, recommendations, correction decisions, or stored Google rating data.</strong> We feature and recommend companies regardless of whether they have an affiliate relationship with us. Companies that pay us commissions may receive critical written reviews when our research warrants it.
+            <strong>This compensation does not influence our editorial reviews, correction decisions, or stored Google rating data.</strong> We cover companies regardless of whether they have an affiliate relationship with us. Companies that pay us commissions may receive critical written reviews when our research warrants it.
           </p>
           <p class="text-sm text-muted leading-relaxed">
             For complete details about how we earn money, please see our <a href="/disclosure/" class="text-primary hover:underline">Affiliate Disclosure</a>.
@@ -194,6 +201,26 @@ const jsonLd = {
           <p class="text-sm text-muted leading-relaxed">
             Consumers should conduct their own research, read contracts carefully, verify pricing independently, and consult with qualified professionals before making any financial decision.
           </p>
+        </div>
+      </div>
+
+      <!-- ============================================ -->
+      <!-- CONSUMER RIGHTS -->
+      <!-- ============================================ -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Use This Disclaimer With CreditDoc Context</h2>
+        <div class="rounded-xl border border-border bg-white p-6 sm:p-8">
+          <p class="text-sm text-muted leading-relaxed">
+            These linked resources connect the disclaimer to practical credit-report tools, state context, and public complaint-data research. They are informational resources, not legal or financial advice.
+          </p>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            {contextLinks.map(link => (
+              <a href={link.href} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40 transition-colors">
+                <span class="text-sm font-semibold text-text">{link.label}</span>
+                <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 

@@ -98,6 +98,13 @@ const regulatoryLinks = [
   { name: 'Do Not Sell My Info', href: '/do-not-sell/' },
   { name: 'FAQ', href: '/faq/' },
 ];
+
+const contextLinks = [
+  { href: '/about/creditdoc-data/', label: 'Data Questions', description: 'Understand the source and limits of the data shown on CreditDoc pages.' },
+  { href: '/research/', label: 'Research Reports', description: 'Review original CreditDoc research built from public consumer-finance datasets.' },
+  { href: '/city/', label: 'Local Guides', description: 'Browse city-level pages before asking about local provider or state-rule context.' },
+  { href: '/resources/', label: 'Resource Library', description: 'Find public checklists and templates before sending a general education request.' },
+];
 ---
 
 <BaseLayout title={title} description={description} jsonLd={jsonLd}>
@@ -115,6 +122,21 @@ const regulatoryLinks = [
     <p class="text-lg text-muted max-w-2xl mb-8">
       We're an independent consumer lending directory. Pick the channel that matches your request — we read every email and route it to the right person.
     </p>
+
+    <section class="glass-card p-6 mb-10">
+      <h2 class="text-lg font-bold text-text mb-3">Use Contact With CreditDoc Context</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        If your question is about data, research, local pages, or consumer resources, these sections may answer it before you email.
+      </p>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2">
+        {contextLinks.map(link => (
+          <a href={link.href} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40 transition-colors">
+            <span class="text-sm font-semibold text-text">{link.label}</span>
+            <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
 
     <!-- Contact channels -->
     <section class="grid gap-5 sm:grid-cols-2 mb-10">
@@ -212,7 +234,7 @@ const regulatoryLinks = [
             <strong class="text-text">Not financial, legal, or tax advice.</strong> Information on CreditDoc is for general educational purposes only and does not constitute personalized financial, legal, or tax advice. For advice specific to your situation, consult a qualified professional licensed in your state.
           </p>
           <p>
-            <strong class="text-text">Affiliate compensation.</strong> CreditDoc may earn a commission when you click on certain links, open an account, or complete an application with a company featured on this site. These relationships help fund our free research. Compensation does not influence editorial reviews, page order, recommendations, or stored Google rating data. See our <a href="/disclosure/" class="text-primary hover:underline">full affiliate disclosure</a>.
+            <strong class="text-text">Affiliate compensation.</strong> CreditDoc may earn a commission when you click on certain links, open an account, or complete an application with a company featured on this site. These relationships help fund our free research. Compensation does not influence editorial reviews, correction decisions, or stored Google rating data. See our <a href="/disclosure/" class="text-primary hover:underline">full affiliate disclosure</a>.
           </p>
           <p>
             <strong class="text-text">Rates, terms & availability.</strong> Products, rates, fees, and terms are provided by third parties and can change without notice. We make reasonable efforts to keep information current but cannot guarantee accuracy at the moment you apply. Always verify terms directly with the provider.

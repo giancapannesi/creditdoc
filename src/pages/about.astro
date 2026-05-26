@@ -31,11 +31,18 @@ const jsonLd = {
     }
   }
 };
+
+const contextLinks = [
+  { href: '/about/creditdoc-data/', label: 'How CreditDoc Uses Data', description: 'See how stored Google ratings, public records, CFPB data, and local information are used.' },
+  { href: '/methodology/', label: 'Research Methodology', description: 'Review the process behind company pages, rating display rules, and correction handling.' },
+  { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Understand how public CFPB complaint records support CreditDoc research.' },
+  { href: '/city/', label: 'Local City Guides', description: 'Explore the local page network that connects providers, maps, state rules, and answers.' },
+];
 ---
 
 <BaseLayout
   title="About CreditDoc | Our Mission, Team & Expertise"
-  description="CreditDoc is an independent comparison website helping Americans find the right credit repair, personal loan, and debt relief services. Learn about our team and mission."
+  description="CreditDoc is an independent comparison website for credit repair, personal loan, debt relief, and consumer finance research. Learn about our team and mission."
   jsonLd={jsonLd}
 >
   <!-- Hero -->
@@ -44,7 +51,7 @@ const jsonLd = {
       <span class="inline-block rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-6">About Us</span>
       <h1 class="text-4xl font-bold text-text sm:text-5xl">About CreditDoc</h1>
       <p class="mt-6 text-lg text-muted leading-relaxed max-w-2xl mx-auto">
-        We believe every American deserves access to clear, unbiased information about credit repair and lending services. CreditDoc exists to shine a light on an industry that has historically been opaque.
+        We believe consumers deserve clear information about credit repair, lending, debt, and local financial services. CreditDoc exists to make provider research easier to verify and compare.
       </p>
     </div>
   </section>
@@ -61,7 +68,7 @@ const jsonLd = {
             Millions of Americans struggle with damaged credit. The credit repair industry -- worth over $5 billion annually -- promises solutions, but the landscape is filled with confusing pricing, misleading claims, and companies that don't always deliver on their promises. Meanwhile, predatory lenders target the most financially vulnerable consumers.
           </p>
           <p class="mt-4 text-base text-text leading-relaxed">
-            CreditDoc was built to change that. We provide independent, research-backed reviews and comparisons of credit repair companies, personal lenders, and financial services so that consumers can make informed decisions -- not pressured ones.
+            CreditDoc was built to organize that information. We provide research-backed reviews and comparisons of credit repair companies, personal lenders, and financial services so consumers can compare options with more context.
           </p>
         </div>
       </div>
@@ -95,7 +102,7 @@ const jsonLd = {
               <h3 class="text-lg font-semibold text-text">Unbiased Comparisons</h3>
             </div>
             <p class="text-sm text-muted leading-relaxed">
-              Our side-by-side comparisons help you evaluate credit repair services on the factors that matter: pricing, effectiveness, transparency, customer service, and ease of use.
+              Our side-by-side comparisons help you evaluate credit repair services using available public information, pricing details, transparency signals, customer-service context, and usability factors.
             </p>
           </div>
 
@@ -109,7 +116,7 @@ const jsonLd = {
               <h3 class="text-lg font-semibold text-text">Consumer Education</h3>
             </div>
             <p class="text-sm text-muted leading-relaxed">
-              We provide guides, resources, and educational content to help consumers understand their rights under the FCRA and CROA, and to help them make informed choices about their financial health.
+              We provide guides, resources, and educational content to help consumers understand their rights under the FCRA and CROA, and to help them compare credit, debt, and lending topics with more context.
             </p>
           </div>
 
@@ -123,7 +130,7 @@ const jsonLd = {
               <h3 class="text-lg font-semibold text-text">Verified Pricing</h3>
             </div>
             <p class="text-sm text-muted leading-relaxed">
-              We verify pricing directly from company websites monthly. When prices change, we update our listings. You'll always see current, accurate pricing information.
+              We review pricing from company websites on a recurring schedule and update listings when changes are identified. Readers should still verify current terms directly with the provider.
             </p>
           </div>
         </div>
@@ -144,7 +151,7 @@ const jsonLd = {
               </div>
               <div>
                 <p class="text-base font-semibold text-text">We are not a credit repair company.</p>
-                <p class="mt-1 text-sm text-muted">We don't sell credit repair services, originate loans, or provide financial advice. We compare services so you can choose the right one for your situation.</p>
+                <p class="mt-1 text-sm text-muted">We don't sell credit repair services, originate loans, or provide financial advice. We organize service information so you can compare options and verify details independently.</p>
               </div>
             </div>
 
@@ -158,7 +165,7 @@ const jsonLd = {
               </div>
               <div>
                 <p class="text-base font-semibold text-text">Compensation never changes Google rating data.</p>
-                <p class="mt-1 text-sm text-muted">Some companies featured on our site pay us referral fees. This compensation never affects stored Google rating data, editorial reviews, correction decisions, or recommendations. We also feature companies that don't pay us anything.</p>
+                <p class="mt-1 text-sm text-muted">Some companies featured on our site pay us referral fees. This compensation never affects stored Google rating data, editorial reviews, or correction decisions. We also feature companies that don't pay us anything.</p>
               </div>
             </div>
 
@@ -172,7 +179,7 @@ const jsonLd = {
               </div>
               <div>
                 <p class="text-base font-semibold text-text">Built by a finance professional, not marketers.</p>
-                <p class="mt-1 text-sm text-muted">Our founder has 15+ years in consumer financial services -- not affiliate marketing. This is a financial research site built with industry expertise, not a content farm designed to rank on Google.</p>
+                <p class="mt-1 text-sm text-muted">Our founder has 15+ years in consumer financial services, including payments, lending, and risk management. CreditDoc is built around finance research and local data organization.</p>
               </div>
             </div>
           </div>
@@ -213,6 +220,24 @@ const jsonLd = {
                 <span class="rounded-full bg-bg-alt px-3 py-1 text-xs font-medium text-muted">Former COO</span>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Use About CreditDoc With More Context</h2>
+        <div class="rounded-xl border border-border bg-white p-6 sm:p-8">
+          <p class="text-sm text-muted leading-relaxed">
+            These pages explain how CreditDoc uses public data, how our methodology works, and how the local authority graph connects city, state, research, and provider pages.
+          </p>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            {contextLinks.map(link => (
+              <a href={link.href} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40 transition-colors">
+                <span class="text-sm font-semibold text-text">{link.label}</span>
+                <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+              </a>
+            ))}
           </div>
         </div>
       </div>

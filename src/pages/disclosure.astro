@@ -8,6 +8,13 @@ const jsonLd = {
   "description": "CreditDoc's affiliate disclosure explaining how we earn money and how it affects our editorial content.",
   "url": "https://www.creditdoc.co/disclosure/"
 };
+
+const contextLinks = [
+  { href: '/methodology/', label: 'Research Methodology', description: 'See how editorial review, stored Google ratings, and correction decisions are handled.' },
+  { href: '/editorial-policy/', label: 'Editorial Policy', description: 'Review the listing, update, sponsorship, and corrections standards.' },
+  { href: '/about/creditdoc-data/', label: 'Data Explainer', description: 'Understand the data sources used across provider, city, and research pages.' },
+  { href: '/contact/', label: 'Contact CreditDoc', description: 'Send partnership, correction, privacy, legal, or press inquiries.' },
+];
 ---
 
 <BaseLayout
@@ -41,7 +48,7 @@ const jsonLd = {
           <div>
             <h2 class="text-lg font-bold text-text">Important Notice</h2>
             <p class="mt-2 text-sm text-text leading-relaxed">
-              CreditDoc.co is owned and operated by Cosmic Phoenix LLC. <strong>We earn compensation from some of the companies and products featured on this website.</strong> This compensation may impact how and where products appear on the site (including, for example, the order in which they appear in certain listings). However, this compensation does not influence our editorial reviews, recommendations, correction decisions, or stored Google rating data.
+              CreditDoc.co is owned and operated by Cosmic Phoenix LLC. <strong>We earn compensation from some of the companies and products featured on this website.</strong> This compensation may impact how and where products appear on the site (including, for example, the order in which they appear in certain listings). However, this compensation does not influence our editorial reviews, correction decisions, or stored Google rating data.
             </p>
           </div>
         </div>
@@ -101,7 +108,7 @@ const jsonLd = {
               </svg>
             </div>
             <p class="text-sm text-muted leading-relaxed">
-              <strong class="text-text">Our opinions are our own.</strong> Compensation does not influence written reviews, recommendations, correction decisions, or stored Google rating data. When a star rating is shown, it is the stored Google rating with the stored Google review count.
+              <strong class="text-text">Our opinions are our own.</strong> Compensation does not influence written reviews, correction decisions, or stored Google rating data. When a star rating is shown, it is the stored Google rating with the stored Google review count.
             </p>
           </div>
           <div class="flex gap-3">
@@ -137,7 +144,7 @@ const jsonLd = {
           <ul class="ml-4 list-disc text-sm text-muted leading-relaxed space-y-2">
             <li>"Visit Website" or "Get Started" buttons on review and comparison pages</li>
             <li>Company name links that direct you to the company's website</li>
-            <li>Call-to-action buttons in "best of" listicle articles</li>
+            <li>Call-to-action buttons in comparison or list-style articles</li>
             <li>Links within our editorial content that direct you to a company's sign-up page</li>
           </ul>
           <p class="mt-4 text-sm text-muted leading-relaxed">
@@ -180,8 +187,26 @@ const jsonLd = {
             <li>We receive monetary compensation from some companies featured on this website.</li>
             <li>All opinions expressed on this website are our own and are not influenced by compensation.</li>
             <li>We have a material connection to the products and services mentioned on this site because we may receive a commission if you click a link and make a purchase or sign up for a service.</li>
-            <li>We only recommend products and services that we believe provide value to our readers.</li>
+            <li>We aim to include links and service information that are relevant to the page topic and useful to readers comparing options.</li>
           </ol>
+        </div>
+      </div>
+
+      <!-- Geographic Availability -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Use This Disclosure With CreditDoc Context</h2>
+        <div class="rounded-xl border border-border bg-white p-6 sm:p-8">
+          <p class="text-sm text-muted leading-relaxed">
+            This disclosure works alongside CreditDoc's methodology, editorial standards, data explainer, and contact process.
+          </p>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            {contextLinks.map(link => (
+              <a href={link.href} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40 transition-colors">
+                <span class="text-sm font-semibold text-text">{link.label}</span>
+                <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -204,7 +229,7 @@ const jsonLd = {
             If you see an advertisement for a service that is not available in your state, or if you believe a service was incorrectly shown or hidden based on your location, please contact us at <a href="mailto:contact@creditdoc.co" class="text-primary hover:underline">contact@creditdoc.co</a>. We use IP-based geolocation to determine your approximate state, which may not always be accurate (for example, if you are using a VPN).
           </p>
           <p class="text-sm text-muted leading-relaxed">
-            <strong>Important:</strong> CreditDoc does not verify the licensing status of every company listed in our directory. Before engaging any financial service provider, we recommend verifying that the company is properly licensed to operate in your state. You can typically check licensing status through your state's Department of Financial Institutions, Attorney General's office, or equivalent regulatory body.
+            <strong>Important:</strong> CreditDoc does not verify the licensing status of every company listed in our directory. Before engaging any financial service provider, verify current licensing and authorization directly with your state's Department of Financial Institutions, Attorney General's office, or equivalent regulatory body.
           </p>
         </div>
       </div>

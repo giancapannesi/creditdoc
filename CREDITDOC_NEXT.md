@@ -777,3 +777,21 @@ Next execution:
    draft profiles (`dave-banking`, `sofi`), and decide duplicate handling for
    `sofi` vs `sofi-bank`.
 5. Keep updating the workpack README and `CREDITDOC_NOW/NEXT` after each batch.
+
+## Sitewide Page Upgrade
+
+Batch 013 trust/support pages are locally complete and build-verified. After
+committing, continue with Batch 014 on the remaining static support/trust pages:
+
+- inspect `src/pages/privacy.astro`
+- inspect `src/pages/terms.astro`
+- inspect `src/pages/accessibility.astro`
+- inspect `src/pages/about/harvey-brooks.astro`
+- inspect any other small static trust pages discovered by `rg --files`
+
+For Batch 014, keep the same rules:
+
+- connect into the bottom-up local graph without adding unsupported claims;
+- avoid "best", endorsement, approval, safety, licensing, legal/financial
+  advice, guaranteed outcome, and "right provider" language;
+- build-check, generated-output-check, document, and commit before moving on.

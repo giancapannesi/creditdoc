@@ -1760,3 +1760,38 @@ Verification:
   - all 3 promoted review URLs return `200`;
   - none have a `noindex` robots meta;
   - live `sitemap-3.xml` contains all 3 review paths.
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 013
+
+Batch 013 completed locally for trust/support pages:
+
+- `/about/`
+- `/about/creditdoc-data/`
+- `/methodology/`
+- `/editorial-policy/`
+- `/faq/`
+- `/disclosure/`
+- `/disclaimer/`
+- `/contact/`
+
+Changes:
+
+- Added trust-page graph/context blocks into local guides, state rules, answer
+  clusters, tools, resources, categories, and CFPB complaint-data research.
+- Softened unsupported YMYL-sensitive wording around recommendations, "best" or
+  "right" provider framing, guarantees, price currentness, privacy protection,
+  licensing, and financial outcomes.
+- Left the legal disclaimer's negated "No Endorsement" language in place.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,411 SSR route URLs.
+- Output scan confirmed all eight new Batch 013 context blocks.
+- Static route checks passed for touched trust/support pages and core graph
+  destination routes.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_013_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_013_trust_support_pages_gsc_seen_2026-05-26.csv`

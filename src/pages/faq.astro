@@ -11,11 +11,11 @@ const faqs = [
       },
       {
         q: 'Is CreditDoc free to use?',
-        a: 'Yes, CreditDoc is completely free for consumers. We earn revenue through affiliate partnerships with some of the companies listed on our site. When you click certain links and sign up, we may receive a referral fee. This never affects editorial reviews, recommendations, or stored Google rating data.',
+        a: 'Yes, CreditDoc is free for consumers. We earn revenue through affiliate partnerships with some of the companies listed on our site. When you click certain links and sign up, we may receive a referral fee. This never affects editorial reviews, correction decisions, or stored Google rating data.',
       },
       {
         q: 'How does CreditDoc make money?',
-        a: 'We earn commissions when visitors click affiliate links on our site and sign up for services. This is clearly disclosed on every page. Our editorial team independently reviews all services, and compensation never influences editorial content, recommendations, or stored Google rating data. Learn more on our <a href="/disclosure/" class="text-primary hover:underline">Disclosure page</a>.',
+        a: 'We earn commissions when visitors click affiliate links on our site and sign up for services. This is clearly disclosed on every page. Our editorial team independently reviews listed services, and compensation never influences editorial content, correction decisions, or stored Google rating data. Learn more on our <a href="/disclosure/" class="text-primary hover:underline">Disclosure page</a>.',
       },
       {
         q: 'Who runs CreditDoc?',
@@ -40,7 +40,7 @@ const faqs = [
       },
       {
         q: 'Can companies pay for a better rating?',
-        a: 'No. Companies cannot pay to change a stored Google rating, review count, editorial review, recommendation, or correction decision. We frequently recommend and cover companies that have no affiliate relationship with us.',
+        a: 'No. Companies cannot pay to change a stored Google rating, review count, editorial review, displayed research note, or correction decision. We cover many companies that have no affiliate relationship with us.',
       },
       {
         q: 'I think a review is inaccurate. How do I report it?',
@@ -85,8 +85,8 @@ const faqs = [
         a: 'Debt relief refers to strategies and services that help you reduce or manage overwhelming debt. This includes debt settlement (negotiating to pay less than you owe), debt management plans (consolidating payments at lower interest rates), and debt consolidation loans.',
       },
       {
-        q: 'How do I know which service is right for me?',
-        a: 'It depends on your situation. If you have errors on your credit report, credit repair may help. If you are struggling with debt payments, debt relief or credit counseling might be appropriate. If you need funds for a specific purpose, a personal loan could work. Our <a href="/categories/credit-repair/" class="text-primary hover:underline">category guides</a> can help you determine the best path.',
+        q: 'How do I compare service types?',
+        a: 'It depends on your situation. If you have errors on your credit report, credit repair may be relevant. If you are struggling with debt payments, debt relief or credit counseling may be worth researching. If you need funds for a specific purpose, a personal loan may be one option to compare. Our <a href="/categories/credit-repair/" class="text-primary hover:underline">category guides</a> provide context for comparing the main paths.',
       },
     ],
   },
@@ -121,6 +121,15 @@ const jsonLd = {
     },
   }))),
 };
+
+const contextLinks = [
+  { href: '/learn/', label: 'Education Search', description: 'Search CreditDoc guides, definitions, and articles by topic.' },
+  { href: '/answers/', label: 'Answers Library', description: 'Browse question-led explanations for credit, debt, loans, and consumer finance.' },
+  { href: '/tools/', label: 'Financial Tools', description: 'Use calculators and simulators after reading FAQ answers.' },
+  { href: '/city/', label: 'Local City Guides', description: 'Connect general questions with local provider and state-rule context.' },
+  { href: '/resources/', label: 'Resource Library', description: 'Use checklists and templates for credit-report and debt-letter tasks.' },
+  { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Review public complaint-data context for consumer-finance markets.' },
+];
 ---
 
 <BaseLayout
@@ -134,7 +143,7 @@ const jsonLd = {
       <span class="inline-block rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-6">Help Center</span>
       <h1 class="text-4xl font-bold text-text sm:text-5xl">Frequently Asked Questions</h1>
       <p class="mt-6 text-lg text-muted leading-relaxed max-w-2xl mx-auto">
-        Find answers to common questions about CreditDoc, credit repair, personal loans, debt relief, and how we protect your privacy.
+        Find answers to common questions about CreditDoc, credit repair, personal loans, debt relief, and how our privacy policy works.
       </p>
     </div>
   </section>
@@ -163,6 +172,21 @@ const jsonLd = {
           </div>
         </div>
       ))}
+
+      <div class="rounded-xl border border-border bg-white p-6">
+        <h2 class="text-xl font-bold text-text mb-3">Use FAQ Answers With CreditDoc Context</h2>
+        <p class="text-sm text-muted leading-relaxed">
+          FAQs are a starting point. Use the related sections to move from a short answer into education pages, tools, local guides, resources, and public-data research.
+        </p>
+        <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {contextLinks.map(link => (
+            <a href={link.href} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40 transition-colors">
+              <span class="text-sm font-semibold text-text">{link.label}</span>
+              <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
 
       <!-- Still Have Questions -->
       <div class="rounded-xl border border-primary/20 bg-primary-light/20 p-6 text-center">

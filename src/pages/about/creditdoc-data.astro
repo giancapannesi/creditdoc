@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = 'Our Data Explained — Google Ratings, CFPB & Regulatory Sources | CreditDoc';
-const description = 'How CreditDoc uses stored Google ratings, what CFPB response rates mean, and where our regulatory data comes from. Every metric exists to help you make better financial decisions.';
+const description = 'How CreditDoc uses stored Google ratings, what CFPB response rates mean, and where our regulatory data comes from. Every metric exists to support more informed consumer-finance research.';
 
 const jsonLd = [
   {
@@ -26,6 +26,13 @@ const jsonLd = [
     ]
   }
 ];
+
+const contextLinks = [
+  { href: '/methodology/', label: 'Methodology', description: 'Review how CreditDoc separates stored Google ratings from editorial analysis.' },
+  { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'See the complaint-data research layer connected to provider and market pages.' },
+  { href: '/state/', label: 'State Rule Context', description: 'Connect data explanations with state lending and credit repair context.' },
+  { href: '/city/', label: 'Local City Guides', description: 'See how local guides connect providers, maps, rules, and answer clusters.' },
+];
 ---
 
 <BaseLayout title={title} description={description} jsonLd={jsonLd}>
@@ -46,19 +53,19 @@ const jsonLd = [
     <h1 class="text-3xl sm:text-4xl font-bold text-text">Our Data — How CreditDoc Works</h1>
     <div class="mt-6 space-y-4 text-muted leading-relaxed">
       <p>
-        CreditDoc is built on publicly verifiable data. Every number on our pages has a source you can check yourself. We use federal databases (CFPB, FDIC, HMDA, SBA), state regulatory filings, and verified company information — all designed to help you make better financial decisions.
+        CreditDoc is built on publicly verifiable data. Every number on our pages should connect to a source or defined methodology. We use federal databases (CFPB, FDIC, HMDA, SBA), state regulatory filings, and verified company information to support consumer-finance research.
       </p>
       <p>
-        Everything we display exists to benefit <strong class="text-text">you</strong> — the consumer trying to navigate a confusing financial landscape. We don't accept payment to change editorial reviews, correction decisions, recommendations, or stored Google rating data.
+        Everything we display is intended to help consumers navigate a confusing financial landscape. We don't accept payment to change editorial reviews, correction decisions, or stored Google rating data.
       </p>
       <p>
         Our methodology is completely transparent. This page explains exactly what every metric means, how it's calculated, and where the data comes from. We believe you deserve to understand what you're looking at.
       </p>
       <p>
-        Our data is <strong class="text-text">constantly updated</strong> — CFPB complaints sync daily, company information refreshes automatically, state regulatory changes are incorporated as they happen. Every page shows when it was last updated so you know how fresh the information is. You're never looking at stale data.
+        Our data is updated on defined schedules — CFPB complaints sync regularly, company information refreshes through our data pipeline, and state regulatory changes are incorporated when identified. Every page shows when it was last updated so readers can understand freshness.
       </p>
       <p class="text-sm">
-        If you find an error, <a href="/contact/" class="text-primary hover:underline">contact us</a> — we correct mistakes within 24 hours.
+        If you find an error, <a href="/contact/" class="text-primary hover:underline">contact us</a> so we can review and correct verified mistakes.
       </p>
     </div>
   </section>
@@ -199,7 +206,7 @@ const jsonLd = [
     <div id="diagnosis">
       <h2 class="text-2xl font-bold text-text mb-4">3. CreditDoc Diagnosis</h2>
       <p class="text-sm text-muted leading-relaxed mb-4">
-        The "Doctor's Verdict" card on each profile is our editorial summary of a company's strengths and weaknesses. We use a medical metaphor because CreditDoc helps diagnose the financial health of companies — just as a doctor gives you a clear verdict after examining the data.
+        The "Doctor's Verdict" card on each profile is our editorial summary of a company's strengths and weaknesses. We use a medical metaphor because CreditDoc organizes a structured review of company data and highlights points readers may want to verify.
       </p>
       <div class="glass-card p-5 space-y-4">
         <h3 class="text-base font-semibold text-text">What Each Part Means</h3>
@@ -276,7 +283,7 @@ const jsonLd = [
           <strong class="text-text">Important:</strong> Ratings shown on similar company cards are those companies' own stored Google ratings when available. They are not the rating of the company you're currently viewing.
         </p>
         <p class="text-sm text-muted leading-relaxed">
-          <strong class="text-text">Why this matters:</strong> Comparison shopping is essential for financial services. Seeing alternatives side-by-side helps you evaluate whether the company you're looking at is the best fit, or whether a competitor might serve you better.
+          <strong class="text-text">Why this matters:</strong> Comparison shopping is important for financial services. Seeing alternatives side-by-side helps you evaluate whether a company matches your research criteria and whether other providers should be compared.
         </p>
       </div>
     </div>
@@ -316,11 +323,11 @@ const jsonLd = [
     <div id="city-guides">
       <h2 class="text-2xl font-bold text-text mb-4">7. City Guides</h2>
       <p class="text-sm text-muted leading-relaxed mb-4">
-        Our city guides are local financial resource hubs built for your specific city. Financial services vary dramatically by location — what's available in Atlanta is different from what's available in Austin. A national "best of" list doesn't help you if those companies don't serve your area.
+        Our city guides are local financial resource hubs built for specific cities. Financial services vary by location — what's available in Atlanta may differ from what's available in Austin. National lists can miss local availability and state-rule context.
       </p>
       <div class="glass-card p-5 space-y-3">
         <p class="text-sm text-muted leading-relaxed">
-          <strong class="text-text">What you'll find:</strong> Local providers that serve your city, state-specific regulations that apply to you, HMDA lending data for your area, and localized answers to questions like "what are the best credit repair companies in my city?"
+          <strong class="text-text">What you'll find:</strong> Local providers that serve your city, state-specific regulation context, HMDA lending data for your area, and localized answers to common credit and lending questions.
         </p>
         <p class="text-sm text-muted leading-relaxed">
           <strong class="text-text">Category sub-pages:</strong> Each city has dedicated pages for specific needs — credit repair, personal loans, emergency cash, debt relief, and more. These show only providers that serve your city and state, filtered by the service you actually need.
@@ -329,7 +336,7 @@ const jsonLd = [
           <strong class="text-text">How providers are listed:</strong> Companies physically located in your city appear first, followed by statewide providers that serve your area. This ensures you see the most local options before seeing larger regional companies.
         </p>
         <p class="text-sm text-muted leading-relaxed">
-          <strong class="text-text">Why local matters:</strong> State laws determine what fees are legal, what protections you have, and what recourse you have if something goes wrong. A company may be excellent in one state and unable to operate in another. Our city guides account for this.
+          <strong class="text-text">Why local matters:</strong> State laws affect fees, protections, and recourse. A provider may operate differently across states, so city guides connect provider research with local and state context.
         </p>
       </div>
     </div>
@@ -351,7 +358,7 @@ const jsonLd = [
           <strong class="text-text">How we verify information:</strong> Company details are cross-referenced against state licensing databases (NMLS), Secretary of State business filings, FDIC BankFind, and company websites.
         </p>
         <p class="text-sm text-muted leading-relaxed">
-          <strong class="text-text">Editorial independence:</strong> No company can pay for a higher rating, better placement, or removal of negative data. If the CFPB data shows problems, we show it. If a company has regulatory actions against it, we display that. Our obligation is to you, the consumer — not to the companies we profile.
+          <strong class="text-text">Editorial independence:</strong> No company can pay for a higher stored Google rating, removal of verified negative data, or removal of relevant public regulatory records. If CFPB data or regulatory records are relevant to the profile, we display that context.
         </p>
         <p class="text-sm text-muted leading-relaxed">
           <strong class="text-text">Update frequency:</strong> Data refreshes daily (CFPB sync). Full editorial review on a quarterly cycle. The "Updated" badge on each profile shows the most recent refresh date.
@@ -411,10 +418,10 @@ const jsonLd = [
       </div>
       <div class="mt-4 space-y-2">
         <p class="text-sm text-muted leading-relaxed">
-          <strong class="text-text">What enforcement actions mean:</strong> A company with CFPB consent orders or state AG settlements has been formally disciplined for violating consumer protection laws. This is public record and factored into our assessment. It doesn't mean the company is necessarily bad today — but it means they have a history you should be aware of.
+          <strong class="text-text">What enforcement actions mean:</strong> A company with CFPB consent orders or state AG settlements has public regulatory history. This does not necessarily describe current operations, but it is relevant context for provider research.
         </p>
         <p class="text-sm text-muted leading-relaxed">
-          <strong class="text-text">Licensing status:</strong> We verify companies are properly licensed in the states where they operate. Unlicensed operators are flagged. Operating without required licenses is illegal in most states and removes consumer protections.
+          <strong class="text-text">Licensing status:</strong> We use available licensing and regulatory sources where possible. Licensing requirements vary by product and state, so readers should verify current licensing directly with the relevant regulator before engaging a provider.
         </p>
         <p class="text-sm text-muted leading-relaxed">
           <strong class="text-text">Why this matters to you:</strong> A company's regulatory history tells you how they've treated consumers in the past, whether they follow the law, and whether they're supervised by authorities who can intervene if something goes wrong. This data is continuously refreshed as new enforcement actions, licensing changes, and regulatory filings become public.
@@ -436,6 +443,24 @@ const jsonLd = [
       </div>
     </div>
 
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="mx-auto max-w-4xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-6">
+      <h2 class="text-lg font-bold text-text mb-2">Use Data Explanations With CreditDoc Context</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        These pages connect the data explainer to methodology, complaint-data research, state rules, and the local guide network.
+      </p>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2">
+        {contextLinks.map(link => (
+          <a href={link.href} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40 transition-colors">
+            <span class="text-sm font-semibold text-text">{link.label}</span>
+            <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
   </section>
 
   <!-- Bottom CTA -->

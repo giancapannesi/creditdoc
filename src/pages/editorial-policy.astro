@@ -10,6 +10,13 @@ const jsonLd = {
   "datePublished": "2026-03-22",
   "dateModified": "2026-03-22"
 };
+
+const contextLinks = [
+  { href: '/methodology/', label: 'Methodology', description: 'Review the research process, rating display rules, and correction handling.' },
+  { href: '/disclosure/', label: 'Affiliate Disclosure', description: 'See how CreditDoc earns money and separates compensation from editorial work.' },
+  { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Understand how public complaint data supports provider research.' },
+  { href: '/contact/', label: 'Corrections Contact', description: 'Send corrections, listing updates, press requests, or privacy/legal questions.' },
+];
 ---
 
 <BaseLayout
@@ -37,7 +44,7 @@ const jsonLd = {
         <h2 class="text-2xl font-bold text-text mb-6">Editorial Independence</h2>
         <div class="rounded-xl border-2 border-primary/30 bg-primary-light/30 p-6 sm:p-8">
           <p class="text-base text-text leading-relaxed mb-4">
-            CreditDoc's editorial team operates independently from our business and advertising operations. Editorial reviews, recommendations, correction decisions, and stored Google rating data are never influenced by compensation arrangements.
+            CreditDoc's editorial team operates independently from our business and advertising operations. Editorial reviews, correction decisions, and stored Google rating data are never influenced by compensation arrangements.
           </p>
           <p class="text-sm text-muted leading-relaxed">
             Companies cannot pay to change stored Google rating data, receive preferential placement in editorial content, or remove negative information. Affiliate relationships are disclosed transparently on every page where they exist. See our <a href="/disclosure/" class="text-primary hover:underline">Affiliate Disclosure</a> for full details.
@@ -179,6 +186,24 @@ const jsonLd = {
               <span><strong class="text-text">Editorial content</strong> (reviews, comparisons, guides) is written by our research team and is never reviewed or approved by the companies being evaluated.</span>
             </li>
           </ul>
+        </div>
+      </div>
+
+      <!-- Corrections -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Use This Policy With CreditDoc Context</h2>
+        <div class="rounded-xl border border-border bg-white p-6">
+          <p class="text-sm text-muted leading-relaxed">
+            The editorial policy connects to the methodology, disclosure, public-data research, and correction process that govern CreditDoc pages.
+          </p>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            {contextLinks.map(link => (
+              <a href={link.href} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40 transition-colors">
+                <span class="text-sm font-semibold text-text">{link.label}</span>
+                <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 

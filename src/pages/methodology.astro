@@ -10,6 +10,13 @@ const jsonLd = {
   "datePublished": "2026-03-15",
   "dateModified": "2026-05-25"
 };
+
+const contextLinks = [
+  { href: '/about/creditdoc-data/', label: 'Data Explainer', description: 'See what each displayed data point means and where it comes from.' },
+  { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Review how public CFPB data is used as one research signal.' },
+  { href: '/state/', label: 'State Rule Context', description: 'Connect provider research with state-level lending and credit repair context.' },
+  { href: '/resources/credit-report-checklist/', label: 'Credit Report Checklist', description: 'Use a practical resource connected to credit-report review topics.' },
+];
 ---
 
 <BaseLayout
@@ -94,7 +101,7 @@ const jsonLd = {
               <div>
                 <h3 class="text-lg font-semibold text-text">Compensation cannot change ratings</h3>
                 <p class="mt-2 text-sm text-muted leading-relaxed">
-                  Affiliate compensation cannot change a stored Google rating, review count, editorial review, correction decision, or recommendation.
+                  Affiliate compensation cannot change a stored Google rating, review count, editorial review, correction decision, or displayed research note.
                 </p>
               </div>
             </div>
@@ -163,8 +170,8 @@ const jsonLd = {
             <div class="relative flex gap-4 sm:gap-6">
               <div class="flex-shrink-0 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white text-sm font-bold sm:h-12 sm:w-12">3</div>
               <div class="pt-1 sm:pt-2">
-                <h3 class="text-base font-semibold text-text">Expert Analysis</h3>
-                <p class="mt-1 text-sm text-muted leading-relaxed">Our team writes the detailed review narrative, identifies pros/cons, checks safety caveats, and determines "best for" categories. Star ratings remain limited to stored Google rating data when available.</p>
+                <h3 class="text-base font-semibold text-text">Editorial Analysis</h3>
+                <p class="mt-1 text-sm text-muted leading-relaxed">Our team writes the detailed review narrative, identifies pros/cons, checks caveats, and documents the consumer situations a service appears built for. Star ratings remain limited to stored Google rating data when available.</p>
               </div>
             </div>
             <div class="relative flex gap-4 sm:gap-6">
@@ -178,7 +185,7 @@ const jsonLd = {
               <div class="flex-shrink-0 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white text-sm font-bold sm:h-12 sm:w-12">5</div>
               <div class="pt-1 sm:pt-2">
                 <h3 class="text-base font-semibold text-text">Publication</h3>
-                <p class="mt-1 text-sm text-muted leading-relaxed">The review is published on CreditDoc with a "last updated" date. All reviews include our editorial diagnosis -- a plain-language summary of who the service is best for and what to watch out for.</p>
+                <p class="mt-1 text-sm text-muted leading-relaxed">The review is published on CreditDoc with a "last updated" date. Reviews include a plain-language summary of the service profile, relevant context, and points readers may want to verify.</p>
               </div>
             </div>
             <div class="relative flex gap-4 sm:gap-6">
@@ -241,11 +248,29 @@ const jsonLd = {
             CreditDoc earns revenue through affiliate partnerships with some of the companies listed on our site. When you click certain links and sign up for a service, we may receive a referral fee. This is how we fund our research and keep the site free for consumers.
           </p>
           <p class="text-sm text-text leading-relaxed mb-4">
-            <strong>However, compensation never influences our editorial content.</strong> It cannot change stored Google rating data, review counts, written reviews, correction decisions, or recommendations. We frequently feature and recommend companies that do not have an affiliate relationship with us.
+            <strong>However, compensation never influences our editorial content.</strong> It cannot change stored Google rating data, review counts, written reviews, correction decisions, or displayed research notes. We cover many companies that do not have an affiliate relationship with us.
           </p>
           <p class="text-sm text-text leading-relaxed">
             If you believe any of our reviews contain inaccurate information, we encourage you to contact us at <a href="mailto:contact@creditdoc.co" class="text-primary hover:underline">contact@creditdoc.co</a>. We take corrections seriously and will investigate promptly. For our full affiliate disclosure, visit our <a href="/disclosure/" class="text-primary hover:underline">Disclosure page</a>.
           </p>
+        </div>
+      </div>
+
+      <!-- Rating Display Rules -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6">Use Methodology With CreditDoc Context</h2>
+        <div class="rounded-xl border border-border bg-white p-6 sm:p-8">
+          <p class="text-sm text-muted leading-relaxed">
+            Methodology is most useful when it connects back to the underlying data, state rules, consumer resources, and original research that support CreditDoc pages.
+          </p>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            {contextLinks.map(link => (
+              <a href={link.href} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40 transition-colors">
+                <span class="text-sm font-semibold text-text">{link.label}</span>
+                <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
