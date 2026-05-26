@@ -529,3 +529,38 @@ Start with a small, controlled pilot:
 
 This creates the first visible graph cluster instead of isolated improvements.
 
+## Execution Log
+
+### Batch 032: Answer Display Copy Boundary
+
+Date: 2026-05-26  
+Implementation commit: `bdd7591b3c` (`feat: soften answer display copy`)
+
+Scope:
+
+- `src/pages/answers/[slug].astro`
+
+What changed:
+
+- Moved the answer page renderer from the generic YMYL copy softener to the
+  education-specific softener.
+- Applied softened display copy to answer title, H1, meta description,
+  breadcrumb, JSON-LD headline/description, key takeaways, section headings,
+  section content, FAQ schema, visible FAQ copy, and related-answer cards.
+- Preserved raw answer JSON and URLs; this is a render-boundary improvement.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Targeted scan across generated trends output plus answer/trend templates was
+  clean for the tracked risky teaser and recommendation phrases.
+- `git diff --check` passed.
+
+Notes:
+
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
