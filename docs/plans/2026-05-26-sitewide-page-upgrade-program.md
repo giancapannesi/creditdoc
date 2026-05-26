@@ -2643,3 +2643,54 @@ Notes:
 - Render-only safe-copy cleanup; no source lender or comparison records changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 081: Lender Name Whitespace Normalization
+
+Date: 2026-05-26
+Implementation commit: `20f3231278` (`fix: trim lender names in data shaping`)
+
+Scope:
+
+- `src/utils/data-build.ts`
+- `src/utils/data-runtime.ts`
+
+What changed:
+
+- Trimmed loaded lender names in build-time `getAllLenders()` so city, browse,
+  comparison, and list surfaces do not render provider names with trailing
+  whitespace.
+- Trimmed runtime database lender names in `shapeBodyInlineToLender()` and
+  `shapeCatalogToLenderStub()` so SSR review and related-provider surfaces use
+  the same normalized display names.
+- Fixed rendered artifacts such as `Brightbridge ` headings and
+  `alt="Brightbridge  logo"` without editing source JSON records.
+- Preserved lender source records, routes, slugs, categories, rankings, pricing,
+  ratings, logos, badges, city mappings, and card layout.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered scan returned no matches for double-space logo alt text in city,
+  browse, compare, or search pages.
+- Rendered scan returned no matches for provider-card `<h3>` names ending with
+  trailing whitespace in city, browse, compare, or search pages.
+- Targeted Lawrence rendered check showed `Brightbridge` without trailing
+  whitespace and `alt="Brightbridge logo"`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/city/lawrence-ma/`, `/review/brightbridge/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Data-shaping normalization only; no source lender JSON records changed.
+- A draft check against `/browse/credit-unions/lawrence-ma/` and
+  `/browse/credit-unions/` returned 404 because those exact routes are not
+  generated locally; this was treated as a bad check path, not a site outage.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
