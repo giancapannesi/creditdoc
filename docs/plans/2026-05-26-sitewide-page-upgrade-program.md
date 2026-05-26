@@ -1822,3 +1822,49 @@ Notes:
 - No source post records, slugs, URLs, or filter destination mappings changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 065: Neutral Category Action Labels
+
+Date: 2026-05-26
+Implementation commit: `a96860aae7` (`feat: neutralize category action labels`)
+
+Scope:
+
+- `src/content/categories.json`
+- `src/components/FilterBar.astro`
+- `src/components/Footer.astro`
+- `src/pages/compare/[slug].astro`
+- `src/pages/answers/[slug].astro`
+- `src/pages/credit-guide/[slug]/index.astro`
+
+What changed:
+
+- Replaced shared category display labels `I Need a Loan`, `Get Out of Debt`,
+  and `Build My Credit` with neutral labels: `Personal Loans`, `Debt Relief`,
+  and `Credit Building`.
+- Updated homepage filter options, footer links, category records, comparison
+  category cards, answer category labels, and local city guide path labels.
+- Preserved category slugs, URLs, route params, city-guide category paths, and
+  existing interlinking structure.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- `git diff --check` passed.
+- Generated `dist/index.html`, `dist/sitemap/index.html`,
+  `dist/city/amarillo-tx/index.html`, and representative comparison output
+  confirmed old category action labels were removed and neutral labels were
+  present.
+
+Notes:
+
+- Remaining source matches for `Build My Credit` or `Get Out of Debt` are
+  provider/product names or quoted marketing context inside lender data and
+  were not changed in this batch.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
