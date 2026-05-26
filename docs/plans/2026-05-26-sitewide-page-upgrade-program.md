@@ -1265,3 +1265,40 @@ Notes:
   boundary.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 051: Blog Related Listicle Titles
+
+Date: 2026-05-26
+Implementation commit: `90fd309aba` (`feat: soften blog related listicle titles`)
+
+Scope:
+
+- `src/pages/blog/[slug].astro`
+
+What changed:
+
+- Applied `softenEducationalTeaserCopy()` to related listicle titles loaded for
+  the blog sidebar.
+- Preserved related listicle slugs, `/best/` links, category lookup behavior,
+  and sidebar layout.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and built `/blog/[slug]` worker route-module scans confirmed related
+  listicle titles are softened before rendering.
+- `git diff --check` passed.
+
+Notes:
+
+- Blog page title, H1, metadata, related posts, FAQ, and key takeaways already
+  had safe-copy handling; this batch closes the remaining related-listicle
+  sidebar path.
+- `/blog/[slug]` is an SSR route emitted under
+  `dist/_worker.js/pages/blog/_slug_.astro.mjs`.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
