@@ -1868,3 +1868,53 @@ Notes:
   were not changed in this batch.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 066: Learn Search Payload Copy
+
+Date: 2026-05-26
+Implementation commit: `2d93f7c39e` (`feat: soften learn search payload copy`)
+
+Scope:
+
+- `src/pages/learn.astro`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Extended `softenEducationalTeaserCopy()` for education-search payload strings
+  already routed through `getEducationSearchData()`.
+- Softened embedded `/learn/` search-result titles, descriptions, and key
+  takeaways around `you need`, `you should`, `you must`, `must`, `guarantee`,
+  `guaranteed`, `proven`, `safest`, and `choose`.
+- Reworded the visible `/learn/` Answers Library context link from a
+  personal-need phrase to neutral focused-explanation language.
+- Added narrow cleanup rules for generated helper artifacts around result
+  claims, minimum-payment wording, and approval-claim wording.
+- Preserved `/learn/` route/template, search categories, search indexes,
+  result URLs, slugs, and source content records.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- `git diff --check` passed.
+- Generated `dist/learn/index.html` confirmed targeted raw phrases were
+  removed from visible/search payload copy; the only remaining `guaranteed`
+  matches were slug/URL strings.
+- Generated output confirmed awkward phrases such as
+  `specific result claim specific`, `Minimum payments specific result claim`,
+  and `can maintain approval` were absent.
+- Production spot checks returned HTTP 200 for `/`, `/learn/`, `/blog/`,
+  `/credit-guide/amarillo-tx/`, `/categories/fintech/`, `/glossary/`,
+  `/sitemap-index.xml`, and `/robots.txt`.
+
+Notes:
+
+- Central helper and page-copy change only; no source guide/post/glossary
+  records, URLs, slugs, or search behavior changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
