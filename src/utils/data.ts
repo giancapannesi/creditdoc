@@ -337,13 +337,19 @@ export interface ClusterAnswer {
 // --- Pure helpers ---
 
 export function getBbbClass(rating: string): string {
-  if (rating === 'A+') return 'bbb-a-plus';
-  if (rating === 'A') return 'bbb-a';
-  if (rating === 'B+') return 'bbb-b-plus';
-  if (rating === 'B') return 'bbb-b';
-  if (rating === 'C' || rating === 'C+' || rating === 'C-') return 'bbb-c';
-  if (rating === 'F') return 'bbb-f';
+  const normalized = normalizedBbbRating(rating);
+  if (normalized === 'A+') return 'bbb-a-plus';
+  if (normalized === 'A') return 'bbb-a';
+  if (normalized === 'B+') return 'bbb-b-plus';
+  if (normalized === 'B') return 'bbb-b';
+  if (normalized === 'C' || normalized === 'C+' || normalized === 'C-') return 'bbb-c';
+  if (normalized === 'F') return 'bbb-f';
   return 'bbb-nr';
+}
+
+export function normalizedBbbRating(rating: string | null | undefined): string {
+  const normalized = rating?.trim() || '';
+  return normalized && normalized !== 'N/A' ? normalized : 'NR';
 }
 
 export function formatPrice(price: number): string {

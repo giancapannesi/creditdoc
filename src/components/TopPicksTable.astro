@@ -1,7 +1,7 @@
 ---
 import type { Lender } from '../utils/data';
 import RatingStars from './RatingStars.astro';
-import { formatPrice, getBbbClass } from '../utils/data';
+import { formatPrice, getBbbClass, normalizedBbbRating } from '../utils/data';
 import { softenYmylCopy } from '../utils/safe-copy';
 
 interface Props {
@@ -32,7 +32,8 @@ function softenProviderSignal(text: string): string {
     </thead>
     <tbody class="divide-y divide-border">
       {sorted.map((lender, i) => {
-        const bbbClass = getBbbClass(lender.company_info.bbb_rating);
+        const bbbRating = normalizedBbbRating(lender.company_info.bbb_rating);
+        const bbbClass = getBbbClass(bbbRating);
         const isVerified = lender.verified_provider === true;
         const showGoogleRating = Boolean(lender.google_rating && lender.google_rating > 0 && !(lender.google_rating > 5) && lender.google_reviews_count && lender.google_reviews_count >= 1);
         return (
@@ -98,7 +99,7 @@ function softenProviderSignal(text: string): string {
             <!-- BBB -->
             <td class="py-4 px-4 text-center">
               <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${bbbClass}`}>
-                {lender.company_info.bbb_rating}
+                {bbbRating}
               </span>
             </td>
 

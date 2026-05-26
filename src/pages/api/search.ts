@@ -10,6 +10,7 @@
  * with those three letters anywhere in name/description/services.
  */
 import type { APIRoute } from 'astro';
+import { normalizedBbbRating } from '../../utils/data';
 
 export const prerender = false;
 
@@ -87,7 +88,7 @@ function compact(r: RawLender): CompactLender {
     sc: b.subcategories || [],
     r: b.google_rating && b.google_rating > 0 && !(b.google_rating > 5) && b.google_reviews_count && b.google_reviews_count >= 1 ? b.google_rating : 0,
     mp: b.pricing?.monthly_price || 0,
-    bb: b.company_info?.bbb_rating || 'NR',
+    bb: normalizedBbbRating(b.company_info?.bbb_rating),
     mg: !!b.pricing?.money_back_guarantee,
     fc: !!b.pricing?.free_consultation,
     st: b.states_served || [],
