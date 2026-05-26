@@ -2804,3 +2804,52 @@ Notes:
   slug-based.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 084: Comparison Risk Recommendation Copy Softening
+
+Date: 2026-05-26
+Implementation commit: `2bdc62480a` (`fix: soften comparison risk recommendation copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared safe-copy replacements for comparison winner/summary fragments
+  that read like direct recommendations or unsupported superiority claims.
+- Replaced `less problematic choice` with `profile with fewer listed risk
+  flags`.
+- Replaced `more problematic choice` with `profile with more listed risk flags`.
+- Replaced `superior APR range` with `lower listed APR range`.
+- Replaced `better accessibility and value` with `broader access and
+  listed-cost context`.
+- Replaced `better accessibility` with `broader access context`.
+- Preserved source comparison JSON, lender JSON, pricing fields, route slugs,
+  cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for
+  `less problematic choice`, `more problematic choice`, `superior APR range`,
+  `better accessibility and value`, or `better accessibility`.
+- Targeted rendered checks confirmed the replacement phrases on
+  `/compare/ace-cash-express-new-orleans-la-vs-ace-cash-express-orlando/` and
+  `/compare/advance-america-oklahoma-city-vs-ace-cash-express-terrytown/`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/ace-cash-express-new-orleans-la-vs-ace-cash-express-orlando/`,
+  `/compare/advance-america-oklahoma-city-vs-ace-cash-express-terrytown/`,
+  `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only safe-copy cleanup; no source comparison or lender records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
