@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAllAnswersRuntime, type RuntimeLenderEnv } from '../../lib/db';
+import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 
 // CDM-REV Phase 5.1 [OBJ-1] — SSR (no rebuild).
 // Index of all answers — pulls rows from Supabase at request time so adding
@@ -17,9 +18,9 @@ const answers = rows.map((row) => {
   return {
     slug: row.slug,
     title: row.title || b.title,
-    h1: b.h1 || row.title,
-    meta_description: b.meta_description as string | undefined,
-    answer_summary: b.answer_summary as string | undefined,
+    h1: softenEducationalTeaserCopy((b.h1 || row.title || '') as string),
+    meta_description: softenEducationalTeaserCopy((b.meta_description as string | undefined) || ''),
+    answer_summary: softenEducationalTeaserCopy((b.answer_summary as string | undefined) || ''),
     category: (row.banner_category || b.banner_category || b.category) as string | undefined,
     last_updated: (b.last_updated as string | undefined) || row.updated_at,
   };
