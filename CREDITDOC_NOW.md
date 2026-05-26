@@ -2373,3 +2373,46 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_027_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_027_browse_city_category_titles_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 028
+
+Batch 028 implementation committed as `e3cb9feef6` for SSR review-page fit
+copy and lending-record labels:
+
+- `src/pages/review/[slug].astro`
+- `src/components/HMDARecord.astro`
+- `src/components/RegulatoryRecord.astro`
+
+Changes:
+
+- Reframed review FAQ copy from `best suited for` to listed profile-signal
+  wording.
+- Reframed the review mini quiz away from `Right for You`, `matches your
+  needs`, `strong match`, `good option`, and `better match` language.
+- Replaced quiz priority label `Reputation & trust` with public-rating-field
+  wording and `Fast results` with timing-note wording.
+- Reframed the related next-step link from `Match your need` to `Review fit
+  context`.
+- Rephrased HMDA text from active `approving` wording to recorded approval
+  outcomes, and changed `Top Denial Reasons` / `Top Lending States` labels to
+  common-denial and recorded-application labels.
+- Rephrased SBA component copy from `Approved` to recorded approvals.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json` changes
+  affected generated inventory; neither file was staged or committed.
+- Build generated 124 city guides plus 2,232 city-category sub-pages.
+- Postbuild sitemap/robots conflict check passed.
+- Targeted source scan was clean for the old review/HMDA/SBA phrases addressed
+  in this batch.
+- Generated static scan found separate blog index teaser copy using `right for
+  you`; that is outside the SSR review scope and is queued for Batch 029.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_028_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_028_review_fit_lending_records_gsc_seen_2026-05-26.csv`

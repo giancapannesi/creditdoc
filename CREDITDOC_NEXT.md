@@ -1055,3 +1055,25 @@ Initial Batch 028 targets:
   `src/content/comparisons.json` from staging unless the user explicitly asks to
   take ownership of those raw content files;
 - build-check, output/source-check, document, commit, then continue.
+
+Batch 028 implementation is complete, build-verified, and committed as
+`e3cb9feef6`. Move to Batch 029 by handling residual blog/learn teaser copy
+surfaced by the generated scan, especially `right for you`, `good`, `bad`,
+`truth`, and similar YMYL suitability/outcome framing in generated static
+indexes.
+
+Initial Batch 029 targets:
+
+- inspect the generated `/blog/` index and its source/content feed for teaser
+  descriptions containing `right for you`, `good`, `bad`, `truth`, `worth it`,
+  and similar judgment/suitability framing;
+- decide whether the issue should be handled in blog metadata, an index-only
+  teaser softener, or a shared blog-card presentation helper;
+- scan `/learn/` because its embedded search data exposed the same blog
+  descriptions and key takeaways in generated output;
+- preserve blog URLs and titles unless changing a title is necessary for a
+  visible YMYL claim; prefer description/teaser softening first;
+- continue excluding unrelated `src/content/wellness-guides.json` and
+  `src/content/comparisons.json` from staging unless the user explicitly asks to
+  take ownership of those raw content files;
+- build-check, output/source-check, document, commit, then continue.
