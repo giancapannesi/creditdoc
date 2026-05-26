@@ -822,7 +822,7 @@ upgrade, starting with:
 Continue the same loop: inspect, edit narrowly, build, output-check, document,
 commit, then proceed.
 
-Batch 016 is locally complete and build-verified. After committing it, move to
+Batch 016 is complete, build-verified, and committed as `0157185c6f`. Move to
 Batch 017 by inventorying remaining uncovered page/templates and shared rendered
 components, especially components that inject sitewide commercial/YMYL language
 into many page families.

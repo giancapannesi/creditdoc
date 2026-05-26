@@ -1870,7 +1870,7 @@ Workpack:
 
 ## 2026-05-26 — Sitewide Page Upgrade Batch 016
 
-Batch 016 is locally complete and build-verified for dynamic graph templates:
+Batch 016 committed as `0157185c6f` for dynamic graph templates:
 
 - `/brand/{brand}/`
 - `/trends/`
