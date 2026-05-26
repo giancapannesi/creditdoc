@@ -3093,6 +3093,48 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 102: State Law Date Label
+
+Date: 2026-05-26
+Implementation commit: `43f2fdf6f7` (`fix: soften state law date label`)
+
+Scope:
+
+- `src/pages/state/[slug]/lending-laws.astro`
+
+What changed:
+
+- Reframed the state lending-law page metadata label from `Last verified` to
+  `Law summary checked`.
+- Preserved the underlying `legislation_last_updated` data, state-law routes,
+  page layout, rule summaries, and state research context.
+
+Verification:
+
+- `git diff --check` passed.
+- Source scan confirmed no remaining `Last verified` phrase in
+  `src/pages/state`.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered scan confirmed `Law summary checked` across generated state
+  lending-law pages and returned no old `Last verified` output in the scanned
+  state build paths.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`, `/state/texas/lending-laws/`,
+  `/state/california/lending-laws/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Static label cleanup only; no state law records, lender records, or sitemap
+  routing logic were rewritten.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+- Workpack notes:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_102_notes_2026-05-26.md`.
+
 ### Batch 101: Editorial and CFPB Verification Labels
 
 Date: 2026-05-26
