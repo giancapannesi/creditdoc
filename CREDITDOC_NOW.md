@@ -121,7 +121,8 @@ Sitewide upgrade program restarted:
   2,232 city-category sub-pages.
 - Batch 007 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_007_notes_2026-05-26.md`
-- Batch 008 completed locally and build-verified:
+- Batch 008 completed and committed:
+  `9c013cfa8f feat: add graph links to tools pages`.
   tools pages now link calculators/quizzes into local guides, state context,
   provider categories, answer clusters, resources, and CFPB/research pages.
 - Batch 008 scope: `/tools/`, `/tools/borrowing-power-quiz/`,
@@ -138,13 +139,33 @@ Sitewide upgrade program restarted:
   city-category sub-pages.
 - Batch 008 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_008_notes_2026-05-26.md`
+- Batch 009 completed locally and build-verified:
+  resources pages now link checklist/template resources into tools, answers,
+  local guides, provider categories, and CFPB complaint-data context.
+- Batch 009 scope: `/resources/`, `/resources/credit-report-checklist/`,
+  `/resources/credit-report-checklist/print/`,
+  `/resources/debt-credit-letter-templates/`, and individual letter-template
+  pages through `src/components/LetterTemplatePage.astro`.
+- Latest local GSC pull (`pull_id=12`) saw 0 `/resources/` URLs. This batch is
+  a pre-visibility authority-graph upgrade for the current resource pages.
+- Batch 009 also softened checklist copy from "highest-impact" to "major
+  credit-building habits" and added CFPB complaint-data context to the printable
+  checklist.
+- Batch 009 build verification passed:
+  `npm run build`, robots contract, SSR sitemap parity, Astro build, generated
+  output section scan, and sitemap/robots conflict check. This run injected
+  18,411 SSR route URLs and successfully added 124 city guides plus 2,232
+  city-category sub-pages.
+- Batch 009 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_009_notes_2026-05-26.md`
 
 Immediate next:
 
-1. Commit Batch 008 with only the tools pages and resume-cursor docs.
-2. Continue to Batch 009: upgrade resources pages so checklist/template pages
-   link back to tools, answers, local guides, categories, state context, and
-   research pages.
+1. Commit Batch 009 with only the resources pages, shared letter-template
+   component, and resume-cursor docs.
+2. Continue to Batch 010: inspect and upgrade financial-wellness pages so
+   wellness content links back to local guides, categories, answers, tools,
+   resources, research pages, and state context where relevant.
 3. Keep every batch scoped, build-verified, documented, and committed before
    starting the next one.
 

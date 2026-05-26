@@ -1,5 +1,33 @@
 # CreditDoc — NEXT ACTIONS (updated 2026-05-16)
 
+## Active 2026-05-26 — Sitewide Page Upgrade Program
+
+User direction: keep looping through priority page families until the pages are
+upgraded, documented, build-verified, and committed. Do not deploy unless
+requested.
+
+Latest completed/active state:
+
+- Batch 008 committed: `9c013cfa8f feat: add graph links to tools pages`.
+- Batch 009 resources pages completed locally and build-verified; commit next.
+- Batch 009 scope: `/resources/`, `/resources/credit-report-checklist/`,
+  `/resources/credit-report-checklist/print/`,
+  `/resources/debt-credit-letter-templates/`, and individual letter-template
+  pages through `src/components/LetterTemplatePage.astro`.
+- Latest local GSC pull (`pull_id=12`) saw 0 `/resources/` URLs.
+- Batch 009 verification passed: `npm run build`, robots contract, SSR sitemap
+  parity, generated output scan, sitemap/robots check, and 18,411 SSR route URL
+  injection.
+
+Immediate next:
+
+1. Commit Batch 009 with only the scoped resources files and resume-cursor docs.
+2. Start Batch 010 by inspecting `src/pages/financial-wellness/` and upgrading
+   financial-wellness pages with authority graph links into local guides,
+   categories, answers, tools, resources, research, and state context.
+3. Keep every batch scoped, documented in the workpack, build-verified, and
+   committed before starting the next batch.
+
 ## Strategic Direction — AI Council Session 6 (2026-05-16)
 
 **Core insight:** "Not a content problem — a CTR and trust-signal problem."  
