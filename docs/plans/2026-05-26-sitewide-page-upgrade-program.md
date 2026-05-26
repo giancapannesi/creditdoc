@@ -3093,6 +3093,49 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 103: Safe-Copy Entity Preservation
+
+Date: 2026-05-26
+Implementation commit: `a65ca0d245` (`fix: preserve mortgage brand names in safe copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Preserved `Guarantee Mortgage` when broad safe-copy refund-term rewrites
+  would otherwise corrupt the provider name into `listed refund term Mortgage`.
+- Softened provider-stated timing language for Instant Loan Processing from
+  `guaranteed 24-hour turnaround times` to `advertised 24-hour turnaround
+  times`.
+- Preserved source lender records and route generation.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered HTML scan found no `listed refund term Mortgage`,
+  `listed refund term mortgage`, or `refund term Mortgage` output.
+- Rendered browse-page checks confirmed `Guarantee Mortgage is a
+  California-based mortgage banker...` and `advertised 24-hour turnaround
+  times`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/browse/mortgages/san-francisco-ca/`, `/review/guarantee-mortgage/`,
+  `/review/instant-loan-processing/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Sanitizer-only repair; no lender JSON records were rewritten.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+- Workpack notes:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_103_notes_2026-05-26.md`.
+
 ### Batch 102: State Law Date Label
 
 Date: 2026-05-26
