@@ -2486,3 +2486,48 @@ Notes:
 - Render/API payload normalization only; no source lender records changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 078: Comparison BBB FAQ Article Grammar
+
+Date: 2026-05-26
+Implementation commit: `a2cae90d57` (`fix: correct comparison BBB article grammar`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Corrected comparison BBB FAQ and JSON-LD FAQ copy so stored BBB labels render
+  as `has an A+ BBB rating`, `has an NR BBB rating`, and `has an F BBB rating`
+  where appropriate instead of `has a A+ BBB rating`, `has a NR BBB rating`,
+  or `has a F BBB rating`.
+- Preserved source comparison records, lender records, routes, slugs, pricing,
+  ratings, badges, table layout, card layout, and comparison summaries.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for `has a A+ BBB rating`,
+  `has a A BBB rating`, `has a F BBB rating`, or `has a NR BBB rating`.
+- Targeted rendered checks on
+  `/compare/incharge-debt-solutions-vs-detroit-wealth-club/` and
+  `/compare/tang-associates-law-office-vs-american-debt-relief/` confirmed
+  visible FAQ and JSON-LD FAQ output now use `has an A+ BBB rating` and
+  `has an NR BBB rating`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/incharge-debt-solutions-vs-detroit-wealth-club/`,
+  `/compare/tang-associates-law-office-vs-american-debt-relief/`, `/robots.txt`,
+  and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only copy grammar fix; no source lender or comparison records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
