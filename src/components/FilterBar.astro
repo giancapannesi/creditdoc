@@ -176,7 +176,7 @@ const contextOptions = {
   },
   'credit-monitoring': {
     second: {
-      label: 'What do you need?',
+      label: 'Monitoring focus',
       name: 'monitor_need',
       placeholder: 'Select...',
       options: [
@@ -199,7 +199,7 @@ const contextOptions = {
   },
   'free-help': {
     second: {
-      label: 'I need help with',
+      label: 'Help topic',
       name: 'help_type',
       placeholder: 'Select topic...',
       options: [
@@ -238,14 +238,14 @@ const categoryContextMapJson = JSON.stringify(categoryContextMap);
 <div class="glass-card p-6 sm:p-8" style="transform: none;">
   <div class="text-center mb-6">
     <h2 class="text-lg sm:text-xl font-bold text-text">Find Service Profiles</h2>
-    <p class="text-sm text-muted mt-1">Tell us what you need and we'll show matching directory profiles</p>
+    <p class="text-sm text-muted mt-1">Choose a topic and we'll show matching directory profiles</p>
   </div>
 
   <form id="filter-form" class="flex flex-col gap-4">
     <!-- Row 1: Category selector -->
     <div>
       <label for="filter-need" class="block text-xs font-semibold text-text uppercase tracking-wider mb-1.5">
-        What do you need?
+        Choose a topic
       </label>
       <select
         id="filter-need"
