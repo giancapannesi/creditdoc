@@ -149,10 +149,10 @@ const jsonLd = [
           </div>
         )}
 
-        {/* Top-rated section */}
+        {/* Provider profile section */}
         {topRated.length > 0 && (
           <div class="mb-8">
-            <h2 class="text-lg font-bold text-text mb-4">Top-Rated {category.name}</h2>
+            <h2 class="text-lg font-bold text-text mb-4">Provider Profiles for {category.name}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {topRated.map(lender => <LenderCard lender={lender} />)}
             </div>

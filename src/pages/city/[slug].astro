@@ -61,7 +61,7 @@ const jsonLd = [
   ...(topLenders.length > 0 ? [{
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": `Top-Rated Financial Services in ${cityInfo.city}, ${cityInfo.stateAbbr}`,
+    "name": `Financial Service Profiles in ${cityInfo.city}, ${cityInfo.stateAbbr}`,
     "itemListOrder": "https://schema.org/ItemListOrderDescending",
     "numberOfItems": topLenders.length,
     "itemListElement": topLenders.map((l: any, i: number) => ({

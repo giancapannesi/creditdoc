@@ -428,10 +428,10 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
           </section>
         )}
 
-        <!-- Top Rated Lenders -->
+        <!-- Provider profiles -->
         {topLenders.length > 0 && (
           <section>
-            <h2 class="text-xl font-bold text-text mb-4">Top-Rated in {stateInfo.name}</h2>
+            <h2 class="text-xl font-bold text-text mb-4">Provider Profiles in {stateInfo.name}</h2>
             <div class="space-y-3">
               {topLenders.slice(0, 6).map(lender => (
                 <LenderCard lender={lender} />

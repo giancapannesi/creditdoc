@@ -7,11 +7,12 @@
  *
  * Categories → Offers:
  *   credit-repair → The Credit People ($125 CPA)
- *   personal-loans, emergency-cash, payday-alternatives → Lead Stack (loan matching)
+ *   personal-loans, emergency-cash, payday-alternatives → Lead Stack (loan profiles)
  *   debt-relief → The Credit People (credit repair helps debt too)
  *   build-credit, credit-monitoring → WalletHub (credit monitoring)
  *   default → Lead Stack (broadest appeal)
  */
+import { softenYmylCopy } from '../utils/safe-copy';
 
 interface Props {
   category: string;
@@ -19,7 +20,7 @@ interface Props {
 
 const { category } = Astro.props;
 
-// Map page categories to the best affiliate offer
+// Map page categories to the contextual affiliate offer
 type Offer = {
   name: string;
   tagline: string;
@@ -35,7 +36,7 @@ const offers: Record<string, Offer> = {
   'credit-repair': {
     name: 'The Credit People',
     tagline: 'Professional Credit Repair',
-    description: 'Trusted by thousands to dispute errors, remove negative items, and rebuild credit scores. Results in as little as 30 days.',
+    description: 'Review dispute-service details, pricing, and public profile signals before contacting a provider.',
     cta: 'Get a Free Consultation',
     url: 'https://thecreditpeople.net/?a=17543&c=5194&s1=creditdoc-sidebar',
     banner: '/affiliates/tcp/The worst credit ever 300x250-1.jpg',
@@ -76,7 +77,7 @@ const offer = offers[offerKey];
 
   <h3 class="text-sm font-bold text-text">{offer.name}</h3>
   <p class="text-xs text-primary font-medium mt-0.5">{offer.tagline}</p>
-  <p class="mt-2 text-xs text-muted leading-relaxed">{offer.description}</p>
+  <p class="mt-2 text-xs text-muted leading-relaxed">{softenYmylCopy(offer.description)}</p>
 
   <a
     href={offer.url}

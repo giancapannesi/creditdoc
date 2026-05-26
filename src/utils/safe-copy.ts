@@ -26,6 +26,8 @@ export function softenYmylCopy(text: string): string {
     .replace(/\bbest option\b/gi, 'option to compare')
     .replace(/\bright choice\b/gi, 'option to compare')
     .replace(/\btop companies compared\b/gi, 'company profiles compared')
+    .replace(/\btop-rated credit repair companies\b/gi, 'credit repair company profiles')
+    .replace(/\btop-rated\b/gi, 'profiled')
     .replace(/\btop-ranked local lenders\b/gi, 'local lender profiles')
     .replace(/\btop-ranked\b/gi, 'profiled')
     .replace(/\bfull rankings & reviews\b/gi, 'provider profiles and comparisons')
