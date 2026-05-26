@@ -516,12 +516,25 @@ Phase 1 write status:
   - 3 `pending_post_regen_review`
   - 1 `pending_fintech_policy` (`moneylion`; do not auto-change)
   - 1 `pending_category_policy` (`sarma`; B2B/data/collections policy needed)
+- Profile review batch completed for the 5 `pending_profile_review` rows:
+  `first-technology`, `mountain-america`, `wafd-bank-seattle`,
+  `hancock-whitney-bank-gulfport`, and `san-diego-county`.
+  - stale weak-source copy removed from First Tech and Mountain America
+  - official websites aligned for WaFd and Hancock Whitney
+  - category-correct names/meta/copy applied
+  - all five set to `review_status: published`
+  - no unresolved Supabase retry rows
+- Updated top-50 disposition:
+  - 45 `yes_pending_final_methodology`
+  - 3 `pending_post_regen_review`
+  - 1 `pending_fintech_policy` (`moneylion`)
+  - 1 `pending_category_policy` (`sarma`)
 
 Next execution:
 
-1. Review the 5 `pending_profile_review` rows before public report use:
-   `first-technology`, `mountain-america`, `wafd-bank-seattle`,
-   `hancock-whitney-bank-gulfport`, and `san-diego-county`.
+1. Confirm the three `pending_post_regen_review` category fixes are now safe
+   for final methodology: `goldman-sachs-bank-usa`, `bmo-bank`,
+   `synovus-bank`.
 2. Decide fintech/multi-product category policy for `moneylion`.
 3. Decide whether B2B credit reporting/data/collections providers such as
    `sarma` belong in the public CFPB responsiveness report or should be a
