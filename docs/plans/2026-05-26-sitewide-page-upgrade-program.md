@@ -2430,3 +2430,59 @@ Notes:
 - Render-only normalization; no source lender records changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 077: Shared BBB Badge Normalization
+
+Date: 2026-05-26
+Implementation commit: `8d2b206fd6` (`fix: normalize shared BBB badges`)
+
+Scope:
+
+- `src/utils/data.ts`
+- `src/components/LenderCard.astro`
+- `src/components/TopPicksTable.astro`
+- `src/pages/best/[slug].astro`
+- `src/pages/deals.astro`
+- `src/pages/search.astro`
+- `src/pages/api/search.ts`
+
+What changed:
+
+- Added shared `normalizedBbbRating()` helper and made `getBbbClass()` classify
+  trimmed BBB values.
+- Normalized blank and `N/A` BBB values to `NR` on shared lender cards,
+  top-picks tables, listicle ranked cards, deals cards, client-side search
+  result cards, and the search API compact payload.
+- Preserved lender source records, routes, slugs, rankings, pricing, Google
+  ratings, category mappings, review links, and layouts.
+- `src/pages/deals.astro` is founder-protected; this batch touched only BBB
+  badge normalization under the user's project-level permission to modify
+  protected files and document the change.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered scan across `dist/browse`, `dist/deals`, and the static search shell
+  returned no matches for blank `BBB:` artifacts.
+- Targeted rendered check on
+  `/browse/credit-unions/salt-lake-city-ut/` confirmed Hercules First and
+  Ridgeline now render `BBB: NR` instead of a blank BBB badge.
+- Rendered deals check confirmed BBB badges still render populated values such
+  as `BBB: B+` and `BBB: A+`.
+- Search API worker output includes `bb: normalizedBbbRating(...)`, and the
+  client search bundle includes `normalizedBbbRating()`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/browse/credit-unions/salt-lake-city-ut/`, `/deals/`, `/search/`,
+  `/categories/fintech/`, `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render/API payload normalization only; no source lender records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
