@@ -1536,3 +1536,39 @@ Notes:
   in the blog and review route scan.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 058: Answers Index Card Copy
+
+Date: 2026-05-26
+Implementation commit: `1ac7b890cd` (`feat: soften answers index card copy`)
+
+Scope:
+
+- `src/pages/answers/index.astro`
+
+What changed:
+
+- Applied `softenEducationalTeaserCopy()` to answer card H1 display values on
+  the `/answers/` index.
+- Applied the same safe-copy helper to answer card meta descriptions and answer
+  summaries before truncation.
+- Preserved answer slugs, source row titles, categories, update timestamps, and
+  runtime Supabase fetch behavior.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and generated `/answers/` worker route-module scans confirmed answer
+  card display values are softened before rendering.
+- `git diff --check` passed.
+
+Notes:
+
+- This supports the question-cluster strategy by keeping answer index snippets
+  safer without changing answer records or URLs.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
