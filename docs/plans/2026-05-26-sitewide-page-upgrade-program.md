@@ -3092,6 +3092,69 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 092: Comparison Guarantee, Trust, and Specialist Claim Softening
+
+Date: 2026-05-26
+Implementation commit: `3b36c5857a` (`fix: soften comparison guarantee and trust claims`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared safe-copy replacements for generated comparison fragments that
+  framed guarantees, specialist credentials, trusted status, verified clients,
+  verified results, and settlement outcomes as broad claims.
+- Softened targeted phrases including `refund guarantee`, `guarantee`,
+  `guaranteed approval`, `guaranteed satisfaction`, `guaranteed outcomes`,
+  `guaranteed credit bureau reporting`, `guaranteed 45-day refund option`,
+  `NACSO-certified specialists`, `dedicated named specialist`, `specialist`,
+  `specialists`, `specialized debt category`, `specialized debt`, `specialized`,
+  `verified results`, `verified customer reviews`, `verified clients`,
+  `trusted by 90% of lenders`, `trusted`, `trustworthy`, `documented 55-61%
+  debt reductions`, `successful settlements`, `greater overall value`, and
+  `expert consultation`.
+- Added cleanup for generated grammar artifacts such as `staff context provide`
+  after specialist-claim softening.
+- Preserved source comparison records, source lender records, pricing values,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` targeted raw-phrase scan returned no matches for the
+  Batch 092 phrase set.
+- Targeted rendered checks confirmed replacement language on comparison pages
+  including `/compare/the-credit-pros-vs-safeport-law/`,
+  `/compare/greenlight-financial-vs-boost-credit-101/`,
+  `/compare/the-credit-repairmen-vs-credit360-credit-repair/`,
+  `/compare/kikoff-vs-first-progress-platinum-elite/`,
+  `/compare/dovly-vs-boost-my-fico-scores/`,
+  `/compare/dickmann-tax-group-vs-grt-financial/`,
+  `/compare/credit-blueprint-vs-continental-credit/`,
+  `/compare/american-profit-recovery-vs-grt-financial/`,
+  `/compare/greenlight-financial-vs-capital-one-platinum-secured/`, and
+  `/compare/kikoff-vs-capital-one-platinum-secured/`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/the-credit-pros-vs-safeport-law/`,
+  `/compare/greenlight-financial-vs-boost-credit-101/`,
+  `/compare/the-credit-repairmen-vs-credit360-credit-repair/`,
+  `/compare/kikoff-vs-first-progress-platinum-elite/`,
+  `/compare/dickmann-tax-group-vs-grt-financial/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 090: Comparison Pricing and Credibility Claim Softening
 
 Date: 2026-05-26
