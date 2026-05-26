@@ -137,7 +137,7 @@ const bestSbaNational = sba.find(s => s.rank_national && s.rank_national <= 25);
           <p class="text-sm text-muted">
             Ranked <span class="font-semibold text-text">#{bestSbaNational.rank_national} nationally</span> for
             SBA {bestSbaNational.program.toUpperCase()} lending in FY{bestSbaNational.fiscal_year}.
-            Approved {dollar(bestSbaNational.total_approval)} across {fmt(bestSbaNational.loan_count)} loans.
+            Recorded {dollar(bestSbaNational.total_approval)} in approvals across {fmt(bestSbaNational.loan_count)} loans.
           </p>
         )}
         {bestSbaState && (

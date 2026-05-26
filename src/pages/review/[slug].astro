@@ -317,8 +317,8 @@ if (svcList.length >= 2) {
 const bestFor = safeBestFor ?? [];
 if (bestFor.length >= 1) {
   faqCandidates.push({
-    question: `Who is ${lender.name} best suited for?`,
-    answer: `${lender.name} is best suited for ${bestFor.join(', ')}.`,
+    question: `What profile signals are listed for ${lender.name}?`,
+    answer: `${lender.name} has profile signals associated with ${bestFor.join(', ')}.`,
     priority: 9,
   });
 }
@@ -1063,8 +1063,8 @@ const ogImageUrl = lender.logo_url?.trim()
   <!-- Mini Fit Quiz -->
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="glass-card p-6 border-primary/20 border" id="fit-quiz">
-      <h2 class="text-xl font-bold text-text mb-2">Is {lender.name} Right for You?</h2>
-      <p class="text-sm text-muted mb-5">Answer 3 quick questions to see if this provider matches your needs.</p>
+      <h2 class="text-xl font-bold text-text mb-2">Compare Your Needs With {lender.name}</h2>
+      <p class="text-sm text-muted mb-5">Answer 3 quick questions to review category, service, and profile context.</p>
       <div id="quiz-questions">
         <div class="quiz-step" data-step="1">
           <p class="text-sm font-semibold text-text mb-3">1. What's your primary financial goal?</p>
@@ -1085,11 +1085,11 @@ const ogImageUrl = lender.logo_url?.trim()
           </div>
         </div>
         <div class="quiz-step hidden" data-step="3">
-          <p class="text-sm font-semibold text-text mb-3">3. What matters most to you in a provider?</p>
+          <p class="text-sm font-semibold text-text mb-3">3. Which provider detail do you want to review first?</p>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="price">Low cost / free options</button>
-            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="speed">Fast results</button>
-            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="trust">Reputation & trust</button>
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="speed">Timing notes</button>
+            <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="trust">Public rating fields</button>
             <button class="quiz-btn text-left px-4 py-3 rounded-lg border border-border text-sm text-text hover:border-primary hover:bg-primary/5 transition-colors" data-value="service">Full-service support</button>
           </div>
         </div>
@@ -1156,14 +1156,14 @@ const ogImageUrl = lender.logo_url?.trim()
         const verdict = document.getElementById('quiz-verdict');
         const reason = document.getElementById('quiz-reason');
         if (score >= 3) {
-          verdict.textContent = quizName + ' looks like a strong match!';
-          reason.textContent = 'Based on your goals and preferences, this provider aligns well with what you\'re looking for.';
+          verdict.textContent = quizName + ' has several relevant profile signals.';
+          reason.textContent = 'Based on your answers, this profile has category, service, or public-rating fields to review more closely.';
         } else if (score >= 1) {
-          verdict.textContent = quizName + ' could be a good option.';
-          reason.textContent = 'This provider offers relevant services. Compare a few options, current terms, and complaint records before deciding what to do next.';
+          verdict.textContent = quizName + ' has some relevant profile context.';
+          reason.textContent = 'Review the listed services, current terms, public ratings, and complaint records alongside similar providers before deciding what to do next.';
         } else {
-          verdict.textContent = 'You might want to explore other options.';
-          reason.textContent = 'Based on your specific needs, other providers may be a better match. Check our comparison page for alternatives.';
+          verdict.textContent = 'Review additional provider profiles.';
+          reason.textContent = 'Based on your answers, compare similar providers and category pages before contacting a company.';
         }
       }
     })();
@@ -1217,8 +1217,8 @@ const ogImageUrl = lender.logo_url?.trim()
               <span class="mt-1 block text-xs text-muted leading-relaxed">See whether the provider lists the help you need.</span>
             </a>
             <a href="#fit-quiz" class="rounded-lg border border-border bg-white/60 p-4 hover:border-primary transition-colors group">
-              <span class="block text-sm font-semibold text-text group-hover:text-primary transition-colors">Match your need</span>
-              <span class="mt-1 block text-xs text-muted leading-relaxed">Use the quiz for loans, credit help, debt support, or credit building.</span>
+              <span class="block text-sm font-semibold text-text group-hover:text-primary transition-colors">Review fit context</span>
+              <span class="mt-1 block text-xs text-muted leading-relaxed">Use the quiz to compare category, service, and public-rating fields.</span>
             </a>
             <a href="#related-companies" class="rounded-lg border border-border bg-white/60 p-4 hover:border-primary transition-colors group">
               <span class="block text-sm font-semibold text-text group-hover:text-primary transition-colors">Compare alternatives</span>

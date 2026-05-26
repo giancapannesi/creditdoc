@@ -48,7 +48,7 @@ const stateNames: Record<string, string> = {
   <h2 class="text-xl font-bold text-text mb-4">Mortgage Lending Transparency</h2>
   <p class="text-sm text-muted mb-4">
     {lenderName} processed <span class="font-semibold text-text">{fmt(stats.total_applications)} mortgage applications</span> in {stats.year},
-    approving <span class="font-semibold text-text">{stats.approval_rate}%</span> of applicants across {stats.states_served} states.
+    with <span class="font-semibold text-text">{stats.approval_rate}%</span> recorded as approved across {stats.states_served} states.
   </p>
 
   <!-- Key metrics -->
@@ -98,7 +98,7 @@ const stateNames: Record<string, string> = {
   <!-- Denial reasons -->
   {denialReasons.length > 0 && stats.total_denied > 10 && (
     <div class="mb-5">
-      <h3 class="text-sm font-semibold text-text mb-3">Top Denial Reasons ({fmt(stats.total_denied)} denied)</h3>
+      <h3 class="text-sm font-semibold text-text mb-3">Common Denial Reasons ({fmt(stats.total_denied)} denied)</h3>
       <div class="space-y-1">
         {denialReasons.map(d => (
           <div class="flex items-center justify-between text-sm">
@@ -113,7 +113,7 @@ const stateNames: Record<string, string> = {
   <!-- Top states -->
   {geo.length > 0 && (
     <div class="mb-4">
-      <h3 class="text-sm font-semibold text-text mb-3">Top Lending States</h3>
+      <h3 class="text-sm font-semibold text-text mb-3">States With Recorded Applications</h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {geo.slice(0, 6).map(g => (
           <div class="flex items-center justify-between text-sm rounded-lg bg-bg-alt border border-border px-3 py-2">
