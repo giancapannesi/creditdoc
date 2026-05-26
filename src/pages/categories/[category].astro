@@ -38,11 +38,21 @@ if (!categoryRow) {
 }
 
 const categoryBody = (categoryRow.body_inline ?? {}) as Record<string, any>;
+
+function softenCategoryTitle(title: string): string {
+  return softenYmylCopy(title)
+    .replace(/^Best\b/i, 'Compare')
+    .replace(/\bBest\b/g, 'Compare')
+    .replace(/\btop\b/gi, 'listed')
+    .replace(/\bRight\b/g, 'Relevant')
+    .replace(/\bright\b/g, 'relevant');
+}
+
 const category = {
   slug: categoryRow.slug,
   name: categoryRow.name,
   description: softenYmylCopy((categoryBody.description as string) || ''),
-  seo_title: (categoryBody.seo_title as string) || `${categoryRow.name} | CreditDoc`,
+  seo_title: softenCategoryTitle((categoryBody.seo_title as string) || `${categoryRow.name} | CreditDoc`),
   seo_description: softenYmylCopy((categoryBody.seo_description as string) || (categoryBody.description as string) || ''),
   filter_type: (categoryBody.filter_type as string) || '',
 };
