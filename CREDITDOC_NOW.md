@@ -1224,6 +1224,19 @@ Bottom-up local authority + CFPB responsiveness project 2026-05-26:
   - MoneyLion moved from CFPB policy hold to
     `yes_pending_final_methodology` as a Fintech / multi-product app.
   - Sarma remains the only top-50 policy hold.
+- CFPB responsiveness report Phase 3 advanced:
+  - Sarma policy decision completed: exclude from the first public
+    consumer-facing provider ranking because it is B2B credit reporting/data,
+    debt collection, background screening, and mortgage-services
+    infrastructure.
+  - Final report input generated with 49 eligible candidates:
+    `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/cfpb_responsiveness_final_report_input_2026-05-26.csv`
+  - Methodology note generated:
+    `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/methodology_note_most_responsive_providers_2026-05-26.md`
+  - Public page scaffold added:
+    `/research/most-responsive-consumer-finance-providers-2026/`
+  - Local report-body link check passed with zero errors. Provider names link
+    to `/search/?q={slug}` until direct review SSR links are confirmed.
 
 ## 2026-05-26 — Noindex Cleanup Batch 004
 

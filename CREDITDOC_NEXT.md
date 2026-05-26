@@ -579,13 +579,18 @@ Phase 1 write status:
 
 Next execution:
 
-1. Decide whether B2B credit reporting/data/collections providers such as
-   `sarma` belong in the public CFPB responsiveness report or should be a
-   separate category/table.
-2. Move to Phase 3 final candidate/methodology work only after that decision.
-3. Run the profile-quality workflow continuously against the next CFPB/regulator
+1. Review the public report scaffold at
+   `/research/most-responsive-consumer-finance-providers-2026/` for tone,
+   methodology wording, and provider citation language.
+2. Decide whether to keep provider links routed through `/search/?q={slug}` or
+   switch them to direct `/review/{slug}/` links after confirming the review
+   SSR data source in the target environment.
+3. Add the remaining release assets: press pitch, provider outreach copy, and
+   internal link plan from `/about/creditdoc-data/`, `/press/`, and relevant
+   complaint/transparency pages.
+4. Run the profile-quality workflow continuously against the next CFPB/regulator
    candidates and high-internal-link lender profiles.
-4. Start Fintech profile-quality cleanup: normalize official websites, clean
+5. Start Fintech profile-quality cleanup: normalize official websites, clean
    draft profiles (`dave-banking`, `sofi`), and decide duplicate handling for
    `sofi` vs `sofi-bank`.
-5. Keep updating the workpack README and `CREDITDOC_NOW/NEXT` after each batch.
+6. Keep updating the workpack README and `CREDITDOC_NOW/NEXT` after each batch.

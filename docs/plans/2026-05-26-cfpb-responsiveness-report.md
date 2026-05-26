@@ -133,6 +133,32 @@ Every public version must say:
 9. Deploy through `./deploy.sh` only after release scope review.
 10. Upload final docs to Google Drive.
 
+## Progress - 2026-05-26
+
+Phase 3 final input is generated:
+
+- Final CSV:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/cfpb_responsiveness_final_report_input_2026-05-26.csv`
+- Methodology note:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/methodology_note_most_responsive_providers_2026-05-26.md`
+- Public-page data file:
+  `src/data/cfpb-responsive-providers-2026.json`
+- Final main report input contains 49 eligible consumer/provider candidates.
+- Sarma is excluded from the first public consumer-facing provider ranking
+  because it is primarily B2B credit reporting/data, debt collection,
+  background screening, and mortgage-services infrastructure.
+
+Public report scaffold:
+
+- Added route:
+  `/research/most-responsive-consumer-finance-providers-2026/`
+- Added Research hub link from `/research/`.
+- Provider names currently link to `/search/?q={slug}` instead of direct
+  `/review/{slug}/` links because the local SSR review route returned 404 for
+  those slugs during verification. Switch to direct review links only after the
+  review SSR data source is confirmed in the target environment.
+- Local route verification passed for the report page and report-body links.
+
 ## Success Metrics
 
 Within 30 days after publication:

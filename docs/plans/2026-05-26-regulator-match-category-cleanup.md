@@ -218,3 +218,15 @@ Fintech category launch:
   reporting/data/collections provider.
 - Detailed launch plan:
   `docs/plans/2026-05-26-fintech-category-launch.md`
+
+Phase 3 final report input:
+
+- Sarma policy decision completed: exclude from the first public
+  consumer-facing CFPB responsiveness ranking and reserve for a future
+  B2B/data-provider appendix or separate methodology.
+- Updated audit CSV with Sarma set to
+  `no_excluded_b2b_data_provider`.
+- Generated final main report input with 49 eligible candidates:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/cfpb_responsiveness_final_report_input_2026-05-26.csv`
+- Generated methodology note:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/methodology_note_most_responsive_providers_2026-05-26.md`
