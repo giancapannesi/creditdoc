@@ -153,11 +153,13 @@ Public report scaffold:
 - Added route:
   `/research/most-responsive-consumer-finance-providers-2026/`
 - Added Research hub link from `/research/`.
-- Provider names currently link to `/search/?q={slug}` instead of direct
-  `/review/{slug}/` links because the local SSR review route returned 404 for
-  those slugs during verification. Switch to direct review links only after the
-  review SSR data source is confirmed in the target environment.
-- Local route verification passed for the report page and report-body links.
+- Provider names link directly to `/review/{slug}/`.
+- Local dev SSR review links returned 404 because the local runtime data source
+  does not mirror production for review pages, but production verification with
+  a browser-like user agent returned 200 for all 25 visible report provider
+  links.
+- Local route verification passed for the report page and non-review
+  report-body links.
 
 ## Success Metrics
 

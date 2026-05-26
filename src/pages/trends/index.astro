@@ -14,7 +14,19 @@ interface CfpbEntry {
 }
 
 const raw = fs.readFileSync(path.join(process.cwd(), 'src/content/cfpb-trends.json'), 'utf-8');
-const allEntries: CfpbEntry[] = JSON.parse(raw);
+const rawEntries: CfpbEntry[] = JSON.parse(raw);
+
+const allEntries = rawEntries.filter((entry) => {
+  const lenderPath = path.join(process.cwd(), 'src/content/lenders', `${entry.slug}.json`);
+  if (!fs.existsSync(lenderPath)) return true;
+
+  try {
+    const lender = JSON.parse(fs.readFileSync(lenderPath, 'utf-8'));
+    return lender.processing_status !== 'archived' && lender.no_index !== true;
+  } catch {
+    return true;
+  }
+});
 
 // Deduplicate index by company_name — keep shortest slug (canonical) per brand.
 // Individual /trends/[slug] detail pages remain untouched (branches have unique location data).

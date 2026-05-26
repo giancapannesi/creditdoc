@@ -131,7 +131,7 @@ const jsonLd = [
               <tr class="border-b border-border/50">
                 <td class="py-3 px-4 text-muted">{provider.rank}</td>
                 <td class="py-3 px-4">
-                  <a href={`/search/?q=${provider.slug}`} class="font-semibold text-primary hover:underline">
+                  <a href={`/review/${provider.slug}/`} class="font-semibold text-primary hover:underline">
                     {provider.creditdocName || provider.canonicalName}
                   </a>
                   <p class="text-xs text-muted mt-0.5">{provider.topIssue}</p>

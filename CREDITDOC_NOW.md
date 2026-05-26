@@ -1235,8 +1235,9 @@ Bottom-up local authority + CFPB responsiveness project 2026-05-26:
     `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/methodology_note_most_responsive_providers_2026-05-26.md`
   - Public page scaffold added:
     `/research/most-responsive-consumer-finance-providers-2026/`
-  - Local report-body link check passed with zero errors. Provider names link
-    to `/search/?q={slug}` until direct review SSR links are confirmed.
+  - Local report page renders. Non-review report-body links passed local checks.
+  - Provider names link directly to `/review/{slug}/`; production verification
+    returned 200 for all 25 visible report provider links.
 
 ## 2026-05-26 — Noindex Cleanup Batch 004
 
