@@ -3093,6 +3093,50 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 100: Provider Caution Profile Signals
+
+Date: 2026-05-26
+Implementation commit: `3ee8edae17` (`fix: soften provider caution profile signals`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared safe-copy replacements for raw provider profile-signal language
+  that displayed `(NOT recommended)` or `not recommended`.
+- Reframed those labels as `flagged for caution` while preserving the caution
+  signal for users.
+- Applied at the shared `softenYmylCopy` layer so the cleanup covers lender
+  cards, top-picks tables, review pages, best/listicle pages, city pages, and
+  browse pages without rewriting provider records.
+
+Verification:
+
+- `git diff --check` passed.
+- First `npm run build` completed but was discarded as verification evidence
+  because city-guide sitemap generation timed out and only injected 16,057 SSR
+  route URLs.
+- Rerun `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered scan returned no matches for `NOT recommended` or `not recommended`
+  across rendered browse, city, state, review SSR, and best SSR output.
+- Replacement-language check confirmed `flagged for caution` on
+  `/browse/credit-repair/miami-fl/`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/browse/credit-repair/miami-fl/`, `/city/miami-fl/`,
+  `/review/optimum-credit-solutions-credit-score-fix/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-layer cleanup only; no lender/provider records were rewritten.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 099: Educational Authority Copy
 
 Date: 2026-05-26
