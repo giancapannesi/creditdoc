@@ -163,7 +163,15 @@ const editorial = editorialParas
   .map(p => `<p>${linker(p).join(' ')}</p>`)
   .join('');
 const creditTipsRaw: string[] = data.credit_tips || [];
-const creditTips: string[] = creditTipsRaw.map(tip => linker(tip).join(''));
+// City tips are meant to be plain text. Some generated rows contain raw anchor
+// tags; strip tags first, then let the approved CreditDoc inline linker add safe
+// internal links.
+const stripInlineHtml = (value: string) =>
+  value
+    .replace(/<a\b[^>]*>(.*?)<\/a>/gi, '$1')
+    .replace(/<[^>]+>/g, '')
+    .trim();
+const creditTips: string[] = creditTipsRaw.map(tip => linker(stripInlineHtml(tip)).join(''));
 const sbaInfo: { office?: string; address?: string; phone?: string; programs?: string[] } = data.sba_info || {};
 const consumerProtection: { agency?: string; phone?: string; url?: string; filing_info?: string } = data.consumer_protection || {};
 
