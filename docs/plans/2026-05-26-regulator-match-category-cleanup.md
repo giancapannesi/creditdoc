@@ -182,3 +182,25 @@ Profile review batch completed:
 - After this batch, the top-50 queue has 45 rows ready for final methodology,
   3 rows pending post-regeneration confirmation, and 2 policy holds
   (`moneylion`, `sarma`).
+
+Post-regeneration profile review completed:
+
+- `goldman-sachs-bank-usa`, `bmo-bank`, and `synovus-bank` were reviewed after
+  their category corrections regenerated correctly as `banking`.
+- Goldman Sachs Bank USA is now treated as a brand-level Marcus/Goldman Sachs
+  Bank USA banking page, with official Marcus URL, no branch address, and
+  source-backed consumer banking copy.
+- BMO Bank is now treated as a brand-level BMO U.S. banking page, with official
+  U.S. personal banking URL, no branch phone/address, and source-backed banking
+  copy. The founder-protected row was updated with founder authorization.
+- Synovus Bank is now treated as a brand-level banking page, with official
+  Synovus URL, no branch phone/address, and source-backed banking copy.
+- No unresolved Supabase retry rows for these three slugs.
+- After this batch, the top-50 queue has 48 rows ready for final methodology
+  and 2 policy holds (`moneylion`, `sarma`).
+
+Ongoing operating plan:
+
+- Added `docs/plans/2026-05-26-profile-quality-agent.md` to define the
+  dedicated profile-quality workflow, queue priority, source rules, DB write
+  rules, documentation requirements, cadence, and success metrics.

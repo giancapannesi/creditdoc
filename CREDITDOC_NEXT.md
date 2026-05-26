@@ -524,20 +524,27 @@ Phase 1 write status:
   - category-correct names/meta/copy applied
   - all five set to `review_status: published`
   - no unresolved Supabase retry rows
+- Post-regeneration profile review completed for:
+  `goldman-sachs-bank-usa`, `bmo-bank`, and `synovus-bank`.
+  - all three now have brand-level banking profile copy/meta
+  - official public URLs are aligned
+  - misleading branch phone/address fields were removed where appropriate
+  - all three are `published`
+  - no unresolved Supabase retry rows
 - Updated top-50 disposition:
-  - 45 `yes_pending_final_methodology`
-  - 3 `pending_post_regen_review`
+  - 48 `yes_pending_final_methodology`
   - 1 `pending_fintech_policy` (`moneylion`)
   - 1 `pending_category_policy` (`sarma`)
+- Profile-quality operating plan added:
+  `docs/plans/2026-05-26-profile-quality-agent.md`
 
 Next execution:
 
-1. Confirm the three `pending_post_regen_review` category fixes are now safe
-   for final methodology: `goldman-sachs-bank-usa`, `bmo-bank`,
-   `synovus-bank`.
-2. Decide fintech/multi-product category policy for `moneylion`.
-3. Decide whether B2B credit reporting/data/collections providers such as
+1. Decide fintech/multi-product category policy for `moneylion`.
+2. Decide whether B2B credit reporting/data/collections providers such as
    `sarma` belong in the public CFPB responsiveness report or should be a
    separate category/table.
-4. Move to Phase 3 final candidate/methodology work only after those decisions.
+3. Move to Phase 3 final candidate/methodology work only after those decisions.
+4. Run the profile-quality workflow continuously against the next CFPB/regulator
+   candidates and high-internal-link lender profiles.
 5. Keep updating the workpack README and `CREDITDOC_NOW/NEXT` after each batch.

@@ -1187,3 +1187,24 @@ Bottom-up local authority + CFPB responsiveness project 2026-05-26:
   - 3 `pending_post_regen_review`
   - 1 `pending_fintech_policy` (`moneylion`)
   - 1 `pending_category_policy` (`sarma`)
+- Post-regeneration profile review batch completed:
+  - Backup:
+    `data/backups/creditdoc_before_post_regen_profile_batch_2026-05-26.sqlite`
+  - `goldman-sachs-bank-usa`: exported public profile now shows `banking`,
+    official Marcus URL, brand-level copy/meta, no misleading branch address,
+    and `review_status: published`.
+  - `bmo-bank`: founder-authorized profile cleanup preserved protection and
+    now shows `banking`, official BMO U.S. personal banking URL, brand-level
+    copy/meta, no branch phone/address, and `review_status: published`.
+  - `synovus-bank`: exported public profile now shows `banking`, official
+    Synovus URL, brand-level copy/meta, no branch phone/address, and
+    `review_status: published`.
+  - No unresolved Supabase retry rows for the three slugs.
+  - Audit queue now marks all three
+    `post_regen_profile_reviewed_approved_for_report_candidate`.
+  - Updated Phase 1 top-50 status:
+    - 48 `yes_pending_final_methodology`
+    - 1 `pending_fintech_policy` (`moneylion`)
+    - 1 `pending_category_policy` (`sarma`)
+- Added profile-quality operating plan:
+  `docs/plans/2026-05-26-profile-quality-agent.md`
