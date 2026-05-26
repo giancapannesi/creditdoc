@@ -2334,3 +2334,42 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_026_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_026_compare_copy_boundary_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 027
+
+Batch 027 implementation committed as `41a648a0d2` for browse city-category
+title and intro cleanup:
+
+- `src/pages/browse/[catSlug]/[citySlug].astro`
+
+Changes:
+
+- Reframed generated city-category titles from `Best {category} in {city}` to
+  `{category} Provider Profiles in {city}`.
+- Replaced meta/OG/Twitter description language from `find trusted local
+  providers` to profile-comparison wording focused on pricing fields, public
+  ratings, and local provider context.
+- Reframed the ItemList JSON-LD name from `Top {category}` to provider-profile
+  wording.
+- Updated visible H1 and intro copy to avoid ranking-style claims while
+  preserving local page intent, category URLs, city URLs, and internal linking.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json` changes
+  affected generated inventory; neither file was staged or committed.
+- Build generated 124 city guides plus 2,232 city-category sub-pages.
+- Postbuild sitemap/robots conflict check passed.
+- Source scan for old `Best`/`Top`/`trusted local providers` browse-template
+  wording was clean.
+- Generated sample scan across New York credit cards, Baton Rouge credit
+  unions, and Fresno check cashing pages was clean for the old wording and
+  confirmed the new provider-profile copy.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_027_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_027_browse_city_category_titles_gsc_seen_2026-05-26.csv`

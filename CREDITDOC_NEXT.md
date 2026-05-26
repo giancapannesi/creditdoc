@@ -1033,3 +1033,25 @@ Initial Batch 027 targets:
   `src/content/comparisons.json` from staging unless the user explicitly asks to
   take ownership of those raw content files;
 - build-check, output/source-check, document, commit, then continue.
+
+Batch 027 implementation is complete, build-verified, and committed as
+`41a648a0d2`. Move to Batch 028 by scanning review, trend, and remaining
+directory surfaces for unsupported best/top/recommendation/outcome wording that
+is not already covered by `softenYmylCopy()`.
+
+Initial Batch 028 targets:
+
+- inspect generated `/review/` pages and `src/pages/review/[slug].astro` for
+  remaining unsupported recommendation, approval, licensing, safety, guarantee,
+  top/best, trust, and outcome wording;
+- scan generated `/trends/` and selected directory pages for residual phrases
+  that are real visible claims rather than route names, provider names,
+  disclaimers, or warning examples;
+- prefer shared render-time softening only when a pattern leaks across many
+  records; otherwise keep changes tightly scoped to the affected template;
+- preserve local/category URLs and strategic SEO routes unless a broken-link
+  issue is found;
+- continue excluding unrelated `src/content/wellness-guides.json` and
+  `src/content/comparisons.json` from staging unless the user explicitly asks to
+  take ownership of those raw content files;
+- build-check, output/source-check, document, commit, then continue.
