@@ -62,6 +62,18 @@ Repo commits:
 - `93f38ad0a7` — archive title-service noindex cleanup batch.
 - `c40a3a3025` — verify report links and trend filtering.
 - `de5ccdea7f` — archive auto-vehicle noindex cleanup batch.
+- `25bd492a1c` — record noindex cleanup batches.
+
+Coordination note:
+
+- `c40a3a3025` was intentionally kept scoped while another agent completed the
+  Batch 007 lender updates. Do not revert the Batch 007 lender changes when
+  working on CFPB/report links or trend filtering.
+- The trends index/detail filters must stay aligned: the index removes
+  archived/noindex lender-backed entries, and `[slug].astro` must not generate
+  those same archived/noindex trend detail pages.
+- Memory mirror:
+  `/root/.claude/projects/-srv-BusinessOps/memory/creditdoc_cfpb_noindex_coordination_2026-05-26.md`
 
 Continue noindex cleanup in controlled batches only. Every batch must end with
 build verification, exact static reference scan, deploy via `./deploy.sh`, live
