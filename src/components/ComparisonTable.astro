@@ -37,8 +37,16 @@ function formatMonthlyPrice(price: number | null): string {
   return price === 0 ? 'No monthly subscription listed' : `From ${formatPrice(price)}/mo`;
 }
 
+function formatSetupFee(price: number): string {
+  return price === 0 ? 'No setup fee listed' : formatPrice(price);
+}
+
 function comparableMonthlyPrice(price: number | null): number | null {
   return price !== null && price > 0 ? price : null;
+}
+
+function comparableSetupFee(price: number): number | null {
+  return Number.isFinite(price) && price > 0 ? price : null;
 }
 
 function ratingWinner(a: number, b: number): 'a' | 'b' | 'tie' {
@@ -73,10 +81,12 @@ const lowestPriceA = lowestListedMonthlyPrice(lenderA);
 const lowestPriceB = lowestListedMonthlyPrice(lenderB);
 const comparablePriceA = comparableMonthlyPrice(lowestPriceA);
 const comparablePriceB = comparableMonthlyPrice(lowestPriceB);
+const comparableSetupFeeA = comparableSetupFee(lenderA.pricing.setup_fee);
+const comparableSetupFeeB = comparableSetupFee(lenderB.pricing.setup_fee);
 
 const winners = {
   price: comparablePriceA === null || comparablePriceB === null ? 'tie' as const : priceWinner(comparablePriceA, comparablePriceB),
-  setup: priceWinner(lenderA.pricing.setup_fee, lenderB.pricing.setup_fee),
+  setup: comparableSetupFeeA === null || comparableSetupFeeB === null ? 'tie' as const : priceWinner(comparableSetupFeeA, comparableSetupFeeB),
   bbb: bbbWinner(normalizedBbbRating(lenderA.company_info.bbb_rating), normalizedBbbRating(lenderB.company_info.bbb_rating)),
   guarantee: lenderA.pricing.money_back_guarantee === lenderB.pricing.money_back_guarantee ? 'tie' as const : (lenderA.pricing.money_back_guarantee ? 'a' as const : 'b' as const),
   rating: ratingWinner(googleRating(lenderA), googleRating(lenderB)),
@@ -155,11 +165,11 @@ const comparisonBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-
       <tr class="hover:bg-bg-alt/50 transition-colors">
         <td class="py-3 px-4 font-medium text-text">Setup Fee</td>
         <td class="py-3 px-4 text-center">
-          <span>{formatPrice(lenderA.pricing.setup_fee)}</span>
+          <span>{formatSetupFee(lenderA.pricing.setup_fee)}</span>
           {winners.setup === 'a' && <span class={comparisonBadge}>Lower</span>}
         </td>
         <td class="py-3 px-4 text-center">
-          <span>{formatPrice(lenderB.pricing.setup_fee)}</span>
+          <span>{formatSetupFee(lenderB.pricing.setup_fee)}</span>
           {winners.setup === 'b' && <span class={comparisonBadge}>Lower</span>}
         </td>
       </tr>
