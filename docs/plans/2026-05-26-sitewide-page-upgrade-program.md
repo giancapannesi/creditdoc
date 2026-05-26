@@ -1376,3 +1376,46 @@ Notes:
   strings rather than editorial claims.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 054: Guide Link-List Titles
+
+Date: 2026-05-26
+Implementation commit: `dc0c6963fc` (`feat: soften guide link-list titles`)
+
+Scope:
+
+- `src/pages/index.astro`
+- `src/pages/sitemap.astro`
+- `src/pages/categories/[category].astro`
+
+What changed:
+
+- Applied `softenEducationalTeaserCopy()` to homepage financial-wellness guide
+  card titles and descriptions.
+- Applied `softenEducationalTeaserCopy()` to financial-wellness guide titles
+  rendered in the HTML sitemap.
+- Added a sitemap-only comparison title display helper built on the existing
+  educational teaser softener and used it for comparison links.
+- Pre-softened category related wellness-guide titles and descriptions during
+  the SSR mapping step before card rendering.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source scans confirmed homepage and sitemap guide/comparison link-list render
+  boundaries now use safe-copy helpers.
+- Generated `/categories/[category]` worker route-module scan confirmed related
+  wellness guide title and description values are pre-softened before rendering.
+- `git diff --check` passed.
+
+Notes:
+
+- Broad generated sitemap scans still include exact slugs, provider names, and
+  untouched future-copy targets such as some financial-wellness article titles;
+  this batch only covers the link-list render boundaries above.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
