@@ -2,6 +2,19 @@ export function softenYmylCopy(text: string): string {
   return text
     .replace(/money-back guarantees/gi, 'listed refund terms')
     .replace(/money-back guarantee/gi, 'listed refund term')
+    .replace(/\b50-point credit score increase guaranteed or full money back\b/gi, 'published 50-point score-increase refund term')
+    .replace(/\b50-point credit score guarantee with full money-back refund\b/gi, 'published 50-point score-increase refund term')
+    .replace(/\bscore-increase guarantee\b/gi, 'score-increase refund term')
+    .replace(/\bcredit score guarantee\b/gi, 'score-increase refund term')
+    .replace(/\boffers a specific 50-point score increase guarantee\b/gi, 'lists a provider-stated 50-point score-increase refund term')
+    .replace(/\bbacks its service with a measurable 50-point score increase guarantee with a full refund\b/gi, 'lists a provider-stated 50-point score-increase refund term')
+    .replace(/\boffers better consumer protection through its guarantee\b/gi, 'lists a provider-stated refund term')
+    .replace(/\blower price and score-increase refund term\b/gi, 'lower listed price and published refund term')
+    .replace(/\bstronger guarantee\b/gi, 'more detailed listed refund term')
+    .replace(/\bbacked by a guarantee\b/gi, 'with a published refund term')
+    .replace(/\bguarantee demonstrates confidence in results and protects customers from paying for undelivered services\b/gi, 'published refund term is a provider-stated field to verify before payment')
+    .replace(/\bguarantee demonstrates confidence in results\b/gi, 'published refund term is a provider-stated field')
+    .replace(/\bprotects customers from paying for undelivered services\b/gi, 'adds provider-stated refund context to verify before payment')
     .replace(/service guarantee/gi, 'service term')
     .replace(/satisfaction guarantee/gi, 'listed satisfaction term')
     .replace(/guarantees before engaging/gi, 'terms before contacting the provider')
@@ -51,6 +64,7 @@ export function softenYmylCopy(text: string): string {
     .replace(/\bstrongest refund policies\b/gi, 'listed refund policies')
     .replace(/\bstrongest money-back guarantee\b/gi, 'notable listed refund term')
     .replace(/\bstronger consumer protections\b/gi, 'more listed consumer-protection fields')
+    .replace(/\bbetter consumer protection\b/gi, 'more listed consumer-protection context')
     .replace(/\bbetter consumer protections\b/gi, 'more listed consumer-protection fields')
     .replace(/\bsuperior consumer protections\b/gi, 'more listed consumer-protection context')
     .replace(/\bsuperior consumer protection\b/gi, 'more listed consumer-protection context')
@@ -77,6 +91,10 @@ export function softenYmylCopy(text: string): string {
     .replace(/\brisk-free\b/gi, 'with published refund terms')
     .replace(/\bprotected if results do not materialize\b/gi, 'covered by the provider\'s published refund terms')
     .replace(/\bright choice\b/gi, 'option to compare')
+    .replace(/\bclear edge over\b/gi, 'more listed comparison context than')
+    .replace(/\bstronger combination\b/gi, 'more listed combination')
+    .replace(/\bgiving consumers more accountability and lower financial risk\b/gi, 'adding accountability context and listed-cost context')
+    .replace(/\bhigher customer satisfaction justify the premium\b/gi, 'higher customer-review signals may explain the higher listed price')
     .replace(/\bright type of lender\b/gi, 'relevant lender category')
     .replace(/\bis better for\b/gi, 'has profile signals for')
     .replace(/\bideal for\b/gi, 'profiled for')
@@ -114,7 +132,8 @@ export function softenYmylCopy(text: string): string {
     .replace(/\bquick wins\b/gi, 'quick progress markers')
     .replace(/\bwins\b/gi, 'results')
     .replace(/Our editorial team independently evaluates all services\. Compensation does not influence editorial reviews, page order, or recommendations;/gi, 'Compensation does not determine whether a provider can be covered or how visible star ratings are calculated;')
-    .replace(/Compensation does not influence editorial reviews, page order, or recommendations;/gi, 'Compensation does not determine whether a provider can be covered or how visible star ratings are calculated;');
+    .replace(/Compensation does not influence editorial reviews, page order, or recommendations;/gi, 'Compensation does not determine whether a provider can be covered or how visible star ratings are calculated;')
+    .replace(/\bwith published refund terms results with a published refund term\b/gi, 'with published refund terms');
 }
 
 export function softenEducationalTeaserCopy(text: string): string {
