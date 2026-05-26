@@ -606,6 +606,48 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 039: City Featured Provider Copy
+
+Date: 2026-05-26
+Implementation commit: `498c5e35fe` (`feat: soften city featured provider copy`)
+
+Scope:
+
+- `src/pages/city/[slug].astro`
+
+What changed:
+
+- Kept the strategic city-guide featured-provider section, but reframed it from
+  `Top Rated` to `Featured Provider Profiles`.
+- Renamed the local featured-provider variable/comment from top-lender language
+  to featured-provider language while preserving ordering by stored Google
+  rating where available.
+- Reframed city page metadata, JSON-LD description, and hero copy away from
+  `Honest reviews` / `independently reviewed` claims toward stored ratings,
+  BBB context, pricing fields, maps, and local rules where available.
+- Preserved maps, local regulations, category sections, browse links, and city
+  interlinking.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Targeted source/generated city scan was clean for `Top Rated`, `top lenders`,
+  `topLenders`, `Honest reviews`, and `independently reviewed`.
+- Generated Amarillo page was checked and now shows `Featured Provider Profiles
+  in Amarillo`, stored-rating metadata, and local profile context.
+- `git diff --check` passed.
+
+Notes:
+
+- This preserves the bottom-up local SEO strategy while reducing unsupported
+  ranking/review claims in city snippets.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 033: Compare Profile Notes
 
 Date: 2026-05-26  
