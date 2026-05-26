@@ -226,13 +226,13 @@ const breadcrumbJsonLd = {
         <button id="show-more-schedule" class="mt-3 text-sm text-primary hover:text-primary-hover font-medium hidden">Show more months...</button>
       </div>
 
-      <!-- Recommendation -->
-      <div class="glass-card p-6 mb-6" id="recommendation-box">
+      <!-- Calculation note -->
+      <div class="glass-card p-6 mb-6" id="calculation-note-box">
         <h3 class="font-bold text-text mb-2 flex items-center gap-2">
           <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
           Calculation Note
         </h3>
-        <p id="recommendation-text" class="text-sm text-muted leading-relaxed"></p>
+        <p id="calculation-note-text" class="text-sm text-muted leading-relaxed"></p>
       </div>
 
       <!-- CTA -->
@@ -240,7 +240,7 @@ const breadcrumbJsonLd = {
         <div class="flex flex-col sm:flex-row items-center gap-4">
           <div class="flex-1">
             <h3 class="font-bold text-text">Struggling with high-interest debt?</h3>
-            <p class="text-sm text-muted mt-1">A debt relief company could negotiate lower balances. Compare top-rated options.</p>
+            <p class="text-sm text-muted mt-1">Debt relief providers may discuss negotiated-balance programs. Review provider profiles and program trade-offs before contacting a company.</p>
           </div>
           <a href="/categories/debt-relief/" class="inline-flex items-center gap-2 bg-primary text-white font-medium px-5 py-2.5 rounded-xl hover:bg-primary-hover transition-colors flex-shrink-0">
             Compare Options
@@ -504,20 +504,20 @@ const breadcrumbJsonLd = {
         const banner = document.getElementById('savings-banner');
         if (diff > 10) {
           const winner = avalanche.totalInterest < snowball.totalInterest ? 'Avalanche' : 'Snowball';
-          document.getElementById('savings-text').textContent = `The ${winner} method saves you ${fmt(diff)} in interest! But remember — the snowball gives you quicker wins to stay motivated.`;
+          document.getElementById('savings-text').textContent = `The ${winner} method shows ${fmt(diff)} lower estimated interest in this scenario. The snowball method may show an earlier first payoff.`;
           banner.classList.remove('hidden');
         } else {
           banner.classList.add('hidden');
         }
 
-        // Recommendation
-        const recText = document.getElementById('recommendation-text');
+        // Calculation note
+        const recText = document.getElementById('calculation-note-text');
         if (diff < 100) {
-          recText.textContent = 'Both methods are nearly identical for your debt mix. Go with snowball for the motivational wins — you\'ll see your first debt disappear faster.';
+          recText.textContent = 'Both methods are nearly identical for your debt mix. Compare the snowball method for earlier first-payoff timing with the avalanche method for lower-interest sequencing.';
         } else if (avalanche.totalInterest < snowball.totalInterest) {
           const monthDiff = snowball.firstWin && avalanche.firstWin ? snowball.firstWin.month - avalanche.firstWin.month : 0;
           if (monthDiff < -3) {
-            recText.textContent = `Avalanche saves you ${fmt(diff)}, but snowball eliminates "${snowball.firstWin?.name}" ${Math.abs(monthDiff)} months sooner. If staying motivated is key, go snowball. If saving money matters more, go avalanche.`;
+            recText.textContent = `Avalanche shows ${fmt(diff)} lower estimated interest, while snowball shows "${snowball.firstWin?.name}" paid off ${Math.abs(monthDiff)} months sooner. Compare both paths against your budget and motivation needs.`;
           } else {
             recText.textContent = `Avalanche shows lower estimated interest by ${fmt(diff)} in this scenario. The first-payoff timing is similar between both methods, so compare the lower-interest path with your motivation and budget needs.`;
           }

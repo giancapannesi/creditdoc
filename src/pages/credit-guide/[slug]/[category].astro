@@ -44,7 +44,7 @@ const categoryIntros: Record<string, (city: string, state: string, data: any) =>
   },
   'personal-loans': (c, s, d) => {
     const usury = d?.usury_cap ? `${s} caps interest rates at ${d.usury_cap}.` : '';
-    return `Need a personal loan in ${c}, ${s}? ${usury} Whether you're consolidating debt, covering an emergency expense, or funding a major purchase, compare lenders below based on APR, loan amounts, and eligibility requirements. ${s} residents should verify any lender is properly licensed with the state Department of Banking before borrowing.`;
+    return `Need a personal loan in ${c}, ${s}? ${usury} Whether you're consolidating debt, covering an emergency expense, or funding a major purchase, compare lenders below based on APR, loan amounts, and eligibility requirements. ${s} residents should check lender licensing or registration with the state Department of Banking before borrowing.`;
   },
   'emergency-cash': (c, s, d) => {
     const payday = d?.payday_loan_status === 'Banned' ? `${s} has banned payday lending, protecting consumers from predatory rates.` : d?.payday_loan_status === 'Restricted' ? `${s} restricts payday lending with rate caps and loan limits.` : `Payday loans are available in ${s} but often carry extremely high APRs.`;

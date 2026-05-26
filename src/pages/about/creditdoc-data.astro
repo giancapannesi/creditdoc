@@ -77,7 +77,7 @@ const contextLinks = [
       <nav class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <a href="#rating" class="text-sm text-primary hover:underline">1. Google Rating</a>
         <a href="#cfpb-data" class="text-sm text-primary hover:underline">2. CFPB Transparency Report</a>
-        <a href="#diagnosis" class="text-sm text-primary hover:underline">3. CreditDoc Diagnosis</a>
+        <a href="#profile-note" class="text-sm text-primary hover:underline">3. CreditDoc Profile Note</a>
         <a href="#pricing" class="text-sm text-primary hover:underline">4. Pricing & Fees</a>
         <a href="#similar-companies" class="text-sm text-primary hover:underline">5. Similar Companies</a>
         <a href="#state-data" class="text-sm text-primary hover:underline">6. State & Local Regulations</a>
@@ -202,31 +202,31 @@ const contextLinks = [
       </div>
     </div>
 
-    <!-- Section 3: Diagnosis -->
-    <div id="diagnosis">
-      <h2 class="text-2xl font-bold text-text mb-4">3. CreditDoc Diagnosis</h2>
+    <!-- Section 3: Profile Note -->
+    <div id="profile-note">
+      <h2 class="text-2xl font-bold text-text mb-4">3. CreditDoc Profile Note</h2>
       <p class="text-sm text-muted leading-relaxed mb-4">
-        The "Doctor's Verdict" card on each profile is our editorial summary of a company's strengths and weaknesses. We use a medical metaphor because CreditDoc organizes a structured review of company data and highlights points readers may want to verify.
+        The "Research Note" card on each profile summarizes visible company data and highlights points readers may want to verify before contacting a provider.
       </p>
       <div class="glass-card p-5 space-y-4">
         <h3 class="text-base font-semibold text-text">What Each Part Means</h3>
         <dl class="space-y-4">
           <div>
-            <dt class="text-sm font-semibold text-text">"Ideal for..."</dt>
-            <dd class="text-xs text-muted mt-1">The type of consumer who would benefit most from this company, based on their services, pricing tier, and specialization. Derived from category analysis and service offerings.</dd>
+            <dt class="text-sm font-semibold text-text">"Profile signals..."</dt>
+            <dd class="text-xs text-muted mt-1">Common consumer or business contexts associated with the company, based on services, pricing tier, and specialization. Derived from category analysis and service offerings.</dd>
           </div>
           <div>
             <dt class="text-sm font-semibold text-text">"Strength..."</dt>
-            <dd class="text-xs text-muted mt-1">The company's highest-scoring factor or most notable differentiator. This is what they do better than competitors in their category.</dd>
+            <dd class="text-xs text-muted mt-1">A visible profile factor or notable differentiator based on the data available for that company.</dd>
           </div>
           <div>
             <dt class="text-sm font-semibold text-text">"Watch out for..."</dt>
-            <dd class="text-xs text-muted mt-1">The company's lowest-scoring factor or most common complaint theme from CFPB data. This is what you should be aware of before signing up.</dd>
+            <dd class="text-xs text-muted mt-1">A lower-information area, cost factor, or complaint-data theme to verify before contacting the provider.</dd>
           </div>
         </dl>
       </div>
       <p class="mt-4 text-sm text-muted leading-relaxed">
-        The diagnosis is generated from real company data — services offered, pricing structure, CFPB complaint patterns, and user reviews. It updates whenever the underlying data changes significantly.
+        The profile note is generated from company data, services offered, pricing structure, CFPB complaint patterns where available, and public review signals. It updates whenever the underlying data changes significantly.
       </p>
     </div>
 
@@ -244,11 +244,11 @@ const contextLinks = [
           </div>
           <div>
             <dt class="text-sm font-semibold text-text">Setup Fee</dt>
-            <dd class="text-xs text-muted mt-1">A one-time enrollment or activation cost charged when you first sign up. "None" means no upfront cost to begin using the service.</dd>
+            <dd class="text-xs text-muted mt-1">A one-time enrollment or activation cost charged when you first sign up. "None" means no listed setup fee was identified in the reviewed source.</dd>
           </div>
           <div>
-            <dt class="text-sm font-semibold text-text">Money-Back Guarantee</dt>
-            <dd class="text-xs text-muted mt-1">"Yes" means the company has a written refund policy — typically a specific number of days during which you can cancel for a full refund. "No" means no formal guarantee is offered (you may still be able to cancel, but refunds are not guaranteed).</dd>
+            <dt class="text-sm font-semibold text-text">Refund Terms</dt>
+            <dd class="text-xs text-muted mt-1">"Yes" means the company states a written refund policy, typically a specific number of days during which cancellation may qualify for a refund. "No" means no formal refund term was identified in the reviewed source.</dd>
           </div>
         </dl>
       </div>

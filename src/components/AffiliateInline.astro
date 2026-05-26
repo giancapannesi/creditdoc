@@ -23,27 +23,27 @@ const isBuildCredit = ['build-credit', 'credit-monitoring'].includes(category);
 const loanLinks: Record<string, { title: string; subtitle: string; href: string; cta: string }> = {
   'personal-loans': {
     title: 'Compare Personal Loans',
-    subtitle: 'Side-by-side rates, terms, and approval odds from our top-ranked lenders.',
+    subtitle: 'Side-by-side listed rates, terms, eligibility fields, and lender profile context.',
     href: '/best/best-personal-loan-lenders/',
-    cta: 'See Our Picks',
+    cta: 'Review Profiles',
   },
   'emergency-cash': {
-    title: 'Need Cash Fast?',
-    subtitle: "Cash advance apps that don't run a hard credit check, ranked by speed and fees.",
+    title: 'Review Cash App Profiles',
+    subtitle: "Cash advance app profiles with fee, timing, and credit-check context.",
     href: '/best/best-cash-advance-apps/',
-    cta: 'See Cash Apps',
+    cta: 'Review Apps',
   },
   'payday-alternatives': {
     title: 'Payday Loan Alternatives',
-    subtitle: 'Safer borrowing options with lower APRs and longer payback windows.',
+    subtitle: 'Borrowing alternatives with APR, repayment-window, and eligibility context.',
     href: '/best/best-payday-loan-alternatives/',
-    cta: 'See Alternatives',
+    cta: 'Review Alternatives',
   },
   'business-loans': {
     title: 'Compare Small Business Loans',
-    subtitle: 'SBA, lines of credit, equipment financing, and more — ranked by approval odds and rates.',
+    subtitle: 'SBA, lines of credit, equipment financing, and more with rate and eligibility context.',
     href: '/best/best-small-business-loans/',
-    cta: 'See Our Picks',
+    cta: 'Review Profiles',
   },
 };
 const loanLink = loanLinks[category];
@@ -58,15 +58,15 @@ const loanLink = loanLinks[category];
         </svg>
       </div>
       <div class="flex-1">
-        <p class="text-sm font-semibold text-text">Need Help Fixing Your Credit?</p>
-        <p class="mt-1 text-xs text-muted leading-relaxed">The Credit People have helped thousands dispute errors and remove negative items. Free consultation, results in 30 days or less.</p>
+        <p class="text-sm font-semibold text-text">Research Credit Repair Help</p>
+        <p class="mt-1 text-xs text-muted leading-relaxed">Review The Credit People's credit-report dispute service, pricing, refund terms, and disclosures before contacting the provider.</p>
         <a
           href="https://thecreditpeople.net/?a=17543&c=5194&s1=creditdoc-inline"
           target="_blank"
           rel="noopener noreferrer nofollow"
           class="mt-2 inline-flex items-center px-3.5 py-2 rounded-lg bg-primary text-white text-xs font-semibold hover:bg-primary-hover transition-colors"
         >
-          Get Your Free Consultation
+          Visit Partner Site
           <svg xmlns="http://www.w3.org/2000/svg" class="ml-1.5 h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"/>
           </svg>
@@ -111,15 +111,15 @@ const loanLink = loanLinks[category];
         </svg>
       </div>
       <div class="flex-1">
-        <p class="text-sm font-semibold text-text">Track Your Credit Score for Free</p>
-        <p class="mt-1 text-xs text-muted leading-relaxed">WalletHub monitors your credit score daily and sends alerts when your report changes. Personalized tips to improve.</p>
+        <p class="text-sm font-semibold text-text">Track Your Credit Score</p>
+        <p class="mt-1 text-xs text-muted leading-relaxed">WalletHub provides credit-score monitoring, report-change alerts, and educational credit-profile context.</p>
         <a
           href="https://wallethub.com/"
           target="_blank"
           rel="noopener noreferrer nofollow"
           class="mt-2 inline-flex items-center px-3.5 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors"
         >
-          Start Monitoring Free
+          Visit WalletHub
         </a>
         <p class="mt-1.5 text-[10px] text-muted/50">Sponsored &middot; <a href="/disclosure/" class="underline">Disclosure</a></p>
       </div>
