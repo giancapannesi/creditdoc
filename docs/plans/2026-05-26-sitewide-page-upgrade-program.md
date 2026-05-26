@@ -3093,6 +3093,66 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 095: Remaining Category Metadata and Provider Snippet Claim Softening
+
+Date: 2026-05-26
+Implementation commit: `46d9419f6e` (`fix: soften remaining category metadata claims`)
+
+Scope:
+
+- `src/content/categories.json`
+- `src/utils/safe-copy.ts`
+- `src/pages/credit-guide/[slug]/[category].astro`
+
+What changed:
+
+- Softened remaining category metadata for pawn shops, ATMs, credit cards,
+  business loans, mortgages, bankruptcy, banks, credit unions, and fintech.
+- Removed remaining `Best ...` category SEO titles for cards, business loans,
+  mortgages, banks, credit unions, and fintech.
+- Reframed pawn and ATM metadata away from cash-fast, no-credit-check, and
+  surcharge-free claims into stored review, fee-context, and claim-verification
+  language.
+- Added shared safe-copy replacements for surcharge-free ATM/cash-access
+  snippets and standalone no-credit-check snippets.
+- Applied `softenYmylCopy` to dynamic credit-guide category provider snippets so
+  SSR city-category pages use the same YMYL-safe provider summary boundary as
+  browse cards.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered raw-phrase scan returned no matches for the Batch 095 phrase set,
+  including `Best Credit Cards`, `Best Small Business Loans`, `Best Mortgage
+  Lenders`, `Best Banks`, `Best Credit Unions`, `Best Fintech Apps`, `Get cash
+  fast without a credit check`, `surcharge-free cash access`,
+  `surcharge-free ATM access`, `surcharge-free ATMs`, `surcharge-free ATM
+  network`, `no credit check.`, and `without a credit check`.
+- Positive rendered/source scan confirmed replacement language including
+  `eligibility context`, `consultation terms`, `experience signals`,
+  `fee-context details`, `stored review signals`, `no-credit-check claims to
+  verify`, `membership context`, and `ATM network fee context`.
+- Built worker/source scan confirmed dynamic credit-guide category provider
+  snippets route through `safeProfileCopy` / `softenYmylCopy`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/browse/credit-cards/new-york-ny/`,
+  `/browse/business-loans/new-york-ny/`,
+  `/browse/mortgages/new-york-ny/`,
+  `/browse/banking/new-york-ny/`,
+  `/browse/credit-unions/phoenix-az/`,
+  `/credit-guide/amarillo-tx/`, `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Source lender/provider records were not rewritten in this batch; provider
+  snippet cleanup is render-time through shared safe-copy.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 093: Static Support Authority and Safety Claim Softening
 
 Date: 2026-05-26
