@@ -607,25 +607,31 @@ Completed batches:
   comparison wording.
 - Batch 005 committed `f1e0e02d2d`: category hubs now link to local
   city-category examples, answer hub, state hub, CFPB data context, and tools.
-- Batch 006 completed locally and build-verified: state index, state directory
-  pages, and lending-law pages now connect to local guides, categories, answers,
-  and CFPB complaint-data context. Commit next.
+- Batch 006 committed `e142c1650b`: state index, state directory pages, and
+  lending-law pages now connect to local guides, categories, answers, and CFPB
+  complaint-data context.
+- Batch 007 completed locally and build-verified: research index and four
+  research reports now connect back to local guides, state context, provider
+  categories, answer clusters, tools, CFPB methodology, and report-specific
+  category context. Commit next.
 
 Next execution:
 
-1. Commit Batch 006:
-   - `src/pages/state/index.astro`
-   - `src/pages/state/[slug].astro`
-   - `src/pages/state/[slug]/lending-laws.astro`
+1. Commit Batch 007:
+   - `src/pages/research/index.astro`
+   - `src/pages/research/consumer-complaints.astro`
+   - `src/pages/research/lending-transparency.astro`
+   - `src/pages/research/most-responsive-consumer-finance-providers-2026.astro`
+   - `src/pages/research/state-of-subprime-lending-2026.astro`
    - `CREDITDOC_NOW.md`
    - `CREDITDOC_NEXT.md`
-2. Start Batch 007 on research pages:
-   - inspect `src/pages/research/index.astro`;
-   - inspect public report pages under `src/pages/research/`;
-   - add research-to-local/category/state/answers/tools graph paths with
-     methodology-first, advisory-neutral wording.
+2. Start Batch 008 on tools pages:
+   - inspect `src/pages/tools/index.astro`;
+   - inspect calculator/quiz pages under `src/pages/tools/`;
+   - add tool-to-local/category/state/answer/research graph paths with
+     advisory-neutral wording.
 3. Build, verify generated output, document in the sitewide upgrade workpack,
-   and commit before Batch 008.
+   and commit before Batch 009.
 
 ## Regulator Match / Category Cleanup
 

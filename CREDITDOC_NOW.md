@@ -82,7 +82,8 @@ Sitewide upgrade program restarted:
   `/categories/` URLs. Batch 005 applies to every SSR category page.
 - Batch 005 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_005_notes_2026-05-26.md`
-- Batch 006 completed locally and build-verified:
+- Batch 006 completed and committed:
+  `e142c1650b feat: add graph links to state pages`.
   `/state/`, `/state/{slug}/`, and `/state/{slug}/lending-laws/` now include
   state-to-local authority paths connecting state hubs, lending-law pages,
   city guides, category pages, answer clusters, and CFPB complaint-data context.
@@ -99,13 +100,32 @@ Sitewide upgrade program restarted:
   2,232 city-category sub-pages.
 - Batch 006 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_006_notes_2026-05-26.md`
+- Batch 007 completed locally and build-verified:
+  research pages now link original-data reports back into local guides, state
+  pages, provider categories, answer clusters, CreditDoc tools, CFPB
+  methodology, and report-specific category context.
+- Batch 007 scope: `/research/`, `/research/consumer-complaints/`,
+  `/research/lending-transparency/`,
+  `/research/most-responsive-consumer-finance-providers-2026/`, and
+  `/research/state-of-subprime-lending-2026/`.
+- Latest local GSC pull (`pull_id=12`) saw 0 `/research/` URLs. This batch is a
+  pre-visibility authority-graph upgrade for all current research pages.
+- Batch 007 also softened the consumer-complaints title/meta away from
+  "protect borrowers" wording and fixed the State of Subprime Lending breadcrumb
+  from `/press/` to `/research/`.
+- Batch 007 build verification passed:
+  `npm run build`, robots contract, SSR sitemap parity, Astro build, generated
+  output/server-bundle section scan, and sitemap/robots conflict check. This run
+  injected 18,411 SSR route URLs and successfully added 124 city guides plus
+  2,232 city-category sub-pages.
+- Batch 007 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_007_notes_2026-05-26.md`
 
 Immediate next:
 
-1. Commit Batch 006 with only the state templates and resume-cursor docs.
-2. Continue to Batch 007: upgrade research pages so the original-research hub
-   and reports connect back into local guides, categories, answer clusters,
-   state pages, tools, and methodology/data-context pages.
+1. Commit Batch 007 with only the research pages and resume-cursor docs.
+2. Continue to Batch 008: upgrade tools pages so calculators/quizzes link back
+   to local guides, state context, categories, answers, and research pages.
 3. Keep every batch scoped, build-verified, documented, and committed before
    starting the next one.
 

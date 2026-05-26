@@ -77,8 +77,8 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
 const fmt = (n: number) => n.toLocaleString('en-US');
 const pct = (n: number | null) => n != null ? `${(n * 100).toFixed(1)}%` : '—';
 
-const title = "Consumer Complaint Transparency — How CreditDoc Uses Federal Data to Protect Borrowers";
-const description = `We analyze ${fmt(totalComplaints)}+ consumer complaints filed with the CFPB to help you see how lenders really treat their customers. See complaint volumes, resolution rates, and enforcement actions for ${fmt(totalCompanies)}+ financial companies.`;
+const title = "Consumer Complaint Transparency — How CreditDoc Uses Federal Data for Borrower Research";
+const description = `We analyze ${fmt(totalComplaints)}+ consumer complaints filed with the CFPB to add public-data context to lender research. See complaint volumes, resolution rates, and enforcement actions for ${fmt(totalCompanies)}+ financial companies.`;
 
 const jsonLd = [
   {
@@ -153,6 +153,27 @@ const jsonLd = [
         <p class="text-xs text-muted mt-1">Average timely response</p>
       </div>
     </div>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-3">Use Complaint Data With Local Research</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        Complaint records can help you ask better questions, but they do not replace local availability checks, state rules, category comparisons, contract review, or direct licensing verification.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Local city guides
+        </a>
+        <a href="/state/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          State lending context
+        </a>
+        <a href="/categories/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Provider categories
+        </a>
+        <a href="/tools/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          CreditDoc tools
+        </a>
+      </div>
+    </section>
 
     <!-- Why CreditDoc Shows This -->
     <section class="glass-card p-6 mb-8">
