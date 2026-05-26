@@ -2493,3 +2493,39 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_030_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_030_wellness_presentation_copy_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 031
+
+Batch 031 implementation committed as `53e8386d4a` for credit-fundamentals
+course module phrasing:
+
+- `src/pages/courses/credit-fundamentals/[slug].astro`
+
+Changes:
+
+- Added narrow render-time cleanup for external course markdown lesson HTML:
+  `may be worth it` / `worth it` now renders as evaluation wording, and
+  `top lenders` now renders as `major lenders`.
+- Reframed quiz instruction copy from `Pick the best answer` to `Pick the most
+  accurate answer`.
+- Preserved quiz correctness, `data-correct` attributes, answer text semantics,
+  and intentional guarantee/scam red-flag examples.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json` changes
+  affected generated inventory; neither file was staged or committed.
+- Build generated 124 city guides plus 2,232 city-category sub-pages.
+- Postbuild sitemap/robots conflict check passed.
+- Rendered course-page scan was clean for `worth it`, `top lenders`, and
+  `best answer`; source-only hits are the replacement rules themselves.
+- Generated scam/red-flag course pages still render guarantee examples in the
+  intended warning context.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_031_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_031_course_module_copy_gsc_seen_2026-05-26.csv`

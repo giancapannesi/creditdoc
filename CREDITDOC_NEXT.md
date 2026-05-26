@@ -1113,3 +1113,19 @@ Initial Batch 031 targets:
 - keep quiz correctness intact and do not change `data-correct` attributes or
   answer semantics;
 - build-check, output/source-check, document, commit, then continue.
+
+Batch 031 implementation is complete, build-verified, and committed as
+`53e8386d4a`. Move to Batch 032 by scanning answer-cluster and trend pages for
+remaining recommendation/outcome phrasing, with special care around route names
+and provider names that should not be rewritten.
+
+Initial Batch 032 targets:
+
+- scan generated `/answers/` and `/trends/` pages for remaining visible
+  best/top/recommended/right-fit/approval/safe/guarantee/diagnosis/outcome
+  wording;
+- separate URL slug text, provider names, and legitimate warning examples from
+  visible copy that should be softened;
+- prefer answer/trend template rendering fixes before raw JSON edits;
+- preserve strategic answer URLs, trend URLs, and internal links;
+- build-check, output/source-check, document, commit, then continue.
