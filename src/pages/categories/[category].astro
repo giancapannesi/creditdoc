@@ -8,6 +8,7 @@ import { shapeBodyInlineToLender, getGlossaryTermsForContextRuntime } from '../.
 import { createLinker } from '../../utils/inline-linker';
 import type { Lender } from '../../utils/data';
 import categoriesData from '../../content/categories.json';
+import { softenYmylCopy } from '../../utils/safe-copy';
 
 const env = (Astro.locals as any).runtime?.env;
 const { category: categorySlug } = Astro.params;
@@ -40,9 +41,9 @@ const categoryBody = (categoryRow.body_inline ?? {}) as Record<string, any>;
 const category = {
   slug: categoryRow.slug,
   name: categoryRow.name,
-  description: (categoryBody.description as string) || '',
+  description: softenYmylCopy((categoryBody.description as string) || ''),
   seo_title: (categoryBody.seo_title as string) || `${categoryRow.name} | CreditDoc`,
-  seo_description: (categoryBody.seo_description as string) || (categoryBody.description as string) || '',
+  seo_description: softenYmylCopy((categoryBody.seo_description as string) || (categoryBody.description as string) || ''),
   filter_type: (categoryBody.filter_type as string) || '',
 };
 
@@ -134,7 +135,7 @@ const jsonLd = [
   ...(topLenders.length > 0 ? [{
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: `Top ${category.name} Companies`,
+    name: `${category.name} Company Profiles`,
     itemListOrder: 'https://schema.org/ItemListOrderDescending',
     numberOfItems: topLenders.length,
     itemListElement: topLenders.map((l, i) => ({
@@ -246,7 +247,7 @@ Astro.response.headers.set('x-cdm-slug', categorySlug || '');
         </div>
         <h2 class="text-lg font-semibold text-text">Our team is reviewing {category.name} providers</h2>
         <p class="mt-2 text-sm text-muted max-w-md mx-auto">
-          We're researching pricing, features, and customer reviews to bring you unbiased comparisons. In the meantime, explore our reviewed categories.
+          We're researching pricing, features, and customer review signals. In the meantime, explore related categories.
         </p>
         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a

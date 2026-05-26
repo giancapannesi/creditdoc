@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import AffiliateInline from '../../components/AffiliateInline.astro';
 import AffiliateSidebar from '../../components/AffiliateSidebar.astro';
 import { createLinker } from '../../utils/inline-linker';
+import { softenYmylCopy } from '../../utils/safe-copy';
 import {
   getAnswerBySlugRuntime,
   getSiblingAnswersByPillarRuntime,
@@ -94,8 +95,8 @@ Astro.response.headers.set('x-cdm-version', String(verSec));
 // Per-page linker: 8 money + 8 glossary caps persist across all sections.
 const linker = createLinker(glossaryTerms, { moneyBudget: 8, glossaryBudget: 8 });
 const linkedSections = answer.sections.map(section => ({
-  heading: section.heading,
-  content: linker(section.content).join('\n\n'),
+  heading: softenYmylCopy(section.heading),
+  content: softenYmylCopy(linker(section.content).join('\n\n')),
 }));
 
 // Derive key takeaways from the first sentence of the first 4 sections (used in TL;DR card).
@@ -104,7 +105,7 @@ function firstSentence(md: string): string {
   const m = plain.match(/^(.*?[.!?])(\s|$)/);
   return (m ? m[1] : plain.slice(0, 160)).trim();
 }
-const keyTakeaways = answer.sections.slice(0, 4).map(s => firstSentence(s.content)).filter(Boolean);
+const keyTakeaways = answer.sections.slice(0, 4).map(s => softenYmylCopy(firstSentence(s.content))).filter(Boolean);
 
 const categoryLabels: Record<string, string> = {
   'build-credit': 'Build My Credit',
@@ -242,8 +243,8 @@ const faqSchema = _faqItems.length > 0 ? {
   '@type': 'FAQPage',
   mainEntity: _faqItems.map((f: { question: string; answer: string }) => ({
     '@type': 'Question',
-    name: f.question.trim(),
-    acceptedAnswer: { '@type': 'Answer', text: f.answer.trim() },
+    name: softenYmylCopy(f.question.trim()),
+    acceptedAnswer: { '@type': 'Answer', text: softenYmylCopy(f.answer.trim()) },
   })),
 } : null;
 
@@ -362,7 +363,7 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
         {/* Money CTA */}
         <div class="rounded-xl border-2 border-primary/30 bg-gradient-to-r from-primary/5 to-primary/10 p-6">
           <h2 class="text-xl font-bold text-text mb-2">Ready to take action?</h2>
-          <p class="text-muted mb-4">Compare our top-rated options for this topic and find the right fit for your situation.</p>
+          <p class="text-muted mb-4">Compare profile options for this topic and review the context that fits your situation.</p>
           <a
             href={answer.target_money_page}
             class="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary-hover transition-colors"
@@ -382,12 +383,12 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
               {answer.faq_schema.map(f => (
                 <details class="glass-card p-5 group" open>
                   <summary class="flex items-center justify-between cursor-pointer list-none">
-                    <h3 class="text-base font-semibold text-text pr-4">{f.question}</h3>
+                    <h3 class="text-base font-semibold text-text pr-4">{softenYmylCopy(f.question)}</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-muted shrink-0 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/>
                     </svg>
                   </summary>
-                  <p class="mt-3 text-sm text-muted leading-relaxed">{f.answer}</p>
+                  <p class="mt-3 text-sm text-muted leading-relaxed">{softenYmylCopy(f.answer)}</p>
                 </details>
               ))}
             </div>
@@ -472,7 +473,7 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="rounded-lg bg-bg-alt border border-border p-4">
       <p class="text-xs text-muted leading-relaxed">
-        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to products and services mentioned on this page. These commissions help us maintain our free research. Our editorial team independently evaluates all services. Compensation does not influence editorial reviews, page order, or recommendations; visible star ratings use stored Google review ratings when available. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
+        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to products and services mentioned on this page. These commissions help us maintain our free research. Compensation does not determine whether a provider can be covered; visible star ratings use stored Google review ratings when available. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
       </p>
     </div>
   </section>
