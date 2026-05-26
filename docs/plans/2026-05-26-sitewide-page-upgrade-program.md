@@ -2167,3 +2167,59 @@ Notes:
   category mappings, or card layout changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 072: Business Funding Card Claims
+
+Date: 2026-05-26
+Implementation commit: `c47a84759e` (`feat: soften business funding card claims`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Extended `softenYmylCopy()` with phrase-specific coverage for provider-card
+  descriptions and profile signals that used business-funding speed,
+  approval-timing, 0% interest, limited-documentation, collateral, rate, or
+  marketplace-matching claims.
+- Reworded variants such as `quick approval`, `quick approvals`,
+  `24-hour approvals`, `minimal documentation`, `competitive rates`,
+  `0% interest business funding`, `without requiring collateral or financial
+  statements`, `funding marketplace that matches small businesses with`, and
+  `fast business funding solutions` into provider-profile or
+  verification-oriented context.
+- Added final-pass cleanup for generated artifacts such as `business-funding
+  profile details solutions`, nested `advertised advertised 0% interest`
+  output, `a advertised 0% interest`, and `find rate claims to verify`.
+- Preserved source lender records, city/browse routes, slugs, rankings,
+  category mappings, card layout, ratings, and links.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Generated city/browse pages confirmed targeted raw phrases were absent from
+  sampled provider-card copy and replacement wording was present for
+  `/browse/business-loans/charlotte-nc/`, `/city/charlotte-nc/`,
+  `/browse/mortgages/baltimore-md/`, `/browse/pawn-shops/national-city-ca/`,
+  `/city/national-city-ca/`, and `/city/south-gate-ca/`.
+- Broader `dist/city` and `dist/browse` scan confirmed no remaining matches
+  for the targeted business-funding/card-claim raw phrases.
+- Production spot checks returned HTTP 200 for
+  `/browse/business-loans/charlotte-nc/`, `/city/charlotte-nc/`,
+  `/browse/mortgages/baltimore-md/`, `/browse/pawn-shops/national-city-ca/`,
+  `/browse/check-cashing/houston-tx/`, `/city/los-angeles-ca/`, `/learn/`,
+  `/blog/`, `/categories/fintech/`, `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Helper-only change; no source lender records, routes, slugs, rankings,
+  category mappings, or card layout changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
