@@ -32,7 +32,7 @@ Latest completed/active state:
 - Batch 011 verification passed: `npm run build`, robots contract, SSR sitemap
   parity, generated output/server-bundle scan, sitemap/robots check, and 18,411
   SSR route URL injection.
-- Batch 012 committed: `2b6d63bae4 feat: add graph links to education pages`.
+- Batch 012 committed: `c304df885c feat: add graph links to education pages`.
 - Batch 012 scope: `/learn/`, `/glossary/`, `/courses/`,
   `/courses/credit-fundamentals/`, and every
   `/courses/credit-fundamentals/{slug}/` module page.

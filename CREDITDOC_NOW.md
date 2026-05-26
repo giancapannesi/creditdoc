@@ -198,7 +198,7 @@ Sitewide upgrade program restarted:
 - Batch 011 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_011_notes_2026-05-26.md`
 - Batch 012 completed and committed:
-  `2b6d63bae4 feat: add graph links to education pages`.
+  `c304df885c feat: add graph links to education pages`.
   education-support pages now link the learn/search, glossary, and course layer
   into local guides, answer clusters, tools, resources, provider categories,
   state context, and CFPB complaint-data research.
