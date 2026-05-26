@@ -48,8 +48,9 @@ function googleRating(lender: Lender): number {
 }
 
 function bbbRank(rating: string): number {
+  const normalized = rating?.trim() || 'NR';
   const ranks: Record<string, number> = { 'A+': 7, 'A': 6, 'B+': 5, 'B': 4, 'C+': 3, 'C': 2, 'C-': 1, 'F': 0 };
-  return ranks[rating] ?? -1;
+  return ranks[normalized] ?? -1;
 }
 
 function bbbWinner(a: string, b: string): 'a' | 'b' | 'tie' {
@@ -58,13 +59,18 @@ function bbbWinner(a: string, b: string): 'a' | 'b' | 'tie' {
   return ra > rb ? 'a' : 'b';
 }
 
+function normalizedBbbRating(rating: string): string {
+  const normalized = rating?.trim() || '';
+  return normalized && normalized !== 'N/A' ? normalized : 'NR';
+}
+
 const lowestPriceA = lowestListedMonthlyPrice(lenderA);
 const lowestPriceB = lowestListedMonthlyPrice(lenderB);
 
 const winners = {
   price: lowestPriceA === null || lowestPriceB === null ? 'tie' as const : priceWinner(lowestPriceA, lowestPriceB),
   setup: priceWinner(lenderA.pricing.setup_fee, lenderB.pricing.setup_fee),
-  bbb: bbbWinner(lenderA.company_info.bbb_rating, lenderB.company_info.bbb_rating),
+  bbb: bbbWinner(normalizedBbbRating(lenderA.company_info.bbb_rating), normalizedBbbRating(lenderB.company_info.bbb_rating)),
   guarantee: lenderA.pricing.money_back_guarantee === lenderB.pricing.money_back_guarantee ? 'tie' as const : (lenderA.pricing.money_back_guarantee ? 'a' as const : 'b' as const),
   rating: ratingWinner(googleRating(lenderA), googleRating(lenderB)),
 };
@@ -155,14 +161,14 @@ const comparisonBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-
       <tr class="hover:bg-bg-alt/50 transition-colors">
         <td class="py-3 px-4 font-medium text-text">BBB Rating</td>
         <td class="py-3 px-4 text-center">
-          <span class={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${getBbbClass(lenderA.company_info.bbb_rating)}`}>
-            {lenderA.company_info.bbb_rating}
+          <span class={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${getBbbClass(normalizedBbbRating(lenderA.company_info.bbb_rating))}`}>
+            {normalizedBbbRating(lenderA.company_info.bbb_rating)}
           </span>
           {winners.bbb === 'a' && <span class={comparisonBadge}>Higher</span>}
         </td>
         <td class="py-3 px-4 text-center">
-          <span class={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${getBbbClass(lenderB.company_info.bbb_rating)}`}>
-            {lenderB.company_info.bbb_rating}
+          <span class={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${getBbbClass(normalizedBbbRating(lenderB.company_info.bbb_rating))}`}>
+            {normalizedBbbRating(lenderB.company_info.bbb_rating)}
           </span>
           {winners.bbb === 'b' && <span class={comparisonBadge}>Higher</span>}
         </td>

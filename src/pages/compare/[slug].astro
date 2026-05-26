@@ -79,6 +79,21 @@ function monthlyPriceLabel(lender: Lender): string {
   return price === null ? 'No listed monthly price' : `From ${formatPrice(price)}/mo`;
 }
 
+function normalizedBbbRating(lender: Lender): string {
+  return lender.company_info.bbb_rating?.trim() || '';
+}
+
+function bbbBadgeLabel(lender: Lender): string {
+  const rating = normalizedBbbRating(lender);
+  return rating && rating !== 'N/A' ? `BBB: ${rating}` : 'BBB: NR';
+}
+
+function bbbFaqLabel(lender: Lender): string {
+  const rating = normalizedBbbRating(lender);
+  if (!rating || rating === 'N/A') return `${lender.name} does not have a stored BBB rating in this profile`;
+  return `${lender.name} has a ${rating} BBB rating${lender.company_info.bbb_accredited ? ' (accredited)' : ''}`;
+}
+
 const lenderAMonthlyPrice = lowestListedMonthlyPrice(lenderA);
 const lenderBMonthlyPrice = lowestListedMonthlyPrice(lenderB);
 
@@ -126,7 +141,7 @@ const faqs = [
   },
   {
     question: `Which has the higher stored BBB rating, ${lenderA.name} or ${lenderB.name}?`,
-    answer: `${lenderA.name} has a ${lenderA.company_info.bbb_rating} BBB rating${lenderA.company_info.bbb_accredited ? ' (accredited)' : ''}, while ${lenderB.name} has a ${lenderB.company_info.bbb_rating} BBB rating${lenderB.company_info.bbb_accredited ? ' (accredited)' : ''}. BBB ratings are third-party signals and should be checked with current provider, regulator, and complaint-response context.`,
+    answer: `${bbbFaqLabel(lenderA)}, while ${bbbFaqLabel(lenderB)}. BBB ratings are third-party signals and should be checked with current provider, regulator, and complaint-response context.`,
   },
   {
     question: `Do ${lenderA.name} and ${lenderB.name} list refund terms?`,
@@ -211,7 +226,7 @@ const jsonLd = [
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       {[lenderA, lenderB].map((lender) => {
         const isWinner = comparison.winner === lender.slug;
-        const bbbCls = getBbbClass(lender.company_info.bbb_rating);
+        const bbbCls = getBbbClass(normalizedBbbRating(lender));
         return (
           <div class:list={[
             'glass-card p-6 text-center relative',
@@ -245,7 +260,7 @@ const jsonLd = [
                 {monthlyPriceLabel(lender)}
               </span>
               <span class:list={['inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold', bbbCls]}>
-                BBB: {lender.company_info.bbb_rating}
+                {bbbBadgeLabel(lender)}
               </span>
             </div>
             <div class="mt-4 flex gap-2">
