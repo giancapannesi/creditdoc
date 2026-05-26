@@ -2050,3 +2050,59 @@ Notes:
   records, URLs, slugs, or data mappings changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 070: Comparison Refund-Term Claim Copy
+
+Date: 2026-05-26
+Implementation commit: `680284aaea` (`feat: soften comparison refund-term claim copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Extended `softenYmylCopy()` with phrase-specific coverage for comparison
+  summaries, JSON-LD descriptions, visible FAQ answers, and comparison-note
+  snippets that referenced provider refund guarantees, result-confidence
+  language, or customer-protection claims.
+- Reworded variants such as `50-point credit score increase guaranteed or full
+  money back`, `score-increase guarantee`, `stronger guarantee`, `guarantee
+  demonstrates confidence in results`, and `protects customers from paying for
+  undelivered services` into provider-stated refund-term context.
+- Added final-pass cleanup for the generated artifact `with published refund
+  terms results with a published refund term`.
+- Preserved comparison routes, slugs, lender records, pricing fields, FAQ
+  structure, JSON-LD structure, and comparison page layout.
+
+Verification:
+
+- `git diff --check` passed.
+- Direct helper checks confirmed the targeted guarantee/result-confidence
+  phrases soften before rendering.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Generated comparison pages confirmed the targeted raw phrases were absent and
+  provider-stated refund-term replacements were present for
+  `/compare/continental-credit-vs-cosmo-credit-repair/`,
+  `/compare/the-credit-repairmen-vs-cosmo-credit-repair/`, and
+  `/compare/ecreditadvisor-vs-cosmo-credit-repair/`.
+- Broader `dist/compare` scan confirmed no remaining matches for the targeted
+  guarantee/result-confidence phrases.
+- Production spot checks returned HTTP 200 for
+  `/compare/continental-credit-vs-cosmo-credit-repair/`,
+  `/compare/the-credit-repairmen-vs-cosmo-credit-repair/`,
+  `/compare/ecreditadvisor-vs-cosmo-credit-repair/`, `/learn/`, `/blog/`,
+  `/credit-guide/amarillo-tx/`, `/categories/fintech/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Helper-only change; no source comparison/lender records, routes, slugs, or
+  data mappings changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
