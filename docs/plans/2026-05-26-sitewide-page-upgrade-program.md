@@ -1116,3 +1116,47 @@ Notes:
   visible `Profile Highlights` copy and existing table behavior.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 047: Listicle Display Titles
+
+Date: 2026-05-26
+Implementation commit: `6d0227d286` (`feat: soften listicle display titles`)
+
+Scope:
+
+- `src/pages/best/[slug].astro`
+
+What changed:
+
+- Added a route-level `softenListicleTitle()` helper for listicle display and
+  SEO titles.
+- Reframed rendered listicle titles such as `Best`, `Cheapest`, `Top`,
+  `Money-Back Guarantee`, and `Lowest` wording toward comparison/profile
+  language.
+- Updated the rendered page title, H1, breadcrumb text, breadcrumb schema,
+  `ItemList` schema, and `Article` headline to use the softened display title.
+- Preserved existing slugs, canonical URLs, Supabase source rows, and lender
+  ranking order.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and built `/best/[slug]` worker route-module scans confirmed the
+  softened display title path for page title, H1, breadcrumbs, and schema.
+- Source scan was clean for direct rendered `listicle.title` and
+  `listicle.seo_title` references in the listicle route.
+- `git diff --check` passed.
+
+Notes:
+
+- `/best/[slug]` is an SSR route emitted under
+  `dist/_worker.js/pages/best/_slug_.astro.mjs`; there are no static
+  `dist/best/*` files to inspect for this route.
+- This batch intentionally leaves raw source listicle JSON/Supabase title
+  values untouched and applies YMYL-safe wording at the render boundary.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
