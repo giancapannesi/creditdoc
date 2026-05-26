@@ -3028,6 +3028,70 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 091: Comparison Proof, Pricing-Cap, and Refund Claim Softening
+
+Date: 2026-05-26
+Implementation commit: `145a43b931` (`fix: soften comparison proof and refund claims`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared safe-copy replacements for generated comparison fragments that
+  framed review/testimonial proof, independent verification, social proof,
+  capped pricing, mortgage specialization, refund terms, hidden pricing, and
+  outcome claims as broad claims.
+- Softened targeted phrases including `verified reviews`, `verified
+  testimonials`, `independent verification`, `stronger social proof`,
+  `transparent, capped pricing`, `transparent 6-month price cap`,
+  `transparent 6-month cap`, `6-month maximum cap`, `6-month cost cap`, `price
+  cap`, `cost cap`, `specialized mortgage-qualification experience`,
+  `specialized mortgage-qualification expertise`, `specialized mortgage
+  qualification`, `mortgage-qualification experience`, `no-hassle
+  cancellation`, `full refund`, `full refunds`, `100% listed refund term`,
+  `proven 27-year track record`, `comprehensive debt management
+  specialization`, `hidden pricing`, `lower entry price is offset by`, `lack of
+  specialization`, `significantly lower total cost`, `superior
+  consumer-protection context`, and `documented/verifiable results`.
+- Added cleanup for duplicate generated context artifacts such as repeated
+  `listed` wording and repeated mortgage-qualification context.
+- Preserved source comparison records, source lender records, pricing values,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` targeted raw-phrase scan returned no matches.
+- Targeted rendered checks confirmed replacement language on comparison pages
+  including `/compare/ecreditadvisor-vs-national-credit-fixers/`,
+  `/compare/ecreditadvisor-vs-safeport-law/`,
+  `/compare/incharge-debt-solutions-vs-creditorg/`,
+  `/compare/the-credit-repairmen-vs-cosmo-credit-repair/`,
+  `/compare/self-credit-builder-vs-the-credit-gal/`, and
+  `/compare/ace-cash-express-terrytown-vs-advance-america-montebello/`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/ecreditadvisor-vs-national-credit-fixers/`,
+  `/compare/ecreditadvisor-vs-safeport-law/`,
+  `/compare/incharge-debt-solutions-vs-creditorg/`,
+  `/compare/the-credit-repairmen-vs-cosmo-credit-repair/`,
+  `/compare/self-credit-builder-vs-the-credit-gal/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- Earlier retry hit a non-fatal city guide timeout and produced 16,057 SSR
+  route URLs; that degraded build was discarded and not used for verification.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 090: Comparison Pricing and Credibility Claim Softening
 
 Date: 2026-05-26
