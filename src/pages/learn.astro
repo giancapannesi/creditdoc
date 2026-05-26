@@ -30,6 +30,13 @@ const popularTopics = [
   { label: 'Budgeting', query: 'budget' },
   { label: 'Bankruptcy', query: 'bankruptcy' },
 ];
+
+const contextLinks = [
+  { href: '/city/', label: 'Local City Guides', description: 'Compare education topics with local lender, rule, and map context.' },
+  { href: '/answers/', label: 'Answers Library', description: 'Use question-led pages when you need a direct explanation of a credit or loan topic.' },
+  { href: '/tools/', label: 'Financial Tools', description: 'Run calculators and simulators after reading an education result.' },
+  { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Check CFPB complaint patterns alongside glossary, guide, and article research.' },
+];
 ---
 
 <BaseLayout
@@ -134,8 +141,23 @@ const popularTopics = [
           Blog Articles
         </a>
         <a href="/" class="inline-flex items-center px-5 py-2.5 rounded-lg border border-border text-text text-sm font-semibold hover:bg-bg-alt transition-colors min-h-[44px]">
-          Lender Directory
+          CreditDoc Directory
         </a>
+      </div>
+    </div>
+
+    <div class="mt-12 glass-card p-6 sm:p-8">
+      <h2 class="text-xl font-bold text-text">Use Search With CreditDoc Context</h2>
+      <p class="mt-2 text-sm text-muted leading-relaxed">
+        Search is a starting point. Use the related CreditDoc sections to connect definitions, guides, and articles with local pages, calculators, public complaint data, and question-led explanations.
+      </p>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2">
+        {contextLinks.map(link => (
+          <a href={link.href} class="rounded-lg border border-border bg-white p-4 hover:border-primary/40 transition-colors">
+            <span class="text-sm font-semibold text-text">{link.label}</span>
+            <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+          </a>
+        ))}
       </div>
     </div>
   </section>

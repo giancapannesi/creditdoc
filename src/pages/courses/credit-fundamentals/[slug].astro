@@ -110,6 +110,66 @@ const candidate = `${shortTitle} — Free Credit Course | CreditDoc`;
 const title = candidate.length <= 60 ? candidate : `${shortTitle} | Free Course — CreditDoc`;
 const description = mod.description;
 
+const defaultContextLinks = [
+  { href: '/answers/', label: 'Answers Library', description: 'Review short explanations connected to this module topic.' },
+  { href: '/tools/', label: 'Financial Tools', description: 'Use CreditDoc calculators and simulators after studying the lesson.' },
+  { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Compare course concepts with public CFPB complaint trends.' },
+  { href: '/city/', label: 'Local City Guides', description: 'Connect education with local pages, maps, and state rule context.' },
+];
+
+const moduleContextLinks: Record<string, typeof defaultContextLinks> = {
+  'understanding-your-credit-score': [
+    { href: '/tools/credit-score-simulator/', label: 'Credit Score Simulator', description: 'Model score-factor scenarios while reviewing payment, balance, and account-history concepts.' },
+    { href: '/glossary/#fico-score', label: 'FICO Score Definition', description: 'Review the glossary definition for one of the core scoring terms.' },
+    { href: '/answers/', label: 'Credit Score Answers', description: 'Use question-led explainers for common credit-score topics.' },
+    { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Compare scoring topics with public credit-reporting complaint patterns.' },
+  ],
+  'how-to-read-your-credit-report': [
+    { href: '/resources/credit-report-checklist/', label: 'Credit Report Checklist', description: 'Use a structured checklist while reviewing report sections and possible follow-up items.' },
+    { href: '/resources/debt-credit-letter-templates/', label: 'Letter Templates', description: 'Review template language for common credit and debt correspondence.' },
+    { href: '/answers/', label: 'Credit Report Answers', description: 'Move from report terms to common consumer questions.' },
+    { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Review credit-reporting complaint patterns from public CFPB data.' },
+  ],
+  'building-credit-from-scratch': [
+    { href: '/tools/credit-score-simulator/', label: 'Credit Score Simulator', description: 'Estimate how credit-building behaviors can affect a score scenario.' },
+    { href: '/financial-wellness/building-credit/', label: 'Building Credit Guides', description: 'Read longer CreditDoc explainers connected to starter-credit topics.' },
+    { href: '/answers/', label: 'Credit Builder Answers', description: 'Review question-led pages for common first-credit decisions.' },
+    { href: '/city/', label: 'Local City Guides', description: 'Connect general credit education with local lender and rule context.' },
+  ],
+  'managing-debt-effectively': [
+    { href: '/tools/debt-payoff-calculator/', label: 'Debt Payoff Calculator', description: 'Compare payoff scenarios after studying repayment methods.' },
+    { href: '/categories/debt-relief/', label: 'Debt Relief Research', description: 'Review provider-category context before comparing debt-relief options.' },
+    { href: '/answers/', label: 'Debt Answers', description: 'Use question-led explainers for debt-management topics.' },
+    { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Check public complaint patterns for debt collection and debt relief topics.' },
+  ],
+  'credit-repair-diy-vs-hiring-help': [
+    { href: '/resources/credit-report-checklist/', label: 'Credit Report Checklist', description: 'Organize report review before deciding how to handle dispute follow-up.' },
+    { href: '/categories/credit-repair/', label: 'Credit Repair Research', description: 'Review category context before comparing credit repair providers.' },
+    { href: '/resources/debt-credit-letter-templates/', label: 'Letter Templates', description: 'Use template examples for credit-report and debt correspondence.' },
+    { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Review public complaint trends connected to credit repair and reporting.' },
+  ],
+  'personal-loans-and-borrowing-smart': [
+    { href: '/tools/borrowing-power-quiz/', label: 'Borrowing Power Quiz', description: 'Estimate borrowing context before comparing personal-loan options.' },
+    { href: '/categories/personal-loans/', label: 'Personal Loan Research', description: 'Review provider-category context for personal loan comparisons.' },
+    { href: '/city/', label: 'Local City Guides', description: 'Connect borrowing education with local lender pages and state rule context.' },
+    { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Check public complaint patterns for loan products and servicing topics.' },
+  ],
+  'avoiding-scams-and-predatory-lending': [
+    { href: '/resources/', label: 'Resource Library', description: 'Use checklists and templates while reviewing warning signs and next steps.' },
+    { href: '/answers/', label: 'Consumer Finance Answers', description: 'Review short explainers for common scam, debt, and lending questions.' },
+    { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Look at public complaint patterns for products and practices discussed in the module.' },
+    { href: '/state/', label: 'State Rule Context', description: 'Check state-level pages where local rule context matters.' },
+  ],
+  'know-your-rights': [
+    { href: '/resources/debt-credit-letter-templates/', label: 'Letter Templates', description: 'Review example correspondence for credit, debt, and dispute topics.' },
+    { href: '/answers/', label: 'Rights Answers', description: 'Use question-led explainers for consumer-rights topics.' },
+    { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Compare rights topics with public complaint patterns.' },
+    { href: '/state/', label: 'State Rule Context', description: 'Connect federal rights education with state-level context pages.' },
+  ],
+};
+
+const contextLinks = moduleContextLinks[slug] || defaultContextLinks;
+
 const jsonLd = [
   {
     "@context": "https://schema.org",
@@ -217,6 +277,21 @@ const jsonLd = [
         )}
       </ol>
     </nav>
+
+    <section class="glass-card p-6 sm:p-8 mb-10">
+      <h2 class="text-xl font-bold text-text">Use This Module With CreditDoc Context</h2>
+      <p class="mt-2 text-sm text-muted leading-relaxed">
+        Use these related pages to connect the module to CreditDoc tools, local guides, provider-category research, templates, and public complaint data.
+      </p>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2">
+        {contextLinks.map(link => (
+          <a href={link.href} class="rounded-lg border border-border bg-white p-4 hover:border-primary/40 transition-colors">
+            <span class="text-sm font-semibold text-text">{link.label}</span>
+            <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
 
     <!-- ============================================ -->
     <!--  ENROLLMENT GATE — shown when NOT enrolled   -->

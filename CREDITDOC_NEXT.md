@@ -25,21 +25,30 @@ Latest completed/active state:
 - Batch 010 verification passed: `npm run build`, robots contract, SSR sitemap
   parity, generated output/server-bundle scan, sitemap/robots check, and 18,411
   SSR route URL injection.
-- Batch 011 blog pages completed locally and build-verified; commit next.
+- Batch 011 committed: `bc19ad1a9c feat: add graph links to blog pages`.
 - Batch 011 scope: `/blog/` and `/blog/{slug}/`.
 - Local blog inventory: 68 rows; latest local GSC pull (`pull_id=12`) saw 13
   `/blog/` URLs.
 - Batch 011 verification passed: `npm run build`, robots contract, SSR sitemap
   parity, generated output/server-bundle scan, sitemap/robots check, and 18,411
   SSR route URL injection.
+- Batch 012 committed: `2b6d63bae4 feat: add graph links to education pages`.
+- Batch 012 scope: `/learn/`, `/glossary/`, `/courses/`,
+  `/courses/credit-fundamentals/`, and every
+  `/courses/credit-fundamentals/{slug}/` module page.
+- Local education inventory: 71 glossary terms, 1 current course, 8 modules,
+  and 40 lessons. Latest local GSC pull (`pull_id=12`) saw 0 `/learn/`,
+  `/glossary/`, or `/courses/` URLs.
+- Batch 012 verification passed: `npm run build`, robots contract, SSR sitemap
+  parity, generated output scan, targeted route check, sitemap/robots check, and
+  18,411 SSR route URL injection.
 
 Immediate next:
 
-1. Commit Batch 011 with only the scoped blog files and resume-cursor docs.
-2. Start Batch 012 by inspecting the course/learn/glossary education-support
-   pages and upgrading the next suitable page family with graph links into local
-   guides, categories, answers, tools, resources, research, and state context.
-3. Keep every batch scoped, documented in the workpack, build-verified, and
+1. Start Batch 013 by inspecting the static trust/support pages and upgrading
+   the next suitable page family with graph links into local guides, categories,
+   answers, tools, resources, research, and state context.
+2. Keep every batch scoped, documented in the workpack, build-verified, and
    committed before starting the next batch.
 
 ## Strategic Direction — AI Council Session 6 (2026-05-16)

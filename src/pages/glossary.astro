@@ -46,6 +46,15 @@ const jsonLd = {
     "url": `https://www.creditdoc.co/glossary/#${t.slug}`,
   })),
 };
+
+const contextLinks = [
+  { href: '/learn/', label: 'Education Search', description: 'Search glossary definitions alongside wellness guides and articles.' },
+  { href: '/answers/', label: 'Answers Library', description: 'Move from a definition to common consumer-finance questions.' },
+  { href: '/tools/', label: 'Financial Tools', description: 'Use calculators and simulators to apply key lending and credit terms.' },
+  { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Review public complaint trends connected to lending, credit reporting, and debt topics.' },
+  { href: '/city/', label: 'Local City Guides', description: 'Connect national concepts with local providers, maps, and state rule context.' },
+  { href: '/financial-wellness/', label: 'Wellness Guides', description: 'Read longer explainers for credit, debt, loans, budgeting, and everyday finance topics.' },
+];
 ---
 
 <BaseLayout title={title} description={description}>
@@ -115,6 +124,23 @@ const jsonLd = {
           </div>
         );
       })}
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+      <div class="glass-card p-6 sm:p-8">
+        <h2 class="text-xl font-bold text-text">Use Glossary Terms With CreditDoc Context</h2>
+        <p class="mt-2 text-sm text-muted leading-relaxed max-w-3xl">
+          Definitions are easier to use when they connect to examples, tools, local pages, and source-backed research. These sections help move from a single term to the wider CreditDoc research graph.
+        </p>
+        <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {contextLinks.map(link => (
+            <a href={link.href} class="rounded-lg border border-border bg-white p-4 hover:border-primary/40 transition-colors">
+              <span class="text-sm font-semibold text-text">{link.label}</span>
+              <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
     </section>
   </main>
 </BaseLayout>

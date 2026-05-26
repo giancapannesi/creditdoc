@@ -41,6 +41,15 @@ const jsonLd = [
     ]
   }
 ];
+
+const contextLinks = [
+  { href: '/resources/credit-report-checklist/', label: 'Credit Report Checklist', description: 'Use a structured checklist alongside the credit report and dispute modules.' },
+  { href: '/tools/credit-score-simulator/', label: 'Credit Score Simulator', description: 'Model score-factor scenarios after studying utilization, payments, and account history.' },
+  { href: '/answers/', label: 'Credit Answers', description: 'Review short question-led explainers connected to the topics in this course.' },
+  { href: '/research/consumer-complaints/', label: 'Complaint Data Research', description: 'Compare course concepts with public complaint patterns from consumer-finance markets.' },
+  { href: '/city/', label: 'Local City Guides', description: 'Connect education with local lender pages, directions, and state rule context.' },
+  { href: '/categories/credit-repair/', label: 'Credit Repair Research', description: 'Review provider-category context before comparing credit repair options.' },
+];
 ---
 
 <BaseLayout title={title} description={description} jsonLd={jsonLd}>
@@ -61,7 +70,7 @@ const jsonLd = [
       <span class="inline-block rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-6">Free Course — 8 Modules — No Credit Card Required</span>
       <h1 class="text-4xl font-bold text-text sm:text-5xl">Credit Fundamentals</h1>
       <p class="mt-6 text-lg text-muted leading-relaxed max-w-2xl mx-auto">
-        The complete beginner's guide to understanding, building, and repairing your credit — written in plain English, backed by federal data, and designed to save you thousands of dollars.
+        A beginner-friendly course on understanding credit scores, reading credit reports, managing debt, comparing borrowing options, and using consumer-rights resources.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-6 text-sm text-muted">
         <span class="flex items-center gap-2">
@@ -84,16 +93,16 @@ const jsonLd = [
 
     <!-- The Problem -->
     <div class="mb-14">
-      <h2 class="text-2xl font-bold text-text mb-4">Most People Learn About Credit the Hard Way</h2>
+      <h2 class="text-2xl font-bold text-text mb-4">Credit Decisions Are Easier With Context</h2>
       <div class="space-y-4 text-muted leading-relaxed">
         <p>
-          A denied apartment application. A car loan at 18% instead of 5%. A credit card balance that snowballs into years of minimum payments. For most Americans, the first time they really think about credit is when something goes wrong — and by then, the damage is already done.
+          Apartment applications, auto loans, credit cards, debt collection letters, and insurance or utility checks can all involve credit information. Many people only study the details after a denial, a high quoted rate, or a confusing report entry.
         </p>
         <p>
-          The credit system isn't complicated. But nobody teaches it. Schools don't cover it. Banks profit from your confusion. And the "free advice" online is usually a sales pitch for a credit monitoring subscription you don't need.
+          This course explains the core mechanics in one place: scoring factors, report review, debt repayment methods, dispute rights, borrowing terms, scam warning signs, and consumer-protection laws.
         </p>
         <p>
-          This course exists to change that. In about 2 hours, you'll understand how the credit system actually works — from the inside out — so you can stop making expensive mistakes and start making the system work <em>for</em> you.
+          In about 2 hours, you can build a working foundation and then use CreditDoc's checklists, calculators, local pages, and public-data research to continue comparing your options.
         </p>
       </div>
     </div>
@@ -108,7 +117,7 @@ const jsonLd = [
           </div>
           <div>
             <h3 class="font-semibold text-text mb-1">Actually Free — No Upsell</h3>
-            <p class="text-sm text-muted">No "premium tier," no credit card required, no paid certificate. Every lesson, quiz, and resource is completely free. We make money by recommending good lenders — not by charging you for education.</p>
+            <p class="text-sm text-muted">No premium tier, no credit card required, and no paid certificate. The lessons, quizzes, and related resources are available at no cost.</p>
           </div>
         </div>
         <div class="flex items-start gap-4">
@@ -117,7 +126,7 @@ const jsonLd = [
           </div>
           <div>
             <h3 class="font-semibold text-text mb-1">Backed by Real Data</h3>
-            <p class="text-sm text-muted">We pull from CFPB complaint data, FDIC reports, and federal consumer protection statutes — not opinions. When we say something works, we show you why.</p>
+            <p class="text-sm text-muted">Course references connect to CFPB complaint data, FDIC materials, and federal consumer-protection statutes where those sources are relevant.</p>
           </div>
         </div>
         <div class="flex items-start gap-4">
@@ -126,7 +135,7 @@ const jsonLd = [
           </div>
           <div>
             <h3 class="font-semibold text-text mb-1">Plain English, Not Jargon</h3>
-            <p class="text-sm text-muted">No finance degree required. We explain FICO scores, utilization ratios, and dispute letters the way a smart friend would — clearly, with examples you can actually use.</p>
+            <p class="text-sm text-muted">No finance degree required. The course explains FICO scores, utilization ratios, dispute letters, and borrowing terms with plain-language examples.</p>
           </div>
         </div>
         <div class="flex items-start gap-4">
@@ -147,27 +156,27 @@ const jsonLd = [
       <div class="grid sm:grid-cols-2 gap-4">
         <div class="flex items-start gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
-          <span class="text-text">A clear understanding of how credit scores are calculated — and which factors actually move the needle</span>
+          <span class="text-text">A clear understanding of how credit scores are calculated and which factors commonly affect scoring models</span>
         </div>
         <div class="flex items-start gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
-          <span class="text-text">How to read your credit report line-by-line and spot errors that could be costing you money</span>
+          <span class="text-text">How to read your credit report line-by-line and identify entries that may need follow-up</span>
         </div>
         <div class="flex items-start gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
-          <span class="text-text">A step-by-step plan to build credit from zero — even with no credit history at all</span>
+          <span class="text-text">Common ways people begin building credit when they have limited or no credit history</span>
         </div>
         <div class="flex items-start gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
-          <span class="text-text">The debt payoff strategies that actually work (avalanche vs. snowball — and when to use each)</span>
+          <span class="text-text">How debt payoff methods such as avalanche and snowball compare in different situations</span>
         </div>
         <div class="flex items-start gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
-          <span class="text-text">How to do credit repair yourself — for free — using the same dispute process the paid companies use</span>
+          <span class="text-text">How the credit-report dispute process works, including when people handle disputes themselves and when they compare paid help</span>
         </div>
         <div class="flex items-start gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
-          <span class="text-text">How to compare loans without getting ripped off — APR vs. interest rate, origination fees, and what "pre-qualified" really means</span>
+          <span class="text-text">How to compare borrowing terms, including APR, interest rate, origination fees, and what pre-qualified can mean</span>
         </div>
         <div class="flex items-start gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
@@ -280,7 +289,7 @@ const jsonLd = [
           <span class="text-primary font-bold mt-0.5">&#10003;</span>
           <div>
             <p class="font-medium text-text">People rebuilding after a setback</p>
-            <p class="text-sm text-muted">Bankruptcy, collections, divorce, medical debt — this course shows you exactly how to come back.</p>
+            <p class="text-sm text-muted">Bankruptcy, collections, divorce, medical debt, or other setbacks where report review and planning context can help.</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
@@ -293,8 +302,8 @@ const jsonLd = [
         <div class="flex items-start gap-3">
           <span class="text-primary font-bold mt-0.5">&#10003;</span>
           <div>
-            <p class="font-medium text-text">Anyone tired of getting denied</p>
-            <p class="text-sm text-muted">Denied for a mortgage, car loan, or apartment? This course shows you why — and how to fix it.</p>
+            <p class="font-medium text-text">Anyone reviewing a denial or high quoted rate</p>
+            <p class="text-sm text-muted">Denied for a mortgage, car loan, or apartment? This course explains where to look for the factors that may have contributed.</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
@@ -334,7 +343,7 @@ const jsonLd = [
           </div>
           <div>
             <p class="font-medium text-text">Action steps you can take today</p>
-            <p class="text-sm text-muted">Concrete things you can do right now to improve your credit — not vague advice, but specific steps with links to the right tools.</p>
+            <p class="text-sm text-muted">Practical review steps tied to the course topic, with links to relevant CreditDoc tools and resources.</p>
           </div>
         </div>
         <div class="flex items-start gap-4">
@@ -350,9 +359,24 @@ const jsonLd = [
     </div>
 
     <!-- Bottom CTA -->
+    <div class="glass-card p-6 sm:p-8 mb-14">
+      <h2 class="text-xl font-bold text-text">Use This Course With CreditDoc Context</h2>
+      <p class="mt-2 text-sm text-muted leading-relaxed">
+        The course introduces the concepts. These sections connect the lessons to checklists, calculators, local pages, category research, and public complaint data.
+      </p>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {contextLinks.map(link => (
+          <a href={link.href} class="rounded-lg border border-border bg-white p-4 hover:border-primary/40 transition-colors">
+            <span class="text-sm font-semibold text-text">{link.label}</span>
+            <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+
     <div id="bottom-cta" class="text-center glass-card p-8 sm:p-10 border-2 border-primary/20">
-      <h2 class="text-2xl font-bold text-text mb-3">Ready to Take Control of Your Credit?</h2>
-      <p class="text-muted mb-6 max-w-lg mx-auto">Join thousands of people who've used this free course to understand their credit, fix mistakes, and save money on loans. It takes about 15 minutes per module.</p>
+      <h2 class="text-2xl font-bold text-text mb-3">Start With the First Module</h2>
+      <p class="text-muted mb-6 max-w-lg mx-auto">Work through the course at your own pace and use the related CreditDoc resources as reference material. It takes about 15 minutes per module.</p>
       <div id="bottom-cta-enroll">
         <a href="#enroll-section" class="inline-block rounded-lg bg-primary px-8 py-3.5 text-base font-semibold text-white hover:bg-primary/90 transition-colors">Enroll Free — Start Module 1</a>
         <p class="mt-3 text-xs text-muted">No credit card. No spam. Just credit education.</p>

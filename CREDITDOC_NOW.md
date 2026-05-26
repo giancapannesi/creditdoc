@@ -179,7 +179,8 @@ Sitewide upgrade program restarted:
   2,232 city-category sub-pages.
 - Batch 010 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_010_notes_2026-05-26.md`
-- Batch 011 completed locally and build-verified:
+- Batch 011 completed and committed:
+  `bc19ad1a9c feat: add graph links to blog pages`.
   blog pages now link editorial posts into local guides, answer clusters,
   tools/resources, related provider categories, and CFPB complaint-data context.
 - Batch 011 scope: `/blog/` and `/blog/{slug}/` through
@@ -196,13 +197,35 @@ Sitewide upgrade program restarted:
   2,232 city-category sub-pages.
 - Batch 011 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_011_notes_2026-05-26.md`
+- Batch 012 completed and committed:
+  `2b6d63bae4 feat: add graph links to education pages`.
+  education-support pages now link the learn/search, glossary, and course layer
+  into local guides, answer clusters, tools, resources, provider categories,
+  state context, and CFPB complaint-data research.
+- Batch 012 scope: `/learn/`, `/glossary/`, `/courses/`,
+  `/courses/credit-fundamentals/`, and every
+  `/courses/credit-fundamentals/{slug}/` module page through the shared course
+  module template.
+- Local education inventory: 71 glossary terms, 1 current course, 8 course
+  modules, and 40 course lessons. Latest local GSC pull (`pull_id=12`) saw 0
+  `/learn/`, `/glossary/`, or `/courses/` URLs.
+- Batch 012 also softened the Credit Fundamentals overview away from unsupported
+  savings, endorsement, "right answer", and strong outcome claims.
+- Batch 012 build verification passed:
+  `npm run build`, robots contract, SSR sitemap parity, Astro build, generated
+  output scan, targeted route check, and sitemap/robots conflict check. This run
+  injected 18,411 SSR route URLs and successfully added 124 city guides plus
+  2,232 city-category sub-pages.
+- Batch 012 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_012_notes_2026-05-26.md`
 
 Immediate next:
 
-1. Commit Batch 011 with only the blog pages and resume-cursor docs.
-2. Continue to Batch 012: inspect the course/learn/glossary education-support
-   pages and upgrade the next suitable page family.
-3. Keep every batch scoped, build-verified, documented, and committed before
+1. Continue to Batch 013: inspect static trust/support pages such as about,
+   methodology, editorial policy, FAQ, disclosure, disclaimer, privacy/terms,
+   accessibility, and contact; upgrade the suitable next family with graph links
+   and YMYL-safe wording.
+2. Keep every batch scoped, build-verified, documented, and committed before
    starting the next one.
 
 ## 2026-05-26 — Static Asset Routing Fix + Noindex Cleanup Batch 009

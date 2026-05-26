@@ -12,6 +12,13 @@ const jsonLd = {
     { "@type": "ListItem", "position": 2, "name": "Courses", "item": "https://www.creditdoc.co/courses/" }
   ]
 };
+
+const contextLinks = [
+  { href: '/financial-wellness/', label: 'Wellness Guides', description: 'Read longer explainers that expand on credit, debt, loan, and budgeting lessons.' },
+  { href: '/resources/credit-report-checklist/', label: 'Credit Report Checklist', description: 'Use a practical checklist while working through reporting and dispute lessons.' },
+  { href: '/tools/credit-score-simulator/', label: 'Credit Score Simulator', description: 'Model how common credit factors can affect a score estimate.' },
+  { href: '/city/', label: 'Local City Guides', description: 'Connect course topics with local lender pages, maps, and state rule context.' },
+];
 ---
 
 <BaseLayout title={title} description={description} jsonLd={[jsonLd]}>
@@ -25,7 +32,7 @@ const jsonLd = {
 
   <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
     <h1 class="text-4xl font-bold text-text mb-4">Free Financial Literacy Courses</h1>
-    <p class="text-lg text-muted mb-12 max-w-2xl">Self-paced courses that teach you how credit works, how to protect yourself, and how to take control of your financial future.</p>
+    <p class="text-lg text-muted mb-12 max-w-2xl">Self-paced courses that explain how credit works, how consumer protections apply, and how to compare next steps with better context.</p>
 
     <a href="/courses/credit-fundamentals/" class="glass-card p-6 flex flex-col sm:flex-row items-start sm:items-center gap-6 hover:border-primary/40 transition-colors group block">
       <div class="shrink-0 w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
@@ -43,5 +50,20 @@ const jsonLd = {
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary/40 group-hover:text-primary transition-colors shrink-0 hidden sm:block" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
     </a>
+
+    <div class="mt-12 glass-card p-6 sm:p-8">
+      <h2 class="text-xl font-bold text-text">Use Courses With CreditDoc Context</h2>
+      <p class="mt-2 text-sm text-muted leading-relaxed">
+        Course pages are designed to connect education with the rest of CreditDoc: guides, tools, local pages, and research pages that help readers verify and compare what they learn.
+      </p>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2">
+        {contextLinks.map(link => (
+          <a href={link.href} class="rounded-lg border border-border bg-white p-4 hover:border-primary/40 transition-colors">
+            <span class="text-sm font-semibold text-text">{link.label}</span>
+            <p class="mt-1 text-xs text-muted leading-relaxed">{link.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
   </section>
 </BaseLayout>
