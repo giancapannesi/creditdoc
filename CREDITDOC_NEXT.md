@@ -837,3 +837,22 @@ Initial Batch 017 targets:
   because small wording changes there can improve thousands of rendered pages;
 - keep the same loop: inspect, edit narrowly, build, output-check/source-check,
   document, commit, then continue.
+
+Batch 017 is complete, build-verified, and committed as `67cab54fa8`. Move to
+Batch 018 by inventorying any remaining page/template families and raw content
+sources that still render old commercial/YMYL wording outside the Batch 017
+sample pages.
+
+Initial Batch 018 targets:
+
+- run a broader generated-output or source-data scan for remaining
+  user-visible `best`, `guarantee`, `wins`, `better value`, approval,
+  licensing, recommendation, and diagnosis-style wording across high-value
+  routes;
+- inspect raw `src/content/comparisons.json`, `src/content/categories.json`,
+  and selected lender profiles only where display-time softening is not enough;
+- decide whether each finding should be fixed in raw data, page templates, or a
+  shared sanitizer;
+- keep routes and existing slugs stable unless there is a clear broken-link or
+  legal-risk reason to change them;
+- build-check, generated-output-check, document, commit, then continue.

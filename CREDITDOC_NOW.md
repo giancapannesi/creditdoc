@@ -1906,3 +1906,50 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_016_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_016_dynamic_templates_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 017
+
+Batch 017 committed as `67cab54fa8` for shared components and sitewide
+commercial/YMYL language cleanup:
+
+- `CategoryCard`
+- `ComparisonTable`
+- `DiagnosisCard`
+- `Footer`
+- `LenderCard`
+- `SearchBar`
+- `TopPicksTable`
+- `TrustBadge`
+- comparison-page template follow-up
+- review-page cross-sell follow-up
+
+Changes:
+
+- Reframed shared UI labels away from unsupported ranking, diagnosis,
+  guarantee, and verification wording.
+- Added display-time softeners for legacy provider/category/comparison strings
+  so rendered pages show `Refund Term`, `Profile Signals`, `Profiled`,
+  `CreditDoc Profile Note`, `Research Note`, `listed refund term`, and
+  `listed pricing context` language.
+- Replaced the visible footer quick-link label `Best Credit Repair` with
+  `Credit Repair Guide`.
+- Softened compare-page FAQ, summary, profile-note, explore-more, and affiliate
+  disclosure language.
+- Softened review-page personal-loan cross-sell language.
+- Preserved existing slugs, query params, and raw data files for compatibility.
+
+Verification:
+
+- `npm run build` passed.
+- Final build injected 18,411 SSR route URLs and generated 124 city guides plus
+  2,232 city-category sub-pages.
+- Generated-output scan on `dist/index.html` and
+  `dist/compare/credit-saint-vs-sky-blue-credit/index.html` found no Batch 017
+  blocked phrases for guarantee, best-value, wins, diagnosis/verdict,
+  independent-evaluation, approval, and old explore-more labels.
+- Positive output scan confirmed the expected replacement language.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_017_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_017_shared_components_gsc_seen_2026-05-26.csv`
