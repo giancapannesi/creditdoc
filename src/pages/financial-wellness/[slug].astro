@@ -10,6 +10,7 @@ import {
   getGlossaryTermsForContextRuntimeFromDb,
 } from '../../utils/data-runtime';
 import { createLinker } from '../../utils/inline-linker';
+import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 import type { WellnessGuide } from '../../utils/data';
 
 const env = (Astro.locals as any).runtime?.env;
@@ -20,10 +21,11 @@ if (!guide) {
   return new Response('Not found', { status: 404 });
 }
 
-const guideSeoTitle = ((guide as any).seo_title as string) || guide.title;
-const guideSeoDescription = ((guide as any).seo_description as string) || '';
+const displayTitle = softenEducationalTeaserCopy(guide.title);
+const guideSeoTitle = softenEducationalTeaserCopy(((guide as any).seo_title as string) || guide.title);
+const guideSeoDescription = softenEducationalTeaserCopy(((guide as any).seo_description as string) || '');
 const guideReadTime = ((guide as any).read_time as string) || '';
-const guideDescription = ((guide as any).description as string) || '';
+const guideDescription = softenEducationalTeaserCopy(((guide as any).description as string) || '');
 
 const [relatedGuidesRaw, categories] = await Promise.all([
   Promise.all(
@@ -119,7 +121,7 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": guide.title,
+    "headline": displayTitle,
     "description": guideSeoDescription,
     "image": "https://www.creditdoc.co/og-default.png",
     "url": `https://www.creditdoc.co/financial-wellness/${guide.slug}/`,
@@ -158,7 +160,7 @@ const jsonLd = [
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/" },
       { "@type": "ListItem", "position": 2, "name": "Financial Wellness", "item": "https://www.creditdoc.co/financial-wellness/" },
-      { "@type": "ListItem", "position": 3, "name": guide.title, "item": `https://www.creditdoc.co/financial-wellness/${guide.slug}/` }
+      { "@type": "ListItem", "position": 3, "name": displayTitle, "item": `https://www.creditdoc.co/financial-wellness/${guide.slug}/` }
     ]
   },
   ...(relatedListicle ? [{
@@ -195,7 +197,7 @@ const jsonLd = [
         <svg xmlns="http://www.w3.org/2000/svg" class="mx-2 h-4 w-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"/>
         </svg>
-        <span class="text-text font-medium truncate">{guide.title}</span>
+        <span class="text-text font-medium truncate">{displayTitle}</span>
       </nav>
     </div>
   </div>
@@ -208,7 +210,7 @@ const jsonLd = [
           <span class="inline-block rounded-full bg-primary-light px-3 py-1 text-xs font-semibold text-primary uppercase tracking-wider">{categoryLabel}</span>
           <span class="text-sm text-muted">{guideReadTime} read</span>
         </div>
-        <h1 class="text-3xl font-bold text-text sm:text-4xl leading-tight">{guide.title}</h1>
+        <h1 class="text-3xl font-bold text-text sm:text-4xl leading-tight">{displayTitle}</h1>
         <p class="mt-4 text-lg text-muted leading-relaxed">{guideDescription}</p>
         <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted">
           <span>Written by <a href="/about/" class="text-primary hover:underline font-medium">Harvey Brooks</a></span>
@@ -242,7 +244,7 @@ const jsonLd = [
 
         {linkedSections.map((section, i) => (
           <section id={`section-${i}`}>
-            <h2 class="text-xl font-bold text-text mb-4">{section.heading}</h2>
+            <h2 class="text-xl font-bold text-text mb-4">{softenEducationalTeaserCopy(section.heading)}</h2>
             <div class="prose-content text-sm text-muted leading-relaxed space-y-4">
               {section.content.split('\n\n').map(paragraph => {
                 if (paragraph.startsWith('- ') || paragraph.startsWith('* ')) {
@@ -335,7 +337,7 @@ const jsonLd = [
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary flex-shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/>
                 </svg>
-                <span>{takeaway}</span>
+                <span>{softenEducationalTeaserCopy(takeaway)}</span>
               </li>
             ))}
           </ul>
@@ -355,7 +357,7 @@ const jsonLd = [
                 href={`#section-${i}`}
                 class="block text-sm text-muted hover:text-primary transition-colors py-0.5"
               >
-                {section.heading}
+                {softenEducationalTeaserCopy(section.heading)}
               </a>
             ))}
             {guide.faq.length > 0 && (
@@ -376,7 +378,7 @@ const jsonLd = [
                   href={`/financial-wellness/${related.slug}/`}
                   class="block rounded-lg border border-border p-3 hover:border-primary/30 hover:bg-primary-light/20 transition-colors"
                 >
-                  <p class="text-sm font-medium text-text leading-snug">{related.title}</p>
+                  <p class="text-sm font-medium text-text leading-snug">{softenEducationalTeaserCopy(related.title)}</p>
                   <p class="mt-1 text-xs text-muted">{((related as any).read_time as string) || ''}</p>
                 </a>
               ))}

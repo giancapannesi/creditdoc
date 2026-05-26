@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getWellnessGuides, getWellnessGuidesByCategory } from '../../utils/data-build';
+import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 
 const guides = getWellnessGuides();
 
@@ -87,7 +88,7 @@ const jsonLd = {
       <span class="inline-block rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-6">Financial Wellness</span>
       <h1 class="text-4xl font-bold text-text sm:text-5xl">Financial Wellness Center</h1>
       <p class="mt-6 text-lg text-muted leading-relaxed max-w-2xl mx-auto">
-        Actionable, jargon-free guides to help you understand credit, manage debt, budget smarter, and build a stronger financial future. Written by finance professionals, not marketers.
+        Actionable, jargon-free guides to help you understand credit, manage debt, budget smarter, and support financial planning. Written by finance professionals, not marketers.
       </p>
     </div>
   </section>
@@ -106,7 +107,7 @@ const jsonLd = {
         <div>
           <h2 class="text-lg font-bold text-text">Our Commitment to Financial Education</h2>
           <p class="mt-2 text-sm text-text leading-relaxed">
-            CreditDoc promotes financial wellness at every level. Whether you're rebuilding your credit from scratch, trying to understand how interest rates work, or looking for the best way to pay down debt, our guides provide clear, actionable education -- not sales pitches. Every guide is written and reviewed by our finance team with combined experience of 15+ years in consumer lending and credit.
+            CreditDoc promotes financial wellness at every level. Whether you're rebuilding your credit from scratch, trying to understand how interest rates work, or comparing ways to pay down debt, our guides provide clear, actionable education -- not sales pitches. Every guide is written and reviewed by our finance team with combined experience of 15+ years in consumer lending and credit.
           </p>
         </div>
       </div>
@@ -164,7 +165,7 @@ const jsonLd = {
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-muted group-hover:text-primary transition-colors flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"/>
                     </svg>
-                    <span>{guide.title}</span>
+                    <span>{softenEducationalTeaserCopy(guide.title)}</span>
                     <span class="ml-auto text-xs text-muted flex-shrink-0">{guide.read_time}</span>
                   </a>
                 </li>
@@ -192,8 +193,8 @@ const jsonLd = {
               </span>
               <span class="text-xs text-muted">{guide.read_time}</span>
             </div>
-            <h3 class="text-base font-semibold text-text group-hover:text-primary transition-colors leading-snug">{guide.title}</h3>
-            <p class="mt-2 text-sm text-muted leading-relaxed line-clamp-3">{guide.description}</p>
+            <h3 class="text-base font-semibold text-text group-hover:text-primary transition-colors leading-snug">{softenEducationalTeaserCopy(guide.title)}</h3>
+            <p class="mt-2 text-sm text-muted leading-relaxed line-clamp-3">{softenEducationalTeaserCopy(guide.description)}</p>
             <div class="mt-4 flex items-center text-sm font-medium text-primary">
               Read guide
               <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 20 20" fill="currentColor">
