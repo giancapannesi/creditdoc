@@ -1782,3 +1782,43 @@ Notes:
 - This continues the central helper approach from Batch 062.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 064: Homepage and Blog Need Copy
+
+Date: 2026-05-26
+Implementation commit: `f015da3967` (`feat: soften homepage and blog need copy`)
+
+Scope:
+
+- `src/components/FilterBar.astro`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Reworded homepage filter helper text and labels from personal-need prompts to
+  topic-selection language: `Choose a topic`, `Monitoring focus`, and
+  `Help topic`.
+- Extended `softenEducationalTeaserCopy()` for blog-card titles and
+  descriptions already routed through the helper on `/blog/`.
+- Softened `What You Need to Know`, `What Credit Score Do You Need...`,
+  `you should use it`, `how to choose`, and `what you need before`.
+- Preserved post records, slugs, URLs, the blog route/template, and filter
+  category behavior.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- `git diff --check` passed.
+- Generated `dist/index.html` and `dist/blog/index.html` confirmed targeted
+  raw phrases were removed and representative softened copy was present.
+
+Notes:
+
+- No source post records, slugs, URLs, or filter destination mappings changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
