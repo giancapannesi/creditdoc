@@ -25,6 +25,27 @@ const lenderB = getLenderBySlug(comparison.lender_b)!;
 
 const winnerLender = comparison.winner === comparison.lender_a ? lenderA : lenderB;
 
+function softenComparisonText(text: string): string {
+  return text
+    .replace(/money-back guarantees/gi, 'listed refund terms')
+    .replace(/money-back guarantee/gi, 'listed refund term')
+    .replace(/\bwins\b/gi, 'is flagged')
+    .replace(/\bthe better value\b/gi, 'the lower listed-cost comparison')
+    .replace(/\bbest value\b/gi, 'lower listed-cost profile')
+    .replace(/\bbest\b/gi, 'notable')
+    .replace(/effective credit repair/gi, 'credit repair services')
+    .replace(/without overpaying/gi, 'with listed pricing context')
+    .replace(/comparable effectiveness/gi, 'comparable profile fields')
+    .replace(/zero upfront cost to get started/gi, 'no listed setup fee');
+}
+
+const safeSummary = softenComparisonText(comparison.summary);
+const safeWinnerReason = softenComparisonText(comparison.winner_reason);
+const lenderASignals = lenderA.best_for.slice(0, 2).map(softenComparisonText).join('. ');
+const lenderBSignals = lenderB.best_for.slice(0, 2).map(softenComparisonText).join('. ');
+const lenderAStrength = softenComparisonText(lenderA.pros[0] || 'Review the profile fields before contacting the provider');
+const lenderBStrength = softenComparisonText(lenderB.pros[0] || 'Review the profile fields before contacting the provider');
+
 const categoryLabels: Record<string, string> = {
   'build-credit': 'Build My Credit',
   'business-loans': 'Business Loans',
@@ -52,16 +73,16 @@ const faqs = [
         : `Both ${lenderA.name} and ${lenderB.name} charge the same monthly rate of ${formatPrice(lenderA.pricing.monthly_price)}/mo. The difference comes down to setup fees: ${lenderA.pricing.setup_fee > 0 ? `${lenderA.name} charges ${formatPrice(lenderA.pricing.setup_fee)}` : `${lenderA.name} charges nothing`} vs ${lenderB.pricing.setup_fee > 0 ? `${formatPrice(lenderB.pricing.setup_fee)} for ${lenderB.name}` : `no setup fee for ${lenderB.name}`}.`,
   },
   {
-    question: `Which has a better BBB rating, ${lenderA.name} or ${lenderB.name}?`,
-    answer: `${lenderA.name} has a ${lenderA.company_info.bbb_rating} BBB rating${lenderA.company_info.bbb_accredited ? ' (accredited)' : ''}, while ${lenderB.name} has a ${lenderB.company_info.bbb_rating} BBB rating${lenderB.company_info.bbb_accredited ? ' (accredited)' : ''}. The BBB rating reflects how well a company responds to customer complaints and conducts business.`,
+    question: `Which has the higher stored BBB rating, ${lenderA.name} or ${lenderB.name}?`,
+    answer: `${lenderA.name} has a ${lenderA.company_info.bbb_rating} BBB rating${lenderA.company_info.bbb_accredited ? ' (accredited)' : ''}, while ${lenderB.name} has a ${lenderB.company_info.bbb_rating} BBB rating${lenderB.company_info.bbb_accredited ? ' (accredited)' : ''}. BBB ratings are third-party signals and should be checked with current provider, regulator, and complaint-response context.`,
   },
   {
-    question: `Do ${lenderA.name} and ${lenderB.name} offer money-back guarantees?`,
-    answer: `${lenderA.pricing.money_back_guarantee ? `${lenderA.name} offers a money-back guarantee: ${lenderA.pricing.guarantee_details}` : `${lenderA.name} does not offer a money-back guarantee.`} ${lenderB.pricing.money_back_guarantee ? `${lenderB.name} offers a money-back guarantee: ${lenderB.pricing.guarantee_details}` : `${lenderB.name} does not offer a money-back guarantee.`}`,
+    question: `Do ${lenderA.name} and ${lenderB.name} list refund terms?`,
+    answer: `${lenderA.pricing.money_back_guarantee ? `${lenderA.name} has a listed refund term: ${softenComparisonText(lenderA.pricing.guarantee_details || 'refund term listed')}` : `${lenderA.name} does not have a listed refund term in this profile.`} ${lenderB.pricing.money_back_guarantee ? `${lenderB.name} has a listed refund term: ${softenComparisonText(lenderB.pricing.guarantee_details || 'refund term listed')}` : `${lenderB.name} does not have a listed refund term in this profile.`}`,
   },
   {
     question: `How should I compare ${lenderA.name} and ${lenderB.name}?`,
-    answer: `Compare the profile details, pricing fields, public ratings where available, guarantee terms, and complaint-response context before contacting either company. CreditDoc's comparison note currently favors ${winnerLender.name} for this matchup because: ${comparison.winner_reason}`,
+    answer: `Compare the profile details, pricing fields, public ratings where available, refund terms, and complaint-response context before contacting either company. CreditDoc's comparison note currently flags ${winnerLender.name} for this matchup because: ${safeWinnerReason}`,
   },
 ];
 
@@ -70,7 +91,7 @@ const jsonLd = [
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: comparison.title,
-    description: comparison.summary,
+    description: safeSummary,
     url: `https://www.creditdoc.co/compare/${comparison.slug}/`,
     author: {
       '@type': 'Person',
@@ -114,7 +135,7 @@ const jsonLd = [
 
 <BaseLayout
   title={`${comparison.title} | CreditDoc`}
-  description={comparison.summary}
+  description={safeSummary}
   jsonLd={jsonLd}
 >
   <!-- Breadcrumbs -->
@@ -164,7 +185,7 @@ const jsonLd = [
                   <p class="mt-0.5 text-xs text-muted">Google rating from {lender.google_reviews_count.toLocaleString()} reviews</p>
                 </div>
               ) : (
-                <span class="text-xs text-muted">No verified Google rating</span>
+                <span class="text-xs text-muted">No stored Google rating</span>
               )}
             </div>
             <div class="mt-3 flex flex-wrap items-center justify-center gap-2">
@@ -201,7 +222,7 @@ const jsonLd = [
   <section class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
     <div class="glass-card p-6">
       <h2 class="text-lg font-bold text-text mb-3">Summary</h2>
-      <p class="text-sm text-muted leading-relaxed">{comparison.summary}</p>
+      <p class="text-sm text-muted leading-relaxed">{safeSummary}</p>
     </div>
   </section>
 
@@ -218,17 +239,17 @@ const jsonLd = [
     <h2 class="text-lg font-bold text-text mb-4">How to Compare These Two</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <DiagnosisCard
-        diagnosis={`Review ${lenderA.name} if these stored profile signals match your needs: ${lenderA.best_for.slice(0, 2).join('. ')}. Profile strength to verify: ${lenderA.pros[0]}.`}
+        diagnosis={`Review ${lenderA.name} if these stored profile signals match your needs: ${lenderASignals}. Profile signal to verify: ${lenderAStrength}.`}
         lenderName={lenderA.name}
       />
       <DiagnosisCard
-        diagnosis={`Review ${lenderB.name} if these stored profile signals match your needs: ${lenderB.best_for.slice(0, 2).join('. ')}. Profile strength to verify: ${lenderB.pros[0]}.`}
+        diagnosis={`Review ${lenderB.name} if these stored profile signals match your needs: ${lenderBSignals}. Profile signal to verify: ${lenderBStrength}.`}
         lenderName={lenderB.name}
       />
     </div>
     <div class="mt-4">
       <DiagnosisCard
-        diagnosis={`CreditDoc comparison note: ${winnerLender.name}. ${comparison.winner_reason}`}
+        diagnosis={`CreditDoc comparison note: ${winnerLender.name}. ${safeWinnerReason}`}
         lenderName={winnerLender.name}
       />
     </div>
@@ -288,8 +309,8 @@ const jsonLd = [
     <h2 class="text-lg font-bold text-text mb-4">Explore More Options</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
       <a href="/best/best-credit-repair-companies/" class="glass-card p-4 hover:border-primary transition-colors">
-        <p class="text-sm font-semibold text-text">Best Credit Repair</p>
-        <p class="text-xs text-muted mt-1">Full rankings & reviews</p>
+        <p class="text-sm font-semibold text-text">Credit Repair Guide</p>
+        <p class="text-xs text-muted mt-1">Provider profiles and comparisons</p>
       </a>
       <a href="/best/best-personal-loans-bad-credit/" class="glass-card p-4 hover:border-primary transition-colors">
         <p class="text-sm font-semibold text-text">Personal Loans</p>
@@ -297,7 +318,7 @@ const jsonLd = [
       </a>
       <a href="/best/best-debt-relief-companies/" class="glass-card p-4 hover:border-primary transition-colors">
         <p class="text-sm font-semibold text-text">Debt Relief</p>
-        <p class="text-xs text-muted mt-1">Top companies compared</p>
+        <p class="text-xs text-muted mt-1">Company profiles compared</p>
       </a>
       <a href="/financial-wellness/" class="glass-card p-4 hover:border-primary transition-colors">
         <p class="text-sm font-semibold text-text">Free Guides</p>
@@ -310,7 +331,7 @@ const jsonLd = [
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="rounded-lg bg-bg-alt border border-border p-4">
       <p class="text-xs text-muted leading-relaxed">
-        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to the services featured on this page. Our editorial team independently evaluates all services. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
+        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to the services featured on this page. Compensation does not determine whether a provider can be covered. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
       </p>
     </div>
   </section>

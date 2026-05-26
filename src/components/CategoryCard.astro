@@ -6,6 +6,14 @@ interface Props {
 }
 
 const { category } = Astro.props;
+
+function softenCategoryDescription(text: string): string {
+  return text
+    .replace(/money-back guarantees/gi, 'listed refund terms')
+    .replace(/money-back guarantee/gi, 'listed refund term')
+    .replace(/Compare by BBB rating, listed refund terms, and services included\./gi, 'Review BBB ratings where available, listed refund terms, and included services.')
+    .replace(/Compare by BBB rating, money-back guarantees, and services included\./gi, 'Review BBB ratings where available, listed refund terms, and included services.');
+}
 ---
 
 <a
@@ -76,7 +84,7 @@ const { category } = Astro.props;
 
   <!-- Description -->
   <p class="text-sm text-muted leading-relaxed line-clamp-2">
-    {category.description}
+    {softenCategoryDescription(category.description)}
   </p>
 
   <!-- Browse link -->

@@ -13,6 +13,15 @@ const { lender, showRatings = true } = Astro.props;
 
 const bbbClass = getBbbClass(lender.company_info.bbb_rating);
 const showGoogleRating = showRatings && lender.google_rating && lender.google_rating > 0 && !(lender.google_rating > 5) && lender.google_reviews_count && lender.google_reviews_count >= 1;
+
+function softenProviderSignal(text: string): string {
+  return text
+    .replace(/money-back guarantees/gi, 'listed refund terms')
+    .replace(/money-back guarantee/gi, 'listed refund term')
+    .replace(/effective credit repair/gi, 'credit repair services')
+    .replace(/without overpaying/gi, 'with listed pricing context')
+    .replace(/\bbest\b/gi, 'notable');
+}
 ---
 
 <article class="glass-card p-5 sm:p-6 flex flex-col h-full">
@@ -46,7 +55,7 @@ const showGoogleRating = showRatings && lender.google_rating && lender.google_ra
       <p class="text-sm text-muted mt-0.5 line-clamp-2">
         {showRatings
           ? lender.description_short
-          : 'View this provider profile and compare verified details before choosing a service.'}
+          : 'View this provider profile and compare source-linked details before choosing what to do next.'}
       </p>
     </div>
   </div>
@@ -75,7 +84,7 @@ const showGoogleRating = showRatings && lender.google_rating && lender.google_ra
   {lender.best_for.length > 0 && (
     <div class="mt-3">
       <p class="text-xs text-muted">
-        <span class="font-medium">Best for:</span> {lender.best_for.slice(0, 2).join(', ')}
+        <span class="font-medium">Profile signals:</span> {lender.best_for.slice(0, 2).map(softenProviderSignal).join(', ')}
       </p>
     </div>
   )}

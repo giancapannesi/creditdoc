@@ -68,7 +68,7 @@ const featureKeys: { key: keyof Lender['features']; label: string }[] = [
   { key: 'ai_powered', label: 'AI-Powered' },
 ];
 
-const winnerBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-light text-primary text-xs font-semibold px-2 py-0.5 ml-1';
+const comparisonBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-light text-primary text-xs font-semibold px-2 py-0.5 ml-1';
 ---
 
 <div class="overflow-x-auto -mx-4 sm:mx-0">
@@ -114,11 +114,11 @@ const winnerBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-ligh
         <td class="py-3 px-4 font-medium text-text">Monthly Price</td>
         <td class="py-3 px-4 text-center">
           <span class="font-semibold">From {formatPrice(lowestPriceA)}/mo</span>
-          {winners.price === 'a' && <span class={winnerBadge}>Best</span>}
+          {winners.price === 'a' && <span class={comparisonBadge}>Lower</span>}
         </td>
         <td class="py-3 px-4 text-center">
           <span class="font-semibold">From {formatPrice(lowestPriceB)}/mo</span>
-          {winners.price === 'b' && <span class={winnerBadge}>Best</span>}
+          {winners.price === 'b' && <span class={comparisonBadge}>Lower</span>}
         </td>
       </tr>
 
@@ -127,11 +127,11 @@ const winnerBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-ligh
         <td class="py-3 px-4 font-medium text-text">Setup Fee</td>
         <td class="py-3 px-4 text-center">
           <span>{formatPrice(lenderA.pricing.setup_fee)}</span>
-          {winners.setup === 'a' && <span class={winnerBadge}>Best</span>}
+          {winners.setup === 'a' && <span class={comparisonBadge}>Lower</span>}
         </td>
         <td class="py-3 px-4 text-center">
           <span>{formatPrice(lenderB.pricing.setup_fee)}</span>
-          {winners.setup === 'b' && <span class={winnerBadge}>Best</span>}
+          {winners.setup === 'b' && <span class={comparisonBadge}>Lower</span>}
         </td>
       </tr>
 
@@ -142,26 +142,26 @@ const winnerBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-ligh
           <span class={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${getBbbClass(lenderA.company_info.bbb_rating)}`}>
             {lenderA.company_info.bbb_rating}
           </span>
-          {winners.bbb === 'a' && <span class={winnerBadge}>Best</span>}
+          {winners.bbb === 'a' && <span class={comparisonBadge}>Higher</span>}
         </td>
         <td class="py-3 px-4 text-center">
           <span class={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${getBbbClass(lenderB.company_info.bbb_rating)}`}>
             {lenderB.company_info.bbb_rating}
           </span>
-          {winners.bbb === 'b' && <span class={winnerBadge}>Best</span>}
+          {winners.bbb === 'b' && <span class={comparisonBadge}>Higher</span>}
         </td>
       </tr>
 
-      <!-- Money-Back Guarantee -->
+      <!-- Refund term -->
       <tr class="hover:bg-bg-alt/50 transition-colors">
-        <td class="py-3 px-4 font-medium text-text">Money-Back Guarantee</td>
+        <td class="py-3 px-4 font-medium text-text">Refund Term Listed</td>
         <td class="py-3 px-4 text-center">
           {lenderA.pricing.money_back_guarantee ? (
             <span class="text-positive font-medium">Yes</span>
           ) : (
             <span class="text-muted">No</span>
           )}
-          {winners.guarantee === 'a' && <span class={winnerBadge}>Best</span>}
+          {winners.guarantee === 'a' && <span class={comparisonBadge}>Listed</span>}
         </td>
         <td class="py-3 px-4 text-center">
           {lenderB.pricing.money_back_guarantee ? (
@@ -169,7 +169,7 @@ const winnerBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-ligh
           ) : (
             <span class="text-muted">No</span>
           )}
-          {winners.guarantee === 'b' && <span class={winnerBadge}>Best</span>}
+          {winners.guarantee === 'b' && <span class={comparisonBadge}>Listed</span>}
         </td>
       </tr>
 
@@ -182,10 +182,10 @@ const winnerBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-ligh
               <>
                 <RatingStars rating={googleRating(lenderA)} size="sm" />
                 <span class="text-xs text-muted">{lenderA.google_reviews_count?.toLocaleString()} reviews</span>
-                {winners.rating === 'a' && <span class={winnerBadge}>Best</span>}
+                {winners.rating === 'a' && <span class={comparisonBadge}>Higher</span>}
               </>
             ) : (
-              <span class="text-xs text-muted">No verified Google rating</span>
+              <span class="text-xs text-muted">No stored Google rating</span>
             )}
           </div>
         </td>
@@ -195,10 +195,10 @@ const winnerBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-ligh
               <>
                 <RatingStars rating={googleRating(lenderB)} size="sm" />
                 <span class="text-xs text-muted">{lenderB.google_reviews_count?.toLocaleString()} reviews</span>
-                {winners.rating === 'b' && <span class={winnerBadge}>Best</span>}
+                {winners.rating === 'b' && <span class={comparisonBadge}>Higher</span>}
               </>
             ) : (
-              <span class="text-xs text-muted">No verified Google rating</span>
+              <span class="text-xs text-muted">No stored Google rating</span>
             )}
           </div>
         </td>
