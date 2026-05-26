@@ -1077,3 +1077,21 @@ Initial Batch 029 targets:
   `src/content/comparisons.json` from staging unless the user explicitly asks to
   take ownership of those raw content files;
 - build-check, output/source-check, document, commit, then continue.
+
+Batch 029 implementation is complete, build-verified, and committed as
+`bbaefb5b44`. Move to Batch 030 by scanning the remaining generated education
+and trend surfaces for residual raw body-copy claims that are outside the
+blog/learn teaser boundary.
+
+Initial Batch 030 targets:
+
+- inspect generated `/financial-wellness/`, `/courses/`, `/answers/`, and
+  `/trends/` surfaces for remaining unsupported best/top/right-fit/outcome,
+  urgency, approval, guarantee, diagnosis, or safety wording;
+- separate raw long-form educational body copy from navigation cards, JSON-LD,
+  search payloads, and generated snippets so fixes stay in the safest layer;
+- avoid touching the unrelated unstaged `src/content/wellness-guides.json` and
+  `src/content/comparisons.json` unless the next scan proves those files are the
+  correct owner for a visible issue and no render-time boundary is appropriate;
+- preserve strategic local/city/category URLs and existing blog/education URLs;
+- build-check, output/source-check, document, commit, then continue.

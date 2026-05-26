@@ -2416,3 +2416,43 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_028_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_028_review_fit_lending_records_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 029
+
+Batch 029 implementation committed as `bbaefb5b44` for blog and learn
+education teaser copy:
+
+- `src/utils/safe-copy.ts`
+- `src/pages/blog/index.astro`
+- `src/pages/blog/[slug].astro`
+- `src/utils/data-build.ts`
+
+Changes:
+
+- Added `softenEducationalTeaserCopy()` as a shared presentation-layer helper
+  for education teasers and embedded search data.
+- Reframed blog index cards, blog detail titles/descriptions/JSON-LD headlines,
+  key takeaways, and related-post labels away from suitability/judgment wording
+  such as `right for you`, `good idea`, `bad`, `truth`, and `worth it`.
+- Applied the same softening to `/learn/` embedded search data for wellness
+  guides, glossary terms, and blog posts without editing the raw content JSON.
+- Tightened the shared YMYL copy boundary so `quick wins` becomes neutral
+  progress-marker wording instead of the previous awkward `quick is flagged`
+  output.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json` changes
+  affected generated inventory; neither file was staged or committed.
+- Build generated 124 city guides plus 2,232 city-category sub-pages.
+- Postbuild sitemap/robots conflict check passed.
+- Generated `/blog/` and `/learn/` scans were clean for targeted old teaser
+  phrases and awkward replacement patterns.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_029_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_029_blog_learn_teasers_gsc_seen_2026-05-26.csv`
