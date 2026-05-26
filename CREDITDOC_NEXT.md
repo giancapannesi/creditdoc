@@ -1011,3 +1011,25 @@ Initial Batch 026 targets:
 - continue excluding unrelated `src/content/wellness-guides.json` unless the
   user explicitly confirms it belongs in this cleanup;
 - build-check, output/source-check, document, commit, then continue.
+
+Batch 026 implementation is complete, build-verified, and committed as
+`92a87a80a3`. Move to Batch 027 by scanning remaining generated comparison,
+trend, review, and directory surfaces for residual tone issues that are not
+covered by the shared copy boundary.
+
+Initial Batch 027 targets:
+
+- run a broader but carefully filtered scan across generated `/compare/`,
+  `/review/`, `/trends/`, `/browse/`, and `/city/` pages for residual
+  recommendation, outcome, safety, approval, licensing, guarantee, and
+  best/top wording;
+- separate real visible claims from explicit disclaimers, route names, provider
+  names, and strategic SEO URL labels;
+- inspect whether any remaining comparison wording should be handled by
+  `softenYmylCopy()`, comparison-template rendering, or later raw data cleanup
+  once the other agent's `src/content/comparisons.json` work is committed or
+  abandoned;
+- continue excluding unrelated `src/content/wellness-guides.json` and
+  `src/content/comparisons.json` from staging unless the user explicitly asks to
+  take ownership of those raw content files;
+- build-check, output/source-check, document, commit, then continue.

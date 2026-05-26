@@ -2292,3 +2292,45 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_025_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_025_research_support_labels_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 026
+
+Batch 026 implementation committed as `92a87a80a3` for comparison-page copy
+boundary cleanup:
+
+- `src/utils/safe-copy.ts`
+
+Changes:
+
+- Expanded the shared YMYL copy softener for comparison-data phrases that can
+  leak from raw comparison records into summaries, research notes, FAQ answers,
+  and JSON-LD.
+- Neutralized comparison wording around preferable/reliable/trustworthy/safe,
+  stronger or better consumer/borrower protections, superior credibility or
+  transparency, value proposition, strong BBB/Google-review phrasing, and
+  guarantee/refund framing.
+- Added render-time replacements for older comparison-record patterns such as
+  `stronger choice`, `proven results`, `proven track record`, `is better for`,
+  and `Choose ... for`.
+- Left raw `src/content/comparisons.json` untouched because it is currently an
+  unrelated unstaged change from another agent/user; this batch protects
+  generated output without taking ownership of that file.
+
+Verification:
+
+- `npm run build` passed after the final copy-boundary update.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json` changes
+  affected generated inventory; neither file was staged or committed.
+- Build generated 124 city guides plus 2,232 city-category sub-pages.
+- Postbuild sitemap/robots conflict check passed.
+- Targeted generated `/compare/` hit-list scan was clean for the risky raw
+  phrases addressed in this batch.
+- Replacement-language scan confirmed the shared boundary is producing neutral
+  profile/context wording in generated comparison pages.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_026_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_026_compare_copy_boundary_gsc_seen_2026-05-26.csv`
