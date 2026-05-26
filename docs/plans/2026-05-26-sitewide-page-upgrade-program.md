@@ -2900,3 +2900,65 @@ Notes:
   product or service is free.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 086: Comparison Free Access Copy Softening
+
+Date: 2026-05-26
+Implementation commit: `2cbfdbdcef` (`fix: soften comparison free access copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added shared safe-copy replacements for broad free-access, no-hard-pull,
+  encryption, recommendation, and superiority-style comparison language.
+- Replaced `completely free` monitoring/sign-up/pricing language with
+  no-listed-monthly-subscription or no-listed-upfront-fee context.
+- Replaced `legitimate free access`, `robust encryption`, `professional credit
+  repair assistance`, `product recommendations`, and `more comprehensive bureau
+  coverage` with listed-context language.
+- Replaced `is highlighted` and the comparison FAQ wrapper `stored comparison
+  note highlights` with comparison-record phrasing.
+- Replaced no-hard-pull and immediate score-impact wording with claims-to-verify
+  language.
+- Added cleanup replacements for awkward generated phrases after the first pass.
+- Preserved source comparison records, source lender records, pricing values,
+  route slugs, cards, tables, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for the targeted raw phrases:
+  `completely free`, `legitimate free`, `professional credit repair assistance`,
+  `is highlighted`, `stored comparison note highlights`,
+  `more comprehensive bureau coverage`, `product recommendations`,
+  `robust encryption`, `eliminating immediate score impact`,
+  `no hard credit pull`, `superior overall value`,
+  `more accessible and cost-effective`, `through its profile lists`, or
+  `stronger listed-cost context`.
+- Targeted rendered checks confirmed replacement language on
+  `/compare/transunion-vs-credit-karma-credit-repair/`,
+  `/compare/dovly-vs-the-credit-bureau/`, `/compare/dovly-vs-lookout/`, and
+  `/compare/kikoff-vs-chime/`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/transunion-vs-credit-karma-credit-repair/`,
+  `/compare/dovly-vs-the-credit-bureau/`, `/compare/dovly-vs-lookout/`,
+  `/compare/kikoff-vs-chime/`, `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- The comparison FAQ now says CreditDoc records the stored comparison note rather
+  than highlighting a provider.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
