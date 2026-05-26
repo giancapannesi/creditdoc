@@ -2386,3 +2386,47 @@ Notes:
   category mappings, or card/table layout changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 076: Comparison BBB Display Normalization
+
+Date: 2026-05-26
+Implementation commit: `17aa6b269c` (`fix: normalize comparison BBB display`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+- `src/components/ComparisonTable.astro`
+
+What changed:
+
+- Normalized blank and `N/A` BBB ratings in comparison header cards, table
+  badges, BBB winner ranking, FAQ copy, and JSON-LD FAQ output.
+- Missing BBB values now render as `BBB: NR` in badges and as "does not have a
+  stored BBB rating in this profile" in FAQ copy.
+- Preserved source lender records, routes, slugs, pricing, ratings, category
+  mappings, review links, and table/card layout.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- `dist/compare` scan returned no matches for `has a  BBB rating`,
+  `BBB: </span>`, or blank `> </span>` artifacts.
+- Targeted rendered check on
+  `/compare/smartcredit-vs-boost-my-fico-scores/` confirmed `BBB: NR` display
+  and no malformed blank BBB FAQ text.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/learn/`, `/blog/`, `/categories/fintech/`,
+  `/compare/smartcredit-vs-boost-my-fico-scores/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only normalization; no source lender records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
