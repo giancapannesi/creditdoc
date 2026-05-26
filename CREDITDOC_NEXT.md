@@ -808,3 +808,16 @@ Batch 015 on the remaining broad navigation/commercial support pages:
   treatment in a prior branch
 
 Keep Batch 015 scoped and YMYL-safe. Do not deploy unless requested.
+
+Batch 015 is locally complete and build-verified. After committing, move to
+Batch 016 on remaining template families not yet covered by the sitewide graph
+upgrade, starting with:
+
+- `src/pages/brand/[brand].astro`
+- `src/pages/trends/index.astro`
+- `src/pages/trends/[slug].astro`
+- any `/best/[slug].astro` or `/review/[slug].astro` follow-up needed after
+  checking whether previous batches already covered them
+
+Continue the same loop: inspect, edit narrowly, build, output-check, document,
+commit, then proceed.

@@ -140,7 +140,7 @@ const faqs = [
     <div class="mb-6">
       <h2 class="text-xl sm:text-2xl font-bold text-text">Current deals</h2>
       <p class="mt-2 text-sm text-muted leading-relaxed">
-        Verified offers from credit repair companies we have profiled. Click "Read profile" before redeeming so you know exactly what you are buying.
+        Offers from credit repair companies we have profiled. Click "Read profile" before redeeming so you can review provider context and current terms.
       </p>
     </div>
     {specials.length > 0 ? (
@@ -249,7 +249,7 @@ const faqs = [
           </svg>
         </div>
         <h2 class="text-lg font-semibold text-text">No active deals right now</h2>
-        <p class="mt-2 text-sm text-muted">Check back soon. In the meantime, the educational guides below are the best place to start.</p>
+        <p class="mt-2 text-sm text-muted">Check back soon. In the meantime, the educational guides below can help you understand tradeoffs before using a paid service.</p>
         <a
           href="/"
           class="mt-6 inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors"
@@ -331,6 +331,34 @@ const faqs = [
             </a>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CreditDoc Context -->
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-6">
+      <h2 class="text-xl font-bold text-text mb-4">Use Deals With CreditDoc Context</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        A promotion is only one part of the decision. Review the provider profile, your legal rights, local rules, and complaint-data context before using a paid credit repair offer.
+      </p>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/financial-wellness/credit-repair-rights-fcra-croa/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">FCRA &amp; CROA Rights</span>
+          <span class="mt-1 block text-xs text-muted">Understand federal credit repair protections.</span>
+        </a>
+        <a href="/resources/debt-credit-letter-templates/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Letter Templates</span>
+          <span class="mt-1 block text-xs text-muted">Compare paid help against DIY dispute and debt-letter workflows.</span>
+        </a>
+        <a href="/state/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">State Rules</span>
+          <span class="mt-1 block text-xs text-muted">Review state-level lending and consumer-protection context.</span>
+        </a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Complaint Data</span>
+          <span class="mt-1 block text-xs text-muted">Check public complaint patterns as one research input.</span>
+        </a>
       </div>
     </div>
   </section>

@@ -1830,3 +1830,40 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_014_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_014_static_support_pages_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 015
+
+Batch 015 completed locally for navigation/commercial support pages:
+
+- `/`
+- `/press/`
+- `/sitemap/`
+- `/search/` (runtime SSR)
+- `/deals/` (founder-protected, changed under cleanup authorization)
+- `/specials/` inspected; remains a 301 redirect to `/deals/`
+
+Changes:
+
+- Added graph/context blocks into city guides, state pages, categories,
+  Fintech, answers, resources, tools, methodology, data explanations, and CFPB
+  complaint-data research.
+- Softened homepage/search wording away from unsupported "best", "top picks",
+  expert-pick, approval, guarantee, licensing, diagnosis, and matching claims.
+- Softened press data/verification wording and deals offer wording.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,411 SSR route URLs and generated 124 city guides plus 2,232
+  city-category sub-pages.
+- Generated-output scan confirmed context blocks on `/`, `/press/`,
+  `/sitemap/`, and `/deals/`.
+- `/search/` is `prerender = false`, so no static `dist/search/index.html` is
+  expected; source scan confirmed the context block and the full build passed.
+- Static route checks passed for static Batch 015 pages and core graph
+  destinations.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_015_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_015_navigation_commercial_pages_gsc_seen_2026-05-26.csv`

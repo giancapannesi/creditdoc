@@ -17,7 +17,7 @@ const stats = {
 };
 
 const title = "Press & Media — CreditDoc";
-const description = "Media resources, data citations, and press inquiries for CreditDoc — the independent consumer lending directory covering credit repair, personal loans, and financial services.";
+const description = "Media resources, data citations, and press inquiries for CreditDoc, an independent consumer finance directory covering credit repair, personal loans, and financial services.";
 
 const jsonLd = [
   {
@@ -76,7 +76,7 @@ const jsonLd = [
         </div>
       </div>
       <p class="text-xs text-muted mt-3">
-        Data sourced from: {stats.sources.join(', ')}. {stats.enriched.toLocaleString()} profiles independently verified.
+        Data sourced from: {stats.sources.join(', ')}. {stats.enriched.toLocaleString()} profiles include enriched editorial or data review.
       </p>
     </section>
 
@@ -86,10 +86,10 @@ const jsonLd = [
       <div class="space-y-4">
         <div class="glass-card p-5">
           <h3 class="font-semibold text-text mb-2">Available Data</h3>
-          <p class="text-sm text-muted mb-3">CreditDoc maintains one of the most comprehensive consumer lending databases in the U.S., cross-referencing multiple government and commercial sources:</p>
+          <p class="text-sm text-muted mb-3">CreditDoc maintains a consumer-finance directory that cross-references multiple government and commercial sources:</p>
           <ul class="text-sm text-muted space-y-1.5 ml-4 list-disc">
             <li><strong class="text-text">FDIC-insured institutions</strong> — Bank profiles, deposit data, branch locations</li>
-            <li><strong class="text-text">NCUA credit unions</strong> — Credit union profiles, membership data, financial health</li>
+            <li><strong class="text-text">NCUA credit unions</strong> — Credit union profiles, membership data, and public financial data</li>
             <li><strong class="text-text">HUD-approved counselors</strong> — Housing and financial counseling agencies</li>
             <li><strong class="text-text">CFPB complaint data</strong> — Consumer complaint trends by company and product</li>
             <li><strong class="text-text">State lending regulations</strong> — Usury caps, payday loan laws, consumer protection agencies for all 50 states</li>
@@ -163,6 +163,34 @@ const jsonLd = [
           <p class="text-sm text-muted">
             We aim to respond to media inquiries within 24 hours. For urgent requests, please include "PRESS" in the subject line.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CreditDoc Context -->
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">Use Press Data With CreditDoc Context</h2>
+      <div class="glass-card p-5">
+        <p class="text-sm text-muted leading-relaxed mb-4">
+          Media citations should be paired with the source, methodology, and local directory context behind the data point.
+        </p>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <a href="/about/creditdoc-data/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+            <span class="block text-sm font-semibold text-text">Data Sources</span>
+            <span class="mt-1 block text-xs text-muted">How public records, provider data, and complaint datasets support CreditDoc pages.</span>
+          </a>
+          <a href="/methodology/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+            <span class="block text-sm font-semibold text-text">Methodology</span>
+            <span class="mt-1 block text-xs text-muted">How profiles, comparisons, local guides, and ratings display are handled.</span>
+          </a>
+          <a href="/research/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+            <span class="block text-sm font-semibold text-text">Research</span>
+            <span class="mt-1 block text-xs text-muted">Original complaint-data and lending-transparency research pages.</span>
+          </a>
+          <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+            <span class="block text-sm font-semibold text-text">Local Guides</span>
+            <span class="mt-1 block text-xs text-muted">City-level finance pages that support the bottom-up local authority graph.</span>
+          </a>
         </div>
       </div>
     </section>
