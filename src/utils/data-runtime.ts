@@ -498,7 +498,7 @@ export function shapeBodyInlineToLender(row: RuntimeLenderWithBody): Lender {
     ...(defaults() as Lender),
     ...body,
     // Authoritative columns from `lenders` table override anything in body_inline.
-    name: row.name,
+    name: row.name.trim(),
     slug: row.slug,
     category: row.category,
     processing_status: row.processing_status,
@@ -528,7 +528,7 @@ export function shapeBodyInlineToLender(row: RuntimeLenderWithBody): Lender {
 export function shapeCatalogToLenderStub(row: RuntimeLender): Lender {
   const stub: Lender = {
     ...(defaults() as Lender),
-    name: row.name,
+    name: row.name.trim(),
     slug: row.slug,
     category: row.category,
     last_updated: (row.updated_at ?? '').slice(0, 10),
