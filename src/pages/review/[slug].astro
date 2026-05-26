@@ -12,7 +12,7 @@ import InfoLink from '../../components/InfoLink.astro';
 import StateRegulatoryContext from '../../components/StateRegulatoryContext.astro';
 import cfpbResponsiveReport from '../../data/cfpb-responsive-providers-2026.json';
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
-import { softenYmylCopy } from '../../utils/safe-copy';
+import { softenEducationalTeaserCopy, softenYmylCopy } from '../../utils/safe-copy';
 import {
   getBbbClass,
   generateDiagnosis,
@@ -177,6 +177,11 @@ const categoryGuideMap: Record<string, string> = {
 };
 const guideCategory = categoryGuideMap[lender.category] || 'understanding-credit';
 const relatedWellnessGuides = (await getWellnessGuidesByCategoryRuntime(guideCategory, env, 3)).slice(0, 3);
+const displayRelatedWellnessGuides = relatedWellnessGuides.map((guide: any) => ({
+  ...guide,
+  title: softenEducationalTeaserCopy(guide.title || ''),
+  description: softenEducationalTeaserCopy(guide.description || ''),
+}));
 
 const answerPillarMap: Record<string, string> = {
   'personal-loans': 'personal-loans',
@@ -211,7 +216,9 @@ const primaryWellnessGuide = relatedWellnessGuides[0];
 const nextStepWellnessHref = primaryWellnessGuide
   ? `/financial-wellness/${primaryWellnessGuide.slug}/`
   : '/financial-wellness/';
-const nextStepWellnessTitle = primaryWellnessGuide?.title || 'Financial Wellness Guides';
+const nextStepWellnessTitle = primaryWellnessGuide
+  ? softenEducationalTeaserCopy(primaryWellnessGuide.title || '')
+  : 'Financial Wellness Guides';
 const reviewSummaryItems = [
   `${lender.name} is listed as a ${categoryLabel}${locationLabel ? ` provider in ${locationLabel}` : ' provider'} on CreditDoc.`,
   `Use this page to check contact details, location, listed services, review signals, FAQs, and similar providers before deciding what to do next.`,
@@ -1239,11 +1246,11 @@ const ogImageUrl = lender.logo_url?.trim()
   </section>
 
   <!-- Related Financial Wellness Guides -->
-  {relatedWellnessGuides.length > 0 && (
+  {displayRelatedWellnessGuides.length > 0 && (
     <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
       <h2 class="text-lg font-bold text-text mb-3">Financial Wellness Guides</h2>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        {relatedWellnessGuides.map(guide => (
+        {displayRelatedWellnessGuides.map(guide => (
           <a href={`/financial-wellness/${guide.slug}/`} class="glass-card p-4 hover:border-primary transition-colors group">
             <h3 class="text-sm font-semibold text-text group-hover:text-primary transition-colors line-clamp-2">{guide.title}</h3>
             <p class="mt-1 text-xs text-muted line-clamp-2">{guide.description}</p>
