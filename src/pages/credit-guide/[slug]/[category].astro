@@ -153,7 +153,7 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
 const title = `${catName} in ${city}, ${stateAbbr} — Local Directory | CreditDoc`;
 const description = isAtmCategory
   ? `Browse selected ATM and cash access profiles for ${city}, ${stateName}. Verify current ATM availability directly with your bank, credit union, or ATM network.`
-  : `Find the best ${catName.toLowerCase()} serving ${city}, ${stateName}. Compare ${sortedLenders.length}+ local and statewide providers with Google ratings where available, reviews, and contact information.`;
+  : `Find ${catName.toLowerCase()} serving ${city}, ${stateName}. Compare ${sortedLenders.length}+ local and statewide provider profiles with ratings where available, reviews, and contact information.`;
 
 const listName = isAtmCategory && cityLenders.length === 0
   ? `Selected ${stateName} ${catName} Profiles`
@@ -272,8 +272,30 @@ const jsonLd = [
         <a href={`/state/${stateSlug}/lending-laws/`} class="text-primary hover:underline">{stateName} lending laws &rarr;</a>
         <a href={`/credit-guide/${slug}/`} class="text-primary hover:underline">{city} full guide &rarr;</a>
         <a href="/tools/borrowing-power-quiz/" class="text-primary hover:underline">Check your borrowing power &rarr;</a>
+        <a href="/research/consumer-complaints/" class="text-primary hover:underline">How complaint data works &rarr;</a>
       </div>
     </div>
+
+    <section class="glass-card p-5 mb-8">
+      <h2 class="text-lg font-bold text-text mb-2">How to Use This {city} List</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        Start with local and statewide provider profiles, then check the related state rules, common borrower questions, and CreditDoc data explainers. A listing here is directory context, not a recommendation, approval prediction, price quote, or licensing determination.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href={`/credit-guide/${slug}/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          {city} guide
+        </a>
+        <a href={`/state/${stateSlug}/lending-laws/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          State rules
+        </a>
+        <a href="/answers/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Borrower questions
+        </a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          CFPB data context
+        </a>
+      </div>
+    </section>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- Main Content (2 cols) -->

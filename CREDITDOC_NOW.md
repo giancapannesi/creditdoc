@@ -34,16 +34,30 @@ Sitewide upgrade program restarted:
 - Plan: `docs/plans/2026-05-26-sitewide-page-upgrade-program.md`
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
+- Batch 001 completed and committed:
+  `bba672df72 feat: add cfpb report profile links`.
 - Batch 001 scope: 49 report-included `/review/{slug}/` provider pages get an
   `Included in CreditDoc research` callout through the review template when the
   provider appears in `src/data/cfpb-responsive-providers-2026.json`.
+- Batch 002 completed locally and build-verified:
+  `/credit-guide/{slug}/` and `/credit-guide/{slug}/{category}/` templates now
+  include local authority graph paths that connect city pages to city-category
+  pages, state lending laws, answer clusters, tools, and CFPB data context.
+- Latest local GSC pull (`pull_id=12`) saw 26 `/credit-guide/` URLs; the
+  Batch 002 template changes apply beyond those rows to every ready city guide
+  and city-category page served by the two templates.
+- Batch 002 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_002_notes_2026-05-26.md`
 
 Immediate next:
 
-1. Build/verify Batch 001.
-2. Commit the sitewide upgrade plan plus review-template upgrade.
-3. Continue to Batch 002: a connected city/city-category/answer pilot cluster,
-   starting with Amarillo and other small/regional pages with good local data.
+1. Commit Batch 002 with only the two local template files and resume-cursor
+   docs.
+2. Continue to Batch 003: upgrade the answer-page template so question clusters
+   connect back into city/local category, state rules, tools, and research
+   context where the data supports it.
+3. Keep every batch scoped, build-verified, documented, and committed before
+   starting the next one.
 
 ## 2026-05-26 — Static Asset Routing Fix + Noindex Cleanup Batch 009
 

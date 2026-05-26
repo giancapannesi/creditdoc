@@ -259,6 +259,28 @@ const jsonLd = [
       </div>
     </div>
 
+    <!-- Local Authority Path -->
+    <section class="glass-card p-5 mb-8">
+      <h2 class="text-lg font-bold text-text mb-2">Plan Your Next Step in {city}</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        Use this guide as a local starting point: compare provider categories, check {stateName} lending rules, read consumer-finance answers, and use CreditDoc tools before contacting a company.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href={`/credit-guide/${slug}/personal-loans/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Personal loans in {city}
+        </a>
+        <a href={`/state/${stateSlug}/lending-laws/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          {stateName} lending laws
+        </a>
+        <a href="/answers/how-to-get-a-personal-loan/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Borrowing questions
+        </a>
+        <a href="/tools/borrowing-power-quiz/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Borrowing power quiz
+        </a>
+      </div>
+    </section>
+
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- Main Content (2 cols) -->
       <div class="lg:col-span-2 space-y-8">

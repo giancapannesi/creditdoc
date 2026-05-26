@@ -543,18 +543,26 @@ Local authority context:
 
 Immediate graph build batch:
 
-1. Build and commit Sitewide Page Upgrade Batch 001:
+1. Sitewide Page Upgrade Batch 001 is complete and committed:
    - 49 report-included provider profile pages receive a safe related-research
      callout through `src/pages/review/[slug].astro`.
    - Workpack:
      `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
-2. Continue to Sitewide Page Upgrade Batch 002:
-   - 10 city guide pages, starting with Amarillo and other small/regional towns
-     with strong existing local data.
-   - 10 connected city-category pages.
-   - 10 connected answer pages.
-   - Validate each upgraded cluster links across at least 3 graph layers.
-3. Keep every batch scoped, build-verified, documented, and committed without
+2. Sitewide Page Upgrade Batch 002 is complete locally and build-verified:
+   - `/credit-guide/{slug}/` template now adds a `Plan Your Next Step in {city}`
+     local authority path.
+   - `/credit-guide/{slug}/{category}/` template now adds a YMYL-safe
+     `How to Use This {city} List` section, CFPB data context link, and removes
+     blanket `best` wording from the meta description.
+   - Latest GSC pull saw 26 `/credit-guide/` URLs; the template upgrade applies
+     to every ready city guide and city-category page served by those templates.
+3. Next Sitewide Page Upgrade Batch 003:
+   - Upgrade `/answers/` pages/templates so question clusters connect back into
+     relevant city/local category pages, state lending rules, tools, and
+     research/methodology context.
+   - Keep language advisory-neutral: no approval prediction, pricing promise,
+     licensing determination, or recommendation claim.
+4. Keep every batch scoped, build-verified, documented, and committed without
    getting pulled back into unrelated cleanup.
 
 Sitewide upgrade program:
