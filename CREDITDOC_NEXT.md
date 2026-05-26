@@ -821,3 +821,19 @@ upgrade, starting with:
 
 Continue the same loop: inspect, edit narrowly, build, output-check, document,
 commit, then proceed.
+
+Batch 016 is locally complete and build-verified. After committing it, move to
+Batch 017 by inventorying remaining uncovered page/templates and shared rendered
+components, especially components that inject sitewide commercial/YMYL language
+into many page families.
+
+Initial Batch 017 targets:
+
+- run a full `src/pages` inventory against completed batches to find any missed
+  user-facing routes;
+- scan `src/components` for recommendation, ranking, guarantee, licensing,
+  approval, safety, "best fit", and matching language;
+- prioritize shared components used by lender/profile/category/comparison cards
+  because small wording changes there can improve thousands of rendered pages;
+- keep the same loop: inspect, edit narrowly, build, output-check/source-check,
+  document, commit, then continue.

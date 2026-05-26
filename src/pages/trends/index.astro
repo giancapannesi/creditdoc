@@ -46,7 +46,7 @@ const totalInteractions = allEntries.reduce((sum, e) => {
 }, 0);
 
 const title = 'Consumer Response Profiles — All Companies | CreditDoc';
-const description = `Browse ${entries.length} consumer response profiles showing how financial companies handle inquiries. Resolution rates, timely responses, and service breakdowns from CFPB data.`;
+const description = `Browse ${entries.length} consumer response profiles showing public CFPB response patterns. Includes response rates, timely responses, and service breakdowns from CFPB data.`;
 
 const jsonLd = [
   {
@@ -108,7 +108,7 @@ for (const entry of sorted) {
     </div>
 
     <p class="text-sm text-muted mb-6">
-      Each profile shows how a company responds to consumer inquiries — resolution rates, timeliness, and the types of services consumers interact with most. Data sourced from the <a href="/research/consumer-complaints/" class="text-primary hover:underline">Consumer Financial Protection Bureau</a>.
+      Each profile shows public CFPB response patterns by company: response rates, timeliness, and the types of services consumers interact with most. Data sourced from the <a href="/research/consumer-complaints/" class="text-primary hover:underline">Consumer Financial Protection Bureau</a>.
     </p>
 
     <!-- Alphabet nav -->
@@ -138,6 +138,33 @@ for (const entry of sorted) {
           </div>
         </div>
       ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <h2 class="text-lg font-bold text-text mb-3">Use Consumer Response Data With CreditDoc Context</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        CFPB response data is one public-data layer. Compare it with provider profiles, categories, local guides, and state rules.
+      </p>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Complaint Methodology</span>
+          <span class="mt-1 block text-xs text-muted">How CreditDoc explains CFPB complaint data.</span>
+        </a>
+        <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">City Guides</span>
+          <span class="mt-1 block text-xs text-muted">Add local provider and map context.</span>
+        </a>
+        <a href="/categories/fintech/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Fintech</span>
+          <span class="mt-1 block text-xs text-muted">Review app-based finance providers separately.</span>
+        </a>
+        <a href="/about/creditdoc-data/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Data Sources</span>
+          <span class="mt-1 block text-xs text-muted">Understand how CreditDoc uses public datasets.</span>
+        </a>
+      </div>
     </div>
   </section>
 

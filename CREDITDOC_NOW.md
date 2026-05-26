@@ -1867,3 +1867,42 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_015_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_015_navigation_commercial_pages_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 016
+
+Batch 016 is locally complete and build-verified for dynamic graph templates:
+
+- `/brand/{brand}/`
+- `/trends/`
+- `/trends/{slug}/`
+- `/best/{slug}/`
+- `/review/{slug}/` follow-up language cleanup
+
+Changes:
+
+- Added contextual graph blocks from dynamic brand, trends, and list-style guide
+  templates into local guides, state rules, categories, Fintech, tools, data
+  methodology, and CFPB complaint-data research.
+- Softened CFPB trend language so response metrics are described as public
+  response patterns and transparency signals, not consumer-service quality,
+  successful resolution, endorsement, rating, or suitability claims.
+- Softened list/review wording away from unsupported "best fit",
+  recommendation, guarantee, and broad independent-review claims.
+
+Verification:
+
+- First `npm run build` passed but hit the known non-fatal city-guide sitemap
+  fetch timeout and injected 16,055 SSR route URLs.
+- Reran `npm run build`; second build passed with 124 city guides, 2,232
+  city-category sub-pages, and 18,411 SSR route URLs injected.
+- Generated-output scan confirmed blocks on `/trends/` and
+  `/trends/american-consumer-credit-counseling/`.
+- Source scan confirmed runtime SSR blocks in brand and best templates.
+- YMYL phrase scan found no remaining unsafe Batch 016 target phrases; the only
+  "suitability recommendation" wording is explicitly negated in a CFPB
+  transparency disclaimer.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_016_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_016_dynamic_templates_gsc_seen_2026-05-26.csv`

@@ -249,7 +249,7 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
                   </span>
                   {lender.pricing.money_back_guarantee && (
                     <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-positive-light text-positive">
-                      Money-Back Guarantee
+                      Money-back term listed
                     </span>
                   )}
                   {lender.pricing.free_consultation && (
@@ -277,7 +277,7 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
                   )}
                 </div>
 
-                <!-- Why it made the list -->
+                <!-- Profile summary -->
                 <p class="mt-3 text-sm text-muted leading-relaxed">
                   {lender.description_short}
                 </p>
@@ -300,7 +300,7 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
                     href={`/review/${lender.slug}/`}
                     class="inline-flex items-center justify-center px-4 py-2.5 rounded-lg border border-border text-sm font-medium text-text hover:bg-bg-alt transition-colors"
                   >
-                    Read Full Review
+                    Read Full Profile
                   </a>
                   <a
                     href={lender.affiliate_url || lender.website_url}
@@ -339,6 +339,34 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
     </section>
   )}
 
+  <!-- CreditDoc Context -->
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-6">
+      <h2 class="text-xl font-bold text-text mb-4">Use This Guide With CreditDoc Context</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        List-style guides are starting points. Compare each provider profile with local guides, state rules, tools, and CFPB complaint-data context before relying on a ranking or offer.
+      </p>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">City Guides</span>
+          <span class="mt-1 block text-xs text-muted">Local provider lists, maps, and regional context.</span>
+        </a>
+        <a href="/state/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">State Rules</span>
+          <span class="mt-1 block text-xs text-muted">State lending-law and regulator context.</span>
+        </a>
+        <a href="/tools/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Tools</span>
+          <span class="mt-1 block text-xs text-muted">Estimate borrowing power, debt payoff, or credit-score scenarios.</span>
+        </a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Complaint Data</span>
+          <span class="mt-1 block text-xs text-muted">Use public CFPB complaint patterns as one research input.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Author / E-E-A-T -->
   <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
     <div class="rounded-xl border border-border bg-white p-5 flex gap-4">
@@ -359,7 +387,7 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="rounded-lg bg-bg-alt border border-border p-4">
       <p class="text-xs text-muted leading-relaxed">
-        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to the services featured on this page. Our editorial team independently evaluates all services. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
+        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to the services featured on this page. Compensation does not determine whether a provider can be covered. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
       </p>
     </div>
   </section>

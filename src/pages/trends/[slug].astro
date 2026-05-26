@@ -159,7 +159,7 @@ const jsonLd = [
         <div class="text-3xl font-bold text-primary">
           {resolutionPct != null ? `${resolutionPct}%` : '—'}
         </div>
-        <p class="text-xs text-muted mt-1">Consumer inquiries resolved successfully</p>
+        <p class="text-xs text-muted mt-1">Consumer inquiries with a recorded company response outcome</p>
       </div>
 
       <!-- Timely Response -->
@@ -272,17 +272,17 @@ const jsonLd = [
       <div class="prose prose-sm text-muted max-w-none space-y-3">
         <p>
           The <strong class="text-text">Consumer Financial Protection Bureau (CFPB)</strong> tracks
-          how financial companies respond to consumer inquiries. This profile shows
-          <strong class="text-text">{cfpb.company_name}</strong>'s responsiveness and resolution track record.
+          how financial companies respond to consumer complaints. This profile shows
+          public response patterns for <strong class="text-text">{cfpb.company_name}</strong>.
         </p>
         <ul class="list-disc list-inside space-y-1">
           <li>
-            <strong class="text-text">Resolution Rate</strong> — How often the company resolves
-            consumer inquiries with a satisfactory outcome (monetary or non-monetary relief).
+            <strong class="text-text">Resolution Rate</strong> — How often the company records
+            a response outcome such as monetary relief, non-monetary relief, or explanation.
           </li>
           <li>
             <strong class="text-text">Timely Response Rate</strong> — How consistently the company
-            responds within the required 15-day window — a sign of operational responsiveness.
+            responds within the CFPB response window.
           </li>
           <li>
             <strong class="text-text">Services Used</strong> — Which product categories consumers
@@ -294,10 +294,38 @@ const jsonLd = [
           </li>
         </ul>
         <p>
-          Higher resolution and timely response rates indicate strong consumer service operations.
-          Volume of interactions is not a quality indicator — larger, more established companies
-          naturally handle more consumer inquiries.
+          Response rates are transparency signals, not endorsements, ratings, or suitability
+          determinations. Volume of interactions is not a quality indicator; larger companies
+          often handle more consumer complaints.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CreditDoc Context -->
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <h2 class="text-lg font-bold text-text mb-3">Use This Response Profile With CreditDoc Context</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        Treat CFPB response data as one research input. Review the provider profile, category page, local guides, and state rules for more context.
+      </p>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href={`/review/${cfpb.slug}/`} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Provider Profile</span>
+          <span class="mt-1 block text-xs text-muted">Review pricing, services, third-party ratings, and source notes.</span>
+        </a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Complaint Data</span>
+          <span class="mt-1 block text-xs text-muted">Read the broader CFPB data explanation.</span>
+        </a>
+        <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">City Guides</span>
+          <span class="mt-1 block text-xs text-muted">Add local provider and map context.</span>
+        </a>
+        <a href="/state/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">State Rules</span>
+          <span class="mt-1 block text-xs text-muted">Compare against state-level lending context.</span>
+        </a>
       </div>
     </div>
   </section>

@@ -352,7 +352,7 @@ if (relatedLenders.length >= 2) {
   const catLabel = category?.name || 'financial services';
   faqCandidates.push({
     question: `How does ${lender.name} compare to similar companies?`,
-    answer: `In the ${catLabel} category, comparable providers include ${compNames}. Each company has different strengths — compare services, pricing, and consumer complaint records to find the best fit.`,
+    answer: `In the ${catLabel} category, comparable providers include ${compNames}. Each company has different strengths, so compare services, pricing, and consumer complaint records before deciding what to do next.`,
     priority: 6,
   });
 }
@@ -1156,7 +1156,7 @@ const ogImageUrl = lender.logo_url?.trim()
           reason.textContent = 'Based on your goals and preferences, this provider aligns well with what you\'re looking for.';
         } else if (score >= 1) {
           verdict.textContent = quizName + ' could be a good option.';
-          reason.textContent = 'This provider offers relevant services. We recommend comparing a few options to find your best fit.';
+          reason.textContent = 'This provider offers relevant services. Compare a few options, current terms, and complaint records before deciding what to do next.';
         } else {
           verdict.textContent = 'You might want to explore other options.';
           reason.textContent = 'Based on your specific needs, other providers may be a better match. Check our comparison page for alternatives.';
@@ -1289,7 +1289,7 @@ const ogImageUrl = lender.logo_url?.trim()
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="rounded-lg bg-bg-alt border border-border p-4">
       <p class="text-xs text-muted leading-relaxed">
-        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to {lender.name} and other services. These commissions help us maintain our free research. Our editorial team independently evaluates all services. Compensation does not influence editorial reviews, page order, or recommendations; visible star ratings use stored Google review ratings when available. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
+        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to {lender.name} and other services. These commissions help us maintain our free research. Compensation does not determine whether a provider can be covered; visible star ratings use stored Google review ratings when available. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
       </p>
     </div>
   </section>

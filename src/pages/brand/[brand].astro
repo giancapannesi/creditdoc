@@ -402,6 +402,34 @@ const description = `Browse all ${locationCount} ${brandInfo.display_name} locat
     </section>
   )}
 
+  <!-- CreditDoc Context -->
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-6">
+      <h2 class="text-lg font-semibold text-text mb-4">Use This Brand Page With CreditDoc Context</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        Brand pages collect known locations for one company. Pair them with local guides, state rules, category pages, and public complaint-data context before relying on a listing.
+      </p>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">City Guides</span>
+          <span class="mt-1 block text-xs text-muted">Local provider lists, maps, and regional context.</span>
+        </a>
+        <a href="/state/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">State Rules</span>
+          <span class="mt-1 block text-xs text-muted">State lending-law and regulator context.</span>
+        </a>
+        <a href={`/categories/${brandInfo.category}/`} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Category Context</span>
+          <span class="mt-1 block text-xs text-muted">Compare this brand with other providers in the same category.</span>
+        </a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Complaint Data</span>
+          <span class="mt-1 block text-xs text-muted">Use CFPB complaint patterns as one research input.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Related Blog Posts -->
   {relatedPosts.length > 0 && (
     <section class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
