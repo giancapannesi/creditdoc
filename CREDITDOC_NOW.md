@@ -132,6 +132,37 @@ Follow-up shipped 2026-05-21:
     `https://www.creditdoc.co/sitemap-index.xml`.
   - `https://www.creditdoc.co/sitemap-index.xml` returns `200 application/xml`.
 
+## 2026-05-26 — Noindex Cleanup Batch 001
+
+Founder decision: obvious wrong-vertical noindex pages should come off the site
+completely, with redirects only where Google has already shown demand.
+
+Batch 001 files:
+
+- Work folder: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Noindex_Review_2026-05-26/`
+- Drop batch: `noindex_drop_batch_001_2026-05-26.csv`
+- Archive record: `noindex_dropped_archive_batch_001_2026-05-26.json`
+
+Batch 001 action:
+
+- Archived 77 obvious wrong-vertical records in local SQLite and Supabase.
+- Categories archived: auto/vehicle/buy-here-pay-here rows, title-service rows,
+  passport rows, detective/fraud/wrong-vertical rows.
+- Local backup before archive:
+  `data/backups/creditdoc_before_noindex_drop_batch_001_20260526T080717Z.sqlite`
+- Supabase update succeeded for all 77 rows.
+- `src/pages/review/[slug].astro` now redirects the 9 dropped rows that had GSC
+  impressions to relevant category or city-guide pages.
+- Dropped rows with no GSC demand are intended to leave the site as 404 after
+  archive.
+
+Verification:
+
+- `npm run build` passed after the redirect-map change.
+- Required after deploy: check all 9 redirect URLs and a sample of no-demand
+  archived URLs live. Every future cleanup section must end with live status
+  checks for all touched pages.
+
 Same-day GSC audit:
 
 - Report: `/srv/BusinessOps/data/creditdoc_gsc_audit/gsc_audit_2026-05-21.md`

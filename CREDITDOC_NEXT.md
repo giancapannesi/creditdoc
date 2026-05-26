@@ -171,6 +171,29 @@ wellness-generator batch.
   "Blocked by robots.txt". Keep `/search/` out of XML sitemaps, but allow crawl
   so its `noindex,nofollow` and canonical can be processed.
 
+## Noindex Cleanup Queue — Active
+
+Current project folder:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Noindex_Review_2026-05-26/`
+
+Batch 001 has archived 77 obvious wrong-vertical rows. Finish the release by:
+
+1. Commit and deploy the redirect-map update in `src/pages/review/[slug].astro`.
+2. Verify the 9 GSC-demand dropped pages redirect live.
+3. Verify a sample of no-demand archived pages returns 404 live.
+4. Continue the noindex queue in small batches:
+   - Dump/redirect: obvious auto, vehicle, title-only, passport, detective,
+     fraud, and other wrong-vertical pages.
+   - Fix: real lenders/financial providers with matching websites and useful
+     location/service data.
+   - Escalate/manual: ambiguous rows where the website/category does not prove
+     the page belongs on CreditDoc.
+
+Rule for every batch: store the candidate list, archive list, DB backup path,
+Supabase result count, redirect list, and live URL status checks in the project
+folder before calling the batch done.
+
 ---
 
 ## Key Reference
