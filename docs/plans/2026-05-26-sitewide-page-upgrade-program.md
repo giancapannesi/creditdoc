@@ -564,3 +564,39 @@ Notes:
 
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 033: Compare Profile Notes
+
+Date: 2026-05-26  
+Implementation commit: `01f45822ca` (`feat: soften compare profile notes`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Reframed compare-page profile notes from stored signals that `match your
+  needs` to stored signals that may be relevant to user research.
+- Neutralized generated comparison reasons that used `better option`.
+- Cleaned an awkward generated phrase caused by a previous replacement rule:
+  `more sustainable and profile with trust signals to verify`.
+- Replaced the local `wins` fallback with `is highlighted`.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Generated compare HTML scan was clean for `match your needs`,
+  `better option`, `more sustainable and profile`, `wins`, and `is flagged`;
+  remaining hits were source-only replacement-rule literals.
+- `git diff --check` passed.
+
+Notes:
+
+- Raw comparison JSON was not edited.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
