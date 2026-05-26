@@ -686,6 +686,50 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 041: Finance Tool Estimate Copy
+
+Date: 2026-05-26
+Implementation commit: `f0cef15223` (`feat: soften finance tool estimate copy`)
+
+Scope:
+
+- `src/pages/tools/borrowing-power-quiz.astro`
+- `src/pages/tools/debt-payoff-calculator.astro`
+
+What changed:
+
+- Reframed borrowing-quiz copy from personalized matching/qualification
+  language toward educational estimates based on user inputs.
+- Changed `Find My Borrowing Power` to `Estimate Borrowing Power`.
+- Reframed credit-score and DTI result insights to avoid lender certainty,
+  savings certainty, and confidence/qualification claims.
+- Renamed embedded category data internals from recommendation terminology to
+  profile terminology while preserving client-side quiz behavior.
+- Reframed debt-avalanche copy from `saves you the most money` to total-interest
+  reduction when assumptions are equal.
+- Removed a `choose the approach` FAQ phrase from the debt calculator JSON-LD.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Targeted source/generated/client-asset scan was clean for `matched to your
+  situation`, `how much you could qualify for`, `Find My Borrowing Power`,
+  `Your best estimate`, `saves you the most money`, `Lenders see you as low
+  risk`, `Most lenders will consider you`, `could save you thousands`, `shop
+  confidently`, `may qualify for lower`, and `choose the approach`.
+- `git diff --check` passed.
+
+Notes:
+
+- Calculator behavior was preserved; this was copy and embedded-data naming
+  cleanup only.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 033: Compare Profile Notes
 
 Date: 2026-05-26  
