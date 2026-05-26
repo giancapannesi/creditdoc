@@ -1079,3 +1079,40 @@ Notes:
   files in this build.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 046: Homepage Profile Anchor
+
+Date: 2026-05-26
+Implementation commit: `999425abbf` (`feat: rename homepage profile anchor`)
+
+Scope:
+
+- `src/pages/index.astro`
+
+What changed:
+
+- Renamed the homepage profile-highlight jump link target from `#top-picks` to
+  `#profile-highlights`.
+- Updated the profile-highlight section ID to match the new link.
+- Updated the homepage table filtering selector from the stale
+  `#top-picks-table tbody` selector to `#profile-highlights tbody`.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and generated homepage scans were clean for `top-picks`,
+  `#top-picks`, and `top-picks-table`.
+- Generated homepage confirmed `href="#profile-highlights"`,
+  `id="profile-highlights"`, and the updated script selector.
+- `git diff --check` passed.
+
+Notes:
+
+- This batch removes stale homepage `top-picks` terminology while keeping the
+  visible `Profile Highlights` copy and existing table behavior.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
