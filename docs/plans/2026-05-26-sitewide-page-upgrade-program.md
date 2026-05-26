@@ -2223,3 +2223,56 @@ Notes:
   category mappings, or card layout changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 073: Comparison Monthly Price Rendering
+
+Date: 2026-05-26
+Implementation commit: `a8743c57cd` (`fix: guard comparison monthly price rendering`)
+
+Scope:
+
+- `src/components/ComparisonTable.astro`
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added finite-price guards for comparison monthly-price rendering so empty tier
+  filters cannot render `Infinity` into the side-by-side comparison table.
+- Reused the same lowest-listed monthly-price logic in comparison header cards
+  and FAQ answers so tiered providers with `monthly_price: 0` do not display as
+  `Free/mo` when a listed tier price exists.
+- Removed broad title softening from comparison titles and rebuilt the display
+  title from provider names so business names containing `Best` are preserved
+  instead of being rewritten to awkward title copy such as `notable 0 Down`.
+- Preserved comparison routes, slugs, source records, JSON-LD structure,
+  category links, ratings, review links, and card/table layout.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- `dist/compare` scan for `Infinity`, `$Infinity`, and `NaN` returned no
+  matches.
+- Rendered verification on
+  `/compare/greenlight-financial-vs-vip-auto-lease-nyc-best-0-down-leasing-deals/`
+  confirmed the card, table, FAQ, and JSON-LD price context use `$229.00/mo`
+  for VIP Auto Lease instead of `$Infinity/mo` or `Free/mo`.
+- Rendered verification confirmed the page title now preserves
+  `VIP Auto Lease NYC Best 0 Down Leasing Deals` as the provider name instead
+  of rewriting it to `notable 0 Down Leasing Deals`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/learn/`, `/blog/`, `/categories/fintech/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- The Greenlight/VIP comparison route exists in the local build but returned
+  404 on production during the quality check, indicating it is not deployed on
+  the live site yet rather than a live outage.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
