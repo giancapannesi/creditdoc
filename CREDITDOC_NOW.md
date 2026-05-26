@@ -941,3 +941,21 @@ Search robots/noindex regression prevention 2026-05-26:
 - Verification on 2026-05-26: smoke test passed `10/10`; site monitor exited
   `0`; live `robots.txt` does not block `/search/`; live search URL has
   `noindex,nofollow` and canonical to `/search/`.
+
+Content engine firing verification 2026-05-26:
+
+- Jammi clarified that CreditDoc content engines firing every working day is
+  non-negotiable: blog, financial wellness/health, city guides, and
+  questions/answers must run on schedule.
+- Added `/srv/BusinessOps/tools/creditdoc_content_engine_daily_verify.py`.
+  It does not generate content; it verifies today's scheduled engine logs after
+  all weekday engines are due and emails Jammi if any required engine did not
+  fire or did not show a success marker.
+- Added weekday cron:
+  `45 16 * * 1-5 /srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/creditdoc_content_engine_daily_verify.py >> /srv/BusinessOps/logs/creditdoc_content_engine_verify.log 2>&1`
+- Crontab backup:
+  `/srv/BusinessOps/backups/crontab-before-creditdoc-content-engine-verifier-20260526T060638Z.txt`
+- Manual verifier run at 2026-05-26 06:06 UTC confirmed:
+  blog scheduler already fired; blog generator, city guides, content drip,
+  questions/answers, financial wellness, and comparisons were correctly pending
+  because their scheduled times had not arrived.
