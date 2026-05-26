@@ -565,6 +565,71 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 094: Category Metadata and Comparison Label Claim Softening
+
+Date: 2026-05-26
+Implementation commit: `384cb30442` (`fix: soften category and comparison claim labels`)
+
+Scope:
+
+- `src/components/DiagnosisCard.astro`
+- `src/content/categories.json`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Removed rendered HTML comment language that exposed diagnosis wording in the
+  profile note component.
+- Softened category metadata for credit repair, personal loans, emergency cash,
+  debt relief, credit building, credit monitoring, free help, and insurance.
+- Replaced broad category claims such as `Best ...`, `top credit repair`,
+  `real results`, `money-back guarantees`, `Need money today`, `same-day or
+  next-day funding`, `Same-Day Funding`, `no catch, no upsell`, and `financial
+  guarantees` with comparison, listed-term, public-signal, and verification
+  wording.
+- Added shared safe-copy replacements for generated comparison language around
+  `superior pricing`, `customer proof`, `social proof`, and `same-day funding`
+  so rendered comparison pages use listed-pricing, stored public-review, and
+  funding-timing verification wording.
+- Preserved route slugs, source comparison records, source lender records,
+  pricing fields, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected the full 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Strict rendered scan returned no matches for targeted raw phrases:
+  `Diagnosis text`, `Stethoscope Icon`, `money-back guarantees`,
+  `money-back guarantee`, `Best Credit Repair Companies`,
+  `Best Personal Loan Lenders`, `Best Debt Relief Companies`,
+  `Best Credit Building Tools`, `Best Credit Monitoring`,
+  `same-day or next-day funding`, `Same-Day Funding`, `same-day funding`,
+  `Need money today`, `top credit repair`, `real results`,
+  `no catch, no upsell`, `financial guarantees`, `superior pricing`,
+  `customer proof`, or `social proof`.
+- Positive rendered checks confirmed replacement language including
+  `Credit Repair Companies 2026`, `listed refund terms`,
+  `stored public-review signals`, `Compare Funding Timing`,
+  `listed funding-timing claims to verify`, `funding-timing claims to verify`,
+  `Debt Relief Companies 2026`, `Credit Building Tools 2026`,
+  `Credit Monitoring & Identity Protection 2026`, `free or low-cost`,
+  `provider signals`, `exclusions`, `claims processes`,
+  `clearer listed pricing context`, and `stored public-review context`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/credit-saint-vs-the-credit-repairmen/`,
+  `/compare/credit-supreme-credit-repair-miami-fix-credit-fast-miami-fl-vs-safeport-law/`,
+  `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- This batch combined source category metadata cleanup with shared generated-copy
+  safety rules.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 074: Comparison Risk And Timing Claims
 
 Date: 2026-05-26
