@@ -2749,3 +2749,58 @@ Notes:
   total product cost, borrowing cost, card fees, interest, and transaction fees.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 083: Slug-Like Lender Display Name Normalization
+
+Date: 2026-05-26
+Implementation commit: `575d73e79c` (`fix: normalize slug-like lender display names`)
+
+Scope:
+
+- `src/utils/data.ts`
+- `src/utils/data-build.ts`
+- `src/utils/data-runtime.ts`
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added shared `normalizeLenderDisplayName()` helper for all-lowercase
+  hyphenated lender names.
+- Applied display-name normalization to build-time and runtime lender data
+  shaping.
+- Replaced raw comparison participant slugs inside stored comparison summary and
+  FAQ copy with current lender display names.
+- Fixed rendered visible text, logo alt text, and JSON-LD artifacts such as
+  `lakeview-law-group`, `safe-credit-solutions`, and `recovery-law-group`.
+- Preserved source lender JSON records, route slugs, review URLs, logo paths,
+  categories, pricing, ratings, badges, and layouts.
+
+Verification:
+
+- Initial `npm run build` attempt failed because the new helper was imported
+  from the wrong module in runtime data shaping; the import was corrected before
+  final verification.
+- `git diff --check` passed.
+- Final `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered scan returned no matches for visible raw-slug artifacts in logo alt
+  text, card headings, or JSON-LD display names.
+- Targeted rendered checks confirmed `Lakeview Law Group`,
+  `Safe Credit Solutions`, and `Recovery Law Group` display text while stable
+  URL and logo-path slugs remain unchanged.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/browse/debt-relief/new-york-ny/`,
+  `/compare/american-profit-recovery-vs-lakeview-law-group/`, `/robots.txt`,
+  and `/sitemap-index.xml`.
+
+Notes:
+
+- Render/data-shaping normalization only; no source lender JSON records changed.
+- Existing route slugs, review URLs, and logo filenames intentionally remain
+  slug-based.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
