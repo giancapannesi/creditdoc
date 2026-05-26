@@ -9,7 +9,7 @@ requested.
 Latest completed/active state:
 
 - Batch 008 committed: `9c013cfa8f feat: add graph links to tools pages`.
-- Batch 009 resources pages completed locally and build-verified; commit next.
+- Batch 009 committed: `2d5c452abf feat: add graph links to resource pages`.
 - Batch 009 scope: `/resources/`, `/resources/credit-report-checklist/`,
   `/resources/credit-report-checklist/print/`,
   `/resources/debt-credit-letter-templates/`, and individual letter-template
@@ -18,13 +18,22 @@ Latest completed/active state:
 - Batch 009 verification passed: `npm run build`, robots contract, SSR sitemap
   parity, generated output scan, sitemap/robots check, and 18,411 SSR route URL
   injection.
+- Batch 010 financial-wellness pages completed locally and build-verified;
+  commit next.
+- Batch 010 scope: `/financial-wellness/` and `/financial-wellness/{slug}/`.
+- Local wellness guide inventory: 98 rows; latest local GSC pull (`pull_id=12`)
+  saw 32 `/financial-wellness/` URLs.
+- Batch 010 verification passed: `npm run build`, robots contract, SSR sitemap
+  parity, generated output/server-bundle scan, sitemap/robots check, and 18,411
+  SSR route URL injection.
 
 Immediate next:
 
-1. Commit Batch 009 with only the scoped resources files and resume-cursor docs.
-2. Start Batch 010 by inspecting `src/pages/financial-wellness/` and upgrading
-   financial-wellness pages with authority graph links into local guides,
-   categories, answers, tools, resources, research, and state context.
+1. Commit Batch 010 with only the scoped financial-wellness files and
+   resume-cursor docs.
+2. Start Batch 011 by inspecting the blog page family and upgrading blog pages
+   with authority graph links into local guides, categories, answers, tools,
+   resources, research, and state context where relevant.
 3. Keep every batch scoped, documented in the workpack, build-verified, and
    committed before starting the next batch.
 

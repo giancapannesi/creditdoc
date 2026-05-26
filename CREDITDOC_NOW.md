@@ -139,7 +139,8 @@ Sitewide upgrade program restarted:
   city-category sub-pages.
 - Batch 008 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_008_notes_2026-05-26.md`
-- Batch 009 completed locally and build-verified:
+- Batch 009 completed and committed:
+  `2d5c452abf feat: add graph links to resource pages`.
   resources pages now link checklist/template resources into tools, answers,
   local guides, provider categories, and CFPB complaint-data context.
 - Batch 009 scope: `/resources/`, `/resources/credit-report-checklist/`,
@@ -158,14 +159,32 @@ Sitewide upgrade program restarted:
   city-category sub-pages.
 - Batch 009 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_009_notes_2026-05-26.md`
+- Batch 010 completed locally and build-verified:
+  financial-wellness pages now link the education layer into local guides,
+  answer clusters, tools/resources, related provider categories, and CFPB
+  complaint-data context.
+- Batch 010 scope: `/financial-wellness/` and `/financial-wellness/{slug}/`
+  through `src/pages/financial-wellness/[slug].astro`.
+- Local wellness guide inventory: 98 `wellness_guides` rows. Latest local GSC
+  pull (`pull_id=12`) saw 32 `/financial-wellness/` URLs.
+- Batch 010 also fixed wellness category label mappings for
+  `building-credit`, `budgeting-and-saving`, `loans-and-interest`,
+  `everyday-finance`, and `credit-repair`, and softened index copy toward
+  verifiable education plus local/provider/public-data context.
+- Batch 010 build verification passed:
+  `npm run build`, robots contract, SSR sitemap parity, Astro build, generated
+  output/server-bundle scan, and sitemap/robots conflict check. This run
+  injected 18,411 SSR route URLs and successfully added 124 city guides plus
+  2,232 city-category sub-pages.
+- Batch 010 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_010_notes_2026-05-26.md`
 
 Immediate next:
 
-1. Commit Batch 009 with only the resources pages, shared letter-template
-   component, and resume-cursor docs.
-2. Continue to Batch 010: inspect and upgrade financial-wellness pages so
-   wellness content links back to local guides, categories, answers, tools,
-   resources, research pages, and state context where relevant.
+1. Commit Batch 010 with only the financial-wellness pages and resume-cursor
+   docs.
+2. Continue to Batch 011: inspect the blog page family and upgrade blog pages
+   into the same graph where appropriate.
 3. Keep every batch scoped, build-verified, documented, and committed before
    starting the next one.
 

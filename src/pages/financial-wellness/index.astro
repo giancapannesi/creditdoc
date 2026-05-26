@@ -39,6 +39,29 @@ const topicCategories = [
 
 const featuredGuides = guides.slice(0, 3);
 
+const contextLinks = [
+  {
+    title: 'Local credit guides',
+    description: 'Use city pages to compare local providers and nearby category options.',
+    href: '/city/',
+  },
+  {
+    title: 'Answer library',
+    description: 'Read focused answers before moving from education into provider research.',
+    href: '/answers/',
+  },
+  {
+    title: 'Tools and calculators',
+    description: 'Estimate debt payoff, credit-score scenarios, and borrowing context.',
+    href: '/tools/',
+  },
+  {
+    title: 'Research reports',
+    description: 'Add complaint-data and market context to provider and category research.',
+    href: '/research/consumer-complaints/',
+  },
+];
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -86,6 +109,24 @@ const jsonLd = {
             CreditDoc promotes financial wellness at every level. Whether you're rebuilding your credit from scratch, trying to understand how interest rates work, or looking for the best way to pay down debt, our guides provide clear, actionable education -- not sales pitches. Every guide is written and reviewed by our finance team with combined experience of 15+ years in consumer lending and credit.
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CreditDoc Context -->
+  <section class="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="rounded-xl border border-primary/20 bg-primary-light/30 p-6 sm:p-8">
+      <h2 class="text-xl font-bold text-text">Use Wellness Guides With CreditDoc Context</h2>
+      <p class="mt-2 text-sm leading-relaxed text-muted">
+        These guides explain consumer finance topics in plain language. Use them with local guides, answer clusters, tools, resource checklists, category directories, and research pages before contacting a company or comparing options.
+      </p>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {contextLinks.map(link => (
+          <a href={link.href} class="rounded-lg border border-border bg-white p-4 hover:border-primary transition-colors">
+            <h3 class="text-sm font-semibold text-text">{link.title}</h3>
+            <p class="mt-2 text-xs leading-relaxed text-muted">{link.description}</p>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -177,7 +218,7 @@ const jsonLd = {
         <div>
           <h2 class="text-xl font-bold text-text">Written by Finance Professionals</h2>
           <p class="mt-3 text-sm text-muted leading-relaxed">
-            Every guide on CreditDoc is written and reviewed by our editorial team, led by a consumer finance specialist with 15+ years of experience in payments, lending, and risk management across 10+ countries. We don't generate content for clicks -- we write to genuinely help people make better financial decisions.
+            Every guide on CreditDoc is written and reviewed by our editorial team, led by a consumer finance specialist with 15+ years of experience in payments, lending, and risk management across 10+ countries. The goal is practical financial education that can be checked against local provider pages, public data, and official sources.
           </p>
           <div class="mt-4 flex flex-wrap gap-2">
             <span class="rounded-full bg-bg-alt px-3 py-1 text-xs font-medium text-muted">15+ Years Finance</span>
@@ -195,7 +236,7 @@ const jsonLd = {
     <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 text-center">
       <h2 class="text-2xl font-bold text-text">Ready to Take Action?</h2>
       <p class="mt-3 text-muted max-w-xl mx-auto">
-        Once you've learned the basics, browse our directory to find the right credit repair company, lender, or financial service for your situation.
+        Once you've learned the basics, browse CreditDoc's directory to compare credit repair companies, lenders, and financial service providers with more context.
       </p>
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
         <a

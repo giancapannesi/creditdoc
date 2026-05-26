@@ -40,9 +40,12 @@ const relatedCategories = (guide.related_categories ?? [])
 
 const categoryLabels: Record<string, string> = {
   'understanding-credit': 'Understanding Credit',
-  'budgeting-saving': 'Budgeting & Saving',
-  'loans-interest': 'Loans & Interest',
+  'building-credit': 'Building Credit',
+  'budgeting-and-saving': 'Budgeting & Saving',
+  'loans-and-interest': 'Loans & Interest',
   'financial-recovery': 'Financial Recovery',
+  'everyday-finance': 'Everyday Finance',
+  'credit-repair': 'Credit Repair',
 };
 
 const categoryLabel = categoryLabels[guide.category] || guide.category.replace(/-/g, ' ');
@@ -90,6 +93,22 @@ const wellnessListicleMap: Record<string, { name: string; url: string }> = {
   'credit-repair': { name: 'Best Credit Repair Companies', url: 'https://www.creditdoc.co/best/best-credit-repair-companies/' },
 };
 const recommendedListicle = wellnessListicleMap[guide.category];
+
+const categoryToolMap: Record<string, { label: string; href: string }> = {
+  'understanding-credit': { label: 'Credit score simulator', href: '/tools/credit-score-simulator/' },
+  'building-credit': { label: 'Credit score simulator', href: '/tools/credit-score-simulator/' },
+  'credit-repair': { label: 'Credit report checklist', href: '/resources/credit-report-checklist/' },
+  'budgeting-and-saving': { label: 'Borrowing power quiz', href: '/tools/borrowing-power-quiz/' },
+  'loans-and-interest': { label: 'Borrowing power quiz', href: '/tools/borrowing-power-quiz/' },
+  'financial-recovery': { label: 'Debt payoff calculator', href: '/tools/debt-payoff-calculator/' },
+  'everyday-finance': { label: 'Borrowing power quiz', href: '/tools/borrowing-power-quiz/' },
+};
+
+const primaryContextTool = categoryToolMap[guide.category] || { label: 'Tools and calculators', href: '/tools/' };
+const primaryRelatedCategory = relatedCategories[0];
+const primaryCategoryLink = primaryRelatedCategory
+  ? { label: `${primaryRelatedCategory.name} providers`, href: `/categories/${primaryRelatedCategory.slug}/` }
+  : { label: 'Provider categories', href: '/categories/' };
 
 Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
 Astro.response.headers.set('x-cdm-rev-source', 'ssr-wellness');
@@ -150,6 +169,10 @@ const jsonLd = [
     "relatedLink": [
       "https://www.creditdoc.co/financial-wellness/",
       recommendedListicle.url,
+      "https://www.creditdoc.co/city/",
+      "https://www.creditdoc.co/answers/",
+      "https://www.creditdoc.co/tools/",
+      "https://www.creditdoc.co/research/consumer-complaints/",
     ],
   }] : []),
 ];
@@ -204,6 +227,19 @@ const jsonLd = [
 
       <!-- Main Column -->
       <div class="lg:col-span-2 space-y-8">
+        <section class="rounded-xl border border-primary/20 bg-primary-light/30 p-6">
+          <h2 class="text-xl font-bold text-text">Use This Guide With CreditDoc Context</h2>
+          <p class="mt-2 text-sm leading-relaxed text-muted">
+            This guide is educational and should be checked against your own documents, local rules, provider pages, official sources, and complaint-data context before you contact a company or make a financial decision.
+          </p>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            <a href={primaryContextTool.href} class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">{primaryContextTool.label}</a>
+            <a href={primaryCategoryLink.href} class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">{primaryCategoryLink.label}</a>
+            <a href="/city/" class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">Local credit guides</a>
+            <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">Complaint data context</a>
+          </div>
+        </section>
+
         {linkedSections.map((section, i) => (
           <section id={`section-${i}`}>
             <h2 class="text-xl font-bold text-text mb-4">{section.heading}</h2>
