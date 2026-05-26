@@ -2456,3 +2456,40 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_029_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_029_blog_learn_teasers_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 030
+
+Batch 030 implementation committed as `39f756b067` for financial-wellness guide
+presentation copy:
+
+- `src/pages/financial-wellness/index.astro`
+- `src/pages/financial-wellness/[slug].astro`
+
+Changes:
+
+- Applied `softenEducationalTeaserCopy()` to wellness index topic-list guide
+  titles and featured guide cards.
+- Applied presentation-layer softening to SSR wellness guide titles,
+  descriptions, SEO metadata, JSON-LD headlines/breadcrumb labels, section
+  headings, key takeaways, table-of-contents labels, and related-guide titles.
+- Rephrased hardcoded financial-wellness landing copy from `best way to pay
+  down debt` and `stronger financial future` toward neutral comparison and
+  planning language.
+- Preserved all wellness guide URLs and did not edit raw
+  `src/content/wellness-guides.json`.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json` changes
+  affected generated inventory; neither file was staged or committed.
+- Build generated 124 city guides plus 2,232 city-category sub-pages.
+- Postbuild sitemap/robots conflict check passed.
+- Generated `/financial-wellness/` scan was clean for targeted old phrases.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_030_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_030_wellness_presentation_copy_gsc_seen_2026-05-26.csv`

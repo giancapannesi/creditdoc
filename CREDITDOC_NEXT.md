@@ -1095,3 +1095,21 @@ Initial Batch 030 targets:
   correct owner for a visible issue and no render-time boundary is appropriate;
 - preserve strategic local/city/category URLs and existing blog/education URLs;
 - build-check, output/source-check, document, commit, then continue.
+
+Batch 030 implementation is complete, build-verified, and committed as
+`39f756b067`. Move to Batch 031 by handling the course-module raw body-copy
+issues found during the Batch 030 generated scan.
+
+Initial Batch 031 targets:
+
+- inspect `src/pages/courses/credit-fundamentals/[slug].astro` and the external
+  markdown course module content rendered from
+  `/srv/BusinessOps/data/outreach/edu_gov/course/modules`;
+- focus on visible course module phrases such as `worth it`, `guarantee`,
+  `guarantees results`, `best answer`, and `top lenders` while preserving
+  legitimate warning examples where the page is explicitly teaching red flags;
+- prefer render-time softening of lesson HTML and navigation snippets if it can
+  avoid editing external raw markdown files;
+- keep quiz correctness intact and do not change `data-correct` attributes or
+  answer semantics;
+- build-check, output/source-check, document, commit, then continue.
