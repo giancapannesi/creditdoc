@@ -1994,3 +1994,46 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_018_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_018_runtime_content_boundaries_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 019
+
+Batch 019 implementation committed as `04eec9f88c` for residual guide/tool
+copy cleanup:
+
+- `src/components/AffiliateInline.astro`
+- `src/pages/about/creditdoc-data.astro`
+- `src/pages/browse/[catSlug]/[citySlug].astro`
+- `src/pages/city/[slug].astro`
+- `src/pages/credit-guide/[slug]/[category].astro`
+- `src/pages/tools/debt-payoff-calculator.astro`
+
+Changes:
+
+- Softened inline affiliate blocks away from approval-odds, top-ranked,
+  guaranteed result, and strong service-claim wording.
+- Reframed debt calculator output from recommendations and "saves" language to
+  educational calculation notes and estimated scenario comparisons.
+- Updated CreditDoc Data terminology from diagnosis/verdict/guarantee language
+  to profile-note, research-note, and refund-terms language.
+- Softened browse/city guide CTAs and city guide resource blocks away from
+  "best options", "top-rated services", and broad independent-review claims.
+- Rephrased personal-loan city-category copy from determining that a lender is
+  properly licensed to checking licensing or registration with the state.
+
+Verification:
+
+- `npm run build` passed after the main Batch 019 edits with 18,411 SSR route
+  URLs injected.
+- A final post-copy build also passed; it hit the known non-fatal city-guide
+  sitemap timeout and injected 16,055 SSR route URLs on that attempt.
+- Generated-output scans on CreditDoc Data, the debt payoff calculator,
+  Amarillo city, and an Amarillo browse page found no Batch 019 blocked
+  phrases.
+- Source scan confirmed the SSR credit-guide category copy now uses licensing
+  lookup language.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_019_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_019_residual_guide_tool_copy_gsc_seen_2026-05-26.csv`

@@ -873,3 +873,20 @@ Initial Batch 019 targets:
   label change, or the shared `softenYmylCopy()` boundary;
 - keep slugs and URLs stable;
 - build-check, source/output-check, document, commit, then continue.
+
+Batch 019 implementation is complete, build-verified, and committed as
+`04eec9f88c`. Move to Batch 020 by scanning the remaining content-heavy
+families and shared labels that still produce unsupported YMYL/commercial
+wording.
+
+Initial Batch 020 targets:
+
+- inspect remaining direct matches in `src/pages` and `src/components` after
+  excluding explicit negated disclaimers and replacement-rule patterns;
+- prioritize `src/pages/tools/borrowing-power-quiz.astro`,
+  `src/pages/research/consumer-complaints.astro`, financial-wellness pages, and
+  any source-visible labels that still say recommendation/recommended;
+- decide whether variable/internal names should be left alone or renamed only
+  where they leak into markup, IDs, JSON-LD, or generated HTML;
+- keep URLs stable;
+- build-check, output/source-check, document, commit, then continue.
