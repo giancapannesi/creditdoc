@@ -42,7 +42,8 @@ function softenComparisonText(text: string): string {
     .replace(/zero upfront cost to get started/gi, 'no listed setup fee');
   return softenYmylCopy(locallySoftened)
     .replace(/\bmore sustainable and profile with trust signals to verify\b/gi, 'more sustainable profile with trust signals to verify')
-    .replace(/\bare relevant to your situation\b/gi, 'are relevant to your research');
+    .replace(/\bare relevant to your situation\b/gi, 'are relevant to your research')
+    .replace(/([.!?])\s+for national-access\b/g, '$1 For national-access');
 }
 
 const safeSummary = softenComparisonText(comparison.summary);
@@ -76,7 +77,8 @@ function lowestListedMonthlyPrice(lender: Lender): number | null {
 
 function monthlyPriceLabel(lender: Lender): string {
   const price = lowestListedMonthlyPrice(lender);
-  return price === null ? 'No listed monthly price' : `From ${formatPrice(price)}/mo`;
+  if (price === null) return 'No listed monthly price';
+  return price === 0 ? 'No monthly subscription listed' : `From ${formatPrice(price)}/mo`;
 }
 
 function normalizedBbbRating(lender: Lender): string {
@@ -105,6 +107,14 @@ function monthlyPriceFaqAnswer(): string {
 
   if (lenderAMonthlyPrice === null || lenderBMonthlyPrice === null) {
     return `The stored monthly-price fields are incomplete for this comparison. Current listed context: ${aContext}; ${bContext}. ${setupContext}`;
+  }
+
+  if (lenderAMonthlyPrice === 0 || lenderBMonthlyPrice === 0) {
+    if (lenderAMonthlyPrice === 0 && lenderBMonthlyPrice === 0) {
+      return `Neither profile lists a recurring monthly subscription fee. This does not mean all borrowing, card, usage, interest, or per-transaction costs are free. Current listed context: ${aContext}; ${bContext}. ${setupContext}`;
+    }
+
+    return `Only one profile lists a recurring monthly subscription fee. This does not make the other profile cost-free; review borrowing, card, usage, interest, and per-transaction costs before comparing total cost. Current listed context: ${aContext}; ${bContext}. ${setupContext}`;
   }
 
   if (lenderAMonthlyPrice < lenderBMonthlyPrice) {

@@ -33,7 +33,12 @@ function lowestListedMonthlyPrice(lender: Lender): number | null {
 }
 
 function formatMonthlyPrice(price: number | null): string {
-  return price === null ? 'No listed monthly price' : `From ${formatPrice(price)}/mo`;
+  if (price === null) return 'No listed monthly price';
+  return price === 0 ? 'No monthly subscription listed' : `From ${formatPrice(price)}/mo`;
+}
+
+function comparableMonthlyPrice(price: number | null): number | null {
+  return price !== null && price > 0 ? price : null;
 }
 
 function ratingWinner(a: number, b: number): 'a' | 'b' | 'tie' {
@@ -66,9 +71,11 @@ function normalizedBbbRating(rating: string): string {
 
 const lowestPriceA = lowestListedMonthlyPrice(lenderA);
 const lowestPriceB = lowestListedMonthlyPrice(lenderB);
+const comparablePriceA = comparableMonthlyPrice(lowestPriceA);
+const comparablePriceB = comparableMonthlyPrice(lowestPriceB);
 
 const winners = {
-  price: lowestPriceA === null || lowestPriceB === null ? 'tie' as const : priceWinner(lowestPriceA, lowestPriceB),
+  price: comparablePriceA === null || comparablePriceB === null ? 'tie' as const : priceWinner(comparablePriceA, comparablePriceB),
   setup: priceWinner(lenderA.pricing.setup_fee, lenderB.pricing.setup_fee),
   bbb: bbbWinner(normalizedBbbRating(lenderA.company_info.bbb_rating), normalizedBbbRating(lenderB.company_info.bbb_rating)),
   guarantee: lenderA.pricing.money_back_guarantee === lenderB.pricing.money_back_guarantee ? 'tie' as const : (lenderA.pricing.money_back_guarantee ? 'a' as const : 'b' as const),
