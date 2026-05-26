@@ -229,6 +229,15 @@ function escapeHtml(text: string): string {
   return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+function softenLinkTitle(title: string): string {
+  return title
+    .replace(/\bBest\b/gi, 'Comparison')
+    .replace(/\bCheapest\b/gi, 'Lower-Cost')
+    .replace(/\bEasy Approval\b/gi, 'Approval Context')
+    .replace(/\bMoney Back Guarantee\b/gi, 'Refund Terms')
+    .replace(/\bGuarantee\b/gi, 'Terms');
+}
+
 function escapeRegex(str: string): string {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -291,7 +300,7 @@ function linkifyParagraph(
     if (linked.slice(start, end).some(Boolean)) continue;
 
     replacements.push([start, end,
-      `<a href="${ml.url}" class="text-primary font-semibold hover:underline" title="${escapeHtml(ml.title)}">${escapeHtml(match[0])}</a>`
+      `<a href="${ml.url}" class="text-primary font-semibold hover:underline" title="${escapeHtml(softenLinkTitle(ml.title))}">${escapeHtml(match[0])}</a>`
     ]);
     for (let i = start; i < end; i++) linked[i] = true;
     usedPhrases.add(lower);
