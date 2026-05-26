@@ -3153,6 +3153,68 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 096: Residual Guide, Review, Course, and Tool Claim Softening
+
+Date: 2026-05-26
+Implementation commit: `f073e71722` (`fix: soften residual guide and tool claim copy`)
+
+Scope:
+
+- `src/pages/credit-guide/[slug]/[category].astro`
+- `src/pages/review/[slug].astro`
+- `src/pages/courses/index.astro`
+- `src/pages/courses/credit-fundamentals/index.astro`
+- `src/pages/tools/borrowing-power-quiz.astro`
+- `src/utils/inline-linker.ts`
+
+What changed:
+
+- Reframed dynamic pawn-shop guide intro away from `without a credit check` and
+  immediate-cash language into collateral, fee, redemption, and item-recovery
+  verification context.
+- Reframed payday-alternative guide intro away from broad better-rate language
+  into listed cost, eligibility, repayment, and lower-cost context.
+- Removed `make an informed choice` from the dynamic guide fallback and replaced
+  it with stored Google rating context.
+- Replaced course meta descriptions' `No cost, no credit check` language with
+  `No payment or account application required`.
+- Reframed review-page secured-card cross-sell copy and button labels around
+  bureau reporting, deposits, fees, and eligibility profile context.
+- Reframed borrowing-power quiz urgent-need guidance from finding same-day or
+  next-day options to comparing funding-timing claims, fees, and repayment
+  terms.
+- Softened inline-link title metadata for no-credit-check card links to `Card
+  Eligibility Profiles`.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted raw-phrase scan returned no matches for `without a credit check`,
+  `you get cash immediately`, `make an informed choice`, `better rates than
+  traditional payday loans`, `No cost, no credit check`, `Several options
+  require no credit check`, `For urgent needs, look for same-day or next-day
+  funding options`, `No Credit Check Cards`, or `Best No Credit Check Cards`
+  across the batch-owned source files, rendered course pages, SSR worker route
+  modules, inline-linker worker chunk, and borrowing-power client bundle.
+- Positive scan confirmed replacement language in rendered course pages, SSR
+  worker modules, source files, inline-linker worker chunk, and the
+  borrowing-power client bundle.
+- Production spot checks returned HTTP 200 for `/`, `/courses/`,
+  `/courses/credit-fundamentals/`, `/tools/borrowing-power-quiz/`,
+  `/credit-guide/amarillo-tx/`, `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- The route names under `/best/best-no-credit-check-cards/` were not changed;
+  this batch only softened labels, metadata, and rendered guidance around those
+  links.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 093: Static Support Authority and Safety Claim Softening
 
 Date: 2026-05-26
