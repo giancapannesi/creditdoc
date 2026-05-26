@@ -17,6 +17,7 @@ import {
   getAllStatesRuntime,
   type RuntimeLenderEnv,
 } from '../../lib/db';
+import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 import type { Lender } from '../../utils/data';
 
 // CDM-REV Phase 5.1 [OBJ-1] — SSR (no rebuild). DB row update at T+0 →
@@ -193,6 +194,14 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
   if (qRes?.ok) relatedQuestions = await qRes.json();
   if (bRes?.ok) relatedPosts = await bRes.json();
 }
+const displayRelatedQuestions = relatedQuestions.map((q) => ({
+  ...q,
+  title: softenEducationalTeaserCopy(q.title.replace(/ \| CreditDoc$/, '')),
+}));
+const displayRelatedPosts = relatedPosts.map((post) => ({
+  ...post,
+  title: softenEducationalTeaserCopy(post.title),
+}));
 ---
 
 <BaseLayout title={title} description={description} jsonLd={jsonLd}>
@@ -532,7 +541,7 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
     <GlossaryAppendix terms={glossaryTerms} />
 
     <!-- Related Questions -->
-    {relatedQuestions.length > 0 && (
+    {displayRelatedQuestions.length > 0 && (
       <section class="mt-10">
         <div class="glass-card p-6">
           <div class="flex items-center justify-between mb-4">
@@ -545,13 +554,13 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
             Get answers to frequently asked questions about financial services in {stateInfo.name}.
           </p>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {relatedQuestions.map(q => (
+            {displayRelatedQuestions.map(q => (
               <a
                 href={`/answers/${q.slug}/`}
                 class="glass-card p-4 block hover:border-primary transition-colors group"
               >
                 <span class="text-sm font-medium text-text group-hover:text-primary transition-colors">
-                  {q.title.replace(/ \| CreditDoc$/, '')}
+                  {q.title}
                 </span>
               </a>
             ))}
@@ -561,7 +570,7 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
     )}
 
     <!-- Related Blog Posts -->
-    {relatedPosts.length > 0 && (
+    {displayRelatedPosts.length > 0 && (
       <section class="mt-6">
         <div class="glass-card p-6">
           <div class="flex items-center justify-between mb-4">
@@ -571,7 +580,7 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
             <a href="/blog/" class="text-sm text-primary hover:underline">Browse all articles &rarr;</a>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {relatedPosts.map(post => (
+            {displayRelatedPosts.map(post => (
               <a
                 href={`/blog/${post.slug}/`}
                 class="glass-card p-4 block hover:border-primary transition-colors group"
