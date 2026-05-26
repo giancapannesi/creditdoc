@@ -1194,3 +1194,36 @@ Notes:
   narrow directory listings without making a recommendation-style promise.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 049: Homepage Filter Heading
+
+Date: 2026-05-26
+Implementation commit: `9048dab61a` (`feat: soften homepage filter heading`)
+
+Scope:
+
+- `src/components/FilterBar.astro`
+
+What changed:
+
+- Reframed the homepage filter heading from `Find the Right Service for You` to
+  `Find Service Profiles`.
+- Preserved the already-softened helper copy and all filter interactions.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and generated homepage scans confirmed `Find Service Profiles` and
+  were clean for `Find the Right Service for You`.
+- `git diff --check` passed.
+
+Notes:
+
+- This completes the first pass over the homepage filter’s recommendation-like
+  heading/helper language.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
