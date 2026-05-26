@@ -69,7 +69,7 @@ const relatedListicles = (relatedListiclesRaw ?? []).slice(0, 3).map((row) => {
   const body = (row.body_inline ?? {}) as Record<string, unknown>;
   return {
     slug: row.slug,
-    title: row.title || (body.title as string) || row.slug,
+    title: softenEducationalTeaserCopy(row.title || (body.title as string) || row.slug),
     category: row.category,
   };
 });
