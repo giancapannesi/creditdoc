@@ -1697,3 +1697,46 @@ Notes:
 - This continues the central-helper strategy from Batches 059 and 060.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 062: Glossary Advice Copy
+
+Date: 2026-05-26
+Implementation commit: `e3fffb9f50` (`feat: soften glossary advice copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Broadened `softenGlossaryCopy()` for glossary definitions, why-it-matters
+  blocks, and examples already routed through the helper on `/glossary/`.
+- Softened direct/advice-like glossary phrases around checking reports, credit
+  freeze protection, soft-inquiry shopping, balance-transfer payoff timing,
+  minimum-payment descriptions, FCRA/FDCPA/TILA legal-action phrasing, usury
+  repayment, FHA MIP, and mortgage refinance break-even framing.
+- Preserved glossary records, anchors, JSON-LD term URLs, route structure, and
+  page templates.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- `git diff --check` passed.
+- Generated `dist/glossary/index.html` confirmed targeted raw phrases were
+  removed and representative softened glossary copy was present.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`, `/categories/fintech/`,
+  `/financial-wellness/`, `/glossary/`, `/sitemap-index.xml`, and
+  `/robots.txt`.
+
+Notes:
+
+- This is a central helper change only; no source glossary records or URL paths
+  were changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
