@@ -3028,6 +3028,61 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 090: Comparison Pricing and Credibility Claim Softening
+
+Date: 2026-05-26
+Implementation commit: `bbeb0116ea` (`fix: soften comparison pricing and credibility claims`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared safe-copy replacements for generated comparison fragments that
+  framed pricing, savings, premium cost, perfect ratings, industry ranges,
+  transparency, free/no-cost access, dispute timing, mortgage results,
+  credibility, and refund protection as broad claims.
+- Replaced `significantly lower pricing`, `saving clients`, `premium pricing`,
+  `perfect 5.0/5`, `industry ceiling`, `transparency concerns`, `genuinely
+  comprehensive`, `without paying anything`, `at no cost`, `same-day dispute
+  filing`, `mortgage-focused results`, `verified credibility`, and
+  `outcome-based refund protection` with listed/stored profile-context wording.
+- Preserved source comparison records, source lender records, pricing values,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged JSON changes
+  affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for targeted raw phrases:
+  `significantly lower pricing`, `saving clients`, `premium pricing`, `perfect
+  5.0/5`, `industry ceiling`, `transparency concerns`, `genuinely
+  comprehensive`, `without paying anything`, `at no cost`, `same-day dispute
+  filing`, `mortgage-focused results`, `verified credibility`, or
+  `outcome-based refund protection`.
+- Targeted rendered checks confirmed replacement language on
+  `/compare/credit-supreme-credit-repair-miami--vs-continental-credit/`,
+  `/compare/dickmann-tax-group-vs-american-debt-relief/`,
+  `/compare/dovly-vs-wallethub/`, and
+  `/compare/ecreditadvisor-vs-credit-saint/`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/credit-supreme-credit-repair-miami--vs-continental-credit/`,
+  `/compare/dickmann-tax-group-vs-american-debt-relief/`,
+  `/compare/dovly-vs-wallethub/`, `/compare/ecreditadvisor-vs-credit-saint/`,
+  `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 088: Comparison Review and Pricing Claim Softening
 
 Date: 2026-05-26
