@@ -265,6 +265,7 @@ export function softenEducationalTeaserCopy(text: string): string {
 
 export function softenGlossaryCopy(text: string): string {
   return softenEducationalTeaserCopy(text)
+    .replace(/\bworks best when\b/gi, 'is generally most useful when')
     .replace(/\bYou should check all three reports\b/gi, 'It can be useful to check all three reports')
     .replace(/\bthe strongest protection against identity theft\b/gi, 'one of the strongest consumer protections against identity theft')
     .replace(/\bshopping around is safe\b/gi, 'comparison shopping can be done without a score impact')
