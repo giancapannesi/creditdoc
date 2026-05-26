@@ -3081,3 +3081,61 @@ Notes:
   records changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 089: Comparison Value and Eligibility Claim Softening
+
+Date: 2026-05-26
+Implementation commit: `95ebf947a7` (`fix: soften comparison value and eligibility claims`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared safe-copy replacements for comparison summaries and winner notes
+  that framed long-term value, credit-line potential, monitoring cost, and
+  qualification as broad user-fit claims.
+- Replaced `provide/provides better long-term value` and `better long-term
+  value` with listed long-term comparison context.
+- Replaced `for users who can qualify` and `users who can qualify` with
+  eligibility-comparison context.
+- Replaced `free CreditWise monitoring` with `CreditWise monitoring with no
+  listed annual fee`.
+- Replaced `potential for higher credit limits than deposit amounts` with
+  listed potential credit-line context beyond deposit amounts.
+- Replaced `established reputation` and `lacks critical compliance disclosures`
+  with stored reputation signals and listed-disclosure context.
+- Replaced `for consumers comparing profile details,` with stored-comparison
+  context and added sentence-start capitalization cleanup.
+- Preserved source comparison records, source lender records, pricing values,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged JSON changes
+  affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for targeted raw phrases:
+  `better long-term value`, `users who can qualify`, `for users who can
+  qualify`, `free CreditWise monitoring`, `potential for higher credit limits
+  than deposit amounts`, `for consumers comparing profile details,`,
+  `. for consumers comparing profile details`, `. in this stored comparison`,
+  `established reputation`, or `lacks critical compliance disclosures`.
+- Targeted rendered checks confirmed replacement language on
+  `/compare/self-credit-builder-vs-capital-one-platinum-secured/` and
+  `/compare/xperia-credit-solutions-vs-lenders-choice-credit-solutions/`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/self-credit-builder-vs-capital-one-platinum-secured/`,
+  `/compare/xperia-credit-solutions-vs-lenders-choice-credit-solutions/`,
+  `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
