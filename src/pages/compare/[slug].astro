@@ -91,7 +91,8 @@ function bbbBadgeLabel(lender: Lender): string {
 function bbbFaqLabel(lender: Lender): string {
   const rating = normalizedBbbRating(lender);
   if (!rating || rating === 'N/A') return `${lender.name} does not have a stored BBB rating in this profile`;
-  return `${lender.name} has a ${rating} BBB rating${lender.company_info.bbb_accredited ? ' (accredited)' : ''}`;
+  const article = rating === 'NR' || rating.startsWith('A') || rating.startsWith('F') ? 'an' : 'a';
+  return `${lender.name} has ${article} ${rating} BBB rating${lender.company_info.bbb_accredited ? ' (accredited)' : ''}`;
 }
 
 const lenderAMonthlyPrice = lowestListedMonthlyPrice(lenderA);
