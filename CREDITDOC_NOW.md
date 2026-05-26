@@ -69,13 +69,23 @@ Sitewide upgrade program restarted:
   `/compare/` URLs. Batch 004 applies to every generated comparison page.
 - Batch 004 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_004_notes_2026-05-26.md`
+- Batch 005 completed locally and build-verified:
+  `/categories/{category}/` template now includes an `Explore {category}
+  Locally` authority path and `Research the Next Step` cards.
+- Category hubs now connect to example local city-category pages for Amarillo,
+  Austin, and Charlotte, plus answer hub, state lending-rule hub, CFPB complaint
+  data context, and CreditDoc tools.
+- Local category inventory: 19 `categories` rows; latest GSC pull saw 14
+  `/categories/` URLs. Batch 005 applies to every SSR category page.
+- Batch 005 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_005_notes_2026-05-26.md`
 
 Immediate next:
 
-1. Commit Batch 004 with only the comparison template and resume-cursor docs.
-2. Continue to Batch 005: upgrade category pages so category hubs connect into
-   local city-category pages, answer clusters, tools, and research/methodology
-   pages with advisory-neutral wording.
+1. Commit Batch 005 with only the category template and resume-cursor docs.
+2. Continue to Batch 006: upgrade state/state lending-law pages so state hubs
+   connect into local guide pages, relevant categories, answer clusters, and
+   research/methodology pages with advisory-neutral wording.
 3. Keep every batch scoped, build-verified, documented, and committed before
    starting the next one.
 

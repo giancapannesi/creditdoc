@@ -76,6 +76,37 @@ const categoryWellnessGuides = wellnessRows.map((g: any) => {
 
 const isLoanCategory = category.filter_type === 'loan';
 const topLenders = lenders.slice(0, 10);
+const localGuideCities = [
+  { label: 'Amarillo, TX', slug: 'amarillo-tx' },
+  { label: 'Austin, TX', slug: 'austin-tx' },
+  { label: 'Charlotte, NC', slug: 'charlotte-nc' },
+];
+const localCategoryLinks = localGuideCities.map(city => ({
+  ...city,
+  href: `/credit-guide/${city.slug}/${categorySlug}/`,
+}));
+const categoryActionLinks = [
+  {
+    href: '/answers/',
+    label: 'Borrower questions',
+    body: 'Read CreditDoc answers that explain common finance terms, risks, and next steps.',
+  },
+  {
+    href: '/state/',
+    label: 'State lending rules',
+    body: 'Check state-level lending-law pages before relying on a general category page.',
+  },
+  {
+    href: '/research/consumer-complaints/',
+    label: 'Complaint data context',
+    body: 'Understand how public CFPB complaint data can support provider research.',
+  },
+  {
+    href: '/tools/',
+    label: 'CreditDoc tools',
+    body: 'Use calculators and quizzes to frame the numbers before contacting a provider.',
+  },
+];
 
 const jsonLd = [
   {
@@ -147,6 +178,38 @@ Astro.response.headers.set('x-cdm-slug', categorySlug || '');
     <div class="max-w-3xl">
       <h1 class="text-2xl sm:text-3xl font-bold text-text">{category.name}</h1>
       <p class="mt-3 text-muted leading-relaxed" set:html={linkedDescription || category.description} />
+    </div>
+  </section>
+
+  <!-- Category Authority Paths -->
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <div>
+          <h2 class="text-lg font-bold text-text mb-2">Explore {category.name} Locally</h2>
+          <p class="text-sm text-muted leading-relaxed">
+            Use this category hub with local city guides, state lending rules, answer pages, and CreditDoc data explainers. Listings are directory context, not a recommendation, approval prediction, price quote, or licensing determination.
+          </p>
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {localCategoryLinks.map(city => (
+              <a href={city.href} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+                {category.name} in {city.label}
+              </a>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h2 class="text-lg font-bold text-text mb-2">Research the Next Step</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {categoryActionLinks.map(link => (
+              <a href={link.href} class="rounded-lg border border-border bg-bg-alt p-3 transition-colors hover:border-primary">
+                <span class="block text-sm font-semibold text-primary">{link.label}</span>
+                <span class="mt-1 block text-xs leading-relaxed text-muted">{link.body}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 

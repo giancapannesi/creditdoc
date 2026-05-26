@@ -564,7 +564,7 @@ Immediate graph build batch:
    - Local inventory: 35 answer rows; latest GSC pull saw 13 `/answers/` URLs.
    - Keep language advisory-neutral: no approval prediction, pricing promise,
      licensing determination, or recommendation claim.
-4. Sitewide Page Upgrade Batch 004 is complete locally and build-verified:
+4. Sitewide Page Upgrade Batch 004 is complete and committed:
    - `/compare/{slug}/` template now adds a `Check the Context Before You
      Contact a Company` graph path.
    - Comparison pages connect to both lender profiles, category context, local
@@ -575,11 +575,19 @@ Immediate graph build batch:
      URLs.
    - Residual risk: stored `comparison.winner_reason` copy still needs a later
      data-quality pass for assertive claims.
-5. Next Sitewide Page Upgrade Batch 005:
-   - Upgrade `/categories/{category}/` pages so category hubs connect into local
-     city-category pages, answer clusters, tools, and research/methodology pages
-     with advisory-neutral wording.
-6. Keep every batch scoped, build-verified, documented, and committed without
+5. Sitewide Page Upgrade Batch 005 is complete locally and build-verified:
+   - `/categories/{category}/` template now adds an `Explore {category}
+     Locally` authority path.
+   - Category hubs connect into example local city-category pages, the answer
+     hub, state lending-rule hub, CFPB complaint-data context, and CreditDoc
+     tools.
+   - Local inventory: 19 category rows; latest GSC pull saw 14 `/categories/`
+     URLs.
+6. Next Sitewide Page Upgrade Batch 006:
+   - Upgrade `/state/` and `/state/{slug}/lending-laws/` pages so state hubs
+     connect into local guide pages, relevant categories, answer clusters, and
+     research/methodology pages with advisory-neutral wording.
+7. Keep every batch scoped, build-verified, documented, and committed without
    getting pulled back into unrelated cleanup.
 
 Sitewide upgrade program:
