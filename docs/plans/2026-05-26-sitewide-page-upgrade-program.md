@@ -3028,6 +3028,64 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 093: Static Support Authority and Safety Claim Softening
+
+Date: 2026-05-26
+Implementation commit: `58332ce3a0` (`fix: soften support page authority claims`)
+
+Scope:
+
+- `src/content/categories.json`
+- `src/pages/about.astro`
+- `src/pages/about/creditdoc-data.astro`
+- `src/pages/faq.astro`
+- `src/pages/financial-wellness/index.astro`
+
+What changed:
+
+- Softened the homepage Payday Alternatives category copy from broad safety,
+  speed, and cost assertions to comparison-oriented language around advertised
+  APR caps, eligibility, fees, speed, and repayment terms.
+- Replaced About-page authority labels including `Expertise`, `Verified
+  Pricing`, `Consumer Finance Specialist`, and `deep expertise` with research
+  and direct-experience language.
+- Reframed the data methodology page from `verified company information` and
+  `lowest advertised monthly cost` to public/provider-source information and
+  lowest listed monthly cost.
+- Replaced FAQ language around `verified monthly where available` and
+  `convenience and expertise` with reviewed-monthly and process-support wording.
+- Replaced the Financial Wellness byline section heading and specialist wording
+  with finance-background and research-lead language.
+
+Verification:
+
+- `git diff --check` passed.
+- Initial `npm run build` attempt hit the known non-fatal city-guide timeout
+  and injected only 16,057 SSR route URLs; that build was discarded for
+  verification.
+- Follow-up `npm run build` passed with 124 city guides, 2,232 city-category
+  sub-pages, and 18,413 SSR route URLs; postbuild sitemap/robots check passed.
+- Rendered targeted raw-phrase scan returned no matches for `Safer
+  alternatives`, `same speed, far less cost`, `Our Mission, Team & Expertise`,
+  `Verified Pricing`, `Consumer Finance Specialist`, `deep expertise`, `Written
+  by Finance Professionals`, `consumer finance specialist`, `verified company
+  information`, `lowest advertised monthly cost`, `verified monthly where
+  available`, or `convenience and expertise`.
+- Positive rendered checks confirmed replacement language on `/`, `/about/`,
+  `/about/creditdoc-data/`, `/faq/`, and `/financial-wellness/`.
+- Production spot checks returned HTTP 200 for `/`, `/about/`,
+  `/about/creditdoc-data/`, `/faq/`, `/financial-wellness/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Static support/homepage copy cleanup; no comparison records or lender records
+  changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+- Workpack notes:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_093_notes_2026-05-26.md`.
+
 ### Batch 091: Comparison Proof, Pricing-Cap, and Refund Claim Softening
 
 Date: 2026-05-26
