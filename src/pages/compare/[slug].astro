@@ -30,15 +30,19 @@ function softenComparisonText(text: string): string {
   const locallySoftened = text
     .replace(/money-back guarantees/gi, 'listed refund terms')
     .replace(/money-back guarantee/gi, 'listed refund term')
-    .replace(/\bwins\b/gi, 'is flagged')
+    .replace(/\bwins\b/gi, 'is highlighted')
     .replace(/\bthe better value\b/gi, 'the lower listed-cost comparison')
+    .replace(/\bthe better option\b/gi, 'the profile to compare')
+    .replace(/\bbetter option\b/gi, 'profile to compare')
     .replace(/\bbest value\b/gi, 'lower listed-cost profile')
     .replace(/\bbest\b/gi, 'notable')
     .replace(/effective credit repair/gi, 'credit repair services')
     .replace(/without overpaying/gi, 'with listed pricing context')
     .replace(/comparable effectiveness/gi, 'comparable profile fields')
     .replace(/zero upfront cost to get started/gi, 'no listed setup fee');
-  return softenYmylCopy(locallySoftened);
+  return softenYmylCopy(locallySoftened)
+    .replace(/\bmore sustainable and profile with trust signals to verify\b/gi, 'more sustainable profile with trust signals to verify')
+    .replace(/\bare relevant to your situation\b/gi, 'are relevant to your research');
 }
 
 const safeSummary = softenComparisonText(comparison.summary);
@@ -241,11 +245,11 @@ const jsonLd = [
     <h2 class="text-lg font-bold text-text mb-4">How to Compare These Two</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <DiagnosisCard
-        diagnosis={`Review ${lenderA.name} if these stored profile signals match your needs: ${lenderASignals}. Profile signal to verify: ${lenderAStrength}.`}
+        diagnosis={`Review ${lenderA.name} if these stored profile signals are relevant to your research: ${lenderASignals}. Profile signal to verify: ${lenderAStrength}.`}
         lenderName={lenderA.name}
       />
       <DiagnosisCard
-        diagnosis={`Review ${lenderB.name} if these stored profile signals match your needs: ${lenderBSignals}. Profile signal to verify: ${lenderBStrength}.`}
+        diagnosis={`Review ${lenderB.name} if these stored profile signals are relevant to your research: ${lenderBSignals}. Profile signal to verify: ${lenderBStrength}.`}
         lenderName={lenderB.name}
       />
     </div>
