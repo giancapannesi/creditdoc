@@ -2078,3 +2078,44 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_020_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_020_remaining_state_tool_copy_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 021
+
+Batch 021 implementation committed as `421bd7122f` for shared YMYL copy boundary
+expansion:
+
+- `src/utils/safe-copy.ts`
+- `src/components/LenderCard.astro`
+- `src/components/TopPicksTable.astro`
+- `src/pages/compare/[slug].astro`
+
+Changes:
+
+- Expanded `softenYmylCopy()` for additional raw content phrases around
+  satisfaction guarantees, guaranteed results, remove-negative-item claims,
+  better-value claims, top-ranked profile signals, recommendation language, and
+  professional recommendations.
+- Moved lender card short descriptions and profile signals onto the shared
+  display-time softening boundary.
+- Moved top-picks profile signals onto the shared boundary.
+- Wrapped compare summaries, research notes, FAQ answers, and JSON-LD text with
+  the shared boundary after comparison-specific softening.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,413 SSR route URLs because an unrelated unstaged
+  `src/content/wellness-guides.json` change added two generated wellness URLs;
+  that file was not staged or committed in Batch 021.
+- Build generated 124 city guides plus 2,232 city-category sub-pages.
+- Postbuild sitemap/robots conflict check passed.
+- Targeted generated-output scan was clean across representative compare and
+  browse pages that previously exposed the raw phrases.
+- Source scan found only explicit replacement-rule patterns in the touched
+  files.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_021_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_021_shared_ymyl_boundary_gsc_seen_2026-05-26.csv`

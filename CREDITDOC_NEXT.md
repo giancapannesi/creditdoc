@@ -907,3 +907,22 @@ Initial Batch 021 targets:
   churn many records without improving user-visible quality;
 - keep URLs stable;
 - build-check, output/source-check, document, commit, then continue.
+
+Batch 021 implementation is complete, build-verified, and committed as
+`421bd7122f`. Move to Batch 022 by separating source-data cleanup from
+display-time softening and checking the remaining static content areas that are
+not yet covered by `softenYmylCopy()`.
+
+Initial Batch 022 targets:
+
+- scan generated `/trends/`, `/financial-wellness/`, `/resources/`, `/courses/`,
+  `/best/`, and home/support pages for remaining visible unsupported claims;
+- inspect `AffiliateSidebar`, listicle pages, course CTA content, glossary
+  examples, and category/listicle content sources to decide where raw copy
+  should be edited versus softened at render time;
+- preserve explicit legal/scam examples when they are clearly warnings rather
+  than CreditDoc claims;
+- keep URLs stable and do not stage the unrelated
+  `src/content/wellness-guides.json` change unless the user explicitly confirms
+  it is intended for this batch;
+- build-check, output/source-check, document, commit, then continue.
