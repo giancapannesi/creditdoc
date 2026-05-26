@@ -8,7 +8,7 @@ import { shapeBodyInlineToLender, getGlossaryTermsForContextRuntime } from '../.
 import { createLinker } from '../../utils/inline-linker';
 import type { Lender } from '../../utils/data';
 import categoriesData from '../../content/categories.json';
-import { softenYmylCopy } from '../../utils/safe-copy';
+import { softenEducationalTeaserCopy, softenYmylCopy } from '../../utils/safe-copy';
 
 const env = (Astro.locals as any).runtime?.env;
 const { category: categorySlug } = Astro.params;
@@ -79,8 +79,8 @@ const categoryWellnessGuides = wellnessRows.map((g: any) => {
   const body = (g.body_inline ?? {}) as Record<string, any>;
   return {
     slug: g.slug,
-    title: g.title,
-    description: (body.description as string) || (body.excerpt as string) || '',
+    title: softenEducationalTeaserCopy(g.title),
+    description: softenEducationalTeaserCopy((body.description as string) || (body.excerpt as string) || ''),
     category_label: (body.category_label as string) || (g.category as string) || '',
   };
 });

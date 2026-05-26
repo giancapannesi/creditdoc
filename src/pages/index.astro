@@ -6,6 +6,7 @@ import CategoryCard from '../components/CategoryCard.astro';
 import LenderNameSearch from '../components/LenderNameSearch.astro';
 import { getAllLenders, getCategories, getSpecials, getWellnessGuides } from '../utils/data-build';
 import { formatPrice } from '../utils/data';
+import { softenEducationalTeaserCopy } from '../utils/safe-copy';
 
 const lenders = getAllLenders();
 const categories = getCategories();
@@ -400,8 +401,8 @@ const jsonLd = [
             </span>
             <span class="text-xs text-muted">{guide.read_time}</span>
           </div>
-          <h3 class="text-sm font-semibold text-text group-hover:text-primary transition-colors leading-snug">{guide.title}</h3>
-          <p class="mt-1.5 text-xs text-muted leading-relaxed line-clamp-2">{guide.description}</p>
+          <h3 class="text-sm font-semibold text-text group-hover:text-primary transition-colors leading-snug">{softenEducationalTeaserCopy(guide.title)}</h3>
+          <p class="mt-1.5 text-xs text-muted leading-relaxed line-clamp-2">{softenEducationalTeaserCopy(guide.description)}</p>
         </a>
       ))}
     </div>
