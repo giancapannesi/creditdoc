@@ -971,3 +971,22 @@ Initial Batch 024 targets:
 - continue excluding unrelated `src/content/wellness-guides.json` unless the
   user explicitly confirms it belongs in this cleanup;
 - build-check, output/source-check, document, commit, then continue.
+
+Batch 024 implementation is complete, build-verified, and committed as
+`35683faede`. Move to Batch 025 by scanning remaining high-traffic support
+pages and dynamic templates for residual YMYL-risk labels that are not already
+covered by the shared copy boundary.
+
+Initial Batch 025 targets:
+
+- scan homepage-adjacent static pages, research pages, tools, resources,
+  privacy/disclaimer/about pages, and generated trend/review samples for
+  remaining visible unsupported best/top/recommendation/guarantee, approval,
+  licensing, safety, matching, and outcome wording;
+- inspect whether remaining matches are route slugs, explicit disclaimers,
+  warning examples, raw provider names, or visible claims that need softening;
+- preserve strategic `/best/.../` URLs and existing slugs unless a real broken
+  link or legal-risk issue is found;
+- continue excluding unrelated `src/content/wellness-guides.json` unless the
+  user explicitly confirms it belongs in this cleanup;
+- build-check, output/source-check, document, commit, then continue.

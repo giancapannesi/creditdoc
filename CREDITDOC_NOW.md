@@ -2206,3 +2206,44 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_023_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_023_listicle_quiz_crosslinks_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 024
+
+Batch 024 implementation committed as `35683faede` for homepage and research
+support copy cleanup:
+
+- `src/pages/index.astro`
+- `src/pages/research/most-responsive-consumer-finance-providers-2026.astro`
+- `src/pages/research/consumer-complaints.astro`
+- `src/pages/resources/index.astro`
+
+Changes:
+
+- Reframed homepage `Independent Reviews` copy as independent research and
+  comparison context, without implying CreditDoc reviews as a lender/broker.
+- Softened homepage category and business-finance blurbs away from rebuild,
+  top, startup-friendly, flexible-cash, and direct funding outcome language.
+- Rephrased research-report language from matching/ranking/strong records to
+  linked provider profiles, notable public records, and report context.
+- Reframed consumer-complaint support copy from `better bet`/ratings language
+  to documented relief context and profile signals.
+- Softened resources copy from choosing tools to comparing tools.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,413 SSR route URLs because an unrelated unstaged
+  `src/content/wellness-guides.json` change added two generated wellness URLs;
+  that file was not staged or committed in Batch 024.
+- Build generated 124 city guides plus 2,232 city-category sub-pages.
+- Postbuild sitemap/robots conflict check passed.
+- Targeted old-copy scan was clean across the touched source files and
+  generated homepage, resources, and responsive-provider research pages.
+- The complaint research page is SSR-only (`prerender = false`), so generated
+  verification used source-level checks for that route.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_024_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_024_homepage_research_support_copy_gsc_seen_2026-05-26.csv`
