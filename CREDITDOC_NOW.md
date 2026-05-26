@@ -4,6 +4,50 @@
 
 ---
 
+## 2026-05-26 — Noindex Cleanup Batch 009
+
+**Status: local verification passed; deploy held until concurrent Batch 001
+normalization files are settled.**
+
+Archived 15 zero-impression, raw, no-website, low-quality noindex profiles:
+
+- `1-checks-cashed`
+- `12-30-financial`
+- `123-credit-debt-counseling`
+- `123fixcredit`
+- `2-raise-my-credit-score`
+- `2020-vision-credit-repair`
+- `2nd-chance-budget-debt`
+- `44-financial-corporation`
+- `50kcreditsystem`
+- `5m-capital`
+- `60-percent-debt-settlement`
+- `866-get-paid`
+- `8fiftycredit`
+- `accelerateyourcredit`
+- `advance-case-lending`
+
+Verification completed:
+
+- SQLite backup:
+  `data/backups/creditdoc_before_noindex_drop_batch_009_20260526T111210Z.sqlite`
+- Workpack records:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Noindex_Review_2026-05-26/noindex_drop_batch_009_2026-05-26.csv`
+  and
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Noindex_Review_2026-05-26/noindex_dropped_archive_batch_009_2026-05-26.json`
+- Local DB and exported JSON agree:
+  `processing_status=archived`,
+  `review_status=archived_low_quality_no_website`,
+  `no_index=true`, `quarantine_reason=low_quality_no_website`.
+- No unresolved Supabase retry rows for the 15 touched slugs.
+- `npm run build` passed.
+- Exact built static scan found zero `/review/<slug>/` references for the 15
+  touched slugs.
+
+Do not deploy Batch 009 until the concurrent dirty Batch 001 normalization files
+are committed or cleared, so the deploy does not accidentally include unrelated
+local changes.
+
 ## 2026-05-26 — Noindex Cleanup Batches 006-007
 
 **Status: deployed and live-verified. Worktree clean after commit.**

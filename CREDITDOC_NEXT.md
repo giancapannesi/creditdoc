@@ -193,13 +193,19 @@ Latest completed state:
 
 Continue next:
 
-1. Keep resolving noindex records by quality gate: reinstate genuine finance
+1. Finish Batch 009 release once the concurrent Batch 001 normalization files
+   are committed or cleared:
+   - deploy via `./deploy.sh`;
+   - live-check all 15 Batch 009 review URLs return `404`;
+   - confirm live sitemaps do not reference those 15 review URLs;
+   - commit any final documentation if the deploy adds a Worker version.
+2. Keep resolving noindex records by quality gate: reinstate genuine finance
    profiles with real value; archive/drop rubbish, wrong-vertical, blank, or
    unsafe pages.
-2. Prioritize obvious rubbish/wrong-vertical clusters before weak finance pages.
-3. For real lenders with real websites/regulatory data, fix/enrich instead of
+3. Prioritize obvious rubbish/wrong-vertical clusters before weak finance pages.
+4. For real lenders with real websites/regulatory data, fix/enrich instead of
    dropping.
-4. End every section with:
+5. End every section with:
    - `npm run build`
    - exact built reference scan for touched `/review/<slug>/` paths
    - deploy via `./deploy.sh`
