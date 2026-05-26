@@ -4,6 +4,69 @@
 
 ---
 
+## 2026-05-26 — Noindex Cleanup Batches 006-007
+
+**Status: deployed and live-verified. Worktree clean after commit.**
+
+Batch 006 archived 10 title/title-service wrong-vertical profiles:
+
+- `stewart-title-of-oklahoma-inc-okc-title`
+- `citywide-title-corporation-chicago-il`
+- `definitive-title`
+- `empire-title-of-colorado-springs`
+- `fidelity-national-title`
+- `pennsylvania-land-titles`
+- `titlesmart`
+- `warranty-title`
+- `signloc-title-escrow`
+- `title-exchange-of-east-point`
+
+Batch 007 archived 12 hard auto/vehicle/car-dealer wrong-vertical profiles:
+
+- `alamo-city`
+- `american-pride`
+- `ascent`
+- `bachman-buys`
+- `battery-employees`
+- `buyright`
+- `byrider-colorado-springs`
+- `byrider-pittsburgh`
+- `byrider-san-antonio-west`
+- `chapman-speedway`
+- `hudson-pre-owned`
+- `napletons-aston-martin-chicago`
+
+Verification completed:
+
+- Local JSON, local SQLite, and Supabase were verified for Batch 007:
+  `processing_status=archived`, `review_status=archived_wrong_vertical`,
+  `no_index=true`, `quarantine_reason=wrong_vertical_auto_vehicle`.
+- `npm run build` passed after restoring `/city/` to `src/pages/city/index.astro`
+  and preserving the trends filter from commit `c40a3a3025`.
+- Static exact-path scan found no `/review/<slug>/` references for all 12 Batch
+  007 slugs.
+- `/trends/ascent/` is no longer generated and no longer appears in live
+  sitemaps.
+- Batch 006 deploy: Worker version `95c04a59-9fcf-442e-89a0-b14dd45e2959`.
+- Batch 007 deploy: Worker version `1d5be9ba-6f92-4125-8029-7393e086aad2`.
+- Live Batch 007 checks: all 12 review URLs return `404`; `/trends/ascent/`
+  returns `404`; live sitemaps have no references to the 12 review URLs or
+  `/trends/ascent/`.
+- Live smoke checks return `200` with no `noindex`: `/review/lexington-law/`,
+  `/categories/fintech/`, `/review/moneylion/`,
+  `/research/most-responsive-consumer-finance-providers-2026/`,
+  `/credit-guide/austin-tx/`, and `/city/`.
+
+Repo commits:
+
+- `93f38ad0a7` — archive title-service noindex cleanup batch.
+- `c40a3a3025` — verify report links and trend filtering.
+- `de5ccdea7f` — archive auto-vehicle noindex cleanup batch.
+
+Continue noindex cleanup in controlled batches only. Every batch must end with
+build verification, exact static reference scan, deploy via `./deploy.sh`, live
+URL checks, and live sitemap checks.
+
 ## 2026-05-18 — SEO FIXES BATCH + PRICING REMOVAL + AI COUNCIL
 
 **Status: 18 fixes shipped. Pricing stripped. Council rebuilt with real characters. FREEZE ON-PAGE CHANGES.**

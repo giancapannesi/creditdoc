@@ -177,6 +177,33 @@ Current project folder:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Noindex_Review_2026-05-26/`
 
+Latest completed state:
+
+- Batch 006 title/title-service wrong-vertical archive deployed and live-verified.
+- Batch 007 auto/vehicle/car-dealer wrong-vertical archive deployed and live-verified.
+- Latest production Worker version: `1d5be9ba-6f92-4125-8029-7393e086aad2`.
+- Latest commit: `de5ccdea7f data: archive auto-vehicle noindex cleanup batch`.
+- `npm run build` passed with 18,405 SSR route URLs injected and sitemap/robots
+  guards passing.
+- Live checks passed: all 12 Batch 007 review URLs are `404`; `/trends/ascent/`
+  is `404`; live sitemaps contain none of those URLs; normal smoke pages are
+  `200` without noindex.
+
+Continue next:
+
+1. Keep resolving noindex records by quality gate: reinstate genuine finance
+   profiles with real value; archive/drop rubbish, wrong-vertical, blank, or
+   unsafe pages.
+2. Prioritize obvious rubbish/wrong-vertical clusters before weak finance pages.
+3. For real lenders with real websites/regulatory data, fix/enrich instead of
+   dropping.
+4. End every section with:
+   - `npm run build`
+   - exact built reference scan for touched `/review/<slug>/` paths
+   - deploy via `./deploy.sh`
+   - live URL status checks for every touched page
+   - live sitemap checks
+
 Batch 001 completed and deployed 2026-05-26:
 
 - Archived 77 obvious wrong-vertical rows.
