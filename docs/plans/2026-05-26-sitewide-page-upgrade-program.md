@@ -990,3 +990,48 @@ Notes:
   files in this build.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 044: Inline Link Title Copy
+
+Date: 2026-05-26
+Implementation commit: `409fd29cc6` (`feat: soften inline link titles`)
+
+Scope:
+
+- `src/utils/inline-linker.ts`
+
+What changed:
+
+- Added a render-boundary title softener for inline money-link `title`
+  attributes.
+- Preserved existing `/best/` URLs, keyword matching, budgets, and visible
+  anchor text.
+- Reframed generated title attributes from strong comparative or eligibility
+  labels toward neutral comparison/context labels:
+  - `Best` -> `Comparison`
+  - `Cheapest` -> `Lower-Cost`
+  - `Easy Approval` -> `Approval Context`
+  - `Money Back Guarantee` -> `Refund Terms`
+  - `Guarantee` -> `Terms`
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Generated dist scan was clean for old high-risk inline-link title attributes:
+  `title="Best...`, `title="Cheapest...`, `title="Easy Approval...`, and
+  guarantee-style title attributes.
+- Built worker chunk contains the title-softening function, confirming the
+  runtime render path is updated.
+- `git diff --check` passed.
+
+Notes:
+
+- Raw link-map strings remain in source and compiled utility data because they
+  are internal map labels; the emitted anchor title attribute is softened at
+  render time.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
