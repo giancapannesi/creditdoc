@@ -730,6 +730,33 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 042: Homepage Quality Gate Comment
+
+Date: 2026-05-26
+Implementation commit: `c242b74355` (`chore: soften homepage quality gate comment`)
+
+Scope:
+
+- `src/pages/index.astro`
+
+What changed:
+
+- Reframed a non-rendered homepage source comment from `Verified providers
+  always qualify` to `Verified providers pass the quality gate`.
+
+Verification:
+
+- `git diff --check` passed for the touched file.
+- Targeted source scan was clean for `Verified providers always qualify` and
+  `qualify` in `src/pages/index.astro`.
+
+Notes:
+
+- No rendered output or calculator/page behavior changed; no full build was
+  required for this source-comment-only batch.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 033: Compare Profile Notes
 
 Date: 2026-05-26  
