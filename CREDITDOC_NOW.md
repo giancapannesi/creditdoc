@@ -1052,3 +1052,79 @@ CreditDoc lender/business onboarding drip disabled 2026-05-26:
 - During this change, 41 generated lender JSON diffs reappeared with the same
   export metadata churn pattern (`last_engine_run` / `brand_slug`). They were
   restored because the database remains the source of truth.
+
+Bottom-up local authority + CFPB responsiveness project 2026-05-26:
+
+- Jammi clarified the strategic reason for the city/small-town guide buildout:
+  CreditDoc is intentionally coming at incumbents from local and regional
+  markets they ignore, building a web of small-town/city guides, city-category
+  pages, lender/entity pages, state regulations, maps/directions, local help,
+  and question clusters.
+- Do not interpret city-guide velocity as generic doorway-page expansion. The
+  existing pages, e.g. `/credit-guide/amarillo-tx/`, include local context,
+  state regulations, maps/directions/entity links, HMDA/lender data, local
+  resources, and question-cluster links. This is a core moat, not a side quest.
+- Strategic model:
+  `research authority + state law pages + city guides + city/category pages + lender profiles + question clusters + tools/quizzes`.
+- A future artifact should document this as the **CreditDoc Local Authority
+  Graph** so the linking strategy remains explicit across sessions.
+- CFPB/data research already exists (`/research/consumer-complaints/`,
+  `/research/lending-transparency/`,
+  `/research/state-of-subprime-lending-2026/`, `/about/creditdoc-data/`,
+  `/trends/[slug]/`). The current gap is packaging and distribution, not raw
+  data availability.
+- New plan added:
+  `docs/plans/2026-05-26-cfpb-responsiveness-report.md`
+- Working title: **America's Most Responsive Consumer Finance Providers 2026**.
+  Use positive framing only. No "worst lender" or adversarial CFPB pages.
+- Goal: create an outreach-ready backlink/authority asset from CFPB complaint
+  response data with methodology, caveats, provider-friendly citation hooks,
+  press pitch, and internal links into the local authority graph.
+- Current build sequence: inspect regulator data, generate candidate ranking
+  CSV, manually review duplicates/mismatches, finalize scoring, then build the
+  public research page and outreach assets.
+- First candidate CSVs generated:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/`
+- Initial candidate set: 131 deduped CFPB/provider rows after
+  `match_confidence >= 0.85`, all-time complaints >=25, and available response
+  metrics. All map to `ready_for_index` CreditDoc rows, but manual review is
+  required before publication.
+- First-pass issue: category/profile mismatches appear in the top candidates
+  (example: `Goldman Sachs Bank USA` mapped to `pawn-shops`; `BMO Bank National
+  Association` mapped to `personal-loans`). Do not build the public report until
+  top candidates are manually classified.
+- Regulator match/category cleanup plan added:
+  `docs/plans/2026-05-26-regulator-match-category-cleanup.md`
+- Phase 1 audit queue created:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/regulator_match_category_audit_phase1_2026-05-26.csv`
+- Initial top-50 classification found 3 obvious category-fix candidates
+  (`goldman-sachs-bank-usa`, `bmo-bank`, `synovus-bank`) and 2 canonical-review
+  rows (`firstbank`, `independent-bank-memphis`). Apply obvious fixes through
+  DB API only; if federal-ID guard blocks category changes, leave them for
+  founder-reviewed fixes.
+- Phase 1 safe fix attempt completed:
+  - DB backup:
+    `data/backups/creditdoc_before_regulator_category_cleanup_2026-05-26.sqlite`
+  - `synovus-bank` category corrected `mortgages` -> `banking` through DB API.
+  - `goldman-sachs-bank-usa` category correction blocked by federal-ID guard
+    (FDIC row); now marked founder override required.
+  - `bmo-bank` category correction blocked because profile is founder-protected;
+    now marked founder override required.
+  - Do not include Goldman Sachs or BMO in the public CFPB report until Jammi
+    approves category correction or exclusion.
+- Jammi then granted explicit permission to use founder-level updates for this
+  cleanup project and restore/preserve protection states.
+- Founder-authorized corrections completed:
+  - Backup:
+    `data/backups/creditdoc_before_founder_authorized_regulator_category_cleanup_2026-05-26.sqlite`
+  - `goldman-sachs-bank-usa`: `pawn-shops` -> `banking`, audit logged by
+    `founder`, `is_protected` remained `0`.
+  - `bmo-bank`: `personal-loans` -> `banking`, audit logged by `founder`,
+    `is_protected` remained `1`.
+  - No unresolved Supabase retry rows for either slug.
+  - Audit queue updated to `category_fixed_founder_override`.
+- Regenerated post-fix candidate CSV:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/cfpb_responsiveness_candidates_enriched_after_phase1_fixes_2026-05-26.csv`
+- Regenerated set remains 131 rows. Corrected rows now appear as `banking`;
+  banking count increased to 57, personal-loans decreased to 18, mortgages
+  decreased to 9.

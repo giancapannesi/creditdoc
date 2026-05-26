@@ -423,3 +423,86 @@ indexing decision batch.
     decision batch.
   - Decide Vigo chain indexing policy.
   - Separate redirect batch for stale/category-mismatch rows if desired.
+
+## CFPB Responsiveness Report + Local Authority Graph
+
+New strategic project added 2026-05-26:
+
+- Plan: `/srv/BusinessOps/creditdoc/docs/plans/2026-05-26-cfpb-responsiveness-report.md`
+- Working public asset:
+  `/research/most-responsive-consumer-finance-providers-2026/`
+- Working title: **America's Most Responsive Consumer Finance Providers 2026**
+
+Important framing:
+
+- CreditDoc already has CFPB/data research pages. The task is to package and
+  distribute a sharper positive-framed report for backlinks, media, provider
+  engagement, and authority.
+- Use positive wording: "responsive", "strong consumer-response records",
+  "public complaint-response transparency".
+- Do not publish "worst lender" lists or adversarial CFPB rankings.
+- Do not imply companies are safe, approved, licensed, cheapest, or best based
+  only on CFPB data.
+- Complaint volume is context, not a penalty, because large companies naturally
+  receive more complaints.
+
+Next steps:
+
+1. Generate first candidate ranking CSV from `data/regulator.db`.
+   - Completed initial pass 2026-05-26:
+     `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/cfpb_responsiveness_candidates_enriched_2026-05-26.csv`
+   - 131 deduped candidate rows.
+   - Manual review required; top rows include category/profile mismatches.
+2. Inspect top candidates manually for duplicate subsidiaries, weak matches, or
+   misleading category/state assumptions.
+3. Finalize eligibility/scoring thresholds.
+4. Build public Astro report page.
+5. Add internal links from `/research/`, `/research/consumer-complaints/`,
+   `/about/creditdoc-data/`, `/press/`, and later relevant review/trends/city
+   pages.
+6. Create press pitch, provider outreach copy, and Drive copy.
+
+Local authority context:
+
+- Do not pause city/small-town guide velocity. Jammi's strategy is bottom-up
+  authority: build useful local/regional pages incumbents ignore, then connect
+  them through city-category pages, lender profiles, state regulations,
+  question clusters, tools/quizzes, and research authority assets.
+- Add a future documentation artifact called **CreditDoc Local Authority Graph**
+  to make the internal-linking model explicit.
+
+## Regulator Match / Category Cleanup
+
+Plan:
+
+- `/srv/BusinessOps/creditdoc/docs/plans/2026-05-26-regulator-match-category-cleanup.md`
+
+Phase 1 audit queue:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/regulator_match_category_audit_phase1_2026-05-26.csv`
+
+Current P1 findings:
+
+- Obvious category-fix candidates:
+  - `goldman-sachs-bank-usa`: `pawn-shops` -> `banking`
+  - `bmo-bank`: `personal-loans` -> `banking`
+  - `synovus-bank`: `mortgages` -> `banking`
+- Canonical/brand review needed:
+  - `firstbank`
+  - `independent-bank-memphis`
+
+Phase 1 write status:
+
+- `synovus-bank`: fixed through DB API, `mortgages` -> `banking`.
+- `goldman-sachs-bank-usa`: founder-authorized DB API correction completed,
+  `pawn-shops` -> `banking`; `is_protected` remained `0`.
+- `bmo-bank`: founder-authorized DB API correction completed,
+  `personal-loans` -> `banking`; `is_protected` remained `1`.
+- Post-fix candidate CSV regenerated:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/cfpb_responsiveness_candidates_enriched_after_phase1_fixes_2026-05-26.csv`
+
+Next execution:
+
+1. Continue manual classification of remaining top-50 candidates.
+2. Re-check Supabase retry queue after any additional writes.
+3. Keep updating the workpack README and `CREDITDOC_NOW/NEXT` after each batch.
