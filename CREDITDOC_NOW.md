@@ -1798,7 +1798,7 @@ Workpack:
 
 ## 2026-05-26 — Sitewide Page Upgrade Batch 014
 
-Batch 014 completed locally for remaining static support/trust pages:
+Batch 014 committed as `05224c8ddd` for remaining static support/trust pages:
 
 - `/privacy/`
 - `/terms/`

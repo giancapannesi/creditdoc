@@ -797,7 +797,7 @@ For Batch 014, keep the same rules:
   advice, guaranteed outcome, and "right provider" language;
 - build-check, generated-output-check, document, and commit before moving on.
 
-Batch 014 is locally complete and build-verified. After committing, move to
+Batch 014 is complete, build-verified, and committed as `05224c8ddd`. Move to
 Batch 015 on the remaining broad navigation/commercial support pages:
 
 - inspect `/press/`
