@@ -116,6 +116,14 @@ export default defineConfig({
   site: 'https://www.creditdoc.co',
   output: 'static',
   adapter: cloudflare({
+    routes: {
+      extend: {
+        exclude: [
+          { pattern: '/sitemap-index.xml' },
+          { pattern: '/sitemap-*.xml' },
+        ],
+      },
+    },
     // 'passthrough' avoids bundling sharp/detect-libc into the worker (which
     // breaks workerd at runtime — bare require('fs')/'child_process'). Static
     // images in dist/_astro/ are still optimized at build time. SSR pages do

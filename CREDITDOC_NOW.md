@@ -4,10 +4,32 @@
 
 ---
 
-## 2026-05-26 — Noindex Cleanup Batch 009
+## 2026-05-26 — Static Asset Routing Fix + Noindex Cleanup Batch 009
 
-**Status: local verification passed; deploy held until concurrent Batch 001
-normalization files are settled.**
+**Status: deployed and live-verified.**
+
+Root cause found for repeated unrelated lender JSON dirtiness: the broad
+`export_changed_lenders()` path exports every lender where `exported_at IS NULL`
+or `updated_at > exported_at`, not just the current cleanup batch. For controlled
+noindex batches, use `CreditDocDB.export_lender_to_json(slug)` per explicit slug
+only.
+
+Static asset routing issue fixed:
+
+- Symptoms after the previous deploy: `/`, `/city/`, and `/sitemap-index.xml`
+  returned `404`, while dynamic SSR pages such as `/review/lexington-law/`
+  still returned `200`.
+- Cause: Cloudflare static assets had no explicit HTML handling, so `/path/`
+  was not resolving to `/path/index.html`; sitemap XML was also being routed to
+  the Worker instead of static assets.
+- Fix: `wrangler.toml` now sets `html_handling = "auto-trailing-slash"` and
+  `not_found_handling = "404-page"`; `astro.config.mjs` excludes
+  `/sitemap-index.xml` and `/sitemap-*.xml` from Worker routing.
+- Deploy via `./deploy.sh` passed.
+- Cloudflare Worker version: `11d2be7e-624f-4b23-8d9c-31db1923a411`.
+- Live smoke checks passed: `/`, `/city/`, `/sitemap-index.xml`,
+  `/robots.txt`, `/review/lexington-law/`, and `/credit-guide/austin-tx/`
+  all return `200` and no `noindex`.
 
 Archived 15 zero-impression, raw, no-website, low-quality noindex profiles:
 
@@ -44,9 +66,33 @@ Verification completed:
 - Exact built static scan found zero `/review/<slug>/` references for the 15
   touched slugs.
 
-Do not deploy Batch 009 until the concurrent dirty Batch 001 normalization files
-are committed or cleared, so the deploy does not accidentally include unrelated
-local changes.
+Also archived and redirected 9 wrong-vertical or unsafe GSC-visible profiles:
+
+- `auto-titles-and-bonds` -> `/credit-guide/dallas-tx/personal-loans/`
+- `autocarhouston-autos-usados` -> `/credit-guide/houston-tx/personal-loans/`
+- `burns-buy-here-pay-here-of-spartanburg` -> `/categories/personal-loans/`
+- `fix-my-auto-credit-score` -> `/categories/personal-loans/`
+- `fraud` -> `/categories/credit-repair/`
+- `good-price-title-auto-title-services-bonded-titles-by-appointment-only` ->
+  `/categories/personal-loans/`
+- `jm-auto-title-service-titulos-y-placas-surety-bond-title` ->
+  `/credit-guide/dallas-tx/personal-loans/`
+- `ny-identity-theft-group` -> `/categories/credit-repair/`
+- `vfs-global-india-passport-application-center` ->
+  `/categories/credit-repair/`
+
+Live Batch 009 checks:
+
+- All 9 redirected review URLs return `302` to the expected target.
+- Live sitemap index and all five sitemap XML files return `200`.
+- None of the 9 redirected review URLs appear in live sitemaps.
+- Deploy verification passed through `./deploy.sh`.
+
+Repo commits before this routing fix:
+
+- `7961ce8df7` — `data: archive low-quality noindex batch`
+- `253db0cf96` — `data: archive redirected wrong-vertical noindex batch`
+- `546476de43` — `docs: add cfpb report release links`
 
 ## 2026-05-26 — CFPB Report Release Assets
 
