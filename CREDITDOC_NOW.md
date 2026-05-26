@@ -1243,3 +1243,34 @@ Verification:
   - The 4 archived review URLs return `404`.
   - Live `sitemap-0.xml` through `sitemap-4.xml` contain none of the 4
     archived review paths; `sitemap-5.xml` and above return `404`.
+
+## 2026-05-26 — Noindex Fix/Index Batch 005
+
+Promoted 3 verified provider pages from noindex/pending state:
+
+- `snap-loans-cash`
+- `reverse-mortgages-home-loans-with-christopher-gibson-at-c2-financial`
+- `public-loans`
+
+Rules applied:
+
+- Required a working official-looking website, matching category, useful stored
+  profile data, and GSC signal.
+- Did not promote `the-debt-crushers` because its profile still records
+  unresolved San Francisco/Las Vegas location signals.
+- Did not promote rows whose stored source was a suspended website, HTTP 500,
+  trademark page, PDF, or Google business placeholder.
+
+Verification:
+
+- Local SQLite and Supabase agree for all 3 promoted slugs.
+- No Supabase retry rows for the 3 promoted slugs.
+- `npm run build` passed.
+- Generated sitemap included all 3 review paths.
+- Deployed via `./deploy.sh`.
+- Cloudflare Worker version:
+  `d0f3eb08-20cb-4368-b125-594ac77aded4`.
+- Live status:
+  - all 3 promoted review URLs return `200`;
+  - none have a `noindex` robots meta;
+  - live `sitemap-3.xml` contains all 3 review paths.

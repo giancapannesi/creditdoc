@@ -216,6 +216,19 @@ Batch 004 completed 2026-05-26:
   candidates, not another blind drop batch, unless the candidate is clearly
   rubbish.
 
+Batch 005 completed 2026-05-26:
+
+- Promoted and deployed 3 verified provider pages:
+  - `snap-loans-cash`
+  - `reverse-mortgages-home-loans-with-christopher-gibson-at-c2-financial`
+  - `public-loans`
+- Worker version: `d0f3eb08-20cb-4368-b125-594ac77aded4`.
+- Next noindex step: continue the real-lender fix queue, but skip rows with
+  bad source evidence. Current examples to hold/skip until fixed:
+  `the-debt-crushers` location conflict, `merchant-king-services-inc-credit-funding-experts`
+  HTTP 500, `praxis-debt-solutions` suspended site, and rows sourced only from
+  PDF/trademark/Google placeholder pages.
+
 ---
 
 ## Key Reference
