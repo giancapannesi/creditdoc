@@ -1572,3 +1572,46 @@ Notes:
   safer without changing answer records or URLs.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 059: Educational Title Softener Coverage
+
+Date: 2026-05-26
+Implementation commit: `2a359e0845` (`feat: broaden educational title softening`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Broadened `softenEducationalTeaserCopy()` so surfaces already using the
+  central helper soften plain `Best` article titles, `Best Free`, `Guaranteed
+  Approval`, `Who Actually Approves`, and `Who Approves` patterns.
+- Added copy-safe phrasing for rendered teaser descriptions that referenced
+  "what lenders actually check", "which lenders approve", "highest acceptance
+  rates", and a direct 500-credit-score approval framing.
+- Added grammar cleanup for generated "advertised approval claims for..."
+  snippets, "advertises certain approval", and "Here are eligibility fields to
+  check" after title replacement.
+- Preserved source article records, slugs, URLs, runtime fetch behavior, and
+  page-specific rendering logic.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Generated `dist/blog/index.html` confirmed representative article-card
+  titles and descriptions now render softened text for installment-loan,
+  advertised-approval, credit-card, and 500-credit-score examples.
+- `git diff --check` passed.
+
+Notes:
+
+- This central-helper change benefits existing surfaces that already call
+  `softenEducationalTeaserCopy()`; it does not recategorize or rewrite content
+  records.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
