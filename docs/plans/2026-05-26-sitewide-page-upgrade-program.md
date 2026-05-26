@@ -1965,3 +1965,48 @@ Notes:
   names, or quoted third-party rankings.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 068: Homepage Filter and Glossary Comparison Copy
+
+Date: 2026-05-26
+Implementation commit: `7587c292bc` (`feat: soften homepage filter and glossary comparison copy`)
+
+Scope:
+
+- `src/components/FilterBar.astro`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Reworded the homepage filter helper text and category label from `Choose a
+  topic` language to neutral `Select a topic` language.
+- Extended `softenGlossaryCopy()` so glossary explanatory copy renders `works
+  best when` as `is generally most useful when`.
+- Preserved homepage filter category values, slugs, form behavior, glossary
+  records, anchors, JSON-LD term URLs, and route structure.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Generated `dist/index.html` and `dist/glossary/index.html` confirmed the
+  targeted raw phrases were absent and replacement copy was present.
+- Rendered stripped-text scan confirmed remaining sitemap `best` hits are
+  provider-name contexts and the state `recommendation` hit is a disclaimer, so
+  they were not changed.
+- Production spot checks returned HTTP 200 for `/`, `/glossary/`, `/sitemap/`,
+  `/state/`, `/learn/`, `/blog/`, `/financial-wellness/`,
+  `/credit-guide/amarillo-tx/`, `/categories/fintech/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- This batch only changed shared homepage filter copy and glossary helper
+  output; no source content records, URLs, slugs, or data mappings changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
