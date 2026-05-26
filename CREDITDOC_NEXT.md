@@ -890,3 +890,20 @@ Initial Batch 020 targets:
   where they leak into markup, IDs, JSON-LD, or generated HTML;
 - keep URLs stable;
 - build-check, output/source-check, document, commit, then continue.
+
+Batch 020 implementation is complete, build-verified, and committed as
+`c0b49e5c13`. Move to Batch 021 by broadening from direct static-template copy
+to source-data and generated-output risk surfaces that can affect many pages.
+
+Initial Batch 021 targets:
+
+- run source and generated-output scans across representative `dist/trends`,
+  `dist/review`, `dist/categories`, `dist/answers`, `dist/compare`, and
+  `dist/browse` pages for remaining unsupported recommendation, top/best,
+  guarantee, approval, licensing, safety, and matching language;
+- inspect whether remaining matches are explicit disclaimers, replacement-rule
+  patterns, raw provider names, or visible copy that needs softening;
+- prefer display-time boundaries or template labels where raw data changes would
+  churn many records without improving user-visible quality;
+- keep URLs stable;
+- build-check, output/source-check, document, commit, then continue.

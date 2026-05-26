@@ -2037,3 +2037,44 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_019_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_019_residual_guide_tool_copy_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 020
+
+Batch 020 implementation committed as `c0b49e5c13` for remaining state, FAQ,
+research, and tool copy cleanup:
+
+- `src/pages/state/index.astro`
+- `src/pages/faq.astro`
+- `src/pages/research/consumer-complaints.astro`
+- `src/pages/tools/credit-score-simulator.astro`
+- `src/pages/tools/debt-payoff-calculator.astro`
+
+Changes:
+
+- Replaced state-index "top-rated lenders" wording with provider profile
+  context language.
+- Replaced older FAQ independent-review language with a more precise
+  compensation-boundary statement.
+- Rephrased complaint-data research copy from direct licensing verification to
+  state license or registration checks.
+- Reframed the credit-score simulator CTA away from top-rated/removal claims and
+  toward provider profile comparison.
+- Replaced debt-snowball "psychological wins" language in FAQ schema and visible
+  FAQ copy with early payoff milestone language.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,411 SSR route URLs and generated 124 city guides plus 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots conflict check passed.
+- Generated-output scan confirmed the old Batch 020 phrases were absent from
+  the state index, FAQ, credit-score simulator, and debt payoff calculator.
+- Source check confirmed the complaint research page now uses state license or
+  registration check language.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_020_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_020_remaining_state_tool_copy_gsc_seen_2026-05-26.csv`
