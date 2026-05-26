@@ -24,11 +24,34 @@ for (const post of posts) {
   categoryCounts.set(post.category, (categoryCounts.get(post.category) || 0) + 1);
 }
 
+const contextLinks = [
+  {
+    title: 'Local guides',
+    description: 'Connect article topics to city and regional provider research.',
+    href: '/city/',
+  },
+  {
+    title: 'Answer clusters',
+    description: 'Use short answers when you need a focused next question.',
+    href: '/answers/',
+  },
+  {
+    title: 'Tools and resources',
+    description: 'Check estimates, calculators, checklists, and letter templates.',
+    href: '/tools/',
+  },
+  {
+    title: 'Research reports',
+    description: 'Add complaint-data and market context to provider research.',
+    href: '/research/consumer-complaints/',
+  },
+];
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Blog",
   "name": "CreditDoc Blog — Debt Traps & Financial Education",
-  "description": "In-depth articles exposing how debt traps work, how to avoid them, and how to build real financial literacy. New articles every week.",
+  "description": "In-depth articles explaining how debt traps work, how to compare options, and how to build financial literacy. New articles every week.",
   "url": "https://www.creditdoc.co/blog/",
   "publisher": {
     "@type": "Organization",
@@ -40,7 +63,7 @@ const jsonLd = {
 
 <BaseLayout
   title="Blog — Debt Traps & Financial Education | CreditDoc"
-  description="In-depth articles exposing how debt traps work, how to avoid predatory lending, and build real financial literacy. New articles published every week."
+  description="In-depth articles explaining how debt traps work, how to compare financial options, and build real financial literacy. New articles published every week."
   jsonLd={jsonLd}
 >
   <!-- Hero -->
@@ -49,8 +72,25 @@ const jsonLd = {
       <span class="inline-block rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-6">Blog</span>
       <h1 class="text-4xl font-bold text-text sm:text-5xl">Debt Traps & Financial Education</h1>
       <p class="mt-6 text-lg text-muted leading-relaxed max-w-2xl mx-auto">
-        How loans, credit cards, and financial products are designed to keep you paying. We break down the mechanics, show you the real numbers, and give you a way out. New articles every week.
+        How loans, credit cards, and financial products can become expensive or hard to compare. We break down the mechanics, show the numbers, and connect articles to practical CreditDoc research paths.
       </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="rounded-xl border border-primary/20 bg-primary-light/30 p-6 sm:p-8">
+      <h2 class="text-xl font-bold text-text">Use Blog Articles With CreditDoc Context</h2>
+      <p class="mt-2 text-sm leading-relaxed text-muted">
+        Articles are starting points, not recommendations. Use them with local guides, answer clusters, tools, resources, category pages, and public-data research before contacting a company or comparing providers.
+      </p>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {contextLinks.map(link => (
+          <a href={link.href} class="rounded-lg border border-border bg-white p-4 hover:border-primary transition-colors">
+            <h3 class="text-sm font-semibold text-text">{link.title}</h3>
+            <p class="mt-2 text-xs leading-relaxed text-muted">{link.description}</p>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 

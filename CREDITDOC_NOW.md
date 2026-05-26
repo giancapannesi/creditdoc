@@ -159,7 +159,8 @@ Sitewide upgrade program restarted:
   city-category sub-pages.
 - Batch 009 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_009_notes_2026-05-26.md`
-- Batch 010 completed locally and build-verified:
+- Batch 010 completed and committed:
+  `9cc4811945 feat: add graph links to wellness pages`.
   financial-wellness pages now link the education layer into local guides,
   answer clusters, tools/resources, related provider categories, and CFPB
   complaint-data context.
@@ -178,13 +179,29 @@ Sitewide upgrade program restarted:
   2,232 city-category sub-pages.
 - Batch 010 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_010_notes_2026-05-26.md`
+- Batch 011 completed locally and build-verified:
+  blog pages now link editorial posts into local guides, answer clusters,
+  tools/resources, related provider categories, and CFPB complaint-data context.
+- Batch 011 scope: `/blog/` and `/blog/{slug}/` through
+  `src/pages/blog/[slug].astro`.
+- Local blog inventory: 68 `blog_posts` rows. Latest local GSC pull
+  (`pull_id=12`) saw 13 `/blog/` URLs.
+- Batch 011 also softened blog index and sidebar wording away from
+  recommendation/top-pick and qualification phrasing toward neutral comparison,
+  research-path, and context language.
+- Batch 011 build verification passed:
+  `npm run build`, robots contract, SSR sitemap parity, Astro build, generated
+  output/server-bundle scan, and sitemap/robots conflict check. This run
+  injected 18,411 SSR route URLs and successfully added 124 city guides plus
+  2,232 city-category sub-pages.
+- Batch 011 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_011_notes_2026-05-26.md`
 
 Immediate next:
 
-1. Commit Batch 010 with only the financial-wellness pages and resume-cursor
-   docs.
-2. Continue to Batch 011: inspect the blog page family and upgrade blog pages
-   into the same graph where appropriate.
+1. Commit Batch 011 with only the blog pages and resume-cursor docs.
+2. Continue to Batch 012: inspect the course/learn/glossary education-support
+   pages and upgrade the next suitable page family.
 3. Keep every batch scoped, build-verified, documented, and committed before
    starting the next one.
 

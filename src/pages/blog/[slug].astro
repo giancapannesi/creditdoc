@@ -79,6 +79,27 @@ const categoryLabel = (post.category_label as string) || '';
 const readTime = (post.read_time as string) || '';
 const description = (post.description as string) || '';
 
+const blogCategoryToolMap: Record<string, { label: string; href: string }> = {
+  'build-credit': { label: 'Credit score simulator', href: '/tools/credit-score-simulator/' },
+  'credit-score': { label: 'Credit score simulator', href: '/tools/credit-score-simulator/' },
+  'credit-repair': { label: 'Credit report checklist', href: '/resources/credit-report-checklist/' },
+  'credit-monitoring': { label: 'Credit report checklist', href: '/resources/credit-report-checklist/' },
+  'identity-theft': { label: 'Credit report checklist', href: '/resources/credit-report-checklist/' },
+  'debt-relief': { label: 'Debt payoff calculator', href: '/tools/debt-payoff-calculator/' },
+  'credit-counseling': { label: 'Debt payoff calculator', href: '/tools/debt-payoff-calculator/' },
+  'personal-loans': { label: 'Borrowing power quiz', href: '/tools/borrowing-power-quiz/' },
+  'emergency-cash': { label: 'Borrowing power quiz', href: '/tools/borrowing-power-quiz/' },
+  'payday-alternatives': { label: 'Borrowing power quiz', href: '/tools/borrowing-power-quiz/' },
+  'veterans': { label: 'Borrowing power quiz', href: '/tools/borrowing-power-quiz/' },
+  'credit-unions': { label: 'Local credit guides', href: '/city/' },
+};
+
+const primaryContextTool = blogCategoryToolMap[postCategory] || { label: 'Tools and calculators', href: '/tools/' };
+const primaryRelatedCategory = relatedCategories[0];
+const primaryCategoryLink = primaryRelatedCategory
+  ? { label: `${primaryRelatedCategory.name} providers`, href: `/categories/${primaryRelatedCategory.slug}/` }
+  : { label: 'Provider categories', href: '/categories/' };
+
 // Run inline-linker on blog sections for internal links to money pages, tools, answers
 const linker = createLinker(glossaryTerms, { moneyBudget: 6, glossaryBudget: 6 });
 const linkedSections = postSections.map(section => ({
@@ -129,7 +150,14 @@ const jsonLd = [
       "@type": "WebPage",
       "@id": `https://www.creditdoc.co/blog/${post.slug}/`
     },
-    "keywords": postTags.join(', ')
+    "keywords": postTags.join(', '),
+    "relatedLink": [
+      "https://www.creditdoc.co/blog/",
+      "https://www.creditdoc.co/city/",
+      "https://www.creditdoc.co/answers/",
+      "https://www.creditdoc.co/tools/",
+      "https://www.creditdoc.co/research/consumer-complaints/"
+    ]
   },
   ...((postFaq.filter(f => f.question?.trim() && f.answer?.trim())).length > 0 ? [{
     "@context": "https://schema.org",
@@ -210,6 +238,19 @@ const jsonLd = [
 
       <!-- Main Column -->
       <div class="lg:col-span-2 space-y-8">
+        <section class="rounded-xl border border-primary/20 bg-primary-light/30 p-6">
+          <h2 class="text-xl font-bold text-text">Use This Article With CreditDoc Context</h2>
+          <p class="mt-2 text-sm leading-relaxed text-muted">
+            This article is educational and should be checked against your own documents, local provider pages, official sources, tools, and complaint-data context before you contact a company or make a financial decision.
+          </p>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            <a href={primaryContextTool.href} class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">{primaryContextTool.label}</a>
+            <a href={primaryCategoryLink.href} class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">{primaryCategoryLink.label}</a>
+            <a href="/answers/" class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">Related answers</a>
+            <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">Complaint data context</a>
+          </div>
+        </section>
+
         {linkedSections.map((section, i) => (
           <Fragment>
             <section id={`section-${i}`}>
@@ -421,14 +462,14 @@ const jsonLd = [
         <!-- Affiliate Sidebar -->
         <AffiliateSidebar category={postCategory} />
 
-        <!-- Recommended Services (cross-link to listicles) -->
+        <!-- Related Service Research (cross-link to listicles) -->
         {relatedListicles.length > 0 && (
           <div class="glass-card p-5">
             <h3 class="text-base font-semibold text-text mb-3 flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd"/>
               </svg>
-              Recommended Services
+              Related Service Research
             </h3>
             <div class="space-y-3">
               {relatedListicles.map(listicle => (
@@ -437,7 +478,7 @@ const jsonLd = [
                   class="block rounded-lg border border-border p-3 hover:border-primary/30 hover:bg-primary-light/20 transition-colors"
                 >
                   <p class="text-sm font-medium text-text leading-snug">{listicle.title}</p>
-                  <p class="mt-1 text-xs text-primary font-medium">Compare top picks &rarr;</p>
+                  <p class="mt-1 text-xs text-primary font-medium">Review comparison context &rarr;</p>
                 </a>
               ))}
             </div>
@@ -485,7 +526,7 @@ const jsonLd = [
             </div>
             <div>
               <h3 class="text-sm font-semibold text-text group-hover:text-primary transition-colors">Borrowing Power Quiz</h3>
-              <p class="mt-0.5 text-xs text-muted">How much could you borrow? 60-second quiz, no credit impact.</p>
+              <p class="mt-0.5 text-xs text-muted">Estimate borrowing context with no credit impact.</p>
             </div>
           </a>
         </div>

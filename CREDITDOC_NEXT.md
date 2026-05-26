@@ -18,22 +18,27 @@ Latest completed/active state:
 - Batch 009 verification passed: `npm run build`, robots contract, SSR sitemap
   parity, generated output scan, sitemap/robots check, and 18,411 SSR route URL
   injection.
-- Batch 010 financial-wellness pages completed locally and build-verified;
-  commit next.
+- Batch 010 committed: `9cc4811945 feat: add graph links to wellness pages`.
 - Batch 010 scope: `/financial-wellness/` and `/financial-wellness/{slug}/`.
 - Local wellness guide inventory: 98 rows; latest local GSC pull (`pull_id=12`)
   saw 32 `/financial-wellness/` URLs.
 - Batch 010 verification passed: `npm run build`, robots contract, SSR sitemap
   parity, generated output/server-bundle scan, sitemap/robots check, and 18,411
   SSR route URL injection.
+- Batch 011 blog pages completed locally and build-verified; commit next.
+- Batch 011 scope: `/blog/` and `/blog/{slug}/`.
+- Local blog inventory: 68 rows; latest local GSC pull (`pull_id=12`) saw 13
+  `/blog/` URLs.
+- Batch 011 verification passed: `npm run build`, robots contract, SSR sitemap
+  parity, generated output/server-bundle scan, sitemap/robots check, and 18,411
+  SSR route URL injection.
 
 Immediate next:
 
-1. Commit Batch 010 with only the scoped financial-wellness files and
-   resume-cursor docs.
-2. Start Batch 011 by inspecting the blog page family and upgrading blog pages
-   with authority graph links into local guides, categories, answers, tools,
-   resources, research, and state context where relevant.
+1. Commit Batch 011 with only the scoped blog files and resume-cursor docs.
+2. Start Batch 012 by inspecting the course/learn/glossary education-support
+   pages and upgrading the next suitable page family with graph links into local
+   guides, categories, answers, tools, resources, research, and state context.
 3. Keep every batch scoped, documented in the workpack, build-verified, and
    committed before starting the next batch.
 
