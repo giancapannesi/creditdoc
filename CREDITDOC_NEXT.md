@@ -856,3 +856,20 @@ Initial Batch 018 targets:
 - keep routes and existing slugs stable unless there is a clear broken-link or
   legal-risk reason to change them;
 - build-check, generated-output-check, document, commit, then continue.
+
+Batch 018 implementation is complete, build-verified, and committed as
+`49b38174a0`. Move to Batch 019 by inventorying the remaining visible-risk
+surface that is not covered by the new runtime content boundary.
+
+Initial Batch 019 targets:
+
+- scan `src/pages`, `src/components`, and high-value `src/content` files for
+  remaining unsupported `best`, `top`, `recommended`, guarantee, approval,
+  licensing, safety, matching, value, and diagnosis-style wording;
+- prioritize templates that render city/browse pages, state pages, research
+  pages, tools/resources, and remaining static pages because those are part of
+  the bottom-up authority graph;
+- decide whether each remaining issue belongs in raw data cleanup, a template
+  label change, or the shared `softenYmylCopy()` boundary;
+- keep slugs and URLs stable;
+- build-check, source/output-check, document, commit, then continue.

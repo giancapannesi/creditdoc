@@ -1953,3 +1953,44 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_017_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_017_shared_components_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 018
+
+Batch 018 implementation committed as `49b38174a0` for runtime content
+boundaries:
+
+- `src/utils/safe-copy.ts`
+- `src/components/ProsCons.astro`
+- `src/pages/answers/[slug].astro`
+- `src/pages/categories/[category].astro`
+- `src/pages/review/[slug].astro`
+
+Changes:
+
+- Added a shared `softenYmylCopy()` display-time boundary for legacy content
+  phrases that still exist in raw JSON/content sources.
+- Applied the boundary to answer body sections, answer takeaways, answer FAQ
+  schema and visible FAQ copy, category description/meta copy, review long
+  descriptions, review profile notes, review pros/cons, and review profile
+  signals.
+- Softened runtime CTA, affiliate disclosure, category `ItemList` schema, and
+  secured-card cross-sell wording away from unsupported "best", "top",
+  guarantee, approval, recommendation, value, and diagnosis-style phrasing.
+- Preserved existing routes, slugs, raw content files, and link targets.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,411 SSR route URLs and generated 124 city guides plus 2,232
+  city-category sub-pages.
+- Touched SSR-template source scan found no remaining direct risky phrase
+  matches outside the explicit replacement patterns in `safe-copy.ts`.
+- Generated-output scan on `dist/index.html` and
+  `dist/compare/credit-saint-vs-sky-blue-credit/index.html` found no Batch 018
+  blocked phrases.
+- `git diff --check` passed for the touched implementation files.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_018_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_018_runtime_content_boundaries_gsc_seen_2026-05-26.csv`
