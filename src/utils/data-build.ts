@@ -20,6 +20,7 @@ import type {
   ClusterPillar,
 } from './data';
 import { STATE_ABBREVIATIONS } from './data';
+import { softenEducationalTeaserCopy } from './safe-copy';
 
 const LENDERS_DIR = path.join(process.cwd(), 'src/content/lenders');
 const CONTENT_DIR = path.join(process.cwd(), 'src/content');
@@ -516,35 +517,35 @@ export function getSiblingClusterAnswers(slug: string, limit: number = 4): Clust
 export function getEducationSearchData() {
   const guides = getWellnessGuides().map(g => ({
     slug: g.slug,
-    title: g.title,
-    description: g.description,
+    title: softenEducationalTeaserCopy(g.title),
+    description: softenEducationalTeaserCopy(g.description),
     category: g.category,
     read_time: g.read_time,
     type: 'guide' as const,
     url: `/financial-wellness/${g.slug}/`,
-    key_takeaways: g.key_takeaways,
+    key_takeaways: (g.key_takeaways || []).map(softenEducationalTeaserCopy),
   }));
 
   const terms = getGlossaryTerms().map(t => ({
     slug: t.slug,
-    title: t.term,
-    description: t.plain_definition,
+    title: softenEducationalTeaserCopy(t.term),
+    description: softenEducationalTeaserCopy(t.plain_definition),
     category: t.category,
-    full_form: t.full_form,
+    full_form: t.full_form ? softenEducationalTeaserCopy(t.full_form) : t.full_form,
     type: 'term' as const,
     url: `/glossary/#${t.slug}`,
   }));
 
   const posts = getBlogPosts().map(p => ({
     slug: p.slug,
-    title: p.title,
-    description: p.description,
+    title: softenEducationalTeaserCopy(p.title),
+    description: softenEducationalTeaserCopy(p.description),
     category: p.category,
     read_time: p.read_time,
     tags: p.tags,
     type: 'post' as const,
     url: `/blog/${p.slug}/`,
-    key_takeaways: p.key_takeaways,
+    key_takeaways: (p.key_takeaways || []).map(softenEducationalTeaserCopy),
   }));
 
   return { guides, terms, posts };
