@@ -565,6 +565,47 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 038: Comparison Guide Label Copy
+
+Date: 2026-05-26
+Implementation commit: `1f8873dfb2` (`feat: soften comparison guide labels`)
+
+Scope:
+
+- `src/components/LenderCard.astro`
+- `src/pages/answers/index.astro`
+- `src/pages/state/[slug].astro`
+
+What changed:
+
+- Replaced the internal lender-card HTML comment `Best For` with `Profile
+  signals` so generated source mirrors the already-neutral visible label.
+- Reframed answer-index comparison links from top/rate-oriented labels to
+  neutral comparison-guide and pricing/terms language.
+- Reframed state-page ItemList JSON-LD from `Top Financial Services` to
+  `Financial Service Profiles`.
+- Replaced the state-page CTA `See all comparisons` with `View comparison
+  guides`.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Targeted source/generated scan was clean for `Top Comparison Guides`,
+  `Top Financial Services`, `<!-- Best For -->`, `Compare BBB-rated services`,
+  `Compare rates & terms`, and `See all comparisons`.
+- `git diff --check` passed.
+
+Notes:
+
+- `dist/answers` is not emitted as a static directory in the current build, so
+  generated verification covered `dist/state` and `dist/browse` plus source.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 033: Compare Profile Notes
 
 Date: 2026-05-26  
