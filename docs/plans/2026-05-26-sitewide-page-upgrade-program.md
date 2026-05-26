@@ -1740,3 +1740,45 @@ Notes:
   were changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 063: Remaining Glossary Legal Copy
+
+Date: 2026-05-26
+Implementation commit: `52dbf701bc` (`feat: soften remaining glossary legal copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Extended `softenGlossaryCopy()` for the last visible `/glossary/` phrases
+  found by the rendered quality scan.
+- Softened legal-absolute and result-claim phrases around APR disclosure,
+  finance-charge disclosure, Chapter 7 income context, CROA result promises,
+  FCRA inaccurate-information handling, TILA APR comparison, and VA mortgage
+  backing.
+- Corrected the rendered artifact `What to Know in Lending Act` back to
+  `Truth in Lending Act` in the glossary helper output.
+- Preserved glossary records, anchors, JSON-LD term URLs, route structure, and
+  page templates.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- `git diff --check` passed.
+- Generated `dist/glossary/index.html` confirmed targeted raw phrases were
+  removed and representative softened glossary copy was present.
+- Rendered `/glossary/` scan returned no matches for the tracked YMYL phrase
+  set used in this batch.
+
+Notes:
+
+- This continues the central helper approach from Batch 062.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
