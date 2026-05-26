@@ -1035,3 +1035,47 @@ Notes:
   render time.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 045: Credit Guide Local CTA Copy
+
+Date: 2026-05-26
+Implementation commit: `e8d48b482d` (`feat: soften credit guide local ctas`)
+
+Scope:
+
+- `src/pages/credit-guide/[slug]/index.astro`
+- `src/pages/credit-guide/[slug]/[category].astro`
+
+What changed:
+
+- Reframed the city credit-guide SBA link from `Best SBA lenders serving` to
+  `SBA lender profiles serving`.
+- Reframed borrowing-power links from `Check your borrowing power` to
+  `Estimate borrowing power`.
+- Reframed the city HMDA section heading from `Which Banks Approve the Most`
+  to `Mortgage Application Outcomes`.
+- Reframed HMDA intro copy from lenders `ranked by approval rate` to recorded
+  application-outcome context.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and built credit-guide worker route-module scans were clean for:
+  `Best SBA lenders serving`, `Check your borrowing power`,
+  `Which Banks Approve the Most`, and `Mortgage lenders ranked by approval
+  rate`.
+- Built worker route-module scan confirmed the replacement SBA profile,
+  borrowing estimate, and HMDA application-outcome copy.
+- `git diff --check` passed.
+
+Notes:
+
+- Credit-guide dynamic pages are emitted as server route modules under
+  `dist/_worker.js/pages/credit-guide/`, not static `dist/credit-guide/`
+  files in this build.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
