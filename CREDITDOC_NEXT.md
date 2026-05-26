@@ -780,8 +780,9 @@ Next execution:
 
 ## Sitewide Page Upgrade
 
-Batch 013 trust/support pages are locally complete and build-verified. After
-committing, continue with Batch 014 on the remaining static support/trust pages:
+Batch 013 trust/support pages are complete, build-verified, and committed as
+`61f6875616`. Continue with Batch 014 on the remaining static support/trust
+pages:
 
 - inspect `src/pages/privacy.astro`
 - inspect `src/pages/terms.astro`

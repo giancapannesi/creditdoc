@@ -1763,7 +1763,7 @@ Verification:
 
 ## 2026-05-26 — Sitewide Page Upgrade Batch 013
 
-Batch 013 completed locally for trust/support pages:
+Batch 013 committed as `61f6875616` for trust/support pages:
 
 - `/about/`
 - `/about/creditdoc-data/`
