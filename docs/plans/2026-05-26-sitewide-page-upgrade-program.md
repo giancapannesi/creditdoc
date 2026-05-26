@@ -673,3 +673,43 @@ Notes:
 - Raw glossary JSON was not edited.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 036: Compare Pricing FAQ Copy
+
+Date: 2026-05-26
+Implementation commit: `59acdfa7d6` (`feat: soften compare pricing faq copy`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Reframed generated comparison FAQ pricing language from `Which is cheaper`
+  and `is cheaper at` to lower listed monthly price and setup-fee context.
+- Replaced `currently flags` comparison wording with stored comparison-note
+  language.
+- Added render-boundary softening for `choose ... only if`,
+  `Consumers should choose`, `should choose`, and `superior choice` variants in
+  generated comparison summaries.
+- Preserved raw comparison JSON and comparison URLs.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Generated compare-page scan was clean for targeted pricing FAQ,
+  `currently flags`, `choose ... only if`, `should choose`, and
+  `superior choice` phrases; remaining hits were source-only replacement-rule
+  literals.
+- Sample generated compare page showed the updated FAQ and JSON-LD wording.
+- `git diff --check` passed.
+
+Notes:
+
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
