@@ -921,3 +921,23 @@ Autonomous growth ops plan ready for activation 2026-05-25:
   loop from the plan, starting with safe daily checks, GSC workpack generation,
   repo cleanliness, automation status, and live URL status verification. Keep
   `creditdoc-engine.service` stopped unless Jammi explicitly approves restart.
+
+Search robots/noindex regression prevention 2026-05-26:
+
+- Problem: the 2026-05-21 fix excluded `/search/` from XML sitemaps but left
+  `Disallow: /search/` in `robots.txt`, and the build contract required that
+  old rule. GSC then surfaced `/search/?state=Utah`, `/search/?state=Iowa`, and
+  `https://creditdoc.co/search/` under "Blocked by robots.txt".
+- Permanent policy: `/search/` and parameterized search URLs must be crawlable
+  but not indexable. Keep them out of XML sitemaps, keep page-level
+  `noindex,nofollow`, canonical to `https://www.creditdoc.co/search/`, and do
+  not robots-block `/search/`.
+- Commit `1d02f03cd2 Allow search noindex crawling` removed the robots block and
+  changed `scripts/check_robots_contract.mjs` so future builds fail if the old
+  `/search/` robots block returns.
+- Added live operational guards outside the repo:
+  `/srv/BusinessOps/tools/creditdoc_smoke_test.py` now checks this daily, and
+  `/srv/BusinessOps/tools/creditdoc_site_monitor.sh` checks it every 5 minutes.
+- Verification on 2026-05-26: smoke test passed `10/10`; site monitor exited
+  `0`; live `robots.txt` does not block `/search/`; live search URL has
+  `noindex,nofollow` and canonical to `/search/`.
