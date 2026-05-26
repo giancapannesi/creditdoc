@@ -1336,3 +1336,43 @@ Notes:
   title paths in the blog sidebar.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 053: Comparison Display Titles
+
+Date: 2026-05-26
+Implementation commit: `6fbf915e3b` (`feat: soften comparison display titles`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added a `displayComparisonTitle` derived from the existing comparison copy
+  softener.
+- Applied the softened display title to page metadata, H1, breadcrumb text,
+  Article JSON-LD headline, and Breadcrumb JSON-LD.
+- Preserved comparison slugs, canonical route behavior, provider cards, FAQ
+  provider names, review links, and source comparison data.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source scan confirmed the comparison title render path now uses
+  `displayComparisonTitle`.
+- Generated comparison page scan confirmed title/H1/breadcrumb/schema used the
+  softened display title while stored provider names and review links remained
+  unchanged.
+- `git diff --check` passed.
+
+Notes:
+
+- Provider names inside cards, FAQ questions, diagnosis cards, and profile links
+  intentionally remain exact stored names because those may be business-name
+  strings rather than editorial claims.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
