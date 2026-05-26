@@ -1498,3 +1498,41 @@ Notes:
   answer, brand, state, or provider source records.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 057: Blog And Review Related Content Titles
+
+Date: 2026-05-26
+Implementation commit: `7d5c6ebd9a` (`feat: soften related content titles`)
+
+Scope:
+
+- `src/pages/blog/[slug].astro`
+- `src/pages/review/[slug].astro`
+
+What changed:
+
+- Applied `softenEducationalTeaserCopy()` to related answer titles rendered on
+  blog article pages.
+- Applied `softenEducationalTeaserCopy()` to related service-research listicle
+  titles rendered in the blog sidebar.
+- Applied `softenEducationalTeaserCopy()` to related answer titles rendered on
+  provider review pages.
+- Preserved answer, listicle, and review URLs plus runtime fetch behavior.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and generated `/blog/[slug]` and `/review/[slug]` worker route-module
+  scans confirmed the related-content title render expressions use safe-copy.
+- `git diff --check` passed.
+
+Notes:
+
+- This batch closes the remaining raw related-answer/listicle render paths found
+  in the blog and review route scan.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
