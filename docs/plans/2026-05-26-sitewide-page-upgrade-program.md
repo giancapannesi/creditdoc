@@ -2590,3 +2590,56 @@ Notes:
   records changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 080: Comparison Refund Safe-Copy Grammar
+
+Date: 2026-05-26
+Implementation commit: `c0b1c987d4` (`fix: normalize comparison refund safe copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added specific render-time normalization for common stored `risk-free` trial
+  and service phrases before the broader YMYL-safe `risk-free` replacement runs.
+- Corrected already-softened fragments such as `a with published refund terms
+  $1 trial`, `with published refund terms trial access`, `with published
+  refund terms payment structure`, and `with published refund terms service`.
+- Corrected `an provider-stated...` article grammar to `a provider-stated...`
+  for comparison refund-term copy.
+- Preserved source comparison records, routes, slugs, rankings, lender records,
+  pricing, ratings, badges, table layout, card layout, meta routing, and JSON-LD
+  structure.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for `an provider-stated`,
+  `a with published refund terms`, `with published refund terms trial`,
+  `with published refund terms trial access`, `with published refund terms
+  trial period`, `with published refund terms guarantee`,
+  `with published refund terms payment structure`, `with published refund terms
+  service`, or `risk-free`.
+- Targeted rendered checks covered `/compare/smartcredit-vs-transunion/`,
+  `/compare/smartcredit-vs-dovly/`,
+  `/compare/the-credit-pros-vs-safeport-law/`,
+  `/compare/kikoff-vs-first-progress-platinum-elite/`, and
+  `/compare/dickmann-tax-group-vs-national-debt-relief/`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/smartcredit-vs-transunion/`,
+  `/compare/the-credit-pros-vs-safeport-law/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only safe-copy cleanup; no source lender or comparison records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
