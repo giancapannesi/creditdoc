@@ -1458,3 +1458,43 @@ Notes:
   DB-backed guide records or review page routing.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 056: Brand And State Related Titles
+
+Date: 2026-05-26
+Implementation commit: `974611d992` (`feat: soften brand and state related titles`)
+
+Scope:
+
+- `src/pages/brand/[brand].astro`
+- `src/pages/state/[slug].astro`
+
+What changed:
+
+- Added display-only related question and related blog-post arrays on brand
+  pages.
+- Added the same display-only related question and related blog-post arrays on
+  state pages.
+- Applied `softenEducationalTeaserCopy()` to runtime related answer/blog titles
+  after stripping the `| CreditDoc` suffix from answer titles.
+- Preserved Supabase fetches, answer/blog slugs, destination URLs, brand data,
+  state data, and provider listings.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and generated `/brand/[brand]` and `/state/[slug]` worker route-module
+  scans confirmed related question/article titles render from softened display
+  arrays.
+- `git diff --check` passed.
+
+Notes:
+
+- This batch only changes related-content labels; it does not change article,
+  answer, brand, state, or provider source records.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
