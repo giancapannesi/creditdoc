@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import AffiliateInline from '../../components/AffiliateInline.astro';
 import AffiliateSidebar from '../../components/AffiliateSidebar.astro';
 import { createLinker } from '../../utils/inline-linker';
-import { softenYmylCopy } from '../../utils/safe-copy';
+import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 import {
   getAnswerBySlugRuntime,
   getSiblingAnswersByPillarRuntime,
@@ -95,8 +95,8 @@ Astro.response.headers.set('x-cdm-version', String(verSec));
 // Per-page linker: 8 money + 8 glossary caps persist across all sections.
 const linker = createLinker(glossaryTerms, { moneyBudget: 8, glossaryBudget: 8 });
 const linkedSections = answer.sections.map(section => ({
-  heading: softenYmylCopy(section.heading),
-  content: softenYmylCopy(linker(section.content).join('\n\n')),
+  heading: softenEducationalTeaserCopy(section.heading),
+  content: softenEducationalTeaserCopy(linker(section.content).join('\n\n')),
 }));
 
 // Derive key takeaways from the first sentence of the first 4 sections (used in TL;DR card).
@@ -105,7 +105,10 @@ function firstSentence(md: string): string {
   const m = plain.match(/^(.*?[.!?])(\s|$)/);
   return (m ? m[1] : plain.slice(0, 160)).trim();
 }
-const keyTakeaways = answer.sections.slice(0, 4).map(s => softenYmylCopy(firstSentence(s.content))).filter(Boolean);
+const keyTakeaways = answer.sections.slice(0, 4).map(s => softenEducationalTeaserCopy(firstSentence(s.content))).filter(Boolean);
+const displayTitle = softenEducationalTeaserCopy(answer.title || answer.h1 || '');
+const displayH1 = softenEducationalTeaserCopy(answer.h1 || answer.title || '');
+const displayDescription = softenEducationalTeaserCopy(answer.meta_description || '');
 
 const categoryLabels: Record<string, string> = {
   'build-credit': 'Build My Credit',
@@ -217,8 +220,8 @@ const siteName = 'CreditDoc';
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: answer.h1,
-  description: answer.meta_description,
+  headline: displayH1,
+  description: displayDescription,
   author: {
     '@type': 'Person',
     name: 'Harvey Brooks',
@@ -243,8 +246,8 @@ const faqSchema = _faqItems.length > 0 ? {
   '@type': 'FAQPage',
   mainEntity: _faqItems.map((f: { question: string; answer: string }) => ({
     '@type': 'Question',
-    name: softenYmylCopy(f.question.trim()),
-    acceptedAnswer: { '@type': 'Answer', text: softenYmylCopy(f.answer.trim()) },
+    name: softenEducationalTeaserCopy(f.question.trim()),
+    acceptedAnswer: { '@type': 'Answer', text: softenEducationalTeaserCopy(f.answer.trim()) },
   })),
 } : null;
 
@@ -254,7 +257,7 @@ const breadcrumbSchema = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
     { '@type': 'ListItem', position: 2, name: 'Answers', item: 'https://www.creditdoc.co/answers/' },
-    { '@type': 'ListItem', position: 3, name: answer.h1, item: canonicalUrl },
+    { '@type': 'ListItem', position: 3, name: displayH1, item: canonicalUrl },
   ],
 };
 
@@ -262,8 +265,8 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
 ---
 
 <BaseLayout
-  title={answer.title}
-  description={answer.meta_description}
+  title={displayTitle}
+  description={displayDescription}
   canonical={canonicalUrl}
   ogType="article"
   articlePublishedTime={answer.published_at || answer.last_updated}
@@ -279,15 +282,15 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
       <li><span class="mx-1">/</span></li>
       <li><a href="/answers/" class="hover:text-primary transition-colors">Answers</a></li>
       <li><span class="mx-1">/</span></li>
-      <li class="text-text font-medium truncate">{answer.h1}</li>
+      <li class="text-text font-medium truncate">{displayH1}</li>
     </ol>
   </nav>
 
   <!-- Header -->
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="max-w-3xl">
-      <h1 class="text-2xl sm:text-3xl font-bold text-text">{answer.h1}</h1>
-      <p class="mt-3 text-muted leading-relaxed">{answer.meta_description}</p>
+      <h1 class="text-2xl sm:text-3xl font-bold text-text">{displayH1}</h1>
+      <p class="mt-3 text-muted leading-relaxed">{displayDescription}</p>
       <p class="mt-3 text-sm text-muted">Written by <a href="/about/" class="text-primary hover:underline font-medium">Harvey Brooks</a>, Senior Financial Editor</p>
     </div>
   </section>
@@ -383,12 +386,12 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
               {answer.faq_schema.map(f => (
                 <details class="glass-card p-5 group" open>
                   <summary class="flex items-center justify-between cursor-pointer list-none">
-                    <h3 class="text-base font-semibold text-text pr-4">{softenYmylCopy(f.question)}</h3>
+                    <h3 class="text-base font-semibold text-text pr-4">{softenEducationalTeaserCopy(f.question)}</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-muted shrink-0 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/>
                     </svg>
                   </summary>
-                  <p class="mt-3 text-sm text-muted leading-relaxed">{softenYmylCopy(f.answer)}</p>
+                  <p class="mt-3 text-sm text-muted leading-relaxed">{softenEducationalTeaserCopy(f.answer)}</p>
                 </details>
               ))}
             </div>
@@ -403,7 +406,7 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
               {siblings.map(s => (
                 <a href={`/answers/${s.slug}/`} class="glass-card p-4 block hover:border-primary transition-colors">
                   <div class="text-xs text-primary font-semibold uppercase tracking-wide mb-1">{s.cluster_pillar.replace('-', ' ')}</div>
-                  <div class="text-text font-semibold leading-snug">{s.h1}</div>
+                  <div class="text-text font-semibold leading-snug">{softenEducationalTeaserCopy(s.h1)}</div>
                 </a>
               ))}
             </div>
