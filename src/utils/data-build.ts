@@ -19,7 +19,7 @@ import type {
   ClusterAnswer,
   ClusterPillar,
 } from './data';
-import { STATE_ABBREVIATIONS } from './data';
+import { normalizeLenderDisplayName, STATE_ABBREVIATIONS } from './data';
 import { softenEducationalTeaserCopy } from './safe-copy';
 
 const LENDERS_DIR = path.join(process.cwd(), 'src/content/lenders');
@@ -219,7 +219,7 @@ export function getAllLenders(): Lender[] {
   _lendersCache = files.map(f => {
     const raw = fs.readFileSync(path.join(LENDERS_DIR, f), 'utf-8');
     const l = JSON.parse(raw) as Lender;
-    l.name = typeof l.name === 'string' ? l.name.trim() : l.name;
+    l.name = typeof l.name === 'string' ? normalizeLenderDisplayName(l.name) : l.name;
     l.subcategories = Array.isArray(l.subcategories) ? l.subcategories : [];
     l.states_served = Array.isArray(l.states_served) ? l.states_served : [];
     l.cities_served = Array.isArray(l.cities_served) ? l.cities_served : [];

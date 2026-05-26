@@ -28,6 +28,8 @@ const winnerLender = comparison.winner === comparison.lender_a ? lenderA : lende
 
 function softenComparisonText(text: string): string {
   const locallySoftened = text
+    .replace(new RegExp(`\\b${comparison.lender_a}\\b`, 'gi'), lenderA.name)
+    .replace(new RegExp(`\\b${comparison.lender_b}\\b`, 'gi'), lenderB.name)
     .replace(/money-back guarantees/gi, 'listed refund terms')
     .replace(/money-back guarantee/gi, 'listed refund term')
     .replace(/\bwins\b/gi, 'is highlighted')

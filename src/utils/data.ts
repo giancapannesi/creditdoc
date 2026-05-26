@@ -357,6 +357,16 @@ export function formatPrice(price: number): string {
   return `$${price.toFixed(2)}`;
 }
 
+export function normalizeLenderDisplayName(name: string): string {
+  const trimmed = name.trim();
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)+$/.test(trimmed)) return trimmed;
+
+  return trimmed
+    .split('-')
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
 export function generateDiagnosis(lender: Lender): string {
   if (lender.diagnosis) return lender.diagnosis;
   const bestFor = lender.best_for.slice(0, 2).join(' and ');
