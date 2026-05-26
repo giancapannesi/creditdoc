@@ -52,6 +52,12 @@ const lenderBSignals = lenderB.best_for.slice(0, 2).map(softenComparisonText).jo
 const lenderAStrength = softenComparisonText(lenderA.pros[0] || 'Review the profile fields before contacting the provider');
 const lenderBStrength = softenComparisonText(lenderB.pros[0] || 'Review the profile fields before contacting the provider');
 
+function setupFeeContext(lender: Lender): string {
+  return lender.pricing.setup_fee > 0
+    ? `${lender.name} lists a ${formatPrice(lender.pricing.setup_fee)} setup fee`
+    : `${lender.name} has no listed setup fee`;
+}
+
 const categoryLabels: Record<string, string> = {
   'build-credit': 'Build My Credit',
   'business-loans': 'Business Loans',
@@ -71,12 +77,12 @@ const categoryContextCards = comparedCategories.map(category => ({
 
 const faqs = [
   {
-    question: `Which is cheaper, ${lenderA.name} or ${lenderB.name}?`,
+    question: `Which lists the lower monthly price, ${lenderA.name} or ${lenderB.name}?`,
     answer: lenderA.pricing.monthly_price < lenderB.pricing.monthly_price
-      ? `${lenderA.name} is cheaper at ${formatPrice(lenderA.pricing.monthly_price)}/mo compared to ${lenderB.name} at ${formatPrice(lenderB.pricing.monthly_price)}/mo. However, ${lenderA.pricing.setup_fee > 0 ? `${lenderA.name} charges a ${formatPrice(lenderA.pricing.setup_fee)} setup fee` : `${lenderA.name} has no setup fee`}, while ${lenderB.pricing.setup_fee > 0 ? `${lenderB.name} charges a ${formatPrice(lenderB.pricing.setup_fee)} setup fee` : `${lenderB.name} has no setup fee`}.`
+      ? `${lenderA.name} lists the lower monthly price at ${formatPrice(lenderA.pricing.monthly_price)}/mo, compared with ${lenderB.name} at ${formatPrice(lenderB.pricing.monthly_price)}/mo. Setup fees can change first-month cost: ${setupFeeContext(lenderA)}, while ${setupFeeContext(lenderB)}.`
       : lenderA.pricing.monthly_price > lenderB.pricing.monthly_price
-        ? `${lenderB.name} is cheaper at ${formatPrice(lenderB.pricing.monthly_price)}/mo compared to ${lenderA.name} at ${formatPrice(lenderA.pricing.monthly_price)}/mo. However, ${lenderB.pricing.setup_fee > 0 ? `${lenderB.name} charges a ${formatPrice(lenderB.pricing.setup_fee)} setup fee` : `${lenderB.name} has no setup fee`}, while ${lenderA.pricing.setup_fee > 0 ? `${lenderA.name} charges a ${formatPrice(lenderA.pricing.setup_fee)} setup fee` : `${lenderA.name} has no setup fee`}.`
-        : `Both ${lenderA.name} and ${lenderB.name} charge the same monthly rate of ${formatPrice(lenderA.pricing.monthly_price)}/mo. The difference comes down to setup fees: ${lenderA.pricing.setup_fee > 0 ? `${lenderA.name} charges ${formatPrice(lenderA.pricing.setup_fee)}` : `${lenderA.name} charges nothing`} vs ${lenderB.pricing.setup_fee > 0 ? `${formatPrice(lenderB.pricing.setup_fee)} for ${lenderB.name}` : `no setup fee for ${lenderB.name}`}.`,
+        ? `${lenderB.name} lists the lower monthly price at ${formatPrice(lenderB.pricing.monthly_price)}/mo, compared with ${lenderA.name} at ${formatPrice(lenderA.pricing.monthly_price)}/mo. Setup fees can change first-month cost: ${setupFeeContext(lenderB)}, while ${setupFeeContext(lenderA)}.`
+        : `Both ${lenderA.name} and ${lenderB.name} list the same monthly price of ${formatPrice(lenderA.pricing.monthly_price)}/mo. Setup fees can change first-month cost: ${setupFeeContext(lenderA)}, while ${setupFeeContext(lenderB)}.`,
   },
   {
     question: `Which has the higher stored BBB rating, ${lenderA.name} or ${lenderB.name}?`,
@@ -88,7 +94,7 @@ const faqs = [
   },
   {
     question: `How should I compare ${lenderA.name} and ${lenderB.name}?`,
-    answer: `Compare the profile details, pricing fields, public ratings where available, refund terms, and complaint-response context before contacting either company. CreditDoc's comparison note currently flags ${winnerLender.name} for this matchup because: ${safeWinnerReason}`,
+    answer: `Compare the profile details, pricing fields, public ratings where available, refund terms, and complaint-response context before contacting either company. CreditDoc's stored comparison note highlights ${winnerLender.name} for this matchup because: ${safeWinnerReason}`,
   },
 ];
 
