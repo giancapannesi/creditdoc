@@ -1615,3 +1615,47 @@ Notes:
   records.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 060: Wellness Guide List Titles
+
+Date: 2026-05-26
+Implementation commit: `7e490ca06a` (`feat: soften wellness guide list titles`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Broadened `softenEducationalTeaserCopy()` for financial-wellness guide titles
+  already routed through safe-copy on `/financial-wellness/` and `/sitemap/`.
+- Softened rendered list-title phrases including `Easy Approval`, `How to
+  Qualify`, `How to Get Approved`, `Better Loan Deal`, `Which Protects You
+  Better`, `What Hurts Your Score`, `Where to Apply`, cosigner, payoff-method,
+  and credit-monitoring phrasing.
+- Added cleanup for replacement joins such as `Cosigner Trade-Offs: Risks`,
+  `Loan Cost Comparison`, `Eligibility Fields and Listed Pricing Context`,
+  `Protection Trade-Offs`, and `How to Evaluate`.
+- Preserved guide records, slugs, URLs, route structure, and page templates.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- `git diff --check` passed.
+- Generated `dist/financial-wellness/index.html` and `dist/sitemap/index.html`
+  confirmed targeted raw phrases were removed and representative softened
+  titles were present.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`, `/categories/fintech/`,
+  `/financial-wellness/`, `/sitemap-index.xml`, and `/robots.txt`.
+
+Notes:
+
+- This is a central helper change only; no source records or URL paths were
+  changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
