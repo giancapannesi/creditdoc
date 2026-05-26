@@ -1419,3 +1419,42 @@ Notes:
   this batch only covers the link-list render boundaries above.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 055: Review Related Guide Copy
+
+Date: 2026-05-26
+Implementation commit: `0f635e1a44` (`feat: soften review related guide copy`)
+
+Scope:
+
+- `src/pages/review/[slug].astro`
+
+What changed:
+
+- Added display-only related financial-wellness guide records on provider review
+  pages.
+- Applied `softenEducationalTeaserCopy()` to related guide titles and
+  descriptions before card rendering.
+- Applied the same title softener to the "next step" card label when it points
+  to the first related guide.
+- Preserved guide slugs, runtime fetches, provider profile data, and provider
+  names.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and generated `/review/[slug]` worker route-module scans confirmed
+  `displayRelatedWellnessGuides` uses safe-copy title/description values before
+  rendering.
+- `git diff --check` passed.
+
+Notes:
+
+- This closes the provider-review related-guide surface without changing
+  DB-backed guide records or review page routing.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
