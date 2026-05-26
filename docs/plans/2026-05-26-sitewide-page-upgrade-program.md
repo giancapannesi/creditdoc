@@ -3093,6 +3093,67 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 098: Static Trust and Rating Copy
+
+Date: 2026-05-26
+Implementation commit: `5fff633ae7` (`fix: soften static trust and rating copy`)
+
+Scope:
+
+- `src/pages/about.astro`
+- `src/pages/about/creditdoc-data.astro`
+- `src/pages/best/[slug].astro`
+- `src/pages/contact.astro`
+- `src/pages/editorial-policy.astro`
+- `src/pages/methodology.astro`
+- `src/pages/review/[slug].astro`
+- `src/pages/search.astro`
+
+What changed:
+
+- Reframed static trust, editorial, and methodology copy away from direct
+  verification and expert-positioning claims.
+- Replaced `verified user review platforms` with `public user review
+  platforms`.
+- Replaced `Pricing is verified monthly` and `Pricing Verification` language
+  with pricing-reference review language.
+- Replaced `No verified Google rating` with `No stored Google rating` in
+  dynamic rating fallbacks.
+- Replaced `Guarantee listed` with `Refund policy listed` in search filters.
+- Reframed data-correction and removal copy around source-supported corrections
+  and public-data context.
+- Preserved routes, layouts, content records, pricing data, provider records,
+  and dynamic page structure.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted source and rendered scans returned no matches for old risky phrases:
+  `verified user review platforms`, `Pricing is verified monthly`,
+  `No verified Google rating`, `verified mistakes`, `verified negative data`,
+  `expert commentary`, `correction is verified`, `Guarantee listed`,
+  `Verified customer reviews`, `Pricing Verification`,
+  `direct pricing verification`, `Verified quarterly`,
+  `How we verify information`, or `Verified through`.
+- Replacement-language checks confirmed rendered output on `/about/`,
+  `/about/creditdoc-data/`, `/contact/`, `/editorial-policy/`,
+  `/methodology/`, dynamic review/best SSR modules, and the search client
+  bundle.
+- Production spot checks returned HTTP 200 for `/`, `/about/`,
+  `/editorial-policy/`, `/methodology/`, `/about/creditdoc-data/`,
+  `/contact/`, `/search/`, `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Static page and fallback-label cleanup only; no provider or comparison data
+  records were rewritten.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 097: State Lending-Law Provider Copy Softening
 
 Date: 2026-05-26
