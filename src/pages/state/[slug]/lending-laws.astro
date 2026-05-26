@@ -17,6 +17,10 @@ export function getStaticPaths() {
 const { stateInfo, data } = Astro.props;
 const lenders = getLendersInState(stateInfo.abbr);
 const creditRepairLenders = lenders.filter(l => l.category === 'credit-repair' || l.category === 'credit-counseling');
+const creditRepairProviderCount = creditRepairLenders.length;
+const creditRepairProviderSummary = creditRepairProviderCount > 0
+  ? `Review ${creditRepairProviderCount} listed credit repair ${creditRepairProviderCount === 1 ? 'provider profile' : 'provider profiles'} in ${stateInfo.name}.`
+  : `Review local provider listings and state-rule context for ${stateInfo.name}.`;
 
 const cr = data.credit_repair_laws || {};
 const lt = data.lending_types || {};
@@ -424,7 +428,7 @@ const psc = paydayStatusColor(data.payday_loan_status || '');
         <div class="glass-card p-5 bg-gradient-to-br from-primary-light to-white">
           <h3 class="font-bold text-text mb-2">Need Credit Repair in {stateInfo.abbr}?</h3>
           <p class="text-sm text-muted mb-3">
-            Compare {creditRepairLenders.length > 0 ? creditRepairLenders.length : ''} verified credit repair companies in {stateInfo.name}.
+            {creditRepairProviderSummary}
           </p>
           <a href={`/state/${stateInfo.slug}/`} class="inline-flex items-center gap-2 bg-primary text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-primary-hover transition-colors">
             Browse {stateInfo.abbr} Providers
