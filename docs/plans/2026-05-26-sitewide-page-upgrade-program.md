@@ -2853,3 +2853,50 @@ Notes:
 - Render-only safe-copy cleanup; no source comparison or lender records changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 085: Comparison Zero Setup Fee Clarification
+
+Date: 2026-05-26
+Implementation commit: `48ed11457f` (`fix: clarify zero setup fee in comparisons`)
+
+Scope:
+
+- `src/components/ComparisonTable.astro`
+
+What changed:
+
+- Changed comparison setup-fee table rendering for stored `0` values from
+  `Free` to `No setup fee listed`.
+- Stopped zero setup-fee values from receiving the `Lower` badge in side-by-side
+  comparison tables.
+- Preserved source comparison records, source lender records, pricing values,
+  routes, cards, table structure, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for setup-fee rows rendering
+  `<span>Free</span>` or zero setup-fee `Lower` badges.
+- Targeted rendered checks confirmed `No setup fee listed` on
+  `/compare/ace-cash-express-new-orleans-la-vs-ace-cash-express-miami-fl/`.
+- Targeted rendered checks confirmed `/compare/self-credit-builder-vs-discover-it-secured/`
+  renders `$9.00` against `No setup fee listed` without a zero-fee `Lower`
+  badge.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/self-credit-builder-vs-discover-it-secured/`,
+  `/compare/ace-cash-express-new-orleans-la-vs-ace-cash-express-miami-fl/`,
+  `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison clarification; no source pricing records changed.
+- The table now distinguishes no listed setup fee from a broader claim that the
+  product or service is free.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
