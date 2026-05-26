@@ -1227,3 +1227,41 @@ Notes:
   heading/helper language.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 050: Category Meta Titles
+
+Date: 2026-05-26
+Implementation commit: `771d35800e` (`feat: soften category meta titles`)
+
+Scope:
+
+- `src/pages/categories/[category].astro`
+
+What changed:
+
+- Added `softenCategoryTitle()` to the SSR category route.
+- Applied it to category SEO titles before passing them into `BaseLayout`.
+- Reframed `Best`, `top`, and `right` title wording toward comparison,
+  listed-profile, and relevant-context language.
+- Preserved category names, slugs, canonical route behavior, schema names,
+  lender ordering, and source category JSON/Supabase values.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and built `/categories/[category]` worker route-module scans confirmed
+  `softenCategoryTitle()` and category meta-title usage.
+- `git diff --check` passed.
+
+Notes:
+
+- `/categories/[category]` is an SSR route emitted under
+  `dist/_worker.js/pages/categories/_category_.astro.mjs`.
+- This keeps raw category data intact and applies title cleanup at the render
+  boundary.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
