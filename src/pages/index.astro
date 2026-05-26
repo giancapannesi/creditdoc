@@ -31,7 +31,7 @@ const topPicks = lenders
     const relevantCategory = TOP_PICK_CATEGORIES.includes(l.category);
     const goodRating = l.google_rating && l.google_rating >= 3.0 && !(l.google_rating > 5) && l.google_reviews_count && l.google_reviews_count >= 1;
     const isVerified = l.verified_provider === true;
-    const goodQuality = isVerified || (l.quality_score || 0) >= 8;  // Verified providers always qualify
+    const goodQuality = isVerified || (l.quality_score || 0) >= 8;  // Verified providers pass the quality gate
     const noWarning = !(l as any).website_status;
     return relevantCategory && (ds === 'enriched' || ds === 'editorial' || ds === 'verified' || enriched) && hasContent && goodRating && goodQuality && noWarning;
   })
