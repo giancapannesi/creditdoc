@@ -949,3 +949,25 @@ Initial Batch 023 targets:
   `src/content/wellness-guides.json` change unless the user explicitly confirms
   it belongs in this project batch;
 - build-check, output/source-check, document, commit, then continue.
+
+Batch 023 implementation is complete, build-verified, and committed as
+`4737bde7ec`. Move to Batch 024 by scanning the remaining generated support
+surfaces and raw content sources that were intentionally not rewritten in Batch
+023.
+
+Initial Batch 024 targets:
+
+- scan homepage, answers index/source, state sidebar source, generated tools,
+  generated resources, generated research, generated trends samples, and source
+  listicle content for residual unsupported best/top/recommendation/guarantee,
+  approval, licensing, safety, and outcome wording;
+- decide case by case whether remaining `best` language is strategic SEO title
+  language, route slug/anchor context, a raw content issue, or a visible claim
+  that should be softened;
+- inspect `src/content/listicles.json` only for raw phrases that are not covered
+  by the `/best/[slug]` render boundary or that leak into other templates;
+- preserve explicit warning/scam/legal examples;
+- keep routes and slugs stable;
+- continue excluding unrelated `src/content/wellness-guides.json` unless the
+  user explicitly confirms it belongs in this cleanup;
+- build-check, output/source-check, document, commit, then continue.

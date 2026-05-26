@@ -2163,3 +2163,46 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_022_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_022_static_guide_quiz_labels_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 023
+
+Batch 023 implementation committed as `4737bde7ec` for listicle and quiz
+cross-link copy cleanup:
+
+- `src/pages/best/[slug].astro`
+- `src/pages/tools/borrowing-power-quiz.astro`
+- `src/pages/financial-wellness/[slug].astro`
+- `src/pages/state/[slug].astro`
+- `src/pages/answers/index.astro`
+- `src/utils/safe-copy.ts`
+
+Changes:
+
+- Routed `/best/[slug]` listicle descriptions, intros, TL;DR text, key
+  takeaways, FAQ text/schema, lender summaries, and pros through
+  `softenYmylCopy()` at render time.
+- Expanded `softenYmylCopy()` for remaining listicle-style best/risk-free,
+  strongest-guarantee, refund-policy, lower-rate, and matched-provider wording.
+- Replaced visible `Best`/`Top` cross-link labels on quiz, answers, wellness,
+  and state surfaces with profile/comparison language while preserving URLs.
+- Softened borrowing-power quiz copy around matching, lower rates, credit-repair
+  outcomes, and result follow-up text.
+
+Verification:
+
+- `npm run build` passed after the implementation and again after the final
+  quiz wording tweak.
+- Build injected 18,413 SSR route URLs because an unrelated unstaged
+  `src/content/wellness-guides.json` change added two generated wellness URLs;
+  that file was not staged or committed in Batch 023.
+- Build generated 124 city guides plus 2,232 city-category sub-pages.
+- Postbuild sitemap/robots conflict check passed.
+- Targeted source/generated-output scan confirmed old Batch 023 phrases were
+  absent from the SSR listicle template, financial-wellness template, state
+  template, answers index source, and generated borrowing-power quiz page.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_023_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_023_listicle_quiz_crosslinks_gsc_seen_2026-05-26.csv`
