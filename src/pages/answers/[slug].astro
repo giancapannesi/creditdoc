@@ -111,14 +111,14 @@ const displayH1 = softenEducationalTeaserCopy(answer.h1 || answer.title || '');
 const displayDescription = softenEducationalTeaserCopy(answer.meta_description || '');
 
 const categoryLabels: Record<string, string> = {
-  'build-credit': 'Build My Credit',
+  'build-credit': 'Credit Building',
   'business-loans': 'Business Loans',
   'credit-cards': 'Credit Cards',
   'credit-monitoring': 'Monitor & Protect',
   'credit-repair': 'Credit Repair',
-  'debt-relief': 'Get Out of Debt',
+  'debt-relief': 'Debt Relief',
   fintech: 'Fintech',
-  'personal-loans': 'I Need a Loan',
+  'personal-loans': 'Personal Loans',
 };
 const categorySlug = answer.banner_category || '';
 const categoryLabel = categoryLabels[categorySlug] || categorySlug.replace(/-/g, ' ') || 'Finance';

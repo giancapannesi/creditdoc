@@ -60,14 +60,14 @@ function setupFeeContext(lender: Lender): string {
 }
 
 const categoryLabels: Record<string, string> = {
-  'build-credit': 'Build My Credit',
+  'build-credit': 'Credit Building',
   'business-loans': 'Business Loans',
   'credit-cards': 'Credit Cards',
   'credit-monitoring': 'Monitor & Protect',
   'credit-repair': 'Credit Repair',
-  'debt-relief': 'Get Out of Debt',
+  'debt-relief': 'Debt Relief',
   fintech: 'Fintech',
-  'personal-loans': 'I Need a Loan',
+  'personal-loans': 'Personal Loans',
 };
 
 const comparedCategories = Array.from(new Set([lenderA.category, lenderB.category].filter(Boolean)));
