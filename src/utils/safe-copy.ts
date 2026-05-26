@@ -153,3 +153,13 @@ export function softenEducationalTeaserCopy(text: string): string {
     .replace(/\bimprove your score\b/gi, 'support score improvement context')
     .replace(/\bimproves your financial future\b/gi, 'supports your financial planning');
 }
+
+export function softenGlossaryCopy(text: string): string {
+  return softenEducationalTeaserCopy(text)
+    .replace(/\bmost reliable way to find the cheapest loan\b/gi, 'one way to compare loan cost')
+    .replace(/\bthe cheapest loan\b/gi, 'a lower-cost loan')
+    .replace(/\bcheapest loan\b/gi, 'lower-cost loan')
+    .replace(/\bChapter 13 is better than Chapter 7\b/gi, 'Chapter 13 may be more relevant than Chapter 7')
+    .replace(/\bLower LTV = lower risk for lender = better rate for you\b/gi, 'Lower LTV can mean lower lender risk and different rate context')
+    .replace(/\bbest mortgage deals available\b/gi, 'mortgage options with notable listed benefits');
+}
