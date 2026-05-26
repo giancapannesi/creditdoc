@@ -188,17 +188,33 @@ Batch 001 completed and deployed 2026-05-26:
 
 Continue the noindex queue in small batches:
 
-1. Dump/redirect: obvious auto, vehicle, title-only, passport, detective,
+1. Fix/index: select the next small batch of real finance providers from
+   `noindex_real_lenders_with_websites_fix_queue_2026-05-26.csv`; verify the
+   website/category match and only remove noindex after the page meets the
+   review checklist.
+2. Chain-location rebuild: keep Vigo/MoneyGram/Barri/Amscot/DolEx-style rows
+   out of blind dump batches; rebuild these with the chain-location treatment
+   and state regulatory context before deciding indexability.
+3. Dump/redirect: obvious auto, vehicle, title-only, passport, detective,
    fraud, and other wrong-vertical pages.
-2. Fix: real lenders/financial providers with matching websites and useful
-   location/service data.
-3. Escalate/manual: ambiguous rows where the website/category does not prove
+4. Escalate/manual: ambiguous rows where the website/category does not prove
    the page belongs on CreditDoc.
 
 Rule for every batch: store the candidate list, archive list, DB backup path,
 Supabase result count, redirect list, and live URL status checks in the project
 folder before calling the batch done. Also scan live/static browse pages and
 sitemaps for exact `/review/<slug>/` paths before closing the batch.
+
+Batch 004 completed 2026-05-26:
+
+- `continental-bank` reinstated and deployed as indexable.
+- `check-cashing-payday-loans`, `credit-repair-finest`,
+  `simple-fast-business-funding-same-day-loans`, and
+  `smile-jewels-pawn-loans` archived and live-verified as `404`.
+- Worker version: `46a1298e-a4d0-478f-9499-1edce895ca73`.
+- Next noindex step: move into a 10-15 page fix/index batch from real lender
+  candidates, not another blind drop batch, unless the candidate is clearly
+  rubbish.
 
 ---
 

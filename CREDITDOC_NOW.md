@@ -1208,3 +1208,38 @@ Bottom-up local authority + CFPB responsiveness project 2026-05-26:
     - 1 `pending_category_policy` (`sarma`)
 - Added profile-quality operating plan:
   `docs/plans/2026-05-26-profile-quality-agent.md`
+
+## 2026-05-26 — Noindex Cleanup Batch 004
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Noindex_Review_2026-05-26/`
+
+Batch 004 resolved the 5 `ready_for_index` rows that still had
+`data.no_index=true`:
+
+- Reinstated `continental-bank`: `no_index=false`, published, neutral meta
+  title/description, and unsupported rating wording removed from the meta
+  description.
+- Archived 4 weak/mismatched zero-GSC rows:
+  - `check-cashing-payday-loans`
+  - `credit-repair-finest`
+  - `simple-fast-business-funding-same-day-loans`
+  - `smile-jewels-pawn-loans`
+
+Verification:
+
+- Local SQLite and Supabase agree for all 5 touched slugs.
+- No Supabase retry rows for the 5 touched slugs.
+- `npm run build` passed.
+- Exact built HTML/XML scan found no `/review/<slug>/` references for the 4
+  archived paths.
+- Deployed via `./deploy.sh`.
+- Cloudflare Worker version:
+  `46a1298e-a4d0-478f-9499-1edce895ca73`.
+- Live status:
+  - `https://www.creditdoc.co/review/continental-bank/` returns `200` with no
+    `noindex` robots meta.
+  - The 4 archived review URLs return `404`.
+  - Live `sitemap-0.xml` through `sitemap-4.xml` contain none of the 4
+    archived review paths; `sitemap-5.xml` and above return `404`.
