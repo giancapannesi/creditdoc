@@ -83,13 +83,13 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
 const fmt = (n: number) => n.toLocaleString('en-US');
 const slugToName = (slug: string) => slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 
-const title = "Which Banks Actually Approve Mortgages? | CreditDoc";
-const description = "Analysis of 3.4 million mortgage applications from 2023 HMDA data. See which banks approve the most low-income applicants and which have the biggest income-based approval gaps.";
+const title = "Mortgage Approval Data by Bank | CreditDoc";
+const description = "Analysis of 3.4 million mortgage applications from 2023 HMDA data. See reported low-income approval rates and income-based approval gaps by institution.";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Which Banks Actually Approve Mortgages? A Transparency Report",
+  "headline": "Mortgage Approval Data by Bank: A Transparency Report",
   "description": description,
   "author": { "@type": "Organization", "name": "CreditDoc" },
   "publisher": { "@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co" },
@@ -110,10 +110,10 @@ const jsonLd = {
     </nav>
 
     <h1 class="text-3xl sm:text-4xl font-bold text-text mb-4">
-      Which Banks Actually Approve Mortgages?
+      Mortgage Approval Data by Bank
     </h1>
     <p class="text-lg text-muted mb-8">
-      We analyzed <span class="text-text font-semibold">{fmt(totalApps)} mortgage applications</span> across {fmt(lenderCount)} institutions using 2023 HMDA data from the Consumer Financial Protection Bureau. Here's what the data shows about who actually gets approved — and who doesn't.
+      We analyzed <span class="text-text font-semibold">{fmt(totalApps)} mortgage applications</span> across {fmt(lenderCount)} institutions using 2023 HMDA data from the Consumer Financial Protection Bureau. Here's what the public data shows about recorded approval outcomes.
     </p>
 
     <!-- Key Stats -->
@@ -157,9 +157,9 @@ const jsonLd = {
       </div>
     </section>
 
-    <!-- Section 1: Top Approvers for Low-Income -->
+    <!-- Section 1: Low-income approval rates -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold text-text mb-2">Banks That Approve Low-Income Applicants</h2>
+      <h2 class="text-2xl font-bold text-text mb-2">Low-Income Approval Rate Records</h2>
       <p class="text-sm text-muted mb-4">
         These institutions have the highest approval rates for applicants reporting income under $50,000. Minimum 1,000 total applications and 100 low-income applications required.
       </p>
@@ -199,9 +199,9 @@ const jsonLd = {
 
     <!-- Section 2: Lowest Approval for Low-Income -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold text-text mb-2">Banks With Lowest Low-Income Approval Rates</h2>
+      <h2 class="text-2xl font-bold text-text mb-2">Lower Low-Income Approval Rate Records</h2>
       <p class="text-sm text-muted mb-4">
-        These institutions approve the fewest applicants reporting income under $50,000. This doesn't necessarily indicate discrimination — different lenders serve different markets. But transparency matters.
+        These institutions show lower approval rates for applicants reporting income under $50,000. This doesn't necessarily indicate discrimination — different lenders serve different markets. But transparency matters.
       </p>
       {topDeniers.length > 0 && (
         <div class="glass-card p-4 overflow-x-auto">
@@ -239,7 +239,7 @@ const jsonLd = {
 
     <!-- Section 3: Biggest Income Gap -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold text-text mb-2">Biggest Approval Gaps by Income</h2>
+      <h2 class="text-2xl font-bold text-text mb-2">Largest Approval Gaps by Income</h2>
       <p class="text-sm text-muted mb-4">
         The largest difference between approval rates for high-income (over $200K) vs low-income (under $50K) applicants at the same institution. A larger gap means income is a stronger predictor of approval at that lender.
       </p>
