@@ -2333,3 +2333,56 @@ Notes:
   the live site yet rather than a live outage.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 075: Comparison Guarantee And Value Claims
+
+Date: 2026-05-26
+Implementation commit: `ccdfc797cc` (`feat: soften comparison guarantee value claims`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Extended `softenYmylCopy()` for remaining comparison-generated guarantee,
+  refund, value, choice, winner, flexibility, and social-proof phrasing.
+- Reworded variants such as `does not explicitly guarantee this benefit`,
+  `50-point guarantee with full money-back refund`, `full money-back refund`,
+  `performance guarantee`, `significantly reduces consumer risk`,
+  `assurance of results`, `valuable 72-hour listed satisfaction term`,
+  `superior geographic flexibility`, `wins decisively`, `edges ahead`,
+  `cannot match`, `overwhelming social proof`, and `critical differentiators`
+  into provider-stated, listed-field, listed-cost, or context-to-verify wording.
+- Reworded `Choose based on`, `choose Cosmo`, and similar comparison-summary
+  phrasing into compare-oriented language.
+- Preserved comparison routes, slugs, source records, rankings, category
+  mappings, ratings, review links, table layout, and card layout.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- `dist/compare` scan returned no matches for the targeted guarantee, value,
+  winner, flexibility, social-proof, and `consumer-protection context context`
+  phrases.
+- Targeted rendered checks covered
+  `/compare/advance-america-oklahoma-city-vs-advance-america-hialeah-fl/`,
+  `/compare/ace-cash-express-new-orleans-la-vs-amscot-the-money-superstore-orlando/`,
+  `/compare/credit-blueprint-vs-cosmo-credit-repair/`, and
+  `/compare/national-credit-care-vs-cosmo-credit-repair/`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/learn/`, `/blog/`, `/categories/fintech/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Helper-only change; no source lender records, routes, slugs, rankings,
+  category mappings, or card/table layout changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
