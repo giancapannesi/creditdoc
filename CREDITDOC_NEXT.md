@@ -809,7 +809,7 @@ Batch 015 on the remaining broad navigation/commercial support pages:
 
 Keep Batch 015 scoped and YMYL-safe. Do not deploy unless requested.
 
-Batch 015 is locally complete and build-verified. After committing, move to
+Batch 015 is complete, build-verified, and committed as `7a2f4b0ddb`. Move to
 Batch 016 on remaining template families not yet covered by the sitewide graph
 upgrade, starting with:
 

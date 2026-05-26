@@ -1833,7 +1833,7 @@ Workpack:
 
 ## 2026-05-26 — Sitewide Page Upgrade Batch 015
 
-Batch 015 completed locally for navigation/commercial support pages:
+Batch 015 committed as `7a2f4b0ddb` for navigation/commercial support pages:
 
 - `/`
 - `/press/`
