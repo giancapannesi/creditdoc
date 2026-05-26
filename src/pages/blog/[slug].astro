@@ -340,7 +340,7 @@ const jsonLd = [
                 {relatedAnswers.map(q => (
                   <a href={`/answers/${q.slug}/`} class="glass-card p-4 block hover:border-primary transition-colors group">
                     <span class="text-sm font-medium text-text group-hover:text-primary transition-colors">
-                      {q.title.replace(/ \| CreditDoc$/, '')}
+                      {softenEducationalTeaserCopy(q.title.replace(/ \| CreditDoc$/, ''))}
                     </span>
                   </a>
                 ))}
@@ -479,7 +479,7 @@ const jsonLd = [
                   href={`/best/${listicle.slug}/`}
                   class="block rounded-lg border border-border p-3 hover:border-primary/30 hover:bg-primary-light/20 transition-colors"
                 >
-                  <p class="text-sm font-medium text-text leading-snug">{listicle.title}</p>
+                  <p class="text-sm font-medium text-text leading-snug">{softenEducationalTeaserCopy(listicle.title)}</p>
                   <p class="mt-1 text-xs text-primary font-medium">Review comparison context &rarr;</p>
                 </a>
               ))}

@@ -1188,7 +1188,7 @@ const ogImageUrl = lender.logo_url?.trim()
           {relatedAnswers.map(answer => (
             <a href={`/answers/${answer.slug}/`} class="glass-card p-4 block hover:border-primary transition-colors group">
               <span class="text-sm font-medium text-text group-hover:text-primary transition-colors">
-                {answer.title.replace(/ \| CreditDoc$/, '')}
+                {softenEducationalTeaserCopy(answer.title.replace(/ \| CreditDoc$/, ''))}
               </span>
             </a>
           ))}
