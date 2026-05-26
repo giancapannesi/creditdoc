@@ -103,6 +103,30 @@ const psc = paydayStatusColor(data.payday_loan_status || '');
       )}
     </div>
 
+    <section class="glass-card p-5 mb-8">
+      <h2 class="text-lg font-bold text-text mb-2">Use These Rules With Local Research</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        State laws are only one part of provider research. Check local guides, provider categories, borrower answers, and complaint-data context before contacting a company. This page is legal-context research, not legal advice, a recommendation, approval prediction, price quote, or licensing determination.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href={`/state/${stateInfo.slug}/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          {stateInfo.name} provider directory
+        </a>
+        <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Local city guides
+        </a>
+        <a href="/categories/personal-loans/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Personal loan providers
+        </a>
+        <a href="/answers/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Borrower questions
+        </a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Complaint data context
+        </a>
+      </div>
+    </section>
+
     <!-- Quick Reference Cards -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
       <div class="glass-card p-4 text-center" style="pointer-events: none;">

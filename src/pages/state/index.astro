@@ -89,6 +89,27 @@ for (const region of Object.values(regions)) {
       </div>
     </div>
 
+    <section class="glass-card p-5 mb-8">
+      <h2 class="text-lg font-bold text-text mb-2">Use State Pages With Local Guides</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        Start with a state overview, then move into city guides, state lending-law pages, provider categories, and CreditDoc data explainers. These pages provide directory and legal-context research, not a recommendation, approval prediction, price quote, or licensing determination.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Browse city guides
+        </a>
+        <a href="/categories/personal-loans/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Personal loan providers
+        </a>
+        <a href="/answers/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Borrower questions
+        </a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Complaint data context
+        </a>
+      </div>
+    </section>
+
     <!-- Regions -->
     {Object.entries(regions).filter(([, s]) => s.length > 0).map(([region, regionStates]) => (
       <section class="mb-8">

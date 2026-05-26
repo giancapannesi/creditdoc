@@ -49,7 +49,8 @@ Sitewide upgrade program restarted:
   and city-category page served by the two templates.
 - Batch 002 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_002_notes_2026-05-26.md`
-- Batch 003 completed locally and build-verified:
+- Batch 003 completed and committed:
+  `1acbc51ecf feat: add graph links to answer pages`.
   `/answers/{slug}/` template now includes a `Continue Your Research` graph path
   connecting answer pages to the matching category directory, local credit
   guides, state lending-rule pages, and CFPB complaint-data context.
@@ -58,7 +59,8 @@ Sitewide upgrade program restarted:
   template.
 - Batch 003 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_003_notes_2026-05-26.md`
-- Batch 004 completed locally and build-verified:
+- Batch 004 completed and committed:
+  `d672d77841 feat: add graph context to comparison pages`.
   `/compare/{slug}/` template now includes a `Check the Context Before You
   Contact a Company` graph path connecting comparison pages to lender profiles,
   category context, local guides, and CFPB complaint-data context.
@@ -69,7 +71,8 @@ Sitewide upgrade program restarted:
   `/compare/` URLs. Batch 004 applies to every generated comparison page.
 - Batch 004 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_004_notes_2026-05-26.md`
-- Batch 005 completed locally and build-verified:
+- Batch 005 completed and committed:
+  `f1e0e02d2d feat: add graph links to category pages`.
   `/categories/{category}/` template now includes an `Explore {category}
   Locally` authority path and `Research the Next Step` cards.
 - Category hubs now connect to example local city-category pages for Amarillo,
@@ -79,13 +82,30 @@ Sitewide upgrade program restarted:
   `/categories/` URLs. Batch 005 applies to every SSR category page.
 - Batch 005 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_005_notes_2026-05-26.md`
+- Batch 006 completed locally and build-verified:
+  `/state/`, `/state/{slug}/`, and `/state/{slug}/lending-laws/` now include
+  state-to-local authority paths connecting state hubs, lending-law pages,
+  city guides, category pages, answer clusters, and CFPB complaint-data context.
+- Batch 006 uses advisory-neutral wording: state pages provide
+  directory/legal-context research, not legal advice, recommendations, approval
+  predictions, price quotes, or licensing determinations.
+- Latest local GSC pull (`pull_id=12`) saw 10 `/state/` URLs. Batch 006 applies
+  beyond those rows to the state index, every SSR state directory page, and
+  every generated lending-law page.
+- Batch 006 build verification passed:
+  `npm run build`, robots contract, SSR sitemap parity, Astro build, generated
+  output/server-bundle section scan, and sitemap/robots conflict check. This run
+  injected 18,411 SSR route URLs and successfully added 124 city guides plus
+  2,232 city-category sub-pages.
+- Batch 006 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_006_notes_2026-05-26.md`
 
 Immediate next:
 
-1. Commit Batch 005 with only the category template and resume-cursor docs.
-2. Continue to Batch 006: upgrade state/state lending-law pages so state hubs
-   connect into local guide pages, relevant categories, answer clusters, and
-   research/methodology pages with advisory-neutral wording.
+1. Commit Batch 006 with only the state templates and resume-cursor docs.
+2. Continue to Batch 007: upgrade research pages so the original-research hub
+   and reports connect back into local guides, categories, answer clusters,
+   state pages, tools, and methodology/data-context pages.
 3. Keep every batch scoped, build-verified, documented, and committed before
    starting the next one.
 

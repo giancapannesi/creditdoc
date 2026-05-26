@@ -594,6 +594,39 @@ Sitewide upgrade program:
 
 - `docs/plans/2026-05-26-sitewide-page-upgrade-program.md`
 
+Completed batches:
+
+- Batch 001 committed `bba672df72`: 49 CFPB report-included provider profiles
+  now show the research callout through the review template.
+- Batch 002 committed `07b046a396`: city guide and city-category templates now
+  connect local pages to category, state, answer, tool, and CFPB data context.
+- Batch 003 committed `1acbc51ecf`: answer pages now include `Continue Your
+  Research` graph paths to category, local, state, and CFPB context pages.
+- Batch 004 committed `d672d77841`: comparison pages now link lender profiles,
+  category context, local guides, and CFPB complaint-data context with softened
+  comparison wording.
+- Batch 005 committed `f1e0e02d2d`: category hubs now link to local
+  city-category examples, answer hub, state hub, CFPB data context, and tools.
+- Batch 006 completed locally and build-verified: state index, state directory
+  pages, and lending-law pages now connect to local guides, categories, answers,
+  and CFPB complaint-data context. Commit next.
+
+Next execution:
+
+1. Commit Batch 006:
+   - `src/pages/state/index.astro`
+   - `src/pages/state/[slug].astro`
+   - `src/pages/state/[slug]/lending-laws.astro`
+   - `CREDITDOC_NOW.md`
+   - `CREDITDOC_NEXT.md`
+2. Start Batch 007 on research pages:
+   - inspect `src/pages/research/index.astro`;
+   - inspect public report pages under `src/pages/research/`;
+   - add research-to-local/category/state/answers/tools graph paths with
+     methodology-first, advisory-neutral wording.
+3. Build, verify generated output, document in the sitewide upgrade workpack,
+   and commit before Batch 008.
+
 ## Regulator Match / Category Cleanup
 
 Plan:

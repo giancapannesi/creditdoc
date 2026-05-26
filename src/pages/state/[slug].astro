@@ -172,6 +172,11 @@ const fmtCurrency = (n: number) => n ? '$' + n.toLocaleString('en-US') : 'N/A';
 
 // Find the dominant category for this state's lenders to match related content
 const topCategory = sortedGroups.length > 0 ? sortedGroups[0][0] : '';
+const stateGraphCities = stateCities.slice(0, 3);
+const stateGraphCategories = sortedGroups.slice(0, 3).map(([categorySlug]) => ({
+  slug: categorySlug,
+  name: catNames[categorySlug] || categorySlug.replace(/-/g, ' '),
+}));
 
 // Fetch related questions and blog posts
 let relatedQuestions: { slug: string; title: string }[] = [];
@@ -257,6 +262,34 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
       )}
     </div>
     ) : null}
+
+    <section class="glass-card p-5 mb-8">
+      <h2 class="text-lg font-bold text-text mb-2">Plan Your Next Step in {stateInfo.name}</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        Use this state page as a regulatory and directory starting point, then compare local city pages, relevant categories, borrower questions, and CreditDoc data explainers. These links provide research context, not a recommendation, approval prediction, price quote, or licensing determination.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href={`/state/${stateInfo.slug}/lending-laws/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          {stateInfo.name} lending laws
+        </a>
+        {stateGraphCities.slice(0, 1).map(city => (
+          <a href={`/credit-guide/${city.slug}/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+            {city.city} local guide
+          </a>
+        ))}
+        {stateGraphCategories.slice(0, 1).map(category => (
+          <a href={`/categories/${category.slug}/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+            {category.name} directory
+          </a>
+        ))}
+        <a href="/answers/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Borrower questions
+        </a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          CFPB data context
+        </a>
+      </div>
+    </section>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- Main Content (2 cols) -->
