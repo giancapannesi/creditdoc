@@ -948,3 +948,45 @@ Notes:
   exists and is linked from the research index.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 043: Borrowing Quiz CTA Copy
+
+Date: 2026-05-26
+Implementation commit: `bd5f8b052d` (`feat: soften borrowing quiz cta copy`)
+
+Scope:
+
+- `src/pages/credit-guide/[slug]/[category].astro`
+- `src/pages/blog/[slug].astro`
+
+What changed:
+
+- Reframed credit-guide quiz CTA copy from eligibility/qualification wording to
+  borrowing-range estimate and research-path wording.
+- Changed the sidebar CTA heading from `Check Your Options` to
+  `Research Your Options`.
+- Reframed blog tool teaser copy from `Find out what you qualify for` to
+  `Estimate a borrowing range`.
+- Preserved the existing borrowing-power quiz URL and city/category routing.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and built worker route-module scans were clean for
+  `Find out what you qualify for`, `qualify for based`, `what ... qualify for`,
+  and `Check Your Options`.
+- Built route-module scan confirmed the replacement borrowing-range and
+  research-options copy in blog and credit-guide routes.
+- `git diff --check` passed.
+
+Notes:
+
+- Credit-guide dynamic pages are emitted as server route modules under
+  `dist/_worker.js/pages/credit-guide/`, not static `dist/credit-guide/`
+  files in this build.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
