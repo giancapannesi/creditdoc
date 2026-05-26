@@ -3093,6 +3093,54 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 101: Editorial and CFPB Verification Labels
+
+Date: 2026-05-26
+Implementation commit: `5d9bf5b491` (`fix: soften editorial and CFPB verification labels`)
+
+Scope:
+
+- `src/pages/about/harvey-brooks.astro`
+- `src/pages/trends/[slug].astro`
+
+What changed:
+
+- Reframed the editor bio page from an absolute every-fact verification claim
+  to source-check language tied to available provider and regulator sources.
+- Reframed CFPB trend profile header dates from `Last verified` to
+  `Data checked`.
+- Preserved trend data, CFPB dates, routes, metrics, chart content, editor page
+  layout, and source links.
+
+Verification:
+
+- `git diff --check` passed.
+- Source scan returned no matches for targeted old phrases:
+  `Every fact in the written review is verified` or `Last verified` in the
+  patched files.
+- First `npm run build` completed but was discarded as verification evidence
+  because city-guide sitemap generation timed out and only injected 16,057 SSR
+  route URLs.
+- Rerun `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered scan returned no matches for `Every fact in the written review is
+  verified` or `Last verified` across rendered about/trends pages and trend SSR
+  output.
+- Replacement-language checks confirmed `source-checked against` on
+  `/about/harvey-brooks/` and `Data checked:` on trend pages.
+- Production spot checks returned HTTP 200 for `/`, `/about/harvey-brooks/`,
+  `/trends/afterpay/`, `/trends/citizens-bank-columbia/`, `/trends/`,
+  `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Static/SSR label cleanup only; no CFPB data records or editor profile routes
+  were rewritten.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 100: Provider Caution Profile Signals
 
 Date: 2026-05-26
