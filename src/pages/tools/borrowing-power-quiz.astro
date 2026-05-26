@@ -5,8 +5,8 @@ import { getAllLenders, getCategories } from '../../utils/data-build';
 const categories = getCategories();
 const allLenders = getAllLenders();
 
-// Build recommendation data: top lenders per category (only enriched/quality ones)
-const categoryRecommendations: Record<string, { name: string; slug: string; google_rating: number; google_reviews_count: number; category: string; description: string; website_url: string; free_consultation: boolean; money_back: boolean }[]> = {};
+// Build profile data by category (only enriched/quality records)
+const categoryProfiles: Record<string, { name: string; slug: string; google_rating: number; google_reviews_count: number; category: string; description: string; website_url: string; free_consultation: boolean; money_back: boolean }[]> = {};
 
 for (const cat of categories) {
   const catLenders = allLenders
@@ -25,7 +25,7 @@ for (const cat of categories) {
       money_back: l.pricing?.money_back_guarantee || false,
     }));
   if (catLenders.length > 0) {
-    categoryRecommendations[cat.slug] = catLenders;
+    categoryProfiles[cat.slug] = catLenders;
   }
 }
 
@@ -71,7 +71,7 @@ const faqJsonLd = {
       "name": "How is my borrowing power calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Your borrowing power estimate is based on your income, existing debt obligations, credit score range, and loan purpose. We use standard debt-to-income ratios used by lenders to estimate how much you could qualify for. This is an educational estimate, not a pre-approval."
+        "text": "Your borrowing power estimate is based on your income, existing debt obligations, credit score range, and loan purpose. We use common debt-to-income ranges used in lending research to estimate a possible borrowing range. This is an educational estimate, not a pre-approval."
       }
     },
     {
@@ -129,7 +129,7 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
         </div>
 
         <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">What's My Borrowing Power?</h1>
-        <p class="text-lg text-muted mb-8 max-w-xl mx-auto">Answer 5 quick questions to get an educational estimate of how much you could borrow, plus next-step research paths matched to your situation.</p>
+        <p class="text-lg text-muted mb-8 max-w-xl mx-auto">Answer 5 quick questions to get an educational estimate of how much you could borrow, plus next-step research paths based on your inputs.</p>
 
         <div class="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
           <div class="text-center">
@@ -153,7 +153,7 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
         </div>
 
         <button id="start-quiz-btn" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white font-semibold px-8 py-3.5 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-          Find My Borrowing Power
+          Estimate Borrowing Power
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
         </button>
       </div>
@@ -288,7 +288,7 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
         <!-- Question 3: Credit Score -->
         <div class="quiz-step hidden" data-step="3">
           <h2 class="text-2xl font-bold text-text mb-2">What's your credit score range?</h2>
-          <p class="text-muted mb-6">Your best estimate is fine. Don't know? <a href="/financial-wellness/understanding-credit-scores/" class="text-primary hover:underline">Learn how to check for free</a>.</p>
+          <p class="text-muted mb-6">A rough estimate is fine. Don't know? <a href="/financial-wellness/understanding-credit-scores/" class="text-primary hover:underline">Learn how to check for free</a>.</p>
           <div class="grid gap-3" id="q3-options">
             <button class="quiz-option" data-value="poor">
               <span class="quiz-option-icon bg-negative-light text-negative">
@@ -554,7 +554,7 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
             How is my borrowing power calculated?
             <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
           </summary>
-          <p class="text-muted mt-3 text-sm leading-relaxed">Your borrowing power estimate is based on your income, existing debt obligations, credit score range, and loan purpose. We use standard debt-to-income ratios used by lenders to estimate how much you could qualify for. This is an educational estimate, not a pre-approval.</p>
+          <p class="text-muted mt-3 text-sm leading-relaxed">Your borrowing power estimate is based on your income, existing debt obligations, credit score range, and loan purpose. We use common debt-to-income ranges used in lending research to estimate a possible borrowing range. This is an educational estimate, not a pre-approval.</p>
         </details>
         <details class="glass-card p-4 group" style="pointer-events: auto;">
           <summary class="font-semibold text-text cursor-pointer flex items-center justify-between">
@@ -743,8 +743,8 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
   </div>
 
   <!-- Embed lender data for client-side filtering -->
-  <script define:vars={{ categoryRecommendations }}>
-    window.__LENDER_DATA = categoryRecommendations;
+  <script define:vars={{ categoryProfiles }}>
+    window.__LENDER_DATA = categoryProfiles;
   </script>
 
   <script>
@@ -909,23 +909,23 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
         // Build insights
         const insights = [];
         if (currentDTI < 0.2) {
-          insights.push('Your debt-to-income ratio is excellent. Lenders see you as low risk.');
+          insights.push('Your debt-to-income ratio is low in this estimate. Some lenders may view lower DTI as a favorable signal.');
         } else if (currentDTI < 0.36) {
-          insights.push('Your debt-to-income ratio is healthy. Most lenders will consider you.');
+          insights.push('Your debt-to-income ratio is within a commonly reviewed range. Compare provider criteria before applying.');
         } else if (currentDTI < 0.43) {
-          insights.push('Your DTI is on the higher side. Paying down existing debt could unlock better rates.');
+          insights.push('Your DTI is on the higher side in this estimate. Paying down existing debt may improve how some lenders review an application.');
         } else {
           insights.push('Your DTI ratio is high. Focus on reducing existing debt before taking on more.');
         }
 
         if (a[3] === 'poor') {
-          insights.push('With a score under 580, credit repair could save you thousands in interest. Even a 50-point improvement opens significantly better options.');
+          insights.push('With a score under 580, credit report review and debt reduction may be useful research steps before applying.');
         } else if (a[3] === 'fair') {
-          insights.push('A fair credit score gives you options, but rates will be higher. Improving to 670+ could cut your APR substantially.');
+          insights.push('A fair credit score can affect listed rate ranges. Improving credit profile factors may change future offers.');
         } else if (a[3] === 'good') {
-          insights.push('Good credit gives you access to competitive rates. You can shop confidently.');
+          insights.push('Good credit is commonly reviewed as a positive signal. Compare pricing fields and terms directly.');
         } else if (a[3] === 'excellent') {
-          insights.push('Excellent credit may qualify for lower listed rates. Use that leverage to compare offers.');
+          insights.push('Excellent credit is commonly associated with lower listed rate ranges, but final terms depend on each provider.');
         } else {
           insights.push('Not knowing your score is common. Check it for free at AnnualCreditReport.com before applying anywhere.');
         }
@@ -933,7 +933,7 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
         if (a[5] === 'asap') {
           insights.push('For urgent needs, look for same-day or next-day funding options. Pre-qualification checks (soft pulls) let you compare without hurting your score.');
         } else if (a[5] === 'months' || a[5] === 'no-rush') {
-          insights.push('With time on your side, shop multiple lenders. Even a 1% APR difference on a $10,000 loan saves $300+ over the life of the loan.');
+          insights.push('With time on your side, compare multiple provider profiles. Even a 1% APR difference on a $10,000 loan can change total interest materially.');
         }
 
         // Build actions
