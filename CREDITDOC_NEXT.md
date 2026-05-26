@@ -990,3 +990,24 @@ Initial Batch 025 targets:
 - continue excluding unrelated `src/content/wellness-guides.json` unless the
   user explicitly confirms it belongs in this cleanup;
 - build-check, output/source-check, document, commit, then continue.
+
+Batch 025 implementation is complete, build-verified, and committed as
+`5c9a831a8a`. Move to Batch 026 by inspecting the remaining generated compare
+pages and raw comparison data surfaces, especially because an unrelated
+unstaged `src/content/comparisons.json` change currently contains fresh
+unsupported winner/value/guarantee copy.
+
+Initial Batch 026 targets:
+
+- inspect the uncommitted `src/content/comparisons.json` additions separately
+  from the committed cleanup work before deciding whether to normalize,
+  revert-by-owner, or leave them for the other agent;
+- scan generated `/compare/` pages, `src/content/comparisons.json`, and the
+  compare renderer for winner/preferable/better-value/guarantee/safe/reliable
+  language that may bypass the shared `softenYmylCopy()` boundary;
+- prefer template-level or render-time softening if the same unsupported
+  comparison patterns appear across many records;
+- preserve comparison URLs unless a broken-link issue is found;
+- continue excluding unrelated `src/content/wellness-guides.json` unless the
+  user explicitly confirms it belongs in this cleanup;
+- build-check, output/source-check, document, commit, then continue.

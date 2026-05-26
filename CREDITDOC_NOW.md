@@ -2247,3 +2247,48 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_024_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_024_homepage_research_support_copy_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 025
+
+Batch 025 implementation committed as `5c9a831a8a` for research and support page
+label cleanup:
+
+- `src/pages/research/most-responsive-consumer-finance-providers-2026.astro`
+- `src/pages/research/consumer-complaints.astro`
+- `src/pages/research/lending-transparency.astro`
+- `src/pages/about/creditdoc-data.astro`
+- `src/pages/tools/borrowing-power-quiz.astro`
+
+Changes:
+
+- Reframed research headings from `Top`/ranking language to provider-record,
+  reviewed-row, and approval-rate-record language.
+- Rephrased the most-responsive report citation line from `strong CFPB` to
+  `notable CFPB` and softened candidate-set methodology language.
+- Reframed complaint research table labels from `Top` complaint categories and
+  `Top 25` companies to common categories and large complaint-count records.
+- Replaced remaining support-page `diagnosis`, `CreditDoc rating`, and
+  `licensed to operate` language with profile notes, stored Google rating
+  fields, and state-level availability context.
+- Softened borrowing-power quiz cross-link subtitles away from best/right/work
+  phrasing while preserving existing strategic URLs.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json` changes
+  affected generated URL/content inventory; neither file was staged or
+  committed in Batch 025.
+- Build generated 124 city guides plus 2,232 city-category sub-pages.
+- Postbuild sitemap/robots conflict check passed.
+- Targeted old-copy scan was clean across static generated pages and SSR-only
+  source routes.
+- `consumer-complaints` and `lending-transparency` are SSR-only in the static
+  build, so those routes were source-verified.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_025_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_025_research_support_labels_gsc_seen_2026-05-26.csv`
