@@ -47,8 +47,23 @@ const listicle = {
   faq: (lb.faq ?? []) as Array<{ q: string; a: string }>,
 };
 
+function softenListicleTitle(title: string): string {
+  return softenYmylCopy(title)
+    .replace(/^Best\b/i, 'Compare')
+    .replace(/^Cheapest\b/i, 'Lower-Cost')
+    .replace(/\bTop\b/g, 'Notable')
+    .replace(/\btop\b/g, 'notable')
+    .replace(/\bWith Money-Back Guarantee\b/gi, 'With Listed Refund Terms')
+    .replace(/\bMoney-Back Guarantee\b/gi, 'Listed Refund Terms')
+    .replace(/\bLowest Interest Rates\b/gi, 'Lower Listed Interest Rates')
+    .replace(/\bLowest APR Lenders\b/gi, 'Lower Listed APR Lenders')
+    .replace(/\bLow Credit Score Options\b/gi, 'Lower Credit Score Profiles');
+}
+
 const displayListicle = {
   ...listicle,
+  title: softenListicleTitle(listicle.title),
+  seo_title: softenListicleTitle(listicle.seo_title),
   description: softenYmylCopy(listicle.description),
   seo_description: softenYmylCopy(listicle.seo_description),
   intro: softenYmylCopy(listicle.intro),
@@ -93,13 +108,13 @@ const jsonLd = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
-      { '@type': 'ListItem', position: 2, name: listicle.title, item: `https://www.creditdoc.co/best/${listicle.slug}/` },
+      { '@type': 'ListItem', position: 2, name: displayListicle.title, item: `https://www.creditdoc.co/best/${listicle.slug}/` },
     ],
   },
   {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: listicle.title,
+    name: displayListicle.title,
     description: displayListicle.description,
     numberOfItems: rankedLenders.length,
     itemListElement: rankedLenders.map((lender, i) => ({
@@ -112,7 +127,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: listicle.title,
+    headline: displayListicle.title,
     description: displayListicle.description,
     author: {
       '@type': 'Person',
@@ -155,7 +170,7 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
 ---
 
 <BaseLayout
-  title={listicle.seo_title}
+  title={displayListicle.seo_title}
   description={displayListicle.seo_description}
   canonical={canonicalUrl}
   jsonLd={jsonLd}
@@ -165,14 +180,14 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
     <ol class="flex items-center gap-1.5 text-sm text-muted">
       <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
       <li><span class="mx-1">/</span></li>
-      <li class="text-text font-medium">{listicle.title}</li>
+      <li class="text-text font-medium">{displayListicle.title}</li>
     </ol>
   </nav>
 
   <!-- Header -->
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="max-w-3xl">
-      <h1 class="text-2xl sm:text-3xl font-bold text-text">{listicle.title}</h1>
+      <h1 class="text-2xl sm:text-3xl font-bold text-text">{displayListicle.title}</h1>
       <p class="mt-3 text-muted leading-relaxed">{displayListicle.description}</p>
       <p class="mt-3 text-sm text-muted">Written by <a href="/about/" class="text-primary hover:underline font-medium">Harvey Brooks</a>, Senior Financial Editor</p>
     </div>
