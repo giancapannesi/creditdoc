@@ -100,7 +100,8 @@ Sitewide upgrade program restarted:
   2,232 city-category sub-pages.
 - Batch 006 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_006_notes_2026-05-26.md`
-- Batch 007 completed locally and build-verified:
+- Batch 007 completed and committed:
+  `3b2cb3967d feat: add graph links to research pages`.
   research pages now link original-data reports back into local guides, state
   pages, provider categories, answer clusters, CreditDoc tools, CFPB
   methodology, and report-specific category context.
@@ -120,12 +121,30 @@ Sitewide upgrade program restarted:
   2,232 city-category sub-pages.
 - Batch 007 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_007_notes_2026-05-26.md`
+- Batch 008 completed locally and build-verified:
+  tools pages now link calculators/quizzes into local guides, state context,
+  provider categories, answer clusters, resources, and CFPB/research pages.
+- Batch 008 scope: `/tools/`, `/tools/borrowing-power-quiz/`,
+  `/tools/debt-payoff-calculator/`, and `/tools/credit-score-simulator/`.
+- Latest local GSC pull (`pull_id=12`) saw 0 `/tools/` URLs. This batch is a
+  pre-visibility authority-graph upgrade for the current tool pages.
+- Batch 008 also softened visible tool copy: no `Our Recommendation` label, no
+  "best method" claim, no personalized lender-recommendation framing, and less
+  assertive credit-score impact language.
+- Batch 008 build verification passed:
+  `npm run build`, robots contract, SSR sitemap parity, Astro build, generated
+  output section scan, and sitemap/robots conflict check. This run injected
+  18,411 SSR route URLs and successfully added 124 city guides plus 2,232
+  city-category sub-pages.
+- Batch 008 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_008_notes_2026-05-26.md`
 
 Immediate next:
 
-1. Commit Batch 007 with only the research pages and resume-cursor docs.
-2. Continue to Batch 008: upgrade tools pages so calculators/quizzes link back
-   to local guides, state context, categories, answers, and research pages.
+1. Commit Batch 008 with only the tools pages and resume-cursor docs.
+2. Continue to Batch 009: upgrade resources pages so checklist/template pages
+   link back to tools, answers, local guides, categories, state context, and
+   research pages.
 3. Keep every batch scoped, build-verified, documented, and committed before
    starting the next one.
 

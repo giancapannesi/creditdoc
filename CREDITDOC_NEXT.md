@@ -610,28 +610,30 @@ Completed batches:
 - Batch 006 committed `e142c1650b`: state index, state directory pages, and
   lending-law pages now connect to local guides, categories, answers, and CFPB
   complaint-data context.
-- Batch 007 completed locally and build-verified: research index and four
-  research reports now connect back to local guides, state context, provider
-  categories, answer clusters, tools, CFPB methodology, and report-specific
-  category context. Commit next.
+- Batch 007 committed `3b2cb3967d`: research index and four research reports
+  now connect back to local guides, state context, provider categories, answer
+  clusters, tools, CFPB methodology, and report-specific category context.
+- Batch 008 completed locally and build-verified: tools pages now connect to
+  local guides, state context, provider categories, answer clusters, resources,
+  and CFPB/research pages. Commit next.
 
 Next execution:
 
-1. Commit Batch 007:
-   - `src/pages/research/index.astro`
-   - `src/pages/research/consumer-complaints.astro`
-   - `src/pages/research/lending-transparency.astro`
-   - `src/pages/research/most-responsive-consumer-finance-providers-2026.astro`
-   - `src/pages/research/state-of-subprime-lending-2026.astro`
+1. Commit Batch 008:
+   - `src/pages/tools/index.astro`
+   - `src/pages/tools/borrowing-power-quiz.astro`
+   - `src/pages/tools/debt-payoff-calculator.astro`
+   - `src/pages/tools/credit-score-simulator.astro`
    - `CREDITDOC_NOW.md`
    - `CREDITDOC_NEXT.md`
-2. Start Batch 008 on tools pages:
-   - inspect `src/pages/tools/index.astro`;
-   - inspect calculator/quiz pages under `src/pages/tools/`;
-   - add tool-to-local/category/state/answer/research graph paths with
+2. Start Batch 009 on resources pages:
+   - inspect `src/pages/resources/index.astro`;
+   - inspect `src/pages/resources/credit-report-checklist/`;
+   - inspect `src/pages/resources/debt-credit-letter-templates/`;
+   - add resource-to-tool/answer/local/category/state/research graph paths with
      advisory-neutral wording.
 3. Build, verify generated output, document in the sitewide upgrade workpack,
-   and commit before Batch 009.
+   and commit before Batch 010.
 
 ## Regulator Match / Category Cleanup
 

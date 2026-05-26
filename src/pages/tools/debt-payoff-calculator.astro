@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = "Debt Payoff Calculator — Snowball vs Avalanche | CreditDoc";
-const description = "Compare snowball vs avalanche debt payoff strategies. See your debt-free date, total interest paid, and monthly payment plan. Free, no signup required.";
+const description = "Compare snowball vs avalanche debt payoff strategies. Estimate payoff timing, total interest paid, and monthly payment order. Free, no signup required.";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -48,7 +48,7 @@ const faqJsonLd = {
       "name": "Which method saves more money?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The avalanche method always saves more in total interest paid. However, research shows the snowball method has higher completion rates because quick wins keep people motivated. The best method is the one you'll stick with."
+        "text": "The avalanche method usually reduces total interest paid when all other assumptions are equal. The snowball method can be easier for some people to follow because small balances disappear earlier. Compare the outputs and choose the approach that fits your budget and behavior."
       }
     }
   ]
@@ -83,8 +83,21 @@ const breadcrumbJsonLd = {
         Free &middot; Instant Results &middot; No Signup
       </div>
       <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">Debt Payoff Calculator</h1>
-      <p class="text-lg text-muted max-w-2xl mx-auto">Enter your debts below and see exactly when you'll be debt-free. Compare snowball vs. avalanche to find the strategy that works for you.</p>
+      <p class="text-lg text-muted max-w-2xl mx-auto">Enter your debts below to estimate payoff timing. Compare snowball vs. avalanche outputs against your budget and behavior.</p>
     </div>
+
+    <section class="glass-card p-5 mb-6">
+      <h2 class="text-lg font-bold text-text mb-2">Use This Calculator With Debt Research</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        Calculator results depend on the numbers you enter and do not replace contract review, budget planning, or advice from a qualified professional. Use the plan with CreditDoc category pages, borrower answers, and complaint-data context.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href="/categories/debt-relief/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Debt relief providers</a>
+        <a href="/answers/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Borrower questions</a>
+        <a href="/resources/debt-credit-letter-templates/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Letter templates</a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Complaint data context</a>
+      </div>
+    </section>
 
     <!-- Debt Input Form -->
     <div class="glass-card p-6 mb-6">
@@ -217,7 +230,7 @@ const breadcrumbJsonLd = {
       <div class="glass-card p-6 mb-6" id="recommendation-box">
         <h3 class="font-bold text-text mb-2 flex items-center gap-2">
           <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
-          Our Recommendation
+          Calculation Note
         </h3>
         <p id="recommendation-text" class="text-sm text-muted leading-relaxed"></p>
       </div>
@@ -267,7 +280,7 @@ const breadcrumbJsonLd = {
             Which method saves more money?
             <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
           </summary>
-          <p class="text-muted mt-3 text-sm leading-relaxed">The avalanche method always saves more in total interest paid. However, research from Northwestern University shows the snowball method has higher completion rates because quick wins keep people motivated. The best method is the one you'll stick with.</p>
+          <p class="text-muted mt-3 text-sm leading-relaxed">The avalanche method usually reduces total interest paid when all other assumptions are equal. Some people prefer the snowball method because small balances disappear earlier. Compare the outputs against your budget and behavior.</p>
         </details>
         <details class="glass-card p-4 group">
           <summary class="font-semibold text-text cursor-pointer flex items-center justify-between">
@@ -506,7 +519,7 @@ const breadcrumbJsonLd = {
           if (monthDiff < -3) {
             recText.textContent = `Avalanche saves you ${fmt(diff)}, but snowball eliminates "${snowball.firstWin?.name}" ${Math.abs(monthDiff)} months sooner. If staying motivated is key, go snowball. If saving money matters more, go avalanche.`;
           } else {
-            recText.textContent = `Avalanche is the clear winner here — it saves you ${fmt(diff)} in interest. The first-win timing is similar between both methods, so you get the savings without sacrificing motivation.`;
+            recText.textContent = `Avalanche shows lower estimated interest by ${fmt(diff)} in this scenario. The first-payoff timing is similar between both methods, so compare the lower-interest path with your motivation and budget needs.`;
           }
         }
 

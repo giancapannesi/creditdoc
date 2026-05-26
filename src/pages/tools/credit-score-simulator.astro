@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = "Credit Score Simulator — See How Actions Affect Your Score | CreditDoc";
-const description = "Simulate how paying off debt, opening new accounts, or missing payments could affect your credit score. Free educational tool with personalized recommendations.";
+const description = "Simulate how paying off debt, opening new accounts, or missing payments could affect your credit score. Free educational estimate for credit research.";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -40,7 +40,7 @@ const faqJsonLd = {
       "name": "What factors affect my credit score the most?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Payment history (35%) and credit utilization (30%) together account for 65% of your FICO score. Reducing utilization below 30% and never missing payments are the two highest-impact actions you can take."
+        "text": "Payment history (35%) and credit utilization (30%) together account for 65% of your FICO score. Reducing utilization and avoiding missed payments are two major scoring factors."
       }
     }
   ]
@@ -77,6 +77,19 @@ const breadcrumbJsonLd = {
       <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">Credit Score Simulator</h1>
       <p class="text-lg text-muted max-w-2xl mx-auto">See how different financial actions could affect your credit score. Adjust the sliders to simulate "what if" scenarios.</p>
     </div>
+
+    <section class="glass-card p-5 mb-6">
+      <h2 class="text-lg font-bold text-text mb-2">Use This Simulator With Credit Research</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        Score changes are directional estimates based on simplified assumptions. Use them with credit repair categories, borrower answers, local guides, and CFPB complaint-data context before contacting a company.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href="/categories/credit-repair/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Credit repair providers</a>
+        <a href="/answers/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Credit questions</a>
+        <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Local guides</a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Complaint data context</a>
+      </div>
+    </section>
 
     <!-- Current Score Input -->
     <div class="glass-card p-6 mb-6">
@@ -294,7 +307,7 @@ const breadcrumbJsonLd = {
             What factors affect my credit score the most?
             <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
           </summary>
-          <p class="text-muted mt-3 text-sm leading-relaxed">Payment history (35%) and credit utilization (30%) together account for 65% of your FICO score. Reducing utilization below 30% and never missing payments are the two highest-impact actions you can take.</p>
+          <p class="text-muted mt-3 text-sm leading-relaxed">Payment history (35%) and credit utilization (30%) together account for 65% of your FICO score. Reducing utilization and avoiding missed payments are two major scoring factors.</p>
         </details>
         <details class="glass-card p-4 group">
           <summary class="font-semibold text-text cursor-pointer flex items-center justify-between">
@@ -356,7 +369,7 @@ const breadcrumbJsonLd = {
 
         // Payment history impact (35% weight)
         // 6 on-time = +15-25 points for someone with missed payments
-        // Missing payments = devastating
+        // Missing payments can have a large negative effect in the estimate.
         const missedPayments = 6 - onTimePayments;
         if (missedPayments > 0) {
           // Missing payments is very damaging
@@ -418,10 +431,10 @@ const breadcrumbJsonLd = {
 
         // Build insights
         const insights = [];
-        if (newUtil <= 10 && baseUtil > 10) insights.push('Getting utilization below 10% puts you in the "excellent" range for this factor. Huge impact.');
-        else if (newUtil <= 30 && baseUtil > 30) insights.push('Dropping below 30% utilization is the single most impactful thing you can do. Most scoring models treat this as a key threshold.');
-        if (newUtil > 50) insights.push('Utilization above 50% is hurting your score significantly. Pay down balances before applying for new credit.');
-        if (missedPayments > 0) insights.push(`Missing ${missedPayments} payment${missedPayments > 1 ? 's' : ''} would be devastating. A single 30-day late payment can drop your score 60-110 points and stays on your report for 7 years.`);
+        if (newUtil <= 10 && baseUtil > 10) insights.push('Getting utilization below 10% may improve the utilization part of many scoring models.');
+        else if (newUtil <= 30 && baseUtil > 30) insights.push('Dropping below 30% utilization may help because many scoring models treat this as a key threshold.');
+        if (newUtil > 50) insights.push('Utilization above 50% can weigh on many credit scoring models. Review balances before applying for new credit.');
+        if (missedPayments > 0) insights.push(`Missing ${missedPayments} payment${missedPayments > 1 ? 's' : ''} can materially lower a credit score. A 30-day late payment may remain on a credit report for up to 7 years.`);
         if (onTimePayments === 6 && baseScore < 670) insights.push('Six months of on-time payments helps, but the biggest gains come from reducing utilization. Focus on both simultaneously.');
         if (inquiries >= 3) insights.push('Multiple hard inquiries signal risk to lenders. Rate-shop within a 14-day window — FICO counts it as one inquiry for mortgages and auto loans.');
         if (closeOld) insights.push('Closing your oldest card shortens your credit history and reduces available credit. Keep it open with a small recurring charge instead.');
