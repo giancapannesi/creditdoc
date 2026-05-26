@@ -183,6 +183,10 @@ const ARCHIVED_REVIEW_SLUGS = new Set([
   "star-pawn-brokers-pawnshop",
   "texas-title-loan",
   "the-law-office-of-attorney-frank-guilardi",
+  "check-cashing-payday-loans",
+  "credit-repair-finest",
+  "simple-fast-business-funding-same-day-loans",
+  "smile-jewels-pawn-loans",
 ]);
 
 const ABBR_TO_FULL_STATE: Record<string, string> = Object.fromEntries(
