@@ -39,7 +39,8 @@ Sitewide upgrade program restarted:
 - Batch 001 scope: 49 report-included `/review/{slug}/` provider pages get an
   `Included in CreditDoc research` callout through the review template when the
   provider appears in `src/data/cfpb-responsive-providers-2026.json`.
-- Batch 002 completed locally and build-verified:
+- Batch 002 completed and committed:
+  `07b046a396 feat: add local graph links to credit guides`.
   `/credit-guide/{slug}/` and `/credit-guide/{slug}/{category}/` templates now
   include local authority graph paths that connect city pages to city-category
   pages, state lending laws, answer clusters, tools, and CFPB data context.
@@ -48,14 +49,22 @@ Sitewide upgrade program restarted:
   and city-category page served by the two templates.
 - Batch 002 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_002_notes_2026-05-26.md`
+- Batch 003 completed locally and build-verified:
+  `/answers/{slug}/` template now includes a `Continue Your Research` graph path
+  connecting answer pages to the matching category directory, local credit
+  guides, state lending-rule pages, and CFPB complaint-data context.
+- Local answer inventory: 35 `cluster_answers` rows; latest GSC pull saw 13
+  `/answers/` URLs. Batch 003 applies to every answer served by the SSR answer
+  template.
+- Batch 003 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_003_notes_2026-05-26.md`
 
 Immediate next:
 
-1. Commit Batch 002 with only the two local template files and resume-cursor
-   docs.
-2. Continue to Batch 003: upgrade the answer-page template so question clusters
-   connect back into city/local category, state rules, tools, and research
-   context where the data supports it.
+1. Commit Batch 003 with only the answer template and resume-cursor docs.
+2. Continue to Batch 004: upgrade comparison pages so high-intent comparison
+   URLs connect into lender profiles, category context, local guides, and
+   research/methodology pages without unsupported ranking or safety claims.
 3. Keep every batch scoped, build-verified, documented, and committed before
    starting the next one.
 

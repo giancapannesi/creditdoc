@@ -106,6 +106,44 @@ function firstSentence(md: string): string {
 }
 const keyTakeaways = answer.sections.slice(0, 4).map(s => firstSentence(s.content)).filter(Boolean);
 
+const categoryLabels: Record<string, string> = {
+  'build-credit': 'Build My Credit',
+  'business-loans': 'Business Loans',
+  'credit-cards': 'Credit Cards',
+  'credit-monitoring': 'Monitor & Protect',
+  'credit-repair': 'Credit Repair',
+  'debt-relief': 'Get Out of Debt',
+  fintech: 'Fintech',
+  'personal-loans': 'I Need a Loan',
+};
+const categorySlug = answer.banner_category || '';
+const categoryLabel = categoryLabels[categorySlug] || categorySlug.replace(/-/g, ' ') || 'Finance';
+const comparisonPath = answer.target_money_page && answer.target_money_page.startsWith('/')
+  ? answer.target_money_page
+  : null;
+const relatedPathCards = [
+  {
+    href: `/categories/${categorySlug}/`,
+    label: `${categoryLabel} directory`,
+    body: 'Compare provider profiles and category context before contacting a company.',
+  },
+  {
+    href: '/city/',
+    label: 'Local credit guides',
+    body: 'Find city and regional pages that connect providers, rules, and local borrower context.',
+  },
+  {
+    href: '/state/',
+    label: 'State lending rules',
+    body: 'Check state-level lending-law pages before relying on a general finance answer.',
+  },
+  {
+    href: '/research/consumer-complaints/',
+    label: 'Complaint data context',
+    body: 'Read how CreditDoc uses public complaint data as one transparency signal.',
+  },
+].filter(card => !card.href.includes('//'));
+
 // Convert a minimal markdown subset to HTML (tables, headings, lists, bold, italic).
 // Matches typography of existing site components (glass-card with dark text).
 function mdToHtml(src: string): string {
@@ -278,6 +316,36 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
   <!-- Affiliate offer — above the fold, after Key Takeaways -->
   <section class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
     <AffiliateInline category={answer.banner_category} />
+  </section>
+
+  <!-- Local authority graph paths -->
+  <section class="mx-auto max-w-7xl px-4 pb-6 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h2 class="text-lg font-bold text-text">Continue Your Research</h2>
+          <p class="mt-1 text-sm text-muted leading-relaxed">
+            Use this answer with CreditDoc's directory pages, local guides, state rules, and data explainers. These links provide context, not a recommendation, approval prediction, price quote, or licensing determination.
+          </p>
+        </div>
+        {comparisonPath && (
+          <a
+            href={comparisonPath}
+            class="inline-flex shrink-0 items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
+          >
+            Compare options
+          </a>
+        )}
+      </div>
+      <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {relatedPathCards.map(card => (
+          <a href={card.href} class="rounded-lg border border-border bg-bg-alt p-3 transition-colors hover:border-primary">
+            <span class="block text-sm font-semibold text-primary">{card.label}</span>
+            <span class="mt-1 block text-xs leading-relaxed text-muted">{card.body}</span>
+          </a>
+        ))}
+      </div>
+    </div>
   </section>
 
   <!-- Main content (full-width, matching /best/ layout) -->

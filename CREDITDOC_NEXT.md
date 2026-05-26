@@ -548,7 +548,7 @@ Immediate graph build batch:
      callout through `src/pages/review/[slug].astro`.
    - Workpack:
      `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
-2. Sitewide Page Upgrade Batch 002 is complete locally and build-verified:
+2. Sitewide Page Upgrade Batch 002 is complete and committed:
    - `/credit-guide/{slug}/` template now adds a `Plan Your Next Step in {city}`
      local authority path.
    - `/credit-guide/{slug}/{category}/` template now adds a YMYL-safe
@@ -556,13 +556,19 @@ Immediate graph build batch:
      blanket `best` wording from the meta description.
    - Latest GSC pull saw 26 `/credit-guide/` URLs; the template upgrade applies
      to every ready city guide and city-category page served by those templates.
-3. Next Sitewide Page Upgrade Batch 003:
-   - Upgrade `/answers/` pages/templates so question clusters connect back into
-     relevant city/local category pages, state lending rules, tools, and
-     research/methodology context.
+3. Sitewide Page Upgrade Batch 003 is complete locally and build-verified:
+   - `/answers/{slug}/` template now adds a `Continue Your Research` graph path.
+   - Answer pages connect to matching category directories, local guide hub,
+     state lending-rule hub, CFPB complaint-data context, and local comparison
+     CTAs when `target_money_page` is available.
+   - Local inventory: 35 answer rows; latest GSC pull saw 13 `/answers/` URLs.
    - Keep language advisory-neutral: no approval prediction, pricing promise,
      licensing determination, or recommendation claim.
-4. Keep every batch scoped, build-verified, documented, and committed without
+4. Next Sitewide Page Upgrade Batch 004:
+   - Upgrade `/compare/{slug}/` pages so comparison URLs connect into lender
+     profiles, category context, local guides, and research/methodology pages
+     without unsupported ranking or safety claims.
+5. Keep every batch scoped, build-verified, documented, and committed without
    getting pulled back into unrelated cleanup.
 
 Sitewide upgrade program:
