@@ -713,3 +713,46 @@ Notes:
 
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 037: HMDA Research Approval Copy
+
+Date: 2026-05-26
+Implementation commit: `99b04fc2f3` (`feat: soften hmda research approval copy`)
+
+Scope:
+
+- `src/pages/research/index.astro`
+- `src/pages/research/lending-transparency.astro`
+
+What changed:
+
+- Reframed the research index card from `Which Banks Actually Approve
+  Mortgages?` to mortgage application outcomes by bank.
+- Replaced `who approves the most` / `biggest approval gaps` teaser wording
+  with recorded HMDA outcome context.
+- Reframed the lending-transparency page title, metadata, headings, stats, and
+  section copy from approval/ranking language toward recorded public-data
+  outcome language.
+- Clarified that income-based gaps in the public dataset are not predictions
+  for individual applicants.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Rendered research/source scan was clean for `Which Banks Actually Approve
+  Mortgages`, `Who approves the most`, `highest approval rates`,
+  `stronger predictor of approval`, `Mortgage Approval Data by Bank`, and
+  related targeted phrases.
+- `git diff --check` passed.
+
+Notes:
+
+- The `/research/lending-transparency/` page is not currently present as a
+  static file under `dist/research`; source was still updated because the route
+  exists and is linked from the research index.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
