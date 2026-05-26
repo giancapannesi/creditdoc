@@ -159,9 +159,22 @@ Batch 001 action:
 Verification:
 
 - `npm run build` passed after the redirect-map change.
-- Required after deploy: check all 9 redirect URLs and a sample of no-demand
-  archived URLs live. Every future cleanup section must end with live status
-  checks for all touched pages.
+- Deployed to Cloudflare Worker version
+  `11102048-c6e3-4e3f-b70e-fe92d47d6f1f`.
+- Commits:
+  - `e5be2bf3ae` — archive batch notes + redirect map.
+  - `0c5008f055` — exclude archived review records from static browse data.
+- Live checks passed:
+  - All 9 GSC-demand dropped review URLs redirect to replacement category or
+    city-guide pages.
+  - Sample no-demand archived URLs return `404`.
+  - The five browse pages that previously linked to archived records now have
+    no archived review links.
+  - Live `sitemap-0.xml` through `sitemap-4.xml` contain no archived review
+    paths; `sitemap-5.xml` returns `404`.
+
+Every future cleanup section must end with live status checks for all touched
+pages and a static/browse reference scan.
 
 Same-day GSC audit:
 
