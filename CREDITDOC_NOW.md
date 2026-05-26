@@ -4,6 +4,38 @@
 
 ---
 
+## 2026-05-26 — Local Authority Graph Project Restart
+
+**Status: original strategic project resumed after cleanup/deploy detour.**
+
+Created the operating plan for the bottom-up local authority strategy:
+
+- `docs/plans/2026-05-26-creditdoc-local-authority-graph.md`
+
+This plan turns CreditDoc's page network into a deliberate graph:
+
+- local/city pages;
+- lender/entity profiles;
+- state rules and data explainers;
+- answer clusters;
+- tools/quizzes;
+- original research reports;
+- provider correction/outreach loops.
+
+Current CFPB report release-loop progress:
+
+1. Added `/research/consumer-complaints/` -> CFPB responsiveness report link.
+2. Created provider and press/media outreach tracker CSVs in the CFPB workpack.
+3. Documented those release assets in:
+   `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/release_assets_log_2026-05-26.md`
+
+Immediate next build batch:
+
+1. Add safe links from included provider profiles to the report where the
+   profile/template supports it.
+2. Build, verify, and commit the local-authority graph docs and research-link
+   change.
+
 ## 2026-05-26 — Static Asset Routing Fix + Noindex Cleanup Batch 009
 
 **Status: deployed and live-verified.**

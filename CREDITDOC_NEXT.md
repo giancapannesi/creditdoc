@@ -521,10 +521,16 @@ Next steps:
    misleading category/state assumptions.
 3. Finalize eligibility/scoring thresholds.
 4. Build public Astro report page.
+   - Completed 2026-05-26:
+     `/research/most-responsive-consumer-finance-providers-2026/`
 5. Add internal links from `/research/`, `/research/consumer-complaints/`,
    `/about/creditdoc-data/`, `/press/`, and later relevant review/trends/city
    pages.
+   - `/about/creditdoc-data/`, `/press/`, and
+     `/research/consumer-complaints/` now link to the report.
 6. Create press pitch, provider outreach copy, and Drive copy.
+   - Press pitch, provider outreach copy, provider outreach tracker, and
+     press/media outreach tracker now exist in the CFPB workpack.
 
 Local authority context:
 
@@ -532,8 +538,15 @@ Local authority context:
   authority: build useful local/regional pages incumbents ignore, then connect
   them through city-category pages, lender profiles, state regulations,
   question clusters, tools/quizzes, and research authority assets.
-- Add a future documentation artifact called **CreditDoc Local Authority Graph**
-  to make the internal-linking model explicit.
+- CreditDoc Local Authority Graph plan added:
+  `docs/plans/2026-05-26-creditdoc-local-authority-graph.md`
+
+Immediate graph build batch:
+
+1. Add safe links from relevant report-included provider profiles back to the
+   CFPB report only where the profile/template has a suitable research/data
+   section.
+2. Build, verify, and commit without getting pulled back into unrelated cleanup.
 
 ## Regulator Match / Category Cleanup
 
