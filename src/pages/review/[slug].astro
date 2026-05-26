@@ -10,6 +10,7 @@ import RegulatoryRecord from '../../components/RegulatoryRecord.astro';
 import HMDARecord from '../../components/HMDARecord.astro';
 import InfoLink from '../../components/InfoLink.astro';
 import StateRegulatoryContext from '../../components/StateRegulatoryContext.astro';
+import cfpbResponsiveReport from '../../data/cfpb-responsive-providers-2026.json';
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
 import {
   getBbbClass,
@@ -110,6 +111,8 @@ const primaryRow = await getLenderWithBodyBySlugRuntime(slug, env);
 if (!primaryRow) return new Response('Not found', { status: 404 });
 
 const lender = shapeBodyInlineToLender(primaryRow);
+const responsiveReportProvider = ((cfpbResponsiveReport as any).allProviders || [])
+  .find((provider: any) => provider.slug === lender.slug);
 
 // Related-lender resolution: 2-tier (explicit similar_lenders → category top-rated).
 // Replaces the build-time 4-tier fallback (similar → nearby → category → state)
@@ -974,6 +977,16 @@ const ogImageUrl = lender.logo_url?.trim()
               Source: <a href="https://www.consumerfinance.gov/data-research/consumer-complaints/" target="_blank" rel="noopener noreferrer" class="underline hover:text-primary">consumerfinance.gov</a>
               {lender.cfpb_data.last_checked && ` | Last checked ${lender.cfpb_data.last_checked}`}
             </p>
+            {responsiveReportProvider && (
+              <div class="mt-4 rounded-lg border border-primary/20 bg-primary-light/40 p-3">
+                <p class="text-xs font-semibold text-text">Included in CreditDoc research</p>
+                <p class="mt-1 text-xs text-muted leading-relaxed">
+                  {lender.name} appears in CreditDoc's
+                  {' '}<a href="/research/most-responsive-consumer-finance-providers-2026/" class="text-primary hover:underline">2026 Most Responsive Consumer Finance Providers report</a>
+                  {' '}for its public CFPB complaint-response record. This is a transparency signal, not an endorsement, safety rating, pricing review, licensing determination, or suitability recommendation.
+                </p>
+              </div>
+            )}
           </div>
         )}
 

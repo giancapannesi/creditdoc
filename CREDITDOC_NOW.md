@@ -29,12 +29,21 @@ Current CFPB report release-loop progress:
 3. Documented those release assets in:
    `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/release_assets_log_2026-05-26.md`
 
-Immediate next build batch:
+Sitewide upgrade program restarted:
 
-1. Add safe links from included provider profiles to the report where the
-   profile/template supports it.
-2. Build, verify, and commit the local-authority graph docs and research-link
-   change.
+- Plan: `docs/plans/2026-05-26-sitewide-page-upgrade-program.md`
+- Batch 001 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
+- Batch 001 scope: 49 report-included `/review/{slug}/` provider pages get an
+  `Included in CreditDoc research` callout through the review template when the
+  provider appears in `src/data/cfpb-responsive-providers-2026.json`.
+
+Immediate next:
+
+1. Build/verify Batch 001.
+2. Commit the sitewide upgrade plan plus review-template upgrade.
+3. Continue to Batch 002: a connected city/city-category/answer pilot cluster,
+   starting with Amarillo and other small/regional pages with good local data.
 
 ## 2026-05-26 — Static Asset Routing Fix + Noindex Cleanup Batch 009
 

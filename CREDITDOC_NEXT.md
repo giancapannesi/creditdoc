@@ -543,10 +543,23 @@ Local authority context:
 
 Immediate graph build batch:
 
-1. Add safe links from relevant report-included provider profiles back to the
-   CFPB report only where the profile/template has a suitable research/data
-   section.
-2. Build, verify, and commit without getting pulled back into unrelated cleanup.
+1. Build and commit Sitewide Page Upgrade Batch 001:
+   - 49 report-included provider profile pages receive a safe related-research
+     callout through `src/pages/review/[slug].astro`.
+   - Workpack:
+     `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
+2. Continue to Sitewide Page Upgrade Batch 002:
+   - 10 city guide pages, starting with Amarillo and other small/regional towns
+     with strong existing local data.
+   - 10 connected city-category pages.
+   - 10 connected answer pages.
+   - Validate each upgraded cluster links across at least 3 graph layers.
+3. Keep every batch scoped, build-verified, documented, and committed without
+   getting pulled back into unrelated cleanup.
+
+Sitewide upgrade program:
+
+- `docs/plans/2026-05-26-sitewide-page-upgrade-program.md`
 
 ## Regulator Match / Category Cleanup
 
