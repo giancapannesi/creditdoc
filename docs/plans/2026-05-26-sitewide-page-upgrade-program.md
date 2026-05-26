@@ -2010,3 +2010,43 @@ Notes:
   output; no source content records, URLs, slugs, or data mappings changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 069: Homepage Provider Action Step
+
+Date: 2026-05-26
+Implementation commit: `07f0594021` (`feat: soften homepage provider action step`)
+
+Scope:
+
+- `src/pages/index.astro`
+
+What changed:
+
+- Reworded the fourth homepage `How It Works` step from `Apply` to `Visit`.
+- Replaced sign-up/free-consultation action language with neutral provider-site
+  research language: `Use the provider website to review current terms,
+  disclosures, and intake steps directly.`
+- Preserved homepage layout, step count, icons, links, category sections,
+  route structure, and provider/category data.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Generated `dist/index.html` confirmed `Apply`, `Click through to the company
+  website`, `sign up`, and `free consultations` were absent from the homepage
+  step copy.
+- Generated `dist/index.html` confirmed the replacement `Visit` step and
+  provider-site research wording were present.
+
+Notes:
+
+- This batch only changed visible homepage workflow copy; no source content
+  records, URLs, slugs, or data mappings changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
