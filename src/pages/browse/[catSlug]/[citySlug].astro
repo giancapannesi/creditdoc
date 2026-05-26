@@ -46,8 +46,8 @@ const topRated = googleRated.filter(l => l.description_short?.length > 20).slice
 const totalRated = googleRated.length;
 const avgRating = totalRated > 0 ? (googleRated.reduce((s, l) => s + (l.google_rating || 0), 0) / totalRated).toFixed(1) : null;
 
-const title = `Best ${category.name} in ${cityInfo.city}, ${cityInfo.stateAbbr} (2026) | CreditDoc`;
-const description = `Compare ${lenders.length} ${category.name.toLowerCase()} companies in ${cityInfo.city}, ${cityInfo.state}. ${avgRating ? `Average Google rating where available: ${avgRating}/5.` : ''} Read reviews, compare pricing, and find trusted local providers.`;
+const title = `${category.name} Provider Profiles in ${cityInfo.city}, ${cityInfo.stateAbbr} (2026) | CreditDoc`;
+const description = `Compare ${lenders.length} ${category.name.toLowerCase()} company profiles in ${cityInfo.city}, ${cityInfo.state}. ${avgRating ? `Average stored Google rating where available: ${avgRating}/5.` : ''} Review pricing fields, public ratings, and local provider context.`;
 
 const jsonLd = [
   {
@@ -65,7 +65,7 @@ const jsonLd = [
   ...(topRated.length > 0 ? [{
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": `Top ${category.name} in ${cityInfo.city}, ${cityInfo.stateAbbr}`,
+    "name": `${category.name} Provider Profiles in ${cityInfo.city}, ${cityInfo.stateAbbr}`,
     "itemListOrder": "https://schema.org/ItemListOrderDescending",
     "numberOfItems": topRated.length,
     "itemListElement": topRated.map((l: Lender, i: number) => ({
@@ -109,11 +109,11 @@ const jsonLd = [
         <!-- Header -->
         <div class="mb-8">
           <h1 class="text-2xl md:text-3xl font-bold text-text mb-2">
-            Best {category.name} in {cityInfo.city}, {cityInfo.stateAbbr}
+            {category.name} Provider Profiles in {cityInfo.city}, {cityInfo.stateAbbr}
           </h1>
           <p class="text-muted max-w-2xl">
-            Compare {lenders.length} {category.name.toLowerCase()} companies serving {cityInfo.city}, {cityInfo.state}.
-            {avgRating && <> Average Google rating where available: <span class="text-primary font-semibold">{avgRating}/5</span>.</>}
+            Compare {lenders.length} {category.name.toLowerCase()} company profiles serving {cityInfo.city}, {cityInfo.state}.
+            {avgRating && <> Average stored Google rating where available: <span class="text-primary font-semibold">{avgRating}/5</span>.</>}
           </p>
           <div class="flex items-center gap-4 mt-3">
             <span class="text-xs bg-primary-light text-primary font-medium px-2 py-1 rounded">{lenders.length} Companies</span>
