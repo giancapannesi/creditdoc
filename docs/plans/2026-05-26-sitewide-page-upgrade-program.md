@@ -634,3 +634,42 @@ Notes:
 
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 035: Glossary Display Copy
+
+Date: 2026-05-26
+Implementation commit: `fefe5cba77` (`feat: soften glossary display copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+- `src/components/GlossaryAppendix.astro`
+- `src/pages/glossary.astro`
+
+What changed:
+
+- Added a glossary-specific render-boundary softener that inherits the existing
+  educational teaser cleanup.
+- Applied glossary softening to standalone glossary JSON-LD and visible
+  definition, why-it-matters, and example copy.
+- Applied the same boundary to shared glossary appendices used on state, blog,
+  wellness, and related educational surfaces.
+- Neutralized glossary claims around cheapest loans, `best mortgage deals`,
+  bankruptcy chapter superiority, and lower-LTV/rate certainty.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Generated glossary/state/blog/financial-wellness scan was clean for targeted
+  glossary claims; remaining hits were source-only replacement-rule literals.
+- `git diff --check` passed.
+
+Notes:
+
+- Raw glossary JSON was not edited.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
