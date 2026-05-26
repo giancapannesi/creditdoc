@@ -54,19 +54,19 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
     totalOriginated = allLenders.reduce((s, l) => s + l.total_originated, 0);
     avgApproval = lenderCount > 0 ? Math.round(allLenders.reduce((s, l) => s + l.approval_rate, 0) / lenderCount * 10) / 10 : 0;
 
-    // Top approvers (min 1000 apps, min 100 low-income apps)
+    // Higher recorded low-income approval-rate records (min 1000 apps, min 100 low-income apps)
     topApprovers = allLenders
       .filter(l => l.total_applications >= 1000 && l.income_under_50k_apps >= 100 && l.income_under_50k_rate != null)
       .sort((a, b) => (b.income_under_50k_rate || 0) - (a.income_under_50k_rate || 0))
       .slice(0, 15);
 
-    // Top deniers (min 1000 apps)
+    // Lower recorded low-income approval-rate records (min 1000 apps)
     topDeniers = allLenders
       .filter(l => l.total_applications >= 1000 && l.income_under_50k_apps >= 100 && l.income_under_50k_rate != null)
       .sort((a, b) => (a.income_under_50k_rate || 0) - (b.income_under_50k_rate || 0))
       .slice(0, 15);
 
-    // Biggest gap between high-income and low-income approval
+    // Largest recorded gap between high-income and low-income approval rates
     biggestGap = allLenders
       .filter(l => l.income_under_50k_rate != null && l.income_over_200k_rate != null && l.income_under_50k_apps >= 100 && l.income_over_200k_apps >= 100)
       .map(l => ({
@@ -83,13 +83,13 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
 const fmt = (n: number) => n.toLocaleString('en-US');
 const slugToName = (slug: string) => slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 
-const title = "Mortgage Approval Data by Bank | CreditDoc";
-const description = "Analysis of 3.4 million mortgage applications from 2023 HMDA data. See reported low-income approval rates and income-based approval gaps by institution.";
+const title = "Mortgage Application Outcomes by Bank | CreditDoc";
+const description = "Analysis of 3.4 million mortgage applications from 2023 HMDA data. See recorded low-income application outcomes and income-based outcome gaps by institution.";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Mortgage Approval Data by Bank: A Transparency Report",
+  "headline": "Mortgage Application Outcomes by Bank: A Transparency Report",
   "description": description,
   "author": { "@type": "Organization", "name": "CreditDoc" },
   "publisher": { "@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co" },
@@ -110,7 +110,7 @@ const jsonLd = {
     </nav>
 
     <h1 class="text-3xl sm:text-4xl font-bold text-text mb-4">
-      Mortgage Approval Data by Bank
+      Mortgage Application Outcomes by Bank
     </h1>
     <p class="text-lg text-muted mb-8">
       We analyzed <span class="text-text font-semibold">{fmt(totalApps)} mortgage applications</span> across {fmt(lenderCount)} institutions using 2023 HMDA data from the Consumer Financial Protection Bureau. Here's what the public data shows about recorded approval outcomes.
@@ -124,7 +124,7 @@ const jsonLd = {
       </div>
       <div class="glass-card p-4 text-center">
         <p class="text-2xl font-bold text-primary">{avgApproval}%</p>
-        <p class="text-xs text-muted mt-1">Average Approval Rate</p>
+        <p class="text-xs text-muted mt-1">Average Recorded Approval Rate</p>
       </div>
       <div class="glass-card p-4 text-center">
         <p class="text-2xl font-bold text-text">{fmt(lenderCount)}</p>
@@ -157,11 +157,11 @@ const jsonLd = {
       </div>
     </section>
 
-    <!-- Section 1: Low-income approval rates -->
+    <!-- Section 1: Low-income approval-rate records -->
     <section class="mb-12">
       <h2 class="text-2xl font-bold text-text mb-2">Low-Income Approval Rate Records</h2>
       <p class="text-sm text-muted mb-4">
-        These institutions have the highest approval rates for applicants reporting income under $50,000. Minimum 1,000 total applications and 100 low-income applications required.
+        These institutions show higher recorded approval rates for applicants reporting income under $50,000 in the HMDA file. Minimum 1,000 total applications and 100 low-income applications required.
       </p>
       {topApprovers.length > 0 && (
         <div class="glass-card p-4 overflow-x-auto">
@@ -197,11 +197,11 @@ const jsonLd = {
       )}
     </section>
 
-    <!-- Section 2: Lowest Approval for Low-Income -->
+    <!-- Section 2: Lower recorded approval-rate records for low-income applicants -->
     <section class="mb-12">
       <h2 class="text-2xl font-bold text-text mb-2">Lower Low-Income Approval Rate Records</h2>
       <p class="text-sm text-muted mb-4">
-        These institutions show lower approval rates for applicants reporting income under $50,000. This doesn't necessarily indicate discrimination — different lenders serve different markets. But transparency matters.
+        These institutions show lower recorded approval rates for applicants reporting income under $50,000 in the HMDA file. This does not necessarily indicate discrimination because lenders serve different markets, products, and borrower profiles.
       </p>
       {topDeniers.length > 0 && (
         <div class="glass-card p-4 overflow-x-auto">
@@ -239,9 +239,9 @@ const jsonLd = {
 
     <!-- Section 3: Biggest Income Gap -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold text-text mb-2">Largest Approval Gaps by Income</h2>
+      <h2 class="text-2xl font-bold text-text mb-2">Largest Recorded Approval-Rate Gaps by Income</h2>
       <p class="text-sm text-muted mb-4">
-        The largest difference between approval rates for high-income (over $200K) vs low-income (under $50K) applicants at the same institution. A larger gap means income is a stronger predictor of approval at that lender.
+        The largest recorded difference between approval rates for high-income (over $200K) and low-income (under $50K) applicants at the same institution. A larger gap shows a stronger income-based pattern in this public dataset, not a prediction for any individual applicant.
       </p>
       {biggestGap.length > 0 && (
         <div class="glass-card p-4 overflow-x-auto">
@@ -292,7 +292,7 @@ const jsonLd = {
 
     <!-- CTA -->
     <div class="text-center">
-      <p class="text-muted mb-4">Look up any lender's approval rates on their profile page.</p>
+      <p class="text-muted mb-4">Look up recorded lender outcome context on available profile pages.</p>
       <a href="/" class="inline-block px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:opacity-90 transition-opacity">
         Search Lenders
       </a>
