@@ -35,9 +35,9 @@ for (const cat of categories) {
   catNames[cat.slug] = cat.name;
 }
 
-// Top lenders for featured section, ordered by stored Google rating where available
+// Featured providers for local section, ordered by stored Google rating where available
 const googleRatingValue = (l: Lender) => l.google_rating && l.google_rating > 0 && !(l.google_rating > 5) && l.google_reviews_count && l.google_reviews_count >= 1 ? l.google_rating : 0;
-const topLenders = [...lenders].sort((a, b) => googleRatingValue(b) - googleRatingValue(a)).slice(0, 6);
+const featuredLenders = [...lenders].sort((a, b) => googleRatingValue(b) - googleRatingValue(a)).slice(0, 6);
 
 // Map center (use city name for Google Maps embed)
 const mapQuery = `${cityInfo.city}, ${cityInfo.stateAbbr}`;
@@ -47,7 +47,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": `Credit Repair & Financial Services in ${cityInfo.city}, ${cityInfo.state}`,
-    "description": `Find ${lenders.length} credit repair companies, personal lenders, and financial services in ${cityInfo.city}, ${cityInfo.stateAbbr}. Compare ratings, pricing, and BBB ratings.`,
+    "description": `Review ${lenders.length} credit repair companies, personal lenders, and financial services in ${cityInfo.city}, ${cityInfo.stateAbbr}. Compare stored ratings, pricing fields, and BBB context where available.`,
     "url": `https://www.creditdoc.co/city/${cityInfo.slug}/`,
     "about": {
       "@type": "City",
@@ -58,13 +58,13 @@ const jsonLd = [
       }
     }
   },
-  ...(topLenders.length > 0 ? [{
+  ...(featuredLenders.length > 0 ? [{
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": `Financial Service Profiles in ${cityInfo.city}, ${cityInfo.stateAbbr}`,
     "itemListOrder": "https://schema.org/ItemListOrderDescending",
-    "numberOfItems": topLenders.length,
-    "itemListElement": topLenders.map((l: any, i: number) => ({
+    "numberOfItems": featuredLenders.length,
+    "itemListElement": featuredLenders.map((l: any, i: number) => ({
       "@type": "ListItem",
       "position": i + 1,
       "name": l.name,
@@ -85,7 +85,7 @@ const jsonLd = [
 
 <BaseLayout
   title={`Credit Repair & Financial Services in ${cityInfo.city}, ${cityInfo.stateAbbr} (2026) | CreditDoc`}
-  description={`Compare ${lenders.length} credit repair companies, personal lenders, and financial services in ${cityInfo.city}, ${cityInfo.state}. Honest reviews, BBB ratings, and pricing.`}
+  description={`Review ${lenders.length} credit repair companies, personal lenders, and financial services in ${cityInfo.city}, ${cityInfo.state}. Stored ratings, BBB context, and pricing fields where available.`}
   jsonLd={jsonLd}
 >
   <!-- Breadcrumbs -->
@@ -117,7 +117,7 @@ const jsonLd = [
             Credit Repair & Financial Services in {cityInfo.city}
           </h1>
           <p class="mt-4 text-lg text-muted leading-relaxed">
-            Compare {lenders.length} credit repair companies, personal lenders, and financial services in {cityInfo.city}, {cityInfo.state}. All independently reviewed with BBB ratings and pricing.
+            Review {lenders.length} credit repair companies, personal lenders, and financial services in {cityInfo.city}, {cityInfo.state}. Profiles include stored ratings, BBB context, pricing fields, maps, and local rules where available.
           </p>
           <div class="mt-6 flex flex-wrap gap-3">
             {sortedGroups.slice(0, 4).map(([cat, items]) => (
@@ -177,14 +177,14 @@ const jsonLd = [
     </div>
   )}
 
-  <!-- Top Rated -->
+  <!-- Featured Providers -->
   <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between mb-6">
-      <h2 class="text-2xl font-bold text-text">Top Rated in {cityInfo.city}</h2>
+      <h2 class="text-2xl font-bold text-text">Featured Provider Profiles in {cityInfo.city}</h2>
       <span class="text-sm text-muted">{lenders.length} companies</span>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {topLenders.map(lender => (
+      {featuredLenders.map(lender => (
         <LenderCard lender={lender} />
       ))}
     </div>
