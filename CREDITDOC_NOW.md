@@ -58,13 +58,24 @@ Sitewide upgrade program restarted:
   template.
 - Batch 003 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_003_notes_2026-05-26.md`
+- Batch 004 completed locally and build-verified:
+  `/compare/{slug}/` template now includes a `Check the Context Before You
+  Contact a Company` graph path connecting comparison pages to lender profiles,
+  category context, local guides, and CFPB complaint-data context.
+- Batch 004 also softened template-level comparison language:
+  `Our Pick` -> `Comparison Note`, `Which One Is Right for You?` ->
+  `How to Compare These Two`, and `Choose ...` -> `Review ...`.
+- Local comparison inventory: 280 `comparisons` rows; latest GSC pull saw 7
+  `/compare/` URLs. Batch 004 applies to every generated comparison page.
+- Batch 004 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_004_notes_2026-05-26.md`
 
 Immediate next:
 
-1. Commit Batch 003 with only the answer template and resume-cursor docs.
-2. Continue to Batch 004: upgrade comparison pages so high-intent comparison
-   URLs connect into lender profiles, category context, local guides, and
-   research/methodology pages without unsupported ranking or safety claims.
+1. Commit Batch 004 with only the comparison template and resume-cursor docs.
+2. Continue to Batch 005: upgrade category pages so category hubs connect into
+   local city-category pages, answer clusters, tools, and research/methodology
+   pages with advisory-neutral wording.
 3. Keep every batch scoped, build-verified, documented, and committed before
    starting the next one.
 

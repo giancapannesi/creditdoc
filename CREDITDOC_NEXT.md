@@ -556,7 +556,7 @@ Immediate graph build batch:
      blanket `best` wording from the meta description.
    - Latest GSC pull saw 26 `/credit-guide/` URLs; the template upgrade applies
      to every ready city guide and city-category page served by those templates.
-3. Sitewide Page Upgrade Batch 003 is complete locally and build-verified:
+3. Sitewide Page Upgrade Batch 003 is complete and committed:
    - `/answers/{slug}/` template now adds a `Continue Your Research` graph path.
    - Answer pages connect to matching category directories, local guide hub,
      state lending-rule hub, CFPB complaint-data context, and local comparison
@@ -564,11 +564,22 @@ Immediate graph build batch:
    - Local inventory: 35 answer rows; latest GSC pull saw 13 `/answers/` URLs.
    - Keep language advisory-neutral: no approval prediction, pricing promise,
      licensing determination, or recommendation claim.
-4. Next Sitewide Page Upgrade Batch 004:
-   - Upgrade `/compare/{slug}/` pages so comparison URLs connect into lender
-     profiles, category context, local guides, and research/methodology pages
-     without unsupported ranking or safety claims.
-5. Keep every batch scoped, build-verified, documented, and committed without
+4. Sitewide Page Upgrade Batch 004 is complete locally and build-verified:
+   - `/compare/{slug}/` template now adds a `Check the Context Before You
+     Contact a Company` graph path.
+   - Comparison pages connect to both lender profiles, category context, local
+     guides, and CFPB complaint-data context.
+   - Template-level language was softened from `Our Pick` and `Choose...` to
+     `Comparison Note` and `Review...`.
+   - Local inventory: 280 comparison rows; latest GSC pull saw 7 `/compare/`
+     URLs.
+   - Residual risk: stored `comparison.winner_reason` copy still needs a later
+     data-quality pass for assertive claims.
+5. Next Sitewide Page Upgrade Batch 005:
+   - Upgrade `/categories/{category}/` pages so category hubs connect into local
+     city-category pages, answer clusters, tools, and research/methodology pages
+     with advisory-neutral wording.
+6. Keep every batch scoped, build-verified, documented, and committed without
    getting pulled back into unrelated cleanup.
 
 Sitewide upgrade program:

@@ -25,6 +25,23 @@ const lenderB = getLenderBySlug(comparison.lender_b)!;
 
 const winnerLender = comparison.winner === comparison.lender_a ? lenderA : lenderB;
 
+const categoryLabels: Record<string, string> = {
+  'build-credit': 'Build My Credit',
+  'business-loans': 'Business Loans',
+  'credit-cards': 'Credit Cards',
+  'credit-monitoring': 'Monitor & Protect',
+  'credit-repair': 'Credit Repair',
+  'debt-relief': 'Get Out of Debt',
+  fintech: 'Fintech',
+  'personal-loans': 'I Need a Loan',
+};
+
+const comparedCategories = Array.from(new Set([lenderA.category, lenderB.category].filter(Boolean)));
+const categoryContextCards = comparedCategories.map(category => ({
+  href: `/categories/${category}/`,
+  label: categoryLabels[category] || category.replace(/-/g, ' '),
+}));
+
 const faqs = [
   {
     question: `Which is cheaper, ${lenderA.name} or ${lenderB.name}?`,
@@ -43,8 +60,8 @@ const faqs = [
     answer: `${lenderA.pricing.money_back_guarantee ? `${lenderA.name} offers a money-back guarantee: ${lenderA.pricing.guarantee_details}` : `${lenderA.name} does not offer a money-back guarantee.`} ${lenderB.pricing.money_back_guarantee ? `${lenderB.name} offers a money-back guarantee: ${lenderB.pricing.guarantee_details}` : `${lenderB.name} does not offer a money-back guarantee.`}`,
   },
   {
-    question: `Which company is better overall, ${lenderA.name} or ${lenderB.name}?`,
-    answer: `Based on our analysis, ${winnerLender.name} is the better overall choice. ${comparison.winner_reason}`,
+    question: `How should I compare ${lenderA.name} and ${lenderB.name}?`,
+    answer: `Compare the profile details, pricing fields, public ratings where available, guarantee terms, and complaint-response context before contacting either company. CreditDoc's comparison note currently favors ${winnerLender.name} for this matchup because: ${comparison.winner_reason}`,
   },
 ];
 
@@ -129,7 +146,7 @@ const jsonLd = [
           ]}>
             {isWinner && (
               <span class="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-primary text-white shadow-md">
-                Our Pick
+                Comparison Note
               </span>
             )}
             <div class="w-16 h-16 rounded-2xl bg-bg-alt border border-border flex items-center justify-center mx-auto overflow-hidden">
@@ -198,22 +215,51 @@ const jsonLd = [
 
   <!-- Diagnosis -->
   <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-    <h2 class="text-lg font-bold text-text mb-4">Which One Is Right for You?</h2>
+    <h2 class="text-lg font-bold text-text mb-4">How to Compare These Two</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <DiagnosisCard
-        diagnosis={`Choose ${lenderA.name} if you want: ${lenderA.best_for.slice(0, 2).join('. ')}. Top strength: ${lenderA.pros[0]}.`}
+        diagnosis={`Review ${lenderA.name} if these stored profile signals match your needs: ${lenderA.best_for.slice(0, 2).join('. ')}. Profile strength to verify: ${lenderA.pros[0]}.`}
         lenderName={lenderA.name}
       />
       <DiagnosisCard
-        diagnosis={`Choose ${lenderB.name} if you want: ${lenderB.best_for.slice(0, 2).join('. ')}. Top strength: ${lenderB.pros[0]}.`}
+        diagnosis={`Review ${lenderB.name} if these stored profile signals match your needs: ${lenderB.best_for.slice(0, 2).join('. ')}. Profile strength to verify: ${lenderB.pros[0]}.`}
         lenderName={lenderB.name}
       />
     </div>
     <div class="mt-4">
       <DiagnosisCard
-        diagnosis={`Our pick: ${winnerLender.name}. ${comparison.winner_reason}`}
+        diagnosis={`CreditDoc comparison note: ${winnerLender.name}. ${comparison.winner_reason}`}
         lenderName={winnerLender.name}
       />
+    </div>
+  </section>
+
+  <!-- Authority Graph Context -->
+  <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <h2 class="text-lg font-bold text-text mb-2">Check the Context Before You Contact a Company</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        Use this comparison with each company profile, related category pages, local guides, and CreditDoc data explainers. This page is directory context, not a recommendation, approval prediction, price quote, or licensing determination.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href={`/review/${lenderA.slug}/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          {lenderA.name} profile
+        </a>
+        <a href={`/review/${lenderB.slug}/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          {lenderB.name} profile
+        </a>
+        {categoryContextCards.slice(0, 1).map(card => (
+          <a href={card.href} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+            {card.label} directory
+          </a>
+        ))}
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Complaint data context
+        </a>
+        <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+          Local guides
+        </a>
+      </div>
     </div>
   </section>
 
