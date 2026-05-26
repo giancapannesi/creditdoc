@@ -2694,3 +2694,58 @@ Notes:
   generated locally; this was treated as a bad check path, not a site outage.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 082: Comparison Zero Monthly Price Clarification
+
+Date: 2026-05-26
+Implementation commit: `3096ad5821` (`fix: clarify zero monthly price in comparisons`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+- `src/components/ComparisonTable.astro`
+
+What changed:
+
+- Changed comparison monthly-price rendering for stored `0` values from
+  `From Free/mo` to `No monthly subscription listed`.
+- Stopped zero monthly subscription values from receiving the `Lower` badge in
+  side-by-side comparison tables.
+- Updated comparison FAQ answers so zero monthly subscription values do not
+  read as free borrowing, free card usage, or a lower total-cost claim.
+- Added a narrow capitalization cleanup for softened comparison summary copy
+  that produced `. for national-access...` after YMYL-safe rewrites.
+- Preserved source comparison records, source lender records, slugs, routes,
+  pricing data, table structure, cards, JSON-LD structure, and review links.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for `Free/mo`,
+  `same monthly price of Free/mo`, `lower monthly price at Free/mo`, or
+  `From Free/mo`.
+- Targeted rendered checks covered
+  `/compare/the-credit-repairmen-vs-cosmo-credit-repair/`,
+  `/compare/ace-cash-express-miami-fl-vs-amscot-the-money-superstore-orlando/`,
+  and `/compare/kikoff-vs-opensky-secured-credit-card/`.
+- Targeted rendered checks confirmed `No monthly subscription listed`,
+  contextual zero-price FAQ language, and no zero-monthly `Lower` badge.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/the-credit-repairmen-vs-cosmo-credit-repair/`,
+  `/compare/ace-cash-express-miami-fl-vs-amscot-the-money-superstore-orlando/`,
+  `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison clarification; no source pricing or comparison records
+  changed.
+- The language now distinguishes no listed recurring monthly subscription from
+  total product cost, borrowing cost, card fees, interest, and transaction fees.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
