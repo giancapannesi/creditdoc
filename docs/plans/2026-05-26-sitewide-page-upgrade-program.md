@@ -2531,3 +2531,62 @@ Notes:
 - Render-only copy grammar fix; no source lender or comparison records changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 079: Comparison Summary Safe-Copy Grammar
+
+Date: 2026-05-26
+Implementation commit: `f3f38fbc52` (`fix: normalize comparison summary safe copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added render-time copy normalization for comparison summary and winner-reason
+  text so `with a A+ BBB rating`, `with a NR BBB rating`, and similar phrases
+  render as `with an A+ BBB rating`, `with an NR BBB rating`, or the matching
+  vowel-safe article.
+- Moved `safer pick` normalization before the broader `safer` replacement so
+  stored comparison summaries do not render as `the with more listed...`.
+- Added final safe-copy cleanups for rendered comparison summaries that had
+  already been softened into phrases such as `the with more listed
+  risk-context fields, more sustainable choice`.
+- Preserved source comparison records, routes, slugs, rankings, lender records,
+  pricing, ratings, badges, table layout, card layout, meta routing, and JSON-LD
+  structure.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for `with a A+ BBB rating`,
+  `with a A BBB rating`, `with a F BBB rating`, `with a NR BBB rating`,
+  `a A+ BBB rating`, `a A BBB rating`, `a F BBB rating`, or
+  `a NR BBB rating`.
+- Rendered `dist/compare` scan returned no matches for `the with more listed`,
+  `with more listed risk-context fields, more`, or
+  `with more listed risk-context fields pick`.
+- Targeted rendered checks covered
+  `/compare/incharge-debt-solutions-vs-clarifi/`,
+  `/compare/kikoff-vs-boost-credit-101/`,
+  `/compare/self-credit-builder-vs-boost-credit-101/`,
+  `/compare/kikoff-vs-debt-freedom-ga/`,
+  `/compare/kikoff-vs-self-credit-builder/`, and
+  `/compare/credit-blueprint-vs-national-credit-care/`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/incharge-debt-solutions-vs-clarifi/`,
+  `/compare/kikoff-vs-boost-credit-101/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only grammar and safe-copy cleanup; no source lender or comparison
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
