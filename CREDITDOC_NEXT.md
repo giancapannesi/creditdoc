@@ -926,3 +926,26 @@ Initial Batch 022 targets:
   `src/content/wellness-guides.json` change unless the user explicitly confirms
   it is intended for this batch;
 - build-check, output/source-check, document, commit, then continue.
+
+Batch 022 implementation is complete, build-verified, and committed as
+`a6bb2e77dc`. Move to Batch 023 by inspecting source-data and listicle/template
+surfaces where remaining YMYL risk may come from raw content rather than static
+labels.
+
+Initial Batch 023 targets:
+
+- inspect `src/content/listicles.json` and the listicle renderer before making
+  any broad data edits;
+- scan generated `/best/`, `/guides/`, `/resources/`, `/financial-wellness/`,
+  and selected `/trends/` pages for remaining unsupported best/top,
+  guarantee, approval, licensing, endorsement, recommendation, and
+  safety-style wording;
+- preserve explicit warning/scam/legal examples when they are clearly framed as
+  consumer-protection education rather than CreditDoc claims;
+- prefer render-time softening for shared presentation issues and raw data
+  cleanup only where the source copy itself is misleading or likely to leak
+  across many templates;
+- keep routes stable and continue excluding the unrelated
+  `src/content/wellness-guides.json` change unless the user explicitly confirms
+  it belongs in this project batch;
+- build-check, output/source-check, document, commit, then continue.

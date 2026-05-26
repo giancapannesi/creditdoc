@@ -2119,3 +2119,47 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_021_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_021_shared_ymyl_boundary_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 022
+
+Batch 022 implementation committed as `a6bb2e77dc` for static guide, sidebar,
+course, and quiz label cleanup:
+
+- `src/components/AffiliateSidebar.astro`
+- `src/pages/city/[slug].astro`
+- `src/pages/state/[slug].astro`
+- `src/pages/browse/[catSlug]/[citySlug].astro`
+- `src/pages/credit-guide/[slug]/index.astro`
+- `src/pages/courses/credit-fundamentals/[slug].astro`
+- `src/pages/tools/borrowing-power-quiz.astro`
+- `src/utils/safe-copy.ts`
+
+Changes:
+
+- Reframed affiliate sidebar credit-repair copy away from removal/result claims
+  and through the shared `softenYmylCopy()` display boundary.
+- Replaced remaining visible `Top-Rated`, `Top Picks`, `Recommended Next
+  Steps`, and `Matched Lenders for You` labels with provider/profile/review
+  context language.
+- Replaced city `ItemList` schema wording from top-rated financial services to
+  financial service profiles.
+- Added shared softening to course CTA text and expanded `softenYmylCopy()` for
+  remaining `top-rated` course/listicle phrasing.
+
+Verification:
+
+- `npm run build` passed.
+- Build injected 18,413 SSR route URLs because an unrelated unstaged
+  `src/content/wellness-guides.json` change added two generated wellness URLs;
+  that file was not staged or committed in Batch 022.
+- Build generated 124 city guides plus 2,232 city-category sub-pages.
+- Postbuild sitemap/robots conflict check passed.
+- Targeted generated-output/source scan confirmed the old Batch 022 phrases
+  were absent from representative city, browse, course, quiz, state, guide, and
+  affiliate-sidebar surfaces.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_022_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_022_static_guide_quiz_labels_gsc_seen_2026-05-26.csv`
