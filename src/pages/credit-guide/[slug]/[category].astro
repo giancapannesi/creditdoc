@@ -64,11 +64,11 @@ const categoryIntros: Record<string, (city: string, state: string, data: any) =>
     return `Need business financing in ${c}, ${s}? From SBA-backed loans to microloans and lines of credit, ${c} entrepreneurs have multiple options. The SBA ${s} District Office can connect you with approved lenders and free business mentoring through SCORE. Compare business lenders below based on loan size, rates, and eligibility for ${s}-based businesses.`;
   },
   'pawn-shops': (c, s, _d) => {
-    return `Looking for pawn shops in ${c}, ${s}? Pawn loans let you borrow against personal property without a credit check — you get cash immediately and reclaim your item when you repay. ${s} regulates pawn transactions including maximum interest rates and minimum redemption periods. Compare licensed pawn shops serving ${c} below.`;
+    return `Looking for pawn shops in ${c}, ${s}? Pawn loans are collateral-based products tied to personal property, with fees, redemption periods, and item-recovery rules to verify before signing. ${s} regulates pawn transactions including maximum interest rates and minimum redemption periods. Compare licensed pawn shops serving ${c} below.`;
   },
   'payday-alternatives': (c, s, d) => {
-    const payday = d?.payday_loan_status === 'Banned' ? `Since ${s} bans payday lending, these alternatives are especially important for ${c} residents needing short-term cash.` : `These alternatives typically offer better rates than traditional payday loans available in ${s}.`;
-    return `Looking for payday loan alternatives in ${c}, ${s}? ${payday} Credit union payday alternative loans (PALs), employer advances, and emergency assistance programs offer lower-cost options for short-term borrowing needs.`;
+    const payday = d?.payday_loan_status === 'Banned' ? `Since ${s} bans payday lending, these alternatives may be relevant for ${c} residents researching short-term cash options.` : `Compare listed costs, eligibility rules, and repayment terms against any payday loan option available in ${s}.`;
+    return `Looking for payday loan alternatives in ${c}, ${s}? ${payday} Credit union payday alternative loans (PALs), employer advances, and emergency assistance programs can provide lower-cost context for short-term borrowing research.`;
   },
 };
 
@@ -87,7 +87,7 @@ const localIntro = isAtmCategory
   ? `Use this page to browse selected ATM and cash access profiles associated with ${stateName}. CreditDoc does not maintain a complete, real-time inventory of every ATM in ${city}; for the nearest machine, verify availability directly with your bank, credit union, or ATM network before you go.`
   : introFn
     ? introFn(city, stateName, stateData)
-    : `Find ${catName.toLowerCase()} providers serving ${city}, ${stateName}. Compare local and statewide options available to ${city} residents, check Google ratings where available, and make an informed choice.`;
+    : `Find ${catName.toLowerCase()} providers serving ${city}, ${stateName}. Compare local and statewide options available to ${city} residents, and check stored Google ratings where available.`;
 
 // Fetch lenders in this state + category from Supabase
 let lenders: Lender[] = [];

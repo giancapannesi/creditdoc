@@ -56,8 +56,8 @@ const MONEY_LINKS: MoneyLink[] = [
   { phrase: 'installment loans', url: '/categories/personal-loans/', title: 'Personal Loan Lenders' },
   { phrase: 'personal loans', url: '/categories/personal-loans/', title: 'Personal Loan Lenders' },
   // 2026-04-15: added to cover all 18 live /best/ listicles per INTERLINKING_MAP.md
-  { phrase: 'no credit check credit cards', url: '/best/best-no-credit-check-cards/', title: 'Best No Credit Check Cards' },
-  { phrase: 'no credit check cards', url: '/best/best-no-credit-check-cards/', title: 'Best No Credit Check Cards' },
+  { phrase: 'no credit check credit cards', url: '/best/best-no-credit-check-cards/', title: 'Card Eligibility Profiles' },
+  { phrase: 'no credit check cards', url: '/best/best-no-credit-check-cards/', title: 'Card Eligibility Profiles' },
   { phrase: 'cheapest personal loans', url: '/best/cheapest-personal-loans/', title: 'Cheapest Personal Loans' },
   { phrase: 'lowest rate personal loans', url: '/best/cheapest-personal-loans/', title: 'Cheapest Personal Loans' },
   { phrase: 'credit repair money back guarantee', url: '/best/best-credit-repair-money-back-guarantee/', title: 'Credit Repair with Money Back Guarantee' },
