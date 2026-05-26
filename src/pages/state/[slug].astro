@@ -152,7 +152,7 @@ const jsonLd = [
   ...(topLenders.length > 0 ? [{
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": `Top Financial Services in ${stateInfo.name}`,
+    "name": `Financial Service Profiles in ${stateInfo.name}`,
     "itemListElement": topLenders.slice(0, 6).map((l, i) => ({
       "@type": "ListItem",
       "position": i + 1,
@@ -489,7 +489,7 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
             <li><a href="/best/best-debt-consolidation-loans/" class="text-sm text-muted hover:text-primary transition-colors" style="pointer-events: auto;">Debt Consolidation Profiles</a></li>
             <li><a href="/best/best-credit-monitoring-services/" class="text-sm text-muted hover:text-primary transition-colors" style="pointer-events: auto;">Credit Monitoring Profiles</a></li>
           </ul>
-          <a href="/best/best-credit-repair-companies/" class="mt-3 block text-xs text-primary hover:text-primary-hover font-medium" style="pointer-events: auto;">See all comparisons &rarr;</a>
+          <a href="/best/best-credit-repair-companies/" class="mt-3 block text-xs text-primary hover:text-primary-hover font-medium" style="pointer-events: auto;">View comparison guides &rarr;</a>
         </div>
 
         <!-- Quiz CTA -->
