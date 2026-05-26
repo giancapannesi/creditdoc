@@ -2106,3 +2106,64 @@ Notes:
   data mappings changed.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 071: City Card Urgency Copy
+
+Date: 2026-05-26
+Implementation commit: `b94d5b0922` (`feat: soften city card urgency copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Extended `softenYmylCopy()` with phrase-specific coverage for city and
+  browse provider-card descriptions and profile signals that used high-pressure
+  urgency, application-timing, same-day funding, no-credit-check, or
+  qualification-exclusion wording.
+- Reworded variants such as `fast approval`, `quick cash`, `fast title loans`,
+  `quick personal loans`, `same-day or next-business-day funding`, `need
+  emergency cash within days`, `need funds quickly`, `no credit check needed`,
+  `cannot qualify for traditional personal loans`, and `have exhausted other
+  options` into provider-profile or verification-oriented context.
+- Added final-pass cleanup for generated artifacts such as `short-term cash
+  access access`, `who need listed funding timing`, `need emergency cash
+  quickly`, `no other financing alternatives`, and `for short-term cash access
+  for short-term cash research`.
+- Preserved source lender records, city/browse routes, slugs, rankings,
+  category mappings, card layout, ratings, and links.
+
+Verification:
+
+- `git diff --check` passed.
+- Direct helper checks confirmed targeted urgency, no-credit-check, timing, and
+  qualification phrases soften before rendering.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Postbuild sitemap/robots check passed.
+- Generated city/browse pages confirmed targeted raw phrases were absent from
+  sampled provider-card copy and replacement wording was present for
+  `/city/tampa-fl/`, `/city/hammond-in/`, `/city/houston-tx/`,
+  `/city/norcross-ga/`, `/city/nashville-tn/`, `/city/tempe-az/`,
+  `/browse/emergency-cash/houston-tx/`, `/browse/pawn-shops/tampa-fl/`, and
+  `/browse/pawn-shops/virginia-beach-va/`.
+- Broader `dist/city` and `dist/browse` scan confirmed no remaining matches
+  for the targeted generated-artifact phrases. Remaining sampled hits were
+  provider/business names such as `Quick Cash Pawn` or `TN Quick Cash`, not
+  body-copy claims.
+- Production spot checks returned HTTP 200 for `/city/tampa-fl/`,
+  `/city/hammond-in/`, `/city/houston-tx/`, `/city/tempe-az/`,
+  `/browse/emergency-cash/houston-tx/`, `/browse/pawn-shops/tampa-fl/`,
+  `/learn/`, `/blog/`, `/categories/fintech/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Helper-only change; no source lender records, routes, slugs, rankings,
+  category mappings, or card layout changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
