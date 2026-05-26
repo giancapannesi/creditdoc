@@ -453,7 +453,7 @@ const jsonLd = [
                   href={`/financial-wellness/${guide.slug}/`}
                   class="block rounded-lg border border-border p-3 hover:border-primary/30 hover:bg-primary-light/20 transition-colors"
                 >
-                  <p class="text-sm font-medium text-text leading-snug">{guide.title}</p>
+                  <p class="text-sm font-medium text-text leading-snug">{softenEducationalTeaserCopy(guide.title)}</p>
                   <p class="mt-1 text-xs text-muted">{((guide as any).read_time as string) || ''}</p>
                 </a>
               ))}
