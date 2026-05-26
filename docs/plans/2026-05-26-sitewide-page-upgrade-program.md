@@ -648,6 +648,44 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 040: 404 Guide Label Copy
+
+Date: 2026-05-26
+Implementation commit: `fe86349200` (`feat: soften 404 guide labels`)
+
+Scope:
+
+- `src/pages/404.astro`
+
+What changed:
+
+- Reframed the 404 page quick-link section from `Top Guides` to `Research
+  Guides`.
+- Reframed visible guide anchor text from `Best ...` labels to neutral guide
+  labels.
+- Preserved the existing `/best/.../` URLs so no route, sitemap, or internal
+  link target changed.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Targeted source/generated 404 scan was clean for `Top Guides`, `Best Credit
+  Repair Companies`, `Best Personal Loan Lenders`, `Best Debt Relief
+  Companies`, `Best Credit Builder Loans`, and `Best Credit Monitoring
+  Services`.
+- Generated `dist/404.html` shows `Research Guides` and neutral guide labels.
+- `git diff --check` passed.
+
+Notes:
+
+- This is a presentation-only cleanup; URL slugs were intentionally preserved.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 033: Compare Profile Notes
 
 Date: 2026-05-26  
