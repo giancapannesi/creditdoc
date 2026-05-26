@@ -1160,3 +1160,37 @@ Notes:
   values untouched and applies YMYL-safe wording at the render boundary.
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
+
+### Batch 048: Homepage Filter Promise
+
+Date: 2026-05-26
+Implementation commit: `27b5f2c9d8` (`feat: soften homepage filter promise`)
+
+Scope:
+
+- `src/components/FilterBar.astro`
+
+What changed:
+
+- Reframed the homepage filter helper line from `we'll show the best matches`
+  to `we'll show matching directory profiles`.
+- Preserved the existing filter form, category options, homepage placement, and
+  interaction behavior.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs because unrelated unstaged
+  `src/content/wellness-guides.json` and `src/content/comparisons.json`
+  changes affect generated inventory.
+- Source and generated homepage scans were clean for `best matches` and
+  confirmed the replacement `matching directory profiles` copy.
+- `git diff --check` passed.
+
+Notes:
+
+- This is a shared homepage UI copy cleanup: the filter can still help users
+  narrow directory listings without making a recommendation-style promise.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
