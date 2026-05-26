@@ -1795,3 +1795,38 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_013_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_013_trust_support_pages_gsc_seen_2026-05-26.csv`
+
+## 2026-05-26 — Sitewide Page Upgrade Batch 014
+
+Batch 014 completed locally for remaining static support/trust pages:
+
+- `/privacy/`
+- `/terms/`
+- `/accessibility/`
+- `/do-not-sell/`
+- `/about/harvey-brooks/`
+
+Changes:
+
+- Added contextual graph blocks into methodology, editorial policy, disclosure,
+  data explanations, local guides, state pages, tools, resources, and CFPB
+  complaint-data research.
+- Softened unsupported recommendation, guarantee, privacy-protection, licensing,
+  and stale editorial-review inventory language.
+- Updated the editor/founder page to describe selected editorial review without
+  implying directory-wide manual review coverage.
+
+Verification:
+
+- Initial `npm run build` passed but had a non-fatal sitemap city-guide fetch
+  timeout and injected 16,055 SSR URLs.
+- Reran `npm run build`; second build passed with 124 city guides, 2,232
+  city-category sub-pages, and 18,411 SSR route URLs injected.
+- Output scan confirmed all five Batch 014 context blocks.
+- Static route checks passed for touched support/trust pages and graph
+  destinations.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_014_notes_2026-05-26.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_014_static_support_pages_gsc_seen_2026-05-26.csv`

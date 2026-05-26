@@ -796,3 +796,15 @@ For Batch 014, keep the same rules:
 - avoid "best", endorsement, approval, safety, licensing, legal/financial
   advice, guaranteed outcome, and "right provider" language;
 - build-check, generated-output-check, document, and commit before moving on.
+
+Batch 014 is locally complete and build-verified. After committing, move to
+Batch 015 on the remaining broad navigation/commercial support pages:
+
+- inspect `/press/`
+- inspect `/sitemap/`
+- inspect `/search/`
+- inspect `/deals/` and `/specials/`
+- inspect the homepage only if it has not already received the local graph
+  treatment in a prior branch
+
+Keep Batch 015 scoped and YMYL-safe. Do not deploy unless requested.

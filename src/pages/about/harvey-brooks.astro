@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 <BaseLayout
   title="About Harvey Brooks — Editor | CreditDoc"
-  description="Harvey Brooks is the editor overseeing hand-reviewed lender profiles on CreditDoc."
+  description="Harvey Brooks is the editor overseeing selected hand-reviewed lender profiles on CreditDoc."
   canonical="https://www.creditdoc.co/about/harvey-brooks/"
 >
   <main class="max-w-3xl mx-auto px-6 py-12">
@@ -19,27 +19,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <section class="prose prose-lg max-w-none">
       <h2>Role</h2>
       <p>
-        Harvey Brooks serves as editor for CreditDoc's hand-reviewed lender
-        profiles. He is responsible for verifying that the written content
-        on a small set of flagship profiles accurately represents each
-        lender's products, pricing, and customer experience.
+        Harvey Brooks serves as editor for selected CreditDoc hand-reviewed
+        lender profiles. His role is to check written profile content against
+        provider websites, regulator records, and other cited public sources
+        before publication.
       </p>
 
       <h2>Scope of Editorial Review</h2>
       <p>
-        Editorial review at CreditDoc is reserved for our flagship profile
-        set. As of today, roughly 200 of the 20,000+ lender pages on
-        CreditDoc carry editorial review. The rest are automatically
-        compiled from public regulatory filings (NCUA, FDIC, HUD) and
+        Editorial review at CreditDoc is reserved for a limited flagship
+        profile set. Most lender pages are automatically compiled from public
+        regulatory filings (including NCUA, FDIC, and HUD records) and
         publicly available business information.
       </p>
 
       <h2>What Editorial Review Is</h2>
       <ul>
         <li>Every fact in the written review is verified against the lender's own website or a primary-source regulator</li>
-        <li>Products, pricing tiers, fees, and eligibility criteria are confirmed</li>
-        <li>Pros and cons reflect real strengths and gaps, not generic boilerplate</li>
-        <li>The profile is only published once the editor is satisfied it is accurate</li>
+        <li>Products, pricing tiers, fees, and eligibility criteria are checked against available sources</li>
+        <li>Pros and cons are written from observed source material rather than generic boilerplate</li>
+        <li>The profile is published after editorial checks are complete, while readers should still verify current provider terms directly</li>
       </ul>
 
       <h2>What Editorial Review Is Not</h2>
@@ -57,6 +56,31 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         For editorial corrections or feedback, please use the contact form
         on our <a href="/about/">About page</a>.
       </p>
+    </section>
+
+    <section class="mt-12 rounded-xl border border-border bg-white p-6">
+      <h2 class="text-xl font-bold text-text mb-4">Use This Editor Page With CreditDoc Context</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        Editorial review is one layer in the wider CreditDoc graph. These pages explain the data, methodology, and research context behind public profiles.
+      </p>
+      <div class="grid gap-3 sm:grid-cols-2">
+        <a href="/methodology/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Methodology</span>
+          <span class="mt-1 block text-xs text-muted">How CreditDoc organizes profiles, ratings display, and comparison context.</span>
+        </a>
+        <a href="/editorial-policy/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Editorial Policy</span>
+          <span class="mt-1 block text-xs text-muted">How corrections, updates, and editorial independence are handled.</span>
+        </a>
+        <a href="/about/creditdoc-data/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">CreditDoc Data</span>
+          <span class="mt-1 block text-xs text-muted">How public records and provider data feed directory pages.</span>
+        </a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+          <span class="block text-sm font-semibold text-text">Complaint Data</span>
+          <span class="mt-1 block text-xs text-muted">Use public complaint patterns as one research input.</span>
+        </a>
+      </div>
     </section>
   </main>
 </BaseLayout>
