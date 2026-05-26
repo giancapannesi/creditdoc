@@ -5,6 +5,7 @@ import DiagnosisCard from '../../components/DiagnosisCard.astro';
 import RatingStars from '../../components/RatingStars.astro';
 import { getComparisons, getLenderBySlug } from '../../utils/data-build';
 import { formatPrice, getBbbClass } from '../../utils/data';
+import { softenYmylCopy } from '../../utils/safe-copy';
 import type { Lender } from '../../utils/data';
 
 export function getStaticPaths() {
@@ -26,7 +27,7 @@ const lenderB = getLenderBySlug(comparison.lender_b)!;
 const winnerLender = comparison.winner === comparison.lender_a ? lenderA : lenderB;
 
 function softenComparisonText(text: string): string {
-  return text
+  const locallySoftened = text
     .replace(/money-back guarantees/gi, 'listed refund terms')
     .replace(/money-back guarantee/gi, 'listed refund term')
     .replace(/\bwins\b/gi, 'is flagged')
@@ -37,6 +38,7 @@ function softenComparisonText(text: string): string {
     .replace(/without overpaying/gi, 'with listed pricing context')
     .replace(/comparable effectiveness/gi, 'comparable profile fields')
     .replace(/zero upfront cost to get started/gi, 'no listed setup fee');
+  return softenYmylCopy(locallySoftened);
 }
 
 const safeSummary = softenComparisonText(comparison.summary);

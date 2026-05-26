@@ -2,6 +2,7 @@
 import type { Lender } from '../utils/data';
 import RatingStars from './RatingStars.astro';
 import { formatPrice, getBbbClass } from '../utils/data';
+import { softenYmylCopy } from '../utils/safe-copy';
 
 interface Props {
   lenders: Lender[];
@@ -12,12 +13,7 @@ const { lenders } = Astro.props;
 const sorted = lenders;
 
 function softenProviderSignal(text: string): string {
-  return text
-    .replace(/money-back guarantees/gi, 'listed refund terms')
-    .replace(/money-back guarantee/gi, 'listed refund term')
-    .replace(/effective credit repair/gi, 'credit repair services')
-    .replace(/without overpaying/gi, 'with listed pricing context')
-    .replace(/\bbest\b/gi, 'notable');
+  return softenYmylCopy(text);
 }
 ---
 

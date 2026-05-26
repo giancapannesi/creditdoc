@@ -3,6 +3,7 @@ import type { Lender } from '../utils/data';
 import { getBbbClass } from '../utils/data';
 import RatingStars from './RatingStars.astro';
 import TrustBadge from './TrustBadge.astro';
+import { softenYmylCopy } from '../utils/safe-copy';
 
 interface Props {
   lender: Lender;
@@ -15,12 +16,7 @@ const bbbClass = getBbbClass(lender.company_info.bbb_rating);
 const showGoogleRating = showRatings && lender.google_rating && lender.google_rating > 0 && !(lender.google_rating > 5) && lender.google_reviews_count && lender.google_reviews_count >= 1;
 
 function softenProviderSignal(text: string): string {
-  return text
-    .replace(/money-back guarantees/gi, 'listed refund terms')
-    .replace(/money-back guarantee/gi, 'listed refund term')
-    .replace(/effective credit repair/gi, 'credit repair services')
-    .replace(/without overpaying/gi, 'with listed pricing context')
-    .replace(/\bbest\b/gi, 'notable');
+  return softenYmylCopy(text);
 }
 ---
 
@@ -54,7 +50,7 @@ function softenProviderSignal(text: string): string {
       <h3 class="text-lg font-semibold text-text truncate">{lender.name}</h3>
       <p class="text-sm text-muted mt-0.5 line-clamp-2">
         {showRatings
-          ? lender.description_short
+          ? softenYmylCopy(lender.description_short)
           : 'View this provider profile and compare source-linked details before choosing what to do next.'}
       </p>
     </div>
