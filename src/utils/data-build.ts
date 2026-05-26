@@ -28,6 +28,88 @@ const ANSWERS_DIR = path.join(process.cwd(), 'src/content/answers');
 
 let _lendersCache: Lender[] | null = null;
 
+// DB is the live source of truth, but prerendered browse pages still read the
+// static lender export. Keep archived review records out of static references.
+const ARCHIVED_REVIEW_SLUGS = new Set([
+  "vfs-global-india-passport-application-center",
+  "fix-my-auto-credit-score",
+  "autocarhouston-autos-usados",
+  "ny-identity-theft-group",
+  "auto-titles-and-bonds",
+  "jm-auto-title-service-titulos-y-placas-surety-bond-title",
+  "burns-buy-here-pay-here-of-spartanburg",
+  "fraud",
+  "good-price-title-auto-title-services-bonded-titles-by-appointment-only",
+  "atlanta-buy-here-pay-here",
+  "atlanta-international-auto-show",
+  "austin-buy-here-pay-here",
+  "auto-car-financing-oklahoma-city-ok",
+  "auto-credit-chicago",
+  "auto-financing-san-antonio",
+  "auto-now",
+  "auto-now-financial",
+  "auto-now-financial-services",
+  "auto-pawn-loans",
+  "auto-smart-charlotte",
+  "auto-title-loans",
+  "auto-title-loans-personal-loans",
+  "automatic-financing",
+  "autovalley",
+  "autowise-body-shop-used-cars-center",
+  "b-and-b-auto-title-pawn",
+  "buy-here-pay-here",
+  "buy-here-pay-here-999-downcom",
+  "buy-here-pay-here-bayonne",
+  "buy-here-pay-here-clifton",
+  "buy-here-pay-here-fl",
+  "buy-here-pay-here-jersey-city",
+  "buy-here-pay-here-newark",
+  "buy-here-pay-here-of-long-island",
+  "buy-here-pay-here-of-long-island-garden-city",
+  "buy-here-pay-here-passaic",
+  "buy-here-pay-here-union",
+  "buy-here-pay-here-union-city",
+  "cleveland-auto-nation",
+  "cp-auto-center",
+  "credex-auto-title-loans-west-flagler",
+  "de-jesus-auto-tags",
+  "dfw-buy-here-pay-here",
+  "eazy-auto-finance",
+  "echopark-automotive-atlanta-duluth",
+  "echopark-los-angeles-long-beach-vehicle-buying-center",
+  "equity-auto-loan",
+  "finest-auto-leasing",
+  "ganas-auto-fresno",
+  "ganas-auto-long-beach",
+  "ganas-auto-sacramento",
+  "get-auto-title-loans-charlotte-mi",
+  "hm-buy-here-pay-here",
+  "kjc-auto-title-loans",
+  "kjc-auto-title-loans-houston",
+  "kjc-auto-title-loans-houston-tx",
+  "kjc-auto-title-loans-san-antonio",
+  "lease-with-ease-auto-awesome-leasing",
+  "legacy-automotive-buy-here-pay-here",
+  "loancenter-title-loans-at-georgia-peach-auto-sales",
+  "louisville-buy-here-pay-here",
+  "mars-auto-trade",
+  "melrose-park-auto-credit",
+  "pittsburgh-auto-shipping-group",
+  "prestamo-por-titulo-de-auto-mvp-bell-gardens",
+  "quick-cash-auto-loans",
+  "quick-cash-auto-loans-cutler-bay",
+  "rapid-auto-loans",
+  "vehicles-for-sale-near-detroit-automotive",
+  "youremergencycash-auto-title-loans",
+  "fidelity-national-title-insurance-colorado-springs",
+  "first-american-title-insurance-company-national-commercial",
+  "first-american-title-insurance-company-national-commercial-pittsburgh",
+  "houston-title",
+  "title-one-agency-cincinnati-oh-title-company-with-best-rates",
+  "consumer-frauds-and-protection-bureau",
+  "emergency-expedited-passports-visa-expediting",
+]);
+
 const ABBR_TO_FULL_STATE: Record<string, string> = Object.fromEntries(
   Object.entries(STATE_ABBREVIATIONS).map(([full, abbr]) => [abbr, full])
 );
@@ -67,6 +149,7 @@ export function getAllLenders(): Lender[] {
     l.cons = Array.isArray(l.cons) ? l.cons : [];
     return l;
   }).filter(l => {
+    if (ARCHIVED_REVIEW_SLUGS.has(l.slug)) return false;
     const ps = (l as any).processing_status;
     if (ps) return ps === 'ready_for_index' || ps === 'pending_approval';
     return l.review_status === 'published';
