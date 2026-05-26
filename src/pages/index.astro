@@ -175,7 +175,7 @@ const jsonLd = [
         </div>
         <div class="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
-            href="#top-picks"
+            href="#profile-highlights"
             class="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary-hover transition-colors min-h-[44px]"
           >
             See Profile Highlights
@@ -200,7 +200,7 @@ const jsonLd = [
   </section>
 
   <!-- Profile Highlights Table -->
-  <section id="top-picks" class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+  <section id="profile-highlights" class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-2xl font-bold text-text">Profile Highlights</h2>
       <span class="text-sm text-muted">{lenders.length} companies reviewed</span>
@@ -511,7 +511,7 @@ const jsonLd = [
   const searchInput = document.getElementById('filter-search') as HTMLInputElement | null;
   const categoryFilter = document.getElementById('filter-category') as HTMLSelectElement | null;
   const sortFilter = document.getElementById('filter-sort') as HTMLSelectElement | null;
-  const tableBody = document.querySelector('#top-picks-table tbody');
+  const tableBody = document.querySelector('#profile-highlights tbody');
 
   function filterAndSort() {
     if (!tableBody) return;
