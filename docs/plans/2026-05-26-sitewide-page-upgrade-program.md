@@ -3093,6 +3093,61 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 099: Educational Authority Copy
+
+Date: 2026-05-26
+Implementation commit: `8a0d9c6672` (`fix: soften educational authority copy`)
+
+Scope:
+
+- `src/pages/index.astro`
+- `src/pages/financial-wellness/index.astro`
+- `src/pages/credit-guide/[slug]/index.astro`
+
+What changed:
+
+- Reframed visible educational authority language away from broad
+  finance-professional and expert-guide claims.
+- Replaced homepage wellness teaser copy with CreditDoc research and editorial
+  review language.
+- Replaced financial wellness hub meta, hero, JSON-LD, and commitment copy with
+  research-led editorial-process language.
+- Replaced city-guide wellness teaser copy with research-led guide language
+  focused on credit habits, debt decisions, and financial planning basics.
+- Preserved page routes, page structure, guide records, city records, provider
+  records, and founder/about factual bio copy.
+
+Verification:
+
+- `git diff --check` passed.
+- Source scan returned no matches for the targeted old phrases:
+  `Free educational guides written by finance professionals`,
+  `CreditDoc's finance professionals`, `Written by finance professionals`,
+  `written and reviewed by our finance team`, or
+  `Expert guides to help consumers`.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered scan returned no matches for the targeted old phrases across static
+  HTML, SSR worker modules, and client bundles.
+- Replacement-language checks confirmed rendered output on `/`, the financial
+  wellness hub, and the credit-guide SSR worker module.
+- Production spot checks returned HTTP 200 for `/`, `/financial-wellness/`,
+  `/credit-guide/amarillo-tx/`, `/city/amarillo-tx/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Static/SSR template copy cleanup only; no content records or provider data
+  were rewritten.
+- A positive rendered-check command included a static `dist/credit-guide`
+  filepath that does not exist because city guide pages are SSR; the relevant
+  replacement text was confirmed in `dist/_worker.js/pages/credit-guide/_slug_.astro.mjs`
+  and the live route returned HTTP 200.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 098: Static Trust and Rating Copy
 
 Date: 2026-05-26
