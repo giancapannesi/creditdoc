@@ -1159,3 +1159,31 @@ Bottom-up local authority + CFPB responsiveness project 2026-05-26:
   - `wafd-bank-seattle`, `hancock-whitney-bank-gulfport`, and
     `san-diego-county` are confirmed matches but remain pending profile review
     because their CreditDoc rows are draft/brand-profile review candidates.
+- Profile review batch completed:
+  - Backup:
+    `data/backups/creditdoc_before_cfpb_profile_review_batch_2026-05-26.sqlite`
+  - Updated through `CreditDocDB.update_lender(...,
+    updated_by='regulator_profile_review', force=True)`.
+  - `first-technology`: display name now `First Tech Federal Credit Union`;
+    stale Instrumentl/source-derived copy removed; category remains
+    `credit-unions`; `review_status` set to `published`.
+  - `mountain-america`: display name now `Mountain America Credit Union`;
+    stale Wikipedia/source-derived copy removed; category remains
+    `credit-unions`; `review_status` set to `published`.
+  - `wafd-bank-seattle`: official website aligned to
+    `https://www.wafdbank.com`; brand-level banking copy/meta cleaned;
+    `review_status` set to `published`.
+  - `hancock-whitney-bank-gulfport`: official website aligned to
+    `https://www.hancockwhitney.com`; brand-level banking copy/meta cleaned;
+    `review_status` set to `published`.
+  - `san-diego-county`: display name now `San Diego County Credit Union`;
+    credit-union copy/meta cleaned; `review_status` set to `published`.
+  - No unresolved Supabase retry rows for these five slugs.
+  - Exported changed lender JSON files.
+  - Regenerated candidate CSV:
+    `/srv/BusinessOps/CreditDoc Project Improvement/CFPB_Responsiveness_Report_2026-05-26/cfpb_responsiveness_candidates_enriched_after_profile_review_2026-05-26.csv`
+- Updated Phase 1 top-50 status after profile review:
+  - 45 `yes_pending_final_methodology`
+  - 3 `pending_post_regen_review`
+  - 1 `pending_fintech_policy` (`moneylion`)
+  - 1 `pending_category_policy` (`sarma`)
