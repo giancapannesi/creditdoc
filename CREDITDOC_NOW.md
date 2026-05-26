@@ -957,21 +957,20 @@ Content engine firing verification 2026-05-26:
 - Crontab backup:
   `/srv/BusinessOps/backups/crontab-before-creditdoc-content-engine-verifier-20260526T060638Z.txt`
 - Manual verifier run at 2026-05-26 06:06 UTC confirmed:
-  blog scheduler already fired; blog generator, city guides, content drip,
-  questions/answers, financial wellness, and comparisons were correctly pending
-  because their scheduled times had not arrived.
+  blog scheduler already fired; blog generator, city guides, questions/answers,
+  financial wellness, and comparisons were correctly pending because their
+  scheduled times had not arrived.
 
 Content engine queue reserve guard 2026-05-26:
 
 - Expanded `/srv/BusinessOps/tools/creditdoc_content_engine_daily_verify.py`
   so it checks queue reserves as well as same-day firing:
   blog queue, city guide queue, questions/answers clusters, financial wellness
-  queue, comparison queue, and the legacy content drip source queue.
+  queue, and comparison queue.
 - Queue thresholds at time of change:
   blog minimum 10 pending, city guides minimum 100 tracked, answers minimum
   50 pending, wellness minimum 10 remaining, comparisons minimum 50 remaining.
-  The legacy content drip queue is allowed to be 0 because it reports all
-  lenders processed.
+  The legacy content drip queue is not a daily growth queue.
 - Found a real near-miss: blog queue had only 5 pending items. Tightened
   `/srv/BusinessOps/tools/creditdoc_blog.py` so it auto-refills when pending
   count is `<= 10`, not only `< 5`.
@@ -994,3 +993,18 @@ Content engine queue reserve guard 2026-05-26:
   `/blog/are-credit-card-balance-transfers-worth-it/`,
   `/blog/are-credit-card-interest-rates-capped/`, and
   `/blog/are-credit-card-interest-rates-going-down/` all returned HTTP 200.
+
+CreditDoc lender/business onboarding drip disabled 2026-05-26:
+
+- Jammi confirmed the lender/business onboarding drip should not run daily.
+  It should be treated as a periodic refresh job, likely once or twice per
+  year, to discover new businesses and identify closed businesses.
+- Disabled the daily noon cron by commenting it out:
+  `creditdoc-content-drip / creditdoc_content_drip.py`.
+- Crontab backup before the change:
+  `/srv/BusinessOps/backups/crontab-before-disable-creditdoc-content-drip-20260526T070607Z.txt`
+- Removed content drip from the daily content-engine verifier so it does not
+  alert on a deliberately disabled job.
+- During this change, 41 generated lender JSON diffs reappeared with the same
+  export metadata churn pattern (`last_engine_run` / `brand_slug`). They were
+  restored because the database remains the source of truth.
