@@ -79,6 +79,50 @@ Continue noindex cleanup in controlled batches only. Every batch must end with
 build verification, exact static reference scan, deploy via `./deploy.sh`, live
 URL checks, and live sitemap checks.
 
+## 2026-05-26 — Noindex Cleanup Batch 008
+
+**Status: deployed and live-verified.**
+
+Batch 008 reinstated 5 real credit union profiles from noindex after validating
+official websites and stored NCUA charter data:
+
+- `u-f-c-w-local-1776`
+- `mattel`
+- `midwest-family`
+- `telco-community-credit-union`
+- `pioneer-appalachia`
+
+Rules applied:
+
+- Used `CreditDocDB.update_lender()` with founder override; no direct JSON
+  surgery.
+- Required working official-looking credit union website plus NCUA charter
+  context already present in the profile.
+- Set `processing_status=ready_for_index`, `review_status=published`, and
+  `no_index=false`.
+- Added neutral, factual title/meta/description copy and official `website_url`.
+- Did not reinstate candidates with SSL/domain mismatch or weak website signals.
+
+Verification:
+
+- Local SQLite and exported JSON agree for all five touched slugs.
+- `npm run build` passed with robots/sitemap guards and 18,410 injected SSR
+  route URLs.
+- Generated sitemap includes all five `/review/<slug>/` paths.
+- Deployed via `./deploy.sh`.
+- Cloudflare Worker version:
+  `3968f894-d02b-4867-8fc9-6ffac519303b`.
+- Live: all five review URLs return `200`, have canonical review URLs, and do
+  not contain a `noindex` robots meta.
+- Live sitemaps include all five review URLs.
+- Live smoke pages return `200` with no noindex: `/review/lexington-law/`,
+  `/city/`, `/credit-guide/austin-tx/`, `/sitemap-index.xml`, and
+  `/robots.txt`.
+
+Repo commit:
+
+- `4240a47847` — `data: reinstate verified credit union noindex batch`.
+
 ## 2026-05-18 — SEO FIXES BATCH + PRICING REMOVAL + AI COUNCIL
 
 **Status: 18 fixes shipped. Pricing stripped. Council rebuilt with real characters. FREEZE ON-PAGE CHANGES.**

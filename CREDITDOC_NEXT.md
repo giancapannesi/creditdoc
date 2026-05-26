@@ -181,13 +181,15 @@ Latest completed state:
 
 - Batch 006 title/title-service wrong-vertical archive deployed and live-verified.
 - Batch 007 auto/vehicle/car-dealer wrong-vertical archive deployed and live-verified.
-- Latest production Worker version: `1d5be9ba-6f92-4125-8029-7393e086aad2`.
-- Latest commit: `de5ccdea7f data: archive auto-vehicle noindex cleanup batch`.
+- Batch 008 reinstated 5 verified credit union profiles from noindex and
+  deployed/live-verified them.
+- Latest production Worker version: `3968f894-d02b-4867-8fc9-6ffac519303b`.
+- Latest commit: `4240a47847 data: reinstate verified credit union noindex batch`.
 - `npm run build` passed with 18,405 SSR route URLs injected and sitemap/robots
-  guards passing.
+  guards passing for Batch 007; Batch 008 passed with 18,410 SSR route URLs.
 - Live checks passed: all 12 Batch 007 review URLs are `404`; `/trends/ascent/`
-  is `404`; live sitemaps contain none of those URLs; normal smoke pages are
-  `200` without noindex.
+  is `404`; Batch 008 credit union URLs are `200`, canonical, not noindex, and
+  present in live sitemaps; normal smoke pages are `200` without noindex.
 
 Continue next:
 
