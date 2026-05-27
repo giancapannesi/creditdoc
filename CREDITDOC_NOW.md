@@ -35,6 +35,18 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
+  `cda882eca5 fix: soften blog and glossary outcome copy`.
+  Batch 137 cleaned rendered blog-index teaser copy and glossary educational
+  examples, softening hard approval/outcome language, numeric score-change
+  claims, score/rate determinism, and grammar artifacts from earlier safe-copy
+  passes.
+- Batch 137 verification passed: `git diff --check`, `npm run build`, 124 city
+  guides, 2,232 city-category sub-pages, 18,413 SSR route URLs,
+  sitemap/robots OK, targeted rendered blog/glossary residue scan clean, local
+  static route checks all HTTP 200, and production spot checks all HTTP 200.
+- Batch 137 preserved the two unrelated unstaged files:
+  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
+- Previous cleanup batch:
   `78ffaec0c5 fix: soften residual comparison and card claims`.
   Batch 136 cleaned rendered provider-card and comparison-page residue including
   lingering no-credit-check wording, eligibility/timing phrasing, `starts at
@@ -45,8 +57,6 @@ Sitewide upgrade program restarted:
   guides, 2,232 city-category sub-pages, 18,413 SSR route URLs,
   sitemap/robots OK, targeted rendered residue scan clean, local static route
   checks all HTTP 200, and production spot checks all HTTP 200.
-- Batch 136 preserved the two unrelated unstaged files:
-  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
 - Previous cleanup batch:
   `3d53c7b4d0 fix: soften provider and comparison claim residue`.
   Batch 135 cleaned provider-card and comparison-page residue including

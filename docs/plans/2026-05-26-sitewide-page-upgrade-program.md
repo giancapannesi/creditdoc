@@ -669,6 +669,52 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 137: Blog and Glossary Outcome Copy Softening
+
+Date: 2026-05-27
+Implementation commit: `cda882eca5` (`fix: soften blog and glossary outcome copy`)
+
+Scope:
+
+- `src/pages/blog/index.astro`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added a blog-index display softener so teaser titles and descriptions avoid
+  hard approval, scam, and outcome phrasing while preserving the underlying
+  article records and slugs.
+- Softened glossary display copy for deterministic credit-score, approval, and
+  rate examples.
+- Replaced point-change and exact mortgage-score outcome examples with
+  context-based wording.
+- Cleaned second-order glossary grammar artifacts from earlier safe-copy passes,
+  including lowercase sentence starts and phrases such as `Every lender are
+  required`, `they is generally required`, and `we'll promise removal`.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/blog` and `dist/glossary` scans returned no matches for the
+  targeted residual phrases, including hard approval phrases, `red flags`,
+  deterministic score-change claims, `100-point difference`, `Every lender are
+  required`, `they is generally required`, and `claimed certain`.
+- Local static route checks returned HTTP 200 for `/blog/`, `/glossary/`,
+  `/city/amarillo-tx/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/blog/`, `/glossary/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-time copy cleanup only; no source blog, glossary, lender, comparison,
+  city, or category records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 136: Residual Comparison and Provider-Card Claim Cleanup
 
 Date: 2026-05-27
