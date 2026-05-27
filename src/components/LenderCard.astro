@@ -26,7 +26,12 @@ function softenProviderCardCopy(text: string): string {
     .replace(/\bpredatory lending practices\b/gi, 'high-cost lending practices')
     .replace(/\bpredatory lending\b/gi, 'high-cost lending')
     .replace(/\bpredatory practices\b/gi, 'high-cost practices')
-    .replace(/\bpredatory\b/gi, 'high-cost');
+    .replace(/\bpredatory\b/gi, 'high-cost')
+    .replace(/\bmore listed Pawn\b/g, 'Superior Pawn')
+    .replace(/\bmore listed Loan\b/g, 'Superior Loan')
+    .replace(/\bmore listed Credit Repair\b/g, 'Superior Credit Repair')
+    .replace(/\bmore listed Ave\b/g, 'Superior Ave')
+    .replace(/\bmore listed rating\b/g, 'Superior rating');
 }
 ---
 
