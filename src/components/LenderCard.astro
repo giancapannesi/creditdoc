@@ -69,6 +69,8 @@ function softenProviderCardCopy(text: string): string {
     .replace(/\bexpedited dispute resolution\b/gi, 'dispute-timing claims to verify')
     .replace(/\brepresentatives at each credit bureau\b/gi, 'credit-bureau contact claims to verify')
     .replace(/\bclaiming full results in 90-120 days\b/gi, 'listing provider-stated 90-120 day timing claims to verify')
+    .replace(/\bno credit checks required\b/gi, 'eligibility claims to verify')
+    .replace(/\bno credit checks\b/gi, 'eligibility claims to verify')
     .replace(/\bno-credit-check claim to verify Loans\b/gi, 'No Credit Check Loans profile')
     .replace(/\bwith no-credit-check claim to verify\b/gi, 'with no-credit-check claims to verify')
     .replace(/\bflexible approval for borrowers with no credit history\b/gi, 'eligibility claims to verify for borrowers with limited credit history')
@@ -90,8 +92,19 @@ function softenProviderCardCopy(text: string): string {
     .replace(/\bsame-day to next-day funding-timing claims to verify\b/gi, 'provider-stated same-day to next-day funding timing')
     .replace(/\bnext-day funding-timing claims to verify(?:-timing claims to verify)?\b/gi, 'provider-stated next-day funding timing')
     .replace(/\bfunding-timing claims to verify\b/gi, 'provider-stated funding timing')
+    .replace(/\bsame-day approvals\b/gi, 'provider-stated same-day approval timing')
     .replace(/\bsame-day approval claim to verify(?: claim to verify)?\b/gi, 'provider-stated same-day approval timing')
-    .replace(/\binstant approval decisions\b/gi, 'instant decision claims to verify');
+    .replace(/\binstant approval decisions\b/gi, 'instant decision claims to verify')
+    .replace(/\bwith no-credit-check and application-process claims to verify\b/gi, 'with eligibility and application-process claims to verify')
+    .replace(/\bwith no-credit-check and income-verification claims to verify\b/gi, 'with eligibility and income-verification claims to verify')
+    .replace(/\bwith no-credit-check and bank-account claims to verify\b/gi, 'with eligibility and bank-account claims to verify')
+    .replace(/\bwith no-credit-check claims to verify\b/gi, 'with eligibility claims to verify')
+    .replace(/\bno-credit-check lending options\b/gi, 'eligibility-based lending options to verify')
+    .replace(/\bno-credit-check lending option\b/gi, 'eligibility-based lending option to verify')
+    .replace(/\bno-credit-check options\b/gi, 'eligibility options to verify')
+    .replace(/\bno-credit-check option\b/gi, 'eligibility option to verify')
+    .replace(/\bno-credit-check claims to verify\b/gi, 'eligibility claims to verify')
+    .replace(/\bno-credit-check claim to verify\b/gi, 'eligibility claim to verify');
 }
 ---
 
