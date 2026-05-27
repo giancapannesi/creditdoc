@@ -21,6 +21,11 @@ function softenBlogTeaserCopy(text: string): string {
     .replace(/\bred flags to avoid\b/gi, 'warning signs to review')
     .replace(/\bred flags\b/gi, 'warning signs')
     .replace(/\bavoid scams\b/gi, 'identify scam warning signs')
+    .replace(/\bCredit Repair Scams: How to Spot Warning Signs\b/gi, 'Credit Repair Warning Signs: How to Review Them')
+    .replace(/\bcredit repair scams\b/gi, 'credit repair warning signs')
+    .replace(/\blegitimate ways to repair your credit\b/gi, 'consumer-protection-aware ways to review credit repair')
+    .replace(/\bThese 7 options can get you \$100-\$50,000 within 24 hours — without high-cost payday-loan risks\./gi, 'Review seven common options, timing claims, costs, and payday-loan risks before applying.')
+    .replace(/\bare researching emergency-cash options with bad credit\?/gi, 'Researching emergency-cash options with bad credit?')
     .replace(/\bSpot & Avoid Them\b/gi, 'Spot Warning Signs')
     .replace(/\bHow to Spot & Avoid Them\b/gi, 'How to Spot Warning Signs')
     .replace(/\bMaster personal loan tips\b/gi, 'Review personal loan tips')
@@ -43,7 +48,7 @@ const categories = [
   { slug: 'mortgage-traps', label: 'Mortgages' },
   { slug: 'debt-settlement-traps', label: 'Debt Settlement' },
   { slug: 'bnpl-traps', label: 'Buy Now Pay Later' },
-  { slug: 'predatory-lending', label: 'Predatory Lending' },
+  { slug: 'predatory-lending', label: 'High-Cost Lending' },
   { slug: 'credit-repair-traps', label: 'Credit Repair' },
   { slug: 'financial-literacy', label: 'Financial Literacy' },
 ];
