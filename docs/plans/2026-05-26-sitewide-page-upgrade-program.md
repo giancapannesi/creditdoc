@@ -3093,6 +3093,37 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Monitoring Checkpoint: 2026-05-27 Quality and Uptime Pass
+
+Date: 2026-05-27
+
+Scope:
+
+- Site build health.
+- Sitemap/robots generation.
+- Production availability spot checks.
+- Documentation and git hygiene check.
+
+Verification:
+
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`,
+  `/compare/cambridge-credit-counseling-vs-incharge-debt-solutions/`,
+  `/compare/brigit-vs-ace-cash-express/`, `/sitemap-index.xml`, and
+  `/robots.txt`.
+- Repo documentation and memory documentation were current through Batch 116
+  before this monitoring checkpoint.
+
+Notes:
+
+- No source implementation files were changed during this checkpoint.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 110: Best Listicle Safe-Copy Softening
 
 Date: 2026-05-27
