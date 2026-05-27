@@ -35,17 +35,18 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
-  `5874a3aa45 fix: soften comparison overclaim residue`.
-  Batch 132 softened remaining loaded comparison wording such as `devastating
-  payday loan APRs`, `traps borrowers in high-cost repeat-borrowing cycles`,
-  `saving borrowers hundreds of dollars`, `signaling serious customer
-  dissatisfaction`, `affordable short-term funds`, and `higher high-cost
-  lending risk context`.
-- Batch 132 verification passed: `npm run build`, 124 city guides, 2,232
+  `f490bff142 fix: soften comparison approval and outcome claims`.
+  Batch 133 softened comparison wording that could read as recommendation,
+  approval-rate, price-superiority, or credit-score outcome claims, including
+  `choose {provider} if you need`, `directly builds credit scores`,
+  `essential for actual credit score building`, `87% approval rate`,
+  `significantly cheaper`, `genuinely free comprehensive tier`, and
+  `makes it accessible to users`.
+- Batch 133 verification passed: `npm run build`, 124 city guides, 2,232
   city-category sub-pages, 18,413 SSR route URLs, sitemap/robots OK, targeted
   rendered residue scan clean, local static route checks all HTTP 200, and
   production spot checks all HTTP 200.
-- Batch 132 preserved the two unrelated unstaged files:
+- Batch 133 preserved the two unrelated unstaged files:
   `src/content/comparisons.json` and `src/content/wellness-guides.json`.
 - Batch 001 completed and committed:
   `bba672df72 feat: add cfpb report profile links`.

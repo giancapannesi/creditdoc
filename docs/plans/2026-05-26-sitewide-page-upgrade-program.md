@@ -862,6 +862,56 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 133: Comparison Approval and Outcome Claim Softening
+
+Date: 2026-05-27
+Implementation commit: `f490bff142` (`fix: soften comparison approval and outcome claims`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added display-time softening for comparison wording that could read as a
+  CreditDoc recommendation, approval claim, price superiority claim, or
+  credit-score outcome claim.
+- Reframed `choose {provider} if you need`, `directly builds credit scores`,
+  `essential for actual credit score building`, `direct credit history
+  establishment`, `87% approval rate`, `significantly cheaper`,
+  `genuinely free comprehensive tier`, `no paywall required`, `meaningful
+  features`, and `makes it accessible to users`.
+- Kept comparison output focused on stored profile fields, listed-cost context,
+  provider-stated claims to verify, and credit-profile context to review.
+- No raw lender, city, category, comparison, or education records changed.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered residue scan across `dist/compare` returned zero matches
+  for the Batch 133 raw phrases.
+- Positive rendered checks confirmed replacement language on representative
+  comparison pages, including Greenlight vs OpenSky and Dovly vs WalletHub.
+- Local static checks returned HTTP 200 for `/`,
+  `/compare/greenlight-financial-vs-opensky-secured-credit-card/`,
+  `/compare/dovly-vs-wallethub/`,
+  `/compare/dovly-vs-credit-karma-credit-repair/`,
+  `/compare/brigit-vs-ace-cash-express/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`,
+  `/compare/greenlight-financial-vs-opensky-secured-credit-card/`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-template cleanup; no source data files were changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 132: Comparison Overclaim Residue Cleanup
 
 Date: 2026-05-27
