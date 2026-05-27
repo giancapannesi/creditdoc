@@ -3076,3 +3076,34 @@ Verification:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_129_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 146
+
+Batch 146 implementation committed as `81b668307c` for index, local, state,
+blog, and card hard-claim copy softening.
+
+Changes:
+
+- Applied shared YMYL copy softening to state consumer-rights summaries rendered
+  on city, browse, and state lending-law pages.
+- Softened visible provider-card refund, total-cost, and regulatory-compliance
+  wording.
+- Cleaned education/blog teaser wording around advertised approval, score
+  improvement, `Perfect for`, and `dramatically` phrasing.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed with 18,413 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Rendered HTML scan, excluding bundled sanitizer source chunks, returned zero
+  matches for the Batch 146 hard-claim phrase set.
+- Local and production spot checks returned HTTP 200 for `/`, `/learn/`,
+  `/blog/`, `/city/omaha-ne/`, `/browse/credit-unions/omaha-ne/`,
+  `/state/nebraska/lending-laws/`, `/city/denver-co/`, and
+  `/sitemap-index.xml`.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_146_notes_2026-05-27.md`

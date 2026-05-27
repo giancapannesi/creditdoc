@@ -565,6 +565,57 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 146: Index and Local Hard-Claim Copy Softening
+
+Date: 2026-05-27
+Implementation commit: `81b668307c` (`fix: soften index and local hard-claim copy`)
+
+Scope:
+
+- `src/components/LenderCard.astro`
+- `src/pages/blog/index.astro`
+- `src/pages/browse/[catSlug]/[citySlug].astro`
+- `src/pages/city/[slug].astro`
+- `src/pages/state/[slug]/lending-laws.astro`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Applied shared YMYL copy softening to city, browse, and state lending-law
+  consumer-rights summaries.
+- Softened visible provider-card refund, total-cost, and regulatory-compliance
+  claims into provider-stated or listed context.
+- Cleaned education/blog index teaser residue around advertised approval
+  wording, score-improvement phrasing, `Perfect for`, and `dramatically`
+  wording.
+- Preserved source comparison, lender, city, category, blog, glossary, course,
+  and generated inventory records.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered HTML scan, excluding bundled sanitizer source chunks, returned zero
+  matches for `Bad Credit Personal Loans advertised approval claims`,
+  `dramatically`, `raise your score`, `Perfect for`, `100% refund policy`,
+  `lower total costs`, and `regulatory compliance documentation`.
+- Local static route checks returned HTTP 200 for `/`, `/learn/`, `/blog/`,
+  `/city/omaha-ne/`, `/browse/credit-unions/omaha-ne/`,
+  `/state/nebraska/lending-laws/`, `/city/denver-co/`, and
+  `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for the same routes.
+
+Notes:
+
+- Render-time cleanup only.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+- Workpack notes:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_146_notes_2026-05-27.md`.
+
 ### Batch 120: Cross-Page Educational Residue Normalization
 
 Date: 2026-05-27
