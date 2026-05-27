@@ -3140,6 +3140,51 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 111: Deals Page Warning-Copy Softening
+
+Date: 2026-05-27
+Implementation commit: `03890d4f8b` (`fix: soften deals page warning copy`)
+
+Scope:
+
+- `src/pages/deals.astro`
+
+What changed:
+
+- Updated founder-protected `/deals/` copy under the active cleanup permission
+  for this project.
+- Replaced hard-edged consumer-facing phrasing around `"guaranteed" score
+  jumps`, `legitimate company`, `Most legitimate disputes`, `results in days`,
+  `selling you something`, `guarantee a score increase`, `walk away`, and
+  `done legitimately`.
+- Reframed the same compliance points as warning signs, verification context,
+  bureau investigation windows, and consumer-protection-rule context.
+- Preserved the protected page structure, deal cards, provider data, promo-code
+  behavior, CTA links, education links, FAQ structure, and redirect from
+  `/specials/`.
+
+Verification:
+
+- `git diff --check` passed.
+- Targeted source scan returned no matches in `src/pages/deals.astro` for:
+  `guaranteed`, `legitimate`, `walk away`, `results in days`,
+  `selling you something`, or `guarantee a score increase`.
+- Valid `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan returned no matches in `dist/deals/index.html` for
+  the same old phrases.
+- Production spot checks returned HTTP 200 for `/`, `/deals/`, `/specials/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Copy-only cleanup on a founder-protected page; no source deal or lender data
+  was edited.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 109: Comparison Overclaim Copy Softening
 
 Date: 2026-05-27
