@@ -3185,6 +3185,62 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 112: Education and Resource Safe-Copy Softening
+
+Date: 2026-05-27
+Implementation commit: `c9e9dc292e` (`fix: soften education resource copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+- `src/pages/courses/credit-fundamentals/[slug].astro`
+- `src/pages/courses/credit-fundamentals/index.astro`
+- `src/components/LetterTemplatePage.astro`
+
+What changed:
+
+- Broadened the shared educational teaser safe-copy helper for education,
+  course, and resource surfaces.
+- Applied the helper to course module markdown, lesson titles, quiz questions,
+  quiz answers, module titles/descriptions, visible breadcrumbs, H1 copy,
+  Course JSON-LD, and CTA labels.
+- Applied the helper to debt/credit letter template JSON-LD, usage guidance,
+  template body lines, and checklist items.
+- Replaced course overview heading `What You'll Walk Away With` with
+  `What This Course Covers`.
+- Covered targeted education/resource phrases found in rendered pages:
+  `walk away`, `guaranteed outcome`, `guaranteed removal`,
+  `guaranteed score jumps`, `guaranteed results`, `guarantees approval`,
+  `legitimate company`, `legitimate services`, `legitimate disputes`,
+  `best rates`, `lowest APR`, and `cheapest` variants.
+- Added a cleanup for `not guaranteed` so checklist copy renders as
+  `not certain` instead of the mechanical fallback.
+- Preserved source course JSON, source markdown, source template data,
+  resource routes, enrollment behavior, Sendy form behavior, quiz behavior,
+  related-guide links, and page layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- Valid `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan returned no matches across `/learn/`, course overview,
+  five course module pages, and debt/credit letter template pages for the old
+  risky phrase set or `not claimed certain`.
+- Production spot checks returned HTTP 200 for `/`, `/learn/`,
+  `/courses/credit-fundamentals/`,
+  `/resources/debt-credit-letter-templates/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-layer cleanup only; no source course, markdown, template, comparison,
+  wellness, lender, or city data was edited.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 109: Comparison Overclaim Copy Softening
 
 Date: 2026-05-27
