@@ -862,6 +862,56 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 131: Second-Order Render Residue Cleanup
+
+Date: 2026-05-27
+Implementation commit: `e46834e3d3` (`fix: clean second-order render residue`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+- `src/components/LenderCard.astro`
+
+What changed:
+
+- Cleaned second-order comparison and provider-card grammar created by prior
+  display-time safety rewrites.
+- Normalized comparison residue including `more profile context and
+  competitive`, `a more profile context and accessible service`, `more profile
+  context-cost`, `more package context context`, and `more listed-cost`.
+- Normalized provider-card residue including `more listed-cost`, `no fee unless
+  you have more listed context`, and `with with published refund terms
+  consultations`.
+- No raw lender, city, category, comparison, or education records changed.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered residue scan across `dist/compare`, `dist/browse`,
+  `dist/city`, and `dist/review` returned zero matches for the Batch 131
+  residue phrases.
+- Positive rendered checks confirmed the replacement language appears on the
+  affected comparison and browse pages.
+- Local static checks returned HTTP 200 for `/`,
+  `/compare/greenlight-financial-vs-capital-one-platinum-secured/`,
+  `/compare/credit-saint-vs-the-credit-pros/`,
+  `/compare/ace-cash-express-miami-fl-vs-advance-america-missouri-city/`,
+  `/compare/self-credit-builder-vs-chime/`,
+  `/browse/bankruptcy/denver-co/`, `/browse/bankruptcy/indianapolis-in/`,
+  `/browse/bankruptcy/san-diego-ca/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-template/component cleanup; no source data files were changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 130: Comparison Listed-Residue Cleanup
 
 Date: 2026-05-27

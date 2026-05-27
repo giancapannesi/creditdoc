@@ -35,14 +35,16 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
-  `f5078c230c fix: normalize comparison listed residue`.
-  Batch 130 cleaned residual comparison-page grammar such as `more listed ...`,
-  `with more listed`, `has more listed`, and `all more listed to` at render
-  time in `src/pages/compare/[slug].astro`.
-- Batch 130 verification passed: `npm run build`, 124 city guides, 2,232
+  `e46834e3d3 fix: clean second-order render residue`.
+  Batch 131 cleaned second-order comparison and provider-card grammar such as
+  `more profile context and competitive`, `more profile context-cost`, `more
+  package context context`, `more listed-cost`, `no fee unless you have more
+  listed context`, and `with with published refund terms consultations`.
+- Batch 131 verification passed: `npm run build`, 124 city guides, 2,232
   city-category sub-pages, 18,413 SSR route URLs, sitemap/robots OK, rendered
-  residue scans clean, and production spot checks all returned HTTP 200.
-- Batch 130 preserved the two unrelated unstaged files:
+  residue scan clean, local static route checks all HTTP 200, and production
+  spot checks all HTTP 200.
+- Batch 131 preserved the two unrelated unstaged files:
   `src/content/comparisons.json` and `src/content/wellness-guides.json`.
 - Batch 001 completed and committed:
   `bba672df72 feat: add cfpb report profile links`.
