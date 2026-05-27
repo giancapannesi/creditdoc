@@ -57,7 +57,7 @@ const totalRated = googleRated.length;
 const avgRating = totalRated > 0 ? (googleRated.reduce((s, l) => s + (l.google_rating || 0), 0) / totalRated).toFixed(1) : null;
 
 const title = `${category.name} Provider Profiles in ${cityInfo.city}, ${cityInfo.stateAbbr} (2026) | CreditDoc`;
-const description = `Compare ${displayLenders.length} ${category.name.toLowerCase()} company profiles in ${cityInfo.city}, ${cityInfo.state}. ${avgRating ? `Average stored Google rating where available: ${avgRating}/5.` : ''} Review pricing fields, public ratings, and local provider context.`;
+const description = `Review ${displayLenders.length} listed ${category.name.toLowerCase()} profiles associated with ${cityInfo.city}, ${cityInfo.state}. ${avgRating ? `Average stored Google rating where available: ${avgRating}/5.` : ''} Check pricing fields, public ratings, and local provider context.`;
 
 const jsonLd = [
   {
@@ -122,11 +122,11 @@ const jsonLd = [
             {category.name} Provider Profiles in {cityInfo.city}, {cityInfo.stateAbbr}
           </h1>
           <p class="text-muted max-w-2xl">
-            Compare {displayLenders.length} {category.name.toLowerCase()} company profiles serving {cityInfo.city}, {cityInfo.state}.
+            Review {displayLenders.length} listed {category.name.toLowerCase()} profiles associated with {cityInfo.city}, {cityInfo.state}.
             {avgRating && <> Average stored Google rating where available: <span class="text-primary font-semibold">{avgRating}/5</span>.</>}
           </p>
           <div class="flex items-center gap-4 mt-3">
-            <span class="text-xs bg-primary-light text-primary font-medium px-2 py-1 rounded">{displayLenders.length} Companies</span>
+            <span class="text-xs bg-primary-light text-primary font-medium px-2 py-1 rounded">{displayLenders.length} Listed Profiles</span>
             {totalRated > 0 && <span class="text-xs bg-bg-alt text-muted font-medium px-2 py-1 rounded">{totalRated} Google-rated</span>}
             {sd?.payday_loan_status && (
               <span class:list={["text-xs font-medium px-2 py-1 rounded",
@@ -171,7 +171,7 @@ const jsonLd = [
 
         {/* All lenders */}
         <div>
-          <h2 class="text-lg font-bold text-text mb-4">All {category.name} in {cityInfo.city} ({sorted.length})</h2>
+          <h2 class="text-lg font-bold text-text mb-4">Listed {category.name} Profiles in {cityInfo.city} ({sorted.length})</h2>
           {sorted.length > 0 ? (
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {sorted.map(lender => <LenderCard lender={lender} />)}
@@ -193,7 +193,7 @@ const jsonLd = [
           <h3 class="text-sm font-bold text-text mb-3">Other Services in {cityInfo.city}</h3>
           <div class="space-y-1">
             <a href={`/city/${cityInfo.slug}/`} class="block text-sm text-primary hover:underline">
-              All {cityInfo.count} companies
+              {cityInfo.city} city guide
             </a>
           </div>
         </div>

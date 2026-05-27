@@ -45,26 +45,26 @@ const categoryIntros: Record<string, (city: string, state: string, data: any) =>
   },
   'personal-loans': (c, s, d) => {
     const usury = d?.usury_cap ? `${s} caps interest rates at ${d.usury_cap}.` : '';
-    return `Need a personal loan in ${c}, ${s}? ${usury} Whether you're consolidating debt, covering an emergency expense, or funding a major purchase, compare lenders below based on APR, loan amounts, and eligibility requirements. ${s} residents should check lender licensing or registration with the state Department of Banking before borrowing.`;
+    return `Need a personal loan in ${c}, ${s}? ${usury} Whether you're consolidating debt, covering an emergency expense, or funding a major purchase, review the listed lender profiles below for APR fields, loan amounts, and eligibility context. ${s} residents should verify lender licensing or registration with the state Department of Banking before borrowing.`;
   },
   'emergency-cash': (c, s, d) => {
-    const payday = d?.payday_loan_status === 'Banned' ? `${s} has banned payday lending, protecting consumers from predatory rates.` : d?.payday_loan_status === 'Restricted' ? `${s} restricts payday lending with rate caps and loan limits.` : `Payday loans are available in ${s} but often carry extremely high APRs.`;
-    return `Need emergency cash in ${c}, ${s}? ${payday} The providers below offer alternatives for ${c} residents facing urgent financial needs — including title loans, pawn services, and emergency personal loans. Compare options carefully and understand all fees before borrowing.`;
+    const payday = d?.payday_loan_status === 'Banned' ? `${s} has banned payday lending, limiting payday-loan availability in the state.` : d?.payday_loan_status === 'Restricted' ? `${s} restricts payday lending with rate caps and loan limits.` : `Payday lending may be available in ${s}, and listed APRs can be very high.`;
+    return `Need emergency cash in ${c}, ${s}? ${payday} The profiles below include short-term cash, title-loan, pawn-service, and emergency personal-loan contexts associated with ${c}. Compare terms carefully and verify fees before borrowing.`;
   },
   'debt-relief': (c, s, d) => {
-    return `Struggling with debt in ${c}, ${s}? Debt relief companies can negotiate with creditors to reduce what you owe, consolidate payments, or create a structured repayment plan. ${s} has specific statutes of limitation on debt collection that affect your rights. Review the debt relief providers below serving ${c} residents, and consider consulting a HUD-approved credit counselor before committing to any program.`;
+    return `Struggling with debt in ${c}, ${s}? Debt relief companies may advertise creditor negotiation, consolidated payments, or structured repayment programs. ${s} has specific statutes of limitation on debt collection that affect your rights. Review the listed debt relief profiles associated with ${c}, and consider consulting a HUD-approved credit counselor before committing to any program.`;
   },
   'build-credit': (c, s, _d) => {
-    return `Building credit in ${c}, ${s}? Whether you're starting from scratch or rebuilding after financial hardship, the programs below help ${c} residents establish and strengthen their credit profiles. Look for secured credit cards, credit-builder loans, and reporting services that help demonstrate responsible credit behavior to the bureaus.`;
+    return `Building credit in ${c}, ${s}? Whether you're starting from scratch or rebuilding after financial hardship, the profiles below may be relevant to secured cards, credit-builder loans, and reporting services. Verify terms, fees, and bureau-reporting details before applying.`;
   },
   'free-help': (c, s, _d) => {
-    return `Looking for free financial help in ${c}, ${s}? Non-profit credit counseling agencies, legal aid organizations, and government-funded programs offer no-cost assistance to ${c} residents dealing with debt, foreclosure, or credit issues. HUD-approved counselors are required to provide free initial consultations. Below are free resources available in your area.`;
+    return `Looking for free financial help in ${c}, ${s}? Nonprofit credit counseling agencies, legal aid organizations, and government-funded programs may offer no-cost assistance for debt, foreclosure, or credit issues. HUD-approved counselors are required to provide free initial consultations. Below are free-help resources listed for this area.`;
   },
   'business-loans': (c, s, _d) => {
-    return `Need business financing in ${c}, ${s}? From SBA-backed loans to microloans and lines of credit, ${c} entrepreneurs have multiple options. The SBA ${s} District Office can connect you with approved lenders and free business mentoring through SCORE. Compare business lenders below based on loan size, rates, and eligibility for ${s}-based businesses.`;
+    return `Need business financing in ${c}, ${s}? From SBA-backed loans to microloans and lines of credit, ${c} entrepreneurs can compare several research paths. The SBA ${s} District Office can point business owners toward participating lender programs and free mentoring through SCORE. Review the listed business-lender profiles below for loan size, rate, and eligibility context.`;
   },
   'pawn-shops': (c, s, _d) => {
-    return `Looking for pawn shops in ${c}, ${s}? Pawn loans are collateral-based products tied to personal property, with fees, redemption periods, and item-recovery rules to verify before signing. ${s} regulates pawn transactions including maximum interest rates and minimum redemption periods. Compare licensed pawn shops serving ${c} below.`;
+    return `Looking for pawn shops in ${c}, ${s}? Pawn loans are collateral-based products tied to personal property, with fees, redemption periods, and item-recovery rules to verify before signing. ${s} regulates pawn transactions including maximum interest rates and minimum redemption periods. Review the pawn-shop profiles associated with ${c} below.`;
   },
   'payday-alternatives': (c, s, d) => {
     const payday = d?.payday_loan_status === 'Banned' ? `Since ${s} bans payday lending, these alternatives may be relevant for ${c} residents researching short-term cash options.` : `Compare listed costs, eligibility rules, and repayment terms against any payday loan option available in ${s}.`;
@@ -87,7 +87,7 @@ const localIntro = isAtmCategory
   ? `Use this page to browse selected ATM and cash access profiles associated with ${stateName}. CreditDoc does not maintain a complete, real-time inventory of every ATM in ${city}; for the nearest machine, verify availability directly with your bank, credit union, or ATM network before you go.`
   : introFn
     ? introFn(city, stateName, stateData)
-    : `Find ${catName.toLowerCase()} providers serving ${city}, ${stateName}. Compare local and statewide options available to ${city} residents, and check stored Google ratings where available.`;
+    : `Review ${catName.toLowerCase()} provider profiles associated with ${city}, ${stateName}. Compare local and statewide profile context, and check stored Google ratings where available.`;
 
 // Fetch lenders in this state + category from Supabase
 let lenders: Lender[] = [];
@@ -155,7 +155,7 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
 const title = `${catName} in ${city}, ${stateAbbr} — Local Directory | CreditDoc`;
 const description = isAtmCategory
   ? `Browse selected ATM and cash access profiles for ${city}, ${stateName}. Verify current ATM availability directly with your bank, credit union, or ATM network.`
-  : `Find ${catName.toLowerCase()} serving ${city}, ${stateName}. Compare ${sortedLenders.length}+ local and statewide provider profiles with ratings where available, reviews, and contact information.`;
+  : `Review ${sortedLenders.length} listed ${catName.toLowerCase()} profiles associated with ${city}, ${stateName}. Compare local and statewide profile context, stored ratings where available, reviews, and contact information.`;
 
 const listName = isAtmCategory && cityLenders.length === 0
   ? `Selected ${stateName} ${catName} Profiles`
@@ -241,8 +241,8 @@ const jsonLd = [
         {isAtmCategory
           ? `Browse selected ATM and cash access profiles for ${city}, ${stateName}. This is not a complete count of every ATM in the city; confirm current locations and availability with your bank, credit union, or ATM network.`
           : sortedLenders.length > 0
-          ? `Compare ${sortedLenders.length} ${catName.toLowerCase()} providers serving ${city}, ${stateName}. Find local offices, read reviews, and get the help you need.`
-          : `Find ${catName.toLowerCase()} providers serving ${city}, ${stateName}. Browse statewide options available to ${city} residents.`
+          ? `Review ${sortedLenders.length} listed ${catName.toLowerCase()} profiles associated with ${city}, ${stateName}. Check local offices, stored review context, and state-level rules before contacting a provider.`
+          : `Review ${catName.toLowerCase()} provider profiles associated with ${city}, ${stateName}. Use statewide and category-level context while this local inventory is reviewed.`
         }
       </p>
     </div>
@@ -252,7 +252,7 @@ const jsonLd = [
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
         <div class="glass-card p-4 text-center" style="pointer-events: none;">
           <p class="text-2xl font-bold text-primary">{sortedLenders.length}</p>
-          <p class="text-xs text-muted mt-1">{catName} Providers</p>
+          <p class="text-xs text-muted mt-1">{catName} Listed Profiles</p>
         </div>
         {cityLenders.length > 0 && (
           <div class="glass-card p-4 text-center" style="pointer-events: none;">
@@ -262,7 +262,7 @@ const jsonLd = [
         )}
         <div class="glass-card p-4 text-center" style="pointer-events: none;">
           <p class="text-2xl font-bold text-text">{stateLenders.length}</p>
-          <p class="text-xs text-muted mt-1">Serving {stateAbbr} Statewide</p>
+          <p class="text-xs text-muted mt-1">Statewide Profiles</p>
         </div>
       </div>
     )}
@@ -343,7 +343,7 @@ const jsonLd = [
               <p class="text-sm text-muted mb-4">
                 {isAtmCategory
                   ? `These are selected ${stateName} cash-access profiles in CreditDoc's directory, not a complete inventory of ${city} ATMs.`
-                  : `Statewide providers available to ${city} residents.`}
+                  : `Statewide profiles that may be relevant for ${city} residents researching this category.`}
               </p>
               <div class="grid grid-cols-1 gap-3">
                 {stateLenders.slice(0, 12).map(lender => (
@@ -375,7 +375,7 @@ const jsonLd = [
         ) : (
           <div class="glass-card p-8 text-center">
             <p class="text-lg text-muted mb-4">No {catName.toLowerCase()} providers found specifically in {city}, {stateAbbr} yet.</p>
-            <p class="text-sm text-muted mb-6">We're continuously adding providers. In the meantime, check the statewide directory.</p>
+            <p class="text-sm text-muted mb-6">CreditDoc is continuing to review profiles. In the meantime, use the broader category directory and state rules.</p>
             <a href={`/categories/${category}/`} class="inline-block px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors">
               Browse All {catName} &rarr;
             </a>
