@@ -862,6 +862,53 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 130: Comparison Listed-Residue Cleanup
+
+Date: 2026-05-27
+Implementation commit: `f5078c230c` (`fix: normalize comparison listed residue`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added comparison-page display-time cleanup for residual `more listed ...`,
+  `with more listed`, `has more listed`, and `all more listed to` grammar.
+- Normalized affected comparison summaries, meta descriptions, JSON-LD FAQ
+  answers, and visible research notes without rewriting raw comparison data.
+- Preserved advisory-neutral comparison framing: profile context, stored
+  fields, public data, and verifiable signals rather than recommendations.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan across `dist/compare` returned zero matches for
+  generic `more listed ...`, `has more listed`, `with more listed`, and `all
+  more listed to` residue.
+- Regression scan across `dist/city`, `dist/browse`, `dist/compare`, and
+  `dist/review` returned zero matches for the previously fixed hard-claim and
+  duplicated-grammar artifacts in scope.
+- Local static checks returned HTTP 200 for `/`, representative comparison
+  pages, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/creditassociates-vs-new-era-debt-solutions/`,
+  `/compare/accredited-debt-relief-vs-lakeview-law-group/`,
+  `/compare/the-credit-pros-vs-the-credit-people/`,
+  `/compare/dovly-vs-cbc-companies/`, `/credit-guide/amarillo-tx/`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-template cleanup; no source lender, city, category, comparison, or
+  education records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 129: Lender Card Residual Grammar Cleanup
 
 Date: 2026-05-27
