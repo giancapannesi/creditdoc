@@ -3295,6 +3295,53 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 114: State and Blog Residual Safe-Copy Softening
+
+Date: 2026-05-27
+Implementation commit: `73614cf347` (`fix: soften state blog residual copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+- `src/pages/state/[slug]/lending-laws.astro`
+
+What changed:
+
+- Added educational teaser safe-copy coverage for singular `legitimate lender`
+  language and the specific blog teaser phrase `No legitimate lender advertises
+  certain approval`.
+- Applied the existing YMYL safe-copy helper to state credit-repair key
+  provisions so legal/regulatory source text such as `guaranteed results`
+  renders as neutral result-claim language.
+- Preserved source state data, blog post source metadata, state page routing,
+  state legal page layout, blog index layout, city guides, category pages, and
+  sitemap generation.
+
+Verification:
+
+- `git diff --check` passed.
+- Valid `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan returned no matches on
+  `/state/west-virginia/lending-laws/`, `/state/alaska/lending-laws/`, and
+  `/blog/` for `guaranteed results`, `legitimate lender`, or
+  `No legitimate lender`.
+- Broader rendered scan over `dist/state`, `dist/financial-wellness`,
+  `dist/blog`, `dist/tools`, `dist/city`, `dist/browse`, `dist/review`, and
+  `dist/trends` returned zero matches for the current residual YMYL phrase set.
+- Production spot checks returned HTTP 200 for `/`,
+  `/state/west-virginia/lending-laws/`, `/state/alaska/lending-laws/`,
+  `/blog/`, `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-layer cleanup only; no source state, blog, comparison, wellness,
+  lender, city, or generated provider data was edited.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 109: Comparison Overclaim Copy Softening
 
 Date: 2026-05-27
