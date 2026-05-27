@@ -31,7 +31,13 @@ function softenProviderCardCopy(text: string): string {
     .replace(/\bmore listed Loan\b/g, 'Superior Loan')
     .replace(/\bmore listed Credit Repair\b/g, 'Superior Credit Repair')
     .replace(/\bmore listed Ave\b/g, 'Superior Ave')
-    .replace(/\bmore listed rating\b/g, 'Superior rating');
+    .replace(/\bmore listed rating\b/g, 'Superior rating')
+    .replace(/\bmore listed Business\b/g, 'Superior Business')
+    .replace(/\bmore listed Mercado\b/g, 'Superior Mercado')
+    .replace(/\bshort-term short-term funds\b/gi, 'short-term funds')
+    .replace(/\bshort-term cash access shortfalls\b/gi, 'short-term cash shortfalls')
+    .replace(/\bwith high-cost lending risk context lending\b/gi, 'with high-cost lending risk context')
+    .replace(/\brisk context lending\b/gi, 'risk context');
 }
 ---
 
