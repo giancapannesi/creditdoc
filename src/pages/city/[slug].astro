@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
 import { getCitiesWithLenders, getLendersByCityState, getCategories, getStateData } from '../../utils/data-build';
 import type { CityInfo, Lender } from '../../utils/data';
+import { softenYmylCopy } from '../../utils/safe-copy';
 
 export function getStaticPaths() {
   const cities = getCitiesWithLenders(5);
@@ -237,7 +238,7 @@ const jsonLd = [
       <h2 class="text-xl font-bold text-text mb-4">Your Rights in {cityInfo.state}</h2>
       <div class="glass-card p-6 space-y-4 text-sm text-muted leading-relaxed">
         {sd?.consumer_rights_summary && (
-          <p><strong class="text-text">{cityInfo.state} Consumer Protections:</strong> {sd.consumer_rights_summary}</p>
+          <p><strong class="text-text">{cityInfo.state} Consumer Protections:</strong> {softenYmylCopy(sd.consumer_rights_summary)}</p>
         )}
         {sd?.usury_cap && (
           <p><strong class="text-text">Interest Rate Cap:</strong> {cityInfo.state} usury cap: {sd.usury_cap}.

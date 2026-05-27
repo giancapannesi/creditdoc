@@ -26,6 +26,10 @@ function softenProviderCardCopy(text: string): string {
   }
 
   return softenYmylCopy(text)
+    .replace(/\b100% refund policy\b/gi, 'provider-stated refund policy to verify')
+    .replace(/\blower total costs\b/gi, 'lower listed-cost context')
+    .replace(/\bregulatory compliance documentation\b/gi, 'regulatory documentation to verify')
+    .replace(/\bregulatory compliance support\b/gi, 'regulatory support context to verify')
     .replace(/\bguaranteed returns\b/gi, 'stated return terms to verify')
     .replace(/\bguaranteed return\b/gi, 'stated return term to verify')
     .replace(/\bguaranteed\b/gi, 'provider-stated')

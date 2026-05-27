@@ -360,7 +360,7 @@ const psc = paydayStatusColor(data.payday_loan_status || '');
 
             {data.consumer_rights_summary && (
               <div class="mb-4 p-4 rounded-xl bg-primary-light/30 border border-primary/10">
-                <p class="text-sm text-text leading-relaxed">{data.consumer_rights_summary}</p>
+                <p class="text-sm text-text leading-relaxed">{softenYmylCopy(data.consumer_rights_summary)}</p>
               </div>
             )}
 
