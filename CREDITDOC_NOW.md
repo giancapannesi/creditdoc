@@ -250,6 +250,51 @@ Verification:
   city-category template is covered by source scan plus successful worker
   build, not by local HTTP.
 
+## 2026-05-27 — CFPB Trends Response Context Batch 154
+
+**Status: built, locally smoke-tested, documented, pending deploy.**
+
+Batch 154 implementation:
+
+- Commit: `144c5aa12e` (`fix: clarify CFPB trend response context`).
+- Scope:
+  `src/pages/trends/[slug].astro` and `src/pages/trends/index.astro`.
+- Replaced `resolution rate` presentation with `recorded response-outcome`
+  wording so CFPB complaint data is not implied to prove consumer satisfaction
+  or actual dispute resolution.
+- Reframed trend index counts from generic consumer interactions to public CFPB
+  complaint records.
+- Removed `complete profile`, `user reviews`, and `handles consumer inquiries`
+  overstatements from trend detail metadata and CTAs.
+- Added stronger trend-page disclaimers that CFPB response data is
+  transparency context, not proof of wrongdoing, endorsement, safety rating,
+  customer-satisfaction evidence, or suitability determination.
+- Preserved trend routes, CFPB source records, response metrics, index
+  grouping, provider-profile links, research links, city/state/context links,
+  and JSON-LD structure.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,435 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/trends` scan returned zero matches for:
+  `Resolution Rate`, `resolution rate`, `complete profile`, `user reviews`,
+  `consumer interactions`, `handles consumer inquiries`, `Total
+  Interactions`, `Services Used by Consumers`, `Consumer Feedback Categories`,
+  and `Response rates are transparency`.
+- Rendered sample files exist for `/trends/`, `/trends/lexington-law/`,
+  `/trends/american-consumer-credit-counseling/`, and
+  `/trends/advance-america/`.
+- Local Wrangler smoke checks returned HTTP 200 for `/trends/`,
+  `/trends/lexington-law/`, `/trends/american-consumer-credit-counseling/`,
+  `/trends/advance-america/`, and `/sitemap-index.xml`.
+- Local rendered copy check for `/trends/lexington-law/` found none of the old
+  phrases and confirmed the new `Recorded Response Outcome` and `not proof of
+  wrongdoing` markers.
+
 Created the operating plan for the bottom-up local authority strategy:
 
 - `docs/plans/2026-05-26-creditdoc-local-authority-graph.md`
