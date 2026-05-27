@@ -891,6 +891,11 @@ export function softenYmylCopy(text: string): string {
     .replace(/\bmore ([a-z-]+) context proposition\b/gi, 'more $1 context')
     .replace(/\bsignificantly lower total cost\b/gi, 'lower listed total-cost context')
     .replace(/\bverified experience\b/gi, 'stored experience context')
+    .replace(/\bsame-day to next-day funding-timing claims to verify\b/gi, 'provider-stated same-day to next-day funding timing')
+    .replace(/\bnext-day funding-timing claims to verify(?:-timing claims to verify)?\b/gi, 'provider-stated next-day funding timing')
+    .replace(/\bfunding-timing claims to verify\b/gi, 'provider-stated funding timing')
+    .replace(/\bsame-day approval claim to verify(?: claim to verify)?\b/gi, 'provider-stated same-day approval timing')
+    .replace(/\binstant approval decisions\b/gi, 'instant decision claims to verify')
     .replace(/\bexpertise\b/gi, 'experience context');
 }
 

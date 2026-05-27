@@ -86,7 +86,12 @@ function softenProviderCardCopy(text: string): string {
     .replace(/\bestablished ([0-9]+)-year track record\b/gi, 'provider-stated $1-year operating-history context')
     .replace(/\bestablished track record\b/gi, 'provider-stated operating-history context')
     .replace(/\bseeking credit improvement\b/gi, 'reviewing credit-improvement claims')
-    .replace(/\bcredit score improvement\b/gi, 'credit-score context to review');
+    .replace(/\bcredit score improvement\b/gi, 'credit-score context to review')
+    .replace(/\bsame-day to next-day funding-timing claims to verify\b/gi, 'provider-stated same-day to next-day funding timing')
+    .replace(/\bnext-day funding-timing claims to verify(?:-timing claims to verify)?\b/gi, 'provider-stated next-day funding timing')
+    .replace(/\bfunding-timing claims to verify\b/gi, 'provider-stated funding timing')
+    .replace(/\bsame-day approval claim to verify(?: claim to verify)?\b/gi, 'provider-stated same-day approval timing')
+    .replace(/\binstant approval decisions\b/gi, 'instant decision claims to verify');
 }
 ---
 
