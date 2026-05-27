@@ -616,6 +616,53 @@ Notes:
 - Workpack notes:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_146_notes_2026-05-27.md`.
 
+### Batch 147: Provider Card Assurance Copy Softening
+
+Date: 2026-05-27
+Implementation commit: `ff8683d253` (`fix: soften provider card assurance copy`)
+
+Scope:
+
+- `src/components/LenderCard.astro`
+- `src/pages/blog/index.astro`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Softened visible city and browse lender-card wording around expert appraisals,
+  expert guidance, expert authentication, quality grading, verified lenders,
+  verified ATF credentials, and verified luxury items.
+- Cleaned remaining quoted advertised-approval wording on the blog index and
+  learn search payload.
+- Preserved source lender, blog, city, category, comparison, and generated
+  inventory records.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered HTML scan, excluding bundled source chunks and sitemap XML, returned
+  zero matches for `expert appraisals`, `expert appraisal`, `expert guidance`,
+  `expert authentication`, `expert quality grading`, `verified lenders`,
+  `network of verified lenders`, `verified ATF credentials`, `verified luxury
+  items`, and `"advertised approval claims" Credit Cards & Loans`.
+- Local static route checks returned HTTP 200 for `/`, `/blog/`, `/learn/`,
+  `/city/houston-tx/`, `/city/mesa-az/`,
+  `/browse/pawn-shops/las-vegas-nv/`, `/browse/pawn-shops/houston-tx/`,
+  `/browse/business-loans/nashville-tn/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for the same routes.
+
+Notes:
+
+- Render-time cleanup only.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+- Workpack notes:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_147_notes_2026-05-27.md`.
+
 ### Batch 120: Cross-Page Educational Residue Normalization
 
 Date: 2026-05-27

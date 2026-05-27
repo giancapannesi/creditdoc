@@ -3107,3 +3107,35 @@ Verification:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_146_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 147
+
+Batch 147 implementation committed as `ff8683d253` for provider-card
+assurance wording and blog/learn teaser residue.
+
+Changes:
+
+- Softened visible city and browse lender-card wording around expert appraisals,
+  expert guidance, expert authentication, quality grading, verified lenders,
+  verified ATF credentials, and verified luxury items.
+- Cleaned the remaining quoted advertised-approval artifact on blog and learn
+  teaser/search data.
+- Preserved source lender, blog, city, category, comparison, and generated
+  inventory records.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed with 18,413 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Rendered HTML scan, excluding bundled source chunks and sitemap XML, returned
+  zero matches for the Batch 147 raw phrase set.
+- Local and production spot checks returned HTTP 200 for `/`, `/blog/`,
+  `/learn/`, `/city/houston-tx/`, `/city/mesa-az/`,
+  `/browse/pawn-shops/las-vegas-nv/`, `/browse/pawn-shops/houston-tx/`,
+  `/browse/business-loans/nashville-tn/`, and `/sitemap-index.xml`.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_147_notes_2026-05-27.md`
