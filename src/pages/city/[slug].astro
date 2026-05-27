@@ -250,7 +250,7 @@ const jsonLd = [
           <div>
             <strong class="text-text">Key Regulations:</strong>
             <ul class="mt-1 ml-4 list-disc space-y-0.5">
-              {sd.key_regulations.map((reg: string) => <li>{reg}</li>)}
+              {sd.key_regulations.map((reg: string) => <li>{softenYmylCopy(reg)}</li>)}
             </ul>
           </div>
         )}
