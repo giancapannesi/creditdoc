@@ -3308,3 +3308,47 @@ Notes:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_149_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 150
+
+Batch 150 implementation committed as `0da6966ded` for no-credit-check and
+approval-timing residue cleanup across city, browse, and comparison pages.
+
+Changes:
+
+- Added plural no-credit-check cleanup in shared YMYL safe-copy output.
+- Mirrored the cleanup in provider cards and comparison-page text sanitizers.
+- Normalized `no credit checks required`, `no credit checks`,
+  `with no-credit-check...`, and hyphenated `no-credit-check option(s)` profile
+  signals into eligibility-context wording.
+- Normalized plural `same-day approvals` into provider-stated same-day approval
+  timing language.
+- Preserved source lender records, comparison records, city/category routes,
+  generated inventory, and profile slugs.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed with 18,415 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Rendered scan across `dist/city`, `dist/browse`, and `dist/compare` returned
+  zero matches for `no credit checks required`, `no credit checks`,
+  `with no-credit-check`, `no-credit-check options`, `no-credit-check option`,
+  `no-credit-check claims to verify`, `no-credit-check claim to verify`,
+  `same-day approvals`, and `funding-timing claims to verify`.
+- Local static route checks returned HTTP 200 for `/`,
+  `/city/virginia-beach-va/`, `/browse/pawn-shops/virginia-beach-va/`,
+  `/browse/credit-unions/memphis-tn/`,
+  `/compare/kikoff-vs-the-credit-gal/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for the same routes.
+
+Notes:
+
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged content changes and were not staged or committed in this
+  batch.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_150_notes_2026-05-27.md`

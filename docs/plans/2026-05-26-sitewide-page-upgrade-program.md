@@ -767,6 +767,55 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 150: No-Credit-Check and Approval Timing Residue Cleanup
+
+Date: 2026-05-27
+Implementation commit: `0da6966ded` (`fix: soften no-credit-check residue`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+- `src/components/LenderCard.astro`
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added shared safe-copy replacements for plural no-credit-check language that
+  survived prior singular-only cleanup.
+- Mirrored the cleanup in provider cards and comparison-page text so city,
+  browse, and comparison output use eligibility-context wording.
+- Replaced `no credit checks required`, `no credit checks`,
+  `with no-credit-check...`, `no-credit-check options`, and
+  `no-credit-check option` with eligibility-context wording.
+- Replaced plural `same-day approvals` with provider-stated same-day approval
+  timing language.
+- Preserved source lender records, source comparison records, city/category
+  routes, generated inventory, and profile slugs.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,415 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered scan across `dist/city`, `dist/browse`, and `dist/compare` returned
+  no matches for: `no credit checks required`, `no credit checks`,
+  `with no-credit-check`, `no-credit-check options`, `no-credit-check option`,
+  `no-credit-check claims to verify`, `no-credit-check claim to verify`,
+  `same-day approvals`, and `funding-timing claims to verify`.
+- Local static route checks returned HTTP 200 for `/`,
+  `/city/virginia-beach-va/`, `/browse/pawn-shops/virginia-beach-va/`,
+  `/browse/credit-unions/memphis-tn/`,
+  `/compare/kikoff-vs-the-credit-gal/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for the same routes.
+
+Notes:
+
+- Render-time cleanup only; no source comparison or lender records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 148: Education Teaser Residue Cleanup
 
 Date: 2026-05-27
