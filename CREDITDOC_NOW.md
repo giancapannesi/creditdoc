@@ -2844,3 +2844,42 @@ Verification:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_127_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 128
+
+Batch 128 implementation committed as `60061f54f0` for lender-card proper-name
+restoration:
+
+- `src/components/LenderCard.astro`
+
+Changes:
+
+- Added a provider-card restoration pass for proper-name contexts damaged by a
+  previous broad `superior` safe-copy replacement.
+- Restored visible lender-card copy such as `Superior Pawn`, `Superior Loan`,
+  `Superior Credit Repair`, `Superior Ave`, and `Superior rating`.
+- Preserved the Batch 127 claim-softening behavior for card descriptions and
+  profile signals.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed with 18,413 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan across `dist/city` and `dist/browse` returned zero
+  matches for damaged `more listed Pawn`, `more listed Loan`, `more listed
+  Credit Repair`, `more listed Ave`, and `more listed rating` artifacts.
+- Positive rendered checks confirmed restored copy on Virginia Beach pawn,
+  Oklahoma City personal-loan, Chicago credit-repair, Cleveland emergency-cash,
+  and Las Vegas banking browse pages.
+- Live spot checks returned HTTP 200 for `/`,
+  `/browse/pawn-shops/virginia-beach-va/`,
+  `/browse/personal-loans/oklahoma-city-ok/`,
+  `/browse/credit-repair/chicago-il/`,
+  `/browse/emergency-cash/cleveland-oh/`,
+  `/browse/banking/las-vegas-nv/`, and `/sitemap-index.xml`.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_128_notes_2026-05-27.md`

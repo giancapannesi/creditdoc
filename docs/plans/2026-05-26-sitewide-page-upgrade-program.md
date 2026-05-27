@@ -862,6 +862,54 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 128: Lender Card Proper-Name Restoration
+
+Date: 2026-05-27
+Implementation commit: `60061f54f0` (`fix: restore superior proper names in lender cards`)
+
+Scope:
+
+- `src/components/LenderCard.astro`
+
+What changed:
+
+- Added a provider-card restoration pass for proper-name contexts damaged by a
+  previous broad `superior` safe-copy replacement.
+- Restored visible lender-card copy such as `Superior Pawn`, `Superior Loan`,
+  `Superior Credit Repair`, `Superior Ave`, and `Superior rating`.
+- Preserved the Batch 127 claim-softening behavior for card descriptions and
+  profile signals.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan across `dist/city` and `dist/browse` returned zero
+  matches for damaged artifacts: `more listed Pawn`, `more listed Loan`, `more
+  listed Credit Repair`, `more listed Ave`, and `more listed rating`.
+- Positive rendered checks confirmed restored copy on
+  `/browse/pawn-shops/virginia-beach-va/`,
+  `/browse/personal-loans/oklahoma-city-ok/`,
+  `/browse/credit-repair/chicago-il/`,
+  `/browse/emergency-cash/cleveland-oh/`, and
+  `/browse/banking/las-vegas-nv/`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/browse/pawn-shops/virginia-beach-va/`,
+  `/browse/personal-loans/oklahoma-city-ok/`,
+  `/browse/credit-repair/chicago-il/`,
+  `/browse/emergency-cash/cleveland-oh/`,
+  `/browse/banking/las-vegas-nv/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-component cleanup; no source lender, city, category, comparison, or
+  education records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 126: Emergency-Cash Comparison Claim Softening
 
 Date: 2026-05-27
