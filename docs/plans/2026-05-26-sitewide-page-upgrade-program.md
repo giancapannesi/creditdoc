@@ -565,6 +565,53 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 118: Comparison Risk-Copy Grammar Normalization
+
+Date: 2026-05-27
+Implementation commit: `f1ee357215` (`fix: normalize comparison risk copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added render-time cleanup for residual comparison grammar and risk-language
+  artifacts created by earlier safe-copy passes.
+- Normalized phrases including `more listed choice`, duplicated published
+  refund-term wording, `stronger listed`, `protects borrowers`, `actual profile
+  context`, `predatory lending risks`, `predatory loan terms`, `predatory debt
+  cycles`, `hidden fees`, `troubling history`, `devastating APRs`, `extreme
+  APRs`, and `sustainable financial health`.
+- Reframed the affected copy into listed-context, refund-term,
+  borrower-protection-context, high-cost-risk-context, repeat-borrowing-cycle,
+  fee-verification, regulatory-history, high-APR, and long-term financial-health
+  context language.
+
+Verification:
+
+- `git diff --check` passed.
+- Valid `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Focused rendered `dist/compare` scan returned zero matches for the targeted
+  Batch 118 grammar and risk-language phrase set.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/brigit-vs-ace-cash-express/`,
+  `/compare/brigit-vs-advance-america-missouri-city/`,
+  `/compare/kikoff-vs-gocreditme-lake-western/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-layer cleanup only; no source comparison, lender, city, category,
+  wellness, or generated provider data was edited.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+- Workpack notes:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_118_notes_2026-05-27.md`.
+
 ### Batch 094: Category Metadata and Comparison Label Claim Softening
 
 Date: 2026-05-26
