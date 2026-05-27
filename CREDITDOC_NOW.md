@@ -35,18 +35,18 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
-  `f490bff142 fix: soften comparison approval and outcome claims`.
-  Batch 133 softened comparison wording that could read as recommendation,
-  approval-rate, price-superiority, or credit-score outcome claims, including
-  `choose {provider} if you need`, `directly builds credit scores`,
-  `essential for actual credit score building`, `87% approval rate`,
-  `significantly cheaper`, `genuinely free comprehensive tier`, and
-  `makes it accessible to users`.
-- Batch 133 verification passed: `npm run build`, 124 city guides, 2,232
+  `382300397d fix: clean comparison residual grammar claims`.
+  Batch 134 cleaned remaining comparison grammar and outcome residue including
+  `more consumer comparison context profile details`, `is more listed`,
+  `are more listed`, `profile details seeking`, `average {n}-point increase`,
+  `average {n}-point score lift`, `undercuts`, `significantly higher APRs`,
+  `raises concerns`, `no-interest or fees`, `genuinely free`, and `lower
+  higher listed pricing`.
+- Batch 134 verification passed: `npm run build`, 124 city guides, 2,232
   city-category sub-pages, 18,413 SSR route URLs, sitemap/robots OK, targeted
-  rendered residue scan clean, local static route checks all HTTP 200, and
-  production spot checks all HTTP 200.
-- Batch 133 preserved the two unrelated unstaged files:
+  rendered comparison residue scan clean, local static route checks all HTTP
+  200, and production spot checks all HTTP 200.
+- Batch 134 preserved the two unrelated unstaged files:
   `src/content/comparisons.json` and `src/content/wellness-guides.json`.
 - Batch 001 completed and committed:
   `bba672df72 feat: add cfpb report profile links`.

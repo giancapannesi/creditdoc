@@ -862,6 +862,53 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 134: Comparison Residual Grammar and Outcome Cleanup
+
+Date: 2026-05-27
+Implementation commit: `382300397d` (`fix: clean comparison residual grammar claims`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added display-time cleanup for remaining comparison grammar and outcome
+  residue in summaries, meta descriptions, JSON-LD, FAQ answers, and visible
+  research notes.
+- Cleaned phrases including `more consumer comparison context profile details`,
+  `is more listed`, `are more listed`, `profile details seeking`,
+  `average {n}-point increase`, `average {n}-point score lift`,
+  `reporting average {n}-point score improvements for engaged users`,
+  `undercuts`, `delivering substantially more cost context`, `significantly
+  higher APRs`, `loyal customers`, `raises concerns`, `no-interest or fees`,
+  `genuinely free`, and `lower higher listed pricing`.
+- Kept output focused on stored profile fields, listed-cost context,
+  provider-stated claims to verify, and review/risk context.
+- No raw lender, city, category, comparison, or education records changed.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered comparison residue scan across `dist/compare` returned
+  zero matches for the Batch 134 raw phrases.
+- Local static route checks returned HTTP 200 for `/`, selected comparison
+  pages, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`,
+  `/compare/dovly-vs-credit-karma-credit-repair/`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-template cleanup; no source data records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 133: Comparison Approval and Outcome Claim Softening
 
 Date: 2026-05-27
