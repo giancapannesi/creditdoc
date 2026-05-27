@@ -767,6 +767,55 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 152: Comparison Proven-Claim Softening and Recovery Deploy
+
+Date: 2026-05-27
+Implementation commit: `970331423c` (`fix: soften comparison proven claims`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added render-only comparison-page replacements for recurring `proven ...`
+  claims that appeared in comparison summaries, research notes, FAQs, and
+  JSON-LD.
+- Normalized examples such as `proven 27-year nonprofit track record`,
+  `proven settlement track record`, `proven institutional backing`,
+  `proven debt elimination in 42 months`, and `proven 4.8/5 rating` into
+  listed/stored/provider-stated evidence-context wording.
+- Preserved source comparison records, lender records, route slugs, pricing
+  fields, ratings, comparison tables, FAQs, and page layout.
+
+Verification:
+
+- `git diff --check` passed.
+- Clean `npm run build` passed with 18,435 SSR route URLs, 124 city guides, and
+  2,232 city-category sub-pages; postbuild sitemap/robots check passed.
+- Rendered scan across `dist/compare` returned zero matches for the Batch 152
+  proven-claim phrase set.
+- Production recovery deploy completed via `./deploy.sh` after a concurrent
+  session caused static routes to return 404.
+- Worker version: `c166a2b3-11a8-420a-9e7d-554e259fd083`.
+- Deploy-script smoke checks returned HTTP 200 for `/`,
+  `/credit-guide/austin-tx/`, `/review/lexington-law/`,
+  `/answers/best-debt-consolidation-loans-bad-credit/`, and
+  `/best/best-credit-repair-companies/`.
+- Additional production recovery checks returned HTTP 200 for `/`, `/city/`,
+  `/sitemap-index.xml`, `/robots.txt`,
+  `/compare/ecreditadvisor-vs-credit-saint/`, and
+  `/compare/incharge-debt-solutions-vs-covenant-community-capital/`.
+
+Notes:
+
+- Operating rule added: do not run concurrent CreditDoc agents against the same
+  repository/deploy target; if parallel work is unavoidable, split by
+  branch/worktree and assign one owner for build, deploy, stash, and restore
+  operations.
+- Workpack notes:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_152_notes_2026-05-27.md`.
+
 ### Batch 150: No-Credit-Check and Approval Timing Residue Cleanup
 
 Date: 2026-05-27

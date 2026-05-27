@@ -153,6 +153,59 @@ Reinstated 20 real-provider noindex rows:
 - `git diff --check` passed.
 - Rebuilt sitemap includes all 20 reinstated `/review/<slug>/` routes.
 
+## 2026-05-27 — Production Static Route Recovery + Comparison Batch 152
+
+**Status: deployed, cache-purged, live-verified, and implementation committed.**
+
+Recovered production after overlapping agent sessions caused a bad deploy where
+static routes returned 404 while SSR routes still worked:
+
+- Confirmed the clash source: one session was stashing unrelated files and
+  running noindex deploys while this session was editing the comparison
+  renderer.
+- Rebuilt from a coordinated state after the other session paused.
+- `npm run build` passed with 18,435 SSR route URLs, 124 city guides, and
+  2,232 city-category sub-pages; postbuild sitemap/robots check passed.
+- Deployed via `./deploy.sh`.
+- Worker version:
+  `c166a2b3-11a8-420a-9e7d-554e259fd083`.
+- Cache purge passed.
+- Deploy-script smoke checks returned 200 for `/`,
+  `/credit-guide/austin-tx/`, `/review/lexington-law/`,
+  `/answers/best-debt-consolidation-loans-bad-credit/`, and
+  `/best/best-credit-repair-companies/`.
+- Explicit production recovery checks returned 200 for `/`, `/city/`,
+  `/sitemap-index.xml`, `/robots.txt`,
+  `/compare/ecreditadvisor-vs-credit-saint/`, and
+  `/compare/incharge-debt-solutions-vs-covenant-community-capital/`.
+
+Batch 152 implementation:
+
+- Commit: `970331423c` (`fix: soften comparison proven claims`).
+- Scope: `src/pages/compare/[slug].astro`.
+- Added comparison-page render-only softening for recurring `proven ...`
+  claims in summaries, research notes, FAQs, and JSON-LD.
+- Preserved source comparison records, lender records, route slugs, pricing
+  fields, ratings, tables, and layout.
+- Rendered `dist/compare` scan returned zero matches for:
+  `proven 30-year track record`, `proven settlement track record`,
+  `proven 36% successful DMP completion rate`,
+  `proven 27-year nonprofit track record`, `proven institutional backing`,
+  `proven reliability`, `proven market credibility`, `proven enforcement`,
+  `proven success-based fee model`, `proven features`,
+  `proven client satisfaction`, `proven customer base`,
+  `proven debt elimination`, `proven stored public-review context`, and
+  `proven 4.8/5 rating`.
+
+Operating rule going forward:
+
+- Do not run two concurrent CreditDoc agents against the same repository and
+  deploy target.
+- If parallel work is unavoidable, split by branch/worktree and assign exactly
+  one owner for `npm run build`, `./deploy.sh`, Cloudflare deploy, and any
+  stash/restore operation.
+- Do not stash or restore files another active agent may be editing.
+
 Created the operating plan for the bottom-up local authority strategy:
 
 - `docs/plans/2026-05-26-creditdoc-local-authority-graph.md`
