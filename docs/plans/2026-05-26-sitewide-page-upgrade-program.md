@@ -820,6 +820,56 @@ Notes:
 - Additional unrelated content JSON edits were present in the working tree and
   were not staged or committed.
 
+### Batch 149: Provider Card Timing Residue Cleanup
+
+Date: 2026-05-27
+Implementation commit: `a28fb2e726` (`fix: clean provider card timing residue`)
+
+Scope:
+
+- `src/components/LenderCard.astro`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added final shared safe-copy cleanup for city and browse provider-card timing
+  residue after broader YMYL transformations.
+- Normalized `funding-timing claims to verify`,
+  `next-day funding-timing claims to verify`, `same-day approval claim to
+  verify`, and `instant approval decisions` into clearer provider-stated
+  timing/context wording.
+- Mirrored cleanup in the card-specific sanitizer so city and browse cards use
+  the same final copy pass.
+- Preserved source lender records, city/category routes, generated inventory,
+  and profile slugs.
+
+Verification:
+
+- `git diff --check` passed.
+- Clean `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,415 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered scan across `dist/city` and `dist/browse` returned zero matches for
+  `same-day to next-day funding-timing claims to verify`,
+  `next-day funding-timing claims to verify`, `funding-timing claims to
+  verify`, `same-day approval claim to verify`, and `instant approval
+  decisions`.
+- Positive rendered checks confirmed replacement wording such as
+  `provider-stated funding timing` and `provider-stated same-day approval
+  timing`.
+- Local static route checks returned HTTP 200 for `/`,
+  `/city/colorado-springs-co/`, `/city/norfolk-va/`,
+  `/browse/business-loans/new-york-ny/`,
+  `/browse/emergency-cash/miami-fl/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for the same routes.
+
+Notes:
+
+- A concurrently started `deploy.sh` was stopped before deployment because it
+  was building from a working tree that contained uncommitted Batch 149 edits.
+  No files were modified by stopping that process.
+
 ### Batch 145: Failed Extraction Artifact Cleanup
 
 Date: 2026-05-27

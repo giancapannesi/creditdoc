@@ -3223,3 +3223,50 @@ Notes:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_148_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 149
+
+Batch 149 implementation committed as `a28fb2e726` for provider-card
+funding and approval timing residue cleanup.
+
+Changes:
+
+- Added final shared safe-copy cleanup for city and browse provider-card
+  wording that previously rendered as `funding-timing claims to verify`.
+- Normalized `next-day funding-timing claims to verify`,
+  `same-day approval claim to verify`, and `instant approval decisions` into
+  clearer provider-stated timing/context wording.
+- Mirrored the cleanup in `LenderCard.astro` so card-specific output catches
+  final residue after broader YMYL transformations.
+- Preserved source lender records, city/category routes, generated inventory,
+  and profile slugs.
+
+Verification:
+
+- `git diff --check` passed.
+- Clean `npm run build` passed with 18,415 SSR route URLs, 124 city guides, and
+  2,232 city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Rendered scan across `dist/city` and `dist/browse` returned zero matches for
+  `same-day to next-day funding-timing claims to verify`,
+  `next-day funding-timing claims to verify`, `funding-timing claims to
+  verify`, `same-day approval claim to verify`, and `instant approval
+  decisions`.
+- Positive rendered checks confirmed replacement wording such as
+  `provider-stated funding timing` and `provider-stated same-day approval
+  timing`.
+- Local static route checks returned HTTP 200 for `/`,
+  `/city/colorado-springs-co/`, `/city/norfolk-va/`,
+  `/browse/business-loans/new-york-ny/`,
+  `/browse/emergency-cash/miami-fl/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for the same routes.
+
+Notes:
+
+- A concurrently started `deploy.sh` was stopped before deployment because it
+  was building from a working tree that contained uncommitted Batch 149 edits.
+  No files were modified by stopping that process.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_149_notes_2026-05-27.md`
