@@ -3093,6 +3093,62 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 105: No-Subscription Safe-Copy Cleanup
+
+Date: 2026-05-27
+Implementation commit: `3472247df4` (`fix: clean no-subscription safe copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared safe-copy replacements for rendered comparison sentences that
+  used awkward no-subscription wording such as `listed with no monthly
+  subscription credit building`, `listed with no monthly subscription banking`,
+  `listed with no monthly subscription counseling`, `listed with no monthly
+  subscription financial coaching`, and `listed with no monthly subscription
+  service`.
+- Normalized duplicate connector phrases including `with no listed monthly
+  subscription with no monthly fees`, `service with no listed monthly
+  subscription with`, `counseling with no listed monthly subscription with`,
+  `monitoring with no listed monthly subscription with`, and `credit monitoring
+  with no listed monthly subscription with`.
+- Cleaned remaining comparison output for `listed refund term terms`,
+  `more listed-cost and reputable option`, and credit-building no-subscription
+  variants.
+- Preserved source comparison records, lender records, route slugs, pricing
+  fields, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for targeted raw phrases:
+  `listed with no monthly subscription`, `listed refund term terms`,
+  `more listed-cost and reputable option`, `with listed with no monthly
+  subscription credit building`, `offers listed with no monthly subscription
+  credit building`, or `with no listed monthly subscription with`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/self-credit-builder-vs-chime/`,
+  `/compare/credit-saint-vs-credit-blueprint/`,
+  `/compare/kikoff-vs-chime/`,
+  `/compare/smartcredit-vs-credit-karma-credit-repair/`,
+  `/compare/greenlight-financial-vs-chime/`,
+  `/compare/transunion-vs-credit-karma-credit-repair/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 104: Refund-Term Safe-Copy Normalization
 
 Date: 2026-05-26
