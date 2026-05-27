@@ -3093,6 +3093,61 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 108: Residual YMYL Claim Softening
+
+Date: 2026-05-27
+Implementation commit: `22af51757b` (`fix: soften residual YMYL claims`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added safe-copy coverage for residual rendered claims around `legitimate`,
+  `legally questionable`, tradelines, credit-score improvement, score-change
+  claims, valuation/expert language, and market-pricing language.
+- Added comparison-page final cleanup for compound phrases produced after shared
+  safe-copy rewrites.
+- Reframed affected language as provider claims to verify, compliance context,
+  credit-score context to review, stored outcome context, or listed profile
+  fields.
+- Preserved source comparison records, source lender records, provider names,
+  category assignments, route slugs, cards, maps, tables, city pages, browse
+  pages, comparison pages, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- Valid `npm run build` passed after rejecting one known incomplete sitemap
+  timeout build.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/city`, `dist/browse`, and `dist/compare` scan returned no
+  matches for targeted residual phrases including `legitimate`, `sustainable
+  credit building`, `average 49-point score increases`, `averaging 49-point
+  score increases`, `help improve credit scores`, `improve credit scores`,
+  `legally gray`, `legally questionable`, `controversial tradeline`, `fair
+  market pricing`, `expert valuation`, `expert evaluation`, `hometown experts`,
+  `methodology context for credit-building context to review`, `valuation
+  contexts`, `evaluation contexts`, `genuine financial habits`, and `risky score
+  improvements`.
+- Production spot checks returned HTTP 200 for `/`, `/city/amarillo-tx/`,
+  `/credit-guide/amarillo-tx/`,
+  `/compare/self-credit-builder-vs-boost-credit-101/`,
+  `/compare/greenlight-financial-vs-boost-credit-101/`,
+  `/browse/credit-repair/brooklyn-ny/`,
+  `/browse/pawn-shops/los-angeles-ca/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only safe-copy cleanup; no source comparison or lender records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 107: City Credit-Score Claim Softening
 
 Date: 2026-05-27
