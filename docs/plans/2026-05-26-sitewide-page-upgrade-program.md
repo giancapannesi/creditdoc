@@ -816,6 +816,58 @@ Notes:
 - Workpack notes:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_152_notes_2026-05-27.md`.
 
+### Batch 153: City-Category Availability Copy Cleanup
+
+Date: 2026-05-27
+Implementation commit: `7c499ea0a2` (`fix: soften city-category availability copy`)
+
+Scope:
+
+- `src/pages/credit-guide/[slug]/[category].astro`
+- `src/pages/browse/[catSlug]/[citySlug].astro`
+
+What changed:
+
+- Softened city-category page language that implied broad availability,
+  complete inventory, or serving-area certainty.
+- Replaced `compare company profiles serving`, `get the help you need`,
+  `statewide providers available`, broad `companies` badges, and similar copy
+  with listed-profile, associated-with-city, and verify-before-contact wording.
+- Reframed personal-loan, emergency-cash, debt-relief, build-credit,
+  free-help, business-loan, and pawn-shop category intros to avoid implied
+  outcomes, complete availability, fee certainty, or licensing determinations.
+- Preserved provider cards, route structure, source lender records,
+  city/category counts, JSON-LD structure, graph links, and generated inventory.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,435 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Focused source and rendered `dist/browse` scans returned zero matches for
+  `company profiles serving`, `get the help you need`,
+  `statewide options available`, `Statewide providers available`,
+  `predatory rates`, `understand all fees`, `Compare licensed pawn shops`, and
+  `All {cityInfo.count} companies`.
+- Rendered sample files checked clean for
+  `/browse/personal-loans/new-york-ny/`,
+  `/browse/emergency-cash/houston-tx/`, and
+  `/browse/credit-unions/amarillo-tx/`.
+- Local Wrangler smoke checks returned HTTP 200 for
+  `/browse/personal-loans/new-york-ny/`,
+  `/browse/emergency-cash/houston-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- No production deploy was run for this batch.
+- Local Wrangler SSR checks for `/credit-guide/.../.../` returned 404 because
+  the local worker was not running with the runtime Supabase binding; the SSR
+  city-category template is covered by source scan and successful worker build.
+- Workpack notes:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_153_notes_2026-05-27.md`.
+
 ### Batch 150: No-Credit-Check and Approval Timing Residue Cleanup
 
 Date: 2026-05-27

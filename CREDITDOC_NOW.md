@@ -206,6 +206,50 @@ Operating rule going forward:
   stash/restore operation.
 - Do not stash or restore files another active agent may be editing.
 
+## 2026-05-27 — City-Category Availability Copy Batch 153
+
+**Status: built, locally smoke-tested for static routes, documented, pending
+deploy.**
+
+Batch 153 implementation:
+
+- Commit: `7c499ea0a2` (`fix: soften city-category availability copy`).
+- Scope:
+  `src/pages/credit-guide/[slug]/[category].astro` and
+  `src/pages/browse/[catSlug]/[citySlug].astro`.
+- Softened city-category availability and completeness language from broad
+  `compare companies serving` and `statewide providers available` wording into
+  listed-profile, associated-with-city, and verify-before-contact wording.
+- Reframed category intros for personal loans, emergency cash, debt relief,
+  build-credit, free-help, business-loans, and pawn-shops to avoid implied
+  outcomes, complete availability, fee certainty, or licensing determinations.
+- Preserved routes, provider cards, lender records, city/category counts,
+  JSON-LD structure, graph links, and source data.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,435 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Focused source and rendered `dist/browse` scans returned zero matches for:
+  `company profiles serving`, `get the help you need`,
+  `statewide options available`, `Statewide providers available`,
+  `predatory rates`, `understand all fees`, `Compare licensed pawn shops`, and
+  `All {cityInfo.count} companies`.
+- Rendered sample files checked clean:
+  `/browse/personal-loans/new-york-ny/`,
+  `/browse/emergency-cash/houston-tx/`, and
+  `/browse/credit-unions/amarillo-tx/`.
+- Local Wrangler smoke checks returned HTTP 200 for
+  `/browse/personal-loans/new-york-ny/`,
+  `/browse/emergency-cash/houston-tx/`, and `/sitemap-index.xml`.
+- Local Wrangler SSR checks for `/credit-guide/.../.../` returned 404 because
+  the local worker was not running with the runtime Supabase binding; the SSR
+  city-category template is covered by source scan plus successful worker
+  build, not by local HTTP.
+
 Created the operating plan for the bottom-up local authority strategy:
 
 - `docs/plans/2026-05-26-creditdoc-local-authority-graph.md`
