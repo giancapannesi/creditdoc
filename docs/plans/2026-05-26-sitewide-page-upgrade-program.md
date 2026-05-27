@@ -3093,6 +3093,66 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 117: Comparison Recommendation Residue Softening
+
+Date: 2026-05-27
+Implementation commit: `4164de7b33` (`fix: soften comparison recommendation residue`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared render-time safe-copy coverage for remaining comparison
+  recommendation residue including `clearer choice`, `clearer profile to
+  compare`, `more reliable option`, `most users`, `most clients`, `proven
+  experience`, `measurable results`, `delivers measurable results`,
+  `predatory lending terms`, `debt-trap`, and `riskier`.
+- Reframed direct recommendation wording into listed-context,
+  available-trust-signal, documented-experience, documented-outcome,
+  high-cost-term, repeat-borrowing-risk, or higher-risk comparison language.
+- Preserved source comparison records, lender records, route slugs, JSON-LD
+  routing, comparison tables, diagnosis cards, city pages, category pages, and
+  sitemap generation.
+
+Verification:
+
+- `git diff --check` passed.
+- Valid `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Focused rendered `dist/compare` scan returned zero matches for `clearer
+  choice`, `clearer profile to compare`, `more reliable choice`, `more
+  reliable option`, `most consumers`, `most clients`, `most users`, `proven
+  experience`, `measurable results`, `delivers measurable results`,
+  `predatory lending terms`, `debt-trap`, `debt trap`, or `riskier`.
+- Targeted rendered checks returned zero matches on representative affected
+  pages including `/compare/cambridge-credit-counseling-vs-incharge-debt-solutions/`,
+  `/compare/brigit-vs-ace-cash-express/`,
+  `/compare/greenlight-financial-vs-self-credit-builder/`,
+  `/compare/cambridge-credit-counseling-vs-premisien-credit-counseling/`,
+  `/compare/american-consumer-credit-counseling-vs-detroit-wealth-club/`, and
+  `/compare/brigit-vs-advance-america-missouri-city/`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/cambridge-credit-counseling-vs-incharge-debt-solutions/`,
+  `/compare/brigit-vs-ace-cash-express/`,
+  `/compare/greenlight-financial-vs-self-credit-builder/`,
+  `/compare/cambridge-credit-counseling-vs-premisien-credit-counseling/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-layer cleanup only; no source comparison, lender, city, category,
+  wellness, or generated provider data was edited.
+- Non-comparison educational/legal references such as state-law `actual
+  results` language remain intentionally out of scope for this batch.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+- Workpack notes:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_117_notes_2026-05-27.md`.
+
 ### Monitoring Checkpoint: 2026-05-27 Quality and Uptime Pass
 
 Date: 2026-05-27
