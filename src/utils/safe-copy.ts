@@ -777,6 +777,8 @@ export function softenEducationalTeaserCopy(text: string): string {
     .replace(/\blegitimate companies\b/gi, 'companies following consumer-protection rules')
     .replace(/\blegitimate services\b/gi, 'services following consumer-protection rules')
     .replace(/\blegitimate disputes\b/gi, 'documented disputes')
+    .replace(/\bNo legitimate lender advertises certain approval\b/gi, 'Responsible lenders generally do not advertise certain approval')
+    .replace(/\blegitimate lender\b/gi, 'lender following applicable rules')
     .replace(/\blegitimate lenders\b/gi, 'lenders following applicable rules')
     .replace(/\blegitimate high-yield savings accounts\b/gi, 'high-yield savings accounts following applicable rules')
     .replace(/\bwhen you need a direct explanation\b/gi, 'when a focused explanation is useful')

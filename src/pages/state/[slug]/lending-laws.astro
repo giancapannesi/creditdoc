@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../../components/GlossaryAppendix.astro';
 import { getAllStatesInfo, getStatesWithLenders, getStateData, getLendersInState, getGlossaryTermsForContext } from '../../../utils/data-build';
+import { softenYmylCopy } from '../../../utils/safe-copy';
 
 export function getStaticPaths() {
   const states = getAllStatesInfo();
@@ -287,7 +288,7 @@ const psc = paydayStatusColor(data.payday_loan_status || '');
                   {cr.key_provisions.map((p: string) => (
                     <li class="flex items-start gap-2 text-sm text-muted">
                       <svg class="w-4 h-4 mt-0.5 text-positive shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                      {p}
+                      {softenYmylCopy(p)}
                     </li>
                   ))}
                 </ul>
