@@ -40,7 +40,18 @@ function softenProviderCardCopy(text: string): string {
     .replace(/\brisk context lending\b/gi, 'risk context')
     .replace(/\bmore listed-cost\b/gi, 'more cost-relevant')
     .replace(/\bno fee unless you have more listed context\b/gi, 'no fee unless there is a recovery')
-    .replace(/\bwith with published refund terms consultations\b/gi, 'with published consultation terms');
+    .replace(/\bwith with published refund terms consultations\b/gi, 'with published consultation terms')
+    .replace(/\boption to compare Capital Inc provides\b/gi, 'Right Choice Capital Inc lists')
+    .replace(/\bwith funding in 1-3 business days and approval criteria beyond credit score\b/gi, 'with funding-timing and eligibility claims to verify')
+    .replace(/\baggressive credit repair services\b/gi, 'credit repair services')
+    .replace(/\bexpedited dispute resolution\b/gi, 'dispute-timing claims to verify')
+    .replace(/\brepresentatives at each credit bureau\b/gi, 'credit-bureau contact claims to verify')
+    .replace(/\bclaiming full results in 90-120 days\b/gi, 'listing provider-stated 90-120 day timing claims to verify')
+    .replace(/\bno-credit-check claim to verify Loans\b/gi, 'No Credit Check Loans profile')
+    .replace(/\bwith no-credit-check claim to verify\b/gi, 'with no-credit-check claims to verify')
+    .replace(/\bflexible approval for borrowers with no credit history\b/gi, 'eligibility claims to verify for borrowers with limited credit history')
+    .replace(/\bno-credit-check claim to verify loans\b/gi, 'no-credit-check loan claims to verify')
+    .replace(/\bcredit score improvement\b/gi, 'credit-score context to review');
 }
 ---
 
