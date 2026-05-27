@@ -82,7 +82,7 @@ const titleCompany = cfpb.company_name.length > 30
   ? cfpb.company_name.substring(0, 30).trim()
   : cfpb.company_name;
 const seoTitle = `${titleCompany} Consumer Response Profile | CreditDoc`;
-const seoDesc = `${cfpb.company_name} consumer response data: ${resolutionPct || '—'}% resolution rate, ${timelyPct || '—'}% timely responses. See how this company handles consumer inquiries.`;
+const seoDesc = `${cfpb.company_name} CFPB response data: ${resolutionPct || '-'}% recorded response-outcome rate, ${timelyPct || '-'}% timely responses. Use as transparency context, not a rating.`;
 
 // JSON-LD
 const jsonLd = [
@@ -144,7 +144,7 @@ const jsonLd = [
       {cfpb.company_name} — Consumer Response Profile
     </h1>
     <p class="text-sm text-muted">
-      How this company responds to consumer inquiries (CFPB data)
+      Public CFPB response-outcome context for this company
       {cfpb.data_period && <span> &bull; Period: {cfpb.data_period}</span>}
       {cfpb.checked_at && <span> &bull; Data checked: {cfpb.checked_at}</span>}
     </p>
@@ -153,13 +153,13 @@ const jsonLd = [
   <!-- Key Metrics -->
   <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <!-- Resolution Rate -->
+      <!-- Recorded Response Outcome Rate -->
       <div class="glass-card p-5 text-center">
-        <div class="text-xs font-semibold uppercase tracking-wider text-muted mb-2">Resolution Rate</div>
+        <div class="text-xs font-semibold uppercase tracking-wider text-muted mb-2">Recorded Response Outcome</div>
         <div class="text-3xl font-bold text-primary">
           {resolutionPct != null ? `${resolutionPct}%` : '—'}
         </div>
-        <p class="text-xs text-muted mt-1">Consumer inquiries with a recorded company response outcome</p>
+        <p class="text-xs text-muted mt-1">CFPB complaints with a recorded company response outcome</p>
       </div>
 
       <!-- Timely Response -->
@@ -168,16 +168,16 @@ const jsonLd = [
         <div class="text-3xl font-bold text-emerald-500">
           {timelyPct != null ? `${timelyPct}%` : '—'}
         </div>
-        <p class="text-xs text-muted mt-1">Responded within 15-day window</p>
+        <p class="text-xs text-muted mt-1">Company response recorded within the CFPB response window</p>
       </div>
 
       <!-- Total Responses -->
       <div class="glass-card p-5 text-center">
-        <div class="text-xs font-semibold uppercase tracking-wider text-muted mb-2">Total Interactions</div>
+        <div class="text-xs font-semibold uppercase tracking-wider text-muted mb-2">Recorded Complaints</div>
         <div class="text-3xl font-bold text-text">
           {breakdownTotal > 0 ? breakdownTotal.toLocaleString() : '—'}
         </div>
-        <p class="text-xs text-muted mt-1">Consumer interactions on record</p>
+        <p class="text-xs text-muted mt-1">Public CFPB complaint records in this dataset</p>
       </div>
     </div>
   </section>
@@ -186,7 +186,7 @@ const jsonLd = [
   {cfpb.top_products && cfpb.top_products.length > 0 && (
     <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
       <div class="glass-card p-5">
-        <h2 class="text-lg font-bold text-text mb-4">Services Used by Consumers</h2>
+        <h2 class="text-lg font-bold text-text mb-4">Products Named in CFPB Records</h2>
         <div class="space-y-3">
           {cfpb.top_products.map((product) => (
             <div>
@@ -211,7 +211,7 @@ const jsonLd = [
   {cfpb.top_issues && cfpb.top_issues.length > 0 && (
     <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
       <div class="glass-card p-5">
-        <h2 class="text-lg font-bold text-text mb-4">Consumer Feedback Categories</h2>
+        <h2 class="text-lg font-bold text-text mb-4">Issue Categories in CFPB Records</h2>
         <div class="space-y-3">
           {cfpb.top_issues.map((issue) => (
             <div>
@@ -277,26 +277,28 @@ const jsonLd = [
         </p>
         <ul class="list-disc list-inside space-y-1">
           <li>
-            <strong class="text-text">Resolution Rate</strong> — How often the company records
-            a response outcome such as monetary relief, non-monetary relief, or explanation.
+            <strong class="text-text">Recorded Response Outcome</strong> — The share of public CFPB
+            complaint records where the company has a recorded response outcome such as monetary
+            relief, non-monetary relief, or explanation.
           </li>
           <li>
-            <strong class="text-text">Timely Response Rate</strong> — How consistently the company
-            responds within the CFPB response window.
+            <strong class="text-text">Timely Response Rate</strong> — The share of public CFPB
+            complaint records with a company response inside the CFPB response window.
           </li>
           <li>
-            <strong class="text-text">Services Used</strong> — Which product categories consumers
-            interact with most frequently.
+            <strong class="text-text">Products Named</strong> — Which CFPB product categories appear
+            most often in this company's public complaint records.
           </li>
           <li>
-            <strong class="text-text">Feedback Categories</strong> — The types of inquiries consumers
-            submit most often.
+            <strong class="text-text">Issue Categories</strong> — The complaint issue categories
+            consumers selected most often in the public CFPB records.
           </li>
         </ul>
         <p>
-          Response rates are transparency signals, not endorsements, ratings, or suitability
-          determinations. Volume of interactions is not a quality indicator; larger companies
-          often handle more consumer complaints.
+          CFPB response data is transparency context, not proof of wrongdoing, endorsement,
+          customer-satisfaction evidence, a safety rating, or a suitability determination.
+          Complaint volume is not a quality indicator; larger companies often have more
+          public complaint records.
         </p>
       </div>
     </div>
@@ -335,7 +337,7 @@ const jsonLd = [
     <div class="glass-card p-6 text-center border-primary/20 border">
       <h2 class="text-lg font-bold text-text mb-2">Want the Full Picture?</h2>
       <p class="text-sm text-muted mb-5 max-w-lg mx-auto">
-        See {cfpb.company_name}'s complete profile including pricing, services, BBB rating, and user reviews on CreditDoc.
+        Continue to the CreditDoc provider profile for listed services, contact details, stored rating context where available, and source notes.
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
         <a
