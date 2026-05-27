@@ -3342,6 +3342,62 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 115: Comparison Residual Claim Softening
+
+Date: 2026-05-27
+Implementation commit: `c4b7fbf338` (`fix: soften comparison residual claims`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared render-time safe-copy coverage for residual comparison claims
+  using `significantly better` and `dramatically lower entry pricing`.
+- Reframed customer-satisfaction, reputation/reliability, consumer-trust,
+  validation/risk, and value wording into stored-signal or listed-context
+  language.
+- Preserved source comparison records, lender records, comparison routes,
+  JSON-LD routing, comparison table behavior, diagnosis cards, city pages,
+  category pages, and sitemap generation.
+
+Verification:
+
+- `git diff --check` passed.
+- Valid `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan returned no matches for `significantly better` or
+  `dramatically lower` on the seven affected comparison pages:
+  `/compare/midland-credit-management-vs-accredited-debt-relief/`,
+  `/compare/tang-associates-law-office-vs-lakeview-law-group/`,
+  `/compare/brigit-vs-advance-america-missouri-city/`,
+  `/compare/self-credit-builder-vs-opensky-secured-credit-card/`,
+  `/compare/national-debt-relief-vs-new-era-debt-solutions/`,
+  `/compare/american-consumer-credit-counseling-vs-clarifi/`, and
+  `/compare/kikoff-vs-first-progress-platinum-elite/`.
+- Broader rendered scan over `dist/compare`, `dist/categories`,
+  `dist/answers`, `dist/resources`, `dist/research`, `dist/deals`,
+  `dist/specials`, `dist/learn`, `dist/courses`, `dist/state`,
+  `dist/financial-wellness`, `dist/blog`, `dist/tools`, `dist/city`,
+  `dist/browse`, `dist/review`, and `dist/trends` returned zero matches for
+  the current residual YMYL phrase set.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/midland-credit-management-vs-accredited-debt-relief/`,
+  `/compare/kikoff-vs-first-progress-platinum-elite/`,
+  `/compare/self-credit-builder-vs-opensky-secured-credit-card/`,
+  `/compare/brigit-vs-advance-america-missouri-city/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-layer cleanup only; no source comparison, lender, city, category,
+  wellness, or generated provider data was edited.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 109: Comparison Overclaim Copy Softening
 
 Date: 2026-05-27
