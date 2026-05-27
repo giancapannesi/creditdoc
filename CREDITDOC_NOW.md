@@ -35,6 +35,20 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
+  `b12ab69fa4 fix: clean comparison copy artifacts`.
+  Batch 141 cleaned live-quality comparison-page copy artifacts found during
+  health monitoring, including the broken InCharge `to verify.2 million`
+  rendered phrase, duplicated `listed, listed credit-building` wording,
+  `stored outcome context (49-point average increase)` residue,
+  overconfident `100% refund policy` and `claims of 2-week posting` wording,
+  and `profile with more context for debt management` grammar.
+- Batch 141 verification passed: `git diff --check`, `npm run build`, 124 city
+  guides, 2,232 city-category sub-pages, 18,413 SSR route URLs,
+  sitemap/robots OK, targeted rendered comparison residue scan clean, local
+  static route checks all HTTP 200, and production spot checks all HTTP 200.
+- Batch 141 preserved the two unrelated unstaged files:
+  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
+- Previous cleanup batch:
   `a695ba76ec fix: soften comparison residual claims`.
   Batch 140 cleaned comparison-page residual claim and grammar artifacts around
   Brigit/ACE, ACE location-to-location, and Midland/APR examples, including

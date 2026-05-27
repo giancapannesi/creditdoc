@@ -669,6 +669,58 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 141: Comparison Copy Artifact Cleanup
+
+Date: 2026-05-27
+Implementation commit: `b12ab69fa4` (`fix: clean comparison copy artifacts`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Cleaned comparison-page copy artifacts found during health monitoring.
+- Fixed the broken InCharge rendered phrase
+  `provider-stated outcome context to verify.2 million clients...`.
+- Cleaned duplicated `listed, listed credit-building` wording.
+- Reframed `stored outcome context (49-point average increase)`,
+  `100% refund policy`, `claims of 2-week posting`,
+  `more sustainable profile with trust signals`, and
+  `profile with more context for debt management` into safer comparison and
+  verification wording.
+- Preserved source comparison records, lender records, pricing values, ratings,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered `dist/compare` residue scan returned zero matches for the
+  Batch 141 phrase set.
+- Local static route checks returned HTTP 200 for `/`,
+  `/city/amarillo-tx/`, `/browse/credit-unions/amarillo-tx/`,
+  `/compare/brigit-vs-ace-cash-express/`,
+  `/compare/self-credit-builder-vs-boost-credit-101/`,
+  `/compare/incharge-debt-solutions-vs-detroit-wealth-club/`, `/faq/`, and
+  `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`, `/browse/credit-unions/amarillo-tx/`,
+  `/compare/brigit-vs-ace-cash-express/`,
+  `/compare/self-credit-builder-vs-boost-credit-101/`,
+  `/compare/incharge-debt-solutions-vs-detroit-wealth-club/`, `/faq/`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 140: Residual Comparison Claim Cleanup
 
 Date: 2026-05-27
