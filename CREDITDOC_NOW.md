@@ -35,6 +35,19 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
+  `a695ba76ec fix: soften comparison residual claims`.
+  Batch 140 cleaned comparison-page residual claim and grammar artifacts around
+  Brigit/ACE, ACE location-to-location, and Midland/APR examples, including
+  long-term financial-improvement phrasing, budget-conscious borrower framing,
+  hard suitability language, BBB/fair-lending overclaims, high-APR phrasing,
+  debt-relief framing, and duplicated `to review` wording.
+- Batch 140 verification passed: `git diff --check`, `npm run build`, 124 city
+  guides, 2,232 city-category sub-pages, 18,413 SSR route URLs,
+  sitemap/robots OK, targeted rendered comparison residue scans clean, local
+  static route checks all HTTP 200, and production spot checks all HTTP 200.
+- Batch 140 preserved the two unrelated unstaged files:
+  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
+- Previous cleanup batch:
   `c55b2a579d fix: clean course module render artifacts`.
   Batch 139 cleaned Credit Fundamentals course rendering by removing leaked
   authoring notes from module content/previews, softening module meta

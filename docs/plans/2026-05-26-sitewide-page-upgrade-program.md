@@ -669,6 +669,54 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 140: Residual Comparison Claim Cleanup
+
+Date: 2026-05-27
+Implementation commit: `a695ba76ec` (`fix: soften comparison residual claims`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Cleaned comparison-page safe-copy residue around Brigit/ACE, ACE
+  location-to-location, and Midland/APR examples.
+- Softened long-term financial-improvement phrasing, budget-conscious
+  borrower framing, hard suitability language, BBB/fair-lending overclaims,
+  high-APR phrasing, debt-relief framing, and duplicated `to review` wording.
+- Preserved source comparison records, lender records, pricing values, ratings,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered `dist/compare` residue scan returned zero matches for the
+  Batch 140 phrase set.
+- Local static route checks returned HTTP 200 for
+  `/compare/brigit-vs-ace-cash-express/`,
+  `/compare/brigit-vs-ace-cash-express-terrytown/`,
+  `/compare/ace-cash-express-new-orleans-la-vs-ace-cash-express-terrytown/`,
+  `/compare/midland-credit-management-vs-american-profit-recovery/`,
+  `/city/amarillo-tx/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for
+  `/compare/brigit-vs-ace-cash-express/`,
+  `/compare/brigit-vs-ace-cash-express-terrytown/`,
+  `/compare/ace-cash-express-new-orleans-la-vs-ace-cash-express-terrytown/`,
+  `/compare/midland-credit-management-vs-american-profit-recovery/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 139: Course Module Render Artifact Cleanup
 
 Date: 2026-05-27
