@@ -2645,3 +2645,46 @@ Verification:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_122_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 123
+
+Batch 123 implementation committed as `902784f11c` for listed-context residue
+normalization:
+
+- `src/utils/safe-copy.ts`
+
+Changes:
+
+- Added render-time cleanup for remaining `more listed context` residue across
+  comparison pages and educational teaser/index output.
+- Normalized `with more listed context`, `has more listed context`, `more
+  listed context for`, `more listed value context`, `more listed risk context`,
+  `more listed profile context`, `more listed comparison context`, `more listed
+  regulatory context`, `more listed feature context`, `more listed
+  accreditation context`, `more listed risk-context`, and `more listed-cost
+  context`.
+- Reframed remaining `better overall choice` language to `stored comparison
+  pick`.
+- Cleaned second-order grammar artifacts in comparison, course, learn, and blog
+  output.
+- Preserved source comparison, education, and lender data.
+
+Verification:
+
+- `npm run build` passed with 18,413 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan across `dist/compare`, `dist/blog`, `dist/courses`,
+  `dist/learn`, and `dist/financial-wellness` returned zero matches for the
+  Batch 123 phrase set.
+- Live spot checks returned HTTP 200 for `/`,
+  `/compare/smartcredit-vs-lookout/`,
+  `/compare/kikoff-vs-opensky-secured-credit-card/`,
+  `/courses/credit-fundamentals/managing-debt-effectively/`,
+  `/courses/credit-fundamentals/know-your-rights/`, `/blog/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_123_notes_2026-05-27.md`

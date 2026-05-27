@@ -716,6 +716,58 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 123: Listed-Context Residue Normalization
+
+Date: 2026-05-27
+Implementation commit: `902784f11c` (`fix: normalize listed-context residue`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared render-time cleanup for remaining `more listed context` residue
+  across comparison, blog index, course, learn, and financial-wellness output.
+- Normalized phrases including `with more listed context`, `has more listed
+  context`, `more listed context for`, `more listed value context`, `more
+  listed risk context`, `more listed profile context`, `more listed comparison
+  context`, `more listed regulatory context`, `more listed feature context`,
+  `more listed accreditation context`, `more listed risk-context`, and `more
+  listed-cost context`.
+- Reframed remaining `better overall choice` language to `stored comparison
+  pick`.
+- Added cleanup for second-order grammar artifacts including `profile with more
+  supporting context with`, `has more supporting context a court judgment`,
+  `motivation has more supporting context`, `math has more supporting context`,
+  and related course/blog title residue.
+- Preserved source comparison records, education records, lender records,
+  pricing values, ratings, route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Focused rendered scan across `dist/compare`, `dist/blog`, `dist/courses`,
+  `dist/learn`, and `dist/financial-wellness` returned zero matches for the
+  targeted Batch 123 phrase set.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/smartcredit-vs-lookout/`,
+  `/compare/kikoff-vs-opensky-secured-credit-card/`,
+  `/courses/credit-fundamentals/managing-debt-effectively/`,
+  `/courses/credit-fundamentals/know-your-rights/`, `/blog/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only safe-copy cleanup; no source comparison, education, lender, city,
+  or category records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 118: Comparison Risk-Copy Grammar Normalization
 
 Date: 2026-05-27
