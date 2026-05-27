@@ -44,6 +44,9 @@ function softenComparisonText(text: string): string {
     .replace(/zero upfront cost to get started/gi, 'no listed setup fee');
   return softenYmylCopy(locallySoftened)
     .replace(/\bmore sustainable and profile with trust signals to verify\b/gi, 'more sustainable profile with trust signals to verify')
+    .replace(/\bmethodology context for credit-building context to review\b/gi, 'methodology context for credit-building features to review')
+    .replace(/\blegally questionable tradeline practices\b/gi, 'tradeline practices with compliance context to verify')
+    .replace(/\blegally questionable authorized user tradelines\b/gi, 'authorized user tradelines with compliance context to verify')
     .replace(/\bare relevant to your situation\b/gi, 'are relevant to your research')
     .replace(/([.!?])\s+for national-access\b/g, '$1 For national-access');
 }
