@@ -45,6 +45,38 @@ Archived 25 obvious low-quality noindex rows from the dump queue:
   must remain outside noindex cleanup deploy scope unless explicitly reviewed:
   `src/content/comparisons.json` and `src/content/wellness-guides.json`.
 
+## 2026-05-27 — Noindex Cleanup Batch 011
+
+**Status: committed locally after DB/build/reference verification; deploy pending.**
+
+Archived 30 explicit non-financial quarantine rows from the noindex queue:
+
+- Selection rule: already `failed_quarantine`, zero GSC impressions/clicks,
+  `quality_score` `0-1`, one service or fewer, not protected, and quarantine
+  reason `gold_dealer_not_financial` or `cannabis_not_financial`.
+- Excluded chain/location brands and money-transfer/check-cashing chains from
+  this batch, including Ria, PLS, Vigo, MoneyGram, Western Union, Barri, DolEx,
+  ACE, Amscot, Sigue, and envio/money-transfer slugs.
+- Backup:
+  `data/backups/creditdoc_before_noindex_drop_batch_011_20260527T065617Z.sqlite`
+- Workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Noindex_Review_2026-05-26/noindex_drop_batch_011_2026-05-27.csv`
+- Archive record:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Noindex_Review_2026-05-26/noindex_dropped_archive_batch_011_2026-05-27.json`
+- Updated local DB and Supabase through `CreditDocDB.update_lender()`.
+- Used `CreditDocDB.export_lender_to_json(slug)` per explicit slug only; did
+  not use broad `export_changed_lenders()`.
+- DB verification: 30 rows now have
+  `processing_status=archived`,
+  `review_status=archived_non_financial_quarantine`,
+  `no_index=true`, and
+  `archive_batch=noindex_drop_batch_011_2026-05-27`.
+- Supabase retry queue: 0 unresolved lender retry rows for the batch.
+- `npm run build` passed with 18,415 SSR route URLs and sitemap/robots checks.
+- `git diff --check` passed.
+- Rebuilt `dist` reference scan found zero `/review/<slug>/` references for
+  the 30 touched pages.
+
 Created the operating plan for the bottom-up local authority strategy:
 
 - `docs/plans/2026-05-26-creditdoc-local-authority-graph.md`
