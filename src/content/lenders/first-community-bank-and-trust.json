@@ -70,7 +70,7 @@
   "latitude": 41.3509839872602,
   "longitude": -87.6202319691052,
   "published": true,
-  "review_status": "draft",
+  "review_status": "published",
   "features": {
     "credit_monitoring": false,
     "all_three_bureaus": false,
@@ -121,11 +121,10 @@
   ],
   "phone": "",
   "address": "1111 Dixie Hwy, Beecher, IL 60401",
-  "processing_status": "pending_approval",
+  "processing_status": "ready_for_index",
   "quality_score": 11,
   "enrichment_attempts": 1,
-  "no_index": true,
-  "last_engine_run": "2026-04-17",
+  "no_index": false,
   "has_been_enriched": true,
   "qc_passed_at": "2026-04-17",
   "fdic_official_name": "First Community Bank and Trust",
@@ -143,5 +142,9 @@
   "fdic_match_confidence": 1.0,
   "fdic_match_method": "stored_cert_lookup",
   "fdic_resolved_at": "2026-04-21T10:41:27Z",
+  "indexed_at": "2026-05-27T07:21:58Z",
+  "indexing_decision": "reinstate_indexable_real_provider",
+  "reinstate_reason": "Official bank site HTTP 200; 1 GSC impression; banking services present.",
+  "reinstate_batch": "noindex_reinstate_batch_013_2026-05-27",
   "brand_slug": null
 }

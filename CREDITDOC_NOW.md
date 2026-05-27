@@ -122,6 +122,37 @@ Archived 24 obvious non-financial false-positive noindex rows:
   `/city/`, `/sitemap-index.xml`, `/review/lexington-law/`, and
   `/credit-guide/austin-tx/` return 200 without `noindex`.
 
+## 2026-05-27 — Noindex Reinstatement Batch 013
+
+**Status: committed locally after DB/build/sitemap verification; deploy pending.**
+
+Reinstated 20 real-provider noindex rows:
+
+- Selection rule: GSC impressions present, `quality_score` at least 7, official
+  website present and verified reachable, services present, not protected, and
+  no quarantine reason.
+- Excluded suspicious cases from this batch, including suspended pages, PDFs,
+  SSL failures/timeouts, and blocked sites.
+- Backup:
+  `data/backups/creditdoc_before_noindex_reinstate_batch_013_20260527T072117Z.sqlite`
+- Workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Noindex_Review_2026-05-26/noindex_reinstate_batch_013_2026-05-27.csv`
+- Reinstatement record:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Noindex_Review_2026-05-26/noindex_reinstated_batch_013_2026-05-27.json`
+- Updated local DB and Supabase through `CreditDocDB.update_lender()`.
+- Used `CreditDocDB.export_lender_to_json(slug)` per explicit slug only; did
+  not use broad `export_changed_lenders()`.
+- DB verification: 20 rows now have
+  `processing_status=ready_for_index`,
+  `review_status=published`,
+  `no_index=false`, and
+  `reinstate_batch=noindex_reinstate_batch_013_2026-05-27`.
+- Supabase retry queue: 0 unresolved lender retry rows for the batch.
+- `npm run build` passed; SSR sitemap route count increased from 18,415 to
+  18,435, matching the 20 reinstated review routes.
+- `git diff --check` passed.
+- Rebuilt sitemap includes all 20 reinstated `/review/<slug>/` routes.
+
 Created the operating plan for the bottom-up local authority strategy:
 
 - `docs/plans/2026-05-26-creditdoc-local-authority-graph.md`

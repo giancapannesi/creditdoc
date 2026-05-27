@@ -55,7 +55,7 @@
   "data_source": "ncua",
   "ncua_charter": "65775",
   "published": true,
-  "review_status": "draft",
+  "review_status": "published",
   "features": {
     "credit_monitoring": false,
     "all_three_bureaus": false,
@@ -103,10 +103,10 @@
   "cities_served": [],
   "phone": "9703303900",
   "address": ",  ",
-  "processing_status": "raw",
+  "processing_status": "ready_for_index",
   "quality_score": 7,
   "enrichment_attempts": 0,
-  "no_index": true,
+  "no_index": false,
   "ncua_charter_number": "65775",
   "ncua_official_name": "NORTHERN COLORADO",
   "ncua_match_score": 1.0,
@@ -115,5 +115,11 @@
   "state": "CO",
   "meta_title": "Northern Colorado \u2014 Credit Union in GREELEY, CO | CreditDoc",
   "meta_description": "Northern Colorado \u2014 NCUA-insured credit union in GREELEY, CO. Member-owned, not-for-profit. Loans, savings, and member services.",
-  "website": "https://www.nococu.org"
+  "website": "https://www.nococu.org",
+  "has_been_enriched": true,
+  "indexed_at": "2026-05-27T07:21:58Z",
+  "indexing_decision": "reinstate_indexable_real_provider",
+  "reinstate_reason": "Official credit union site HTTP 200; 3 GSC impressions; credit-union services present.",
+  "reinstate_batch": "noindex_reinstate_batch_013_2026-05-27",
+  "brand_slug": null
 }

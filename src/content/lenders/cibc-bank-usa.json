@@ -55,7 +55,7 @@
   "latitude": 41.880310392883,
   "longitude": -87.632826952093,
   "published": true,
-  "review_status": "draft",
+  "review_status": "published",
   "features": {
     "credit_monitoring": false,
     "all_three_bureaus": false,
@@ -105,10 +105,10 @@
   ],
   "phone": "",
   "address": "120 S La Salle St, Chicago, IL 60603",
-  "processing_status": "raw",
+  "processing_status": "ready_for_index",
   "quality_score": 9,
   "enrichment_attempts": 0,
-  "no_index": true,
+  "no_index": false,
   "cfpb_data": {
     "found_in_cfpb": true,
     "cfpb_company_name": "CIBC BANK USA",
@@ -118,5 +118,10 @@
     "data_period": "2023-present",
     "last_checked": "2026-04-28"
   },
+  "has_been_enriched": true,
+  "indexed_at": "2026-05-27T07:21:58Z",
+  "indexing_decision": "reinstate_indexable_real_provider",
+  "reinstate_reason": "Official CIBC US site HTTP 200; 1 GSC impression; banking services present.",
+  "reinstate_batch": "noindex_reinstate_batch_013_2026-05-27",
   "brand_slug": null
 }
