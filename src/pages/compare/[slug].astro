@@ -77,6 +77,8 @@ function softenComparisonText(text: string): string {
     .replace(/\bmore listed-cost\b/gi, 'more cost-relevant')
     .replace(/\bmore sustainable and profile with trust signals to verify\b/gi, 'more sustainable profile with trust signals to verify')
     .replace(/\bmore sustainable profile with trust signals to verify\b/gi, 'profile with more listed context to compare')
+    .replace(/\bhigher in listed context stored public-review context\b/gi, 'higher stored public-review context')
+    .replace(/\bclearer listed-cost context proposition\b/gi, 'profile with clearer listed-cost context to compare')
     .replace(/\bdevastating payday loan APRs\b/gi, 'very high payday-loan APRs')
     .replace(/\btraps borrowers in high-cost repeat-borrowing cycles\b/gi, 'can involve high-cost repeat-borrowing risk')
     .replace(/\bcreates repeat-borrowing cycles\b/gi, 'has repeat-borrowing risk to review')
@@ -130,6 +132,12 @@ function softenComparisonText(text: string): string {
     .replace(/\bprofile details seeking\b/gi, 'users reviewing')
     .replace(/\band profile with more risk context\b/gi, 'and more risk context to review')
     .replace(/\bprofile with more risk context\b/gi, 'profile with more risk context to review')
+    .replace(/\bmaking it the profile with more context for consumers seeking ([^.;]+)\b/gi, 'giving it more context to compare for consumers reviewing $1')
+    .replace(/\bmaking it the profile with more context for price-conscious ([^.;]+)\b/gi, 'giving it more listed-cost context to compare for consumers reviewing $1')
+    .replace(/\bgiving it more context to compare for consumers reviewing credit repair seekers\b/gi, 'giving it more context to compare for credit-repair consumers')
+    .replace(/\bgiving it more listed-cost context to compare for consumers reviewing credit repair seekers\b/gi, 'giving it more listed-cost context to compare for credit-repair consumers')
+    .replace(/\bprofile with more context for consumers seeking ([^.;]+)\b/gi, 'profile with more context to compare for consumers reviewing $1')
+    .replace(/\bprofile with more context for price-conscious ([^.;]+)\b/gi, 'profile with more listed-cost context to compare for consumers reviewing $1')
     .replace(/\bsignificant advantage\b/gi, 'listed-context advantage')
     .replace(/\bsignificantly larger verified customer base\b/gi, 'larger stored review footprint')
     .replace(/\bdemonstrated track record\b/gi, 'provider-stated operating history')
@@ -171,6 +179,8 @@ function softenComparisonText(text: string): string {
     .replace(/\bfaster dispute processing\b/gi, 'listed dispute-timing context to verify')
     .replace(/\bmore suitable for\b/gi, 'more relevant to compare for')
     .replace(/\bprofile to compare for\b/gi, 'profile with more context for')
+    .replace(/\bmaking it the profile with more context for consumers seeking ([^.;]+)\b/gi, 'giving it more context to compare for consumers reviewing $1')
+    .replace(/\bprofile with more context for consumers seeking ([^.;]+)\b/gi, 'profile with more context to compare for consumers reviewing $1')
     .replace(/\bis the profile with more context for debt management\b/gi, 'has more listed debt-management context to compare')
     .replace(/\bprofile with more context for debt management\b/gi, 'profile with more listed debt-management context to compare')
     .replace(/\bslightly more aggressive credit-building mechanism\b/gi, 'more credit-building mechanism context to review')
@@ -267,9 +277,13 @@ function softenComparisonText(text: string): string {
     .replace(/\bdemonstrate more profile context and consumer protection\b/gi, 'add more profile and consumer-protection context to review')
     .replace(/\bmore reliable choice\b/gi, 'profile with more stored context to review')
     .replace(/\bfor cost-effectiveness and credit building\b/gi, 'for listed-cost and credit-building context')
+    .replace(/\bfor consumers comparing listed cost prioritizing\b/gi, 'for consumers comparing listed cost and')
+    .replace(/\bFor consumers comparing listed cost prioritizing\b/g, 'For consumers comparing listed cost and')
     .replace(/\bseeking credit improvement\b/gi, 'reviewing credit-improvement claims')
+    .replace(/\bmaking it the profile with more context for ([^.;]+)\b/gi, 'giving it more context to compare for $1')
     .replace(/\bto review to review\b/gi, 'to review')
-    .replace(/([.!?])\s+for national-access\b/g, '$1 For national-access');
+    .replace(/([.!?])\s+for national-access\b/g, '$1 For national-access')
+    .replace(/([.!?])\s+for consumers comparing listed cost\b/g, '$1 For consumers comparing listed cost');
 }
 
 const safeSummary = softenComparisonText(comparison.summary);
