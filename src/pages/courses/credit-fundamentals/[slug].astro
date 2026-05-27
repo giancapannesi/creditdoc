@@ -38,6 +38,14 @@ if (mdFile) {
   const mdPath = path.resolve('/srv/BusinessOps/data/outreach/edu_gov/course/modules', mdFile);
   const raw = fs.readFileSync(mdPath, 'utf-8');
 
+  const removeAuthoringNotes = (value: string) =>
+    value
+      .replace(/^.*Canva search:.*(?:\n|$)/gim, '')
+      .replace(/<p[^>]*>.*Canva search:.*?<\/p>/gis, '')
+      .replace(/<strong>Canva search:<\/strong>[^<]*(?:<br\s*\/?>)?/gi, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
   // Extract lessons: ## Lesson N: Title
   const lessonRegex = /^## Lesson \d+:\s*(.+)$/gm;
   const lessonMatches = [...raw.matchAll(lessonRegex)];
@@ -50,7 +58,7 @@ if (mdFile) {
         ? raw.indexOf('## Module', start)
         : raw.length;
 
-    let content = raw.slice(start, end).trim();
+    let content = removeAuthoringNotes(raw.slice(start, end).trim());
     content = content.replace(/### IMAGE:[\s\S]*?(?=\n(?:###?\s|\*\*[A-Z])|$)/g, '').trim();
     content = content.replace(/## IMAGE:[\s\S]*?(?=\n---)/g, '').trim();
 
@@ -72,8 +80,9 @@ if (mdFile) {
       return `<p class="text-muted leading-relaxed mb-4">${block}</p>`;
     }).join('\n');
 
-    content = content.replace(/<p[^>]*>\*\*Canva search:\*\*[^<]*<\/p>/g, '');
+    content = removeAuthoringNotes(content);
     content = content
+      .replace(/^\s*---\s*$/gm, '')
       .replace(/\bmay be worth it\b/gi, 'may be worth evaluating')
       .replace(/\bworth it\b/gi, 'worth evaluating')
       .replace(/\btop lenders\b/gi, 'major lenders');
@@ -114,7 +123,7 @@ if (mdFile) {
 const shortTitle = mod.title.replace(/ — .*$/, '');
 const candidate = `${shortTitle} — Free Credit Course | CreditDoc`;
 const title = candidate.length <= 60 ? candidate : `${shortTitle} | Free Course — CreditDoc`;
-const description = mod.description;
+const description = softenEducationalTeaserCopy(mod.description);
 const displayModTitle = softenEducationalTeaserCopy(mod.title);
 const displayModDescription = softenEducationalTeaserCopy(mod.description);
 
