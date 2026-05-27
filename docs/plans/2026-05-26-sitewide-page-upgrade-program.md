@@ -669,6 +669,61 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 144: Comparison Context Residue Cleanup
+
+Date: 2026-05-27
+Implementation commit: `31724b28e4` (`fix: clean comparison context residue`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Cleaned rendered comparison-page context residue found during quality
+  monitoring.
+- Reframed `stored outcome context` as outcome context to verify.
+- Reframed `consumer research context ...` residue into clearer
+  credit-monitoring, accountability, emergency, debt-relief, public-profile,
+  listed-cost, and cost-structure comparison wording.
+- Updated the shared YMYL copy softener so `verifiable/verified/documented
+  results` no longer becomes the awkward public phrase `stored outcome
+  context`.
+- Preserved source comparison records, lender records, pricing values, ratings,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered `dist/compare` and `dist/browse` residue scan returned
+  zero matches for the Batch 144 phrase set.
+- Local static route checks returned HTTP 200 for `/`,
+  `/city/amarillo-tx/`, `/browse/credit-repair/miami-fl/`,
+  `/compare/self-credit-builder-vs-the-credit-gal/`,
+  `/compare/transunion-vs-lookout/`,
+  `/compare/incharge-debt-solutions-vs-creditorg/`,
+  `/compare/cambridge-credit-counseling-vs-creditorg/`, and
+  `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`, `/browse/credit-repair/miami-fl/`,
+  `/compare/self-credit-builder-vs-the-credit-gal/`,
+  `/compare/transunion-vs-lookout/`,
+  `/compare/incharge-debt-solutions-vs-creditorg/`,
+  `/compare/cambridge-credit-counseling-vs-creditorg/`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-time comparison/browse safe-copy cleanup; no source comparison or
+  lender records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 143: Comparison Result Residue Softening
 
 Date: 2026-05-27
