@@ -3093,6 +3093,58 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 104: Refund-Term Safe-Copy Normalization
+
+Date: 2026-05-26
+Implementation commit: `bba1684f41` (`fix: normalize refund-term safe copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+- `astro.config.mjs`
+
+What changed:
+
+- Normalized redundant safe-copy output from `provider-stated listed refund
+  term(s)` to `provider-stated refund term(s)`.
+- Covered both sentence-case and lowercase variants, and both singular and
+  plural term wording.
+- Raised the Supabase city-guide sitemap fetch timeout from 60 seconds to 120
+  seconds after repeated non-fatal fetch timeouts produced invalid reduced
+  build inventory.
+- Preserved source comparison records, lender records, route slugs, cards,
+  tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- First fresh `npm run build` after the copy patch was discarded as verification
+  evidence because city-guide sitemap generation timed out and only injected
+  16,057 SSR route URLs.
+- After raising the sitemap fetch timeout, `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for the old redundant
+  phrases `provider-stated listed refund term` or
+  `Provider-stated listed refund term`.
+- Rendered `dist/compare` scan confirmed replacement output for
+  `provider-stated refund term` / `Provider-stated refund term`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/the-credit-pros-vs-safeport-law/`,
+  `/compare/the-credit-repairmen-vs-credit360-credit-repair/`,
+  `/compare/credit360-credit-repair-vs-lenders-choice-credit-solutions/`,
+  `/robots.txt`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Sanitizer-only copy repair plus build reliability timeout change; no source
+  comparison or lender JSON records were rewritten.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+- Workpack notes:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_104_notes_2026-05-26.md`.
+
 ### Batch 103: Safe-Copy Entity Preservation
 
 Date: 2026-05-26
