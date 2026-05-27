@@ -3093,6 +3093,53 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 110: Best Listicle Safe-Copy Softening
+
+Date: 2026-05-27
+Implementation commit: `248f2c923a` (`fix: soften best listicle copy`)
+
+Scope:
+
+- `src/pages/best/[slug].astro`
+
+What changed:
+
+- Added a listicle-specific render-time copy softener for `/best/[slug]` SSR
+  pages.
+- Softened listicle title, SEO title, description, SEO description, intro,
+  TL;DR, key takeaways, visible FAQ, and FAQ JSON-LD output.
+- Covered risky listicle phrases observed on live `/best/` samples, including
+  `5 Best...`, `Cheapest...`, `expert reviews`, `real results`, `top pick`,
+  `highest approval rate`, `approval speed`, `settlement success rates`,
+  `best rates`, `best option`, `best choice`, `best combination`, `best for`,
+  `best if`, `lowest APR`, and `Top 10 SBA lender`.
+- Changed the no-credit-check listicle badge from `No Credit Check` to
+  `No-credit-check claim`.
+- Preserved runtime Supabase fetches, source listicle records, source lender
+  records, ranked-lender order, provider names, route slugs, review links,
+  card layouts, pricing values, star ratings, and schema structure.
+
+Verification:
+
+- `git diff --check` passed.
+- Valid `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Production availability spot checks returned HTTP 200 for `/`,
+  `/best/best-credit-repair-companies/`, `/best/best-no-credit-check-cards/`,
+  `/best/best-sba-loans/`, `/credit-guide/amarillo-tx/`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- This is a render-layer cleanup for SSR `/best/` pages; the live production
+  copy will reflect the softer wording after this commit is deployed and cache
+  expires.
+- No source listicle or lender data was edited.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 109: Comparison Overclaim Copy Softening
 
 Date: 2026-05-27
