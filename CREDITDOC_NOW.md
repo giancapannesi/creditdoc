@@ -3139,3 +3139,50 @@ Verification:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_147_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 148
+
+Batch 148 implementation committed as `3d0c32256c` for education/blog teaser
+residue cleanup.
+
+Changes:
+
+- Cleaned the emergency-loan blog teaser grammar from `are researching...` to
+  `Researching...`.
+- Replaced the remaining hard-sell emergency-loan teaser sentence with
+  review-oriented wording around options, timing claims, costs, and payday-loan
+  risks.
+- Softened visible credit-repair teaser wording from scam-first phrasing to
+  warning-sign and consumer-protection wording.
+- Relabeled the blog category filter from `Predatory Lending` to
+  `High-Cost Lending` while preserving the existing slug and route behavior.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed with 18,415 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan returned zero matches for the Batch 148 visible blog
+  teaser phrase set: broken emergency-cash grammar, old $100-$50,000
+  hard-sell wording, `predatory payday loan traps`, `Credit Repair Scams: How
+  to Spot`, and `legitimate ways to repair your credit`.
+- Positive rendered checks confirmed replacement language on `/blog/` and
+  `/learn/`.
+- Local static route checks returned HTTP 200 for `/`, `/blog/`, `/learn/`,
+  `/financial-wellness/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`, `/blog/`, `/learn/`,
+  `/financial-wellness/`, `/sitemap-index.xml`,
+  `/blog/emergency-loans-bad-credit-options-within-24-hours/`, and
+  `/blog/credit-repair-scams-how-to-spot-them-and-what-to-do-instead/`.
+
+Notes:
+
+- The two blog article routes are SSR routes and returned 404 from a simple
+  local static server, but production returned HTTP 200.
+- Additional unrelated content JSON edits were present in the working tree and
+  were not staged or committed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_148_notes_2026-05-27.md`

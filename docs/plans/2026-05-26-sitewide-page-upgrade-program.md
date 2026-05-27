@@ -767,6 +767,59 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 148: Education Teaser Residue Cleanup
+
+Date: 2026-05-27
+Implementation commit: `3d0c32256c` (`fix: clean education teaser residue`)
+
+Scope:
+
+- `src/pages/blog/index.astro`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Cleaned emergency-cash teaser grammar so the blog card starts with
+  `Researching emergency-cash options with bad credit?`.
+- Replaced the remaining `$100-$50,000 within 24 hours` teaser sentence with
+  review-oriented wording about options, timing claims, costs, and payday-loan
+  risks.
+- Softened credit-repair teaser wording from scam-first wording to warning-sign
+  and consumer-protection wording.
+- Relabeled the visible blog category filter from `Predatory Lending` to
+  `High-Cost Lending` while preserving the existing `predatory-lending` slug.
+- Preserved source blog records, article slugs, route paths, source lender
+  data, source comparison data, and generated inventory records.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,415 SSR route URLs after the current repo state added two
+  blog articles.
+- Postbuild sitemap/robots check passed.
+- Rendered scan, excluding bundled assets, source maps, and sitemap XML,
+  returned zero matches for the targeted visible teaser residue:
+  `are researching emergency-cash options with bad credit`, old `$100-$50,000`
+  wording, `predatory payday loan traps`, `Credit Repair Scams: How to Spot`,
+  and `legitimate ways to repair your credit`.
+- Positive rendered checks confirmed replacement language on `/blog/` and
+  `/learn/`.
+- Local static route checks returned HTTP 200 for `/`, `/blog/`, `/learn/`,
+  `/financial-wellness/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`, `/blog/`, `/learn/`,
+  `/financial-wellness/`, `/sitemap-index.xml`,
+  `/blog/emergency-loans-bad-credit-options-within-24-hours/`, and
+  `/blog/credit-repair-scams-how-to-spot-them-and-what-to-do-instead/`.
+
+Notes:
+
+- Article routes are SSR routes and returned 404 from a simple local static
+  server, but production returned HTTP 200.
+- Additional unrelated content JSON edits were present in the working tree and
+  were not staged or committed.
+
 ### Batch 145: Failed Extraction Artifact Cleanup
 
 Date: 2026-05-27
