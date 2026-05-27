@@ -669,6 +669,57 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 143: Comparison Result Residue Softening
+
+Date: 2026-05-27
+Implementation commit: `bb312cc51b` (`fix: soften comparison result residue`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Cleaned rendered comparison result and claim residue found during quality
+  monitoring.
+- Fixed `for borrowers comparing listed cost prioritizing`, `more option for
+  consumers comparing users reviewing...`, provider-stated credit-building
+  result phrasing, `actual financial return` / `money returned at loan
+  completion`, `lower total costs`, `suggesting greater operational maturity
+  and client satisfaction`, `regulatory compliance`, `significant transparency
+  and trust concerns`, and `exclude many users`.
+- Preserved source comparison records, lender records, pricing values, ratings,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered `dist/compare` residue scan returned zero matches for the
+  Batch 143 phrase set.
+- Local static route checks returned HTTP 200 for `/`,
+  `/city/amarillo-tx/`,
+  `/compare/self-credit-builder-vs-first-progress-platinum-elite/`,
+  `/compare/greenlight-financial-vs-gocreditme-lake-western/`,
+  `/compare/apex-credit-fix-vs-cosmo-credit-repair/`,
+  `/compare/kikoff-vs-discover-it-secured/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`,
+  `/compare/self-credit-builder-vs-first-progress-platinum-elite/`,
+  `/compare/greenlight-financial-vs-gocreditme-lake-western/`,
+  `/compare/apex-credit-fix-vs-cosmo-credit-repair/`,
+  `/compare/kikoff-vs-discover-it-secured/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 142: Comparison Grammar Residue Cleanup
 
 Date: 2026-05-27

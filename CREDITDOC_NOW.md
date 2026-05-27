@@ -35,6 +35,21 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
+  `bb312cc51b fix: soften comparison result residue`.
+  Batch 143 softened rendered comparison-page result and claim residue found
+  during quality monitoring, including `for borrowers comparing listed cost
+  prioritizing`, `more option for consumers comparing users reviewing...`,
+  `dramatically better credit-building results`, `actual financial return`,
+  `lower total costs`, `suggesting greater operational maturity and client
+  satisfaction`, `regulatory compliance`, `significant transparency and trust
+  concerns`, and `exclude many users`.
+- Batch 143 verification passed: `git diff --check`, `npm run build`, 124 city
+  guides, 2,232 city-category sub-pages, 18,413 SSR route URLs,
+  sitemap/robots OK, targeted rendered comparison residue scan clean, local
+  static route checks all HTTP 200, and production spot checks all HTTP 200.
+- Batch 143 preserved the two unrelated unstaged files:
+  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
+- Previous cleanup batch:
   `7e3454f706 fix: clean comparison grammar residue`.
   Batch 142 cleaned comparison-page grammar residue found during quality
   monitoring, including `for consumers comparing listed cost prioritizing`,
