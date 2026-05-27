@@ -16,8 +16,17 @@ const bbbRating = normalizedBbbRating(lender.company_info.bbb_rating);
 const bbbClass = getBbbClass(bbbRating);
 const showGoogleRating = showRatings && lender.google_rating && lender.google_rating > 0 && !(lender.google_rating > 5) && lender.google_reviews_count && lender.google_reviews_count >= 1;
 
-function softenProviderSignal(text: string): string {
-  return softenYmylCopy(text);
+function softenProviderCardCopy(text: string): string {
+  return softenYmylCopy(text)
+    .replace(/\bguaranteed returns\b/gi, 'stated return terms to verify')
+    .replace(/\bguaranteed return\b/gi, 'stated return term to verify')
+    .replace(/\bguaranteed\b/gi, 'provider-stated')
+    .replace(/\bwithout predatory lending\b/gi, 'with lending-cost context to verify')
+    .replace(/\bwithout the predatory practices of traditional title loan companies\b/gi, 'with lending-cost and title-loan comparison context to verify')
+    .replace(/\bpredatory lending practices\b/gi, 'high-cost lending practices')
+    .replace(/\bpredatory lending\b/gi, 'high-cost lending')
+    .replace(/\bpredatory practices\b/gi, 'high-cost practices')
+    .replace(/\bpredatory\b/gi, 'high-cost');
 }
 ---
 
@@ -51,7 +60,7 @@ function softenProviderSignal(text: string): string {
       <h3 class="text-lg font-semibold text-text truncate">{lender.name}</h3>
       <p class="text-sm text-muted mt-0.5 line-clamp-2">
         {showRatings
-          ? softenYmylCopy(lender.description_short)
+          ? softenProviderCardCopy(lender.description_short)
           : 'View this provider profile and compare source-linked details before choosing what to do next.'}
       </p>
     </div>
@@ -81,7 +90,7 @@ function softenProviderSignal(text: string): string {
   {lender.best_for.length > 0 && (
     <div class="mt-3">
       <p class="text-xs text-muted">
-        <span class="font-medium">Profile signals:</span> {lender.best_for.slice(0, 2).map(softenProviderSignal).join(', ')}
+        <span class="font-medium">Profile signals:</span> {lender.best_for.slice(0, 2).map(softenProviderCardCopy).join(', ')}
       </p>
     </div>
   )}
