@@ -2726,3 +2726,43 @@ Verification:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_124_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 125
+
+Batch 125 implementation committed as `9b33d02b47` for comparison FAQ fallback
+copy consolidation:
+
+- `src/pages/compare/[slug].astro`
+
+Changes:
+
+- Consolidated comparison FAQ answers when both profiles lack a recurring
+  monthly subscription fee.
+- Consolidated refund-term FAQ answers when neither profile lists a refund term
+  in the stored comparison data.
+- Preserved provider-specific setup-fee context and one-provider refund-term
+  details when only one side has data.
+- Trimmed trailing punctuation from provider-stated refund details to prevent
+  double periods in rendered FAQs and FAQ JSON-LD.
+- Preserved source comparison, lender, city, category, and education data.
+
+Verification:
+
+- `npm run build` passed with 18,413 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan across `dist/compare` returned zero matches for
+  duplicate monthly-subscription fallback text, duplicate missing-refund-term
+  fallback text, and listed-refund double-period residue.
+- Targeted rendered checks confirmed consolidated FAQ copy on representative
+  comparison pages.
+- Live spot checks returned HTTP 200 for `/`,
+  `/compare/creditassociates-vs-new-era-debt-solutions/`,
+  `/compare/cambridge-credit-counseling-vs-greenpath-financial-wellness/`,
+  `/compare/greenlight-financial-vs-boost-credit-101/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_125_notes_2026-05-27.md`

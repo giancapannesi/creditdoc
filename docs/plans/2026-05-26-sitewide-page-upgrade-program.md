@@ -768,6 +768,51 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 125: Comparison FAQ Fallback Copy Consolidation
+
+Date: 2026-05-27
+Implementation commit: `9b33d02b47` (`fix: consolidate comparison faq fallback copy`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Consolidated comparison FAQ answers when both profiles lack a recurring
+  monthly subscription fee.
+- Consolidated refund-term FAQ answers when neither profile lists a refund term
+  in the stored comparison data.
+- Preserved provider-specific setup-fee context and one-provider refund-term
+  details when only one side has data.
+- Trimmed trailing punctuation from provider-stated refund details to prevent
+  double periods in rendered FAQs and FAQ JSON-LD.
+- Preserved source comparison records, lender records, pricing values, ratings,
+  route slugs, cards, tables, schema shape, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed after a second build with the punctuation cleanup.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan across `dist/compare` returned zero matches for
+  duplicate monthly-subscription fallback text, duplicate missing-refund-term
+  fallback text, and listed-refund double-period residue.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/creditassociates-vs-new-era-debt-solutions/`,
+  `/compare/cambridge-credit-counseling-vs-greenpath-financial-wellness/`,
+  `/compare/greenlight-financial-vs-boost-credit-101/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-template cleanup; no source comparison, education, lender, city, or
+  category records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 124: Comparison Context Grammar Normalization
 
 Date: 2026-05-27
