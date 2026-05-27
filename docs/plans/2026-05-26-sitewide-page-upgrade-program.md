@@ -3093,6 +3093,60 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 109: Comparison Overclaim Copy Softening
+
+Date: 2026-05-27
+Implementation commit: `00544bfa85` (`fix: soften comparison overclaim copy`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added render-time safe-copy coverage for comparison-page overclaim language
+  including `clear winner`, `verified legitimacy`, `significantly stronger`,
+  `risk-free`, `low-risk`, `transparent`, `superior value`, `substantially`
+  lower-cost claims, `dramatically` lower-cost/value claims, and `proven`
+  creditor-negotiation/result language.
+- Added cleanup for awkward generated fragments such as `vastly has more listed
+  context than`, `has more listed context than with`, and `has more listed
+  context than on`.
+- Preserved source comparison records, source lender records, provider names,
+  route slugs, category assignments, cards, maps, tables, comparison FAQs, and
+  layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- Valid `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for targeted comparison
+  phrases including `clear winner`, `verified legitimacy`, `significantly
+  stronger`, `low-risk trial`, `risk-free`, `superior value`, `substantially
+  lower costs`, `dramatically lower costs`, `dramatically better value`,
+  `transparent pricing`, `transparent fees`, `transparent fee structure`,
+  `transparent stated terms`, `proven results`, `verified A+ BBB
+  accreditation`, `proven creditor negotiation`, `vastly has more listed
+  context`, `has more listed context than with`, `has more listed context than
+  on`, ` wins`, and ` win`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/accredited-debt-relief-vs-american-profit-recovery/`,
+  `/compare/kikoff-vs-debt-freedom-ga/`,
+  `/compare/smartcredit-vs-boost-my-fico-scores/`,
+  `/compare/brigit-vs-ace-cash-express-terrytown/`,
+  `/browse/credit-repair/brooklyn-ny/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 108: Residual YMYL Claim Softening
 
 Date: 2026-05-27
