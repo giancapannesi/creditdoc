@@ -669,6 +669,58 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 142: Comparison Grammar Residue Cleanup
+
+Date: 2026-05-27
+Implementation commit: `7e3454f706` (`fix: clean comparison grammar residue`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Cleaned comparison-page grammar residue found during quality monitoring.
+- Fixed listed-cost wording artifacts and lowercase sentence-start residue from
+  prior listed-cost rewrites.
+- Cleaned `higher in listed context stored public-review context`,
+  `clearer listed-cost context proposition`,
+  `making it the profile with more context for...`, and awkward
+  `consumers reviewing credit repair seekers` phrasing.
+- Preserved source comparison records, lender records, pricing values, ratings,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered `dist/compare` residue scans returned zero matches for the
+  Batch 142 phrase set.
+- Local static route checks returned HTTP 200 for `/`,
+  `/city/amarillo-tx/`,
+  `/compare/apex-credit-fix-vs-the-credit-pros/`,
+  `/compare/credit-supreme-credit-repair-miami-fix-credit-fast-miami-fl-vs-safeport-law/`,
+  `/compare/american-profit-recovery-vs-lakeview-law-group/`,
+  `/compare/the-credit-repairmen-vs-cosmo-credit-repair/`, and
+  `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`,
+  `/compare/apex-credit-fix-vs-the-credit-pros/`,
+  `/compare/credit-supreme-credit-repair-miami-fix-credit-fast-miami-fl-vs-safeport-law/`,
+  `/compare/american-profit-recovery-vs-lakeview-law-group/`,
+  `/compare/the-credit-repairmen-vs-cosmo-credit-repair/`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 141: Comparison Copy Artifact Cleanup
 
 Date: 2026-05-27

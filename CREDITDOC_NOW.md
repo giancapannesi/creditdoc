@@ -35,6 +35,21 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
+  `7e3454f706 fix: clean comparison grammar residue`.
+  Batch 142 cleaned comparison-page grammar residue found during quality
+  monitoring, including `for consumers comparing listed cost prioritizing`,
+  lowercase sentence-start residue after listed-cost rewrites,
+  `higher in listed context stored public-review context`,
+  `clearer listed-cost context proposition`,
+  `making it the profile with more context for...`, and awkward
+  `consumers reviewing credit repair seekers` phrasing.
+- Batch 142 verification passed: `git diff --check`, `npm run build`, 124 city
+  guides, 2,232 city-category sub-pages, 18,413 SSR route URLs,
+  sitemap/robots OK, targeted rendered comparison residue scans clean, local
+  static route checks all HTTP 200, and production spot checks all HTTP 200.
+- Batch 142 preserved the two unrelated unstaged files:
+  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
+- Previous cleanup batch:
   `b12ab69fa4 fix: clean comparison copy artifacts`.
   Batch 141 cleaned live-quality comparison-page copy artifacts found during
   health monitoring, including the broken InCharge `to verify.2 million`
