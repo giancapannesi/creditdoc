@@ -2529,3 +2529,41 @@ Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_031_notes_2026-05-26.md`
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_031_course_module_copy_gsc_seen_2026-05-26.csv`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 120
+
+Batch 120 implementation committed as `6245f10fc7` for cross-page educational
+residue normalization:
+
+- `src/utils/safe-copy.ts`
+
+Changes:
+
+- Added render-time cleanup for residual educational, glossary, learn,
+  wellness, course, blog, resource, and comparison artifacts.
+- Normalized `Financial Account Protection net`, `has more listed context a
+  judgment`, `makes overspending easy to overspend`, `claimed certain by`,
+  `it can be useful to Try`, `more listed context-cost context`, `listed
+  context-cost context`, and `advertised approval claim to verify`.
+- Preserved source comparison, wellness-guide, lender, city, and category data.
+
+Verification:
+
+- `npm run build` passed with 18,413 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan returned zero matches across `dist/compare`,
+  `dist/financial-wellness`, `dist/learn`, `dist/glossary`, `dist/blog`,
+  `dist/courses`, and `dist/resources`.
+- Live spot checks returned HTTP 200 for `/`, `/learn/`,
+  `/financial-wellness/`, `/glossary/`,
+  `/blog/are-guaranteed-approval-personal-loans-real-the-truth/`,
+  `/courses/credit-fundamentals/avoiding-scams-and-predatory-lending/`,
+  `/compare/self-credit-builder-vs-first-progress-platinum-elite/`,
+  `/compare/dickmann-tax-group-vs-grt-financial/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_120_notes_2026-05-27.md`

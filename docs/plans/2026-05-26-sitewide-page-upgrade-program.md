@@ -565,6 +565,57 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 120: Cross-Page Educational Residue Normalization
+
+Date: 2026-05-27
+Implementation commit: `6245f10fc7` (`fix: normalize cross-page educational residue`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared render-time cleanup for residual educational, glossary, learn,
+  wellness, course, blog, resource, and comparison phrases found in generated
+  output.
+- Normalized awkward replacement artifacts including `Financial Account
+  Protection net`, `has more listed context a judgment`, `makes overspending
+  easy to overspend`, `claimed certain by`, `it can be useful to Try`,
+  `more listed context-cost context`, `listed context-cost context`, and
+  `advertised approval claim to verify`.
+- Reframed those phrases into neutral account-protection, legal-reference,
+  overspending-risk, listed-cost, judgment, review, and approval-claim
+  language.
+- Preserved source comparison records, source wellness-guide records, lender
+  records, city/category records, slugs, route generation, cards, tables, and
+  layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Focused rendered scan across `dist/compare`, `dist/financial-wellness`,
+  `dist/learn`, `dist/glossary`, `dist/blog`, `dist/courses`, and
+  `dist/resources` returned zero matches for the targeted Batch 120 phrase set.
+- Production spot checks returned HTTP 200 for `/`, `/learn/`,
+  `/financial-wellness/`, `/glossary/`,
+  `/blog/are-guaranteed-approval-personal-loans-real-the-truth/`,
+  `/courses/credit-fundamentals/avoiding-scams-and-predatory-lending/`,
+  `/compare/self-credit-builder-vs-first-progress-platinum-elite/`,
+  `/compare/dickmann-tax-group-vs-grt-financial/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only cleanup; no source comparison, source wellness guide, lender,
+  city, or category records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 118: Comparison Risk-Copy Grammar Normalization
 
 Date: 2026-05-27
