@@ -6,7 +6,7 @@ import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 function softenBlogTeaserCopy(text: string): string {
   return softenEducationalTeaserCopy(text)
     .replace(/\bBad Credit Personal Loans advertised approval claims: context to verify\b/gi, 'Bad Credit Personal Loans: advertised approval context')
-    .replace(/\b"advertised approval claims" Credit Cards & Loans: context to verify\b/gi, 'Credit Cards & Loans: advertised approval context')
+    .replace(/"advertised approval claims" Credit Cards & Loans: context to verify/gi, 'Credit Cards & Loans: advertised approval context')
     .replace(/\badvertised approval claims: Truth vs\. Marketing\b/gi, 'advertised approval claims: context to verify')
     .replace(/\badvertised approval claims" Credit Cards & Loans: What It Really Means\b/gi, 'advertised approval claims" Credit Cards & Loans: context to verify')
     .replace(/\bGetting Approved\b/gi, 'Eligibility Context')
@@ -27,6 +27,7 @@ function softenBlogTeaserCopy(text: string): string {
     .replace(/\bbuild financial security\b/gi, 'support financial planning')
     .replace(/\bResponsible lenders generally do not advertise certain approval\b/gi, 'Responsible lenders generally review eligibility before offering credit')
     .replace(/\bDiscover the reality behind\b/gi, 'Review the context behind')
+    .replace(/"advertised approval claims" Credit Cards & Loans: context to verify/gi, 'Credit Cards & Loans: advertised approval context')
     .replace(/Bad Credit Personal Loans advertised approval claims: context to verify/gi, 'Bad Credit Personal Loans: advertised approval context');
 }
 
