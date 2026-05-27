@@ -862,6 +862,60 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 132: Comparison Overclaim Residue Cleanup
+
+Date: 2026-05-27
+Implementation commit: `5874a3aa45` (`fix: soften comparison overclaim residue`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added display-time softening for remaining comparison overclaim and loaded
+  wording in summaries, meta descriptions, JSON-LD, FAQs, and research notes.
+- Cleaned phrases including `devastating payday loan APRs`, `traps borrowers in
+  high-cost repeat-borrowing cycles`, `creates repeat-borrowing cycles`,
+  `saving borrowers hundreds of dollars`, `signaling serious customer
+  dissatisfaction`, `need lower interest rates to make real progress`,
+  `affordable short-term funds`, and `higher high-cost lending risk context`.
+- Cleaned awkward second-order comparison conclusions including `lower in
+  listed-cost context and with more risk context` and `profile with more context
+  for long-term financial-health context`.
+- No raw lender, city, category, comparison, or education records changed.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered residue scan across `dist/compare` returned zero matches
+  for the Batch 132 raw phrases.
+- Positive rendered checks confirmed replacement language including `very high
+  payday-loan APRs`, `repeat-borrowing risk to review`, `showing materially
+  different listed-cost context`, `adding review-context risk to verify`, `are
+  comparing lower-interest repayment options`, `lower-listed-cost short-term
+  funds`, `higher lending-cost risk context`, and long-term financial-health
+  context to review.
+- Local static checks returned HTTP 200 for `/`,
+  `/compare/brigit-vs-ace-cash-express/`,
+  `/compare/brigit-vs-advance-america-claymont/`,
+  `/compare/incharge-debt-solutions-vs-detroit-wealth-club/`,
+  `/compare/incharge-debt-solutions-vs-clarifi/`,
+  `/compare/ecreditadvisor-vs-sky-blue-credit/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`,
+  `/compare/brigit-vs-ace-cash-express/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-template cleanup; no source data files were changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 131: Second-Order Render Residue Cleanup
 
 Date: 2026-05-27
