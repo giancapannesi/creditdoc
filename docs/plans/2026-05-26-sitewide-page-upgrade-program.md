@@ -3241,6 +3241,60 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 113: Resource and Research Residual Copy Softening
+
+Date: 2026-05-27
+Implementation commit: `c54dcdcf58` (`fix: soften resource research residual copy`)
+
+Scope:
+
+- `src/components/LetterTemplatePage.astro`
+- `src/pages/resources/debt-credit-letter-templates/index.astro`
+- `src/pages/research/most-responsive-consumer-finance-providers-2026.astro`
+
+What changed:
+
+- Extended the letter-template renderer so the educational safe-copy helper also
+  covers hero H1 text, hero intro text, `Designed for` list items, where-to-send
+  card copy, official-source descriptions, related template cards, related
+  answer cards, more-guide cards, and tool CTA copy.
+- Softened the debt/credit letter templates index copy from guarantee framing
+  to certain-outcome framing.
+- Softened the pay-for-delete template card language from `never guaranteed` to
+  `removal may not happen`.
+- Reframed the responsive-provider research disclaimer from `best, cheapest,
+  safest` language to `universally preferable, lower-cost, lower-risk`
+  language.
+- Preserved source template data, pay-for-delete route behavior, research data,
+  table rows, methodology links, internal graph links, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- Valid `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan returned no matches on the affected template index,
+  pay-for-delete template, and responsive-provider report for `guaranteed
+  deletion`, `not guaranteed`, `never guaranteed`, `do not guarantee`,
+  `guarantee a collector`, `best, cheapest`, `cheapest, safest`, or `safest`.
+- Broader rendered scan over `dist/resources`, `dist/tools`, `dist/research`,
+  `dist/categories`, and `dist/answers` returned no matches for the residual
+  phrase set.
+- Production spot checks returned HTTP 200 for `/`,
+  `/resources/debt-credit-letter-templates/`,
+  `/resources/debt-credit-letter-templates/pay-for-delete-letter/`,
+  `/research/most-responsive-consumer-finance-providers-2026/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render/source copy cleanup only; no comparison, wellness, lender, city, or
+  generated provider data was edited.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 109: Comparison Overclaim Copy Softening
 
 Date: 2026-05-27
