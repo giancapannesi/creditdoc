@@ -125,8 +125,8 @@ const jsonLd = [
     <div class="mx-auto grid max-w-5xl gap-8 px-4 py-12 md:grid-cols-[1.4fr_0.8fr] md:items-center">
       <div>
         <span class="inline-flex rounded-full bg-primary-light px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">Free public resource</span>
-        <h1 class="mt-5 text-3xl font-bold leading-tight text-text sm:text-5xl">{page.h1}</h1>
-        <p class="mt-5 text-lg leading-relaxed text-muted">{page.intro}</p>
+        <h1 class="mt-5 text-3xl font-bold leading-tight text-text sm:text-5xl">{softenEducationalTeaserCopy(page.h1)}</h1>
+        <p class="mt-5 text-lg leading-relaxed text-muted">{softenEducationalTeaserCopy(page.intro)}</p>
         <div class="mt-6 flex flex-wrap gap-3">
           <a href="#template" class="inline-flex min-h-[44px] items-center rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white hover:bg-primary-hover">
             View letter template
@@ -139,7 +139,7 @@ const jsonLd = [
       <aside class="rounded-xl border border-primary/20 bg-primary-light/30 p-6">
         <h2 class="text-base font-bold text-text">Designed for</h2>
         <ul class="mt-4 space-y-3 text-sm leading-relaxed text-muted">
-          {page.designedFor.map((item) => <li>{item}</li>)}
+          {page.designedFor.map((item) => <li>{softenEducationalTeaserCopy(item)}</li>)}
         </ul>
       </aside>
     </div>
@@ -246,8 +246,8 @@ const jsonLd = [
         <div class="mt-6 grid gap-4 sm:grid-cols-2">
           {page.whereToSend.map((item) => (
             <a href={item.href} class="rounded-xl border border-border bg-white p-5 hover:border-primary hover:shadow-sm">
-              <h3 class="font-semibold text-text">{item.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
+              <h3 class="font-semibold text-text">{softenEducationalTeaserCopy(item.title)}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{softenEducationalTeaserCopy(item.text)}</p>
             </a>
           ))}
         </div>
@@ -259,7 +259,7 @@ const jsonLd = [
           <ul class="space-y-4 text-sm leading-relaxed text-muted">
             {page.officialSources.map((source) => (
               <li>
-                <a class="font-medium text-primary hover:underline" href={source.href} rel="noopener noreferrer">{source.name}</a>: {source.text}
+                <a class="font-medium text-primary hover:underline" href={source.href} rel="noopener noreferrer">{source.name}</a>: {softenEducationalTeaserCopy(source.text)}
               </li>
             ))}
           </ul>
@@ -271,8 +271,8 @@ const jsonLd = [
         <div class="mt-6 grid gap-4 sm:grid-cols-2">
           {page.relatedTemplates.map((item) => (
             <a href={item.href} class="rounded-xl border border-border bg-white p-5 hover:border-primary hover:shadow-sm">
-              <h3 class="font-semibold text-text">{item.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
+              <h3 class="font-semibold text-text">{softenEducationalTeaserCopy(item.title)}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{softenEducationalTeaserCopy(item.text)}</p>
               <span class="mt-4 inline-flex text-sm font-semibold text-primary">Open template</span>
             </a>
           ))}
@@ -284,8 +284,8 @@ const jsonLd = [
         <div class="mt-6 grid gap-4 sm:grid-cols-2">
           {page.relatedAnswers.map((item) => (
             <a href={item.href} class="rounded-xl border border-border bg-white p-5 hover:border-primary hover:shadow-sm">
-              <h3 class="font-semibold text-text">{item.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
+              <h3 class="font-semibold text-text">{softenEducationalTeaserCopy(item.title)}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{softenEducationalTeaserCopy(item.text)}</p>
               <span class="mt-4 inline-flex text-sm font-semibold text-primary">Read answer</span>
             </a>
           ))}
@@ -297,8 +297,8 @@ const jsonLd = [
         <div class="mt-6 grid gap-4 sm:grid-cols-2">
           {page.moreGuides.map((item) => (
             <a href={item.href} class="rounded-xl border border-border bg-white p-5 hover:border-primary hover:shadow-sm">
-              <h3 class="font-semibold text-text">{item.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
+              <h3 class="font-semibold text-text">{softenEducationalTeaserCopy(item.title)}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{softenEducationalTeaserCopy(item.text)}</p>
               <span class="mt-4 inline-flex text-sm font-semibold text-primary">Read guide</span>
             </a>
           ))}
@@ -307,8 +307,8 @@ const jsonLd = [
 
       {page.toolCta && (
         <section class="rounded-xl border border-primary/20 bg-primary-light/30 p-6">
-          <h2 class="text-xl font-bold text-text">{page.toolCta.title}</h2>
-          <p class="mt-2 text-sm leading-relaxed text-muted">{page.toolCta.text}</p>
+          <h2 class="text-xl font-bold text-text">{softenEducationalTeaserCopy(page.toolCta.title)}</h2>
+          <p class="mt-2 text-sm leading-relaxed text-muted">{softenEducationalTeaserCopy(page.toolCta.text)}</p>
           <a href={page.toolCta.href} class="mt-5 inline-flex min-h-[44px] items-center rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white hover:bg-primary-hover">
             Open tool
           </a>
