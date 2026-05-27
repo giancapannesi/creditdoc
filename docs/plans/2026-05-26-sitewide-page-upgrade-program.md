@@ -669,6 +669,53 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 122: Emergency-Cash Comparison Residue Normalization
+
+Date: 2026-05-27
+Implementation commit: `a835d70ba2` (`fix: normalize emergency-cash comparison residue`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared render-time cleanup for emergency-cash comparison pages where
+  previous safe-copy passes left hard cost/risk phrasing and awkward listed
+  context wording.
+- Normalized phrases including `extremely expensive`, `unless no alternatives
+  exist`, `notable avoided unless`, `makes it with more listed context`,
+  `significantly more expensive and predatory`, and `and predatory`.
+- Reframed those phrases into high listed borrowing cost, available-alternative,
+  listed-context, and high-cost lending risk wording.
+- Preserved source comparison records, lender records, pricing values, ratings,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Focused rendered `dist/compare` scan returned zero matches for the targeted
+  Batch 122 phrase set.
+- Targeted rendered checks confirmed replacement language on
+  `/compare/brigit-vs-advance-america-oklahoma-city/` in JSON-LD, summary,
+  research note, and FAQ body.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/brigit-vs-advance-america-oklahoma-city/`,
+  `/compare/ace-cash-express-terrytown-vs-ace-cash-express-miami-fl/`,
+  `/compare/brigit-vs-advance-america-montebello/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 118: Comparison Risk-Copy Grammar Normalization
 
 Date: 2026-05-27

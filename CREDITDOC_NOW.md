@@ -2608,3 +2608,40 @@ Verification:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_121_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 122
+
+Batch 122 implementation committed as `a835d70ba2` for emergency-cash
+comparison residue normalization:
+
+- `src/utils/safe-copy.ts`
+
+Changes:
+
+- Added render-time cleanup for comparison pages where previous safe-copy
+  passes left hard emergency-cash cost/risk wording and awkward listed-context
+  residue.
+- Normalized `extremely expensive`, `unless no alternatives exist`, `notable
+  avoided unless`, `makes it with more listed context`, `significantly more
+  expensive and predatory`, and `and predatory`.
+- Preserved source comparison and lender data.
+
+Verification:
+
+- `npm run build` passed with 18,413 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered `dist/compare` scan returned zero matches for the Batch
+  122 phrase set.
+- Targeted rendered checks confirmed replacement language on
+  `/compare/brigit-vs-advance-america-oklahoma-city/`.
+- Live spot checks returned HTTP 200 for `/`,
+  `/compare/brigit-vs-advance-america-oklahoma-city/`,
+  `/compare/ace-cash-express-terrytown-vs-ace-cash-express-miami-fl/`,
+  `/compare/brigit-vs-advance-america-montebello/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_122_notes_2026-05-27.md`
