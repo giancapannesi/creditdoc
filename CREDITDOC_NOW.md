@@ -10,7 +10,7 @@
 
 ## 2026-05-27 — Noindex Cleanup Batch 010
 
-**Status: local build and reference verification passed; deploy pending.**
+**Status: committed, deployed, cache-purged, and live-verified.**
 
 Archived 25 obvious low-quality noindex rows from the dump queue:
 
@@ -35,7 +35,14 @@ Archived 25 obvious low-quality noindex rows from the dump queue:
 - `npm run build` passed with 18,415 SSR route URLs and sitemap/robots checks.
 - Exact generated reference scan found zero `/review/<slug>/` references for
   the 25 touched pages.
-- Unrelated generated files were preserved separately before verification:
+- Deployed to Cloudflare Workers version
+  `7a8b4f71-42e7-455d-8a5b-17e8443faca9`.
+- Live verification after deploy: all 25 touched `/review/<slug>/` URLs return
+  404, live sitemap has 0 references to them, and smoke checks for `/`,
+  `/city/`, `/sitemap-index.xml`, `/review/lexington-law/`, and
+  `/credit-guide/austin-tx/` return 200 without `noindex`.
+- Unrelated generated files were preserved separately before verification and
+  must remain outside noindex cleanup deploy scope unless explicitly reviewed:
   `src/content/comparisons.json` and `src/content/wellness-guides.json`.
 
 Created the operating plan for the bottom-up local authority strategy:
