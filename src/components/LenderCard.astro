@@ -37,7 +37,10 @@ function softenProviderCardCopy(text: string): string {
     .replace(/\bshort-term short-term funds\b/gi, 'short-term funds')
     .replace(/\bshort-term cash access shortfalls\b/gi, 'short-term cash shortfalls')
     .replace(/\bwith high-cost lending risk context lending\b/gi, 'with high-cost lending risk context')
-    .replace(/\brisk context lending\b/gi, 'risk context');
+    .replace(/\brisk context lending\b/gi, 'risk context')
+    .replace(/\bmore listed-cost\b/gi, 'more cost-relevant')
+    .replace(/\bno fee unless you have more listed context\b/gi, 'no fee unless there is a recovery')
+    .replace(/\bwith with published refund terms consultations\b/gi, 'with published consultation terms');
 }
 ---
 
