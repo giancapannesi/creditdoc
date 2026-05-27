@@ -3093,6 +3093,54 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 107: City Credit-Score Claim Softening
+
+Date: 2026-05-27
+Implementation commit: `550407f7a4` (`fix: soften city credit-score claims`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added targeted safe-copy replacements for city and browse provider-card copy
+  that framed credit repair as direct credit-score improvement.
+- Reframed `remove negative accounts and improve credit scores`, `remove
+  negative items and improve credit scores`, `help clients improve credit
+  scores`, `works to improve credit scores`, and `raise credit scores quickly`
+  language as dispute/context/claim-to-verify language.
+- Added grammar cleanup for rendered profile-signal phrases produced by the
+  broad `to improve credit scores` replacement.
+- Preserved provider names, source lender records, category assignments, route
+  slugs, cards, maps, tables, city pages, and browse-page layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/city` and `dist/browse` scan returned no matches for targeted
+  old phrases or grammar artifacts: `remove negative accounts`,
+  `raise credit scores quickly`, `help clients improve credit scores`,
+  `works to improve credit scores`, `and improve credit scores`,
+  `to improve credit scores`, `seeking for credit-score`, or
+  `structured plan for credit-score`.
+- Production spot checks returned HTTP 200 for `/`, `/city/philadelphia-pa/`,
+  `/browse/credit-repair/philadelphia-pa/`,
+  `/browse/credit-repair/new-york-ny/`, `/city/tempe-az/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only city/browse safe-copy cleanup; no source lender records changed.
+- Provider names containing phrases such as `Fix Your Credit` were preserved in
+  this batch to avoid corrupting entity names.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 106: Self Eligibility Profile-Note Softening
 
 Date: 2026-05-27
