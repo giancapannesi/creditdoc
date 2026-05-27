@@ -47,7 +47,7 @@ Archived 25 obvious low-quality noindex rows from the dump queue:
 
 ## 2026-05-27 — Noindex Cleanup Batch 011
 
-**Status: committed locally after DB/build/reference verification; deploy pending.**
+**Status: committed, deployed, cache-purged, and live-verified.**
 
 Archived 30 explicit non-financial quarantine rows from the noindex queue:
 
@@ -76,6 +76,12 @@ Archived 30 explicit non-financial quarantine rows from the noindex queue:
 - `git diff --check` passed.
 - Rebuilt `dist` reference scan found zero `/review/<slug>/` references for
   the 30 touched pages.
+- Deployed to Cloudflare Workers version
+  `422e3851-ade5-4e99-9fa1-3909088436a3`.
+- Live verification after deploy: all 30 touched `/review/<slug>/` URLs return
+  404, live sitemap has 0 references to them, and smoke checks for `/`,
+  `/city/`, `/sitemap-index.xml`, `/review/lexington-law/`, and
+  `/credit-guide/austin-tx/` return 200 without `noindex`.
 
 Created the operating plan for the bottom-up local authority strategy:
 
