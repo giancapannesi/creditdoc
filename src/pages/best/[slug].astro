@@ -47,9 +47,43 @@ const listicle = {
   faq: (lb.faq ?? []) as Array<{ q: string; a: string }>,
 };
 
+function softenListicleCopy(text: string): string {
+  return softenYmylCopy(text)
+    .replace(/\bexpert analysis\b/gi, 'editorial comparison')
+    .replace(/\bexpert reviews\b/gi, 'editorial reviews')
+    .replace(/\breal results\b/gi, 'stored result context')
+    .replace(/\btop pick\b/gi, 'notable profile')
+    .replace(/\btop picks\b/gi, 'notable profiles')
+    .replace(/\bhighest approval rate\b/gi, 'highest stored approval-context claim')
+    .replace(/\bapproval rate\b/gi, 'approval-context claim')
+    .replace(/\bapproval speed\b/gi, 'approval-timing context')
+    .replace(/\bsettlement success rates\b/gi, 'settlement-outcome context')
+    .replace(/\bsuccess rates\b/gi, 'outcome context')
+    .replace(/\bthe best rates\b/gi, 'lower listed rates')
+    .replace(/\bbest rates\b/gi, 'lower listed rates')
+    .replace(/\bbest option\b/gi, 'option to compare')
+    .replace(/\bbest options\b/gi, 'options to compare')
+    .replace(/\bbest choice\b/gi, 'profile to compare')
+    .replace(/\bbest combination\b/gi, 'listed combination')
+    .replace(/\bbest for\b/gi, 'profile signals for')
+    .replace(/\bbest if\b/gi, 'profiled if')
+    .replace(/\bcheapest personal loans\b/gi, 'lower-cost personal loan profiles')
+    .replace(/\bcheapest personal loan\b/gi, 'lower-cost personal loan profile')
+    .replace(/\bcheapest\b/gi, 'lower-cost')
+    .replace(/\blowest APR\b/gi, 'lower listed APR')
+    .replace(/\blowest interest rates\b/gi, 'lower listed interest rates')
+    .replace(/\bTop 10 SBA lender\b/gi, 'listed SBA lending-volume context')
+    .replace(/\btop SBA\b/gi, 'notable SBA')
+    .replace(/\btop-rated\b/gi, 'profiled')
+    .replace(/\bTop-rated\b/g, 'Profiled');
+}
+
 function softenListicleTitle(title: string): string {
-  return softenYmylCopy(title)
+  return softenListicleCopy(title)
+    .replace(/^(\d+\s+)Best\b/i, '$1Compare')
     .replace(/^Best\b/i, 'Compare')
+    .replace(/\bBest\b/g, 'Compare')
+    .replace(/\bbest\b/g, 'compare')
     .replace(/^Cheapest\b/i, 'Lower-Cost')
     .replace(/\bTop\b/g, 'Notable')
     .replace(/\btop\b/g, 'notable')
@@ -64,14 +98,14 @@ const displayListicle = {
   ...listicle,
   title: softenListicleTitle(listicle.title),
   seo_title: softenListicleTitle(listicle.seo_title),
-  description: softenYmylCopy(listicle.description),
-  seo_description: softenYmylCopy(listicle.seo_description),
-  intro: softenYmylCopy(listicle.intro),
-  tldr: listicle.tldr ? softenYmylCopy(listicle.tldr) : undefined,
-  key_takeaways: listicle.key_takeaways.map((takeaway) => softenYmylCopy(takeaway)),
+  description: softenListicleCopy(listicle.description),
+  seo_description: softenListicleCopy(listicle.seo_description),
+  intro: softenListicleCopy(listicle.intro),
+  tldr: listicle.tldr ? softenListicleCopy(listicle.tldr) : undefined,
+  key_takeaways: listicle.key_takeaways.map((takeaway) => softenListicleCopy(takeaway)),
   faq: listicle.faq.map((item) => ({
-    q: softenYmylCopy(item.q),
-    a: softenYmylCopy(item.a),
+    q: softenListicleCopy(item.q),
+    a: softenListicleCopy(item.a),
   })),
 };
 
@@ -152,10 +186,10 @@ const faqSchemaItems = (listicle.faq || [])
   .filter((item: { q?: string; a?: string }) => item.q?.trim() && item.a?.trim())
   .map((item: { q: string; a: string }) => ({
     '@type': 'Question',
-    name: softenYmylCopy(item.q.trim()),
+    name: softenListicleCopy(item.q.trim()),
     acceptedAnswer: {
       '@type': 'Answer',
-      text: softenYmylCopy(item.a.trim()),
+      text: softenListicleCopy(item.a.trim()),
     },
   }));
 if (faqSchemaItems.length > 0) {
@@ -292,7 +326,7 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/>
                       </svg>
-                      No Credit Check
+                      No-credit-check claim
                     </span>
                   )}
                   {lender.subcategories?.includes('cashback-rewards') && (
