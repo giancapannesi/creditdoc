@@ -51,6 +51,19 @@ function softenProviderCardCopy(text: string): string {
     .replace(/\bwith no-credit-check claim to verify\b/gi, 'with no-credit-check claims to verify')
     .replace(/\bflexible approval for borrowers with no credit history\b/gi, 'eligibility claims to verify for borrowers with limited credit history')
     .replace(/\bno-credit-check claim to verify loans\b/gi, 'no-credit-check loan claims to verify')
+    .replace(/\bno-credit-check claims to verify\b/gi, 'eligibility claims to verify')
+    .replace(/\bno-credit-check claim to verify\b/gi, 'eligibility claim to verify')
+    .replace(/\bminimal credit requirements\b/gi, 'eligibility requirements to verify')
+    .replace(/\bflexible approval criteria\b/gi, 'eligibility criteria to verify')
+    .replace(/\bsame-day cash claims to verify\b/gi, 'cash-timing claims to verify')
+    .replace(/\bfast, confidential collateral-based loans\b/gi, 'collateral-based loan profile details')
+    .replace(/\bfast personal loans\b/gi, 'personal-loan profile details')
+    .replace(/\bfunding-timing claims to verify and eligibility claim to verify\b/gi, 'funding-timing and eligibility claims to verify')
+    .replace(/\bclaiming ([0-9]+)% success rates\b/gi, 'listing provider-stated $1% success-rate claims to verify')
+    .replace(/\bbudget-conscious consumers\b/gi, 'consumers comparing listed cost')
+    .replace(/\bestablished ([0-9]+)-year track record\b/gi, 'provider-stated $1-year operating-history context')
+    .replace(/\bestablished track record\b/gi, 'provider-stated operating-history context')
+    .replace(/\bseeking credit improvement\b/gi, 'reviewing credit-improvement claims')
     .replace(/\bcredit score improvement\b/gi, 'credit-score context to review');
 }
 ---
