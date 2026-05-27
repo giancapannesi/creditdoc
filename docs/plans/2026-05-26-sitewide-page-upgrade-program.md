@@ -3398,6 +3398,60 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 116: Comparison Overclaim Residue Softening
+
+Date: 2026-05-27
+Implementation commit: `da4bb8e4a1` (`fix: soften comparison overclaim residue`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared render-time safe-copy coverage for remaining comparison
+  overclaim residue including `superior`, `exceptional`, `vastly outweighs`,
+  `proven credibility`, `proven client history`, `stronger option`, `zero
+  interest`, `zero upfront`, and `no upfront costs`.
+- Reframed residual comparative language into listed-feature,
+  stored-review-signal, documented-history, or no-listed-upfront-cost language.
+- Preserved source comparison records, lender records, route slugs, JSON-LD
+  routing, comparison tables, diagnosis cards, city pages, category pages, and
+  sitemap generation.
+
+Verification:
+
+- `git diff --check` passed.
+- Valid `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Focused rendered `dist/compare` scan returned zero matches for `stronger
+  choice`, `stronger option`, `superior`, `overwhelming social proof`, `proven
+  credibility`, `proven client history`, `verified customer reviews`,
+  `exceptional`, `vastly outweighs`, `zero interest`, `zero upfront`, `no
+  upfront costs`, or `cannot match`.
+- Targeted rendered checks returned zero matches on representative affected
+  pages including `/compare/tang-associates-law-office-vs-lakeview-law-group/`,
+  `/compare/cambridge-credit-counseling-vs-incharge-debt-solutions/`,
+  `/compare/national-debt-relief-vs-new-era-debt-solutions/`,
+  `/compare/american-consumer-credit-counseling-vs-clarifi/`,
+  `/compare/transunion-vs-experian/`, and
+  `/compare/credit-supreme-credit-repair-miami-fix-credit-fast-miami-fl-vs-the-credit-people/`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/tang-associates-law-office-vs-lakeview-law-group/`,
+  `/compare/cambridge-credit-counseling-vs-incharge-debt-solutions/`,
+  `/compare/national-debt-relief-vs-new-era-debt-solutions/`,
+  `/compare/transunion-vs-experian/`, `/credit-guide/amarillo-tx/`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-layer cleanup only; no source comparison, lender, city, category,
+  wellness, or generated provider data was edited.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 109: Comparison Overclaim Copy Softening
 
 Date: 2026-05-27
