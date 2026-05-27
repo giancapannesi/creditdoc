@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { softenEducationalTeaserCopy } from '../utils/safe-copy';
 
 type LinkCard = {
   title: string;
@@ -64,8 +65,8 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: page.h1,
-    description: page.description,
+    headline: softenEducationalTeaserCopy(page.h1),
+    description: softenEducationalTeaserCopy(page.description),
     url: page.canonical,
     datePublished: page.published,
     dateModified: page.modified,
@@ -149,7 +150,7 @@ const jsonLd = [
       <section class="rounded-xl border border-primary/20 bg-primary-light/30 p-6">
         <h2 class="text-xl font-bold text-text">Use This Template With Broader Context</h2>
         <p class="mt-2 text-sm leading-relaxed text-muted">
-          This template is an educational documentation aid, not legal advice, debt settlement advice, credit repair advice, or a guaranteed outcome. Review official sources, related answers, relevant categories, and complaint-data context before sending documents or contacting a company.
+          This template is an educational documentation aid, not legal advice, debt settlement advice, credit repair advice, or a certain outcome. Review official sources, related answers, relevant categories, and complaint-data context before sending documents or contacting a company.
         </p>
         <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <a href="/resources/credit-report-checklist/" class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">Credit report checklist</a>
@@ -163,7 +164,7 @@ const jsonLd = [
         <h2 class="text-2xl font-bold text-text">Before you use this template</h2>
         <div class="mt-5 rounded-xl border border-border bg-white p-6 text-sm leading-relaxed text-muted">
           <p>
-            This page is educational and does not provide legal, tax, credit repair, or debt settlement advice. A letter can help you document a request, but it cannot guarantee that a collector, creditor, credit bureau, or court will agree with you.
+            This page is educational and does not provide legal, tax, credit repair, or debt settlement advice. A letter can help you document a request, but it cannot create a certain outcome with a collector, creditor, credit bureau, or court.
           </p>
           <p class="mt-4">
             If you are facing a lawsuit, wage garnishment, identity theft, tax consequences, or a state-law deadline, consider contacting a qualified consumer attorney, nonprofit credit counselor, state consumer agency, or the Consumer Financial Protection Bureau before sending anything.
@@ -179,7 +180,7 @@ const jsonLd = [
               {page.whenToUse.map((item) => (
                 <li class="flex gap-3">
                   <span class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-primary"></span>
-                  <span>{item}</span>
+                  <span>{softenEducationalTeaserCopy(item)}</span>
                 </li>
               ))}
             </ul>
@@ -190,7 +191,7 @@ const jsonLd = [
               {page.whenNotToUse.map((item) => (
                 <li class="flex gap-3">
                   <span class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-warning"></span>
-                  <span>{item}</span>
+                  <span>{softenEducationalTeaserCopy(item)}</span>
                 </li>
               ))}
             </ul>
@@ -205,7 +206,7 @@ const jsonLd = [
             <li class="rounded-xl border border-border bg-white p-5">
               <div class="flex gap-4">
                 <span class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">{index + 1}</span>
-                <p class="text-sm leading-relaxed text-muted">{item}</p>
+                <p class="text-sm leading-relaxed text-muted">{softenEducationalTeaserCopy(item)}</p>
               </div>
             </li>
           ))}
@@ -217,7 +218,7 @@ const jsonLd = [
         <div class="mt-6 rounded-xl border border-border bg-white p-6">
           <div class="rounded-lg border border-border bg-bg-alt p-5 font-mono text-sm leading-relaxed text-text">
             {page.templateBody.map((line) => (
-              line === '' ? <br /> : <p class="mb-3 whitespace-pre-wrap last:mb-0">{line}</p>
+              line === '' ? <br /> : <p class="mb-3 whitespace-pre-wrap last:mb-0">{softenEducationalTeaserCopy(line)}</p>
             ))}
           </div>
           <p class="mt-4 text-xs leading-relaxed text-muted">
@@ -233,7 +234,7 @@ const jsonLd = [
             {page.checklist.map((item) => (
               <li class="flex gap-3 text-sm leading-relaxed text-muted">
                 <span class="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded border border-border bg-bg-alt"></span>
-                <span>{item}</span>
+                <span>{softenEducationalTeaserCopy(item)}</span>
               </li>
             ))}
           </ul>

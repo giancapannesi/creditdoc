@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import courseData from '../../../content/course-credit-fundamentals.json';
+import { softenEducationalTeaserCopy } from '../../../utils/safe-copy';
 
 const title = "Credit Fundamentals — Free Financial Literacy Course | CreditDoc";
 const description = "Free 8-module course: credit scores, reports, debt management, credit repair, loans, scam avoidance, and your legal rights. Self-paced, ~2 hours. No payment or account application required.";
@@ -152,7 +153,7 @@ const contextLinks = [
 
     <!-- What You'll Learn -->
     <div class="mb-14">
-      <h2 class="text-2xl font-bold text-text mb-6">What You'll Walk Away With</h2>
+      <h2 class="text-2xl font-bold text-text mb-6">What This Course Covers</h2>
       <div class="grid sm:grid-cols-2 gap-4">
         <div class="flex items-start gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
@@ -253,8 +254,8 @@ const contextLinks = [
               {mod.number}
             </div>
             <div class="flex-1 min-w-0">
-              <h3 class="font-semibold text-text group-hover:text-primary transition-colors">{mod.title}</h3>
-              <p class="text-sm text-muted mt-1 line-clamp-1">{mod.description}</p>
+              <h3 class="font-semibold text-text group-hover:text-primary transition-colors">{softenEducationalTeaserCopy(mod.title)}</h3>
+              <p class="text-sm text-muted mt-1 line-clamp-1">{softenEducationalTeaserCopy(mod.description)}</p>
             </div>
             <div class="shrink-0 hidden sm:flex items-center gap-4 text-xs text-muted">
               <span>{mod.lessons} lessons</span>
