@@ -2766,3 +2766,40 @@ Verification:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_125_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 126
+
+Batch 126 implementation committed as `1b83026a91` for emergency-cash
+comparison claim softening:
+
+- `src/pages/compare/[slug].astro`
+
+Changes:
+
+- Added comparison-only render-time cleanup for emergency-cash claim language.
+- Reframed `predatory` comparison phrases to high-cost/risk-context wording on
+  comparison pages.
+- Replaced broad `for most borrowers` wording with stored-profile comparison
+  framing.
+- Preserved educational content, source comparison data, lender data, pricing,
+  ratings, slugs, table/schema layout, city pages, and category pages.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed with 18,413 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan across `dist/compare` returned zero matches for the
+  targeted hard/broad phrases.
+- Positive rendered checks confirmed softer language on representative
+  emergency-cash comparison pages.
+- Live spot checks returned HTTP 200 for `/`,
+  `/compare/brigit-vs-ace-cash-express-terrytown/`,
+  `/compare/ace-cash-express-new-orleans-la-vs-amscot-the-money-superstore-orlando/`,
+  `/compare/brigit-vs-advance-america-montebello/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_126_notes_2026-05-27.md`

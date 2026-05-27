@@ -813,6 +813,53 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 126: Emergency-Cash Comparison Claim Softening
+
+Date: 2026-05-27
+Implementation commit: `1b83026a91` (`fix: soften emergency-cash comparison claims`)
+
+Scope:
+
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added comparison-only render-time cleanup for emergency-cash claim language.
+- Reframed `predatory` comparison phrases to high-cost/risk-context wording on
+  comparison pages.
+- Replaced broad `for most borrowers` wording with stored-profile comparison
+  framing.
+- Preserved educational content, source comparison data, lender data, pricing,
+  ratings, slugs, table/schema layout, city pages, and category pages.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for targeted raw phrases:
+  `predatory`, `for most borrowers`, `debt-trap`, `debt trap`, `safest`,
+  `safer choice`, `best choice`, `best option`, `we recommend`, or
+  `should choose`.
+- Targeted rendered checks confirmed replacement language including
+  `high-cost loan-rate context`, `For borrowers comparing these stored profile
+  fields`, `high-cost payday-loan structure`, and `high-cost short-term lending
+  model`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/brigit-vs-ace-cash-express-terrytown/`,
+  `/compare/ace-cash-express-new-orleans-la-vs-amscot-the-money-superstore-orlando/`,
+  `/compare/brigit-vs-advance-america-montebello/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-template cleanup; no source comparison, education, lender, city, or
+  category records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 124: Comparison Context Grammar Normalization
 
 Date: 2026-05-27
