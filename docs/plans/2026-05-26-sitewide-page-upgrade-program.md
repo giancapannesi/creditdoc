@@ -3093,6 +3093,57 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 106: Self Eligibility Profile-Note Softening
+
+Date: 2026-05-27
+Implementation commit: `352b4426d4` (`fix: soften Self eligibility profile notes`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added targeted safe-copy replacements for broad Self profile-note language
+  rendered on comparison pages.
+- Reframed `People with no credit who need to build history from scratch` as
+  `People with no credit comparing ways to build history from scratch`.
+- Reframed `Anyone who wants to save money while building credit
+  simultaneously` as `Consumers comparing savings-linked credit-building
+  features`.
+- Reframed `No credit check — anyone can apply` and `anyone can apply` as
+  eligibility claims to verify against provider criteria.
+- Preserved source lender records, comparison records, route slugs, pricing
+  fields, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/compare` scan returned no matches for targeted old phrases:
+  `Anyone who wants to save money`, `anyone can apply`,
+  `People with no credit who need to build history`, `save money while building
+  credit simultaneously`, or `No credit check — anyone can apply`.
+- Rendered checks confirmed replacement text on
+  `/compare/self-credit-builder-vs-chime/`,
+  `/compare/self-credit-builder-vs-discover-it-secured/`, and
+  `/compare/self-credit-builder-vs-gocreditme-lake-western/`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/self-credit-builder-vs-discover-it-secured/`,
+  `/compare/self-credit-builder-vs-gocreditme-lake-western/`,
+  `/compare/self-credit-builder-vs-chime/`, `/robots.txt`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 105: No-Subscription Safe-Copy Cleanup
 
 Date: 2026-05-27
