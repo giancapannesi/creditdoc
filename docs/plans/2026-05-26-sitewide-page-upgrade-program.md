@@ -768,6 +768,52 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 124: Comparison Context Grammar Normalization
+
+Date: 2026-05-27
+Implementation commit: `341d91dda0` (`fix: normalize comparison context grammar`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added final render-time cleanup for comparison grammar created by earlier
+  safe-copy passes.
+- Normalized remaining `risk-context fields` wording to `risk context`.
+- Added final comma cleanup for `more [topic] context with` phrases including
+  cost, value, profile, transparency, and consumer-protection contexts.
+- Normalized `consumer context protection`, `consumer context researching`,
+  `consumer context comparing`, `consumer context compared`, and `consumer
+  context seeking`.
+- Preserved source comparison records, education records, lender records,
+  pricing values, ratings, route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed after a second build with the final-order cleanup.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Focused rendered scan across `dist/compare`, `dist/blog`, `dist/courses`,
+  `dist/learn`, and `dist/financial-wellness` returned zero matches for the
+  targeted Batch 124 phrase set.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/brigit-vs-ace-cash-express/`,
+  `/compare/smartcredit-vs-regal-credit-management/`,
+  `/compare/creditassociates-vs-new-era-debt-solutions/`,
+  `/courses/credit-fundamentals/personal-loans-and-borrowing-smart/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only safe-copy cleanup; no source comparison, education, lender, city,
+  or category records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 118: Comparison Risk-Copy Grammar Normalization
 
 Date: 2026-05-27

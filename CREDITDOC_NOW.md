@@ -2688,3 +2688,41 @@ Verification:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_123_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 124
+
+Batch 124 implementation committed as `341d91dda0` for comparison context
+grammar normalization:
+
+- `src/utils/safe-copy.ts`
+
+Changes:
+
+- Added final render-time cleanup for comparison grammar created by previous
+  safe-copy passes.
+- Normalized remaining `risk-context fields` residue to `risk context`.
+- Cleaned `more [topic] context with` and `more [topic] context proposition`
+  residue after listed-context reductions.
+- Normalized `consumer context protection/researching/comparing/compared/seeking`
+  into readable consumer-protection, consumer-research, and comparison context.
+- Preserved source comparison, education, lender, city, and category data.
+
+Verification:
+
+- `npm run build` passed with 18,413 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan across `dist/compare`, `dist/blog`, `dist/courses`,
+  `dist/learn`, and `dist/financial-wellness` returned zero matches for the
+  Batch 124 phrase set.
+- Live spot checks returned HTTP 200 for `/`,
+  `/compare/brigit-vs-ace-cash-express/`,
+  `/compare/smartcredit-vs-regal-credit-management/`,
+  `/compare/creditassociates-vs-new-era-debt-solutions/`,
+  `/courses/credit-fundamentals/personal-loans-and-borrowing-smart/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_124_notes_2026-05-27.md`
