@@ -3140,6 +3140,54 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 119: Educational Teaser and Comparison Residue Normalization
+
+Date: 2026-05-27
+Implementation commit: `affda69017` (`fix: normalize educational teaser residue`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared render-time cleanup for residual educational teaser and
+  comparison phrases surfaced in rendered `learn`, `financial-wellness`, and
+  comparison output.
+- Normalized awkward/generated phrases including `quick has more listed
+  context`, `lower listed-cost profile`, `profile signals for simple cases`,
+  `actual customer satisfaction`, `actual profile`, `that plague traditional
+  payday lenders`, `proven service quality`, `sustained excellence`,
+  `meaningful improvement`, `top financial priority`, `dangerously easy`, and
+  `most responsible option`.
+- Reframed wording into progress-marker, listed-cost, fit-signal,
+  stored-context, operating-history, overspending-risk, and qualified
+  professional discussion language.
+- Preserved source comparison records, source wellness guide records, route
+  slugs, JSON-LD structure, city pages, category pages, and sitemap generation.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Focused rendered scan across `dist/compare`, `dist/financial-wellness`, and
+  `dist/learn` returned zero matches for the targeted Batch 119 phrase set.
+- Production spot checks returned HTTP 200 for `/`, `/learn/`,
+  `/financial-wellness/`,
+  `/compare/brigit-vs-advance-america-missouri-city/`,
+  `/compare/incharge-debt-solutions-vs-take-charge-america/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only safe-copy cleanup; no source comparison, source wellness guide,
+  lender, city, or category records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 117: Comparison Recommendation Residue Softening
 
 Date: 2026-05-27
