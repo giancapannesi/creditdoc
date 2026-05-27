@@ -3352,3 +3352,45 @@ Notes:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_150_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 151
+
+Batch 151 implementation committed as `49d19238b2` for city-page regulatory
+bullet safe-copy coverage.
+
+Changes:
+
+- Updated the city page "Key Regulations" bullet renderer to pass state-law
+  bullet text through `softenYmylCopy`.
+- Removed remaining city-page regulatory `predatory lending` wording from
+  rendered output while preserving the underlying state-law source records.
+- Preserved city routes, provider cards, category sections, source lender
+  records, and generated inventory.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed with 18,415 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Rendered scan across `dist/city`, `dist/browse`, and `dist/compare` returned
+  zero matches for `predatory lending`, `anti-predatory lending protections`,
+  `protections against predatory lending`, and
+  `consumer protection against predatory lending`.
+- Local static route checks returned HTTP 200 for `/`,
+  `/city/virginia-beach-va/`, `/city/baltimore-md/`,
+  `/city/minneapolis-mn/`, `/city/little-rock-ar/`, and
+  `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for the same routes.
+
+Notes:
+
+- Render-time template cleanup only; no source state-law, comparison, or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged content changes and were not staged or committed in this
+  batch.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_151_notes_2026-05-27.md`

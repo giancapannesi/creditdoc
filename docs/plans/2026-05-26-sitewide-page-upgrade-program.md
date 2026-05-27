@@ -816,6 +816,48 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 151: City Regulation Bullet Safe-Copy Coverage
+
+Date: 2026-05-27
+Implementation commit: `49d19238b2` (`fix: soften city regulation bullets`)
+
+Scope:
+
+- `src/pages/city/[slug].astro`
+
+What changed:
+
+- Updated the city page "Key Regulations" bullet renderer to pass state-law
+  bullet copy through `softenYmylCopy`.
+- Removed remaining rendered city-page regulatory `predatory lending` wording
+  without editing the underlying state-law source data.
+- Preserved city routes, provider cards, category sections, source lender
+  records, source state-law records, and generated inventory.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,415 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered scan across `dist/city`, `dist/browse`, and `dist/compare` returned
+  zero matches for `predatory lending`, `anti-predatory lending protections`,
+  `protections against predatory lending`, and
+  `consumer protection against predatory lending`.
+- Local static route checks returned HTTP 200 for `/`,
+  `/city/virginia-beach-va/`, `/city/baltimore-md/`,
+  `/city/minneapolis-mn/`, `/city/little-rock-ar/`, and
+  `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for the same routes.
+
+Notes:
+
+- Render-time template cleanup only; no source state-law, comparison, or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 148: Education Teaser Residue Cleanup
 
 Date: 2026-05-27
