@@ -8,6 +8,36 @@
 
 **Status: original strategic project resumed after cleanup/deploy detour.**
 
+## 2026-05-27 — Noindex Cleanup Batch 010
+
+**Status: local build and reference verification passed; deploy pending.**
+
+Archived 25 obvious low-quality noindex rows from the dump queue:
+
+- Selection rule: zero GSC impressions/clicks, no website, quality score `0-1`,
+  very short description, one service or fewer, and not a chain/location brand
+  such as Vigo, MoneyGram, ACE, Amscot, Barri, DolEx, Ria/PLS, or Moneytree.
+- Backup:
+  `data/backups/creditdoc_before_noindex_drop_batch_010_20260527T064039Z.sqlite`
+- Workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Noindex_Review_2026-05-26/noindex_drop_batch_010_2026-05-27.csv`
+- Archive record:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Noindex_Review_2026-05-26/noindex_dropped_archive_batch_010_2026-05-27.json`
+- Updated local DB and Supabase through `CreditDocDB.update_lender()`.
+- Used `CreditDocDB.export_lender_to_json(slug)` per explicit slug only; did
+  not use broad `export_changed_lenders()`.
+- DB verification: 25 rows now have
+  `processing_status=archived`,
+  `review_status=archived_low_quality_no_website`,
+  `no_index=true`, and
+  `quarantine_reason=low_quality_no_website_no_gsc`.
+- Supabase retry queue: 0 unresolved lender retry rows for the batch.
+- `npm run build` passed with 18,415 SSR route URLs and sitemap/robots checks.
+- Exact generated reference scan found zero `/review/<slug>/` references for
+  the 25 touched pages.
+- Unrelated generated files were preserved separately before verification:
+  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
+
 Created the operating plan for the bottom-up local authority strategy:
 
 - `docs/plans/2026-05-26-creditdoc-local-authority-graph.md`
