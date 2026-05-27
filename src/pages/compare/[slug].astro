@@ -110,13 +110,17 @@ function monthlyPriceFaqAnswer(): string {
   const bContext = `${lenderB.name}: ${monthlyPriceLabel(lenderB)}`;
   const setupContext = `Setup fees can change first-month cost: ${setupFeeContext(lenderA)}, while ${setupFeeContext(lenderB)}.`;
 
+  if (lenderAMonthlyPrice === null && lenderBMonthlyPrice === null) {
+    return `Neither profile has a stored monthly-price field for this comparison. ${setupContext}`;
+  }
+
   if (lenderAMonthlyPrice === null || lenderBMonthlyPrice === null) {
     return `The stored monthly-price fields are incomplete for this comparison. Current listed context: ${aContext}; ${bContext}. ${setupContext}`;
   }
 
   if (lenderAMonthlyPrice === 0 || lenderBMonthlyPrice === 0) {
     if (lenderAMonthlyPrice === 0 && lenderBMonthlyPrice === 0) {
-      return `Neither profile lists a recurring monthly subscription fee. This does not mean all borrowing, card, usage, interest, or per-transaction costs are free. Current listed context: ${aContext}; ${bContext}. ${setupContext}`;
+      return `Neither profile lists a recurring monthly subscription fee. This does not mean all borrowing, card, usage, interest, or per-transaction costs are free. ${setupContext}`;
     }
 
     return `Only one profile lists a recurring monthly subscription fee. This does not make the other profile cost-free; review borrowing, card, usage, interest, and per-transaction costs before comparing total cost. Current listed context: ${aContext}; ${bContext}. ${setupContext}`;
@@ -131,6 +135,29 @@ function monthlyPriceFaqAnswer(): string {
   }
 
   return `Both ${lenderA.name} and ${lenderB.name} list the same monthly price of ${formatPrice(lenderAMonthlyPrice)}/mo. ${setupContext}`;
+}
+
+function refundTermLabel(lender: Lender): string | null {
+  if (!lender.pricing.money_back_guarantee) return null;
+  const refundDetails = softenComparisonText(lender.pricing.guarantee_details || 'refund term listed').replace(/[.\s]+$/g, '');
+  return `${lender.name} has a listed refund term: ${refundDetails}`;
+}
+
+function refundTermsFaqAnswer(): string {
+  const aRefund = refundTermLabel(lenderA);
+  const bRefund = refundTermLabel(lenderB);
+
+  if (!aRefund && !bRefund) {
+    return 'Neither profile lists a refund term in the stored comparison data.';
+  }
+
+  if (aRefund && bRefund) {
+    return `${aRefund}. ${bRefund}.`;
+  }
+
+  const listedRefund = aRefund || bRefund;
+  const missingRefundLender = aRefund ? lenderB : lenderA;
+  return `${listedRefund}. ${missingRefundLender.name} does not have a listed refund term in this profile.`;
 }
 
 const categoryLabels: Record<string, string> = {
@@ -161,7 +188,7 @@ const faqs = [
   },
   {
     question: `Do ${lenderA.name} and ${lenderB.name} list refund terms?`,
-    answer: `${lenderA.pricing.money_back_guarantee ? `${lenderA.name} has a listed refund term: ${softenComparisonText(lenderA.pricing.guarantee_details || 'refund term listed')}` : `${lenderA.name} does not have a listed refund term in this profile.`} ${lenderB.pricing.money_back_guarantee ? `${lenderB.name} has a listed refund term: ${softenComparisonText(lenderB.pricing.guarantee_details || 'refund term listed')}` : `${lenderB.name} does not have a listed refund term in this profile.`}`,
+    answer: refundTermsFaqAnswer(),
   },
   {
     question: `How should I compare ${lenderA.name} and ${lenderB.name}?`,
