@@ -750,6 +750,7 @@ export function softenYmylCopy(text: string): string {
     .replace(/\bsustainable financial health\b/gi, 'long-term financial-health context')
     .replace(/\bsignificantly less accessible and with trust signals to verify\b/gi, 'with less listed access and fewer trust-signal fields')
     .replace(/\bwith no-hard-pull claim to verify, with no-hard-pull score-impact context to verify\b/gi, 'with no-hard-pull and score-impact claims to verify')
+    .replace(/\badvertised approval claim to verify\b/gi, 'advertised approval claims')
     .replace(/\bdelivers clearer listed-cost context through its\b/gi, 'lists clearer cost context through its')
     .replace(/\bmakes Chime broader access and listed-cost context for\b/gi, 'adds broader access and listed-cost context for')
     .replace(/\boffers stronger listed-cost context\b/gi, 'offers more listed-cost context')
@@ -777,6 +778,7 @@ export function softenYmylCopy(text: string): string {
     .replace(/\bprovider-stated listed refund term\b/g, 'provider-stated refund term')
     .replace(/\blisted refund term terms\b/gi, 'listed refund terms')
     .replace(/\bquick has more listed context\b/gi, 'quick progress markers')
+    .replace(/\bhas more listed context a judgment\b/gi, 'has obtained a judgment')
     .replace(/\blower listed-cost profile\b/gi, 'lower listed-cost path to compare')
     .replace(/\bprofile signals for simple cases\b/gi, 'a fit signal for simple cases')
     .replace(/\bactual customer satisfaction\b/gi, 'stored customer-satisfaction context')
@@ -788,7 +790,10 @@ export function softenYmylCopy(text: string): string {
     .replace(/\bmeaningful improvement\b/gi, 'measurable changes')
     .replace(/\btop financial priority\b/gi, 'important financial priority')
     .replace(/\bdangerously easy\b/gi, 'easy to overspend')
+    .replace(/\bmakes overspending easy to overspend\b/gi, 'can make overspending easier')
     .replace(/\bmost responsible option\b/gi, 'option to discuss with a qualified professional')
+    .replace(/\bmore listed context-cost context\b/gi, 'more listed cost context')
+    .replace(/\blisted context-cost context\b/gi, 'listed cost context')
     .replace(/\bsignificantly lower total cost\b/gi, 'lower listed total-cost context')
     .replace(/\bverified experience\b/gi, 'stored experience context')
     .replace(/\bexpertise\b/gi, 'experience context');
@@ -801,6 +806,7 @@ export function softenEducationalTeaserCopy(text: string): string {
     .replace(/\bBest\b/g, 'Compare')
     .replace(/\bGuaranteed Approval\b/g, 'Advertised Approval Claims')
     .replace(/\bguaranteed approval\b/gi, 'advertised approval claims')
+    .replace(/\badvertised approval claim to verify\b/gi, 'advertised approval claims')
     .replace(/\badvertised approval claims personal loans\b/gi, 'advertised approval claims for personal loans')
     .replace(/\badvertised approval claims credit cards\b/gi, 'advertised approval claims for credit cards')
     .replace(/\bstated terms approval\b/gi, 'advertises certain approval')
@@ -903,12 +909,14 @@ export function softenEducationalTeaserCopy(text: string): string {
     .replace(/\bWhere to Apply and What to Expect\b/gi, 'Application Context and What to Expect')
     .replace(/\bShould You Get a Cosigner\?/gi, 'Cosigner Trade-Offs')
     .replace(/\bYou Should Try First\b/gi, 'to Review First')
+    .replace(/\bit can be useful to Try First\b/gi, 'to Review First')
     .replace(/\bWhich Payoff Method Works Faster\?/gi, 'Payoff Method Trade-Offs')
     .replace(/\bWhich Should You Choose\?/gi, 'Trade-Offs to Compare')
     .replace(/\bWhat You Actually Need\b/gi, 'Account Trade-Offs to Compare')
     .replace(/\bHow to Stop It and Protect\b/gi, 'Response Steps and Ways to Protect')
     .replace(/\bWhich You Need\b/gi, 'Trade-Offs to Compare')
     .replace(/\bFinancial Safety\b/gi, 'Financial Account Protection')
+    .replace(/\bFinancial Account Protection net\b/gi, 'financial safety net')
     .replace(/\bCosigner Trade-Offs Risks\b/gi, 'Cosigner Trade-Offs: Risks')
     .replace(/\bWhere to Get a Loan Cost Comparison\b/gi, 'Loan Cost Comparison')
     .replace(/\bEligibility Fields to Check with listed pricing context\b/gi, 'Eligibility Fields and Listed Pricing Context')
@@ -963,7 +971,9 @@ export function softenEducationalTeaserCopy(text: string): string {
     .replace(/\bcheapest\b/gi, 'lower-cost')
     .replace(/\bboosting scores\b/gi, 'score-change context')
     .replace(/\bimprove your score\b/gi, 'support score improvement context')
-    .replace(/\bimproves your financial future\b/gi, 'supports your financial planning');
+    .replace(/\bimproves your financial future\b/gi, 'supports your financial planning')
+    .replace(/\bas claimed certain by the FCRA\b/gi, 'under the FCRA')
+    .replace(/\bclaimed certain by the Department of Veterans Affairs\b/gi, 'backed by the Department of Veterans Affairs');
 }
 
 export function softenGlossaryCopy(text: string): string {
