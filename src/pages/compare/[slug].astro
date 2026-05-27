@@ -43,6 +43,12 @@ function softenComparisonText(text: string): string {
     .replace(/comparable effectiveness/gi, 'comparable profile fields')
     .replace(/zero upfront cost to get started/gi, 'no listed setup fee');
   return softenYmylCopy(locallySoftened)
+    .replace(/\bwebsite is inaccessible \(403 Forbidden error\), preventing verification of services, pricing, licensing, or legitimacy\b/gi, 'public website access issue limits verification of services, pricing, licensing, and profile details')
+    .replace(/\bwebsite access issues, making it impossible to verify legitimacy, services, or regulatory standing\b/gi, 'public website access issues, limiting verification of services and regulatory context')
+    .replace(/\b403 Forbidden error\b/gi, 'public website access issue')
+    .replace(/\b403 Forbidden\b/gi, 'public website access issue')
+    .replace(/\bUnable to verify\b/gi, 'Profile details need verification')
+    .replace(/\bUnable to generate\b/gi, 'Profile details need review')
     .replace(/\bpredatory short-term lending model\b/gi, 'high-cost short-term lending model')
     .replace(/\bpredatory payday loan structure\b/gi, 'high-cost payday-loan structure')
     .replace(/\bpredatory lending structures\b/gi, 'high-cost lending structures')

@@ -33,8 +33,17 @@ export function getStaticPaths() {
 
 const { cityInfo, category, lenders, sd } = Astro.props;
 
+function hasUsableProfileCopy(lender: Lender): boolean {
+  const desc = lender.description_short || '';
+  if (desc.includes('403 Forbidden') || desc.includes('Unable to verify') || desc.includes('Unable to generate')) return false;
+  if (!desc || desc.length < 30) return false;
+  return true;
+}
+
+const displayLenders = lenders.filter(hasUsableProfileCopy);
+
 // Sort lenders: verified Google rating first, then by name
-const sorted = [...lenders].sort((a, b) => {
+const sorted = [...displayLenders].sort((a, b) => {
   const aGoogle = a.google_rating && a.google_rating > 0 && !(a.google_rating > 5) && a.google_reviews_count && a.google_reviews_count >= 1 ? a.google_rating : 0;
   const bGoogle = b.google_rating && b.google_rating > 0 && !(b.google_rating > 5) && b.google_reviews_count && b.google_reviews_count >= 1 ? b.google_rating : 0;
   if (bGoogle !== aGoogle) return bGoogle - aGoogle;
@@ -47,7 +56,7 @@ const totalRated = googleRated.length;
 const avgRating = totalRated > 0 ? (googleRated.reduce((s, l) => s + (l.google_rating || 0), 0) / totalRated).toFixed(1) : null;
 
 const title = `${category.name} Provider Profiles in ${cityInfo.city}, ${cityInfo.stateAbbr} (2026) | CreditDoc`;
-const description = `Compare ${lenders.length} ${category.name.toLowerCase()} company profiles in ${cityInfo.city}, ${cityInfo.state}. ${avgRating ? `Average stored Google rating where available: ${avgRating}/5.` : ''} Review pricing fields, public ratings, and local provider context.`;
+const description = `Compare ${displayLenders.length} ${category.name.toLowerCase()} company profiles in ${cityInfo.city}, ${cityInfo.state}. ${avgRating ? `Average stored Google rating where available: ${avgRating}/5.` : ''} Review pricing fields, public ratings, and local provider context.`;
 
 const jsonLd = [
   {
@@ -112,11 +121,11 @@ const jsonLd = [
             {category.name} Provider Profiles in {cityInfo.city}, {cityInfo.stateAbbr}
           </h1>
           <p class="text-muted max-w-2xl">
-            Compare {lenders.length} {category.name.toLowerCase()} company profiles serving {cityInfo.city}, {cityInfo.state}.
+            Compare {displayLenders.length} {category.name.toLowerCase()} company profiles serving {cityInfo.city}, {cityInfo.state}.
             {avgRating && <> Average stored Google rating where available: <span class="text-primary font-semibold">{avgRating}/5</span>.</>}
           </p>
           <div class="flex items-center gap-4 mt-3">
-            <span class="text-xs bg-primary-light text-primary font-medium px-2 py-1 rounded">{lenders.length} Companies</span>
+            <span class="text-xs bg-primary-light text-primary font-medium px-2 py-1 rounded">{displayLenders.length} Companies</span>
             {totalRated > 0 && <span class="text-xs bg-bg-alt text-muted font-medium px-2 py-1 rounded">{totalRated} Google-rated</span>}
             {sd?.payday_loan_status && (
               <span class:list={["text-xs font-medium px-2 py-1 rounded",
@@ -162,9 +171,17 @@ const jsonLd = [
         {/* All lenders */}
         <div>
           <h2 class="text-lg font-bold text-text mb-4">All {category.name} in {cityInfo.city} ({sorted.length})</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {sorted.map(lender => <LenderCard lender={lender} />)}
-          </div>
+          {sorted.length > 0 ? (
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {sorted.map(lender => <LenderCard lender={lender} />)}
+            </div>
+          ) : (
+            <div class="glass-card p-5">
+              <p class="text-sm text-muted leading-relaxed">
+                CreditDoc does not currently have enough display-ready {category.name.toLowerCase()} profiles for {cityInfo.city}. Use the city guide, state page, and related categories while this category is being reviewed.
+              </p>
+            </div>
+          )}
         </div>
       </div>
 

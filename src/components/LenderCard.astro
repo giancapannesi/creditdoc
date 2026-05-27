@@ -16,7 +16,15 @@ const bbbRating = normalizedBbbRating(lender.company_info.bbb_rating);
 const bbbClass = getBbbClass(bbbRating);
 const showGoogleRating = showRatings && lender.google_rating && lender.google_rating > 0 && !(lender.google_rating > 5) && lender.google_reviews_count && lender.google_reviews_count >= 1;
 
+function hasBadExtractionText(text: string): boolean {
+  return /403 Forbidden|Unable to verify|Unable to generate/i.test(text);
+}
+
 function softenProviderCardCopy(text: string): string {
+  if (!text || text.length < 30 || hasBadExtractionText(text)) {
+    return 'Review this provider profile and compare source-linked details before choosing what to do next.';
+  }
+
   return softenYmylCopy(text)
     .replace(/\bguaranteed returns\b/gi, 'stated return terms to verify')
     .replace(/\bguaranteed return\b/gi, 'stated return term to verify')
