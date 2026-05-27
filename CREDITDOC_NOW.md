@@ -2803,3 +2803,44 @@ Verification:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_126_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 127
+
+Batch 127 implementation committed as `385d0feb52` for lender-card profile
+signal softening:
+
+- `src/components/LenderCard.astro`
+
+Changes:
+
+- Added provider-card-specific render-time softening for lender descriptions and
+  profile signals.
+- Reframed visible card phrases such as `guaranteed returns`, `without
+  predatory lending`, and `predatory practices` into provider-stated,
+  lending-cost, and verification-context language.
+- Improved shared card output for city pages and category browse pages without
+  changing lender source records, city data, category data, comparison pages, or
+  educational content.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed with 18,413 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Targeted profile-signal rendered scan across `dist/city` and `dist/browse`
+  returned zero card matches for the targeted raw phrases.
+- Positive rendered checks confirmed replacement language including `stated
+  return terms to verify`, `lending-cost context to verify`, `lending-cost and
+  title-loan comparison context to verify`, and `high-cost lending practices`.
+- Live spot checks returned HTTP 200 for `/`, `/city/irvine-ca/`,
+  `/city/arlington-tx/`, `/browse/banking/wilmington-de/`,
+  `/browse/free-help/birmingham-al/`, `/browse/bankruptcy/philadelphia-pa/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+- A first check against `/browse/credit-unions/arlington-tx/` returned 404
+  because that route is not generated in `dist`; it was replaced with generated
+  browse-route checks above.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_127_notes_2026-05-27.md`

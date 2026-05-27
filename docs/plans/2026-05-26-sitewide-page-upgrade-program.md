@@ -813,6 +813,55 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 127: Lender Card Profile Signal Softening
+
+Date: 2026-05-27
+Implementation commit: `385d0feb52` (`fix: soften lender card profile signals`)
+
+Scope:
+
+- `src/components/LenderCard.astro`
+
+What changed:
+
+- Added provider-card-specific render-time softening for lender descriptions and
+  profile signals.
+- Reframed visible card phrases such as `guaranteed returns`, `without
+  predatory lending`, and `predatory practices` into provider-stated,
+  lending-cost, and verification-context language.
+- Improved shared card output for city pages and category browse pages without
+  changing lender source records, city data, category data, comparison pages, or
+  educational content.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted profile-signal rendered scan across `dist/city` and `dist/browse`
+  returned zero card matches for raw phrases: `guaranteed returns`,
+  `guaranteed return`, `without predatory lending`, `without the predatory
+  practices`, `predatory practices`, and `predatory lending practices`.
+- Positive rendered checks confirmed replacement language including `stated
+  return terms to verify`, `lending-cost context to verify`, `lending-cost and
+  title-loan comparison context to verify`, and `high-cost lending practices`.
+- Production spot checks returned HTTP 200 for `/`, `/city/irvine-ca/`,
+  `/city/arlington-tx/`, `/browse/banking/wilmington-de/`,
+  `/browse/free-help/birmingham-al/`, `/browse/bankruptcy/philadelphia-pa/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+- A first check against `/browse/credit-unions/arlington-tx/` returned 404
+  because that route is not generated in `dist`; it was replaced with generated
+  browse-route checks above.
+
+Notes:
+
+- Render-component cleanup; no source lender, city, category, comparison, or
+  education records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 126: Emergency-Cash Comparison Claim Softening
 
 Date: 2026-05-27
