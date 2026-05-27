@@ -669,6 +669,61 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 145: Failed Extraction Artifact Cleanup
+
+Date: 2026-05-27
+Implementation commit: `97f2d6b394` (`fix: hide failed extraction artifacts`)
+
+Scope:
+
+- `src/pages/browse/[catSlug]/[citySlug].astro`
+- `src/components/LenderCard.astro`
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Cleaned rendered failed-extraction artifacts found during quality monitoring.
+- Browse pages now count and display only profiles with usable provider-card
+  copy while keeping existing browse URLs live to avoid broken internal links.
+- Lender cards now fall back to neutral review copy if a card receives failed
+  extraction text.
+- Comparison pages now soften raw `403 Forbidden`, `Unable to verify`, and
+  `Unable to generate` wording into public website access / profile-verification
+  context.
+- Preserved source comparison records, lender records, pricing values, ratings,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered `dist/browse` and `dist/compare` scan returned zero matches
+  for `403 Forbidden`, `Unable to verify`, and `Unable to generate`.
+- Local static route checks returned HTTP 200 for `/`,
+  `/city/amarillo-tx/`, `/browse/credit-repair/miami-fl/`,
+  `/browse/personal-loans/austin-tx/`,
+  `/compare/greenlight-financial-vs-debt-freedom-ga/`,
+  `/compare/self-credit-builder-vs-debt-freedom-ga/`,
+  `/compare/cambridge-credit-counseling-vs-premisien-credit-counseling/`, and
+  `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/credit-guide/amarillo-tx/`, `/browse/credit-repair/miami-fl/`,
+  `/browse/personal-loans/austin-tx/`,
+  `/compare/greenlight-financial-vs-debt-freedom-ga/`,
+  `/compare/self-credit-builder-vs-debt-freedom-ga/`,
+  `/compare/cambridge-credit-counseling-vs-premisien-credit-counseling/`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-time browse/card/comparison cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 144: Comparison Context Residue Cleanup
 
 Date: 2026-05-27

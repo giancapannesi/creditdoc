@@ -35,6 +35,21 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
+  `97f2d6b394 fix: hide failed extraction artifacts`.
+  Batch 145 cleaned rendered browse/provider-card and comparison-page failed
+  extraction artifacts. Browse pages now count/display only profiles with usable
+  card copy, LenderCard falls back to neutral review copy if extraction text is
+  bad, and comparison pages soften raw `403 Forbidden`, `Unable to verify`, and
+  `Unable to generate` wording.
+- Batch 145 verification passed: `git diff --check`, `npm run build`, 124 city
+  guides, 2,232 city-category sub-pages, 18,413 SSR route URLs,
+  sitemap/robots OK, targeted rendered `dist/browse` and `dist/compare` scan
+  returned zero matches for `403 Forbidden`, `Unable to verify`, and `Unable to
+  generate`, local static route checks all HTTP 200, and production spot checks
+  all HTTP 200.
+- Batch 145 preserved the two unrelated unstaged files:
+  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
+- Previous cleanup batch:
   `31724b28e4 fix: clean comparison context residue`.
   Batch 144 cleaned rendered comparison and browse-page context residue,
   including `stored outcome context`, `consumer research context credit
