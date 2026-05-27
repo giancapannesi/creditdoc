@@ -35,19 +35,24 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
+  `3d53c7b4d0 fix: soften provider and comparison claim residue`.
+  Batch 135 cleaned provider-card and comparison-page residue including
+  awkward no-credit-check phrases, `option to compare Capital Inc provides`,
+  credit-repair timing claims, `stored outcome fields`, `27-year track record`,
+  `accuracy and affordability make it`, `last-resort settlement option`,
+  `unsuitable for`, and timeline/outcome claims.
+- Batch 135 verification passed: `git diff --check`, `npm run build`, 124 city
+  guides, 2,232 city-category sub-pages, 18,413 SSR route URLs,
+  sitemap/robots OK, targeted rendered residue scan clean, local static route
+  checks all HTTP 200, and production spot checks all HTTP 200.
+- Batch 135 preserved the two unrelated unstaged files:
+  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
+- Previous cleanup batch:
   `382300397d fix: clean comparison residual grammar claims`.
-  Batch 134 cleaned remaining comparison grammar and outcome residue including
-  `more consumer comparison context profile details`, `is more listed`,
-  `are more listed`, `profile details seeking`, `average {n}-point increase`,
-  `average {n}-point score lift`, `undercuts`, `significantly higher APRs`,
-  `raises concerns`, `no-interest or fees`, `genuinely free`, and `lower
-  higher listed pricing`.
-- Batch 134 verification passed: `npm run build`, 124 city guides, 2,232
+  Batch 134 verification passed: `npm run build`, 124 city guides, 2,232
   city-category sub-pages, 18,413 SSR route URLs, sitemap/robots OK, targeted
   rendered comparison residue scan clean, local static route checks all HTTP
   200, and production spot checks all HTTP 200.
-- Batch 134 preserved the two unrelated unstaged files:
-  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
 - Batch 001 completed and committed:
   `bba672df72 feat: add cfpb report profile links`.
 - Batch 001 scope: 49 report-included `/review/{slug}/` provider pages get an

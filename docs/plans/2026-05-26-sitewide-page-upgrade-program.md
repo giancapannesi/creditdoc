@@ -669,6 +669,64 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 135: Provider Card and Comparison Claim Residue Cleanup
+
+Date: 2026-05-27
+Implementation commit: `3d53c7b4d0` (`fix: soften provider and comparison claim residue`)
+
+Scope:
+
+- `src/components/LenderCard.astro`
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added provider-card render-time cleanup for city and browse pages where raw
+  descriptions still produced awkward or over-assertive copy.
+- Replaced `option to compare Capital Inc provides`, funding/approval timing
+  claims, aggressive credit-repair wording, expedited dispute-resolution
+  claims, credit-bureau representative claims, 90-120 day results claims,
+  awkward no-credit-check phrases, and credit-score improvement wording.
+- Added comparison-page render-time cleanup for summaries, meta descriptions,
+  JSON-LD, FAQ answers, and research notes.
+- Replaced `stored outcome fields`, `stored debt-management context`,
+  `27-year track record`, `free financial education`, `accuracy and
+  affordability make it`, `strong national reputation`, `higher verified
+  customer ratings`, `resolved over $1 billion in debt`, `free debt-free
+  assessment`, `faster 3-year potential timelines`, `more suitable for`,
+  `last-resort settlement option`, `regulatory penalties`, `unsuitable for`,
+  and timeline/outcome overclaims.
+- Preserved source comparison records, source lender records, pricing values,
+  route slugs, cards, maps, tables, FAQs, city pages, and browse pages.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/city`, `dist/browse`, and `dist/compare` scan returned no
+  matches for the targeted provider-card and comparison residue phrases.
+- Local static checks returned HTTP 200 for `/`, `/city/norcross-ga/`,
+  `/browse/credit-repair/dallas-tx/`, `/browse/emergency-cash/kansas-city-mo/`,
+  `/browse/emergency-cash/tampa-fl/`,
+  `/compare/incharge-debt-solutions-vs-detroit-wealth-club/`,
+  `/compare/transunion-vs-boost-my-fico-scores/`,
+  `/compare/cambridge-credit-counseling-vs-clarifi/`,
+  `/compare/credit-supreme-credit-repair-miami-fix-credit-fast-miami-fl-vs-the-credit-people/`,
+  and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/incharge-debt-solutions-vs-detroit-wealth-club/`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only cleanup; no source comparison, lender, city, or category records
+  changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 122: Emergency-Cash Comparison Residue Normalization
 
 Date: 2026-05-27
