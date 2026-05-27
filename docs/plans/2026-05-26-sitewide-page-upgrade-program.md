@@ -669,6 +669,74 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 136: Residual Comparison and Provider-Card Claim Cleanup
+
+Date: 2026-05-27
+Implementation commit: `78ffaec0c5` (`fix: soften residual comparison and card claims`)
+
+Scope:
+
+- `src/components/LenderCard.astro`
+- `src/pages/compare/[slug].astro`
+
+What changed:
+
+- Added provider-card render-time cleanup for lingering city and browse copy
+  residue.
+- Replaced remaining no-credit-check, minimal-credit, flexible-approval,
+  same-day-cash, fast-loan, success-rate, budget-conscious, track-record, and
+  credit-improvement phrases with eligibility, timing, listed-cost,
+  provider-stated, and review-context wording.
+- Added comparison-page render-time cleanup for summaries, meta descriptions,
+  JSON-LD, FAQ answers, and research notes.
+- Replaced `starts at just`, `profiled for those with poor or no credit
+  history`, `faster credit rebuilding`, `accessibility and affordability`,
+  `monthly advantage`, unsupported reputation/review-volume phrasing,
+  `professional credit-building tools`, `free tier is appealing`, `red flags`,
+  `critical security issues`, `verified ConsumerAffairs reviews`, client-volume
+  claims, and broad reliability/consumer-protection conclusions.
+- Preserved source comparison records, source lender records, pricing values,
+  route slugs, cards, maps, tables, FAQs, city pages, and browse pages.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Rendered `dist/city`, `dist/browse`, and `dist/compare` scan returned no
+  matches for the targeted Batch 136 provider-card and comparison residue
+  phrases.
+- Local static checks returned HTTP 200 for `/`, `/city/doraville-ga/`,
+  `/city/virginia-beach-va/`, `/browse/pawn-shops/memphis-tn/`,
+  `/browse/emergency-cash/fresno-ca/`,
+  `/browse/emergency-cash/tampa-fl/`,
+  `/browse/emergency-cash/cleveland-oh/`,
+  `/browse/emergency-cash/orlando-fl/`,
+  `/browse/pawn-shops/san-diego-ca/`,
+  `/browse/credit-repair/phoenix-az/`,
+  `/browse/banking/san-diego-ca/`,
+  `/compare/kikoff-vs-discover-it-secured/`,
+  `/compare/national-credit-care-vs-elevate-my-scores/`,
+  `/compare/brigit-vs-advance-america-hialeah-fl/`,
+  `/compare/xperia-credit-solutions-vs-elevate-my-scores/`,
+  `/compare/xperia-credit-solutions-vs-national-credit-care/`,
+  `/compare/smartcredit-vs-wallethub/`,
+  `/compare/national-debt-relief-vs-lakeview-law-group/`, and
+  `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/`, `/credit-guide/amarillo-tx/`,
+  `/compare/kikoff-vs-discover-it-secured/`,
+  `/compare/xperia-credit-solutions-vs-national-credit-care/`, and
+  `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only cleanup; no source comparison, lender, city, or category records
+  changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 135: Provider Card and Comparison Claim Residue Cleanup
 
 Date: 2026-05-27

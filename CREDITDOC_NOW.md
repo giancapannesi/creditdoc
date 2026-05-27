@@ -35,6 +35,19 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
+  `78ffaec0c5 fix: soften residual comparison and card claims`.
+  Batch 136 cleaned rendered provider-card and comparison-page residue including
+  lingering no-credit-check wording, eligibility/timing phrasing, `starts at
+  just`, `faster credit rebuilding`, `budget-conscious consumers`, unsupported
+  reputation/review-volume phrasing, success-rate claims, `established track
+  record`, and security/red-flag comparison language.
+- Batch 136 verification passed: `git diff --check`, `npm run build`, 124 city
+  guides, 2,232 city-category sub-pages, 18,413 SSR route URLs,
+  sitemap/robots OK, targeted rendered residue scan clean, local static route
+  checks all HTTP 200, and production spot checks all HTTP 200.
+- Batch 136 preserved the two unrelated unstaged files:
+  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
+- Previous cleanup batch:
   `3d53c7b4d0 fix: soften provider and comparison claim residue`.
   Batch 135 cleaned provider-card and comparison-page residue including
   awkward no-credit-check phrases, `option to compare Capital Inc provides`,
@@ -45,8 +58,6 @@ Sitewide upgrade program restarted:
   guides, 2,232 city-category sub-pages, 18,413 SSR route URLs,
   sitemap/robots OK, targeted rendered residue scan clean, local static route
   checks all HTTP 200, and production spot checks all HTTP 200.
-- Batch 135 preserved the two unrelated unstaged files:
-  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
 - Previous cleanup batch:
   `382300397d fix: clean comparison residual grammar claims`.
   Batch 134 verification passed: `npm run build`, 124 city guides, 2,232
