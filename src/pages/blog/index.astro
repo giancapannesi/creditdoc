@@ -3,6 +3,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getBlogPosts, getBlogPostsByCategory } from '../../utils/data-build';
 import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 
+function softenBlogTeaserCopy(text: string): string {
+  return softenEducationalTeaserCopy(text)
+    .replace(/\badvertised approval claims: Truth vs\. Marketing\b/gi, 'advertised approval claims: context to verify')
+    .replace(/\badvertised approval claims" Credit Cards & Loans: What It Really Means\b/gi, 'advertised approval claims" Credit Cards & Loans: context to verify')
+    .replace(/\bGetting Approved\b/gi, 'Eligibility Context')
+    .replace(/\bget approved\b/gi, 'compare eligibility factors')
+    .replace(/\bBuild Credit Fast\b/gi, 'Build Credit With Context')
+    .replace(/\bbuild credit fast\b/gi, 'build credit with context')
+    .replace(/\bcan help you save money and rebuild credit\b/gi, 'can change costs and credit context')
+    .replace(/\bstrategies that actually work\b/gi, 'strategies to review')
+    .replace(/\bavoid debt traps\b/gi, 'review high-cost debt patterns')
+    .replace(/\bwhat to avoid\b/gi, 'what to review carefully')
+    .replace(/\bhow to avoid\b/gi, 'how to identify')
+    .replace(/\bred flags to avoid\b/gi, 'warning signs to review')
+    .replace(/\bred flags\b/gi, 'warning signs')
+    .replace(/\bavoid scams\b/gi, 'identify scam warning signs')
+    .replace(/\bSpot & Avoid Them\b/gi, 'Spot Warning Signs')
+    .replace(/\bHow to Spot & Avoid Them\b/gi, 'How to Spot Warning Signs')
+    .replace(/\bMaster personal loan tips\b/gi, 'Review personal loan tips')
+    .replace(/\bbuild financial security\b/gi, 'support financial planning')
+    .replace(/\bResponsible lenders generally do not advertise certain approval\b/gi, 'Responsible lenders generally review eligibility before offering credit')
+    .replace(/\bDiscover the reality behind\b/gi, 'Review the context behind');
+}
+
 const posts = getBlogPosts().sort((a, b) =>
   new Date(b.publish_date).getTime() - new Date(a.publish_date).getTime()
 );
@@ -149,8 +173,8 @@ const jsonLd = {
                 </span>
                 <span class="text-xs text-muted">{post.read_time}</span>
               </div>
-              <h2 class="text-base font-semibold text-text group-hover:text-primary transition-colors leading-snug">{softenEducationalTeaserCopy(post.title)}</h2>
-              <p class="mt-2 text-sm text-muted leading-relaxed line-clamp-3">{softenEducationalTeaserCopy(post.description)}</p>
+              <h2 class="text-base font-semibold text-text group-hover:text-primary transition-colors leading-snug">{softenBlogTeaserCopy(post.title)}</h2>
+              <p class="mt-2 text-sm text-muted leading-relaxed line-clamp-3">{softenBlogTeaserCopy(post.description)}</p>
               <div class="flex-1"></div>
               <div class="mt-4 flex items-center justify-between">
                 <span class="text-xs text-muted">
