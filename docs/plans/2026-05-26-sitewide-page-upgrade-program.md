@@ -616,6 +616,59 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 121: Comparison Listed-Context Residue Normalization
+
+Date: 2026-05-27
+Implementation commit: `66f051d864` (`fix: normalize comparison listed-context residue`)
+
+Scope:
+
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Added shared render-time cleanup for comparison pages where earlier
+  safe-copy passes left duplicated listed-context phrasing and remaining hard
+  risk language.
+- Normalized phrases including `more listed cost context`, `lists more listed
+  cost context`, `offers more listed cost context`, `provides more listed
+  consumer-protection context`, `stronger regulatory compliance`,
+  `perpetuates repeat-borrowing cycles`, `predatory APRs`, `predatory
+  304%-688% APRs`, `designed to encourage costly rollovers`, `costly
+  rollovers`, `proven credit repair`, `stronger accreditation`, and `more
+  practical benefits`.
+- Reframed those phrases into cost-context, consumer-protection-context,
+  regulatory-context, high-listed-APR, rollover-risk, feature-context, and
+  accreditation-context wording.
+- Preserved source comparison records, lender records, pricing values, ratings,
+  route slugs, cards, tables, FAQs, and layouts.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Focused rendered `dist/compare` scan returned zero matches for the targeted
+  Batch 121 phrase set.
+- Production spot checks returned HTTP 200 for `/`,
+  `/compare/brigit-vs-ace-cash-express/`,
+  `/compare/brigit-vs-advance-america-montebello/`,
+  `/compare/brigit-vs-advance-america-oklahoma-city/`,
+  `/compare/ace-cash-express-terrytown-vs-ace-cash-express-miami-fl/`,
+  `/compare/dickmann-tax-group-vs-lakeview-law-group/`,
+  `/compare/credit-saint-vs-safeport-law/`,
+  `/compare/safeport-law-vs-the-credit-people/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-only comparison safe-copy cleanup; no source comparison or lender
+  records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 118: Comparison Risk-Copy Grammar Normalization
 
 Date: 2026-05-27

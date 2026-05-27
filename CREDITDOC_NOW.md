@@ -2567,3 +2567,44 @@ Verification:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_120_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 121
+
+Batch 121 implementation committed as `66f051d864` for comparison
+listed-context residue normalization:
+
+- `src/utils/safe-copy.ts`
+
+Changes:
+
+- Added render-time cleanup for comparison pages where previous safe-copy
+  passes left duplicated listed-context wording and hard risk language.
+- Normalized `more listed cost context`, `lists more listed cost context`,
+  `offers more listed cost context`, `provides more listed consumer-protection
+  context`, `stronger regulatory compliance`, `perpetuates repeat-borrowing
+  cycles`, `predatory APRs`, `predatory 304%-688% APRs`, `designed to
+  encourage costly rollovers`, `costly rollovers`, `proven credit repair`,
+  `stronger accreditation`, and `more practical benefits`.
+- Preserved source comparison and lender data.
+
+Verification:
+
+- `npm run build` passed with 18,413 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered `dist/compare` scan returned zero matches for the Batch
+  121 phrase set.
+- Live spot checks returned HTTP 200 for `/`,
+  `/compare/brigit-vs-ace-cash-express/`,
+  `/compare/brigit-vs-advance-america-montebello/`,
+  `/compare/brigit-vs-advance-america-oklahoma-city/`,
+  `/compare/ace-cash-express-terrytown-vs-ace-cash-express-miami-fl/`,
+  `/compare/dickmann-tax-group-vs-lakeview-law-group/`,
+  `/compare/credit-saint-vs-safeport-law/`,
+  `/compare/safeport-law-vs-the-credit-people/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+- `git diff --check` passed.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_121_notes_2026-05-27.md`
