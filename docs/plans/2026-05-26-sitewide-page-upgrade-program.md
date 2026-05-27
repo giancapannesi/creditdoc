@@ -669,6 +669,55 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 139: Course Module Render Artifact Cleanup
+
+Date: 2026-05-27
+Implementation commit: `c55b2a579d` (`fix: clean course module render artifacts`)
+
+Scope:
+
+- `src/pages/courses/credit-fundamentals/[slug].astro`
+- `src/utils/safe-copy.ts`
+
+What changed:
+
+- Removed leaked course authoring notes such as `Canva search` from module
+  previews and full lesson content before rendering.
+- Removed raw horizontal-rule artifacts from rendered module lesson content.
+- Sent module meta descriptions through the shared educational safe-copy path.
+- Cleaned course CTA/quiz wording around stale verified-lender phrasing,
+  broad scam wording, automatic deletion claims, score-increase promises, and
+  complaint-agency overclaim framing.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered course scans returned no matches for `Canva search`,
+  `listed refund term a specific score increase`, `MOST effective for
+  resolving complaints`, `top-rated credit repair companies`, `Search verified
+  lenders in your state`, `What is ALWAYS a scam`, `Forces bureaus to delete
+  anything`, `automatically removes negative items`, and `before they must
+  remove the item`.
+- Local static route checks returned HTTP 200 for `/courses/credit-fundamentals/`,
+  `/courses/credit-fundamentals/credit-repair-diy-vs-hiring-help/`,
+  `/courses/credit-fundamentals/avoiding-scams-and-predatory-lending/`,
+  `/city/amarillo-tx/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/courses/credit-fundamentals/`,
+  `/courses/credit-fundamentals/credit-repair-diy-vs-hiring-help/`,
+  `/courses/credit-fundamentals/avoiding-scams-and-predatory-lending/`,
+  `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Course render/safe-copy cleanup only; no raw course markdown, lender, city,
+  category, comparison, blog, glossary, or generated inventory records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 138: Static FAQ Claim and Outcome Softening
 
 Date: 2026-05-27

@@ -35,6 +35,19 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
+  `c55b2a579d fix: clean course module render artifacts`.
+  Batch 139 cleaned Credit Fundamentals course rendering by removing leaked
+  authoring notes from module content/previews, softening module meta
+  descriptions through the shared safe-copy path, cleaning stale CTA wording,
+  and fixing quiz wording/grammar artifacts around score-increase promises,
+  complaint-agency framing, automatic deletion claims, and broad scam wording.
+- Batch 139 verification passed: `git diff --check`, `npm run build`, 124 city
+  guides, 2,232 city-category sub-pages, 18,413 SSR route URLs,
+  sitemap/robots OK, targeted rendered course residue scans clean, local static
+  route checks all HTTP 200, and production spot checks all HTTP 200.
+- Batch 139 preserved the two unrelated unstaged files:
+  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
+- Previous cleanup batch:
   `b605275bff fix: soften faq claims`.
   Batch 138 softened static FAQ copy around CreditDoc purpose, update cadence,
   ratings visibility, correction review timing, credit-repair outcomes,
