@@ -669,6 +669,46 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 138: Static FAQ Claim and Outcome Softening
+
+Date: 2026-05-27
+Implementation commit: `b605275bff` (`fix: soften faq claims`)
+
+Scope:
+
+- `src/pages/faq.astro`
+
+What changed:
+
+- Softened FAQ claims around CreditDoc purpose, update cadence, ratings
+  visibility, correction review timing, credit-repair outcomes,
+  credit-repair pricing/timing, self-repair, and debt-relief framing.
+- Replaced deterministic or promissory language with research-oriented,
+  provider-data, and context-based phrasing.
+- FAQ JSON-LD uses the same cleaned answers because it is generated from the
+  shared `faqs` array.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted source and rendered FAQ scans returned no matches for the cleaned
+  residue phrases.
+- Local static route checks returned HTTP 200 for `/faq/`, `/blog/`,
+  `/glossary/`, `/city/amarillo-tx/`, and `/sitemap-index.xml`.
+- Production spot checks returned HTTP 200 for `/faq/`, `/blog/`,
+  `/glossary/`, `/credit-guide/amarillo-tx/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Static FAQ copy cleanup only; no raw lender, city, category, comparison,
+  blog, glossary, or generated inventory records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 137: Blog and Glossary Outcome Copy Softening
 
 Date: 2026-05-27

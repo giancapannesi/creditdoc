@@ -35,6 +35,18 @@ Sitewide upgrade program restarted:
 - Batch 001 workpack:
   `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/`
 - Latest cleanup batch completed:
+  `b605275bff fix: soften faq claims`.
+  Batch 138 softened static FAQ copy around CreditDoc purpose, update cadence,
+  ratings visibility, correction review timing, credit-repair outcomes,
+  pricing/timing, self-repair, and debt-relief framing. FAQ JSON-LD receives the
+  same cleaned answers from the shared FAQ array.
+- Batch 138 verification passed: `git diff --check`, `npm run build`, 124 city
+  guides, 2,232 city-category sub-pages, 18,413 SSR route URLs,
+  sitemap/robots OK, targeted source/rendered FAQ residue scans clean, local
+  static route checks all HTTP 200, and production spot checks all HTTP 200.
+- Batch 138 preserved the two unrelated unstaged files:
+  `src/content/comparisons.json` and `src/content/wellness-guides.json`.
+- Previous cleanup batch:
   `cda882eca5 fix: soften blog and glossary outcome copy`.
   Batch 137 cleaned rendered blog-index teaser copy and glossary educational
   examples, softening hard approval/outcome language, numeric score-change
