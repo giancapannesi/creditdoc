@@ -573,7 +573,10 @@ export function softenYmylCopy(text: string): string {
     .replace(/\blisted listed\b/gi, 'listed')
     .replace(/\bstaff context provide\b/gi, 'staff context provides')
     .replace(/\blisted mortgage-qualification context context\b/gi, 'listed mortgage-qualification context')
-    .replace(/\bprovider-stated listed refund term if\b/g, 'Provider-stated listed refund term if')
+    .replace(/\bProvider-stated listed refund terms\b/g, 'Provider-stated refund terms')
+    .replace(/\bprovider-stated listed refund terms\b/g, 'provider-stated refund terms')
+    .replace(/\bProvider-stated listed refund term\b/g, 'Provider-stated refund term')
+    .replace(/\bprovider-stated listed refund term\b/g, 'provider-stated refund term')
     .replace(/\bsignificantly lower total cost\b/gi, 'lower listed total-cost context')
     .replace(/\bverified experience\b/gi, 'stored experience context')
     .replace(/\bexpertise\b/gi, 'experience context');

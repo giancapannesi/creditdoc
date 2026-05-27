@@ -71,7 +71,7 @@ function ssrSitemapPages() {
       if (anonKey) {
         const cgOut = execSync(
           `curl -s "https://pndpnjjkhknmutlmlwsk.supabase.co/rest/v1/city_guides?status=eq.ready_for_index&select=slug" -H "apikey: ${anonKey}" -H "Authorization: Bearer ${anonKey}"`,
-          { encoding: 'utf8', timeout: 20000 }
+          { encoding: 'utf8', timeout: 120000 }
         );
         const cityGuides = JSON.parse(cgOut);
         if (Array.isArray(cityGuides)) {
