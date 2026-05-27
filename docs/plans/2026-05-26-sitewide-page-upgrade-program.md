@@ -862,6 +862,58 @@ Notes:
 - `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
   unrelated unstaged changes and were not staged or committed.
 
+### Batch 129: Lender Card Residual Grammar Cleanup
+
+Date: 2026-05-27
+Implementation commit: `0ce68411b3` (`fix: clean lender card residual grammar`)
+
+Scope:
+
+- `src/components/LenderCard.astro`
+
+What changed:
+
+- Added final provider-card cleanup for duplicate `short-term short-term`
+  wording in visible city and browse card profile signals.
+- Normalized `short-term cash access shortfalls` to `short-term cash
+  shortfalls`.
+- Cleaned second-order high-cost wording such as `high-cost lending risk
+  context lending`.
+- Restored remaining proper-name contexts damaged by earlier broad `superior`
+  replacements: `Superior Business` and `Superior Mercado`.
+- Preserved source lender, city, category, comparison, and education records.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed.
+- Build generated 124 city guides and 2,232 city-category sub-pages.
+- Build injected 18,413 SSR route URLs.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan across `dist/city` and `dist/browse` returned zero
+  matches for `short-term short-term`, `short-term cash access shortfalls`,
+  `high-cost lending risk context lending`, `risk context lending`, `more
+  listed Business`, and `more listed Mercado`.
+- Positive rendered checks confirmed replacement/restored language on
+  `/city/virginia-beach-va/`,
+  `/browse/pawn-shops/virginia-beach-va/`,
+  `/browse/pawn-shops/las-vegas-nv/`,
+  `/browse/business-loans/chicago-il/`, and
+  `/browse/check-cashing/sacramento-ca/`.
+- Production spot checks returned HTTP 200 for `/`,
+  `/city/virginia-beach-va/`,
+  `/browse/pawn-shops/virginia-beach-va/`,
+  `/browse/pawn-shops/las-vegas-nv/`,
+  `/browse/business-loans/chicago-il/`,
+  `/browse/check-cashing/sacramento-ca/`, and `/sitemap-index.xml`.
+
+Notes:
+
+- Render-component cleanup; no source lender, city, category, comparison, or
+  education records changed.
+- `src/content/comparisons.json` and `src/content/wellness-guides.json` remain
+  unrelated unstaged changes and were not staged or committed.
+
 ### Batch 128: Lender Card Proper-Name Restoration
 
 Date: 2026-05-27

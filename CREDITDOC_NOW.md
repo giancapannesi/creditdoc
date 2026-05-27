@@ -2883,3 +2883,45 @@ Verification:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_128_notes_2026-05-27.md`
+
+## 2026-05-27 - Sitewide Page Upgrade Batch 129
+
+Batch 129 implementation committed as `0ce68411b3` for lender-card residual
+grammar cleanup:
+
+- `src/components/LenderCard.astro`
+
+Changes:
+
+- Added final provider-card cleanup for duplicate `short-term short-term`
+  wording in visible city and browse card profile signals.
+- Normalized `short-term cash access shortfalls` to `short-term cash
+  shortfalls`.
+- Cleaned second-order high-cost wording such as `high-cost lending risk
+  context lending`.
+- Restored remaining proper-name contexts damaged by earlier broad `superior`
+  replacements: `Superior Business` and `Superior Mercado`.
+- Preserved source lender, city, category, comparison, and education records.
+
+Verification:
+
+- `git diff --check` passed.
+- `npm run build` passed with 18,413 SSR route URLs, 124 city guides, and 2,232
+  city-category sub-pages.
+- Postbuild sitemap/robots check passed.
+- Targeted rendered scan across `dist/city` and `dist/browse` returned zero
+  matches for `short-term short-term`, `short-term cash access shortfalls`,
+  `high-cost lending risk context lending`, `risk context lending`, `more
+  listed Business`, and `more listed Mercado`.
+- Positive rendered checks confirmed replacement/restored language on Virginia
+  Beach pawn, Las Vegas pawn, Chicago business-loan, and Sacramento
+  check-cashing browse pages.
+- Live spot checks returned HTTP 200 for `/`, `/city/virginia-beach-va/`,
+  `/browse/pawn-shops/virginia-beach-va/`,
+  `/browse/pawn-shops/las-vegas-nv/`,
+  `/browse/business-loans/chicago-il/`,
+  `/browse/check-cashing/sacramento-ca/`, and `/sitemap-index.xml`.
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_129_notes_2026-05-27.md`
