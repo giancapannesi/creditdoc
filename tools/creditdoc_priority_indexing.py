@@ -6,16 +6,16 @@ FOUNDER RULE 2026-04-24: Never submit /review/<slug>/ lender profiles
 (FA or otherwise) to search engines. Only submit the pages that earn clicks
 and move users toward money: money pages, drip, blog, education.
 
-Push tiers (in order — per AI Council 2026-05-13, reordered 2026-05-14):
-    1. City guides         /credit-guide/<slug>/      (fastest-ranking, council #1)
-    2. Money pages         /best/<slug>/              (listicles)
-    3. Blog                /blog/<slug>/              (blog_posts)
-    4. Brand hubs          /brand/<slug>/             (brand JSON exists)
-    5. Compare pages       /compare/<slug>/           (comparisons)
-    6. State pages         /state/<slug>/             (already tracked in GSC)
+Push tiers (in order — updated by Jammi 2026-05-30):
+    1. Money pages         /best/<slug>/              (listicles)
+    2. Questions           /answers/<slug>/           (cluster_answers)
+    3. City guides         /credit-guide/<slug>/      (local pages)
+    4. Blog                /blog/<slug>/              (blog_posts)
+    5. Brand hubs          /brand/<slug>/             (brand JSON exists)
+    6. Compare pages       /compare/<slug>/           (comparisons)
+    7. State pages         /state/<slug>/             (already tracked in GSC)
 
-EXCLUDED (Jammi submits these manually via GSC Request Indexing, 10/day):
-    - Drip                /answers/<slug>/
+EXCLUDED:
     - Education           /financial-wellness/<slug>/
 
 Quota: 200/day Google Indexing API, unlimited IndexNow (Bing/AI search).
@@ -23,6 +23,7 @@ Quota: 200/day Google Indexing API, unlimited IndexNow (Bing/AI search).
 Usage:
     python3 creditdoc_priority_indexing.py              # Full run: GSC + IndexNow
     python3 creditdoc_priority_indexing.py --indexnow-only
+    python3 creditdoc_priority_indexing.py --tier money --indexnow-only
     python3 creditdoc_priority_indexing.py --dry-run
     python3 creditdoc_priority_indexing.py --limit 200  # override cap
 """
@@ -61,8 +62,11 @@ BRANDS_DIR = Path(__file__).resolve().parents[1] / "src" / "content" / "brands"
 RESUBMIT_DAYS = 30
 
 
-def fetch_priority_urls(db, limit, force_all=False):
-    """Publishable URLs only: money pages, drip, education, blog, brand,
+VALID_TIERS = ("money", "answers", "city", "blog", "brand", "compare", "state")
+
+
+def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_cooldown=False):
+    """Publishable URLs only: money pages, answers, city, blog, brand,
     compare, and state pages.
     /review/* lender profiles are NEVER pushed (founder rule 2026-04-24).
 
@@ -74,6 +78,8 @@ def fetch_priority_urls(db, limit, force_all=False):
         eligible the next day once their verdict comes back NEUTRAL.
       - SKIP urls submitted via Indexing API in last RESUBMIT_DAYS (cooldown) —
         Google has the request; nagging it again wastes quota.
+        IndexNow-only tier pings may set ignore_cooldown=True because they do
+        not spend Google quota.
     Pass force_all=True to bypass the filter (catastrophic re-index only).
     """
     urls = []
@@ -89,19 +95,23 @@ def fetch_priority_urls(db, limit, force_all=False):
         [(s,) for s in brand_slugs],
     )
 
-    # Answers + wellness are excluded: Jammi submits those manually via GSC
-    # Request Indexing (10/day). Automated API handles everything else.
-    # City guides added + promoted to tier 1 per AI Council (2026-05-14).
+    # Wellness is excluded. Money + answers are first priority per Jammi
+    # direction on 2026-05-30.
     publishable_cte = f"""
     publishable AS (
+      SELECT 'money' AS tier, 'best/' || slug AS path, slug AS sort_key
+        FROM listicles
+      UNION ALL
+      SELECT 'answers' AS tier, 'answers/' || slug AS path,
+             COALESCE(published_at, updated_at, slug) AS sort_key
+        FROM cluster_answers
+        WHERE status='published'
+      UNION ALL
       SELECT DISTINCT 'city' AS tier,
              TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
              TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS sort_key
         FROM indexation_status
         WHERE page_url LIKE '{SITE}/credit-guide/%'
-      UNION ALL
-      SELECT 'money' AS tier, 'best/' || slug AS path, slug AS sort_key
-        FROM listicles
       UNION ALL
       SELECT 'blog' AS tier, 'blog/' || slug AS path, COALESCE(updated_at, slug) AS sort_key
         FROM blog_posts
@@ -127,11 +137,20 @@ def fetch_priority_urls(db, limit, force_all=False):
         WHERE page_url LIKE '{SITE}/state/%'
     )"""
 
+    tier_where = ""
+    if tier_filter:
+        if tier_filter not in VALID_TIERS:
+            raise ValueError(f"invalid tier: {tier_filter}")
+        tier_where = f"p.tier = '{tier_filter}'"
+
     if force_all:
         # Emergency re-index: bypass all filters, push everything.
         status_cte = ""
         join_clause = "LEFT JOIN indexation_status i"
-        where_filter = ""
+        conditions = ["COALESCE(i.coverage_state, '') != 'Alternate page with proper canonical tag'"]
+        if tier_where:
+            conditions.append(tier_where)
+        where_filter = "WHERE " + " AND ".join(conditions)
     else:
         # Normal mode: INNER JOIN forces an indexation_status row to exist,
         # verdict must be NEUTRAL, and cooldown must be expired.
@@ -146,10 +165,15 @@ def fetch_priority_urls(db, limit, force_all=False):
       GROUP BY page_url
     )"""
         join_clause = "JOIN eligible_status i"
-        where_filter = (
-            f"WHERE (i.last_request_indexing_submitted IS NULL "
-            f"     OR i.last_request_indexing_submitted < datetime('now', '-{RESUBMIT_DAYS} days'))"
-        )
+        conditions = []
+        if not ignore_cooldown:
+            conditions.append(
+                f"(i.last_request_indexing_submitted IS NULL "
+                f" OR i.last_request_indexing_submitted < datetime('now', '-{RESUBMIT_DAYS} days'))"
+            )
+        if tier_where:
+            conditions.append(tier_where)
+        where_filter = "WHERE " + " AND ".join(conditions) if conditions else ""
 
     sql = f"""
     WITH {publishable_cte}
@@ -162,12 +186,13 @@ def fetch_priority_urls(db, limit, force_all=False):
     {where_filter}
     ORDER BY
       CASE p.tier
-        WHEN 'city' THEN 1
-        WHEN 'money' THEN 2
-        WHEN 'blog' THEN 3
-        WHEN 'brand' THEN 4
-        WHEN 'compare' THEN 5
-        WHEN 'state' THEN 6
+        WHEN 'money' THEN 1
+        WHEN 'answers' THEN 2
+        WHEN 'city' THEN 3
+        WHEN 'blog' THEN 4
+        WHEN 'brand' THEN 5
+        WHEN 'compare' THEN 6
+        WHEN 'state' THEN 7
         ELSE 99
       END,
       p.sort_key DESC
@@ -183,6 +208,7 @@ def fetch_priority_urls(db, limit, force_all=False):
     skipped = {"indexed": 0, "unchecked": 0, "cooldown": 0}
     if not force_all:
         # Show why URLs were filtered out so quota savings are visible.
+        breakdown_where = f"WHERE {tier_where}" if tier_where else ""
         breakdown = db.conn.execute(f"""
             WITH {publishable_cte}
             SELECT
@@ -194,19 +220,21 @@ def fetch_priority_urls(db, limit, force_all=False):
                        THEN 1 ELSE 0 END) AS cooldown
             FROM publishable p
             LEFT JOIN indexation_status i ON i.page_url = '{SITE}/' || p.path || '/'
+            {breakdown_where}
         """).fetchone()
         skipped["indexed"] = breakdown[0] or 0
         skipped["unchecked"] = breakdown[1] or 0
         skipped["cooldown"] = breakdown[2] or 0
 
-    by_tier = {t: sum(1 for u in urls if u["tier"] == t) for t in ("city", "money", "blog", "brand", "compare", "state")}
-    print(f"  City:     {by_tier['city']}")
+    by_tier = {t: sum(1 for u in urls if u["tier"] == t) for t in VALID_TIERS}
     print(f"  Money:    {by_tier['money']}")
+    print(f"  Answers:  {by_tier['answers']}")
+    print(f"  City:     {by_tier['city']}")
     print(f"  Blog:     {by_tier['blog']}")
     print(f"  Brand:    {by_tier['brand']}")
     print(f"  Compare:  {by_tier['compare']}")
     print(f"  State:    {by_tier['state']}")
-    print(f"  (Answers + wellness excluded — Jammi submits manually)")
+    print(f"  (Wellness excluded)")
     if not force_all:
         print(f"  (Skipped {skipped['indexed']} already indexed (PASS), "
               f"{skipped['unchecked']} unverified, "
@@ -263,6 +291,8 @@ def main():
     parser.add_argument("--indexnow-only", action="store_true",
                         help="Skip Google Indexing API (already quota-exhausted)")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--tier", choices=VALID_TIERS,
+                        help="Only submit one tier, e.g. money or answers")
     parser.add_argument("--limit", type=int, default=GOOGLE_DAILY_QUOTA,
                         help=f"Max URLs to push (default {GOOGLE_DAILY_QUOTA})")
     args = parser.parse_args()
@@ -272,7 +302,14 @@ def main():
     print(f"{'='*60}")
 
     db = CreditDocDB()
-    url_list = fetch_priority_urls(db, args.limit)
+    indexnow_tier_reping = args.indexnow_only and args.tier in ("money", "answers", "blog")
+    url_list = fetch_priority_urls(
+        db,
+        args.limit,
+        tier_filter=args.tier,
+        force_all=indexnow_tier_reping,
+        ignore_cooldown=indexnow_tier_reping,
+    )
     print(f"\nTotal priority queue: {len(url_list)} URLs")
 
     if not url_list:
