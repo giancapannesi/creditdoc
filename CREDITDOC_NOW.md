@@ -4,6 +4,46 @@
 
 ---
 
+## 2026-05-31 — Traffic Drop Investigation + Production Worker 503 Recovery
+
+**Status: production recovered and verified.**
+
+Jammi noticed CreditDoc traffic appeared to be dropping despite the volume of
+SEO/content work. Investigation used local GSC reports and live route checks.
+
+GSC facts from the latest local report:
+
+- `gsc_report_2026-05-31.json` covers `2026-05-21 to 2026-05-28`.
+- Summary: 1 click, 2,629 impressions, 0.04% CTR, average position 50.3.
+- This is materially below the May 10 peak report
+  (4 clicks, 5,153 impressions, 0.08% CTR, average position 18.8).
+- Impressions had started recovering by May 31 from the May 29 low of 2,256.
+- Main SEO read: this is not a Search Console “issue” report; it is a traffic
+  and CTR/position problem in the performance data, while newer pages are still
+  too fresh to judge.
+
+Production reliability issue found:
+
+- Direct live checks from the VPS found Cloudflare Worker `503` responses with
+  body `error code: 1102` on `/review/`, `/best/`, `/credit-guide/`,
+  `/state/`, and `/answers/` index route families.
+- The exact same routes rendered locally through `wrangler dev --local` with
+  Supabase env as HTTP 200, so the current clean bundle could render them.
+
+Recovery:
+
+- Redeployed from the clean current working tree using
+  `/srv/BusinessOps/creditdoc/deploy.sh`.
+- Cloudflare Worker version deployed:
+  `44d0d733-3c99-4c70-90a8-a78cb879d861`.
+- Cache purge succeeded.
+- Post-deploy checks returned HTTP 200 for both Googlebot and browser user
+  agents on:
+  `/`, `/review/lexington-law/`, `/best/best-credit-repair-companies/`,
+  `/credit-guide/austin-tx/`, `/state/wyoming/`,
+  `/answers/best-debt-consolidation-loans-bad-credit/`, and `/answers/`.
+- Repo working tree remained clean after deploy.
+
 ## 2026-05-26 — Local Authority Graph Project Restart
 
 **Status: original strategic project resumed after cleanup/deploy detour.**
