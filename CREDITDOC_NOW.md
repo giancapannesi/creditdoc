@@ -44,6 +44,23 @@ Recovery:
   `/answers/best-debt-consolidation-loans-bad-credit/`, and `/answers/`.
 - Repo working tree remained clean after deploy.
 
+Safeguard added after recovery:
+
+- Added `tools/creditdoc_route_self_healer.py`.
+- It monitors 10 live route-family URLs: homepage, review, best/listicle, city
+  guide, state, answers index, answer page, category, blog, and
+  financial-wellness.
+- It retries failures and only runs a self-heal deploy when at least two
+  critical SSR route families fail after retry.
+- Self-heal uses the existing safe deploy path: `./deploy.sh`, then verifies the
+  same route set after deploy.
+- Guardrails: one active self-healer at a time, one active deploy at a time,
+  six-hour heal cooldown, AgentMail notification on heal/heal-failure/cooldown.
+- Cron installed every 15 minutes:
+  `/srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/creditdoc/tools/creditdoc_route_self_healer.py`.
+- Verification passed: `py_compile`, monitor-only live run, normal live run
+  (`10/10` healthy, no deploy), and `/srv/BusinessOps/tools/verify_crons.sh`.
+
 ## 2026-05-26 — Local Authority Graph Project Restart
 
 **Status: original strategic project resumed after cleanup/deploy detour.**
