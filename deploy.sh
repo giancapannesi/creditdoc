@@ -38,7 +38,9 @@ else
   echo "$purge_result"
 fi
 
-# 4. Verify site loads — homepage, CSS, and SSR routes
+# 4. Verify site loads — homepage, CSS, and SSR route families.
+# These SSR checks also warm Cloudflare's versioned cache after purge/deploy so
+# users and crawlers are less likely to be the first expensive render.
 echo ""
 echo "[4/4] Verifying site..."
 sleep 2
@@ -52,16 +54,24 @@ css_status=$(curl -s -o /dev/null -w "%{http_code}" "https://www.creditdoc.co${c
 echo "Homepage: $status | CSS ($css_url): $css_status"
 [ "$status" != "200" ] || [ "$css_status" != "200" ] && FAIL=1
 
-# SSR smoke tests — one URL per dynamic route type
+# SSR smoke tests — one URL per dynamic route family
 SSR_URLS=(
-  "/credit-guide/austin-tx/"
   "/review/lexington-law/"
+  "/state/wyoming/"
+  "/credit-guide/austin-tx/"
+  "/credit-guide/austin-tx/credit-repair/"
   "/answers/best-debt-consolidation-loans-bad-credit/"
   "/best/best-credit-repair-companies/"
+  "/categories/credit-repair/"
+  "/blog/how-to-get-a-personal-loan-with-bad-credit-in-2026/"
+  "/financial-wellness/credit-score-basics/"
 )
 for url in "${SSR_URLS[@]}"; do
-  s=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 10 "https://www.creditdoc.co${url}")
-  echo "  $url → $s"
+  headers=$(mktemp)
+  s=$(curl -sL -D "$headers" -o /dev/null -w "%{http_code}" --max-time 10 "https://www.creditdoc.co${url}")
+  cache=$(grep -i '^x-cdm-cache:' "$headers" | tail -1 | tr -d '\r' | sed 's/^x-cdm-cache: //I')
+  rm -f "$headers"
+  echo "  $url → $s${cache:+ | cache=$cache}"
   [ "$s" != "200" ] && FAIL=1
 done
 

@@ -3717,3 +3717,24 @@ Verification:
 - Live status checks returned HTTP 200 for Lexington Law review, Wyoming state,
   Austin city guide, Austin credit-repair city-guide category, a blog post, and
   a financial-wellness guide.
+
+## 2026-06-01 - Deploy Route Warmer Coverage
+
+Expanded `deploy.sh` post-deploy verification so it also warms the main
+versioned-cache SSR route families after every cache purge/deploy:
+
+- review
+- state
+- city guide
+- city guide category
+- answer
+- best/listicle
+- category
+- blog
+- financial wellness
+
+Verification:
+
+- `bash -n deploy.sh` passed.
+- Live checks for every warmer URL returned HTTP 200.
+- All checked cacheable routes returned `x-cdm-cache: HIT` after warming.
