@@ -3767,3 +3767,11 @@ Implementation notes:
 Verification:
 
 - `npm run build` passed.
+- Deployed Worker version `b045b169-8217-436c-b450-4767becc0703`.
+- Initial deploy script verification exited early because `set -e` treated a
+  missing optional `x-cdm-cache` header as fatal in the deploy warmer pipeline.
+  Fixed the script with an explicit `|| true` on that optional header read.
+- Manual post-deploy checks returned HTTP 200 for all warmed route families.
+- Second-pass checks showed `x-cdm-cache: HIT` for `/answers/`, answer slug,
+  best/listicle, category, blog, and financial-wellness routes.
+- Self-healer `--check-only` returned `10/10` route families healthy.

@@ -70,7 +70,7 @@ SSR_URLS=(
 for url in "${SSR_URLS[@]}"; do
   headers=$(mktemp)
   s=$(curl -sL -D "$headers" -o /dev/null -w "%{http_code}" --max-time 10 "https://www.creditdoc.co${url}")
-  cache=$(grep -i '^x-cdm-cache:' "$headers" | tail -1 | tr -d '\r' | sed 's/^x-cdm-cache: //I')
+  cache=$(grep -i '^x-cdm-cache:' "$headers" | tail -1 | tr -d '\r' | sed 's/^x-cdm-cache: //I' || true)
   rm -f "$headers"
   echo "  $url → $s${cache:+ | cache=$cache}"
   [ "$s" != "200" ] && FAIL=1
