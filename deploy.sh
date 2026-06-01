@@ -66,6 +66,7 @@ SSR_URLS=(
   "/categories/credit-repair/"
   "/blog/how-to-get-a-personal-loan-with-bad-credit-in-2026/"
   "/financial-wellness/credit-score-basics/"
+  "/brand/advance-america/"
 )
 for url in "${SSR_URLS[@]}"; do
   headers=$(mktemp)

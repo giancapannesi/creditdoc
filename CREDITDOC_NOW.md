@@ -3775,3 +3775,14 @@ Verification:
 - Second-pass checks showed `x-cdm-cache: HIT` for `/answers/`, answer slug,
   best/listicle, category, blog, and financial-wellness routes.
 - Self-healer `--check-only` returned `10/10` route families healthy.
+
+## 2026-06-01 - Brand Page Versioned Cache
+
+Added middleware versioned cache coverage for `/brand/[brand]/` public SEO
+pages using `brands.updated_at`.
+
+Verification:
+
+- `npm run build` passed.
+- `/brand/advance-america/` returned HTTP 200 before deployment and was added
+  to the deploy warmer URL list.

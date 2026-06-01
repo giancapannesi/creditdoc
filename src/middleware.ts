@@ -97,7 +97,7 @@ function applySecurityHeaders(res: Response): Response {
 }
 
 interface CacheableRoute {
-  table: 'answers' | 'lenders' | 'listicles' | 'categories' | 'states' | 'city_guides' | 'blog_posts' | 'wellness_guides';
+  table: 'answers' | 'lenders' | 'listicles' | 'categories' | 'states' | 'city_guides' | 'blog_posts' | 'wellness_guides' | 'brands';
   /** Maps URL pathname → row slug. Returns null if path is not an SSR row page. */
   match: (pathname: string) => string | null;
   /** Optional: route variant tag (for cache-key namespacing). */
@@ -164,6 +164,14 @@ const CACHEABLE_ROUTES: CacheableRoute[] = [
     variant: 'wellness-slug',
     match: (p) => {
       const m = p.match(/^\/financial-wellness\/([^/]+)\/?$/);
+      return m ? m[1] : null;
+    },
+  },
+  {
+    table: 'brands',
+    variant: 'brand-slug',
+    match: (p) => {
+      const m = p.match(/^\/brand\/([^/]+)\/?$/);
       return m ? m[1] : null;
     },
   },
