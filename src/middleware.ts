@@ -97,7 +97,7 @@ function applySecurityHeaders(res: Response): Response {
 }
 
 interface CacheableRoute {
-  table: 'answers' | 'lenders' | 'listicles' | 'categories';
+  table: 'answers' | 'lenders' | 'listicles' | 'categories' | 'states' | 'city_guides' | 'blog_posts' | 'wellness_guides';
   /** Maps URL pathname → row slug. Returns null if path is not an SSR row page. */
   match: (pathname: string) => string | null;
   /** Optional: route variant tag (for cache-key namespacing). */
@@ -118,6 +118,55 @@ interface CacheableRoute {
 // /answers/index and /answers/[slug] both ride /answers/* — the index is
 // excluded by the slug-extraction returning null when no slug is present.
 const CACHEABLE_ROUTES: CacheableRoute[] = [
+  {
+    table: 'lenders',
+    variant: 'review-slug',
+    match: (p) => {
+      const m = p.match(/^\/review\/([^/]+)\/?$/);
+      return m ? m[1] : null;
+    },
+  },
+  {
+    table: 'states',
+    variant: 'state-slug',
+    match: (p) => {
+      const m = p.match(/^\/state\/([^/]+)\/?$/);
+      return m ? m[1] : null;
+    },
+    versionFetch: fetchStateVersionBySlug,
+  },
+  {
+    table: 'city_guides',
+    variant: 'credit-guide-slug',
+    match: (p) => {
+      const m = p.match(/^\/credit-guide\/([^/]+)\/?$/);
+      return m ? m[1] : null;
+    },
+  },
+  {
+    table: 'city_guides',
+    variant: 'credit-guide-category',
+    match: (p) => {
+      const m = p.match(/^\/credit-guide\/([^/]+)\/([^/]+)\/?$/);
+      return m ? m[1] : null;
+    },
+  },
+  {
+    table: 'blog_posts',
+    variant: 'blog-slug',
+    match: (p) => {
+      const m = p.match(/^\/blog\/([^/]+)\/?$/);
+      return m ? m[1] : null;
+    },
+  },
+  {
+    table: 'wellness_guides',
+    variant: 'wellness-slug',
+    match: (p) => {
+      const m = p.match(/^\/financial-wellness\/([^/]+)\/?$/);
+      return m ? m[1] : null;
+    },
+  },
   {
     table: 'answers',
     variant: 'answers-slug',
@@ -214,6 +263,33 @@ async function fetchCategoryAggregateVersion(
     // timestamp with time zone so format is consistent.
     candidates.sort();
     return candidates[candidates.length - 1];
+  } catch {
+    return null;
+  }
+}
+
+async function fetchStateVersionBySlug(
+  slug: string,
+  env: RuntimeEnvLike
+): Promise<string | null> {
+  if (!env.SUPABASE_URL || !env.SUPABASE_ANON_KEY) return null;
+  const name = slug.replace(/-/g, " ");
+  const url =
+    `${env.SUPABASE_URL}/rest/v1/states` +
+    `?name=ilike.${encodeURIComponent(name)}` +
+    `&select=updated_at` +
+    `&limit=1`;
+  try {
+    const res = await fetch(url, {
+      headers: {
+        apikey: env.SUPABASE_ANON_KEY,
+        authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+      },
+      signal: AbortSignal.timeout(2000),
+    });
+    if (!res.ok) return null;
+    const rows = (await res.json()) as Array<{ updated_at?: string }>;
+    return rows?.[0]?.updated_at ?? null;
   } catch {
     return null;
   }

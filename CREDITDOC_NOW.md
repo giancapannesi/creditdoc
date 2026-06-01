@@ -3690,3 +3690,30 @@ Verification:
 - Live production route check returned `10/10` route families healthy.
 - Correct de-duplicated historical heal count as of 2026-06-01 06:00 UTC:
   2 actual heal starts, not 4.
+
+## 2026-06-01 - SSR Versioned Cache Coverage Pass 1
+
+Expanded existing middleware versioned cache coverage to the main SSR route
+families that were still relying on page `Cache-Control` headers only:
+
+- `/review/[slug]/`
+- `/state/[slug]/`
+- `/credit-guide/[slug]/`
+- `/credit-guide/[slug]/[category]/`
+- `/blog/[slug]/`
+- `/financial-wellness/[slug]/`
+
+Implementation notes:
+
+- Reused the existing Cloudflare Cache API middleware pattern.
+- Version keys use each route family's existing source table `updated_at`.
+- State pages use a custom slug-to-state-name version lookup because the
+  `states` table has no slug column.
+
+Verification:
+
+- `npm run build` passed.
+- `git diff --check` passed.
+- Live status checks returned HTTP 200 for Lexington Law review, Wyoming state,
+  Austin city guide, Austin credit-repair city-guide category, a blog post, and
+  a financial-wellness guide.
