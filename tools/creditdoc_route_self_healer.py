@@ -92,6 +92,8 @@ def fetch(url: str, timeout: int) -> dict:
         "bytes": 0,
         "seconds": None,
         "error": None,
+        "cf_ray": None,
+        "x_cdm_cache": None,
         "body_prefix": "",
     }
     try:
@@ -99,11 +101,15 @@ def fetch(url: str, timeout: int) -> dict:
             body = resp.read()
             rec["status"] = resp.status
             rec["bytes"] = len(body)
+            rec["cf_ray"] = resp.headers.get("cf-ray")
+            rec["x_cdm_cache"] = resp.headers.get("x-cdm-cache")
             rec["body_prefix"] = body[:80].decode("utf-8", "replace").replace("\n", " ")
     except urllib.error.HTTPError as exc:
         body = exc.read()
         rec["status"] = exc.code
         rec["bytes"] = len(body)
+        rec["cf_ray"] = exc.headers.get("cf-ray")
+        rec["x_cdm_cache"] = exc.headers.get("x-cdm-cache")
         rec["body_prefix"] = body[:80].decode("utf-8", "replace").replace("\n", " ")
         rec["error"] = f"HTTPError: {exc}"
     except Exception as exc:
@@ -226,7 +232,9 @@ def main(argv: list[str]) -> int:
             log(
                 "failure "
                 f"family={failure['family']} status={failure.get('status')} "
-                f"bytes={failure.get('bytes')} error={failure.get('error')} "
+                f"bytes={failure.get('bytes')} seconds={failure.get('seconds')} "
+                f"cache={failure.get('x_cdm_cache')} cf_ray={failure.get('cf_ray')} "
+                f"error={failure.get('error')} "
                 f"url={failure['url']}"
             )
 

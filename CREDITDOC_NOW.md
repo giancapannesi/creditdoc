@@ -3738,3 +3738,17 @@ Verification:
 - `bash -n deploy.sh` passed.
 - Live checks for every warmer URL returned HTTP 200.
 - All checked cacheable routes returned `x-cdm-cache: HIT` after warming.
+
+## 2026-06-01 - Self-Healer Diagnostics Pass
+
+Enhanced `tools/creditdoc_route_self_healer.py` route records with:
+
+- Cloudflare `cf-ray`
+- CreditDoc `x-cdm-cache`
+- response seconds in failure log lines
+
+Verification:
+
+- `python3 -m py_compile tools/creditdoc_route_self_healer.py` passed.
+- `--check-only` returned `10/10` route families healthy.
+- State file now records cache/ray evidence for checked routes.
