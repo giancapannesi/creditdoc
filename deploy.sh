@@ -60,6 +60,7 @@ SSR_URLS=(
   "/state/wyoming/"
   "/credit-guide/austin-tx/"
   "/credit-guide/austin-tx/credit-repair/"
+  "/answers/"
   "/answers/best-debt-consolidation-loans-bad-credit/"
   "/best/best-credit-repair-companies/"
   "/categories/credit-repair/"

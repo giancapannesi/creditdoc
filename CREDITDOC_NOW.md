@@ -3752,3 +3752,18 @@ Verification:
 - `python3 -m py_compile tools/creditdoc_route_self_healer.py` passed.
 - `--check-only` returned `10/10` route families healthy.
 - State file now records cache/ray evidence for checked routes.
+
+## 2026-06-01 - Answers Index Versioned Cache
+
+Added middleware versioned cache coverage for `/answers/`, which was one of the
+SSR route families that previously appeared in self-healer failures.
+
+Implementation notes:
+
+- `/answers/` uses the latest visible `answers.updated_at` value as the cache
+  version.
+- Added `/answers/` to the deploy warmer URL list.
+
+Verification:
+
+- `npm run build` passed.

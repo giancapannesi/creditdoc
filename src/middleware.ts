@@ -169,6 +169,12 @@ const CACHEABLE_ROUTES: CacheableRoute[] = [
   },
   {
     table: 'answers',
+    variant: 'answers-index',
+    match: (p) => (/^\/answers\/?$/.test(p) ? '__index' : null),
+    versionFetch: (_slug, env) => fetchLatestTableVersion('answers', env),
+  },
+  {
+    table: 'answers',
     variant: 'answers-slug',
     match: (p) => {
       const m = p.match(/^\/answers\/([^/]+)\/?$/);
@@ -278,6 +284,32 @@ async function fetchStateVersionBySlug(
     `${env.SUPABASE_URL}/rest/v1/states` +
     `?name=ilike.${encodeURIComponent(name)}` +
     `&select=updated_at` +
+    `&limit=1`;
+  try {
+    const res = await fetch(url, {
+      headers: {
+        apikey: env.SUPABASE_ANON_KEY,
+        authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+      },
+      signal: AbortSignal.timeout(2000),
+    });
+    if (!res.ok) return null;
+    const rows = (await res.json()) as Array<{ updated_at?: string }>;
+    return rows?.[0]?.updated_at ?? null;
+  } catch {
+    return null;
+  }
+}
+
+async function fetchLatestTableVersion(
+  table: string,
+  env: RuntimeEnvLike
+): Promise<string | null> {
+  if (!env.SUPABASE_URL || !env.SUPABASE_ANON_KEY) return null;
+  const url =
+    `${env.SUPABASE_URL}/rest/v1/${table}` +
+    `?select=updated_at` +
+    `&order=updated_at.desc` +
     `&limit=1`;
   try {
     const res = await fetch(url, {
