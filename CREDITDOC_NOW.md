@@ -3663,3 +3663,30 @@ Notes:
 Workpack:
 
 - `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Sitewide_Page_Upgrade_2026-05-26/batch_151_notes_2026-05-27.md`
+
+## 2026-06-01 - Route Self-Healer Log De-Dupe
+
+Fixed duplicate logging in
+`tools/creditdoc_route_self_healer.py`.
+
+Finding:
+
+- The monitor wrote each log line directly to
+  `/srv/BusinessOps/logs/creditdoc_route_self_healer.log`.
+- Cron also redirected stdout to that same file.
+- Result: historical self-healer counts were doubled in the raw log.
+
+Change:
+
+- `log()` now detects whether stdout already points at the self-healer log.
+- If cron is already redirecting stdout to the log, the script does not append a
+  second copy.
+- Manual runs still print and append normally.
+
+Verification:
+
+- `python3 -m py_compile tools/creditdoc_route_self_healer.py` passed.
+- Cron-style redirected `--check-only` run wrote one line, not two.
+- Live production route check returned `10/10` route families healthy.
+- Correct de-duplicated historical heal count as of 2026-06-01 06:00 UTC:
+  2 actual heal starts, not 4.

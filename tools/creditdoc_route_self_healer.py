@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import fcntl
 import json
+import os
 import subprocess
 import sys
 import time
@@ -66,12 +67,20 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def stdout_points_to_log() -> bool:
+    try:
+        return os.path.samefile("/proc/self/fd/1", LOG)
+    except OSError:
+        return False
+
+
 def log(msg: str) -> None:
     LOG.parent.mkdir(parents=True, exist_ok=True)
     line = f"[{datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}] {msg}"
-    print(line)
-    with LOG.open("a") as f:
-        f.write(line + "\n")
+    print(line, flush=True)
+    if not stdout_points_to_log():
+        with LOG.open("a") as f:
+            f.write(line + "\n")
 
 
 def fetch(url: str, timeout: int) -> dict:
