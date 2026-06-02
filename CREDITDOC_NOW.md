@@ -4,6 +4,41 @@
 
 ---
 
+## 2026-06-02 — Generator Hallucination / Pricing Guardrails
+
+**Status: patched and function-tested.**
+
+Added operational guardrails to the active CreditDoc content creation scripts in
+`/srv/BusinessOps/tools` so generated pages fail before publishing if they
+invent current provider prices, fees, APRs, BBB ratings, Google ratings, star
+ratings, guarantees, approval odds, or other certainty claims.
+
+Patched active generators:
+
+- `creditdoc_content_guardrails.py` added as the shared detector.
+- `creditdoc_cluster_executor.py` now hard-fails answer pages with unsupported
+  current provider facts or certainty claims, alongside the first-person claim
+  gate.
+- `templates/cluster_asset_prompt.md` now explicitly forbids invented current
+  provider facts.
+- `creditdoc_blog.py`, `creditdoc_wellness_generator.py`, and
+  `creditdoc_city_guide_generator.py` now instruct the model not to invent
+  provider facts and reject unsafe output before save.
+- `creditdoc_comparison_generator.py` now rejects any dollar amount, rating, or
+  guarantee that does not appear in the supplied source lender data.
+
+Verification:
+
+- Direct guardrail test: invented `$99/month`, `4.9/5 Google rating`, and
+  `guaranteed approval` fails.
+- Direct guardrail test: the same `$99` and `4.9/5` pass when supplied as source
+  lender data.
+- Legal/educational context such as a `36% MAPR` statutory cap passes.
+- Answer compliance function forces unsafe generated answer content below the
+  publish threshold.
+- Comparison generator accepts sourced facts and rejects invented facts.
+- `python3 -m py_compile` passed for all patched generator scripts.
+
 ## 2026-06-02 — Four Answer Pages First-Person Claim Fix
 
 **Status: committed, pushed, deployed, DB-updated, cache-purged, and live-verified.**
