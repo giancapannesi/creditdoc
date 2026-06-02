@@ -3952,3 +3952,38 @@ Verification:
 - `npm run build` passed.
 - `/brand/advance-america/` returned HTTP 200 before deployment and was added
   to the deploy warmer URL list.
+
+## 2026-06-02 - Debugger Follow-Up: Guardrails and Comparison Copy
+
+Fixed the issues found by the debugger review of the CreditDoc content
+guardrails:
+
+- Existing comparison render safety now also softens `clear pick`, which had
+  leaked into one rendered comparison page.
+- Public policy pages no longer promise hard monthly pricing verification or
+  quarterly full reviews unless a proven process backs that exact cadence. They
+  now describe scheduled data refreshes, editorial passes, and source updates.
+- Operational generator guardrails in `/srv/BusinessOps/tools` now catch
+  natural-language current fact claims such as `$99 per month`, `4.9 out of 5
+  on Google`, `12% APR`, `approves 95% of applicants`, and `money-back
+  guarantee`.
+- Comparison generator guardrails now validate sourced values per named company,
+  so a price/rating from Company A cannot be assigned to Company B just because
+  the value appeared somewhere in the two-company prompt.
+
+Repo commit and deploy:
+
+- Commit: `619955e7c1 fix: strengthen CreditDoc comparison safety copy`.
+- Deployed Cloudflare Worker version
+  `07b46d6f-a5a0-4e99-832f-2d174c7e010a`.
+
+Verification:
+
+- `npm run build` passed with robots/sitemap checks.
+- Guardrail regression checks passed: unsafe provider claims fail, legal
+  educational `36% MAPR` context passes, right-company sourced values pass, and
+  wrong-company sourced values fail.
+- Live `/disclaimer/`, `/editorial-policy/`, `/methodology/`, and the touched
+  comparison URL returned HTTP 200.
+- Live touched comparison page no longer contains `clear pick`.
+- Route self-healer check-only returned `10/10` with zero failures.
