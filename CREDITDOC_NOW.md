@@ -4,6 +4,29 @@
 
 ---
 
+## 2026-06-02 — Four Answer Pages First-Person Claim Fix
+
+**Status: committed, pushed, deployed, DB-updated, cache-purged, and live-verified.**
+
+Removed fabricated first-person/lived-experience anecdotes from these answer
+pages and replaced them with neutral hypothetical examples:
+
+- `/answers/can-you-get-a-business-loan-with-bad-credit/`
+- `/answers/business-loan-rates-fees-explained/`
+- `/answers/debt-to-income-ratio-explained/`
+- `/answers/equipment-financing-explained/`
+
+Important source-of-truth lesson: live `/answers/[slug]` pages read
+`public.answers.body_inline` from Supabase at runtime, not only
+`src/content/answers/*.json`. Static JSON edits alone do not change live answer
+pages. For answer fixes, update both the repo JSON and the Supabase `answers`
+row, then revalidate/purge cache and verify live HTML.
+
+Commit: `556721ff47 fix: remove first-person answer anecdotes`.
+Worker deployed: `bee68656-2b85-4221-a23b-1e4b31f98f31`.
+Verification: four URLs returned HTTP 200; old phrases absent; replacement
+neutral examples present. Repo clean after deploy.
+
 ## 2026-06-02 — CreditDoc AI Provider Hardening
 
 **Status: patched and smoke-verified; no production deploy run for this change.**
