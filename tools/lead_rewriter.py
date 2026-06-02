@@ -239,7 +239,7 @@ def validate_output(text, name, phone, city, address):
 
 # ─── Claude CLI Call ──────────────────────────────────────────────────────────
 
-def call_claude(prompt, model="claude-haiku-4-5"):
+def call_claude(prompt, model="claude-opus-4-6"):
     """
     Call Claude CLI with the given prompt.
     Returns (output_text, error_str).

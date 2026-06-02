@@ -4,6 +4,38 @@
 
 ---
 
+## 2026-06-02 — CreditDoc AI Provider Hardening
+
+**Status: patched and smoke-verified; no production deploy run for this change.**
+
+Root cause found for the repeated Anthropic-key failures: CreditDoc automation
+used inconsistent AI provider paths. Some scripts used Claude CLI/OAuth and
+worked, while others still used direct Anthropic SDK paths or attempted to use
+Claude OAuth token material like an Anthropic SDK API key.
+
+Provider contract now lives in `/srv/BusinessOps/tools/creditdoc_oauth.py`:
+
+- Claude CLI first, normalized to `claude-opus-4-6`.
+- Real Anthropic SDK only if a real `ANTHROPIC_API_KEY` exists.
+- OpenAI fallback using existing key files.
+- Gemini fallback using existing key files.
+
+Patched scripts include the global CreditDoc blog, city guide, autonomous
+engine, state legislation, cluster executor, comparison, QA auditor/fixer,
+validator, smoke-test paths, plus repo-side `tools/lead_rewriter.py`.
+
+Verification evidence:
+
+- Patched scripts passed `python3 -m py_compile`.
+- Bad-pattern grep found no remaining CreditDoc matches for
+  `ANTHROPIC_API_KEY is not set`, OAuth-token-as-SDK-key, or Haiku model calls.
+- Claude CLI Opus smoke returned `OK`.
+- Full `/srv/BusinessOps/tools/creditdoc_smoke_test.py` passed `10/10` at
+  `2026-06-02 07:29 UTC`.
+
+Audit/handover:
+`/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_AI_Provider_Audit_2026-06-02.md`
+
 ## 2026-05-31 — Traffic Drop Investigation + Production Worker 503 Recovery
 
 **Status: production recovered and verified.**
