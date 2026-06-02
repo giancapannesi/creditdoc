@@ -4,6 +4,62 @@
 
 ---
 
+## 2026-06-02 — Search State Query Robots/GSC Fix
+
+**Status: deployed, live-verified, and build-guarded.**
+
+Jammi flagged that the correct GSC domain property still showed these URLs as
+`Blocked by robots.txt`:
+
+- `https://www.creditdoc.co/search/?state=Texas`
+- `https://www.creditdoc.co/search/?state=Utah`
+- `https://www.creditdoc.co/search/?state=Iowa`
+
+Root cause: old state-filtered search parameter URLs had been crawled by Google
+as `/search/?state=...` pages. Current live robots.txt allows crawling, but GSC
+URL Inspection API still reports the old May 22-24 crawl state until Google
+recrawls them.
+
+Code fix:
+
+- `src/pages/search.astro` now redirects state-only search filters with a 301 to
+  the proper state landing page:
+  `/search/?state=Texas` -> `/state/texas/`, etc.
+- Clean `/search/` is no longer unconditional `noindex`.
+- Remaining filtered search pages still use page-level `noindex` via
+  `noindex={hasSearchFilters}`.
+- `scripts/check_robots_contract.mjs` now fails prebuild if the state-filter
+  redirect or conditional search noindex policy is removed.
+
+Deployment:
+
+- Deployed via `/srv/BusinessOps/creditdoc/deploy.sh`.
+- Cloudflare Worker version:
+  `0a984615-d8e2-48a1-abfd-a5cc24a9afcb`.
+
+Verification:
+
+- `npm run build` passed after the route fix.
+- Deploy script passed build, Cloudflare deploy, cache purge, and live route
+  checks.
+- Second `npm run build` passed after adding the regression guard.
+- Live Googlebot checks:
+  - Texas state-query URL: `301 /state/texas/` then `200`.
+  - Utah state-query URL: `301 /state/utah/` then `200`.
+  - Iowa state-query URL: `301 /state/iowa/` then `200`.
+  - Clean `/search/`: `200`.
+- Live meta checks show `/search/` has canonical
+  `https://www.creditdoc.co/search/` and no robots noindex tag; state-query
+  redirects resolve to state-page canonicals.
+
+GSC caveat:
+
+- URL Inspection API still shows the three state-query URLs as
+  `Blocked by robots.txt` with last crawl dates from May 22-24.
+- This is stale Google crawl data, not the current live response.
+- Do not tell Jammi to validate the GSC issue again until a fresh inspection or
+  recrawl no longer shows the stale blocked state.
+
 ## 2026-06-02 — Generator Hallucination / Pricing Guardrails
 
 **Status: patched and function-tested.**

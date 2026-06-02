@@ -11,12 +11,25 @@ const stateEntries = US_STATES.map((state) => ({
   name: state,
   abbr: STATE_ABBREVIATIONS[state] || '',
 }));
+
+const stateFilter = Astro.url.searchParams.get('state');
+const queryKeys = Array.from(Astro.url.searchParams.keys());
+
+if (stateFilter && queryKeys.length === 1) {
+  const matchedState = US_STATES.find((state) => state.toLowerCase() === stateFilter.toLowerCase());
+
+  if (matchedState) {
+    return Astro.redirect(`/state/${matchedState.toLowerCase().replace(/\s+/g, '-')}/`, 301);
+  }
+}
+
+const hasSearchFilters = Astro.url.searchParams.toString().length > 0;
 ---
 
 <BaseLayout
   title="Search Consumer Finance Providers | CreditDoc"
   description="Search and filter consumer finance providers by state, city, category, budget, and available third-party rating data."
-  noindex={true}
+  noindex={hasSearchFilters}
 >
   <!-- Header -->
   <section class="bg-white border-b border-border">
