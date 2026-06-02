@@ -36,6 +36,50 @@ Verification evidence:
 Audit/handover:
 `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_AI_Provider_Audit_2026-06-02.md`
 
+## 2026-06-02 — Content Feeds Triggered, Fixed, Deployed
+
+**Status: deployed and verified.**
+
+Cloudflare Worker version:
+`b24d47c1-8e2d-4312-b773-5a03f2641302`
+
+Real feed paths triggered:
+
+- Blog: generated `/blog/are-credit-repair-companies-legit-reddit/`.
+  Final accepted article: 2,330 words, 8 sections, 5 FAQs.
+- City guides: generated `/credit-guide/denton-tx/`.
+- Financial wellness: rejected and deleted weak
+  `credit-score-after-paying-debt`; accepted
+  `/financial-wellness/credit-report-errors-common/` at 2,408 words,
+  8 sections, 3 FAQs.
+- Comparisons: generated `/compare/dollar-financial-group-vs-refijet/`.
+- Answers/questions: generated
+  `/answers/can-you-get-a-business-loan-with-bad-credit/`, compliance 10/10.
+
+Code fixes found by real feed tests:
+
+- `creditdoc_blog.py`: missing `time` import fixed; blog quality floor added.
+- `creditdoc_wellness_generator.py`: quality floor, queue retry, JSON preface
+  recovery, and quarantine for one repeatedly failing slug.
+- `creditdoc_cluster_executor.py`: undefined `ROOT` provider import fixed.
+- `creditdoc_oauth.py`: long-form Opus timeout raised.
+
+Verification:
+
+- `npm run build` passed.
+- `/srv/BusinessOps/creditdoc/deploy.sh` passed.
+- New/touched live pages returned HTTP 200.
+- Rejected wellness slug returned HTTP 404.
+- `/srv/BusinessOps/tools/creditdoc_smoke_test.py` passed `10/10`.
+- `creditdoc_route_self_healer.py --check-only` passed `10/10`.
+- `/srv/BusinessOps/tools/verify_crons.sh` passed all 57 expected crons.
+- Money, answers, and blog IndexNow tier runs each submitted 20 URLs OK.
+- Today’s five new/touched URLs were directly submitted to IndexNow and Bing
+  with HTTP 200.
+
+Full report:
+`/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Content_Feed_Deployment_Report_2026-06-02.md`
+
 ## 2026-05-31 — Traffic Drop Investigation + Production Worker 503 Recovery
 
 **Status: production recovered and verified.**
