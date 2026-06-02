@@ -314,6 +314,7 @@ export function softenYmylCopy(text: string): string {
     .replace(/\bthe safer pick\b/gi, 'the profile with more listed risk-context fields')
     .replace(/\bsafer pick\b/gi, 'profile with more listed risk-context fields')
     .replace(/\bclear choice\b/gi, 'clearer profile to compare')
+    .replace(/\bclear pick\b/gi, 'profile with more relevant comparison context')
     .replace(/\bthe better choice\b/gi, 'the clearer profile to compare')
     .replace(/\bbetter choice\b/gi, 'clearer profile to compare')
     .replace(/\bthe clearer choice\b/gi, 'the profile with more listed context')
