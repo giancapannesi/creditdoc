@@ -318,7 +318,7 @@ def git_commit_changes(exported_slugs, content_exported, push=False, answer_slug
 
     if push:
         print("  Pushing to remote...")
-        subprocess.run(["git", "push", "origin", "main"], check=True, capture_output=True)
+        subprocess.run(["git", "push", "origin", "HEAD"], check=True, capture_output=True)
         print("  Pushed.")
 
     return True
