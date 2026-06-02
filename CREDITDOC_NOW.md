@@ -27,6 +27,38 @@ Worker deployed: `bee68656-2b85-4221-a23b-1e4b31f98f31`.
 Verification: four URLs returned HTTP 200; old phrases absent; replacement
 neutral examples present. Repo clean after deploy.
 
+## 2026-06-02 — Answer Generator First-Person Claim Gate
+
+**Status: patched and verified.**
+
+Patched the active answer creation path used by cron:
+
+- `/srv/BusinessOps/tools/creditdoc_cluster_executor.py`
+- `/srv/BusinessOps/tools/templates/cluster_asset_prompt.md`
+
+Changes:
+
+- Removed voice-profile instructions that encouraged fake personal experience
+  such as "when I applied for my first SBA loan" and "I've been there" energy.
+- Added a hard prompt boundary: CreditDoc must not invent first-person lived
+  experience about applying for loans, having a FICO score, being declined,
+  paying off debt, repairing credit, or using a lender.
+- Added `detect_narrator_claim_violations()` to scan generated answer sections.
+- Added a critical compliance failure:
+  `critical: no fabricated first-person lived-experience claims`.
+- The gate hard-fails the answer by capping the compliance score below the
+  publish threshold when this issue appears.
+
+Verification:
+
+- `python3 -m py_compile /srv/BusinessOps/tools/creditdoc_cluster_executor.py`
+  passed.
+- Detector test caught the bad example and allowed the neutral example.
+- `basic_compliance()` now fails the exact bad pattern below publish threshold.
+- `--preview` prompt includes the new critical voice boundary.
+- Active cron confirmed it runs the patched file:
+  `/srv/BusinessOps/tools/creditdoc_cluster_executor.py --apply`.
+
 ## 2026-06-02 — CreditDoc AI Provider Hardening
 
 **Status: patched and smoke-verified; no production deploy run for this change.**
