@@ -4,6 +4,44 @@
 
 ---
 
+## 2026-06-03 — Daily GSC Progress Calendar
+
+**Status: active.**
+
+Added a daily CreditDoc GSC progress calendar using the correct GSC domain
+property: `sc-domain:creditdoc.co`.
+
+Files:
+
+- Script: `/srv/BusinessOps/tools/creditdoc_gsc_progress_calendar.py`
+- JSONL history: `/srv/BusinessOps/CreditDoc_SEO/gsc_progress_calendar.jsonl`
+- Markdown calendar:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_GSC_Progress_Calendar_2026-06.md`
+- Cron log: `/srv/BusinessOps/logs/creditdoc_gsc_progress_calendar.log`
+
+Cron:
+
+- `5 10 * * * /srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/creditdoc_gsc_progress_calendar.py >> /srv/BusinessOps/logs/creditdoc_gsc_progress_calendar.log 2>&1`
+
+The script is idempotent by `run_date`, so rerunning the same day replaces the
+same row rather than duplicating the calendar entry. It logs latest complete
+7-day and 28-day GSC traffic, week-over-week change, and page-family breakdown
+for review, city guides, answers, blogs, wellness, best, compare, state, and
+other page groups.
+
+Baseline written on 2026-06-03:
+
+- GSC complete through: 2026-06-01
+- Latest 7d: 2 clicks / 11,552 impressions
+- Latest 28d: 13 clicks / 35,443 impressions
+- Leading family: review pages
+
+Verification:
+
+- Manual run completed and wrote the JSONL + markdown calendar.
+- `--print-only` returned valid JSON.
+- `verify_crons.sh` passed: `OK: All 59 expected crons present`.
+
 ## 2026-06-02 — Search State Query Robots/GSC Fix
 
 **Status: deployed, live-verified, and build-guarded.**
