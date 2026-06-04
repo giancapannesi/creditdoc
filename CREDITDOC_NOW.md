@@ -55,6 +55,24 @@ Tomorrow rule: check `already_worked_review_slugs.csv` before editing any GSC
 candidate; do not redo Marco's, Vigo chain repair, Phase 1 held pages, or prior
 metadata batches unless fresh GSC evidence shows a new issue.
 
+Execution plan now saved:
+
+- Repo plan:
+  `/srv/BusinessOps/creditdoc/docs/plans/2026-06-04-creditdoc-seo-review-sequence.md`
+- Project handoff:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_SEO_Tomorrow_Startpack_2026-06-04/SEO_REVIEW_SEQUENCE_PLAN_2026-06-04.md`
+- Memory copy:
+  `/root/.claude/projects/-srv-BusinessOps/memory/creditdoc_seo_review_sequence_plan_2026-06-04.md`
+
+Plan sequence:
+
+1. Reload context and duplicate-work guard.
+2. Audit all 13 first-batch pages live before editing.
+3. Edit the safest credit-repair pages first.
+4. Edit non-credit-repair pages only after source/claim validation.
+5. Classify quarantine rows into keep/dump/chain-systematic lanes.
+6. Log indexing and measure after fresh GSC data.
+
 ## 2026-06-04 — New Blog/Wellness Metadata QA
 
 **Status: live-verified and committed.**
