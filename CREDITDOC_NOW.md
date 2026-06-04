@@ -4,6 +4,43 @@
 
 ---
 
+## 2026-06-04 — New Blog/Wellness Metadata QA
+
+**Status: live-verified and committed.**
+
+Checked the new June 4 blog pages and June 3 wellness pages for live rendered
+SEO title, meta description, canonical, and HTTP status:
+
+- `/blog/are-credit-score-checks-free/`
+- `/blog/are-credits-negative/`
+- `/financial-wellness/couples-money-management/`
+- `/financial-wellness/credit-score-car-insurance/`
+
+Fixes:
+
+- Tightened `/blog/are-credit-score-checks-free/` SEO title from 61 chars to
+  49 chars.
+- Tightened `/blog/are-credits-negative/` meta description from 158 chars to
+  131 chars.
+- Updated both `src/content/blog-posts.json` and the `blog_posts` DB row through
+  `CreditDocDB.add_blog_post()`, which revalidated the affected blog slugs.
+- Patched `/srv/BusinessOps/tools/creditdoc_blog.py` so generated blog metadata
+  is normalized after generation: title <=55, description <=140, SEO title
+  <=58, SEO description <=155.
+
+Verification:
+
+- Live Googlebot checks returned HTTP 200 for all four URLs with correct
+  canonical URLs and title/meta lengths.
+- `npm run build` passed, including robots contract, SSR sitemap parity, Astro
+  build, and sitemap/robots postbuild check.
+- `/srv/BusinessOps/tools/creditdoc_smoke_test.py` passed 10/10 at 08:42 UTC.
+- Daily content verifier passed with later UTC jobs correctly marked pending.
+
+Commit:
+
+- `54674b4ebb fix: tighten new blog metadata`
+
 ## 2026-06-03 — Daily GSC Progress Calendar
 
 **Status: active.**
