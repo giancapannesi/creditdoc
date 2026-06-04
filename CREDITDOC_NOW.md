@@ -4,6 +4,57 @@
 
 ---
 
+## 2026-06-04 — SEO Tomorrow Startpack / Avoid Duplicate Review Work
+
+**Status: prepared and saved to project memory.**
+
+Built a consolidated SEO startpack for the next review-page CTR/indexing push:
+
+- Project folder:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_SEO_Tomorrow_Startpack_2026-06-04/`
+- Memory copy:
+  `/root/.claude/projects/-srv-BusinessOps/memory/creditdoc_seo_tomorrow_startpack_2026-06-04.md`
+
+Files:
+
+- `README.md`
+- `already_worked_review_slugs.csv`
+- `next_optimize_candidates_unworked.csv`
+- `tomorrow_first_batch_candidates.csv`
+- `quarantine_candidates_need_decision.csv`
+- `non_review_zero_click_candidates_latest.csv`
+
+Summary:
+
+- Found **1,610** review slugs with prior work/decisions from the May 22/23
+  review rollout, Vigo repair, noindex review, and sitewide upgrade memory.
+- Found **196** slugs from prior review metadata update batches.
+- Found **45** Vigo chain-repair slugs.
+- Found **1,374** noindex/drop/reinstate decision slugs.
+- From the June 2 traffic/ranking workpack, only **13** optimize candidates
+  remain unworked after excluding prior-work slugs.
+- The suggested first batch for the next session is the 13-row
+  `tomorrow_first_batch_candidates.csv`.
+- The 80-row `quarantine_candidates_need_decision.csv` must not be optimized
+  blindly; those need keep/dump decisions first.
+
+First batch starts with:
+
+- `velnor-credit-repair-san-diego`
+- `crisdon-credit-repair`
+- `savage-squad-credit`
+- `credit-repair-specialists`
+- `dc-lending`
+- `consumer-credit-counseling-burlingame`
+- `credit-pros`
+- `lakehills-commercial-lending`
+- `capdeck-business-loans-san-jose`
+- `cash-express-of-mwc`
+
+Tomorrow rule: check `already_worked_review_slugs.csv` before editing any GSC
+candidate; do not redo Marco's, Vigo chain repair, Phase 1 held pages, or prior
+metadata batches unless fresh GSC evidence shows a new issue.
+
 ## 2026-06-04 — New Blog/Wellness Metadata QA
 
 **Status: live-verified and committed.**
