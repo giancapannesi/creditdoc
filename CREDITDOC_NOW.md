@@ -4,6 +4,99 @@
 
 ---
 
+## 2026-06-05 — Quarantine Cleanup / 404 Fix / Dump-Lane Redirects
+
+**Status: in progress; build-verified before deploy/archive.**
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_SEO_Tomorrow_Startpack_2026-06-04/`
+
+Files created:
+
+- `quarantine_decision_plan_2026-06-05.csv`
+- `quarantine_dump_archive_batch_2026-06-05.csv`
+
+What happened:
+
+- Audited 80 quarantine candidates against DB and live production URLs.
+- Classification result:
+  - 7 `resolved_redirect_monitor`
+  - 3 `resolved_archived_redirect_monitor`
+  - 1 `manual_keep_candidate_validate_sources`
+  - 4 `manual_review_weak_or_missing_website`
+  - 35 `chain_or_money_services_systematic`
+  - 19 `optimize_later_lower_priority`
+  - 8 `likely_dump_auto_or_title`
+  - 3 `likely_dump_unrelated_or_low_priority`
+- Fixed `credit-repair-outfit-philadelphia` from a live 404 to a controlled
+  `pending_approval` noindex source-check page. Also cleared the wrong
+  `creditrepair.com` website reference and replaced generated/rating copy with
+  neutral held-for-review copy through the DB API.
+- Added review-route redirects for 11 clear dump-lane pages:
+  auto-title, pawn, and unrelated cargo/pawn entries.
+
+Verification so far:
+
+- `npm run build` passed after the redirect patch.
+- `credit-repair-outfit-philadelphia` live check returned HTTP 200, canonical,
+  and `noindex=true` after the DB update.
+
+Next:
+
+- Deploy the redirect patch through `/srv/BusinessOps/creditdoc/deploy.sh`.
+- After deploy, archive/noindex the 11 dump-lane DB rows.
+- End with live URL checks proving those 11 routes redirect and no touched URL
+  returns 404.
+
+## 2026-06-05 — Linkable Asset Expansion Plan
+
+**Status: planning package created; no site pages changed or deployed.**
+
+Jammi approved the concept of expanding CreditDoc's backlink/linkable-asset
+library, with a hard rule: nothing gets deleted, discarded, overwritten,
+removed, replaced, or cleaned up without express approval.
+
+Project folder:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Linkable_Assets_Plan_2026-06-05/`
+
+Files:
+
+- `README.md`
+- `LINKABLE_ASSETS_IMPLEMENTATION_PLAN_2026-06-05.md`
+- `asset_matrix_2026-06-05.csv`
+
+Memory copy:
+
+- `/root/.claude/projects/-srv-BusinessOps/memory/creditdoc_linkable_assets_plan_2026-06-05.md`
+
+Plan summary:
+
+- Keep all existing backlink outreach, prospect lists, reports, and assets.
+- Do not rebuild existing assets such as the credit report checklist, debt
+  templates, borrowing power quiz, credit score simulator, debt payoff
+  calculator, or research reports.
+- First recommended build:
+  `/resources/loan-approval-readiness-toolkit/` and printable version.
+- First recommended attached tool:
+  `/tools/loan-denial-reason-checker/`.
+- Additional planned assets:
+  business loan readiness score, MCA repayment calculator, bank statement cash
+  flow calculator, credit denial action checklist, and state consumer credit
+  regulator directory.
+- Menu placement is documented: tools surface through existing top-nav
+  `/tools/`; public resources surface through `/resources/`; no new top-level
+  Resources nav should be added unless Jammi approves.
+- SEO titles, meta descriptions, schema types, internal links, hub placement,
+  outreach targets, and verification requirements are all specified in the plan.
+
+Next:
+
+- Before implementing any asset, search for duplicate routes/names again and
+  check the worktree because another agent may be active.
+- Implement Phase 1 only first unless Jammi approves a larger build batch.
+
 ## 2026-06-05 — GSC-Visible Review Page Upgrade Batch 1
 
 **Status: first 13-page batch audited; 11 pages changed or explicitly decided; all 13 live-verified.**
