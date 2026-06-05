@@ -4,6 +4,57 @@
 
 ---
 
+## 2026-06-05 — GSC-Visible Review Page Upgrade Batch 1
+
+**Status: first 13-page batch audited; 11 pages changed or explicitly decided; all 13 live-verified.**
+
+Workpack:
+
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_SEO_Tomorrow_Startpack_2026-06-04/`
+
+Files created:
+
+- `first_batch_live_audit_2026-06-05.csv`
+- `phase_2_3_first_safe_updates_2026-06-05.csv`
+- `phase_3_rating_claim_metadata_fixes_2026-06-05.csv`
+- `phase_3_remaining_page_decisions_2026-06-05.csv`
+- `first_batch_final_live_status_2026-06-05.csv`
+
+What changed:
+
+- Added DB-backed `seo_title` and neutral, factual `meta_description` updates for:
+  `velnor-credit-repair-san-diego`, `crisdon-credit-repair`,
+  `savage-squad-credit`, `credit-pros`, `dc-lending`,
+  `lakehills-commercial-lending`, `capdeck-business-loans-san-jose`,
+  `cash-express-of-mwc`, `loandepot-new-york`, `bay-area-loan`.
+- Removed unverifiable rating/loan-amount wording from the live metadata for:
+  `capdeck-business-loans-san-jose`, `cash-express-of-mwc`,
+  `loandepot-new-york`, `bay-area-loan`.
+- Resolved `nanakuli-housing-corporation` stale DB mismatch:
+  `review_status` moved from `draft` to `published`, with neutral title/meta.
+- Left `consumer-credit-counseling-burlingame` unchanged because it already has
+  usable metadata, healthy internal links, and prior April chain-rewrite work.
+- Held `credit-repair-specialists` for source validation/drop decision because
+  the stored source is a Super Lawyers attorney directory, not a clean direct
+  finance/provider website.
+
+Verification:
+
+- DB writes used `CreditDocDB.update_lender(... updated_by='founder' ...)`.
+- Audit log contains the expected field-level entries for every changed page.
+- Protected flags stayed unchanged.
+- Final Googlebot-style production sweep: all 13 batch URLs returned HTTP 200,
+  canonical `/review/<slug>/`, and no `noindex`.
+- No lender JSON export was run and the repo worktree remained clean.
+
+Next:
+
+- Use `first_batch_final_live_status_2026-06-05.csv` as the baseline for this
+  batch.
+- Continue with the next GSC-visible unworked review pages, but keep
+  `credit-repair-specialists` in a source-validation/drop lane until the founder
+  decides whether it belongs on CreditDoc.
+
 ## 2026-06-04 — SEO Tomorrow Startpack / Avoid Duplicate Review Work
 
 **Status: prepared and saved to project memory.**
