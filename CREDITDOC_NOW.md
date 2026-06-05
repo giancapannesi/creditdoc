@@ -6,7 +6,7 @@
 
 ## 2026-06-05 — Quarantine Cleanup / 404 Fix / Dump-Lane Redirects
 
-**Status: in progress; build-verified before deploy/archive.**
+**Status: deployed, archived, and live-verified.**
 
 Workpack:
 
@@ -16,6 +16,8 @@ Files created:
 
 - `quarantine_decision_plan_2026-06-05.csv`
 - `quarantine_dump_archive_batch_2026-06-05.csv`
+- `quarantine_dump_archive_db_updates_2026-06-05.csv`
+- `quarantine_dump_archive_final_live_status_2026-06-05.csv`
 
 What happened:
 
@@ -35,19 +37,28 @@ What happened:
   neutral held-for-review copy through the DB API.
 - Added review-route redirects for 11 clear dump-lane pages:
   auto-title, pawn, and unrelated cargo/pawn entries.
+- Deployed redirect patch through `/srv/BusinessOps/creditdoc/deploy.sh`.
+- Archived/noindexed the 11 dump-lane DB rows after redirects were live.
+- Cleared stale rating fields from `credit-repair-outfit-philadelphia` after
+  live verification found an old `5.0/5` pro still rendering.
 
-Verification so far:
+Verification:
 
 - `npm run build` passed after the redirect patch.
 - `credit-repair-outfit-philadelphia` live check returned HTTP 200, canonical,
-  and `noindex=true` after the DB update.
+  `noindex=true`, no wrong `creditrepair.com` website reference, and no stale
+  `5.0/5`/high-rating claim.
+- Final live sweep: all 11 dump-lane review URLs return 302 redirects to their
+  category destinations.
+- Deploy script passed build, Cloudflare deploy, cache purge, and smoke routes.
+- Cloudflare Worker version: `330751c3-7419-4e7d-8844-e6624d940084`.
 
 Next:
 
-- Deploy the redirect patch through `/srv/BusinessOps/creditdoc/deploy.sh`.
-- After deploy, archive/noindex the 11 dump-lane DB rows.
-- End with live URL checks proving those 11 routes redirect and no touched URL
-  returns 404.
+- Continue the quarantine plan with the 35 money-transfer/check-cashing chain
+  pages as a systematic chain-template lane, not one-off rewrites.
+- Keep the 4 weak/manual pages noindexed unless a real provider-owned source is
+  found.
 
 ## 2026-06-05 — Linkable Asset Expansion Plan
 
