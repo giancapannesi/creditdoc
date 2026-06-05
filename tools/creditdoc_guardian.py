@@ -45,7 +45,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from creditdoc_db import CreditDocDB, PERSISTENT_FIELDS, _is_empty
+from creditdoc_db import CreditDocDB, JSON_EXPORT_EXCLUDED_FIELDS, PERSISTENT_FIELDS, _is_empty
 
 PROJECT_DIR = Path(__file__).parent.parent
 LENDERS_DIR = PROJECT_DIR / "src" / "content" / "lenders"
@@ -78,6 +78,21 @@ def _checksum(data):
     return hashlib.sha256(canonical.encode()).hexdigest()
 
 
+def _public_drift_compare_data(data):
+    """Normalize JSON for protected drift checks.
+
+    Some legacy writers kept DB-only fields in files, while the DB export path
+    excludes them. Some files also omit null brand_slug while the exporter writes
+    it explicitly. Those differences should not trigger Guardian rewrites.
+    """
+    normalized = dict(data or {})
+    for field in JSON_EXPORT_EXCLUDED_FIELDS:
+        normalized.pop(field, None)
+    if normalized.get("brand_slug") is None:
+        normalized.pop("brand_slug", None)
+    return normalized
+
+
 def write_lender_json(slug, data):
     """Write DB version of a lender to its JSON file."""
     filepath = LENDERS_DIR / f"{slug}.json"
@@ -104,8 +119,9 @@ def read_lender_json(slug):
 
 def heal_protected_profiles(db, dry_run=False):
     """
-    Ensure protected profile JSON files match DB exactly.
-    If drift detected, overwrite JSON with DB version.
+    Ensure protected profile JSON files match the public DB export exactly.
+    If drift detected, overwrite JSON with the same shape used by the normal
+    DB export path. This avoids Git churn from DB-only operational fields.
     """
     log("=== HEAL: Protected Profiles ===")
 
@@ -120,8 +136,9 @@ def heal_protected_profiles(db, dry_run=False):
 
     for row in rows:
         slug = row["slug"]
-        db_data = json.loads(row["data"])
-        db_checksum = row["checksum"]
+        raw_db_data = json.loads(row["data"])
+        db_data = db.get_lender_data(slug) or raw_db_data
+        db_checksum = _checksum(_public_drift_compare_data(db_data))
 
         file_data = read_lender_json(slug)
         if file_data is None:
@@ -132,7 +149,7 @@ def heal_protected_profiles(db, dry_run=False):
                 healed += 1
             continue
 
-        file_checksum = _checksum(file_data)
+        file_checksum = _checksum(_public_drift_compare_data(file_data))
 
         if file_checksum == db_checksum:
             matching += 1

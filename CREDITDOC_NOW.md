@@ -4,6 +4,44 @@
 
 ---
 
+## 2026-06-05 — SEO Title/Meta Stability Rule
+
+**Operating rule:** CreditDoc titles and meta descriptions are now treated as
+stable SEO assets. Do not rewrite them merely because a model suggests a nicer
+variant.
+
+Only change a title or meta description when one of these is true:
+
+- Jammi explicitly asks for title/meta work on that page or batch.
+- There is a verified defect: wrong entity, wrong location/category, broken
+  wording, hallucinated claim, unsupported current fact, duplicate title at
+  scale, missing canonical metadata, or a clear truncation/formatting problem.
+- GSC shows measured underperformance after a real settling period, normally
+  21-28 days after the last deployed title/meta change.
+
+For normal SEO work, prioritize indexability, sitemap/robots health, internal
+links, content quality, route health, publishing/index submission, and GSC
+measurement. Do not make Google relearn page titles repeatedly without a
+specific reason.
+
+## 2026-06-05 — Guardian / Lender JSON Dirty-Tree Fix
+
+**Root cause:** the daily answers engine exported protected lender JSON using
+the public DB export shape, then the hourly CreditDoc Guardian compared those
+files against the raw DB blob checksum and rewrote four protected files back to
+the legacy/raw shape. The churn was serialization-only: `last_engine_run`
+present/absent and `brand_slug: null` present/absent.
+
+**Fix:** `tools/creditdoc_guardian.py` now normalizes protected-profile drift
+checks before comparing checksums. It ignores DB-only export-excluded fields and
+treats missing `brand_slug` the same as `brand_slug: null`. This keeps Guardian
+protecting real DB/content drift without dirtying Git for bookkeeping shape
+differences.
+
+**Regression coverage:** `tests/test_guardian_public_export.py` verifies both
+public-export JSON and legacy operational JSON are treated as matching when the
+only differences are those serialization fields.
+
 ## 2026-06-05 — Quarantine Cleanup / 404 Fix / Dump-Lane Redirects
 
 **Status: deployed, archived, and live-verified.**
