@@ -4565,3 +4565,31 @@ Key direction:
 - This should be embedded into the short- to mid-term AI workforce goals:
   build useful tools and quizzes in tandem with indexing/backlink work, while
   making CreditDoc's regulatory track-record data the differentiator.
+
+## 2026-06-09 - Origination Capture System Direction
+
+Saved Jammi's clarification that interactive CreditDoc assets should feed an
+origination system, not just standalone tools or email-only funnels.
+
+Memory/project locations:
+
+- `/root/.claude/projects/-srv-BusinessOps/memory/creditdoc_origination_capture_system_2026-06-09.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Origination_Capture_System_2026-06-09/`
+
+Execution direction:
+
+- Visitor uses a quiz, checker, calculator, course CTA, or checklist CTA.
+- We capture email and send the response/nurture through the existing Sendy
+  system.
+- We also persist structured answers/result path/source URL/category/consent
+  into the CreditDoc lead/quiz layer.
+- Those records become the future input for embedded-finance matching and
+  origination routing: affiliate, BrokerOS/direct broker, or later embedded
+  partners.
+
+Guardrails:
+
+- Do not build a separate disconnected lead system.
+- Do not ask for SSNs or sensitive documents in the front-end tools.
+- Do not imply approval, underwriting, or prequalification unless a real
+  partner/API supports it.

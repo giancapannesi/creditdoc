@@ -14,6 +14,38 @@ Interactive quiz pages that capture visitors and feed them into the affiliate/re
 Question → /answers/X/ page → quiz CTA → /qualify/Z/ quiz → email captured → drip sequence → affiliate click → $
 ```
 
+## 2026-06-09 Update — Origination Capture Layer
+
+Jammi clarified that quizzes, calculators, checkers, courses, and other
+interactive surfaces should become the intake layer for CreditDoc's origination
+system.
+
+Updated target flow:
+
+```
+SEO / review / wellness / course visitor
+    ↓
+interactive quiz, checker, calculator, or course CTA
+    ↓
+email capture
+    ↓
+Sendy response / nurture sequence
+    ↓
+persisted lead or quiz response record
+    ↓
+embedded-finance matching algorithm
+    ↓
+affiliate, BrokerOS/direct broker, or future embedded partner route
+```
+
+Sendy remains the response/nurture system. It should not be the only record of
+the lead. Structured answers, result path, source URL, product category, consent
+timestamp, and recommended next route should also be saved for future routing.
+
+Do not ask for SSNs or sensitive financial documents in the front-end tools. Do
+not imply underwriting, approval, or prequalification unless a real partner/API
+supports that claim.
+
 ---
 
 ## What Already Exists

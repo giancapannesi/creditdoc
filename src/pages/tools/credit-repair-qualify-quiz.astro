@@ -2,18 +2,44 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAllLenders } from '../../utils/data-build';
 
-const creditRepairProfiles = getAllLenders()
-  .filter((l) =>
+function isSafeCreditRepairProfile(l) {
+  const processingStatus = String(l.processing_status || '');
+  const reviewStatus = String(l.review_status || '');
+  const quarantineReason = String(l.quarantine_reason || '');
+  const noIndex = l.no_index === true || l.no_index === 1 || l.no_index === 'true';
+
+  return (
     l.category === 'credit-repair' &&
+    processingStatus === 'ready_for_index' &&
+    reviewStatus === 'published' &&
+    !noIndex &&
+    !quarantineReason &&
     l.google_rating &&
     l.google_rating > 0 &&
     l.google_rating <= 5 &&
     l.google_reviews_count &&
-    l.google_reviews_count >= 1 &&
+    l.google_reviews_count >= 10 &&
     l.description_short &&
     l.description_short.length > 30
-  )
-  .sort((a, b) => (b.google_rating || 0) - (a.google_rating || 0))
+  );
+}
+
+function profileScore(l) {
+  const rating = Number(l.google_rating || 0);
+  const reviews = Number(l.google_reviews_count || 0);
+  const quality = Number(l.quality_score || 0);
+  const enriched =
+    l.has_been_enriched === true ||
+    l.data_source === 'enriched' ||
+    l.data_source === 'editorial' ||
+    l.data_source === 'verified';
+
+  return (enriched ? 30 : 0) + quality * 2 + Math.log10(reviews + 1) * 12 + rating * 4;
+}
+
+const creditRepairProfiles = getAllLenders()
+  .filter(isSafeCreditRepairProfile)
+  .sort((a, b) => profileScore(b) - profileScore(a))
   .slice(0, 6)
   .map((l) => ({
     name: l.name,
@@ -180,9 +206,11 @@ const breadcrumbJsonLd = {
         <form id="email-form" class="mt-4 grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
           <input id="capture-name" type="text" placeholder="Name" class="rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
           <input id="capture-email" type="email" placeholder="Email" required class="rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+          <input id="capture-company" type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
           <button type="submit" class="rounded-lg bg-primary px-5 py-3 font-semibold text-white hover:bg-primary-hover">Send</button>
         </form>
-        <p id="email-success" class="mt-3 hidden text-sm font-medium text-positive">Saved. Check your inbox for the next-step summary.</p>
+        <p class="mt-2 text-xs leading-relaxed text-muted">Submitting this form sends your requested resources and saves your quiz result so CreditDoc can improve routing. It is not an application and it does not create marketing consent.</p>
+        <p id="email-success" class="mt-3 hidden text-sm font-medium text-positive">Saved. We will send the next useful CreditDoc resources for this topic.</p>
         <p id="email-error" class="mt-3 hidden text-sm font-medium text-negative">That did not go through. You can still use the links above.</p>
       </div>
     </section>
@@ -279,6 +307,9 @@ const breadcrumbJsonLd = {
 
     const answers = {};
     let currentIndex = 0;
+    let currentResult = null;
+    const sessionId = crypto.randomUUID?.() || String(Date.now());
+    const quizLoadedAt = Date.now();
 
     const intro = document.getElementById('quiz-intro');
     const panel = document.getElementById('quiz-panel');
@@ -344,6 +375,7 @@ const breadcrumbJsonLd = {
             ['Review the methodology', '/methodology/'],
           ],
           eventLabel: 'repair_research',
+          recommendedRoute: '/best/best-credit-repair-companies/',
         };
       }
 
@@ -368,6 +400,7 @@ const breadcrumbJsonLd = {
             ['Use the debt payoff calculator', '/tools/debt-payoff-calculator/'],
           ],
           eventLabel: 'build_first',
+          recommendedRoute: '/tools/credit-score-simulator/',
         };
       }
 
@@ -391,6 +424,7 @@ const breadcrumbJsonLd = {
           ['Browse credit repair category context', '/categories/credit-repair/'],
         ],
         eventLabel: 'review_first',
+        recommendedRoute: '/resources/credit-report-checklist/',
       };
     }
 
@@ -408,6 +442,7 @@ const breadcrumbJsonLd = {
 
     function renderResult() {
       const result = buildResult();
+      currentResult = result;
       panel.classList.add('hidden');
       resultPanel.classList.remove('hidden');
       document.getElementById('result-title').textContent = result.title;
@@ -469,10 +504,56 @@ const breadcrumbJsonLd = {
       }
     }
 
+    function compactAnswers() {
+      return Object.fromEntries(
+        Object.entries(answers).map(([key, item]) => [key, item.value])
+      );
+    }
+
+    function collectUtm() {
+      const params = new URLSearchParams(window.location.search);
+      const utm = {};
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach((key) => {
+        const value = params.get(key);
+        if (value) utm[key] = value.slice(0, 160);
+      });
+      return utm;
+    }
+
+    async function saveOriginationIntake({ name = '', email = '' } = {}) {
+      if (!currentResult) return;
+      const honeypot = document.getElementById('capture-company')?.value || '';
+      const response = await fetch('/api/origination-intake', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tool_id: 'credit-repair-qualify-quiz',
+          pillar: 'credit-repair',
+          source_page: window.location.pathname,
+          result_label: currentResult.eventLabel,
+          email,
+          name,
+          consent_marketing: false,
+          honeypot,
+          elapsed_ms: Date.now() - quizLoadedAt,
+          responses: {
+            session_id: sessionId,
+            ...compactAnswers(),
+          },
+          utm: collectUtm(),
+        }),
+      });
+      if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(detail);
+      }
+    }
+
     startBtn?.addEventListener('click', () => {
       intro.classList.add('hidden');
       panel.classList.remove('hidden');
       showQuestion(currentIndex);
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
     const emailForm = document.getElementById('email-form');
@@ -490,6 +571,7 @@ const breadcrumbJsonLd = {
       button.disabled = true;
 
       try {
+        await saveOriginationIntake({ name, email });
         const body = new URLSearchParams({
           list: 'rCzcu8brUim88T892Y85IqRQ',
           email,

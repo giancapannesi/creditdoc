@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = "Free Financial Tools & Calculators | CreditDoc";
-const description = "Free tools to support financial research. Loan denial checker, borrowing power quiz, debt payoff calculator, and credit score simulator — no signup required.";
+const description = "Free tools to support financial research. Loan denial checker, borrowing power quiz, debt payoff calculator, and credit score simulator — no signup required to use.";
 
 const tools = [
   {
@@ -150,9 +150,9 @@ const breadcrumbJsonLd = {
             </svg>
           </div>
           <div class="flex-1">
-            <div class="flex items-center gap-3 mb-2">
-              <h2 class="text-xl font-bold text-text">{tool.title}</h2>
-              <span class:list={["text-xs font-medium px-2.5 py-0.5 rounded-full", tool.live ? "bg-positive-light text-positive" : "bg-bg-alt text-muted"]}>
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+              <h2 class="min-w-0 text-xl font-bold text-text">{tool.title}</h2>
+              <span class:list={["shrink-0 text-xs font-medium px-2.5 py-0.5 rounded-full", tool.live ? "bg-positive-light text-positive" : "bg-bg-alt text-muted"]}>
                 {tool.badge}
               </span>
             </div>
