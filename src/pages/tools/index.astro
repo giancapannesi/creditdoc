@@ -2,9 +2,25 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = "Free Financial Tools & Calculators | CreditDoc";
-const description = "Free tools to support financial research. Borrowing power quiz, debt payoff calculator, and credit score simulator — no signup required.";
+const description = "Free tools to support financial research. Loan denial checker, borrowing power quiz, debt payoff calculator, and credit score simulator — no signup required.";
 
 const tools = [
+  {
+    title: "Credit Repair Qualify Quiz",
+    description: "Answer simple questions about credit report errors, collections, score pressure, and timeline to see which research path fits next.",
+    href: "/tools/credit-repair-qualify-quiz/",
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h3.75c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125h-3.75A1.125 1.125 0 0 1 9 4.875v-1.5c0-.621.504-1.125 1.125-1.125ZM4.5 6.75A2.25 2.25 0 0 1 6.75 4.5H7.5m9 0h.75a2.25 2.25 0 0 1 2.25 2.25v12A2.25 2.25 0 0 1 17.25 21H6.75A2.25 2.25 0 0 1 4.5 18.75v-12ZM9 12l2 2 4-4" />',
+    badge: "New quiz",
+    live: true,
+  },
+  {
+    title: "Loan Denial Reason Checker",
+    description: "Map a denial notice and application profile to common review areas: credit, DTI, income proof, documents, business history, and lender fit.",
+    href: "/tools/loan-denial-reason-checker/",
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />',
+    badge: "New",
+    live: true,
+  },
   {
     title: "What's My Borrowing Power?",
     description: "Answer 5 quick questions to estimate borrowing capacity and see relevant research paths for your situation.",
@@ -28,6 +44,21 @@ const tools = [
     icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />',
     badge: "New",
     live: true,
+  },
+];
+
+const learningResources = [
+  {
+    title: "Free Credit Fundamentals Course",
+    description: "Eight self-paced modules covering credit scores, reports, debt management, credit repair, loans, scam avoidance, and consumer rights.",
+    href: "/courses/credit-fundamentals/",
+    badge: "Free course",
+  },
+  {
+    title: "Credit Report Checklist",
+    description: "Use the checklist before disputes, credit repair research, loan applications, or provider conversations.",
+    href: "/resources/credit-report-checklist/",
+    badge: "Printable",
   },
 ];
 
@@ -87,6 +118,24 @@ const breadcrumbJsonLd = {
         <a href="/research/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
           CreditDoc research
         </a>
+      </div>
+    </section>
+
+    <section class="glass-card p-5 mb-8">
+      <h2 class="text-lg font-bold text-text mb-2">Courses And Checklists</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        Use these before or after a quiz result to understand the basics, organize documents, and avoid rushing into an application or paid service.
+      </p>
+      <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        {learningResources.map(resource => (
+          <a href={resource.href} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary transition-colors">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="font-semibold text-text">{resource.title}</h3>
+              <span class="rounded-full bg-primary-light px-2.5 py-0.5 text-xs font-medium text-primary">{resource.badge}</span>
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{resource.description}</p>
+          </a>
+        ))}
       </div>
     </section>
 

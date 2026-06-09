@@ -4500,3 +4500,68 @@ Verification:
   including queue reserves and generated-content guardrail regression.
 - Mirrored the changed live scripts into `tools/live_ops/` for committed
   rollback/reference because `/srv/BusinessOps/tools` is not a git repo.
+
+## 2026-06-09 - Tools Directory Cleanup
+
+Committed the remaining tools-page work after debug review.
+
+Added:
+
+- `/tools/loan-denial-reason-checker/`
+  - Educational denial-pattern checker for personal loans, credit cards,
+    business/SBA loans, debt consolidation, and MCA/fast funding.
+  - Uses adverse-action notice framing and links to published CreditDoc answer,
+    research, checklist, and calculator resources.
+- `/tools/credit-repair-qualify-quiz/`
+  - Educational credit-repair fit quiz that routes users toward credit repair
+    research, DIY report review, or credit-building/debt tools.
+  - Uses imported credit-repair profile data for optional research cards.
+  - Profile cards render user/data text with DOM `textContent`, not raw
+    interpolated HTML.
+- `/tools/`
+  - Added cards for the two new tools.
+  - Added a courses/checklists section linking to credit fundamentals and the
+    credit report checklist.
+- `tools/creditdoc_priority_indexing.py`
+  - Promoted verified tools, courses/learn, research, regulatory/trust, and
+    wellness pages ahead of money/answer/city/blog pages in the priority
+    indexing queue.
+  - Kept the existing safety rule that unchecked URLs are not submitted blind.
+  - Updated tier reporting so future alerts show the new queue mix accurately.
+
+Verification:
+
+- Independent debug agent reviewed the tool pages, live-op mirrors, and
+  handoff documentation. No loan-tool syntax/schema/link issues were found.
+- Dynamic links referenced by the tools were verified against repo pages or DB
+  content tables.
+- Priority indexer dry-run passed at 2026-06-09 12:19 UTC and returned verified
+  tools, course/learn, research, regulatory/trust, and wellness URLs.
+- `npm run prebuild` passed.
+- `npx astro sync` passed.
+- `git diff --check` passed for the tool pages.
+- Full `npm run build` passed at 2026-06-09 12:21 UTC, including Astro
+  prerender and the postbuild sitemap/robots check.
+
+## 2026-06-09 - Tools + Regulatory Quiz Strategy Memory
+
+Saved Faraday's reviewer findings as a strategic workstream, not a loose bug
+list.
+
+Memory/project locations:
+
+- `/root/.claude/projects/-srv-BusinessOps/memory/creditdoc_tools_regulatory_quiz_strategy_2026-06-09.md`
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Tools_Regulatory_Quiz_Strategy_2026-06-09/`
+
+Key direction:
+
+- Review pages were created first; tools/quizzes must now sit on top of that
+  review/regulatory data layer.
+- Do not treat the credit-repair quiz as complete until provider filtering
+  excludes quarantined/noindex/held profiles, provider text is safely escaped,
+  quiz answers/results feed the real lead/quiz layer, and results route users
+  through CreditDoc-specific review, regulatory, complaint, state, course,
+  checklist, wellness, and listicle assets.
+- This should be embedded into the short- to mid-term AI workforce goals:
+  build useful tools and quizzes in tandem with indexing/backlink work, while
+  making CreditDoc's regulatory track-record data the differentiator.

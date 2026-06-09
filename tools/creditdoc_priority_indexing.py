@@ -6,17 +6,18 @@ FOUNDER RULE 2026-04-24: Never submit /review/<slug>/ lender profiles
 (FA or otherwise) to search engines. Only submit the pages that earn clicks
 and move users toward money: money pages, drip, blog, education.
 
-Push tiers (in order — updated by Jammi 2026-05-30):
-    1. Money pages         /best/<slug>/              (listicles)
-    2. Questions           /answers/<slug>/           (cluster_answers)
-    3. City guides         /credit-guide/<slug>/      (local pages)
-    4. Blog                /blog/<slug>/              (blog_posts)
-    5. Brand hubs          /brand/<slug>/             (brand JSON exists)
-    6. Compare pages       /compare/<slug>/           (comparisons)
-    7. State pages         /state/<slug>/             (already tracked in GSC)
-
-EXCLUDED:
-    - Education           /financial-wellness/<slug>/
+Push tiers (resource/trust assets promoted 2026-06-09):
+    1. Tools/quizzes       /tools/<slug>/
+    2. Courses/learn       /courses/<slug>/, /learn/
+    3. Research/trust      /research/<slug>/ + methodology/disclosure/about
+    4. Wellness            /financial-wellness/<slug>/
+    5. Money pages         /best/<slug>/              (listicles)
+    6. Questions           /answers/<slug>/           (cluster_answers)
+    7. City guides         /credit-guide/<slug>/      (local pages)
+    8. Blog                /blog/<slug>/              (blog_posts)
+    9. Brand hubs          /brand/<slug>/             (brand JSON exists)
+   10. Compare pages       /compare/<slug>/           (comparisons)
+   11. State pages         /state/<slug>/             (already tracked in GSC)
 
 Quota: 200/day Google Indexing API, unlimited IndexNow (Bing/AI search).
 
@@ -62,12 +63,25 @@ BRANDS_DIR = Path(__file__).resolve().parents[1] / "src" / "content" / "brands"
 RESUBMIT_DAYS = 30
 
 
-VALID_TIERS = ("money", "answers", "city", "blog", "brand", "compare", "state")
+VALID_TIERS = (
+    "tools",
+    "courses",
+    "research",
+    "regulatory",
+    "wellness",
+    "money",
+    "answers",
+    "city",
+    "blog",
+    "brand",
+    "compare",
+    "state",
+)
 
 
 def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_cooldown=False):
-    """Publishable URLs only: money pages, answers, city, blog, brand,
-    compare, and state pages.
+    """Publishable URLs only: tools, courses, research/trust, wellness,
+    money pages, answers, city, blog, brand, compare, and state pages.
     /review/* lender profiles are NEVER pushed (founder rule 2026-04-24).
 
     Quota-conserving filter (2026-05-03, hardened):
@@ -95,10 +109,46 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
         [(s,) for s in brand_slugs],
     )
 
-    # Wellness is excluded. Money + answers are first priority per Jammi
-    # direction on 2026-05-30.
+    # Resource/trust assets are first priority per Jammi direction on
+    # 2026-06-09: Google needs to see the full CreditDoc research layer, not
+    # only review/directory pages.
     publishable_cte = f"""
     publishable AS (
+      SELECT DISTINCT 'tools' AS tier,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS sort_key
+        FROM indexation_status
+        WHERE page_url LIKE '{SITE}/tools/%'
+      UNION ALL
+      SELECT DISTINCT 'courses' AS tier,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS sort_key
+        FROM indexation_status
+        WHERE page_url LIKE '{SITE}/courses/%'
+           OR page_url = '{SITE}/learn/'
+           OR page_url LIKE '{SITE}/learn/%'
+      UNION ALL
+      SELECT DISTINCT 'research' AS tier,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS sort_key
+        FROM indexation_status
+        WHERE page_url LIKE '{SITE}/research/%'
+      UNION ALL
+      SELECT 'regulatory' AS tier, 'about' AS path, 'about' AS sort_key
+      UNION ALL SELECT 'regulatory' AS tier, 'about/creditdoc-data' AS path, 'about/creditdoc-data' AS sort_key
+      UNION ALL SELECT 'regulatory' AS tier, 'about/harvey-brooks' AS path, 'about/harvey-brooks' AS sort_key
+      UNION ALL SELECT 'regulatory' AS tier, 'disclosure' AS path, 'disclosure' AS sort_key
+      UNION ALL SELECT 'regulatory' AS tier, 'editorial-policy' AS path, 'editorial-policy' AS sort_key
+      UNION ALL SELECT 'regulatory' AS tier, 'methodology' AS path, 'methodology' AS sort_key
+      UNION ALL SELECT 'regulatory' AS tier, 'privacy' AS path, 'privacy' AS sort_key
+      UNION ALL SELECT 'regulatory' AS tier, 'terms' AS path, 'terms' AS sort_key
+      UNION ALL
+      SELECT DISTINCT 'wellness' AS tier,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS sort_key
+        FROM indexation_status
+        WHERE page_url LIKE '{SITE}/financial-wellness/%'
+      UNION ALL
       SELECT 'money' AS tier, 'best/' || slug AS path, slug AS sort_key
         FROM listicles
       UNION ALL
@@ -186,13 +236,18 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
     {where_filter}
     ORDER BY
       CASE p.tier
-        WHEN 'money' THEN 1
-        WHEN 'answers' THEN 2
-        WHEN 'city' THEN 3
-        WHEN 'blog' THEN 4
-        WHEN 'brand' THEN 5
-        WHEN 'compare' THEN 6
-        WHEN 'state' THEN 7
+        WHEN 'tools' THEN 1
+        WHEN 'courses' THEN 2
+        WHEN 'research' THEN 3
+        WHEN 'regulatory' THEN 4
+        WHEN 'wellness' THEN 5
+        WHEN 'money' THEN 6
+        WHEN 'answers' THEN 7
+        WHEN 'city' THEN 8
+        WHEN 'blog' THEN 9
+        WHEN 'brand' THEN 10
+        WHEN 'compare' THEN 11
+        WHEN 'state' THEN 12
         ELSE 99
       END,
       p.sort_key DESC
@@ -227,6 +282,11 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
         skipped["cooldown"] = breakdown[2] or 0
 
     by_tier = {t: sum(1 for u in urls if u["tier"] == t) for t in VALID_TIERS}
+    print(f"  Tools:    {by_tier['tools']}")
+    print(f"  Courses:  {by_tier['courses']}")
+    print(f"  Research: {by_tier['research']}")
+    print(f"  Reg/trust:{by_tier['regulatory']}")
+    print(f"  Wellness: {by_tier['wellness']}")
     print(f"  Money:    {by_tier['money']}")
     print(f"  Answers:  {by_tier['answers']}")
     print(f"  City:     {by_tier['city']}")
@@ -234,7 +294,6 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
     print(f"  Brand:    {by_tier['brand']}")
     print(f"  Compare:  {by_tier['compare']}")
     print(f"  State:    {by_tier['state']}")
-    print(f"  (Wellness excluded)")
     if not force_all:
         print(f"  (Skipped {skipped['indexed']} already indexed (PASS), "
               f"{skipped['unchecked']} unverified, "
@@ -292,7 +351,7 @@ def main():
                         help="Skip Google Indexing API (already quota-exhausted)")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--tier", choices=VALID_TIERS,
-                        help="Only submit one tier, e.g. money or answers")
+                        help="Only submit one tier, e.g. tools, wellness, money, or answers")
     parser.add_argument("--limit", type=int, default=GOOGLE_DAILY_QUOTA,
                         help=f"Max URLs to push (default {GOOGLE_DAILY_QUOTA})")
     args = parser.parse_args()
@@ -349,18 +408,19 @@ def main():
         else:
             print("  Skipped: no service account token")
 
-    # Telegram report
-    money_count = sum(1 for u in url_list if u['tier'] == 'money')
-    drip_count = sum(1 for u in url_list if u['tier'] == 'drip')
-    blog_count = sum(1 for u in url_list if u['tier'] == 'blog')
-    brand_count = sum(1 for u in url_list if u['tier'] == 'brand')
-    compare_count = sum(1 for u in url_list if u['tier'] == 'compare')
+    # Telegram report. send_telegram is currently disabled, but keep this
+    # summary accurate for the day alerts are re-enabled.
+    tier_counts = {
+        tier: sum(1 for u in url_list if u["tier"] == tier)
+        for tier in VALID_TIERS
+    }
+    tier_summary = ", ".join(
+        f"{tier}: {count}" for tier, count in tier_counts.items() if count
+    )
     msg = (
         f"<b>📊 CreditDoc Priority Indexing</b>\n"
         f"{ts}\n\n"
-        f"<b>Queue:</b> {len(url_list)} URLs "
-        f"(money: {money_count}, blog: {blog_count}, "
-        f"brand: {brand_count}, compare: {compare_count})\n\n"
+        f"<b>Queue:</b> {len(url_list)} URLs ({tier_summary})\n\n"
         f"<b>IndexNow:</b> {in_ok} OK / {in_fail} fail\n"
     )
     if not args.indexnow_only:

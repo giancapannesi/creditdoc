@@ -1,0 +1,444 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Loan Denial Reason Checker | CreditDoc';
+const description = 'Use a free loan denial checker to identify common denial causes including credit, income, DTI, documents, business history, collateral, and lender fit.';
+const canonical = 'https://www.creditdoc.co/tools/loan-denial-reason-checker/';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Loan Denial Reason Checker',
+  description,
+  url: canonical,
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Web',
+  image: 'https://www.creditdoc.co/og-default.png',
+  isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  datePublished: '2026-06-06',
+  dateModified: '2026-06-06',
+  author: { '@type': 'Organization', name: 'CreditDoc', url: 'https://www.creditdoc.co' },
+  publisher: { '@type': 'Organization', name: 'CreditDoc', url: 'https://www.creditdoc.co' },
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Can this tool tell me exactly why I was denied?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Your adverse action notice is the official source for denial reasons. This checker helps you map common denial patterns to documents, credit checks, and safer next steps.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does the checker affect my credit score?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. This is an educational tool. It does not ask for your Social Security number, does not contact lenders, and does not run a credit check.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What should I do first after a loan denial?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Read the adverse action notice, save it, check which credit report or data source was used, gather supporting documents, and avoid repeated applications until the cited issue is addressed.',
+      },
+    },
+  ],
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+    { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://www.creditdoc.co/tools/' },
+    { '@type': 'ListItem', position: 3, name: 'Loan Denial Reason Checker', item: canonical },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={[jsonLd, faqJsonLd, breadcrumbJsonLd]}>
+  <nav class="mx-auto max-w-4xl px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/tools/" class="hover:text-primary transition-colors">Tools</a></li>
+      <li class="text-border">/</li>
+      <li class="font-medium text-text">Loan Denial Reason Checker</li>
+    </ol>
+  </nav>
+
+  <div class="mx-auto max-w-4xl px-4 py-8">
+    <section class="text-center">
+      <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-light px-4 py-1.5 text-sm font-medium text-primary">
+        Free &middot; No credit check &middot; Educational only
+      </div>
+      <h1 class="text-3xl font-bold text-text md:text-4xl">Loan Denial Reason Checker</h1>
+      <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+        Answer a few questions to identify common reasons a personal loan, credit card, business loan, SBA loan, or debt consolidation application may have been denied. Use the result to organize your next steps before applying again.
+      </p>
+    </section>
+
+    <section class="glass-card mt-8 p-5">
+      <h2 class="mb-2 text-lg font-bold text-text">Start With The Notice</h2>
+      <p class="text-sm leading-relaxed text-muted">
+        Lenders must generally give you an adverse action notice when they deny an application. That notice is more important than this tool. Use this checker to translate the notice into a practical review list: credit reports, income documents, debt level, missing paperwork, business history, collateral, or lender fit.
+      </p>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/tools/borrowing-power-quiz/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Borrowing power quiz</a>
+        <a href="/resources/credit-report-checklist/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Credit report checklist</a>
+        <a href="/answers/debt-to-income-ratio-explained/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">DTI guide</a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Complaint data context</a>
+      </div>
+    </section>
+
+    <section class="mt-8 rounded-xl border border-border bg-white p-6">
+      <div class="grid gap-5 md:grid-cols-2">
+        <label class="block">
+          <span class="text-sm font-semibold text-text">Application type</span>
+          <select id="loan-type" class="mt-2 w-full rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+            <option value="personal">Personal loan</option>
+            <option value="credit-card">Credit card</option>
+            <option value="business">Business loan or line of credit</option>
+            <option value="sba">SBA or bank business loan</option>
+            <option value="debt">Debt consolidation loan</option>
+            <option value="mca">Merchant cash advance or fast funding</option>
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="text-sm font-semibold text-text">Credit score range</span>
+          <select id="credit-range" class="mt-2 w-full rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+            <option value="unknown">I do not know</option>
+            <option value="under580">Under 580</option>
+            <option value="580-619">580-619</option>
+            <option value="620-679">620-679</option>
+            <option value="680plus">680 or higher</option>
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="text-sm font-semibold text-text">Debt or payment burden</span>
+          <select id="debt-burden" class="mt-2 w-full rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+            <option value="unknown">I am not sure</option>
+            <option value="low">Low: payments feel manageable</option>
+            <option value="medium">Medium: tight but manageable</option>
+            <option value="high">High: payments are already hard</option>
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="text-sm font-semibold text-text">Income or revenue proof</span>
+          <select id="income-proof" class="mt-2 w-full rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+            <option value="strong">Strong: current and consistent</option>
+            <option value="thin">Thin: limited or irregular</option>
+            <option value="missing">Missing or hard to document</option>
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="text-sm font-semibold text-text">Recent applications</span>
+          <select id="recent-apps" class="mt-2 w-full rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+            <option value="none">0-1 in the last 90 days</option>
+            <option value="some">2-3 in the last 90 days</option>
+            <option value="many">4 or more in the last 90 days</option>
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="text-sm font-semibold text-text">Credit report issues</span>
+          <select id="report-issues" class="mt-2 w-full rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+            <option value="unknown">I have not checked recently</option>
+            <option value="clean">No obvious issues</option>
+            <option value="derogatory">Collections, charge-offs, or late payments</option>
+            <option value="identity">Identity, mixed-file, or account errors</option>
+          </select>
+        </label>
+
+        <label class="block business-field">
+          <span class="text-sm font-semibold text-text">Business age</span>
+          <select id="business-age" class="mt-2 w-full rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+            <option value="na">Not a business application</option>
+            <option value="startup">Under 6 months</option>
+            <option value="under2">6 months to under 2 years</option>
+            <option value="2plus">2 years or more</option>
+          </select>
+        </label>
+
+        <label class="block business-field">
+          <span class="text-sm font-semibold text-text">Business documents</span>
+          <select id="business-docs" class="mt-2 w-full rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+            <option value="na">Not a business application</option>
+            <option value="ready">Bank statements and tax records ready</option>
+            <option value="partial">Some documents missing</option>
+            <option value="weak">No separate business bank records</option>
+          </select>
+        </label>
+      </div>
+
+      <button id="check-denial-btn" class="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-primary-hover sm:w-auto">
+        Check Likely Denial Reasons
+      </button>
+    </section>
+
+    <section id="results" class="mt-8 hidden">
+      <div class="rounded-xl border border-primary/20 bg-primary-light/30 p-6">
+        <p class="text-sm font-semibold uppercase tracking-wider text-primary">Review priority</p>
+        <h2 id="result-title" class="mt-2 text-2xl font-bold text-text"></h2>
+        <p id="result-summary" class="mt-3 text-sm leading-relaxed text-muted"></p>
+      </div>
+
+      <div class="mt-6 grid gap-6 md:grid-cols-2">
+        <div class="rounded-xl border border-border bg-white p-6">
+          <h3 class="font-bold text-text">Likely denial patterns to review</h3>
+          <ul id="reason-list" class="mt-4 space-y-3 text-sm leading-relaxed text-muted"></ul>
+        </div>
+        <div class="rounded-xl border border-border bg-white p-6">
+          <h3 class="font-bold text-text">Documents and next steps</h3>
+          <ul id="step-list" class="mt-4 space-y-3 text-sm leading-relaxed text-muted"></ul>
+        </div>
+      </div>
+
+      <div class="mt-6 rounded-xl border border-border bg-white p-6">
+        <h3 class="font-bold text-text">Helpful CreditDoc resources</h3>
+        <div id="resource-list" class="mt-4 grid gap-3 sm:grid-cols-2"></div>
+      </div>
+    </section>
+
+    <section class="mt-8 rounded-xl border border-border bg-white p-6">
+      <h2 class="text-xl font-bold text-text">Loan Denial Checker FAQ</h2>
+      <div class="mt-5 space-y-5">
+        <div>
+          <h3 class="font-semibold text-text">Can this tool tell me exactly why I was denied?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">
+            No. Your adverse action notice is the official source for denial reasons. This checker helps you map common denial patterns to documents, credit checks, and safer next steps.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-text">Does the checker affect my credit score?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">
+            No. This is an educational tool. It does not ask for your Social Security number, does not contact lenders, and does not run a credit check.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-text">What should I do first after a loan denial?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">
+            Read the adverse action notice, save it, check which credit report or data source was used, gather supporting documents, and avoid repeated applications until the cited issue is addressed.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-8 rounded-xl border border-border bg-bg-alt p-5">
+      <h2 class="font-bold text-text">Important Limits</h2>
+      <p class="mt-2 text-xs leading-relaxed text-muted">
+        This tool is not legal, tax, financial, or underwriting advice. It does not access your credit report, does not know your lender's exact rules, and does not replace an adverse action notice. Save the notice, review the specific reasons listed, and avoid repeated applications until the underlying issue is addressed.
+      </p>
+    </section>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    const resources = {
+      credit: [
+        ['Credit report checklist', '/resources/credit-report-checklist/'],
+        ['Credit score simulator', '/tools/credit-score-simulator/'],
+        ['How to build credit score fast', '/answers/how-to-build-credit-score-fast/'],
+      ],
+      personal: [
+        ['How to get a personal loan', '/answers/how-to-get-a-personal-loan/'],
+        ['Personal loans for bad credit', '/answers/personal-loans-bad-credit-how-to-qualify/'],
+        ['Borrowing power quiz', '/tools/borrowing-power-quiz/'],
+      ],
+      business: [
+        ['How to apply for a business loan', '/answers/how-to-apply-for-a-business-loan/'],
+        ['Business loan with bad credit', '/answers/can-you-get-a-business-loan-with-bad-credit/'],
+        ['SBA loan guide', '/answers/how-to-get-an-sba-loan/'],
+      ],
+      debt: [
+        ['Debt to income ratio explained', '/answers/debt-to-income-ratio-explained/'],
+        ['Debt payoff calculator', '/tools/debt-payoff-calculator/'],
+        ['Debt consolidation guide', '/answers/can-i-do-debt-consolidation-myself/'],
+      ],
+      mca: [
+        ['Merchant cash advance guide', '/answers/merchant-cash-advance-guide/'],
+        ['Small business loans and MCAs', '/answers/small-business-loans-sba-merchant-cash-advances/'],
+        ['How to apply for a business loan', '/answers/how-to-apply-for-a-business-loan/'],
+      ],
+    };
+
+    function addUnique(list, item) {
+      if (!list.includes(item)) list.push(item);
+    }
+
+    function getValues() {
+      return {
+        loanType: $('loan-type').value,
+        creditRange: $('credit-range').value,
+        debtBurden: $('debt-burden').value,
+        incomeProof: $('income-proof').value,
+        recentApps: $('recent-apps').value,
+        reportIssues: $('report-issues').value,
+        businessAge: $('business-age').value,
+        businessDocs: $('business-docs').value,
+      };
+    }
+
+    function buildResult(values) {
+      const reasons = [];
+      const steps = [];
+      const resourceKeys = ['credit'];
+      let severity = 0;
+
+      if (values.creditRange === 'unknown') {
+        addUnique(reasons, 'The lender may have used a credit score or bureau report you have not reviewed recently.');
+        addUnique(steps, 'Pull all three official credit reports and save the report named in the adverse action notice.');
+        severity += 1;
+      } else if (values.creditRange === 'under580') {
+        addUnique(reasons, 'Credit score range may be below many mainstream lender thresholds.');
+        addUnique(steps, 'Review report accuracy, recent late payments, collections, charge-offs, utilization, and safer credit-building options before reapplying.');
+        severity += 3;
+      } else if (values.creditRange === '580-619') {
+        addUnique(reasons, 'Credit score may be borderline for bank, card, SBA, or lower-cost loan products.');
+        addUnique(steps, 'Look for the exact credit reason in the notice and avoid applying again until that factor improves or lender fit changes.');
+        severity += 2;
+      }
+
+      if (values.reportIssues === 'unknown') {
+        addUnique(reasons, 'Unreviewed credit reports can hide errors, outdated items, or accounts you do not recognize.');
+        addUnique(steps, 'Use the credit report checklist before submitting another application.');
+        severity += 1;
+      } else if (values.reportIssues === 'derogatory') {
+        addUnique(reasons, 'Collections, charge-offs, recent late payments, or derogatory marks can trigger denials even when income is adequate.');
+        addUnique(steps, 'Separate accurate negative items from inaccurate items. Dispute only inaccurate information and document any paid or resolved accounts.');
+        severity += 3;
+      } else if (values.reportIssues === 'identity') {
+        addUnique(reasons, 'Identity mismatches, mixed-file problems, or accounts you do not recognize can cause verification failures or credit denials.');
+        addUnique(steps, 'Document the mismatch, dispute bureau errors, and consider identity theft reporting if accounts are not yours.');
+        severity += 3;
+      }
+
+      if (values.debtBurden === 'high') {
+        addUnique(reasons, 'Debt-to-income or payment burden may be too high for the new payment.');
+        addUnique(steps, 'List every monthly debt payment, estimate DTI, and consider paying down balances before another application.');
+        resourceKeys.push('debt');
+        severity += 3;
+      } else if (values.debtBurden === 'medium' || values.debtBurden === 'unknown') {
+        addUnique(reasons, 'The lender may have been concerned about payment capacity or debt burden.');
+        addUnique(steps, 'Calculate monthly obligations and compare the new payment against your budget before reapplying.');
+        resourceKeys.push('debt');
+        severity += 1;
+      }
+
+      if (values.incomeProof === 'thin') {
+        addUnique(reasons, 'Income may have looked irregular, seasonal, recent, or hard to verify.');
+        addUnique(steps, 'Gather current pay stubs, tax records, benefit letters, bank deposits, or other proof the lender accepts.');
+        severity += 2;
+      } else if (values.incomeProof === 'missing') {
+        addUnique(reasons, 'Missing or weak income documentation is a common avoidable denial reason.');
+        addUnique(steps, 'Do not reapply until income or revenue documents are complete and consistent with the application.');
+        severity += 3;
+      }
+
+      if (values.recentApps === 'some') {
+        addUnique(reasons, 'Several recent applications may have made the file look riskier.');
+        addUnique(steps, 'Pause applications, review the denial notice, and use prequalification where possible before another hard inquiry.');
+        severity += 1;
+      } else if (values.recentApps === 'many') {
+        addUnique(reasons, 'Too many recent applications or hard inquiries may be part of the denial pattern.');
+        addUnique(steps, 'Stop applying broadly. Wait, fix the cited issue, and target a lender that fits your profile.');
+        severity += 3;
+      }
+
+      if (['business', 'sba', 'mca'].includes(values.loanType)) {
+        resourceKeys.push('business');
+        if (values.businessAge === 'startup') {
+          addUnique(reasons, 'Business age may be too short for many lenders, especially banks and SBA lenders.');
+          addUnique(steps, 'Prepare a startup-friendly funding path and avoid comparing yourself against two-year operating-business criteria.');
+          severity += 3;
+        } else if (values.businessAge === 'under2') {
+          addUnique(reasons, 'Business age may be borderline for bank or SBA financing.');
+          addUnique(steps, 'Document revenue history, business bank activity, and use of funds clearly.');
+          severity += 2;
+        }
+
+        if (values.businessDocs === 'partial') {
+          addUnique(reasons, 'Missing business documents can block underwriting even if revenue exists.');
+          addUnique(steps, 'Gather bank statements, tax returns, entity records, ownership details, and debt schedules before reapplying.');
+          severity += 2;
+        } else if (values.businessDocs === 'weak') {
+          addUnique(reasons, 'No separate business bank records can make business revenue hard to verify.');
+          addUnique(steps, 'Separate business and personal accounts and build a cleaner statement trail before applying for serious funding.');
+          severity += 3;
+        }
+      }
+
+      if (values.loanType === 'mca') {
+        resourceKeys.push('mca');
+        addUnique(reasons, 'Fast funding providers may focus heavily on daily revenue, bank activity, and repayment pressure.');
+        addUnique(steps, 'Compare total repayment, factor rate, holdback, and cash-flow pressure before accepting any offer.');
+      } else if (values.loanType === 'debt') {
+        resourceKeys.push('debt', 'personal');
+        addUnique(reasons, 'Debt consolidation denials often come from high balances, high DTI, low score, or too little payment capacity.');
+      } else if (values.loanType === 'personal' || values.loanType === 'credit-card') {
+        resourceKeys.push('personal');
+      }
+
+      if (reasons.length === 0) {
+        reasons.push('The denial may be lender-fit specific rather than one obvious weakness.');
+        steps.push('Compare the notice against the lender type, requested amount, repayment term, collateral, and required documents.');
+      }
+
+      const resultTitle = severity >= 8
+        ? 'High-priority issues to fix before reapplying'
+        : severity >= 4
+          ? 'Several likely issues need review'
+          : 'Start with the notice and lender fit';
+
+      const summary = severity >= 8
+        ? 'Your answers point to issues that can compound if you keep applying immediately. Pause, gather documents, review reports, and address the cited reasons first.'
+        : severity >= 4
+          ? 'Your denial may involve more than one factor. Work from the adverse action notice, then check the items below before another application.'
+          : 'Your profile may need a narrower review. The adverse action notice, lender fit, and documentation should guide the next step.';
+
+      return { title: resultTitle, summary, reasons, steps, resourceKeys: [...new Set(resourceKeys)] };
+    }
+
+    function renderList(id, items) {
+      $(id).innerHTML = items.map((item) => `<li class="flex gap-3"><span class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-primary"></span><span>${item}</span></li>`).join('');
+    }
+
+    function renderResources(keys) {
+      const pairs = keys.flatMap((key) => resources[key] || []);
+      const seen = new Set();
+      $('resource-list').innerHTML = pairs
+        .filter(([resourceTitle]) => {
+          if (seen.has(resourceTitle)) return false;
+          seen.add(resourceTitle);
+          return true;
+        })
+        .slice(0, 8)
+        .map(([resourceTitle, href]) => `<a href="${href}" class="rounded-lg border border-border bg-bg-alt p-3 text-sm font-medium text-primary hover:underline">${resourceTitle}</a>`)
+        .join('');
+    }
+
+    $('check-denial-btn').addEventListener('click', () => {
+      const result = buildResult(getValues());
+      $('result-title').textContent = result.title;
+      $('result-summary').textContent = result.summary;
+      renderList('reason-list', result.reasons);
+      renderList('step-list', result.steps);
+      renderResources(result.resourceKeys);
+      $('results').classList.remove('hidden');
+      $('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  </script>
+</BaseLayout>
