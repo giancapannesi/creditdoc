@@ -4380,3 +4380,58 @@ Verification:
   comparison URL returned HTTP 200.
 - Live touched comparison page no longer contains `clear pick`.
 - Route self-healer check-only returned `10/10` with zero failures.
+
+## 2026-06-09 - City Guide Guardrail Recovery
+
+Fixed a live city-guide content-engine regression where recent guides were
+generating but being blocked by false-positive guardrail failures.
+
+What happened:
+
+- The city-guide generator correctly supplied FDIC/SBA/CFPB/state-law facts to
+  the prompt, but validation only allowed exact raw values from
+  `city_info`, `state_data`, and `local_stats`.
+- Generated copy often rewrote sourced public facts into normal reader-facing
+  forms, for example `$27372.6M` as `$27.3 billion` or `$500,000` followed by a
+  comma in prose.
+- The shared current-fact guardrail then misread those sourced public facts as
+  unsupported provider prices, rates, or ratings.
+
+Live tool fixes:
+
+- `/srv/BusinessOps/tools/creditdoc_city_guide_generator.py` now builds a
+  city-guide-specific allowed-value set that includes normalized SBA totals,
+  standard SBA program limits, payday-law/PAL public-program values, state
+  income variants, and common credit-education percentages.
+- `/srv/BusinessOps/tools/creditdoc_content_guardrails.py` now canonicalizes
+  trailing punctuation so sourced values such as `$500,000,` match `$500,000`.
+- `/srv/BusinessOps/tools/creditdoc_comparison_generator.py` now passes imported
+  `google_rating` and `google_reviews_count` explicitly as `Google Rating`
+  source facts, separate from the internal CreditDoc rating.
+
+Important source-data rule:
+
+- Google/BBB values must not be assumed fake. CreditDoc has imported source
+  records in `src/content/lenders/*.json` and `data/creditdoc.db` with
+  `data_source: outscraper`, `google_rating`, `google_reviews_count`,
+  `google_place_id`, and BBB fields. Future validator work must trust values
+  present in those source records and block only model-invented values outside
+  the supplied/imported source data.
+
+Recovery completed:
+
+- Reprocessed and live-verified HTTP 200:
+  `visalia-ca`, `topeka-ks`, `coral-springs-fl`, `warren-mi`,
+  `sterling-heights-mi`, `elizabeth-nj`, `norman-ok`, `kent-wa`,
+  `west-palm-beach-fl`.
+- Final recovery batch ended `Generated: 5 | Failed: 0`.
+- Queue advanced past the previously blocked cities to Hampton, New Haven,
+  Clearwater, West Valley City, and Miramar.
+
+Verification:
+
+- `python3 -m py_compile` passed for both patched live scripts.
+- Debugger-style validation confirmed sourced public facts pass, imported
+  Google comparison facts pass, and unsourced BBB/Google company rating claims
+  still block.
+- All nine recovered live city-guide URLs returned HTTP 200.
