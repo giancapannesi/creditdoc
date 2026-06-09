@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export PATH="/root/.nvm/versions/node/v24.15.0/bin:/usr/local/bin:/usr/bin:/bin:${PATH:-}"
+
 REPO="/srv/BusinessOps/creditdoc"
 WORKTREE="/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Tools_Autonomous_Worktree_2026-06-09"
 BRANCH="creditdoc-tools-autonomous-2026-06-09"
@@ -59,8 +61,7 @@ fi
 
   codex exec \
     --cd "$WORKTREE" \
-    --sandbox danger-full-access \
-    --ask-for-approval never \
+    --dangerously-bypass-approvals-and-sandbox \
     --output-last-message "$WORKTREE/AUTONOMOUS_LAST_MESSAGE.md" \
     - < "$PROMPT"
 
