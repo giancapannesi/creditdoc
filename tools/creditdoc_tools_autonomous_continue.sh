@@ -8,6 +8,7 @@ WORKTREE="/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Tools_Autonom
 BRANCH="creditdoc-tools-autonomous-2026-06-09"
 PROMPT="/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Origination_Capture_System_2026-06-09/AUTONOMOUS_TOOLS_PROMPT.md"
 LOG="/srv/BusinessOps/logs/creditdoc_tools_autonomous_continue.log"
+LAST_MESSAGE="/srv/BusinessOps/logs/creditdoc_tools_autonomous_last_message.md"
 LOCK="/tmp/creditdoc_tools_autonomous_continue.lock"
 CUTOFF_UTC="2026-06-12T00:00:00Z"
 
@@ -62,7 +63,7 @@ fi
   codex exec \
     --cd "$WORKTREE" \
     --dangerously-bypass-approvals-and-sandbox \
-    --output-last-message "$WORKTREE/AUTONOMOUS_LAST_MESSAGE.md" \
+    --output-last-message "$LAST_MESSAGE" \
     - < "$PROMPT"
 
   echo "--- post-agent status ---"
