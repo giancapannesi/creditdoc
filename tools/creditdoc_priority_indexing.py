@@ -10,14 +10,15 @@ Push tiers (resource/trust assets promoted 2026-06-09):
     1. Tools/quizzes       /tools/<slug>/
     2. Courses/learn       /courses/<slug>/, /learn/
     3. Research/trust      /research/<slug>/ + methodology/disclosure/about
-    4. Wellness            /financial-wellness/<slug>/
-    5. Money pages         /best/<slug>/              (listicles)
-    6. Questions           /answers/<slug>/           (cluster_answers)
-    7. City guides         /credit-guide/<slug>/      (local pages)
-    8. Blog                /blog/<slug>/              (blog_posts)
-    9. Brand hubs          /brand/<slug>/             (brand JSON exists)
-   10. Compare pages       /compare/<slug>/           (comparisons)
-   11. State pages         /state/<slug>/             (already tracked in GSC)
+    4. Resources           /resources/<slug>/         (checklists/templates)
+    5. Wellness            /financial-wellness/<slug>/
+    6. Money pages         /best/<slug>/              (listicles)
+    7. Questions           /answers/<slug>/           (cluster_answers)
+    8. City guides         /credit-guide/<slug>/      (local pages)
+    9. Blog                /blog/<slug>/              (blog_posts)
+   10. Brand hubs          /brand/<slug>/             (brand JSON exists)
+   11. Compare pages       /compare/<slug>/           (comparisons)
+   12. State pages         /state/<slug>/             (already tracked in GSC)
 
 Quota: 200/day Google Indexing API, unlimited IndexNow (Bing/AI search).
 
@@ -68,6 +69,7 @@ VALID_TIERS = (
     "courses",
     "research",
     "regulatory",
+    "resources",
     "wellness",
     "money",
     "answers",
@@ -80,8 +82,8 @@ VALID_TIERS = (
 
 
 def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_cooldown=False):
-    """Publishable URLs only: tools, courses, research/trust, wellness,
-    money pages, answers, city, blog, brand, compare, and state pages.
+    """Publishable URLs only: tools, courses, research/trust, resources,
+    wellness, money pages, answers, city, blog, brand, compare, and state pages.
     /review/* lender profiles are NEVER pushed (founder rule 2026-04-24).
 
     Quota-conserving filter (2026-05-03, hardened):
@@ -142,6 +144,12 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
       UNION ALL SELECT 'regulatory' AS tier, 'methodology' AS path, 'methodology' AS sort_key
       UNION ALL SELECT 'regulatory' AS tier, 'privacy' AS path, 'privacy' AS sort_key
       UNION ALL SELECT 'regulatory' AS tier, 'terms' AS path, 'terms' AS sort_key
+      UNION ALL
+      SELECT DISTINCT 'resources' AS tier,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS sort_key
+        FROM indexation_status
+        WHERE page_url LIKE '{SITE}/resources/%'
       UNION ALL
       SELECT DISTINCT 'wellness' AS tier,
              TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
@@ -240,14 +248,15 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
         WHEN 'courses' THEN 2
         WHEN 'research' THEN 3
         WHEN 'regulatory' THEN 4
-        WHEN 'wellness' THEN 5
-        WHEN 'money' THEN 6
-        WHEN 'answers' THEN 7
-        WHEN 'city' THEN 8
-        WHEN 'blog' THEN 9
-        WHEN 'brand' THEN 10
-        WHEN 'compare' THEN 11
-        WHEN 'state' THEN 12
+        WHEN 'resources' THEN 5
+        WHEN 'wellness' THEN 6
+        WHEN 'money' THEN 7
+        WHEN 'answers' THEN 8
+        WHEN 'city' THEN 9
+        WHEN 'blog' THEN 10
+        WHEN 'brand' THEN 11
+        WHEN 'compare' THEN 12
+        WHEN 'state' THEN 13
         ELSE 99
       END,
       p.sort_key DESC
@@ -286,6 +295,7 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
     print(f"  Courses:  {by_tier['courses']}")
     print(f"  Research: {by_tier['research']}")
     print(f"  Reg/trust:{by_tier['regulatory']}")
+    print(f"  Resources:{by_tier['resources']}")
     print(f"  Wellness: {by_tier['wellness']}")
     print(f"  Money:    {by_tier['money']}")
     print(f"  Answers:  {by_tier['answers']}")
@@ -351,7 +361,7 @@ def main():
                         help="Skip Google Indexing API (already quota-exhausted)")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--tier", choices=VALID_TIERS,
-                        help="Only submit one tier, e.g. tools, wellness, money, or answers")
+                        help="Only submit one tier, e.g. tools, resources, wellness, money, or answers")
     parser.add_argument("--limit", type=int, default=GOOGLE_DAILY_QUOTA,
                         help=f"Max URLs to push (default {GOOGLE_DAILY_QUOTA})")
     args = parser.parse_args()
