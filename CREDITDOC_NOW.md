@@ -4593,3 +4593,26 @@ Guardrails:
 - Do not ask for SSNs or sensitive documents in the front-end tools.
 - Do not imply approval, underwriting, or prequalification unless a real
   partner/API supports it.
+
+## 2026-06-09 - Temporary Autonomous Tools Continuation
+
+Set up a temporary cron handoff so CreditDoc tools/origination construction can
+continue while Jammi is away.
+
+Operational details:
+
+- Cron entry: `7 */4 * * * /srv/BusinessOps/creditdoc/tools/creditdoc_tools_autonomous_continue.sh`
+- Cutoff: `2026-06-12T00:00:00Z`
+- Log: `/srv/BusinessOps/logs/creditdoc_tools_autonomous_continue.log`
+- Isolated worktree: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Tools_Autonomous_Worktree_2026-06-09`
+- Branch: `creditdoc-tools-autonomous-2026-06-09`
+- Prompt: `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Origination_Capture_System_2026-06-09/AUTONOMOUS_TOOLS_PROMPT.md`
+
+Safety behavior:
+
+- The runner uses `flock` so two runs cannot overlap.
+- It skips if `/srv/BusinessOps/creditdoc` is dirty, to avoid clashing with
+  another agent.
+- It skips if the isolated worktree is dirty from a prior run.
+- It runs `npm run build` before committing autonomous changes.
+- It commits locally only. It does not push or deploy from cron.
