@@ -4435,3 +4435,33 @@ Verification:
   Google comparison facts pass, and unsourced BBB/Google company rating claims
   still block.
 - All nine recovered live city-guide URLs returned HTTP 200.
+
+## 2026-06-09 - Guardrail Repeat-Proofing
+
+Completed the follow-up hardening so this class of failure is checked
+automatically.
+
+Implemented:
+
+- Extended `/srv/BusinessOps/tools/test_creditdoc_content_guardrails.py` with
+  regression cases for city-guide sourced SBA/public-law facts, money
+  punctuation variants, imported Google rating/review source facts, and
+  invented Google rating claims.
+- Confirmed `/srv/BusinessOps/tools/creditdoc_content_engine_daily_verify.py`
+  runs that regression test as a command check.
+- Mirrored the live guardrail/generator/verifier scripts into tracked repo path
+  `tools/live_ops/` because `/srv/BusinessOps/tools` is not itself a git
+  repository.
+
+Verification:
+
+- Direct guardrail regression command passed.
+- `python3 -m py_compile` passed for the patched live scripts.
+- Daily verifier dry-run with `--allow-pending` passed at 2026-06-09 12:03 UTC,
+  including the guardrail regression hook and all queue reserve checks.
+
+Operational rule:
+
+- Whenever a live script under `/srv/BusinessOps/tools` is changed for
+  CreditDoc, mirror the changed file into `tools/live_ops/` and commit it with
+  the related handoff/memory update.
