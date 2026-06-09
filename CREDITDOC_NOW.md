@@ -4465,3 +4465,38 @@ Operational rule:
 - Whenever a live script under `/srv/BusinessOps/tools` is changed for
   CreditDoc, mirror the changed file into `tools/live_ops/` and commit it with
   the related handoff/memory update.
+
+## 2026-06-09 - Repair-And-Revalidate Generator Hardening
+
+Added the missing constructive guardrail behavior across the content engines.
+
+Implemented:
+
+- Added `/srv/BusinessOps/tools/creditdoc_content_repair.py`.
+- Wired one conservative repair pass into:
+  `/srv/BusinessOps/tools/creditdoc_city_guide_generator.py`,
+  `/srv/BusinessOps/tools/creditdoc_comparison_generator.py`,
+  `/srv/BusinessOps/tools/creditdoc_blog.py`,
+  `/srv/BusinessOps/tools/creditdoc_wellness_generator.py`, and
+  `/srv/BusinessOps/tools/creditdoc_cluster_executor.py`.
+- Flow is now: generate JSON, validate guardrails, repair once if needed,
+  revalidate, then publish/reject/save draft based on the same guardrails.
+
+Repair behavior:
+
+- Preserves JSON shape.
+- Does not invent replacement facts.
+- Removes or rewrites unsupported current prices, APRs, ratings, review
+  counts, guarantees, approval odds, or company claims.
+- Uses source context where available, including city public facts and
+  comparison lender summaries.
+
+Verification:
+
+- `python3 -m py_compile` passed for the repair helper and all wired live
+  generators.
+- Direct guardrail regression test passed.
+- Daily verifier dry-run with `--allow-pending` passed at 2026-06-09 12:07 UTC,
+  including queue reserves and generated-content guardrail regression.
+- Mirrored the changed live scripts into `tools/live_ops/` for committed
+  rollback/reference because `/srv/BusinessOps/tools` is not a git repo.

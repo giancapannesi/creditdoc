@@ -13,7 +13,11 @@ file here in the same work session and commit the mirror with the handoff notes.
 Current mirrored guardrail set:
 
 - `creditdoc_content_guardrails.py`
+- `creditdoc_content_repair.py`
 - `creditdoc_city_guide_generator.py`
+- `creditdoc_blog.py`
+- `creditdoc_wellness_generator.py`
+- `creditdoc_cluster_executor.py`
 - `creditdoc_comparison_generator.py`
 - `test_creditdoc_content_guardrails.py`
 - `creditdoc_content_engine_daily_verify.py`

@@ -28,6 +28,7 @@ import requests
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, SCRIPT_DIR)
 from creditdoc_content_guardrails import reject_if_unsafe, supplied_fact_values
+from creditdoc_content_repair import repair_unsafe_json
 
 PROJECT_DIR = os.path.join(SCRIPT_DIR, "..", "creditdoc")
 REGULATOR_DB = os.path.join(PROJECT_DIR, "data", "regulator.db")
@@ -324,6 +325,24 @@ def _city_guardrail_allowed_values(city_info, state_data, local_stats):
     return allowed
 
 
+def _city_source_context(city_info, state_data, local_stats):
+    return json.dumps(
+        {
+            "city_info": city_info,
+            "state_data": state_data,
+            "local_stats": local_stats,
+            "allowed_public_program_context": [
+                "SBA 7(a), 504, Microloan, SBA Express, and Disaster Loan program limits",
+                "state usury/payday law summaries supplied in state_data",
+                "FDIC/SBA/CFPB public statistics supplied in local_stats",
+                "general credit education such as utilization percentages",
+            ],
+        },
+        ensure_ascii=False,
+        default=str,
+    )
+
+
 def get_lender_count_for_state(state_abbr):
     """Count indexed lenders in the state from creditdoc.db."""
     try:
@@ -582,7 +601,16 @@ Return ONLY the JSON object, no markdown fences, no explanation."""
         allowed_values = _city_guardrail_allowed_values(city_info, state_data, local_stats)
         guardrail_failures = reject_if_unsafe(parsed, allowed_values=allowed_values)
         if guardrail_failures:
-            raise ValueError("CreditDoc city guardrails failed: " + " | ".join(guardrail_failures[:8]))
+            parsed, guardrail_failures = repair_unsafe_json(
+                parsed,
+                guardrail_failures,
+                content_type="city guide",
+                source_context=_city_source_context(city_info, state_data, local_stats),
+                allowed_values=allowed_values,
+                max_tokens=4000,
+            )
+        if guardrail_failures:
+            raise ValueError("CreditDoc city guardrails failed after content repair: " + " | ".join(guardrail_failures[:8]))
         return parsed
     except json.JSONDecodeError:
         openai_key = (
@@ -608,6 +636,15 @@ Malformed response:
         parsed = _parse_city_json(repaired, city_info["slug"])
         allowed_values = _city_guardrail_allowed_values(city_info, state_data, local_stats)
         guardrail_failures = reject_if_unsafe(parsed, allowed_values=allowed_values)
+        if guardrail_failures:
+            parsed, guardrail_failures = repair_unsafe_json(
+                parsed,
+                guardrail_failures,
+                content_type="city guide",
+                source_context=_city_source_context(city_info, state_data, local_stats),
+                allowed_values=allowed_values,
+                max_tokens=4000,
+            )
         if guardrail_failures:
             raise ValueError("CreditDoc city guardrails failed after repair: " + " | ".join(guardrail_failures[:8]))
         return parsed

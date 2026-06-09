@@ -29,6 +29,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from creditdoc_oauth import call_claude
 from creditdoc_content_guardrails import reject_if_unsafe, supplied_fact_values
+from creditdoc_content_repair import repair_unsafe_json
 
 # === CONFIG ===
 PROJECT_DIR = "/srv/BusinessOps/creditdoc"
@@ -258,6 +259,17 @@ RULES:
             allowed_values=allowed_values,
             entity_allowed_values=entity_allowed_values,
         )
+        if guardrail_failures:
+            print("  REPAIR: CreditDoc guardrails failed; attempting content repair")
+            comp, guardrail_failures = repair_unsafe_json(
+                comp,
+                guardrail_failures,
+                content_type="comparison page",
+                source_context=f"COMPANY A:\n{a_summary}\n\nCOMPANY B:\n{b_summary}",
+                allowed_values=allowed_values,
+                entity_allowed_values=entity_allowed_values,
+                max_tokens=2048,
+            )
         if guardrail_failures:
             print("  REJECT: CreditDoc guardrails failed")
             for failure in guardrail_failures[:8]:
