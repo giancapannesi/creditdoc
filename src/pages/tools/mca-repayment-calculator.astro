@@ -1,0 +1,308 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'MCA Repayment Calculator | CreditDoc';
+const description = 'Estimate merchant cash advance repayment, factor-rate cost, holdback impact, and daily or weekly cash-flow pressure. Free educational calculator.';
+const canonical = 'https://www.creditdoc.co/tools/mca-repayment-calculator/';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'MCA Repayment Calculator',
+  description,
+  url: canonical,
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Web',
+  image: 'https://www.creditdoc.co/og-default.png',
+  isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  author: { '@type': 'Organization', name: 'CreditDoc', url: 'https://www.creditdoc.co' },
+  publisher: { '@type': 'Organization', name: 'CreditDoc', url: 'https://www.creditdoc.co' },
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is a merchant cash advance factor rate?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A factor rate is a multiplier applied to the funded amount. For example, a 1.35 factor on $20,000 means the estimated payback amount is $27,000 before considering any separate fees or contract details.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is an MCA the same as a business loan?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Merchant cash advances are commonly structured as purchases of future receivables rather than traditional loans. Contract structure, state rules, payment method, and total repayment terms can differ from loan products.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does this calculator tell me whether to take an MCA?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. This calculator is an educational estimate. Review the contract, payment frequency, reconciliation terms, total repayment, default provisions, and alternatives before making a decision.',
+      },
+    },
+  ],
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+    { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://www.creditdoc.co/tools/' },
+    { '@type': 'ListItem', position: 3, name: 'MCA Repayment Calculator', item: canonical },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={[jsonLd, faqJsonLd, breadcrumbJsonLd]}>
+  <nav class="mx-auto max-w-4xl px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="transition-colors hover:text-primary">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/tools/" class="transition-colors hover:text-primary">Tools</a></li>
+      <li class="text-border">/</li>
+      <li class="font-medium text-text">MCA Repayment Calculator</li>
+    </ol>
+  </nav>
+
+  <div class="mx-auto max-w-4xl px-4 py-8">
+    <section class="mb-8 text-center">
+      <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-light px-4 py-1.5 text-sm font-medium text-primary">
+        Free &middot; Educational estimate &middot; No signup
+      </div>
+      <h1 class="text-3xl font-bold text-text md:text-4xl">MCA Repayment Calculator</h1>
+      <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+        Estimate total payback, daily or weekly payment pressure, and holdback impact before comparing merchant cash advance offers or fast-funding alternatives.
+      </p>
+    </section>
+
+    <section class="glass-card mb-6 p-5">
+      <h2 class="mb-2 text-lg font-bold text-text">Use This Before Fast Funding</h2>
+      <p class="text-sm leading-relaxed text-muted">
+        MCA pricing is usually expressed as a factor rate, not an APR. This calculator keeps the math visible so you can compare payback amount, payment frequency, and the share of revenue that may be pulled from cash flow.
+      </p>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/answers/merchant-cash-advance-guide/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">MCA guide</a>
+        <a href="/best/best-merchant-cash-advance/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">MCA research</a>
+        <a href="/tools/business-loan-readiness-quiz/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Business readiness quiz</a>
+        <a href="/tools/loan-denial-reason-checker/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Denial checker</a>
+      </div>
+    </section>
+
+    <section class="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+      <div class="glass-card p-6">
+        <h2 class="mb-5 text-xl font-bold text-text">Advance Details</h2>
+        <div class="grid gap-4">
+          <label class="block">
+            <span class="mb-2 block text-sm font-medium text-text">Funding amount</span>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted">$</span>
+              <input id="funding-amount" type="number" min="1000" max="1000000" step="1000" value="25000" class="w-full rounded-lg border border-border bg-white py-3 pl-7 pr-4 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+            </div>
+          </label>
+
+          <label class="block">
+            <span class="mb-2 block text-sm font-medium text-text">Factor rate</span>
+            <input id="factor-rate" type="number" min="1.05" max="2.5" step="0.01" value="1.35" class="w-full rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+            <span class="mt-1 block text-xs text-muted">Example: 1.35 means $1.35 repaid for every $1.00 funded.</span>
+          </label>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-text">Estimated term</span>
+              <input id="term-weeks" type="number" min="4" max="104" step="1" value="26" class="w-full rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+              <span class="mt-1 block text-xs text-muted">Weeks until payback.</span>
+            </label>
+
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-text">Payment frequency</span>
+              <select id="payment-frequency" class="w-full rounded-lg border border-border bg-white px-4 py-3 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                <option value="daily">Daily, 5 business days/week</option>
+                <option value="weekly">Weekly</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-text">Average monthly revenue</span>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted">$</span>
+                <input id="monthly-revenue" type="number" min="0" max="5000000" step="1000" value="60000" class="w-full rounded-lg border border-border bg-white py-3 pl-7 pr-4 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+              </div>
+            </label>
+
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-text">Estimated holdback</span>
+              <div class="relative">
+                <input id="holdback-rate" type="number" min="1" max="50" step="1" value="15" class="w-full rounded-lg border border-border bg-white py-3 pl-4 pr-8 text-text outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-muted">%</span>
+              </div>
+            </label>
+          </div>
+
+          <button id="calculate-mca" class="mt-2 inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-primary-hover sm:w-auto">
+            Calculate Repayment
+          </button>
+        </div>
+      </div>
+
+      <aside class="glass-card p-6">
+        <h2 class="mb-5 text-xl font-bold text-text">Estimated Output</h2>
+        <div class="space-y-4">
+          <div class="rounded-xl border border-border bg-white p-4">
+            <p class="text-sm text-muted">Total payback</p>
+            <p id="total-payback" class="mt-1 text-2xl font-bold text-text">$33,750</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="rounded-xl border border-border bg-white p-4">
+              <p class="text-sm text-muted">Estimated cost</p>
+              <p id="total-cost" class="mt-1 text-xl font-bold text-negative">$8,750</p>
+            </div>
+            <div class="rounded-xl border border-border bg-white p-4">
+              <p class="text-sm text-muted">Cost as funded %</p>
+              <p id="cost-percent" class="mt-1 text-xl font-bold text-negative">35.0%</p>
+            </div>
+          </div>
+          <div class="rounded-xl border border-border bg-white p-4">
+            <p id="payment-label" class="text-sm text-muted">Estimated daily payment</p>
+            <p id="periodic-payment" class="mt-1 text-2xl font-bold text-primary">$260</p>
+          </div>
+          <div class="rounded-xl border border-border bg-white p-4">
+            <p class="text-sm text-muted">Revenue pressure estimate</p>
+            <p id="pressure-label" class="mt-1 text-xl font-bold text-text">Moderate</p>
+            <p id="pressure-copy" class="mt-2 text-sm leading-relaxed text-muted">The estimated payment uses a noticeable share of monthly revenue. Compare slower funding and lower-cost alternatives if timing allows.</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="mt-6 grid gap-6 md:grid-cols-2">
+      <div class="rounded-xl border border-border bg-white p-6">
+        <h2 class="font-bold text-text">Numbers to Review</h2>
+        <ul id="review-list" class="mt-4 space-y-3 text-sm leading-relaxed text-muted"></ul>
+      </div>
+      <div class="rounded-xl border border-border bg-white p-6">
+        <h2 class="font-bold text-text">Contract Questions</h2>
+        <ul class="mt-4 space-y-3 text-sm leading-relaxed text-muted">
+          <li>Is the agreement structured as a receivables purchase or a loan?</li>
+          <li>Are there origination, broker, renewal, stacking, or default fees?</li>
+          <li>Can payments be reconciled if revenue drops?</li>
+          <li>What happens after missed payments, blocked debits, or business closure?</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-6 rounded-xl border border-border bg-bg-alt p-5">
+      <h2 class="font-bold text-text">Important Limits</h2>
+      <p class="mt-2 text-xs leading-relaxed text-muted">
+        This calculator is not financial, legal, tax, brokerage, underwriting, or contract advice. It does not read your MCA agreement, state law, bank activity, or lender rules. Actual repayment may differ because of fees, payment timing, reconciliation terms, renewals, defaults, and revenue changes.
+      </p>
+    </section>
+
+    <section class="mt-8 rounded-xl border border-border bg-white p-6">
+      <h2 class="text-xl font-bold text-text">MCA Repayment FAQ</h2>
+      <div class="mt-5 space-y-5">
+        <div>
+          <h3 class="font-semibold text-text">What is a merchant cash advance factor rate?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">A factor rate is a multiplier applied to the funded amount. For example, a 1.35 factor on $20,000 means the estimated payback amount is $27,000 before considering any separate fees or contract details.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-text">Is an MCA the same as a business loan?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">No. Merchant cash advances are commonly structured as purchases of future receivables rather than traditional loans. Contract structure, state rules, payment method, and total repayment terms can differ from loan products.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-text">Does this calculator tell me whether to take an MCA?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">No. This calculator is an educational estimate. Review the contract, payment frequency, reconciliation terms, total repayment, default provisions, and alternatives before making a decision.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const money = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0,
+    });
+
+    const inputs = {
+      funding: document.getElementById('funding-amount'),
+      factor: document.getElementById('factor-rate'),
+      weeks: document.getElementById('term-weeks'),
+      frequency: document.getElementById('payment-frequency'),
+      revenue: document.getElementById('monthly-revenue'),
+      holdback: document.getElementById('holdback-rate'),
+    };
+
+    function numberValue(input, fallback) {
+      const value = Number(input.value);
+      return Number.isFinite(value) && value >= 0 ? value : fallback;
+    }
+
+    function addReviewItem(list, label, value) {
+      const item = document.createElement('li');
+      item.className = 'flex items-start gap-2';
+      const marker = document.createElement('span');
+      marker.className = 'mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary';
+      const copy = document.createElement('span');
+      copy.textContent = `${label}: ${value}`;
+      item.append(marker, copy);
+      list.appendChild(item);
+    }
+
+    function calculate() {
+      const funding = Math.min(Math.max(numberValue(inputs.funding, 25000), 1000), 1000000);
+      const factor = Math.min(Math.max(numberValue(inputs.factor, 1.35), 1.05), 2.5);
+      const weeks = Math.min(Math.max(numberValue(inputs.weeks, 26), 4), 104);
+      const monthlyRevenue = Math.min(Math.max(numberValue(inputs.revenue, 60000), 0), 5000000);
+      const holdback = Math.min(Math.max(numberValue(inputs.holdback, 15), 1), 50);
+      const periods = inputs.frequency.value === 'daily' ? weeks * 5 : weeks;
+      const label = inputs.frequency.value === 'daily' ? 'Estimated daily payment' : 'Estimated weekly payment';
+      const totalPayback = funding * factor;
+      const cost = totalPayback - funding;
+      const periodic = totalPayback / periods;
+      const monthlyPaymentPressure = inputs.frequency.value === 'daily' ? periodic * 21.67 : periodic * 4.33;
+      const revenueShare = monthlyRevenue > 0 ? (monthlyPaymentPressure / monthlyRevenue) * 100 : 0;
+      const holdbackDollars = monthlyRevenue * (holdback / 100);
+
+      let pressureLabel = 'Low';
+      let pressureCopy = 'The estimated payment uses a smaller share of monthly revenue, but contract terms and revenue volatility still matter.';
+      if (revenueShare >= 25) {
+        pressureLabel = 'High';
+        pressureCopy = 'The estimated payment uses a large share of monthly revenue. Review alternatives, reconciliation terms, and default risk carefully before proceeding.';
+      } else if (revenueShare >= 12) {
+        pressureLabel = 'Moderate';
+        pressureCopy = 'The estimated payment uses a noticeable share of monthly revenue. Compare slower funding and lower-cost alternatives if timing allows.';
+      }
+
+      document.getElementById('total-payback').textContent = money.format(totalPayback);
+      document.getElementById('total-cost').textContent = money.format(cost);
+      document.getElementById('cost-percent').textContent = `${((cost / funding) * 100).toFixed(1)}%`;
+      document.getElementById('payment-label').textContent = label;
+      document.getElementById('periodic-payment').textContent = money.format(periodic);
+      document.getElementById('pressure-label').textContent = pressureLabel;
+      document.getElementById('pressure-copy').textContent = pressureCopy;
+
+      const reviewList = document.getElementById('review-list');
+      reviewList.innerHTML = '';
+      addReviewItem(reviewList, 'Estimated total repayment', money.format(totalPayback));
+      addReviewItem(reviewList, 'Estimated funding cost', money.format(cost));
+      addReviewItem(reviewList, 'Estimated monthly payment pressure', `${money.format(monthlyPaymentPressure)} (${revenueShare.toFixed(1)}% of entered revenue)`);
+      addReviewItem(reviewList, 'Entered holdback estimate', `${holdback}% of revenue, or about ${money.format(holdbackDollars)} per month`);
+      addReviewItem(reviewList, 'Estimated payment count', `${Math.round(periods)} ${inputs.frequency.value === 'daily' ? 'business-day' : 'weekly'} payments`);
+    }
+
+    document.getElementById('calculate-mca').addEventListener('click', calculate);
+    Object.values(inputs).forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  </script>
+</BaseLayout>
