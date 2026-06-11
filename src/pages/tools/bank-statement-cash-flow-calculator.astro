@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Bank Statement Cash Flow Calculator | CreditDoc';
+const description = 'Estimate business cash-flow signals from bank statement deposits, ending balances, negative days, and existing debt payments before comparing funding options.';
+const canonical = 'https://www.creditdoc.co/tools/bank-statement-cash-flow-calculator/';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Bank Statement Cash Flow Calculator',
+  description,
+  url: canonical,
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Web',
+  image: 'https://www.creditdoc.co/og-default.png',
+  isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  publisher: { '@type': 'Organization', name: 'CreditDoc', url: 'https://www.creditdoc.co' },
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What bank statement numbers do business lenders review?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Business funding reviews may look at deposit volume, average balances, negative-balance days, existing debt payments, seasonality, returned items, and whether revenue appears stable enough to support repayment.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does this calculator connect to my bank account?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. This calculator does not connect to bank accounts, does not upload statements, and does not store the numbers entered on the page.',
+      },
+    },
+  ],
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+    { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://www.creditdoc.co/tools/' },
+    { '@type': 'ListItem', position: 3, name: 'Bank Statement Cash Flow Calculator', item: canonical },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={[jsonLd, faqJsonLd, breadcrumbJsonLd]}>
+  <nav class="mx-auto max-w-4xl px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/tools/" class="hover:text-primary">Tools</a></li>
+      <li class="text-border">/</li>
+      <li class="font-medium text-text">Bank Statement Cash Flow Calculator</li>
+    </ol>
+  </nav>
+
+  <div class="mx-auto max-w-4xl px-4 py-8">
+    <section class="mb-8 text-center">
+      <div class="mb-4 inline-flex rounded-full bg-primary-light px-4 py-1.5 text-sm font-medium text-primary">
+        Free &middot; No bank login &middot; Educational only
+      </div>
+      <h1 class="text-3xl font-bold text-text md:text-4xl">Bank Statement Cash Flow Calculator</h1>
+      <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+        Enter broad monthly deposit and balance numbers to estimate repayment pressure and document readiness before comparing business funding options.
+      </p>
+    </section>
+
+    <section class="glass-card mb-6 p-5">
+      <h2 class="mb-2 text-lg font-bold text-text">Use This With Business Funding Research</h2>
+      <p class="text-sm leading-relaxed text-muted">
+        Many business funding reviews start with bank statement patterns. This tool uses summary numbers only. Do not enter account numbers, bank logins, or personally sensitive information.
+      </p>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/tools/business-loan-readiness-quiz/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Readiness quiz</a>
+        <a href="/tools/mca-repayment-calculator/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">MCA calculator</a>
+        <a href="/answers/how-to-apply-for-a-business-loan/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Application guide</a>
+        <a href="/best/best-small-business-loans/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Business loan research</a>
+      </div>
+    </section>
+
+    <section class="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+      <div class="glass-card p-6">
+        <h2 class="mb-5 text-xl font-bold text-text">Three-Month Statement Summary</h2>
+        <div class="grid gap-4">
+          <div class="grid gap-3 rounded-xl border border-border bg-white p-4">
+            <p class="text-sm font-semibold text-text">Monthly deposits</p>
+            <div class="grid gap-3 sm:grid-cols-3">
+              <label><span class="mb-1 block text-xs text-muted">Month 1</span><input id="deposits-1" type="number" min="0" step="500" value="42000" class="input-field" /></label>
+              <label><span class="mb-1 block text-xs text-muted">Month 2</span><input id="deposits-2" type="number" min="0" step="500" value="48000" class="input-field" /></label>
+              <label><span class="mb-1 block text-xs text-muted">Month 3</span><input id="deposits-3" type="number" min="0" step="500" value="51000" class="input-field" /></label>
+            </div>
+          </div>
+
+          <div class="grid gap-3 rounded-xl border border-border bg-white p-4">
+            <p class="text-sm font-semibold text-text">Ending balances</p>
+            <div class="grid gap-3 sm:grid-cols-3">
+              <label><span class="mb-1 block text-xs text-muted">Month 1</span><input id="balance-1" type="number" step="500" value="8500" class="input-field" /></label>
+              <label><span class="mb-1 block text-xs text-muted">Month 2</span><input id="balance-2" type="number" step="500" value="9400" class="input-field" /></label>
+              <label><span class="mb-1 block text-xs text-muted">Month 3</span><input id="balance-3" type="number" step="500" value="11200" class="input-field" /></label>
+            </div>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-text">Existing monthly debt payments</span>
+              <input id="debt-payments" type="number" min="0" step="100" value="4200" class="input-field" />
+            </label>
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-text">Negative-balance days in 90 days</span>
+              <input id="negative-days" type="number" min="0" max="90" step="1" value="2" class="input-field" />
+            </label>
+          </div>
+
+          <label class="block">
+            <span class="mb-2 block text-sm font-medium text-text">Possible new monthly payment</span>
+            <input id="new-payment" type="number" min="0" step="100" value="3500" class="input-field" />
+            <span class="mt-1 block text-xs text-muted">Use a proposed loan, MCA, lease, or line-of-credit payment estimate.</span>
+          </label>
+        </div>
+      </div>
+
+      <aside class="glass-card p-6">
+        <h2 class="mb-5 text-xl font-bold text-text">Cash-Flow Snapshot</h2>
+        <div class="space-y-4">
+          <div class="rounded-xl border border-border bg-white p-4">
+            <p class="text-sm text-muted">Average monthly deposits</p>
+            <p id="avg-deposits" class="mt-1 text-2xl font-bold text-text">$47,000</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="rounded-xl border border-border bg-white p-4">
+              <p class="text-sm text-muted">Deposit trend</p>
+              <p id="deposit-trend" class="mt-1 text-xl font-bold text-positive">+21.4%</p>
+            </div>
+            <div class="rounded-xl border border-border bg-white p-4">
+              <p class="text-sm text-muted">Avg ending balance</p>
+              <p id="avg-balance" class="mt-1 text-xl font-bold text-text">$9,700</p>
+            </div>
+          </div>
+          <div class="rounded-xl border border-border bg-white p-4">
+            <p class="text-sm text-muted">Debt payment load</p>
+            <p id="payment-load" class="mt-1 text-2xl font-bold text-primary">16.4%</p>
+          </div>
+          <div class="rounded-xl border border-border bg-white p-4">
+            <p class="text-sm text-muted">Readiness signal</p>
+            <p id="signal-label" class="mt-1 text-xl font-bold text-text">Moderate</p>
+            <p id="signal-copy" class="mt-2 text-sm leading-relaxed text-muted">The cash-flow profile has usable revenue, but repayment load or balance patterns need review before adding debt.</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="mt-6 grid gap-6 md:grid-cols-2">
+      <div class="rounded-xl border border-border bg-white p-6">
+        <h2 class="font-bold text-text">What to Review</h2>
+        <ul id="review-list" class="mt-4 space-y-3 text-sm leading-relaxed text-muted"></ul>
+      </div>
+      <div class="rounded-xl border border-border bg-white p-6">
+        <h2 class="font-bold text-text">Statement Red Flags</h2>
+        <ul class="mt-4 space-y-3 text-sm leading-relaxed text-muted">
+          <li>Frequent negative days or overdrafts.</li>
+          <li>Large revenue drops from month to month.</li>
+          <li>Existing daily or weekly funding payments.</li>
+          <li>Deposits that do not match tax or accounting records.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-6 rounded-xl border border-border bg-bg-alt p-5">
+      <h2 class="font-bold text-text">Important Limits</h2>
+      <p class="mt-2 text-xs leading-relaxed text-muted">
+        This tool is not underwriting, accounting, tax, legal, brokerage, or financial advice. It does not connect to your bank, verify deposits, read statements, or decide eligibility. Use it as a planning estimate before reviewing lender-specific requirements.
+      </p>
+    </section>
+  </div>
+
+  <style>
+    .input-field {
+      width: 100%;
+      border-radius: 0.5rem;
+      border: 1px solid var(--color-border, #d8dee8);
+      background: #fff;
+      padding: 0.75rem 1rem;
+      color: var(--color-text, #172033);
+      outline: none;
+    }
+    .input-field:focus {
+      border-color: var(--color-primary, #2563eb);
+      box-shadow: 0 0 0 1px var(--color-primary, #2563eb);
+    }
+  </style>
+
+  <script>
+    const money = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0,
+    });
+
+    const ids = [
+      'deposits-1',
+      'deposits-2',
+      'deposits-3',
+      'balance-1',
+      'balance-2',
+      'balance-3',
+      'debt-payments',
+      'negative-days',
+      'new-payment',
+    ];
+    const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
+
+    function value(id) {
+      const parsed = Number(fields[id].value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function addItem(list, text) {
+      const item = document.createElement('li');
+      item.className = 'flex items-start gap-2';
+      const marker = document.createElement('span');
+      marker.className = 'mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary';
+      const copy = document.createElement('span');
+      copy.textContent = text;
+      item.append(marker, copy);
+      list.appendChild(item);
+    }
+
+    function calculate() {
+      const deposits = [value('deposits-1'), value('deposits-2'), value('deposits-3')].map((n) => Math.max(n, 0));
+      const balances = [value('balance-1'), value('balance-2'), value('balance-3')];
+      const debtPayments = Math.max(value('debt-payments'), 0);
+      const newPayment = Math.max(value('new-payment'), 0);
+      const negativeDays = Math.min(Math.max(value('negative-days'), 0), 90);
+      const avgDeposits = deposits.reduce((sum, n) => sum + n, 0) / 3;
+      const avgBalance = balances.reduce((sum, n) => sum + n, 0) / 3;
+      const trend = deposits[0] > 0 ? ((deposits[2] - deposits[0]) / deposits[0]) * 100 : 0;
+      const paymentLoad = avgDeposits > 0 ? ((debtPayments + newPayment) / avgDeposits) * 100 : 0;
+
+      let signal = 'Stronger';
+      let copy = 'Entered deposits, balances, and payment load look more stable, but lender-specific rules and documentation still matter.';
+      if (paymentLoad > 25 || negativeDays > 10 || trend < -20 || avgBalance < 0) {
+        signal = 'Caution';
+        copy = 'The entered numbers show repayment pressure, negative-balance risk, or declining deposits. Review documents and alternatives before adding debt.';
+      } else if (paymentLoad > 15 || negativeDays > 3 || trend < -5) {
+        signal = 'Moderate';
+        copy = 'The cash-flow profile has usable revenue, but repayment load or balance patterns need review before adding debt.';
+      }
+
+      document.getElementById('avg-deposits').textContent = money.format(avgDeposits);
+      document.getElementById('avg-balance').textContent = money.format(avgBalance);
+      document.getElementById('deposit-trend').textContent = `${trend >= 0 ? '+' : ''}${trend.toFixed(1)}%`;
+      document.getElementById('deposit-trend').className = `mt-1 text-xl font-bold ${trend >= 0 ? 'text-positive' : 'text-negative'}`;
+      document.getElementById('payment-load').textContent = `${paymentLoad.toFixed(1)}%`;
+      document.getElementById('signal-label').textContent = signal;
+      document.getElementById('signal-copy').textContent = copy;
+
+      const reviewList = document.getElementById('review-list');
+      reviewList.innerHTML = '';
+      addItem(reviewList, `Average monthly deposits entered: ${money.format(avgDeposits)}.`);
+      addItem(reviewList, `Existing plus possible new payment load: ${paymentLoad.toFixed(1)}% of average monthly deposits.`);
+      addItem(reviewList, `Deposit trend from month 1 to month 3: ${trend >= 0 ? '+' : ''}${trend.toFixed(1)}%.`);
+      addItem(reviewList, `Average ending balance entered: ${money.format(avgBalance)}.`);
+      addItem(reviewList, `Negative-balance days entered for the 90-day period: ${negativeDays}.`);
+    }
+
+    ids.forEach((id) => fields[id].addEventListener('input', calculate));
+    calculate();
+  </script>
+</BaseLayout>
