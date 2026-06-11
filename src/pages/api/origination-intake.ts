@@ -15,7 +15,8 @@ interface IntakePayload {
   result_label?: string;
   responses?: Record<string, unknown>;
   utm?: Record<string, string>;
-  consent_marketing?: false;
+  consent_marketing?: boolean;
+  capture_only?: boolean;
   honeypot?: string;
   elapsed_ms?: number;
 }
@@ -51,6 +52,41 @@ const TOOL_CONFIG = {
       review_first: {
         recommended_route: '/resources/credit-report-checklist/',
         title: 'Start with report review before hiring anyone',
+      },
+    },
+  },
+  'business-loan-readiness-quiz': {
+    pillar: 'business-loans',
+    sourcePage: '/tools/business-loan-readiness-quiz/',
+    answerValues: {
+      session_id: null,
+      timeInBusiness: ['startup', '6-12', '12-24', '24plus'],
+      monthlyRevenue: ['pre-revenue', 'under10k', '10k-25k', '25k-75k', '75kplus'],
+      creditRange: ['unknown', 'under580', '580-619', '620-679', '680plus'],
+      fundingUse: ['working-capital', 'equipment', 'startup', 'debt-refi', 'fast-cash'],
+      docsReady: ['ready', 'partial', 'weak'],
+      cashFlowPressure: ['low', 'medium', 'high'],
+    },
+    results: {
+      bank_sba_ready: {
+        recommended_route: '/best/best-sba-loans/',
+        title: 'Bank or SBA research may be worth comparing',
+      },
+      alternative_lender_fit: {
+        recommended_route: '/best/best-small-business-loans/',
+        title: 'Alternative business loan research may fit first',
+      },
+      startup_build_path: {
+        recommended_route: '/best/best-startup-business-loans/',
+        title: 'Startup funding and document-building path',
+      },
+      cash_flow_caution: {
+        recommended_route: '/answers/merchant-cash-advance-guide/',
+        title: 'Cash-flow pressure needs careful review',
+      },
+      repair_docs_first: {
+        recommended_route: '/tools/loan-denial-reason-checker/',
+        title: 'Documents, credit, or denial-risk factors need review first',
       },
     },
   },
@@ -224,9 +260,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const utm = cleanObject(payload.utm);
   const userAgent = cleanText(request.headers.get('user-agent'), 500);
   const ip = clientIp(request);
+  const captureOnly = payload.capture_only === true;
 
   if (email && !EMAIL_RE.test(email)) {
     return json({ ok: false, error: 'Invalid email' }, 400);
+  }
+
+  if (captureOnly && !email) {
+    return json({ ok: false, error: 'Email is required for lead capture' }, 400);
   }
 
   if (sourcePage !== config.sourcePage) {
@@ -248,25 +289,29 @@ export const POST: APIRoute = async ({ request, locals }) => {
   safeResponses.session_id = sessionId;
 
   try {
-    await postgrestInsert(env, 'user_quiz_responses', {
-      session_id: sessionId,
-      pillar,
-      email,
-      responses: {
-        ...safeResponses,
-        tool_id: toolId,
-      },
-      result_payload: {
-        result_label: resultLabel,
-        recommended_route: resultConfig.recommended_route,
-        title: resultConfig.title,
-        source_page: sourcePage,
-      },
-      ip,
-      user_agent: userAgent,
-      referrer: request.headers.get('referer'),
-      utm,
-    });
+    if (!captureOnly) {
+      await postgrestInsert(env, 'user_quiz_responses', {
+        session_id: sessionId,
+        pillar,
+        email,
+        responses: {
+          ...safeResponses,
+          tool_id: toolId,
+          capture_type: 'completion',
+        },
+        result_payload: {
+          result_label: resultLabel,
+          recommended_route: resultConfig.recommended_route,
+          title: resultConfig.title,
+          source_page: sourcePage,
+          capture_type: 'completion',
+        },
+        ip,
+        user_agent: userAgent,
+        referrer: request.headers.get('referer'),
+        utm,
+      });
+    }
 
     if (email) {
       await postgrestInsert(env, 'lead_captures', {
