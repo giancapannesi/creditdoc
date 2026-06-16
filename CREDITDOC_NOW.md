@@ -4717,3 +4717,22 @@ Verification:
 - npm run build passed after the responsive class fix, including prebuild robots/SSR sitemap parity and postbuild sitemap/robots conflict checks.
 - Generated /tools/ output contains the toolkit card and link.
 - Debug agent Anscombe reviewed the scoped change and reported no blocking findings; only noted the unrelated untracked Engine readiness markdown should stay out of commits.
+
+## 2026-06-16 - CreditDoc loan toolkit tools hub deployed
+
+Deployed the tools hub placement for the Loan Approval Readiness Toolkit to Cloudflare Workers.
+
+Code commits deployed:
+- 92452f6d3d feat: feature loan toolkit on tools hub
+- cbfe718d82 docs: log loan toolkit tools placement
+
+Cloudflare deploy result:
+- Deploy completed successfully.
+- Current Version ID: 5100fcc8-82ef-4bed-a121-a507d0192ad8.
+- Cloudflare cache purge succeeded.
+- Deploy script smoke tests returned 200 for homepage, CSS, and core SSR route families.
+
+Targeted live check:
+- https://www.creditdoc.co/tools/ contains Loan Approval Readiness Toolkit, links to /resources/loan-approval-readiness-toolkit/, and uses sm:grid-cols-2 lg:grid-cols-3 for the Courses And Checklists cards.
+
+Repo note: unrelated untracked file remains excluded from commits: CreditDoc_Engine_Embedding_Readiness_Activities_2026-06-16.md.
