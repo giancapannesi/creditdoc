@@ -56,8 +56,9 @@ const sections = [
 <BaseLayout title={title} description={description} canonical={canonical} publicResource={true}>
   <style>
     @media print {
-      header,
-      footer,
+      :global(body > header),
+      :global(body > footer),
+      :global(#cd-cookie-banner),
       .no-print {
         display: none !important;
       }
@@ -102,7 +103,15 @@ const sections = [
 
   <article class="print-page mx-auto max-w-4xl px-4 py-8">
     <header class="mb-6 border-b border-border pb-5">
-      <p class="text-xs font-semibold uppercase tracking-wider text-primary">CreditDoc free public resource</p>
+      <div class="flex items-center gap-2 text-primary" aria-label="CreditDoc">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3" />
+          <path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4" />
+          <circle cx="20" cy="10" r="2" />
+        </svg>
+        <span class="text-xl font-bold text-primary">CreditDoc</span>
+      </div>
+      <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-primary">CreditDoc free public resource</p>
       <h1 class="mt-2 text-3xl font-bold text-text">Credit Report Review and Dispute Checklist</h1>
       <p class="mt-3 text-sm leading-relaxed text-muted">
         Use this worksheet when reviewing reports from Equifax, Experian, and TransUnion. It is educational and does not replace legal advice.
