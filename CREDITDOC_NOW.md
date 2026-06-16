@@ -4701,3 +4701,19 @@ Verification:
 - git diff --check passed.
 - Live HTML for both print URLs contains aria-label=CreditDoc and the appropriate printable resource label.
 - Credit report checklist print CSS was hardened to hide only global site header/footer and the cookie banner, preserving the printable article header/logo.
+
+## 2026-06-16 - CreditDoc loan toolkit tools hub placement
+
+Completed Task 2 tools-hub placement for the Loan Approval Readiness Toolkit.
+
+Code commit: 92452f6d3d feat: feature loan toolkit on tools hub.
+
+What changed:
+- Added Loan Approval Readiness Toolkit to /tools/ Courses And Checklists section.
+- Link target: /resources/loan-approval-readiness-toolkit/.
+- Preserved tablet two-column layout and added large-screen three-column layout with sm:grid-cols-2 lg:grid-cols-3.
+
+Verification:
+- npm run build passed after the responsive class fix, including prebuild robots/SSR sitemap parity and postbuild sitemap/robots conflict checks.
+- Generated /tools/ output contains the toolkit card and link.
+- Debug agent Anscombe reviewed the scoped change and reported no blocking findings; only noted the unrelated untracked Engine readiness markdown should stay out of commits.
