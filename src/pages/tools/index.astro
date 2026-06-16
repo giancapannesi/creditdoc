@@ -89,6 +89,12 @@ const tools = [
 
 const learningResources = [
   {
+    title: "Loan Approval Readiness Toolkit",
+    description: "Use the toolkit before personal loan, business loan, credit card, debt consolidation, SBA loan, or cash-flow funding research.",
+    href: "/resources/loan-approval-readiness-toolkit/",
+    badge: "Printable",
+  },
+  {
     title: "Free Credit Fundamentals Course",
     description: "Eight self-paced modules covering credit scores, reports, debt management, credit repair, loans, scam avoidance, and consumer rights.",
     href: "/courses/credit-fundamentals/",
@@ -166,7 +172,7 @@ const breadcrumbJsonLd = {
       <p class="text-sm text-muted leading-relaxed">
         Use these before or after a quiz result to understand the basics, organize documents, and avoid rushing into an application or paid service.
       </p>
-      <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {learningResources.map(resource => (
           <a href={resource.href} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary transition-colors">
             <div class="flex items-center justify-between gap-3">
