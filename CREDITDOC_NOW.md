@@ -4658,3 +4658,31 @@ Verification:
 - Independent debug agent reviewed the two files, found print chrome, nested-main, and HowTo schema issues, then re-reviewed after fixes and reported no findings.
 
 Next recommended step: commit Phase 1, then add hub/internal links from /resources/, /tools/, and relevant answer/category pages before any deploy.
+## 2026-06-16 - CreditDoc loan approval toolkit deployed
+
+Deployed the Loan Approval Readiness Toolkit work to Cloudflare Workers on 2026-06-16.
+
+Code commits deployed:
+- b7c294eb73 feat: add loan approval readiness toolkit
+- 7d2ea36cdf fix: link loan readiness toolkit from resources
+
+Cloudflare deploy result:
+- Worker deploy completed successfully.
+- Current Version ID: 534ba7ba-1606-4eca-a76c-c490a82f93a5.
+- Cloudflare cache purge succeeded.
+- Deploy script smoke tests returned 200 for homepage, CSS, and core SSR route families.
+
+Targeted live checks:
+- https://www.creditdoc.co/resources/loan-approval-readiness-toolkit/ returned 200.
+- https://www.creditdoc.co/resources/loan-approval-readiness-toolkit/print/ returned 200.
+- https://www.creditdoc.co/resources/ returned 200.
+- Live toolkit HTML contains the Loan Approval Readiness Toolkit title, ItemList JSON-LD, and printable checklist CTA.
+- Live print HTML contains Printable Loan Readiness Checklist, window.print, and print CSS hiding body header/footer and the cookie banner.
+- Live resources hub HTML contains the toolkit card and public-resource footer link.
+
+Independent debug agent result:
+- Initial deploy review found one Medium non-blocking issue: toolkit was not linked from the resources hub/footer.
+- Fixed with a hub card in src/pages/resources/index.astro and footer link in src/layouts/BaseLayout.astro.
+- Final debug pass confirmed the finding was resolved and no deploy blockers remained.
+
+Standing next step: review the live page manually, then consider adding contextual links from relevant answer/category pages and submitting the new resource URLs for priority indexing.
