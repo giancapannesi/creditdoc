@@ -6,19 +6,18 @@ FOUNDER RULE 2026-04-24: Never submit /review/<slug>/ lender profiles
 (FA or otherwise) to search engines. Only submit the pages that earn clicks
 and move users toward money: money pages, drip, blog, education.
 
-Push tiers (resource/trust assets promoted 2026-06-09):
-    1. Tools/quizzes       /tools/<slug>/
-    2. Courses/learn       /courses/<slug>/, /learn/
-    3. Research/trust      /research/<slug>/ + methodology/disclosure/about
-    4. Resources           /resources/<slug>/         (checklists/templates)
-    5. Wellness            /financial-wellness/<slug>/
-    6. Money pages         /best/<slug>/              (listicles)
-    7. Questions           /answers/<slug>/           (cluster_answers)
-    8. City guides         /credit-guide/<slug>/      (local pages)
-    9. Blog                /blog/<slug>/              (blog_posts)
-   10. Brand hubs          /brand/<slug>/             (brand JSON exists)
-   11. Compare pages       /compare/<slug>/           (comparisons)
-   12. State pages         /state/<slug>/             (already tracked in GSC)
+Push tiers (founder focus refreshed 2026-06-16):
+    1. Tools/quizzes/questionnaires  /tools/<slug>/
+    2. Courses/learn                /courses/<slug>/, /learn/
+    3. Questions/answers            /answers/<slug>/
+    4. Money pages                  /best/, /categories/, /browse/, /compare/
+    5. Research/trust               /research/<slug>/ + methodology/disclosure/about
+    6. Resources                    /resources/<slug>/
+    7. Wellness                     /financial-wellness/<slug>/
+    8. Blog                         /blog/<slug>/
+    9. Brand hubs                   /brand/<slug>/
+   10. State pages                  /state/<slug>/
+   99. City guides                  /credit-guide/<slug>/ last
 
 Quota: 200/day Google Indexing API, unlimited IndexNow (Bing/AI search).
 
@@ -111,9 +110,9 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
         [(s,) for s in brand_slugs],
     )
 
-    # Resource/trust assets are first priority per Jammi direction on
-    # 2026-06-09: Google needs to see the full CreditDoc research layer, not
-    # only review/directory pages.
+    # Founder focus refreshed 2026-06-16: tools/quizzes/questionnaires,
+    # courses, answers, and money pages are the acquisition path. City guides
+    # remain useful, but they must not consume priority-indexing quota first.
     publishable_cte = f"""
     publishable AS (
       SELECT DISTINCT 'tools' AS tier,
@@ -129,6 +128,22 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
         WHERE page_url LIKE '{SITE}/courses/%'
            OR page_url = '{SITE}/learn/'
            OR page_url LIKE '{SITE}/learn/%'
+      UNION ALL
+      SELECT 'answers' AS tier, 'answers/' || slug AS path,
+             COALESCE(published_at, updated_at, slug) AS sort_key
+        FROM cluster_answers
+        WHERE status='published'
+      UNION ALL
+      SELECT 'money' AS tier, 'best/' || slug AS path, slug AS sort_key
+        FROM listicles
+      UNION ALL
+      SELECT DISTINCT 'money' AS tier,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
+             TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS sort_key
+        FROM indexation_status
+        WHERE page_url LIKE '{SITE}/categories/%'
+           OR page_url LIKE '{SITE}/browse/%'
+           OR page_url LIKE '{SITE}/compare/%'
       UNION ALL
       SELECT DISTINCT 'research' AS tier,
              TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
@@ -157,14 +172,6 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
         FROM indexation_status
         WHERE page_url LIKE '{SITE}/financial-wellness/%'
       UNION ALL
-      SELECT 'money' AS tier, 'best/' || slug AS path, slug AS sort_key
-        FROM listicles
-      UNION ALL
-      SELECT 'answers' AS tier, 'answers/' || slug AS path,
-             COALESCE(published_at, updated_at, slug) AS sort_key
-        FROM cluster_answers
-        WHERE status='published'
-      UNION ALL
       SELECT DISTINCT 'city' AS tier,
              TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
              TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS sort_key
@@ -184,9 +191,8 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
             AND brand_slug <> ''
             AND processing_status='ready_for_index'
         ) l ON l.brand_slug = b.slug
-      UNION ALL
-      SELECT 'compare' AS tier, 'compare/' || slug AS path, COALESCE(updated_at, slug) AS sort_key
-        FROM comparisons
+      -- /compare/ pages are treated as money pages above so they share the
+      -- same priority as other conversion-adjacent pages and are not duplicated.
       UNION ALL
       SELECT DISTINCT 'state' AS tier,
              TRIM(REPLACE(page_url, '{SITE}/', ''), '/') AS path,
@@ -246,17 +252,17 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
       CASE p.tier
         WHEN 'tools' THEN 1
         WHEN 'courses' THEN 2
-        WHEN 'research' THEN 3
-        WHEN 'regulatory' THEN 4
-        WHEN 'resources' THEN 5
-        WHEN 'wellness' THEN 6
-        WHEN 'money' THEN 7
-        WHEN 'answers' THEN 8
-        WHEN 'city' THEN 9
-        WHEN 'blog' THEN 10
-        WHEN 'brand' THEN 11
-        WHEN 'compare' THEN 12
-        WHEN 'state' THEN 13
+        WHEN 'answers' THEN 3
+        WHEN 'money' THEN 4
+        WHEN 'research' THEN 5
+        WHEN 'regulatory' THEN 6
+        WHEN 'resources' THEN 7
+        WHEN 'wellness' THEN 8
+        WHEN 'blog' THEN 9
+        WHEN 'brand' THEN 10
+        WHEN 'compare' THEN 11
+        WHEN 'state' THEN 12
+        WHEN 'city' THEN 99
         ELSE 99
       END,
       p.sort_key DESC

@@ -4616,3 +4616,17 @@ Safety behavior:
 - It skips if the isolated worktree is dirty from a prior run.
 - It runs `npm run build` before committing autonomous changes.
 - It commits locally only. It does not push or deploy from cron.
+## 2026-06-16 - Indexing Priority Guardrail
+
+Tools, quizzes, questionnaires, courses, answer/question pages, and money pages are the priority for indexing. City pages must be last.
+
+Implemented and verified in both indexing paths:
+
+- /srv/BusinessOps/tools/creditdoc_daily_gsc_queue.py
+- /srv/BusinessOps/creditdoc/tools/creditdoc_priority_indexing.py
+
+Current order: tools/quizzes/questionnaires, courses/learn, answers/questions, money pages (/best/, /categories/, /browse/, /compare/), then trust/resource/supporting pages. City guides are last.
+
+Tracking check on 2026-06-16: request_indexing_count and last_request_indexing_submitted are consistent across indexation_status; 1,049 rows have both fields set and there are 0 mismatched submission-tracking rows.
+
+Verification: py_compile passed for both scripts; daily GSC queue dry-run selected 10 money /browse/ URLs and no city URLs; priority indexer dry-run selected money URLs first and reported City: 0.
