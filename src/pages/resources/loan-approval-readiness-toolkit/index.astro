@@ -1,0 +1,286 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const title = 'Loan Approval Readiness Toolkit | CreditDoc';
+const description = 'Free loan approval readiness checklist for personal loans, business loans, SBA loans, credit cards, and debt consolidation. Prepare documents, credit factors, and next steps before applying.';
+const canonical = 'https://www.creditdoc.co/resources/loan-approval-readiness-toolkit/';
+const published = '2026-06-16';
+
+const readinessSections = [
+  {
+    title: 'Before you apply',
+    intro: 'Start by checking whether the application is worth making now, or whether a short preparation step could reduce avoidable denials and hard inquiries.',
+    items: [
+      'Confirm the loan or credit product matches the reason you need funds.',
+      'Review whether you can document income, revenue, or repayment capacity.',
+      'Check whether recent missed payments, collections, or high utilization need attention first.',
+      'Avoid submitting several applications in a row without understanding why one was declined.',
+    ],
+  },
+  {
+    title: 'Personal loan readiness',
+    intro: 'For personal loans, lenders commonly review identity, income, existing debt, credit history, payment behavior, and requested loan purpose.',
+    items: [
+      'Gather pay stubs, tax forms, benefit letters, or other income records.',
+      'List rent or mortgage payment, credit card balances, auto loans, student loans, and other monthly debts.',
+      'Review your credit reports for incorrect late payments, collections, balances, or accounts you do not recognize.',
+      'Estimate whether the new payment would fit your current budget without replacing essentials.',
+    ],
+  },
+  {
+    title: 'Business loan readiness',
+    intro: 'For business funding, readiness often depends on business age, deposits, cash flow, documents, personal credit range, and the type of funding being considered.',
+    items: [
+      'Collect recent bank statements, tax returns, profit-and-loss reports, and business registration details.',
+      'Summarize monthly deposits, average balances, negative-balance days, and existing business debt payments.',
+      'Separate bank, SBA, equipment, invoice, line-of-credit, and MCA options before comparing offers.',
+      'Prepare a clear use-of-funds explanation and avoid overstating revenue or contract certainty.',
+    ],
+  },
+  {
+    title: 'If you were denied',
+    intro: 'A denial is a signal to slow down, read the notice, and identify the next evidence-based step before applying again.',
+    items: [
+      'Read the adverse action notice and write down every reason listed.',
+      'Match each reason to a document, report item, income issue, debt issue, or lender-fit issue you can review.',
+      'Pull official credit reports when the denial mentions credit history, score, public records, or report data.',
+      'Use a denial checklist before making another application with similar information.',
+    ],
+  },
+];
+
+const documentChecklist = [
+  'Government ID and current address information',
+  'Recent pay stubs, benefit letters, tax forms, or income records',
+  'Recent bank statements or business bank statements where relevant',
+  'Credit reports from AnnualCreditReport.com or the credit bureaus directly',
+  'Current debt list with balances, payments, and interest-rate notes where known',
+  'Business tax returns, profit-and-loss statement, registration, and use-of-funds notes if applying for business funding',
+  'Adverse action notice or denial email if you were recently declined',
+  'Proof documents for any credit report item you plan to dispute',
+];
+
+const relatedTools = [
+  {
+    title: 'Loan Denial Reason Checker',
+    href: '/tools/loan-denial-reason-checker/',
+    text: 'Map denial reasons to common review areas such as credit, DTI, documents, income proof, business history, and lender fit.',
+  },
+  {
+    title: 'Business Loan Readiness Quiz',
+    href: '/tools/business-loan-readiness-quiz/',
+    text: 'Review business age, revenue band, credit range, documents, cash flow, and funding use before researching lenders.',
+  },
+  {
+    title: 'Bank Statement Cash Flow Calculator',
+    href: '/tools/bank-statement-cash-flow-calculator/',
+    text: 'Summarize deposits, balances, negative-balance days, and repayment load before business funding conversations.',
+  },
+  {
+    title: 'MCA Repayment Calculator',
+    href: '/tools/mca-repayment-calculator/',
+    text: 'Estimate factor-rate payback and payment pressure before comparing merchant cash advance offers.',
+  },
+  {
+    title: 'Credit Score Simulator',
+    href: '/tools/credit-score-simulator/',
+    text: 'Model how common credit actions may affect a score range before applying or disputing report items.',
+  },
+  {
+    title: 'Debt Payoff Calculator',
+    href: '/tools/debt-payoff-calculator/',
+    text: 'Compare repayment order and timeline before adding another monthly payment.',
+  },
+];
+
+const relatedAnswers = [
+  { title: 'How to get a personal loan', href: '/answers/how-to-get-a-personal-loan/' },
+  { title: 'Personal loans with bad credit: how to qualify', href: '/answers/personal-loans-bad-credit-how-to-qualify/' },
+  { title: 'How to apply for a business loan', href: '/answers/how-to-apply-for-a-business-loan/' },
+  { title: 'Can you get a business loan with bad credit?', href: '/answers/can-you-get-a-business-loan-with-bad-credit/' },
+  { title: 'How to get an SBA loan', href: '/answers/how-to-get-an-sba-loan/' },
+  { title: 'Merchant cash advance guide', href: '/answers/merchant-cash-advance-guide/' },
+  { title: 'Debt-to-income ratio explained', href: '/answers/debt-to-income-ratio-explained/' },
+  { title: 'How to check credit score free', href: '/answers/how-to-check-credit-score-free/' },
+];
+
+const officialSources = [
+  { title: 'AnnualCreditReport.com', href: 'https://www.annualcreditreport.com/', text: 'Official source for free credit reports from Equifax, Experian, and TransUnion.' },
+  { title: 'CFPB complaint portal', href: 'https://www.consumerfinance.gov/complaint/', text: 'Official federal complaint path for many consumer financial products and services.' },
+  { title: 'FTC ReportFraud', href: 'https://reportfraud.ftc.gov/', text: 'Official FTC reporting path for scams, fraud, and deceptive practices.' },
+  { title: 'SBA funding programs', href: 'https://www.sba.gov/funding-programs/loans', text: 'Official SBA overview of SBA-backed loan programs and lender matching resources.' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Loan Approval Readiness Toolkit',
+    description,
+    url: canonical,
+    datePublished: published,
+    dateModified: published,
+    author: { '@type': 'Organization', name: 'CreditDoc Editorial Team' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'CreditDoc',
+      url: 'https://www.creditdoc.co',
+      logo: { '@type': 'ImageObject', url: 'https://www.creditdoc.co/favicon.svg' },
+    },
+    mainEntityOfPage: canonical,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Loan approval readiness checklist sections',
+    description,
+    itemListElement: readinessSections.map((section, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: section.title,
+      description: `${section.intro} ${section.items.join(' ')}`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: 'https://www.creditdoc.co/resources/' },
+      { '@type': 'ListItem', position: 3, name: 'Loan Approval Readiness Toolkit', item: canonical },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLd={jsonLd}
+  ogType="article"
+  articlePublishedTime={published}
+  articleModifiedTime={published}
+  articleAuthor="CreditDoc Editorial Team"
+  articleSection="Loan Readiness"
+  publicResource={true}
+>
+  <nav class="mx-auto max-w-5xl px-4 pt-6 text-sm text-muted" aria-label="Breadcrumb">
+    <a href="/" class="hover:text-primary">Home</a>
+    <span class="px-2">/</span>
+    <a href="/resources/" class="hover:text-primary">Resources</a>
+    <span class="px-2">/</span>
+    <span class="text-text">Loan Approval Readiness Toolkit</span>
+  </nav>
+
+  <section class="border-b border-border bg-white">
+    <div class="mx-auto grid max-w-5xl gap-8 px-4 py-12 md:grid-cols-[1.4fr_0.8fr] md:items-center">
+      <div>
+        <span class="inline-flex rounded-full bg-primary-light px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">Free public resource</span>
+        <h1 class="mt-5 text-3xl font-bold leading-tight text-text sm:text-5xl">Loan Approval Readiness Toolkit</h1>
+        <p class="mt-5 text-lg leading-relaxed text-muted">
+          Use this no-signup toolkit before applying for a personal loan, business loan, SBA loan, credit card, debt consolidation loan, or cash-flow product. It helps you organize documents, review credit factors, and choose a safer next step.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="/resources/loan-approval-readiness-toolkit/print/" class="inline-flex min-h-[44px] items-center rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white hover:bg-primary-hover">
+            Open printable checklist
+          </a>
+          <a href="#tools" class="inline-flex min-h-[44px] items-center rounded-lg border border-border px-5 py-3 text-sm font-semibold text-text hover:bg-bg-alt">
+            Use related tools
+          </a>
+        </div>
+      </div>
+      <aside class="rounded-xl border border-primary/20 bg-primary-light/30 p-6">
+        <h2 class="text-base font-bold text-text">Built for linkable use</h2>
+        <ul class="mt-4 space-y-3 text-sm leading-relaxed text-muted">
+          <li>No signup required.</li>
+          <li>No affiliate links inside this resource.</li>
+          <li>Printable version for advisors and libraries.</li>
+          <li>Official source links included where appropriate.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-5xl px-4 py-12">
+    <section class="rounded-xl border border-primary/20 bg-primary-light/30 p-6">
+      <h2 class="text-xl font-bold text-text">Use this before another application</h2>
+      <p class="mt-2 text-sm leading-relaxed text-muted">
+        This toolkit is not an approval estimate or underwriting decision. It is a preparation checklist that helps you see what to review before making an application, especially if you have been denied recently or are comparing several funding paths.
+      </p>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/resources/credit-report-checklist/" class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">Credit report checklist</a>
+        <a href="/tools/loan-denial-reason-checker/" class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">Denial checker</a>
+        <a href="/categories/personal-loans/" class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">Personal loan category</a>
+        <a href="/categories/business-loans/" class="rounded-lg border border-border bg-white p-3 text-sm font-medium text-primary hover:underline">Business loan category</a>
+      </div>
+    </section>
+
+    <section class="mt-12 grid gap-6 md:grid-cols-2">
+      {readinessSections.map((section) => (
+        <article class="rounded-xl border border-border bg-white p-6">
+          <h2 class="text-xl font-bold text-text">{section.title}</h2>
+          <p class="mt-3 text-sm leading-relaxed text-muted">{section.intro}</p>
+          <ul class="mt-5 space-y-3 text-sm leading-relaxed text-muted">
+            {section.items.map((item) => <li class="border-l-2 border-primary-light pl-3">{item}</li>)}
+          </ul>
+        </article>
+      ))}
+    </section>
+
+    <section class="mt-12 rounded-xl border border-border bg-white p-6">
+      <h2 class="text-2xl font-bold text-text">Documents to gather</h2>
+      <p class="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+        You may not need every item for every application. Use this as a preparation list, then confirm the exact documents requested by the lender, card issuer, credit union, or program you are reviewing.
+      </p>
+      <div class="mt-6 grid gap-3 md:grid-cols-2">
+        {documentChecklist.map((item) => (
+          <div class="rounded-lg border border-border bg-bg-alt p-4 text-sm leading-relaxed text-muted">{item}</div>
+        ))}
+      </div>
+    </section>
+
+    <section id="tools" class="mt-12">
+      <h2 class="text-2xl font-bold text-text">Free tools to use with the checklist</h2>
+      <p class="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+        These tools help turn the checklist into a specific next step. They use broad ranges and educational routing, not approval predictions.
+      </p>
+      <div class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {relatedTools.map((tool) => (
+          <a href={tool.href} class="rounded-xl border border-border bg-white p-5 hover:border-primary hover:shadow-sm">
+            <h3 class="font-semibold text-text">{tool.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{tool.text}</p>
+            <span class="mt-4 inline-flex text-sm font-semibold text-primary">Open tool</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-12 border-t border-border pt-10">
+      <h2 class="text-2xl font-bold text-text">Borrower questions that connect to this toolkit</h2>
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
+        {relatedAnswers.map((answer) => (
+          <a href={answer.href} class="rounded-xl border border-border bg-white p-5 hover:border-primary hover:shadow-sm">
+            <h3 class="font-semibold text-text">{answer.title}</h3>
+            <span class="mt-4 inline-flex text-sm font-semibold text-primary">Read answer</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-12 rounded-xl border border-border bg-white p-6">
+      <h2 class="text-2xl font-bold text-text">Official sources and complaint paths</h2>
+      <p class="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+        Use official sources for credit reports, complaints, fraud reports, and government loan-program information. CreditDoc links to these as public references and does not imply endorsement.
+      </p>
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
+        {officialSources.map((source) => (
+          <a href={source.href} rel="noopener noreferrer" target="_blank" class="rounded-xl border border-border bg-bg-alt p-5 hover:border-primary">
+            <h3 class="font-semibold text-text">{source.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{source.text}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

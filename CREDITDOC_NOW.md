@@ -4635,3 +4635,26 @@ Verification: py_compile passed for both scripts; daily GSC queue dry-run select
 
 Plan saved at `/srv/BusinessOps/creditdoc/docs/plans/2026-06-16-loan-approval-readiness-toolkit.md`.
 Existing indexing-priority changes were committed separately as `279f452c55` before toolkit implementation. Next task: create the toolkit and printable pages, build-verify, then commit. No deploy unless Jammi approves.
+## 2026-06-16 - CreditDoc loan approval toolkit Phase 1 complete
+
+Implemented the public Loan Approval Readiness Toolkit as the first missing linkable asset from the 2026-06-05 plan. No deploy was performed.
+
+Files added:
+- /srv/BusinessOps/creditdoc/src/pages/resources/loan-approval-readiness-toolkit/index.astro
+- /srv/BusinessOps/creditdoc/src/pages/resources/loan-approval-readiness-toolkit/print/index.astro
+
+What shipped locally:
+- Public no-signup resource page for personal loans, business loans, SBA loans, credit cards, debt consolidation, denial follow-up, and cash-flow funding prep.
+- Printable checklist page for advisors/libraries/small-business helpers.
+- Internal links to the existing tools, answer cluster pages, and money category pages.
+- Official-source links to AnnualCreditReport.com, CFPB, FTC, and SBA.
+- Article, ItemList, and Breadcrumb JSON-LD; avoided HowTo schema because the content is a branching checklist rather than a linear process.
+- Print-page CSS hides global header/footer/cookie banner during printing.
+
+Verification:
+- Full npm run build passed on 2026-06-16, including Astro build, prerender, sitemap generation, and postbuild sitemap/robots check.
+- git diff --check passed.
+- Generated routes exist at /resources/loan-approval-readiness-toolkit/ and /resources/loan-approval-readiness-toolkit/print/.
+- Independent debug agent reviewed the two files, found print chrome, nested-main, and HowTo schema issues, then re-reviewed after fixes and reported no findings.
+
+Next recommended step: commit Phase 1, then add hub/internal links from /resources/, /tools/, and relevant answer/category pages before any deploy.
