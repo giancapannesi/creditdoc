@@ -4686,3 +4686,18 @@ Independent debug agent result:
 - Final debug pass confirmed the finding was resolved and no deploy blockers remained.
 
 Standing next step: review the live page manually, then consider adding contextual links from relevant answer/category pages and submitting the new resource URLs for priority indexing.
+
+## 2026-06-16 - CreditDoc printable resource logo deployed
+
+Added the CreditDoc logo lockup to the printable/downloadable resource headers for:
+- /resources/loan-approval-readiness-toolkit/print/
+- /resources/credit-report-checklist/print/
+
+Code commit: c75e652de8 fix: brand printable resources.
+Cloudflare deploy successful on 2026-06-16; Worker Version ID: 702a2b3b-e386-4fe9-9eee-34324543a1a4.
+
+Verification:
+- npm run build passed, including sitemap generation and postbuild sitemap/robots check.
+- git diff --check passed.
+- Live HTML for both print URLs contains aria-label=CreditDoc and the appropriate printable resource label.
+- Credit report checklist print CSS was hardened to hide only global site header/footer and the cookie banner, preserving the printable article header/logo.
