@@ -23,6 +23,8 @@ const EXEMPT = new Set([
   'api/revalidate.ts',
   // Pilot route with intentional noindex (CDM-REV-2026-04-29 §1.3)
   'r/[slug].ts',
+  // Redirect-only outbound CTA route; robot-blocked and intentionally omitted from sitemap.
+  'go/[slug].ts',
   // Single fixed routes — no per-slug fan-out, plugin auto-discovers
   'search.astro',
   'answers/index.astro',

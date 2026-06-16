@@ -4736,3 +4736,30 @@ Targeted live check:
 - https://www.creditdoc.co/tools/ contains Loan Approval Readiness Toolkit, links to /resources/loan-approval-readiness-toolkit/, and uses sm:grid-cols-2 lg:grid-cols-3 for the Courses And Checklists cards.
 
 Repo note: unrelated untracked file remains excluded from commits: CreditDoc_Engine_Embedding_Readiness_Activities_2026-06-16.md.
+
+## 2026-06-16 - CreditDoc lender category and outbound tracking fixes build-verified
+
+Fixed the validated issues from the CreditDoc Free Fixes review in the local CreditDoc repo. This is not deployed yet.
+
+What changed:
+- Upstart was corrected from credit-repair to personal-loans in the live DB via creditdoc_db.py update/export flow and local mirror file src/content/lenders/upstart.json.
+- Added src/utils/outbound.ts for lender destination selection, /go/ href generation, and normalized tel: links.
+- Added SSR route src/pages/go/[slug].ts for outbound CTA redirects. It prefers affiliate_url, falls back to website_url, validates http/https, adds UTM tracking to non-affiliate website fallbacks, and returns no-store plus x-robots-tag noindex/nofollow.
+- Review, best, and compare templates now route provider CTAs through /go/<slug>/ with source parameters and sponsored/nofollow rel values.
+- Review phone links now use normalized tel: hrefs.
+- Best/listicle loan cards no longer show credit-repair subscription-style From Free/mo for loan categories; loan categories show Rates and terms vary.
+- Review quiz Compare alternatives link is category-aware instead of hardcoding best-credit-repair-companies for every provider category.
+- robots.txt blocks /go/ for wildcard and each named AI crawler group; SSR sitemap parity exempts go/[slug].ts as an intentional redirect-only robot-blocked route.
+
+AI bug auditor result:
+- Auditor flagged two real issues after the first pass: named robots groups still allowed /go/, and /go/[slug].ts checked raw affiliate_url instead of normalized affiliate URL for UTM decisions.
+- Both issues were fixed before final verification.
+
+Verification:
+- node --check src/pages/go/[slug].ts passed.
+- git diff --check passed.
+- npm run build passed on 2026-06-16, including robots contract, SSR sitemap parity, Astro build, sitemap generation, and postbuild sitemap/robots conflict check.
+
+Repo note:
+- Unrelated untracked file remains excluded: CreditDoc_Engine_Embedding_Readiness_Activities_2026-06-16.md.
+- Changes are not committed or deployed yet as of this note.

@@ -1129,3 +1129,12 @@ Initial Batch 032 targets:
 - prefer answer/trend template rendering fixes before raw JSON edits;
 - preserve strategic answer URLs, trend URLs, and internal links;
 - build-check, output/source-check, document, commit, then continue.
+
+## 2026-06-16 - Next: CreditDoc outbound/category fix release
+
+Before deploying the CreditDoc lender category/outbound tracking fix set:
+- review git status and stage only the scoped CreditDoc files, excluding CreditDoc_Engine_Embedding_Readiness_Activities_2026-06-16.md;
+- commit the build-verified changes;
+- deploy through the documented Cloudflare deploy path, not Vercel;
+- live-check /review/upstart/, /best/best-personal-loans-bad-credit/, a representative /compare/ URL, robots.txt, and one /go/upstart/?source=smoke redirect response;
+- after deploy, monitor outbound click behavior and GSC/indexing impact over the normal crawl window.

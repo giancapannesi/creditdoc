@@ -6,6 +6,7 @@ import RatingStars from '../../components/RatingStars.astro';
 import { getComparisons, getLenderBySlug } from '../../utils/data-build';
 import { formatPrice, getBbbClass } from '../../utils/data';
 import { softenYmylCopy } from '../../utils/safe-copy';
+import { buildLenderGoHref } from '../../utils/outbound';
 import type { Lender } from '../../utils/data';
 
 export function getStaticPaths() {
@@ -563,6 +564,7 @@ const jsonLd = [
       {[lenderA, lenderB].map((lender) => {
         const isWinner = comparison.winner === lender.slug;
         const bbbCls = getBbbClass(normalizedBbbRating(lender));
+        const lenderGoHref = buildLenderGoHref(lender);
         return (
           <div class:list={[
             'glass-card p-6 text-center relative',
@@ -606,14 +608,16 @@ const jsonLd = [
               >
                 Full Review
               </a>
-              <a
-                href={lender.affiliate_url || lender.website_url}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                class="flex-1 text-center px-4 py-2.5 text-sm font-medium rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors"
-              >
-                Visit Site
-              </a>
+              {lenderGoHref && (
+                <a
+                  href={`${lenderGoHref}?source=compare_${comparison.slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow sponsored"
+                  class="flex-1 text-center px-4 py-2.5 text-sm font-medium rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors"
+                >
+                  Visit Site
+                </a>
+              )}
             </div>
           </div>
         );

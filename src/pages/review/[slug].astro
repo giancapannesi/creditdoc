@@ -12,6 +12,7 @@ import InfoLink from '../../components/InfoLink.astro';
 import StateRegulatoryContext from '../../components/StateRegulatoryContext.astro';
 import cfpbResponsiveReport from '../../data/cfpb-responsive-providers-2026.json';
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
+import { buildLenderGoHref, normalizeTelHref } from '../../utils/outbound';
 import { softenEducationalTeaserCopy, softenYmylCopy } from '../../utils/safe-copy';
 import {
   getBbbClass,
@@ -123,6 +124,8 @@ const primaryRow = await getLenderWithBodyBySlugRuntime(slug, env);
 if (!primaryRow) return new Response('Not found', { status: 404 });
 
 const lender = shapeBodyInlineToLender(primaryRow);
+const lenderGoHref = buildLenderGoHref(lender);
+const lenderTelHref = normalizeTelHref(lender.phone);
 const responsiveReportProvider = ((cfpbResponsiveReport as any).allProviders || [])
   .find((provider: any) => provider.slug === lender.slug);
 
@@ -175,6 +178,20 @@ const stateAbbr = lender.company_info?.state
 const relatedLendersLabel = similarLenders.length > 0
   ? 'Similar Companies'
   : `More ${category?.name || 'Lenders'}`;
+
+const categoryAlternativeBestHref: Record<string, string> = {
+  'credit-repair': '/best/best-credit-repair-companies/',
+  'fix-my-credit': '/best/best-credit-repair-companies/',
+  'personal-loans': '/best/best-personal-loans-bad-credit/',
+  'emergency-cash': '/best/best-personal-loans-bad-credit/',
+  'payday-alternatives': '/best/best-payday-loan-alternatives/',
+  'debt-relief': '/best/best-debt-relief-companies/',
+  'credit-counseling': '/best/best-credit-counseling-agencies/',
+  'build-credit': '/best/best-credit-builder-loans/',
+  'credit-monitoring': '/best/best-credit-monitoring-services/',
+  'credit-cards': '/best/best-secured-credit-cards/',
+};
+const alternativeBestHref = categoryAlternativeBestHref[lender.category] || categoryHref;
 
 // Category-mapped wellness guides — DB-backed (A.2).
 const categoryGuideMap: Record<string, string> = {
@@ -638,11 +655,11 @@ const ogImageUrl = lender.logo_url?.trim()
         {lender.verified_provider && (
           <TrustBadge type="verified-provider" text="Profiled Provider" />
         )}
-        {(lender.affiliate_url || lender.website_url) && (
+        {lenderGoHref && (
         <a
-          href={lender.affiliate_url || lender.website_url}
+          href={`${lenderGoHref}?source=review_hero`}
           target="_blank"
-          rel="noopener noreferrer nofollow"
+          rel="noopener noreferrer nofollow sponsored"
           class="inline-flex items-center px-5 py-2 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary-hover transition-colors ml-auto"
         >
           Visit Website
@@ -896,11 +913,11 @@ const ogImageUrl = lender.logo_url?.trim()
               </div>
             )}
           </dl>
-          {(lender.affiliate_url || lender.website_url) ? (
+          {lenderGoHref ? (
           <a
-            href={lender.affiliate_url || lender.website_url}
+            href={`${lenderGoHref}?source=review_sidebar`}
             target="_blank"
-            rel="noopener noreferrer nofollow"
+            rel="noopener noreferrer nofollow sponsored"
             class="mt-5 flex items-center justify-center w-full rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px]"
           >
             Visit {lender.name}
@@ -912,8 +929,8 @@ const ogImageUrl = lender.logo_url?.trim()
           {/* Contact & Location */}
           {(lender.phone || lender.address) && (
             <div class="mt-4 pt-4 border-t border-border/50 space-y-2" id="contact-location">
-              {lender.phone && (
-                <a href={`tel:${lender.phone}`} class="flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors">
+              {lender.phone && lenderTelHref && (
+                <a href={lenderTelHref} class="flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd"/>
                   </svg>
@@ -1119,12 +1136,12 @@ const ogImageUrl = lender.logo_url?.trim()
             <p class="text-lg font-bold text-text mb-2" id="quiz-verdict"></p>
             <p class="text-sm text-muted mb-4" id="quiz-reason"></p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-              {(lender.affiliate_url || lender.website_url) && (
-                <a href={lender.affiliate_url || lender.website_url} target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors">
+              {lenderGoHref && (
+                <a href={`${lenderGoHref}?source=review_quiz`} target="_blank" rel="noopener noreferrer nofollow sponsored" class="inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-lg bg-primary text-white hover:bg-primary-hover transition-colors">
                   Visit {lender.name}
                 </a>
               )}
-              <a href="/best/best-credit-repair-companies/" class="inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-lg border border-border text-text hover:bg-bg-alt transition-colors">
+              <a href={alternativeBestHref} class="inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-lg border border-border text-text hover:bg-bg-alt transition-colors">
                 Compare alternatives
               </a>
             </div>
