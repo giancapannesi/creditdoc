@@ -4630,3 +4630,8 @@ Current order: tools/quizzes/questionnaires, courses/learn, answers/questions, m
 Tracking check on 2026-06-16: request_indexing_count and last_request_indexing_submitted are consistent across indexation_status; 1,049 rows have both fields set and there are 0 mismatched submission-tracking rows.
 
 Verification: py_compile passed for both scripts; daily GSC queue dry-run selected 10 money /browse/ URLs and no city URLs; priority indexer dry-run selected money URLs first and reported City: 0.
+
+## 2026-06-16 - Loan Approval Toolkit Phase 0
+
+Plan saved at `/srv/BusinessOps/creditdoc/docs/plans/2026-06-16-loan-approval-readiness-toolkit.md`.
+Existing indexing-priority changes were committed separately as `279f452c55` before toolkit implementation. Next task: create the toolkit and printable pages, build-verify, then commit. No deploy unless Jammi approves.
