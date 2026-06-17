@@ -20,6 +20,7 @@ import argparse
 import json
 import glob
 import os
+import re
 import subprocess
 import sys
 import time
@@ -28,7 +29,7 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from creditdoc_oauth import call_claude
-from creditdoc_content_guardrails import reject_if_unsafe, supplied_fact_values
+from creditdoc_content_guardrails import reject_if_unsafe, supplied_fact_values, extract_current_fact_values
 from creditdoc_content_repair import repair_unsafe_json
 
 # === CONFIG ===
@@ -145,6 +146,100 @@ def format_price(price):
     return f"${price:.2f}"
 
 
+def _positive_number(value):
+    try:
+        return value is not None and float(value) > 0
+    except (TypeError, ValueError):
+        return False
+
+
+def _safe_note_items(items, limit=4):
+    """Keep qualitative notes, but drop mixed current-fact strings.
+
+    Lender JSON often stores APRs, loan amounts, review counts, and fee ranges in
+    free-text pros/cons/features. Those may be real for the source lender, but
+    comparison generation has repeatedly misattributed them. Only structured
+    fields below should expose current numeric facts to the model.
+    """
+    safe = []
+    for item in items or []:
+        if not isinstance(item, str) or not item.strip():
+            continue
+        if extract_current_fact_values(item):
+            continue
+        if re.search(r"\d", item):
+            continue
+        safe.append(item.strip())
+        if len(safe) >= limit:
+            break
+    return safe
+
+
+def lender_summary(l):
+    """Build a guarded per-lender source summary for comparison generation."""
+    pricing = l.get('pricing', {}) or {}
+    price = pricing.get('monthly_price', 0)
+    setup = pricing.get('setup_fee', 0)
+    tiers = pricing.get('tiers', []) or []
+    bbb = l.get('company_info', {}).get('bbb_rating', 'N/A')
+    accred = l.get('company_info', {}).get('bbb_accredited', False)
+    mbg = pricing.get('money_back_guarantee', False)
+    mbg_detail = pricing.get('guarantee_details', '')
+    google_rating = l.get('google_rating')
+    google_reviews_count = l.get('google_reviews_count', 0)
+
+    if _positive_number(price) or _positive_number(setup):
+        price_line = f"Monthly Price: {format_price(price)}"
+        setup_line = f"Setup Fee: {format_price(setup)}"
+    else:
+        price_line = "Pricing: Not listed in current CreditDoc source data"
+        setup_line = "Setup Fee: Not listed in current CreditDoc source data"
+
+    lines = [
+        f"Name: {l['name']}",
+        f"Slug: {l['slug']}",
+        f"Category: {l['category']}",
+        f"CreditDoc Rating: {l.get('rating', 0)}/5",
+        f"Google Rating: {google_rating}/5 ({google_reviews_count} reviews)" if google_rating and google_reviews_count else "Google Rating: Not supplied",
+        price_line,
+        setup_line,
+        f"BBB Rating: {bbb} {'(Accredited)' if accred else ''}".strip(),
+        f"Money-Back Guarantee: {'Yes - ' + mbg_detail if mbg else 'No'}",
+        f"Headquarters: {l.get('company_info', {}).get('headquarters', 'Unknown')}",
+        f"Founded: {l.get('company_info', {}).get('founded_year', 'Unknown')}",
+    ]
+
+    tier_names = [t.get('name') for t in tiers if isinstance(t, dict) and t.get('name')]
+    if tier_names:
+        lines.append("Product types: " + " | ".join(tier_names[:5]))
+
+    safe_pros = _safe_note_items(l.get('pros'))
+    safe_cons = _safe_note_items(l.get('cons'))
+    safe_features = []
+    for tier in tiers:
+        if isinstance(tier, dict):
+            safe_features.extend(_safe_note_items(tier.get('features'), limit=2))
+    safe_features = safe_features[:4]
+
+    if safe_features:
+        lines.append("Qualitative features: " + " | ".join(safe_features))
+    if safe_pros:
+        lines.append("Qualitative pros: " + " | ".join(safe_pros))
+    if safe_cons:
+        lines.append("Qualitative cons: " + " | ".join(safe_cons))
+
+    description = l.get('description_short')
+    if description and not extract_current_fact_values(description) and not re.search(r"\d", description):
+        lines.append(f"Description: {description}")
+
+    return "\n".join(lines)
+
+
+def lender_current_fact_values(l):
+    """Return only values from the guarded summary for one lender."""
+    return supplied_fact_values([lender_summary(l)])
+
+
 def generate_comparison(lenders, comp_item):
     """Generate a comparison using Claude CLI."""
     a = lenders[comp_item['lender_a']]
@@ -154,48 +249,15 @@ def generate_comparison(lenders, comp_item):
     if len(slug) > 80:
         slug = f"{a['slug'][:35]}-vs-{b['slug'][:35]}"
 
-    # Build context for Claude
-    def lender_summary(l):
-        price = l.get('pricing', {}).get('monthly_price', 0)
-        setup = l.get('pricing', {}).get('setup_fee', 0)
-        tiers = l.get('pricing', {}).get('tiers', [])
-        bbb = l.get('company_info', {}).get('bbb_rating', 'N/A')
-        accred = l.get('company_info', {}).get('bbb_accredited', False)
-        mbg = l.get('pricing', {}).get('money_back_guarantee', False)
-        mbg_detail = l.get('pricing', {}).get('guarantee_details', '')
-        google_rating = l.get('google_rating')
-        google_reviews_count = l.get('google_reviews_count', 0)
-
-        lines = [
-            f"Name: {l['name']}",
-            f"Slug: {l['slug']}",
-            f"Category: {l['category']}",
-            f"CreditDoc Rating: {l.get('rating', 0)}/5",
-            f"Google Rating: {google_rating}/5 ({google_reviews_count} reviews)" if google_rating and google_reviews_count else "Google Rating: Not supplied",
-            f"Monthly Price: {format_price(price)}",
-            f"Setup Fee: {format_price(setup)}",
-            f"BBB Rating: {bbb} {'(Accredited)' if accred else ''}",
-            f"Money-Back Guarantee: {'Yes — ' + mbg_detail if mbg else 'No'}",
-            f"Headquarters: {l.get('company_info', {}).get('headquarters', 'Unknown')}",
-            f"Founded: {l.get('company_info', {}).get('founded_year', 'Unknown')}",
-        ]
-        if tiers:
-            lines.append("Tiers: " + " | ".join(f"{t['name']}: {format_price(t['price'])}/mo" for t in tiers))
-        if l.get('pros'):
-            lines.append("Pros: " + " | ".join(l['pros'][:5]))
-        if l.get('cons'):
-            lines.append("Cons: " + " | ".join(l['cons'][:5]))
-        if l.get('description_short'):
-            lines.append(f"Description: {l['description_short']}")
-        return "\n".join(lines)
-
+    a_summary = lender_summary(a)
+    b_summary = lender_summary(b)
     prompt = f"""Generate a comparison analysis for CreditDoc.co.
 
 COMPANY A:
-{lender_summary(a)}
+{a_summary}
 
 COMPANY B:
-{lender_summary(b)}
+{b_summary}
 
 Write a comparison analysis. Output ONLY strict JSON (no markdown, no code fences):
 
@@ -205,18 +267,19 @@ Write a comparison analysis. Output ONLY strict JSON (no markdown, no code fence
   "lender_b": "{b['slug']}",
   "title": "{a['name']} vs {b['name']} ({YEAR})",
   "target_keyword": "{a['name'].lower()} vs {b['name'].lower()}",
-  "summary": "3-5 sentence comparison summary. Be specific about pricing, BBB ratings, features, and clear recommendation only where source data is supplied.",
+  "summary": "3-5 sentence comparison summary. Use only facts supplied for the named company. If pricing is not listed for both companies, say so plainly and compare fit/transparency without estimating.",
   "winner": "slug-of-the-better-option",
-  "winner_reason": "1-2 sentences explaining why the winner is better. Use specific data points."
+  "winner_reason": "1-2 sentences explaining why the winner is a better fit. Use only entity-matched source facts."
 }}
 
 RULES:
 - Be objective. Use only real data from both companies as supplied above.
 - Do NOT invent prices, fees, APRs, BBB ratings, Google ratings, star ratings, guarantees, founded years, locations, or feature claims.
-- Dollar amounts, ratings, and guarantees may appear ONLY if the exact value appears in COMPANY A or COMPANY B above.
-- If pricing is "Contact for pricing", say pricing is not listed in the current CreditDoc source data; do not estimate it.
-- The winner should be the company with the better overall value proposition.
-- Consider: price, BBB rating, money-back guarantee, features, reputation.
+- Dollar amounts, ratings, and guarantees may appear ONLY for the same company whose source block contains that exact value.
+- If pricing is not listed in the current CreditDoc source data, say that; do not estimate or infer pricing.
+- Do not describe loan amount ranges, APR ranges, origination fees, or review counts unless they are explicitly present in that company's source block.
+- The winner should be the company with the better fit based on supplied facts, not guessed pricing.
+- Consider: source-data transparency, product fit, BBB/Google signals when supplied for that same company, and qualitative features.
 - Summary should be 80-120 words, specific and useful.
 - Output ONLY the JSON object."""
 
@@ -247,12 +310,10 @@ RULES:
         if comp["winner"] not in (a['slug'], b['slug']):
             comp["winner"] = a['slug']  # Default to A
 
-        a_summary = lender_summary(a)
-        b_summary = lender_summary(b)
         allowed_values = supplied_fact_values([a_summary, b_summary])
         entity_allowed_values = {
-            a["name"]: supplied_fact_values([a_summary]),
-            b["name"]: supplied_fact_values([b_summary]),
+            a["name"]: lender_current_fact_values(a),
+            b["name"]: lender_current_fact_values(b),
         }
         guardrail_failures = reject_if_unsafe(
             comp,

@@ -66,6 +66,7 @@ Rules:
 - Preserve the same top-level keys and JSON shape.
 - Do not invent replacement facts.
 - If a price, APR, rate, BBB rating, Google rating, review count, guarantee, approval rate, or current company claim is not clearly supplied in the source facts, remove it or rewrite it generically.
+- For comparison pages, write fact claims one company at a time. Do not combine two companies and two values in a single sentence if that makes attribution ambiguous.
 - Keep educational, legal, and public-program context only when it is sourced.
 - Keep the content useful and natural after removing unsafe claims.
 

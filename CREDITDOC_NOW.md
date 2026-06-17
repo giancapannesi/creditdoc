@@ -4,6 +4,34 @@
 
 ---
 
+## 2026-06-16 - Feed audit comparison guardrail patch
+
+Status: future-prevention patch implemented and locally verified; not deployed in this session.
+
+What changed:
+- Patched comparison generator source shaping in root tools and `tools/live_ops`.
+- Future comparison prompts now strip numeric/current-fact free text from pros, cons, tier features, and descriptions.
+- Structured CreditDoc, Google, and BBB ratings remain available per lender.
+- Missing/zero monthly/setup price now renders as "Pricing: Not listed in current CreditDoc source data".
+- Patched guardrails so side-by-side comparison sentences are split by clause before entity-value attribution.
+- Patched BBB canonicalization so `BBB Rating: A+` and `BBB A+ rating` match.
+- Patched repair prompt to ask for one-company-at-a-time fact sentences on comparison pages.
+
+Verification:
+- `python3 /srv/BusinessOps/tests/test_creditdoc_comparison_generator.py` passed.
+- `python3 /srv/BusinessOps/tools/test_creditdoc_content_guardrails.py` passed.
+- `python3 /srv/BusinessOps/creditdoc/tools/live_ops/test_creditdoc_content_guardrails.py` passed.
+- `python3 -m py_compile ...` passed for changed Python files.
+- `python3 /srv/BusinessOps/tools/creditdoc_comparison_generator.py --dry-run --count 5` returned the same next 5 queue pairs without writing.
+- Prompt-source inspection for those 5 pairs returned `numeric_free_text_leaks=[]`.
+
+Do not bulk rewrite historical comparisons. A scan found 309 existing comparison records with current-fact language (`$`, APR, percentages, or origination-fee terms). Build a reviewed workpack and remediate in small batches only.
+
+Remaining feed follow-ups:
+- `kikoff-vs-a-better-way-auto-brokerage` exists in DB/content but live route is 404 because lender `a-better-way-auto-brokerage` has no lender JSON.
+- Wellness sitemap parity: `personal-loan-application-checklist` and `personal-loan-interest-how-calculated` are live 200 but absent from the sitemap during the check.
+- Priority GSC Indexing API is currently healthy; latest log showed successful Google pushes Jun 10-14 and no URLs to push Jun 15-16.
+
 ## 2026-06-05 — SEO Title/Meta Stability Rule
 
 **Operating rule:** CreditDoc titles and meta descriptions are now treated as

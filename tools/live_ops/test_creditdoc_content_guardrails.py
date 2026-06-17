@@ -105,6 +105,27 @@ def main() -> int:
         "misattributed sourced value",
         **comparison_kwargs,
     )
+    assert_passes(
+        "comparison sentence with entity-matched ratings",
+        {"summary": "Alpha has a 4.8 out of 5 rating, while Beta has a 3.2 out of 5 rating."},
+        **comparison_kwargs,
+    )
+    assert_fails(
+        "comparison sentence with crossed rating",
+        {"summary": "Beta has a 4.8 out of 5 rating, while Alpha has a 3.2 out of 5 rating."},
+        "misattributed sourced value",
+        **comparison_kwargs,
+    )
+    bbb_source = "Name: Gamma\nBBB Rating: A+ (Accredited)\nMonthly Price: Contact for pricing"
+    bbb_kwargs = {
+        "allowed_values": supplied_fact_values([bbb_source]),
+        "entity_allowed_values": {"Gamma": supplied_fact_values([bbb_source])},
+    }
+    assert_passes(
+        "bbb rating source format canonicalizes",
+        {"summary": "Gamma has a BBB A+ rating."},
+        **bbb_kwargs,
+    )
     google_source = "Name: 007 Credit Agent\nCreditDoc Rating: 4.3/5\nGoogle Rating: 4.7/5 (176 reviews)\nBBB Rating: NR"
     google_kwargs = {"allowed_values": supplied_fact_values([google_source])}
     assert_passes(

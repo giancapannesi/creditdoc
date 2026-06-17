@@ -47,9 +47,16 @@ VALUE_RE = re.compile(
     r"\$[0-9][0-9,]*(?:\.[0-9]{1,2})?(?:\s+(?:k|m|million|billion)\b)?"
     r"|[0-9]+(?:\.[0-9]+)?\s*%(?:\s*(?:APR|MAPR|interest|rate))?"
     r"|(?:APR|MAPR)\s*(?:of|at|from|between|up to|as high as|as low as)?\s*[0-9]+(?:\.[0-9]+)?\s*%"
+    r"|BBB\s+Rating:\s*[A-F][+-]?"
+    r"|BBB\s+[A-F][+-]?\s*(?:rating|rated)"
     r"|[A-F][+-]?\s*(?:BBB\s*)?(?:rating|rated)"
     r"|\d+(?:\.\d+)?\s*(?:out of|/)\s*5(?:\s*(?:Google|star|rating|stars?))?"
     r")",
+    re.I,
+)
+
+COMPARISON_CLAUSE_SPLIT_RE = re.compile(
+    r"\s*(?:,?\s+\b(?:while|whereas)\b\s+|\s+\b(?:compared to|versus|vs\.?)\b\s+)\s*",
     re.I,
 )
 
@@ -77,6 +84,15 @@ def canonical_value(value: str) -> str:
     rating = re.search(r"\b(\d+(?:\.\d+)?)\s*(?:out of|/)\s*5\b", value, re.I)
     if rating:
         return f"{rating.group(1)} out of 5"
+    bbb_rating = re.search(r"\bBBB\s+Rating:\s*([A-F][+-]?)(?=\W|$)", value, re.I)
+    if bbb_rating:
+        return bbb_rating.group(1).lower()
+    bbb_rating_reversed = re.search(r"\bRating:\s*([A-F][+-]?)(?=\W|$)", value, re.I)
+    if bbb_rating_reversed:
+        return bbb_rating_reversed.group(1).lower()
+    bbb_prefix = re.search(r"\bBBB\s+([A-F][+-]?)(?=\W|$)\s*(?:rating|rated)\b", value, re.I)
+    if bbb_prefix:
+        return bbb_prefix.group(1).lower()
     value = re.sub(r"\s*(?:google|bbb|star|stars|rating|rated|reviews?)\b", "", value).strip()
     value = re.sub(r"\s+", " ", value)
     return value
@@ -135,7 +151,10 @@ def unsupported_entity_value_claims(
     if not allowed_by_entity:
         return []
 
-    chunks = re.split(r"(?<=[.!?])\s+|[;\n]", text)
+    sentences = re.split(r"(?<=[.!?])\s+|[;\n]", text)
+    chunks = []
+    for sentence in sentences:
+        chunks.extend(part for part in COMPARISON_CLAUSE_SPLIT_RE.split(sentence) if part.strip())
     violations: list[str] = []
     for chunk in chunks:
         values = VALUE_RE.findall(chunk)
