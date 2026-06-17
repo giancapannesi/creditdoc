@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "prebuild": "node scripts/check_robots_contract.mjs && node scripts/check_ssr_sitemap_parity.mjs",
-    "postbuild": "node scripts/check_sitemap_robots_conflicts.mjs",
+    "postbuild": "node scripts/check_sitemap_robots_conflicts.mjs && node scripts/check_sitemap_critical_urls.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

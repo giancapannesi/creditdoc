@@ -23,13 +23,13 @@ if (stateFilter && queryKeys.length === 1) {
   }
 }
 
-const hasSearchFilters = Astro.url.searchParams.toString().length > 0;
+const searchPageNoindex = true;
 ---
 
 <BaseLayout
   title="Search Consumer Finance Providers | CreditDoc"
   description="Search and filter consumer finance providers by state, city, category, budget, and available third-party rating data."
-  noindex={hasSearchFilters}
+  noindex={searchPageNoindex}
 >
   <!-- Header -->
   <section class="bg-white border-b border-border">

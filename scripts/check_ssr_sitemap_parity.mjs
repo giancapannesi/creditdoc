@@ -28,10 +28,6 @@ const EXEMPT = new Set([
   // Single fixed routes — no per-slug fan-out, plugin auto-discovers
   'search.astro',
   'answers/index.astro',
-  // /state/[slug] — companion `state/[slug]/lending-laws/` getStaticPaths
-  // walks every state and the plugin picks up `/state/<slug>/` from that
-  // sibling discovery. Verified 50 URLs live in sitemap-*.xml (May 2).
-  'state/[slug].astro',
   // /credit-guide/[slug] — data lives in Supabase city_guides table (not
   // local SQLite). Sitemap injection handled separately via Supabase REST
   // query in ssrSitemapPages(). Exempt from SQLite parity check.

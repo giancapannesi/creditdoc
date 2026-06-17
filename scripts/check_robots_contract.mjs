@@ -57,9 +57,9 @@ function main() {
       message: 'src/pages/search.astro must 301 state-only filters to /state/<state>/ pages.',
     },
     {
-      ok: searchPage.includes('const hasSearchFilters = Astro.url.searchParams.toString().length > 0;') &&
-        searchPage.includes('noindex={hasSearchFilters}'),
-      message: 'src/pages/search.astro must keep clean /search/ indexable while noindexing remaining filtered search pages.',
+      ok: searchPage.includes('const searchPageNoindex = true;') &&
+        searchPage.includes('noindex={searchPageNoindex}'),
+      message: 'src/pages/search.astro must keep /search/ and remaining non-state search URLs crawlable but page-level noindexed.',
     },
   ];
   const searchFailures = searchGuards.filter((guard) => !guard.ok);
@@ -74,7 +74,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(`[robots-contract] OK — robots.txt allows crawlable noindex handling.`);
+  console.log(`[robots-contract] OK — robots.txt allows crawlable search noindex handling.`);
 }
 
 main();

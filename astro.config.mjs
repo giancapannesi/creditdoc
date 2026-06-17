@@ -22,6 +22,8 @@ function ssrSitemapPages() {
         .filter((f) => f.endsWith('.json'))
         .map((f) => f.replace(/\.json$/, ''))
     );
+    const stateData = JSON.parse(readFileSync(join(process.cwd(), 'src/content/states.json'), 'utf8'));
+    const stateRows = Object.values(stateData);
     const sql = `
       SELECT 'blog/' || slug FROM blog_posts WHERE status='published';
       SELECT 'financial-wellness/' || slug FROM wellness_guides;
@@ -56,6 +58,17 @@ function ssrSitemapPages() {
     }
     if (droppedBrands > 0) {
       console.log(`[sitemap] dropped ${droppedBrands} brand slug(s) with no brand record`);
+    }
+    if (Array.isArray(stateRows)) {
+      let addedStateRoots = 0;
+      for (const state of stateRows) {
+        const slug = state?.slug || state?.name?.toLowerCase().replace(/\s+/g, '-');
+        if (slug) {
+          urls.push(`${SITE}/state/${slug}/`);
+          addedStateRoots += 1;
+        }
+      }
+      console.log(`[sitemap] added ${addedStateRoots} state root URL(s)`);
     }
 
     // City guides live in Supabase (not local SQLite). Read anon key from env
