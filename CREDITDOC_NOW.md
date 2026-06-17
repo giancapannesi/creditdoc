@@ -4,6 +4,27 @@
 
 ---
 
+## 2026-06-17 - Phase 1 comparison pricing safety patch slice 1
+
+Status: first live-page comparison cleanup slice implemented locally, build-verified, and ready for commit/deploy review.
+
+What changed:
+- Patched 9 first-batch comparison records in `src/content/comparisons.json` through `CreditDocDB.add_comparison(..., updated_by='founder')` and content export.
+- Replaced winner-led/current-fact-heavy comparison summaries with stored-field comparison language.
+- Corrected visible BBB/source-field contradictions on the first-batch pages.
+- Kept listed pricing values where they came from current CreditDoc source fields; did not convert missing/zero pricing into "free".
+- No pages were noindexed or bulk removed.
+
+Verification:
+- Independent read-only debug agent reviewed the first batch and confirmed raw-data cleanup was warranted for the 9 live pages.
+- `npm run build` passed.
+- Prebuild checks passed: robots contract and SSR sitemap parity.
+- Postbuild checks passed: sitemap/robots conflict check and critical URL check.
+- Rendered HTML scan for the 9 patched compare pages found no targeted unsafe phrases: `money-back guarantee`, `wins`, `superior value`, `better value`, `clear pick`, `safer choice`, `versus no BBB rating`, `no BBB rating`, or `red flag`.
+
+Remaining Phase 1 follow-up:
+- `kikoff-vs-a-better-way-auto-brokerage` remains the single orphan comparison source record. It is non-public because no generated page exists while lender `a-better-way-auto-brokerage` is missing. Do not recreate that lender just to make the comparison render. Next step is a reviewed one-record orphan cleanup via a DB delete helper or explicit archived one-record DB/Supabase delete/export.
+
 ## 2026-06-16 - Feed audit comparison guardrail patch
 
 Status: future-prevention patch implemented and locally verified; not deployed in this session.
