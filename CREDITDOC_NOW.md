@@ -31,6 +31,47 @@ Remaining Phase 1 follow-up:
 - Local SQLite, Supabase, and exported JSON all show zero rows for the orphan slug after cleanup.
 - Next Phase 1 step is the next 10 highest-risk live 200 comparison pages from the inventory.
 
+## 2026-06-18 - Phase 1 comparison pricing safety patch slice 2
+
+Status: second live-page comparison cleanup slice implemented, independently reviewed, build-verified, committed, deployed, and live-verified.
+
+What changed:
+- Patched the next 10 highest-risk live 200 comparison records from `comparison_risk_inventory_2026-06-17.csv`.
+- Updated `summary`, `winner_reason`, and `seo_description` fields through `CreditDocDB.add_comparison(..., updated_by='founder')` and content export.
+- Preserved useful stored facts: listed monthly/setup prices, refund-term notes, BBB context, review fields, product/use-case differences, and service features.
+- Removed derived savings math, winner/value verdicts, old guarantee wording, unsupported BBB certainty, and strong reliability/trust conclusions.
+- Changed `CreditDocDB.add_comparison(...)` from `INSERT OR REPLACE` to an SQLite upsert so comparison updates preserve row identity and avoid JSON export reorder churn.
+
+Patched records:
+- `credit-blueprint-vs-continental-credit`
+- `credit-saint-vs-the-credit-people`
+- `ecreditadvisor-vs-xperia-credit-solutions`
+- `credit-blueprint-vs-elevate-my-scores`
+- `xperia-credit-solutions-vs-national-credit-care`
+- `greenlight-financial-vs-self-credit-builder`
+- `ecreditadvisor-vs-credit-blueprint`
+- `credit-blueprint-vs-xperia-credit-solutions`
+- `credit-saint-vs-xperia-credit-solutions`
+- `the-credit-repairmen-vs-national-credit-care`
+
+Verification:
+- Independent read-only debug agent reviewed the 10 candidates and agreed cleanup was warranted without deleting useful sourced content.
+- Row-id checks confirmed the DB upsert preserved record identity during the patch.
+- Raw-record scan across `summary`, `winner_reason`, and `seo_description` found no targeted unsafe phrases after patch.
+- `npm run build` passed.
+- Prebuild checks passed: robots contract and SSR sitemap parity.
+- Postbuild checks passed: sitemap/robots conflict check and critical URL check.
+- Rendered `dist/compare/.../index.html` scan for the 10 patched pages found no targeted unsafe phrase hits.
+- Deployed 2026-06-18 through `./deploy.sh`.
+- Cloudflare Worker Version ID: `e3ebb3d1-1235-4b83-a47f-de94e35d0f86`.
+- Deploy smoke checks returned 200 for homepage, CSS, and 11 core SSR route families.
+- Targeted live checks: all 10 patched comparison pages returned 200 and had no targeted unsafe phrase hits.
+
+Remaining Phase 1 follow-up:
+- Continue with the next 10 highest-risk remaining live 200 comparison pages from the inventory.
+- Keep small batches only; do not bulk rewrite comparison history.
+- Continue preserving sourced prices and facts while avoiding fabricated current-price, guarantee, winner, or trust verdict language.
+
 ## 2026-06-16 - Feed audit comparison guardrail patch
 
 Status: future-prevention patch implemented and locally verified; not deployed in this session.

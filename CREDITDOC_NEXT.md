@@ -9,12 +9,16 @@ Latest completed:
 - First Phase 1 live-page patch slice updated 9 comparison records with stored-field comparison language and build verification.
 - Single orphan comparison `kikoff-vs-a-better-way-auto-brokerage` was archived and removed from local DB, Supabase, and exported JSON.
 - Phase 1 cleanup release deployed 2026-06-18, Cloudflare Worker Version ID `4f189f5a-1b95-4b74-acd4-c55866f8f9d4`.
+- Second Phase 1 live-page patch slice updated 10 comparison records, including summaries, winner reasons, and SEO descriptions, with independent read-only review and build/live verification.
+- Second slice deployed 2026-06-18, Cloudflare Worker Version ID `e3ebb3d1-1235-4b83-a47f-de94e35d0f86`.
+- `CreditDocDB.add_comparison(...)` now uses row-preserving SQLite upsert instead of `INSERT OR REPLACE` to avoid comparison export reorder churn.
 
 Immediate next:
 
-1. Continue the next 10 highest-risk live 200 comparison pages from `comparison_risk_inventory_2026-06-17.csv`.
+1. Continue the next 10 highest-risk remaining live 200 comparison pages from `comparison_risk_inventory_2026-06-17.csv`.
 2. Keep Phase 1 as small batches only; no bulk comparison rewrites.
 3. Keep pricing/rating values only where they are current CreditDoc source fields, and keep copy framed as stored-field comparison rather than recommendation.
+4. Patch `summary`, `winner_reason`, and `seo_description` together for each selected comparison because all three can render or influence snippets.
 
 ## Active 2026-05-26 — Sitewide Page Upgrade Program
 
