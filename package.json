@@ -7,6 +7,10 @@
     "prebuild": "node scripts/check_robots_contract.mjs && node scripts/check_ssr_sitemap_parity.mjs",
     "postbuild": "node scripts/check_sitemap_robots_conflicts.mjs && node scripts/check_sitemap_critical_urls.mjs",
     "build": "astro build",
+    "test:comparison-batch": "node --test test/comparison_batch_utils.test.mjs",
+    "check:comparison-db-freshness": "node scripts/check_comparison_db_freshness.mjs",
+    "check:comparison-batch-scope": "node scripts/check_comparison_batch_scope.mjs",
+    "comparison:extract-source-facts": "node scripts/extract_comparison_source_facts.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
