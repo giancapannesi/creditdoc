@@ -270,6 +270,32 @@ def _supabase_upsert(table: str, slug: str, payload: dict, db_conn=None) -> bool
         return False
 
 
+def _supabase_delete(table: str, slug: str) -> bool:
+    """Best-effort Supabase row delete by slug. Never raises."""
+    if not table or not slug:
+        return False
+    url, key = _load_supabase_creds()
+    if not url or not key:
+        return False
+    try:
+        import urllib.parse
+        import urllib.request
+        encoded_slug = urllib.parse.quote(slug, safe="")
+        req = urllib.request.Request(
+            f"{url.rstrip('/')}/rest/v1/{table}?slug=eq.{encoded_slug}",
+            method="DELETE",
+            headers={
+                "apikey": key,
+                "authorization": f"Bearer {key}",
+                "prefer": "return=minimal",
+            },
+        )
+        urllib.request.urlopen(req, timeout=8).read()
+        return True
+    except Exception:
+        return False
+
+
 def _build_lender_payload(data: dict, checksum: str, ts: str) -> dict:
     """Map SQLite lender data → Supabase lenders columns (incl. body_inline)."""
     return {
@@ -848,6 +874,29 @@ class CreditDocDB:
             db_conn=self.conn,
         )
 
+    def delete_comparison(self, slug: str, updated_by: str, reason: str = "founder-initiated comparison delete") -> bool:
+        if updated_by != "founder":
+            raise ProtectedProfileError(
+                f"delete_comparison requires updated_by='founder' (got '{updated_by}')"
+            )
+        row = self.conn.execute("SELECT data FROM comparisons WHERE slug = ?", (slug,)).fetchone()
+        if not row:
+            return False
+
+        ts = _now()
+        old_value = row["data"]
+        self.conn.execute("DELETE FROM comparisons WHERE slug = ?", (slug,))
+        self.conn.execute(
+            """INSERT INTO audit_log
+               (slug, table_name, field_changed, old_value, changed_by, changed_at, reason)
+               VALUES (?, 'comparisons', 'DELETE', ?, ?, ?, ?)""",
+            (slug, old_value, updated_by, ts, reason),
+        )
+        self.conn.commit()
+        _ping_revalidate("comparison", slug)
+        _supabase_delete("comparisons", slug)
+        return True
+
     def add_wellness_guide(self, data: dict, updated_by: str):
         slug = data.get("slug", "")
         if not slug:
@@ -1306,7 +1355,7 @@ class CreditDocDB:
 def main():
     if len(sys.argv) < 2:
         print("Usage: python3 creditdoc_db.py <command> [args]")
-        print("Commands: stats, get <slug>, audit [slug], export-changed, export-all, changed-since <ts>, logo-stats")
+        print("Commands: stats, get <slug>, audit [slug], delete-comparison <slug>, export-changed, export-all, changed-since <ts>, logo-stats")
         return
 
     cmd = sys.argv[1]
@@ -1360,6 +1409,13 @@ def main():
         else:
             print("No audit entries found.")
 
+    elif cmd == "delete-comparison" and len(sys.argv) > 2:
+        slug = sys.argv[2]
+        if db.delete_comparison(slug, updated_by="founder"):
+            print(f"Deleted comparison: {slug}")
+        else:
+            print(f"Comparison not found: {slug}")
+
     elif cmd == "export-changed":
         count = db.export_changed_lenders()
         print(f"Exported {count} changed lenders to JSON.")
@@ -1387,7 +1443,7 @@ def main():
 
     else:
         print(f"Unknown command: {cmd}")
-        print("Commands: stats, get <slug>, audit [slug], export-changed, export-all, changed-since <ts>, logo-stats")
+        print("Commands: stats, get <slug>, audit [slug], delete-comparison <slug>, export-changed, export-all, changed-since <ts>, logo-stats")
 
     db.close()
 

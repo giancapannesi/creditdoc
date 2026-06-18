@@ -7,14 +7,13 @@ Latest completed:
 - Phase 0 reliability fixes were committed, deployed, and live-verified.
 - Phase 1 workpack created at `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Pricing_Safety_Phase_1_2026-06-17/`.
 - First Phase 1 live-page patch slice updated 9 comparison records with stored-field comparison language and build verification.
+- Single orphan comparison `kikoff-vs-a-better-way-auto-brokerage` was archived and removed from local DB, Supabase, and exported JSON.
 
 Immediate next:
 
-1. Resolve the single orphan comparison source record: `kikoff-vs-a-better-way-auto-brokerage`.
-2. Do not recreate missing lender `a-better-way-auto-brokerage` just to make the orphan comparison render.
-3. Use a reviewed one-record cleanup path: either add a small `delete_comparison` DB helper or archive the orphan and perform a documented one-record DB/Supabase delete/export.
-4. After the orphan is resolved, continue the next 10 highest-risk live 200 comparison pages from `comparison_risk_inventory_2026-06-17.csv`.
-5. Keep Phase 1 as small batches only; no bulk comparison rewrites.
+1. Deploy the Phase 1 comparison cleanup release after final review.
+2. Continue the next 10 highest-risk live 200 comparison pages from `comparison_risk_inventory_2026-06-17.csv`.
+3. Keep Phase 1 as small batches only; no bulk comparison rewrites.
 
 ## Active 2026-05-26 — Sitewide Page Upgrade Program
 
