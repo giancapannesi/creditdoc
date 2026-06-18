@@ -471,6 +471,126 @@ const categoryContextCards = comparedCategories.map(category => ({
   label: categoryLabels[category] || category.replace(/-/g, ' '),
 }));
 
+type ComparisonResourceLink = {
+  label: string;
+  href: string;
+  detail: string;
+  group: 'tool' | 'guide' | 'course' | 'resource' | 'local' | 'data';
+};
+
+const sharedComparisonLinks: ComparisonResourceLink[] = [
+  { label: 'Credit fundamentals course', href: '/courses/credit-fundamentals/', detail: 'Review core credit concepts before comparing paid services.', group: 'course' },
+  { label: 'Local credit guides', href: '/city/', detail: 'Compare local providers, state context, and city-level credit resources.', group: 'local' },
+  { label: 'Complaint data context', href: '/research/consumer-complaints/', detail: 'Use public complaint context as one research signal.', group: 'data' },
+];
+
+const categoryResourceLinks: Record<string, ComparisonResourceLink[]> = {
+  'credit-repair': [
+    { label: 'Credit repair qualify quiz', href: '/tools/credit-repair-qualify-quiz/', detail: 'Check whether dispute help, DIY review, or credit building may fit.', group: 'tool' },
+    { label: 'Credit score simulator', href: '/tools/credit-score-simulator/', detail: 'Model common score-pressure scenarios before paying for help.', group: 'tool' },
+    { label: 'Credit report checklist', href: '/resources/credit-report-checklist/', detail: 'Review report sections before hiring a repair company.', group: 'resource' },
+    { label: 'Charge-off guide', href: '/answers/how-to-remove-charge-offs/', detail: 'Understand charge-off research before comparing repair providers.', group: 'guide' },
+    { label: 'Build credit faster', href: '/answers/how-to-build-credit-score-fast/', detail: 'Compare dispute work with credit-building actions.', group: 'guide' },
+  ],
+  'personal-loans': [
+    { label: 'Borrowing power quiz', href: '/tools/borrowing-power-quiz/', detail: 'Estimate broad borrowing capacity before comparing lenders.', group: 'tool' },
+    { label: 'Loan denial checker', href: '/tools/loan-denial-reason-checker/', detail: 'Map denial reasons to next research steps.', group: 'tool' },
+    { label: 'APR guide', href: '/answers/personal-loan-interest-rates-explained/', detail: 'Understand interest-rate and APR terms before applying.', group: 'guide' },
+  ],
+  'emergency-cash': [
+    { label: 'Borrowing power quiz', href: '/tools/borrowing-power-quiz/', detail: 'Check broad repayment fit before using high-cost cash products.', group: 'tool' },
+    { label: 'Credit denial checklist', href: '/tools/credit-denial-action-checklist/', detail: 'Review safer next steps after a credit denial.', group: 'tool' },
+    { label: 'State regulator directory', href: '/tools/state-consumer-credit-regulator-directory/', detail: 'Find state lending-law starting points and official resources.', group: 'data' },
+  ],
+  'debt-relief': [
+    { label: 'Debt payoff calculator', href: '/tools/debt-payoff-calculator/', detail: 'Compare payoff paths before contacting debt-relief providers.', group: 'tool' },
+    { label: 'Debt letter templates', href: '/resources/debt-credit-letter-templates/', detail: 'Use templates and checklists for debt validation and settlement research.', group: 'resource' },
+    { label: 'DIY debt consolidation', href: '/answers/can-i-do-debt-consolidation-myself/', detail: 'Compare provider help with self-managed options.', group: 'guide' },
+  ],
+  'business-loans': [
+    { label: 'Business readiness quiz', href: '/tools/business-loan-readiness-quiz/', detail: 'Check documents, revenue, business age, and route fit.', group: 'tool' },
+    { label: 'Cash-flow calculator', href: '/tools/bank-statement-cash-flow-calculator/', detail: 'Estimate cash-flow pressure before comparing funding products.', group: 'tool' },
+    { label: 'MCA repayment calculator', href: '/tools/mca-repayment-calculator/', detail: 'Compare payback amount and revenue share before accepting fast funding.', group: 'tool' },
+  ],
+  'build-credit': [
+    { label: 'Credit score simulator', href: '/tools/credit-score-simulator/', detail: 'Model score-pressure scenarios before choosing credit-building products.', group: 'tool' },
+    { label: 'Build credit with no history', href: '/answers/build-credit-with-no-credit-history/', detail: 'Compare product choices with basic credit-building steps.', group: 'guide' },
+    { label: 'Secured card questions', href: '/answers/secured-credit-cards-questions-answered/', detail: 'Understand secured-card trade-offs before comparing products.', group: 'guide' },
+  ],
+  fintech: [
+    { label: 'Credit score simulator', href: '/tools/credit-score-simulator/', detail: 'Model credit-building scenarios before choosing fintech tools.', group: 'tool' },
+    { label: 'Credit fundamentals course', href: '/courses/credit-fundamentals/', detail: 'Review core credit concepts before comparing apps or subscriptions.', group: 'course' },
+  ],
+};
+
+function comparisonResourceLinks(categories: string[]): ComparisonResourceLink[] {
+  const links = [
+    ...categories.flatMap(category => categoryResourceLinks[category] || []),
+    ...sharedComparisonLinks,
+  ];
+  const seen = new Set<string>();
+  return links.filter(link => {
+    if (seen.has(link.href)) return false;
+    seen.add(link.href);
+    return true;
+  }).slice(0, 8);
+}
+
+function topServiceSignals(lender: Lender): string[] {
+  return [
+    ...(lender.services || []),
+    ...(lender.pros || []),
+  ]
+    .filter(Boolean)
+    .slice(0, 4)
+    .map(item => softenComparisonText(String(item)).replace(/[.\s]+$/g, ''));
+}
+
+function decisionMapLine(lender: Lender): string {
+  const signals = topServiceSignals(lender);
+  if (signals.length === 0) {
+    return `Compare ${lender.name} if its full profile, listed category, and current provider terms match your research need.`;
+  }
+  return `Compare ${lender.name} if these stored profile signals match your need: ${signals.slice(0, 3).join('; ')}.`;
+}
+
+function beforeContactChecklist(categories: string[]): string[] {
+  const base = [
+    'Verify current pricing, setup fees, and cancellation terms directly with the company.',
+    'Read both full CreditDoc review pages before using external signup links.',
+    'Check whether listed refund, return, or satisfaction terms have conditions.',
+  ];
+
+  if (categories.includes('credit-repair')) {
+    return [
+      ...base,
+      'Ask which bureaus are included and how dispute updates are delivered.',
+      'Confirm whether the service is dispute-focused, coaching-focused, mortgage-readiness focused, or credit-building focused.',
+    ];
+  }
+
+  if (categories.includes('emergency-cash') || categories.includes('personal-loans')) {
+    return [
+      ...base,
+      'Confirm APR, fees, repayment schedule, and state-specific availability before applying.',
+      'Check whether prequalification uses a soft or hard credit inquiry.',
+    ];
+  }
+
+  if (categories.includes('debt-relief')) {
+    return [
+      ...base,
+      'Ask whether the program requires missed payments or dedicated-account deposits.',
+      'Compare fee timing, tax risk, and credit-report impact before enrolling.',
+    ];
+  }
+
+  return base;
+}
+
+const resourceLinks = comparisonResourceLinks(comparedCategories);
+const contactChecklist = beforeContactChecklist(comparedCategories);
+
 const faqs = [
   {
     question: `Which lists the lower monthly price, ${lenderA.name} or ${lenderB.name}?`,
@@ -633,6 +753,22 @@ const jsonLd = [
     </div>
   </section>
 
+  <!-- Quick Decision Map -->
+  <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+    <h2 class="text-lg font-bold text-text mb-4">Quick Decision Map</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {[lenderA, lenderB].map((lender) => (
+        <div class="rounded-lg border border-border bg-bg-alt p-4">
+          <h3 class="text-sm font-semibold text-text">Compare {lender.name} if...</h3>
+          <p class="mt-2 text-sm text-muted leading-relaxed">{decisionMapLine(lender)}</p>
+          <a href={`/review/${lender.slug}/`} class="mt-3 inline-flex text-sm font-medium text-primary hover:underline">
+            Read the full {lender.name} review
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
   <!-- Comparison Table -->
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="glass-card p-4 sm:p-6">
@@ -659,6 +795,21 @@ const jsonLd = [
         diagnosis={`CreditDoc comparison note: ${winnerLender.name}. ${safeWinnerReason}`}
         lenderName={winnerLender.name}
       />
+    </div>
+  </section>
+
+  <!-- Before Contact Checklist -->
+  <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+    <div class="rounded-lg border border-border bg-bg-alt p-5">
+      <h2 class="text-lg font-bold text-text mb-3">Before You Contact Either Company</h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
+        {contactChecklist.map(item => (
+          <li class="text-sm text-muted leading-relaxed flex gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0"></span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -690,6 +841,25 @@ const jsonLd = [
       </div>
     </div>
   </section>
+
+  <!-- CreditDoc Resources -->
+  {resourceLinks.length > 0 && (
+    <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <h2 class="text-lg font-bold text-text mb-2">CreditDoc Tools and Guides for This Comparison</h2>
+      <p class="max-w-3xl text-sm text-muted leading-relaxed">
+        If you need a calculator, checklist, course, or deeper guide before contacting either company, start with these CreditDoc resources.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {resourceLinks.map(link => (
+          <a href={link.href} class="rounded-lg border border-border bg-bg-alt p-3 hover:border-primary transition-colors">
+            <span class="text-xs font-semibold uppercase text-muted">{link.group}</span>
+            <span class="mt-1 block text-sm font-semibold text-primary">{link.label}</span>
+            <span class="mt-1 block text-xs text-muted leading-relaxed">{link.detail}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
 
   <!-- FAQ -->
   <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
