@@ -72,6 +72,45 @@ Remaining Phase 1 follow-up:
 - Keep small batches only; do not bulk rewrite comparison history.
 - Continue preserving sourced prices and facts while avoiding fabricated current-price, guarantee, winner, or trust verdict language.
 
+## 2026-06-18 - Phase 1 comparison pricing safety patch slice 3
+
+Status: third live-page comparison cleanup slice implemented, independently reviewed, build-verified, committed, deployed, and live-verified.
+
+What changed:
+- Patched the next 10 highest-risk live 200 comparison records from `comparison_risk_inventory_2026-06-17.csv`.
+- Updated `summary`, `winner_reason`, and `seo_description` fields through `CreditDocDB.add_comparison(..., updated_by='founder')` and content export.
+- Preserved useful stored facts: listed prices, setup fees, APR/rate examples, return/refund terms, BBB/profile context, review fields, product mechanics, and use-case distinctions.
+- Removed derived savings claims, value verdicts, old guarantee wording, unsupported BBB certainty, negative trust conclusions, and payday-lender language that went beyond stored fields.
+- No pages were noindexed, redirected, removed, or bulk rewritten.
+
+Patched records:
+- `the-credit-pros-vs-safeport-law`
+- `ace-cash-express-new-orleans-la-vs-ace-cash-express`
+- `advance-america-oklahoma-city-vs-ace-cash-express`
+- `ace-cash-express-miami-fl-vs-advance-america-missouri-city`
+- `apex-credit-fix-vs-credit-blueprint`
+- `ecreditadvisor-vs-elevate-my-scores`
+- `kikoff-vs-self-credit-builder`
+- `capital-fundings-vs-refijet`
+- `dovly-vs-the-credit-bureau`
+- `the-credit-repairmen-vs-elevate-my-scores`
+
+Verification:
+- Independent read-only debug agent reviewed the 10 candidates and agreed cleanup was warranted without deleting useful sourced content.
+- Raw-record scan across `summary`, `winner_reason`, and `seo_description` found no targeted unsafe phrases after patch.
+- `npm run build` passed.
+- Prebuild checks passed: robots contract and SSR sitemap parity.
+- Postbuild checks passed: sitemap/robots conflict check and critical URL check.
+- Rendered `dist/compare/.../index.html` scan for the 10 patched pages found no targeted unsafe phrase hits.
+- Deployed 2026-06-18 through `/srv/BusinessOps/creditdoc/deploy.sh`.
+- Deploy smoke checks returned 200 for homepage, CSS, and 11 core SSR route families.
+- Targeted live checks: all 10 patched comparison pages returned 200 and had no targeted unsafe phrase hits.
+
+Remaining Phase 1 follow-up:
+- Continue with the next 10 highest-risk remaining live 200 comparison pages from the inventory.
+- Keep small batches only; do not bulk rewrite comparison history.
+- Continue preserving sourced prices and facts while avoiding fabricated current-price, guarantee, winner, or trust verdict language.
+
 ## 2026-06-16 - Feed audit comparison guardrail patch
 
 Status: future-prevention patch implemented and locally verified; not deployed in this session.
