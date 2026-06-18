@@ -6,9 +6,11 @@ import { join } from 'node:path';
 import test from 'node:test';
 
 import {
+  checkComparisonClaimSafety,
   checkComparisonDbFreshness,
   compareComparisonBatchScope,
   extractComparisonSourceFacts,
+  checkRenderedComparisonBatch,
   selectComparisonsForManifest,
   loadLendersForComparisons,
 } from '../scripts/lib/comparison_batch_utils.mjs';
@@ -232,4 +234,628 @@ test('manifest selection records selected comparison slugs missing from content'
   assert.deepEqual(result.comparisons.map((row) => row.slug), ['alpha-vs-beta']);
   assert.deepEqual(result.missingComparisonSlugs, ['missing-vs-beta']);
   assert.deepEqual(result.blockers, ['selected comparison not found: missing-vs-beta']);
+});
+
+test('claim scanner blocks unsupported dollar amounts and flags winner language', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha costs $99/month, while Beta costs $777/month.',
+      winner_reason: 'Alpha is the clear winner.',
+      seo_description: 'Compare Alpha and Beta.',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { pricing: { monthly_price: 99 }, bbb_accredited: false },
+        lender_b: { pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers[0].type, 'unsupported_money_amount');
+  assert.equal(result.blockers[0].amount, '777');
+  assert.equal(result.reviews[0].type, 'risky_phrase');
+});
+
+test('claim scanner blocks accreditation language when source facts do not support it', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha is BBB accredited.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { pricing: {}, bbb_accredited: false },
+        lender_b: { pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers[0].type, 'unsupported_accreditation_claim');
+});
+
+test('claim scanner allows explicit no-accreditation wording', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha has A+ BBB letter-grade context without accreditation.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { pricing: {}, bbb_accredited: false },
+        lender_b: { pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('claim scanner still blocks positive BBB accredited wording when unsupported', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha is a BBB accredited business.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { pricing: {}, bbb_accredited: false },
+        lender_b: { pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers[0].type, 'unsupported_accreditation_claim');
+});
+
+test('claim scanner blocks unsupported APR and rate claims', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Beta offers 36% APR financing.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers[0].type, 'unsupported_rate_claim');
+});
+
+test('claim scanner blocks unsupported APR wording without percent symbol', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Beta offers 24 percent APR and an APR of 36.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers.filter((blocker) => blocker.type === 'unsupported_rate_claim').length, 2);
+});
+
+test('claim scanner blocks unsupported natural-language APR and interest-rate wording', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: "Beta APR is 24. Beta's interest rate is 25. Beta has APR set at 26. Beta offers 27 APR. Beta APR: 28. Beta APR - 29. Beta APR=30.",
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers.filter((blocker) => blocker.type === 'unsupported_rate_claim').length, 7);
+});
+
+test('claim scanner blocks fabricated zero and free pricing when pricing is missing', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Beta costs $0 per month and is free to use.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers.some((blocker) => blocker.type === 'unsupported_money_amount'), true);
+  assert.equal(result.blockers.some((blocker) => blocker.type === 'unsupported_free_pricing_claim'), true);
+});
+
+test('claim scanner scopes prices to the lender named near the claim', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Beta costs $99 per month.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: { monthly_price: 99 }, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: { monthly_price: 149 }, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers[0].type, 'unsupported_money_amount');
+});
+
+test('claim scanner blocks swapped prices in while clauses', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha costs $149 per month, while Beta costs $99 per month.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: { monthly_price: 99 }, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: { monthly_price: 149 }, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers.filter((blocker) => blocker.type === 'unsupported_money_amount').length, 2);
+});
+
+test('claim scanner scopes accreditation to the lender named near the claim', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Beta is BBB accredited.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers[0].type, 'unsupported_accreditation_claim');
+});
+
+test('claim scanner allows supported accreditation when the other lender is explicitly not accredited', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha lists A+ BBB accreditation context. Beta lists A+ BBB letter-grade context without accreditation.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('claim scanner uses local accreditation context when both lenders are mentioned in the field', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha lists A+ BBB accreditation context. Beta remains relevant for lower listed pricing and dashboard access.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('claim scanner scopes accreditation across while clauses', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha has an A+ BBB rating (accredited), while Beta has an A+ BBB rating.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('claim scanner blocks swapped repeated accreditation claims in while clauses', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha is BBB accredited, while Beta is BBB accredited.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers[0].type, 'unsupported_accreditation_claim');
+});
+
+test('claim scanner blocks unsupported positive accreditation before a negative contrast clause', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha is BBB accredited, but Beta is not BBB-accredited.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers[0].type, 'unsupported_accreditation_claim');
+});
+
+test('claim scanner blocks unsupported positive accreditation after sentence-leading negative contrast clauses', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Although Beta is not BBB-accredited, Alpha is BBB accredited. However Beta is not BBB-accredited, Alpha is BBB accredited.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers.filter((blocker) => blocker.type === 'unsupported_accreditation_claim').length, 2);
+});
+
+test('claim scanner blocks mixed positive and negative accreditation claims joined by and', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha is BBB accredited and Beta is not BBB-accredited. Beta is not BBB-accredited, and Alpha is BBB accredited.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers.filter((blocker) => blocker.type === 'unsupported_accreditation_claim').length, 2);
+});
+
+test('claim scanner allows supported positive accreditation joined to explicit no-accreditation wording by and', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha is BBB accredited and Beta is not BBB-accredited. Beta is not BBB-accredited, and Alpha is BBB accredited.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('claim scanner blocks unsupported accreditation for lender names containing and', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'walters-vs-alpha',
+      summary: 'Walters Bank and Trust Company is BBB accredited.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'walters-vs-alpha': {
+        lender_a: { name: 'Walters Bank and Trust Company', pricing: {}, bbb_accredited: false },
+        lender_b: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers[0].type, 'unsupported_accreditation_claim');
+});
+
+test('claim scanner allows supported accreditation for lender names containing and', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'walters-vs-alpha',
+      summary: 'Walters Bank and Trust Company is BBB accredited.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'walters-vs-alpha': {
+        lender_a: { name: 'Walters Bank and Trust Company', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('claim scanner allows supported mixed accreditation when a lender name contains and', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'walters-vs-alpha',
+      summary: 'Walters Bank and Trust Company is BBB accredited and Alpha is not BBB-accredited. Alpha is not BBB-accredited and Walters Bank and Trust Company is BBB accredited.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'walters-vs-alpha': {
+        lender_a: { name: 'Walters Bank and Trust Company', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('claim scanner checks collective accreditation claims against both lenders', () => {
+  const bothSupported = checkComparisonClaimSafety({
+    comparisons: [{ slug: 'alpha-vs-beta', summary: 'Alpha and Beta are BBB accredited. Alpha and Beta have BBB accreditation.', winner_reason: '', seo_description: '' }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: true },
+      },
+    },
+  });
+  const firstUnsupported = checkComparisonClaimSafety({
+    comparisons: [{ slug: 'alpha-vs-beta', summary: 'Alpha and Beta are BBB accredited. Alpha and Beta have BBB accreditation.', winner_reason: '', seo_description: '' }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: true },
+      },
+    },
+  });
+  const secondUnsupported = checkComparisonClaimSafety({
+    comparisons: [{ slug: 'alpha-vs-beta', summary: 'Alpha and Beta are BBB accredited. Alpha and Beta have BBB accreditation.', winner_reason: '', seo_description: '' }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(bothSupported.ok, true);
+  assert.equal(firstUnsupported.ok, false);
+  assert.equal(secondUnsupported.ok, false);
+});
+
+test('claim scanner checks collective have-accreditation claims against both lenders', () => {
+  const bothSupported = checkComparisonClaimSafety({
+    comparisons: [{ slug: 'alpha-vs-beta', summary: 'Alpha and Beta have BBB accreditation.', winner_reason: '', seo_description: '' }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: true },
+      },
+    },
+  });
+  const firstUnsupported = checkComparisonClaimSafety({
+    comparisons: [{ slug: 'alpha-vs-beta', summary: 'Alpha and Beta have BBB accreditation.', winner_reason: '', seo_description: '' }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: true },
+      },
+    },
+  });
+  const secondUnsupported = checkComparisonClaimSafety({
+    comparisons: [{ slug: 'alpha-vs-beta', summary: 'Alpha and Beta have BBB accreditation.', winner_reason: '', seo_description: '' }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(bothSupported.ok, true);
+  assert.equal(firstUnsupported.ok, false);
+  assert.equal(secondUnsupported.ok, false);
+});
+
+test('claim scanner allows supported mixed accreditation with has-no-accreditation wording', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha is BBB accredited and Beta has no BBB accreditation. Beta has no BBB accreditation and Alpha is BBB accredited. Alpha has BBB accreditation and Beta has no BBB accreditation.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('claim scanner allows explicit does-not-have accreditation wording', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Beta does not have BBB accreditation. Alpha and Beta do not have BBB accreditation. Alpha is BBB accredited and Beta does not have BBB accreditation. Beta does not hold BBB accreditation. Alpha and Beta do not hold BBB accreditation. Alpha is BBB accredited and Beta does not hold BBB accreditation.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: true },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('claim scanner allows hyphenated explicit no-accreditation wording', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Beta is not BBB-accredited.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('claim scanner does not treat default zero pricing as support for free service claims', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Beta is free to use.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+        lender_b: { name: 'Beta', pricing: { monthly_price: 0, setup_fee: 0 }, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers[0].type, 'unsupported_free_pricing_claim');
+});
+
+test('rendered scanner requires enrichment sections and scans rendered claims', () => {
+  const dir = tempDir();
+  const compareDir = join(dir, 'compare', 'alpha-vs-beta');
+  mkdirSync(compareDir, { recursive: true });
+  writeFileSync(join(compareDir, 'index.html'), [
+    '<h2>Quick Decision Map</h2>',
+    '<h2>CreditDoc Tools and Guides for This Comparison</h2>',
+    '<h2>Before You Contact Either Company</h2>',
+    '<p>Alpha costs $777/month.</p>',
+  ].join('\n'));
+
+  const result = checkRenderedComparisonBatch({
+    distDir: dir,
+    selectedSlugs: ['alpha-vs-beta'],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { pricing: { monthly_price: 99 }, bbb_accredited: false },
+        lender_b: { pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.pages[0].sections_ok, true);
+  assert.equal(result.blockers[0].type, 'unsupported_money_amount');
+});
+
+test('rendered scanner blocks missing enrichment sections', () => {
+  const dir = tempDir();
+  const compareDir = join(dir, 'compare', 'alpha-vs-beta');
+  mkdirSync(compareDir, { recursive: true });
+  writeFileSync(join(compareDir, 'index.html'), '<p>No sections here.</p>');
+
+  const result = checkRenderedComparisonBatch({
+    distDir: dir,
+    selectedSlugs: ['alpha-vs-beta'],
+    factsBySlug: { 'alpha-vs-beta': { lender_a: { pricing: {} }, lender_b: { pricing: {} } } },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers[0].type, 'missing_rendered_section');
 });
