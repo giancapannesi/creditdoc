@@ -6,7 +6,7 @@
 
 ## 2026-06-17 - Phase 1 comparison pricing safety patch slice 1
 
-Status: first live-page comparison cleanup slice implemented locally, build-verified, committed, and followed by one-record orphan cleanup.
+Status: first live-page comparison cleanup slice implemented, build-verified, committed, deployed, and followed by one-record orphan cleanup.
 
 What changed:
 - Patched 9 first-batch comparison records in `src/content/comparisons.json` through `CreditDocDB.add_comparison(..., updated_by='founder')` and content export.
@@ -21,6 +21,10 @@ Verification:
 - Prebuild checks passed: robots contract and SSR sitemap parity.
 - Postbuild checks passed: sitemap/robots conflict check and critical URL check.
 - Rendered HTML scan for the 9 patched compare pages found no targeted unsafe phrases: `money-back guarantee`, `wins`, `superior value`, `better value`, `clear pick`, `safer choice`, `versus no BBB rating`, `no BBB rating`, or `red flag`.
+- Deployed 2026-06-18 through `./deploy.sh`.
+- Cloudflare Worker Version ID: `4f189f5a-1b95-4b74-acd4-c55866f8f9d4`.
+- Deploy smoke checks returned 200 for homepage, CSS, and 11 core SSR route families.
+- Targeted live checks: orphan `/compare/kikoff-vs-a-better-way-auto-brokerage/` returned 404; sampled patched comparison pages returned 200 with no targeted unsafe phrase hits.
 
 Remaining Phase 1 follow-up:
 - `kikoff-vs-a-better-way-auto-brokerage` was archived and removed on 2026-06-18 through founder-only `CreditDocDB.delete_comparison(...)`, then exported from `src/content/comparisons.json`.

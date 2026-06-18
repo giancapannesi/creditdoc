@@ -8,12 +8,13 @@ Latest completed:
 - Phase 1 workpack created at `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Pricing_Safety_Phase_1_2026-06-17/`.
 - First Phase 1 live-page patch slice updated 9 comparison records with stored-field comparison language and build verification.
 - Single orphan comparison `kikoff-vs-a-better-way-auto-brokerage` was archived and removed from local DB, Supabase, and exported JSON.
+- Phase 1 cleanup release deployed 2026-06-18, Cloudflare Worker Version ID `4f189f5a-1b95-4b74-acd4-c55866f8f9d4`.
 
 Immediate next:
 
-1. Deploy the Phase 1 comparison cleanup release after final review.
-2. Continue the next 10 highest-risk live 200 comparison pages from `comparison_risk_inventory_2026-06-17.csv`.
-3. Keep Phase 1 as small batches only; no bulk comparison rewrites.
+1. Continue the next 10 highest-risk live 200 comparison pages from `comparison_risk_inventory_2026-06-17.csv`.
+2. Keep Phase 1 as small batches only; no bulk comparison rewrites.
+3. Keep pricing/rating values only where they are current CreditDoc source fields, and keep copy framed as stored-field comparison rather than recommendation.
 
 ## Active 2026-05-26 — Sitewide Page Upgrade Program
 
