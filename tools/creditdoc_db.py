@@ -857,8 +857,13 @@ class CreditDocDB:
             raise ValueError("Comparison must have a 'slug' field")
         ts = _now()
         self.conn.execute(
-            """INSERT OR REPLACE INTO comparisons (slug, data, checksum, updated_at, updated_by)
-               VALUES (?, ?, ?, ?, ?)""",
+            """INSERT INTO comparisons (slug, data, checksum, updated_at, updated_by)
+               VALUES (?, ?, ?, ?, ?)
+               ON CONFLICT(slug) DO UPDATE SET
+                   data = excluded.data,
+                   checksum = excluded.checksum,
+                   updated_at = excluded.updated_at,
+                   updated_by = excluded.updated_by""",
             (slug, json.dumps(data, separators=(",", ":")), _checksum(data), ts, updated_by),
         )
         self.conn.commit()
