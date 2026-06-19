@@ -4,6 +4,37 @@
 
 ---
 
+## 2026-06-19 - Comparison batch runner guardrail orchestrator
+
+Status: Task 8 guardrail runner implemented, independently reviewed, verified, committed, and repo-clean. Not deployed; this is operator tooling only.
+
+Code commit:
+- `9861eb5159 feat: add guarded comparison batch runner`
+
+What changed:
+- Added `scripts/run_comparison_batch_guarded.mjs`.
+- Added npm scripts `comparison:batch:preflight` and `comparison:batch:check`.
+- Added shared `buildComparisonPreflightReport(...)` helper and unit coverage.
+- Runner writes report/status artifacts only. It does not edit comparison records, lender JSON, page templates, routes, DB rows, redirects, or indexability.
+- Preflight mode runs DB freshness, source fact extraction, scope preview, and preflight status.
+- Check mode reruns preflight, enforces selected-slug/allowed-field scope, runs raw claim safety, runs `npm run build`, scans rendered output, and invokes the existing review-packet generator so both `review_packet.json` and `review_packet.md` are produced.
+
+Verification:
+- Independent read-only checker agent `Popper` returned PASS.
+- `npm run test:comparison-batch` passed: 42/42.
+- `node --check scripts/run_comparison_batch_guarded.mjs` passed.
+- `git diff --check` passed.
+- `npm run check:comparison-db-freshness` passed: 340 JSON rows, 340 DB rows, 0 mismatches.
+- Selected-page preflight smoke passed for `continental-credit-vs-cosmo-credit-repair`.
+- Selected-page check smoke failed intentionally at scope gate with `selected slug not changed: continental-credit-vs-cosmo-credit-repair` and did not run build/render/review-packet steps.
+- Empty-manifest check smoke passed and wrote the complete bundle, including `review_packet_command_report.json`, `review_packet.json`, and `review_packet.md`.
+
+Repo state:
+- `git status --short --untracked-files=all` returned clean after commit.
+
+Next:
+- Do not start 20-page content batches yet. Next implementation step is the final checker result/evidence gate and campaign report wrapper so each batch can stop after deterministic checks, independent review, final checker pass, and cumulative reporting.
+
 ## 2026-06-17 - Phase 1 comparison pricing safety patch slice 1
 
 Status: first live-page comparison cleanup slice implemented, build-verified, committed, deployed, and followed by one-record orphan cleanup.

@@ -13,13 +13,19 @@ Latest completed:
 - Second slice deployed 2026-06-18, Cloudflare Worker Version ID `e3ebb3d1-1235-4b83-a47f-de94e35d0f86`.
 - Third Phase 1 live-page patch slice updated 10 comparison records, including summaries, winner reasons, and SEO descriptions, with independent read-only review, build verification, deploy, and live verification.
 - `CreditDocDB.add_comparison(...)` now uses row-preserving SQLite upsert instead of `INSERT OR REPLACE` to avoid comparison export reorder churn.
+- Task 8 guardrail runner committed as `9861eb5159 feat: add guarded comparison batch runner`.
+- Runner commands now available:
+  - `npm run comparison:batch:preflight -- --manifest <manifest.json> --output-dir <reports-dir>`
+  - `npm run comparison:batch:check -- --manifest <manifest.json> --output-dir <reports-dir>`
+- Runner is report/check tooling only. It does not edit content or DB rows.
 
 Immediate next:
 
-1. Continue the next 10 highest-risk remaining live 200 comparison pages from `comparison_risk_inventory_2026-06-17.csv`.
+1. Implement the final checker result/evidence gate and campaign report wrapper before running any 20-page content batch.
 2. Keep Phase 1 as small batches only; no bulk comparison rewrites.
 3. Keep pricing/rating values only where they are current CreditDoc source fields, and keep copy framed as stored-field comparison rather than recommendation.
 4. Patch `summary`, `winner_reason`, and `seo_description` together for each selected comparison because all three can render or influence snippets.
+5. Once the checker/report wrapper is in place, run a reviewed first 20-page batch through preflight -> deterministic check -> independent content review -> final checker -> report. Stop and report before continuing.
 
 ## Active 2026-05-26 — Sitewide Page Upgrade Program
 
