@@ -1,5 +1,23 @@
 # CreditDoc — NEXT ACTIONS (updated 2026-05-16)
 
+## Active 2026-06-19 — Supabase Size Monitoring
+
+Latest completed:
+
+- CreditDoc Supabase database size incident resolved without paying for an upgrade.
+- Database reduced from `513 MB` to `175 MB`.
+- `public.audit_log` reduced from `370 MB` to `32 MB`.
+- Full audit archive stored outside Supabase at:
+  `/srv/BusinessOps/backups/creditdoc_supabase_audit_cleanup/20260619T114841Z/public_audit_log_before_prune.dump`
+- Future audit rows now strip `body_inline` and retain compact marker fields so the same bloat should not recur from normal content updates.
+
+Next checks:
+
+1. Add this to the normal CreditDoc daily/weekly ops review: check `pg_database_size(current_database())` and `pg_total_relation_size('public.audit_log')`.
+2. If `public.audit_log` grows unexpectedly, inspect row distribution by `table_name`, `operation`, and JSON payload size before pruning anything.
+3. Keep audit archive files; do not delete the 2026-06-19 archive unless there is a separate retention decision.
+4. If changing `public.fn_audit_row()` again, use the DB safety protocol and preserve the rollback function definition first.
+
 ## Active 2026-06-17 — Phase 1 Comparison Pricing Safety
 
 Latest completed:

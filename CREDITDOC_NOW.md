@@ -4,6 +4,40 @@
 
 ---
 
+## 2026-06-19 - Supabase free-plan database size incident resolved
+
+Status: CreditDoc Supabase database size reduced below the free-plan threshold without changing live content tables.
+
+What happened:
+- CreditDoc still uses Cloudflare Workers SSR with SQLite as the canonical write/source database and Supabase Postgres as the read-at-request mirror for runtime content.
+- Supabase database size was `513 MB`.
+- `public.audit_log` was `370 MB`; almost all bloat came from old `lenders UPDATE` audit rows storing full `old_data` and `new_data` JSON snapshots, including `body_inline`.
+
+What was done:
+- Archived the full `public.audit_log` table before pruning:
+  `/srv/BusinessOps/backups/creditdoc_supabase_audit_cleanup/20260619T114841Z/public_audit_log_before_prune.dump`
+- Verified archive checksum and `pg_restore --list`.
+- Deleted only old audit rows matching:
+  `table_name='lenders' AND operation='UPDATE' AND created_at < now() - interval '30 days'`.
+- Deleted row count: `37,808`.
+- Ran `VACUUM (FULL, ANALYZE) public.audit_log`.
+- Updated `public.fn_audit_row()` so future audit snapshots strip `body_inline` and keep compact `body_inline_present` / `body_inline_changed` markers instead of duplicating full content blobs.
+- Saved rollback function definition:
+  `/srv/BusinessOps/backups/creditdoc_supabase_audit_cleanup/20260619T114841Z/fn_audit_row_before_body_inline_strip.sql`
+
+Verification:
+- Final Supabase database size: `175 MB`.
+- Final `public.audit_log` size: `32 MB`.
+- Remaining audit rows: `5,815`.
+- Remaining old lender update rows matching the prune predicate: `0`.
+- Rollback-transaction trigger test on `lexington-law` produced a compact audit row of `1132 bytes`, with no `body_inline` stored; transaction was rolled back.
+- Live route checks returned `200` for homepage, Lexington Law review, Crushing on Credit review, answers index, Amarillo city guide, known comparison `credit-saint-vs-sky-blue-credit`, sitemap index, and search state URL.
+- Independent debugger agent reviewed the approach before write/reclaim work and found no evidence that live rendering reads `public.audit_log`.
+
+Important:
+- Do not confuse this with TraderTrac. This incident was CreditDoc project `pndpnjjkhknmutlmlwsk`; the `lenders` table is CreditDoc-specific.
+- Do not reintroduce full `body_inline` snapshots into Supabase audit logging unless the DB plan/budget has changed.
+
 ## 2026-06-19 - Comparison batch runner guardrail orchestrator
 
 Status: Task 8 guardrail runner implemented, independently reviewed, verified, committed, and repo-clean. Not deployed; this is operator tooling only.
