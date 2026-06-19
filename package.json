@@ -14,6 +14,8 @@
     "comparison:claim-safety": "node scripts/check_comparison_claim_safety.mjs",
     "comparison:rendered-check": "node scripts/check_rendered_comparison_batch.mjs",
     "comparison:review-packet": "node scripts/build_comparison_review_packet.mjs",
+    "comparison:batch:preflight": "node scripts/run_comparison_batch_guarded.mjs --mode preflight",
+    "comparison:batch:check": "node scripts/run_comparison_batch_guarded.mjs --mode check",
     "preview": "astro preview",
     "astro": "astro"
   },

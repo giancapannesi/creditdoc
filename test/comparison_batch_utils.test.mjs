@@ -12,6 +12,7 @@ import {
   extractComparisonSourceFacts,
   checkRenderedComparisonBatch,
   buildComparisonReviewPacket,
+  buildComparisonPreflightReport,
   selectComparisonsForManifest,
   loadLendersForComparisons,
 } from '../scripts/lib/comparison_batch_utils.mjs';
@@ -236,6 +237,26 @@ test('review packet truncates long scanner snippets', () => {
   const text = packet.rows[0].scanner_findings.blockers[0].text;
   assert.equal(text.length, 283);
   assert.match(text, /\.\.\.$/);
+});
+
+test('preflight report allows selected slugs before any comparison edits', () => {
+  const report = buildComparisonPreflightReport({
+    manifest: {
+      batch_id: 'credit-repair-pricing-refunds-001',
+      group: 'credit-repair-pricing-refunds',
+      selected_slugs: ['alpha-vs-beta'],
+      allowed_fields: ['summary', 'winner_reason', 'seo_description'],
+    },
+    dbFreshness: { ok: true, jsonCount: 1, dbCount: 1, mismatches: [] },
+    factsPayload: { ok: true, blockers: [], comparisons: [{ slug: 'alpha-vs-beta' }] },
+  });
+
+  assert.equal(report.ok, true);
+  assert.equal(report.batch_id, 'credit-repair-pricing-refunds-001');
+  assert.equal(report.selected_count, 1);
+  assert.deepEqual(report.selected_slugs, ['alpha-vs-beta']);
+  assert.deepEqual(report.blockers, []);
+  assert.deepEqual(report.reports, ['db_freshness_report.json', 'source_facts.json', 'scope_preview.json']);
 });
 
 test('source fact extractor preserves pricing and uncertainty flags from lender data', () => {

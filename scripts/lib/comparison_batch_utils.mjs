@@ -240,6 +240,25 @@ export function buildComparisonReviewPacket({
   };
 }
 
+export function buildComparisonPreflightReport({ manifest, dbFreshness, factsPayload }) {
+  const blockers = [
+    ...(dbFreshness?.ok ? [] : ['comparison DB freshness check failed']),
+    ...((factsPayload?.blockers || []).map((blocker) => String(blocker))),
+  ];
+
+  return {
+    batch_id: manifest.batch_id || '',
+    group: manifest.group || '',
+    phase: 'preflight',
+    ok: blockers.length === 0,
+    selected_count: (manifest.selected_slugs || []).length,
+    selected_slugs: [...(manifest.selected_slugs || [])].sort(),
+    allowed_fields: manifest.allowed_fields || EDITABLE_COMPARISON_FIELDS,
+    blockers,
+    reports: ['db_freshness_report.json', 'source_facts.json', 'scope_preview.json'],
+  };
+}
+
 function compactArray(value, limit = 8) {
   return Array.isArray(value) ? value.filter(Boolean).slice(0, limit) : [];
 }
