@@ -36,14 +36,20 @@ Latest completed:
   - `npm run comparison:batch:preflight -- --manifest <manifest.json> --output-dir <reports-dir>`
   - `npm run comparison:batch:check -- --manifest <manifest.json> --output-dir <reports-dir>`
 - Runner is report/check tooling only. It does not edit content or DB rows.
+- Task 9/10 live verifier and campaign gate committed as `e2824fae5f feat: add comparison live and campaign gates`.
+- Additional commands now available:
+  - `npm run comparison:live-check -- --manifest <manifest.json> --output-dir <reports-dir>`
+  - `npm run comparison:campaign:report -- --campaign <campaign.json> --batch-dir <batch-dir> --output-dir <campaign-report-dir>`
+  - `npm run comparison:campaign:can-continue -- --campaign-report <campaign_report.json> --latest-batch-dir <batch-dir>`
 
 Immediate next:
 
-1. Implement the final checker result/evidence gate and campaign report wrapper before running any 20-page content batch.
-2. Keep Phase 1 as small batches only; no bulk comparison rewrites.
-3. Keep pricing/rating values only where they are current CreditDoc source fields, and keep copy framed as stored-field comparison rather than recommendation.
-4. Patch `summary`, `winner_reason`, and `seo_description` together for each selected comparison because all three can render or influence snippets.
-5. Once the checker/report wrapper is in place, run a reviewed first 20-page batch through preflight -> deterministic check -> independent content review -> final checker -> report. Stop and report before continuing.
+1. Prepare the first reviewed 20-page batch manifest from the balanced first-20 candidate list.
+2. Run preflight first and report the source facts/scope preview before editing content.
+3. Keep Phase 1 as small batches only; no bulk comparison rewrites.
+4. Keep pricing/rating values only where they are current CreditDoc source fields, and keep copy framed as stored-field comparison rather than recommendation.
+5. Patch `summary`, `winner_reason`, and `seo_description` together for each selected comparison because all three can render or influence snippets.
+6. For the batch loop, require: preflight -> deterministic check -> independent content review -> final checker result file -> campaign report -> can-continue gate. Stop and report before continuing to another batch.
 
 ## Active 2026-05-26 — Sitewide Page Upgrade Program
 

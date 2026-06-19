@@ -38,6 +38,42 @@ Important:
 - Do not confuse this with TraderTrac. This incident was CreditDoc project `pndpnjjkhknmutlmlwsk`; the `lenders` table is CreditDoc-specific.
 - Do not reintroduce full `body_inline` snapshots into Supabase audit logging unless the DB plan/budget has changed.
 
+## 2026-06-19 - Comparison live verifier and campaign gate
+
+Status: Task 9 and Task 10 guardrails implemented, independently reviewed, verified, committed, and repo-clean after docs handoff.
+
+Code commit:
+- `e2824fae5f feat: add comparison live and campaign gates`
+
+What changed:
+- Added `scripts/check_live_comparison_batch.mjs`.
+- Added `scripts/write_comparison_campaign_report.mjs`.
+- Added `scripts/check_comparison_campaign_can_continue.mjs`.
+- Added npm scripts:
+  - `comparison:live-check`
+  - `comparison:campaign:report`
+  - `comparison:campaign:can-continue`
+- Live verifier fetches each selected live `/compare/<slug>/` URL, requires HTTP 200, requires the three enrichment sections, and scans live HTML against the same source-backed claim rules.
+- Campaign reporter writes `campaign_report.json` and `campaign_report.md`.
+- Continue gate fails closed when the latest batch failed, final checker did not pass, live verifier failed, cumulative report has blockers, campaign reached planned batch count, or repo is dirty.
+- Fixed a scanner false positive by allowing dollar amounts found inside current source pricing strings, such as Credit Saint's `$195` setup-fee note.
+
+Verification:
+- Independent read-only checker agent `Ampere` returned PASS.
+- `npm run test:comparison-batch` passed: 46/46.
+- `node --check` passed for all new/changed comparison gate scripts.
+- `git diff --check` passed.
+- `npm run check:comparison-db-freshness` passed: 340 JSON rows, 340 DB rows, 0 mismatches.
+- Empty-manifest live-check smoke passed.
+- Campaign report and can-continue CLI smokes passed with clean temporary status.
+- Real live smoke for `credit-saint-vs-sky-blue-credit` returned 200, confirmed all enrichment sections, and passed with no blockers after the source-string `$195` fix.
+- Full guarded batch check smoke passed after the scanner fix and produced the complete evidence bundle.
+
+Important:
+- These scripts do not edit content pages, DB rows, lender JSON, routes, redirects, indexability, sitemap logic, or deploy state.
+- They only write explicit report files in the chosen output directory.
+- Campaign loops must run `comparison:campaign:can-continue`; the report writer alone is not the hard stop.
+
 ## 2026-06-19 - Comparison batch runner guardrail orchestrator
 
 Status: Task 8 guardrail runner implemented, independently reviewed, verified, committed, and repo-clean. Not deployed; this is operator tooling only.
