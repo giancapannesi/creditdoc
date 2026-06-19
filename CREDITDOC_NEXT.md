@@ -22,6 +22,17 @@ Next checks:
 
 Latest completed:
 
+- First reviewed 20-page comparison batch rendering/fact-safety work completed on 2026-06-19.
+- Rendered fact alignment commit: `e0940e5526 fix: align comparison rendered facts`.
+- Separate wellness cron content commit: `42ab02e0f3 content: add wellness guides`.
+- The batch preserved comparison-page value sections and linked tools/blog/course/local/research sections.
+- Fixed pricing contradictions for Brigit, Cosmo, Dovly, WalletHub, Experian, ACCC, InCharge, and other sampled pages where positive source pricing or paid tiers were being hidden by free/default tiers.
+- Fixed stale TransUnion/Experian research text so it uses bureau/monitoring signals instead of credit-repair/counseling framing.
+- Added `check:content-text-integrity` and wired it into `prebuild` to catch narrative JSON control-character/currency corruption.
+- Repaired corrupted ACCC profile text through the DB writer/export path.
+- Independent read-only reviewer `Dalton` passed after initially finding the Dovly/WalletHub and Experian paid-tier issue.
+- Verification passed: `npm run test:comparison-batch` 50/50, `npm run check:content-text-integrity`, `git diff --check`, `node --check` for changed scripts, `npm run check:comparison-db-freshness` 345/345, and full `npm run build` with prebuild/postbuild checks.
+- Scheduled comparison generator cron unexpectedly committed/pushed `85fa250de5 Add 5 comparison pages` during the batch. Do not rewrite history; continue from current branch state.
 - Phase 0 reliability fixes were committed, deployed, and live-verified.
 - Phase 1 workpack created at `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Pricing_Safety_Phase_1_2026-06-17/`.
 - First Phase 1 live-page patch slice updated 9 comparison records with stored-field comparison language and build verification.
@@ -44,12 +55,15 @@ Latest completed:
 
 Immediate next:
 
-1. Prepare the first reviewed 20-page batch manifest from the balanced first-20 candidate list.
-2. Run preflight first and report the source facts/scope preview before editing content.
-3. Keep Phase 1 as small batches only; no bulk comparison rewrites.
-4. Keep pricing/rating values only where they are current CreditDoc source fields, and keep copy framed as stored-field comparison rather than recommendation.
-5. Patch `summary`, `winner_reason`, and `seo_description` together for each selected comparison because all three can render or influence snippets.
-6. For the batch loop, require: preflight -> deterministic check -> independent content review -> final checker result file -> campaign report -> can-continue gate. Stop and report before continuing to another batch.
+1. Push the local commits if not already pushed.
+2. Do not deploy until release scope is reviewed.
+3. Generate/write the final batch report artifacts for the first 20-page stage, including the independent reviewer result.
+4. Run the campaign report and `comparison:campaign:can-continue` gate before selecting the next batch.
+5. Keep Phase 1 as small batches only; no bulk comparison rewrites.
+6. Keep pricing/rating values only where they are current CreditDoc source fields, including paid tiers; do not let free/default tiers hide real paid pricing.
+7. Keep copy framed as stored-field comparison rather than recommendation.
+8. Patch `summary`, `winner_reason`, and `seo_description` together for each selected comparison because all three can render or influence snippets.
+9. For the batch loop, require: preflight -> deterministic check -> independent content review -> final checker result file -> campaign report -> can-continue gate. Stop and report before continuing to another batch.
 
 ## Active 2026-05-26 — Sitewide Page Upgrade Program
 

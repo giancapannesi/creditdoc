@@ -4,6 +4,60 @@
 
 ---
 
+## 2026-06-19 - Comparison first-20 rendered fact alignment
+
+Status: first 20 comparison batch rendering/fact-safety work completed, independently reviewed, verified, and committed. Not deployed in this step.
+
+Commits:
+- `e0940e5526 fix: align comparison rendered facts`
+- `42ab02e0f3 content: add wellness guides` (separate wellness cron content commit; not part of the comparison fix)
+
+What changed:
+- Preserved comparison-page value sections while aligning rendered facts across summary, profile cards, side-by-side table, research notes, and FAQ.
+- Fixed monthly-price rendering when a provider has a real positive `pricing.monthly_price`; free tiers no longer hide the paid monthly value.
+- Fixed monthly-price rendering when a provider has `monthly_price: 0` but paid tiers exist; the page now shows the lowest positive paid tier instead of "No monthly subscription listed."
+- Fixed TransUnion/Experian credit-monitoring research copy so it uses bureau/monitoring service signals instead of stale credit-repair/counseling language.
+- Fixed comparison source-fact extraction to prefer rendered `company_info` BBB fields over older top-level BBB fields.
+- Added rendered/live claim scanning hardening so generated image metadata does not create false money-claim blockers.
+- Added `scripts/check_content_text_integrity.mjs` and wired it into `prebuild`; it blocks narrative JSON control-character/currency corruption while exempting legacy top-level address control characters.
+- Repaired corrupted American Consumer Credit Counseling profile text through the DB writer/export path:
+  - `best_for`: restored `$3,000-$50,000`.
+  - `diagnosis`: restored `$7/month` and `$3K-$50K`.
+
+Important incident note:
+- During the batch, the scheduled comparison generator cron committed and pushed `85fa250de5 Add 5 comparison pages`, which included the previously uncommitted comparison JSON changes plus 5 generated comparison rows.
+- I did not rewrite history or reset this. The follow-up manual commits only cover the rendered-fact/checker/template/data-integrity fixes and the separate wellness cron output.
+
+Verification:
+- `npm run test:comparison-batch` passed: 50/50.
+- `npm run check:content-text-integrity` passed.
+- `git diff --check` passed.
+- `node --check scripts/lib/comparison_batch_utils.mjs` passed.
+- `node --check scripts/check_content_text_integrity.mjs` passed.
+- `npm run check:comparison-db-freshness` passed: 345 JSON rows, 345 DB rows, 0 mismatches.
+- `npm run build` passed after the final paid-tier fix.
+- Prebuild checks passed: content text integrity, robots contract, SSR sitemap parity.
+- Postbuild checks passed: sitemap/robots conflicts and critical sitemap URLs.
+- Targeted rendered checks passed for:
+  - `brigit-vs-advance-america-claymont`
+  - `continental-credit-vs-cosmo-credit-repair`
+  - `the-credit-repairmen-vs-cosmo-credit-repair`
+  - `credit-supreme-credit-repair-miami--vs-cosmo-credit-repair`
+  - `dovly-vs-wallethub`
+  - `american-consumer-credit-counseling-vs-incharge-debt-solutions`
+  - `transunion-vs-experian`
+- Independent read-only reviewer `Dalton` initially failed the Dovly/WalletHub and Experian free-tier pricing issue, then passed after the final paid-tier fix and rebuild.
+
+Repo state:
+- After commits, the CreditDoc repo was locally clean before this memory/handoff update.
+- `origin/cdm-rev-hybrid` still needed the two local commits pushed at this checkpoint.
+
+Next:
+- Push the new commits when ready.
+- Do not deploy until release scope is reviewed.
+- Continue first-20/campaign work only through the guarded loop: deterministic checks -> independent review -> campaign report -> can-continue gate.
+- Keep the comparison pages rich; do not strip linked tools, blogs, courses, local pages, or research sections.
+
 ## 2026-06-19 - Supabase free-plan database size incident resolved
 
 Status: CreditDoc Supabase database size reduced below the free-plan threshold without changing live content tables.
