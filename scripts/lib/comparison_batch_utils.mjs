@@ -470,7 +470,7 @@ function hasNameReference(text, lender = {}) {
   return candidates.some((candidate) => {
     const normalized = String(candidate).replaceAll('-', ' ').trim();
     if (!normalized) return false;
-    return new RegExp(`\\b${escapeRegExp(normalized)}\\b`, 'i').test(String(text).replaceAll('-', ' '));
+    return new RegExp(`(?:^|[^\\w])${escapeRegExp(normalized)}(?=$|[^\\w])`, 'i').test(String(text).replaceAll('-', ' '));
   });
 }
 
@@ -565,7 +565,7 @@ function nextSeparatorOutsideRanges(text, separator, afterIndex, ranges) {
   return -1;
 }
 
-function accreditationClaimText(text, index, length, fact = {}) {
+function claimTextWithProtectedLenderNames(text, index, length, fact = {}) {
   const separators = [
     '.', '!', '?', ';',
     ' while ', ' whereas ', ' but ', ' however ', ' although ',
@@ -651,7 +651,7 @@ function scanTextForClaims({ slug, text, field, fact }) {
   const moneyMatches = text.matchAll(MONEY_PATTERN);
   for (const match of moneyMatches) {
     const amount = normalizeMoneyAmount(`${match[1]}${match[2] || ''}`);
-    const context = clauseClaimText(text, match.index, match[0].length) || localClaimText(text, match.index, match[0].length);
+    const context = claimTextWithProtectedLenderNames(text, match.index, match[0].length, fact) || localClaimText(text, match.index, match[0].length);
     if (isAmountAllowedForClaim({ fact, amount, context })) {
       info.push({ slug, field, type: 'source_supported_money_amount', amount });
     } else {
@@ -666,7 +666,7 @@ function scanTextForClaims({ slug, text, field, fact }) {
     ...text.matchAll(/([0-9]+(?:\.\d+)?)\s+(?:apr|interest\s+rate)\b/gi),
   ];
   for (const match of rateMatches) {
-    const context = clauseClaimText(text, match.index, match[0].length) || localClaimText(text, match.index, match[0].length);
+    const context = claimTextWithProtectedLenderNames(text, match.index, match[0].length, fact) || localClaimText(text, match.index, match[0].length);
     if (!/\b(apr|rate|interest)\b/i.test(context)) continue;
     const rate = normalizeRateAmount(match[1]);
     if (isRateAllowedForClaim({ fact, rate, context })) {
@@ -687,7 +687,7 @@ function scanTextForClaims({ slug, text, field, fact }) {
 
   const accreditationMatches = text.matchAll(/\b(accredited|accreditation)\b/gi);
   for (const match of accreditationMatches) {
-    const narrowContext = accreditationClaimText(text, match.index, match[0].length, fact);
+    const narrowContext = claimTextWithProtectedLenderNames(text, match.index, match[0].length, fact);
     const broadContext = clauseClaimText(text, match.index, match[0].length);
     const narrowReferences = referencedLenders(narrowContext, fact);
     const broadReferences = referencedLenders(broadContext, fact);
@@ -729,6 +729,48 @@ function claimScanTextFromHtml(html) {
     .replace(/<head\b[\s\S]*?<\/head>/gi, '')
     .replace(/<script\b[\s\S]*?<\/script>/gi, '')
     .replace(/<style\b[\s\S]*?<\/style>/gi, '');
+}
+
+function textFromHtmlFragment(html) {
+  return String(html || '')
+    .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&#34;/g, '"')
+    .replace(/&quot;/g, '"')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function scanRenderedTableMoneyClaims({ slug, html, field, fact }) {
+  const blockers = [];
+  const info = [];
+  const rowMatches = String(html || '').matchAll(/<tr\b[\s\S]*?<\/tr>/gi);
+  for (const rowMatch of rowMatches) {
+    const cells = [...rowMatch[0].matchAll(/<t[dh]\b[\s\S]*?<\/t[dh]>/gi)].map((match) => match[0]);
+    if (cells.length < 3) continue;
+    const feature = textFromHtmlFragment(cells[0]);
+    if (!/^(Monthly Price|Setup Fee)$/i.test(feature)) continue;
+
+    const columns = [
+      { lenderKey: 'lender_a', lender: fact?.lender_a || {}, cell: cells[1] },
+      { lenderKey: 'lender_b', lender: fact?.lender_b || {}, cell: cells[2] },
+    ];
+    for (const column of columns) {
+      const allowed = allowedMoneyAmountsFor(column.lender);
+      for (const match of column.cell.matchAll(MONEY_PATTERN)) {
+        const amount = normalizeMoneyAmount(`${match[1]}${match[2] || ''}`);
+        if (allowed.has(amount)) {
+          info.push({ slug, field, type: 'source_supported_table_money_amount', amount, lender: column.lenderKey, feature });
+        } else {
+          blockers.push({ slug, field, type: 'unsupported_table_money_amount', amount, match: match[0], lender: column.lenderKey, feature });
+        }
+      }
+    }
+  }
+  return { blockers, info };
 }
 
 export function checkComparisonClaimSafety({ comparisons, factsBySlug }) {
@@ -777,9 +819,17 @@ export function checkRenderedComparisonBatch({ distDir = 'dist', selectedSlugs, 
       field: 'rendered_html',
       fact: factsBySlug[slug] || {},
     });
+    const tableResult = scanRenderedTableMoneyClaims({
+      slug,
+      html,
+      field: 'rendered_html',
+      fact: factsBySlug[slug] || {},
+    });
     blockers.push(...result.blockers);
+    blockers.push(...tableResult.blockers);
     reviews.push(...result.reviews);
     info.push(...result.info);
+    info.push(...tableResult.info);
     pages.push({ slug, path, exists: true, sections_ok: missingSections.length === 0, missing_sections: missingSections });
   }
   return { ok: blockers.length === 0, pages, blockers, reviews, info };
@@ -828,9 +878,17 @@ export async function checkLiveComparisonBatch({
       field: 'live_html',
       fact: factsBySlug[slug] || {},
     });
+    const tableResult = scanRenderedTableMoneyClaims({
+      slug,
+      html,
+      field: 'live_html',
+      fact: factsBySlug[slug] || {},
+    });
     blockers.push(...result.blockers);
+    blockers.push(...tableResult.blockers);
     reviews.push(...result.reviews);
     info.push(...result.info);
+    info.push(...tableResult.info);
     pages.push({
       slug,
       url,

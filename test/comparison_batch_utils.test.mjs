@@ -1033,6 +1033,109 @@ test('claim scanner does not treat punctuation plus next word as money suffix', 
   assert.equal(result.ok, true);
 });
 
+test('rendered scanner allows two-decimal display for sourced integer monthly prices', () => {
+  const dir = tempDir();
+  const compareDir = join(dir, 'compare', 'alpha-vs-beta');
+  mkdirSync(compareDir, { recursive: true });
+  writeFileSync(join(compareDir, 'index.html'), [
+    '<h2>Quick Decision Map</h2>',
+    '<h2>CreditDoc Tools and Guides for This Comparison</h2>',
+    '<h2>Before You Contact Either Company</h2>',
+    '<table>',
+    '<tr><th>Feature</th><th>Alpha Counseling</th><th>Beta Debt</th></tr>',
+    '<tr><td>Monthly Price</td><td>From $7.00/mo</td><td>From $33.00/mo</td></tr>',
+    '</table>',
+  ].join('\n'));
+
+  const result = checkRenderedComparisonBatch({
+    distDir: dir,
+    selectedSlugs: ['alpha-vs-beta'],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha Counseling', pricing: { monthly_price: 7 }, bbb_accredited: false },
+        lender_b: { name: 'Beta Debt', pricing: { monthly_price: 33 }, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('rendered scanner allows sourced nonprofit counseling table prices with legal names', () => {
+  const dir = tempDir();
+  const compareDir = join(dir, 'compare', 'american-consumer-credit-counseling-vs-incharge-debt-solutions');
+  mkdirSync(compareDir, { recursive: true });
+  writeFileSync(join(compareDir, 'index.html'), [
+    '<h2>Quick Decision Map</h2>',
+    '<h2>CreditDoc Tools and Guides for This Comparison</h2>',
+    '<h2>Before You Contact Either Company</h2>',
+    '<table>',
+    '<tr><th>Feature</th><th><img alt="American Consumer Credit Counseling, Inc.">American Consumer Credit Counseling, Inc.</th><th><img alt="Incharge Debt Solutions">Incharge Debt Solutions</th></tr>',
+    '<tr><td>Monthly Price</td><td><span>From $7.00/mo</span><span>Lower</span></td><td><span>From $33.00/mo</span></td></tr>',
+    '<tr><td>Setup Fee</td><td>$39.00</td><td>$52.00</td></tr>',
+    '</table>',
+  ].join('\n'));
+
+  const result = checkRenderedComparisonBatch({
+    distDir: dir,
+    selectedSlugs: ['american-consumer-credit-counseling-vs-incharge-debt-solutions'],
+    factsBySlug: {
+      'american-consumer-credit-counseling-vs-incharge-debt-solutions': {
+        lender_a: {
+          name: 'American Consumer Credit Counseling, Inc.',
+          pricing: { monthly_price: 7, setup_fee: 39 },
+          bbb_accredited: true,
+        },
+        lender_b: {
+          name: 'Incharge Debt Solutions',
+          pricing: { monthly_price: 33, setup_fee: 52 },
+          bbb_accredited: true,
+        },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('rendered scanner blocks swapped side-by-side table prices', () => {
+  const dir = tempDir();
+  const compareDir = join(dir, 'compare', 'american-consumer-credit-counseling-vs-incharge-debt-solutions');
+  mkdirSync(compareDir, { recursive: true });
+  writeFileSync(join(compareDir, 'index.html'), [
+    '<h2>Quick Decision Map</h2>',
+    '<h2>CreditDoc Tools and Guides for This Comparison</h2>',
+    '<h2>Before You Contact Either Company</h2>',
+    '<table>',
+    '<tr><th>Feature</th><th>American Consumer Credit Counseling, Inc.</th><th>Incharge Debt Solutions</th></tr>',
+    '<tr><td>Monthly Price</td><td><span>From $33.00/mo</span></td><td><span>From $7.00/mo</span></td></tr>',
+    '<tr><td>Setup Fee</td><td>$52.00</td><td>$39.00</td></tr>',
+    '</table>',
+  ].join('\n'));
+
+  const result = checkRenderedComparisonBatch({
+    distDir: dir,
+    selectedSlugs: ['american-consumer-credit-counseling-vs-incharge-debt-solutions'],
+    factsBySlug: {
+      'american-consumer-credit-counseling-vs-incharge-debt-solutions': {
+        lender_a: {
+          name: 'American Consumer Credit Counseling, Inc.',
+          pricing: { monthly_price: 7, setup_fee: 39 },
+          bbb_accredited: true,
+        },
+        lender_b: {
+          name: 'Incharge Debt Solutions',
+          pricing: { monthly_price: 33, setup_fee: 52 },
+          bbb_accredited: true,
+        },
+      },
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.blockers.filter((blocker) => blocker.type === 'unsupported_table_money_amount').length, 4);
+});
+
 test('rendered scanner requires enrichment sections and scans rendered claims', () => {
   const dir = tempDir();
   const compareDir = join(dir, 'compare', 'alpha-vs-beta');
