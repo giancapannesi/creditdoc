@@ -8,6 +8,42 @@
 
 Status: first 20 comparison batch rendering/fact-safety work completed, independently reviewed, verified, and committed. Not deployed in this step.
 
+### 2026-06-19 - Campaign gate follow-up
+
+Status: first-20 local/final checker passed, campaign continuation is blocked by live production verification.
+
+Additional commit:
+- `2ff0c35d4c test: tighten comparison table claim scanner`
+
+What changed:
+- Tightened the comparison claim-safety checker after independent reviewer `Faraday` found that rendered side-by-side table prices could be swapped and still pass if both lender names appeared in the extracted table context.
+- Added rendered-table-specific money checks for `Monthly Price` and `Setup Fee` rows so each value is checked against the correct lender column.
+- Added regressions for sourced two-decimal monthly prices, legal names ending in punctuation such as `Inc.`, and swapped side-by-side table prices.
+- This is checker/test code only. It does not change page content, DB rows, lender JSON, routes, indexability, redirects, or deploy state.
+
+Verification:
+- `npm run test:comparison-batch` passed: 53/53.
+- `node --check scripts/lib/comparison_batch_utils.mjs` passed.
+- `git diff --check` passed.
+- `npm run check:content-text-integrity` passed.
+- `npm run check:comparison-db-freshness` passed: 345 JSON rows, 345 DB rows, 0 mismatches.
+- `npm run build` passed with prebuild and postbuild checks.
+- Current local rendered first-20 report passed: 20 pages, 0 blockers.
+- Independent reviewer `Faraday` first returned FAIL for the swapped-table gap, then PASS after the rendered table checker/regression was added.
+
+Campaign artifacts:
+- Batch final artifact dir:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_First_20_Batch_2026-06-19/final-campaign-batch-001/`
+- Campaign report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_First_20_Batch_2026-06-19/campaign-report/campaign_report.json`
+- `comparison:campaign:can-continue` result: blocked.
+
+Current blocker:
+- Live production verifier fetched all 20 pages successfully with HTTP 200 and all required enrichment sections present.
+- Live production claim-safety still failed with 15 blockers across 8 pages, so `can_start_next_batch` is false.
+- Do not start the next comparison batch until production live verification passes or the live blockers are reviewed and resolved.
+- Do not strip comparison-page value sections; local output already preserves the enriched sections and passes rendered checks.
+
 Commits:
 - `e0940e5526 fix: align comparison rendered facts`
 - `42ab02e0f3 content: add wellness guides` (separate wellness cron content commit; not part of the comparison fix)

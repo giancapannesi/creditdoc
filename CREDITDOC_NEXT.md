@@ -55,10 +55,10 @@ Latest completed:
 
 Immediate next:
 
-1. Push the local commits if not already pushed.
-2. Do not deploy until release scope is reviewed.
-3. Generate/write the final batch report artifacts for the first 20-page stage, including the independent reviewer result.
-4. Run the campaign report and `comparison:campaign:can-continue` gate before selecting the next batch.
+1. Stop before selecting the next comparison batch: `comparison:campaign:can-continue` is currently blocked by live production verifier failures.
+2. Review the first-20 release/deploy scope. Local current output passes build and rendered checks, but production HTML still has 15 live claim-safety blockers across 8 pages.
+3. If approved, deploy the already-pushed comparison fixes through the documented Cloudflare Worker path, then rerun `npm run comparison:live-check -- --manifest <final-campaign-batch-001/manifest.json> --output-dir <new-live-check-dir>`.
+4. Only after live verification passes, regenerate the campaign report and rerun `comparison:campaign:can-continue`.
 5. Keep Phase 1 as small batches only; no bulk comparison rewrites.
 6. Keep pricing/rating values only where they are current CreditDoc source fields, including paid tiers; do not let free/default tiers hide real paid pricing.
 7. Keep copy framed as stored-field comparison rather than recommendation.
