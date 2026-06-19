@@ -10,6 +10,7 @@ export const REQUIRED_RENDERED_SECTIONS = [
   'CreditDoc Tools and Guides for This Comparison',
   'Before You Contact Either Company',
 ];
+const MONEY_PATTERN = /\$([0-9]+(?:,[0-9]{3})*(?:\.\d{1,2})?)([KMB])?\b/gi;
 
 export function readJson(path) {
   return JSON.parse(readFileSync(path, 'utf8'));
@@ -270,19 +271,20 @@ function hasPricing(pricing) {
 }
 
 function lenderFacts(lender = {}) {
-  const bbbAccredited = lender.bbb_accredited ?? lender.bbb_data?.accredited ?? lender.company_info?.bbb_accredited ?? null;
+  const bbbAccredited = lender.company_info?.bbb_accredited ?? lender.bbb_data?.accredited ?? lender.bbb_accredited ?? null;
   return {
     slug: lender.slug || '',
     name: lender.name || '',
     category: lender.category || '',
     pricing: lender.pricing || {},
-    bbb_rating: lender.bbb_rating ?? lender.bbb_data?.rating ?? lender.company_info?.bbb_rating ?? '',
+    bbb_rating: lender.company_info?.bbb_rating ?? lender.bbb_data?.rating ?? lender.bbb_rating ?? '',
     bbb_accredited: bbbAccredited,
     google_rating: lender.google_rating ?? null,
     google_reviews: lender.google_reviews ?? lender.google_reviews_count ?? null,
     services: compactArray(lender.services),
     pros: compactArray(lender.pros),
     cons: compactArray(lender.cons),
+    best_for: compactArray(lender.best_for),
   };
 }
 
@@ -337,21 +339,25 @@ export function loadLendersForComparisons({ comparisons, lendersDir = 'src/conte
 
 function collectPricingNumbers(pricing = {}) {
   const numbers = new Set();
+  const addAmount = (rawAmount, suffix = '') => {
+    let amount = Number(String(rawAmount).replaceAll(',', ''));
+    if (!Number.isFinite(amount) || amount <= 0) return;
+    if (/^k$/i.test(suffix)) amount *= 1000;
+    if (/^m$/i.test(suffix)) amount *= 1000000;
+    if (/^b$/i.test(suffix)) amount *= 1000000000;
+    numbers.add(String(Math.round(amount * 100) / 100));
+    numbers.add(String(Math.round(amount)));
+  };
   const visit = (value) => {
     if (value == null) return;
     if (typeof value === 'number' && Number.isFinite(value)) {
       if (value <= 0) return;
-      numbers.add(String(Math.round(value * 100) / 100));
-      numbers.add(String(Math.round(value)));
+      addAmount(value);
       return;
     }
     if (typeof value === 'string') {
-      for (const match of value.matchAll(/\$([0-9][0-9,]*(?:\.\d{1,2})?)/g)) {
-        const amount = Number(match[1].replaceAll(',', ''));
-        if (amount > 0) {
-          numbers.add(String(Math.round(amount * 100) / 100));
-          numbers.add(String(Math.round(amount)));
-        }
+      for (const match of value.matchAll(MONEY_PATTERN)) {
+        addAmount(match[1], match[2]);
       }
       return;
     }
@@ -369,19 +375,28 @@ function collectPricingNumbers(pricing = {}) {
 
 function collectRateNumbers(pricing = {}) {
   const rates = new Set();
+  const addRate = (rawRate) => {
+    const rate = Number(String(rawRate).replaceAll(',', ''));
+    if (!Number.isFinite(rate)) return;
+    rates.add(String(Math.round(rate * 100) / 100));
+    rates.add(String(Math.round(rate)));
+  };
   const visit = (value, key = '') => {
     if (value == null) return;
     const keyLooksLikeRate = /\b(apr|rate|interest)\b/i.test(key);
     if (typeof value === 'number' && Number.isFinite(value) && keyLooksLikeRate) {
-      rates.add(String(Math.round(value * 100) / 100));
-      rates.add(String(Math.round(value)));
+      addRate(value);
       return;
     }
-    if (typeof value === 'string' && keyLooksLikeRate) {
-      const match = value.match(/([0-9]+(?:\.\d+)?)/);
-      if (match) {
-        rates.add(String(Math.round(Number(match[1]) * 100) / 100));
-        rates.add(String(Math.round(Number(match[1]))));
+    if (typeof value === 'string') {
+      const textLooksLikeRate = keyLooksLikeRate || /\b(apr|rate|interest)\b/i.test(value);
+      if (textLooksLikeRate) {
+        for (const match of value.matchAll(/([0-9]+(?:\.\d+)?)\s*(?:%|percent)/gi)) {
+          addRate(match[1]);
+        }
+        for (const match of value.matchAll(/\b(?:apr|interest\s+rate|rate|interest)\s+(?:of\s+)?([0-9]+(?:\.\d+)?)/gi)) {
+          addRate(match[1]);
+        }
       }
       return;
     }
@@ -398,7 +413,13 @@ function collectRateNumbers(pricing = {}) {
 }
 
 function normalizeMoneyAmount(value) {
-  return String(Number(String(value).replaceAll(',', '')) || 0);
+  const match = String(value).match(/^([0-9][0-9,]*(?:\.\d{1,2})?)\s*([KMB])?$/i);
+  if (!match) return String(Number(String(value).replaceAll(',', '')) || 0);
+  let amount = Number(match[1].replaceAll(',', ''));
+  if (/^k$/i.test(match[2] || '')) amount *= 1000;
+  if (/^m$/i.test(match[2] || '')) amount *= 1000000;
+  if (/^b$/i.test(match[2] || '')) amount *= 1000000000;
+  return String(amount || 0);
 }
 
 function normalizeRateAmount(value) {
@@ -413,11 +434,23 @@ function lenderFactEntries(fact = {}) {
 }
 
 function allowedMoneyAmountsFor(lender = {}) {
-  return new Set([...collectPricingNumbers(lender.pricing)].map(normalizeMoneyAmount));
+  return new Set([
+    ...collectPricingNumbers(lender.pricing),
+    ...collectPricingNumbers(lender.services),
+    ...collectPricingNumbers(lender.pros),
+    ...collectPricingNumbers(lender.cons),
+    ...collectPricingNumbers(lender.best_for),
+  ].map(normalizeMoneyAmount));
 }
 
 function allowedRateAmountsFor(lender = {}) {
-  return new Set([...collectRateNumbers(lender.pricing)].map(normalizeRateAmount));
+  return new Set([
+    ...collectRateNumbers(lender.pricing),
+    ...collectRateNumbers(lender.services),
+    ...collectRateNumbers(lender.pros),
+    ...collectRateNumbers(lender.cons),
+    ...collectRateNumbers(lender.best_for),
+  ].map(normalizeRateAmount));
 }
 
 function allAllowedMoneyAmounts(fact = {}) {
@@ -615,9 +648,9 @@ function scanTextForClaims({ slug, text, field, fact }) {
   const blockers = [];
   const reviews = [];
   const info = [];
-  const moneyMatches = text.matchAll(/\$([0-9][0-9,]*(?:\.\d{1,2})?)/g);
+  const moneyMatches = text.matchAll(MONEY_PATTERN);
   for (const match of moneyMatches) {
-    const amount = normalizeMoneyAmount(match[1]);
+    const amount = normalizeMoneyAmount(`${match[1]}${match[2] || ''}`);
     const context = clauseClaimText(text, match.index, match[0].length) || localClaimText(text, match.index, match[0].length);
     if (isAmountAllowedForClaim({ fact, amount, context })) {
       info.push({ slug, field, type: 'source_supported_money_amount', amount });
@@ -691,6 +724,13 @@ function scanTextForClaims({ slug, text, field, fact }) {
   return { blockers, reviews, info };
 }
 
+function claimScanTextFromHtml(html) {
+  return String(html || '')
+    .replace(/<head\b[\s\S]*?<\/head>/gi, '')
+    .replace(/<script\b[\s\S]*?<\/script>/gi, '')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, '');
+}
+
 export function checkComparisonClaimSafety({ comparisons, factsBySlug }) {
   const blockers = [];
   const reviews = [];
@@ -733,7 +773,7 @@ export function checkRenderedComparisonBatch({ distDir = 'dist', selectedSlugs, 
     }
     const result = scanTextForClaims({
       slug,
-      text: html,
+      text: claimScanTextFromHtml(html),
       field: 'rendered_html',
       fact: factsBySlug[slug] || {},
     });
@@ -784,7 +824,7 @@ export async function checkLiveComparisonBatch({
 
     const result = scanTextForClaims({
       slug,
-      text: html,
+      text: claimScanTextFromHtml(html),
       field: 'live_html',
       fact: factsBySlug[slug] || {},
     });

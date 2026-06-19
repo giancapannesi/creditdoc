@@ -23,9 +23,12 @@ function listedPrice(price: number | undefined): number | null {
 
 function lowestListedMonthlyPrice(lender: Lender): number | null {
   const monthlyPrice = listedPrice(lender.pricing.monthly_price);
+  if (monthlyPrice !== null && monthlyPrice > 0) return monthlyPrice;
+
   const comparableTiers = lender.pricing.tiers
     .map(tier => listedPrice(tier.price))
     .filter((price): price is number => price !== null)
+    .filter(price => price > 0)
     .filter(price => monthlyPrice === null || monthlyPrice === 0 || price <= monthlyPrice * 2);
 
   if (comparableTiers.length > 0) return Math.min(...comparableTiers);

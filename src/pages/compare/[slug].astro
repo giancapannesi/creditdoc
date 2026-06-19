@@ -348,10 +348,10 @@ function softenComparisonText(text: string): string {
 const safeSummary = softenComparisonText(comparison.summary);
 const safeWinnerReason = softenComparisonText(comparison.winner_reason);
 const displayComparisonTitle = `${lenderA.name} vs ${lenderB.name} (2026)`;
-const lenderASignals = lenderA.best_for.slice(0, 2).map(softenComparisonText).join('. ');
-const lenderBSignals = lenderB.best_for.slice(0, 2).map(softenComparisonText).join('. ');
-const lenderAStrength = softenComparisonText(lenderA.pros[0] || 'Review the profile fields before contacting the provider');
-const lenderBStrength = softenComparisonText(lenderB.pros[0] || 'Review the profile fields before contacting the provider');
+const lenderASignals = profileSignals(lenderA);
+const lenderBSignals = profileSignals(lenderB);
+const lenderAStrength = profileStrength(lenderA);
+const lenderBStrength = profileStrength(lenderB);
 
 function setupFeeContext(lender: Lender): string {
   return lender.pricing.setup_fee > 0
@@ -365,9 +365,11 @@ function listedPrice(price: number | undefined): number | null {
 
 function lowestListedMonthlyPrice(lender: Lender): number | null {
   const monthlyPrice = listedPrice(lender.pricing.monthly_price);
+  if (monthlyPrice !== null && monthlyPrice > 0) return monthlyPrice;
   const comparableTiers = lender.pricing.tiers
     .map(tier => listedPrice(tier.price))
     .filter((price): price is number => price !== null)
+    .filter(price => price > 0)
     .filter(price => monthlyPrice === null || monthlyPrice === 0 || price <= monthlyPrice * 2);
 
   if (comparableTiers.length > 0) return Math.min(...comparableTiers);
@@ -542,8 +544,25 @@ function topServiceSignals(lender: Lender): string[] {
     ...(lender.pros || []),
   ]
     .filter(Boolean)
+    .filter(item => !(lender.category === 'credit-monitoring' && /^(creditor negotiations|credit counseling)\b/i.test(String(item).trim())))
     .slice(0, 4)
     .map(item => softenComparisonText(String(item)).replace(/[.\s]+$/g, ''));
+}
+
+function profileSignals(lender: Lender): string {
+  if (lender.category === 'credit-monitoring') {
+    const signals = topServiceSignals(lender).slice(0, 2);
+    if (signals.length > 0) return signals.join('. ');
+  }
+  return lender.best_for.slice(0, 2).map(softenComparisonText).join('. ');
+}
+
+function profileStrength(lender: Lender): string {
+  if (lender.category === 'credit-monitoring') {
+    const signals = topServiceSignals(lender);
+    if (signals.length > 2) return signals[2];
+  }
+  return softenComparisonText(lender.pros[0] || 'Review the profile fields before contacting the provider');
 }
 
 function decisionMapLine(lender: Lender): string {

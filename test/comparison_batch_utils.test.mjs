@@ -321,6 +321,33 @@ test('source fact extractor reads BBB facts from company_info', () => {
   assert.equal(facts.flags.bbb_accreditation_supported_b, false);
 });
 
+test('source fact extractor prefers rendered company_info BBB facts over legacy top-level fields', () => {
+  const facts = extractComparisonSourceFacts({
+    comparison: { slug: 'alpha-vs-beta', lender_a: 'alpha', lender_b: 'beta' },
+    lendersBySlug: {
+      alpha: {
+        slug: 'alpha',
+        name: 'Alpha Credit',
+        bbb_rating: 'A+',
+        bbb_accredited: true,
+        company_info: { bbb_rating: 'F', bbb_accredited: false },
+      },
+      beta: {
+        slug: 'beta',
+        name: 'Beta Credit',
+        bbb_rating: 'B-',
+        bbb_accredited: false,
+        company_info: { bbb_rating: 'A+', bbb_accredited: true },
+      },
+    },
+  });
+
+  assert.equal(facts.lender_a.bbb_rating, 'F');
+  assert.equal(facts.lender_a.bbb_accredited, false);
+  assert.equal(facts.lender_b.bbb_rating, 'A+');
+  assert.equal(facts.lender_b.bbb_accredited, true);
+});
+
 test('lender loader records missing lender source files as blockers', () => {
   const dir = tempDir();
   mkdirSync(join(dir, 'lenders'), { recursive: true });
@@ -954,6 +981,58 @@ test('claim scanner allows dollar amounts from pricing source strings', () => {
   assert.equal(result.ok, true);
 });
 
+test('claim scanner allows source-backed money and rate claims from service fields', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha offers loans from $300 to $10,000 and rates from 143% to 200% APR for consumers with $5,000 in unsecured debt.',
+      winner_reason: 'Alpha also lists properties over $100K.',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: {
+          name: 'Alpha',
+          pricing: {},
+          services: [
+            'Fixed-rate personal loans ($300–$10,000)',
+            'Installment loans (143%–200%+ APR)',
+            'Properties over $100K',
+          ],
+          best_for: ['Consumers with $5,000+ in unsecured debt'],
+          bbb_accredited: false,
+        },
+        lender_b: { name: 'Beta', pricing: {}, services: [], bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('claim scanner does not treat punctuation plus next word as money suffix', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha costs $33; BBB rating shown as A+. Beta costs $25, while monitoring scope should be verified.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: {
+          name: 'Alpha',
+          pricing: { monthly_price: 33 },
+          bbb_accredited: false,
+        },
+        lender_b: { name: 'Beta', pricing: { monthly_price: 25 }, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
 test('rendered scanner requires enrichment sections and scans rendered claims', () => {
   const dir = tempDir();
   const compareDir = join(dir, 'compare', 'alpha-vs-beta');
@@ -995,6 +1074,31 @@ test('rendered scanner blocks missing enrichment sections', () => {
 
   assert.equal(result.ok, false);
   assert.equal(result.blockers[0].type, 'missing_rendered_section');
+});
+
+test('rendered scanner ignores truncated money inside generated image meta tags', () => {
+  const dir = tempDir();
+  const compareDir = join(dir, 'compare', 'alpha-vs-beta');
+  mkdirSync(compareDir, { recursive: true });
+  writeFileSync(join(compareDir, 'index.html'), [
+    '<html><head>',
+    '<meta property="og:image" content="/_image?text=Alpha%20currently%20shows%20$8...">',
+    '<meta name="twitter:image" content="/_image?text=Alpha%20currently%20shows%20$8...">',
+    '</head><body>',
+    '<h2>Quick Decision Map</h2>',
+    '<h2>CreditDoc Tools and Guides for This Comparison</h2>',
+    '<h2>Before You Contact Either Company</h2>',
+    '<p>Alpha currently shows $89/month.</p>',
+    '</body></html>',
+  ].join('\n'));
+
+  const result = checkRenderedComparisonBatch({
+    distDir: dir,
+    selectedSlugs: ['alpha-vs-beta'],
+    factsBySlug: { 'alpha-vs-beta': { lender_a: { pricing: { monthly_price: 89 } }, lender_b: { pricing: {} } } },
+  });
+
+  assert.equal(result.ok, true);
 });
 
 test('live verifier requires HTTP 200 and rendered comparison enrichment sections', async () => {
