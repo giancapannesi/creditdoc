@@ -16,6 +16,9 @@
     "comparison:review-packet": "node scripts/build_comparison_review_packet.mjs",
     "comparison:batch:preflight": "node scripts/run_comparison_batch_guarded.mjs --mode preflight",
     "comparison:batch:check": "node scripts/run_comparison_batch_guarded.mjs --mode check",
+    "comparison:live-check": "node scripts/check_live_comparison_batch.mjs",
+    "comparison:campaign:report": "node scripts/write_comparison_campaign_report.mjs",
+    "comparison:campaign:can-continue": "node scripts/check_comparison_campaign_can_continue.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

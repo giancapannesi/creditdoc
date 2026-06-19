@@ -6,8 +6,11 @@ import { join } from 'node:path';
 import test from 'node:test';
 
 import {
+  buildComparisonCampaignReport,
   checkComparisonClaimSafety,
   checkComparisonDbFreshness,
+  checkComparisonCampaignCanContinue,
+  checkLiveComparisonBatch,
   compareComparisonBatchScope,
   extractComparisonSourceFacts,
   checkRenderedComparisonBatch,
@@ -925,6 +928,32 @@ test('claim scanner does not treat default zero pricing as support for free serv
   assert.equal(result.blockers[0].type, 'unsupported_free_pricing_claim');
 });
 
+test('claim scanner allows dollar amounts from pricing source strings', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Alpha lists a $195 setup fee for its top plan.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: {
+          name: 'Alpha',
+          pricing: {
+            monthly_price: 79,
+            guarantee_details: 'Setup fees: $99 for Basic and $195 for Clean Slate.',
+          },
+          bbb_accredited: false,
+        },
+        lender_b: { name: 'Beta', pricing: {}, bbb_accredited: false },
+      },
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
 test('rendered scanner requires enrichment sections and scans rendered claims', () => {
   const dir = tempDir();
   const compareDir = join(dir, 'compare', 'alpha-vs-beta');
@@ -966,4 +995,106 @@ test('rendered scanner blocks missing enrichment sections', () => {
 
   assert.equal(result.ok, false);
   assert.equal(result.blockers[0].type, 'missing_rendered_section');
+});
+
+test('live verifier requires HTTP 200 and rendered comparison enrichment sections', async () => {
+  const report = await checkLiveComparisonBatch({
+    selectedSlugs: ['alpha-vs-beta', 'missing-vs-page'],
+    factsBySlug: {},
+    fetchImpl: async (url) => {
+      if (url.endsWith('/alpha-vs-beta/')) {
+        return {
+          status: 200,
+          text: async () => [
+            'Quick Decision Map',
+            'CreditDoc Tools and Guides for This Comparison',
+            'Before You Contact Either Company',
+          ].join('\n'),
+        };
+      }
+      return { status: 404, text: async () => 'not found' };
+    },
+  });
+
+  assert.equal(report.ok, false);
+  assert.equal(report.pages[0].status, 200);
+  assert.equal(report.pages[0].sections_ok, true);
+  assert.equal(report.blockers[0].slug, 'missing-vs-page');
+  assert.equal(report.blockers[0].type, 'live_http_status');
+});
+
+test('campaign report blocks continuation until final checker passes and repo is clean', () => {
+  const report = buildComparisonCampaignReport({
+    campaignManifest: {
+      campaign_id: 'comparison-pricing-safety-10x20-001',
+      batch_count: 10,
+      batch_size: 20,
+      max_total_rows: 200,
+    },
+    batchManifests: [{
+      batch_id: 'batch-001',
+      selected_slugs: ['alpha-vs-beta', 'gamma-vs-delta'],
+    }],
+    batchStatuses: [{ batch_id: 'batch-001', ok: true, blockers: [], reports: ['review_packet.md'] }],
+    finalCheckerResults: [{ batch_id: 'batch-001', ok: true, verdict: 'pass' }],
+    liveReports: [{ batch_id: 'batch-001', ok: true }],
+    gitStatus: '',
+  });
+
+  assert.equal(report.ok, true);
+  assert.equal(report.progress.completed_batches, 1);
+  assert.equal(report.totals.selected_pages, 2);
+  assert.equal(report.can_start_next_batch, true);
+
+  const blocked = checkComparisonCampaignCanContinue({
+    campaignReport: report,
+    latestBatchStatus: { batch_id: 'batch-001', ok: true, blockers: [] },
+    finalCheckerResult: { batch_id: 'batch-001', ok: false, verdict: 'needs correction' },
+    liveReport: { batch_id: 'batch-001', ok: true },
+    gitStatus: ' M src/content/comparisons.json\n',
+  });
+
+  assert.equal(blocked.ok, false);
+  assert.match(blocked.blockers.join('\n'), /final checker did not pass/);
+  assert.match(blocked.blockers.join('\n'), /repo is dirty/);
+});
+
+test('campaign continue gate blocks live failures, report blockers, and completed campaigns', () => {
+  const base = {
+    campaignReport: {
+      blockers: [],
+      progress: { completed_batches: 1, planned_batches: 10 },
+    },
+    latestBatchStatus: { batch_id: 'batch-001', ok: true, blockers: [] },
+    finalCheckerResult: { batch_id: 'batch-001', ok: true, verdict: 'pass' },
+    liveReport: { batch_id: 'batch-001', ok: true },
+    gitStatus: '',
+  };
+
+  const liveFail = checkComparisonCampaignCanContinue({
+    ...base,
+    liveReport: { batch_id: 'batch-001', ok: false, blockers: [{ type: 'live_http_status' }] },
+  });
+  assert.equal(liveFail.ok, false);
+  assert.match(liveFail.blockers.join('\n'), /live verifier did not pass/);
+
+  const reportBlocker = checkComparisonCampaignCanContinue({
+    ...base,
+    campaignReport: {
+      blockers: ['batch-001: unsupported money amount'],
+      progress: { completed_batches: 1, planned_batches: 10 },
+    },
+  });
+  assert.equal(reportBlocker.ok, false);
+  assert.match(reportBlocker.blockers.join('\n'), /cumulative campaign report has blockers/);
+
+  const completed = checkComparisonCampaignCanContinue({
+    ...base,
+    campaignReport: {
+      blockers: [],
+      progress: { completed_batches: 10, planned_batches: 10 },
+    },
+  });
+  assert.equal(completed.ok, false);
+  assert.match(completed.blockers.join('\n'), /campaign already reached planned batch count/);
 });

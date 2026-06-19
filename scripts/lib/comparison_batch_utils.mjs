@@ -345,6 +345,16 @@ function collectPricingNumbers(pricing = {}) {
       numbers.add(String(Math.round(value)));
       return;
     }
+    if (typeof value === 'string') {
+      for (const match of value.matchAll(/\$([0-9][0-9,]*(?:\.\d{1,2})?)/g)) {
+        const amount = Number(match[1].replaceAll(',', ''));
+        if (amount > 0) {
+          numbers.add(String(Math.round(amount * 100) / 100));
+          numbers.add(String(Math.round(amount)));
+        }
+      }
+      return;
+    }
     if (Array.isArray(value)) {
       for (const item of value) visit(item);
       return;
@@ -733,4 +743,180 @@ export function checkRenderedComparisonBatch({ distDir = 'dist', selectedSlugs, 
     pages.push({ slug, path, exists: true, sections_ok: missingSections.length === 0, missing_sections: missingSections });
   }
   return { ok: blockers.length === 0, pages, blockers, reviews, info };
+}
+
+export async function checkLiveComparisonBatch({
+  selectedSlugs,
+  factsBySlug = {},
+  baseUrl = 'https://www.creditdoc.co',
+  fetchImpl = fetch,
+} = {}) {
+  const blockers = [];
+  const reviews = [];
+  const info = [];
+  const pages = [];
+
+  for (const slug of selectedSlugs || []) {
+    const url = `${String(baseUrl).replace(/\/$/, '')}/compare/${slug}/`;
+    let response;
+    let html = '';
+    try {
+      response = await fetchImpl(url);
+      html = await response.text();
+    } catch (error) {
+      blockers.push({ slug, type: 'live_fetch_error', url, message: error?.message || String(error) });
+      pages.push({ slug, url, status: null, fetch_ok: false, sections_ok: false });
+      continue;
+    }
+
+    if (response.status !== 200) {
+      blockers.push({ slug, type: 'live_http_status', url, status: response.status });
+      pages.push({ slug, url, status: response.status, fetch_ok: true, sections_ok: false });
+      continue;
+    }
+
+    const missingSections = REQUIRED_RENDERED_SECTIONS.filter((section) => !html.includes(section));
+    if (missingSections.length > 0) {
+      for (const section of missingSections) {
+        blockers.push({ slug, type: 'missing_live_section', section, url });
+      }
+    }
+
+    const result = scanTextForClaims({
+      slug,
+      text: html,
+      field: 'live_html',
+      fact: factsBySlug[slug] || {},
+    });
+    blockers.push(...result.blockers);
+    reviews.push(...result.reviews);
+    info.push(...result.info);
+    pages.push({
+      slug,
+      url,
+      status: response.status,
+      fetch_ok: true,
+      sections_ok: missingSections.length === 0,
+      missing_sections: missingSections,
+    });
+  }
+
+  return {
+    ok: blockers.length === 0,
+    checked_at: new Date().toISOString(),
+    pages,
+    blockers,
+    reviews,
+    info,
+  };
+}
+
+function checkerPassed(result = {}) {
+  return result.ok === true && (!result.verdict || String(result.verdict).toLowerCase() === 'pass');
+}
+
+function gitStatusDirty(gitStatus = '') {
+  return String(gitStatus || '').trim().length > 0;
+}
+
+export function buildComparisonCampaignReport({
+  campaignManifest = {},
+  batchManifests = [],
+  batchStatuses = [],
+  finalCheckerResults = [],
+  liveReports = [],
+  gitStatus = '',
+} = {}) {
+  const batchCount = Number(campaignManifest.batch_count || 0);
+  const completedBatchIds = batchStatuses
+    .filter((status) => status?.ok)
+    .map((status) => status.batch_id)
+    .filter(Boolean);
+  const selectedPages = batchManifests.reduce((total, manifest) => total + (manifest.selected_slugs || []).length, 0);
+  const blockers = [
+    ...batchStatuses.flatMap((status) => (status.blockers || []).map((blocker) => `${status.batch_id || 'unknown'}: ${blocker}`)),
+    ...finalCheckerResults
+      .filter((result) => !checkerPassed(result))
+      .map((result) => `${result.batch_id || 'unknown'}: final checker did not pass`),
+    ...liveReports
+      .filter((report) => report && report.ok === false)
+      .flatMap((report) => (report.blockers || ['live check failed']).map((blocker) => `${report.batch_id || 'unknown'}: ${typeof blocker === 'string' ? blocker : blocker.type || 'live check failed'}`)),
+    ...(gitStatusDirty(gitStatus) ? ['repo is dirty'] : []),
+  ];
+  const latestBatchStatus = batchStatuses.at(-1) || null;
+  const latestFinalChecker = finalCheckerResults.at(-1) || null;
+  const latestLiveReport = liveReports.at(-1) || null;
+  const continueGate = checkComparisonCampaignCanContinue({
+    campaignReport: {
+      blockers,
+      progress: { completed_batches: completedBatchIds.length, planned_batches: batchCount },
+    },
+    latestBatchStatus,
+    finalCheckerResult: latestFinalChecker,
+    liveReport: latestLiveReport,
+    gitStatus,
+  });
+
+  return {
+    campaign_id: campaignManifest.campaign_id || '',
+    generated_at: new Date().toISOString(),
+    ok: blockers.length === 0,
+    progress: {
+      completed_batches: completedBatchIds.length,
+      planned_batches: batchCount,
+      batch_size: campaignManifest.batch_size || null,
+      max_total_rows: campaignManifest.max_total_rows || null,
+      completed_batch_ids: completedBatchIds,
+    },
+    totals: {
+      selected_pages: selectedPages,
+      changed_pages: selectedPages,
+      skipped_pages: 0,
+      final_checker_passes: finalCheckerResults.filter(checkerPassed).length,
+      live_check_passes: liveReports.filter((report) => report?.ok === true).length,
+    },
+    batch_statuses: batchStatuses,
+    final_checker_results: finalCheckerResults,
+    live_reports: liveReports,
+    git_status: gitStatus,
+    blockers,
+    can_start_next_batch: blockers.length === 0 && continueGate.ok,
+    continue_gate: continueGate,
+  };
+}
+
+export function checkComparisonCampaignCanContinue({
+  campaignReport,
+  latestBatchStatus,
+  finalCheckerResult,
+  liveReport = null,
+  gitStatus = '',
+} = {}) {
+  const blockers = [];
+  if (!campaignReport) blockers.push('cumulative campaign report is missing');
+  if (!latestBatchStatus) blockers.push('latest batch report is missing');
+  if (latestBatchStatus && latestBatchStatus.ok !== true) {
+    blockers.push('latest batch report has blockers');
+  }
+  if (!finalCheckerResult || !checkerPassed(finalCheckerResult)) {
+    blockers.push('final checker did not pass');
+  }
+  if (liveReport && liveReport.ok !== true) {
+    blockers.push('live verifier did not pass');
+  }
+  if (gitStatusDirty(gitStatus)) {
+    blockers.push('repo is dirty');
+  }
+  if ((campaignReport?.blockers || []).length > 0) {
+    blockers.push('cumulative campaign report has blockers');
+  }
+  const progress = campaignReport?.progress || {};
+  if (progress.planned_batches && progress.completed_batches >= progress.planned_batches) {
+    blockers.push('campaign already reached planned batch count');
+  }
+
+  return {
+    ok: blockers.length === 0,
+    blockers: [...new Set(blockers)],
+  };
 }
