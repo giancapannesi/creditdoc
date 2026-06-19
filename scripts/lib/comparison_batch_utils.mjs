@@ -144,6 +144,102 @@ export function compareComparisonBatchScope({ baseRows, currentRows, manifest })
   };
 }
 
+function compactText(value, limit = 280) {
+  const text = String(value || '');
+  return text.length > limit ? `${text.slice(0, limit)}...` : text;
+}
+
+function compactFinding(finding = {}) {
+  return {
+    slug: finding.slug || '',
+    type: finding.type || '',
+    severity: finding.severity || '',
+    field: finding.field || '',
+    message: finding.message || '',
+    text: compactText(finding.text || finding.snippet || ''),
+  };
+}
+
+function findingsForSlug(report = {}, slug) {
+  const matches = (items = []) => items
+    .filter((item) => item?.slug === slug)
+    .map(compactFinding);
+  return {
+    blockers: matches(report.blockers),
+    reviews: matches(report.reviews),
+    info: matches(report.info),
+  };
+}
+
+function mergeFindings(...groups) {
+  return {
+    blockers: groups.flatMap((group) => group.blockers || []),
+    reviews: groups.flatMap((group) => group.reviews || []),
+    info: groups.flatMap((group) => group.info || []),
+  };
+}
+
+function factsMapFromPayload(factsPayload = {}) {
+  return new Map((factsPayload.comparisons || []).map((fact) => [fact.slug, fact]));
+}
+
+export function buildComparisonReviewPacket({
+  manifest,
+  baseRows,
+  currentRows,
+  factsPayload = {},
+  claimReport = {},
+  renderedReport = {},
+}) {
+  const selected = new Set(manifest.selected_slugs || []);
+  const allowedFields = manifest.allowed_fields || EDITABLE_COMPARISON_FIELDS;
+  const baseBySlug = mapBySlug(baseRows || []);
+  const currentBySlug = mapBySlug(currentRows || []);
+  const factsBySlug = factsMapFromPayload(factsPayload);
+
+  const rows = [...selected].sort().map((slug) => {
+    const baseRow = baseBySlug.get(slug) || {};
+    const currentRow = currentBySlug.get(slug) || {};
+    const beforeAfter = {};
+    for (const field of allowedFields) {
+      if (stableJson(baseRow[field]) !== stableJson(currentRow[field])) {
+        beforeAfter[field] = {
+          before: baseRow[field] ?? null,
+          after: currentRow[field] ?? null,
+        };
+      }
+    }
+
+    return {
+      slug,
+      group: manifest.group || '',
+      lender_a: currentRow.lender_a || baseRow.lender_a || '',
+      lender_b: currentRow.lender_b || baseRow.lender_b || '',
+      changed_fields: Object.keys(beforeAfter).sort(),
+      before_after: beforeAfter,
+      allowed_facts: factsBySlug.get(slug) || null,
+      scanner_findings: mergeFindings(
+        findingsForSlug(claimReport, slug),
+        findingsForSlug(renderedReport, slug),
+      ),
+      reviewer_questions: [
+        'Does this preserve useful page value?',
+        'Are any prices, ratings, guarantees, or accreditation claims unsupported?',
+        'Is the language too restrictive or likely to reduce user value?',
+      ],
+    };
+  });
+
+  return {
+    batch_id: manifest.batch_id || '',
+    group: manifest.group || '',
+    generated_at: new Date().toISOString(),
+    selected_count: selected.size,
+    allowed_fields: allowedFields,
+    rows,
+  };
+}
+
 function compactArray(value, limit = 8) {
   return Array.isArray(value) ? value.filter(Boolean).slice(0, limit) : [];
 }

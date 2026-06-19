@@ -11,6 +11,7 @@ import {
   compareComparisonBatchScope,
   extractComparisonSourceFacts,
   checkRenderedComparisonBatch,
+  buildComparisonReviewPacket,
   selectComparisonsForManifest,
   loadLendersForComparisons,
 } from '../scripts/lib/comparison_batch_utils.mjs';
@@ -149,6 +150,92 @@ test('batch scope fails on an unselected slug and disallowed field', () => {
   assert.equal(result.ok, false);
   assert.match(result.blockers.join('\n'), /unselected changed slug: gamma-vs-delta/);
   assert.match(result.blockers.join('\n'), /disallowed field changed: alpha-vs-beta seo_title/);
+});
+
+test('review packet includes compact before/after field diffs, facts, findings, and reviewer questions', () => {
+  const packet = buildComparisonReviewPacket({
+    manifest: {
+      batch_id: 'credit-repair-pricing-refunds-001',
+      group: 'credit-repair-pricing-refunds',
+      selected_slugs: ['alpha-vs-beta'],
+      allowed_fields: ['summary', 'winner_reason', 'seo_description'],
+    },
+    baseRows: [
+      {
+        slug: 'alpha-vs-beta',
+        lender_a: 'alpha',
+        lender_b: 'beta',
+        summary: 'Old summary',
+        winner_reason: 'Old reason',
+        seo_description: 'Old meta',
+        body: 'This full body must not enter the packet.',
+      },
+    ],
+    currentRows: [
+      {
+        slug: 'alpha-vs-beta',
+        lender_a: 'alpha',
+        lender_b: 'beta',
+        summary: 'New summary',
+        winner_reason: 'Old reason',
+        seo_description: 'New meta',
+        body: 'This full body must not enter the packet.',
+      },
+    ],
+    factsPayload: {
+      comparisons: [{
+        slug: 'alpha-vs-beta',
+        lender_a: { name: 'Alpha', pricing: { monthly_price: 79 }, pros: ['Portal'] },
+        lender_b: { name: 'Beta', pricing: {}, cons: ['No listed price'] },
+        flags: { has_pricing_a: true, pricing_missing_b: true },
+      }],
+    },
+    claimReport: {
+      blockers: [{ slug: 'alpha-vs-beta', type: 'unsupported_money_amount', field: 'summary' }],
+      reviews: [{ slug: 'alpha-vs-beta', type: 'soft_claim', field: 'summary' }],
+      info: [{ slug: 'alpha-vs-beta', type: 'source_supported_price', field: 'summary' }],
+    },
+    renderedReport: {
+      blockers: [],
+      reviews: [{ slug: 'alpha-vs-beta', type: 'rendered_soft_claim' }],
+      info: [],
+    },
+  });
+
+  assert.equal(packet.batch_id, 'credit-repair-pricing-refunds-001');
+  assert.equal(packet.rows.length, 1);
+  assert.deepEqual(packet.rows[0].changed_fields, ['seo_description', 'summary']);
+  assert.deepEqual(packet.rows[0].before_after.summary, { before: 'Old summary', after: 'New summary' });
+  assert.equal(packet.rows[0].before_after.body, undefined);
+  assert.equal(packet.rows[0].allowed_facts.lender_a.name, 'Alpha');
+  assert.equal(packet.rows[0].scanner_findings.blockers.length, 1);
+  assert.equal(packet.rows[0].scanner_findings.reviews.length, 2);
+  assert.match(packet.rows[0].reviewer_questions.join('\n'), /preserve useful page value/);
+  assert.match(packet.rows[0].reviewer_questions.join('\n'), /unsupported/);
+  assert.match(packet.rows[0].reviewer_questions.join('\n'), /too restrictive/);
+});
+
+test('review packet truncates long scanner snippets', () => {
+  const packet = buildComparisonReviewPacket({
+    manifest: {
+      batch_id: 'credit-repair-pricing-refunds-001',
+      selected_slugs: ['alpha-vs-beta'],
+      allowed_fields: ['summary'],
+    },
+    baseRows: [{ slug: 'alpha-vs-beta', summary: 'Old' }],
+    currentRows: [{ slug: 'alpha-vs-beta', summary: 'New' }],
+    claimReport: {
+      blockers: [{
+        slug: 'alpha-vs-beta',
+        type: 'rendered_text_probe',
+        snippet: 'x'.repeat(700),
+      }],
+    },
+  });
+
+  const text = packet.rows[0].scanner_findings.blockers[0].text;
+  assert.equal(text.length, 283);
+  assert.match(text, /\.\.\.$/);
 });
 
 test('source fact extractor preserves pricing and uncertainty flags from lender data', () => {
