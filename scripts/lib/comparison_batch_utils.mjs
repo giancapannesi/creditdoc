@@ -339,9 +339,9 @@ export function loadLendersForComparisons({ comparisons, lendersDir = 'src/conte
 
 function collectPricingNumbers(pricing = {}) {
   const numbers = new Set();
-  const addAmount = (rawAmount, suffix = '') => {
+  const addAmount = (rawAmount, suffix = '', { allowZero = false } = {}) => {
     let amount = Number(String(rawAmount).replaceAll(',', ''));
-    if (!Number.isFinite(amount) || amount <= 0) return;
+    if (!Number.isFinite(amount) || amount < 0 || (amount === 0 && !allowZero)) return;
     if (/^k$/i.test(suffix)) amount *= 1000;
     if (/^m$/i.test(suffix)) amount *= 1000000;
     if (/^b$/i.test(suffix)) amount *= 1000000000;
@@ -357,7 +357,7 @@ function collectPricingNumbers(pricing = {}) {
     }
     if (typeof value === 'string') {
       for (const match of value.matchAll(MONEY_PATTERN)) {
-        addAmount(match[1], match[2]);
+        addAmount(match[1], match[2], { allowZero: true });
       }
       return;
     }

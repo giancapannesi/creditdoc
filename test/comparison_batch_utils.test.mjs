@@ -536,6 +536,31 @@ test('claim scanner blocks fabricated zero and free pricing when pricing is miss
   assert.equal(result.blockers.some((blocker) => blocker.type === 'unsupported_free_pricing_claim'), true);
 });
 
+test('claim scanner allows source-backed zero-dollar down-payment strings', () => {
+  const result = checkComparisonClaimSafety({
+    comparisons: [{
+      slug: 'alpha-vs-beta',
+      summary: 'Beta lists $0 down payment lease programs.',
+      winner_reason: '',
+      seo_description: '',
+    }],
+    factsBySlug: {
+      'alpha-vs-beta': {
+        lender_a: { name: 'Alpha', pricing: {}, bbb_accredited: false },
+        lender_b: {
+          name: 'Beta',
+          pricing: {
+            tiers: [{ name: 'Lease', features: ['$0 down payment'] }],
+          },
+          bbb_accredited: false,
+        },
+      },
+    },
+  });
+
+  assert.equal(result.blockers.some((blocker) => blocker.type === 'unsupported_money_amount'), false);
+});
+
 test('claim scanner scopes prices to the lender named near the claim', () => {
   const result = checkComparisonClaimSafety({
     comparisons: [{
