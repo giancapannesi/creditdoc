@@ -22,6 +22,16 @@ Next checks:
 
 Latest completed:
 
+- Second guarded difficult comparison batch completed 2026-06-20 and deployed.
+- Batch 002 commit: `acc359f237 fix: clean guarded comparison batch 002`.
+- Worker Version ID: `fef6e12d-6b01-4168-8d06-8144248f7be6`.
+- Batch 002 updated only 12 high-risk records from a 20-candidate workpack, preserving comparison-page value while removing unsupported pricing, value, winner, and accreditation claims.
+- National Credit Fixers source copy now says stored BBB A+ rating field, not BBB accreditation.
+- Claim scanner now allows source-backed `$0` strings such as explicit `$0 down` pricing while still blocking fabricated free-pricing claims from default numeric zero.
+- Independent checker `Dewey` passed before commit.
+- Verification passed: `npm run test:comparison-batch` 54/54, `node --check`, `git diff --check`, content text integrity, comparison DB freshness 345/345, guarded batch check 12 pages/0 blockers, deploy smoke, live comparison check 12/12 URLs 200 with 0 blockers, campaign report `ok: true`, and continue gate `ok: true`.
+- Batch 002 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Batch_002_2026-06-20/`
 - First reviewed 20-page comparison batch rendering/fact-safety work completed on 2026-06-19.
 - Rendered fact alignment commit: `e0940e5526 fix: align comparison rendered facts`.
 - Separate wellness cron content commit: `42ab02e0f3 content: add wellness guides`.
@@ -55,15 +65,14 @@ Latest completed:
 
 Immediate next:
 
-1. Stop before selecting the next comparison batch: `comparison:campaign:can-continue` is currently blocked by live production verifier failures.
-2. Review the first-20 release/deploy scope. Local current output passes build and rendered checks, but production HTML still has 15 live claim-safety blockers across 8 pages.
-3. If approved, deploy the already-pushed comparison fixes through the documented Cloudflare Worker path, then rerun `npm run comparison:live-check -- --manifest <final-campaign-batch-001/manifest.json> --output-dir <new-live-check-dir>`.
-4. Only after live verification passes, regenerate the campaign report and rerun `comparison:campaign:can-continue`.
-5. Keep Phase 1 as small batches only; no bulk comparison rewrites.
-6. Keep pricing/rating values only where they are current CreditDoc source fields, including paid tiers; do not let free/default tiers hide real paid pricing.
-7. Keep copy framed as stored-field comparison rather than recommendation.
-8. Patch `summary`, `winner_reason`, and `seo_description` together for each selected comparison because all three can render or influence snippets.
-9. For the batch loop, require: preflight -> deterministic check -> independent content review -> final checker result file -> campaign report -> can-continue gate. Stop and report before continuing to another batch.
+1. Campaign gate is open after batch 002, so the next comparison batch may start.
+2. Pick the next difficult pages from the risk inventory and checker recommendations, but keep batches scoped to 10-25 pages and edit only records that fail claim safety or obviously need factual cleanup.
+3. Keep Phase 1 as small batches only; no bulk comparison rewrites.
+4. Keep pricing/rating values only where they are current CreditDoc source fields, including paid tiers; do not let free/default tiers hide real paid pricing.
+5. Keep copy framed as stored-field comparison rather than recommendation.
+6. Patch `summary`, `winner_reason`, and `seo_description` together for each selected comparison because all three can render or influence snippets.
+7. For every batch loop, require: preflight -> deterministic check -> independent content review -> final checker result file -> commit -> deploy when release scope is clear -> live check -> campaign report -> can-continue gate.
+8. If the gate blocks, stop the loop and fix the specific blocker before selecting more pages.
 
 ## Active 2026-05-26 — Sitewide Page Upgrade Program
 

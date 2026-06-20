@@ -4,6 +4,50 @@
 
 ---
 
+## 2026-06-20 - Comparison guarded batch 002 deployed and live-verified
+
+Status: second difficult comparison batch completed, independently reviewed, committed, pushed, deployed, live-verified, and campaign-gated.
+
+Commit:
+- `acc359f237 fix: clean guarded comparison batch 002`
+
+Deploy:
+- Deployed through `/srv/BusinessOps/creditdoc/deploy.sh`.
+- Cloudflare Worker Version ID: `fef6e12d-6b01-4168-8d06-8144248f7be6`.
+- Deploy smoke returned 200 for homepage, CSS, and core review/state/guide/answers/best/category/blog/wellness/brand routes.
+
+What changed:
+- Updated only 12 high-risk comparison records from the batch, not all 20 candidates.
+- Preserved page value while removing unsupported winner/value/pricing/accreditation claims from `summary`, `winner_reason`, and `seo_description`.
+- Corrected National Credit Fixers source wording so it no longer says BBB accreditation when current CreditDoc data only supports a stored BBB A+ rating field.
+- Hardened the claim scanner so source-backed `$0` strings such as explicit `$0 down` lender pricing can pass, while default numeric zero still cannot support fabricated free-pricing claims.
+- Added regression coverage for the source-backed zero-dollar pricing case.
+
+Workpack:
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Batch_002_2026-06-20/`
+- Final local/check folder:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Batch_002_2026-06-20/check-edited-final/`
+- Live production evidence:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Batch_002_2026-06-20/live-check-after-deploy-20260620T1038Z/live_check_report.json`
+- Campaign report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Batch_002_2026-06-20/campaign-report-after-deploy-20260620T1038Z/campaign_report.json`
+
+Verification:
+- Independent checker `Dewey` returned PASS before commit.
+- `npm run test:comparison-batch` passed: 54/54.
+- `node --check scripts/lib/comparison_batch_utils.mjs` passed.
+- `git diff --check` passed.
+- `npm run check:content-text-integrity` passed.
+- `npm run check:comparison-db-freshness` passed: 345 JSON rows, 345 DB rows, 0 mismatches.
+- `npm run comparison:batch:check -- --manifest .../manifest-edited.json --output-dir .../check-edited-final` passed with 12 pages and 0 blockers.
+- `npm run comparison:live-check -- --manifest .../manifest-edited.json --output-dir .../live-check-after-deploy-20260620T1038Z` passed: 12/12 live URLs returned 200 with required comparison sections and 0 blockers.
+- `npm run comparison:campaign:report` across batch 001 and batch 002 passed: `ok: true`, `can_start_next_batch: true`, blockers `[]`.
+- `npm run comparison:campaign:can-continue` passed: `ok: true`, blockers `[]`.
+
+Notes:
+- The live checker still records review flags for the word `best` in rendered HTML, but these are non-blocking review flags, not live blockers.
+- Continue only through the guarded loop. Do not bulk rewrite comparison pages.
+
 ## 2026-06-19 - Comparison first-20 rendered fact alignment
 
 Status: first 20 comparison batch rendering/fact-safety work completed, independently reviewed, verified, and committed. Not deployed in this step.
