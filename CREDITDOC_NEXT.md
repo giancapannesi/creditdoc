@@ -22,6 +22,15 @@ Next checks:
 
 Latest completed:
 
+- Third guarded comparison batch completed 2026-06-20 and deployed.
+- Batch 003 commit: `83ecf2238a fix: clean guarded comparison batch 003`.
+- Worker Version ID: `012e4339-8052-4a6e-ba41-d77d368fb7df`.
+- Batch 003 started from 20 high-risk unhandled candidates, but pre-edit claim safety found only one blocker, so only `capital-fundings-vs-refijet` was edited.
+- The edit removed unsupported concrete rate/APR and exact amount claims from the changed fields while preserving use-case, fee-context, marketplace/refinance, review-signal, and investor-lending value.
+- Independent checker `Averroes` passed before commit.
+- Verification passed: preflight 20-candidate manifest, edited claim safety, `npm run test:comparison-batch` 54/54, `git diff --check`, content text integrity, comparison DB freshness 345/345, guarded batch check 1 page/0 blockers, deploy smoke, live comparison check 1/1 URL 200 with 0 blockers, cumulative campaign report `ok: true`, and continue gate `ok: true`.
+- Batch 003 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Batch_003_2026-06-20/`
 - Second guarded difficult comparison batch completed 2026-06-20 and deployed.
 - Batch 002 commit: `acc359f237 fix: clean guarded comparison batch 002`.
 - Worker Version ID: `fef6e12d-6b01-4168-8d06-8144248f7be6`.
@@ -65,14 +74,15 @@ Latest completed:
 
 Immediate next:
 
-1. Campaign gate is open after batch 002, so the next comparison batch may start.
+1. Campaign gate is open after batch 003, so the next comparison batch may start.
 2. Pick the next difficult pages from the risk inventory and checker recommendations, but keep batches scoped to 10-25 pages and edit only records that fail claim safety or obviously need factual cleanup.
-3. Keep Phase 1 as small batches only; no bulk comparison rewrites.
-4. Keep pricing/rating values only where they are current CreditDoc source fields, including paid tiers; do not let free/default tiers hide real paid pricing.
-5. Keep copy framed as stored-field comparison rather than recommendation.
-6. Patch `summary`, `winner_reason`, and `seo_description` together for each selected comparison because all three can render or influence snippets.
-7. For every batch loop, require: preflight -> deterministic check -> independent content review -> final checker result file -> commit -> deploy when release scope is clear -> live check -> campaign report -> can-continue gate.
-8. If the gate blocks, stop the loop and fix the specific blocker before selecting more pages.
+3. Batch 003 showed that high risk-score inventory rows can pass the current source-backed checks. Do not edit passing pages just to make a batch look larger.
+4. Keep Phase 1 as small batches only; no bulk comparison rewrites.
+5. Keep pricing/rating values only where they are current CreditDoc source fields, including paid tiers; do not let free/default tiers hide real paid pricing.
+6. Keep copy framed as stored-field comparison rather than recommendation.
+7. Patch `summary`, `winner_reason`, and `seo_description` together for each selected comparison because all three can render or influence snippets.
+8. For every batch loop, require: preflight -> deterministic check -> independent content review -> final checker result file -> commit -> deploy when release scope is clear -> live check -> campaign report -> can-continue gate.
+9. If the gate blocks, stop the loop and fix the specific blocker before selecting more pages.
 
 ## Active 2026-05-26 — Sitewide Page Upgrade Program
 
