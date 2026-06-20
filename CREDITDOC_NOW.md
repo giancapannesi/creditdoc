@@ -4,6 +4,51 @@
 
 ---
 
+## 2026-06-20 - Comparison guarded batch 004 deployed and live-verified
+
+Status: fourth guarded comparison batch completed. The 20-candidate scan produced blockers on two pages, so only those two pages were edited, reviewed, committed, pushed, deployed, live-verified, and campaign-gated.
+
+Commit:
+- `6bdd97a52b fix: clean guarded comparison batch 004`
+
+Deploy:
+- Deployed through `/srv/BusinessOps/creditdoc/deploy.sh`.
+- Cloudflare Worker Version ID: `ee4df2a5-8169-48fe-a690-40b94fd57a13`.
+- Deploy smoke returned 200 for homepage, CSS, and core route families.
+
+What changed:
+- Edited only:
+  - `credit-supreme-credit-repair-miami-fix-credit-fast-miami-fl-vs-safeport-law`
+  - `american-consumer-credit-counseling-vs-creditorg`
+- Changed only `summary`, `winner_reason`, and `seo_description`.
+- Removed unsupported value/savings/recommendation language and unsafe accreditation framing.
+- Preserved comparison value through pricing fields, review signals, service model, counseling scope, refund/program terms, and attorney/nonprofit context.
+- No route, noindex, redirect, delete, sitemap, config, or template change.
+
+Workpack:
+- `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Batch_004_2026-06-20/`
+- Live evidence:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Batch_004_2026-06-20/live-check-after-deploy-20260620T1101Z/live_check_report.json`
+- Campaign report:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Batch_004_2026-06-20/campaign-report-after-deploy-20260620T1101Z/campaign_report.json`
+
+Verification:
+- Preflight on the 20-candidate manifest passed.
+- Pre-edit claim safety found 5 blockers on 2 pages.
+- Edited claim safety passed.
+- Independent checker `Harvey` returned PASS before commit.
+- `npm run test:comparison-batch` passed: 54/54.
+- `git diff --check` passed.
+- `npm run check:content-text-integrity` passed.
+- `npm run check:comparison-db-freshness` passed: 345 JSON rows, 345 DB rows, 0 mismatches.
+- `npm run comparison:batch:check` passed for the edited manifest with 2 pages and 0 blockers.
+- `npm run comparison:live-check` passed: 2 live URLs returned 200, required sections present, blockers `[]`.
+- Cumulative `comparison:campaign:report` across batches 001-004 passed: `ok: true`, `can_start_next_batch: true`, blockers `[]`.
+- `comparison:campaign:can-continue` passed: `ok: true`, blockers `[]`.
+
+Next:
+- Campaign gate is open. Continue with the next difficult comparison batch only through the same guarded loop.
+
 ## 2026-06-20 - Comparison guarded batch 003 deployed and live-verified
 
 Status: third guarded comparison batch completed. The 20-candidate scan produced only one raw blocker, so only one page was edited, reviewed, committed, pushed, deployed, live-verified, and campaign-gated.

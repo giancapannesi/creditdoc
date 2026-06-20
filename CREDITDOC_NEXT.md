@@ -22,6 +22,15 @@ Next checks:
 
 Latest completed:
 
+- Fourth guarded comparison batch completed 2026-06-20 and deployed.
+- Batch 004 commit: `6bdd97a52b fix: clean guarded comparison batch 004`.
+- Worker Version ID: `ee4df2a5-8169-48fe-a690-40b94fd57a13`.
+- Batch 004 started from 20 next-risk candidates, but pre-edit claim safety found blockers on only two pages, so only `credit-supreme-credit-repair-miami-fix-credit-fast-miami-fl-vs-safeport-law` and `american-consumer-credit-counseling-vs-creditorg` were edited.
+- The edit removed unsupported value/savings/recommendation language and unsafe accreditation framing while preserving pricing fields, review signals, service model, counseling scope, refund/program terms, and attorney/nonprofit context.
+- Independent checker `Harvey` passed before commit.
+- Verification passed: preflight 20-candidate manifest, edited claim safety, `npm run test:comparison-batch` 54/54, `git diff --check`, content text integrity, comparison DB freshness 345/345, guarded batch check 2 pages/0 blockers, deploy smoke, live comparison check 2/2 URLs 200 with 0 blockers, cumulative campaign report `ok: true`, and continue gate `ok: true`.
+- Batch 004 workpack:
+  `/srv/BusinessOps/CreditDoc Project Improvement/CreditDoc_Comparison_Batch_004_2026-06-20/`
 - Third guarded comparison batch completed 2026-06-20 and deployed.
 - Batch 003 commit: `83ecf2238a fix: clean guarded comparison batch 003`.
 - Worker Version ID: `012e4339-8052-4a6e-ba41-d77d368fb7df`.
@@ -74,7 +83,7 @@ Latest completed:
 
 Immediate next:
 
-1. Campaign gate is open after batch 003, so the next comparison batch may start.
+1. Campaign gate is open after batch 004, so the next comparison batch may start.
 2. Pick the next difficult pages from the risk inventory and checker recommendations, but keep batches scoped to 10-25 pages and edit only records that fail claim safety or obviously need factual cleanup.
 3. Batch 003 showed that high risk-score inventory rows can pass the current source-backed checks. Do not edit passing pages just to make a batch look larger.
 4. Keep Phase 1 as small batches only; no bulk comparison rewrites.
