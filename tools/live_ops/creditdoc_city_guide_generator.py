@@ -3,7 +3,7 @@
 CreditDoc City Guide Generator — autonomous pipeline for 5 cities/day.
 
 Pulls city data from FDIC locations (regulator.db), state data from Supabase,
-generates unique editorial + localized Q&A via Claude, inserts into Supabase
+generates unique editorial + localized Q&A via OpenAI, inserts into Supabase
 city_guides table with status=ready_for_index.
 
 Usage:
@@ -34,7 +34,6 @@ PROJECT_DIR = os.path.join(SCRIPT_DIR, "..", "creditdoc")
 REGULATOR_DB = os.path.join(PROJECT_DIR, "data", "regulator.db")
 CREDITDOC_DB = os.path.join(PROJECT_DIR, "data", "creditdoc.db")
 SUPABASE_ENV = os.path.join(SCRIPT_DIR, ".supabase-creditdoc.env")
-CLAUDE_CREDS = os.path.expanduser("~/.claude.json")
 CITIES_CSV = os.path.join(PROJECT_DIR, "US Cities", "us_all_places_by_population.csv")
 
 US_STATES = {
@@ -361,7 +360,6 @@ AI_ENV_FILES = (
     os.path.join(PROJECT_DIR, "..", ".env"),
     os.path.expanduser("~/.hermes/.env"),
 )
-GEMINI_KEY_FILE = os.path.join(SCRIPT_DIR, ".gemini-api-key")
 OPENAI_KEY_FILE = os.path.join(SCRIPT_DIR, ".openai-api-key")
 
 
@@ -400,7 +398,7 @@ def _read_key_file(path):
 
 
 def _get_api_config():
-    """Return a fallback (api_key, base_url, model, provider) tuple if CLI fails."""
+    """Return an OpenAI fallback (api_key, base_url, model, provider) tuple if primary routing fails."""
     openai_key = (
         os.environ.get("OPENAI_API_KEY", "")
         or _read_env_value(AI_ENV_FILES, "OPENAI_API_KEY")
@@ -410,22 +408,7 @@ def _get_api_config():
         model = os.environ.get("OPENAI_MODEL", "") or _read_env_value(AI_ENV_FILES, "OPENAI_MODEL") or "gpt-4.1"
         return openai_key, "https://api.openai.com", model, "openai"
 
-    gemini_key = (
-        os.environ.get("GEMINI_API_KEY", "")
-        or os.environ.get("GOOGLE_API_KEY", "")
-        or _read_env_value(AI_ENV_FILES, "GEMINI_API_KEY")
-        or _read_env_value(AI_ENV_FILES, "GOOGLE_API_KEY")
-    )
-    if not gemini_key:
-        try:
-            gemini_key = open(GEMINI_KEY_FILE).read().strip()
-        except Exception:
-            gemini_key = ""
-    if gemini_key:
-        model = os.environ.get("GEMINI_MODEL", "") or _read_env_value(AI_ENV_FILES, "GEMINI_MODEL") or "gemini-2.5-flash"
-        return gemini_key, "https://generativelanguage.googleapis.com", model, "gemini"
-
-    raise RuntimeError("No OpenAI or Gemini fallback key found for city guide generation.")
+    raise RuntimeError("No OpenAI key found for city guide generation.")
 
 
 def _call_openai_json(api_key, base_url, model, prompt, max_tokens=4000):
@@ -470,7 +453,7 @@ def _parse_city_json(text, city_slug):
 
 
 def generate_city_content(city_info, state_data, local_stats):
-    """Use Claude to generate unique editorial + localized Q&A."""
+    """Use OpenAI to generate unique editorial + localized Q&A."""
     city = city_info["city"]
     state = city_info["state_name"]
     state_abbr = city_info["state_abbr"]
@@ -512,9 +495,11 @@ CITY FACTS:
 - Consumer protection URL: {consumer_url}
 
 SOURCE AND FACT RULES:
-- Use only the city/state/local facts listed above plus real local resource details you are confident about.
+- Use only the city/state/local facts listed above and official/state/federal resource details supplied in the source context.
 - Do NOT invent current prices, fees, APRs, BBB ratings, Google ratings, star ratings, or guarantees for any local company, lender, card, app, or service.
+- Do NOT invent local organization names, street addresses, phone numbers, URLs, office names, ratings, or credentials.
 - If a provider-specific price/rate/rating/guarantee is not supplied in the facts above, omit it.
+- If a specific local resource is not supplied, use the state consumer protection agency, SBA/SCORE/HUD official lookup paths, or conservative "verify directly" language.
 - General legal caps and state-law summaries are allowed when tied to the state data above.
 
 OUTPUT FORMAT — Return a single JSON object with these exact keys:
@@ -526,11 +511,11 @@ OUTPUT FORMAT — Return a single JSON object with these exact keys:
    DO NOT use generic filler. Every sentence must be specific to {city}.
 
 2. "credit_tips" — Array of 6 strings. Actionable credit improvement tips specific to {city}/{state}.
-   Reference local resources, state laws, and local programs by name when possible.
+   Reference state laws, official agencies, and verified resources by name when supplied.
 
 3. "local_questions" — Array of 7 objects, each with "q" (question) and "a" (HTML answer with <p> tags).
    Questions MUST be localized: "What is the best credit repair company in {city}?" not generic.
-   Answers must reference {state} law (statute names), local resources, and include internal links:
+   Answers must reference {state} law when supplied, official resources when supplied, and include internal links:
    - <a href='https://www.creditdoc.co/best/best-credit-repair-companies/'>best credit repair companies</a>
    - <a href='https://www.creditdoc.co/best/best-personal-loan-lenders/'>best personal loan lenders</a>
    - <a href='https://www.creditdoc.co/best/best-sba-loans/'>best SBA loans</a>
@@ -539,15 +524,17 @@ OUTPUT FORMAT — Return a single JSON object with these exact keys:
    Questions should cover: credit repair, credit score improvement, SBA loans, debt consolidation,
    credit unions, payday loan alternatives, and identity theft protection — all localized to {city}.
 
-4. "local_resources" — Array of 3-5 objects with "name", "type", "phone", "address", "url".
-   Real local organizations: HUD-approved counselors, city financial empowerment offices,
-   legal aid, SCORE chapters, SBA district offices. Use REAL names and addresses for {city}.
+4. "local_resources" — Array of 2-5 objects with "name", "type", "phone", "address", "url".
+   Only include organizations, addresses, phones, and URLs that are supplied above or are official state/federal resources.
+   If exact street address or phone is not supplied, omit that field instead of guessing.
+   Acceptable safer entries include the supplied consumer protection agency, SBA district-level office if supplied,
+   HUD housing counseling lookup, SCORE chapter lookup, and official state legal-aid or attorney-general resources.
 
 5. "consumer_protection" — Object with "agency", "phone", "url", "filing_info".
-   The state consumer protection agency for {state}. Use real contact info.
+   The state consumer protection agency for {state}. Use only supplied/official contact info; omit unknown fields.
 
 6. "sba_info" — Object with "office", "address", "phone", "programs" (array of strings).
-   The SBA district office serving {city}. Use real info.
+   The SBA district office serving {city}. Use only supplied/official info; omit unknown fields.
 
 7. "seo_title" — STRICTLY 50-58 chars (HARD MAX 58). Must be UNIQUE and target real search intent.
    Include {city} and {state_abbr}. Count characters carefully — Google truncates at 60.
@@ -568,34 +555,13 @@ Return ONLY the JSON object, no markdown fences, no explanation."""
     try:
         sys.path.insert(0, SCRIPT_DIR)
         from creditdoc_oauth import call_ai
-        text = call_ai(prompt, model="opus", max_tokens=4000, timeout_secs=120)
+        text = call_ai(prompt, model="gpt-4.1", max_tokens=4000, timeout_secs=120)
     except Exception as primary_error:
         api_key, base_url, model, provider = _get_api_config()
         if provider == "openai":
             text = _call_openai_json(api_key, base_url, model, prompt)
-        elif provider == "gemini":
-            r = requests.post(
-                f"{base_url}/v1beta/models/{model}:generateContent",
-                params={"key": api_key},
-                json={
-                    "contents": [
-                        {
-                            "role": "user",
-                            "parts": [{"text": prompt}],
-                        }
-                    ],
-                    "generationConfig": {
-                        "maxOutputTokens": 4000,
-                        "responseMimeType": "application/json",
-                    },
-                },
-                timeout=120,
-            )
-            r.raise_for_status()
-            parts = r.json()["candidates"][0]["content"]["parts"]
-            text = "".join(part.get("text", "") for part in parts).strip()
         else:
-            raise RuntimeError(f"Unsupported city guide AI provider after Claude CLI failure: {provider}") from primary_error
+            raise RuntimeError(f"Unsupported city guide AI provider after primary failure: {provider}") from primary_error
     try:
         parsed = _parse_city_json(text, city_info["slug"])
         allowed_values = _city_guardrail_allowed_values(city_info, state_data, local_stats)
@@ -785,8 +751,8 @@ def cmd_generate(env, batch_size=5, specific_city=None, specific_state=None):
 
             print(f"  Data: {local_stats['total_branches']} branches, {local_stats.get('sba_loans_count', 0)} SBA loans, {lender_count} indexed lenders in {state_abbr}")
 
-            # Generate content via Claude
-            print("  Generating content via Claude...")
+            # Generate content via OpenAI
+            print("  Generating content via OpenAI...")
             content = generate_city_content(city_info, state_data, local_stats)
 
             # Validate
@@ -805,7 +771,7 @@ def cmd_generate(env, batch_size=5, specific_city=None, specific_state=None):
                 print(f"  [OK] https://www.creditdoc.co/credit-guide/{city_info['slug']}/")
                 successes.append(city_info)
 
-            # Rate limit — be nice to Claude API
+            # Rate limit AI/API calls.
             if i < len(cities):
                 time.sleep(3)
 

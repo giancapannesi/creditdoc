@@ -23,16 +23,55 @@ CLOUDFLARE_EMAIL="$CLOUDFLARE_EMAIL" \
 CLOUDFLARE_API_KEY="$CLOUDFLARE_GLOBAL_API_KEY" \
 npx wrangler deploy 2>&1 | tail -5
 
-# 3. Purge Cloudflare cache
+# 3. Purge Cloudflare cache.
+#
+# Do not purge the whole zone by default. CreditDoc has thousands of SSR pages
+# behind versioned edge cache; a full purge makes every crawler request a cold
+# Worker render and can trigger Cloudflare 1102 CPU failures. Use
+# FULL_CACHE_PURGE=1 only for emergencies or planned low-traffic maintenance.
 echo ""
 echo "[3/4] Purging Cloudflare cache..."
 ZONE_ID="b644afdfb731703f578f6885ca1774b4"
+if [ "${FULL_CACHE_PURGE:-0}" = "1" ]; then
+  purge_payload='{"purge_everything":true}'
+else
+  purge_payload=$(python3 - <<'PY'
+import json
+
+paths = [
+    "/",
+    "/robots.txt",
+    "/sitemap-index.xml",
+    "/feed.xml",
+    "/rss.xml",
+    "/review/lexington-law/",
+    "/state/wyoming/",
+    "/credit-guide/austin-tx/",
+    "/credit-guide/austin-tx/credit-repair/",
+    "/answers/",
+    "/answers/best-debt-consolidation-loans-bad-credit/",
+    "/best/best-credit-repair-companies/",
+    "/categories/credit-repair/",
+    "/blog/how-to-get-a-personal-loan-with-bad-credit-in-2026/",
+    "/financial-wellness/credit-score-basics/",
+    "/brand/advance-america/",
+]
+print(json.dumps({
+    "files": [f"https://www.creditdoc.co{path}" for path in paths]
+}))
+PY
+)
+fi
 purge_result=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/purge_cache" \
   -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
   -H "Content-Type: application/json" \
-  --data '{"purge_everything":true}')
+  --data "$purge_payload")
 if echo "$purge_result" | python3 -c "import sys,json; sys.exit(0 if json.load(sys.stdin).get('success') else 1)" 2>/dev/null; then
-  echo "Cache purged."
+  if [ "${FULL_CACHE_PURGE:-0}" = "1" ]; then
+    echo "Full cache purge completed."
+  else
+    echo "Targeted cache purge completed."
+  fi
 else
   echo "WARNING: Cache purge failed!"
   echo "$purge_result"

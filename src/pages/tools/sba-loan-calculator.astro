@@ -1,0 +1,356 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'SBA Loan Calculator | CreditDoc';
+const description = 'Estimate SBA loan payments, total interest, guarantee-fee impact, and repayment pressure with editable assumptions. Free educational calculator.';
+const canonical = 'https://www.creditdoc.co/tools/sba-loan-calculator/';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'SBA Loan Calculator',
+  description,
+  url: canonical,
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Web',
+  image: 'https://www.creditdoc.co/og-default.png',
+  isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  publisher: { '@type': 'Organization', name: 'CreditDoc', url: 'https://www.creditdoc.co' },
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What does an SBA loan calculator estimate?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'An SBA loan calculator estimates monthly payment, total repayment, interest cost, and the possible impact of upfront fees based on the assumptions you enter.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does this calculator show my actual SBA loan rate?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. SBA loan rates, fees, eligibility, and terms depend on the SBA program, lender, loan amount, collateral, use of funds, business financials, and owner credit profile.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can SBA fees be financed into the loan?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Some SBA-related fees may be financed or included in closing costs depending on the program and lender. Use this calculator as a planning estimate and confirm all fees with the lender before signing.',
+      },
+    },
+  ],
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+    { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://www.creditdoc.co/tools/' },
+    { '@type': 'ListItem', position: 3, name: 'SBA Loan Calculator', item: canonical },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={[jsonLd, faqJsonLd, breadcrumbJsonLd]}>
+  <nav class="mx-auto max-w-4xl px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="transition-colors hover:text-primary">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/tools/" class="transition-colors hover:text-primary">Tools</a></li>
+      <li class="text-border">/</li>
+      <li class="font-medium text-text">SBA Loan Calculator</li>
+    </ol>
+  </nav>
+
+  <div class="mx-auto max-w-4xl px-4 py-8">
+    <section class="mb-8 text-center">
+      <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-light px-4 py-1.5 text-sm font-medium text-primary">
+        Free &middot; Editable assumptions &middot; No signup
+      </div>
+      <h1 class="text-3xl font-bold text-text md:text-4xl">SBA Loan Calculator</h1>
+      <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+        Estimate monthly payments, total repayment, interest cost, and fee impact before comparing SBA 7(a), SBA 504, or other business funding options.
+      </p>
+    </section>
+
+    <section class="glass-card mb-6 p-5">
+      <h2 class="mb-2 text-lg font-bold text-text">Use This With SBA Loan Research</h2>
+      <p class="text-sm leading-relaxed text-muted">
+        SBA loan offers depend on lender underwriting, SBA program rules, loan purpose, collateral, business cash flow, and owner credit. Enter your own assumptions and compare the output with written lender disclosures.
+      </p>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/best/best-sba-loans/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">SBA loan research</a>
+        <a href="/tools/business-loan-readiness-quiz/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Readiness quiz</a>
+        <a href="/answers/how-do-sba-loans-work/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">How SBA loans work</a>
+        <a href="/answers/can-i-get-sba-loan-with-bad-credit/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">SBA and bad credit</a>
+      </div>
+    </section>
+
+    <section class="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+      <div class="glass-card p-6">
+        <h2 class="mb-5 text-xl font-bold text-text">Loan Assumptions</h2>
+        <div class="grid gap-4">
+          <label class="block">
+            <span class="mb-2 block text-sm font-medium text-text">Loan amount</span>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted">$</span>
+              <input id="loan-amount" type="number" min="1000" max="5000000" step="1000" value="250000" class="input-field pl-7" />
+            </div>
+          </label>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-text">Annual interest rate</span>
+              <div class="relative">
+                <input id="interest-rate" type="number" min="0" max="50" step="0.125" value="11.5" class="input-field pr-8" />
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-muted">%</span>
+              </div>
+            </label>
+
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-text">Term</span>
+              <div class="relative">
+                <input id="term-years" type="number" min="1" max="30" step="1" value="10" class="input-field pr-14" />
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-muted">years</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-text">Upfront fee estimate</span>
+              <div class="relative">
+                <input id="fee-rate" type="number" min="0" max="10" step="0.1" value="2.5" class="input-field pr-8" />
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-muted">%</span>
+              </div>
+              <span class="mt-1 block text-xs text-muted">Use this for guarantee, packaging, closing, or other upfront fees you want to model.</span>
+            </label>
+
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-text">Fee treatment</span>
+              <select id="fee-treatment" class="input-field">
+                <option value="financed">Finance fees into loan</option>
+                <option value="cash">Pay fees upfront</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-text">Estimated monthly business revenue</span>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted">$</span>
+                <input id="monthly-revenue" type="number" min="0" max="10000000" step="1000" value="85000" class="input-field pl-7" />
+              </div>
+            </label>
+
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-text">Existing monthly debt payments</span>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted">$</span>
+                <input id="existing-debt" type="number" min="0" max="1000000" step="100" value="6500" class="input-field pl-7" />
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <aside class="glass-card p-6">
+        <h2 class="mb-5 text-xl font-bold text-text">Estimated Output</h2>
+        <div class="space-y-4">
+          <div class="rounded-xl border border-border bg-white p-4">
+            <p class="text-sm text-muted">Estimated monthly payment</p>
+            <p id="monthly-payment" class="mt-1 text-2xl font-bold text-primary">$3,555</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="rounded-xl border border-border bg-white p-4">
+              <p class="text-sm text-muted">Amount financed</p>
+              <p id="amount-financed" class="mt-1 text-xl font-bold text-text">$256,250</p>
+            </div>
+            <div class="rounded-xl border border-border bg-white p-4">
+              <p class="text-sm text-muted">Fee estimate</p>
+              <p id="fee-estimate" class="mt-1 text-xl font-bold text-text">$6,250</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="rounded-xl border border-border bg-white p-4">
+              <p class="text-sm text-muted">Total interest</p>
+              <p id="total-interest" class="mt-1 text-xl font-bold text-negative">$170,327</p>
+            </div>
+            <div class="rounded-xl border border-border bg-white p-4">
+              <p class="text-sm text-muted">Total repayment</p>
+              <p id="total-repayment" class="mt-1 text-xl font-bold text-negative">$426,577</p>
+            </div>
+          </div>
+          <div class="rounded-xl border border-border bg-white p-4">
+            <p class="text-sm text-muted">Payment pressure</p>
+            <p id="pressure-label" class="mt-1 text-xl font-bold text-text">Moderate</p>
+            <p id="pressure-copy" class="mt-2 text-sm leading-relaxed text-muted">The entered monthly payment is meaningful but may be workable if revenue and margins are stable.</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="mt-6 grid gap-6 md:grid-cols-2">
+      <div class="rounded-xl border border-border bg-white p-6">
+        <h2 class="font-bold text-text">What to Review Before Applying</h2>
+        <ul id="review-list" class="mt-4 space-y-3 text-sm leading-relaxed text-muted"></ul>
+      </div>
+      <div class="rounded-xl border border-border bg-white p-6">
+        <h2 class="font-bold text-text">SBA Cost Questions</h2>
+        <ul class="mt-4 space-y-3 text-sm leading-relaxed text-muted">
+          <li>Which SBA program is the lender quoting: 7(a), 504, Express, or another product?</li>
+          <li>Is the rate fixed or variable, and what index or spread applies?</li>
+          <li>Which fees are financed, which are paid at closing, and which are nonrefundable?</li>
+          <li>Are collateral, personal guarantee, insurance, or appraisal costs required?</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-6 rounded-xl border border-border bg-bg-alt p-5">
+      <h2 class="font-bold text-text">Important Limits</h2>
+      <p class="mt-2 text-xs leading-relaxed text-muted">
+        This calculator is not an SBA approval, lender quote, rate quote, financial advice, tax advice, or legal advice. It uses only the assumptions entered on this page. Confirm rates, guarantee fees, closing costs, repayment schedule, collateral, and eligibility with an SBA lender before signing.
+      </p>
+    </section>
+
+    <section class="mt-8 rounded-xl border border-border bg-white p-6">
+      <h2 class="text-xl font-bold text-text">SBA Loan Calculator FAQ</h2>
+      <div class="mt-5 space-y-5">
+        <div>
+          <h3 class="font-semibold text-text">What does an SBA loan calculator estimate?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">It estimates monthly payment, total repayment, interest cost, and the possible impact of upfront fees based on the loan amount, rate, term, and fee assumptions you enter.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-text">Does this calculator show my actual SBA loan rate?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">No. SBA loan rates, fees, eligibility, and terms depend on the SBA program, lender, loan amount, collateral, use of funds, business financials, and owner credit profile.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-text">Can SBA fees be financed into the loan?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">Some SBA-related fees may be financed or included in closing costs depending on the program and lender. Use this calculator as a planning estimate and confirm all fees with the lender before signing.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <style>
+    .input-field {
+      width: 100%;
+      border-radius: 0.5rem;
+      border: 1px solid var(--color-border, #d8dee8);
+      background: #fff;
+      padding: 0.75rem 1rem;
+      color: var(--color-text, #172033);
+      outline: none;
+    }
+    .input-field:focus {
+      border-color: var(--color-primary, #2563eb);
+      box-shadow: 0 0 0 1px var(--color-primary, #2563eb);
+    }
+  </style>
+
+  <script>
+    const money = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0,
+    });
+
+    const ids = [
+      'loan-amount',
+      'interest-rate',
+      'term-years',
+      'fee-rate',
+      'fee-treatment',
+      'monthly-revenue',
+      'existing-debt',
+    ];
+    const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
+
+    function value(id) {
+      const parsed = Number(fields[id].value);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function setText(id, text) {
+      const node = document.getElementById(id);
+      if (node) node.textContent = text;
+    }
+
+    function addItem(list, text) {
+      const item = document.createElement('li');
+      item.className = 'flex items-start gap-2';
+      const marker = document.createElement('span');
+      marker.className = 'mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary';
+      const copy = document.createElement('span');
+      copy.textContent = text;
+      item.append(marker, copy);
+      list.appendChild(item);
+    }
+
+    function payment(principal, annualRate, months) {
+      if (principal <= 0 || months <= 0) return 0;
+      const monthlyRate = annualRate / 100 / 12;
+      if (monthlyRate === 0) return principal / months;
+      return principal * (monthlyRate * (1 + monthlyRate) ** months) / ((1 + monthlyRate) ** months - 1);
+    }
+
+    function calculate() {
+      const amount = Math.max(value('loan-amount'), 0);
+      const rate = Math.max(value('interest-rate'), 0);
+      const years = Math.max(value('term-years'), 1);
+      const feeRate = Math.max(value('fee-rate'), 0);
+      const monthlyRevenue = Math.max(value('monthly-revenue'), 0);
+      const existingDebt = Math.max(value('existing-debt'), 0);
+      const months = years * 12;
+      const feeEstimate = amount * (feeRate / 100);
+      const amountFinanced = fields['fee-treatment'].value === 'financed' ? amount + feeEstimate : amount;
+      const monthlyPayment = payment(amountFinanced, rate, months);
+      const totalPaid = monthlyPayment * months;
+      const totalInterest = Math.max(totalPaid - amountFinanced, 0);
+      const totalRepayment = fields['fee-treatment'].value === 'financed' ? totalPaid : totalPaid + feeEstimate;
+      const paymentLoad = monthlyRevenue > 0 ? ((existingDebt + monthlyPayment) / monthlyRevenue) * 100 : 0;
+
+      let pressure = 'Lower';
+      let copy = 'The entered payment uses a smaller share of monthly revenue. Still review margins, seasonality, collateral, and lender terms.';
+      if (paymentLoad >= 25) {
+        pressure = 'High';
+        copy = 'The entered debt load uses a large share of monthly revenue. Review cash-flow cushion, term length, collateral, and lower-cost alternatives before applying.';
+      } else if (paymentLoad >= 12) {
+        pressure = 'Moderate';
+        copy = 'The entered monthly payment is meaningful but may be workable if revenue and margins are stable.';
+      }
+
+      setText('monthly-payment', money.format(monthlyPayment));
+      setText('amount-financed', money.format(amountFinanced));
+      setText('fee-estimate', money.format(feeEstimate));
+      setText('total-interest', money.format(totalInterest));
+      setText('total-repayment', money.format(totalRepayment));
+      setText('pressure-label', pressure);
+      setText('pressure-copy', copy);
+
+      const list = document.getElementById('review-list');
+      list.innerHTML = '';
+      addItem(list, `Monthly payment estimate: ${money.format(monthlyPayment)} over ${months} months.`);
+      addItem(list, `Modeled upfront fee impact: ${money.format(feeEstimate)} at ${feeRate.toFixed(1)}%.`);
+      addItem(list, `Estimated debt payment load after this loan: ${paymentLoad.toFixed(1)}% of monthly revenue.`);
+      addItem(list, fields['fee-treatment'].value === 'financed'
+        ? 'Fees are modeled as financed, which raises the amount used to calculate interest.'
+        : 'Fees are modeled as paid upfront, so they are added to total cost but not financed.');
+    }
+
+    ids.forEach((id) => fields[id]?.addEventListener('input', calculate));
+    fields['fee-treatment']?.addEventListener('change', calculate);
+    calculate();
+  </script>
+</BaseLayout>

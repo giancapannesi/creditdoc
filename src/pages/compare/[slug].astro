@@ -347,7 +347,63 @@ function softenComparisonText(text: string): string {
 
 const safeSummary = softenComparisonText(comparison.summary);
 const safeWinnerReason = softenComparisonText(comparison.winner_reason);
-const displayComparisonTitle = `${lenderA.name} vs ${lenderB.name} (2026)`;
+
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function titleCaseSlug(value: string): string {
+  return value
+    .split('-')
+    .filter(Boolean)
+    .map((part) => (part.length === 2 ? part.toUpperCase() : part.charAt(0).toUpperCase() + part.slice(1)))
+    .join(' ');
+}
+
+function compact(value: string, maxLength: number): string {
+  const normalized = value.replace(/\s+/g, ' ').trim();
+  if (normalized.length <= maxLength) return normalized;
+  return normalized.slice(0, maxLength - 1).trimEnd();
+}
+
+function addressContext(lender: Lender): string {
+  const address = String(lender.address || '');
+  const match = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s+\d{5}/);
+  return match ? `${match[1].trim()} ${match[2].trim()}` : '';
+}
+
+function slugContext(lender: Lender): string {
+  const legalSuffixes = new Set(['inc', 'llc', 'ltd', 'co', 'corp', 'corporation', 'company', 'pllc', 'lp']);
+  const slugParts = lender.slug.split('-').filter(Boolean);
+  const nameParts = slugify(lender.name)
+    .split('-')
+    .filter((part) => part && !legalSuffixes.has(part));
+
+  let index = 0;
+  for (const part of nameParts) {
+    if (slugParts[index] === part) index += 1;
+  }
+
+  const contextParts = slugParts.slice(index);
+  if (contextParts.length === 0 || contextParts.length === slugParts.length) return '';
+  return titleCaseSlug(contextParts.join('-'));
+}
+
+function lenderMetaLabel(lender: Lender, maxLength = 38): string {
+  const context = addressContext(lender) || slugContext(lender);
+  const nameHasContext = context && lender.name.toLowerCase().includes(context.toLowerCase());
+  const label = context && !nameHasContext ? `${lender.name} ${context}` : lender.name;
+  return compact(label, maxLength);
+}
+
+const lenderATitleLabel = lenderMetaLabel(lenderA, 30);
+const lenderBTitleLabel = lenderMetaLabel(lenderB, 30);
+const displayComparisonTitle = `${lenderATitleLabel} vs ${lenderBTitleLabel} (2026)`;
+const metaDescription = `${lenderMetaLabel(lenderA, 44)} vs ${lenderMetaLabel(lenderB, 44)}: compare listed pricing, services, review context, BBB/profile fields, and verification questions before contacting either provider.`;
 const lenderASignals = profileSignals(lenderA);
 const lenderBSignals = profileSignals(lenderB);
 const lenderAStrength = profileStrength(lenderA);
@@ -678,7 +734,7 @@ const jsonLd = [
 
 <BaseLayout
   title={`${displayComparisonTitle} | CreditDoc`}
-  description={safeSummary}
+  description={metaDescription}
   jsonLd={jsonLd}
 >
   <!-- Breadcrumbs -->

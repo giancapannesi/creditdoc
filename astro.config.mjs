@@ -155,12 +155,15 @@ export default defineConfig({
       // Split into multiple sitemaps (~5000 URLs each) for crawl efficiency
       entryLimit: 5000,
       customPages: ssrPages,
-      // /search/ is an internal utility page with a page-level noindex meta.
-      // Do not submit it in XML sitemaps; Search Console otherwise reports it
-      // as a robots/indexing conflict when robots rules change.
+      // Exclude utility, print, and redirect-only pages from XML sitemaps.
+      // Content pages should have one useful H1; these routes are not search
+      // landing pages and create crawler noise in third-party audit tools.
       filter(page) {
         const url = new URL(page);
-        return url.pathname !== '/search/';
+        if (url.pathname === '/search/') return false;
+        if (url.pathname === '/specials/') return false;
+        if (url.pathname.endsWith('/print/')) return false;
+        return true;
       },
       // Set priority + changefreq per page type
       serialize(item) {

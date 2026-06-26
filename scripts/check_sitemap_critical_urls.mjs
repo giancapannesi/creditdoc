@@ -18,6 +18,9 @@ const REQUIRED_URLS = [
 
 const FORBIDDEN_URLS = [
   'https://www.creditdoc.co/search/',
+  'https://www.creditdoc.co/specials/',
+  'https://www.creditdoc.co/resources/credit-report-checklist/print/',
+  'https://www.creditdoc.co/resources/loan-approval-readiness-toolkit/print/',
   'https://www.creditdoc.co/compare/kikoff-vs-a-better-way-auto-brokerage/',
 ];
 

@@ -5,7 +5,7 @@ lead_rewriter.py — Rewrite chain location page lead paragraphs to be location-
 Reads DB rows where brand_slug IS NOT NULL. For each row:
   - Skip if is_protected=1
   - Skip if description_short already leads with address/location pattern
-  - Build a prompt for Claude Haiku via CLI, validate output, write to DB
+  - Validate cached/local output only; external model calls are disabled
   - Cache responses to avoid re-spending on re-runs
 
 Usage:
@@ -21,7 +21,6 @@ import hashlib
 import json
 import random
 import re
-import subprocess
 import sys
 import time
 from datetime import datetime, timezone
@@ -237,29 +236,6 @@ def validate_output(text, name, phone, city, address):
     return True, "ok"
 
 
-# ─── Claude CLI Call ──────────────────────────────────────────────────────────
-
-def call_claude(prompt, model="claude-opus-4-6"):
-    """
-    Call Claude CLI with the given prompt.
-    Returns (output_text, error_str).
-    """
-    try:
-        result = subprocess.run(
-            ["claude", "--model", model, "--print", prompt],
-            capture_output=True,
-            text=True,
-            timeout=60,
-        )
-        if result.returncode != 0:
-            return None, f"CLI error (rc={result.returncode}): {result.stderr[:200]}"
-        return result.stdout.strip(), None
-    except subprocess.TimeoutExpired:
-        return None, "CLI timeout after 60s"
-    except Exception as e:
-        return None, f"CLI exception: {e}"
-
-
 # ─── Row Processor ────────────────────────────────────────────────────────────
 
 def build_prompt(row_data, name, address, city, state_abbr, phone, category_label):
@@ -334,62 +310,13 @@ def process_row(slug, row_data, is_protected, cache, live=False, verbose=True):
         print(f"  [WARN] name/desc mismatch: '{name}' not found in description_short. Skipping (needs manual curation).")
         return {"action": "skip", "new_text": None, "reason": f"name/desc mismatch: '{name}' not in description_short", "old_text": old_text}
 
-    # If not live mode, can't call Claude
+    # External model calls are disabled for this automation.
     if not live:
         return {"action": "skip", "new_text": None, "reason": "dry-run (no --live)", "old_text": old_text}
 
-    # Build and send prompt
-    prompt = build_prompt(row_data, name, address, city, state_abbr, phone, category_label)
-
-    output, err = call_claude(prompt)
-    if err:
-        cache[ck] = {"output": None, "validation": "failed", "timestamp": _now(), "skip_reason": err}
-        return {"action": "failed", "new_text": None, "reason": f"CLI error: {err}", "old_text": old_text}
-
-    valid, reason = validate_output(output, name, phone, city, address)
-
-    # Retry once on failure
-    if not valid:
-        retry_prompt = prompt + RETRY_SUFFIX.format(reason=reason)
-        if verbose:
-            print(f"  [retry] validation failed: {reason}")
-        output2, err2 = call_claude(retry_prompt)
-        if not err2:
-            valid2, reason2 = validate_output(output2, name, phone, city, address)
-            if valid2:
-                output = output2
-                valid = True
-                reason = reason2
-            else:
-                reason = f"retry also failed: {reason2}"
-        else:
-            reason = f"retry CLI error: {err2}"
-
-    if not valid:
-        cache[ck] = {
-            "output": output,
-            "validation": "failed",
-            "timestamp": _now(),
-            "skip_reason": reason,
-        }
-        return {"action": "failed", "new_text": None, "reason": reason, "old_text": old_text}
-
-    if output == "NO_CHANGE":
-        cache[ck] = {
-            "output": None,
-            "validation": "skip",
-            "timestamp": _now(),
-            "skip_reason": "model returned NO_CHANGE",
-        }
-        return {"action": "no_change", "new_text": None, "reason": "model returned NO_CHANGE", "old_text": old_text}
-
-    # Success
-    cache[ck] = {
-        "output": output,
-        "validation": "ok",
-        "timestamp": _now(),
-    }
-    return {"action": "write", "new_text": output, "reason": "ok", "old_text": old_text}
+    reason = "live rewriting disabled: no external model route is configured"
+    cache[ck] = {"output": None, "validation": "failed", "timestamp": _now(), "skip_reason": reason}
+    return {"action": "failed", "new_text": None, "reason": reason, "old_text": old_text}
 
 
 def _now():

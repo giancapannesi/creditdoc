@@ -373,7 +373,7 @@ export function getLendersByCityState(city: string, stateAbbr: string): Lender[]
 export function getStatesWithLenders(minCount: number = 1): StateInfo[] {
   const stateMap = new Map<string, { count: number; cities: Set<string> }>();
   for (const l of getAllLenders()) {
-    const abbr = l.company_info.state;
+    const abbr = normalizeStateAbbr(l.company_info.state);
     if (!abbr) continue;
     if (!stateMap.has(abbr)) stateMap.set(abbr, { count: 0, cities: new Set() });
     const s = stateMap.get(abbr)!;

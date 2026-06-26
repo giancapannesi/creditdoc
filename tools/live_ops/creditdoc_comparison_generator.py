@@ -2,7 +2,7 @@
 """
 CreditDoc — Comparison Page Generator
 
-Generates comparison pages between lenders using Claude CLI.
+Generates comparison pages between lenders using OpenAI.
 Appends to comparisons.json — NEVER overwrites existing entries.
 
 Usage:
@@ -28,7 +28,7 @@ from itertools import combinations
 from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from creditdoc_oauth import call_claude
+from creditdoc_oauth import call_ai
 from creditdoc_content_guardrails import reject_if_unsafe, supplied_fact_values, extract_current_fact_values
 from creditdoc_content_repair import repair_unsafe_json
 
@@ -241,7 +241,7 @@ def lender_current_fact_values(l):
 
 
 def generate_comparison(lenders, comp_item):
-    """Generate a comparison using Claude CLI."""
+    """Generate a comparison using OpenAI."""
     a = lenders[comp_item['lender_a']]
     b = lenders[comp_item['lender_b']]
 
@@ -284,7 +284,7 @@ RULES:
 - Output ONLY the JSON object."""
 
     try:
-        output = call_claude(prompt, model='opus', max_tokens=2048)
+        output = call_ai(prompt, model='gpt-4.1', max_tokens=2048)
 
         # Clean markdown fences
         if "```json" in output:

@@ -6,6 +6,54 @@ const description = "Free tools to support financial research, credit review, de
 
 const tools = [
   {
+    title: "SBA Loan Calculator",
+    description: "Estimate SBA loan monthly payments, total repayment, interest cost, fee impact, and payment pressure with editable assumptions.",
+    href: "/tools/sba-loan-calculator/",
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.768 0-1.536-.22-2.121-.659-1.172-.879-1.172-2.303 0-3.182 1.171-.879 3.07-.879 4.242 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />',
+    badge: "New calculator",
+    live: true,
+  },
+  {
+    title: "Business Loan Calculator",
+    description: "Estimate business loan payment, total interest, modeled fee impact, and revenue pressure before comparing funding options.",
+    href: "/tools/business-loan-calculator/",
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m6-6h1.5m-1.5 3h1.5m-1.5 3h1.5" />',
+    badge: "New calculator",
+    live: true,
+  },
+  {
+    title: "Equipment Financing Calculator",
+    description: "Estimate equipment financing payments, down-payment impact, total interest, and repayment cost before comparing lenders.",
+    href: "/tools/equipment-financing-calculator/",
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h7.5m-10.5 0H3.375A1.125 1.125 0 0 1 2.25 17.625V14.25m13.5 4.5a1.5 1.5 0 0 1 3 0m-3 0a1.5 1.5 0 0 0 3 0m0 0h1.875c.621 0 1.125-.504 1.125-1.125V14.25m-19.5 0V6.375c0-.621.504-1.125 1.125-1.125h9.75c.621 0 1.125.504 1.125 1.125v7.875m-12 0h12m0 0h6.75m0 0-2.25-4.5h-4.5" />',
+    badge: "New calculator",
+    live: true,
+  },
+  {
+    title: "SBA Guarantee Fee Calculator",
+    description: "Model the guaranteed portion of an SBA loan and estimate guarantee-fee impact from editable lender-disclosure assumptions.",
+    href: "/tools/sba-guarantee-fee-calculator/",
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7.5-4.5 7.5-11.25V5.625L12 2.25 4.5 5.625V9.75C4.5 16.5 12 21 12 21Zm-2.25-9 1.5 1.5 3-3" />',
+    badge: "New calculator",
+    live: true,
+  },
+  {
+    title: "Accounts Receivable Financing Calculator",
+    description: "Estimate invoice advance amount, reserve, fees, and net funds before comparing receivables financing or factoring options.",
+    href: "/tools/accounts-receivable-financing-calculator/",
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5A3.375 3.375 0 0 0 10.125 2.25H8.25m2.25 0H5.625C5.004 2.25 4.5 2.754 4.5 3.375v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />',
+    badge: "New calculator",
+    live: true,
+  },
+  {
+    title: "Working Capital Calculator",
+    description: "Estimate working capital gap, runway, modeled loan payment, and short-term funding pressure before comparing options.",
+    href: "/tools/working-capital-calculator/",
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75c0 .621-.504 1.125-1.125 1.125h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75Zm6.75-4.5c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625Zm6.75-4.5c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />',
+    badge: "New calculator",
+    live: true,
+  },
+  {
     title: "Credit Denial Action Checklist",
     description: "Organize an adverse action notice, credit report review, supporting documents, and next research steps before applying again.",
     href: "/tools/credit-denial-action-checklist/",
@@ -158,7 +206,7 @@ const breadcrumbJsonLd = {
         <a href="/state/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
           State context
         </a>
-        <a href="/categories/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+        <a href="/categories/personal-loans/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
           Provider categories
         </a>
         <a href="/research/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">

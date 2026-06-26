@@ -100,7 +100,7 @@ const primaryContextTool = blogCategoryToolMap[postCategory] || { label: 'Tools 
 const primaryRelatedCategory = relatedCategories[0];
 const primaryCategoryLink = primaryRelatedCategory
   ? { label: `${primaryRelatedCategory.name} providers`, href: `/categories/${primaryRelatedCategory.slug}/` }
-  : { label: 'Provider categories', href: '/categories/' };
+  : { label: 'Local provider directory', href: '/city/' };
 
 // Run inline-linker on blog sections for internal links to money pages, tools, answers
 const linker = createLinker(glossaryTerms, { moneyBudget: 6, glossaryBudget: 6 });

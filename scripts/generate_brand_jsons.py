@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate per-brand copy JSONs for all 57 approved chains.
-Uses claude CLI (claude-haiku-4-5) for summary_long + FAQs.
-Run sequentially with 2s sleep between calls.
+Uses deterministic local templates for summary_long + FAQs.
 
 Usage:
     python3 scripts/generate_brand_jsons.py
@@ -13,9 +12,7 @@ import json
 import os
 import re
 import sqlite3
-import subprocess
 import sys
-import time
 from pathlib import Path
 
 DB_PATH = Path(__file__).parent.parent / "data" / "creditdoc.db"
@@ -326,29 +323,8 @@ def get_brand_db_data(db, brand_slug):
     return rows
 
 
-def call_claude(prompt):
-    """Call claude CLI with a prompt. Returns text output."""
-    try:
-        result = subprocess.run(
-            ["claude", "--model", "claude-haiku-4-5", "--print", prompt],
-            capture_output=True,
-            text=True,
-            timeout=60,
-        )
-        if result.returncode != 0:
-            print(f"  WARNING: claude returned code {result.returncode}: {result.stderr[:200]}")
-            return None
-        return result.stdout.strip()
-    except subprocess.TimeoutExpired:
-        print("  WARNING: claude call timed out")
-        return None
-    except FileNotFoundError:
-        print("  ERROR: claude CLI not found in PATH")
-        return None
-
-
 def generate_brand_json(brand_slug, db_row, meta):
-    """Generate brand JSON using Claude CLI for summary_long + FAQs."""
+    """Generate brand JSON using local factual templates."""
     location_count = db_row["cnt"]
     category = db_row["category"] or "financial-services"
     states_raw = db_row["states"] or ""
@@ -366,89 +342,20 @@ def generate_brand_json(brand_slug, db_row, meta):
     parent_str = f"owned by {parent_company}" if parent_company else "an independent company"
     top_states_str = ", ".join(top_states) if top_states else "multiple US states"
 
-    prompt = f"""You are writing factual, Wikipedia-tone content for a financial directory.
-Write a 3-paragraph brand overview for {display_name}.
-
-Context:
-- Brand: {display_name}
-- Category: {category.replace('-', ' ')}
-- US locations: {location_count}
-- Top states: {top_states_str}
-- Corporate: {parent_str}
-- Official website: {official_website or 'not verified'}
-
-Rules:
-1. Wikipedia tone — factual, neutral, no marketing language.
-2. No words: best, trusted, premier, leading, top, excellent, exceptional, outstanding, superior, amazing.
-3. Do not invent facts. If you don't know something, omit it.
-4. Paragraph 1: What this company does and who it serves.
-5. Paragraph 2: Geographic footprint and any notable products/services.
-6. Paragraph 3: Consumer considerations — what to know before using (fees, regulations, alternatives).
-7. Each paragraph is 2-3 sentences. Total: ~150 words.
-8. Then write 3 FAQs in this exact format:
-   Q: [question about {display_name}]
-   A: [factual answer, 1-2 sentences]
-   Q: [question about finding a location]
-   A: [factual answer]
-   Q: [question about safety, fees, or regulations]
-   A: [factual answer]
-
-Output format:
-SUMMARY:
-[3 paragraphs]
-
-FAQs:
-Q: ...
-A: ...
-Q: ...
-A: ...
-Q: ...
-A: ...
-"""
-
-    output = call_claude(prompt)
-    if not output:
-        # Fallback: minimal content
-        summary_long = f"{display_name} is a {category.replace('-', ' ')} provider with {location_count} locations across the US. The company operates in {len(state_list)} states including {top_states_str}. Consumers should review terms and fees before using this service."
-        faqs = [
-            {"q": f"How do I find a nearby {display_name} location?", "a": f"Use the location finder on this page to browse all {location_count} {display_name} branches by state."},
-            {"q": f"What does {display_name} offer?", "a": f"{display_name} provides {category.replace('-', ' ')} services at branch locations."},
-            {"q": f"Is {display_name} regulated?", "a": "Financial service providers are regulated at the state level. Check your state regulator for specific licensing information."},
-        ]
-        return summary_long, faqs
-
-    # Parse output
-    summary_long = ""
-    faqs = []
-
-    # Split on SUMMARY: and FAQs:
-    summary_match = re.search(r"SUMMARY:\s*(.*?)(?=FAQs:|$)", output, re.DOTALL | re.IGNORECASE)
-    faq_match = re.search(r"FAQs:\s*(.*?)$", output, re.DOTALL | re.IGNORECASE)
-
-    if summary_match:
-        summary_long = summary_match.group(1).strip()
-    else:
-        # Try to grab first 3 paragraphs
-        lines = output.split("\n\n")
-        non_faq = [l for l in lines if not l.strip().startswith("Q:") and not l.strip().startswith("FAQs")]
-        summary_long = "\n\n".join(non_faq[:3]).strip()
-
-    if faq_match:
-        faq_text = faq_match.group(1).strip()
-        q_pattern = re.findall(r"Q:\s*(.+?)\nA:\s*(.+?)(?=\nQ:|\Z)", faq_text, re.DOTALL)
-        for q, a in q_pattern:
-            faqs.append({"q": q.strip(), "a": a.strip()})
-
-    # Fallback FAQs if parsing failed
-    if not faqs:
-        faqs = [
-            {"q": f"How do I find a nearby {display_name} location?", "a": f"Use the location finder on this page to browse all {location_count} {display_name} branches by state."},
-            {"q": f"What does {display_name} offer?", "a": f"{display_name} provides {category.replace('-', ' ')} services at branch locations."},
-            {"q": f"Is {display_name} regulated?", "a": "Financial service providers are regulated at the state level. Check your state regulator for specific licensing information."},
-        ]
-
-    if not summary_long:
-        summary_long = f"{display_name} is a {category.replace('-', ' ')} provider with {location_count} locations across the US, operating primarily in {top_states_str}. The company provides services at physical branch locations. Consumers should review terms and fees before using this service."
+    category_label = category.replace('-', ' ')
+    summary_long = (
+        f"{display_name} is a {category_label} provider listed in the CreditDoc directory. "
+        f"The brand has {location_count} indexed location{'s' if location_count != 1 else ''} and is {parent_str}.\n\n"
+        f"CreditDoc location data shows activity across {top_states_str}. "
+        f"Consumers can use the brand page to compare locations, categories, and available profile details before contacting a provider.\n\n"
+        f"Before using {display_name}, review fees, eligibility requirements, licensing, and state-specific rules. "
+        f"Directory information should be checked against the provider's official website{f' at {official_website}' if official_website else ''} and applicable state regulators."
+    )
+    faqs = [
+        {"q": f"How do I find a nearby {display_name} location?", "a": f"Use the location finder on this page to browse all {location_count} {display_name} location{'s' if location_count != 1 else ''} by state."},
+        {"q": f"What does {display_name} offer?", "a": f"{display_name} is categorized as a {category_label} provider in the CreditDoc directory."},
+        {"q": f"Is {display_name} regulated?", "a": "Financial service providers are usually regulated at the state or federal level. Check the provider's disclosures and your state regulator before applying."},
+    ]
 
     return summary_long, faqs
 
@@ -528,10 +435,6 @@ def main():
         out_path.write_text(json.dumps(brand_data, indent=2, ensure_ascii=False))
         print(f"    Written: {out_path.name}")
         generated += 1
-
-        # Rate limit: 2s sleep between claude calls
-        if i < len(all_slugs):
-            time.sleep(2)
 
     db.close()
     print(f"\nDone: {generated} generated, {skipped} skipped.")

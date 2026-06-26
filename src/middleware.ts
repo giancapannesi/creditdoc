@@ -35,6 +35,25 @@ const CITY_STATE_SLUGS = Object.entries(STATE_ABBREVIATIONS)
   }))
   .sort((a, b) => b.stateSlug.length - a.stateSlug.length);
 
+const STATE_CODE_REDIRECTS = new Map(
+  Object.entries(STATE_ABBREVIATIONS).map(([state, abbr]) => [
+    abbr.toLowerCase(),
+    `/state/${state.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}/`,
+  ])
+);
+
+const NON_STATE_CODE_REDIRECTS = new Set(['dc', 'gu', 'ho', 'pm', 'pr', 'st', 'vi']);
+
+function stateCodeRedirectTarget(pathname: string): string | null {
+  const match = pathname.match(/^\/state\/([a-z]{2})\/?$/i);
+  if (!match) return null;
+
+  const code = match[1].toLowerCase();
+  const target = STATE_CODE_REDIRECTS.get(code);
+  if (target) return target === pathname ? null : target;
+  return NON_STATE_CODE_REDIRECTS.has(code) ? '/state/' : null;
+}
+
 function cityStateRedirectTarget(pathname: string): string | null {
   const match = pathname.match(/^\/city\/([^/]+)\/?$/);
   if (!match) return null;
@@ -376,6 +395,15 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   const url = new URL(context.request.url);
   const pathname = url.pathname;
+
+  if (/^\/categories\/?$/.test(pathname)) {
+    return Response.redirect(new URL('/city/', url.origin), 301);
+  }
+
+  const stateRedirectTarget = stateCodeRedirectTarget(pathname);
+  if (stateRedirectTarget) {
+    return Response.redirect(new URL(stateRedirectTarget, url.origin), 301);
+  }
 
   const cityRedirectTarget = cityStateRedirectTarget(pathname);
   if (cityRedirectTarget) {

@@ -2,7 +2,7 @@
 """
 CreditDoc — Wellness Guide Generator
 
-Generates financial wellness guides using Claude CLI.
+Generates financial wellness guides using OpenAI.
 Appends to wellness-guides.json — NEVER overwrites existing entries.
 
 Usage:
@@ -26,7 +26,7 @@ import time
 from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from creditdoc_oauth import call_claude
+from creditdoc_oauth import call_ai
 from creditdoc_content_guardrails import reject_if_unsafe
 from creditdoc_content_repair import repair_unsafe_json
 
@@ -256,7 +256,7 @@ def _fetch_answer_titles():
 
 
 def _generate_new_topics(existing_slugs, count=20):
-    """Use Claude to generate new wellness topic ideas based on coverage gaps.
+    """Use OpenAI to generate new wellness topic ideas based on coverage gaps.
 
     Pulls from the answers table to ensure new guides are coherent with
     the questions people are actually asking on the site.
@@ -312,7 +312,7 @@ RULES:
 - Think about what someone would search AFTER reading one of the answer pages above
 """
     try:
-        result = call_claude(prompt)
+        result = call_ai(prompt, model="gpt-4.1")
         text = result.strip()
         if text.startswith("```"):
             text = text.split("\n", 1)[1].rsplit("```", 1)[0]
@@ -327,7 +327,7 @@ RULES:
 
 
 def generate_guide(topic):
-    """Generate a wellness guide using Claude CLI."""
+    """Generate a wellness guide using OpenAI."""
     slug = topic["slug"]
     title = topic["title"]
     category = topic["category"]
@@ -404,7 +404,7 @@ IMPORTANT: Output ONLY the JSON object. No markdown, no code fences, no explanat
 
     print(f"  Generating: {title}...")
     try:
-        output = call_claude(prompt)
+        output = call_ai(prompt, model="gpt-4.1")
 
         # Clean any markdown fences or short assistant prefaces.
         if "```json" in output:
@@ -463,7 +463,7 @@ IMPORTANT: Output ONLY the JSON object. No markdown, no code fences, no explanat
         return guide
 
     except json.JSONDecodeError as e:
-        print(f"  ERROR: Invalid JSON from Claude: {e}")
+        print(f"  ERROR: Invalid JSON from OpenAI: {e}")
         debug_path = f"/tmp/creditdoc_guide_debug_{slug}.txt"
         with open(debug_path, "w") as f:
             f.write(output)

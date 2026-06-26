@@ -351,19 +351,19 @@ def normalize_blog_metadata(post):
 
 # ── Article Generation ──────────────────────────────────────────
 
-def claude_call(prompt, timeout_secs=240):
-    """Call the shared CreditDoc provider stack: Claude CLI Opus, then fallbacks."""
+def openai_call(prompt, timeout_secs=240):
+    """Call the shared CreditDoc OpenAI text provider."""
     try:
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
         from creditdoc_oauth import call_ai
-        return call_ai(prompt, model="opus", max_tokens=8192, timeout_secs=timeout_secs)
+        return call_ai(prompt, model="gpt-4.1", max_tokens=8192, timeout_secs=timeout_secs)
     except Exception as e:
-        print(f"  Claude/OpenAI generation failed: {e}")
+        print(f"  OpenAI generation failed: {e}")
     return None
 
 
 def generate_article(article_meta):
-    """Generate a full blog post using Claude SDK/CLI."""
+    """Generate a full blog post using OpenAI."""
     topic = article_meta["topic"]
     keyword = article_meta.get("keyword", topic)
     category = article_meta.get("category", "general")
@@ -428,9 +428,9 @@ RULES:
 """
 
     try:
-        output = claude_call(prompt)
+        output = openai_call(prompt)
         if not output:
-            print(f"  ERROR: No response from Claude for '{topic}'")
+            print(f"  ERROR: No response from OpenAI for '{topic}'")
             return None
 
         # Extract JSON from response — robust parsing

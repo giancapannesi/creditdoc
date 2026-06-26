@@ -1,10 +1,25 @@
 export const prerender = false;
 
+const SITEMAP_FILES = [
+  'sitemap-0.xml',
+  'sitemap-1.xml',
+  'sitemap-2.xml',
+  'sitemap-3.xml',
+  'sitemap-4.xml',
+];
+
 export function GET({ url }: { url: URL }) {
-  return new Response(null, {
-    status: 301,
+  const origin = url.origin;
+  const body = `<?xml version="1.0" encoding="UTF-8"?>` +
+    `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
+    SITEMAP_FILES.map((file) => `<sitemap><loc>${origin}/${file}</loc></sitemap>`).join('') +
+    `</sitemapindex>`;
+
+  return new Response(body, {
+    status: 200,
     headers: {
-      Location: new URL('/sitemap-index.xml', url.origin).toString(),
+      'content-type': 'application/xml; charset=utf-8',
+      'cache-control': 'public, max-age=0, must-revalidate',
     },
   });
 }

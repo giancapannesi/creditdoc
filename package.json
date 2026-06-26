@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "astro dev",
     "prebuild": "node scripts/check_content_text_integrity.mjs && node scripts/check_robots_contract.mjs && node scripts/check_ssr_sitemap_parity.mjs",
-    "postbuild": "node scripts/check_sitemap_robots_conflicts.mjs && node scripts/check_sitemap_critical_urls.mjs",
+    "postbuild": "node scripts/check_sitemap_robots_conflicts.mjs && node scripts/check_sitemap_critical_urls.mjs && node scripts/check_feed_contract.mjs && node scripts/check_image_alt_contract.mjs && node scripts/check_image_filename_contract.mjs",
     "build": "astro build",
     "test:comparison-batch": "node --test test/comparison_batch_utils.test.mjs",
     "check:comparison-db-freshness": "node scripts/check_comparison_db_freshness.mjs",
     "check:content-text-integrity": "node scripts/check_content_text_integrity.mjs",
+    "check:seo-deep": "node scripts/seo_deep_audit.mjs",
     "check:comparison-batch-scope": "node scripts/check_comparison_batch_scope.mjs",
     "comparison:extract-source-facts": "node scripts/extract_comparison_source_facts.mjs",
     "comparison:claim-safety": "node scripts/check_comparison_claim_safety.mjs",

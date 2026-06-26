@@ -77,12 +77,52 @@ function getBreakdownColor(key: string): string {
   return breakdownColors[key] || 'bg-slate-400';
 }
 
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function titleCaseSlug(value: string): string {
+  return value
+    .split('-')
+    .filter(Boolean)
+    .map((part) => (part.length === 2 ? part.toUpperCase() : part.charAt(0).toUpperCase() + part.slice(1)))
+    .join(' ');
+}
+
+function compact(value: string, maxLength: number): string {
+  const normalized = value.replace(/\s+/g, ' ').trim();
+  if (normalized.length <= maxLength) return normalized;
+  return normalized.slice(0, maxLength - 1).trimEnd();
+}
+
+function slugContext(slug: string, companyName: string): string {
+  const legalSuffixes = new Set(['inc', 'llc', 'ltd', 'co', 'corp', 'corporation', 'company', 'pllc', 'lp']);
+  const slugParts = slug.split('-').filter(Boolean);
+  const companyParts = slugify(companyName)
+    .split('-')
+    .filter((part) => part && !legalSuffixes.has(part));
+
+  let index = 0;
+  for (const part of companyParts) {
+    if (slugParts[index] === part) index += 1;
+  }
+
+  const contextParts = slugParts.slice(index);
+  if (contextParts.length === 0 || contextParts.length === slugParts.length) return '';
+  return titleCaseSlug(contextParts.join('-'));
+}
+
 // SEO
-const titleCompany = cfpb.company_name.length > 30
-  ? cfpb.company_name.substring(0, 30).trim()
-  : cfpb.company_name;
-const seoTitle = `${titleCompany} Consumer Response Profile | CreditDoc`;
-const seoDesc = `${cfpb.company_name} CFPB response data: ${resolutionPct || '-'}% recorded response-outcome rate, ${timelyPct || '-'}% timely responses. Use as transparency context, not a rating.`;
+const contextLabel = slugContext(cfpb.slug, cfpb.company_name);
+const titleCompany = compact(cfpb.company_name, contextLabel ? Math.max(18, 48 - contextLabel.length) : 42);
+const seoTitle = contextLabel
+  ? `${titleCompany} ${contextLabel} CFPB | CreditDoc`
+  : `${titleCompany} CFPB Data | CreditDoc`;
+const seoDesc = `${cfpb.company_name}${contextLabel ? ` (${contextLabel})` : ''} CFPB response data: ${resolutionPct || '-'}% recorded response-outcome rate, ${timelyPct || '-'}% timely responses. Use as transparency context, not a rating.`;
 
 // JSON-LD
 const jsonLd = [

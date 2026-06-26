@@ -168,7 +168,7 @@ const categoryLinkFallbacks: Record<string, string> = {
 };
 const categoryHref = category
   ? `/categories/${lender.category}/`
-  : (categoryLinkFallbacks[lender.category] || '/categories/');
+  : (categoryLinkFallbacks[lender.category] || '/city/');
 const absoluteCategoryHref = `https://www.creditdoc.co${categoryHref}`;
 
 const stateAbbr = lender.company_info?.state
@@ -204,12 +204,7 @@ const categoryGuideMap: Record<string, string> = {
   'buy-here-pay-here': 'loans-and-interest',
 };
 const guideCategory = categoryGuideMap[lender.category] || 'understanding-credit';
-const relatedWellnessGuides = (await getWellnessGuidesByCategoryRuntime(guideCategory, env, 3)).slice(0, 3);
-const displayRelatedWellnessGuides = relatedWellnessGuides.map((guide: any) => ({
-  ...guide,
-  title: softenEducationalTeaserCopy(guide.title || ''),
-  description: softenEducationalTeaserCopy(guide.description || ''),
-}));
+const relatedWellnessGuidesPromise = getWellnessGuidesByCategoryRuntime(guideCategory, env, 3);
 
 const answerPillarMap: Record<string, string> = {
   'personal-loans': 'personal-loans',
@@ -231,15 +226,40 @@ const answerPillarMap: Record<string, string> = {
   'mortgages': 'personal-loans',
 };
 const relatedAnswerPillar = answerPillarMap[lender.category] || 'credit-score';
-const relatedAnswers = await getAnswersByPillarRuntime(relatedAnswerPillar, env, 4);
+const relatedAnswersPromise = getAnswersByPillarRuntime(relatedAnswerPillar, env, 4);
+
+Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
+Astro.response.headers.set('x-cdm-rev-source', 'ssr-review');
+Astro.response.headers.set('x-cdm-route', '/review/[slug]');
+Astro.response.headers.set('x-cdm-slug', lender.slug);
 
 const cityName = lender.company_info?.city || '';
 const regionName = stateAbbr || lender.company_info?.state || '';
 const locationLabel = [cityName, regionName].filter(Boolean).join(', ');
 const categoryLabel = category?.name || lender.category.replace(/-/g, ' ');
-const stateRegulatoryContext = stateAbbr
-  ? await getStateByCodeRuntimeFromDb(stateAbbr, env)
-  : null;
+const [
+  relatedWellnessGuidesRaw,
+  relatedAnswers,
+  stateRegulatoryContext,
+  regulatorData,
+  hmdaData,
+  comparisons,
+  brandInfo,
+] = await Promise.all([
+  relatedWellnessGuidesPromise,
+  relatedAnswersPromise,
+  stateAbbr ? getStateByCodeRuntimeFromDb(stateAbbr, env) : Promise.resolve(null),
+  getRegulatorDataRuntime(lender.slug, env as any),
+  lender.category === 'mortgages' ? getHMDADataRuntime(lender.slug, env as any) : Promise.resolve(null),
+  getComparisonsForLenderRuntime(lender.slug, env, 12),
+  lender.brand_slug ? getBrandInfoRuntime(lender.brand_slug, env) : Promise.resolve(null),
+]);
+const relatedWellnessGuides = relatedWellnessGuidesRaw.slice(0, 3);
+const displayRelatedWellnessGuides = relatedWellnessGuides.map((guide: any) => ({
+  ...guide,
+  title: softenEducationalTeaserCopy(guide.title || ''),
+  description: softenEducationalTeaserCopy(guide.description || ''),
+}));
 const primaryWellnessGuide = relatedWellnessGuides[0];
 const nextStepWellnessHref = primaryWellnessGuide
   ? `/financial-wellness/${primaryWellnessGuide.slug}/`
@@ -281,11 +301,6 @@ const affiliateConfig = lender.affiliate_url && Array.isArray(lender.affiliate_a
 const linkedParagraphs = lender.description_long
   ? linkifyDescription(softenYmylCopy(lender.description_long), glossaryTerms, lender.slug, affiliateConfig, lender.category)
   : [];
-
-const regulatorData = await getRegulatorDataRuntime(lender.slug, env as any);
-const hmdaData = await getHMDADataRuntime(lender.slug, env as any);
-
-const comparisons = await getComparisonsForLenderRuntime(lender.slug, env, 50);
 
 // Pre-fetch the "other side" lender names for the Compare-With cards.
 // Single batched query keeps the SSR round-trip count bounded.
@@ -518,10 +533,6 @@ const jsonLd = shouldEmitEntitySchema
   : [breadcrumbSchema];
 
 const canonicalUrl = `https://www.creditdoc.co/review/${lender.slug}/`;
-
-// Brand/chain link — only present if lender belongs to an approved chain.
-// DB-backed (A.2): live from `brands` table at request time.
-const brandInfo = lender.brand_slug ? await getBrandInfoRuntime(lender.brand_slug, env) : null;
 
 // Per-entity OG image: prefer logo, fall through to default in BaseLayout
 const ogImageUrl = lender.logo_url?.trim()

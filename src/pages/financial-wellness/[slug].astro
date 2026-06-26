@@ -110,7 +110,7 @@ const primaryContextTool = categoryToolMap[guide.category] || { label: 'Tools an
 const primaryRelatedCategory = relatedCategories[0];
 const primaryCategoryLink = primaryRelatedCategory
   ? { label: `${primaryRelatedCategory.name} providers`, href: `/categories/${primaryRelatedCategory.slug}/` }
-  : { label: 'Provider categories', href: '/categories/' };
+  : { label: 'Local provider directory', href: '/city/' };
 
 Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
 Astro.response.headers.set('x-cdm-rev-source', 'ssr-wellness');

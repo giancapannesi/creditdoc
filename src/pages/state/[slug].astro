@@ -127,6 +127,11 @@ const description = hasLenders
     : `Compare ${stateInfo.lenderCount} credit repair companies, personal lenders, and financial services in ${stateInfo.name}. BBB ratings, pricing, and reviews.`)
   : `${stateInfo.name} lending regulations, credit repair laws, consumer protections, and financial resources. ${data?.consumer_rights_summary?.split('.')[0] || ''}`;
 
+Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
+Astro.response.headers.set('x-cdm-rev-source', 'ssr-state');
+Astro.response.headers.set('x-cdm-route', '/state/[slug]');
+Astro.response.headers.set('x-cdm-slug', stateInfo.slug);
+
 const jsonLd = [
   {
     "@context": "https://schema.org",

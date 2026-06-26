@@ -3,7 +3,7 @@
 CreditDoc Cluster Content Executor
 
 Reads CLUSTER_MAP.json (40 clusters, priority-ranked), picks the next unpublished
-cluster, calls Claude CLI with a prompt built from the cluster definition, validates
+cluster, calls the shared OpenAI text provider with a prompt built from the cluster definition, validates
 the returned JSON, writes to the cluster_answers DB table, runs the compliance gate,
 exports to JSON for the Astro build, commits, and pushes.
 
@@ -272,11 +272,173 @@ def _pick_voice_profile(cluster_id):
     return VOICE_PROFILES[idx]
 
 
+QUESTION_STARTERS = (
+    "are ", "can ", "could ", "do ", "does ", "did ", "how ", "is ", "should ",
+    "what ", "when ", "where ", "which ", "who ", "why ", "will ",
+)
+
+
+def _normalize_question(text):
+    return re.sub(r"\s+", " ", (text or "").strip())
+
+
+def _sentence_case_question(text):
+    text = _normalize_question(text)
+    if not text:
+        return text
+    text = text[0].upper() + text[1:]
+    text = re.sub(r"\bi\b", "I", text)
+    acronym_map = {
+        "sba": "SBA",
+        "mca": "MCA",
+        "apr": "APR",
+        "fico": "FICO",
+        "irs": "IRS",
+        "ftc": "FTC",
+        "cfpb": "CFPB",
+        "llc": "LLC",
+    }
+    for raw, fixed in acronym_map.items():
+        text = re.sub(rf"\b{raw}\b", fixed, text, flags=re.I)
+    return text
+
+
+def _is_question_like(text):
+    q = _normalize_question(text).lower().rstrip("?")
+    return q.startswith(QUESTION_STARTERS) or "?" in text
+
+
+def _question_score(text):
+    """Prefer exact FAQ-style questions over head terms in a cluster queue."""
+    q = _normalize_question(text).lower()
+    score = 0
+    if _is_question_like(q):
+        score += 20
+    if q.endswith("?"):
+        score += 4
+    if q.startswith(("how ", "what ", "can ", "does ", "is ", "should ", "which ")):
+        score += 6
+    if any(term in q for term in ("reddit", "2022", "2023", "2024", "2025", "2026", "forbes")):
+        score -= 8
+    if q.startswith(("best ", "top ", "compare ")):
+        score -= 6
+    # Keep the page narrow; very long candidates tend to be keyword strings.
+    wc = len(q.split())
+    if 4 <= wc <= 12:
+        score += 4
+    elif wc > 16:
+        score -= 5
+    return score
+
+
+def _ensure_question(text):
+    text = _normalize_question(text)
+    if not text:
+        return "What should borrowers know before comparing financing options?"
+    lower = text.lower().rstrip("?")
+    original_lower = lower
+    phrase_fixes = {
+        "can credit card balance transfer": "Can you transfer a credit card balance?",
+        "are credit card balance transfer bad": "Are credit card balance transfers bad?",
+        "are credit card balance transfers a good idea": "Are credit card balance transfers a good idea?",
+        "are small business loans": "What are small business loans?",
+        "how do i get small business loan": "How do I get a small business loan?",
+        "where to apply for small business loan": "Where can you apply for a small business loan?",
+        "where can i apply for small business loan": "Where can I apply for a small business loan?",
+        "what credit score you need to get a business loan": "What credit score do you need to get a business loan?",
+        "does credit repair companies work": "Do credit repair companies work?",
+        "does credit repair services work": "Do credit repair services work?",
+    }
+    if lower in phrase_fixes:
+        return phrase_fixes[lower]
+    article_patterns = (
+        (r"\bget small business loan\b", "get a small business loan"),
+        (r"\bapply for small business loan\b", "apply for a small business loan"),
+        (r"\bget restaurant business loan\b", "get a restaurant business loan"),
+        (r"\bdump truck business loan\b", "a dump truck business loan"),
+        (r"\bstart up business loan\b", "startup business loan"),
+        (r"\bstart up\b", "startup"),
+    )
+    for pattern, replacement in article_patterns:
+        lower = re.sub(pattern, replacement, lower)
+    if lower != original_lower:
+        text = lower + ("?" if text.endswith("?") else "")
+    if lower.startswith("can credit card transfer balance to "):
+        destination = lower.replace("can credit card transfer balance to ", "", 1)
+        return _sentence_case_question(f"Can you transfer a credit card balance to {destination}?")
+    if lower.startswith("can i transfer credit card balance to "):
+        destination = lower.replace("can i transfer credit card balance to ", "", 1)
+        return _sentence_case_question(f"Can I transfer a credit card balance to {destination}?")
+    if text.endswith("?"):
+        return _sentence_case_question(text)
+    if lower.startswith(QUESTION_STARTERS):
+        return _sentence_case_question(text + "?")
+    if lower.startswith(("best ", "top ")):
+        return _sentence_case_question("What are the " + lower + "?")
+    if lower.startswith("compare "):
+        return _sentence_case_question("How should you " + lower + "?")
+    return _sentence_case_question("What should you know about " + lower + "?")
+
+
+def select_primary_question(cluster):
+    """Turn a cluster queue row into one dedicated answer-page target."""
+    candidates = []
+    for q in cluster.get("sample_questions", []) or []:
+        if isinstance(q, str) and q.strip():
+            candidates.append(q)
+    name = cluster.get("name", "")
+    if name:
+        candidates.append(name)
+
+    if not candidates:
+        return _ensure_question("")
+
+    best = max(candidates, key=_question_score)
+    return _ensure_question(best)
+
+
+def select_supporting_questions(cluster, primary_question, limit=6):
+    primary_norm = re.sub(r"[^a-z0-9]+", " ", primary_question.lower()).strip()
+    out = []
+    seen = {primary_norm}
+    ranked = sorted(
+        [q for q in (cluster.get("sample_questions", []) or []) if isinstance(q, str) and q.strip()],
+        key=_question_score,
+        reverse=True,
+    )
+    for q in ranked:
+        candidate = _ensure_question(q)
+        norm = re.sub(r"[^a-z0-9]+", " ", candidate.lower()).strip()
+        if norm in seen:
+            continue
+        seen.add(norm)
+        out.append(candidate)
+        if len(out) >= limit:
+            break
+    return out
+
+
+def _dedicated_page_recommendation(text):
+    text = _normalize_question(text)
+    if not text:
+        return "Standard dedicated /answers/ page."
+    replacements = {
+        "Standard /answers/ cluster page.": "Standard dedicated /answers/ page.",
+        "Standard /answers/ cluster page with a /best/ money-page CTA.": "Standard dedicated /answers/ page with a /best/ money-page CTA.",
+        "cluster page": "dedicated answer page",
+        "Cluster page": "Dedicated answer page",
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    return text
+
+
 def build_prompt(cluster):
     template = PROMPT_TEMPLATE.read_text()
     pillar, banner = pillar_of(cluster)
-    questions = cluster.get("sample_questions", [])
-    question_bullets = "\n".join(f"- {q}" for q in questions)
+    primary_question = select_primary_question(cluster)
+    supporting_questions = select_supporting_questions(cluster, primary_question)
+    question_bullets = "\n".join(f"- {q}" for q in supporting_questions) or "- None supplied"
 
     seo_web = _load_seo_web()
     pillar_num = cluster.get("pillar") if cluster.get("source") == "cluster_spec" else None
@@ -284,7 +446,9 @@ def build_prompt(cluster):
     voice = _pick_voice_profile(cluster["id"])
 
     serp_strategy = cluster.get("serp_strategy", "standard")
-    page_type_rec = cluster.get("page_type_recommendation", "Standard /answers/ cluster page.")
+    page_type_rec = _dedicated_page_recommendation(
+        cluster.get("page_type_recommendation", "Standard dedicated /answers/ page.")
+    )
     serp_top_3 = cluster.get("serp_top_3", "[]")
     if isinstance(serp_top_3, str):
         try:
@@ -299,6 +463,7 @@ def build_prompt(cluster):
         .replace("{{PILLAR}}", pillar)
         .replace("{{MONEY_PAGE}}", cluster["money_page"])
         .replace("{{BANNER_CATEGORY}}", banner)
+        .replace("{{PRIMARY_QUESTION}}", primary_question)
         .replace("{{QUESTIONS}}", question_bullets)
         .replace("{{INTENT_DESCRIPTION}}", intent_desc)
         .replace("{{SERP_STRATEGY}}", serp_strategy)
@@ -306,25 +471,25 @@ def build_prompt(cluster):
         .replace("{{SERP_TOP_3}}", serp_top_3)
         .replace("{{VOICE_PROFILE}}", voice)
     )
-    return prompt, pillar, banner
+    return prompt, pillar, banner, primary_question
 
 
-def call_claude_cli(prompt, timeout=600):
-    """Invoke the shared CreditDoc provider stack: Claude CLI Opus, then fallbacks."""
+def call_openai_text(prompt, timeout=600):
+    """Invoke the shared CreditDoc OpenAI text provider."""
     sys.path.insert(0, str(BASE / "tools"))
     from creditdoc_oauth import call_ai
-    return call_ai(prompt, model="opus", max_tokens=8192, timeout_secs=timeout)
+    return call_ai(prompt, model="gpt-4.1", max_tokens=8192, timeout_secs=timeout)
 
 
 def extract_json(text):
-    """Claude sometimes wraps output in markdown fences. Extract the object."""
+    """Extract a JSON object from provider output."""
     fence = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
     if fence:
         return fence.group(1)
     start = text.find("{")
     end = text.rfind("}")
     if start == -1 or end == -1:
-        raise ValueError("no JSON object found in Claude output")
+        raise ValueError("no JSON object found in provider output")
     return text[start : end + 1]
 
 
@@ -334,7 +499,27 @@ REQUIRED_FIELDS = [
 ]
 
 
-def validate_shape(obj):
+def _contains_meaningful_overlap(text, question):
+    text_tokens = set(re.findall(r"[a-z0-9]+", (text or "").lower()))
+    q_tokens = [
+        t for t in re.findall(r"[a-z0-9]+", (question or "").lower())
+        if t not in {"a", "an", "and", "are", "can", "do", "does", "for", "how", "i", "is", "of", "or", "the", "to", "what", "when", "where", "which", "who", "why", "with", "you", "your"}
+    ]
+    if not q_tokens:
+        return True
+    return len(text_tokens.intersection(q_tokens)) >= max(2, min(5, len(set(q_tokens)) // 2))
+
+
+def _h1_contains_primary_question_terms(h1, question):
+    h1_tokens = set(re.findall(r"[a-z0-9]+", (h1 or "").lower()))
+    q_tokens = {
+        t for t in re.findall(r"[a-z0-9]+", (question or "").lower())
+        if t not in {"a", "an", "and", "are", "can", "do", "does", "for", "how", "i", "is", "of", "or", "the", "to", "what", "when", "where", "which", "who", "why", "with", "you", "your"}
+    }
+    return not q_tokens or q_tokens <= h1_tokens
+
+
+def validate_shape(obj, primary_question=None):
     errors = []
     for f in REQUIRED_FIELDS:
         if f not in obj:
@@ -347,6 +532,13 @@ def validate_shape(obj):
         errors.append(f"faq_schema must have 4-8 items, got {len(obj.get('faq_schema', []))}")
     if not isinstance(obj["internal_links"], list) or len(obj["internal_links"]) < 8:
         errors.append(f"internal_links must have ≥8 items, got {len(obj.get('internal_links', []))}")
+    questions_answered = obj.get("questions_answered", [])
+    if not isinstance(questions_answered, list) or not (1 <= len(questions_answered) <= 3):
+        errors.append(f"questions_answered must have 1-3 items for dedicated answer pages, got {len(questions_answered or [])}")
+    if primary_question:
+        combined_title = f"{obj.get('title', '')} {obj.get('h1', '')}"
+        if not _contains_meaningful_overlap(combined_title, primary_question):
+            errors.append("title/h1 do not clearly target the primary question")
     if len(obj.get("title", "")) > 60:
         errors.append(f"title >60 chars: {len(obj['title'])}")
     md = obj.get("meta_description", "")
@@ -388,7 +580,7 @@ def detect_narrator_claim_violations(obj):
     return violations
 
 
-def basic_compliance(obj, target_money_page):
+def basic_compliance(obj, target_money_page, primary_question=None):
     """Inline 10-check sanity gate. Full 65-point gate comes in Phase 5
     via cluster_compliance_check.py. Returns (score_out_of_10, failures)."""
     checks = []
@@ -400,6 +592,9 @@ def basic_compliance(obj, target_money_page):
     c(len(obj.get("title", "")) <= 60, "title ≤60 chars")
     c(100 <= len(obj.get("meta_description", "")) <= 160, "meta_description 100-160")
     c(len(obj.get("sections", [])) >= 5, "≥5 sections")
+    c(1 <= len(obj.get("questions_answered", [])) <= 3, "1-3 questions_answered for dedicated page")
+    if primary_question:
+        c(_h1_contains_primary_question_terms(obj.get("h1", ""), primary_question), "h1 contains primary question terms")
 
     total_words = sum(len(s.get("content", "").split()) for s in obj.get("sections", []))
     c(total_words >= 1200, f"body ≥1200 words (got {total_words})")
@@ -470,29 +665,30 @@ def run(args):
     pillar, banner = pillar_of(cluster)
     log(f"pillar={pillar} banner={banner} money_page={cluster['money_page']}")
 
-    prompt, _pillar, _banner = build_prompt(cluster)
+    prompt, _pillar, _banner, primary_question = build_prompt(cluster)
     log(f"prompt built ({len(prompt)} chars)")
+    log(f"primary_question={primary_question!r}")
 
     if args.dry_run:
-        log("DRY-RUN — not calling Claude, not writing DB, not committing")
+        log("DRY-RUN — not calling OpenAI, not writing DB, not committing")
         print("\n--- PROMPT PREVIEW (first 2000 chars) ---")
         print(prompt[:2000])
         print("\n--- END PREVIEW ---")
         return 0
 
-    log("calling Claude CLI (may take 30-120s)...")
+    log("calling OpenAI text provider (may take 30-120s)...")
     try:
-        raw = call_claude_cli(prompt)
+        raw = call_openai_text(prompt)
     except Exception as e:
         tb = traceback.format_exc()
-        log(f"CLAUDE CLI FAILED: {e}")
-        telegram_alert("Cluster executor — Claude CLI failed", f"cluster={cluster['id']}\n\n{e}\n\n{tb[-800:]}")
+        log(f"OPENAI TEXT PROVIDER FAILED: {e}")
+        telegram_alert("Cluster executor — OpenAI text provider failed", f"cluster={cluster['id']}\n\n{e}\n\n{tb[-800:]}")
         state["failed"].append({"cluster_id": cluster["id"], "when": _now_iso(), "reason": str(e)})
         save_state(state)
-        append_execution_log("3", "executor", "(none)", cluster["id"], "0/10", "", f"claude fail: {e}")
+        append_execution_log("3", "executor", "(none)", cluster["id"], "0/10", "", f"openai fail: {e}")
         return 2
 
-    log(f"Claude returned {len(raw)} bytes")
+    log(f"OpenAI returned {len(raw)} bytes")
 
     try:
         obj = json.loads(extract_json(raw))
@@ -515,7 +711,10 @@ def run(args):
     if len(title) > 60:
         obj["title"] = title[:57].rsplit(" ", 1)[0] + "..."
 
-    shape_errors = validate_shape(obj)
+    obj["page_format"] = "dedicated_question_answer"
+    obj["primary_question"] = primary_question
+
+    shape_errors = validate_shape(obj, primary_question)
     if shape_errors:
         log(f"SHAPE VALIDATION FAILED: {shape_errors}")
         telegram_alert(
@@ -550,7 +749,7 @@ def run(args):
         except Exception as e:
             log(f"guardrail repair failed: {type(e).__name__}: {e}")
 
-        shape_errors = validate_shape(obj)
+        shape_errors = validate_shape(obj, primary_question)
         if shape_errors:
             log(f"SHAPE VALIDATION FAILED AFTER REPAIR: {shape_errors}")
             telegram_alert(
@@ -563,21 +762,22 @@ def run(args):
             return 4
 
     # Compliance gate
-    passed, total, failures = basic_compliance(obj, cluster["money_page"])
+    passed, total, failures = basic_compliance(obj, cluster["money_page"], primary_question)
     score_str = f"{passed}/{total}"
     log(f"compliance: {score_str}  failures={failures}")
+    min_passed = max(8, int(total * 0.85 + 0.999))
 
     obj["cluster_id"] = cluster["id"]
     obj["cluster_pillar"] = pillar
     obj["banner_category"] = banner
     obj["target_money_page"] = cluster["money_page"]
     obj["compliance_score"] = passed
-    obj["compliance_passed"] = passed >= 8
+    obj["compliance_passed"] = passed >= min_passed
     obj["author"] = "CreditDoc Editorial"
 
     slug = obj["slug"]
 
-    if passed < 8:
+    if passed < min_passed:
         log(f"COMPLIANCE FAILED ({score_str}) — saving as draft, NOT publishing")
         obj["status"] = "draft"
         with CreditDocDB() as db:
@@ -696,7 +896,7 @@ def status():
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--preview", action="store_true", help="Print prompt only — no Claude call, no write")
+    p.add_argument("--preview", action="store_true", help="Print prompt only — no OpenAI call, no write")
     p.add_argument("--apply", action="store_true", help="Also git commit + push after publish (default: generate + write DB + export only)")
     p.add_argument("--asset", help="override: publish this cluster_id")
     p.add_argument("--skip", help="mark a cluster_id as skipped")
