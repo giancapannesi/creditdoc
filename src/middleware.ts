@@ -26,7 +26,9 @@
 import { defineMiddleware } from 'astro:middleware';
 import { STATE_ABBREVIATIONS } from './utils/data';
 
-const NAMESPACE = 'creditdoc-v1-mw';
+// Bump this when shared SSR templates change; DB updated_at alone does not
+// invalidate cached HTML for code-only changes.
+const NAMESPACE = 'creditdoc-v2-mw';
 
 const CITY_STATE_SLUGS = Object.entries(STATE_ABBREVIATIONS)
   .map(([state, abbr]) => ({
