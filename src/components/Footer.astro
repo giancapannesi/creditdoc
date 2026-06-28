@@ -25,6 +25,36 @@ const resourceLinks = [
   { name: 'Terms of Service', href: '/terms/' },
   { name: 'Accessibility', href: '/accessibility/' },
 ];
+
+const toolLinks = [
+  { name: 'Borrowing Power Quiz', href: '/tools/borrowing-power-quiz/' },
+  { name: 'Credit Score Simulator', href: '/tools/credit-score-simulator/' },
+  { name: 'Debt Payoff Calculator', href: '/tools/debt-payoff-calculator/' },
+  { name: 'Loan Denial Checker', href: '/tools/loan-denial-reason-checker/' },
+  { name: 'Credit Denial Checklist', href: '/tools/credit-denial-action-checklist/' },
+  { name: 'Business Loan Calculator', href: '/tools/business-loan-calculator/' },
+  { name: 'Business Readiness Quiz', href: '/tools/business-loan-readiness-quiz/' },
+  { name: 'SBA Loan Calculator', href: '/tools/sba-loan-calculator/' },
+  { name: 'Cash Flow Calculator', href: '/tools/bank-statement-cash-flow-calculator/' },
+  { name: 'MCA Repayment Calculator', href: '/tools/mca-repayment-calculator/' },
+  { name: 'Equipment Financing Calculator', href: '/tools/equipment-financing-calculator/' },
+  { name: 'Working Capital Calculator', href: '/tools/working-capital-calculator/' },
+  { name: 'AR Financing Calculator', href: '/tools/accounts-receivable-financing-calculator/' },
+  { name: 'SBA Guarantee Fee Calculator', href: '/tools/sba-guarantee-fee-calculator/' },
+  { name: 'Regulator Directory', href: '/tools/state-consumer-credit-regulator-directory/' },
+];
+
+const courseLinks = [
+  { name: 'Credit Fundamentals Course', href: '/courses/credit-fundamentals/' },
+  { name: 'Understanding Credit Scores', href: '/courses/credit-fundamentals/understanding-your-credit-score/' },
+  { name: 'Read Your Credit Report', href: '/courses/credit-fundamentals/how-to-read-your-credit-report/' },
+  { name: 'Build Credit From Scratch', href: '/courses/credit-fundamentals/building-credit-from-scratch/' },
+  { name: 'Manage Debt Effectively', href: '/courses/credit-fundamentals/managing-debt-effectively/' },
+  { name: 'Credit Repair DIY vs Help', href: '/courses/credit-fundamentals/credit-repair-diy-vs-hiring-help/' },
+  { name: 'Borrowing Smart', href: '/courses/credit-fundamentals/personal-loans-and-borrowing-smart/' },
+  { name: 'Avoid Scams', href: '/courses/credit-fundamentals/avoiding-scams-and-predatory-lending/' },
+  { name: 'Know Your Rights', href: '/courses/credit-fundamentals/know-your-rights/' },
+];
 ---
 
 <footer class="border-t border-border bg-white">
@@ -84,6 +114,34 @@ const resourceLinks = [
           <li><a href="/search/" class="text-sm text-muted hover:text-primary transition-colors">Search by Location</a></li>
           <li><a href="/trends/" class="text-sm text-muted hover:text-primary transition-colors">Consumer Response Data</a></li>
           <li><a href="/deals/" class="text-sm text-muted hover:text-primary transition-colors">Current Deals</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 gap-8 border-t border-border pt-8 lg:grid-cols-2">
+      <div>
+        <h3 class="text-sm font-semibold text-text uppercase tracking-wider">Calculators and Quizzes</h3>
+        <ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {toolLinks.map(link => (
+            <li>
+              <a href={link.href} class="text-sm text-muted hover:text-primary transition-colors">
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold text-text uppercase tracking-wider">Credit Course Modules</h3>
+        <ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {courseLinks.map(link => (
+            <li>
+              <a href={link.href} class="text-sm text-muted hover:text-primary transition-colors">
+                {link.name}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

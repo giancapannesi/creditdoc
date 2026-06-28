@@ -126,6 +126,29 @@ const whyCreditDoc = [
   },
 ];
 
+const homepageToolLinks = [
+  { name: 'Credit Score Simulator', href: '/tools/credit-score-simulator/', description: 'Model common score-factor scenarios.' },
+  { name: 'Debt Payoff Calculator', href: '/tools/debt-payoff-calculator/', description: 'Compare snowball and avalanche paths.' },
+  { name: 'Borrowing Power Quiz', href: '/tools/borrowing-power-quiz/', description: 'Estimate borrowing context privately.' },
+  { name: 'Loan Denial Checker', href: '/tools/loan-denial-reason-checker/', description: 'Map denial reasons to next steps.' },
+  { name: 'Business Readiness Quiz', href: '/tools/business-loan-readiness-quiz/', description: 'Check business funding route fit.' },
+  { name: 'SBA Loan Calculator', href: '/tools/sba-loan-calculator/', description: 'Estimate SBA loan payment pressure.' },
+  { name: 'Business Loan Calculator', href: '/tools/business-loan-calculator/', description: 'Estimate payments and fee impact.' },
+  { name: 'Cash Flow Calculator', href: '/tools/bank-statement-cash-flow-calculator/', description: 'Review bank-statement cash flow.' },
+];
+
+const homepageCourseLinks = [
+  { name: 'Credit Fundamentals', href: '/courses/credit-fundamentals/' },
+  { name: 'Understanding Credit Scores', href: '/courses/credit-fundamentals/understanding-your-credit-score/' },
+  { name: 'Reading Credit Reports', href: '/courses/credit-fundamentals/how-to-read-your-credit-report/' },
+  { name: 'Building Credit From Scratch', href: '/courses/credit-fundamentals/building-credit-from-scratch/' },
+  { name: 'Managing Debt Effectively', href: '/courses/credit-fundamentals/managing-debt-effectively/' },
+  { name: 'Credit Repair Options', href: '/courses/credit-fundamentals/credit-repair-diy-vs-hiring-help/' },
+  { name: 'Borrowing Smart', href: '/courses/credit-fundamentals/personal-loans-and-borrowing-smart/' },
+  { name: 'Avoiding Scams', href: '/courses/credit-fundamentals/avoiding-scams-and-predatory-lending/' },
+  { name: 'Know Your Rights', href: '/courses/credit-fundamentals/know-your-rights/' },
+];
+
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -230,6 +253,46 @@ const jsonLd = [
         <p class="mt-1 text-sm text-muted">Search 15,000+ lender reviews by name</p>
       </div>
       <LenderNameSearch variant="inline" />
+    </div>
+  </section>
+
+  <!-- Tools and Course Discovery -->
+  <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div class="glass-card p-6">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-bold text-text">Calculators and Quizzes</h2>
+            <p class="mt-1 text-sm text-muted">Use practical tools before comparing providers or applying.</p>
+          </div>
+          <a href="/tools/" class="text-sm font-medium text-primary hover:underline">All tools</a>
+        </div>
+        <div class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {homepageToolLinks.map(link => (
+            <a href={link.href} class="rounded-lg border border-border bg-bg-alt p-3 hover:border-primary/40">
+              <span class="block text-sm font-semibold text-text">{link.name}</span>
+              <span class="mt-1 block text-xs text-muted">{link.description}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="glass-card p-6">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-bold text-text">Free Credit Course</h2>
+            <p class="mt-1 text-sm text-muted">Study credit scores, reports, debt, borrowing, scams, and rights.</p>
+          </div>
+          <a href="/courses/" class="text-sm font-medium text-primary hover:underline">Courses</a>
+        </div>
+        <div class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {homepageCourseLinks.map(link => (
+            <a href={link.href} class="rounded-lg border border-border bg-bg-alt p-3 text-sm font-medium text-text hover:border-primary/40 hover:text-primary">
+              {link.name}
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 
