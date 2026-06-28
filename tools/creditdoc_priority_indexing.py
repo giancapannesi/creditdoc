@@ -56,6 +56,7 @@ SITE = "https://www.creditdoc.co"  # canonical (matches indexation_status + GSC 
 SITE_INDEXING_API = "https://creditdoc.co"  # GSC property is non-www; Indexing API rejects www
 GOOGLE_DAILY_QUOTA = 200
 BRANDS_DIR = Path(__file__).resolve().parents[1] / "src" / "content" / "brands"
+FORCE_GOOGLE_QUEUE_FILE = Path("/srv/BusinessOps/data/creditdoc_force_google_indexing_urls.json")
 
 # Re-push window: re-submit a confirmed-indexed URL only if it hasn't been
 # pushed to the Indexing API in the last RESUBMIT_DAYS, AND its content
@@ -78,6 +79,65 @@ VALID_TIERS = (
     "compare",
     "state",
 )
+
+
+def load_force_google_urls():
+    """One-shot Google priority queue.
+
+    These URLs bypass the normal cooldown and are prepended to the next Google
+    Indexing API run. Accepted URLs are removed after push, so this file is a
+    durable retry mechanism rather than a permanent daily quota drain.
+    """
+    if not FORCE_GOOGLE_QUEUE_FILE.exists():
+        return []
+    try:
+        payload = json.loads(FORCE_GOOGLE_QUEUE_FILE.read_text())
+    except Exception as e:
+        print(f"  Force queue unreadable: {FORCE_GOOGLE_QUEUE_FILE}: {e}")
+        return []
+
+    urls = payload.get("urls", payload if isinstance(payload, list) else [])
+    if not isinstance(urls, list):
+        return []
+
+    seen = set()
+    normalized = []
+    for url in urls:
+        if not isinstance(url, str):
+            continue
+        url = url.strip()
+        if not url:
+            continue
+        if url.startswith("https://creditdoc.co/"):
+            url = url.replace("https://creditdoc.co/", f"{SITE}/", 1)
+        if not url.startswith(f"{SITE}/"):
+            continue
+        if not url.endswith("/"):
+            url = url + "/"
+        if url not in seen:
+            seen.add(url)
+            normalized.append(url)
+    return normalized
+
+
+def save_force_google_urls(urls):
+    FORCE_GOOGLE_QUEUE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "site": "creditdoc",
+        "purpose": "One-shot forced Google Indexing API priority queue. Accepted URLs are removed by creditdoc_priority_indexing.py.",
+        "updated": datetime.now(timezone.utc).isoformat(),
+        "urls": urls,
+    }
+    FORCE_GOOGLE_QUEUE_FILE.write_text(json.dumps(payload, indent=2) + "\n")
+
+
+def remove_force_google_urls(accepted_urls):
+    if not accepted_urls or not FORCE_GOOGLE_QUEUE_FILE.exists():
+        return 0
+    remaining = [u for u in load_force_google_urls() if u not in set(accepted_urls)]
+    before = len(load_force_google_urls())
+    save_force_google_urls(remaining)
+    return before - len(remaining)
 
 
 def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_cooldown=False):
@@ -385,6 +445,16 @@ def main():
         force_all=indexnow_tier_reping,
         ignore_cooldown=indexnow_tier_reping,
     )
+    force_urls = []
+    if not args.indexnow_only and not args.tier:
+        force_urls = load_force_google_urls()
+        if force_urls:
+            forced_items = [
+                {"url": url, "slug": url.rstrip("/").split("/")[-1], "tier": "forced", "verdict": "FORCE"}
+                for url in force_urls
+            ]
+            url_list = forced_items + [u for u in url_list if u["url"] not in set(force_urls)]
+            print(f"  Force Google queue: {len(force_urls)} URLs prepended ahead of normal cooldown")
     print(f"\nTotal priority queue: {len(url_list)} URLs")
 
     if not url_list:
@@ -421,6 +491,9 @@ def main():
                 www_urls = [u.replace(SITE_INDEXING_API, SITE) for u in urls_only[:g_ok]]
                 n = stamp_submitted(db, www_urls)
                 print(f"  DB stamped: {n} rows (cooldown applies for {RESUBMIT_DAYS}d)")
+                removed = remove_force_google_urls(www_urls)
+                if removed:
+                    print(f"  Force queue cleared: {removed} accepted URLs removed")
         else:
             print("  Skipped: no service account token")
 
