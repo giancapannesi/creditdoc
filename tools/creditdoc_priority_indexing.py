@@ -58,10 +58,23 @@ GOOGLE_DAILY_QUOTA = 200
 BRANDS_DIR = Path(__file__).resolve().parents[1] / "src" / "content" / "brands"
 FORCE_GOOGLE_QUEUE_FILE = Path("/srv/BusinessOps/data/creditdoc_force_google_indexing_urls.json")
 
-# Re-push window: re-submit a confirmed-indexed URL only if it hasn't been
-# pushed to the Indexing API in the last RESUBMIT_DAYS, AND its content
-# probably changed. For now: never re-push PASS rows (Google has them).
-RESUBMIT_DAYS = 30
+# Re-push window. High-priority launch assets get a shorter retry window;
+# bulk/local surfaces stay conservative so they do not drain the daily quota.
+DEFAULT_RESUBMIT_DAYS = 30
+RESUBMIT_DAYS_BY_TIER = {
+    "tools": 3,
+    "courses": 3,
+    "answers": 7,
+    "money": 7,
+    "resources": 7,
+    "research": 14,
+    "regulatory": 14,
+    "wellness": 14,
+    "blog": 14,
+    "brand": 30,
+    "state": 30,
+    "city": 30,
+}
 
 
 VALID_TIERS = (
@@ -289,11 +302,15 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
       GROUP BY page_url
     )"""
         join_clause = "JOIN eligible_status i"
+        tier_cooldown_case = "CASE p.tier " + " ".join(
+            f"WHEN '{tier}' THEN {days}"
+            for tier, days in RESUBMIT_DAYS_BY_TIER.items()
+        ) + f" ELSE {DEFAULT_RESUBMIT_DAYS} END"
         conditions = []
         if not ignore_cooldown:
             conditions.append(
                 f"(i.last_request_indexing_submitted IS NULL "
-                f" OR i.last_request_indexing_submitted < datetime('now', '-{RESUBMIT_DAYS} days'))"
+                f" OR i.last_request_indexing_submitted < datetime('now', '-' || {tier_cooldown_case} || ' days'))"
             )
         if tier_where:
             conditions.append(tier_where)
@@ -339,6 +356,10 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
     if not force_all:
         # Show why URLs were filtered out so quota savings are visible.
         breakdown_where = f"WHERE {tier_where}" if tier_where else ""
+        tier_cooldown_case = "CASE p.tier " + " ".join(
+            f"WHEN '{tier}' THEN {days}"
+            for tier, days in RESUBMIT_DAYS_BY_TIER.items()
+        ) + f" ELSE {DEFAULT_RESUBMIT_DAYS} END"
         breakdown = db.conn.execute(f"""
             WITH {publishable_cte}
             SELECT
@@ -346,7 +367,7 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
               SUM(CASE WHEN i.verdict IS NULL OR i.verdict NOT IN ('NEUTRAL','PASS') THEN 1 ELSE 0 END) AS unchecked,
               SUM(CASE WHEN i.verdict='NEUTRAL'
                        AND i.last_request_indexing_submitted IS NOT NULL
-                       AND i.last_request_indexing_submitted >= datetime('now', '-{RESUBMIT_DAYS} days')
+                       AND i.last_request_indexing_submitted >= datetime('now', '-' || {tier_cooldown_case} || ' days')
                        THEN 1 ELSE 0 END) AS cooldown
             FROM publishable p
             LEFT JOIN indexation_status i ON i.page_url = '{SITE}/' || p.path || '/'
@@ -373,7 +394,7 @@ def fetch_priority_urls(db, limit, force_all=False, tier_filter=None, ignore_coo
     if not force_all:
         print(f"  (Skipped {skipped['indexed']} already indexed (PASS), "
               f"{skipped['unchecked']} unverified, "
-              f"{skipped['cooldown']} in {RESUBMIT_DAYS}-day cooldown)")
+              f"{skipped['cooldown']} in tier-specific cooldown)")
     return urls[:limit]
 
 
@@ -490,7 +511,7 @@ def main():
             if g_ok:
                 www_urls = [u.replace(SITE_INDEXING_API, SITE) for u in urls_only[:g_ok]]
                 n = stamp_submitted(db, www_urls)
-                print(f"  DB stamped: {n} rows (cooldown applies for {RESUBMIT_DAYS}d)")
+                print(f"  DB stamped: {n} rows (tier-specific cooldown applies)")
                 removed = remove_force_google_urls(www_urls)
                 if removed:
                     print(f"  Force queue cleared: {removed} accepted URLs removed")
