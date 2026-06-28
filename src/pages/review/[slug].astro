@@ -267,6 +267,85 @@ const nextStepWellnessHref = primaryWellnessGuide
 const nextStepWellnessTitle = primaryWellnessGuide
   ? softenEducationalTeaserCopy(primaryWellnessGuide.title || '')
   : 'Financial Wellness Guides';
+const reviewToolMap: Record<string, { href: string; label: string; body: string }> = {
+  'credit-repair': {
+    href: '/resources/credit-report-checklist/',
+    label: 'Credit report checklist',
+    body: 'Organize report errors, dispute notes, and verification steps before contacting a repair provider.',
+  },
+  'build-credit': {
+    href: '/tools/credit-score-simulator/',
+    label: 'Credit score simulator',
+    body: 'Model common score-factor scenarios before choosing a credit-building path.',
+  },
+  'credit-monitoring': {
+    href: '/tools/credit-score-simulator/',
+    label: 'Credit score simulator',
+    body: 'Review score-factor context before comparing monitoring or identity-theft products.',
+  },
+  'personal-loans': {
+    href: '/tools/borrowing-power-quiz/',
+    label: 'Borrowing power quiz',
+    body: 'Estimate borrowing context privately before comparing loan providers.',
+  },
+  'business-loans': {
+    href: '/tools/business-loan-readiness-quiz/',
+    label: 'Business readiness quiz',
+    body: 'Check revenue, cash-flow, and documentation readiness before comparing business lenders.',
+  },
+  'emergency-cash': {
+    href: '/tools/debt-payoff-calculator/',
+    label: 'Debt payoff calculator',
+    body: 'Compare repayment pressure before using short-term cash options.',
+  },
+  'payday-alternatives': {
+    href: '/tools/debt-payoff-calculator/',
+    label: 'Debt payoff calculator',
+    body: 'Compare payoff paths and lower-cost alternatives before choosing emergency cash.',
+  },
+  'debt-relief': {
+    href: '/tools/debt-payoff-calculator/',
+    label: 'Debt payoff calculator',
+    body: 'Estimate payoff paths before comparing debt-relief or counseling options.',
+  },
+  'credit-counseling': {
+    href: '/tools/debt-payoff-calculator/',
+    label: 'Debt payoff calculator',
+    body: 'Frame balances and repayment options before speaking with a counselor.',
+  },
+  'mortgages': {
+    href: '/tools/borrowing-power-quiz/',
+    label: 'Borrowing power quiz',
+    body: 'Review income, debt, and credit context before comparing mortgage profiles.',
+  },
+};
+const primaryReviewTool = reviewToolMap[lender.category] || {
+  href: '/tools/',
+  label: 'CreditDoc tools',
+  body: 'Use calculators, quizzes, and checklists to frame the next step before contacting a provider.',
+};
+const reviewDecisionPaths = [
+  {
+    href: primaryReviewTool.href,
+    label: primaryReviewTool.label,
+    body: primaryReviewTool.body,
+  },
+  {
+    href: alternativeBestHref,
+    label: 'Compare alternatives',
+    body: `Review related ${categoryLabel.toLowerCase()} options before relying on one profile.`,
+  },
+  {
+    href: '/courses/credit-fundamentals/',
+    label: 'Credit fundamentals course',
+    body: 'Study credit scores, reports, debt, borrowing terms, scams, and consumer rights.',
+  },
+  {
+    href: nextStepWellnessHref,
+    label: nextStepWellnessTitle,
+    body: 'Use a related guide for context before applying, disputing, consolidating, or contacting a provider.',
+  },
+];
 const reviewSummaryItems = [
   `${lender.name} is listed as a ${categoryLabel}${locationLabel ? ` provider in ${locationLabel}` : ' provider'} on CreditDoc.`,
   `Use this page to check contact details, location, listed services, review signals, FAQs, and similar providers before deciding what to do next.`,
@@ -679,6 +758,31 @@ const ogImageUrl = lender.logo_url?.trim()
           </svg>
         </a>
         )}
+      </div>
+    </div>
+  </section>
+
+  <!-- High-intent decision paths -->
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="rounded-xl border border-primary/20 bg-white p-5 shadow-sm">
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 class="text-lg font-bold text-text">Before You Contact {lender.name}</h2>
+          <p class="mt-1 text-sm text-muted">
+            Use these CreditDoc paths to check fit, compare alternatives, and understand the category before sharing information with a provider.
+          </p>
+        </div>
+        <a href={categoryHref} class="text-sm font-medium text-primary hover:underline">
+          Browse {categoryLabel}
+        </a>
+      </div>
+      <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {reviewDecisionPaths.map(path => (
+          <a href={path.href} class="rounded-lg border border-border bg-bg-alt p-4 transition-colors hover:border-primary">
+            <span class="block text-sm font-semibold text-text">{path.label}</span>
+            <span class="mt-1 block text-xs leading-relaxed text-muted">{path.body}</span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
