@@ -80,6 +80,35 @@ function cityStateRedirectTarget(pathname: string): string | null {
   return null;
 }
 
+function browseCityStateRedirectTarget(pathname: string): string | null {
+  const match = pathname.match(/^\/browse\/([^/]+)\/([^/]+)\/?$/);
+  if (!match) return null;
+
+  const categorySlug = match[1];
+  let cityStateSlug: string;
+  try {
+    cityStateSlug = decodeURIComponent(match[2]);
+  } catch {
+    cityStateSlug = match[2];
+  }
+  cityStateSlug = cityStateSlug
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  for (const { stateSlug, abbr } of CITY_STATE_SLUGS) {
+    const suffix = `-${stateSlug}`;
+    if (!cityStateSlug.endsWith(suffix)) continue;
+    const citySlug = cityStateSlug.slice(0, -suffix.length).replace(/-+$/g, '');
+    if (!citySlug) return null;
+    const target = `/browse/${categorySlug}/${citySlug}-${abbr}/`;
+    return target === pathname ? null : target;
+  }
+
+  return null;
+}
+
 // CDM-REV iter 35 — Tier 1 OBJ-3 security-header hardening.
 // Applied to every response (cached HIT, fresh MISS, BYPASS, non-cacheable, non-GET).
 // Headers chosen with Jammi (2026-05-01): full safe set, HTTPS-only posture confirmed.
@@ -410,6 +439,11 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const cityRedirectTarget = cityStateRedirectTarget(pathname);
   if (cityRedirectTarget) {
     return Response.redirect(new URL(cityRedirectTarget, url.origin), 301);
+  }
+
+  const browseRedirectTarget = browseCityStateRedirectTarget(pathname);
+  if (browseRedirectTarget) {
+    return Response.redirect(new URL(browseRedirectTarget, url.origin), 301);
   }
 
   // Find the first matching cacheable route (returns slug or null).
