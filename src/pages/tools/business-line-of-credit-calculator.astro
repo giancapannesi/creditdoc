@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Business Line of Credit Calculator | CreditDoc';
+const description = 'Estimate business line of credit payments, draw costs, interest, fees, and cash-flow pressure. Free educational calculator.';
+const canonical = 'https://www.creditdoc.co/tools/business-line-of-credit-calculator/';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Business Line of Credit Calculator',
+  description,
+  url: canonical,
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Web',
+  image: 'https://www.creditdoc.co/og-default.png',
+  isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  publisher: { '@type': 'Organization', name: 'CreditDoc', url: 'https://www.creditdoc.co' },
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What does a business line of credit calculator estimate?',
+      acceptedAnswer: { '@type': 'Answer', text: 'It estimates payment pressure, interest, draw fees, unused line fees, and payoff timing from a business credit line draw.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is a business line of credit the same as a term loan?',
+      acceptedAnswer: { '@type': 'Answer', text: 'No. A term loan usually advances one lump sum. A business line of credit is revolving credit that may allow repeated draws and repayments within the credit limit.' },
+    },
+  ],
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+    { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://www.creditdoc.co/tools/' },
+    { '@type': 'ListItem', position: 3, name: 'Business Line of Credit Calculator', item: canonical },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={[jsonLd, faqJsonLd, breadcrumbJsonLd]}>
+  <nav class="mx-auto max-w-4xl px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary">Home</a></li><li class="text-border">/</li>
+      <li><a href="/tools/" class="hover:text-primary">Tools</a></li><li class="text-border">/</li>
+      <li class="font-medium text-text">Business Line of Credit Calculator</li>
+    </ol>
+  </nav>
+
+  <div class="mx-auto max-w-4xl px-4 py-8">
+    <section class="mb-8 text-center">
+      <div class="mb-4 inline-flex rounded-full bg-primary-light px-4 py-1.5 text-sm font-medium text-primary">Free &middot; Revolving credit estimate &middot; No signup</div>
+      <h1 class="text-3xl font-bold text-text md:text-4xl">Business Line of Credit Calculator</h1>
+      <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted">Estimate payment pressure and costs for a business credit line draw before comparing small business lines of credit.</p>
+    </section>
+
+    <section class="glass-card mb-6 p-5">
+      <h2 class="mb-2 text-lg font-bold text-text">Use This With Line Of Credit Research</h2>
+      <p class="text-sm leading-relaxed text-muted">A business line of credit can be useful for seasonal cash flow, inventory, payroll timing, or emergency working capital. Draw fees, minimum payments, renewal fees, and variable rates can change the real cost.</p>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/best/best-business-lines-of-credit/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Business lines of credit</a>
+        <a href="/tools/working-capital-calculator/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Working capital calculator</a>
+        <a href="/tools/business-loan-calculator/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Business loan calculator</a>
+        <a href="/tools/business-loan-readiness-quiz/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Readiness quiz</a>
+      </div>
+    </section>
+
+    <section class="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+      <div class="glass-card p-6">
+        <h2 class="mb-5 text-xl font-bold text-text">Credit Line Details</h2>
+        <div class="grid gap-4">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label><span class="label">Credit limit</span><span class="money-wrap"><span>$</span><input id="limit" class="input-field pl-7" type="number" min="1000" step="1000" value="100000" /></span></label>
+            <label><span class="label">Current draw</span><span class="money-wrap"><span>$</span><input id="draw" class="input-field pl-7" type="number" min="0" step="1000" value="40000" /></span></label>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-3">
+            <label><span class="label">APR estimate</span><span class="unit-wrap"><input id="rate" class="input-field pr-8" type="number" min="0" max="99" step="0.1" value="18" /><span>%</span></span></label>
+            <label><span class="label">Draw fee</span><span class="unit-wrap"><input id="drawfee" class="input-field pr-8" type="number" min="0" max="20" step="0.1" value="1.5" /><span>%</span></span></label>
+            <label><span class="label">Unused fee</span><span class="unit-wrap"><input id="unusedfee" class="input-field pr-8" type="number" min="0" max="10" step="0.1" value="0" /><span>%</span></span></label>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label><span class="label">Monthly repayment</span><span class="money-wrap"><span>$</span><input id="repayment" class="input-field pl-7" type="number" min="0" step="100" value="5000" /></span></label>
+            <label><span class="label">Monthly revenue</span><span class="money-wrap"><span>$</span><input id="revenue" class="input-field pl-7" type="number" min="0" step="1000" value="60000" /></span></label>
+          </div>
+        </div>
+      </div>
+
+      <aside class="glass-card p-6">
+        <h2 class="mb-5 text-xl font-bold text-text">Estimate</h2>
+        <div class="space-y-4">
+          <div class="result"><p>Monthly interest estimate</p><strong id="interest">$600</strong></div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="result"><p>Draw fee</p><strong id="drawfee-out">$600</strong></div>
+            <div class="result"><p>Unused line fee</p><strong id="unused-out">$0</strong></div>
+          </div>
+          <div class="result"><p>Months to pay off draw</p><strong id="months">9</strong></div>
+          <div class="result"><p>Payment pressure</p><strong id="pressure">Moderate</strong><span id="pressure-copy">The entered repayment uses a meaningful share of monthly revenue.</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="mt-8 rounded-xl border border-border bg-white p-6">
+      <h2 class="text-xl font-bold text-text">Business Line Of Credit Calculator FAQ</h2>
+      <div class="mt-5 space-y-5">
+        <div>
+          <h3 class="font-semibold text-text">How is a business credit line payment calculated?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">Some lenders use interest-only payments during a draw period. Others require principal plus interest, fixed weekly payments, or a percentage of the balance. This calculator uses the repayment amount you enter to estimate payoff timing.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-text">Can startups use a business line of credit?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">Some startup credit lines exist, but approvals can depend heavily on revenue, business bank activity, owner credit, collateral, and personal guarantees. A startup without revenue may have fewer options and higher costs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-6 rounded-xl border border-border bg-bg-alt p-5">
+      <h2 class="font-bold text-text">Important Limits</h2>
+      <p class="mt-2 text-xs leading-relaxed text-muted">This calculator is not a credit offer, approval, APR quote, underwriting decision, or financial advice. Actual line-of-credit agreements can include draw fees, maintenance fees, renewal fees, variable rates, minimum charges, collateral requirements, UCC filings, and personal guarantees.</p>
+    </section>
+  </div>
+
+  <style>
+    .label{margin-bottom:.5rem;display:block;font-size:.875rem;font-weight:500;color:var(--color-text,#172033)}.input-field{width:100%;border-radius:.5rem;border:1px solid var(--color-border,#d8dee8);background:#fff;padding:.75rem 1rem;color:var(--color-text,#172033);outline:none}.input-field:focus{border-color:var(--color-primary,#2563eb);box-shadow:0 0 0 1px var(--color-primary,#2563eb)}.money-wrap,.unit-wrap{position:relative;display:block}.money-wrap>span,.unit-wrap>span{position:absolute;top:50%;transform:translateY(-50%);color:var(--color-muted,#667085)}.money-wrap>span{left:.75rem}.unit-wrap>span{right:.75rem}.result{border:1px solid var(--color-border,#d8dee8);border-radius:.75rem;background:white;padding:1rem}.result p{font-size:.875rem;color:var(--color-muted,#667085)}.result strong{margin-top:.25rem;display:block;font-size:1.35rem;color:var(--color-text,#172033)}.result span{margin-top:.5rem;display:block;font-size:.875rem;line-height:1.5;color:var(--color-muted,#667085)}
+  </style>
+  <script>
+    const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    const ids = ['limit', 'draw', 'rate', 'drawfee', 'unusedfee', 'repayment', 'revenue'];
+    const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
+    const value = (id) => Math.max(Number(fields[id]?.value || 0), 0);
+    function calculate() {
+      const limit = value('limit');
+      const draw = Math.min(value('draw'), limit || value('draw'));
+      const unused = Math.max(limit - draw, 0);
+      const monthlyInterest = draw * value('rate') / 100 / 12;
+      const drawFee = draw * value('drawfee') / 100;
+      const unusedFee = unused * value('unusedfee') / 100 / 12;
+      const principalPayment = Math.max(value('repayment') - monthlyInterest, 0);
+      const months = principalPayment ? Math.ceil(draw / principalPayment) : 0;
+      const load = value('revenue') ? value('repayment') / value('revenue') * 100 : 0;
+      document.getElementById('interest').textContent = money.format(monthlyInterest);
+      document.getElementById('drawfee-out').textContent = money.format(drawFee);
+      document.getElementById('unused-out').textContent = money.format(unusedFee);
+      document.getElementById('months').textContent = months ? String(months) : 'N/A';
+      let label = 'Lower';
+      let copy = 'The entered repayment uses a smaller share of monthly revenue, but cash-flow timing still matters.';
+      if (load >= 15) { label = 'High'; copy = 'The entered repayment uses a large share of monthly revenue. Review seasonality and cash reserve before drawing.'; }
+      else if (load >= 7) { label = 'Moderate'; copy = 'The entered repayment uses a meaningful share of monthly revenue.'; }
+      document.getElementById('pressure').textContent = label;
+      document.getElementById('pressure-copy').textContent = copy;
+    }
+    ids.forEach((id) => fields[id]?.addEventListener('input', calculate));
+    calculate();
+  </script>
+</BaseLayout>

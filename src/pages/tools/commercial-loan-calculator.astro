@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Commercial Loan Calculator | CreditDoc';
+const description = 'Estimate commercial loan or commercial mortgage payments, total interest, balloon balance, and closing-cost impact. Free educational calculator.';
+const canonical = 'https://www.creditdoc.co/tools/commercial-loan-calculator/';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Commercial Loan Calculator',
+  description,
+  url: canonical,
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Web',
+  image: 'https://www.creditdoc.co/og-default.png',
+  isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  publisher: { '@type': 'Organization', name: 'CreditDoc', url: 'https://www.creditdoc.co' },
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What does a commercial loan calculator estimate?',
+      acceptedAnswer: { '@type': 'Answer', text: 'It estimates monthly payment, total interest, closing-cost impact, and any balloon balance using the commercial loan assumptions entered on the page.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can this calculator estimate a commercial mortgage payment?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. It can model a basic amortized commercial mortgage or commercial building loan, including a shorter balloon period than the full amortization schedule.' },
+    },
+  ],
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.creditdoc.co/' },
+    { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://www.creditdoc.co/tools/' },
+    { '@type': 'ListItem', position: 3, name: 'Commercial Loan Calculator', item: canonical },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={[jsonLd, faqJsonLd, breadcrumbJsonLd]}>
+  <nav class="mx-auto max-w-4xl px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary">Home</a></li><li class="text-border">/</li>
+      <li><a href="/tools/" class="hover:text-primary">Tools</a></li><li class="text-border">/</li>
+      <li class="font-medium text-text">Commercial Loan Calculator</li>
+    </ol>
+  </nav>
+
+  <div class="mx-auto max-w-4xl px-4 py-8">
+    <section class="mb-8 text-center">
+      <div class="mb-4 inline-flex rounded-full bg-primary-light px-4 py-1.5 text-sm font-medium text-primary">Free &middot; Commercial mortgage estimate &middot; No signup</div>
+      <h1 class="text-3xl font-bold text-text md:text-4xl">Commercial Loan Calculator</h1>
+      <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted">Estimate payments for a commercial loan, commercial mortgage, commercial building loan, or construction takeout loan before comparing lender options.</p>
+    </section>
+
+    <section class="glass-card mb-6 p-5">
+      <h2 class="mb-2 text-lg font-bold text-text">Use This With Commercial Funding Research</h2>
+      <p class="text-sm leading-relaxed text-muted">Commercial loan offers can depend on collateral, property type, business cash flow, debt service coverage, owner credit, appraisal results, guarantees, and whether the loan has a balloon maturity.</p>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/best/best-small-business-loans/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Business loan research</a>
+        <a href="/best/best-sba-loans/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">SBA loan research</a>
+        <a href="/tools/business-loan-calculator/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Business loan calculator</a>
+        <a href="/tools/business-loan-readiness-quiz/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Readiness quiz</a>
+      </div>
+    </section>
+
+    <section class="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+      <div class="glass-card p-6">
+        <h2 class="mb-5 text-xl font-bold text-text">Commercial Loan Details</h2>
+        <div class="grid gap-4">
+          <label><span class="label">Loan amount</span><span class="money-wrap"><span>$</span><input id="amount" class="input-field pl-7" type="number" min="10000" step="5000" value="750000" /></span></label>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label><span class="label">Interest rate</span><span class="unit-wrap"><input id="rate" class="input-field pr-8" type="number" min="0" max="40" step="0.125" value="8.5" /><span>%</span></span></label>
+            <label><span class="label">Amortization</span><span class="unit-wrap"><input id="amortization" class="input-field pr-16" type="number" min="1" max="30" step="1" value="20" /><span>years</span></span></label>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label><span class="label">Balloon or maturity</span><span class="unit-wrap"><input id="maturity" class="input-field pr-16" type="number" min="1" max="30" step="1" value="10" /><span>years</span></span></label>
+            <label><span class="label">Closing costs</span><span class="unit-wrap"><input id="closing" class="input-field pr-8" type="number" min="0" max="20" step="0.1" value="2.5" /><span>%</span></span></label>
+          </div>
+          <label><span class="label">Estimated monthly property or business NOI</span><span class="money-wrap"><span>$</span><input id="noi" class="input-field pl-7" type="number" min="0" step="1000" value="12000" /></span></label>
+        </div>
+      </div>
+
+      <aside class="glass-card p-6">
+        <h2 class="mb-5 text-xl font-bold text-text">Estimate</h2>
+        <div class="space-y-4">
+          <div class="result"><p>Monthly payment</p><strong id="payment">$6,508</strong></div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="result"><p>Closing costs</p><strong id="costs">$18,750</strong></div>
+            <div class="result"><p>Interest before maturity</p><strong id="interest">$330,919</strong></div>
+          </div>
+          <div class="result"><p>Estimated balloon balance</p><strong id="balloon">$537,898</strong></div>
+          <div class="result"><p>Modeled DSCR</p><strong id="dscr">1.84x</strong><span id="dscr-copy">The entered income is above the modeled payment, but lender minimums and adjustments vary.</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="mt-8 rounded-xl border border-border bg-white p-6">
+      <h2 class="text-xl font-bold text-text">Commercial Loan Calculator FAQ</h2>
+      <div class="mt-5 space-y-5">
+        <div>
+          <h3 class="font-semibold text-text">Is this the same as a business loan calculator?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">It is more specific. This page is built for commercial loan calculator, commercial mortgage calculator, commercial building loan calculator, and amortization commercial loan calculator searches where balloon maturity and debt service coverage matter.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-text">What is a balloon balance?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">A balloon balance is the estimated unpaid principal at the loan maturity date when the amortization schedule is longer than the actual loan term.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-6 rounded-xl border border-border bg-bg-alt p-5">
+      <h2 class="font-bold text-text">Important Limits</h2>
+      <p class="mt-2 text-xs leading-relaxed text-muted">This calculator is not a lender quote, commercial mortgage approval, appraisal, tax advice, or financial advice. Actual commercial loan terms can include variable rates, prepayment penalties, lender fees, appraisal costs, environmental reports, guarantees, reserves, and covenants.</p>
+    </section>
+  </div>
+
+  <style>
+    .label{margin-bottom:.5rem;display:block;font-size:.875rem;font-weight:500;color:var(--color-text,#172033)}.input-field{width:100%;border-radius:.5rem;border:1px solid var(--color-border,#d8dee8);background:#fff;padding:.75rem 1rem;color:var(--color-text,#172033);outline:none}.input-field:focus{border-color:var(--color-primary,#2563eb);box-shadow:0 0 0 1px var(--color-primary,#2563eb)}.money-wrap,.unit-wrap{position:relative;display:block}.money-wrap>span,.unit-wrap>span{position:absolute;top:50%;transform:translateY(-50%);color:var(--color-muted,#667085)}.money-wrap>span{left:.75rem}.unit-wrap>span{right:.75rem}.result{border:1px solid var(--color-border,#d8dee8);border-radius:.75rem;background:white;padding:1rem}.result p{font-size:.875rem;color:var(--color-muted,#667085)}.result strong{margin-top:.25rem;display:block;font-size:1.35rem;color:var(--color-text,#172033)}.result span{margin-top:.5rem;display:block;font-size:.875rem;line-height:1.5;color:var(--color-muted,#667085)}
+  </style>
+  <script>
+    const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    const ids = ['amount', 'rate', 'amortization', 'maturity', 'closing', 'noi'];
+    const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
+    const value = (id) => Math.max(Number(fields[id]?.value || 0), 0);
+    function payment(principal, annualRate, months) {
+      const r = annualRate / 100 / 12;
+      if (!principal || !months) return 0;
+      if (!r) return principal / months;
+      return principal * (r * (1 + r) ** months) / ((1 + r) ** months - 1);
+    }
+    function balance(principal, monthly, annualRate, paidMonths) {
+      const r = annualRate / 100 / 12;
+      if (!principal || !paidMonths) return principal;
+      if (!r) return Math.max(principal - monthly * paidMonths, 0);
+      return principal * (1 + r) ** paidMonths - monthly * (((1 + r) ** paidMonths - 1) / r);
+    }
+    function calculate() {
+      const amount = value('amount');
+      const rate = value('rate');
+      const months = Math.max(value('amortization'), 1) * 12;
+      const maturityMonths = Math.min(Math.max(value('maturity'), 1) * 12, months);
+      const monthly = payment(amount, rate, months);
+      const balloon = balance(amount, monthly, rate, maturityMonths);
+      const interest = monthly * maturityMonths - Math.max(amount - balloon, 0);
+      const costs = amount * value('closing') / 100;
+      const dscr = monthly ? value('noi') / monthly : 0;
+      document.getElementById('payment').textContent = money.format(monthly);
+      document.getElementById('costs').textContent = money.format(costs);
+      document.getElementById('interest').textContent = money.format(Math.max(interest, 0));
+      document.getElementById('balloon').textContent = money.format(Math.max(balloon, 0));
+      document.getElementById('dscr').textContent = `${dscr.toFixed(2)}x`;
+      document.getElementById('dscr-copy').textContent = dscr >= 1.25 ? 'The entered income is above the modeled payment, but lender minimums and adjustments vary.' : 'The entered income is close to or below common lender coverage thresholds. Review cash flow and assumptions carefully.';
+    }
+    ids.forEach((id) => fields[id]?.addEventListener('input', calculate));
+    calculate();
+  </script>
+</BaseLayout>
