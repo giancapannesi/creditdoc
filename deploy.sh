@@ -44,6 +44,7 @@ paths = [
     "/sitemap-index.xml",
     "/feed.xml",
     "/rss.xml",
+    "/linkedin-oauth-callback/",
     "/review/lexington-law/",
     "/state/wyoming/",
     "/credit-guide/austin-tx/",

@@ -11,7 +11,7 @@ const LOG_FILE = `${ROOT}/logs/creditdoc_linkedin_posts.jsonl`;
 const DEFAULT_VERSION = '202606';
 const WEEKLY_CAP = 2;
 const DEFAULT_REDIRECT_URI = 'https://www.creditdoc.co/linkedin-oauth-callback/';
-const DEFAULT_SCOPES = ['openid', 'profile', 'email', 'w_organization_social', 'r_organization_social'];
+const DEFAULT_SCOPES = ['w_organization_social', 'r_organization_social'];
 
 const CAMPAIGNS = [
   {

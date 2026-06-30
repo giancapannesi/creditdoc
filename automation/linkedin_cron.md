@@ -60,6 +60,11 @@ node scripts/creditdoc_linkedin_manager.mjs auth-url
 
 Open the generated URL, approve the scopes, copy the `code` value from the callback page, and exchange it:
 
+The authorization helper requests only the organization posting scopes needed for CreditDoc company-page publishing:
+
+- `w_organization_social`
+- `r_organization_social`
+
 ```bash
 node scripts/creditdoc_linkedin_manager.mjs exchange-code '<code>'
 ```
