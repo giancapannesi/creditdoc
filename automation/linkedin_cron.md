@@ -23,6 +23,8 @@ Expected keys:
 - Draft queue: `/srv/BusinessOps/data/creditdoc_linkedin_queue.json`
 - Publish state: `/srv/BusinessOps/data/creditdoc_linkedin_state.json`
 - Publish log: `/srv/BusinessOps/logs/creditdoc_linkedin_posts.jsonl`
+- Generated post images: `/srv/BusinessOps/data/creditdoc_linkedin_cards/`
+- Pinterest/Blotato log: `/srv/BusinessOps/logs/creditdoc_pinterest_blotato_posts.jsonl`
 
 ## Safety Rules
 
@@ -31,6 +33,8 @@ Expected keys:
 - The publisher refuses more than two posts per UTC ISO week.
 - Live publishing requires `LINKEDIN_ACCESS_TOKEN` and `LINKEDIN_ORGANIZATION_URN`.
 - Each post links to one CreditDoc URL and uses detailed explanatory copy.
+- Every live scheduled post must include a generated CreditDoc-style image. The publisher renders a card and uploads it through LinkedIn's image media flow before creating the post.
+- Pinterest cross-posting uses Blotato only when `BLOTATO_PINTEREST_BOARD_ID` is set. If the board ID is missing or Pinterest fails, LinkedIn posting still continues and the Pinterest result is logged.
 
 ## Commands
 
@@ -47,6 +51,7 @@ node scripts/creditdoc_linkedin_manager.mjs run-scheduled-tools --dry-run
 node scripts/creditdoc_linkedin_manager.mjs run-scheduled-tools
 node scripts/creditdoc_linkedin_manager.mjs status
 node scripts/creditdoc_linkedin_manager.mjs approve <draft-id>
+node scripts/creditdoc_linkedin_manager.mjs render-card <draft-id>
 node scripts/creditdoc_linkedin_manager.mjs publish-approved --dry-run
 node scripts/creditdoc_linkedin_manager.mjs publish-approved
 ```
@@ -102,3 +107,15 @@ Optional manual dry run:
 ```bash
 node scripts/creditdoc_linkedin_manager.mjs run-scheduled-resources --dry-run
 ```
+
+## Optional Pinterest Cross-Post
+
+Blotato proxy is expected at `http://localhost:8098`. The connected CreditDoc Pinterest account currently uses Blotato account ID `6599`.
+
+To enable Pinterest cross-posting for the same twice-weekly resource posts, set the destination board ID in the cron environment:
+
+```bash
+BLOTATO_PINTEREST_BOARD_ID='<pinterest-board-id>'
+```
+
+The job copies the generated image to `/var/www/html/social-media/` so Blotato can fetch it from `https://cdn.supagum.com/`.

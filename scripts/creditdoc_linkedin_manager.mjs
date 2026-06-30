@@ -7,11 +7,18 @@ const ROOT = '/srv/BusinessOps';
 const SECRETS_FILE = `${ROOT}/tools/.linkedin.env`;
 const QUEUE_FILE = `${ROOT}/data/creditdoc_linkedin_queue.json`;
 const STATE_FILE = `${ROOT}/data/creditdoc_linkedin_state.json`;
+const CARD_DIR = `${ROOT}/data/creditdoc_linkedin_cards`;
 const LOG_FILE = `${ROOT}/logs/creditdoc_linkedin_posts.jsonl`;
+const PINTEREST_LOG_FILE = `${ROOT}/logs/creditdoc_pinterest_blotato_posts.jsonl`;
 const DEFAULT_VERSION = '202606';
 const WEEKLY_CAP = 2;
 const DEFAULT_REDIRECT_URI = 'https://www.creditdoc.co/linkedin-oauth-callback/';
 const DEFAULT_SCOPES = ['w_organization_social', 'r_organization_social'];
+const CDN_DIR = process.env.CREDITDOC_SOCIAL_CDN_DIR || '/var/www/html/social-media';
+const CDN_BASE = (process.env.CREDITDOC_SOCIAL_CDN_BASE || 'https://cdn.supagum.com').replace(/\/$/, '');
+const BLOTATO_PROXY = (process.env.BLOTATO_PROXY || 'http://localhost:8098').replace(/\/$/, '');
+const BLOTATO_PINTEREST_ACCOUNT_ID = process.env.BLOTATO_PINTEREST_ACCOUNT_ID || '6599';
+const BLOTATO_PINTEREST_BOARD_ID = process.env.BLOTATO_PINTEREST_BOARD_ID || '';
 
 const CAMPAIGNS = [
   {
@@ -194,6 +201,7 @@ function usage() {
   node scripts/creditdoc_linkedin_manager.mjs run-scheduled-tools [--date YYYY-MM-DD] [--dry-run]
   node scripts/creditdoc_linkedin_manager.mjs status
   node scripts/creditdoc_linkedin_manager.mjs approve <draft-id>
+  node scripts/creditdoc_linkedin_manager.mjs render-card <draft-id>
   node scripts/creditdoc_linkedin_manager.mjs publish-approved [--dry-run] [--limit N]
 
 Safety:
@@ -254,6 +262,11 @@ function writeJson(file, payload) {
   fs.writeFileSync(file, `${JSON.stringify(payload, null, 2)}\n`);
 }
 
+function appendJsonl(file, payload) {
+  ensureDir(file);
+  fs.appendFileSync(file, `${JSON.stringify(payload)}\n`);
+}
+
 function today(dateArg) {
   return dateArg || new Date().toISOString().slice(0, 10);
 }
@@ -304,6 +317,78 @@ function makePost(campaign) {
     '',
     campaign.hashtags.join(' '),
   ].join('\n');
+}
+
+function campaignForDraft(draft) {
+  return CAMPAIGNS.find((campaign) => campaign.slug === draft.campaign_slug) || {
+    slug: draft.campaign_slug,
+    title: draft.title,
+    kind: 'Tool',
+    problem: `CreditDoc resource: ${draft.title}`,
+    useCases: ['financial planning', 'loan research', 'borrower preparation'],
+  };
+}
+
+function cardPathForDraft(draft) {
+  return path.join(CARD_DIR, `${draft.id}.png`);
+}
+
+function renderCardForDraft(draft) {
+  const campaign = campaignForDraft(draft);
+  const out = cardPathForDraft(draft);
+  const kind = campaign.kind || 'Tool';
+  const args = [
+    'scripts/creditdoc_linkedin_card.py',
+    '--out',
+    out,
+    '--kind',
+    kind,
+    '--title',
+    draft.title,
+    '--summary',
+    campaign.problem || `CreditDoc resource: ${draft.title}`,
+    '--use-cases',
+    (campaign.useCases || []).join('|'),
+  ];
+  const result = spawnSync('python3', args, {
+    cwd: '/srv/BusinessOps/creditdoc',
+    encoding: 'utf8',
+  });
+  if (result.status !== 0) {
+    throw new Error(`Card render failed: ${result.stderr || result.stdout || `exit ${result.status}`}`);
+  }
+  if (!fs.existsSync(out) || fs.statSync(out).size < 10000) {
+    throw new Error(`Card render did not create a valid image: ${out}`);
+  }
+  draft.image_path = out;
+  draft.image_alt = `${draft.title} CreditDoc ${kind.toLowerCase()} resource card`;
+  return out;
+}
+
+function renderCardCommand(id) {
+  const queue = loadQueue();
+  const draft = queue.drafts.find((item) => item.id === id);
+  if (!draft) {
+    console.error(`Draft not found: ${id}`);
+    process.exit(1);
+  }
+  const imagePath = renderCardForDraft(draft);
+  saveQueue(queue);
+  console.log(JSON.stringify({
+    ok: true,
+    id: draft.id,
+    image_path: imagePath,
+    image_alt: draft.image_alt,
+  }, null, 2));
+}
+
+function copyCardToCdn(imagePath, draft) {
+  fs.mkdirSync(CDN_DIR, { recursive: true });
+  const filename = `${draft.id}.png`;
+  const dest = path.join(CDN_DIR, filename);
+  fs.copyFileSync(imagePath, dest);
+  fs.chmodSync(dest, 0o644);
+  return `${CDN_BASE}/${filename}`;
 }
 
 function loadQueue() {
@@ -624,11 +709,111 @@ function postsThisWeek(state, week) {
   return state.published.filter((post) => post.iso_week === week).length;
 }
 
+async function uploadLinkedInImage(env, imagePath) {
+  const owner = env.LINKEDIN_ORGANIZATION_URN;
+  const accessToken = env.LINKEDIN_ACCESS_TOKEN;
+  const version = env.LINKEDIN_VERSION || DEFAULT_VERSION;
+  const initResponse = await fetch('https://api.linkedin.com/rest/images?action=initializeUpload', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+      'Linkedin-Version': version,
+      'X-Restli-Protocol-Version': '2.0.0',
+    },
+    body: JSON.stringify({
+      initializeUploadRequest: {
+        owner,
+      },
+    }),
+  });
+  const initText = await initResponse.text();
+  let initPayload = {};
+  try { initPayload = JSON.parse(initText); } catch { initPayload = { raw: initText }; }
+  if (!initResponse.ok) {
+    throw new Error(`LinkedIn image upload init failed: ${initResponse.status} ${initResponse.statusText}: ${initText.slice(0, 500)}`);
+  }
+  const value = initPayload.value || initPayload;
+  const uploadUrl = value.uploadUrl;
+  const imageUrn = value.image;
+  if (!uploadUrl || !imageUrn) {
+    throw new Error(`LinkedIn image upload init returned unexpected payload: ${JSON.stringify(initPayload).slice(0, 500)}`);
+  }
+
+  const binary = fs.readFileSync(imagePath);
+  const uploadResponse = await fetch(uploadUrl, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'image/png',
+    },
+    body: binary,
+  });
+  const uploadText = await uploadResponse.text();
+  if (!uploadResponse.ok) {
+    throw new Error(`LinkedIn image binary upload failed: ${uploadResponse.status} ${uploadResponse.statusText}: ${uploadText.slice(0, 500)}`);
+  }
+  return imageUrn;
+}
+
+async function publishPinterestViaBlotato(draft, imagePath) {
+  if (!BLOTATO_PINTEREST_BOARD_ID) {
+    const skipped = {
+      ok: false,
+      skipped: 'missing BLOTATO_PINTEREST_BOARD_ID',
+      account_id: BLOTATO_PINTEREST_ACCOUNT_ID,
+    };
+    appendJsonl(PINTEREST_LOG_FILE, {
+      ...skipped,
+      id: draft.id,
+      target_url: draft.target_url,
+      created_at: new Date().toISOString(),
+    });
+    return skipped;
+  }
+  const mediaUrl = copyCardToCdn(imagePath, draft);
+  const body = {
+    accountId: BLOTATO_PINTEREST_ACCOUNT_ID,
+    platform: 'pinterest',
+    text: draft.commentary,
+    mediaUrls: [mediaUrl],
+    boardId: BLOTATO_PINTEREST_BOARD_ID,
+    title: draft.title,
+    link: draft.target_url,
+  };
+  const response = await fetch(`${BLOTATO_PROXY}/publish`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const text = await response.text();
+  let payload = null;
+  try { payload = JSON.parse(text); } catch { payload = { raw: text }; }
+  const result = {
+    ok: response.ok,
+    status: `${response.status} ${response.statusText}`,
+    account_id: BLOTATO_PINTEREST_ACCOUNT_ID,
+    board_id: BLOTATO_PINTEREST_BOARD_ID,
+    media_url: mediaUrl,
+    payload,
+  };
+  appendJsonl(PINTEREST_LOG_FILE, {
+    ...result,
+    id: draft.id,
+    target_url: draft.target_url,
+    created_at: new Date().toISOString(),
+  });
+  return result;
+}
+
 async function createLinkedInPost(env, draft) {
   const author = env.LINKEDIN_ORGANIZATION_URN;
   const accessToken = env.LINKEDIN_ACCESS_TOKEN;
   if (!author) throw new Error('Missing LINKEDIN_ORGANIZATION_URN');
   if (!accessToken) throw new Error('Missing LINKEDIN_ACCESS_TOKEN');
+  const imagePath = renderCardForDraft(draft);
+  const imageUrn = await uploadLinkedInImage(env, imagePath);
+  draft.linkedin_image_urn = imageUrn;
   const body = {
     author,
     commentary: draft.commentary,
@@ -639,10 +824,9 @@ async function createLinkedInPost(env, draft) {
       thirdPartyDistributionChannels: [],
     },
     content: {
-      article: {
-        source: draft.target_url,
+      media: {
+        id: imageUrn,
         title: draft.title,
-        description: `CreditDoc resource: ${draft.title}`,
       },
     },
     lifecycleState: 'PUBLISHED',
@@ -662,7 +846,11 @@ async function createLinkedInPost(env, draft) {
   if (!response.ok) {
     throw new Error(`LinkedIn post failed: ${response.status} ${response.statusText}: ${text.slice(0, 500)}`);
   }
-  return response.headers.get('x-restli-id') || text.trim() || null;
+  return {
+    postUrn: response.headers.get('x-restli-id') || text.trim() || null,
+    imagePath,
+    imageUrn,
+  };
 }
 
 async function publishApproved(dryRun, options = {}) {
@@ -686,7 +874,29 @@ async function publishApproved(dryRun, options = {}) {
   const published = [];
   for (const draft of candidates) {
     let postUrn = null;
+    let imagePath = draft.image_path || null;
+    let imageUrn = draft.linkedin_image_urn || null;
+    let pinterest = null;
     if (!dryRun) postUrn = await createLinkedInPost(env, draft);
+    if (!dryRun && postUrn && typeof postUrn === 'object') {
+      imagePath = postUrn.imagePath;
+      imageUrn = postUrn.imageUrn;
+      postUrn = postUrn.postUrn;
+    }
+    if (!dryRun && imagePath) {
+      try {
+        pinterest = await publishPinterestViaBlotato(draft, imagePath);
+      } catch (error) {
+        pinterest = { ok: false, error: error.message || String(error) };
+        appendJsonl(PINTEREST_LOG_FILE, {
+          ...pinterest,
+          id: draft.id,
+          target_url: draft.target_url,
+          created_at: new Date().toISOString(),
+        });
+      }
+      draft.pinterest_blotato_result = pinterest;
+    }
     draft.status = dryRun ? 'approved' : 'published';
     draft.published_at = dryRun ? null : new Date().toISOString();
     draft.linkedin_post_urn = dryRun ? null : postUrn;
@@ -697,12 +907,21 @@ async function publishApproved(dryRun, options = {}) {
         published_at: draft.published_at,
         target_url: draft.target_url,
         linkedin_post_urn: postUrn,
+        linkedin_image_urn: imageUrn,
+        image_path: imagePath,
+        pinterest_blotato_result: pinterest,
       };
       state.published.push(record);
-      ensureDir(LOG_FILE);
-      fs.appendFileSync(LOG_FILE, `${JSON.stringify(record)}\n`);
+      appendJsonl(LOG_FILE, record);
     }
-    published.push({ id: draft.id, target_url: draft.target_url, linkedin_post_urn: postUrn });
+    published.push({
+      id: draft.id,
+      target_url: draft.target_url,
+      linkedin_post_urn: postUrn,
+      linkedin_image_urn: imageUrn,
+      image_path: imagePath,
+      pinterest_blotato_result: pinterest,
+    });
   }
   if (!dryRun) {
     saveQueue(queue);
@@ -745,6 +964,7 @@ async function main() {
     draftWeek(dateArg);
   } else if (command === 'status') status();
   else if (command === 'approve') approve(args[0]);
+  else if (command === 'render-card') renderCardCommand(args[0]);
   else if (command === 'publish-approved') {
     const limitArg = args.includes('--limit') ? args[args.indexOf('--limit') + 1] : args.find((arg) => arg.startsWith('--limit='))?.slice(8);
     await publishApproved(args.includes('--dry-run'), { limit: limitArg ? Number(limitArg) : undefined });
