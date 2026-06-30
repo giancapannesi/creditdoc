@@ -17,56 +17,168 @@ const CAMPAIGNS = [
   {
     slug: 'commercial-loan-calculator',
     url: 'https://www.creditdoc.co/tools/commercial-loan-calculator/',
-    cadenceSlot: 'tool',
     title: 'Commercial loan calculator',
-    angle: 'Commercial mortgages can look simple until balloon maturities, closing costs, and debt-service coverage enter the picture.',
-    cta: 'Use the free CreditDoc commercial loan calculator before comparing lender terms.',
+    problem: 'Commercial loan payments can look simple at first, but the real obligation changes once amortization, balloon maturity, closing costs, and debt-service coverage are included.',
+    purpose: 'The CreditDoc commercial loan calculator helps business owners model payment, total repayment, estimated closing costs, balloon balance, and DSCR before comparing lender terms.',
+    useCases: ['commercial real estate loans', 'owner-occupied property financing', 'balloon-payment planning', 'cash-flow checks before lender conversations'],
+    cta: 'Use the free calculator here:',
     hashtags: ['#SmallBusinessFinance', '#CommercialLoans', '#BusinessFunding'],
   },
   {
     slug: 'business-line-of-credit-calculator',
     url: 'https://www.creditdoc.co/tools/business-line-of-credit-calculator/',
-    cadenceSlot: 'tool',
     title: 'Business line of credit calculator',
-    angle: 'A business line of credit is flexible, but draw fees, unused line fees, APR, and repayment timing can change the real cost.',
-    cta: 'Use the free CreditDoc business line of credit calculator to model a draw before applying.',
+    problem: 'A business line of credit is flexible, but the cost is not just the APR. Draw amount, draw fees, unused-line fees, repayment timing, and utilization all matter.',
+    purpose: 'The CreditDoc business line of credit calculator helps borrowers estimate the cost of a draw and understand how repayment choices affect cash flow.',
+    useCases: ['working-capital planning', 'seasonal inventory purchases', 'short-term cash-flow gaps', 'comparing bank and online credit lines'],
+    cta: 'Use the free calculator here:',
     hashtags: ['#BusinessLineOfCredit', '#SmallBusiness', '#WorkingCapital'],
   },
   {
     slug: 'sba-loan-calculator',
     url: 'https://www.creditdoc.co/tools/sba-loan-calculator/',
-    cadenceSlot: 'tool',
     title: 'SBA loan calculator',
-    angle: 'SBA loans can offer longer terms, but the payment still depends on loan amount, rate, term, and fee treatment.',
-    cta: 'Use the CreditDoc SBA loan calculator to estimate payment pressure before speaking with a lender.',
+    problem: 'SBA loans are often discussed as lower-cost funding, but borrowers still need to estimate monthly payment, interest, fees, and cash-flow pressure.',
+    purpose: 'The CreditDoc SBA loan calculator helps business owners test loan amount, term, rate, and fee assumptions before speaking with an SBA lender.',
+    useCases: ['SBA 7(a) planning', 'startup or expansion funding', 'monthly payment estimates', 'comparing repayment scenarios'],
+    cta: 'Use the free calculator here:',
     hashtags: ['#SBALoans', '#SmallBusinessFinance', '#BusinessLoans'],
   },
   {
-    slug: 'business-loan-readiness-quiz',
-    url: 'https://www.creditdoc.co/tools/business-loan-readiness-quiz/',
-    cadenceSlot: 'education',
-    title: 'Business loan readiness quiz',
-    angle: 'Before a business owner applies, it helps to know whether revenue, documents, time in business, and credit profile match the likely funding path.',
-    cta: 'CreditDoc built a free business loan readiness quiz for that first-pass review.',
-    hashtags: ['#BusinessLoans', '#Entrepreneurs', '#SmallBusiness'],
+    slug: 'accounts-receivable-financing-calculator',
+    url: 'https://www.creditdoc.co/tools/accounts-receivable-financing-calculator/',
+    title: 'Accounts receivable financing calculator',
+    problem: 'Receivables financing can improve cash flow, but advance rates, reserve holds, fees, and collection timing affect how much cash a business actually receives.',
+    purpose: 'The CreditDoc accounts receivable financing calculator helps estimate advance amount, reserve, fees, and net funds from unpaid invoices.',
+    useCases: ['invoice financing research', 'cash-flow planning', 'fee comparison', 'estimating net proceeds before applying'],
+    cta: 'Use the free calculator here:',
+    hashtags: ['#AccountsReceivable', '#WorkingCapital', '#BusinessFinance'],
   },
   {
-    slug: 'best-business-lines-of-credit',
-    url: 'https://www.creditdoc.co/best/best-business-lines-of-credit/',
-    cadenceSlot: 'education',
-    title: 'Business lines of credit research',
-    angle: 'Business lines of credit are not one product. Banks, online lenders, secured lines, and startup options can behave very differently.',
-    cta: 'CreditDoc’s research page compares business line of credit options and links to planning tools.',
-    hashtags: ['#BusinessCredit', '#WorkingCapital', '#SmallBusinessFinance'],
+    slug: 'business-loan-calculator',
+    url: 'https://www.creditdoc.co/tools/business-loan-calculator/',
+    title: 'Business loan calculator',
+    problem: 'A business loan headline rate does not show the full repayment picture. Term length, fees, payment frequency, and total interest can change the decision.',
+    purpose: 'The CreditDoc business loan calculator gives borrowers a quick way to estimate payment and repayment pressure before comparing financing options.',
+    useCases: ['term-loan planning', 'monthly payment estimates', 'total interest checks', 'side-by-side lender comparison'],
+    cta: 'Use the free calculator here:',
+    hashtags: ['#BusinessLoans', '#SmallBusinessFinance', '#Entrepreneurs'],
   },
   {
-    slug: 'best-sba-loans',
-    url: 'https://www.creditdoc.co/best/best-sba-loans/',
-    cadenceSlot: 'education',
-    title: 'SBA loan research',
-    angle: 'SBA funding is often described as one category, but 7(a), 504, Express, and microloan paths solve different problems.',
-    cta: 'CreditDoc’s SBA loan research page gives borrowers a clearer starting point.',
-    hashtags: ['#SBALoans', '#BusinessFunding', '#SmallBusiness'],
+    slug: 'equipment-financing-calculator',
+    url: 'https://www.creditdoc.co/tools/equipment-financing-calculator/',
+    title: 'Equipment financing calculator',
+    problem: 'Equipment financing decisions should account for payment, term, down payment, fees, useful life, and whether the asset can support the debt.',
+    purpose: 'The CreditDoc equipment financing calculator helps estimate payment and total repayment before a business commits to equipment debt.',
+    useCases: ['vehicle or machinery purchases', 'down-payment planning', 'monthly cash-flow review', 'equipment lender comparison'],
+    cta: 'Use the free calculator here:',
+    hashtags: ['#EquipmentFinancing', '#SmallBusiness', '#BusinessFunding'],
+  },
+  {
+    slug: 'working-capital-calculator',
+    url: 'https://www.creditdoc.co/tools/working-capital-calculator/',
+    title: 'Working capital calculator',
+    problem: 'Working capital is one of the first checks lenders and owners use to understand short-term financial pressure.',
+    purpose: 'The CreditDoc working capital calculator helps estimate current assets minus current liabilities and gives a clearer view of short-term operating cushion.',
+    useCases: ['cash-flow reviews', 'lender preparation', 'short-term finance planning', 'operating runway checks'],
+    cta: 'Use the free calculator here:',
+    hashtags: ['#WorkingCapital', '#BusinessFinance', '#SmallBusiness'],
+  },
+  {
+    slug: 'sba-guarantee-fee-calculator',
+    url: 'https://www.creditdoc.co/tools/sba-guarantee-fee-calculator/',
+    title: 'SBA guarantee fee calculator',
+    problem: 'SBA guarantee fees can be easy to overlook, but they may affect total financing cost and cash needed at closing.',
+    purpose: 'The CreditDoc SBA guarantee fee calculator helps estimate the guarantee fee impact before a borrower compares SBA loan options.',
+    useCases: ['SBA 7(a) planning', 'closing-cost estimates', 'fee comparison', 'lender conversation prep'],
+    cta: 'Use the free calculator here:',
+    hashtags: ['#SBALoans', '#BusinessLoans', '#SmallBusinessFinance'],
+  },
+  {
+    slug: 'bank-statement-cash-flow-calculator',
+    url: 'https://www.creditdoc.co/tools/bank-statement-cash-flow-calculator/',
+    title: 'Bank statement cash flow calculator',
+    problem: 'Some lenders look closely at business bank activity. Deposits, average balances, and cash-flow consistency can affect the funding conversation.',
+    purpose: 'The CreditDoc bank statement cash flow calculator helps business owners review bank-statement cash flow before applying.',
+    useCases: ['bank-statement loan prep', 'cash-flow review', 'deposit consistency checks', 'alternative lender comparison'],
+    cta: 'Use the free calculator here:',
+    hashtags: ['#CashFlow', '#BusinessFunding', '#SmallBusiness'],
+  },
+  {
+    slug: 'mca-repayment-calculator',
+    url: 'https://www.creditdoc.co/tools/mca-repayment-calculator/',
+    title: 'MCA repayment calculator',
+    problem: 'Merchant cash advances can move quickly, but daily or weekly repayment can put pressure on operating cash flow.',
+    purpose: 'The CreditDoc MCA repayment calculator helps estimate repayment amount, holdback pressure, and total payback before a business evaluates an advance.',
+    useCases: ['MCA comparison', 'daily repayment planning', 'cash-flow stress checks', 'alternative funding review'],
+    cta: 'Use the free calculator here:',
+    hashtags: ['#BusinessFunding', '#CashFlow', '#SmallBusinessFinance'],
+  },
+  {
+    slug: 'credit-fundamentals-course',
+    kind: 'Course',
+    url: 'https://www.creditdoc.co/courses/credit-fundamentals/',
+    title: 'Credit fundamentals course',
+    problem: 'Credit decisions affect borrowing costs, credit cards, loan approvals, housing, insurance, and business funding, but many readers do not have a structured place to learn the basics.',
+    purpose: 'The free CreditDoc credit fundamentals course gives readers a guided path through credit reports, scores, debt, disputes, and safer borrowing decisions.',
+    useCases: ['credit education', 'financial wellness onboarding', 'rebuilding credit', 'understanding reports before applying for loans'],
+    cta: 'Start the free course here:',
+    hashtags: ['#CreditEducation', '#FinancialWellness', '#CreditScores'],
+  },
+  {
+    slug: 'how-do-small-business-loans-work',
+    kind: 'Answer',
+    url: 'https://www.creditdoc.co/answers/how-do-small-business-loans-work/',
+    title: 'How small business loans work',
+    problem: 'Small business loans can involve different products, eligibility rules, documents, fees, repayment structures, and risks.',
+    purpose: 'This CreditDoc answer explains the main small business loan types, what lenders usually review, how applications work, and what borrowers should check before accepting an offer.',
+    useCases: ['business loan research', 'first-time borrower education', 'loan type comparison', 'application preparation'],
+    cta: 'Read the answer here:',
+    hashtags: ['#BusinessLoans', '#SmallBusinessFinance', '#BusinessFunding'],
+  },
+  {
+    slug: 'business-loan-rates-fees-explained',
+    kind: 'Answer',
+    url: 'https://www.creditdoc.co/answers/business-loan-rates-fees-explained/',
+    title: 'Business loan rates and fees explained',
+    problem: 'The monthly payment is only one part of a business loan. APR, origination fees, draw fees, prepayment terms, and repayment frequency can all affect cost.',
+    purpose: 'This CreditDoc answer breaks down the common rate and fee terms business borrowers should understand before comparing lenders.',
+    useCases: ['loan offer review', 'APR comparison', 'fee checks', 'borrower preparation'],
+    cta: 'Read the answer here:',
+    hashtags: ['#BusinessLoans', '#SmallBusinessFinance', '#APR'],
+  },
+  {
+    slug: 'can-i-get-small-business-loan-with-bad-credit',
+    kind: 'Answer',
+    url: 'https://www.creditdoc.co/answers/can-i-get-small-business-loan-with-bad-credit/',
+    title: 'Small business loans with bad credit',
+    problem: 'Bad credit does not always make business funding impossible, but it can affect lender options, pricing, collateral requirements, and personal guarantee risk.',
+    purpose: 'This CreditDoc answer explains what borrowers with weaker credit should expect and how to prepare before applying.',
+    useCases: ['bad-credit business funding research', 'application preparation', 'risk review', 'alternative funding comparison'],
+    cta: 'Read the answer here:',
+    hashtags: ['#BusinessLoans', '#BadCredit', '#SmallBusiness'],
+  },
+  {
+    slug: 'business-line-of-credit-guide-new-llc-bad-credit',
+    kind: 'Answer',
+    url: 'https://www.creditdoc.co/answers/business-line-of-credit-guide-new-llc-bad-credit/',
+    title: 'Business line of credit for a new LLC with bad credit',
+    problem: 'New LLCs with limited revenue or weak credit often face stricter underwriting, smaller limits, higher costs, or secured funding requirements.',
+    purpose: 'This CreditDoc answer explains how business lines of credit may work for new LLCs and what owners should check before applying.',
+    useCases: ['new LLC funding research', 'line of credit comparison', 'credit profile preparation', 'working capital planning'],
+    cta: 'Read the answer here:',
+    hashtags: ['#BusinessLineOfCredit', '#StartupFunding', '#SmallBusiness'],
+  },
+  {
+    slug: 'are-merchant-cash-advances-a-good-idea',
+    kind: 'Answer',
+    url: 'https://www.creditdoc.co/answers/are-merchant-cash-advances-a-good-idea/',
+    title: 'Are merchant cash advances a good idea?',
+    problem: 'Merchant cash advances can provide fast capital, but repayment structure, factor rates, and daily or weekly withdrawals can create serious cash-flow pressure.',
+    purpose: 'This CreditDoc answer helps business owners understand when an MCA may be risky and what to compare before accepting one.',
+    useCases: ['MCA research', 'cash-flow risk review', 'alternative funding comparison', 'repayment pressure checks'],
+    cta: 'Read the answer here:',
+    hashtags: ['#MerchantCashAdvance', '#BusinessFunding', '#CashFlow'],
   },
 ];
 
@@ -78,13 +190,14 @@ function usage() {
   node scripts/creditdoc_linkedin_manager.mjs list-organizations
   node scripts/creditdoc_linkedin_manager.mjs set-organization <urn:li:organization:id>
   node scripts/creditdoc_linkedin_manager.mjs draft-week [--date YYYY-MM-DD]
+  node scripts/creditdoc_linkedin_manager.mjs run-scheduled-resources [--date YYYY-MM-DD] [--dry-run]
+  node scripts/creditdoc_linkedin_manager.mjs run-scheduled-tools [--date YYYY-MM-DD] [--dry-run]
   node scripts/creditdoc_linkedin_manager.mjs status
   node scripts/creditdoc_linkedin_manager.mjs approve <draft-id>
-  node scripts/creditdoc_linkedin_manager.mjs publish-approved [--dry-run]
+  node scripts/creditdoc_linkedin_manager.mjs publish-approved [--dry-run] [--limit N]
 
 Safety:
-  - Draft generation is automatic.
-  - Publishing requires status=approved.
+  - Scheduled resource posting can auto-approve due CreditDoc resource drafts.
   - Publisher refuses more than ${WEEKLY_CAP} live posts per UTC ISO week.
 `);
 }
@@ -167,9 +280,23 @@ function nextWeekday(dateString, targetDay) {
   return addDays(dateString, delta);
 }
 
+function sameWeekday(dateString, targetDay) {
+  const date = new Date(`${dateString}T00:00:00Z`);
+  const current = date.getUTCDay();
+  const delta = targetDay - current;
+  return addDays(dateString, delta);
+}
+
 function makePost(campaign) {
+  const kind = campaign.kind || 'Tool';
   return [
-    campaign.angle,
+    `${kind} spotlight: ${campaign.title}`,
+    '',
+    campaign.problem,
+    '',
+    `What it is for: ${campaign.purpose}`,
+    '',
+    `Useful for: ${campaign.useCases.join(', ')}.`,
     '',
     campaign.cta,
     '',
@@ -218,32 +345,73 @@ function buildDraft(campaign, scheduledDate, slot) {
   };
 }
 
+function refreshDraftFromCampaign(draft, campaign, slot) {
+  if (draft.status === 'published') return false;
+  draft.title = campaign.title;
+  draft.target_url = campaign.url;
+  draft.slot = slot;
+  draft.commentary = makePost(campaign);
+  return true;
+}
+
 function draftWeek(dateArg) {
   const base = today(dateArg);
-  const tuesday = nextWeekday(base, 2);
-  const friday = nextWeekday(base, 5);
+  const tuesday = sameWeekday(base, 2);
+  const friday = sameWeekday(base, 5);
   const queue = loadQueue();
   const keys = existingDraftKeys(queue);
 
-  const education = CAMPAIGNS.filter((item) => item.cadenceSlot === 'education');
-  const tools = CAMPAIGNS.filter((item) => item.cadenceSlot === 'tool');
   const weekSeed = Number(isoWeek(base).split('W')[1]) || 1;
+  const firstIndex = ((weekSeed - 1) * 2) % CAMPAIGNS.length;
   const picks = [
-    { campaign: education[weekSeed % education.length], date: tuesday, slot: 'education' },
-    { campaign: tools[weekSeed % tools.length], date: friday, slot: 'tool' },
+    { campaign: CAMPAIGNS[firstIndex], date: tuesday, slot: 'resource' },
+    { campaign: CAMPAIGNS[(firstIndex + 1) % CAMPAIGNS.length], date: friday, slot: 'resource' },
   ];
 
   const added = [];
+  const refreshed = [];
+  const campaignBySlug = new Map(CAMPAIGNS.map((campaign) => [campaign.slug, campaign]));
   for (const pick of picks) {
+    if (pick.date < base) continue;
+    const dateAlreadyQueued = queue.drafts.some((draft) => draft.status !== 'published' && draft.scheduled_date === pick.date);
+    if (dateAlreadyQueued) continue;
     const key = `${pick.date}:${pick.campaign.slug}`;
-    if (keys.has(key)) continue;
+    if (keys.has(key)) {
+      const draft = queue.drafts.find((item) => item.scheduled_date === pick.date && item.campaign_slug === pick.campaign.slug);
+      if (draft && refreshDraftFromCampaign(draft, pick.campaign, pick.slot)) refreshed.push(draft.id);
+      continue;
+    }
     const draft = buildDraft(pick.campaign, pick.date, pick.slot);
     queue.drafts.push(draft);
     added.push(draft.id);
   }
+  for (const draft of queue.drafts) {
+    const campaign = campaignBySlug.get(draft.campaign_slug);
+    if (!campaign) continue;
+    if (refreshDraftFromCampaign(draft, campaign, 'resource') && !refreshed.includes(draft.id)) {
+      refreshed.push(draft.id);
+    }
+  }
   queue.drafts.sort((a, b) => `${a.scheduled_date}:${a.id}`.localeCompare(`${b.scheduled_date}:${b.id}`));
   saveQueue(queue);
-  console.log(JSON.stringify({ ok: true, added, queue_file: QUEUE_FILE }, null, 2));
+  console.log(JSON.stringify({ ok: true, added, refreshed, queue_file: QUEUE_FILE }, null, 2));
+}
+
+function approveDueResourceDrafts(dateArg) {
+  const nowDate = today(dateArg);
+  const queue = loadQueue();
+  const eligibleSlugs = new Set(CAMPAIGNS.map((campaign) => campaign.slug));
+  const approved = [];
+  for (const draft of queue.drafts) {
+    if (draft.status !== 'draft') continue;
+    if (!eligibleSlugs.has(draft.campaign_slug)) continue;
+    if (draft.scheduled_date > nowDate) continue;
+    draft.status = 'approved';
+    draft.approved_at = new Date().toISOString();
+    approved.push(draft.id);
+  }
+  if (approved.length > 0) saveQueue(queue);
+  return approved;
 }
 
 function status() {
@@ -317,14 +485,28 @@ async function authCheck() {
     console.log(JSON.stringify(report, null, 2));
     process.exit(1);
   }
+  if (!orgUrn) {
+    report.ok = false;
+    report.api_status = 'missing LINKEDIN_ORGANIZATION_URN; company page organization is required for API posting';
+    console.log(JSON.stringify(report, null, 2));
+    process.exit(1);
+  }
 
-  const response = await fetch('https://api.linkedin.com/v2/userinfo', {
-    headers: { Authorization: `Bearer ${accessToken}` },
+  const organizationId = orgUrn.split(':').pop();
+  const response = await fetch('https://api.linkedin.com/v2/organizations?q=vanityName&vanityName=creditdoc-co&projection=(elements*(id,localizedName,vanityName))', {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'X-Restli-Protocol-Version': '2.0.0',
+    },
   });
   report.api_status = `${response.status} ${response.statusText}`;
-  report.ok = response.ok;
+  const payload = await response.json().catch(() => ({}));
+  const organizations = Array.isArray(payload.elements) ? payload.elements : [];
+  report.organization_id = organizationId;
+  report.organization_lookup_match = organizations.some((item) => String(item.id) === String(organizationId));
+  report.ok = response.ok && report.organization_lookup_match;
   console.log(JSON.stringify(report, null, 2));
-  process.exit(response.ok ? 0 : 1);
+  process.exit(report.ok ? 0 : 1);
 }
 
 function authUrl() {
@@ -483,22 +665,23 @@ async function createLinkedInPost(env, draft) {
   return response.headers.get('x-restli-id') || text.trim() || null;
 }
 
-async function publishApproved(dryRun) {
+async function publishApproved(dryRun, options = {}) {
   const env = loadEnv();
   const queue = loadQueue();
   const state = loadState();
-  const nowDate = today();
+  const nowDate = today(options.dateArg);
   const week = isoWeek(nowDate);
   const used = postsThisWeek(state, week);
   if (used >= WEEKLY_CAP) {
     console.log(JSON.stringify({ ok: true, published: [], skipped: `weekly cap reached (${used}/${WEEKLY_CAP})` }, null, 2));
-    return;
+    return { published: [], skipped: `weekly cap reached (${used}/${WEEKLY_CAP})`, weekly_used_after: used };
   }
+  const allowed = Math.max(0, Math.min(options.limit || WEEKLY_CAP, WEEKLY_CAP - used));
 
   const candidates = queue.drafts
     .filter((draft) => draft.status === 'approved' && draft.scheduled_date <= nowDate)
     .sort((a, b) => `${a.scheduled_date}:${a.id}`.localeCompare(`${b.scheduled_date}:${b.id}`))
-    .slice(0, WEEKLY_CAP - used);
+    .slice(0, allowed);
 
   const published = [];
   for (const draft of candidates) {
@@ -525,7 +708,25 @@ async function publishApproved(dryRun) {
     saveQueue(queue);
     saveState(state);
   }
-  console.log(JSON.stringify({ ok: true, dry_run: dryRun, published, weekly_used_after: used + published.length }, null, 2));
+  const result = { ok: true, dry_run: dryRun, published, weekly_used_after: used + published.length };
+  console.log(JSON.stringify(result, null, 2));
+  return result;
+}
+
+async function runScheduledResources(args) {
+  const dryRun = args.includes('--dry-run');
+  const dateArg = args.includes('--date') ? args[args.indexOf('--date') + 1] : args.find((arg) => arg.startsWith('--date='))?.slice(7);
+  if (!dryRun) draftWeek(dateArg);
+  const approved = dryRun ? [] : approveDueResourceDrafts(dateArg);
+  const publishResult = await publishApproved(dryRun, { dateArg, limit: 1 });
+  console.log(JSON.stringify({
+    ok: true,
+    command: 'run-scheduled-resources',
+    date: today(dateArg),
+    dry_run: dryRun,
+    auto_approved: approved,
+    publish_result: publishResult,
+  }, null, 2));
 }
 
 async function main() {
@@ -544,7 +745,10 @@ async function main() {
     draftWeek(dateArg);
   } else if (command === 'status') status();
   else if (command === 'approve') approve(args[0]);
-  else if (command === 'publish-approved') await publishApproved(args.includes('--dry-run'));
+  else if (command === 'publish-approved') {
+    const limitArg = args.includes('--limit') ? args[args.indexOf('--limit') + 1] : args.find((arg) => arg.startsWith('--limit='))?.slice(8);
+    await publishApproved(args.includes('--dry-run'), { limit: limitArg ? Number(limitArg) : undefined });
+  } else if (command === 'run-scheduled-resources' || command === 'run-scheduled-tools') await runScheduledResources(args);
   else {
     usage();
     process.exit(1);

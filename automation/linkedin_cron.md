@@ -1,6 +1,9 @@
 # CreditDoc LinkedIn Cron
 
-The LinkedIn workflow is intentionally approval-gated.
+The LinkedIn workflow publishes one CreditDoc resource post twice per week.
+
+The live schedule is Tuesday and Friday. Each run creates/refreshed the weekly
+resource drafts, auto-approves only due CreditDoc resource posts, and publishes at most one post.
 
 ## Secrets
 
@@ -23,10 +26,11 @@ Expected keys:
 
 ## Safety Rules
 
-- Auto-generation creates drafts only.
-- A draft must be manually marked `approved` before publishing.
+- Scheduled posting rotates CreditDoc tools, the free course, and selected answer pages.
+- Each scheduled run publishes at most one due resource post.
 - The publisher refuses more than two posts per UTC ISO week.
 - Live publishing requires `LINKEDIN_ACCESS_TOKEN` and `LINKEDIN_ORGANIZATION_URN`.
+- Each post links to one CreditDoc URL and uses detailed explanatory copy.
 
 ## Commands
 
@@ -37,6 +41,10 @@ node scripts/creditdoc_linkedin_manager.mjs exchange-code '<code-from-callback-u
 node scripts/creditdoc_linkedin_manager.mjs list-organizations
 node scripts/creditdoc_linkedin_manager.mjs set-organization 'urn:li:organization:123456'
 node scripts/creditdoc_linkedin_manager.mjs draft-week
+node scripts/creditdoc_linkedin_manager.mjs run-scheduled-resources --dry-run
+node scripts/creditdoc_linkedin_manager.mjs run-scheduled-resources
+node scripts/creditdoc_linkedin_manager.mjs run-scheduled-tools --dry-run
+node scripts/creditdoc_linkedin_manager.mjs run-scheduled-tools
 node scripts/creditdoc_linkedin_manager.mjs status
 node scripts/creditdoc_linkedin_manager.mjs approve <draft-id>
 node scripts/creditdoc_linkedin_manager.mjs publish-approved --dry-run
@@ -83,14 +91,14 @@ node scripts/creditdoc_linkedin_manager.mjs set-organization 'urn:li:organizatio
 
 ## Recommended Cron
 
-Drafts only, weekly:
+Live twice-weekly resource posting:
 
 ```cron
-35 10 * * 1 cd /srv/BusinessOps/creditdoc && /usr/bin/node scripts/creditdoc_linkedin_manager.mjs draft-week >> /srv/BusinessOps/logs/creditdoc_linkedin_drafts.log 2>&1
+5 14 * * 2,5 cd /srv/BusinessOps/creditdoc && /usr/bin/node scripts/creditdoc_linkedin_manager.mjs run-scheduled-resources >> /srv/BusinessOps/logs/creditdoc_linkedin_resource_posts.log 2>&1
 ```
 
-Approved-publish check, twice weekly:
+Optional manual dry run:
 
-```cron
-45 10 * * 2,5 cd /srv/BusinessOps/creditdoc && /usr/bin/node scripts/creditdoc_linkedin_manager.mjs publish-approved >> /srv/BusinessOps/logs/creditdoc_linkedin_publish.log 2>&1
+```bash
+node scripts/creditdoc_linkedin_manager.mjs run-scheduled-resources --dry-run
 ```
