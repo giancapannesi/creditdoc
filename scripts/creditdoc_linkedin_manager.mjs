@@ -10,6 +10,8 @@ const STATE_FILE = `${ROOT}/data/creditdoc_linkedin_state.json`;
 const LOG_FILE = `${ROOT}/logs/creditdoc_linkedin_posts.jsonl`;
 const DEFAULT_VERSION = '202606';
 const WEEKLY_CAP = 2;
+const DEFAULT_REDIRECT_URI = 'https://www.creditdoc.co/linkedin-oauth-callback/';
+const DEFAULT_SCOPES = ['openid', 'profile', 'email', 'w_organization_social', 'r_organization_social'];
 
 const CAMPAIGNS = [
   {
@@ -71,6 +73,10 @@ const CAMPAIGNS = [
 function usage() {
   console.log(`Usage:
   node scripts/creditdoc_linkedin_manager.mjs auth-check
+  node scripts/creditdoc_linkedin_manager.mjs auth-url
+  node scripts/creditdoc_linkedin_manager.mjs exchange-code <code>
+  node scripts/creditdoc_linkedin_manager.mjs list-organizations
+  node scripts/creditdoc_linkedin_manager.mjs set-organization <urn:li:organization:id>
   node scripts/creditdoc_linkedin_manager.mjs draft-week [--date YYYY-MM-DD]
   node scripts/creditdoc_linkedin_manager.mjs status
   node scripts/creditdoc_linkedin_manager.mjs approve <draft-id>
@@ -96,6 +102,29 @@ function loadEnv() {
     env[key.trim()] = rest.join('=').trim().replace(/^["']|["']$/g, '');
   }
   return env;
+}
+
+function saveEnv(updates) {
+  const existing = loadEnv();
+  const merged = { ...existing, ...updates };
+  const orderedKeys = [
+    'LINKEDIN_CLIENT_ID',
+    'LINKEDIN_API_KEY',
+    'LINKEDIN_CLIENT_SECRET',
+    'LINKEDIN_REDIRECT_URI',
+    'LINKEDIN_ACCESS_TOKEN',
+    'LINKEDIN_EXPIRES_IN',
+    'LINKEDIN_ACCESS_TOKEN_SAVED_AT',
+    'LINKEDIN_ORGANIZATION_URN',
+    'LINKEDIN_VERSION',
+  ];
+  const keys = [...orderedKeys, ...Object.keys(merged).filter((key) => !orderedKeys.includes(key)).sort()];
+  const lines = keys
+    .filter((key) => merged[key] !== undefined && merged[key] !== null && String(merged[key]).length > 0)
+    .map((key) => `${key}=${merged[key]}`);
+  ensureDir(SECRETS_FILE);
+  fs.writeFileSync(SECRETS_FILE, `${lines.join('\n')}\n`, { mode: 0o600 });
+  fs.chmodSync(SECRETS_FILE, 0o600);
 }
 
 function readJson(file, fallback) {
@@ -298,6 +327,117 @@ async function authCheck() {
   process.exit(response.ok ? 0 : 1);
 }
 
+function authUrl() {
+  const env = loadEnv();
+  const clientId = env.LINKEDIN_CLIENT_ID;
+  const redirectUri = env.LINKEDIN_REDIRECT_URI || DEFAULT_REDIRECT_URI;
+  if (!clientId) {
+    console.error('Missing LINKEDIN_CLIENT_ID');
+    process.exit(1);
+  }
+  saveEnv({ LINKEDIN_REDIRECT_URI: redirectUri });
+  const state = `creditdoc-${Date.now()}`;
+  const params = new URLSearchParams({
+    response_type: 'code',
+    client_id: clientId,
+    redirect_uri: redirectUri,
+    scope: DEFAULT_SCOPES.join(' '),
+    state,
+  });
+  console.log(JSON.stringify({
+    ok: true,
+    redirect_uri: redirectUri,
+    scopes: DEFAULT_SCOPES,
+    state,
+    note: 'Add this redirect URI in the LinkedIn Developer app first if it is not already present. After approval, copy the code query parameter and run exchange-code.',
+    url: `https://www.linkedin.com/oauth/v2/authorization?${params.toString()}`,
+  }, null, 2));
+}
+
+async function exchangeCode(code) {
+  const env = loadEnv();
+  const clientId = env.LINKEDIN_CLIENT_ID;
+  const clientSecret = env.LINKEDIN_CLIENT_SECRET || env.LINKEDIN_API_KEY;
+  const redirectUri = env.LINKEDIN_REDIRECT_URI || DEFAULT_REDIRECT_URI;
+  if (!clientId || !clientSecret) {
+    console.error('Missing LINKEDIN_CLIENT_ID or LINKEDIN_CLIENT_SECRET/LINKEDIN_API_KEY');
+    process.exit(1);
+  }
+  if (!code) {
+    console.error('Missing authorization code');
+    process.exit(1);
+  }
+  const body = new URLSearchParams({
+    grant_type: 'authorization_code',
+    code,
+    redirect_uri: redirectUri,
+    client_id: clientId,
+    client_secret: clientSecret,
+  });
+  const response = await fetch('https://www.linkedin.com/oauth/v2/accessToken', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body,
+  });
+  const payload = await response.json().catch(async () => ({ raw: await response.text() }));
+  if (!response.ok || !payload.access_token) {
+    console.error(JSON.stringify({ ok: false, status: response.status, payload }, null, 2));
+    process.exit(1);
+  }
+  saveEnv({
+    LINKEDIN_REDIRECT_URI: redirectUri,
+    LINKEDIN_ACCESS_TOKEN: payload.access_token,
+    LINKEDIN_EXPIRES_IN: String(payload.expires_in || ''),
+    LINKEDIN_ACCESS_TOKEN_SAVED_AT: new Date().toISOString(),
+  });
+  console.log(JSON.stringify({
+    ok: true,
+    saved: ['LINKEDIN_ACCESS_TOKEN', 'LINKEDIN_EXPIRES_IN', 'LINKEDIN_ACCESS_TOKEN_SAVED_AT'],
+    expires_in: payload.expires_in || null,
+  }, null, 2));
+}
+
+async function listOrganizations() {
+  const env = loadEnv();
+  const accessToken = env.LINKEDIN_ACCESS_TOKEN;
+  if (!accessToken) {
+    console.error('Missing LINKEDIN_ACCESS_TOKEN');
+    process.exit(1);
+  }
+  const response = await fetch('https://api.linkedin.com/rest/organizationAcls?q=roleAssignee&role=ADMINISTRATOR&state=APPROVED', {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Linkedin-Version': env.LINKEDIN_VERSION || DEFAULT_VERSION,
+      'X-Restli-Protocol-Version': '2.0.0',
+    },
+  });
+  const text = await response.text();
+  let payload = null;
+  try { payload = JSON.parse(text); } catch { payload = { raw: text }; }
+  const elements = Array.isArray(payload.elements) ? payload.elements : [];
+  console.log(JSON.stringify({
+    ok: response.ok,
+    status: `${response.status} ${response.statusText}`,
+    organizations: elements.map((item) => ({
+      organization: item.organization,
+      role: item.role,
+      state: item.state,
+    })),
+    raw_count: elements.length,
+    payload: response.ok ? undefined : payload,
+  }, null, 2));
+  process.exit(response.ok ? 0 : 1);
+}
+
+function setOrganization(urn) {
+  if (!urn || !/^urn:li:organization:\d+$/.test(urn)) {
+    console.error('Expected organization URN like urn:li:organization:123456');
+    process.exit(1);
+  }
+  saveEnv({ LINKEDIN_ORGANIZATION_URN: urn });
+  console.log(JSON.stringify({ ok: true, saved: 'LINKEDIN_ORGANIZATION_URN' }, null, 2));
+}
+
 function postsThisWeek(state, week) {
   return state.published.filter((post) => post.iso_week === week).length;
 }
@@ -395,6 +535,10 @@ async function main() {
     return;
   }
   if (command === 'auth-check') await authCheck();
+  else if (command === 'auth-url') authUrl();
+  else if (command === 'exchange-code') await exchangeCode(args[0]);
+  else if (command === 'list-organizations') await listOrganizations();
+  else if (command === 'set-organization') setOrganization(args[0]);
   else if (command === 'draft-week') {
     const dateArg = args.includes('--date') ? args[args.indexOf('--date') + 1] : args.find((arg) => arg.startsWith('--date='))?.slice(7);
     draftWeek(dateArg);

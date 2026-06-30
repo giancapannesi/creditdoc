@@ -32,11 +32,48 @@ Expected keys:
 
 ```bash
 node scripts/creditdoc_linkedin_manager.mjs auth-check
+node scripts/creditdoc_linkedin_manager.mjs auth-url
+node scripts/creditdoc_linkedin_manager.mjs exchange-code '<code-from-callback-url>'
+node scripts/creditdoc_linkedin_manager.mjs list-organizations
+node scripts/creditdoc_linkedin_manager.mjs set-organization 'urn:li:organization:123456'
 node scripts/creditdoc_linkedin_manager.mjs draft-week
 node scripts/creditdoc_linkedin_manager.mjs status
 node scripts/creditdoc_linkedin_manager.mjs approve <draft-id>
 node scripts/creditdoc_linkedin_manager.mjs publish-approved --dry-run
 node scripts/creditdoc_linkedin_manager.mjs publish-approved
+```
+
+## OAuth Setup
+
+The helper uses this redirect URI:
+
+```text
+https://www.creditdoc.co/linkedin-oauth-callback/
+```
+
+Add that exact URI in the LinkedIn Developer app under OAuth redirect URLs.
+Then run:
+
+```bash
+node scripts/creditdoc_linkedin_manager.mjs auth-url
+```
+
+Open the generated URL, approve the scopes, copy the `code` value from the callback page, and exchange it:
+
+```bash
+node scripts/creditdoc_linkedin_manager.mjs exchange-code '<code>'
+```
+
+After the access token is saved, find the company page organization URN:
+
+```bash
+node scripts/creditdoc_linkedin_manager.mjs list-organizations
+```
+
+Then save the correct CreditDoc organization:
+
+```bash
+node scripts/creditdoc_linkedin_manager.mjs set-organization 'urn:li:organization:123456'
 ```
 
 ## Recommended Cron
