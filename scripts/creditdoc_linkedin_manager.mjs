@@ -14,11 +14,12 @@ const DEFAULT_VERSION = '202606';
 const WEEKLY_CAP = 2;
 const DEFAULT_REDIRECT_URI = 'https://www.creditdoc.co/linkedin-oauth-callback/';
 const DEFAULT_SCOPES = ['w_organization_social', 'r_organization_social'];
+const FILE_ENV = loadEnv();
 const CDN_DIR = process.env.CREDITDOC_SOCIAL_CDN_DIR || '/var/www/html/social-media';
 const CDN_BASE = (process.env.CREDITDOC_SOCIAL_CDN_BASE || 'https://cdn.supagum.com').replace(/\/$/, '');
-const BLOTATO_PROXY = (process.env.BLOTATO_PROXY || 'http://localhost:8098').replace(/\/$/, '');
-const BLOTATO_PINTEREST_ACCOUNT_ID = process.env.BLOTATO_PINTEREST_ACCOUNT_ID || '6599';
-const BLOTATO_PINTEREST_BOARD_ID = process.env.BLOTATO_PINTEREST_BOARD_ID || '';
+const BLOTATO_PROXY = (process.env.BLOTATO_PROXY || FILE_ENV.BLOTATO_PROXY || 'http://localhost:8098').replace(/\/$/, '');
+const BLOTATO_PINTEREST_ACCOUNT_ID = process.env.BLOTATO_PINTEREST_ACCOUNT_ID || FILE_ENV.BLOTATO_PINTEREST_ACCOUNT_ID || '6599';
+const BLOTATO_PINTEREST_BOARD_ID = process.env.BLOTATO_PINTEREST_BOARD_ID || FILE_ENV.BLOTATO_PINTEREST_BOARD_ID || '';
 
 const CAMPAIGNS = [
   {
@@ -187,6 +188,72 @@ const CAMPAIGNS = [
     cta: 'Read the answer here:',
     hashtags: ['#MerchantCashAdvance', '#BusinessFunding', '#CashFlow'],
   },
+  {
+    slug: 'business-line-of-credit-guide',
+    kind: 'Wellness guide',
+    url: 'https://www.creditdoc.co/financial-wellness/business-line-of-credit-guide/',
+    title: 'Business line of credit guide',
+    problem: 'A business line of credit can help with working capital, but owners still need to understand draw costs, repayment timing, utilization, and the difference between revolving credit and a term loan.',
+    purpose: 'This CreditDoc financial-wellness guide explains how business lines of credit work, what lenders may review, and how borrowers can compare offers more carefully.',
+    useCases: ['working-capital education', 'business funding research', 'line of credit comparison', 'borrower preparation'],
+    cta: 'Read the guide here:',
+    hashtags: ['#BusinessLineOfCredit', '#FinancialWellness', '#SmallBusinessFinance'],
+  },
+  {
+    slug: 'business-loan-bad-credit',
+    kind: 'Wellness guide',
+    url: 'https://www.creditdoc.co/financial-wellness/business-loan-bad-credit/',
+    title: 'Business loans with bad credit guide',
+    problem: 'Bad credit can change a business loan conversation quickly. It may affect approval odds, rates, collateral, personal guarantees, and whether an alternative lender is worth the cost.',
+    purpose: 'This CreditDoc guide helps business owners understand the tradeoffs before applying for funding with weaker credit.',
+    useCases: ['bad-credit business funding research', 'loan readiness', 'risk review', 'alternative funding comparison'],
+    cta: 'Read the guide here:',
+    hashtags: ['#BusinessLoans', '#BadCredit', '#FinancialWellness'],
+  },
+  {
+    slug: 'cash-advance-alternatives',
+    kind: 'Wellness guide',
+    url: 'https://www.creditdoc.co/financial-wellness/cash-advance-alternatives/',
+    title: 'Cash advance alternatives',
+    problem: 'Cash advances can solve a short-term problem while creating a harder repayment problem. Borrowers need safer options before fees and repeat borrowing become the pattern.',
+    purpose: 'This CreditDoc financial-wellness guide explains alternatives to cash advances and the questions to ask before using fast-cash products.',
+    useCases: ['cash-flow stress', 'emergency borrowing research', 'fee comparison', 'safer borrowing decisions'],
+    cta: 'Read the guide here:',
+    hashtags: ['#FinancialWellness', '#CashAdvance', '#ConsumerFinance'],
+  },
+  {
+    slug: 'credit-score-borrowing-power',
+    kind: 'Wellness guide',
+    url: 'https://www.creditdoc.co/financial-wellness/credit-score-borrowing-power/',
+    title: 'Credit score and borrowing power',
+    problem: 'A credit score does not guarantee approval, but it can influence available products, rate ranges, limits, deposits, and how lenders price risk.',
+    purpose: 'This CreditDoc guide explains how credit scores can affect borrowing power and why borrowers should compare the full terms, not only the approval result.',
+    useCases: ['credit education', 'loan preparation', 'rate comparison', 'borrowing power planning'],
+    cta: 'Read the guide here:',
+    hashtags: ['#CreditScores', '#FinancialWellness', '#Borrowing'],
+  },
+  {
+    slug: 'sba-loan-application-guide',
+    kind: 'Wellness guide',
+    url: 'https://www.creditdoc.co/financial-wellness/sba-loan-application-guide/',
+    title: 'SBA loan application guide',
+    problem: 'SBA loan applications can require more preparation than faster financing products, including financial documents, business history, collateral context, and repayment analysis.',
+    purpose: 'This CreditDoc guide helps business owners understand what to prepare before starting an SBA loan conversation.',
+    useCases: ['SBA loan preparation', 'document planning', 'business funding research', 'lender conversation prep'],
+    cta: 'Read the guide here:',
+    hashtags: ['#SBALoans', '#SmallBusinessFinance', '#FinancialWellness'],
+  },
+  {
+    slug: 'predatory-lending-signs',
+    kind: 'Wellness guide',
+    url: 'https://www.creditdoc.co/financial-wellness/predatory-lending-signs/',
+    title: 'Signs of predatory lending',
+    problem: 'Fast approvals and simple payments can hide expensive terms, repeat borrowing cycles, aggressive collections, or contract details that borrowers did not understand.',
+    purpose: 'This CreditDoc financial-wellness guide explains warning signs to check before accepting a loan or cash advance.',
+    useCases: ['loan offer review', 'consumer protection', 'fee and contract checks', 'safer borrowing decisions'],
+    cta: 'Read the guide here:',
+    hashtags: ['#ConsumerFinance', '#FinancialWellness', '#Borrowing'],
+  },
 ];
 
 function usage() {
@@ -196,6 +263,7 @@ function usage() {
   node scripts/creditdoc_linkedin_manager.mjs exchange-code <code>
   node scripts/creditdoc_linkedin_manager.mjs list-organizations
   node scripts/creditdoc_linkedin_manager.mjs set-organization <urn:li:organization:id>
+  node scripts/creditdoc_linkedin_manager.mjs set-pinterest-board <boardId>
   node scripts/creditdoc_linkedin_manager.mjs draft-week [--date YYYY-MM-DD]
   node scripts/creditdoc_linkedin_manager.mjs run-scheduled-resources [--date YYYY-MM-DD] [--dry-run]
   node scripts/creditdoc_linkedin_manager.mjs run-scheduled-tools [--date YYYY-MM-DD] [--dry-run]
@@ -238,6 +306,9 @@ function saveEnv(updates) {
     'LINKEDIN_ACCESS_TOKEN_SAVED_AT',
     'LINKEDIN_ORGANIZATION_URN',
     'LINKEDIN_VERSION',
+    'BLOTATO_PROXY',
+    'BLOTATO_PINTEREST_ACCOUNT_ID',
+    'BLOTATO_PINTEREST_BOARD_ID',
   ];
   const keys = [...orderedKeys, ...Object.keys(merged).filter((key) => !orderedKeys.includes(key)).sort()];
   const lines = keys
@@ -412,6 +483,43 @@ function existingDraftKeys(queue) {
   return new Set(queue.drafts.map((draft) => `${draft.scheduled_date}:${draft.campaign_slug}`));
 }
 
+function campaignFamily(campaign) {
+  if ((campaign.kind || 'Tool') === 'Course') return 'course';
+  if ((campaign.kind || 'Tool') === 'Answer') return 'answer';
+  if ((campaign.kind || 'Tool').toLowerCase().includes('wellness')) return 'wellness';
+  return 'tool';
+}
+
+function pickCampaignByFamily(family, seed, usedSlugs) {
+  const pool = CAMPAIGNS.filter((campaign) => campaignFamily(campaign) === family);
+  if (pool.length === 0) return null;
+  for (let offset = 0; offset < pool.length; offset += 1) {
+    const campaign = pool[(seed + offset) % pool.length];
+    if (!usedSlugs.has(campaign.slug)) return campaign;
+  }
+  return pool[seed % pool.length];
+}
+
+function pickCampaignsForWeek(base, queue) {
+  const weekSeed = Number(isoWeek(base).split('W')[1]) || 1;
+  const patterns = [
+    ['tool', 'wellness'],
+    ['course', 'answer'],
+    ['tool', 'wellness'],
+    ['answer', 'tool'],
+  ];
+  const pattern = patterns[(weekSeed - 1) % patterns.length];
+  const usedSlugs = new Set(queue.drafts.map((draft) => draft.campaign_slug));
+  const picks = [];
+  for (const family of pattern) {
+    const campaign = pickCampaignByFamily(family, weekSeed + picks.length, usedSlugs);
+    if (!campaign) continue;
+    usedSlugs.add(campaign.slug);
+    picks.push(campaign);
+  }
+  return picks;
+}
+
 function buildDraft(campaign, scheduledDate, slot) {
   const id = `cd-li-${scheduledDate}-${campaign.slug}`;
   return {
@@ -446,12 +554,11 @@ function draftWeek(dateArg) {
   const queue = loadQueue();
   const keys = existingDraftKeys(queue);
 
-  const weekSeed = Number(isoWeek(base).split('W')[1]) || 1;
-  const firstIndex = ((weekSeed - 1) * 2) % CAMPAIGNS.length;
+  const weekCampaigns = pickCampaignsForWeek(base, queue);
   const picks = [
-    { campaign: CAMPAIGNS[firstIndex], date: tuesday, slot: 'resource' },
-    { campaign: CAMPAIGNS[(firstIndex + 1) % CAMPAIGNS.length], date: friday, slot: 'resource' },
-  ];
+    { campaign: weekCampaigns[0], date: tuesday, slot: 'resource' },
+    { campaign: weekCampaigns[1], date: friday, slot: 'resource' },
+  ].filter((pick) => pick.campaign);
 
   const added = [];
   const refreshed = [];
@@ -522,6 +629,12 @@ function status() {
       url: draft.target_url,
     })),
     published_count: state.published.length,
+    pinterest: {
+      proxy: BLOTATO_PROXY,
+      account_id: BLOTATO_PINTEREST_ACCOUNT_ID,
+      has_board_id: Boolean(BLOTATO_PINTEREST_BOARD_ID),
+      board_id: BLOTATO_PINTEREST_BOARD_ID || null,
+    },
   }, null, 2));
 }
 
@@ -703,6 +816,19 @@ function setOrganization(urn) {
   }
   saveEnv({ LINKEDIN_ORGANIZATION_URN: urn });
   console.log(JSON.stringify({ ok: true, saved: 'LINKEDIN_ORGANIZATION_URN' }, null, 2));
+}
+
+function setPinterestBoard(boardId) {
+  if (!boardId) {
+    console.error('Missing Pinterest boardId');
+    process.exit(1);
+  }
+  saveEnv({ BLOTATO_PINTEREST_BOARD_ID: boardId });
+  console.log(JSON.stringify({
+    ok: true,
+    saved: 'BLOTATO_PINTEREST_BOARD_ID',
+    board_id: boardId,
+  }, null, 2));
 }
 
 function postsThisWeek(state, week) {
@@ -959,6 +1085,7 @@ async function main() {
   else if (command === 'exchange-code') await exchangeCode(args[0]);
   else if (command === 'list-organizations') await listOrganizations();
   else if (command === 'set-organization') setOrganization(args[0]);
+  else if (command === 'set-pinterest-board') setPinterestBoard(args[0]);
   else if (command === 'draft-week') {
     const dateArg = args.includes('--date') ? args[args.indexOf('--date') + 1] : args.find((arg) => arg.startsWith('--date='))?.slice(7);
     draftWeek(dateArg);
