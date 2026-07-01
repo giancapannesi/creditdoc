@@ -33,7 +33,10 @@ const toolLinks = [
   { name: 'Loan Denial Checker', href: '/tools/loan-denial-reason-checker/' },
   { name: 'Credit Denial Checklist', href: '/tools/credit-denial-action-checklist/' },
   { name: 'Business Loan Calculator', href: '/tools/business-loan-calculator/' },
+  { name: 'Commercial Loan Calculator', href: '/tools/commercial-loan-calculator/' },
+  { name: 'Business Line of Credit Calculator', href: '/tools/business-line-of-credit-calculator/' },
   { name: 'Business Readiness Quiz', href: '/tools/business-loan-readiness-quiz/' },
+  { name: 'Credit Repair Qualify Quiz', href: '/tools/credit-repair-qualify-quiz/' },
   { name: 'SBA Loan Calculator', href: '/tools/sba-loan-calculator/' },
   { name: 'Cash Flow Calculator', href: '/tools/bank-statement-cash-flow-calculator/' },
   { name: 'MCA Repayment Calculator', href: '/tools/mca-repayment-calculator/' },
@@ -54,6 +57,20 @@ const courseLinks = [
   { name: 'Borrowing Smart', href: '/courses/credit-fundamentals/personal-loans-and-borrowing-smart/' },
   { name: 'Avoid Scams', href: '/courses/credit-fundamentals/avoiding-scams-and-predatory-lending/' },
   { name: 'Know Your Rights', href: '/courses/credit-fundamentals/know-your-rights/' },
+];
+
+const comparisonLinks = [
+  { name: 'Small Business Loan Profiles', href: '/best/best-small-business-loans/' },
+  { name: 'SBA Loan Profiles', href: '/best/best-sba-loans/' },
+  { name: 'Personal Loan Lender Profiles', href: '/best/best-personal-loan-lenders/' },
+  { name: 'Bad Credit Personal Loan Profiles', href: '/best/best-personal-loans-bad-credit/' },
+  { name: 'Debt Consolidation Loan Profiles', href: '/best/best-debt-consolidation-loans/' },
+  { name: 'Debt Relief Company Profiles', href: '/best/best-debt-relief-companies/' },
+  { name: 'Credit Builder Loan Profiles', href: '/best/best-credit-builder-loans/' },
+  { name: 'Secured Credit Card Profiles', href: '/best/best-secured-credit-cards/' },
+  { name: 'Credit Repair Company Profiles', href: '/best/best-credit-repair-companies/' },
+  { name: 'Credit Monitoring Profiles', href: '/best/best-credit-monitoring-services/' },
+  { name: 'Cash Advance App Profiles', href: '/best/best-cash-advance-apps/' },
 ];
 ---
 
@@ -118,7 +135,7 @@ const courseLinks = [
       </div>
     </div>
 
-    <div class="mt-10 grid grid-cols-1 gap-8 border-t border-border pt-8 lg:grid-cols-2">
+    <div class="mt-10 grid grid-cols-1 gap-8 border-t border-border pt-8 lg:grid-cols-3">
       <div>
         <h3 class="text-sm font-semibold text-text uppercase tracking-wider">Calculators and Quizzes</h3>
         <ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -136,6 +153,19 @@ const courseLinks = [
         <h3 class="text-sm font-semibold text-text uppercase tracking-wider">Credit Course Modules</h3>
         <ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
           {courseLinks.map(link => (
+            <li>
+              <a href={link.href} class="text-sm text-muted hover:text-primary transition-colors">
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold text-text uppercase tracking-wider">Comparison Guides</h3>
+        <ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {comparisonLinks.map(link => (
             <li>
               <a href={link.href} class="text-sm text-muted hover:text-primary transition-colors">
                 {link.name}
