@@ -21,7 +21,7 @@ const FILE_ENV = loadEnv();
 const CDN_DIR = process.env.CREDITDOC_SOCIAL_CDN_DIR || '/var/www/html/social-media';
 const CDN_BASE = (process.env.CREDITDOC_SOCIAL_CDN_BASE || 'https://cdn.supagum.com').replace(/\/$/, '');
 const BLOTATO_PROXY = (process.env.BLOTATO_PROXY || FILE_ENV.BLOTATO_PROXY || 'http://localhost:8098').replace(/\/$/, '');
-const BLOTATO_PINTEREST_ACCOUNT_ID = process.env.BLOTATO_PINTEREST_ACCOUNT_ID || FILE_ENV.BLOTATO_PINTEREST_ACCOUNT_ID || '6599';
+const BLOTATO_PINTEREST_ACCOUNT_ID = process.env.BLOTATO_PINTEREST_ACCOUNT_ID || FILE_ENV.BLOTATO_PINTEREST_ACCOUNT_ID || '7943';
 const BLOTATO_PINTEREST_BOARD_ID = process.env.BLOTATO_PINTEREST_BOARD_ID || FILE_ENV.BLOTATO_PINTEREST_BOARD_ID || '';
 
 const CAMPAIGNS = [
@@ -266,6 +266,7 @@ function usage() {
   node scripts/creditdoc_linkedin_manager.mjs exchange-code <code>
   node scripts/creditdoc_linkedin_manager.mjs list-organizations
   node scripts/creditdoc_linkedin_manager.mjs set-organization <urn:li:organization:id>
+  node scripts/creditdoc_linkedin_manager.mjs set-pinterest-account <accountId>
   node scripts/creditdoc_linkedin_manager.mjs set-pinterest-board <boardId>
   node scripts/creditdoc_linkedin_manager.mjs draft-week [--date YYYY-MM-DD]
   node scripts/creditdoc_linkedin_manager.mjs run-scheduled-resources [--date YYYY-MM-DD] [--dry-run]
@@ -416,6 +417,13 @@ function makePinterestDescription(draft) {
     '',
     (campaign.hashtags || []).join(' '),
   ].filter((line) => line !== '').join('\n');
+}
+
+function blotatoPublishSucceeded(responseOk, payload) {
+  if (!responseOk || !payload || typeof payload !== 'object') return false;
+  const raw = typeof payload.raw === 'string' ? payload.raw.toLowerCase() : '';
+  if (raw.includes('error')) return false;
+  return Boolean(payload.postSubmissionId || payload.id || payload.publicUrl || payload.url || payload.status === 'success' || payload.status === 'queued');
 }
 
 function campaignForDraft(draft) {
@@ -918,6 +926,19 @@ function setPinterestBoard(boardId) {
   }, null, 2));
 }
 
+function setPinterestAccount(accountId) {
+  if (!accountId) {
+    console.error('Missing Pinterest accountId');
+    process.exit(1);
+  }
+  saveEnv({ BLOTATO_PINTEREST_ACCOUNT_ID: accountId });
+  console.log(JSON.stringify({
+    ok: true,
+    saved: 'BLOTATO_PINTEREST_ACCOUNT_ID',
+    account_id: accountId,
+  }, null, 2));
+}
+
 function postsThisWeek(state, week) {
   return state.published.filter((post) => post.iso_week === week).length;
 }
@@ -1004,7 +1025,7 @@ async function publishPinterestViaBlotato(draft, imagePath) {
   let payload = null;
   try { payload = JSON.parse(text); } catch { payload = { raw: text }; }
   const result = {
-    ok: response.ok,
+    ok: blotatoPublishSucceeded(response.ok, payload),
     status: `${response.status} ${response.statusText}`,
     account_id: BLOTATO_PINTEREST_ACCOUNT_ID,
     board_id: BLOTATO_PINTEREST_BOARD_ID,
@@ -1255,6 +1276,7 @@ async function main() {
   else if (command === 'exchange-code') await exchangeCode(args[0]);
   else if (command === 'list-organizations') await listOrganizations();
   else if (command === 'set-organization') setOrganization(args[0]);
+  else if (command === 'set-pinterest-account') setPinterestAccount(args[0]);
   else if (command === 'set-pinterest-board') setPinterestBoard(args[0]);
   else if (command === 'draft-week') {
     const dateArg = args.includes('--date') ? args[args.indexOf('--date') + 1] : args.find((arg) => arg.startsWith('--date='))?.slice(7);
