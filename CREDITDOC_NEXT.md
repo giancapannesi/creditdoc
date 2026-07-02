@@ -1,4 +1,28 @@
-# CreditDoc — NEXT ACTIONS (updated 2026-05-16)
+# CreditDoc — NEXT ACTIONS (updated 2026-07-02)
+
+## Active 2026-07-02 — Static SEO Migration
+
+Latest completed:
+
+- Tools, answers/questions, blog detail pages, financial-wellness detail pages, and `/best/` money pages were converted or confirmed as static build output.
+- Build evidence from `npm run build` on 2026-07-02:
+  - `/answers/`: 492 generated `index.html` files including the answer index.
+  - `/tools/`: 19 generated `index.html` files including the tools index.
+  - `/blog/`: 104 generated `index.html` files including the blog index.
+  - `/financial-wellness/`: 140 generated `index.html` files including the wellness index.
+  - `/best/`: 27 generated `index.html` files.
+- No `export const prerender = false` remains in `src/pages/blog`, `src/pages/financial-wellness`, `src/pages/best`, `src/pages/answers`, or `src/pages/tools`.
+- `npm run build` passed with prebuild and postbuild checks, including sitemap/robots, critical URLs, feeds, rendered image alt tags, and image filename checks.
+- Static migration tracker:
+  `/srv/BusinessOps/creditdoc/SEO/STATIC_SEO_PAGE_MIGRATION_PLAN_2026-07-02.md`
+
+Immediate next:
+
+1. Commit the follow-up static editorial/money-page changes after final status review.
+2. After deploy, verify production sitemap includes static URLs for `/tools/`, `/answers/`, `/blog/`, `/financial-wellness/`, and `/best/`.
+3. Continue static work selectively only where evidence supports it: high-impression `/categories/`, `/credit-guide/`, and selected indexed/high-value `/review/` pages.
+4. Do not bulk-staticize every route family blindly; check data freshness, sitemap size, and build-time impact first.
+5. Keep `/search/`, `/api/*`, `/go/[slug]`, `/r/[slug]`, and OAuth/callback utility routes dynamic or non-indexable as appropriate.
 
 ## Active 2026-06-19 — Supabase Size Monitoring
 

@@ -4,6 +4,40 @@
 
 ---
 
+## 2026-07-02 - Static SEO migration: tools, answers, blog, wellness, and money pages
+
+Status: static migration phase completed and build-verified for the ranking page families the user prioritized.
+
+Commits:
+- `7ace40d2d1 Improve SEO tooling and static answers`
+- Follow-up static editorial/money-page commit pending at end of session.
+
+What changed:
+- `/tools/*` kept static and strengthened with related-tool crawl links across the individual calculator/quiz/checklist pages.
+- `/answers/` and `/answers/[slug]/` now build from local answer JSON through `getStaticPaths()` instead of runtime Supabase queries.
+- `/blog/[slug]/` now builds statically from local blog data.
+- `/financial-wellness/[slug]/` now builds statically from local wellness data.
+- `/best/[slug]/` money pages now build statically from local listicle/lender JSON.
+- Sitemap manual SSR injection was reduced so pages that Astro can discover statically are not duplicated through custom SSR sitemap SQL.
+- Crawl-noise cleanup was applied: noindex pages now use `noindex, follow`, unreliable external favicon image fallbacks were removed, and internal sponsored CTAs no longer carry internal `nofollow`.
+
+Build evidence:
+- `npm run build` passed on 2026-07-02.
+- Prebuild checks passed, including content text integrity, robots contract, and SSR sitemap parity.
+- Postbuild checks passed: sitemap/robots conflicts, critical sitemap URLs, feed contract, rendered image alt contract, and image filename contract.
+- Generated static HTML counts:
+  - `/answers/`: 492 `index.html` files including the answer index.
+  - `/tools/`: 19 `index.html` files including the tools index.
+  - `/blog/`: 104 `index.html` files including the blog index.
+  - `/financial-wellness/`: 140 `index.html` files including the wellness index.
+  - `/best/`: 27 `index.html` files.
+- No `export const prerender = false` remains in `src/pages/blog`, `src/pages/financial-wellness`, `src/pages/best`, `src/pages/answers`, or `src/pages/tools`.
+
+Next:
+- Do not re-argue whether these pages are static; they are now emitted as physical HTML during build.
+- Next static work should be selective only: high-impression `/categories/`, `/credit-guide/`, and selected `/review/` pages after checking data freshness, sitemap size, and build-time impact.
+- Keep `/search/`, `/api/*`, `/go/[slug]`, `/r/[slug]`, and OAuth/callback utility routes dynamic or non-indexable as appropriate.
+
 ## 2026-06-20 - Comparison guarded batch 004 deployed and live-verified
 
 Status: fourth guarded comparison batch completed. The 20-candidate scan produced blockers on two pages, so only those two pages were edited, reviewed, committed, pushed, deployed, live-verified, and campaign-gated.

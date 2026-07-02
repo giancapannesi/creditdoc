@@ -1,30 +1,29 @@
 ---
-export const prerender = false;
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import AffiliateSidebar from '../../components/AffiliateSidebar.astro';
 import AffiliateInline from '../../components/AffiliateInline.astro';
 import AffiliateGeoFilter from '../../components/AffiliateGeoFilter.astro';
 import {
-  getBlogPostBySlugRuntimeFromDb,
-  getBlogPostsByCategoryRuntimeFromDb,
-  getCategoriesRuntimeFromDb,
-  getWellnessGuideBySlugRuntimeFromDb,
-  getGlossaryTermsForContextRuntimeFromDb,
-} from '../../utils/data-runtime';
-import { getListiclesByCategoriesRuntime } from '../../lib/db';
+  getBlogPosts,
+  getBlogPostsByCategory,
+  getCategories,
+  getClusterAnswers,
+  getGlossaryTermsForContext,
+  getListicles,
+  getWellnessGuideBySlug,
+} from '../../utils/data-build';
 import { createLinker } from '../../utils/inline-linker';
 import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 
-const env = (Astro.locals as any).runtime?.env;
-const { slug } = Astro.params;
-
-const post = await getBlogPostBySlugRuntimeFromDb(slug!, env);
-if (!post) {
-  return new Response('Not found', { status: 404 });
+export function getStaticPaths() {
+  return getBlogPosts().map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
 }
 
+const { post } = Astro.props;
 const postCategory = (post.category ?? '') as string;
 const postTags = Array.isArray(post.tags) ? (post.tags as string[]) : [];
 const postRelatedGuides = Array.isArray(post.related_guides) ? (post.related_guides as string[]) : [];
@@ -33,27 +32,22 @@ const postSections = Array.isArray(post.sections) ? (post.sections as Array<{ he
 const postFaq = Array.isArray(post.faq) ? (post.faq as Array<{ question: string; answer: string }>) : [];
 const postKeyTakeaways = Array.isArray(post.key_takeaways) ? (post.key_takeaways as string[]) : [];
 
-// Run sidebar fetches in parallel
-const [relatedPostsRaw, categories, relatedGuidesRaw, glossaryTerms, relatedListiclesRaw] = await Promise.all([
-  postCategory
-    ? getBlogPostsByCategoryRuntimeFromDb(postCategory, env, 6)
-    : Promise.resolve([] as Awaited<ReturnType<typeof getBlogPostsByCategoryRuntimeFromDb>>),
-  getCategoriesRuntimeFromDb(env),
-  Promise.all(postRelatedGuides.map((s) => getWellnessGuideBySlugRuntimeFromDb(s, env))),
-  getGlossaryTermsForContextRuntimeFromDb(postTags.map((t) => `blog-${t}`), env),
-  (() => {
-    const blogCategoryToListicleCategory: Record<string, string[]> = {
-      'personal-loans': ['personal-loans'],
-      'credit-repair': ['credit-repair'],
-      'debt-relief': ['debt-relief'],
-      'build-credit': ['build-credit'],
-      'credit-monitoring': ['credit-monitoring'],
-      'emergency-cash': ['payday-alternatives', 'emergency-cash'],
-    };
-    const cats = blogCategoryToListicleCategory[postCategory] || [];
-    return cats.length ? getListiclesByCategoriesRuntime(cats, env, 3) : Promise.resolve([]);
-  })(),
-]);
+const relatedPostsRaw = postCategory ? getBlogPostsByCategory(postCategory).slice(0, 6) : [];
+const categories = getCategories();
+const relatedGuidesRaw = postRelatedGuides.map((s) => getWellnessGuideBySlug(s));
+const glossaryTerms = getGlossaryTermsForContext(postTags.map((t) => `blog-${t}`));
+const blogCategoryToListicleCategory: Record<string, string[]> = {
+  'personal-loans': ['personal-loans'],
+  'credit-repair': ['credit-repair'],
+  'debt-relief': ['debt-relief'],
+  'build-credit': ['build-credit'],
+  'credit-monitoring': ['credit-monitoring'],
+  'emergency-cash': ['payday-alternatives', 'emergency-cash'],
+};
+const relatedListicleCategories = blogCategoryToListicleCategory[postCategory] || [];
+const relatedListiclesRaw = relatedListicleCategories.length
+  ? getListicles().filter((listicle) => relatedListicleCategories.includes(listicle.category)).slice(0, 3)
+  : [];
 
 const relatedPosts = relatedPostsRaw
   .filter((p) => p.slug !== post.slug)
@@ -65,14 +59,11 @@ const relatedCategories = postRelatedCategories
   .map((s) => categories.find((c) => c.slug === s))
   .filter((c): c is NonNullable<typeof c> => c !== undefined);
 
-const relatedListicles = (relatedListiclesRaw ?? []).slice(0, 3).map((row) => {
-  const body = (row.body_inline ?? {}) as Record<string, unknown>;
-  return {
-    slug: row.slug,
-    title: softenEducationalTeaserCopy(row.title || (body.title as string) || row.slug),
-    category: row.category,
-  };
-});
+const relatedListicles = (relatedListiclesRaw ?? []).slice(0, 3).map((row) => ({
+  slug: row.slug,
+  title: softenEducationalTeaserCopy(row.title || row.slug),
+  category: row.category,
+}));
 
 const displayTitle = softenEducationalTeaserCopy((post.title as string) || '');
 const seoTitle = softenEducationalTeaserCopy((post.seo_title as string) || post.title);
@@ -109,20 +100,12 @@ const linkedSections = postSections.map(section => ({
   content: linker(section.content).join('\n\n'),
 }));
 
-// Fetch related answers for interconnecting block
-let relatedAnswers: { slug: string; title: string }[] = [];
-if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
-  const pillar = postCategory || '';
-  if (pillar) {
-    const headers = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
-    const aRes = await fetch(`${env.SUPABASE_URL}/rest/v1/answers?cluster_pillar=eq.${encodeURIComponent(pillar)}&select=slug,title&limit=6`, { headers, signal: AbortSignal.timeout(3000) }).catch(() => null);
-    if (aRes?.ok) relatedAnswers = await aRes.json();
-  }
-}
-
-// Cache headers — DB row update bumps updated_at, but we still want CDN cache.
-Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
-Astro.response.headers.set('x-cdm-rev-source', 'ssr-blog');
+const relatedAnswers = postCategory
+  ? getClusterAnswers()
+      .filter((answer) => answer.cluster_pillar === postCategory && (answer.status || 'published') === 'published')
+      .slice(0, 6)
+      .map((answer) => ({ slug: answer.slug, title: answer.title || answer.h1 }))
+  : [];
 
 // JSON-LD: Article + FAQPage + BreadcrumbList
 const jsonLd = [

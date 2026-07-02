@@ -7,8 +7,8 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
 
-// CDM-REV iter 36 (Task #41): SSR routes (/blog/<slug>, /financial-wellness/<slug>,
-// /brand/<slug>) have no getStaticPaths, so @astrojs/sitemap can't discover them.
+// CDM-REV iter 36 (Task #41): SSR routes without getStaticPaths cannot be
+// discovered by @astrojs/sitemap.
 // Pull per-slug URLs from the local SQLite source-of-truth at build time and
 // inject via customPages. Sync execSync is fine — runs once at build, ~50ms.
 const SITE = 'https://www.creditdoc.co';
@@ -25,10 +25,7 @@ function ssrSitemapPages() {
     const stateData = JSON.parse(readFileSync(join(process.cwd(), 'src/content/states.json'), 'utf8'));
     const stateRows = Object.values(stateData);
     const sql = `
-      SELECT 'blog/' || slug FROM blog_posts WHERE status='published';
-      SELECT 'financial-wellness/' || slug FROM wellness_guides;
       SELECT 'categories/' || slug FROM categories;
-      SELECT 'best/' || slug FROM listicles;
       SELECT 'review/' || slug FROM lenders WHERE processing_status='ready_for_index';
       SELECT DISTINCT brand_slug FROM lenders
         WHERE brand_slug IS NOT NULL AND brand_slug <> ''

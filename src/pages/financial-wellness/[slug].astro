@@ -1,38 +1,33 @@
 ---
-export const prerender = false;
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import AffiliateInline from '../../components/AffiliateInline.astro';
 import {
-  getWellnessGuideBySlugRuntimeFromDb,
-  getCategoriesRuntimeFromDb,
-  getGlossaryTermsForContextRuntimeFromDb,
-} from '../../utils/data-runtime';
+  getCategories,
+  getGlossaryTermsForContext,
+  getWellnessGuideBySlug,
+  getWellnessGuides,
+} from '../../utils/data-build';
 import { createLinker } from '../../utils/inline-linker';
 import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 import type { WellnessGuide } from '../../utils/data';
 
-const env = (Astro.locals as any).runtime?.env;
-const { slug } = Astro.params;
-
-const guide = await getWellnessGuideBySlugRuntimeFromDb(slug!, env);
-if (!guide) {
-  return new Response('Not found', { status: 404 });
+export function getStaticPaths() {
+  return getWellnessGuides().map((guide) => ({
+    params: { slug: guide.slug },
+    props: { guide },
+  }));
 }
 
+const { guide } = Astro.props;
 const displayTitle = softenEducationalTeaserCopy(guide.title);
 const guideSeoTitle = softenEducationalTeaserCopy(((guide as any).seo_title as string) || guide.title);
 const guideSeoDescription = softenEducationalTeaserCopy(((guide as any).seo_description as string) || '');
 const guideReadTime = ((guide as any).read_time as string) || '';
 const guideDescription = softenEducationalTeaserCopy(((guide as any).description as string) || '');
 
-const [relatedGuidesRaw, categories] = await Promise.all([
-  Promise.all(
-    (guide.related_guides ?? []).map((s) => getWellnessGuideBySlugRuntimeFromDb(s, env))
-  ),
-  getCategoriesRuntimeFromDb(env),
-]);
+const relatedGuidesRaw = (guide.related_guides ?? []).map((s) => getWellnessGuideBySlug(s));
+const categories = getCategories();
 
 const relatedGuides = relatedGuidesRaw.filter((g): g is WellnessGuide => g != null);
 
@@ -63,7 +58,7 @@ const wellnessGlossaryMap: Record<string, string[]> = {
   'credit-repair': ['wellness-credit-repair'],
 };
 const glossaryContexts = wellnessGlossaryMap[guide.category] || [];
-const glossaryTerms = await getGlossaryTermsForContextRuntimeFromDb(glossaryContexts, env);
+const glossaryTerms = getGlossaryTermsForContext(glossaryContexts);
 
 // Per-page linker: auto-links money keywords → /best/ listicles + glossary terms
 const linker = createLinker(glossaryTerms, { moneyBudget: 8, glossaryBudget: 8 });
@@ -111,9 +106,6 @@ const primaryRelatedCategory = relatedCategories[0];
 const primaryCategoryLink = primaryRelatedCategory
   ? { label: `${primaryRelatedCategory.name} providers`, href: `/categories/${primaryRelatedCategory.slug}/` }
   : { label: 'Local provider directory', href: '/city/' };
-
-Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
-Astro.response.headers.set('x-cdm-rev-source', 'ssr-wellness');
 
 // JSON-LD: Article + FAQPage + BreadcrumbList + WebPage with significantLink
 const _wellnessFaqs = (guide.faq || []).filter((f: { question?: string; answer?: string }) => f.question?.trim() && f.answer?.trim());
