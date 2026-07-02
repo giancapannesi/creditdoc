@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 import { getAllLenders } from '../../utils/data-build';
 
 function isSafeBusinessLoanProfile(l) {
@@ -73,7 +74,7 @@ const businessLoanProfiles = getAllLenders()
   }));
 
 const title = 'Business Loan Readiness Quiz | CreditDoc';
-const description = 'Answer simple business funding questions to map your readiness path across SBA loans, alternative business loans, startup funding, MCA caution, or document review.';
+const description = 'Answer business funding questions to map readiness across SBA loans, startup funding, MCA caution, documents, and lender-fit review.';
 const canonical = 'https://www.creditdoc.co/tools/business-loan-readiness-quiz/';
 
 const jsonLd = {
@@ -730,4 +731,5 @@ const breadcrumbJsonLd = {
       transform: translateY(-1px);
     }
   </style>
+  <ToolRelatedLinks />
 </BaseLayout>

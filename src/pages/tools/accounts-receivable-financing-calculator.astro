@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 
 const title = 'Accounts Receivable Financing Calculator | CreditDoc';
 const description = 'Estimate AR financing advance amount, fees, net funds, and receivables cost before comparing invoice factoring or receivables financing.';
@@ -30,4 +31,5 @@ const breadcrumbJsonLd = { '@context': 'https://schema.org', '@type': 'Breadcrum
     function calc(){ const inv=v('invoices'), adv=inv*v('advance')/100, reserve=Math.max(inv-adv,0), fees=inv*v('fee')/100+v('extra'), net=Math.max(adv-fees,0), share=inv?fees/inv*100:0; document.getElementById('advance-out').textContent=money.format(adv); document.getElementById('reserve').textContent=money.format(reserve); document.getElementById('fees').textContent=money.format(fees); document.getElementById('net').textContent=money.format(net); document.getElementById('share').textContent=`${share.toFixed(1)}%`; document.getElementById('copy').textContent = v('days') > 60 ? 'Longer collection periods can raise total financing cost. Confirm how fees accrue if customers pay late.' : 'Compare this cost with waiting for payment, a line of credit, or a working capital loan.'; }
     ids.forEach(id=>f[id]?.addEventListener('input',calc)); calc();
   </script>
+  <ToolRelatedLinks />
 </BaseLayout>

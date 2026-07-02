@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 
 const title = 'Commercial Loan Calculator | CreditDoc';
 const description = 'Estimate commercial loan or commercial mortgage payments, total interest, balloon balance, and closing-cost impact. Free educational calculator.';
@@ -165,4 +166,5 @@ const breadcrumbJsonLd = {
     ids.forEach((id) => fields[id]?.addEventListener('input', calculate));
     calculate();
   </script>
+  <ToolRelatedLinks />
 </BaseLayout>

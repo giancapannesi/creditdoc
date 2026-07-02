@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 
-const title = "Credit Score Simulator — See How Actions Affect Your Score | CreditDoc";
+const title = "Credit Score Simulator | CreditDoc";
 const description = "Simulate how paying off debt, opening new accounts, or missing payments could affect your credit score. Free educational estimate for credit research.";
 
 const jsonLd = {
@@ -514,4 +515,5 @@ const breadcrumbJsonLd = {
     }
     input[type="number"] { -moz-appearance: textfield; }
   </style>
+  <ToolRelatedLinks />
 </BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 
 const title = 'Equipment Financing Calculator | CreditDoc';
 const description = 'Estimate equipment financing payments, down-payment impact, total interest, and cash-flow pressure before comparing equipment lenders.';
@@ -69,4 +70,5 @@ const breadcrumbJsonLd = { '@context': 'https://schema.org', '@type': 'Breadcrum
     function calc(){ const cost=value('cost'), down=value('down'), trade=value('trade'), fees=value('fees'); const financed=Math.max(cost-down-trade+fees,0); const months=Math.max(value('term'),1)*12; const monthly=pmt(financed,value('rate'),months); const interest=Math.max(monthly*months-financed,0); const downShare=cost ? (down/cost)*100 : 0; document.getElementById('financed').textContent=money.format(financed); document.getElementById('payment').textContent=money.format(monthly); document.getElementById('interest').textContent=money.format(interest); document.getElementById('total').textContent=money.format(monthly*months); document.getElementById('down-share').textContent=`${downShare.toFixed(1)}%`; }
     ids.forEach((id)=>fields[id]?.addEventListener('input',calc)); calc();
   </script>
+  <ToolRelatedLinks />
 </BaseLayout>

@@ -1,0 +1,122 @@
+---
+const currentPath = Astro.url.pathname.replace(/\/+$/, '/');
+
+const businessTools = [
+  {
+    href: '/tools/sba-loan-calculator/',
+    label: 'SBA loan calculator',
+    body: 'Estimate SBA payment, interest, guarantee-fee impact, and repayment pressure.',
+  },
+  {
+    href: '/tools/commercial-loan-calculator/',
+    label: 'Commercial loan calculator',
+    body: 'Model commercial loan payments, balloon balance, and closing-cost impact.',
+  },
+  {
+    href: '/tools/business-line-of-credit-calculator/',
+    label: 'Business line of credit calculator',
+    body: 'Estimate draw cost, monthly payment pressure, and line utilization.',
+  },
+  {
+    href: '/tools/business-loan-calculator/',
+    label: 'Business loan calculator',
+    body: 'Compare payment, total repayment, interest, and origination-fee impact.',
+  },
+  {
+    href: '/tools/working-capital-calculator/',
+    label: 'Working capital calculator',
+    body: 'Estimate funding gaps, payment pressure, and cash runway.',
+  },
+  {
+    href: '/tools/equipment-financing-calculator/',
+    label: 'Equipment financing calculator',
+    body: 'Estimate equipment payment, down-payment impact, and cash-flow pressure.',
+  },
+  {
+    href: '/tools/accounts-receivable-financing-calculator/',
+    label: 'AR financing calculator',
+    body: 'Estimate advance amount, fees, reserve, and net receivables funding.',
+  },
+  {
+    href: '/tools/bank-statement-cash-flow-calculator/',
+    label: 'Cash-flow calculator',
+    body: 'Review deposits, ending balances, negative days, and existing debt payments.',
+  },
+  {
+    href: '/tools/mca-repayment-calculator/',
+    label: 'MCA repayment calculator',
+    body: 'Estimate factor-rate repayment, holdback pressure, and total cost.',
+  },
+  {
+    href: '/tools/business-loan-readiness-quiz/',
+    label: 'Business loan readiness quiz',
+    body: 'Map revenue, business age, documents, and funding-route readiness.',
+  },
+];
+
+const creditTools = [
+  {
+    href: '/tools/credit-score-simulator/',
+    label: 'Credit score simulator',
+    body: 'Model common payment, utilization, inquiry, and account-age scenarios.',
+  },
+  {
+    href: '/tools/debt-payoff-calculator/',
+    label: 'Debt payoff calculator',
+    body: 'Compare snowball and avalanche payoff order, interest, and timing.',
+  },
+  {
+    href: '/tools/credit-repair-qualify-quiz/',
+    label: 'Credit repair qualify quiz',
+    body: 'Check whether DIY dispute steps, credit repair research, or credit building may fit.',
+  },
+  {
+    href: '/tools/loan-denial-reason-checker/',
+    label: 'Loan denial reason checker',
+    body: 'Map denial reasons to credit, income, DTI, documents, collateral, and lender fit.',
+  },
+  {
+    href: '/tools/credit-denial-action-checklist/',
+    label: 'Credit denial action checklist',
+    body: 'Organize adverse action notices, credit reports, documents, and next steps.',
+  },
+  {
+    href: '/tools/borrowing-power-quiz/',
+    label: 'Borrowing power quiz',
+    body: 'Estimate broad borrowing capacity before comparing loan options.',
+  },
+  {
+    href: '/tools/state-consumer-credit-regulator-directory/',
+    label: 'State regulator directory',
+    body: 'Find state lending-law pages and official complaint resources.',
+  },
+];
+
+const isBusinessTool = businessTools.some((tool) => tool.href === currentPath);
+const sourceTools = isBusinessTool ? businessTools : creditTools;
+const secondaryTools = isBusinessTool ? creditTools : businessTools;
+const primaryLinks = sourceTools.filter((tool) => tool.href !== currentPath).slice(0, 6);
+const secondaryLinks = secondaryTools.slice(0, 3);
+---
+
+<section class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8" aria-labelledby="related-tools-heading">
+  <div class="rounded-xl border border-border bg-white p-5 sm:p-6">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h2 id="related-tools-heading" class="text-xl font-bold text-text">Related CreditDoc Tools</h2>
+        <p class="mt-1 text-sm leading-relaxed text-muted">
+          Use these calculators, quizzes, and checklists together before comparing lenders, credit services, or next steps.
+        </p>
+      </div>
+      <a href="/tools/" class="text-sm font-semibold text-primary hover:underline">View all tools</a>
+    </div>
+    <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {[...primaryLinks, ...secondaryLinks].map((tool) => (
+        <a href={tool.href} class="rounded-lg border border-border bg-bg-alt p-4 transition-colors hover:border-primary">
+          <span class="block text-sm font-semibold text-primary">{tool.label}</span>
+          <span class="mt-1 block text-xs leading-relaxed text-muted">{tool.body}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

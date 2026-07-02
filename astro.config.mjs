@@ -29,7 +29,6 @@ function ssrSitemapPages() {
       SELECT 'financial-wellness/' || slug FROM wellness_guides;
       SELECT 'categories/' || slug FROM categories;
       SELECT 'best/' || slug FROM listicles;
-      SELECT 'answers/' || slug FROM cluster_answers WHERE status='published';
       SELECT 'review/' || slug FROM lenders WHERE processing_status='ready_for_index';
       SELECT DISTINCT brand_slug FROM lenders
         WHERE brand_slug IS NOT NULL AND brand_slug <> ''

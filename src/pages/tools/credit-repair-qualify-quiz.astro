@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 import { getAllLenders } from '../../utils/data-build';
 
 function isSafeCreditRepairProfile(l) {
@@ -623,4 +624,5 @@ const breadcrumbJsonLd = {
       transform: translateY(-1px);
     }
   </style>
+  <ToolRelatedLinks />
 </BaseLayout>

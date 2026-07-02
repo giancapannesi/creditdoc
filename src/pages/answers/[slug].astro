@@ -5,98 +5,45 @@ import AffiliateSidebar from '../../components/AffiliateSidebar.astro';
 import { createLinker } from '../../utils/inline-linker';
 import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 import {
-  getAnswerBySlugRuntime,
-  getSiblingAnswersByPillarRuntime,
-  getGlossaryTermsForContextsRuntime,
-  type RuntimeAnswer,
-} from '../../lib/db';
+  getClusterAnswers,
+  getGlossaryTermsForContext,
+  getSiblingClusterAnswers,
+} from '../../utils/data-build';
 
-// CDM-REV Phase 5.1 [OBJ-1] — SSR (no rebuild).
-// DB row update at T+0 → URL serves new HTML at T+≤cache TTL.
-// Cache layer: Cache-Control headers below; per-version Cache-API wrap is the
-// next-loop polish (see middleware TODO in src/lib/cache.ts header).
-export const prerender = false;
-
-const { slug } = Astro.params;
-const env = (Astro.locals as any)?.runtime?.env as
-  | { SUPABASE_URL?: string; SUPABASE_ANON_KEY?: string }
-  | undefined;
-
-const row = slug ? await getAnswerBySlugRuntime(slug, env) : null;
-if (!row) {
-  return new Response('Answer not found', {
-    status: 404,
-    headers: { 'content-type': 'text/plain; charset=utf-8' },
-  });
+export function getStaticPaths() {
+  return getClusterAnswers()
+    .filter((answer) => (answer.status || 'published') === 'published')
+    .map((answer) => ({
+      params: { slug: answer.slug },
+      props: { answer },
+    }));
 }
 
-// Hydrate the legacy ClusterAnswer shape from top-level columns + body_inline.
-// All fields the existing template references must be present on `answer`.
-const b = (row.body_inline ?? {}) as Record<string, any>;
-const answer = {
-  slug: row.slug,
-  title: row.title || b.title,
-  h1: b.h1 || row.title,
-  meta_description: b.meta_description as string,
-  cluster_id: row.cluster_id || b.cluster_id,
-  cluster_pillar: (row.cluster_pillar || b.cluster_pillar) as string,
-  banner_category: row.banner_category || b.banner_category,
-  target_money_page: row.target_money_page || b.target_money_page,
-  sections: (b.sections ?? []) as Array<{ heading: string; content: string }>,
-  faq_schema: (b.faq_schema ?? []) as Array<{ question: string; answer: string }>,
-  primary_sources: (b.primary_sources ?? []) as Array<{ name: string; url: string }>,
-  last_updated: (b.last_updated as string) || row.updated_at,
-  published_at: b.published_at as string | undefined,
-};
+const { answer } = Astro.props;
 
-const siblingsRaw = await getSiblingAnswersByPillarRuntime(
-  answer.cluster_pillar,
-  answer.slug,
-  env,
-  4,
-);
-const siblings = siblingsRaw.map((s: RuntimeAnswer) => {
-  const sb = (s.body_inline ?? {}) as Record<string, any>;
-  return {
-    slug: s.slug,
-    h1: (sb.h1 as string) || s.title,
-    cluster_pillar: (s.cluster_pillar || sb.cluster_pillar) as string,
-  };
-});
+const siblings = getSiblingClusterAnswers(answer.slug, 4).map((s) => ({
+  slug: s.slug,
+  h1: s.h1 || s.title,
+  cluster_pillar: s.cluster_pillar,
+}));
 
-// Glossary context feeds the inline linker. Pull rows + map to linker shape.
-const glossaryRows = await getGlossaryTermsForContextsRuntime(
-  [
-    `cluster-${answer.cluster_pillar}`,
-    `answer-${answer.cluster_id}`,
-    'blog-credit-score',
-    'blog-credit-repair',
-    'blog-personal-loans',
-  ],
-  env,
-);
-const glossaryTerms = glossaryRows.map((g) => {
-  const gb = (g.body_inline ?? {}) as Record<string, any>;
-  return {
-    term: g.term,
-    slug: g.slug,
-    plain_definition: (gb.plain_definition as string) ?? '',
-  };
-});
-
-// Edge cache headers — keep response cacheable until /api/revalidate purges
-// or until version-keyed Cache-API wrap lands. 24h max-age matches /r/[slug].
-const verSec = Math.floor(Date.parse(row.updated_at) / 1000);
-Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
-Astro.response.headers.set('x-cdm-route', '/answers/[slug]');
-Astro.response.headers.set('x-cdm-slug', answer.slug);
-Astro.response.headers.set('x-cdm-version', String(verSec));
+const glossaryTerms = getGlossaryTermsForContext([
+  `cluster-${answer.cluster_pillar}`,
+  `answer-${answer.cluster_id}`,
+  'blog-credit-score',
+  'blog-credit-repair',
+  'blog-personal-loans',
+]);
 
 // Per-page linker: 8 money + 8 glossary caps persist across all sections.
 const linker = createLinker(glossaryTerms, { moneyBudget: 8, glossaryBudget: 8 });
-const linkedSections = answer.sections.map(section => ({
-  heading: softenEducationalTeaserCopy(section.heading),
-  content: softenEducationalTeaserCopy(linker(section.content).join('\n\n')),
+const sections = (answer.sections || []).filter((section) => section?.heading && section?.content);
+const faqs = (answer.faq_schema || []).filter((f) => f?.question && f?.answer);
+const primarySources = (answer.primary_sources || []).filter((src) => src?.name && src?.url);
+
+const linkedSections = sections.map(section => ({
+  heading: softenEducationalTeaserCopy(section.heading || ''),
+  content: softenEducationalTeaserCopy(linker(section.content || '').join('\n\n')),
 }));
 
 // Derive key takeaways from the first sentence of the first 4 sections (used in TL;DR card).
@@ -105,7 +52,7 @@ function firstSentence(md: string): string {
   const m = plain.match(/^(.*?[.!?])(\s|$)/);
   return (m ? m[1] : plain.slice(0, 160)).trim();
 }
-const keyTakeaways = answer.sections.slice(0, 4).map(s => softenEducationalTeaserCopy(firstSentence(s.content))).filter(Boolean);
+const keyTakeaways = sections.slice(0, 4).map(s => softenEducationalTeaserCopy(firstSentence(s.content || ''))).filter(Boolean);
 const displayTitle = softenEducationalTeaserCopy(answer.title || answer.h1 || '');
 const displayH1 = softenEducationalTeaserCopy(answer.h1 || answer.title || '');
 const displayDescription = softenEducationalTeaserCopy(answer.meta_description || '');
@@ -240,7 +187,7 @@ const articleSchema = {
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
 };
 
-const _faqItems = (answer.faq_schema || []).filter((f: { question?: string; answer?: string }) => f.question?.trim() && f.answer?.trim());
+const _faqItems = faqs.filter((f: { question?: string; answer?: string }) => f.question?.trim() && f.answer?.trim());
 const faqSchema = _faqItems.length > 0 ? {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -368,7 +315,7 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
           <h2 class="text-xl font-bold text-text mb-2">Ready to take action?</h2>
           <p class="text-muted mb-4">Compare profile options for this topic and review the context that fits your situation.</p>
           <a
-            href={answer.target_money_page}
+            href={answer.target_money_page || '/best/'}
             class="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary-hover transition-colors"
           >
             See the full comparison
@@ -379,19 +326,19 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
         </div>
 
         {/* FAQ */}
-        {answer.faq_schema && answer.faq_schema.length > 0 && (
+        {faqs.length > 0 && (
           <section id="faq">
             <h2 class="text-2xl font-bold text-text mb-4">Frequently Asked Questions</h2>
             <div class="space-y-4">
-              {answer.faq_schema.map(f => (
+              {faqs.map(f => (
                 <details class="glass-card p-5 group" open>
                   <summary class="flex items-center justify-between cursor-pointer list-none">
-                    <h3 class="text-base font-semibold text-text pr-4">{softenEducationalTeaserCopy(f.question)}</h3>
+                    <h3 class="text-base font-semibold text-text pr-4">{softenEducationalTeaserCopy(f.question || '')}</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-muted shrink-0 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/>
                     </svg>
                   </summary>
-                  <p class="mt-3 text-sm text-muted leading-relaxed">{softenEducationalTeaserCopy(f.answer)}</p>
+                  <p class="mt-3 text-sm text-muted leading-relaxed">{softenEducationalTeaserCopy(f.answer || '')}</p>
                 </details>
               ))}
             </div>
@@ -405,8 +352,8 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {siblings.map(s => (
                 <a href={`/answers/${s.slug}/`} class="glass-card p-4 block hover:border-primary transition-colors">
-                  <div class="text-xs text-primary font-semibold uppercase tracking-wide mb-1">{s.cluster_pillar.replace('-', ' ')}</div>
-                  <div class="text-text font-semibold leading-snug">{softenEducationalTeaserCopy(s.h1)}</div>
+                  <div class="text-xs text-primary font-semibold uppercase tracking-wide mb-1">{(s.cluster_pillar || '').replace('-', ' ')}</div>
+                  <div class="text-text font-semibold leading-snug">{softenEducationalTeaserCopy(s.h1 || '')}</div>
                 </a>
               ))}
             </div>
@@ -414,11 +361,11 @@ const jsonLd = [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
         )}
 
         {/* Sources */}
-        {answer.primary_sources && answer.primary_sources.length > 0 && (
+        {primarySources.length > 0 && (
           <section class="rounded-lg border border-border bg-bg-alt p-5">
             <h2 class="text-base font-semibold text-text mb-3">Sources</h2>
             <ul class="list-disc pl-6 space-y-1.5 text-sm text-muted">
-              {answer.primary_sources.map(src => (
+              {primarySources.map(src => (
                 <li><a href={src.url} rel="nofollow noopener" class="hover:text-primary underline">{src.name}</a></li>
               ))}
             </ul>

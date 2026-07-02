@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 
 const title = 'SBA Guarantee Fee Calculator | CreditDoc';
 const description = 'Estimate the guaranteed portion of an SBA loan and model an upfront SBA guarantee-fee assumption before comparing lender disclosures.';
@@ -30,4 +31,5 @@ const breadcrumbJsonLd = { '@context': 'https://schema.org', '@type': 'Breadcrum
     function calc(){ const amount=v('amount'), guaranteed=amount*v('guarantee')/100, fee=guaranteed*v('fee')/100, total=fee+v('other'); document.getElementById('guaranteed').textContent=money.format(guaranteed); document.getElementById('guarantee-fee').textContent=money.format(fee); document.getElementById('total').textContent=money.format(total); document.getElementById('share').textContent=amount?`${(total/amount*100).toFixed(1)}%`:'0.0%'; }
     ids.forEach(id=>f[id]?.addEventListener('input',calc)); calc();
   </script>
+  <ToolRelatedLinks />
 </BaseLayout>

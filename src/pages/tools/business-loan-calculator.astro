@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 
 const title = 'Business Loan Calculator | CreditDoc';
 const description = 'Estimate business loan monthly payments, total repayment, interest cost, origination-fee impact, and payment pressure. Free educational calculator.';
@@ -157,4 +158,5 @@ const breadcrumbJsonLd = {
     ids.forEach((id) => fields[id]?.addEventListener('input', calculate));
     calculate();
   </script>
+  <ToolRelatedLinks />
 </BaseLayout>

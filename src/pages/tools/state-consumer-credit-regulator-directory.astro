@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 import { getAllStatesInfo } from '../../utils/data-build';
 
 const states = getAllStatesInfo().sort((a, b) => a.name.localeCompare(b.name));
@@ -159,4 +160,5 @@ const breadcrumbJsonLd = {
       </div>
     </section>
   </div>
+  <ToolRelatedLinks />
 </BaseLayout>

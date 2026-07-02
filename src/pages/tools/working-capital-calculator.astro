@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 
 const title = 'Working Capital Calculator | CreditDoc';
 const description = 'Estimate working capital gap, loan payment pressure, and runway impact before comparing short-term business funding options.';
@@ -31,4 +32,5 @@ const breadcrumbJsonLd = { '@context': 'https://schema.org', '@type': 'Breadcrum
     function calc(){ const capital=v('assets')-v('liabilities'), runway=v('expenses')?capital/v('expenses'):0, gap=Math.max(v('target')-capital,0), pay=pmt(v('loan'),v('rate'),Math.max(v('months'),1)); let signal='Lower', copy='Current working capital is near or above the target cushion. Still review cash timing before borrowing.'; if(gap>0){ signal='Moderate'; copy='The target cushion is above current working capital. Compare repayment cost with receivables, inventory, and expense timing.'; } if(runway<1 || pay>v('expenses')*.15){ signal='Caution'; copy='The entered numbers show limited runway or higher payment pressure. Review lower-cost options and cash-flow timing before adding debt.'; } document.getElementById('capital').textContent=money.format(capital); document.getElementById('runway').textContent=`${runway.toFixed(1)} mo`; document.getElementById('gap').textContent=money.format(gap); document.getElementById('payment').textContent=money.format(pay); document.getElementById('signal').textContent=signal; document.getElementById('copy').textContent=copy; }
     ids.forEach(id=>f[id]?.addEventListener('input',calc)); calc();
   </script>
+  <ToolRelatedLinks />
 </BaseLayout>

@@ -1,38 +1,20 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getAllAnswersRuntime, type RuntimeLenderEnv } from '../../lib/db';
+import { getClusterAnswers } from '../../utils/data-build';
 import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 
-// CDM-REV Phase 5.1 [OBJ-1] — SSR (no rebuild).
-// Index of all answers — pulls rows from Supabase at request time so adding
-// or editing an answer doesn't require a `git push` + Pages rebuild.
-export const prerender = false;
-
-const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
-const rows = await getAllAnswersRuntime(env);
-
-// Hydrate the legacy answer shape from top-level columns + body_inline
-// so the existing card markup keeps working unchanged.
-const answers = rows.map((row) => {
-  const b = (row.body_inline ?? {}) as Record<string, any>;
-  return {
-    slug: row.slug,
-    title: row.title || b.title,
-    h1: softenEducationalTeaserCopy((b.h1 || row.title || '') as string),
-    meta_description: softenEducationalTeaserCopy((b.meta_description as string | undefined) || ''),
-    answer_summary: softenEducationalTeaserCopy((b.answer_summary as string | undefined) || ''),
-    category: (row.banner_category || b.banner_category || b.category) as string | undefined,
-    last_updated: (b.last_updated as string | undefined) || row.updated_at,
-  };
-});
-
-// Edge cache headers — index reflects latest row update across the table.
-const latestVerSec = answers.length
-  ? Math.floor(Date.parse(answers[0].last_updated || '0') / 1000)
-  : 0;
-Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
-Astro.response.headers.set('x-cdm-route', '/answers/index');
-Astro.response.headers.set('x-cdm-version', String(latestVerSec));
+const answers = getClusterAnswers()
+  .filter((answer) => (answer.status || 'published') === 'published')
+  .sort((a, b) => Date.parse(b.last_updated || b.published_at || '0') - Date.parse(a.last_updated || a.published_at || '0'))
+  .map((answer) => ({
+    slug: answer.slug,
+    title: answer.title,
+    h1: softenEducationalTeaserCopy(answer.h1 || answer.title || ''),
+    meta_description: softenEducationalTeaserCopy(answer.meta_description || ''),
+    answer_summary: '',
+    category: answer.banner_category,
+    last_updated: answer.last_updated || answer.published_at,
+  }));
 
 function truncate(text: string, max: number): string {
   if (!text) return '';

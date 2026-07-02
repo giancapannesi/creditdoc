@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 
 const title = 'Loan Denial Reason Checker | CreditDoc';
 const description = 'Use a free loan denial checker to identify common denial causes including credit, income, DTI, documents, business history, collateral, and lender fit.';
@@ -441,4 +442,5 @@ const breadcrumbJsonLd = {
       $('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   </script>
+  <ToolRelatedLinks />
 </BaseLayout>

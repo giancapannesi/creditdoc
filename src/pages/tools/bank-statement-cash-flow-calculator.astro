@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 
 const title = 'Bank Statement Cash Flow Calculator | CreditDoc';
 const description = 'Estimate business cash-flow signals from bank statement deposits, ending balances, negative days, and existing debt payments before comparing funding options.';
@@ -276,4 +277,5 @@ const breadcrumbJsonLd = {
     ids.forEach((id) => fields[id].addEventListener('input', calculate));
     calculate();
   </script>
+  <ToolRelatedLinks />
 </BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
 
 const title = 'MCA Repayment Calculator | CreditDoc';
 const description = 'Estimate merchant cash advance repayment, factor-rate cost, holdback impact, and daily or weekly cash-flow pressure. Free educational calculator.';
@@ -305,4 +306,5 @@ const breadcrumbJsonLd = {
     Object.values(inputs).forEach((input) => input.addEventListener('input', calculate));
     calculate();
   </script>
+  <ToolRelatedLinks />
 </BaseLayout>
