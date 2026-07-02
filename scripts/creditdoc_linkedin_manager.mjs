@@ -8,10 +8,13 @@ const SECRETS_FILE = `${ROOT}/tools/.linkedin.env`;
 const QUEUE_FILE = `${ROOT}/data/creditdoc_linkedin_queue.json`;
 const STATE_FILE = `${ROOT}/data/creditdoc_linkedin_state.json`;
 const CARD_DIR = `${ROOT}/data/creditdoc_linkedin_cards`;
+const PINTEREST_STATE_FILE = `${ROOT}/data/creditdoc_pinterest_state.json`;
+const PINTEREST_CARD_DIR = `${ROOT}/data/creditdoc_pinterest_pins`;
 const LOG_FILE = `${ROOT}/logs/creditdoc_linkedin_posts.jsonl`;
 const PINTEREST_LOG_FILE = `${ROOT}/logs/creditdoc_pinterest_blotato_posts.jsonl`;
 const DEFAULT_VERSION = '202606';
 const WEEKLY_CAP = 2;
+const PINTEREST_INTERVAL_DAYS = 3;
 const DEFAULT_REDIRECT_URI = 'https://www.creditdoc.co/linkedin-oauth-callback/';
 const DEFAULT_SCOPES = ['w_organization_social', 'r_organization_social'];
 const FILE_ENV = loadEnv();
@@ -267,6 +270,7 @@ function usage() {
   node scripts/creditdoc_linkedin_manager.mjs draft-week [--date YYYY-MM-DD]
   node scripts/creditdoc_linkedin_manager.mjs run-scheduled-resources [--date YYYY-MM-DD] [--dry-run]
   node scripts/creditdoc_linkedin_manager.mjs run-scheduled-tools [--date YYYY-MM-DD] [--dry-run]
+  node scripts/creditdoc_linkedin_manager.mjs run-scheduled-pinterest [--date YYYY-MM-DD] [--dry-run]
   node scripts/creditdoc_linkedin_manager.mjs status
   node scripts/creditdoc_linkedin_manager.mjs approve <draft-id>
   node scripts/creditdoc_linkedin_manager.mjs render-card <draft-id>
@@ -357,6 +361,12 @@ function addDays(dateString, days) {
   return date.toISOString().slice(0, 10);
 }
 
+function daysBetween(startDate, endDate) {
+  const start = new Date(`${startDate}T00:00:00Z`);
+  const end = new Date(`${endDate}T00:00:00Z`);
+  return Math.floor((end - start) / 86400000);
+}
+
 function nextWeekday(dateString, targetDay) {
   const date = new Date(`${dateString}T00:00:00Z`);
   const current = date.getUTCDay();
@@ -390,6 +400,24 @@ function makePost(campaign) {
   ].join('\n');
 }
 
+function makePinterestDescription(draft) {
+  const campaign = campaignForDraft(draft);
+  const kind = (campaign.kind || 'Tool').toLowerCase();
+  const useCases = (campaign.useCases || []).slice(0, 3).join(', ');
+  return [
+    `${campaign.title} from CreditDoc.`,
+    '',
+    campaign.problem || `Use this CreditDoc ${kind} to compare options before making a financial decision.`,
+    '',
+    useCases ? `Useful for: ${useCases}.` : '',
+    '',
+    `Get the ${kind} here:`,
+    draft.target_url,
+    '',
+    (campaign.hashtags || []).join(' '),
+  ].filter((line) => line !== '').join('\n');
+}
+
 function campaignForDraft(draft) {
   return CAMPAIGNS.find((campaign) => campaign.slug === draft.campaign_slug) || {
     slug: draft.campaign_slug,
@@ -402,6 +430,10 @@ function campaignForDraft(draft) {
 
 function cardPathForDraft(draft) {
   return path.join(CARD_DIR, `${draft.id}.png`);
+}
+
+function pinterestPinPathForDraft(draft) {
+  return path.join(PINTEREST_CARD_DIR, `${draft.id}.png`);
 }
 
 function renderCardForDraft(draft) {
@@ -436,6 +468,39 @@ function renderCardForDraft(draft) {
   return out;
 }
 
+function renderPinterestPinForDraft(draft) {
+  const campaign = campaignForDraft(draft);
+  const out = pinterestPinPathForDraft(draft);
+  const kind = campaign.kind || 'Tool';
+  const args = [
+    'scripts/creditdoc_pinterest_pin.py',
+    '--out',
+    out,
+    '--kind',
+    kind,
+    '--title',
+    draft.title,
+    '--summary',
+    campaign.problem || `CreditDoc resource: ${draft.title}`,
+    '--use-cases',
+    (campaign.useCases || []).join('|'),
+    '--url',
+    draft.target_url,
+  ];
+  const result = spawnSync('python3', args, {
+    cwd: '/srv/BusinessOps/creditdoc',
+    encoding: 'utf8',
+  });
+  if (result.status !== 0) {
+    throw new Error(`Pinterest pin render failed: ${result.stderr || result.stdout || `exit ${result.status}`}`);
+  }
+  if (!fs.existsSync(out) || fs.statSync(out).size < 10000) {
+    throw new Error(`Pinterest pin render did not create a valid image: ${out}`);
+  }
+  draft.pinterest_image_path = out;
+  return out;
+}
+
 function renderCardCommand(id) {
   const queue = loadQueue();
   const draft = queue.drafts.find((item) => item.id === id);
@@ -453,9 +518,9 @@ function renderCardCommand(id) {
   }, null, 2));
 }
 
-function copyCardToCdn(imagePath, draft) {
+function copyCardToCdn(imagePath, draft, suffix = '') {
   fs.mkdirSync(CDN_DIR, { recursive: true });
-  const filename = `${draft.id}.png`;
+  const filename = `${draft.id}${suffix}.png`;
   const dest = path.join(CDN_DIR, filename);
   fs.copyFileSync(imagePath, dest);
   fs.chmodSync(dest, 0o644);
@@ -477,6 +542,14 @@ function loadState() {
 
 function saveState(state) {
   writeJson(STATE_FILE, state);
+}
+
+function loadPinterestState() {
+  return readJson(PINTEREST_STATE_FILE, { published: [], next_campaign_index: 0, last_published_date: null });
+}
+
+function savePinterestState(state) {
+  writeJson(PINTEREST_STATE_FILE, state);
 }
 
 function existingDraftKeys(queue) {
@@ -534,6 +607,20 @@ function buildDraft(campaign, scheduledDate, slot) {
     approved_at: null,
     published_at: null,
     linkedin_post_urn: null,
+    commentary: makePost(campaign),
+  };
+}
+
+function buildPinterestDraft(campaign, scheduledDate) {
+  return {
+    id: `cd-pin-${scheduledDate}-${campaign.slug}`,
+    campaign_slug: campaign.slug,
+    title: campaign.title,
+    target_url: campaign.url,
+    scheduled_date: scheduledDate,
+    slot: 'pinterest',
+    status: 'approved',
+    created_at: new Date().toISOString(),
     commentary: makePost(campaign),
   };
 }
@@ -897,11 +984,12 @@ async function publishPinterestViaBlotato(draft, imagePath) {
     });
     return skipped;
   }
-  const mediaUrl = copyCardToCdn(imagePath, draft);
+  const pinPath = imagePath && fs.existsSync(imagePath) ? imagePath : renderPinterestPinForDraft(draft);
+  const mediaUrl = copyCardToCdn(pinPath, draft, '-pin');
   const body = {
     accountId: BLOTATO_PINTEREST_ACCOUNT_ID,
     platform: 'pinterest',
-    text: draft.commentary,
+    text: makePinterestDescription(draft),
     mediaUrls: [mediaUrl],
     boardId: BLOTATO_PINTEREST_BOARD_ID,
     title: draft.title,
@@ -921,6 +1009,7 @@ async function publishPinterestViaBlotato(draft, imagePath) {
     account_id: BLOTATO_PINTEREST_ACCOUNT_ID,
     board_id: BLOTATO_PINTEREST_BOARD_ID,
     media_url: mediaUrl,
+    pin_image_path: pinPath,
     payload,
   };
   appendJsonl(PINTEREST_LOG_FILE, {
@@ -1074,6 +1163,87 @@ async function runScheduledResources(args) {
   }, null, 2));
 }
 
+async function runScheduledPinterest(args) {
+  const dryRun = args.includes('--dry-run');
+  const dateArg = args.includes('--date') ? args[args.indexOf('--date') + 1] : args.find((arg) => arg.startsWith('--date='))?.slice(7);
+  const nowDate = today(dateArg);
+  const state = loadPinterestState();
+  const lastDate = state.last_published_date || null;
+  const daysSinceLast = lastDate ? daysBetween(lastDate, nowDate) : null;
+  const due = !lastDate || daysSinceLast >= PINTEREST_INTERVAL_DAYS;
+  if (!due) {
+    console.log(JSON.stringify({
+      ok: true,
+      command: 'run-scheduled-pinterest',
+      dry_run: dryRun,
+      date: nowDate,
+      published: null,
+      skipped: `not due; last successful pin was ${lastDate}`,
+      days_since_last: daysSinceLast,
+      interval_days: PINTEREST_INTERVAL_DAYS,
+    }, null, 2));
+    return;
+  }
+
+  const index = Number(state.next_campaign_index || 0);
+  const campaign = CAMPAIGNS[index % CAMPAIGNS.length];
+  const draft = buildPinterestDraft(campaign, nowDate);
+  const pinPath = renderPinterestPinForDraft(draft);
+  const description = makePinterestDescription(draft);
+
+  if (dryRun) {
+    console.log(JSON.stringify({
+      ok: true,
+      command: 'run-scheduled-pinterest',
+      dry_run: true,
+      date: nowDate,
+      due: true,
+      next_campaign_index: index,
+      draft: {
+        id: draft.id,
+        title: draft.title,
+        target_url: draft.target_url,
+        pin_image_path: pinPath,
+        description,
+      },
+    }, null, 2));
+    return;
+  }
+
+  const result = await publishPinterestViaBlotato(draft, pinPath);
+  if (result.ok) {
+    state.last_published_date = nowDate;
+    state.next_campaign_index = index + 1;
+    state.published = Array.isArray(state.published) ? state.published : [];
+    state.published.push({
+      id: draft.id,
+      campaign_slug: draft.campaign_slug,
+      title: draft.title,
+      target_url: draft.target_url,
+      published_at: new Date().toISOString(),
+      pin_image_path: result.pin_image_path || pinPath,
+      media_url: result.media_url || null,
+      blotato_result: result,
+    });
+    savePinterestState(state);
+  }
+
+  console.log(JSON.stringify({
+    ok: Boolean(result.ok),
+    command: 'run-scheduled-pinterest',
+    dry_run: false,
+    date: nowDate,
+    draft: {
+      id: draft.id,
+      title: draft.title,
+      target_url: draft.target_url,
+      pin_image_path: pinPath,
+    },
+    pinterest_result: result,
+    next_run_after_success: result.ok ? addDays(nowDate, PINTEREST_INTERVAL_DAYS) : null,
+  }, null, 2));
+}
+
 async function main() {
   const [command, ...args] = process.argv.slice(2);
   if (!command || command === '--help' || command === 'help') {
@@ -1096,6 +1266,7 @@ async function main() {
     const limitArg = args.includes('--limit') ? args[args.indexOf('--limit') + 1] : args.find((arg) => arg.startsWith('--limit='))?.slice(8);
     await publishApproved(args.includes('--dry-run'), { limit: limitArg ? Number(limitArg) : undefined });
   } else if (command === 'run-scheduled-resources' || command === 'run-scheduled-tools') await runScheduledResources(args);
+  else if (command === 'run-scheduled-pinterest') await runScheduledPinterest(args);
   else {
     usage();
     process.exit(1);
