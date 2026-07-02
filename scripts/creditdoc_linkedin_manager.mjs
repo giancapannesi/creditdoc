@@ -1047,7 +1047,7 @@ async function createLinkedInPost(env, draft) {
   const accessToken = env.LINKEDIN_ACCESS_TOKEN;
   if (!author) throw new Error('Missing LINKEDIN_ORGANIZATION_URN');
   if (!accessToken) throw new Error('Missing LINKEDIN_ACCESS_TOKEN');
-  const imagePath = renderCardForDraft(draft);
+  const imagePath = renderPinterestPinForDraft(draft);
   const imageUrn = await uploadLinkedInImage(env, imagePath);
   draft.linkedin_image_urn = imageUrn;
   const body = {
