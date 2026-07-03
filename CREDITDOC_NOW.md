@@ -6,7 +6,11 @@
 
 ## 2026-07-03 - SE Ranking audit cleanup and static SEO verification
 
-Status: local code/build SEO cleanup completed. Production still needs deployment verification if the latest commit has not been deployed.
+Status: code/build SEO cleanup completed, deployed, live-verified, and committed locally. Push to GitHub is blocked by invalid GitHub authentication on the VPS.
+
+Process rule:
+- For CreditDoc, finished work must be pushed after commit as a matter of process.
+- Current exception: `git push origin cdm-rev-hybrid` failed on 2026-07-03 because the GitHub HTTPS token configured on `origin` is invalid; `gh auth status` also reports an invalid token; SSH auth is not configured.
 
 What changed:
 - Excluded `/linkedin-oauth-callback/` from generated sitemap while keeping the callback page noindex utility behavior.
@@ -28,10 +32,12 @@ Verification:
 - `node scripts/seo_deep_audit.mjs` passed: 2,742 rendered HTML pages, 24,891 sitemap URLs, 0 errors, 0 warnings.
 - Targeted check confirmed `/linkedin-oauth-callback/` is absent from generated XML sitemaps.
 - Generated HTML confirms unique titles for the sitemap and credit-score wellness pages.
+- Deployed through `/srv/BusinessOps/creditdoc/deploy.sh`.
+- Cloudflare Worker Version ID: `0339224a-16ad-4954-b087-535c9be1760b`.
+- Live checks confirmed 200 responses for representative `/answers/`, `/best/`, `/blog/`, `/financial-wellness/`, `/review/`, sitemap, homepage, CSS, and core route samples.
 
 Next:
-- Commit this SEO cleanup.
-- Deploy and verify production no longer serves stale SSR headers for `/answers/`, `/best/`, `/blog/`, and `/financial-wellness/`.
+- Repair GitHub authentication on the VPS and push `cdm-rev-hybrid`; local branch is ahead of `origin/cdm-rev-hybrid` because push is currently blocked.
 - Treat the next SE Ranking report as the external recrawl confirmation; local generated output is clean.
 
 ## 2026-07-02 - Static SEO migration: tools, answers, blog, wellness, and money pages
