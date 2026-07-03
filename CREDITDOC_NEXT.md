@@ -1,4 +1,23 @@
-# CreditDoc — NEXT ACTIONS (updated 2026-07-02)
+# CreditDoc — NEXT ACTIONS (updated 2026-07-03)
+
+## Active 2026-07-03 — SE Ranking Cleanup Verification
+
+Latest completed:
+
+- Local SE Ranking remediation pass completed for sitemap/noindex, short titles, duplicate titles, duplicate H1s, broken external favicon image fallbacks, and missing-anchor-text audit coverage.
+- `scripts/seo_deep_audit.mjs` now checks rendered links for empty anchor text.
+- `npm run build` passed with prebuild and postbuild contracts.
+- `node scripts/seo_deep_audit.mjs` passed: 2,742 rendered HTML pages, 24,891 sitemap URLs, 0 errors, 0 warnings.
+- Generated sitemap no longer includes `/linkedin-oauth-callback/`.
+- Image alt and image filename contracts passed.
+
+Immediate next:
+
+1. Deploy the latest SEO cleanup commit if it is not already live.
+2. After deploy, live-check representative URLs from `/tools/`, `/answers/`, `/best/`, `/blog/`, `/financial-wellness/`, `/courses/`, and `/review/`.
+3. Confirm production headers no longer show old SSR route sources for staticized page families.
+4. Use the next SE Ranking crawl as external confirmation; do not reopen fixed items unless the fresh crawl reproduces them on the current deployed build.
+5. Continue strategic SEO work on internal link depth for important money/tool/course pages, since local technical crawl errors are now clean.
 
 ## Active 2026-07-02 — Static SEO Migration
 

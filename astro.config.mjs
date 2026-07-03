@@ -158,6 +158,7 @@ export default defineConfig({
         const url = new URL(page);
         if (url.pathname === '/search/') return false;
         if (url.pathname === '/specials/') return false;
+        if (url.pathname === '/linkedin-oauth-callback/') return false;
         if (url.pathname.endsWith('/print/')) return false;
         return true;
       },

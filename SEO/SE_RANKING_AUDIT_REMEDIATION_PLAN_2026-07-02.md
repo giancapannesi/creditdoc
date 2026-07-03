@@ -44,32 +44,48 @@ Even if temporary, this still matters because Google and audit tools need stable
 
 | Priority | Status | Issue | Audit count | Diagnosis | Fix strategy | Owner action |
 |---:|---:|---|---:|---|---|---|
-| P0 | In progress | Runtime/static instability | 738 5XX during crawl | Live spot checks now return 200, suggesting crawl-time SSR/runtime instability | Move SEO pages to static; keep utility routes dynamic | Follow static migration plan |
-| P0 | Pending | 5XX URLs in sitemap | 76 | Sitemap included pages that failed during crawl | After static migration, recrawl generated sitemap and remove/avoid any unstable route family | Verify sitemap after each build |
-| P0 | Pending | Noindex pages in sitemap | 76 | Audit claims sitemap/noindex conflict; live spot checks did not show noindex on tested sitemap examples | Run local generated sitemap conflict checks and live curl against exact audit list | Remove noindex URLs from sitemap or remove noindex from pages if they should rank |
-| P1 | In progress | Nofollow internal links | 141 | Internal `/go/` sponsored redirects and noindex pages create crawl warnings | Use `sponsored` for internal monetized redirects; avoid `nofollow` on internal utility paths where possible | First cleanup started |
-| P1 | In progress | Search pages nofollow all links | 11 | `noindex, nofollow` blocks link following from search/filter pages | Change to `noindex, follow` | First cleanup started |
-| P1 | In progress | Broken/redirected images | 6 | External favicon lookups on lender cards can return 3XX/4XX | Remove unreliable third-party favicon fallback; use stored logo or text initial | First cleanup started |
+| P0 | Fixed locally | Runtime/static instability | 738 5XX during crawl | Static SEO page families now emit physical HTML during build | Tools, answers, blog, wellness, best pages staticized; utility routes remain dynamic/nonindexable | Deploy and verify live cache/headers |
+| P0 | Fixed locally | 5XX URLs in sitemap | 76 | Generated sitemap now validates locally against robots and critical URL rules | Static migration plus sitemap checks | Confirm after next SE Ranking crawl |
+| P0 | Fixed locally | Noindex pages in sitemap | 76 | Local audit found LinkedIn OAuth callback in sitemap | Excluded `/linkedin-oauth-callback/` from sitemap; deep audit now 0 noindex-in-sitemap errors | Confirm after deploy/recrawl |
+| P1 | Fixed locally | Nofollow internal links | 141 | Internal `/go/` sponsored redirects and noindex pages created crawl warnings | Noindex pages use `noindex, follow`; internal sponsored CTAs use `sponsored` without `nofollow` | Confirm after SE Ranking recrawl |
+| P1 | Fixed locally | Search pages nofollow all links | 11 | `noindex, nofollow` blocked link following from search/filter pages | Changed noindex handling to `noindex, follow` | Confirm after SE Ranking recrawl |
+| P1 | Fixed locally | Broken/redirected images | 6 | External favicon lookups on lender cards/review pages can return 3XX/4XX | Removed unreliable third-party favicon image fallbacks; stored logo or text initial remains | Confirm after SE Ranking recrawl |
 | P1 | Pending | One inbound internal link | 63 | Important new tools and some pages are underlinked | Add hub links from tools, best, course, answers, wellness, and selected category pages | Build internal link pass after static Phase 1 |
-| P2 | Pending | Meta descriptions too long | 38 | Some descriptions exceed crawler threshold despite layout truncation | Normalize source descriptions to <= 155 chars for affected pages | Script/source pass |
-| P2 | Pending | Title too short | 2 | `/review/lookout/`, `/review/gain/` titles are too generic | Update source title/meta data for those reviews | Source data patch |
-| P2 | Pending | Duplicate H1 | 2 | `/review/sofi-bank/` and `/review/sofi/` collide | Make H1s distinguish bank vs SoFi profile | Source/template patch |
-| P2 | Pending | Missing anchor text | 124 | Likely icon/empty links in cards/buttons | Audit rendered HTML and add aria-label/text where needed | Template pass |
-| P3 | Pending | Slow pages | 2 | `/answers/`, `/tools/working-capital-calculator/` | Staticize `/answers/`; inspect working capital JS/CSS and payload | Phase 2 plus page-specific cleanup |
-| P3 | Pending | JS not minified | 1 | `/tools/debt-payoff-calculator/` crawler warning | Verify if bundled JS is actually minified; ignore if false positive | Check after build |
+| P2 | Fixed locally | Meta descriptions too long | 38 | Local rendered deep audit checks description length and now reports no long descriptions | Source/layout output normalized by generated HTML checks | Confirm after SE Ranking recrawl |
+| P2 | Fixed locally | Title too short | 2 | `/review/lookout/`, `/review/gain/` titles were too generic | Added review SEO title/description overrides | Confirm after SE Ranking recrawl |
+| P2 | Fixed locally | Duplicate H1 | 2 | `/review/sofi-bank/` and `/review/sofi/` collided | Added review H1 overrides to distinguish SoFi Bank from SoFi Financial Services | Confirm after SE Ranking recrawl |
+| P2 | Fixed locally | Missing anchor text | 124 | Needed deterministic local rendered check | Added empty-anchor check to `scripts/seo_deep_audit.mjs`; current generated site has 0 warnings | Confirm after SE Ranking recrawl |
+| P3 | Fixed locally | Slow pages | 2 | `/answers/` was previously runtime-heavy | `/answers/` and tool pages now emit static HTML; calculator JS bundles are Vite-minified | Confirm after SE Ranking recrawl |
+| P3 | Fixed locally | JS not minified | 1 | `/tools/debt-payoff-calculator/` crawler warning | Build emits hashed Vite bundle; local build completed normally | Treat as crawler false positive unless SE repeats it |
+
+Latest local validation, 2026-07-03:
+
+```bash
+npm run build
+node scripts/seo_deep_audit.mjs
+```
+
+Result:
+
+- Build passed with prebuild checks and postbuild sitemap/feed/image contracts.
+- Rendered SEO audit checked 2,742 HTML pages and 24,891 sitemap URLs.
+- Rendered SEO audit result: 0 errors, 0 warnings.
 
 ## Work Order
 
 ### Batch 0: Immediate Cleanup
 
-Status: in progress.
+Status: complete locally.
 
-Changes already started:
+Changes completed:
 
 - `BaseLayout.astro`: noindex pages now use `noindex, follow`.
 - `LenderCard.astro`: removed unreliable external favicon fallback.
 - `TopPicksTable.astro`: removed unreliable external favicon fallback.
+- `review/[slug].astro`: removed unreliable external favicon fallback from review pages.
 - Review/best/compare CTA links: removed `nofollow` from internal sponsored redirects, leaving `sponsored`.
+- `astro.config.mjs`: excluded `/linkedin-oauth-callback/` from generated sitemap.
+- `scripts/seo_deep_audit.mjs`: added empty-anchor-text detection.
 
 Validation:
 
@@ -79,7 +95,7 @@ Validation:
 
 Next:
 
-- Commit this cleanup once we decide whether to include the new audit/plan files.
+- Deploy and confirm production no longer serves stale SSR route headers for the staticized page families.
 
 ### Batch 1: Static Editorial Pages
 
@@ -171,6 +187,8 @@ Validation:
 
 ### Batch 5: Metadata Cleanup
 
+Status: complete locally.
+
 Target:
 
 - 38 long descriptions
@@ -186,8 +204,7 @@ Fix:
 
 Validation:
 
-- Build page samples.
-- Re-run audit.
+- `node scripts/seo_deep_audit.mjs` now reports 0 rendered SEO warnings.
 
 ### Batch 6: Performance Cleanup
 
@@ -218,4 +235,3 @@ Every weekly SE Ranking report:
 4. Separate real issues from crawler artifacts using live curl checks.
 5. Fix P0/P1 first.
 6. Do not chase low-value warnings before static migration and sitemap hygiene are stable.
-

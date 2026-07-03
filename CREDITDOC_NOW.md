@@ -4,13 +4,44 @@
 
 ---
 
+## 2026-07-03 - SE Ranking audit cleanup and static SEO verification
+
+Status: local code/build SEO cleanup completed. Production still needs deployment verification if the latest commit has not been deployed.
+
+What changed:
+- Excluded `/linkedin-oauth-callback/` from generated sitemap while keeping the callback page noindex utility behavior.
+- Fixed remaining short/duplicate title issues in generated pages:
+  - `/sitemap/`
+  - `/research/`
+  - answer pages around balance transfers, small business loans, business line of credit variants, late payments, startups, and women-owned business loans.
+  - wellness credit-score calculation pages.
+- Added review SEO overrides for `/review/lookout/`, `/review/gain/`, `/review/sofi-bank/`, and `/review/sofi/` to fix short titles and duplicate H1s.
+- Removed unreliable third-party favicon image fallback from review pages. Lender cards and top-picks fallbacks had already been removed.
+- Extended `scripts/seo_deep_audit.mjs` to detect links with no visible text, image alt, aria-label, or title.
+
+Verification:
+- `npm run build` passed on 2026-07-03.
+- Prebuild checks passed: content text integrity, robots contract, SSR sitemap parity.
+- Postbuild checks passed: sitemap/robots conflicts, critical sitemap URLs, feed contract, image alt contract, and image filename contract.
+- Image alt contract result: 11 source image tags and 14,548 rendered image tags include alt attributes.
+- Image filename contract result: 14,439 public image filenames checked.
+- `node scripts/seo_deep_audit.mjs` passed: 2,742 rendered HTML pages, 24,891 sitemap URLs, 0 errors, 0 warnings.
+- Targeted check confirmed `/linkedin-oauth-callback/` is absent from generated XML sitemaps.
+- Generated HTML confirms unique titles for the sitemap and credit-score wellness pages.
+
+Next:
+- Commit this SEO cleanup.
+- Deploy and verify production no longer serves stale SSR headers for `/answers/`, `/best/`, `/blog/`, and `/financial-wellness/`.
+- Treat the next SE Ranking report as the external recrawl confirmation; local generated output is clean.
+
 ## 2026-07-02 - Static SEO migration: tools, answers, blog, wellness, and money pages
 
 Status: static migration phase completed and build-verified for the ranking page families the user prioritized.
 
 Commits:
 - `7ace40d2d1 Improve SEO tooling and static answers`
-- Follow-up static editorial/money-page commit pending at end of session.
+- `1ba33061e5 Staticize editorial and money pages`
+- `7781f144df Add traffic analysis audit export`
 
 What changed:
 - `/tools/*` kept static and strengthened with related-tool crawl links across the individual calculator/quiz/checklist pages.

@@ -613,6 +613,29 @@ const jsonLd = shouldEmitEntitySchema
 
 const canonicalUrl = `https://www.creditdoc.co/review/${lender.slug}/`;
 
+const reviewSeoOverrides: Record<string, { title?: string; h1?: string; description?: string }> = {
+  lookout: {
+    title: 'Lookout Profile and Security Context | CreditDoc',
+    description: 'Lookout profile with business context, category notes, source signals, and alternatives for CreditDoc readers.',
+  },
+  gain: {
+    title: 'GAIN Profile and Platform Context | CreditDoc',
+    description: 'GAIN profile with classification context, source signals, and alternatives for CreditDoc readers.',
+  },
+  'sofi-bank': {
+    title: 'SoFi Bank Review: Loans, Banking, and App Context',
+    h1: 'SoFi Bank in San Francisco, CA',
+    description: 'SoFi Bank profile covering loans, banking, app features, complaint signals, and alternatives for borrowers.',
+  },
+  sofi: {
+    title: 'SoFi Financial Services Review and Context',
+    h1: 'SoFi Financial Services in San Francisco, CA',
+    description: 'SoFi profile covering digital banking, loans, investing, credit tools, complaint signals, and alternatives.',
+  },
+};
+
+const reviewSeoOverride = reviewSeoOverrides[lender.slug] || {};
+
 // Per-entity OG image: prefer logo, fall through to default in BaseLayout
 const ogImageUrl = lender.logo_url?.trim()
   ? (lender.logo_url.startsWith('http') ? lender.logo_url : `https://www.creditdoc.co${lender.logo_url}`)
@@ -623,6 +646,7 @@ const ogImageUrl = lender.logo_url?.trim()
   canonical={canonicalUrl}
   ogImage={ogImageUrl}
   title={(() => {
+    if (reviewSeoOverride.title) return reviewSeoOverride.title;
     if (lender.seo_title) return lender.seo_title;
     const city = lender.company_info?.city;
     const state = lender.company_info?.state;
@@ -634,6 +658,7 @@ const ogImageUrl = lender.logo_url?.trim()
     return nameWithLoc.slice(0, 60);
   })()}
   description={(() => {
+    if (reviewSeoOverride.description) return reviewSeoOverride.description;
     if (lender.meta_description) return lender.meta_description.slice(0, 155);
     const base = lender.description_short || `${lender.name} review with services, contact details, review signals, and alternatives.`;
     const city = lender.company_info?.city;
@@ -695,8 +720,6 @@ const ogImageUrl = lender.logo_url?.trim()
         <div class="w-20 h-20 rounded-2xl bg-bg-alt border border-border flex items-center justify-center shrink-0 overflow-hidden">
           {lender.logo_url && !lender.logo_url.includes('googleusercontent.com') ? (
             <img src={lender.logo_url} alt={`${lender.name} logo`} class="w-14 h-14 object-contain" loading="lazy" onerror={`this.onerror=null;this.parentElement.innerHTML='<span class="text-2xl font-bold text-primary">${lender.name.charAt(0)}</span>'`} />
-          ) : lender.website_url ? (
-            <img src={`https://icons.duckduckgo.com/ip3/${new URL(lender.website_url).hostname}.ico`} alt={`${lender.name} logo`} class="w-14 h-14 object-contain" loading="lazy" onerror={`this.onerror=function(){this.onerror=null;this.parentElement.innerHTML='<span class=\"text-2xl font-bold text-primary\">${lender.name.charAt(0)}</span>'};this.src='https://icon.horse/icon/${new URL(lender.website_url).hostname}?size=large'`} />
           ) : (
             <span class="text-2xl font-bold text-primary">{lender.name.charAt(0)}</span>
           )}
@@ -704,13 +727,13 @@ const ogImageUrl = lender.logo_url?.trim()
 
         <div class="flex-1">
           <h1 class="text-2xl sm:text-3xl font-bold text-text">
-            {lender.name}{(() => {
+            {reviewSeoOverride.h1 || `${lender.name}${(() => {
               const city = lender.company_info?.city;
               const state = lender.company_info?.state;
               const stAbbr = state ? (STATE_ABBR[state] || state.slice(0, 2).toUpperCase()) : '';
               if (!city) return '';
               return ` in ${city}${stAbbr ? ', ' + stAbbr : ''}`;
-            })()}
+            })()}`}
           </h1>
           {showGoogleRating ? (
             <div class="flex items-center gap-3 mt-2">

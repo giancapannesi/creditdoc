@@ -42,6 +42,13 @@ function stripScriptsAndStyles(html) {
     .replace(/<style\b[\s\S]*?<\/style>/gi, ' ');
 }
 
+function textForAnchor(innerHtml) {
+  const imageAltText = [...innerHtml.matchAll(/<img\b[^>]*>/gi)]
+    .map((match) => attrs(match[0]).alt || '')
+    .join(' ');
+  return `${stripTags(innerHtml)} ${imageAltText}`.replace(/\s+/g, ' ').trim();
+}
+
 function textOfFirst(html, pattern) {
   const match = html.match(pattern);
   return match ? decodeHtml(match[1].trim()) : '';
@@ -198,8 +205,15 @@ for (const filePath of htmlFiles) {
   }
 
   const linkHtml = stripScriptsAndStyles(html);
-  for (const match of linkHtml.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>/gi)) {
-    const href = decodeHtml(match[1]);
+  for (const match of linkHtml.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+    const linkAttrs = attrs(match[0]);
+    const href = decodeHtml(linkAttrs.href || '');
+    const linkText = textForAnchor(match[2]);
+    const accessibleLabel = `${linkAttrs['aria-label'] || ''} ${linkAttrs.title || ''}`.trim();
+    if (!linkText && !accessibleLabel) {
+      addIssue(issues, 'warning', 'empty_anchor_text', url, `Link has no visible, image-alt, aria-label, or title text: ${href}`, { href });
+    }
+
     const targetFile = fileForInternalHref(href);
     const targetUrl = (() => {
       try {
