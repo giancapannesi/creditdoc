@@ -304,33 +304,68 @@ def draw_checklist_pin(image, draw, args):
 
 def draw_focus_pin(image, draw, args):
     accent = [GREEN, BLUE, GOLD, CYAN][((args.variant or 0) // 4) % 4]
-    draw.rectangle((0, 0, WIDTH, HEIGHT), fill="#f8fbff")
-    draw.rectangle((0, 0, WIDTH, 90), fill=WHITE)
-    paste_logo(image, 70, 28, 230, BLUE)
-    draw.polygon([(0, 170), (1000, 0), (1000, 540), (0, 690)], fill=NAVY)
-    draw.polygon([(650, 0), (1000, 0), (1000, 430), (740, 470)], fill=accent)
+    lower_title = args.title.lower()
+    is_receivables = "receivable" in lower_title or "invoice" in lower_title
+    draw.rectangle((0, 0, WIDTH, HEIGHT), fill="#fffaf2")
+    draw.rectangle((0, 0, WIDTH, 116), fill=WHITE)
+    paste_logo(image, 64, 30, 260, BLUE)
+    draw.rounded_rectangle((690, 34, 920, 86), radius=22, fill="#e7f8f2")
+    draw.text((724, 48), f"FREE {args.kind.upper().split()[0]}", font=font(BOLD, 21), fill=GREEN)
 
-    draw.rounded_rectangle((70, 180, 285, 240), radius=28, fill=WHITE)
-    draw.text((112, 197), f"FREE {args.kind.upper().split()[0]}", font=font(BOLD, 22), fill=accent)
-    draw_wrapped(draw, args.title, (70, 310), font(HEAVY, 54), WHITE, 720, line_gap=4, max_lines=3)
-    draw_wrapped(draw, args.summary, (72, 545), font(REGULAR, 27), "#dbeafe", 780, line_gap=7, max_lines=3)
+    draw.rectangle((0, 116, WIDTH, 642), fill="#0f2f46")
+    draw.polygon([(0, 525), (1000, 410), (1000, 642), (0, 642)], fill="#f59e0b")
+    draw.polygon([(0, 590), (1000, 480), (1000, 642), (0, 642)], fill="#fffaf2")
 
-    cases = [item.strip() for item in args.use_cases.split("|") if item.strip()][:4]
-    draw.rounded_rectangle((70, 765, 930, 1225), radius=42, fill=WHITE, outline="#cbdced", width=3)
-    draw.text((118, 822), "Best when you need to", font=font(HEAVY, 40), fill=NAVY)
-    y = 900
-    for idx, label in enumerate(cases):
-        x = 120 if idx % 2 == 0 else 520
-        if idx == 2:
-            y += 115
-        draw.rounded_rectangle((x, y, x + 330, y + 82), radius=24, fill=["#eff6ff", "#ecfdf5", "#fff7ed", "#ecfeff"][idx])
-        draw.text((x + 24, y + 23), str(idx + 1), font=font(HEAVY, 28), fill=[BLUE, GREEN, GOLD, CYAN][idx])
-        draw_wrapped(draw, label, (x + 70, y + 19), font(BOLD, 22), INK, 230, line_gap=1, max_lines=2)
+    headline = "Cash tied up in invoices?" if is_receivables else "Check the cost before you choose."
+    subhead = (
+        "Estimate the advance, reserve, fees, and net cash before receivables financing becomes urgent."
+        if is_receivables
+        else "Use the free CreditDoc resource to compare the numbers before making a financial decision."
+    )
+    draw_wrapped(draw, headline, (68, 178), font(SERIF_BOLD, 72), WHITE, 780, line_gap=6, max_lines=2)
+    draw.rounded_rectangle((68, 360, 680, 470), radius=24, fill="#143b58")
+    draw_wrapped(draw, subhead, (94, 382), font(REGULAR, 25), "#dbeafe", 555, line_gap=6, max_lines=2)
 
-    draw.rounded_rectangle((100, 1310, 900, 1390), radius=32, fill=accent)
-    draw.text((225, 1330), "Go to the free resource", font=font(HEAVY, 33), fill=WHITE)
-    draw.rectangle((0, 1430, WIDTH, HEIGHT), fill=NAVY)
-    draw.text((142, 1450), compact_url(args.url), font=font(BOLD, 26), fill=WHITE)
+    def invoice_card(x, y, w, h, angle, label, amount, color):
+        card = Image.new("RGBA", (w + 40, h + 40), (0, 0, 0, 0))
+        cd = ImageDraw.Draw(card)
+        cd.rounded_rectangle((20, 20, w + 20, h + 20), radius=28, fill=WHITE, outline="#b7cfe5", width=3)
+        cd.rectangle((48, 56, w - 40, 66), fill=color)
+        cd.text((48, 92), label, font=font(BOLD, 24), fill=NAVY)
+        cd.text((48, 138), amount, font=font(HEAVY, 44), fill=color)
+        for idx in range(3):
+            yy = 212 + idx * 34
+            cd.rounded_rectangle((48, yy, w - 70, yy + 14), radius=7, fill="#e5edf5")
+        rotated = card.rotate(angle, expand=True, resample=Image.Resampling.BICUBIC)
+        image.paste(rotated, (x, y), rotated)
+
+    invoice_card(612, 185, 310, 365, 6, "Invoice value", "$18,400", GREEN)
+    invoice_card(505, 402, 300, 330, -8, "Net cash", "$15,920", BLUE)
+
+    draw.rounded_rectangle((70, 720, 930, 1078), radius=38, fill=WHITE, outline="#e5c58f", width=3)
+    draw.text((116, 768), "What the calculator helps show", font=font(HEAVY, 38), fill=NAVY)
+    points = [
+        ("Advance", "How much cash may arrive upfront"),
+        ("Reserve", "What may be held back"),
+        ("Fees", "What the financing may cost"),
+    ]
+    for idx, (label, body) in enumerate(points):
+        x = 116 + idx * 270
+        draw.rounded_rectangle((x, 850, x + 220, 1018), radius=26, fill=["#ecfdf5", "#eff6ff", "#fff7ed"][idx])
+        draw.text((x + 26, 882), label, font=font(HEAVY, 25), fill=[GREEN, BLUE, GOLD][idx])
+        draw_wrapped(draw, body, (x + 26, 930), font(BOLD, 21), INK, 160, line_gap=3, max_lines=3)
+
+    draw.rectangle((0, 1146, WIDTH, HEIGHT), fill=NAVY)
+    draw.text((70, 1192), "Use the free CreditDoc calculator.", font=font(HEAVY, 40), fill=WHITE)
+    bottom_copy = (
+        "Model invoice amount, advance rate, reserve holdback, and fees so you can see the net funds before applying."
+        if is_receivables
+        else "Open the resource, compare the key numbers, and make the next borrowing decision with more context."
+    )
+    draw_wrapped(draw, bottom_copy, (74, 1260), font(REGULAR, 27), "#dbeafe", 810, line_gap=7, max_lines=3)
+    paste_logo(image, 74, 1370, 195, WHITE)
+    draw.rounded_rectangle((330, 1376, 910, 1430), radius=24, fill="#e7f8f2")
+    draw.text((368, 1391), compact_url(args.url), font=font(BOLD, 20), fill=NAVY)
 
 
 def variant_for(args):

@@ -274,6 +274,7 @@ function usage() {
   node scripts/creditdoc_linkedin_manager.mjs run-scheduled-resources [--date YYYY-MM-DD] [--dry-run]
   node scripts/creditdoc_linkedin_manager.mjs run-scheduled-tools [--date YYYY-MM-DD] [--dry-run]
   node scripts/creditdoc_linkedin_manager.mjs run-scheduled-pinterest [--date YYYY-MM-DD] [--dry-run]
+  node scripts/creditdoc_linkedin_manager.mjs preview-pinterest-week [--date YYYY-MM-DD] [--days N]
   node scripts/creditdoc_linkedin_manager.mjs status
   node scripts/creditdoc_linkedin_manager.mjs approve <draft-id>
   node scripts/creditdoc_linkedin_manager.mjs render-card <draft-id>
@@ -1396,6 +1397,58 @@ async function runScheduledPinterest(args) {
   }, null, 2));
 }
 
+function previewPinterestWeek(args) {
+  const dateArg = args.includes('--date') ? args[args.indexOf('--date') + 1] : args.find((arg) => arg.startsWith('--date='))?.slice(7);
+  const daysArg = args.includes('--days') ? args[args.indexOf('--days') + 1] : args.find((arg) => arg.startsWith('--days='))?.slice(7);
+  const startDate = today(dateArg);
+  const days = Math.max(1, Number(daysArg || 7));
+  const simulatedState = JSON.parse(JSON.stringify(loadPinterestState()));
+  const scheduled = [];
+
+  for (let offset = 0; offset < days; offset += 1) {
+    const scheduledDate = addDays(startDate, offset);
+    const lastDate = simulatedState.last_published_date || null;
+    const daysSinceLast = lastDate ? daysBetween(lastDate, scheduledDate) : null;
+    const due = !lastDate || daysSinceLast >= PINTEREST_INTERVAL_DAYS;
+    if (!due) continue;
+
+    const { campaign, index, skipped_recent: skippedRecent } = pickPinterestCampaign(simulatedState, scheduledDate);
+    if (!campaign) {
+      scheduled.push({
+        date: scheduledDate,
+        skipped: 'no non-duplicate campaign available inside repeat block',
+      });
+      continue;
+    }
+
+    const draft = buildPinterestDraft(campaign, scheduledDate);
+    const pinPath = renderPinterestPinForDraft(draft);
+    const description = makePinterestDescription(draft);
+    scheduled.push({
+      date: scheduledDate,
+      campaign_index: index,
+      skipped_recent_targets: skippedRecent,
+      id: draft.id,
+      title: draft.title,
+      target_url: draft.target_url,
+      pin_image_path: pinPath,
+      description,
+    });
+
+    simulatedState.last_published_date = scheduledDate;
+    simulatedState.next_campaign_index = index + 1;
+  }
+
+  console.log(JSON.stringify({
+    ok: true,
+    command: 'preview-pinterest-week',
+    start_date: startDate,
+    days,
+    interval_days: PINTEREST_INTERVAL_DAYS,
+    scheduled,
+  }, null, 2));
+}
+
 async function main() {
   const [command, ...args] = process.argv.slice(2);
   if (!command || command === '--help' || command === 'help') {
@@ -1420,6 +1473,7 @@ async function main() {
     await publishApproved(args.includes('--dry-run'), { limit: limitArg ? Number(limitArg) : undefined });
   } else if (command === 'run-scheduled-resources' || command === 'run-scheduled-tools') await runScheduledResources(args);
   else if (command === 'run-scheduled-pinterest') await runScheduledPinterest(args);
+  else if (command === 'preview-pinterest-week') previewPinterestWeek(args);
   else {
     usage();
     process.exit(1);
