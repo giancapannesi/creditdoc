@@ -5350,3 +5350,24 @@ Verification:
 Deployment still required after commit: push, Cloudflare deploy, targeted purge
 of the 124 snapshot URLs, and live sample checks for the `x-cdm-static-snapshot:
 seranking-2026-07-05` header.
+
+Deployment completed:
+- Code commit: `ab7add9942` (`Staticize SE Ranking flagged pages`).
+- Pushed to GitHub branch `cdm-rev-hybrid`.
+- Cloudflare deploy succeeded on 2026-07-05; Worker Version ID:
+  `6f2b68cc-d565-4541-93f9-9fab8de269d7`.
+- Purged all 124 manifest URLs from Cloudflare cache in five successful purge
+  batches.
+- Live representative checks returned 200 with static snapshot marker and no
+  `noindex` for `/review/deluxe-credit-solutions/`, `/review/prosper/`,
+  `/categories/credit-unions/`, `/credit-guide/amarillo-tx/business-loans/`,
+  `/credit-guide/austin-tx/mortgages/`, and
+  `/credit-guide/charlotte-nc/banking/`.
+- Live slashless variants returned 307 redirects to trailing-slash canonical
+  paths.
+- Full live 124-URL sweep passed: 124 checked, 0 failures. Each URL returned
+  200, included the static snapshot marker, and did not include `noindex`.
+
+Note: Cloudflare served these URLs as static assets directly, so the custom
+middleware header was not present live. That is acceptable because the responses
+had the committed static marker and no `x-cdm-cache`/`x-cdm-route` SSR headers.
