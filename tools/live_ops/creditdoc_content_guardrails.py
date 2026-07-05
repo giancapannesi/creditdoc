@@ -180,6 +180,25 @@ def prohibited_certainty_claims(obj: Any) -> list[str]:
         match = pattern.search(text)
         if not match:
             continue
+        prefix = text[max(0, match.start() - 80): match.start()].lower()
+        if re.search(r"\b(no|not|never|cannot|can't|do not|does not|don't|doesn't|without)\s+(?:a\s+|any\s+)?$", prefix):
+            continue
+        context = text[max(0, match.start() - 180): match.end() + 180].lower()
+        warning_context = (
+            "be cautious" in context
+            or "watch for" in context
+            or "red flag" in context
+            or "scam" in context
+            or "prohibit" in context
+            or "illegal" in context
+            or "no one can" in context
+            or "cannot guarantee" in context
+            or "can't guarantee" in context
+            or "do not guarantee" in context
+            or "does not guarantee" in context
+        )
+        if warning_context:
+            continue
         excerpt = " ".join(text[max(0, match.start() - 100): match.end() + 160].split())
         violations.append(excerpt[:260])
     return violations

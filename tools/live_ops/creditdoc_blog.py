@@ -352,7 +352,7 @@ def normalize_blog_metadata(post):
 # ── Article Generation ──────────────────────────────────────────
 
 def openai_call(prompt, timeout_secs=240):
-    """Call the shared CreditDoc OpenAI text provider."""
+    """Compatibility wrapper around the shared CreditDoc OpenAI text provider."""
     try:
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
         from creditdoc_oauth import call_ai
@@ -548,6 +548,78 @@ RULES:
         return None
 
 
+def expand_short_article(post, article_meta, target_words=1700):
+    """Expand a valid but short article once, preserving the JSON shape."""
+    current_words = sum(len(s.get("content", "").split()) for s in post.get("sections", []))
+    prompt = f"""Expand this CreditDoc blog article to at least {target_words} words while preserving the same JSON structure.
+
+Topic: {article_meta.get("topic", post.get("title", ""))}
+Category: {article_meta.get("category", post.get("category", ""))}
+Current word count: {current_words}
+
+Rules:
+- Return ONLY valid JSON for the full article object.
+- Keep the existing title, slug, category, metadata, key_takeaways, tags, and FAQ unless they need minor clarity edits.
+- Expand section content with useful, specific explanation, examples, mistakes to avoid, and next steps.
+- Do NOT invent current provider prices, APRs, ratings, review counts, guarantees, or approval odds.
+- Keep anti-scam warnings, but do not claim guaranteed results or guaranteed approval.
+- Use evergreen financial education and federal law context only.
+
+Article JSON:
+{json.dumps(post)}
+"""
+    output = openai_call(prompt)
+    if not output:
+        return post
+
+    try:
+        expanded = json.loads(output)
+    except json.JSONDecodeError:
+        match = re.search(r"\{[\s\S]*\}", output)
+        if not match:
+            return post
+        try:
+            expanded = json.loads(match.group(0))
+        except json.JSONDecodeError:
+            return post
+
+    if not isinstance(expanded, dict) or not expanded.get("sections"):
+        return post
+
+    expanded.setdefault("slug", post.get("slug"))
+    expanded.setdefault("category", post.get("category"))
+    expanded.setdefault("category_label", post.get("category_label"))
+    expanded.setdefault("publish_date", post.get("publish_date"))
+    expanded.setdefault("status", post.get("status"))
+    expanded.setdefault("last_updated", post.get("last_updated"))
+    expanded.setdefault("related_guides", post.get("related_guides", []))
+    expanded.setdefault("related_categories", post.get("related_categories", []))
+    expanded.setdefault("tags", post.get("tags", []))
+    expanded = normalize_blog_metadata(expanded)
+
+    guardrail_failures = reject_if_unsafe(expanded)
+    if guardrail_failures:
+        print("  EXPAND REPAIR: CreditDoc guardrails failed; attempting content repair")
+        expanded, guardrail_failures = repair_unsafe_json(
+            expanded,
+            guardrail_failures,
+            content_type="expanded blog article",
+            source_context=(
+                f"Topic: {article_meta.get('topic', post.get('title', ''))}\n"
+                f"Category: {article_meta.get('category', post.get('category', ''))}\n"
+                "Use evergreen education only. Do not add current company prices, APRs, ratings, review counts, guarantees, or approval odds."
+            ),
+            max_tokens=8192,
+        )
+    if guardrail_failures:
+        print("  EXPAND REJECT: CreditDoc guardrails failed")
+        for failure in guardrail_failures[:5]:
+            print(f"    - {failure}")
+        return post
+
+    return expanded
+
+
 # ── Main ────────────────────────────────────────────────────────
 
 def main():
@@ -618,7 +690,10 @@ def main():
     generated = 0
     log = load_log()
 
-    for article_meta in pending[:args.count]:
+    max_attempts = min(len(pending), max(args.count * 4, args.count + 5))
+    for article_meta in pending[:max_attempts]:
+        if generated >= args.count:
+            break
         if "topic" not in article_meta and "title" in article_meta:
             article_meta["topic"] = article_meta["title"]
         slug = article_meta.get("slug") or slug_from_topic(article_meta["topic"])
@@ -644,11 +719,16 @@ def main():
         print(f"  Generated: {post['title']} ({total_words} words, {len(post['sections'])} sections)")
 
         if total_words < 1500:
-            print(f"  REJECT: Only {total_words} words — below CreditDoc blog quality floor")
-            article_meta["status"] = "failed_quality"
-            article_meta["failed_date"] = TODAY
-            article_meta["failure_reason"] = f"word_count_below_1500:{total_words}"
-            continue
+            print(f"  EXPAND: Only {total_words} words — requesting one expansion pass")
+            post = expand_short_article(post, article_meta)
+            total_words = sum(len(s.get("content", "").split()) for s in post["sections"])
+            print(f"  Expanded: {post['title']} ({total_words} words, {len(post['sections'])} sections)")
+            if total_words < 1500:
+                print(f"  REJECT: Only {total_words} words — below CreditDoc blog quality floor")
+                article_meta["status"] = "failed_quality"
+                article_meta["failed_date"] = TODAY
+                article_meta["failure_reason"] = f"word_count_below_1500:{total_words}"
+                continue
 
         # Add to blog posts
         existing_posts.append(post)
@@ -688,10 +768,12 @@ def main():
                 cwd=PROJECT_DIR, capture_output=True, timeout=30
             )
             if not args.no_deploy:
-                subprocess.run(
+                push = subprocess.run(
                     ["git", "push", "origin", "HEAD"],
-                    cwd=PROJECT_DIR, capture_output=True, timeout=60
+                    cwd=PROJECT_DIR, capture_output=True, text=True, timeout=120
                 )
+                if push.returncode != 0:
+                    raise RuntimeError(f"git push failed: {(push.stderr or push.stdout)[-500:]}")
                 print("Pushed to deploy.")
 
                 # IndexNow
