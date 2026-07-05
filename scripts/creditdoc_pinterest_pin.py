@@ -25,6 +25,7 @@ WHITE = "#ffffff"
 REGULAR = "/usr/share/fonts/truetype/lato/Lato-Regular.ttf"
 BOLD = "/usr/share/fonts/truetype/lato/Lato-Bold.ttf"
 HEAVY = "/usr/share/fonts/truetype/lato/Lato-Heavy.ttf"
+SERIF_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"
 
 
 def font(path, size):
@@ -212,32 +213,93 @@ def draw_briefing_pin(image, draw, args):
 
 
 def draw_checklist_pin(image, draw, args):
-    accent = [BLUE, GREEN, GOLD, CYAN][((args.variant or 0) // 4) % 4]
-    draw.rectangle((0, 0, WIDTH, HEIGHT), fill="#eef6ff")
-    draw.polygon([(0, 0), (1000, 0), (1000, 520), (0, 760)], fill=NAVY)
-    draw.polygon([(720, 0), (1000, 0), (1000, 430), (650, 515)], fill=accent)
-    paste_logo(image, 72, 58, 250, WHITE)
+    accent = [GREEN, GOLD, BLUE, CYAN][((args.variant or 0) // 4) % 4]
+    draw.rectangle((0, 0, WIDTH, HEIGHT), fill="#f4f8f3")
+    draw.polygon([(0, 0), (1000, 0), (1000, 355), (0, 510)], fill="#0f2f46")
+    draw.polygon([(0, 1010), (1000, 880), (1000, 1500), (0, 1500)], fill="#12324d")
+    draw.ellipse((690, 92, 1115, 517), fill="#0f766e")
+    draw.ellipse((-120, 720, 220, 1060), fill="#dbeafe")
 
-    draw.rounded_rectangle((70, 190, 285, 250), radius=30, fill=WHITE)
-    draw.text((112, 207), f"FREE {args.kind.upper().split()[0]}", font=font(BOLD, 22), fill=accent)
-    draw_wrapped(draw, args.title, (70, 315), font(HEAVY, 56), WHITE, 700, line_gap=3, max_lines=3)
+    paste_logo(image, 64, 34, 278, WHITE)
+    draw.rounded_rectangle((700, 48, 920, 102), radius=22, fill=WHITE)
+    draw.text((731, 63), "FREE SBA TOOL", font=font(BOLD, 21), fill=GREEN)
 
-    draw.rounded_rectangle((70, 635, 930, 1258), radius=44, fill=WHITE, outline="#c7d8eb", width=3)
-    draw.text((118, 700), "What to check first", font=font(HEAVY, 42), fill=NAVY)
-    draw_wrapped(draw, args.summary, (120, 770), font(REGULAR, 27), MUTED, 735, line_gap=7, max_lines=3)
+    draw.text((70, 156), "SBA loan", font=font(SERIF_BOLD, 82), fill=WHITE)
+    draw.text((70, 248), "reality check", font=font(SERIF_BOLD, 82), fill="#bbf7d0")
+    draw.rounded_rectangle((62, 358, 675, 455), radius=24, fill="#143b58")
+    draw_wrapped(
+        draw,
+        "Payment, fees, and term can change the deal. Check the numbers before you compare offers.",
+        (88, 376),
+        font(REGULAR, 25),
+        "#dbeafe",
+        545,
+        line_gap=6,
+        max_lines=2,
+    )
 
-    cases = [item.strip() for item in args.use_cases.split("|") if item.strip()][:4]
-    y = 910
-    for idx, label in enumerate(cases):
-        color = [BLUE, GREEN, GOLD, CYAN][idx]
-        draw.ellipse((120, y, 174, y + 54), fill="#eaf2ff")
-        draw.line((136, y + 31, 149, y + 43, 163, y + 14), fill=color, width=6)
-        draw_wrapped(draw, label, (200, y + 2), font(BOLD, 29), INK, 610, line_gap=2, max_lines=2)
-        y += 78
+    def pasted_note(x, y, width, height, angle, bg, number, title, body):
+        note = Image.new("RGBA", (width + 34, height + 34), (0, 0, 0, 0))
+        nd = ImageDraw.Draw(note)
+        nd.rounded_rectangle((17, 17, width + 17, height + 17), radius=24, fill=bg, outline="#b7c9d8", width=2)
+        nd.ellipse((42, 42, 94, 94), fill=accent if number == "1" else [BLUE, GOLD, GREEN][int(number) - 2])
+        nd.text((60, 53), number, font=font(HEAVY, 25), fill=WHITE)
+        nd.text((112, 43), title, font=font(HEAVY, 28), fill=NAVY)
+        draw_wrapped(nd, body, (42, 120), font(REGULAR, 24), INK, width - 72, line_gap=5, max_lines=3)
+        rotated = note.rotate(angle, expand=True, resample=Image.Resampling.BICUBIC)
+        image.paste(rotated, (x, y), rotated)
 
-    draw.rounded_rectangle((100, 1320, 900, 1398), radius=32, fill=accent)
-    draw.text((235, 1339), "Open it on CreditDoc", font=font(HEAVY, 34), fill=WHITE)
-    draw.text((142, 1448), compact_url(args.url), font=font(BOLD, 26), fill=NAVY)
+    pasted_note(
+        72,
+        565,
+        400,
+        255,
+        -5,
+        "#ffffff",
+        "1",
+        "Payment",
+        "Estimate the monthly repayment before the lender offer feels urgent.",
+    )
+    pasted_note(
+        520,
+        535,
+        390,
+        245,
+        4,
+        "#fff7ed",
+        "2",
+        "Fees",
+        "Add SBA fee assumptions so the real cost is not hidden at closing.",
+    )
+    pasted_note(
+        112,
+        835,
+        430,
+        250,
+        3,
+        "#eff6ff",
+        "3",
+        "Cash flow",
+        "Check whether the payment still leaves room to operate the business.",
+    )
+
+    draw.rounded_rectangle((598, 820, 910, 1088), radius=36, fill=WHITE, outline="#b7cfe5", width=3)
+    draw.text((640, 858), "Example result", font=font(BOLD, 24), fill=MUTED)
+    draw.text((640, 906), "$4,821", font=font(HEAVY, 58), fill=NAVY)
+    draw.text((820, 939), "/mo", font=font(BOLD, 24), fill=MUTED)
+    draw.line((640, 1004, 868, 1004), fill="#dbeafe", width=16)
+    draw.line((640, 1004, 800, 1004), fill=BLUE, width=16)
+    draw.text((640, 1036), "payment + fees + term", font=font(BOLD, 19), fill=NAVY)
+
+    draw.text((72, 1160), "Try the calculator before you commit.", font=font(HEAVY, 42), fill=WHITE)
+    bottom_copy = (
+        "Enter amount, rate, term, and SBA fee assumptions. CreditDoc gives you "
+        "a clearer repayment picture before you compare lender offers."
+    )
+    draw_wrapped(draw, bottom_copy, (76, 1230), font(REGULAR, 28), "#dbeafe", 790, line_gap=7, max_lines=3)
+    paste_logo(image, 76, 1344, 210, WHITE)
+    draw.rounded_rectangle((342, 1354, 900, 1410), radius=24, fill="#e7f8f2")
+    draw.text((388, 1369), compact_url(args.url), font=font(BOLD, 22), fill=NAVY)
 
 
 def draw_focus_pin(image, draw, args):
