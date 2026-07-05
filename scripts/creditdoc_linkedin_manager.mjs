@@ -15,6 +15,8 @@ const PINTEREST_LOG_FILE = `${ROOT}/logs/creditdoc_pinterest_blotato_posts.jsonl
 const DEFAULT_VERSION = '202606';
 const WEEKLY_CAP = 2;
 const PINTEREST_INTERVAL_DAYS = 3;
+const PINTEREST_TARGET_REPEAT_BLOCK_DAYS = 90;
+const CROSS_CHANNEL_TARGET_REPEAT_BLOCK_DAYS = 30;
 const DEFAULT_REDIRECT_URI = 'https://www.creditdoc.co/linkedin-oauth-callback/';
 const DEFAULT_SCOPES = ['w_organization_social', 'r_organization_social'];
 const FILE_ENV = loadEnv();
@@ -343,6 +345,94 @@ function appendJsonl(file, payload) {
   fs.appendFileSync(file, `${JSON.stringify(payload)}\n`);
 }
 
+function readJsonl(file) {
+  if (!fs.existsSync(file)) return [];
+  return fs.readFileSync(file, 'utf8')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      try {
+        return JSON.parse(line);
+      } catch {
+        return null;
+      }
+    })
+    .filter(Boolean);
+}
+
+function isSuccessfulPinterestRecord(record) {
+  if (!record || !record.ok) return false;
+  const payload = record.payload && typeof record.payload === 'object' ? record.payload : {};
+  const raw = typeof payload.raw === 'string' ? payload.raw.toLowerCase() : '';
+  if (raw.includes('error')) return false;
+  return Boolean(payload.publicUrl || payload.postSubmissionId || payload.status === 'published' || payload.statusCode === 200);
+}
+
+function successfulPinterestRecords(state = loadPinterestState()) {
+  const records = [];
+  for (const record of Array.isArray(state.published) ? state.published : []) {
+    const result = record.blotato_result || {};
+    if (!result.ok) continue;
+    records.push({
+      id: record.id,
+      target_url: record.target_url,
+      created_at: record.published_at,
+      public_url: result.payload?.publicUrl || null,
+      source: 'state',
+    });
+  }
+  for (const record of readJsonl(PINTEREST_LOG_FILE)) {
+    if (!isSuccessfulPinterestRecord(record)) continue;
+    records.push({
+      id: record.id,
+      target_url: record.target_url,
+      created_at: record.created_at,
+      public_url: record.payload?.publicUrl || null,
+      source: 'jsonl',
+    });
+  }
+  return records.filter((record) => record.target_url && record.created_at);
+}
+
+function recentPinterestDuplicate(targetUrl, nowDate = today(), state = loadPinterestState()) {
+  const matches = successfulPinterestRecords(state)
+    .filter((record) => record.target_url === targetUrl)
+    .map((record) => ({
+      ...record,
+      date: String(record.created_at).slice(0, 10),
+    }))
+    .filter((record) => record.date && daysBetween(record.date, nowDate) >= 0)
+    .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+  const latest = matches[0] || null;
+  if (!latest) return null;
+  const ageDays = daysBetween(latest.date, nowDate);
+  if (ageDays >= PINTEREST_TARGET_REPEAT_BLOCK_DAYS) return null;
+  return { ...latest, age_days: ageDays, block_days: PINTEREST_TARGET_REPEAT_BLOCK_DAYS };
+}
+
+function recentPublishedTargets(nowDate = today(), blockDays = CROSS_CHANNEL_TARGET_REPEAT_BLOCK_DAYS) {
+  const targets = new Map();
+  const add = (targetUrl, createdAt, source, id) => {
+    if (!targetUrl || !createdAt) return;
+    const date = String(createdAt).slice(0, 10);
+    const ageDays = daysBetween(date, nowDate);
+    if (ageDays < 0 || ageDays >= blockDays) return;
+    const current = targets.get(targetUrl);
+    if (!current || String(createdAt) > String(current.created_at)) {
+      targets.set(targetUrl, { target_url: targetUrl, created_at: createdAt, date, age_days: ageDays, source, id });
+    }
+  };
+  const linkedinState = loadState();
+  for (const record of Array.isArray(linkedinState.published) ? linkedinState.published : []) {
+    add(record.target_url, record.published_at, 'linkedin-state', record.id);
+  }
+  for (const record of successfulPinterestRecords()) {
+    add(record.target_url, record.created_at, `pinterest-${record.source}`, record.id);
+  }
+  return targets;
+}
+
 function today(dateArg) {
   return dateArg || new Date().toISOString().slice(0, 10);
 }
@@ -571,14 +661,18 @@ function campaignFamily(campaign) {
   return 'tool';
 }
 
-function pickCampaignByFamily(family, seed, usedSlugs) {
+function pickCampaignByFamily(family, seed, usedSlugs, usedTargets = new Set()) {
   const pool = CAMPAIGNS.filter((campaign) => campaignFamily(campaign) === family);
   if (pool.length === 0) return null;
   for (let offset = 0; offset < pool.length; offset += 1) {
     const campaign = pool[(seed + offset) % pool.length];
+    if (!usedSlugs.has(campaign.slug) && !usedTargets.has(campaign.url)) return campaign;
+  }
+  for (let offset = 0; offset < pool.length; offset += 1) {
+    const campaign = pool[(seed + offset) % pool.length];
     if (!usedSlugs.has(campaign.slug)) return campaign;
   }
-  return pool[seed % pool.length];
+  return null;
 }
 
 function pickCampaignsForWeek(base, queue) {
@@ -591,11 +685,13 @@ function pickCampaignsForWeek(base, queue) {
   ];
   const pattern = patterns[(weekSeed - 1) % patterns.length];
   const usedSlugs = new Set(queue.drafts.map((draft) => draft.campaign_slug));
+  const usedTargets = new Set(recentPublishedTargets(base).keys());
   const picks = [];
   for (const family of pattern) {
-    const campaign = pickCampaignByFamily(family, weekSeed + picks.length, usedSlugs);
+    const campaign = pickCampaignByFamily(family, weekSeed + picks.length, usedSlugs, usedTargets);
     if (!campaign) continue;
     usedSlugs.add(campaign.slug);
+    usedTargets.add(campaign.url);
     picks.push(campaign);
   }
   return picks;
@@ -633,6 +729,17 @@ function buildPinterestDraft(campaign, scheduledDate) {
   };
 }
 
+function pickPinterestCampaign(state, nowDate) {
+  const start = Number(state.next_campaign_index || 0);
+  const usedTargets = new Set(recentPublishedTargets(nowDate).keys());
+  for (let offset = 0; offset < CAMPAIGNS.length; offset += 1) {
+    const index = (start + offset) % CAMPAIGNS.length;
+    const campaign = CAMPAIGNS[index];
+    if (!usedTargets.has(campaign.url)) return { campaign, index, skipped_recent: offset };
+  }
+  return { campaign: null, index: start, skipped_recent: CAMPAIGNS.length };
+}
+
 function refreshDraftFromCampaign(draft, campaign, slot) {
   if (draft.status === 'published') return false;
   draft.title = campaign.title;
@@ -642,11 +749,11 @@ function refreshDraftFromCampaign(draft, campaign, slot) {
   return true;
 }
 
-function draftWeek(dateArg) {
+function draftWeek(dateArg, options = {}) {
   const base = today(dateArg);
   const tuesday = sameWeekday(base, 2);
   const friday = sameWeekday(base, 5);
-  const queue = loadQueue();
+  const queue = options.queue || loadQueue();
   const keys = existingDraftKeys(queue);
 
   const weekCampaigns = pickCampaignsForWeek(base, queue);
@@ -680,13 +787,15 @@ function draftWeek(dateArg) {
     }
   }
   queue.drafts.sort((a, b) => `${a.scheduled_date}:${a.id}`.localeCompare(`${b.scheduled_date}:${b.id}`));
-  saveQueue(queue);
-  console.log(JSON.stringify({ ok: true, added, refreshed, queue_file: QUEUE_FILE }, null, 2));
+  if (!options.dryRun) saveQueue(queue);
+  const result = { ok: true, added, refreshed, queue_file: QUEUE_FILE };
+  if (!options.silent) console.log(JSON.stringify(result, null, 2));
+  return result;
 }
 
-function approveDueResourceDrafts(dateArg) {
+function approveDueResourceDrafts(dateArg, options = {}) {
   const nowDate = today(dateArg);
-  const queue = loadQueue();
+  const queue = options.queue || loadQueue();
   const eligibleSlugs = new Set(CAMPAIGNS.map((campaign) => campaign.slug));
   const approved = [];
   for (const draft of queue.drafts) {
@@ -697,7 +806,7 @@ function approveDueResourceDrafts(dateArg) {
     draft.approved_at = new Date().toISOString();
     approved.push(draft.id);
   }
-  if (approved.length > 0) saveQueue(queue);
+  if (approved.length > 0 && !options.dryRun) saveQueue(queue);
   return approved;
 }
 
@@ -990,7 +1099,25 @@ async function uploadLinkedInImage(env, imagePath) {
   return imageUrn;
 }
 
-async function publishPinterestViaBlotato(draft, imagePath) {
+async function publishPinterestViaBlotato(draft, imagePath, options = {}) {
+  const nowDate = options.date || today();
+  const duplicate = recentPinterestDuplicate(draft.target_url, nowDate);
+  if (duplicate && !options.allowDuplicate) {
+    const skipped = {
+      ok: false,
+      skipped: 'duplicate target_url blocked',
+      target_url: draft.target_url,
+      duplicate,
+      account_id: BLOTATO_PINTEREST_ACCOUNT_ID,
+      board_id: BLOTATO_PINTEREST_BOARD_ID || null,
+    };
+    appendJsonl(PINTEREST_LOG_FILE, {
+      ...skipped,
+      id: draft.id,
+      created_at: new Date().toISOString(),
+    });
+    return skipped;
+  }
   if (!BLOTATO_PINTEREST_BOARD_ID) {
     const skipped = {
       ok: false,
@@ -1091,8 +1218,8 @@ async function createLinkedInPost(env, draft) {
 
 async function publishApproved(dryRun, options = {}) {
   const env = loadEnv();
-  const queue = loadQueue();
-  const state = loadState();
+  const queue = options.queue || loadQueue();
+  const state = options.state || loadState();
   const nowDate = today(options.dateArg);
   const week = isoWeek(nowDate);
   const used = postsThisWeek(state, week);
@@ -1112,26 +1239,11 @@ async function publishApproved(dryRun, options = {}) {
     let postUrn = null;
     let imagePath = draft.image_path || null;
     let imageUrn = draft.linkedin_image_urn || null;
-    let pinterest = null;
     if (!dryRun) postUrn = await createLinkedInPost(env, draft);
     if (!dryRun && postUrn && typeof postUrn === 'object') {
       imagePath = postUrn.imagePath;
       imageUrn = postUrn.imageUrn;
       postUrn = postUrn.postUrn;
-    }
-    if (!dryRun && imagePath) {
-      try {
-        pinterest = await publishPinterestViaBlotato(draft, imagePath);
-      } catch (error) {
-        pinterest = { ok: false, error: error.message || String(error) };
-        appendJsonl(PINTEREST_LOG_FILE, {
-          ...pinterest,
-          id: draft.id,
-          target_url: draft.target_url,
-          created_at: new Date().toISOString(),
-        });
-      }
-      draft.pinterest_blotato_result = pinterest;
     }
     draft.status = dryRun ? 'approved' : 'published';
     draft.published_at = dryRun ? null : new Date().toISOString();
@@ -1145,7 +1257,7 @@ async function publishApproved(dryRun, options = {}) {
         linkedin_post_urn: postUrn,
         linkedin_image_urn: imageUrn,
         image_path: imagePath,
-        pinterest_blotato_result: pinterest,
+        pinterest_blotato_result: null,
       };
       state.published.push(record);
       appendJsonl(LOG_FILE, record);
@@ -1156,7 +1268,7 @@ async function publishApproved(dryRun, options = {}) {
       linkedin_post_urn: postUrn,
       linkedin_image_urn: imageUrn,
       image_path: imagePath,
-      pinterest_blotato_result: pinterest,
+      pinterest_blotato_result: null,
     });
   }
   if (!dryRun) {
@@ -1171,14 +1283,17 @@ async function publishApproved(dryRun, options = {}) {
 async function runScheduledResources(args) {
   const dryRun = args.includes('--dry-run');
   const dateArg = args.includes('--date') ? args[args.indexOf('--date') + 1] : args.find((arg) => arg.startsWith('--date='))?.slice(7);
-  if (!dryRun) draftWeek(dateArg);
-  const approved = dryRun ? [] : approveDueResourceDrafts(dateArg);
-  const publishResult = await publishApproved(dryRun, { dateArg, limit: 1 });
+  const queue = loadQueue();
+  const state = loadState();
+  const draftResult = draftWeek(dateArg, { queue, dryRun, silent: true });
+  const approved = approveDueResourceDrafts(dateArg, { queue, dryRun });
+  const publishResult = await publishApproved(dryRun, { dateArg, limit: 1, queue, state });
   console.log(JSON.stringify({
     ok: true,
     command: 'run-scheduled-resources',
     date: today(dateArg),
     dry_run: dryRun,
+    draft_result: draftResult,
     auto_approved: approved,
     publish_result: publishResult,
   }, null, 2));
@@ -1206,8 +1321,19 @@ async function runScheduledPinterest(args) {
     return;
   }
 
-  const index = Number(state.next_campaign_index || 0);
-  const campaign = CAMPAIGNS[index % CAMPAIGNS.length];
+  const { campaign, index, skipped_recent: skippedRecent } = pickPinterestCampaign(state, nowDate);
+  if (!campaign) {
+    console.log(JSON.stringify({
+      ok: true,
+      command: 'run-scheduled-pinterest',
+      dry_run: dryRun,
+      date: nowDate,
+      published: null,
+      skipped: 'no non-duplicate campaign available inside repeat block',
+      block_days: CROSS_CHANNEL_TARGET_REPEAT_BLOCK_DAYS,
+    }, null, 2));
+    return;
+  }
   const draft = buildPinterestDraft(campaign, nowDate);
   const pinPath = renderPinterestPinForDraft(draft);
   const description = makePinterestDescription(draft);
@@ -1220,6 +1346,7 @@ async function runScheduledPinterest(args) {
       date: nowDate,
       due: true,
       next_campaign_index: index,
+      skipped_recent_targets: skippedRecent,
       draft: {
         id: draft.id,
         title: draft.title,
