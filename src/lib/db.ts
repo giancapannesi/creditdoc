@@ -45,6 +45,37 @@ export interface RuntimeLenderEnv {
 const CATALOG_COLUMNS =
   "slug,name,category,state,brand_slug,has_logo,seo_tier,updated_at,processing_status";
 
+function runtimeFetchHeaders(env: RuntimeLenderEnv): HeadersInit {
+  return {
+    apikey: env.SUPABASE_ANON_KEY!,
+    authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
+    accept: "application/json",
+  };
+}
+
+async function safeRuntimeJson<T>(
+  url: string,
+  env: RuntimeLenderEnv | undefined,
+  fallback: T,
+  timeoutMs = 2500,
+  extraHeaders: HeadersInit = {}
+): Promise<T> {
+  if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return fallback;
+  try {
+    const res = await fetch(url, {
+      headers: {
+        ...runtimeFetchHeaders(env),
+        ...extraHeaders,
+      },
+      signal: AbortSignal.timeout(timeoutMs),
+    });
+    if (!res.ok) return fallback;
+    return (await res.json()) as T;
+  } catch {
+    return fallback;
+  }
+}
+
 /**
  * Read-only lookup of one lender by slug.
  * Returns null on not-found OR if the runtime env isn't wired (build/preview).
@@ -69,16 +100,7 @@ export async function getLenderBySlugRuntime(
     `&processing_status=eq.ready_for_index` +
     `&limit=1`;
 
-  const res = await fetch(url, {
-    headers: {
-      apikey: env.SUPABASE_ANON_KEY,
-      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
-      accept: "application/json",
-    },
-    signal: AbortSignal.timeout(2500),
-  });
-  if (!res.ok) return null;
-  const rows = (await res.json()) as RuntimeLender[];
+  const rows = await safeRuntimeJson<RuntimeLender[]>(url, env, []);
   return rows[0] ?? null;
 }
 
@@ -103,16 +125,7 @@ export async function getLenderWithBodyBySlugRuntime(
     `&select=${FULL_COLUMNS}` +
     `&processing_status=in.(ready_for_index,pending_approval)` +
     `&limit=1`;
-  const res = await fetch(url, {
-    headers: {
-      apikey: env.SUPABASE_ANON_KEY,
-      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
-      accept: "application/json",
-    },
-    signal: AbortSignal.timeout(2500),
-  });
-  if (!res.ok) return null;
-  const rows = (await res.json()) as RuntimeLenderWithBody[];
+  const rows = await safeRuntimeJson<RuntimeLenderWithBody[]>(url, env, []);
   return rows[0] ?? null;
 }
 
@@ -140,16 +153,7 @@ export async function getRelatedLendersByCategoryRuntime(
     `&select=${CATALOG_COLUMNS}` +
     `&order=updated_at.desc` +
     `&limit=${limit}`;
-  const res = await fetch(url, {
-    headers: {
-      apikey: env.SUPABASE_ANON_KEY,
-      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
-      accept: "application/json",
-    },
-    signal: AbortSignal.timeout(2500),
-  });
-  if (!res.ok) return [];
-  return (await res.json()) as RuntimeLender[];
+  return safeRuntimeJson<RuntimeLender[]>(url, env, []);
 }
 
 /**
@@ -179,16 +183,7 @@ export async function getLendersByBrandRuntime(
     `&select=${FULL_COLUMNS}` +
     `&order=state.asc,name.asc` +
     `&limit=500`;
-  const res = await fetch(url, {
-    headers: {
-      apikey: env.SUPABASE_ANON_KEY,
-      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
-      accept: "application/json",
-    },
-    signal: AbortSignal.timeout(4000),
-  });
-  if (!res.ok) return [];
-  return (await res.json()) as RuntimeLenderWithBody[];
+  return safeRuntimeJson<RuntimeLenderWithBody[]>(url, env, [], 4000);
 }
 
 /**
@@ -213,22 +208,24 @@ export async function getTopLendersByCategoryRuntime(
     `&select=${FULL_COLUMNS}` +
     `&order=rating.desc.nullslast,updated_at.desc` +
     `&limit=${limit}`;
-  const res = await fetch(url, {
-    headers: {
-      apikey: env.SUPABASE_ANON_KEY,
-      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
-      accept: "application/json",
-      prefer: "count=exact",
-    },
-    signal: AbortSignal.timeout(4000),
-  });
-  if (!res.ok) return [];
-  const rows = (await res.json()) as RuntimeLenderWithBody[];
-  // Stash count from Content-Range header onto first row (caller can pull off [0]).
-  const range = res.headers.get("content-range") || "";
-  const total = range.includes("/") ? parseInt(range.split("/")[1] || "0", 10) : rows.length;
-  if (rows.length > 0) (rows[0] as any).__total_count__ = total;
-  return rows;
+  try {
+    const res = await fetch(url, {
+      headers: {
+        ...runtimeFetchHeaders(env),
+        prefer: "count=exact",
+      },
+      signal: AbortSignal.timeout(4000),
+    });
+    if (!res.ok) return [];
+    const rows = (await res.json()) as RuntimeLenderWithBody[];
+    // Stash count from Content-Range header onto first row (caller can pull off [0]).
+    const range = res.headers.get("content-range") || "";
+    const total = range.includes("/") ? parseInt(range.split("/")[1] || "0", 10) : rows.length;
+    if (rows.length > 0) (rows[0] as any).__total_count__ = total;
+    return rows;
+  } catch {
+    return [];
+  }
 }
 
 export async function getCategoryCountRuntime(
@@ -243,18 +240,20 @@ export async function getCategoryCountRuntime(
     `&processing_status=eq.ready_for_index` +
     `&select=slug` +
     `&limit=1`;
-  const res = await fetch(url, {
-    headers: {
-      apikey: env.SUPABASE_ANON_KEY,
-      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
-      accept: "application/json",
-      prefer: "count=exact",
-    },
-    signal: AbortSignal.timeout(2500),
-  });
-  if (!res.ok) return 0;
-  const range = res.headers.get("content-range") || "";
-  return range.includes("/") ? parseInt(range.split("/")[1] || "0", 10) : 0;
+  try {
+    const res = await fetch(url, {
+      headers: {
+        ...runtimeFetchHeaders(env),
+        prefer: "count=exact",
+      },
+      signal: AbortSignal.timeout(2500),
+    });
+    if (!res.ok) return 0;
+    const range = res.headers.get("content-range") || "";
+    return range.includes("/") ? parseInt(range.split("/")[1] || "0", 10) : 0;
+  } catch {
+    return 0;
+  }
 }
 
 export async function getLendersBySlugListRuntime(
@@ -273,16 +272,7 @@ export async function getLendersBySlugListRuntime(
     `&processing_status=eq.ready_for_index` +
     `&select=${FULL_COLUMNS}` +
     `&limit=${slugs.length}`;
-  const res = await fetch(url, {
-    headers: {
-      apikey: env.SUPABASE_ANON_KEY,
-      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
-      accept: "application/json",
-    },
-    signal: AbortSignal.timeout(2500),
-  });
-  if (!res.ok) return [];
-  const rows = (await res.json()) as RuntimeLenderWithBody[];
+  const rows = await safeRuntimeJson<RuntimeLenderWithBody[]>(url, env, []);
   return rows.filter((r) => {
     const raw = (r as { body_inline?: { rating?: unknown } })?.body_inline?.rating;
     const n = typeof raw === "number" ? raw : Number(raw);
@@ -311,16 +301,7 @@ async function _restGet<T>(
   env: RuntimeLenderEnv | undefined
 ): Promise<T[] | null> {
   if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) return null;
-  const res = await fetch(url, {
-    headers: {
-      apikey: env.SUPABASE_ANON_KEY,
-      authorization: `Bearer ${env.SUPABASE_ANON_KEY}`,
-      accept: "application/json",
-    },
-    signal: AbortSignal.timeout(2500),
-  });
-  if (!res.ok) return null;
-  return (await res.json()) as T[];
+  return safeRuntimeJson<T[] | null>(url, env, null);
 }
 
 export interface RuntimeWellnessGuide {

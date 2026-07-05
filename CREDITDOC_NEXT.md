@@ -1,5 +1,14 @@
 # CreditDoc — NEXT ACTIONS (updated 2026-07-03)
 
+## 2026-07-05 - Next: remove remaining crawler dependence on dynamic Astro SSR
+
+Follow-up from the SE Ranking 5XX audit:
+- Treat `/review/`, `/categories/`, `/state/[slug]/`, `/brand/`, and `/credit-guide/[slug]/...` as the remaining dynamic SEO risk because they are sitemap-listed SSR routes.
+- Prioritize staticizing or snapshotting the highest-value money/category/local pages first, rather than changing already-static tools, answers, blogs, wellness, courses, city, browse, comparison, trend, or resource pages.
+- If full staticization is too large for one pass, add stale-cache fallback behavior for SSR routes so a version-probe or Supabase timeout can serve the last good cached HTML instead of forcing a fresh render.
+- Expand the route self-healer beyond 10 sample URLs to include representative SE Ranking URLs from review/category/credit-guide route families, using a crawler-style user agent and enough concurrency to catch cold-cache/runtime failures.
+- Keep the daily SE audit comparison focused on whether 5XX count drops from the July 5 baseline of 671 and sitemap 5XX/noindex drops from 27.
+
 ## Active 2026-07-03 — SE Ranking Cleanup Verification
 
 Latest completed:

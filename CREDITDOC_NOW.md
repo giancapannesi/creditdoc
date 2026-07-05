@@ -5213,6 +5213,32 @@ Targeted live checks:
 Independent debug agent result:
 - Initial deploy review found one Medium non-blocking issue: toolkit was not linked from the resources hub/footer.
 - Fixed with a hub card in src/pages/resources/index.astro and footer link in src/layouts/BaseLayout.astro.
+## 2026-07-05 - CreditDoc SE Ranking 5XX diagnosis and runtime hardening
+
+Investigated the SE Ranking audit at `SEO/audit_creditdoc.co_2026-07-05_13-36-15.pdf`.
+
+Findings:
+- The audit reported 671 URLs with 5XX, including review, category, and credit-guide category URLs.
+- Spot checks and a 160-URL SEBot-style probe returned current 200s, so these are not permanently broken URLs.
+- The affected URL families are dynamic Astro SSR routes listed in the sitemap, especially `/review/[slug]/`, `/categories/[category]/`, and `/credit-guide/[slug]/[category]/`.
+- Static tools, answers, blog, wellness, course, city, browse, comparison, trend, and resource pages were confirmed by `npm run build` to prerender as real HTML in `dist/`.
+- The immediate failure mode was uncaught `fetch(... AbortSignal.timeout(...))` calls in `src/lib/db.ts`. During crawler bursts or cold-cache requests, Supabase/PostgREST timeouts could throw through Astro SSR and produce Worker 5XX, then later look fine once cached or under lighter load.
+
+Fix applied:
+- Added safe runtime JSON fetch handling in `src/lib/db.ts`.
+- Runtime Supabase network/timeouts now degrade to `null` or `[]` instead of throwing into page render for the shared DB data layer.
+- Category count/top-lender fetches now catch timeout/network exceptions as well.
+
+Verification:
+- `npm run build` passed on 2026-07-05.
+- Prebuild checks passed: content text integrity, robots contract, SSR sitemap parity.
+- Postbuild checks passed: sitemap/robots conflicts, critical sitemap URLs, feed contract, image alt contract, image filename contract.
+- Build output explicitly generated static HTML for `/answers/`, `/blog/`, `/financial-wellness/`, `/courses/`, `/tools/`, `/city/`, `/browse/`, `/compare/`, `/trends/`, and resources.
+
+Remaining structural SEO risk:
+- `/review/`, `/categories/`, `/state/[slug]/`, `/brand/`, and `/credit-guide/[slug]/...` still depend on Astro SSR + Supabase at request time.
+- The durable fix is to staticize the highest-value sitemap-listed SSR families or add stale-cache fallback behavior so crawlers never depend on live DB reads for critical SEO pages.
+
 - Final debug pass confirmed the finding was resolved and no deploy blockers remained.
 
 Standing next step: review the live page manually, then consider adding contextual links from relevant answer/category pages and submitting the new resource URLs for priority indexing.
