@@ -130,6 +130,18 @@ export default defineConfig({
         exclude: [
           { pattern: '/sitemap-index.xml' },
           { pattern: '/sitemap-*.xml' },
+          // SEO content that is prerendered into real HTML should bypass the
+          // Worker route table entirely.
+          { pattern: '/answers' },
+          { pattern: '/answers/*' },
+          { pattern: '/blog' },
+          { pattern: '/blog/*' },
+          { pattern: '/tools' },
+          { pattern: '/tools/*' },
+          { pattern: '/financial-wellness' },
+          { pattern: '/financial-wellness/*' },
+          { pattern: '/courses' },
+          { pattern: '/courses/*' },
         ],
       },
     },

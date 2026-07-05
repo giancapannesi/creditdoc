@@ -5371,3 +5371,45 @@ Deployment completed:
 Note: Cloudflare served these URLs as static assets directly, so the custom
 middleware header was not present live. That is acceptable because the responses
 had the committed static marker and no `x-cdm-cache`/`x-cdm-route` SSR headers.
+
+## 2026-07-05 - Static SEO surface debugger audit and route hardening
+
+Debugger agent Godel audited the requested static SEO surfaces:
+answers/questions, blogs, tools, financial wellness, and courses.
+
+Confirmed static HTML counts in `dist`:
+- `answers`: 492 HTML files, including 491 leaf pages plus index.
+- `blog`: 106 HTML files, including 105 leaf pages plus index.
+- `tools`: 19 HTML files, including 18 tool pages plus index.
+- `financial-wellness`: 140 HTML files, including 139 leaf pages plus index.
+- `courses`: 10 HTML files, including course root/module pages.
+
+Source checks:
+- Dynamic routes use `getStaticPaths()`.
+- `astro.config.mjs` keeps `output: 'static'`.
+- No `export const prerender = false` exists under the requested route
+  directories.
+
+Issue found and fixed:
+- The generated `_routes.json` previously had `include: ["/*"]` with no broad
+  excludes for `/answers`, `/blog`, `/tools`, `/financial-wellness`, or
+  `/courses`, so those static SEO families were Worker-eligible.
+- Added exact and wildcard Cloudflare route excludes for all five families in
+  `astro.config.mjs`.
+
+Verification:
+- `npm run build` passed, including prebuild and postbuild contracts.
+- Local audit across all 767 requested HTML files passed for title, meta
+  description, canonical, H1, and no `noindex`.
+- Generated `_routes.json` now includes excludes for `/answers`, `/answers/*`,
+  `/blog`, `/blog/*`, `/tools`, `/tools/*`, `/financial-wellness`,
+  `/financial-wellness/*`, `/courses`, and `/courses/*`.
+- Deployed to Cloudflare Workers; Version ID:
+  `d2cb8be0-ae1f-498f-bb43-a599dd8dfca2`.
+- Full live sweep passed: 767 URLs checked, 767 HTTP 200, 767
+  `cf-cache-status: HIT`, 0 `x-cdm-cache`/`x-cdm-route` SSR headers, and 0
+  `noindex`.
+
+Rule going forward: answers/questions, blogs, tools, financial wellness, and
+courses are important SEO surfaces and should stay static HTML plus excluded
+from Worker routing unless the user explicitly approves a change.

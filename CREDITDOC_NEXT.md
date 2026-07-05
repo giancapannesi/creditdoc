@@ -1304,34 +1304,29 @@ Before deploying the CreditDoc lender category/outbound tracking fix set:
 - live-check /review/upstart/, /best/best-personal-loans-bad-credit/, a representative /compare/ URL, robots.txt, and one /go/upstart/?source=smoke redirect response;
 - after deploy, monitor outbound click behavior and GSC/indexing impact over the normal crawl window.
 
-## 2026-07-05 - Next: deploy and expand SE Ranking staticization
+## 2026-07-05 - Next: expand staticization after debugger-confirmed SEO surface hardening
 
-Current completed local work:
-- Exact SE Ranking 5XX snapshot set generated from
-  `/tmp/creditdoc-se-ranking-audit.txt`.
-- 124 committed static snapshots prepared under `public/`:
-  97 `/review/`, 26 `/credit-guide/<city>/<category>/`, and
-  1 `/categories/credit-unions/`.
-- Middleware static bypass prepared for exact trailing-slash manifest paths only.
-- Build and focused snapshot checks passed after debugger-agent review.
+Completed today:
+- SE Ranking 5XX static snapshot remediation was committed, pushed, deployed,
+  cache-purged, and live-verified for all 124 extracted report URLs.
+- Debugger agent Godel audited answers/questions, blogs, tools, financial
+  wellness, and courses.
+- Those five SEO families are confirmed as static HTML in `dist` and live:
+  767 URLs checked, 767 HTTP 200, 767 Cloudflare HIT, 0 `x-cdm-cache`/
+  `x-cdm-route` headers, and 0 `noindex`.
+- `astro.config.mjs` now explicitly excludes `/answers`, `/blog`, `/tools`,
+  `/financial-wellness`, and `/courses` from Worker routing with exact and
+  wildcard Cloudflare route patterns.
+- Deployed route hardening version:
+  `d2cb8be0-ae1f-498f-bb43-a599dd8dfca2`.
 
-Immediate next steps:
-- Commit and push the static snapshot remediation.
-- Deploy to Cloudflare Workers via `./deploy.sh`.
-- Purge the 124 URLs from Cloudflare cache using the manifest.
-- Live-check representative URLs:
-  `/review/deluxe-credit-solutions/`,
-  `/review/prosper/`,
-  `/categories/credit-unions/`,
-  `/credit-guide/amarillo-tx/business-loans/`,
-  `/credit-guide/austin-tx/mortgages/`,
-  `/credit-guide/charlotte-nc/banking/`.
-- Confirm live 200s and `x-cdm-static-snapshot: seranking-2026-07-05`.
-
-Then continue structural work:
+Next structural work:
 - Expand staticization beyond the first SE sample set to the full high-value
   `/review/`, `/categories/`, `/credit-guide/`, `/state/`, and `/brand/`
   SEO surfaces, preferably from local/static content generation instead of
   runtime snapshots where feasible.
 - Keep `/go/`, `/search/`, query-string URLs, affiliate redirects, and utility
   surfaces out of static SEO snapshots.
+- Preserve the rule that answers/questions, blogs, tools, financial wellness,
+  and courses remain static HTML and excluded from Worker routing unless the
+  user explicitly approves otherwise.
