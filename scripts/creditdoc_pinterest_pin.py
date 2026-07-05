@@ -213,93 +213,41 @@ def draw_briefing_pin(image, draw, args):
 
 
 def draw_checklist_pin(image, draw, args):
-    accent = [GREEN, GOLD, BLUE, CYAN][((args.variant or 0) // 4) % 4]
-    draw.rectangle((0, 0, WIDTH, HEIGHT), fill="#f4f8f3")
-    draw.polygon([(0, 0), (1000, 0), (1000, 355), (0, 510)], fill="#0f2f46")
-    draw.polygon([(0, 1010), (1000, 880), (1000, 1500), (0, 1500)], fill="#12324d")
-    draw.ellipse((690, 92, 1115, 517), fill="#0f766e")
-    draw.ellipse((-120, 720, 220, 1060), fill="#dbeafe")
+    draw.rectangle((0, 0, WIDTH, HEIGHT), fill="#fbf7ef")
+    draw.rectangle((0, 0, WIDTH, 118), fill=WHITE)
+    paste_logo(image, 64, 32, 258, BLUE)
+    draw.rounded_rectangle((695, 34, 920, 86), radius=22, fill="#17324d")
+    draw.text((731, 48), "FREE SBA TOOL", font=font(BOLD, 20), fill=WHITE)
 
-    paste_logo(image, 64, 34, 278, WHITE)
-    draw.rounded_rectangle((700, 48, 920, 102), radius=22, fill=WHITE)
-    draw.text((731, 63), "FREE SBA TOOL", font=font(BOLD, 21), fill=GREEN)
+    draw.rectangle((0, 118, WIDTH, 456), fill="#f7c948")
+    draw.rectangle((0, 456, WIDTH, 592), fill="#17324d")
+    draw.text((70, 168), "Two SBA offers", font=font(SERIF_BOLD, 78), fill=NAVY)
+    draw.text((70, 258), "can look similar.", font=font(SERIF_BOLD, 70), fill=NAVY)
+    draw.text((72, 488), "The payment story may be completely different.", font=font(HEAVY, 34), fill=WHITE)
 
-    draw.text((70, 156), "SBA loan", font=font(SERIF_BOLD, 82), fill=WHITE)
-    draw.text((70, 248), "reality check", font=font(SERIF_BOLD, 82), fill="#bbf7d0")
-    draw.rounded_rectangle((62, 358, 675, 455), radius=24, fill="#143b58")
-    draw_wrapped(
-        draw,
-        "Payment, fees, and term can change the deal. Check the numbers before you compare offers.",
-        (88, 376),
-        font(REGULAR, 25),
-        "#dbeafe",
-        545,
-        line_gap=6,
-        max_lines=2,
-    )
+    def offer_card(x, y, title, payment, fee, total, stripe):
+        draw.rounded_rectangle((x, y, x + 385, y + 438), radius=26, fill=WHITE, outline="#dbc186", width=3)
+        draw.rectangle((x + 34, y + 36, x + 351, y + 48), fill=stripe)
+        draw.text((x + 34, y + 82), title, font=font(HEAVY, 30), fill=NAVY)
+        draw.text((x + 34, y + 145), "Monthly payment", font=font(BOLD, 22), fill=MUTED)
+        draw.text((x + 34, y + 177), payment, font=font(HEAVY, 58), fill=stripe)
+        draw.line((x + 34, y + 260, x + 351, y + 260), fill="#e8ddc5", width=3)
+        draw.text((x + 34, y + 292), "Estimated fees", font=font(BOLD, 22), fill=MUTED)
+        draw.text((x + 232, y + 288), fee, font=font(HEAVY, 27), fill=NAVY)
+        draw.text((x + 34, y + 346), "Total repayment", font=font(BOLD, 22), fill=MUTED)
+        draw.text((x + 220, y + 342), total, font=font(HEAVY, 27), fill=NAVY)
 
-    def pasted_note(x, y, width, height, angle, bg, number, title, body):
-        note = Image.new("RGBA", (width + 34, height + 34), (0, 0, 0, 0))
-        nd = ImageDraw.Draw(note)
-        nd.rounded_rectangle((17, 17, width + 17, height + 17), radius=24, fill=bg, outline="#b7c9d8", width=2)
-        nd.ellipse((42, 42, 94, 94), fill=accent if number == "1" else [BLUE, GOLD, GREEN][int(number) - 2])
-        nd.text((60, 53), number, font=font(HEAVY, 25), fill=WHITE)
-        nd.text((112, 43), title, font=font(HEAVY, 28), fill=NAVY)
-        draw_wrapped(nd, body, (42, 120), font(REGULAR, 24), INK, width - 72, line_gap=5, max_lines=3)
-        rotated = note.rotate(angle, expand=True, resample=Image.Resampling.BICUBIC)
-        image.paste(rotated, (x, y), rotated)
+    offer_card(70, 662, "Offer A", "$4,821", "$7,240", "$578k", GREEN)
+    offer_card(545, 662, "Offer B", "$5,106", "$3,980", "$613k", BLUE)
 
-    pasted_note(
-        72,
-        565,
-        400,
-        255,
-        -5,
-        "#ffffff",
-        "1",
-        "Payment",
-        "Estimate the monthly repayment before the lender offer feels urgent.",
-    )
-    pasted_note(
-        520,
-        535,
-        390,
-        245,
-        4,
-        "#fff7ed",
-        "2",
-        "Fees",
-        "Add SBA fee assumptions so the real cost is not hidden at closing.",
-    )
-    pasted_note(
-        112,
-        835,
-        430,
-        250,
-        3,
-        "#eff6ff",
-        "3",
-        "Cash flow",
-        "Check whether the payment still leaves room to operate the business.",
-    )
+    draw.rounded_rectangle((105, 1138, 895, 1266), radius=32, fill=NAVY)
+    draw.text((150, 1170), "Before the lender call:", font=font(HEAVY, 32), fill=WHITE)
+    draw.text((150, 1210), "test loan amount, rate, term, fees, and repayment pressure.", font=font(REGULAR, 25), fill="#dbeafe")
 
-    draw.rounded_rectangle((598, 820, 910, 1088), radius=36, fill=WHITE, outline="#b7cfe5", width=3)
-    draw.text((640, 858), "Example result", font=font(BOLD, 24), fill=MUTED)
-    draw.text((640, 906), "$4,821", font=font(HEAVY, 58), fill=NAVY)
-    draw.text((820, 939), "/mo", font=font(BOLD, 24), fill=MUTED)
-    draw.line((640, 1004, 868, 1004), fill="#dbeafe", width=16)
-    draw.line((640, 1004, 800, 1004), fill=BLUE, width=16)
-    draw.text((640, 1036), "payment + fees + term", font=font(BOLD, 19), fill=NAVY)
-
-    draw.text((72, 1160), "Try the calculator before you commit.", font=font(HEAVY, 42), fill=WHITE)
-    bottom_copy = (
-        "Enter amount, rate, term, and SBA fee assumptions. CreditDoc gives you "
-        "a clearer repayment picture before you compare lender offers."
-    )
-    draw_wrapped(draw, bottom_copy, (76, 1230), font(REGULAR, 28), "#dbeafe", 790, line_gap=7, max_lines=3)
-    paste_logo(image, 76, 1344, 210, WHITE)
-    draw.rounded_rectangle((342, 1354, 900, 1410), radius=24, fill="#e7f8f2")
-    draw.text((388, 1369), compact_url(args.url), font=font(BOLD, 22), fill=NAVY)
+    draw.rounded_rectangle((86, 1310, 914, 1430), radius=0, fill=WHITE, outline="#e5c58f", width=3)
+    paste_logo(image, 112, 1340, 190, BLUE)
+    draw.text((342, 1335), "Use CreditDoc's free SBA loan calculator", font=font(HEAVY, 29), fill=NAVY)
+    draw.text((342, 1382), compact_url(args.url), font=font(BOLD, 23), fill=GREEN)
 
 
 def draw_focus_pin(image, draw, args):

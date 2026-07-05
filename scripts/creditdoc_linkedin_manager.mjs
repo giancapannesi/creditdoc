@@ -473,19 +473,42 @@ function sameWeekday(dateString, targetDay) {
   return addDays(dateString, delta);
 }
 
+function storyForCampaign(campaign) {
+  const storyBySlug = {
+    'sba-loan-calculator': [
+      'A business owner can hear "SBA loan" and immediately think lower-cost funding. That may be true, but the monthly payment, guarantee fees, term, and cash-flow pressure still need to work together.',
+      'This calculator is for the moment before a lender conversation, when you want to test the numbers yourself and understand what a realistic repayment picture could look like.',
+    ],
+    'accounts-receivable-financing-calculator': [
+      'Unpaid invoices can make a business look busy while cash still feels tight. Receivables financing may help, but the advance rate, reserve holdback, fees, and collection timing decide how much cash actually reaches the business.',
+      'Use this calculator to estimate the net funds before comparing invoice-financing offers.',
+    ],
+    'business-line-of-credit-calculator': [
+      'A business line of credit can feel flexible, but the cost changes once draws, fees, repayment timing, and utilization enter the picture.',
+      'Use this calculator to model a draw before relying on a credit line for working capital.',
+    ],
+    'commercial-loan-calculator': [
+      'Commercial loan offers can look simple on the surface. The real picture depends on amortization, balloon maturity, closing costs, and whether cash flow can support the debt.',
+      'Use this calculator to compare the payment and repayment pressure before moving deeper into a deal.',
+    ],
+  };
+  return storyBySlug[campaign.slug] || [
+    campaign.problem || `Financial decisions are easier to compare when the numbers are visible before you apply.`,
+    `Use this CreditDoc ${(campaign.kind || 'Tool').toLowerCase()} to understand the tradeoffs before making the next move.`,
+  ];
+}
+
 function makePost(campaign) {
   const kind = campaign.kind || 'Tool';
+  const story = storyForCampaign(campaign);
   return [
-    `${kind} spotlight: ${campaign.title}`,
+    `${campaign.title} from CreditDoc`,
     '',
-    campaign.problem,
-    '',
-    `What it is for: ${campaign.purpose}`,
+    ...story,
     '',
     `Useful for: ${campaign.useCases.join(', ')}.`,
     '',
     campaign.cta,
-    '',
     campaign.url,
     '',
     campaign.hashtags.join(' '),
@@ -496,14 +519,15 @@ function makePinterestDescription(draft) {
   const campaign = campaignForDraft(draft);
   const kind = (campaign.kind || 'Tool').toLowerCase();
   const useCases = (campaign.useCases || []).slice(0, 3).join(', ');
+  const story = storyForCampaign(campaign);
   return [
-    `${campaign.title} from CreditDoc.`,
+    `${campaign.title} from CreditDoc`,
     '',
-    campaign.problem || `Use this CreditDoc ${kind} to compare options before making a financial decision.`,
+    ...story,
     '',
     useCases ? `Useful for: ${useCases}.` : '',
     '',
-    `Get the ${kind} here:`,
+    `Open the free ${kind}:`,
     draft.target_url,
     '',
     (campaign.hashtags || []).join(' '),
