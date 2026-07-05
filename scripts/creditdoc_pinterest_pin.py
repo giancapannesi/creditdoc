@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import hashlib
 import os
 import subprocess
 import textwrap
@@ -124,6 +125,159 @@ def draw_bar_panel(draw, x, y):
     draw.text((x + 78, y + 475), "Compare first", font=font(BOLD, 19), fill=BLUE)
 
 
+def draw_roadmap_pin(image, draw, args):
+    for y in range(0, HEIGHT):
+        ratio = y / HEIGHT
+        r = int(248 * (1 - ratio) + 236 * ratio)
+        g = int(251 * (1 - ratio) + 246 * ratio)
+        b = int(255 * (1 - ratio) + 238 * ratio)
+        draw.line((0, y, WIDTH, y), fill=(r, g, b))
+
+    draw.rectangle((0, 0, WIDTH, 176), fill=NAVY)
+    paste_logo(image, 72, 52, 250, WHITE)
+    draw.rounded_rectangle((712, 54, 926, 118), radius=28, fill=WHITE)
+    draw.text((760, 70), "FREE TOOL", font=font(BOLD, 24), fill=BLUE)
+
+    draw.text((70, 235), "SBA Funding", font=font(HEAVY, 60), fill=NAVY)
+    draw.text((70, 302), "readiness map", font=font(HEAVY, 60), fill=BLUE)
+    draw_wrapped(draw, args.summary, (74, 395), font(REGULAR, 30), MUTED, 820, line_gap=8, max_lines=3)
+
+    draw.rounded_rectangle((70, 545, 930, 982), radius=44, fill=WHITE, outline="#c8d8ea", width=3)
+    draw.text((118, 600), "Before you talk to a lender", font=font(HEAVY, 38), fill=NAVY)
+
+    steps = [
+        ("1", "Estimate payment", "See the monthly obligation before applying."),
+        ("2", "Add fees", "Model SBA fees and total repayment."),
+        ("3", "Check cash flow", "Stress-test the payment against revenue."),
+    ]
+    x_positions = [120, 392, 664]
+    for idx, (num, title, body) in enumerate(steps):
+        x = x_positions[idx]
+        draw.rounded_rectangle((x, 690, x + 216, 908), radius=30, fill=["#eff6ff", "#ecfdf5", "#fff7ed"][idx])
+        draw.ellipse((x + 72, 722, x + 144, 794), fill=[BLUE, GREEN, GOLD][idx])
+        w = draw.textbbox((0, 0), num, font=font(HEAVY, 36))[2]
+        draw.text((x + 108 - w / 2, 735), num, font=font(HEAVY, 36), fill=WHITE)
+        draw_wrapped(draw, title, (x + 24, 815), font(BOLD, 24), INK, 168, line_gap=2, max_lines=2)
+        draw_wrapped(draw, body, (x + 24, 870), font(REGULAR, 16), MUTED, 168, line_gap=2, max_lines=2)
+
+    draw.line((336, 780, 392, 780), fill="#bfd3ea", width=7)
+    draw.line((608, 780, 664, 780), fill="#bfd3ea", width=7)
+
+    cases = [item.strip() for item in args.use_cases.split("|") if item.strip()][:4]
+    draw.rounded_rectangle((70, 1035, 930, 1264), radius=38, fill=NAVY)
+    draw.text((118, 1074), "Use it for", font=font(HEAVY, 36), fill=WHITE)
+    y = 1134
+    for idx, label in enumerate(cases):
+        x = 118 if idx % 2 == 0 else 545
+        if idx == 2:
+            y += 70
+        draw.ellipse((x, y + 6, x + 28, y + 34), fill=CYAN if idx % 2 == 0 else GOLD)
+        draw_wrapped(draw, label, (x + 44, y), font(BOLD, 21), "#eef6ff", 320, line_gap=2, max_lines=2)
+
+    draw.rounded_rectangle((100, 1314, 900, 1390), radius=32, fill=BLUE)
+    draw.text((215, 1333), "Open the calculator", font=font(HEAVY, 36), fill=WHITE)
+
+    draw.rectangle((0, 1430, WIDTH, HEIGHT), fill=NAVY)
+    paste_logo(image, 72, 1445, 128, WHITE)
+    draw.text((250, 1450), compact_url(args.url), font=font(BOLD, 26), fill=WHITE)
+
+
+def draw_briefing_pin(image, draw, args):
+    accent = [BLUE, GREEN, GOLD, CYAN][((args.variant or 0) // 4) % 4]
+    draw.rectangle((0, 0, WIDTH, HEIGHT), fill="#f8fafc")
+    draw.rectangle((0, 0, 340, HEIGHT), fill=NAVY)
+    draw.polygon([(340, 0), (520, 0), (340, HEIGHT)], fill=accent)
+    paste_logo(image, 70, 62, 235, WHITE)
+
+    draw.rounded_rectangle((74, 1250, 292, 1320), radius=28, fill=WHITE)
+    draw.text((113, 1268), args.kind.upper().split()[0], font=font(BOLD, 24), fill=BLUE)
+
+    draw.text((420, 90), "CreditDoc resource", font=font(BOLD, 28), fill=accent)
+    draw_wrapped(draw, args.title, (420, 150), font(HEAVY, 58), NAVY, 500, line_gap=4, max_lines=4)
+    draw_wrapped(draw, args.summary, (420, 430), font(REGULAR, 29), MUTED, 470, line_gap=8, max_lines=4)
+
+    cases = [item.strip() for item in args.use_cases.split("|") if item.strip()][:4]
+    y = 650
+    for idx, label in enumerate(cases):
+        color = [BLUE, GREEN, GOLD, CYAN][idx]
+        draw.rounded_rectangle((420, y, 910, y + 105), radius=28, fill=WHITE, outline="#d7e3f1", width=2)
+        draw.rounded_rectangle((445, y + 24, 500, y + 79), radius=18, fill=color)
+        draw.text((465, y + 32), str(idx + 1), font=font(HEAVY, 24), fill=WHITE)
+        draw_wrapped(draw, label, (525, y + 25), font(BOLD, 27), INK, 345, line_gap=2, max_lines=2)
+        y += 130
+
+    draw.rounded_rectangle((420, 1248, 910, 1340), radius=34, fill=accent)
+    draw.text((510, 1272), "Use the free resource", font=font(HEAVY, 30), fill=WHITE)
+    draw.text((420, 1428), compact_url(args.url), font=font(BOLD, 25), fill=NAVY)
+
+
+def draw_checklist_pin(image, draw, args):
+    accent = [BLUE, GREEN, GOLD, CYAN][((args.variant or 0) // 4) % 4]
+    draw.rectangle((0, 0, WIDTH, HEIGHT), fill="#eef6ff")
+    draw.polygon([(0, 0), (1000, 0), (1000, 520), (0, 760)], fill=NAVY)
+    draw.polygon([(720, 0), (1000, 0), (1000, 430), (650, 515)], fill=accent)
+    paste_logo(image, 72, 58, 250, WHITE)
+
+    draw.rounded_rectangle((70, 190, 285, 250), radius=30, fill=WHITE)
+    draw.text((112, 207), f"FREE {args.kind.upper().split()[0]}", font=font(BOLD, 22), fill=accent)
+    draw_wrapped(draw, args.title, (70, 315), font(HEAVY, 56), WHITE, 700, line_gap=3, max_lines=3)
+
+    draw.rounded_rectangle((70, 635, 930, 1258), radius=44, fill=WHITE, outline="#c7d8eb", width=3)
+    draw.text((118, 700), "What to check first", font=font(HEAVY, 42), fill=NAVY)
+    draw_wrapped(draw, args.summary, (120, 770), font(REGULAR, 27), MUTED, 735, line_gap=7, max_lines=3)
+
+    cases = [item.strip() for item in args.use_cases.split("|") if item.strip()][:4]
+    y = 910
+    for idx, label in enumerate(cases):
+        color = [BLUE, GREEN, GOLD, CYAN][idx]
+        draw.ellipse((120, y, 174, y + 54), fill="#eaf2ff")
+        draw.line((136, y + 31, 149, y + 43, 163, y + 14), fill=color, width=6)
+        draw_wrapped(draw, label, (200, y + 2), font(BOLD, 29), INK, 610, line_gap=2, max_lines=2)
+        y += 78
+
+    draw.rounded_rectangle((100, 1320, 900, 1398), radius=32, fill=accent)
+    draw.text((235, 1339), "Open it on CreditDoc", font=font(HEAVY, 34), fill=WHITE)
+    draw.text((142, 1448), compact_url(args.url), font=font(BOLD, 26), fill=NAVY)
+
+
+def draw_focus_pin(image, draw, args):
+    accent = [GREEN, BLUE, GOLD, CYAN][((args.variant or 0) // 4) % 4]
+    draw.rectangle((0, 0, WIDTH, HEIGHT), fill="#f8fbff")
+    draw.rectangle((0, 0, WIDTH, 90), fill=WHITE)
+    paste_logo(image, 70, 28, 230, BLUE)
+    draw.polygon([(0, 170), (1000, 0), (1000, 540), (0, 690)], fill=NAVY)
+    draw.polygon([(650, 0), (1000, 0), (1000, 430), (740, 470)], fill=accent)
+
+    draw.rounded_rectangle((70, 180, 285, 240), radius=28, fill=WHITE)
+    draw.text((112, 197), f"FREE {args.kind.upper().split()[0]}", font=font(BOLD, 22), fill=accent)
+    draw_wrapped(draw, args.title, (70, 310), font(HEAVY, 54), WHITE, 720, line_gap=4, max_lines=3)
+    draw_wrapped(draw, args.summary, (72, 545), font(REGULAR, 27), "#dbeafe", 780, line_gap=7, max_lines=3)
+
+    cases = [item.strip() for item in args.use_cases.split("|") if item.strip()][:4]
+    draw.rounded_rectangle((70, 765, 930, 1225), radius=42, fill=WHITE, outline="#cbdced", width=3)
+    draw.text((118, 822), "Best when you need to", font=font(HEAVY, 40), fill=NAVY)
+    y = 900
+    for idx, label in enumerate(cases):
+        x = 120 if idx % 2 == 0 else 520
+        if idx == 2:
+            y += 115
+        draw.rounded_rectangle((x, y, x + 330, y + 82), radius=24, fill=["#eff6ff", "#ecfdf5", "#fff7ed", "#ecfeff"][idx])
+        draw.text((x + 24, y + 23), str(idx + 1), font=font(HEAVY, 28), fill=[BLUE, GREEN, GOLD, CYAN][idx])
+        draw_wrapped(draw, label, (x + 70, y + 19), font(BOLD, 22), INK, 230, line_gap=1, max_lines=2)
+
+    draw.rounded_rectangle((100, 1310, 900, 1390), radius=32, fill=accent)
+    draw.text((225, 1330), "Go to the free resource", font=font(HEAVY, 33), fill=WHITE)
+    draw.rectangle((0, 1430, WIDTH, HEIGHT), fill=NAVY)
+    draw.text((142, 1450), compact_url(args.url), font=font(BOLD, 26), fill=WHITE)
+
+
+def variant_for(args):
+    if args.variant is not None:
+        return args.variant % 4
+    key = f"{args.url}|{args.title}".encode("utf-8")
+    return int(hashlib.sha1(key).hexdigest()[:8], 16) % 4
+
+
 def compact_url(url):
     return url.replace("https://www.", "").replace("https://", "").rstrip("/")
 
@@ -136,11 +290,33 @@ def main():
     parser.add_argument("--summary", required=True)
     parser.add_argument("--use-cases", default="")
     parser.add_argument("--url", required=True)
+    parser.add_argument("--variant", type=int, default=None)
     args = parser.parse_args()
 
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
     image = Image.new("RGB", (WIDTH, HEIGHT), BG)
     draw = ImageDraw.Draw(image)
+
+    variant = variant_for(args)
+    if variant == 0:
+        draw_roadmap_pin(image, draw, args)
+        image.save(args.out, "PNG", optimize=True)
+        print(args.out)
+        return
+    if variant == 1:
+        draw_briefing_pin(image, draw, args)
+        image.save(args.out, "PNG", optimize=True)
+        print(args.out)
+        return
+    if variant == 2:
+        draw_checklist_pin(image, draw, args)
+        image.save(args.out, "PNG", optimize=True)
+        print(args.out)
+        return
+    draw_focus_pin(image, draw, args)
+    image.save(args.out, "PNG", optimize=True)
+    print(args.out)
+    return
 
     for y in range(0, 665):
         ratio = y / 665

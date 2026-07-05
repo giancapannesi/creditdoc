@@ -585,6 +585,10 @@ function renderPinterestPinForDraft(draft) {
     '--url',
     draft.target_url,
   ];
+  const campaignIndex = CAMPAIGNS.findIndex((item) => item.slug === draft.campaign_slug);
+  if (campaignIndex >= 0) {
+    args.push('--variant', String(campaignIndex));
+  }
   const result = spawnSync('python3', args, {
     cwd: '/srv/BusinessOps/creditdoc',
     encoding: 'utf8',
