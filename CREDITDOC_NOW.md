@@ -5319,3 +5319,34 @@ Verification:
 Repo note:
 - Unrelated untracked file remains excluded: CreditDoc_Engine_Embedding_Readiness_Activities_2026-06-16.md.
 - Changes are not committed or deployed yet as of this note.
+
+## 2026-07-05 - CreditDoc SE Ranking 5XX static snapshot remediation
+
+Implemented the first structural remediation for the SE Ranking 5XX report by
+committing static HTML snapshots for the exact URLs extracted from the report's
+5XX sections.
+
+What changed:
+- Added `scripts/create_seranking_static_snapshots.mjs`.
+- Added `data/seranking_static_snapshot_urls_2026-07-05.json` with 124 URLs:
+  97 review pages, 26 credit-guide city/category pages, and 1 category page.
+- Added 124 committed `public/.../index.html` snapshots with a static marker.
+- Updated `src/middleware.ts` so exact trailing-slash manifest paths are served
+  from the Cloudflare `ASSETS` binding before SSR/Supabase cache logic.
+
+Verification:
+- `npm run build` passed after the debugger-agent fix.
+- Postbuild sitemap/robots, critical sitemap, feed, image-alt, and image-file
+  contracts passed.
+- Focused snapshot check passed: 124 unique URLs, no bad families, no query
+  URLs, no `/go` or `/search`, all generated in `dist`, all include the static
+  marker, and none contain `noindex`.
+- Built Worker check confirmed exact-path matching with
+  `SERANKING_STATIC_SNAPSHOT_PATHS.has(pathname)`.
+- Debugger agent Schrodinger reviewed the patch and found one issue: slashless
+  variants were also matched. Fixed before commit by preserving exact manifest
+  pathnames including trailing slash.
+
+Deployment still required after commit: push, Cloudflare deploy, targeted purge
+of the 124 snapshot URLs, and live sample checks for the `x-cdm-static-snapshot:
+seranking-2026-07-05` header.

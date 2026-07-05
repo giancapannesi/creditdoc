@@ -25,6 +25,7 @@
  */
 import { defineMiddleware } from 'astro:middleware';
 import { STATE_ABBREVIATIONS } from './utils/data';
+import seRankingStaticSnapshotManifest from '../data/seranking_static_snapshot_urls_2026-07-05.json';
 
 // Bump this when shared SSR templates change; DB updated_at alone does not
 // invalidate cached HTML for code-only changes.
@@ -45,6 +46,12 @@ const STATE_CODE_REDIRECTS = new Map(
 );
 
 const NON_STATE_CODE_REDIRECTS = new Set(['dc', 'gu', 'ho', 'pm', 'pr', 'st', 'vi']);
+
+const SERANKING_STATIC_SNAPSHOT_PATHS = new Set(
+  (seRankingStaticSnapshotManifest.urls as string[]).map((href) => {
+    return new URL(href).pathname;
+  })
+);
 
 function stateCodeRedirectTarget(pathname: string): string | null {
   const match = pathname.match(/^\/state\/([a-z]{2})\/?$/i);
@@ -271,6 +278,9 @@ const CACHEABLE_ROUTES: CacheableRoute[] = [
 interface RuntimeEnvLike {
   SUPABASE_URL?: string;
   SUPABASE_ANON_KEY?: string;
+  ASSETS?: {
+    fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+  };
 }
 
 /**
@@ -426,6 +436,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   const url = new URL(context.request.url);
   const pathname = url.pathname;
+  const env = (context.locals as any)?.runtime?.env as RuntimeEnvLike | undefined;
 
   if (/^\/categories\/?$/.test(pathname)) {
     return Response.redirect(new URL('/city/', url.origin), 301);
@@ -446,6 +457,22 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return Response.redirect(new URL(browseRedirectTarget, url.origin), 301);
   }
 
+  if (
+    url.search === '' &&
+    env?.ASSETS &&
+    SERANKING_STATIC_SNAPSHOT_PATHS.has(pathname)
+  ) {
+    const assetUrl = new URL(`${pathname}index.html`, url.origin);
+    const asset = await env.ASSETS.fetch(new Request(assetUrl.toString(), context.request));
+    if (asset.status === 200) {
+      const out = new Response(asset.body, asset);
+      out.headers.set('content-type', 'text/html; charset=utf-8');
+      out.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400, immutable');
+      out.headers.set('x-cdm-static-snapshot', 'seranking-2026-07-05');
+      return applySecurityHeaders(out);
+    }
+  }
+
   // Find the first matching cacheable route (returns slug or null).
   let matched: { route: CacheableRoute; slug: string } | null = null;
   for (const route of CACHEABLE_ROUTES) {
@@ -457,7 +484,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
   }
   if (!matched) return applySecurityHeaders(await next());
 
-  const env = (context.locals as any)?.runtime?.env as RuntimeEnvLike | undefined;
   if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) {
     // Build-mode preview or env not configured — don't cache, just pass.
     const fresh = await next();

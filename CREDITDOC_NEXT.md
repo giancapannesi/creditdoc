@@ -9,6 +9,26 @@ Follow-up from the SE Ranking 5XX audit:
 - Expand the route self-healer beyond 10 sample URLs to include representative SE Ranking URLs from review/category/credit-guide route families, using a crawler-style user agent and enough concurrency to catch cold-cache/runtime failures.
 - Keep the daily SE audit comparison focused on whether 5XX count drops from the July 5 baseline of 671 and sitemap 5XX/noindex drops from 27.
 
+Execution plan now in progress:
+1. Extract the exact URLs visible in `SEO/audit_creditdoc.co_2026-07-05_13-36-15.pdf` / `/tmp/creditdoc-se-ranking-audit.txt`.
+2. Group the flagged URLs by route family and prioritize the externally flagged 5XX families first.
+3. Start with the sitemap-listed 5XX examples from SE Ranking:
+   - `/credit-guide/amarillo-tx/emergency-cash/`
+   - `/credit-guide/austin-tx/emergency-cash/`
+   - `/credit-guide/charlotte-nc/emergency-cash/`
+   - `/categories/credit-unions/`
+   - `/credit-guide/amarillo-tx/business-loans/`
+   - `/credit-guide/austin-tx/business-loans/`
+   - `/credit-guide/charlotte-nc/business-loans/`
+   - `/credit-guide/amarillo-tx/debt-relief/`
+   - `/credit-guide/austin-tx/debt-relief/`
+   - `/credit-guide/amarillo-tx/mortgages/`
+   - `/credit-guide/austin-tx/mortgages/`
+   - `/credit-guide/charlotte-nc/mortgages/`
+4. For review pages, begin with the review URLs listed in the SE 5XX examples, not every review page at once.
+5. Prefer true Astro static generation from local content where feasible. If a whole family is too large/risky in one pass, create committed static snapshots for the SE-flagged URLs first, then follow with a broader route-family static migration.
+6. After each phase: run `npm run build`, verify generated/static coverage for the target URLs, commit, push, deploy through `./deploy.sh`, and update memory.
+
 ## Active 2026-07-03 — SE Ranking Cleanup Verification
 
 Latest completed:
@@ -1283,3 +1303,35 @@ Before deploying the CreditDoc lender category/outbound tracking fix set:
 - deploy through the documented Cloudflare deploy path, not Vercel;
 - live-check /review/upstart/, /best/best-personal-loans-bad-credit/, a representative /compare/ URL, robots.txt, and one /go/upstart/?source=smoke redirect response;
 - after deploy, monitor outbound click behavior and GSC/indexing impact over the normal crawl window.
+
+## 2026-07-05 - Next: deploy and expand SE Ranking staticization
+
+Current completed local work:
+- Exact SE Ranking 5XX snapshot set generated from
+  `/tmp/creditdoc-se-ranking-audit.txt`.
+- 124 committed static snapshots prepared under `public/`:
+  97 `/review/`, 26 `/credit-guide/<city>/<category>/`, and
+  1 `/categories/credit-unions/`.
+- Middleware static bypass prepared for exact trailing-slash manifest paths only.
+- Build and focused snapshot checks passed after debugger-agent review.
+
+Immediate next steps:
+- Commit and push the static snapshot remediation.
+- Deploy to Cloudflare Workers via `./deploy.sh`.
+- Purge the 124 URLs from Cloudflare cache using the manifest.
+- Live-check representative URLs:
+  `/review/deluxe-credit-solutions/`,
+  `/review/prosper/`,
+  `/categories/credit-unions/`,
+  `/credit-guide/amarillo-tx/business-loans/`,
+  `/credit-guide/austin-tx/mortgages/`,
+  `/credit-guide/charlotte-nc/banking/`.
+- Confirm live 200s and `x-cdm-static-snapshot: seranking-2026-07-05`.
+
+Then continue structural work:
+- Expand staticization beyond the first SE sample set to the full high-value
+  `/review/`, `/categories/`, `/credit-guide/`, `/state/`, and `/brand/`
+  SEO surfaces, preferably from local/static content generation instead of
+  runtime snapshots where feasible.
+- Keep `/go/`, `/search/`, query-string URLs, affiliate redirects, and utility
+  surfaces out of static SEO snapshots.
