@@ -5776,6 +5776,25 @@ Important interpretation:
 - This work did not stop or disable cron, feeds, publishing, Pinterest, or
   LinkedIn automation.
 
+## 2026-07-06 - Eagle lender meta cleanup
+
+Cleaned up the two remaining dirty lender files:
+- `src/content/lenders/eagle-finance.json`
+- `src/content/lenders/eagle-loan.json`
+
+Fix:
+- Replaced duplicated/overlapping meta descriptions with unique page-specific
+  descriptions.
+- Restored the previously removed `last_engine_run` fields.
+- Removed unnecessary `brand_slug: null` churn.
+- Restored clean JSON formatting with final newlines.
+
+Verification:
+- Both files parse as valid JSON.
+- Both meta descriptions are 139 characters.
+- Duplicate-meta scan confirmed each Eagle meta description is unique across
+  `src/content/lenders/*.json`.
+
 ## 2026-07-06 - Clean-deploy state sitemap hardening
 
 While attempting to deploy the `/best/` SERP fix from a clean temporary
