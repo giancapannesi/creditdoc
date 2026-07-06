@@ -4,6 +4,50 @@
 
 ---
 
+## 2026-07-06 - Manual GSC queue fixed to 10/day and unindexed action plan saved
+
+Status: in progress operationally; automation corrected for the founder's actual 10 manual GSC URL Inspection submissions/day.
+
+What changed:
+- Saved the current GSC unindexed action plan to `SEO/GSC_CRAWLED_NOT_INDEXED_ACTION_PLAN_2026-07-06.md`.
+- Updated `/srv/BusinessOps/tools/creditdoc_daily_gsc_queue.py` from 20 URLs/day to 10 URLs/day.
+- Updated `/srv/BusinessOps/CRON_OPERATIONS.md` to state the CreditDoc GSC queue is a daily 10-URL manual queue.
+- Did not pause, stop, or disable any publishing/feed/social cron.
+- Repaired the local source JSON for `eagle-finance` and `eagle-loan` after a later export rewrote the duplicate meta descriptions; the rendered duplicate-meta fix must remain protected.
+
+Evidence:
+- The daily queue cron is installed at 06:15 UTC:
+  `/usr/bin/flock -w 7200 /tmp/creditdoc_db_writer.lock -c '/srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/creditdoc_daily_gsc_queue.py --apply'`
+- Today's 06:15 UTC cron had already sent the old 20-URL email before the script was corrected. Do not send a second same-day email just to correct the count; tomorrow's cron will emit 10.
+- Dry-run after the fix returned exactly 10 URLs, all high-value financial wellness pages with `Crawled - currently not indexed`:
+  - `/financial-wellness/credit-builder-loans/`
+  - `/financial-wellness/credit-building-after-prison/`
+  - `/financial-wellness/credit-repair-scams/`
+  - `/financial-wellness/credit-score-ranges-explained/`
+  - `/financial-wellness/credit-utilization-guide/`
+  - `/financial-wellness/emergency-fund-guide/`
+  - `/financial-wellness/hard-vs-soft-inquiries/`
+  - `/financial-wellness/how-credit-scores-calculated/`
+  - `/financial-wellness/identity-theft-prevention/`
+  - `/financial-wellness/medical-debt-guide/`
+
+Current indexation diagnosis from `indexation_status`:
+- `Crawled - currently not indexed` by family:
+  - review 600
+  - state 68
+  - city 53
+  - financial wellness 25
+  - blog 13
+  - answers 11
+  - money pages 8
+  - other 1
+- Manual GSC submissions must not be spent on review/city/state noise first. Use them on tools, course/learn, wellness, answers, and money pages.
+
+GSC validation guidance:
+- Yes, ask Google to validate the duplicate title/meta fixes from `SEO/Table - Duplicates.csv`.
+- Yes, ask Google to validate the robots-blocked `/go/` fix after robots cleanup.
+- Do not treat broad `Crawled - currently not indexed` as one validation bug; handle it by daily 10 manual submissions, API breadth, internal links, and page-level improvement/consolidation if a page remains excluded after recrawl.
+
 ## 2026-07-06 - Crawl integrity, GSC duplicates, and robots cleanup
 
 Status: deployed, live-verified, and ready for GSC/SE Ranking validation.
