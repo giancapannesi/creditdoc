@@ -24,37 +24,11 @@ function ssrSitemapPages() {
     );
     const stateData = JSON.parse(readFileSync(join(process.cwd(), 'src/content/states.json'), 'utf8'));
     const stateRows = Object.values(stateData);
-    const sql = `
-      SELECT 'categories/' || slug FROM categories;
-      SELECT 'review/' || slug FROM lenders WHERE processing_status='ready_for_index';
-      SELECT DISTINCT brand_slug FROM lenders
-        WHERE brand_slug IS NOT NULL AND brand_slug <> ''
-          AND processing_status='ready_for_index';
-    `;
-    const out = execSync(`sqlite3 data/creditdoc.db "${sql.replace(/\n\s+/g, ' ').replace(/"/g, '\\"')}"`, {
-      encoding: 'utf8',
-      cwd: process.cwd(),
-    });
-    const lines = out.split('\n').map((s) => s.trim()).filter(Boolean);
-    let droppedBrands = 0;
     const urls = [];
-    for (const line of lines) {
-      // Brand slug rows are bare slugs (no '/'); blog/wellness rows already
-      // carry their prefix. Differentiate by '/' presence.
-      if (!line.includes('/')) {
-        // Bare brand slug — keep only if a matching brand file exists.
-        if (brandFiles.has(line)) {
-          urls.push(`${SITE}/brand/${line}/`);
-        } else {
-          droppedBrands += 1;
-        }
-      } else {
-        urls.push(`${SITE}/${line}/`);
-      }
-    }
-    if (droppedBrands > 0) {
-      console.log(`[sitemap] dropped ${droppedBrands} brand slug(s) with no brand record`);
-    }
+
+    // State roots are SEO-critical SSR pages. Keep them independent from the
+    // optional local SQLite export below so a missing/stale DB cannot remove
+    // /state/<slug>/ from clean deploy sitemaps.
     if (Array.isArray(stateRows)) {
       let addedStateRoots = 0;
       for (const state of stateRows) {
@@ -65,6 +39,41 @@ function ssrSitemapPages() {
         }
       }
       console.log(`[sitemap] added ${addedStateRoots} state root URL(s)`);
+    }
+
+    const sql = `
+      SELECT 'categories/' || slug FROM categories;
+      SELECT 'review/' || slug FROM lenders WHERE processing_status='ready_for_index';
+      SELECT DISTINCT brand_slug FROM lenders
+        WHERE brand_slug IS NOT NULL AND brand_slug <> ''
+          AND processing_status='ready_for_index';
+    `;
+    try {
+      const out = execSync(`sqlite3 data/creditdoc.db "${sql.replace(/\n\s+/g, ' ').replace(/"/g, '\\"')}"`, {
+        encoding: 'utf8',
+        cwd: process.cwd(),
+      });
+      const lines = out.split('\n').map((s) => s.trim()).filter(Boolean);
+      let droppedBrands = 0;
+      for (const line of lines) {
+        // Brand slug rows are bare slugs (no '/'); blog/wellness rows already
+        // carry their prefix. Differentiate by '/' presence.
+        if (!line.includes('/')) {
+          // Bare brand slug — keep only if a matching brand file exists.
+          if (brandFiles.has(line)) {
+            urls.push(`${SITE}/brand/${line}/`);
+          } else {
+            droppedBrands += 1;
+          }
+        } else {
+          urls.push(`${SITE}/${line}/`);
+        }
+      }
+      if (droppedBrands > 0) {
+        console.log(`[sitemap] dropped ${droppedBrands} brand slug(s) with no brand record`);
+      }
+    } catch (dbErr) {
+      console.warn('[sitemap] local DB-backed SSR URLs skipped (non-fatal):', dbErr.message);
     }
 
     // City guides live in Supabase (not local SQLite). Read anon key from env

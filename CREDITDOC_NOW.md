@@ -5776,6 +5776,44 @@ Important interpretation:
 - This work did not stop or disable cron, feeds, publishing, Pinterest, or
   LinkedIn automation.
 
+## 2026-07-06 - Clean-deploy state sitemap hardening
+
+While attempting to deploy the `/best/` SERP fix from a clean temporary
+worktree, the postbuild critical sitemap guard caught a clean-source issue:
+`/state/utah/` was missing from the generated sitemap even though
+`/state/utah/lending-laws/` was present.
+
+Cause:
+- `astro.config.mjs` added SSR state-root sitemap URLs inside
+  `ssrSitemapPages()` only after the optional local SQLite export query
+  succeeded.
+- In a clean deploy worktree the DB-backed category/review/brand export can be
+  absent, stale, or empty. That optional failure must not remove SEO-critical
+  `/state/<slug>/` root URLs.
+
+Fix:
+- Moved state-root injection ahead of DB-backed sitemap URL collection.
+- Wrapped DB-backed category/review/brand sitemap collection in its own
+  non-fatal `try/catch`.
+- State root URLs are now always added from committed `src/content/states.json`
+  before optional DB-backed sitemap work.
+
+Verification:
+- `npm run build` passed after the fix.
+- Postbuild passed: sitemap/robots, critical sitemap URLs, schema/sitemap,
+  `/best/` SERP contract, feed, image alt, image filename, and AI-ingestion
+  contracts.
+- Build log confirmed `[sitemap] added 50 state root URL(s)` before DB-backed
+  sitemap collection.
+
+Important interpretation:
+- This was a real clean-deploy robustness issue. The live/main working tree
+  could pass while a clean deploy could fail because local generated DB state
+  masked the dependency. Sitemap-critical SEO surfaces must be derived from
+  committed source wherever possible.
+- This work did not stop or disable cron, feeds, publishing, Pinterest, or
+  LinkedIn automation.
+
 ## 2026-07-06 - Restored Best intent on money-page SERPs
 
 Fixed an over-broad YMYL/listicle softening helper that rewrote `/best/`
