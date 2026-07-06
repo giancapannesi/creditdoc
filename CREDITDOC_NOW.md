@@ -5759,6 +5759,15 @@ Verification:
   `/tools/sba-loan-calculator/`, `/courses/credit-fundamentals/`,
   `/financial-wellness/sba-loan-application-guide/`, and the formerly duplicate
   browse check-cashing city pages.
+- Committed and pushed as `209b1c9ee9`:
+  `Improve CreditDoc answer SEO metadata and AI ingestion`.
+- Deployed to Cloudflare Workers with Version ID:
+  `523f5478-ec63-4411-8a2b-ee28f52a7085`.
+- Live smoke checks passed for:
+  - `/llms.txt`
+  - `/answers/how-to-get-an-sba-loan/`
+  - `/tools/sba-loan-calculator/`
+  - `/browse/check-cashing/indianapolis-in/`
 
 Important interpretation:
 - Regenerating pages is required because the SEO fields are compiled into the
