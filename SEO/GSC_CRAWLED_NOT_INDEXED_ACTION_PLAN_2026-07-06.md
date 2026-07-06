@@ -61,22 +61,39 @@ Excluded from the manual email:
 - Canonical-conflict URLs
 - Random unpublished review-directory noise
 
-## Today's Correct 10-URL Priority Set
+## Today's Manual Submission Handling
 
-Dry-run after the fix produced exactly 10 URLs:
+The 06:15 UTC cron had already sent a 20-URL email before the script was corrected to 10/day.
 
-1. `https://www.creditdoc.co/financial-wellness/credit-builder-loans/`
-2. `https://www.creditdoc.co/financial-wellness/credit-building-after-prison/`
-3. `https://www.creditdoc.co/financial-wellness/credit-repair-scams/`
-4. `https://www.creditdoc.co/financial-wellness/credit-score-ranges-explained/`
-5. `https://www.creditdoc.co/financial-wellness/credit-utilization-guide/`
-6. `https://www.creditdoc.co/financial-wellness/emergency-fund-guide/`
-7. `https://www.creditdoc.co/financial-wellness/hard-vs-soft-inquiries/`
-8. `https://www.creditdoc.co/financial-wellness/how-credit-scores-calculated/`
-9. `https://www.creditdoc.co/financial-wellness/identity-theft-prevention/`
-10. `https://www.creditdoc.co/financial-wellness/medical-debt-guide/`
+Use the first 10 URLs from that email as today's manual GSC submissions:
 
-These are good manual candidates because Google has already crawled them and chosen not to index yet. Requesting indexing here gives Google a direct recrawl prompt on authority content.
+1. `https://www.creditdoc.co/courses/credit-fundamentals/`
+2. `https://www.creditdoc.co/tools/accounts-receivable-financing-calculator/`
+3. `https://www.creditdoc.co/tools/borrowing-power-quiz/`
+4. `https://www.creditdoc.co/tools/credit-repair-qualify-quiz/`
+5. `https://www.creditdoc.co/tools/credit-score-simulator/`
+6. `https://www.creditdoc.co/tools/equipment-financing-calculator/`
+7. `https://www.creditdoc.co/tools/loan-denial-reason-checker/`
+8. `https://www.creditdoc.co/tools/sba-guarantee-fee-calculator/`
+9. `https://www.creditdoc.co/financial-wellness/secured-credit-cards-complete-guide/`
+10. `https://www.creditdoc.co/financial-wellness/side-hustle-income-guide/`
+
+The database stamp was corrected after the script fix: positions 11-20 from the old email were unstamped so they are not hidden by cooldown.
+
+Dry-run after the DB correction now returns exactly 10 URLs for the next eligible queue:
+
+1. `https://www.creditdoc.co/financial-wellness/store-credit-cards-worth-it/`
+2. `https://www.creditdoc.co/financial-wellness/subscription-audit-guide/`
+3. `https://www.creditdoc.co/financial-wellness/50-30-20-budget-rule/`
+4. `https://www.creditdoc.co/financial-wellness/609-dispute-letter-truth/`
+5. `https://www.creditdoc.co/financial-wellness/authorized-user-strategy/`
+6. `https://www.creditdoc.co/financial-wellness/auto-loans-bad-credit/`
+7. `https://www.creditdoc.co/financial-wellness/borrowing-money-explained/`
+8. `https://www.creditdoc.co/financial-wellness/building-credit-from-zero/`
+9. `https://www.creditdoc.co/financial-wellness/checking-savings-guide/`
+10. `https://www.creditdoc.co/financial-wellness/choosing-credit-repair-company/`
+
+These are good next manual candidates because they are authority content pages that are either unknown to Google or crawled but not indexed.
 
 ## What To Validate In GSC Now
 
@@ -109,4 +126,3 @@ Quality escalation:
 - For persistent unindexed tools/course/wellness/answer/money pages, add stronger internal links from indexed money pages, homepage modules, relevant blogs, and LinkedIn/Pinterest posts.
 - If two answer/wellness pages overlap heavily, consolidate or differentiate them instead of repeatedly submitting both.
 - Keep `/go/` URLs noindex via header and crawlable by robots so Google can see the noindex.
-

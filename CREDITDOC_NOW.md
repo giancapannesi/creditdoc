@@ -18,18 +18,11 @@ What changed:
 Evidence:
 - The daily queue cron is installed at 06:15 UTC:
   `/usr/bin/flock -w 7200 /tmp/creditdoc_db_writer.lock -c '/srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/creditdoc_daily_gsc_queue.py --apply'`
-- Today's 06:15 UTC cron had already sent the old 20-URL email before the script was corrected. Do not send a second same-day email just to correct the count; tomorrow's cron will emit 10.
-- Dry-run after the fix returned exactly 10 URLs, all high-value financial wellness pages with `Crawled - currently not indexed`:
-  - `/financial-wellness/credit-builder-loans/`
-  - `/financial-wellness/credit-building-after-prison/`
-  - `/financial-wellness/credit-repair-scams/`
-  - `/financial-wellness/credit-score-ranges-explained/`
-  - `/financial-wellness/credit-utilization-guide/`
-  - `/financial-wellness/emergency-fund-guide/`
-  - `/financial-wellness/hard-vs-soft-inquiries/`
-  - `/financial-wellness/how-credit-scores-calculated/`
-  - `/financial-wellness/identity-theft-prevention/`
-  - `/financial-wellness/medical-debt-guide/`
+- Today's 06:15 UTC cron had already sent the old 20-URL email before the script was corrected. Do not send a second same-day email just to correct the count.
+- Use the first 10 URLs from today's received email as today's manual submissions:
+  `/courses/credit-fundamentals/`, `/tools/accounts-receivable-financing-calculator/`, `/tools/borrowing-power-quiz/`, `/tools/credit-repair-qualify-quiz/`, `/tools/credit-score-simulator/`, `/tools/equipment-financing-calculator/`, `/tools/loan-denial-reason-checker/`, `/tools/sba-guarantee-fee-calculator/`, `/financial-wellness/secured-credit-cards-complete-guide/`, `/financial-wellness/side-hustle-income-guide/`.
+- Corrected the DB stamp for the old 20-URL email: positions 11-20 were unstamped so they are not hidden by cooldown when the founder only submits 10/day.
+- Dry-run after the DB correction returns exactly 10 URLs for the next eligible queue: `/financial-wellness/store-credit-cards-worth-it/`, `/financial-wellness/subscription-audit-guide/`, `/financial-wellness/50-30-20-budget-rule/`, `/financial-wellness/609-dispute-letter-truth/`, `/financial-wellness/authorized-user-strategy/`, `/financial-wellness/auto-loans-bad-credit/`, `/financial-wellness/borrowing-money-explained/`, `/financial-wellness/building-credit-from-zero/`, `/financial-wellness/checking-savings-guide/`, `/financial-wellness/choosing-credit-repair-company/`.
 
 Current indexation diagnosis from `indexation_status`:
 - `Crawled - currently not indexed` by family:
