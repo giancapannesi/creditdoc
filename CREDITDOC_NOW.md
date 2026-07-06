@@ -5933,6 +5933,12 @@ Verification before deploy:
 - Follow-up verification: `npm run build` passed, `node scripts/seo_deep_audit.mjs`
   passed, and local redirect-map checks passed for encoded and decoded versions
   of the 3 problem URLs.
+- Final deployed version: Cloudflare Workers
+  `1337ba0c-0b3c-43fe-97f3-6072f0768700`.
+- Final production sweep after purging all 802 stale review URLs from
+  Cloudflare cache: 805 unique `/review/` URLs from the GSC CSV checked,
+  `805` ended HTTP 200, `badCount=0`. Final destinations: 469 category pages,
+  332 `/review/` hub redirects, and 3 legitimate live review pages.
 
 Operational rule:
 - For GSC 404 cleanup, do not publish weak/draft review pages just to hide
