@@ -8,6 +8,8 @@ CreditDoc is being discovered by Google, but Google is mostly seeing the wrong s
 
 The latest available GSC export in `Traffic Analysis/` shows the site receiving impressions, but those impressions are dominated by low-position provider/entity review pages rather than the strategic revenue assets: money pages, tools, answers, financial wellness, and course pages.
 
+Important context: review pages make up the bulk of the discovered surface partly because they were the first/largest page family created. Local city pages also received manual URL Inspection submissions earlier, when the team believed the automatic API submission flow was producing more indexation impact than it actually was. Do not misread this as proof that Google prefers review/city pages strategically; it is partly a sequencing and submission-history artifact.
+
 Key evidence from `Traffic Analysis/Pages.csv` for 2026-05-20 to 2026-06-19:
 
 | Family | Impressions | Clicks | CTR | Avg position |
@@ -176,4 +178,3 @@ Commercial priority:
 ## Google Guidance Anchor
 
 Google's own documentation says sitemap submission is a hint and does not guarantee crawling or indexing. Google also says it does not guarantee every compliant page will be indexed or served. That matches the current diagnosis: the solution is not only submission volume; it is clearer crawl surface, stronger internal routing, better quality/authority signals, and fewer low-yield URLs competing for crawl/index attention.
-

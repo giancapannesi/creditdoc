@@ -15,6 +15,7 @@ What changed:
 Core diagnosis:
 - CreditDoc is being discovered by Google, but Google is mostly seeing the wrong surface.
 - Latest GSC export shows `/review/` pages produced 36,279 impressions and 8 clicks, while `/best/`, tools, answers, wellness, and course/revenue assets barely registered.
+- Context: review pages dominate discovery partly because they were the first/largest page family created. Local city pages also received manual URL Inspection submissions earlier when the team believed automatic API submissions were materially moving indexation.
 - Remaining technical risk is not duplicate metas/robots anymore; it is sitemap/runtime surface size and crawl priority: the sitemap advertises about 25k URLs, while most are runtime URLs rather than physical static HTML.
 - Strategic work should focus on sitemap narrowing, live sitemap validation, money-page routing, answer-to-money-page cluster mapping, exact commercial title/meta alignment, and data-led authority outreach.
 
