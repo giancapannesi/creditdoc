@@ -33,7 +33,29 @@ const {
   noindex,
   publicResource = false,
 } = Astro.props;
-const title = rawTitle.length > 65 ? rawTitle.slice(0, 62) + '...' : rawTitle;
+
+function trimTitleAtWord(value: string, maxLength: number) {
+  const cleaned = String(value || '').replace(/\s+/g, ' ').trim();
+  if (cleaned.length <= maxLength) return cleaned;
+  const truncated = cleaned.slice(0, maxLength).replace(/\s+\S*$/, '').trim();
+  return truncated || cleaned.slice(0, maxLength).trim();
+}
+
+const TITLE_MAX_LENGTH = 60;
+
+function normalizeTitle(value: string) {
+  const cleaned = String(value || '').replace(/\s+/g, ' ').trim();
+  const brandSuffix = ' | CreditDoc';
+  if (cleaned.length <= TITLE_MAX_LENGTH) return cleaned;
+  if (cleaned.endsWith(brandSuffix)) {
+    const base = cleaned.slice(0, -brandSuffix.length).trim();
+    if (base.length <= TITLE_MAX_LENGTH) return base;
+    return trimTitleAtWord(base, TITLE_MAX_LENGTH);
+  }
+  return trimTitleAtWord(cleaned, TITLE_MAX_LENGTH);
+}
+
+const title = normalizeTitle(rawTitle);
 const description = rawDesc.length > 160 ? rawDesc.slice(0, 157) + '...' : rawDesc;
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
 const ogImg = ogImage || 'https://www.creditdoc.co/og-default.png';

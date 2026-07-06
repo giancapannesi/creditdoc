@@ -5701,3 +5701,68 @@ Operational gap found and fixed:
   `/blog/can-a-student-get-credit-card/`.
 - Full live static SEO sweep passed after deploy: 769/769 URLs returned HTTP
   200, with 0 `x-cdm-cache`/`x-cdm-route` SSR headers and 0 `noindex`.
+
+## 2026-07-06 - Answer SEO metadata, schema keywords, and AI ingestion guard
+
+Implemented the answer-page SEO metadata improvement requested from the Phase 1
+KPI report.
+
+Changes:
+- Added `scripts/creditdoc_answer_meta_audit.mjs`.
+- Added npm scripts:
+  - `npm run check:answer-meta`
+  - `npm run seo:answer-meta:apply`
+  - `npm run check:ai-ingestion`
+- Added the answer metadata audit and AI-ingestion audit to
+  `automation/two_week_seo_calendar.json` and
+  `scripts/creditdoc_two_week_seo_runner.mjs`.
+- Backfilled answer `primary_phrase`/secondary phrase metadata in controlled
+  batches: 162/491 published answers now have `primary_phrase`; 329 remain.
+- Repaired bad generated primary phrases; `needs_primary_repair=0`.
+- Answer meta audit now reports `meta_too_short=0`, `meta_too_long=0`, and
+  `needs_meta_review=0`.
+- Added answer keyword output to Article JSON-LD on
+  `src/pages/answers/[slug].astro`.
+- Added `scripts/check_ai_ingestion_contract.mjs` to prebuild so robots and
+  `llms.txt` stay aligned for AI crawlers.
+- Added the same AI-ingestion contract to postbuild so built artifact checks
+  run after fresh `dist` generation, not only before build.
+- Tightened `public/llms.txt` to high-value static surfaces: sitemap index,
+  feeds, answers/tools/wellness/course hubs, key tools, key money pages, and
+  selected wellness resources. It must not point AI crawlers at `/go/`, `/api/`,
+  `/search/`, `/specials/`, or the non-existent `/sitemap.xml`.
+- Corrected `feed.xml` wording in `llms.txt`; both feed endpoints are RSS.
+- Fixed title normalization in `src/layouts/BaseLayout.astro` to avoid broken
+  ellipsis titles and keep rendered titles unique.
+- Shortened browse city/category title templates so category pages keep the
+  city/state in the title instead of collapsing to duplicates.
+- Debugger agent Mencius reviewed the changes. Its non-blocking findings were
+  addressed: audit-mode answer metadata reports now use `selected_candidates`
+  instead of falsely labeling candidates as `applied`, and the summary now
+  exposes `candidate_count`, `selected_candidate_count`, and
+  `primary_phrase_coverage_complete=false` while 329 answers remain.
+
+Verification:
+- `npm run build` passed with prebuild and postbuild contracts, including the
+  postbuild AI-ingestion artifact check.
+- `npm run check:seo-deep` passed: 2,875 rendered HTML pages checked,
+  25,129 sitemap URLs checked, `errors=0`, `warnings=0`.
+- `node scripts/check_ai_ingestion_contract.mjs` passed: robots advertises
+  `llms.txt`; `llms.txt` covers 17 high-value URLs and 151 built artifacts.
+- `npm run check:answer-meta` passed: 491 published answers, 0 missing answer
+  JSON files, 162 with `primary_phrase`, 329 missing `primary_phrase`, 0 meta
+  length/review issues, 329 remaining candidates, and 50 selected candidates for
+  the next controlled batch.
+- Dry-run of the two-week SEO runner for 2026-07-09 passed and includes answer
+  metadata plus AI-ingestion audits.
+- Rendered spot checks passed for answer pages, `/best/best-sba-loans/`,
+  `/tools/sba-loan-calculator/`, `/courses/credit-fundamentals/`,
+  `/financial-wellness/sba-loan-application-guide/`, and the formerly duplicate
+  browse check-cashing city pages.
+
+Important interpretation:
+- Regenerating pages is required because the SEO fields are compiled into the
+  static HTML in `dist`; the source changes are not visible to Google until the
+  static output is rebuilt and deployed.
+- This work did not stop or disable cron, feeds, publishing, Pinterest, or
+  LinkedIn automation.

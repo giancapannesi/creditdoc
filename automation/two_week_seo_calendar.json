@@ -132,12 +132,13 @@
       "day": 8,
       "title": "Startup/no-revenue line of credit page",
       "type": "implementation",
-      "auto_actions": ["write_daily_brief"],
+      "auto_actions": ["write_daily_brief", "audit_ai_ingestion"],
       "tasks": [
         "Build or improve targeted content for business line of credit for startup without revenue.",
         "Include business loan with no revenue and related startup financing terms.",
         "Explain limitations honestly: owner credit, bank activity, revenue, collateral, and alternatives.",
         "Link to startup business loans, line-of-credit calculator, readiness quiz, business loan calculator, and bad-credit business loans.",
+        "Confirm sitemap, robots, llms.txt, and schema surfaces expose the page family cleanly.",
         "Run build after changes."
       ]
     },
@@ -172,11 +173,16 @@
       "day": 11,
       "title": "Title and meta refinement from data",
       "type": "monitoring",
-      "auto_actions": ["write_daily_brief"],
+      "auto_actions": ["write_daily_brief", "audit_answer_meta", "audit_ai_ingestion"],
       "tasks": [
         "Pull GSC queries for URLs with impressions.",
+        "Run the answer SEO metadata audit and review /answers/ primary_phrase coverage.",
+        "Backfill answer primary_phrase/secondary_phrases in controlled batches using the page question, title, FAQ language, and mapped money page.",
+        "Prioritize answers that support indexed money pages, tools, course pages, and high-intent lending/credit phrases.",
         "Compare query language to current titles/metas.",
         "Rewrite titles/metas only where data shows mismatch or weak CTR.",
+        "Confirm answer Article and FAQ schema still reflects the rendered page content.",
+        "Confirm answer URLs remain in sitemap and AI-readable surfaces without noindex/blocking.",
         "Avoid duplicate metas across money/tool/support pages.",
         "Run build after changes."
       ]
@@ -198,10 +204,11 @@
       "day": 13,
       "title": "Indexation and crawl cleanup",
       "type": "technical",
-      "auto_actions": ["write_daily_brief", "run_build_checks", "force_priority_urls"],
+      "auto_actions": ["write_daily_brief", "run_build_checks", "force_priority_urls", "audit_ai_ingestion"],
       "tasks": [
         "Re-run priority indexation checks.",
         "Confirm newly added pages are live 200, canonical to themselves, in sitemap, linked internally, not blocked, and queued/submitted where possible.",
+        "Confirm llms.txt still points AI crawlers to indexable, static, high-value hubs and not noindex/search/outbound redirect routes.",
         "Check whether SE Ranking issues are real technical issues or crawler interpretation.",
         "Keep important unknown URLs in the forced indexing queue."
       ]

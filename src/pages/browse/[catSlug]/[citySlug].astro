@@ -56,7 +56,7 @@ const topRated = googleRated.filter(l => l.description_short?.length > 20).slice
 const totalRated = googleRated.length;
 const avgRating = totalRated > 0 ? (googleRated.reduce((s, l) => s + (l.google_rating || 0), 0) / totalRated).toFixed(1) : null;
 
-const title = `${category.name} Provider Profiles in ${cityInfo.city}, ${cityInfo.stateAbbr} (2026) | CreditDoc`;
+const title = `${category.name} in ${cityInfo.city}, ${cityInfo.stateAbbr} (2026) | CreditDoc`;
 const description = `Review ${displayLenders.length} listed ${category.name.toLowerCase()} profiles associated with ${cityInfo.city}, ${cityInfo.state}. ${avgRating ? `Average stored Google rating where available: ${avgRating}/5.` : ''} Check pricing fields, public ratings, and local provider context.`;
 
 const jsonLd = [

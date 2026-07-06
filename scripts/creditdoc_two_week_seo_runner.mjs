@@ -94,11 +94,57 @@ function runBuildChecks(dryRun) {
     timeout: 1000 * 60 * 8,
   });
   const logPath = `${ROOT}/logs/creditdoc_two_week_seo_build_${new Date().toISOString().replace(/[:.]/g, '-')}.log`;
+  ensureDir(path.dirname(logPath));
   fs.writeFileSync(logPath, `${result.stdout || ''}\n${result.stderr || ''}`);
   return {
     action: 'run_build_checks',
     ok: result.status === 0,
     detail: `exit ${result.status}; log ${logPath}`,
+  };
+}
+
+function auditAnswerMeta(dryRun) {
+  if (dryRun) {
+    return { action: 'audit_answer_meta', ok: true, detail: 'dry-run skipped answer meta audit' };
+  }
+  const result = spawnSync('node', ['scripts/creditdoc_answer_meta_audit.mjs', '--limit', '100'], {
+    cwd: CREDITDOC,
+    encoding: 'utf8',
+    timeout: 1000 * 60 * 3,
+  });
+  const logPath = `${ROOT}/logs/creditdoc_answer_meta_audit_${new Date().toISOString().replace(/[:.]/g, '-')}.log`;
+  ensureDir(path.dirname(logPath));
+  fs.writeFileSync(logPath, `${result.stdout || ''}\n${result.stderr || ''}`);
+  let detail = `exit ${result.status}; report ${CREDITDOC}/reports/answer-seo-meta-audit.json; log ${logPath}`;
+  try {
+    const summary = JSON.parse(result.stdout || '{}');
+    detail = `missing_primary_phrase=${summary.missing_primary_phrase}, needs_meta_review=${summary.needs_meta_review}; report ${CREDITDOC}/reports/answer-seo-meta-audit.json`;
+  } catch {
+    // Keep the raw exit/log detail if stdout is not JSON.
+  }
+  return {
+    action: 'audit_answer_meta',
+    ok: result.status === 0,
+    detail,
+  };
+}
+
+function auditAiIngestion(dryRun) {
+  if (dryRun) {
+    return { action: 'audit_ai_ingestion', ok: true, detail: 'dry-run skipped AI ingestion contract check' };
+  }
+  const result = spawnSync('node', ['scripts/check_ai_ingestion_contract.mjs'], {
+    cwd: CREDITDOC,
+    encoding: 'utf8',
+    timeout: 1000 * 60,
+  });
+  const detail = result.status === 0
+    ? (result.stdout || '').trim()
+    : `exit ${result.status}; ${(result.stderr || result.stdout || '').trim()}`;
+  return {
+    action: 'audit_ai_ingestion',
+    ok: result.status === 0,
+    detail,
   };
 }
 
@@ -171,6 +217,8 @@ function main() {
   for (const action of job.auto_actions) {
     if (action === 'force_priority_urls') results.push(forcePriorityUrls(calendar, args.dryRun));
     else if (action === 'run_build_checks') results.push(runBuildChecks(args.dryRun));
+    else if (action === 'audit_answer_meta') results.push(auditAnswerMeta(args.dryRun));
+    else if (action === 'audit_ai_ingestion') results.push(auditAiIngestion(args.dryRun));
   }
   results.unshift(writeDailyBrief(calendar, job, results, args.dryRun));
 

@@ -56,6 +56,15 @@ const keyTakeaways = sections.slice(0, 4).map(s => softenEducationalTeaserCopy(f
 const displayTitle = softenEducationalTeaserCopy(answer.title || answer.h1 || '');
 const displayH1 = softenEducationalTeaserCopy(answer.h1 || answer.title || '');
 const displayDescription = softenEducationalTeaserCopy(answer.meta_description || '');
+const secondaryPhrases = Array.isArray(answer.secondary_phrases)
+  ? answer.secondary_phrases.map((item) => typeof item === 'string' ? item : item?.phrase).filter(Boolean)
+  : [];
+const answerKeywords = [...new Set([
+  answer.primary_phrase,
+  ...secondaryPhrases,
+  answer.cluster_pillar?.replace(/-/g, ' '),
+  answer.banner_category?.replace(/-/g, ' '),
+].filter(Boolean).map((item) => String(item).trim()))];
 
 const categoryLabels: Record<string, string> = {
   'build-credit': 'Credit Building',
@@ -169,6 +178,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: displayH1,
   description: displayDescription,
+  keywords: answerKeywords,
   author: {
     '@type': 'Person',
     name: 'Harvey Brooks',
