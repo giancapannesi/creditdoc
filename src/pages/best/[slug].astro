@@ -66,10 +66,6 @@ function softenListicleCopy(text: string): string {
 
 function softenListicleTitle(title: string): string {
   return softenListicleCopy(title)
-    .replace(/^(\d+\s+)Best\b/i, '$1Compare')
-    .replace(/^Best\b/i, 'Compare')
-    .replace(/\bBest\b/g, 'Compare')
-    .replace(/\bbest\b/g, 'compare')
     .replace(/^Cheapest\b/i, 'Lower-Cost')
     .replace(/\bTop\b/g, 'Notable')
     .replace(/\btop\b/g, 'notable')
@@ -80,12 +76,23 @@ function softenListicleTitle(title: string): string {
     .replace(/\bLow Credit Score Options\b/gi, 'Lower Credit Score Profiles');
 }
 
+function bestIntentSeoDescription(description: string, title: string): string {
+  const softened = softenListicleCopy(description);
+  if (!/\bbest\b/i.test(title) || /\bbest\b/i.test(softened)) return softened;
+  const shortTitle = title
+    .replace(/\s*\([^)]*\)/g, '')
+    .replace(/\s*[—-].*$/, '')
+    .replace(/\s*\|\s*CreditDoc.*$/i, '')
+    .trim();
+  return `${shortTitle}: ${softened}`;
+}
+
 const displayListicle = {
   ...listicle,
   title: softenListicleTitle(listicle.title),
   seo_title: softenListicleTitle(listicle.seo_title),
   description: softenListicleCopy(listicle.description),
-  seo_description: softenListicleCopy(listicle.seo_description),
+  seo_description: bestIntentSeoDescription(listicle.seo_description, listicle.seo_title || listicle.title),
   intro: softenListicleCopy(listicle.intro),
   tldr: listicle.tldr ? softenListicleCopy(listicle.tldr) : undefined,
   key_takeaways: listicle.key_takeaways.map((takeaway) => softenListicleCopy(takeaway)),

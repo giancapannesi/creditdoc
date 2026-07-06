@@ -5776,6 +5776,46 @@ Important interpretation:
 - This work did not stop or disable cron, feeds, publishing, Pinterest, or
   LinkedIn automation.
 
+## 2026-07-06 - Restored Best intent on money-page SERPs
+
+Fixed an over-broad YMYL/listicle softening helper that rewrote `/best/`
+money-page SEO identity from `Best` to `Compare` at render time. The source
+listicles still carried `Best`, but `src/pages/best/[slug].astro` was changing
+SEO-critical fields during rendering.
+
+Changes:
+- Removed the `Best`/`best` -> `Compare`/`compare` rewrite from
+  `softenListicleTitle` so `/best/` page titles, H1s, and Article schema
+  headlines preserve exact commercial search intent.
+- Added `bestIntentSeoDescription` so meta descriptions keep `Best` when the
+  source SEO title uses `Best`, while still allowing cautious comparison wording
+  in body copy.
+- Added `scripts/check_best_serp_contract.mjs`, `npm run check:best-serp`, and
+  a postbuild guard so `/best/` rendered title, H1, meta description, and
+  Article schema headline cannot silently lose `Best` or render as `Compare`.
+
+Verification:
+- `npm run build` passed, including the new postbuild
+  `[best-serp-contract]` check.
+- `npm run check:best-serp` passed: 26 `/best/` listicle pages preserve source
+  `Best` title intent.
+- `npm run check:seo-deep` passed: 2,875 rendered HTML pages, 25,129 sitemap
+  URLs, `errors=0`, `warnings=0`.
+- `npm run check:schema-sitemap` passed: 25,123 sitemap page URLs, 2,875 HTML
+  pages, `warnings=0`.
+- Rendered spot checks confirmed `Best` in title/H1/meta description for
+  `/best/best-sba-loans/`, `/best/best-small-business-loans/`,
+  `/best/best-business-lines-of-credit/`, and
+  `/best/best-credit-repair-companies/`.
+
+Important rule:
+- Compliance caution should not erase exact SEO intent in page identity. Keep
+  caution in claims/body language, but do not let scripts rewrite high-intent
+  `/best/` title, H1, meta description, canonical identity, or schema headline
+  away from the source page promise.
+- This work did not stop or disable cron, feeds, publishing, Pinterest, or
+  LinkedIn automation.
+
 ## 2026-07-06 - Sitemap and schema contract guard
 
 Added a postbuild contract so sitemap structure and rendered JSON-LD schema are
