@@ -5413,3 +5413,37 @@ Verification:
 Rule going forward: answers/questions, blogs, tools, financial wellness, and
 courses are important SEO surfaces and should stay static HTML plus excluded
 from Worker routing unless the user explicitly approves a change.
+
+## 2026-07-06 - Follow-up verification after static SEO hardening
+
+Rechecked the 2026-07-05 fixes on current HEAD after the automated blog commit
+`82e7d63da1` (`blog: add 2 article(s) — 2026-07-06`).
+
+Verification:
+- Repo was clean before verification.
+- `npm run build` passed on current HEAD.
+- Prebuild checks passed: content text integrity, robots contract, SSR sitemap
+  parity.
+- Postbuild checks passed: sitemap/robots conflicts, critical sitemap URLs,
+  feed contract, image alt contract, and image filename contract.
+- Generated static SEO counts after build:
+  - `answers`: 492.
+  - `blog`: 108.
+  - `tools`: 19.
+  - `financial-wellness`: 140.
+  - `courses`: 10.
+- Generated `_routes.json` still contains all required exact/wildcard excludes
+  for `/answers`, `/blog`, `/tools`, `/financial-wellness`, and `/courses`.
+- Live SE Ranking snapshot sweep still passed: 124/124 URLs returned 200,
+  included the static snapshot marker, and had no `noindex`.
+
+Operational gap found and fixed:
+- The two new 2026-07-06 blog URLs built locally but were initially 404 on
+  production because the latest content commit had not been deployed yet.
+- Deployed the current build to Cloudflare Workers; Version ID:
+  `2a2724fc-85c0-4120-9b87-99e09785e1bb`.
+- Confirmed both new blog URLs are now live:
+  `/blog/can-a-low-credit-score-get-a-mortgage/` and
+  `/blog/can-a-student-get-credit-card/`.
+- Full live static SEO sweep passed after deploy: 769/769 URLs returned HTTP
+  200, with 0 `x-cdm-cache`/`x-cdm-route` SSR headers and 0 `noindex`.
