@@ -4,6 +4,23 @@
 
 ---
 
+## 2026-07-06 - Feed watchdog false robots failure fixed
+
+Status: fixed and verified; no cron, feed, publishing, Pinterest, or LinkedIn automation stopped.
+
+What happened:
+- The 11:12 UTC feed continuity watchdog failed only on `required surfaces`.
+- Root cause was a stale monitor rule in `/srv/BusinessOps/tools/creditdoc_required_surfaces.py` that still required `Disallow: /go/` in `/robots.txt`.
+- That old requirement conflicted with the current SEO fix: `/go/*` must stay crawlable so Google can see `X-Robots-Tag: noindex, nofollow`.
+
+Fix:
+- Updated `creditdoc_required_surfaces.py` to reject `Disallow: /go/` and instead verify a representative `/go/` redirect returns `X-Robots-Tag` containing `noindex` and `nofollow`.
+
+Verification:
+- `/srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/creditdoc_required_surfaces.py` passed.
+- `/srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/creditdoc_feed_continuity_watchdog.py` passed at 2026-07-06 12:00 UTC.
+- Feeds, required surfaces, answer HTML, wellness HTML, tools HTML, courses HTML, and all monitored content crons were OK.
+
 ## 2026-07-06 - Specialist SEO agent review saved
 
 Status: completed as a strategic review; no code, cron, feed, publishing, Pinterest, or LinkedIn automation changed.
