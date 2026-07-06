@@ -4,6 +4,27 @@
 
 ---
 
+## 2026-07-06 - Specialist SEO agent review saved
+
+Status: completed as a strategic review; no code, cron, feed, publishing, Pinterest, or LinkedIn automation changed.
+
+What changed:
+- Ran four specialist review lanes: technical SEO/crawl, content SEO/keyword architecture, authority/digital PR, and commercial SEO/SERP conversion.
+- Saved the consolidated review to `SEO/SPECIALIST_SEO_AGENT_REVIEW_2026-07-06.md`.
+
+Core diagnosis:
+- CreditDoc is being discovered by Google, but Google is mostly seeing the wrong surface.
+- Latest GSC export shows `/review/` pages produced 36,279 impressions and 8 clicks, while `/best/`, tools, answers, wellness, and course/revenue assets barely registered.
+- Remaining technical risk is not duplicate metas/robots anymore; it is sitemap/runtime surface size and crawl priority: the sitemap advertises about 25k URLs, while most are runtime URLs rather than physical static HTML.
+- Strategic work should focus on sitemap narrowing, live sitemap validation, money-page routing, answer-to-money-page cluster mapping, exact commercial title/meta alignment, and data-led authority outreach.
+
+Do next:
+- Build/live-run sitemap status validator.
+- Narrow sitemap exposure for low-yield runtime review/city/category surfaces.
+- Align `data/money_page_map.json` and `src/utils/inline-linker.ts`.
+- Review `/best` title/meta softening from "Best" to "Compare".
+- Keep manual GSC quota focused on tools, course, high-intent wellness, answers, and money pages.
+
 ## 2026-07-06 - LinkedIn footer link added
 
 Status: implemented locally, build/audit clean, no cron or publishing automation changed.
