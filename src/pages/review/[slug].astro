@@ -11,6 +11,7 @@ import HMDARecord from '../../components/HMDARecord.astro';
 import InfoLink from '../../components/InfoLink.astro';
 import StateRegulatoryContext from '../../components/StateRegulatoryContext.astro';
 import cfpbResponsiveReport from '../../data/cfpb-responsive-providers-2026.json';
+import gscReview404Redirects from '../../../data/gsc_404_review_redirects_2026-07-06.json';
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
 import { buildLenderGoHref, normalizeTelHref } from '../../utils/outbound';
 import { softenEducationalTeaserCopy, softenYmylCopy } from '../../utils/safe-copy';
@@ -68,6 +69,11 @@ const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
 
 const { slug } = Astro.params;
 if (!slug) return new Response('Bad request', { status: 400 });
+
+const gscReview404RedirectTarget = (gscReview404Redirects as Record<string, string>)[`/review/${slug}/`];
+if (gscReview404RedirectTarget) {
+  return Astro.redirect(gscReview404RedirectTarget, 301);
+}
 
 const staleReviewRedirects: Record<string, string> = {
   'first-heritage-loan-firm': '/categories/personal-loans/',

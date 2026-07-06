@@ -5905,6 +5905,35 @@ Important rule:
 - This work did not stop or disable cron, feeds, publishing, Pinterest, or
   LinkedIn automation.
 
+## 2026-07-06 - GSC review 404 route-level guard
+
+The first GSC review 404 remediation added a manifest and middleware redirect
+map for 802 stale `/review/` URLs from `SEO/Table 404 Missing Pages.csv`, plus a
+static `/review/` hub. Live testing showed sample stale review URLs still
+returned 404 after deploy, even though the manifest was present in the worker
+and other middleware redirects worked.
+
+Second-pass fix:
+- Added the same GSC stale-review redirect lookup directly inside
+  `src/pages/review/[slug].astro`, before the review database lookup.
+- This keeps known stale GSC review URLs from reaching the SSR 404 path even if
+  middleware routing does not catch the request first.
+- Keep legitimate live review pages excluded from the manifest:
+  `/review/power-financial/`, `/review/pioneer-appalachia/`, and
+  `/review/mattel/`.
+
+Verification before deploy:
+- `npm run build` passed with all postbuild contracts.
+- `node scripts/seo_deep_audit.mjs` passed: 2,879 rendered HTML pages, 25,133
+  sitemap URLs, `errors=0`, `warnings=0`.
+
+Operational rule:
+- For GSC 404 cleanup, do not publish weak/draft review pages just to hide
+  errors. Redirect stale/bad crawl paths to the most relevant durable category
+  or hub, and prove the behavior with live `curl` checks after deploy.
+- This work did not stop or disable cron, feeds, publishing, Pinterest, or
+  LinkedIn automation.
+
 ## 2026-07-06 - Sitemap and schema contract guard
 
 Added a postbuild contract so sitemap structure and rendered JSON-LD schema are
