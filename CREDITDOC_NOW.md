@@ -4,6 +4,44 @@
 
 ---
 
+## 2026-07-06 - SE Ranking 404 table diagnosis
+
+Source checked: `/srv/BusinessOps/creditdoc/SEO/Table.csv` updated 2026-07-06 10:30 UTC.
+
+Findings:
+- CSV has 1,000 rows with only `URL` and `Last crawled`; it appears to be an exported SE Ranking issue bucket, not a full status table.
+- Route-family split:
+  - 964 `/review/` URLs
+  - 22 `/city/` URLs
+  - 9 `/browse/` URLs
+  - 4 `/compare/` URLs
+  - 1 `/categories/` URL
+- Host duplicates exist: 159 duplicate paths from `creditdoc.co` vs `www.creditdoc.co` variants.
+- Only 3 of the 1,000 reported paths are in the current generated sitemap:
+  - `/review/power-financial/`
+  - `/review/pioneer-appalachia/`
+  - `/review/mattel/`
+- None of the reported paths currently have static `dist/.../index.html` output.
+- For `/review/` rows, about half have local lender JSON and half do not:
+  - 484 rows have a matching `src/content/lenders/<slug>.json` row.
+  - 480 review rows have no matching local lender JSON.
+- Representative live checks confirm current real 404s for the reported review/city/compare/category paths, while known published review pages like `/review/prosper/` and `/review/deluxe-credit-solutions/` return 200.
+
+Diagnosis:
+- This is mainly review-directory crawl exposure, not a tools/answers/blog/wellness feed problem.
+- SE Ranking is finding old or internally linked `/review/` URLs for providers that are not currently published/static/live. Some were likely generated historically from directory/listing data and later not included in the published review set.
+- The city/browse rows are old full-state slugs, e.g. `/city/cedar-park-texas/`, while the live site uses abbreviation slugs such as `/city/cedar-park-tx/`. Some browse full-state URLs redirect correctly; others still 404 because no live category/city combination exists.
+- `/categories/fix-my-credit/` is an old alias; live category is `/categories/credit-repair/`.
+- The four `/compare/` rows are old comparison slugs that are not in the current generated comparison corpus.
+- Separate small snippet with `/go/...` and `/search/?state=...`: live checks returned 200 after redirects. `/go/` is intentionally noindex/nofollow redirect utility; `/search/?state=Texas|Utah|Iowa` redirects to `/state/<state>/`.
+
+Recommended fix order:
+1. Remove/stop internal links to unpublished `/review/` pages, or route them to a safe category/city fallback when the review is not published.
+2. Add redirect/alias handling for old full-state city and browse slugs to abbreviation slugs where an equivalent page exists.
+3. Add alias redirect for `/categories/fix-my-credit/` to `/categories/credit-repair/`.
+4. For the 3 sitemap-listed review 404s, either publish those review pages or remove them from sitemap injection immediately.
+5. Treat old compare slugs as redirect candidates only if there is a current equivalent; otherwise leave 404/410 and stop internal links.
+
 ## 2026-07-06 - Feed health check and answer pipeline recovery
 
 Status: all CreditDoc public/content feed checks are green as of 2026-07-06 10:28 UTC.
