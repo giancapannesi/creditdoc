@@ -1,5 +1,6 @@
 ---
 const currentYear = new Date().getFullYear();
+const linkedinUrl = 'https://www.linkedin.com/company/creditdoc-co/';
 
 const categoryLinks = [
   { name: 'Credit Repair', href: '/categories/credit-repair/' },
@@ -24,6 +25,7 @@ const resourceLinks = [
   { name: 'Privacy Policy', href: '/privacy/' },
   { name: 'Terms of Service', href: '/terms/' },
   { name: 'Accessibility', href: '/accessibility/' },
+  { name: 'LinkedIn', href: linkedinUrl, external: true },
 ];
 
 const toolLinks = [
@@ -112,7 +114,7 @@ const comparisonLinks = [
         <ul class="mt-4 space-y-3">
           {resourceLinks.map(link => (
             <li>
-              <a href={link.href} class="text-sm text-muted hover:text-primary transition-colors">
+              <a href={link.href} class="text-sm text-muted hover:text-primary transition-colors" target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
                 {link.name}
               </a>
             </li>
@@ -196,6 +198,8 @@ const comparisonLinks = [
         <a href="/disclosure/" class="text-xs text-muted hover:text-primary transition-colors">Disclosure</a>
         <span class="text-border">|</span>
         <a href="/do-not-sell/" class="text-xs text-muted hover:text-primary transition-colors">Do Not Sell</a>
+        <span class="text-border">|</span>
+        <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" class="text-xs text-muted hover:text-primary transition-colors">LinkedIn</a>
       </div>
     </div>
   </div>

@@ -38,6 +38,7 @@ const description = rawDesc.length > 160 ? rawDesc.slice(0, 157) + '...' : rawDe
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
 const ogImg = ogImage || 'https://www.creditdoc.co/og-default.png';
 const resolvedOgType = ogType || 'website';
+const linkedinUrl = 'https://www.linkedin.com/company/creditdoc-co/';
 ---
 
 <!doctype html>
@@ -194,6 +195,7 @@ const resolvedOgType = ogType || 'website';
               <li><a href="/contact/" class="text-sm text-muted hover:text-primary">Contact</a></li>
               <li><a href="/methodology/" class="text-sm text-muted hover:text-primary">Methodology</a></li>
               <li><a href="/editorial-policy/" class="text-sm text-muted hover:text-primary">Editorial Policy</a></li>
+              <li><a href={linkedinUrl} target="_blank" rel="noopener noreferrer" class="text-sm text-muted hover:text-primary">LinkedIn</a></li>
             </ul>
           </div>
         </div>
@@ -213,6 +215,7 @@ const resolvedOgType = ogType || 'website';
             <a href="/terms/" class="text-xs text-muted hover:text-primary">Terms</a>
             <a href="/disclaimer/" class="text-xs text-muted hover:text-primary">Disclaimer</a>
             <a href="/accessibility/" class="text-xs text-muted hover:text-primary">Accessibility</a>
+            <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" class="text-xs text-muted hover:text-primary">LinkedIn</a>
           </div>
         </div>
       </div>

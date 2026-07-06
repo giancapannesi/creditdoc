@@ -4,6 +4,20 @@
 
 ---
 
+## 2026-07-06 - LinkedIn footer link added
+
+Status: implemented locally, build/audit clean, no cron or publishing automation changed.
+
+What changed:
+- Added the public CreditDoc LinkedIn company profile link to the standard site footer and the public resource footer.
+- Profile URL used: `https://www.linkedin.com/company/creditdoc-co/`.
+- External footer links render with `target="_blank"` and `rel="noopener noreferrer"`.
+
+Verification:
+- `npm run build` passed, including sitemap/robots, critical sitemap URL, feed, image alt, and image filename checks.
+- Rendered homepage and resources page both include the LinkedIn footer links.
+- `node scripts/seo_deep_audit.mjs` passed with `errors=0, warnings=0` across 2,875 rendered HTML pages and 25,129 sitemap URLs.
+
 ## 2026-07-06 - Manual GSC queue fixed to 10/day and unindexed action plan saved
 
 Status: in progress operationally; automation corrected for the founder's actual 10 manual GSC URL Inspection submissions/day.
