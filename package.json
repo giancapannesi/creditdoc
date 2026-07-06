@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "prebuild": "node scripts/check_content_text_integrity.mjs && node scripts/check_robots_contract.mjs && node scripts/check_ai_ingestion_contract.mjs && node scripts/check_ssr_sitemap_parity.mjs",
-    "postbuild": "node scripts/check_sitemap_robots_conflicts.mjs && node scripts/check_sitemap_critical_urls.mjs && node scripts/check_feed_contract.mjs && node scripts/check_image_alt_contract.mjs && node scripts/check_image_filename_contract.mjs && node scripts/check_ai_ingestion_contract.mjs",
+    "postbuild": "node scripts/check_sitemap_robots_conflicts.mjs && node scripts/check_sitemap_critical_urls.mjs && node scripts/check_schema_sitemap_contract.mjs && node scripts/check_feed_contract.mjs && node scripts/check_image_alt_contract.mjs && node scripts/check_image_filename_contract.mjs && node scripts/check_ai_ingestion_contract.mjs",
     "build": "astro build",
     "check:answer-meta": "node scripts/creditdoc_answer_meta_audit.mjs",
     "seo:answer-meta:apply": "node scripts/creditdoc_answer_meta_audit.mjs --apply --limit 50",
@@ -13,6 +13,7 @@
     "check:comparison-db-freshness": "node scripts/check_comparison_db_freshness.mjs",
     "check:content-text-integrity": "node scripts/check_content_text_integrity.mjs",
     "check:ai-ingestion": "node scripts/check_ai_ingestion_contract.mjs",
+    "check:schema-sitemap": "node scripts/check_schema_sitemap_contract.mjs",
     "check:seo-deep": "node scripts/seo_deep_audit.mjs",
     "check:live-sitemap": "node scripts/check_live_sitemap_status.mjs",
     "check:comparison-batch-scope": "node scripts/check_comparison_batch_scope.mjs",

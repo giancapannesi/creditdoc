@@ -5775,3 +5775,40 @@ Important interpretation:
   static output is rebuilt and deployed.
 - This work did not stop or disable cron, feeds, publishing, Pinterest, or
   LinkedIn automation.
+
+## 2026-07-06 - Sitemap and schema contract guard
+
+Added a postbuild contract so sitemap structure and rendered JSON-LD schema are
+validated every time the site is built.
+
+Changes:
+- Added `scripts/check_schema_sitemap_contract.mjs`.
+- Added `npm run check:schema-sitemap`.
+- Added the schema/sitemap contract to `postbuild`, after critical sitemap URL
+  checks and before feed/image/AI ingestion checks.
+- The contract validates sitemap index/files, Google URL/file limits, duplicate
+  sitemap URLs, same-origin canonical URL shape, forbidden utility URLs, sitemap
+  family crawl-budget guardrails, and static HTML artifacts for important SEO
+  families.
+- The contract validates rendered JSON-LD syntax, `@context`, `@type`,
+  required schema types for answers/best/blog/courses/financial-wellness/tools,
+  self-canonicals, title/meta presence, and minimum rendered content depth.
+- Legitimate supporting schema URLs for publisher, author, breadcrumbs, related
+  links, and hub-level defined-term schema are not treated as page canonical
+  mismatches.
+
+Verification:
+- `npm run build` passed, including the new postbuild contract.
+- `npm run check:schema-sitemap` passed: 25,123 sitemap page URLs, 2,875
+  rendered HTML pages, `warnings=0`.
+- `npm run check:seo-deep` passed: 2,875 rendered HTML pages, 25,129 sitemap
+  URLs, `errors=0`, `warnings=0`.
+
+Important interpretation:
+- The sitemap is not missing the core surfaces. Current family counts are
+  intentionally measured and guarded; `/review/` and `/credit-guide/` still
+  dominate sitemap volume, so future strategy should narrow low-yield crawl
+  noise carefully rather than accidentally removing revenue or helpful-content
+  surfaces.
+- This work did not stop or disable cron, feeds, publishing, Pinterest, or
+  LinkedIn automation.
