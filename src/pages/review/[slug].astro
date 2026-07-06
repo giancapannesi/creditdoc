@@ -48,6 +48,27 @@ import type { Lender } from '../../utils/data';
 // invalidates → next request re-fetches. <10s globally, no rebuild.
 export const prerender = false;
 
+function normalizeStaleReviewPath(pathname: string): string {
+  let decoded = pathname;
+  try {
+    decoded = decodeURIComponent(pathname);
+  } catch {
+    decoded = pathname;
+  }
+  return decoded
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/\/+$/, '/');
+}
+
+const GSC_REVIEW_404_REDIRECTS = new Map<string, string>(
+  Object.entries(gscReview404Redirects as Record<string, string>).map(([pathname, target]) => [
+    normalizeStaleReviewPath(pathname),
+    target,
+  ])
+);
+
 const STATE_ABBR: Record<string, string> = {
   'Alabama':'AL','Alaska':'AK','Arizona':'AZ','Arkansas':'AR','California':'CA',
   'Colorado':'CO','Connecticut':'CT','Delaware':'DE','Florida':'FL','Georgia':'GA',
@@ -70,7 +91,7 @@ const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
 const { slug } = Astro.params;
 if (!slug) return new Response('Bad request', { status: 400 });
 
-const gscReview404RedirectTarget = (gscReview404Redirects as Record<string, string>)[`/review/${slug}/`];
+const gscReview404RedirectTarget = GSC_REVIEW_404_REDIRECTS.get(normalizeStaleReviewPath(`/review/${slug}/`));
 if (gscReview404RedirectTarget) {
   return Astro.redirect(gscReview404RedirectTarget, 301);
 }

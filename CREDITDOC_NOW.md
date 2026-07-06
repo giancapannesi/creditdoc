@@ -5926,6 +5926,13 @@ Verification before deploy:
 - `npm run build` passed with all postbuild contracts.
 - `node scripts/seo_deep_audit.mjs` passed: 2,879 rendered HTML pages, 25,133
   sitemap URLs, `errors=0`, `warnings=0`.
+- Full live sweep after deploy initially found 3 remaining non-ASCII encoded
+  stale review URLs. The redirect manifest keys and incoming route paths are now
+  normalized consistently in both middleware and `src/pages/review/[slug].astro`
+  so encoded and decoded Unicode variants hit the same redirect target.
+- Follow-up verification: `npm run build` passed, `node scripts/seo_deep_audit.mjs`
+  passed, and local redirect-map checks passed for encoded and decoded versions
+  of the 3 problem URLs.
 
 Operational rule:
 - For GSC 404 cleanup, do not publish weak/draft review pages just to hide

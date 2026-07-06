@@ -54,10 +54,6 @@ const SERANKING_STATIC_SNAPSHOT_PATHS = new Set(
   })
 );
 
-const GSC_REVIEW_404_REDIRECTS = new Map<string, string>(
-  Object.entries(gscReview404Redirects as Record<string, string>)
-);
-
 const LEGACY_CATEGORY_REDIRECTS = new Map<string, string>([
   ['fix-my-credit', 'credit-repair'],
 ]);
@@ -114,6 +110,13 @@ function normalizeLegacyPath(pathname: string): string {
     .replace(/-+/g, '-')
     .replace(/\/+$/, '/');
 }
+
+const GSC_REVIEW_404_REDIRECTS = new Map<string, string>(
+  Object.entries(gscReview404Redirects as Record<string, string>).map(([pathname, target]) => [
+    normalizeLegacyPath(pathname),
+    target,
+  ])
+);
 
 function legacyRedirectTarget(pathname: string): string | null {
   const normalized = normalizeLegacyPath(pathname);
