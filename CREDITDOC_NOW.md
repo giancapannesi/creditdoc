@@ -4,6 +4,24 @@
 
 ---
 
+## 2026-07-06 - Content audit blog 404s cleared
+
+Status: verified clear; no cron, feed, publishing, Pinterest, or LinkedIn automation stopped.
+
+What happened:
+- User pasted a daily content audit showing 2 blog 404s:
+  - `/blog/can-a-low-credit-score-get-a-mortgage/`
+  - `/blog/can-a-student-get-credit-card/`
+- Live production checks at 2026-07-06 12:01 UTC returned HTTP 200 for both URLs.
+- Both pages have canonical tags and appear as the newest items in `/rss.xml`.
+
+Verification:
+- `/srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/creditdoc_content_audit.py --preview --no-fix` returned `0 issues found`.
+- The preview showed 12 city guides, 4 blogs, 0 answers, 0 wellness, required public surfaces OK, and all 4 recent blog posts OK.
+
+Interpretation:
+- The pasted audit was stale relative to the current production state, likely from before the later deploy/cache refresh made the two blog pages live.
+
 ## 2026-07-06 - Feed watchdog false robots failure fixed
 
 Status: fixed and verified; no cron, feed, publishing, Pinterest, or LinkedIn automation stopped.
