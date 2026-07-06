@@ -4,6 +4,45 @@
 
 ---
 
+## 2026-07-06 - Feed health check and answer pipeline recovery
+
+Status: all CreditDoc public/content feed checks are green as of 2026-07-06 10:28 UTC.
+
+What was checked:
+- Live `/rss.xml` and `/feed.xml`: both return 50 items; newest item is dated 2026-07-06.
+- Required public surfaces: homepage, robots, llms, sitemap index, sitemap shard, search JSON, blog index, answers index, money page, representative answer page, and representative blog page all OK.
+- Static HTML feed surfaces:
+  - `/answers/`: 491 generated answer HTML pages passed title/meta/H1/canonical/content checks.
+  - `/financial-wellness/`: 139 generated HTML pages passed title/meta/H1/canonical/content checks.
+  - `/tools/`: 19 generated HTML pages passed title/meta/H1/canonical/content checks.
+  - `/courses/`: 10 generated HTML pages passed title/meta/H1/canonical/content checks.
+- Content audit preview: 0 issues; 12 city guides and 4 blogs created in the last 48 hours; course pages all OK.
+- Blog/city feeds are running today. Wellness/comparison jobs were pending because their cron times had not yet arrived.
+
+Fixes/actions:
+- The answer feed was stale: `cluster_state.json` had last successful answer publish at 2026-06-19/21 while cron was only showing smoke-test dry runs before the scheduled 13:00 UTC job.
+- Ran the answer publisher manually under the normal DB writer lock:
+  `/srv/BusinessOps/tools/creditdoc_cluster_executor.py --apply`
+- Published and pushed:
+  `https://creditdoc.co/answers/can-you-transfer-a-credit-card-balance/`
+- Verified the live page returns 200 and has:
+  - title length 51
+  - meta length 156
+  - canonical `https://www.creditdoc.co/answers/can-you-transfer-a-credit-card-balance/`
+  - static HTML in `dist/answers/can-you-transfer-a-credit-card-balance/index.html`
+- Patched `/srv/BusinessOps/tools/cluster_pipeline_watchdog.py` so old historical failures before the latest successful publish do not keep the answer watchdog red forever. The watchdog now reports healthy after a new publish.
+- Blog queue reserve was low at 9 pending against a 10 minimum. Refilled through the existing `creditdoc_blog.py` auto-refill path; queue is now 20 pending.
+
+Verification after fixes:
+- `creditdoc_content_engine_daily_verify.py --dry-run --allow-pending`: all OK, including blog queue reserve 20, answer queue reserve 674, wellness queue reserve 20, comparison queue reserve 355, and guardrail regression.
+- `creditdoc_feed_continuity_watchdog.py`: all OK.
+- `cluster_pipeline_watchdog.py`: healthy, DB 491 published / 2 draft.
+- Latest repo commit after answer publish: `48f3d3705d DB export: 2 answers, 107 blog posts, 357 comparisons, 139 wellness guides, 19 categories (2026-07-06)`.
+
+Notes:
+- The only untracked repo file after this work is still `SEO/two-week-action-calendar/2026-07-06-day-08.md`; it was pre-existing/unrelated and was not touched.
+- CreditDoc process rule remains: always read memory before CreditDoc work, update memory afterward, and push committed work whenever repo-tracked files change.
+
 ## 2026-07-03 - SE Ranking audit cleanup and static SEO verification
 
 Status: code/build SEO cleanup completed, deployed, live-verified, and committed locally. Push to GitHub is blocked by invalid GitHub authentication on the VPS.
