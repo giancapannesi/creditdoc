@@ -4,6 +4,46 @@
 
 ---
 
+## 2026-07-06 - Crawl integrity, GSC duplicates, and robots cleanup
+
+Status: deployed, live-verified, and ready for GSC/SE Ranking validation.
+
+Deploys:
+- Legacy redirect/internal-link cleanup deployed to Cloudflare Worker version `38ac06ac-066e-4155-a329-7117ef0fa579`.
+- Duplicate-meta snapshot cleanup deployed to Cloudflare Worker version `244b322b-297d-4496-9a17-6d525ffd2605`.
+- Robots `/go/` cleanup deployed to Cloudflare Worker version `aa9fa260-5689-41e8-9d0e-99b5eace38b3`.
+
+What changed:
+- Parsed `/srv/BusinessOps/creditdoc/SEO/Table.csv`:
+  - 1,000 rows: 964 `/review/`, 22 `/city/`, 9 `/browse/`, 4 `/compare/`, 1 `/categories/`.
+  - 36 non-review legacy paths now have exact static redirects in `public/_redirects`.
+  - Live verification after deploy: all 36 non-review legacy paths final-resolve to 200.
+- Added middleware fallback redirects for legacy category/path variants.
+- Changed `/search/?state=...` browse links to canonical `/state/<slug>/` links.
+- Added shared lender review-link gating/fallback so cards/tables/compare pages do not push users/crawlers into unpublished review URLs.
+- Parsed GSC duplicate export `/srv/BusinessOps/creditdoc/SEO/Table - Duplicates.csv`:
+  - 71 rows: 57 `/review/`, 14 `/city/`.
+  - Live validation after fixes: 0 duplicate title groups, 0 duplicate meta-description groups, 0 duplicate H1 groups across all 71 URLs.
+- Fixed the only current rendered duplicate meta found by `scripts/seo_deep_audit.mjs`:
+  - `/review/eagle-finance/`
+  - `/review/eagle-loan/`
+  - Updated review template overrides, lender JSON, and the static SE Ranking snapshot HTML files.
+- Changed `robots.txt` so `/go/` is no longer robots-blocked. `/go/*` remains non-indexable via HTTP header `X-Robots-Tag: noindex, nofollow`, which lets Google see the noindex instead of reporting blocked-by-robots for discovered utility URLs.
+
+Verification:
+- `npm run build` passed after the redirect/internal-link changes.
+- Postbuild checks passed: sitemap/robots conflicts, critical sitemap URLs, feed contract, rendered image alt contract, image filename contract.
+- `node scripts/check_robots_contract.mjs` passed.
+- `node scripts/check_sitemap_robots_conflicts.mjs` passed with no User-agent:* disallow rules to compare.
+- `node scripts/seo_deep_audit.mjs` passed with `errors=0, warnings=0` across 2,875 rendered HTML pages and 25,129 sitemap URLs.
+- Live `/robots.txt` shows no `/go/` disallow.
+- Live `/go/advance-america/?source=check` returns 302 with `x-robots-tag: noindex, nofollow`.
+- Live `/review/eagle-finance/` and `/review/eagle-loan/` return 200 with distinct titles and meta descriptions.
+
+Important:
+- No cron or publishing automation was stopped, paused, or disabled during this work.
+- GSC validation can be requested for the duplicate-title/meta sample now. The robots-blocked `/go/` issue should clear after Google recrawls robots and the affected URLs.
+
 ## 2026-07-06 - SE Ranking 404 table diagnosis
 
 Source checked: `/srv/BusinessOps/creditdoc/SEO/Table.csv` updated 2026-07-06 10:30 UTC.

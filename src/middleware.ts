@@ -53,6 +53,78 @@ const SERANKING_STATIC_SNAPSHOT_PATHS = new Set(
   })
 );
 
+const LEGACY_CATEGORY_REDIRECTS = new Map<string, string>([
+  ['fix-my-credit', 'credit-repair'],
+]);
+
+const LEGACY_PATH_REDIRECTS = new Map<string, string>([
+  ['/categories/fix-my-credit/', '/categories/credit-repair/'],
+  ['/browse/emergency-cash/houston-texas/', '/browse/emergency-cash/houston-tx/'],
+  ['/browse/pawn-shops/houston-texas/', '/browse/pawn-shops/houston-tx/'],
+  ['/browse/check-cashing/tucson-arizona/', '/browse/check-cashing/tucson-az/'],
+  ['/browse/emergency-cash/north-las-vegas-nevada/', '/browse/emergency-cash/north-las-vegas-nv/'],
+  ['/browse/pawn-shops/garland-texas/', '/browse/pawn-shops/garland-tx/'],
+  ['/browse/pawn-shops/tucson-arizona/', '/browse/pawn-shops/tucson-az/'],
+  ['/browse/fix-my-credit/brooklyn-ny/', '/browse/credit-repair/brooklyn-ny/'],
+  ['/browse/emergency-cash/new-orleans-louisiana/', '/browse/emergency-cash/new-orleans-la/'],
+  ['/browse/fix-my-credit/southfield-mi/', '/categories/credit-repair/'],
+  ['/city/cedar-park-texas/', '/city/cedar-park-tx/'],
+  ['/city/halethorpe-maryland/', '/state/maryland/'],
+  ['/city/pflugerville-texas/', '/city/pflugerville-tx/'],
+  ['/city/daly-city-california/', '/state/california/'],
+  ['/city/stone-mountain-georgia/', '/city/stone-mountain-ga/'],
+  ['/city/st-augustine-florida/', '/state/florida/'],
+  ['/city/murfreesboro-tennessee/', '/state/tennessee/'],
+  ['/city/leon-valley-texas/', '/state/texas/'],
+  ['/city/hilliard-ohio/', '/state/ohio/'],
+  ['/city/burien-washington/', '/state/washington/'],
+  ['/city/miami-lakes-florida/', '/city/miami-lakes-fl/'],
+  ['/city/covington-kentucky/', '/city/covington-ky/'],
+  ['/city/redford-township-michigan/', '/state/michigan/'],
+  ['/city/macclenny-florida/', '/city/macclenny-fl/'],
+  ['/city/avondale-arizona/', '/city/avondale-az/'],
+  ['/city/maple-heights-ohio/', '/state/ohio/'],
+  ['/city/fairfield-ohio/', '/state/ohio/'],
+  ['/city/newport-kentucky/', '/city/newport-ky/'],
+  ['/city/spartanburg-south-carolina/', '/city/spartanburg-sc/'],
+  ['/city/grove-city-ohio/', '/state/ohio/'],
+  ['/city/southaven-mississippi/', '/state/mississippi/'],
+  ['/city/goodlettsville-tennessee/', '/city/goodlettsville-tn/'],
+  ['/compare/credit-saint-vs-disputebee/', '/compare/credit-saint-vs-the-credit-people/'],
+  ['/compare/the-credit-pros-vs-credit-saint/', '/compare/credit-saint-vs-the-credit-pros/'],
+  ['/compare/lexington-law-vs-the-credit-people/', '/compare/credit-saint-vs-the-credit-people/'],
+  ['/compare/disputebee-vs-the-credit-people/', '/compare/credit-saint-vs-the-credit-people/'],
+]);
+
+function normalizeLegacyPath(pathname: string): string {
+  let decoded = pathname;
+  try {
+    decoded = decodeURIComponent(pathname);
+  } catch {
+    decoded = pathname;
+  }
+  return decoded
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/\/+$/, '/');
+}
+
+function legacyRedirectTarget(pathname: string): string | null {
+  const normalized = normalizeLegacyPath(pathname);
+  return LEGACY_PATH_REDIRECTS.get(normalized) ?? null;
+}
+
+function categoryAliasRedirectTarget(pathname: string): string | null {
+  const match = pathname.match(/^\/categories\/([^/]+)\/?$/);
+  if (!match) return null;
+
+  const category = LEGACY_CATEGORY_REDIRECTS.get(match[1].toLowerCase());
+  if (!category) return null;
+  const target = `/categories/${category}/`;
+  return target === pathname ? null : target;
+}
+
 function stateCodeRedirectTarget(pathname: string): string | null {
   const match = pathname.match(/^\/state\/([a-z]{2})\/?$/i);
   if (!match) return null;
@@ -91,7 +163,7 @@ function browseCityStateRedirectTarget(pathname: string): string | null {
   const match = pathname.match(/^\/browse\/([^/]+)\/([^/]+)\/?$/);
   if (!match) return null;
 
-  const categorySlug = match[1];
+  const categorySlug = LEGACY_CATEGORY_REDIRECTS.get(match[1].toLowerCase()) ?? match[1];
   let cityStateSlug: string;
   try {
     cityStateSlug = decodeURIComponent(match[2]);
@@ -438,8 +510,18 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const pathname = url.pathname;
   const env = (context.locals as any)?.runtime?.env as RuntimeEnvLike | undefined;
 
+  const legacyTarget = legacyRedirectTarget(pathname);
+  if (legacyTarget) {
+    return Response.redirect(new URL(legacyTarget, url.origin), 301);
+  }
+
   if (/^\/categories\/?$/.test(pathname)) {
     return Response.redirect(new URL('/city/', url.origin), 301);
+  }
+
+  const categoryRedirectTarget = categoryAliasRedirectTarget(pathname);
+  if (categoryRedirectTarget) {
+    return Response.redirect(new URL(categoryRedirectTarget, url.origin), 301);
   }
 
   const stateRedirectTarget = stateCodeRedirectTarget(pathname);

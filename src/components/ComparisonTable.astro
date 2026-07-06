@@ -2,6 +2,7 @@
 import type { Lender } from '../utils/data';
 import { getBbbClass, formatPrice } from '../utils/data';
 import RatingStars from './RatingStars.astro';
+import { buildLenderFallbackHref, buildReviewHref } from '../utils/outbound';
 
 interface Props {
   lenderA: Lender;
@@ -9,6 +10,12 @@ interface Props {
 }
 
 const { lenderA, lenderB } = Astro.props;
+const lenderAReviewHref = buildReviewHref(lenderA);
+const lenderBReviewHref = buildReviewHref(lenderB);
+const lenderADetailsHref = lenderAReviewHref ?? buildLenderFallbackHref(lenderA);
+const lenderBDetailsHref = lenderBReviewHref ?? buildLenderFallbackHref(lenderB);
+const lenderADetailsLabel = lenderAReviewHref ? `View ${lenderA.name} Review` : `Compare ${lenderA.name} Category`;
+const lenderBDetailsLabel = lenderBReviewHref ? `View ${lenderB.name} Review` : `Compare ${lenderB.name} Category`;
 
 // Determine winners for each row
 function priceWinner(a: number, b: number): 'a' | 'b' | 'tie' {
@@ -128,9 +135,13 @@ const comparisonBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-
                 <span class="text-sm font-bold text-primary">{lenderA.name.charAt(0)}</span>
               )}
             </div>
-            <a href={`/review/${lenderA.slug}/`} class="font-semibold text-text hover:text-primary transition-colors">
-              {lenderA.name}
-            </a>
+            {lenderAReviewHref ? (
+              <a href={lenderAReviewHref} class="font-semibold text-text hover:text-primary transition-colors">
+                {lenderA.name}
+              </a>
+            ) : (
+              <span class="font-semibold text-text">{lenderA.name}</span>
+            )}
           </div>
         </th>
         <th class="py-4 px-4 text-center w-1/3">
@@ -142,9 +153,13 @@ const comparisonBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-
                 <span class="text-sm font-bold text-primary">{lenderB.name.charAt(0)}</span>
               )}
             </div>
-            <a href={`/review/${lenderB.slug}/`} class="font-semibold text-text hover:text-primary transition-colors">
-              {lenderB.name}
-            </a>
+            {lenderBReviewHref ? (
+              <a href={lenderBReviewHref} class="font-semibold text-text hover:text-primary transition-colors">
+                {lenderB.name}
+              </a>
+            ) : (
+              <span class="font-semibold text-text">{lenderB.name}</span>
+            )}
           </div>
         </th>
       </tr>
@@ -281,15 +296,15 @@ const comparisonBadge = 'inline-flex items-center gap-1 rounded-full bg-primary-
 <!-- CTA Row -->
 <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
   <a
-    href={`/review/${lenderA.slug}/`}
+    href={lenderADetailsHref}
     class="flex items-center justify-center rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px]"
   >
-    View {lenderA.name} Review
+    {lenderADetailsLabel}
   </a>
   <a
-    href={`/review/${lenderB.slug}/`}
+    href={lenderBDetailsHref}
     class="flex items-center justify-center rounded-lg border-2 border-primary px-4 py-3 text-sm font-semibold text-primary hover:bg-primary-light transition-colors min-h-[44px]"
   >
-    View {lenderB.name} Review
+    {lenderBDetailsLabel}
   </a>
 </div>

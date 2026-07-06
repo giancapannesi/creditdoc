@@ -6,7 +6,7 @@ import RatingStars from '../../components/RatingStars.astro';
 import { getComparisons, getLenderBySlug } from '../../utils/data-build';
 import { formatPrice, getBbbClass } from '../../utils/data';
 import { softenYmylCopy } from '../../utils/safe-copy';
-import { buildLenderGoHref } from '../../utils/outbound';
+import { buildLenderFallbackHref, buildLenderGoHref, buildReviewHref } from '../../utils/outbound';
 import type { Lender } from '../../utils/data';
 
 export function getStaticPaths() {
@@ -26,6 +26,18 @@ const lenderA = getLenderBySlug(comparison.lender_a)!;
 const lenderB = getLenderBySlug(comparison.lender_b)!;
 
 const winnerLender = comparison.winner === comparison.lender_a ? lenderA : lenderB;
+const reviewHrefBySlug = new Map([
+  [lenderA.slug, buildReviewHref(lenderA)],
+  [lenderB.slug, buildReviewHref(lenderB)],
+]);
+
+function lenderDetailsHref(lender: Lender): string {
+  return reviewHrefBySlug.get(lender.slug) ?? buildLenderFallbackHref(lender);
+}
+
+function lenderReviewLabel(lender: Lender): string {
+  return reviewHrefBySlug.get(lender.slug) ? `Read the full ${lender.name} review` : `Compare ${lender.name} category`;
+}
 
 function softenComparisonText(text: string): string {
   const locallySoftened = text
@@ -798,10 +810,10 @@ const jsonLd = [
             </div>
             <div class="mt-4 flex gap-2">
               <a
-                href={`/review/${lender.slug}/`}
+                href={lenderDetailsHref(lender)}
                 class="flex-1 text-center px-4 py-2.5 text-sm font-medium rounded-lg border border-border text-text hover:bg-bg-alt transition-colors"
               >
-                Full Review
+                {reviewHrefBySlug.get(lender.slug) ? 'Full Review' : 'Category'}
               </a>
               {lenderGoHref && (
                 <a
@@ -836,8 +848,8 @@ const jsonLd = [
         <div class="rounded-lg border border-border bg-bg-alt p-4">
           <h3 class="text-sm font-semibold text-text">Compare {lender.name} if...</h3>
           <p class="mt-2 text-sm text-muted leading-relaxed">{decisionMapLine(lender)}</p>
-          <a href={`/review/${lender.slug}/`} class="mt-3 inline-flex text-sm font-medium text-primary hover:underline">
-            Read the full {lender.name} review
+          <a href={lenderDetailsHref(lender)} class="mt-3 inline-flex text-sm font-medium text-primary hover:underline">
+            {lenderReviewLabel(lender)}
           </a>
         </div>
       ))}
@@ -896,10 +908,10 @@ const jsonLd = [
         Use this comparison with each company profile, related category pages, local guides, and CreditDoc data explainers. This page is directory context, not a recommendation, approval prediction, price quote, or licensing determination.
       </p>
       <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        <a href={`/review/${lenderA.slug}/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+        <a href={lenderDetailsHref(lenderA)} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
           {lenderA.name} profile
         </a>
-        <a href={`/review/${lenderB.slug}/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+        <a href={lenderDetailsHref(lenderB)} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
           {lenderB.name} profile
         </a>
         {categoryContextCards.slice(0, 1).map(card => (

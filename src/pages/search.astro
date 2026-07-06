@@ -10,6 +10,7 @@ import { US_STATES, STATE_ABBREVIATIONS } from '../utils/data';
 const stateEntries = US_STATES.map((state) => ({
   name: state,
   abbr: STATE_ABBREVIATIONS[state] || '',
+  slug: state.toLowerCase().replace(/\s+/g, '-'),
 }));
 
 const stateFilter = Astro.url.searchParams.get('state');
@@ -116,7 +117,7 @@ const searchPageNoindex = true;
       <div class="grid grid-cols-5 sm:grid-cols-10 gap-2">
         {stateEntries.map(state => (
           <a
-            href={`/search/?state=${encodeURIComponent(state.name)}`}
+            href={`/state/${state.slug}/`}
             class="flex items-center justify-center px-2 py-2 rounded-lg text-xs font-medium text-text bg-bg-alt hover:bg-primary-light hover:text-primary transition-colors border border-transparent hover:border-primary/20"
             title={state.name}
           >

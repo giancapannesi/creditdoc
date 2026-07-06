@@ -3,6 +3,7 @@ import type { Lender } from '../utils/data';
 import RatingStars from './RatingStars.astro';
 import { formatPrice, getBbbClass, normalizedBbbRating } from '../utils/data';
 import { softenYmylCopy } from '../utils/safe-copy';
+import { buildLenderFallbackHref, buildReviewHref } from '../utils/outbound';
 
 interface Props {
   lenders: Lender[];
@@ -36,6 +37,9 @@ function softenProviderSignal(text: string): string {
         const bbbClass = getBbbClass(bbbRating);
         const isVerified = lender.verified_provider === true;
         const showGoogleRating = Boolean(lender.google_rating && lender.google_rating > 0 && !(lender.google_rating > 5) && lender.google_reviews_count && lender.google_reviews_count >= 1);
+        const reviewHref = buildReviewHref(lender);
+        const detailsHref = reviewHref ?? buildLenderFallbackHref(lender);
+        const detailsLabel = reviewHref ? 'View Details' : 'Compare Category';
         return (
           <tr class={`hover:bg-bg-alt/50 transition-colors ${isVerified ? 'bg-amber-50/40 border-l-2 border-l-amber-400' : 'bg-white'}`}>
             <!-- Rank -->
@@ -57,9 +61,13 @@ function softenProviderSignal(text: string): string {
                 </div>
                 <div class="min-w-0">
                   <div class="flex items-center gap-2">
-                    <a href={`/review/${lender.slug}/`} class="font-semibold text-text hover:text-primary transition-colors truncate">
-                      {lender.name}
-                    </a>
+                    {reviewHref ? (
+                      <a href={reviewHref} class="font-semibold text-text hover:text-primary transition-colors truncate">
+                        {lender.name}
+                      </a>
+                    ) : (
+                      <span class="font-semibold text-text truncate">{lender.name}</span>
+                    )}
                     {isVerified && (
                       <span class="inline-flex items-center gap-1 rounded-full bg-amber-100 border border-amber-300 px-1.5 py-0.5 text-[10px] font-bold text-amber-800 uppercase tracking-wider flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
@@ -125,10 +133,10 @@ function softenProviderSignal(text: string): string {
             <!-- Action -->
             <td class="py-4 px-4 text-center">
               <a
-                href={`/review/${lender.slug}/`}
+                href={detailsHref}
                 class="inline-flex items-center gap-1 rounded-lg bg-primary px-4 py-2.5 text-xs font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px] whitespace-nowrap"
               >
-                View Details
+                {detailsLabel}
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/>
                 </svg>
