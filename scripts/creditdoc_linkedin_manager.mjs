@@ -14,6 +14,7 @@ const LOG_FILE = `${ROOT}/logs/creditdoc_linkedin_posts.jsonl`;
 const PINTEREST_LOG_FILE = `${ROOT}/logs/creditdoc_pinterest_blotato_posts.jsonl`;
 const DEFAULT_VERSION = '202606';
 const WEEKLY_CAP = 2;
+const LINKEDIN_TARGET_REPEAT_BLOCK_DAYS = 90;
 const PINTEREST_INTERVAL_DAYS = 3;
 const PINTEREST_TARGET_REPEAT_BLOCK_DAYS = 90;
 const CROSS_CHANNEL_TARGET_REPEAT_BLOCK_DAYS = 30;
@@ -275,6 +276,7 @@ function usage() {
   node scripts/creditdoc_linkedin_manager.mjs run-scheduled-tools [--date YYYY-MM-DD] [--dry-run]
   node scripts/creditdoc_linkedin_manager.mjs run-scheduled-pinterest [--date YYYY-MM-DD] [--dry-run]
   node scripts/creditdoc_linkedin_manager.mjs preview-pinterest-week [--date YYYY-MM-DD] [--days N]
+  node scripts/creditdoc_linkedin_manager.mjs audit-social-duplicates [--date YYYY-MM-DD]
   node scripts/creditdoc_linkedin_manager.mjs status
   node scripts/creditdoc_linkedin_manager.mjs approve <draft-id>
   node scripts/creditdoc_linkedin_manager.mjs render-card <draft-id>
@@ -396,8 +398,33 @@ function successfulPinterestRecords(state = loadPinterestState()) {
   return records.filter((record) => record.target_url && record.created_at);
 }
 
-function recentPinterestDuplicate(targetUrl, nowDate = today(), state = loadPinterestState()) {
-  const matches = successfulPinterestRecords(state)
+function successfulLinkedInRecords(state = loadState()) {
+  const records = [];
+  for (const record of Array.isArray(state.published) ? state.published : []) {
+    if (!record.linkedin_post_urn) continue;
+    records.push({
+      id: record.id,
+      target_url: record.target_url,
+      created_at: record.published_at,
+      public_url: record.linkedin_post_urn,
+      source: 'state',
+    });
+  }
+  for (const record of readJsonl(LOG_FILE)) {
+    if (!record || !record.linkedin_post_urn) continue;
+    records.push({
+      id: record.id,
+      target_url: record.target_url,
+      created_at: record.published_at,
+      public_url: record.linkedin_post_urn,
+      source: 'jsonl',
+    });
+  }
+  return records.filter((record) => record.target_url && record.created_at);
+}
+
+function recentSocialDuplicate(records, targetUrl, nowDate, blockDays) {
+  const matches = records
     .filter((record) => record.target_url === targetUrl)
     .map((record) => ({
       ...record,
@@ -408,8 +435,16 @@ function recentPinterestDuplicate(targetUrl, nowDate = today(), state = loadPint
   const latest = matches[0] || null;
   if (!latest) return null;
   const ageDays = daysBetween(latest.date, nowDate);
-  if (ageDays >= PINTEREST_TARGET_REPEAT_BLOCK_DAYS) return null;
-  return { ...latest, age_days: ageDays, block_days: PINTEREST_TARGET_REPEAT_BLOCK_DAYS };
+  if (ageDays >= blockDays) return null;
+  return { ...latest, age_days: ageDays, block_days: blockDays };
+}
+
+function recentLinkedInDuplicate(targetUrl, nowDate = today(), state = loadState()) {
+  return recentSocialDuplicate(successfulLinkedInRecords(state), targetUrl, nowDate, LINKEDIN_TARGET_REPEAT_BLOCK_DAYS);
+}
+
+function recentPinterestDuplicate(targetUrl, nowDate = today(), state = loadPinterestState()) {
+  return recentSocialDuplicate(successfulPinterestRecords(state), targetUrl, nowDate, PINTEREST_TARGET_REPEAT_BLOCK_DAYS);
 }
 
 function recentPublishedTargets(nowDate = today(), blockDays = CROSS_CHANNEL_TARGET_REPEAT_BLOCK_DAYS) {
@@ -427,6 +462,9 @@ function recentPublishedTargets(nowDate = today(), blockDays = CROSS_CHANNEL_TAR
   const linkedinState = loadState();
   for (const record of Array.isArray(linkedinState.published) ? linkedinState.published : []) {
     add(record.target_url, record.published_at, 'linkedin-state', record.id);
+  }
+  for (const record of successfulLinkedInRecords(linkedinState)) {
+    add(record.target_url, record.created_at, `linkedin-${record.source}`, record.id);
   }
   for (const record of successfulPinterestRecords()) {
     add(record.target_url, record.created_at, `pinterest-${record.source}`, record.id);
@@ -1260,11 +1298,31 @@ async function publishApproved(dryRun, options = {}) {
 
   const candidates = queue.drafts
     .filter((draft) => draft.status === 'approved' && draft.scheduled_date <= nowDate)
-    .sort((a, b) => `${a.scheduled_date}:${a.id}`.localeCompare(`${b.scheduled_date}:${b.id}`))
-    .slice(0, allowed);
+    .sort((a, b) => `${a.scheduled_date}:${a.id}`.localeCompare(`${b.scheduled_date}:${b.id}`));
 
   const published = [];
+  const skipped = [];
   for (const draft of candidates) {
+    if (published.length >= allowed) break;
+    const duplicate = recentLinkedInDuplicate(draft.target_url, nowDate, state);
+    if (duplicate) {
+      const record = {
+        id: draft.id,
+        target_url: draft.target_url,
+        skipped: 'duplicate linkedin target_url blocked',
+        duplicate,
+        created_at: new Date().toISOString(),
+      };
+      skipped.push(record);
+      if (!dryRun) {
+        draft.status = 'blocked_duplicate';
+        draft.blocked_at = record.created_at;
+        draft.blocked_reason = record.skipped;
+        draft.blocked_duplicate = duplicate;
+        appendJsonl(LOG_FILE, record);
+      }
+      continue;
+    }
     let postUrn = null;
     let imagePath = draft.image_path || null;
     let imageUrn = draft.linkedin_image_urn || null;
@@ -1304,7 +1362,7 @@ async function publishApproved(dryRun, options = {}) {
     saveQueue(queue);
     saveState(state);
   }
-  const result = { ok: true, dry_run: dryRun, published, weekly_used_after: used + published.length };
+  const result = { ok: true, dry_run: dryRun, published, skipped, weekly_used_after: used + published.length };
   console.log(JSON.stringify(result, null, 2));
   return result;
 }
@@ -1473,6 +1531,55 @@ function previewPinterestWeek(args) {
   }, null, 2));
 }
 
+function duplicateGroups(records, nowDate, blockDays) {
+  const byTarget = new Map();
+  const seen = new Set();
+  for (const record of records) {
+    const date = String(record.created_at || '').slice(0, 10);
+    if (!date) continue;
+    const ageDays = daysBetween(date, nowDate);
+    if (ageDays < 0 || ageDays >= blockDays) continue;
+    const recordKey = record.public_url || `${record.id}:${record.target_url}:${record.created_at}`;
+    if (seen.has(recordKey)) continue;
+    seen.add(recordKey);
+    if (!byTarget.has(record.target_url)) byTarget.set(record.target_url, []);
+    byTarget.get(record.target_url).push({
+      id: record.id,
+      created_at: record.created_at,
+      age_days: ageDays,
+      public_url: record.public_url || null,
+      source: record.source || null,
+    });
+  }
+  return [...byTarget.entries()]
+    .map(([target_url, entries]) => ({
+      target_url,
+      count: entries.length,
+      entries: entries.sort((a, b) => String(a.created_at).localeCompare(String(b.created_at))),
+    }))
+    .filter((group) => group.count > 1)
+    .sort((a, b) => b.count - a.count || a.target_url.localeCompare(b.target_url));
+}
+
+function auditSocialDuplicates(args) {
+  const dateArg = args.includes('--date') ? args[args.indexOf('--date') + 1] : args.find((arg) => arg.startsWith('--date='))?.slice(7);
+  const nowDate = today(dateArg);
+  const linkedinDuplicates = duplicateGroups(successfulLinkedInRecords(), nowDate, LINKEDIN_TARGET_REPEAT_BLOCK_DAYS);
+  const pinterestDuplicates = duplicateGroups(successfulPinterestRecords(), nowDate, PINTEREST_TARGET_REPEAT_BLOCK_DAYS);
+  console.log(JSON.stringify({
+    ok: linkedinDuplicates.length === 0 && pinterestDuplicates.length === 0,
+    command: 'audit-social-duplicates',
+    date: nowDate,
+    linkedin_repeat_block_days: LINKEDIN_TARGET_REPEAT_BLOCK_DAYS,
+    pinterest_repeat_block_days: PINTEREST_TARGET_REPEAT_BLOCK_DAYS,
+    linkedin_duplicate_targets: linkedinDuplicates,
+    pinterest_duplicate_targets: pinterestDuplicates,
+  }, null, 2));
+  if (linkedinDuplicates.length > 0 || pinterestDuplicates.length > 0) {
+    process.exitCode = 1;
+  }
+}
+
 async function main() {
   const [command, ...args] = process.argv.slice(2);
   if (!command || command === '--help' || command === 'help') {
@@ -1498,6 +1605,7 @@ async function main() {
   } else if (command === 'run-scheduled-resources' || command === 'run-scheduled-tools') await runScheduledResources(args);
   else if (command === 'run-scheduled-pinterest') await runScheduledPinterest(args);
   else if (command === 'preview-pinterest-week') previewPinterestWeek(args);
+  else if (command === 'audit-social-duplicates') auditSocialDuplicates(args);
   else {
     usage();
     process.exit(1);
