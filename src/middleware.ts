@@ -26,6 +26,7 @@
 import { defineMiddleware } from 'astro:middleware';
 import { STATE_ABBREVIATIONS } from './utils/data';
 import seRankingStaticSnapshotManifest from '../data/seranking_static_snapshot_urls_2026-07-05.json';
+import gscReview404Redirects from '../data/gsc_404_review_redirects_2026-07-06.json';
 
 // Bump this when shared SSR templates change; DB updated_at alone does not
 // invalidate cached HTML for code-only changes.
@@ -51,6 +52,10 @@ const SERANKING_STATIC_SNAPSHOT_PATHS = new Set(
   (seRankingStaticSnapshotManifest.urls as string[]).map((href) => {
     return new URL(href).pathname;
   })
+);
+
+const GSC_REVIEW_404_REDIRECTS = new Map<string, string>(
+  Object.entries(gscReview404Redirects as Record<string, string>)
 );
 
 const LEGACY_CATEGORY_REDIRECTS = new Map<string, string>([
@@ -113,6 +118,11 @@ function normalizeLegacyPath(pathname: string): string {
 function legacyRedirectTarget(pathname: string): string | null {
   const normalized = normalizeLegacyPath(pathname);
   return LEGACY_PATH_REDIRECTS.get(normalized) ?? null;
+}
+
+function gscReview404RedirectTarget(pathname: string): string | null {
+  const normalized = normalizeLegacyPath(pathname);
+  return GSC_REVIEW_404_REDIRECTS.get(normalized) ?? null;
 }
 
 function categoryAliasRedirectTarget(pathname: string): string | null {
@@ -513,6 +523,11 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const legacyTarget = legacyRedirectTarget(pathname);
   if (legacyTarget) {
     return Response.redirect(new URL(legacyTarget, url.origin), 301);
+  }
+
+  const review404Target = gscReview404RedirectTarget(pathname);
+  if (review404Target) {
+    return Response.redirect(new URL(review404Target, url.origin), 301);
   }
 
   if (/^\/categories\/?$/.test(pathname)) {

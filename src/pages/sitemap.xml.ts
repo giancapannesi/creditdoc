@@ -6,6 +6,7 @@ const SITEMAP_FILES = [
   'sitemap-2.xml',
   'sitemap-3.xml',
   'sitemap-4.xml',
+  'sitemap-5.xml',
 ];
 
 export function GET({ url }: { url: URL }) {

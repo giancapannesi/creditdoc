@@ -4,6 +4,38 @@
 
 ---
 
+## 2026-07-06 - GSC review 404 remediation
+
+Status: implemented locally; build and deep SEO audit clean; deployment/live validation next.
+
+What changed:
+- Parsed `SEO/Table 404 Missing Pages.csv` from GSC.
+- Confirmed the unresolved issue was the old `/review/` URL family: 805 unique review slugs in the export.
+- Added `data/gsc_404_review_redirects_2026-07-06.json` with 802 permanent redirect targets.
+- Excluded 3 slugs that are now live published review pages:
+  - `/review/power-financial/`
+  - `/review/pioneer-appalachia/`
+  - `/review/mattel/`
+- Added a static `/review/` research hub page with title/meta/canonical/schema and links to categories, best pages, tools, answers, wellness, city, and state hubs.
+- Wired middleware to 301 the old missing/draft/noindex review URLs before the SSR review route runs.
+
+SEO rationale:
+- Do not publish raw, draft, pending, noindex, or quarantined lender records just to silence GSC. That would increase low-quality crawlable pages.
+- Redirect exact local draft/noindex records to their live category where possible.
+- Redirect missing records to a strong inferred category only when the slug is obvious; otherwise redirect to `/review/`.
+- Avoid homepage redirects so Google sees a relevant consolidation path rather than a broad soft-404 pattern.
+
+Verification:
+- `npm run build` passed.
+- Postbuild contracts passed: sitemap/robots conflicts, critical sitemap URLs, schema/sitemap contract, Best SERP contract, feed contract, image alt, image filename, AI ingestion.
+- `node scripts/seo_deep_audit.mjs` passed with `errors=0,warnings=0` across 2,879 rendered HTML pages and 25,133 sitemap URLs.
+- Redirect manifest validation passed: 802 redirects, 805 unique review slugs, 3 live review slugs excluded, 0 bad targets.
+- `/review/` generated as static HTML with 50-character title, 145-character meta description, canonical `https://www.creditdoc.co/review/`, and H1 `Financial Service Reviews`.
+
+Next:
+- Commit, push, deploy, then live-sweep representative/all GSC review URLs to confirm no flagged review URL still returns 404.
+- After live verification, GSC can be asked to validate the 404 fix. Expect GSC lag while Google recrawls old URLs.
+
 ## 2026-07-06 - Phase 1 KPI report marked as primary SEO operating report
 
 Status: report reviewed; no automation changed.
