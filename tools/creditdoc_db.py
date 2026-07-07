@@ -1280,8 +1280,9 @@ class CreditDocDB:
             except Exception:
                 pass
 
-        with open(filepath, "w") as f:
-            json.dump(data, f, indent=2)
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+            f.write("\n")
 
         ts = _now()
         self.conn.execute(
