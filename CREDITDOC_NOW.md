@@ -6026,3 +6026,38 @@ Verification:
 
 Operational note:
 - No cron, feed, Pinterest, or LinkedIn automation was stopped or paused.
+## 2026-07-07 - Saved next SEO traffic actions
+
+Next work must be actioned from data, not guesses. Use GSC, SE Ranking, the Phase 1 KPI report, and `data/exports/longtail_picks_*.csv`.
+
+Priority sequence:
+1. Build/retarget exact-intent support pages for the business line-of-credit cluster:
+   - `business lines of credit lenders`
+   - `business lines of credit interest rates`
+   - `business line of credit unsecured`
+   - `business lines of credit for bad credit`
+   - `business line of credit calculator` support/internal-link work.
+2. Every support page should route to:
+   - `/best/best-business-lines-of-credit/`
+   - `/tools/business-line-of-credit-calculator/`
+   - one related answer
+   - one adjacent commercial page where relevant.
+3. Manual GSC submissions should prioritize:
+   - `/answers/credit-cards-for-bad-credit-guide/`
+   - `/answers/business-line-of-credit-for-startup-without-revenue/`
+   - `/tools/business-line-of-credit-calculator/`
+   - `/tools/credit-score-simulator/`
+   - highest-value money/tool URLs still not indexed or weakly discovered.
+4. Weekly monitoring:
+   - GSC impressions for new exact-intent pages.
+   - selected keyword coverage in the KPI report.
+   - `/best/` and `/tools/` impression growth.
+   - SE Ranking exact-phrase movement.
+5. Social:
+   - distribute answer/tool/course/wellness pages through LinkedIn and Pinterest,
+   - unique image per post,
+   - narrative text plus direct page link,
+   - no duplicate target URL inside the 90-day guard.
+
+Next chunk:
+- Implement `business lines of credit lenders` first.
