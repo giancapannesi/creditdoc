@@ -6005,3 +6005,24 @@ Verification:
 
 Operational note:
 - No cron, feed, Pinterest, or LinkedIn automation was stopped or paused.
+## 2026-07-07 14:58 UTC - Startup/no-revenue line-of-credit traffic chunk
+
+Status:
+- Deployed the next exact-intent business-loan support page to Cloudflare Workers version `14f6a95c-3e49-4970-813c-3def3663eafb`.
+
+Implemented:
+- Added `/answers/business-line-of-credit-for-startup-without-revenue/` for the Lendio-research opportunity around `business line of credit for startup without revenue`, `business loan with no revenue`, `startup line of credit`, and related terms.
+- Updated `/tools/business-line-of-credit-calculator/` to route users and crawlers to the new guide from the calculator research block and startup FAQ.
+- Adjusted source wording after rendered checks showed the safe-copy layer rewrote `safer` and `personal guarantee` badly.
+
+Verification:
+- `npm run build` passed all postbuild contracts.
+- Rendered checks passed for the new answer and calculator: title/canonical/schema present, no raw markdown, no bad safe-copy phrases.
+- Live checks passed for both URLs with HTTP 200 and correct canonicals.
+- `/srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/creditdoc_feed_continuity_watchdog.py`: all OK; answer HTML count now 495.
+- `/srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/creditdoc_content_audit.py --preview --no-fix --stdout`: `0 issues found`.
+- `/srv/BusinessOps/tools/verify_crons.sh`: all 59 expected crons present.
+- `node scripts/creditdoc_linkedin_manager.mjs audit-social-duplicates`: no current social duplicate targets.
+
+Operational note:
+- No cron, feed, Pinterest, or LinkedIn automation was stopped or paused.
