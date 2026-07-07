@@ -96,7 +96,129 @@ const localCategoryLinks = localGuideCities.map(city => ({
   ...city,
   href: `/credit-guide/${city.slug}/${categorySlug}/`,
 }));
+const categoryMoneyMap: Record<string, { href: string; label: string; body: string }> = {
+  'business-loans': {
+    href: '/best/best-small-business-loans/',
+    label: 'Small business loan options',
+    body: 'Compare business funding routes, then use calculators to estimate payment pressure.',
+  },
+  'personal-loans': {
+    href: '/best/best-personal-loans-bad-credit/',
+    label: 'Personal loan options',
+    body: 'Compare loan options and qualification context before contacting providers.',
+  },
+  'emergency-cash': {
+    href: '/best/best-payday-loan-alternatives/',
+    label: 'Payday loan alternatives',
+    body: 'Review safer emergency-cash routes before using short-term products.',
+  },
+  'payday-alternatives': {
+    href: '/best/best-payday-loan-alternatives/',
+    label: 'Payday loan alternatives',
+    body: 'Compare lower-risk alternatives and repayment pressure before borrowing.',
+  },
+  'credit-repair': {
+    href: '/best/best-credit-repair-companies/',
+    label: 'Credit repair companies',
+    body: 'Compare credit-repair providers with educational context and report-review steps.',
+  },
+  'debt-relief': {
+    href: '/best/best-debt-relief-companies/',
+    label: 'Debt relief companies',
+    body: 'Compare debt-relief routes and understand settlement, counseling, and payoff trade-offs.',
+  },
+  'credit-counseling': {
+    href: '/best/best-credit-counseling-agencies/',
+    label: 'Credit counseling agencies',
+    body: 'Review counseling options and debt-management context before choosing help.',
+  },
+  'build-credit': {
+    href: '/best/best-credit-builder-loans/',
+    label: 'Credit builder loans',
+    body: 'Compare credit-building routes and understand payment-history trade-offs.',
+  },
+  'credit-cards': {
+    href: '/best/best-secured-credit-cards/',
+    label: 'Secured credit cards',
+    body: 'Compare secured-card deposits, fees, bureau reporting, and graduation context.',
+  },
+  'credit-monitoring': {
+    href: '/best/best-credit-monitoring-services/',
+    label: 'Credit monitoring services',
+    body: 'Compare monitoring tools with identity-theft and report-review context.',
+  },
+  'credit-unions': {
+    href: '/best/best-personal-loan-lenders/',
+    label: 'Personal loan lenders',
+    body: 'Compare borrowing options alongside credit-union and bank profiles.',
+  },
+  'banking': {
+    href: '/best/best-personal-loan-lenders/',
+    label: 'Personal loan lenders',
+    body: 'Compare borrowing options after reviewing banking and credit-union profiles.',
+  },
+  'mortgages': {
+    href: '/tools/borrowing-power-quiz/',
+    label: 'Borrowing power quiz',
+    body: 'Review income, debt, and credit context before comparing mortgage profiles.',
+  },
+  'pawn-shops': {
+    href: '/best/best-payday-loan-alternatives/',
+    label: 'Cash alternatives',
+    body: 'Compare short-term cash alternatives before using collateral or pawn options.',
+  },
+  'check-cashing': {
+    href: '/best/best-payday-loan-alternatives/',
+    label: 'Cash alternatives',
+    body: 'Compare lower-risk alternatives before relying on check-cashing or short-term cash products.',
+  },
+};
+const categoryToolMap: Record<string, { href: string; label: string; body: string }> = {
+  'business-loans': {
+    href: '/tools/business-loan-calculator/',
+    label: 'Business loan calculator',
+    body: 'Estimate payment, term, and cost scenarios before comparing lenders.',
+  },
+  'credit-repair': {
+    href: '/resources/credit-report-checklist/',
+    label: 'Credit report checklist',
+    body: 'Organize reports and dispute notes before paying for credit help.',
+  },
+  'debt-relief': {
+    href: '/tools/debt-payoff-calculator/',
+    label: 'Debt payoff calculator',
+    body: 'Estimate payoff paths before comparing relief or counseling options.',
+  },
+  'credit-counseling': {
+    href: '/tools/debt-payoff-calculator/',
+    label: 'Debt payoff calculator',
+    body: 'Frame balances and repayment options before speaking with a counselor.',
+  },
+  'credit-cards': {
+    href: '/tools/credit-score-simulator/',
+    label: 'Credit score simulator',
+    body: 'Model credit-factor scenarios before comparing card options.',
+  },
+  'build-credit': {
+    href: '/tools/credit-score-simulator/',
+    label: 'Credit score simulator',
+    body: 'Model common score-factor scenarios before choosing a credit-building path.',
+  },
+  'credit-monitoring': {
+    href: '/tools/credit-score-simulator/',
+    label: 'Credit score simulator',
+    body: 'Review score-factor context before choosing monitoring products.',
+  },
+};
+const categoryMoneyLink = categoryMoneyMap[categorySlug!];
+const categoryToolLink = categoryToolMap[categorySlug!] || {
+  href: '/tools/borrowing-power-quiz/',
+  label: 'Borrowing power quiz',
+  body: 'Frame your borrowing and credit context before comparing providers.',
+};
 const categoryActionLinks = [
+  ...(categoryMoneyLink ? [categoryMoneyLink] : []),
+  categoryToolLink,
   {
     href: '/answers/',
     label: 'Borrower questions',
@@ -111,11 +233,6 @@ const categoryActionLinks = [
     href: '/research/consumer-complaints/',
     label: 'Complaint data context',
     body: 'Understand how public CFPB complaint data can support provider research.',
-  },
-  {
-    href: '/tools/',
-    label: 'CreditDoc tools',
-    body: 'Use calculators and quizzes to frame the numbers before contacting a provider.',
   },
 ];
 

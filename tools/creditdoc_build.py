@@ -29,7 +29,7 @@ from pathlib import Path
 
 # Add parent dir so we can import creditdoc_db
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from creditdoc_db import CreditDocDB
+from creditdoc_db import CreditDocDB, sanitize_export_seo_titles
 
 PROJECT_DIR = Path(__file__).parent.parent
 LENDERS_DIR = PROJECT_DIR / "src" / "content" / "lenders"
@@ -84,7 +84,7 @@ def export_changed_cluster_answers(db):
     ts = now_iso()
     for row in rows:
         slug = row["slug"]
-        data = json.loads(row["data"])
+        data = sanitize_export_seo_titles(json.loads(row["data"]))
         out = ANSWERS_DIR / f"{slug}.json"
         out.write_text(json.dumps(data, indent=2, ensure_ascii=False))
         db.conn.execute(

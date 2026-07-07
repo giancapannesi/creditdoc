@@ -212,11 +212,17 @@ const categoryAlternativeBestHref: Record<string, string> = {
   'personal-loans': '/best/best-personal-loans-bad-credit/',
   'emergency-cash': '/best/best-personal-loans-bad-credit/',
   'payday-alternatives': '/best/best-payday-loan-alternatives/',
+  'check-cashing': '/best/best-payday-loan-alternatives/',
   'debt-relief': '/best/best-debt-relief-companies/',
   'credit-counseling': '/best/best-credit-counseling-agencies/',
   'build-credit': '/best/best-credit-builder-loans/',
   'credit-monitoring': '/best/best-credit-monitoring-services/',
   'credit-cards': '/best/best-secured-credit-cards/',
+  'credit-unions': '/best/best-personal-loan-lenders/',
+  'banking': '/best/best-personal-loan-lenders/',
+  'business-loans': '/best/best-small-business-loans/',
+  'mortgages': '/best/best-personal-loan-lenders/',
+  'pawn-shops': '/best/best-payday-loan-alternatives/',
 };
 const alternativeBestHref = categoryAlternativeBestHref[lender.category] || categoryHref;
 
@@ -330,6 +336,16 @@ const reviewToolMap: Record<string, { href: string; label: string; body: string 
     label: 'Debt payoff calculator',
     body: 'Compare payoff paths and lower-cost alternatives before choosing emergency cash.',
   },
+  'check-cashing': {
+    href: '/tools/borrowing-power-quiz/',
+    label: 'Borrowing power quiz',
+    body: 'Review borrowing context before using check-cashing, money-service, or short-term cash options.',
+  },
+  'pawn-shops': {
+    href: '/tools/borrowing-power-quiz/',
+    label: 'Borrowing power quiz',
+    body: 'Check borrowing context before comparing collateral, pawn, or short-term cash options.',
+  },
   'debt-relief': {
     href: '/tools/debt-payoff-calculator/',
     label: 'Debt payoff calculator',
@@ -344,6 +360,21 @@ const reviewToolMap: Record<string, { href: string; label: string; body: string 
     href: '/tools/borrowing-power-quiz/',
     label: 'Borrowing power quiz',
     body: 'Review income, debt, and credit context before comparing mortgage profiles.',
+  },
+  'credit-unions': {
+    href: '/tools/borrowing-power-quiz/',
+    label: 'Borrowing power quiz',
+    body: 'Frame borrowing needs before comparing credit unions, banks, or personal-loan options.',
+  },
+  'banking': {
+    href: '/tools/borrowing-power-quiz/',
+    label: 'Borrowing power quiz',
+    body: 'Review account and borrowing context before comparing bank or credit-union profiles.',
+  },
+  'credit-cards': {
+    href: '/tools/credit-score-simulator/',
+    label: 'Credit score simulator',
+    body: 'Model credit-factor scenarios before comparing secured-card or card-building options.',
   },
 };
 const primaryReviewTool = reviewToolMap[lender.category] || {

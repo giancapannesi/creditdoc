@@ -63,6 +63,70 @@ JSON_EXPORT_EXCLUDED_FIELDS = {
     "last_engine_run",
 }
 
+SEO_TITLE_KEYS = {"title", "seo_title", "meta_title", "h1"}
+
+
+def _strip_title_ellipsis(value):
+    if not isinstance(value, str):
+        return value
+    stripped = value.strip()
+    if not (stripped.endswith("...") or stripped.endswith("…")):
+        return value
+    stripped = stripped.rstrip(".…").rstrip()
+    return stripped.rstrip(" |-:;,([").strip()
+
+
+def _state_abbr(state):
+    states = {
+        "Alabama": "AL", "Alaska": "AK", "Arizona": "AZ", "Arkansas": "AR", "California": "CA",
+        "Colorado": "CO", "Connecticut": "CT", "Delaware": "DE", "Florida": "FL", "Georgia": "GA",
+        "Hawaii": "HI", "Idaho": "ID", "Illinois": "IL", "Indiana": "IN", "Iowa": "IA",
+        "Kansas": "KS", "Kentucky": "KY", "Louisiana": "LA", "Maine": "ME", "Maryland": "MD",
+        "Massachusetts": "MA", "Michigan": "MI", "Minnesota": "MN", "Mississippi": "MS",
+        "Missouri": "MO", "Montana": "MT", "Nebraska": "NE", "Nevada": "NV",
+        "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM", "New York": "NY",
+        "North Carolina": "NC", "North Dakota": "ND", "Ohio": "OH", "Oklahoma": "OK",
+        "Oregon": "OR", "Pennsylvania": "PA", "Rhode Island": "RI", "South Carolina": "SC",
+        "South Dakota": "SD", "Tennessee": "TN", "Texas": "TX", "Utah": "UT", "Vermont": "VT",
+        "Virginia": "VA", "Washington": "WA", "West Virginia": "WV", "Wisconsin": "WI",
+        "Wyoming": "WY", "District of Columbia": "DC",
+    }
+    if not state:
+        return ""
+    return states.get(str(state), str(state))
+
+
+def sanitize_export_seo_titles(data):
+    """Prevent DB exports from reintroducing title/meta ellipsis truncation."""
+    if isinstance(data, list):
+        return [sanitize_export_seo_titles(item) for item in data]
+    if not isinstance(data, dict):
+        return data
+
+    sanitized = {}
+    for key, value in data.items():
+        sanitized[key] = sanitize_export_seo_titles(value)
+
+    for key in SEO_TITLE_KEYS:
+        value = sanitized.get(key)
+        if not (isinstance(value, str) and (value.strip().endswith("...") or value.strip().endswith("…"))):
+            continue
+        if key == "meta_title" and sanitized.get("name"):
+            info = sanitized.get("company_info") or {}
+            city = info.get("city") if isinstance(info, dict) else ""
+            state = _state_abbr(info.get("state") if isinstance(info, dict) else "")
+            location = ", ".join(part for part in [city, state] if part)
+            sanitized[key] = f"{sanitized['name']} in {location} | CreditDoc" if location else f"{sanitized['name']} | CreditDoc"
+        elif key == "title" and isinstance(sanitized.get("h1"), str) and not sanitized["h1"].strip().endswith(("...", "…")):
+            sanitized[key] = sanitized["h1"]
+        elif key == "seo_title" and isinstance(sanitized.get("title"), str):
+            title = _strip_title_ellipsis(sanitized["title"])
+            sanitized[key] = title if "CreditDoc" in title else f"{title} | CreditDoc"
+        else:
+            sanitized[key] = _strip_title_ellipsis(value)
+
+    return sanitized
+
 
 # ─── Persistence Rules ──────────────────────────────────────────────
 # PERSISTENT FIELDS — editorial content that must NEVER be lost or silently
@@ -1094,7 +1158,7 @@ class CreditDocDB:
         ts = _now()
         for row in rows:
             slug = row["slug"]
-            data = json.loads(row["data"])
+            data = sanitize_export_seo_titles(json.loads(row["data"]))
             out = output_dir / f"{slug}.json"
             out.write_text(json.dumps(data, indent=2, ensure_ascii=False))
             written.append(slug)
@@ -1200,6 +1264,7 @@ class CreditDocDB:
         data = self.get_lender_data(slug)
         if not data:
             return False
+        data = sanitize_export_seo_titles(data)
 
         filepath = output_dir / f"{slug}.json"
         if filepath.exists():
@@ -1275,7 +1340,7 @@ class CreditDocDB:
         """Export a content table back to its JSON file."""
         output_dir = Path(output_dir) if output_dir else CONTENT_DIR
         rows = self.conn.execute(f"SELECT data FROM {table}").fetchall()
-        items = [json.loads(r["data"]) for r in rows]
+        items = [sanitize_export_seo_titles(json.loads(r["data"])) for r in rows]
 
         filepath = output_dir / filename
         with open(filepath, "w") as f:
