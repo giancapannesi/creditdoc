@@ -703,13 +703,12 @@ def run(args):
         append_execution_log("3", "executor", "(none)", cluster["id"], "0/10", "", f"json parse fail")
         return 3
 
-    # Auto-fix minor issues before validation
+    # Auto-fix minor meta issues before validation. Do not auto-trim titles:
+    # a chopped SEO title can publish as a bad search result, so overlong titles
+    # must fail validation and be regenerated/fixed upstream.
     md = obj.get("meta_description", "")
     if len(md) > 160:
-        obj["meta_description"] = md[:157].rsplit(" ", 1)[0] + "..."
-    title = obj.get("title", "")
-    if len(title) > 60:
-        obj["title"] = title[:57].rsplit(" ", 1)[0] + "..."
+        obj["meta_description"] = md[:160].rsplit(" ", 1)[0].rstrip(" .,;:-")
 
     obj["page_format"] = "dedicated_question_answer"
     obj["primary_question"] = primary_question

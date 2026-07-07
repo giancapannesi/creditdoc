@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node scripts/check_content_text_integrity.mjs && node scripts/check_robots_contract.mjs && node scripts/check_ai_ingestion_contract.mjs && node scripts/check_ssr_sitemap_parity.mjs",
+    "prebuild": "node scripts/check_content_text_integrity.mjs && node scripts/check_no_truncated_seo_fields.mjs && node scripts/check_robots_contract.mjs && node scripts/check_ai_ingestion_contract.mjs && node scripts/check_ssr_sitemap_parity.mjs",
     "postbuild": "node scripts/check_sitemap_robots_conflicts.mjs && node scripts/check_sitemap_critical_urls.mjs && node scripts/check_schema_sitemap_contract.mjs && node scripts/check_best_serp_contract.mjs && node scripts/check_feed_contract.mjs && node scripts/check_image_alt_contract.mjs && node scripts/check_image_filename_contract.mjs && node scripts/check_ai_ingestion_contract.mjs",
     "build": "astro build",
     "check:answer-meta": "node scripts/creditdoc_answer_meta_audit.mjs",

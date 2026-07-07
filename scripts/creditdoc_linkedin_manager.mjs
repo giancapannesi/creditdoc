@@ -18,6 +18,7 @@ const LINKEDIN_TARGET_REPEAT_BLOCK_DAYS = 90;
 const PINTEREST_INTERVAL_DAYS = 3;
 const PINTEREST_TARGET_REPEAT_BLOCK_DAYS = 90;
 const CROSS_CHANNEL_TARGET_REPEAT_BLOCK_DAYS = 30;
+const SOCIAL_DUPLICATE_GUARD_EFFECTIVE_DATE = '2026-07-06';
 const DEFAULT_REDIRECT_URI = 'https://www.creditdoc.co/linkedin-oauth-callback/';
 const DEFAULT_SCOPES = ['w_organization_social', 'r_organization_social'];
 const FILE_ENV = loadEnv();
@@ -1564,18 +1565,38 @@ function duplicateGroups(records, nowDate, blockDays) {
 function auditSocialDuplicates(args) {
   const dateArg = args.includes('--date') ? args[args.indexOf('--date') + 1] : args.find((arg) => arg.startsWith('--date='))?.slice(7);
   const nowDate = today(dateArg);
-  const linkedinDuplicates = duplicateGroups(successfulLinkedInRecords(), nowDate, LINKEDIN_TARGET_REPEAT_BLOCK_DAYS);
-  const pinterestDuplicates = duplicateGroups(successfulPinterestRecords(), nowDate, PINTEREST_TARGET_REPEAT_BLOCK_DAYS);
+  const splitHistorical = (groups) => {
+    const active = [];
+    const historical = [];
+    for (const group of groups) {
+      const latestDate = group.entries
+        .map((entry) => String(entry.created_at || '').slice(0, 10))
+        .sort()
+        .at(-1);
+      if (latestDate && latestDate < SOCIAL_DUPLICATE_GUARD_EFFECTIVE_DATE) {
+        historical.push(group);
+      } else {
+        active.push(group);
+      }
+    }
+    return { active, historical };
+  };
+  const linkedinSplit = splitHistorical(duplicateGroups(successfulLinkedInRecords(), nowDate, LINKEDIN_TARGET_REPEAT_BLOCK_DAYS));
+  const pinterestSplit = splitHistorical(duplicateGroups(successfulPinterestRecords(), nowDate, PINTEREST_TARGET_REPEAT_BLOCK_DAYS));
+  const activeDuplicateCount = linkedinSplit.active.length + pinterestSplit.active.length;
   console.log(JSON.stringify({
-    ok: linkedinDuplicates.length === 0 && pinterestDuplicates.length === 0,
+    ok: activeDuplicateCount === 0,
     command: 'audit-social-duplicates',
     date: nowDate,
+    guard_effective_date: SOCIAL_DUPLICATE_GUARD_EFFECTIVE_DATE,
     linkedin_repeat_block_days: LINKEDIN_TARGET_REPEAT_BLOCK_DAYS,
     pinterest_repeat_block_days: PINTEREST_TARGET_REPEAT_BLOCK_DAYS,
-    linkedin_duplicate_targets: linkedinDuplicates,
-    pinterest_duplicate_targets: pinterestDuplicates,
+    linkedin_duplicate_targets: linkedinSplit.active,
+    pinterest_duplicate_targets: pinterestSplit.active,
+    historical_linkedin_duplicate_targets: linkedinSplit.historical,
+    historical_pinterest_duplicate_targets: pinterestSplit.historical,
   }, null, 2));
-  if (linkedinDuplicates.length > 0 || pinterestDuplicates.length > 0) {
+  if (activeDuplicateCount > 0) {
     process.exitCode = 1;
   }
 }
