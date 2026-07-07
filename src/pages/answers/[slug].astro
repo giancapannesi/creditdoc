@@ -41,14 +41,30 @@ const sections = (answer.sections || []).filter((section) => section?.heading &&
 const faqs = (answer.faq_schema || []).filter((f) => f?.question && f?.answer);
 const primarySources = (answer.primary_sources || []).filter((src) => src?.name && src?.url);
 
+function stripMarkdownLinks(md: string): string {
+  return md.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+}
+
 const linkedSections = sections.map(section => ({
   heading: softenEducationalTeaserCopy(section.heading || ''),
-  content: softenEducationalTeaserCopy(linker(section.content || '').join('\n\n')),
+  content: softenEducationalTeaserCopy(linker(stripMarkdownLinks(section.content || '')).join('\n\n')),
 }));
 
 // Derive key takeaways from the first sentence of the first 4 sections (used in TL;DR card).
 function firstSentence(md: string): string {
-  const plain = md.replace(/[#*_`|]/g, '').replace(/\s+/g, ' ').trim();
+  const withoutTables = stripMarkdownLinks(md)
+    .split('\n')
+    .filter((line) => {
+      const trimmed = line.trim();
+      return !(trimmed.startsWith('|') && trimmed.endsWith('|'));
+    })
+    .join('\n');
+  const plain = withoutTables
+    .replace(/^\s*[-*]\s+/gm, '')
+    .replace(/^\s*\d+\.\s+/gm, '')
+    .replace(/[#*_`|]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
   const m = plain.match(/^(.*?[.!?])(\s|$)/);
   return (m ? m[1] : plain.slice(0, 160)).trim();
 }

@@ -5983,3 +5983,25 @@ Important interpretation:
   surfaces.
 - This work did not stop or disable cron, feeds, publishing, Pinterest, or
   LinkedIn automation.
+## 2026-07-07 14:49 UTC - Secured/bad-credit cards traffic chunk
+
+Status:
+- Deployed secured/bad-credit credit-card exact-intent cluster to Cloudflare Workers version `fafe58f8-a5c2-4fba-8910-564d6f6fa2ef`.
+
+Implemented:
+- Added `/answers/credit-cards-for-bad-credit-guide/`.
+- Updated `/answers/top-secured-credit-cards/`, `/answers/how-to-apply-for-secured-credit-cards/`, and `/answers/how-does-secured-credit-card-work-for-capital-one/` for exact-intent title/meta/phrase support.
+- Updated `/tools/credit-score-simulator/` internal links toward secured cards, credit-builder loans, and relevant answer support.
+- Patched `src/pages/answers/[slug].astro` so answer pages strip markdown links before inline auto-linking and exclude markdown tables from TL;DR/key-takeaway extraction.
+- Cleaned simulator `WebApplication` author schema to `Organization: CreditDoc Editorial`.
+
+Verification:
+- `npm run build` passed all postbuild contracts.
+- Live target checks passed: 200 status, canonicals present, JSON-LD present, no raw markdown links, no table leakage in takeaways, no bad safe-copy phrases, no stale executive-person schema.
+- `/srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/creditdoc_feed_continuity_watchdog.py`: all OK.
+- `/srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/creditdoc_content_audit.py --preview --no-fix --stdout`: `0 issues found`.
+- `/srv/BusinessOps/tools/verify_crons.sh`: all 59 expected crons present.
+- `node scripts/creditdoc_linkedin_manager.mjs audit-social-duplicates`: no current LinkedIn or Pinterest duplicate targets.
+
+Operational note:
+- No cron, feed, Pinterest, or LinkedIn automation was stopped or paused.
