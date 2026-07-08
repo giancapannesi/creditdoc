@@ -95,9 +95,12 @@ const primaryCategoryLink = primaryRelatedCategory
 
 // Run inline-linker on blog sections for internal links to money pages, tools, answers
 const linker = createLinker(glossaryTerms, { moneyBudget: 6, glossaryBudget: 6 });
+function stripMarkdownLinks(md: string): string {
+  return md.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+}
 const linkedSections = postSections.map(section => ({
   heading: section.heading,
-  content: linker(section.content).join('\n\n'),
+  content: linker(stripMarkdownLinks(section.content)).join('\n\n'),
 }));
 
 const relatedAnswers = postCategory

@@ -4,6 +4,40 @@
 
 ---
 
+## 2026-07-08 - CreditDoc health check, blog 404 fix, and title softener cleanup
+
+Status: deployed, live-verified, memory updated, no cron/feed/social automation stopped.
+
+What happened:
+- Full CreditDoc health check found the site broadly working, but the daily content audit initially flagged 2 new blog URLs as HTTP 404:
+  - `/blog/can-an-identity-theft-unfreeze-your-credit/`
+  - `/blog/can-authorized-user-pay-credit-card/`
+- Root cause was stale production assets after new blog source records were present in `src/content/blog-posts.json`; current source had not yet been deployed.
+- While verifying the generated blog pages, found raw markdown link leakage risk in blog section rendering and an awkward title-softener output where `What You Need` became `key context`.
+
+Fix:
+- Updated `src/pages/blog/[slug].astro` so blog section content strips existing markdown links before the inline linker runs, preventing raw `[text](/url)` leakage/nested link artifacts.
+- Updated `src/utils/safe-copy.ts` so `What You Need` / `What You Need to Know` softens to `What to Review` instead of `key context`.
+- Rebuilt and deployed to Cloudflare Worker version `48e5eaf0-e411-4c2b-ac26-78951d74edf5`.
+- Purged the Cloudflare cache for `/blog/can-authorized-user-pay-credit-card/` after confirming the local built asset was correct.
+
+Verification:
+- `npm run build` passed.
+- Postbuild contracts passed: sitemap/robots conflicts, critical sitemap URLs, schema/sitemap contract, Best SERP contract, feed contract, image alt contract, image filename contract, and AI ingestion contract.
+- Live checks returned HTTP 200 for homepage, the two fixed blog pages, a priority answer, a priority tool, the course hub, a wellness page, sitemap, RSS, and Atom feed.
+- Live blog pages now have canonical tags, JSON-LD, no raw markdown links, and corrected schema/H1 for `Can Authorized User Pay Credit Card? What to Review`.
+- `creditdoc_content_audit.py --preview --no-fix --stdout` returned `0 issues found`.
+- `creditdoc_feed_continuity_watchdog.py` passed:
+  - RSS newest `2026-07-08T00:00:00+00:00`
+  - feed newest `2026-07-08T00:00:00+00:00`
+  - answer HTML 495, wellness HTML 139, tools HTML 19, courses HTML 10 all passed title/meta/H1/canonical/content checks.
+- `/srv/BusinessOps/tools/verify_crons.sh` returned `OK: All 59 expected crons present`.
+- `node scripts/creditdoc_linkedin_manager.mjs audit-social-duplicates` returned no current LinkedIn/Pinterest duplicate targets. Historical Pinterest duplicate for the commercial-loan calculator remains recorded from July 2/3, before the current guard window.
+
+Operational note:
+- Today’s auto-generated two-week SEO calendar brief was kept at `SEO/two-week-action-calendar/2026-07-08-day-10.md`.
+- Do not pause or stop feeds, city/blog/answers/wellness publishing, Pinterest, or LinkedIn automation without explicit founder approval.
+
 ## 2026-07-06 - GSC review 404 remediation
 
 Status: implemented locally; build and deep SEO audit clean; deployment/live validation next.
