@@ -6171,3 +6171,110 @@ Next recommended SEO actions:
 3. Expand review-page state context coverage beyond the current 97 rendered review pages where the lender has resolvable state data.
 4. Build exact-intent answer pages around regulatory queries such as `how to check if a lender is licensed`, `where to complain about a lender`, `state payday loan laws`, `credit repair laws by state`, and `CFPB complaint meaning`.
 5. Use this layer in social distribution: pins/posts should occasionally lead with "check the regulator before you apply" and link to the directory/tool/state pages.
+
+## 2026-07-09 09:18 UTC - Plan to use CreditDoc regulatory layer
+
+Objective:
+- Turn CreditDoc's regulatory/state-law/complaint-data layer into a visible trust and SEO differentiator across commercial, educational, and social surfaces.
+- Do this without making unsafe licensing, legal, compliance, approval, or suitability claims.
+
+Phase 1 - Make the moat visible on money pages and tools:
+- Add a reusable `RegulatoryResearchModule` or equivalent page section.
+- Install it on the highest-value `/best/` pages first:
+  - `/best/best-business-lines-of-credit/`
+  - `/best/best-sba-loans/`
+  - `/best/best-small-business-loans/`
+  - `/best/best-personal-loan-lenders/`
+  - `/best/best-personal-loans-bad-credit/`
+  - `/best/best-credit-repair-companies/`
+  - `/best/best-debt-relief-companies/`
+  - `/best/best-secured-credit-cards/`
+- Install a compact version on high-value tools:
+  - `/tools/business-line-of-credit-calculator/`
+  - `/tools/sba-loan-calculator/`
+  - `/tools/business-loan-calculator/`
+  - `/tools/commercial-loan-calculator/`
+  - `/tools/credit-score-simulator/`
+  - `/tools/debt-payoff-calculator/`
+- Links should route to:
+  - `/tools/state-consumer-credit-regulator-directory/`
+  - `/state/`
+  - relevant `/state/[slug]/lending-laws/` where state context is known
+  - `/research/consumer-complaints/`
+  - `/about/creditdoc-data/`
+
+Phase 2 - Create regulatory-intent answer cluster:
+- Build or improve answer pages targeting:
+  - `how to check if a lender is licensed`
+  - `where to complain about a lender`
+  - `how to file a CFPB complaint`
+  - `what does a CFPB complaint mean`
+  - `credit repair laws by state`
+  - `payday loan laws by state`
+  - `business loan licensing requirements`
+  - `how to check a debt relief company`
+  - `how to check a credit repair company`
+- Every page must link back to:
+  - regulator directory
+  - relevant money/tool page
+  - one state-law page
+  - one research/data page
+
+Phase 3 - Strengthen structured data and AI ingestion:
+- Add schema `about` / `mentions` references where appropriate for:
+  - CFPB
+  - FTC
+  - state regulators
+  - consumer complaint routing
+  - lending laws
+  - credit repair law
+- Make sure `/llms.txt` and AI ingestion surfaces include:
+  - regulator directory
+  - state law hub
+  - CFPB complaint research
+  - top regulatory answer pages
+  - methodology and CreditDoc data pages.
+- Avoid adding legal-service schema or implying legal advice.
+
+Phase 4 - Expand review-page coverage safely:
+- Audit why only 97 rendered review pages currently show `State Consumer Finance Context`.
+- Increase coverage where lender records have reliable state data.
+- Keep copy conservative:
+  - state-level context only;
+  - no claim that the provider/location is licensed unless direct proof exists;
+  - no claim that regulator data proves safety, quality, approval odds, or suitability.
+
+Phase 5 - Use it in social and outreach:
+- LinkedIn/Pinterest content should periodically highlight:
+  - "Check the regulator before applying"
+  - "Where to file a complaint"
+  - "How to compare lenders beyond advertised rates"
+  - "What CFPB complaint data can and cannot tell you"
+- Social posts must use unique images, direct page links, and no repeated target URL within the 90-day guard.
+- Use the regulatory layer as a backlink/outreach hook for journalists, consumer advocates, financial educators, and local resources.
+
+Measurement:
+- Track GSC impressions/clicks for regulatory pages and queries.
+- Track internal clicks from money/tools pages into regulator resources.
+- Track indexation of regulatory answer cluster.
+- Track whether `/best/` and `/tools/` pages with the module improve impressions or CTR over 14/28-day windows.
+
+Refresh cadence:
+- Regulatory/state-law/complaint-resource data must have a scheduled refresh at least every 6 months.
+- Add a monthly lightweight drift check for broken regulator/statute/complaint-resource links.
+- Six-month refresh should check:
+  - state regulator names and URLs;
+  - attorney general / consumer protection complaint links;
+  - lending-law/statute references;
+  - CFPB/FTC complaint-routing links;
+  - outdated rate-cap or fee-context wording;
+  - schema/dateModified updates on refreshed pages.
+- Any page using regulatory copy should keep cautious language: educational context only, verify with official regulator, no legal advice, no licensing claim unless directly proven.
+
+Implementation order:
+1. Build reusable regulatory module and add it to priority money/tool pages.
+2. Regenerate/build/deploy and run schema/sitemap/feed/content audits.
+3. Create first 5 regulatory answer pages from exact-intent list.
+4. Add regulatory pages to priority indexing queue.
+5. Add cron/reminder for monthly link drift checks and six-month full regulatory refresh.
+6. Update LinkedIn/Pinterest rotation with regulatory content slots.
