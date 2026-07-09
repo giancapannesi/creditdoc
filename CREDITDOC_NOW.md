@@ -6344,3 +6344,50 @@ Remaining scheduled next phases:
 - Expand safe review-page state context coverage where lender/location data is reliable.
 - Add regulatory-content slots to LinkedIn/Pinterest rotation, using unique images and no repeated URL inside the 90-day guard.
 - Watch GSC 14/28-day impact for money/tool pages with the module and for regulatory query impressions.
+
+## 2026-07-09 15:05 UTC - Manual GSC and social rollout schedule for regulatory URLs
+
+Manual GSC URL Inspection emails:
+- Patched `/srv/BusinessOps/tools/creditdoc_daily_gsc_queue.py` so it can read a dated founder manual-submit schedule before the general priority queue.
+- Added `/srv/BusinessOps/data/creditdoc_manual_gsc_submit_schedule.json`.
+- Added `--date YYYY-MM-DD` dry-run support to verify future daily email contents without waiting for cron.
+- The normal daily cron remains unchanged: 06:15 UTC via `creditdoc_daily_gsc_queue.py --apply`.
+
+Scheduled manual-submit batches:
+- 2026-07-10 email will contain these 10 URLs:
+  - `/tools/state-consumer-credit-regulator-directory/`
+  - `/state/`
+  - `/about/creditdoc-data/`
+  - `/research/consumer-complaints/`
+  - `/best/best-business-lines-of-credit/`
+  - `/best/best-sba-loans/`
+  - `/best/best-small-business-loans/`
+  - `/best/best-personal-loan-lenders/`
+  - `/best/best-personal-loans-bad-credit/`
+  - `/best/best-credit-repair-companies/`
+- 2026-07-11 email will contain these 8 scheduled URLs, then fill the final 2 slots from the normal high-priority queue:
+  - `/best/best-debt-relief-companies/`
+  - `/best/best-secured-credit-cards/`
+  - `/tools/business-line-of-credit-calculator/`
+  - `/tools/sba-loan-calculator/`
+  - `/tools/business-loan-calculator/`
+  - `/tools/commercial-loan-calculator/`
+  - `/tools/credit-score-simulator/`
+  - `/tools/debt-payoff-calculator/`
+- Verified dry runs for 2026-07-10 and 2026-07-11. The schedule now prevents July 11 filler rows from repeating URLs already scheduled for July 10.
+
+Social rollout:
+- Added regulatory campaigns to `scripts/creditdoc_linkedin_manager.mjs`, placed after the first three existing campaigns so Pinterest's `next_campaign_index=3` starts the regulatory sequence next.
+- Added LinkedIn drafts to `/srv/BusinessOps/data/creditdoc_linkedin_queue.json`:
+  - 2026-07-14: State consumer credit regulator directory
+  - 2026-07-17: Business line of credit comparison with regulatory context
+  - 2026-07-21: State lending law hub
+  - 2026-07-24: CreditDoc data methodology
+- Existing 2026-07-10 LinkedIn draft for MCA repayment calculator remains first and should publish before the regulatory sequence.
+- Pinterest preview for 2026-07-09 through 2026-07-24 shows:
+  - 2026-07-11: State consumer credit regulator directory
+  - 2026-07-14: State lending law hub
+  - 2026-07-17: CreditDoc data methodology
+  - 2026-07-20: Business line of credit comparison with regulatory context
+  - 2026-07-23: Accounts receivable financing calculator
+- Social duplicate audit remains OK for active duplicate targets; historical July 2/3 commercial-loan duplicate remains recorded only as historical.
