@@ -6134,3 +6134,40 @@ Next SEO focus:
 - Continue priority indexing and internal routing for tools, courses, answers, wellness, and money pages.
 - Do not spend manual GSC quota on review pages unless there is a specific revenue reason.
 - Use GSC watchlists for pages already visible in positions 4-20 and rewrite titles/meta only where query/page mismatch is proven.
+
+## 2026-07-09 09:10 UTC - Regulatory layer SEO moat audit
+
+Finding:
+- CreditDoc has a real regulatory/data layer and it is likely a meaningful differentiator versus generic affiliate/comparison sites.
+- It is present in source and rendered output, but should be pushed harder as an SEO/E-E-A-T moat.
+
+Current implementation:
+- `src/components/StateRegulatoryContext.astro` renders state-level consumer finance context: state regulator, consumer protection agency, credit/debt/loan/payday/title/money-services context, complaint resources, statute links, and cautious source/disclaimer copy.
+- `src/components/RegulatoryRecord.astro` renders company-level federal data where matched: CFPB complaint stats, enforcement actions, FDIC branch count, and SBA lending records.
+- `/review/[slug].astro` imports both components:
+  - company regulator data via `getRegulatorDataRuntime(lender.slug, env)`;
+  - state context via `getStateByCodeRuntimeFromDb(stateAbbr, env)`.
+- Rendered build check on 2026-07-09:
+  - 97 built review pages include `State Consumer Finance Context`.
+  - 9 built review pages include `Consumer Complaint Record`.
+- The standalone tool/resource page exists at `/tools/state-consumer-credit-regulator-directory/` with CollectionPage, FAQPage, and BreadcrumbList schema and links to all state lending-law pages.
+- Local regulator data inventory in `data/regulator.db`:
+  - `cfpb_company_stats`: 2,514 rows.
+  - `cfpb_enforcement_actions`: 385 rows.
+  - `regulator_entities`: 7,193 rows.
+  - `sba_lender_national_year`: 5,704 rows.
+  - `sba_lender_state_year`: 16,263 rows.
+  - `hmda_lender_stats`: 2,506 rows.
+  - `fdic_institutions`: 27,832 rows.
+
+Strategic interpretation:
+- We are using the regulatory layer, but not yet enough.
+- It appears strongly on some review pages and exists as a directory/tool, but it should also support high-value money pages, tools, answers, wellness/course material, and comparison pages more explicitly.
+- This should be framed as consumer research context, not a claim that providers are licensed, safe, approved, best, cheapest, or compliant.
+
+Next recommended SEO actions:
+1. Add a visible `Regulatory research` trust module to major money pages and tools, linking to `/tools/state-consumer-credit-regulator-directory/`, `/state/`, and `/research/consumer-complaints/`.
+2. Add schema-supported sameAs/mentions/about links where pages discuss CFPB, state lending laws, complaint routing, licensing checks, or regulator context.
+3. Expand review-page state context coverage beyond the current 97 rendered review pages where the lender has resolvable state data.
+4. Build exact-intent answer pages around regulatory queries such as `how to check if a lender is licensed`, `where to complain about a lender`, `state payday loan laws`, `credit repair laws by state`, and `CFPB complaint meaning`.
+5. Use this layer in social distribution: pins/posts should occasionally lead with "check the regulator before you apply" and link to the directory/tool/state pages.
