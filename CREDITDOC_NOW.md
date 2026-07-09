@@ -6095,3 +6095,42 @@ Priority sequence:
 
 Next chunk:
 - Implement `business lines of credit lenders` first.
+
+## 2026-07-09 09:02 UTC - CreditDoc health, feeds, and SEO status check
+
+Status:
+- Deployed today's health fixes to Cloudflare Workers version `97accfb9-dee1-4dc9-9ae5-2f98c24a0c9e`.
+- No cron, feed, Pinterest, LinkedIn, or content publishing automation was stopped or paused.
+
+Fixes:
+- Fixed two 2026-07-09 blog posts that were present in source but not yet live on production:
+  - `/blog/can-authorized-user-see-credit-card-on-chase-app/`
+  - `/blog/can-authorized-users-pay-credit-card-bill/`
+- Fixed new blog SEO titles/descriptions for those two posts.
+- Tightened `scripts/check_no_truncated_seo_fields.mjs` so title-like SEO fields fail if they contain an ellipsis anywhere, including cases like `|...`.
+
+Verification:
+- Live checks for both fixed blog URLs returned HTTP 200.
+- `creditdoc_feed_continuity_watchdog.py`: OK.
+  - `/rss.xml`: 50 items, newest `2026-07-09T00:00:00+00:00`.
+  - `/feed.xml`: 50 items, newest `2026-07-08T00:00:00+00:00`.
+  - Answers HTML: 495 pages passed title/meta/H1/canonical/content checks.
+  - Financial wellness HTML: 139 pages passed.
+  - Tools HTML: 19 pages passed.
+  - Courses HTML: 10 pages passed.
+- `creditdoc_content_audit.py --preview --no-fix --stdout`: `0 issues found`; 20 city guides and 4 blogs in the last 48h passed.
+- `verify_crons.sh`: all 59 expected crons present.
+- `creditdoc_linkedin_manager.mjs audit-social-duplicates`: no current LinkedIn or Pinterest duplicate targets. Historical July 2/3 Pinterest duplicate remains recorded, before the 2026-07-06 guard window.
+- `npm run build`: passed all prebuild/postbuild contracts, including sitemap/robots, schema-sitemap contract, feed contract, image alt/filename contracts, AI ingestion, and Best-page title intent.
+
+SEO read:
+- Current traffic diagnosis report written to `reports/traffic_diagnosis_2026-07-09.md`.
+- Latest 7-day GSC window, 2026-06-30 to 2026-07-06: 1 click vs 3 prior, 8,353 impressions vs 10,550 prior (-20.8%), avg position 51.33 vs 46.62.
+- Latest 28-day GSC window, 2026-06-09 to 2026-07-06: 9 clicks vs 7 prior, 38,803 impressions vs 31,698 prior (+22.4%), avg position 41.04 vs 44.75.
+- Diagnosis: technical health is green today; SEO weakness is still traffic quality/indexation maturity. Google visibility is dominated by review/entity pages. Tools/courses/answers/blog/wellness are live/static and technically valid, but many newer pages are still unknown to Google or thinly visible.
+- Latest GSC coverage audit available is `/srv/BusinessOps/data/creditdoc_gsc_audit/gsc_audit_2026-07-07.md`: tools 17/19 indexed, courses 9/10 indexed, best 25/27 indexed, answers 3/50 sampled indexed, financial wellness 22/60 sampled indexed, blog 4/35 sampled indexed.
+
+Next SEO focus:
+- Continue priority indexing and internal routing for tools, courses, answers, wellness, and money pages.
+- Do not spend manual GSC quota on review pages unless there is a specific revenue reason.
+- Use GSC watchlists for pages already visible in positions 4-20 and rewrite titles/meta only where query/page mismatch is proven.
