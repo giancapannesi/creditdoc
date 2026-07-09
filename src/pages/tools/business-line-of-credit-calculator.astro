@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
+import RegulatoryResearchModule from '../../components/RegulatoryResearchModule.astro';
 
 const title = 'Business Line of Credit Calculator | CreditDoc';
 const description = 'Estimate business line of credit payments, draw costs, interest, fees, and cash-flow pressure. Free educational calculator.';
@@ -161,5 +162,6 @@ const breadcrumbJsonLd = {
     ids.forEach((id) => fields[id]?.addEventListener('input', calculate));
     calculate();
   </script>
+  <RegulatoryResearchModule compact context="tool" />
   <ToolRelatedLinks />
 </BaseLayout>

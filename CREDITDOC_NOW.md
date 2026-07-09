@@ -6278,3 +6278,69 @@ Implementation order:
 4. Add regulatory pages to priority indexing queue.
 5. Add cron/reminder for monthly link drift checks and six-month full regulatory refresh.
 6. Update LinkedIn/Pinterest rotation with regulatory content slots.
+
+## 2026-07-09 09:28 UTC - Regulatory SEO scheduler and first deployment pass
+
+Implemented now:
+- Added reusable regulatory SEO module: `src/components/RegulatoryResearchModule.astro`.
+- Installed the module on all `/best/` money pages via `src/pages/best/[slug].astro`.
+- Added Article schema `about` / `mentions` references for consumer finance comparison, state lending laws, complaint data, CFPB, FTC, and the CreditDoc regulator directory.
+- Installed compact regulatory module on priority tools:
+  - `/tools/business-line-of-credit-calculator/`
+  - `/tools/sba-loan-calculator/`
+  - `/tools/business-loan-calculator/`
+  - `/tools/commercial-loan-calculator/`
+  - `/tools/credit-score-simulator/`
+  - `/tools/debt-payoff-calculator/`
+- Added regulatory AI-ingestion entries to `public/llms.txt`:
+  - `/tools/state-consumer-credit-regulator-directory/`
+  - `/state/`
+  - `/about/creditdoc-data/`
+- Patched the shared VPS `llms_txt_regenerator.py` so future automated llms regeneration preserves CreditDoc's curated AI-ingestion file instead of replacing it with a broad unsafe URL dump.
+- Added execution plan doc: `docs/plans/2026-07-09-regulatory-layer-execution-schedule.md`.
+- Added regulatory automation scripts:
+  - `tools/creditdoc_regulatory_refresh_check.py`
+  - `tools/creditdoc_regulatory_seo_execution_check.py`
+  - `tools/creditdoc_regulatory_next_phase_scheduler.py`
+- Fixed stale official regulator/consumer-resource links in `src/content/states.json` discovered during the link drift sample.
+- Ran the next-phase scheduler once immediately; it queued 18 priority regulatory/money/tool URLs into the existing forced Google indexing queue for the next priority indexing run.
+
+Crons added and verified:
+- Monthly link drift: `creditdoc-regulatory-link-drift`, runs at 09:35 UTC on the 2nd of every month.
+- Six-month full refresh checklist: `creditdoc-regulatory-full-refresh`, runs at 09:45 UTC on Jan 2 and Jul 2.
+- Weekly regulatory SEO execution check: `creditdoc-regulatory-seo-execution`, runs Mondays at 10:20 UTC.
+- Daily next-phase scheduler while founder is traveling: `creditdoc-regulatory-next-phase`, runs daily at 11:10 UTC.
+- `/srv/BusinessOps/tools/verify_crons.sh` passed after adding these; all 59 expected crons present.
+
+Verification:
+- `npm run build` passed.
+- Postbuild contracts passed:
+  - sitemap/robots conflict check OK
+  - critical sitemap URLs OK
+  - schema-sitemap contract OK, sitemap URLs=25,716, HTML pages=2,898, warnings=0
+  - best SERP title intent OK
+  - feed contract OK
+  - image alt contract OK
+  - image filename contract OK
+  - AI ingestion OK: robots advertises `llms.txt`; 17 high-value URLs and 154 built artifacts covered.
+- Content audit: 0 issues; required public surfaces OK; 20 city guides and 4 blogs created in last 48h.
+- Feed watchdog: RSS/feed OK; answers 495 HTML pages OK; wellness 139 HTML pages OK; tools 19 HTML pages OK; courses 10 HTML pages OK; publishing crons active.
+- Regulatory execution check: PASS.
+- Regulatory link drift sample: checked 25 URLs, failed=0, warnings=2. Warnings were official sites blocking bot-style checks, not confirmed broken public pages.
+- Social duplicate audit: active guard OK; no current LinkedIn/Pinterest duplicate targets. Historical Pinterest duplicate for commercial loan calculator from July 2/3 remains recorded; guard effective date is July 6 with 90-day repeat block.
+
+Deployment:
+- Deployed to Cloudflare Workers.
+- Current deployed Worker version: `76c9e1fe-8f27-430c-982e-a6f46da66c66`.
+- Live checks passed after edge cache settled:
+  - `/best/best-business-lines-of-credit/` contains the regulatory research module and schema references.
+  - `/tools/business-line-of-credit-calculator/` contains `Check The Regulatory Context`.
+  - `/llms.txt` contains the regulatory directory, state-law hub, and CreditDoc data methodology entries.
+  - `/rss.xml` and `/feed.xml` return HTTP 200.
+
+Remaining scheduled next phases:
+- Create/improve first regulatory-intent answer pages from the saved exact-intent list.
+- Add these regulatory URLs to the priority indexing queue after publication.
+- Expand safe review-page state context coverage where lender/location data is reliable.
+- Add regulatory-content slots to LinkedIn/Pinterest rotation, using unique images and no repeated URL inside the 90-day guard.
+- Watch GSC 14/28-day impact for money/tool pages with the module and for regulatory query impressions.

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RatingStars from '../../components/RatingStars.astro';
+import RegulatoryResearchModule from '../../components/RegulatoryResearchModule.astro';
 import { formatPrice, getBbbClass, normalizedBbbRating } from '../../utils/data';
 import type { Lender } from '../../utils/data';
 import { createLinker } from '../../utils/inline-linker';
@@ -173,6 +174,16 @@ const jsonLd = [
     },
     image: 'https://www.creditdoc.co/og-default.png',
     url: `https://www.creditdoc.co/best/${listicle.slug}/`,
+    about: [
+      { '@type': 'Thing', name: 'Consumer finance comparison' },
+      { '@type': 'Thing', name: 'State lending laws' },
+      { '@type': 'Thing', name: 'Consumer complaint data' },
+    ],
+    mentions: [
+      { '@type': 'Organization', name: 'Consumer Financial Protection Bureau', url: 'https://www.consumerfinance.gov/' },
+      { '@type': 'Organization', name: 'Federal Trade Commission', url: 'https://www.ftc.gov/' },
+      { '@type': 'WebPage', name: 'CreditDoc State Consumer Credit Regulator Directory', url: 'https://www.creditdoc.co/tools/state-consumer-credit-regulator-directory/' },
+    ],
   },
 ];
 
@@ -403,32 +414,11 @@ const canonicalUrl = `https://www.creditdoc.co/best/${listicle.slug}/`;
   )}
 
   <!-- CreditDoc Context -->
-  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-    <div class="glass-card p-6">
-      <h2 class="text-xl font-bold text-text mb-4">Use This Guide With CreditDoc Context</h2>
-      <p class="text-sm text-muted leading-relaxed mb-4">
-        List-style guides are starting points. Compare each provider profile with local guides, state rules, tools, and CFPB complaint-data context before relying on a ranking or offer.
-      </p>
-      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
-          <span class="block text-sm font-semibold text-text">City Guides</span>
-          <span class="mt-1 block text-xs text-muted">Local provider lists, maps, and regional context.</span>
-        </a>
-        <a href="/state/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
-          <span class="block text-sm font-semibold text-text">State Rules</span>
-          <span class="mt-1 block text-xs text-muted">State lending-law and regulator context.</span>
-        </a>
-        <a href="/tools/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
-          <span class="block text-sm font-semibold text-text">Tools</span>
-          <span class="mt-1 block text-xs text-muted">Estimate borrowing power, debt payoff, or credit-score scenarios.</span>
-        </a>
-        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
-          <span class="block text-sm font-semibold text-text">Complaint Data</span>
-          <span class="mt-1 block text-xs text-muted">Use public CFPB complaint patterns as one research input.</span>
-        </a>
-      </div>
-    </div>
-  </section>
+  <RegulatoryResearchModule
+    context="money"
+    title="Use This Guide With Regulatory Research"
+    description="List-style guides are starting points. Compare each provider profile with local guides, state lending-law resources, CreditDoc tools, and CFPB complaint-data context before relying on a ranking, offer, or advertised rate."
+  />
 
   <!-- Author / E-E-A-T -->
   <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">

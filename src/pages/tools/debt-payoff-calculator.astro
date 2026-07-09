@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
+import RegulatoryResearchModule from '../../components/RegulatoryResearchModule.astro';
 
 const title = "Debt Payoff Calculator — Snowball vs Avalanche | CreditDoc";
 const description = "Compare snowball vs avalanche debt payoff strategies. Estimate payoff timing, total interest paid, and monthly payment order. Free, no signup required.";
@@ -592,5 +593,6 @@ const breadcrumbJsonLd = {
       -moz-appearance: textfield;
     }
   </style>
+  <RegulatoryResearchModule compact context="tool" />
   <ToolRelatedLinks />
 </BaseLayout>

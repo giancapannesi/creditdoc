@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
+import RegulatoryResearchModule from '../../components/RegulatoryResearchModule.astro';
 
 const title = 'SBA Loan Calculator | CreditDoc';
 const description = 'Estimate SBA loan payments, total interest, guarantee-fee impact, and repayment pressure with editable assumptions. Free educational calculator.';
@@ -368,5 +369,6 @@ const breadcrumbJsonLd = {
     fields['fee-treatment']?.addEventListener('change', calculate);
     calculate();
   </script>
+  <RegulatoryResearchModule compact context="tool" />
   <ToolRelatedLinks />
 </BaseLayout>

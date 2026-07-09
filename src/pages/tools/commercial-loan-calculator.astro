@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolRelatedLinks from '../../components/ToolRelatedLinks.astro';
+import RegulatoryResearchModule from '../../components/RegulatoryResearchModule.astro';
 
 const title = 'Commercial Loan Calculator | CreditDoc';
 const description = 'Estimate commercial loan or commercial mortgage payments, total interest, balloon balance, and closing-cost impact. Free educational calculator.';
@@ -181,5 +182,6 @@ const breadcrumbJsonLd = {
       </div>
     </div>
   </section>
+  <RegulatoryResearchModule compact context="tool" />
   <ToolRelatedLinks />
 </BaseLayout>
