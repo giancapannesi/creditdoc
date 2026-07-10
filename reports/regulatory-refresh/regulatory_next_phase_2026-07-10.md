@@ -1,8 +1,8 @@
-# CreditDoc Regulatory Next Phase Scheduler - 2026-07-10 07:28 UTC
+# CreditDoc Regulatory Next Phase Scheduler - 2026-07-10 11:10 UTC
 
 ## Indexing Queue
 - Priority regulatory/money/tool URLs tracked: 23
-- Newly added to force-Google queue: 5
+- Newly added to force-Google queue: 14
 - Force-Google queue size after merge: 23
 
 ## Checks
@@ -13,7 +13,7 @@ CreditDoc regulatory SEO execution check: status=PASS report=/srv/BusinessOps/cr
 
 ### priority regulatory dry-run - OK
 ```
-CreditDoc Priority Indexing — 2026-07-10 07:28 UTC
+CreditDoc Priority Indexing — 2026-07-10 11:10 UTC
 ============================================================
   Tools:    0
   Courses:  0

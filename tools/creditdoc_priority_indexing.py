@@ -32,6 +32,7 @@ Usage:
 import argparse
 import json
 import os
+import sqlite3
 import sys
 import time
 from datetime import datetime, timezone
@@ -420,22 +421,36 @@ def push_indexnow(url_list):
         return 0, len(url_list)
 
 
-def stamp_submitted(db, urls):
+def stamp_submitted(db, urls, attempts=6):
     """Mark URLs as just-pushed-to-Indexing-API in indexation_status.
     Without this, the daily email queue will re-suggest the same URLs tomorrow,
     and the cooldown filter on the priority indexer never engages."""
     if not urls:
         return 0
     placeholders = ",".join("?" * len(urls))
-    db.conn.execute(
-        f"""UPDATE indexation_status
-            SET last_request_indexing_submitted = datetime('now'),
-                request_indexing_count = COALESCE(request_indexing_count, 0) + 1
-            WHERE page_url IN ({placeholders})""",
-        urls,
-    )
-    db.conn.commit()
-    return db.conn.total_changes
+    sql = f"""UPDATE indexation_status
+              SET last_request_indexing_submitted = datetime('now'),
+                  request_indexing_count = COALESCE(request_indexing_count, 0) + 1
+              WHERE page_url IN ({placeholders})"""
+    last_error = None
+    for attempt in range(1, attempts + 1):
+        try:
+            db.conn.execute("PRAGMA busy_timeout=120000")
+            db.conn.execute(sql, urls)
+            db.conn.commit()
+            return db.conn.total_changes
+        except sqlite3.OperationalError as e:
+            last_error = e
+            if "locked" not in str(e).lower() or attempt == attempts:
+                break
+            try:
+                db.conn.rollback()
+            except Exception:
+                pass
+            wait = min(10 * attempt, 60)
+            print(f"  DB stamp locked; retrying in {wait}s ({attempt}/{attempts})...")
+            time.sleep(wait)
+    raise last_error
 
 
 def send_telegram(message):

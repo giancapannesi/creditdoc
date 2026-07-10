@@ -4,6 +4,47 @@
 
 ---
 
+## 2026-07-10 - Bing drop investigation and direct recovery lane
+
+Status: implemented, first Bing batch accepted, daily cron installed, memory updated.
+
+Evidence checked:
+- Bing performance export in `SEO/Bing Results/creditdoc.co_SearchPerformanceOverview_All_7_10_2026.csv` shows traffic fell from active April impressions/clicks to near-zero after 2026-04-28.
+- Git history shows the timing lines up with the 2026-04-27/2026-05-02 canonical/SSR/Cloudflare transition:
+  - 2026-04-27 robots/sitemap canonical changed to `www`.
+  - 2026-04-27 through 2026-05-02 SSR/Cloudflare/Astro architecture cutover and sitemap injection changes landed.
+- Bing Webmaster API confirms CreditDoc is not technically disconnected:
+  - 2026-07-09: 2,702 pages crawled, 115 errors, 18,180 pages in index.
+  - Current Bing API traffic for the last 30 days is still 0 impressions / 0 clicks.
+- Interpretation: strongest evidence is not a robots/access outage. Bing is crawling and indexing, but search visibility appears to have reset/dropped after the late-April canonical/runtime transition. Treat as a Bing ranking/canonical trust recovery problem, not a hard crawl disconnect.
+
+Fixes made:
+- Hardened `tools/creditdoc_priority_indexing.py` so post-Google-push DB stamping retries SQLite locks instead of failing after the URL submission succeeds. This prevents local indexation tracking from drifting when the DB is busy.
+- Added `tools/creditdoc_bing_recovery.py`:
+  - Selects high-value CreditDoc pages first: tools, courses, regulatory answers, wellness, money, research/resources, then blog/state.
+  - Live-validates each URL as HTTP 200 before submission.
+  - Submits through Bing Webmaster Tools direct `SubmitUrlBatch`, separate from generic IndexNow.
+  - Records a 14-day cooldown in `/srv/BusinessOps/data/creditdoc_bing_direct_submission_state.json`.
+  - Writes run reports to `reports/bing-recovery/`.
+- Ran the first live Bing recovery batch at 2026-07-10 18:13 UTC:
+  - 100 URLs selected and submitted.
+  - Bing quota moved from `100 daily / 2200 monthly` to `0 daily / 2100 monthly`, confirming acceptance.
+  - Report: `reports/bing-recovery/bing_recovery_2026-07-10.md`.
+- Installed daily cron:
+  - `35 8 * * * cd /srv/BusinessOps/creditdoc && /srv/BusinessOps/.venv/bin/python3 tools/creditdoc_bing_recovery.py --apply --limit 100 >> /srv/BusinessOps/logs/creditdoc_bing_recovery.log 2>&1`
+
+Verification:
+- `python3 -m py_compile tools/creditdoc_priority_indexing.py tools/creditdoc_bing_recovery.py` passed.
+- `creditdoc_bing_recovery.py --apply --limit 100` succeeded.
+- Bing Webmaster quota after submission: `0 daily / 2100 monthly`.
+- `creditdoc_feed_continuity_watchdog.py` passed: RSS/feed OK, 501 answers, 139 wellness, 19 tools, 10 courses all passed static HTML checks, all monitored content crons active.
+- `verify_crons.sh` passed: all 59 expected crons present.
+
+Next monitoring:
+- Check Bing Webmaster traffic/crawl/page stats daily for 7-14 days.
+- Do not infer recovery from crawl/index count alone; the recovery signal is impressions returning for high-value tools, answers, courses, wellness, and money pages.
+- Keep the direct Bing recovery lane running unless explicitly stopped by the founder.
+
 ## 2026-07-08 - CreditDoc health check, blog 404 fix, and title softener cleanup
 
 Status: deployed, live-verified, memory updated, no cron/feed/social automation stopped.
