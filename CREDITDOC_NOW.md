@@ -45,6 +45,35 @@ Next monitoring:
 - Do not infer recovery from crawl/index count alone; the recovery signal is impressions returning for high-value tools, answers, courses, wellness, and money pages.
 - Keep the direct Bing recovery lane running unless explicitly stopped by the founder.
 
+## 2026-07-10 - Bing sitemap resubmitted
+
+Status: done and scheduled.
+
+What happened:
+- Founder correctly asked whether a fresh sitemap should be submitted to Bing after the Bing visibility collapse.
+- Confirmed old public ping endpoints are no longer usable:
+  - Google `/ping?sitemap=` returns HTTP 404 with deprecation message.
+  - Bing `/ping?sitemap=` returns HTTP 410 Gone.
+- Used the Bing Webmaster Tools API method `SubmitFeed` instead.
+
+Submitted to Bing:
+- `https://www.creditdoc.co/sitemap-index.xml`
+- `https://www.creditdoc.co/sitemap.xml`
+
+Result:
+- Bing returned success for both submissions: `{"d": null}`.
+- Added `tools/creditdoc_sitemap_resubmit.py` to make this repeatable.
+- Run report: `reports/sitemap-resubmissions/sitemap_resubmit_2026-07-10.md`.
+- Installed daily cron:
+  - `45 8 * * * cd /srv/BusinessOps/creditdoc && /srv/BusinessOps/.venv/bin/python3 tools/creditdoc_sitemap_resubmit.py --apply >> /srv/BusinessOps/logs/creditdoc_sitemap_resubmit.log 2>&1`
+
+Google note:
+- GSC currently has the CreditDoc sitemaps listed under `sc-domain:creditdoc.co`.
+- GSC readback showed:
+  - `https://creditdoc.co/sitemap-index.xml` last submitted 2026-05-07, last downloaded 2026-07-01, 0 errors, 0 warnings.
+  - `https://www.creditdoc.co/sitemap-index.xml` last submitted 2026-05-07, last downloaded 2026-07-06, 0 errors, 0 warnings.
+- Stored GSC OAuth token is read-only (`webmasters.readonly`), so programmatic Google sitemap submission is blocked until OAuth is refreshed with full `https://www.googleapis.com/auth/webmasters` scope.
+
 ## 2026-07-08 - CreditDoc health check, blog 404 fix, and title softener cleanup
 
 Status: deployed, live-verified, memory updated, no cron/feed/social automation stopped.
