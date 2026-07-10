@@ -8,6 +8,35 @@
 
 Status: implemented, first Bing batch accepted, daily cron installed, memory updated.
 
+## 2026-07-10 - Bing added to weekly CreditDoc SEO review
+
+Status: implemented in the existing Monday weekly SEO digest.
+
+What changed:
+- Updated `/srv/BusinessOps/tools/creditdoc_weekly_digest.py` so the existing Monday report now includes Bing Webmaster data every week.
+- No new cron was needed because the weekly digest already runs:
+  - `0 7 * * 1 /srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/cron_alert.py "creditdoc-weekly-digest" /srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/creditdoc_weekly_digest.py --send >> /srv/BusinessOps/logs/creditdoc_weekly_digest.log 2>&1`
+
+Weekly Bing section now reports:
+- 7-day and 30-day Bing impressions/clicks.
+- Warning if Bing impressions remain zero.
+- Latest Bing crawl date, crawled pages, crawl errors, and pages in index.
+- Bing URL submission quota.
+- Top Bing queries and top Bing pages when Bing reports them.
+
+Verification:
+- `python3 -m py_compile /srv/BusinessOps/tools/creditdoc_weekly_digest.py` passed.
+- Dry run of `/srv/BusinessOps/tools/creditdoc_weekly_digest.py` succeeded and included the new Bing section.
+- Current Bing facts in the dry run:
+  - Traffic 7d: 0 impressions / 0 clicks.
+  - Traffic 30d: 0 impressions / 0 clicks.
+  - Latest crawl: 2026-07-09, 2,702 crawled, 115 errors, 18,180 in index.
+  - URL submission quota: 0 daily / 2,100 monthly after the first direct recovery batch.
+
+Operational rule:
+- From now on, Bing must be included in the weekly CreditDoc SEO review, not treated as an occasional manual check.
+- The recovery signal is Bing impressions and query/page visibility returning; crawl/index count alone is not enough.
+
 Evidence checked:
 - Bing performance export in `SEO/Bing Results/creditdoc.co_SearchPerformanceOverview_All_7_10_2026.csv` shows traffic fell from active April impressions/clicks to near-zero after 2026-04-28.
 - Git history shows the timing lines up with the 2026-04-27/2026-05-02 canonical/SSR/Cloudflare transition:
