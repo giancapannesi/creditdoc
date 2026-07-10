@@ -74,6 +74,54 @@ Google note:
   - `https://www.creditdoc.co/sitemap-index.xml` last submitted 2026-05-07, last downloaded 2026-07-06, 0 errors, 0 warnings.
 - Stored GSC OAuth token is read-only (`webmasters.readonly`), so programmatic Google sitemap submission is blocked until OAuth is refreshed with full `https://www.googleapis.com/auth/webmasters` scope.
 
+## 2026-07-10 - CreditDoc IndexNow key rotated and monitored
+
+Status: fixed, deployed, tested, watchdog scheduled.
+
+What happened:
+- Founder provided the new IndexNow key: `1efee5eebbd54ea4812e2e77a9b73fcc`.
+- Important correction: this is an IndexNow key, not a Bing Webmaster API key. The previous Bing Webmaster API key was restored after the new string failed strict Bing Webmaster API validation.
+
+Fix:
+- Added the required root key file:
+  - `public/1efee5eebbd54ea4812e2e77a9b73fcc.txt`
+  - Live production URL verified: `https://www.creditdoc.co/1efee5eebbd54ea4812e2e77a9b73fcc.txt`
+- Corrected CreditDoc IndexNow payloads to match the protocol:
+  - `host`: `www.creditdoc.co`
+  - `key`: `1efee5eebbd54ea4812e2e77a9b73fcc`
+  - `keyLocation`: `https://www.creditdoc.co/1efee5eebbd54ea4812e2e77a9b73fcc.txt`
+  - URL lists use `https://www.creditdoc.co/...` URLs, so host/keyLocation now match and avoid 422 host mismatch.
+- Updated repo scripts:
+  - `tools/creditdoc_priority_indexing.py`
+  - `tools/live_ops/creditdoc_blog.py`
+  - `tools/live_ops/creditdoc_comparison_generator.py`
+  - `tools/live_ops/creditdoc_wellness_generator.py`
+- Updated external operational scripts outside this repo:
+  - `/srv/BusinessOps/tools/indexnow.py` now uses the new key only for CreditDoc and keeps the old default for other sites.
+  - `/srv/BusinessOps/tools/gsc_coverage_monitor.py` CreditDoc config now uses `www.creditdoc.co` and the new key.
+  - CreditDoc-specific external generators were updated to the new key/host/keyLocation: blog, blog scheduler, blog generator, content drip, comparison generator, approval review, QA fixer, and wellness generator.
+
+Deploy/verification:
+- `npm run build` passed all SEO contracts.
+- Deployed via `./deploy.sh` to Cloudflare Worker version `a788d095-07e2-4eaf-9318-be019a5bfd73`; targeted cache purge completed; route-family smoke checks all returned 200.
+- Live key file returned HTTP 200 and exact key content.
+- Direct IndexNow POST to `https://api.indexnow.org/IndexNow` using the new payload returned HTTP 202.
+- `python3 tools/creditdoc_priority_indexing.py --tier tools --indexnow-only --limit 5` returned `IndexNow: 2 OK, 0 failed`.
+
+Monitoring added:
+- Added `tools/creditdoc_bing_indexnow_watchdog.py`.
+- It checks:
+  - live IndexNow key file;
+  - Bing crawl/index stats;
+  - Bing traffic/impressions.
+- Current result at 2026-07-10 18:40 UTC:
+  - key file OK;
+  - Bing crawl OK: 2026-07-09 crawled 2,702, in index 18,180;
+  - Bing traffic still bad: 30-day impressions=0, clicks=0.
+- Installed daily alerting cron:
+  - `5 9 * * * cd /srv/BusinessOps/creditdoc && /srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/cron_alert.py "creditdoc-bing-indexnow-watchdog" /srv/BusinessOps/.venv/bin/python3 tools/creditdoc_bing_indexnow_watchdog.py >> /srv/BusinessOps/logs/creditdoc_bing_indexnow_watchdog.log 2>&1`
+- This watchdog intentionally fails while Bing impressions remain zero, so this cannot silently disappear again.
+
 ## 2026-07-08 - CreditDoc health check, blog 404 fix, and title softener cleanup
 
 Status: deployed, live-verified, memory updated, no cron/feed/social automation stopped.

@@ -37,7 +37,7 @@ PROJECT_DIR = "/srv/BusinessOps/creditdoc"
 COMPARISONS_FILE = os.path.join(PROJECT_DIR, "src/content/comparisons.json")
 LENDERS_DIR = os.path.join(PROJECT_DIR, "src/content/lenders")
 SITE_URL = "https://creditdoc.co"
-INDEXNOW_KEY = "f2018aa106044007bf54b7cde9067a1e"
+INDEXNOW_KEY = "1efee5eebbd54ea4812e2e77a9b73fcc"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 YEAR = datetime.now().strftime("%Y")
 
@@ -369,7 +369,7 @@ def build_and_push(new_slugs):
     # IndexNow
     urls = [f"{SITE_URL}/compare/{s}/" for s in new_slugs]
     payload = json.dumps({
-        "host": "creditdoc.co",
+        "host": "www.creditdoc.co",
         "key": INDEXNOW_KEY,
         "urlList": urls
     })

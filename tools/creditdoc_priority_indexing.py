@@ -50,7 +50,7 @@ from gsc_indexing import get_indexing_api_token, push_indexing_api  # push_index
 TELEGRAM_TOKEN = ""  # removed — all alerts via Harvey email (cron_alert.py)
 TELEGRAM_CHAT_ID = ""
 
-INDEXNOW_KEY = "f2018aa106044007bf54b7cde9067a1e"  # verified: /f2018...txt live
+INDEXNOW_KEY = "1efee5eebbd54ea4812e2e77a9b73fcc"  # verified via /1efee...txt key file
 INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow"
 
 SITE = "https://www.creditdoc.co"  # canonical (matches indexation_status + GSC property)
@@ -405,9 +405,9 @@ def push_indexnow(url_list):
         return 0, 0
 
     payload = {
-        "host": "creditdoc.co",
+        "host": "www.creditdoc.co",
         "key": INDEXNOW_KEY,
-        "keyLocation": f"https://creditdoc.co/{INDEXNOW_KEY}.txt",
+        "keyLocation": f"https://www.creditdoc.co/{INDEXNOW_KEY}.txt",
         "urlList": [u["url"] for u in url_list],
     }
     try:

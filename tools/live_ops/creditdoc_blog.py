@@ -797,8 +797,8 @@ def main():
 def _submit_indexnow(slugs):
     """Submit new blog URLs to IndexNow."""
     import requests
-    key = "f2018aa106044007bf54b7cde9067a1e"
-    host = "creditdoc.co"
+    key = "1efee5eebbd54ea4812e2e77a9b73fcc"
+    host = "www.creditdoc.co"
     urls = [f"https://{host}/blog/{s}/" for s in slugs]
     payload = {
         "host": host, "key": key,

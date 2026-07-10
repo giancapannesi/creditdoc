@@ -34,7 +34,7 @@ from creditdoc_content_repair import repair_unsafe_json
 PROJECT_DIR = "/srv/BusinessOps/creditdoc"
 GUIDES_FILE = os.path.join(PROJECT_DIR, "src/content/wellness-guides.json")
 SITE_URL = "https://creditdoc.co"
-INDEXNOW_KEY = "f2018aa106044007bf54b7cde9067a1e"
+INDEXNOW_KEY = "1efee5eebbd54ea4812e2e77a9b73fcc"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 YEAR = datetime.now().strftime("%Y")
 
@@ -524,7 +524,7 @@ def build_and_push(new_slugs):
     urls = [f"{SITE_URL}/financial-wellness/{s}/" for s in new_slugs]
     urls.append(f"{SITE_URL}/financial-wellness/")
     payload = json.dumps({
-        "host": "creditdoc.co",
+        "host": "www.creditdoc.co",
         "key": INDEXNOW_KEY,
         "urlList": urls
     })
