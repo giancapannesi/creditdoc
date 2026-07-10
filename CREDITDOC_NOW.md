@@ -6391,3 +6391,38 @@ Social rollout:
   - 2026-07-20: Business line of credit comparison with regulatory context
   - 2026-07-23: Accounts receivable financing calculator
 - Social duplicate audit remains OK for active duplicate targets; historical July 2/3 commercial-loan duplicate remains recorded only as historical.
+## 2026-07-10 - Regulatory answer pages deployed and GSC manual queue corrected
+
+- Added and deployed five static HTML regulatory answer pages:
+  - `/answers/how-to-check-if-a-lender-is-licensed/`
+  - `/answers/where-to-complain-about-a-lender/`
+  - `/answers/how-to-file-a-cfpb-complaint/`
+  - `/answers/what-does-a-cfpb-complaint-mean/`
+  - `/answers/how-to-check-a-credit-repair-company/`
+- Live verification after Cloudflare deploy/cache purge:
+  - all five canonical URLs return HTTP 200 with the intended titles.
+  - GSC URL Inspection reports all five as `NEUTRAL / URL is unknown to Google`, not 404.
+- The earlier manual GSC queue was wrong because it mixed strategic priority pages with verified-unindexed pages. Confirmed indexed and excluded from future manual GSC emails:
+  - `/state/`
+  - `/best/best-business-lines-of-credit/`
+  - `/best/best-sba-loans/`
+  - `/best/best-small-business-loans/`
+  - `/best/best-personal-loan-lenders/`
+  - `/best/best-personal-loans-bad-credit/`
+  - `/best/best-credit-repair-companies/`
+  - `/financial-wellness/credit-repair-rights-fcra-croa/`
+  - `/financial-wellness/debt-validation-letters/`
+- Patched `/srv/BusinessOps/tools/creditdoc_daily_gsc_queue.py` so dated manual schedule rows must pass the same eligibility check as forced rows and cannot include confirmed-indexed exclusions.
+- Fixed daily queue suppression so old scheduled URLs do not hide future forced/scheduled URLs.
+- Updated `/srv/BusinessOps/data/creditdoc_manual_gsc_submit_schedule.json` for `2026-07-11` with verified-live, non-indexed URLs:
+  - the five new regulatory answer pages;
+  - `/about/creditdoc-data/`;
+  - `/research/consumer-complaints/`;
+  - `/financial-wellness/predatory-lending-signs/`;
+  - `/financial-wellness/understanding-loan-terms/`;
+  - `/financial-wellness/vantagescore-vs-fico/`.
+- Feed/static verifier passed after deploy:
+  - `/rss.xml` and `/feed.xml` OK, newest `2026-07-10T00:00:00+00:00`;
+  - 501 generated `/answers/` HTML pages passed title/meta/H1/canonical/content checks;
+  - wellness/tools/courses static HTML checks OK;
+  - publishing crons active.

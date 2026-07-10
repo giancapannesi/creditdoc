@@ -83,6 +83,7 @@ def main() -> int:
         "creditdoc-regulatory-link-drift",
         "creditdoc-regulatory-full-refresh",
         "creditdoc-regulatory-seo-execution",
+        "creditdoc-regulatory-next-phase",
     ]:
         if marker in cron:
             rows.append(f"- OK cron marker present: `{marker}`.")

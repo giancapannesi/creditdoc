@@ -42,6 +42,11 @@ PRIORITY_URLS = [
     "/tools/commercial-loan-calculator/",
     "/tools/credit-score-simulator/",
     "/tools/debt-payoff-calculator/",
+    "/answers/how-to-check-if-a-lender-is-licensed/",
+    "/answers/where-to-complain-about-a-lender/",
+    "/answers/how-to-file-a-cfpb-complaint/",
+    "/answers/what-does-a-cfpb-complaint-mean/",
+    "/answers/how-to-check-a-credit-repair-company/",
 ]
 
 
@@ -157,7 +162,7 @@ def main() -> int:
         "## Next Phase Instructions",
         "- Keep regulatory pages and priority tools in the forced indexing queue until the existing priority indexer accepts/removes them.",
         "- Continue weekly regulatory execution checks and monthly link-drift checks.",
-        "- Next manual/content phase remains: create or improve the regulatory-intent answer cluster, then add those URLs to indexing and social rotation.",
+        "- Regulatory-intent answer cluster is part of the forced indexing queue and should be checked in the weekly execution report.",
         "- Do not pause feeds, city/blog/answers/wellness publishing, LinkedIn, Pinterest, or existing crons without explicit founder approval.",
         "",
     ])
