@@ -6436,3 +6436,19 @@ Social rollout:
   - `/answers/are-collections-on-credit-report/`: `NEUTRAL / URL is unknown to Google`
   - `/answers/are-credit-card-balance-transfers-bad/`: `NEUTRAL / URL is unknown to Google`
   - `/answers/are-credit-card-balance-transfers-worth-it/`: `NEUTRAL / URL is unknown to Google`
+
+## 2026-07-10 - Regulatory moat static vs SSR audit
+
+- Audited public regulatory/moat routes against `dist/` static HTML output and `src/pages` prerender settings.
+- Static regulatory/moat assets:
+  - 477 answer JSON pages with regulatory/compliance/consumer-rights terms, all present as static `/answers/.../index.html`.
+  - 50 `/state/<state>/lending-laws/` pages, all static HTML.
+  - `/tools/state-consumer-credit-regulator-directory/` static HTML.
+  - `/about/creditdoc-data/`, `/methodology/`, `/editorial-policy/`, `/disclaimer/`, `/disclosure/`, `/privacy/`, `/terms/`, `/research/`, `/research/most-responsive-consumer-finance-providers-2026/`, and `/research/state-of-subprime-lending-2026/` static HTML.
+  - Relevant resources and credit/fraud/debt-letter pages under `/resources/` are static HTML.
+- Important regulatory/moat routes still using `export const prerender = false` and therefore not emitted as static HTML:
+  - `/research/consumer-complaints/`
+  - `/research/lending-transparency/`
+  - `/state/<state>/` root pages
+- Note: `/state/<state>/lending-laws/` is static; the non-static part is the state root route only.
+- Recommended follow-up: convert the two research pages first, then decide whether `/state/<state>/` roots should be statically generated from build-time data or left SSR because they hydrate broader lender/state runtime data.
