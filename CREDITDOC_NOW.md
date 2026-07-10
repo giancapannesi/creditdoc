@@ -6426,3 +6426,13 @@ Social rollout:
   - 501 generated `/answers/` HTML pages passed title/meta/H1/canonical/content checks;
   - wellness/tools/courses static HTML checks OK;
   - publishing crons active.
+- Founder submitted the seven verified URLs above on `2026-07-10`. Stamped them in `indexation_status` with `last_manual_request_indexing_submitted`.
+- Permanent guardrail added to `/srv/BusinessOps/tools/creditdoc_daily_gsc_queue.py`: every row is live-fetched before email output; URLs are skipped if the canonical page does not return HTTP 200 or looks like 404 content.
+- Forced-queue guardrail added: URLs manually submitted in the last 7 days do not resurface from the force queue.
+- Removed the submitted seven from `/srv/BusinessOps/data/creditdoc_force_google_indexing_urls.json`.
+- Updated `2026-07-11` manual schedule to avoid the seven already submitted today.
+- Verified tomorrow filler URLs through live GSC:
+  - `/financial-wellness/what-happens-miss-payment/`: `NEUTRAL / Crawled - currently not indexed`
+  - `/answers/are-collections-on-credit-report/`: `NEUTRAL / URL is unknown to Google`
+  - `/answers/are-credit-card-balance-transfers-bad/`: `NEUTRAL / URL is unknown to Google`
+  - `/answers/are-credit-card-balance-transfers-worth-it/`: `NEUTRAL / URL is unknown to Google`
