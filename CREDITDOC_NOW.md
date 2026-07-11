@@ -4,6 +4,51 @@
 
 ---
 
+## 2026-07-11 - Hermes backlink lane pivoted to CreditDoc tools/data assets
+
+Status: implemented and first batch sent.
+
+What changed:
+- Confirmed the old Hermes checklist/resource-page outreach was already executed and did not produce confirmed backlinks.
+- Reclassified the old checklist-only strategy as exhausted; do not restart it as a new plan.
+- Added a new Hermes outreach queue focused on stronger existing CreditDoc assets:
+  - Credit Score Simulator
+  - Debt Payoff Calculator
+  - Borrowing Power Quiz
+  - Credit Report Checklist
+  - financial wellness guides
+  - State Consumer Credit Regulator Directory
+- New Hermes queue:
+  - `/srv/BusinessOps/hermes-creditdoc-backlinks/OUTREACH_QUEUE_TOOLS_PR_2026-07-11.json`
+- New sender:
+  - `/srv/BusinessOps/hermes-creditdoc-backlinks/tools/send_tool_asset_outreach.py`
+- Old exhausted wave2 cron entrypoint now delegates to the new sender:
+  - `/srv/BusinessOps/hermes-creditdoc-backlinks/tools/send_wave2_university_library_outreach.py`
+- Main Hermes autopilot now also runs the new sender after reply checks/research/reporting:
+  - `/srv/BusinessOps/hermes-creditdoc-backlinks/tools/backlink_autopilot_daily.py`
+- Guardrails:
+  - email only;
+  - no calls, forms, accounts, DMs, paid placements, or site publishing;
+  - no duplicate recipient sends from previous Hermes logs;
+  - shared daily cap of 3 tool/data asset outreach emails across both cron paths.
+
+First live batch sent on 2026-07-11:
+- University of Tennessee Center for Financial Wellness -> Credit Score Simulator / Debt Payoff / Credit Report Checklist.
+- Marquette Money Matters -> Debt Payoff Calculator / Credit Score Simulator / Build Credit From Scratch.
+- Foothill College Financial Aid -> Credit Score Simulator / Build Credit answer / Credit Report Checklist.
+
+Verification:
+- Python compile passed for the touched Hermes scripts.
+- `tools/validate_outreach_queue.py` passed with no queue errors.
+- First live batch succeeded and wrote `OUTREACH_SENT_LOG_2026-07-11.md`.
+- Post-send dry run returned zero targets, confirming today's shared 3-send cap is enforced.
+- Updated Hermes project memory at `/srv/BusinessOps/hermes-creditdoc-backlinks/PROJECT_MEMORY.md`.
+
+Next:
+- Let the weekday Hermes crons continue the remaining tool/data asset queue.
+- Check reply reports daily before more sends.
+- Do not judge this lane by reports generated; judge by replies and confirmed backlinks only.
+
 ## 2026-07-10 - Bing drop investigation and direct recovery lane
 
 Status: implemented, first Bing batch accepted, daily cron installed, memory updated.
