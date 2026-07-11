@@ -6811,3 +6811,26 @@ Social rollout:
   - `/srv/BusinessOps/backups/cron_manual/root_crontab_before_sendy_backup_20260711T141251Z.txt`
 - Rule going forward: before changing Sendy SMTP/SES settings, run `python3 tools/sendy_backup.py`; after any SMTP switch, test a real signup, confirm the subscriber row, confirm the expected email/autoresponder fires, and inspect SPF/DKIM/DMARC alignment.
 - Full report: `reports/email/sendy_contact_backup_guardrail_2026-07-11.md`.
+
+## 2026-07-11 - Truthful sitemap lastmod dates
+
+- Implemented sitemap `<lastmod>` enrichment in `astro.config.mjs`; it only writes a date when a real source date exists, not blanket "today" freshness.
+- Date sources now include SQLite `updated_at`/published fields for reviews, categories, blogs, financial wellness, answers, listicles, and comparisons; JSON dates for answer/course/listicle content; Supabase `city_guides.updated_at`; state/content file mtimes; tool page mtimes; and static page mtimes.
+- Homepage plus `/blog/`, `/answers/`, `/financial-wellness/`, and `/review/` inherit the newest relevant child content date, so publishing new content updates the section freshness shown in the sitemap.
+- Corrected the city-guide lastmod fetch to use the actual Supabase city guide schema (`slug,updated_at`), restoring lastmod on `/credit-guide/` URLs.
+- Final build passed all prebuild/postbuild contracts:
+  - content integrity, truncated SEO fields, robots, AI-ingestion, SSR sitemap parity;
+  - sitemap/robots conflicts, critical sitemap URLs, schema/sitemap contract, Best-title contract, feed contract, image alt and filename contracts.
+- Final generated sitemap evidence:
+  - `19078` sitemap URLs total;
+  - `17555` URLs with `<lastmod>`;
+  - `1523` URLs without `<lastmod>` because no reliable source date was available.
+- Spot checks with `<lastmod>` present:
+  - `/` -> `2026-07-11`;
+  - `/blog/` -> `2026-07-11`;
+  - `/answers/` -> `2026-07-10`;
+  - `/financial-wellness/` -> `2026-07-08`;
+  - `/review/` -> `2026-07-08`;
+  - `/tools/sba-loan-calculator/` -> `2026-07-09`;
+  - `/credit-guide/spokane-wa/` -> `2026-05-23`.
+- RSS/feed generation was not changed and feed contract passed. No manual Google indexing requests were consumed by this work.
