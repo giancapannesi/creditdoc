@@ -23,7 +23,7 @@ DIST = ROOT / "dist"
 STATE_FILE = Path("/srv/BusinessOps/data/creditdoc_bing_direct_submission_state.json")
 REPORT_DIR = ROOT / "reports" / "bing-recovery"
 SITE = "https://www.creditdoc.co"
-BING_SITE = "https://creditdoc.co/"
+BING_SITE = "https://www.creditdoc.co/"
 DEFAULT_LIMIT = 100
 COOLDOWN_DAYS = 14
 

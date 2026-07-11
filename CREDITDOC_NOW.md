@@ -8,6 +8,72 @@
 
 Status: implemented, first Bing batch accepted, daily cron installed, memory updated.
 
+## 2026-07-11 - Bing www property verified and footprint reduced
+
+Status: implemented, deployed, verified, Bing resubmitted, daily lane consumed for today.
+
+What changed:
+- Added `https://www.creditdoc.co/` as a Bing Webmaster Tools property via API.
+- Deployed Bing verification signals:
+  - `public/BingSiteAuth.xml`
+  - `<meta name="msvalidate.01" content="4B5251D006A8437B1A0C7C45CB7C374D" />`
+- Bing API verification succeeded: `https://www.creditdoc.co/` now returns `IsVerified: true`.
+- Updated Bing-specific tooling to use the canonical verified www property:
+  - repo: `tools/creditdoc_bing_recovery.py`
+  - repo: `tools/creditdoc_sitemap_resubmit.py`
+  - repo: `tools/creditdoc_bing_indexnow_watchdog.py`
+  - external: `/srv/BusinessOps/tools/bing_webmaster.py`
+  - external: `/srv/BusinessOps/tools/creditdoc_weekly_digest.py`
+  - external: `/srv/BusinessOps/tools/seo_manager_daily.py`
+- Submitted the www sitemaps to Bing under the verified www property:
+  - `https://www.creditdoc.co/sitemap-index.xml`
+  - `https://www.creditdoc.co/sitemap.xml`
+- Ran today’s direct Bing recovery batch against the verified www property:
+  - 100 URLs submitted.
+  - Quota after submission: `0 daily / 2,000 monthly`.
+
+Footprint reduction:
+- Added `tools/creditdoc_sitemap_footprint_audit.py`.
+- Added tracked plan: `SEO/BING_TRUST_RECOVERY_CHECKLIST_2026-07-11.md`.
+- Removed `/credit-guide/<city>/<category>/` permutation URLs from XML sitemap generation.
+- Marked `/credit-guide/<city>/<category>/` pages `noindex, follow` with both:
+  - HTML meta via `BaseLayout noindex`.
+  - `X-Robots-Tag: noindex, follow` response header.
+- These pages still return 200 for users and preserve internal links, but they are no longer submitted as indexable search landing pages.
+
+Verification:
+- `npm run build` passed.
+- Postbuild contracts passed:
+  - sitemap/robots conflicts;
+  - critical sitemap URLs;
+  - schema/sitemap contract;
+  - Best SERP contract;
+  - feed contract;
+  - image alt/filename contracts;
+  - AI ingestion contract.
+- Deployed with `./deploy.sh` to Cloudflare Worker version `a580e281-43c2-42c2-929e-67b7aff18506`; smoke checks passed.
+- Live Bing verification file works: `https://www.creditdoc.co/BingSiteAuth.xml`.
+- Live homepage contains `msvalidate.01`.
+- Live city/category sample `/credit-guide/austin-tx/credit-repair/` returns `X-Robots-Tag: noindex, follow`.
+- Live sitemap check:
+  - 4 sitemap files.
+  - 19,065 sitemap URLs.
+  - 381 `/credit-guide/<city>/` root guides in sitemap.
+  - 0 `/credit-guide/<city>/<category>/` subpages in sitemap.
+- Previous measured local sitemap baseline before the cut was 25,927 URLs, so the first footprint reduction removed about 6,862 submitted URLs without touching tools, best pages, answers, blogs, wellness, courses, research, resources, state pages, or city root guides.
+
+Current Bing status:
+- Weekly digest dry run now reads the verified www property.
+- Latest Bing crawl: 2026-07-10, 3,082 crawled, 143 errors, 18,398 in index.
+- Bing traffic is still the active problem: 7d and 30d impressions remain 0.
+- Treat this as trust/quality recovery, not solved by submission alone.
+
+Next:
+- Review `/review/` quality tiers before any wider footprint suppression. Do not noindex high-quality ready profiles blindly.
+- Check Cloudflare security events/Bot settings for verified Bingbot challenge history.
+- Draft Bing Webmaster Support ticket after the www property and footprint reduction are visible.
+- Continue backlink/authority work around CFPB/data research assets; Bing recovery likely depends on authority signals, not only technical cleanup.
+
 ## 2026-07-10 - Bing added to weekly CreditDoc SEO review
 
 Status: implemented in the existing Monday weekly SEO digest.

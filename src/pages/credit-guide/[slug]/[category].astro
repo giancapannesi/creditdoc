@@ -195,6 +195,7 @@ const description = isAtmCategory
   : `Review ${sortedLenders.length} listed ${catName.toLowerCase()} profiles associated with ${city}, ${stateName}. Compare local and statewide profile context, stored ratings where available, reviews, and contact information.`;
 
 Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
+Astro.response.headers.set('x-robots-tag', 'noindex, follow');
 Astro.response.headers.set('x-cdm-rev-source', 'ssr-credit-guide-category');
 Astro.response.headers.set('x-cdm-route', '/credit-guide/[slug]/[category]');
 Astro.response.headers.set('x-cdm-slug', `${slug}/${category}`);
@@ -271,7 +272,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+<BaseLayout title={title} description={description} jsonLd={jsonLd} noindex={true}>
   <!-- Breadcrumbs -->
   <nav class="max-w-6xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
     <ol class="flex items-center gap-2 text-sm text-muted flex-wrap">

@@ -21,7 +21,7 @@ ROOT = Path("/srv/BusinessOps/creditdoc")
 REPORT_DIR = ROOT / "reports" / "sitemap-resubmissions"
 GSC_CREDS = Path("/srv/BusinessOps/tools/.gsc-credentials.json")
 GSC_PROPERTY = "sc-domain:creditdoc.co"
-BING_SITE = "https://creditdoc.co/"
+BING_SITE = "https://www.creditdoc.co/"
 SITEMAPS = [
     "https://www.creditdoc.co/sitemap-index.xml",
     "https://www.creditdoc.co/sitemap.xml",

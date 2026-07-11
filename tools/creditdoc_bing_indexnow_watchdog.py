@@ -17,7 +17,7 @@ ROOT = Path("/srv/BusinessOps/creditdoc")
 REPORT_DIR = ROOT / "reports" / "bing-indexnow-watchdog"
 KEY = "1efee5eebbd54ea4812e2e77a9b73fcc"
 KEY_URL = f"https://www.creditdoc.co/{KEY}.txt"
-BING_SITE = "https://creditdoc.co/"
+BING_SITE = "https://www.creditdoc.co/"
 
 sys.path.insert(0, "/srv/BusinessOps/tools")
 from bing_webmaster import api_get, _unwrap, _parse_date  # noqa: E402

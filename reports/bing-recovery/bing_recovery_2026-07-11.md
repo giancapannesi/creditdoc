@@ -1,0 +1,159 @@
+# CreditDoc Bing Recovery - 2026-07-11 08:38 UTC
+
+Submitted: yes
+Selected URLs: 100
+Skipped during selection: 100
+
+## Selected
+- https://www.creditdoc.co/answers/can-i-dispute-credit-card-debt/
+- https://www.creditdoc.co/answers/can-i-dispute-credit-report-online/
+- https://www.creditdoc.co/answers/can-i-dispute-credit-report/
+- https://www.creditdoc.co/answers/can-i-dispute-late-payments-on-credit-report/
+- https://www.creditdoc.co/answers/can-i-dispute-student-loans-on-credit-report/
+- https://www.creditdoc.co/answers/can-i-do-debt-consolidation-myself/
+- https://www.creditdoc.co/answers/can-i-freeze-credit-karma/
+- https://www.creditdoc.co/answers/can-i-get-a-100k-business-loan/
+- https://www.creditdoc.co/answers/can-i-get-a-business-loan-with-no-income/
+- https://www.creditdoc.co/answers/can-i-get-a-business-loan-with-no-money/
+- https://www.creditdoc.co/answers/can-i-get-a-business-loan-without-a-business/
+- https://www.creditdoc.co/answers/can-i-get-a-car-loan-with-my-credit-score/
+- https://www.creditdoc.co/answers/can-i-get-a-credit-builder-loan/
+- https://www.creditdoc.co/answers/can-i-get-a-loan-for-auto-repair/
+- https://www.creditdoc.co/answers/can-i-get-a-loan-if-i-m-self-employed/
+- https://www.creditdoc.co/answers/can-i-get-a-loan-to-start-my-business/
+- https://www.creditdoc.co/answers/can-i-get-a-loan-with-a-600-credit-score/
+- https://www.creditdoc.co/answers/can-i-get-a-new-business-loan-with-bad-credit/
+- https://www.creditdoc.co/answers/can-i-get-a-personal-loan-self-employed/
+- https://www.creditdoc.co/answers/can-i-get-a-personal-loan-with-580-credit-score/
+- https://www.creditdoc.co/answers/can-i-get-a-personal-loan-with-bad-credit-and-a-cosigner/
+- https://www.creditdoc.co/answers/can-i-get-a-personal-loan-with-bad-credit-from-my-bank/
+- https://www.creditdoc.co/answers/can-i-get-a-sba-loan-to-start-a-business/
+- https://www.creditdoc.co/answers/can-i-get-a-small-business-loan-for-a-new-business/
+- https://www.creditdoc.co/answers/can-i-get-a-small-business-loan-with-a-600-credit-score/
+- https://www.creditdoc.co/answers/can-i-get-a-small-business-loan-with-an-llc/
+- https://www.creditdoc.co/answers/can-i-get-a-small-business-loan-with-no-credit/
+- https://www.creditdoc.co/answers/can-i-get-a-startup-business-loan-from-government/
+- https://www.creditdoc.co/answers/can-i-get-a-startup-business-loan-with-a-500-credit-score/
+- https://www.creditdoc.co/answers/can-i-get-a-startup-business-loan-with-bad-credit/
+- https://www.creditdoc.co/answers/can-i-get-credit-after-bankruptcy/
+- https://www.creditdoc.co/answers/can-i-get-hard-inquiry-removed/
+- https://www.creditdoc.co/answers/can-i-get-personal-loan-with-low-cibil-score/
+- https://www.creditdoc.co/answers/can-i-get-personal-loan-without-cibil-score/
+- https://www.creditdoc.co/answers/can-i-get-sba-loan-with-bad-credit/
+- https://www.creditdoc.co/answers/can-i-get-sba-loan-without-collateral/
+- https://www.creditdoc.co/answers/can-i-get-small-business-loan-with-bad-credit/
+- https://www.creditdoc.co/answers/can-i-have-multiple-credit-builder-loans/
+- https://www.creditdoc.co/answers/can-i-pay-collections-before-it-shows-on-credit-report/
+- https://www.creditdoc.co/answers/can-i-pay-off-debt-consolidation-loan-early/
+- https://www.creditdoc.co/answers/can-i-place-a-fraud-alert-on-credit-karma/
+- https://www.creditdoc.co/answers/can-i-rebuild-credit-after-bankruptcy/
+- https://www.creditdoc.co/answers/can-i-transfer-a-credit-card-balance-to-another-person/
+- https://www.creditdoc.co/answers/can-i-transfer-a-credit-card-balance-to-another/
+- https://www.creditdoc.co/answers/can-i-transfer-a-credit-card-balance-to-personal-loan/
+- https://www.creditdoc.co/answers/can-i-use-personal-line-of-credit-for-business/
+- https://www.creditdoc.co/answers/can-sba-loans-be-forgiven/
+- https://www.creditdoc.co/answers/can-small-business-loans-be-forgiven/
+- https://www.creditdoc.co/answers/can-you-buy-a-truck-with-a-business-loan/
+- https://www.creditdoc.co/answers/can-you-dispute-a-delinquent-credit-report/
+- https://www.creditdoc.co/answers/can-you-dispute-address-on-credit-report/
+- https://www.creditdoc.co/answers/can-you-dispute-negative-items-on-your-credit-report/
+- https://www.creditdoc.co/answers/can-you-do-debt-consolidation-yourself-guide/
+- https://www.creditdoc.co/answers/can-you-freeze-credit-on-experian-app/
+- https://www.creditdoc.co/answers/can-you-freeze-credit-with-credit-karma/
+- https://www.creditdoc.co/answers/can-you-get-a-business-loan-for-a-car/
+- https://www.creditdoc.co/answers/can-you-get-a-business-loan-to-start-a-business/
+- https://www.creditdoc.co/answers/can-you-get-a-business-loan-with-bad-credit/
+- https://www.creditdoc.co/answers/can-you-get-a-business-loan-without-using-personal-credit/
+- https://www.creditdoc.co/answers/can-you-get-a-equipment-loan-with-bad-credit/
+- https://www.creditdoc.co/answers/can-you-get-a-line-of-credit-to-start-a-business/
+- https://www.creditdoc.co/answers/can-you-get-a-loan-for-a-farm/
+- https://www.creditdoc.co/answers/can-you-get-a-loan-for-medical-bills/
+- https://www.creditdoc.co/answers/can-you-get-a-loan-if-your-self-employed/
+- https://www.creditdoc.co/answers/can-you-get-a-loan-with-620-credit-score/
+- https://www.creditdoc.co/answers/can-you-get-a-personal-loan-for-any-reason/
+- https://www.creditdoc.co/answers/can-you-get-a-personal-loan-for-credit-card-debt/
+- https://www.creditdoc.co/answers/can-you-get-a-personal-loan-without-a-credit-score/
+- https://www.creditdoc.co/answers/can-you-get-a-small-business-startup-loan-with-bad-credit/
+- https://www.creditdoc.co/answers/can-you-get-an-sba-loan-for-a-startup/
+- https://www.creditdoc.co/answers/can-you-get-credit-after-bankruptcy/
+- https://www.creditdoc.co/answers/can-you-have-multiple-business-lines-of-credit/
+- https://www.creditdoc.co/answers/can-you-lock-credit-karma/
+- https://www.creditdoc.co/answers/can-you-refinance-an-equipment-loan/
+- https://www.creditdoc.co/answers/can-you-remove-hard-inquiries-from-car-dealership/
+- https://www.creditdoc.co/answers/can-you-remove-hard-inquiry/
+- https://www.creditdoc.co/answers/can-you-transfer-a-credit-card-balance-to-bank-account/
+- https://www.creditdoc.co/answers/can-you-transfer-a-credit-card-balance/
+- https://www.creditdoc.co/answers/can-you-use-credit-cards-at-costco/
+- https://www.creditdoc.co/answers/credit-cards-for-bad-credit-guide/
+- https://www.creditdoc.co/answers/credit-score-needed-for-loans/
+- https://www.creditdoc.co/answers/debt-consolidation-vs-personal-loan/
+- https://www.creditdoc.co/answers/debt-settlement-credit-report-diy-guide/
+- https://www.creditdoc.co/answers/debt-to-income-ratio-explained/
+- https://www.creditdoc.co/answers/do-business-loans-affect-personal-credit/
+- https://www.creditdoc.co/answers/do-business-loans-check-personal-credit/
+- https://www.creditdoc.co/answers/do-business-loans-require-collateral/
+- https://www.creditdoc.co/answers/do-credit-builder-loans-help/
+- https://www.creditdoc.co/answers/do-credit-repair-companies-actually-help/
+- https://www.creditdoc.co/answers/do-i-need-a-credit-repair-company/
+- https://www.creditdoc.co/answers/do-immigrants-get-free-business-loans/
+- https://www.creditdoc.co/answers/do-klarna-build-credit/
+- https://www.creditdoc.co/answers/do-loans-build-credit/
+- https://www.creditdoc.co/answers/do-merchant-cash-advance-report-to-credit/
+- https://www.creditdoc.co/answers/do-small-business-loans-require-collateral/
+- https://www.creditdoc.co/answers/do-you-need-collateral-for-a-business-loan/
+- https://www.creditdoc.co/answers/do-you-need-good-credit-for-an-sba-loan/
+- https://www.creditdoc.co/answers/does-a-joint-account-affect-my-credit/
+- https://www.creditdoc.co/answers/does-a-sba-loan-affect-your-credit/
+- https://www.creditdoc.co/answers/does-afterpay-build-credit/
+
+## Skipped Sample
+- /about/creditdoc-data/: cooldown
+- /answers/how-to-check-a-credit-repair-company/: cooldown
+- /answers/how-to-check-if-a-lender-is-licensed/: cooldown
+- /answers/how-to-file-a-cfpb-complaint/: cooldown
+- /answers/what-does-a-cfpb-complaint-mean/: cooldown
+- /answers/where-to-complain-about-a-lender/: cooldown
+- /courses/credit-fundamentals/: cooldown
+- /editorial-policy/: cooldown
+- /financial-wellness/credit-repair-rights-fcra-croa/: cooldown
+- /financial-wellness/debt-validation-letters/: cooldown
+- /financial-wellness/how-credit-repair-works/: cooldown
+- /methodology/: cooldown
+- /research/consumer-complaints/: cooldown
+- /research/lending-transparency/: cooldown
+- /tools/business-line-of-credit-calculator/: cooldown
+- /tools/commercial-loan-calculator/: cooldown
+- /tools/credit-score-simulator/: cooldown
+- /tools/equipment-financing-calculator/: cooldown
+- /tools/loan-denial-reason-checker/: cooldown
+- /tools/sba-guarantee-fee-calculator/: cooldown
+- /tools/: cooldown
+- /tools/accounts-receivable-financing-calculator/: cooldown
+- /tools/bank-statement-cash-flow-calculator/: cooldown
+- /tools/borrowing-power-quiz/: cooldown
+- /tools/business-loan-calculator/: cooldown
+- /tools/business-loan-readiness-quiz/: cooldown
+- /tools/credit-denial-action-checklist/: cooldown
+- /tools/credit-repair-qualify-quiz/: cooldown
+- /tools/debt-payoff-calculator/: cooldown
+- /tools/mca-repayment-calculator/: cooldown
+- /tools/sba-loan-calculator/: cooldown
+- /tools/state-consumer-credit-regulator-directory/: cooldown
+- /tools/working-capital-calculator/: cooldown
+- /courses/: cooldown
+- /courses/credit-fundamentals/avoiding-scams-and-predatory-lending/: cooldown
+- /courses/credit-fundamentals/building-credit-from-scratch/: cooldown
+- /courses/credit-fundamentals/credit-repair-diy-vs-hiring-help/: cooldown
+- /courses/credit-fundamentals/how-to-read-your-credit-report/: cooldown
+- /courses/credit-fundamentals/know-your-rights/: cooldown
+- /courses/credit-fundamentals/managing-debt-effectively/: cooldown
+- /courses/credit-fundamentals/personal-loans-and-borrowing-smart/: cooldown
+- /courses/credit-fundamentals/understanding-your-credit-score/: cooldown
+- /answers/: cooldown
+- /answers/are-business-loans-cheaper-than-personal-loans/: cooldown
+- /answers/are-business-loans-tax-deductible/: cooldown
+- /answers/are-collections-on-credit-report/: cooldown
+- /answers/are-collections-on-your-credit-report/: cooldown
+- /answers/are-credit-builder-loans-bad/: cooldown
+- /answers/are-credit-builder-loans-good/: cooldown
+- /answers/are-credit-builder-loans-legit/: cooldown

@@ -102,13 +102,10 @@ function ssrSitemapPages() {
           for (const cg of cityGuides) {
             if (cg.slug) {
               urls.push(`${SITE}/credit-guide/${cg.slug}/`);
-              for (const cat of categorySlugs) {
-                urls.push(`${SITE}/credit-guide/${cg.slug}/${cat}/`);
-              }
             }
           }
           if (cityGuides.length > 0) {
-            console.log(`[sitemap] added ${cityGuides.length} city guide(s) + ${cityGuides.length * categorySlugs.length} category sub-pages`);
+            console.log(`[sitemap] added ${cityGuides.length} city guide root URL(s); category sub-pages are noindex/follow and omitted`);
           }
         }
       }
