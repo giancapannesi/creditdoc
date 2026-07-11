@@ -167,7 +167,7 @@ function sanitizeResponses(
   for (const [key, allowed] of Object.entries(config.answerValues)) {
     const raw = responses[key];
     if (key === 'session_id') {
-      const sessionId = cleanText(raw, 160);
+      const sessionId = cleanText(raw, 128);
       if (sessionId) clean.session_id = sessionId;
       continue;
     }
@@ -192,7 +192,7 @@ async function postgrestInsert(
   env: RuntimeEnv,
   table: 'lead_captures' | 'user_quiz_responses',
   payload: Record<string, unknown>
-) {
+): Promise<void> {
   const res = await fetch(`${env.SUPABASE_URL}/rest/v1/${table}`, {
     method: 'POST',
     headers: {
@@ -284,9 +284,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }
 
   const sessionId =
-    cleanText(safeResponses.session_id || null, 160) ||
+    cleanText(safeResponses.session_id || null, 128) ||
     crypto.randomUUID();
   safeResponses.session_id = sessionId;
+  const writes = {
+    user_quiz_responses: false,
+    lead_captures: false,
+  };
 
   try {
     if (!captureOnly) {
@@ -311,6 +315,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         referrer: request.headers.get('referer'),
         utm,
       });
+      writes.user_quiz_responses = true;
     }
 
     if (email) {
@@ -324,13 +329,29 @@ export const POST: APIRoute = async ({ request, locals }) => {
         user_agent: userAgent,
         consent_marketing: false,
       });
+      writes.lead_captures = true;
     }
   } catch (err) {
     console.error('[origination-intake]', (err as Error).message);
     return json({ ok: false, error: 'Intake save failed' }, 502);
   }
 
-  return json({ ok: true, session_id: sessionId });
+  return json({
+    ok: true,
+    session_id: sessionId,
+    capture: {
+      email,
+      name,
+      tool_id: toolId,
+      pillar,
+      source_page: sourcePage,
+      result_label: resultLabel,
+      result_title: resultConfig.title,
+      recommended_route: resultConfig.recommended_route,
+      consent_marketing: false,
+      writes,
+    },
+  });
 };
 
 export const GET: APIRoute = async () =>

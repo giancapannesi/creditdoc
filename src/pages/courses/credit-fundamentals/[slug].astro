@@ -521,14 +521,19 @@ const jsonLd = [
       (btn as HTMLButtonElement).disabled = true;
       btn.textContent = 'Enrolling...';
       try {
-        const body = new URLSearchParams();
-        body.append('list', 'Yj7BPjltZ5YG9nUBw892y93g');
-        body.append('email', email);
-        body.append('name', name);
-        body.append('boolean', 'true');
-        const res = await fetch('https://sendy.creditdoc.co/subscribe', { method: 'POST', body });
-        const text = await res.text();
-        if (text.trim() === '1' || text.includes('Already subscribed')) {
+        const res = await fetch('/api/email-signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            signup_type: 'credit-fundamentals-course',
+            source_page: window.location.pathname,
+            email,
+            name,
+            elapsed_ms: 3000,
+          }),
+        });
+        const data = await res.json();
+        if (res.ok && data.ok && data.signup?.email === email.toLowerCase()) {
           localStorage.setItem('cd_course_enrolled', 'true');
           localStorage.setItem('cd_course_email', email);
           localStorage.setItem('cd_course_name', name);
@@ -538,7 +543,7 @@ const jsonLd = [
           // Scroll to first lesson
           document.getElementById('lesson-1')?.scrollIntoView({ behavior: 'smooth' });
         } else {
-          throw new Error(text);
+          throw new Error(data?.error || 'Signup failed');
         }
       } catch {
         document.getElementById('gate-error')!.classList.remove('hidden');

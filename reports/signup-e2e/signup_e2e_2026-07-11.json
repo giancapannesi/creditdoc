@@ -1,0 +1,88 @@
+{
+  "ok": true,
+  "checked_at": "2026-07-11T11:47:13Z",
+  "base_url": "https://www.creditdoc.co",
+  "checks": [
+    {
+      "ok": true,
+      "check": "quiz API returns ok"
+    },
+    {
+      "ok": true,
+      "check": "quiz response returns submitted email"
+    },
+    {
+      "ok": true,
+      "check": "quiz response returns source page"
+    },
+    {
+      "ok": true,
+      "check": "quiz response returns tool id"
+    },
+    {
+      "ok": true,
+      "check": "quiz response returns route"
+    },
+    {
+      "ok": true,
+      "check": "quiz response confirms quiz write"
+    },
+    {
+      "ok": true,
+      "check": "quiz response confirms lead write"
+    },
+    {
+      "ok": true,
+      "check": "quiz row exists in Supabase user_quiz_responses"
+    },
+    {
+      "ok": true,
+      "check": "quiz lead exists in Supabase lead_captures"
+    },
+    {
+      "ok": true,
+      "check": "course signup API returns ok"
+    },
+    {
+      "ok": true,
+      "check": "course response returns submitted email"
+    },
+    {
+      "ok": true,
+      "check": "course response returns signup type"
+    },
+    {
+      "ok": true,
+      "check": "course response returns source page"
+    },
+    {
+      "ok": true,
+      "check": "course response returns list name"
+    },
+    {
+      "ok": true,
+      "check": "course response confirms Sendy write"
+    },
+    {
+      "ok": true,
+      "check": "course response confirms lead write"
+    },
+    {
+      "ok": true,
+      "check": "course signup exists in Sendy course list"
+    },
+    {
+      "ok": true,
+      "check": "course lead exists in Supabase lead_captures"
+    }
+  ],
+  "cleanup": true,
+  "cleanup_actions": [
+    "removed Sendy test subscribers",
+    "removed Supabase test rows"
+  ],
+  "test_emails": [
+    "creditdoc-e2e-quiz-1783770433@example.com",
+    "creditdoc-e2e-course-1783770433@example.com"
+  ]
+}

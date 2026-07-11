@@ -4,6 +4,48 @@
 
 ---
 
+## 2026-07-11 - Signup capture wiring verified end-to-end
+
+Status: implemented, deployed, debugger-audited, test rows cleaned up.
+
+What changed:
+- Added a same-origin signup wrapper at `/api/email-signup` so forms no longer post directly from the browser to Sendy.
+- The wrapper now returns structured confirmation data:
+  - normalized email;
+  - name;
+  - signup type;
+  - source page;
+  - Sendy list name/status;
+  - write confirmations.
+- Course signups and Borrowing Power signups now also write durable rows to Supabase `lead_captures`.
+- Credit repair and business loan quiz signups still use `/api/origination-intake` for Supabase quiz/lead capture, then `/api/email-signup` for Sendy.
+- Fixed stale course module allowlist slugs in the signup wrapper.
+- Fixed old browser-side `throw new Error(text)` paths that could hide the real signup failure after the wrapper change.
+- Capped quiz `session_id` sanitization at 128 chars to match the Supabase `user_quiz_responses` RLS/check constraint.
+- Added repeatable live debugger audit:
+  - `tools/creditdoc_signup_e2e_audit.py`
+  - latest report: `reports/signup-e2e/signup_e2e_2026-07-11.md`
+
+Verification:
+- `python3 -m py_compile tools/creditdoc_signup_e2e_audit.py` passed.
+- `npm run build` passed all prebuild/postbuild contracts.
+- Deployed to Cloudflare Worker version `d7674829-307f-4899-8e71-83ae0f0799cc`; deploy smoke checks returned 200 for the sampled routes.
+- Live debugger audit passed 18/18 checks against `https://www.creditdoc.co`:
+  - quiz API returned submitted email/source/tool/route/write confirmations;
+  - quiz row existed in Supabase `user_quiz_responses`;
+  - quiz lead existed in Supabase `lead_captures`;
+  - course signup API returned submitted email/source/signup type/list/write confirmations;
+  - course signup existed in Sendy course list;
+  - course lead existed in Supabase `lead_captures`.
+- The debugger removed its own test subscribers and Supabase rows after verification.
+
+Operational rule:
+- For signup/debug work, use `tools/creditdoc_signup_e2e_audit.py --cleanup` after deploy so live responses and backing stores are verified together.
+- Do not reintroduce direct browser posts to `https://sendy.creditdoc.co/subscribe`; use the site API wrapper so responses are auditable.
+
+Next:
+- If more signup surfaces are added, register them in `/api/email-signup` with explicit source pages and add an audit case before deploying.
+
 ## 2026-07-11 - Hermes backlink lane pivoted to CreditDoc tools/data assets
 
 Status: implemented and first batch sent.

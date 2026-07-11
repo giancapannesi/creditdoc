@@ -1101,19 +1101,19 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
       btn.disabled = true;
 
       try {
-        const body = new URLSearchParams({
-          list: 'rCzcu8brUim88T892Y85IqRQ',
-          email,
-          name,
-          boolean: 'true',
-        });
-        const res = await fetch('https://sendy.creditdoc.co/subscribe', {
+        const res = await fetch('/api/email-signup', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: body.toString(),
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            signup_type: 'borrowing-power',
+            source_page: window.location.pathname,
+            email,
+            name,
+            elapsed_ms: 3000,
+          }),
         });
-        const text = await res.text();
-        if (text.trim() === '1' || text.includes('Already subscribed')) {
+        const data = await res.json();
+        if (res.ok && data.ok && data.signup?.email === email.toLowerCase()) {
           emailForm.classList.add('hidden');
           emailSuccess.classList.remove('hidden');
           emailError.classList.add('hidden');
@@ -1121,7 +1121,7 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
             gtag('event', 'quiz_email_capture', { event_category: 'engagement' });
           }
         } else {
-          throw new Error(text);
+          throw new Error(data?.error || 'Signup failed');
         }
       } catch {
         emailError.classList.remove('hidden');
