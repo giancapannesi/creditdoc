@@ -4,6 +4,42 @@
 
 ---
 
+## 2026-07-11 - Amazon SES DNS prepared for CreditDoc email
+
+Status: DNS implemented; actual Sendy/SES send migration is blocked on SES SMTP/API credentials and sender-domain alignment.
+
+What changed:
+- Added the three Amazon SES DKIM CNAME records supplied for the `www.creditdoc.co` SES identity:
+  - `chf6lh6etffrt5pu43vg6oqjfwu6vj5s._domainkey.www.creditdoc.co`
+  - `nohyvjvjif3mw6la2h5buqwqmwnsgsiz._domainkey.www.creditdoc.co`
+  - `q7jw7rhl3hlknvanw4m22tjfpmlma2ri._domainkey.www.creditdoc.co`
+- Added Amazon SES to root SPF while keeping existing mail paths:
+  - `v=spf1 include:simplelogin.co include:amazonses.com ip4:187.77.2.146 ip6:2a02:4780:4:a118::1 ~all`
+- Added SPF for `www.creditdoc.co`:
+  - `v=spf1 include:amazonses.com ~all`
+- Report written:
+  - `reports/email/amazon_ses_migration_2026-07-11.md`
+
+Verification:
+- Cloudflare API returned success for all SES DNS records.
+- Public DNS checks passed via `1.1.1.1`, `8.8.8.8`, and `9.9.9.9`.
+- Sendy status checked:
+  - Sendy cron active every 5 minutes.
+  - CreditDoc Sendy brand currently uses `noreply@creditdoc.co`, reply-to `gian.eao@gmail.com`.
+  - Sendy main AWS key/secret fields are empty.
+  - Sendy brand SMTP still points to `localhost:25`.
+  - Postfix is not relaying through SES (`relayhost` empty).
+
+Important:
+- The supplied SES DKIM identity is `www.creditdoc.co`, but the active sender is `noreply@creditdoc.co`.
+- DMARC is strict (`adkim=s; aspf=s`), so for best delivery we should verify the root `creditdoc.co` SES identity if we keep `noreply@creditdoc.co`.
+- Do not change Sendy SMTP away from `localhost:25` until SES SMTP credentials or AWS IAM credentials are available; doing so without credentials would break course/autoresponder emails.
+
+Next:
+- Get SES SMTP credentials for the selected SES region.
+- Prefer verifying root `creditdoc.co` in SES and using `noreply@creditdoc.co`.
+- Then configure Sendy CreditDoc brand SMTP to SES (`email-smtp.<region>.amazonaws.com`, port `587`, TLS) and run the live signup E2E audit again.
+
 ## 2026-07-11 - Signup capture wiring verified end-to-end
 
 Status: implemented, deployed, debugger-audited, test rows cleaned up.
