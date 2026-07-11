@@ -6788,3 +6788,26 @@ Social rollout:
   - `/state/<state>/` root pages
 - Note: `/state/<state>/lending-laws/` is static; the non-static part is the state root route only.
 - Recommended follow-up: convert the two research pages first, then decide whether `/state/<state>/` roots should be statically generated from build-time data or left SSR because they hydrate broader lender/state runtime data.
+
+## 2026-07-11 - Sendy contacts/autoresponders protected before SES cutover
+
+- Created a verified Sendy database backup before any Amazon SES SMTP cutover:
+  - `/srv/BusinessOps/backups/sendy/2026-07-11T14-12-34Z`
+  - `sendy_full.sql`, `sendy_inventory.tsv`, and `SHA256SUMS`
+  - `sha256sum -c` passed.
+- Current Sendy inventory at backup time:
+  - CreditDoc / `Credit Repair Quiz Leads`: 1 total, 1 active.
+  - CreditDoc / `Credit Fundamentals Course`: 1 total, 1 active.
+  - DentaFund / `DentaFund National Nurture`: 0 total, 0 active.
+  - DentaFund / `DentaFund Calculator Results`: 1 total, 1 active.
+  - `Credit Fundamentals Module Summaries`: 8 autoresponder emails.
+  - `Calculator results follow-up`: 3 autoresponder emails.
+- Added `tools/sendy_backup.py` to back up the full Sendy MySQL DB plus an inventory report with list counts, autoresponder counts, and app SMTP state.
+- Installed daily Sendy backup cron at 06:35 UTC:
+  - `35 6 * * * cd /srv/BusinessOps/creditdoc && /usr/bin/python3 tools/sendy_backup.py >> /srv/BusinessOps/logs/sendy_backup.log 2>&1 # sendy-daily-backup`
+- Preserved existing Sendy sending cron:
+  - `*/5 * * * * php7.4 /srv/sendy/scheduled.php > /dev/null 2>&1`
+- Backed up root crontab before installing the new line:
+  - `/srv/BusinessOps/backups/cron_manual/root_crontab_before_sendy_backup_20260711T141251Z.txt`
+- Rule going forward: before changing Sendy SMTP/SES settings, run `python3 tools/sendy_backup.py`; after any SMTP switch, test a real signup, confirm the subscriber row, confirm the expected email/autoresponder fires, and inspect SPF/DKIM/DMARC alignment.
+- Full report: `reports/email/sendy_contact_backup_guardrail_2026-07-11.md`.
