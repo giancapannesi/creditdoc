@@ -33,6 +33,34 @@ SEO implication:
 - The question is not whether CreditDoc's core local pages are obviously thin. They are not, based on the current measurements.
 - The next strategic decision is whether to selectively index/push stronger service-city pages, especially commercial-intent categories, while keeping weaker permutations controlled.
 
+## 2026-07-12 - Local pages are now lead-capture priority
+
+Status: planning started, no site behavior changed.
+
+Files created:
+- `reports/local-seo/live_local_page_inventory_2026-07-12.csv`
+- `reports/local-seo/published_city_pages_2026-07-12.csv`
+- `reports/local-seo/local_pages_with_gsc_impressions_2026-07-12.csv`
+- `reports/local-seo/local_lead_capture_plan_2026-07-12.md`
+
+Inventory:
+- 331 published static `/city/` pages.
+- 467 published static `/browse/<category>/<city>/` service-city pages.
+- 798 local pages total in the built output.
+- 0 embedded forms currently on those local pages.
+- 798 local pages currently link to the Borrowing Power Quiz.
+
+GSC evidence:
+- 73 local pages matched impressions in the 2026-05-20 to 2026-06-19 GSC export.
+- Top local impression pages include `/browse/pawn-shops/san-diego-ca/`, `/browse/pawn-shops/denver-co/`, `/browse/pawn-shops/phoenix-az/`, `/city/long-beach-ca/`, `/city/west-new-york-nj/`, `/city/vernon-ca/`, `/city/pittsburgh-pa/`, and `/city/new-orleans-la/`.
+
+Strategic rule:
+- Every meaningful local page is a possible client entry point.
+- Add contextual email/quiz capture to local pages using the existing `/api/email-signup`, `/api/origination-intake`, Sendy, and Supabase `lead_captures` infrastructure.
+- Do not gate the content.
+- Do not make indexability, sitemap, robots, canonical, redirect, feed, or route-family suppression changes as part of lead-capture work.
+- Rollout should start with the 73 local pages already showing GSC impressions, then expand to all `/browse/<category>/<city>/`, then `/city/`, then `/credit-guide/<city>/`.
+
 ## 2026-07-11 - Amazon SES DNS prepared for CreditDoc email
 
 Status: DNS implemented; actual Sendy/SES send migration is blocked on SES SMTP/API credentials and sender-domain alignment.
