@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import LenderCard from '../../../components/LenderCard.astro';
+import LocalLeadCapture from '../../../components/LocalLeadCapture.astro';
 import { getCitiesWithLenders, getLendersByCityState, getCategories, getStateData } from '../../../utils/data-build';
 import type { CityInfo, Lender, Category } from '../../../utils/data';
 import { softenYmylCopy } from '../../../utils/safe-copy';
@@ -139,9 +140,25 @@ const jsonLd = [
           </div>
         </div>
 
+        <LocalLeadCapture
+          city={cityInfo.city}
+          stateAbbr={cityInfo.stateAbbr}
+          stateName={cityInfo.state}
+          categorySlug={category.slug}
+          categoryName={category.name}
+          routeFamily="browse"
+          compact={true}
+          consumerRightsSummary={sd?.consumer_rights_summary ? softenYmylCopy(sd.consumer_rights_summary) : null}
+          usuryCap={sd?.usury_cap || null}
+          paydayLoanStatus={sd?.payday_loan_status || null}
+          consumerProtectionAgency={sd?.consumer_protection_agency || null}
+          consumerProtectionUrl={sd?.consumer_protection_url || null}
+          licensingBoard={sd?.licensing_board || null}
+        />
+
         {/* State regulation callout */}
         {sd && (
-          <div class="glass-card p-4 mb-6 border-l-4 border-primary">
+          <div class="glass-card p-4 my-6 border-l-4 border-primary">
             <h2 class="text-sm font-semibold text-text mb-1">{cityInfo.state} Lending Regulations</h2>
             <p class="text-sm text-muted mb-2">{softenYmylCopy(sd.consumer_rights_summary)}</p>
             <div class="flex flex-wrap gap-3 text-xs text-muted">

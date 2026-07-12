@@ -192,7 +192,7 @@ if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
 const title = `${catName} in ${city}, ${stateAbbr} — Local Directory | CreditDoc`;
 const description = isAtmCategory
   ? `Browse selected ATM and cash access profiles for ${city}, ${stateName}. Verify current ATM availability directly with your bank, credit union, or ATM network.`
-  : `Review ${sortedLenders.length} listed ${catName.toLowerCase()} profiles associated with ${city}, ${stateName}. Compare local and statewide profile context, stored ratings where available, reviews, and contact information.`;
+  : `Review ${sortedLenders.length} listed ${catName.toLowerCase()} profiles associated with ${city}, ${stateName}. Compare local context, ratings, reviews, and contact details.`;
 
 Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
 Astro.response.headers.set('x-robots-tag', 'noindex, follow');

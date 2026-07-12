@@ -56,7 +56,7 @@ function normalizeTitle(value: string) {
 }
 
 const title = normalizeTitle(rawTitle);
-const description = rawDesc.length > 160 ? rawDesc.slice(0, 157) + '...' : rawDesc;
+const description = trimTitleAtWord(rawDesc, 160);
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
 const ogImg = ogImage || 'https://www.creditdoc.co/og-default.png';
 const resolvedOgType = ogType || 'website';

@@ -1,0 +1,159 @@
+# CreditDoc Bing Recovery - 2026-07-12 08:35 UTC
+
+Submitted: yes
+Selected URLs: 100
+Skipped during selection: 200
+
+## Selected
+- https://www.creditdoc.co/answers/denied-carecredit-dental-financing/
+- https://www.creditdoc.co/answers/dental-financing-bad-credit/
+- https://www.creditdoc.co/answers/dental-implants-monthly-payment/
+- https://www.creditdoc.co/answers/does-amazon-do-loans/
+- https://www.creditdoc.co/answers/does-bad-credit-score-affect-car-insurance/
+- https://www.creditdoc.co/answers/does-business-line-of-credit-affect-credit-score/
+- https://www.creditdoc.co/answers/does-business-line-of-credit-show-on-credit-report/
+- https://www.creditdoc.co/answers/does-closing-a-credit-card-hurt-your-score/
+- https://www.creditdoc.co/answers/does-consumer-credit-counseling-hurt-your-credit/
+- https://www.creditdoc.co/answers/does-credit-builder-loans-work/
+- https://www.creditdoc.co/answers/does-credit-counseling-hurt-your-credit/
+- https://www.creditdoc.co/answers/does-credit-history-affect-car-insurance/
+- https://www.creditdoc.co/answers/does-credit-repair-companies-work/
+- https://www.creditdoc.co/answers/does-credit-repair-cost-money/
+- https://www.creditdoc.co/answers/does-credit-repair-services-work/
+- https://www.creditdoc.co/answers/does-credit-score-affect-background-check/
+- https://www.creditdoc.co/answers/does-credit-score-affect-car-insurance/
+- https://www.creditdoc.co/answers/does-credit-score-affect-checking-account/
+- https://www.creditdoc.co/answers/does-credit-score-affect-employment/
+- https://www.creditdoc.co/answers/does-credit-score-affect-interest-rate/
+- https://www.creditdoc.co/answers/does-credit-score-affect-opening-checking-account/
+- https://www.creditdoc.co/answers/does-credit-score-affect-visa-application/
+- https://www.creditdoc.co/answers/does-credit-score-increase-car-insurance/
+- https://www.creditdoc.co/answers/does-debt-settlement-ruin-your-credit/
+- https://www.creditdoc.co/answers/does-getting-a-business-loan-affect-personal-credit/
+- https://www.creditdoc.co/answers/does-personal-loan-affect-cibil-score/
+- https://www.creditdoc.co/answers/easy-approval-credit-cards/
+- https://www.creditdoc.co/answers/equipment-financing-explained/
+- https://www.creditdoc.co/answers/how-big-are-small-business-loans/
+- https://www.creditdoc.co/answers/how-build-credit-after-bankruptcy/
+- https://www.creditdoc.co/answers/how-can-i-apply-for-a-business-loan/
+- https://www.creditdoc.co/answers/how-can-i-get-a-sba-loan-without-collateral/
+- https://www.creditdoc.co/answers/how-can-my-business-offer-financing/
+- https://www.creditdoc.co/answers/how-credit-card-interest-works/
+- https://www.creditdoc.co/answers/how-credit-scores-are-calculated/
+- https://www.creditdoc.co/answers/how-do-business-loans-work-for-startups/
+- https://www.creditdoc.co/answers/how-do-credit-builder-loans-work/
+- https://www.creditdoc.co/answers/how-do-credit-counseling-agencies-work/
+- https://www.creditdoc.co/answers/how-do-credit-counseling-services-work/
+- https://www.creditdoc.co/answers/how-do-credit-repair-agencies-work/
+- https://www.creditdoc.co/answers/how-do-credit-repair-companies-work/
+- https://www.creditdoc.co/answers/how-do-credit-repair-services-work/
+- https://www.creditdoc.co/answers/how-do-debt-consolidation-loans-work/
+- https://www.creditdoc.co/answers/how-do-i-consolidate-my-credit-card-debt/
+- https://www.creditdoc.co/answers/how-do-i-get-a-personal-loan/
+- https://www.creditdoc.co/answers/how-do-i-get-a-startup-business-loan/
+- https://www.creditdoc.co/answers/how-do-i-get-small-business-loan/
+- https://www.creditdoc.co/answers/how-do-sba-loans-work-for-startups/
+- https://www.creditdoc.co/answers/how-do-sba-loans-work/
+- https://www.creditdoc.co/answers/how-do-small-business-loans-work/
+- https://www.creditdoc.co/answers/how-do-small-businesses-get-funding/
+- https://www.creditdoc.co/answers/how-does-a-personal-loan-affect-credit-score/
+- https://www.creditdoc.co/answers/how-does-amex-business-line-of-credit-work/
+- https://www.creditdoc.co/answers/how-does-business-line-of-credit-work/
+- https://www.creditdoc.co/answers/how-does-credit-counseling-work/
+- https://www.creditdoc.co/answers/how-does-credit-monitoring-work/
+- https://www.creditdoc.co/answers/how-does-debt-consolidation-work/
+- https://www.creditdoc.co/answers/how-does-debt-settlement-work/
+- https://www.creditdoc.co/answers/how-does-equipment-financing-work/
+- https://www.creditdoc.co/answers/how-does-equipment-leasing-work/
+- https://www.creditdoc.co/answers/how-does-invoice-discounting-facility-work/
+- https://www.creditdoc.co/answers/how-does-invoice-factoring-work/
+- https://www.creditdoc.co/answers/how-does-invoice-financing-work/
+- https://www.creditdoc.co/answers/how-does-kikoff-credit-builder-loan-work/
+- https://www.creditdoc.co/answers/how-does-merchant-cash-advance-work/
+- https://www.creditdoc.co/answers/how-does-personal-loan-interest-work/
+- https://www.creditdoc.co/answers/how-does-sba-disaster-loan-work/
+- https://www.creditdoc.co/answers/how-does-secured-credit-card-work-for-capital-one/
+- https://www.creditdoc.co/answers/how-does-working-capital-loan-work/
+- https://www.creditdoc.co/answers/how-fast-does-a-credit-builder-loan-work/
+- https://www.creditdoc.co/answers/how-long-are-sba-loans/
+- https://www.creditdoc.co/answers/how-long-before-foreclosure-is-removed-from-credit-report/
+- https://www.creditdoc.co/answers/how-long-can-you-finance-equipment/
+- https://www.creditdoc.co/answers/how-long-can-you-get-a-business-loan-for/
+- https://www.creditdoc.co/answers/how-long-does-a-personal-loan-take-to-go-through/
+- https://www.creditdoc.co/answers/how-long-does-credit-score-check-take/
+- https://www.creditdoc.co/answers/how-many-secured-credit-cards-should-i-have/
+- https://www.creditdoc.co/answers/how-much-can-a-small-business-loan-be/
+- https://www.creditdoc.co/answers/how-much-can-you-borrow-with-your-credit-score/
+- https://www.creditdoc.co/answers/how-much-can-you-get-a-personal-loan-for/
+- https://www.creditdoc.co/answers/how-much-debt-consolidation-loan-can-i-get/
+- https://www.creditdoc.co/answers/how-much-do-debt-consolidation-companies-charge/
+- https://www.creditdoc.co/answers/how-much-do-personal-loans-affect-credit-score/
+- https://www.creditdoc.co/answers/how-much-does-a-personal-loan-affect-your-credit-score/
+- https://www.creditdoc.co/answers/how-much-does-invoice-discounting-cost/
+- https://www.creditdoc.co/answers/how-much-down-payment-for-sba-loan/
+- https://www.creditdoc.co/answers/how-much-line-of-credit-should-a-business-have/
+- https://www.creditdoc.co/answers/how-much-personal-loan-do-i-qualify-for/
+- https://www.creditdoc.co/answers/how-much-will-credit-score-increase-after-foreclosure-is-removed/
+- https://www.creditdoc.co/answers/how-much-will-secured-credit-card-raise-my-score/
+- https://www.creditdoc.co/answers/how-much-would-a-100-000-business-loan-cost/
+- https://www.creditdoc.co/answers/how-should-you-compare-small-business-loans/
+- https://www.creditdoc.co/answers/how-to-apply-for-a-business-loan/
+- https://www.creditdoc.co/answers/how-to-apply-for-a-small-business-loan-grant/
+- https://www.creditdoc.co/answers/how-to-apply-for-business-loan-from-government/
+- https://www.creditdoc.co/answers/how-to-apply-for-business-loan-with-ein/
+- https://www.creditdoc.co/answers/how-to-apply-for-personal-loans/
+- https://www.creditdoc.co/answers/how-to-apply-for-secured-credit-cards/
+- https://www.creditdoc.co/answers/how-to-become-a-merchant-cash-advance-broker/
+- https://www.creditdoc.co/answers/how-to-borrow-money-for-business-startup/
+
+## Skipped Sample
+- /about/creditdoc-data/: cooldown
+- /answers/how-to-check-a-credit-repair-company/: cooldown
+- /answers/how-to-check-if-a-lender-is-licensed/: cooldown
+- /answers/how-to-file-a-cfpb-complaint/: cooldown
+- /answers/what-does-a-cfpb-complaint-mean/: cooldown
+- /answers/where-to-complain-about-a-lender/: cooldown
+- /courses/credit-fundamentals/: cooldown
+- /editorial-policy/: cooldown
+- /financial-wellness/credit-repair-rights-fcra-croa/: cooldown
+- /financial-wellness/debt-validation-letters/: cooldown
+- /financial-wellness/how-credit-repair-works/: cooldown
+- /methodology/: cooldown
+- /research/consumer-complaints/: cooldown
+- /research/lending-transparency/: cooldown
+- /tools/business-line-of-credit-calculator/: cooldown
+- /tools/commercial-loan-calculator/: cooldown
+- /tools/credit-score-simulator/: cooldown
+- /tools/equipment-financing-calculator/: cooldown
+- /tools/loan-denial-reason-checker/: cooldown
+- /tools/sba-guarantee-fee-calculator/: cooldown
+- /tools/: cooldown
+- /tools/accounts-receivable-financing-calculator/: cooldown
+- /tools/bank-statement-cash-flow-calculator/: cooldown
+- /tools/borrowing-power-quiz/: cooldown
+- /tools/business-loan-calculator/: cooldown
+- /tools/business-loan-readiness-quiz/: cooldown
+- /tools/credit-denial-action-checklist/: cooldown
+- /tools/credit-repair-qualify-quiz/: cooldown
+- /tools/debt-payoff-calculator/: cooldown
+- /tools/mca-repayment-calculator/: cooldown
+- /tools/sba-loan-calculator/: cooldown
+- /tools/state-consumer-credit-regulator-directory/: cooldown
+- /tools/working-capital-calculator/: cooldown
+- /courses/: cooldown
+- /courses/credit-fundamentals/avoiding-scams-and-predatory-lending/: cooldown
+- /courses/credit-fundamentals/building-credit-from-scratch/: cooldown
+- /courses/credit-fundamentals/credit-repair-diy-vs-hiring-help/: cooldown
+- /courses/credit-fundamentals/how-to-read-your-credit-report/: cooldown
+- /courses/credit-fundamentals/know-your-rights/: cooldown
+- /courses/credit-fundamentals/managing-debt-effectively/: cooldown
+- /courses/credit-fundamentals/personal-loans-and-borrowing-smart/: cooldown
+- /courses/credit-fundamentals/understanding-your-credit-score/: cooldown
+- /answers/: cooldown
+- /answers/are-business-loans-cheaper-than-personal-loans/: cooldown
+- /answers/are-business-loans-tax-deductible/: cooldown
+- /answers/are-collections-on-credit-report/: cooldown
+- /answers/are-collections-on-your-credit-report/: cooldown
+- /answers/are-credit-builder-loans-bad/: cooldown
+- /answers/are-credit-builder-loans-good/: cooldown
+- /answers/are-credit-builder-loans-legit/: cooldown

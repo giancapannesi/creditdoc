@@ -65,6 +65,69 @@ const SIGNUP_TYPES = {
     consent_marketing: false,
     allowed_sources: ['/tools/borrowing-power-quiz/'],
   },
+  'local-finance-guide': {
+    list: 'rCzcu8brUim88T892Y85IqRQ',
+    list_name: 'Credit Repair Quiz Leads',
+    pillar: 'local-finance',
+    write_lead_capture: true,
+    consent_marketing: false,
+    allowed_sources: [],
+    allowed_source_prefixes: ['/city/', '/browse/', '/credit-guide/'],
+  },
+  'local-credit-repair': {
+    list: 'rCzcu8brUim88T892Y85IqRQ',
+    list_name: 'Credit Repair Quiz Leads',
+    pillar: 'credit-repair',
+    write_lead_capture: true,
+    consent_marketing: false,
+    allowed_sources: [],
+    allowed_source_prefixes: ['/city/', '/browse/', '/credit-guide/'],
+  },
+  'local-business-loans': {
+    list: 'rCzcu8brUim88T892Y85IqRQ',
+    list_name: 'Credit Repair Quiz Leads',
+    pillar: 'business-loans',
+    write_lead_capture: true,
+    consent_marketing: false,
+    allowed_sources: [],
+    allowed_source_prefixes: ['/city/', '/browse/', '/credit-guide/'],
+  },
+  'local-personal-loans': {
+    list: 'rCzcu8brUim88T892Y85IqRQ',
+    list_name: 'Credit Repair Quiz Leads',
+    pillar: 'personal-loans',
+    write_lead_capture: true,
+    consent_marketing: false,
+    allowed_sources: [],
+    allowed_source_prefixes: ['/city/', '/browse/', '/credit-guide/'],
+  },
+  'local-debt-relief': {
+    list: 'rCzcu8brUim88T892Y85IqRQ',
+    list_name: 'Credit Repair Quiz Leads',
+    pillar: 'debt-relief',
+    write_lead_capture: true,
+    consent_marketing: false,
+    allowed_sources: [],
+    allowed_source_prefixes: ['/city/', '/browse/', '/credit-guide/'],
+  },
+  'local-banking': {
+    list: 'rCzcu8brUim88T892Y85IqRQ',
+    list_name: 'Credit Repair Quiz Leads',
+    pillar: 'banking',
+    write_lead_capture: true,
+    consent_marketing: false,
+    allowed_sources: [],
+    allowed_source_prefixes: ['/city/', '/browse/', '/credit-guide/'],
+  },
+  'local-emergency-cash': {
+    list: 'rCzcu8brUim88T892Y85IqRQ',
+    list_name: 'Credit Repair Quiz Leads',
+    pillar: 'emergency-cash',
+    write_lead_capture: true,
+    consent_marketing: false,
+    allowed_sources: [],
+    allowed_source_prefixes: ['/city/', '/browse/', '/credit-guide/'],
+  },
 } as const;
 
 function json(body: unknown, status = 200) {
@@ -102,6 +165,17 @@ function sameOrigin(request: Request): boolean {
   } catch {
     return false;
   }
+}
+
+function sourceAllowed(
+  sourcePage: string,
+  config: {
+    allowed_sources: readonly string[];
+    allowed_source_prefixes?: readonly string[];
+  }
+): boolean {
+  if (config.allowed_sources.includes(sourcePage)) return true;
+  return Boolean(config.allowed_source_prefixes?.some((prefix) => sourcePage.startsWith(prefix)));
 }
 
 function isRateLimited(request: Request): boolean {
@@ -176,7 +250,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }
 
   const config = SIGNUP_TYPES[signupType];
-  if (!config.allowed_sources.includes(sourcePage as never)) {
+  if (!sourceAllowed(sourcePage, config)) {
     return json({ ok: false, error: 'Invalid source page' }, 400);
   }
 

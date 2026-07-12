@@ -4,6 +4,55 @@
 
 ---
 
+## 2026-07-12 - City landing pages are being enhanced in batches of 10
+
+Status: Batch 001 implemented locally; build/debug verification in progress.
+
+Operating rule:
+- CreditDoc city/local pages are strategic lead-capture assets, not pages to suppress by default.
+- Work city pages in batches of 10 so quality can be checked and committed continuously.
+- Do not bulk noindex, remove, redirect, canonical-change, sitemap-remove, robots-block, feed-stop, or route-suppress local pages without Jammi's express approval.
+- Do not call local/city pages thin without measuring the actual built/live page.
+- Every enhanced city page should improve local usefulness and lead capture: localized quiz/tool CTAs, email capture, city-specific FAQs, state/regulatory context, and links into the matching `/browse/`, `/tools/`, `/best/`, and `/state/` pages.
+
+Files added/updated for this lane:
+- `src/content/local-city-landing-enhancements.json`
+- `src/components/CityLandingEnhancement.astro`
+- `src/components/LocalLeadCapture.astro`
+- `src/pages/city/[slug].astro`
+- `src/pages/browse/[catSlug]/[citySlug].astro`
+- `src/pages/api/email-signup.ts`
+- `reports/local-seo/city_page_enhancement_backlog_2026-07-12.csv`
+- `reports/local-seo/city_page_enhancement_backlog_2026-07-12.md`
+- `reports/local-seo/city_landing_batch_001_2026-07-12.md`
+
+Batch 001 enhanced city URLs:
+- `https://www.creditdoc.co/city/long-beach-ca/`
+- `https://www.creditdoc.co/city/west-new-york-nj/`
+- `https://www.creditdoc.co/city/vernon-ca/`
+- `https://www.creditdoc.co/city/pittsburgh-pa/`
+- `https://www.creditdoc.co/city/new-orleans-la/`
+- `https://www.creditdoc.co/city/san-jose-ca/`
+- `https://www.creditdoc.co/city/madison-tn/`
+- `https://www.creditdoc.co/city/decatur-ga/`
+- `https://www.creditdoc.co/city/college-park-ga/`
+- `https://www.creditdoc.co/city/midwest-city-ok/`
+
+What Batch 001 adds:
+- Bespoke local action-plan block for each city.
+- Localized tool links such as Credit Repair Quiz, Credit Calculator, Borrowing Power Quiz, Debt Payoff Calculator, business calculators, or denial/checklist tools.
+- Priority internal links into matching `/browse/` and `/state/` pages.
+- Local FAQ blocks plus FAQPage structured data for enhanced city pages.
+- The existing local email capture block remains active globally on city and browse-local pages.
+
+Next batch:
+- Rows 11-20 of `reports/local-seo/city_page_enhancement_backlog_2026-07-12.csv`: Rock Hill SC, Bakersfield CA, Bronx NY, Santa Clara CA, Seattle WA, Los Angeles CA, Marietta GA, Grand Prairie TX, Edmond OK, Arlington TX.
+
+Related status:
+- The full 331-city backlog CSV was emailed to `gian.eao@gmail.com` via AgentMail on 2026-07-12.
+- IndexNow was submitted for the main tools pages on 2026-07-12 and accepted by the API with HTTP 202; report: `reports/indexnow/creditdoc_tools_indexnow_2026-07-12.json`.
+- Truncated SEO field cleanup passed after build: `reports/seo-debug/truncated_description_audit_2026-07-12.json` shows zero source JSON issues, zero rendered meta-description issues, and zero rendered title issues.
+
 ## 2026-07-12 - Evidence rule: do not call CreditDoc local pages thin without measuring
 
 Status: checked against built/static output after the local programmatic SEO discussion.

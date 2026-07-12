@@ -6,7 +6,17 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 const CONTENT_DIR = join(ROOT, 'src', 'content');
-const TITLE_FIELDS = new Set(['title', 'seo_title', 'meta_title', 'h1']);
+const SEO_FIELDS = new Set([
+  'title',
+  'seo_title',
+  'meta_title',
+  'h1',
+  'description',
+  'seo_description',
+  'meta_description',
+  'summary',
+  'excerpt',
+]);
 const TITLE_ELLIPSIS = /(\.\.\.|…)/;
 const issues = [];
 
@@ -44,7 +54,7 @@ function scanJson(filePath) {
 
     for (const [key, child] of Object.entries(value)) {
       const childPath = `${jsonPath}.${key}`;
-      if (typeof child === 'string' && TITLE_FIELDS.has(key) && TITLE_ELLIPSIS.test(child.trim())) {
+      if (typeof child === 'string' && SEO_FIELDS.has(key) && TITLE_ELLIPSIS.test(child.trim())) {
         issues.push({ filePath, path: childPath, field: key, value: child });
       } else {
         visit(child, childPath);
@@ -58,7 +68,7 @@ function scanJson(filePath) {
 walk(CONTENT_DIR);
 
 if (issues.length) {
-  console.error(`[no-truncated-seo-fields] FAILED — ${issues.length} title-like field(s) contain an ellipsis.`);
+  console.error(`[no-truncated-seo-fields] FAILED — ${issues.length} SEO field(s) contain an ellipsis.`);
   for (const issue of issues.slice(0, 40)) {
     console.error(
       `[no-truncated-seo-fields] ${relative(ROOT, issue.filePath)} ${issue.path}: ${JSON.stringify(issue.value)}`,
@@ -70,4 +80,4 @@ if (issues.length) {
   process.exit(1);
 }
 
-console.log('[no-truncated-seo-fields] OK — no title-like SEO fields contain an ellipsis.');
+console.log('[no-truncated-seo-fields] OK — no title or description SEO fields contain an ellipsis.');

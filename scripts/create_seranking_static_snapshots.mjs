@@ -66,7 +66,28 @@ async function fetchHtml(url) {
   if (!/<html[\s>]/i.test(html) || !/<\/html>/i.test(html)) {
     throw new Error(`${url} did not return a complete HTML document`);
   }
-  return `<!-- Static snapshot generated from ${url} for SE Ranking 5XX remediation. -->\n${html}`;
+  return `<!-- Static snapshot generated from ${url} for SE Ranking 5XX remediation. -->\n${sanitizeSeoHeadFields(html)}`;
+}
+
+function removeEllipsis(value) {
+  return value
+    .replace(/\s*(?:\.{3}|…)\s*$/g, '')
+    .replace(/\s+(?:and|or|co|comp|credi|creditdo|directo|cre)$/i, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function sanitizeSeoHeadFields(html) {
+  return html
+    .replace(/(<title[^>]*>)([\s\S]*?)(<\/title>)/gi, (_match, open, value, close) => {
+      return `${open}${removeEllipsis(value)}${close}`;
+    })
+    .replace(/(<meta\s+[^>]*(?:name|property)=["'](?:description|og:description|twitter:description|og:title|twitter:title)["'][^>]*content=)(["'])([\s\S]*?)(\2[^>]*>)/gi, (_match, open, _quote, value, close) => {
+      return `${open}${_quote}${removeEllipsis(value)}${close}`;
+    })
+    .replace(/(<meta\s+[^>]*content=)(["'])([\s\S]*?)(\2[^>]*(?:name|property)=["'](?:description|og:description|twitter:description|og:title|twitter:title)["'][^>]*>)/gi, (_match, open, _quote, value, close) => {
+      return `${open}${_quote}${removeEllipsis(value)}${close}`;
+    });
 }
 
 const text = await readFile(AUDIT_TEXT, 'utf8');
