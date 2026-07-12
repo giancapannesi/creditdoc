@@ -4,6 +4,35 @@
 
 ---
 
+## 2026-07-12 - Evidence rule: do not call CreditDoc local pages thin without measuring
+
+Status: checked against built/static output after the local programmatic SEO discussion.
+
+Important working rule:
+- Do not start CreditDoc SEO analysis with a generic "as long as the pages are not thin" caveat.
+- First check the actual route family, built HTML, live status, sitemap/noindex status, and internal-link/profile depth.
+- The current evidence says the main local layers are not thin.
+- Do not blame city/local pages for Google or Bing performance without evidence from GSC/Bing/logs/live crawl data.
+- Never make bulk indexability, sitemap, robots, canonical, redirect, route-family suppression, or crawl-control changes without Jammi's express approval first.
+- Any proposed bulk SEO-control change must include URL count, route family, examples, measured reason, expected impact, risks, and rollback path before approval.
+
+Measured evidence:
+- `/city/` static pages:
+  - 331 built pages sampled.
+  - Word count min/median/average/max: 1,364 / 1,653 / 2,114.5 / 7,477.
+  - Review-link count min/median/average/max: 6 / 13 / 19.4 / 89.
+  - Shortest sampled examples still have 1,300+ words, 170+ links, H2 structure, and provider/review links.
+- `/browse/<category>/<city>/` static service-city pages:
+  - 467 built pages sampled.
+  - Word count min/median/average/max: 720 / 1,352 / 1,549.7 / 6,282.
+  - Review-link count min/median/average/max: 2 / 11 / 14.9 / 90.
+- Live `/credit-guide/<city>/` root samples returned 200, were indexable, and had 2,000+ words with 200+ links and schema.
+- `/credit-guide/<city>/<category>/` child pages are deliberately `noindex, follow`; this is a strategic footprint choice, not evidence that the pages are empty.
+
+SEO implication:
+- The question is not whether CreditDoc's core local pages are obviously thin. They are not, based on the current measurements.
+- The next strategic decision is whether to selectively index/push stronger service-city pages, especially commercial-intent categories, while keeping weaker permutations controlled.
+
 ## 2026-07-11 - Amazon SES DNS prepared for CreditDoc email
 
 Status: DNS implemented; actual Sendy/SES send migration is blocked on SES SMTP/API credentials and sender-domain alignment.
