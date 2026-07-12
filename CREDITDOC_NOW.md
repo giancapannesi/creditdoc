@@ -6834,3 +6834,24 @@ Social rollout:
   - `/tools/sba-loan-calculator/` -> `2026-07-09`;
   - `/credit-guide/spokane-wa/` -> `2026-05-23`.
 - RSS/feed generation was not changed and feed contract passed. No manual Google indexing requests were consumed by this work.
+
+## 2026-07-12 - Manual GSC quota used mostly by DentaFund
+
+- Founder used the available Google manual Request Indexing quota mostly on DentaFund, so CreditDoc should not treat the full 2026-07-12 queue as submitted.
+- CreditDoc URL actually submitted manually on 2026-07-12:
+  - `/tools/mca-repayment-calculator/`
+- Corrected CreditDoc tracking in `data/creditdoc.db`:
+  - removed the false 06:15 UTC manual-submission stamps for the other nine CreditDoc queue URLs;
+  - stamped only `/tools/mca-repayment-calculator/` with `last_manual_request_indexing_submitted=2026-07-12 14:49:15`;
+  - its `manual_request_indexing_count` is now `4`.
+- Backed up the DB before the correction:
+  - `/srv/BusinessOps/creditdoc/data/creditdoc.db.before_manual_gsc_rollback_20260712T144802Z`
+  - `/srv/BusinessOps/creditdoc/data/creditdoc.db.before_mca_manual_stamp_20260712T144914Z`
+- Updated `/srv/BusinessOps/data/creditdoc_manual_gsc_submit_schedule.json`:
+  - removed `/tools/mca-repayment-calculator/` from the 2026-07-13 batch;
+  - kept the remaining nine deferred CreditDoc URLs for 2026-07-13;
+  - preserved the strategic 2026-07-12 batch by copying it to 2026-07-14.
+- Verification:
+  - `stamped_today=1` in `indexation_status`;
+  - 2026-07-13 dry-run queue contains the nine deferred scheduled URLs plus one filler answer page;
+  - `/tools/mca-repayment-calculator/` does not reappear in the 2026-07-13 queue.
