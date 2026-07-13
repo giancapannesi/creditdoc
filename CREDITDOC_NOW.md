@@ -6,7 +6,7 @@
 
 ## 2026-07-12 - City landing pages are being enhanced in batches of 10
 
-Status: Batch 001 implemented locally; build/debug verification in progress.
+Status: Batch 001 committed/pushed; Batch 002 implemented and build/debug verified locally.
 
 Operating rule:
 - CreditDoc city/local pages are strategic lead-capture assets, not pages to suppress by default.
@@ -38,6 +38,24 @@ Batch 001 enhanced city URLs:
 - `https://www.creditdoc.co/city/college-park-ga/`
 - `https://www.creditdoc.co/city/midwest-city-ok/`
 
+Batch 002 enhanced city URLs:
+- `https://www.creditdoc.co/city/rock-hill-sc/`
+- `https://www.creditdoc.co/city/bakersfield-ca/`
+- `https://www.creditdoc.co/city/bronx-ny/`
+- `https://www.creditdoc.co/city/santa-clara-ca/`
+- `https://www.creditdoc.co/city/seattle-wa/`
+- `https://www.creditdoc.co/city/los-angeles-ca/`
+- `https://www.creditdoc.co/city/marietta-ga/`
+- `https://www.creditdoc.co/city/grand-prairie-tx/`
+- `https://www.creditdoc.co/city/edmond-ok/`
+- `https://www.creditdoc.co/city/arlington-tx/`
+
+Batch 002 verification:
+- `npm run build` passed on 2026-07-13.
+- Postbuild contracts passed: sitemap/robots conflicts, critical URLs, schema/sitemap contract, best-page SERP contract, feed contract, image alt/filename contracts, and AI ingestion contract.
+- Focused rendered-page debugger check passed for all 10 Batch 002 URLs: enhancement marker, FAQPage schema, Credit Repair Quiz link, Credit Calculator link, localized action plan, and local signup form were present.
+- The build initially caught 336 existing SEO fields with ellipses in content JSON. Those source truncation markers were cleaned so the enforced `no-truncated-seo-fields` gate passes again.
+
 What Batch 001 adds:
 - Bespoke local action-plan block for each city.
 - Localized tool links such as Credit Repair Quiz, Credit Calculator, Borrowing Power Quiz, Debt Payoff Calculator, business calculators, or denial/checklist tools.
@@ -46,7 +64,7 @@ What Batch 001 adds:
 - The existing local email capture block remains active globally on city and browse-local pages.
 
 Next batch:
-- Rows 11-20 of `reports/local-seo/city_page_enhancement_backlog_2026-07-12.csv`: Rock Hill SC, Bakersfield CA, Bronx NY, Santa Clara CA, Seattle WA, Los Angeles CA, Marietta GA, Grand Prairie TX, Edmond OK, Arlington TX.
+- Rows 21-30 of `reports/local-seo/city_page_enhancement_backlog_2026-07-12.csv`: Warren MI, Knoxville TN, Carrollton TX, Dallas TX, Dearborn MI, Sandy Springs GA, Philadelphia PA, Marrero LA, Omaha NE, National City CA.
 
 Related status:
 - The full 331-city backlog CSV was emailed to `gian.eao@gmail.com` via AgentMail on 2026-07-12.
