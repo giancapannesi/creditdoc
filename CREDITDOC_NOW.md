@@ -14,6 +14,7 @@ Operating rule:
 - Do not bulk noindex, remove, redirect, canonical-change, sitemap-remove, robots-block, feed-stop, or route-suppress local pages without Jammi's express approval.
 - Do not call local/city pages thin without measuring the actual built/live page.
 - Every enhanced city page should improve local usefulness and lead capture: localized quiz/tool CTAs, email capture, city-specific FAQs, state/regulatory context, and links into the matching `/browse/`, `/tools/`, `/best/`, and `/state/` pages.
+- Run a debugger/check pass every time before committing and pushing an SEO/local-page batch. Minimum checks: full build or approved focused build, postbuild contracts where applicable, rendered-page assertions for the edited URLs, truncation/SEO-field gate, and a short verification note in the batch report or this memory file.
 
 Files added/updated for this lane:
 - `src/content/local-city-landing-enhancements.json`
