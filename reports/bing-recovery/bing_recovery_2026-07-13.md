@@ -1,0 +1,159 @@
+# CreditDoc Bing Recovery - 2026-07-13 08:35 UTC
+
+Submitted: yes
+Selected URLs: 100
+Skipped during selection: 300
+
+## Selected
+- https://www.creditdoc.co/answers/how-to-build-credit-after-bankruptcy-discharge/
+- https://www.creditdoc.co/answers/how-to-build-credit-score-fast/
+- https://www.creditdoc.co/answers/how-to-check-credit-score-free/
+- https://www.creditdoc.co/answers/how-to-establish-credit-after-bankruptcy/
+- https://www.creditdoc.co/answers/how-to-find-best-personal-loan-lenders/
+- https://www.creditdoc.co/answers/how-to-get-a-150-000-business-loan/
+- https://www.creditdoc.co/answers/how-to-get-a-200k-business-loan/
+- https://www.creditdoc.co/answers/how-to-get-a-300k-business-loan/
+- https://www.creditdoc.co/answers/how-to-get-a-business-loan-for-equipment/
+- https://www.creditdoc.co/answers/how-to-get-a-business-loan-with-bad-credit-and-no-money/
+- https://www.creditdoc.co/answers/how-to-get-a-first-time-small-business-loan/
+- https://www.creditdoc.co/answers/how-to-get-a-large-business-loan-with-no-money/
+- https://www.creditdoc.co/answers/how-to-get-a-personal-loan/
+- https://www.creditdoc.co/answers/how-to-get-a-small-business-loan-to-start-a-business/
+- https://www.creditdoc.co/answers/how-to-get-a-small-business-loan-with-no-income/
+- https://www.creditdoc.co/answers/how-to-get-a-small-business-loan-without-collateral/
+- https://www.creditdoc.co/answers/how-to-get-a-startup-business-loan-with-no-money/
+- https://www.creditdoc.co/answers/how-to-get-a-startup-business-loan-without-collateral/
+- https://www.creditdoc.co/answers/how-to-get-an-sba-loan/
+- https://www.creditdoc.co/answers/how-to-get-business-funding-with-no-revenue/
+- https://www.creditdoc.co/answers/how-to-get-business-line-of-credit-with-no-revenue/
+- https://www.creditdoc.co/answers/how-to-get-small-business-loan-from-government/
+- https://www.creditdoc.co/answers/how-to-get-small-business-loan-with-bad-credit/
+- https://www.creditdoc.co/answers/how-to-increase-credit-limit/
+- https://www.creditdoc.co/answers/how-to-pay-off-credit-card-debt/
+- https://www.creditdoc.co/answers/how-to-pay-off-debt-fast/
+- https://www.creditdoc.co/answers/how-to-qualify-for-a-business-line-of-credit/
+- https://www.creditdoc.co/answers/how-to-qualify-for-sba-loan-forgiveness/
+- https://www.creditdoc.co/answers/how-to-remove-charge-offs/
+- https://www.creditdoc.co/answers/how-to-sell-merchant-cash-advance/
+- https://www.creditdoc.co/answers/how-to-start-a-merchant-cash-advance-business/
+- https://www.creditdoc.co/answers/how-to-start-a-merchant-cash-advance-company/
+- https://www.creditdoc.co/answers/invoice-factoring-companies-guide/
+- https://www.creditdoc.co/answers/is-a-business-line-of-credit-a-good-idea/
+- https://www.creditdoc.co/answers/is-a-consolidation-loan-better-than-credit-card-debt/
+- https://www.creditdoc.co/answers/is-a-credit-builder-loan-a-good-idea/
+- https://www.creditdoc.co/answers/is-a-merchant-cash-advance-a-loan/
+- https://www.creditdoc.co/answers/is-a-personal-loan-better-than-credit-card/
+- https://www.creditdoc.co/answers/is-a-small-business-loan-secured/
+- https://www.creditdoc.co/answers/is-business-line-of-credit-interest-tax-deductible/
+- https://www.creditdoc.co/answers/is-chime-secured-credit-card-good/
+- https://www.creditdoc.co/answers/is-credit-counseling-a-good-idea/
+- https://www.creditdoc.co/answers/is-credit-repair-business-profitable/
+- https://www.creditdoc.co/answers/is-debt-settlement-a-good-idea/
+- https://www.creditdoc.co/answers/is-debt-settlement-good-or-bad/
+- https://www.creditdoc.co/answers/is-getting-a-loan-for-debt-consolidation-bad/
+- https://www.creditdoc.co/answers/is-invoice-discounting-safe/
+- https://www.creditdoc.co/answers/is-invoice-factoring-a-good-idea/
+- https://www.creditdoc.co/answers/is-invoice-financing-a-good-idea/
+- https://www.creditdoc.co/answers/is-it-a-good-time-to-get-a-personal-loan/
+- https://www.creditdoc.co/answers/is-it-easy-to-get-a-personal-loan/
+- https://www.creditdoc.co/answers/is-it-hard-to-get-a-business-line-of-credit/
+- https://www.creditdoc.co/answers/is-no-credit-history-bad/
+- https://www.creditdoc.co/answers/is-secured-credit-card-a-good-idea/
+- https://www.creditdoc.co/answers/is-secured-credit-card-better-than-unsecured/
+- https://www.creditdoc.co/answers/merchant-cash-advance-guide/
+- https://www.creditdoc.co/answers/no-credit-check-cards-guide/
+- https://www.creditdoc.co/answers/personal-loan-interest-rates-explained/
+- https://www.creditdoc.co/answers/personal-loans-bad-credit-how-to-qualify/
+- https://www.creditdoc.co/answers/remove-late-payments-from-credit-report/
+- https://www.creditdoc.co/answers/sba-504-commercial-real-estate-loans/
+- https://www.creditdoc.co/answers/secured-credit-cards-questions-answered/
+- https://www.creditdoc.co/answers/should-i-get-a-business-loan-to-start-a-business/
+- https://www.creditdoc.co/answers/should-i-get-a-business-loan/
+- https://www.creditdoc.co/answers/should-i-get-a-secured-credit-card-to-build-credit/
+- https://www.creditdoc.co/answers/should-i-pay-for-credit-monitoring/
+- https://www.creditdoc.co/answers/should-i-pay-off-my-business-loan-early/
+- https://www.creditdoc.co/answers/small-business-loans-guide/
+- https://www.creditdoc.co/answers/small-business-loans-sba-merchant-cash-advances/
+- https://www.creditdoc.co/answers/sofi-personal-loans-review/
+- https://www.creditdoc.co/answers/startup-business-loans-new-business-financing/
+- https://www.creditdoc.co/answers/top-secured-credit-cards/
+- https://www.creditdoc.co/answers/upstart-loan-questions-cancellation-early-payoff-refinance/
+- https://www.creditdoc.co/answers/what-are-business-loans/
+- https://www.creditdoc.co/answers/what-are-credit-building-loans/
+- https://www.creditdoc.co/answers/what-are-credit-repair-companies/
+- https://www.creditdoc.co/answers/what-are-debt-consolidation-loans/
+- https://www.creditdoc.co/answers/what-are-merchant-cash-advances/
+- https://www.creditdoc.co/answers/what-are-sba-loans/
+- https://www.creditdoc.co/answers/what-are-the-best-business-cash-advance/
+- https://www.creditdoc.co/answers/what-are-the-best-business-line-of-credit-banks/
+- https://www.creditdoc.co/answers/what-are-the-best-business-line-of-credit-for-bad-credit/
+- https://www.creditdoc.co/answers/what-are-the-best-business-line-of-credit-lenders/
+- https://www.creditdoc.co/answers/what-are-the-best-business-line-of-credit-offers/
+- https://www.creditdoc.co/answers/what-are-the-best-business-line-of-credit-options/
+- https://www.creditdoc.co/answers/what-are-the-best-business-loans-for-minorities/
+- https://www.creditdoc.co/answers/what-are-the-best-equipment-financing-companies-for-startups/
+- https://www.creditdoc.co/answers/what-are-the-best-equipment-financing-rates/
+- https://www.creditdoc.co/answers/what-are-the-best-heavy-equipment-financing/
+- https://www.creditdoc.co/answers/what-are-the-best-invoice-factoring-companies/
+- https://www.creditdoc.co/answers/what-are-the-best-invoice-factoring-software/
+- https://www.creditdoc.co/answers/what-are-the-best-invoice-financing-companies/
+- https://www.creditdoc.co/answers/what-are-the-best-merchant-cash-advance/
+- https://www.creditdoc.co/answers/what-are-the-best-sba-loans-for-startups/
+- https://www.creditdoc.co/answers/what-are-the-best-small-business-loan-banks/
+- https://www.creditdoc.co/answers/what-are-the-best-small-business-loan-rates/
+- https://www.creditdoc.co/answers/what-are-the-best-small-business-loans-for-bad-credit/
+- https://www.creditdoc.co/answers/what-are-the-best-small-business-loans-for-new-businesses/
+- https://www.creditdoc.co/answers/what-are-the-best-small-business-loans-for-startups/
+- https://www.creditdoc.co/answers/what-are-the-best-small-business-loans-for-women/
+
+## Skipped Sample
+- /about/creditdoc-data/: cooldown
+- /answers/how-to-check-a-credit-repair-company/: cooldown
+- /answers/how-to-check-if-a-lender-is-licensed/: cooldown
+- /answers/how-to-file-a-cfpb-complaint/: cooldown
+- /answers/what-does-a-cfpb-complaint-mean/: cooldown
+- /answers/where-to-complain-about-a-lender/: cooldown
+- /courses/credit-fundamentals/: cooldown
+- /editorial-policy/: cooldown
+- /financial-wellness/credit-repair-rights-fcra-croa/: cooldown
+- /financial-wellness/debt-validation-letters/: cooldown
+- /financial-wellness/how-credit-repair-works/: cooldown
+- /methodology/: cooldown
+- /research/consumer-complaints/: cooldown
+- /research/lending-transparency/: cooldown
+- /tools/business-line-of-credit-calculator/: cooldown
+- /tools/commercial-loan-calculator/: cooldown
+- /tools/credit-score-simulator/: cooldown
+- /tools/equipment-financing-calculator/: cooldown
+- /tools/loan-denial-reason-checker/: cooldown
+- /tools/sba-guarantee-fee-calculator/: cooldown
+- /tools/: cooldown
+- /tools/accounts-receivable-financing-calculator/: cooldown
+- /tools/bank-statement-cash-flow-calculator/: cooldown
+- /tools/borrowing-power-quiz/: cooldown
+- /tools/business-loan-calculator/: cooldown
+- /tools/business-loan-readiness-quiz/: cooldown
+- /tools/credit-denial-action-checklist/: cooldown
+- /tools/credit-repair-qualify-quiz/: cooldown
+- /tools/debt-payoff-calculator/: cooldown
+- /tools/mca-repayment-calculator/: cooldown
+- /tools/sba-loan-calculator/: cooldown
+- /tools/state-consumer-credit-regulator-directory/: cooldown
+- /tools/working-capital-calculator/: cooldown
+- /courses/: cooldown
+- /courses/credit-fundamentals/avoiding-scams-and-predatory-lending/: cooldown
+- /courses/credit-fundamentals/building-credit-from-scratch/: cooldown
+- /courses/credit-fundamentals/credit-repair-diy-vs-hiring-help/: cooldown
+- /courses/credit-fundamentals/how-to-read-your-credit-report/: cooldown
+- /courses/credit-fundamentals/know-your-rights/: cooldown
+- /courses/credit-fundamentals/managing-debt-effectively/: cooldown
+- /courses/credit-fundamentals/personal-loans-and-borrowing-smart/: cooldown
+- /courses/credit-fundamentals/understanding-your-credit-score/: cooldown
+- /answers/: cooldown
+- /answers/are-business-loans-cheaper-than-personal-loans/: cooldown
+- /answers/are-business-loans-tax-deductible/: cooldown
+- /answers/are-collections-on-credit-report/: cooldown
+- /answers/are-collections-on-your-credit-report/: cooldown
+- /answers/are-credit-builder-loans-bad/: cooldown
+- /answers/are-credit-builder-loans-good/: cooldown
+- /answers/are-credit-builder-loans-legit/: cooldown

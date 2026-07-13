@@ -6981,3 +6981,20 @@ Social rollout:
   - `stamped_today=1` in `indexation_status`;
   - 2026-07-13 dry-run queue contains the nine deferred scheduled URLs plus one filler answer page;
   - `/tools/mca-repayment-calculator/` does not reappear in the 2026-07-13 queue.
+
+## 2026-07-13 - Exported lender meta descriptions fixed
+
+- Resolved dirty SEO export files after a database export reintroduced terminal ellipses into 336 `src/content/lenders/*.json` `meta_description` fields.
+- Patched `tools/creditdoc_db.py` so `sanitize_export_seo_titles()` now also sanitizes description-like SEO fields, including `meta_description`, `seo_description`, `description`, `summary`, and `excerpt`.
+- For exported `meta_description` values ending in `...`/`…`, the sanitizer now rebuilds from full source copy where available (`description_short`, `answer_summary`, `summary`, `excerpt`, `description_long`) and trims cleanly without an ellipsis.
+- Cleaned the current 336 lender JSON files so no title or description SEO field contains an ellipsis.
+- Captured and kept 2026-07-13 operational reports:
+  - Bing IndexNow watchdog: key file OK, Bing crawl data present, traffic still 0 impressions/clicks in the 30d Bing snapshot.
+  - Bing recovery direct submission: 100 selected URLs submitted, 300 skipped.
+  - Sitemap resubmission: Bing sitemap submissions succeeded; Google sitemap read-only check showed no sitemap errors/warnings.
+  - Regulatory SEO execution: PASS, including reusable regulatory module, priority tool coverage, answer cluster, and regulatory cron markers.
+- Verification passed:
+  - `node scripts/check_no_truncated_seo_fields.mjs`
+  - `python3 -m py_compile tools/creditdoc_db.py tools/creditdoc_build.py`
+  - `npm run build`
+  - postbuild contracts: sitemap/robots, critical URLs, schema/sitemap, Best-title intent, feeds, image alt, image filenames, and AI ingestion.

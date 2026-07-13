@@ -64,6 +64,7 @@ JSON_EXPORT_EXCLUDED_FIELDS = {
 }
 
 SEO_TITLE_KEYS = {"title", "seo_title", "meta_title", "h1"}
+SEO_DESCRIPTION_KEYS = {"description", "seo_description", "meta_description", "summary", "excerpt"}
 
 
 def _strip_title_ellipsis(value):
@@ -74,6 +75,32 @@ def _strip_title_ellipsis(value):
         return value
     stripped = stripped.rstrip(".…").rstrip()
     return stripped.rstrip(" |-:;,([").strip()
+
+
+def _strip_description_ellipsis(value):
+    if not isinstance(value, str):
+        return value
+    stripped = value.strip()
+    if not (stripped.endswith("...") or stripped.endswith("…")):
+        return value
+    stripped = stripped.rstrip(".…").rstrip()
+    return stripped.rstrip(" |-:;,([").strip()
+
+
+def _description_source(data):
+    for key in ("description_short", "answer_summary", "summary", "excerpt", "description_long"):
+        value = data.get(key)
+        if isinstance(value, str) and value.strip() and not value.strip().endswith(("...", "…")):
+            return value
+    return ""
+
+
+def _trim_meta_description(value, max_length=160):
+    cleaned = " ".join(str(value or "").split())
+    if len(cleaned) <= max_length:
+        return cleaned
+    truncated = cleaned[:max_length].rsplit(" ", 1)[0].rstrip(" .,;:-")
+    return truncated or cleaned[:max_length].rstrip(" .,;:-")
 
 
 def _state_abbr(state):
@@ -124,6 +151,13 @@ def sanitize_export_seo_titles(data):
             sanitized[key] = title if "CreditDoc" in title else f"{title} | CreditDoc"
         else:
             sanitized[key] = _strip_title_ellipsis(value)
+
+    for key in SEO_DESCRIPTION_KEYS:
+        value = sanitized.get(key)
+        if not (isinstance(value, str) and (value.strip().endswith("...") or value.strip().endswith("…"))):
+            continue
+        source = _description_source(sanitized) if key == "meta_description" else ""
+        sanitized[key] = _trim_meta_description(source) if source else _strip_description_ellipsis(value)
 
     return sanitized
 
