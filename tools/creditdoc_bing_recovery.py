@@ -16,16 +16,19 @@ import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timedelta, timezone
+from functools import lru_cache
 from pathlib import Path
 
 ROOT = Path("/srv/BusinessOps/creditdoc")
 DIST = ROOT / "dist"
 STATE_FILE = Path("/srv/BusinessOps/data/creditdoc_bing_direct_submission_state.json")
 REPORT_DIR = ROOT / "reports" / "bing-recovery"
+CITY_ENHANCEMENTS = ROOT / "src" / "content" / "local-city-landing-enhancements.json"
 SITE = "https://www.creditdoc.co"
 BING_SITE = "https://www.creditdoc.co/"
 DEFAULT_LIMIT = 100
 COOLDOWN_DAYS = 14
+ENHANCED_CITY_SCORE = 15
 
 sys.path.insert(0, "/srv/BusinessOps/tools")
 from bing_webmaster import api_post  # noqa: E402
@@ -101,9 +104,24 @@ def route_from_html(path: Path) -> str | None:
     return "/" + parent.strip("/") + "/"
 
 
+@lru_cache(maxsize=1)
+def enhanced_city_routes() -> frozenset[str]:
+    if not CITY_ENHANCEMENTS.exists():
+        return frozenset()
+    try:
+        data = json.loads(CITY_ENHANCEMENTS.read_text())
+    except Exception:
+        return frozenset()
+    if not isinstance(data, dict):
+        return frozenset()
+    return frozenset(f"/city/{slug}/" for slug in data if isinstance(slug, str) and slug.strip())
+
+
 def priority_for(route: str) -> tuple[int, str]:
     if route in PINNED_PATHS:
         return (0, route)
+    if route in enhanced_city_routes():
+        return (ENHANCED_CITY_SCORE, route)
     first = route.strip("/").split("/", 1)[0]
     for prefix, score in PRIORITY_PREFIXES:
         if first == prefix:
@@ -112,13 +130,14 @@ def priority_for(route: str) -> tuple[int, str]:
 
 
 def collect_candidate_routes() -> list[str]:
-    routes = set(PINNED_PATHS)
+    enhanced_cities = enhanced_city_routes()
+    routes = set(PINNED_PATHS) | enhanced_cities
     for html in DIST.glob("**/index.html"):
         route = route_from_html(html)
         if not route:
             continue
         first = route.strip("/").split("/", 1)[0]
-        if first in {prefix for prefix, _ in PRIORITY_PREFIXES}:
+        if route in enhanced_cities or first in {prefix for prefix, _ in PRIORITY_PREFIXES}:
             routes.add(route)
     return sorted(routes, key=priority_for)
 

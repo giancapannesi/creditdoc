@@ -15,6 +15,7 @@ Operating rule:
 - Do not call local/city pages thin without measuring the actual built/live page.
 - Every enhanced city page should improve local usefulness and lead capture: localized quiz/tool CTAs, email capture, city-specific FAQs, state/regulatory context, and links into the matching `/browse/`, `/tools/`, `/best/`, and `/state/` pages.
 - Run a debugger/check pass every time before committing and pushing an SEO/local-page batch. Minimum checks: full build or approved focused build, postbuild contracts where applicable, rendered-page assertions for the edited URLs, truncation/SEO-field gate, and a short verification note in the batch report or this memory file.
+- Bing/direct submission priority should favor new or newly improved tools, educational pages, and the local landing/capture pages we actively enhance. Keep cooldown as quota protection, but do not let the selector drift to low-value pages while improved capture pages are eligible.
 
 Files added/updated for this lane:
 - `src/content/local-city-landing-enhancements.json`
