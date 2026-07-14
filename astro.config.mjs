@@ -261,7 +261,6 @@ function ssrSitemapPages() {
 
     const sql = `
       SELECT 'categories/' || slug FROM categories;
-      SELECT 'review/' || slug FROM lenders WHERE processing_status='ready_for_index';
       SELECT DISTINCT brand_slug FROM lenders
         WHERE brand_slug IS NOT NULL AND brand_slug <> ''
           AND processing_status='ready_for_index';
@@ -368,6 +367,8 @@ export default defineConfig({
           { pattern: '/courses/*' },
           { pattern: '/best' },
           { pattern: '/best/*' },
+          { pattern: '/review' },
+          { pattern: '/review/*' },
           { pattern: '/city' },
           { pattern: '/city/*' },
           { pattern: '/browse' },

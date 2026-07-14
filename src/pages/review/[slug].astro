@@ -11,7 +11,6 @@ import HMDARecord from '../../components/HMDARecord.astro';
 import InfoLink from '../../components/InfoLink.astro';
 import StateRegulatoryContext from '../../components/StateRegulatoryContext.astro';
 import cfpbResponsiveReport from '../../data/cfpb-responsive-providers-2026.json';
-import gscReview404Redirects from '../../../data/gsc_404_review_redirects_2026-07-06.json';
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
 import { buildLenderGoHref, normalizeTelHref } from '../../utils/outbound';
 import { softenEducationalTeaserCopy, softenYmylCopy } from '../../utils/safe-copy';
@@ -19,55 +18,28 @@ import {
   getBbbClass,
   generateDiagnosis,
   getBadgeEligibility,
-  getCategoriesRuntime,
-  getGlossaryTermsForContextRuntime,
-  getWellnessGuidesByCategoryRuntime,
-  getComparisonsForLenderRuntime,
-  getBrandInfoRuntime,
-  getStateByCodeRuntimeFromDb,
-  shapeBodyInlineToLender,
-  shapeCatalogToLenderStub,
 } from '../../utils/data-runtime';
 import {
-  getLenderWithBodyBySlugRuntime,
-  getLendersBySlugListRuntime,
-  getRelatedLendersByCategoryRuntime,
-  getRegulatorDataRuntime,
-  getHMDADataRuntime,
-  getAnswersByPillarRuntime,
-  type RuntimeLenderEnv,
-} from '../../lib/db';
-import type { Lender } from '../../utils/data';
+  getAllLenders,
+  getBrandInfo,
+  getCategories,
+  getClusterAnswersByPillar,
+  getComparisons,
+  getGlossaryTermsForContext,
+  getHMDAData,
+  getLendersByCategory,
+  getRegulatorData,
+  getStateData,
+  getWellnessGuidesByCategory,
+} from '../../utils/data-build';
+import type { ClusterPillar, Lender } from '../../utils/data';
 
-// CDM-REV-2026-04-29 Phase 1.3.B-A.1 — SSR cutover.
-// `prerender = false` switches this route from build-time static to per-request
-// SSR on the Cloudflare Worker. Combined with the body_inline column on
-// `lenders` (A.1) and the wellness/comparisons/brands tables (A.2), every
-// content surface on this page is fetched from Postgres at request time.
-// OBJ-1 mechanism: DB row update bumps lenders.updated_at → CF Cache content-version
-// invalidates → next request re-fetches. <10s globally, no rebuild.
-export const prerender = false;
-
-function normalizeStaleReviewPath(pathname: string): string {
-  let decoded = pathname;
-  try {
-    decoded = decodeURIComponent(pathname);
-  } catch {
-    decoded = pathname;
-  }
-  return decoded
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/\/+$/, '/');
+export async function getStaticPaths() {
+  return getAllLenders().map((lender) => ({
+    params: { slug: lender.slug },
+    props: { lender },
+  }));
 }
-
-const GSC_REVIEW_404_REDIRECTS = new Map<string, string>(
-  Object.entries(gscReview404Redirects as Record<string, string>).map(([pathname, target]) => [
-    normalizeStaleReviewPath(pathname),
-    target,
-  ])
-);
 
 const STATE_ABBR: Record<string, string> = {
   'Alabama':'AL','Alaska':'AK','Arizona':'AZ','Arkansas':'AR','California':'CA',
@@ -83,74 +55,7 @@ const STATE_ABBR: Record<string, string> = {
   'District of Columbia':'DC'
 };
 
-// Runtime env from Cloudflare Worker (Astro.locals.runtime.env on Pages adapter).
-// Falls back to undefined in build-mode preview without secrets — runtime
-// fetchers degrade gracefully (return null/[]) so the 404 path still renders.
-const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
-
-const { slug } = Astro.params;
-if (!slug) return new Response('Bad request', { status: 400 });
-
-const gscReview404RedirectTarget = GSC_REVIEW_404_REDIRECTS.get(normalizeStaleReviewPath(`/review/${slug}/`));
-if (gscReview404RedirectTarget) {
-  return Astro.redirect(gscReview404RedirectTarget, 301);
-}
-
-const staleReviewRedirects: Record<string, string> = {
-  'first-heritage-loan-firm': '/categories/personal-loans/',
-  'compramos-todo-tipo-de-carros': '/categories/personal-loans/',
-  'used-cars-for-sale-miami-financing-available-auto-dealer': '/credit-guide/miami-fl/personal-loans/',
-  'auto-savings': '/categories/personal-loans/',
-  'thinksmart-financial': '/categories/personal-loans/',
-  '3f-auto-sales-llc-albuquerque-nm': '/credit-guide/albuquerque-nm/personal-loans/',
-  'atkins-auto': '/categories/personal-loans/',
-  'az-debt-relief-group': '/categories/debt-relief/',
-  'argus-check-cashing-inside-danys-supermarket': '/categories/check-cashing/',
-  'midtown-gold-and-silver-buyers': '/categories/pawn-shops/',
-  'flat-rate-auto-outlet': '/categories/personal-loans/',
-  'pjs-auto-sales': '/categories/personal-loans/',
-  'hall-pre-owned-express-and-buying-center': '/categories/personal-loans/',
-  'star-motor-express-auto-sales': '/categories/personal-loans/',
-  'a2z-express-mart': '/categories/check-cashing/',
-  'direct-motorsport-of-virginia-beach': '/credit-guide/virginia-beach-va/personal-loans/',
-  '1st-budget-car-outlet': '/categories/personal-loans/',
-  'alvarez-motorsports': '/categories/personal-loans/',
-  'new-car-dealers-dallas': '/credit-guide/dallas-tx/personal-loans/',
-  'mayra-cars-indy': '/credit-guide/indianapolis-in/personal-loans/',
-  'greater-metro': '/categories/credit-unions/',
-  'vfs-global-india-passport-application-center': '/categories/credit-repair/',
-  'fix-my-auto-credit-score': '/categories/personal-loans/',
-  'jm-auto-title-service-titulos-y-placas-surety-bond-title': '/credit-guide/dallas-tx/personal-loans/',
-  'ny-identity-theft-group': '/categories/credit-repair/',
-  'the-ivy-league-solutions': '/categories/credit-repair/',
-  'pacific-check-cashing-financial': '/categories/check-cashing/',
-  'autocarhouston-autos-usados': '/credit-guide/houston-tx/personal-loans/',
-  'auto-titles-and-bonds': '/credit-guide/dallas-tx/personal-loans/',
-  'burns-buy-here-pay-here-of-spartanburg': '/categories/personal-loans/',
-  'fraud': '/categories/credit-repair/',
-  'good-price-title-auto-title-services-bonded-titles-by-appointment-only': '/categories/personal-loans/',
-  'ria-money-transfer-envios-el-papi': '/credit-guide/san-diego-ca/check-cashing/',
-  'loanmart-auto-title-loans': '/categories/personal-loans/',
-  '5-star-car-title-loans-youngstown-oh': '/categories/personal-loans/',
-  'montana-capital-car-title-loans-greenville': '/categories/personal-loans/',
-  'montana-capital-car-title-loans-dallas': '/categories/personal-loans/',
-  'swift-title-loans-dallas': '/categories/personal-loans/',
-  '5-star-car-title-loans-san-antonio': '/categories/personal-loans/',
-  'montana-capital-car-title-loans-norman-ok': '/categories/personal-loans/',
-  'mvp-car-title-loan-long-beach': '/categories/personal-loans/',
-  'pawn-shop-bronx': '/categories/pawn-shops/',
-  'macro-international-cargo': '/categories/check-cashing/',
-  'victor-pawn-broker': '/categories/pawn-shops/',
-};
-
-if (staleReviewRedirects[slug]) {
-  return Astro.redirect(staleReviewRedirects[slug], 302);
-}
-
-const primaryRow = await getLenderWithBodyBySlugRuntime(slug, env);
-if (!primaryRow) return new Response('Not found', { status: 404 });
-
-const lender = shapeBodyInlineToLender(primaryRow);
+const lender = Astro.props.lender as Lender;
 const lenderGoHref = buildLenderGoHref(lender);
 const lenderTelHref = normalizeTelHref(lender.phone);
 const responsiveReportProvider = ((cfpbResponsiveReport as any).allProviders || [])
@@ -165,18 +70,18 @@ const similarSlugList = (lender.similar_lenders ?? []).filter(
   (s): s is string => typeof s === 'string' && s.length > 0
 );
 const slugRows = similarSlugList.length > 0
-  ? await getLendersBySlugListRuntime(similarSlugList.slice(0, 3), env)
+  ? similarSlugList
+      .slice(0, 3)
+      .map((similarSlug) => getAllLenders().find((candidate) => candidate.slug === similarSlug))
+      .filter((candidate): candidate is Lender => Boolean(candidate))
   : [];
-const slugLenders = slugRows.map(shapeBodyInlineToLender);
+const slugLenders = slugRows;
 let categoryStubs: Lender[] = [];
 if (slugLenders.length < 3) {
-  const more = await getRelatedLendersByCategoryRuntime(
-    lender.category,
-    lender.slug,
-    env,
-    3 - slugLenders.length
-  );
-  categoryStubs = more.map(shapeCatalogToLenderStub);
+  categoryStubs = getLendersByCategory(lender.category)
+    .filter((candidate) => candidate.slug !== lender.slug && !slugLenders.some((related) => related.slug === candidate.slug))
+    .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+    .slice(0, 3 - slugLenders.length);
 }
 const relatedLenders: Lender[] = [...slugLenders, ...categoryStubs].slice(0, 3);
 
@@ -188,7 +93,7 @@ const categoryLenders = similarSlugList.length === 0 ? relatedLenders : [];
 const stateLenders: Lender[] = [];
 const usedSlugs = new Set([lender.slug, ...relatedLenders.map((l) => l.slug)]);
 
-const categories = getCategoriesRuntime();
+const categories = getCategories();
 const category = categories.find((c) => c.slug === lender.category);
 const categoryLinkFallbacks: Record<string, string> = {
   'credit-counseling': '/best/best-credit-counseling-agencies/',
@@ -226,7 +131,7 @@ const categoryAlternativeBestHref: Record<string, string> = {
 };
 const alternativeBestHref = categoryAlternativeBestHref[lender.category] || categoryHref;
 
-// Category-mapped wellness guides — DB-backed (A.2).
+// Category-mapped wellness guides.
 const categoryGuideMap: Record<string, string> = {
   'credit-repair': 'credit-repair',
   'debt-relief': 'financial-recovery',
@@ -237,7 +142,7 @@ const categoryGuideMap: Record<string, string> = {
   'buy-here-pay-here': 'loans-and-interest',
 };
 const guideCategory = categoryGuideMap[lender.category] || 'understanding-credit';
-const relatedWellnessGuidesPromise = getWellnessGuidesByCategoryRuntime(guideCategory, env, 3);
+const relatedWellnessGuidesRaw = getWellnessGuidesByCategory(guideCategory).slice(0, 3);
 
 const answerPillarMap: Record<string, string> = {
   'personal-loans': 'personal-loans',
@@ -259,7 +164,7 @@ const answerPillarMap: Record<string, string> = {
   'mortgages': 'personal-loans',
 };
 const relatedAnswerPillar = answerPillarMap[lender.category] || 'credit-score';
-const relatedAnswersPromise = getAnswersByPillarRuntime(relatedAnswerPillar, env, 4);
+const relatedAnswers = getClusterAnswersByPillar(relatedAnswerPillar as ClusterPillar).slice(0, 4);
 
 Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
 
@@ -267,24 +172,15 @@ const cityName = lender.company_info?.city || '';
 const regionName = stateAbbr || lender.company_info?.state || '';
 const locationLabel = [cityName, regionName].filter(Boolean).join(', ');
 const categoryLabel = category?.name || lender.category.replace(/-/g, ' ');
-const [
-  relatedWellnessGuidesRaw,
-  relatedAnswers,
-  stateRegulatoryContext,
-  regulatorData,
-  hmdaData,
-  comparisons,
-  brandInfo,
-] = await Promise.all([
-  relatedWellnessGuidesPromise,
-  relatedAnswersPromise,
-  stateAbbr ? getStateByCodeRuntimeFromDb(stateAbbr, env) : Promise.resolve(null),
-  getRegulatorDataRuntime(lender.slug, env as any),
-  lender.category === 'mortgages' ? getHMDADataRuntime(lender.slug, env as any) : Promise.resolve(null),
-  getComparisonsForLenderRuntime(lender.slug, env, 12),
-  lender.brand_slug ? getBrandInfoRuntime(lender.brand_slug, env) : Promise.resolve(null),
-]);
-const relatedWellnessGuides = relatedWellnessGuidesRaw.slice(0, 3);
+const statesByAbbr = getStateData();
+const stateRegulatoryContext = stateAbbr ? (statesByAbbr[stateAbbr] || null) : null;
+const regulatorData = getRegulatorData(lender.slug);
+const hmdaData = lender.category === 'mortgages' ? getHMDAData(lender.slug) : null;
+const comparisons = getComparisons()
+  .filter((comparison) => comparison.lender_a === lender.slug || comparison.lender_b === lender.slug)
+  .slice(0, 12);
+const brandInfo = lender.brand_slug ? getBrandInfo(lender.brand_slug) : null;
+const relatedWellnessGuides = relatedWellnessGuidesRaw;
 const displayRelatedWellnessGuides = relatedWellnessGuides.map((guide: any) => ({
   ...guide,
   title: softenEducationalTeaserCopy(guide.title || ''),
@@ -423,7 +319,7 @@ const glossaryContextMap: Record<string, string[]> = {
   'credit-counseling': ['review-credit-repair', 'review-debt-relief'],
 };
 const glossaryContexts = glossaryContextMap[lender.category] || [];
-const glossaryTerms = getGlossaryTermsForContextRuntime(glossaryContexts);
+const glossaryTerms = getGlossaryTermsForContext(glossaryContexts);
 
 // Auto-link glossary terms and money keywords in description text.
 // If lender has affiliate_url + affiliate_anchors, the first match of each
@@ -442,9 +338,11 @@ const otherSlugs = Array.from(new Set(
   comparisons.map((c) => (c.lender_a === lender.slug ? c.lender_b : c.lender_a))
 ));
 const otherLendersRows = otherSlugs.length > 0
-  ? await getLendersBySlugListRuntime(otherSlugs, env)
+  ? otherSlugs
+      .map((otherSlug) => getAllLenders().find((candidate) => candidate.slug === otherSlug))
+      .filter((candidate): candidate is Lender => Boolean(candidate))
   : [];
-const otherLenderNames = new Map(otherLendersRows.map((r) => [r.slug, r.name]));
+const otherLenderNames = new Map(otherLendersRows.map((row) => [row.slug, row.name]));
 
 const diagnosis = softenYmylCopy(generateDiagnosis(lender));
 const safePros = (lender.pros || []).map(softenYmylCopy);
@@ -646,7 +544,7 @@ const breadcrumbSchema = {
       { '@type': 'ListItem', position: 3, name: lender.name, item: `https://www.creditdoc.co/review/${lender.slug}/` },
     ],
   };
-const shouldEmitEntitySchema = !isSkeleton && primaryRow.processing_status === 'ready_for_index';
+const shouldEmitEntitySchema = !isSkeleton && lender.processing_status === 'ready_for_index';
 const jsonLd = shouldEmitEntitySchema
   ? [
       financialService,
@@ -734,7 +632,7 @@ const ogImageUrl = lender.logo_url?.trim()
     return base.slice(0, 155);
   })()}
   jsonLd={jsonLd}
-  noindex={isSkeleton || primaryRow.processing_status !== 'ready_for_index'}
+  noindex={isSkeleton || lender.processing_status !== 'ready_for_index'}
 >
   <!-- Breadcrumbs -->
   <nav class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8" aria-label="Breadcrumb">

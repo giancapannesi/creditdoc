@@ -19,6 +19,10 @@ import type {
   ClusterAnswer,
   ClusterPillar,
 } from './data';
+import type {
+  HMDAData,
+  RegulatorData,
+} from '../lib/db';
 import { normalizeLenderDisplayName, STATE_ABBREVIATIONS } from './data';
 import { softenEducationalTeaserCopy } from './safe-copy';
 
@@ -26,8 +30,11 @@ const LENDERS_DIR = path.join(process.cwd(), 'src/content/lenders');
 const CONTENT_DIR = path.join(process.cwd(), 'src/content');
 const BRANDS_DIR = path.join(process.cwd(), 'src/content/brands');
 const ANSWERS_DIR = path.join(process.cwd(), 'src/content/answers');
+const REVIEW_REGULATORY_STATIC = path.join(process.cwd(), 'data/review_regulatory_static.json');
 
 let _lendersCache: Lender[] | null = null;
+let _regulatorDataCache: Map<string, RegulatorData> | null = null;
+let _hmdaDataCache: Map<string, HMDAData> | null = null;
 
 // DB is the live source of truth, but prerendered browse pages still read the
 // static lender export. Keep archived review records out of static references.
@@ -240,6 +247,40 @@ export function getAllLenders(): Lender[] {
 
 export function getLenderBySlug(slug: string): Lender | undefined {
   return getAllLenders().find(l => l.slug === slug);
+}
+
+type ReviewRegulatoryStatic = {
+  generated_at: string;
+  source: string;
+  regulator: Record<string, RegulatorData>;
+  hmda: Record<string, HMDAData>;
+};
+
+function readReviewRegulatoryStatic(): ReviewRegulatoryStatic | null {
+  if (!fs.existsSync(REVIEW_REGULATORY_STATIC)) return null;
+  return JSON.parse(fs.readFileSync(REVIEW_REGULATORY_STATIC, 'utf8')) as ReviewRegulatoryStatic;
+}
+
+function buildRegulatorDataCache(): Map<string, RegulatorData> {
+  if (_regulatorDataCache) return _regulatorDataCache;
+  const snapshot = readReviewRegulatoryStatic();
+  _regulatorDataCache = new Map(Object.entries(snapshot?.regulator ?? {}));
+  return _regulatorDataCache;
+}
+
+function buildHmdaDataCache(): Map<string, HMDAData> {
+  if (_hmdaDataCache) return _hmdaDataCache;
+  const snapshot = readReviewRegulatoryStatic();
+  _hmdaDataCache = new Map(Object.entries(snapshot?.hmda ?? {}));
+  return _hmdaDataCache;
+}
+
+export function getRegulatorData(slug: string): RegulatorData | null {
+  return buildRegulatorDataCache().get(slug) ?? null;
+}
+
+export function getHMDAData(slug: string): HMDAData | null {
+  return buildHmdaDataCache().get(slug) ?? null;
 }
 
 export function getLendersByCategory(category: string): Lender[] {

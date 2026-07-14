@@ -4,6 +4,57 @@
 
 ---
 
+## 2026-07-14 - Crawler 404/5xx stabilization for state and review pages
+
+Status: implemented and build/debug verified locally.
+
+What happened:
+- Bing/GSC flagged valid `/state/` and `/review/` URLs as 404/5xx even though many opened normally in a browser later.
+- The failure mode was delivery consistency: important pages could still be served through runtime/SSR paths, so a crawler could see a transient failure even when the content record and page quality were valid.
+- This was not treated as a page-quality problem and no valid state/review/city pages were noindexed, removed, or suppressed.
+
+What changed:
+- Forced state roots and lending-law pages to prerender as static HTML:
+  - `/state/`
+  - `/state/<state>/`
+  - `/state/<state>/lending-laws/`
+- Converted review detail pages in the current build path to static HTML output and kept stale GSC review redirects in Cloudflare `_redirects` rather than runtime page code.
+- Added `scripts/check_static_html_contract.mjs`.
+- Wired the static HTML contract into `postbuild` so priority SEO surfaces fail the build if the expected static files disappear.
+
+Verification:
+- `npx astro build` passed on 2026-07-14 and emitted 19,074 HTML pages.
+- Static state roots confirmed: 50 `/state/<state>/index.html` files.
+- Exact Bing/GSC examples confirmed present as static HTML:
+  - `/state/texas/`
+  - `/review/minnesota-first-credit-and-savings-incorporated/`
+  - `/review/ks-statebank/`
+  - `/review/superior-national-bank/`
+  - `/review/sam-check-cashing-machine-detroit-mi/`
+  - `/review/city-of-wilmington/`
+  - `/review/rey-cash-downtown-pawn-jewelry/`
+  - `/review/the-state-exchange-bank/`
+  - `/review/cash-city-pawn/`
+  - `/review/citizens-bank-of-edinburg/`
+  - `/review/first-hope-bank-a-national-banking-association/`
+  - `/review/steer-financial-small-business-loans/`
+  - `/review/advantage-credit-counseling/`
+- Postbuild/debug contracts passed:
+  - no truncated SEO fields
+  - static HTML contract
+  - sitemap/robots conflicts
+  - critical sitemap URLs
+  - schema/sitemap contract
+  - `/best/` SERP title contract
+  - feed contract
+  - image alt and filename contracts
+  - AI ingestion contract
+  - internal static link contract
+
+Follow-up:
+- `npm run build` from a clean `dist` still needs a follow-up cleanup because `prebuild` runs `check_ai_ingestion_contract.mjs`, which expects existing built artifacts. For this stabilization pass the build was run directly with `npx astro build`, then the postbuild/debug contracts were run manually.
+- Continue converting crawler-sensitive runtime surfaces in controlled batches only. Do not bulk noindex, remove, redirect, canonical-change, robots-block, sitemap-remove, feed-stop, or pause publishing without Jammi's express approval.
+
 ## 2026-07-14 - Public sanitation / Astro fingerprint reduction
 
 Status: Phase 1 implemented, build verified, daily audit cron installed.
