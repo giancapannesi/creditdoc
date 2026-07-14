@@ -529,7 +529,7 @@ class CreditDocDB:
                 data.pop(field, None)
         # Inject brand_slug from the column (may be None/null)
         data["brand_slug"] = row["brand_slug"]
-        return data
+        return sanitize_export_seo_titles(data)
 
     def lender_exists(self, slug):
         """Check if a lender exists in the database."""
@@ -1298,7 +1298,6 @@ class CreditDocDB:
         data = self.get_lender_data(slug)
         if not data:
             return False
-        data = sanitize_export_seo_titles(data)
 
         filepath = output_dir / f"{slug}.json"
         if filepath.exists():

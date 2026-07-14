@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 import { readdirSync, readFileSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const CONTENT_DIR = join(ROOT, 'src', 'content');
 const SEO_FIELDS = new Set([
   'title',

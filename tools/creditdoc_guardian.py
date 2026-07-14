@@ -45,7 +45,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from creditdoc_db import CreditDocDB, JSON_EXPORT_EXCLUDED_FIELDS, PERSISTENT_FIELDS, _is_empty
+from creditdoc_db import CreditDocDB, JSON_EXPORT_EXCLUDED_FIELDS, PERSISTENT_FIELDS, _is_empty, sanitize_export_seo_titles
 
 PROJECT_DIR = Path(__file__).parent.parent
 LENDERS_DIR = PROJECT_DIR / "src" / "content" / "lenders"
@@ -96,8 +96,10 @@ def _public_drift_compare_data(data):
 def write_lender_json(slug, data):
     """Write DB version of a lender to its JSON file."""
     filepath = LENDERS_DIR / f"{slug}.json"
-    with open(filepath, "w") as f:
-        json.dump(data, f, indent=2)
+    data = sanitize_export_seo_titles(data)
+    with open(filepath, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+        f.write("\n")
 
 
 def read_lender_json(slug):
@@ -137,7 +139,7 @@ def heal_protected_profiles(db, dry_run=False):
     for row in rows:
         slug = row["slug"]
         raw_db_data = json.loads(row["data"])
-        db_data = db.get_lender_data(slug) or raw_db_data
+        db_data = sanitize_export_seo_titles(db.get_lender_data(slug) or raw_db_data)
         db_checksum = _checksum(_public_drift_compare_data(db_data))
 
         file_data = read_lender_json(slug)

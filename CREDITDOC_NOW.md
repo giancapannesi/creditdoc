@@ -7098,3 +7098,14 @@ Social rollout:
   - `node scripts/check_no_truncated_seo_fields.mjs` passed.
   - `python3 -m py_compile` passed for the patched active generator scripts and the cadence verifier/watchdog scripts.
 - Note: `/srv/BusinessOps/tools/*` is outside the CreditDoc git repo, so those active-script changes are saved on the VPS and documented here, but only repo files can be committed to `giancapannesi/creditdoc`.
+
+## 2026-07-14 - Guardian SEO regression path fixed
+
+- Root cause found for recurring truncated lender meta descriptions: the hourly `creditdoc_guardian.py` job was restoring 336 protected profiles from stale DB data after clean builds.
+- Guardian was not paused. The code path was fixed so DB reads and Guardian writes sanitize SEO title/description fields before exporting JSON.
+- Added the truncation guard to `npm run postbuild` so future builds fail if any title or description SEO field contains an ellipsis.
+- Re-ran Guardian in protected-only mode after the fix; it rewrote the affected lender JSON files through the sanitized path.
+- Verification:
+  - `node scripts/check_no_truncated_seo_fields.mjs` passes.
+- Next crawler-risk target:
+  - convert `/review/[slug]/` away from runtime Astro, because Bing's 5XX report is dominated by review URLs and this is the largest remaining public SEO route family still served dynamically.
