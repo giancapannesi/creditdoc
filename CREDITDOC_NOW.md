@@ -6998,3 +6998,21 @@ Social rollout:
   - `python3 -m py_compile tools/creditdoc_db.py tools/creditdoc_build.py`
   - `npm run build`
   - postbuild contracts: sitemap/robots, critical URLs, schema/sitemap, Best-title intent, feeds, image alt, image filenames, and AI ingestion.
+
+## 2026-07-14 - City guide publishing slowed to one every two days
+
+- Founder requested slowing CreditDoc city guide generation to give the city landing-page/capture project time to catch up.
+- Updated root crontab from daily `creditdoc_city_guide_generator.py --batch 10` to one guide every two UTC days:
+  - active line uses `/usr/bin/python3 -c 'import datetime,sys; sys.exit(datetime.date.today().toordinal() & 1)' && ... creditdoc_city_guide_generator.py --batch 1`;
+  - July 14, 2026 skips; July 15, 2026 runs; then alternates every other UTC day.
+- Backups created before crontab edits:
+  - `/srv/BusinessOps/backups/cron_manual/root_crontab_before_creditdoc_city_guides_cadence_20260714T085005Z.txt`
+  - `/srv/BusinessOps/backups/cron_manual/root_crontab_before_creditdoc_city_guides_cadence_fix_20260714T085017Z.txt`
+- Updated `/srv/BusinessOps/tools/creditdoc_feed_continuity_watchdog.py` so the required active cron check expects `creditdoc_city_guide_generator.py --batch 1`, not `--batch 10`.
+- Updated `/srv/BusinessOps/tools/creditdoc_content_engine_daily_verify.py` so the city guide job is skipped cleanly on off-days instead of generating false failure emails.
+- Verification:
+  - July 14 guard exits `1` (skip); July 15 guard exits `0` (run).
+  - `python3 -m py_compile` passed for city guide generator, feed watchdog, and content verifier.
+  - `creditdoc_content_engine_daily_verify.py --dry-run --allow-pending` passed and reported `city guides: skipped on alternating-day cadence`.
+  - Feed watchdog cron requirement check passed with `cron: city guides active`.
+- This does not pause city guides; it reduces velocity to one new guide every two days while keeping the pipeline monitored.
