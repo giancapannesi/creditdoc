@@ -15,6 +15,7 @@ import {
 } from '../../../lib/db';
 import type { Lender } from '../../../utils/data';
 import { softenYmylCopy } from '../../../utils/safe-copy';
+import { buildCategoryHref } from '../../../utils/outbound';
 
 const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
 const { slug, category } = Astro.params;
@@ -419,7 +420,7 @@ const jsonLd = [
               </div>
               {stateLenders.length > 12 && (
                 <p class="text-sm text-muted mt-3 text-center">
-                  Showing 12 of {stateLenders.length} statewide providers. <a href={`/categories/${category}/`} class="text-primary hover:underline">View all {catName} nationally &rarr;</a>
+                  Showing 12 of {stateLenders.length} statewide providers. <a href={buildCategoryHref(category)} class="text-primary hover:underline">View all {catName} nationally &rarr;</a>
                 </p>
               )}
             </section>
@@ -428,7 +429,7 @@ const jsonLd = [
           <div class="glass-card p-8 text-center">
             <p class="text-lg text-muted mb-4">No {catName.toLowerCase()} providers found specifically in {city}, {stateAbbr} yet.</p>
             <p class="text-sm text-muted mb-6">CreditDoc is continuing to review profiles. In the meantime, use the broader category directory and state rules.</p>
-            <a href={`/categories/${category}/`} class="inline-block px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors">
+            <a href={buildCategoryHref(category)} class="inline-block px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors">
               Browse All {catName} &rarr;
             </a>
           </div>

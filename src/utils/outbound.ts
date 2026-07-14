@@ -36,8 +36,20 @@ export function buildReviewHref(lender: ReviewLinkCandidate): string | null {
   return isReviewLinkable(lender) ? `/review/${encodeURIComponent(lender.slug)}/` : null;
 }
 
+const categoryRouteAliases: Record<string, string> = {
+  "debt-consolidation": "debt-relief",
+  "fix-my-credit": "credit-repair",
+  "payday-loans": "payday-alternatives",
+};
+
+export function buildCategoryHref(category?: string): string {
+  if (!category) return "/categories/credit-repair/";
+  const canonicalCategory = categoryRouteAliases[category] || category;
+  return `/categories/${encodeURIComponent(canonicalCategory)}/`;
+}
+
 export function buildLenderFallbackHref(lender: ReviewLinkCandidate): string {
-  return lender.category ? `/categories/${encodeURIComponent(lender.category)}/` : "/categories/credit-repair/";
+  return buildCategoryHref(lender.category);
 }
 
 export function normalizeTelHref(phone?: string): string | null {

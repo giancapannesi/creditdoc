@@ -6,7 +6,7 @@ import RatingStars from '../../components/RatingStars.astro';
 import { getComparisons, getLenderBySlug } from '../../utils/data-build';
 import { formatPrice, getBbbClass } from '../../utils/data';
 import { softenYmylCopy } from '../../utils/safe-copy';
-import { buildLenderFallbackHref, buildLenderGoHref, buildReviewHref } from '../../utils/outbound';
+import { buildCategoryHref, buildLenderFallbackHref, buildLenderGoHref, buildReviewHref } from '../../utils/outbound';
 import type { Lender } from '../../utils/data';
 
 export function getStaticPaths() {
@@ -537,7 +537,7 @@ const categoryLabels: Record<string, string> = {
 
 const comparedCategories = Array.from(new Set([lenderA.category, lenderB.category].filter(Boolean)));
 const categoryContextCards = comparedCategories.map(category => ({
-  href: `/categories/${category}/`,
+  href: buildCategoryHref(category),
   label: categoryLabels[category] || category.replace(/-/g, ' '),
 }));
 

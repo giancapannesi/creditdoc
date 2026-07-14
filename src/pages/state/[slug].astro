@@ -6,6 +6,7 @@ import LenderCard from '../../components/LenderCard.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
 import { getAllStatesInfo, getCategories, getCitiesWithLenders, getGlossaryTermsForContext, getLendersInState, getStateData, getStatesWithLenders } from '../../utils/data-build';
 import { createLinker } from '../../utils/inline-linker';
+import { buildCategoryHref } from '../../utils/outbound';
 import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 import type { Lender } from '../../utils/data';
 
@@ -406,7 +407,7 @@ const displayRelatedPosts = relatedPosts.map((post) => ({
           <h2 class="text-xl font-bold text-text mb-4">Browse by Category</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {sortedGroups.map(([cat, catLenders]) => (
-              <a href={`/categories/${cat}/`} class="glass-card p-4 flex items-center justify-between hover:border-primary transition-colors">
+              <a href={buildCategoryHref(cat)} class="glass-card p-4 flex items-center justify-between hover:border-primary transition-colors">
                 <div>
                   <p class="font-semibold text-text text-sm">{catNames[cat] || cat}</p>
                   <p class="text-xs text-muted">{catLenders.length} companies in {stateInfo.abbr}</p>

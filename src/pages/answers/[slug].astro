@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import AffiliateInline from '../../components/AffiliateInline.astro';
 import AffiliateSidebar from '../../components/AffiliateSidebar.astro';
 import { createLinker } from '../../utils/inline-linker';
+import { buildCategoryHref } from '../../utils/outbound';
 import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 import {
   getClusterAnswers,
@@ -99,7 +100,7 @@ const comparisonPath = answer.target_money_page && answer.target_money_page.star
   : null;
 const relatedPathCards = [
   {
-    href: `/categories/${categorySlug}/`,
+    href: buildCategoryHref(categorySlug),
     label: `${categoryLabel} directory`,
     body: 'Compare provider profiles and category context before contacting a company.',
   },

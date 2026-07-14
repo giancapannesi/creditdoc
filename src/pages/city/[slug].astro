@@ -6,6 +6,7 @@ import CityLandingEnhancement from '../../components/CityLandingEnhancement.astr
 import { getCitiesWithLenders, getLendersByCityState, getCategories, getStateData } from '../../utils/data-build';
 import type { CityInfo, Lender } from '../../utils/data';
 import { softenYmylCopy } from '../../utils/safe-copy';
+import { buildCategoryHref } from '../../utils/outbound';
 import cityLandingEnhancements from '../../content/local-city-landing-enhancements.json';
 
 export function getStaticPaths() {
@@ -58,7 +59,7 @@ function normalizeLocalEnhancementLink(link: any) {
   return {
     ...link,
     label: label.replace(/\s+in\s+.+$/i, ''),
-    href: `/categories/${catSlug}/`,
+    href: buildCategoryHref(catSlug),
   };
 }
 
@@ -262,7 +263,7 @@ const jsonLd = [
           {catNames[cat] || cat} in {cityInfo.city}
         </h2>
         <a
-          href={`/categories/${cat}/`}
+          href={buildCategoryHref(cat)}
           class="text-sm font-medium text-primary hover:text-primary-hover transition-colors"
         >
           View all &rarr;

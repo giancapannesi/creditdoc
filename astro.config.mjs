@@ -13,6 +13,49 @@ import cloudflare from '@astrojs/cloudflare';
 // inject via customPages. Sync execSync is fine — runs once at build, ~50ms.
 const SITE = 'https://www.creditdoc.co';
 
+function normalizeSitemapUrl(value) {
+  try {
+    const url = new URL(value, SITE);
+    const siteUrl = new URL(SITE);
+    const path = url.pathname.replace(/\/+$/, '') || '/';
+    url.protocol = siteUrl.protocol;
+    url.host = siteUrl.host;
+    url.pathname = path === '/' ? '/' : `${path}/`;
+    url.search = '';
+    url.hash = '';
+    return url.href;
+  } catch {
+    return null;
+  }
+}
+
+function loadCrawlerExportSitemapExclusions() {
+  const files = [
+    'SEO/Table 404 Missing Pages.csv',
+    'SEO/Table - Duplicates.csv',
+  ];
+  const exclusions = new Set();
+
+  for (const relativePath of files) {
+    try {
+      const text = readFileSync(join(process.cwd(), relativePath), 'utf8').replace(/^\uFEFF/, '');
+      for (const match of text.matchAll(/https?:\/\/(?:www\.)?creditdoc\.co\/[^"',\s]+/g)) {
+        const normalized = normalizeSitemapUrl(match[0]);
+        if (normalized) exclusions.add(normalized);
+      }
+    } catch {
+      // Export files are operational inputs, not required for local builds.
+    }
+  }
+
+  if (exclusions.size > 0) {
+    console.log(`[sitemap] excluding ${exclusions.size} crawler-export URL(s) from XML sitemap`);
+  }
+  return exclusions;
+}
+
+const crawlerExportSitemapExclusions = loadCrawlerExportSitemapExclusions();
+
 function normalizeDate(value) {
   if (!value) return null;
   const parsed = new Date(value);
@@ -252,7 +295,8 @@ function ssrSitemapPages() {
       for (const state of stateRows) {
         const slug = state?.slug || state?.name?.toLowerCase().replace(/\s+/g, '-');
         if (slug) {
-          urls.push(`${SITE}/state/${slug}/`);
+          const pageUrl = `${SITE}/state/${slug}/`;
+          if (!crawlerExportSitemapExclusions.has(pageUrl)) urls.push(pageUrl);
           addedStateRoots += 1;
         }
       }
@@ -278,12 +322,14 @@ function ssrSitemapPages() {
         if (!line.includes('/')) {
           // Bare brand slug — keep only if a matching brand file exists.
           if (brandFiles.has(line)) {
-            urls.push(`${SITE}/brand/${line}/`);
+            const pageUrl = `${SITE}/brand/${line}/`;
+            if (!crawlerExportSitemapExclusions.has(pageUrl)) urls.push(pageUrl);
           } else {
             droppedBrands += 1;
           }
         } else {
-          urls.push(`${SITE}/${line}/`);
+          const pageUrl = `${SITE}/${line}/`;
+          if (!crawlerExportSitemapExclusions.has(pageUrl)) urls.push(pageUrl);
         }
       }
       if (droppedBrands > 0) {
@@ -318,7 +364,8 @@ function ssrSitemapPages() {
           ];
           for (const cg of cityGuides) {
             if (cg.slug) {
-              urls.push(`${SITE}/credit-guide/${cg.slug}/`);
+              const pageUrl = `${SITE}/credit-guide/${cg.slug}/`;
+              if (!crawlerExportSitemapExclusions.has(pageUrl)) urls.push(pageUrl);
             }
           }
           if (cityGuides.length > 0) {
@@ -404,6 +451,8 @@ export default defineConfig({
       // Content pages should have one useful H1; these routes are not search
       // landing pages and create crawler noise in third-party audit tools.
       filter(page) {
+        const normalizedPage = normalizeSitemapUrl(page);
+        if (normalizedPage && crawlerExportSitemapExclusions.has(normalizedPage)) return false;
         const url = new URL(page);
         if (url.pathname === '/search/') return false;
         if (url.pathname === '/specials/') return false;

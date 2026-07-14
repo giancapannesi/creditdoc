@@ -4,6 +4,34 @@
 
 ---
 
+## 2026-07-14 - Crawler error export guard and duplicate-validation diagnosis
+
+Status: implemented and committed after the static state/review stabilization.
+
+Why the 71-page validation failed:
+- The current built HTML does not show duplicate titles, descriptions, canonicals, or H1s for the 59 listed pages that exist as static HTML.
+- The exported validation set also contained 12 stale city URL variants using long state names, for example `/city/sugar-land-texas/`, while the real static page is `/city/sugar-land-tx/`.
+- Google validation can fail the issue if its sampled URLs still include stale/unresolved variants, even when the original duplicate-meta template issue has been fixed.
+
+What changed:
+- Added `scripts/check_crawler_error_exports.mjs`.
+- Wired the crawler export check into `postbuild`.
+- Added an explicit 301 for the remaining homoglyph Jersey review slug from the 404 export.
+- Wrote the operating plan: `reports/seo-debug/crawler_error_clearance_plan_2026-07-14.md`.
+
+Verification:
+- `node scripts/check_crawler_error_exports.mjs` passed:
+  - 1,071 exported URL rows checked from the current 404 and duplicate CSVs.
+  - 77 static HTML targets.
+  - 994 explicit redirects.
+  - 0 unresolved exported crawler URLs.
+- `node scripts/check_static_html_contract.mjs` passed.
+
+Operating rule:
+- After every new GSC/Bing/SE crawler export is dropped into `SEO/`, run the crawler export contract before asking for validation.
+- Fix stale URLs with 301s or convert valid recurring pages to static HTML.
+- Do not bulk noindex, remove, robots-block, sitemap-remove, canonical-change, or pause publishing without Jammi's express approval.
+
 ## 2026-07-14 - Crawler 404/5xx stabilization for state and review pages
 
 Status: implemented and build/debug verified locally.
@@ -7160,3 +7188,44 @@ Social rollout:
   - `node scripts/check_no_truncated_seo_fields.mjs` passes.
 - Next crawler-risk target:
   - convert `/review/[slug]/` away from runtime Astro, because Bing's 5XX report is dominated by review URLs and this is the largest remaining public SEO route family still served dynamically.
+
+## 2026-07-14 - Crawler export failures hardened to zero
+
+- Implemented non-destructive cleanup for the GSC/Bing exported 404/duplicate crawler rows:
+  - valid pages remain live/static;
+  - stale exported URLs are removed from XML sitemaps;
+  - stale review redirects now point at real static category hubs instead of missing `/credit-guide/...` category URLs;
+  - category pages are prerendered static HTML from the canonical category list.
+- Added `scripts/check_crawler_error_exports.mjs` and wired it into `npm run postbuild`.
+  - It parses `SEO/Table 404 Missing Pages.csv` and `SEO/Table - Duplicates.csv`.
+  - It fails if any exported row is neither static nor redirected.
+  - It fails if any exported problem URL leaks into `dist/sitemap*.xml`.
+  - It fails if any local redirect target points at a missing static page.
+- Fixed sitemap exclusion normalization so apex and `www` versions from crawler exports normalize to the canonical `https://www.creditdoc.co/...` host before comparison.
+- Added category URL canonicalization helpers so stale aliases such as `payday-loans`, `debt-consolidation`, and `fix-my-credit` resolve to the live static hubs.
+- Fixed two duplicate-export rows that were valid pages but had stale noindex/publishing metadata:
+  - `vigo-new-york`
+  - `winscott-credit-repair`
+- Full rebuild completed successfully on 2026-07-14.
+- Debugger/postbuild verification passed:
+  - `node scripts/check_crawler_error_exports.mjs`
+    - `1071` exported URL rows checked;
+    - `77` static;
+    - `994` redirected;
+    - `sitemap leaks=0`;
+    - `bad redirect targets=0`.
+  - `npm run postbuild`
+    - no truncated SEO fields;
+    - required static HTML contract OK;
+    - crawler export guard OK;
+    - sitemap/robots OK;
+    - critical sitemap URLs OK;
+    - schema/sitemap contract OK (`sitemap URLs=19454`, `HTML pages=19092`, `warnings=0`);
+    - Best title intent OK;
+    - feeds OK;
+    - image alt/filename checks OK;
+    - AI ingestion OK;
+    - internal static links OK (`1042675` links checked).
+- Google validation guidance:
+  - The crawler-export guard is now green, so it is reasonable to request validation for the duplicate-canonical and 404 fix groups.
+  - Do not bulk noindex or remove valid city/review pages; this fix keeps valid pages live and stops stale/bad URLs from being advertised.

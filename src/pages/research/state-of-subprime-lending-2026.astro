@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAllLenders, getStatesWithLenders, getStateData, getCitiesWithLenders } from '../../utils/data-build';
+import { buildCategoryHref } from '../../utils/outbound';
 
 const allLenders = getAllLenders();
 const states = getStatesWithLenders(1);
@@ -156,7 +157,7 @@ const jsonLd = [
         <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
           Local guides
         </a>
-        <a href="/categories/payday-loans/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+        <a href="/categories/payday-alternatives/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
           Payday loan category
         </a>
         <a href="/answers/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
@@ -326,7 +327,7 @@ const jsonLd = [
         <div class="space-y-3">
           {topCategories.map(([cat, count]) => (
             <div class="flex items-center gap-3">
-              <a href={`/categories/${cat}/`} class="text-sm text-text hover:text-primary transition-colors w-40 flex-shrink-0 capitalize">
+              <a href={buildCategoryHref(cat)} class="text-sm text-text hover:text-primary transition-colors w-40 flex-shrink-0 capitalize">
                 {cat.replace(/-/g, ' ')}
               </a>
               <div class="flex-1 bg-bg-alt rounded-full h-4 overflow-hidden">

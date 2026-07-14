@@ -1,5 +1,5 @@
 ---
-export const prerender = false;
+export const prerender = true;
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
@@ -9,6 +9,12 @@ import { createLinker } from '../../utils/inline-linker';
 import type { Lender } from '../../utils/data';
 import categoriesData from '../../content/categories.json';
 import { softenEducationalTeaserCopy, softenYmylCopy } from '../../utils/safe-copy';
+
+export function getStaticPaths() {
+  return (categoriesData as any[]).map((category) => ({
+    params: { category: category.slug },
+  }));
+}
 
 const env = (Astro.locals as any).runtime?.env;
 const { category: categorySlug } = Astro.params;
@@ -58,7 +64,10 @@ const category = {
 };
 
 const lenders: Lender[] = lenderRowsTop.map(shapeBodyInlineToLender);
-const totalCount = Number.isFinite(totalForCategory) && totalForCategory > 0 ? totalForCategory : lenders.length;
+const fallbackCount = Number(categoryBody.count) || 0;
+const totalCount = Number.isFinite(totalForCategory) && totalForCategory > 0
+  ? totalForCategory
+  : Math.max(fallbackCount, lenders.length);
 
 const glossaryTerms = getGlossaryTermsForContextRuntime(['category']);
 const linker = createLinker(glossaryTerms, { moneyBudget: 4, glossaryBudget: 4 });
@@ -284,7 +293,6 @@ Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=864
 <BaseLayout
   title={category.seo_title}
   description={category.seo_description}
-  noindex={totalCount === 0}
   jsonLd={jsonLd}
 >
   <!-- Breadcrumbs -->

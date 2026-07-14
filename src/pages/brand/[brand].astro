@@ -6,6 +6,7 @@ import LenderCard from '../../components/LenderCard.astro';
 import { getBrandInfoRuntime, shapeBodyInlineToLender, getGlossaryTermsForContextRuntime } from '../../utils/data-runtime';
 import { createLinker } from '../../utils/inline-linker';
 import { getLendersByBrandRuntime } from '../../lib/db';
+import { buildCategoryHref } from '../../utils/outbound';
 import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 import type { Lender } from '../../utils/data';
 
@@ -199,7 +200,7 @@ const description = `Browse all ${locationCount} ${brandInfo.display_name} locat
           <div class="glass-card px-4 py-2 text-sm">
             <span class="text-muted">Category:</span>
             <a
-              href={`/categories/${brandInfo.category}/`}
+              href={buildCategoryHref(brandInfo.category)}
               class="ml-1 font-semibold text-primary hover:underline"
             >
               {brandInfo.category.replace(/-/g, ' ')}
@@ -355,7 +356,7 @@ const description = `Browse all ${locationCount} ${brandInfo.display_name} locat
           )}
           <div class="pt-2 border-t border-border">
             <a
-              href={`/categories/${brandInfo.category}/`}
+              href={buildCategoryHref(brandInfo.category)}
               class="text-sm text-primary hover:underline"
             >
               Browse all {brandInfo.category.replace(/-/g, ' ')} companies
@@ -426,7 +427,7 @@ const description = `Browse all ${locationCount} ${brandInfo.display_name} locat
           <span class="block text-sm font-semibold text-text">State Rules</span>
           <span class="mt-1 block text-xs text-muted">State lending-law and regulator context.</span>
         </a>
-        <a href={`/categories/${brandInfo.category}/`} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
+        <a href={buildCategoryHref(brandInfo.category)} class="rounded-lg border border-border bg-bg-alt p-4 hover:border-primary/40">
           <span class="block text-sm font-semibold text-text">Category Context</span>
           <span class="mt-1 block text-xs text-muted">Compare this brand with other providers in the same category.</span>
         </a>

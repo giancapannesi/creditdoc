@@ -12,7 +12,7 @@ import InfoLink from '../../components/InfoLink.astro';
 import StateRegulatoryContext from '../../components/StateRegulatoryContext.astro';
 import cfpbResponsiveReport from '../../data/cfpb-responsive-providers-2026.json';
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
-import { buildLenderGoHref, normalizeTelHref } from '../../utils/outbound';
+import { buildCategoryHref, buildLenderGoHref, normalizeTelHref } from '../../utils/outbound';
 import { softenEducationalTeaserCopy, softenYmylCopy } from '../../utils/safe-copy';
 import {
   getBbbClass,
@@ -99,7 +99,7 @@ const categoryLinkFallbacks: Record<string, string> = {
   'credit-counseling': '/best/best-credit-counseling-agencies/',
 };
 const categoryHref = category
-  ? `/categories/${lender.category}/`
+  ? buildCategoryHref(lender.category)
   : (categoryLinkFallbacks[lender.category] || '/city/');
 const absoluteCategoryHref = `https://www.creditdoc.co${categoryHref}`;
 
