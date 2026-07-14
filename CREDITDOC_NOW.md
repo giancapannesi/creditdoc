@@ -7016,3 +7016,18 @@ Social rollout:
   - `creditdoc_content_engine_daily_verify.py --dry-run --allow-pending` passed and reported `city guides: skipped on alternating-day cadence`.
   - Feed watchdog cron requirement check passed with `cron: city guides active`.
 - This does not pause city guides; it reduces velocity to one new guide every two days while keeping the pipeline monitored.
+
+## 2026-07-14 - Truncated SEO field guard cleaned again
+
+- After the cadence work, `node scripts/check_no_truncated_seo_fields.mjs` found SEO ellipses again.
+- Cleaned committed source issues:
+  - `src/content/blog-posts.json`: fixed two chopped blog title fields from the July 14 blog output.
+  - `src/content/lenders/server-unavailable-possibly-it-is-restarting-please-try-later.json`: replaced literal `...` punctuation in the profile name/match/meta description with normal sentence punctuation.
+- Patched active generator scripts outside the CreditDoc repo so new generated metadata trims cleanly without appending `...`:
+  - `/srv/BusinessOps/tools/creditdoc_blog.py`
+  - `/srv/BusinessOps/tools/creditdoc_cluster_executor.py`
+  - `/srv/BusinessOps/tools/creditdoc_answer_dedication_loop.py`
+- Verification:
+  - `node scripts/check_no_truncated_seo_fields.mjs` passed.
+  - `python3 -m py_compile` passed for the patched active generator scripts and the cadence verifier/watchdog scripts.
+- Note: `/srv/BusinessOps/tools/*` is outside the CreditDoc git repo, so those active-script changes are saved on the VPS and documented here, but only repo files can be committed to `giancapannesi/creditdoc`.
