@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "prebuild": "node scripts/check_content_text_integrity.mjs && node scripts/check_no_truncated_seo_fields.mjs && node scripts/check_robots_contract.mjs && node scripts/check_ai_ingestion_contract.mjs && node scripts/check_ssr_sitemap_parity.mjs",
-    "postbuild": "node scripts/check_sitemap_robots_conflicts.mjs && node scripts/check_sitemap_critical_urls.mjs && node scripts/check_schema_sitemap_contract.mjs && node scripts/check_best_serp_contract.mjs && node scripts/check_feed_contract.mjs && node scripts/check_image_alt_contract.mjs && node scripts/check_image_filename_contract.mjs && node scripts/check_ai_ingestion_contract.mjs",
+    "postbuild": "node scripts/check_sitemap_robots_conflicts.mjs && node scripts/check_sitemap_critical_urls.mjs && node scripts/check_schema_sitemap_contract.mjs && node scripts/check_best_serp_contract.mjs && node scripts/check_feed_contract.mjs && node scripts/check_image_alt_contract.mjs && node scripts/check_image_filename_contract.mjs && node scripts/check_ai_ingestion_contract.mjs && node scripts/check_internal_static_links.mjs",
     "build": "astro build",
     "check:answer-meta": "node scripts/creditdoc_answer_meta_audit.mjs",
     "seo:answer-meta:apply": "node scripts/creditdoc_answer_meta_audit.mjs --apply --limit 50",
@@ -17,6 +17,8 @@
     "check:best-serp": "node scripts/check_best_serp_contract.mjs",
     "check:seo-deep": "node scripts/seo_deep_audit.mjs",
     "check:live-sitemap": "node scripts/check_live_sitemap_status.mjs",
+    "check:public-sanitization": "node scripts/check_public_sanitization_contract.mjs",
+    "check:internal-static-links": "node scripts/check_internal_static_links.mjs",
     "check:comparison-batch-scope": "node scripts/check_comparison_batch_scope.mjs",
     "comparison:extract-source-facts": "node scripts/extract_comparison_source_facts.mjs",
     "comparison:claim-safety": "node scripts/check_comparison_claim_safety.mjs",

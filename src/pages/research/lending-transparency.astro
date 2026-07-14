@@ -1,6 +1,4 @@
 ---
-export const prerender = false;
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 interface RuntimeEnv {
@@ -8,7 +6,11 @@ interface RuntimeEnv {
   SUPABASE_ANON_KEY?: string;
 }
 
-const env = (Astro.locals as any)?.runtime?.env as RuntimeEnv | undefined;
+const runtimeEnv = (Astro.locals as any)?.runtime?.env as RuntimeEnv | undefined;
+const env: RuntimeEnv = {
+  SUPABASE_URL: runtimeEnv?.SUPABASE_URL ?? import.meta.env.SUPABASE_URL ?? process.env.SUPABASE_URL,
+  SUPABASE_ANON_KEY: runtimeEnv?.SUPABASE_ANON_KEY ?? import.meta.env.SUPABASE_ANON_KEY ?? process.env.SUPABASE_ANON_KEY,
+};
 
 interface LenderRow {
   slug: string;

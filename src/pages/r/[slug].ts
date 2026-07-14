@@ -72,13 +72,13 @@ function renderHtml(lender: RuntimeLenderWithBody, ver: number): string {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>${name} — CreditDoc (SSR pilot)</title>
+  <title>${name} — CreditDoc</title>
   <meta name="description" content="${descShort}">
   <meta name="cdm-last-updated" content="${lastUpdatedRaw}">
   <link rel="canonical" href="${reviewHref}">
 </head>
 <body style="font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6;">
-  <p style="color:#888;font-size:0.875rem">CreditDoc · SSR pilot · /r/${escapeHtml(lender.slug)} · body fields: ${bodyFieldCount}</p>
+  <p style="color:#888;font-size:0.875rem">CreditDoc profile preview</p>
   <h1 style="margin:0.5rem 0">${name}${rating ? ` <span style="color:#c80;font-size:1rem">★ ${rating}</span>` : ""}</h1>
   <p style="color:#444">${cat}${state ? ` · ${state}` : ""}</p>
   ${descShort ? `<p style="font-style:italic;color:#222">${descShort}</p>` : ""}
@@ -89,8 +89,7 @@ function renderHtml(lender: RuntimeLenderWithBody, ver: number): string {
   <hr style="margin:2rem 0;border:none;border-top:1px solid #eee">
   <p>For the full styled review, see <a href="${reviewHref}">${reviewHref}</a>.</p>
   <p style="color:#888;font-size:0.75rem">
-    Content version: ${ver} (${verIso})<br>
-    Architecture: Astro 5 hybrid · Cloudflare Pages Workers · Supabase PostgREST anon · body_inline jsonb
+    Updated: ${verIso}
   </p>
 </body>
 </html>`;
@@ -125,8 +124,6 @@ export async function GET(ctx: APIContext): Promise<Response> {
         status: 200,
         headers: {
           "content-type": "text/html; charset=utf-8",
-          "x-cdm-route": "/r/[slug]",
-          "x-cdm-slug": lender.slug,
         },
       });
     },

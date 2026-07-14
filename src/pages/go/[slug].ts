@@ -82,8 +82,6 @@ export async function GET(ctx: APIContext): Promise<Response> {
       location: url.toString(),
       "cache-control": "no-store",
       "x-robots-tag": "noindex, nofollow",
-      "x-cdm-route": "/go/[slug]",
-      "x-cdm-slug": slug,
     },
   });
 }

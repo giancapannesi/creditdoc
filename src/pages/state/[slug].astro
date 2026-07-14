@@ -2,76 +2,47 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
 import GlossaryAppendix from '../../components/GlossaryAppendix.astro';
-import {
-  getCategoriesRuntime,
-  getGlossaryTermsForContextRuntime,
-  shapeBodyInlineToLender,
-} from '../../utils/data-runtime';
+import { getAllStatesInfo, getCategories, getCitiesWithLenders, getGlossaryTermsForContext, getLendersInState, getStateData, getStatesWithLenders } from '../../utils/data-build';
 import { createLinker } from '../../utils/inline-linker';
-import {
-  getStateBySlugRuntime,
-  getStateCountRuntime,
-  getStateCitiesRuntime,
-  getLendersByStateRuntime,
-  getTopStatesRuntime,
-  getAllStatesRuntime,
-  type RuntimeLenderEnv,
-} from '../../lib/db';
 import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
 import type { Lender } from '../../utils/data';
 
-// CDM-REV Phase 5.1 [OBJ-1] — SSR (no rebuild). DB row update at T+0 →
-// URL serves new HTML at T+≤cache TTL. Same shape as /answers/[slug] +
-// /best/[slug] flips. State info, lender counts, city list, and full
-// lender hydration come from Supabase at request time.
-export const prerender = false;
-
-const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
-const { slug } = Astro.params;
-if (!slug) return new Response('Bad request', { status: 400 });
-
-const stateRow = await getStateBySlugRuntime(slug, env);
-if (!stateRow) {
-  return new Response('State not found', {
-    status: 404,
-    headers: { 'content-type': 'text/plain; charset=utf-8' },
-  });
+export function getStaticPaths() {
+  const stateData = getStateData();
+  return getAllStatesInfo().map((stateInfo) => ({
+    params: { slug: stateInfo.slug },
+    props: { stateInfo, data: stateData[stateInfo.abbr] || null },
+  }));
 }
 
-const abbr = stateRow.abbr || stateRow.code;
-const slugClean = stateRow.name.toLowerCase().replace(/ /g, '-');
-
-// State stats from state_lender_counts MV (A.5 v2). Falls back to zero.
-const counts = await getStateCountRuntime(abbr, env);
-const lenderCount = counts?.lender_count ?? 0;
-const cityCount = counts?.city_count ?? 0;
-
-// Per-state regulatory data lives in states.body_inline.
-const data = (stateRow.body_inline ?? null) as Record<string, any> | null;
-
-const stateInfo = {
-  name: stateRow.name,
-  abbr,
-  slug: slugClean,
-  lenderCount,
-  cityCount,
+const { stateInfo: baseStateInfo, data } = Astro.props as {
+  stateInfo: { name: string; abbr: string; slug: string };
+  data: Record<string, any> | null;
 };
 
-// Cities in this state from state_city_lender_counts MV.
-const cityRows = await getStateCitiesRuntime(abbr, env, 30);
-const stateCities = cityRows.map(c => ({
-  city: c.city_display || c.city,
-  slug: c.city,
-  stateAbbr: c.state_abbr,
-  count: c.lender_count,
-}));
+const lenders: Lender[] = getLendersInState(baseStateInfo.abbr).slice(0, 60);
+const allStateSummaries = getStatesWithLenders(1);
+const stateSummary = allStateSummaries.find((state) => state.abbr === baseStateInfo.abbr);
+const stateCities = getCitiesWithLenders(5)
+  .filter((city) => city.stateAbbr === baseStateInfo.abbr)
+  .slice(0, 30)
+  .map((city) => ({
+    city: city.city,
+    slug: city.slug,
+    stateAbbr: city.stateAbbr,
+    count: city.count,
+  }));
 
-// Top lenders for the page — bounded so payload stays tight.
-const lenderRows = lenderCount > 0 ? await getLendersByStateRuntime(abbr, env, 60) : [];
-const lenders: Lender[] = lenderRows.map(r => shapeBodyInlineToLender(r as any));
+const stateInfo = {
+  name: baseStateInfo.name,
+  abbr: baseStateInfo.abbr,
+  slug: baseStateInfo.slug,
+  lenderCount: stateSummary?.lenderCount ?? lenders.length,
+  cityCount: stateSummary?.cityCount ?? stateCities.length,
+};
 
-const categories = getCategoriesRuntime();
-const glossaryTerms = getGlossaryTermsForContextRuntime(['state']);
+const categories = getCategories();
+const glossaryTerms = getGlossaryTermsForContext(['state']);
 const linker = createLinker(glossaryTerms, { moneyBudget: 5, glossaryBudget: 5 });
 const linkedConsumerRights = data?.consumer_rights_summary
   ? linker(data.consumer_rights_summary).join(' ')
@@ -80,22 +51,12 @@ const linkedRegulations = data?.key_regulations
   ? (data.key_regulations as string[]).map((reg: string) => linker(reg).join(' '))
   : [];
 
-// "Other States" sidebar — top 13 by lender count, joined to states table for
-// human-readable name + URL slug. Single bounded query; result <2KB.
-const [topCounts, allStates] = await Promise.all([
-  getTopStatesRuntime(env, 13),
-  getAllStatesRuntime(env),
-]);
-const stateMeta = new Map(
-  allStates.map(s => [s.abbr || s.code, {
-    abbr: s.abbr || s.code,
-    name: s.name,
-    slug: s.name.toLowerCase().replace(/ /g, '-'),
-  }])
-);
-const otherStates = topCounts
-  .map(c => stateMeta.get(c.state_abbr))
-  .filter((s): s is { abbr: string; name: string; slug: string } => !!s)
+const otherStates = allStateSummaries
+  .map((state) => ({
+    abbr: state.abbr,
+    name: state.name,
+    slug: state.slug,
+  }))
   .filter(s => s.abbr !== stateInfo.abbr)
   .slice(0, 12);
 
@@ -128,9 +89,6 @@ const description = hasLenders
   : `${stateInfo.name} lending regulations, credit repair laws, consumer protections, and financial resources. ${data?.consumer_rights_summary?.split('.')[0] || ''}`;
 
 Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
-Astro.response.headers.set('x-cdm-rev-source', 'ssr-state');
-Astro.response.headers.set('x-cdm-route', '/state/[slug]');
-Astro.response.headers.set('x-cdm-slug', stateInfo.slug);
 
 const jsonLd = [
   {
@@ -184,21 +142,8 @@ const stateGraphCategories = sortedGroups.slice(0, 3).map(([categorySlug]) => ({
   name: catNames[categorySlug] || categorySlug.replace(/-/g, ' '),
 }));
 
-// Fetch related questions and blog posts
-let relatedQuestions: { slug: string; title: string }[] = [];
-let relatedPosts: { slug: string; title: string }[] = [];
-
-if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
-  const headers = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
-  const qFilter = topCategory ? `cluster_pillar=eq.${encodeURIComponent(topCategory)}&` : '';
-  const bFilter = topCategory ? `category=eq.${encodeURIComponent(topCategory)}&` : '';
-  const [qRes, bRes] = await Promise.all([
-    fetch(`${env.SUPABASE_URL}/rest/v1/answers?${qFilter}select=slug,title&limit=6`, { headers, signal: AbortSignal.timeout(3000) }).catch(() => null),
-    fetch(`${env.SUPABASE_URL}/rest/v1/blog_posts?${bFilter}select=slug,title&limit=6`, { headers, signal: AbortSignal.timeout(3000) }).catch(() => null),
-  ]);
-  if (qRes?.ok) relatedQuestions = await qRes.json();
-  if (bRes?.ok) relatedPosts = await bRes.json();
-}
+const relatedQuestions: { slug: string; title: string }[] = [];
+const relatedPosts: { slug: string; title: string }[] = [];
 const displayRelatedQuestions = relatedQuestions.map((q) => ({
   ...q,
   title: softenEducationalTeaserCopy(q.title.replace(/ \| CreditDoc$/, '')),

@@ -25,7 +25,6 @@ const lenders: Lender[] = lenderRows.map(shapeBodyInlineToLender);
 const locationCount = lenders.length;
 
 Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
-Astro.response.headers.set('x-cdm-rev-source', 'ssr-brand');
 
 // Group lenders by state
 const byState = new Map<string, Lender[]>();

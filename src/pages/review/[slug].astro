@@ -262,9 +262,6 @@ const relatedAnswerPillar = answerPillarMap[lender.category] || 'credit-score';
 const relatedAnswersPromise = getAnswersByPillarRuntime(relatedAnswerPillar, env, 4);
 
 Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
-Astro.response.headers.set('x-cdm-rev-source', 'ssr-review');
-Astro.response.headers.set('x-cdm-route', '/review/[slug]');
-Astro.response.headers.set('x-cdm-slug', lender.slug);
 
 const cityName = lender.company_info?.city || '';
 const regionName = stateAbbr || lender.company_info?.state || '';

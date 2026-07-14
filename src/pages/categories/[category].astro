@@ -279,9 +279,6 @@ const jsonLd = [
 // the category row + every lender in that category, so any DB write busts the
 // key globally and the next request re-renders. No deploy/purge needed.
 Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400, immutable');
-Astro.response.headers.set('x-cdm-rev-source', 'ssr-category');
-Astro.response.headers.set('x-cdm-route', '/categories/[category]');
-Astro.response.headers.set('x-cdm-slug', categorySlug || '');
 ---
 
 <BaseLayout

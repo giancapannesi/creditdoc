@@ -196,9 +196,6 @@ const description = isAtmCategory
 
 Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
 Astro.response.headers.set('x-robots-tag', 'noindex, follow');
-Astro.response.headers.set('x-cdm-rev-source', 'ssr-credit-guide-category');
-Astro.response.headers.set('x-cdm-route', '/credit-guide/[slug]/[category]');
-Astro.response.headers.set('x-cdm-slug', `${slug}/${category}`);
 
 const listName = isAtmCategory && cityLenders.length === 0
   ? `Selected ${stateName} ${catName} Profiles`

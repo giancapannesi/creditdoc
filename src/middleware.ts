@@ -515,6 +515,38 @@ function buildCacheKey(req: Request, pathname: string, verSec: number, variant: 
   return new Request(url.toString(), { method: 'GET' });
 }
 
+async function fetchStaticHtmlAsset(
+  pathname: string,
+  origin: string,
+  request: Request,
+  env?: RuntimeEnvLike
+): Promise<Response | null> {
+  if (!env?.ASSETS || !pathname.endsWith('/')) return null;
+  const assetUrl = new URL(`${pathname}index.html`, origin);
+  const asset = await env.ASSETS.fetch(new Request(assetUrl.toString(), request));
+  if (asset.status !== 200) return null;
+  const out = new Response(asset.body, asset);
+  out.headers.set('content-type', 'text/html; charset=utf-8');
+  out.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400, immutable');
+  return applySecurityHeaders(out);
+}
+
+async function renderWithStaticFallback(
+  next: () => Promise<Response>,
+  pathname: string,
+  origin: string,
+  request: Request,
+  env?: RuntimeEnvLike
+): Promise<Response> {
+  try {
+    return await next();
+  } catch (err) {
+    const staticAsset = await fetchStaticHtmlAsset(pathname, origin, request, env);
+    if (staticAsset) return staticAsset;
+    throw err;
+  }
+}
+
 export const onRequest = defineMiddleware(async (context, next) => {
   // Only cache GETs of HTML routes.
   if (context.request.method !== 'GET') return applySecurityHeaders(await next());
@@ -559,18 +591,10 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   if (
     url.search === '' &&
-    env?.ASSETS &&
     SERANKING_STATIC_SNAPSHOT_PATHS.has(pathname)
   ) {
-    const assetUrl = new URL(`${pathname}index.html`, url.origin);
-    const asset = await env.ASSETS.fetch(new Request(assetUrl.toString(), context.request));
-    if (asset.status === 200) {
-      const out = new Response(asset.body, asset);
-      out.headers.set('content-type', 'text/html; charset=utf-8');
-      out.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400, immutable');
-      out.headers.set('x-cdm-static-snapshot', 'seranking-2026-07-05');
-      return applySecurityHeaders(out);
-    }
+    const staticAsset = await fetchStaticHtmlAsset(pathname, url.origin, context.request, env);
+    if (staticAsset) return staticAsset;
   }
 
   // Find the first matching cacheable route (returns slug or null).
@@ -582,13 +606,17 @@ export const onRequest = defineMiddleware(async (context, next) => {
       break;
     }
   }
-  if (!matched) return applySecurityHeaders(await next());
+  if (!matched) {
+    return applySecurityHeaders(
+      await renderWithStaticFallback(next, pathname, url.origin, context.request, env)
+    );
+  }
 
   if (!env?.SUPABASE_URL || !env?.SUPABASE_ANON_KEY) {
     // Build-mode preview or env not configured — don't cache, just pass.
-    const fresh = await next();
-    fresh.headers.set('x-cdm-cache', 'BYPASS-NOENV');
-    return applySecurityHeaders(fresh);
+    return applySecurityHeaders(
+      await renderWithStaticFallback(next, pathname, url.origin, context.request, env)
+    );
   }
 
   // Version probe — if it fails, skip caching for this request.
@@ -599,16 +627,16 @@ export const onRequest = defineMiddleware(async (context, next) => {
     ? await matched.route.versionFetch(matched.slug, env)
     : await fetchUpdatedAt(matched.route.table, matched.slug, env);
   if (!updatedAt) {
-    const fresh = await next();
-    fresh.headers.set('x-cdm-cache', 'BYPASS-NOVERSION');
-    return applySecurityHeaders(fresh);
+    return applySecurityHeaders(
+      await renderWithStaticFallback(next, pathname, url.origin, context.request, env)
+    );
   }
 
   const verSec = Math.floor(Date.parse(updatedAt) / 1000);
   if (!Number.isFinite(verSec) || verSec <= 0) {
-    const fresh = await next();
-    fresh.headers.set('x-cdm-cache', 'BYPASS-BADVERSION');
-    return applySecurityHeaders(fresh);
+    return applySecurityHeaders(
+      await renderWithStaticFallback(next, pathname, url.origin, context.request, env)
+    );
   }
 
   // @ts-expect-error caches global is provided by Cloudflare Workers runtime
@@ -617,15 +645,11 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   const hit = await cache.match(key);
   if (hit) {
-    const out = new Response(hit.body, hit);
-    out.headers.set('x-cdm-cache', 'HIT');
-    out.headers.set('x-cdm-version', String(verSec));
-    out.headers.set('x-cdm-route', `mw:${matched.route.variant}`);
-    return applySecurityHeaders(out);
+    return applySecurityHeaders(new Response(hit.body, hit));
   }
 
   // Miss → render → cache.put with version-keyed key.
-  const fresh = await next();
+  const fresh = await renderWithStaticFallback(next, pathname, url.origin, context.request, env);
   if (
     fresh.status === 200 &&
     !fresh.headers.get('cache-control')?.includes('private')
@@ -635,9 +659,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
       'cache-control',
       'public, max-age=86400, s-maxage=86400, immutable'
     );
-    cacheable.headers.set('x-cdm-version', String(verSec));
-    cacheable.headers.set('x-cdm-cache', 'MISS-STORED');
-    cacheable.headers.set('x-cdm-route', `mw:${matched.route.variant}`);
     // Security headers are baked into the cached copy too — so a HIT served
     // from a stale PoP still carries the protection.
     applySecurityHeaders(cacheable);
@@ -647,8 +668,5 @@ export const onRequest = defineMiddleware(async (context, next) => {
       // cache.put can fail on certain response shapes — never block render.
     }
   }
-  fresh.headers.set('x-cdm-cache', 'MISS');
-  fresh.headers.set('x-cdm-version', String(verSec));
-  fresh.headers.set('x-cdm-route', `mw:${matched.route.variant}`);
   return applySecurityHeaders(fresh);
 });

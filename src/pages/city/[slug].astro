@@ -20,11 +20,14 @@ export function getStaticPaths() {
 const { cityInfo, sd } = Astro.props as { cityInfo: CityInfo; sd: any };
 const lenders = getLendersByCityState(cityInfo.city, cityInfo.stateAbbr);
 const categories = getCategories();
+const categoryAliases: Record<string, string> = {
+  'fix-my-credit': 'credit-repair',
+};
 
 // Group lenders by category
 const categoryGroups = new Map<string, Lender[]>();
 for (const l of lenders) {
-  const cat = l.category;
+  const cat = categoryAliases[l.category] || l.category;
   if (!categoryGroups.has(cat)) categoryGroups.set(cat, []);
   categoryGroups.get(cat)!.push(l);
 }
@@ -42,7 +45,29 @@ for (const cat of categories) {
 // Featured providers for local section, ordered by stored Google rating where available
 const googleRatingValue = (l: Lender) => l.google_rating && l.google_rating > 0 && !(l.google_rating > 5) && l.google_reviews_count && l.google_reviews_count >= 1 ? l.google_rating : 0;
 const featuredLenders = [...lenders].sort((a, b) => googleRatingValue(b) - googleRatingValue(a)).slice(0, 6);
-const cityEnhancement = (cityLandingEnhancements as Record<string, any>)[cityInfo.slug] || null;
+const rawCityEnhancement = (cityLandingEnhancements as Record<string, any>)[cityInfo.slug] || null;
+
+function normalizeLocalEnhancementLink(link: any) {
+  const href = String(link?.href || '');
+  const browseMatch = href.match(/^\/browse\/([^/]+)\/([^/]+)\/$/);
+  if (!browseMatch) return link;
+  const [, catSlug, citySlug] = browseMatch;
+  const items = categoryGroups.get(catSlug) || [];
+  if (citySlug === cityInfo.slug && items.length >= 5) return link;
+  const label = String(link?.label || catNames[catSlug] || 'Related provider category');
+  return {
+    ...link,
+    label: label.replace(/\s+in\s+.+$/i, ''),
+    href: `/categories/${catSlug}/`,
+  };
+}
+
+const cityEnhancement = rawCityEnhancement
+  ? {
+      ...rawCityEnhancement,
+      priorityLinks: (rawCityEnhancement.priorityLinks || []).map(normalizeLocalEnhancementLink),
+    }
+  : null;
 
 // Map center (use city name for Google Maps embed)
 const mapQuery = `${cityInfo.city}, ${cityInfo.stateAbbr}`;

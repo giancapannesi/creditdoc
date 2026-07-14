@@ -63,7 +63,6 @@ export async function GET(ctx: APIContext): Promise<Response> {
         status: 200,
         headers: {
           "content-type": "application/json; charset=utf-8",
-          "x-cdm-route": "/api/lender/[slug]",
         },
       }),
     { contentVersion: ver }

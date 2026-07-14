@@ -72,16 +72,12 @@ export async function cacheWrap(
 
   const cached = await cache.match(key);
   if (cached) {
-    const hit = new Response(cached.body, cached);
-    hit.headers.set('x-cdm-cache', 'HIT');
-    hit.headers.set('x-cdm-version', String(opts.contentVersion));
-    return hit;
+    return new Response(cached.body, cached);
   }
 
   const fresh = await render();
   // Only cache successful, non-personalized responses.
   if (fresh.status !== 200 || fresh.headers.get('cache-control')?.includes('private')) {
-    fresh.headers.set('x-cdm-cache', 'BYPASS');
     return fresh;
   }
 
@@ -91,14 +87,10 @@ export async function cacheWrap(
     'cache-control',
     `public, max-age=${maxAge}, s-maxage=${maxAge}, immutable`
   );
-  cacheable.headers.set('x-cdm-version', String(opts.contentVersion));
-  cacheable.headers.set('x-cdm-cache', 'MISS');
 
   // Fire-and-forget cache.put per CF Workers pattern.
   // In Astro middleware/endpoints we use ctx.waitUntil; here we await for safety.
   await cache.put(key, cacheable);
 
-  fresh.headers.set('x-cdm-cache', 'MISS');
-  fresh.headers.set('x-cdm-version', String(opts.contentVersion));
   return fresh;
 }

@@ -4,6 +4,73 @@
 
 ---
 
+## 2026-07-14 - Public sanitation / Astro fingerprint reduction
+
+Status: Phase 1 implemented, build verified, daily audit cron installed.
+
+Operating rule:
+- Treat this as a public-quality sanitation program, not a panic rewrite.
+- Do not bulk noindex, remove, redirect, canonical-change, robots-block, sitemap-remove, feed-stop, or route-suppress pages without Jammi's express approval.
+- Do not pause publishing, LinkedIn, Pinterest, IndexNow, GSC queue, or feed crons as part of sanitation work.
+- Pick top pages first using evidence: GSC impressions, commercial value, local lead-capture potential, tools/money-page intent, and regulatory moat.
+- Work in batches. Build/debug before commit.
+
+What changed:
+- Removed public `x-cdm-*` debug/cache headers from middleware/cache/runtime public paths.
+- Removed visible `/r/` SSR pilot/architecture wording.
+- Removed internal city-page labels from `CityLandingEnhancement.astro`:
+  - `Batch {n} priority #{n} local landing page`
+  - `Current GSC signal`
+  - `data-city-enhancement-batch`
+- Added Cloudflare adapter static bypasses for prerendered priority route families:
+  - `/best`, `/city`, `/browse`, `/state`, `/research`, `/resources`
+  - Existing bypasses already covered `/answers`, `/blog`, `/tools`, `/financial-wellness`, `/courses`.
+- Added `scripts/check_public_sanitization_contract.mjs`.
+- Added `npm run check:public-sanitization`.
+- Added `scripts/check_internal_static_links.mjs`.
+- Added `npm run check:internal-static-links` and wired it into postbuild so missing internal links to priority static surfaces fail the build instead of reaching Google/Bing.
+- Wrote the full plan: `reports/seo-debug/public_sanitization_plan_2026-07-14.md`.
+- Converted `/state/<state>/` roots from runtime rendering to static build output.
+- Converted regulatory research pages to static build output:
+  - `/research/consumer-complaints/`
+  - `/research/lending-transparency/`
+- Fixed crawler-facing stale links and installed 301s for:
+  - `/financial-wellness/building-credit/` -> `/financial-wellness/building-credit-from-zero/`
+  - `/best/best-free-credit-monitoring/` -> `/best/best-credit-monitoring-services/`
+  - `/best/lower-cost-personal-loans/` -> `/best/cheapest-personal-loans/`
+  - `/financial-wellness/understanding-credit-scores/` -> `/financial-wellness/credit-score-basics/`
+  - `/best/best-debt-consolidation-companies/` -> `/best/best-debt-consolidation-loans/`
+- Fixed local city/browse aliasing so `fix-my-credit` links resolve to the static `credit-repair` browse pages.
+- Added runtime static fallback logic in middleware so a route with a built same-path static asset can serve that asset if runtime rendering throws.
+
+Priority order:
+1. Top 40 `/city/` and `/browse/` URLs with GSC signal from `reports/local-seo/local_pages_with_gsc_impressions_2026-07-12.csv`.
+2. Commercial tool and money pages: calculators, quizzes, `/best/`, and related answers.
+3. Regulatory moat: `/state/`, lending-law pages, `/research/`, `/resources/`, regulator directory, CFPB/complaint assets.
+4. Remaining local pages in batches of 10.
+5. Review/category/runtime surfaces after static-priority pages are clean.
+
+Verification:
+- `npm run build` passed on 2026-07-14.
+- Build emitted and validated 2,987 HTML pages.
+- Sitemap/schema contract passed with 19,115 sitemap URLs and 0 warnings.
+- Internal static link contract passed:
+  - 162,319 priority internal static links checked.
+  - zero missing static targets after the city/browse alias and stale link fixes.
+- Postbuild sitemap, `/best/`, feed, image alt/filename, and AI-ingestion contracts passed.
+- `npm run check:public-sanitization` passed after rebuild:
+  - 55 priority static pages checked.
+  - zero public `x-cdm-*`, `SSR pilot`, `Architecture:`, batch/priority, GSC signal, city-enhancement data marker, or machine-generated wording matches.
+
+Static status after this batch:
+- Confirmed static SEO surfaces: `/answers/`, `/blog/`, `/best/`, `/tools/`, `/financial-wellness/`, `/courses/`, `/city/`, `/browse/`, `/state/`, `/research/`, `/resources/`, and state lending-law pages.
+- Remaining public hybrid/runtime surfaces to convert in later controlled batches: `/review/`, `/categories/`, `/credit-guide/`, `/brand/`, and `/search/` where appropriate.
+- API/utility routes intentionally remain runtime: `/api/*`, `/go/*`, `/r/*`, `/sitemap.xml`.
+
+Daily cron:
+- Install an alerting audit cron; do not auto-rewrite pages in bulk:
+  - `40 18 * * * cd /srv/BusinessOps/creditdoc && /srv/BusinessOps/.venv/bin/python3 /srv/BusinessOps/tools/cron_alert.py "creditdoc-public-sanitization-contract" /usr/bin/node scripts/check_public_sanitization_contract.mjs >> /srv/BusinessOps/logs/creditdoc_public_sanitization_contract.log 2>&1`
+
 ## 2026-07-12 - City landing pages are being enhanced in batches of 10
 
 Status: Batch 001 committed/pushed; Batch 002 implemented and build/debug verified locally.
