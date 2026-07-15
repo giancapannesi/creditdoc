@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Resubmit CreditDoc sitemap surfaces where API access allows it.
+"""Resubmit the canonical CreditDoc sitemap index where API access allows it.
 
 Bing supports sitemap/feed submission through SubmitFeed. Google Search Console
 requires a write-scoped OAuth token; if the stored token is read-only, this
@@ -24,7 +24,6 @@ GSC_PROPERTY = "sc-domain:creditdoc.co"
 BING_SITE = "https://www.creditdoc.co/"
 SITEMAPS = [
     "https://www.creditdoc.co/sitemap-index.xml",
-    "https://www.creditdoc.co/sitemap.xml",
 ]
 
 sys.path.insert(0, "/srv/BusinessOps/tools")

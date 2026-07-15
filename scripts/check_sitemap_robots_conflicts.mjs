@@ -10,6 +10,13 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 const ROBOTS = join(ROOT, 'public/robots.txt');
 const DIST = join(ROOT, 'dist');
+const FORBIDDEN_SUBMISSION_URLS = [
+  'https://www.creditdoc.co/sitemap.xml',
+];
+const SUBMISSION_SURFACES = [
+  'tools/creditdoc_sitemap_resubmit.py',
+  'scripts/submit-indexnow.sh',
+];
 
 function robotsDisallows() {
   const src = readFileSync(ROBOTS, 'utf8');
@@ -77,6 +84,29 @@ function pathnameFor(url) {
 }
 
 function main() {
+  const staleSubmissions = [];
+  for (const relativePath of SUBMISSION_SURFACES) {
+    const file = join(ROOT, relativePath);
+    if (!existsSync(file)) continue;
+    const src = readFileSync(file, 'utf8');
+    for (const forbiddenUrl of FORBIDDEN_SUBMISSION_URLS) {
+      if (src.includes(forbiddenUrl)) {
+        staleSubmissions.push({ relativePath, forbiddenUrl });
+      }
+    }
+  }
+
+  if (staleSubmissions.length) {
+    console.error('');
+    console.error('Sitemap submission contract FAILED:');
+    for (const { relativePath, forbiddenUrl } of staleSubmissions) {
+      console.error(`  - ${relativePath} submits stale sitemap URL: ${forbiddenUrl}`);
+    }
+    console.error('');
+    console.error('Fix: submit only https://www.creditdoc.co/sitemap-index.xml to search engines.');
+    process.exit(1);
+  }
+
   const missingSitemaps = [];
   for (const sitemapUrl of robotsSitemaps()) {
     const pathname = pathnameFor(sitemapUrl);

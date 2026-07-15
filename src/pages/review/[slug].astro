@@ -12,7 +12,7 @@ import InfoLink from '../../components/InfoLink.astro';
 import StateRegulatoryContext from '../../components/StateRegulatoryContext.astro';
 import cfpbResponsiveReport from '../../data/cfpb-responsive-providers-2026.json';
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
-import { buildCategoryHref, buildLenderGoHref, normalizeTelHref } from '../../utils/outbound';
+import { buildCategoryHref, buildCityHref, buildCitySlug, buildLenderGoHref, buildLocalBrowseHref, canonicalCategorySlug, normalizeTelHref } from '../../utils/outbound';
 import { softenEducationalTeaserCopy, softenYmylCopy } from '../../utils/safe-copy';
 import {
   getBbbClass,
@@ -23,11 +23,13 @@ import {
   getAllLenders,
   getBrandInfo,
   getCategories,
+  getCitiesWithLenders,
   getClusterAnswersByPillar,
   getComparisons,
   getGlossaryTermsForContext,
   getHMDAData,
   getLendersByCategory,
+  getLendersByCityState,
   getRegulatorData,
   getStateData,
   getWellnessGuidesByCategory,
@@ -172,6 +174,24 @@ const cityName = lender.company_info?.city || '';
 const regionName = stateAbbr || lender.company_info?.state || '';
 const locationLabel = [cityName, regionName].filter(Boolean).join(', ');
 const categoryLabel = category?.name || lender.category.replace(/-/g, ' ');
+const generatedCitySlugs = new Set(getCitiesWithLenders(5).map((city) => city.slug));
+const localCitySlug = buildCitySlug(cityName, stateAbbr);
+const cityHref = localCitySlug && generatedCitySlugs.has(localCitySlug)
+  ? buildCityHref(cityName, stateAbbr)
+  : null;
+const localCategorySlug = canonicalCategorySlug(lender.category);
+const localCategoryCount = cityName && stateAbbr
+  ? getLendersByCityState(cityName, stateAbbr).filter((candidate) => candidate.category === localCategorySlug).length
+  : 0;
+const localBrowseHref = cityHref && localCategoryCount >= 5
+  ? buildLocalBrowseHref(lender.category, cityName, stateAbbr)
+  : null;
+const localMoneyHref = localBrowseHref || cityHref;
+const localMoneyLabel = localBrowseHref
+  ? `${categoryLabel} in ${cityName}`
+  : cityHref
+    ? `Loan companies in ${cityName}`
+    : 'Local credit guides';
 const statesByAbbr = getStateData();
 const stateRegulatoryContext = stateAbbr ? (statesByAbbr[stateAbbr] || null) : null;
 const regulatorData = getRegulatorData(lender.slug);
@@ -286,6 +306,13 @@ const reviewDecisionPaths = [
     label: 'Compare alternatives',
     body: `Review related ${categoryLabel.toLowerCase()} options before relying on one profile.`,
   },
+  ...(localMoneyHref ? [{
+    href: localMoneyHref,
+    label: localMoneyLabel,
+    body: localBrowseHref
+      ? `Review local ${categoryLabel.toLowerCase()} profiles and city-level context for ${cityName}.`
+      : `Review loan companies, credit repair, personal loans, and local finance context for ${cityName}.`,
+  }] : []),
   {
     href: '/courses/credit-fundamentals/',
     label: 'Credit fundamentals course',

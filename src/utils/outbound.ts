@@ -42,10 +42,39 @@ const categoryRouteAliases: Record<string, string> = {
   "payday-loans": "payday-alternatives",
 };
 
+export function canonicalCategorySlug(category?: string): string {
+  if (!category) return "credit-repair";
+  return categoryRouteAliases[category] || category;
+}
+
 export function buildCategoryHref(category?: string): string {
-  if (!category) return "/categories/credit-repair/";
-  const canonicalCategory = categoryRouteAliases[category] || category;
-  return `/categories/${encodeURIComponent(canonicalCategory)}/`;
+  return `/categories/${encodeURIComponent(canonicalCategorySlug(category))}/`;
+}
+
+export function slugifyLocalPart(value?: string): string {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function buildCitySlug(city?: string, stateAbbr?: string): string | null {
+  const citySlug = slugifyLocalPart(city);
+  const stateSlug = slugifyLocalPart(stateAbbr);
+  if (!citySlug || !stateSlug) return null;
+  return `${citySlug}-${stateSlug}`;
+}
+
+export function buildCityHref(city?: string, stateAbbr?: string): string | null {
+  const citySlug = buildCitySlug(city, stateAbbr);
+  return citySlug ? `/city/${citySlug}/` : null;
+}
+
+export function buildLocalBrowseHref(category?: string, city?: string, stateAbbr?: string): string | null {
+  const citySlug = buildCitySlug(city, stateAbbr);
+  if (!citySlug) return null;
+  return `/browse/${encodeURIComponent(canonicalCategorySlug(category))}/${citySlug}/`;
 }
 
 export function buildLenderFallbackHref(lender: ReviewLinkCandidate): string {

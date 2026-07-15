@@ -1070,7 +1070,7 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
         if (!geo.city || !geo.regionCode) return;
 
         const slug = `${geo.city.toLowerCase().replace(/\s+/g, '-')}-${geo.regionCode.toLowerCase()}`;
-        const check = await fetch(`/credit-guide/${slug}/`, { method: 'HEAD' });
+        const check = await fetch(`/city/${slug}/`, { method: 'HEAD' });
         if (!check.ok) return;
 
         const block = document.getElementById('local-guide-block');
@@ -1078,8 +1078,8 @@ const combinedJsonLd = [jsonLd, faqJsonLd, breadcrumbJsonLd];
         const title = document.getElementById('local-guide-title');
         const desc = document.getElementById('local-guide-desc');
 
-        link.href = `/credit-guide/${slug}/`;
-        title.textContent = `Credit Repair & Financial Services in ${geo.city}, ${geo.regionCode}`;
+        link.href = `/city/${slug}/`;
+        title.textContent = `Loan Companies in ${geo.city}, ${geo.regionCode}`;
         desc.textContent = `Local lenders, ${geo.region} state regulations, credit repair companies, and free resources in ${geo.city}.`;
         block.classList.remove('hidden');
       } catch {}

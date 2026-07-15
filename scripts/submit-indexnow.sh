@@ -7,7 +7,6 @@ key_location="https://${host}/${key}.txt"
 
 urls=(
   "https://www.creditdoc.co/"
-  "https://www.creditdoc.co/sitemap.xml"
   "https://www.creditdoc.co/sitemap-index.xml"
 )
 

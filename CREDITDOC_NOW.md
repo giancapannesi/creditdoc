@@ -7334,3 +7334,37 @@ Social rollout:
 - Google validation guidance:
   - The crawler-export guard is now green, so it is reasonable to request validation for the duplicate-canonical and 404 fix groups.
   - Do not bulk noindex or remove valid city/review pages; this fix keeps valid pages live and stops stale/bad URLs from being advertised.
+
+## 2026-07-15 - Structural SEO routing and sitemap submission cleanup
+
+- Treated the GSC/Bing 404/5XX/canonical damage as a crawler-facing reliability issue, not a cosmetic SEO issue.
+- Removed the second sitemap submission path:
+  - `/sitemap.xml` now 301 redirects to `/sitemap-index.xml` instead of emitting a stale parallel sitemap index.
+  - `tools/creditdoc_sitemap_resubmit.py` now submits only `https://www.creditdoc.co/sitemap-index.xml`.
+  - `scripts/submit-indexnow.sh` no longer submits `https://www.creditdoc.co/sitemap.xml`.
+  - `scripts/check_sitemap_robots_conflicts.mjs` now fails postbuild if any sitemap submission script reintroduces the stale sitemap URL.
+- Fixed local route helpers:
+  - added canonical category, city slug, city href, and local browse href builders in `src/utils/outbound.ts`;
+  - borrowing-power quiz now points local users to `/city/{city-state}/`, not `/credit-guide/{city-state}/`;
+  - review pages now route internal equity into generated static city hubs or valid generated `/browse/{category}/{city}/` pages only.
+- Debugger caught a real unsafe first attempt:
+  - first full build failed `check_internal_static_links.mjs` with 4,305 unique missing static targets because review pages linked to city/browse URLs that were not generated;
+  - fixed by only linking review pages to city slugs from `getCitiesWithLenders(5)` and browse routes with at least five matching local lenders;
+  - second full build passed.
+- Full verification on 2026-07-15:
+  - `npm run build` completed successfully (`sitemap-index.xml` created at `dist`);
+  - no truncated SEO fields;
+  - static HTML contract OK;
+  - crawler export guard OK: `2071` exported URL rows, `95` static, `1976` redirected, `sitemap leaks=0`, `bad redirect targets=0`;
+  - geo architecture contract OK;
+  - sitemap/robots OK;
+  - critical sitemap URLs OK;
+  - schema/sitemap contract OK: `sitemap URLs=19460`, `HTML pages=19097`, `warnings=0`;
+  - Best title intent OK;
+  - feeds OK;
+  - image alt/filename checks OK;
+  - AI ingestion OK;
+  - internal static links OK: `1051694` internal static links checked.
+- Standing rule reinforced:
+  - no bulk noindex, removals, robots blocks, canonical rewrites, feed pauses, social pauses, or city-page suppression without explicit approval;
+  - structural fixes must be verified by full build/debugger contracts before commit.
