@@ -18,6 +18,8 @@ Core conclusion:
 - City pages are strategic lead-capture assets. Do not noindex, remove, suppress, or blame them without measured evidence.
 - Current authority is too low for the site footprint: Domain Trust 15, 3 referring domains, 4 backlinks, 19K sitemap URLs, and only about 7.8K estimated indexed pages.
 - `/review/` pages currently carry most traffic and should route equity into the local architecture.
+- SE Ranking rank tracker is now expanded to 91 keywords in the CreditDoc project, Google USA: original 5 plus 86 additions across City Consumer Loans (40), City Business Loans (14), City Credit Repair (12), State Terms (8), and National Heads (12). Quota is 178/500, leaving 322 slots for Tier B city expansion after first rankings settle.
+- City credit-card keywords were intentionally not added because the data showed no useful city-level credit-card demand; credit cards stay national `/best/` and category-page targets.
 
 Geo route rules:
 - `/city/{city}/` is the local hub for `loan companies in {city}`, `{city} credit repair companies`, and `financial services {city}`.
