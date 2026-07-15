@@ -123,6 +123,10 @@ const otherCities = siblingGuides.filter(g => g.slug !== slug).slice(0, 8);
 
 // Related categories for sidebar
 const relatedCategories = categories.filter(c => c.slug !== category).slice(0, 10);
+const localRelatedCategoryHref = (categorySlug: string) => {
+  if (categorySlug === 'credit-cards') return buildCategoryHref(categorySlug);
+  return `/city/${slug}/`;
+};
 
 // Category-to-answer keyword mapping for relevant questions
 const categoryAnswerKeywords: Record<string, string[]> = {
@@ -518,7 +522,7 @@ const jsonLd = [
           <ul class="space-y-2">
             {relatedCategories.map(cat => (
               <li>
-                <a href={`/credit-guide/${slug}/${cat.slug}/`} class="text-sm text-muted hover:text-primary transition-colors" style="pointer-events: auto;">
+                <a href={localRelatedCategoryHref(cat.slug)} class="text-sm text-muted hover:text-primary transition-colors" style="pointer-events: auto;">
                   {cat.name} in {city}
                 </a>
               </li>
@@ -533,7 +537,7 @@ const jsonLd = [
             <ul class="space-y-2">
               {otherCities.map(g => (
                 <li>
-                  <a href={`/credit-guide/${g.slug}/${category}/`} class="text-sm text-muted hover:text-primary transition-colors" style="pointer-events: auto;">
+                  <a href={`/city/${g.slug}/`} class="text-sm text-muted hover:text-primary transition-colors" style="pointer-events: auto;">
                     {catName} in {g.city}
                   </a>
                 </li>

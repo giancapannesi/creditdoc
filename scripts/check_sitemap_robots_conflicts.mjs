@@ -39,6 +39,17 @@ function robotsDisallows() {
   return rules;
 }
 
+function robotsSitemaps() {
+  const src = readFileSync(ROBOTS, 'utf8');
+  const urls = [];
+  for (const rawLine of src.split('\n')) {
+    const line = rawLine.replace(/#.*/, '').trim();
+    const match = line.match(/^sitemap:\s*(\S+)/i);
+    if (match) urls.push(match[1]);
+  }
+  return urls;
+}
+
 function sitemapUrls() {
   if (!existsSync(DIST)) {
     throw new Error('dist/ does not exist. Run this after astro build.');
@@ -66,9 +77,26 @@ function pathnameFor(url) {
 }
 
 function main() {
+  const missingSitemaps = [];
+  for (const sitemapUrl of robotsSitemaps()) {
+    const pathname = pathnameFor(sitemapUrl);
+    if (!pathname) continue;
+    const localFile = join(DIST, pathname.replace(/^\/+/, ''));
+    if (!existsSync(localFile)) missingSitemaps.push(sitemapUrl);
+  }
+
+  if (missingSitemaps.length) {
+    console.error('');
+    console.error('Robots sitemap advertisement FAILED:');
+    for (const sitemapUrl of missingSitemaps) console.error(`  - ${sitemapUrl} is advertised in robots.txt but missing from dist/`);
+    console.error('');
+    console.error('Fix: advertise only generated sitemap files in public/robots.txt.');
+    process.exit(1);
+  }
+
   const rules = robotsDisallows();
   if (!rules.length) {
-    console.log('[sitemap-robots] OK — no User-agent:* Disallow rules to compare.');
+    console.log('[sitemap-robots] OK — advertised sitemap files exist; no User-agent:* Disallow rules to compare.');
     return;
   }
 

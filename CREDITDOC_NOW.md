@@ -6,7 +6,7 @@
 
 ## 2026-07-15 - Geo architecture strategy adopted
 
-Status: plan saved; first implementation pass in progress.
+Status: first implementation pass verified; commit pending.
 
 Source strategy:
 - `/srv/BusinessOps/CreditDoc_SEO/creditdoc-city-page-targeting-strategy.md`
@@ -31,15 +31,22 @@ Immediate implementation notes:
   `/srv/BusinessOps/CreditDoc_SEO/gsc_reports/creditdoc.co-Coverage-Drilldown-2026-07-14 - Table.csv`
 - Running `node scripts/check_crawler_error_exports.mjs` after adding that input exposed 154 unresolved rows / 94 unique paths.
 - Those 154 unresolved rows were resolved with explicit 301 redirects. The crawler guard now checks 2,071 exported rows: 95 static, 1,976 redirected, 0 sitemap leaks, 0 bad redirect targets.
-- `/credit-guide/{city}/` root links were patched so category links route to `/browse/{category}/{city}/` when there is enough city-specific provider coverage, otherwise back to the city guide; credit-card city links route to the category hub because useful city-level credit-card demand is effectively zero.
+- `/credit-guide/{city}/` root links were patched so category links no longer emit runtime `/browse/` links that may not exist as static HTML. They now route back to the city hub/guide, while credit-card city links route to the category hub because useful city-level credit-card demand is effectively zero.
 - Category pages no longer point priority local links at noindex `/credit-guide/{city}/{category}/` pages.
-- Added `scripts/check_geo_architecture_contract.mjs` and wired it into `npm run postbuild` so priority source files fail if they reintroduce links to noindex city-category guide URLs.
+- Nested `/credit-guide/{city}/{category}/` pages were also patched so related-city/category links stop pointing at noindex nested guide URLs.
+- Removed stale `https://www.creditdoc.co/sitemap.xml` from `public/robots.txt`; only the generated `sitemap-index.xml` is advertised now.
+- Extended `scripts/check_sitemap_robots_conflicts.mjs` so postbuild fails if robots advertises a sitemap file that does not exist in `dist/`.
+- Added/extended `scripts/check_geo_architecture_contract.mjs` and wired it into `npm run postbuild` so priority source files fail if they reintroduce links to noindex city-category guide URLs.
+- Fixed one bad lender SEO source record with an ellipsis in `meta_description`: `src/content/lenders/server-unavailable-possibly-it-is-restarting-please-try-later.json`.
+- Debugger review found and the implementation fixed: stale robots sitemap advertisement, runtime links to possibly unbuilt `/browse/` pages, remaining nested noindex credit-guide links, and overly broad compare-page redirects.
+- Verification passed after fixes:
+  - `npm run build` completed.
+  - `npm run postbuild` passed all contracts: no truncated SEO fields, static HTML, crawler exports, geo architecture, sitemap/robots, critical sitemap URLs, schema/sitemap, Best SERP titles, feeds, image alt/filenames, AI ingestion, and internal static links.
 - Next implementation steps:
-  1. Finish the current full build and postbuild debugger run.
-  2. Add a geo architecture inventory report for `/city/`, `/browse/`, `/credit-guide/`, `/state/`, and `/review/`.
-  3. Patch `/review/` pages so profile equity routes into city hubs and valid `/browse/{category}/{city}/` pages.
-  4. Add canonical coverage audit/fix after the current crawler-export/link-contract changes are committed.
-  5. Commit and push only after checks pass.
+  1. Add a geo architecture inventory report for `/city/`, `/browse/`, `/credit-guide/`, `/state/`, and `/review/`.
+  2. Patch `/review/` pages so profile equity routes into city hubs and valid static local money pages.
+  3. Add canonical coverage audit/fix after the current crawler-export/link-contract changes are committed.
+  4. Continue authority/link acquisition work from the CFPB/review data set.
 
 ## 2026-07-14 - Crawler error export guard and duplicate-validation diagnosis
 

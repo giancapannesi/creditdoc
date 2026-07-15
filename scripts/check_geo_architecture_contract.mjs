@@ -12,11 +12,13 @@ const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 
 const priorityFiles = [
   'src/pages/credit-guide/[slug]/index.astro',
+  'src/pages/credit-guide/[slug]/[category].astro',
   'src/pages/categories/[category].astro',
 ];
 
 const prohibitedPatterns = [
   /href=\{`\/credit-guide\/\$\{slug\}\/\$\{[^}]+\}\/?`\}/,
+  /href=\{`\/credit-guide\/\$\{g\.slug\}\/\$\{category\}\/?`\}/,
   /href:\s*`\/credit-guide\/\$\{city\.slug\}\/\$\{categorySlug\}\/?`/,
 ];
 
