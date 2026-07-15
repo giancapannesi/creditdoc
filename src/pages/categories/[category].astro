@@ -103,7 +103,9 @@ const localGuideCities = [
 ];
 const localCategoryLinks = localGuideCities.map(city => ({
   ...city,
-  href: `/credit-guide/${city.slug}/${categorySlug}/`,
+  href: categorySlug === 'credit-cards'
+    ? '/categories/credit-cards/'
+    : `/city/${city.slug}/`,
 }));
 const categoryMoneyMap: Record<string, { href: string; label: string; body: string }> = {
   'business-loans': {

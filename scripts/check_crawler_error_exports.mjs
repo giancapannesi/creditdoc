@@ -14,6 +14,7 @@ const REDIRECTS = join(ROOT, 'public', '_redirects');
 const EXPORTS = [
   join(ROOT, 'SEO', 'Table 404 Missing Pages.csv'),
   join(ROOT, 'SEO', 'Table - Duplicates.csv'),
+  '/srv/BusinessOps/CreditDoc_SEO/gsc_reports/creditdoc.co-Coverage-Drilldown-2026-07-14 - Table.csv',
 ];
 
 function parseCsv(text) {

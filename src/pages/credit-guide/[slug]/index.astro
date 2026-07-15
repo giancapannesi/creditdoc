@@ -19,6 +19,7 @@ import {
   type HMDAGeoStats,
 } from '../../../lib/db';
 import type { Lender } from '../../../utils/data';
+import { buildCategoryHref } from '../../../utils/outbound';
 
 const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
 const { slug } = Astro.params;
@@ -83,6 +84,22 @@ for (const l of nearbyLenders) {
   if (!categoryGroups.has(l.category)) categoryGroups.set(l.category, []);
   categoryGroups.get(l.category)!.push(l);
 }
+
+const localCategoryRouteAliases: Record<string, string> = {
+  'debt-consolidation': 'debt-relief',
+  'fix-my-credit': 'credit-repair',
+  'payday-loans': 'payday-alternatives',
+};
+const citySpecificCategoryCount = (categorySlug: string) =>
+  cityLenders.filter(l => l.category === categorySlug).length;
+const localCategoryHref = (categorySlug: string) => {
+  const canonicalCategory = localCategoryRouteAliases[categorySlug] || categorySlug;
+  if (canonicalCategory === 'credit-cards') return buildCategoryHref(canonicalCategory);
+  if (citySpecificCategoryCount(categorySlug) >= 5) {
+    return `/browse/${canonicalCategory}/${slug}/`;
+  }
+  return `/credit-guide/${slug}/`;
+};
 
 // Sibling city guides in same state
 const siblingGuides = await getCityGuidesByStateRuntime(stateAbbr, env, 20);
@@ -266,7 +283,7 @@ const jsonLd = [
         Use this guide as a local starting point: compare provider categories, check {stateName} lending rules, read consumer-finance answers, and use CreditDoc tools before contacting a company.
       </p>
       <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        <a href={`/credit-guide/${slug}/personal-loans/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+        <a href={localCategoryHref('personal-loans')} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
           Personal loans in {city}
         </a>
         <a href={`/state/${stateSlug}/lending-laws/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
@@ -632,7 +649,7 @@ const jsonLd = [
           <ul class="space-y-2">
             {categories.slice(0, 10).map(cat => (
               <li>
-                <a href={`/credit-guide/${slug}/${cat.slug}/`} class="text-sm text-muted hover:text-primary transition-colors flex items-center justify-between" style="pointer-events: auto;">
+                <a href={localCategoryHref(cat.slug)} class="text-sm text-muted hover:text-primary transition-colors flex items-center justify-between" style="pointer-events: auto;">
                   <span>{cat.name} in {city}</span>
                   {categoryGroups.get(cat.slug) && (
                     <span class="text-xs bg-primary-light text-primary px-2 py-0.5 rounded-full">{categoryGroups.get(cat.slug)!.length}</span>
@@ -647,14 +664,14 @@ const jsonLd = [
         <div class="glass-card p-5 border-primary border" style="pointer-events: none;">
           <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">Local Guide Paths for {city} Residents</h3>
           <ul class="space-y-2 text-sm">
-            <li><a href={`/credit-guide/${slug}/credit-repair/`} class="text-primary hover:underline" style="pointer-events: auto;">Credit Repair in {city}</a></li>
-            <li><a href={`/credit-guide/${slug}/personal-loans/`} class="text-primary hover:underline" style="pointer-events: auto;">Personal Loans in {city}</a></li>
-            <li><a href={`/credit-guide/${slug}/emergency-cash/`} class="text-primary hover:underline" style="pointer-events: auto;">Emergency Cash in {city}</a></li>
-            <li><a href={`/credit-guide/${slug}/debt-relief/`} class="text-primary hover:underline" style="pointer-events: auto;">Debt Relief in {city}</a></li>
-            <li><a href={`/credit-guide/${slug}/build-credit/`} class="text-primary hover:underline" style="pointer-events: auto;">Credit Building in {city}</a></li>
-            <li><a href={`/credit-guide/${slug}/free-help/`} class="text-primary hover:underline" style="pointer-events: auto;">Free Help in {city}</a></li>
-            <li><a href={`/credit-guide/${slug}/business-loans/`} class="text-primary hover:underline" style="pointer-events: auto;">Small Business Loans in {city}</a></li>
-            <li><a href={`/credit-guide/${slug}/pawn-shops/`} class="text-primary hover:underline" style="pointer-events: auto;">Pawn Shops in {city}</a></li>
+            <li><a href={localCategoryHref('credit-repair')} class="text-primary hover:underline" style="pointer-events: auto;">Credit Repair in {city}</a></li>
+            <li><a href={localCategoryHref('personal-loans')} class="text-primary hover:underline" style="pointer-events: auto;">Personal Loans in {city}</a></li>
+            <li><a href={localCategoryHref('emergency-cash')} class="text-primary hover:underline" style="pointer-events: auto;">Emergency Cash in {city}</a></li>
+            <li><a href={localCategoryHref('debt-relief')} class="text-primary hover:underline" style="pointer-events: auto;">Debt Relief in {city}</a></li>
+            <li><a href={localCategoryHref('build-credit')} class="text-primary hover:underline" style="pointer-events: auto;">Credit Building in {city}</a></li>
+            <li><a href={localCategoryHref('free-help')} class="text-primary hover:underline" style="pointer-events: auto;">Free Help in {city}</a></li>
+            <li><a href={localCategoryHref('business-loans')} class="text-primary hover:underline" style="pointer-events: auto;">Small Business Loans in {city}</a></li>
+            <li><a href={localCategoryHref('pawn-shops')} class="text-primary hover:underline" style="pointer-events: auto;">Pawn Shops in {city}</a></li>
           </ul>
           <div class="mt-4">
             <a href="/tools/borrowing-power-quiz/" class="block w-full text-center py-2 px-4 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors" style="pointer-events: auto;">

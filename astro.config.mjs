@@ -33,12 +33,14 @@ function loadCrawlerExportSitemapExclusions() {
   const files = [
     'SEO/Table 404 Missing Pages.csv',
     'SEO/Table - Duplicates.csv',
+    '/srv/BusinessOps/CreditDoc_SEO/gsc_reports/creditdoc.co-Coverage-Drilldown-2026-07-14 - Table.csv',
   ];
   const exclusions = new Set();
 
   for (const relativePath of files) {
     try {
-      const text = readFileSync(join(process.cwd(), relativePath), 'utf8').replace(/^\uFEFF/, '');
+      const inputPath = relativePath.startsWith('/') ? relativePath : join(process.cwd(), relativePath);
+      const text = readFileSync(inputPath, 'utf8').replace(/^\uFEFF/, '');
       for (const match of text.matchAll(/https?:\/\/(?:www\.)?creditdoc\.co\/[^"',\s]+/g)) {
         const normalized = normalizeSitemapUrl(match[0]);
         if (normalized) exclusions.add(normalized);

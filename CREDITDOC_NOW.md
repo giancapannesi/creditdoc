@@ -4,6 +4,43 @@
 
 ---
 
+## 2026-07-15 - Geo architecture strategy adopted
+
+Status: plan saved; first implementation pass in progress.
+
+Source strategy:
+- `/srv/BusinessOps/CreditDoc_SEO/creditdoc-city-page-targeting-strategy.md`
+- `/srv/BusinessOps/CreditDoc_SEO/creditdoc-architecture-find-fix-plan v2.md`
+- Repo plan: `reports/seo-debug/geo_architecture_resolution_plan_2026-07-15.md`
+
+Core conclusion:
+- CreditDoc's local problem is authority plus architecture, not thin city pages.
+- City pages are strategic lead-capture assets. Do not noindex, remove, suppress, or blame them without measured evidence.
+- Current authority is too low for the site footprint: Domain Trust 15, 3 referring domains, 4 backlinks, 19K sitemap URLs, and only about 7.8K estimated indexed pages.
+- `/review/` pages currently carry most traffic and should route equity into the local architecture.
+
+Geo route rules:
+- `/city/{city}/` is the local hub for `loan companies in {city}`, `{city} credit repair companies`, and `financial services {city}`.
+- `/browse/{category}/{city}/` is the preferred category-city money page for `personal loans {city}`, `business loans {city}`, and similar supported verticals.
+- `/credit-guide/{city}/` can remain as supporting local education where useful.
+- `/credit-guide/{city}/{category}/` is already `noindex, follow` and omitted from sitemap, but should stop receiving internal links as the ranking target when a valid `/browse/{category}/{city}/` page exists.
+- Do not geo-target credit cards; the evidence shows effectively zero useful city-level credit-card demand. Fight credit cards on `/best/` and national category pages later.
+
+Immediate implementation notes:
+- Added the newer GSC coverage drilldown export as a crawler-error input:
+  `/srv/BusinessOps/CreditDoc_SEO/gsc_reports/creditdoc.co-Coverage-Drilldown-2026-07-14 - Table.csv`
+- Running `node scripts/check_crawler_error_exports.mjs` after adding that input exposed 154 unresolved rows / 94 unique paths.
+- Those 154 unresolved rows were resolved with explicit 301 redirects. The crawler guard now checks 2,071 exported rows: 95 static, 1,976 redirected, 0 sitemap leaks, 0 bad redirect targets.
+- `/credit-guide/{city}/` root links were patched so category links route to `/browse/{category}/{city}/` when there is enough city-specific provider coverage, otherwise back to the city guide; credit-card city links route to the category hub because useful city-level credit-card demand is effectively zero.
+- Category pages no longer point priority local links at noindex `/credit-guide/{city}/{category}/` pages.
+- Added `scripts/check_geo_architecture_contract.mjs` and wired it into `npm run postbuild` so priority source files fail if they reintroduce links to noindex city-category guide URLs.
+- Next implementation steps:
+  1. Finish the current full build and postbuild debugger run.
+  2. Add a geo architecture inventory report for `/city/`, `/browse/`, `/credit-guide/`, `/state/`, and `/review/`.
+  3. Patch `/review/` pages so profile equity routes into city hubs and valid `/browse/{category}/{city}/` pages.
+  4. Add canonical coverage audit/fix after the current crawler-export/link-contract changes are committed.
+  5. Commit and push only after checks pass.
+
 ## 2026-07-14 - Crawler error export guard and duplicate-validation diagnosis
 
 Status: implemented and committed after the static state/review stabilization.
