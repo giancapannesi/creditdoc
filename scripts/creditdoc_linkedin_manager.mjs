@@ -25,6 +25,7 @@ const FILE_ENV = loadEnv();
 const CDN_DIR = process.env.CREDITDOC_SOCIAL_CDN_DIR || '/var/www/html/social-media';
 const CDN_BASE = (process.env.CREDITDOC_SOCIAL_CDN_BASE || 'https://cdn.supagum.com').replace(/\/$/, '');
 const BLOTATO_PROXY = (process.env.BLOTATO_PROXY || FILE_ENV.BLOTATO_PROXY || 'http://localhost:8098').replace(/\/$/, '');
+const PINTEREST_DISABLED = ['1', 'true', 'yes'].includes(String(process.env.PINTEREST_DISABLED || FILE_ENV.PINTEREST_DISABLED || '').toLowerCase());
 const BLOTATO_PINTEREST_ACCOUNT_ID = process.env.BLOTATO_PINTEREST_ACCOUNT_ID || FILE_ENV.BLOTATO_PINTEREST_ACCOUNT_ID || '7943';
 const BLOTATO_PINTEREST_BOARD_ID = process.env.BLOTATO_PINTEREST_BOARD_ID || FILE_ENV.BLOTATO_PINTEREST_BOARD_ID || '';
 
@@ -1212,6 +1213,21 @@ async function uploadLinkedInImage(env, imagePath) {
 }
 
 async function publishPinterestViaBlotato(draft, imagePath, options = {}) {
+  if (PINTEREST_DISABLED) {
+    const skipped = {
+      ok: false,
+      skipped: 'Pinterest disabled by explicit PINTEREST_DISABLED setting',
+      account_id: BLOTATO_PINTEREST_ACCOUNT_ID || null,
+      board_id: BLOTATO_PINTEREST_BOARD_ID || null,
+    };
+    appendJsonl(PINTEREST_LOG_FILE, {
+      ...skipped,
+      id: draft.id,
+      target_url: draft.target_url,
+      created_at: new Date().toISOString(),
+    });
+    return skipped;
+  }
   const nowDate = options.date || today();
   const duplicate = recentPinterestDuplicate(draft.target_url, nowDate);
   if (duplicate && !options.allowDuplicate) {
@@ -1432,6 +1448,15 @@ async function runScheduledResources(args) {
 }
 
 async function runScheduledPinterest(args) {
+  if (PINTEREST_DISABLED) {
+    console.log(JSON.stringify({
+      ok: true,
+      command: 'run-scheduled-pinterest',
+      published: null,
+      skipped: 'Pinterest disabled by explicit PINTEREST_DISABLED setting',
+    }, null, 2));
+    return;
+  }
   const dryRun = args.includes('--dry-run');
   const dateArg = args.includes('--date') ? args[args.indexOf('--date') + 1] : args.find((arg) => arg.startsWith('--date='))?.slice(7);
   const nowDate = today(dateArg);

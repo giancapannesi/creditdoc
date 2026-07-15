@@ -43,6 +43,26 @@ Debugger verification:
   - AI ingestion contract
   - internal static link contract
 
+Follow-up repo cleanup:
+- Sorted the remaining dirty repo files after the local keyword commit.
+- The untracked report files were valid daily outputs from existing tracked report families and should be committed, not deleted:
+  - `reports/bing-indexnow-watchdog/bing_indexnow_watchdog_2026-07-14.json`
+  - `reports/bing-indexnow-watchdog/bing_indexnow_watchdog_2026-07-15.json`
+  - `reports/bing-recovery/bing_recovery_2026-07-14.md`
+  - `reports/bing-recovery/bing_recovery_2026-07-15.md`
+  - `reports/regulatory-refresh/regulatory_next_phase_2026-07-14.md`
+  - `reports/regulatory-refresh/regulatory_next_phase_2026-07-15.md`
+  - `reports/regulatory-refresh/regulatory_seo_execution_2026-07-14.md`
+  - `reports/regulatory-refresh/regulatory_seo_execution_2026-07-15.md`
+  - `reports/sitemap-resubmissions/sitemap_resubmit_2026-07-14.md`
+  - `reports/sitemap-resubmissions/sitemap_resubmit_2026-07-15.md`
+- `src/content/comparisons.json` had two generated Amscot vs Advance America comparisons from the comparison-generation lane; JSON validates with 391 rows and 0 duplicate slugs.
+- `scripts/creditdoc_linkedin_manager.mjs` had an uncommitted Pinterest skip path. It was corrected so Pinterest only skips when `PINTEREST_DISABLED=true/1/yes` is explicitly set; otherwise it keeps the normal account fallback. Do not stop Pinterest/LinkedIn/social publishing without explicit approval.
+- Validation run:
+  - `node --check scripts/creditdoc_linkedin_manager.mjs`
+  - `node scripts/creditdoc_linkedin_manager.mjs audit-social-duplicates --date 2026-07-15`
+  - `node -e` JSON validation for `src/content/comparisons.json`
+
 ## 2026-07-15 - Geo architecture strategy adopted
 
 Status: first implementation pass verified; commit pending.
