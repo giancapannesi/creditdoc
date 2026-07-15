@@ -4,6 +4,45 @@
 
 ---
 
+## 2026-07-15 - Local landing keyword/meta/subtitle targeting
+
+Status: implemented, debugger/postbuild verified; commit/push pending.
+
+What changed:
+- Updated `/city/{city}/` pages so the primary local keyword is used naturally in the title, meta description, H1, H2 subtitles, hero copy, and CollectionPage schema.
+- City pages now target `loan companies in {city}` as the hub phrase, while also including `{city} credit repair`, `personal loans {city}`, and `business loans {city}` in the description and page sections.
+- Updated `/browse/{category}/{city}/` pages with category-specific keyword targeting:
+  - `/browse/personal-loans/{city}/`: `Personal Loans {city}, {state}` plus `Personal Loan Companies in {city}`.
+  - `/browse/business-loans/{city}/`: `Business Loans {city}, {state}` plus `Business Loan Companies in {city}`.
+  - `/browse/credit-repair/{city}/`: `{city} Credit Repair Companies` plus `Credit Repair Companies in {city}`.
+- Meta descriptions are concise, local, and keyword-aware without stuffing. Rendered examples stayed under 170 characters and did not use ellipses.
+- Added explicit 301 redirects for the new 2026-07-15 GSC crawler-error review exports so stale review URLs resolve to relevant static category/state hubs instead of lingering as crawler errors.
+
+Debugger verification:
+- Render-inspected 10 target pages across Dallas, Houston, Tulsa, and Atlanta:
+  - `/city/dallas-tx/`
+  - `/browse/personal-loans/dallas-tx/`
+  - `/browse/business-loans/dallas-tx/`
+  - `/browse/credit-repair/dallas-tx/`
+  - `/city/houston-tx/`
+  - `/browse/personal-loans/houston-tx/`
+  - `/browse/business-loans/houston-tx/`
+  - `/city/tulsa-ok/`
+  - `/city/atlanta-ga/`
+  - `/browse/personal-loans/atlanta-ga/`
+- `npm run postbuild` passed after the changes:
+  - no truncated SEO fields
+  - static HTML contract
+  - crawler-error export guard
+  - geo architecture contract
+  - sitemap/robots and critical sitemap checks
+  - schema/sitemap contract
+  - Best SERP contract
+  - feed contract
+  - image alt and filename contracts
+  - AI ingestion contract
+  - internal static link contract
+
 ## 2026-07-15 - Geo architecture strategy adopted
 
 Status: first implementation pass verified; commit pending.

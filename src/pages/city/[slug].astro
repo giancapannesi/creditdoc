@@ -72,13 +72,19 @@ const cityEnhancement = rawCityEnhancement
 
 // Map center (use city name for Google Maps embed)
 const mapQuery = `${cityInfo.city}, ${cityInfo.stateAbbr}`;
+const localKeyword = `loan companies in ${cityInfo.city}`;
+const creditRepairKeyword = `${cityInfo.city} credit repair`;
+const personalLoansKeyword = `personal loans ${cityInfo.city}`;
+const businessLoansKeyword = `business loans ${cityInfo.city}`;
+const seoTitle = `Loan Companies in ${cityInfo.city}, ${cityInfo.stateAbbr} | CreditDoc`;
+const seoDescription = `Compare ${localKeyword}, ${creditRepairKeyword}, ${personalLoansKeyword}, and financial service profiles in ${cityInfo.city}, ${cityInfo.stateAbbr}. Review ${lenders.length} local listings.`;
 
 const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": `Credit Repair & Financial Services in ${cityInfo.city}, ${cityInfo.state}`,
-    "description": `Review ${lenders.length} credit repair companies, personal lenders, and financial services in ${cityInfo.city}, ${cityInfo.stateAbbr}. Compare stored ratings, pricing fields, and BBB context where available.`,
+    "name": `Loan Companies in ${cityInfo.city}, ${cityInfo.stateAbbr}`,
+    "description": seoDescription,
     "url": `https://www.creditdoc.co/city/${cityInfo.slug}/`,
     "about": {
       "@type": "City",
@@ -128,8 +134,8 @@ const jsonLd = [
 ---
 
 <BaseLayout
-  title={`Credit Repair & Financial Services in ${cityInfo.city}, ${cityInfo.stateAbbr} (2026) | CreditDoc`}
-  description={`Review ${lenders.length} credit repair companies, personal lenders, and financial services in ${cityInfo.city}, ${cityInfo.state}. Stored ratings, BBB context, and pricing fields where available.`}
+  title={seoTitle}
+  description={seoDescription}
   jsonLd={jsonLd}
 >
   <!-- Breadcrumbs -->
@@ -158,10 +164,10 @@ const jsonLd = [
             {cityInfo.city}, {cityInfo.stateAbbr}
           </span>
           <h1 class="text-3xl font-bold text-text sm:text-4xl leading-tight">
-            Credit Repair & Financial Services in {cityInfo.city}
+            Loan Companies in {cityInfo.city}, {cityInfo.stateAbbr}
           </h1>
           <p class="mt-4 text-lg text-muted leading-relaxed">
-            Review {lenders.length} credit repair companies, personal lenders, and financial services in {cityInfo.city}, {cityInfo.state}. Profiles include stored ratings, BBB context, pricing fields, maps, and local rules where available.
+            Compare {localKeyword}, {creditRepairKeyword}, {personalLoansKeyword}, and {businessLoansKeyword} research paths in one local guide. Review {lenders.length} profiles with stored ratings, BBB context, pricing fields, maps, and local rules where available.
           </p>
           <div class="mt-6 flex flex-wrap gap-3">
             {sortedGroups.slice(0, 4).map(([cat, items]) => (
@@ -245,7 +251,7 @@ const jsonLd = [
   <!-- Featured Providers -->
   <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between mb-6">
-      <h2 class="text-2xl font-bold text-text">Featured Provider Profiles in {cityInfo.city}</h2>
+      <h2 class="text-2xl font-bold text-text">Featured Loan Companies and Credit Repair Profiles in {cityInfo.city}</h2>
       <span class="text-sm text-muted">{lenders.length} companies</span>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -260,7 +266,13 @@ const jsonLd = [
     <section id={cat} class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between mb-4">
         <h2 class="text-xl font-bold text-text">
-          {catNames[cat] || cat} in {cityInfo.city}
+          {cat === 'personal-loans'
+            ? `Personal Loans ${cityInfo.city}, ${cityInfo.stateAbbr}`
+            : cat === 'business-loans'
+              ? `Business Loans ${cityInfo.city}, ${cityInfo.stateAbbr}`
+              : cat === 'credit-repair'
+                ? `${cityInfo.city} Credit Repair Companies`
+                : `${catNames[cat] || cat} in ${cityInfo.city}`}
         </h2>
         <a
           href={buildCategoryHref(cat)}
@@ -299,7 +311,7 @@ const jsonLd = [
   <!-- Know Your Rights -->
   <section class="bg-white border-t border-b border-border">
     <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h2 class="text-xl font-bold text-text mb-4">Your Rights in {cityInfo.state}</h2>
+      <h2 class="text-xl font-bold text-text mb-4">{cityInfo.state} Rules for {cityInfo.city} Loan Companies and Credit Repair</h2>
       <div class="glass-card p-6 space-y-4 text-sm text-muted leading-relaxed">
         {sd?.consumer_rights_summary && (
           <p><strong class="text-text">{cityInfo.state} Consumer Protections:</strong> {softenYmylCopy(sd.consumer_rights_summary)}</p>
@@ -335,7 +347,7 @@ const jsonLd = [
 
   <!-- Research Resources -->
   <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-    <h2 class="text-xl font-bold text-text mb-4">Research Service Guides</h2>
+    <h2 class="text-xl font-bold text-text mb-4">Research Guides for {personalLoansKeyword}, {creditRepairKeyword}, and Debt Help</h2>
     <p class="text-sm text-muted mb-4">Use these guides with local pages, state rules, and provider profiles before contacting a company.</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
       <a href="/best/best-credit-repair-companies/" class="glass-card p-4 hover:border-primary transition-colors">
