@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """CreditDoc Bing + IndexNow watchdog.
 
-This catches the silent failure class we just found: Bing can still crawl/index
-the site while impressions are zero and IndexNow/key wiring is broken or stale.
+This catches the silent failure class we found: Bing can still crawl/index the
+site while impressions are zero and IndexNow/key wiring is broken or stale.
+Infrastructure failures are hard failures. Zero impressions are a recovery
+warning once crawl/index and key-file checks are healthy.
 """
 
 from __future__ import annotations
@@ -89,17 +91,19 @@ def main() -> None:
         "bing_traffic": bing_traffic(),
         "bing_crawl": bing_crawl(),
     }
-    report = write_report(payload)
-
     failures = []
+    warnings = []
     if not payload["key_file"].get("ok"):
         failures.append("IndexNow key file is not live/valid")
     if not payload["bing_crawl"].get("ok"):
         failures.append("Bing crawl stats unavailable")
     if payload["bing_traffic"].get("ok") and payload["bing_traffic"].get("impressions_30d", 0) == 0:
-        failures.append("Bing impressions are still 0 over the API traffic window")
+        warnings.append("Bing impressions are still 0 over the API traffic window")
     elif not payload["bing_traffic"].get("ok"):
         failures.append("Bing traffic stats unavailable")
+    payload["failures"] = failures
+    payload["warnings"] = warnings
+    report = write_report(payload)
 
     print(f"CreditDoc Bing/IndexNow watchdog report: {report}")
     print(f"Key file OK: {payload['key_file'].get('ok')}")
@@ -120,6 +124,11 @@ def main() -> None:
         for failure in failures:
             print(f"- {failure}")
         raise SystemExit(1)
+    if warnings:
+        print("WARNINGS:")
+        for warning in warnings:
+            print(f"- {warning}")
+        print("Infrastructure OK; keeping zero-impression state as warning, not cron failure.")
 
 
 if __name__ == "__main__":
