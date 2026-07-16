@@ -94,8 +94,9 @@ const citySpecificCategoryCount = (categorySlug: string) =>
 const localCategoryHref = (categorySlug: string) => {
   const canonicalCategory = localCategoryRouteAliases[categorySlug] || categorySlug;
   if (canonicalCategory === 'credit-cards') return buildCategoryHref(canonicalCategory);
-  if (citySpecificCategoryCount(categorySlug) >= 5) return `/city/${slug}/`;
-  return `/credit-guide/${slug}/`;
+  // Prerendered guide × category matrix exists — link straight to the specific
+  // category page for the current city.
+  return `/credit-guide/${slug}/${canonicalCategory}/`;
 };
 
 // Sibling city guides in same state (build-time filter from cache)

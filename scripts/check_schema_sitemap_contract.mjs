@@ -43,7 +43,12 @@ const SITEMAP_FAMILY_BUDGETS = new Map([
   // These are not ranking targets; keep generous caps to catch accidental
   // explosions, not normal production growth.
   ['review', 20000],
-  ['credit-guide', 8000],
+  // 2026-07-16: was 8000; raised to 10000 after /credit-guide/[slug]/[category]
+  // was converted from SSR to prerendered (~412 guides × ~18 categories = ~7,400
+  // matrix pages + ~412 root guides = ~8,240 total). Matrix pages carry
+  // noindex,follow so they don't leak into SERPs, but they're still emitted
+  // and count against the family budget.
+  ['credit-guide', 10000],
   ['trends', 1500],
   ['compare', 1000],
   ['browse', 1000],

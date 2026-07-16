@@ -159,6 +159,30 @@ function cityStateRedirectTarget(pathname: string): string | null {
   return null;
 }
 
+// /search/?state=<name> — legacy SSR-only shortcut. Handled at edge now so
+// /search/ can be prerendered. Contract enforced by
+// scripts/check_robots_contract.mjs which greps this function's presence.
+function searchStateRedirectTarget(url: URL): string | null {
+  if (url.pathname !== '/search/' && url.pathname !== '/search') return null;
+  const keys = Array.from(url.searchParams.keys());
+  if (keys.length !== 1) return null;
+  const stateRaw = url.searchParams.get('state');
+  if (!stateRaw) return null;
+  const stateSlug = stateRaw.trim().toLowerCase().replace(/\s+/g, '-');
+  // Reject any non-known slugs — protects against open-redirect via ?state=.
+  const target = STATE_CODE_REDIRECTS.get(stateSlug); // only lookup as 2-letter code (won't match names)
+  // Full-name path: match against known state name slugs (Alabama → alabama etc.)
+  for (const [_stateName, _abbr] of Object.entries(STATE_ABBREVIATIONS)) {
+    const candidateSlug = _stateName.toLowerCase().replace(/\s+/g, '-');
+    if (candidateSlug === stateSlug) {
+      return `/state/${candidateSlug}/`;
+    }
+  }
+  // If input matched a 2-letter code (rare — usually names), STATE_CODE_REDIRECTS
+  // gives back the state page path — reuse it.
+  return target ?? null;
+}
+
 function browseCityStateRedirectTarget(pathname: string): string | null {
   const match = pathname.match(/^\/browse\/([^/]+)\/([^/]+)\/?$/);
   if (!match) return null;
@@ -561,6 +585,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const browseRedirectTarget = browseCityStateRedirectTarget(pathname);
   if (browseRedirectTarget) {
     return Response.redirect(new URL(browseRedirectTarget, url.origin), 301);
+  }
+
+  // /search/?state=X → /state/X/ (edge redirect — replaces prior SSR-only path)
+  const searchStateTarget = searchStateRedirectTarget(url);
+  if (searchStateTarget) {
+    return Response.redirect(new URL(searchStateTarget, url.origin), 301);
   }
 
   if (

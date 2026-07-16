@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 const ROBOTS = join(ROOT, 'public/robots.txt');
 const SEARCH_PAGE = join(ROOT, 'src/pages/search.astro');
+const MIDDLEWARE = join(ROOT, 'src/middleware.ts');
 
 const REQUIRED_LINES = [
   'User-agent: *',
@@ -46,15 +47,21 @@ function main() {
     process.exit(1);
   }
 
+  // /search/ is now prerendered — the SSR-form ?state=X → /state/X/ 301 has
+  // moved to middleware.ts (searchStateRedirectTarget). Contract now enforces:
+  //   • middleware.ts contains the redirect helper
+  //   • middleware.ts wires it into onRequest
+  //   • search.astro keeps its page-level noindex
   const searchPage = readFileSync(SEARCH_PAGE, 'utf8');
+  const middlewareSrc = readFileSync(MIDDLEWARE, 'utf8');
   const searchGuards = [
     {
-      ok: searchPage.includes("Astro.url.searchParams.get('state')"),
-      message: 'src/pages/search.astro must detect state query filters.',
+      ok: middlewareSrc.includes('function searchStateRedirectTarget('),
+      message: 'src/middleware.ts must define searchStateRedirectTarget(url) to handle /search/?state=X.',
     },
     {
-      ok: searchPage.includes('Astro.redirect(`/state/${matchedState.toLowerCase().replace(/\\s+/g, \'-\')}/`, 301)'),
-      message: 'src/pages/search.astro must 301 state-only filters to /state/<state>/ pages.',
+      ok: middlewareSrc.includes('searchStateTarget = searchStateRedirectTarget(url)'),
+      message: 'src/middleware.ts onRequest must call searchStateRedirectTarget and 301 the returned target.',
     },
     {
       ok: searchPage.includes('const searchPageNoindex = true;') &&
