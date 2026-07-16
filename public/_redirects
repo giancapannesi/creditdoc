@@ -2,6 +2,13 @@
 /linkedin https://www.linkedin.com/company/creditdoc-co/ 302
 /linkedin/ https://www.linkedin.com/company/creditdoc-co/ 302
 
+# City 404 recovery: thin-lender cities (<5 ready_for_index) redirect to nearest metro
+# with real lender coverage, preserving Google/backlink signal.
+/city/daly-city-ca /city/san-francisco-ca/ 301
+/city/daly-city-ca/ /city/san-francisco-ca/ 301
+/city/murfreesboro-tn /city/nashville-tn/ 301
+/city/murfreesboro-tn/ /city/nashville-tn/ 301
+
 /categories/ /city/ 301
 /state/dc/ /state/ 301
 /state/gu/ /state/ 301
