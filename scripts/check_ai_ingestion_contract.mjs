@@ -12,8 +12,11 @@ const ROBOTS = join(ROOT, 'public/robots.txt');
 const LLMS = join(ROOT, 'public/llms.txt');
 const DIST = join(ROOT, 'dist');
 
+// `LLMs:` is a non-standard robots.txt directive — Bing logs a parse error on
+// it. Kept as a comment for humans/tools that scan robots.txt. The URL is still
+// discoverable directly at /llms.txt (which LLM crawlers auto-check).
 const REQUIRED_ROBOTS_LINES = [
-  'LLMs: https://www.creditdoc.co/llms.txt',
+  '# LLMs: https://www.creditdoc.co/llms.txt',
   'User-agent: GPTBot',
   'User-agent: ChatGPT-User',
   'User-agent: OAI-SearchBot',
