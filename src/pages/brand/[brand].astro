@@ -1,31 +1,39 @@
 ---
-export const prerender = false;
+// Prerendered — one static HTML file per brand. Runtime env removed to keep
+// the whole /brand/ family out of dist/_worker.js. See INCIDENT_SSR_...md.
+export const prerender = true;
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LenderCard from '../../components/LenderCard.astro';
-import { getBrandInfoRuntime, shapeBodyInlineToLender, getGlossaryTermsForContextRuntime } from '../../utils/data-runtime';
 import { createLinker } from '../../utils/inline-linker';
-import { getLendersByBrandRuntime } from '../../lib/db';
 import { buildCategoryHref } from '../../utils/outbound';
 import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
-import type { Lender } from '../../utils/data';
+import {
+  getAllBrands,
+  getBrandInfo,
+  getLendersByBrand,
+  getGlossaryTermsForContext,
+  getBlogPostsByCategory,
+  getClusterAnswersByPillar,
+} from '../../utils/data-build';
+import type { ClusterPillar, Lender } from '../../utils/data';
 
-const env = (Astro.locals as any).runtime?.env;
-const { brand: brandSlug } = Astro.params;
-
-const [brandInfo, lenderRows] = await Promise.all([
-  getBrandInfoRuntime(brandSlug!, env),
-  getLendersByBrandRuntime(brandSlug!, env),
-]);
-
-if (!brandInfo) {
-  return new Response('Not found', { status: 404 });
+export function getStaticPaths() {
+  // Only brands that resolve to a real BrandInfo AND have at least one lender.
+  // Empty-shell brand pages hurt more than they help.
+  return getAllBrands()
+    .filter((brand) => getLendersByBrand(brand.slug).length > 0)
+    .map((brand) => ({ params: { brand: brand.slug } }));
 }
 
-const lenders: Lender[] = lenderRows.map(shapeBodyInlineToLender);
+const { brand: brandSlug } = Astro.params;
+const brandInfo = getBrandInfo(brandSlug!);
+if (!brandInfo) {
+  // Should never hit — getStaticPaths guarantees valid slug. Belt-and-braces.
+  throw new Error(`Brand not found at build time: ${brandSlug}`);
+}
+const lenders: Lender[] = getLendersByBrand(brandSlug!);
 const locationCount = lenders.length;
-
-Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
 
 // Group lenders by state
 const byState = new Map<string, Lender[]>();
@@ -78,15 +86,16 @@ const category = brandInfo.category;
 let relatedQuestions: { slug: string; title: string }[] = [];
 let relatedPosts: { slug: string; title: string }[] = [];
 
-if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
-  const headers = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
-  const [qRes, bRes] = await Promise.all([
-    fetch(`${env.SUPABASE_URL}/rest/v1/answers?cluster_pillar=eq.${encodeURIComponent(category)}&select=slug,title&limit=6`, { headers, signal: AbortSignal.timeout(3000) }).catch(() => null),
-    fetch(`${env.SUPABASE_URL}/rest/v1/blog_posts?category=eq.${encodeURIComponent(category)}&select=slug,title&limit=6`, { headers, signal: AbortSignal.timeout(3000) }).catch(() => null),
-  ]);
-  if (qRes?.ok) relatedQuestions = await qRes.json();
-  if (bRes?.ok) relatedPosts = await bRes.json();
-}
+// Related questions + blog posts from local SQLite (build-time). Replaces the
+// per-request Supabase fetch that the old SSR path did.
+try {
+  relatedQuestions = getClusterAnswersByPillar(category as ClusterPillar)
+    .slice(0, 6)
+    .map((a) => ({ slug: a.slug, title: a.title }));
+} catch { /* pillar may not match ClusterPillar enum; leave empty */ }
+relatedPosts = getBlogPostsByCategory(category)
+  .slice(0, 6)
+  .map((p) => ({ slug: p.slug, title: p.title }));
 const displayRelatedQuestions = relatedQuestions.map((q) => ({
   ...q,
   title: softenEducationalTeaserCopy(q.title.replace(/ \| CreditDoc$/, '')),
@@ -96,7 +105,7 @@ const displayRelatedPosts = relatedPosts.map((post) => ({
   title: softenEducationalTeaserCopy(post.title),
 }));
 
-const glossaryTerms = getGlossaryTermsForContextRuntime(['brand']);
+const glossaryTerms = getGlossaryTermsForContext(['brand']);
 const linker = createLinker(glossaryTerms, { moneyBudget: 5, glossaryBudget: 5 });
 const linkedSummary = brandInfo.summary_long
   ? brandInfo.summary_long.split('\n\n').map((para: string) => linker(para).join(' '))

@@ -54,10 +54,14 @@ const PERMANENT_SSR_ALLOWLIST = new Set([
 // This list should shrink to empty. When it does, delete it.
 // Emits a WARNING per file at build time so the founder can see progress.
 const TEMPORARY_SSR_ALLOWLIST = new Set([
-  'src/pages/brand/[brand].astro',            // TODO: prerender all 57 brands from Supabase
-  'src/pages/credit-guide/[slug]/index.astro', // TODO: prerender all 412 city guides
-  'src/pages/credit-guide/[slug]/[category].astro', // TODO: prerender all guide×category pages
-  'src/pages/search.astro',                    // TODO: convert to static (no async data)
+  // 2026-07-16: All 4 CDM-REV content SSR regressions reversed:
+  //   /search — converted to prerendered
+  //   /brand/[brand] — converted to prerendered (57 brands from local SQLite)
+  //   /credit-guide/[slug]/index — converted to prerendered (412 city guides, Supabase cached at build)
+  //   /credit-guide/[slug]/[category] — converted to prerendered (guide×category matrix)
+  // If this set stays empty for 2+ weeks, consider removing @astrojs/cloudflare
+  // adapter entirely to drop dist/_worker.js runtime (would eliminate all SSR
+  // runtime surface for content — only api/redirect/feed routes need it).
 ]);
 
 const ALLOWLIST = new Set([...PERMANENT_SSR_ALLOWLIST, ...TEMPORARY_SSR_ALLOWLIST]);

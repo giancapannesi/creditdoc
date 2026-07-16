@@ -1,7 +1,8 @@
 ---
-// iter 37: SSR-fed search. The page is now a tiny shell — results come from
-// /api/search/ at request time. Replaces the prior 20MB inline-data embed.
-export const prerender = false;
+// Static shell — results come from /api/search/ at request time via fetch().
+// Prior SSR-only ?state=X → /state/X/ 301 shortcut moved client-side (see
+// bottom of file) because static builds cannot server-redirect on query.
+export const prerender = true;
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SearchBar from '../components/SearchBar.astro';
@@ -12,17 +13,6 @@ const stateEntries = US_STATES.map((state) => ({
   abbr: STATE_ABBREVIATIONS[state] || '',
   slug: state.toLowerCase().replace(/\s+/g, '-'),
 }));
-
-const stateFilter = Astro.url.searchParams.get('state');
-const queryKeys = Array.from(Astro.url.searchParams.keys());
-
-if (stateFilter && queryKeys.length === 1) {
-  const matchedState = US_STATES.find((state) => state.toLowerCase() === stateFilter.toLowerCase());
-
-  if (matchedState) {
-    return Astro.redirect(`/state/${matchedState.toLowerCase().replace(/\s+/g, '-')}/`, 301);
-  }
-}
 
 const searchPageNoindex = true;
 ---
@@ -399,6 +389,31 @@ const searchPageNoindex = true;
         heading.innerHTML = `${headingText} (<span id="results-count">${rows.length}</span>)`;
       }
     }
+
+    // Client-side ?state=X → /state/X/ shortcut (replaces prior SSR redirect).
+    // Only when state is the ONLY query param, matching the original behavior.
+    (function stateOnlyRedirect() {
+      const params = new URLSearchParams(window.location.search);
+      const keys = Array.from(params.keys());
+      const stateVal = (params.get('state') || '').trim().toLowerCase();
+      if (stateVal && keys.length === 1) {
+        const stateSlug = stateVal.replace(/\s+/g, '-');
+        // Whitelist against known state slugs to prevent open-redirect via query.
+        const KNOWN_STATE_SLUGS = new Set([
+          'alabama','alaska','arizona','arkansas','california','colorado','connecticut','delaware',
+          'florida','georgia','hawaii','idaho','illinois','indiana','iowa','kansas','kentucky',
+          'louisiana','maine','maryland','massachusetts','michigan','minnesota','mississippi',
+          'missouri','montana','nebraska','nevada','new-hampshire','new-jersey','new-mexico',
+          'new-york','north-carolina','north-dakota','ohio','oklahoma','oregon','pennsylvania',
+          'rhode-island','south-carolina','south-dakota','tennessee','texas','utah','vermont',
+          'virginia','washington','west-virginia','wisconsin','wyoming','district-of-columbia'
+        ]);
+        if (KNOWN_STATE_SLUGS.has(stateSlug)) {
+          window.location.replace(`/state/${stateSlug}/`);
+          return;
+        }
+      }
+    })();
 
     // Initial fetch on load
     runSearch();

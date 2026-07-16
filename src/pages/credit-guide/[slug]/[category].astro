@@ -1,29 +1,38 @@
 ---
-export const prerender = false;
+// Prerendered — one static HTML per (city_guide × category) pair. All data
+// resolved at build time from local SQLite + Supabase-cached helpers.
+export const prerender = true;
 
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import LenderCard from '../../../components/LenderCard.astro';
+import { getAllLenders, getCategories } from '../../../utils/data-build';
 import {
-  getCategoriesRuntime,
-  shapeBodyInlineToLender,
-} from '../../../utils/data-runtime';
-import {
-  getCityGuideBySlugRuntime,
-  getCityGuidesByStateRuntime,
-  getStateBySlugRuntime,
-  type RuntimeLenderEnv,
-} from '../../../lib/db';
+  getAllCityGuidesBuildTime,
+  getCityGuideBySlugBuildTime,
+  getCityGuidesByStateBuildTime,
+  getStateBySlugBuildTime,
+  filterAnswerRefsBySlugPatterns,
+} from '../../../utils/data-build-remote';
 import type { Lender } from '../../../utils/data';
 import { softenYmylCopy } from '../../../utils/safe-copy';
 import { buildCategoryHref } from '../../../utils/outbound';
 
-const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
-const { slug, category } = Astro.params;
-if (!slug || !category) return new Response('Bad request', { status: 400 });
+export function getStaticPaths() {
+  const categoriesList = getCategories();
+  const paths: { params: { slug: string; category: string } }[] = [];
+  for (const guide of getAllCityGuidesBuildTime()) {
+    for (const cat of categoriesList) {
+      paths.push({ params: { slug: guide.slug, category: cat.slug } });
+    }
+  }
+  return paths;
+}
 
-const guide = await getCityGuideBySlugRuntime(slug, env);
+const { slug, category } = Astro.params;
+const guide = getCityGuideBySlugBuildTime(slug!);
 if (!guide) {
-  return new Response('Not found', { status: 404, headers: { 'content-type': 'text/plain; charset=utf-8' } });
+  // getStaticPaths guarantees valid slug — belt-and-braces.
+  throw new Error(`City guide missing at build time: ${slug}`);
 }
 
 const city = guide.city;
@@ -32,8 +41,8 @@ const stateName = guide.state_name;
 const stateSlug = stateName.toLowerCase().replace(/ /g, '-');
 const guideData = (guide.body_inline ?? {}) as Record<string, any>;
 
-// Fetch state data for localized intro
-const stateRow = await getStateBySlugRuntime(stateSlug, env);
+// State data for localized intro (build-time cache from Supabase)
+const stateRow = getStateBySlugBuildTime(stateSlug);
 const stateData = (stateRow?.body_inline ?? null) as Record<string, any> | null;
 
 // Build localized intro based on category + state data
@@ -74,10 +83,10 @@ const categoryIntros: Record<string, (city: string, state: string, data: any) =>
   },
 };
 
-const categories = getCategoriesRuntime();
+const categories = getCategories();
 const catInfo = categories.find(c => c.slug === category);
 if (!catInfo) {
-  return new Response('Category not found', { status: 404, headers: { 'content-type': 'text/plain; charset=utf-8' } });
+  throw new Error(`Category missing at build time: ${category}`);
 }
 
 const catName = catInfo.name;
@@ -91,22 +100,18 @@ const localIntro = isAtmCategory
     ? introFn(city, stateName, stateData)
     : `Review ${catName.toLowerCase()} provider profiles associated with ${city}, ${stateName}. Compare local and statewide profile context, and check stored Google ratings where available.`;
 
-// Fetch lenders in this state + category from Supabase
-let lenders: Lender[] = [];
-if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
-  const hdrs = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
-  const url = `${env.SUPABASE_URL}/rest/v1/lenders?state_abbr=eq.${stateAbbr}&category=eq.${encodeURIComponent(category)}&processing_status=eq.ready_for_index&select=slug,name,category,state,brand_slug,has_logo,seo_tier,updated_at,processing_status,body_inline&order=updated_at.desc&limit=100`;
-  const res = await fetch(url, { headers: hdrs, signal: AbortSignal.timeout(8000) }).catch(() => null);
-  if (res?.ok) {
-    const rows = await res.json();
-    lenders = rows.map((r: any) => shapeBodyInlineToLender(r)).filter((l: Lender) => {
-      const desc = l.description_short || '';
-      if (desc.includes('403 Forbidden') || desc.includes('Unable to verify') || desc.includes('Unable to generate')) return false;
-      if (!desc || desc.length < 30) return false;
-      return true;
-    });
-  }
-}
+// Lenders in this state + category (build-time from local SQLite).
+const allLenders = getAllLenders();
+const lenders: Lender[] = allLenders
+  .filter((l) => l.category === category)
+  .filter((l) => (l as any).state_abbr === stateAbbr || (l as any).state === stateName)
+  .filter((l) => {
+    const desc = l.description_short || '';
+    if (desc.includes('403 Forbidden') || desc.includes('Unable to verify') || desc.includes('Unable to generate')) return false;
+    if (!desc || desc.length < 30) return false;
+    return true;
+  })
+  .slice(0, 100);
 
 // City-specific lenders first, then rest of state
 const cityLower = city.toLowerCase().replace(/\s+/g, '-');
@@ -117,8 +122,8 @@ const cityLenders = lenders.filter(l => {
 const stateLenders = lenders.filter(l => !cityLenders.includes(l));
 const sortedLenders = [...cityLenders, ...stateLenders];
 
-// Sibling city guides
-const siblingGuides = await getCityGuidesByStateRuntime(stateAbbr, env, 12);
+// Sibling city guides (build-time cache)
+const siblingGuides = getCityGuidesByStateBuildTime(stateAbbr, 12);
 const otherCities = siblingGuides.filter(g => g.slug !== slug).slice(0, 8);
 
 // Related categories for sidebar
@@ -182,25 +187,17 @@ const localCategoryFaq = (localCategoryQuestions.length > 0 ? localCategoryQuest
   })
   .filter(faq => faq.q && faq.a);
 
-// Fetch related answers for this category
-let answerPages: { slug: string; title: string }[] = [];
-if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
-  const hdrs = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
-  const orFilter = answerKeywords.map(k => `slug.ilike.*${k}*`).join(',');
-  const aRes = await fetch(
-    `${env.SUPABASE_URL}/rest/v1/answers?select=slug,title&or=(${orFilter})&limit=6`,
-    { headers: hdrs, signal: AbortSignal.timeout(3000) }
-  ).catch(() => null);
-  if (aRes?.ok) answerPages = await aRes.json();
-}
+// Related answers for this category (build-time — filtered from cached answer pool)
+const answerPages = filterAnswerRefsBySlugPatterns(answerKeywords, 6);
 
 const title = `${catName} in ${city}, ${stateAbbr} — Local Directory | CreditDoc`;
 const description = isAtmCategory
   ? `Browse selected ATM and cash access profiles for ${city}, ${stateName}. Verify current ATM availability directly with your bank, credit union, or ATM network.`
   : `Review ${sortedLenders.length} listed ${catName.toLowerCase()} profiles associated with ${city}, ${stateName}. Compare local context, ratings, reviews, and contact details.`;
 
-Astro.response.headers.set('cache-control', 'public, max-age=86400, s-maxage=86400');
-Astro.response.headers.set('x-robots-tag', 'noindex, follow');
+// noindex/follow: this route is a filtered browse — canonical is /credit-guide/<slug>/.
+// Static builds can't set x-robots-tag headers per-page; use meta tag via BaseLayout.
+const pageNoindex = true;
 
 const listName = isAtmCategory && cityLenders.length === 0
   ? `Selected ${stateName} ${catName} Profiles`

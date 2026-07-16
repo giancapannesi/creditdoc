@@ -1,36 +1,34 @@
 ---
-export const prerender = false;
+// Prerendered — 412 static HTML files (one per city_guide.status='ready_for_index').
+// All data fetched from Supabase at build time via data-build-remote helpers,
+// then cached in-memory across all page renders.
+export const prerender = true;
 
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import LenderCard from '../../../components/LenderCard.astro';
-import {
-  getCategoriesRuntime,
-  shapeBodyInlineToLender,
-} from '../../../utils/data-runtime';
 import { createLinker } from '../../../utils/inline-linker';
+import { getAllLenders, getCategories } from '../../../utils/data-build';
 import {
-  getCityGuideBySlugRuntime,
-  getCityGuidesByStateRuntime,
-  getStateBySlugRuntime,
-  getLendersByStateRuntime,
-  getStateCountRuntime,
-  type RuntimeLenderEnv,
-  type RuntimeCityGuide,
-  type HMDAGeoStats,
-} from '../../../lib/db';
+  getAllCityGuidesBuildTime,
+  getCityGuideBySlugBuildTime,
+  getCityGuidesByStateBuildTime,
+  getStateBySlugBuildTime,
+  getWellnessGuideRefsBuildTime,
+  getCreditGuideAnswerPoolBuildTime,
+  getHmdaTopLendersByStateBuildTime,
+} from '../../../utils/data-build-remote';
 import type { Lender } from '../../../utils/data';
 import { buildCategoryHref } from '../../../utils/outbound';
 
-const env = (Astro.locals as any)?.runtime?.env as RuntimeLenderEnv | undefined;
-const { slug } = Astro.params;
-if (!slug) return new Response('Bad request', { status: 400 });
+export function getStaticPaths() {
+  return getAllCityGuidesBuildTime().map((g) => ({ params: { slug: g.slug } }));
+}
 
-const guide = await getCityGuideBySlugRuntime(slug, env);
+const { slug } = Astro.params;
+const guide = getCityGuideBySlugBuildTime(slug!);
 if (!guide) {
-  return new Response('Not found', {
-    status: 404,
-    headers: { 'content-type': 'text/plain; charset=utf-8' },
-  });
+  // getStaticPaths guarantees valid slug — belt-and-braces.
+  throw new Error(`City guide missing at build time: ${slug}`);
 }
 
 const city = guide.city;
@@ -39,7 +37,7 @@ const stateName = guide.state_name;
 const data = guide.body_inline ?? {};
 
 const stateSlug = stateName.toLowerCase().replace(/ /g, '-');
-const stateRow = await getStateBySlugRuntime(stateSlug, env);
+const stateRow = getStateBySlugBuildTime(stateSlug);
 const stateData = (stateRow?.body_inline ?? null) as Record<string, any> | null;
 
 // Extract credit repair laws object for structured rendering
@@ -50,10 +48,11 @@ const creditRepairSummary = creditRepairLaws
   ? `${creditRepairLaws.state_statute || 'State credit repair law'}${creditRepairLaws.statute_code ? ` (${creditRepairLaws.statute_code})` : ''}. ${creditRepairLaws.upfront_fees_prohibited ? 'Upfront fees prohibited. ' : ''}${creditRepairLaws.cancellation_period_days ? `${creditRepairLaws.cancellation_period_days}-day cancellation period. ` : ''}${creditRepairLaws.bond_required ? `$${creditRepairLaws.bond_amount || '25,000'} bond required.` : ''}`
   : typeof stateData?.credit_repair_laws === 'string' ? stateData.credit_repair_laws : null;
 
-// Lenders in this state (for local lender section — limit to 30 for display; count from lightweight view)
-const lenderRows = await getLendersByStateRuntime(stateAbbr, env, 30);
-const lenders: Lender[] = lenderRows.map(r => shapeBodyInlineToLender(r as any));
-const stateCount = await getStateCountRuntime(stateAbbr, env);
+// Lenders in this state (build-time filter from local SQLite catalog).
+const allLenders = getAllLenders();
+const stateLenders = allLenders.filter((l) => (l as any).state_abbr === stateAbbr || (l as any).state === stateName);
+const lenders: Lender[] = stateLenders.slice(0, 30);
+const stateCount = stateLenders.length;
 
 // Filter out broken lenders (no description or error messages in description)
 const validLenders = lenders.filter(l => {
@@ -73,8 +72,8 @@ const cityLenders = validLenders.filter(l => {
 });
 const nearbyLenders = cityLenders.length > 0 ? cityLenders : validLenders.slice(0, 12);
 
-// Categories
-const categories = getCategoriesRuntime();
+// Categories (local build-time)
+const categories = getCategories();
 const catNames: Record<string, string> = {};
 for (const cat of categories) catNames[cat.slug] = cat.name;
 
@@ -99,46 +98,23 @@ const localCategoryHref = (categorySlug: string) => {
   return `/credit-guide/${slug}/`;
 };
 
-// Sibling city guides in same state
-const siblingGuides = await getCityGuidesByStateRuntime(stateAbbr, env, 20);
-const otherCities = siblingGuides.filter(g => g.slug !== slug).slice(0, 12);
+// Sibling city guides in same state (build-time filter from cache)
+const siblingGuides = getCityGuidesByStateBuildTime(stateAbbr, 20);
+const otherCities = siblingGuides.filter((g) => g.slug !== slug).slice(0, 12);
 
-// Fetch wellness guides and answers for the bottom section
-let wellnessGuides: { slug: string; title: string }[] = [];
-let answerPages: { slug: string; title: string }[] = [];
-if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
-  const hdrs = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
-  const [wRes, aRes] = await Promise.all([
-    fetch(`${env.SUPABASE_URL}/rest/v1/wellness_guides?select=slug,title&limit=6`, { headers: hdrs, signal: AbortSignal.timeout(3000) }).catch(() => null),
-    fetch(`${env.SUPABASE_URL}/rest/v1/answers?select=slug,title&or=(slug.ilike.*personal-loans-bad-credit*,slug.ilike.*debt-consolidation*,slug.ilike.*build-credit*,slug.ilike.*how-to-get-a-personal-loan*,slug.ilike.*how-much-can-you-borrow*,slug.ilike.*small-business-loans*,slug.ilike.*secured-credit-card*)&limit=8`, { headers: hdrs, signal: AbortSignal.timeout(3000) }).catch(() => null),
-  ]);
-  if (wRes?.ok) wellnessGuides = await wRes.json();
-  if (aRes?.ok) answerPages = await aRes.json();
-}
+// Wellness guides + answers (fetched ONCE at build, cached across all pages)
+const wellnessGuides = getWellnessGuideRefsBuildTime(6);
+const answerPages = getCreditGuideAnswerPoolBuildTime();
 
-// HMDA top lenders for this state
-let hmdaTopLenders: { slug: string; state_code: string; total_applications: number; total_originated: number; approval_rate: number; low_income_approval_rate: number | null }[] = [];
-if (env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
-  const hdrs = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
-  const geoRes = await fetch(
-    `${env.SUPABASE_URL}/rest/v1/hmda_geo_stats?state_code=eq.${encodeURIComponent(stateAbbr)}&total_applications=gte.100&order=approval_rate.desc&limit=10`,
-    { headers: hdrs, signal: AbortSignal.timeout(2000) }
-  ).catch(() => null);
-  if (geoRes?.ok) hmdaTopLenders = await geoRes.json();
-}
+// HMDA top lenders for this state (build-time)
+const hmdaTopLenders = getHmdaTopLendersByStateBuildTime(stateAbbr, 10);
 
-// Get lender names for HMDA slugs
-let hmdaLenderNames: Record<string, string> = {};
-if (hmdaTopLenders.length > 0 && env?.SUPABASE_URL && env?.SUPABASE_ANON_KEY) {
-  const hdrs = { apikey: env.SUPABASE_ANON_KEY, authorization: `Bearer ${env.SUPABASE_ANON_KEY}`, accept: 'application/json' };
-  const slugList = hmdaTopLenders.map(l => `"${l.slug}"`).join(',');
-  const nameRes = await fetch(
-    `${env.SUPABASE_URL}/rest/v1/lenders?slug=in.(${slugList})&select=slug,name`,
-    { headers: hdrs, signal: AbortSignal.timeout(2000) }
-  ).catch(() => null);
-  if (nameRes?.ok) {
-    const rows: { slug: string; name: string }[] = await nameRes.json();
-    for (const r of rows) hmdaLenderNames[r.slug] = r.name;
+// Get lender names for HMDA slugs (local SQLite lookup — no runtime fetch).
+const hmdaLenderNames: Record<string, string> = {};
+if (hmdaTopLenders.length > 0) {
+  const wantedSlugs = new Set(hmdaTopLenders.map((l) => l.slug));
+  for (const l of allLenders) {
+    if (wantedSlugs.has(l.slug)) hmdaLenderNames[l.slug] = l.name;
   }
 }
 
