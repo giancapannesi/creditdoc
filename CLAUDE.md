@@ -2,7 +2,17 @@
 
 **CRITICAL: Read `AGENT_PROTOCOL.md` before making any changes to this project.**
 
-## THE RULE
+## THE HARD RULE — NEVER FLIP A CONTENT PAGE TO SSR
+
+**NEVER add `export const prerender = false;` to any page under `src/pages/` outside the allowlist in `scripts/check_no_ssr_regression.mjs`.**
+
+On 2026-04-29/30, the "CDM-REV Phase 5.1" commits flipped `/answers/[slug]`, `/best/[slug]`, `/categories`, `/brand`, `/blog`, `/wellness` from prerendered static HTML → runtime SSR. Bing's crawler responded by dropping the site from 2,200+ citations to **zero overnight**. Traffic has not recovered in 4 months.
+
+The prebuild guard `scripts/check_no_ssr_regression.mjs` runs on every `npm run build` and fails the build if any page outside the allowlist has `prerender = false`. **Do not bypass this guard.** If a new route genuinely must be SSR, get founder approval and add the path to `PERMANENT_SSR_ALLOWLIST` with a comment explaining why.
+
+Run anytime: `npm run check:no-ssr`
+
+## THE RULE — DATA WRITES
 
 CreditDoc uses a SQLite database at `data/creditdoc.db` as the single source of truth.
 **Do not write directly to JSON files in `src/content/`.** Use the DB API.
