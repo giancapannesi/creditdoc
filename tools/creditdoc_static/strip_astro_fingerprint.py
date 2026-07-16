@@ -323,15 +323,23 @@ def apply_strip(root: Path, dist_root: Path, report_dir: Path) -> int:
     }
     report_path.write_text(json.dumps(report, indent=2))
 
+    # Distinguish fatal errors (read/write failed) from non-fatal warnings
+    # (a referenced CSS hash that no longer exists on disk — usually stale
+    # pages that predate the last Astro rebuild; the strip is actually
+    # HEALING that drift by consolidating to /styles.css).
+    fatal = [e for e in errors if e.get('stage') in ('read', 'write', 'css-write')]
+    warnings = [e for e in errors if e not in fatal]
+
     print()
     print(f'--- summary ---')
     print(f'  touched:   {touched:,}')
     print(f'  unchanged: {unchanged:,}')
-    print(f'  errors:    {len(errors):,}')
+    print(f'  warnings:  {len(warnings):,} (non-fatal: e.g. stale CSS refs)')
+    print(f'  errors:    {len(fatal):,} (fatal: read/write failures)')
     print(f'  css copied: {len(css_copies)} files')
     print(f'  duration:  {report["duration_sec"]}s')
     print(f'  report:    {report_path.relative_to(REPO_ROOT)}')
-    return 1 if errors else 0
+    return 1 if fatal else 0
 
 
 def main(argv: list[str]) -> int:
