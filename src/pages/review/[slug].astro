@@ -14,6 +14,7 @@ import cfpbResponsiveReport from '../../data/cfpb-responsive-providers-2026.json
 import { linkifyDescription, autoParagraphs } from '../../utils/inline-linker';
 import { buildCategoryHref, buildCityHref, buildCitySlug, buildLenderGoHref, buildLocalBrowseHref, canonicalCategorySlug, normalizeTelHref } from '../../utils/outbound';
 import { softenEducationalTeaserCopy, softenYmylCopy } from '../../utils/safe-copy';
+import { truncateSmart, truncateTitleWithSuffix } from '../../utils/truncate';
 import {
   getBbbClass,
   generateDiagnosis,
@@ -645,18 +646,18 @@ const ogImageUrl = lender.logo_url?.trim()
     const nameWithLoc = locSuffix ? `${lender.name}${locSuffix}` : lender.name;
     if (nameWithLoc.length <= 45) return `${nameWithLoc} | CreditDoc`;
     if (nameWithLoc.length <= 60) return nameWithLoc;
-    return nameWithLoc.slice(0, 60);
+    return truncateTitleWithSuffix(lender.name, locSuffix, 60);
   })()}
   description={(() => {
     if (reviewSeoOverride.description) return reviewSeoOverride.description;
-    if (lender.meta_description) return lender.meta_description.slice(0, 155);
+    if (lender.meta_description) return truncateSmart(lender.meta_description, 155);
     const base = lender.description_short || `${lender.name} review with services, contact details, review signals, and alternatives.`;
     const city = lender.company_info?.city;
     if (city && !base.includes(city)) {
       const locNote = ` Located in ${city}${lender.company_info?.state ? ', ' + lender.company_info.state : ''}.`;
-      return (base + locNote).slice(0, 155);
+      return truncateSmart(base + locNote, 155);
     }
-    return base.slice(0, 155);
+    return truncateSmart(base, 155);
   })()}
   jsonLd={jsonLd}
   noindex={isSkeleton || lender.processing_status !== 'ready_for_index'}

@@ -5,6 +5,7 @@ import AffiliateSidebar from '../../components/AffiliateSidebar.astro';
 import { createLinker } from '../../utils/inline-linker';
 import { buildCategoryHref } from '../../utils/outbound';
 import { softenEducationalTeaserCopy } from '../../utils/safe-copy';
+import { truncateSmart } from '../../utils/truncate';
 import {
   getClusterAnswers,
   getGlossaryTermsForContext,
@@ -67,7 +68,7 @@ function firstSentence(md: string): string {
     .replace(/\s+/g, ' ')
     .trim();
   const m = plain.match(/^(.*?[.!?])(\s|$)/);
-  return (m ? m[1] : plain.slice(0, 160)).trim();
+  return (m ? m[1] : truncateSmart(plain, 160)).trim();
 }
 const keyTakeaways = sections.slice(0, 4).map(s => softenEducationalTeaserCopy(firstSentence(s.content || ''))).filter(Boolean);
 const displayTitle = softenEducationalTeaserCopy(answer.title || answer.h1 || '');
