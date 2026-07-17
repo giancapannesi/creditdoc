@@ -103,30 +103,53 @@
 {% if lender.pros or lender.cons %}
 <section class="mb-8">
 <h2 class="text-2xl font-semibold mb-3">Pros & Cons</h2>
+<p class="text-sm text-muted mb-4">Reader-focused summary of the strongest reasons to consider {{ lender.name }} and the factors most worth weighing before contracting. Individual outcomes depend on your credit situation and goals.</p>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 {% if lender.pros %}
-<div><h3 class="font-semibold mb-2">Pros</h3><ul>{% for p in lender.pros %}<li>{{ p }}</li>{% endfor %}</ul></div>
+<div class="glass-card p-5">
+<h3 class="font-semibold mb-3 text-positive">Pros</h3>
+<ul class="space-y-2">{% for p in lender.pros %}<li class="flex items-start gap-2 text-sm"><span class="text-positive mt-0.5">✓</span><span>{{ p }}</span></li>{% endfor %}</ul>
+</div>
 {% endif %}
 {% if lender.cons %}
-<div><h3 class="font-semibold mb-2">Cons</h3><ul>{% for c in lender.cons %}<li>{{ c }}</li>{% endfor %}</ul></div>
+<div class="glass-card p-5">
+<h3 class="font-semibold mb-3 text-warning">Areas to Consider</h3>
+<ul class="space-y-2">{% for c in lender.cons %}<li class="flex items-start gap-2 text-sm"><span class="text-warning mt-0.5">!</span><span>{{ c }}</span></li>{% endfor %}</ul>
+</div>
 {% endif %}
 </div>
+{% if lender.pros and lender.cons %}
+<div class="mt-4 glass-card p-5 bg-bg-alt">
+<h3 class="font-semibold mb-2">Verdict Summary</h3>
+<p class="text-sm">{{ lender.name }} works best for consumers who value {{ (lender.pros[0]|lower)|truncate(80, killwords=True, end='') }} and can accept the tradeoff of {{ (lender.cons[0]|lower)|truncate(80, killwords=True, end='') }}. Compare against similar providers below before signing any contract.</p>
+</div>
+{% endif %}
 </section>
 {% endif %}
-{% if lender.services or lender.features %}
+{% if lender.services or lender.features or lender.best_for %}
 <section class="mb-8">
 <h2 class="text-2xl font-semibold mb-3">Services & Features</h2>
 {% if lender.services %}
-<h3 class="font-semibold mb-2">Services</h3>
-<ul class="mb-4">{% for s in lender.services %}<li>{{ s }}</li>{% endfor %}</ul>
+<h3 class="font-semibold mb-3">Services offered</h3>
+<ul class="mb-6 space-y-1">{% for s in lender.services %}<li class="flex items-start gap-2"><span class="text-primary mt-1">✓</span><span>{{ s }}</span></li>{% endfor %}</ul>
 {% endif %}
-{% if lender.features %}
-<h3 class="font-semibold mb-2">Features</h3>
-<ul>{% for f in lender.features %}<li>{{ f }}</li>{% endfor %}</ul>
+{% if lender.features and lender.features is mapping %}
+<h3 class="font-semibold mb-3">Feature Checklist</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6 text-sm">
+{% for feat_key, has in lender.features.items() %}
+<div class="flex items-center gap-2 glass-card p-3">
+{% if has %}<span class="text-positive font-bold">✓</span>{% else %}<span class="text-muted">✗</span>{% endif %}
+<span class="{% if not has %}text-muted{% endif %}">{{ feat_key|replace('_',' ')|title }}</span>
+</div>
+{% endfor %}
+</div>
+{% elif lender.features %}
+<h3 class="font-semibold mb-3">Features</h3>
+<ul class="mb-6 space-y-1">{% for f in lender.features %}<li class="flex items-start gap-2"><span class="text-primary mt-1">✓</span><span>{{ f }}</span></li>{% endfor %}</ul>
 {% endif %}
 {% if lender.best_for %}
-<h3 class="font-semibold mt-4 mb-2">Best For</h3>
-<ul>{% for b in lender.best_for %}<li>{{ b }}</li>{% endfor %}</ul>
+<h3 class="font-semibold mb-3">Best For</h3>
+<ul class="space-y-1">{% for b in lender.best_for %}<li class="flex items-start gap-2"><span class="text-primary mt-1">•</span><span>{{ b }}</span></li>{% endfor %}</ul>
 {% endif %}
 </section>
 {% endif %}
@@ -142,13 +165,22 @@
 </section>
 <section class="mb-8">
 <h2 class="text-2xl font-semibold mb-3">Compare Your Needs With {{ lender.name }}</h2>
-<p class="text-sm text-muted mb-3">Use this checklist to decide whether {{ lender.name }} matches your situation:</p>
-<ul class="text-sm space-y-2">
-<li><strong>Budget:</strong> {% if lender.pricing %}Pricing detailed above.{% else %}Confirm pricing before contracting — check for setup fees, monthly fees, and cancellation terms.{% endif %}</li>
-<li><strong>Service type:</strong> {{ lender.category|title|replace('-',' ') }}. Check the services list to confirm they cover what you need.</li>
-<li><strong>State coverage:</strong> {% if lender.state %}Listed for {{ lender.state }}.{% else %}Confirm they serve your state directly.{% endif %}</li>
-<li><strong>Alternatives:</strong> See <a href="/categories/{{ lender.category }}/">all {{ lender.category|title|replace('-',' ') }} providers</a> for comparison.</li>
+<p class="text-sm text-muted mb-4">Match these decision factors against {{ lender.name }}'s profile before committing. This rubric mirrors what independent consumer-finance research typically checks for {{ lender.category|title|replace('-',' ') }} providers.</p>
+<div class="glass-card p-5 mb-4">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm mb-4 pb-4 border-b border-border">
+<div><strong>Category</strong><p class="text-muted mt-1">{{ lender.category|title|replace('-',' ') }}</p></div>
+<div><strong>Service scope</strong><p class="text-muted mt-1">{% if lender.services %}{{ lender.services|length }} services listed{% else %}Contact provider{% endif %}</p></div>
+<div><strong>Geographic coverage</strong><p class="text-muted mt-1">{% if lender.states_served %}{{ lender.states_served|length }} states{% elif lender.state %}{{ lender.state }}{% else %}Verify with provider{% endif %}</p></div>
+</div>
+<h3 class="font-semibold mb-2">Match to your priorities</h3>
+<ul class="space-y-3 text-sm">
+<li class="flex items-start gap-3"><span class="text-primary mt-1">●</span><div><strong>Budget priority:</strong> {% if lender.pricing %}Pricing published above — factor in setup, monthly, and cancellation fees over the full expected service window.{% else %}Not published — request a written price disclosure before signing any agreement.{% endif %}</div></li>
+<li class="flex items-start gap-3"><span class="text-primary mt-1">●</span><div><strong>Complexity priority:</strong> {% if lender.pros %}Consider {{ lender.name }}'s stated strengths ({{ lender.pros[0]|truncate(100, killwords=True) }}) against your specific credit situation.{% else %}Match your specific credit issues against services listed above.{% endif %}</div></li>
+<li class="flex items-start gap-3"><span class="text-primary mt-1">●</span><div><strong>Timeline priority:</strong> {{ lender.category|title|replace('-',' ') }} typically takes 3-6 months for meaningful outcomes. Providers guaranteeing overnight results are red flags under federal consumer protection law.</div></li>
+<li class="flex items-start gap-3"><span class="text-primary mt-1">●</span><div><strong>Recourse priority:</strong> Confirm state licensing via your <a href="/tools/state-consumer-credit-regulator-directory/" class="text-primary hover:underline">state regulator</a> and check the CFPB complaint database before contracting.</div></li>
+<li class="flex items-start gap-3"><span class="text-primary mt-1">●</span><div><strong>Alternatives:</strong> Compare against <a href="/categories/{{ lender.category }}/" class="text-primary hover:underline">all {{ lender.category|title|replace('-',' ') }} providers</a>, DIY options via non-profit counseling agencies, and free CFPB resources.</div></li>
 </ul>
+</div>
 </section>
 {% if lender.pricing %}
 <section class="mb-8">
