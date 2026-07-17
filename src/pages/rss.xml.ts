@@ -1,3 +1,8 @@
+// Prerendered at build time — reads blog-posts.json snapshot, emits static XML.
+// Nightly cron regenerates blog-posts.json + rebuilds site, so feed refresh
+// cadence matches build cadence (was: cached 1h at edge on SSR path).
+export const prerender = true;
+
 import blogPosts from '../content/blog-posts.json';
 
 const SITE = 'https://www.creditdoc.co';

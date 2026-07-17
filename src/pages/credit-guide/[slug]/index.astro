@@ -38,6 +38,10 @@ const data = guide.body_inline ?? {};
 
 const stateSlug = stateName.toLowerCase().replace(/ /g, '-');
 const stateRow = getStateBySlugBuildTime(stateSlug);
+// State hub only exists for the 50 US states — DC (and any future non-state
+// territories) have no /state/<slug>/ hub. Suppress state-hub links so we don't
+// emit dead /state/district-of-columbia/ 404s from DC city guides.
+const stateHubExists = !!stateRow;
 const stateData = (stateRow?.body_inline ?? null) as Record<string, any> | null;
 
 // Extract credit repair laws object for structured rendering
@@ -186,8 +190,8 @@ const jsonLd = [
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/" },
-      { "@type": "ListItem", "position": 2, "name": stateName, "item": `https://www.creditdoc.co/state/${stateSlug}/` },
-      { "@type": "ListItem", "position": 3, "name": `${city} Credit Guide`, "item": `https://www.creditdoc.co/credit-guide/${slug}/` }
+      ...(stateHubExists ? [{ "@type": "ListItem", "position": 2, "name": stateName, "item": `https://www.creditdoc.co/state/${stateSlug}/` }] : []),
+      { "@type": "ListItem", "position": stateHubExists ? 3 : 2, "name": `${city} Credit Guide`, "item": `https://www.creditdoc.co/credit-guide/${slug}/` }
     ]
   },
   ...(localQuestions.length > 0 ? [{
@@ -208,8 +212,17 @@ const jsonLd = [
     <ol class="flex items-center gap-2 text-sm text-muted">
       <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
       <li class="text-border">/</li>
-      <li><a href={`/state/${stateSlug}/`} class="hover:text-primary transition-colors">{stateName}</a></li>
-      <li class="text-border">/</li>
+      {stateHubExists ? (
+        <>
+          <li><a href={`/state/${stateSlug}/`} class="hover:text-primary transition-colors">{stateName}</a></li>
+          <li class="text-border">/</li>
+        </>
+      ) : (
+        <>
+          <li class="text-muted">{stateName}</li>
+          <li class="text-border">/</li>
+        </>
+      )}
       <li class="text-text font-medium">{city} Credit Guide</li>
     </ol>
   </nav>
@@ -261,9 +274,15 @@ const jsonLd = [
         <a href={localCategoryHref('personal-loans')} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
           Personal loans in {city}
         </a>
-        <a href={`/state/${stateSlug}/lending-laws/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
-          {stateName} lending laws
-        </a>
+        {stateHubExists ? (
+          <a href={`/state/${stateSlug}/lending-laws/`} class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+            {stateName} lending laws
+          </a>
+        ) : (
+          <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
+            Consumer protection
+          </a>
+        )}
         <a href="/answers/how-to-get-a-personal-loan/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">
           Borrowing questions
         </a>
@@ -365,11 +384,13 @@ const jsonLd = [
                 </div>
               )}
             </div>
-            <div class="mt-4 pt-3 border-t border-border">
-              <a href={`/state/${stateSlug}/lending-laws/`} class="text-sm text-primary hover:underline">
-                View full {stateName} lending laws &rarr;
-              </a>
-            </div>
+            {stateHubExists && (
+              <div class="mt-4 pt-3 border-t border-border">
+                <a href={`/state/${stateSlug}/lending-laws/`} class="text-sm text-primary hover:underline">
+                  View full {stateName} lending laws &rarr;
+                </a>
+              </div>
+            )}
           </section>
         )}
 
@@ -536,11 +557,13 @@ const jsonLd = [
                 <LenderCard lender={lender} />
               ))}
             </div>
-            <div class="mt-4">
-              <a href={`/state/${stateSlug}/`} class="text-sm text-primary hover:underline">
-                View all lenders in {stateName} &rarr;
-              </a>
-            </div>
+            {stateHubExists && (
+              <div class="mt-4">
+                <a href={`/state/${stateSlug}/`} class="text-sm text-primary hover:underline">
+                  View all lenders in {stateName} &rarr;
+                </a>
+              </div>
+            )}
           </section>
         )}
 
@@ -672,16 +695,18 @@ const jsonLd = [
           </div>
         )}
 
-        <!-- State Page Link -->
-        <div class="glass-card p-5" style="pointer-events: none;">
-          <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">{stateName} Overview</h3>
-          <p class="text-sm text-muted mb-3">
-            View all lenders, lending laws, and consumer protections across {stateName}.
-          </p>
-          <a href={`/state/${stateSlug}/`} class="text-sm text-primary hover:underline" style="pointer-events: auto;">
-            {stateName} credit guide &rarr;
-          </a>
-        </div>
+        {stateHubExists && (
+          <!-- State Page Link -->
+          <div class="glass-card p-5" style="pointer-events: none;">
+            <h3 class="text-sm font-bold text-text mb-3 uppercase tracking-wide">{stateName} Overview</h3>
+            <p class="text-sm text-muted mb-3">
+              View all lenders, lending laws, and consumer protections across {stateName}.
+            </p>
+            <a href={`/state/${stateSlug}/`} class="text-sm text-primary hover:underline" style="pointer-events: auto;">
+              {stateName} credit guide &rarr;
+            </a>
+          </div>
+        )}
       </aside>
     </div>
   </div>

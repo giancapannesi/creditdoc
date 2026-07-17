@@ -1,17 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /go/
 
-User-agent: SEBot-WA
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-Sitemap: https://www.creditdoc.co/sitemap-index.xml
-
-# LLMs: https://www.creditdoc.co/llms.txt
-
-# AI crawlers welcome
 User-agent: GPTBot
 Allow: /
 
@@ -32,3 +23,11 @@ Allow: /
 
 User-agent: Bytespider
 Allow: /
+
+User-agent: SEBot-WA
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+Sitemap: https://www.creditdoc.co/sitemap-index.xml

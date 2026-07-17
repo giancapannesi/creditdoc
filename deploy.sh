@@ -13,15 +13,36 @@ python3 scripts/export_cfpb_trends.py 2>/dev/null || true
 # 1. Build
 echo ""
 echo "[1/4] Building..."
-npm run build 2>&1 | tail -3
+BUILD_LOG="/tmp/creditdoc_build_$(date +%s).log"
+if ! npm run build > "$BUILD_LOG" 2>&1; then
+  echo "!!! BUILD FAILED — last 40 lines of $BUILD_LOG !!!"
+  tail -40 "$BUILD_LOG"
+  exit 1
+fi
+tail -3 "$BUILD_LOG"
+
+# Post-build sanity: dist must have thousands of files, not zero.
+DIST_COUNT=$(find dist -name '*.html' 2>/dev/null | wc -l)
+if [ "$DIST_COUNT" -lt 10000 ]; then
+  echo "!!! DIST HAS ONLY $DIST_COUNT HTML FILES — EXPECTED >10000 — ABORTING !!!"
+  echo "Build log: $BUILD_LOG"
+  exit 1
+fi
+echo "  dist has $DIST_COUNT HTML files"
 
 # 2. Deploy to Cloudflare Workers
 echo ""
 echo "[2/4] Deploying to Cloudflare Workers..."
-CLOUDFLARE_API_TOKEN="" \
-CLOUDFLARE_EMAIL="$CLOUDFLARE_EMAIL" \
-CLOUDFLARE_API_KEY="$CLOUDFLARE_GLOBAL_API_KEY" \
-npx wrangler deploy 2>&1 | tail -5
+DEPLOY_LOG="/tmp/creditdoc_deploy_$(date +%s).log"
+if ! CLOUDFLARE_API_TOKEN="" \
+     CLOUDFLARE_EMAIL="$CLOUDFLARE_EMAIL" \
+     CLOUDFLARE_API_KEY="$CLOUDFLARE_GLOBAL_API_KEY" \
+     npx wrangler deploy > "$DEPLOY_LOG" 2>&1; then
+  echo "!!! WRANGLER DEPLOY FAILED — last 40 lines of $DEPLOY_LOG !!!"
+  tail -40 "$DEPLOY_LOG"
+  exit 1
+fi
+tail -5 "$DEPLOY_LOG"
 
 # 3. Purge Cloudflare cache.
 #
