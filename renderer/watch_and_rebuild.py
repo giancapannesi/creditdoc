@@ -61,7 +61,7 @@ def changed_slugs_since(last_seen: str, limit: int) -> list[tuple[str, str]]:
         conn.row_factory = sqlite3.Row
         rows = conn.execute(
             "SELECT slug, updated_at FROM lenders "
-            "WHERE updated_at > ? AND processing_status IN ('ready_for_index','approved') "
+            "WHERE updated_at > ? AND processing_status IN ('ready_for_index','pending_approval') "
             "ORDER BY updated_at ASC LIMIT ?",
             (last_seen, limit + 1),
         ).fetchall()
