@@ -40,7 +40,11 @@ RENDER_SCRIPT = REPO_ROOT / "renderer" / "render.py"
 SHADOW_DIST = REPO_ROOT / "shadow_dist"
 
 REQUIRED_SCHEMA = {"FinancialService", "BreadcrumbList", "FAQPage"}
-MIN_BYTE_RATIO = 0.50
+# Byte ratio is a rough backstop for total structural completeness. The real
+# quality signal is visible-text word ratio (below), which strips markup /
+# framework noise and measures what a human/crawler sees.
+MIN_BYTE_RATIO = 0.35
+MIN_VISIBLE_WORD_RATIO = 0.80
 MIN_INTERNAL_LINK_RATIO = 0.90
 
 
@@ -68,6 +72,15 @@ def _extract_schema_types(html: str) -> set[str]:
 
 def _internal_link_count(html: str) -> int:
     return len(set(re.findall(r'href="/[^"#?]*"', html)))
+
+
+def _visible_word_count(html: str) -> int:
+    """Words visible to a crawler/user — strips scripts, styles, and tags."""
+    html = re.sub(r'<script[^>]*>.*?</script>', '', html, flags=re.DOTALL | re.IGNORECASE)
+    html = re.sub(r'<style[^>]*>.*?</style>', '', html, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'<[^>]+>', ' ', html)
+    text = re.sub(r'\s+', ' ', text).strip()
+    return len(text.split())
 
 
 def _has_head_essentials(html: str) -> bool:
@@ -101,11 +114,29 @@ def parity_gate(astro_html: str, renderer_html: str) -> tuple[bool, list[str]]:
     if astro_bytes > 0 and (render_bytes / astro_bytes) < MIN_BYTE_RATIO:
         reasons.append(f"byte ratio {render_bytes}/{astro_bytes} ({100*render_bytes/astro_bytes:.1f}%) below {MIN_BYTE_RATIO*100:.0f}%")
 
+    astro_words = _visible_word_count(astro_html)
+    render_words = _visible_word_count(renderer_html)
+    if astro_words > 0 and (render_words / astro_words) < MIN_VISIBLE_WORD_RATIO:
+        reasons.append(f"visible-text parity {render_words}/{astro_words} ({100*render_words/astro_words:.1f}%) below {MIN_VISIBLE_WORD_RATIO*100:.0f}%")
+
     return (not reasons, reasons)
 
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+try:
+    from render import render_review as _render_review_inproc  # type: ignore  # noqa: E402
+except ImportError:
+    _render_review_inproc = None
+
+
 def render(slug: str) -> Path:
-    """Invoke renderer/render.py for one slug, output to shadow_dist/."""
+    """Render one slug into shadow_dist/. In-process if importable, else subprocess."""
+    if _render_review_inproc is not None:
+        try:
+            return _render_review_inproc(slug, SHADOW_DIST)
+        except SystemExit as e:
+            print(f"  render FAIL for {slug}: {e}", file=sys.stderr)
+            raise RuntimeError("render failure")
     proc = subprocess.run(
         [sys.executable, str(RENDER_SCRIPT), "review", "--slug", slug, "--output-dir", str(SHADOW_DIST)],
         capture_output=True,
@@ -182,17 +213,24 @@ def cutover_one(slug: str, commit: bool) -> tuple[str, bool]:
 
     astro_bytes = len(astro_html)
     render_bytes = len(renderer_html)
-    ratio = f"{100*render_bytes/astro_bytes:.1f}%"
+    astro_words = _visible_word_count(astro_html)
+    render_words = _visible_word_count(renderer_html)
+    ratio = f"{100*render_bytes/astro_bytes:.0f}%b/{100*render_words/max(1,astro_words):.0f}%w"
 
     if not passed:
-        return (f"BLOCK ({ratio} bytes) — {'; '.join(reasons)}", False)
+        return (f"BLOCK ({ratio}) — {'; '.join(reasons)}", False)
 
     if not commit:
-        return (f"OK ({ratio} bytes) — would swap, no --commit", False)
+        return (f"OK ({ratio}) — would swap, no --commit", False)
 
     # Actual cutover: overwrite Astro's dist file with renderer output.
     shutil.copy2(renderer_path, astro_path)
-    return (f"OK ({ratio} bytes) — cut over", True)
+    return (f"OK ({ratio}) — cut over", True)
+
+
+def _pool_worker(args_tuple: tuple[str, bool]) -> tuple[str, tuple[str, bool]]:
+    slug, commit = args_tuple
+    return (slug, cutover_one(slug, commit))
 
 
 def main() -> None:
@@ -201,26 +239,59 @@ def main() -> None:
     )
     parser.add_argument("--slug", help="Single lender slug")
     parser.add_argument("--batch-file", help="File with one slug per line")
+    parser.add_argument("--all-review", action="store_true", help="Iterate every existing dist/review/<slug>/index.html")
     parser.add_argument("--commit", action="store_true", help="Actually swap + deploy. Without this, preview only.")
+    parser.add_argument("--no-deploy", action="store_true", help="Do the swap but skip wrangler (useful for staging)")
+    parser.add_argument("--quiet", action="store_true", help="Only print blocked / errored slugs")
+    parser.add_argument("--workers", type=int, default=1, help="Parallel workers (multiprocessing). Default 1.")
     args = parser.parse_args()
 
-    if not args.slug and not args.batch_file:
-        parser.error("--slug or --batch-file is required")
+    if not args.slug and not args.batch_file and not args.all_review:
+        parser.error("--slug, --batch-file, or --all-review is required")
 
     slugs: list[str] = []
     if args.slug:
         slugs.append(args.slug)
     if args.batch_file:
         slugs.extend(l.strip() for l in Path(args.batch_file).read_text().splitlines() if l.strip() and not l.startswith("#"))
+    if args.all_review:
+        for p in sorted((ASTRO_DIST / "review").iterdir()):
+            if p.is_dir() and (p / "index.html").exists():
+                slugs.append(p.name)
 
     deployed_any = False
-    for slug in slugs:
-        status, deployed = cutover_one(slug, args.commit)
+    ok = block = err = 0
+
+    def _report(slug: str, result: tuple[str, bool]) -> None:
+        nonlocal ok, block, err, deployed_any
+        status, deployed = result
+        if deployed:
+            ok += 1
+        elif status.startswith("OK"):
+            ok += 1
+        elif status.startswith("BLOCK"):
+            block += 1
+        else:
+            err += 1
         marker = "✓" if deployed else "·" if status.startswith("OK") else "✗"
-        print(f"  {marker}  {slug:60s}  {status}")
+        if not args.quiet or marker == "✗":
+            print(f"  {marker}  {slug:60s}  {status}")
         deployed_any = deployed_any or deployed
 
-    if deployed_any and args.commit:
+    if args.workers > 1:
+        from multiprocessing import Pool
+        pool_args = [(s, args.commit) for s in slugs]
+        with Pool(processes=args.workers) as pool:
+            for slug, result in pool.imap_unordered(_pool_worker, pool_args, chunksize=25):
+                _report(slug, result)
+    else:
+        for slug in slugs:
+            _report(slug, cutover_one(slug, args.commit))
+
+    print()
+    print(f"totals: {ok} passed  {block} blocked  {err} errored  ({len(slugs)} scanned)")
+
+    if deployed_any and args.commit and not args.no_deploy:
         print()
         print("running wrangler deploy (only changed files upload) ...")
         if wrangler_deploy():

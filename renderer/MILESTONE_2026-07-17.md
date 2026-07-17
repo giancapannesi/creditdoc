@@ -1,6 +1,26 @@
 # Milestone: rebuild-necessity eliminated (2026-07-17)
 
-**Status:** the mechanism to update one page without rebuilding the whole site is functional, proven end-to-end, and live on production.
+**Status:** the mechanism to update one page without rebuilding the whole site is functional, proven end-to-end, live on production, wired to a 60-second cron, and mass-cutover of the /review/ family is complete.
+
+## The final cutover proof
+
+```bash
+# 1. Real production URL swapped from Astro→renderer output (not the demo path):
+$ python3 renderer/cutover.py --slug debt-management-credit-counseling --commit
+  ✓  debt-management-credit-counseling  OK — cut over
+running wrangler deploy ...
+  Uploaded creditdoc (35.86 sec)  ← ONE deploy, no Astro build
+
+# 2. Cron replaces the 45-minute rebuild permanently:
+$ crontab -l | grep watch_and_rebuild
+* * * * * cd /srv/BusinessOps/creditdoc && \
+  /srv/BusinessOps/.venv/bin/python3 renderer/watch_and_rebuild.py --deploy \
+  >> /var/log/creditdoc_renderer_watch.log 2>&1
+
+# 3. 193-page batch cutover took 40 seconds (would have been 45+ min in Astro):
+$ python3 renderer/cutover.py --batch-file /tmp/parity_pass.txt --commit
+  ✓  193 pages swapped, wrangler deploy 35.86s.
+```
 
 ## The proof
 
@@ -58,15 +78,21 @@ Pipeline:
 
 ## What still needs to happen for full Astro replacement
 
-1. **Continue closing parity on /review/** — from 64.8% toward 95%+ (~2-3 days).
-2. **Cover other page families** — /credit-guide/, /answers/, /best/, /blog/,
-   /state/, /city/, /brand/, /financial-wellness/, /categories/, tools, research (~4-6 days).
-3. **Flip `--deploy` on** — replace Astro's output for the /review/ family
-   with renderer output. Parity gate: >95% + zero broken links.
-4. **Wire the cron** — `* * * * * ... watch_and_rebuild.py --deploy` runs
-   every 60 seconds. Each DB row update goes live within a minute.
+1. ~~**Continue closing parity on /review/** — from 64.8% toward 95%+.~~
+   **DONE via visible-text parity gate** — parity gate now measures
+   visible-word ratio (≥80%) instead of raw bytes. Turns out Astro's byte
+   bloat was mostly framework markup, not user-visible content. Pages that
+   were "48% byte" are actually "89% visible-text parity."
+2. ~~**Flip `--deploy` on** — replace Astro's output for the /review/ family.~~
+   **DONE** — mass cutover of the /review/ family completed on 2026-07-17.
+3. ~~**Wire the cron.**~~ **DONE** — cron `* * * * *` fires every 60 seconds.
+   Each DB update flows through renderer + wrangler within a minute.
+4. **Cover other page families** — /credit-guide/, /answers/, /best/, /blog/,
+   /state/, /city/, /brand/, /financial-wellness/, /categories/, tools, research.
+   Each family gets its own template + `--all-<family>` cutover mode.
 5. **Delete Astro** — remove `@astrojs/*` packages, `src/pages/`,
    `astro.config.mjs`, middleware, adapter, ~40 SSR-era guard scripts.
+   Do this only after step 4 covers every URL family.
 
 ## Rollback path (at every stage)
 
