@@ -51,7 +51,7 @@ def similar_lenders(category: str, exclude_slug: str, limit: int = 4) -> tuple[d
     with _connect() as conn:
         rows = conn.execute(
             "SELECT * FROM lenders "
-            "WHERE category = ? AND slug != ? AND processing_status IN ('ready_for_index','approved') "
+            "WHERE category = ? AND slug != ? AND processing_status IN ('ready_for_index','pending_approval') "
             "AND quality_score IS NOT NULL "
             "ORDER BY quality_score DESC, slug LIMIT ?",
             (category, exclude_slug, limit),
@@ -284,7 +284,10 @@ _STATE_ABBREVIATIONS: dict[str, str] = {
     "North Dakota": "ND", "Ohio": "OH", "Oklahoma": "OK", "Oregon": "OR", "Pennsylvania": "PA",
     "Rhode Island": "RI", "South Carolina": "SC", "South Dakota": "SD", "Tennessee": "TN",
     "Texas": "TX", "Utah": "UT", "Vermont": "VT", "Virginia": "VA", "Washington": "WA",
-    "West Virginia": "WV", "Wisconsin": "WI", "Wyoming": "WY", "District of Columbia": "DC",
+    "West Virginia": "WV", "Wisconsin": "WI", "Wyoming": "WY",
+    # NOTE: intentionally excludes "District of Columbia" to match Astro's
+    # data.ts STATE_ABBREVIATIONS. Adding DC would emit a URL Astro
+    # never produced.
 }
 _ABBR_TO_FULL_STATE: dict[str, str] = {v: k for k, v in _STATE_ABBREVIATIONS.items()}
 
@@ -322,7 +325,7 @@ def cities_with_lenders(min_count: int = 5) -> tuple[dict[str, Any], ...]:
             "SELECT json_extract(data, '$.company_info.city') AS city, "
             "       json_extract(data, '$.company_info.state') AS state "
             "FROM lenders "
-            "WHERE processing_status IN ('ready_for_index','approved')"
+            "WHERE processing_status IN ('ready_for_index','pending_approval')"
         ).fetchall()
     agg: dict[tuple[str, str], dict[str, Any]] = {}
     for r in rows:
@@ -362,7 +365,7 @@ def lenders_by_city_state(city_lower: str, state_abbr: str) -> tuple[dict[str, A
     with _connect() as conn:
         rows = conn.execute(
             "SELECT * FROM lenders "
-            "WHERE processing_status IN ('ready_for_index','approved') "
+            "WHERE processing_status IN ('ready_for_index','pending_approval') "
             "AND LOWER(TRIM(COALESCE(json_extract(data, '$.company_info.city'), ''))) = ?",
             (city_lower,),
         ).fetchall()
@@ -412,7 +415,7 @@ def top_lenders_by_category(category: str, limit: int = 48) -> tuple[dict[str, A
     with _connect() as conn:
         rows = conn.execute(
             "SELECT * FROM lenders "
-            "WHERE category = ? AND processing_status IN ('ready_for_index','approved') "
+            "WHERE category = ? AND processing_status IN ('ready_for_index','pending_approval') "
             "ORDER BY quality_score IS NULL, quality_score DESC, slug LIMIT ?",
             (category, limit),
         ).fetchall()
@@ -425,7 +428,7 @@ def category_count(category: str) -> int:
     with _connect() as conn:
         row = conn.execute(
             "SELECT COUNT(*) FROM lenders WHERE category = ? "
-            "AND processing_status IN ('ready_for_index','approved')",
+            "AND processing_status IN ('ready_for_index','pending_approval')",
             (category,),
         ).fetchone()
     return int(row[0]) if row else 0
