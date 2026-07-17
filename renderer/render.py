@@ -30,6 +30,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import (  # noqa: E402
     category_to_pillar,
+    glossary_for_review,
     load_lender,
     related_answers,
     similar_lenders,
@@ -67,6 +68,7 @@ def render_review(slug: str, output_dir: Path) -> Path:
     if lender_state:
         lender["state"] = lender_state
     state_ctx = state_context(lender_state)
+    glossary = glossary_for_review(lender["category"] or "", limit=15)
 
     # FAQ: prefer data-driven lender-specific questions, then merge in category template.
     # Matches Astro's behavior where the FAQ is populated from the lender's own fields.
@@ -99,6 +101,7 @@ def render_review(slug: str, output_dir: Path) -> Path:
         related_answers=answers,
         wellness_guides=wellness,
         state_ctx=state_ctx,
+        glossary=glossary,
     )
 
     out_path = output_dir / "review" / slug / "index.html"

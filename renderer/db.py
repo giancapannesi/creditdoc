@@ -92,7 +92,42 @@ def wellness_guides_by_category(category: str, limit: int = 4) -> tuple[dict[str
 
 
 _STATES_JSON_PATH = Path(__file__).resolve().parent.parent / "src" / "content" / "states.json"
+_GLOSSARY_JSON_PATH = Path(__file__).resolve().parent.parent / "src" / "content" / "glossary-terms.json"
 _states_cache: dict[str, dict[str, Any]] | None = None
+_glossary_cache: list[dict[str, Any]] | None = None
+
+
+def _load_glossary() -> list[dict[str, Any]]:
+    global _glossary_cache
+    if _glossary_cache is None:
+        try:
+            _glossary_cache = json.loads(_GLOSSARY_JSON_PATH.read_text(encoding="utf-8"))
+        except (FileNotFoundError, json.JSONDecodeError):
+            _glossary_cache = []
+    return _glossary_cache
+
+
+def glossary_for_review(category: str, limit: int = 12) -> list[dict[str, Any]]:
+    """Return glossary terms matching a review-page context for the given category."""
+    all_terms = _load_glossary()
+    ctx = f"review-{category}"
+    generic = "review-general"
+    matches = []
+    for t in all_terms:
+        contexts = t.get("page_contexts") or []
+        if ctx in contexts or generic in contexts or "review-all" in contexts:
+            matches.append(t)
+    # Category-agnostic: if too few matches, pad with credit-scoring terms
+    if len(matches) < limit:
+        for t in all_terms:
+            if t in matches:
+                continue
+            cat = t.get("category", "")
+            if cat in ("credit-and-scoring", "how-loans-work"):
+                matches.append(t)
+            if len(matches) >= limit:
+                break
+    return matches[:limit]
 
 
 def _load_states_json() -> dict[str, dict[str, Any]]:

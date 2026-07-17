@@ -64,6 +64,18 @@
 } | tojson }}
 </script>
 {% endif %}
+{% if glossary %}
+{% set glossary_entities = [] %}
+{% for g in glossary %}{% set _ = glossary_entities.append({"@type": "DefinedTerm", "name": g.term, "description": g.plain_definition, "url": "https://www.creditdoc.co/glossary/#" + g.slug}) %}{% endfor %}
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "CreditDoc Glossary — key terms for this page",
+  "hasDefinedTerm": glossary_entities,
+} | tojson }}
+</script>
+{% endif %}
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="stylesheet" href="/styles.css">
 </head>
@@ -310,6 +322,26 @@ It does not confirm that {{ lender.name }} or this specific location is licensed
 <li>Check state regulator listings for {{ lender.name }}'s licensing before committing.</li>
 <li><a href="/go/{{ lender.slug }}/?source=review_quiz" rel="nofollow noopener">Visit {{ lender.name }}</a> once you're ready.</li>
 </ol>
+</section>
+{% endif %}
+{% if glossary %}
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Glossary of Terms</h2>
+<p class="text-sm text-muted mb-4">Common terms that come up when comparing {{ lender.category|title|replace('-',' ') }} providers. Full glossary at <a href="/glossary/" class="text-primary hover:underline">creditdoc.co/glossary/</a>.</p>
+<dl class="space-y-4">
+{% for g in glossary %}
+<div class="glass-card p-4">
+<dt class="font-semibold" id="{{ g.slug }}">{{ g.term }}{% if g.full_form and g.full_form != g.term %} — <span class="text-sm text-muted font-normal">{{ g.full_form }}</span>{% endif %}</dt>
+<dd class="text-sm mt-2">{{ g.plain_definition }}</dd>
+{% if g.why_it_matters %}
+<dd class="text-xs text-muted mt-2"><strong>Why it matters:</strong> {{ g.why_it_matters|truncate(220, killwords=True) }}</dd>
+{% endif %}
+{% if g.example %}
+<dd class="text-xs text-muted mt-1"><strong>Example:</strong> {{ g.example|truncate(240, killwords=True) }}</dd>
+{% endif %}
+</div>
+{% endfor %}
+</dl>
 </section>
 {% endif %}
 <footer class="text-xs text-muted mt-16 pt-4 border-t border-border">
