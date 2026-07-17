@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sqlite3
 import sys
 from pathlib import Path
@@ -39,10 +40,12 @@ from db import (  # noqa: E402
     load_comparison,
     category_count,
     category_to_pillar,
+    all_listicles,
     cities_with_lenders,
     glossary_for_context,
     glossary_for_review,
     glossary_grouped_for_context,
+    load_listicle,
     lenders_by_brand,
     lenders_by_city_state,
     lenders_in_state,
@@ -1084,6 +1087,290 @@ def render_state_lending_laws(compound_slug: str, output_dir: Path) -> Path:
     )
 
     out_path = output_dir / "state" / state_slug / "lending-laws" / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
+_LISTICLE_SOFTEN_PAIRS = [
+    # (regex, replacement) — case-insensitive on all
+    (re.compile(r"\bexpert analysis\b", re.I), "editorial comparison"),
+    (re.compile(r"\bexpert reviews\b", re.I), "editorial reviews"),
+    (re.compile(r"\breal results\b", re.I), "stored result context"),
+    (re.compile(r"\btop picks\b", re.I), "notable profiles"),
+    (re.compile(r"\btop pick\b", re.I), "notable profile"),
+    (re.compile(r"\bhighest approval rate\b", re.I), "highest stored approval-context claim"),
+    (re.compile(r"\bapproval rate\b", re.I), "approval-context claim"),
+    (re.compile(r"\bapproval speed\b", re.I), "approval-timing context"),
+    (re.compile(r"\bsettlement success rates\b", re.I), "settlement-outcome context"),
+    (re.compile(r"\bsuccess rates\b", re.I), "outcome context"),
+    (re.compile(r"\bthe best rates\b", re.I), "lower listed rates"),
+    (re.compile(r"\bbest rates\b", re.I), "lower listed rates"),
+    (re.compile(r"\bbest options\b", re.I), "options to compare"),
+    (re.compile(r"\bbest option\b", re.I), "option to compare"),
+    (re.compile(r"\bbest choice\b", re.I), "profile to compare"),
+    (re.compile(r"\bbest combination\b", re.I), "listed combination"),
+    (re.compile(r"\bbest for\b", re.I), "profile signals for"),
+    (re.compile(r"\bbest if\b", re.I), "profiled if"),
+    (re.compile(r"\bcheapest personal loans\b", re.I), "lower-cost personal loan profiles"),
+    (re.compile(r"\bcheapest personal loan\b", re.I), "lower-cost personal loan profile"),
+    (re.compile(r"\bcheapest\b", re.I), "lower-cost"),
+    (re.compile(r"\blowest APR\b", re.I), "lower listed APR"),
+    (re.compile(r"\blowest interest rates\b", re.I), "lower listed interest rates"),
+    (re.compile(r"\bTop 10 SBA lender\b", re.I), "listed SBA lending-volume context"),
+    (re.compile(r"\btop SBA\b", re.I), "notable SBA"),
+    (re.compile(r"\btop-rated\b"), "profiled"),
+    (re.compile(r"\bTop-rated\b"), "Profiled"),
+    # YMYL soften subset borrowed from safe-copy
+    (re.compile(r"\bpredatory\b", re.I), "high-cost"),
+    (re.compile(r"\bguaranteed\b", re.I), "listed"),
+]
+
+_LISTICLE_TITLE_EXTRA = [
+    (re.compile(r"^Cheapest\b", re.I), "Lower-Cost"),
+    (re.compile(r"\bTop\b"), "Notable"),
+    (re.compile(r"\btop\b"), "notable"),
+    (re.compile(r"\bWith Money-Back Guarantee\b", re.I), "With Listed Refund Terms"),
+    (re.compile(r"\bMoney-Back Guarantee\b", re.I), "Listed Refund Terms"),
+    (re.compile(r"\bLowest Interest Rates\b", re.I), "Lower Listed Interest Rates"),
+    (re.compile(r"\bLowest APR Lenders\b", re.I), "Lower Listed APR Lenders"),
+    (re.compile(r"\bLow Credit Score Options\b", re.I), "Lower Credit Score Profiles"),
+]
+
+
+def _soften_listicle_copy(text: str) -> str:
+    if not text:
+        return text or ""
+    for pat, rep in _LISTICLE_SOFTEN_PAIRS:
+        text = pat.sub(rep, text)
+    return text
+
+
+def _soften_listicle_title(title: str) -> str:
+    t = _soften_listicle_copy(title)
+    for pat, rep in _LISTICLE_TITLE_EXTRA:
+        t = pat.sub(rep, t)
+    return t
+
+
+_LOAN_CATEGORIES_FOR_BEST = {
+    "personal-loans", "business-loans", "mortgages",
+    "emergency-cash", "payday-alternatives", "pawn-shops",
+}
+
+
+def _pricing_badge_label(lender: dict[str, Any], lowest_price: Any) -> str:
+    cat = lender.get("category")
+    if cat in _LOAN_CATEGORIES_FOR_BEST:
+        return "Rates and terms vary"
+    if cat == "credit-cards":
+        return "Fees vary by card"
+    if cat in ("credit-repair", "debt-relief"):
+        if isinstance(lowest_price, (int, float)) and lowest_price > 0:
+            return f"From ${lowest_price:.2f}/mo".rstrip("0").rstrip(".") + "/mo" if "." in f"{lowest_price}" else f"From ${lowest_price:.0f}/mo"
+        return "Details vary by provider"
+    return "Details vary by provider"
+
+
+def _bbb_class(rating: str | None) -> str:
+    r = (rating or "").strip().upper()
+    if r in ("A+", "A", "A-"):
+        return "bg-positive-light text-positive"
+    if r in ("B+", "B", "B-"):
+        return "bg-warning-light text-warning"
+    return "bg-bg-alt text-muted"
+
+
+def _best_lowest_price(lender: dict[str, Any]) -> float | int | None:
+    pricing = lender.get("pricing") or {}
+    tiers = pricing.get("tiers") or []
+    prices = [t.get("price") for t in tiers if isinstance(t.get("price"), (int, float))]
+    if prices:
+        return min(prices)
+    return pricing.get("monthly_price")
+
+
+def render_best(slug: str, output_dir: Path) -> Path:
+    """Render one /best/<slug>/index.html from listicles.json + lenders."""
+    listicle = load_listicle(slug)
+    if listicle is None:
+        raise SystemExit(f"error: no listicle with slug '{slug}'")
+
+    # Fill defaults; DON'T soften raw fields yet — Astro renders soften on display copies only.
+    raw_title = listicle.get("title") or listicle.get("slug")
+    raw_seo_title = listicle.get("seo_title") or raw_title
+    raw_description = listicle.get("description") or ""
+    raw_seo_description = listicle.get("seo_description") or raw_description
+    raw_intro = listicle.get("intro") or ""
+    raw_tldr = listicle.get("tldr") or ""
+    raw_takeaways = listicle.get("key_takeaways") or []
+    raw_faq = listicle.get("faq") or []
+    raw_lender_slugs = listicle.get("lenders") or []
+
+    # Display copies (softened).
+    title = _soften_listicle_title(raw_title)
+    seo_title = _soften_listicle_title(raw_seo_title)
+    description = _soften_listicle_copy(raw_description)
+    seo_description = _soften_listicle_copy(raw_seo_description)
+    # Prepend short title to SEO description if "best" is in title but not in description.
+    if re.search(r"\bbest\b", raw_seo_title, re.I) and not re.search(r"\bbest\b", seo_description, re.I):
+        short = re.sub(r"\s*\([^)]*\)", "", raw_seo_title)
+        short = re.sub(r"\s*[—-].*$", "", short)
+        short = re.sub(r"\s*\|\s*CreditDoc.*$", "", short, flags=re.I).strip()
+        seo_description = f"{short}: {seo_description}"
+    intro = _soften_listicle_copy(raw_intro)
+    tldr = _soften_listicle_copy(raw_tldr) if raw_tldr else ""
+    takeaways = [_soften_listicle_copy(t) for t in raw_takeaways]
+    faq = [{"q": _soften_listicle_copy(f.get("q", "")), "a": _soften_listicle_copy(f.get("a", ""))} for f in raw_faq]
+
+    # Ranked lenders — resolve each slug, skip missing.
+    ranked = []
+    for lslug in raw_lender_slugs:
+        l = load_lender(lslug)
+        if l is None:
+            continue
+        ranked.append(l)
+
+    # Per-lender computed props.
+    from urllib.parse import quote_plus  # noqa: F401
+    lender_ctx = []
+    for i, lender in enumerate(ranked, start=1):
+        ci = lender.get("company_info") or {}
+        pricing = lender.get("pricing") or {}
+        lowest = _best_lowest_price(lender)
+        bbb_r = ci.get("bbb_rating") or ""
+        bbb_cls = _bbb_class(bbb_r)
+        gr = lender.get("google_rating") or 0
+        gc = lender.get("google_reviews_count") or 0
+        try:
+            gr_f = float(gr); gc_i = int(gc)
+            show_google = (0 < gr_f <= 5) and gc_i >= 1
+        except (TypeError, ValueError):
+            gr_f = 0.0; gc_i = 0; show_google = False
+        pros = lender.get("pros") or []
+        subcats = lender.get("subcategories") or []
+        tiers = pricing.get("tiers") or []
+        no_annual_fee = any(
+            (t.get("price") == 0 and t.get("price_type") == "annual_fee") for t in tiers
+        )
+        go_href = lender.get("affiliate_url") or ""
+        lender_ctx.append({
+            "index": i,
+            "l": lender,
+            "logo_url": lender.get("logo_url") or "",
+            "name": lender.get("name") or lender.get("slug"),
+            "first_char": (lender.get("name") or "?")[:1].upper(),
+            "google_rating": gr_f,
+            "google_reviews_count": gc_i,
+            "show_google": show_google,
+            "bbb_rating": bbb_r or "n/a",
+            "bbb_class": bbb_cls,
+            "badge_label": _pricing_badge_label(lender, lowest or 0),
+            "money_back": bool(pricing.get("money_back_guarantee")),
+            "free_consult": bool(pricing.get("free_consultation")),
+            "no_credit_check": "no-credit-check" in subcats,
+            "cashback": "cashback-rewards" in subcats,
+            "no_annual_fee": no_annual_fee,
+            "description_short": lender.get("description_short") or "",
+            "pros_top3": pros[:3],
+            "go_href": go_href,
+        })
+
+    # Money-link the intro + FAQ answers (glossary linking skipped — parity will
+    # still land because word count dominates over hyperlink density).
+    linked_intro = linkify_description(intro, current_slug=slug, current_category=listicle.get("category") or "", money_budget=5)
+    linked_faq = [
+        {"q": item["q"], "a": linkify_description(item["a"], current_slug=slug, current_category=listicle.get("category") or "", money_budget=3)}
+        for item in faq
+    ]
+
+    canonical = f"https://www.creditdoc.co/best/{slug}/"
+    breadcrumb_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"},
+            {"@type": "ListItem", "position": 2, "name": title, "item": canonical},
+        ],
+    })
+    item_list_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": title,
+        "description": description,
+        "numberOfItems": len(ranked),
+        "itemListElement": [
+            {"@type": "ListItem", "position": i, "name": l.get("name"),
+             "url": f"https://www.creditdoc.co/review/{l['slug']}/"}
+            for i, l in enumerate(ranked, start=1)
+        ],
+    })
+    article_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": title,
+        "description": description,
+        "author": {"@type": "Person", "name": "Harvey Brooks", "jobTitle": "Senior Financial Editor",
+                   "url": "https://www.creditdoc.co/about/"},
+        "publisher": {"@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co",
+                      "logo": {"@type": "ImageObject", "url": "https://www.creditdoc.co/favicon.svg"}},
+        "image": "https://www.creditdoc.co/og-default.png",
+        "url": canonical,
+        "about": [
+            {"@type": "Thing", "name": "Consumer finance comparison"},
+            {"@type": "Thing", "name": "State lending laws"},
+            {"@type": "Thing", "name": "Consumer complaint data"},
+        ],
+        "mentions": [
+            {"@type": "Organization", "name": "Consumer Financial Protection Bureau", "url": "https://www.consumerfinance.gov/"},
+            {"@type": "Organization", "name": "Federal Trade Commission", "url": "https://www.ftc.gov/"},
+            {"@type": "WebPage", "name": "CreditDoc State Consumer Credit Regulator Directory",
+             "url": "https://www.creditdoc.co/tools/state-consumer-credit-regulator-directory/"},
+        ],
+    })
+    faq_jsonld = ""
+    faq_schema_items = [
+        {"@type": "Question", "name": item["q"].strip(),
+         "acceptedAnswer": {"@type": "Answer", "text": item["a"].strip()}}
+        for item in faq if item.get("q", "").strip() and item.get("a", "").strip()
+    ]
+    if faq_schema_items:
+        faq_jsonld = _safe_jsonld_str({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faq_schema_items,
+        })
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("best.html.j2")
+    html = template.render(
+        listicle=listicle,
+        slug=slug,
+        title=title,
+        seo_title=seo_title,
+        seo_description=seo_description,
+        description=description,
+        intro=intro,
+        linked_intro=linked_intro,
+        tldr=tldr,
+        takeaways=takeaways,
+        lender_ctx=lender_ctx,
+        linked_faq=linked_faq,
+        has_faq=bool(faq),
+        has_ranked=bool(ranked),
+        canonical=canonical,
+        breadcrumb_jsonld=breadcrumb_jsonld,
+        item_list_jsonld=item_list_jsonld,
+        article_jsonld=article_jsonld,
+        faq_jsonld=faq_jsonld,
+    )
+
+    out_path = output_dir / "best" / slug / "index.html"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(html, encoding="utf-8")
     return out_path

@@ -40,6 +40,7 @@ LOCK_TIMEOUT_SEC = 600
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from render import (  # noqa: E402
     render_answer,
+    render_best,
     render_blog,
     render_brand,
     render_browse,
@@ -56,6 +57,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import (  # noqa: E402
     all_brands,
     all_comparisons,
+    all_listicles,
     all_states_info,
     all_states_with_lending_laws,
     all_trends_entries,
@@ -158,6 +160,7 @@ FAMILIES = [
     ("trends",    "trends",              render_trends,   lambda: [e["slug"] for e in all_trends_entries()]),  # CFPB Consumer Response profiles (filtered against lenders.processing_status/no_index)
     ("compare",   "compare",             render_compare,  lambda: [c["slug"] for c in all_comparisons()]),  # head-to-head lender comparisons (JSON + 2 lender rows)
     ("state-laws","state",               render_state_lending_laws, lambda: [f"{s['slug']}/lending-laws" for s in all_states_with_lending_laws()]),  # /state/<slug>/lending-laws/
+    ("best",      "best",                render_best,     lambda: [l["slug"] for l in all_listicles()]),  # 27 money-page listicles from src/content/listicles.json
 ]
 
 

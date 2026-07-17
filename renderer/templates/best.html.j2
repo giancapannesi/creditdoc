@@ -1,0 +1,205 @@
+{#
+  /best/<slug>/index.html — Jinja2 template for money-page listicles.
+  Matches Astro's /best/[slug].astro surface: breadcrumb + hero, TL;DR block
+  with key takeaways, softened intro (money-link enriched), ranked lender
+  list with rating/badges/pros/CTA, softened + linked FAQ, regulatory
+  research module footer copy, E-E-A-T author card, affiliate disclosure.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ seo_title }}</title>
+<meta name="description" content="{{ seo_description|striptags|truncate(160, killwords=True, end='') }}">
+<link rel="canonical" href="{{ canonical }}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ seo_title }}">
+<meta property="og:description" content="{{ seo_description|striptags|truncate(200, killwords=True, end='') }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:site_name" content="CreditDoc">
+<meta property="og:image" content="https://www.creditdoc.co/og-default.png">
+<link rel="stylesheet" href="/styles/site.css">
+<script type="application/ld+json">
+{{ breadcrumb_jsonld|safe }}
+</script>
+<script type="application/ld+json">
+{{ item_list_jsonld|safe }}
+</script>
+<script type="application/ld+json">
+{{ article_jsonld|safe }}
+</script>
+{% if faq_jsonld %}
+<script type="application/ld+json">
+{{ faq_jsonld|safe }}
+</script>
+{% endif %}
+</head>
+<body class="min-h-screen bg-bg text-text antialiased">
+{% include "_header.html" %}
+<main>
+  <nav class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li class="text-text font-medium">{{ title }}</li>
+    </ol>
+  </nav>
+
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <h1 class="text-2xl sm:text-3xl font-bold text-text">{{ title }}</h1>
+      <p class="mt-3 text-muted leading-relaxed">{{ description }}</p>
+      <p class="mt-3 text-sm text-muted">Written by <a href="/about/" class="text-primary hover:underline font-medium">Harvey Brooks</a>, Senior Financial Editor</p>
+    </div>
+  </section>
+
+  {% if tldr %}
+  <section class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
+    <div class="rounded-xl border-2 border-primary/30 bg-gradient-to-r from-primary/5 to-primary/10 p-6">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary text-white uppercase tracking-wide">TL;DR</span>
+        <span class="text-xs text-muted">Quick summary</span>
+      </div>
+      <p class="text-sm font-medium text-text leading-relaxed">{{ tldr }}</p>
+      {% if takeaways %}
+      <div class="mt-4 pt-4 border-t border-primary/20">
+        <p class="text-xs font-bold text-text uppercase tracking-wide mb-2">Key Takeaways</p>
+        <ul class="space-y-1.5">
+          {% for t in takeaways %}
+          <li class="flex items-start gap-2 text-sm text-muted">{{ t }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
+    <div class="glass-card p-6">
+      <p class="text-sm text-muted leading-relaxed">{{ linked_intro|safe }}</p>
+    </div>
+  </section>
+
+  {% if has_ranked %}
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="space-y-6">
+      {% for r in lender_ctx %}
+      <article class="glass-card p-6 relative">
+        <div class="absolute -top-4 -left-2 w-10 h-10 rounded-full bg-primary text-white text-lg font-bold flex items-center justify-center shadow-lg">{{ r.index }}</div>
+        <div class="flex flex-col sm:flex-row items-start gap-6 ml-6 sm:ml-8">
+          <div class="w-16 h-16 rounded-xl bg-bg-alt border border-border flex items-center justify-center shrink-0 overflow-hidden">
+            {% if r.logo_url %}
+            <img src="{{ r.logo_url }}" alt="{{ r.name }} logo" class="w-12 h-12 object-contain" loading="lazy">
+            {% else %}
+            <span class="text-xl font-bold text-primary">{{ r.first_char }}</span>
+            {% endif %}
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <h2 class="text-lg font-bold text-text">{{ r.name }}</h2>
+              {% if r.show_google %}
+              <div>
+                <span class="text-sm font-semibold">★ {{ '%.1f'|format(r.google_rating) }}</span>
+                <p class="mt-0.5 text-xs text-muted">Google rating from {{ '{:,}'.format(r.google_reviews_count) }} reviews</p>
+              </div>
+              {% else %}
+              <span class="text-xs text-muted">No stored Google rating</span>
+              {% endif %}
+            </div>
+            <div class="mt-3 flex flex-wrap items-center gap-2">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-primary-light text-primary">{{ r.badge_label }}</span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold {{ r.bbb_class }}">BBB: {{ r.bbb_rating }}</span>
+              {% if r.money_back %}<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-positive-light text-positive">Money-back term listed</span>{% endif %}
+              {% if r.free_consult %}<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-accent/10 text-accent">Free Consultation</span>{% endif %}
+              {% if r.no_credit_check %}<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">No-credit-check claim</span>{% endif %}
+              {% if r.cashback %}<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200">Cash Back Rewards</span>{% endif %}
+              {% if r.no_annual_fee %}<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 border border-blue-200">No Annual Fee</span>{% endif %}
+            </div>
+            <p class="mt-3 text-sm text-muted leading-relaxed">{{ r.description_short }}</p>
+            <div class="mt-3 space-y-1">
+              {% for pro in r.pros_top3 %}
+              <div class="flex items-start gap-2 text-sm text-text">{{ pro }}</div>
+              {% endfor %}
+            </div>
+            <div class="mt-4 flex flex-col sm:flex-row gap-2">
+              <a href="/review/{{ r.l.slug }}/" class="inline-flex items-center justify-center px-4 py-2.5 rounded-lg border border-border text-sm font-medium text-text hover:bg-bg-alt transition-colors">Read Full Profile</a>
+              {% if r.go_href %}
+              <a href="{{ r.go_href }}?source=best_{{ slug }}" target="_blank" rel="noopener noreferrer sponsored" class="inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-primary text-sm font-medium text-white hover:bg-primary-hover transition-colors">Visit {{ r.name }}</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if has_faq %}
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8" id="faq">
+    <h2 class="text-2xl font-bold text-text mb-6">Frequently Asked Questions</h2>
+    <div class="space-y-4">
+      {% for item in linked_faq %}
+      <details class="glass-card p-5 group" open>
+        <summary class="flex items-center justify-between cursor-pointer list-none">
+          <h3 class="text-base font-semibold text-text pr-4">{{ item.q }}</h3>
+        </summary>
+        <p class="mt-3 text-sm text-muted leading-relaxed">{{ item.a|safe }}</p>
+      </details>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="glass-card p-6">
+      <h2 class="text-lg font-bold text-text mb-2">Use This Guide With Regulatory Research</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        List-style guides are starting points. Compare each provider profile with local guides,
+        state lending-law resources, CreditDoc tools, and CFPB complaint-data context before
+        relying on a ranking, offer, or advertised rate. Every listing on this page is a research
+        anchor, not a recommendation. Combine the ranking with a licensing check via your state
+        agency, a check of the CFPB complaint database, and a written Truth in Lending disclosure
+        before you sign anything.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href="/state/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">State lending laws</a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">CFPB complaint context</a>
+        <a href="/tools/state-consumer-credit-regulator-directory/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">State regulator directory</a>
+        <a href="/answers/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Borrower questions</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+    <div class="rounded-xl border border-border bg-white p-5 flex gap-4">
+      <div class="flex-shrink-0">
+        <div class="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center text-white text-sm font-bold">HB</div>
+      </div>
+      <div>
+        <p class="text-sm font-semibold text-text">Harvey Brooks</p>
+        <p class="text-xs text-primary font-medium">Senior Financial Editor</p>
+        <p class="mt-2 text-xs text-muted leading-relaxed">
+          Harvey Brooks is a consumer finance writer specializing in credit repair, personal lending, and debt management.
+          With over a decade covering the industry, he makes financial literacy accessible to everyday Americans.
+          <a href="/about/" class="text-primary hover:underline">About our editorial team</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="rounded-lg bg-bg-alt border border-border p-4">
+      <p class="text-xs text-muted leading-relaxed">
+        <strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to
+        the services featured on this page. Compensation does not determine whether a provider can be covered.
+        <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.
+      </p>
+    </div>
+  </section>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>

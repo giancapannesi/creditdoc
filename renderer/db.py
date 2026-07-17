@@ -366,6 +366,32 @@ def glossary_for_context(context: str, limit: int | None = None) -> list[dict[st
     return matches
 
 
+_LISTICLES_JSON_PATH = Path(__file__).resolve().parent.parent / "src" / "content" / "listicles.json"
+_listicles_cache: list[dict[str, Any]] | None = None
+
+
+def _load_listicles() -> list[dict[str, Any]]:
+    global _listicles_cache
+    if _listicles_cache is None:
+        try:
+            _listicles_cache = json.loads(_LISTICLES_JSON_PATH.read_text(encoding="utf-8"))
+        except (FileNotFoundError, json.JSONDecodeError):
+            _listicles_cache = []
+    return _listicles_cache
+
+
+def all_listicles() -> tuple[dict[str, Any], ...]:
+    """All /best/ listicle rows from src/content/listicles.json."""
+    return tuple(_load_listicles())
+
+
+def load_listicle(slug: str) -> dict[str, Any] | None:
+    for l in _load_listicles():
+        if l.get("slug") == slug:
+            return l
+    return None
+
+
 def glossary_grouped_for_context(context: str) -> list[tuple[str, str, list[dict[str, Any]]]]:
     """Glossary terms for `context` grouped by category, in display order.
 
