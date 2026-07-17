@@ -1,15 +1,20 @@
-# CDM-REV-2026-04-29 — Cloudflare Worker config (Astro hybrid + Static Assets).
+# Rock 1 Phase R1.3 (2026-07-17) — hand-rolled worker, Astro adapter killed.
 #
 # Target:  Worker `creditdoc` (git-connected to giancapannesi/creditdoc).
-# Adapter: @astrojs/cloudflare v12 emits SSR entry to dist/_worker.js/index.js
-#          and static files to dist/. CF Workers Static Assets (GA 2025-04)
-#          serves dist/ directly; SSR routes fall through to `main`.
+# Runtime: worker/index.ts handles 6 dynamic routes (/api/geo, /api/search,
+#          /api/email-signup, /api/origination-intake, /api/revalidate,
+#          /go/[slug]). Everything else falls through to Static Assets
+#          binding at dist/.
 #
-# Build:   `npm run build` (Astro → dist/)
-# Deploy:  `wrangler deploy` (or git auto-deploy via CF Worker Builds)
+# Build:   `npm run build` (renderer/build_all.py → dist/, no Astro).
+# Deploy:  `wrangler deploy`.
+#
+# Previously: main = "./dist/_worker.js/index.js" (from @astrojs/cloudflare
+# adapter). Adapter killed 2026-07-17; that file no longer exists in fresh
+# builds.
 
 name = "creditdoc"
-main = "./dist/_worker.js/index.js"
+main = "./worker/index.ts"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
