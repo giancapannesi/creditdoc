@@ -158,10 +158,58 @@ FAMILIES = [
 ]
 
 
+def _purge_stale(family_dir: str, keep_slugs: set[str]) -> tuple[int, list[str]]:
+    """Delete dist/<family_dir>/<slug>/ subdirs not in keep_slugs.
+
+    Handles compound slugs like "cat/city" for /browse/ — walks two levels
+    when any keep_slug contains '/'.
+
+    Preserves top-level files like dist/<family_dir>/index.html (family
+    landing page). Returns (n_deleted, sample_names).
+    """
+    root = DIST / family_dir
+    if not root.exists():
+        return (0, [])
+    compound = any("/" in s for s in keep_slugs)
+    keep = set(keep_slugs)
+    stale: list[Path] = []
+    if compound:
+        # Two levels: dist/<family>/<a>/<b>/index.html
+        for a in root.iterdir():
+            if not a.is_dir():
+                continue
+            for b in a.iterdir():
+                if not b.is_dir():
+                    continue
+                slug = f"{a.name}/{b.name}"
+                if slug not in keep:
+                    stale.append(b)
+    else:
+        for entry in root.iterdir():
+            if not entry.is_dir():
+                continue
+            if entry.name not in keep:
+                stale.append(entry)
+    for p in stale:
+        idx = p / "index.html"
+        try:
+            if idx.exists():
+                idx.unlink()
+            # remove now-empty dir; ignore if it has other files
+            try:
+                p.rmdir()
+            except OSError:
+                pass
+        except Exception:
+            pass
+    return (len(stale), [str(p.relative_to(root)) for p in stale[:5]])
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="DB-authoritative rebuild of renderer-covered families.")
     parser.add_argument("--dry-run", action="store_true", help="Count slugs per family; render nothing.")
     parser.add_argument("--only", choices=[f[0] for f in FAMILIES], help="Rebuild one family only.")
+    parser.add_argument("--no-purge", action="store_true", help="Skip pre-build stale-slug purge.")
     args = parser.parse_args()
 
     print(f"[build_all] acquiring {LOCK_PATH} (wait up to {LOCK_TIMEOUT_SEC}s)...")
@@ -181,6 +229,12 @@ def main() -> int:
             if args.dry_run:
                 print(f"[build_all] {label}: {len(slugs)} slug(s) would be rendered")
                 continue
+
+            if not args.no_purge:
+                n_purged, sample = _purge_stale(family_dir, set(slugs))
+                if n_purged:
+                    ex = ", ".join(sample) + (" ..." if n_purged > len(sample) else "")
+                    print(f"[build_all] {label}: purged {n_purged} stale slug dir(s): {ex}")
 
             print(f"[build_all] rendering {label}: {len(slugs)} slug(s)")
             fam_start = time.time()

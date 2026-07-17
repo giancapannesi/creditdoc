@@ -37,13 +37,25 @@ page, canonical exact-match.
 renderer output; live production still serves Astro's Jul 16 build.
 Rollback: `dist.trashed_r1_1784269927/compare/`.
 
-## Two-page delta
+## Two-page delta (audited 2026-07-17)
 
-I ship 394 comparisons where Astro filters to 392. Root cause not
-audited yet — likely a lender that exists in JSON but not the
-SQLite mirror OR vice versa. Non-blocking. If deploy priority is
-exact byte-for-byte URL matching, filter the 2 extra; otherwise
-ship the 2 extra as coverage.
+Renderer ships 394 comparisons; Astro's Jul 16 dist backup shipped 392.
+The two extras are:
+- `advance-america-hialeah-fl-vs-ace-cash-express-orlando`
+- `advance-america-hialeah-fl-vs-advance-america-montebello`
+
+Root cause: legitimate net-new coverage, not drift. All four
+underlying lender rows have `processing_status='ready_for_index'`
+and `no_index=0` in both `data/creditdoc.db` and
+`src/content/lenders/*.json` today. Astro's `[slug].astro`
+`getStaticPaths` filter passes any comparison where both
+`getLenderBySlug(a)` and `getLenderBySlug(b)` resolve — which they
+do. The reason Astro's Jul 16 build didn't emit them is that the
+underlying lenders were promoted to `ready_for_index` after that
+build ran. Renderer is correct to include them; Astro would too on
+its next build.
+
+Ship the two extras as coverage.
 
 ## Rolling total after Phase 3.7
 

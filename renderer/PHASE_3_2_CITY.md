@@ -93,14 +93,20 @@ review of a spot-check render.
 Rollback: `dist.trashed_r1_1784269927/city/` retains all 332 Astro-built
 pages.
 
-## Coverage gap
+## Coverage — audited 2026-07-17
 
-**12 Astro-built /city/ pages are not renderer-covered** (Astro's
-`company_info`-based grouping saw ≥5 lenders per city; my SQLite counting
-disagreed by 1–2 lenders because of state-abbreviation normalization edge
-cases). Those directories keep their Astro Jul 16 index.html unchanged.
-If a founder review flags any of them as still-needed, the fix is a
-one-line adjustment to `normalize_state_abbr` or the ≥5 threshold.
+Renderer `cities_with_lenders(min_count=5)` returns **331 slugs**.
+Astro's Jul 16 dist backup ships **331 slug dirs + 1 `index.html`
+hub file = 332 entries in `ls`**. Set-diff between renderer output
+and Astro backup is empty in both directions — full parity.
+
+`_STATE_ABBREVIATIONS` intentionally excludes "District of Columbia"
+(matches Astro's `data.ts`). Any lender with `state='DC'` is dropped
+from the city groupby, so `washington-dc/` is not emitted. A stale
+`dist/city/washington-dc/index.html` from an earlier iteration was
+purged 2026-07-17 during the Phase C audit fixup, and `build_all.py`
+now runs a `_purge_stale()` pass before each family render to
+prevent recurrence.
 
 ## Simplifications vs Astro
 

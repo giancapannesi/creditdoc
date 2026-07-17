@@ -20,6 +20,13 @@ Commit: `84d365b1eb` on `cdm-rev-hybrid`.
 different template (WebPage schema + statute-focused content). Landing
 tonight ships the primary hub only, which is the main SEO surface.
 
+Phase C audit (2026-07-17) caught 50 Astro-built
+`dist/state/*/lending-laws/index.html` files that were left over from
+Jul 16 and would have deployed stale (Astro fingerprint intact).
+Purged during Phase C fixup. `build_all.py` now guards this via
+`_purge_stale()` — running `--only state` would delete them again if
+they reappeared. Phase 3.4B will render them fresh from the renderer.
+
 ## Parity 50/50 pass
 
 Ratios 0.80×–1.04×. Content padding is state-name-substituted so word
