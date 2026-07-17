@@ -32,6 +32,7 @@ from db import (  # noqa: E402
     all_brands,
     all_categories,
     all_states_info,
+    browse_pairs,
     category_count,
     category_to_pillar,
     cities_with_lenders,
@@ -914,6 +915,149 @@ def render_state(slug: str, output_dir: Path) -> Path:
     return out_path
 
 
+_BROWSE_KEYWORDS: dict[str, dict[str, str]] = {
+    "personal-loans": {"h1": "Personal Loans {city}, {abbr}"},
+    "business-loans": {"h1": "Business Loans {city}, {abbr}"},
+    "credit-repair": {"h1": "{city} Credit Repair Companies"},
+}
+
+
+def render_browse(cat_slug: str, city_slug: str, output_dir: Path) -> Path:
+    """Render one /browse/<cat>/<city>/index.html from lenders in (cat, city, state)."""
+    # Find city.
+    city = None
+    for c in cities_with_lenders(5):
+        if c["slug"] == city_slug:
+            city = c
+            break
+    if city is None:
+        raise SystemExit(f"error: unknown city slug '{city_slug}'")
+
+    # Find category.
+    cat = None
+    for cc in all_categories():
+        if cc.get("slug") == cat_slug:
+            cat = cc
+            break
+    if cat is None:
+        raise SystemExit(f"error: unknown category slug '{cat_slug}'")
+
+    lenders_all = list(lenders_by_city_state(city["city"].lower(), city["state_abbr"]))
+    lenders = [l for l in lenders_all if (l.get("category") or "") == cat_slug]
+    # Filter to usable copy (skips 403/scrape failures).
+    def _usable(l):
+        d = (l.get("description_short") or "")
+        if any(bad in d for bad in ("403 Forbidden", "Unable to verify", "Unable to generate")):
+            return False
+        return len(d) >= 30
+    display_lenders = [l for l in lenders if _usable(l)]
+
+    # Sort: google-rated first (by rating desc), then by name.
+    def _grate(l):
+        gr = l.get("google_rating") or 0
+        gc = l.get("google_reviews_count") or 0
+        try:
+            gr_f = float(gr); gc_i = int(gc)
+        except (TypeError, ValueError):
+            return 0.0
+        return gr_f if 0 < gr_f <= 5 and gc_i >= 1 else 0.0
+    display_lenders.sort(key=lambda l: (-_grate(l), (l.get("name") or "").lower()))
+
+    google_rated = [l for l in display_lenders if _grate(l) > 0]
+    top_rated = [l for l in google_rated if len(l.get("description_short") or "") > 20][:6]
+    total_rated = len(google_rated)
+    avg_rating = None
+    if total_rated > 0:
+        avg_rating = f"{sum(_grate(l) for l in google_rated) / total_rated:.1f}"
+
+    cat_name = cat.get("name") or cat_slug.replace("-", " ").title()
+    state_slug = city["state"].lower().replace(" ", "-")
+
+    kw = _BROWSE_KEYWORDS.get(cat_slug) or {}
+    h1 = kw.get("h1", "{cat_name} in {city}, {abbr}").format(
+        cat_name=cat_name, city=city["city"], abbr=city["state_abbr"]
+    )
+    provider_h2 = f"{cat_name} Companies in {city['city']}"
+    all_h2 = f"Listed {cat_name} Profiles in {city['city']}"
+    regulation_h2 = f"{city['state']} Rules for {cat_name} in {city['city']}"
+
+    display_count = len(display_lenders)
+    title = f"{h1} | CreditDoc"
+    description = (
+        f"Compare {cat_name.lower()} providers in {city['city']}, {city['state_abbr']} — "
+        f"{display_count} listed profiles with pricing, licensing, and CFPB complaint context. "
+        f"Review {display_count} listed profiles."
+    )
+
+    collection_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": h1,
+        "description": description,
+        "url": f"https://www.creditdoc.co/browse/{cat_slug}/{city_slug}/",
+        "about": {
+            "@type": "Service",
+            "name": cat_name,
+            "areaServed": {"@type": "City", "name": city["city"], "containedInPlace": {"@type": "State", "name": city["state"]}},
+        },
+        "provider": {"@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co"},
+    })
+    breadcrumb_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"},
+            {"@type": "ListItem", "position": 2, "name": cat_name, "item": f"https://www.creditdoc.co/categories/{cat_slug}/"},
+            {"@type": "ListItem", "position": 3, "name": f"{city['city']}, {city['state_abbr']}", "item": f"https://www.creditdoc.co/browse/{cat_slug}/{city_slug}/"},
+        ],
+    })
+    item_list_jsonld = ""
+    if top_rated:
+        item_list_jsonld = _safe_jsonld_str({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": f"Top {cat_name} Providers in {city['city']}",
+            "numberOfItems": len(top_rated),
+            "itemListElement": [
+                {"@type": "ListItem", "position": i, "name": l.get("name"), "url": f"https://www.creditdoc.co/review/{l['slug']}/"}
+                for i, l in enumerate(top_rated, start=1)
+            ],
+        })
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("browse.html.j2")
+    html = template.render(
+        cat_slug=cat_slug,
+        cat_name=cat_name,
+        city=city,
+        state_slug=state_slug,
+        title=title,
+        description=description,
+        h1=h1,
+        provider_h2=provider_h2,
+        all_h2=all_h2,
+        regulation_h2=regulation_h2,
+        avg_rating=avg_rating,
+        total_rated=total_rated,
+        top_rated=top_rated,
+        display_lenders=display_lenders,
+        display_count=display_count,
+        collection_jsonld=collection_jsonld,
+        breadcrumb_jsonld=breadcrumb_jsonld,
+        item_list_jsonld=item_list_jsonld,
+    )
+
+    out_path = output_dir / "browse" / cat_slug / city_slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="CreditDoc renderer — Astro-free HTML from DB.",
@@ -984,6 +1128,15 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    browse = subparsers.add_parser("browse", help="Render /browse/[cat]/[city]/ page(s)")
+    browse.add_argument("--cat", required=True, help="Category slug (e.g. personal-loans)")
+    browse.add_argument("--city", required=True, help="City slug (e.g. new-york-ny)")
+    browse.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
@@ -1009,6 +1162,9 @@ def main() -> None:
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     elif args.command == "state":
         out = render_state(args.slug, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "browse":
+        out = render_browse(args.cat, args.city, Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()

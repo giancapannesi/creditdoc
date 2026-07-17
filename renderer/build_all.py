@@ -42,6 +42,7 @@ from render import (  # noqa: E402
     render_answer,
     render_blog,
     render_brand,
+    render_browse,
     render_category,
     render_city,
     render_review,
@@ -49,7 +50,13 @@ from render import (  # noqa: E402
     render_wellness,
 )
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from db import all_brands, all_states_info, cities_with_lenders, lenders_by_brand  # noqa: E402
+from db import (  # noqa: E402
+    all_brands,
+    all_states_info,
+    browse_pairs,
+    cities_with_lenders,
+    lenders_by_brand,
+)
 
 
 def _acquire_lock():
@@ -121,6 +128,16 @@ def _atomic_render(slug: str, render_fn, out_family: str) -> tuple[bool, str]:
         return (False, f"{type(e).__name__}: {e}")
 
 
+def _browse_wrapper(compound_slug: str, out_dir: Path):
+    """Bridge single-slug build_all interface to render_browse's (cat, city) signature.
+
+    The 'slug' passed by build_all is "cat_slug/city_slug"; the atomic-write path
+    matches the URL structure.
+    """
+    cat, city = compound_slug.split("/", 1)
+    return render_browse(cat, city, out_dir)
+
+
 FAMILIES = [
     # (label, family_dir, render_fn, slug_query)
     ("review",    "review",              render_review,   lambda: _slugs("lenders",          "processing_status", ("ready_for_index", "approved"))),
@@ -131,6 +148,7 @@ FAMILIES = [
     ("city",      "city",                render_city,     lambda: [c["slug"] for c in cities_with_lenders(5)]),  # aggregated from lenders table (city+state), ≥5 lenders
     ("brand",     "brand",               render_brand,    lambda: [b["slug"] for b in all_brands() if lenders_by_brand(b["slug"])]),  # brand JSON files with ≥1 indexable lender
     ("state",     "state",               render_state,    lambda: [s["slug"] for s in all_states_info()]),  # 50 US states from data.ts STATE_ABBREVIATIONS
+    ("browse",    "browse",              _browse_wrapper, lambda: [f"{cat}/{city}" for cat, city in browse_pairs(5)]),  # category × city cross-slices ≥5 lenders each
 ]
 
 

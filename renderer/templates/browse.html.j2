@@ -1,0 +1,147 @@
+{#
+  /browse/[catSlug]/[citySlug]/index.html — Jinja2 template for browse hubs.
+
+  Matches Astro's browse/[catSlug]/[citySlug].astro schema surface:
+  CollectionPage + BreadcrumbList JSON-LD, H1 = "<Category> in <City>, <ST>",
+  provider grid, regulatory rights block, other-services carousel.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description|striptags|truncate(160, killwords=True, end='') }}">
+<link rel="canonical" href="https://www.creditdoc.co/browse/{{ cat_slug }}/{{ city.slug }}/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description|striptags|truncate(200, killwords=True, end='') }}">
+<meta property="og:url" content="https://www.creditdoc.co/browse/{{ cat_slug }}/{{ city.slug }}/">
+<meta property="og:site_name" content="CreditDoc">
+<meta property="og:image" content="https://www.creditdoc.co/og-default.png">
+<link rel="stylesheet" href="/styles/site.css">
+<script type="application/ld+json">
+{{ collection_jsonld|safe }}
+</script>
+<script type="application/ld+json">
+{{ breadcrumb_jsonld|safe }}
+</script>
+{% if item_list_jsonld %}
+<script type="application/ld+json">
+{{ item_list_jsonld|safe }}
+</script>
+{% endif %}
+</head>
+<body class="min-h-screen bg-bg text-text antialiased">
+{% include "_header.html" %}
+<main>
+  <nav class="mx-auto max-w-6xl px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/categories/{{ cat_slug }}/" class="hover:text-primary transition-colors">{{ cat_name }}</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/city/{{ city.slug }}/" class="hover:text-primary transition-colors">{{ city.city }}, {{ city.state_abbr }}</a></li>
+    </ol>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">{{ h1 }}</h1>
+      <p class="text-lg text-muted max-w-3xl leading-relaxed">{{ description }}</p>
+    </div>
+
+    {% if avg_rating %}
+    <div class="glass-card p-4 mb-6 inline-flex items-center gap-3">
+      <span class="text-yellow-400 text-lg">★</span>
+      <span class="font-semibold text-text">{{ avg_rating }}</span>
+      <span class="text-sm text-muted">average rating across {{ total_rated }} rated {{ cat_name|lower }} provider{{ 's' if total_rated != 1 else '' }} in {{ city.city }}</span>
+    </div>
+    {% endif %}
+
+    {% if top_rated %}
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">Top-Rated {{ provider_h2 }}</h2>
+      <p class="text-sm text-muted mb-4 leading-relaxed">Featured providers with verified public review signals. Sorted by stored Google rating. Every listing links to a CreditDoc profile with pricing, licensing, and complaint context.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for lender in top_rated %}
+        <article class="glass-card p-5">
+          <h3 class="text-base font-semibold text-text mb-1"><a href="/review/{{ lender.slug }}/" class="hover:text-primary transition-colors">{{ lender.name }}</a></h3>
+          <p class="text-xs text-muted mb-2">{{ city.city }}, {{ city.state_abbr }}</p>
+          <p class="text-xs text-yellow-400 mb-2">★ {{ '%.1f' % lender.google_rating }} · {{ lender.google_reviews_count }} reviews</p>
+          <p class="text-sm text-muted leading-relaxed">{{ (lender.description_short or lender.meta_description or 'Review this ' ~ city.city ~ ' ' ~ cat_name|lower ~ ' provider before contacting them.')|striptags|truncate(280, killwords=True, end='') }} This {{ city.city }} listing is one of {{ display_count }} listed {{ cat_name|lower }} providers reviewed by CreditDoc.</p>
+          <a href="/review/{{ lender.slug }}/" class="inline-block mt-3 text-xs font-semibold text-primary hover:underline">View Details →</a>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">All {{ all_h2 }}</h2>
+      <p class="text-sm text-muted mb-4 leading-relaxed">Below are every {{ cat_name|lower }} provider CreditDoc has listed in {{ city.city }}, {{ city.state_abbr }}. Review pricing, refund terms, licensing, and CFPB complaint context on each profile. Comparing at least three profiles side-by-side is the fastest way to spot outliers on price or terms in the {{ city.city }} market.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for lender in display_lenders %}
+        <article class="glass-card p-5">
+          <h3 class="text-base font-semibold text-text mb-1"><a href="/review/{{ lender.slug }}/" class="hover:text-primary transition-colors">{{ lender.name }}</a></h3>
+          <p class="text-xs text-muted mb-2">{{ city.city }}, {{ city.state_abbr }}</p>
+          {% if lender.company_info and lender.company_info.bbb_rating %}<p class="text-xs text-muted mb-2">BBB {{ lender.company_info.bbb_rating }}</p>{% endif %}
+          <p class="text-sm text-muted leading-relaxed">{{ (lender.description_short or lender.meta_description or 'Review this ' ~ city.city ~ ' provider profile.')|striptags|truncate(240, killwords=True, end='') }} This is a {{ city.city }} {{ cat_name|lower }} listing on CreditDoc. Verify pricing, refund policy, and state licensing before signing anything.</p>
+          <a href="/review/{{ lender.slug }}/" class="inline-block mt-3 text-xs font-semibold text-primary hover:underline">View Details →</a>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-3">{{ regulation_h2 }}</h2>
+      <div class="space-y-4 text-sm text-muted leading-relaxed">
+        <p><strong class="text-text">Federal protections for {{ city.city }} consumers:</strong> the Fair Credit Reporting Act (FCRA) gives {{ city.city }} residents the right to dispute inaccurate credit report information for free with all three credit bureaus. The Credit Repair Organizations Act (CROA) makes it illegal for any credit repair provider — in {{ city.city }} or elsewhere — to charge before services are performed. If a {{ city.city }} {{ cat_name|lower }} provider asks for upfront payment before performing work, treat it as a red flag.</p>
+        <p><strong class="text-text">{{ city.state }} state-level protections:</strong> {{ city.state }} adds its own state-level rules on top of the federal ones. Interest-rate caps, licensing requirements, refund policies, and enforcement all vary by state. Check the {{ city.state }} overview page for the current usury cap, payday-lending status, and consumer protection agency contact. Every {{ city.city }} lender should hold an active {{ city.state }} license — if a provider cannot give you their license number in writing, treat it as a red flag.</p>
+        <p><strong class="text-text">How to check licensing:</strong> the {{ city.state }} Department of Financial Services (or equivalent agency) publishes a searchable license lookup. Before your first meeting with any {{ city.city }} {{ cat_name|lower }} provider, spend five minutes cross-checking their license status. Providers that refuse to give a license number are often unlicensed to operate in {{ city.city }} or have had licenses revoked.</p>
+        <p><strong class="text-text">How to research a {{ city.city }} provider's track record:</strong> the CFPB Consumer Complaint Database at consumerfinance.gov/complaint lists complaints filed against every lender, credit repair company, and debt collector in the country. A pattern of unresolved complaints against a specific {{ city.city }} provider is one of the strongest signals available before signing a contract.</p>
+      </div>
+    </section>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-3">How to Compare {{ cat_name }} Providers in {{ city.city }}</h2>
+      <div class="space-y-4 text-sm text-muted leading-relaxed">
+        <p><strong class="text-text">Get the pricing in writing.</strong> Ask every {{ city.city }} {{ cat_name|lower }} provider for their fees, monthly cost (if applicable), setup fee (if applicable), and APR (for lending products) in writing before signing. Providers that only quote pricing over the phone or that offer "call for a personalized quote" without a public pricing tier are harder to compare and usually more expensive.</p>
+        <p><strong class="text-text">Confirm the refund policy.</strong> Ask each {{ city.city }} provider what happens if you cancel within the first three days (federal CROA window), within the first month, and after the promised results are not delivered. Refund policies are one of the biggest differentiators between {{ cat_name|lower }} providers in {{ city.city }}, and they are frequently not disclosed until after signing.</p>
+        <p><strong class="text-text">Cross-check with the CFPB.</strong> Search each {{ city.city }} provider's exact business name in the CFPB Consumer Complaint Database. A provider with zero complaints is not necessarily better — it may just be smaller. But a provider with a pattern of unresolved complaints in the same category (e.g. billing disputes, misleading claims about credit repair timelines, high-cost lending disclosures) is a strong signal to keep researching alternatives.</p>
+        <p><strong class="text-text">Compare at least three providers.</strong> {{ city.city }} has {{ display_count }} listed {{ cat_name|lower }} provider{{ 's' if display_count != 1 else '' }} on CreditDoc. Reviewing three provider profiles side-by-side is the fastest way to spot pricing outliers, licensing gaps, and refund-policy differences. Providers that are transparent about pricing, licensing, and refund terms will match this level of preparation on their side; providers that resist it are usually not the right fit.</p>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">More Research in {{ city.city }}</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href="/city/{{ city.slug }}/" class="glass-card p-4 hover:border-primary transition-colors">
+          <p class="text-sm font-semibold text-text">{{ city.city }} City Hub</p>
+          <p class="text-xs text-muted mt-1">All financial services in {{ city.city }}</p>
+        </a>
+        <a href="/categories/{{ cat_slug }}/" class="glass-card p-4 hover:border-primary transition-colors">
+          <p class="text-sm font-semibold text-text">{{ cat_name }} Directory</p>
+          <p class="text-xs text-muted mt-1">Nationwide {{ cat_name|lower }} providers</p>
+        </a>
+        <a href="/state/{{ state_slug }}/" class="glass-card p-4 hover:border-primary transition-colors">
+          <p class="text-sm font-semibold text-text">{{ city.state }} State Rules</p>
+          <p class="text-xs text-muted mt-1">Consumer protections and licensing</p>
+        </a>
+        <a href="/answers/" class="glass-card p-4 hover:border-primary transition-colors">
+          <p class="text-sm font-semibold text-text">Borrower Q&amp;A</p>
+          <p class="text-xs text-muted mt-1">Common questions answered</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <div class="rounded-lg bg-bg-alt border border-border p-4">
+        <p class="text-xs text-muted leading-relaxed"><strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to products and services featured on this page. Compensation does not determine whether a provider can be covered or how visible star ratings are calculated. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.</p>
+      </div>
+    </section>
+  </div>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>

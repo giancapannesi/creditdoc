@@ -129,6 +129,26 @@ def all_brands() -> tuple[dict[str, Any], ...]:
     return _brands_cache
 
 
+@lru_cache(maxsize=1)
+def browse_pairs(min_count: int = 5) -> tuple[tuple[str, str], ...]:
+    """Enumerate every (category_slug, city_slug) pair with ≥ min_count indexable
+    lenders. Matches Astro's /browse/[catSlug]/[citySlug] getStaticPaths.
+    """
+    out: list[tuple[str, str]] = []
+    cats = [c.get("slug") for c in all_categories() if c.get("slug")]
+    for city in cities_with_lenders(5):
+        lenders = lenders_by_city_state(city["city"].lower(), city["state_abbr"])
+        # Count by category, skip aliases (fix-my-credit collapse handled in render).
+        counts: dict[str, int] = {}
+        for l in lenders:
+            cat = l.get("category") or ""
+            counts[cat] = counts.get(cat, 0) + 1
+        for cat in cats:
+            if counts.get(cat, 0) >= min_count:
+                out.append((cat, city["slug"]))
+    return tuple(out)
+
+
 def all_states_info() -> tuple[dict[str, Any], ...]:
     """Return all 50 states as {name, abbr, slug} — matches Astro's getAllStatesInfo."""
     out = []
