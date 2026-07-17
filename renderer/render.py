@@ -33,13 +33,16 @@ from db import (  # noqa: E402
     all_categories,
     all_comparisons,
     all_states_info,
+    all_states_with_lending_laws,
     all_trends_entries,
     browse_pairs,
     load_comparison,
     category_count,
     category_to_pillar,
     cities_with_lenders,
+    glossary_for_context,
     glossary_for_review,
+    glossary_grouped_for_context,
     lenders_by_brand,
     lenders_by_city_state,
     lenders_in_state,
@@ -48,6 +51,7 @@ from db import (  # noqa: E402
     load_category,
     load_cluster_answer,
     load_lender,
+    load_state_lending_laws,
     load_trends_entry,
     load_wellness_guide,
     normalize_state_abbr,
@@ -59,6 +63,7 @@ from db import (  # noqa: E402
     slugify_city,
     state_context,
     state_lender_and_city_counts,
+    states_with_lenders,
     top_lenders_by_category,
     wellness_guides_by_category,
 )
@@ -914,6 +919,171 @@ def render_state(slug: str, output_dir: Path) -> Path:
     )
 
     out_path = output_dir / "state" / slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
+_LOAN_TYPES = [
+    {"key": "personal_loans",     "name": "Personal Loans",     "icon": "💰"},
+    {"key": "payday_loans",       "name": "Payday Loans",       "icon": "⚡"},
+    {"key": "title_loans",        "name": "Title Loans",        "icon": "🚗"},
+    {"key": "installment_loans",  "name": "Installment Loans",  "icon": "📅"},
+    {"key": "mortgage",           "name": "Mortgage",           "icon": "🏠"},
+]
+
+
+def render_state_lending_laws(compound_slug: str, output_dir: Path) -> Path:
+    """Render one /state/<state_slug>/lending-laws/index.html.
+
+    compound_slug is `<state_slug>/lending-laws` — the atomic_render helper
+    passes it through so the disk path matches the URL structure.
+    """
+    if "/" not in compound_slug:
+        raise SystemExit(f"error: expected 'state_slug/lending-laws', got '{compound_slug}'")
+    state_slug, tail = compound_slug.split("/", 1)
+    if tail != "lending-laws":
+        raise SystemExit(f"error: unexpected subroute '{tail}' for state-lending-laws")
+
+    state = None
+    for s in all_states_info():
+        if s["slug"] == state_slug:
+            state = s
+            break
+    if state is None:
+        raise SystemExit(f"error: no state with slug '{state_slug}'")
+
+    data = load_state_lending_laws(state["abbr"])
+    if data is None or not data.get("credit_repair_laws"):
+        raise SystemExit(f"error: state '{state['abbr']}' has no credit_repair_laws in states.json")
+
+    lenders = list(lenders_in_state(state["abbr"]))
+    cr_lenders = [
+        l for l in lenders
+        if l.get("category") in ("credit-repair", "credit-counseling")
+    ]
+    cr_count = len(cr_lenders)
+    if cr_count > 0:
+        cr_summary = (
+            f"Review {cr_count} listed credit repair "
+            f"{'provider profile' if cr_count == 1 else 'provider profiles'} in {state['name']}."
+        )
+    else:
+        cr_summary = f"Review local provider listings and state-rule context for {state['name']}."
+
+    cr = data.get("credit_repair_laws") or {}
+    lt = data.get("lending_types") or {}
+    vp = data.get("veteran_protections") or {}
+    complaints = data.get("complaint_resources") or []
+    statutes = data.get("statute_links") or []
+    glossary = glossary_for_context("lending-laws")
+    glossary_groups = glossary_grouped_for_context("lending-laws")
+
+    from datetime import datetime, timezone
+    year = datetime.now(timezone.utc).year
+    title = f"{state['name']} Lending & Credit Laws ({year}) | CreditDoc"
+    description = (
+        f"{state['name']} lending regulations, credit repair laws, "
+        "payday loan rules, veteran protections (MLA/SCRA), and consumer "
+        "rights. Official statute references and complaint resources."
+    )
+
+    # Format the "law summary checked" date if present.
+    check_iso = data.get("legislation_last_updated") or ""
+    check_pretty = ""
+    if check_iso:
+        try:
+            dt = datetime.fromisoformat(check_iso.replace("Z", "+00:00"))
+            check_pretty = dt.strftime("%B %-d, %Y")
+        except ValueError:
+            check_pretty = check_iso
+
+    url = f"https://www.creditdoc.co/state/{state_slug}/lending-laws/"
+    webpage_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": f"{state['name']} Lending & Credit Laws",
+        "description": description,
+        "url": url,
+        "dateModified": check_iso or datetime.now(timezone.utc).date().isoformat(),
+        "publisher": {"@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co"},
+        "about": [
+            {"@type": "Thing", "name": f"{state['name']} consumer lending regulations"},
+            {"@type": "Thing", "name": "Credit repair laws"},
+            {"@type": "Thing", "name": "Military Lending Act"},
+        ],
+    })
+    breadcrumb_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"},
+            {"@type": "ListItem", "position": 2, "name": "States", "item": "https://www.creditdoc.co/state/"},
+            {"@type": "ListItem", "position": 3, "name": state["name"], "item": f"https://www.creditdoc.co/state/{state_slug}/"},
+            {"@type": "ListItem", "position": 4, "name": "Lending Laws", "item": url},
+        ],
+    })
+
+    other_states = [s for s in states_with_lenders(10) if s["abbr"] != state["abbr"]][:12]
+
+    # Materialize the (key, name, icon, loan) list for the template, skipping absent loan types.
+    loan_rows = []
+    for lt_row in _LOAN_TYPES:
+        loan = lt.get(lt_row["key"])
+        if not loan:
+            continue
+        loan_rows.append({**lt_row, "loan": loan})
+
+    # Interest rate cap short form for the top-right stat card.
+    usury_short = ""
+    if data.get("usury_cap"):
+        usury_short = (data["usury_cap"] or "").split(";")[0].strip()
+
+    # Payday status color mapping (positive/warning/negative).
+    payday_status = (data.get("payday_loan_status") or "").strip() or "Unknown"
+    if payday_status == "Banned":
+        payday_bg, payday_text = "bg-positive-light", "text-positive"
+    elif payday_status == "Restricted":
+        payday_bg, payday_text = "bg-warning-light", "text-warning"
+    else:
+        payday_bg, payday_text = "bg-negative-light", "text-negative"
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("state_lending_laws.html.j2")
+    html = template.render(
+        state=state,
+        state_slug=state_slug,
+        data=data,
+        cr=cr,
+        vp=vp,
+        complaints=complaints,
+        statutes=statutes,
+        glossary=glossary,
+        glossary_groups=glossary_groups,
+        glossary_total=len(glossary),
+        title=title,
+        description=description,
+        year=year,
+        url=url,
+        check_iso=check_iso,
+        check_pretty=check_pretty,
+        cr_summary=cr_summary,
+        usury_short=usury_short,
+        payday_status=payday_status,
+        payday_bg=payday_bg,
+        payday_text=payday_text,
+        loan_rows=loan_rows,
+        other_states=other_states,
+        webpage_jsonld=webpage_jsonld,
+        breadcrumb_jsonld=breadcrumb_jsonld,
+    )
+
+    out_path = output_dir / "state" / state_slug / "lending-laws" / "index.html"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(html, encoding="utf-8")
     return out_path

@@ -289,6 +289,105 @@ def state_lender_and_city_counts(state_abbr: str) -> dict[str, int]:
     return {"lender_count": len(rows), "city_count": len(cities)}
 
 
+def all_states_with_lending_laws() -> tuple[dict[str, Any], ...]:
+    """States (name/abbr/slug) that have a credit_repair_laws block in states.json.
+
+    Matches Astro lending-laws.astro's `states.filter(s => stateData[s.abbr]?.credit_repair_laws)`.
+    """
+    states = _load_states_json()
+    out = []
+    for s in all_states_info():
+        entry = states.get(s["abbr"])
+        if isinstance(entry, dict) and entry.get("credit_repair_laws"):
+            out.append(s)
+    return tuple(out)
+
+
+def load_state_lending_laws(abbr: str) -> dict[str, Any] | None:
+    """Full states.json entry for `abbr`, or None."""
+    states = _load_states_json()
+    entry = states.get(abbr)
+    if isinstance(entry, dict):
+        return entry
+    return None
+
+
+@lru_cache(maxsize=8)
+def states_with_lenders(min_count: int = 10) -> tuple[dict[str, Any], ...]:
+    """States with ≥`min_count` indexable lenders (name/abbr/slug + lender_count).
+
+    Used by the /lending-laws/ "Other State Laws" carousel.
+    """
+    with _connect() as conn:
+        rows = conn.execute(
+            "SELECT * FROM lenders "
+            "WHERE processing_status IN ('ready_for_index','pending_approval')"
+        ).fetchall()
+    counts: dict[str, int] = {}
+    for r in rows:
+        d = _merge_lender(r)
+        ci = d.get("company_info") or {}
+        abbr = normalize_state_abbr(ci.get("state"))
+        if not abbr:
+            continue
+        counts[abbr] = counts.get(abbr, 0) + 1
+    out = []
+    for s in all_states_info():
+        n = counts.get(s["abbr"], 0)
+        if n >= min_count:
+            out.append({**s, "lender_count": n})
+    out.sort(key=lambda x: (-x["lender_count"], x["name"]))
+    return tuple(out)
+
+
+_GLOSSARY_CATEGORY_ORDER = [
+    "interest-and-rates", "how-loans-work", "credit-and-scoring",
+    "fees-and-costs", "legal-terms", "debt-and-recovery",
+    "mortgages", "credit-cards",
+]
+_GLOSSARY_CATEGORY_LABELS = {
+    "interest-and-rates": "Interest & Rates",
+    "how-loans-work": "How Loans Work",
+    "credit-and-scoring": "Credit & Scoring",
+    "fees-and-costs": "Fees & Costs",
+    "legal-terms": "Legal Terms",
+    "debt-and-recovery": "Debt & Recovery",
+    "mortgages": "Mortgages",
+    "credit-cards": "Credit Cards",
+}
+
+
+def glossary_for_context(context: str, limit: int | None = None) -> list[dict[str, Any]]:
+    """Glossary terms matching a page context (e.g. 'lending-laws')."""
+    all_terms = _load_glossary()
+    matches = [t for t in all_terms if context in (t.get("page_contexts") or [])]
+    if limit is not None:
+        return matches[:limit]
+    return matches
+
+
+def glossary_grouped_for_context(context: str) -> list[tuple[str, str, list[dict[str, Any]]]]:
+    """Glossary terms for `context` grouped by category, in display order.
+
+    Returns list of (cat_slug, cat_label, terms). Empty categories omitted.
+    Matches Astro GlossaryAppendix.astro grouping.
+    """
+    matches = glossary_for_context(context)
+    by_cat: dict[str, list[dict[str, Any]]] = {}
+    for t in matches:
+        c = t.get("category", "") or "misc"
+        by_cat.setdefault(c, []).append(t)
+    out: list[tuple[str, str, list[dict[str, Any]]]] = []
+    for c in _GLOSSARY_CATEGORY_ORDER:
+        if c in by_cat:
+            out.append((c, _GLOSSARY_CATEGORY_LABELS.get(c, c), by_cat[c]))
+    # append any category not in the canonical order at the end
+    for c in sorted(by_cat.keys()):
+        if c not in _GLOSSARY_CATEGORY_ORDER:
+            out.append((c, _GLOSSARY_CATEGORY_LABELS.get(c, c), by_cat[c]))
+    return out
+
+
 def load_brand(slug: str) -> dict[str, Any] | None:
     for b in all_brands():
         if b.get("slug") == slug:

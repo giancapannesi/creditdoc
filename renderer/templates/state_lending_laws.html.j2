@@ -1,0 +1,442 @@
+{#
+  /state/[slug]/lending-laws/index.html — Jinja2 template for state
+  lending-laws subroute. Matches Astro's lending-laws.astro schema:
+  WebPage + BreadcrumbList JSON-LD, quick-reference cards, per-loan-type
+  regulations, credit repair regulations, veteran (MLA/SCRA) protections,
+  complaint resources, recent legislative changes, official-resources
+  sidebar, credit-repair-providers CTA, know-your-rights link block,
+  other-state cross-links, glossary appendix, disclaimer.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description|striptags|truncate(160, killwords=True, end='') }}">
+<link rel="canonical" href="{{ url }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description|striptags|truncate(200, killwords=True, end='') }}">
+<meta property="og:url" content="{{ url }}">
+<meta property="og:site_name" content="CreditDoc">
+<meta property="og:image" content="https://www.creditdoc.co/og-default.png">
+<link rel="stylesheet" href="/styles/site.css">
+<script type="application/ld+json">
+{{ webpage_jsonld|safe }}
+</script>
+<script type="application/ld+json">
+{{ breadcrumb_jsonld|safe }}
+</script>
+</head>
+<body class="min-h-screen bg-bg text-text antialiased">
+{% include "_header.html" %}
+<main>
+  <nav class="max-w-6xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted flex-wrap">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/state/" class="hover:text-primary transition-colors">States</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/state/{{ state_slug }}/" class="hover:text-primary transition-colors">{{ state.name }}</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">Lending Laws</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">
+        {{ state.name }} Lending &amp; Credit Laws
+      </h1>
+      <p class="text-lg text-muted max-w-3xl">
+        Comprehensive guide to {{ state.name }}'s consumer lending regulations, credit repair
+        laws, and veteran protections. Cross-check official state rules before borrowing.
+      </p>
+      {% if check_pretty %}
+      <p class="inline-flex items-center gap-1.5 mt-3 px-3 py-1.5 rounded-full bg-positive-light text-positive text-xs font-medium border border-positive/20">
+        Law summary checked: {{ check_pretty }}
+      </p>
+      {% endif %}
+    </div>
+
+    <section class="glass-card p-5 mb-8">
+      <h2 class="text-lg font-bold text-text mb-2">Use These Rules With Local Research</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        State laws are only one part of provider research. Check local guides,
+        provider categories, borrower answers, and complaint-data context before
+        contacting a company. This page is legal-context research, not legal advice,
+        a recommendation, approval prediction, price quote, or licensing determination.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href="/state/{{ state_slug }}/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">{{ state.name }} provider directory</a>
+        <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Local city guides</a>
+        <a href="/categories/personal-loans/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Personal loan providers</a>
+        <a href="/answers/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Borrower questions</a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Complaint data context</a>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="glass-card p-4 text-center">
+        <p class="text-xs text-muted">Interest Rate Cap</p>
+        <p class="text-sm font-semibold text-text mt-1">{{ usury_short or 'Varies' }}</p>
+      </div>
+      <div class="glass-card p-4 text-center">
+        <p class="text-xs text-muted">Payday Loans</p>
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold mt-1 {{ payday_bg }} {{ payday_text }}">{{ payday_status }}</span>
+      </div>
+      <div class="glass-card p-4 text-center">
+        <p class="text-xs text-muted">Credit Repair Bond</p>
+        <p class="text-sm font-semibold text-text mt-1">
+          {% if cr.bond_required %}{{ cr.bond_amount or 'Required' }}{% else %}Not Required{% endif %}
+        </p>
+      </div>
+      <div class="glass-card p-4 text-center">
+        <p class="text-xs text-muted">Veteran Protections</p>
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold mt-1 bg-blue-50 text-blue-700">MLA + SCRA</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 space-y-8">
+
+        <section>
+          <h2 class="text-xl font-bold text-text mb-4">Lending Regulations by Loan Type</h2>
+          <div class="space-y-4">
+            {% for row in loan_rows %}
+            {% set loan = row.loan %}
+            <div class="glass-card p-5">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="font-semibold text-text flex items-center gap-2">
+                  <span class="text-lg">{{ row.icon }}</span> {{ row.name }}
+                </h3>
+                {% if loan.legal is defined %}
+                {% if loan.legal is not false %}
+                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-positive-light text-positive">Legal</span>
+                {% else %}
+                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-negative-light text-negative">Prohibited</span>
+                {% endif %}
+                {% endif %}
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                {% if loan.rate_cap %}
+                <div><p class="text-xs text-muted uppercase tracking-wider">Rate Cap</p><p class="text-text">{{ loan.rate_cap }}</p></div>
+                {% endif %}
+                {% if loan.max_amount %}
+                <div><p class="text-xs text-muted uppercase tracking-wider">Max Amount</p><p class="text-text">{% if loan.max_amount is number %}${{ '{:,}'.format(loan.max_amount) }}{% else %}{{ loan.max_amount }}{% endif %}</p></div>
+                {% endif %}
+                {% if loan.max_term_days %}
+                <div><p class="text-xs text-muted uppercase tracking-wider">Max Term</p><p class="text-text">{{ loan.max_term_days }} days</p></div>
+                {% endif %}
+                {% if loan.max_outstanding %}
+                <div><p class="text-xs text-muted uppercase tracking-wider">Max Outstanding</p><p class="text-text">{{ loan.max_outstanding }} loan{% if loan.max_outstanding|int != 1 %}s{% endif %} at a time</p></div>
+                {% endif %}
+                {% if loan.cooling_off_days %}
+                <div><p class="text-xs text-muted uppercase tracking-wider">Cooling Off Period</p><p class="text-text">{{ loan.cooling_off_days }} days</p></div>
+                {% endif %}
+                {% if loan.database_tracking is defined %}
+                <div><p class="text-xs text-muted uppercase tracking-wider">State Database</p><p class="text-text">{% if loan.database_tracking %}Yes — lenders must check{% else %}No statewide database{% endif %}</p></div>
+                {% endif %}
+              </div>
+              {% if loan.notes %}
+              <p class="text-sm text-muted mt-3 pt-3 border-t border-border/50">{{ loan.notes }}</p>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+
+        {% if cr.state_statute %}
+        <section class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">Credit Repair Regulations</h2>
+          <div class="mb-4 p-4 rounded-xl bg-primary-light/30 border border-primary/10">
+            <p class="text-sm font-semibold text-text">{{ cr.state_statute }}</p>
+            {% if cr.statute_code %}<p class="text-xs text-muted mt-1">{{ cr.statute_code }}</p>{% endif %}
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+            <div class="text-center p-3 rounded-lg bg-bg-alt">
+              <p class="text-xs text-muted">Bond Required</p>
+              <p class="text-sm font-semibold text-text">{% if cr.bond_required %}Yes{% else %}No{% endif %}</p>
+              {% if cr.bond_amount and cr.bond_required %}<p class="text-xs text-muted">{{ cr.bond_amount }}</p>{% endif %}
+            </div>
+            <div class="text-center p-3 rounded-lg bg-bg-alt">
+              <p class="text-xs text-muted">Registration</p>
+              <p class="text-sm font-semibold text-text">{% if cr.registration_required %}Required{% else %}Not Required{% endif %}</p>
+            </div>
+            <div class="text-center p-3 rounded-lg bg-bg-alt">
+              <p class="text-xs text-muted">Cancellation Period</p>
+              <p class="text-sm font-semibold text-text">{{ cr.cancellation_period_days or 3 }} days</p>
+            </div>
+            <div class="text-center p-3 rounded-lg bg-bg-alt">
+              <p class="text-xs text-muted">Upfront Fees</p>
+              <p class="text-sm font-semibold text-text">{% if cr.upfront_fees_prohibited %}Prohibited{% else %}Allowed{% endif %}</p>
+            </div>
+          </div>
+          {% if cr.key_provisions %}
+          <h3 class="text-sm font-semibold text-text mb-2">Key Provisions</h3>
+          <ul class="space-y-2">
+            {% for p in cr.key_provisions %}
+            <li class="flex items-start gap-2 text-sm text-muted">{{ p }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% if cr.registration_agency %}
+          <p class="text-xs text-muted mt-3">Licensing/Registration: {{ cr.registration_agency }}</p>
+          {% endif %}
+        </section>
+        {% endif %}
+
+        <section class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">Veteran &amp; Military Lending Protections</h2>
+          <div class="space-y-4 mb-6">
+            <div class="p-4 rounded-xl bg-blue-50 border border-blue-100">
+              <h3 class="text-sm font-semibold text-blue-800 mb-1">Military Lending Act (MLA) — Federal</h3>
+              <p class="text-sm text-blue-700">{{ vp.federal_mla_summary or 'The Military Lending Act caps interest at 36% MAPR for active-duty servicemembers and dependents. Applies to payday loans, vehicle title loans, and consumer credit products.' }}</p>
+            </div>
+            <div class="p-4 rounded-xl bg-blue-50 border border-blue-100">
+              <h3 class="text-sm font-semibold text-blue-800 mb-1">Servicemembers Civil Relief Act (SCRA) — Federal</h3>
+              <p class="text-sm text-blue-700">{{ vp.federal_scra_summary or 'SCRA caps interest at 6% on pre-service debts, provides protection against default judgments, and allows lease termination for deployment.' }}</p>
+            </div>
+          </div>
+          {% if vp.state_specific_protections %}
+          <div class="mb-4">
+            <h3 class="text-sm font-semibold text-text mb-2">{{ state.name }}-Specific Veteran Protections</h3>
+            <ul class="space-y-2">
+              {% for p in vp.state_specific_protections %}
+              <li class="flex items-start gap-2 text-sm text-muted">{{ p }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+          {% if vp.va_loan_notes %}
+          <div class="p-4 rounded-xl bg-bg-alt border border-border/50">
+            <h3 class="text-sm font-semibold text-text mb-1">VA Loans in {{ state.name }}</h3>
+            <p class="text-sm text-muted">{{ vp.va_loan_notes }}</p>
+          </div>
+          {% endif %}
+          {% if vp.military_installations %}
+          <p class="text-xs text-muted mt-3"><strong>Military installations:</strong> {{ vp.military_installations }}</p>
+          {% endif %}
+        </section>
+
+        {% if complaints %}
+        <section class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">File a Complaint</h2>
+          {% if data.consumer_rights_summary %}
+          <div class="mb-4 p-4 rounded-xl bg-primary-light/30 border border-primary/10">
+            <p class="text-sm text-text leading-relaxed">{{ data.consumer_rights_summary }}</p>
+          </div>
+          {% endif %}
+          <div class="space-y-3">
+            {% for c in complaints %}
+            <a href="{{ c.url }}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-bg-alt hover:bg-bg-alt/80 transition-colors border border-border/50">
+              <div>
+                <p class="font-semibold text-text text-sm">{{ c.name }}</p>
+                <p class="text-xs text-muted mt-0.5">{{ c.description or c.type }}</p>
+              </div>
+              <span class="text-xs px-2 py-0.5 rounded-full font-medium
+              {%- if c.type == 'Federal' %} bg-blue-50 text-blue-700
+              {%- elif c.type == 'State AG' %} bg-purple-50 text-purple-700
+              {%- else %} bg-bg text-muted{% endif %}">{{ c.type }}</span>
+            </a>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+
+        {% if data.recent_changes %}
+        <section class="glass-card p-6">
+          <h2 class="text-lg font-bold text-text mb-2">Recent Legislative Changes</h2>
+          <p class="text-sm text-muted leading-relaxed">{{ data.recent_changes }}</p>
+        </section>
+        {% endif %}
+
+        <section class="glass-card p-6">
+          <h2 class="text-lg font-bold text-text mb-2">How State Rules Interact with Federal Consumer Protections</h2>
+          <p class="text-sm text-muted leading-relaxed">
+            {{ state.name }} enforces its own consumer credit rules alongside a stack of federal protections: the
+            Truth in Lending Act (TILA), Fair Credit Reporting Act (FCRA), Fair Debt Collection Practices Act (FDCPA),
+            Equal Credit Opportunity Act (ECOA), Credit Repair Organizations Act (CROA), and the Consumer Financial
+            Protection Bureau's oversight of large lenders. When the state cap or protection is stricter than the
+            federal floor, {{ state.name }}'s rule applies. When the state is silent, the federal floor still applies.
+          </p>
+          <p class="text-sm text-muted leading-relaxed mt-3">
+            If you're borrowing in {{ state.name }}, compare the state statute cap on the specific loan type against the
+            APR the lender is quoting, ask for a written Truth in Lending disclosure before signing anything, and
+            confirm the company is licensed with {{ data.licensing_board or 'the state banking or financial institutions department' }}.
+            For credit repair services in {{ state.name }}, verify the company's registration status
+            {% if cr.bond_required %}and confirm the required surety bond ({{ cr.bond_amount or 'per state rule' }}) is filed{% endif %},
+            since {{ cr.upfront_fees_prohibited and 'upfront fees before performance are prohibited under CROA and echoed at state level' or 'state and federal law limit prepayment structures' }}.
+          </p>
+        </section>
+
+        <section class="glass-card p-6">
+          <h2 class="text-lg font-bold text-text mb-2">Rate Caps and What They Actually Mean</h2>
+          <p class="text-sm text-muted leading-relaxed">
+            {{ state.name }}'s general usury cap is {{ data.usury_cap or 'set by statute' }}. A cap on the nominal
+            interest rate is not the same as a cap on total cost — many short-term products layer in origination
+            fees, processing fees, membership fees, and add-on products (credit insurance, GPS trackers on title
+            loans, or ancillary "protection" plans) that don't count toward the stated cap. When comparing a
+            {{ state.name }} loan quote to the caps on this page, always ask for the total finance charge and the
+            annual percentage rate (APR) inclusive of all fees. Federal Regulation Z requires that number in
+            writing before you sign.
+          </p>
+          <p class="text-sm text-muted leading-relaxed mt-3">
+            Payday-loan status in {{ state.name }}: <strong>{{ payday_status }}</strong>.
+            {% if payday_status == 'Banned' %}
+              {{ state.name }} does not allow storefront or online payday lending; check that the lender is
+              not simply using a tribal or offshore workaround which state regulators may treat as illegal.
+            {% elif payday_status == 'Restricted' %}
+              {{ state.name }} allows payday lending only within specific rate, term, and rollover limits.
+              Any loan that exceeds those limits is void or unenforceable, and you may have complaint remedies.
+            {% else %}
+              Payday products in {{ state.name }} carry the highest APRs of any consumer credit type on this page —
+              read the total-cost disclosure carefully and check the state cooling-off and rollover rules before
+              agreeing to a rollover or renewal.
+            {% endif %}
+          </p>
+        </section>
+
+        <section class="glass-card p-6">
+          <h2 class="text-lg font-bold text-text mb-2">Credit Repair Rights in {{ state.name }}</h2>
+          <p class="text-sm text-muted leading-relaxed">
+            Federal CROA gives you the right to a written contract before a credit repair company performs any
+            work, a three-business-day cancellation window after signing, and a prohibition on charging for
+            services before they're delivered. {{ state.name }}
+            {% if cr.state_statute %}additionally enforces {{ cr.state_statute }}{% if cr.cancellation_period_days %} with a {{ cr.cancellation_period_days }}-day cancellation right{% endif %}{% if cr.upfront_fees_prohibited %} and an explicit ban on upfront fees{% endif %}{% if cr.bond_required %}, and requires providers to post a surety bond ({{ cr.bond_amount or 'per state rule' }})
+            with {{ cr.registration_agency or 'the state licensing agency' }} before soliciting {{ state.name }} residents{% endif %}.{% else %}enforces the federal CROA floor without a separate state statute at the time this summary was written.{% endif %}
+          </p>
+          <p class="text-sm text-muted leading-relaxed mt-3">
+            Practical checks before you sign with any {{ state.name }} credit repair company: verify licensing
+            with {{ data.licensing_board or 'the state agency' }}, request the written contract and read the
+            cancellation clause, confirm no fees are being collected before disputes are filed, and record any
+            disputes and results yourself so you have an independent record if you later need to complain to the
+            {% if data.consumer_protection_agency %}{{ data.consumer_protection_agency }}{% else %}state consumer protection office{% endif %}
+            or the Consumer Financial Protection Bureau.
+          </p>
+        </section>
+
+        <section class="glass-card p-6">
+          <h2 class="text-lg font-bold text-text mb-2">Complaint Ladder — Escalation Order</h2>
+          <p class="text-sm text-muted leading-relaxed">
+            If a {{ state.name }} lender or credit repair provider violates the rules on this page, escalate in
+            this order for the fastest resolution: (1) file a written complaint with the company's compliance
+            department and keep a dated copy; (2) if there's no timely resolution, file with the
+            {% if data.consumer_protection_agency %}{{ data.consumer_protection_agency }}{% else %}state consumer protection agency{% endif %}
+            using the link in the sidebar; (3) file a CFPB complaint at consumerfinance.gov for federally
+            regulated lenders; (4) if you were charged an unlawful amount, small-claims court in {{ state.name }}
+            handles disputes under the local dollar threshold with no attorney required; (5) for military
+            servicemember protections, contact your installation's legal assistance office in addition to the
+            civilian channels.
+          </p>
+        </section>
+
+      </div>
+
+      <aside class="space-y-6">
+        {% if statutes %}
+        <div class="glass-card p-5">
+          <h3 class="font-bold text-text mb-3">Official Resources</h3>
+          <div class="space-y-2">
+            {% for s in statutes %}
+            <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" class="block text-sm text-muted hover:text-primary transition-colors py-1">{{ s.name }}</a>
+            {% endfor %}
+          </div>
+          {% if data.consumer_protection_url %}
+          <a href="{{ data.consumer_protection_url }}" target="_blank" rel="noopener noreferrer" class="mt-3 block text-sm text-primary hover:text-primary-hover font-medium">
+            {{ data.consumer_protection_agency or (state.name ~ ' Consumer Protection') }}
+          </a>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="glass-card p-5 bg-gradient-to-br from-primary-light to-white">
+          <h3 class="font-bold text-text mb-2">Need Credit Repair in {{ state.abbr }}?</h3>
+          <p class="text-sm text-muted mb-3">{{ cr_summary }}</p>
+          <a href="/state/{{ state_slug }}/" class="inline-flex items-center gap-2 bg-primary text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-primary-hover transition-colors">Browse {{ state.abbr }} Providers</a>
+        </div>
+
+        <div class="glass-card p-5">
+          <h3 class="font-bold text-text mb-2">Know Your Rights</h3>
+          <ul class="space-y-2 mt-3">
+            <li><a href="/financial-wellness/credit-report-reading-guide/" class="text-sm text-muted hover:text-primary transition-colors">How to Read Your Credit Report</a></li>
+            <li><a href="/financial-wellness/credit-score-basics/" class="text-sm text-muted hover:text-primary transition-colors">Understanding Credit Scores</a></li>
+            <li><a href="/financial-wellness/how-credit-repair-works/" class="text-sm text-muted hover:text-primary transition-colors">How Credit Repair Works</a></li>
+            <li><a href="/financial-wellness/dispute-credit-report-errors/" class="text-sm text-muted hover:text-primary transition-colors">Dispute Credit Report Errors</a></li>
+          </ul>
+          <a href="/financial-wellness/" class="mt-3 block text-xs text-primary hover:text-primary-hover font-medium">All wellness guides &rarr;</a>
+        </div>
+
+        <div class="glass-card p-5">
+          <h3 class="font-bold text-text mb-3">Other State Laws</h3>
+          <div class="flex flex-wrap gap-1.5">
+            {% for s in other_states %}
+            <a href="/state/{{ s.slug }}/lending-laws/" class="text-xs px-2.5 py-1 rounded-full border border-border text-muted hover:text-primary hover:border-primary transition-colors">{{ s.abbr }}</a>
+            {% endfor %}
+            <a href="/state/" class="text-xs px-2.5 py-1 rounded-full bg-primary-light text-primary font-medium">All 50 &rarr;</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    {% if glossary_groups %}
+    <section class="mt-10">
+      <details class="glass-card overflow-hidden">
+        <summary class="flex items-center justify-between cursor-pointer p-5 text-base font-semibold text-text hover:text-primary transition-colors">
+          <span>Key Legal &amp; Lending Terms <span class="text-xs font-normal text-muted ml-1">({{ glossary_total }} terms)</span></span>
+        </summary>
+        <div class="px-5 pb-5 space-y-6 border-t border-border/50">
+          <p class="text-sm text-muted pt-4">New to credit and lending? Here are the key terms used on this page, explained in plain language with real-number examples.</p>
+          {% for cat_slug, cat_label, terms in glossary_groups %}
+          <div>
+            <h3 class="text-sm font-semibold text-primary uppercase tracking-wider mb-3">{{ cat_label }}</h3>
+            <div class="space-y-2">
+              {% for term in terms %}
+              <details class="group border border-border/50 rounded-lg overflow-hidden">
+                <summary class="flex items-center justify-between cursor-pointer px-4 py-3 text-sm font-medium text-text hover:bg-bg-alt/50 transition-colors">
+                  <span>
+                    <span class="font-semibold">{{ term.term }}</span>
+                    {% if term.full_form and term.full_form != term.term %}<span class="text-muted font-normal ml-1">— {{ term.full_form }}</span>{% endif %}
+                  </span>
+                </summary>
+                <div class="px-4 pb-4 space-y-3">
+                  <p class="text-sm text-muted leading-relaxed">{{ term.plain_definition }}</p>
+                  <div class="flex items-start gap-2">
+                    <span class="text-xs font-semibold text-primary uppercase tracking-wider whitespace-nowrap mt-0.5">Why it matters</span>
+                    <p class="text-sm text-muted leading-relaxed">{{ term.why_it_matters }}</p>
+                  </div>
+                  <div class="rounded-lg bg-primary-light/30 border border-primary/10 p-3">
+                    <p class="text-xs font-semibold text-primary uppercase tracking-wider mb-1">Example</p>
+                    <p class="text-sm text-text leading-relaxed">{{ term.example }}</p>
+                  </div>
+                </div>
+              </details>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+          <div class="pt-2 border-t border-border/50">
+            <p class="text-xs text-muted">Want to learn more? Read our <a href="/financial-wellness/" class="text-primary hover:underline font-medium">Financial Wellness Guides</a> for in-depth explanations and practical advice.</p>
+          </div>
+        </div>
+      </details>
+    </section>
+    {% endif %}
+
+    <div class="mt-12 bg-bg-alt border border-border rounded-xl p-4">
+      <p class="text-xs text-muted leading-relaxed">
+        <strong>Disclaimer:</strong> This page provides general information about {{ state.name }} lending and
+        credit regulations for educational purposes only. It does not constitute legal advice. Laws and
+        regulations change frequently — always verify current rules with the
+        {% if data.consumer_protection_url %}<a href="{{ data.consumer_protection_url }}" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{{ data.consumer_protection_agency or (state.name ~ ' consumer protection agency') }}</a>{% else %}{{ data.consumer_protection_agency or (state.name ~ ' consumer protection agency') }}{% endif %}
+        or consult a licensed attorney. Federal protections (MLA, SCRA) are summarized — servicemembers should
+        contact their legal assistance office for specific guidance.
+        <a href="/disclosure/" class="text-primary hover:underline">Full disclosure</a>.
+      </p>
+    </div>
+  </div>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>

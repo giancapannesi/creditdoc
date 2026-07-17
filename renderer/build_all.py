@@ -48,6 +48,7 @@ from render import (  # noqa: E402
     render_compare,
     render_review,
     render_state,
+    render_state_lending_laws,
     render_trends,
     render_wellness,
 )
@@ -56,6 +57,7 @@ from db import (  # noqa: E402
     all_brands,
     all_comparisons,
     all_states_info,
+    all_states_with_lending_laws,
     all_trends_entries,
     browse_pairs,
     cities_with_lenders,
@@ -155,6 +157,7 @@ FAMILIES = [
     ("browse",    "browse",              _browse_wrapper, lambda: [f"{cat}/{city}" for cat, city in browse_pairs(5)]),  # category × city cross-slices ≥5 lenders each
     ("trends",    "trends",              render_trends,   lambda: [e["slug"] for e in all_trends_entries()]),  # CFPB Consumer Response profiles (filtered against lenders.processing_status/no_index)
     ("compare",   "compare",             render_compare,  lambda: [c["slug"] for c in all_comparisons()]),  # head-to-head lender comparisons (JSON + 2 lender rows)
+    ("state-laws","state",               render_state_lending_laws, lambda: [f"{s['slug']}/lending-laws" for s in all_states_with_lending_laws()]),  # /state/<slug>/lending-laws/
 ]
 
 
