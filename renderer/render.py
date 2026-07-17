@@ -34,9 +34,11 @@ from db import (  # noqa: E402
     load_blog_post,
     load_cluster_answer,
     load_lender,
+    load_wellness_guide,
     related_answers,
     sibling_blog_posts,
     sibling_cluster_answers,
+    sibling_wellness_guides,
     similar_lenders,
     state_context,
     wellness_guides_by_category,
@@ -281,6 +283,45 @@ def render_blog(slug: str, output_dir: Path) -> Path:
     return out_path
 
 
+def render_wellness(slug: str, output_dir: Path) -> Path:
+    """Render one /financial-wellness/<slug>/index.html from DB."""
+    post = load_wellness_guide(slug)
+    if post is None:
+        raise SystemExit(f"error: no wellness_guide with slug '{slug}' in DB")
+
+    sections_raw = [s for s in (post.get("sections") or []) if isinstance(s, dict) and s.get("heading") and s.get("content")]
+    sections = [
+        {"heading": s.get("heading", ""), "content_html": _md_to_html(s.get("content", ""))}
+        for s in sections_raw
+    ]
+    faqs = [f for f in (post.get("faq") or []) if isinstance(f, dict) and f.get("question") and f.get("answer")]
+    key_takeaways = post.get("key_takeaways") or []
+    if not isinstance(key_takeaways, list):
+        key_takeaways = []
+    related = list(sibling_wellness_guides(slug, post.get("category") or "", limit=4))
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("wellness.html.j2")
+    html = template.render(
+        post=post,
+        sections=sections,
+        faqs=faqs,
+        primary_sources=[],
+        key_takeaways=key_takeaways,
+        related_siblings=related,
+    )
+
+    out_path = output_dir / "financial-wellness" / slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="CreditDoc renderer — Astro-free HTML from DB.",
@@ -311,6 +352,14 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    wellness = subparsers.add_parser("wellness", help="Render /financial-wellness/[slug]/ page(s)")
+    wellness.add_argument("--slug", required=True, help="Wellness guide slug to render")
+    wellness.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
@@ -321,6 +370,9 @@ def main() -> None:
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     elif args.command == "blog":
         out = render_blog(args.slug, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "wellness":
+        out = render_wellness(args.slug, Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()

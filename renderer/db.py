@@ -173,6 +173,41 @@ def state_context(state_name_or_abbr: str | None) -> dict[str, Any] | None:
     return None
 
 
+def load_wellness_guide(slug: str) -> dict[str, Any] | None:
+    """Load one wellness_guides row + merge JSON blob."""
+    with _connect() as conn:
+        row = conn.execute("SELECT * FROM wellness_guides WHERE slug = ?", (slug,)).fetchone()
+    if not row:
+        return None
+    blob = json.loads(row["data"] or "{}")
+    merged: dict[str, Any] = dict(blob)
+    for k in row.keys():
+        if k == "data":
+            continue
+        v = row[k]
+        if v is not None or k not in merged:
+            merged[k] = v
+    return merged
+
+
+@lru_cache(maxsize=32)
+def sibling_wellness_guides(exclude_slug: str, category: str, limit: int = 4) -> tuple[dict[str, Any], ...]:
+    """Sibling wellness guides in the same category."""
+    with _connect() as conn:
+        rows = conn.execute(
+            "SELECT slug, data FROM wellness_guides "
+            "WHERE slug != ? AND json_extract(data, '$.category') = ? "
+            "ORDER BY slug LIMIT ?",
+            (exclude_slug, category, limit),
+        ).fetchall()
+    result = []
+    for r in rows:
+        d = json.loads(r["data"] or "{}")
+        d["slug"] = r["slug"]
+        result.append(d)
+    return tuple(result)
+
+
 def load_blog_post(slug: str) -> dict[str, Any] | None:
     """Load one blog_posts row + merge JSON blob."""
     with _connect() as conn:

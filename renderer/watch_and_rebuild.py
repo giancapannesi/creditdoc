@@ -37,6 +37,7 @@ DB_PATH = REPO_ROOT / "data" / "creditdoc.db"
 WATERMARK = REPO_ROOT / "data" / "renderer_watermark.txt"
 WATERMARK_ANSWERS = REPO_ROOT / "data" / "renderer_watermark_answers.txt"
 WATERMARK_BLOG = REPO_ROOT / "data" / "renderer_watermark_blog.txt"
+WATERMARK_WELLNESS = REPO_ROOT / "data" / "renderer_watermark_wellness.txt"
 RENDER_SCRIPT = REPO_ROOT / "renderer" / "render.py"
 SHADOW_DIST = REPO_ROOT / "shadow_dist"
 ASTRO_DIST = REPO_ROOT / "dist"
@@ -93,6 +94,19 @@ def changed_blog_since(last_seen: str, limit: int) -> list[tuple[str, str]]:
     return [(r["slug"], r["updated_at"]) for r in rows]
 
 
+def changed_wellness_since(last_seen: str, limit: int) -> list[tuple[str, str]]:
+    """Changed wellness_guides rows since watermark."""
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute(
+            "SELECT slug, updated_at FROM wellness_guides "
+            "WHERE updated_at > ? "
+            "ORDER BY updated_at ASC LIMIT ?",
+            (last_seen, limit + 1),
+        ).fetchall()
+    return [(r["slug"], r["updated_at"]) for r in rows]
+
+
 def rebuild_one(slug: str, output_dir: Path, kind: str = "review") -> tuple[bool, int, int]:
     """Invoke render.py for one slug. Returns (ok, elapsed_ms, bytes)."""
     start = time.time()
@@ -106,7 +120,7 @@ def rebuild_one(slug: str, output_dir: Path, kind: str = "review") -> tuple[bool
     if proc.returncode != 0:
         print(f"  FAIL {slug}: {proc.stderr.strip()[:200]}")
         return (False, elapsed_ms, 0)
-    family_dir = {"review": "review", "answer": "answers", "blog": "blog"}.get(kind, kind + "s")
+    family_dir = FAMILY_DIRS.get(kind, kind + "s")
     out_file = output_dir / family_dir / slug / "index.html"
     size = out_file.stat().st_size if out_file.exists() else 0
     return (True, elapsed_ms, size)
@@ -162,9 +176,12 @@ def deploy_changed(changed_files: list[Path]) -> bool:
     return True
 
 
+FAMILY_DIRS = {"review": "review", "answer": "answers", "blog": "blog", "wellness": "financial-wellness"}
+
+
 def parity_ok(slug: str, renderer_path: Path, kind: str = "review") -> tuple[bool, str]:
     """Check renderer output passes parity gate vs current dist/. Skip swap if not."""
-    family_dir = {"review": "review", "answer": "answers", "blog": "blog"}.get(kind, kind + "s")
+    family_dir = FAMILY_DIRS.get(kind, kind + "s")
     astro_path = ASTRO_DIST / family_dir / slug / "index.html"
     if not astro_path.exists():
         # No Astro baseline — safe to write renderer output directly.
@@ -201,15 +218,17 @@ def main() -> None:
     lender_last = read_watermark(WATERMARK)
     answer_last = read_watermark(WATERMARK_ANSWERS)
     blog_last = read_watermark(WATERMARK_BLOG)
+    wellness_last = read_watermark(WATERMARK_WELLNESS)
     lender_rows = changed_slugs_since(lender_last, args.limit)
     answer_rows = changed_answers_since(answer_last, args.limit)
     blog_rows = changed_blog_since(blog_last, args.limit)
+    wellness_rows = changed_wellness_since(wellness_last, args.limit)
 
-    if not lender_rows and not answer_rows and not blog_rows:
+    if not lender_rows and not answer_rows and not blog_rows and not wellness_rows:
         # Silent success — this runs every minute, no need to spam logs
         return
 
-    print(f"[watch_and_rebuild] {len(lender_rows)} lender + {len(answer_rows)} answer + {len(blog_rows)} blog changed")
+    print(f"[watch_and_rebuild] {len(lender_rows)} lender + {len(answer_rows)} answer + {len(blog_rows)} blog + {len(wellness_rows)} wellness changed")
 
     if args.dry_run:
         for slug, ts in lender_rows[:20]:
@@ -218,6 +237,8 @@ def main() -> None:
             print(f"  would rebuild answer: {slug}  ({ts})")
         for slug, ts in blog_rows[:20]:
             print(f"  would rebuild blog: {slug}  ({ts})")
+        for slug, ts in wellness_rows[:20]:
+            print(f"  would rebuild wellness: {slug}  ({ts})")
         return
 
     output_dir = SHADOW_DIST
@@ -230,7 +251,7 @@ def main() -> None:
     def _process(rows: list[tuple[str, str]], kind: str, wm_path: Path, last: str) -> str:
         nonlocal ok_count, fail_count, skipped_count, total_ms
         max_ts = last
-        family_dir = {"review": "review", "answer": "answers", "blog": "blog"}.get(kind, kind + "s")
+        family_dir = FAMILY_DIRS.get(kind, kind + "s")
         for slug, ts in rows[: args.limit]:
             ok, elapsed_ms, size = rebuild_one(slug, output_dir, kind)
             total_ms += elapsed_ms
@@ -255,6 +276,7 @@ def main() -> None:
     new_lender_last = _process(lender_rows, "review", WATERMARK, lender_last) if lender_rows else lender_last
     new_answer_last = _process(answer_rows, "answer", WATERMARK_ANSWERS, answer_last) if answer_rows else answer_last
     new_blog_last = _process(blog_rows, "blog", WATERMARK_BLOG, blog_last) if blog_rows else blog_last
+    new_wellness_last = _process(wellness_rows, "wellness", WATERMARK_WELLNESS, wellness_last) if wellness_rows else wellness_last
 
     print(f"[watch_and_rebuild] rendered {ok_count} ok, {fail_count} fail, {skipped_count} skipped(gate) in {total_ms} ms")
 
@@ -271,6 +293,9 @@ def main() -> None:
     if new_blog_last != blog_last:
         write_watermark(new_blog_last, WATERMARK_BLOG)
         print(f"[watch_and_rebuild] blog watermark → {new_blog_last}")
+    if new_wellness_last != wellness_last:
+        write_watermark(new_wellness_last, WATERMARK_WELLNESS)
+        print(f"[watch_and_rebuild] wellness watermark → {new_wellness_last}")
 
 
 if __name__ == "__main__":
