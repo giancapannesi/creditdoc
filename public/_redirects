@@ -1170,3 +1170,10 @@
 
 # Legacy sitemap.xml path → canonical sitemap index (was SSR endpoint, now static redirect)
 /sitemap.xml /sitemap-index.xml 301
+
+# DC has no /state/ hub — city guide is the closest destination.
+# Prevents 40 dead 404s from /credit-guide/washington-dc/*/ pages that
+# link to /state/district-of-columbia/*. Long-term fix is the template
+# conditional (stateHubExists) which will land on the next full rebuild.
+/state/district-of-columbia/ /credit-guide/washington-dc/ 301
+/state/district-of-columbia/lending-laws/ /credit-guide/washington-dc/ 301
