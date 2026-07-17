@@ -222,15 +222,32 @@ It does not confirm that {{ lender.name }} or this specific location is licensed
 {% endif %}
 {% if similar_lenders %}
 <section class="mb-8">
-<h2 class="text-2xl font-semibold mb-3">Similar Companies</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<h2 class="text-2xl font-semibold mb-3">Similar Companies <a href="/about/creditdoc-data/#similar-companies" class="text-sm text-muted hover:text-primary" title="How we find similar companies">&#9432;</a></h2>
+<p class="text-sm text-muted mb-4">Comparable {{ lender.category|title|replace('-',' ') }} providers with similar service scope. Ratings reflect stored review context; verify current licensing and pricing directly before contracting.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 {% for s in similar_lenders %}
-<a href="/review/{{ s.slug }}/" class="glass-card p-4 hover:border-primary transition-colors">
-{% if s.logo_url %}<img src="{{ s.logo_url }}" alt="{{ s.name }}" class="h-10 mb-2">{% endif %}
-<h3 class="font-semibold">{{ s.name }}</h3>
-{% if s.description_short %}<p class="text-sm text-muted mt-1">{{ s.description_short|truncate(140, killwords=True) }}</p>{% endif %}
-{% if s.rating %}<p class="text-xs mt-2">Rating: {{ s.rating }}/5</p>{% endif %}
-</a>
+<article class="glass-card p-5 flex flex-col h-full">
+<div class="flex items-start gap-4">
+<div class="shrink-0 w-14 h-14 rounded-xl bg-bg-alt border border-border flex items-center justify-center overflow-hidden">
+{% if s.logo_url %}<img src="{{ s.logo_url }}" alt="{{ s.name }} logo" class="w-10 h-10 object-contain" loading="lazy">
+{% else %}<span class="text-lg font-bold text-primary">{{ s.name[0]|upper }}</span>{% endif %}
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-lg font-semibold text-text">{{ s.name }}</h3>
+{% if s.description_short %}<p class="text-sm text-muted mt-1">{{ s.description_short|truncate(160, killwords=True) }}</p>{% endif %}
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-border flex items-center justify-between">
+<div>
+{% if s.rating %}<p class="text-xs text-muted">Rating <strong>{{ s.rating }}/5</strong></p>{% endif %}
+{% if s.state %}<p class="text-xs text-muted">Listed in {{ s.state }}</p>{% endif %}
+</div>
+<a href="/review/{{ s.slug }}/" class="text-sm text-primary hover:underline">Read review &rarr;</a>
+</div>
+{% if s.pros and s.pros|length > 0 %}
+<p class="text-xs text-muted mt-3"><strong>Notable:</strong> {{ s.pros[0]|truncate(120, killwords=True) }}</p>
+{% endif %}
+</article>
 {% endfor %}
 </div>
 </section>
