@@ -1,0 +1,92 @@
+{#
+  /review/[slug]/index.html — Jinja2 template for lender review pages.
+
+  Phase 1 minimum-viable version. Emits:
+    - <title>, <meta description>, <link canonical>
+    - JSON-LD LocalBusiness + BreadcrumbList
+    - H1, category, short description, long description, pros/cons, CTA
+
+  NOT YET INCLUDED (Phase 2 iteration):
+    - Full nav + footer (needs base.html.j2 extraction)
+    - Similar lenders block
+    - Regulatory records, HMDA, CFPB
+    - Related answers / blog posts
+    - Rating breakdown chart
+    - Category-specific templates
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ lender.name }} Review — {{ lender.category|title }} | CreditDoc</title>
+<meta name="description" content="{{ (lender.meta_description or lender.description_short or '')|striptags|truncate(160, killwords=True, end='') }}">
+<link rel="canonical" href="https://www.creditdoc.co/review/{{ lender.slug }}/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ lender.name }}">
+<meta property="og:description" content="{{ (lender.description_short or '')|striptags|truncate(200, killwords=True, end='') }}">
+<meta property="og:url" content="https://www.creditdoc.co/review/{{ lender.slug }}/">
+<meta property="og:site_name" content="CreditDoc">
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": lender.name,
+  "url": "https://www.creditdoc.co/review/" + lender.slug + "/",
+  "description": lender.description_short or "",
+  "image": lender.logo_url or "",
+  "priceRange": (lender.pricing or {}).get("range", "") if lender.pricing is mapping else "",
+} | tojson }}
+</script>
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"},
+    {"@type": "ListItem", "position": 2, "name": lender.category|title, "item": "https://www.creditdoc.co/categories/" + lender.category + "/"},
+    {"@type": "ListItem", "position": 3, "name": lender.name, "item": "https://www.creditdoc.co/review/" + lender.slug + "/"}
+  ]
+} | tojson }}
+</script>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="max-w-4xl mx-auto px-4 py-8">
+<nav aria-label="Breadcrumb" class="text-sm text-muted mb-4">
+<a href="/">Home</a> / <a href="/categories/{{ lender.category }}/">{{ lender.category|title }}</a> / <span>{{ lender.name }}</span>
+</nav>
+<h1 class="text-3xl font-bold mb-2">{{ lender.name }}</h1>
+<p class="text-sm text-muted mb-4">{{ lender.category|title }}{% if lender.state %} · {{ lender.state }}{% endif %}</p>
+{% if lender.description_short %}
+<p class="text-lg mb-6">{{ lender.description_short }}</p>
+{% endif %}
+{% if lender.description_long %}
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">About {{ lender.name }}</h2>
+<div>{{ lender.description_long|safe }}</div>
+</section>
+{% endif %}
+{% if lender.pros %}
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Pros</h2>
+<ul>{% for p in lender.pros %}<li>{{ p }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+{% if lender.cons %}
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Cons</h2>
+<ul>{% for c in lender.cons %}<li>{{ c }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+{% if lender.website_url %}
+<section class="mb-8">
+<a href="{{ lender.website_url }}" rel="nofollow noopener" class="btn-primary">Visit {{ lender.name }}</a>
+</section>
+{% endif %}
+<footer class="text-xs text-muted mt-16 pt-4 border-t border-border">
+<p>Last updated: {{ lender.updated_at }}</p>
+</footer>
+</main>
+</body>
+</html>
