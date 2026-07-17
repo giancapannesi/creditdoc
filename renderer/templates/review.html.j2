@@ -162,14 +162,62 @@
 {% if state_ctx %}
 <section class="mb-8 glass-card p-5">
 <h2 class="text-2xl font-semibold mb-3">State Consumer Finance Context</h2>
-<p class="text-sm text-muted mb-3">{{ state_ctx.state_name }} — {{ lender.category|title }} operates under state consumer credit regulations. Confirm current rules with the state before contracting.</p>
-<ul class="text-sm space-y-1">
-{% if state_ctx.payday_lending_status %}<li>Payday lending: <strong>{{ state_ctx.payday_lending_status }}</strong></li>{% endif %}
-{% if state_ctx.usury_cap_general %}<li>General usury cap: <strong>{{ state_ctx.usury_cap_general }}</strong></li>{% endif %}
-{% if state_ctx.max_apr_cap_personal %}<li>Max personal loan APR: <strong>{{ state_ctx.max_apr_cap_personal }}</strong></li>{% endif %}
-{% if state_ctx.nmls_regulator_name %}<li>Regulator: <a href="{{ state_ctx.nmls_regulator_url }}" rel="nofollow noopener">{{ state_ctx.nmls_regulator_name }}</a></li>{% endif %}
-{% if state_ctx.complaint_filing_url %}<li><a href="{{ state_ctx.complaint_filing_url }}" rel="nofollow noopener">File a complaint with {{ state_ctx.state_name }}</a></li>{% endif %}
+<p class="text-sm text-muted mb-3">
+This is state-level context for {{ lender.category|title|replace('-',' ') }} consumers in {{ state_ctx.state_name or state_ctx.name }}.
+It does not confirm that {{ lender.name }} or this specific location is licensed.
+</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 text-sm">
+{% if state_ctx.licensing_board %}
+<div><strong>State regulator:</strong> {{ state_ctx.licensing_board }}</div>
+{% endif %}
+{% if state_ctx.consumer_protection_agency %}
+<div><strong>Consumer protection:</strong>
+{% if state_ctx.consumer_protection_url %}<a href="{{ state_ctx.consumer_protection_url }}" rel="nofollow noopener">{{ state_ctx.consumer_protection_agency }}</a>
+{% else %}{{ state_ctx.consumer_protection_agency }}{% endif %}
+</div>
+{% endif %}
+</div>
+{% if state_ctx.credit_repair_laws %}
+<h3 class="font-semibold mb-2">Credit and debt help rules in {{ state_ctx.state_name or state_ctx.name }}</h3>
+<ul class="text-sm space-y-1 mb-4">
+{% if state_ctx.credit_repair_laws.state_statute %}<li><strong>Relevant law:</strong> {{ state_ctx.credit_repair_laws.state_statute }}{% if state_ctx.credit_repair_laws.statute_code %} ({{ state_ctx.credit_repair_laws.statute_code }}){% endif %}</li>{% endif %}
+{% if state_ctx.credit_repair_laws.registration_required %}<li><strong>Registration:</strong> Required{% if state_ctx.credit_repair_laws.registration_agency %} with {{ state_ctx.credit_repair_laws.registration_agency }}{% endif %}</li>{% endif %}
+{% if state_ctx.credit_repair_laws.upfront_fees_prohibited %}<li><strong>Upfront fees:</strong> Prohibited under state law</li>{% endif %}
+{% if state_ctx.credit_repair_laws.cancellation_period_days %}<li><strong>Cancellation window:</strong> {{ state_ctx.credit_repair_laws.cancellation_period_days }}-day right to cancel</li>{% endif %}
+{% if state_ctx.credit_repair_laws.bond_required %}<li><strong>Bond required:</strong> {{ state_ctx.credit_repair_laws.bond_amount or 'Yes' }}</li>{% endif %}
 </ul>
+{% if state_ctx.credit_repair_laws.key_provisions %}
+<h3 class="font-semibold mb-2">Key state rules to check</h3>
+<ul class="text-sm space-y-1 mb-4">
+{% for p in state_ctx.credit_repair_laws.key_provisions[:6] %}<li>{{ p }}</li>{% endfor %}
+</ul>
+{% endif %}
+{% endif %}
+{% if state_ctx.payday_loan_status %}
+<p class="text-sm mb-3"><strong>Payday lending in {{ state_ctx.state_name or state_ctx.name }}:</strong> {{ state_ctx.payday_loan_status }}{% if state_ctx.max_payday_amount %} (max ${{ state_ctx.max_payday_amount }}){% endif %}</p>
+{% endif %}
+{% if state_ctx.usury_cap %}
+<p class="text-sm mb-3"><strong>Usury cap:</strong> {{ state_ctx.usury_cap }}</p>
+{% endif %}
+{% if state_ctx.complaint_resources %}
+<h3 class="font-semibold mb-2">Complaint resources</h3>
+<ul class="text-sm space-y-1 mb-4">
+{% for r in state_ctx.complaint_resources[:5] %}
+<li>{% if r.url %}<a href="{{ r.url }}" rel="nofollow noopener">{{ r.name }}</a>{% else %}<strong>{{ r.name }}</strong>{% endif %}{% if r.description %} — {{ r.description|truncate(140, killwords=True) }}{% endif %}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% if state_ctx.statute_links %}
+<h3 class="font-semibold mb-2">State references</h3>
+<ul class="text-sm space-y-1 mb-4">
+{% for s in state_ctx.statute_links[:5] %}
+<li>{% if s.url %}<a href="{{ s.url }}" rel="nofollow noopener">{{ s.title or s.name or s.url }}</a>{% else %}{{ s.title or s.name }}{% endif %}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% if state_ctx.consumer_rights_summary %}
+<p class="text-sm text-muted">{{ state_ctx.consumer_rights_summary|truncate(400, killwords=True) }}</p>
+{% endif %}
 </section>
 {% endif %}
 {% if similar_lenders %}
