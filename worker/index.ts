@@ -20,8 +20,12 @@
  *   Rock 1 Phase R1.1 migrated all 36 legacy path + 50 state code entries.
  */
 
+import { handleEmailSignup } from "./handlers/email-signup";
 import { handleGeo } from "./handlers/geo";
 import { handleGoRedirect } from "./handlers/go";
+import { handleOriginationIntake } from "./handlers/origination-intake";
+import { handleRevalidate } from "./handlers/revalidate";
+import { handleSearch } from "./handlers/search";
 
 export interface Env {
   ASSETS: Fetcher;
@@ -49,28 +53,20 @@ export default {
       return handleGoRedirect(request, env);
     }
 
-    // TODO Phase R1.2b — port these 4 endpoints from src/pages/api/:
     if (path === "/api/search") {
-      return notImplemented("search");
+      return handleSearch(request, env);
     }
-    if (path === "/api/email-signup" && request.method === "POST") {
-      return notImplemented("email-signup");
+    if (path === "/api/email-signup") {
+      return handleEmailSignup(request, env);
     }
-    if (path === "/api/origination-intake" && request.method === "POST") {
-      return notImplemented("origination-intake");
+    if (path === "/api/origination-intake") {
+      return handleOriginationIntake(request, env);
     }
-    if (path === "/api/revalidate" && request.method === "POST") {
-      return notImplemented("revalidate");
+    if (path === "/api/revalidate") {
+      return handleRevalidate(request, env);
     }
 
     // Fall through to static assets (dist/ contents including _redirects, _headers).
     return env.ASSETS.fetch(request);
   },
 };
-
-function notImplemented(endpoint: string): Response {
-  return new Response(
-    JSON.stringify({ error: `endpoint ${endpoint} not ported yet`, phase: "R1.2b pending" }),
-    { status: 501, headers: { "content-type": "application/json" } },
-  );
-}
