@@ -74,3 +74,80 @@ def category_faqs(category: str, lender_name: str) -> list[dict[str, str]]:
     """Return a list of {q, a} dicts for the given category. Uses a fallback set if unknown."""
     tmpl = _TEMPLATES.get(category, _FALLBACK)
     return [{"q": q, "a": a} for q, a in tmpl]
+
+
+def lender_specific_faqs(lender: dict, similar_lenders: list[dict]) -> list[dict[str, str]]:
+    """Generate FAQ questions grounded in the lender's own data fields.
+
+    Mirrors Astro's data-driven FAQ block: services listed, profile signals,
+    strengths/weaknesses summary, similar-company comparison, geographic
+    coverage. Falls back to category templates if data is thin.
+    """
+    faqs: list[dict[str, str]] = []
+    name = lender.get("name") or "This provider"
+    category = (lender.get("category") or "").replace("-", " ").title() or "Financial Service"
+
+    services = lender.get("services") or []
+    if services:
+        listed = ", ".join(str(s) for s in services[:5])
+        more = len(services) - 5
+        suffix = f", and {more} more" if more > 0 else ""
+        faqs.append({
+            "q": f"What services does {name} offer?",
+            "a": f"{name} offers {len(services)} services including {listed}{suffix}. Confirm current service list directly with the provider before contracting.",
+        })
+
+    best_for = lender.get("best_for") or []
+    if best_for:
+        faqs.append({
+            "q": f"Who is {name} best suited for?",
+            "a": f"{name}'s profile signals suggest it may fit: " + "; ".join(str(b) for b in best_for[:4]) + ". Individual outcomes vary based on your specific situation.",
+        })
+
+    pros = lender.get("pros") or []
+    cons = lender.get("cons") or []
+    if pros or cons:
+        s_part = "; ".join(str(p) for p in pros[:3])
+        c_part = "; ".join(str(c) for c in cons[:2])
+        faqs.append({
+            "q": f"What are the strengths and weaknesses of {name}?",
+            "a": (f"Key strengths: {s_part}. " if s_part else "") + (f"Areas to consider: {c_part}." if c_part else ""),
+        })
+
+    if similar_lenders:
+        peer_names = ", ".join(s.get("name", "") for s in similar_lenders[:3] if s.get("name"))
+        faqs.append({
+            "q": f"How does {name} compare to similar companies?",
+            "a": f"In the {category} category, comparable providers include {peer_names}. Each company has different strengths, so compare services, pricing, and consumer complaint records before deciding what to do next.",
+        })
+
+    states_served = lender.get("states_served") or []
+    if states_served:
+        listed = ", ".join(str(s) for s in states_served[:8])
+        more = len(states_served) - 8
+        suffix = f", and {more} more states" if more > 0 else ""
+        faqs.append({
+            "q": f"Where does {name} operate?",
+            "a": f"{name} serves customers in {len(states_served)} states including {listed}{suffix}. Confirm current service availability in your state directly with the provider.",
+        })
+
+    pricing = lender.get("pricing")
+    if pricing:
+        if isinstance(pricing, dict):
+            p_summary = "; ".join(f"{k.replace('_', ' ')}: {v}" for k, v in list(pricing.items())[:3])
+        else:
+            p_summary = str(pricing)
+        faqs.append({
+            "q": f"How much does {name} cost?",
+            "a": f"Listed pricing for {name}: {p_summary}. Pricing may change — verify current fees directly with the provider before signing any contract.",
+        })
+
+    # If we came up short, top up with category-generic questions.
+    if len(faqs) < 4:
+        for q, a in _TEMPLATES.get(lender.get("category") or "", _FALLBACK):
+            if not any(f["q"] == q for f in faqs):
+                faqs.append({"q": q, "a": a})
+            if len(faqs) >= 6:
+                break
+
+    return faqs[:6]
