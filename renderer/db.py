@@ -273,6 +273,122 @@ def sibling_cluster_answers(exclude_slug: str, cluster_pillar: str, limit: int =
     return tuple(dict(r) for r in rows)
 
 
+_STATE_ABBREVIATIONS: dict[str, str] = {
+    "Alabama": "AL", "Alaska": "AK", "Arizona": "AZ", "Arkansas": "AR", "California": "CA",
+    "Colorado": "CO", "Connecticut": "CT", "Delaware": "DE", "Florida": "FL", "Georgia": "GA",
+    "Hawaii": "HI", "Idaho": "ID", "Illinois": "IL", "Indiana": "IN", "Iowa": "IA",
+    "Kansas": "KS", "Kentucky": "KY", "Louisiana": "LA", "Maine": "ME", "Maryland": "MD",
+    "Massachusetts": "MA", "Michigan": "MI", "Minnesota": "MN", "Mississippi": "MS",
+    "Missouri": "MO", "Montana": "MT", "Nebraska": "NE", "Nevada": "NV", "New Hampshire": "NH",
+    "New Jersey": "NJ", "New Mexico": "NM", "New York": "NY", "North Carolina": "NC",
+    "North Dakota": "ND", "Ohio": "OH", "Oklahoma": "OK", "Oregon": "OR", "Pennsylvania": "PA",
+    "Rhode Island": "RI", "South Carolina": "SC", "South Dakota": "SD", "Tennessee": "TN",
+    "Texas": "TX", "Utah": "UT", "Vermont": "VT", "Virginia": "VA", "Washington": "WA",
+    "West Virginia": "WV", "Wisconsin": "WI", "Wyoming": "WY", "District of Columbia": "DC",
+}
+_ABBR_TO_FULL_STATE: dict[str, str] = {v: k for k, v in _STATE_ABBREVIATIONS.items()}
+
+
+def normalize_state_abbr(state: str | None) -> str | None:
+    """Match Astro's normalizeStateAbbr: accept full name or abbr, return abbr."""
+    if not state:
+        return None
+    trimmed = state.strip()
+    if not trimmed:
+        return None
+    upper = trimmed.upper()
+    if upper in _ABBR_TO_FULL_STATE:
+        return upper
+    return _STATE_ABBREVIATIONS.get(trimmed)
+
+
+def slugify_city(city: str) -> str:
+    """Match Astro's slugifyCity: lower, non-alnum → '-', strip edges."""
+    import re as _re
+    s = city.strip().lower()
+    s = _re.sub(r"[^a-z0-9]+", "-", s)
+    s = _re.sub(r"^-+|-+$", "", s)
+    return s
+
+
+@lru_cache(maxsize=1)
+def cities_with_lenders(min_count: int = 5) -> tuple[dict[str, Any], ...]:
+    """Cities with at least `min_count` indexable lenders.
+
+    Groups by lower(city)+normalized-state-abbr. Slug = f"{slugify_city(city)}-{abbr.lower()}".
+    """
+    with _connect() as conn:
+        rows = conn.execute(
+            "SELECT json_extract(data, '$.company_info.city') AS city, "
+            "       json_extract(data, '$.company_info.state') AS state "
+            "FROM lenders "
+            "WHERE processing_status IN ('ready_for_index','approved')"
+        ).fetchall()
+    agg: dict[tuple[str, str], dict[str, Any]] = {}
+    for r in rows:
+        c = (r["city"] or "").strip()
+        s = normalize_state_abbr(r["state"])
+        if not c or not s:
+            continue
+        key = (c.lower(), s)
+        if key in agg:
+            agg[key]["count"] += 1
+        else:
+            agg[key] = {"city": c, "state_abbr": s, "count": 1}
+    out: list[dict[str, Any]] = []
+    for v in agg.values():
+        if v["count"] < min_count:
+            continue
+        full = _ABBR_TO_FULL_STATE.get(v["state_abbr"], v["state_abbr"])
+        out.append({
+            "city": v["city"],
+            "state": full,
+            "state_abbr": v["state_abbr"],
+            "slug": f"{slugify_city(v['city'])}-{v['state_abbr'].lower()}",
+            "count": v["count"],
+        })
+    out.sort(key=lambda x: (-x["count"], x["slug"]))
+    return tuple(out)
+
+
+@lru_cache(maxsize=2048)
+def lenders_by_city_state(city_lower: str, state_abbr: str) -> tuple[dict[str, Any], ...]:
+    """All indexable lenders in a city (lowercase city, uppercase 2-letter abbr).
+
+    Matches Astro's getLendersByCityState. Runs a broad SQL then filters in
+    Python because state values in the JSON blob use both full-name and abbr
+    forms and we need normalize_state_abbr semantics.
+    """
+    with _connect() as conn:
+        rows = conn.execute(
+            "SELECT * FROM lenders "
+            "WHERE processing_status IN ('ready_for_index','approved') "
+            "AND LOWER(TRIM(COALESCE(json_extract(data, '$.company_info.city'), ''))) = ?",
+            (city_lower,),
+        ).fetchall()
+    out = []
+    for r in rows:
+        d = _merge_lender(r)
+        ci = d.get("company_info") or {}
+        if normalize_state_abbr(ci.get("state")) != state_abbr:
+            continue
+        out.append(d)
+    return tuple(out)
+
+
+@lru_cache(maxsize=1)
+def all_categories() -> tuple[dict[str, Any], ...]:
+    """All categories rows (slug + name), for display-name lookup on hub pages."""
+    with _connect() as conn:
+        rows = conn.execute("SELECT slug, data FROM categories ORDER BY slug").fetchall()
+    out = []
+    for r in rows:
+        d = json.loads(r["data"] or "{}")
+        d.setdefault("slug", r["slug"])
+        out.append(d)
+    return tuple(out)
+
+
 @lru_cache(maxsize=64)
 def load_category(slug: str) -> dict[str, Any] | None:
     """Return the category row merged with its data JSON blob."""

@@ -29,19 +29,24 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 # lender-loading logic here.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import (  # noqa: E402
+    all_categories,
     category_count,
     category_to_pillar,
+    cities_with_lenders,
     glossary_for_review,
+    lenders_by_city_state,
     load_blog_post,
     load_category,
     load_cluster_answer,
     load_lender,
     load_wellness_guide,
+    normalize_state_abbr,
     related_answers,
     sibling_blog_posts,
     sibling_cluster_answers,
     sibling_wellness_guides,
     similar_lenders,
+    slugify_city,
     state_context,
     top_lenders_by_category,
     wellness_guides_by_category,
@@ -51,6 +56,16 @@ from _faqs import category_faqs, lender_specific_faqs  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = Path(__file__).resolve().parent / "templates"
+
+
+def _safe_jsonld_str(obj: Any) -> str:
+    """Serialize obj to a JSON-LD-safe string.
+
+    Escapes `</` so a hostile lender name containing `</script>` can't break
+    out of the enclosing <script> tag. Preserves non-ASCII (ensure_ascii=False)
+    so city/lender names render correctly.
+    """
+    return json.dumps(obj, ensure_ascii=False).replace("</", "<\\/")
 
 
 def render_review(slug: str, output_dir: Path) -> Path:
@@ -438,12 +453,10 @@ def render_category(slug: str, output_dir: Path) -> Path:
 
     is_loan_category = (cat.get("filter_type") == "loan")
 
-    # Pre-build ItemList JSON-LD (Jinja doesn't support Python-style
-    # comprehensions, so we serialise it here.) Escape "</" to guard against
-    # a lender name ever containing a script-close sequence (debugger audit).
+    # Pre-build ItemList JSON-LD via the shared _safe_jsonld_str helper.
     item_list_jsonld = ""
     if top:
-        item_list_jsonld = json.dumps({
+        item_list_jsonld = _safe_jsonld_str({
             "@context": "https://schema.org",
             "@type": "ItemList",
             "name": f"{category_ctx['name']} Company Profiles",
@@ -458,7 +471,7 @@ def render_category(slug: str, output_dir: Path) -> Path:
                 }
                 for i, l in enumerate(top, start=1)
             ],
-        }, ensure_ascii=False).replace("</", "<\\/")
+        })
 
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATES_DIR)),
@@ -480,6 +493,136 @@ def render_category(slug: str, output_dir: Path) -> Path:
     )
 
     out_path = output_dir / "categories" / slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
+_CATEGORY_ALIASES: dict[str, str] = {"fix-my-credit": "credit-repair"}
+
+
+def render_city(slug: str, output_dir: Path) -> Path:
+    """Render one /city/<slug>/index.html from DB. Returns the output path."""
+    # Locate the city by slug (single scan of the aggregated cities list).
+    match = None
+    for c in cities_with_lenders(5):
+        if c["slug"] == slug:
+            match = c
+            break
+    if match is None:
+        raise SystemExit(f"error: no city with slug '{slug}' (need ≥5 indexable lenders)")
+
+    lenders = list(lenders_by_city_state(match["city"].lower(), match["state_abbr"]))
+    lender_total = len(lenders)
+
+    # Group by category (with alias collapse, matches Astro).
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for l in lenders:
+        cat = _CATEGORY_ALIASES.get(l.get("category") or "", l.get("category") or "unknown")
+        groups.setdefault(cat, []).append(l)
+    sorted_groups = sorted(groups.items(), key=lambda kv: -len(kv[1]))
+
+    # Category display-name map (from categories table).
+    cat_names: dict[str, str] = {}
+    for cat in all_categories():
+        s = cat.get("slug")
+        if s:
+            cat_names[s] = cat.get("name") or s
+
+    # Featured providers: order by stored google_rating (0-5 only, ≥1 reviews).
+    def _grate(l: dict[str, Any]) -> float:
+        gr = l.get("google_rating") or 0
+        gc = l.get("google_reviews_count") or 0
+        try:
+            gr_f = float(gr); gc_i = int(gc)
+        except (TypeError, ValueError):
+            return 0.0
+        if 0 < gr_f <= 5 and gc_i >= 1:
+            return gr_f
+        return 0.0
+    featured = sorted(lenders, key=lambda l: -_grate(l))[:6]
+
+    # Sort inside each group for the by-category grid (matches Astro).
+    for cat, items in sorted_groups:
+        items.sort(key=lambda l: -_grate(l))
+
+    other_cities = [c for c in cities_with_lenders(30) if c["slug"] != slug][:24]
+
+    # SEO copy.
+    local_kw = f"loan companies in {match['city']}"
+    credit_repair_kw = f"{match['city']} credit repair"
+    personal_loans_kw = f"personal loans {match['city']}"
+    business_loans_kw = f"business loans {match['city']}"
+    seo_title = f"Loan Companies in {match['city']}, {match['state_abbr']} | CreditDoc"
+    seo_description = (
+        f"Compare {local_kw}, {credit_repair_kw}, {personal_loans_kw}, and "
+        f"financial service profiles in {match['city']}, {match['state_abbr']}. "
+        f"Review {lender_total} local listings."
+    )
+
+    # JSON-LD, pre-serialised via the safe helper.
+    collection_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": f"Loan Companies in {match['city']}, {match['state_abbr']}",
+        "description": seo_description,
+        "url": f"https://www.creditdoc.co/city/{slug}/",
+        "about": {
+            "@type": "City",
+            "name": match["city"],
+            "containedInPlace": {"@type": "State", "name": match["state"]},
+        },
+    })
+    item_list_jsonld = ""
+    if featured:
+        item_list_jsonld = _safe_jsonld_str({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": f"Financial Service Profiles in {match['city']}, {match['state_abbr']}",
+            "itemListOrder": "https://schema.org/ItemListOrderDescending",
+            "numberOfItems": len(featured),
+            "itemListElement": [
+                {"@type": "ListItem", "position": i, "name": l.get("name"), "url": f"https://www.creditdoc.co/review/{l['slug']}/"}
+                for i, l in enumerate(featured, start=1)
+            ],
+        })
+    breadcrumb_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"},
+            {"@type": "ListItem", "position": 2, "name": "Cities", "item": "https://www.creditdoc.co/city/"},
+            {"@type": "ListItem", "position": 3, "name": f"{match['city']}, {match['state_abbr']}", "item": f"https://www.creditdoc.co/city/{slug}/"},
+        ],
+    })
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("city.html.j2")
+    html = template.render(
+        city=match,
+        lender_total=lender_total,
+        featured=featured,
+        sorted_groups=sorted_groups,
+        cat_names=cat_names,
+        other_cities=other_cities,
+        seo_title=seo_title,
+        seo_description=seo_description,
+        local_kw=local_kw,
+        credit_repair_kw=credit_repair_kw,
+        personal_loans_kw=personal_loans_kw,
+        business_loans_kw=business_loans_kw,
+        map_query=f"{match['city']}, {match['state_abbr']} credit repair financial services",
+        collection_jsonld=collection_jsonld,
+        item_list_jsonld=item_list_jsonld,
+        breadcrumb_jsonld=breadcrumb_jsonld,
+    )
+
+    out_path = output_dir / "city" / slug / "index.html"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(html, encoding="utf-8")
     return out_path
@@ -531,6 +674,14 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    city = subparsers.add_parser("city", help="Render /city/[slug]/ page(s)")
+    city.add_argument("--slug", required=True, help="City slug (e.g. new-york-ny) to render")
+    city.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
@@ -547,6 +698,9 @@ def main() -> None:
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     elif args.command == "category":
         out = render_category(args.slug, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "city":
+        out = render_city(args.slug, Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()

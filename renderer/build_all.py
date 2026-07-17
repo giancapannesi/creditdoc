@@ -42,9 +42,12 @@ from render import (  # noqa: E402
     render_answer,
     render_blog,
     render_category,
+    render_city,
     render_review,
     render_wellness,
 )
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from db import cities_with_lenders  # noqa: E402
 
 
 def _acquire_lock():
@@ -123,6 +126,7 @@ FAMILIES = [
     ("blog",      "blog",                render_blog,     lambda: _slugs("blog_posts",       "status",            ("published",))),
     ("wellness",  "financial-wellness",  render_wellness, lambda: _slugs("wellness_guides",  "",                  ())),  # no status column — all rows are considered published
     ("category",  "categories",          render_category, lambda: _slugs("categories",       "",                  ())),  # all rows published
+    ("city",      "city",                render_city,     lambda: [c["slug"] for c in cities_with_lenders(5)]),  # aggregated from lenders table (city+state), ≥5 lenders
 ]
 
 
