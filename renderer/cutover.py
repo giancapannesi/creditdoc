@@ -118,12 +118,37 @@ def render(slug: str) -> Path:
     return SHADOW_DIST / "review" / slug / "index.html"
 
 
+def _load_env_file(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    out: dict[str, str] = {}
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        out[k.strip()] = v.strip().strip('"').strip("'")
+    return out
+
+
 def wrangler_deploy() -> bool:
-    """Push dist/ to Cloudflare. Wrangler uploads only changed files."""
-    env = {**os.environ,
-           "CLOUDFLARE_API_TOKEN": "",
-           "CLOUDFLARE_EMAIL": os.environ.get("CLOUDFLARE_EMAIL", ""),
-           "CLOUDFLARE_API_KEY": os.environ.get("CLOUDFLARE_GLOBAL_API_KEY", "")}
+    """Push dist/ to Cloudflare. Wrangler uploads only changed files.
+
+    Uses Global API Key path (per lies_caught #2): wrangler reads
+    CLOUDFLARE_API_KEY (not _GLOBAL_API_KEY) plus CLOUDFLARE_EMAIL.
+    Must NOT have CLOUDFLARE_API_TOKEN in env — that Zone-only token
+    can't do Workers ops and its presence hijacks the auth path.
+    """
+    dotenv = {**_load_env_file(REPO_ROOT.parent / ".env"),
+              **_load_env_file(REPO_ROOT / ".env")}
+    global_key = os.environ.get("CLOUDFLARE_GLOBAL_API_KEY") or dotenv.get("CLOUDFLARE_GLOBAL_API_KEY", "")
+    email = os.environ.get("CLOUDFLARE_EMAIL") or dotenv.get("CLOUDFLARE_EMAIL", "contact@creditdoc.co")
+    if not global_key:
+        print("wrangler deploy FAILED: no CLOUDFLARE_GLOBAL_API_KEY in env or .env")
+        return False
+    env = {k: v for k, v in os.environ.items() if k != "CLOUDFLARE_API_TOKEN"}
+    env["CLOUDFLARE_EMAIL"] = email
+    env["CLOUDFLARE_API_KEY"] = global_key
     proc = subprocess.run(
         ["npx", "wrangler", "deploy"],
         cwd=str(REPO_ROOT),

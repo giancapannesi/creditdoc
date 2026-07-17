@@ -83,8 +83,24 @@ def rebuild_one(slug: str, output_dir: Path) -> tuple[bool, int, int]:
     return (True, elapsed_ms, size)
 
 
+def _load_env_file(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    out: dict[str, str] = {}
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        out[k.strip()] = v.strip().strip('"').strip("'")
+    return out
+
+
 def deploy_changed(changed_files: list[Path]) -> bool:
-    """Copy changed files to dist/ and run wrangler deploy (uploads changed only)."""
+    """Copy changed files to dist/ and run wrangler deploy (uploads changed only).
+
+    Uses Global API Key path (per lies_caught #2).
+    """
     if not changed_files:
         return True
     for src in changed_files:
@@ -92,10 +108,16 @@ def deploy_changed(changed_files: list[Path]) -> bool:
         dst = ASTRO_DIST / rel
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
-    env = {**os.environ,
-           "CLOUDFLARE_API_TOKEN": "",
-           "CLOUDFLARE_EMAIL": os.environ.get("CLOUDFLARE_EMAIL", ""),
-           "CLOUDFLARE_API_KEY": os.environ.get("CLOUDFLARE_GLOBAL_API_KEY", "")}
+    dotenv = {**_load_env_file(REPO_ROOT.parent / ".env"),
+              **_load_env_file(REPO_ROOT / ".env")}
+    global_key = os.environ.get("CLOUDFLARE_GLOBAL_API_KEY") or dotenv.get("CLOUDFLARE_GLOBAL_API_KEY", "")
+    email = os.environ.get("CLOUDFLARE_EMAIL") or dotenv.get("CLOUDFLARE_EMAIL", "contact@creditdoc.co")
+    if not global_key:
+        print("  wrangler deploy FAILED: no CLOUDFLARE_GLOBAL_API_KEY")
+        return False
+    env = {k: v for k, v in os.environ.items() if k != "CLOUDFLARE_API_TOKEN"}
+    env["CLOUDFLARE_EMAIL"] = email
+    env["CLOUDFLARE_API_KEY"] = global_key
     proc = subprocess.run(
         ["npx", "wrangler", "deploy"],
         cwd=str(REPO_ROOT),
@@ -109,6 +131,23 @@ def deploy_changed(changed_files: list[Path]) -> bool:
         return False
     print(f"  wrangler deploy OK ({len(changed_files)} files uploaded)")
     return True
+
+
+def parity_ok(slug: str, renderer_path: Path) -> tuple[bool, str]:
+    """Check renderer output passes parity gate vs current dist/. Skip swap if not."""
+    astro_path = ASTRO_DIST / "review" / slug / "index.html"
+    if not astro_path.exists():
+        # No Astro baseline — safe to write renderer output directly.
+        return (True, "no-baseline")
+    try:
+        from cutover import parity_gate  # local import — cutover.py sits alongside
+    except ImportError:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from cutover import parity_gate  # type: ignore
+    astro_html = astro_path.read_text(encoding="utf-8", errors="replace")
+    render_html = renderer_path.read_text(encoding="utf-8", errors="replace")
+    passed, reasons = parity_gate(astro_html, render_html)
+    return (passed, "; ".join(reasons) if not passed else "ok")
 
 
 def main() -> None:
@@ -150,18 +189,28 @@ def main() -> None:
     ok_count = 0
     fail_count = 0
 
+    skipped_count = 0
     for slug, ts in rows[: args.limit]:
         ok, elapsed_ms, size = rebuild_one(slug, output_dir)
         total_ms += elapsed_ms
-        if ok:
-            ok_count += 1
-            changed_files.append(output_dir / "review" / slug / "index.html")
-            if ts > max_ts:
-                max_ts = ts
-        else:
+        if not ok:
             fail_count += 1
+            continue
+        if args.deploy:
+            rendered = output_dir / "review" / slug / "index.html"
+            gate_ok, reason = parity_ok(slug, rendered)
+            if not gate_ok:
+                skipped_count += 1
+                print(f"  SKIP {slug}: parity gate — {reason}")
+                if ts > max_ts:
+                    max_ts = ts
+                continue
+        ok_count += 1
+        changed_files.append(output_dir / "review" / slug / "index.html")
+        if ts > max_ts:
+            max_ts = ts
 
-    print(f"[watch_and_rebuild] rendered {ok_count} ok, {fail_count} fail in {total_ms} ms")
+    print(f"[watch_and_rebuild] rendered {ok_count} ok, {fail_count} fail, {skipped_count} skipped(gate) in {total_ms} ms")
 
     if args.deploy and changed_files:
         deploy_changed(changed_files)
