@@ -165,9 +165,42 @@ def main() -> None:
             sys.exit(2)
         result = compare_files(astro_path, renderer_path)
         print(format_report(args.slug, result))
-    else:
-        print("--slug is required for now (family-wide mode: phase 2)")
-        sys.exit(2)
+    elif args.family:
+        # Family-wide: for every renderer-emitted page in that family, compare vs Astro.
+        family_root = renderer_root / args.family
+        if not family_root.exists():
+            print(f"error: {family_root} missing — render some pages first", file=sys.stderr)
+            sys.exit(2)
+        slugs = sorted(p.name for p in family_root.iterdir() if p.is_dir() and (p / "index.html").exists())
+        if not slugs:
+            print(f"error: no rendered pages in {family_root}", file=sys.stderr)
+            sys.exit(2)
+
+        totals = {"pages": 0, "astro_bytes": 0, "renderer_bytes": 0, "byte_gap": 0}
+        largest_gaps: list[tuple[int, str]] = []
+        for slug in slugs:
+            astro_path = astro_root / args.family / slug / "index.html"
+            renderer_path = family_root / slug / "index.html"
+            if not astro_path.exists():
+                continue
+            r = compare_files(astro_path, renderer_path)
+            totals["pages"] += 1
+            totals["astro_bytes"] += r["astro_bytes"]
+            totals["renderer_bytes"] += r["renderer_bytes"]
+            totals["byte_gap"] += (r["astro_bytes"] - r["renderer_bytes"])
+            largest_gaps.append((r["astro_bytes"] - r["renderer_bytes"], slug))
+
+        print(f"=== FAMILY-WIDE PARITY: /{args.family}/ ({totals['pages']} pages) ===")
+        print(f"total astro bytes:    {totals['astro_bytes']:>12,}")
+        print(f"total renderer bytes: {totals['renderer_bytes']:>12,}")
+        print(f"total gap to close:   {totals['byte_gap']:>12,}")
+        if totals["astro_bytes"]:
+            pct = 100 * totals["renderer_bytes"] / totals["astro_bytes"]
+            print(f"parity coverage:      {pct:>11.1f}%")
+        largest_gaps.sort(reverse=True)
+        print("\nlargest per-page gaps:")
+        for gap, slug in largest_gaps[:10]:
+            print(f"  {gap:>+8,} bytes  /{args.family}/{slug}/")
 
 
 if __name__ == "__main__":
