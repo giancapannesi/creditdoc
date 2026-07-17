@@ -31,12 +31,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import (  # noqa: E402
     all_brands,
     all_categories,
+    all_states_info,
     category_count,
     category_to_pillar,
     cities_with_lenders,
     glossary_for_review,
     lenders_by_brand,
     lenders_by_city_state,
+    lenders_in_state,
     load_blog_post,
     load_brand,
     load_category,
@@ -51,6 +53,7 @@ from db import (  # noqa: E402
     similar_lenders,
     slugify_city,
     state_context,
+    state_lender_and_city_counts,
     top_lenders_by_category,
     wellness_guides_by_category,
 )
@@ -776,6 +779,141 @@ def render_brand(slug: str, output_dir: Path) -> Path:
     return out_path
 
 
+def render_state(slug: str, output_dir: Path) -> Path:
+    """Render one /state/<slug>/index.html from states.json + lenders."""
+    # Find state by slug (name lowercased-with-hyphens).
+    state = None
+    for s in all_states_info():
+        if s["slug"] == slug:
+            state = s
+            break
+    if state is None:
+        raise SystemExit(f"error: no state with slug '{slug}'")
+
+    lenders = list(lenders_in_state(state["abbr"], limit=60))
+    counts = state_lender_and_city_counts(state["abbr"])
+    lender_count = counts["lender_count"]
+    city_count = counts["city_count"]
+
+    state_data = state_context(state["abbr"])
+
+    # Category groups from top-60 lenders.
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for l in lenders:
+        cat = l.get("category") or "unknown"
+        groups.setdefault(cat, []).append(l)
+    sorted_groups = sorted(groups.items(), key=lambda kv: -len(kv[1]))
+
+    cat_names: dict[str, str] = {}
+    for cat in all_categories():
+        s = cat.get("slug")
+        if s:
+            cat_names[s] = cat.get("name") or s
+
+    # Top lenders — filter by google rating like Astro.
+    def _has_google(l):
+        gr = l.get("google_rating") or 0
+        gc = l.get("google_reviews_count") or 0
+        try:
+            gr_f = float(gr); gc_i = int(gc)
+        except (TypeError, ValueError):
+            return False
+        return 0 < gr_f <= 5 and gc_i >= 1 and len((l.get("description_short") or "")) > 20
+    top_lenders = sorted([l for l in lenders if _has_google(l)], key=lambda l: -float(l.get("google_rating") or 0))[:10]
+
+    # Cities in this state, top 30 by count.
+    state_cities = [c for c in cities_with_lenders(5) if c["state_abbr"] == state["abbr"]][:30]
+
+    # Other states (12 alphabetically-first, excluding self).
+    other_states = [s for s in all_states_info() if s["abbr"] != state["abbr"]][:12]
+
+    has_lenders = lender_count > 0
+
+    if has_lenders:
+        title = f"Credit Repair & Financial Services in {state['name']} ({state['abbr']}) | CreditDoc"
+    else:
+        title = f"{state['name']} Credit & Lending Laws | CreditDoc"
+
+    if has_lenders and state_data and state_data.get("consumer_rights_summary"):
+        summary_first = (state_data["consumer_rights_summary"] or "").split(".")[0]
+        description = f"Find {lender_count} credit repair companies and lenders in {state['name']}. {summary_first}."
+    elif has_lenders:
+        description = f"Compare {lender_count} credit repair companies, personal lenders, and financial services in {state['name']}. BBB ratings, pricing, and reviews."
+    else:
+        crs = (state_data.get("consumer_rights_summary") if state_data else "") or ""
+        first = crs.split(".")[0] if crs else ""
+        description = f"{state['name']} lending regulations, credit repair laws, consumer protections, and financial resources. {first}"
+
+    collection_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": f"Credit Repair & Financial Services in {state['name']}",
+        "description": description,
+        "url": f"https://www.creditdoc.co/state/{slug}/",
+        "about": {"@type": "State", "name": state["name"], "containedInPlace": {"@type": "Country", "name": "United States"}},
+        "publisher": {"@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co"},
+    })
+    breadcrumb_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"},
+            {"@type": "ListItem", "position": 2, "name": "States", "item": "https://www.creditdoc.co/state/"},
+            {"@type": "ListItem", "position": 3, "name": state["name"], "item": f"https://www.creditdoc.co/state/{slug}/"},
+        ],
+    })
+    item_list_jsonld = ""
+    if top_lenders:
+        item_list_jsonld = _safe_jsonld_str({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": f"Financial Service Profiles in {state['name']}",
+            "itemListElement": [
+                {
+                    "@type": "ListItem", "position": i,
+                    "item": {
+                        "@type": "FinancialService",
+                        "name": l.get("name"),
+                        "url": f"https://www.creditdoc.co/review/{l['slug']}/",
+                        **({"aggregateRating": {"@type": "AggregateRating", "ratingValue": l.get("google_rating"), "bestRating": 5, "worstRating": 1, "ratingCount": l.get("google_reviews_count")}} if l.get("google_rating") and l.get("google_reviews_count") else {}),
+                    }
+                }
+                for i, l in enumerate(top_lenders[:6], start=1)
+            ],
+        })
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("state.html.j2")
+    html = template.render(
+        state=state,
+        state_data=state_data,
+        title=title,
+        description=description,
+        lender_count=lender_count,
+        city_count=city_count,
+        category_group_count=len(sorted_groups),
+        sorted_groups=sorted_groups,
+        cat_names=cat_names,
+        state_cities=state_cities,
+        top_lenders=top_lenders,
+        other_states=other_states,
+        has_lenders=has_lenders,
+        collection_jsonld=collection_jsonld,
+        breadcrumb_jsonld=breadcrumb_jsonld,
+        item_list_jsonld=item_list_jsonld,
+    )
+
+    out_path = output_dir / "state" / slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="CreditDoc renderer — Astro-free HTML from DB.",
@@ -838,6 +976,14 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    state_p = subparsers.add_parser("state", help="Render /state/[slug]/ page(s)")
+    state_p.add_argument("--slug", required=True, help="State slug (e.g. california) to render")
+    state_p.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
@@ -860,6 +1006,9 @@ def main() -> None:
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     elif args.command == "brand":
         out = render_brand(args.slug, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "state":
+        out = render_state(args.slug, Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()

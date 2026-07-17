@@ -129,6 +129,49 @@ def all_brands() -> tuple[dict[str, Any], ...]:
     return _brands_cache
 
 
+def all_states_info() -> tuple[dict[str, Any], ...]:
+    """Return all 50 states as {name, abbr, slug} — matches Astro's getAllStatesInfo."""
+    out = []
+    for abbr, full in _ABBR_TO_FULL_STATE.items():
+        out.append({
+            "name": full,
+            "abbr": abbr,
+            "slug": full.lower().replace(" ", "-"),
+        })
+    return tuple(sorted(out, key=lambda s: s["name"]))
+
+
+@lru_cache(maxsize=64)
+def lenders_in_state(state_abbr: str, limit: int | None = None) -> tuple[dict[str, Any], ...]:
+    """All indexable lenders in a state (by company_info.state normalised)."""
+    with _connect() as conn:
+        rows = conn.execute(
+            "SELECT * FROM lenders "
+            "WHERE processing_status IN ('ready_for_index','pending_approval')"
+        ).fetchall()
+    out = []
+    for r in rows:
+        d = _merge_lender(r)
+        ci = d.get("company_info") or {}
+        if normalize_state_abbr(ci.get("state")) == state_abbr:
+            out.append(d)
+    if limit is not None:
+        out = out[:limit]
+    return tuple(out)
+
+
+def state_lender_and_city_counts(state_abbr: str) -> dict[str, int]:
+    """Total lender + distinct-city counts for a state."""
+    rows = lenders_in_state(state_abbr)
+    cities: set[str] = set()
+    for l in rows:
+        ci = l.get("company_info") or {}
+        c = (ci.get("city") or "").strip()
+        if c:
+            cities.add(c.lower())
+    return {"lender_count": len(rows), "city_count": len(cities)}
+
+
 def load_brand(slug: str) -> dict[str, Any] | None:
     for b in all_brands():
         if b.get("slug") == slug:

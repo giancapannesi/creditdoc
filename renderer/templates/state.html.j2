@@ -1,0 +1,250 @@
+{#
+  /state/[slug]/index.html — Jinja2 template for state hub pages.
+  Matches Astro's [slug].astro schema surface: CollectionPage + BreadcrumbList
+  + ItemList, plus H1, quick stats, state economic overview, category groups,
+  city grid, top lenders, regulations/consumer rights block, other states.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description|striptags|truncate(160, killwords=True, end='') }}">
+<link rel="canonical" href="https://www.creditdoc.co/state/{{ state.slug }}/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description|striptags|truncate(200, killwords=True, end='') }}">
+<meta property="og:url" content="https://www.creditdoc.co/state/{{ state.slug }}/">
+<meta property="og:site_name" content="CreditDoc">
+<meta property="og:image" content="https://www.creditdoc.co/og-default.png">
+<link rel="stylesheet" href="/styles/site.css">
+<script type="application/ld+json">
+{{ collection_jsonld|safe }}
+</script>
+<script type="application/ld+json">
+{{ breadcrumb_jsonld|safe }}
+</script>
+{% if item_list_jsonld %}
+<script type="application/ld+json">
+{{ item_list_jsonld|safe }}
+</script>
+{% endif %}
+</head>
+<body class="min-h-screen bg-bg text-text antialiased">
+{% include "_header.html" %}
+<main>
+  <nav class="max-w-6xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/state/" class="hover:text-primary transition-colors">States</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">{{ state.name }}</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">
+        {% if has_lenders %}Credit Repair &amp; Financial Services in {{ state.name }}{% else %}{{ state.name }} Credit &amp; Lending Laws{% endif %}
+      </h1>
+      <p class="text-lg text-muted max-w-3xl">
+        {% if has_lenders %}Compare {{ lender_count }} credit repair companies, personal lenders, and financial services across {{ city_count }} cities in {{ state.abbr }}.{% else %}{{ state.name }} lending regulations, credit repair laws, consumer protections, and resources for borrowers.{% endif %}
+      </p>
+    </div>
+
+    {% if has_lenders %}
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+      <div class="glass-card p-4 text-center"><p class="text-2xl font-bold text-primary">{{ lender_count }}</p><p class="text-xs text-muted mt-1">Listed Companies</p></div>
+      <div class="glass-card p-4 text-center"><p class="text-2xl font-bold text-text">{{ city_count }}</p><p class="text-xs text-muted mt-1">Cities Covered</p></div>
+      <div class="glass-card p-4 text-center"><p class="text-2xl font-bold text-text">{{ category_group_count }}</p><p class="text-xs text-muted mt-1">Service Categories</p></div>
+      <div class="glass-card p-4 text-center"><p class="text-2xl font-bold text-text">{{ state_data.avg_credit_score if state_data and state_data.avg_credit_score else '—' }}</p><p class="text-xs text-muted mt-1">Avg Credit Score</p></div>
+    </div>
+    {% endif %}
+
+    <section class="glass-card p-5 mb-8">
+      <h2 class="text-lg font-bold text-text mb-2">Plan Your Next Step in {{ state.name }}</h2>
+      <p class="text-sm text-muted leading-relaxed">Use this state page as a regulatory and directory starting point, then compare local city pages, relevant categories, borrower questions, and CreditDoc data explainers. These links provide research context, not a recommendation, approval prediction, price quote, or licensing determination.</p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href="/state/{{ state.slug }}/lending-laws/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">{{ state.name }} lending laws</a>
+        {% if state_cities %}<a href="/credit-guide/{{ state_cities[0].slug }}/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">{{ state_cities[0].city }} local guide</a>{% endif %}
+        {% if sorted_groups %}<a href="/categories/{{ sorted_groups[0][0] }}/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">{{ cat_names.get(sorted_groups[0][0], sorted_groups[0][0]) }} directory</a>{% endif %}
+        <a href="/answers/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Borrower questions</a>
+        <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">CFPB data context</a>
+      </div>
+    </section>
+
+    {% if state_data %}
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">{{ state.name }} Economic Overview</h2>
+      <p class="text-sm text-muted leading-relaxed mb-4">Public economic snapshot for {{ state.name }} residents. Use these figures alongside city-level provider comparisons and state regulatory rules to frame a borrowing decision. Every field below is public data and is updated on periodic refresh.</p>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
+        {% if state_data.median_household_income %}<div><p class="text-sm text-muted">Median Income</p><p class="text-lg font-bold text-text">${{ '{:,}'.format(state_data.median_household_income) }}</p></div>{% endif %}
+        {% if state_data.poverty_rate %}<div><p class="text-sm text-muted">Poverty Rate</p><p class="text-lg font-bold text-text">{{ state_data.poverty_rate }}%</p></div>{% endif %}
+        {% if state_data.unbanked_rate %}<div><p class="text-sm text-muted">Unbanked Rate</p><p class="text-lg font-bold text-text">{{ state_data.unbanked_rate }}%</p></div>{% endif %}
+        {% if state_data.avg_credit_score %}<div><p class="text-sm text-muted">Avg Credit Score</p><p class="text-lg font-bold text-text">{{ state_data.avg_credit_score }}</p></div>{% endif %}
+        {% if state_data.usury_cap %}<div><p class="text-sm text-muted">Usury Cap</p><p class="text-lg font-bold text-text">{{ state_data.usury_cap }}</p></div>{% endif %}
+        {% if state_data.payday_loan_status %}<div><p class="text-sm text-muted">Payday Loans</p><p class="text-lg font-bold text-text">{{ state_data.payday_loan_status }}</p></div>{% endif %}
+      </div>
+      {% if state_data.consumer_rights_summary %}<p class="text-sm text-muted leading-relaxed"><strong class="text-text">{{ state.name }} consumer protections:</strong> {{ state_data.consumer_rights_summary }}</p>{% endif %}
+      {% if state_data.consumer_protection_agency %}<p class="mt-3 text-sm text-muted leading-relaxed"><strong class="text-text">Primary state agency:</strong> {{ state_data.consumer_protection_agency }}{% if state_data.consumer_protection_url %} — file complaints or check licensing at <a href="{{ state_data.consumer_protection_url }}" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{{ state_data.consumer_protection_url }}</a>{% endif %}.</p>{% endif %}
+      {% if state_data.licensing_board %}<p class="mt-3 text-sm text-muted leading-relaxed"><strong class="text-text">Licensing board:</strong> {{ state_data.licensing_board }}. Every consumer lender and credit repair provider operating in {{ state.name }} should be licensed with this agency. If a provider cannot give you their {{ state.name }} license number in writing, treat it as a red flag.</p>{% endif %}
+    </section>
+
+    {% if state_data.key_regulations %}
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-3">Key {{ state.name }} Consumer Lending Regulations</h2>
+      <p class="text-sm text-muted mb-4 leading-relaxed">Below are the state-level rules that govern {{ state.name }} lenders and credit repair providers. These are separate from the federal Fair Credit Reporting Act (FCRA) and Credit Repair Organizations Act (CROA) protections that apply to every US consumer.</p>
+      <ul class="space-y-3 text-sm text-muted leading-relaxed">
+        {% for reg in state_data.key_regulations %}
+        <li class="flex gap-3"><span class="flex-shrink-0 mt-1 w-1.5 h-1.5 rounded-full bg-primary"></span><span>{{ reg }}</span></li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if state_data.credit_repair_laws %}
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-3">{{ state.name }} Credit Repair Rules</h2>
+      <div class="space-y-3 text-sm text-muted leading-relaxed">
+        {% if state_data.credit_repair_laws.state_statute %}<p><strong class="text-text">Governing statute:</strong> {{ state_data.credit_repair_laws.state_statute }}{% if state_data.credit_repair_laws.statute_code %} ({{ state_data.credit_repair_laws.statute_code }}){% endif %}.</p>{% endif %}
+        {% if state_data.credit_repair_laws.upfront_fees_prohibited %}<p><strong class="text-text">Upfront fees:</strong> Prohibited. No credit repair company may collect payment before services are performed.</p>{% endif %}
+        {% if state_data.credit_repair_laws.cancellation_period_days %}<p><strong class="text-text">Cancellation window:</strong> {{ state_data.credit_repair_laws.cancellation_period_days }}-day cancellation period from contract signing.</p>{% endif %}
+        {% if state_data.credit_repair_laws.bond_required %}<p><strong class="text-text">Bond requirement:</strong> Credit repair companies must post a {{ state_data.credit_repair_laws.bond_amount or '$25,000' }} bond with the {{ state.name }} state to operate.</p>{% endif %}
+        {% if state_data.credit_repair_laws.registration_required %}<p><strong class="text-text">Registration:</strong> Credit repair companies must register with {{ state_data.credit_repair_laws.registration_agency or 'the state licensing board' }} before serving {{ state.name }} consumers.</p>{% endif %}
+        {% if state_data.credit_repair_laws.key_provisions %}
+        <div class="mt-3">
+          <strong class="text-text">Additional provisions under {{ state.name }} law:</strong>
+          <ul class="mt-2 space-y-2 ml-4">
+            {% for prov in state_data.credit_repair_laws.key_provisions %}
+            <li class="flex gap-2"><span class="flex-shrink-0 text-primary">•</span><span>{{ prov }}</span></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+    </section>
+    {% endif %}
+    {% endif %}
+
+    {% if top_lenders %}
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">Top-Rated Financial Services in {{ state.name }}</h2>
+      <p class="text-sm text-muted mb-4">{{ top_lenders|length }} highest-rated {{ state.name }} providers with verified public review signals. Sorted by stored Google rating.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for lender in top_lenders %}
+        <article class="glass-card p-5">
+          <h3 class="text-base font-semibold text-text mb-1"><a href="/review/{{ lender.slug }}/" class="hover:text-primary transition-colors">{{ lender.name }}</a></h3>
+          {% if lender.city %}<p class="text-xs text-muted mb-2">{{ lender.city }}, {{ state.abbr }}</p>{% endif %}
+          {% if lender.google_rating %}<p class="text-xs text-yellow-400 mb-2">★ {{ '%.1f' % lender.google_rating }} · {{ lender.google_reviews_count }} reviews</p>{% endif %}
+          <p class="text-sm text-muted leading-relaxed">{{ (lender.description_short or lender.meta_description or 'Review this ' ~ state.name ~ ' provider profile.')|striptags|truncate(360, killwords=True, end='') }} Review pricing, refund terms, licensing, and public complaint context on the full profile before contacting a {{ state.name }} provider. Every {{ state.name }} listing on CreditDoc links to source-cited fields.</p>
+          <a href="/review/{{ lender.slug }}/" class="inline-block mt-3 text-xs font-semibold text-primary hover:underline">View Details →</a>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if sorted_groups %}
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">{{ state.name }} Services by Category</h2>
+      <p class="text-sm text-muted mb-4 leading-relaxed">CreditDoc lists {{ lender_count }} financial-service providers across {{ category_group_count }} categories in {{ state.name }}. Jump to a category to compare listed providers side by side. Each category directory below shows the {{ state.name }} providers sorted by public review signal, with pricing, licensing, and refund-policy context on every profile. Comparing at least three providers within a category is the fastest way to spot outliers on cost or terms in the {{ state.name }} market.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {% for cat, items in sorted_groups %}
+        <a href="/categories/{{ cat }}/" class="glass-card p-4 hover:border-primary transition-colors block">
+          <p class="text-sm font-semibold text-text">{{ cat_names.get(cat, cat) }}</p>
+          <p class="text-xs text-muted mt-1">{{ items|length }} listed provider{{ 's' if items|length != 1 else '' }} in {{ state.name }} — sorted by public review signal on the category page.</p>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if state_cities %}
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">Cities in {{ state.name }}</h2>
+      <p class="text-sm text-muted mb-4 leading-relaxed">Browse local financial services by city. Each {{ state.name }} city page shows top lenders, credit repair providers, and category groups with local licensing context. Local lending markets vary within {{ state.name }} — providers that operate in {{ state_cities[0].city if state_cities else 'a metro area' }} may not have branches or licenses to serve other {{ state.name }} cities. Use the city-level pages to filter for providers actually operating in your local market. The chips below are ordered by the number of listed providers CreditDoc has in each city.</p>
+      <div class="flex flex-wrap gap-2">
+        {% for city in state_cities %}
+        <a href="/city/{{ city.slug }}/" class="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-sm text-text hover:border-primary/30 hover:bg-primary-light/20 transition-colors">{{ city.city }} <span class="text-xs text-muted">({{ city.count }})</span></a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-3">Working with Credit Repair and Loan Providers in {{ state.name }}</h2>
+      <div class="space-y-4 text-sm text-muted leading-relaxed">
+        <p><strong class="text-text">Federal + state protections for {{ state.name }} consumers:</strong> The Fair Credit Reporting Act (FCRA) gives {{ state.name }} residents the right to dispute inaccurate credit report information for free with all three credit bureaus. The Credit Repair Organizations Act (CROA) makes it illegal for any credit repair provider — in {{ state.name }} or elsewhere — to charge before services are performed, and requires a written three-day cancellation window. {{ state.name }} may add its own state-level requirements on top of these federal rules: check the {{ state.name }} lending-laws page for the current usury cap, credit repair bond requirements, and payday-lending status.</p>
+        <p><strong class="text-text">Before signing any {{ state.name }} lending or credit-repair contract:</strong> confirm the annual percentage rate (APR) in writing, confirm all fees (origination, processing, prepayment, late), confirm the payment schedule, confirm total amount paid over the life of the loan, and confirm the refund policy. Cross-check the provider's license with the {{ state.name }} state financial services agency. If a {{ state.name }} lender is offering short-term or payday-alternative products, ask what happens if you cannot pay on the due date. Providers that are transparent about pricing and licensing will match this same level of preparation on their side.</p>
+        <p><strong class="text-text">Where {{ state.name }} residents can escalate a dispute:</strong> for credit report inaccuracies, dispute directly with Equifax, Experian, and TransUnion — this is free and does not require a paid intermediary. For lender misconduct, file a complaint with the {{ state.name }} state financial services agency AND the Consumer Financial Protection Bureau at consumerfinance.gov/complaint. For federally-regulated banks operating in {{ state.name }}, the Office of the Comptroller of the Currency (OCC) accepts complaints. For credit unions, the National Credit Union Administration (NCUA). All four bodies accept complaints from {{ state.name }} consumers at no cost.</p>
+        <p><strong class="text-text">Free resources for {{ state.name }} residents:</strong> get a free credit report annually at AnnualCreditReport.com — the only federally-authorized free credit-report site. HUD-approved counselors offer free housing, debt, and budgeting guidance through consumerfinance.gov/housing/. Every {{ state.name }} lender profile on CreditDoc links directly to these sources where the data is available.</p>
+      </div>
+    </section>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-3">Frequently Asked Questions About Credit and Lending in {{ state.name }}</h2>
+      <div class="space-y-4">
+        <details class="border-t border-border pt-3">
+          <summary class="text-base font-semibold text-text cursor-pointer">How do I find a legitimate credit repair company in {{ state.name }}?</summary>
+          <p class="mt-3 text-sm text-muted leading-relaxed">Start by pulling all three credit reports for free at AnnualCreditReport.com and identifying the specific errors, collections, or negative items you want disputed. Then compare {{ state.name }} credit repair companies on four criteria: (1) do they operate under a written contract with a clear scope of work, (2) do they list monthly pricing plus setup fees transparently rather than requiring a phone consultation to get numbers, (3) do they publish a refund policy in writing, and (4) do they hold any {{ state.name }} state licensing or Better Business Bureau accreditation. Under the federal Credit Repair Organizations Act (CROA), it is illegal for any credit repair provider — in {{ state.name }} or elsewhere — to charge you before services are performed, and every contract must include a three-business-day cancellation window.</p>
+        </details>
+        <details class="border-t border-border pt-3">
+          <summary class="text-base font-semibold text-text cursor-pointer">Are payday loans legal in {{ state.name }}?</summary>
+          <p class="mt-3 text-sm text-muted leading-relaxed">Payday loan legality varies significantly by state. {{ state.name }} has its own payday-lending rules — some states cap short-term loan interest rates through usury laws, some have banned payday lending entirely, and others restrict loan size, term length, or rollover count. Check the {{ state.name }} lending-laws page linked above for the current status. If a {{ state.name }} lender is offering a short-term loan at an APR you cannot easily calculate from the disclosure, ask them to write the effective APR in the contract before signing. When payday lending is restricted or banned in {{ state.name }}, safer alternatives include payday alternative loans (PALs) offered by federally-insured credit unions.</p>
+        </details>
+        <details class="border-t border-border pt-3">
+          <summary class="text-base font-semibold text-text cursor-pointer">What personal loan options are available to {{ state.name }} residents?</summary>
+          <p class="mt-3 text-sm text-muted leading-relaxed">Personal loans in {{ state.name }} are offered by traditional banks, credit unions, online lenders, and community development financial institutions (CDFIs). Rate ranges depend heavily on credit score, income stability, and loan term. {{ state.name }} consumers with lower credit scores should compare CDFI options and credit-union personal loans before accepting a first offer from a subprime online lender — CDFIs and credit unions typically have both lower rates and softer eligibility thresholds. Use the CreditDoc borrowing power quiz to estimate the loan size and monthly payment that match your income before browsing offers, and cross-check every lender against the {{ state.name }} state financial services agency to confirm they are licensed to lend in {{ state.name }}.</p>
+        </details>
+        <details class="border-t border-border pt-3">
+          <summary class="text-base font-semibold text-text cursor-pointer">How do I verify that a {{ state.name }} lender is legitimate?</summary>
+          <p class="mt-3 text-sm text-muted leading-relaxed">Three quick checks: (1) search the {{ state.name }} Department of Financial Services (or equivalent state licensing board) for the lender's active license number — every consumer lender operating in {{ state.name }} should be licensed with the state, (2) look up the lender in the CFPB Consumer Complaint Database at consumerfinance.gov/complaint — a pattern of unresolved complaints against a specific lender is a strong signal, and (3) look up the lender in the Better Business Bureau — BBB does not verify quality but does verify that the business exists at its stated address. Every {{ state.name }} lender profile on CreditDoc links directly to these sources where the data is available.</p>
+        </details>
+        <details class="border-t border-border pt-3">
+          <summary class="text-base font-semibold text-text cursor-pointer">Where do {{ state.name }} residents file complaints against a lender or credit repair company?</summary>
+          <p class="mt-3 text-sm text-muted leading-relaxed">Multiple free options are available to {{ state.name }} residents. For any consumer lender or credit repair provider, the Consumer Financial Protection Bureau accepts complaints at consumerfinance.gov/complaint — CFPB routinely reaches out to the provider within 15 days and posts a public complaint record. For federally-regulated national banks, complain to the Office of the Comptroller of the Currency (OCC). For federal credit unions, complain to the National Credit Union Administration (NCUA). For state-licensed lenders and credit repair providers, the {{ state.name }} state financial services agency has its own complaint intake process. All four bodies accept complaints from {{ state.name }} consumers at no cost.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-3">How to Compare {{ state.name }} Financial Service Providers</h2>
+      <div class="space-y-4 text-sm text-muted leading-relaxed">
+        <p><strong class="text-text">Start with the category, not the provider name.</strong> Choose the category that matches your goal — credit repair, personal loans, debt relief, business loans, credit unions, mortgages, or another. Every category directory linked above shows the {{ state.name }} providers listed by CreditDoc side-by-side, so you can compare pricing, licensing, and public review signals in one place before contacting anyone. This is much faster than filtering by provider name and often surfaces smaller local options that would never show up in a name-based search.</p>
+        <p><strong class="text-text">Then narrow to your city.</strong> Local lending markets in {{ state.name }} differ by city — rate ranges, licensing enforcement, and provider mix all vary. If you live in a major {{ state.name }} metro, the city page linked above will let you filter to providers actually operating in that market. Local providers are often cheaper for pawn, title, and short-term cash products because they compete on price with each other; large national providers are often cheaper for personal loans and business loans because they compete on scale.</p>
+        <p><strong class="text-text">Confirm licensing before any first meeting.</strong> Every consumer lender and credit-repair company operating in {{ state.name }} should hold an active state license. The {{ state.name }} state financial services agency publishes a searchable license lookup. If a provider cannot give you their {{ state.name }} license number in writing, they may not be authorized to serve {{ state.name }} residents, and any contract you sign with them may not be enforceable under {{ state.name }} law.</p>
+        <p><strong class="text-text">Never pay upfront for credit repair.</strong> This is worth repeating: under CROA, no credit repair company in {{ state.name }} or any other state may collect fees before performing services. If a {{ state.name }} provider asks for full payment or a large deposit before doing any work, they are in violation of federal law and you should walk away.</p>
+      </div>
+    </section>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-3">Free {{ state.name }} Consumer Resources</h2>
+      <div class="space-y-3 text-sm text-muted leading-relaxed">
+        <p><strong class="text-text">Free annual credit reports:</strong> AnnualCreditReport.com is the only federally-authorized site for a free credit report from all three bureaus (Equifax, Experian, TransUnion). This is available to every {{ state.name }} resident at no cost, without a subscription, and without any credit-repair company acting as an intermediary. Pulling all three reports before contacting any {{ state.name }} lender is the fastest way to identify errors that will affect your rate offer.</p>
+        <p><strong class="text-text">Free credit counseling in {{ state.name }}:</strong> HUD-approved credit counseling agencies offer no-cost budgeting help, debt management plans, and homebuyer counseling. Locate a HUD-approved counselor in {{ state.name }} at consumerfinance.gov/housing. These agencies are non-profit and are supervised by federal regulators, so their advice does not carry the sales pressure of a for-profit credit repair or debt relief company.</p>
+        <p><strong class="text-text">CFPB Consumer Complaint Database:</strong> Every {{ state.name }} lender, bank, credit repair company, debt collector, and money transmitter is searchable in the CFPB public complaint database at consumerfinance.gov/data-research/consumer-complaints. Before signing with a provider, spend five minutes searching their name — a pattern of unresolved complaints against a specific provider is one of the strongest signals available to {{ state.name }} consumers.</p>
+        <p><strong class="text-text">{{ state.name }} state financial services agency:</strong> for state-licensed lenders and credit repair providers, the {{ state.name }} state agency has its own complaint intake and licensing lookup. This is separate from CFPB and often handles state-specific issues (usury cap violations, unlicensed operations, {{ state.name }}-specific credit repair rules) faster than the federal process.</p>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">Browse Other States</h2>
+      <div class="flex flex-wrap gap-2">
+        {% for other in other_states %}
+        <a href="/state/{{ other.slug }}/" class="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-sm text-text hover:border-primary/30 hover:bg-primary-light/20 transition-colors">{{ other.name }} <span class="text-xs text-muted">{{ other.abbr }}</span></a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <div class="rounded-lg bg-bg-alt border border-border p-4">
+        <p class="text-xs text-muted leading-relaxed"><strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to products and services featured on this page. Compensation does not determine whether a provider can be covered or how visible star ratings are calculated. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.</p>
+      </div>
+    </section>
+  </div>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>

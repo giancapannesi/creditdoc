@@ -45,10 +45,11 @@ from render import (  # noqa: E402
     render_category,
     render_city,
     render_review,
+    render_state,
     render_wellness,
 )
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from db import all_brands, cities_with_lenders, lenders_by_brand  # noqa: E402
+from db import all_brands, all_states_info, cities_with_lenders, lenders_by_brand  # noqa: E402
 
 
 def _acquire_lock():
@@ -129,6 +130,7 @@ FAMILIES = [
     ("category",  "categories",          render_category, lambda: _slugs("categories",       "",                  ())),  # all rows published
     ("city",      "city",                render_city,     lambda: [c["slug"] for c in cities_with_lenders(5)]),  # aggregated from lenders table (city+state), ≥5 lenders
     ("brand",     "brand",               render_brand,    lambda: [b["slug"] for b in all_brands() if lenders_by_brand(b["slug"])]),  # brand JSON files with ≥1 indexable lender
+    ("state",     "state",               render_state,    lambda: [s["slug"] for s in all_states_info()]),  # 50 US states from data.ts STATE_ABBREVIATIONS
 ]
 
 
