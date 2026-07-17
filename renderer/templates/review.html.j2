@@ -1,18 +1,9 @@
 {#
   /review/[slug]/index.html — Jinja2 template for lender review pages.
 
-  Phase 1 minimum-viable version. Emits:
-    - <title>, <meta description>, <link canonical>
-    - JSON-LD LocalBusiness + BreadcrumbList
-    - H1, category, short description, long description, pros/cons, CTA
-
-  NOT YET INCLUDED (Phase 2 iteration):
-    - Full nav + footer (needs base.html.j2 extraction)
-    - Similar lenders block
-    - Regulatory records, HMDA, CFPB
-    - Related answers / blog posts
-    - Rating breakdown chart
-    - Category-specific templates
+  Phase 1 iteration 2: added header + footer parity (extracted from Astro
+  rendered output). Structural gap now dominated by content sections
+  (similar lenders, related answers, FAQ, ratings), not chrome.
 #}
 <!DOCTYPE html>
 <html lang="en">
@@ -27,15 +18,16 @@
 <meta property="og:description" content="{{ (lender.description_short or '')|striptags|truncate(200, killwords=True, end='') }}">
 <meta property="og:url" content="https://www.creditdoc.co/review/{{ lender.slug }}/">
 <meta property="og:site_name" content="CreditDoc">
+<meta property="og:image" content="https://www.creditdoc.co{{ lender.logo_url or '/og-default.png' }}">
 <script type="application/ld+json">
 {{ {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "FinancialService",
   "name": lender.name,
   "url": "https://www.creditdoc.co/review/" + lender.slug + "/",
   "description": lender.description_short or "",
-  "image": lender.logo_url or "",
-  "priceRange": (lender.pricing or {}).get("range", "") if lender.pricing is mapping else "",
+  "image": ("https://www.creditdoc.co" + lender.logo_url) if lender.logo_url else "",
+  "priceRange": (lender.pricing or {}).get("range", "") if (lender.pricing is mapping) else "",
 } | tojson }}
 </script>
 <script type="application/ld+json">
@@ -49,15 +41,43 @@
   ]
 } | tojson }}
 </script>
+{% if lender.rating %}
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "AggregateRating",
+  "itemReviewed": {"@type": "FinancialService", "name": lender.name},
+  "ratingValue": lender.rating,
+  "bestRating": 5,
+  "reviewCount": lender.review_count or 1,
+} | tojson }}
+</script>
+{% endif %}
+{% if lender.faqs %}
+{% set faq_entities = [] %}
+{% for q in lender.faqs %}{% set _ = faq_entities.append({"@type": "Question", "name": q.q, "acceptedAnswer": {"@type": "Answer", "text": q.a}}) %}{% endfor %}
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq_entities,
+} | tojson }}
+</script>
+{% endif %}
 <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
-<main class="max-w-4xl mx-auto px-4 py-8">
+<body class="min-h-screen flex flex-col">
+{% include '_header.html' %}
+<main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
 <nav aria-label="Breadcrumb" class="text-sm text-muted mb-4">
 <a href="/">Home</a> / <a href="/categories/{{ lender.category }}/">{{ lender.category|title }}</a> / <span>{{ lender.name }}</span>
 </nav>
+<div class="mb-6">
 <h1 class="text-3xl font-bold mb-2">{{ lender.name }}</h1>
-<p class="text-sm text-muted mb-4">{{ lender.category|title }}{% if lender.state %} · {{ lender.state }}{% endif %}</p>
+<p class="text-sm text-muted mb-2">{{ lender.category|title }}{% if lender.state %} · {{ lender.state }}{% endif %}</p>
+{% if lender.rating %}<p class="text-sm">Rating: <strong>{{ lender.rating }}/5</strong></p>{% endif %}
+</div>
+{% if lender.logo_url %}<img src="{{ lender.logo_url }}" alt="{{ lender.name }} logo" class="mb-6 max-h-24">{% endif %}
 {% if lender.description_short %}
 <p class="text-lg mb-6">{{ lender.description_short }}</p>
 {% endif %}
@@ -79,14 +99,41 @@
 <ul>{% for c in lender.cons %}<li>{{ c }}</li>{% endfor %}</ul>
 </section>
 {% endif %}
+{% if lender.best_for %}
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Best For</h2>
+<ul>{% for b in lender.best_for %}<li>{{ b }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+{% if lender.pricing %}
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Pricing</h2>
+<div>{{ lender.pricing|tojson }}</div>
+</section>
+{% endif %}
+{% if lender.services %}
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Services</h2>
+<ul>{% for s in lender.services %}<li>{{ s }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+{% if lender.faqs %}
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Frequently Asked Questions</h2>
+{% for q in lender.faqs %}
+<details class="mb-4"><summary class="font-semibold">{{ q.q }}</summary><p class="mt-2">{{ q.a }}</p></details>
+{% endfor %}
+</section>
+{% endif %}
 {% if lender.website_url %}
 <section class="mb-8">
-<a href="{{ lender.website_url }}" rel="nofollow noopener" class="btn-primary">Visit {{ lender.name }}</a>
+<a href="/go/{{ lender.slug }}/" rel="nofollow noopener" class="btn-primary">Visit {{ lender.name }}</a>
 </section>
 {% endif %}
 <footer class="text-xs text-muted mt-16 pt-4 border-t border-border">
 <p>Last updated: {{ lender.updated_at }}</p>
 </footer>
 </main>
+{% include '_footer.html' %}
 </body>
 </html>
