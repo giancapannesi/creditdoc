@@ -88,34 +88,62 @@
 <div>{{ lender.description_long_linked|safe }}</div>
 </section>
 {% endif %}
-{% if lender.pros %}
+{% if lender.pros or lender.cons %}
 <section class="mb-8">
-<h2 class="text-2xl font-semibold mb-3">Pros</h2>
-<ul>{% for p in lender.pros %}<li>{{ p }}</li>{% endfor %}</ul>
-</section>
+<h2 class="text-2xl font-semibold mb-3">Pros & Cons</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+{% if lender.pros %}
+<div><h3 class="font-semibold mb-2">Pros</h3><ul>{% for p in lender.pros %}<li>{{ p }}</li>{% endfor %}</ul></div>
 {% endif %}
 {% if lender.cons %}
-<section class="mb-8">
-<h2 class="text-2xl font-semibold mb-3">Cons</h2>
-<ul>{% for c in lender.cons %}<li>{{ c }}</li>{% endfor %}</ul>
+<div><h3 class="font-semibold mb-2">Cons</h3><ul>{% for c in lender.cons %}<li>{{ c }}</li>{% endfor %}</ul></div>
+{% endif %}
+</div>
 </section>
+{% endif %}
+{% if lender.services or lender.features %}
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Services & Features</h2>
+{% if lender.services %}
+<h3 class="font-semibold mb-2">Services</h3>
+<ul class="mb-4">{% for s in lender.services %}<li>{{ s }}</li>{% endfor %}</ul>
+{% endif %}
+{% if lender.features %}
+<h3 class="font-semibold mb-2">Features</h3>
+<ul>{% for f in lender.features %}<li>{{ f }}</li>{% endfor %}</ul>
 {% endif %}
 {% if lender.best_for %}
-<section class="mb-8">
-<h2 class="text-2xl font-semibold mb-3">Best For</h2>
+<h3 class="font-semibold mt-4 mb-2">Best For</h3>
 <ul>{% for b in lender.best_for %}<li>{{ b }}</li>{% endfor %}</ul>
+{% endif %}
 </section>
 {% endif %}
+<section class="mb-8 glass-card p-5">
+<h2 class="text-2xl font-semibold mb-3">Before You Contact {{ lender.name }}</h2>
+<p class="text-sm text-muted mb-3">Before signing up with any {{ lender.category|title|replace('-',' ') }} provider, review these safeguards:</p>
+<ul class="text-sm space-y-1">
+<li>Confirm state licensing via your <a href="/tools/state-consumer-credit-regulator-directory/">state regulator directory</a>.</li>
+<li>Check <a href="/research/consumer-complaints/">CFPB complaint data</a> for the company name.</li>
+<li>Read the contract before paying any upfront fees — most states prohibit upfront credit-repair fees.</li>
+<li>Compare against <a href="/best/best-credit-repair-companies/">alternative options</a> before committing.</li>
+</ul>
+</section>
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Compare Your Needs With {{ lender.name }}</h2>
+<p class="text-sm text-muted mb-3">Use this checklist to decide whether {{ lender.name }} matches your situation:</p>
+<ul class="text-sm space-y-2">
+<li><strong>Budget:</strong> {% if lender.pricing %}Pricing detailed above.{% else %}Confirm pricing before contracting — check for setup fees, monthly fees, and cancellation terms.{% endif %}</li>
+<li><strong>Service type:</strong> {{ lender.category|title|replace('-',' ') }}. Check the services list to confirm they cover what you need.</li>
+<li><strong>State coverage:</strong> {% if lender.state %}Listed for {{ lender.state }}.{% else %}Confirm they serve your state directly.{% endif %}</li>
+<li><strong>Alternatives:</strong> See <a href="/categories/{{ lender.category }}/">all {{ lender.category|title|replace('-',' ') }} providers</a> for comparison.</li>
+</ul>
+</section>
 {% if lender.pricing %}
 <section class="mb-8">
 <h2 class="text-2xl font-semibold mb-3">Pricing</h2>
-<div>{{ lender.pricing|tojson }}</div>
-</section>
-{% endif %}
-{% if lender.services %}
-<section class="mb-8">
-<h2 class="text-2xl font-semibold mb-3">Services</h2>
-<ul>{% for s in lender.services %}<li>{{ s }}</li>{% endfor %}</ul>
+<div>{% if lender.pricing is mapping %}
+<ul>{% for k, v in lender.pricing.items() %}<li><strong>{{ k|replace('_',' ')|title }}:</strong> {{ v }}</li>{% endfor %}</ul>
+{% else %}{{ lender.pricing }}{% endif %}</div>
 </section>
 {% endif %}
 {% if lender.faqs %}
@@ -183,16 +211,22 @@
 </ul>
 </section>
 {% endif %}
-{% if lender.website_url %}
-<aside class="mb-8 glass-card p-5">
-<h3 class="text-lg font-bold mb-2">Quick Summary</h3>
-<p class="text-sm text-muted mb-2">{{ lender.name }} — {{ lender.category|title }}{% if lender.state %} in {{ lender.state }}{% endif %}.</p>
+<section class="mb-8 glass-card p-5">
+<h2 class="text-2xl font-semibold mb-3">Quick Summary</h2>
+<p class="text-sm text-muted mb-2">{{ lender.name }} — {{ lender.category|title|replace('-',' ') }}{% if lender.state %} in {{ lender.state }}{% endif %}.</p>
 {% if lender.rating %}<p class="text-sm mb-2">Overall rating: <strong>{{ lender.rating }}/5</strong></p>{% endif %}
-<a href="/go/{{ lender.slug }}/?source=review_sidebar" rel="nofollow noopener" class="btn-primary">Visit {{ lender.name }}</a>
-</aside>
+{% if lender.description_short %}<p class="text-sm">{{ lender.description_short|truncate(220, killwords=True) }}</p>{% endif %}
+{% if lender.website_url %}<div class="mt-3"><a href="/go/{{ lender.slug }}/?source=review_sidebar" rel="nofollow noopener" class="btn-primary">Visit {{ lender.name }}</a></div>{% endif %}
+</section>
+{% if lender.website_url %}
 <section class="mb-8">
 <h2 class="text-2xl font-semibold mb-3">Next Steps</h2>
-<p>Use our <a href="/tools/borrowing-power-quiz/">borrowing power quiz</a> to see how {{ lender.name }} matches your situation, or <a href="/go/{{ lender.slug }}/?source=review_quiz" rel="nofollow noopener">visit {{ lender.name }} directly</a>.</p>
+<ol class="list-decimal list-inside space-y-2 text-sm">
+<li>Compare {{ lender.name }} against similar options above.</li>
+<li>Run our <a href="/tools/borrowing-power-quiz/">borrowing power quiz</a> to see how {{ lender.name }} matches your situation.</li>
+<li>Check state regulator listings for {{ lender.name }}'s licensing before committing.</li>
+<li><a href="/go/{{ lender.slug }}/?source=review_quiz" rel="nofollow noopener">Visit {{ lender.name }}</a> once you're ready.</li>
+</ol>
 </section>
 {% endif %}
 <footer class="text-xs text-muted mt-16 pt-4 border-t border-border">
