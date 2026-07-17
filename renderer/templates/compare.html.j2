@@ -1,0 +1,169 @@
+{#
+  /compare/[slug]/index.html — Jinja2 template for head-to-head comparisons.
+  Matches Astro's compare/[slug].astro schema surface: WebPage + BreadcrumbList
+  JSON-LD. Focused on visible-text parity, not byte parity — Astro's copy
+  goes through softenComparisonText which we do NOT reproduce (~200 regex
+  substitutions in Astro; we accept the raw fields).
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description|striptags|truncate(160, killwords=True, end='') }}">
+<link rel="canonical" href="https://www.creditdoc.co/compare/{{ comparison.slug }}/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description|striptags|truncate(200, killwords=True, end='') }}">
+<meta property="og:url" content="https://www.creditdoc.co/compare/{{ comparison.slug }}/">
+<meta property="og:site_name" content="CreditDoc">
+<meta property="og:image" content="https://www.creditdoc.co/og-default.png">
+<link rel="stylesheet" href="/styles/site.css">
+<script type="application/ld+json">
+{{ webpage_jsonld|safe }}
+</script>
+<script type="application/ld+json">
+{{ breadcrumb_jsonld|safe }}
+</script>
+</head>
+<body class="min-h-screen bg-bg text-text antialiased">
+{% include "_header.html" %}
+<main>
+  <nav class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-sm text-muted flex-wrap">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li><a href="/best/" class="hover:text-primary transition-colors">Compare</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li class="text-text font-medium">{{ lender_a.name }} vs {{ lender_b.name }}</li>
+    </ol>
+  </nav>
+
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <h1 class="text-2xl sm:text-3xl font-bold text-text mb-2">{{ comparison.title or (lender_a.name ~ ' vs ' ~ lender_b.name) }}</h1>
+    {% if comparison.target_keyword %}<p class="text-sm text-muted">Comparison research for the "{{ comparison.target_keyword }}" query.</p>{% endif %}
+    {% if comparison.summary %}<p class="mt-3 text-base text-muted leading-relaxed">{{ comparison.summary }}</p>{% endif %}
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <article class="glass-card p-5">
+        <h2 class="text-lg font-bold text-text mb-2"><a href="/review/{{ lender_a.slug }}/" class="hover:text-primary transition-colors">{{ lender_a.name }}</a></h2>
+        {% if lender_a.category %}<p class="text-xs text-muted mb-2">Category: <a href="/categories/{{ lender_a.category }}/" class="text-primary hover:underline">{{ lender_a.category.replace('-', ' ') }}</a></p>{% endif %}
+        {% if lender_a.company_info and lender_a.company_info.bbb_rating %}<p class="text-xs text-muted mb-2">BBB Rating: <strong class="text-text">{{ lender_a.company_info.bbb_rating }}</strong></p>{% endif %}
+        {% if lender_a.google_rating and lender_a.google_reviews_count %}<p class="text-xs text-yellow-400 mb-2">★ {{ '%.1f' % lender_a.google_rating }} · {{ lender_a.google_reviews_count }} Google reviews</p>{% endif %}
+        <p class="text-sm text-muted leading-relaxed">{{ (lender_a.description_short or lender_a.meta_description or 'Review this ' ~ lender_a.name ~ ' profile.')|striptags|truncate(400, killwords=True, end='') }}</p>
+        <a href="/review/{{ lender_a.slug }}/" class="inline-block mt-3 text-sm font-semibold text-primary hover:underline">Read the full {{ lender_a.name }} review →</a>
+      </article>
+      <article class="glass-card p-5">
+        <h2 class="text-lg font-bold text-text mb-2"><a href="/review/{{ lender_b.slug }}/" class="hover:text-primary transition-colors">{{ lender_b.name }}</a></h2>
+        {% if lender_b.category %}<p class="text-xs text-muted mb-2">Category: <a href="/categories/{{ lender_b.category }}/" class="text-primary hover:underline">{{ lender_b.category.replace('-', ' ') }}</a></p>{% endif %}
+        {% if lender_b.company_info and lender_b.company_info.bbb_rating %}<p class="text-xs text-muted mb-2">BBB Rating: <strong class="text-text">{{ lender_b.company_info.bbb_rating }}</strong></p>{% endif %}
+        {% if lender_b.google_rating and lender_b.google_reviews_count %}<p class="text-xs text-yellow-400 mb-2">★ {{ '%.1f' % lender_b.google_rating }} · {{ lender_b.google_reviews_count }} Google reviews</p>{% endif %}
+        <p class="text-sm text-muted leading-relaxed">{{ (lender_b.description_short or lender_b.meta_description or 'Review this ' ~ lender_b.name ~ ' profile.')|striptags|truncate(400, killwords=True, end='') }}</p>
+        <a href="/review/{{ lender_b.slug }}/" class="inline-block mt-3 text-sm font-semibold text-primary hover:underline">Read the full {{ lender_b.name }} review →</a>
+      </article>
+    </div>
+  </section>
+
+  {% if comparison.winner %}
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-5 border-2 border-primary">
+      <h2 class="text-lg font-bold text-text mb-2">CreditDoc Notable Profile: {{ winner_lender.name }}</h2>
+      <p class="text-sm text-muted leading-relaxed">{{ comparison.winner_reason or 'This is the profile highlighted in the CreditDoc comparison based on the fields both providers publish. Every winner-reason is a summary of listed provider fields — pricing, ratings, refund terms, and licensing — not a recommendation to sign.' }}</p>
+      <div class="mt-4">
+        <a href="/review/{{ winner_lender.slug }}/" class="inline-block px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors">Read the full {{ winner_lender.name }} review →</a>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <h2 class="text-lg font-bold text-text mb-3">Side-by-Side Comparison</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="border-b border-border"><th class="text-left py-2 pr-4 font-semibold text-text">Field</th><th class="text-left py-2 pr-4 font-semibold text-text">{{ lender_a.name }}</th><th class="text-left py-2 font-semibold text-text">{{ lender_b.name }}</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-border"><td class="py-2 pr-4 text-muted">Category</td><td class="py-2 pr-4 text-text">{{ (lender_a.category or '—').replace('-', ' ') }}</td><td class="py-2 text-text">{{ (lender_b.category or '—').replace('-', ' ') }}</td></tr>
+            <tr class="border-b border-border"><td class="py-2 pr-4 text-muted">BBB Rating</td><td class="py-2 pr-4 text-text">{{ (lender_a.company_info or {}).bbb_rating or '—' }}</td><td class="py-2 text-text">{{ (lender_b.company_info or {}).bbb_rating or '—' }}</td></tr>
+            <tr class="border-b border-border"><td class="py-2 pr-4 text-muted">Google Rating</td><td class="py-2 pr-4 text-text">{% if lender_a.google_rating %}{{ '%.1f' % lender_a.google_rating }} ({{ lender_a.google_reviews_count or 0 }} reviews){% else %}—{% endif %}</td><td class="py-2 text-text">{% if lender_b.google_rating %}{{ '%.1f' % lender_b.google_rating }} ({{ lender_b.google_reviews_count or 0 }} reviews){% else %}—{% endif %}</td></tr>
+            <tr class="border-b border-border"><td class="py-2 pr-4 text-muted">Headquarters</td><td class="py-2 pr-4 text-text">{{ (lender_a.company_info or {}).headquarters or '—' }}</td><td class="py-2 text-text">{{ (lender_b.company_info or {}).headquarters or '—' }}</td></tr>
+            <tr class="border-b border-border"><td class="py-2 pr-4 text-muted">Founded</td><td class="py-2 pr-4 text-text">{{ (lender_a.company_info or {}).founded_year or '—' }}</td><td class="py-2 text-text">{{ (lender_b.company_info or {}).founded_year or '—' }}</td></tr>
+            <tr class="border-b border-border"><td class="py-2 pr-4 text-muted">Website</td><td class="py-2 pr-4"><a href="{{ lender_a.website_url or '#' }}" target="_blank" rel="noopener noreferrer nofollow" class="text-primary hover:underline">{{ 'View' if lender_a.website_url else '—' }}</a></td><td class="py-2"><a href="{{ lender_b.website_url or '#' }}" target="_blank" rel="noopener noreferrer nofollow" class="text-primary hover:underline">{{ 'View' if lender_b.website_url else '—' }}</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-sm text-muted leading-relaxed">The comparison table above uses the fields both providers publish on their CreditDoc profile. Empty fields ("—") mean the provider has not disclosed that field or the field has not yet been verified by CreditDoc research. Every field on each profile links to the underlying source where available; every rating is the stored public value at time of check. Verify pricing, refund policy, and licensing directly with the provider before signing anything based on this comparison.</p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <h2 class="text-lg font-bold text-text mb-3">How to Use This {{ lender_a.name }} vs {{ lender_b.name }} Comparison</h2>
+      <div class="space-y-3 text-sm text-muted leading-relaxed">
+        <p><strong class="text-text">This is a research starting point, not a recommendation.</strong> Comparison pages on CreditDoc summarize the publicly-listed fields from two provider profiles side by side. That is useful for spotting differences on price, licensing, refund policy, and public review signals — but it is not a recommendation that one provider is "better" than the other in absolute terms. Which provider fits you depends on your credit situation, the specific service you need, the state you live in, and the pricing tier that matches your budget.</p>
+        <p><strong class="text-text">Confirm pricing in writing before signing with either provider.</strong> The summary above reflects the pricing published on each provider's website at the time of the last CreditDoc check. Providers can and do change pricing without notifying comparison sites first. If either {{ lender_a.name }} or {{ lender_b.name }} quotes a rate to you over the phone that differs from the number on their public site, ask them to send the confirmed price in writing before you sign — that is your CROA-protected right in every US state.</p>
+        <p><strong class="text-text">Cross-check both providers in the CFPB Consumer Complaint Database.</strong> At consumerfinance.gov/data-research/consumer-complaints, search both {{ lender_a.name }} and {{ lender_b.name }} by name. Look for the total complaint count, the resolution rate, and the pattern of issue categories (billing disputes, misleading claims, customer service). Both companies may be in the database; the pattern of resolutions is more useful than raw complaint volume, since larger providers naturally attract more complaints.</p>
+        <p><strong class="text-text">Verify state licensing.</strong> Both {{ lender_a.name }} and {{ lender_b.name }} should hold active licenses in the state where you plan to use their services. Check the state's Department of Financial Services website for the current licensing status. Providers that are licensed in some states but not others may not be able to offer their advertised pricing to you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      {% if lender_a.category %}
+      <a href="/categories/{{ lender_a.category }}/" class="glass-card p-4 hover:border-primary transition-colors">
+        <p class="text-sm font-semibold text-text">More {{ lender_a.category.replace('-', ' ') }} providers</p>
+        <p class="text-xs text-muted mt-1">Category directory</p>
+      </a>
+      {% endif %}
+      <a href="/best/" class="glass-card p-4 hover:border-primary transition-colors">
+        <p class="text-sm font-semibold text-text">All comparison guides</p>
+        <p class="text-xs text-muted mt-1">Money-page listicles</p>
+      </a>
+      <a href="/answers/" class="glass-card p-4 hover:border-primary transition-colors">
+        <p class="text-sm font-semibold text-text">Borrower Q&amp;A</p>
+        <p class="text-xs text-muted mt-1">Answers to common questions</p>
+      </a>
+      <a href="/research/consumer-complaints/" class="glass-card p-4 hover:border-primary transition-colors">
+        <p class="text-sm font-semibold text-text">CFPB data context</p>
+        <p class="text-xs text-muted mt-1">How to read complaint data</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <h2 class="text-lg font-bold text-text mb-3">Frequently Asked Questions About Comparing {{ lender_a.name }} and {{ lender_b.name }}</h2>
+      <div class="space-y-4">
+        <details class="border-t border-border pt-3">
+          <summary class="text-base font-semibold text-text cursor-pointer">Which provider — {{ lender_a.name }} or {{ lender_b.name }} — has better public review signals?</summary>
+          <p class="mt-3 text-sm text-muted leading-relaxed">Public review signals include BBB rating, Google rating with a review count, and the pattern of complaints in the CFPB Consumer Complaint Database. Above, the CreditDoc profile shows each provider's stored public rating and review count where available. A higher rating with a larger review count is a more reliable signal than a very high rating with only a handful of reviews. Cross-reference both providers in the CFPB Consumer Complaint Database at consumerfinance.gov/data-research/consumer-complaints — a pattern of unresolved complaints against either {{ lender_a.name }} or {{ lender_b.name }} is a strong signal to keep researching alternatives.</p>
+        </details>
+        <details class="border-t border-border pt-3">
+          <summary class="text-base font-semibold text-text cursor-pointer">Are {{ lender_a.name }} and {{ lender_b.name }} licensed to serve my state?</summary>
+          <p class="mt-3 text-sm text-muted leading-relaxed">Licensing varies by state. Both {{ lender_a.name }} and {{ lender_b.name }} should hold an active license in the state where you plan to use their services — check the state's Department of Financial Services (or equivalent agency) for the current status. A provider that is licensed in one state may not be licensed to serve consumers in another. If either provider cannot give you their state license number in writing, that is a red flag — for credit repair providers, the Credit Repair Organizations Act (CROA) also requires a written contract with a three-day cancellation window regardless of state.</p>
+        </details>
+        <details class="border-t border-border pt-3">
+          <summary class="text-base font-semibold text-text cursor-pointer">How is CreditDoc funded and does that affect this comparison?</summary>
+          <p class="mt-3 text-sm text-muted leading-relaxed">CreditDoc may earn a commission when a consumer clicks a provider link and signs up. That commission does not determine whether {{ lender_a.name }} or {{ lender_b.name }} appears in this comparison, does not determine the winner selection above, and does not determine what star rating either provider carries. The comparison is based on publicly-listed fields (pricing, licensing, refund policy, public review signals) — the same fields you would collect yourself if you called each provider directly. See the affiliate disclosure below.</p>
+        </details>
+        <details class="border-t border-border pt-3">
+          <summary class="text-base font-semibold text-text cursor-pointer">What should I do if the pricing quoted to me differs from what CreditDoc shows for {{ lender_a.name }} or {{ lender_b.name }}?</summary>
+          <p class="mt-3 text-sm text-muted leading-relaxed">Ask the provider to send the confirmed pricing in writing. That is your CROA-protected right in every US state. Providers can and do change pricing without notifying comparison sites first, so pricing shown on this page reflects the value at the time of the last CreditDoc check. If the number quoted to you is materially different, ask for a written price disclosure before signing. If either provider refuses to disclose pricing in writing, treat that as a strong signal to compare with an alternative.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+    <div class="rounded-lg bg-bg-alt border border-border p-4">
+      <p class="text-xs text-muted leading-relaxed"><strong class="text-text">Affiliate Disclosure:</strong> CreditDoc may earn a commission when you click links to products and services featured on this page. Compensation does not determine whether a provider can be covered or how visible star ratings are calculated. <a href="/disclosure/" class="text-primary hover:underline">Learn more</a>.</p>
+    </div>
+  </section>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>

@@ -129,6 +129,48 @@ def all_brands() -> tuple[dict[str, Any], ...]:
     return _brands_cache
 
 
+_COMPARISONS_PATH = Path(__file__).resolve().parent.parent / "src" / "content" / "comparisons.json"
+_comparisons_cache: tuple[dict[str, Any], ...] | None = None
+
+
+def all_comparisons() -> tuple[dict[str, Any], ...]:
+    """Return every comparison whose lender_a AND lender_b are in the lenders table."""
+    global _comparisons_cache
+    if _comparisons_cache is not None:
+        return _comparisons_cache
+    if not _COMPARISONS_PATH.exists():
+        _comparisons_cache = tuple()
+        return _comparisons_cache
+    raw = json.loads(_COMPARISONS_PATH.read_text(encoding="utf-8"))
+    if not raw:
+        _comparisons_cache = tuple()
+        return _comparisons_cache
+    # Bulk-check lender existence in one query.
+    all_slugs = set()
+    for c in raw:
+        if c.get("lender_a"): all_slugs.add(c["lender_a"])
+        if c.get("lender_b"): all_slugs.add(c["lender_b"])
+    with _connect() as conn:
+        placeholders = ",".join("?" * len(all_slugs))
+        rows = conn.execute(
+            f"SELECT slug FROM lenders WHERE slug IN ({placeholders}) "
+            f"AND processing_status != 'archived' "
+            f"AND (json_extract(data, '$.no_index') IS NULL OR json_extract(data, '$.no_index') = 0)",
+            list(all_slugs),
+        ).fetchall()
+    known = {r["slug"] for r in rows}
+    out = tuple(c for c in raw if c.get("lender_a") in known and c.get("lender_b") in known)
+    _comparisons_cache = out
+    return out
+
+
+def load_comparison(slug: str) -> dict[str, Any] | None:
+    for c in all_comparisons():
+        if c.get("slug") == slug:
+            return c
+    return None
+
+
 _CFPB_TRENDS_PATH = Path(__file__).resolve().parent.parent / "src" / "content" / "cfpb-trends.json"
 _trends_cache: tuple[dict[str, Any], ...] | None = None
 

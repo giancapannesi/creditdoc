@@ -31,9 +31,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import (  # noqa: E402
     all_brands,
     all_categories,
+    all_comparisons,
     all_states_info,
     all_trends_entries,
     browse_pairs,
+    load_comparison,
     category_count,
     category_to_pillar,
     cities_with_lenders,
@@ -1166,6 +1168,71 @@ def render_trends(slug: str, output_dir: Path) -> Path:
     return out_path
 
 
+def render_compare(slug: str, output_dir: Path) -> Path:
+    """Render one /compare/<slug>/index.html from comparisons.json + 2 lender rows."""
+    comp = load_comparison(slug)
+    if comp is None:
+        raise SystemExit(f"error: no comparison entry for slug '{slug}'")
+    lender_a = load_lender(comp["lender_a"])
+    lender_b = load_lender(comp["lender_b"])
+    if lender_a is None or lender_b is None:
+        raise SystemExit(f"error: comparison '{slug}' missing lender rows")
+
+    winner_slug = comp.get("winner")
+    winner_lender = lender_a if winner_slug == lender_a["slug"] else lender_b
+
+    title = (comp.get("seo_title") or comp.get("title") or f"{lender_a['name']} vs {lender_b['name']}")
+    if "|" not in title:
+        title = f"{title} | CreditDoc"
+    description = (
+        comp.get("seo_description")
+        or comp.get("summary")
+        or f"Compare {lender_a['name']} vs {lender_b['name']} — pricing, ratings, licensing, and refund policy side by side."
+    )
+
+    webpage_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": title,
+        "description": description,
+        "url": f"https://www.creditdoc.co/compare/{slug}/",
+        "isPartOf": {"@type": "WebSite", "name": "CreditDoc", "url": "https://www.creditdoc.co"},
+        "publisher": {"@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co"},
+    })
+    breadcrumb_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"},
+            {"@type": "ListItem", "position": 2, "name": "Compare", "item": "https://www.creditdoc.co/best/"},
+            {"@type": "ListItem", "position": 3, "name": f"{lender_a['name']} vs {lender_b['name']}", "item": f"https://www.creditdoc.co/compare/{slug}/"},
+        ],
+    })
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("compare.html.j2")
+    html = template.render(
+        comparison=comp,
+        lender_a=lender_a,
+        lender_b=lender_b,
+        winner_lender=winner_lender,
+        title=title,
+        description=description,
+        webpage_jsonld=webpage_jsonld,
+        breadcrumb_jsonld=breadcrumb_jsonld,
+    )
+
+    out_path = output_dir / "compare" / slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="CreditDoc renderer — Astro-free HTML from DB.",
@@ -1253,6 +1320,14 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    compare = subparsers.add_parser("compare", help="Render /compare/[slug]/ page(s)")
+    compare.add_argument("--slug", required=True, help="Comparison slug (e.g. credit-saint-vs-sky-blue-credit)")
+    compare.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
@@ -1284,6 +1359,9 @@ def main() -> None:
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     elif args.command == "trends":
         out = render_trends(args.slug, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "compare":
+        out = render_compare(args.slug, Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()

@@ -45,6 +45,7 @@ from render import (  # noqa: E402
     render_browse,
     render_category,
     render_city,
+    render_compare,
     render_review,
     render_state,
     render_trends,
@@ -53,6 +54,7 @@ from render import (  # noqa: E402
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import (  # noqa: E402
     all_brands,
+    all_comparisons,
     all_states_info,
     all_trends_entries,
     browse_pairs,
@@ -152,6 +154,7 @@ FAMILIES = [
     ("state",     "state",               render_state,    lambda: [s["slug"] for s in all_states_info()]),  # 50 US states from data.ts STATE_ABBREVIATIONS
     ("browse",    "browse",              _browse_wrapper, lambda: [f"{cat}/{city}" for cat, city in browse_pairs(5)]),  # category × city cross-slices ≥5 lenders each
     ("trends",    "trends",              render_trends,   lambda: [e["slug"] for e in all_trends_entries()]),  # CFPB Consumer Response profiles (filtered against lenders.processing_status/no_index)
+    ("compare",   "compare",             render_compare,  lambda: [c["slug"] for c in all_comparisons()]),  # head-to-head lender comparisons (JSON + 2 lender rows)
 ]
 
 
