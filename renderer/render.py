@@ -29,13 +29,16 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 # lender-loading logic here.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import (  # noqa: E402
+    all_brands,
     all_categories,
     category_count,
     category_to_pillar,
     cities_with_lenders,
     glossary_for_review,
+    lenders_by_brand,
     lenders_by_city_state,
     load_blog_post,
+    load_brand,
     load_category,
     load_cluster_answer,
     load_lender,
@@ -628,6 +631,151 @@ def render_city(slug: str, output_dir: Path) -> Path:
     return out_path
 
 
+def render_brand(slug: str, output_dir: Path) -> Path:
+    """Render one /brand/<slug>/index.html from src/content/brands/<slug>.json + lenders."""
+    brand = load_brand(slug)
+    if brand is None:
+        raise SystemExit(f"error: no brand with slug '{slug}' in src/content/brands/")
+
+    lenders = list(lenders_by_brand(slug))
+    if not lenders:
+        raise SystemExit(f"error: brand '{slug}' has no indexable lenders")
+
+    # Group by state (company_info.state fallback).
+    by_state: dict[str, list[dict[str, Any]]] = {}
+    for l in lenders:
+        ci = l.get("company_info") or {}
+        st = ci.get("state") or "Unknown"
+        by_state.setdefault(st, []).append(l)
+    states_grouped = sorted(by_state.items(), key=lambda kv: kv[0])
+    states_count = len(states_grouped)
+
+    # Aggregate google ratings.
+    google_ratings = []
+    for l in lenders:
+        gr = l.get("google_rating") or 0
+        gc = l.get("google_reviews_count") or 0
+        try:
+            gr_f = float(gr); gc_i = int(gc)
+        except (TypeError, ValueError):
+            continue
+        if 0 < gr_f <= 5 and gc_i >= 1:
+            google_ratings.append(gr_f)
+    avg_google_rating = sum(google_ratings) / len(google_ratings) if google_ratings else 0.0
+
+    # Aggregate services / pros / cons / company info.
+    services: set[str] = set()
+    pros_ct: dict[str, int] = {}
+    cons_ct: dict[str, int] = {}
+    company_hq = ""
+    company_founded = 0
+    bbb_rating = ""
+    phone_number = ""
+    for l in lenders:
+        for s in (l.get("services") or []): services.add(s)
+        for p in (l.get("pros") or []): pros_ct[p] = pros_ct.get(p, 0) + 1
+        for c in (l.get("cons") or []): cons_ct[c] = cons_ct.get(c, 0) + 1
+        ci = l.get("company_info") or {}
+        if not company_hq and ci.get("headquarters"): company_hq = ci["headquarters"]
+        if not company_founded and ci.get("founded_year"):
+            try: company_founded = int(ci["founded_year"])
+            except (TypeError, ValueError): pass
+        if not bbb_rating and ci.get("bbb_rating") and ci["bbb_rating"] != "NR":
+            bbb_rating = ci["bbb_rating"]
+        if not phone_number and l.get("phone"):
+            phone_number = l["phone"]
+
+    top_pros = [p for p, _ in sorted(pros_ct.items(), key=lambda kv: -kv[1])[:5]]
+    top_cons = [c for c, _ in sorted(cons_ct.items(), key=lambda kv: -kv[1])[:4]]
+    services_list = sorted(services)
+
+    location_count = len(lenders)
+    display_name = brand.get("display_name") or slug
+
+    # linker for summary paragraphs (fallback: unmodified)
+    linked_summary: list[str] = []
+    for para in (brand.get("summary_long") or "").split("\n\n"):
+        if para.strip():
+            linked_summary.append(linkify_description(para, current_slug=slug, current_category=brand.get("category") or "", money_budget=5))
+
+    linked_faq = [{"q": item.get("q") or "", "a": linkify_description(item.get("a") or "", current_slug=slug, current_category=brand.get("category") or "", money_budget=3)} for item in (brand.get("faq") or [])]
+
+    title = f"{display_name} Locations — Find Your Nearest Branch | CreditDoc"
+    description = f"Browse all {location_count} {display_name} locations across {states_count} states. Find hours, addresses, and contact info for each branch."
+
+    org_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": display_name,
+        "url": brand.get("official_website") or None,
+        "description": brand.get("summary_short") or "",
+    })
+    collection_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": f"{display_name} Locations",
+        "description": description,
+        "url": f"https://www.creditdoc.co/brand/{slug}/",
+        "numberOfItems": location_count,
+        "provider": {"@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co"},
+    })
+    breadcrumb_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"},
+            {"@type": "ListItem", "position": 2, "name": "Brands", "item": "https://www.creditdoc.co/"},
+            {"@type": "ListItem", "position": 3, "name": display_name, "item": f"https://www.creditdoc.co/brand/{slug}/"},
+        ],
+    })
+    faq_jsonld = ""
+    if brand.get("faq"):
+        faq_jsonld = _safe_jsonld_str({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {"@type": "Question", "name": item.get("q"), "acceptedAnswer": {"@type": "Answer", "text": item.get("a")}}
+                for item in brand["faq"]
+            ],
+        })
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("brand.html.j2")
+    html = template.render(
+        brand=brand,
+        title=title,
+        description=description,
+        location_count=location_count,
+        states_count=states_count,
+        avg_google_rating=avg_google_rating,
+        google_rating_count=len(google_ratings),
+        services_list=services_list,
+        top_pros=top_pros,
+        top_cons=top_cons,
+        company_hq=company_hq,
+        company_founded=company_founded,
+        bbb_rating=bbb_rating,
+        phone_number=phone_number,
+        states_grouped=states_grouped,
+        linked_summary=linked_summary,
+        linked_faq=linked_faq,
+        org_jsonld=org_jsonld,
+        collection_jsonld=collection_jsonld,
+        breadcrumb_jsonld=breadcrumb_jsonld,
+        faq_jsonld=faq_jsonld,
+    )
+
+    out_path = output_dir / "brand" / slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="CreditDoc renderer — Astro-free HTML from DB.",
@@ -682,6 +830,14 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    brand = subparsers.add_parser("brand", help="Render /brand/[slug]/ page(s)")
+    brand.add_argument("--slug", required=True, help="Brand slug to render")
+    brand.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
@@ -701,6 +857,9 @@ def main() -> None:
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     elif args.command == "city":
         out = render_city(args.slug, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "brand":
+        out = render_brand(args.slug, Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()

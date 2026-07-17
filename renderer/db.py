@@ -91,6 +91,65 @@ def wellness_guides_by_category(category: str, limit: int = 4) -> tuple[dict[str
     return tuple(result)
 
 
+_BRANDS_DIR = Path(__file__).resolve().parent.parent / "src" / "content" / "brands"
+_brands_cache: tuple[dict[str, Any], ...] | None = None
+
+
+def all_brands() -> tuple[dict[str, Any], ...]:
+    """Return all brand JSONs with location_count attached from lenders table.
+
+    Matches Astro's getAllBrands: reads every JSON file in src/content/brands/,
+    then counts rows in lenders WHERE brand_slug=brand.slug.
+    """
+    global _brands_cache
+    if _brands_cache is not None:
+        return _brands_cache
+    if not _BRANDS_DIR.exists():
+        _brands_cache = tuple()
+        return _brands_cache
+    files = sorted(f for f in _BRANDS_DIR.iterdir() if f.suffix == ".json")
+    # Count once, then look up per brand.
+    with _connect() as conn:
+        rows = conn.execute(
+            "SELECT brand_slug, COUNT(*) as c FROM lenders "
+            "WHERE brand_slug IS NOT NULL "
+            "AND processing_status IN ('ready_for_index','pending_approval') "
+            "GROUP BY brand_slug"
+        ).fetchall()
+    counts = {r["brand_slug"]: r["c"] for r in rows}
+    out: list[dict[str, Any]] = []
+    for f in files:
+        try:
+            brand = json.loads(f.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            continue
+        brand["location_count"] = counts.get(brand.get("slug"), 0)
+        out.append(brand)
+    _brands_cache = tuple(out)
+    return _brands_cache
+
+
+def load_brand(slug: str) -> dict[str, Any] | None:
+    for b in all_brands():
+        if b.get("slug") == slug:
+            return b
+    return None
+
+
+@lru_cache(maxsize=64)
+def lenders_by_brand(brand_slug: str) -> tuple[dict[str, Any], ...]:
+    """All indexable lenders belonging to a brand (by lenders.brand_slug column)."""
+    with _connect() as conn:
+        rows = conn.execute(
+            "SELECT * FROM lenders "
+            "WHERE brand_slug = ? "
+            "AND processing_status IN ('ready_for_index','pending_approval') "
+            "ORDER BY slug",
+            (brand_slug,),
+        ).fetchall()
+    return tuple(_merge_lender(r) for r in rows)
+
+
 _STATES_JSON_PATH = Path(__file__).resolve().parent.parent / "src" / "content" / "states.json"
 _GLOSSARY_JSON_PATH = Path(__file__).resolve().parent.parent / "src" / "content" / "glossary-terms.json"
 _states_cache: dict[str, dict[str, Any]] | None = None
