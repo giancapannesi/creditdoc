@@ -53,22 +53,31 @@ Kill `@astrojs/cloudflare` adapter. Definition-of-done items 1 & 2 met.
 
 ## Remaining follow-ups
 
-**`dist/_astro/` interactive tool bundles (4 files):**
-- `borrowing-power-quiz.astro_astro_type_script_index_0_lang.DIYErfPv.js`
-- `credit-score-simulator.astro_astro_type_script_index_0_lang.C0BmcZCe.js`
-- `debt-payoff-calculator.astro_astro_type_script_index_0_lang.BlQtE8I-.js`
-- `loan-denial-reason-checker.astro_astro_type_script_index_0_lang.NjF7XGxk.js`
+**`dist/_astro/` retained artifacts (15 files, ~audit correction 2026-07-17):**
 
-These 4 tool pages have `<script src="/_astro/...js">` refs. Options
-(deferred, not blocking mandate):
-- (A) Move each bundle to `/tools/<slug>.js` (stable path) and post-process
-  the HTML refs to point at the new location. ~1 hour of work.
-- (B) Convert each tool to inline vanilla JS in the HTML page. ~1 day.
+Debugger audit corrected the closeout's earlier undercount. Actual contents:
 
-For now, `/_astro/` remains as a bounded 4-file artifact carrying only
-the interactive JS. It does not compromise the mandate: content changes
-no longer touch these files. The bundles change only when tool code
-changes (rare).
+- 6 interactive component JS bundles:
+  - `borrowing-power-quiz.astro_astro_type_script_index_0_lang.DIYErfPv.js`
+  - `credit-score-simulator.astro_astro_type_script_index_0_lang.C0BmcZCe.js`
+  - `debt-payoff-calculator.astro_astro_type_script_index_0_lang.BlQtE8I-.js`
+  - `loan-denial-reason-checker.astro_astro_type_script_index_0_lang.DlT9CACN.js`
+  - `LenderNameSearch.astro_astro_type_script_index_0_lang.NjF7XGxk.js` (embedded search widget)
+  - `search.astro_astro_type_script_index_0_lang.DTj06HFP.js` (client-side search page)
+- 1 CSS bundle: `index.VJFBZZP-.css`
+- 8 Inter font woff/woff2 files (400/500/600/700 × latin normal)
+
+These are all consumed by HTML pages via `<script src="/_astro/...">`
+or `@font-face url("/_astro/...")`. They do not compromise the mandate:
+content changes (lender rows, blog posts, comparisons) do not touch these
+files. They change only when tool code, CSS source, or font declarations
+change — rare, framework-upgrade-cadence.
+
+Options for full cleanup (deferred, not blocking mandate):
+- (A) Move each JS bundle to `/tools/<slug>.js` (stable path) + move
+  CSS/fonts to `/styles/` and `/fonts/`, and post-process HTML refs to
+  point at the new locations. ~1 hour of work.
+- (B) Convert each interactive tool to inline vanilla JS. ~1 day.
 
 **`src/middleware.ts` (676 LoC) — reduce to no-op or delete:**
 Since `astro build` no longer runs, middleware.ts is dead code. Can be
