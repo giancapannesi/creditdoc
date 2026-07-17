@@ -439,7 +439,8 @@ def render_category(slug: str, output_dir: Path) -> Path:
     is_loan_category = (cat.get("filter_type") == "loan")
 
     # Pre-build ItemList JSON-LD (Jinja doesn't support Python-style
-    # comprehensions, so we serialise it here.)
+    # comprehensions, so we serialise it here.) Escape "</" to guard against
+    # a lender name ever containing a script-close sequence (debugger audit).
     item_list_jsonld = ""
     if top:
         item_list_jsonld = json.dumps({
@@ -457,7 +458,7 @@ def render_category(slug: str, output_dir: Path) -> Path:
                 }
                 for i, l in enumerate(top, start=1)
             ],
-        }, ensure_ascii=False)
+        }, ensure_ascii=False).replace("</", "<\\/")
 
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATES_DIR)),
