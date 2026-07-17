@@ -129,6 +129,61 @@ def all_brands() -> tuple[dict[str, Any], ...]:
     return _brands_cache
 
 
+_CFPB_TRENDS_PATH = Path(__file__).resolve().parent.parent / "src" / "content" / "cfpb-trends.json"
+_trends_cache: tuple[dict[str, Any], ...] | None = None
+
+
+def all_trends_entries() -> tuple[dict[str, Any], ...]:
+    """Return every CFPB entry that should render a /trends/<slug>/ page.
+
+    Matches Astro's filter: exclude entries whose lender row is either
+    processing_status='archived' or no_index=True. Entries with no
+    matching lender row (CFPB data for a company we haven't profiled)
+    still render, matching Astro's behaviour.
+    """
+    global _trends_cache
+    if _trends_cache is not None:
+        return _trends_cache
+    if not _CFPB_TRENDS_PATH.exists():
+        _trends_cache = tuple()
+        return _trends_cache
+    entries = json.loads(_CFPB_TRENDS_PATH.read_text(encoding="utf-8"))
+    if not entries:
+        _trends_cache = tuple()
+        return _trends_cache
+    # Pull lender status/no_index for every slug in one query.
+    slugs = [e["slug"] for e in entries if e.get("slug")]
+    lookup: dict[str, dict[str, Any]] = {}
+    with _connect() as conn:
+        placeholders = ",".join("?" * len(slugs))
+        rows = conn.execute(
+            f"SELECT slug, processing_status, "
+            f"       json_extract(data, '$.no_index') as no_index "
+            f"FROM lenders WHERE slug IN ({placeholders})",
+            slugs,
+        ).fetchall()
+    for r in rows:
+        lookup[r["slug"]] = {"status": r["processing_status"], "no_index": r["no_index"]}
+    out = []
+    for e in entries:
+        info = lookup.get(e["slug"])
+        if info is not None:
+            if info["status"] == "archived":
+                continue
+            if info["no_index"]:
+                continue
+        out.append(e)
+    _trends_cache = tuple(out)
+    return _trends_cache
+
+
+def load_trends_entry(slug: str) -> dict[str, Any] | None:
+    for e in all_trends_entries():
+        if e.get("slug") == slug:
+            return e
+    return None
+
+
 @lru_cache(maxsize=1)
 def browse_pairs(min_count: int = 5) -> tuple[tuple[str, str], ...]:
     """Enumerate every (category_slug, city_slug) pair with ≥ min_count indexable

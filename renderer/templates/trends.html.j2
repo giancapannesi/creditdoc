@@ -1,0 +1,149 @@
+{#
+  /trends/[slug]/index.html — Jinja2 template for CFPB response profile pages.
+  Matches Astro's trends/[slug].astro: WebPage + BreadcrumbList JSON-LD,
+  H1, 3 metric cards, top-products bars, top-issues bars, response breakdown,
+  context block, and a footer disclosure.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ seo_title }}</title>
+<meta name="description" content="{{ seo_desc|striptags|truncate(160, killwords=True, end='') }}">
+<link rel="canonical" href="https://www.creditdoc.co/trends/{{ cfpb.slug }}/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ seo_title }}">
+<meta property="og:description" content="{{ seo_desc|striptags|truncate(200, killwords=True, end='') }}">
+<meta property="og:url" content="https://www.creditdoc.co/trends/{{ cfpb.slug }}/">
+<meta property="og:site_name" content="CreditDoc">
+<meta property="og:image" content="https://www.creditdoc.co/og-default.png">
+<link rel="stylesheet" href="/styles/site.css">
+<script type="application/ld+json">
+{{ webpage_jsonld|safe }}
+</script>
+<script type="application/ld+json">
+{{ breadcrumb_jsonld|safe }}
+</script>
+</head>
+<body class="min-h-screen bg-bg text-text antialiased">
+{% include "_header.html" %}
+<main>
+  <nav class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-sm text-muted flex-wrap">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li><a href="/research/consumer-complaints/" class="hover:text-primary transition-colors">Consumer Response Data</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li class="text-text font-medium">{{ cfpb.company_name }}</li>
+    </ol>
+  </nav>
+
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <h1 class="text-2xl sm:text-3xl font-bold text-text mb-2">{{ cfpb.company_name }} — Consumer Response Profile</h1>
+    <p class="text-sm text-muted">Public CFPB response-outcome context for this company{% if cfpb.data_period %} • Period: {{ cfpb.data_period }}{% endif %}{% if cfpb.checked_at %} • Data checked: {{ cfpb.checked_at }}{% endif %}.</p>
+    <p class="mt-3 text-sm text-muted leading-relaxed">This page reflects the Consumer Financial Protection Bureau's public complaint database for {{ cfpb.company_name }}. The data is aggregated from complaints filed at consumerfinance.gov/complaint and is intended as transparency context, not a rating or endorsement. Use these figures alongside pricing, licensing, and refund-policy fields on the full provider profile before making a decision.</p>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="glass-card p-5 text-center">
+        <div class="text-xs font-semibold uppercase tracking-wider text-muted mb-2">Recorded Response Outcome</div>
+        <div class="text-3xl font-bold text-primary">{% if resolution_pct is not none %}{{ resolution_pct }}%{% else %}—{% endif %}</div>
+        <p class="text-xs text-muted mt-1">CFPB complaints with a recorded company response outcome</p>
+      </div>
+      <div class="glass-card p-5 text-center">
+        <div class="text-xs font-semibold uppercase tracking-wider text-muted mb-2">Timely Response</div>
+        <div class="text-3xl font-bold text-emerald-500">{% if timely_pct is not none %}{{ timely_pct }}%{% else %}—{% endif %}</div>
+        <p class="text-xs text-muted mt-1">Company response recorded within the CFPB response window</p>
+      </div>
+      <div class="glass-card p-5 text-center">
+        <div class="text-xs font-semibold uppercase tracking-wider text-muted mb-2">Recorded Complaints</div>
+        <div class="text-3xl font-bold text-text">{% if breakdown_total %}{{ '{:,}'.format(breakdown_total) }}{% else %}—{% endif %}</div>
+        <p class="text-xs text-muted mt-1">Public CFPB complaint records in this dataset</p>
+      </div>
+    </div>
+  </section>
+
+  {% if cfpb.top_products %}
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <h2 class="text-lg font-bold text-text mb-4">Products Named in CFPB Records</h2>
+      <div class="space-y-3">
+        {% for product in cfpb.top_products %}
+        <div>
+          <div class="flex items-center justify-between text-sm mb-1">
+            <span class="text-text font-medium">{{ product.name }}</span>
+            <span class="text-muted font-semibold whitespace-nowrap">{{ '%.1f' % product.pct }}%</span>
+          </div>
+          <div class="w-full h-2.5 rounded-full bg-bg-alt overflow-hidden">
+            <div class="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500" style="width: {{ [product.pct, 100]|min }}%"></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <p class="mt-4 text-sm text-muted leading-relaxed">Above are the product categories that appear most often in the public CFPB record for {{ cfpb.company_name }}. Product categories reflect how consumers described their complaint to the CFPB — they are not verified by the company or by CreditDoc. Percentages sum to the total recorded complaint volume for {{ cfpb.company_name }} in this dataset. Consumers researching {{ cfpb.company_name }} can use these categories to understand which product lines have the most reported friction and to decide which questions to ask the provider before signing.</p>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if cfpb.top_issues %}
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <h2 class="text-lg font-bold text-text mb-4">Issue Categories in CFPB Records</h2>
+      <div class="space-y-3">
+        {% for issue in cfpb.top_issues %}
+        <div>
+          <div class="flex items-center justify-between text-sm mb-1">
+            <span class="text-text font-medium">{{ issue.name }}</span>
+            <span class="text-muted font-semibold whitespace-nowrap">{{ '%.1f' % issue.pct }}%</span>
+          </div>
+          <div class="w-full h-2.5 rounded-full bg-bg-alt overflow-hidden">
+            <div class="h-full rounded-full bg-gradient-to-r from-amber-500 to-orange-500" style="width: {{ [issue.pct, 100]|min }}%"></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <p class="mt-4 text-sm text-muted leading-relaxed">Above are the issue categories most frequently cited in CFPB complaints against {{ cfpb.company_name }}. Issue categories are how consumers described the nature of the friction (e.g. billing dispute, poor customer service, product not as described). This is a good starting point for understanding what specific concerns other {{ cfpb.company_name }} customers have raised. Cross-check any recurring issue against your own contract, receipts, or service disclosures before signing.</p>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if response_breakdown_items %}
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <h2 class="text-lg font-bold text-text mb-4">Response Outcome Breakdown</h2>
+      <div class="space-y-2">
+        {% for key, val, pct in response_breakdown_items %}
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-text">{{ key }}</span>
+          <span class="text-muted"><strong class="text-text">{{ val }}</strong> ({{ '%.1f' % pct }}%)</span>
+        </div>
+        {% endfor %}
+      </div>
+      <p class="mt-4 text-sm text-muted leading-relaxed">The breakdown above shows how CFPB complaints against {{ cfpb.company_name }} were resolved. "Closed with monetary relief" and "Closed with non-monetary relief" indicate the company provided a resolution to the consumer; "Closed with explanation" means the company responded but did not offer a direct resolution; "Closed without relief" means the complaint was resolved without providing anything to the consumer. Higher rates of monetary/non-monetary relief generally indicate a more responsive customer service posture.</p>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <h2 class="text-lg font-bold text-text mb-3">How to Use This Consumer Response Data</h2>
+      <div class="space-y-3 text-sm text-muted leading-relaxed">
+        <p><strong class="text-text">This is transparency context, not a rating.</strong> The Consumer Financial Protection Bureau's complaint database is one of the most reliable public signals available for researching a lender, credit repair company, debt collector, or bank. But it is not the only signal, and volume alone is not a verdict. A large national provider will always have more complaints than a small local one, so raw complaint count is less useful than the response rate, timely rate, and breakdown of resolution outcomes.</p>
+        <p><strong class="text-text">What "recorded response outcome" means.</strong> The CFPB requires every regulated company to respond to consumer complaints within a set window (usually 15 days). "Recorded response outcome" measures the percentage of complaints where {{ cfpb.company_name }} provided any response back to the CFPB. A rate above 90% means the company is engaging with the CFPB process; a rate below 60% may indicate operational problems or a disputed regulatory relationship.</p>
+        <p><strong class="text-text">What "timely response" means.</strong> Timely response is the percentage of complaints where {{ cfpb.company_name }} responded within the CFPB's official response window. A high timely rate correlates with a functioning customer service organization; a low timely rate is a signal to ask questions before signing.</p>
+        <p><strong class="text-text">Where to file your own complaint against {{ cfpb.company_name }}.</strong> File at consumerfinance.gov/complaint. CFPB does not charge for complaint filing, does not require an attorney, and typically routes the complaint to the company within 15 days. Every complaint becomes part of the public dataset (with personal identifying information removed) so future consumers can research the company's response history.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="rounded-lg bg-bg-alt border border-border p-4">
+      <p class="text-xs text-muted leading-relaxed"><strong class="text-text">Data source:</strong> Public CFPB Consumer Complaint Database at consumerfinance.gov. Data checked {{ cfpb.checked_at or 'periodically' }}. CreditDoc does not verify individual complaints; the CFPB does. This page is not a rating of {{ cfpb.company_name }} and is not intended to be legal, financial, or product advice. See <a href="/disclosure/" class="text-primary hover:underline">disclosure</a>.</p>
+    </div>
+  </section>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>

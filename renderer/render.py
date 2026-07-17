@@ -32,6 +32,7 @@ from db import (  # noqa: E402
     all_brands,
     all_categories,
     all_states_info,
+    all_trends_entries,
     browse_pairs,
     category_count,
     category_to_pillar,
@@ -45,6 +46,7 @@ from db import (  # noqa: E402
     load_category,
     load_cluster_answer,
     load_lender,
+    load_trends_entry,
     load_wellness_guide,
     normalize_state_abbr,
     related_answers,
@@ -1058,6 +1060,112 @@ def render_browse(cat_slug: str, city_slug: str, output_dir: Path) -> Path:
     return out_path
 
 
+_LEGAL_SUFFIXES = {"inc", "llc", "ltd", "co", "corp", "corporation", "company", "pllc", "lp"}
+
+
+def _trends_slug_context(slug: str, company_name: str) -> str:
+    """Port of Astro's slugContext helper — extract non-name context words from
+    slug, title-cased. Used to disambiguate branch/location profiles from
+    company-name-only profiles.
+    """
+    import re as _re
+    def _s(s):
+        return _re.sub(r"[^a-z0-9]+", "-", _re.sub(r"&", " and ", s.lower())).strip("-")
+    slug_parts = [p for p in slug.split("-") if p]
+    company_parts = [p for p in _s(company_name).split("-") if p and p not in _LEGAL_SUFFIXES]
+    i = 0
+    for cp in company_parts:
+        if i < len(slug_parts) and slug_parts[i] == cp:
+            i += 1
+    ctx = slug_parts[i:]
+    if not ctx or len(ctx) == len(slug_parts):
+        return ""
+    return " ".join(p.upper() if len(p) == 2 else p.capitalize() for p in ctx)
+
+
+def render_trends(slug: str, output_dir: Path) -> Path:
+    """Render one /trends/<slug>/index.html from cfpb-trends.json entry."""
+    cfpb = load_trends_entry(slug)
+    if cfpb is None:
+        raise SystemExit(f"error: no cfpb-trends entry for slug '{slug}'")
+
+    def _fmt_pct(v):
+        if v is None: return None
+        try: return f"{float(v):.1f}"
+        except (TypeError, ValueError): return None
+    resolution_pct = _fmt_pct(cfpb.get("resolution_rate"))
+    timely_pct = _fmt_pct(cfpb.get("timely_rate"))
+    breakdown = cfpb.get("response_breakdown") or {}
+    breakdown_total = sum(breakdown.values()) if breakdown else 0
+    response_breakdown_items = []
+    if breakdown_total > 0:
+        for k, v in sorted(breakdown.items(), key=lambda kv: -kv[1]):
+            response_breakdown_items.append((k, v, 100.0 * v / breakdown_total))
+
+    context_label = _trends_slug_context(cfpb["slug"], cfpb.get("company_name") or "")
+    max_len = max(18, 48 - len(context_label)) if context_label else 42
+    company_name = cfpb.get("company_name") or ""
+    title_company = " ".join(company_name.split())
+    if len(title_company) > max_len:
+        title_company = title_company[: max_len - 1].rstrip()
+    seo_title = (
+        f"{title_company} {context_label} CFPB | CreditDoc"
+        if context_label
+        else f"{title_company} CFPB Data | CreditDoc"
+    )
+    seo_desc = (
+        f"{company_name}{' (' + context_label + ')' if context_label else ''} "
+        f"CFPB response data: {resolution_pct or '-'}% recorded response-outcome rate, "
+        f"{timely_pct or '-'}% timely responses. Use as transparency context, not a rating."
+    )
+
+    webpage_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": seo_title,
+        "description": seo_desc,
+        "url": f"https://www.creditdoc.co/trends/{cfpb['slug']}/",
+        "isPartOf": {"@type": "WebSite", "name": "CreditDoc", "url": "https://www.creditdoc.co"},
+        "author": {"@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co"},
+        "publisher": {"@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co",
+                       "logo": {"@type": "ImageObject", "url": "https://www.creditdoc.co/favicon.svg"}},
+        **({"dateModified": cfpb["checked_at"]} if cfpb.get("checked_at") else {}),
+    })
+    breadcrumb_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"},
+            {"@type": "ListItem", "position": 2, "name": "Consumer Response Data", "item": "https://www.creditdoc.co/research/consumer-complaints/"},
+            {"@type": "ListItem", "position": 3, "name": company_name, "item": f"https://www.creditdoc.co/trends/{cfpb['slug']}/"},
+        ],
+    })
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("trends.html.j2")
+    html = template.render(
+        cfpb=cfpb,
+        seo_title=seo_title,
+        seo_desc=seo_desc,
+        resolution_pct=resolution_pct,
+        timely_pct=timely_pct,
+        breakdown_total=breakdown_total,
+        response_breakdown_items=response_breakdown_items,
+        webpage_jsonld=webpage_jsonld,
+        breadcrumb_jsonld=breadcrumb_jsonld,
+    )
+
+    out_path = output_dir / "trends" / slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="CreditDoc renderer — Astro-free HTML from DB.",
@@ -1137,6 +1245,14 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    trends = subparsers.add_parser("trends", help="Render /trends/[slug]/ page(s)")
+    trends.add_argument("--slug", required=True, help="CFPB entry slug")
+    trends.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
@@ -1165,6 +1281,9 @@ def main() -> None:
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     elif args.command == "browse":
         out = render_browse(args.cat, args.city, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "trends":
+        out = render_trends(args.slug, Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()
