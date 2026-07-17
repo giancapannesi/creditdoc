@@ -250,13 +250,31 @@ It does not confirm that {{ lender.name }} or this specific location is licensed
 {% if wellness_guides %}
 <section class="mb-8">
 <h2 class="text-2xl font-semibold mb-3">Financial Wellness Guides</h2>
-<ul class="space-y-2">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
 {% for g in wellness_guides %}
-<li><a href="/financial-wellness/{{ g.slug }}/" class="text-primary hover:underline">{{ g.title or g.slug }}</a>
-{% if g.description %}<p class="text-sm text-muted">{{ g.description|truncate(160, killwords=True) }}</p>{% endif %}
-</li>
+<a href="/financial-wellness/{{ g.slug }}/" class="glass-card p-4 hover:border-primary transition-colors">
+<h3 class="font-semibold mb-2">{{ g.title or g.slug }}</h3>
+{% if g.description %}<p class="text-sm text-muted mb-2">{{ g.description|truncate(220, killwords=True) }}</p>{% endif %}
+{% if g.category %}<p class="text-xs text-muted">Category: {{ g.category|title|replace('-',' ') }}</p>{% endif %}
+<p class="text-sm text-primary mt-2">Read guide &rarr;</p>
+</a>
 {% endfor %}
-</ul>
+</div>
+<div class="glass-card p-5 mb-4">
+<h3 class="font-semibold mb-2">Free Credit Fundamentals Course</h3>
+<p class="text-sm text-muted mb-2">Learn how credit scores work, how to dispute errors, and build credit from scratch. 10 modules, zero cost.</p>
+<a href="/courses/credit-fundamentals/" class="text-sm text-primary hover:underline">Start free course &rarr;</a>
+</div>
+<div class="glass-card p-5 mb-4">
+<h3 class="font-semibold mb-2">Borrowing Power Quiz</h3>
+<p class="text-sm text-muted mb-2">Find out how much you can borrow and which lenders match your credit situation. 2 minutes.</p>
+<a href="/tools/borrowing-power-quiz/" class="text-sm text-primary hover:underline">Take the quiz &rarr;</a>
+</div>
+<div class="glass-card p-5">
+<h3 class="font-semibold mb-2">Credit Score Simulator</h3>
+<p class="text-sm text-muted mb-2">See how paying down debt, adding a card, or fixing errors changes your projected score.</p>
+<a href="/tools/credit-score-simulator/" class="text-sm text-primary hover:underline">Try the simulator &rarr;</a>
+</div>
 </section>
 {% endif %}
 <section class="mb-8 glass-card p-5">

@@ -37,6 +37,7 @@ from db import (  # noqa: E402
     wellness_guides_by_category,
 )
 from linker import linkify_description  # noqa: E402
+from _faqs import category_faqs  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = Path(__file__).resolve().parent / "templates"
@@ -66,6 +67,10 @@ def render_review(slug: str, output_dir: Path) -> Path:
     if lender_state:
         lender["state"] = lender_state
     state_ctx = state_context(lender_state)
+
+    # FAQ: use lender-supplied faqs if present, otherwise fall back to category template.
+    if not lender.get("faqs"):
+        lender["faqs"] = category_faqs(lender["category"] or "", lender.get("name") or "")
 
     # Pre-linkify description_long so inline money links appear (parity with Astro's
     # linkifyDescription helper). Template renders result with |safe.
