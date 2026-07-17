@@ -1,0 +1,180 @@
+{#
+  /answers/[slug]/index.html — Jinja2 template for cluster_answer pages.
+
+  Renders one answer from the DB row (data blob) into a static HTML page
+  that hits parity with Astro's [slug].astro. Focus: title/meta/canonical,
+  Article + FAQPage + BreadcrumbList JSON-LD, H1, key takeaways,
+  markdown-rendered sections, FAQ, primary sources, related answers.
+
+  Shared chrome from _header.html + _footer.html (extracted from Astro).
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ answer.title or answer.h1 }}</title>
+<meta name="description" content="{{ (answer.meta_description or '')|striptags|truncate(160, killwords=True, end='') }}">
+<link rel="canonical" href="https://www.creditdoc.co/answers/{{ answer.slug }}/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ answer.h1 or answer.title }}">
+<meta property="og:description" content="{{ (answer.meta_description or '')|striptags|truncate(200, killwords=True, end='') }}">
+<meta property="og:url" content="https://www.creditdoc.co/answers/{{ answer.slug }}/">
+<meta property="og:site_name" content="CreditDoc">
+<meta property="og:image" content="https://www.creditdoc.co/og-default.png">
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": answer.h1 or answer.title,
+  "description": answer.meta_description or "",
+  "author": {
+    "@type": "Person",
+    "name": "Harvey Brooks",
+    "jobTitle": "Senior Financial Editor",
+    "url": "https://www.creditdoc.co/about/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "CreditDoc",
+    "url": "https://www.creditdoc.co",
+    "logo": {"@type": "ImageObject", "url": "https://www.creditdoc.co/favicon.svg"}
+  },
+  "datePublished": answer.published_at or answer.last_updated or "",
+  "dateModified": answer.last_updated or answer.published_at or "",
+  "image": "https://www.creditdoc.co/og-default.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.creditdoc.co/answers/" + answer.slug + "/"}
+} | tojson }}
+</script>
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"},
+    {"@type": "ListItem", "position": 2, "name": "Answers", "item": "https://www.creditdoc.co/answers/"},
+    {"@type": "ListItem", "position": 3, "name": answer.h1 or answer.title, "item": "https://www.creditdoc.co/answers/" + answer.slug + "/"}
+  ]
+} | tojson }}
+</script>
+{% if faqs %}
+<script type="application/ld+json">
+{% set faq_entities = [] %}
+{% for q in faqs %}
+{% set _ = faq_entities.append({
+  "@type": "Question",
+  "name": q.question,
+  "acceptedAnswer": {"@type": "Answer", "text": q.answer}
+}) %}
+{% endfor %}
+{{ {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faq_entities} | tojson }}
+</script>
+{% endif %}
+{% include "_header.html" %}
+<main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+<nav aria-label="Breadcrumb" class="mb-4">
+<ol class="flex items-center gap-1.5 text-sm text-muted">
+<li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+<li><span class="mx-1">/</span></li>
+<li><a href="/answers/" class="hover:text-primary transition-colors">Answers</a></li>
+<li><span class="mx-1">/</span></li>
+<li class="text-text font-medium truncate">{{ answer.h1 or answer.title }}</li>
+</ol>
+</nav>
+<header class="max-w-3xl mb-8">
+<h1 class="text-2xl sm:text-3xl font-bold text-text">{{ answer.h1 or answer.title }}</h1>
+<p class="mt-3 text-muted leading-relaxed">{{ answer.meta_description or "" }}</p>
+<p class="mt-3 text-sm text-muted">Written by <a href="/about/" class="text-primary hover:underline font-medium">Harvey Brooks</a>, Senior Financial Editor</p>
+</header>
+{% if key_takeaways %}
+<section class="mb-8">
+<div class="rounded-xl border-2 border-primary/30 bg-gradient-to-r from-primary/5 to-primary/10 p-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary text-white uppercase tracking-wide">Key Takeaways</span>
+<span class="text-xs text-muted">Quick answers to the core questions</span>
+</div>
+<ul class="space-y-1.5">
+{% for t in key_takeaways %}
+<li class="flex items-start gap-2 text-sm text-muted">
+<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/></svg>
+<span>{{ t }}</span>
+</li>
+{% endfor %}
+</ul>
+</div>
+</section>
+{% endif %}
+<section class="mb-8 max-w-3xl">
+<h2 class="sr-only">Continue Your Research</h2>
+<div class="glass-card p-5">
+<h3 class="text-lg font-bold text-text">Continue Your Research</h3>
+<p class="mt-1 text-sm text-muted leading-relaxed">Use this answer with CreditDoc's directory pages, local guides, state rules, and data explainers. These links provide context, not a recommendation, approval prediction, price quote, or licensing determination.</p>
+<div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+<a href="/categories/{{ answer.banner_category or answer.cluster_pillar }}/" class="rounded-lg border border-border p-3 hover:border-primary transition-colors">
+<span class="block font-semibold text-text text-sm">{{ (answer.banner_category or answer.cluster_pillar or '')|replace('-', ' ')|title }} directory</span>
+<span class="block mt-1 text-xs text-muted">Compare provider profiles and category context before contacting a company.</span>
+</a>
+<a href="/city/" class="rounded-lg border border-border p-3 hover:border-primary transition-colors">
+<span class="block font-semibold text-text text-sm">Local credit guides</span>
+<span class="block mt-1 text-xs text-muted">Find city and regional pages that connect providers, rules, and local borrower context.</span>
+</a>
+<a href="/state/" class="rounded-lg border border-border p-3 hover:border-primary transition-colors">
+<span class="block font-semibold text-text text-sm">State lending rules</span>
+<span class="block mt-1 text-xs text-muted">Check state-level lending-law pages before relying on a general finance answer.</span>
+</a>
+<a href="/research/consumer-complaints/" class="rounded-lg border border-border p-3 hover:border-primary transition-colors">
+<span class="block font-semibold text-text text-sm">Complaint data context</span>
+<span class="block mt-1 text-xs text-muted">Read how CreditDoc uses public complaint data as one transparency signal.</span>
+</a>
+</div>
+{% if answer.target_money_page %}
+<div class="mt-4"><a href="{{ answer.target_money_page }}" class="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-hover">Compare options</a></div>
+{% endif %}
+</div>
+</section>
+{% for section in sections %}
+<section class="mb-8 max-w-3xl">
+<h2 class="text-xl font-bold text-text mb-3">{{ section.heading }}</h2>
+<div class="prose text-text leading-relaxed">{{ section.content_html|safe }}</div>
+</section>
+{% endfor %}
+{% if faqs %}
+<section class="mb-8 max-w-3xl">
+<h2 class="text-xl font-bold text-text mb-4">Frequently Asked Questions</h2>
+<div class="space-y-4">
+{% for q in faqs %}
+<div class="glass-card p-5">
+<h3 class="text-base font-semibold text-text">{{ q.question }}</h3>
+<p class="mt-2 text-sm text-muted leading-relaxed">{{ q.answer }}</p>
+</div>
+{% endfor %}
+</div>
+</section>
+{% endif %}
+{% if related_siblings %}
+<section class="mb-8 max-w-3xl">
+<h2 class="text-xl font-bold text-text mb-4">Related Answers</h2>
+<ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+{% for s in related_siblings %}
+<li><a class="glass-card p-4 block hover:border-primary transition-colors" href="/answers/{{ s.slug }}/">
+<span class="block font-semibold text-text text-sm">{{ s.h1 or s.title }}</span>
+<span class="block mt-1 text-xs text-muted">{{ (s.cluster_pillar or '')|replace('-', ' ')|title }}</span>
+</a></li>
+{% endfor %}
+</ul>
+</section>
+{% endif %}
+{% if primary_sources %}
+<section class="mb-8 max-w-3xl">
+<h2 class="text-xl font-bold text-text mb-4">Sources</h2>
+<ul class="space-y-2 text-sm">
+{% for src in primary_sources %}
+<li><a href="{{ src.url }}" rel="nofollow noopener" class="text-primary hover:underline">{{ src.name }}</a>{% if src.description %} — <span class="text-muted">{{ src.description }}</span>{% endif %}</li>
+{% endfor %}
+</ul>
+</section>
+{% endif %}
+</main>
+{% include "_footer.html" %}
+</body>
+</html>

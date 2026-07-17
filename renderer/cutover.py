@@ -39,7 +39,11 @@ ASTRO_DIST = REPO_ROOT / "dist"
 RENDER_SCRIPT = REPO_ROOT / "renderer" / "render.py"
 SHADOW_DIST = REPO_ROOT / "shadow_dist"
 
-REQUIRED_SCHEMA = {"FinancialService", "BreadcrumbList", "FAQPage"}
+REQUIRED_SCHEMA_BY_KIND = {
+    "review": {"FinancialService", "BreadcrumbList", "FAQPage"},
+    "answer": {"Article", "BreadcrumbList"},
+}
+REQUIRED_SCHEMA = {"FinancialService", "BreadcrumbList", "FAQPage"}  # back-compat default
 # Byte ratio is a rough backstop for total structural completeness. The real
 # quality signal is visible-text word ratio (below), which strips markup /
 # framework noise and measures what a human/crawler sees.
@@ -91,16 +95,17 @@ def _has_head_essentials(html: str) -> bool:
     ])
 
 
-def parity_gate(astro_html: str, renderer_html: str) -> tuple[bool, list[str]]:
+def parity_gate(astro_html: str, renderer_html: str, kind: str = "review") -> tuple[bool, list[str]]:
     """Return (passed, reasons). If passed=False, reasons lists failures."""
     reasons: list[str] = []
 
     if not _has_head_essentials(renderer_html):
         reasons.append("renderer output is missing title/meta/canonical")
 
+    required_schema = REQUIRED_SCHEMA_BY_KIND.get(kind, REQUIRED_SCHEMA)
     astro_types = _extract_schema_types(astro_html)
     render_types = _extract_schema_types(renderer_html)
-    missing_required = REQUIRED_SCHEMA - render_types
+    missing_required = required_schema - render_types
     if missing_required:
         reasons.append(f"renderer missing required schema types: {sorted(missing_required)}")
 
@@ -124,21 +129,24 @@ def parity_gate(astro_html: str, renderer_html: str) -> tuple[bool, list[str]]:
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 try:
+    from render import render_answer as _render_answer_inproc  # type: ignore  # noqa: E402
     from render import render_review as _render_review_inproc  # type: ignore  # noqa: E402
 except ImportError:
     _render_review_inproc = None
+    _render_answer_inproc = None
 
 
-def render(slug: str) -> Path:
+def render(slug: str, kind: str = "review") -> Path:
     """Render one slug into shadow_dist/. In-process if importable, else subprocess."""
-    if _render_review_inproc is not None:
+    inproc = _render_review_inproc if kind == "review" else _render_answer_inproc
+    if inproc is not None:
         try:
-            return _render_review_inproc(slug, SHADOW_DIST)
+            return inproc(slug, SHADOW_DIST)
         except SystemExit as e:
             print(f"  render FAIL for {slug}: {e}", file=sys.stderr)
             raise RuntimeError("render failure")
     proc = subprocess.run(
-        [sys.executable, str(RENDER_SCRIPT), "review", "--slug", slug, "--output-dir", str(SHADOW_DIST)],
+        [sys.executable, str(RENDER_SCRIPT), kind, "--slug", slug, "--output-dir", str(SHADOW_DIST)],
         capture_output=True,
         text=True,
         check=False,
@@ -146,7 +154,7 @@ def render(slug: str) -> Path:
     if proc.returncode != 0:
         print(f"  render FAIL for {slug}: {proc.stderr.strip()[:300]}", file=sys.stderr)
         raise RuntimeError("render failure")
-    return SHADOW_DIST / "review" / slug / "index.html"
+    return SHADOW_DIST / f"{kind}s" / slug / "index.html"
 
 
 def _load_env_file(path: Path) -> dict[str, str]:
@@ -196,20 +204,21 @@ def wrangler_deploy() -> bool:
     return True
 
 
-def cutover_one(slug: str, commit: bool) -> tuple[str, bool]:
+def cutover_one(slug: str, commit: bool, kind: str = "review") -> tuple[str, bool]:
     """Render + gate + optionally swap. Returns (status, deployed_bool)."""
-    astro_path = ASTRO_DIST / "review" / slug / "index.html"
+    family_dir = "review" if kind == "review" else "answers"
+    astro_path = ASTRO_DIST / family_dir / slug / "index.html"
     if not astro_path.exists():
         return (f"skip: no astro page at {astro_path}", False)
 
     try:
-        renderer_path = render(slug)
+        renderer_path = render(slug, kind)
     except RuntimeError:
         return ("skip: render failed", False)
 
     astro_html = astro_path.read_text(encoding="utf-8", errors="replace")
     renderer_html = renderer_path.read_text(encoding="utf-8", errors="replace")
-    passed, reasons = parity_gate(astro_html, renderer_html)
+    passed, reasons = parity_gate(astro_html, renderer_html, kind=kind)
 
     astro_bytes = len(astro_html)
     render_bytes = len(renderer_html)
@@ -228,34 +237,43 @@ def cutover_one(slug: str, commit: bool) -> tuple[str, bool]:
     return (f"OK ({ratio}) — cut over", True)
 
 
-def _pool_worker(args_tuple: tuple[str, bool]) -> tuple[str, tuple[str, bool]]:
-    slug, commit = args_tuple
-    return (slug, cutover_one(slug, commit))
+def _pool_worker(args_tuple: tuple[str, bool, str]) -> tuple[str, tuple[str, bool]]:
+    slug, commit, kind = args_tuple
+    return (slug, cutover_one(slug, commit, kind))
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Safely cut over /review/ pages from Astro to renderer output.",
     )
-    parser.add_argument("--slug", help="Single lender slug")
+    parser.add_argument("--slug", help="Single slug")
     parser.add_argument("--batch-file", help="File with one slug per line")
     parser.add_argument("--all-review", action="store_true", help="Iterate every existing dist/review/<slug>/index.html")
+    parser.add_argument("--all-answers", action="store_true", help="Iterate every existing dist/answers/<slug>/index.html")
+    parser.add_argument("--kind", choices=["review", "answer"], default="review", help="Page family for --slug/--batch-file")
     parser.add_argument("--commit", action="store_true", help="Actually swap + deploy. Without this, preview only.")
     parser.add_argument("--no-deploy", action="store_true", help="Do the swap but skip wrangler (useful for staging)")
     parser.add_argument("--quiet", action="store_true", help="Only print blocked / errored slugs")
     parser.add_argument("--workers", type=int, default=1, help="Parallel workers (multiprocessing). Default 1.")
     args = parser.parse_args()
 
-    if not args.slug and not args.batch_file and not args.all_review:
-        parser.error("--slug, --batch-file, or --all-review is required")
+    if not args.slug and not args.batch_file and not args.all_review and not args.all_answers:
+        parser.error("--slug, --batch-file, --all-review, or --all-answers is required")
 
+    kind = args.kind
     slugs: list[str] = []
     if args.slug:
         slugs.append(args.slug)
     if args.batch_file:
         slugs.extend(l.strip() for l in Path(args.batch_file).read_text().splitlines() if l.strip() and not l.startswith("#"))
     if args.all_review:
+        kind = "review"
         for p in sorted((ASTRO_DIST / "review").iterdir()):
+            if p.is_dir() and (p / "index.html").exists():
+                slugs.append(p.name)
+    if args.all_answers:
+        kind = "answer"
+        for p in sorted((ASTRO_DIST / "answers").iterdir()):
             if p.is_dir() and (p / "index.html").exists():
                 slugs.append(p.name)
 
@@ -280,13 +298,13 @@ def main() -> None:
 
     if args.workers > 1:
         from multiprocessing import Pool
-        pool_args = [(s, args.commit) for s in slugs]
+        pool_args = [(s, args.commit, kind) for s in slugs]
         with Pool(processes=args.workers) as pool:
             for slug, result in pool.imap_unordered(_pool_worker, pool_args, chunksize=25):
                 _report(slug, result)
     else:
         for slug in slugs:
-            _report(slug, cutover_one(slug, args.commit))
+            _report(slug, cutover_one(slug, args.commit, kind))
 
     print()
     print(f"totals: {ok} passed  {block} blocked  {err} errored  ({len(slugs)} scanned)")

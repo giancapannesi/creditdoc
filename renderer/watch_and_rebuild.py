@@ -35,6 +35,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = REPO_ROOT / "data" / "creditdoc.db"
 WATERMARK = REPO_ROOT / "data" / "renderer_watermark.txt"
+WATERMARK_ANSWERS = REPO_ROOT / "data" / "renderer_watermark_answers.txt"
 RENDER_SCRIPT = REPO_ROOT / "renderer" / "render.py"
 SHADOW_DIST = REPO_ROOT / "shadow_dist"
 ASTRO_DIST = REPO_ROOT / "dist"
@@ -42,15 +43,15 @@ ASTRO_DIST = REPO_ROOT / "dist"
 BATCH_CAP = 50
 
 
-def read_watermark() -> str:
-    if WATERMARK.exists():
-        return WATERMARK.read_text(encoding="utf-8").strip()
+def read_watermark(path: Path = WATERMARK) -> str:
+    if path.exists():
+        return path.read_text(encoding="utf-8").strip()
     return "1970-01-01T00:00:00Z"
 
 
-def write_watermark(ts: str) -> None:
-    WATERMARK.parent.mkdir(parents=True, exist_ok=True)
-    WATERMARK.write_text(ts, encoding="utf-8")
+def write_watermark(ts: str, path: Path = WATERMARK) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(ts, encoding="utf-8")
 
 
 def changed_slugs_since(last_seen: str, limit: int) -> list[tuple[str, str]]:
@@ -65,11 +66,24 @@ def changed_slugs_since(last_seen: str, limit: int) -> list[tuple[str, str]]:
     return [(r["slug"], r["updated_at"]) for r in rows]
 
 
-def rebuild_one(slug: str, output_dir: Path) -> tuple[bool, int, int]:
+def changed_answers_since(last_seen: str, limit: int) -> list[tuple[str, str]]:
+    """Changed cluster_answers rows since watermark (published+approved only)."""
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute(
+            "SELECT slug, updated_at FROM cluster_answers "
+            "WHERE updated_at > ? AND status IN ('published','approved') "
+            "ORDER BY updated_at ASC LIMIT ?",
+            (last_seen, limit + 1),
+        ).fetchall()
+    return [(r["slug"], r["updated_at"]) for r in rows]
+
+
+def rebuild_one(slug: str, output_dir: Path, kind: str = "review") -> tuple[bool, int, int]:
     """Invoke render.py for one slug. Returns (ok, elapsed_ms, bytes)."""
     start = time.time()
     proc = subprocess.run(
-        [sys.executable, str(RENDER_SCRIPT), "review", "--slug", slug, "--output-dir", str(output_dir)],
+        [sys.executable, str(RENDER_SCRIPT), kind, "--slug", slug, "--output-dir", str(output_dir)],
         capture_output=True,
         text=True,
         check=False,
@@ -78,7 +92,8 @@ def rebuild_one(slug: str, output_dir: Path) -> tuple[bool, int, int]:
     if proc.returncode != 0:
         print(f"  FAIL {slug}: {proc.stderr.strip()[:200]}")
         return (False, elapsed_ms, 0)
-    out_file = output_dir / "review" / slug / "index.html"
+    family_dir = "review" if kind == "review" else "answers"
+    out_file = output_dir / family_dir / slug / "index.html"
     size = out_file.stat().st_size if out_file.exists() else 0
     return (True, elapsed_ms, size)
 
@@ -133,9 +148,10 @@ def deploy_changed(changed_files: list[Path]) -> bool:
     return True
 
 
-def parity_ok(slug: str, renderer_path: Path) -> tuple[bool, str]:
+def parity_ok(slug: str, renderer_path: Path, kind: str = "review") -> tuple[bool, str]:
     """Check renderer output passes parity gate vs current dist/. Skip swap if not."""
-    astro_path = ASTRO_DIST / "review" / slug / "index.html"
+    family_dir = "review" if kind == "review" else "answers"
+    astro_path = ASTRO_DIST / family_dir / slug / "index.html"
     if not astro_path.exists():
         # No Astro baseline — safe to write renderer output directly.
         return (True, "no-baseline")
@@ -146,7 +162,7 @@ def parity_ok(slug: str, renderer_path: Path) -> tuple[bool, str]:
         from cutover import parity_gate  # type: ignore
     astro_html = astro_path.read_text(encoding="utf-8", errors="replace")
     render_html = renderer_path.read_text(encoding="utf-8", errors="replace")
-    passed, reasons = parity_gate(astro_html, render_html)
+    passed, reasons = parity_gate(astro_html, render_html, kind=kind)
     return (passed, "; ".join(reasons) if not passed else "ok")
 
 
@@ -168,57 +184,72 @@ def main() -> None:
     parser.add_argument("--dry-run", action="store_true", help="Show what would run; don't render")
     args = parser.parse_args()
 
-    last_seen = read_watermark()
-    rows = changed_slugs_since(last_seen, args.limit)
+    lender_last = read_watermark(WATERMARK)
+    answer_last = read_watermark(WATERMARK_ANSWERS)
+    lender_rows = changed_slugs_since(lender_last, args.limit)
+    answer_rows = changed_answers_since(answer_last, args.limit)
 
-    if not rows:
+    if not lender_rows and not answer_rows:
         # Silent success — this runs every minute, no need to spam logs
         return
 
-    print(f"[watch_and_rebuild] {len(rows)} row(s) changed since {last_seen}")
+    total = len(lender_rows) + len(answer_rows)
+    print(f"[watch_and_rebuild] {len(lender_rows)} lender(s) + {len(answer_rows)} answer(s) changed")
 
     if args.dry_run:
-        for slug, ts in rows[:20]:
-            print(f"  would rebuild: {slug}  ({ts})")
+        for slug, ts in lender_rows[:20]:
+            print(f"  would rebuild lender: {slug}  ({ts})")
+        for slug, ts in answer_rows[:20]:
+            print(f"  would rebuild answer: {slug}  ({ts})")
         return
 
     output_dir = SHADOW_DIST
-    max_ts = last_seen
     changed_files: list[Path] = []
     total_ms = 0
     ok_count = 0
     fail_count = 0
-
     skipped_count = 0
-    for slug, ts in rows[: args.limit]:
-        ok, elapsed_ms, size = rebuild_one(slug, output_dir)
-        total_ms += elapsed_ms
-        if not ok:
-            fail_count += 1
-            continue
-        if args.deploy:
-            rendered = output_dir / "review" / slug / "index.html"
-            gate_ok, reason = parity_ok(slug, rendered)
-            if not gate_ok:
-                skipped_count += 1
-                print(f"  SKIP {slug}: parity gate — {reason}")
-                if ts > max_ts:
-                    max_ts = ts
+
+    def _process(rows: list[tuple[str, str]], kind: str, wm_path: Path, last: str) -> str:
+        nonlocal ok_count, fail_count, skipped_count, total_ms
+        max_ts = last
+        family_dir = "review" if kind == "review" else "answers"
+        for slug, ts in rows[: args.limit]:
+            ok, elapsed_ms, size = rebuild_one(slug, output_dir, kind)
+            total_ms += elapsed_ms
+            if not ok:
+                fail_count += 1
                 continue
-        ok_count += 1
-        changed_files.append(output_dir / "review" / slug / "index.html")
-        if ts > max_ts:
-            max_ts = ts
+            if args.deploy:
+                rendered = output_dir / family_dir / slug / "index.html"
+                gate_ok, reason = parity_ok(slug, rendered, kind)
+                if not gate_ok:
+                    skipped_count += 1
+                    print(f"  SKIP {kind}:{slug}: parity gate — {reason}")
+                    if ts > max_ts:
+                        max_ts = ts
+                    continue
+            ok_count += 1
+            changed_files.append(output_dir / family_dir / slug / "index.html")
+            if ts > max_ts:
+                max_ts = ts
+        return max_ts
+
+    new_lender_last = _process(lender_rows, "review", WATERMARK, lender_last) if lender_rows else lender_last
+    new_answer_last = _process(answer_rows, "answer", WATERMARK_ANSWERS, answer_last) if answer_rows else answer_last
 
     print(f"[watch_and_rebuild] rendered {ok_count} ok, {fail_count} fail, {skipped_count} skipped(gate) in {total_ms} ms")
 
     if args.deploy and changed_files:
         deploy_changed(changed_files)
 
-    # Advance watermark only past successfully-rendered rows.
-    if ok_count > 0:
-        write_watermark(max_ts)
-        print(f"[watch_and_rebuild] watermark → {max_ts}")
+    # Advance watermarks only if at least one page was successfully rendered for each type.
+    if new_lender_last != lender_last:
+        write_watermark(new_lender_last, WATERMARK)
+        print(f"[watch_and_rebuild] lender watermark → {new_lender_last}")
+    if new_answer_last != answer_last:
+        write_watermark(new_answer_last, WATERMARK_ANSWERS)
+        print(f"[watch_and_rebuild] answer watermark → {new_answer_last}")
 
 
 if __name__ == "__main__":

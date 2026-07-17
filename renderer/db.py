@@ -173,6 +173,36 @@ def state_context(state_name_or_abbr: str | None) -> dict[str, Any] | None:
     return None
 
 
+def load_cluster_answer(slug: str) -> dict[str, Any] | None:
+    """Load one cluster_answer row + merge JSON blob."""
+    with _connect() as conn:
+        row = conn.execute("SELECT * FROM cluster_answers WHERE slug = ?", (slug,)).fetchone()
+    if not row:
+        return None
+    blob = json.loads(row["data"] or "{}")
+    merged: dict[str, Any] = dict(blob)
+    for k in row.keys():
+        if k == "data":
+            continue
+        v = row[k]
+        if v is not None or k not in merged:
+            merged[k] = v
+    return merged
+
+
+@lru_cache(maxsize=32)
+def sibling_cluster_answers(exclude_slug: str, cluster_pillar: str, limit: int = 4) -> tuple[dict[str, Any], ...]:
+    """Siblings from the same cluster pillar."""
+    with _connect() as conn:
+        rows = conn.execute(
+            "SELECT slug, title, h1, cluster_pillar FROM cluster_answers "
+            "WHERE cluster_pillar = ? AND slug != ? AND status IN ('published','approved') "
+            "ORDER BY slug LIMIT ?",
+            (cluster_pillar, exclude_slug, limit),
+        ).fetchall()
+    return tuple(dict(r) for r in rows)
+
+
 def category_to_pillar(category: str) -> str:
     """Map lender category → cluster answer pillar (matches Astro logic)."""
     mapping = {

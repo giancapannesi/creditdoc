@@ -31,8 +31,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import (  # noqa: E402
     category_to_pillar,
     glossary_for_review,
+    load_cluster_answer,
     load_lender,
     related_answers,
+    sibling_cluster_answers,
     similar_lenders,
     state_context,
     wellness_guides_by_category,
@@ -110,6 +112,131 @@ def render_review(slug: str, output_dir: Path) -> Path:
     return out_path
 
 
+def _md_to_html(src: str) -> str:
+    """Minimal markdown → HTML for answer sections.
+
+    Handles headings (## / ###), bullet lists (- ), pipe tables, bold, italic,
+    paragraph breaks. Mirrors the surface set used by Astro's mdToHtml. Not a
+    full markdown implementation — the DB content sticks to this subset.
+    """
+    import re as _re
+    lines = src.split("\n")
+    out: list[str] = []
+    table_rows: list[list[str]] = []
+    in_table = False
+    in_list = False
+
+    def inline(s: str) -> str:
+        s = _re.sub(r'\*\*([^*]+)\*\*', r'<strong class="font-semibold text-text">\1</strong>', s)
+        s = _re.sub(r'(?<!\*)\*([^*]+)\*(?!\*)', r'<em>\1</em>', s)
+        # Bare markdown links [text](url)
+        s = _re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" class="text-primary hover:underline">\1</a>', s)
+        return s
+
+    def flush_table() -> None:
+        nonlocal in_table, table_rows
+        if not table_rows:
+            return
+        header = table_rows[0]
+        body = table_rows[2:] if len(table_rows) >= 2 else []
+        out.append('<div class="my-6 overflow-x-auto rounded-lg border border-border"><table class="w-full text-sm">')
+        out.append('<thead class="bg-bg-alt"><tr>' + "".join(
+            f'<th class="px-4 py-2.5 text-left font-semibold text-text">{inline(c)}</th>' for c in header
+        ) + '</tr></thead><tbody>')
+        for row in body:
+            out.append('<tr class="border-t border-border">' + "".join(
+                f'<td class="px-4 py-2.5 text-text">{inline(c)}</td>' for c in row
+            ) + '</tr>')
+        out.append('</tbody></table></div>')
+        table_rows = []
+        in_table = False
+
+    def flush_list() -> None:
+        nonlocal in_list
+        if in_list:
+            out.append('</ul>')
+            in_list = False
+
+    for raw in lines:
+        line = raw.rstrip()
+        if line.startswith("|") and line.endswith("|"):
+            cells = [c.strip() for c in line[1:-1].split("|")]
+            table_rows.append(cells)
+            in_table = True
+            continue
+        if in_table:
+            flush_table()
+        if line.startswith("### "):
+            flush_list()
+            out.append(f'<h4 class="text-lg font-semibold text-text mt-6 mb-2">{inline(line[4:])}</h4>')
+        elif line.startswith("## "):
+            flush_list()
+            out.append(f'<h4 class="text-lg font-semibold text-text mt-6 mb-2">{inline(line[3:])}</h4>')
+        elif line.startswith("- "):
+            if not in_list:
+                out.append('<ul class="list-disc pl-6 my-3 space-y-1.5 text-text">')
+                in_list = True
+            out.append(f'<li class="leading-relaxed">{inline(line[2:])}</li>')
+        elif line == "":
+            flush_list()
+            out.append("")
+        else:
+            flush_list()
+            out.append(f'<p class="text-text leading-relaxed my-3">{inline(line)}</p>')
+    flush_table()
+    flush_list()
+    return "\n".join(out)
+
+
+def render_answer(slug: str, output_dir: Path) -> Path:
+    """Render one /answers/<slug>/index.html from DB. Returns the output path."""
+    answer = load_cluster_answer(slug)
+    if answer is None:
+        raise SystemExit(f"error: no cluster_answer with slug '{slug}' in DB")
+
+    sections_raw = [s for s in (answer.get("sections") or []) if isinstance(s, dict) and s.get("heading") and s.get("content")]
+    sections = [
+        {"heading": s.get("heading", ""), "content_html": _md_to_html(s.get("content", ""))}
+        for s in sections_raw
+    ]
+    faqs = [f for f in (answer.get("faq_schema") or []) if isinstance(f, dict) and f.get("question") and f.get("answer")]
+    primary_sources = [s for s in (answer.get("primary_sources") or []) if isinstance(s, dict) and s.get("url") and s.get("name")]
+
+    # Key takeaways = first sentence of first 4 sections
+    import re as _re
+    def _first_sentence(md: str) -> str:
+        plain = _re.sub(r"[\*_`|#>-]+", " ", md)
+        plain = _re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", plain)
+        plain = _re.sub(r"\s+", " ", plain).strip()
+        m = _re.match(r"(.*?[.!?])(\s|$)", plain)
+        return (m.group(1) if m else plain[:160]).strip()
+    key_takeaways = [_first_sentence(s.get("content", "")) for s in sections_raw[:4] if s.get("content")]
+    key_takeaways = [t for t in key_takeaways if t]
+
+    related = list(sibling_cluster_answers(slug, answer.get("cluster_pillar") or "", limit=4))
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("answer.html.j2")
+    html = template.render(
+        answer=answer,
+        sections=sections,
+        faqs=faqs,
+        primary_sources=primary_sources,
+        key_takeaways=key_takeaways,
+        related_siblings=related,
+    )
+
+    out_path = output_dir / "answers" / slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="CreditDoc renderer — Astro-free HTML from DB.",
@@ -124,10 +251,21 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    answer = subparsers.add_parser("answer", help="Render /answers/[slug]/ page(s)")
+    answer.add_argument("--slug", required=True, help="Cluster answer slug to render")
+    answer.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
         out = render_review(args.slug, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "answer":
+        out = render_answer(args.slug, Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()
