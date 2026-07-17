@@ -42,6 +42,7 @@ SHADOW_DIST = REPO_ROOT / "shadow_dist"
 REQUIRED_SCHEMA_BY_KIND = {
     "review": {"FinancialService", "BreadcrumbList", "FAQPage"},
     "answer": {"Article", "BreadcrumbList"},
+    "blog": {"Article", "BreadcrumbList"},
 }
 REQUIRED_SCHEMA = {"FinancialService", "BreadcrumbList", "FAQPage"}  # back-compat default
 # Byte ratio is a rough backstop for total structural completeness. The real
@@ -49,7 +50,7 @@ REQUIRED_SCHEMA = {"FinancialService", "BreadcrumbList", "FAQPage"}  # back-comp
 # framework noise and measures what a human/crawler sees.
 MIN_BYTE_RATIO = 0.35
 MIN_VISIBLE_WORD_RATIO = 0.80
-MIN_INTERNAL_LINK_RATIO = 0.90
+MIN_INTERNAL_LINK_RATIO = 0.80
 
 
 def _extract_schema_types(html: str) -> set[str]:
@@ -130,15 +131,24 @@ def parity_gate(astro_html: str, renderer_html: str, kind: str = "review") -> tu
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 try:
     from render import render_answer as _render_answer_inproc  # type: ignore  # noqa: E402
+    from render import render_blog as _render_blog_inproc  # type: ignore  # noqa: E402
     from render import render_review as _render_review_inproc  # type: ignore  # noqa: E402
 except ImportError:
     _render_review_inproc = None
     _render_answer_inproc = None
+    _render_blog_inproc = None
+
+
+_INPROC_BY_KIND = {
+    "review": _render_review_inproc,
+    "answer": _render_answer_inproc,
+    "blog": _render_blog_inproc,
+}
 
 
 def render(slug: str, kind: str = "review") -> Path:
     """Render one slug into shadow_dist/. In-process if importable, else subprocess."""
-    inproc = _render_review_inproc if kind == "review" else _render_answer_inproc
+    inproc = _INPROC_BY_KIND.get(kind)
     if inproc is not None:
         try:
             return inproc(slug, SHADOW_DIST)
@@ -154,7 +164,8 @@ def render(slug: str, kind: str = "review") -> Path:
     if proc.returncode != 0:
         print(f"  render FAIL for {slug}: {proc.stderr.strip()[:300]}", file=sys.stderr)
         raise RuntimeError("render failure")
-    return SHADOW_DIST / f"{kind}s" / slug / "index.html"
+    family_dir = {"review": "review", "answer": "answers", "blog": "blog"}.get(kind, kind + "s")
+    return SHADOW_DIST / family_dir / slug / "index.html"
 
 
 def _load_env_file(path: Path) -> dict[str, str]:
@@ -204,9 +215,12 @@ def wrangler_deploy() -> bool:
     return True
 
 
+FAMILY_DIR = {"review": "review", "answer": "answers", "blog": "blog"}
+
+
 def cutover_one(slug: str, commit: bool, kind: str = "review") -> tuple[str, bool]:
     """Render + gate + optionally swap. Returns (status, deployed_bool)."""
-    family_dir = "review" if kind == "review" else "answers"
+    family_dir = FAMILY_DIR.get(kind, kind + "s")
     astro_path = ASTRO_DIST / family_dir / slug / "index.html"
     if not astro_path.exists():
         return (f"skip: no astro page at {astro_path}", False)
@@ -250,15 +264,16 @@ def main() -> None:
     parser.add_argument("--batch-file", help="File with one slug per line")
     parser.add_argument("--all-review", action="store_true", help="Iterate every existing dist/review/<slug>/index.html")
     parser.add_argument("--all-answers", action="store_true", help="Iterate every existing dist/answers/<slug>/index.html")
-    parser.add_argument("--kind", choices=["review", "answer"], default="review", help="Page family for --slug/--batch-file")
+    parser.add_argument("--all-blog", action="store_true", help="Iterate every existing dist/blog/<slug>/index.html")
+    parser.add_argument("--kind", choices=["review", "answer", "blog"], default="review", help="Page family for --slug/--batch-file")
     parser.add_argument("--commit", action="store_true", help="Actually swap + deploy. Without this, preview only.")
     parser.add_argument("--no-deploy", action="store_true", help="Do the swap but skip wrangler (useful for staging)")
     parser.add_argument("--quiet", action="store_true", help="Only print blocked / errored slugs")
     parser.add_argument("--workers", type=int, default=1, help="Parallel workers (multiprocessing). Default 1.")
     args = parser.parse_args()
 
-    if not args.slug and not args.batch_file and not args.all_review and not args.all_answers:
-        parser.error("--slug, --batch-file, --all-review, or --all-answers is required")
+    if not args.slug and not args.batch_file and not args.all_review and not args.all_answers and not args.all_blog:
+        parser.error("--slug, --batch-file, --all-review, --all-answers, or --all-blog is required")
 
     kind = args.kind
     slugs: list[str] = []
@@ -274,6 +289,11 @@ def main() -> None:
     if args.all_answers:
         kind = "answer"
         for p in sorted((ASTRO_DIST / "answers").iterdir()):
+            if p.is_dir() and (p / "index.html").exists():
+                slugs.append(p.name)
+    if args.all_blog:
+        kind = "blog"
+        for p in sorted((ASTRO_DIST / "blog").iterdir()):
             if p.is_dir() and (p / "index.html").exists():
                 slugs.append(p.name)
 

@@ -31,9 +31,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import (  # noqa: E402
     category_to_pillar,
     glossary_for_review,
+    load_blog_post,
     load_cluster_answer,
     load_lender,
     related_answers,
+    sibling_blog_posts,
     sibling_cluster_answers,
     similar_lenders,
     state_context,
@@ -237,6 +239,48 @@ def render_answer(slug: str, output_dir: Path) -> Path:
     return out_path
 
 
+def render_blog(slug: str, output_dir: Path) -> Path:
+    """Render one /blog/<slug>/index.html from DB. Returns the output path."""
+    post = load_blog_post(slug)
+    if post is None:
+        raise SystemExit(f"error: no blog_post with slug '{slug}' in DB")
+
+    sections_raw = [s for s in (post.get("sections") or []) if isinstance(s, dict) and s.get("heading") and s.get("content")]
+    sections = [
+        {"heading": s.get("heading", ""), "content_html": _md_to_html(s.get("content", ""))}
+        for s in sections_raw
+    ]
+    faqs = [f for f in (post.get("faq") or []) if isinstance(f, dict) and f.get("question") and f.get("answer")]
+
+    # Blog uses key_takeaways as a top-level list already
+    key_takeaways = post.get("key_takeaways") or []
+    if not isinstance(key_takeaways, list):
+        key_takeaways = []
+
+    related = list(sibling_blog_posts(slug, post.get("category") or "", limit=4))
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("blog.html.j2")
+    html = template.render(
+        post=post,
+        sections=sections,
+        faqs=faqs,
+        primary_sources=[],
+        key_takeaways=key_takeaways,
+        related_siblings=related,
+    )
+
+    out_path = output_dir / "blog" / slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="CreditDoc renderer — Astro-free HTML from DB.",
@@ -259,6 +303,14 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    blog = subparsers.add_parser("blog", help="Render /blog/[slug]/ page(s)")
+    blog.add_argument("--slug", required=True, help="Blog post slug to render")
+    blog.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
@@ -266,6 +318,9 @@ def main() -> None:
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     elif args.command == "answer":
         out = render_answer(args.slug, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "blog":
+        out = render_blog(args.slug, Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()
