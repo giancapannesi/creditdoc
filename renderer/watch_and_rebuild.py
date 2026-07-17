@@ -118,10 +118,13 @@ def rebuild_one(slug: str, output_dir: Path, kind: str = "review") -> tuple[bool
     )
     elapsed_ms = int((time.time() - start) * 1000)
     if proc.returncode != 0:
-        print(f"  FAIL {slug}: {proc.stderr.strip()[:200]}")
+        print(f"  FAIL {kind}:{slug}: {proc.stderr.strip()[:200]}")
         return (False, elapsed_ms, 0)
     family_dir = FAMILY_DIRS.get(kind, kind + "s")
-    out_file = output_dir / family_dir / slug / "index.html"
+    if kind == "state-laws":
+        out_file = output_dir / family_dir / slug / "lending-laws" / "index.html"
+    else:
+        out_file = output_dir / family_dir / slug / "index.html"
     size = out_file.stat().st_size if out_file.exists() else 0
     return (True, elapsed_ms, size)
 
@@ -176,7 +179,73 @@ def deploy_changed(changed_files: list[Path]) -> bool:
     return True
 
 
-FAMILY_DIRS = {"review": "review", "answer": "answers", "blog": "blog", "wellness": "financial-wellness"}
+FAMILY_DIRS = {
+    "review": "review",
+    "answer": "answers",
+    "blog": "blog",
+    "wellness": "financial-wellness",
+    "category": "categories",
+    "city": "city",
+    "brand": "brand",
+    "state": "state",
+    "trends": "trends",
+    "compare": "compare",
+    "best": "best",
+    "state-laws": "state",  # compound path — file lives at dist/state/<slug>/lending-laws/index.html
+}
+
+
+def _lender_aggregate_context(slug: str) -> dict[str, str]:
+    """Given a lender slug, return the aggregate hub slugs it belongs to.
+
+    Enables watch_and_rebuild to invalidate the affected /categories/, /city/,
+    /brand/, /state/, /state/*/lending-laws/, /trends/ hub pages when a lender
+    row changes. Returns dict with keys: category, city, brand, state, state-laws.
+    Missing keys mean the lender isn't in that family's coverage.
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    try:
+        from db import (  # type: ignore
+            all_states_info,
+            all_states_with_lending_laws,
+            cities_with_lenders,
+            load_lender,
+            normalize_state_abbr,
+            slugify_city,
+        )
+    except ImportError:
+        return {}
+    l = load_lender(slug)
+    if not l:
+        return {}
+    ctx: dict[str, str] = {}
+    if l.get("category"):
+        ctx["category"] = l["category"]
+    if l.get("brand_slug"):
+        ctx["brand"] = l["brand_slug"]
+    ci = l.get("company_info") or {}
+    city = (ci.get("city") or "").strip()
+    abbr = normalize_state_abbr(ci.get("state"))
+    # City hub only exists if the city has ≥5 indexable lenders (matches cities_with_lenders threshold).
+    if city and abbr:
+        candidate = f"{slugify_city(city)}-{abbr.lower()}"
+        for c in cities_with_lenders(5):
+            if c["slug"] == candidate:
+                ctx["city"] = candidate
+                break
+    # State hub exists for all 50 US states.
+    if abbr:
+        state_slug = next((s["slug"] for s in all_states_info() if s["abbr"] == abbr), None)
+        if state_slug:
+            ctx["state"] = state_slug
+        # State-laws subroute — only for states in all_states_with_lending_laws.
+        state_laws_slug = next(
+            (s["slug"] for s in all_states_with_lending_laws() if s["abbr"] == abbr),
+            None,
+        )
+        if state_laws_slug:
+            ctx["state-laws"] = state_laws_slug
+    return ctx
 
 
 def parity_ok(slug: str, renderer_path: Path, kind: str = "review") -> tuple[bool, str]:
@@ -248,6 +317,12 @@ def main() -> None:
     fail_count = 0
     skipped_count = 0
 
+    # Track which aggregate hubs need re-rendering because their member lenders changed.
+    dirty_aggregates: dict[str, set[str]] = {
+        "category": set(), "city": set(), "brand": set(),
+        "state": set(), "state-laws": set(),
+    }
+
     def _process(rows: list[tuple[str, str]], kind: str, wm_path: Path, last: str) -> str:
         nonlocal ok_count, fail_count, skipped_count, total_ms
         max_ts = last
@@ -269,6 +344,11 @@ def main() -> None:
                     continue
             ok_count += 1
             changed_files.append(output_dir / family_dir / slug / "index.html")
+            # Lender changes invalidate their aggregate hubs.
+            if kind == "review":
+                ctx = _lender_aggregate_context(slug)
+                for hub_kind, hub_slug in ctx.items():
+                    dirty_aggregates.setdefault(hub_kind, set()).add(hub_slug)
             if ts > max_ts:
                 max_ts = ts
         return max_ts
@@ -278,7 +358,27 @@ def main() -> None:
     new_blog_last = _process(blog_rows, "blog", WATERMARK_BLOG, blog_last) if blog_rows else blog_last
     new_wellness_last = _process(wellness_rows, "wellness", WATERMARK_WELLNESS, wellness_last) if wellness_rows else wellness_last
 
-    print(f"[watch_and_rebuild] rendered {ok_count} ok, {fail_count} fail, {skipped_count} skipped(gate) in {total_ms} ms")
+    # Aggregate hub rebuilds. Bounded to keep tick cost predictable.
+    HUB_CAP = 60
+    hub_rebuilt = hub_failed = 0
+    hub_ms = 0
+    for kind, slugs in list(dirty_aggregates.items()):
+        for hub_slug in sorted(slugs)[:HUB_CAP]:
+            ok, elapsed_ms, size = rebuild_one(hub_slug, output_dir, kind)
+            hub_ms += elapsed_ms
+            if ok:
+                hub_rebuilt += 1
+                family_dir = FAMILY_DIRS.get(kind, kind + "s")
+                if kind == "state-laws":
+                    rendered = output_dir / family_dir / hub_slug / "lending-laws" / "index.html"
+                else:
+                    rendered = output_dir / family_dir / hub_slug / "index.html"
+                if rendered.exists():
+                    changed_files.append(rendered)
+            else:
+                hub_failed += 1
+
+    print(f"[watch_and_rebuild] pages {ok_count} ok, {fail_count} fail, {skipped_count} skipped(gate) in {total_ms} ms; hubs {hub_rebuilt} ok, {hub_failed} fail in {hub_ms} ms")
 
     if args.deploy and changed_files:
         deploy_changed(changed_files)

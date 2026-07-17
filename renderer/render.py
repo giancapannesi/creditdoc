@@ -1785,6 +1785,22 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    best = subparsers.add_parser("best", help="Render /best/[slug]/ page(s)")
+    best.add_argument("--slug", required=True, help="Listicle slug (e.g. best-personal-loans)")
+    best.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
+    state_laws = subparsers.add_parser("state-laws", help="Render /state/[slug]/lending-laws/")
+    state_laws.add_argument("--slug", required=True, help="State slug (e.g. california) — subroute is appended")
+    state_laws.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
@@ -1819,6 +1835,13 @@ def main() -> None:
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     elif args.command == "compare":
         out = render_compare(args.slug, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "best":
+        out = render_best(args.slug, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "state-laws":
+        # compound_slug shape for render_state_lending_laws is "<slug>/lending-laws"
+        out = render_state_lending_laws(f"{args.slug}/lending-laws", Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()
