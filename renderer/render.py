@@ -52,7 +52,20 @@ def render_review(slug: str, output_dir: Path) -> Path:
     pillar = category_to_pillar(lender["category"])
     answers = related_answers(pillar, limit=6)
     wellness = wellness_guides_by_category(lender["category"], limit=4)
-    state_ctx = state_context(lender.get("state"))
+    # State resolution: prefer explicit state column, fall back to company_info.state
+    # or company_info.headquarters (matches Astro's derivation).
+    lender_state = lender.get("state")
+    if not lender_state:
+        ci = lender.get("company_info") or {}
+        lender_state = ci.get("state")
+        if not lender_state:
+            hq = (ci.get("headquarters") or "")
+            # "North Salt Lake, UT" → "UT"
+            if "," in hq:
+                lender_state = hq.rsplit(",", 1)[-1].strip()
+    if lender_state:
+        lender["state"] = lender_state
+    state_ctx = state_context(lender_state)
 
     # Pre-linkify description_long so inline money links appear (parity with Astro's
     # linkifyDescription helper). Template renders result with |safe.

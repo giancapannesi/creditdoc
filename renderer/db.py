@@ -91,9 +91,27 @@ def wellness_guides_by_category(category: str, limit: int = 4) -> tuple[dict[str
     return tuple(result)
 
 
+_STATES_JSON_PATH = Path(__file__).resolve().parent.parent / "src" / "content" / "states.json"
+_states_cache: dict[str, dict[str, Any]] | None = None
+
+
+def _load_states_json() -> dict[str, dict[str, Any]]:
+    global _states_cache
+    if _states_cache is None:
+        try:
+            _states_cache = json.loads(_STATES_JSON_PATH.read_text(encoding="utf-8"))
+        except (FileNotFoundError, json.JSONDecodeError):
+            _states_cache = {}
+    return _states_cache
+
+
 @lru_cache(maxsize=64)
 def state_context(state_name_or_abbr: str | None) -> dict[str, Any] | None:
-    """Look up state regulatory context (payday laws, usury cap, etc.) by name OR abbr."""
+    """Look up state regulatory context by name OR abbr.
+
+    Two-tier: try DB state_regulatory_data first, fall back to src/content/states.json
+    (which is the actual source for the Astro build until the DB table is populated).
+    """
     if not state_name_or_abbr:
         return None
     with _connect() as conn:
@@ -102,7 +120,22 @@ def state_context(state_name_or_abbr: str | None) -> dict[str, Any] | None:
             "WHERE state_name = ? OR state_code = ? LIMIT 1",
             (state_name_or_abbr, state_name_or_abbr),
         ).fetchone()
-    return dict(row) if row else None
+    if row:
+        return dict(row)
+    # Fall back to states.json (Astro's actual data source)
+    states = _load_states_json()
+    if state_name_or_abbr in states:
+        d = dict(states[state_name_or_abbr])
+        d.setdefault("state_name", d.get("name"))
+        d.setdefault("state_code", state_name_or_abbr)
+        return d
+    for abbr, info in states.items():
+        if isinstance(info, dict) and info.get("name") == state_name_or_abbr:
+            d = dict(info)
+            d.setdefault("state_name", d.get("name"))
+            d.setdefault("state_code", abbr)
+            return d
+    return None
 
 
 def category_to_pillar(category: str) -> str:
