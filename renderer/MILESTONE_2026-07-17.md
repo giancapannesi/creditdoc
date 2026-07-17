@@ -51,14 +51,23 @@ HTTP/2 200
 | Framework fingerprint | `/_astro/*` bundles | none |
 | Cutover risk to Bing | LOW (parallel-run pattern) | LOW |
 
-## Coverage against Astro (byte parity)
+## Coverage against Astro
 
-- Family-wide `/review/` (16 lender sample): **64.8%**
-- Lexington-law single page: **44%** (75.9 KB vs 171 KB)
-- Structural parity: **100%** — every H2, every JSON-LD schema type, every critical meta/OG tag matches
+| Family | Total pages | Cut over via renderer | Percentage |
+|---|---|---|---|
+| /review/ | 16,181 | 16,129 | 99.7% |
+| /answers/ | 507 | 494 | 97.4% |
+| /blog/ | 129 | 129 | 100% |
+| /financial-wellness/ | 139 | 93 | 66.9% |
+| **Total DB-driven** | **16,956** | **16,845** | **99.3%** |
 
-The remaining 36% byte gap is **content depth** (Astro's longer descriptions,
-more detailed section prose), not missing features or missing schema.
+Parity gate: visible-text-word ratio ≥80% (60% for wellness), all required
+JSON-LD schema types present, ≥80% internal-link parity, title/meta/canonical
+essentials. Blocked pages (~50 total) still serve Astro's output.
+
+**What Astro is still authoritative for:** /best/ (27), /credit-guide/ (412),
+/city/ (332), /brand/ (57), /state/ (51), /categories/ (19), /research/*,
+/tools/*, static pages. Edits to those still trigger a full Astro build.
 
 ## What's committed today
 
