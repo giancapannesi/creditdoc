@@ -130,6 +130,45 @@
 <a href="/go/{{ lender.slug }}/" rel="nofollow noopener" class="btn-primary">Visit {{ lender.name }}</a>
 </section>
 {% endif %}
+{% if similar_lenders %}
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Similar Companies</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+{% for s in similar_lenders %}
+<a href="/review/{{ s.slug }}/" class="glass-card p-4 hover:border-primary transition-colors">
+{% if s.logo_url %}<img src="{{ s.logo_url }}" alt="{{ s.name }}" class="h-10 mb-2">{% endif %}
+<h3 class="font-semibold">{{ s.name }}</h3>
+{% if s.description_short %}<p class="text-sm text-muted mt-1">{{ s.description_short|truncate(140, killwords=True) }}</p>{% endif %}
+{% if s.rating %}<p class="text-xs mt-2">Rating: {{ s.rating }}/5</p>{% endif %}
+</a>
+{% endfor %}
+</div>
+</section>
+{% endif %}
+{% if related_answers %}
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Related Questions</h2>
+<ul class="space-y-2">
+{% for a in related_answers %}
+<li><a href="/answers/{{ a.slug }}/" class="text-primary hover:underline">{{ a.title or a.h1 or a.slug }}</a>
+{% if a.meta_description %}<p class="text-sm text-muted">{{ a.meta_description|truncate(160, killwords=True) }}</p>{% endif %}
+</li>
+{% endfor %}
+</ul>
+</section>
+{% endif %}
+{% if wellness_guides %}
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Financial Wellness Guides</h2>
+<ul class="space-y-2">
+{% for g in wellness_guides %}
+<li><a href="/financial-wellness/{{ g.slug }}/" class="text-primary hover:underline">{{ g.title or g.slug }}</a>
+{% if g.description %}<p class="text-sm text-muted">{{ g.description|truncate(160, killwords=True) }}</p>{% endif %}
+</li>
+{% endfor %}
+</ul>
+</section>
+{% endif %}
 <footer class="text-xs text-muted mt-16 pt-4 border-t border-border">
 <p>Last updated: {{ lender.updated_at }}</p>
 </footer>

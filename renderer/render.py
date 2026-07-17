@@ -24,56 +24,32 @@ from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
+# renderer/ is on sys.path when invoked as `python3 renderer/render.py`, so a
+# relative import works. We use the module for DB helpers to avoid duplicating
+# lender-loading logic here.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from db import (  # noqa: E402
+    category_to_pillar,
+    load_lender,
+    related_answers,
+    similar_lenders,
+    wellness_guides_by_category,
+)
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
-DB_PATH = REPO_ROOT / "data" / "creditdoc.db"
 TEMPLATES_DIR = Path(__file__).resolve().parent / "templates"
-
-
-def load_lender(slug: str) -> dict[str, Any] | None:
-    """Read one lender row from the DB, merging column fields into the JSON blob."""
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    try:
-        row = conn.execute(
-            "SELECT slug, category, processing_status, is_protected, is_enriched, "
-            "quality_score, logo_path, website_url, brand_slug, state, seo_tier, "
-            "created_at, updated_at, data "
-            "FROM lenders WHERE slug = ?",
-            (slug,),
-        ).fetchone()
-    finally:
-        conn.close()
-
-    if row is None:
-        return None
-
-    # `data` blob is the JSON payload with 40+ fields. Merge column fields on top
-    # so they always win (columns are the transient/system fields; blob is content).
-    blob = json.loads(row["data"] or "{}")
-    merged: dict[str, Any] = dict(blob)
-    merged.update({
-        "slug": row["slug"],
-        "category": row["category"],
-        "processing_status": row["processing_status"],
-        "is_protected": bool(row["is_protected"]),
-        "is_enriched": bool(row["is_enriched"]),
-        "quality_score": row["quality_score"],
-        "logo_path": row["logo_path"],
-        "website_url": row["website_url"] or merged.get("website_url"),
-        "brand_slug": row["brand_slug"],
-        "state": row["state"] or merged.get("state"),
-        "seo_tier": row["seo_tier"],
-        "created_at": row["created_at"],
-        "updated_at": row["updated_at"],
-    })
-    return merged
 
 
 def render_review(slug: str, output_dir: Path) -> Path:
     """Render one /review/<slug>/index.html from DB. Returns the output path."""
     lender = load_lender(slug)
     if lender is None:
-        raise SystemExit(f"error: no lender with slug '{slug}' in {DB_PATH}")
+        raise SystemExit(f"error: no lender with slug '{slug}' in DB")
+
+    similar = similar_lenders(lender["category"], slug, limit=4)
+    pillar = category_to_pillar(lender["category"])
+    answers = related_answers(pillar, limit=6)
+    wellness = wellness_guides_by_category(lender["category"], limit=4)
 
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATES_DIR)),
@@ -82,7 +58,12 @@ def render_review(slug: str, output_dir: Path) -> Path:
         lstrip_blocks=True,
     )
     template = env.get_template("review.html.j2")
-    html = template.render(lender=lender)
+    html = template.render(
+        lender=lender,
+        similar_lenders=similar,
+        related_answers=answers,
+        wellness_guides=wellness,
+    )
 
     out_path = output_dir / "review" / slug / "index.html"
     out_path.parent.mkdir(parents=True, exist_ok=True)
