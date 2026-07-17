@@ -33,8 +33,10 @@ from db import (  # noqa: E402
     load_lender,
     related_answers,
     similar_lenders,
+    state_context,
     wellness_guides_by_category,
 )
+from linker import linkify_description  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = Path(__file__).resolve().parent / "templates"
@@ -50,6 +52,19 @@ def render_review(slug: str, output_dir: Path) -> Path:
     pillar = category_to_pillar(lender["category"])
     answers = related_answers(pillar, limit=6)
     wellness = wellness_guides_by_category(lender["category"], limit=4)
+    state_ctx = state_context(lender.get("state"))
+
+    # Pre-linkify description_long so inline money links appear (parity with Astro's
+    # linkifyDescription helper). Template renders result with |safe.
+    if lender.get("description_long"):
+        lender["description_long_linked"] = linkify_description(
+            lender["description_long"],
+            current_slug=slug,
+            current_category=lender["category"] or "",
+            money_budget=4,
+        )
+    else:
+        lender["description_long_linked"] = ""
 
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATES_DIR)),
@@ -63,6 +78,7 @@ def render_review(slug: str, output_dir: Path) -> Path:
         similar_lenders=similar,
         related_answers=answers,
         wellness_guides=wellness,
+        state_ctx=state_ctx,
     )
 
     out_path = output_dir / "review" / slug / "index.html"

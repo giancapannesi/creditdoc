@@ -91,6 +91,20 @@ def wellness_guides_by_category(category: str, limit: int = 4) -> tuple[dict[str
     return tuple(result)
 
 
+@lru_cache(maxsize=64)
+def state_context(state_name_or_abbr: str | None) -> dict[str, Any] | None:
+    """Look up state regulatory context (payday laws, usury cap, etc.) by name OR abbr."""
+    if not state_name_or_abbr:
+        return None
+    with _connect() as conn:
+        row = conn.execute(
+            "SELECT * FROM state_regulatory_data "
+            "WHERE state_name = ? OR state_code = ? LIMIT 1",
+            (state_name_or_abbr, state_name_or_abbr),
+        ).fetchone()
+    return dict(row) if row else None
+
+
 def category_to_pillar(category: str) -> str:
     """Map lender category → cluster answer pillar (matches Astro logic)."""
     mapping = {

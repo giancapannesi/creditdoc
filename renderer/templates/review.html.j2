@@ -64,6 +64,7 @@
 } | tojson }}
 </script>
 {% endif %}
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body class="min-h-screen flex flex-col">
@@ -81,10 +82,10 @@
 {% if lender.description_short %}
 <p class="text-lg mb-6">{{ lender.description_short }}</p>
 {% endif %}
-{% if lender.description_long %}
+{% if lender.description_long_linked %}
 <section class="mb-8">
-<h2 class="text-2xl font-semibold mb-3">About {{ lender.name }}</h2>
-<div>{{ lender.description_long|safe }}</div>
+<h2 class="text-2xl font-semibold mb-3">{{ lender.name }} Review</h2>
+<div>{{ lender.description_long_linked|safe }}</div>
 </section>
 {% endif %}
 {% if lender.pros %}
@@ -127,7 +128,20 @@
 {% endif %}
 {% if lender.website_url %}
 <section class="mb-8">
-<a href="/go/{{ lender.slug }}/" rel="nofollow noopener" class="btn-primary">Visit {{ lender.name }}</a>
+<a href="/go/{{ lender.slug }}/?source=review_hero" rel="nofollow noopener" class="btn-primary">Visit {{ lender.name }}</a>
+</section>
+{% endif %}
+{% if state_ctx %}
+<section class="mb-8 glass-card p-5">
+<h2 class="text-2xl font-semibold mb-3">State Consumer Finance Context</h2>
+<p class="text-sm text-muted mb-3">{{ state_ctx.state_name }} — {{ lender.category|title }} operates under state consumer credit regulations. Confirm current rules with the state before contracting.</p>
+<ul class="text-sm space-y-1">
+{% if state_ctx.payday_lending_status %}<li>Payday lending: <strong>{{ state_ctx.payday_lending_status }}</strong></li>{% endif %}
+{% if state_ctx.usury_cap_general %}<li>General usury cap: <strong>{{ state_ctx.usury_cap_general }}</strong></li>{% endif %}
+{% if state_ctx.max_apr_cap_personal %}<li>Max personal loan APR: <strong>{{ state_ctx.max_apr_cap_personal }}</strong></li>{% endif %}
+{% if state_ctx.nmls_regulator_name %}<li>Regulator: <a href="{{ state_ctx.nmls_regulator_url }}" rel="nofollow noopener">{{ state_ctx.nmls_regulator_name }}</a></li>{% endif %}
+{% if state_ctx.complaint_filing_url %}<li><a href="{{ state_ctx.complaint_filing_url }}" rel="nofollow noopener">File a complaint with {{ state_ctx.state_name }}</a></li>{% endif %}
+</ul>
 </section>
 {% endif %}
 {% if similar_lenders %}
@@ -167,6 +181,18 @@
 </li>
 {% endfor %}
 </ul>
+</section>
+{% endif %}
+{% if lender.website_url %}
+<aside class="mb-8 glass-card p-5">
+<h3 class="text-lg font-bold mb-2">Quick Summary</h3>
+<p class="text-sm text-muted mb-2">{{ lender.name }} — {{ lender.category|title }}{% if lender.state %} in {{ lender.state }}{% endif %}.</p>
+{% if lender.rating %}<p class="text-sm mb-2">Overall rating: <strong>{{ lender.rating }}/5</strong></p>{% endif %}
+<a href="/go/{{ lender.slug }}/?source=review_sidebar" rel="nofollow noopener" class="btn-primary">Visit {{ lender.name }}</a>
+</aside>
+<section class="mb-8">
+<h2 class="text-2xl font-semibold mb-3">Next Steps</h2>
+<p>Use our <a href="/tools/borrowing-power-quiz/">borrowing power quiz</a> to see how {{ lender.name }} matches your situation, or <a href="/go/{{ lender.slug }}/?source=review_quiz" rel="nofollow noopener">visit {{ lender.name }} directly</a>.</p>
 </section>
 {% endif %}
 <footer class="text-xs text-muted mt-16 pt-4 border-t border-border">
