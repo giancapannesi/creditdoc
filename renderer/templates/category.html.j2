@@ -1,0 +1,175 @@
+{#
+  /categories/[slug]/index.html — Jinja2 template for category hub pages.
+
+  Renders one category from the DB (categories.data JSON) into a static HTML
+  page that hits parity with Astro's [category].astro. Focus: title/meta/
+  canonical, CollectionPage + BreadcrumbList + ItemList JSON-LD, H1,
+  description with inline linker, authority-path grid, top-48 lender grid,
+  wellness guides, loan disclaimer.
+
+  Shared chrome from _header.html + _footer.html.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ category.seo_title or (category.name ~ ' | CreditDoc') }}</title>
+<meta name="description" content="{{ (category.seo_description or category.description or '')|striptags|truncate(160, killwords=True, end='') }}">
+<link rel="canonical" href="https://www.creditdoc.co/categories/{{ category.slug }}/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ category.seo_title or category.name }}">
+<meta property="og:description" content="{{ (category.seo_description or category.description or '')|striptags|truncate(200, killwords=True, end='') }}">
+<meta property="og:url" content="https://www.creditdoc.co/categories/{{ category.slug }}/">
+<meta property="og:site_name" content="CreditDoc">
+<meta property="og:image" content="https://www.creditdoc.co/og-default.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/styles/site.css">
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": category.name,
+  "description": category.seo_description or category.description or "",
+  "url": "https://www.creditdoc.co/categories/" ~ category.slug ~ "/",
+  "numberOfItems": total_count,
+  "provider": {
+    "@type": "Organization",
+    "name": "CreditDoc",
+    "url": "https://www.creditdoc.co"
+  }
+}|tojson }}
+</script>
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"},
+    {"@type": "ListItem", "position": 2, "name": "Categories", "item": "https://www.creditdoc.co/"},
+    {"@type": "ListItem", "position": 3, "name": category.name, "item": "https://www.creditdoc.co/categories/" ~ category.slug ~ "/"}
+  ]
+}|tojson }}
+</script>
+{% if item_list_jsonld %}
+<script type="application/ld+json">
+{{ item_list_jsonld|safe }}
+</script>
+{% endif %}
+</head>
+<body class="min-h-screen bg-bg text-text antialiased">
+{% include "_header.html" %}
+<main>
+  <nav class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li><a href="/" class="hover:text-primary transition-colors">Categories</a></li>
+      <li><span class="mx-1">/</span></li>
+      <li class="text-text font-medium">{{ category.name }}</li>
+    </ol>
+  </nav>
+
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      <h1 class="text-2xl sm:text-3xl font-bold text-text">{{ category.name }}</h1>
+      <p class="mt-3 text-muted leading-relaxed">{{ linked_description|safe }}</p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+    <div class="glass-card p-5">
+      <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <div>
+          <h2 class="text-lg font-bold text-text mb-2">Explore {{ category.name }} Locally</h2>
+          <p class="text-sm text-muted leading-relaxed">Use this category hub with local city guides, state lending rules, answer pages, and CreditDoc data explainers. Listings are directory context, not a recommendation, approval prediction, price quote, or licensing determination.</p>
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {% for city in local_city_links %}
+            <a href="{{ city.href }}" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">{{ category.name }} in {{ city.label }}</a>
+            {% endfor %}
+          </div>
+        </div>
+        <div>
+          <h2 class="text-lg font-bold text-text mb-2">Research the Next Step</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {% for link in action_links %}
+            <a href="{{ link.href }}" class="rounded-lg border border-border bg-bg-alt p-3 transition-colors hover:border-primary">
+              <span class="block text-sm font-semibold text-primary">{{ link.label }}</span>
+              <span class="mt-1 block text-xs leading-relaxed text-muted">{{ link.body }}</span>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+    {% if top_lenders %}
+    <div>
+      <p class="text-sm text-muted mb-6">{{ total_count }} {{ 'company' if total_count == 1 else 'companies' }} found</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for lender in top_lenders %}
+        <article class="glass-card p-5 flex flex-col gap-3">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h3 class="text-base font-semibold text-text"><a href="/review/{{ lender.slug }}/" class="hover:text-primary transition-colors">{{ lender.name }}</a></h3>
+              {% if lender.city or lender.state %}
+              <p class="mt-0.5 text-xs text-muted">{{ lender.city }}{% if lender.city and lender.state %}, {% endif %}{{ lender.state }}</p>
+              {% endif %}
+            </div>
+            {% if lender.company_info and lender.company_info.bbb_rating %}
+            <span class="rounded-full bg-primary-light px-2 py-0.5 text-xs font-semibold text-primary">BBB {{ lender.company_info.bbb_rating }}</span>
+            {% endif %}
+          </div>
+          {% set _teaser = lender.description_short or lender.meta_description or (category.name ~ ' provider profile with CreditDoc-listed context.') %}
+          <p class="text-sm text-muted leading-relaxed">{{ _teaser|striptags|truncate(220, killwords=True, end='') }}</p>
+          <div class="mt-auto pt-2">
+            <a href="/review/{{ lender.slug }}/" class="inline-flex items-center text-sm font-semibold text-primary hover:underline">View Details →</a>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+      {% if total_count > 48 %}
+      <div class="mt-8 text-center">
+        <a href="/search/?category={{ category.slug }}" class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-primary text-primary text-sm font-semibold hover:bg-primary-light transition-colors">View All {{ total_count }} Companies →</a>
+      </div>
+      {% endif %}
+    </div>
+    {% else %}
+    <div class="glass-card p-12 text-center">
+      <h2 class="text-lg font-semibold text-text">Our team is reviewing {{ category.name }} providers</h2>
+      <p class="mt-2 text-sm text-muted max-w-md mx-auto">We're researching pricing, features, and customer review signals. In the meantime, explore related categories.</p>
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="/categories/credit-repair/" class="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors">Browse Credit Repair Companies</a>
+        <a href="/search/" class="inline-flex items-center px-5 py-2.5 rounded-lg border border-border text-sm font-medium text-text hover:bg-bg-alt transition-colors">Search All Services</a>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if wellness_guides %}
+    <div class="mt-10">
+      <h2 class="text-lg font-bold text-text mb-3">Learn Before You Borrow</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {% for guide in wellness_guides %}
+        <a href="/financial-wellness/{{ guide.slug }}/" class="glass-card p-4 hover:border-primary transition-colors group">
+          {% if guide.category_label %}<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary-light text-primary mb-2">{{ guide.category_label }}</span>{% endif %}
+          <h3 class="text-sm font-semibold text-text group-hover:text-primary transition-colors line-clamp-2">{{ guide.title }}</h3>
+          <p class="mt-1 text-xs text-muted line-clamp-2">{{ guide.description }}</p>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if is_loan_category %}
+    <div class="mt-8 p-4 rounded-lg bg-bg-alt border border-border">
+      <p class="text-xs text-muted"><strong>Important:</strong> CreditDoc is not a lender, broker, or financial advisor. APR ranges shown are from each lender's published rates. Your actual rate depends on your creditworthiness, loan amount, and term. We do not collect your personal financial information. <a href="/disclaimer/" class="text-primary hover:underline">Full disclaimer</a>.</p>
+    </div>
+    {% endif %}
+  </section>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>

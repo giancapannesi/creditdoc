@@ -41,6 +41,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from render import (  # noqa: E402
     render_answer,
     render_blog,
+    render_category,
     render_review,
     render_wellness,
 )
@@ -121,6 +122,7 @@ FAMILIES = [
     ("answer",    "answers",             render_answer,   lambda: _slugs("cluster_answers",  "status",            ("published", "approved"))),
     ("blog",      "blog",                render_blog,     lambda: _slugs("blog_posts",       "status",            ("published",))),
     ("wellness",  "financial-wellness",  render_wellness, lambda: _slugs("wellness_guides",  "",                  ())),  # no status column — all rows are considered published
+    ("category",  "categories",          render_category, lambda: _slugs("categories",       "",                  ())),  # all rows published
 ]
 
 

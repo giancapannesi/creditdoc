@@ -29,9 +29,11 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 # lender-loading logic here.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import (  # noqa: E402
+    category_count,
     category_to_pillar,
     glossary_for_review,
     load_blog_post,
+    load_category,
     load_cluster_answer,
     load_lender,
     load_wellness_guide,
@@ -41,6 +43,7 @@ from db import (  # noqa: E402
     sibling_wellness_guides,
     similar_lenders,
     state_context,
+    top_lenders_by_category,
     wellness_guides_by_category,
 )
 from linker import linkify_description  # noqa: E402
@@ -322,6 +325,165 @@ def render_wellness(slug: str, output_dir: Path) -> Path:
     return out_path
 
 
+_CATEGORY_MONEY_MAP: dict[str, dict[str, str]] = {
+    "business-loans": {"href": "/best/best-small-business-loans/", "label": "Small business loan options", "body": "Compare business funding routes, then use calculators to estimate payment pressure."},
+    "personal-loans": {"href": "/best/best-personal-loans-bad-credit/", "label": "Personal loan options", "body": "Compare loan options and qualification context before contacting providers."},
+    "emergency-cash": {"href": "/best/best-payday-loan-alternatives/", "label": "Payday loan alternatives", "body": "Review safer emergency-cash routes before using short-term products."},
+    "payday-alternatives": {"href": "/best/best-payday-loan-alternatives/", "label": "Payday loan alternatives", "body": "Compare lower-risk alternatives and repayment pressure before borrowing."},
+    "credit-repair": {"href": "/best/best-credit-repair-companies/", "label": "Credit repair companies", "body": "Compare credit-repair providers with educational context and report-review steps."},
+    "debt-relief": {"href": "/best/best-debt-relief-companies/", "label": "Debt relief companies", "body": "Compare debt-relief routes and understand settlement, counseling, and payoff trade-offs."},
+    "credit-counseling": {"href": "/best/best-credit-counseling-agencies/", "label": "Credit counseling agencies", "body": "Review counseling options and debt-management context before choosing help."},
+    "build-credit": {"href": "/best/best-credit-builder-loans/", "label": "Credit builder loans", "body": "Compare credit-building routes and understand payment-history trade-offs."},
+    "credit-cards": {"href": "/best/best-secured-credit-cards/", "label": "Secured credit cards", "body": "Compare secured-card deposits, fees, bureau reporting, and graduation context."},
+    "credit-monitoring": {"href": "/best/best-credit-monitoring-services/", "label": "Credit monitoring services", "body": "Compare monitoring tools with identity-theft and report-review context."},
+    "credit-unions": {"href": "/best/best-personal-loan-lenders/", "label": "Personal loan lenders", "body": "Compare borrowing options alongside credit-union and bank profiles."},
+    "banking": {"href": "/best/best-personal-loan-lenders/", "label": "Personal loan lenders", "body": "Compare borrowing options after reviewing banking and credit-union profiles."},
+    "mortgages": {"href": "/tools/borrowing-power-quiz/", "label": "Borrowing power quiz", "body": "Review income, debt, and credit context before comparing mortgage profiles."},
+    "pawn-shops": {"href": "/best/best-payday-loan-alternatives/", "label": "Cash alternatives", "body": "Compare short-term cash alternatives before using collateral or pawn options."},
+    "check-cashing": {"href": "/best/best-payday-loan-alternatives/", "label": "Cash alternatives", "body": "Compare lower-risk alternatives before relying on check-cashing or short-term cash products."},
+}
+_CATEGORY_TOOL_MAP: dict[str, dict[str, str]] = {
+    "business-loans": {"href": "/tools/business-loan-calculator/", "label": "Business loan calculator", "body": "Estimate payment, term, and cost scenarios before comparing lenders."},
+    "credit-repair": {"href": "/resources/credit-report-checklist/", "label": "Credit report checklist", "body": "Organize reports and dispute notes before paying for credit help."},
+    "debt-relief": {"href": "/tools/debt-payoff-calculator/", "label": "Debt payoff calculator", "body": "Estimate payoff paths before comparing relief or counseling options."},
+    "credit-counseling": {"href": "/tools/debt-payoff-calculator/", "label": "Debt payoff calculator", "body": "Frame balances and repayment options before speaking with a counselor."},
+    "credit-cards": {"href": "/tools/credit-score-simulator/", "label": "Credit score simulator", "body": "Model credit-factor scenarios before comparing card options."},
+    "build-credit": {"href": "/tools/credit-score-simulator/", "label": "Credit score simulator", "body": "Model common score-factor scenarios before choosing a credit-building path."},
+    "credit-monitoring": {"href": "/tools/credit-score-simulator/", "label": "Credit score simulator", "body": "Review score-factor context before choosing monitoring products."},
+}
+_WELLNESS_GUIDE_MAP: dict[str, str] = {
+    "credit-repair": "credit-repair",
+    "debt-relief": "financial-recovery",
+    "personal-loans": "loans-and-interest",
+    "check-cashing": "everyday-finance",
+    "credit-counseling": "financial-recovery",
+    "pawn-lenders": "everyday-finance",
+    "buy-here-pay-here": "loans-and-interest",
+}
+_LOCAL_CITY_LINKS = [
+    {"label": "Amarillo, TX", "slug": "amarillo-tx"},
+    {"label": "Austin, TX", "slug": "austin-tx"},
+    {"label": "Charlotte, NC", "slug": "charlotte-nc"},
+]
+
+
+def _soften_category_title(title: str) -> str:
+    """Minimal port of softenCategoryTitle from Astro (word-level cleanup)."""
+    import re as _re
+    t = title
+    t = _re.sub(r'^Best\b', 'Compare', t)
+    t = _re.sub(r'\bBest\b', 'Compare', t)
+    t = _re.sub(r'\btop\b', 'listed', t, flags=_re.IGNORECASE)
+    t = _re.sub(r'\bRight\b', 'Relevant', t)
+    t = _re.sub(r'\bright\b', 'relevant', t)
+    return t
+
+
+def render_category(slug: str, output_dir: Path) -> Path:
+    """Render one /categories/<slug>/index.html from DB. Returns the output path."""
+    cat = load_category(slug)
+    if cat is None:
+        raise SystemExit(f"error: no category with slug '{slug}' in DB")
+
+    top = top_lenders_by_category(slug, limit=48)
+    total = category_count(slug)
+    if total <= 0:
+        total = max(int(cat.get("count") or 0), len(top))
+
+    # Wellness guides use a mapped category label distinct from the lender category.
+    guide_cat = _WELLNESS_GUIDE_MAP.get(slug, "understanding-credit")
+    wellness = wellness_guides_by_category(guide_cat, limit=4)
+
+    # City links reuse /city/ except credit-cards (per Astro behaviour).
+    city_links = []
+    for city in _LOCAL_CITY_LINKS:
+        city_links.append({
+            "label": city["label"],
+            "href": "/categories/credit-cards/" if slug == "credit-cards" else f"/city/{city['slug']}/",
+        })
+
+    # Action links: money (if mapped) + tool (or fallback quiz) + fixed 3
+    money = _CATEGORY_MONEY_MAP.get(slug)
+    tool = _CATEGORY_TOOL_MAP.get(slug) or {
+        "href": "/tools/borrowing-power-quiz/",
+        "label": "Borrowing power quiz",
+        "body": "Frame your borrowing and credit context before comparing providers.",
+    }
+    action_links = []
+    if money:
+        action_links.append(money)
+    action_links.append(tool)
+    action_links.extend([
+        {"href": "/answers/", "label": "Borrower questions", "body": "Read CreditDoc answers that explain common finance terms, risks, and next steps."},
+        {"href": "/state/", "label": "State lending rules", "body": "Check state-level lending-law pages before relying on a general category page."},
+        {"href": "/research/consumer-complaints/", "label": "Complaint data context", "body": "Understand how public CFPB complaint data can support provider research."},
+    ])
+
+    # Prepare category display fields (soften title, provide safe defaults)
+    category_ctx = {
+        "slug": cat.get("slug") or slug,
+        "name": cat.get("name") or slug.replace("-", " ").title(),
+        "description": cat.get("description") or "",
+        "seo_title": _soften_category_title(cat.get("seo_title") or f"{cat.get('name') or slug} | CreditDoc"),
+        "seo_description": cat.get("seo_description") or cat.get("description") or "",
+    }
+
+    # Inline-link the description via the shared linker (matches Astro linker output style).
+    linked_description = linkify_description(
+        category_ctx["description"],
+        current_slug=slug,
+        current_category=slug,
+        money_budget=4,
+    ) if category_ctx["description"] else ""
+
+    is_loan_category = (cat.get("filter_type") == "loan")
+
+    # Pre-build ItemList JSON-LD (Jinja doesn't support Python-style
+    # comprehensions, so we serialise it here.)
+    item_list_jsonld = ""
+    if top:
+        item_list_jsonld = json.dumps({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": f"{category_ctx['name']} Company Profiles",
+            "itemListOrder": "https://schema.org/ItemListOrderDescending",
+            "numberOfItems": len(top),
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": i,
+                    "name": l.get("name") or l.get("slug"),
+                    "url": f"https://www.creditdoc.co/review/{l['slug']}/",
+                }
+                for i, l in enumerate(top, start=1)
+            ],
+        }, ensure_ascii=False)
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("category.html.j2")
+    html = template.render(
+        category=category_ctx,
+        top_lenders=list(top),
+        total_count=total,
+        wellness_guides=list(wellness),
+        local_city_links=city_links,
+        action_links=action_links,
+        is_loan_category=is_loan_category,
+        linked_description=linked_description,
+        item_list_jsonld=item_list_jsonld,
+    )
+
+    out_path = output_dir / "categories" / slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="CreditDoc renderer — Astro-free HTML from DB.",
@@ -360,6 +522,14 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    category = subparsers.add_parser("category", help="Render /categories/[slug]/ page(s)")
+    category.add_argument("--slug", required=True, help="Category slug to render")
+    category.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
@@ -373,6 +543,9 @@ def main() -> None:
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     elif args.command == "wellness":
         out = render_wellness(args.slug, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "category":
+        out = render_category(args.slug, Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()

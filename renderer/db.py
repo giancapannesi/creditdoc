@@ -273,6 +273,48 @@ def sibling_cluster_answers(exclude_slug: str, cluster_pillar: str, limit: int =
     return tuple(dict(r) for r in rows)
 
 
+@lru_cache(maxsize=64)
+def load_category(slug: str) -> dict[str, Any] | None:
+    """Return the category row merged with its data JSON blob."""
+    with _connect() as conn:
+        row = conn.execute("SELECT * FROM categories WHERE slug = ?", (slug,)).fetchone()
+    if row is None:
+        return None
+    blob = json.loads(row["data"] or "{}")
+    out: dict[str, Any] = dict(blob)
+    out.setdefault("slug", row["slug"])
+    return out
+
+
+@lru_cache(maxsize=32)
+def top_lenders_by_category(category: str, limit: int = 48) -> tuple[dict[str, Any], ...]:
+    """Ordered top lenders in a category for the category-grid.
+
+    Matches Astro's getTopLendersByCategoryRuntime ordering:
+    quality_score DESC (nulls last), then slug asc, restricted to indexable statuses.
+    """
+    with _connect() as conn:
+        rows = conn.execute(
+            "SELECT * FROM lenders "
+            "WHERE category = ? AND processing_status IN ('ready_for_index','approved') "
+            "ORDER BY quality_score IS NULL, quality_score DESC, slug LIMIT ?",
+            (category, limit),
+        ).fetchall()
+    return tuple(_merge_lender(r) for r in rows)
+
+
+@lru_cache(maxsize=32)
+def category_count(category: str) -> int:
+    """Total indexable lenders in the category."""
+    with _connect() as conn:
+        row = conn.execute(
+            "SELECT COUNT(*) FROM lenders WHERE category = ? "
+            "AND processing_status IN ('ready_for_index','approved')",
+            (category,),
+        ).fetchone()
+    return int(row[0]) if row else 0
+
+
 def category_to_pillar(category: str) -> str:
     """Map lender category → cluster answer pillar (matches Astro logic)."""
     mapping = {
