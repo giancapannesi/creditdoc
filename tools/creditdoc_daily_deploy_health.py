@@ -50,6 +50,13 @@ LOG_PATH = Path("/srv/BusinessOps/logs/creditdoc_deploy_health.log")
 HARVEY_KEY_PATH = Path("/srv/BusinessOps/tools/.agentmail-api-key")
 FOUNDER_EMAIL = "gian.eao@gmail.com"
 
+# Sitemap URL-count guardrail. Baseline = 27,304 (session-end 2026-07-18).
+# Alarm if drift exceeds SITEMAP_TOLERANCE either direction. Update baseline
+# after any legitimate content-scale change.
+SITEMAP_BASELINE = 27_304
+SITEMAP_TOLERANCE = 200  # ±200 URLs = ~0.7% drift budget
+SITEMAP_INDEX_URL = f"{BASE}/sitemap-index.xml"
+
 
 def probe(url: str) -> tuple[int, float, str | None]:
     """Return (status, elapsed_seconds, error_message_or_None)."""
@@ -63,6 +70,29 @@ def probe(url: str) -> tuple[int, float, str | None]:
         return (exc.code, time.perf_counter() - t0, None)
     except Exception as exc:
         return (0, time.perf_counter() - t0, f"{type(exc).__name__}: {exc}")
+
+
+def count_sitemap_urls() -> tuple[int, str | None]:
+    """Fetch sitemap-index.xml + each child, return (total_url_count, error_or_None)."""
+    import re
+    try:
+        req = urllib.request.Request(SITEMAP_INDEX_URL, headers={"user-agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+            index_xml = resp.read().decode("utf-8", errors="replace")
+    except Exception as exc:
+        return (0, f"sitemap-index fetch failed: {type(exc).__name__}: {exc}")
+
+    child_urls = re.findall(r"<loc>([^<]+)</loc>", index_xml)
+    total = 0
+    for child_url in child_urls:
+        try:
+            req = urllib.request.Request(child_url, headers={"user-agent": USER_AGENT})
+            with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+                child_xml = resp.read().decode("utf-8", errors="replace")
+            total += len(re.findall(r"<loc>", child_xml))
+        except Exception as exc:
+            return (total, f"child sitemap {child_url}: {exc}")
+    return (total, None)
 
 
 def send_alert(failures: list[dict]) -> None:
@@ -117,11 +147,30 @@ def main() -> int:
         results.append(rec)
 
     failures = [r for r in results if r["status"] != 200]
+
+    # Sitemap URL-count guardrail (once per run — cheap, catches drift).
+    sitemap_count, sitemap_err = count_sitemap_urls()
+    sitemap_delta = sitemap_count - SITEMAP_BASELINE
+    sitemap_ok = (sitemap_err is None
+                  and abs(sitemap_delta) <= SITEMAP_TOLERANCE
+                  and sitemap_count > 0)
+    if not sitemap_ok:
+        failures.append({
+            "url": "sitemap-count",
+            "status": sitemap_count,
+            "elapsed_s": 0.0,
+            "error": sitemap_err or f"drift {sitemap_delta:+d} from baseline {SITEMAP_BASELINE} exceeds ±{SITEMAP_TOLERANCE}",
+        })
+
     all_green = not failures
     now = datetime.now(timezone.utc).isoformat()
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
     with LOG_PATH.open("a") as fh:
-        fh.write(json.dumps({"ts": now, "results": results, "all_green": all_green}) + "\n")
+        fh.write(json.dumps({
+            "ts": now, "results": results, "all_green": all_green,
+            "sitemap": {"count": sitemap_count, "baseline": SITEMAP_BASELINE,
+                        "delta": sitemap_delta, "err": sitemap_err},
+        }) + "\n")
 
     if all_green:
         if not args.quiet:
