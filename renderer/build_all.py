@@ -150,7 +150,7 @@ def _browse_wrapper(compound_slug: str, out_dir: Path):
 
 FAMILIES = [
     # (label, family_dir, render_fn, slug_query)
-    ("review",    "review",              render_review,   lambda: _slugs("lenders",          "processing_status", ("ready_for_index", "approved"))),
+    ("review",    "review",              render_review,   lambda: _slugs("lenders",          "processing_status", ("ready_for_index", "approved", "pending_approval"))),
     ("answer",    "answers",             render_answer,   lambda: _slugs("cluster_answers",  "status",            ("published", "approved"))),
     ("blog",      "blog",                render_blog,     lambda: _slugs("blog_posts",       "status",            ("published",))),
     ("wellness",  "financial-wellness",  render_wellness, lambda: _slugs("wellness_guides",  "",                  ())),  # no status column — all rows are considered published

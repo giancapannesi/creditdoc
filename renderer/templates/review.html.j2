@@ -12,6 +12,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{ lender.name }} Review — {{ lender.category|title }} | CreditDoc</title>
 <meta name="description" content="{{ (lender.meta_description or lender.description_short or '')|striptags|truncate(160, killwords=True, end='') }}">
+{% if is_pending %}<meta name="robots" content="noindex, nofollow">{% endif %}
 <link rel="canonical" href="https://www.creditdoc.co/review/{{ lender.slug }}/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{{ lender.name }}">

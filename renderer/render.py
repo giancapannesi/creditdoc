@@ -137,6 +137,8 @@ def render_review(slug: str, output_dir: Path) -> Path:
         trim_blocks=True,
         lstrip_blocks=True,
     )
+    is_pending = lender.get("processing_status") == "pending_approval"
+
     template = env.get_template("review.html.j2")
     html = template.render(
         lender=lender,
@@ -145,6 +147,7 @@ def render_review(slug: str, output_dir: Path) -> Path:
         wellness_guides=wellness,
         state_ctx=state_ctx,
         glossary=glossary,
+        is_pending=is_pending,
     )
 
     out_path = output_dir / "review" / slug / "index.html"
