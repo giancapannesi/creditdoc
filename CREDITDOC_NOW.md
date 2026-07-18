@@ -4,6 +4,55 @@
 
 ---
 
+## 2026-07-18 05:00 UTC — Rock 1 DEPLOYED. Astro adapter DEAD in prod.
+
+**Live Worker version:** `d861f943-ecf1-4b5a-ad35-406bd12d1c67`
+**Founder mandate 3/3 MET and verified live.**
+
+**What shipped this session (branch `cdm-rev-hybrid`):**
+- Rock 1 R1.1 → R1.4: killed `@astrojs/cloudflare` adapter, replaced with hand-rolled `worker/index.ts` (52.85 KiB, was ~5 MB). 6 SSR endpoints ported: /api/geo, /api/search, /api/email-signup, /api/origination-intake, /api/revalidate, /go/[slug]. Wrangler now reads `./worker/index.ts`.
+- `npm run build` = `python3 renderer/build_all.py` (was `astro build`). `astro.config.mjs` renamed to `.DISABLED_2026-07-17`.
+- 50 US state 2-letter code → full-name redirects added to `public/_redirects` (commit `80abb83f12`).
+- Pre-deploy caught + fixed: `REVALIDATE_SECRET` → `REVALIDATE_TOKEN` naming (commit `98372456d3` — matches existing Worker secret).
+- Post-deploy: `@astrojs/cloudflare` removed from package.json + lockfile (commit `c01d780309`, 1,299 lines gone).
+
+**Deploy log:**
+- Build: 18,646 pages / 26,959 HTML files in 29 min via renderer/build_all.py.
+- Wrangler upload: 52.46s.
+- Cache purge: targeted (17 URLs).
+- Auto-verify: 11/11 SSR routes 200.
+- Extended tests: /api/geo returns geo JSON, /go/credit-saint → 302 w/ UTM, /api/revalidate no-token → 401, /api/email-signup no-origin → 403, /api/origination-intake no-origin → 403, /state/ca/ → 301 /state/california/, /categories/fix-my-credit/ → 301 /categories/credit-repair/. /api/search count=3 on short query (long `credit+saint` hits pre-existing Supabase 57014 stmt timeout, NOT a migration regression).
+- Independent debugger agent audit (agent `a7047c67af0a78e3a`): 6/6 PASS, zero errors in 60s `wrangler tail --status error` sample.
+
+**Rollback preserved:**
+- `dist.trashed_r1_1784269927/` (Astro Jul 16 backup, 2.7 GB)
+- `dist.pre_rock1_deploy_1784350657/` (pre-deploy snapshot, 2.1 GB)
+- CF dashboard → Workers → creditdoc → Deployments → "Rollback to previous"
+- `git revert dad12eb0a8..2822c271d4` reverses the Rock 1 code swap
+
+**Mandate items — 3/3 MET:**
+1. `astro build` fires only on framework upgrades — ✓ `astro.config.mjs.DISABLED_2026-07-17`
+2. `dist/` has no `_worker.js/` after clean build — ✓ purged in R1.4. `_astro/` retains 15 bounded artifacts (6 tool JS + 1 CSS + 8 fonts) — refresh only on tool-code/CSS/font changes, not per content change.
+3. Single DB row change → single file live deploy in ≤90s — ✓ Rock 3 `watch_and_rebuild.py` end-to-end ~6s per lender change with 12-family aggregate cascade.
+
+**Deferred (not blocking mandate):**
+- `dist/_astro/` 15 files relocation to `/tools/*.js`, `/styles/`, `/fonts/` (~1h of work, or ~1d to convert tools to inline vanilla JS)
+- `src/middleware.ts` (676 LoC) — dead code but kept as escape hatch
+- Phase 3.3 `/credit-guide/` renderer with Supabase ETL (~8,240 pages, blocked on ETL wiring)
+- 8 pending lender JSON metadata drifts in `src/content/lenders/` (not touching without founder approval per Rule 4 — renderer reads DB not JSONs, no functional impact)
+
+**Reference docs written this session:**
+- `renderer/DEPLOY_RUNBOOK_ROCK1.md` — full runbook (pre-deploy, backup, deploy, smoke tests, rollback, contingencies)
+- `renderer/PHASE_ROCK1_CLOSEOUT.md` — R1.1–R1.4 audit trail
+- `renderer/ROCK_1_PLAN.md` — concrete 4-phase Rock 1 plan
+- `renderer/CREDITDOC_ARCH_REMEDIATION_PLAN_v3.md` — updated with 3/3 DEPLOYED status
+- Memory: `project_creditdoc_renderer_migration.md` — updated with deployed-at + rollback
+
+**Commits this session (chronological on `cdm-rev-hybrid`):**
+`80abb83f12` (R1.1 redirects) → `42c6671458` (R1.2a worker skeleton) → `9c56cb3b65` (R1.2b remaining handlers) → `dad12eb0a8` (R1.3 wrangler swap) → `f2d1485081` (Rock 1 closeout 3/3) → `bcfe2b9af9` (closeout _astro count fix) → `98372456d3` (REVALIDATE_TOKEN rename) → `2822c271d4` (deploy runbook) → `2b8acea8c3` (v3 plan deployed marker) → `c01d780309` (@astrojs/cloudflare dep removal).
+
+---
+
 ## 2026-07-15 - Local landing keyword/meta/subtitle targeting
 
 Status: implemented, debugger/postbuild verified; commit/push pending.
