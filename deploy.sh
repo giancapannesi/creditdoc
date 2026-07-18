@@ -113,7 +113,11 @@ status=$(curl -s -o /dev/null -w "%{http_code}" "https://www.creditdoc.co/")
 css_url=$(curl -s "https://www.creditdoc.co/" | grep -oP 'href="(/[^"]*\.css[^"]*)"' | head -1 | sed 's/href="//;s/"//')
 css_status=$(curl -s -o /dev/null -w "%{http_code}" "https://www.creditdoc.co${css_url}")
 echo "Homepage: $status | CSS ($css_url): $css_status"
-[ "$status" != "200" ] || [ "$css_status" != "200" ] && FAIL=1
+# Note: previous form `[ A ] || [ B ] && FAIL=1` silently missed A-failures due to
+# && binding tighter than the [] || [] sequence. Use explicit if to catch both.
+if [ "$status" != "200" ] || [ "$css_status" != "200" ]; then
+  FAIL=1
+fi
 
 # SSR smoke tests — one URL per dynamic route family
 SSR_URLS=(
