@@ -1,4 +1,20 @@
-# CreditDoc — NEXT ACTIONS (updated 2026-07-03)
+# CreditDoc — NEXT ACTIONS (updated 2026-07-18)
+
+## 2026-07-18 — Post-Rock 1 remaining work (added this session)
+
+**1. Phase 3.3 — /credit-guide/ renderer port (8,240 pages, in progress).**
+Last Astro-authored family. 412 city hubs + 7,828 city×category pages currently frozen at Jul 16 20:58 UTC because `astro.config.mjs` is disabled. Reads `city_guides` Supabase table. Pattern is same as /browse/ + /city/. Templates: `src/pages/credit-guide/[slug]/index.astro` (713 lines) + `[slug]/[category].astro` (585 lines). Est. 4-6 hours: (a) add `city_guides` fetcher to `renderer/db.py`, (b) port hub template to Jinja, (c) port category template to Jinja, (d) wire into `build_all.py` FAMILIES + `watch_and_rebuild.py` FAMILY_DIRS, (e) parity test ≥ 0.80 visible-word ratio vs current Astro-authored HTML.
+
+**2. GSC not-indexed backlog (~364 URLs in latest audit).**
+From `gsc_audit_2026-07-16.md`: 111/475 inspected are PASS, remaining 364 are "URL is unknown to Google" (majority), "Crawled - currently not indexed", or "Excluded by noindex tag". Buckets hit hardest: /brand/ (50/50), /answers/ (49/50), /compare/ (41/50), /browse/ (40/40 — but now redirect to /categories/ per 2026-07-18 fix). Work: (a) diff GSC audit vs known-good sitemap, (b) submit not-indexed URLs to Indexing API in prioritized batches (money pages first — /best/, /answers/), (c) monitor which move to PASS over 2-week windows, (d) for URLs stuck ≥30 days despite valid content, investigate whether internal linking is too weak (few inbound links from indexed pages).
+
+**3. Quarantined lender records.**
+`quarantine_dump_archive_batch_2026-06-05.csv` + `quarantine_candidates_need_decision.csv` in `Batch 1` and 80-row decision file. Records in `lenders` table with `processing_status='quarantined'` are intentionally excluded from renderer output (renderer only processes `('ready_for_index', 'pending_approval')`). Work: (a) inventory current quarantined count, (b) surface the 80 candidates for founder decision (promote-to-ready, hard-delete, or keep-quarantined), (c) for any moved to `ready_for_index`, they auto-appear on next renderer run — no code change needed.
+
+**4. Cron safety net (post-Rock 1).**
+`watch_and_rebuild.py --deploy` (the per-file deploy cron) is currently PAUSED. All content-generation crons that call `npm run build` are PAUSED (blog, wellness, comparisons, cluster executor, two-week SEO runner). DB writers (guardian, sync, cfpb, backup) still active — safe because they only touch SQLite + JSON, never deploy. **Site is safe from unwanted rebuilds/deploys** — but new DB rows won't hit live until `watch_and_rebuild.py` is un-paused (which requires all 13 renderer families to be stable). Reactivate order: (a) test watch_and_rebuild.py manually first, (b) un-pause when Phase 3.3 credit-guide port is complete OR when we accept credit-guide will be manually-refreshed only.
+
+---
 
 ## 2026-07-05 - Next: remove remaining crawler dependence on dynamic Astro SSR
 
