@@ -27,6 +27,10 @@ AUDIT_REPORT_*.md
 *.pdf
 audit-*.md
 content_drip_log.json
+# Per-run state snapshots from crons — noise, not history
+reports/website-status/*.json
+reports/bing-indexnow-watchdog/*.json
+reports/seo-debug/*.json
 scripts/__pycache__/
 tools/__pycache__/
 __pycache__/
