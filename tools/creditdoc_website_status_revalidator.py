@@ -158,30 +158,22 @@ def fetch_summary(url: str) -> tuple[str, str, str]:
     return code, final_url, title
 
 
-def remove_status_fields(path: Path, checked_date: str) -> bool:
-    text = path.read_text()
-    original = text
-    text = re.sub(r'\n\s+"website_status":\s+"[^"]+",', "", text)
-    text = re.sub(
-        r'("website_status_checked":\s+")[^"]+(")',
-        rf"\g<1>{checked_date}\2",
-        text,
-        count=1,
-    )
-    if '"website_status_checked"' not in text:
-        text = re.sub(
-            r'("last_engine_run":\s+"[^"]+",)',
-            rf'\1\n  "website_status_checked": "{checked_date}",',
-            text,
-            count=1,
+def clear_status_in_db(slug: str, checked_date: str, reason: str) -> bool:
+    """Wipe website_status in the DB (source of truth) so the guardian
+    DB→JSON sync can't re-corrupt the file. Writing JSON directly here was
+    the 2026-07-18 bug: revalidator stripped JSON, guardian restored it
+    from the still-bad DB row within 5 min.
+    """
+    sys.path.insert(0, str(ROOT))
+    from tools.creditdoc_db import CreditDocDB
+    with CreditDocDB() as db:
+        res = db.update_lender(
+            slug,
+            {"website_status": None, "website_status_checked": checked_date},
+            updated_by="founder",
+            reason=f"revalidator: {reason}",
         )
-    if not text.endswith("\n"):
-        text += "\n"
-    if text != original:
-        json.loads(text)
-        path.write_text(text)
-        return True
-    return False
+        return res["changed"] > 0
 
 
 def main() -> int:
@@ -239,9 +231,9 @@ def main() -> int:
         }
         report["checked"].append(row)
         if args.apply:
-            changed = remove_status_fields(info["path"], today)
+            changed = clear_status_in_db(slug, today, FALSE_WARNING_SLUGS[slug])
             if changed:
-                report["changed"].append({"slug": slug, "path": str(info["path"]), "checked": today})
+                report["changed"].append({"slug": slug, "checked": today, "layer": "db"})
 
     report["remaining_warning_count"] = len(current_hard_warnings())
     report_path.write_text(json.dumps(report, indent=2) + "\n")
