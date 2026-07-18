@@ -47,6 +47,7 @@ from render import (  # noqa: E402
     render_category,
     render_city,
     render_compare,
+    render_credit_guide_hub,
     render_review,
     render_state,
     render_state_lending_laws,
@@ -161,7 +162,23 @@ FAMILIES = [
     ("compare",   "compare",             render_compare,  lambda: [c["slug"] for c in all_comparisons()]),  # head-to-head lender comparisons (JSON + 2 lender rows)
     ("state-laws","state",               render_state_lending_laws, lambda: [f"{s['slug']}/lending-laws" for s in all_states_with_lending_laws()]),  # /state/<slug>/lending-laws/
     ("best",      "best",                render_best,     lambda: [l["slug"] for l in all_listicles()]),  # 27 money-page listicles from src/content/listicles.json
+    ("credit-guide-hub", "credit-guide", render_credit_guide_hub,
+        lambda: _credit_guide_slugs()),  # 412 /credit-guide/<slug>/index.html hubs (Supabase city_guides)
 ]
+
+
+def _credit_guide_slugs() -> list[str]:
+    """Fetch city_guide slugs from Supabase (via renderer.db_remote).
+
+    Isolated in a helper so import-time failure to reach Supabase doesn't
+    break the whole FAMILIES tuple — only the credit-guide family fails.
+    """
+    try:
+        import db_remote
+        return [g["slug"] for g in db_remote.all_city_guides() if g.get("slug")]
+    except Exception as exc:
+        print(f"[build_all] credit-guide-hub: cannot fetch slugs from Supabase — {exc}")
+        return []
 
 
 def _purge_stale(family_dir: str, keep_slugs: set[str]) -> tuple[int, list[str]]:

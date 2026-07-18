@@ -1983,6 +1983,14 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    guide_hub = subparsers.add_parser("credit-guide-hub", help="Render /credit-guide/[slug]/ city hub")
+    guide_hub.add_argument("--slug", required=True, help="city_guide slug (e.g. dallas-tx)")
+    guide_hub.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
@@ -2024,6 +2032,9 @@ def main() -> None:
     elif args.command == "state-laws":
         # compound_slug shape for render_state_lending_laws is "<slug>/lending-laws"
         out = render_state_lending_laws(f"{args.slug}/lending-laws", Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "credit-guide-hub":
+        out = render_credit_guide_hub(args.slug, Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()

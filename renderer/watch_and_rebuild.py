@@ -192,6 +192,7 @@ FAMILY_DIRS = {
     "compare": "compare",
     "best": "best",
     "state-laws": "state",  # compound path — file lives at dist/state/<slug>/lending-laws/index.html
+    "credit-guide-hub": "credit-guide",  # dist/credit-guide/<slug>/index.html
 }
 
 
