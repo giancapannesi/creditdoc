@@ -647,6 +647,188 @@ def render_city(slug: str, output_dir: Path) -> Path:
     return out_path
 
 
+def render_credit_guide_hub(slug: str, output_dir: Path) -> Path:
+    """Render one /credit-guide/<slug>/index.html.
+
+    Reads the city_guide row from Supabase (via db_remote), joins with local
+    SQLite data (state row, lenders, categories), and writes the hub page.
+    Phase 3.3a — replaces the Astro-authored index.astro (713 lines).
+    """
+    import db_remote  # noqa: E402
+
+    guide = db_remote.get_city_guide(slug)
+    if guide is None:
+        raise SystemExit(f"error: no city_guide with slug '{slug}' in Supabase (need status=ready_for_index)")
+
+    city = guide["city"]
+    state_abbr = guide.get("state_abbr", "")
+    state_name = guide.get("state_name", "")
+    body = guide.get("body_inline") or {}
+
+    state_slug = state_name.lower().replace(" ", "-")
+    state_rows = [s for s in all_states_with_lending_laws() if s.get("slug") == state_slug]
+    state_row = state_rows[0] if state_rows else None
+    state_data = state_row.get("body_inline") if state_row else None
+    state_hub_exists = bool(state_row)
+
+    # Credit repair laws — either JSON dict or plain string on the state row.
+    crl = state_data.get("credit_repair_laws") if isinstance(state_data, dict) else None
+    if isinstance(crl, dict):
+        parts = []
+        parts.append(crl.get("state_statute") or "State credit repair law")
+        if crl.get("statute_code"):
+            parts[-1] += f" ({crl['statute_code']})"
+        parts[-1] += "."
+        if crl.get("upfront_fees_prohibited"):
+            parts.append("Upfront fees prohibited.")
+        if crl.get("cancellation_period_days"):
+            parts.append(f"{crl['cancellation_period_days']}-day cancellation period.")
+        if crl.get("bond_required"):
+            parts.append(f"${crl.get('bond_amount') or '25,000'} bond required.")
+        credit_repair_summary = " ".join(parts)
+    elif isinstance(crl, str):
+        credit_repair_summary = crl
+    else:
+        credit_repair_summary = None
+
+    # Lenders in state + city (from SQLite).
+    state_lenders_all = list(lenders_in_state(state_abbr)) if state_abbr else []
+
+    def _valid(l: dict[str, Any]) -> bool:
+        desc = (l.get("description_short") or "")
+        if any(bad in desc for bad in ("403 Forbidden", "Unable to verify", "Unable to generate")):
+            return False
+        return bool(desc) and len(desc) >= 30
+
+    valid_lenders = [l for l in state_lenders_all[:30] if _valid(l)]
+    city_lower = city.lower().replace(" ", "-")
+    city_lenders = [
+        l for l in valid_lenders
+        if (l.get("city") or "").lower() == city.lower()
+        or (l.get("slug") and city_lower in l["slug"])
+    ]
+    nearby_lenders = city_lenders if city_lenders else valid_lenders[:12]
+    listed_count = len(state_lenders_all)
+
+    # Category display names.
+    cat_names: dict[str, str] = {}
+    for c in all_categories():
+        s = c.get("slug")
+        if s:
+            cat_names[s] = c.get("name") or s
+
+    # Local category href map (Astro's localCategoryHref).
+    aliases = {"debt-consolidation": "debt-relief", "fix-my-credit": "credit-repair", "payday-loans": "payday-alternatives"}
+    def _local_href(cat_slug: str) -> str:
+        canonical = aliases.get(cat_slug, cat_slug)
+        if canonical == "credit-cards":
+            return "/categories/credit-cards/"
+        return f"/credit-guide/{slug}/{canonical}/"
+
+    # Sibling city guides in same state (excluding self).
+    sibling_guides = [g for g in db_remote.city_guides_by_state(state_abbr) if g.get("slug") != slug][:12]
+
+    # Body content — editorial paragraphs + FAQ + tips + local resources.
+    editorial_raw = body.get("editorial") or ""
+    editorial_paras = [p for p in re.split(r"</p>\s*<p>", editorial_raw, flags=re.IGNORECASE) if p.strip()]
+    editorial_paras = [re.sub(r"</?p[^>]*>", "", p, flags=re.IGNORECASE).strip() for p in editorial_paras]
+    editorial_paras = [linkify_description(p, money_budget=2) for p in editorial_paras if p]
+
+    local_questions = body.get("local_questions") or []
+    def _linkify_answer(a: str) -> str:
+        if re.search(r"<[a-z][\s\S]*>", a, flags=re.IGNORECASE):
+            return a  # already HTML
+        return linkify_description(a, money_budget=2)
+    faqs = [{"q": faq.get("q", ""), "a": _linkify_answer(faq.get("a", ""))} for faq in local_questions]
+
+    credit_tips_raw = body.get("credit_tips") or []
+    def _strip_inline(v: str) -> str:
+        v = re.sub(r"<a\b[^>]*>(.*?)</a>", r"\1", v, flags=re.IGNORECASE | re.DOTALL)
+        v = re.sub(r"<[^>]+>", "", v)
+        return v.strip()
+    credit_tips = [linkify_description(_strip_inline(t), money_budget=2) for t in credit_tips_raw]
+
+    sba_info = body.get("sba_info") or {}
+    consumer_protection = body.get("consumer_protection") or {}
+    local_resources = body.get("local_resources") or []
+
+    # SEO.
+    seo_title = guide.get("seo_title") or f"Credit Repair & Financial Services in {city}, {state_abbr} | CreditDoc"
+    seo_description = guide.get("meta_description") or (
+        f"Find credit repair companies, personal lenders, SBA resources, and financial services in "
+        f"{city}, {state_name}. Local credit guide with {state_name} lending laws and consumer protections."
+    )
+
+    # JSON-LD (WebPage + BreadcrumbList + FAQPage if any).
+    webpage_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": f"Credit Guide for {city}, {state_abbr}",
+        "description": seo_description,
+        "url": f"https://www.creditdoc.co/credit-guide/{slug}/",
+        "about": {"@type": "City", "name": city, "containedInPlace": {"@type": "State", "name": state_name}},
+        "publisher": {"@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co"},
+    })
+    breadcrumb_items = [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"}]
+    if state_hub_exists:
+        breadcrumb_items.append({"@type": "ListItem", "position": 2, "name": state_name, "item": f"https://www.creditdoc.co/state/{state_slug}/"})
+        breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": f"{city} Credit Guide", "item": f"https://www.creditdoc.co/credit-guide/{slug}/"})
+    else:
+        breadcrumb_items.append({"@type": "ListItem", "position": 2, "name": f"{city} Credit Guide", "item": f"https://www.creditdoc.co/credit-guide/{slug}/"})
+    breadcrumb_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": breadcrumb_items,
+    })
+    faq_jsonld = ""
+    if faqs:
+        faq_jsonld = _safe_jsonld_str({
+            "@context": "https://schema.org", "@type": "FAQPage",
+            "mainEntity": [
+                {"@type": "Question", "name": f["q"], "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
+                for f in faqs[:10]
+            ],
+        })
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("credit_guide_hub.html.j2")
+    html = template.render(
+        slug=slug,
+        guide=guide,
+        city=city,
+        state_abbr=state_abbr,
+        state_name=state_name,
+        state_slug=state_slug,
+        state_hub_exists=state_hub_exists,
+        state_data=state_data,
+        credit_repair_summary=credit_repair_summary,
+        listed_count=listed_count,
+        nearby_lenders=nearby_lenders,
+        cat_names=cat_names,
+        local_href=_local_href,
+        sibling_guides=sibling_guides,
+        editorial_paras=editorial_paras,
+        faqs=faqs,
+        credit_tips=credit_tips,
+        sba_info=sba_info,
+        consumer_protection=consumer_protection,
+        local_resources=local_resources,
+        seo_title=seo_title,
+        seo_description=seo_description,
+        webpage_jsonld=webpage_jsonld,
+        breadcrumb_jsonld=breadcrumb_jsonld,
+        faq_jsonld=faq_jsonld,
+    )
+
+    out_path = output_dir / "credit-guide" / slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
 def render_brand(slug: str, output_dir: Path) -> Path:
     """Render one /brand/<slug>/index.html from src/content/brands/<slug>.json + lenders."""
     brand = load_brand(slug)

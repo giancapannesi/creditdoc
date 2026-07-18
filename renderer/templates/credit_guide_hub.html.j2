@@ -1,0 +1,257 @@
+{#
+  /credit-guide/[slug]/index.html — Jinja2 template for city credit-guide hubs.
+
+  Renders one city-level credit guide hub. Data comes from Supabase
+  city_guides (body_inline JSONB) joined with local SQLite state row and
+  lenders. Ports src/pages/credit-guide/[slug]/index.astro (713 LoC).
+
+  Focus: content parity for SEO — title/meta/canonical, WebPage +
+  BreadcrumbList + FAQPage JSON-LD, H1, hero, editorial paragraphs,
+  localized FAQ, state lending laws box, SBA/consumer protection,
+  credit tips, categories menu, sibling cities, affiliate disclosure.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ seo_title }}</title>
+<meta name="description" content="{{ seo_description|striptags|truncate(160, killwords=True, end='') }}">
+<link rel="canonical" href="https://www.creditdoc.co/credit-guide/{{ slug }}/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ seo_title }}">
+<meta property="og:description" content="{{ seo_description|striptags|truncate(200, killwords=True, end='') }}">
+<meta property="og:url" content="https://www.creditdoc.co/credit-guide/{{ slug }}/">
+<meta property="og:site_name" content="CreditDoc">
+<meta property="og:image" content="https://www.creditdoc.co/og-default.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/styles/site.css">
+<script type="application/ld+json">
+{{ webpage_jsonld|safe }}
+</script>
+<script type="application/ld+json">
+{{ breadcrumb_jsonld|safe }}
+</script>
+{% if faq_jsonld %}
+<script type="application/ld+json">
+{{ faq_jsonld|safe }}
+</script>
+{% endif %}
+</head>
+<body class="min-h-screen bg-bg text-text antialiased">
+{% include "_header.html" %}
+<main>
+  <nav class="max-w-6xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      {% if state_hub_exists %}
+        <li><a href="/state/{{ state_slug }}/" class="hover:text-primary transition-colors">{{ state_name }}</a></li>
+        <li class="text-border">/</li>
+      {% else %}
+        <li class="text-muted">{{ state_name }}</li>
+        <li class="text-border">/</li>
+      {% endif %}
+      <li class="text-text font-medium">{{ city }} Credit Guide</li>
+    </ol>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-text mb-3">
+        Credit Repair &amp; Financial Services in {{ city }}, {{ state_abbr }}
+      </h1>
+      <p class="text-lg text-muted max-w-3xl">
+        Your complete local credit guide for {{ city }}, {{ state_name }}. Find credit repair companies, compare lenders, understand {{ state_name }} lending laws, and access local financial resources.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+      {% if guide.population %}
+      <div class="glass-card p-4 text-center">
+        <p class="text-2xl font-bold text-primary">{{ '{:,}'.format(guide.population) }}</p>
+        <p class="text-xs text-muted mt-1">Population</p>
+      </div>
+      {% endif %}
+      <div class="glass-card p-4 text-center">
+        <p class="text-2xl font-bold text-text">{{ listed_count }}</p>
+        <p class="text-xs text-muted mt-1">Listed Companies</p>
+      </div>
+    </div>
+
+    <section class="glass-card p-5 mb-8">
+      <h2 class="text-lg font-bold text-text mb-2">Plan Your Next Step in {{ city }}</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        Use this guide as a local starting point: compare provider categories, check {{ state_name }} lending rules, read consumer-finance answers, and use CreditDoc tools before contacting a company.
+      </p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href="{{ local_href('personal-loans') }}" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Personal loans in {{ city }}</a>
+        {% if state_hub_exists %}
+          <a href="/state/{{ state_slug }}/lending-laws/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">{{ state_name }} lending laws</a>
+        {% else %}
+          <a href="/research/consumer-complaints/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Consumer protection</a>
+        {% endif %}
+        <a href="/answers/how-to-get-a-personal-loan/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Borrowing questions</a>
+        <a href="/tools/borrowing-power-quiz/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Borrowing power quiz</a>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 space-y-8">
+
+        {% if editorial_paras %}
+        <section class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">Credit Landscape in {{ city }}</h2>
+          <div class="prose prose-sm text-muted max-w-none">
+            {% for p in editorial_paras %}<p>{{ p|safe }}</p>{% endfor %}
+          </div>
+        </section>
+        {% endif %}
+
+        {% if faqs %}
+        <section class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">Credit Questions People Ask in {{ city }}</h2>
+          <div class="space-y-4">
+            {% for faq in faqs %}
+            <details class="group border border-border rounded-lg">
+              <summary class="cursor-pointer px-4 py-3 text-sm font-semibold text-text">{{ faq.q }}</summary>
+              <div class="px-4 pb-4 text-sm text-muted">{{ faq.a|safe }}</div>
+            </details>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+
+        {% if state_data %}
+        <section class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">{{ state_name }} Lending Laws That Apply in {{ city }}</h2>
+          <div class="space-y-3">
+            {% if state_data.usury_cap %}
+            <div><p class="font-semibold text-text text-sm">Interest Rate Cap</p><p class="text-sm text-muted">{{ state_data.usury_cap }}</p></div>
+            {% endif %}
+            {% if state_data.payday_loan_status %}
+            <div><p class="font-semibold text-text text-sm">Payday Lending</p><p class="text-sm text-muted">{{ state_data.payday_loan_status }} in {{ state_name }}</p></div>
+            {% endif %}
+            {% if credit_repair_summary %}
+            <div><p class="font-semibold text-text text-sm">Credit Repair Regulations</p><p class="text-sm text-muted">{{ credit_repair_summary }}</p></div>
+            {% endif %}
+            {% if state_data.consumer_rights_summary %}
+            <div><p class="font-semibold text-text text-sm">Consumer Rights</p><p class="text-sm text-muted">{{ state_data.consumer_rights_summary }}</p></div>
+            {% endif %}
+          </div>
+          {% if state_hub_exists %}
+          <div class="mt-4 pt-3 border-t border-border">
+            <a href="/state/{{ state_slug }}/lending-laws/" class="text-sm text-primary hover:underline">View full {{ state_name }} lending laws &rarr;</a>
+          </div>
+          {% endif %}
+        </section>
+        {% endif %}
+
+        {% if sba_info.office %}
+        <section class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">SBA &amp; Small Business Resources Near {{ city }}</h2>
+          <div class="mb-4 p-4 bg-surface-alt rounded-lg">
+            <p class="font-semibold text-text text-sm">{{ sba_info.office }}</p>
+            {% if sba_info.address %}<p class="text-sm text-muted">{{ sba_info.address }}</p>{% endif %}
+            {% if sba_info.phone %}<p class="text-sm text-muted">{{ sba_info.phone }}</p>{% endif %}
+            {% if sba_info.programs %}
+            <div class="mt-2 flex flex-wrap gap-2">
+              {% for p in sba_info.programs %}<span class="text-xs px-2 py-1 bg-primary-light text-primary rounded-full">{{ p }}</span>{% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          <a href="/best/best-sba-loans/" class="text-sm text-primary hover:underline">SBA lender profiles serving {{ city }} &rarr;</a>
+        </section>
+        {% endif %}
+
+        {% if credit_tips %}
+        <section class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">How to Improve Your Credit in {{ city }}</h2>
+          <ol class="space-y-3 list-decimal list-inside">
+            {% for tip in credit_tips %}
+            <li class="text-sm text-muted leading-relaxed">{{ tip|safe }}</li>
+            {% endfor %}
+          </ol>
+          <div class="mt-4 pt-3 border-t border-border flex flex-wrap gap-3">
+            <a href="/best/best-credit-repair-companies/" class="text-sm text-primary hover:underline">Credit repair options in {{ city }} &rarr;</a>
+            <a href="/tools/borrowing-power-quiz/" class="text-sm text-primary hover:underline">Estimate borrowing power in {{ city }} &rarr;</a>
+          </div>
+        </section>
+        {% endif %}
+
+        {% if consumer_protection.agency %}
+        <section class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">Consumer Protection in {{ state_name }}</h2>
+          <div class="p-4 bg-surface-alt rounded-lg">
+            <p class="font-semibold text-text text-sm">{{ consumer_protection.agency }}</p>
+            {% if consumer_protection.phone %}<p class="text-sm text-muted mt-1">Phone: {{ consumer_protection.phone }}</p>{% endif %}
+            {% if consumer_protection.url %}<p class="text-sm text-muted mt-1"><a href="{{ consumer_protection.url }}" target="_blank" rel="noopener" class="text-primary hover:underline">{{ consumer_protection.url }}</a></p>{% endif %}
+            {% if consumer_protection.filing_info %}<p class="text-sm text-muted mt-2">{{ consumer_protection.filing_info }}</p>{% endif %}
+          </div>
+        </section>
+        {% endif %}
+
+        {% if local_resources %}
+        <section class="glass-card p-6">
+          <h2 class="text-xl font-bold text-text mb-4">Local Financial Resources in {{ city }}</h2>
+          <ul class="space-y-3">
+            {% for r in local_resources %}
+            <li class="p-3 bg-surface-alt rounded-lg">
+              <p class="font-semibold text-text text-sm">{{ r.name }}{% if r.type %} <span class="text-xs text-muted">— {{ r.type }}</span>{% endif %}</p>
+              {% if r.address %}<p class="text-xs text-muted">{{ r.address }}</p>{% endif %}
+              {% if r.phone %}<p class="text-xs text-muted">{{ r.phone }}</p>{% endif %}
+              {% if r.url %}<p class="text-xs"><a href="{{ r.url }}" target="_blank" rel="noopener" class="text-primary hover:underline">{{ r.url }}</a></p>{% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+
+      </div>
+
+      <aside class="space-y-6">
+        <section class="glass-card p-5">
+          <h2 class="text-base font-bold text-text mb-3">Browse by Category</h2>
+          <ul class="space-y-2">
+            {% for cat_slug, cat_name in cat_names.items() %}
+            <li><a href="{{ local_href(cat_slug) }}" class="text-sm text-primary hover:underline">{{ cat_name }} in {{ city }}</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+
+        {% if sibling_guides %}
+        <section class="glass-card p-5">
+          <h2 class="text-base font-bold text-text mb-3">Other {{ state_name }} Cities</h2>
+          <ul class="space-y-2">
+            {% for g in sibling_guides %}
+            <li><a href="/credit-guide/{{ g.slug }}/" class="text-sm text-primary hover:underline">{{ g.city }} Credit Guide</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+
+        {% if nearby_lenders %}
+        <section class="glass-card p-5">
+          <h2 class="text-base font-bold text-text mb-3">Providers Near {{ city }}</h2>
+          <ul class="space-y-3">
+            {% for l in nearby_lenders[:6] %}
+            <li>
+              <a href="/review/{{ l.slug }}/" class="text-sm font-semibold text-text hover:text-primary">{{ l.name }}</a>
+              {% if l.category %}<p class="text-xs text-muted">{{ cat_names.get(l.category, l.category) }}</p>{% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+      </aside>
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-border text-xs text-muted">
+      <p><strong>Affiliate disclosure:</strong> CreditDoc may earn a commission when readers open accounts with providers listed on this page. Compensation does not influence editorial rankings. See our full <a href="/disclosure/" class="text-primary hover:underline">disclosure</a>.</p>
+    </div>
+  </div>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>
