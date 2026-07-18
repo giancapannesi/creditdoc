@@ -4,6 +4,37 @@
 
 ---
 
+## 2026-07-18 08:30 UTC — SESSION COMPLETE. All Astro dead. Zero 404s.
+
+**Final live worker version:** `a641d28f-d1f3-423f-8ae4-ca891c5a11e4`
+
+**What shipped after Rock 1 (in order):**
+1. `481ef251a4` + `a480727bbc` — Phase 3.3a: `render_credit_guide_hub` + `db_remote.py` Supabase fetcher + build wiring. 413 city hubs render in 61s.
+2. `648138190b` — Phase 3.3c: `render_credit_guide_category` + `credit_guide_category.html.j2`. 7,847 city×category pages render in 356s. Parity vs live 15/15 PASS (avg 1.152x). Deployed version `8a508715`.
+3. `79f904cf4a` — pending_approval `/review/` renders with `noindex,nofollow` (was 404-ing from sitemap). 403 slugs added. 16,178/16,178 review render in 22min. Deployed version `d05d9421`.
+4. `5f6738f65c` — 18 `/browse/` hub 404s → 301 to `/categories/`. Deployed version `a8a6d4b8`.
+5. `6eb81c7646` — deploy.sh operator-precedence bug fix + new `tools/creditdoc_daily_deploy_health.py` (2h cron, emails Harvey on fail).
+6. `95a9c707ef` — last 2 spam-slug `/review/` redirects. Task #11 (1,900 404s) closed. Deployed version `a641d28f`.
+
+**Post-session debugger audit (agent `aa6304bcaee8aec82`): 9/9 PASS.**
+- 500 random sitemap URLs: 500/500 → 200
+- 6 dynamic Worker endpoints: geo/search/go/revalidate/email-signup/origination-intake all correct
+- Wrangler tail 45s error stream: zero events
+- noindex correct on both pending_approval and credit-guide/[cat]/
+- Health check cron confirmed on crontab, manual run exit 0
+- astro.config.mjs disabled, @astrojs/cloudflare removed, no _worker.js in dist
+
+**Renderer coverage (from live sitemap):** review 16,109 | credit-guide 8,260 | trends 714 | answers 496 | browse 467 | compare 394 | city 330 | financial-wellness 140 | blog 130 | state 101 | brand 57 | best 27 | categories 19 | other 60 = **27,304 total**.
+
+**Debugger's ranked next-steps (highest-impact first):**
+1. Add sitemap URL-count self-test to `creditdoc_daily_deploy_health.py` (fail if count deviates from baseline ±100)
+2. Add daily wrangler tail error sampling with Harvey alert on any exception
+3. Purge Cloudflare cache post-deploy in deploy.sh (per feedback_always_purge_cache_after_deploy.md)
+4. Backfill credit-guide for pending_approval slugs when promoted → ready_for_index
+5. Delete `src/middleware.ts` (676 LoC dead code) — escape hatch no longer needed
+6. Inline the 15 `dist/_astro/` tool JS bundles (removes last framework fingerprints)
+7. Watch Bing recrawl (7-14 days) — fingerprint-fixes shipped Jul 16 may enable recovery
+
 ## 2026-07-18 06:50 UTC — Phase 3.3a shipped (city_guide hub renderer)
 
 **In-progress:** Phase 3.3 — port /credit-guide/ (last Astro-authored family, 8,240 pages).
