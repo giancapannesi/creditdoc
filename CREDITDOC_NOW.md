@@ -4,6 +4,31 @@
 
 ---
 
+## 2026-07-18 06:50 UTC — Phase 3.3a shipped (city_guide hub renderer)
+
+**In-progress:** Phase 3.3 — port /credit-guide/ (last Astro-authored family, 8,240 pages).
+
+**Shipped this session tick:**
+- `renderer/db_remote.py` — Supabase PostgREST fetcher (413 city_guides loaded, cached in-memory). Commit `d4cf8f8329`.
+- `render_credit_guide_hub()` + `templates/credit_guide_hub.html.j2` — 100+ LoC render function + 250-line Jinja template. Ports `src/pages/credit-guide/[slug]/index.astro` (713 lines). Commit `481ef251a4`.
+- `build_all.py` FAMILIES + `render.py` CLI `credit-guide-hub` subcommand + `watch_and_rebuild.py` FAMILY_DIRS. Commit `a480727bbc`.
+
+**Batch render test (Phase 3.3a):** 413/413 pages rendered in 60.9s, zero failures. Visible-word parity: 8/8 random-slug sample PASS at avg ratio 0.833 (gate ≥0.80).
+
+**NOT YET DEPLOYED.** Renderer output goes to `renderer_dist/` — NOT touching `dist/credit-guide/` (which still has Astro-authored HTML from Jul 16 20:58 UTC). Reason: don't want mixed authorship (Python hubs + Astro categories) in prod. Wait until Phase 3.3c ports the category template, then deploy both together.
+
+**Phase 3.3c remaining (next session):**
+- Port `src/pages/credit-guide/[slug]/[category].astro` (585 lines) → `credit_guide_category.html.j2`. 
+- Complexity: 14 category-specific intro paragraphs (categoryIntros dict), 13 category-specific answer keyword maps, YMYL soft-copy via `softenYmylCopy()`, per-category FAQ selection logic.
+- Renders 7,828 city × category pages (413 cities × ~19 categories).
+- Est. 2-3 hours: (a) port introFn dict + softenYmylCopy helper, (b) render function, (c) Jinja template, (d) wire into build_all + watch_and_rebuild, (e) parity gate 5+ random slugs.
+
+**Deploy plan (after 3.3c):**
+1. Full renderer build → `renderer_dist/`
+2. Parity gate on 20+ random slugs from both hub + category output
+3. If ≥0.80 across the board → `cp -r renderer_dist/credit-guide dist/credit-guide` → wrangler deploy
+4. Un-pause `watch_and_rebuild.py --deploy` cron so city_guides row updates auto-flow to prod
+
 ## 2026-07-18 05:00 UTC — Rock 1 DEPLOYED. Astro adapter DEAD in prod.
 
 **Live Worker version:** `d861f943-ecf1-4b5a-ad35-406bd12d1c67`
