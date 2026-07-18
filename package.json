@@ -4,9 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "wrangler dev worker/index.ts --assets dist",
-    "check:no-ssr": "node scripts/check_no_ssr_regression.mjs",
     "build": "python3 renderer/build_all.py",
-    "build:astro": "astro build || echo 'astro disabled — restore astro.config.mjs to run legacy build'",
     "check:answer-meta": "node scripts/creditdoc_answer_meta_audit.mjs",
     "seo:answer-meta:apply": "node scripts/creditdoc_answer_meta_audit.mjs --apply --limit 50",
     "test:comparison-batch": "node --test test/comparison_batch_utils.test.mjs",
@@ -28,15 +26,11 @@
     "comparison:batch:check": "node scripts/run_comparison_batch_guarded.mjs --mode check",
     "comparison:live-check": "node scripts/check_live_comparison_batch.mjs",
     "comparison:campaign:report": "node scripts/write_comparison_campaign_report.mjs",
-    "comparison:campaign:can-continue": "node scripts/check_comparison_campaign_can_continue.mjs",
-    "preview": "astro preview",
-    "astro": "astro"
+    "comparison:campaign:can-continue": "node scripts/check_comparison_campaign_can_continue.mjs"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.0",
     "@fontsource/inter": "^5.2.8",
     "@tailwindcss/vite": "^4.2.1",
-    "astro": "^5.17.1",
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {

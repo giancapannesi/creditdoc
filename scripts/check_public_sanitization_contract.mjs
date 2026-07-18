@@ -8,17 +8,31 @@ const REPORT_DIR = join(ROOT, 'reports', 'seo-debug');
 const TODAY = new Date().toISOString().slice(0, 10);
 const REPORT_PATH = join(REPORT_DIR, `public_sanitization_contract_${TODAY}.json`);
 
+// Sources that emit public HTML/JSON. Updated 2026-07-18 after Astro→Python renderer migration:
+// Jinja2 templates and hand-rolled Worker replace all src/pages/*.astro + src/middleware.ts.
 const PUBLIC_SOURCE_GLOBS = [
-  'src/components/CityLandingEnhancement.astro',
-  'src/pages/r/[slug].ts',
-  'src/pages/review/[slug].astro',
-  'src/pages/state/[slug].astro',
-  'src/pages/categories/[category].astro',
-  'src/pages/credit-guide/[slug]/[category].astro',
-  'src/pages/brand/[brand].astro',
-  'src/pages/api/lender/[slug].ts',
-  'src/pages/go/[slug].ts',
-  'src/middleware.ts',
+  'renderer/templates/review.html.j2',
+  'renderer/templates/answer.html.j2',
+  'renderer/templates/best.html.j2',
+  'renderer/templates/blog.html.j2',
+  'renderer/templates/wellness.html.j2',
+  'renderer/templates/category.html.j2',
+  'renderer/templates/city.html.j2',
+  'renderer/templates/brand.html.j2',
+  'renderer/templates/state.html.j2',
+  'renderer/templates/browse.html.j2',
+  'renderer/templates/trends.html.j2',
+  'renderer/templates/compare.html.j2',
+  'renderer/templates/state_lending_laws.html.j2',
+  'renderer/templates/credit_guide_hub.html.j2',
+  'renderer/templates/credit_guide_category.html.j2',
+  'worker/index.ts',
+  'worker/handlers/search.ts',
+  'worker/handlers/go.ts',
+  'worker/handlers/geo.ts',
+  'worker/handlers/email-signup.ts',
+  'worker/handlers/origination-intake.ts',
+  'worker/handlers/revalidate.ts',
   'src/lib/cache.ts',
 ];
 

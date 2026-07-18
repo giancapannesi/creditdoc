@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import signal
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -67,16 +68,26 @@ def sample_errors(window_seconds: int) -> tuple[list[dict], str | None]:
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
+            start_new_session=True,
         )
         try:
             stdout, stderr = proc.communicate(timeout=window_seconds)
         except subprocess.TimeoutExpired:
-            proc.terminate()
+            try:
+                os.killpg(proc.pid, signal.SIGTERM)
+            except ProcessLookupError:
+                pass
             try:
                 stdout, stderr = proc.communicate(timeout=5)
             except subprocess.TimeoutExpired:
-                proc.kill()
-                stdout, stderr = proc.communicate()
+                try:
+                    os.killpg(proc.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                try:
+                    stdout, stderr = proc.communicate(timeout=3)
+                except subprocess.TimeoutExpired:
+                    stdout, stderr = "", "wrangler-tail hang: SIGKILL of process group did not release pipes"
     except FileNotFoundError:
         return ([], "wrangler not found on PATH")
 

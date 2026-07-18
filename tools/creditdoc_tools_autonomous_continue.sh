@@ -70,7 +70,7 @@ fi
   git status --short
 
   if [[ -n "$(git status --porcelain=v1)" ]]; then
-    npm run build
+    # Renderer watcher (*/5 * * * *) picks up DB changes and deploys per-slug — no full rebuild needed
     git add -A
     git commit -m "tools: continue CreditDoc origination funnel work"
     echo "Committed autonomous progress on $BRANCH."
