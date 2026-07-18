@@ -53,9 +53,9 @@ export async function handleRevalidate(request: Request, env: Env): Promise<Resp
     return jsonResponse({ ok: false, error: "POST only" }, 405, { allow: "POST" });
   }
 
-  const expected = env.REVALIDATE_SECRET;
+  const expected = env.REVALIDATE_TOKEN;
   if (!expected) {
-    return jsonResponse({ ok: false, error: "REVALIDATE_SECRET not configured" }, 503);
+    return jsonResponse({ ok: false, error: "REVALIDATE_TOKEN not configured" }, 503);
   }
   const provided = request.headers.get("x-revalidate-token");
   if (provided !== expected) {

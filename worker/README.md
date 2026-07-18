@@ -35,7 +35,7 @@ worker/
 - `SUPABASE_URL` — https://pndpnjjkhknmutlmlwsk.supabase.co
 - `SUPABASE_ANON_KEY` — RLS-protected anon JWT
 - `SUPABASE_SERVICE_ROLE_KEY` — needed only for `/api/revalidate`; other endpoints use anon
-- `REVALIDATE_SECRET` — HMAC secret for revalidate endpoint
+- `REVALIDATE_TOKEN` — HMAC secret for revalidate endpoint
 - `EMAIL_SIGNUP_WEBHOOK` — outbound email service URL
 
 ## Local dev
