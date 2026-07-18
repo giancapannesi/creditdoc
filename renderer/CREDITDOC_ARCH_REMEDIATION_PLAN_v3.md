@@ -204,8 +204,13 @@ The mandate is met when **all three** are true:
    deploys the corresponding single page to production in ≤90 seconds
    with no full-site rebuild.
 
-Currently 0/3. This plan gets us to 3/3 in ~7 working days if Phase 3.3
-Supabase ETL doesn't slip.
+**Status 2026-07-18 05:00 UTC — 3/3 MET AND DEPLOYED TO PROD.**
+
+- Item 1 ✓ `npm run build` = `python3 renderer/build_all.py`. `astro.config.mjs` renamed to `.DISABLED_2026-07-17`.
+- Item 2 ✓ `_worker.js/` purged (Rock 1 R1.4). `_astro/` retains 15 bounded artifacts (6 tool JS + 1 CSS + 8 fonts) — content changes do not touch these.
+- Item 3 ✓ Rock 3 `watch_and_rebuild.py` end-to-end ~6s per lender change (well under 90s).
+
+Live production Worker: Version ID `d861f943-ecf1-4b5a-ad35-406bd12d1c67` (`worker/index.ts`, 52.85 KiB, replaces ~5 MB Astro adapter). Deployed via `./deploy.sh` after 8/8 pre-deploy debug audit PASS. All 11 built-in smoke tests + 8 extended endpoint/redirect tests verified 200/302/301/401/403 as expected. Runbook: `renderer/DEPLOY_RUNBOOK_ROCK1.md`.
 
 ## What we deliberately don't do in v3
 
