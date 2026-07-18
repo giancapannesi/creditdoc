@@ -829,6 +829,366 @@ def render_credit_guide_hub(slug: str, output_dir: Path) -> Path:
     return out_path
 
 
+_CATEGORY_INTROS: dict[str, Any] = {
+    "credit-repair": lambda c, s, d: (
+        f"Looking for credit repair help in {c}, {s}? Federal law (CROA) protects your right to dispute "
+        f"inaccurate items on your credit report, and {s} adds additional consumer protections. "
+        + ("State law prohibits credit repair companies from charging upfront fees before services are delivered. "
+           if isinstance(d, dict) and (d.get("credit_repair_laws") or {}).get("upfront_fees_prohibited") else "")
+        + ((f"Companies must maintain a {(d.get('credit_repair_laws') or {}).get('bond_amount') or '$25,000'} surety bond. ")
+           if isinstance(d, dict) and (d.get("credit_repair_laws") or {}).get("bond_required") else "")
+        + ((f"You have {(d.get('credit_repair_laws') or {}).get('cancellation_period_days')} days to cancel any credit repair contract without penalty. ")
+           if isinstance(d, dict) and (d.get("credit_repair_laws") or {}).get("cancellation_period_days") else "")
+        + f"Below are credit repair companies serving {c} residents — compare their services, check their CFPB complaint record, and verify they follow {s} regulations before signing any contract."
+    ),
+    "personal-loans": lambda c, s, d: (
+        f"Need a personal loan in {c}, {s}? "
+        + (f"{s} caps interest rates at {d.get('usury_cap')}. " if isinstance(d, dict) and d.get("usury_cap") else "")
+        + f"Whether you're consolidating debt, covering an emergency expense, or funding a major purchase, review the listed lender profiles below for APR fields, loan amounts, and eligibility context. {s} residents should verify lender licensing or registration with the state Department of Banking before borrowing."
+    ),
+    "emergency-cash": lambda c, s, d: (
+        f"Need emergency cash in {c}, {s}? "
+        + (f"{s} has banned payday lending, limiting payday-loan availability in the state. "
+           if isinstance(d, dict) and d.get("payday_loan_status") == "Banned"
+           else f"{s} restricts payday lending with rate caps and loan limits. "
+           if isinstance(d, dict) and d.get("payday_loan_status") == "Restricted"
+           else f"Payday lending may be available in {s}, and listed APRs can be very high. ")
+        + f"The profiles below include short-term cash, title-loan, pawn-service, and emergency personal-loan contexts associated with {c}. Compare terms carefully and verify fees before borrowing."
+    ),
+    "debt-relief": lambda c, s, d: (
+        f"Struggling with debt in {c}, {s}? Debt relief companies may advertise creditor negotiation, "
+        f"consolidated payments, or structured repayment programs. {s} has specific statutes of limitation "
+        f"on debt collection that affect your rights. Review the listed debt relief profiles associated with "
+        f"{c}, and consider consulting a HUD-approved credit counselor before committing to any program."
+    ),
+    "build-credit": lambda c, s, d: (
+        f"Building credit in {c}, {s}? Whether you're starting from scratch or rebuilding after financial "
+        f"hardship, the profiles below may be relevant to secured cards, credit-builder loans, and "
+        f"reporting services. Verify terms, fees, and bureau-reporting details before applying."
+    ),
+    "free-help": lambda c, s, d: (
+        f"Looking for free financial help in {c}, {s}? Nonprofit credit counseling agencies, legal aid "
+        f"organizations, and government-funded programs may offer no-cost assistance for debt, foreclosure, "
+        f"or credit issues. HUD-approved counselors are required to provide free initial consultations. "
+        f"Below are free-help resources listed for this area."
+    ),
+    "business-loans": lambda c, s, d: (
+        f"Need business financing in {c}, {s}? From SBA-backed loans to microloans and lines of credit, "
+        f"{c} entrepreneurs can compare several research paths. The SBA {s} District Office can point "
+        f"business owners toward participating lender programs and free mentoring through SCORE. Review "
+        f"the listed business-lender profiles below for loan size, rate, and eligibility context."
+    ),
+    "pawn-shops": lambda c, s, d: (
+        f"Looking for pawn shops in {c}, {s}? Pawn loans are collateral-based products tied to personal "
+        f"property, with fees, redemption periods, and item-recovery rules to verify before signing. "
+        f"{s} regulates pawn transactions including maximum interest rates and minimum redemption "
+        f"periods. Review the pawn-shop profiles associated with {c} below."
+    ),
+    "payday-alternatives": lambda c, s, d: (
+        f"Looking for payday loan alternatives in {c}, {s}? "
+        + (f"Since {s} bans payday lending, these alternatives may be relevant for {c} residents "
+           f"researching short-term cash options. "
+           if isinstance(d, dict) and d.get("payday_loan_status") == "Banned"
+           else f"Compare listed costs, eligibility rules, and repayment terms against any payday loan "
+                f"option available in {s}. ")
+        + f"Credit union payday alternative loans (PALs), employer advances, and emergency assistance "
+        f"programs can provide lower-cost context for short-term borrowing research."
+    ),
+}
+
+_CATEGORY_QUESTION_TERMS: dict[str, list[str]] = {
+    "credit-repair": ["credit repair", "repair company", "dispute"],
+    "personal-loans": ["personal loan", "loan", "borrow"],
+    "emergency-cash": ["emergency", "cash", "payday", "alternative"],
+    "debt-relief": ["debt", "consolidation", "relief"],
+    "build-credit": ["improve my credit", "build credit", "credit score", "secured"],
+    "free-help": ["free", "counselor", "help", "legal aid"],
+    "business-loans": ["sba", "business loan", "small business"],
+    "pawn-shops": ["pawn"],
+    "credit-monitoring": ["identity theft", "monitoring", "credit score"],
+    "payday-alternatives": ["payday", "alternative", "cash"],
+    "credit-cards": ["secured", "credit card", "build credit"],
+    "banking": ["bank", "credit union"],
+    "credit-unions": ["credit union"],
+}
+
+_CATEGORY_ANSWER_KEYWORDS: dict[str, list[str]] = {
+    "credit-repair": ["build-credit-score-fast", "build-credit-with-no", "does-credit-score-affect"],
+    "personal-loans": ["best-personal-loans-bad-credit", "how-to-get-a-personal-loan", "personal-loan-interest-rates", "how-to-find-best-personal-loan", "how-much-can-you-borrow"],
+    "emergency-cash": ["best-personal-loans-bad-credit", "how-much-can-you-borrow", "how-to-get-a-personal-loan"],
+    "debt-relief": ["debt-consolidation-loans-bad-credit", "debt-consolidation-vs-personal", "can-i-do-debt-consolidation", "can-you-do-debt-consolidation"],
+    "build-credit": ["build-credit-with-no", "build-credit-score-fast", "secured-credit-card", "top-secured-credit-cards"],
+    "free-help": ["can-i-do-debt-consolidation-myself", "can-you-do-debt-consolidation-yourself", "build-credit-with-no"],
+    "business-loans": ["small-business-loans", "how-to-apply-for-a-business-loan", "how-to-get-an-sba-loan", "business-loan-rates-fees", "business-line-of-credit"],
+    "pawn-shops": ["how-much-can-you-borrow", "best-personal-loans-bad-credit"],
+    "credit-monitoring": ["does-credit-score-affect", "build-credit-score-fast"],
+    "payday-alternatives": ["best-personal-loans-bad-credit", "how-much-can-you-borrow", "how-to-get-a-personal-loan"],
+    "credit-cards": ["easy-approval-credit-cards", "how-credit-card-interest-works", "no-credit-check-cards", "secured-credit-card"],
+    "banking": ["how-much-can-you-borrow", "how-to-get-a-personal-loan"],
+    "credit-unions": ["how-much-can-you-borrow", "build-credit-with-no"],
+}
+
+
+def _soften_ymyl(text: str) -> str:
+    """Minimal port of src/utils/safe-copy.ts softenYmylCopy. Covers highest-frequency
+    YMYL patterns; extend as parity issues surface."""
+    if not text:
+        return text
+    replacements = [
+        (r"\bmoney-back guarantees\b", "listed refund terms"),
+        (r"\bmoney-back guarantee\b", "listed refund term"),
+        (r"\bfull money-back refund\b", "published refund term"),
+        (r"\bperformance guarantee\b", "provider-stated performance term"),
+        (r"\bcredit score guarantee\b", "score-increase refund term"),
+        (r"\bscore-increase guarantee\b", "score-increase refund term"),
+        (r"\bguarantee terms\b", "listed refund terms"),
+        (r"\bstronger guarantee\b", "more detailed listed refund term"),
+        (r"\bbacked by a guarantee\b", "with a published refund term"),
+        (r"\bassurance of results\b", "published-term context"),
+        (r"\bguaranteed results\b", "published-term context"),
+        (r"\bguaranteed removal\b", "listed dispute context"),
+        (r"\bguaranteed approval\b", "listed approval context"),
+        (r"\bwe guarantee\b", "the provider states"),
+        (r"\byou will\b", "you may"),
+        (r"\bwill increase\b", "may increase"),
+        (r"\bwill improve\b", "may improve"),
+        (r"\bwill remove\b", "may dispute for removal of"),
+    ]
+    for pat, repl in replacements:
+        text = re.sub(pat, repl, text, flags=re.IGNORECASE)
+    return text
+
+
+def _all_answer_refs() -> list[dict[str, Any]]:
+    """Return {slug,title} for all published/approved cluster answers.
+
+    Mirrors getAllAnswerRefsBuildTime() from Astro (which hit Supabase 'answers').
+    We use local SQLite cluster_answers which has the same shape.
+    """
+    conn = sqlite3.connect("data/creditdoc.db")
+    conn.row_factory = sqlite3.Row
+    try:
+        rows = conn.execute(
+            "SELECT slug, title FROM cluster_answers WHERE status IN ('published', 'approved')"
+        ).fetchall()
+        return [{"slug": r["slug"], "title": r["title"]} for r in rows]
+    finally:
+        conn.close()
+
+
+def _filter_answer_refs(patterns: list[str], limit: int = 6) -> list[dict[str, Any]]:
+    if not patterns:
+        return []
+    lower = [p.lower() for p in patterns]
+    out: list[dict[str, Any]] = []
+    for ref in _all_answer_refs():
+        s = (ref.get("slug") or "").lower()
+        if any(p in s for p in lower):
+            out.append(ref)
+            if len(out) >= limit:
+                break
+    return out
+
+
+def render_credit_guide_category(compound_slug: str, output_dir: Path) -> Path:
+    """Render one /credit-guide/<city_slug>/<category>/index.html.
+
+    compound_slug shape: "<city_slug>/<category>" (e.g. "dallas-tx/personal-loans").
+    Ports src/pages/credit-guide/[slug]/[category].astro (585 LoC).
+    """
+    import db_remote  # noqa: E402
+
+    if "/" not in compound_slug:
+        raise SystemExit(f"error: credit-guide category slug must be '<city>/<category>', got '{compound_slug}'")
+    city_slug, category = compound_slug.split("/", 1)
+
+    guide = db_remote.get_city_guide(city_slug)
+    if guide is None:
+        raise SystemExit(f"error: no city_guide with slug '{city_slug}' in Supabase")
+
+    cat_row = next((c for c in all_categories() if c.get("slug") == category), None)
+    if cat_row is None:
+        raise SystemExit(f"error: no category with slug '{category}'")
+    cat_name = cat_row.get("name") or category
+
+    city = guide["city"]
+    state_abbr = guide.get("state_abbr", "")
+    state_name = guide.get("state_name", "")
+    guide_data = guide.get("body_inline") or {}
+
+    state_slug = state_name.lower().replace(" ", "-")
+    state_rows = [s for s in all_states_with_lending_laws() if s.get("slug") == state_slug]
+    state_row = state_rows[0] if state_rows else None
+    state_data = state_row.get("body_inline") if state_row else None
+    state_hub_exists = bool(state_row)
+
+    is_atm = category == "atm"
+
+    # Localized intro (category × state).
+    intro_fn = _CATEGORY_INTROS.get(category)
+    if is_atm:
+        local_intro = (
+            f"Use this page to browse selected ATM and cash access profiles associated with {state_name}. "
+            f"CreditDoc does not maintain a complete, real-time inventory of every ATM in {city}; for the "
+            f"nearest machine, verify availability directly with your bank, credit union, or ATM network before you go."
+        )
+    elif intro_fn:
+        local_intro = intro_fn(city, state_name, state_data)
+    else:
+        local_intro = (
+            f"Review {cat_name.lower()} provider profiles associated with {city}, {state_name}. "
+            f"Compare local and statewide profile context, and check stored Google ratings where available."
+        )
+
+    # Lenders in state × category (SQLite).
+    all_state_lenders = list(lenders_in_state(state_abbr)) if state_abbr else []
+    def _valid(l: dict[str, Any]) -> bool:
+        desc = (l.get("description_short") or "")
+        if any(bad in desc for bad in ("403 Forbidden", "Unable to verify", "Unable to generate")):
+            return False
+        return bool(desc) and len(desc) >= 30
+    cat_lenders = [l for l in all_state_lenders if l.get("category") == category and _valid(l)][:100]
+
+    city_lower = city.lower().replace(" ", "-")
+    city_lenders = [l for l in cat_lenders if l.get("slug") and city_lower in l["slug"]]
+    state_only_lenders = [l for l in cat_lenders if l not in city_lenders]
+    sorted_lenders = city_lenders + state_only_lenders
+
+    # Soften descriptions once for template consumption.
+    def _prep_lender(l: dict[str, Any]) -> dict[str, Any]:
+        return {
+            **l,
+            "description_short_soft": _soften_ymyl(l.get("description_short") or ""),
+        }
+    city_lenders = [_prep_lender(l) for l in city_lenders]
+    state_only_lenders = [_prep_lender(l) for l in state_only_lenders]
+
+    # Local FAQ filtered by category terms.
+    local_qs = guide_data.get("local_questions") or []
+    if not isinstance(local_qs, list):
+        local_qs = []
+    terms = _CATEGORY_QUESTION_TERMS.get(category, [cat_name.lower()])
+    def _hay(faq: dict) -> str:
+        a = re.sub(r"<[^>]+>", " ", faq.get("a") or "")
+        return f"{faq.get('q','')} {a}".lower()
+    matched = [f for f in local_qs if any(t in _hay(f) for t in terms)][:4]
+    faqs_raw = matched if matched else local_qs[:3]
+    def _prep_faq(f: dict) -> dict:
+        a = f.get("a", "")
+        has_html = bool(re.search(r"<[a-z][\s\S]*>", a, flags=re.IGNORECASE))
+        return {"q": f.get("q", ""), "a": a if has_html else f"<p>{a}</p>"}
+    faqs = [_prep_faq(f) for f in faqs_raw if f.get("q") and f.get("a")]
+
+    # Related answers.
+    answer_keywords = _CATEGORY_ANSWER_KEYWORDS.get(category, ["personal-loan", "credit-score"])
+    related_answers_list = _filter_answer_refs(answer_keywords, 6)
+
+    # Sibling city guides + related categories.
+    sibling_guides = [g for g in db_remote.city_guides_by_state(state_abbr) if g.get("slug") != city_slug][:8]
+    related_cats = [c for c in all_categories() if c.get("slug") != category][:10]
+
+    def _local_related_href(cat_slug: str) -> str:
+        if cat_slug == "credit-cards":
+            return "/categories/credit-cards/"
+        return f"/credit-guide/{city_slug}/{cat_slug}/"
+
+    # SEO.
+    if is_atm:
+        seo_description = (
+            f"Browse selected ATM and cash access profiles for {city}, {state_name}. "
+            f"Verify current ATM availability directly with your bank, credit union, or ATM network."
+        )
+    else:
+        seo_description = (
+            f"Review {len(sorted_lenders)} listed {cat_name.lower()} profiles associated with "
+            f"{city}, {state_name}. Compare local context, ratings, reviews, and contact details."
+        )
+    seo_title = f"{cat_name} in {city}, {state_abbr} — Local Directory | CreditDoc"
+
+    from datetime import date
+    today = date.today().isoformat()
+
+    list_name = (f"Selected {state_name} {cat_name} Profiles"
+                 if is_atm and not city_lenders
+                 else f"{cat_name} Serving {city}, {state_abbr}")
+
+    # JSON-LD.
+    breadcrumb_items = [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"}]
+    pos = 2
+    if state_hub_exists:
+        breadcrumb_items.append({"@type": "ListItem", "position": pos, "name": state_name, "item": f"https://www.creditdoc.co/state/{state_slug}/"})
+        pos += 1
+    breadcrumb_items.append({"@type": "ListItem", "position": pos, "name": f"{city} Credit Guide", "item": f"https://www.creditdoc.co/credit-guide/{city_slug}/"})
+    pos += 1
+    breadcrumb_items.append({"@type": "ListItem", "position": pos, "name": f"{cat_name} in {city}", "item": f"https://www.creditdoc.co/credit-guide/{city_slug}/{category}/"})
+
+    breadcrumb_jsonld = _safe_jsonld_str({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": breadcrumb_items})
+    collection_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org", "@type": "CollectionPage",
+        "name": seo_title, "description": seo_description,
+        "url": f"https://www.creditdoc.co/credit-guide/{city_slug}/{category}/",
+        "inLanguage": "en-US", "dateModified": today,
+        "about": {"@type": "FinancialService", "serviceType": cat_name,
+                  "areaServed": {"@type": "City", "name": city,
+                                 "containedInPlace": {"@type": "State", "name": state_name}}},
+        "publisher": {"@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co"},
+    })
+    item_list_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org", "@type": "ItemList", "name": list_name,
+        "url": f"https://www.creditdoc.co/credit-guide/{city_slug}/{category}/",
+        "numberOfItems": len(sorted_lenders),
+        "itemListElement": [
+            {"@type": "ListItem", "position": i+1, "item": {
+                "@type": "FinancialService", "name": l.get("name"),
+                "url": f"https://www.creditdoc.co/review/{l['slug']}/",
+                "serviceType": cat_name,
+                "areaServed": {"@type": "City" if l in [x for x in city_lenders] else "State",
+                               "name": city if l in [x for x in city_lenders] else state_name}}}
+            for i, l in enumerate(sorted_lenders[:12])
+        ],
+    }) if sorted_lenders else ""
+    faq_jsonld = ""
+    if faqs:
+        faq_jsonld = _safe_jsonld_str({
+            "@context": "https://schema.org", "@type": "FAQPage",
+            "mainEntity": [
+                {"@type": "Question", "name": f["q"],
+                 "acceptedAnswer": {"@type": "Answer", "text": re.sub(r"<[^>]+>", " ", f["a"]).strip()}}
+                for f in faqs
+            ],
+        })
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("credit_guide_category.html.j2")
+    html = template.render(
+        city_slug=city_slug, category=category,
+        city=city, state_abbr=state_abbr, state_name=state_name, state_slug=state_slug,
+        state_hub_exists=state_hub_exists,
+        cat_name=cat_name, is_atm=is_atm,
+        local_intro=local_intro, list_name=list_name,
+        city_lenders=city_lenders, state_only_lenders=state_only_lenders,
+        n_sorted=len(sorted_lenders),
+        faqs=faqs, related_answers=related_answers_list,
+        sibling_guides=sibling_guides, related_cats=related_cats,
+        local_related_href=_local_related_href,
+        seo_title=seo_title, seo_description=seo_description,
+        breadcrumb_jsonld=breadcrumb_jsonld,
+        collection_jsonld=collection_jsonld,
+        item_list_jsonld=item_list_jsonld,
+        faq_jsonld=faq_jsonld,
+    )
+
+    out_path = output_dir / "credit-guide" / city_slug / category / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
 def render_brand(slug: str, output_dir: Path) -> Path:
     """Render one /brand/<slug>/index.html from src/content/brands/<slug>.json + lenders."""
     brand = load_brand(slug)
@@ -1991,6 +2351,15 @@ def main() -> None:
         help="Output directory (default: renderer_dist/)",
     )
 
+    guide_cat = subparsers.add_parser("credit-guide-cat", help="Render /credit-guide/[slug]/[cat]/ page")
+    guide_cat.add_argument("--slug", required=True,
+                            help="Compound slug '<city_slug>/<category>' (e.g. dallas-tx/personal-loans)")
+    guide_cat.add_argument(
+        "--output-dir",
+        default=str(REPO_ROOT / "renderer_dist"),
+        help="Output directory (default: renderer_dist/)",
+    )
+
     args = parser.parse_args()
 
     if args.command == "review":
@@ -2035,6 +2404,9 @@ def main() -> None:
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     elif args.command == "credit-guide-hub":
         out = render_credit_guide_hub(args.slug, Path(args.output_dir))
+        print(f"rendered: {out} ({out.stat().st_size} bytes)")
+    elif args.command == "credit-guide-cat":
+        out = render_credit_guide_category(args.slug, Path(args.output_dir))
         print(f"rendered: {out} ({out.stat().st_size} bytes)")
     else:
         parser.print_help()

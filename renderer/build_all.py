@@ -47,6 +47,7 @@ from render import (  # noqa: E402
     render_category,
     render_city,
     render_compare,
+    render_credit_guide_category,
     render_credit_guide_hub,
     render_review,
     render_state,
@@ -164,6 +165,8 @@ FAMILIES = [
     ("best",      "best",                render_best,     lambda: [l["slug"] for l in all_listicles()]),  # 27 money-page listicles from src/content/listicles.json
     ("credit-guide-hub", "credit-guide", render_credit_guide_hub,
         lambda: _credit_guide_slugs()),  # 412 /credit-guide/<slug>/index.html hubs (Supabase city_guides)
+    ("credit-guide-cat", "credit-guide", render_credit_guide_category,
+        lambda: _credit_guide_category_slugs()),  # 7,828 /credit-guide/<slug>/<cat>/index.html pages
 ]
 
 
@@ -178,6 +181,19 @@ def _credit_guide_slugs() -> list[str]:
         return [g["slug"] for g in db_remote.all_city_guides() if g.get("slug")]
     except Exception as exc:
         print(f"[build_all] credit-guide-hub: cannot fetch slugs from Supabase — {exc}")
+        return []
+
+
+def _credit_guide_category_slugs() -> list[str]:
+    """City × category compound slugs for the 7,828 /credit-guide/<city>/<cat>/ pages."""
+    try:
+        import db_remote
+        from db import all_categories as _cats
+        cities = [g["slug"] for g in db_remote.all_city_guides() if g.get("slug")]
+        cats = [c["slug"] for c in _cats() if c.get("slug")]
+        return [f"{city}/{cat}" for city in cities for cat in cats]
+    except Exception as exc:
+        print(f"[build_all] credit-guide-cat: cannot fetch pairs — {exc}")
         return []
 
 
