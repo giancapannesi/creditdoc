@@ -154,3 +154,48 @@ mv astro.config.mjs.DISABLED_2026-07-17 astro.config.mjs
 Choose off-peak (US low traffic, EU-CAT sleeping): 02:00-06:00 UTC ideal.
 Not a hard constraint — mandate says continuous deploy latency ≤90s so
 even during traffic peak the blast radius is bounded.
+
+## Post-deploy validation (2026-07-18 05:00 UTC — SUCCESS)
+
+**Version ID:** `d861f943-ecf1-4b5a-ad35-406bd12d1c67`
+**Deployed:** 2026-07-18 05:00 UTC
+**Verified:** 2026-07-18 05:50 UTC (agent `a3afa421085dd35a7`)
+
+**Deploy sequence run:**
+- Build: 18,646 pages / 26,959 HTML files in 29 min (renderer/build_all.py)
+- Wrangler upload: 52.46s, 52.85 KiB bundle (down from ~5 MB Astro adapter)
+- Targeted cache purge: 17 URLs
+- Built-in smoke tests: 11/11 SSR routes 200
+
+**Extended endpoint tests (post-deploy):**
+- `/api/geo` → 200 JSON `{"city":"Boston",...}`
+- `/api/search?q=lex&limit=3` → 200 JSON `count=3, total_matched=12`
+- `/go/credit-saint` → 302 with `location: creditsaint.com` + UTM
+- `/api/revalidate` no auth → 401
+- `/api/email-signup` no origin → 403
+- `/api/origination-intake` no origin → 403
+- `/state/ca/` → 301 `/state/california/`
+- `/categories/fix-my-credit/` → 301 `/categories/credit-repair/`
+
+**Full site audit (independent agent):**
+| Section | Result |
+|---|---|
+| Sitemap sanity (6 child sitemaps, 27,291 URLs, 40-URL random sample) | PASS |
+| Route-family sample (60 URLs across 12 families) | PASS |
+| Static content pages (8 URLs incl. tools) | PASS |
+| Dynamic Worker endpoints (6 endpoints) | PASS |
+| Legacy redirects (8 tested) | PASS |
+| Static asset integrity (CSS + `_astro/*.js`) | PASS |
+| Wrangler tail error stream (2 × 45-90s windows) | PASS (0 errors) |
+| Recent GSC/sitemap audit review | PASS |
+
+**Regressions found: NONE.** Zero 404s outside of deliberately-testing-non-existent URLs, zero 5xx, zero Worker exceptions.
+
+**Known non-migration issue:** `/api/search` returns Supabase code 57014 (statement_timeout) on long queries like `credit+saint`. Short queries work. This is pre-existing Supabase query perf, not caused by the Worker port — the PostgREST query was byte-equivalent from the Astro-era endpoint.
+
+## Post-deploy cleanup landed
+- `98372456d3` — worker Env `REVALIDATE_SECRET` → `REVALIDATE_TOKEN` (matches existing Worker secret)
+- `2822c271d4` — this deploy runbook
+- `2b8acea8c3` — v3 plan marked 3/3 DEPLOYED
+- `c01d780309` — `@astrojs/cloudflare` removed from package.json + lockfile (1,299 line reduction)
+- `d1f6ff96c0` — NOW handoff for next session
