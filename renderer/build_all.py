@@ -26,6 +26,7 @@ from __future__ import annotations
 import argparse
 import fcntl
 import os
+import json
 import sqlite3
 import sys
 import time
@@ -36,6 +37,16 @@ DB_PATH = REPO_ROOT / "data" / "creditdoc.db"
 DIST = REPO_ROOT / "dist"
 LOCK_PATH = Path("/tmp/creditdoc_db_writer.lock")
 LOCK_TIMEOUT_SEC = 600
+KNOWN_FALSE_WEBSITE_STATUS_SLUGS = {
+    "morgan-cash": "live verified; stale parked flag",
+    "cnic-employees-credit-union": "live verified; stale dead flag",
+    "credit-done-right": "live verified; stale dead flag",
+    "jcb-international-credit-card": "live verified; stale dead flag",
+    "my-credit-repair-in-columbus-oh": "live verified; stale dead flag",
+    "optimal-debt-relief-debt-consolidation-settlement": "under construction, not parked/for-sale",
+    "plan-b-credit-repair-texas": "live verified; stale dead flag",
+    "securcommunity-federal-credit-union": "live verified; stale parked flag",
+}
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from render import (  # noqa: E402
@@ -94,6 +105,40 @@ def _release_lock(fd: int) -> None:
         fcntl.flock(fd, fcntl.LOCK_UN)
     finally:
         os.close(fd)
+
+
+def _assert_no_known_false_website_status() -> None:
+    """Block builds if known false-positive website warnings reappear.
+
+    These pages were manually verified on 2026-07-18. The stale flags came from
+    old website-status data and showed misleading public warnings.
+    """
+    failures = []
+    for slug, reason in KNOWN_FALSE_WEBSITE_STATUS_SLUGS.items():
+        json_path = REPO_ROOT / "src" / "content" / "lenders" / f"{slug}.json"
+        db_status = None
+        json_status = None
+
+        if json_path.exists():
+            with open(json_path) as f:
+                json_status = json.load(f).get("website_status")
+
+        with sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True) as conn:
+            row = conn.execute("SELECT data FROM lenders WHERE slug = ?", (slug,)).fetchone()
+            if row:
+                db_status = json.loads(row[0]).get("website_status")
+
+        if db_status or json_status:
+            failures.append(
+                f"{slug}: db={db_status!r} json={json_status!r} ({reason})"
+            )
+
+    if failures:
+        print("[build_all] BLOCKED: known false website_status warning(s) reappeared:")
+        for failure in failures:
+            print(f"  - {failure}")
+        print("[build_all] Fix: clear website_status in DB/source before publishing.")
+        raise RuntimeError("known false website_status warning reappeared")
 
 
 def _slugs(table: str, status_col: str, statuses: tuple[str, ...]) -> list[str]:
@@ -256,6 +301,7 @@ def main() -> int:
     print("[build_all] lock acquired.")
 
     try:
+        _assert_no_known_false_website_status()
         total_ok = 0
         total_fail = 0
         wall_start = time.time()
