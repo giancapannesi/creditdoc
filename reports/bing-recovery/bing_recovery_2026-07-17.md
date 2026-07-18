@@ -1,0 +1,159 @@
+# CreditDoc Bing Recovery - 2026-07-17 08:35 UTC
+
+Submitted: yes
+Selected URLs: 100
+Skipped during selection: 700
+
+## Selected
+- https://www.creditdoc.co/answers/can-i-dispute-hard-credit-inquiry/
+- https://www.creditdoc.co/answers/can-identity-theft-protection-be-forgiven/
+- https://www.creditdoc.co/best/best-bridging-loans/
+- https://www.creditdoc.co/best/best-business-lines-of-credit/
+- https://www.creditdoc.co/best/best-cash-advance-apps/
+- https://www.creditdoc.co/best/best-credit-builder-loans/
+- https://www.creditdoc.co/best/best-credit-counseling-agencies/
+- https://www.creditdoc.co/best/best-credit-monitoring-services/
+- https://www.creditdoc.co/best/best-credit-repair-after-bankruptcy/
+- https://www.creditdoc.co/best/best-credit-repair-companies/
+- https://www.creditdoc.co/best/best-credit-repair-money-back-guarantee/
+- https://www.creditdoc.co/best/best-credit-repair-veterans/
+- https://www.creditdoc.co/best/best-debt-consolidation-loans/
+- https://www.creditdoc.co/best/best-debt-relief-companies/
+- https://www.creditdoc.co/best/best-equipment-financing/
+- https://www.creditdoc.co/best/best-identity-theft-protection/
+- https://www.creditdoc.co/best/best-invoice-factoring/
+- https://www.creditdoc.co/best/best-merchant-cash-advance/
+- https://www.creditdoc.co/best/best-no-credit-check-cards/
+- https://www.creditdoc.co/best/best-payday-loan-alternatives/
+- https://www.creditdoc.co/best/best-personal-loan-lenders/
+- https://www.creditdoc.co/best/best-personal-loans-bad-credit/
+- https://www.creditdoc.co/best/best-rent-reporting-services/
+- https://www.creditdoc.co/best/best-sba-loans/
+- https://www.creditdoc.co/best/best-secured-credit-cards/
+- https://www.creditdoc.co/best/best-small-business-loans/
+- https://www.creditdoc.co/best/best-startup-business-loans/
+- https://www.creditdoc.co/best/cheapest-personal-loans/
+- https://www.creditdoc.co/research/
+- https://www.creditdoc.co/research/most-responsive-consumer-finance-providers-2026/
+- https://www.creditdoc.co/research/state-of-subprime-lending-2026/
+- https://www.creditdoc.co/resources/
+- https://www.creditdoc.co/resources/credit-report-checklist/
+- https://www.creditdoc.co/resources/credit-report-checklist/print/
+- https://www.creditdoc.co/resources/debt-credit-letter-templates/
+- https://www.creditdoc.co/resources/debt-credit-letter-templates/cease-and-desist-debt-collector-letter/
+- https://www.creditdoc.co/resources/debt-credit-letter-templates/debt-validation-letter/
+- https://www.creditdoc.co/resources/debt-credit-letter-templates/pay-for-delete-letter/
+- https://www.creditdoc.co/resources/loan-approval-readiness-toolkit/
+- https://www.creditdoc.co/resources/loan-approval-readiness-toolkit/print/
+- https://www.creditdoc.co/blog/
+- https://www.creditdoc.co/blog/are-authorized-user-s-credit-affected/
+- https://www.creditdoc.co/blog/are-business-credit-cards-worth-it/
+- https://www.creditdoc.co/blog/are-collections-on-credit-report/
+- https://www.creditdoc.co/blog/are-credit-builder-loans-bad/
+- https://www.creditdoc.co/blog/are-credit-builder-loans-good/
+- https://www.creditdoc.co/blog/are-credit-builder-loans-legit/
+- https://www.creditdoc.co/blog/are-credit-builder-loans-worth-it-reddit/
+- https://www.creditdoc.co/blog/are-credit-building-loans-a-good-idea/
+- https://www.creditdoc.co/blog/are-credit-card-annual-fees-tax-deductible/
+- https://www.creditdoc.co/blog/are-credit-card-application-hard-inquiry/
+- https://www.creditdoc.co/blog/are-credit-card-balance-transfer-bad/
+- https://www.creditdoc.co/blog/are-credit-card-balance-transfers-a-good-idea/
+- https://www.creditdoc.co/blog/are-credit-card-balance-transfers-worth-it/
+- https://www.creditdoc.co/blog/are-credit-card-interest-rates-capped/
+- https://www.creditdoc.co/blog/are-credit-card-interest-rates-going-down-to-10-percent/
+- https://www.creditdoc.co/blog/are-credit-card-interest-rates-going-down/
+- https://www.creditdoc.co/blog/are-credit-card-interest-rates-monthly-or-yearly/
+- https://www.creditdoc.co/blog/are-credit-card-rewards-good/
+- https://www.creditdoc.co/blog/are-credit-card-rewards/
+- https://www.creditdoc.co/blog/are-credit-repair-companies-legit-reddit/
+- https://www.creditdoc.co/blog/are-credit-repair-companies-scams/
+- https://www.creditdoc.co/blog/are-credit-score-checks-free/
+- https://www.creditdoc.co/blog/are-credits-negative/
+- https://www.creditdoc.co/blog/are-free-credit-report-safe/
+- https://www.creditdoc.co/blog/are-guaranteed-approval-personal-loans-real-the-truth/
+- https://www.creditdoc.co/blog/are-hard-credit-pulls-bad/
+- https://www.creditdoc.co/blog/are-hard-inquiry-bad/
+- https://www.creditdoc.co/blog/are-landlord-credit-check-a-hard-inquiry/
+- https://www.creditdoc.co/blog/are-late-payments-on-credit-report/
+- https://www.creditdoc.co/blog/are-medical-collections-on-credit-report/
+- https://www.creditdoc.co/blog/are-points-or-cash-back-better-for-credit-cards/
+- https://www.creditdoc.co/blog/are-secured-credit-cards-easy-to-get/
+- https://www.creditdoc.co/blog/are-soft-inquiries-bad/
+- https://www.creditdoc.co/blog/are-soft-pull-credit-scores-accurate/
+- https://www.creditdoc.co/blog/are-student-credit-cards-bad/
+- https://www.creditdoc.co/blog/are-student-credit-cards-easier-to-get/
+- https://www.creditdoc.co/blog/are-student-loans-based-on-credit/
+- https://www.creditdoc.co/blog/are-student-loans-credit-based/
+- https://www.creditdoc.co/blog/are-there-4-credit-bureaus/
+- https://www.creditdoc.co/blog/are-there-more-than-3-credit-bureaus/
+- https://www.creditdoc.co/blog/are-they-doing-away-with-credit-scores/
+- https://www.creditdoc.co/blog/auto-loan-refinance-when-it-makes-sense-and-how-to-do-it/
+- https://www.creditdoc.co/blog/best-free-credit-monitoring-services-2026-complete-guide/
+- https://www.creditdoc.co/blog/best-installment-loans-for-bad-credit-who-actually-approves-in-2026/
+- https://www.creditdoc.co/blog/best-time-to-apply-for-a-personal-loan-and-get-approved/
+- https://www.creditdoc.co/blog/best-ways-to-use-a-personal-loan-responsibly/
+- https://www.creditdoc.co/blog/can-1-late-payment-affect-credit/
+- https://www.creditdoc.co/blog/can-600-credit-score-get-car-loan/
+- https://www.creditdoc.co/blog/can-650-credit-score-get-car-loan/
+- https://www.creditdoc.co/blog/can-a-bad-credit-rating-affect-employment/
+- https://www.creditdoc.co/blog/can-a-bad-credit-score-be-fixed/
+- https://www.creditdoc.co/blog/can-a-business-credit-card-be-used-for-personal-expenses/
+- https://www.creditdoc.co/blog/can-a-business-credit-card-be-used-for-personal/
+- https://www.creditdoc.co/blog/can-a-charge-off-be-removed-if-paid-in-full/
+- https://www.creditdoc.co/blog/can-a-credit-agency-sue-you/
+- https://www.creditdoc.co/blog/can-a-credit-agency-take-you-to-court/
+- https://www.creditdoc.co/blog/can-a-fair-credit-score-get-you-an-apartment/
+- https://www.creditdoc.co/blog/can-a-landlord-do-a-credit-check-without-permission/
+- https://www.creditdoc.co/blog/can-a-low-credit-score-get-a-mortgage/
+
+## Skipped Sample
+- /about/creditdoc-data/: cooldown
+- /answers/how-to-check-a-credit-repair-company/: cooldown
+- /answers/how-to-check-if-a-lender-is-licensed/: cooldown
+- /answers/how-to-file-a-cfpb-complaint/: cooldown
+- /answers/what-does-a-cfpb-complaint-mean/: cooldown
+- /answers/where-to-complain-about-a-lender/: cooldown
+- /courses/credit-fundamentals/: cooldown
+- /editorial-policy/: cooldown
+- /financial-wellness/credit-repair-rights-fcra-croa/: cooldown
+- /financial-wellness/debt-validation-letters/: cooldown
+- /financial-wellness/how-credit-repair-works/: cooldown
+- /methodology/: cooldown
+- /research/consumer-complaints/: cooldown
+- /research/lending-transparency/: cooldown
+- /tools/business-line-of-credit-calculator/: cooldown
+- /tools/commercial-loan-calculator/: cooldown
+- /tools/credit-score-simulator/: cooldown
+- /tools/equipment-financing-calculator/: cooldown
+- /tools/loan-denial-reason-checker/: cooldown
+- /tools/sba-guarantee-fee-calculator/: cooldown
+- /tools/: cooldown
+- /tools/accounts-receivable-financing-calculator/: cooldown
+- /tools/bank-statement-cash-flow-calculator/: cooldown
+- /tools/borrowing-power-quiz/: cooldown
+- /tools/business-loan-calculator/: cooldown
+- /tools/business-loan-readiness-quiz/: cooldown
+- /tools/credit-denial-action-checklist/: cooldown
+- /tools/credit-repair-qualify-quiz/: cooldown
+- /tools/debt-payoff-calculator/: cooldown
+- /tools/mca-repayment-calculator/: cooldown
+- /tools/sba-loan-calculator/: cooldown
+- /tools/state-consumer-credit-regulator-directory/: cooldown
+- /tools/working-capital-calculator/: cooldown
+- /city/arlington-tx/: cooldown
+- /city/bakersfield-ca/: cooldown
+- /city/bronx-ny/: cooldown
+- /city/college-park-ga/: cooldown
+- /city/decatur-ga/: cooldown
+- /city/edmond-ok/: cooldown
+- /city/grand-prairie-tx/: cooldown
+- /city/long-beach-ca/: cooldown
+- /city/los-angeles-ca/: cooldown
+- /city/madison-tn/: cooldown
+- /city/marietta-ga/: cooldown
+- /city/midwest-city-ok/: cooldown
+- /city/new-orleans-la/: cooldown
+- /city/pittsburgh-pa/: cooldown
+- /city/rock-hill-sc/: cooldown
+- /city/san-jose-ca/: cooldown
+- /city/santa-clara-ca/: cooldown

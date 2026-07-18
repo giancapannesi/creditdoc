@@ -1,0 +1,93 @@
+{
+  "generated_at": "2026-07-17T03:40:05.002642+00:00",
+  "apply": true,
+  "known_false_warning_slugs": [
+    "cnic-employees-credit-union",
+    "credit-done-right",
+    "jcb-international-credit-card",
+    "morgan-cash",
+    "my-credit-repair-in-columbus-oh",
+    "optimal-debt-relief-debt-consolidation-settlement",
+    "plan-b-credit-repair-texas",
+    "securcommunity-federal-credit-union"
+  ],
+  "before_warning_count": 9,
+  "checked": [
+    {
+      "slug": "cnic-employees-credit-union",
+      "present": false,
+      "reason": "no current hard website_status"
+    },
+    {
+      "slug": "credit-done-right",
+      "name": "Credit Done Right",
+      "old_status": "dead",
+      "old_checked": "2026-04-01",
+      "url": "https://creditdonerighttx.com/",
+      "http_code": "error",
+      "final_url": "",
+      "title": "[Errno 111] Connection refused",
+      "correction_reason": "live verified; stale dead flag"
+    },
+    {
+      "slug": "jcb-international-credit-card",
+      "name": "JCB International Credit Card",
+      "old_status": "parked",
+      "old_checked": "2026-04-01",
+      "url": "https://www.jcbusa.com/",
+      "http_code": "200",
+      "final_url": "https://www.jcbusa.com/",
+      "title": "JCB USA &#8211; International Payment Brand from Japan",
+      "correction_reason": "live verified; stale parked flag"
+    },
+    {
+      "slug": "morgan-cash",
+      "present": false,
+      "reason": "no current hard website_status"
+    },
+    {
+      "slug": "my-credit-repair-in-columbus-oh",
+      "present": false,
+      "reason": "no current hard website_status"
+    },
+    {
+      "slug": "optimal-debt-relief-debt-consolidation-settlement",
+      "name": "Optimal Debt Relief | Debt Consolidation & Settlement Company",
+      "old_status": "parked",
+      "old_checked": "2026-04-01",
+      "url": "https://www.arizonadebtreliefhelp.com/debt-consolidation-chandler-az/",
+      "http_code": "200",
+      "final_url": "https://www.arizonadebtreliefhelp.com/debt-consolidation-chandler-az/",
+      "title": "ArizonaDebtReliefHelp.com is under construction",
+      "correction_reason": "under construction, not parked/for-sale"
+    },
+    {
+      "slug": "plan-b-credit-repair-texas",
+      "present": false,
+      "reason": "no current hard website_status"
+    },
+    {
+      "slug": "securcommunity-federal-credit-union",
+      "present": false,
+      "reason": "no current hard website_status"
+    }
+  ],
+  "changed": [
+    {
+      "slug": "credit-done-right",
+      "path": "/srv/BusinessOps/creditdoc/src/content/lenders/credit-done-right.json",
+      "checked": "2026-07-17"
+    },
+    {
+      "slug": "jcb-international-credit-card",
+      "path": "/srv/BusinessOps/creditdoc/src/content/lenders/jcb-international-credit-card.json",
+      "checked": "2026-07-17"
+    },
+    {
+      "slug": "optimal-debt-relief-debt-consolidation-settlement",
+      "path": "/srv/BusinessOps/creditdoc/src/content/lenders/optimal-debt-relief-debt-consolidation-settlement.json",
+      "checked": "2026-07-17"
+    }
+  ],
+  "remaining_warning_count": 6
+}
