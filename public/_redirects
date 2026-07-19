@@ -1,14 +1,6 @@
-# /trends/ family retired 2026-07-19 — CFPB data now surfaced as a structured
-# card on /review/{slug} pages (regulatory consolidation).
-# atlanta-autostar has no matching /review/ page — redirect to explainer instead.
-# 301! (force) is required because /trends/{slug}/index.html assets still exist
-# in the deployed corpus; without force, CF serves the asset before applying
-# _redirects. Force ensures the 301 fires regardless.
-/trends/atlanta-autostar/ /research/consumer-complaints/ 301!
-/trends/atlanta-autostar  /research/consumer-complaints/ 301!
-/trends/                  /research/consumer-complaints/ 301!
-/trends                   /research/consumer-complaints/ 301!
-/trends/*                 /review/:splat#cfpb-profile 301!
+# /trends/ family retired 2026-07-19 — CFPB data surfaced on /review/{slug}.
+# Redirects handled in worker/index.ts (Cloudflare dynamic _redirects limit is 100).
+# See worker fetch() for the actual 301 logic.
 
 # Social profile redirects (public-facing short URLs)
 /linkedin https://www.linkedin.com/company/creditdoc-co/ 302

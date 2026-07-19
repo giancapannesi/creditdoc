@@ -66,6 +66,19 @@ export default {
       return handleRevalidate(request, env);
     }
 
+    // Regulatory consolidation 2026-07-19: /trends/ family retired.
+    // Handled here (not _redirects) because Cloudflare's dynamic-rule limit is 100.
+    if (path === "/trends" || path === "/trends/") {
+      return Response.redirect(new URL("/research/consumer-complaints/", url).toString(), 301);
+    }
+    if (path.startsWith("/trends/")) {
+      const slug = path.slice("/trends/".length).replace(/\/$/, "");
+      if (slug === "atlanta-autostar" || slug === "") {
+        return Response.redirect(new URL("/research/consumer-complaints/", url).toString(), 301);
+      }
+      return Response.redirect(new URL(`/review/${slug}/#cfpb-profile`, url).toString(), 301);
+    }
+
     // Fall through to static assets (dist/ contents including _redirects, _headers).
     return env.ASSETS.fetch(request);
   },
