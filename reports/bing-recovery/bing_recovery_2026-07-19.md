@@ -1,0 +1,130 @@
+# CreditDoc Bing Recovery - 2026-07-19 08:35 UTC
+
+Submitted: yes
+Selected URLs: 71
+Skipped during selection: 894
+
+## Selected
+- https://www.creditdoc.co/state/iowa/lending-laws/
+- https://www.creditdoc.co/state/kansas/
+- https://www.creditdoc.co/state/kansas/lending-laws/
+- https://www.creditdoc.co/state/kentucky/
+- https://www.creditdoc.co/state/kentucky/lending-laws/
+- https://www.creditdoc.co/state/louisiana/
+- https://www.creditdoc.co/state/louisiana/lending-laws/
+- https://www.creditdoc.co/state/maine/
+- https://www.creditdoc.co/state/maine/lending-laws/
+- https://www.creditdoc.co/state/maryland/
+- https://www.creditdoc.co/state/maryland/lending-laws/
+- https://www.creditdoc.co/state/massachusetts/
+- https://www.creditdoc.co/state/massachusetts/lending-laws/
+- https://www.creditdoc.co/state/michigan/
+- https://www.creditdoc.co/state/michigan/lending-laws/
+- https://www.creditdoc.co/state/minnesota/
+- https://www.creditdoc.co/state/minnesota/lending-laws/
+- https://www.creditdoc.co/state/mississippi/
+- https://www.creditdoc.co/state/mississippi/lending-laws/
+- https://www.creditdoc.co/state/missouri/
+- https://www.creditdoc.co/state/missouri/lending-laws/
+- https://www.creditdoc.co/state/montana/
+- https://www.creditdoc.co/state/montana/lending-laws/
+- https://www.creditdoc.co/state/nebraska/
+- https://www.creditdoc.co/state/nebraska/lending-laws/
+- https://www.creditdoc.co/state/nevada/
+- https://www.creditdoc.co/state/nevada/lending-laws/
+- https://www.creditdoc.co/state/new-hampshire/
+- https://www.creditdoc.co/state/new-hampshire/lending-laws/
+- https://www.creditdoc.co/state/new-jersey/
+- https://www.creditdoc.co/state/new-jersey/lending-laws/
+- https://www.creditdoc.co/state/new-mexico/
+- https://www.creditdoc.co/state/new-mexico/lending-laws/
+- https://www.creditdoc.co/state/new-york/
+- https://www.creditdoc.co/state/new-york/lending-laws/
+- https://www.creditdoc.co/state/north-carolina/
+- https://www.creditdoc.co/state/north-carolina/lending-laws/
+- https://www.creditdoc.co/state/north-dakota/
+- https://www.creditdoc.co/state/north-dakota/lending-laws/
+- https://www.creditdoc.co/state/ohio/
+- https://www.creditdoc.co/state/ohio/lending-laws/
+- https://www.creditdoc.co/state/oklahoma/
+- https://www.creditdoc.co/state/oklahoma/lending-laws/
+- https://www.creditdoc.co/state/oregon/
+- https://www.creditdoc.co/state/oregon/lending-laws/
+- https://www.creditdoc.co/state/pennsylvania/
+- https://www.creditdoc.co/state/pennsylvania/lending-laws/
+- https://www.creditdoc.co/state/rhode-island/
+- https://www.creditdoc.co/state/rhode-island/lending-laws/
+- https://www.creditdoc.co/state/south-carolina/
+- https://www.creditdoc.co/state/south-carolina/lending-laws/
+- https://www.creditdoc.co/state/south-dakota/
+- https://www.creditdoc.co/state/south-dakota/lending-laws/
+- https://www.creditdoc.co/state/tennessee/
+- https://www.creditdoc.co/state/tennessee/lending-laws/
+- https://www.creditdoc.co/state/texas/
+- https://www.creditdoc.co/state/texas/lending-laws/
+- https://www.creditdoc.co/state/utah/
+- https://www.creditdoc.co/state/utah/lending-laws/
+- https://www.creditdoc.co/state/vermont/
+- https://www.creditdoc.co/state/vermont/lending-laws/
+- https://www.creditdoc.co/state/virginia/
+- https://www.creditdoc.co/state/virginia/lending-laws/
+- https://www.creditdoc.co/state/washington/
+- https://www.creditdoc.co/state/washington/lending-laws/
+- https://www.creditdoc.co/state/west-virginia/
+- https://www.creditdoc.co/state/west-virginia/lending-laws/
+- https://www.creditdoc.co/state/wisconsin/
+- https://www.creditdoc.co/state/wisconsin/lending-laws/
+- https://www.creditdoc.co/state/wyoming/
+- https://www.creditdoc.co/state/wyoming/lending-laws/
+
+## Skipped Sample
+- /about/creditdoc-data/: cooldown
+- /answers/how-to-check-a-credit-repair-company/: cooldown
+- /answers/how-to-check-if-a-lender-is-licensed/: cooldown
+- /answers/how-to-file-a-cfpb-complaint/: cooldown
+- /answers/what-does-a-cfpb-complaint-mean/: cooldown
+- /answers/where-to-complain-about-a-lender/: cooldown
+- /courses/credit-fundamentals/: cooldown
+- /editorial-policy/: cooldown
+- /financial-wellness/credit-repair-rights-fcra-croa/: cooldown
+- /financial-wellness/debt-validation-letters/: cooldown
+- /financial-wellness/how-credit-repair-works/: cooldown
+- /methodology/: cooldown
+- /research/consumer-complaints/: cooldown
+- /research/lending-transparency/: cooldown
+- /tools/business-line-of-credit-calculator/: cooldown
+- /tools/commercial-loan-calculator/: cooldown
+- /tools/credit-score-simulator/: cooldown
+- /tools/equipment-financing-calculator/: cooldown
+- /tools/loan-denial-reason-checker/: cooldown
+- /tools/sba-guarantee-fee-calculator/: cooldown
+- /tools/: cooldown
+- /tools/accounts-receivable-financing-calculator/: cooldown
+- /tools/bank-statement-cash-flow-calculator/: cooldown
+- /tools/borrowing-power-quiz/: cooldown
+- /tools/business-loan-calculator/: cooldown
+- /tools/business-loan-readiness-quiz/: cooldown
+- /tools/credit-denial-action-checklist/: cooldown
+- /tools/credit-repair-qualify-quiz/: cooldown
+- /tools/debt-payoff-calculator/: cooldown
+- /tools/mca-repayment-calculator/: cooldown
+- /tools/sba-loan-calculator/: cooldown
+- /tools/state-consumer-credit-regulator-directory/: cooldown
+- /tools/working-capital-calculator/: cooldown
+- /city/arlington-tx/: cooldown
+- /city/bakersfield-ca/: cooldown
+- /city/bronx-ny/: cooldown
+- /city/college-park-ga/: cooldown
+- /city/decatur-ga/: cooldown
+- /city/edmond-ok/: cooldown
+- /city/grand-prairie-tx/: cooldown
+- /city/long-beach-ca/: cooldown
+- /city/los-angeles-ca/: cooldown
+- /city/madison-tn/: cooldown
+- /city/marietta-ga/: cooldown
+- /city/midwest-city-ok/: cooldown
+- /city/new-orleans-la/: cooldown
+- /city/pittsburgh-pa/: cooldown
+- /city/rock-hill-sc/: cooldown
+- /city/san-jose-ca/: cooldown
+- /city/santa-clara-ca/: cooldown
