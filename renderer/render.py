@@ -139,6 +139,30 @@ def render_review(slug: str, output_dir: Path) -> Path:
     )
     is_pending = lender.get("processing_status") == "pending_approval"
 
+    # Regulatory consolidation (2026-07-19): surface CFPB profile as a
+    # structured card on review, replacing the dark /trends/ family as
+    # the primary display surface. Compute here so template stays simple.
+    cfpb_profile = load_trends_entry(slug)
+    cfpb_ctx: dict[str, Any] | None = None
+    if cfpb_profile and cfpb_profile.get("found_in_cfpb"):
+        breakdown = cfpb_profile.get("response_breakdown") or {}
+        total_complaints = sum(breakdown.values()) if breakdown else 0
+        if total_complaints > 0:
+            def _fmt(v):
+                try:
+                    return f"{float(v):.0f}"
+                except (TypeError, ValueError):
+                    return None
+            top_issues = [i.get("name") for i in (cfpb_profile.get("top_issues") or [])[:3] if i.get("name")]
+            cfpb_ctx = {
+                "resolution_pct": _fmt(cfpb_profile.get("resolution_rate")),
+                "timely_pct": _fmt(cfpb_profile.get("timely_rate")),
+                "total_complaints": total_complaints,
+                "top_issues": top_issues,
+                "data_period": cfpb_profile.get("data_period"),
+                "checked_at": cfpb_profile.get("checked_at"),
+            }
+
     template = env.get_template("review.html.j2")
     html = template.render(
         lender=lender,
@@ -148,6 +172,7 @@ def render_review(slug: str, output_dir: Path) -> Path:
         state_ctx=state_ctx,
         glossary=glossary,
         is_pending=is_pending,
+        cfpb=cfpb_ctx,
     )
 
     out_path = output_dir / "review" / slug / "index.html"
