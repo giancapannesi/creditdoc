@@ -1891,6 +1891,24 @@ def render_best(slug: str, output_dir: Path) -> Path:
                 "title": w.get("title") or w["slug"],
             })
 
+    # Wellness fallback — every /best/ page should surface at least 3 evergreen
+    # wellness guides so that topical link density stays strong even for
+    # business-loan / niche categories that don't map to a wellness cluster.
+    _EVERGREEN_WELLNESS = [
+        ("credit-score-basics", "Credit Score Basics"),
+        ("credit-utilization-guide", "Credit Utilization Guide"),
+        ("credit-report-reading-guide", "How to Read a Credit Report"),
+        ("dispute-credit-report-errors", "Dispute Credit Report Errors"),
+        ("debt-payoff-strategies", "Debt Payoff Strategies"),
+    ]
+    existing_slugs = {w["slug"] for w in wellness_ctx}
+    for slug_fb, title_fb in _EVERGREEN_WELLNESS:
+        if len(wellness_ctx) >= 4:
+            break
+        if slug_fb in existing_slugs:
+            continue
+        wellness_ctx.append({"slug": slug_fb, "title": title_fb})
+
     # Sibling /best/ pages — same category (excluding self).
     sibling_best_ctx = []
     try:
