@@ -93,7 +93,7 @@ def render_review(slug: str, output_dir: Path) -> Path:
     if lender is None:
         raise SystemExit(f"error: no lender with slug '{slug}' in DB")
 
-    similar = similar_lenders(lender["category"], slug, limit=4)
+    similar = similar_lenders(lender["category"], slug, limit=8)
     pillar = category_to_pillar(lender["category"])
     answers = related_answers(pillar, limit=6)
     wellness = wellness_guides_by_category(lender["category"], limit=4)
