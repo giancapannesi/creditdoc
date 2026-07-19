@@ -1666,7 +1666,7 @@ _LISTICLE_SOFTEN_PAIRS = [
     # (regex, replacement) — case-insensitive on all
     (re.compile(r"\bexpert analysis\b", re.I), "editorial comparison"),
     (re.compile(r"\bexpert reviews\b", re.I), "editorial reviews"),
-    (re.compile(r"\breal results\b", re.I), "stored result context"),
+    (re.compile(r"\breal results\b", re.I), "documented outcomes"),
     (re.compile(r"\btop picks\b", re.I), "notable profiles"),
     (re.compile(r"\btop pick\b", re.I), "notable profile"),
     (re.compile(r"\bhighest approval rate\b", re.I), "highest stored approval-context claim"),
@@ -1880,7 +1880,7 @@ def render_best(slug: str, output_dir: Path) -> Path:
         "@type": "Article",
         "headline": title,
         "description": description,
-        "author": {"@type": "Person", "name": "Harvey Brooks", "jobTitle": "Senior Financial Editor",
+        "author": {"@type": "Organization", "name": "CreditDoc Editorial Team",
                    "url": "https://www.creditdoc.co/about/"},
         "publisher": {"@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co",
                       "logo": {"@type": "ImageObject", "url": "https://www.creditdoc.co/favicon.svg"}},
