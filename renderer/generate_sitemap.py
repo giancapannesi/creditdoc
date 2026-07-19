@@ -51,6 +51,11 @@ EXCLUSION_CSV_FILES = [
 # Static-page exclusions from Astro's filter() (config lines 456-462)
 STATIC_EXCLUSIONS = {"/search/", "/specials/", "/linkedin-oauth-callback/"}
 
+# Family-prefix exclusions (2026-07-19): /trends/ family retired — CFPB data
+# now lives on /review/{slug}#cfpb-profile. All /trends/* URLs 301 redirect
+# via public/_redirects, so they must NOT appear in the sitemap.
+EXCLUDED_PREFIXES = ("/trends/",)
+
 
 def _normalize_url(raw: str) -> str | None:
     """Match Astro's normalizeSitemapUrl(): canonical https://www.creditdoc.co/<path>/ .
@@ -94,11 +99,15 @@ def load_exclusions() -> set[str]:
 
 
 def _keep_static(path: str) -> bool:
-    """Match Astro's filter(): drop search/specials/linkedin-oauth-callback/print."""
+    """Match Astro's filter(): drop search/specials/linkedin-oauth-callback/print.
+    Also drops retired family prefixes (EXCLUDED_PREFIXES)."""
     if path in STATIC_EXCLUSIONS:
         return False
     if path.endswith("/print/"):
         return False
+    for prefix in EXCLUDED_PREFIXES:
+        if path.startswith(prefix):
+            return False
     return True
 
 
