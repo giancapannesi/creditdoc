@@ -95,6 +95,12 @@
 {% if lender.description_short %}
 <p class="text-lg mb-6">{{ lender.description_short }}</p>
 {% endif %}
+{% if lender.website_url %}
+<section class="mb-8 glass-card p-5">
+<h2 class="text-xl font-semibold mb-2">Official Website</h2>
+<a href="{{ lender.website_url }}" target="_blank" rel="nofollow noopener" class="text-primary hover:underline break-all">{{ lender.website_url }}</a>
+</section>
+{% endif %}
 {% if lender.description_long_linked %}
 <section class="mb-8">
 <h2 class="text-2xl font-semibold mb-3">{{ lender.name }} Review</h2>
