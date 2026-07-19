@@ -153,6 +153,60 @@
   </section>
   {% endif %}
 
+  {% if related_lenders_ctx %}
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <h2 class="text-2xl font-bold text-text mb-4">More providers in this category</h2>
+    <p class="text-sm text-muted mb-5">Beyond the ranked list above, these {{ related_lenders_ctx|length }} providers cover the same category in our directory. Click through to compare CFPB complaint data, Google ratings, and BBB standing side-by-side.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {% for r in related_lenders_ctx %}
+      <a href="/review/{{ r.slug }}/" class="glass-card p-4 hover:border-primary transition-colors block">
+        <p class="text-sm font-semibold text-text">{{ r.name }}</p>
+        {% if r.city and r.state_abbr %}<p class="mt-1 text-xs text-muted">{{ r.city }}, {{ r.state_abbr }}</p>{% endif %}
+        {% if r.google_rating and r.google_reviews_count %}<p class="mt-1 text-xs text-muted">★ {{ '%.1f'|format(r.google_rating) }} · {{ '{:,}'.format(r.google_reviews_count) }} reviews</p>{% endif %}
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if related_answers_ctx or wellness_ctx or sibling_best_ctx %}
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <h2 class="text-2xl font-bold text-text mb-4">Related research and guides</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {% if related_answers_ctx %}
+      <div>
+        <h3 class="text-sm font-semibold text-text uppercase tracking-wider mb-3">Borrower questions</h3>
+        <ul class="space-y-2">
+          {% for a in related_answers_ctx %}
+          <li><a href="/answers/{{ a.slug }}/" class="text-sm text-primary hover:underline">{{ a.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      {% if wellness_ctx %}
+      <div>
+        <h3 class="text-sm font-semibold text-text uppercase tracking-wider mb-3">Financial wellness guides</h3>
+        <ul class="space-y-2">
+          {% for w in wellness_ctx %}
+          <li><a href="/financial-wellness/{{ w.slug }}/" class="text-sm text-primary hover:underline">{{ w.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      {% if sibling_best_ctx %}
+      <div>
+        <h3 class="text-sm font-semibold text-text uppercase tracking-wider mb-3">Compare related listings</h3>
+        <ul class="space-y-2">
+          {% for s in sibling_best_ctx %}
+          <li><a href="/best/{{ s.slug }}/" class="text-sm text-primary hover:underline">{{ s.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
   <section class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
     <div class="glass-card p-6">
       <h2 class="text-lg font-bold text-text mb-2">Use This Guide With Regulatory Research</h2>

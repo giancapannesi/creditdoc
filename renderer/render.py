@@ -1854,6 +1854,60 @@ def render_best(slug: str, output_dir: Path) -> Path:
         for item in faq
     ]
 
+    # Related content — grow the internal link graph so this money page acts as
+    # a topical hub. Aim: 10+ /review/, 5+ /answers/, 3+ /financial-wellness/, 2+ sibling /best/.
+    listicle_category = listicle.get("category") or ""
+    ranked_slugs = {l["slug"] for l in ranked}
+    related_lenders_ctx = []
+    if listicle_category:
+        peers = top_lenders_by_category(listicle_category, limit=30)
+        for p in peers:
+            if p["slug"] in ranked_slugs:
+                continue
+            related_lenders_ctx.append({
+                "slug": p["slug"],
+                "name": p.get("name") or p["slug"],
+                "logo_url": p.get("logo_url") or "",
+                "google_rating": p.get("google_rating") or 0,
+                "google_reviews_count": p.get("google_reviews_count") or 0,
+                "city": (p.get("company_info") or {}).get("city") or "",
+                "state_abbr": (p.get("company_info") or {}).get("state") or "",
+            })
+            if len(related_lenders_ctx) >= 12:
+                break
+
+    related_answers_ctx = []
+    wellness_ctx = []
+    if listicle_category:
+        pillar = category_to_pillar(listicle_category)
+        for a in related_answers(pillar, limit=6):
+            related_answers_ctx.append({
+                "slug": a["slug"],
+                "title": a.get("h1") or a.get("title") or a["slug"],
+            })
+        for w in wellness_guides_by_category(listicle_category, limit=4):
+            wellness_ctx.append({
+                "slug": w["slug"],
+                "title": w.get("title") or w["slug"],
+            })
+
+    # Sibling /best/ pages — same category (excluding self).
+    sibling_best_ctx = []
+    try:
+        for other in all_listicles():
+            if other.get("slug") == slug:
+                continue
+            if (other.get("category") or "") != listicle_category:
+                continue
+            sibling_best_ctx.append({
+                "slug": other["slug"],
+                "title": other.get("title") or other["slug"],
+            })
+            if len(sibling_best_ctx) >= 4:
+                break
+    except Exception:
+        sibling_best_ctx = []
+
     canonical = f"https://www.creditdoc.co/best/{slug}/"
     breadcrumb_jsonld = _safe_jsonld_str({
         "@context": "https://schema.org",
@@ -1930,6 +1984,10 @@ def render_best(slug: str, output_dir: Path) -> Path:
         tldr=tldr,
         takeaways=takeaways,
         lender_ctx=lender_ctx,
+        related_lenders_ctx=related_lenders_ctx,
+        related_answers_ctx=related_answers_ctx,
+        wellness_ctx=wellness_ctx,
+        sibling_best_ctx=sibling_best_ctx,
         linked_faq=linked_faq,
         has_faq=bool(faq),
         has_ranked=bool(ranked),
