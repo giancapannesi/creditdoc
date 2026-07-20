@@ -156,6 +156,20 @@ function hasArtifact(url) {
   return artifactCandidates(url).some((file) => existsSync(file));
 }
 
+function artifactHtml(url) {
+  const file = artifactCandidates(url).find((candidate) => existsSync(candidate));
+  if (!file || !file.endsWith('.html')) return '';
+  return readFileSync(file, 'utf8');
+}
+
+function hasRobotsNoindex(html) {
+  for (const match of html.matchAll(/<meta\b[^>]*>/gi)) {
+    const tagAttrs = attrs(match[0]);
+    if (tagAttrs.name === 'robots' && /\bnoindex\b/i.test(tagAttrs.content || '')) return true;
+  }
+  return false;
+}
+
 function addIssue(issues, severity, code, message, detail = {}) {
   issues.push({ severity, code, message, ...detail });
 }
@@ -215,6 +229,10 @@ function validateSitemap(issues) {
     }
     if (FORBIDDEN_SITEMAP_PATTERNS.some((pattern) => pattern.test(parsed.pathname))) {
       addIssue(issues, 'error', 'forbidden_sitemap_url', 'Sitemap includes a forbidden utility, redirect, noindex, or print URL.', { url });
+    }
+    const html = artifactHtml(url);
+    if (html && hasRobotsNoindex(html)) {
+      addIssue(issues, 'error', 'noindex_url_in_sitemap', 'Sitemap URL renders a robots noindex meta tag.', { url });
     }
 
     const family = urlFamily(url);

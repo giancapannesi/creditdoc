@@ -14,6 +14,7 @@ Astro build did (verified against astro.config.mjs.DISABLED_2026-07-17):
 Exclusions:
     * Three CSV files of URLs pulled from GSC / crawler audits
     * /search/, /specials/, /linkedin-oauth-callback/, anything ending /print/
+    * Rendered HTML pages with meta robots noindex
 
 Per-family priority + changefreq: matches Astro's serialize() logic.
 Chunking: 5,000 URLs per sitemap file. Emits sitemap-N.xml + sitemap-index.xml.
@@ -111,6 +112,19 @@ def _keep_static(path: str) -> bool:
     return True
 
 
+def _html_has_noindex(html_path: Path) -> bool:
+    try:
+        html = html_path.read_text(encoding="utf-8", errors="replace")
+    except Exception:
+        return False
+    for tag in re.findall(r"<meta\b[^>]*>", html, flags=re.IGNORECASE):
+        if not re.search(r'\bname=["\']robots["\']', tag, flags=re.IGNORECASE):
+            continue
+        if re.search(r'\bcontent=["\'][^"\']*\bnoindex\b', tag, flags=re.IGNORECASE):
+            return True
+    return False
+
+
 def walk_dist_urls() -> dict[str, float]:
     """Every dist/<...>/index.html → path + file mtime.
 
@@ -130,9 +144,12 @@ def walk_dist_urls() -> dict[str, float]:
             path = "/"
         else:
             path = "/" + str(rel).replace(os.sep, "/") + "/"
+        html_path = Path(root) / "index.html"
         if not _keep_static(path):
             continue
-        mtime = (Path(root) / "index.html").stat().st_mtime
+        if _html_has_noindex(html_path):
+            continue
+        mtime = html_path.stat().st_mtime
         out[path] = mtime
     return out
 
@@ -322,6 +339,13 @@ def write_sitemaps(entries: list[dict[str, Any]], dry_run: bool = False) -> None
         for i, chunk in enumerate(chunks):
             print(f"  chunk {i}: {len(chunk)} URLs (would write dist/sitemap-{i}.xml)")
         return
+
+    for stale in DIST.glob("sitemap-*.xml"):
+        if stale.name == "sitemap-index.xml":
+            continue
+        m = re.fullmatch(r"sitemap-(\d+)\.xml", stale.name)
+        if m and int(m.group(1)) >= len(chunks):
+            stale.unlink()
 
     for i, chunk in enumerate(chunks):
         out = DIST / f"sitemap-{i}.xml"
