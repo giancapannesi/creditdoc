@@ -7,6 +7,27 @@ const reportDir = path.join(root, 'reports');
 const reportPath = path.join(reportDir, 'seo-deep-audit.json');
 const siteOrigin = 'https://www.creditdoc.co';
 const workerPagesRoot = path.join(distRoot, '_worker.js', 'pages');
+const redirectsFile = path.join(root, 'public', '_redirects');
+const STATIC_PREFIXES = [
+  '/answers/',
+  '/best/',
+  '/blog/',
+  '/browse/',
+  '/city/',
+  '/courses/',
+  '/financial-wellness/',
+  '/research/',
+  '/resources/',
+  '/state/',
+  '/tools/',
+];
+const ALLOWED_DYNAMIC_PREFIXES = [
+  '/api/',
+  '/go/',
+  '/r/',
+  '/search/',
+  '/linkedin-oauth-callback/',
+];
 
 function walk(dir, predicate, files = []) {
   if (!fs.existsSync(dir)) return files;
@@ -129,14 +150,11 @@ function getWorkerRouteMatchers() {
   return walk(workerPagesRoot, (filePath) => filePath.endsWith('.mjs')).map(routeRegexForWorkerPage);
 }
 
-function addIssue(issues, severity, code, url, message, detail = {}) {
-  issues.push({ severity, code, url, message, ...detail });
-}
-
 function getSitemapUrls() {
   const urls = new Set();
   for (const sitemap of walk(distRoot, (filePath) => /sitemap.*\.xml$/.test(path.basename(filePath)))) {
     const xml = read(sitemap);
+    if (!/<urlset\b/i.test(xml)) continue;
     for (const match of xml.matchAll(/<loc>([\s\S]*?)<\/loc>/gi)) {
       urls.add(decodeHtml(match[1].trim()));
     }
@@ -144,14 +162,60 @@ function getSitemapUrls() {
   return urls;
 }
 
+function normalizePathname(pathname) {
+  if (!pathname || pathname === '/') return '/';
+  const clean = pathname.split('#')[0].split('?')[0].replace(/\/+$/, '');
+  return clean ? `${clean}/` : '/';
+}
+
+function loadRedirectSources() {
+  const sources = new Set();
+  if (!fs.existsSync(redirectsFile)) return sources;
+  for (const rawLine of read(redirectsFile).split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith('#')) continue;
+    const [from, to, status] = line.split(/\s+/);
+    if (!from || !to) continue;
+    if (status && !/^30[1278]$/.test(status)) continue;
+    sources.add(normalizePathname(from));
+  }
+  return sources;
+}
+
+function shouldCheckInternalPath(pathname) {
+  if (ALLOWED_DYNAMIC_PREFIXES.some((prefix) => pathname.startsWith(prefix))) return false;
+  return pathname === '/' || STATIC_PREFIXES.some((prefix) => pathname.startsWith(prefix));
+}
+
 const htmlFiles = walk(distRoot, (filePath) => filePath.endsWith('.html'));
 const sitemapUrls = getSitemapUrls();
 const workerRouteMatchers = getWorkerRouteMatchers();
+const redirectSources = loadRedirectSources();
 const issues = [];
+const issueCounts = new Map();
+const MAX_ISSUES = Number.parseInt(process.env.SEO_DEEP_AUDIT_MAX_ISSUES || '500', 10);
 const titleMap = new Map();
 const descMap = new Map();
 const canonicalMap = new Map();
-const pageSummaries = [];
+
+function addIssue(issues, severity, code, url, message, detail = {}) {
+  const key = `${severity}:${code}`;
+  issueCounts.set(key, (issueCounts.get(key) || 0) + 1);
+  if (issues.length < MAX_ISSUES) {
+    issues.push({ severity, code, url, message, ...detail });
+  }
+}
+
+function addMapSample(map, key, url, limit = 20) {
+  if (!key) return;
+  const existing = map.get(key);
+  if (existing) {
+    existing.count += 1;
+    if (existing.urls.length < limit) existing.urls.push(url);
+  } else {
+    map.set(key, { count: 1, urls: [url] });
+  }
+}
 
 for (const filePath of htmlFiles) {
   const html = read(filePath);
@@ -167,28 +231,30 @@ for (const filePath of htmlFiles) {
   const ogTitle = Boolean(firstTagAttrs(html, 'meta', (tagAttrs) => tagAttrs.property === 'og:title' && tagAttrs.content).content);
   const ogDescription = Boolean(firstTagAttrs(html, 'meta', (tagAttrs) => tagAttrs.property === 'og:description' && tagAttrs.content).content);
 
-  pageSummaries.push({ url, title, description, canonical, robots, h1Count, wordCount, isRedirect });
-
   if (isRedirect) continue;
 
   if (!title) addIssue(issues, 'error', 'missing_title', url, 'Missing <title>.');
   else {
     if (title.length < 25) addIssue(issues, 'warning', 'short_title', url, `Title is short (${title.length} chars).`, { title });
     if (title.length > 65) addIssue(issues, 'warning', 'long_title', url, `Title is long (${title.length} chars).`, { title });
-    titleMap.set(title, [...(titleMap.get(title) || []), url]);
+    addMapSample(titleMap, title, url);
   }
 
   if (!description) addIssue(issues, 'error', 'missing_meta_description', url, 'Missing meta description.');
   else {
     if (description.length < 70) addIssue(issues, 'warning', 'short_meta_description', url, `Meta description is short (${description.length} chars).`, { description });
     if (description.length > 170) addIssue(issues, 'warning', 'long_meta_description', url, `Meta description is long (${description.length} chars).`, { description });
-    descMap.set(description, [...(descMap.get(description) || []), url]);
+    addMapSample(descMap, description, url);
   }
 
   if (!canonical) addIssue(issues, 'error', 'missing_canonical', url, 'Missing canonical URL.');
   else {
-    canonicalMap.set(canonical, [...(canonicalMap.get(canonical) || []), url]);
+    addMapSample(canonicalMap, canonical, url);
     if (!canonical.startsWith(siteOrigin)) addIssue(issues, 'error', 'external_or_relative_canonical', url, 'Canonical is not on the configured site origin.', { canonical });
+  }
+
+  if (isNoindex && sitemapUrls.has(url)) {
+    addIssue(issues, 'error', 'noindex_in_sitemap', url, 'Noindex page appears in sitemap.', { canonical });
   }
 
   if (h1Count !== 1) addIssue(issues, h1Count === 0 ? 'error' : 'warning', 'h1_count', url, `Expected exactly one H1, found ${h1Count}.`);
@@ -223,35 +289,33 @@ for (const filePath of htmlFiles) {
       }
     })();
     const pathname = targetUrl?.origin === siteOrigin ? targetUrl.pathname : '';
+    if (pathname && !shouldCheckInternalPath(normalizePathname(pathname))) continue;
     const isServerRoute = workerRouteMatchers.some((pattern) => pattern.test(pathname.endsWith('/') ? pathname : `${pathname}/`));
     const isSitemapUrl = targetUrl ? sitemapUrls.has(targetUrl.href) || sitemapUrls.has(`${targetUrl.origin}${targetUrl.pathname.endsWith('/') ? targetUrl.pathname : `${targetUrl.pathname}/`}`) : false;
-    if (targetFile && !fs.existsSync(targetFile) && !isServerRoute && !isSitemapUrl) {
+    const isRedirectSource = pathname ? redirectSources.has(normalizePathname(pathname)) : false;
+    if (targetFile && !fs.existsSync(targetFile) && !isServerRoute && !isSitemapUrl && !isRedirectSource) {
       addIssue(issues, 'error', 'broken_internal_link', url, `Internal link target is missing: ${href}`, { href });
     }
   }
 }
 
-for (const [title, urls] of titleMap) {
-  if (urls.length > 1 && title) addIssue(issues, 'warning', 'duplicate_title', urls[0], `Duplicate title appears on ${urls.length} pages.`, { title, urls: urls.slice(0, 20) });
+for (const [title, data] of titleMap) {
+  if (data.count > 1 && title) addIssue(issues, 'warning', 'duplicate_title', data.urls[0], `Duplicate title appears on ${data.count} pages.`, { title, urls: data.urls });
 }
-for (const [description, urls] of descMap) {
-  if (urls.length > 1 && description) addIssue(issues, 'warning', 'duplicate_meta_description', urls[0], `Duplicate meta description appears on ${urls.length} pages.`, { description, urls: urls.slice(0, 20) });
+for (const [description, data] of descMap) {
+  if (data.count > 1 && description) addIssue(issues, 'warning', 'duplicate_meta_description', data.urls[0], `Duplicate meta description appears on ${data.count} pages.`, { description, urls: data.urls });
 }
-for (const [canonical, urls] of canonicalMap) {
-  if (urls.length > 1 && canonical) addIssue(issues, 'warning', 'duplicate_canonical_target', urls[0], `Canonical target is used by ${urls.length} rendered pages.`, { canonical, urls: urls.slice(0, 20) });
-}
-
-for (const summary of pageSummaries) {
-  if (/noindex/i.test(summary.robots || '') && sitemapUrls.has(summary.url)) {
-    addIssue(issues, 'error', 'noindex_in_sitemap', summary.url, 'Noindex page appears in sitemap.', { canonical: summary.canonical });
-  }
+for (const [canonical, data] of canonicalMap) {
+  if (data.count > 1 && canonical) addIssue(issues, 'warning', 'duplicate_canonical_target', data.urls[0], `Canonical target is used by ${data.count} rendered pages.`, { canonical, urls: data.urls });
 }
 
-const grouped = issues.reduce((acc, issue) => {
-  const key = `${issue.severity}:${issue.code}`;
-  acc[key] = (acc[key] || 0) + 1;
-  return acc;
-}, {});
+const grouped = Object.fromEntries([...issueCounts.entries()].sort());
+const errorCount = [...issueCounts.entries()]
+  .filter(([key]) => key.startsWith('error:'))
+  .reduce((sum, [, count]) => sum + count, 0);
+const warningCount = [...issueCounts.entries()]
+  .filter(([key]) => key.startsWith('warning:'))
+  .reduce((sum, [, count]) => sum + count, 0);
 const report = {
   generatedAt: new Date().toISOString(),
   checked: {
@@ -259,11 +323,11 @@ const report = {
     sitemapUrls: sitemapUrls.size,
   },
   counts: {
-    errors: issues.filter((issue) => issue.severity === 'error').length,
-    warnings: issues.filter((issue) => issue.severity === 'warning').length,
-    byCode: Object.fromEntries(Object.entries(grouped).sort()),
+    errors: errorCount,
+    warnings: warningCount,
+    byCode: grouped,
   },
-  topIssues: issues.slice(0, 500),
+  topIssues: issues,
 };
 
 fs.mkdirSync(reportDir, { recursive: true });

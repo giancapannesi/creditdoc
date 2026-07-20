@@ -52,6 +52,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from render import (  # noqa: E402
     render_answer,
     render_best,
+    render_best_index,
     render_blog,
     render_brand,
     render_browse,
@@ -337,6 +338,10 @@ def main() -> int:
             print(f"[build_all] {label}: {fam_ok} ok, {fam_fail} fail in {elapsed:.1f}s")
             total_ok += fam_ok
             total_fail += fam_fail
+
+            if label == "best":
+                render_best_index(DIST)
+                print("[build_all] best-index: rendered /best/")
 
         wall = time.time() - wall_start
         print(f"[build_all] TOTAL: {total_ok} ok, {total_fail} fail in {wall:.1f}s")

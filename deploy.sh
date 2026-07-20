@@ -13,13 +13,17 @@ python3 scripts/export_cfpb_trends.py 2>/dev/null || true
 # 1. Build
 echo ""
 echo "[1/4] Building..."
-BUILD_LOG="/tmp/creditdoc_build_$(date +%s).log"
-if ! npm run build > "$BUILD_LOG" 2>&1; then
-  echo "!!! BUILD FAILED — last 40 lines of $BUILD_LOG !!!"
-  tail -40 "$BUILD_LOG"
-  exit 1
+if [ "${SKIP_BUILD:-0}" = "1" ]; then
+  echo "  SKIP_BUILD=1 — using existing dist/ from targeted renderer output"
+else
+  BUILD_LOG="/tmp/creditdoc_build_$(date +%s).log"
+  if ! npm run build > "$BUILD_LOG" 2>&1; then
+    echo "!!! BUILD FAILED — last 40 lines of $BUILD_LOG !!!"
+    tail -40 "$BUILD_LOG"
+    exit 1
+  fi
+  tail -3 "$BUILD_LOG"
 fi
-tail -3 "$BUILD_LOG"
 
 # Post-build sanity: dist must have thousands of files, not zero.
 DIST_COUNT=$(find dist -name '*.html' 2>/dev/null | wc -l)
@@ -65,11 +69,14 @@ paths = [
     "/sitemap-index.xml",
     "/feed.xml",
     "/rss.xml",
+    "/best/",
     "/linkedin-oauth-callback/",
     "/review/lexington-law/",
     "/state/wyoming/",
+    "/state/wisconsin/",
     "/credit-guide/austin-tx/",
     "/credit-guide/austin-tx/credit-repair/",
+    "/credit-guide/charlotte-nc/atm/",
     "/answers/",
     "/answers/best-debt-consolidation-loans-bad-credit/",
     "/best/best-credit-repair-companies/",

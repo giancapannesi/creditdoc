@@ -87,6 +87,14 @@ def _safe_jsonld_str(obj: Any) -> str:
     return json.dumps(obj, ensure_ascii=False).replace("</", "<\\/")
 
 
+def _seo_meta(text: str, max_len: int = 155) -> str:
+    """Keep rendered meta descriptions under crawler limits without mid-word cuts."""
+    clean = re.sub(r"\s+", " ", str(text or "")).strip()
+    if len(clean) <= max_len:
+        return clean
+    return clean[:max_len].rsplit(" ", 1)[0].rstrip(" ,.;:")
+
+
 def render_review(slug: str, output_dir: Path) -> Path:
     """Render one /review/<slug>/index.html from DB. Returns the output path."""
     lender = load_lender(slug)
@@ -487,7 +495,7 @@ def render_category(slug: str, output_dir: Path) -> Path:
         "name": cat.get("name") or slug.replace("-", " ").title(),
         "description": cat.get("description") or "",
         "seo_title": _soften_category_title(cat.get("seo_title") or f"{cat.get('name') or slug} | CreditDoc"),
-        "seo_description": cat.get("seo_description") or cat.get("description") or "",
+        "seo_description": _seo_meta(cat.get("seo_description") or cat.get("description") or ""),
     }
 
     # Inline-link the description via the shared linker (matches Astro linker output style).
@@ -1122,12 +1130,12 @@ def render_credit_guide_category(compound_slug: str, output_dir: Path) -> Path:
 
     # SEO.
     if is_atm:
-        seo_description = (
+        seo_description = _seo_meta(
             f"Browse selected ATM and cash access profiles for {city}, {state_name}. "
             f"Verify current ATM availability directly with your bank, credit union, or ATM network."
         )
     else:
-        seo_description = (
+        seo_description = _seo_meta(
             f"Review {len(sorted_lenders)} listed {cat_name.lower()} profiles associated with "
             f"{city}, {state_name}. Compare local context, ratings, reviews, and contact details."
         )
@@ -1287,7 +1295,10 @@ def render_brand(slug: str, output_dir: Path) -> Path:
     linked_faq = [{"q": item.get("q") or "", "a": linkify_description(item.get("a") or "", current_slug=slug, current_category=brand.get("category") or "", money_budget=3)} for item in (brand.get("faq") or [])]
 
     title = f"{display_name} Locations — Find Your Nearest Branch | CreditDoc"
-    description = f"Browse all {location_count} {display_name} locations across {states_count} states. Find hours, addresses, and contact info for each branch."
+    description = _seo_meta(
+        f"Browse {location_count} {display_name} locations across {states_count} states. "
+        "Find branch addresses, phone numbers, and profile research."
+    )
 
     org_jsonld = _safe_jsonld_str({
         "@context": "https://schema.org",
@@ -1419,13 +1430,13 @@ def render_state(slug: str, output_dir: Path) -> Path:
 
     if has_lenders and state_data and state_data.get("consumer_rights_summary"):
         summary_first = (state_data["consumer_rights_summary"] or "").split(".")[0]
-        description = f"Find {lender_count} credit repair companies and lenders in {state['name']}. {summary_first}."
+        description = _seo_meta(f"Find {lender_count} credit repair companies and lenders in {state['name']}. {summary_first}.")
     elif has_lenders:
-        description = f"Compare {lender_count} credit repair companies, personal lenders, and financial services in {state['name']}. BBB ratings, pricing, and reviews."
+        description = _seo_meta(f"Compare {lender_count} credit repair companies, personal lenders, and financial services in {state['name']}. BBB ratings, pricing, and reviews.")
     else:
         crs = (state_data.get("consumer_rights_summary") if state_data else "") or ""
         first = crs.split(".")[0] if crs else ""
-        description = f"{state['name']} lending regulations, credit repair laws, consumer protections, and financial resources. {first}"
+        description = _seo_meta(f"{state['name']} lending regulations, credit repair laws, consumer protections, and financial resources. {first}")
 
     collection_jsonld = _safe_jsonld_str({
         "@context": "https://schema.org",
@@ -1555,7 +1566,7 @@ def render_state_lending_laws(compound_slug: str, output_dir: Path) -> Path:
     from datetime import datetime, timezone
     year = datetime.now(timezone.utc).year
     title = f"{state['name']} Lending & Credit Laws ({year}) | CreditDoc"
-    description = (
+    description = _seo_meta(
         f"{state['name']} lending regulations, credit repair laws, "
         "payday loan rules, veteran protections (MLA/SCRA), and consumer "
         "rights. Official statute references and complaint resources."
@@ -2090,7 +2101,7 @@ def render_browse(cat_slug: str, city_slug: str, output_dir: Path) -> Path:
 
     display_count = len(display_lenders)
     title = f"{h1} | CreditDoc"
-    description = (
+    description = _seo_meta(
         f"Compare {cat_name.lower()} providers in {city['city']}, {city['state_abbr']} — "
         f"{display_count} listed profiles with pricing, licensing, and CFPB complaint context. "
         f"Review {display_count} listed profiles."
@@ -2266,6 +2277,64 @@ def render_trends(slug: str, output_dir: Path) -> Path:
     )
 
     out_path = output_dir / "trends" / slug / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
+def render_best_index(output_dir: Path) -> Path:
+    """Render /best/ as a hub for all commercial comparison guides."""
+    listicles = []
+    category_labels = {
+        c.get("slug"): c.get("name") or (c.get("slug") or "").replace("-", " ").title()
+        for c in all_categories()
+    }
+    for item in all_listicles():
+        raw_title = item.get("seo_title") or item.get("title") or item.get("slug")
+        title = _soften_listicle_title(re.sub(r"\s*\|\s*CreditDoc.*$", "", raw_title, flags=re.I).strip())
+        description = _seo_meta(_soften_listicle_copy(item.get("seo_description") or item.get("description") or "Compare CreditDoc research guides."))
+        category = item.get("category") or ""
+        listicles.append({
+            "slug": item.get("slug"),
+            "title": title,
+            "description": description,
+            "category_label": category_labels.get(category) or category.replace("-", " ").title() or "Guide",
+        })
+    listicles = [item for item in listicles if item.get("slug")]
+    listicles.sort(key=lambda item: (item["category_label"].lower(), item["title"].lower()))
+
+    url = "https://www.creditdoc.co/best/"
+    collection_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Best Credit and Loan Guides",
+        "description": "Browse CreditDoc comparison guides for credit repair, loans, debt relief, credit cards, and business financing.",
+        "url": url,
+        "numberOfItems": len(listicles),
+        "provider": {"@type": "Organization", "name": "CreditDoc", "url": "https://www.creditdoc.co"},
+    })
+    breadcrumb_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.creditdoc.co/"},
+            {"@type": "ListItem", "position": 2, "name": "Best Guides", "item": url},
+        ],
+    })
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    template = env.get_template("best_index.html.j2")
+    html = template.render(
+        listicles=listicles,
+        collection_jsonld=collection_jsonld,
+        breadcrumb_jsonld=breadcrumb_jsonld,
+    )
+    out_path = output_dir / "best" / "index.html"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(html, encoding="utf-8")
     return out_path

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Best Credit and Loan Guides | CreditDoc</title>
+<meta name="description" content="Browse CreditDoc's best credit repair, loan, debt relief, credit card, and business financing comparison guides.">
+<link rel="canonical" href="https://www.creditdoc.co/best/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Best Credit and Loan Guides | CreditDoc">
+<meta property="og:description" content="Browse CreditDoc's best credit repair, loan, debt relief, credit card, and business financing comparison guides.">
+<meta property="og:url" content="https://www.creditdoc.co/best/">
+<meta property="og:site_name" content="CreditDoc">
+<meta property="og:image" content="https://www.creditdoc.co/og-default.png">
+<script type="application/ld+json">
+{{ collection_jsonld|safe }}
+</script>
+<script type="application/ld+json">
+{{ breadcrumb_jsonld|safe }}
+</script>
+{% include "_header.html" %}
+<main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+<nav aria-label="Breadcrumb" class="mb-4">
+<ol class="flex items-center gap-1.5 text-sm text-muted">
+<li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+<li><span class="mx-1">/</span></li>
+<li class="text-text font-medium">Best Guides</li>
+</ol>
+</nav>
+<header class="max-w-3xl mb-8">
+<h1 class="text-3xl md:text-4xl font-bold text-text">Best Credit and Loan Guides</h1>
+<p class="mt-3 text-muted leading-relaxed">Compare CreditDoc's research guides for credit repair, personal loans, debt relief, credit cards, business financing, and other financial-service categories.</p>
+</header>
+<section class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+{% for item in listicles %}
+<article class="glass-card p-5">
+<p class="text-xs font-semibold uppercase tracking-wide text-muted">{{ item.category_label }}</p>
+<h2 class="mt-2 text-lg font-bold text-text"><a href="/best/{{ item.slug }}/" class="hover:text-primary transition-colors">{{ item.title }}</a></h2>
+<p class="mt-2 text-sm text-muted leading-relaxed">{{ item.description }}</p>
+<a href="/best/{{ item.slug }}/" class="mt-4 inline-block text-sm font-semibold text-primary hover:underline">View guide</a>
+</article>
+{% endfor %}
+</section>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>
