@@ -384,7 +384,21 @@ function main() {
   };
 
   mkdirSync(join(ROOT, 'reports'), { recursive: true });
-  writeFileSync(REPORT, `${JSON.stringify(report, null, 2)}\n`);
+  if (existsSync(REPORT)) {
+    try {
+      const existing = JSON.parse(readFileSync(REPORT, 'utf8'));
+      const existingStable = { ...existing, generatedAt: report.generatedAt };
+      if (JSON.stringify(existingStable) === JSON.stringify(report)) {
+        report.generatedAt = existing.generatedAt || report.generatedAt;
+      } else {
+        writeFileSync(REPORT, `${JSON.stringify(report, null, 2)}\n`);
+      }
+    } catch {
+      writeFileSync(REPORT, `${JSON.stringify(report, null, 2)}\n`);
+    }
+  } else {
+    writeFileSync(REPORT, `${JSON.stringify(report, null, 2)}\n`);
+  }
 
   if (report.counts.errors > 0) {
     console.error(`[schema-sitemap-contract] FAILED — errors=${report.counts.errors}, warnings=${report.counts.warnings}`);
