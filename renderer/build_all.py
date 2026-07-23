@@ -61,6 +61,7 @@ from render import (  # noqa: E402
     render_compare,
     render_credit_guide_category,
     render_credit_guide_hub,
+    render_research_consumer_complaints,
     render_review,
     render_state,
     render_state_lending_laws,
@@ -342,6 +343,17 @@ def main() -> int:
             if label == "best":
                 render_best_index(DIST)
                 print("[build_all] best-index: rendered /best/")
+
+        # Single-page renderers (no per-slug family — hub pages that stand alone)
+        if not args.only or args.only == "review":
+            # Piggyback on the review pass because /research/consumer-complaints/
+            # aggregates from cfpb-trends.json which changes with lender data.
+            try:
+                p = render_research_consumer_complaints(DIST)
+                print(f"[build_all] research-consumer-complaints: rendered {p.relative_to(DIST)}")
+            except Exception as e:
+                print(f"[build_all] research-consumer-complaints FAILED: {e}")
+                total_fail += 1
 
         wall = time.time() - wall_start
         print(f"[build_all] TOTAL: {total_ok} ok, {total_fail} fail in {wall:.1f}s")

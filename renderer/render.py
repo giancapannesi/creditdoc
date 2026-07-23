@@ -2340,6 +2340,182 @@ def render_best_index(output_dir: Path) -> Path:
     return out_path
 
 
+_RESEARCH_NOISE_SUFFIXES = re.compile(
+    r",?\s+(Inc\.?|LLC|N\.A\.?|NA|Corp\.?|Corporation|Company|Co\.?|Ltd\.?|LP|LLP|Bank)\.?$",
+    re.I,
+)
+_RESEARCH_LOCATION_TAIL = re.compile(
+    r"\s+(ATM|Financial Center|Corporate Center|Branch|Headquarters|HQ|Office)$",
+    re.I,
+)
+
+
+def _research_base_name(name: str) -> str:
+    """Dedup helper for the CFPB leaderboard: collapse "Bank of America ATM" +
+    "Bank of America Corporate Center" into a single "Bank of America" entry.
+    Same logic used in the 2026-07-23 matcher-repair tooling.
+    """
+    s = (name or "").strip()
+    s = _RESEARCH_NOISE_SUFFIXES.sub("", s)
+    s = _RESEARCH_LOCATION_TAIL.sub("", s)
+    return s.strip()
+
+
+def render_research_consumer_complaints(output_dir: Path) -> Path:
+    """Render /research/consumer-complaints/ — the CFPB Consumer Response Data hub.
+
+    Replaces the frozen Astro static page that shipped 2026-07-16 with "0 companies,
+    0 complaints" placeholders. Reads aggregate stats + leaderboard from the same
+    cfpb-trends.json used by /review/#cfpb-profile.
+
+    Positive framing enforced per feedback_creditdoc_no_negative_lender_content.md.
+    """
+    entries = [e for e in all_trends_entries()
+               if e.get("found_in_cfpb") and e.get("response_breakdown")]
+
+    # Aggregates
+    total_records = sum(sum((e.get("response_breakdown") or {}).values()) for e in entries)
+    companies_tracked = len({_research_base_name(e.get("company_name", "")) for e in entries})
+    res_rates = [e["resolution_rate"] for e in entries if e.get("resolution_rate") is not None]
+    tim_rates = [e["timely_rate"] for e in entries if e.get("timely_rate") is not None]
+    avg_resolution_rate = sum(res_rates) / len(res_rates) if res_rates else 0.0
+    avg_timely_rate = sum(tim_rates) / len(tim_rates) if tim_rates else 0.0
+
+    # Leaderboard — dedup by CFPB canonical name. Display label is the canonical
+    # CFPB name, title-cased and stripped of common corporate-form suffixes so
+    # "BANK OF AMERICA, NATIONAL ASSOCIATION" renders as "Bank of America".
+    # This avoids pulling in data-quality-broken CreditDoc display names.
+    def _clean_canonical_label(canon: str) -> str:
+        s = canon
+        # Strip DBA/AKA/FKA trails first (before hitting other suffix rules)
+        s = re.sub(r",?\s+(D/?B/?A|A/?K/?A|F/?K/?A)\s+.*$", "", s, flags=re.I)
+        # Strip legal-form suffixes
+        s = re.sub(
+            r",?\s+(NATIONAL\s+ASSOCIATION|N\.A\.|NA|INCORPORATED|INC\.?|LLC|LTD|CORP\.?|CORPORATION|COMPANY|CO\.?|LP|LLP)\.?$",
+            "", s, flags=re.I,
+        )
+        # Trim dangling connectors
+        s = re.sub(r"[\s,&]+$", "", s)
+        # Title-case whole string
+        s = s.title()
+        # Preserve lowercase connectors
+        for w in ("Of", "And", "The", "For"):
+            s = re.sub(rf"\b{w}\b", w.lower(), s)
+        # Cap length so we don't get 100-char rows
+        if len(s) > 40:
+            s = s[:37].rstrip() + "..."
+        return s.strip()
+
+    # Pick per canonical group: highest volume + link to the most-representative slug
+    by_canon: dict[str, dict[str, Any]] = {}
+    for e in entries:
+        rb = e.get("response_breakdown") or {}
+        total = sum(rb.values()) if rb else 0
+        if total < 5:
+            continue
+        canon = (e.get("cfpb_company_name") or "").strip()
+        if not canon:
+            continue
+        display_label = _clean_canonical_label(canon)
+        # Score slug quality: prefer slugs whose display name looks well-formed
+        # (proper multi-word name, not a bare data-quality artifact like just "Bank")
+        display_raw = (e.get("company_name") or "").strip()
+        slug_quality = len(display_raw.split()) * 10 + len(display_raw)
+
+        prev = by_canon.get(canon)
+        if prev is None:
+            by_canon[canon] = {
+                "slug": e["slug"],
+                "company_name": display_label,
+                "canon": canon,
+                "total": total,
+                "slug_quality": slug_quality,
+                "resolution_rate": e.get("resolution_rate") or 0.0,
+                "timely_rate": e.get("timely_rate") or 0.0,
+            }
+        else:
+            # Highest-volume slug wins the total; highest-quality display name wins the link
+            if total > prev["total"]:
+                prev["total"] = total
+            if slug_quality > prev["slug_quality"]:
+                prev["slug"] = e["slug"]
+                prev["slug_quality"] = slug_quality
+                prev["resolution_rate"] = e.get("resolution_rate") or 0.0
+                prev["timely_rate"] = e.get("timely_rate") or 0.0
+
+    leaderboard = sorted(by_canon.values(), key=lambda r: r["total"], reverse=True)[:25]
+    sample_profiles = leaderboard[:12]
+
+    data_checked = max((e.get("checked_at") or "" for e in entries), default="")
+    if not data_checked:
+        from datetime import datetime as _dt
+        data_checked = _dt.utcnow().strftime("%Y-%m-%d")
+
+    site = "https://www.creditdoc.co"
+    url = f"{site}/research/consumer-complaints/"
+
+    article_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Consumer Response Data Transparency",
+        "description": "Aggregate CFPB Consumer Response data across every financial company CreditDoc tracks. Federal transparency records used for lender research.",
+        "author": {"@type": "Organization", "name": "CreditDoc Editorial Team", "url": f"{site}/about/"},
+        "publisher": {"@type": "Organization", "name": "CreditDoc", "url": site,
+                      "logo": {"@type": "ImageObject", "url": f"{site}/favicon.svg"}},
+        "url": url,
+        "datePublished": "2026-05-12",
+        "dateModified": data_checked,
+    })
+    breadcrumb_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": site + "/"},
+            {"@type": "ListItem", "position": 2, "name": "Research", "item": f"{site}/research/"},
+            {"@type": "ListItem", "position": 3, "name": "Consumer Response Data", "item": url},
+        ],
+    })
+    dataset_jsonld = _safe_jsonld_str({
+        "@context": "https://schema.org", "@type": "Dataset",
+        "name": "CreditDoc Aggregate Consumer Response Dataset",
+        "description": f"Aggregate CFPB Consumer Response data across {companies_tracked:,} financial companies. Includes total records, resolution rates, on-time response rates.",
+        "creator": {"@type": "Organization", "name": "CreditDoc", "url": site},
+        "isBasedOn": "https://www.consumerfinance.gov/data-research/consumer-complaints/",
+        "license": "https://www.consumerfinance.gov/foia/",
+        "dateModified": data_checked,
+        "url": url,
+        "keywords": "CFPB, consumer response, financial services, complaints database, transparency",
+    })
+
+    title = f"Consumer Response Data — {companies_tracked:,} Companies Tracked | CreditDoc"
+    description = f"Aggregate CFPB Consumer Response data across {companies_tracked:,} financial companies. Average resolution rate: {avg_resolution_rate:.1f}%. Average on-time response: {avg_timely_rate:.1f}%. Federal transparency records for lender research."
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_DIR)),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=False,
+        lstrip_blocks=False,
+    )
+    template = env.get_template("research_consumer_complaints.html.j2")
+    html = template.render(
+        title=title,
+        description=description,
+        data_checked=data_checked,
+        total_records=total_records,
+        companies_tracked=companies_tracked,
+        avg_resolution_rate=avg_resolution_rate,
+        avg_timely_rate=avg_timely_rate,
+        leaderboard=leaderboard,
+        sample_profiles=sample_profiles,
+        article_jsonld=article_jsonld,
+        breadcrumb_jsonld=breadcrumb_jsonld,
+        dataset_jsonld=dataset_jsonld,
+    )
+    out_path = output_dir / "research" / "consumer-complaints" / "index.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+    return out_path
+
+
 def render_compare(slug: str, output_dir: Path) -> Path:
     """Render one /compare/<slug>/index.html from comparisons.json + 2 lender rows."""
     comp = load_comparison(slug)

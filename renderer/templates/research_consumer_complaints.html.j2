@@ -1,0 +1,227 @@
+{#
+  /research/consumer-complaints/index.html — Jinja2 template for the CFPB
+  Consumer Response Data hub. Rebuilt 2026-07-23 to replace the frozen
+  Astro static page that shipped with "0 companies, 0 complaints" placeholders.
+
+  Data source: renderer/db.py all_trends_entries() → src/content/cfpb-trends.json
+  Positive framing enforced per feedback_creditdoc_no_negative_lender_content.md.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description|striptags|truncate(160, killwords=True, end='') }}">
+<link rel="canonical" href="https://www.creditdoc.co/research/consumer-complaints/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description|striptags|truncate(200, killwords=True, end='') }}">
+<meta property="og:url" content="https://www.creditdoc.co/research/consumer-complaints/">
+<meta property="og:site_name" content="CreditDoc">
+<meta property="og:image" content="https://www.creditdoc.co/og-default.png">
+<link rel="stylesheet" href="/styles/site.css">
+<script type="application/ld+json">
+{{ article_jsonld|safe }}
+</script>
+<script type="application/ld+json">
+{{ breadcrumb_jsonld|safe }}
+</script>
+<script type="application/ld+json">
+{{ dataset_jsonld|safe }}
+</script>
+</head>
+<body class="min-h-screen bg-bg text-text antialiased">
+{% include "_header.html" %}
+<main class="flex-1">
+
+  <nav class="max-w-5xl mx-auto px-4 pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-border">/</li>
+      <li><a href="/research/" class="hover:text-primary transition-colors">Research</a></li>
+      <li class="text-border">/</li>
+      <li class="text-text font-medium">Consumer Response Data</li>
+    </ol>
+  </nav>
+
+  <article class="max-w-5xl mx-auto px-4 py-8">
+
+    <header class="mb-10">
+      <span class="inline-block rounded-full bg-primary-light px-3 py-1 text-xs font-semibold text-primary uppercase tracking-wider mb-4">CreditDoc Research</span>
+      <h1 class="text-3xl md:text-4xl font-bold text-text mb-3 leading-tight">Consumer Response Data Transparency</h1>
+      <p class="text-lg text-muted max-w-3xl">Every lender page on CreditDoc includes the federal Consumer Response record from the Consumer Financial Protection Bureau. Below is the aggregate view: what the data looks like across every company we track.</p>
+      <div class="flex flex-wrap items-center gap-3 mt-4 text-xs text-muted">
+        <span>Data checked: {{ data_checked }}</span>
+        <span>|</span>
+        <span>Sources: CFPB Consumer Complaint Database, SBA, FDIC</span>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+      <div class="glass-card p-4 text-center">
+        <p class="text-2xl md:text-3xl font-bold text-text">{{ total_records|int|string|replace(',','')|reverse|replace('(\\d{3})','\\1,')|reverse if False else '{:,}'.format(total_records) }}</p>
+        <p class="text-xs text-muted mt-1">Consumer responses analyzed</p>
+      </div>
+      <div class="glass-card p-4 text-center">
+        <p class="text-2xl md:text-3xl font-bold text-text">{{ '{:,}'.format(companies_tracked) }}</p>
+        <p class="text-xs text-muted mt-1">Companies tracked</p>
+      </div>
+      <div class="glass-card p-4 text-center">
+        <p class="text-2xl md:text-3xl font-bold text-emerald-500">{{ '%.1f'|format(avg_resolution_rate) }}%</p>
+        <p class="text-xs text-muted mt-1">Average resolution rate</p>
+      </div>
+      <div class="glass-card p-4 text-center">
+        <p class="text-2xl md:text-3xl font-bold text-emerald-500">{{ '%.1f'|format(avg_timely_rate) }}%</p>
+        <p class="text-xs text-muted mt-1">Average on-time response</p>
+      </div>
+    </div>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-3">Use This Data With Local Research</h2>
+      <p class="text-sm text-muted leading-relaxed">Consumer Response records can help you ask better questions, but they do not replace local availability checks, state rules, category comparisons, contract review, or state license or registration checks.</p>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <a href="/city/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Local city guides</a>
+        <a href="/state/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">State lending context</a>
+        <a href="/categories/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">Provider categories</a>
+        <a href="/tools/" class="rounded-lg border border-border bg-bg-alt p-3 text-sm text-primary hover:underline">CreditDoc tools</a>
+      </div>
+    </section>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">Why CreditDoc Shows Consumer Response Data</h2>
+      <div class="prose prose-sm max-w-none text-muted leading-relaxed space-y-4">
+        <p>Most lender comparison sites show you marketing copy. They tell you what a company <em>says</em> about itself — the features, the promises, the polished brand message. CreditDoc goes further. On every <a href="/city/" class="text-primary hover:underline">local lender directory page</a>, we show you the federal record: how many consumers filed responses with the CFPB, how the company answered, and whether regulators have taken enforcement action.</p>
+        <p>This isn't a rating we invented. It's public data from the <a href="https://www.consumerfinance.gov/data-research/consumer-complaints/" class="text-primary hover:underline" target="_blank" rel="noopener">Consumer Financial Protection Bureau (CFPB)</a>, the federal agency created after the 2008 financial crisis specifically to protect consumers in the financial marketplace. Every record in our database was submitted by a real consumer, sent to the company for response, and tracked by the CFPB.</p>
+        <p>We believe this information should be visible at the moment you're making a borrowing decision — not buried in a government database that most people don't know exists. That's why we put it directly on lender pages alongside the company's services, pricing, and reviews.</p>
+      </div>
+      <div class="mt-5 rounded-lg border border-primary/20 bg-primary-light/40 p-4">
+        <p class="text-sm font-semibold text-text">Related CreditDoc research</p>
+        <p class="mt-1 text-sm text-muted leading-relaxed">For a positive-framed look at companies with notable public CFPB response records, read <a href="/research/most-responsive-consumer-finance-providers-2026/" class="text-primary hover:underline">America's Most Responsive Consumer Finance Providers 2026</a>. The report treats CFPB data as one transparency signal, not a complete measure of price, safety, licensing, or suitability.</p>
+      </div>
+    </section>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">How CFPB Consumer Responses Work</h2>
+      <div class="prose prose-sm max-w-none text-muted leading-relaxed space-y-4">
+        <p>The CFPB operates the largest consumer response database in the United States. Here's how the process works:</p>
+        <ol class="list-decimal list-inside space-y-3">
+          <li><strong class="text-text">A consumer submits a response record</strong> — Anyone can submit at <a href="https://www.consumerfinance.gov/complaint/" class="text-primary hover:underline" target="_blank" rel="noopener">consumerfinance.gov</a> about a financial product or service. The record describes what happened and what outcome the consumer is seeking.</li>
+          <li><strong class="text-text">The company responds</strong> — The CFPB forwards the record to the company, which has 15 days to respond. Companies can close records with "relief" (monetary compensation, account correction, or other tangible action) or without relief (explanation only).</li>
+          <li><strong class="text-text">The data becomes public</strong> — After the company responds (or after 60 days), the record is published in the public database — without the consumer's personal information. This is the data CreditDoc analyzes.</li>
+        </ol>
+        <p>A single record is not proof that a company did anything wrong. But patterns matter. A company with a strong response history tells you something that their marketing page never will.</p>
+      </div>
+    </section>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">What the Numbers on Each Page Mean</h2>
+      <div class="prose prose-sm max-w-none text-muted leading-relaxed">
+        <p class="mb-4">When you visit a lender page like <a href="/review/wells-fargo-bank/" class="text-primary hover:underline">Wells Fargo</a> or <a href="/review/capital-one/" class="text-primary hover:underline">Capital One</a>, you'll see a "Consumer Response Profile" section with several data points:</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose mb-4">
+          <div class="rounded-lg bg-bg-alt border border-border p-4">
+            <p class="font-semibold text-text text-sm mb-1">Total Responses on Record</p>
+            <p class="text-xs text-muted">Total responses filed with the CFPB. Larger banks naturally receive more due to their customer base — compare this relative to company size, not as an absolute score.</p>
+          </div>
+          <div class="rounded-lg bg-bg-alt border border-border p-4">
+            <p class="font-semibold text-text text-sm mb-1">Resolution Rate</p>
+            <p class="text-xs text-muted">The percentage of records where the company provided a documented response outcome — a refund, account correction, fee waiver, or written explanation. Higher is better. Site-wide average is {{ '%.1f'|format(avg_resolution_rate) }}%.</p>
+          </div>
+          <div class="rounded-lg bg-bg-alt border border-border p-4">
+            <p class="font-semibold text-text text-sm mb-1">On-Time Response Rate</p>
+            <p class="text-xs text-muted">How often the company responded within the CFPB's 15-day response window. Site-wide average is {{ '%.1f'|format(avg_timely_rate) }}%.</p>
+          </div>
+          <div class="rounded-lg bg-bg-alt border border-border p-4">
+            <p class="font-semibold text-text text-sm mb-1">Response Categories</p>
+            <p class="text-xs text-muted">The most common product and service categories the response records cover. Categories like "Managing an account" or "Incorrect information on your report" tell you what specific areas customers engage the CFPB on most often.</p>
+          </div>
+        </div>
+        <p>We also show <strong class="text-text">CFPB enforcement actions</strong> when a company has been formally disciplined by the bureau — with penalty amounts and descriptions of what happened. See examples on pages like <a href="/review/wells-fargo-bank/" class="text-primary hover:underline">Wells Fargo</a> or <a href="/review/citibank/" class="text-primary hover:underline">Citibank</a>.</p>
+        <p class="mt-3">For <a href="/categories/business-loans/" class="text-primary hover:underline">business lenders</a>, we additionally show <strong class="text-text">SBA lending rankings</strong> — where the company ranks nationally and by state for Small Business Administration loan approvals. This data comes from <a href="https://data.sba.gov/" class="text-primary hover:underline" target="_blank" rel="noopener">SBA.gov</a>.</p>
+      </div>
+    </section>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">How CreditDoc Integrates This Data</h2>
+      <div class="prose prose-sm max-w-none text-muted leading-relaxed space-y-4">
+        <p>We don't just dump raw numbers on the page. CreditDoc matches federal response records to our directory of {{ '{:,}'.format(companies_tracked) }}+ financial companies using a multi-tier entity resolution system. We cross-reference FDIC bank certificates, NCUA credit union charters, and company names to make sure the response data you see actually belongs to the company you're looking at.</p>
+        <p>Every match carries a confidence score. We only show data when we're at least 85% confident in the match, and we require a minimum threshold to avoid displaying statistically meaningless numbers.</p>
+        <p>The data refreshes daily from the CFPB's public API. When a new record is filed today, it typically appears on the relevant CreditDoc page within 24-48 hours after the CFPB publishes it.</p>
+        <p>Browse companies by category — <a href="/categories/personal-loans/" class="text-primary hover:underline">personal loans</a>, <a href="/categories/credit-cards/" class="text-primary hover:underline">credit cards</a>, <a href="/categories/mortgages/" class="text-primary hover:underline">mortgages</a>, <a href="/categories/debt-relief/" class="text-primary hover:underline">debt relief</a>, or <a href="/categories/credit-repair/" class="text-primary hover:underline">credit repair</a> — and compare response records side by side before you choose a lender.</p>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-text mb-2">Consumer Response Leaderboard</h2>
+      <p class="text-sm text-muted mb-4">Top {{ leaderboard|length }} financial companies by response volume in the CFPB database. Larger banks naturally receive more responses due to their customer base — the resolution rate and on-time rate are often more meaningful metrics than raw volume.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-border">
+              <th class="text-left py-3 px-2 text-xs font-semibold text-muted uppercase tracking-wider">#</th>
+              <th class="text-left py-3 px-2 text-xs font-semibold text-muted uppercase tracking-wider">Company</th>
+              <th class="text-right py-3 px-2 text-xs font-semibold text-muted uppercase tracking-wider">Responses</th>
+              <th class="text-right py-3 px-2 text-xs font-semibold text-muted uppercase tracking-wider">Resolution Rate</th>
+              <th class="text-right py-3 px-2 text-xs font-semibold text-muted uppercase tracking-wider hidden sm:table-cell">On-Time Rate</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border/50">
+            {% for row in leaderboard %}
+            <tr>
+              <td class="py-3 px-2 text-muted">{{ loop.index }}</td>
+              <td class="py-3 px-2"><a href="/review/{{ row.slug }}/#cfpb-profile" class="text-primary hover:underline font-medium">{{ row.company_name }}</a></td>
+              <td class="py-3 px-2 text-right text-text tabular-nums">{{ '{:,}'.format(row.total) }}</td>
+              <td class="py-3 px-2 text-right text-emerald-500 tabular-nums">{{ '%.0f'|format(row.resolution_rate) }}%</td>
+              <td class="py-3 px-2 text-right text-emerald-500 tabular-nums hidden sm:table-cell">{{ '%.0f'|format(row.timely_rate) }}%</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-muted mt-4">Data from the CFPB Consumer Complaint Database. Response counts reflect all product types. Resolution rate measures how often the company provided a documented response outcome. Click any company name to see their full Consumer Response Profile on CreditDoc.</p>
+    </section>
+
+    <section class="glass-card p-6 mb-8 border-primary/20 border">
+      <h2 class="text-xl font-bold text-text mb-2">Browse Individual Consumer Response Profiles</h2>
+      <p class="text-sm text-muted mb-4">CreditDoc publishes detailed Consumer Response Profiles for {{ '{:,}'.format(companies_tracked) }} financial companies — showing resolution rates, on-time response rates, product categories, and response breakdowns. Below is a sample of top-volume profiles; every profile is linked from the relevant <a href="/review/" class="text-primary hover:underline">/review/</a> page.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mb-4">
+        {% for row in sample_profiles %}
+        <a href="/review/{{ row.slug }}/#cfpb-profile" class="text-sm text-primary hover:underline">{{ row.company_name }}</a>
+        {% endfor %}
+      </div>
+      <p class="text-xs text-muted">Each profile shows how the company handles consumer responses based on CFPB data.</p>
+    </section>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">What This Data Doesn't Tell You</h2>
+      <div class="prose prose-sm max-w-none text-muted leading-relaxed space-y-4">
+        <p>Consumer Response records show one part of a company's relationship with its customers. They don't tell you everything.</p>
+        <ul class="list-disc list-inside space-y-2">
+          <li>Volume can reflect scale — a bank with 50 million customers will always show more records than a bank with 500,000, regardless of quality.</li>
+          <li>Records don't measure pricing, product terms, or long-term suitability.</li>
+          <li>The CFPB doesn't cover every financial product — auto insurance and some investment products fall outside its jurisdiction.</li>
+          <li>Newer companies may have limited data because they haven't been in operation long enough to build a track record.</li>
+        </ul>
+        <p>Always cross-reference Consumer Response data with state license checks, contract review, category peer comparisons, and independent reviews.</p>
+      </div>
+    </section>
+
+    <section class="glass-card p-6 mb-8">
+      <h2 class="text-xl font-bold text-text mb-4">How to File a Consumer Response with the CFPB</h2>
+      <div class="prose prose-sm max-w-none text-muted leading-relaxed space-y-4">
+        <p>If you have an issue with a financial company, you can submit a response record directly to the CFPB. The process is free and doesn't require a lawyer:</p>
+        <ol class="list-decimal list-inside space-y-2">
+          <li>Visit <a href="https://www.consumerfinance.gov/complaint/" class="text-primary hover:underline" target="_blank" rel="noopener">consumerfinance.gov/complaint</a></li>
+          <li>Select the product or service the issue is about</li>
+          <li>Describe what happened and what outcome you're seeking</li>
+          <li>The CFPB forwards your record to the company for a response within 15 days</li>
+        </ol>
+        <p>Filing a record creates a public data point that helps future consumers — and helps CreditDoc surface the pattern on this site.</p>
+      </div>
+    </section>
+
+  </article>
+</main>
+{% include "_footer.html" %}
+</body>
+</html>
