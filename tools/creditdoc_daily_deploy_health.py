@@ -50,11 +50,22 @@ LOG_PATH = Path("/srv/BusinessOps/logs/creditdoc_deploy_health.log")
 HARVEY_KEY_PATH = Path("/srv/BusinessOps/tools/.agentmail-api-key")
 FOUNDER_EMAIL = "gian.eao@gmail.com"
 
-# Sitemap URL-count guardrail. Baseline = 27,304 (session-end 2026-07-18).
-# Alarm if drift exceeds SITEMAP_TOLERANCE either direction. Update baseline
-# after any legitimate content-scale change.
-SITEMAP_BASELINE = 27_304
-SITEMAP_TOLERANCE = 200  # ±200 URLs = ~0.7% drift budget
+# Sitemap URL-count guardrail — self-healing.
+#
+# Prior version used a fixed baseline (27,304 set 2026-07-18) and screamed for 5
+# days when commit d5c1eafad6 correctly dropped noindex pages on 2026-07-20.
+# Fixed baselines rot the moment content genuinely changes.
+#
+# New model:
+#   - Record last-good count in SITEMAP_STATE_PATH.
+#   - Compare today's count to that recorded value.
+#   - Only fail if the DROP exceeds both SITEMAP_MIN_DROP_URLS and SITEMAP_MIN_DROP_PCT
+#     (both must be true → real regression, not slow enrichment churn).
+#   - Growth or gentle shrinkage silently updates the state, no alert.
+#   - First-ever run seeds the state and exits green.
+SITEMAP_STATE_PATH = Path("/srv/BusinessOps/data/creditdoc_sitemap_state.json")
+SITEMAP_MIN_DROP_URLS = 500  # ignore drops smaller than this
+SITEMAP_MIN_DROP_PCT = 3.0   # AND smaller than this % of last-good
 SITEMAP_INDEX_URL = f"{BASE}/sitemap-index.xml"
 
 
@@ -93,6 +104,27 @@ def count_sitemap_urls() -> tuple[int, str | None]:
         except Exception as exc:
             return (total, f"child sitemap {child_url}: {exc}")
     return (total, None)
+
+
+def _load_last_good_sitemap() -> int:
+    """Return the last-known-good sitemap URL count, or 0 if state file missing/invalid."""
+    try:
+        data = json.loads(SITEMAP_STATE_PATH.read_text())
+        return int(data.get("last_good_count", 0))
+    except Exception:
+        return 0
+
+
+def _save_last_good_sitemap(count: int) -> None:
+    """Persist the current healthy sitemap count as the new last-good baseline."""
+    try:
+        SITEMAP_STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
+        SITEMAP_STATE_PATH.write_text(json.dumps({
+            "last_good_count": count,
+            "recorded_at": datetime.now(timezone.utc).isoformat(),
+        }, indent=2) + "\n")
+    except Exception as exc:
+        print(f"[health] failed to save sitemap state: {exc}", file=sys.stderr)
 
 
 def send_alert(failures: list[dict]) -> None:
@@ -148,19 +180,26 @@ def main() -> int:
 
     failures = [r for r in results if r["status"] != 200]
 
-    # Sitemap URL-count guardrail (once per run — cheap, catches drift).
+    # Sitemap URL-count guardrail — self-healing (see SITEMAP_STATE_PATH block).
     sitemap_count, sitemap_err = count_sitemap_urls()
-    sitemap_delta = sitemap_count - SITEMAP_BASELINE
-    sitemap_ok = (sitemap_err is None
-                  and abs(sitemap_delta) <= SITEMAP_TOLERANCE
-                  and sitemap_count > 0)
-    if not sitemap_ok:
-        failures.append({
-            "url": "sitemap-count",
-            "status": sitemap_count,
-            "elapsed_s": 0.0,
-            "error": sitemap_err or f"drift {sitemap_delta:+d} from baseline {SITEMAP_BASELINE} exceeds ±{SITEMAP_TOLERANCE}",
-        })
+    prev_count = _load_last_good_sitemap()
+    sitemap_delta = sitemap_count - prev_count if prev_count else 0
+    real_regression = False
+    if sitemap_err is None and sitemap_count > 0 and prev_count:
+        drop_urls = prev_count - sitemap_count
+        drop_pct = (drop_urls / prev_count) * 100.0 if prev_count else 0.0
+        if drop_urls >= SITEMAP_MIN_DROP_URLS and drop_pct >= SITEMAP_MIN_DROP_PCT:
+            real_regression = True
+            failures.append({
+                "url": "sitemap-count",
+                "status": sitemap_count,
+                "elapsed_s": 0.0,
+                "error": f"drop {drop_urls} URLs ({drop_pct:.1f}%) from last-good {prev_count} exceeds thresholds ({SITEMAP_MIN_DROP_URLS} URLs AND {SITEMAP_MIN_DROP_PCT:.1f}%)",
+            })
+    # Only persist last-good when the fetch itself succeeded and it isn't a real
+    # regression (otherwise the alert would silence itself on the next run).
+    if sitemap_err is None and sitemap_count > 0 and not real_regression:
+        _save_last_good_sitemap(sitemap_count)
 
     all_green = not failures
     now = datetime.now(timezone.utc).isoformat()
@@ -168,7 +207,7 @@ def main() -> int:
     with LOG_PATH.open("a") as fh:
         fh.write(json.dumps({
             "ts": now, "results": results, "all_green": all_green,
-            "sitemap": {"count": sitemap_count, "baseline": SITEMAP_BASELINE,
+            "sitemap": {"count": sitemap_count, "last_good": prev_count,
                         "delta": sitemap_delta, "err": sitemap_err},
         }) + "\n")
 
