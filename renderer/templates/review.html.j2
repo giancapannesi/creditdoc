@@ -104,7 +104,11 @@
 {% if lender.description_long_linked %}
 <section class="mb-8">
 <h2 class="text-2xl font-semibold mb-3">{{ lender.name }} Review</h2>
-<div>{{ lender.description_long_linked|safe }}</div>
+<div class="prose prose-sm max-w-none text-text leading-relaxed">
+{% for para in lender.description_long_paragraphs %}
+<p class="mb-4">{{ para|safe }}</p>
+{% endfor %}
+</div>
 </section>
 {% endif %}
 {% if cfpb %}
@@ -219,7 +223,7 @@
 <section class="mb-8">
 <h2 class="text-2xl font-semibold mb-3">Frequently Asked Questions</h2>
 {% for q in lender.faqs %}
-<details class="mb-4"><summary class="font-semibold">{{ q.q }}</summary><p class="mt-2">{{ q.a }}</p></details>
+<details class="mb-4"><summary class="font-semibold">{{ q.q }}</summary><p class="mt-2">{{ q.a_html|default(q.a)|safe }}</p></details>
 {% endfor %}
 </section>
 {% endif %}

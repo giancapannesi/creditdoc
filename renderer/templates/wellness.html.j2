@@ -16,6 +16,8 @@
 <title>{{ post.seo_title or post.title }}</title>
 <meta name="description" content="{{ (post.description or '')|striptags|truncate(160, killwords=True, end='') }}">
 <link rel="canonical" href="https://www.creditdoc.co/financial-wellness/{{ post.slug }}/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/styles.css">
 <meta property="og:type" content="article">
 <meta property="og:title" content="{{ post.title }}">
 <meta property="og:description" content="{{ (post.description or '')|striptags|truncate(200, killwords=True, end='') }}">
@@ -97,7 +99,7 @@
 {% for t in key_takeaways %}
 <li class="flex items-start gap-2 text-sm text-muted">
 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/></svg>
-<span>{{ t }}</span>
+<span>{{ t|safe }}</span>
 </li>
 {% endfor %}
 </ul>
@@ -134,18 +136,18 @@
 </section>
 {% for section in sections %}
 <section class="mb-8 max-w-3xl">
-<h2 class="text-xl font-bold text-text mb-3">{{ section.heading }}</h2>
+<h2 id="{{ (section.heading or '')|lower|replace(' ', '-')|replace(':', '')|replace('?', '')|replace('.', '')|replace(',', '') }}" class="text-xl font-bold text-text mb-3">{{ section.heading }}</h2>
 <div class="prose text-text leading-relaxed">{{ section.content_html|safe }}</div>
 </section>
 {% endfor %}
 {% if faqs %}
 <section class="mb-8 max-w-3xl">
-<h2 class="text-xl font-bold text-text mb-4">Frequently Asked Questions</h2>
+<h2 id="faq" class="text-xl font-bold text-text mb-4">Frequently Asked Questions</h2>
 <div class="space-y-4">
 {% for q in faqs %}
 <div class="glass-card p-5">
 <h3 class="text-base font-semibold text-text">{{ q.question }}</h3>
-<p class="mt-2 text-sm text-muted leading-relaxed">{{ q.answer }}</p>
+<p class="mt-2 text-sm text-muted leading-relaxed">{{ q.answer_html|safe }}</p>
 </div>
 {% endfor %}
 </div>
