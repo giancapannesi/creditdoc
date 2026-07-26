@@ -1,12 +1,15 @@
 {#
   /answers/[slug]/index.html — Jinja2 template for cluster_answer pages.
 
-  Renders one answer from the DB row (data blob) into a static HTML page
-  that hits parity with Astro's [slug].astro. Focus: title/meta/canonical,
-  Article + FAQPage + BreadcrumbList JSON-LD, H1, key takeaways,
-  markdown-rendered sections, FAQ, primary sources, related answers.
+  2026-07-26 restructure (Track C→structural fix). Applies SEO Master Class
+  Recs #1 (300-char direct answer), #6/#7 (peer + hub links), #8 (source
+  citations) plus schema swap Article→QAPage per Google's structured-data
+  docs (single question with a primary answer = QAPage, not Article).
 
-  Shared chrome from _header.html + _footer.html (extracted from Astro).
+  FAQPage schema retained for sub-questions section — Google allows QAPage +
+  FAQPage on the same URL when they serve different purposes.
+
+  Shared chrome from _header.html + _footer.html.
 #}
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +19,8 @@
 <title>{{ answer.title or answer.h1 }}</title>
 <meta name="description" content="{{ (answer.meta_description or '')|striptags|truncate(160, killwords=True, end='') }}">
 <link rel="canonical" href="https://www.creditdoc.co/answers/{{ answer.slug }}/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/styles.css">
 <meta property="og:type" content="article">
 <meta property="og:title" content="{{ answer.h1 or answer.title }}">
 <meta property="og:description" content="{{ (answer.meta_description or '')|striptags|truncate(200, killwords=True, end='') }}">
@@ -25,14 +30,30 @@
 <script type="application/ld+json">
 {{ {
   "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": answer.h1 or answer.title,
-  "description": answer.meta_description or "",
-  "author": {
-    "@type": "Person",
-    "name": "Harvey Brooks",
-    "jobTitle": "Senior Financial Editor",
-    "url": "https://www.creditdoc.co/about/"
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": answer.h1 or answer.title,
+    "text": answer.h1 or answer.title,
+    "answerCount": 1,
+    "dateCreated": published_iso or last_updated_iso or "",
+    "author": {
+      "@type": "Organization",
+      "name": "CreditDoc Editorial Team",
+      "url": "https://www.creditdoc.co/about/"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": direct_answer or answer.meta_description or "",
+      "dateCreated": published_iso or last_updated_iso or "",
+      "upvoteCount": 0,
+      "url": "https://www.creditdoc.co/answers/" + answer.slug + "/",
+      "author": {
+        "@type": "Organization",
+        "name": "CreditDoc Editorial Team",
+        "url": "https://www.creditdoc.co/about/"
+      }
+    }
   },
   "publisher": {
     "@type": "Organization",
@@ -40,9 +61,8 @@
     "url": "https://www.creditdoc.co",
     "logo": {"@type": "ImageObject", "url": "https://www.creditdoc.co/favicon.svg"}
   },
-  "datePublished": answer.published_at or answer.last_updated or "",
-  "dateModified": answer.last_updated or answer.published_at or "",
-  "image": "https://www.creditdoc.co/og-default.png",
+  "datePublished": published_iso or "",
+  "dateModified": last_updated_iso or published_iso or "",
   "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.creditdoc.co/answers/" + answer.slug + "/"}
 } | tojson }}
 </script>
@@ -81,11 +101,27 @@
 <li class="text-text font-medium truncate">{{ answer.h1 or answer.title }}</li>
 </ol>
 </nav>
-<header class="max-w-3xl mb-8">
-<h1 class="text-2xl sm:text-3xl font-bold text-text">{{ answer.h1 or answer.title }}</h1>
-<p class="mt-3 text-muted leading-relaxed">{{ answer.meta_description or "" }}</p>
-<p class="mt-3 text-sm text-muted">Written by <a href="/about/" class="text-primary hover:underline font-medium">Harvey Brooks</a>, Senior Financial Editor</p>
+<article class="max-w-3xl">
+<header class="mb-6">
+<h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-text leading-[1.15]">{{ answer.h1 or answer.title }}</h1>
+<p class="mt-3 text-sm text-muted flex flex-wrap items-center gap-x-3 gap-y-1">
+<span>Reviewed by <a href="/about/" class="text-primary hover:underline font-medium">CreditDoc Editorial Team</a></span>
+{% if last_updated_display %}
+<span aria-hidden="true">·</span>
+<span>Last updated <time datetime="{{ last_updated_iso }}">{{ last_updated_display }}</time></span>
+{% endif %}
+</p>
 </header>
+{% if direct_answer %}
+<section class="mb-8" aria-label="Direct answer">
+<div class="rounded-xl border-l-4 border-primary bg-primary/5 px-5 py-4">
+<p class="text-base sm:text-lg font-medium text-text leading-snug">{{ direct_answer }}</p>
+{% if answer.target_money_page %}
+<p class="mt-3 text-sm text-muted">For providers, see our <a href="{{ answer.target_money_page }}" class="text-primary hover:underline font-medium">{{ (answer.target_money_page.strip('/').replace('best/best-','').replace('-',' ').title()) }}</a> comparison.</p>
+{% endif %}
+</div>
+</section>
+{% endif %}
 {% if key_takeaways %}
 <section class="mb-8">
 <div class="rounded-xl border-2 border-primary/30 bg-gradient-to-r from-primary/5 to-primary/10 p-6">
@@ -97,15 +133,56 @@
 {% for t in key_takeaways %}
 <li class="flex items-start gap-2 text-sm text-muted">
 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/></svg>
-<span>{{ t }}</span>
+<span>{{ t|safe }}</span>
 </li>
 {% endfor %}
 </ul>
 </div>
 </section>
 {% endif %}
-<section class="mb-8 max-w-3xl">
-<h2 class="sr-only">Continue Your Research</h2>
+{% for section in sections %}
+<section class="mb-8">
+<h2 class="text-xl font-bold text-text mb-3">{{ section.heading }}</h2>
+<div class="prose text-text leading-relaxed">{{ section.content_html|safe }}</div>
+</section>
+{% endfor %}
+{% if faqs %}
+<section class="mb-8">
+<h2 class="text-xl font-bold text-text mb-4">Frequently Asked Questions</h2>
+<div class="space-y-4">
+{% for q in faqs %}
+<div class="glass-card p-5">
+<h3 class="text-base font-semibold text-text">{{ q.question }}</h3>
+<p class="mt-2 text-sm text-muted leading-relaxed">{{ q.answer_html|safe }}</p>
+</div>
+{% endfor %}
+</div>
+</section>
+{% endif %}
+{% if related_siblings %}
+<section class="mb-8">
+<h2 class="text-xl font-bold text-text mb-4">Related Questions</h2>
+<ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+{% for s in related_siblings %}
+<li><a class="glass-card p-4 block hover:border-primary transition-colors" href="/answers/{{ s.slug }}/">
+<span class="block font-semibold text-text text-sm">{{ s.h1 or s.title }}</span>
+<span class="block mt-1 text-xs text-muted">{{ (s.cluster_pillar or '')|replace('-', ' ')|title }}</span>
+</a></li>
+{% endfor %}
+</ul>
+</section>
+{% endif %}
+{% if primary_sources %}
+<section class="mb-8">
+<h2 class="text-xl font-bold text-text mb-4">Sources</h2>
+<ul class="space-y-2 text-sm">
+{% for src in primary_sources %}
+<li><a href="{{ src.url }}" rel="nofollow noopener" class="text-primary hover:underline">{{ src.name }}</a>{% if src.description %} — <span class="text-muted">{{ src.description }}</span>{% endif %}</li>
+{% endfor %}
+</ul>
+</section>
+{% endif %}
+<section class="mb-8">
 <div class="glass-card p-5">
 <h3 class="text-lg font-bold text-text">Continue Your Research</h3>
 <p class="mt-1 text-sm text-muted leading-relaxed">Use this answer with CreditDoc's directory pages, local guides, state rules, and data explainers. These links provide context, not a recommendation, approval prediction, price quote, or licensing determination.</p>
@@ -132,48 +209,7 @@
 {% endif %}
 </div>
 </section>
-{% for section in sections %}
-<section class="mb-8 max-w-3xl">
-<h2 class="text-xl font-bold text-text mb-3">{{ section.heading }}</h2>
-<div class="prose text-text leading-relaxed">{{ section.content_html|safe }}</div>
-</section>
-{% endfor %}
-{% if faqs %}
-<section class="mb-8 max-w-3xl">
-<h2 class="text-xl font-bold text-text mb-4">Frequently Asked Questions</h2>
-<div class="space-y-4">
-{% for q in faqs %}
-<div class="glass-card p-5">
-<h3 class="text-base font-semibold text-text">{{ q.question }}</h3>
-<p class="mt-2 text-sm text-muted leading-relaxed">{{ q.answer }}</p>
-</div>
-{% endfor %}
-</div>
-</section>
-{% endif %}
-{% if related_siblings %}
-<section class="mb-8 max-w-3xl">
-<h2 class="text-xl font-bold text-text mb-4">Related Answers</h2>
-<ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-{% for s in related_siblings %}
-<li><a class="glass-card p-4 block hover:border-primary transition-colors" href="/answers/{{ s.slug }}/">
-<span class="block font-semibold text-text text-sm">{{ s.h1 or s.title }}</span>
-<span class="block mt-1 text-xs text-muted">{{ (s.cluster_pillar or '')|replace('-', ' ')|title }}</span>
-</a></li>
-{% endfor %}
-</ul>
-</section>
-{% endif %}
-{% if primary_sources %}
-<section class="mb-8 max-w-3xl">
-<h2 class="text-xl font-bold text-text mb-4">Sources</h2>
-<ul class="space-y-2 text-sm">
-{% for src in primary_sources %}
-<li><a href="{{ src.url }}" rel="nofollow noopener" class="text-primary hover:underline">{{ src.name }}</a>{% if src.description %} — <span class="text-muted">{{ src.description }}</span>{% endif %}</li>
-{% endfor %}
-</ul>
-</section>
-{% endif %}
+</article>
 </main>
 {% include "_footer.html" %}
 </body>

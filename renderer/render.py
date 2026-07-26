@@ -87,6 +87,80 @@ def _safe_jsonld_str(obj: Any) -> str:
     return json.dumps(obj, ensure_ascii=False).replace("</", "<\\/")
 
 
+_SENT_SPLIT_RE = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9])")
+_MD_BOLD_RE = re.compile(r'\*\*([^\n]+?)\*\*')
+_MD_ITALIC_RE = re.compile(r'(?<![*\w])\*([^*\n]+?)\*(?!\w)')
+
+
+def _apply_inline_md(s: str) -> str:
+    """Convert **bold** and *italic* to HTML. Idempotent — safe to run on already-linked text.
+
+    Italic runs before bold so a **bold clause containing *italic*** still resolves.
+    """
+    s = _MD_ITALIC_RE.sub(r'<em>\1</em>', s)
+    s = _MD_BOLD_RE.sub(r'<strong class="font-semibold text-text">\1</strong>', s)
+    return s
+
+
+def _strip_inline_md(s: str) -> str:
+    """Drop markdown asterisks so JSON-LD text and other plain-text contexts are clean."""
+    if not s:
+        return s
+    s = _MD_BOLD_RE.sub(r'\1', s)
+    s = _MD_ITALIC_RE.sub(r'\1', s)
+    return s
+
+
+def _preprocess_faqs(faqs: list) -> list:
+    """Attach `answer_html` (markdown → HTML) and clean `answer` (markdown asterisks stripped).
+
+    Templates render FAQ answers in two places: JSON-LD schema (plain text) and
+    the visible FAQ card (HTML). Storing both variants prevents leaked ``**bold**``
+    markdown from surfacing in either context.
+    """
+    out = []
+    for f in faqs or []:
+        raw = f.get("answer", "") or ""
+        new = dict(f)
+        new["answer_html"] = _apply_inline_md(raw)
+        new["answer"] = _strip_inline_md(raw)
+        out.append(new)
+    return out
+
+
+def _split_paragraphs(text: str, target_sentences: int = 3) -> list[str]:
+    """Return a list of paragraph strings from a description blob.
+
+    Handles three storage patterns: (a) `\\n\\n` separated (already paragraphed),
+    (b) single `\\n` separated (one break per paragraph), and (c) one continuous
+    blob with no breaks — falls back to grouping sentences.
+
+    Also applies inline markdown (**bold**, *italic*) so hand-authored review
+    descriptions like Chime's "**Checking Account:**" render as HTML rather
+    than leaking asterisks to the user.
+    """
+    if not text:
+        return []
+    text = text.replace("\r\n", "\n").strip()
+    if "\n\n" in text:
+        parts = [p.strip() for p in text.split("\n\n") if p.strip()]
+    elif "\n" in text:
+        parts = [p.strip() for p in text.split("\n") if p.strip()]
+    else:
+        parts = [text]
+    out: list[str] = []
+    for part in parts:
+        if len(part) <= 600:
+            out.append(_apply_inline_md(part))
+            continue
+        sentences = _SENT_SPLIT_RE.split(part)
+        for i in range(0, len(sentences), target_sentences):
+            chunk = " ".join(sentences[i : i + target_sentences]).strip()
+            if chunk:
+                out.append(_apply_inline_md(chunk))
+    return out
+
+
 def _seo_meta(text: str, max_len: int = 155) -> str:
     """Keep rendered meta descriptions under crawler limits without mid-word cuts."""
     clean = re.sub(r"\s+", " ", str(text or "")).strip()
@@ -127,6 +201,11 @@ def render_review(slug: str, output_dir: Path) -> Path:
         specific = lender_specific_faqs(lender, list(similar))
         lender["faqs"] = specific if specific else category_faqs(lender["category"] or "", lender.get("name") or "")
 
+    lender["faqs"] = [
+        {**f, "a_html": _apply_inline_md(f.get("a", "") or ""), "a": _strip_inline_md(f.get("a", "") or "")}
+        for f in (lender.get("faqs") or [])
+    ]
+
     # Pre-linkify description_long so inline money links appear (parity with Astro's
     # linkifyDescription helper). Template renders result with |safe.
     if lender.get("description_long"):
@@ -138,6 +217,8 @@ def render_review(slug: str, output_dir: Path) -> Path:
         )
     else:
         lender["description_long_linked"] = ""
+
+    lender["description_long_paragraphs"] = _split_paragraphs(lender["description_long_linked"])
 
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATES_DIR)),
@@ -204,8 +285,9 @@ def _md_to_html(src: str) -> str:
     in_list = False
 
     def inline(s: str) -> str:
-        s = _re.sub(r'\*\*([^*]+)\*\*', r'<strong class="font-semibold text-text">\1</strong>', s)
-        s = _re.sub(r'(?<!\*)\*([^*]+)\*(?!\*)', r'<em>\1</em>', s)
+        # Italic first so **bold containing *italic*** still resolves cleanly.
+        s = _re.sub(r'(?<!\*)\*([^*\n]+)\*(?!\*)', r'<em>\1</em>', s)
+        s = _re.sub(r'\*\*([^\n]+?)\*\*', r'<strong class="font-semibold text-text">\1</strong>', s)
         # Bare markdown links [text](url)
         s = _re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" class="text-primary hover:underline">\1</a>', s)
         return s
@@ -245,10 +327,12 @@ def _md_to_html(src: str) -> str:
             flush_table()
         if line.startswith("### "):
             flush_list()
-            out.append(f'<h4 class="text-lg font-semibold text-text mt-6 mb-2">{inline(line[4:])}</h4>')
+            head = _re.sub(r'^H[1-6]:\s*', '', line[4:])
+            out.append(f'<h4 class="text-lg font-semibold text-text mt-6 mb-2">{inline(head)}</h4>')
         elif line.startswith("## "):
             flush_list()
-            out.append(f'<h4 class="text-lg font-semibold text-text mt-6 mb-2">{inline(line[3:])}</h4>')
+            head = _re.sub(r'^H[1-6]:\s*', '', line[3:])
+            out.append(f'<h4 class="text-lg font-semibold text-text mt-6 mb-2">{inline(head)}</h4>')
         elif line.startswith("- "):
             if not in_list:
                 out.append('<ul class="list-disc pl-6 my-3 space-y-1.5 text-text">')
@@ -276,7 +360,7 @@ def render_answer(slug: str, output_dir: Path) -> Path:
         {"heading": s.get("heading", ""), "content_html": _md_to_html(s.get("content", ""))}
         for s in sections_raw
     ]
-    faqs = [f for f in (answer.get("faq_schema") or []) if isinstance(f, dict) and f.get("question") and f.get("answer")]
+    faqs = _preprocess_faqs([f for f in (answer.get("faq_schema") or []) if isinstance(f, dict) and f.get("question") and f.get("answer")])
     primary_sources = [s for s in (answer.get("primary_sources") or []) if isinstance(s, dict) and s.get("url") and s.get("name")]
 
     # Key takeaways = first sentence of first 4 sections
@@ -288,7 +372,41 @@ def render_answer(slug: str, output_dir: Path) -> Path:
         m = _re.match(r"(.*?[.!?])(\s|$)", plain)
         return (m.group(1) if m else plain[:160]).strip()
     key_takeaways = [_first_sentence(s.get("content", "")) for s in sections_raw[:4] if s.get("content")]
-    key_takeaways = [t for t in key_takeaways if t]
+    key_takeaways = [_apply_inline_md(t) for t in key_takeaways if t]
+
+    # Direct-answer paragraph: ≤300 chars, no leading Yes./No., first section's opening.
+    # Per SEO Master Class Rec #1 (pp.80/151/152/154) — the snippet-capture pattern.
+    def _direct_answer(section_content: str) -> str:
+        if not section_content:
+            return ""
+        plain = _re.sub(r"\*\*(.+?)\*\*", r"\1", section_content)
+        plain = _re.sub(r"[\*_`|#>]+", " ", plain)
+        plain = _re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", plain)
+        plain = _re.sub(r"\s+", " ", plain).strip()
+        plain = _re.sub(r"^(Yes|No|Yes\.|No\.|Yes,|No,)\s+", "", plain, flags=_re.IGNORECASE)
+        if len(plain) <= 300:
+            return plain
+        cut = plain[:300]
+        last_sentence_end = max(cut.rfind("."), cut.rfind("!"), cut.rfind("?"))
+        if last_sentence_end > 150:
+            return cut[:last_sentence_end + 1]
+        last_space = cut.rfind(" ")
+        return cut[:last_space] + "…" if last_space > 200 else cut + "…"
+    direct_answer = _direct_answer(sections_raw[0].get("content", "") if sections_raw else "")
+
+    # Visible-date string. Prefer dateModified > published_at.
+    from datetime import datetime as _dt
+    def _fmt_date(iso: str) -> str:
+        if not iso:
+            return ""
+        try:
+            d = _dt.fromisoformat(iso.replace("Z", "+00:00"))
+            return d.strftime("%B %d, %Y")
+        except Exception:
+            return iso[:10]
+    last_updated_iso = answer.get("last_updated") or answer.get("updated_at") or answer.get("published_at") or ""
+    published_iso = answer.get("published_at") or answer.get("last_updated") or ""
+    last_updated_display = _fmt_date(last_updated_iso)
 
     related = list(sibling_cluster_answers(slug, answer.get("cluster_pillar") or "", limit=4))
 
@@ -306,6 +424,10 @@ def render_answer(slug: str, output_dir: Path) -> Path:
         primary_sources=primary_sources,
         key_takeaways=key_takeaways,
         related_siblings=related,
+        direct_answer=direct_answer,
+        last_updated_display=last_updated_display,
+        last_updated_iso=last_updated_iso,
+        published_iso=published_iso,
     )
 
     out_path = output_dir / "answers" / slug / "index.html"
@@ -325,12 +447,13 @@ def render_blog(slug: str, output_dir: Path) -> Path:
         {"heading": s.get("heading", ""), "content_html": _md_to_html(s.get("content", ""))}
         for s in sections_raw
     ]
-    faqs = [f for f in (post.get("faq") or []) if isinstance(f, dict) and f.get("question") and f.get("answer")]
+    faqs = _preprocess_faqs([f for f in (post.get("faq") or []) if isinstance(f, dict) and f.get("question") and f.get("answer")])
 
     # Blog uses key_takeaways as a top-level list already
     key_takeaways = post.get("key_takeaways") or []
     if not isinstance(key_takeaways, list):
         key_takeaways = []
+    key_takeaways = [_apply_inline_md(t) if isinstance(t, str) else t for t in key_takeaways]
 
     related = list(sibling_blog_posts(slug, post.get("category") or "", limit=4))
 
@@ -367,10 +490,11 @@ def render_wellness(slug: str, output_dir: Path) -> Path:
         {"heading": s.get("heading", ""), "content_html": _md_to_html(s.get("content", ""))}
         for s in sections_raw
     ]
-    faqs = [f for f in (post.get("faq") or []) if isinstance(f, dict) and f.get("question") and f.get("answer")]
+    faqs = _preprocess_faqs([f for f in (post.get("faq") or []) if isinstance(f, dict) and f.get("question") and f.get("answer")])
     key_takeaways = post.get("key_takeaways") or []
     if not isinstance(key_takeaways, list):
         key_takeaways = []
+    key_takeaways = [_apply_inline_md(t) if isinstance(t, str) else t for t in key_takeaways]
     related = list(sibling_wellness_guides(slug, post.get("category") or "", limit=4))
 
     env = Environment(

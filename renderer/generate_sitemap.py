@@ -57,6 +57,86 @@ STATIC_EXCLUSIONS = {"/search/", "/specials/", "/linkedin-oauth-callback/"}
 # via public/_redirects, so they must NOT appear in the sitemap.
 EXCLUDED_PREFIXES = ("/trends/",)
 
+# Path exclusions (2026-07-25): Track C — 16 /answers/ pages Google explicitly
+# rejected (Crawled - currently not indexed) OR near-duplicate slug losers.
+# All 301 redirect via public/_redirects. Must NOT appear in the sitemap.
+# Diagnosis: CreditDoc Project Improvement/answers_fix_2026-07-25/TRACK_C_DIAGNOSIS.md
+EXCLUDED_PATHS = {
+    # Track C 2026-07-25: 14 Google-rejected /answers/ retirements
+    "/answers/build-credit-with-no-credit-history/",
+    "/answers/can-i-do-debt-consolidation-myself/",
+    "/answers/does-credit-score-affect-car-insurance/",
+    "/answers/how-credit-card-interest-works/",
+    "/answers/personal-loan-interest-rates-explained/",
+    "/answers/how-to-find-best-personal-loan-lenders/",
+    "/answers/are-small-business-loans-worth-it/",
+    "/answers/how-to-build-credit-score-fast/",
+    "/answers/small-business-loans-guide/",
+    "/answers/small-business-loans-sba-merchant-cash-advances/",
+    "/answers/how-much-can-you-borrow-with-your-credit-score/",
+    "/answers/personal-loans-bad-credit-how-to-qualify/",
+    "/answers/easy-approval-credit-cards/",
+    "/answers/how-to-apply-for-secured-credit-cards/",
+    # Batch 1 2026-07-25: 12 duplicate-cluster retirements → money pages
+    "/answers/are-credit-builder-loans-bad/",
+    "/answers/are-credit-builder-loans-good/",
+    "/answers/are-credit-builder-loans-legit/",
+    "/answers/are-credit-card-balance-transfers-a-good-idea/",
+    "/answers/are-credit-card-balance-transfers-worth-it/",
+    "/answers/are-credit-repair-companies-good/",
+    "/answers/are-credit-repair-companies-legit/",
+    "/answers/are-small-business-loans/",
+    "/answers/are-small-business-loans-a-good-idea/",
+    "/answers/what-should-you-know-about-invoice-factoring-guide/",
+    "/answers/what-should-you-know-about-invoice-factoring-explained/",
+    "/answers/can-credit-score-affect-car-insurance/",
+    # Batch 2 2026-07-25: 40 cannibal retirements → /best/ money pages
+    "/answers/can-a-credit-repair-company-remove-collections/",
+    "/answers/can-credit-repair-companies-really-fix-your-credit/",
+    "/answers/can-credit-repair-company-remove-collections/",
+    "/answers/do-i-need-a-credit-repair-company/",
+    "/answers/does-credit-repair-companies-work/",
+    "/answers/how-do-credit-repair-companies-work/",
+    "/answers/how-much-do-debt-consolidation-companies-charge/",
+    "/answers/how-should-you-compare-small-business-loans/",
+    "/answers/how-to-start-a-merchant-cash-advance-company/",
+    "/answers/invoice-factoring-companies-guide/",
+    "/answers/what-are-credit-repair-companies/",
+    "/answers/what-are-the-best-business-cash-advance/",
+    "/answers/what-are-the-best-business-line-of-credit-banks/",
+    "/answers/what-are-the-best-business-line-of-credit-for-bad-credit/",
+    "/answers/what-are-the-best-business-line-of-credit-lenders/",
+    "/answers/what-are-the-best-business-line-of-credit-offers/",
+    "/answers/what-are-the-best-business-line-of-credit-options/",
+    "/answers/what-are-the-best-equipment-financing-companies-for-startups/",
+    "/answers/what-are-the-best-equipment-financing-rates/",
+    "/answers/what-are-the-best-heavy-equipment-financing/",
+    "/answers/what-are-the-best-invoice-factoring-companies/",
+    "/answers/what-are-the-best-invoice-factoring-software/",
+    "/answers/what-are-the-best-merchant-cash-advance/",
+    "/answers/what-are-the-best-sba-loans-for-startups/",
+    "/answers/what-are-the-best-small-business-loan-banks/",
+    "/answers/what-are-the-best-small-business-loan-rates/",
+    "/answers/what-are-the-best-small-business-loans/",
+    "/answers/what-are-the-best-small-business-loans-for-bad-credit/",
+    "/answers/what-are-the-best-small-business-loans-for-new-businesses/",
+    "/answers/what-are-the-best-small-business-loans-for-startups/",
+    "/answers/what-are-the-best-small-business-loans-for-women/",
+    "/answers/what-are-the-best-startup-business-loans/",
+    "/answers/what-are-the-top-merchant-cash-advance/",
+    "/answers/what-are-the-top-sba-loans/",
+    "/answers/what-are-the-top-small-business-loans/",
+    "/answers/what-is-a-good-credit-repair-company/",
+    "/answers/what-is-the-best-credit-repair-company/",
+    "/answers/what-should-you-know-about-heavy-equipment-financing-companies/",
+    "/answers/what-should-you-know-about-largest-merchant-cash-advance-companies/",
+    "/answers/which-banks-offer-unsecured-business-loans/",
+    # 2026-07-26: H1-rewrite duplicate-cluster merges (loser of each pair)
+    "/answers/what-should-you-know-about-startup-business-loan-bad-credit-no-revenue/",
+    "/answers/what-should-you-know-about-unsecured-business-loan-interest-rate/",
+    "/answers/what-should-you-know-about-sba-7a-loan-approval-time/",
+}
+
 
 def _normalize_url(raw: str) -> str | None:
     """Match Astro's normalizeSitemapUrl(): canonical https://www.creditdoc.co/<path>/ .
@@ -101,8 +181,11 @@ def load_exclusions() -> set[str]:
 
 def _keep_static(path: str) -> bool:
     """Match Astro's filter(): drop search/specials/linkedin-oauth-callback/print.
-    Also drops retired family prefixes (EXCLUDED_PREFIXES)."""
+    Also drops retired family prefixes (EXCLUDED_PREFIXES) and explicit path
+    exclusions (EXCLUDED_PATHS)."""
     if path in STATIC_EXCLUSIONS:
+        return False
+    if path in EXCLUDED_PATHS:
         return False
     if path.endswith("/print/"):
         return False

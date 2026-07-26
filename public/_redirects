@@ -1310,3 +1310,90 @@
 # 2026-07-18: last 2 /review/ 404s from July 14 GSC Coverage Drilldown (task #11)
 /review/jеrsеy-city-βuу-ηеrе-ρау-hеrе/ /review/ 301
 /review/speedy-miami-envío-de-dinero-y-paquetes-a-centro-y-sur-américa-envío-dentro-de-estados-unidos-in-god-we-trust/ /review/ 301
+
+# 2026-07-25: Track C — retire 16 of 17 Google-rejected /answers/ pages.
+# Diagnosis: intent mismatch on DA=15 site + /best/ money-page cannibalisation + 3 duplicate-slug pairs.
+# 14 → money page (recovers 400-5,617 inbound-link equity per URL). 2 → dup winner.
+# Full audit: CreditDoc Project Improvement/answers_fix_2026-07-25/TRACK_C_DIAGNOSIS.md
+# Pair 1: duplicate winners (retire loser, keep winner):
+/answers/build-credit-with-no-credit-history/ /answers/build-credit-with-no-history/ 301
+/answers/can-i-do-debt-consolidation-myself/ /answers/can-you-do-debt-consolidation-yourself-guide/ 301
+# 14 informational/cannibal → declared target_money_page:
+/answers/does-credit-score-affect-car-insurance/ /best/best-credit-monitoring-services/ 301
+/answers/how-credit-card-interest-works/ /best/best-secured-credit-cards/ 301
+/answers/personal-loan-interest-rates-explained/ /best/best-personal-loan-lenders/ 301
+/answers/how-to-find-best-personal-loan-lenders/ /best/best-personal-loan-lenders/ 301
+/answers/are-small-business-loans-worth-it/ /best/best-small-business-loans/ 301
+/answers/how-to-build-credit-score-fast/ /best/best-credit-builder-loans/ 301
+/answers/small-business-loans-guide/ /best/best-small-business-loans/ 301
+/answers/small-business-loans-sba-merchant-cash-advances/ /best/best-small-business-loans/ 301
+/answers/how-much-can-you-borrow-with-your-credit-score/ /best/best-personal-loan-lenders/ 301
+/answers/personal-loans-bad-credit-how-to-qualify/ /best/best-personal-loans-bad-credit/ 301
+/answers/easy-approval-credit-cards/ /best/best-no-credit-check-cards/ 301
+/answers/how-to-apply-for-secured-credit-cards/ /best/best-secured-credit-cards/ 301
+
+# 2026-07-25 Batch 1 — MERGE_DUP: 12 near-duplicate cluster slugs → target money page.
+# All are informational-YMYL duplicate siblings Google refuses to index on DA=15.
+# Retiring to money pages instead of picking arbitrary sibling-winner.
+# 6 clusters, 12 URLs. Full plan: answers_fix_2026-07-25/BATCH_CLASSIFICATION.md
+/answers/are-credit-builder-loans-bad/ /best/best-credit-builder-loans/ 301
+/answers/are-credit-builder-loans-good/ /best/best-credit-builder-loans/ 301
+/answers/are-credit-builder-loans-legit/ /best/best-credit-builder-loans/ 301
+/answers/are-credit-card-balance-transfers-a-good-idea/ /best/best-secured-credit-cards/ 301
+/answers/are-credit-card-balance-transfers-worth-it/ /best/best-secured-credit-cards/ 301
+/answers/are-credit-repair-companies-good/ /best/best-credit-repair-companies/ 301
+/answers/are-credit-repair-companies-legit/ /best/best-credit-repair-companies/ 301
+/answers/are-small-business-loans/ /best/best-small-business-loans/ 301
+/answers/are-small-business-loans-a-good-idea/ /best/best-small-business-loans/ 301
+/answers/what-should-you-know-about-invoice-factoring-guide/ /best/best-invoice-factoring/ 301
+/answers/what-should-you-know-about-invoice-factoring-explained/ /best/best-invoice-factoring/ 301
+/answers/can-credit-score-affect-car-insurance/ /best/best-credit-monitoring-services/ 301
+
+# 2026-07-25 Batch 2 — RETIRE_CANNIBAL: 40 /answers/ pages that compete head-on
+# with their declared /best/ money page. Google indexes the /best/ page, drops these.
+# Redirect recovers link equity to the indexed money page.
+/answers/does-credit-repair-companies-work/ /best/best-credit-repair-companies/ 301
+/answers/how-should-you-compare-small-business-loans/ /best/best-small-business-loans/ 301
+/answers/invoice-factoring-companies-guide/ /best/best-invoice-factoring/ 301
+/answers/what-are-credit-repair-companies/ /best/best-credit-repair-companies/ 301
+/answers/what-are-the-best-business-line-of-credit-offers/ /best/best-business-lines-of-credit/ 301
+/answers/what-are-the-best-equipment-financing-companies-for-startups/ /best/best-equipment-financing/ 301
+/answers/what-are-the-best-equipment-financing-rates/ /best/best-equipment-financing/ 301
+/answers/what-are-the-best-heavy-equipment-financing/ /best/best-equipment-financing/ 301
+/answers/what-are-the-best-merchant-cash-advance/ /best/best-merchant-cash-advance/ 301
+/answers/what-are-the-best-sba-loans-for-startups/ /best/best-sba-loans/ 301
+/answers/what-are-the-best-small-business-loan-rates/ /best/best-small-business-loans/ 301
+/answers/what-are-the-best-small-business-loans/ /best/best-small-business-loans/ 301
+/answers/what-are-the-best-small-business-loans-for-bad-credit/ /best/best-startup-business-loans/ 301
+/answers/what-are-the-best-small-business-loans-for-new-businesses/ /best/best-startup-business-loans/ 301
+/answers/what-are-the-best-startup-business-loans/ /best/best-startup-business-loans/ 301
+/answers/what-are-the-top-merchant-cash-advance/ /best/best-merchant-cash-advance/ 301
+/answers/what-are-the-top-small-business-loans/ /best/best-small-business-loans/ 301
+/answers/what-is-a-good-credit-repair-company/ /best/best-credit-repair-companies/ 301
+/answers/what-is-the-best-credit-repair-company/ /best/best-credit-repair-companies/ 301
+/answers/what-should-you-know-about-heavy-equipment-financing-companies/ /best/best-equipment-financing/ 301
+/answers/what-should-you-know-about-largest-merchant-cash-advance-companies/ /best/best-merchant-cash-advance/ 301
+/answers/can-a-credit-repair-company-remove-collections/ /best/best-credit-repair-companies/ 301
+/answers/can-credit-repair-companies-really-fix-your-credit/ /best/best-credit-repair-companies/ 301
+/answers/can-credit-repair-company-remove-collections/ /best/best-credit-repair-companies/ 301
+/answers/do-i-need-a-credit-repair-company/ /best/best-credit-repair-companies/ 301
+/answers/how-do-credit-repair-companies-work/ /best/best-credit-repair-companies/ 301
+/answers/how-much-do-debt-consolidation-companies-charge/ /best/best-debt-relief-companies/ 301
+/answers/how-to-start-a-merchant-cash-advance-company/ /best/best-merchant-cash-advance/ 301
+/answers/what-are-the-best-business-cash-advance/ /best/best-merchant-cash-advance/ 301
+/answers/what-are-the-best-business-line-of-credit-banks/ /best/best-business-lines-of-credit/ 301
+/answers/what-are-the-best-business-line-of-credit-for-bad-credit/ /best/best-business-lines-of-credit/ 301
+/answers/what-are-the-best-business-line-of-credit-lenders/ /best/best-business-lines-of-credit/ 301
+/answers/what-are-the-best-business-line-of-credit-options/ /best/best-business-lines-of-credit/ 301
+/answers/what-are-the-best-invoice-factoring-companies/ /best/best-invoice-factoring/ 301
+/answers/what-are-the-best-invoice-factoring-software/ /best/best-invoice-factoring/ 301
+/answers/what-are-the-best-small-business-loan-banks/ /best/best-small-business-loans/ 301
+/answers/what-are-the-best-small-business-loans-for-startups/ /best/best-startup-business-loans/ 301
+/answers/what-are-the-best-small-business-loans-for-women/ /best/best-startup-business-loans/ 301
+/answers/what-are-the-top-sba-loans/ /best/best-sba-loans/ 301
+/answers/which-banks-offer-unsecured-business-loans/ /best/best-business-lines-of-credit/ 301
+
+# 2026-07-26 — H1-rewrite duplicate-cluster merges (3 pairs)
+/answers/what-should-you-know-about-startup-business-loan-bad-credit-no-revenue/ /answers/what-should-you-know-about-startup-business-loans-with-no-revenue-bad/ 301
+/answers/what-should-you-know-about-unsecured-business-loan-interest-rate/ /answers/what-should-you-know-about-unsecured-business-loan-rates/ 301
+/answers/what-should-you-know-about-sba-7a-loan-approval-time/ /answers/what-should-you-know-about-sba-loan-approval-timeline/ 301
