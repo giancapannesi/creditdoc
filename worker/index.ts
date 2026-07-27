@@ -52,6 +52,107 @@ function searchStateTarget(url: URL): string | null {
   return `/state/${slug}/`;
 }
 
+// 19 known category slugs (matches dist/categories/*/). Used for canonical
+// rewrites — /search/?category=X is a functional filter (View All N Companies
+// button on /categories/*/ pages needs it to work), so we do NOT 301 it.
+// Rewriting the canonical tag tells Google the equivalent indexable page is
+// /categories/X/ without breaking the button UX. Added 2026-07-27.
+const CATEGORY_SLUGS = new Set<string>([
+  "atm","banking","bankruptcy","build-credit","business-loans","check-cashing",
+  "credit-cards","credit-monitoring","credit-repair","credit-unions",
+  "debt-relief","emergency-cash","fintech","free-help","insurance","mortgages",
+  "pawn-shops","payday-alternatives","personal-loans",
+]);
+
+// Returns the canonical target path for a /search/?* request when the query
+// maps cleanly to an indexable page. Returns null for compound queries or
+// unknown values (canonical stays /search/).
+function searchCanonicalTarget(url: URL): string | null {
+  const catRaw = url.searchParams.get("category");
+  if (catRaw) {
+    const keys = Array.from(url.searchParams.keys()).filter((k) => url.searchParams.get(k));
+    if (keys.length === 1 && keys[0] === "category") {
+      const slug = catRaw.trim().toLowerCase();
+      if (CATEGORY_SLUGS.has(slug)) return `/categories/${slug}/`;
+    }
+  }
+  return null;
+}
+
+// Rewrites the canonical + og:url tags in the /search/ static HTML before
+// returning to the client. Only for known single-param queries that map to
+// an indexable page. Fail-open — any anomaly returns the original asset.
+async function serveSearchWithCanonicalRewrite(
+  request: Request,
+  env: Env,
+  canonicalPath: string
+): Promise<Response> {
+  try {
+    const bareSearchUrl = new URL("/search/", request.url).toString();
+    const asset = await env.ASSETS.fetch(new Request(bareSearchUrl, request));
+    const ct = asset.headers.get("content-type") || "";
+    if (asset.status !== 200 || !ct.includes("html")) return asset;
+    const html = await asset.text();
+    const origin = new URL(request.url).origin;
+    const newHref = `${origin}${canonicalPath}`;
+    const rewritten = html
+      .replace(
+        /<link rel="canonical" href="[^"]*\/search\/"\s*\/?>/,
+        `<link rel="canonical" href="${newHref}">`
+      )
+      .replace(
+        /<meta property="og:url" content="[^"]*\/search\/"\s*\/?>/,
+        `<meta property="og:url" content="${newHref}">`
+      );
+    const headers = new Headers(asset.headers);
+    headers.delete("content-length");
+    return new Response(rewritten, { status: 200, headers });
+  } catch {
+    return env.ASSETS.fetch(request);
+  }
+}
+
+// STATE_NAME_TO_ABBR — for /browse/<cat>/<city>-<fullstate>/ → /browse/<cat>/<city>-<ab>/
+// Ported 2026-07-27 from deleted src/middleware.ts browseCityStateRedirectTarget.
+// 467 /browse/ URLs live; long-state-name variants were 404ing since 2026-07-18.
+const STATE_NAME_TO_ABBR: Record<string, string> = {
+  "alabama": "al", "alaska": "ak", "arizona": "az", "arkansas": "ar",
+  "california": "ca", "colorado": "co", "connecticut": "ct", "delaware": "de",
+  "florida": "fl", "georgia": "ga", "hawaii": "hi", "idaho": "id",
+  "illinois": "il", "indiana": "in", "iowa": "ia", "kansas": "ks",
+  "kentucky": "ky", "louisiana": "la", "maine": "me", "maryland": "md",
+  "massachusetts": "ma", "michigan": "mi", "minnesota": "mn", "mississippi": "ms",
+  "missouri": "mo", "montana": "mt", "nebraska": "ne", "nevada": "nv",
+  "new-hampshire": "nh", "new-jersey": "nj", "new-mexico": "nm", "new-york": "ny",
+  "north-carolina": "nc", "north-dakota": "nd", "ohio": "oh", "oklahoma": "ok",
+  "oregon": "or", "pennsylvania": "pa", "rhode-island": "ri",
+  "south-carolina": "sc", "south-dakota": "sd", "tennessee": "tn",
+  "texas": "tx", "utah": "ut", "vermont": "vt", "virginia": "va",
+  "washington": "wa", "west-virginia": "wv", "wisconsin": "wi", "wyoming": "wy",
+};
+// Sort state slugs by length DESC so multi-word states match before single-word
+// (e.g. "new-york" checked before "york" — though "york" isn't a state, the
+// principle holds for "north-carolina" vs "carolina" etc.)
+const STATE_NAME_SLUGS_SORTED = Object.keys(STATE_NAME_TO_ABBR).sort((a, b) => b.length - a.length);
+
+function browseFullstateRedirect(pathname: string): string | null {
+  const m = pathname.match(/^\/browse\/([^/]+)\/([^/]+)\/?$/);
+  if (!m) return null;
+  const category = m[1];
+  const cityStateSlug = m[2].toLowerCase();
+  for (const stateSlug of STATE_NAME_SLUGS_SORTED) {
+    const suffix = `-${stateSlug}`;
+    if (cityStateSlug.endsWith(suffix)) {
+      const citySlug = cityStateSlug.slice(0, -suffix.length);
+      if (!citySlug) return null;
+      const abbr = STATE_NAME_TO_ABBR[stateSlug];
+      const target = `/browse/${category}/${citySlug}-${abbr}/`;
+      return target === pathname ? null : target;
+    }
+  }
+  return null;
+}
+
 export interface Env {
   ASSETS: Fetcher;
   SUPABASE_URL?: string;
@@ -105,9 +206,22 @@ export default {
     }
 
     if (path === "/search" || path === "/search/") {
-      const target = searchStateTarget(url);
-      if (target) {
-        return Response.redirect(new URL(target, url.origin).toString(), 301);
+      const stateTarget = searchStateTarget(url);
+      if (stateTarget) {
+        return Response.redirect(new URL(stateTarget, url.origin).toString(), 301);
+      }
+      const canonTarget = searchCanonicalTarget(url);
+      if (canonTarget) {
+        return serveSearchWithCanonicalRewrite(request, env, canonTarget);
+      }
+    }
+
+    // Ported 2026-07-27: /browse/<cat>/<city>-<fullstate>/ → /browse/<cat>/<city>-<ab>/
+    // Deleted middleware behavior — long-state-name variants were 404ing.
+    if (path.startsWith("/browse/")) {
+      const browseTarget = browseFullstateRedirect(path);
+      if (browseTarget) {
+        return Response.redirect(new URL(browseTarget, url.origin).toString(), 301);
       }
     }
 
