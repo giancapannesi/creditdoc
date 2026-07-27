@@ -198,11 +198,13 @@ export default {
       return Response.redirect(new URL("/research/consumer-complaints/", url).toString(), 301);
     }
     if (path.startsWith("/trends/")) {
-      const slug = path.slice("/trends/".length).replace(/\/$/, "");
-      if (slug === "atlanta-autostar" || slug === "") {
-        return Response.redirect(new URL("/research/consumer-complaints/", url).toString(), 301);
-      }
-      return Response.redirect(new URL(`/review/${slug}/#cfpb-profile`, url).toString(), 301);
+      // 2026-07-27: was redirecting every /trends/{slug}/ to /review/{slug}/#cfpb-profile
+      // but ~50% of trend slugs (wells-fargo, chase, discover, ally, consumer-complaints,
+      // debt-collection, etc.) have NO /review/ counterpart → 301 chain landed on 404.
+      // Founder reported "lots of indexing problems"; this was one source.
+      // Safest fix: send everything /trends/* to /research/consumer-complaints/ (200,
+      // topically the closest equivalent for the retired CFPB entity trend data).
+      return Response.redirect(new URL("/research/consumer-complaints/", url).toString(), 301);
     }
 
     if (path === "/search" || path === "/search/") {
