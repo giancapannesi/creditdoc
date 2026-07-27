@@ -149,6 +149,65 @@ for url in "${SSR_URLS[@]}"; do
   [ "$s" != "200" ] && FAIL=1
 done
 
+# Worker API + affiliate smoke tests. Added 2026-07-27 after the run_worker_first
+# regression I introduced silently 404'd /api/* + /go/* for ~2 hours. Deploy
+# declared "successful" three times while the site was actually broken because
+# the SSR_URLS list only contained static pages.
+echo ""
+echo "[4b/5] Worker API + affiliate smoke tests..."
+# /api/search MUST be tested with trailing slash — that's what the client JS calls
+API_TESTS=(
+  "GET|/api/search/?limit=3|200"
+  "GET|/api/search?limit=3|200"
+  "GET|/api/geo|200"
+  "GET|/go/lexington-law?source=deploy-smoke|302"
+)
+for entry in "${API_TESTS[@]}"; do
+  IFS='|' read -r method url expect <<< "$entry"
+  s=$(curl -s -o /dev/null -w "%{http_code}" -X "$method" --max-time 10 "https://www.creditdoc.co${url}")
+  echo "  $method $url → $s (want $expect)"
+  [ "$s" != "$expect" ] && FAIL=1
+done
+
+# Redirect contract tests. Any of these breaking = regression on today's fixes.
+echo ""
+echo "[4c/5] Redirect contract tests..."
+REDIRECT_TESTS=(
+  "/search/?state=Utah|301|/state/utah/"
+  "/browse/credit-repair/austin-texas/|301|/browse/credit-repair/austin-tx/"
+  "/sitemap-4.xml|301|/sitemap-index.xml"
+  "/trends/|301|/research/consumer-complaints/"
+)
+for entry in "${REDIRECT_TESTS[@]}"; do
+  IFS='|' read -r url expect_code expect_loc <<< "$entry"
+  s=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "https://www.creditdoc.co${url}")
+  loc=$(curl -sI --max-time 10 "https://www.creditdoc.co${url}" | grep -i '^location:' | tr -d '\r' | sed 's/location: //i' | sed 's|https://www.creditdoc.co||')
+  echo "  $url → $s → $loc (want $expect_code → $expect_loc)"
+  if [ "$s" != "$expect_code" ] || [ "$loc" != "$expect_loc" ]; then FAIL=1; fi
+done
+
+# Canonical rewrite test — /search/?category=X must rewrite to /categories/X/
+echo ""
+echo "[4d/5] Canonical rewrite tests..."
+can=$(curl -sL --max-time 10 "https://www.creditdoc.co/search/?category=credit-repair" | grep -oE '<link rel="canonical" href="[^"]+"' | head -1)
+if echo "$can" | grep -q 'categories/credit-repair/'; then
+  echo "  /search/?category=credit-repair canonical → /categories/credit-repair/ ✓"
+else
+  echo "  /search/?category=credit-repair canonical WRONG: $can"
+  FAIL=1
+fi
+
+# Form JS guard — dist/search/index.html must retain the categoryOnlyMap + stateOnlyMap
+# added 2026-07-27. If /search/ page is ever regenerated, these get wiped.
+echo ""
+echo "[4e/5] Form JS orphan-prevention guard..."
+formjs=$(curl -sL --max-time 10 "https://www.creditdoc.co/search/")
+for marker in stateOnlyMap categoryOnlyMap; do
+  n=$(echo "$formjs" | grep -c "$marker" || true)
+  echo "  $marker in /search/: $n hits (want ≥1)"
+  [ "$n" = "0" ] && FAIL=1
+done
+
 if [ "$FAIL" = "0" ]; then
   echo ""
   echo "=== Deploy successful ==="
