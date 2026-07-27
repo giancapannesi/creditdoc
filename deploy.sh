@@ -207,6 +207,10 @@ for marker in stateOnlyMap categoryOnlyMap; do
   echo "  $marker in /search/: $n hits (want ≥1)"
   [ "$n" = "0" ] && FAIL=1
 done
+homejs=$(curl -sL --max-time 10 "https://www.creditdoc.co/")
+n=$(echo "$homejs" | grep -c "HP_CATEGORY_MAP" || true)
+echo "  HP_CATEGORY_MAP in homepage: $n hits (want ≥1)"
+[ "$n" = "0" ] && FAIL=1
 
 if [ "$FAIL" = "0" ]; then
   echo ""
