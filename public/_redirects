@@ -1227,6 +1227,11 @@
 
 # Legacy sitemap.xml path → canonical sitemap index (was SSR endpoint, now static redirect)
 /sitemap.xml /sitemap-index.xml 301
+# Sitemap chunks 4-5 existed before the 2026-07-26 answers cleanup shrank the site
+# from 6 chunks (27,304 URLs) to 4 chunks (18,259 URLs). GSC still has them cached
+# and reports 404. 301 to the current index so crawlers reconcile.
+/sitemap-4.xml /sitemap-index.xml 301
+/sitemap-5.xml /sitemap-index.xml 301
 
 # DC has no /state/ hub — city guide is the closest destination.
 # Prevents 40 dead 404s from /credit-guide/washington-dc/*/ pages that
