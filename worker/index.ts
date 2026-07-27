@@ -172,23 +172,23 @@ export default {
     const path = url.pathname;
 
     // Runtime API routes — order matters, most-specific first.
-    if (path === "/api/geo") {
+    if (path === "/api/geo" || path === "/api/geo/") {
       return handleGeo(request);
     }
     if (path.startsWith("/go/")) {
       return handleGoRedirect(request, env);
     }
 
-    if (path === "/api/search") {
+    if (path === "/api/search" || path === "/api/search/") {
       return handleSearch(request, env);
     }
-    if (path === "/api/email-signup") {
+    if (path === "/api/email-signup" || path === "/api/email-signup/") {
       return handleEmailSignup(request, env);
     }
-    if (path === "/api/origination-intake") {
+    if (path === "/api/origination-intake" || path === "/api/origination-intake/") {
       return handleOriginationIntake(request, env);
     }
-    if (path === "/api/revalidate") {
+    if (path === "/api/revalidate" || path === "/api/revalidate/") {
       return handleRevalidate(request, env);
     }
 
