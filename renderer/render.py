@@ -357,10 +357,13 @@ def render_answer(slug: str, output_dir: Path) -> Path:
 
     sections_raw = [s for s in (answer.get("sections") or []) if isinstance(s, dict) and s.get("heading") and s.get("content")]
     sections = [
-        {"heading": s.get("heading", ""), "content_html": _md_to_html(s.get("content", ""))}
+        {"heading": s.get("heading", ""), "content_html": linkify_description(_md_to_html(s.get("content", "")), current_slug=slug, money_budget=3)}
         for s in sections_raw
     ]
     faqs = _preprocess_faqs([f for f in (answer.get("faq_schema") or []) if isinstance(f, dict) and f.get("question") and f.get("answer")])
+    for f in faqs:
+        if f.get("answer_html"):
+            f["answer_html"] = linkify_description(f["answer_html"], current_slug=slug, money_budget=2)
     primary_sources = [s for s in (answer.get("primary_sources") or []) if isinstance(s, dict) and s.get("url") and s.get("name")]
 
     # Key takeaways = first sentence of first 4 sections
@@ -444,10 +447,13 @@ def render_blog(slug: str, output_dir: Path) -> Path:
 
     sections_raw = [s for s in (post.get("sections") or []) if isinstance(s, dict) and s.get("heading") and s.get("content")]
     sections = [
-        {"heading": s.get("heading", ""), "content_html": _md_to_html(s.get("content", ""))}
+        {"heading": s.get("heading", ""), "content_html": linkify_description(_md_to_html(s.get("content", "")), current_slug=slug, money_budget=3)}
         for s in sections_raw
     ]
     faqs = _preprocess_faqs([f for f in (post.get("faq") or []) if isinstance(f, dict) and f.get("question") and f.get("answer")])
+    for f in faqs:
+        if f.get("answer_html"):
+            f["answer_html"] = linkify_description(f["answer_html"], current_slug=slug, money_budget=2)
 
     # Blog uses key_takeaways as a top-level list already
     key_takeaways = post.get("key_takeaways") or []
@@ -487,10 +493,13 @@ def render_wellness(slug: str, output_dir: Path) -> Path:
 
     sections_raw = [s for s in (post.get("sections") or []) if isinstance(s, dict) and s.get("heading") and s.get("content")]
     sections = [
-        {"heading": s.get("heading", ""), "content_html": _md_to_html(s.get("content", ""))}
+        {"heading": s.get("heading", ""), "content_html": linkify_description(_md_to_html(s.get("content", "")), current_slug=slug, money_budget=3)}
         for s in sections_raw
     ]
     faqs = _preprocess_faqs([f for f in (post.get("faq") or []) if isinstance(f, dict) and f.get("question") and f.get("answer")])
+    for f in faqs:
+        if f.get("answer_html"):
+            f["answer_html"] = linkify_description(f["answer_html"], current_slug=slug, money_budget=2)
     key_takeaways = post.get("key_takeaways") or []
     if not isinstance(key_takeaways, list):
         key_takeaways = []
@@ -1236,8 +1245,12 @@ def render_credit_guide_category(compound_slug: str, output_dir: Path) -> Path:
     def _prep_faq(f: dict) -> dict:
         a = f.get("a", "")
         has_html = bool(re.search(r"<[a-z][\s\S]*>", a, flags=re.IGNORECASE))
-        return {"q": f.get("q", ""), "a": a if has_html else f"<p>{a}</p>"}
+        a_html = a if has_html else f"<p>{a}</p>"
+        return {"q": f.get("q", ""), "a": linkify_description(a_html, current_category=category, money_budget=2)}
     faqs = [_prep_faq(f) for f in faqs_raw if f.get("q") and f.get("a")]
+
+    # Linkify the localized intro paragraph too.
+    local_intro = linkify_description(local_intro, current_category=category, money_budget=2)
 
     # Related answers.
     answer_keywords = _CATEGORY_ANSWER_KEYWORDS.get(category, ["personal-loan", "credit-score"])
